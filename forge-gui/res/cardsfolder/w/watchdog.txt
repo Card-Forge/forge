@@ -1,6 +1,6 @@
 Name:Watchdog
 ManaCost:3
-Types:Artifact Creature Hound
+Types:Artifact Creature Dog
 PT:1/2
 K:CARDNAME blocks each combat if able.
 S:Mode$ Continuous | Affected$ Creature.attackingYou | AddPower$ -1 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ As long as CARDNAME is untapped, all creatures attacking you get -1/-0.

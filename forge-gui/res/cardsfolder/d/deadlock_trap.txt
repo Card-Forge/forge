@@ -5,6 +5,5 @@ K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E} (two energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
 A:AB$ Tap | Cost$ T PayEnergy<1> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBPump | SpellDescription$ Tap target creature or planeswalker. Its activated abilities can't be activated this turn.
-SVar:DBPump:DB$Pump | Defined$ ParentTarget | KW$ HIDDEN CARDNAME's activated abilities can't be activated.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deadlock_trap.jpg
+SVar:DBPump:DB$ Pump | Defined$ ParentTarget | KW$ HIDDEN CARDNAME's activated abilities can't be activated.
 Oracle:Deadlock Trap enters the battlefield tapped.\nWhen Deadlock Trap enters the battlefield, you get {E}{E} (two energy counters).\n{T}, Pay {E}: Tap target creature or planeswalker. Its activated abilities can't be activated this turn.

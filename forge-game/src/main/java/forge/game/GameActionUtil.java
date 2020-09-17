@@ -455,7 +455,6 @@ public final class GameActionUtil {
                             eff.setTimestamp(game.getNextTimestamp());
                             eff.setName(c.getName() + "'s Effect");
                             eff.addType("Effect");
-                            eff.setToken(true); // Set token to true, so when leaving play it gets nuked
                             eff.setOwner(activator);
 
                             eff.setImageKey(c.getImageKey());
@@ -473,7 +472,7 @@ public final class GameActionUtil {
                             CardFactoryUtil.setupETBReplacementAbility(saAb);
 
                             String desc = "It enters the battlefield with ";
-                            desc += Lang.nounWithNumeral(v, CounterType.P1P1.getName() + " counter");
+                            desc += Lang.nounWithNumeral(v, CounterEnumType.P1P1.getName() + " counter");
                             desc += " on it.";
 
                             String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | Description$ " + desc;
@@ -587,14 +586,8 @@ public final class GameActionUtil {
             // Mark SAs with subAbilities as undoable. These are generally things like damage, and other stuff
             // that's hard to track and remove
             sa.setUndoable(false);
-        } else {
-            try {
-                if ((sa.getParam("Amount") != null) && (amount != Integer.parseInt(sa.getParam("Amount")))) {
-                    sa.setUndoable(false);
-                }
-            } catch (final NumberFormatException n) {
-                sa.setUndoable(false);
-            }
+        } else if ((sa.getParam("Amount") != null) && (amount != AbilityUtils.calculateAmount(sa.getHostCard(),sa.getParam("Amount"), sa))) {
+            sa.setUndoable(false);
         }
 
         final StringBuilder sb = new StringBuilder();

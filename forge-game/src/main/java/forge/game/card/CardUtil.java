@@ -206,7 +206,7 @@ public final class CardUtil {
                 .build()
         );
 
-        final Card newCopy = new Card(in.getId(), in.getPaperCard(), false, in.getGame());
+        final Card newCopy = new Card(in.getId(), in.getPaperCard(), in.getGame(), null);
         newCopy.setSetCode(in.getSetCode());
         newCopy.setOwner(in.getOwner());
         newCopy.setController(in.getController(), 0);
@@ -237,12 +237,17 @@ public final class CardUtil {
 
         newCopy.setType(new CardType(in.getType()));
         newCopy.setToken(in.isToken());
+        newCopy.setCopiedSpell(in.isCopiedSpell());
+        newCopy.setImmutable(in.isImmutable());
 
-        // lock in the current P/T without bonus from counters
-        newCopy.setBasePower(in.getCurrentPower() + in.getTempPowerBoost());
-        newCopy.setBaseToughness(in.getCurrentToughness() + in.getTempToughnessBoost());
+        // lock in the current P/T
+        newCopy.setBasePower(in.getCurrentPower());
+        newCopy.setBaseToughness(in.getCurrentToughness());
 
-        newCopy.setCounters(Maps.newEnumMap(in.getCounters()));
+        // extra copy PT boost
+        newCopy.setPTBoost(in.getPTBoostTable());
+
+        newCopy.setCounters(Maps.newHashMap(in.getCounters()));
 
         newCopy.setColor(in.determineColor().getColor());
         newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
@@ -293,7 +298,12 @@ public final class CardUtil {
             newCopy.addOptionalCostPaid(ocost);
         }
 
-        newCopy.setCastSA(in.getCastSA());
+        if (in.getCastSA() != null) {
+            SpellAbility castSA = in.getCastSA().copy(newCopy, true);
+            castSA.setLastStateBattlefield(CardCollection.EMPTY);
+            castSA.setLastStateGraveyard(CardCollection.EMPTY);
+            newCopy.setCastSA(castSA);
+        }
         newCopy.setCastFrom(in.getCastFrom());
 
         newCopy.setExiledWith(in.getExiledWith());

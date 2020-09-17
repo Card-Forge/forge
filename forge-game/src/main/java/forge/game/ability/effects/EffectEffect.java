@@ -86,7 +86,7 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("ForgetCounter")) {
-                CounterType cType = CounterType.valueOf(sa.getParam("ForgetCounter"));
+                CounterType cType = CounterType.getType(sa.getParam("ForgetCounter"));
                 rememberList = new FCollection<GameObject>(CardLists.filter(Iterables.filter(rememberList, Card.class), CardPredicates.hasCounter(cType)));
             }
 

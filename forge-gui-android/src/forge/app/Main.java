@@ -25,7 +25,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.PowerManager;
 import android.provider.Settings;
-import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.view.Gravity;
@@ -145,10 +144,16 @@ public class Main extends AndroidApplication {
         super.onBackPressed();
     }
     private boolean checkPermission() {
-        int result = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (result == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        } else {
+        int pid = android.os.Process.myPid();
+        int uid = android.os.Process.myUid();
+        try {
+            int result = this.getBaseContext().checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, pid, uid);
+            if (result == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (NullPointerException e) {
             return false;
         }
     }
@@ -181,45 +186,53 @@ public class Main extends AndroidApplication {
     }
 
     private void initForge(AndroidAdapter adapter, boolean permissiongranted){
-        //establish assets directory
-        if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            Gdx.app.error("Forge", "Can't access external storage");
-            adapter.exit();
-            return;
-        }
-        String assetsDir = Environment.getExternalStorageDirectory() + "/Forge/";
-        if (!FileUtil.ensureDirectoryExists(assetsDir)) {
-            Gdx.app.error("Forge", "Can't access external storage");
-            adapter.exit();
-            return;
-        }
-
-        //ensure .nomedia file exists in Forge directory so its images
-        //and other media files don't appear in Gallery or other apps
-        String noMediaFile = assetsDir + ".nomedia";
-        if (!FileUtil.doesFileExist(noMediaFile)) {
-            FileUtil.writeFile(noMediaFile, "");
-        }
-
-        //enforce orientation based on whether device is a tablet and user preference
-        adapter.switchOrientationFile = assetsDir + "switch_orientation.ini";
-        boolean landscapeMode = adapter.isTablet == !FileUtil.doesFileExist(adapter.switchOrientationFile);
+        boolean isPortrait;
         if (permissiongranted){
+            //establish assets directory
+            if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+                Gdx.app.error("Forge", "Can't access external storage");
+                adapter.exit();
+                return;
+            }
+            String assetsDir = Environment.getExternalStorageDirectory() + "/Forge/";
+            if (!FileUtil.ensureDirectoryExists(assetsDir)) {
+                Gdx.app.error("Forge", "Can't access external storage");
+                adapter.exit();
+                return;
+            }
+
+            //ensure .nomedia file exists in Forge directory so its images
+            //and other media files don't appear in Gallery or other apps
+            String noMediaFile = assetsDir + ".nomedia";
+            if (!FileUtil.doesFileExist(noMediaFile)) {
+                FileUtil.writeFile(noMediaFile, "");
+            }
+
+            //enforce orientation based on whether device is a tablet and user preference
+            adapter.switchOrientationFile = assetsDir + "switch_orientation.ini";
+            boolean landscapeMode = adapter.isTablet == !FileUtil.doesFileExist(adapter.switchOrientationFile);
+
+            ForgePreferences prefs = FModel.getPreferences();
+            boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
+
             if (landscapeMode) {
+                isPortrait = false;
                 Main.this.setRequestedOrientation(Build.VERSION.SDK_INT >= 26 ?
                         ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE : //Oreo and above has virtual back/menu buttons
                         ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             } else {
+                isPortrait = true;
                 Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
+
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig, isPortrait));
         } else {
+            isPortrait = true;
             //set current orientation
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, isPortrait));
         }
 
-        ForgePreferences prefs = FModel.getPreferences();
-        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_USE_ELSA);
-        initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig));
     }
 
     /*@Override

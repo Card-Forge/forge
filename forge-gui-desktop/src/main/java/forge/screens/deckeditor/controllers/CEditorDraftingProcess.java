@@ -52,7 +52,7 @@ import java.util.Map.Entry;
 public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     private IBoosterDraft boosterDraft;
 
-    private String ccAddLabel = "Add card";
+    private String ccAddLabel = Localizer.getInstance().getMessage("lblAddcard");
     private DragCell constructedDecksParent = null;
     private DragCell commanderDecksParent = null;
     private DragCell oathbreakerDecksParent = null;
@@ -76,7 +76,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         //hide filters and options panel so more of pack is visible by default
         catalogManager.setHideViewOptions(1, true);
 
-        deckManager.setCaption("Draft Picks");
+        deckManager.setCaption(localizer.getMessage("lblDraftPicks"));
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
@@ -133,7 +133,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems("Draft", null);
+        cmb.addMoveItems(localizer.getMessage("lblDraft"), null);
     }
 
     @Override
@@ -152,7 +152,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     private void showChoices(final ItemPool<PaperCard> list) {
         int packNumber = ((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1;
 
-        this.getCatalogManager().setCaption("Pack " + packNumber + " - Cards");
+        this.getCatalogManager().setCaption(localizer.getMessage("lblPackNCards", String.valueOf(packNumber)));
         this.getCatalogManager().setPool(list);
     } // showChoices()
 

@@ -1,0 +1,18 @@
+Name:Malakir Rebirth
+ManaCost:B
+Types:Instant
+A:SP$ LoseLife | Cost$ B | Defined$ You | LifeAmount$ 2 | SubAbility$ DBAnimate | SpellDescription$ Choose target creature. You lose 2 life. Until end of turn, that creature gains “When this creature dies, return it to the battlefield tapped under its owner’s control.”
+SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Choose target creature | Triggers$ TrigDies | sVars$ TrigReturn | StackDescription$ Until end of turn, {c:Targeted} gains "When this creature dies, return it to the battlefield tapped under its owner’s control."
+SVar:TrigDies:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, return it to the battlefield tapped under its owner’s control.
+SVar:TrigReturn:DB$ ChangeZone | DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
+AlternateMode:Modal
+Oracle:Choose target creature. You lose 2 life. Until end of turn, that creature gains “When this creature dies, return it to the battlefield tapped under its owner’s control.”
+
+ALTERNATE
+
+Name:Malakir Mire
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+Oracle:Malakir Mire enters the battlefield tapped.\n{T}: Add {B}.

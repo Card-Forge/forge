@@ -2,6 +2,5 @@ Name:Distortion Strike
 ManaCost:U
 Types:Sorcery
 K:Rebound
-A:SP$Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | KW$ HIDDEN Unblockable | SpellDescription$ Target creature gets +1/+0 until end of turn and can't be blocked this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/distortion_strike.jpg
+A:SP$ Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | KW$ HIDDEN Unblockable | SpellDescription$ Target creature gets +1/+0 until end of turn and can't be blocked this turn.
 Oracle:Target creature gets +1/+0 until end of turn and can't be blocked this turn.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

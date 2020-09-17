@@ -296,6 +296,9 @@ public class QuestAchievements {
         catch(ArrayIndexOutOfBoundsException e) {
             return null;
         }
+        catch(IndexOutOfBoundsException e) {
+            return null;
+        }
 
     }
 

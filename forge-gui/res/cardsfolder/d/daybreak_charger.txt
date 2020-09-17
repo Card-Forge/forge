@@ -1,0 +1,7 @@
+Name:Daybreak Charger
+ManaCost:1 W
+Types:Creature Unicorn
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +0
+Oracle:When Daybreak Charger enters the battlefield, target creature gets +2/+0 until end of turn.

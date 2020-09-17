@@ -4,8 +4,7 @@ Types:Creature Goblin Wizard
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, Goblin creatures get +3/+0 until end of turn.
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ At the beginning of the end step, destroy all Goblins.
-SVar:TrigPump:DB$PumpAll | ValidCards$ Creature.Goblin | NumAtt$ 3
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.Goblin | NumAtt$ 3
 SVar:TrigDestroy:DB$DestroyAll | ValidCards$ Creature.Goblin
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_pyromancer.jpg
 Oracle:When Goblin Pyromancer enters the battlefield, Goblin creatures get +3/+0 until end of turn.\nAt the beginning of the end step, destroy all Goblins.

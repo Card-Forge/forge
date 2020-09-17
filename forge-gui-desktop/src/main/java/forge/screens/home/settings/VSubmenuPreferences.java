@@ -77,6 +77,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox(localizer.getMessage("cbEnforceDeckLegality"));
     private final JCheckBox cbSideboardForAI = new OptionsCheckBox(localizer.getMessage("cbSideboardForAI"));
     private final JCheckBox cbPerformanceMode = new OptionsCheckBox(localizer.getMessage("cbPerformanceMode"));
+    private final JCheckBox cbSROptimize = new OptionsCheckBox(localizer.getMessage("cbSROptimize"));
     private final JCheckBox cbFilteredHands = new OptionsCheckBox(localizer.getMessage("cbFilteredHands"));
     private final JCheckBox cbImageFetcher = new OptionsCheckBox(localizer.getMessage("cbImageFetcher"));
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox(localizer.getMessage("cbCloneImgSource"));
@@ -107,8 +108,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbShowStormCount = new OptionsCheckBox(localizer.getMessage("cbShowStormCount"));
     private final JCheckBox cbRemindOnPriority = new OptionsCheckBox(localizer.getMessage("cbRemindOnPriority"));
     private final JCheckBox cbUseSentry = new OptionsCheckBox(localizer.getMessage("cbUseSentry"));
-    private final JCheckBox cbEnableUnknownCards = new OptionsCheckBox("Enable Unknown Cards");
-    private final JCheckBox cbUseElsa = new OptionsCheckBox("Use ELSA Serializer");
+    private final JCheckBox cbEnableUnknownCards = new OptionsCheckBox(localizer.getMessage("lblEnableUnknownCards"));
+    private final JCheckBox cbUseExperimentalNetworkStream = new OptionsCheckBox(localizer.getMessage("lblExperimentalNetworkCompatibility"));
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<>();
 
@@ -290,10 +291,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlLoadHistoricFormats")), descriptionConstraints);
 
         pnlPrefs.add(cbEnableUnknownCards, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Enable Unknown Cards to be loaded to Unknown Set. (Requires restart)"), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableUnknownCards")), descriptionConstraints);
 
-       /*pnlPrefs.add(cbUseElsa, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Use ELSA Serializer for Network (EXPERIMENTAL Option, Requires restart)"), descriptionConstraints);*/
+        pnlPrefs.add(cbUseExperimentalNetworkStream, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlExperimentalNetworkCompatibility")), descriptionConstraints);
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel(localizer.getMessage("GraphicOptions")), sectionConstraints + ", gaptop 2%");
@@ -369,8 +370,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbAltSoundSystem, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAltSoundSystem")), descriptionConstraints);
-
-
+        pnlPrefs.add(cbSROptimize, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSrOptimize")), descriptionConstraints);
         // Keyboard shortcuts
         pnlPrefs.add(new SectionLabel(localizer.getMessage("KeyboardShortcuts")), sectionConstraints);
 
@@ -594,8 +595,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     }
 
     /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbUseElsa() {
-        return cbUseElsa;
+    public JCheckBox getCbUseExperimentalNetworkStream() {
+        return cbUseExperimentalNetworkStream;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
@@ -765,6 +766,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbAltSoundSystem;
     }
 
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbSROptimize() {
+        return cbSROptimize;
+    }
+    
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbTimedTargOverlay() {
         return cbTimedTargOverlay;

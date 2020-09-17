@@ -2,7 +2,7 @@ Name:Vindictive Lich
 ManaCost:3 B
 Types:Creature Zombie Wizard
 PT:4/1
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME dies, ABILITY
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, ABILITY
 SVar:TrigCharm:DB$ Charm | MinCharmNum$ 1 | CharmNum$ 3 | CharmNumOnResolve$ MaxUniqueOpponents | Choices$ SacCreature,DiscardCards,LoseLife | References$ MaxUniqueOpponents | AdditionalDescription$ Each mode must target a different player.
 SVar:SacCreature:DB$ Sacrifice | ValidTgts$ Opponent | TargetUnique$ True | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target opponent sacrifices a creature.
 SVar:DiscardCards:DB$ Discard | ValidTgts$ Opponent | TargetUnique$ True | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target opponent discards two cards.
@@ -10,5 +10,4 @@ SVar:LoseLife:DB$ LoseLife | ValidTgts$ Opponent | TargetUnique$ True | LifeAmou
 SVar:MaxUniqueOpponents:PlayerCountOpponents$Amount
 #TODO: The AI is able to target the same player with multiple modes, usually all three. This should not happen.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vindictive_lich.jpg
 Oracle:When Vindictive Lich dies, choose one or more. Each mode must target a different player.\n• Target opponent sacrifices a creature.\n• Target opponent discards two cards.\n• Target opponent loses 5 life.

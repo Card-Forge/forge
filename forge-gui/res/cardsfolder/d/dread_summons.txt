@@ -1,10 +1,10 @@
 Name:Dread Summons
 ManaCost:X B B
 Types:Sorcery
-A:SP$ Mill | Cost$ X B B | NumCards$ X | References$ X | Defined$ Player | RememberMilled$ True | SubAbility$ DBToken | SpellDescription$ Each player puts the top X cards of their library into their graveyard. For each creature put into a graveyard this way, you create a tapped 2/2 black Zombie creature token.
-SVar:DBToken:DB$ Token | TokenAmount$ Y | References$ Y | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenTapped$ True | LegacyImage$ b 2 2 zombie c15 | SubAbility$ DBCleanup
+A:SP$ Mill | Cost$ X B B | NumCards$ X | References$ X | Defined$ Player | RememberMilled$ True | SubAbility$ DBToken | SpellDescription$ Each player mills X cards. For each creature put into a graveyard this way, you create a tapped 2/2 black Zombie creature token.
+SVar:DBToken:DB$ Token | TokenAmount$ Y | References$ Y | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenTapped$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 SVar:Y:Count$ValidGraveyard Creature.IsRemembered
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_summons.jpg
-Oracle:Each player puts the top X cards of their library into their graveyard. For each creature put into a graveyard this way, you create a tapped 2/2 black Zombie creature token.
+DeckHas:Ability$Token
+Oracle:Each player mills X cards. For each creature put into a graveyard this way, you create a tapped 2/2 black Zombie creature token.

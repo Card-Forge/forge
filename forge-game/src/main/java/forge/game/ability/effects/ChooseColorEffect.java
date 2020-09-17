@@ -40,6 +40,11 @@ public class ChooseColorEffect extends SpellAbilityEffect {
             String[] restrictedChoices = sa.getParam("Choices").split(",");
             colorChoices = Arrays.asList(restrictedChoices);
         }
+        if (sa.hasParam("Exclude")) {
+            for (String s : sa.getParam("Exclude").split(",")) {
+                colorChoices.remove(s);
+            }
+        }
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 

@@ -5,5 +5,5 @@ K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2, then draw a card.
 SVar:TrigScry:DB$ Scry | ScryNum$ 2 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
-A:AB$ Scry | Cost$ 2 U Sac<1/CARDNAME> | ScryNum$ 2 | SpellDescription$ Scry 2.
+A:AB$ Scry | Cost$ 2 U Sac<1/CARDNAME> | ScryNum$ 2 | AILogic$ BestOpportunity | SpellDescription$ Scry 2.
 Oracle:Flash\nWhen Omen of the Sea enters the battlefield, scry 2, then draw a card.\n{2}{U}, Sacrifice Omen of the Sea: Scry 2.

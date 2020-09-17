@@ -1,8 +1,8 @@
 Name:Moonring Mirror
 ManaCost:5
 Types:Artifact
-T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever you draw a card, exile the top card of your library face down.
-SVar:TrigMill:DB$ Mill | NumCards$ 1 | Defined$ You | Destination$ Exile | ExileFaceDown$ True | RememberMilled$ True
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever you draw a card, exile the top card of your library face down.
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ You | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChangeHandExile | TriggerDescription$ At the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with CARDNAME into your hand.
 SVar:TrigChangeHandExile:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | ChangeType$ Card.YouCtrl | RememberChanged$ True | Imprint$ True | SubAbility$ ChangeBack
 SVar:ChangeBack:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+IsNotImprinted+ExiledWithSource | Origin$ Exile | Destination$ Hand | ForgetChanged$ True | SubAbility$ DBCleanup
@@ -12,5 +12,4 @@ SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup2
 SVar:DBCleanup2:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/moonring_mirror.jpg
 Oracle:Whenever you draw a card, exile the top card of your library face down.\nAt the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with Moonring Mirror into your hand.

@@ -11,6 +11,7 @@ import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 
 import java.util.List;
+import java.util.Map;
 
 public class CharmAi extends SpellAbilityAi {
     @Override
@@ -232,7 +233,7 @@ public class CharmAi extends SpellAbilityAi {
     } 
 
     @Override
-    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> opponents) {
+    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> opponents, Map<String, Object> params) {
         return Aggregates.random(opponents);
     }
 }

@@ -4,6 +4,5 @@ Types:Legendary Creature Centaur Warrior
 PT:4/4
 K:Trample
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+withTrample | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control with trample attacks, it gets +2/+2 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ TriggeredAttacker | NumAtt$ 2 | NumDef$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stonebrow_krosan_hero.jpg
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ 2 | NumDef$ 2
 Oracle:Trample\nWhenever a creature you control with trample attacks, it gets +2/+2 until end of turn.

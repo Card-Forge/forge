@@ -32,7 +32,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
         sb.append(sa.getActivatingPlayer().getName());
 
         if (sa.hasParam("CounterType")) {
-            CounterType ctype = CounterType.valueOf(sa.getParam("CounterType"));
+            CounterType ctype = CounterType.getType(sa.getParam("CounterType"));
             sb.append(" removes a ").append(ctype.getName());
             sb.append(" counter from or put another ").append(ctype.getName()).append(" counter on ");
         } else {
@@ -56,7 +56,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
 
         CounterType ctype = null;
         if (sa.hasParam("CounterType")) {
-            ctype = CounterType.valueOf(sa.getParam("CounterType"));
+            ctype = CounterType.getType(sa.getParam("CounterType"));
         }
         
         GameEntityCounterTable table = new GameEntityCounterTable();

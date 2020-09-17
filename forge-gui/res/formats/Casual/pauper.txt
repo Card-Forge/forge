@@ -1,7 +1,0 @@
-[format]
-Name:Pauper
-Order:108
-Subtype:Custom
-Type:Casual
-Rarities:L, C
-Banned:Gush;Gitaxian Probe;Daze;Arcum's Astrolabe

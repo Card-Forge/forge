@@ -2,7 +2,6 @@ Name:Flint Golem
 ManaCost:4
 Types:Artifact Creature Golem
 PT:2/3
-T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME becomes blocked, defending player puts the top three cards of their library into their graveyard.
-SVar:TrigMill:DB$Mill | Defined$ DefendingPlayer | NumCards$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flint_golem.jpg
-Oracle:Whenever Flint Golem becomes blocked, defending player puts the top three cards of their library into their graveyard.
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME becomes blocked, defending player mills three cards.
+SVar:TrigMill:DB$ Mill | Defined$ DefendingPlayer | NumCards$ 3
+Oracle:Whenever Flint Golem becomes blocked, defending player mills three cards.

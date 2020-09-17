@@ -4,7 +4,6 @@ Types:Creature Human Wizard
 PT:2/1
 K:Unblockable
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature can't be blocked this turn.
-SVar:TrigPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_invisimancer.jpg
 Oracle:Neurok Invisimancer can't be blocked.\nWhen Neurok Invisimancer enters the battlefield, target creature can't be blocked this turn.

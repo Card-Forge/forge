@@ -1,0 +1,8 @@
+Name:Snare Tactician
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:2/3
+T:Mode$ Cycled | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever you cycle a card, tap target creature an opponent controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls
+SVar:PlayMain1:TRUE
+Oracle:Whenever you cycle a card, tap target creature an opponent controls.

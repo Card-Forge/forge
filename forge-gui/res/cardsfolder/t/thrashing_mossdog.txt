@@ -1,6 +1,6 @@
 Name:Thrashing Mossdog
 ManaCost:3 G
-Types:Creature Plant Hound
+Types:Creature Plant Dog
 PT:3/3
 K:Reach
 K:Scavenge:4 G G

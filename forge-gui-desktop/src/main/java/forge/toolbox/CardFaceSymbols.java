@@ -125,6 +125,7 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("doublestrike", FSkin.getImage(FSkinProp.IMG_ABILITY_DOUBLE_STRIKE));
         MANA_IMAGES.put("firststrike", FSkin.getImage(FSkinProp.IMG_ABILITY_FIRST_STRIKE));
         MANA_IMAGES.put("fear", FSkin.getImage(FSkinProp.IMG_ABILITY_FEAR));
+        MANA_IMAGES.put("flash", FSkin.getImage(FSkinProp.IMG_ABILITY_FLASH));
         MANA_IMAGES.put("flying", FSkin.getImage(FSkinProp.IMG_ABILITY_FLYING));
         MANA_IMAGES.put("hexproof", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF));
         MANA_IMAGES.put("indestructible", FSkin.getImage(FSkinProp.IMG_ABILITY_INDESTRUCTIBLE));

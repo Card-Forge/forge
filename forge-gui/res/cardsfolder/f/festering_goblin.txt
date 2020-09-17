@@ -3,6 +3,5 @@ ManaCost:B
 Types:Creature Zombie Goblin
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPump | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, target creature gets -1/-1 until end of turn.
-SVar:TrigPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/festering_goblin.jpg
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 Oracle:When Festering Goblin dies, target creature gets -1/-1 until end of turn.

@@ -3,11 +3,10 @@ ManaCost:1 G
 Types:Creature Jackal Wizard
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may have target creature get +X/+X until end of turn, where X is CARDNAME's power.
-SVar:TrigPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | References$ X
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | References$ X
 K:Eternalize:4 G G
 # HOU Release Notes: if power less than 0 as the ability resolves, then X=0
 SVar:X:Count$CardPower
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Token 
-SVar:Picture:http://www.wizards.com/global/images/magic/general/resilient_khenra.jpg
 Oracle:When Resilient Khenra enters the battlefield, you may have target creature get +X/+X until end of turn, where X is Resilient Khenra's power.\nEternalize {4}{G}{G} ({4}{G}{G}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie Jackal Wizard with no mana cost. Eternalize only as a sorcery.)

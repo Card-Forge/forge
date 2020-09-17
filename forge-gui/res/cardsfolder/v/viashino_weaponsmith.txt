@@ -3,6 +3,5 @@ ManaCost:3 R
 Types:Creature Viashino
 PT:2/2
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ TrigBlockedPump | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, CARDNAME get +2/+2 until end of turn.
-SVar:TrigBlockedPump:DB$Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_weaponsmith.jpg
+SVar:TrigBlockedPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +2
 Oracle:Whenever Viashino Weaponsmith becomes blocked by a creature, Viashino Weaponsmith gets +2/+2 until end of turn.

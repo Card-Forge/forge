@@ -1,6 +1,0 @@
-Name:Drannith Magistrate
-ManaCost:1 W
-Types:Creature Human Wizard
-PT:1/3
-S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Opponent | Origin$ Library,Graveyard,Exile | Description$ Your opponents can't cast spells from anywhere other than their hands.
-Oracle:Your opponents can't cast spells from anywhere other than their hands.

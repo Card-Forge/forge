@@ -37,8 +37,7 @@ public class DestroyAllAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        //TODO: Check for bad outcome
-        return true;
+        return doMassRemovalLogic(aiPlayer, sa);
     }
 
     @Override

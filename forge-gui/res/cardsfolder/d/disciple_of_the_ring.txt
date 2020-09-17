@@ -4,8 +4,7 @@ Types:Creature Human Wizard
 PT:3/4
 A:AB$ Charm | Cost$ 1 ExileFromGrave<1/Instant;Sorcery> | CostDesc$ {1}, Exile an instant or sorcery card from your graveyard: | Choices$ DBCounter,DBPump,DBTap,DBUntap | CharmNum$ 1
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | UnlessCost$ 2 | SpellDescription$ Counter target noncreature spell unless its controller pays {2}.
-SVar:DBPump:DB$ Pump | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:DBTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:DBUntap:DB$ Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Untap target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/disciple_of_the_ring.jpg
 Oracle:{1}, Exile an instant or sorcery card from your graveyard: Choose one —\n• Counter target noncreature spell unless its controller pays {2}.\n• Disciple of the Ring gets +1/+1 until end of turn.\n• Tap target creature.\n• Untap target creature.

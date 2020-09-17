@@ -4,8 +4,7 @@ Types:Creature Dragon
 PT:1/1
 K:Flying
 K:Banding
-A:AB$ Pump | Cost$ R | NumAtt$ +1 | ActivationNumberSacrifice$ GE4 | ActivationResolveSub$ DBPump | SpellDescription$ CARDNAME gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice CARDNAME at the beginning of the next end step.
-SVar:DBPump:DB$ Pump | AtEOT$ Sacrifice
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | ActivationNumberSacrifice$ GE4 | ActivationResolveSub$ DBPump | SpellDescription$ CARDNAME gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice CARDNAME at the beginning of the next end step.
+SVar:DBPump:DB$ Pump | Defined$ Self | AtEOT$ Sacrifice
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nalathni_dragon.jpg
 Oracle:Flying, banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)\n{R}: Nalathni Dragon gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Nalathni Dragon at the beginning of the next end step.

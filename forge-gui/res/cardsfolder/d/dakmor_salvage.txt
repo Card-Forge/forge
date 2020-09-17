@@ -5,5 +5,4 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
 K:Dredge:2
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dakmor_salvage.jpg
-Oracle:Dakmor Salvage enters the battlefield tapped.\n{T}: Add {B}.\nDredge 2 (If you would draw a card, instead you may put exactly two cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)
+Oracle:Dakmor Salvage enters the battlefield tapped.\n{T}: Add {B}.\nDredge 2 (If you would draw a card, you may mill two cards instead. If you do, return this card from your graveyard to your hand.)

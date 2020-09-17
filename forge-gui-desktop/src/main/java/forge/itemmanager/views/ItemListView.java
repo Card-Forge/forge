@@ -85,6 +85,7 @@ import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FSkin.SkinnedTable;
 import forge.toolbox.FSkin.SkinnedTableHeader;
+import forge.util.Localizer;
 
 
 /**
@@ -255,7 +256,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     protected String getCaption() {
-        return "List View";
+        return Localizer.getInstance().getMessage("lblListView");
     }
 
     @Override

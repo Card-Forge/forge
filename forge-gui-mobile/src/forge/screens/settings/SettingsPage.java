@@ -3,6 +3,7 @@ package forge.screens.settings;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
+import forge.GuiBase;
 import forge.MulliganDefs;
 import forge.StaticData;
 import forge.ai.AiProfileUtil;
@@ -233,13 +234,36 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("nlLoadHistoricFormats")),
                 3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_LOAD_UNKNOWN_CARDS,
-                        "Enable Unknown Cards",
-                        "Enable Unknown Cards to be loaded to Unknown Set. (Requires restart)"),
+                        localizer.getMessage("lblEnableUnknownCards"),
+                        localizer.getMessage("nlEnableUnknownCards")) {
+                                @Override
+                                public void select() {
+                                    super.select();
+                                    FOptionPane.showConfirmDialog(
+                                            localizer.getMessage("lblRestartForgeDescription"),
+                                            localizer.getMessage("lblRestartForge"),
+                                            localizer.getMessage("lblRestart"),
+                                            localizer.getMessage("lblLater"), new Callback<Boolean>() {
+                                        @Override
+                                        public void run(Boolean result) {
+                                            if (result) {
+                                                Forge.restart(true);
+                                            }
+                                        }
+                                    });
+                                }
+                            },
                 3);
-        /*lstSettings.addItem(new BooleanSetting(FPref.UI_USE_ELSA,
-                        "Use ELSA Serializer",
-                        "Use ELSA Serializer for Network (EXPERIMENTAL Option, Requires restart)"),
-                3);*/
+        lstSettings.addItem(new BooleanSetting(FPref.UI_NETPLAY_COMPAT,
+                        localizer.getMessage("lblExperimentalNetworkCompatibility"),
+                        localizer.getMessage("nlExperimentalNetworkCompatibility")) {
+                                @Override
+                                public void select() {
+                                    super.select();
+                                    GuiBase.enablePropertyConfig(FModel.getPreferences().getPrefBoolean(FPref.UI_NETPLAY_COMPAT));
+                                }
+                            },
+                3);
 
         //Graphic Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER,

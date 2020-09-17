@@ -95,7 +95,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         String action = event.sa.isSpell() ? localizer.getMessage("lblCast")
                 : event.sa.isTrigger() ? localizer.getMessage("lblTriggered")
                         : localizer.getMessage("lblActivated");
-        String object = event.sa.getStackDescription().startsWith("Morph ")
+        String object = event.si.getStackDescription().startsWith("Morph ")
                 ? localizer.getMessage("lblMorph")
                 : event.sa.getHostCard().toString();
 

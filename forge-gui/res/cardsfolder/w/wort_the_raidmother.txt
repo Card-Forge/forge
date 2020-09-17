@@ -5,5 +5,6 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ WortETB | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 red and green Goblin Warrior creature tokens.
 SVar:WortETB:DB$ Token | TokenAmount$ 2 | TokenScript$ rg_1_1_goblin_warrior | TokenOwner$ You
 S:Mode$ Continuous | AddKeyword$ Conspire | Affected$ Instant.Green+YouCtrl,Instant.Red+YouCtrl,Sorcery.Red+YouCtrl,Sorcery.Green+YouCtrl | AffectedZone$ Stack | EffectZone$ Battlefield | Description$ Each red or green instant or sorcery spell you cast has conspire. (As you cast the spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.)
+DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wort_the_raidmother.jpg
 Oracle:When Wort, the Raidmother enters the battlefield, create two 1/1 red and green Goblin Warrior creature tokens.\nEach red or green instant or sorcery spell you cast has conspire. (As you cast the spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.)

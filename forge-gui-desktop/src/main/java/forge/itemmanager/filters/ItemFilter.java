@@ -12,6 +12,7 @@ import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedCheckBox;
 import forge.toolbox.FSkin.SkinnedPanel;
+import forge.util.Localizer;
 
 import javax.swing.*;
 
@@ -190,7 +191,7 @@ public abstract class ItemFilter<T extends InventoryItem> {
         private boolean pressed, hovered;
 
         private RemoveButton() {
-            setToolTipText("Remove filter");
+            setToolTipText(Localizer.getInstance().getMessage("lblRemoveFilter"));
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {

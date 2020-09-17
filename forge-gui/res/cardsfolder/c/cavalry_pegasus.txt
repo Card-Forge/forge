@@ -5,5 +5,6 @@ PT:1/1
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME attacks, each attacking Human gains flying until end of turn.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Human.attacking | KW$ Flying
+DeckHints:Type$Human
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cavalry_pegasus.jpg
 Oracle:Flying\nWhenever Cavalry Pegasus attacks, each attacking Human gains flying until end of turn.

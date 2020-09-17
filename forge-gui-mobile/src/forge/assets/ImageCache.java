@@ -24,8 +24,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.LoadingCache;
+import com.google.common.cache.RemovalCause;
+import com.google.common.cache.RemovalListener;
+import com.google.common.cache.RemovalNotification;
 import forge.ImageKeys;
 import forge.card.CardEdition;
+import forge.card.CardRenderer;
 import forge.game.card.CardView;
 import forge.game.player.IHasIcon;
 import forge.item.IPaperCard;
@@ -61,6 +65,14 @@ public class ImageCache {
     private static final LoadingCache<String, Texture> cache = CacheBuilder.newBuilder()
             .maximumSize(400)
             .expireAfterAccess(15, TimeUnit.MINUTES)
+            .removalListener(new RemovalListener<String, Texture>() {
+                @Override
+                public void onRemoval(RemovalNotification<String, Texture> removalNotification) {
+                    if(removalNotification.wasEvicted()||removalNotification.getCause() == RemovalCause.EXPIRED) {
+                        removalNotification.getValue().dispose();
+                    }
+                }
+            })
             .build(new ImageLoader());
     public static final Texture defaultImage;
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
@@ -85,7 +97,17 @@ public class ImageCache {
 
     public static void clear() {
         cache.invalidateAll();
+        cache.cleanUp();
         missingIconKeys.clear();
+    }
+
+    public static void disposeTexture(){
+        for (Texture t: cache.asMap().values()) {
+            if (!t.toString().contains("pics/icons")) //fixes quest avatars black texture. todo: filter textures that are safe to dispose...
+                t.dispose();
+        }
+        CardRenderer.clearcardArtCache();
+        clear();
     }
 
     public static Texture getImage(InventoryItem ii) {

@@ -8,6 +8,7 @@ import forge.gui.framework.IVDoc;
 import forge.screens.workshop.controllers.CCardDesigner;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
+import forge.util.Localizer;
 
 import javax.swing.*;
 
@@ -24,11 +25,11 @@ public enum VCardDesigner implements IVDoc<CCardDesigner> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Card Designer");
+    private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblCardDesigner"));
     
     private FLabel btnSaveCard = new FLabel.Builder()
     		.opaque(true).hoverable(true)
-    		.text("Save and Apply Card Changes")
+    		.text(Localizer.getInstance().getMessage("lblSaveAndApplyCardChanges"))
     		.icon(FSkin.getIcon(FSkinProp.ICO_SAVE))
     		.enabled(false) //disabled by default until card changes made
     		.build();

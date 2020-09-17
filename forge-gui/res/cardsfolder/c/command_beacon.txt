@@ -2,8 +2,7 @@ Name:Command Beacon
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ ChangeZoneAll | Cost$ T Sac<1/CARDNAME> | ChangeType$ Card.IsCommander+YouOwn | Origin$ Command | Destination$ Hand | SpellDescription$ Put your commander into your hand from the command zone.
+A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | ChangeType$ Card.IsCommander+YouOwn | SelectPrompt$ Select a commander | ChangeNum$ 1 | Mandatory$ True | Origin$ Command | Destination$ Hand | Hidden$ True | SpellDescription$ Put your commander into your hand from the command zone.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/command_beacon.jpg
 Oracle:{T}: Add {C}.\n{T}, Sacrifice Command Beacon: Put your commander into your hand from the command zone.

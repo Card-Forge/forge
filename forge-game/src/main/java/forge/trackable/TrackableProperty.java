@@ -1,7 +1,9 @@
 package forge.trackable;
 
+
 import forge.card.CardRarity;
 import forge.game.Direction;
+import forge.game.EvenOdd;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
@@ -40,17 +42,18 @@ public enum TrackableProperty {
     CommanderAltType(TrackableTypes.StringType),
     Damage(TrackableTypes.IntegerType),
     AssignedDamage(TrackableTypes.IntegerType),
+    LethalDamage(TrackableTypes.IntegerType),
     ShieldCount(TrackableTypes.IntegerType),
     ChosenType(TrackableTypes.StringType),
     ChosenColors(TrackableTypes.StringListType),
     ChosenCards(TrackableTypes.CardViewCollectionType),
     ChosenPlayer(TrackableTypes.PlayerViewType),
     ChosenDirection(TrackableTypes.EnumType(Direction.class)),
+    ChosenEvenOdd(TrackableTypes.EnumType(EvenOdd.class)),
     ChosenMode(TrackableTypes.StringType),
     Remembered(TrackableTypes.StringType),
     NamedCard(TrackableTypes.StringType),
     PlayerMayLook(TrackableTypes.PlayerViewCollectionType, FreezeMode.IgnoresFreeze),
-    PlayerMayLookTemp(TrackableTypes.PlayerViewCollectionType, FreezeMode.IgnoresFreeze),
     EntityAttachedTo(TrackableTypes.GameEntityViewType),
     EncodedCards(TrackableTypes.CardViewCollectionType),
     GainControlTargets(TrackableTypes.CardViewCollectionType),
@@ -61,8 +64,8 @@ public enum TrackableProperty {
     Haunting(TrackableTypes.CardViewType),
     MustBlockCards(TrackableTypes.CardViewCollectionType),
     PairedWith(TrackableTypes.CardViewType),
-    CurrentState(TrackableTypes.CardStateViewType, FreezeMode.IgnoresFreezeIfUnset),
-    AlternateState(TrackableTypes.CardStateViewType),
+    CurrentState(TrackableTypes.CardStateViewType, FreezeMode.IgnoresFreeze),
+    AlternateState(TrackableTypes.CardStateViewType, FreezeMode.IgnoresFreeze),
     HiddenId(TrackableTypes.IntegerType),
     ExertedThisTurn(TrackableTypes.BooleanType),
 
@@ -179,6 +182,7 @@ public enum TrackableProperty {
     BandsWithBlockers(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
     AttackersWithPlannedBlockers(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
     BandsWithPlannedBlockers(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
+    CombatView(TrackableTypes.CombatViewType, FreezeMode.IgnoresFreeze),
 
     //Game
     Players(TrackableTypes.PlayerViewCollectionType),
@@ -217,6 +221,10 @@ public enum TrackableProperty {
 
     public FreezeMode getFreezeMode() {
         return freezeMode;
+    }
+
+    public TrackableType<?> getType() {
+        return type;
     }
 
     @SuppressWarnings("unchecked")

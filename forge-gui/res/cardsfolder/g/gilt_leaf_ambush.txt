@@ -2,8 +2,7 @@ Name:Gilt-Leaf Ambush
 ManaCost:2 G
 Types:Tribal Instant Elf
 A:SP$ Token | Cost$ 2 G | TokenAmount$ 2 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | LegacyImage$ g 1 1 elf warrior lrw | SubAbility$ DBClash | RememberTokens$ True | SpellDescription$ Create two 1/1 green Elf Warrior creature tokens. Clash with an opponent. If you win, those creatures gain deathtouch until end of turn.
-SVar:DBClash:DB$Clash | WinSubAbility$ AdditionalPump
-SVar:AdditionalPump:DB$PumpAll | ValidCards$ Creature.IsRemembered | KW$ Deathtouch | SubAbility$ DBCleanUp
-SVar:DBCleanUp:DB$Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gilt_leaf_ambush.jpg
+SVar:DBClash:DB$ Clash | WinSubAbility$ AdditionalPump
+SVar:AdditionalPump:DB$ PumpAll | ValidCards$ Creature.IsRemembered | KW$ Deathtouch | SubAbility$ DBCleanUp
+SVar:DBCleanUp:DB$ Cleanup | ClearRemembered$ True
 Oracle:Create two 1/1 green Elf Warrior creature tokens. Clash with an opponent. If you win, those creatures gain deathtouch until end of turn. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher converted mana cost. Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it.)

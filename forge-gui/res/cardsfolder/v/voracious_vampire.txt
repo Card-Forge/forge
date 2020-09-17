@@ -4,7 +4,6 @@ Types:Creature Vampire Knight
 PT:2/2
 K:Menace
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target Vampire you control gets +1/+1 and gains menace until end of turn.
-SVar:TrigPump:DB$Pump | ValidTgts$ Vampire.YouCtrl | TgtPrompt$ Select target Vampire you control | NumAtt$ 1 | NumDef$ 1 | KW$ Menace
+SVar:TrigPump:DB$ Pump | ValidTgts$ Vampire.YouCtrl | TgtPrompt$ Select target Vampire you control | NumAtt$ 1 | NumDef$ 1 | KW$ Menace
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/voracious_vampire.jpg
 Oracle:Menace\nWhen Voracious Vampire enters the battlefield, target Vampire you control gets +1/+1 and gains menace until end of turn.

@@ -9,6 +9,8 @@ import forge.game.spellability.SpellAbilityView;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Lists;
+
 import forge.FThreads;
 import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
@@ -92,15 +94,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             if (card.getManaAbilities().size() == 1) {
                 activateManaAbility(card, card.getManaAbilities().get(0));
             } else {
-                SpellAbilityView spellAbilityView;
-                HashMap<SpellAbilityView, SpellAbility> spellAbilityViewMap = new HashMap<>();
-                for (SpellAbility sa : card.getManaAbilities()) {
-                    spellAbilityViewMap.put(sa.getView(), sa);
-                }
-                List<SpellAbilityView> choices = new ArrayList<>(spellAbilityViewMap.keySet());
-                spellAbilityView = getController().getGui().getAbilityToPlay(card.getView(), choices, triggerEvent);
-                if (spellAbilityView != null) {
-                    activateManaAbility(card, spellAbilityViewMap.get(spellAbilityView));
+                SpellAbility spellAbility = getController().getAbilityToPlay(card, Lists.newArrayList(card.getManaAbilities()), triggerEvent);
+                if (spellAbility != null) {
+                    activateManaAbility(card, spellAbility);
                 }
             }
             return true;
@@ -390,7 +386,11 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             }
         }
         else {
-            String colorsProduced = m.isComboMana() ? m.getComboColors() : m.getOrigProduced();
+            // treat special mana if it always can be paid
+            if (m.isSpecialMana()) {
+                return true;
+            }
+            String colorsProduced = m.isComboMana() ? m.getComboColors() : m.mana();
             for (final String color : colorsProduced.split(" ")) {
                 if (0 != (neededColor & ManaAtom.fromName(color))) {
                     return true;

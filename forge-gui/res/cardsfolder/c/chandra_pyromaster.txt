@@ -6,13 +6,12 @@ A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$
 SVar:ChandraDamage:DB$ DealDamage | ValidTgts$ Creature.ControlledBy TargetedOrController | TgtPrompt$ Select target creature that player or that planeswalker's controller controls | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 1 | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Targeted | IsCurse$ True | KW$ HIDDEN CARDNAME can't block. | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ GE1
-A:AB$ Mill | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. You may play it this turn.
+A:AB$ Dig | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. You may play it this turn.
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ Mill | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ You | NumCards$ 10 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBChoose | SpellDescription$ Exile the top ten cards of your library. Choose an instant or sorcery card exiled this way and copy it three times. You may cast the copies without paying their mana costs.
+A:AB$ Dig | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ You | DigNum$ 10 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBChoose | SpellDescription$ Exile the top ten cards of your library. Choose an instant or sorcery card exiled this way and copy it three times. You may cast the copies without paying their mana costs.
 SVar:DBChoose:DB$ ChooseCard | Choices$ Instant.IsRemembered,Sorcery.IsRemembered | ChoiceZone$ Exile | Defined$ You | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Defined$ ChosenCard | WithoutManaCost$ True | CopyCard$ True | Amount$ 3 | AllowRepeats$ True | Controller$ You | Optional$ True | SubAbility$ DBCleanup
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chandra_pyromaster.jpg
 Oracle:[+1]: Chandra, Pyromaster deals 1 damage to target player or planeswalker and 1 damage to up to one target creature that player or that planeswalker's controller controls. That creature can't block this turn.\n[0]: Exile the top card of your library. You may play it this turn.\n[−7]: Exile the top ten cards of your library. Choose an instant or sorcery card exiled this way and copy it three times. You may cast the copies without paying their mana costs.

@@ -5,7 +5,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
@@ -94,15 +93,8 @@ public class RepeatEffect extends SpellAbilityEffect {
             }
             list = CardLists.getValidCards(list, repeatPresent.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
-            int right;
             final String rightString = repeatCompare.substring(2);
-            try { // If this is an Integer, just parse it
-                right = Integer.parseInt(rightString);
-            } catch (final NumberFormatException e) { // Otherwise, grab it from
-                                                      // the
-                // SVar
-                right = CardFactoryUtil.xCount(sa.getHostCard(), sa.getHostCard().getSVar(rightString));
-            }
+            int right = AbilityUtils.calculateAmount(sa.getHostCard(), rightString, sa);
 
             final int left = list.size();
 

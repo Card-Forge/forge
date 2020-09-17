@@ -3,8 +3,8 @@ ManaCost:3 U B
 Types:Creature Zombie Ninja
 PT:5/4
 K:Ninjutsu:2 U B
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player exiles the top two cards of their library. Until end of turn, you may play those cards without paying their mana cost.
-SVar:TrigMill:DB$ Mill | Defined$ TriggeredTarget | NumCards$ 2 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player exiles the top two cards of their library. Until end of turn, you may play those cards without paying their mana cost.
+SVar:TrigExile:DB$ Dig | Defined$ TriggeredTarget | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
 SVar:Play:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until end of turn, you may play those cards without paying their mana cost.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

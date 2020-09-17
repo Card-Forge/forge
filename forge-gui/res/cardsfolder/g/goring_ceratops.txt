@@ -4,6 +4,5 @@ Types:Creature Dinosaur
 PT:3/3
 K:Double Strike
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, other creatures you control gain double strike until end of turn.
-SVar:TrigPump:DB$PumpAll | ValidCards$ Creature.YouCtrl+Other | KW$ Double Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goring_ceratops.jpg
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl+Other | KW$ Double Strike
 Oracle:Double strike\nWhenever Goring Ceratops attacks, other creatures you control gain double strike until end of turn.

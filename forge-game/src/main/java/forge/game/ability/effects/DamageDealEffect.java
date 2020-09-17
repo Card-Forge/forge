@@ -1,8 +1,10 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
@@ -11,6 +13,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardDamageMap;
 import forge.game.card.CardUtil;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
@@ -123,6 +126,7 @@ public class DamageDealEffect extends DamageBaseEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
+        final Player activationPlayer = sa.getActivatingPlayer();
         final Game game = hostCard.getGame();
 
         final String damage = sa.getParam("NumDmg");
@@ -233,7 +237,12 @@ public class DamageDealEffect extends DamageBaseEffect {
             }
 
             for (final Object o : tgts) {
-                dmg = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(o) : dmg;
+                if (!removeDamage) {
+                    dmg = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(o) : dmg;
+                    if (dmg <= 0) {
+                        continue;
+                    }
+                }
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     final Card gc = game.getCardState(c, null);
@@ -247,7 +256,27 @@ public class DamageDealEffect extends DamageBaseEffect {
                             c.setHasBeenDealtDeathtouchDamage(false);
                             c.clearAssignedDamage();
                         } else {
-                            c.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
+                            if (sa.hasParam("ExcessDamage") && (!sa.hasParam("ExcessDamageCondition") ||
+                                    sourceLKI.isValid(sa.getParam("ExcessDamageCondition").split(","), activationPlayer, hostCard, sa))) {
+                                // excess damage explicit says toughness, not lethal damage in the rules
+                                int lethal = c.getLethalDamage();
+                                if (sourceLKI.hasKeyword(Keyword.DEATHTOUCH)) {
+                                    lethal = Math.min(lethal, 1);
+                                }
+                                int dmgToTarget = Math.min(lethal, dmg);
+
+                                c.addDamage(dmgToTarget, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
+
+                                List<GameEntity> list = Lists.newArrayList();
+                                list.addAll(AbilityUtils.getDefinedCards(hostCard, sa.getParam("ExcessDamage"), sa));
+                                list.addAll(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("ExcessDamage"), sa));
+
+                                if (!list.isEmpty()) {
+                                    list.get(0).addDamage(dmg - dmgToTarget, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
+                                }
+                            } else {
+                                c.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
+                            }
                         }
                     }
                 } else if (o instanceof Player) {

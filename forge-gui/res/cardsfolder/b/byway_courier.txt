@@ -2,8 +2,7 @@ Name:Byway Courier
 ManaCost:2 G
 Types:Creature Human Scout
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You | LegacyImage$ c a clue draw soi
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
 DeckHas:Ability$Investigate & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/byway_courier.jpg
 Oracle:When Byway Courier dies, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

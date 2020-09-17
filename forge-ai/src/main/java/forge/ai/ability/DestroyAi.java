@@ -101,7 +101,7 @@ public class DestroyAi extends SpellAbilityAi {
                 return SpecialCardAi.SarkhanTheMad.considerMakeDragon(ai, sa);
             } else if (logic != null && logic.startsWith("MinLoyalty.")) {
                 int minLoyalty = Integer.parseInt(logic.substring(logic.indexOf(".") + 1));
-                if (source.getCounters(CounterType.LOYALTY) < minLoyalty) {
+                if (source.getCounters(CounterEnumType.LOYALTY) < minLoyalty) {
                     return false;
                 }
             } else if ("Polymorph".equals(logic)) {
@@ -161,7 +161,7 @@ public class DestroyAi extends SpellAbilityAi {
                             return false;
                         }
                         //Check for undying
-                        return (!c.hasKeyword(Keyword.UNDYING) || c.getCounters(CounterType.P1P1) > 0);
+                        return (!c.hasKeyword(Keyword.UNDYING) || c.getCounters(CounterEnumType.P1P1) > 0);
                     }
                 });
             }
@@ -222,24 +222,15 @@ public class DestroyAi extends SpellAbilityAi {
                 Card choice = null;
                 // If the targets are only of one type, take the best
                 if (CardLists.getNotType(list, "Creature").isEmpty()) {
+                    if ("Pongify".equals(logic)) {
+                        return SpecialAiLogic.doPongifyLogic(ai, sa);
+                    }
+
                     choice = ComputerUtilCard.getBestCreatureAI(list);
                     if ("OppDestroyYours".equals(logic)) {
                         Card aiBest = ComputerUtilCard.getBestCreatureAI(ai.getCreaturesInPlay());
                         if (ComputerUtilCard.evaluateCreature(aiBest) > ComputerUtilCard.evaluateCreature(choice) - 40) {
                             return false;
-                        }
-                    }
-                    if ("Pongify".equals(logic)) {
-                        final Card token = TokenAi.spawnToken(choice.getController(), sa.getSubAbility());
-                        if (token == null) {
-                            return true;    // becomes Terminate
-                        } else {
-                            if (source.getGame().getPhaseHandler().getPhase()
-                                .isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) || // prevent surprise combatant
-                                ComputerUtilCard.evaluateCreature(choice) < 1.5
-                                * ComputerUtilCard.evaluateCreature(token)) {
-                                return false;
-                            }
                         }
                     }
                 } else if (CardLists.getNotType(list, "Land").isEmpty()) {
@@ -256,7 +247,7 @@ public class DestroyAi extends SpellAbilityAi {
                 }
                 //option to hold removal instead only applies for single targeted removal
                 if (!sa.isTrigger() && abTgt.getMaxTargets(sa.getHostCard(), sa) == 1) {
-                    if (!ComputerUtilCard.useRemovalNow(sa, choice, 0, ZoneType.Graveyard)) {
+                    if (choice == null || !ComputerUtilCard.useRemovalNow(sa, choice, 0, ZoneType.Graveyard)) {
                         return false;
                     }
                 }
@@ -277,6 +268,7 @@ public class DestroyAi extends SpellAbilityAi {
                             SpellAbility sp = aura.getFirstSpellAbility();
                             if (sp != null && "GainControl".equals(sp.getParam("AILogic"))
                                 && aura.getController() != ai && sa.canTarget(aura)) {
+                                list.remove(choice);
                                 choice = aura;
                             }
                         }
@@ -387,7 +379,7 @@ public class DestroyAi extends SpellAbilityAi {
                     if (CardLists.getNotType(list, "Creature").isEmpty()) {
                         if (!sa.getUniqueTargets().isEmpty() && sa.getParent().getApi() == ApiType.Destroy
                                 && sa.getUniqueTargets().get(0) instanceof Card) {
-                            // basic ai for Diaochan 
+                            // basic ai for Diaochan
                             c = (Card) sa.getUniqueTargets().get(0);
                         } else {
                             c = ComputerUtilCard.getWorstCreatureAI(list);
@@ -412,7 +404,7 @@ public class DestroyAi extends SpellAbilityAi {
 
         Player tgtPlayer = tgtLand.getController();
         int oppLandsOTB = tgtPlayer.getLandsInPlay().size();
-        
+
         // AI profile-dependent properties
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         int amountNoTempoCheck = aic.getIntProperty(AiProps.STRIPMINE_MIN_LANDS_OTB_FOR_NO_TEMPO_CHECK);
@@ -435,7 +427,7 @@ public class DestroyAi extends SpellAbilityAi {
 
         // Non-basic lands are currently not ranked in any way in ComputerUtilCard#getBestLandAI, so if a non-basic land is best target,
         // consider killing it off unless there's too much potential tempo loss.
-        // TODO: actually rank non-basics in that method and then kill off the potentially dangerous (manlands, Valakut) or lucrative 
+        // TODO: actually rank non-basics in that method and then kill off the potentially dangerous (manlands, Valakut) or lucrative
         // (dual/triple mana that opens access to a certain color) lands
         boolean nonBasicTgt = !tgtLand.isBasicLand();
 
@@ -447,7 +439,7 @@ public class DestroyAi extends SpellAbilityAi {
         boolean isHighPriority = highPriorityIfNoLandDrop && oppSkippedLandDrop;
 
         boolean timingCheck = canManaLock || canColorLock || nonBasicTgt;
-        boolean tempoCheck = numLandsOTB >= amountNoTempoCheck 
+        boolean tempoCheck = numLandsOTB >= amountNoTempoCheck
                 || ((numLandsInHand >= amountLandsInHand || isHighPriority) && ((numLandsInHand + numLandsOTB >= amountNoTimingCheck) || timingCheck));
 
         // For Ghost Quarter, only use it if you have either more lands in play than your opponent

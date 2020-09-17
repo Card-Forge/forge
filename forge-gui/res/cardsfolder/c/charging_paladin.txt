@@ -3,6 +3,5 @@ ManaCost:2 W
 Types:Creature Human Knight
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +0/+3 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumDef$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/charging_paladin.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumDef$ 3
 Oracle:Whenever Charging Paladin attacks, it gets +0/+3 until end of turn.

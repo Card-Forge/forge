@@ -1,0 +1,9 @@
+Name:Valiant Rescuer
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:3/1
+T:Mode$ Cycled | ValidCard$ Card.Other | ValidPlayer$ You | TriggerZones$ Battlefield | OnlyFirst$ True | Execute$ TrigToken | TriggerDescription$ Whenever you cycle another card for the first time each turn, create a 1/1 white Human Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | LegacyImage$ w 1 1 human soldier iko
+K:Cycling:2
+DeckHas:Ability$Token
+Oracle:Whenever you cycle another card for the first time each turn, create a 1/1 white Human Soldier creature token.\nCycling {2} ({2}, Discard this card: Draw a card.)

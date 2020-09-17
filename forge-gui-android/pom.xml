@@ -6,7 +6,7 @@
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms1024m</build.min.memory>
         <build.max.memory>-Xmx1536m</build.max.memory>
-        <alpha-version>1.6.33.001</alpha-version>
+        <alpha-version>1.6.36.001</alpha-version>
         <sign.keystore>keystore</sign.keystore>
         <sign.alias>alias</sign.alias>
         <sign.storepass>storepass</sign.storepass>
@@ -19,7 +19,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.34-SNAPSHOT</version>
+        <version>1.6.37-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui-android</artifactId>
@@ -103,13 +103,6 @@
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-backend-android</artifactId>
             <version>1.9.10</version>
-        </dependency>
-        <dependency>
-            <groupId>com.android.support</groupId>
-            <artifactId>support-v4</artifactId>
-            <version>23.1.1</version>
-            <scope>system</scope>
-            <systemPath>${pom.basedir}/libs/android-support-v4.jar</systemPath>
         </dependency>
     </dependencies>
 

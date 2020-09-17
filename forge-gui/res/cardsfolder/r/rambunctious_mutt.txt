@@ -1,0 +1,7 @@
+Name:Rambunctious Mutt
+ManaCost:3 W W
+Types:Creature Dog
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact or enchantment an opponent controls.
+SVar:TrigDestroy:DB$Destroy | ValidTgts$ Artifact.OppCtrl,Enchantment.OppCtrl | TgtPrompt$ Select target artifact or enchantment an opponent controls.
+Oracle:When Rambunctious Mutt enters the battlefield, destroy target artifact or enchantment an opponent controls.

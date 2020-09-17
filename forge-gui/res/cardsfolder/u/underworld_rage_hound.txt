@@ -1,6 +1,6 @@
 Name:Underworld Rage-Hound
 ManaCost:1 R
-Types:Creature Elemental Hound
+Types:Creature Elemental Dog
 PT:3/1
 K:CARDNAME attacks each combat if able.
 K:Escape:3 R ExileFromGrave<3/Card.Other/other>

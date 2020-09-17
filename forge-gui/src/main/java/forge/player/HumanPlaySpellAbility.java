@@ -103,7 +103,7 @@ public class HumanPlaySpellAbility {
             // This is should happen earlier, before the Modal spell is chosen
             // Turn face-down card face up (except case of morph spell)
             if (ability.isSpell() && !ability.isCastFaceDown() && fromState == CardStateName.FaceDown) {
-                c.turnFaceUp();
+                c.turnFaceUp(null);
             }
             ability.setHostCard(game.getAction().moveToStack(c, ability));
         }
@@ -114,7 +114,7 @@ public class HumanPlaySpellAbility {
 
         ability = GameActionUtil.addExtraKeywordCost(ability);
 
-        Cost abCost = ability.getPayCosts() == null ? new Cost("0", ability.isAbility()) : ability.getPayCosts();
+        Cost abCost = ability.getPayCosts();
         CostPayment payment = new CostPayment(abCost, ability);
 
         // TODO Apply this to the SAStackInstance instead of the Player
@@ -161,7 +161,6 @@ public class HumanPlaySpellAbility {
                     // if a player failed to play madness cost, move the card to graveyard
                     Card newCard = game.getAction().moveToGraveyard(c, null);
                     newCard.setMadnessWithoutCast(true);
-                    newCard.setMadness(false);
                 } else if (ability.getHostCard().isBestowed()) {
                     ability.getHostCard().unanimateBestow();
                 }
@@ -214,7 +213,7 @@ public class HumanPlaySpellAbility {
                     final FCollection<Player> candidates = AbilityUtils.getDefinedPlayers(source, currentAbility.getParam("TargetingPlayer"), currentAbility);
                     // activator chooses targeting player
                     targetingPlayer = ability.getActivatingPlayer().getController().chooseSingleEntityForEffect(
-                            candidates, currentAbility, "Choose the targeting player");
+                            candidates, currentAbility, "Choose the targeting player", null);
                 } else {
                     targetingPlayer = ability.getActivatingPlayer();
                 }
@@ -223,10 +222,10 @@ public class HumanPlaySpellAbility {
                     return false;
                 }
             }
-            final SpellAbility subAbility = currentAbility.getSubAbility();
+            final AbilitySub subAbility = currentAbility.getSubAbility();
             if (subAbility != null) {
                 // This is necessary for "TargetsWithDefinedController$ ParentTarget"
-                ((AbilitySub) subAbility).setParent(currentAbility);
+                subAbility.setParent(currentAbility);
             }
             currentAbility = subAbility;
         } while (currentAbility != null);
@@ -314,10 +313,10 @@ public class HumanPlaySpellAbility {
                     if (value == null) {
                         return false;
                     }
-                    card.setXManaCostPaid(value);
+                    ability.setXManaCostPaid(value);
                 }
             } else if (manaCost.getMana().isZero() && ability.isSpell()) {
-                card.setXManaCostPaid(0);
+                ability.setXManaCostPaid(0);
             }
         }
         return true;

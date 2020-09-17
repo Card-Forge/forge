@@ -2,8 +2,7 @@ Name:Firehoof Cavalry
 ManaCost:W
 Types:Creature Human Berserker
 PT:1/1
-A:AB$ Pump | Cost$ 3 R | NumAtt$ +2 | KW$ Trample | SpellDescription$ CARDNAME gets +2/+0 and gains trample until end of turn.
+A:AB$ Pump | Cost$ 3 R | Defined$ Self | NumAtt$ +2 | KW$ Trample | SpellDescription$ CARDNAME gets +2/+0 and gains trample until end of turn.
 AI:RemoveDeck:Random
 DeckNeeds:Color$Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/firehoof_cavalry.jpg
 Oracle:{3}{R}: Firehoof Cavalry gets +2/+0 and gains trample until end of turn.

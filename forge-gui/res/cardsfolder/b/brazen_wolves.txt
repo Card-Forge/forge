@@ -3,6 +3,5 @@ ManaCost:2 R
 Types:Creature Wolf
 PT:2/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +2/+0 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brazen_wolves.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2
 Oracle:Whenever Brazen Wolves attacks, it gets +2/+0 until end of turn.

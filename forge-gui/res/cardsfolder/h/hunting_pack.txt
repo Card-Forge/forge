@@ -3,5 +3,6 @@ ManaCost:5 G G
 Types:Instant
 A:SP$ Token | Cost$ 5 G G | TokenAmount$ 1 | TokenScript$ g_4_4_beast | TokenOwner$ You | LegacyImage$ g 4 4 beast scg | SpellDescription$ Create a 4/4 green Beast creature token.
 K:Storm
+DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_pack.jpg
 Oracle:Create a 4/4 green Beast creature token.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)

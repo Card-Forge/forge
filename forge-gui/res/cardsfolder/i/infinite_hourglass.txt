@@ -6,7 +6,7 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ TIME | Counter
 S:Mode$ Continuous | Affected$ Creature | AddPower$ X | Description$ All creatures get +1/+0 for each time counter on CARDNAME.
 SVar:X:Count$CardCounters.TIME
 #TODO: Improve the AI for this
-A:AB$ RemoveCounter | Cost$ 3 | CounterType$ TIME | CounterNum$ 1 | ActivationPhases$ Upkeep | AnyPlayer$ True | AILogic$ Never | SpellDescription$ Remove a time counter from CARDNAME. Any player may activate this ability but only during any upkeep step.
+A:AB$ RemoveCounter | Cost$ 3 | CounterType$ TIME | CounterNum$ 1 | ActivationPhases$ Upkeep | Activator$ Player | AILogic$ Never | SpellDescription$ Remove a time counter from CARDNAME. Any player may activate this ability but only during any upkeep step.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infinite_hourglass.jpg
 Oracle:At the beginning of your upkeep, put a time counter on Infinite Hourglass.\nAll creatures get +1/+0 for each time counter on Infinite Hourglass.\n{3}: Remove a time counter from Infinite Hourglass. Any player may activate this ability but only during any upkeep step.

@@ -2,8 +2,7 @@ Name:Siren Reaver
 ManaCost:3 U
 Types:Creature Siren Pirate
 PT:3/2
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | CheckSVar$ RaidTest | SVarCompare$ GE1 | Description$ Raid — CARDNAME costs {1} less to cast if you attacked with a creature this turn.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | CheckSVar$ RaidTest | SVarCompare$ GE1 | Description$ Raid — CARDNAME costs {1} less to cast if you attacked this turn.
 K:Flying
 SVar:RaidTest:Count$AttackersDeclared
-SVar:Picture:http://www.wizards.com/global/images/magic/general/siren_reaver.jpg
-Oracle:Raid — Siren Reaver costs {1} less to cast if you attacked with a creature this turn.\nFlying
+Oracle:Raid — Siren Reaver costs {1} less to cast if you attacked this turn.\nFlying

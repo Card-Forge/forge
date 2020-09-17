@@ -26,6 +26,7 @@ import forge.gui.framework.IVDoc;
 import forge.screens.match.controllers.CPicture;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -39,7 +40,7 @@ public class VPicture implements IVDoc<CPicture> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Card Picture");
+    private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblCardPicture"));
 
     // Top-level containers
     private final CardPicturePanel pnlPicture = new CardPicturePanel();

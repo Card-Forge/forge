@@ -1,0 +1,15 @@
+Name:Beyeen Veil
+ManaCost:1 U
+Types:Instant
+A:SP$ PumpAll | Cost$ 1 U | ValidCards$ Creature.OppCtrl | NumAtt$ -2 | IsCurse$ True | SpellDescription$ Creatures your opponents control get -2/-0 until end of turn.
+AlternateMode:Modal
+Oracle:Creatures your opponents control get -2/-0 until end of turn.
+
+ALTERNATE
+
+Name:Beyeen Coast
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+Oracle:Beyeen Coast enters the battlefield tapped.\n{T}: Add {U}.

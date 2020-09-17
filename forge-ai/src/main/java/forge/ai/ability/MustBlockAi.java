@@ -18,6 +18,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 import java.util.List;
+import java.util.Map;
 
 public class MustBlockAi extends SpellAbilityAi {
 
@@ -167,7 +168,7 @@ public class MustBlockAi extends SpellAbilityAi {
 
     @Override
     protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional,
-            Player targetedPlayer) {
+            Player targetedPlayer, Map<String, Object> params) {
         final Card host = sa.getHostCard();
 
         Card attacker = host;

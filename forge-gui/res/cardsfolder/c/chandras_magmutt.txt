@@ -1,0 +1,7 @@
+Name:Chandra's Magmutt
+ManaCost:1 R
+Types:Creature Elemental Dog
+PT:2/2
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker.
+SVar:NonCombatPriority:1
+Oracle:{T}: Chandra's Magmutt deals 1 damage to target player or planeswalker.

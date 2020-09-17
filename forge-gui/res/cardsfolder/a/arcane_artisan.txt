@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 PT:0/3
 A:AB$ Draw | Cost$ 2 U T | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 1 | SubAbility$ DBExile | SpellDescription$ Target player draws a card, then exiles a card from their hand. If a creature card is exiled this way, that player creates a token that's a copy of that card.
 SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | RememberChanged$ True | DefinedPlayer$ Targeted | SubAbility$ DBToken
-SVar:DBToken:DB$ CopyPermanent | Defined$ Remembered | Controller$ Targeted | ConditionDefined$ Remembered | ConditionPresent$ Creature | RememberCopied$ True
+SVar:DBToken:DB$ CopyPermanent | Defined$ Remembered | Controller$ Targeted | ConditionDefined$ Remembered | ConditionPresent$ Creature | RememberTokens$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DelTrigLeaves | TriggerDescription$ When CARDNAME leaves the battlefield, exile all tokens created with it at the beginning of the next end step. 
 SVar:DelTrigLeaves:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigExileAll | TriggerController$ TriggeredCardController | TriggerDescription$ Exile all tokens created with CARDNAME at the beginning of the next end step.
 SVar:TrigExileAll:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBCleanup

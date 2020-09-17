@@ -1,0 +1,10 @@
+Name:Mana Cache
+ManaCost:1 R R
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigCounters | TriggerDescription$ At the beginning of each player's end step, put a charge counter on CARDNAME for each untapped land that player controls.
+SVar:TrigCounters:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ X | References$ X
+SVar:X:Count$Valid Land.ActivePlayerCtrl+untapped
+A:AB$ Mana | Cost$ SubCounter<1/CHARGE> | Produced$ C | Activator$ Player | PlayerTurn$ True | ActivationPhases$ Upkeep->Main2 | SpellDescription$ Add {C}. Any player may activate this ability but only during their turn before the end step.
+AI:RemoveDeck:All
+#Until Agetian can sort the AI use/misuse of this card
+Oracle:At the beginning of each player's end step, put a charge counter on Mana Cache for each untapped land that player controls.\nRemove a charge counter from Mana Cache: Add {C}. Any player may activate this ability but only during their turn before the end step.

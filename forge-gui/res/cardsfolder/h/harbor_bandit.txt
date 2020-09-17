@@ -5,6 +5,5 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control an Island.
 SVar:X:Count$Valid Island.YouCtrl
 SVar:BuffedBy:Island
-A:AB$ Pump | Cost$ 1 U | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/harbor_bandit.jpg
+A:AB$ Pump | Cost$ 1 U | Defined$ Self | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
 Oracle:Harbor Bandit gets +1/+1 as long as you control an Island.\n{1}{U}: Harbor Bandit can't be blocked this turn.

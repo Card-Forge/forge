@@ -483,7 +483,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("Transformed")) {
                         if (tgtC.isDoubleFaced()) {
-                            tgtC.changeCardState("Transform", null);
+                            tgtC.changeCardState("Transform", null, sa);
                         } else {
                             // If it can't Transform, don't change zones.
                             continue;
@@ -507,7 +507,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachedTo"), tgtC.getController(), tgtC);
                         }
                         if (!list.isEmpty()) {
-                            Card attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", tgtC.toString()));
+                            Map<String, Object> params = Maps.newHashMap();
+                            params.put("Attach", tgtC);
+                            Card attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", tgtC.toString()), params);
                             tgtC.attachToEntity(attachedTo);
                         } else { // When it should enter the battlefield attached to an illegal permanent it fails
                             continue;
@@ -517,7 +519,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("AttachedToPlayer")) {
                         FCollectionView<Player> list = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("AttachedToPlayer"), sa);
                         if (!list.isEmpty()) {
-                            Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", tgtC.toString()));
+                            Map<String, Object> params = Maps.newHashMap();
+                            params.put("Attach", tgtC);
+                            Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", tgtC.toString()), params);
                             tgtC.attachToEntity(attachedTo);
                         }
                         else { // When it should enter the battlefield attached to an illegal player it fails
@@ -578,7 +582,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                     }
                                 }
                             } else {
-                                defender = player.getController().chooseSingleEntityForEffect(e, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(movedCard.getName())));
+                                String title = Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(movedCard.getName()));
+                                Map<String, Object> params = Maps.newHashMap();
+                                params.put("Attacker", movedCard);
+                                defender = player.getController().chooseSingleEntityForEffect(e, sa, title, params);
                             }
                             if (defender != null) {
                                 combat.addAttacker(movedCard, defender);
@@ -1024,7 +1031,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 if (sa.hasParam("Transformed")) {
                     if (c.isDoubleFaced()) {
-                        c.changeCardState("Transform", null);
+                        c.changeCardState("Transform", null, sa);
                     } else {
                         // If it can't Transform, don't change zones.
                         continue;
@@ -1039,7 +1046,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (!list.isEmpty()) {
                         Card attachedTo = null;
                         if (list.size() > 1) {
-                            attachedTo = decider.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(c.getName())));
+                            String title = Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(c.getName()));
+                            Map<String, Object> params = Maps.newHashMap();
+                            params.put("Attach", c);
+                            attachedTo = decider.getController().chooseSingleEntityForEffect(list, sa, title, params);
                         }
                         else {
                             attachedTo = list.get(0);
@@ -1057,7 +1067,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.hasParam("AttachedToPlayer")) {
                     FCollectionView<Player> list = AbilityUtils.getDefinedPlayers(source, sa.getParam("AttachedToPlayer"), sa);
                     if (!list.isEmpty()) {
-                        Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(c.getName())));
+                        String title =  Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(c.getName()));
+                        Map<String, Object> params = Maps.newHashMap();
+                        params.put("Attach", c);
+                        Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, title, params);
                         c.attachToEntity(attachedTo);
                     }
                     else { // When it should enter the battlefield attached to an illegal permanent it fails
@@ -1080,7 +1093,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                 }
                             }
                         } else {
-                            defender = player.getController().chooseSingleEntityForEffect(e, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())));
+                            String title =  Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName()));
+                            Map<String, Object> params = Maps.newHashMap();
+                            params.put("Attacker", c);
+                            defender = player.getController().chooseSingleEntityForEffect(e, sa, title, params);
                         }
                         if (defender != null) {
                             combat.addAttacker(c, defender);

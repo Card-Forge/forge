@@ -2,8 +2,7 @@ Name:Embalmer's Tools
 ManaCost:2
 Types:Artifact
 S:Mode$ ReduceCost | ValidCard$ Creature.YouOwn+inZoneGraveyard | Type$ Ability | Amount$ 1 | Description$ Activated abilities of creature cards in your graveyard cost {1} less to activate.
-A:AB$ Mill | Cost$ tapXType<1/Zombie> | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | AILogic$ EndOfOppTurn | SpellDescription$ Target player puts the top card of their library into their graveyard.
+A:AB$ Mill | Cost$ tapXType<1/Zombie> | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | AILogic$ EndOfOppTurn | SpellDescription$ Target player mills a card.
 AI:RemoveDeck:Random
 DeckHints:Type$Zombie
-SVar:Picture:http://www.wizards.com/global/images/magic/general/embalmers_tools.jpg
-Oracle:Activated abilities of creature cards in your graveyard cost {1} less to activate.\nTap an untapped Zombie you control: Target player puts the top card of their library into their graveyard.
+Oracle:Activated abilities of creature cards in your graveyard cost {1} less to activate.\nTap an untapped Zombie you control: Target player mills a card.

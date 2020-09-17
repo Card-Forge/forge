@@ -2,9 +2,8 @@ Name:Eye of Doom
 ManaCost:4
 Types:Artifact
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, each player chooses a nonland permanent and puts a doom counter on it.
-SVar:TrigChoose:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose
-SVar:DBChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Permanent.nonLand | AILogic$ OppPreferred | Mandatory$ True | SubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$ PutCounter | Defined$ ChosenCard | CounterType$ DOOM | CounterNum$ 1
+SVar:TrigChoose:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Chooser$ Remembered | Choices$ Permanent.nonLand | CounterType$ DOOM | CounterNum$ 1
 A:AB$ DestroyAll | Cost$ 2 T Sac<1/CARDNAME> | ValidCards$ Permanent.counters_GE1_DOOM | SpellDescription$ Destroy each permanent with a doom counter.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_of_doom.jpg

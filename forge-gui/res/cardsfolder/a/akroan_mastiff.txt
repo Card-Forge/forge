@@ -1,6 +1,6 @@
 Name:Akroan Mastiff
 ManaCost:3 W
-Types:Creature Hound
+Types:Creature Dog
 PT:2/2
 A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akroan_mastiff.jpg

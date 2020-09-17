@@ -1,0 +1,8 @@
+Name:Canyon Jerboa
+ManaCost:2 W
+Types:Creature Mouse
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ DBPumpAll | Landfall — Whenever a land enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1
+SVar:BuffedBy:Land
+Oracle:Landfall — Whenever a land enters the battlefield under your control, creatures you control get +1/+1 until end of turn.

@@ -1,0 +1,13 @@
+Name:Yorion, Sky Nomad
+ManaCost:3 W/U W/U
+Types:Legendary Creature Bird Serpent
+PT:4/5
+K:Companion:Special:DeckSizePlus20:Your starting deck contains at least twenty cards more than the minimum deck size.
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile any number of other cards you own and control. Return those cards to the battlefield at the beginning of the next end step.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ChangeType$ Permanent.nonLand+Other+YouOwn+YouCtrl | SelectPrompt$ Select any number of other nonland permanents you own and control | Hidden$ True | ChangeNum$ X | References$ X | RememberChanged$ True | SubAbility$ DelTrig
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ Remembered | TriggerDescription$ Return those cards to the battlefield at the beginning of the next end step. | SubAbility$ DBCleanup
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRemembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Permanent.nonLand+Other+YouOwn+YouCtrl
+Oracle:Companion — Your starting deck contains at least twenty cards more than the minimum deck size. (If this card is your chosen companion, you may cast it once from outside the game.)\nFlying\nWhen Yorion enters the battlefield, exile any number of other nonland permanents you own and control. Return those cards to the battlefield at the beginning of the next end step.

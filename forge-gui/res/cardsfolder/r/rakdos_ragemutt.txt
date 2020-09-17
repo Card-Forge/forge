@@ -1,6 +1,6 @@
 Name:Rakdos Ragemutt
 ManaCost:3 B R
-Types:Creature Elemental Hound
+Types:Creature Elemental Dog
 PT:3/3
 K:Haste
 K:Lifelink

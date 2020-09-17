@@ -1,6 +1,6 @@
 Name:Banehound
 ManaCost:B
-Types:Creature Nightmare Hound
+Types:Creature Nightmare Dog
 PT:1/1
 K:Haste
 K:Lifelink

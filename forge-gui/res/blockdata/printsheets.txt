@@ -1556,39 +1556,6 @@ Evolving Wilds
 13 Swamp|M20
 
 [ELD Secret Cards]
-Garruk, Cursed Huntsman|ELD|2
-Oko, Thief of Crowns|ELD|2
-The Royal Scions|ELD|2
-Ardenvale Tactician|ELD|2
-Faerie Guidemother|ELD|2
-Giant Killer|ELD|2
-Lonesome Unicorn|ELD|2
-Realm-Cloaked Giant|ELD|2
-Shepherd of the Flock|ELD|2
-Silverflame Squire|ELD|2
-Animating Faerie|ELD|2
-Brazen Borrower|ELD|2
-Fae of Wishes|ELD|2
-Hypnotic Sprite|ELD|2
-Merfolk Secretkeeper|ELD|2
-Queen of Ice|ELD|2
-Foulmire Knight|ELD|2
-Murderous Rider|ELD|2
-Order of Midnight|ELD|2
-Reaper of Night|ELD|2
-Smitten Swordmaster|ELD|2
-Bonecrusher Giant|ELD|2
-Embereth Shieldbreaker|ELD|2
-Merchant of the Vale|ELD|2
-Rimrock Knight|ELD|2
-Beanstalk Giant|ELD|2
-Curious Pair|ELD|2
-Flaxen Intruder|ELD|2
-Garenbrig Carver|ELD|2
-Lovestruck Beast|ELD|2
-Rosethorn Acolyte|ELD|2
-Tuinvale Treefolk|ELD|2
-Oakhame Ranger|ELD|2
 Kenrith, the Returned King
 Rowan, Fearless Sparkmage
 Garrison Griffin
@@ -1705,20 +1672,6 @@ Deathbellow War Cry
 Terror of Mount Velus
 Ironscale Hydra
 Treeshaker Chimera
-Elspeth, Sun's Nemesis|THB|2
-Ashiok, Nightmare Muse|THB|2
-Calix, Destiny's Hand|THB|2
-Daxos, Blessed by the Sun|THB|2
-Heliod, Sun-Crowned|THB|2
-Callaphe, Beloved of the Sea|THB|2
-Thassa, Deep-Dwelling|THB|2
-Erebos, Bleak-Hearted|THB|2
-Tymaret, Chosen from Death|THB|2
-Anax, Hardened in the Forge|THB|2
-Purphoros, Bronze-Blooded|THB|2
-Nylea, Keen-Eyed|THB|2
-Renata, Called to the Hunt|THB|2
-Klothys, God of Destiny|THB|2
 Archon of Sun's Grace|THB|2
 Eidolon of Obstruction|THB|2
 Heliod's Intervention|THB|2
@@ -3632,3 +3585,2548 @@ Kaya, Ghost Assassin|CN2|2
 
 [CN2 Foil Kaya]
 Kaya, Ghost Assassin|CN2|2
+
+[IKO Secret Cards]
+Zilortha, Strength Incarnate
+Drannith Magistrate|IKO|2
+Lavabrink Venturer|IKO|2
+Luminous Broodmoth|IKO|2
+Mythos of Snapdax|IKO|2
+Mythos of Illuna|IKO|2
+Shark Typhoon|IKO|2
+Voracious Greatshark|IKO|2
+Extinction Event|IKO|2
+Hunted Nightmare|IKO|2
+Mythos of Nethroi|IKO|2
+Mythos of Vadrok|IKO|2
+Unpredictable Cyclone|IKO|2
+Yidaro, Wandering Monster|IKO|2
+Colossification|IKO|2
+Kogla, the Titan Ape|IKO|2
+Mythos of Brokkos|IKO|2
+Chevill, Bane of Monsters|IKO|2
+Death's Oasis|IKO|2
+Eerie Ultimatum|IKO|2
+Emergent Ultimatum|IKO|2
+Frondland Felidar|IKO|2
+General Kudro of Drannith|IKO|2
+Genesis Ultimatum|IKO|2
+Inspired Ultimatum|IKO|2
+Kinnan, Bonder Prodigy|IKO|2
+Labyrinth Raptor|IKO|2
+Offspring's Revenge|IKO|2
+Quartzwood Crasher|IKO|2
+Rielle, the Everwise|IKO|2
+Ruinous Ultimatum|IKO|2
+Skycat Sovereign|IKO|2
+Slitherwisp|IKO|2
+Song of Creation|IKO|2
+Titans' Nest|IKO|2
+Whirlwind of Thought|IKO|2
+Winota, Joiner of Forces|IKO|2
+Fiend Artisan|IKO|2
+Gyruda, Doom of Depths|IKO|2
+Jegantha, the Wellspring|IKO|2
+Kaheera, the Orphanguard|IKO|2
+Keruga, the Macrosage|IKO|2
+Lurrus of the Dream-Den|IKO|2
+Lutri, the Spellchaser|IKO|2
+Obosh, the Preypiercer|IKO|2
+Umori, the Collector|IKO|2
+Yorion, Sky Nomad|IKO|2
+Zirda, the Dawnwaker|IKO|2
+Crystalline Giant|IKO|2
+The Ozolith|IKO|2
+Bonders' Enclave|IKO|2
+Colossification|IKO|3
+Flourishing Fox|IKO|2
+Heartless Act|IKO|2
+Forbidden Friendship|IKO|2
+Migration Path|IKO|2
+Sprite Dragon|IKO|2
+Huntmaster Liger|IKO|2
+Luminous Broodmoth|IKO|3
+Pollywog Symbiote|IKO|2
+Void Beckoner|IKO|2
+Everquill Phoenix|IKO|3
+Yidaro, Wandering Monster|IKO|3
+Gemrazer|IKO|3
+Titanoth Rex|IKO|2
+Brokkos, Apex of Forever|IKO|3
+Illuna, Apex of Wishes|IKO|3
+Nethroi, Apex of Death|IKO|3
+Snapdax, Apex of the Hunt|IKO|3
+Sprite Dragon|IKO|3
+Vadrok, Apex of Thunder|IKO|3
+Gyruda, Doom of Depths|IKO|3
+Mysterious Egg|IKO|2
+Dirge Bat|IKO|3
+Crystalline Giant|IKO|3
+
+[M21 Secret Cards]
+Rin and Seri, Inseparable
+Basri, Devoted Paladin
+Adherent of Hope
+Basri's Aegis
+Sigiled Contender
+Teferi, Timeless Voyager
+Historian of Zhalfir
+Mystic Skyfish
+Teferi's Wavecaster
+Liliana, Death Mage
+Liliana's Scorn
+Liliana's Scrounger
+Spirit of Malevolence
+Chandra, Flame's Catalyst
+Chandra's Firemaw
+Keral Keep Disciples
+Storm Caller
+Garruk, Savage Herald
+Garruk's Warsteed
+Predatory Wurm
+Wildwood Patrol
+Baneslayer Angel|M21|2
+Glorious Anthem|M21|2
+Idol of Endurance|M21|2
+Mangara, the Diplomat|M21|2
+Nine Lives|M21|2
+Pack Leader|M21|2
+Runed Halo|M21|2
+Speaker of the Heavens|M21|2
+Barrin, Tolarian Archmage|M21|2
+Discontinuity|M21|2
+Ghostly Pilferer|M21|2
+Pursued Whale|M21|2
+See the Truth|M21|2
+Shacklegeist|M21|2
+Stormwing Entity|M21|2
+Sublime Epiphany|M21|2
+Demonic Embrace|M21|2
+Hooded Blightfang|M21|2
+Kaervek, the Spiteful|M21|2
+Necromentia|M21|2
+Peer into the Abyss|M21|2
+Thieves' Guild Enforcer|M21|2
+Vito, Thorn of the Dusk Rose|M21|2
+Brash Taunter|M21|2
+Conspicuous Snoop|M21|2
+Double Vision|M21|2
+Fiery Emancipation|M21|2
+Gadrak, the Crown-Scourge|M21|2
+Subira, Tulzidi Caravanner|M21|2
+Terror of the Peaks|M21|2
+Transmogrify|M21|2
+Volcanic Salvo|M21|2
+Azusa, Lost but Seeking|M21|2
+Elder Gargaroth|M21|2
+Feline Sovereign|M21|2
+Heroic Intervention|M21|2
+Jolrael, Mwonvuli Recluse|M21|2
+Primal Might|M21|2
+Sporeweb Weaver|M21|2
+Niambi, Esteemed Speaker|M21|2
+Radha, Heart of Keld|M21|2
+Sanctum of All|M21|2
+Chromatic Orrery|M21|2
+Mazemind Tome|M21|2
+Sparkhunter Masticore|M21|2
+Animal Sanctuary|M21|2
+Fabled Passage|M21|2
+Temple of Epiphany|M21|2
+Temple of Malady|M21|2
+Temple of Mystery|M21|2
+Temple of Silence|M21|2
+Temple of Triumph|M21|2
+Pack Leader|M21|3
+Selfless Savior|M21|2
+Frantic Inventory|M21|2
+Eliminate|M21|2
+Heartfire Immolator|M21|2
+Llanowar Visionary|M21|2
+Bloodfell Caves|M21
+Blossoming Sands|M21
+Dismal Backwater|M21
+Jungle Hollow|M21
+Rugged Highlands|M21
+Scoured Barrens|M21
+Swiftwater Cliffs|M21
+Thornwood Falls|M21
+Tranquil Cove|M21
+Wind-Scarred Crag|M21
+
+[M21 Lands]
+6 Bloodfell Caves|M21
+6 Blossoming Sands|M21
+6 Dismal Backwater|M21
+6 Jungle Hollow|M21
+6 Rugged Highlands|M21
+6 Scoured Barrens|M21
+6 Swiftwater Cliffs|M21
+6 Thornwood Falls|M21
+6 Tranquil Cove|M21
+6 Wind-Scarred Crag|M21
+3 Plains|M21|1
+3 Plains|M21|2
+3 Plains|M21|4
+3 Plains|M21|3
+3 Island|M21|1
+3 Island|M21|2
+3 Island|M21|4
+3 Island|M21|3
+3 Swamp|M21|1
+3 Swamp|M21|2
+3 Swamp|M21|4
+3 Swamp|M21|3
+3 Mountain|M21|1
+3 Mountain|M21|2
+3 Mountain|M21|4
+3 Mountain|M21|3
+3 Forest|M21|1
+3 Forest|M21|2
+3 Forest|M21|4
+3 Forest|M21|3
+
+[JMP Above the Clouds 1]
+1 Warden of Evos Isle|JMP
+1 Inniaz, the Gale Force|JMP
+1 Tide Skimmer|M21
+1 Keen Glidemaster|M21
+1 Roaming Ghostlight|M21
+1 Wall of Runes|M21
+1 Mistral Singer|M21
+1 Unsubstantiate|M21
+1 Rain of Revelation|M21
+1 Rookie Mistake|M21
+1 Lofty Denial|M21
+1 Capture Sphere|M21
+1 Thriving Isle|JMP
+7 Island|JMP|3
+
+[JMP Above the Clouds 2]
+1 Serendib Efreet|JMP
+1 Inniaz, the Gale Force|JMP
+1 Tide Skimmer|M21
+1 Keen Glidemaster|M21
+1 Roaming Ghostlight|M21
+1 Mistral Singer|M21
+1 Wall of Runes|M21
+1 Talrand's Invocation|JMP
+1 Rain of Revelation|M21
+1 Unsubstantiate|M21
+1 Frost Breath|M21
+1 Lofty Denial|M21
+1 Capture Sphere|M21
+1 Thriving Isle|JMP
+6 Island|JMP|3
+
+[JMP Above the Clouds 3]
+1 Windreader Sphinx|JMP
+1 Warden of Evos Isle|JMP
+1 Tide Skimmer|M21
+1 Keen Glidemaster|M21
+1 Roaming Ghostlight|M21
+1 Wall of Runes|M21
+1 Rain of Revelation|M21
+1 Unsubstantiate|M21
+1 Frost Breath|M21
+1 Lofty Denial|M21
+1 Capture Sphere|M21
+1 Thriving Isle|JMP
+8 Island|JMP|3
+
+[JMP Above the Clouds 4]
+1 Kira, Great Glass-Spinner|JMP
+1 Windstorm Drake|JMP
+1 Tide Skimmer|JMP
+1 Keen Glidemaster|JMP
+1 Roaming Ghostlight|JMP
+1 Mistral Singer|JMP
+1 Wall of Runes|JMP
+1 Rain of Revelation|JMP
+1 Unsubstantiate|JMP
+1 Rookie Mistake|JMP
+1 Lofty Denial|JMP
+1 Capture Sphere|JMP
+1 Thriving Isle|JMP
+7 Island|JMP|3
+
+[JMP Angels 1]
+1 Emancipation Angel|JMP
+1 Serra Angel|JMP
+1 Angelic Page|JMP
+1 Voice of the Provinces|JMP
+1 Baneslayer Angel|M21|1
+1 Anointed Chorister|M21
+1 Celestial Enforcer|M21
+1 Angelic Edict|JMP
+1 Angelic Ascension|M21
+1 Feat of Resistance|M21
+1 Guardian Idol|JMP
+1 Scroll of Avacyn|JMP
+1 Thriving Heath|JMP
+7 Plains|JMP|3
+
+[JMP Angels 2]
+1 Linvala, Keeper of Silence|JMP
+1 Angelic Arbiter|JMP
+1 Emancipation Angel|JMP
+1 Serra Angel|JMP
+1 Angelic Page|JMP
+1 Anointed Chorister|M21
+1 Celestial Enforcer|M21
+1 Angelic Edict|JMP
+1 Take Heart|JMP
+1 Angelic Ascension|M21
+1 Guardian Idol|JMP
+1 Scroll of Avacyn|JMP
+1 Thriving Heath|JMP
+7 Plains|JMP|3
+
+[JMP Archaeology 1]
+1 Scholar of the Lost Trove|JMP
+1 Juggernaut|JMP
+1 Meteor Golem|JMP
+1 Ancestral Statue|JMP
+2 Archaeomender|JMP
+1 Erratic Visionary|JMP
+1 Lightning-Core Excavator|JMP
+1 Thirst for Knowledge|JMP
+1 Chromatic Sphere|JMP
+1 Hedron Archive|JMP
+1 Aether Spellbomb|JMP
+1 Buried Ruin|JMP
+1 Thriving Isle|JMP
+6 Island|JMP|4
+
+[JMP Archaeology 2]
+1 Scholar of the Lost Trove|JMP
+1 Juggernaut|JMP
+1 Meteor Golem|JMP
+1 Ancestral Statue|JMP
+2 Archaeomender|JMP
+1 Erratic Visionary|JMP
+1 Lightning-Core Excavator|JMP
+1 Thirst for Knowledge|JMP
+1 Dreamstone Hedron|JMP
+1 Aether Spellbomb|JMP
+1 Terrarion|JMP
+1 Buried Ruin|JMP
+1 Thriving Isle|JMP
+6 Island|JMP|4
+
+[JMP Archaeology 3]
+1 Sharding Sphinx|JMP
+1 Vedalken Archmage|JMP
+1 Juggernaut|JMP
+1 Meteor Golem|JMP
+1 Ancestral Statue|JMP
+2 Archaeomender|JMP
+1 Lightning-Core Excavator|JMP
+1 Prismite|M21
+1 Thirst for Knowledge|JMP
+1 Hedron Archive|JMP
+1 Aether Spellbomb|JMP
+1 Buried Ruin|JMP
+1 Thriving Isle|JMP
+6 Island|JMP|4
+
+[JMP Archaeology 4]
+1 Scarecrone|JMP
+1 Juggernaut|JMP
+1 Meteor Golem|JMP
+1 Scuttlemutt|JMP
+2 Archaeomender|JMP
+1 Lightning-Core Excavator|JMP
+1 Jousting Dummy|JMP
+1 Signpost Scarecrow|JMP
+1 Thirst for Knowledge|JMP
+1 Aether Spellbomb|JMP
+1 Short Sword|M21
+1 Buried Ruin|JMP
+1 Thriving Isle|JMP
+5 Island|JMP|4
+
+[JMP Basri]
+1 Basri Ket|M21|1
+1 Concordia Pegasus|M21
+1 Knight of the Tusk|JMP
+1 Basri's Lieutenant|M21|1
+1 Tempered Veteran|M21
+1 Siege Striker|M21
+1 Staunch Shieldmate|M21
+1 Basri's Acolyte|M21|1
+1 Basri's Solidarity|M21|1
+1 Legion's Judgment|M21
+1 Feat of Resistance|M21
+1 Faith's Fetters|M21
+1 Thriving Heath|JMP
+7 Plains|M21|4
+
+[JMP Cats 1]
+1 Keeper of Fables|JMP
+1 Initiate's Companion|JMP
+1 Pouncing Cheetah|JMP
+1 Feral Prowler|JMP
+1 Feline Sovereign|M21|1
+1 Canopy Stalker|M21
+1 Sabertooth Mauler|M21
+1 Pridemalkin|M21
+1 Enlarge|JMP
+1 Nature's Way|JMP
+1 Crushing Canopy|JMP
+1 Feral Invocation|JMP
+1 Thriving Grove|JMP
+7 Forest|JMP|5
+
+[JMP Cats 2]
+1 Keeper of Fables|JMP
+1 Initiate's Companion|JMP
+1 Penumbra Bobcat|JMP
+1 Feral Prowler|JMP
+1 Feline Sovereign|M21|1
+1 Canopy Stalker|M21
+1 Pridemalkin|M21
+1 Enlarge|JMP
+1 Nature's Way|JMP
+1 Crushing Canopy|JMP
+1 Lurking Predators|JMP
+1 Feral Invocation|JMP
+1 Thriving Grove|JMP
+7 Forest|JMP|5
+
+[JMP Chandra]
+1 Chandra, Heart of Fire|M21|1
+1 Pyroclastic Elemental|JMP
+1 Young Pyromancer|JMP
+1 Fanatical Firebrand|JMP
+1 Chandra's Incinerator|M21|1
+1 Chandra's Pyreling|M21|1
+2 Chandra's Magmutt|M21|1
+1 Flames of the Firebrand|JMP
+1 Pillar of Flame|JMP
+1 Hungry Flames|JMP
+1 Thrill of Possibility|M21
+1 Thriving Bluff|JMP
+7 Mountain|M21|4
+
+[JMP Devilish 1]
+1 Forge Devil|JMP
+1 Zurzoth, Chaos Rider|JMP
+1 Chained Brute|JMP
+1 Spiteful Prankster|JMP
+1 Torch Fiend|JMP
+1 Havoc Jester|M21
+1 Hobblefiend|M21
+1 Pitchburn Devils|M21
+1 Traitorous Greed|M21
+1 Dance with Devils|JMP
+1 Collateral Damage|JMP
+1 Heartfire|JMP
+1 Thriving Bluff|JMP
+7 Mountain|JMP|2
+
+[JMP Devilish 2]
+1 Tibalt's Rager|JMP
+1 Zurzoth, Chaos Rider|JMP
+1 Chained Brute|JMP
+1 Spiteful Prankster|JMP
+2 Torch Fiend|JMP
+1 Havoc Jester|M21
+1 Hobblefiend|M21
+1 Pitchburn Devils|M21
+1 Traitorous Greed|M21
+1 Collateral Damage|JMP
+1 Heartfire|JMP
+1 Thriving Bluff|JMP
+7 Mountain|JMP|2
+
+[JMP Devilish 3]
+1 Chained Brute|JMP
+1 Spiteful Prankster|JMP
+1 Lightning-Core Excavator|JMP
+1 Torch Fiend|JMP
+1 Brash Taunter|M21|1
+1 Havoc Jester|M21
+1 Hobblefiend|M21
+1 Pitchburn Devils|M21
+1 Act of Treason|JMP
+1 Traitorous Greed|M21
+1 Dance with Devils|JMP
+1 Collateral Damage|JMP
+1 Thriving Bluff|JMP
+7 Mountain|JMP|2
+
+[JMP Devilish 4]
+1 Hellrider|JMP
+1 Sin Prodder|JMP
+1 Chained Brute|JMP
+1 Spiteful Prankster|JMP
+1 Lightning-Core Excavator|JMP
+1 Havoc Jester|M21
+1 Hobblefiend|M21
+1 Pitchburn Devils|M21
+1 Act of Treason|JMP
+1 Traitorous Greed|M21
+1 Collateral Damage|JMP
+1 Barrage of Expendables|JMP
+1 Thriving Bluff|JMP
+7 Mountain|JMP|2
+
+[JMP Dinosaurs 1]
+1 Ghalta, Primal Hunger|JMP
+1 Drover of the Mighty|JMP
+1 Orazca Frillback|JMP
+1 Thrashing Brontodon|M21
+1 Colossal Dreadmaw|M21
+1 Ornery Dilophosaur|M21
+1 Drowsing Tyrannodon|M21
+1 Savage Stomp|JMP
+1 Commune with Dinosaurs|JMP
+1 Cultivate|M21|1
+1 Crushing Canopy|JMP
+1 Setessan Training|M21
+1 Thriving Grove|JMP
+7 Forest|JMP|4
+
+[JMP Dinosaurs 2]
+1 Selvala, Heart of the Wilds|JMP
+1 Drover of the Mighty|JMP
+1 Thundering Spineback|JMP
+1 Orazca Frillback|JMP
+1 Colossal Dreadmaw|M21
+1 Ornery Dilophosaur|M21
+1 Drowsing Tyrannodon|M21
+1 Savage Stomp|JMP
+1 Commune with Dinosaurs|JMP
+1 Crushing Canopy|JMP
+1 New Horizons|JMP
+1 Garruk's Uprising|M21|1
+1 Thriving Grove|JMP
+7 Forest|JMP|4
+
+[JMP Dinosaurs 3]
+1 Ghalta, Primal Hunger|JMP
+1 Drover of the Mighty|JMP
+1 Thundering Spineback|JMP
+1 Orazca Frillback|JMP
+1 Colossal Dreadmaw|M21
+1 Ornery Dilophosaur|M21
+1 Drowsing Tyrannodon|M21
+1 Savage Stomp|JMP
+1 Commune with Dinosaurs|JMP
+1 Cultivate|M21|1
+1 Crushing Canopy|JMP
+1 Titanic Growth|M21
+1 Thriving Grove|JMP
+7 Forest|JMP|4
+
+[JMP Dinosaurs 4]
+1 Rampaging Brontodon|JMP
+1 Drover of the Mighty|JMP
+1 Orazca Frillback|JMP
+1 Thrashing Brontodon|M21
+1 Colossal Dreadmaw|M21
+1 Ornery Dilophosaur|M21
+1 Drowsing Tyrannodon|M21
+1 Savage Stomp|JMP
+1 Commune with Dinosaurs|JMP
+1 Primal Might|M21|1
+1 New Horizons|JMP
+1 Garruk's Uprising|M21|1
+1 Thriving Grove|JMP
+7 Forest|JMP|4
+
+[JMP Discarding 1]
+1 Fell Specter|JMP
+1 Tinybones, Trinket Thief|JMP
+1 Ravenous Chupacabra|JMP
+1 Entomber Exarch|JMP
+1 Burglar Rat|JMP
+1 Phyrexian Rager|JMP
+1 Slate Street Ruffian|JMP
+2 Wight of Precinct Six|JMP
+1 Assassin's Strike|JMP
+1 Mind Rot|M21
+1 Death's Approach|JMP
+1 Thriving Moor|JMP
+7 Swamp|JMP|2
+
+[JMP Discarding 2]
+1 Liliana's Reaver|JMP
+1 Nyxathid|JMP
+1 Fell Specter|JMP
+1 Ravenous Chupacabra|JMP
+1 Entomber Exarch|JMP
+1 Burglar Rat|JMP
+1 Phyrexian Rager|JMP
+1 Slate Street Ruffian|JMP
+2 Wight of Precinct Six|JMP
+1 Assassin's Strike|JMP
+1 Death's Approach|JMP
+1 Thriving Moor|JMP
+7 Swamp|JMP|2
+
+[JMP Doctor 1]
+1 Brightmare|JMP
+1 Bulwark Giant|JMP
+1 Mesa Unicorn|JMP
+1 Speaker of the Heavens|M21|1
+1 Anointed Chorister|M21
+1 Basri's Acolyte|M21|1
+1 Take Heart|JMP
+1 Swift Response|M21
+1 Revitalize|M21
+1 Faith's Fetters|M21
+1 Griffin Aerie|M21
+1 Light of Promise|M21
+1 Thriving Heath|JMP
+7 Plains|JMP|2
+
+[JMP Doctor 2]
+1 Brightmare|JMP
+1 Stone Haven Pilgrim|JMP
+1 Angel of Mercy|JMP
+1 Speaker of the Heavens|M21|1
+1 Anointed Chorister|M21
+1 Basri's Acolyte|M21|1
+1 Secure the Scene|M21
+1 Revitalize|M21
+1 Moment of Heroism|JMP
+1 Swift Response|M21
+1 Griffin Aerie|M21
+1 Light of Promise|M21
+1 Thriving Heath|JMP
+7 Plains|JMP|2
+
+[JMP Doctor 3]
+1 Rhox Faithmender|JMP
+1 Brightmare|JMP
+1 Angel of Mercy|JMP
+1 Mesa Unicorn|JMP
+1 Anointed Chorister|M21
+1 Basri's Acolyte|M21|1
+1 Revitalize|M21
+1 Moment of Heroism|JMP
+1 Swift Response|M21
+1 Griffin Aerie|M21
+1 Light of Promise|M21
+1 Faith's Fetters|M21
+1 Thriving Heath|JMP
+7 Plains|JMP|2
+
+[JMP Doctor 4]
+1 Alabaster Mage|JMP
+1 Brightmare|JMP
+1 Stone Haven Pilgrim|JMP
+1 Angel of Mercy|JMP
+1 Bulwark Giant|JMP
+1 Anointed Chorister|M21
+1 Basri's Acolyte|M21|1
+1 Swift Response|M21
+1 Revitalize|M21
+1 Cradle of Vitality|JMP
+1 Path of Bravery|JMP
+1 Griffin Aerie|M21
+1 Thriving Heath|JMP
+7 Plains|JMP|2
+
+[JMP Dogs 1]
+1 Affa Guard Hound|JMP
+1 Supply Runners|JMP
+1 Cathar's Companion|JMP
+1 Trusty Retriever|JMP
+1 Pack Leader|M21|1
+1 Selfless Savior|M21
+1 Alpine Watchdog|M21
+1 Rambunctious Mutt|M21
+1 Release the Dogs|JMP
+1 Secure the Scene|M21
+1 Feat of Resistance|M21
+1 Pacifism|JMP
+1 Thriving Heath|JMP
+7 Plains|JMP|8
+
+[JMP Dogs 2]
+1 Isamaru, Hound of Konda|JMP
+1 Affa Guard Hound|JMP
+1 Supply Runners|JMP
+1 Cathar's Companion|JMP
+1 Trusty Retriever|JMP
+1 Pack Leader|M21|1
+1 Alpine Watchdog|M21
+1 Rambunctious Mutt|M21
+1 Release the Dogs|JMP
+1 Secure the Scene|M21
+1 Dauntless Onslaught|JMP
+1 Pacifism|JMP
+1 Thriving Heath|JMP
+7 Plains|JMP|8
+
+[JMP Dragons 1]
+1 Dragonloft Idol|JMP
+1 Rapacious Dragon|JMP
+1 Dragonspeaker Shaman|JMP
+1 Dragon Hatchling|JMP
+1 Lightning Shrieker|JMP
+1 Terror of the Peaks|M21|1
+1 Hellkite Punisher|M21
+1 Bathe in Dragonfire|JMP
+1 Dragon Fodder|JMP
+1 Draconic Roar|JMP
+1 Thrill of Possibility|M21
+1 Thriving Bluff|JMP
+8 Mountain|JMP|1
+
+[JMP Dragons 2]
+1 Lathliss, Dragon Queen|JMP
+1 Rapacious Dragon|JMP
+1 Dragonlord's Servant|JMP
+1 Furnace Whelp|JMP
+1 Dragon Hatchling|JMP
+1 Lightning Shrieker|JMP
+1 Gadrak, the Crown-Scourge|M21|1
+1 Hellkite Punisher|M21
+1 Dragon Fodder|JMP
+1 Draconic Roar|JMP
+1 Sarkhan's Rage|JMP
+1 Thriving Bluff|JMP
+8 Mountain|JMP|1
+
+[JMP Elves 1]
+1 Craterhoof Behemoth|JMP
+1 Elvish Archdruid|JMP
+1 Dwynen's Elite|JMP
+1 Ghirapur Guide|JMP
+1 Silhana Wayfinder|JMP
+1 Wildheart Invoker|JMP
+1 Skyway Sniper|M21
+1 Llanowar Visionary|M21
+1 Hunter's Edge|M21
+1 Crushing Canopy|JMP
+1 Titanic Growth|M21
+1 Presence of Gond|JMP
+1 Thriving Grove|JMP
+7 Forest|JMP|8
+
+[JMP Elves 2]
+1 Dwynen's Elite|JMP
+1 Allosaurus Shepherd|JMP
+1 Silhana Wayfinder|JMP
+1 Wren's Run Vanquisher|JMP
+1 Leaf Gilder|JMP
+1 Wildheart Invoker|JMP
+1 Skyway Sniper|M21
+1 Llanowar Visionary|M21
+1 Hunter's Edge|M21
+1 Crushing Canopy|JMP
+1 Titanic Growth|M21
+1 Presence of Gond|JMP
+1 Thriving Grove|JMP
+7 Forest|JMP|8
+
+[JMP Enchanted 1]
+1 Kor Spiritdancer|JMP
+1 Blessed Spirits|JMP
+1 Stone Haven Pilgrim|JMP
+1 Trusty Retriever|JMP
+1 Knight of the Tusk|JMP
+1 Anointed Chorister|M21
+1 Face of Divinity|JMP
+1 Knightly Valor|JMP
+1 Forced Worship|JMP
+1 Indomitable Will|JMP
+1 Faith's Fetters|M21
+1 Dub|M21
+1 Thriving Heath|JMP
+7 Plains|JMP|5
+
+[JMP Enchanted 2]
+1 Ajani's Chosen|JMP
+1 Blessed Spirits|JMP
+1 Stone Haven Pilgrim|JMP
+1 Bulwark Giant|JMP
+1 Trusty Retriever|JMP
+1 Staunch Shieldmate|M21
+1 Celestial Mantle|JMP
+1 Face of Divinity|JMP
+1 Knightly Valor|JMP
+1 Forced Worship|JMP
+1 Indomitable Will|JMP
+1 Faith's Fetters|M21
+1 Thriving Heath|JMP
+7 Plains|JMP|5
+
+[JMP Feathered Friends 1]
+1 Healer's Hawk|JMP
+1 Steel-Plume Marshal|JMP
+1 Aven Gagglemaster|M21
+1 Falconer Adept|M21
+1 Concordia Pegasus|M21
+1 Warded Battlements|M21
+1 Gale Swooper|M21
+1 Celestial Enforcer|M21
+1 Aerial Assault|JMP
+1 Dauntless Onslaught|JMP
+1 Moment of Heroism|JMP
+1 Sky Tether|JMP
+1 Thriving Heath|JMP
+7 Plains|JMP|7
+
+[JMP Feathered Friends 2]
+1 Concordia Pegasus|M21
+1 Steel-Plume Marshal|JMP
+1 Healer's Hawk|JMP
+1 Aven Gagglemaster|M21
+1 Falconer Adept|M21
+1 Warded Battlements|M21
+1 Gale Swooper|M21
+1 Celestial Enforcer|M21
+1 Tandem Tactics|JMP
+1 Angelic Ascension|M21
+1 Swift Response|M21
+1 Sky Tether|JMP
+1 Thriving Heath|JMP
+7 Plains|JMP|7
+
+[JMP Feathered Friends 3]
+1 Angel of the Dire Hour|JMP
+1 Healer's Hawk|JMP
+1 Aven Gagglemaster|M21
+1 Falconer Adept|M21
+1 Concordia Pegasus|M21
+1 Warded Battlements|M21
+1 Gale Swooper|M21
+1 Celestial Enforcer|M21
+1 Dauntless Onslaught|JMP
+1 Take Heart|JMP
+1 Swift Response|M21
+1 Sky Tether|JMP
+1 Thriving Heath|JMP
+7 Plains|JMP|7
+
+[JMP Feathered Friends 4]
+1 Archon of Justice|JMP
+1 Archon of Redemption|JMP
+1 Healer's Hawk|JMP
+1 Falconer Adept|M21
+1 Concordia Pegasus|M21
+1 Warded Battlements|M21
+1 Gale Swooper|M21
+1 Celestial Enforcer|M21
+1 Aerial Assault|JMP
+1 Aegis of the Heavens|JMP
+1 Dauntless Onslaught|JMP
+1 Sky Tether|JMP
+1 Thriving Heath|JMP
+7 Plains|JMP|7
+
+[JMP Garruk]
+1 Garruk, Unleashed|M21|1
+1 Affectionate Indrik|JMP
+1 Brushstrider|JMP
+1 Rumbling Baloth|JMP
+1 Orazca Frillback|JMP
+1 Garruk's Harbinger|M21|1
+1 Garruk's Gorehorn|M21|1
+1 Drowsing Tyrannodon|M21
+1 Hunter's Edge|M21
+1 Hunter's Insight|JMP
+1 Ranger's Guile|M21
+1 Garruk's Uprising|M21|1
+1 Thriving Grove|JMP
+7 Forest|M21|4
+
+[JMP Goblins 1]
+1 Beetleback Chief|JMP
+1 Muxus, Goblin Grandee|JMP
+1 Goblin Commando|JMP
+1 Volley Veteran|JMP
+1 Boggart Brute|JMP
+1 Goblin Instigator|JMP
+1 Goblin Shortcutter|JMP
+1 Ornery Goblin|JMP
+1 Goblin Arsonist|M21
+1 Outnumber|JMP
+1 Shock|M21
+1 Makeshift Munitions|JMP
+1 Thriving Bluff|JMP
+7 Mountain|JMP|4
+
+[JMP Goblins 2]
+1 Goblin Instigator|JMP
+1 Muxus, Goblin Grandee|JMP
+1 Beetleback Chief|JMP
+1 Goblin Commando|JMP
+1 Boggart Brute|JMP
+1 Goblin Shortcutter|JMP
+1 Ornery Goblin|JMP
+1 Battle-Rattle Shaman|M21
+1 Goblin Arsonist|M21
+1 Outnumber|JMP
+1 Burn Bright|M21
+1 Makeshift Munitions|JMP
+1 Thriving Bluff|JMP
+7 Mountain|JMP|4
+
+[JMP Goblins 3]
+1 Goblin Chieftain|JMP
+1 Goblin Goon|JMP
+1 Beetleback Chief|JMP
+1 Goblin Commando|JMP
+1 Volley Veteran|JMP
+1 Boggart Brute|JMP
+1 Goblin Instigator|JMP
+1 Goblin Shortcutter|JMP
+1 Ornery Goblin|JMP
+1 Goblin Arsonist|M21
+1 Shock|M21
+1 Makeshift Munitions|JMP
+1 Thriving Bluff|JMP
+7 Mountain|JMP|4
+
+[JMP Goblins 4]
+1 Krenko, Mob Boss|JMP
+1 Goblin Commando|JMP
+1 Boggart Brute|JMP
+1 Goblin Instigator|JMP
+1 Goblin Shortcutter|JMP
+1 Ornery Goblin|JMP
+1 Goblin Arsonist|M21
+1 Goblin Lore|JMP
+1 Goblin Rally|JMP
+1 Outnumber|JMP
+1 Burn Bright|M21
+1 Makeshift Munitions|JMP
+1 Thriving Bluff|JMP
+7 Mountain|JMP|4
+
+[JMP Heavily Armored 1]
+1 Patron of the Valiant|JMP
+1 Bulwark Giant|JMP
+1 Trusty Retriever|JMP
+1 Lightwalker|JMP
+1 Tempered Veteran|M21
+1 Siege Striker|M21
+1 Makeshift Battalion|M21
+1 Basri's Acolyte|M21|1
+1 Basri's Solidarity|M21|1
+1 Secure the Scene|M21
+1 Feat of Resistance|M21
+1 Cathars' Crusade|JMP
+1 Thriving Heath|JMP
+7 Plains|JMP|5
+
+[JMP Heavily Armored 2]
+1 Patron of the Valiant|JMP
+1 Bulwark Giant|JMP
+1 Trusty Retriever|JMP
+1 Lightwalker|JMP
+1 Tempered Veteran|M21
+1 Siege Striker|M21
+1 Makeshift Battalion|M21
+1 Basri's Acolyte|M21|1
+1 Gird for Battle|JMP
+1 Secure the Scene|M21
+1 Battlefield Promotion|JMP
+1 Cathars' Crusade|JMP
+1 Thriving Heath|JMP
+7 Plains|JMP|5
+
+[JMP Heavily Armored 3]
+1 Mikaeus, the Lunarch|JMP
+1 Patron of the Valiant|JMP
+1 Supply Runners|JMP
+1 Bulwark Giant|JMP
+1 Trusty Retriever|JMP
+1 Lightwalker|JMP
+1 Tempered Veteran|M21
+1 Makeshift Battalion|M21
+1 Basri's Acolyte|M21|1
+1 Basri's Solidarity|M21|1
+1 Battlefield Promotion|JMP
+1 Divine Arrow|JMP
+1 Thriving Heath|JMP
+7 Plains|JMP|5
+
+[JMP Heavily Armored 4]
+1 High Sentinels of Arashin|JMP
+1 Supply Runners|JMP
+1 Bulwark Giant|JMP
+1 Trusty Retriever|JMP
+1 Lightwalker|JMP
+1 Tempered Veteran|M21
+1 Siege Striker|M21
+1 Makeshift Battalion|M21
+1 Basri's Acolyte|M21|1
+1 Long Road Home|JMP
+1 Swift Response|M21
+1 Duelist's Heritage|JMP
+1 Thriving Heath|JMP
+7 Plains|JMP|5
+
+[JMP Lands 1]
+1 Ulvenwald Hydra|JMP
+1 Awakener Druid|JMP
+1 Feral Hydra|JMP
+1 Fa'adiyah Seer|JMP
+1 Fertilid|JMP
+1 Sylvan Ranger|JMP
+1 Wildheart Invoker|JMP
+1 Cultivate|M21|1
+1 Crushing Canopy|JMP
+1 Elemental Uprising|JMP
+1 Zendikar's Roil|JMP
+1 Vastwood Zendikon|JMP
+1 Thriving Grove|JMP
+7 Forest|M21|2
+
+[JMP Lands 2]
+1 Oracle of Mul Daya|JMP
+1 Awakener Druid|JMP
+1 Feral Hydra|JMP
+1 Woodborn Behemoth|JMP
+1 Fa'adiyah Seer|JMP
+1 Fertilid|JMP
+1 Sporemound|JMP
+1 Sylvan Ranger|JMP
+1 Wildheart Invoker|JMP
+1 Cultivate|M21|1
+1 Crushing Canopy|JMP
+1 Elemental Uprising|JMP
+1 Thriving Grove|JMP
+7 Forest|M21|2
+
+[JMP Legion 1]
+1 Knight of the Tusk|JMP
+1 Selfless Savior|M21
+1 Falconer Adept|M21
+1 Valorous Steed|M21
+1 Daybreak Charger|M21
+1 Makeshift Battalion|M21
+1 Basri's Solidarity|M21|1
+1 Legion's Judgment|M21
+1 Path to Exile|JMP
+1 Inspired Charge|JMP
+1 Raise the Alarm|JMP
+1 Blessed Sanctuary|JMP
+1 Thriving Heath|JMP
+7 Plains|JMP|1
+
+[JMP Legion 2]
+1 Inspiring Captain|JMP
+1 Siege Striker|M21
+1 Valorous Steed|M21
+1 Daybreak Charger|M21
+1 Makeshift Battalion|M21
+1 Staunch Shieldmate|M21
+1 Release the Dogs|JMP
+1 Basri's Solidarity|M21|1
+1 Legion's Judgment|M21
+1 Raise the Alarm|JMP
+1 Glorious Anthem|M21|1
+1 Faith's Fetters|M21
+1 Thriving Heath|JMP
+7 Plains|JMP|1
+
+[JMP Legion 3]
+1 Siege Striker|M21
+1 Valorous Steed|M21
+1 Daybreak Charger|M21
+1 Makeshift Battalion|M21
+1 Staunch Shieldmate|M21
+1 Legion's Judgment|M21
+1 Release the Dogs|JMP
+1 Basri's Solidarity|M21|1
+1 Fortify|JMP
+1 Raise the Alarm|JMP
+1 Glorious Anthem|M21|1
+1 Faith's Fetters|M21
+1 Thriving Heath|JMP
+7 Plains|JMP|1
+
+[JMP Legion 4]
+1 Lena, Selfless Champion|JMP
+1 Mentor of the Meek|JMP
+1 Siege Striker|M21
+1 Selfless Savior|M21
+1 Valorous Steed|M21
+1 Daybreak Charger|M21
+1 Makeshift Battalion|M21
+1 Basri's Solidarity|M21|1
+1 Legion's Judgment
+1 Fortify|JMP
+1 Raise the Alarm|JMP
+1 Faith's Fetters|M21
+1 Thriving Heath|JMP
+7 Plains|JMP|1
+
+[JMP Lightning 1]
+1 Weaver of Lightning|JMP
+1 Lightning Phoenix|JMP
+1 Living Lightning|JMP
+2 Lightning Visionary|JMP
+1 Lightning Elemental|JMP
+1 Lightning Shrieker|JMP
+1 Lightning-Core Excavator|JMP
+1 Homing Lightning|JMP
+1 Lightning Axe|JMP
+1 Lightning Bolt|JMP
+1 Lightning Diadem|JMP
+1 Thriving Bluff|JMP
+7 Mountain|JMP|7
+
+[JMP Lightning 2]
+1 Ball Lightning|JMP
+1 Lightning Phoenix|JMP
+1 Living Lightning|JMP
+1 Weaver of Lightning|JMP
+2 Lightning Visionary|JMP
+1 Lightning Elemental|JMP
+1 Lightning-Core Excavator|JMP
+1 Chain Lightning|JMP
+1 Lightning Axe|JMP
+1 Riddle of Lightning|JMP
+1 Lightning Diadem|JMP
+1 Thriving Bluff|JMP
+7 Mountain|JMP|7
+
+[JMP Liliana]
+1 Liliana, Waker of the Dead|M21|1
+1 Liliana's Elite|JMP
+1 Blighted Bat|JMP
+1 Ghoulraiser|JMP
+1 Wailing Ghoul|JMP
+1 Liliana's Standard Bearer|M21|1
+1 Goremand|M21
+1 Liliana's Devotee|M21|1
+1 Liliana's Steward|M21|1
+1 Settle the Score|JMP
+1 Cemetery Recruitment|JMP
+1 Rise Again|M21
+1 Thriving Moor|JMP
+7 Swamp|M21|4
+
+[JMP Milling]
+1 Bruvac the Grandiloquent|JMP
+1 Belltower Sphinx|JMP
+1 Reckless Scholar|JMP
+1 Wall of Lost Thoughts|JMP
+1 Selhoff Occultist|JMP
+1 Vedalken Entrancer|JMP
+1 Towering-Wave Mystic|JMP
+1 Sweep Away|JMP
+1 Thought Collapse|JMP
+1 Thought Scour|JMP
+1 Teferi's Tutelage|M21|1
+1 Capture Sphere|M21
+1 Thriving Isle|JMP
+7 Island|JMP|5
+
+[JMP Minions 1]
+1 Ghoulcaller's Accomplice|JMP
+1 Kels, Fight Fixer|JMP
+1 Bone Picker|JMP
+1 Dutiful Attendant|JMP
+1 Nocturnal Feeder|JMP
+1 Shambling Goblin|JMP
+1 Goremand|M21
+1 Crypt Lurker|M21
+1 Innocent Blood|JMP
+1 Eliminate|M21
+1 Village Rites|M21
+1 Witch's Cauldron|M21
+1 Thriving Moor|JMP
+7 Swamp|JMP|1
+
+[JMP Minions 2]
+1 Eternal Taskmaster|JMP
+1 Kels, Fight Fixer|JMP
+1 Drainpipe Vermin|JMP
+1 Dutiful Attendant|JMP
+1 Ghoulcaller's Accomplice|JMP
+1 Nocturnal Feeder|JMP
+1 Goremand|M21
+1 Crypt Lurker|M21
+1 Bone Splinters|JMP
+1 Eliminate|M21
+1 Village Rites|M21
+1 Witch's Cauldron|M21
+1 Thriving Moor|JMP
+7 Swamp|JMP|1
+
+[JMP Minions 3]
+1 Dutiful Attendant|JMP
+1 Drainpipe Vermin|JMP
+1 Ghoulcaller's Accomplice|JMP
+1 Nocturnal Feeder|JMP
+1 Goremand|M21
+1 Liliana's Devotee|M21|1
+1 Fetid Imp|M21
+1 Crypt Lurker|M21
+1 Launch Party|JMP
+1 Eliminate|M21
+1 Village Rites|M21
+1 Witch's Cauldron|M21
+1 Phyrexian Tower|JMP
+1 Thriving Moor|JMP
+6 Swamp|JMP|1
+
+[JMP Minions 4]
+1 Ghoulcaller Gisa|JMP
+1 Dutiful Attendant|JMP
+1 Ghoulcaller's Accomplice|JMP
+1 Nocturnal Feeder|JMP
+1 Shambling Goblin|JMP
+1 Goremand|M21
+1 Liliana's Devotee|M21|1
+1 Fetid Imp|M21
+1 Innocent Blood|JMP
+1 Eliminate|M21
+1 Village Rites|M21
+1 Witch's Cauldron|M21
+1 Thriving Moor|JMP
+7 Swamp|JMP|1
+
+[JMP Minotaurs 1]
+1 Bloodrage Brawler|JMP
+1 Sethron, Hurloon General|JMP
+1 Warfire Javelineer|JMP
+1 Borderland Minotaur|JMP
+1 Lightning Visionary|JMP
+1 Minotaur Skullcleaver|JMP
+1 Minotaur Sureshot|JMP
+1 Flurry of Horns|JMP
+1 Mugging|JMP
+1 Soul Sear|M21
+1 Sure Strike|M21
+1 Herald's Horn|JMP
+1 Thriving Bluff|JMP
+7 Mountain|JMP|8
+
+[JMP Minotaurs 2]
+1 Rageblood Shaman|JMP
+1 Sethron, Hurloon General|JMP
+1 Bloodrage Brawler|JMP
+1 Borderland Minotaur|JMP
+1 Lightning Visionary|JMP
+1 Minotaur Skullcleaver|JMP
+1 Minotaur Sureshot|JMP
+1 Flurry of Horns|JMP
+1 Traitorous Greed|M21
+1 Unleash Fury|M21
+1 Soul Sear|M21
+1 Sure Strike|M21
+1 Thriving Bluff|JMP
+7 Mountain|JMP|8
+
+[JMP Phyrexian]
+1 Sheoldred, Whispering One|JMP
+1 Entomber Exarch|JMP
+1 Phyrexian Gargantua|JMP
+1 Myr Sire|JMP
+1 Perilous Myr|JMP
+1 Phyrexian Broodlings|JMP
+1 Phyrexian Debaser|JMP
+1 Phyrexian Rager|JMP
+1 Douse in Gloom|JMP
+1 Malefic Scythe|M21
+1 Phyrexian Reclamation|JMP
+1 Parasitic Implant|JMP
+1 Thriving Moor|JMP
+7 Swamp|JMP|5
+
+[JMP Pirates 1]
+1 Rishadan Airship|JMP
+1 Corsair Captain|JMP
+1 Departed Deckhand|JMP
+1 Spectral Sailor|JMP
+1 Kitesail Corsair|JMP
+1 Prosperous Pirates|JMP
+1 Sailor of Means|JMP
+1 Chart a Course|JMP
+1 Voyage's End|JMP
+1 Pirate's Cutlass|JMP
+1 Coastal Piracy|JMP
+1 Waterknot|JMP
+1 Thriving Isle|JMP
+7 Island|JMP|7
+
+[JMP Pirates 2]
+1 Departed Deckhand|JMP
+1 Corsair Captain|JMP
+1 Spectral Sailor|JMP
+1 Kitesail Corsair|JMP
+1 Prosperous Pirates|JMP
+1 Rishadan Airship|JMP
+1 Sailor of Means|JMP
+1 Chart a Course|JMP
+1 Read the Tides|M21
+1 Pirate's Cutlass|JMP
+1 Curious Obsession|JMP
+1 Capture Sphere|M21
+1 Thriving Isle|JMP
+7 Island|JMP|7
+
+[JMP Plus One 1]
+1 Armorcraft Judge|JMP
+1 Nessian Hornbeetle|JMP
+1 Ironshell Beetle|JMP
+1 Fertilid|JMP
+1 Wildwood Scourge|M21
+1 Trufflesnout|M21
+1 Pridemalkin|M21
+1 Hunter's Edge|M21
+1 Arbor Armament|JMP
+1 Invigorating Surge|M21
+1 Primeval Bounty|JMP
+1 Thriving Grove|JMP
+8 Forest|JMP|3
+
+[JMP Plus One 2]
+1 Armorcraft Judge|JMP
+1 Nessian Hornbeetle|JMP
+1 Fertilid|JMP
+1 Ironshell Beetle|JMP
+1 Wildwood Scourge|M21
+1 Trufflesnout|M21
+1 Pridemalkin|M21
+1 Hunter's Edge|M21
+1 Arbor Armament|JMP
+1 Invigorating Surge|M21
+1 Branching Evolution|JMP
+1 Thriving Grove|JMP
+8 Forest|JMP|3
+
+[JMP Plus One 3]
+1 Rishkar, Peema Renegade|JMP
+1 Nessian Hornbeetle|JMP
+1 Fertilid|JMP
+1 Scrounging Bandar|JMP
+1 Wildwood Scourge|M21
+1 Trufflesnout|M21
+1 Pridemalkin|M21
+1 Hunter's Edge|M21
+1 Inspiring Call|JMP
+1 Arbor Armament|JMP
+1 Invigorating Surge|M21
+1 Thriving Grove|JMP
+8 Forest|JMP|3
+
+[JMP Plus One 4]
+1 Champion of Lambholt|JMP
+1 Nessian Hornbeetle|JMP
+1 Scrounging Bandar|JMP
+1 Wildwood Scourge|M21
+1 Trufflesnout|M21
+1 Pridemalkin|M21
+1 Hunter's Edge|M21
+1 Lifecrafter's Gift|JMP
+1 Arbor Armament|JMP
+1 Invigorating Surge|M21
+1 Branching Evolution|JMP
+1 Thriving Grove|JMP
+8 Forest|JMP|3
+
+[JMP Predatory 1]
+1 Somberwald Stag|JMP
+1 Sylvan Brushstrider|JMP
+1 Neyith of the Dire Hunt|JMP
+1 Brindle Shoat|JMP
+1 Dawntreader Elk|JMP
+1 Trufflesnout|M21
+1 Sabertooth Mauler|M21
+1 Irresistible Prey|JMP
+1 Time to Feed|JMP
+1 Crushing Canopy|JMP
+1 Fungal Rebirth|M21
+1 Marauder's Axe|JMP
+1 Thriving Grove|JMP
+7 Forest|JMP|7
+
+[JMP Predatory 2]
+1 Gingerbrute|JMP
+1 Neyith of the Dire Hunt|JMP
+1 Affectionate Indrik|JMP
+1 Brindle Shoat|JMP
+1 Dawntreader Elk|JMP
+1 Trufflesnout|M21
+1 Sabertooth Mauler|M21
+1 Irresistible Prey|JMP
+1 Time to Feed|JMP
+1 Crushing Canopy|JMP
+1 Fungal Rebirth|M21
+1 Marauder's Axe|JMP
+1 Thriving Grove|JMP
+7 Forest|JMP|7
+
+[JMP Predatory 3]
+1 Thragtusk|JMP
+1 Somberwald Stag|JMP
+1 Brindle Shoat|JMP
+1 Dawntreader Elk|JMP
+1 Gingerbrute|JMP
+1 Trufflesnout|M21
+1 Sabertooth Mauler|M21
+1 Irresistible Prey|JMP
+1 Time to Feed|JMP
+1 Crushing Canopy|JMP
+1 Fungal Rebirth|M21
+1 Marauder's Axe|JMP
+1 Thriving Grove|JMP
+7 Forest|JMP|7
+
+[JMP Predatory 4]
+1 Ravenous Baloth|JMP
+1 Affectionate Indrik|JMP
+1 Brindle Shoat|JMP
+1 Dawntreader Elk|JMP
+1 Sylvan Brushstrider|JMP
+1 Trufflesnout|M21
+1 Sabertooth Mauler|M21
+1 Irresistible Prey|JMP
+1 Time to Feed|JMP
+1 Momentous Fall|JMP
+1 Crushing Canopy|JMP
+1 Fungal Rebirth|M21
+1 Thriving Grove|JMP
+7 Forest|JMP|7
+
+[JMP Rainbow]
+1 Maelstrom Archangel|JMP
+1 Chamber Sentry|JMP
+1 Dinrova Horror|JMP
+1 Fusion Elemental|JMP
+1 Raging Regisaur|JMP
+1 Ironroot Warlord|JMP
+1 Alloy Myr|JMP
+1 Skittering Surveyor|JMP
+1 Prismite|M21
+1 Auger Spree|JMP
+1 Prophetic Prism|JMP
+1 Lawmage's Binding|JMP
+1 Mirrodin's Core|JMP
+1 Rupture Spire|JMP
+1 Forest|JMP
+1 Island|JMP
+1 Mountain|JMP
+1 Plains|JMP
+1 Swamp|JMP
+1 Terramorphic Expanse|JMP
+
+[JMP Reanimated 1]
+1 Mire Triton|JMP
+1 Cadaver Imp|JMP
+1 Crow of Dark Tidings|JMP
+1 Miasmic Mummy|JMP
+1 Tithebearer Giant|JMP
+1 Archfiend's Vessel
+1 Goremand|M21
+1 Crypt Lurker|M21
+1 Reanimate|JMP
+1 Funeral Rites|JMP
+1 Rise Again|M21
+1 Eliminate|M21
+1 Thriving Moor|JMP
+7 Swamp|JMP|3
+
+[JMP Reanimated 2]
+1 Mire Triton|JMP
+1 Crow of Dark Tidings|JMP
+1 Miasmic Mummy|JMP
+1 Carrion Grub|M21
+1 Goremand|M21
+1 Crypt Lurker|M21
+1 Gloom Sower|M21
+1 Reanimate|JMP
+1 Funeral Rites|JMP
+1 Macabre Waltz|JMP
+1 Rise Again|M21
+1 Eliminate|M21
+1 Thriving Moor|JMP
+7 Swamp|JMP|3
+
+[JMP Reanimated 3]
+1 Gravewaker|JMP
+1 Scourge of Nel Toth|JMP
+1 Mire Triton|JMP
+1 Crow of Dark Tidings|JMP
+1 Miasmic Mummy|JMP
+1 Goremand|M21
+1 Crypt Lurker|M21
+1 Exhume|JMP
+1 Funeral Rites|JMP
+1 Rise Again|M21
+1 Eliminate|M21
+1 Zombie Infestation|JMP
+1 Thriving Moor|JMP
+7 Swamp|JMP|3
+
+[JMP Reanimated 4]
+1 Mire Triton|JMP
+1 Crow of Dark Tidings|JMP
+1 Miasmic Mummy|JMP
+1 Carrion Grub|M21
+1 Goremand|M21
+1 Crypt Lurker|M21
+1 Gloom Sower|M21
+1 Rise of the Dark Realms|JMP
+1 Funeral Rites|JMP
+1 Soul Salvage|JMP
+1 Rise Again|M21
+1 Eliminate|M21
+1 Thriving Moor|JMP
+7 Swamp|JMP|3
+
+[JMP Rogues 1]
+1 Gonti, Lord of Luxury|JMP
+1 Mausoleum Turnkey|JMP
+1 Oona's Blackguard|JMP
+1 Lawless Broker|JMP
+1 Nightshade Stinger|JMP
+1 Nocturnal Feeder|JMP
+1 Thieves' Guild Enforcer|M21|1
+1 Masked Blackguard|M21
+1 Alchemist's Gift|M21
+1 Finishing Blow|M21
+1 Rogue's Gloves|JMP
+1 Stab Wound|JMP
+1 Thriving Moor|JMP
+7 Swamp|JMP|4
+
+[JMP Rogues 2]
+1 Corpse Traders|JMP
+1 Oona's Blackguard|JMP
+1 Corpse Hauler|JMP
+1 Lawless Broker|JMP
+1 Nightshade Stinger|JMP
+1 Nocturnal Feeder|JMP
+1 Thieves' Guild Enforcer|M21|1
+1 Masked Blackguard|M21
+1 Last Gasp|JMP
+1 Alchemist's Gift|M21
+1 Rogue's Gloves|JMP
+1 Stab Wound|JMP
+1 Thriving Moor|JMP
+7 Swamp|JMP|4
+
+[JMP Seismic]
+1 Grim Lavamancer|JMP
+1 Cinder Elemental|JMP
+1 Seismic Elemental|JMP
+1 Ashmouth Hound|JMP
+1 Bloodrock Cyclops|JMP
+1 Molten Ravager|JMP
+1 Spitting Earth|JMP
+1 Magmaquake|JMP
+1 Magma Jet|JMP
+1 Volcanic Fallout|JMP
+1 Volcanic Geyser|M21
+1 Mana Geode|JMP
+1 Thriving Bluff|JMP
+7 Mountain|JMP|3
+
+[JMP Smashing 1]
+1 Bloodrage Brawler|JMP
+1 Flametongue Kavu|JMP
+1 Borderland Marauder|JMP
+1 Heartfire Immolator|M21
+1 Onakke Ogre|M21
+1 Turret Ogre|M21
+1 Bone Pit Brute|M21
+1 Volcanic Salvo|M21|1
+1 Fling|JMP
+1 Unleash Fury|M21
+1 Shock|M21
+1 Furious Rise|M21
+1 Thriving Bluff|JMP
+7 Mountain|JMP|6
+
+[JMP Smashing 2]
+1 Bloodrage Brawler|JMP
+1 Borderland Marauder|JMP
+1 Heartfire Immolator|M21
+1 Onakke Ogre|M21
+1 Turret Ogre|M21
+1 Bone Pit Brute|M21
+1 Volcanic Salvo|M21
+1 Flames of the Raze-Boar|JMP
+1 Fling|JMP
+1 Hungry Flames|JMP
+1 Short Sword|M21
+1 Furious Rise|M21
+1 Thriving Bluff|JMP
+7 Mountain|JMP|6
+
+[JMP Smashing 3]
+1 Hamletback Goliath|JMP
+1 Bloodrage Brawler|JMP
+1 Inferno Hellion|JMP
+1 Borderland Marauder|JMP
+1 Heartfire Immolator|M21
+1 Onakke Ogre|M21
+1 Turret Ogre|M21
+1 Bone Pit Brute|M21
+1 Fling|JMP
+1 Unleash Fury|M21
+1 Sarkhan's Unsealing|JMP
+1 Furious Rise|M21
+1 Thriving Bluff|JMP
+7 Mountain|JMP|6
+
+[JMP Smashing 4]
+1 Etali, Primal Storm|JMP
+1 Bloodrage Brawler|JMP
+1 Bloodshot Trainee|JMP
+1 Borderland Marauder|JMP
+1 Heartfire Immolator|M21
+1 Onakke Ogre|M21
+1 Turret Ogre|M21
+1 Bone Pit Brute|M21
+1 Fling|JMP
+1 Hungry Flames|JMP
+1 Furious Rise|M21
+1 Furor of the Bitten|M21
+1 Thriving Bluff|JMP
+7 Mountain|JMP|6
+
+[JMP Spellcasting 1]
+1 Thermo-Alchemist|JMP
+1 Living Lightning|JMP
+1 Lightning Visionary|JMP
+1 Chandra's Pyreling|M21|1
+1 Kinetic Augur|M21
+1 Heartfire Immolator|M21
+1 Blindblast|JMP
+1 Hungry Flames|JMP
+1 Goblin Wizardry|M21
+1 Shock|M21
+1 Thrill of Possibility|M21
+1 Double Vision|M21|1
+1 Thriving Bluff|JMP
+7 Mountain|JMP|5
+
+[JMP Spellcasting 2]
+1 Young Pyromancer|JMP
+1 Kiln Fiend|JMP
+1 Lightning Visionary|JMP
+1 Thermo-Alchemist|JMP
+1 Chandra's Pyreling|M21|1
+1 Kinetic Augur|M21
+1 Heartfire Immolator|M21
+1 Flame Lash|JMP
+1 Hungry Flames|JMP
+1 Shock|M21
+1 Thrill of Possibility|M21
+1 Double Vision|M21|1
+1 Thriving Bluff|JMP
+7 Mountain|JMP|5
+
+[JMP Spellcasting 3]
+1 Charmbreaker Devils|JMP
+1 Dualcaster Mage|JMP
+1 Living Lightning|JMP
+1 Lightning Visionary|JMP
+1 Thermo-Alchemist|JMP
+1 Chandra's Pyreling|M21|1
+1 Kinetic Augur|M21
+1 Heartfire Immolator|M21
+1 Dragon Fodder|JMP
+1 Hungry Flames|JMP
+1 Shock|M21
+1 Thrill of Possibility|M21
+1 Thriving Bluff|JMP
+7 Mountain|JMP|5
+
+[JMP Spellcasting 4]
+1 Kiln Fiend|JMP
+1 Lightning Visionary|JMP
+1 Thermo-Alchemist|JMP
+1 Chandra's Pyreling|M21|1
+1 Kinetic Augur|M21
+1 Heartfire Immolator|M21
+1 Doublecast|JMP
+1 Immolating Gyre|JMP
+1 Crash Through|M21
+1 Hungry Flames|JMP
+1 Shock|M21
+1 Thrill of Possibility|M21
+1 Thriving Bluff|JMP
+7 Mountain|JMP|5
+
+[JMP Spirits 1]
+1 Battleground Geist|JMP
+1 Departed Deckhand|JMP
+1 Nebelgast Herald|JMP
+1 Murmuring Phantasm|JMP
+1 Shacklegeist|M21|1
+1 Roaming Ghostlight|M21
+1 Tome Anima|M21
+1 Winged Words|JMP
+1 Essence Flux|JMP
+1 Befuddle|JMP
+1 Frost Breath|M21
+1 Capture Sphere|M21
+1 Thriving Isle|JMP
+7 Island|JMP|6
+
+[JMP Spirits 2]
+1 Rattlechains|JMP
+1 Battleground Geist|JMP
+1 Departed Deckhand|JMP
+1 Nebelgast Herald|JMP
+1 Shacklegeist|M21|1
+1 Roaming Ghostlight|M21
+1 Tome Anima|M21
+1 Winged Words|JMP
+1 Rewind|M21
+1 Rookie Mistake|M21
+1 Frost Breath|M21
+1 Capture Sphere|M21
+1 Thriving Isle|JMP
+7 Island|JMP|6
+
+[JMP Spooky 1]
+1 Bone Picker|JMP
+1 Eternal Taskmaster|JMP
+1 Gristle Grinner|JMP
+1 Dutiful Attendant|JMP
+1 Liliana's Standard Bearer|M21|1
+1 Crypt Lurker|M21
+1 Caged Zombie|M21
+1 Fetid Imp|M21
+1 Barter in Blood|JMP
+1 Finishing Blow|M21
+1 Village Rites|M21
+1 Malefic Scythe|M21
+1 Thriving Moor|JMP
+7 Swamp|JMP|8
+
+[JMP Spooky 2]
+1 Harvester of Souls|JMP
+1 Bone Picker|JMP
+1 Eternal Taskmaster|JMP
+1 Gristle Grinner|JMP
+1 Dutiful Attendant|JMP
+1 Sanitarium Skeleton|JMP
+1 Crypt Lurker|M21
+1 Caged Zombie|M21
+1 Barter in Blood|JMP
+1 Bone Splinters|JMP
+1 Finishing Blow|M21
+1 Malefic Scythe|M21
+1 Thriving Moor|JMP
+7 Swamp|JMP|8
+
+[JMP Spooky 3]
+1 Ogre Slumlord|JMP
+1 Bone Picker|JMP
+1 Eternal Taskmaster|JMP
+1 Gristle Grinner|JMP
+1 Dutiful Attendant|JMP
+1 Liliana's Devotee|M21|1
+1 Crypt Lurker|M21
+1 Caged Zombie|M21
+1 Fetid Imp|M21
+1 Languish|JMP
+1 Finishing Blow|M21
+1 Malefic Scythe|M21
+1 Thriving Moor|JMP
+7 Swamp|JMP|8
+
+[JMP Spooky 4]
+1 Bone Picker|JMP
+1 Eternal Taskmaster|JMP
+1 Gristle Grinner|JMP
+1 Dutiful Attendant|JMP
+1 Plagued Rusalka|JMP
+1 Sanitarium Skeleton|JMP
+1 Liliana's Devotee|M21|1
+1 Crypt Lurker|M21
+1 Caged Zombie|M21
+1 Finishing Blow|M21
+1 Malefic Scythe|M21
+1 Black Market|JMP
+1 Thriving Moor|JMP
+7 Swamp|JMP|8
+
+[JMP Teferi]
+1 Teferi, Master of Time|M21|1
+1 Prescient Chimera|JMP
+1 Sage's Row Savant|JMP
+1 Tolarian Kraken|JMP
+1 Vodalian Arcanist|M21
+1 Teferi's Protege|M21|1
+1 Talrand's Invocation|JMP
+1 Exclude|JMP
+1 Leave in the Dust|JMP
+1 Opt|M21
+1 Teferi's Ageless Insight|M21|1
+1 Teferi's Tutelage|M21|1
+1 Thriving Isle|JMP
+7 Island|M21|4
+
+[JMP Tree Hugging 1]
+1 Primordial Sage|JMP
+1 Wall of Blossoms|JMP
+1 Ambassador Oak|JMP
+1 Burlfist Oak|M21
+1 Warden of the Woods|M21
+1 Llanowar Visionary|M21
+1 Snarespinner|M21
+1 Gnarled Sage|M21
+1 Nature's Way|JMP
+1 Explore|JMP
+1 Aggressive Urge|JMP
+1 Crushing Canopy|JMP
+1 Thriving Grove|JMP
+7 Forest|JMP|1
+
+[JMP Tree Hugging 2]
+1 Primordial Sage|JMP
+1 Wall of Blossoms|JMP
+1 Ambassador Oak|JMP
+1 Burlfist Oak|M21
+1 Warden of the Woods|M21
+1 Llanowar Visionary|M21
+1 Snarespinner|M21
+1 Gnarled Sage|M21
+1 Nature's Way|JMP
+1 Explore|JMP
+1 Crushing Canopy|JMP
+1 Wildsize|JMP
+1 Thriving Grove|JMP
+7 Forest|JMP|1
+
+[JMP Tree Hugging 3]
+1 Wall of Blossoms|JMP
+1 Ambassador Oak|JMP
+1 Jolrael, Mwonvuli Recluse|M21|1
+1 Burlfist Oak|M21
+1 Warden of the Woods|M21
+1 Llanowar Visionary|M21
+1 Snarespinner|M21
+1 Gnarled Sage|M21
+1 Nature's Way|JMP
+1 Explore|JMP
+1 Aggressive Urge|JMP
+1 Crushing Canopy|JMP
+1 Thriving Grove|JMP
+7 Forest|JMP|1
+
+[JMP Tree Hugging 4]
+1 Soul of the Harvest|JMP
+1 Wall of Blossoms|JMP
+1 Burlfist Oak|M21
+1 Warden of the Woods|M21
+1 Llanowar Visionary|M21
+1 Snarespinner|M21
+1 Gnarled Sage|M21
+1 Nature's Way|JMP
+1 Explore|JMP
+1 Crushing Canopy|JMP
+1 Wildsize|JMP
+1 Verdant Embrace|JMP
+1 Thriving Grove|JMP
+7 Forest|JMP|1
+
+[JMP Under the Sea 1]
+1 Sigiled Starfish|JMP
+1 Octoprophet|JMP
+1 Wishful Merfolk|JMP
+1 Aegis Turtle|JMP
+1 Pursued Whale|M21|1
+1 Tolarian Kraken|M21
+1 Waker of Waves|M21
+1 Voyage's End|JMP
+1 Unstable Obelisk|JMP
+1 Waterknot|JMP
+1 Rousing Read|M21
+1 Thriving Isle|JMP
+8 Island|JMP|1
+
+[JMP Under the Sea 2]
+1 Cryptic Serpent|JMP
+1 Sigiled Starfish|JMP
+1 Octoprophet|JMP
+1 Wishful Merfolk|JMP
+1 Aegis Turtle|JMP
+1 Pursued Whale|M21|1
+1 Waker of Waves|M21
+1 Whelming Wave|JMP
+1 Sweep Away|JMP
+1 Unstable Obelisk|JMP
+1 Waterknot|JMP
+1 Thriving Isle|JMP
+8 Island|JMP|1
+
+[JMP Unicorns]
+1 Inspiring Unicorn|JMP
+1 Emiel the Blessed|JMP
+1 Brightmare|JMP
+1 Mesa Unicorn|JMP
+1 Ronom Unicorn|JMP
+1 Valorous Steed|M21
+1 Daybreak Charger|M21
+1 Valorous Stance|JMP
+1 Cloudshift|JMP
+1 Inspired Charge|JMP
+1 Blessed Sanctuary|JMP
+1 Faith's Fetters|M21
+1 Thriving Heath|JMP
+7 Plains|JMP|4
+
+[JMP Vampires 1]
+1 Blood Artist|JMP
+1 Bloodbond Vampire|JMP
+1 Gifted Aetherborn|JMP
+1 Kalastria Nightwatch|JMP
+1 Nocturnal Feeder|JMP
+1 Vito, Thorn of the Dusk Rose|M21|1
+1 Silversmote Ghoul|M21
+1 Gloom Sower|M21
+1 Agonizing Syphon|JMP
+1 Sanguine Indulgence|M21
+1 Last Gasp|JMP
+1 Eternal Thirst|JMP
+1 Thriving Moor|JMP
+7 Swamp|JMP|7
+
+[JMP Vampires 2]
+1 Blood Host|JMP
+1 Bloodbond Vampire|JMP
+1 Gifted Aetherborn|JMP
+1 Child of Night|JMP
+1 Nocturnal Feeder|JMP
+1 Vito, Thorn of the Dusk Rose|M21|1
+1 Silversmote Ghoul|M21
+1 Gloom Sower|M21
+1 Agonizing Syphon|JMP
+1 Sanguine Indulgence|M21
+1 Last Gasp|JMP
+1 Eternal Thirst|JMP
+1 Thriving Moor|JMP
+7 Swamp|JMP|7
+
+[JMP Vampires 3]
+1 Sangromancer|JMP
+1 Bloodbond Vampire|JMP
+1 Gifted Aetherborn|JMP
+1 Sengir Vampire|JMP
+1 Nocturnal Feeder|JMP
+1 Vampire Neonate|JMP
+1 Silversmote Ghoul|M21
+1 Gloom Sower|M21
+1 Agonizing Syphon|JMP
+1 Sanguine Indulgence|M21
+1 Last Gasp|JMP
+1 Exquisite Blood|JMP
+1 Thriving Moor|JMP
+7 Swamp|JMP|7
+
+[JMP Vampires 4]
+1 Drana, Liberator of Malakir|JMP
+1 Bloodbond Vampire|JMP
+1 Falkenrath Noble|JMP
+1 Gifted Aetherborn|JMP
+1 Child of Night|JMP
+1 Nocturnal Feeder|JMP
+1 Silversmote Ghoul|M21
+1 Gloom Sower|M21
+1 Agonizing Syphon|JMP
+1 Sanguine Indulgence|M21
+1 Last Gasp|JMP
+1 Mark of the Vampire|JMP
+1 Thriving Moor|JMP
+7 Swamp|JMP|7
+
+[JMP Walls]
+1 Wall of Blossoms|JMP
+1 Towering Titan|JMP
+1 Carven Caryatid|JMP
+1 Gargoyle Sentinel|JMP
+1 Overgrown Battlement|JMP
+1 Grave Bramble|JMP
+1 Wall of Vines|JMP
+1 Roving Keep|JMP
+1 Portcullis Vine|M21
+1 Crushing Canopy|JMP
+1 Warmonger's Chariot|JMP
+1 Assault Formation|JMP
+1 Thriving Grove|JMP
+7 Forest|JMP|6
+
+[JMP Well-Read 1]
+1 Suspicious Bookcase|JMP
+1 Ormos, Archive Keeper|JMP
+1 Oneirophage|JMP
+1 Erratic Visionary|JMP
+1 Runed Servitor|JMP
+1 Tolarian Kraken|M21
+1 Tome Anima|M21
+1 Library Larcenist|M21
+1 Opt|M21
+1 Curiosity|JMP
+1 Narcolepsy|JMP
+1 Rousing Read|M21
+1 Thriving Isle|JMP
+7 Island|JMP|8
+
+[JMP Well-Read 2]
+1 Ormos, Archive Keeper|JMP
+1 Oneirophage|JMP
+1 Erratic Visionary|JMP
+1 Runed Servitor|JMP
+1 Tolarian Kraken|M21
+1 Tome Anima|M21
+1 Library Larcenist|M21
+1 Opt|M21
+1 Arcane Encyclopedia|JMP
+1 Curiosity|JMP
+1 Capture Sphere|M21
+1 Rousing Read|M21
+1 Thriving Isle|JMP
+7 Island|JMP|8
+
+[JMP Well-Read 3]
+1 Oneirophage|JMP
+1 Suspicious Bookcase|JMP
+1 Cloudreader Sphinx|JMP
+1 Erratic Visionary|JMP
+1 Runed Servitor|JMP
+1 Tolarian Kraken|M21
+1 Tome Anima|M21
+1 Library Larcenist|M21
+1 Opt|M21
+1 Rhystic Study|JMP
+1 Curiosity|JMP
+1 Narcolepsy|JMP
+1 Thriving Isle|JMP
+7 Island|JMP|8
+
+[JMP Well-Read 4]
+1 Mystic Archaeologist|JMP
+1 Oneirophage|JMP
+1 Suspicious Bookcase|JMP
+1 Cloudreader Sphinx|JMP
+1 Runed Servitor|JMP
+1 Tolarian Kraken|M21
+1 Tome Anima|M21
+1 Library Larcenist|M21
+1 Read the Runes|JMP
+1 Opt|M21
+1 Curiosity|JMP
+1 Capture Sphere|M21
+1 Thriving Isle|JMP
+7 Island|JMP|8
+
+[JMP Witchcraft 1]
+1 Bogbrew Witch|JMP
+1 Witch of the Moors|JMP
+1 Malakir Familiar|JMP
+1 Tempting Witch|JMP
+1 Bloodhunter Bat|JMP
+1 Cauldron Familiar|JMP
+2 Festering Newt|JMP
+1 Bake into a Pie|JMP
+1 Finishing Blow|M21
+1 Bubbling Cauldron|JMP
+1 Witch's Cauldron|M21
+1 Thriving Moor|JMP
+7 Swamp|JMP|6
+
+[JMP Witchcraft 2]
+1 Tempting Witch|JMP
+1 Bogbrew Witch|JMP
+1 Witch of the Moors|JMP
+1 Swarm of Bloodflies|JMP
+1 Black Cat|JMP
+1 Bloodhunter Bat|JMP
+2 Festering Newt|JMP
+1 Blood Divination|JMP
+1 Bake into a Pie|JMP
+1 Last Gasp|JMP
+1 Bubbling Cauldron|JMP
+1 Thriving Moor|JMP
+7 Swamp|JMP|6
+
+[JMP Wizards 1]
+1 Talrand, Sky Summoner|JMP
+1 Exclusion Mage|JMP
+1 Sage's Row Savant|JMP
+1 Shipwreck Dowser|M21
+1 Vodalian Arcanist|M21
+1 Talrand's Invocation|JMP
+1 Winged Words|JMP
+1 Read the Tides|M21
+1 Wizard's Retort|JMP
+1 Befuddle|JMP
+1 Frost Breath|M21
+1 Opt|M21
+1 Thriving Isle|JMP
+7 Island|JMP|2
+
+[JMP Wizards 2]
+1 Exclusion Mage|JMP
+1 Crookclaw Transmuter|JMP
+1 Sage's Row Savant|JMP
+1 Sea Gate Oracle|JMP
+1 Shipwreck Dowser|M21
+1 Vodalian Arcanist|M21
+1 Talrand's Invocation|JMP
+1 Winged Words|JMP
+1 Read the Tides|M21
+1 Wizard's Retort|JMP
+1 Rookie Mistake|M21
+1 Opt|M21
+1 Riptide Laboratory|JMP
+1 Thriving Isle|JMP
+6 Island|JMP|2
+
+[JMP Wizards 3]
+1 Talrand, Sky Summoner|JMP
+1 Sage's Row Savant|JMP
+1 Shipwreck Dowser|M21
+1 Vodalian Arcanist|M21
+1 Teferi's Protege|M21|1
+1 Talrand's Invocation|JMP
+1 Winged Words|JMP
+1 Read the Tides|M21
+1 Wizard's Retort|JMP
+1 Unsubstantiate|M21
+1 Opt|M21
+1 Capture Sphere|M21
+1 Thriving Isle|JMP
+7 Island|JMP|2
+
+[JMP Wizards 4]
+1 Sage's Row Savant|JMP
+1 Storm Sculptor|JMP
+1 Barrin, Tolarian Archmage|M21|1
+1 Shipwreck Dowser|M21
+1 Vodalian Arcanist|M21
+1 Teferi's Protege|M21|1
+1 Talrand's Invocation|JMP
+1 Read the Tides|M21
+1 Wizard's Retort|JMP
+1 Peel from Reality|JMP
+1 Rain of Revelation|M21
+1 Frost Breath|M21
+1 Thriving Isle|JMP
+7 Island|JMP|2
+
+[2XM Foils]
+Karn Liberated+|2XM
+Alabaster Mage+|2XM
+Ancestral Blade+|2XM
+Angel of the Dawn+|2XM
+Archangel of Thune+|2XM
+Auriok Salvagers+|2XM
+Austere Command+|2XM
+Avacyn, Angel of Hope+|2XM
+Blade Splicer+|2XM
+Boon Reflection+|2XM
+Council's Judgment+|2XM
+Crib Swap+|2XM
+Crusader of Odric+|2XM
+Ethersworn Canonist+|2XM
+Fencing Ace+|2XM
+Flickerwisp+|2XM
+Fortify+|2XM
+Glint-Sleeve Artisan+|2XM
+Kemba, Kha Regent+|2XM
+Land Tax+|2XM
+Leonin Abunas+|2XM
+Master Splicer+|2XM
+Myrsmith+|2XM
+Open the Vaults+|2XM
+Path to Exile+|2XM
+Puresteel Paladin+|2XM
+Remember the Fallen+|2XM
+Revoke Existence+|2XM
+Sanctum Gargoyle+|2XM
+Sanctum Spirit+|2XM
+Stoneforge Mystic+|2XM
+Stonehewer Giant+|2XM
+Strength of Arms+|2XM
+Tempered Steel+|2XM
+Thraben Inspector+|2XM
+Topple the Statue+|2XM
+Valor in Akros+|2XM
+Valorous Stance+|2XM
+Wrath of God+|2XM
+Apprentice Wizard+|2XM
+Arcum Dagsson+|2XM
+Argivian Restoration+|2XM
+Braids, Conjurer Adept+|2XM
+Brainstorm+|2XM
+Cloudreader Sphinx+|2XM
+Corridor Monitor+|2XM
+Cyclonic Rift+|2XM
+Deepglow Skate+|2XM
+Esperzoa+|2XM
+Faerie Mechanist+|2XM
+Force of Will+|2XM
+Frogify+|2XM
+Grand Architect+|2XM
+Hinder+|2XM
+Inkwell Leviathan+|2XM
+Jace, the Mind Sculptor+|2XM
+Master of Etherium+|2XM
+Master Transmuter+|2XM
+Metallic Rebuke+|2XM
+Parasitic Strix+|2XM
+Phyrexian Metamorph+|2XM
+Pongify+|2XM
+Relic Runner+|2XM
+Reshape+|2XM
+Riddlesmith+|2XM
+Rush of Knowledge+|2XM
+Sentinel of the Pearl Trident+|2XM
+Serra Sphinx+|2XM
+Sift+|2XM
+Steel Sabotage+|2XM
+Thirst for Knowledge+|2XM
+Thought Reflection+|2XM
+Treasure Mage+|2XM
+Vedalken Infuser+|2XM
+Well of Ideas+|2XM
+Ad Nauseam+|2XM
+Beacon of Unrest+|2XM
+Bone Picker+|2XM
+Cast Down+|2XM
+Costly Plunder+|2XM
+Dark Confidant+|2XM
+Death's Shadow+|2XM
+Defiant Salvager+|2XM
+Dire Fleet Hoarder+|2XM
+Disciple of Bolas+|2XM
+Disciple of the Vault+|2XM
+Divest+|2XM
+Doomed Necromancer+|2XM
+Dread Return+|2XM
+Driver of the Dead+|2XM
+Drown in Sorrow+|2XM
+Executioner's Capsule+|2XM
+Fatal Push+|2XM
+Geth, Lord of the Vault+|2XM
+Glaze Fiend+|2XM
+Heartless Pillage+|2XM
+Magus of the Abyss+|2XM
+Magus of the Will+|2XM
+Morkrut Banshee+|2XM
+Oubliette+|2XM
+Ovalchase Daredevil+|2XM
+Painsmith+|2XM
+Ravenous Trap+|2XM
+Salvage Titan+|2XM
+Silumgar Scavenger+|2XM
+Skirsdag High Priest+|2XM
+Skithiryx, the Blight Dragon+|2XM
+Supernatural Stamina+|2XM
+Thoughtseize+|2XM
+Toxic Deluge+|2XM
+Twisted Abomination+|2XM
+Vampire Hexmage+|2XM
+Wound Reflection+|2XM
+Abrade+|2XM
+Balduvian Rage+|2XM
+Battle-Rattle Shaman+|2XM
+Blasphemous Act+|2XM
+Blood Moon+|2XM
+Bloodshot Trainee+|2XM
+Brimstone Volley+|2XM
+Cathartic Reunion+|2XM
+Cragganwick Cremator+|2XM
+Dismantle+|2XM
+Dualcaster Mage+|2XM
+Galvanic Blast+|2XM
+Goblin Gaveleer+|2XM
+Goblin Guide+|2XM
+Godo, Bandit Warlord+|2XM
+Grim Lavamancer+|2XM
+Heat Shimmer+|2XM
+Imperial Recruiter+|2XM
+Ion Storm+|2XM
+Kazuul's Toll Collector+|2XM
+Kuldotha Flamefiend+|2XM
+Lightning Axe+|2XM
+Mana Echoes+|2XM
+Orcish Vandal+|2XM
+Pyrewild Shaman+|2XM
+Rage Reflection+|2XM
+Rapacious Dragon+|2XM
+Ravenous Intruder+|2XM
+Rolling Earthquake+|2XM
+Salivating Gremlins+|2XM
+Skinbrand Goblin+|2XM
+Sneak Attack+|2XM
+Temur Battle Rage+|2XM
+Thopter Engineer+|2XM
+Trash for Treasure+|2XM
+Tuktuk the Explorer+|2XM
+Weapon Surge+|2XM
+Ancient Stirrings+|2XM
+Avenger of Zendikar+|2XM
+Awakening Zone+|2XM
+Bloodbriar+|2XM
+Bloodspore Thrinax+|2XM
+Champion of Lambholt+|2XM
+Chatter of the Squirrel+|2XM
+Chord of Calling+|2XM
+Clear Shot+|2XM
+Conclave Naturalists+|2XM
+Crop Rotation+|2XM
+Crushing Vines+|2XM
+Death-Hood Cobra+|2XM
+Doubling Season+|2XM
+Elvish Aberration+|2XM
+Enlarge+|2XM
+Exploration+|2XM
+Fierce Empath+|2XM
+Gelatinous Genesis+|2XM
+Greater Good+|2XM
+Heartbeat of Spring+|2XM
+Invigorate+|2XM
+Kozilek's Predator+|2XM
+Liege of the Tangle+|2XM
+Mana Reflection+|2XM
+Might of the Masses+|2XM
+Noble Hierarch+|2XM
+Reclamation Sage+|2XM
+Shamanic Revelation+|2XM
+Skullmulcher+|2XM
+Sylvan Might+|2XM
+Terastodon+|2XM
+Thragtusk+|2XM
+Ulvenwald Mysteries+|2XM
+Vengevine+|2XM
+Veteran Explorer+|2XM
+Whisperer of the Wilds+|2XM
+Woodland Champion+|2XM
+Arixmethes, Slumbering Isle+|2XM
+Atraxa, Praetors' Voice+|2XM
+Baleful Strix+|2XM
+Breya, Etherium Shaper+|2XM
+Brudiclad, Telchor Engineer+|2XM
+Deathreap Ritual+|2XM
+Falkenrath Aristocrat+|2XM
+Fulminator Mage+|2XM
+Geist of Saint Traft+|2XM
+Ghor-Clan Rampager+|2XM
+Glassdust Hulk+|2XM
+Hanna, Ship's Navigator+|2XM
+Hidden Stockpile+|2XM
+Izzet Charm+|2XM
+Jhoira, Weatherlight Captain+|2XM
+Kaalia of the Vast+|2XM
+Karrthus, Tyrant of Jund+|2XM
+Maelstrom Nexus+|2XM
+Maelstrom Pulse+|2XM
+Manamorphose+|2XM
+Mazirek, Kraul Death Priest+|2XM
+Meddling Mage+|2XM
+Merciless Eviction+|2XM
+Progenitor Mimic+|2XM
+Rhys the Redeemed+|2XM
+Riku of Two Reflections+|2XM
+Savageborn Hydra+|2XM
+The Scarab God+|2XM
+Selesnya Guildmage+|2XM
+Sen Triplets+|2XM
+Sharuum the Hegemon+|2XM
+Sphinx Summoner+|2XM
+Swiftblade Vindicator+|2XM
+Thopter Foundry+|2XM
+Time Sieve+|2XM
+Unlicensed Disintegration+|2XM
+Vexing Shusher+|2XM
+Vish Kal, Blood Arbiter+|2XM
+Voice of Resurgence+|2XM
+Weapons Trainer+|2XM
+Yavimaya's Embrace+|2XM
+Accomplished Automaton+|2XM
+Adaptive Automaton+|2XM
+Basalt Monolith+|2XM
+Basilisk Collar+|2XM
+Batterskull+|2XM
+Blightsteel Colossus+|2XM
+Bosh, Iron Golem+|2XM
+Cathodion+|2XM
+Chief of the Foundry+|2XM
+Chromatic Star+|2XM
+Chrome Mox+|2XM
+Clone Shell+|2XM
+Cogwork Assembler+|2XM
+Conjurer's Closet+|2XM
+Coretapper+|2XM
+Cranial Plating+|2XM
+Culling Dais+|2XM
+Darksteel Axe+|2XM
+Darksteel Forge+|2XM
+Duplicant+|2XM
+Eager Construct+|2XM
+Endless Atlas+|2XM
+Engineered Explosives+|2XM
+Ensnaring Bridge+|2XM
+Everflowing Chalice+|2XM
+Expedition Map+|2XM
+Flayer Husk+|2XM
+Gleaming Barrier+|2XM
+Golem Artisan+|2XM
+Golem-Skin Gauntlets+|2XM
+Hammer of Nazahn+|2XM
+Ichor Wellspring+|2XM
+Iron Bully+|2XM
+Iron League Steed+|2XM
+Isochron Scepter+|2XM
+Jhoira's Familiar+|2XM
+Kuldotha Forgemaster+|2XM
+Lightning Greaves+|2XM
+Lux Cannon+|2XM
+Magnifying Glass+|2XM
+Mana Crypt+|2XM
+Masterwork of Ingenuity+|2XM
+Mesmeric Orb+|2XM
+Metalspinner's Puzzleknot+|2XM
+Mishra's Bauble+|2XM
+Mox Opal+|2XM
+Myr Battlesphere+|2XM
+Myr Retriever+|2XM
+O-Naginata+|2XM
+Oblivion Stone+|2XM
+Peace Strider+|2XM
+Pentad Prism+|2XM
+Phyrexian Revoker+|2XM
+Pyrite Spellbomb+|2XM
+Ratchet Bomb+|2XM
+Sandstone Oracle+|2XM
+Sculpting Steel+|2XM
+Sickleslicer+|2XM
+Skinwing+|2XM
+Spellskite+|2XM
+Sphinx of the Guildpact+|2XM
+Springleaf Drum+|2XM
+Sundering Titan+|2XM
+Sunforger+|2XM
+Surge Node+|2XM
+Sword of Body and Mind+|2XM
+Sword of Feast and Famine+|2XM
+Sword of Fire and Ice+|2XM
+Sword of Light and Shadow+|2XM
+Sword of the Meek+|2XM
+Sword of War and Peace+|2XM
+Throne of Geth+|2XM
+Treasure Keeper+|2XM
+Trinisphere+|2XM
+Tumble Magnet+|2XM
+Vulshok Gauntlets+|2XM
+Walking Ballista+|2XM
+Welding Jar+|2XM
+Wurmcoil Engine+|2XM
+Academy Ruins+|2XM
+Ash Barrens+|2XM
+Blinkmoth Nexus+|2XM
+Buried Ruin+|2XM
+Cascade Bluffs+|2XM
+Dark Depths+|2XM
+Darksteel Citadel+|2XM
+Fetid Heath+|2XM
+Fire-Lit Thicket+|2XM
+Flooded Grove+|2XM
+Glimmervoid+|2XM
+Graven Cairns+|2XM
+High Market+|2XM
+Maze of Ith+|2XM
+Mishra's Factory+|2XM
+Mystic Gate+|2XM
+Rugged Prairie+|2XM
+Sunken Ruins+|2XM
+Thespian's Stage+|2XM
+Twilight Mire+|2XM
+Urza's Mine+|2XM
+Urza's Power Plant+|2XM
+Urza's Tower+|2XM
+Wooded Bastion+|2XM
+
+[AKR Box Topper]
+Regal Caracal
+
+[ZNR Secret Cards]
+Angel of Destiny|ZNR|2
+Archon of Emeria|ZNR|2
+Archpriest of Iona|ZNR|2
+Emeria's Call|ZNR|2
+Legion Angel|ZNR|2
+Luminarch Aspirant|ZNR|2
+Maul of the Skyclaves|ZNR|2
+Ondu Inversion|ZNR|2
+Skyclave Apparition|ZNR|2
+Squad Commander|ZNR|2
+Tazri, Beacon of Unity|ZNR|2
+Charix, the Raging Isle|ZNR|2
+Confounding Conundrum|ZNR|2
+Coralhelm Chronicler|ZNR|2
+Glasspool Mimic|ZNR|2
+Inscription of Insight|ZNR|2
+Maddening Cacophony|ZNR|2
+Master of Winds|ZNR|2
+Nimble Trapfinder|ZNR|2
+Sea Gate Restoration|ZNR|2
+Sea Gate Stormcaller|ZNR|2
+Thieving Skydiver|ZNR|2
+Agadeem's Awakening|ZNR|2
+Coveted Prize|ZNR|2
+Drana, the Last Bloodchief|ZNR|2
+Hagra Mauling|ZNR|2
+Inscription of Ruin|ZNR|2
+Nighthawk Scavenger|ZNR|2
+Nullpriest of Oblivion|ZNR|2
+Scourge of the Skyclaves|ZNR|2
+Shadows' Verdict|ZNR|2
+Soul Shatter|ZNR|2
+Taborax, Hope's Demise|ZNR|2
+Kargan Intimidator|ZNR|2
+Leyline Tyrant|ZNR|2
+Magmatic Channeler|ZNR|2
+Nahiri's Lithoforming|ZNR|2
+Relic Robber|ZNR|2
+Roiling Vortex|ZNR|2
+Shatterskull Charger|ZNR|2
+Shatterskull Smashing|ZNR|2
+Valakut Awakening|ZNR|2
+Wayward Guide-Beast|ZNR|2
+Ancient Greenwarden|ZNR|2
+Ashaya, Soul of the Wild|ZNR|2
+Cragplate Baloth|ZNR|2
+Inscription of Abundance|ZNR|2
+Oran-Rief Ooze|ZNR|2
+Swarm Shambler|ZNR|2
+Tajuru Paragon|ZNR|2
+Turntimber Symbiosis|ZNR|2
+Akiri, Fearless Voyager|ZNR|2
+Grakmaw, Skyclave Ravager|ZNR|2
+Kaza, Roil Chaser|ZNR|2
+Linvala, Shield of Sea Gate|ZNR|2
+Orah, Skyclave Hierophant|ZNR|2
+Verazol, the Split Current|ZNR|2
+Yasharn, Implacable Earth|ZNR|2
+Zagras, Thief of Heartbeats|ZNR|2
+Zareth San, the Trickster|ZNR|2
+Forsaken Monument|ZNR|2
+Lithoform Engine|ZNR|2
+Myriad Construct|ZNR|2
+Skyclave Relic|ZNR|2
+Crawling Barrens|ZNR|2
+Throne of Makindi|ZNR|2
+Plains|ZNR|4
+Island|ZNR|4
+Swamp|ZNR|4
+Mountain|ZNR|4
+Forest|ZNR|4
+Orah, Skyclave Hierophant|ZNR|3
+Charix, the Raging Isle|ZNR|3
+Into the Roil|ZNR|2
+Bloodchief's Thirst|ZNR|2
+Roil Eruption|ZNR|2
+Roiling Regrowth|ZNR|2
+Kargan Warleader|ZNR|2

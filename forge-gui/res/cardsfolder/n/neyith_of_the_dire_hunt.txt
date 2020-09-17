@@ -1,0 +1,11 @@
+Name:Neyith of the Dire Hunt
+ManaCost:2 G G
+Types:Legendary Creature Human Warrior
+PT:3/3
+T:Mode$ FightOnce | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever one or more creatures you control fight or become blocked, draw a card.
+T:Mode$ AttackerBlockedOnce | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Whenever one or more creatures you control fight or become blocked, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, you may pay {2}{R/G}. If you do, double target creature's power until end of turn. That creature must be blocked this combat if able.
+SVar:TrigPump:AB$ Pump | Cost$ 2 RG | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | References$ X | KW$ HIDDEN CARDNAME must be blocked if able.
+SVar:X:Targeted$CardPower
+Oracle:Whenever one or more creatures you control fight or become blocked, draw a card.\nAt the beginning of combat on your turn, you may pay {2}{R/G}. If you do, double target creature's power until end of turn. That creature must be blocked this combat if able. ({R/G} can be paid with either {R} or {G}.)

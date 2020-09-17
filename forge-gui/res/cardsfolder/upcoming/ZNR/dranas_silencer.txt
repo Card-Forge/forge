@@ -1,0 +1,11 @@
+Name:Drana's Silencer
+ManaCost:5 B
+Types:Creature Vampire Rogue
+PT:3/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature an opponent controls gets -X/-X until end of turn, where X is the number of creatures in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True | NumAtt$ -X | NumDef$ -X | References$ X
+SVar:X:Count$Party
+DeckHas:Ability$Party
+DeckHints:Type$Cleric|Warrior|Wizard
+SVar:PlayMain1:TRUE
+Oracle:When Drana's Silencer enters the battlefield, target creature an opponent controls gets -X/-X until end of turn, where X is the number of creatures in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)

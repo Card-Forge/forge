@@ -4,6 +4,5 @@ Types:Creature Imp
 PT:1/1
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +2/+0 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_skirge.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2
 Oracle:Flying\nWhenever Ravenous Skirge attacks, it gets +2/+0 until end of turn.

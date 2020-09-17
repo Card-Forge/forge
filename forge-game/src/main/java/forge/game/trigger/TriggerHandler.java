@@ -17,7 +17,6 @@
  */
 package forge.game.trigger;
 
-import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityFactory;
@@ -27,16 +26,15 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.spellability.Ability;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
@@ -528,11 +526,7 @@ public class TriggerHandler {
         sa = regtrig.getOverridingAbility();
         if (sa == null) {
             if (!regtrig.hasParam("Execute")) {
-                sa = new Ability(host, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                    }
-                };
+                sa = new SpellAbility.EmptySa(host);
             }
             else {
                 String name = regtrig.getParam("Execute");
@@ -563,9 +557,6 @@ public class TriggerHandler {
         sa.setSourceTrigger(regtrig.getId());
         regtrig.setTriggeringObjects(sa, runParams);
         sa.setTriggerRemembered(regtrig.getTriggerRemembered());
-        if (regtrig.getStoredTriggeredObjects() != null) {
-            sa.setTriggeringObjects(regtrig.getStoredTriggeredObjects());
-        }
 
         if (sa.getDeltrigActivatingPlayer() != null) {
             // make sure that the original delayed trigger activator is restored
@@ -591,33 +582,20 @@ public class TriggerHandler {
         }
 
         Player decider = null;
-        boolean mand = false;
+        boolean isMandatory = false;
         if (regtrig.hasParam("OptionalDecider")) {
             sa.setOptionalTrigger(true);
             decider = AbilityUtils.getDefinedPlayers(host, regtrig.getParam("OptionalDecider"), sa).get(0);
         }
         else if (sa instanceof AbilitySub || !sa.hasParam("Cost") || sa.getParam("Cost").equals("0")) {
-            mand = true;
+            isMandatory = true;
         }
         else { // triggers with a cost can't be mandatory
             sa.setOptionalTrigger(true);
             decider = sa.getActivatingPlayer();
         }
 
-        SpellAbility ability = sa;
-        while (ability != null) {
-            final TargetRestrictions tgt = ability.getTargetRestrictions();
-
-            if (tgt != null) {
-                tgt.setMandatory(true);
-            }
-            ability = ability.getSubAbility();
-        }
-        final boolean isMandatory = mand;
-
         final WrappedAbility wrapperAbility = new WrappedAbility(regtrig, sa, decider);
-        wrapperAbility.setTrigger(true);
-        wrapperAbility.setMandatory(isMandatory);
         //wrapperAbility.setDescription(wrapperAbility.getStackDescription());
         //wrapperAbility.setDescription(wrapperAbility.toUnsuppressedString());
 
@@ -628,7 +606,6 @@ public class TriggerHandler {
         else {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
         }
-        regtrig.setTriggeredSA(wrapperAbility);
 
         regtrig.triggerRun();
 
@@ -642,10 +619,29 @@ public class TriggerHandler {
 
     private int handlePanharmonicon(final Trigger t, final Map<AbilityKey, Object> runParams, final Player p) {
         Card host = t.getHostCard();
+        int n = 0;
+
+        // Sanctum of All
+        if (host.isShrine() && host.isInZone(ZoneType.Battlefield) && p.equals(host.getController())) {
+            int shrineCount = CardLists.count(p.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Shrine"));
+            if (shrineCount >= 6) {
+                for (final Card ck : p.getCardsIn(ZoneType.Battlefield)) {
+                    for (final KeywordInterface ki : ck.getKeywords()) {
+                        final String kw = ki.getOriginal();
+                        if (kw.startsWith("Shrineharmonicon")) {
+                            final String valid = kw.split(":")[1];
+                            if (host.isValid(valid.split(","), p, ck, null)) {
+                                n++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         // not a changesZone trigger or changesZoneAll
         if (t.getMode() != TriggerType.ChangesZone && t.getMode() != TriggerType.ChangesZoneAll) {
-            return 0;
+            return n;
         }
 
         // leave battlefield trigger, might be dying
@@ -660,7 +656,6 @@ public class TriggerHandler {
             return 0;
         }
 
-        int n = 0;
         if (t.getMode() == TriggerType.ChangesZone) {
             // iterate over all cards
             final List<Card> lastCards = CardLists.filterControlledBy(p.getGame().getLastStateBattlefield(), p);

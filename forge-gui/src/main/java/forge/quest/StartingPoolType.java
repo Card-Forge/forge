@@ -1,19 +1,21 @@
 package forge.quest;
 
+import forge.util.Localizer;
+
 public enum StartingPoolType {
-    Complete("Unrestricted"),
-    Sanctioned("Sanctioned format"),
-    Casual("Casual/Historic format"),
-    CustomFormat("Custom format"),
-    Precon("Event or starter deck"),
-    SealedDeck("My sealed deck"),
-    DraftDeck("My draft deck"),
-    Cube("Predefined cube");
+    Complete("lblUnrestricted"),
+    Sanctioned("lblSanctionedFormat"),
+    Casual("lblCasualOrHistoricFormat"),
+    CustomFormat("lblCustomFormat"),
+    Precon("lblEventOrStartDeck"),
+    SealedDeck("lblMySealedDeck"),
+    DraftDeck("lblMyDraftDeck"),
+    Cube("lblPredefinedCube");
 
     private final String caption;
 
     StartingPoolType(String caption0) {
-        caption = caption0;
+        caption = Localizer.getInstance().getMessage(caption0);
     }
 
     /* (non-Javadoc)

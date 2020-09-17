@@ -210,13 +210,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         this.layer = layer0;
     }
 
-    /**
-     * To string.
-     *
-     * @return a String
-     */
-    @Override
-    public String toString() {
+    public String getDescription() {
         if (hasParam("Description") && !this.isSuppressed()) {
             String desc = AbilityUtils.applyDescriptionTextChangeEffects(getParam("Description"), this);
             if (desc.contains("CARDNAME")) {
@@ -226,6 +220,16 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         } else {
             return "";
         }
+    }
+
+    /**
+     * To string.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        return getHostCard().toString() + " - " + getDescription();
     }
 
     /** {@inheritDoc} */
