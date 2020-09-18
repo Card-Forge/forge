@@ -68,7 +68,8 @@ public abstract class ImageFetcher {
                     suffix = (backFace ? "b" : "a");
                 }
                 final String editionMciCode = data.getEditions().getMciCodeByCode(paperCard.getEdition());
-                downloadUrls.add(String.format("https://img.scryfall.com/cards/normal/en/%s/%s%s.jpg", editionMciCode, cardNum, suffix));
+                //see https://scryfall.com/blog 2020/8/6, and https://scryfall.com/docs/api/cards/collector
+                downloadUrls.add(String.format("https://api.scryfall.com/cards/%s/%s%s/en?format=image&version=normal", editionMciCode, cardNum, suffix));
             }
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             if (tokenImages == null) {
