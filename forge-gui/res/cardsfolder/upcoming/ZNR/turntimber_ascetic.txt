@@ -1,0 +1,7 @@
+Name:Turntimber Ascetic
+ManaCost:4 G
+Types:Creature Giant Cleric
+PT:5/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+SVar:TrigGainLife:DB$GainLife | LifeAmount$ 3
+Oracle:When Turntimber Ascetic enters the battlefield, you gain 3 life.

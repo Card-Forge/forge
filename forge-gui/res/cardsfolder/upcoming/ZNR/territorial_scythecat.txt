@@ -1,0 +1,9 @@
+Name:Territorial Scythecat
+ManaCost:2 G
+Types:Creature Cat
+PT:2/1
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Land
+Oracle:Trample\nLandfall — Whenever a land enters the battlefield under your control, put a +1/+1 counter on Territorial Scythecat.
