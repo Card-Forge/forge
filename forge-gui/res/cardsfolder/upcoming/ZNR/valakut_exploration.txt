@@ -1,0 +1,18 @@
+Name:Valakut Exploration
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, exile the top card of your library. You may play that card for as long as it remains exiled.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True
+S:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
+SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigGraveyard | CheckSVar$ Y | SVarCompare$ GT0 | References$ Y | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if there are cards exiled with CARDNAME, put them into their owner's graveyard, then CARDNAME deals that much damage to each opponent.
+SVar:TrigGraveyard:DB$ ChangeZoneAll | ChangeType$ Card.ExiledWithSource | Origin$ Exile | Destination$ Graveyard | RememberChanged$ True | SubAbility$ DBDamageAll
+SVar:DBDamageAll:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ X | References$ X | SubAbility$ DBCleanup
+SVar:X:Remembered$Amount
+SVar:Y:Count$ValidExile Card.ExiledWithSource
+SVar:BuffedBy:Land
+DeckHas:Ability$Graveyard
+Oracle:Landfall — Whenever a land enters the battlefield under your control, exile the top card of your library. You may play that card for as long as it remains exiled.\nAt the beginning of your end step, if there are cards exiled with Valakut Exploration, put them into their owner's graveyard, then Valakut Exploration deals that much damage to each opponent.
