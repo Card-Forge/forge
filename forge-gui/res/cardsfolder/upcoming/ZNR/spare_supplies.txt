@@ -5,4 +5,5 @@ K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 A:AB$ Draw | Cost$ 2 T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice
 Oracle:Spare Supplies enters the battlefield tapped.\nWhen Spare Supplies enters the battlefield, draw a card.\n{2}, {T}, Sacrifice Spare Supplies: Draw a card.
