@@ -49,6 +49,13 @@ public class CountersPutEffect extends SpellAbilityEffect {
         final boolean dividedAsYouChoose = spellAbility.hasParam("DividedAsYouChoose");
 
         final int amount = AbilityUtils.calculateAmount(card, spellAbility.getParamOrDefault("CounterNum", "1"), spellAbility);
+        //skip the StringBuilder if no targets are chosen ("up to" scenario)
+        if (spellAbility.usesTargeting()) {
+            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
+            if (targetCards.size() == 0) {
+                return stringBuilder.toString();
+            }
+        }
         if (spellAbility.hasParam("Bolster")) {
             stringBuilder.append("Bolster ").append(amount);
             return stringBuilder.toString();
