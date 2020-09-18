@@ -121,7 +121,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
         final String destination = sa.getParam("Destination");
 
-        final String type = sa.hasParam("ChangeType") ? sa.getParam("ChangeType") : "Card";
+        String type = "card";
+        if (sa.hasParam("ChangeTypeDesc")) {
+            type = sa.getParam("ChangeTypeDesc");
+        }
+        else if (sa.hasParam("ChangeType")) {
+            type = sa.getParam("ChangeType");
+        }
+
         final int num = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(host,
                 sa.getParam("ChangeNum"), sa) : 1;
 
@@ -140,8 +147,17 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         } else if (origin.equals("Library")) {
             sb.append(chooserNames);
             sb.append(" search").append(choosers.size() > 1 ? " " : "es ");
-            sb.append(fetchPlayer);
-            sb.append("'s library for ").append(num).append(" ").append(type).append(" and ");
+            sb.append(fetchPlayer).append(fetchPlayer.equals(chooserNames) ? "'s " : " ");
+            sb.append("library for ").append(num).append(" ");
+            sb.append(type).append(num > 1 ? "s" : "");
+            if (!sa.hasParam("NoReveal")) {
+                if (choosers.size() == 1) {
+                    sb.append(num > 1 ? ", reveals those cards," : ", reveals that card,");
+                } else {
+                    sb.append(num > 1 ? ", reveal those cards," : ", reveal that card,");
+                }
+            }
+            sb.append(" and ");
 
             if (destination.equals("Exile")) {
                 if (num == 1) {
@@ -169,10 +185,19 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                 }
                 if (destination.equals("Hand")) {
-                    sb.append("into its owner's hand.");
+                    if (num == 1) {
+                        sb.append("into its owner's hand.");
+                    } else {
+                        sb.append("into their owner's hand.");
+                    }
                 }
                 if (destination.equals("Graveyard")) {
-                    sb.append("into its owners's graveyard.");
+                    if (num == 1) {
+                        sb.append("into its owner's graveyard.");
+                    } else {
+                        sb.append("into their owner's graveyard.");
+                    }
+
                 }
             }
             sb.append(" Then shuffle that library.");
