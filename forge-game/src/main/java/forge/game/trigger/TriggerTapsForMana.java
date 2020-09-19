@@ -100,6 +100,9 @@ public class TriggerTapsForMana extends Trigger {
                     return false;
                 }
             }
+            if (!produced.contains(MagicColor.toShortString(this.getParam("Produced")))) {
+                        return false;
+            }
         }
 
         return true;
