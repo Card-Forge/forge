@@ -1,27 +1,16 @@
-/*
- * Forge: Play Magic: the Gathering.
- * Copyright (C) 2011  Forge Team
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package forge.quest;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import forge.model.FModel;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.data.QuestPreferences.QPref;
-import forge.quest.io.QuestDuelReader;
+import forge.quest.io.MainWorldDuelReader;
 import forge.util.CollectionSuppliers;
 import forge.util.MyRandom;
 import forge.util.maps.EnumMapOfLists;
@@ -29,27 +18,18 @@ import forge.util.maps.MapOfLists;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
-import java.io.File;
-import java.util.*;
+public class MainWorldEventDuelManager implements QuestEventDuelManagerInterface {
 
-/**
- * QuestEventManager.
- *
- * @author Forge
- * @version $Id: QuestEventManager.java 20404 2013-03-17 05:34:13Z myk $
- */
-public class QuestEventDuelManager implements QuestEventDuelManagerInterface {
-
-    private final MapOfLists<QuestEventDifficulty, QuestEventDuel> sortedDuels = new EnumMapOfLists<>(QuestEventDifficulty.class, CollectionSuppliers.arrayLists());
-    private final IStorage<QuestEventDuel> allDuels;
+    protected final MapOfLists<QuestEventDifficulty, QuestEventDuel> sortedDuels = new EnumMapOfLists<>(QuestEventDifficulty.class, CollectionSuppliers.arrayLists());
+    protected final IStorage<QuestEventDuel> allDuels;
 
     /**
      * Instantiate all events and difficulty lists.
      *
      * @param dir &emsp; File object
      */
-    public QuestEventDuelManager(final File dir) {
-        allDuels = new StorageBase<>("Quest duels", new QuestDuelReader(dir));
+    public MainWorldEventDuelManager(final File dir) {
+        allDuels = new StorageBase<>("Quest duels", new MainWorldDuelReader(dir));
         assembleDuelDifficultyLists();
     }
 
@@ -66,6 +46,7 @@ public class QuestEventDuelManager implements QuestEventDuelManagerInterface {
     private static List<QuestEventDifficulty> mediumOrder = Arrays.asList(QuestEventDifficulty.MEDIUM, QuestEventDifficulty.HARD, QuestEventDifficulty.EASY, QuestEventDifficulty.EXPERT);
     private static List<QuestEventDifficulty> hardOrder = Arrays.asList(QuestEventDifficulty.HARD, QuestEventDifficulty.MEDIUM, QuestEventDifficulty.EASY, QuestEventDifficulty.EXPERT);
     private static List<QuestEventDifficulty> expertOrder = Arrays.asList(QuestEventDifficulty.EXPERT, QuestEventDifficulty.HARD, QuestEventDifficulty.MEDIUM, QuestEventDifficulty.EASY);
+    private static List<QuestEventDifficulty> wildOrder = Arrays.asList(QuestEventDifficulty.WILD);
 
     private List<QuestEventDifficulty> getOrderForDifficulty(QuestEventDifficulty d) {
         final List<QuestEventDifficulty> difficultyOrder;
@@ -82,6 +63,9 @@ public class QuestEventDuelManager implements QuestEventDuelManagerInterface {
                 break;
             case EXPERT:
                 difficultyOrder = expertOrder;
+                break;
+            case WILD:
+                difficultyOrder = wildOrder;
                 break;
             default:
                 throw new RuntimeException("unhandled difficulty: " + d);
@@ -203,6 +187,8 @@ public class QuestEventDuelManager implements QuestEventDuelManagerInterface {
             }
         }
 
+        //TODO put in preferences the number of wild duels to add
+        addDuel(duelOpponents, QuestEventDifficulty.WILD, 3);
         addRandomDuel(duelOpponents, randomDuelDifficulty);
 
         return duelOpponents;
@@ -215,13 +201,14 @@ public class QuestEventDuelManager implements QuestEventDuelManagerInterface {
      * </p>
      * Assemble duel deck difficulty lists
      */
-    private void assembleDuelDifficultyLists() {
+    protected void assembleDuelDifficultyLists() {
 
         sortedDuels.clear();
         sortedDuels.put(QuestEventDifficulty.EASY, new ArrayList<>());
         sortedDuels.put(QuestEventDifficulty.MEDIUM, new ArrayList<>());
         sortedDuels.put(QuestEventDifficulty.HARD, new ArrayList<>());
         sortedDuels.put(QuestEventDifficulty.EXPERT, new ArrayList<>());
+        sortedDuels.put(QuestEventDifficulty.WILD, new ArrayList<>());
 
         for (final QuestEventDuel qd : allDuels) {
             sortedDuels.add(qd.getDifficulty(), qd);
@@ -236,5 +223,5 @@ public class QuestEventDuelManager implements QuestEventDuelManagerInterface {
             Collections.shuffle(list, MyRandom.getRandom());
         }
     }
-
+    
 }
