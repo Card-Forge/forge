@@ -1450,38 +1450,42 @@ public final class CMatchUI
     }
 
     private void createLandPopupPanel(Card land, Zone zone) {
-        String title = "Forge";            
-        List<String> options = ImmutableList.of(Localizer.getInstance().getMessage("lblOK"));
         
-        MigLayout migLayout = new MigLayout("insets 15, left, gap 30, fill");
-        JPanel mainPanel = new JPanel(migLayout);
-        final Dimension parentSize = JOptionPane.getRootFrame().getSize();
-        Dimension maxSize = new Dimension(1400, parentSize.height - 100);
-        mainPanel.setMaximumSize(maxSize);
-        mainPanel.setOpaque(false);   
-        
-        int rotation = getRotation(land.getView());
+        String landPlayedNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_LAND_PLAYED_NOTIFICATION_POLICY);
+        Player cardController = land.getController();       
+        boolean isAi = cardController.isAI();         
+        if(ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS.equals(landPlayedNotificationPolicy) || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI.equals(landPlayedNotificationPolicy) && (isAi))) {
+            String title = "Forge";            
+            List<String> options = ImmutableList.of(Localizer.getInstance().getMessage("lblOK"));
+            
+            MigLayout migLayout = new MigLayout("insets 15, left, gap 30, fill");
+            JPanel mainPanel = new JPanel(migLayout);
+            final Dimension parentSize = JOptionPane.getRootFrame().getSize();
+            Dimension maxSize = new Dimension(1400, parentSize.height - 100);
+            mainPanel.setMaximumSize(maxSize);
+            mainPanel.setOpaque(false);   
+            
+            int rotation = getRotation(land.getView());
 
-        FImagePanel imagePanel = new FImagePanel();               
-        BufferedImage bufferedImage = FImageUtil.getImage(land.getCurrentState().getView()); 
-        imagePanel.setImage(bufferedImage, rotation, AutoSizeImageMode.SOURCE);
-        int imageWidth = 433;
-        int imageHeight = 600;
-        Dimension imagePanelDimension = new Dimension(imageWidth,imageHeight);
-        imagePanel.setMinimumSize(imagePanelDimension);
-                
-        mainPanel.add(imagePanel, "cell 0 0, spany 3");
-        
-        Player cardController = land.getController();
-        String msg = cardController.toString() + " puts " + land.toString() + " into play into " + zone.toString() + "."; 
-        
-        final FTextArea prompt1 = new FTextArea(msg);
-        prompt1.setFont(FSkin.getFont(21));
-        prompt1.setAutoSize(true);
-        prompt1.setMinimumSize(new Dimension(475,200));
-        mainPanel.add(prompt1, "cell 1 0, aligny top");    
-
-        
-        FOptionPane.showOptionDialog(null, title, null, mainPanel, options);          
+            FImagePanel imagePanel = new FImagePanel();               
+            BufferedImage bufferedImage = FImageUtil.getImage(land.getCurrentState().getView()); 
+            imagePanel.setImage(bufferedImage, rotation, AutoSizeImageMode.SOURCE);
+            int imageWidth = 433;
+            int imageHeight = 600;
+            Dimension imagePanelDimension = new Dimension(imageWidth,imageHeight);
+            imagePanel.setMinimumSize(imagePanelDimension);
+                    
+            mainPanel.add(imagePanel, "cell 0 0, spany 3");
+            
+            String msg = cardController.toString() + " puts " + land.toString() + " into play into " + zone.toString() + "."; 
+            
+            final FTextArea prompt1 = new FTextArea(msg);
+            prompt1.setFont(FSkin.getFont(21));
+            prompt1.setAutoSize(true);
+            prompt1.setMinimumSize(new Dimension(475,200));
+            mainPanel.add(prompt1, "cell 1 0, aligny top");    
+            
+            FOptionPane.showOptionDialog(null, title, null, mainPanel, options);                      
+        }      
     }
 }
