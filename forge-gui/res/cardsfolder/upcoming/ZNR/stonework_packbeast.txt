@@ -1,0 +1,8 @@
+Name:Stonework Packbeast
+ManaCost:2
+Types:Artifact Creature Beast
+PT:2/1
+S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ Cleric & Rogue & Warrior & Wizard | Description$ CARDNAME is also a Cleric, Rogue, Warrior, and Wizard.
+A:AB$ Mana | Cost$ 2 | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHints:Ability$Party
+Oracle:Stonework Packbeast is also a Cleric, Rogue, Warrior, and Wizard.\n{2}: Add one mana of any color.
