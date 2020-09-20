@@ -28,6 +28,8 @@ import forge.game.card.CardUtil;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventZone;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerController;
 import forge.util.CollectionSuppliers;
 import forge.util.MyRandom;
 import forge.util.maps.EnumMapOfLists;
@@ -124,7 +126,19 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         }
         onChanged();
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
-    }
+        
+        if(zoneType == ZoneType.Battlefield && c.isLand()) {
+            PlayerCollection playerCollection = game.getPlayers();
+            int numPlayers = playerCollection.size();
+            for (int i = 0; i < numPlayers; i++) {
+                Player player = playerCollection.get(i);
+                if(!player.isAI()) {
+                    PlayerController playerControllerHuman = player.getController();
+                    playerControllerHuman.handleLandPlayed(c,this);
+                }
+            }                    
+        }
+   }
 
     public final boolean contains(final Card c) {
         return cardList.contains(c);

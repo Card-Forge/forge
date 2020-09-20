@@ -321,6 +321,11 @@ public final class ForgeConstants {
     public static final String STACK_EFFECT_NOTIFICATION_NEVER = "Never";
     public static final String STACK_EFFECT_NOTIFICATION_ALWAYS = "Always";
     public static final String STACK_EFFECT_NOTIFICATION_AI_AND_TRIGGERED = "AI cast/activated, or triggered by any player";
+
+    // Constants for LAnd played notification policy
+    public static final String LAND_PLAYED_NOTIFICATION_NEVER = "Never";
+    public static final String LAND_PLAYED_NOTIFICATION_ALWAYS = "Always";
+    public static final String LAND_PLAYED_NOTIFICATION_AI = "Lands entering a battlefield because of an action of a AI player";
     
     // Set boolean constant for landscape mode for gdx port
     public static final boolean isGdxPortLandscape = FileUtil.doesFileExist(ASSETS_DIR + "switch_orientation.ini");
