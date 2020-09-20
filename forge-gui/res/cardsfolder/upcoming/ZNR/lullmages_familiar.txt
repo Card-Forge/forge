@@ -7,4 +7,5 @@ A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 T:Mode$ SpellCast | ValidCard$ Card.kicked | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a kicked spell, you gain 2 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 SVar:BuffedBy:Card.withKicker,Card.withMultikicker
+DeckHas:Ability$LifeGain
 Oracle:{T}: Add {G} or {U}.\nWhenever you cast a kicked spell, you gain 2 life.
