@@ -6174,6 +6174,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                     source.forceTurnFaceUp();
                 }
 
+                // the modal state is not copied with lki, need to copy it extra
+                if (!source.hasState(CardStateName.Modal)) {
+                    source.addAlternateState(CardStateName.Modal, false);
+                    source.getState(CardStateName.Modal).copyFrom(this.getState(CardStateName.Modal), true);
+                }
+
                 source.setSplitStateToPlayAbility(la);
 
                 if (la.canPlay(source)) {
