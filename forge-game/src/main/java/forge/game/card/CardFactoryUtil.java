@@ -1295,6 +1295,9 @@ public class CardFactoryUtil {
         if (sq[0].contains("CardNumColors")) {
             return doXMath(CardUtil.getColors(c).countColors(), m, c);
         }
+        if (sq[0].contains("CardNumAttacksThisTurn")) {
+            return doXMath(c.getDamageHistory().getCreatureAttacksThisTurn(), m, c);
+        }
         if (sq[0].contains("ChosenNumber")) {
             Integer i = c.getChosenNumber();
             return doXMath(i == null ? 0 : i, m, c);

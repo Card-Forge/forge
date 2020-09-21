@@ -1,0 +1,12 @@
+Name:Moraug, Fury of Akoum
+ManaCost:4 R R
+Types:Legendary Creature Minotaur Warrior
+PT:6/6
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ AffectedX | Description$ Each creature you control gets +1/+0 for each time it has attacked this turn.
+SVar:AffectedX:Count$CardNumAttacksThisTurn
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Condition$ PlayerTurn | Phase$ Main1,Main2 | Execute$ TrigAddPhase | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, if it's your main phase, there's an additional combat phase after this phase. At the beginning of that combat, untap all creatures you control.
+SVar:TrigAddPhase:DB$ AddPhase | ExtraPhase$ BeginCombat | AfterPhase$ Main1 | FollowedBy$ BeginCombat | ConditionPhases$ Main1 | SubAbility$ DBAddPhase
+SVar:DBAddPhase:DB$ AddPhase | ExtraPhase$ BeginCombat | AfterPhase$ Main2 | FollowedBy$ End of Turn | ConditionPhases$ Main2 | SubAbility$ DelTrigUntap
+SVar:DelTrigUntap:DB$ DelayedTrigger | Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigUntapAll | TriggerDescription$ At the beginning of that combat, untap all creatures you control.
+SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
+Oracle:Each creature you control gets +1/+0 for each time it has attacked this turn.\nLandfall — Whenever a land enters the battlefield under your control, if it's your main phase, there's an additional combat phase after this phase. At the beginning of that combat, untap all creatures you control.
