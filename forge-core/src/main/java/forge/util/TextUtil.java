@@ -300,4 +300,8 @@ public class TextUtil {
         sb.append( str, idx1, str.length() );
         return sb.toString();
     }
+    //Convert to Mana String
+    public static String toManaString(String ManaProduced){
+        return "{"+TextUtil.fastReplace(ManaProduced," ","}{")+"}";
+    }
 }
