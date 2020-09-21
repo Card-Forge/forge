@@ -302,7 +302,8 @@ public class TextUtil {
     }
     //Convert to Mana String
     public static String toManaString(String ManaProduced){
-        String convertedMana = "{"+TextUtil.fastReplace(ManaProduced," ","}{")+"}";
-        return TextUtil.fastReplace(convertedMana,"{Combo}{Any}", "X mana in any combination"); //Fix manamorphose stack descrition, todo: better/alternative method..
+        if (ManaProduced == "mana"|| ManaProduced.contains("Combo")|| ManaProduced.contains("Any"))
+            return "mana";//fix manamorphose stack description and probably others..
+        return "{"+TextUtil.fastReplace(ManaProduced," ","}{")+"}";
     }
 }
