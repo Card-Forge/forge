@@ -1,0 +1,13 @@
+[metadata]
+Code=ZNC
+Date=2020-09-25
+Name=Zendikar Rising Commander
+Type=Other
+
+[cards]
+1 M Anowon, the Ruin Thief
+2 M Obuun, Mul Daya Ancestor
+3 R Trove Warden
+4 R Enigma Thief
+5 R Whispersteel Dagger
+6 R Geode Rager
