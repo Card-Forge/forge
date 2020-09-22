@@ -6,26 +6,24 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 public class GoadEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player player = sa.getActivatingPlayer();
         final Game game = player.getGame();
         final long timestamp = game.getNextTimestamp();
 
-        for (final Card tgtC : getTargetCards(sa)) {
+        for (final Card tgtC : getDefinedCardsOrTargeted(sa)) {
             // only pump things in PumpZone
             if (!game.getCardsIn(ZoneType.Battlefield).contains(tgtC)) {
                 continue;
             }
 
             // if pump is a target, make sure we can still target now
-            if ((tgt != null) && !tgtC.canBeTargetedBy(sa)) {
+            if (sa.usesTargeting() && !sa.getTargetRestrictions().canTgtPlayer() && !tgtC.canBeTargetedBy(sa)) {
                 continue;
             }
 

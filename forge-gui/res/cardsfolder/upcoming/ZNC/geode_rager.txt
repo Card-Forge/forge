@@ -1,0 +1,9 @@
+Name:Geode Rager
+ManaCost:4 R R
+Types:Creature Elemental
+PT:4/3
+K:First Strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGoad | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, goad each creature target player controls. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)
+SVar:TrigGoad:DB$ Goad | ValidTgts$ Player | TgtPrompt$ Select target player | Defined$ Valid Creature.ControlledBy TargetedPlayer
+SVar:BuffedBy:Land
+Oracle:First strike\nLandfall — Whenever a land enters the battlefield under your control, goad each creature target player controls. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)
