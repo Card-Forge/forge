@@ -24,6 +24,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Iterables;
 import java.util.List;
 
+import static forge.util.TextUtil.toManaString;
+
 public class ManaEffect extends SpellAbilityEffect {
 
     @Override
@@ -252,7 +254,7 @@ public class ManaEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         String mana = !sa.hasParam("Amount") || StringUtils.isNumeric(sa.getParam("Amount"))
                 ? GameActionUtil.generatedMana(sa) : "mana";
-        sb.append("Add ").append(mana).append(".");
+        sb.append("Add ").append(toManaString(mana)).append(".");
         return sb.toString();
     }
 }
