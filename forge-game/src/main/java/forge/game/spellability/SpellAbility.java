@@ -113,8 +113,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean blessing = false;
     private Integer chapter = null;
 
-    private boolean basicLandAbility = false;
-
     private CardStateName stateName = null;
 
     private int totalManaSpent = 0;
@@ -787,13 +785,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public boolean isFlashBackAbility() {
         return this.isAlternativeCost(AlternativeCost.Flashback);
-    }
-
-    public void setBasicLandAbility(final boolean basicLandAbility0) {
-        basicLandAbility = basicLandAbility0;
-    }
-    public boolean isBasicLandAbility() {
-        return basicLandAbility && isIntrinsic();
     }
 
     /**
