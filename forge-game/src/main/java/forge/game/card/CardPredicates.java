@@ -456,6 +456,19 @@ public final class CardPredicates {
         };
     }
 
+    public static final Predicate<Card> castSA(final Predicate<SpellAbility> predSA) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c)
+            {
+                if (c.getCastSA() == null) {
+                    return false;
+                }
+                return predSA.apply(c.getCastSA());
+            }
+        };
+    }
+
     public static class Presets {
 
         /**
