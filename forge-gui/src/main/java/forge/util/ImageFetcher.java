@@ -118,8 +118,7 @@ public abstract class ImageFetcher {
         }
 
         if (destFile.exists()) {
-            // TODO: Figure out why this codepath gets reached. Ideally, fetchImage()
-            // wouldn't
+            // TODO: Figure out why this codepath gets reached. Ideally, fetchImage() wouldn't
             // be called if we already have the image.
             return;
         }
