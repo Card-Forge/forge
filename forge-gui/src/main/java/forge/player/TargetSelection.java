@@ -66,7 +66,8 @@ public class TargetSelection {
     private boolean bTargetingDone = false;
 
     private boolean isMandatory() {
-        return ability.isMandatory() || getTgt().getMandatory();
+        // even if its an optionalTrigger, the targeting is still mandatory
+        return ability.isTrigger() || getTgt().getMandatory();
     }
 
     public final boolean chooseTargets(Integer numTargets) {
