@@ -1,7 +1,6 @@
 Name:Daze
 ManaCost:1 U
 Types:Instant
+SVar:AltCost:Cost$ Return<1/Island> | AILogic$ MinCMC.4 | Description$ You may return an Island you control to its owner's hand rather than pay CARDNAME's mana cost.
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays {1}.
-A:SP$ Counter | Cost$ Return<1/Island> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | AILogic$ MinCMC.4 | CostDesc$ You may return an Island you control to its owner's hand | SpellDescription$ rather than pay CARDNAME's mana cost.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/daze.jpg
 Oracle:You may return an Island you control to its owner's hand rather than pay Daze's mana cost.\nCounter target spell unless its controller pays {1}.
