@@ -1,9 +1,7 @@
 Name:Turbulent Dreams
 ManaCost:U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ U U Discard<X/Card> | Origin$ Battlefield | Destination$ Hand | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgts | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SpellDescription$ Return X target nonland permanents to their owners' hands.
-SVar:X:Targeted$Amount
-SVar:MaxTgts:Count$Valid Permanent.nonLand
+A:SP$ ChangeZone | Cost$ U U Discard<X/Card> | Origin$ Battlefield | Destination$ Hand | TargetMin$ ChosenX | TargetMax$ ChosenX | References$ X | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select X target nonland permanents | SpellDescription$ Return X target nonland permanents to their owners' hands.
+SVar:X:XChoice
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/turbulent_dreams.jpg
 Oracle:As an additional cost to cast Turbulent Dreams, discard X cards.\nReturn X target nonland permanents to their owners' hands.

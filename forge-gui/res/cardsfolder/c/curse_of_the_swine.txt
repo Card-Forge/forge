@@ -1,12 +1,10 @@
 Name:Curse of the Swine
 ManaCost:X U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X U U | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgts | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ DBToken | SpellDescription$ Exile X target creatures. For each creature exiled this way, its controller creates a 2/2 green Boar creature token.
+A:SP$ ChangeZone | Cost$ X U U | ValidTgts$ Creature | TargetMin$ X | TargetMax$ X | References$ X | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ DBToken | SpellDescription$ Exile X target creatures. For each creature exiled this way, its controller creates a 2/2 green Boar creature token.
 SVar:DBToken:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemembered | RepeatSubAbility$ TokenBoar | SubAbility$ DBCleanup | ChangeZoneTable$ True
 SVar:TokenBoar:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_boar | TokenOwner$ ImprintedController | LegacyImage$ g 2 2 boar ths
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Targeted$Amount
-SVar:MaxTgts:Count$Valid Creature
+SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_the_swine.jpg
 Oracle:Exile X target creatures. For each creature exiled this way, its controller creates a 2/2 green Boar creature token.
