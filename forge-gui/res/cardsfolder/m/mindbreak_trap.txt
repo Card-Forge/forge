@@ -1,10 +1,9 @@
 Name:Mindbreak Trap
 ManaCost:2 U U
 Types:Instant Trap
-A:SP$ ChangeZone | Cost$ 2 U U | TargetType$ Spell | ValidTgts$ Card | TgtZone$ Stack | Origin$ Stack | Destination$ Exile | TargetMin$ 0 | TargetMax$ MaxTgts | References$ MaxTgts | Fizzle$ True | SpellDescription$ Exile any number of target spells.
-A:SP$ ChangeZone | Cost$ 0 | CheckSVar$ OppCastThisTurn | SVarCompare$ GE3 | TargetType$ Spell | ValidTgts$ Card | TgtZone$ Stack | Origin$ Stack | Destination$ Exile | TargetMin$ 0 | TargetMax$ MaxTgts | References$ OppCastThisTurn,MaxTgts | Fizzle$ True | SpellDescription$ If an opponent cast three or more spells this turn, you may pay {0} rather than pay CARDNAME's mana cost.
-SVar:OppCastThisTurn:Count$ThisTurnCast_Card.YouDontCtrl
+SVar:AltCost:Cost$ 0 | CheckSVar$ OppCastThisTurn | SVarCompare$ GE3 | References$ OppCastThisTurn | Description$ If an opponent cast three or more spells this turn, you may pay {0} rather than pay CARDNAME's mana cost.
+A:SP$ ChangeZone | Cost$ 2 U U | TargetType$ Spell | ValidTgts$ Card | TgtZone$ Stack | Origin$ Stack | Destination$ Exile | TargetMin$ 0 | TargetMax$ MaxTgts | References$ MaxTgts | Fizzle$ True | StackDescription$ Exile {c:Targeted} | SpellDescription$ Exile any number of target spells.
+SVar:OppCastThisTurn:Count$ThisTurnCast_Card.OppCtrl
 SVar:MaxTgts:Count$SpellsOnStack
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mindbreak_trap.jpg
 Oracle:If an opponent cast three or more spells this turn, you may pay {0} rather than pay Mindbreak Trap's mana cost.\nExile any number of target spells.

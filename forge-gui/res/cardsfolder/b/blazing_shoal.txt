@@ -1,10 +1,9 @@
 Name:Blazing Shoal
 ManaCost:X R R
 Types:Instant Arcane
-A:SP$ Pump | Cost$ X R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | References$ X | SpellDescription$ Target creature gets +X/+0 until end of turn.
-A:SP$ Pump | Cost$ ExileFromHand<1/Card.Red> | CostDesc$ You may exile a red card from your hand rather than pay Blazing Shoal's mana cost. | ValidTgts$ Creature | NumAtt$ +Y | References$ Y | SpellDescription$ Target creature gets +X/+0 until end of turn, where X is the exiled card's converted mana cost.
+SVar:AltCost:Cost$ ExileFromHand<1/Card.Red> | Description$ You may exile a red card with converted mana cost X from your hand rather than pay CARDNAME's mana cost.
+A:SP$ Pump | Cost$ X R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +Z | References$ X,Y,Z | SpellDescription$ Target creature gets +X/+0 until end of turn.
 SVar:X:Count$xPaid
 SVar:Y:Exiled$CardManaCost
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_shoal.jpg
 Oracle:You may exile a red card with converted mana cost X from your hand rather than pay this spell's mana cost.\nTarget creature gets +X/+0 until end of turn.
