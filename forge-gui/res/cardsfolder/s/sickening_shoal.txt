@@ -1,10 +1,10 @@
 Name:Sickening Shoal
 ManaCost:X B B
 Types:Instant Arcane
-A:SP$ Pump | Cost$ X B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | References$ X | SpellDescription$ Target creature gets -X/-X until end of turn.
-A:SP$ Pump | Cost$ ExileFromHand<1/Card.Black> | CostDesc$ You may exile a black card from your hand rather than pay Sickening Shoal's mana cost. | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -Y | NumDef$ -Y | IsCurse$ True | References$ Y | SpellDescription$ Target creature gets -X/-X until end of turn, where X is the exiled card's converted mana cost.
+SVar:AltCost:Cost$ ExileFromHand<1/Card.Black> | Description$ You may exile a black card with converted mana cost X from your hand rather than pay Sickening Shoal's mana cost.
+A:SP$ Pump | Cost$ X B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -Z | NumDef$ -Z | IsCurse$ True | References$ X,Y,Z | SpellDescription$ Target creature gets -X/-X until end of turn.
 SVar:X:Count$xPaid
 SVar:Y:Exiled$CardManaCost
+SVar:Z:SVar$Y/Plus.X
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sickening_shoal.jpg
 Oracle:You may exile a black card with converted mana cost X from your hand rather than pay Sickening Shoal's mana cost.\nTarget creature gets -X/-X until end of turn.

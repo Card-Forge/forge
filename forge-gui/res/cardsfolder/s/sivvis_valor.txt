@@ -1,12 +1,11 @@
 Name:Sivvi's Valor
 ManaCost:2 W
 Types:Instant
-A:SP$ Effect | Name$ Sivvi's Effect | Cost$ tapXType<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect damage from | ReplacementEffects$ SelflessDamage | Triggers$ OutOfSight | SVars$ SelflessDmg,ExileEffect | References$ SelflessDamage,OutOfSight,SelflessDmg,ExileEffect | RememberObjects$ Targeted | IsPresent$ Plains.YouCtrl | CostDesc$ If you control a Plains, | SpellDescription$ you may tap an untapped creature you control rather than pay CARDNAME's mana cost.
-A:SP$ Effect | Name$ Sivvi's Effect | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect damage from | ReplacementEffects$ SelflessDamage | Triggers$ OutOfSight | SVars$ SelflessDmg,ExileEffect | References$ SelflessDamage,OutOfSight,SelflessDmg,ExileEffect | RememberObjects$ Targeted | SpellDescription$ All damage that would be dealt to target creature this turn is dealt to you instead.
+SVar:AltCost:Cost$ tapXType<1/Creature/creature> | IsPresent$ Plains.YouCtrl | StackDescription$ If you control a Plains, you may tap an untapped creature you control rather than pay CARDNAME's mana cost. | Description$ If you control a Plains, you may tap an untapped creature you control rather than pay CARDNAME's mana cost.
+A:SP$ Effect | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect damage from | ReplacementEffects$ SelflessDamage | Triggers$ OutOfSight | SVars$ SelflessDmg,ExileEffect | References$ SelflessDamage,OutOfSight,SelflessDmg,ExileEffect | RememberObjects$ Targeted | StackDescription$ All damage that would be dealt to {c:Targeted} this turn is dealt to {p:You} instead. | SpellDescription$ All damage that would be dealt to target creature this turn is dealt to you instead.
 SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ Card.IsRemembered | ReplaceWith$ SelflessDmg | Description$ All damage that would be dealt to target creature this turn is dealt to you instead.
 SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ You | VarType$ Player
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.IsRemembered | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sivvis_valor.jpg
 Oracle:If you control a Plains, you may tap an untapped creature you control rather than pay Sivvi's Valor's mana cost.\nAll damage that would be dealt to target creature this turn is dealt to you instead.
