@@ -74,6 +74,7 @@ Jace, Architect of Thought|Jace's Incantation|I like that one. I'll steal it!
 Jace, Cunning Castaway|Jace's Mirror Image|Who is real and who is fake?
 Jace, Ingenious Mind-Mage|Jace's Will|Let me change your minds...
 Jace, Memory Adept|Jace's Revelation|So many things to learn!
+Jace, Mirror Mage|Jace the Bob|Really not much of an achievement at all, but what can you do?
 Jace, Telepath Unbound|Jace's Erasure|First empty your mind and then... nope, that's it.
 Jace, the Living Guildpact|Jace's Timetwister|Symmetry? What symmetry?
 Jace, the Mind Sculptor|Jace's Lobotomy|What do you mean, "overpowered"?
@@ -100,6 +101,7 @@ Liliana, Untouched by Death|Liliana's Graveyard Party|What? I'm not touching you
 Liliana, Waker of the Dead|Liliana's Rotten Reserves|They awaken, feeling well-rested.
 Lord Windgrace|Windgrace's Hunting Party|Let me show you a true cat-astrophe.
 Lukka, Coppercoat Outcast|Lukka's Ultimatum|Get them.
+Nahiri, Heir of the Ancients|Swiss-Army Nahiri|It pays to be well-equipped.
 Nahiri, the Harbinger|Nahiri's Mystery Guest|This should be your cue to run.
 Nahiri, the Lithomancer|Nahiri's Gift|I pulled it out! Now I'm a king!
 Narset of the Ancient Way|Narset's Burning Knowledge|Prowess both magical and martial.
@@ -109,6 +111,7 @@ Nicol Bolas, God-Pharaoh|Bolas's Cleansing|Let's just tear this down and start a
 Nicol Bolas, Planeswalker|Bolas's Ultimatum|Whatever you do, don't call him "Nicol"!
 Nicol Bolas, the Arisen|Bolas's Mind Wipe|Anything Jace can do, I can do better.
 Nicol Bolas, the Deceiver|Bolas's Cunning Hit|I know exactly how to hurt you.
+Nissa of Shadowed Boughs|Nissa's Reanimation|Every land hides some secrets deep down.
 Nissa Revane|Nissa's Summoning|The whole village is here!
 Nissa, Genesis Mage|Nissa's Genesis Wave|Let's see who shows up.
 Nissa, Nature's Artisan|Nissa's Stampede|Big enough for you?
