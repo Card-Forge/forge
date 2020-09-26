@@ -451,7 +451,8 @@ public enum CSubmenuPreferences implements ICDoc {
 
     private void initializeLandPlayedComboBox() {
         final String[] elems = {ForgeConstants.LAND_PLAYED_NOTIFICATION_NEVER, ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS,
-                ForgeConstants.LAND_PLAYED_NOTIFICATION_AI};
+                ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS_FOR_NONBASIC_LANDS, ForgeConstants.LAND_PLAYED_NOTIFICATION_AI,
+                ForgeConstants.LAND_PLAYED_NOTIFICATION_AI_FOR_NONBASIC_LANDS};
         final FPref userSetting = FPref.UI_LAND_PLAYED_NOTIFICATION_POLICY;
         final FComboBoxPanel<String> panel = this.view.getCbpLandPlayedComboBoxPanel();
         final FComboBox<String> comboBox = createComboBox(elems, userSetting);

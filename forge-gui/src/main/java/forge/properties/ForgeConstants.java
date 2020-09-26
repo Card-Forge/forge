@@ -325,7 +325,9 @@ public final class ForgeConstants {
     // Constants for LAnd played notification policy
     public static final String LAND_PLAYED_NOTIFICATION_NEVER = "Never";
     public static final String LAND_PLAYED_NOTIFICATION_ALWAYS = "Always";
+    public static final String LAND_PLAYED_NOTIFICATION_ALWAYS_FOR_NONBASIC_LANDS = "Always, but only for nonbasic lands";
     public static final String LAND_PLAYED_NOTIFICATION_AI = "Lands entering a battlefield because of an action of a AI player";
+    public static final String LAND_PLAYED_NOTIFICATION_AI_FOR_NONBASIC_LANDS = "Nonbasic lands entering a battlefield because of an action of a AI player";
     
     // Set boolean constant for landscape mode for gdx port
     public static final boolean isGdxPortLandscape = FileUtil.doesFileExist(ASSETS_DIR + "switch_orientation.ini");
