@@ -19,6 +19,7 @@ package forge.assets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -39,7 +40,9 @@ import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -77,6 +80,7 @@ public class ImageCache {
     public static final Texture defaultImage;
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
     public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
+    private static final Map<Texture, Boolean> Borders = new HashMap<>();
 
     private static boolean imageLoaded, delayLoadRequested;
     public static void allowSingleLoad() {
@@ -99,6 +103,7 @@ public class ImageCache {
         cache.invalidateAll();
         cache.cleanUp();
         missingIconKeys.clear();
+        Borders.clear();
     }
 
     public static void disposeTexture(){
@@ -181,6 +186,8 @@ public class ImageCache {
             if (useDefaultIfNotFound) {
                 image = defaultImage;
                 cache.put(imageKey, defaultImage);
+                if (Borders.get(image) == null)
+                    Borders.put(image, false); //black border
             }
         }
         return image;
@@ -192,8 +199,8 @@ public class ImageCache {
             e.printStackTrace();
         }
     }
-    public static TextureRegion croppedBorderImage(Texture image, boolean fullborder) {
-        if (!fullborder)
+    public static TextureRegion croppedBorderImage(Texture image) {
+        if (!image.toString().contains(".fullborder."))
             return new TextureRegion(image);
         float rscale = 0.96f;
         int rw = Math.round(image.getWidth()*rscale);
@@ -201,25 +208,6 @@ public class ImageCache {
         int rx = Math.round((image.getWidth() - rw)/2f);
         int ry = Math.round((image.getHeight() - rh)/2f)-2;
         return new TextureRegion(image, rx, ry, rw, rh);
-    }
-    public static boolean isWhiteBordered(IPaperCard c) {
-        if (c == null)
-            return false;
-
-        CardEdition ed = FModel.getMagicDb().getEditions().get(c.getEdition());
-        if (ed != null && ed.isWhiteBorder())
-            return true;
-        return false;
-    }
-    public static boolean isWhiteBordered(CardView c) {
-        if (c == null)
-            return false;
-
-        CardView.CardStateView state = c.getCurrentState();
-        CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
-        if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0)
-            return true;
-        return false;
     }
     public static Color borderColor(IPaperCard c) {
         if (c == null)
@@ -271,17 +259,38 @@ public class ImageCache {
             return true;
         return false;
     }
-    public static FImage getBorderImage(CardView c, boolean canshow) {
+    public static FImage getBorder(Texture t) {
+        if (Borders.get(t) == null)
+            Borders.put(t, isCloserToWhite(getpixelColor(t)));
+        return Borders.get(t) ? WhiteBorder : BlackBorder;
+    }
+    public static FImage getBorderImage(Texture t, boolean canshow) {
         if (!canshow)
             return BlackBorder;
-        if (isWhiteBordered(c))
-            return WhiteBorder;
-        return BlackBorder;
+        return getBorder(t);
     }
-    public static FImage getBorderImage(IPaperCard c) {
-        if (isWhiteBordered(c))
-            return WhiteBorder;
-        return BlackBorder;
+    public static FImage getBorderImage(Texture t) {
+        return getBorder(t);
+    }
+    public static String getpixelColor(Texture i) {
+        if (!i.getTextureData().isPrepared()) {
+            i.getTextureData().prepare(); //prepare texture
+        }
+        //get pixmap from texture data
+        Pixmap pixmap = i.getTextureData().consumePixmap();
+        //get pixel color from x,y texture coordinate based on the image fullborder or not
+        Color color = new Color(pixmap.getPixel(croppedBorderImage(i).getRegionX()+1, croppedBorderImage(i).getRegionY()+1));
+        pixmap.dispose();
+        return color.toString();
+    }
+    public static boolean isCloserToWhite(String c){
+        if (c == null || c == "")
+            return false;
+        int c_r = Integer.parseInt(c.substring(0,2),16);
+        int c_g = Integer.parseInt(c.substring(2,4),16);
+        int c_b = Integer.parseInt(c.substring(4,6),16);
+        int brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+        return brightness > 155;
     }
     public static Color getTint(CardView c) {
         if (c == null)
