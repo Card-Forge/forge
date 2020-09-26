@@ -322,7 +322,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (ZoneType.Graveyard.equals(origin)) {
                 sb.append(fromGraveyard);
             }
-            sb.append(" to").append(pronoun).append("owners hand.");
+            sb.append(" to").append(pronoun).append("owner's hand.");
         }
 
         if (destination.equals(ZoneType.Library)) {
