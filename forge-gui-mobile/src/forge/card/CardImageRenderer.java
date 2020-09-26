@@ -348,7 +348,6 @@ public class CardImageRenderer {
         if (image == ImageCache.defaultImage) { //support drawing card image manually if card image not found
             drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top);
         } else {
-            boolean fullborder = image.toString().contains(".fullborder.");
             float radius = (h - w)/8;
             float wh_Adj = ForgeConstants.isGdxPortLandscape && isCurrentCard ? 1.38f:1.0f;
             float new_w = w*wh_Adj;
@@ -371,7 +370,7 @@ public class CardImageRenderer {
                         g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
                     else {
                         g.drawRotatedImage(FSkin.getBorders().get(0), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
-                        g.drawRotatedImage(ImageCache.croppedBorderImage(image, fullborder), new_x+radius/2-minusxy, new_y+radius/2-minusxy, new_w*croppedArea, new_h*croppedArea, (new_x+radius/2-minusxy) + (new_w*croppedArea) / 2, (new_y+radius/2-minusxy) + (new_h*croppedArea) / 2, -90);
+                        g.drawRotatedImage(ImageCache.croppedBorderImage(image), new_x+radius/2-minusxy, new_y+radius/2-minusxy, new_w*croppedArea, new_h*croppedArea, (new_x+radius/2-minusxy) + (new_w*croppedArea) / 2, (new_y+radius/2-minusxy) + (new_h*croppedArea) / 2, -90);
                     }
                 } else
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
@@ -382,7 +381,7 @@ public class CardImageRenderer {
                         g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
                     else {
                         g.drawRotatedImage(FSkin.getBorders().get(ImageCache.getFSkinBorders(card)), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
-                        g.drawRotatedImage(ImageCache.croppedBorderImage(image, fullborder), new_x + radius / 2-minusxy, new_y + radius / 2-minusxy, new_w * croppedArea, new_h * croppedArea, (new_x + radius / 2-minusxy) + (new_w * croppedArea) / 2, (new_y + radius / 2-minusxy) + (new_h * croppedArea) / 2, isAftermath ? 90 : -90);
+                        g.drawRotatedImage(ImageCache.croppedBorderImage(image), new_x + radius / 2-minusxy, new_y + radius / 2-minusxy, new_w * croppedArea, new_h * croppedArea, (new_x + radius / 2-minusxy) + (new_w * croppedArea) / 2, (new_y + radius / 2-minusxy) + (new_h * croppedArea) / 2, isAftermath ? 90 : -90);
                     }
                 } else
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
@@ -391,8 +390,8 @@ public class CardImageRenderer {
                     if (ImageCache.isExtendedArt(card))
                         g.drawImage(image, x, y, w, h);
                     else {
-                        g.drawImage(ImageCache.getBorderImage(card, canshow), x, y, w, h);
-                        g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
+                        g.drawImage(ImageCache.getBorderImage(image, canshow), x, y, w, h);
+                        g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
                     }
                 } else {
                     if (canshow)
