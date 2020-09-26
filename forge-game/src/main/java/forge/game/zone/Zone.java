@@ -125,8 +125,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
             }
         }
         onChanged();
-        game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
-        
+
         if(zoneType == ZoneType.Battlefield && c.isLand()) {
             PlayerCollection playerCollection = game.getPlayers();
             int numPlayers = playerCollection.size();
@@ -138,6 +137,9 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
                 }
             }                    
         }
+        
+        game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
+        
    }
 
     public final boolean contains(final Card c) {
