@@ -366,7 +366,7 @@ public class CardImageRenderer {
             }
             if (rotatePlane && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane())) {
                 if (Forge.enableUIMask){
-                    if (ImageCache.isExtendedArt(card))
+                    if (ImageCache.isBorderlessCardArt(image))
                         g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
                     else {
                         g.drawRotatedImage(FSkin.getBorders().get(0), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
@@ -377,7 +377,7 @@ public class CardImageRenderer {
             } else if (rotateSplit && isCurrentCard && card.isSplitCard() && canshow) {
                 boolean isAftermath = card.getText().contains("Aftermath") || card.getAlternateState().getOracleText().contains("Aftermath");
                 if (Forge.enableUIMask) {
-                    if (ImageCache.isExtendedArt(card))
+                    if (ImageCache.isBorderlessCardArt(image))
                         g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
                     else {
                         g.drawRotatedImage(FSkin.getBorders().get(ImageCache.getFSkinBorders(card)), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
@@ -387,7 +387,7 @@ public class CardImageRenderer {
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
             } else {
                 if (Forge.enableUIMask && canshow) {
-                    if (ImageCache.isExtendedArt(card))
+                    if (ImageCache.isBorderlessCardArt(image))
                         g.drawImage(image, x, y, w, h);
                     else {
                         g.drawImage(ImageCache.getBorderImage(image, canshow), x, y, w, h);

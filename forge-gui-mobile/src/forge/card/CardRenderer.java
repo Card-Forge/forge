@@ -460,7 +460,7 @@ public class CardRenderer {
                 CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
             } else {
                 if (Forge.enableUIMask) {
-                    if (ImageCache.isExtendedArt(pc))
+                    if (ImageCache.isBorderlessCardArt(image))
                         g.drawImage(image, x, y, w, h);
                     else {
                         g.drawImage(ImageCache.getBorderImage(image), x, y, w, h);
@@ -501,7 +501,7 @@ public class CardRenderer {
                 if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
                         && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()) && rotate){
                     if (Forge.enableUIMask) {
-                        if (ImageCache.isExtendedArt(card))
+                        if (ImageCache.isBorderlessCardArt(image))
                             g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                         else {
                             g.drawRotatedImage(FSkin.getBorders().get(0), x, y, w, h, x + w / 2, y + h / 2, -90);
@@ -511,7 +511,7 @@ public class CardRenderer {
                         g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                 } else {
                     if (Forge.enableUIMask && canshow) {
-                        if (ImageCache.isExtendedArt(card))
+                        if (ImageCache.isBorderlessCardArt(image))
                             g.drawImage(image, x, y, w, h);
                         else {
                             boolean t = (card.getCurrentState().getOriginalColors() != card.getCurrentState().getColors()) || card.getCurrentState().hasChangeColors();
