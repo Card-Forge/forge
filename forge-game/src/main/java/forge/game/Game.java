@@ -20,9 +20,12 @@ package forge.game;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Table;
 import com.google.common.eventbus.EventBus;
 import forge.card.CardRarity;
 import forge.card.CardStateName;
@@ -52,6 +55,8 @@ import forge.util.MyRandom;
 import forge.util.Visitor;
 
 import java.util.*;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
@@ -85,6 +90,8 @@ public class Game {
 
     private Map<Player, PlayerCollection> attackedThisTurn = Maps.newHashMap();
     private Map<Player, PlayerCollection> attackedLastTurn = Maps.newHashMap();
+
+    private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
 
     private Player monarch = null;
     private Player monarchBeginTurn = null;
@@ -938,5 +945,47 @@ public class Game {
             }
         }
         return result;
+    }
+
+    public void onCleanupPhase() {
+        clearCounterAddedThisTurn();
+        for (Player player : getPlayers()) {
+            player.onCleanupPhase();
+        }
+    }
+
+    public void addCounterAddedThisTurn(Player putter, CounterType cType, Card card, Integer value) {
+        if (putter == null || card == null || value <= 0) {
+            return;
+        }
+        List<Pair<Card, Integer>> result = countersAddedThisTurn.get(cType, putter);
+        if (result == null) {
+            result = Lists.newArrayList();
+        }
+        result.add(Pair.of(CardUtil.getLKICopy(card), value));
+        if (!countersAddedThisTurn.contains(cType, putter)) {
+            countersAddedThisTurn.put(cType, putter, result);
+        }
+    }
+
+    public int getCounterAddedThisTurn(CounterType cType, String validPlayer, String validCard, Card source, Player sourceController, SpellAbility spellAbility) {
+        int result = 0;
+        if (!countersAddedThisTurn.containsRow(cType)) {
+            return result;
+        }
+        for (Map.Entry<Player, List<Pair<Card, Integer>>> e : countersAddedThisTurn.row(cType).entrySet()) {
+           if (e.getKey().isValid(validPlayer.split(","), sourceController, source, spellAbility)) {
+               for (Pair<Card, Integer> p : e.getValue()) {
+                   if (p.getKey().isValid(validCard.split(","), sourceController, source, spellAbility)) {
+                       result += p.getValue();
+                   }
+               }
+           }
+        }
+        return result;
+    }
+
+    public void clearCounterAddedThisTurn() {
+        countersAddedThisTurn.clear();
     }
 }
