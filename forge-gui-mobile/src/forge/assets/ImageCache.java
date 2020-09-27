@@ -39,7 +39,9 @@ import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -77,6 +79,7 @@ public class ImageCache {
     public static final Texture defaultImage;
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
     public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
+    private static final Map<Texture, Boolean> Borders = new HashMap<>();
 
     private static boolean imageLoaded, delayLoadRequested;
     public static void allowSingleLoad() {
@@ -99,6 +102,7 @@ public class ImageCache {
         cache.invalidateAll();
         cache.cleanUp();
         missingIconKeys.clear();
+        Borders.clear();
     }
 
     public static void disposeTexture(){
@@ -181,6 +185,8 @@ public class ImageCache {
             if (useDefaultIfNotFound) {
                 image = defaultImage;
                 cache.put(imageKey, defaultImage);
+                if (Borders.get(image) == null)
+                    Borders.put(image, false); //black border
             }
         }
         return image;
@@ -192,8 +198,8 @@ public class ImageCache {
             e.printStackTrace();
         }
     }
-    public static TextureRegion croppedBorderImage(Texture image, boolean fullborder) {
-        if (!fullborder)
+    public static TextureRegion croppedBorderImage(Texture image) {
+        if (!image.toString().contains(".fullborder."))
             return new TextureRegion(image);
         float rscale = 0.96f;
         int rw = Math.round(image.getWidth()*rscale);
@@ -201,25 +207,6 @@ public class ImageCache {
         int rx = Math.round((image.getWidth() - rw)/2f);
         int ry = Math.round((image.getHeight() - rh)/2f)-2;
         return new TextureRegion(image, rx, ry, rw, rh);
-    }
-    public static boolean isWhiteBordered(IPaperCard c) {
-        if (c == null)
-            return false;
-
-        CardEdition ed = FModel.getMagicDb().getEditions().get(c.getEdition());
-        if (ed != null && ed.isWhiteBorder())
-            return true;
-        return false;
-    }
-    public static boolean isWhiteBordered(CardView c) {
-        if (c == null)
-            return false;
-
-        CardView.CardStateView state = c.getCurrentState();
-        CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
-        if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0)
-            return true;
-        return false;
     }
     public static Color borderColor(IPaperCard c) {
         if (c == null)
@@ -250,38 +237,24 @@ public class ImageCache {
             return 1;
         return 0;
     }
-    public static boolean isExtendedArt(CardView c) {
-        if (c == null)
-            return false;
-
-        CardView.CardStateView state = c.getCurrentState();
-        if (state.getSetCode().contains("MPS_"))
-            return true;
-        if (state.getSetCode().equalsIgnoreCase("UST"))
-            return true;
-        return false;
+    public static boolean isBorderlessCardArt(Texture t) {
+        return ImageLoader.isBorderless(t);
     }
-    public static boolean isExtendedArt(IPaperCard c) {
-        if (c == null)
-            return false;
-
-        if (c.getEdition().contains("MPS_"))
-            return true;
-        if (c.getEdition().equalsIgnoreCase("UST"))
-            return true;
-        return false;
+    public static void updateBorders(Texture t, boolean val){
+        Borders.put(t, val);
     }
-    public static FImage getBorderImage(CardView c, boolean canshow) {
+    public static FImage getBorder(Texture t) {
+        if (Borders.get(t) == null)
+            return BlackBorder;
+        return Borders.get(t) ? WhiteBorder : BlackBorder;
+    }
+    public static FImage getBorderImage(Texture t, boolean canshow) {
         if (!canshow)
             return BlackBorder;
-        if (isWhiteBordered(c))
-            return WhiteBorder;
-        return BlackBorder;
+        return getBorder(t);
     }
-    public static FImage getBorderImage(IPaperCard c) {
-        if (isWhiteBordered(c))
-            return WhiteBorder;
-        return BlackBorder;
+    public static FImage getBorderImage(Texture t) {
+        return getBorder(t);
     }
     public static Color getTint(CardView c) {
         if (c == null)

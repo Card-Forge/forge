@@ -1,0 +1,16 @@
+Name:Tangled Florahedron
+ManaCost:1 G
+Types:Creature Elemental
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+AlternateMode:Modal
+Oracle:{T}: Add {G}.
+
+ALTERNATE
+
+Name:Tangled Vale
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+Oracle:Tangled Vale enters the battlefield tapped.\n{T}: Add {G}.

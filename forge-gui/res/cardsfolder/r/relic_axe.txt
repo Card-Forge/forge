@@ -1,0 +1,13 @@
+Name:Relic Axe
+ManaCost:2
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters the battlefield, attach it to target creature you control.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | AITgts$ Warrior | TgtPrompt$ Select target creature you control
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ 1 | References$ X,Y | Description$ Equipped creature gets +1/+1. If it's a Warrior, it gets +2/+1 instead.
+SVar:X:Count$Compare Y GE1.2.1
+SVar:Y:Targeted$Valid Warrior
+SVar:Y:Count$Valid Warrior.AttachedBy
+K:Equip:2
+SVar:NeedsToPlay:Creature.YouCtrl+inZoneBattlefield
+DeckHints:Type$Warrior
+Oracle:When Relic Axe enters the battlefield, attach it to target creature you control.\nEquipped creature gets +1/+1. If it's a Warrior, it gets +2/+1 instead.\nEquip {2}

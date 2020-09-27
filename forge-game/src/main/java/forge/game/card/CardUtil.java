@@ -173,23 +173,12 @@ public final class CardUtil {
     }
 
     public static List<Card> getThisTurnCast(final String valid, final Card src) {
-        List<Card> res = Lists.newArrayList();
-        final Game game = src.getGame();
-        res.addAll(game.getStack().getSpellsCastThisTurn());
-
-        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src);
-
-        return res;
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, src.getController(), src);
     }
 
     public static List<Card> getLastTurnCast(final String valid, final Card src) {
-        List<Card> res = Lists.newArrayList();
-        final Game game = src.getGame();
-        res.addAll(game.getStack().getSpellsCastLastTurn());
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, src.getController(), src);
 
-        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src);
-
-        return res;
     }
 
     /**

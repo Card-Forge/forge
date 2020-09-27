@@ -86,7 +86,7 @@ public class InputBlock extends InputSyncronizedBase {
         }
         else {
             String attackerName = currentAttacker.isFaceDown() ? localizer.getMessage("lblMorph") : currentAttacker.getName() + " (" + currentAttacker.getId() + ")";
-            String message = localizer.getMessage("lblSelectBlocker") + attackerName + localizer.getMessage("lblOrSelectBlockTarget");
+            String message = localizer.getMessage("lblSelectBlocker") + attackerName + " " + localizer.getMessage("lblOrSelectBlockTarget");
             showMessage(message);
         }
 

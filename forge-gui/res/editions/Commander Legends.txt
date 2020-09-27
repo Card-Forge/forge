@@ -1,0 +1,34 @@
+[metadata]
+Code=CMR
+Date=2020-11-11
+Name=Commander Legends
+Type=Other
+
+[cards]
+1 C The Prismatic Piper
+27 R Keeper of the Accord
+149 R Sengir, the Dark Baron
+160 U Alena, Kessig Trapper
+231 U Halana, Kessig Ranger
+306 C Commander's Sphere
+350 C Command Tower
+354 R Rejuvenating Springs
+356 R Spectator Seating
+358 R Training Center
+359 R Undergrowth Stadium
+360 R Vault of Champions
+530 M Prossh, Skyraider of Kher
+546 C The Prismatic Piper
+568 R Sengir, the Dark Baron
+570 U Alena, Kessig Trapper
+579 U Halana, Kessig Ranger
+621 R Keeper of the Accord
+693 C Commander's Sphere
+705 C Command Tower
+709 R Rejuvenating Springs
+711 R Spectator Seating
+713 R Training Center
+714 R Undergrowth Stadium
+715 R Vault of Champions
+721 M Mana Confluence
+722 R Sengir, the Dark Baron

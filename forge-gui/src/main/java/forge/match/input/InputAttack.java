@@ -328,7 +328,7 @@ public class InputAttack extends InputSyncronizedBase {
 
     private void updateMessage() {
         Localizer localizer = Localizer.getInstance();
-        String message = localizer.getMessage("lblSelectAttackCreatures") + currentDefender + localizer.getMessage("lblSelectAttackTarget");
+        String message = localizer.getMessage("lblSelectAttackCreatures") + " " + currentDefender + " " + localizer.getMessage("lblSelectAttackTarget");
         if (potentialBanding) {
             message += localizer.getMessage("lblSelectBandingTarget");
         }

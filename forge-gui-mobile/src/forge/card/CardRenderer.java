@@ -459,13 +459,12 @@ public class CardRenderer {
             if (image == ImageCache.defaultImage) {
                 CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
             } else {
-                boolean fullborder = image.toString().contains(".fullborder.");
                 if (Forge.enableUIMask) {
-                    if (ImageCache.isExtendedArt(pc))
+                    if (ImageCache.isBorderlessCardArt(image))
                         g.drawImage(image, x, y, w, h);
                     else {
-                        g.drawImage(ImageCache.getBorderImage(pc), x, y, w, h);
-                        g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
+                        g.drawImage(ImageCache.getBorderImage(image), x, y, w, h);
+                        g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
                     }
                 } else
                     g.drawImage(image, x, y, w, h);
@@ -499,26 +498,25 @@ public class CardRenderer {
             if (image == ImageCache.defaultImage) {
                 CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);
             } else {
-                boolean fullborder = image.toString().contains(".fullborder.");
                 if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
                         && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()) && rotate){
                     if (Forge.enableUIMask) {
-                        if (ImageCache.isExtendedArt(card))
+                        if (ImageCache.isBorderlessCardArt(image))
                             g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                         else {
                             g.drawRotatedImage(FSkin.getBorders().get(0), x, y, w, h, x + w / 2, y + h / 2, -90);
-                            g.drawRotatedImage(ImageCache.croppedBorderImage(image, fullborder), x+radius/2.3f-minusxy, y+radius/2-minusxy, w*croppedArea, h*croppedArea, (x+radius/2.3f-minusxy) + (w*croppedArea) / 2, (y+radius/2-minusxy) + (h*croppedArea) / 2, -90);
+                            g.drawRotatedImage(ImageCache.croppedBorderImage(image), x+radius/2.3f-minusxy, y+radius/2-minusxy, w*croppedArea, h*croppedArea, (x+radius/2.3f-minusxy) + (w*croppedArea) / 2, (y+radius/2-minusxy) + (h*croppedArea) / 2, -90);
                         }
                     } else
                         g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                 } else {
                     if (Forge.enableUIMask && canshow) {
-                        if (ImageCache.isExtendedArt(card))
+                        if (ImageCache.isBorderlessCardArt(image))
                             g.drawImage(image, x, y, w, h);
                         else {
                             boolean t = (card.getCurrentState().getOriginalColors() != card.getCurrentState().getColors()) || card.getCurrentState().hasChangeColors();
-                            g.drawBorderImage(ImageCache.getBorderImage(card, canshow), ImageCache.getTint(card), x, y, w, h, t); //tint check for changed colors
-                            g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
+                            g.drawBorderImage(ImageCache.getBorderImage(image, canshow), ImageCache.getTint(card), x, y, w, h, t); //tint check for changed colors
+                            g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
                         }
                     } else {
                         if (canshow)

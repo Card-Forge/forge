@@ -80,3 +80,5 @@ IKO: 10 Boosters, 40 BasicLands
 #needs to be 20 BasicLands, 20 Foil BasicLands, 1 Colossification+|IKO|3
 M21: 10 Boosters, 40 BasicLands
 #needs to be 20 BasicLands, 20 Foil BasicLands, 1 Pack Leader+|M21|3
+ZNR: 10 Boosters, 40 BasicLands
+#needs to be 20 BasicLands, 20 Foil BasicLands, 1 Charix, the Raging Isle+|ZNR|3

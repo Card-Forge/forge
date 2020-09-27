@@ -9,8 +9,6 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import forge.GuiBase;
-import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -20,13 +18,16 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.assets.FSkinProp;
 import forge.game.GameView;
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
+import forge.game.zone.Zone;
 import forge.interfaces.IGameController;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.IMayViewCards;
@@ -34,6 +35,7 @@ import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.trackable.TrackableTypes;
+import forge.util.Localizer;
 
 public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private PlayerView currentPlayer = null;
@@ -709,5 +711,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public void notifyStackRemoval(GameEventSpellRemovedFromStack event) {
     }
     
+    @Override
+    public void handleLandPlayed(Card land, Zone zone) {
+    }  
+
     // End of Choice code
 }
