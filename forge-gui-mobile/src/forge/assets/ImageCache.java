@@ -19,7 +19,6 @@ package forge.assets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -238,30 +237,15 @@ public class ImageCache {
             return 1;
         return 0;
     }
-    public static boolean isExtendedArt(CardView c) {
-        if (c == null)
-            return false;
-
-        CardView.CardStateView state = c.getCurrentState();
-        if (state.getSetCode().contains("MPS_"))
-            return true;
-        if (state.getSetCode().equalsIgnoreCase("UST"))
-            return true;
-        return false;
+    public static boolean isBorderlessCardArt(Texture t) {
+        return ImageLoader.isBorderless(t);
     }
-    public static boolean isExtendedArt(IPaperCard c) {
-        if (c == null)
-            return false;
-
-        if (c.getEdition().contains("MPS_"))
-            return true;
-        if (c.getEdition().equalsIgnoreCase("UST"))
-            return true;
-        return false;
+    public static void updateBorders(Texture t, boolean val){
+        Borders.put(t, val);
     }
     public static FImage getBorder(Texture t) {
         if (Borders.get(t) == null)
-            Borders.put(t, isCloserToWhite(getpixelColor(t)));
+            return BlackBorder;
         return Borders.get(t) ? WhiteBorder : BlackBorder;
     }
     public static FImage getBorderImage(Texture t, boolean canshow) {
@@ -271,26 +255,6 @@ public class ImageCache {
     }
     public static FImage getBorderImage(Texture t) {
         return getBorder(t);
-    }
-    public static String getpixelColor(Texture i) {
-        if (!i.getTextureData().isPrepared()) {
-            i.getTextureData().prepare(); //prepare texture
-        }
-        //get pixmap from texture data
-        Pixmap pixmap = i.getTextureData().consumePixmap();
-        //get pixel color from x,y texture coordinate based on the image fullborder or not
-        Color color = new Color(pixmap.getPixel(croppedBorderImage(i).getRegionX()+1, croppedBorderImage(i).getRegionY()+1));
-        pixmap.dispose();
-        return color.toString();
-    }
-    public static boolean isCloserToWhite(String c){
-        if (c == null || c == "")
-            return false;
-        int c_r = Integer.parseInt(c.substring(0,2),16);
-        int c_g = Integer.parseInt(c.substring(2,4),16);
-        int c_b = Integer.parseInt(c.substring(4,6),16);
-        int brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
-        return brightness > 155;
     }
     public static Color getTint(CardView c) {
         if (c == null)

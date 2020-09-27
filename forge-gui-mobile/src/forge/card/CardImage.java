@@ -49,7 +49,7 @@ public class CardImage implements FImage {
         }
         else {
             if (Forge.enableUIMask) {
-                if (ImageCache.isExtendedArt(card))
+                if (ImageCache.isBorderlessCardArt(image))
                     g.drawImage(image, x, y, w, h);
                 else {
                     float radius = (h - w)/8;
