@@ -5,5 +5,6 @@ SVar:AltCost:Cost$ ExileFromHand<1/Card.Red> | Description$ You may exile a red 
 A:SP$ Pump | Cost$ X R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +Z | References$ X,Y,Z | SpellDescription$ Target creature gets +X/+0 until end of turn.
 SVar:X:Count$xPaid
 SVar:Y:Exiled$CardManaCost
+SVar:Z:SVar$Y/Plus.X
 AI:RemoveDeck:All
 Oracle:You may exile a red card with converted mana cost X from your hand rather than pay this spell's mana cost.\nTarget creature gets +X/+0 until end of turn.
