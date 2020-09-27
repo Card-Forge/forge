@@ -173,23 +173,12 @@ public final class CardUtil {
     }
 
     public static List<Card> getThisTurnCast(final String valid, final Card src) {
-        List<Card> res = Lists.newArrayList();
-        final Game game = src.getGame();
-        res.addAll(game.getStack().getSpellsCastThisTurn());
-
-        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src);
-
-        return res;
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, src.getController(), src);
     }
 
     public static List<Card> getLastTurnCast(final String valid, final Card src) {
-        List<Card> res = Lists.newArrayList();
-        final Game game = src.getGame();
-        res.addAll(game.getStack().getSpellsCastLastTurn());
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, src.getController(), src);
 
-        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src);
-
-        return res;
     }
 
     /**
@@ -240,9 +229,12 @@ public final class CardUtil {
         newCopy.setCopiedSpell(in.isCopiedSpell());
         newCopy.setImmutable(in.isImmutable());
 
-        // lock in the current P/T without bonus from counters
-        newCopy.setBasePower(in.getCurrentPower() + in.getTempPowerBoost());
-        newCopy.setBaseToughness(in.getCurrentToughness() + in.getTempToughnessBoost());
+        // lock in the current P/T
+        newCopy.setBasePower(in.getCurrentPower());
+        newCopy.setBaseToughness(in.getCurrentToughness());
+
+        // extra copy PT boost
+        newCopy.setPTBoost(in.getPTBoostTable());
 
         newCopy.setCounters(Maps.newHashMap(in.getCounters()));
 

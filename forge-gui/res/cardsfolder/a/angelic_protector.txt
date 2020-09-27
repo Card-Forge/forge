@@ -4,6 +4,5 @@ Types:Creature Angel
 PT:2/2
 K:Flying
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability, it gets +0/+3 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumDef$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_protector.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumDef$ 3
 Oracle:Flying\nWhenever Angelic Protector becomes the target of a spell or ability, Angelic Protector gets +0/+3 until end of turn.

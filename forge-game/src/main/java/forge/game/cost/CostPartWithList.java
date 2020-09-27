@@ -132,7 +132,7 @@ public abstract class CostPartWithList extends CostPart {
             }
             cardList.addAll(doListPayment(ability, targetCards));
         } else {
-            for (Card c: targetCards) {
+            for (Card c : targetCards) {
                 executePayment(ability, c);
             }
         }

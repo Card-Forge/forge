@@ -4,8 +4,7 @@ Types:Legendary Creature Human Wizard
 PT:3/5
 K:Vigilance
 A:AB$ Untap | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ DBPump | SpellDescription$ Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
-SVar:DBPump:DB$Pump | Defined$ Targeted | KW$ Prevent all combat damage that would be dealt to and dealt by CARDNAME.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Prevent all combat damage that would be dealt to and dealt by CARDNAME.
 K:Suspend:4:W U
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ith_high_arcanist.jpg
 Oracle:Vigilance\n{T}: Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.\nSuspend 4—{W}{U} (Rather than cast this card from your hand, you may pay {W}{U} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)

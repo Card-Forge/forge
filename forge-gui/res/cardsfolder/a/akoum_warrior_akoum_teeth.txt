@@ -1,0 +1,16 @@
+Name:Akoum Warrior
+ManaCost:5 R
+Types:Creature Minotaur Warrior
+PT:4/5
+K:Trample
+AlternateMode:Modal
+Oracle:Trample
+
+ALTERNATE
+
+Name:Akoum Teeth
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+Oracle:Akoum Teeth enters the battlefield tapped.\n{T}: Add {R}.

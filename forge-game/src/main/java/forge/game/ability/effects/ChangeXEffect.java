@@ -23,14 +23,17 @@ public class ChangeXEffect extends SpellAbilityEffect {
 
         final MagicStack stack = activator.getGame().getStack();
         for (final SpellAbility tgtSA : sas) {
-            SpellAbilityStackInstance si = stack.getInstanceFromSpellAbility(tgtSA);
-            if (si == null) {
-                // If there isn't a Stack Instance, then this doesn't matter
-                continue;
+            // for Unbound Flourishing, can't go over SpellAbilityStackInstances because the x is in cast SA copy
+            SpellAbility castSA = tgtSA.getHostCard().getCastSA();
+            if (castSA != null && tgtSA.equals(castSA)) {
+                castSA.setXManaCostPaid(castSA.getXManaCostPaid() * 2);
             }
-
-            // currently hard coded, no nicer way to get the xManaPaid from that Spell/Card
-            si.setXManaPaid(si.getXManaPaid() * 2);
+            // fall back to other potential cards
+            SpellAbilityStackInstance si = stack.getInstanceFromSpellAbility(tgtSA);
+            if (si != null) {
+                // currently hard coded, no nicer way to get the xManaPaid from that Spell/Card
+                si.setXManaPaid(si.getXManaPaid() * 2);
+            }
         }
     }
 }

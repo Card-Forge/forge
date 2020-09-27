@@ -12,6 +12,7 @@ import forge.screens.home.gauntlet.VSubmenuGauntletQuick;
 import forge.screens.home.online.VSubmenuOnlineLobby;
 import forge.screens.home.puzzle.VSubmenuPuzzleCreate;
 import forge.screens.home.puzzle.VSubmenuPuzzleSolve;
+import forge.screens.home.puzzle.VSubmenuTutorial;
 import forge.screens.home.quest.*;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.screens.home.sanctioned.VSubmenuDraft;
@@ -63,6 +64,7 @@ public enum EDocID {
     HOME_ACHIEVEMENTS (VSubmenuAchievements.SINGLETON_INSTANCE),
     HOME_AVATARS (VSubmenuAvatars.SINGLETON_INSTANCE),
     HOME_UTILITIES (VSubmenuDownloaders.SINGLETON_INSTANCE),
+    HOME_TUTORIAL(VSubmenuTutorial.SINGLETON_INSTANCE),
     HOME_PUZZLE_CREATE(VSubmenuPuzzleCreate.SINGLETON_INSTANCE),
     HOME_PUZZLE_SOLVE(VSubmenuPuzzleSolve.SINGLETON_INSTANCE),
     HOME_CONSTRUCTED (VSubmenuConstructed.SINGLETON_INSTANCE),

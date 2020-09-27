@@ -3,6 +3,5 @@ ManaCost:3 B
 Types:Creature Human Wizard
 PT:2/3
 T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast an enchantment spell, you may have target creature get -2/-2 until end of turn.
-SVar:TrigPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blightcaster.jpg
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True
 Oracle:Whenever you cast an enchantment spell, you may have target creature get -2/-2 until end of turn.

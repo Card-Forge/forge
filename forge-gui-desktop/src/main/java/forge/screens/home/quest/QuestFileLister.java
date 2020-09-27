@@ -374,7 +374,7 @@ public class QuestFileLister extends JPanel {
     private void deleteFile(RowPanel r0) {
         final QuestData qd = r0.getQuestData();
 
-        if (!FOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblConfirmDelete") + "'" + qd.getName() + "'?",
+        if (!FOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblConfirmDelete") + " '" + qd.getName() + "'?",
                 Localizer.getInstance().getMessage("lblDeleteQuest"), Localizer.getInstance().getMessage("lblDelete"),
                 Localizer.getInstance().getMessage("lblCancel"), false)) {
             return;

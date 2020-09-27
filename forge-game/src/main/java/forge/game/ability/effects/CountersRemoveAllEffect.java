@@ -11,7 +11,9 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.Set;
+import java.util.Map;
+
+import com.google.common.collect.Lists;
 
 public class CountersRemoveAllEffect extends SpellAbilityEffect {
     @Override
@@ -60,11 +62,10 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
         int numberRemoved = 0;
         for (final Card tgtCard : cards) {
             if (sa.hasParam("AllCounterTypes")) {
-            	Set<CounterType> types = tgtCard.getCounters().keySet();
-            	for(CounterType ct : types) {
-            		numberRemoved += tgtCard.getCounters(ct);
-            		tgtCard.subtractCounter(ct, tgtCard.getCounters(ct));
-            	}
+                for(Map.Entry<CounterType, Integer> e : Lists.newArrayList(tgtCard.getCounters().entrySet())) {
+                    numberRemoved += e.getValue();
+                    tgtCard.subtractCounter(e.getKey(), e.getValue());
+                }
                 //tgtCard.getCounters().clear();
                 continue;
             }

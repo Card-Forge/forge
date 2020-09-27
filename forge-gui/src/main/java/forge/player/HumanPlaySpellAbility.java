@@ -103,7 +103,7 @@ public class HumanPlaySpellAbility {
             // This is should happen earlier, before the Modal spell is chosen
             // Turn face-down card face up (except case of morph spell)
             if (ability.isSpell() && !ability.isCastFaceDown() && fromState == CardStateName.FaceDown) {
-                c.turnFaceUp();
+                c.turnFaceUp(null);
             }
             ability.setHostCard(game.getAction().moveToStack(c, ability));
         }
@@ -161,7 +161,6 @@ public class HumanPlaySpellAbility {
                     // if a player failed to play madness cost, move the card to graveyard
                     Card newCard = game.getAction().moveToGraveyard(c, null);
                     newCard.setMadnessWithoutCast(true);
-                    newCard.setMadness(false);
                 } else if (ability.getHostCard().isBestowed()) {
                     ability.getHostCard().unanimateBestow();
                 }

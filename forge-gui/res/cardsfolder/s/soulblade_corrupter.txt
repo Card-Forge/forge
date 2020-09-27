@@ -5,7 +5,6 @@ PT:3/3
 K:Partner:Soulblade Renewer
 K:Deathtouch
 T:Mode$ Attacks | ValidCard$ Creature.counters_GE1_P1P1 | Attacked$ Player.Opponent | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature with a +1/+1 counter on it attacks one of your opponents, that creature gains deathtouch until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ TriggeredAttacker | KW$ Deathtouch
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | KW$ Deathtouch
 DeckHints:Name$Soulblade Renewer & Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soulblade_corrupter.jpg
 Oracle:Partner with Soulblade Renewer (When this creature enters the battlefield, target player may put Soulblade Renewer into their hand from their library, then shuffle.)\nDeathtouch\nWhenever a creature with a +1/+1 counter on it attacks one of your opponents, that creature gains deathtouch until end of turn.

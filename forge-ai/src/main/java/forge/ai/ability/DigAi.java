@@ -32,6 +32,10 @@ public class DigAi extends SpellAbilityAi {
         final Card host = sa.getHostCard();
         Player libraryOwner = ai;
 
+        if (!willPayCosts(ai, sa, sa.getPayCosts(), host)) {
+            return false;
+        }
+
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (!opp.canBeTargetedBy(sa)) {

@@ -96,6 +96,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             return true;
+        } else if (aiLogic.equals("Pongify")) {
+            return SpecialAiLogic.doPongifyLogic(ai, sa);
         }
 
         return super.checkAiLogic(ai, sa, aiLogic);
@@ -128,6 +130,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 // This logic only fills the multiple cards array, the decision to play is made
                 // separately in hiddenOriginCanPlayAI later.
                 multipleCardsToChoose = SpecialCardAi.Intuition.considerMultiple(aiPlayer, sa);
+            } else if (aiLogic.equals("MazesEnd")) {
+                return SpecialCardAi.MazesEnd.consider(aiPlayer, sa);
+            } else if (aiLogic.equals("Pongify")) {
+                return sa.isTargetNumberValid(); // Pre-targeted in checkAiLogic
             }
         }
         if (isHidden(sa)) {
@@ -1491,6 +1497,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return SpecialCardAi.MairsilThePretender.considerCardFromList(fetchList);
             } else if ("SurvivalOfTheFittest".equals(logic)) {
                 return SpecialCardAi.SurvivalOfTheFittest.considerCardToGet(decider, sa);
+            } else if ("MazesEnd".equals(logic)) {
+                return SpecialCardAi.MazesEnd.considerCardToGet(decider, sa);
             } else if ("Intuition".equals(logic)) {
                 if (!multipleCardsToChoose.isEmpty()) {
                     Card choice = multipleCardsToChoose.get(0);

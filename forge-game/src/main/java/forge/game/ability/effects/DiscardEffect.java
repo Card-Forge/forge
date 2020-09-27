@@ -19,8 +19,6 @@ import forge.util.Aggregates;
 import forge.util.TextUtil;
 import forge.util.Localizer;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -294,8 +292,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         continue; // for loop over players
 
                     if (sa.hasParam("RevealNumber")) {
-                        String amountString = sa.getParam("RevealNumber");
-                        int amount = StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString) : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+                        int amount = AbilityUtils.calculateAmount(source, sa.getParam("RevealNumber"), sa);
                         dPHand = p.getController().chooseCardsToRevealFromHand(amount, amount, dPHand);
                     }
 

@@ -42,6 +42,9 @@ public class AltWinAchievements extends AchievementCollection {
             }
 
             Achievement achievement = achievements.get(altWinCondition);
+            if (achievement == null) {
+                achievement = achievements.get("Emblem - " + altWinCondition); // indirectly winning through an emblem
+            }
             if (achievement != null) {
                 achievement.update(player);
                 save();

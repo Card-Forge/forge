@@ -202,7 +202,7 @@ public class GameAction {
             // all sort of funky shenanigans may happen later (e.g. their ETB replacement effects are set
             // up on the wrong card state etc.).
             if (wasFacedown && (fromBattlefield || (toHand && zoneFrom.is(ZoneType.Exile)))) {
-                c.turnFaceUp(false, false);
+                c.forceTurnFaceUp();
             }
 
             if (!c.isToken()) {
@@ -264,7 +264,7 @@ public class GameAction {
             if (repres != ReplacementResult.NotReplaced) {
                 // reset failed manifested Cards back to original
                 if (c.isManifested() && !c.isInZone(ZoneType.Battlefield)) {
-                    c.turnFaceUp(false, false);
+                    c.forceTurnFaceUp();
                 }
 
                 copied.getOwner().removeInboundToken(copied);
@@ -431,7 +431,7 @@ public class GameAction {
         // rule 504.6: reveal a face-down card leaving the stack
         if (zoneFrom != null && zoneTo != null && zoneFrom.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Battlefield) && wasFacedown) {
             Card revealLKI = CardUtil.getLKICopy(c);
-            revealLKI.turnFaceUp(true, false);
+            revealLKI.forceTurnFaceUp();
             reveal(new CardCollection(revealLKI), revealLKI.getOwner(), true, "Face-down card moves from the stack: ");
         }
 
@@ -462,7 +462,7 @@ public class GameAction {
             // Reveal if face-down
             if (wasFacedown) {
                 Card revealLKI = CardUtil.getLKICopy(c);
-                revealLKI.turnFaceUp(true, false);
+                revealLKI.forceTurnFaceUp();
 
                 reveal(new CardCollection(revealLKI), revealLKI.getOwner(), true, "Face-down card leaves the battlefield: ");
 

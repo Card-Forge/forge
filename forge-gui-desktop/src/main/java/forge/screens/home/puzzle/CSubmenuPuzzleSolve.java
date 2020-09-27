@@ -13,10 +13,11 @@ import forge.match.HostedMatch;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
 import forge.player.GamePlayerUtil;
+import forge.properties.ForgeConstants;
 import forge.puzzle.Puzzle;
 import forge.puzzle.PuzzleIO;
-import forge.util.gui.SOptionPane;
 import forge.util.Localizer;
+import forge.util.gui.SOptionPane;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -53,7 +54,7 @@ public enum CSubmenuPuzzleSolve implements ICDoc, IMenuProvider {
     };
 
     private void updateData() {
-        final ArrayList<Puzzle> puzzles = PuzzleIO.loadPuzzles();
+        final ArrayList<Puzzle> puzzles = PuzzleIO.loadPuzzles(ForgeConstants.PUZZLE_DIR);
         Collections.sort(puzzles);
 
         for(Puzzle p : puzzles) {

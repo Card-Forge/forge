@@ -229,6 +229,13 @@ public class BoosterGenerator {
             String sheetKey = StaticData.instance().getEditions().contains(setCode) ? slotType.trim() + " " + setCode
                     : slotType.trim();
 
+            if (sheetKey.startsWith("wholeSheet")) {
+                PrintSheet ps = getPrintSheet(sheetKey);
+                result.addAll(ps.all());
+                sheetsUsed.add(ps);
+                continue;
+            }
+
             slotType = slotType.split("[ :!]")[0]; // add expansion symbol here?
 
             boolean foilInThisSlot = hasFoil && (slotType.equals(foilSlot));
@@ -438,9 +445,10 @@ public class BoosterGenerator {
 
             String mainCode = itMod.next();
 
-            if (mainCode.regionMatches(true, 0, "fromSheet", 0, 9)) { // custom print sheet
-
-                String sheetName = StringUtils.strip(mainCode.substring(9), "()\" ");
+            if (mainCode.regionMatches(true, 0, "fromSheet", 0, 9) ||
+                    mainCode.regionMatches(true, 0, "wholeSheet", 0, 10)
+            ) { // custom print sheet
+                String sheetName = StringUtils.strip(mainCode.substring(10), "()\" ");
                 src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
                 setPred = Predicates.alwaysTrue();
 
@@ -524,7 +532,12 @@ public class BoosterGenerator {
 
             Predicate<PaperCard> toAdd = null;
             if (operator.equalsIgnoreCase(BoosterSlots.DUAL_FACED_CARD)) {
-                toAdd = Predicates.compose(Predicates.or(CardRulesPredicates.splitType(CardSplitType.Transform), CardRulesPredicates.splitType(CardSplitType.Meld)),
+                toAdd = Predicates.compose(
+                            Predicates.or(
+                                CardRulesPredicates.splitType(CardSplitType.Transform),
+                                CardRulesPredicates.splitType(CardSplitType.Meld),
+                                CardRulesPredicates.splitType(CardSplitType.Modal)
+                            ),
                         PaperCard.FN_GET_RULES);
             } else if (operator.equalsIgnoreCase(BoosterSlots.LAND)) {          toAdd = Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES);
             } else if (operator.equalsIgnoreCase(BoosterSlots.BASIC_LAND)) {    toAdd = IPaperCard.Predicates.Presets.IS_BASIC_LAND;

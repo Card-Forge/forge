@@ -3,6 +3,7 @@ ManaCost:2 R
 Types:Creature Zombie Minotaur Warrior
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has first strike.
-A:AB$ Pump | Cost$ 1 Sac<1/Creature.Other/another creature> | NumAtt$ +2 | AILogic$ Aristocrat | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+A:AB$ Pump | Cost$ 1 Sac<1/Creature.Other/another creature> | Defined$ Self | NumAtt$ +2 | AILogic$ Aristocrat | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
 SVar:AIPreference:SacCost$Creature.Other
+DeckHas:Ability$Sacrifice
 Oracle:As long as it's your turn, Ahn-Crop Invader has first strike.\n{1}, Sacrifice another creature: Ahn-Crop Invader gets +2/+0 until end of turn.

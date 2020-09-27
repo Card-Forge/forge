@@ -1,6 +1,6 @@
 #Add one announcement per line
-M21 Pre-release.
-Mutate is NOT finished yet. Please be patient.
-Companion is in, but unfortunately Wizards changed the rules on us. We'll get the new rules in when we can.
-[b]Forge now requires Java 8 (or newer). You will not be able to start the game if you are not yet running Java 8.[/b]
-We have a Discord server for hanging out with Forge devs and other Forge fans. Feel free to [url=https://discord.gg/3v9JCVr]jump on in and say hi[/url]!
+Keyboard shortcut change: to help improve accessibility, the arrow key shortcuts to move between deck editor tables now require control or Command, depending on which platform you're on.
+Jumpstart sealed!
+Double Masters (including double pick)
+Lots of art updates and fixes
+No update on Mutate yet. Trust us, you'll know when it's here. 

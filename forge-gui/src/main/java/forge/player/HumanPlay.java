@@ -11,7 +11,6 @@ import forge.game.GameEntityViewMap;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
-import forge.game.ability.effects.FlipCoinEffect;
 import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.*;
@@ -82,7 +81,7 @@ public class HumanPlay {
         }
 
         if (flippedToCast && !castFaceDown) {
-            source.turnFaceUp(false, false);
+            source.forceTurnFaceUp();
         }
 
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
@@ -322,16 +321,22 @@ public class HumanPlay {
                 ((CostMill) part).payAsDecided(p, PaymentDecision.card(listmill), sourceAbility);
             }
             else if (part instanceof CostFlipCoin) {
-                final int amount = getAmountFromPart(part, source, sourceAbility);
-                if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantFlipNCoinOrDoAction", String.valueOf(amount), orString), sourceAbility)) {
+                if (!part.canPay(sourceAbility, p)) {
                     return false;
                 }
-                final int n = FlipCoinEffect.getFilpMultiplier(p);
-                for (int i = 0; i < amount; i++) {
-                    FlipCoinEffect.flipCoinCall(p, sourceAbility, n);
-                }
+
+                PaymentDecision pd = part.accept(hcd);
+
+                if (pd == null)
+                    return false;
+                else
+                    part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostDamage) {
+                if (!part.canPay(sourceAbility, p)) {
+                    return false;
+                }
+
                 // not a pay life but damage!
                 PaymentDecision pd = part.accept(hcd);
 
@@ -341,6 +346,10 @@ public class HumanPlay {
                     part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostPutCounter) {
+                if (!part.canPay(sourceAbility, p)) {
+                    return false;
+                }
+
                 PaymentDecision pd = part.accept(hcd);
 
                 if (pd == null)

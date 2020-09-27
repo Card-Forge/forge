@@ -1856,7 +1856,7 @@ public class ComputerUtilCard {
 
     public static AiPlayDecision checkNeedsToPlayReqs(final Card card, final SpellAbility sa) {
         Game game = card.getGame();
-        boolean isRightSplit = sa != null && sa.isRightSplit();
+        boolean isRightSplit = sa != null && sa.getCardState() != null;
         String needsToPlayName = isRightSplit ? "SplitNeedsToPlay" : "NeedsToPlay";
         String needsToPlayVarName = isRightSplit ? "SplitNeedsToPlayVar" : "NeedsToPlayVar";
 
@@ -1929,5 +1929,8 @@ public class ComputerUtilCard {
     }
     public static boolean isCardRemRandomDeck(final Card card) {
         return card.getRules() != null && card.getRules().getAiHints().getRemRandomDecks();
+    }
+    public static boolean isCardRemNonCommanderDeck(final Card card) {
+        return card.getRules() != null && card.getRules().getAiHints().getRemNonCommanderDecks();
     }
 }

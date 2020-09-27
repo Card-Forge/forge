@@ -5,7 +5,7 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, mill three cards.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, mill three cards.
 T:Mode$ ChangesZoneAll | ValidCards$ Creature.YouOwn | Origin$ Library | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more creature cards are put into your graveyard from your library, create a 2/2 black Zombie creature token.
-SVar:TrigMill:DB$Mill | NumCards$ 3 | Defined$ You
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You
-DeckHas:Ability$Token & Ability$Graveyard
+DeckHas:Ability$Token & Ability$Graveyard & Ability$Mill
 Oracle:Whenever Sidisi, Brood Tyrant enters the battlefield or attacks, mill three cards.\nWhenever one or more creature cards are put into your graveyard from your library, create a 2/2 black Zombie creature token.

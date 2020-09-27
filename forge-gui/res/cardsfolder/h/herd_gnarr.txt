@@ -3,7 +3,6 @@ ManaCost:3 G
 Types:Creature Beast
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 SVar:BuffedBy:Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/herd_gnarr.jpg
 Oracle:Whenever another creature enters the battlefield under your control, Herd Gnarr gets +2/+2 until end of turn.

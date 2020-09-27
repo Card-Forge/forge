@@ -1,0 +1,25 @@
+[metadata]
+Name:Spellslinger WR vs BG (Win the Game)
+URL:https://www.cardforge.org
+Goal:Win
+Turns:16
+Difficulty:Easy
+Description:This is a preconfigured game, where you need to overcome your opponents defenses by any means necessary and to reduce his/her lifepoints to 0 before you both run out of cards in your respective libraries. There are several ways to reach your goal.
+[state]
+humanlife=10
+ailife=10
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Plains;Plains;Mountain;Mountain;Silverbeak Griffin;Hostile Minotaur;Charging Monstrosaur
+humanlibrary=Inspiring Captain;Knight of New Benalia;Frenzied Raptor;Moment of Triumph;Luminous Bonds;Plains;Plains
+humangraveyard=
+humanbattlefield=
+humanexile=
+humancommand=
+aihand=Swamp;Swamp;Forest;Forest;Colossal Dreadmaw;Hitchclaw Recluse;Walking Corpse
+ailibrary=Impale;Ravenous Chupacabra;Swamp;Titanic Growth;Forest;Vampire Sovereign;Greenwood Sentinel
+aigraveyard=
+aibattlefield=
+aiexile=
+aicommand=

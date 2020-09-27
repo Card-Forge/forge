@@ -3,6 +3,5 @@ ManaCost:1 G
 Types:Creature Merfolk Warrior
 PT:2/2
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deeproot_warrior.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
 Oracle:Whenever Deeproot Warrior becomes blocked, it gets +1/+1 until end of turn.

@@ -36,7 +36,7 @@ public class VCombat implements IVDoc<CCombat> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblCombat"));
+    private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblCombatTab"));
 
     private final SkinnedTextArea tar = new SkinnedTextArea();
 
@@ -109,7 +109,7 @@ public class VCombat implements IVDoc<CCombat> {
         // No need to update this unless it's showing
         if (!this.equals(parentCell.getSelected())) { return; }
 
-        tab.setText(cntAttackers > 0 ? (Localizer.getInstance().getMessage("lblCombat") + " : " + cntAttackers) : Localizer.getInstance().getMessage("lblCombat"));
+        tab.setText(cntAttackers > 0 ? (Localizer.getInstance().getMessage("lblCombatTab") + " : " + cntAttackers) : Localizer.getInstance().getMessage("lblCombatTab"));
         tar.setText(desc);
     }
 }

@@ -1769,12 +1769,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         return false;
     }
 
-    public final void playLandNoCheck(final Card land) {
+    public final Card playLandNoCheck(final Card land) {
         land.setController(this, 0);
         if (land.isFaceDown()) {
-            land.turnFaceUp();
+            land.turnFaceUp(null);
         }
         final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), land, null);
+        game.copyLastState();
         game.updateLastStateForCard(c);
 
         // play a sound
@@ -1784,6 +1785,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, AbilityKey.mapFromCard(land), false);
         game.getStack().unfreezeStack();
         addLandPlayedThisTurn();
+        return c;
     }
 
     public final boolean canPlayLand(final Card land) {
@@ -2992,7 +2994,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         CardCollectionView view = CardCollection.getView(legalCompanions);
 
-        SpellAbility fakeSa = new SpellAbility.EmptySa(ApiType.CompanionChoose, null, this);
+        SpellAbility fakeSa = new SpellAbility.EmptySa(ApiType.CompanionChoose,  legalCompanions.get(0), this);
         return controller.chooseSingleEntityForEffect(view, fakeSa, Localizer.getInstance().getMessage("lblChooseACompanion"), true, null);
     }
 

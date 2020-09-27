@@ -347,6 +347,9 @@ public final class AbilityFactory {
         if (mapParams.containsKey("TargetsWithDifferentControllers")) {
             abTgt.setDifferentControllers(true);
         }
+        if (mapParams.containsKey("TargetsWithDifferentCMC")) {
+            abTgt.setDifferentCMC(true);
+        }
         if (mapParams.containsKey("DividedAsYouChoose")) {
             abTgt.calculateStillToDivide(mapParams.get("DividedAsYouChoose"), null, null);
             abTgt.setDividedAsYouChoose(true);

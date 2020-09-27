@@ -44,7 +44,7 @@ public class AssetsDownloader {
                     if (!Forge.getDeviceAdapter().isConnectedToWifi()) {
                         message += " If so, you may want to connect to wifi first. The download is around 6.5MB.";
                     }
-                    if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later")) {
+                    if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later", true, true)) {
                         String filename = "forge-android-" + version + "-signed-aligned.apk";
                         String apkFile = new GuiDownloadZipService("", "update",
                                 "https://releases.cardforge.org/forge/forge-gui-android/" + version + "/" + filename,

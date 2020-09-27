@@ -353,33 +353,13 @@ public class CardView extends GameEntityView {
 
     public boolean mayPlayerLook(PlayerView pv) {
         TrackableCollection<PlayerView> col = get(TrackableProperty.PlayerMayLook);
-        if (col != null && col.contains(pv)) {
-            return true;
-        }
-        col = get(TrackableProperty.PlayerMayLookTemp);
         return col != null && col.contains(pv);
     }
-    void setPlayerMayLook(Player p, boolean mayLook, boolean temp) {
-        TrackableProperty prop = temp ? TrackableProperty.PlayerMayLookTemp : TrackableProperty.PlayerMayLook;
-        TrackableCollection<PlayerView> col = get(prop);
-        if (mayLook) {
-            if (col == null) {
-                col = new TrackableCollection<>(p.getView());
-                set(prop, col);
-            }
-            else if (col.add(p.getView())) {
-                flagAsChanged(prop);
-            }
-        }
-        else if (col != null) {
-            if (col.remove(p.getView())) {
-                if (col.isEmpty()) {
-                    set(prop, null);
-                }
-                else {
-                    flagAsChanged(prop);
-                }
-            }
+    void setPlayerMayLook(Iterable<Player> list) {
+        if (Iterables.isEmpty(list)) {
+            set(TrackableProperty.PlayerMayLook, null);
+        } else {
+            set(TrackableProperty.PlayerMayLook, PlayerView.getCollection(list));
         }
     }
 

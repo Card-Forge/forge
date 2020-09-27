@@ -4,6 +4,5 @@ Types:Creature Angel
 PT:2/4
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player skips their next combat phase.
-SVar:TrigPump:DB$Pump | Defined$ TriggeredTarget | KW$ Skip your next combat phase. | Permanent$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_angel.jpg
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredTarget | KW$ Skip your next combat phase. | Permanent$ True
 Oracle:Flying\nWhenever Blinding Angel deals combat damage to a player, that player skips their next combat phase.

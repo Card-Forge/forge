@@ -124,6 +124,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final NavigableMap<Long, CardCloneStates> clonedStates = Maps.newTreeMap();
     private final NavigableMap<Long, CardCloneStates> textChangeStates = Maps.newTreeMap();
 
+    private final Map<Long, PlayerCollection> mayLook = Maps.newHashMap();
+    private final PlayerCollection mayLookFaceDownExile = new PlayerCollection();
+    private final PlayerCollection mayLookTemp = new PlayerCollection();
+
     private final Multimap<Long, Keyword> cantHaveKeywords = MultimapBuilder.hashKeys().enumSetValues(Keyword.class).build();
 
     private final Map<CounterType, Long> counterTypeTimestamps = Maps.newHashMap();
@@ -178,7 +182,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean tributed = false;
     private boolean embalmed = false;
     private boolean eternalized = false;
-    private boolean madness = false;
     private boolean madnessWithoutCast = false;
 
     private boolean flipped = false;
@@ -206,8 +209,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     // x=Static Avility id or 0, y=timestamp
     private Table<Integer, Long, Pair<Integer,Integer>> boostPT = TreeBasedTable.create();
 
-    private String basePowerString = null;
-    private String baseToughnessString = null;
     private String oracleText = "";
 
     private int damage;
@@ -337,28 +338,14 @@ public class Card extends GameEntity implements Comparable<Card> {
     public CardStateName getAlternateStateName() {
         if (hasAlternateState()) {
             if (isSplitCard()) {
-                if (currentStateName == CardStateName.RightSplit) {
-                    return CardStateName.LeftSplit;
+                return currentStateName == CardStateName.RightSplit ? CardStateName.LeftSplit : CardStateName.RightSplit;
+            } else if (getRules() != null) {
+                CardStateName changedState = getRules().getSplitType().getChangedStateName();
+                if (currentStateName != changedState) {
+                    return changedState;
                 }
-                else {
-                    return CardStateName.RightSplit;
-                }
             }
-            else if (isFlipCard() && currentStateName != CardStateName.Flipped) {
-                return CardStateName.Flipped;
-            }
-            else if (isDoubleFaced() && currentStateName != CardStateName.Transformed) {
-                return CardStateName.Transformed;
-            }
-            else if (isMeldable() && currentStateName != CardStateName.Meld) {
-                return CardStateName.Meld;
-            }
-            else if (this.isAdventureCard() && currentStateName != CardStateName.Adventure) {
-                return CardStateName.Adventure;
-            }
-            else {
-                return CardStateName.Original;
-            }
+            return CardStateName.Original;
         }
         else if (isFaceDown()) {
             return CardStateName.Original;
@@ -549,7 +536,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         currentState.getView().updateType(currentState);
     }
 
-    public boolean changeCardState(final String mode, final String customState) {
+    public boolean changeCardState(final String mode, final String customState, final SpellAbility cause) {
         if (mode == null)
             return changeToState(CardStateName.smartValueOf(customState));
 
@@ -597,7 +584,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (oldState == CardStateName.Original || oldState == CardStateName.Flipped) {
                 return turnFaceDown();
             } else if (isFaceDown()) {
-                return turnFaceUp();
+                return turnFaceUp(cause);
             }
         } else if (mode.equals("Meld") && isMeldable()) {
             return changeToState(CardStateName.Meld);
@@ -641,7 +628,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public boolean turnFaceDown(boolean override) {
-        if (override || (!isDoubleFaced() && !isMeldable())) {
+        if (override || !hasBackSide()) {
             facedown = true;
             if (setState(CardStateName.FaceDown, true)) {
                 runFacedownCommands();
@@ -656,11 +643,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         return setState(CardStateName.FaceDown, false);
     }
 
-    public boolean turnFaceUp() {
-        return turnFaceUp(false, true);
+    public boolean turnFaceUp(SpellAbility cause) {
+        return turnFaceUp(false, true, cause);
     }
 
-    public boolean turnFaceUp(boolean manifestPaid, boolean runTriggers) {
+    public boolean turnFaceUp(boolean manifestPaid, boolean runTriggers, SpellAbility cause) {
         if (isFaceDown()) {
             if (manifestPaid && isManifested() && !getRules().getType().isCreature()) {
                 // If we've manifested a non-creature and we're demanifesting disallow it
@@ -688,8 +675,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 getGame().getReplacementHandler().run(ReplacementType.TurnFaceUp, AbilityKey.mapFromAffected(this));
 
                 // Run triggers
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
+                runParams.put(AbilityKey.Cause, cause);
+
                 getGame().getTriggerHandler().registerActiveTrigger(this, false);
-                getGame().getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, AbilityKey.mapFromCard(this), false);
+                getGame().getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, runParams, false);
             }
             return result;
         }
@@ -732,6 +722,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     @Override
     public final String getName() {
         return getName(currentState);
+    }
+
+    public final String getName(CardStateName stateName) {
+        return getName(getState(stateName));
     }
 
     public final String getName(CardState state) {
@@ -794,6 +788,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         return getRules() != null && getRules().getSplitType() == CardSplitType.Meld;
     }
 
+    public final boolean isModal() {
+        return getRules() != null && getRules().getSplitType() == CardSplitType.Modal;
+    }
+
+    public final boolean hasBackSide() {
+        return isDoubleFaced() || isMeldable() || isModal();
+    }
+
     public final boolean isFlipCard() {
         return hasState(CardStateName.Flipped);
     }
@@ -808,6 +810,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final boolean isBackSide() {
         return backside;
+    }
+    public final void setBackSide(boolean value) {
+        backside = value;
     }
 
     public boolean isCloned() {
@@ -2839,11 +2844,44 @@ public class Card extends GameEntity implements Comparable<Card> {
         return view.mayPlayerLook(player.getView());
     }
 
-    public final void setMayLookAt(final Player player, final boolean mayLookAt) {
-        setMayLookAt(player, mayLookAt, false);
+    public final void addMayLookAt(final long timestamp, final Iterable<Player> list) {
+        PlayerCollection plist = new PlayerCollection(list);
+        mayLook.put(timestamp, plist);
+        if (isFaceDown() && isInZone(ZoneType.Exile)) {
+            mayLookFaceDownExile.addAll(plist);
+        }
+        updateMayLook();
     }
-    public final void setMayLookAt(final Player player, final boolean mayLookAt, final boolean temp) {
-        view.setPlayerMayLook(player, mayLookAt, temp);
+
+    public final void removeMayLookAt(final long timestamp) {
+        if (mayLook.remove(timestamp) != null) {
+            updateMayLook();
+        }
+    }
+
+    public final void addMayLookTemp(final Player player) {
+        if (mayLookTemp.add(player)) {
+            if (isFaceDown() && isInZone(ZoneType.Exile)) {
+                mayLookFaceDownExile.add(player);
+            }
+            updateMayLook();
+        }
+    }
+
+    public final void removeMayLookTemp(final Player player) {
+        if (mayLookTemp.remove(player)) {
+            updateMayLook();
+        }
+    }
+
+    public final void updateMayLook() {
+        PlayerCollection result = new PlayerCollection();
+        for (PlayerCollection v : mayLook.values()) {
+            result.addAll(v);
+        }
+        result.addAll(mayLookFaceDownExile);
+        result.addAll(mayLookTemp);
+        getView().setPlayerMayLook(result);
     }
 
     public final CardPlayOption mayPlay(final StaticAbility sta) {
@@ -3243,20 +3281,20 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // values that are printed on card
     public final String getBasePowerString() {
-        return (null == basePowerString) ? "" + getBasePower() : basePowerString;
+        return currentState.getBasePowerString();
     }
 
     public final String getBaseToughnessString() {
-        return (null == baseToughnessString) ? "" + getBaseToughness() : baseToughnessString;
+        return currentState.getBaseToughnessString();
     }
 
     // values that are printed on card
     public final void setBasePowerString(final String s) {
-        basePowerString = s;
+        currentState.setBasePowerString(s);;
     }
 
     public final void setBaseToughnessString(final String s) {
-        baseToughnessString = s;
+        currentState.setBaseToughnessString(s);
     }
 
     public final int getSetPower() {
@@ -3343,13 +3381,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final CardStateName getFaceupCardStateName() {
         if (isFlipped() && hasState(CardStateName.Flipped)) {
             return CardStateName.Flipped;
-        } else if (backside && isDoubleFaced() && hasState(CardStateName.Transformed)) {
-            return CardStateName.Transformed;
-        } else if (backside && isMeldable() && hasState(CardStateName.Meld)) {
-            return CardStateName.Meld;
-        } else {
-            return CardStateName.Original;
+        } else if (backside && hasBackSide()) {
+            CardStateName stateName = getRules().getSplitType().getChangedStateName();
+            if (hasState(stateName)) {
+                return stateName;
+            }
         }
+        return CardStateName.Original;
     }
 
     private final CardCloneStates getLastClonedState() {
@@ -5230,10 +5268,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public boolean isMadness() {
-        return madness;
-    }
-    public void setMadness(boolean madness0) {
-        madness = madness0;
+        if (this.getCastSA() == null) {
+            return false;
+        }
+        return getCastSA().isMadness();
     }
     public boolean getMadnessWithoutCast() { return madnessWithoutCast; }
     public void setMadnessWithoutCast(boolean state) { madnessWithoutCast = state; }
@@ -6031,20 +6069,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public void setSplitStateToPlayAbility(final SpellAbility sa) {
-        if (isAdventureCard()) {
-            if (sa.isAdventure()) {
-                setState(CardStateName.Adventure, true);
+        CardStateName stateName = sa.getCardState();
+        if (hasState(stateName)) {
+            setState(stateName, true);
+            // need to set backSide value according to the SplitType
+            if (hasBackSide()) {
+                setBackSide(getRules().getSplitType().getChangedStateName().equals(stateName));
             }
-            return;
-        }
-        if (!isSplitCard()) {
-            return; // just in case
-        }
-        // Split card support
-        if (sa.isLeftSplit()) {
-            setState(CardStateName.LeftSplit, true);
-        } else if (sa.isRightSplit()) {
-            setState(CardStateName.RightSplit, true);
         }
     }
 
@@ -6102,7 +6133,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (isFaceDown()) {
                 lkicheck = true;
                 source = CardUtil.getLKICopy(source);
-                source.turnFaceUp(false, false);
+                source.forceTurnFaceUp();
             }
 
             if (lkicheck) {
@@ -6127,6 +6158,58 @@ public class Card extends GameEntity implements Comparable<Card> {
                 game.getTracker().clearDelayed();
                 // need to unfreeze tracker
                 game.getTracker().unfreeze();
+            }
+        }
+
+        if (isModal() && hasState(CardStateName.Modal)) {
+            if (getState(CardStateName.Modal).getType().isLand() && !getLastKnownZone().is(ZoneType.Battlefield)) {
+                LandAbility la = new LandAbility(this, player, null);
+                la.setCardState(CardStateName.Modal);
+
+                Card source = CardUtil.getLKICopy(this);
+                boolean lkicheck = true;
+
+                // if Card is Facedown, need to check if MayPlay still applies
+                if (isFaceDown()) {
+                    source.forceTurnFaceUp();
+                }
+
+                // the modal state is not copied with lki, need to copy it extra
+                if (!source.hasState(CardStateName.Modal)) {
+                    source.addAlternateState(CardStateName.Modal, false);
+                    source.getState(CardStateName.Modal).copyFrom(this.getState(CardStateName.Modal), true);
+                }
+
+                source.setSplitStateToPlayAbility(la);
+
+                if (la.canPlay(source)) {
+                    abilities.add(la);
+                }
+
+                if (lkicheck) {
+                    // double freeze tracker, so it doesn't update view
+                    game.getTracker().freeze();
+                    CardCollection preList = new CardCollection(source);
+                    game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
+                }
+
+                // extra for MayPlay
+                for (CardPlayOption o : source.mayPlay(player)) {
+                    la = new LandAbility(this, player, o.getAbility());
+                    la.setCardState(CardStateName.Modal);
+                    if (la.canPlay(source)) {
+                        abilities.add(la);
+                    }
+                }
+
+                // reset static abilities
+                if (lkicheck) {
+                    game.getAction().checkStaticAbilities(false);
+                    // clear delayed changes, this check should not have updated the view
+                    game.getTracker().clearDelayed();
+                    // need to unfreeze tracker
+                    game.getTracker().unfreeze();
+                }
             }
         }
 
@@ -6315,7 +6398,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public void forceTurnFaceUp() {
         getGame().getTriggerHandler().suppressMode(TriggerType.TurnFaceUp);
-        turnFaceUp(false, false);
+        turnFaceUp(false, false, null);
         getGame().getTriggerHandler().clearSuppression(TriggerType.TurnFaceUp);
     }
 

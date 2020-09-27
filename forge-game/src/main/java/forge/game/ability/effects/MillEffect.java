@@ -105,9 +105,7 @@ public class MillEffect extends SpellAbilityEffect {
         if (numCards != 1) {
             sb.append("s");
         }
-        final String millPosition = sa.hasParam("FromBottom") ? "bottom" : "top";
-        sb.append(" from the ").append(millPosition).append(" of their library.");
-
+        sb.append(".");
 
         return sb.toString();
     }

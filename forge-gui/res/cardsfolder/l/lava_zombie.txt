@@ -2,9 +2,8 @@ Name:Lava Zombie
 ManaCost:1 B R
 Types:Creature Zombie
 PT:4/3
-A:AB$ Pump | Cost$ 2 | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+A:AB$ Pump | Cost$ 2 | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a black or red creature you control to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.Black+YouCtrl,Creature.Red+YouCtrl | AILogic$ NeverBounceItself
 SVar:NeedsToPlay:Creature.Black+cmcLE3+YouCtrl,Creature.Red+cmcLE3+YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lava_zombie.jpg
 Oracle:When Lava Zombie enters the battlefield, return a black or red creature you control to its owner's hand.\n{2}: Lava Zombie gets +1/+0 until end of turn.

@@ -2,7 +2,6 @@ Name:Rakshasa Deathdealer
 ManaCost:B G
 Types:Creature Cat Demon
 PT:2/2
-A:AB$ Pump | Cost$ B G | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+A:AB$ Pump | Cost$ B G | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 A:AB$ Regenerate | Cost$ B G | SpellDescription$ Regenerate CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rakshasa_deathdealer.jpg
 Oracle:{B}{G}: Rakshasa Deathdealer gets +2/+2 until end of turn.\n{B}{G}: Regenerate Rakshasa Deathdealer.

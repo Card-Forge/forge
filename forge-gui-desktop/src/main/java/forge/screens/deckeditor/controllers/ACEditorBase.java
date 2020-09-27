@@ -458,7 +458,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             }
 
             GuiUtils.addMenuItem(menu, localizer.getMessage("lblJumptoprevioustable"),
-                    KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0),
+                    KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, InputEvent.META_DOWN_MASK | InputEvent.CTRL_DOWN_MASK),
                     new Runnable() {
                 @Override
                 public void run() {
@@ -466,7 +466,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                 }
             });
             GuiUtils.addMenuItem(menu, localizer.getMessage("lblJumptopnexttable"),
-                    KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0),
+                    KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, InputEvent.META_DOWN_MASK | InputEvent.CTRL_DOWN_MASK),
                     new Runnable() {
                 @Override
                 public void run() {

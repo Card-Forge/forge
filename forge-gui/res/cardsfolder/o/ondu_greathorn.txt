@@ -4,7 +4,6 @@ Types:Creature Beast
 PT:2/3
 K:First Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +2
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +2
 SVar:BuffedBy:Land
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ondu_greathorn.jpg
 Oracle:First strike\nLandfall — Whenever a land enters the battlefield under your control, Ondu Greathorn gets +2/+2 until end of turn.

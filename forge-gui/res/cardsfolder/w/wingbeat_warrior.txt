@@ -5,6 +5,5 @@ PT:2/1
 K:Flying
 K:Morph:2 W
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, target creature gains first strike until end of turn.
-SVar:TrigPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wingbeat_warrior.jpg
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike
 Oracle:Flying\nMorph {2}{W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Wingbeat Warrior is turned face up, target creature gains first strike until end of turn.

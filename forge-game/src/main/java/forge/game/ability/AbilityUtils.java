@@ -1650,6 +1650,12 @@ public class AbilityUtils {
                                 return CardFactoryUtil.doXMath(0, expr, c);
                             }
                             return CardFactoryUtil.doXMath(cycleSA.getXManaCostPaid(), expr, c);
+                        } else if (TriggerType.TurnFaceUp.equals(t.getMode())) {
+                            SpellAbility turnupSA = (SpellAbility) sa.getTriggeringObject(AbilityKey.Cause);
+                            if (turnupSA == null || turnupSA.getXManaCostPaid() == null) {
+                                return CardFactoryUtil.doXMath(0, expr, c);
+                            }
+                            return CardFactoryUtil.doXMath(turnupSA.getXManaCostPaid(), expr, c);
                         }
                     }
 
@@ -1909,10 +1915,7 @@ public class AbilityUtils {
     }
 
     public static final String getSVar(final CardTraitBase ability, final String sVarName) {
-        String val = null;
-        if (ability instanceof SpellAbility) {
-            val = ability.getSVar(sVarName);
-        }
+        String val = ability.getSVar(sVarName);
         if (StringUtils.isEmpty(val)) {
             Card host = null;
             if (ability instanceof SpellAbility) {

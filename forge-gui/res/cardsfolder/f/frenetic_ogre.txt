@@ -2,7 +2,6 @@ Name:Frenetic Ogre
 ManaCost:4 R
 Types:Creature Ogre
 PT:2/3
-A:AB$ Pump | Cost$ R Discard<1/Random> | NumAtt$ +3 | SpellDescription$ CARDNAME gets +3/+0 until end of turn.
+A:AB$ Pump | Cost$ R Discard<1/Random> | Defined$ Self | NumAtt$ +3 | SpellDescription$ CARDNAME gets +3/+0 until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/frenetic_ogre.jpg
 Oracle:{R}, Discard a card at random: Frenetic Ogre gets +3/+0 until end of turn.

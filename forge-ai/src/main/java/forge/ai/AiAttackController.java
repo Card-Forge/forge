@@ -38,6 +38,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
@@ -740,6 +741,11 @@ public class AiAttackController {
         if (lightmineField) {
             doLightmineFieldAttackLogic(attackersLeft, numForcedAttackers, playAggro);
         }
+        // Revenge of Ravens: make sure the AI doesn't kill itself and doesn't damage itself unnecessarily
+        if (!doRevengeOfRavensAttackLogic(ai, defender, attackersLeft, numForcedAttackers, attackMax)) {
+            return;
+        }
+
 
         if (bAssault) {
             if (LOG_AI_ATTACKS)
@@ -1164,6 +1170,9 @@ public class AiAttackController {
                 return CombatUtil.canBlock(attacker, defender);
             }
         });
+
+        boolean canTrampleOverDefenders = attacker.hasKeyword(Keyword.TRAMPLE) && attacker.getNetCombatDamage() > Aggregates.sum(validBlockers, CardPredicates.Accessors.fnGetNetToughness);
+
         // used to check that CanKillAllDangerous check makes sense in context where creatures with dangerous abilities are present
         boolean dangerousBlockersPresent = !CardLists.filter(validBlockers, Predicates.or(
                 CardPredicates.hasKeyword(Keyword.WITHER), CardPredicates.hasKeyword(Keyword.INFECT),
@@ -1252,6 +1261,10 @@ public class AiAttackController {
         if (canKillAll && isWorthLessThanAllKillers && !CombatUtil.canBlock(attacker)) {
             if (LOG_AI_ATTACKS)
                 System.out.println(attacker.getName() + " = attacking because they can't block, expecting to kill or damage player");
+            return true;
+        } else if (!canBeKilled && !dangerousBlockersPresent && canTrampleOverDefenders) {
+            if (LOG_AI_ATTACKS)
+                System.out.println(attacker.getName() + " = expecting to survive and get some Trample damage through");
             return true;
         }
 
@@ -1482,6 +1495,41 @@ public class AiAttackController {
         }
         
         attackersLeft.removeAll(attUnsafe);
+    }
+
+    private boolean doRevengeOfRavensAttackLogic(Player ai, GameEntity defender, List<Card> attackersLeft, int numForcedAttackers, int maxAttack) {
+        // TODO: detect Revenge of Ravens by the trigger instead of by name
+        boolean revengeOfRavens = false;
+        if (defender instanceof Player) {
+            revengeOfRavens = !CardLists.filter(((Player)defender).getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Revenge of Ravens")).isEmpty();
+        } else if (defender instanceof Card) {
+            revengeOfRavens = !CardLists.filter(((Card)defender).getController().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Revenge of Ravens")).isEmpty();
+        }
+
+        if (!revengeOfRavens) {
+            return true;
+        }
+
+        int life = ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife() ? ai.getLife() : Integer.MAX_VALUE;
+        maxAttack = maxAttack < 0 ? Integer.MAX_VALUE - 1 : maxAttack;
+        if (Math.min(maxAttack, numForcedAttackers) >= life) {
+            return false;
+        }
+
+        // Remove all 1-power attackers since they usually only hurt the attacker
+        // TODO: improve to account for possible combat effects coming from attackers like that
+        CardCollection attUnsafe = new CardCollection();
+        for (Card attacker : attackersLeft) {
+            if (attacker.getNetCombatDamage() <= 1) {
+                attUnsafe.add(attacker);
+            }
+        }
+        attackersLeft.removeAll(attUnsafe);
+        if (Math.min(maxAttack, attackersLeft.size()) >= life) {
+            return false;
+        }
+
+        return true;
     }
 
 } // end class ComputerUtil_Attack2

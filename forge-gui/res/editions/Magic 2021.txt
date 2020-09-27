@@ -4,7 +4,7 @@ Date=2020-06-04
 Name=Core Set 2021
 Type=Core
 BoosterCovers=3
-Booster=10 Common:!fromSheet("M21 Secret Cards"), 3 Uncommon:!fromSheet("M21 Secret Cards"), 1 RareMythic:!fromSheet("M21 Secret Cards"), 1 BasicLand:!fromSheet("M21 Secret Cards")
+Booster=10 Common:!fromSheet("M21 Secret Cards"), 3 Uncommon:!fromSheet("M21 Secret Cards"), 1 RareMythic:!fromSheet("M21 Secret Cards"), 1 fromSheet("M21 Lands")
 Prerelease=6 Boosters, 1 RareMythic+
 
 [cards]
@@ -285,13 +285,16 @@ Prerelease=6 Boosters, 1 RareMythic+
 275 M Teferi, Master of Time
 276 M Teferi, Master of Time
 277 M Teferi, Master of Time
+#Buy-A-Box Promo
 278 M Rin and Seri, Inseparable
+#Borderless Planeswalkers
 279 M Ugin, the Spirit Dragon
 280 M Basri Ket
 281 M Teferi, Master of Time
 282 M Liliana, Waker of the Dead
 283 M Chandra, Heart of Fire
 284 M Garruk, Unleashed
+#Showcase Frame Cards
 285 M Ugin, the Spirit Dragon
 286 M Basri Ket
 287 C Basri's Acolyte
@@ -321,12 +324,14 @@ Prerelease=6 Boosters, 1 RareMythic+
 311 L Swamp
 312 L Mountain
 313 L Forest
+#Alternate-Art Borderless Cards
 314 R Containment Priest
 315 M Grim Tutor
 316 M Massacre Wurm
 317 R Cultivate
 318 R Scavenging Ooze
 319 R Solemn Simulacrum
+#Planeswalker Deck Cards
 320 M Basri, Devoted Paladin
 321 C Adherent of Hope
 322 R Basri's Aegis
@@ -347,6 +352,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 337 R Garruk's Warsteed
 338 U Predatory Wurm
 339 C Wildwood Patrol
+#Extended Art Cards
 340 M Baneslayer Angel
 341 R Glorious Anthem
 342 R Idol of Endurance
@@ -399,6 +405,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 389 R Temple of Mystery
 390 R Temple of Silence
 391 R Temple of Triumph
+#Promos
 392 R Pack Leader
 393 U Selfless Savior
 394 C Frantic Inventory
@@ -408,7 +415,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 
 [tokens]
 b_2_2_zombie
-b_5_5_demon
+b_5_5_demon_flying
 c_a_treasure_sac
 c_4_4_a_construct
 g_1_1_cat

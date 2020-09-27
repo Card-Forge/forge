@@ -4,5 +4,6 @@ Types:Creature Elephant Soldier
 PT:3/3
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, other creatures you control gain vigilance until end of turn.
-SVar:TrigPumpAll:DB$PumpAll | ValidCards$ Creature.Other+YouCtrl | KW$ Vigilance
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl | KW$ Vigilance
+SVar:PlayMain1:TRUE
 Oracle:Vigilance\nWhen Loxodon Sergeant enters the battlefield, other creatures you control gain vigilance until end of turn.

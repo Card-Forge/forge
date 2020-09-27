@@ -3,6 +3,5 @@ ManaCost:1 R
 Types:Instant
 K:Kicker:R
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | ReplaceDyingDefined$ Targeted | ReplaceDyingCondition$ Kicked | SubAbility$ KickingLava | SpellDescription$ CARDNAME deals 2 damage to any target. If CARDNAME was kicked, that creature can't be regenerated this turn and if it would die this turn, exile it instead.
-SVar:KickingLava:DB$Pump | KW$ HIDDEN CARDNAME can't be regenerated. | Defined$ Targeted | Condition$ Kicked | ConditionDescription$ If Scorching Lava was kicked,
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scorching_lava.jpg
+SVar:KickingLava:DB$ Pump | KW$ HIDDEN CARDNAME can't be regenerated. | Defined$ Targeted | Condition$ Kicked | ConditionDescription$ If Scorching Lava was kicked,
 Oracle:Kicker {R} (You may pay an additional {R} as you cast this spell.)\nScorching Lava deals 2 damage to any target. If Scorching Lava was kicked, that creature can't be regenerated this turn and if it would die this turn, exile it instead.

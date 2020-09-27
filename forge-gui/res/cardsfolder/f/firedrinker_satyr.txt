@@ -5,8 +5,7 @@ PT:2/1
 T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to you.
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | Defined$ You | References$ X
 SVar:X:TriggerCount$DamageAmount
-A:AB$ Pump | Cost$ 1 R | NumAtt$ 1 | SubAbility$ DBDmg | SpellDescription$ CARDNAME gets +1/+0 until end of turn and deals 1 damage to you.
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ 1 | SubAbility$ DBDmg | SpellDescription$ CARDNAME gets +1/+0 until end of turn and deals 1 damage to you.
 SVar:DBDmg:DB$ DealDamage | NumDmg$ 1 | Defined$ You
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/firedrinker_satyr.jpg
 Oracle:Whenever Firedrinker Satyr is dealt damage, it deals that much damage to you.\n{1}{R}: Firedrinker Satyr gets +1/+0 until end of turn and deals 1 damage to you.

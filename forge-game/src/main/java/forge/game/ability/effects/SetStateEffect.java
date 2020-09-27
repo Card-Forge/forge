@@ -76,7 +76,7 @@ public class SetStateEffect extends SpellAbilityEffect {
             if ("TurnFace".equals(mode) && tgt.isFaceDown() && tgt.isInZone(ZoneType.Battlefield)
                 && !tgt.getState(CardStateName.Original).getType().isPermanent()) {
                 Card lki = CardUtil.getLKICopy(tgt);
-                lki.turnFaceUp(true, false);
+                lki.forceTurnFaceUp();
                 game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, Localizer.getInstance().getMessage("lblFaceDownCardCantTurnFaceUp"));
 
                 continue;
@@ -106,11 +106,11 @@ public class SetStateEffect extends SpellAbilityEffect {
 
             boolean hasTransformed = false;
             if (morphUp) {
-                hasTransformed = tgt.turnFaceUp();
+                hasTransformed = tgt.turnFaceUp(sa);
             } else if (manifestUp) {
-                hasTransformed = tgt.turnFaceUp(true, true);
+                hasTransformed = tgt.turnFaceUp(true, true, sa);
             } else {
-                hasTransformed = tgt.changeCardState(mode, sa.getParam("NewState"));
+                hasTransformed = tgt.changeCardState(mode, sa.getParam("NewState"), sa);
             }
             if ( hasTransformed ) {
                 if (morphUp) {

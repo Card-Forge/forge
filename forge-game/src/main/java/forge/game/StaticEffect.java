@@ -17,16 +17,13 @@
  */
 package forge.game;
 
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardUtil;
+
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -182,11 +179,8 @@ public class StaticEffect {
 
         boolean setPT = false;
         String[] addHiddenKeywords = null;
-        String addColors = null;
         boolean removeMayPlay = false;
         boolean removeWithFlash = false;
-
-        List<Player> mayLookAt = null;
 
         if (hasParam("ChangeColorWordsTo")) {
             changeColorWordsTo = getParam("ChangeColorWordsTo");
@@ -200,31 +194,6 @@ public class StaticEffect {
             addHiddenKeywords = getParam("AddHiddenKeyword").split(" & ");
         }
 
-        if (hasParam("AddColor")) {
-            final String colors = getParam("AddColor");
-            if (colors.equals("ChosenColor")) {
-                addColors = CardUtil.getShortColorsString(getSource().getChosenColors());
-            } else {
-                addColors = CardUtil.getShortColorsString(new ArrayList<>(Arrays.asList(colors.split(" & "))));
-            }
-        }
-
-        if (hasParam("SetColor")) {
-            final String colors = getParam("SetColor");
-            if (colors.equals("ChosenColor")) {
-                addColors = CardUtil.getShortColorsString(getSource().getChosenColors());
-            } else {
-                addColors = CardUtil.getShortColorsString(new ArrayList<>(Arrays.asList(colors.split(" & "))));
-            }
-        }
-
-        if (hasParam("MayLookAt")) {
-            String look = getParam("MayLookAt");
-            if ("True".equals(look)) {
-                look = "You";
-            }
-            mayLookAt = AbilityUtils.getDefinedPlayers(source, look, null);
-        }
         if (hasParam("MayPlay")) {
             removeMayPlay = true;
         }
@@ -303,15 +272,13 @@ public class StaticEffect {
             }
 
             // remove colors
-            if (addColors != null) {
+            if (hasParam("AddColor") || hasParam("SetColor")) {
                 affectedCard.removeColor(getTimestamp());
             }
 
             // remove may look at
-            if (mayLookAt != null) {
-                for (Player p : mayLookAt) {
-                    affectedCard.setMayLookAt(p, false);
-                }
+            if (hasParam("MayLookAt")) {
+                affectedCard.removeMayLookAt(getTimestamp());
             }
             if (removeMayPlay) {
                 affectedCard.removeMayPlay(ability);

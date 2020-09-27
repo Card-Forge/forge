@@ -4,6 +4,5 @@ Types:Creature Elf Archer
 PT:1/2
 K:Reach
 T:Mode$ AttackerBlocked | ValidCard$ Creature.withFlying | ValidBlocker$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks a creature with flying, CARDNAME gets +3/+0 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ezuris_archers.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 3
 Oracle:Reach (This creature can block creatures with flying.)\nWhenever Ezuri's Archers blocks a creature with flying, Ezuri's Archers gets +3/+0 until end of turn.

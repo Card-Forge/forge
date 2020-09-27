@@ -69,11 +69,6 @@ public class AttachAi extends SpellAbilityAi {
             return false;
         }
 
-        if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                && !"Curse".equals(sa.getParam("AILogic"))) {
-            return false;
-        }
-
         // prevent run-away activations - first time will always return true
         if (ComputerUtil.preventRunAwayActivations(sa)) {
         	return false;
@@ -838,7 +833,7 @@ public class AttachAi extends SpellAbilityAi {
      * @return the card
      */
     private static Card attachAICursePreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
-            final Card attachSource) {
+            final Card attachSource, final Player ai) {
         // AI For choosing a Card to Curse of.
 
         // TODO Figure out some way to combine The "gathering of data" from
@@ -928,6 +923,24 @@ public class AttachAi extends SpellAbilityAi {
             prefList = CardLists.filter(prefList,
                 Predicates.not(CardPredicates.isEnchantedBy(attachSource.getName()))
             );
+        }
+
+        // If this is already attached and there's a sac cost, make sure we attach to something that's
+        // seriously better than whatever the attachment is currently attached to (e.g. Bound by Moonsilver)
+        if (sa.getHostCard().getAttachedTo() != null && sa.getHostCard().getAttachedTo().isCreature()
+                && sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+            final int oldEvalRating = ComputerUtilCard.evaluateCreature(sa.getHostCard().getAttachedTo());
+            final int threshold = ai.isAI() ? ((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.SAC_TO_REATTACH_TARGET_EVAL_THRESHOLD) : Integer.MAX_VALUE;
+            prefList = CardLists.filter(prefList, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    if (!card.isCreature()) {
+                        return false;
+                    }
+
+                    return ComputerUtilCard.evaluateCreature(card) >= oldEvalRating + threshold;
+                }
+            });
         }
 
         c = ComputerUtilCard.getBestAI(prefList);
@@ -1455,7 +1468,7 @@ public class AttachAi extends SpellAbilityAi {
         if ("GainControl".equals(logic)) {
             c = attachAIControlPreference(sa, prefList, mandatory, attachSource);
         } else if ("Curse".equals(logic)) {
-            c = attachAICursePreference(sa, prefList, mandatory, attachSource);
+            c = attachAICursePreference(sa, prefList, mandatory, attachSource, ai);
         } else if ("Pump".equals(logic)) {
             c = attachAIPumpPreference(ai, sa, prefList, mandatory, attachSource);
         } else if ("Curiosity".equals(logic)) {

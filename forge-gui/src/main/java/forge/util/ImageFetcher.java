@@ -21,6 +21,22 @@ import forge.properties.ForgePreferences;
 
 public abstract class ImageFetcher {
     private static final ExecutorService threadPool = Executors.newCachedThreadPool();
+    // see https://scryfall.com/docs/api/languages and
+    // https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+    private static final HashMap<String, String> langCodeMap = new HashMap<>();
+    static {
+        langCodeMap.put("en-US", "en");
+        langCodeMap.put("es-ES", "es");
+        langCodeMap.put("fr-FR", "fr");
+        langCodeMap.put("de-DE", "de");
+        langCodeMap.put("it-IT", "it");
+        langCodeMap.put("pt-BR", "pt");
+        langCodeMap.put("ja-JP", "ja");
+        langCodeMap.put("ko-KR", "ko");
+        langCodeMap.put("ru-RU", "ru");
+        langCodeMap.put("zh-CN", "zhs");
+        langCodeMap.put("zh-HK", "zht");
+    };
     private HashMap<String, HashSet<Callback>> currentFetches = new HashMap<>();
     private HashMap<String, String> tokenImages;
 
@@ -47,40 +63,49 @@ public abstract class ImageFetcher {
             final String filename = ImageUtil.getImageKey(paperCard, backFace, true);
             destFile = new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + filename + ".jpg");
 
-            // First try to download the LQ Set URL, then fetch from scryfall
-            StringBuilder setDownload = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
-            setDownload.append(ImageUtil.getDownloadUrl(paperCard, backFace));
-            downloadUrls.add(setDownload.toString());
-
             int artIndex = 1;
-            final Pattern pattern = Pattern.compile(
-                    "^.:([^|]*\\|){2}(\\d+).*$"
-            );
+            final Pattern pattern = Pattern.compile("^.:([^|]*\\|){2}(\\d+).*$");
             Matcher matcher = pattern.matcher(imageKey);
             if (matcher.matches()) {
                 artIndex = Integer.parseInt(matcher.group(2));
             }
             final StaticData data = StaticData.instance();
-            final String cardNum = data.getCommonCards().getCardCollectorNumber(paperCard.getName(), paperCard.getEdition(), artIndex);
-            if (cardNum != null)  {
+            final String cardNum = data.getCommonCards().getCardCollectorNumber(paperCard.getName(),
+                    paperCard.getEdition(), artIndex);
+            if (cardNum != null) {
                 String suffix = "";
                 if (paperCard.getRules().getOtherPart() != null) {
                     suffix = (backFace ? "b" : "a");
                 }
                 final String editionMciCode = data.getEditions().getMciCodeByCode(paperCard.getEdition());
-                downloadUrls.add(String.format("https://img.scryfall.com/cards/normal/en/%s/%s%s.jpg", editionMciCode, cardNum, suffix));
+                String langCode = "en";
+                String UILang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_LANGUAGE);
+                if (langCodeMap.containsKey(UILang)) {
+                    langCode = langCodeMap.get(UILang);
+                }
+                // see https://scryfall.com/blog 2020/8/6, and
+                // https://scryfall.com/docs/api/cards/collector
+                downloadUrls.add(String.format("https://api.scryfall.com/cards/%s/%s%s/%s?format=image&version=normal",
+                        editionMciCode, cardNum, suffix, langCode));
             }
+
+            StringBuilder setDownload = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
+            setDownload.append(ImageUtil.getDownloadUrl(paperCard, backFace));
+            downloadUrls.add(setDownload.toString());
+
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             if (tokenImages == null) {
                 tokenImages = new HashMap<>();
-                for (Pair<String, String> nameUrlPair : FileUtil.readNameUrlFile(ForgeConstants.IMAGE_LIST_TOKENS_FILE)) {
+                for (Pair<String, String> nameUrlPair : FileUtil
+                        .readNameUrlFile(ForgeConstants.IMAGE_LIST_TOKENS_FILE)) {
                     tokenImages.put(nameUrlPair.getLeft(), nameUrlPair.getRight());
                 }
             }
             final String filename = imageKey.substring(2) + ".jpg";
             String tokenUrl = tokenImages.get(filename);
             if (tokenUrl == null) {
-                System.err.println("No specified file for '" + filename + "'.. Attempting to download from default Url");
+                System.err
+                        .println("No specified file for '" + filename + "'.. Attempting to download from default Url");
                 tokenUrl = String.format("%s%s", ForgeConstants.URL_TOKEN_DOWNLOAD, filename);
             }
             destFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename);

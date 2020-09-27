@@ -4,7 +4,7 @@ Types:Legendary Creature Goblin Rogue
 PT:2/2
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control deals combat damage to a player, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBGoad,DBExile
-SVar:DBGoad:DB$ Goad | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls. | SpellDescription$ Goad target creature that player controls.
+SVar:DBGoad:DB$ Goad | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredTarget | TgtPrompt$ Select target creature damaged player controls | SpellDescription$ Goad target creature that player controls.
 SVar:DBExile:DB$ Dig | Defined$ TriggeredDefendingPlayer | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of that player's library. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | Triggers$ TriggerCastDoM | SVars$ TrigRemoveSelf | RememberObjects$ Remembered | SubAbility$ DBCleanup
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it.

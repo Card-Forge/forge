@@ -308,7 +308,7 @@ public final class StaticAbilityContinuous {
         if (layer == StaticAbilityLayer.ABILITIES && params.containsKey("AddAbility")) {
             final String[] sVars = params.get("AddAbility").split(" & ");
             for (int i = 0; i < sVars.length; i++) {
-                sVars[i] = hostCard.getSVar(sVars[i]);
+                sVars[i] = AbilityUtils.getSVar(stAb, sVars[i]);
             }
             addAbilities = sVars;
         }
@@ -316,7 +316,7 @@ public final class StaticAbilityContinuous {
         if (layer == StaticAbilityLayer.ABILITIES && params.containsKey("AddReplacementEffects")) {
             final String[] sVars = params.get("AddReplacementEffects").split(" & ");
             for (int i = 0; i < sVars.length; i++) {
-                sVars[i] = hostCard.getSVar(sVars[i]);
+                sVars[i] = AbilityUtils.getSVar(stAb, sVars[i]);
             }
             addReplacements = sVars;
         }
@@ -433,7 +433,7 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("AddTrigger")) {
                 final String[] sVars = params.get("AddTrigger").split(" & ");
                 for (int i = 0; i < sVars.length; i++) {
-                    sVars[i] = hostCard.getSVar(sVars[i]);
+                    sVars[i] = AbilityUtils.getSVar(stAb, sVars[i]);
                 }
                 addTriggers = sVars;
             }
@@ -441,7 +441,7 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("AddStaticAbility")) {
                 final String[] sVars = params.get("AddStaticAbility").split(" & ");
                 for (int i = 0; i < sVars.length; i++) {
-                    sVars[i] = hostCard.getSVar(sVars[i]);
+                    sVars[i] = AbilityUtils.getSVar(stAb, sVars[i]);
                 }
                 addStatics = sVars;
             }
@@ -668,7 +668,7 @@ public final class StaticAbilityContinuous {
             // add SVars
             if (addSVars != null) {
                 for (final String sVar : addSVars) {
-                    String actualSVar = hostCard.getSVar(sVar);
+                    String actualSVar = AbilityUtils.getSVar(stAb, sVar);
                     String name = sVar;
                     if (actualSVar.startsWith("SVar:")) {
                         actualSVar = actualSVar.split("SVar:")[1];
@@ -757,7 +757,8 @@ public final class StaticAbilityContinuous {
                         // with that the TargetedCard does not need the Svars added to them anymore
                         // but only do it if the trigger doesn't already have a overriding ability
                         if (actualTrigger.hasParam("Execute") && actualTrigger.getOverridingAbility() == null) {
-                            SpellAbility sa = AbilityFactory.getAbility(hostCard, actualTrigger.getParam("Execute"));
+                            String svar = AbilityUtils.getSVar(stAb, actualTrigger.getParam("Execute"));
+                            SpellAbility sa = AbilityFactory.getAbility(svar, hostCard);
                             // set hostcard there so when the card is added to trigger, it doesn't make a copy of it
                             sa.setHostCard(affectedCard);
                             // set OriginalHost to get the owner of this static ability
@@ -824,9 +825,7 @@ public final class StaticAbilityContinuous {
             }
 
             if (mayLookAt != null) {
-                for (Player p : mayLookAt) {
-                    affectedCard.setMayLookAt(p, true);
-                }
+                affectedCard.addMayLookAt(se.getTimestamp(), mayLookAt);
             }
             if (withFlash != null) {
                 affectedCard.addWithFlash(se.getTimestamp(), withFlash);

@@ -47,6 +47,8 @@ public final class ForgeConstants {
     public static final String IMAGE_LIST_ACHIEVEMENTS_FILE          = LISTS_DIR + "achievement-images.txt";
     public static final String NET_DECKS_LIST_FILE                   = LISTS_DIR + "net-decks.txt";
     public static final String NET_DECKS_COMMANDER_LIST_FILE         = LISTS_DIR + "net-decks-commander.txt";
+    public static final String NET_DECKS_BRAWL_LIST_FILE             = LISTS_DIR + "net-decks-brawl.txt";
+
 
     public static final String CHANGES_FILE            = ASSETS_DIR + "README.txt";
     public static final String CHANGES_FILE_NO_RELEASE = ASSETS_DIR + "CHANGES.txt";
@@ -69,6 +71,7 @@ public final class ForgeConstants {
     public static final String LANG_DIR            = RES_DIR + "languages" + PATH_SEPARATOR;
     public static final String EFFECTS_DIR         = RES_DIR + "effects" + PATH_SEPARATOR;
     public static final String PUZZLE_DIR          = RES_DIR + "puzzle" + PATH_SEPARATOR;
+    public static final String TUTORIAL_DIR        = RES_DIR + "tutorial" + PATH_SEPARATOR;
     public static final String DECK_GEN_DIR        = RES_DIR + "deckgendecks" + PATH_SEPARATOR;
 
 
@@ -318,6 +321,13 @@ public final class ForgeConstants {
     public static final String STACK_EFFECT_NOTIFICATION_NEVER = "Never";
     public static final String STACK_EFFECT_NOTIFICATION_ALWAYS = "Always";
     public static final String STACK_EFFECT_NOTIFICATION_AI_AND_TRIGGERED = "AI cast/activated, or triggered by any player";
+
+    // Constants for LAnd played notification policy
+    public static final String LAND_PLAYED_NOTIFICATION_NEVER = "Never";
+    public static final String LAND_PLAYED_NOTIFICATION_ALWAYS = "Always";
+    public static final String LAND_PLAYED_NOTIFICATION_ALWAYS_FOR_NONBASIC_LANDS = "Always, but only for nonbasic lands";
+    public static final String LAND_PLAYED_NOTIFICATION_AI = "Lands entering a battlefield because of an action of a AI player";
+    public static final String LAND_PLAYED_NOTIFICATION_AI_FOR_NONBASIC_LANDS = "Nonbasic lands entering a battlefield because of an action of a AI player";
     
     // Set boolean constant for landscape mode for gdx port
     public static final boolean isGdxPortLandscape = FileUtil.doesFileExist(ASSETS_DIR + "switch_orientation.ini");

@@ -1,0 +1,5 @@
+Name:Cliffhaven Sell-Sword
+ManaCost:1 W
+Types:Creature Kor Warrior
+PT:3/1
+Oracle:
