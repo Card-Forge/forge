@@ -188,7 +188,7 @@ public class MainWorldEventDuelManager implements QuestEventDuelManagerInterface
         }
 
         //TODO put in preferences the number of wild duels to add
-        addDuel(duelOpponents, QuestEventDifficulty.WILD, 3);
+        addDuel(duelOpponents, QuestEventDifficulty.WILD, FModel.getQuestPreferences().getPrefInt(QPref.WILD_OPPONENTS_NUMBER));
         addRandomDuel(duelOpponents, randomDuelDifficulty);
 
         return duelOpponents;
