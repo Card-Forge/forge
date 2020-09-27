@@ -37,7 +37,6 @@ import forge.util.Localizer;
 import forge.util.Utils;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
