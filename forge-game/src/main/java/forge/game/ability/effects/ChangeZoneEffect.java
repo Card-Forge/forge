@@ -201,6 +201,26 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
             sb.append(" Then shuffle that library.");
+        } else if (origin.equals("Sideboard")) {
+            sb.append(chooserNames);
+            //currently Reveal is always True in ChangeZone
+            if (sa.hasParam("Reveal")) {
+                sb.append(" may reveal ").append(num).append(" ").append(type).append(" from outside the game and put ");
+                if (num == 1) {
+                    sb.append("it ");
+                } else {
+                    sb.append("them ");
+                }
+                sb.append("into their ").append(destination.toLowerCase()).append(".");
+            } else {
+                if (sa.hasParam("Mandatory")) {
+                    sb.append(" puts ");
+                } else {
+                    sb.append(" may put ");
+                }
+                sb.append(num).append(" ").append(type).append(" from outside the game into their ");
+                sb.append(destination.toLowerCase()).append(".");
+            }
         } else if (origin.equals("Hand")) {
             sb.append(chooserNames);
             if (!chooserNames.equals(fetcherNames)) {
