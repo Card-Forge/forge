@@ -27,6 +27,7 @@ import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalCause;
 import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
+import forge.Forge;
 import forge.ImageKeys;
 import forge.card.CardEdition;
 import forge.card.CardRenderer;
@@ -106,6 +107,8 @@ public class ImageCache {
     }
 
     public static void disposeTexture(){
+        if (Forge.enablePreloadExtendedArt)
+            return;
         for (Texture t: cache.asMap().values()) {
             if (!t.toString().contains("pics/icons")) //fixes quest avatars black texture. todo: filter textures that are safe to dispose...
                 t.dispose();
