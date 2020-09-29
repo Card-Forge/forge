@@ -1239,7 +1239,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final int loyaltyBefore = getCurrentLoyalty();
 
                 setCounters(counterType, newValue);
-                getController().addCounterToPermThisTurn(counterType, addAmount);
+                getGame().addCounterAddedThisTurn(source, counterType, this, addAmount);
                 view.updateCounters(this);
 
                 //fire card stats changed event if p/t bonuses or loyalty changed from added counters
@@ -1267,7 +1267,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else {
             setCounters(counterType, newValue);
-            getController().addCounterToPermThisTurn(counterType, addAmount);
+
+            getGame().addCounterAddedThisTurn(source, counterType, this, addAmount);
             view.updateCounters(this);
         }
         if (newValue <= 0) {

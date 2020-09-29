@@ -841,14 +841,6 @@ public class CardFactoryUtil {
             return doXMath(maxNum, m, c);
         }
 
-        // Count$CountersAddedToPermYouCtrl <CounterType>
-        if (l[0].startsWith("CountersAddedToPermYouCtrl")) {
-            final String[] components = l[0].split(" ", 2);
-            final CounterType counterType = CounterType.getType(components[1]);
-            int n = cc.getCounterToPermThisTurn(counterType);
-            return doXMath(n, m, c);
-        }
-
         if (l[0].startsWith("CommanderCastFromCommandZone")) {
             // only used by Opal Palace, and it does add the trigger to the card
             return doXMath(cc.getCommanderCast(c), m, c);
