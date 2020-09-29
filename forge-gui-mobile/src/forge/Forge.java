@@ -37,7 +37,6 @@ import forge.util.Localizer;
 import forge.util.Utils;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -160,25 +159,17 @@ public class Forge implements ApplicationListener {
     private void preloadExtendedArt() {
         if (!enablePreloadExtendedArt)
             return;
-        List<String> keys = new ArrayList<>();
-        File[] directories = new File(ForgeConstants.CACHE_CARD_PICS_DIR).listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                if (!file.getName().startsWith("MPS_"))
-                    return false;
-                return file.isDirectory();
-            }
-        });
-        for (File folder : directories) {
-            File[] files = new File(folder.toString()).listFiles();
-            for (File file : files) {
-                if (file.isFile()) {
-                    keys.add(folder.getName() + "/" +file.getName().replace(".jpg","").replace(".png",""));
-                }
-            }
+        List<String> BorderlessCardlistkeys = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
+        if(BorderlessCardlistkeys.isEmpty())
+            return;
+        List<String> filteredkeys = new ArrayList<>();
+        for (String cardname : BorderlessCardlistkeys){
+            File image = new File(ForgeConstants.CACHE_CARD_PICS_DIR+"/"+cardname+".jpg");
+            if (image.exists())
+                filteredkeys.add(cardname);
         }
-        if (!keys.isEmpty())
-            ImageCache.preloadCache((Iterable<String>)keys);
+        if (!filteredkeys.isEmpty())
+            ImageCache.preloadCache(filteredkeys);
     }
 
     private void afterDbLoaded() {

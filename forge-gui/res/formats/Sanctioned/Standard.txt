@@ -4,4 +4,4 @@ Order:101
 Subtype:Standard
 Type:Sanctioned
 Sets:ELD, THB, IKO, M21, ZNR
-Banned:Cauldron Familiar; Fires of Invention; Oko, Thief of Crowns; Once Upon a Time; Veil of Summer
+Banned:Cauldron Familiar; Fires of Invention; Oko, Thief of Crowns; Once Upon a Time; Uro, Titan of Nature's Wrath; Veil of Summer
