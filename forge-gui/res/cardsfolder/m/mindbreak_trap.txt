@@ -2,7 +2,7 @@ Name:Mindbreak Trap
 ManaCost:2 U U
 Types:Instant Trap
 SVar:AltCost:Cost$ 0 | CheckSVar$ OppCastThisTurn | SVarCompare$ GE3 | References$ OppCastThisTurn | Description$ If an opponent cast three or more spells this turn, you may pay {0} rather than pay CARDNAME's mana cost.
-A:SP$ ChangeZone | Cost$ 2 U U | TargetType$ Spell | ValidTgts$ Card | TgtZone$ Stack | Origin$ Stack | Destination$ Exile | TargetMin$ 0 | TargetMax$ MaxTgts | References$ MaxTgts | Fizzle$ True | StackDescription$ Exile {c:Targeted} | SpellDescription$ Exile any number of target spells.
+A:SP$ ChangeZone | Cost$ 2 U U | TargetType$ Spell | ValidTgts$ Card | TgtZone$ Stack | Origin$ Stack | Destination$ Exile | TargetMin$ 0 | TargetMax$ MaxTgts | References$ MaxTgts | Fizzle$ True | StackDescription$ SpellDescription | SpellDescription$ Exile any number of target spells.
 SVar:OppCastThisTurn:Count$ThisTurnCast_Card.OppCtrl
 SVar:MaxTgts:Count$SpellsOnStack
 AI:RemoveDeck:All

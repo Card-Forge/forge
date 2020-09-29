@@ -1,7 +1,7 @@
 Name:Soul Spike
 ManaCost:5 B B
 Types:Instant
-SVar:AltCost:Cost$ ExileFromHand<2/Card.Black> | Description$ You may exile two black cards from your hand rather than pay CARDNAME's mana cost.
+SVar:AltCost:Cost$ ExileFromHand<2/Card.Black+Other/black cards> | Description$ You may exile two black cards from your hand rather than pay CARDNAME's mana cost.
 A:SP$ DealDamage | Cost$ 5 B B | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to any target and you gain 4 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4
 Oracle:You may exile two black cards from your hand rather than pay Soul Spike's mana cost.\nSoul Spike deals 4 damage to any target and you gain 4 life.
