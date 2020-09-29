@@ -6046,6 +6046,15 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
+        if (isPermanent() && !isLand() && source.getActivatingPlayer().hasKeyword("You can't sacrifice nonland permanents to cast spells or activate abilities.")) {
+            Cost srcCost = source.getPayCosts();
+            if (srcCost != null) {
+                if (srcCost.hasSpecificCostType(CostSacrifice.class)) {
+                    return false;
+                }
+            }
+        }
+
         return getController().canSacrificeBy(source);
     }
 
