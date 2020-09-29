@@ -307,6 +307,8 @@ public class CardZoom extends FOverlay {
         }
         g.fillRect(FDialog.MSG_BACK_COLOR, 0, h - messageHeight, w, messageHeight);
         g.drawText(zoomMode ? Localizer.getInstance().getMessage("lblSwipeDownDetailView") : Localizer.getInstance().getMessage("lblSwipeDownPictureView"), FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, h - messageHeight, w, messageHeight, false, Align.center, true);
+
+        interrupt(false);
     }
 
     @Override
@@ -317,5 +319,16 @@ public class CardZoom extends FOverlay {
         String getActivateAction(int index);
         void setSelectedIndex(int index);
         void activate(int index);
+    }
+
+    public void interrupt(boolean resume) {
+        if (MatchController.instance.hasLocalPlayers())
+            return;
+        if(resume && MatchController.instance.isGamePaused()) {
+            MatchController.instance.resumeMatch();
+            return;
+        }
+        if(!MatchController.instance.isGamePaused())
+            MatchController.instance.pauseMatch();
     }
 }

@@ -390,7 +390,7 @@ public class CardImageRenderer {
                     if (ImageCache.isBorderlessCardArt(image))
                         g.drawImage(image, x, y, w, h);
                     else {
-                        g.drawImage(ImageCache.getBorderImage(image, canshow), x, y, w, h);
+                        g.drawImage(ImageCache.getBorderImage(image.toString(), canshow), x, y, w, h);
                         g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
                     }
                 } else {

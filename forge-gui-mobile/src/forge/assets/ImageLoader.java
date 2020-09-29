@@ -34,7 +34,7 @@ final class ImageLoader extends CacheLoader<String, Texture> {
             try {
                 Texture t = new Texture(fh, textureFilter);
                 //update
-                ImageCache.updateBorders(t, extendedArt ? false: isCloserToWhite(getpixelColor(t)));
+                ImageCache.updateBorders(t.toString(), extendedArt ? false: isCloserToWhite(getpixelColor(t)));
                 if (textureFilter)
                     t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
                 if (extendedArt)

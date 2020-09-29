@@ -337,7 +337,9 @@ public final class CardUtil {
         ret.setName("");
         ret.setType(type);
 
-        ret.setImageKey(ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE));
+        //show hidden if exiled facedown
+        ret.setImageKey(ImageKeys.getTokenKey(c.isInZone(ZoneType.Exile) ? ImageKeys.HIDDEN_CARD : ImageKeys.MORPH_IMAGE));
+        //TODO: the imagey key here don't support cards with backside... hmmm cards with backside and hidden should display its faceup verion not their alternate...
         return ret;
     }
 
