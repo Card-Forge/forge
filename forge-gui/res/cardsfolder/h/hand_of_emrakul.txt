@@ -3,6 +3,5 @@ ManaCost:9
 Types:Creature Eldrazi
 PT:7/7
 K:Annihilator:1
-SVar:AltCost:Cost$ Sac<4/Eldrazi.Spawn> | Description$ You may sacrifice four Eldrazi Spawn rather than pay Hand of Emrakul's mana cost.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hand_of_emrakul.jpg
-Oracle:You may sacrifice four Eldrazi Spawn rather than pay Hand of Emrakul's mana cost.\nAnnihilator 1 (Whenever this creature attacks, defending player sacrifices a permanent.)
+SVar:AltCost:Cost$ Sac<4/Eldrazi.Spawn> | Description$ You may sacrifice four Eldrazi Spawn rather than pay this spell's mana cost.
+Oracle:You may sacrifice four Eldrazi Spawn rather than pay this spell's mana cost.\nAnnihilator 1 (Whenever this creature attacks, defending player sacrifices a permanent.)

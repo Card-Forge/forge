@@ -1,9 +1,8 @@
 Name:Fieldmist Borderpost
 ManaCost:1 W U
 Types:Artifact
+SVar:AltCost:Cost$ 1 Return<1/Land.Basic> | Description$ You may pay {1} and return a basic land you control to its owner's hand rather than pay this spell's mana cost.
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-SVar:AltCost:Cost$ 1 Return<1/Land.Basic> | Description$ You may pay {1} and return a basic land you control to its owner's hand rather than pay Fieldmist Borderpost's mana cost.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fieldmist_borderpost.jpg
-Oracle:You may pay {1} and return a basic land you control to its owner's hand rather than pay Fieldmist Borderpost's mana cost.\nFieldmist Borderpost enters the battlefield tapped.\n{T}: Add {W} or {U}.
+Oracle:You may pay {1} and return a basic land you control to its owner's hand rather than pay this spell's mana cost.\nFieldmist Borderpost enters the battlefield tapped.\n{T}: Add {W} or {U}.
