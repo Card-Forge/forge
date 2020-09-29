@@ -79,7 +79,7 @@ public class ImageCache {
     public static final Texture defaultImage;
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
     public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
-    private static final Map<String, Boolean> ImageBorder = new HashMap<>(1024);
+    private static final Map<String, Boolean> imageBorder = new HashMap<>(1024);
 
     private static boolean imageLoaded, delayLoadRequested;
     public static void allowSingleLoad() {
@@ -184,8 +184,8 @@ public class ImageCache {
             if (useDefaultIfNotFound) {
                 image = defaultImage;
                 cache.put(imageKey, defaultImage);
-                if (ImageBorder.get(image.toString()) == null)
-                    ImageBorder.put(image.toString(), false); //black border
+                if (imageBorder.get(image.toString()) == null)
+                    imageBorder.put(image.toString(), false); //black border
             }
         }
         return image;
@@ -240,12 +240,12 @@ public class ImageCache {
         return ImageLoader.isBorderless(t);
     }
     public static void updateBorders(String textureString, boolean val){
-        ImageBorder.put(textureString, val);
+        imageBorder.put(textureString, val);
     }
     public static FImage getBorder(String textureString) {
-        if (ImageBorder.get(textureString) == null)
+        if (imageBorder.get(textureString) == null)
             return BlackBorder;
-        return ImageBorder.get(textureString) ? WhiteBorder : BlackBorder;
+        return imageBorder.get(textureString) ? WhiteBorder : BlackBorder;
     }
     public static FImage getBorderImage(String textureString, boolean canshow) {
         if (!canshow)
