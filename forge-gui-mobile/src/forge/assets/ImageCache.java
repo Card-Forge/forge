@@ -27,7 +27,6 @@ import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalCause;
 import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
-import forge.Forge;
 import forge.ImageKeys;
 import forge.card.CardEdition;
 import forge.card.CardRenderer;
@@ -80,7 +79,7 @@ public class ImageCache {
     public static final Texture defaultImage;
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
     public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
-    private static final Map<Texture, Boolean> Borders = new HashMap<>();
+    private static final Map<String, Boolean> imageBorder = new HashMap<>(1024);
 
     private static boolean imageLoaded, delayLoadRequested;
     public static void allowSingleLoad() {
@@ -103,12 +102,9 @@ public class ImageCache {
         cache.invalidateAll();
         cache.cleanUp();
         missingIconKeys.clear();
-        Borders.clear();
     }
 
     public static void disposeTexture(){
-        if (Forge.enablePreloadExtendedArt)
-            return;
         for (Texture t: cache.asMap().values()) {
             if (!t.toString().contains("pics/icons")) //fixes quest avatars black texture. todo: filter textures that are safe to dispose...
                 t.dispose();
@@ -188,8 +184,8 @@ public class ImageCache {
             if (useDefaultIfNotFound) {
                 image = defaultImage;
                 cache.put(imageKey, defaultImage);
-                if (Borders.get(image) == null)
-                    Borders.put(image, false); //black border
+                if (imageBorder.get(image.toString()) == null)
+                    imageBorder.put(image.toString(), false); //black border
             }
         }
         return image;
@@ -243,21 +239,21 @@ public class ImageCache {
     public static boolean isBorderlessCardArt(Texture t) {
         return ImageLoader.isBorderless(t);
     }
-    public static void updateBorders(Texture t, boolean val){
-        Borders.put(t, val);
+    public static void updateBorders(String textureString, boolean val){
+        imageBorder.put(textureString, val);
     }
-    public static FImage getBorder(Texture t) {
-        if (Borders.get(t) == null)
+    public static FImage getBorder(String textureString) {
+        if (imageBorder.get(textureString) == null)
             return BlackBorder;
-        return Borders.get(t) ? WhiteBorder : BlackBorder;
+        return imageBorder.get(textureString) ? WhiteBorder : BlackBorder;
     }
-    public static FImage getBorderImage(Texture t, boolean canshow) {
+    public static FImage getBorderImage(String textureString, boolean canshow) {
         if (!canshow)
             return BlackBorder;
-        return getBorder(t);
+        return getBorder(textureString);
     }
-    public static FImage getBorderImage(Texture t) {
-        return getBorder(t);
+    public static FImage getBorderImage(String textureString) {
+        return getBorder(textureString);
     }
     public static Color getTint(CardView c) {
         if (c == null)

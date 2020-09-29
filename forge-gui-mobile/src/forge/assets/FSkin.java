@@ -27,10 +27,10 @@ import forge.screens.SplashScreen;
 import forge.toolbox.FProgressBar;
 
 public class FSkin {
-    private static final Map<FSkinProp, FSkinImage> images = new HashMap<>();
-    private static final Map<Integer, TextureRegion> avatars = new HashMap<>();
-    private static final Map<Integer, TextureRegion> sleeves = new HashMap<>();
-    private static final Map<Integer, TextureRegion> borders = new HashMap<>();
+    private static final Map<FSkinProp, FSkinImage> images = new HashMap<>(512);
+    private static final Map<Integer, TextureRegion> avatars = new HashMap<>(150);
+    private static final Map<Integer, TextureRegion> sleeves = new HashMap<>(64);
+    private static final Map<Integer, TextureRegion> borders = new HashMap<>(2);
 
     private static Array<String> allSkins;
     private static FileHandle preferredDir;

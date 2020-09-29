@@ -73,9 +73,12 @@ public class CardImageRenderer {
         prevImageHeight = h;
     }
 
-    public static void drawFaceDownCard(Graphics g, float x, float y, float w, float h) {
-        // TODO: improve the way a face-down card back is represented so it doesn't look as ugly
-        drawArt(g, x, y, w, h);
+    public static void drawFaceDownCard(CardView card, Graphics g, float x, float y, float w, float h) {
+        //try to draw the card sleeves first
+        if (FSkin.getSleeves().get(card.getOwner()) != null)
+            g.drawImage(FSkin.getSleeves().get(card.getOwner()), x, y, w, h);
+        else
+            drawArt(g, x, y, w, h);
     }
 
     public static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos) {
@@ -92,7 +95,7 @@ public class CardImageRenderer {
         final boolean canShow = MatchController.instance.mayView(card);
 
         if (!canShow) {
-            drawFaceDownCard(g, x, y, w, h);
+                drawFaceDownCard(card, g, x, y, w, h);
             return;
         }
 
@@ -390,7 +393,7 @@ public class CardImageRenderer {
                     if (ImageCache.isBorderlessCardArt(image))
                         g.drawImage(image, x, y, w, h);
                     else {
-                        g.drawImage(ImageCache.getBorderImage(image, canshow), x, y, w, h);
+                        g.drawImage(ImageCache.getBorderImage(image.toString(), canshow), x, y, w, h);
                         g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
                     }
                 } else {

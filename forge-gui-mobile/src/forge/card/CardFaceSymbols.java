@@ -29,7 +29,7 @@ import java.util.StringTokenizer;
 
 public class CardFaceSymbols {
     public static final float FONT_SIZE_FACTOR = 0.85f;
-    private static final Map<String, FSkinImage> MANA_IMAGES = new HashMap<>();
+    private static final Map<String, FSkinImage> MANA_IMAGES = new HashMap<>(128);
 
     public static void loadImages() {
         for (int i = 0; i <= 20; i++) {

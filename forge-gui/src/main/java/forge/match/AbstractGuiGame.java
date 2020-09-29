@@ -272,6 +272,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
     public boolean isGamePaused() { return gamePause; }
     public void setgamePause(boolean pause) { gamePause = pause; }
+    public void pauseMatch() {
+        IGameController controller = spectator;
+        if(controller != null && !isGamePaused())
+            controller.selectButtonOk();
+    }
+    public void resumeMatch() {
+        IGameController controller = spectator;
+        if(controller != null && isGamePaused())
+            controller.selectButtonOk();
+    }
 
     /** Concede game, bring up WinLose UI. */
     public boolean concede() {
