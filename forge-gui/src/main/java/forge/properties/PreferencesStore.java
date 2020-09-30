@@ -119,4 +119,8 @@ public abstract class PreferencesStore<T extends Enum<T>> {
     public final boolean getPrefBoolean(final T fp0) {
         return Boolean.parseBoolean(getPref(fp0));
     }
+    
+    public final double getPrefDouble(final T fp0) {
+        return Double.parseDouble(getPref(fp0));        
+    }
 }
