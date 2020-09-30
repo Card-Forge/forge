@@ -2905,7 +2905,7 @@ public class CardFactoryUtil {
 
             final String repeatStr = "DB$ RepeatEach | RepeatPlayers$ OpponentsOtherThanDefendingPlayer | ChangeZoneTable$ True";
 
-            final String copyStr = "DB$ CopyPermanent | Defined$ Self | Tapped$ True | Optional$ True | TokenAttacking$ Remembered"
+            final String copyStr = "DB$ CopyPermanent | Defined$ Self | TokenTapped$ True | Optional$ True | TokenAttacking$ Remembered"
                     + " | ChoosePlayerOrPlaneswalker$  True | ImprintTokens$ True";
 
             final String delTrigStr = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | RememberObjects$ Imprinted"
