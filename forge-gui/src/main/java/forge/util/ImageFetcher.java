@@ -63,6 +63,11 @@ public abstract class ImageFetcher {
             final String filename = ImageUtil.getImageKey(paperCard, backFace, true);
             destFile = new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + filename + ".jpg");
 
+            //move priority of ftp image here
+            StringBuilder setDownload = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
+            setDownload.append(ImageUtil.getDownloadUrl(paperCard, backFace));
+            downloadUrls.add(setDownload.toString());
+
             int artIndex = 1;
             final Pattern pattern = Pattern.compile("^.:([^|]*\\|){2}(\\d+).*$");
             Matcher matcher = pattern.matcher(imageKey);
@@ -88,10 +93,6 @@ public abstract class ImageFetcher {
                 downloadUrls.add(String.format("https://api.scryfall.com/cards/%s/%s%s/%s?format=image&version=normal",
                         editionMciCode, cardNum, suffix, langCode));
             }
-
-            StringBuilder setDownload = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
-            setDownload.append(ImageUtil.getDownloadUrl(paperCard, backFace));
-            downloadUrls.add(setDownload.toString());
 
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             if (tokenImages == null) {
