@@ -1,7 +1,5 @@
 package forge.screens.home.quest;
 
-import java.math.BigDecimal;
-
 import javax.swing.SwingUtilities;
 
 import com.google.common.primitives.Ints;
