@@ -1,0 +1,13 @@
+Name:Michonne, Ruthless Survivor
+ManaCost:3 B G
+Types:Legendary Creature Human Warrior
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters the battlefield, create two Walker tokens.
+SVar:TrigToken:DB$ Cleanup | SpellDescription$ Do nothing.
+
+As long as NICKNAME is equipped, she must be blocked if able.
+
+
+Oracle:When Michonne enters the battlefield, create two Walker tokens.\n
+As long as Michonne is equipped, she must be blocked if able.\n
+Whenever Michonne and at least two Zombies attack, she gains indestructible until end of turn.
