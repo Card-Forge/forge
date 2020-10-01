@@ -705,7 +705,7 @@ public class PlayerControllerForTests extends PlayerController {
 
 	@Override
 	public List<SpellAbility> chooseSpellAbilitiesForEffect(List<SpellAbility> spells, SpellAbility sa, String title,
-			int num, Map<String, Object> params) {
+			int num, Map<String, Object> params, boolean generic) {
 		// TODO Auto-generated method stub
 		return null;
 	}
