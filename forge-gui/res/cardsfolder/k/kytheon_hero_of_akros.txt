@@ -2,11 +2,13 @@ Name:Kytheon, Hero of Akros
 ManaCost:W
 Types:Legendary Creature Human Soldier
 PT:2/1
-T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Creature.Other+attackedThisCombat | PresentCompare$ GE2 | Execute$ TrigDelayTransform | Static$ True
-SVar:TrigDelayTransform:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At end of combat, if CARDNAME and at least two other creatures attacked this combat, exile CARDNAME, then return him to the battlefield transformed under his owner's control.
+T:Mode$ Phase | Mode$ Phase | Phase$ EndCombat | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigExile | TriggerDescription$ At end of combat, if CARDNAME and at least two other creatures attacked this combat, exile CARDNAME, then return him to the battlefield transformed under his owner's control.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | ForgetOtherRemembered$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:SVar$Y/Plus.Z
+SVar:Y:Count$Valid Card.Self+attackedThisCombat
+SVar:Z:Count$Valid Creature.Other+attackedThisCombat/LimitMax.2
 A:AB$ Pump | Cost$ 2 W | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn.
 AlternateMode:DoubleFaced
 Oracle:At end of combat, if Kytheon, Hero of Akros and at least two other creatures attacked this combat, exile Kytheon, then return him to the battlefield transformed under his owner's control.\n{2}{W}: Kytheon gains indestructible until end of turn.
@@ -23,5 +25,4 @@ A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creat
 SVar:DBUntap:DB$ Untap | Defined$ Targeted
 A:AB$ Animate | Cost$ AddCounter<0/LOYALTY> | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Human,Soldier | Keywords$ Indestructible | SubAbility$ DBPrevent | Planeswalker$ True | Ultimate$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 4/4 Human Soldier creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
 SVar:DBPrevent:DB$ Pump | Defined$ Self | KW$ Prevent all damage that would be dealt to CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gideon_battle_forged.jpg
 Oracle:[+2]: Up to one target creature an opponent controls attacks Gideon, Battle-Forged during its controller's next turn if able.\n[+1]: Until your next turn, target creature gains indestructible. Untap that creature.\n[0]: Until end of turn, Gideon, Battle-Forged becomes a 4/4 Human Soldier creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
