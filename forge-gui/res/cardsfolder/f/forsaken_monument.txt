@@ -5,7 +5,7 @@ S:Mode$ Continuous | Affected$ Creature.Colorless+YouCtrl | AddPower$ 2 | AddTou
 T:Mode$ TapsForMana | ValidCard$ Permanent.YouCtrl | Produced$ C | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever you tap a permanent for {C}, add an additional {C}.
 SVar:TrigMana:DB$ Mana | Produced$ C
 T:Mode$ SpellCast | ValidCard$ Card.Colorless | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a colorless spell, you gain 1 life.
-SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 SVar:PlayMain1:TRUE
 DeckHints:Color$Colorless
 DeckHas:Ability$LifeGain
