@@ -2,7 +2,9 @@ package forge.ai.ability;
 
 import com.google.common.collect.Lists;
 import forge.ai.*;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.effects.CharmEffect;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -19,10 +21,13 @@ public class CharmAi extends SpellAbilityAi {
         // sa is Entwined, no need for extra logic
         if (sa.isEntwine()) {
             return true;
-        } 
+        }
 
-        final int num = Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
-        final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
+        final Card source = sa.getHostCard();
+
+        final int num = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa);
+        final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParamOrDefault("MinCharmNum", "1"), sa) : num;
+
         boolean timingRight = sa.isTrigger(); //is there a reason to play the charm now?
 
         // Reset the chosen list otherwise it will be locked in forever by earlier calls

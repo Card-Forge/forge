@@ -34,7 +34,6 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.ability.effects.CharmEffect;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostSacrifice;
@@ -280,6 +279,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final Table<SpellAbility, StaticAbility, Integer> numberTurnActivationsStatic = HashBasedTable.create();
     private final Table<SpellAbility, StaticAbility, Integer> numberGameActivationsStatic = HashBasedTable.create();
 
+    private final Map<SpellAbility, List<String>> chosenModesTurn = Maps.newHashMap();
+    private final Map<SpellAbility, List<String>> chosenModesGame = Maps.newHashMap();
+
+    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesTurnStatic = HashBasedTable.create();
+    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesGameStatic = HashBasedTable.create();
 
     // Enumeration for CMC request types
     public enum SplitCMCMode {
@@ -2326,14 +2330,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private String formatSpellAbility(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final String elementText = sa.toString();
-
-        //Determine if a card has multiple choices, then format it in an easier to read list.
-        if (ApiType.Charm.equals(sa.getApi())) {
-            sb.append(CharmEffect.makeFormatedDescription(sa));
-        } else {
-            sb.append(elementText).append("\r\n");
-        }
+        sb.append(sa.toString()).append("\r\n");
         return sb.toString();
     }
 
@@ -5916,6 +5913,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         clearBlockedThisTurn();
         resetMayPlayTurn();
         resetExtertedThisTurn();
+        resetChosenModeTurn();
     }
 
     public boolean hasETBTrigger(final boolean drawbackOnly) {
@@ -6590,6 +6588,94 @@ public class Card extends GameEntity implements Comparable<Card> {
     public void resetTurnActivations() {
         numberTurnActivations.clear();
         numberTurnActivationsStatic.clear();
+    }
+
+    public List<String> getChosenModesTurn(SpellAbility ability) {
+        SpellAbility original = null;
+        SpellAbility root = ability.getRootAbility();
+
+        // because trigger spell abilities are copied, try to get original one
+        if (root.isTrigger()) {
+            original = root.getTrigger().getOverridingAbility();
+        } else {
+            original = ability.getOriginalAbility();
+            if (original == null) {
+                original = ability;
+            }
+        }
+
+        if (ability.getGrantorStatic() != null) {
+            return chosenModesTurnStatic.get(original, ability.getGrantorStatic());
+        }
+        return chosenModesTurn.get(original);
+    }
+    public List<String> getChosenModesGame(SpellAbility ability) {
+        SpellAbility original = null;
+        SpellAbility root = ability.getRootAbility();
+
+        // because trigger spell abilities are copied, try to get original one
+        if (root.isTrigger()) {
+            original = root.getTrigger().getOverridingAbility();
+        } else {
+            original = ability.getOriginalAbility();
+            if (original == null) {
+                original = ability;
+            }
+        }
+
+        if (ability.getGrantorStatic() != null) {
+            return chosenModesGameStatic.get(original, ability.getGrantorStatic());
+        }
+        return chosenModesGame.get(original);
+    }
+
+    public void addChosenModes(SpellAbility ability, String mode) {
+        SpellAbility original = null;
+        SpellAbility root = ability.getRootAbility();
+
+        // because trigger spell abilities are copied, try to get original one
+        if (root.isTrigger()) {
+            original = root.getTrigger().getOverridingAbility();
+        } else {
+            original = ability.getOriginalAbility();
+            if (original == null) {
+                original = ability;
+            }
+        }
+
+        if (ability.getGrantorStatic() != null) {
+            List<String> result = chosenModesTurnStatic.get(original, ability.getGrantorStatic());
+            if (result == null) {
+                result = Lists.newArrayList();
+                chosenModesTurnStatic.put(original, ability.getGrantorStatic(), result);
+            }
+            result.add(mode);
+            result = chosenModesGameStatic.get(original, ability.getGrantorStatic());
+            if (result == null) {
+                result = Lists.newArrayList();
+                chosenModesGameStatic.put(original, ability.getGrantorStatic(), result);
+            }
+            result.add(mode);
+        } else {
+            List<String> result = chosenModesTurn.get(original);
+            if (result == null) {
+                result = Lists.newArrayList();
+                chosenModesTurn.put(original, result);
+            }
+            result.add(mode);
+
+            result = chosenModesGame.get(original);
+            if (result == null) {
+                result = Lists.newArrayList();
+                chosenModesGame.put(original, result);
+            }
+            result.add(mode);
+        }
+    }
+
+    public void resetChosenModeTurn() {
+        chosenModesTurn.clear();
+        chosenModesTurnStatic.clear();
     }
 
     public int getPlaneswalkerAbilityActivated() {

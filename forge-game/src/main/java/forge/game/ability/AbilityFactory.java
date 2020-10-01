@@ -286,7 +286,7 @@ public final class AbilityFactory {
 
             spellAbility.setDescription(sb.toString());
         } else if (api == ApiType.Charm) {
-            spellAbility.setDescription(CharmEffect.makeSpellDescription(spellAbility));
+            spellAbility.setDescription(CharmEffect.makeFormatedDescription(spellAbility));
         } else {
             spellAbility.setDescription("");
         }
