@@ -374,7 +374,7 @@ public class AbilityUtils {
         if (StringUtils.isBlank(amount)) { return 0; }
         if (card == null) { return 0; }
         final Player player = card.getController();
-        final Game game = player.getGame();
+        final Game game = player == null ? card.getGame() : player.getGame();
 
         // Strip and save sign for calculations
         final boolean startsWithPlus = amount.charAt(0) == '+';

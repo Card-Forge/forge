@@ -2103,9 +2103,9 @@ public class AiController {
         return filterList(list, CardTraitPredicates.hasParam("AiLogic", logic));
     }
 
-    public List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num, boolean allowRepeat) {
+    public List<AbilitySub> chooseModeForAbility(SpellAbility sa, List<AbilitySub> possible, int min, int num, boolean allowRepeat) {
         if (simPicker != null) {
-            return simPicker.chooseModeForAbility(sa, min, num, allowRepeat);
+            return simPicker.chooseModeForAbility(sa, possible, min, num, allowRepeat);
         }
         return null;
     }
