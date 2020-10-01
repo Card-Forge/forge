@@ -38,7 +38,7 @@ public class StoreSVarEffect extends SpellAbilityEffect {
         int value = 0;
 
         if (type.equals("Count")) {
-            value = CardFactoryUtil.xCount(source, expr);
+            value = AbilityUtils.xCount(source, expr, sa);
         }
         else if (type.equals("Number")) {
             value = Integer.valueOf(expr);
