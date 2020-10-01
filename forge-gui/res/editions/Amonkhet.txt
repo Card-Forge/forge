@@ -311,7 +311,7 @@ embalm_labyrinth_guardian
 embalm_oketra's_attendant
 embalm_sacred_cat
 embalm_tah-crop_skirmisher
-embalm_temmet,_vizier_of_naktamun
+embalm_temmet_vizier_of_naktamun
 embalm_trueheart_duelist
 embalm_unwavering_initiate
 embalm_vizier_of_many_faces
