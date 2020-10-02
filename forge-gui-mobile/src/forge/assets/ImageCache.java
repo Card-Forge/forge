@@ -111,7 +111,7 @@ public class ImageCache {
     public static void disposeTexture(){
         for (Texture t: cache.asMap().values()) {
             if (!t.toString().contains("pics/icons")) //fixes quest avatars black texture. todo: filter textures that are safe to dispose...
-                if(!t.toString().contains("com.badlogic.gdx.graphics.Texture@"))  //generated texture don't need to be disposed manually
+                if(!t.toString().contains("@"))  //generated texture don't need to be disposed manually
                     t.dispose();
         }
         CardRenderer.clearcardArtCache();
