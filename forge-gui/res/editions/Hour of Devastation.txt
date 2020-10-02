@@ -223,6 +223,15 @@ TreatAsSmallSet=true
 209 C Cinder Barrens
 
 [tokens]
+eternalize_adorned_pouncer
+eternalize_champion_of_wits
+eternalize_dreamstealer
+eternalize_earthshaker_khenra
+eternalize_proven_combatant
+eternalize_resilient_khenra
+eternalize_sinuous_striker
+eternalize_steadfast_sentinel
+eternalize_sunscourge_champion
 w_1_1_cat_lifelink
 w_5_5_horse
 w_1_1_warrior_vigilance

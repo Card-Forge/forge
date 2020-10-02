@@ -333,5 +333,6 @@ w_1_1_pegasus_flying
 w_1_1_spirit_flying
 w_3_3_bird_flying
 w_3_4_bird_flying
+embalm_angel_of_sanctions
+embalm_heart-piercer_manticore
 u_2_2_drake_flying
-

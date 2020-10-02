@@ -731,7 +731,8 @@ public class CardFactory {
                 String name = TextUtil.fastReplace(
                         TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
-                state.setImageKey(ImageKeys.getTokenKey("embalm_" + name));
+                String set = host.getSetCode().toLowerCase();
+                state.setImageKey(ImageKeys.getTokenKey("embalm_" + name + "_" + set));
             }
 
             if (sa.hasParam("Eternalize") && out.isEternalized()) {
@@ -744,7 +745,8 @@ public class CardFactory {
                 String name = TextUtil.fastReplace(
                     TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
-                state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name));
+                String set = host.getSetCode().toLowerCase();
+                state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
             }
 
             // set the host card for copied replacement effects
