@@ -699,6 +699,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             String desc = node.getDescription();
             if (node.getHostCard() != null) {
                 desc = TextUtil.fastReplace(desc, "CARDNAME", node.getHostCard().getName());
+                desc = TextUtil.fastReplace(desc,"NICKNAME",node.getHostCard().getName().split(",")[0]);
                 if (node.getOriginalHost() != null) {
                     desc = TextUtil.fastReplace(desc, "ORIGINALHOST", node.getOriginalHost().getName());
                 }

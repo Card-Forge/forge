@@ -150,7 +150,11 @@ public abstract class SpellAbilityEffect {
             if ("}".equals(t)) { isPlainText = true; continue; }
 
             if (isPlainText) {
-                sb.append(TextUtil.fastReplace(t, "CARDNAME", sa.getHostCard().getName()));
+                if(t.startsWith("NICKNAME")) {
+                    sb.append(TextUtil.fastReplace(t,"NICKNAME", sa.getHostCard().getName().split(",")[0]));
+                } else {
+                    sb.append(TextUtil.fastReplace(t, "CARDNAME", sa.getHostCard().getName()));
+                }
             } else {
                 final List<? extends GameObject> objs;
                 if (t.startsWith("p:")) {
