@@ -27,6 +27,7 @@ import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalCause;
 import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
+import forge.Forge;
 import forge.ImageKeys;
 import forge.card.CardEdition;
 import forge.card.CardRenderer;
@@ -235,7 +236,7 @@ public class ImageCache {
         }
     }
     public static void preloadCache(Deck deck) {
-        if(deck == null)
+        if(deck == null||!Forge.enablePreloadExtendedArt)
             return;
         for (PaperCard p : deck.getAllCardsInASinglePool().toFlatList()) {
             if (getImage(p.getImageKey(false),false) == null)
