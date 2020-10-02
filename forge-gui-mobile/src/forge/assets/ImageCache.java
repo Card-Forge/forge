@@ -108,6 +108,16 @@ public class ImageCache {
         missingIconKeys.clear();
     }
 
+    public static void disposeTexture(){
+        for (Texture t: cache.asMap().values()) {
+            if (!t.toString().contains("pics/icons")) //fixes quest avatars black texture. todo: filter textures that are safe to dispose...
+                if(!t.toString().contains("com.badlogic.gdx.graphics.Texture@"))  //generated texture don't need to be disposed manually
+                    t.dispose();
+        }
+        CardRenderer.clearcardArtCache();
+        clear();
+    }
+
     public static Texture getImage(InventoryItem ii) {
         return getImage(ii.getImageKey(false), true);
     }

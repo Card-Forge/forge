@@ -60,9 +60,19 @@ public class FButton extends FDisplayObject implements IButton {
     }
 
     private void resetImg() {
-        imgL = (hdbuttonskin() && FSkinImage.HDBTN_UP_LEFT != null) ? FSkinImage.HDBTN_UP_LEFT : FSkinImage.BTN_UP_LEFT;
-        imgM = (hdbuttonskin() && FSkinImage.HDBTN_UP_CENTER != null) ? FSkinImage.HDBTN_UP_CENTER : FSkinImage.BTN_UP_CENTER;
-        imgR = (hdbuttonskin() && FSkinImage.HDBTN_UP_RIGHT != null) ? FSkinImage.HDBTN_UP_RIGHT : FSkinImage.BTN_UP_RIGHT;
+        imgL = FSkinImage.BTN_UP_LEFT;
+        imgM = FSkinImage.BTN_UP_CENTER;
+        imgR = FSkinImage.BTN_UP_RIGHT;
+        if (hdbuttonskin())
+        {
+            imgL = FSkinImage.HDBTN_UP_LEFT;
+            imgM = FSkinImage.HDBTN_UP_CENTER;
+            imgR = FSkinImage.HDBTN_UP_RIGHT;
+        } else {
+            imgL = FSkinImage.BTN_UP_LEFT;
+            imgM = FSkinImage.BTN_UP_CENTER;
+            imgR = FSkinImage.BTN_UP_RIGHT;
+        }
     }
 
     public String getText() {
@@ -88,15 +98,25 @@ public class FButton extends FDisplayObject implements IButton {
             resetImg();
         }
         else {
-            imgL = (hdbuttonskin() && FSkinImage.HDBTN_UP_LEFT != null) ? FSkinImage.HDBTN_UP_LEFT : FSkinImage.BTN_UP_LEFT;
-            imgM = (hdbuttonskin() && FSkinImage.HDBTN_UP_CENTER != null) ? FSkinImage.HDBTN_UP_CENTER : FSkinImage.BTN_UP_CENTER;
-            imgR = (hdbuttonskin() && FSkinImage.HDBTN_UP_RIGHT != null) ? FSkinImage.HDBTN_UP_RIGHT : FSkinImage.BTN_UP_RIGHT;
+            imgL = FSkinImage.BTN_DISABLED_LEFT;
+            imgM = FSkinImage.BTN_DISABLED_CENTER;
+            imgR = FSkinImage.BTN_DISABLED_RIGHT;
+            if (hdbuttonskin())
+            {
+                imgL = FSkinImage.HDBTN_DISABLED_LEFT;
+                imgM = FSkinImage.HDBTN_DISABLED_CENTER;
+                imgR = FSkinImage.HDBTN_DISABLED_RIGHT;
+            } else {
+                imgL = FSkinImage.BTN_DISABLED_LEFT;
+                imgM = FSkinImage.BTN_DISABLED_CENTER;
+                imgR = FSkinImage.BTN_DISABLED_RIGHT;
+            }
         }
     }
 
-    /** 
+    /**
      * Button toggle state, for a "permanently pressed" functionality, e.g. as a tab.
-     * 
+     *
      * @return boolean
      */
     public boolean isToggled() {
@@ -107,17 +127,37 @@ public class FButton extends FDisplayObject implements IButton {
         toggled = b0;
 
         if (toggled) {
-            imgL = (hdbuttonskin() && FSkinImage.HDBTN_UP_LEFT != null) ? FSkinImage.HDBTN_UP_LEFT : FSkinImage.BTN_UP_LEFT;
-            imgM = (hdbuttonskin() && FSkinImage.HDBTN_UP_CENTER != null) ? FSkinImage.HDBTN_UP_CENTER : FSkinImage.BTN_UP_CENTER;
-            imgR = (hdbuttonskin() && FSkinImage.HDBTN_UP_RIGHT != null) ? FSkinImage.HDBTN_UP_RIGHT : FSkinImage.BTN_UP_RIGHT;
+            imgL = FSkinImage.BTN_TOGGLE_LEFT;
+            imgM = FSkinImage.BTN_TOGGLE_CENTER;
+            imgR = FSkinImage.BTN_TOGGLE_RIGHT;
+            if (hdbuttonskin())
+            {
+                imgL = FSkinImage.HDBTN_TOGGLE_LEFT;
+                imgM = FSkinImage.HDBTN_TOGGLE_CENTER;
+                imgR = FSkinImage.HDBTN_TOGGLE_RIGHT;
+            } else {
+                imgL = FSkinImage.BTN_TOGGLE_LEFT;
+                imgM = FSkinImage.BTN_TOGGLE_CENTER;
+                imgR = FSkinImage.BTN_TOGGLE_RIGHT;
+            }
         }
         else if (isEnabled()) {
             resetImg();
         }
         else {
-            imgL = (hdbuttonskin() && FSkinImage.HDBTN_UP_LEFT != null) ? FSkinImage.HDBTN_UP_LEFT : FSkinImage.BTN_UP_LEFT;
-            imgM = (hdbuttonskin() && FSkinImage.HDBTN_UP_CENTER != null) ? FSkinImage.HDBTN_UP_CENTER : FSkinImage.BTN_UP_CENTER;
-            imgR = (hdbuttonskin() && FSkinImage.HDBTN_UP_RIGHT != null) ? FSkinImage.HDBTN_UP_RIGHT : FSkinImage.BTN_UP_RIGHT;
+            imgL = FSkinImage.BTN_DISABLED_LEFT;
+            imgM = FSkinImage.BTN_DISABLED_CENTER;
+            imgR = FSkinImage.BTN_DISABLED_RIGHT;
+            if (hdbuttonskin())
+            {
+                imgL = FSkinImage.HDBTN_DISABLED_LEFT;
+                imgM = FSkinImage.HDBTN_DISABLED_CENTER;
+                imgR = FSkinImage.HDBTN_DISABLED_RIGHT;
+            } else {
+                imgL = FSkinImage.BTN_DISABLED_LEFT;
+                imgM = FSkinImage.BTN_DISABLED_CENTER;
+                imgR = FSkinImage.BTN_DISABLED_RIGHT;
+            }
         }
     }
 
@@ -142,10 +182,20 @@ public class FButton extends FDisplayObject implements IButton {
     @Override
     public final boolean press(float x, float y) {
         if (isToggled()) { return true; }
+        imgL = FSkinImage.BTN_DOWN_LEFT;
+        imgM = FSkinImage.BTN_DOWN_CENTER;
+        imgR = FSkinImage.BTN_DOWN_RIGHT;
 
-        imgL = (hdbuttonskin() && FSkinImage.HDBTN_UP_LEFT != null) ? FSkinImage.HDBTN_UP_LEFT : FSkinImage.BTN_UP_LEFT;
-        imgM = (hdbuttonskin() && FSkinImage.HDBTN_UP_CENTER != null) ? FSkinImage.HDBTN_UP_CENTER : FSkinImage.BTN_UP_CENTER;
-        imgR = (hdbuttonskin() && FSkinImage.HDBTN_UP_RIGHT != null) ? FSkinImage.HDBTN_UP_RIGHT : FSkinImage.BTN_UP_RIGHT;
+        if (hdbuttonskin())
+        {
+            imgL = FSkinImage.HDBTN_DOWN_LEFT;
+            imgM = FSkinImage.HDBTN_DOWN_CENTER;
+            imgR = FSkinImage.HDBTN_DOWN_RIGHT;
+        } else {
+            imgL = FSkinImage.BTN_DOWN_LEFT;
+            imgM = FSkinImage.BTN_DOWN_CENTER;
+            imgR = FSkinImage.BTN_DOWN_RIGHT;
+        }
 
         return true;
     }
@@ -192,51 +242,51 @@ public class FButton extends FDisplayObject implements IButton {
         else {
             //determine images to draw and text alignment based on which corner button is in (if any)
             switch (corner) {
-            case None:
-                if (w > 2 * h) {
-                    g.drawImage(imgL, 0, 0, h, h);
-                    g.drawImage(imgM, h, 0, w - (2 * h), h);
-                    g.drawImage(imgR, w - h, 0, h, h);
-                }
-                else {
-                    g.drawImage(imgL, 0, 0, cornerButtonWidth, h);
-                    g.drawImage(imgR, cornerButtonWidth, 0, w - cornerButtonWidth, h);
-                }
-                x += PADDING;
-                w -= 2 * PADDING;
-                break;
-            case BottomLeft:
-                g.startClip(x, y, w, h);
-                g.drawImage(imgM, 0, 0, cornerButtonWidth, cornerButtonHeight);
-                g.drawImage(imgR, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
-                g.endClip();
-                w -= cornerTextOffsetX;
-                y += cornerTextOffsetY;
-                h -= cornerTextOffsetY;
-                break;
-            case BottomRight:
-                g.startClip(x, y, w, h);
-                g.drawImage(imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
-                g.drawImage(imgM, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
-                g.endClip();
-                x += cornerTextOffsetX;
-                w -= cornerTextOffsetX;
-                y += cornerTextOffsetY;
-                h -= cornerTextOffsetY;
-                break;
-            case BottomMiddle:
-                g.startClip(x, y, w, h);
-                cornerButtonWidth = w / 3;
-                cornerTextOffsetX = cornerButtonWidth / 2;
-                g.drawImage(imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
-                g.drawImage(imgM, cornerButtonWidth, 0, w - 2 * cornerButtonWidth, cornerButtonHeight);
-                g.drawImage(imgR, w - cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
-                g.endClip();
-                x += cornerTextOffsetX / 2;
-                w -= cornerTextOffsetX;
-                y += cornerTextOffsetY;
-                h -= cornerTextOffsetY;
-                break;
+                case None:
+                    if (w > 2 * h) {
+                        g.drawImage(imgL, 0, 0, h, h);
+                        g.drawImage(imgM, h, 0, w - (2 * h), h);
+                        g.drawImage(imgR, w - h, 0, h, h);
+                    }
+                    else {
+                        g.drawImage(imgL, 0, 0, cornerButtonWidth, h);
+                        g.drawImage(imgR, cornerButtonWidth, 0, w - cornerButtonWidth, h);
+                    }
+                    x += PADDING;
+                    w -= 2 * PADDING;
+                    break;
+                case BottomLeft:
+                    g.startClip(x, y, w, h);
+                    g.drawImage(imgM, 0, 0, cornerButtonWidth, cornerButtonHeight);
+                    g.drawImage(imgR, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
+                    g.endClip();
+                    w -= cornerTextOffsetX;
+                    y += cornerTextOffsetY;
+                    h -= cornerTextOffsetY;
+                    break;
+                case BottomRight:
+                    g.startClip(x, y, w, h);
+                    g.drawImage(imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
+                    g.drawImage(imgM, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
+                    g.endClip();
+                    x += cornerTextOffsetX;
+                    w -= cornerTextOffsetX;
+                    y += cornerTextOffsetY;
+                    h -= cornerTextOffsetY;
+                    break;
+                case BottomMiddle:
+                    g.startClip(x, y, w, h);
+                    cornerButtonWidth = w / 3;
+                    cornerTextOffsetX = cornerButtonWidth / 2;
+                    g.drawImage(imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
+                    g.drawImage(imgM, cornerButtonWidth, 0, w - 2 * cornerButtonWidth, cornerButtonHeight);
+                    g.drawImage(imgR, w - cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
+                    g.endClip();
+                    x += cornerTextOffsetX / 2;
+                    w -= cornerTextOffsetX;
+                    y += cornerTextOffsetY;
+                    h -= cornerTextOffsetY;
+                    break;
             }
         }
 
@@ -262,9 +312,9 @@ public class FButton extends FDisplayObject implements IButton {
     @Override
     public boolean keyDown(int keyCode) {
         switch (keyCode) {
-        case Keys.ENTER:
-        case Keys.SPACE:
-            return trigger(); //trigger button on Enter or Space
+            case Keys.ENTER:
+            case Keys.SPACE:
+                return trigger(); //trigger button on Enter or Space
         }
         return false;
     }
