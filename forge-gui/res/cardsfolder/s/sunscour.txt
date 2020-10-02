@@ -1,7 +1,7 @@
 Name:Sunscour
 ManaCost:5 W W
 Types:Sorcery
-SVar:AltCost:Cost$ ExileFromHand<2/Card.White+Other/white cards> | Description$ You may exile two white cards from your hand rather than pay CARDNAME's mana cost.
+SVar:AltCost:Cost$ ExileFromHand<2/Card.White+Other> | Description$ You may exile two white cards from your hand rather than pay this spell's mana cost.
 A:SP$ DestroyAll | Cost$ 5 W W | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
 AI:RemoveDeck:Random
-Oracle:You may exile two white cards from your hand rather than pay Sunscour's mana cost.\nDestroy all creatures.
+Oracle:You may exile two white cards from your hand rather than pay this spell's mana cost.\nDestroy all creatures.

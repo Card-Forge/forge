@@ -1,7 +1,7 @@
 Name:Ricochet Trap
 ManaCost:3 R
 Types:Instant Trap
-SVar:AltCost:Cost$ R | CheckSVar$ X | References$ X | SVarCompare$ GE1 | StackDescription$ Description | Description$ If an opponent cast a blue spell this turn, you may pay {R} rather than pay CARDNAME's mana cost.
+SVar:AltCost:Cost$ R | CheckSVar$ X | References$ X | SVarCompare$ GE1 | StackDescription$ Description | Description$ If an opponent cast a blue spell this turn, you may pay {R} rather than pay this spell's mana cost.
 A:SP$ ChangeTargets | Cost$ 3 R | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell with a single target | TargetsSingleTarget$ True | StackDescription$ SpellDescription | SpellDescription$ Change the target of target spell with a single target.
 SVar:X:Count$ThisTurnCast_Card.Blue+OppCtrl
-Oracle:If an opponent cast a blue spell this turn, you may pay {R} rather than pay Ricochet Trap's mana cost.\nChange the target of target spell with a single target.
+Oracle:If an opponent cast a blue spell this turn, you may pay {R} rather than pay this spell's mana cost.\nChange the target of target spell with a single target.
