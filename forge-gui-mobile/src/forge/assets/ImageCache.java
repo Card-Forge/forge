@@ -30,20 +30,23 @@ import com.google.common.cache.RemovalNotification;
 import forge.ImageKeys;
 import forge.card.CardEdition;
 import forge.card.CardRenderer;
+import forge.deck.Deck;
 import forge.game.card.CardView;
 import forge.game.player.IHasIcon;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -73,6 +76,7 @@ public class ImageCache {
                     if(removalNotification.wasEvicted()||removalNotification.getCause() == RemovalCause.EXPIRED) {
                         removalNotification.getValue().dispose();
                     }
+                    CardRenderer.clearcardArtCache();
                 }
             })
             .build(new ImageLoader());
@@ -104,15 +108,6 @@ public class ImageCache {
         missingIconKeys.clear();
     }
 
-    public static void disposeTexture(){
-        for (Texture t: cache.asMap().values()) {
-            if (!t.toString().contains("pics/icons")) //fixes quest avatars black texture. todo: filter textures that are safe to dispose...
-                t.dispose();
-        }
-        CardRenderer.clearcardArtCache();
-        clear();
-    }
-
     public static Texture getImage(InventoryItem ii) {
         return getImage(ii.getImageKey(false), true);
     }
@@ -129,6 +124,39 @@ public class ImageCache {
             return FSkinImage.UNKNOWN;
         }
         return new FTextureImage(icon);
+    }
+
+    /**
+     * checks the card image exists from the disk.
+     */
+    public static boolean imageKeyFileExists(String imageKey) {
+        if (StringUtils.isEmpty(imageKey))
+            return false;
+
+        if (imageKey.length() < 2)
+            return false;
+
+        final String prefix = imageKey.substring(0, 2);
+
+        if (prefix.equals(ImageKeys.CARD_PREFIX)) {
+            PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
+            if (paperCard == null)
+                return false;
+
+            final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
+            final String cardfilename = ImageUtil.getImageKey(paperCard, backFace, true);
+            if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + cardfilename + ".jpg").exists())
+                if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + cardfilename + ".png").exists())
+                    if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + TextUtil.fastReplace(cardfilename,".full", ".fullborder") + ".jpg").exists())
+                        return false;
+        } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
+            final String tokenfilename = imageKey.substring(2) + ".jpg";
+
+            if (!new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, tokenfilename).exists())
+                return false;
+        }
+
+        return true;
     }
 
     /**
@@ -191,11 +219,19 @@ public class ImageCache {
         return image;
     }
     public static void preloadCache(Iterable<String> keys) {
-        try {
-            cache.getAll(keys);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        for (String imageKey : keys){
+            if(getImage(imageKey, false) == null)
+                System.err.println("could not load card image:"+imageKey);
         }
+    }
+    public static void preloadCache(Deck deck) {
+        if(deck == null)
+            return;
+        for (PaperCard p : deck.getAllCardsInASinglePool().toFlatList()) {
+            if (getImage(p.getImageKey(false),false) == null)
+                System.err.println("could not load card image:"+p.toString());
+        }
+
     }
     public static TextureRegion croppedBorderImage(Texture image) {
         if (!image.toString().contains(".fullborder."))

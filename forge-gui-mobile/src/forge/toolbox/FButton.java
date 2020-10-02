@@ -60,16 +60,9 @@ public class FButton extends FDisplayObject implements IButton {
     }
 
     private void resetImg() {
-        if (hdbuttonskin())
-        {
-            imgL = FSkinImage.HDBTN_UP_LEFT;
-            imgM = FSkinImage.HDBTN_UP_CENTER;
-            imgR = FSkinImage.HDBTN_UP_RIGHT;
-        } else {
-            imgL = FSkinImage.BTN_UP_LEFT;
-            imgM = FSkinImage.BTN_UP_CENTER;
-            imgR = FSkinImage.BTN_UP_RIGHT;
-        }
+        imgL = (hdbuttonskin() && FSkinImage.HDBTN_UP_LEFT != null) ? FSkinImage.HDBTN_UP_LEFT : FSkinImage.BTN_UP_LEFT;
+        imgM = (hdbuttonskin() && FSkinImage.HDBTN_UP_CENTER != null) ? FSkinImage.HDBTN_UP_CENTER : FSkinImage.BTN_UP_CENTER;
+        imgR = (hdbuttonskin() && FSkinImage.HDBTN_UP_RIGHT != null) ? FSkinImage.HDBTN_UP_RIGHT : FSkinImage.BTN_UP_RIGHT;
     }
 
     public String getText() {
@@ -95,16 +88,9 @@ public class FButton extends FDisplayObject implements IButton {
             resetImg();
         }
         else {
-            if (hdbuttonskin())
-            {
-                imgL = FSkinImage.HDBTN_DISABLED_LEFT;
-                imgM = FSkinImage.HDBTN_DISABLED_CENTER;
-                imgR = FSkinImage.HDBTN_DISABLED_RIGHT;
-            } else {
-                imgL = FSkinImage.BTN_DISABLED_LEFT;
-                imgM = FSkinImage.BTN_DISABLED_CENTER;
-                imgR = FSkinImage.BTN_DISABLED_RIGHT;
-            }
+            imgL = (hdbuttonskin() && FSkinImage.HDBTN_UP_LEFT != null) ? FSkinImage.HDBTN_UP_LEFT : FSkinImage.BTN_UP_LEFT;
+            imgM = (hdbuttonskin() && FSkinImage.HDBTN_UP_CENTER != null) ? FSkinImage.HDBTN_UP_CENTER : FSkinImage.BTN_UP_CENTER;
+            imgR = (hdbuttonskin() && FSkinImage.HDBTN_UP_RIGHT != null) ? FSkinImage.HDBTN_UP_RIGHT : FSkinImage.BTN_UP_RIGHT;
         }
     }
 
@@ -121,31 +107,17 @@ public class FButton extends FDisplayObject implements IButton {
         toggled = b0;
 
         if (toggled) {
-            if (hdbuttonskin())
-            {
-                imgL = FSkinImage.HDBTN_TOGGLE_LEFT;
-                imgM = FSkinImage.HDBTN_TOGGLE_CENTER;
-                imgR = FSkinImage.HDBTN_TOGGLE_RIGHT;
-            } else {
-                imgL = FSkinImage.BTN_TOGGLE_LEFT;
-                imgM = FSkinImage.BTN_TOGGLE_CENTER;
-                imgR = FSkinImage.BTN_TOGGLE_RIGHT;
-            }
+            imgL = (hdbuttonskin() && FSkinImage.HDBTN_UP_LEFT != null) ? FSkinImage.HDBTN_UP_LEFT : FSkinImage.BTN_UP_LEFT;
+            imgM = (hdbuttonskin() && FSkinImage.HDBTN_UP_CENTER != null) ? FSkinImage.HDBTN_UP_CENTER : FSkinImage.BTN_UP_CENTER;
+            imgR = (hdbuttonskin() && FSkinImage.HDBTN_UP_RIGHT != null) ? FSkinImage.HDBTN_UP_RIGHT : FSkinImage.BTN_UP_RIGHT;
         }
         else if (isEnabled()) {
             resetImg();
         }
         else {
-            if (hdbuttonskin())
-            {
-                imgL = FSkinImage.HDBTN_DISABLED_LEFT;
-                imgM = FSkinImage.HDBTN_DISABLED_CENTER;
-                imgR = FSkinImage.HDBTN_DISABLED_RIGHT;
-            } else {
-                imgL = FSkinImage.BTN_DISABLED_LEFT;
-                imgM = FSkinImage.BTN_DISABLED_CENTER;
-                imgR = FSkinImage.BTN_DISABLED_RIGHT;
-            }
+            imgL = (hdbuttonskin() && FSkinImage.HDBTN_UP_LEFT != null) ? FSkinImage.HDBTN_UP_LEFT : FSkinImage.BTN_UP_LEFT;
+            imgM = (hdbuttonskin() && FSkinImage.HDBTN_UP_CENTER != null) ? FSkinImage.HDBTN_UP_CENTER : FSkinImage.BTN_UP_CENTER;
+            imgR = (hdbuttonskin() && FSkinImage.HDBTN_UP_RIGHT != null) ? FSkinImage.HDBTN_UP_RIGHT : FSkinImage.BTN_UP_RIGHT;
         }
     }
 
@@ -171,16 +143,9 @@ public class FButton extends FDisplayObject implements IButton {
     public final boolean press(float x, float y) {
         if (isToggled()) { return true; }
 
-        if (hdbuttonskin())
-        {
-            imgL = FSkinImage.HDBTN_DOWN_LEFT;
-            imgM = FSkinImage.HDBTN_DOWN_CENTER;
-            imgR = FSkinImage.HDBTN_DOWN_RIGHT;
-        } else {
-            imgL = FSkinImage.BTN_DOWN_LEFT;
-            imgM = FSkinImage.BTN_DOWN_CENTER;
-            imgR = FSkinImage.BTN_DOWN_RIGHT;
-        }
+        imgL = (hdbuttonskin() && FSkinImage.HDBTN_UP_LEFT != null) ? FSkinImage.HDBTN_UP_LEFT : FSkinImage.BTN_UP_LEFT;
+        imgM = (hdbuttonskin() && FSkinImage.HDBTN_UP_CENTER != null) ? FSkinImage.HDBTN_UP_CENTER : FSkinImage.BTN_UP_CENTER;
+        imgR = (hdbuttonskin() && FSkinImage.HDBTN_UP_RIGHT != null) ? FSkinImage.HDBTN_UP_RIGHT : FSkinImage.BTN_UP_RIGHT;
 
         return true;
     }

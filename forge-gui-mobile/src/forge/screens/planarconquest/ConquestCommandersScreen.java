@@ -10,6 +10,7 @@ import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.ImageCache;
 import forge.card.CardFaceSymbols;
 import forge.card.CardRenderer;
 import forge.card.ColorSet;
@@ -76,6 +77,8 @@ public class ConquestCommandersScreen extends FScreen {
             public void handleEvent(FEvent e) {
                 final ConquestCommander commander = lstCommanders.getSelectedItem();
                 if (commander != null) {
+                    /*preload deck to cache*/
+                    ImageCache.preloadCache(commander.getDeck());
                     preventRefreshOnActivate = true; //refresh not needed since deck changes won't affect commander display
                     Forge.openScreen(new ConquestDeckEditor(commander));
                 }

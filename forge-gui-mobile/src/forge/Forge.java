@@ -70,6 +70,7 @@ public class Forge implements ApplicationListener {
     public static boolean hdbuttons = false;
     public static boolean hdstart = false;
     public static boolean isPortraitMode = false;
+    public static boolean gameInProgress = false;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation) {
         if (GuiBase.getInterface() == null) {
@@ -159,12 +160,12 @@ public class Forge implements ApplicationListener {
     private void preloadExtendedArt() {
         if (!enablePreloadExtendedArt)
             return;
-        List<String> BorderlessCardlistkeys = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
-        if(BorderlessCardlistkeys.isEmpty())
+        List<String> borderlessCardlistkeys = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
+        if(borderlessCardlistkeys.isEmpty())
             return;
         List<String> filteredkeys = new ArrayList<>();
-        for (String cardname : BorderlessCardlistkeys){
-            File image = new File(ForgeConstants.CACHE_CARD_PICS_DIR+"/"+cardname+".jpg");
+        for (String cardname : borderlessCardlistkeys){
+            File image = new File(ForgeConstants.CACHE_CARD_PICS_DIR+ForgeConstants.PATH_SEPARATOR+cardname+".jpg");
             if (image.exists())
                 filteredkeys.add(cardname);
         }
@@ -393,18 +394,14 @@ public class Forge implements ApplicationListener {
     }
 
     private static void setCurrentScreen(FScreen screen0) {
+        String toNewScreen = screen0 != null ? screen0.toString() : "";
+        String previousScreen = currentScreen != null ? currentScreen.toString() : "";
+
+        gameInProgress = toNewScreen.toLowerCase().contains("match") || previousScreen.toLowerCase().contains("match");
+
         try {
             endKeyInput(); //end key input before switching screens
             ForgeAnimation.endAll(); //end all active animations before switching screens
-            try {
-                ImageCache.disposeTexture();
-            }
-            catch (Exception ex)
-            {
-                // FIXME: This isn't supposed to be necessary, but disposeTexture crashes e.g. in Quest Tournaments on mobile, needs proper fixing.
-                System.err.println("Warning: caught an exception while trying to call ImageCache.disposeTexture() in setCurrentScreen.");
-            }
-
             currentScreen = screen0;
             currentScreen.setSize(screenWidth, screenHeight);
             currentScreen.onActivate();

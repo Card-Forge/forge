@@ -275,6 +275,20 @@ public class FSkin {
                     }
                 }
                 pxPreferredAvatars.dispose();
+            } else if (!FSkin.preferredName.isEmpty()){
+                //workaround bug crash fix if missing sprite avatar on preferred theme for quest tournament...
+                //i really don't know why it needs to populate the avatars twice.... needs investigation
+                final int pw = pxDefaultAvatars.getWidth();
+                final int ph = pxDefaultAvatars.getHeight();
+
+                for (int j = 0; j < ph; j += 100) {
+                    for (int i = 0; i < pw; i += 100) {
+                        if (i == 0 && j == 0) { continue; }
+                        pxTest = new Color(pxDefaultAvatars.getPixel(i + 50, j + 50));
+                        if (pxTest.a == 0) { continue; }
+                        FSkin.avatars.put(counter++, new TextureRegion(txDefaultAvatars, i, j, 100, 100));
+                    }
+                }
             }
 
             final int aw = pxDefaultAvatars.getWidth();
