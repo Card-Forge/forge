@@ -2,7 +2,7 @@ Name:Negan, the Cold-Blooded
 ManaCost:2 R W B
 Types:Legendary Creature Human Rogue
 PT:4/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTgtOpp | TriggerDescription$ When CARDNAME enters the battlefield, you and target opponent each secretly choose a creature that player controls. Then those choices are revealed, and that player sacrifices those creatures.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTgtOpp | TriggerDescription$ When NICKNAME enters the battlefield, you and target opponent each secretly choose a creature that player controls. Then those choices are revealed, and that player sacrifices those creatures.
 SVar:TrigTgtOpp:DB$ Pump | ValidTgts$ Player | TgtPrompt$ Select target opponent | IsCurse$ True | RememberTargets$ True | SubAbility$ DBYouChoose
 SVar:DBYouChoose:DB$ ChooseCard | Defined$ You | Amount$ 1 | Mandatory$ True | Choices$ Creature.RememberedPlayerCtrl | RememberChosen$ True | SubAbility$ DBOppChoose
 SVar:DBOppChoose:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Mandatory$ True | Choices$ Creature.RememberedPlayerCtrl | SubAbility$ DBReveal
