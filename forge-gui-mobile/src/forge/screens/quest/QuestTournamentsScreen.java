@@ -9,6 +9,7 @@ import forge.GuiBase;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.assets.ImageCache;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -241,6 +242,8 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     public void editDeck(boolean isExistingDeck) {
         Deck deck = getDeck();
         if (deck != null) {
+            /*preload deck to cache*/
+            ImageCache.preloadCache(deck);
             if (isExistingDeck) {
                 Forge.openScreen(new QuestDraftDeckEditor(deck.getName()));
             }

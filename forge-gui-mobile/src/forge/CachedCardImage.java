@@ -27,8 +27,7 @@ public abstract class CachedCardImage implements ImageFetcher.Callback {
     }
 
     public void fetch() {
-        Texture image = ImageCache.getImage(key, false);
-        if (image == null) {
+        if (!ImageCache.imageKeyFileExists(key)) {
             fetcher.fetchImage(key, this);
         }
     }
