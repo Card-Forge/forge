@@ -116,6 +116,11 @@ public class CardState extends GameObject {
             view.updateType(this);
         }
     }
+    public final void addType(Iterable<String> type0) {
+        if (type.addAll(type0)) {
+            view.updateType(this);
+        }
+    }
     public final void setType(final CardType type0) {
         if (type0 == type) {
             // Logic below would incorrectly clear the type if it's the same object.

@@ -26,7 +26,6 @@ import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
 import forge.card.CardDb.SetPreference;
-import forge.card.CardType.CoreType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.*;
@@ -3098,6 +3097,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         currentState.addType(type0);
     }
 
+    public final void addType(final Iterable<String> type0) {
+        currentState.addType(type0);
+    }
+
     public final void removeType(final CardType.Supertype st) {
         currentState.removeType(st);
     }
@@ -4601,82 +4604,32 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (c1 == null) {
             return false;
         }
-
-        for (final String type : getType().getCreatureTypes()) {
-            if (type.equals("AllCreatureTypes") && c1.hasACreatureType()) {
-                return true;
-            }
-            if (c1.getType().hasCreatureType(type)) {
-                return true;
-            }
-        }
-        return false;
+        return getType().sharesCreaturetypeWith(c1.getType());
     }
 
     public final boolean sharesLandTypeWith(final Card c1) {
         if (c1 == null) {
             return false;
         }
-
-        for (final String type : getType().getLandTypes()) {
-            if (c1.getType().hasSubtype(type)) {
-                return true;
-            }
-        }
-        return false;
+        return getType().sharesLandTypeWith(c1.getType());
     }
 
     public final boolean sharesPermanentTypeWith(final Card c1) {
         if (c1 == null) {
             return false;
         }
-
-        for (final CoreType type : getType().getCoreTypes()) {
-            if (type.isPermanent && c1.getType().hasType(type)) {
-                return true;
-            }
-        }
-        return false;
+        return getType().sharesPermanentTypeWith(c1.getType());
     }
 
     public final boolean sharesCardTypeWith(final Card c1) {
-        for (final CoreType type : getType().getCoreTypes()) {
-            if (c1.getType().hasType(type)) {
-                return true;
-            }
+        if (c1 == null) {
+            return false;
         }
-        return false;
-    }
-
-    public final boolean sharesTypeWith(final Card c1) {
-        for (final String type : getType()) {
-            if (c1.getType().hasStringType(type)) {
-                return true;
-            }
-        }
-        return false;
+        return getType().sharesCardTypeWith(c1.getType());
     }
 
     public final boolean sharesControllerWith(final Card c1) {
         return c1 != null && getController().equals(c1.getController());
-    }
-
-    public final boolean hasACreatureType() {
-        for (final String type : getType().getSubtypes()) {
-            if (forge.card.CardType.isACreatureType(type) ||  type.equals("AllCreatureTypes")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public final boolean hasALandType() {
-        for (final String type : getType().getSubtypes()) {
-            if (forge.card.CardType.isALandType(type) || forge.card.CardType.isABasicLandType(type)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public final boolean hasABasicLandType() {

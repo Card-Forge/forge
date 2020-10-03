@@ -37,6 +37,7 @@ import forge.util.collect.FCollectionView;
 import forge.util.Localizer;
 import forge.util.CardTranslation;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -1179,9 +1180,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
 
                     if (sa.hasParam("FaceDownAddType")) {
-                        for (String type : sa.getParam("FaceDownAddType").split(",")) {
-                            c.addType(type);
-                        }
+                        c.addType(Arrays.asList(sa.getParam("FaceDownAddType").split(" & ")));
                     }
 
                     if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
