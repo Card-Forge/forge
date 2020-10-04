@@ -1,7 +1,6 @@
 Name:Cave-In
 ManaCost:3 R R
 Types:Sorcery
+SVar:AltCost:Cost$ ExileFromHand<1/Card.Red+Other> | Description$ You may exile a red card from your hand rather than pay this spell's mana cost.
 A:SP$ DamageAll | Cost$ 3 R R | NumDmg$ 2 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 2 damage to each creature and each player.
-SVar:AltCost:Cost$ ExileFromHand<1/Card.Red> | Description$ You may exile a red card from your hand rather than pay Cave-In's mana cost.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cave_in.jpg
 Oracle:You may exile a red card from your hand rather than pay this spell's mana cost.\nCave-In deals 2 damage to each creature and each player.

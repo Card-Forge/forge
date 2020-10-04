@@ -4685,8 +4685,10 @@ public class CardFactoryUtil {
         }
         altCostSA.setRestrictions(restriction);
 
-        final String costDescription = params.containsKey("Description") ? params.get("Description")
-                : TextUtil.concatWithSpace("You may", abCost.toStringAlt(),"rather than pay", TextUtil.addSuffix(card.getName(),"'s mana cost."));
+        String costDescription = TextUtil.fastReplace(params.get("Description"),"CARDNAME", card.getName());
+        if (costDescription.isEmpty()) {
+            costDescription = TextUtil.concatWithSpace("You may", abCost.toStringAlt(), "rather than pay", TextUtil.addSuffix(card.getName(), "'s mana cost."));
+        }
 
         altCostSA.setDescription(costDescription);
         if (params.containsKey("References")) {
