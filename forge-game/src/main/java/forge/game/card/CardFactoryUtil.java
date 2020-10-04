@@ -1116,7 +1116,7 @@ public class CardFactoryUtil {
             for (Card card : cards) {
                 Iterables.addAll(creatTypes, card.getType().getCreatureTypes());
             }
-            int n = creatTypes.contains("AllCreatureTypes") ? CardType.getAllCreatureTypes().size() : creatTypes.size();
+            int n = creatTypes.contains(CardType.AllCreatureTypes) ? CardType.getAllCreatureTypes().size() : creatTypes.size();
             return doXMath(n, m, c);
         }
 
@@ -1198,7 +1198,7 @@ public class CardFactoryUtil {
             // Figure out how to count each class separately.
             for (Card card : adventurers) {
                 Set<String> creatureTypes = card.getType().getCreatureTypes();
-                boolean anyType = creatureTypes.contains("AllCreatureTypes");
+                boolean anyType = creatureTypes.contains(CardType.AllCreatureTypes);
                 creatureTypes.retainAll(partyTypes);
 
                 if (anyType || creatureTypes.size() == 4) {
@@ -1997,7 +1997,7 @@ public class CardFactoryUtil {
             // Remove Duplicated types
             final Set<String> creatureTypes = c.getType().getCreatureTypes();
             for (String creatureType : creatureTypes) {
-                if (creatureType.equals("AllCreatureTypes")) {
+                if (creatureType.equals(CardType.AllCreatureTypes)) {
                     allCreatureType++;
                 }
                 else {

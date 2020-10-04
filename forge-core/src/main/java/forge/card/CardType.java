@@ -52,6 +52,8 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     public static final CardTypeView EMPTY = new CardType();
 
+    public static final String AllCreatureTypes = "AllCreatureTypes";
+
     public enum CoreType {
         Artifact(true),
         Conspiracy(false),
@@ -152,6 +154,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 changed = true;
             }
         }
+        sanisfySubtypes();
         return changed;
     }
     public boolean addAll(final CardType type) {
@@ -159,6 +162,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (coreTypes.addAll(type.coreTypes)) { changed = true; }
         if (supertypes.addAll(type.supertypes)) { changed = true; }
         if (subtypes.addAll(type.subtypes)) { changed = true; }
+        sanisfySubtypes();
         return changed;
     }
     public boolean addAll(final CardTypeView type) {
@@ -166,6 +170,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (Iterables.addAll(coreTypes, type.getCoreTypes())) { changed = true; }
         if (Iterables.addAll(supertypes, type.getSupertypes())) { changed = true; }
         if (Iterables.addAll(subtypes, type.getSubtypes())) { changed = true; }
+        sanisfySubtypes();
         return changed;
     }
 
@@ -175,6 +180,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (supertypes.removeAll(type.supertypes)) { changed = true; }
         if (subtypes.removeAll(type.subtypes)) { changed = true; }
         if (changed) {
+            sanisfySubtypes();
             calculatedType = null;
             return true;
         }
@@ -211,6 +217,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         }
 
         if (changed) {
+            sanisfySubtypes();
             calculatedType = null;
         }
         return changed;
@@ -223,7 +230,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         }
         boolean changed = Iterables.removeIf(subtypes, Predicates.IS_CREATURE_TYPE);
         // need to remove AllCreatureTypes too when setting Creature Type
-        if (subtypes.remove("AllCreatureTypes")) {
+        if (subtypes.remove(AllCreatureTypes)) {
             changed = true;
         }
         subtypes.addAll(ctypes);
@@ -252,7 +259,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         final Set<String> creatureTypes = Sets.newHashSet();
         if (isCreature() || isTribal()) {
             for (final String t : subtypes) {
-                if (isACreatureType(t) || t.equals("AllCreatureTypes")) {
+                if (isACreatureType(t) || t.equals(AllCreatureTypes)) {
                     creatureTypes.add(t);
                 }
             }
@@ -302,7 +309,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
     @Override
     public boolean hasSubtype(final String subtype) {
-        if (isACreatureType(subtype) && subtypes.contains("AllCreatureTypes")) {
+        if (isACreatureType(subtype) && subtypes.contains(AllCreatureTypes)) {
             return true;
         }
         return subtypes.contains(subtype);
@@ -315,7 +322,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         creatureType = toMixedCase(creatureType);
         if (!isACreatureType(creatureType)) { return false; }
 
-        return subtypes.contains(creatureType) || subtypes.contains("AllCreatureTypes");
+        return subtypes.contains(creatureType) || subtypes.contains(AllCreatureTypes);
     }
     private static String toMixedCase(final String s) {
         if (s.isEmpty()) {
@@ -485,7 +492,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 if (ct.isRemoveCreatureTypes()) {
                     Iterables.removeIf(newType.subtypes, Predicates.IS_CREATURE_TYPE);
                     // need to remove AllCreatureTypes too when removing creature Types
-                    newType.subtypes.remove("AllCreatureTypes");
+                    newType.subtypes.remove(AllCreatureTypes);
                 }
                 if (ct.isRemoveArtifactTypes()) {
                     Iterables.removeIf(newType.subtypes, Predicates.IS_ARTIFACT_TYPE);
@@ -503,27 +510,31 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         }
         // sanisfy subtypes
         if (newType != null && !newType.subtypes.isEmpty()) {
-            if (!newType.isCreature() && !newType.isTribal()) {
-                Iterables.removeIf(newType.subtypes, Predicates.IS_CREATURE_TYPE);
-                newType.subtypes.remove("AllCreatureTypes");
-            }
-            if (!newType.isLand()) {
-                Iterables.removeIf(newType.subtypes, Predicates.IS_LAND_TYPE);
-            }
-            if (!newType.isArtifact()) {
-                Iterables.removeIf(newType.subtypes, Predicates.IS_ARTIFACT_TYPE);
-            }
-            if (!newType.isEnchantment()) {
-                Iterables.removeIf(newType.subtypes, Predicates.IS_ENCHANTMENT_TYPE);
-            }
-            if (!newType.isInstant() && !newType.isSorcery()) {
-                Iterables.removeIf(newType.subtypes, Predicates.IS_SPELL_TYPE);
-            }
-            if (!newType.isPlaneswalker() && !newType.isEmblem()) {
-                Iterables.removeIf(newType.subtypes, Predicates.IS_WALKER_TYPE);
-            }
+            newType.sanisfySubtypes();
         }
         return newType == null ? this : newType;
+    }
+
+    public void sanisfySubtypes() {
+        if (!isCreature() && !isTribal()) {
+            Iterables.removeIf(subtypes, Predicates.IS_CREATURE_TYPE);
+            subtypes.remove(AllCreatureTypes);
+        }
+        if (!isLand()) {
+            Iterables.removeIf(subtypes, Predicates.IS_LAND_TYPE);
+        }
+        if (!isArtifact()) {
+            Iterables.removeIf(subtypes, Predicates.IS_ARTIFACT_TYPE);
+        }
+        if (!isEnchantment()) {
+            Iterables.removeIf(subtypes, Predicates.IS_ENCHANTMENT_TYPE);
+        }
+        if (!isInstant() && !isSorcery()) {
+            Iterables.removeIf(subtypes, Predicates.IS_SPELL_TYPE);
+        }
+        if (!isPlaneswalker() && !isEmblem()) {
+            Iterables.removeIf(subtypes, Predicates.IS_WALKER_TYPE);
+        }
     }
 
     @Override
@@ -560,7 +571,64 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return toString().compareTo(o.toString());
     }
 
-    public boolean sharesSubtypeWith(final CardType ctOther) {
+    public boolean sharesCreaturetypeWith(final CardTypeView ctOther) {
+        if (ctOther == null) {
+            return false;
+        }
+        if (this.subtypes.contains(AllCreatureTypes) && ctOther.hasSubtype(AllCreatureTypes)) {
+            return true;
+        }
+        for (final String type : getCreatureTypes()) {
+            if (ctOther.hasCreatureType(type)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean sharesLandTypeWith(final CardTypeView ctOther) {
+        if (ctOther == null) {
+            return false;
+        }
+
+        for (final String type : getLandTypes()) {
+            if (ctOther.hasSubtype(type)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean sharesPermanentTypeWith(final CardTypeView ctOther) {
+        if (ctOther == null) {
+            return false;
+        }
+
+        for (final CoreType type : getCoreTypes()) {
+            if (type.isPermanent && ctOther.hasType(type)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean sharesCardTypeWith(final CardTypeView ctOther) {
+        if (ctOther == null) {
+            return false;
+        }
+
+        for (final CoreType type : getCoreTypes()) {
+            if (ctOther.hasType(type)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean sharesSubtypeWith(final CardTypeView ctOther) {
+        if (ctOther == null) {
+            return false;
+        }
         for (final String t : ctOther.getSubtypes()) {
             if (hasSubtype(t)) {
                 return true;

@@ -587,7 +587,7 @@ public class CardFactory {
         String shortColors = "";
 
         if (sa.hasParam("AddTypes")) {
-            types.addAll(Arrays.asList(sa.getParam("AddTypes").split(",")));
+            types.addAll(Arrays.asList(sa.getParam("AddTypes").split(" & ")));
         }
 
         if (sa.hasParam("AddKeywords")) {
@@ -654,9 +654,7 @@ public class CardFactory {
                 state.removeType(CardType.Supertype.Legendary);
             }
 
-            for (final String type : types) {
-                state.addType(type);
-            }
+            state.addType(types);
 
             if (creatureTypes != null) {
                 state.setCreatureTypes(creatureTypes);
@@ -795,7 +793,7 @@ public class CardFactory {
                 if (sa.hasParam("SetCreatureTypes")) {
                     // currently only Changeling and similar should be affected by that
                     // other cards using AddType$ ChosenType should not
-                    if (sta.hasParam("AddType") && "AllCreatureTypes".equals(sta.getParam("AddType"))) {
+                    if (sta.hasParam("AddType") && CardType.AllCreatureTypes.equals(sta.getParam("AddType"))) {
                         state.removeStaticAbility(sta);
                     }
                 }
