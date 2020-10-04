@@ -183,7 +183,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<SpellAbility> chooseSpellAbilitiesForEffect(List<SpellAbility> spells, SpellAbility sa, String title,
-            int num, Map<String, Object> params, boolean generic) {
+            int num, Map<String, Object> params) {
         List<SpellAbility> remaining = Lists.newArrayList(spells);
         List<SpellAbility> selecteds = Lists.newArrayList();
         SpellAbility selected;
