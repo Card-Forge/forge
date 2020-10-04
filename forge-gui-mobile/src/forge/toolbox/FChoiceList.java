@@ -367,6 +367,24 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
             g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, false, Align.center, true);
         }
     }
+    //simple check for cardview needed on some special renderer for cards
+    private boolean showAlternate(CardView cardView, String value){
+        boolean showAlt = false;
+        if(cardView.hasAlternateState()){
+            if(cardView.hasBackSide())
+                showAlt = value.contains(cardView.getBackSideName());
+            else if (cardView.isAdventureCard())
+                showAlt = value.equals(cardView.getAlternateState().getAbilityText());
+            else if (cardView.isSplitCard()) {
+                //special case if aftermath cards can be cast from graveyard like yawgmoths will, you will have choices
+                if (cardView.getAlternateState().getOracleText().contains("Aftermath"))
+                    showAlt = cardView.getAlternateState().getOracleText().contains(value);
+                else
+                    showAlt = value.equals(cardView.getAlternateState().getAbilityText());
+            }
+        }
+        return showAlt;
+    }
     //special renderer for cards
     protected class PaperCardItemRenderer extends ItemRenderer {
         @Override
@@ -464,7 +482,8 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         @Override
         public boolean tap(Integer index, T value, float x, float y, int count) {
             if (x <= VStack.CARD_WIDTH + 2 * FList.PADDING) {
-                CardZoom.show(((IHasCardView)value).getCardView());
+                CardView cv = ((IHasCardView)value).getCardView();
+                CardZoom.show(cv, showAlternate(cv, value.toString()));
                 return true;
             }
             return false;
@@ -472,13 +491,16 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
 
         @Override
         public boolean longPress(Integer index, T value, float x, float y) {
-            CardZoom.show(((IHasCardView)value).getCardView());
+            CardView cv = ((IHasCardView)value).getCardView();
+            CardZoom.show(cv, showAlternate(cv, value.toString()));
             return true;
         }
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            CardRenderer.drawCardWithOverlays(g, ((IHasCardView)value).getCardView(), x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top);
+            CardView cv = ((IHasCardView)value).getCardView();
+            boolean showAlternate = showAlternate(cv, value.toString());
+            CardRenderer.drawCardWithOverlays(g, cv, x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top, false, showAlternate);
 
             float dx = VStack.CARD_WIDTH + FList.PADDING;
             x += dx;

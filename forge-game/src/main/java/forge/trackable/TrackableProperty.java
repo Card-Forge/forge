@@ -25,6 +25,9 @@ public enum TrackableProperty {
 
     Flipped(TrackableTypes.BooleanType),
     Facedown(TrackableTypes.BooleanType),
+    Modal(TrackableTypes.BooleanType),
+    Adventure(TrackableTypes.BooleanType),
+    DoubleFaced(TrackableTypes.BooleanType),
 
     //TODO?
     Cloner(TrackableTypes.StringType),
@@ -163,6 +166,10 @@ public enum TrackableProperty {
     Description(TrackableTypes.StringType),
     CanPlay(TrackableTypes.BooleanType),
     PromptIfOnlyPossibleAbility(TrackableTypes.BooleanType),
+
+    //HasBackSide
+    BackSideName(TrackableTypes.StringType),
+    HasBackSide(TrackableTypes.BooleanType),
 
     //StackItem
     Key(TrackableTypes.StringType),

@@ -134,6 +134,18 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.SplitCard);
     }
 
+    public boolean isDoubleFacedCard() {
+        return get(TrackableProperty.DoubleFaced);
+    }
+
+    public boolean isAdventureCard() {
+        return get(TrackableProperty.Adventure);
+    }
+
+    public boolean isModalCard() {
+        return get(TrackableProperty.Modal);
+    }
+
     /*
     public boolean isTransformed() {
         return getCurrentState().getState() == CardStateName.Transformed;
@@ -678,12 +690,22 @@ public class CardView extends GameEntityView {
     public CardStateView getAlternateState() {
         return get(TrackableProperty.AlternateState);
     }
+
+    public boolean hasBackSide() {
+        return get(TrackableProperty.HasBackSide);
+    }
+    public String getBackSideName() { return get(TrackableProperty.BackSideName); }
+
     CardStateView createAlternateState(final CardStateName state0) {
         return new CardStateView(getId(), state0, tracker);
     }
 
     public CardStateView getState(final boolean alternate0) {
         return alternate0 ? getAlternateState() : getCurrentState();
+    }
+    void updateBackSide(String stateName, boolean hasBackSide) {
+        set(TrackableProperty.HasBackSide, hasBackSide);
+        set(TrackableProperty.BackSideName, stateName);
     }
     void updateState(Card c) {
         updateName(c);
@@ -694,6 +716,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.SplitCard, isSplitCard);
         set(TrackableProperty.FlipCard, c.isFlipCard());
         set(TrackableProperty.Facedown, c.isFaceDown());
+        set(TrackableProperty.Adventure, c.isAdventureCard());
+        set(TrackableProperty.DoubleFaced, c.isDoubleFaced());
+        set(TrackableProperty.Modal, c.isModal());
+
+        //backside
+        if (c.getAlternateState()!=null)
+            updateBackSide(c.getAlternateState().getName(), c.hasBackSide());
 
         final Card cloner = c.getCloner();
 
@@ -732,6 +761,9 @@ public class CardView extends GameEntityView {
             // face-down (e.g. manifested) split cards should show the original face on their flip side
             alternateState = c.getState(CardStateName.Original);
         }
+
+        if (c.hasBackSide() && isFaceDown()) //fixes facedown cards with backside...
+            alternateState = c.getState(CardStateName.Original);
 
         if (alternateState == null) {
             set(TrackableProperty.AlternateState, null);
