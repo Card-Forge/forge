@@ -225,7 +225,11 @@ public class BoosterDraft implements IBoosterDraft {
         final BoosterDraft draft = new BoosterDraft(draftType);
 
         for (String booster : boosters) {
-            draft.product.add(block.getBooster(booster));
+            try {
+                draft.product.add(block.getBooster(booster));
+            } catch (Exception ex) {
+                System.err.println("Booster Draft Error: "+ex.getMessage());
+            }
         }
 
         IBoosterDraft.LAND_SET_CODE[0] = block.getLandSet();
