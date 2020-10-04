@@ -173,6 +173,7 @@ public class CardZoom extends FOverlay {
         }
         hide();
         showBackSide = false;
+        showAltState = false;
         return true;
     }
 
@@ -181,16 +182,19 @@ public class CardZoom extends FOverlay {
         if (Math.abs(velocityX) > Math.abs(velocityY)) {
             incrementCard(velocityX > 0 ? -1 : 1);
             showBackSide = false;
+            showAltState = false;
             return true;
         }
         if (velocityY > 0) {
             zoomMode = !zoomMode;
             showBackSide = false;
+            showAltState = false;
             return true;
         }
         if (currentActivateAction != null && activateHandler != null) {
             hide();
             showBackSide = false;
+            showAltState = false;
             activateHandler.activate(currentIndex);
             return true;
         }

@@ -340,7 +340,7 @@ public class CardImageRenderer {
         try {
             image = ImageCache.getImage(card.getState(altState).getImageKey(), true);
         } catch (Exception ex) {
-            System.err.println(card.toString()+" : " +ex.getMessage());
+            //System.err.println(card.toString()+" : " +ex.getMessage());
             //TODO: don't know why this is needed, needs further investigation...
             if (!card.hasAlternateState()) {
                 altState = false;
