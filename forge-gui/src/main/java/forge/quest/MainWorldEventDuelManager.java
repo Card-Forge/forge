@@ -1,5 +1,6 @@
 package forge.quest;
 
+import java.awt.image.renderable.RenderableImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -146,32 +147,61 @@ public class MainWorldEventDuelManager implements QuestEventDuelManagerInterface
         final List<QuestEventDuel> duelOpponents = new ArrayList<>();
 
         QuestEventDifficulty randomDuelDifficulty = QuestEventDifficulty.EASY;
+        
+        double randomDouble = MyRandom.getRandom().nextDouble();
 
         if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
             addDuel(duelOpponents, QuestEventDifficulty.EASY, 3);
-            randomDuelDifficulty = QuestEventDifficulty.EASY;
+            if(areWildDecksWanted() && isWildDeckAvailable() && randomDouble * 2 < 1) {
+                randomDuelDifficulty = QuestEventDifficulty.WILD; 
+            } else {
+                randomDuelDifficulty = QuestEventDifficulty.EASY;                
+            }
         } else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
             addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
             addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 2);
-            randomDuelDifficulty = QuestEventDifficulty.MEDIUM;
+            if(areWildDecksWanted() && isWildDeckAvailable() && randomDouble * 2 < 1) {
+                randomDuelDifficulty = QuestEventDifficulty.WILD; 
+            } else {            
+                randomDuelDifficulty = QuestEventDifficulty.MEDIUM;
+            }
         } else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
             addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 3);
             randomDuelDifficulty = QuestEventDifficulty.MEDIUM;
         } else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
             addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 1);
             addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
-            randomDuelDifficulty = QuestEventDifficulty.HARD;
+            if(areWildDecksWanted() && isWildDeckAvailable() && randomDouble * 2 < 1) {
+                randomDuelDifficulty = QuestEventDifficulty.WILD; 
+            } else {                        
+                randomDuelDifficulty = QuestEventDifficulty.HARD;
+            }
         } else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_EXPERTAI, index)) {
             addDuel(duelOpponents, QuestEventDifficulty.HARD, 3);
-            randomDuelDifficulty = QuestEventDifficulty.HARD;
+            if(areWildDecksWanted() && isWildDeckAvailable() && randomDouble * 2 < 1) {
+                randomDuelDifficulty = QuestEventDifficulty.WILD; 
+            } else {                        
+                randomDuelDifficulty = QuestEventDifficulty.HARD;
+            }
         } else {
             addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
             addDuel(duelOpponents, QuestEventDifficulty.EXPERT, 1);
-            if (MyRandom.getRandom().nextDouble() * 3 < 2) {
-                randomDuelDifficulty = QuestEventDifficulty.HARD;
-            } else {
-                randomDuelDifficulty = QuestEventDifficulty.EXPERT;
+            if(areWildDecksWanted() && isWildDeckAvailable()) {
+                if(randomDouble * 2 < 1) {
+                    randomDuelDifficulty = QuestEventDifficulty.WILD;                                    
+                } else if(randomDouble * 6 < 5) {
+                    randomDuelDifficulty = QuestEventDifficulty.HARD;                    
+                } else {
+                    randomDuelDifficulty = QuestEventDifficulty.EXPERT;                    
+                }
+             } else {
+                if (randomDouble * 3 < 2) {
+                    randomDuelDifficulty = QuestEventDifficulty.HARD;
+                } else  {
+                    randomDuelDifficulty = QuestEventDifficulty.EXPERT;
+                }                
             }
+            
         }
 
         if (moreDuelChoices) {
@@ -186,8 +216,8 @@ public class MainWorldEventDuelManager implements QuestEventDuelManagerInterface
                 addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
             }
         }
-
-        //TODO put in preferences the number of wild duels to add
+        
+        // Now to add the wild opponents
         addDuel(duelOpponents, QuestEventDifficulty.WILD, FModel.getQuestPreferences().getPrefInt(QPref.WILD_OPPONENTS_NUMBER));
         addRandomDuel(duelOpponents, randomDuelDifficulty);
 
@@ -195,6 +225,16 @@ public class MainWorldEventDuelManager implements QuestEventDuelManagerInterface
 
     }
 
+    private boolean areWildDecksWanted() {
+        int wildOpponentsPreference = FModel.getQuestPreferences().getPrefInt(QPref.WILD_OPPONENTS_NUMBER);
+        return wildOpponentsPreference > 0;
+    }
+    
+    private boolean isWildDeckAvailable() {
+        List<QuestEventDuel> wildList = (List<QuestEventDuel>) sortedDuels.get(QuestEventDifficulty.WILD);
+        return !wildList.isEmpty();
+    }
+    
     /**
      * <p>
      * assembleDuelDifficultyLists.
