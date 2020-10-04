@@ -300,6 +300,17 @@ AdditionalSetUnlockedInQuest=MPS_AKH
 287 C Woodland Stream
 
 [tokens]
+w_1_1_cat_lifelink
+w_1_1_warrior_vigilance
+u_2_2_drake_flying
+b_1_1_insect
+b_2_2_zombie
+g_4_2_beast
+g_3_3_hippo
+g_1_1_snake_deathtouch
+g_5_5_wurm
+
+[other]
 embalm_angel_of_sanctions
 embalm_anointer_priest
 embalm_aven_initiate
@@ -315,12 +326,3 @@ embalm_temmet_vizier_of_naktamun
 embalm_trueheart_duelist
 embalm_unwavering_initiate
 embalm_vizier_of_many_faces
-w_1_1_cat_lifelink
-w_1_1_warrior_vigilance
-u_2_2_drake_flying
-b_1_1_insect
-b_2_2_zombie
-g_4_2_beast
-g_3_3_hippo
-g_1_1_snake_deathtouch
-g_5_5_wurm
