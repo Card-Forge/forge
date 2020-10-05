@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicates;
-import com.google.common.collect.Lists;
 import forge.ai.*;
 import forge.card.CardType;
 import forge.game.ability.AbilityUtils;
@@ -15,7 +14,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class ChooseTypeAi extends SpellAbilityAi {
