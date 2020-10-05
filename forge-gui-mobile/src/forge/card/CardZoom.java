@@ -1,7 +1,6 @@
 package forge.card;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -18,7 +17,6 @@ import forge.deck.CommanderDeckGenerator;
 import forge.deck.DeckProxy;
 import forge.game.GameView;
 import forge.game.card.CardView;
-import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.model.FModel;

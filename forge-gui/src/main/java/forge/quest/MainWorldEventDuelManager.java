@@ -1,6 +1,5 @@
 package forge.quest;
 
-import java.awt.image.renderable.RenderableImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
