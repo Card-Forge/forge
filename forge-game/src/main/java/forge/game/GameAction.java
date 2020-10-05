@@ -103,7 +103,7 @@ public class GameAction {
         boolean wasFacedown = c.isFaceDown();
 
         //Rule 110.5g: A token that has left the battlefield can't move to another zone
-        if (c.isToken() && zoneFrom != null && !fromBattlefield) {
+        if (c.isToken() && zoneFrom != null && !fromBattlefield && !zoneFrom.is(ZoneType.Stack)) {
             return c;
         }
 

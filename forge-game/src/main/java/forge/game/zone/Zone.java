@@ -115,7 +115,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
         // Do not add Tokens to other zones than the battlefield.
         // But Effects/Emblems count as Tokens too, so allow Command too.
-        if (zoneType == ZoneType.Battlefield || !c.isToken()) {
+        if (zoneType == ZoneType.Battlefield || zoneType == ZoneType.Stack || !c.isToken()) {
             c.setZone(this);
 
             if (index == null) {
