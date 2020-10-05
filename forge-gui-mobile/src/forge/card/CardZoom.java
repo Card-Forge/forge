@@ -46,10 +46,15 @@ public class CardZoom extends FOverlay {
     private static String currentActivateAction;
     private static Rectangle flipIconBounds;
     private static boolean showAltState;
+    private static boolean showBackSide = false;
 
     public static void show(Object item) {
+        show(item, false);
+    }
+    public static void show(Object item, boolean showbackside) {
         List<Object> items0 = new ArrayList<>();
         items0.add(item);
+        showBackSide = showbackside; //reverse the displayed zoomed card for the choice list
         show(items0, 0, null);
     }
     public static void show(FCollectionView<?> items0, int currentIndex0, ActivateHandler activateHandler0) {
@@ -158,10 +163,15 @@ public class CardZoom extends FOverlay {
     @Override
     public boolean tap(float x, float y, int count) {
         if (flipIconBounds != null && flipIconBounds.contains(x, y)) {
-            showAltState = !showAltState;
+            if (!showBackSide)
+                showAltState = !showAltState;
+            else
+                showBackSide = !showBackSide;
             return true;
         }
         hide();
+        showBackSide = false;
+        showAltState = false;
         return true;
     }
 
@@ -169,14 +179,20 @@ public class CardZoom extends FOverlay {
     public boolean fling(float velocityX, float velocityY) {
         if (Math.abs(velocityX) > Math.abs(velocityY)) {
             incrementCard(velocityX > 0 ? -1 : 1);
+            showBackSide = false;
+            showAltState = false;
             return true;
         }
         if (velocityY > 0) {
             zoomMode = !zoomMode;
+            showBackSide = false;
+            showAltState = false;
             return true;
         }
         if (currentActivateAction != null && activateHandler != null) {
             hide();
+            showBackSide = false;
+            showAltState = false;
             activateHandler.activate(currentIndex);
             return true;
         }
@@ -282,10 +298,9 @@ public class CardZoom extends FOverlay {
         float x = (w - cardWidth) / 2;
         y = (h - cardHeight) / 2;
         if (zoomMode) {
-            CardImageRenderer.drawZoom(g, currentCard, gameView, showAltState, x, y, cardWidth, cardHeight, getWidth(), getHeight(), true);
-        }
-        else {
-            CardImageRenderer.drawDetails(g, currentCard, gameView, showAltState, x, y, cardWidth, cardHeight);
+            CardImageRenderer.drawZoom(g, currentCard, gameView, showBackSide? showBackSide : showAltState, x, y, cardWidth, cardHeight, getWidth(), getHeight(), true);
+        } else {
+            CardImageRenderer.drawDetails(g, currentCard, gameView, showBackSide? showBackSide : showAltState, x, y, cardWidth, cardHeight);
         }
 
         if (flipIconBounds != null) {
