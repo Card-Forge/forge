@@ -667,6 +667,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
 
             facedown = false;
+            updateStateForView(); //fixes cards with backside viewable
             // need to run faceup commands, currently
             // it does cleanup the modified facedown state
             if (result) {
