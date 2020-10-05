@@ -1,26 +1,20 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicates;
-import com.google.common.collect.Lists;
-import forge.ai.AiCardMemory;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.card.CardType;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.ability.ApiType;
+import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import java.util.List;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class ChooseTypeAi extends SpellAbilityAi {
     @Override
@@ -31,6 +25,8 @@ public class ChooseTypeAi extends SpellAbilityAi {
             if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Mirror Entity Avatar")) {
                 return doMirrorEntityLogic(aiPlayer, sa);
             }
+        } else if ("MostProminentOppControls".equals(sa.getParam("AILogic"))) {
+            return !chooseType(sa, aiPlayer.getOpponents().getCardsIn(ZoneType.Battlefield)).isEmpty();
         }
 
         return doTriggerAINoCost(aiPlayer, sa, false);
@@ -44,27 +40,11 @@ public class ChooseTypeAi extends SpellAbilityAi {
             return false;
         }
         
-        CardCollectionView otb = aiPlayer.getCardsIn(ZoneType.Battlefield);
-        List<String> valid = Lists.newArrayList(CardType.getAllCreatureTypes());
-
-        String chosenType = ComputerUtilCard.getMostProminentType(otb, valid);
+        String chosenType = chooseType(sa, aiPlayer.getCardsIn(ZoneType.Battlefield));
         if (chosenType.isEmpty()) {
-            // Account for the situation when only changelings are on the battlefield
-            boolean allChangeling = false;
-            for (Card c : otb) {
-                if (c.isCreature() && c.hasStartOfKeyword(Keyword.CHANGELING.toString())) {
-                    chosenType = Aggregates.random(valid); // just choose a random type for changelings
-                    allChangeling = true;
-                    break;
-                }
-            }
-
-            if (!allChangeling) {
-                // Still empty, probably no creatures on board
-                return false;
-            }
+            return false;
         }
-        
+
         int maxX = ComputerUtilMana.determineMaxAffordableX(aiPlayer, sa);
         int avgPower = 0;
         
@@ -127,4 +107,40 @@ public class ChooseTypeAi extends SpellAbilityAi {
         return true;
     }
 
+    private String chooseType(SpellAbility sa, CardCollectionView cards) {
+        Set<String> valid = new HashSet<>();
+
+        if (sa.getSubAbility() != null && sa.getSubAbility().getApi() == ApiType.PumpAll
+                && sa.getSubAbility().isCurse() && sa.getSubAbility().hasParam("NumDef")) {
+            final SpellAbility pumpSa = sa.getSubAbility();
+            final int defense = AbilityUtils.calculateAmount(sa.getHostCard(), pumpSa.getParam("NumDef"), pumpSa);
+            for (Card c : cards) {
+                if (c.isCreature() && c.getNetToughness() <= -defense) {
+                    valid.addAll(c.getType().getCreatureTypes());
+                }
+            }
+        } else {
+            valid.addAll(CardType.getAllCreatureTypes());
+        }
+
+        String chosenType = ComputerUtilCard.getMostProminentType(cards, valid);
+        if (chosenType.isEmpty()) {
+            // Account for the situation when only changelings are on the battlefield
+            boolean allChangeling = false;
+            for (Card c : cards) {
+                if (c.isCreature() && c.hasStartOfKeyword(Keyword.CHANGELING.toString())) {
+                    chosenType = Aggregates.random(valid); // just choose a random type for changelings
+                    allChangeling = true;
+                    break;
+                }
+            }
+
+            if (!allChangeling) {
+                // Still empty, probably no creatures on board
+                return "";
+            }
+        }
+
+        return chosenType;
+    }
 }
