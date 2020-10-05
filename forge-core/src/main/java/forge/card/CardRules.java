@@ -487,7 +487,7 @@ public final class CardRules implements ICardCharacteristics {
                     if ("T".equals(key)) {
                         this.faces[this.curFace].addTrigger(value);
                     } else if ("Types".equals(key)) {
-                        this.faces[this.curFace].setType(CardType.parse(value));
+                        this.faces[this.curFace].setType(CardType.parse(value, false));
                     } else if ("Text".equals(key) && !"no text".equals(value) && StringUtils.isNotBlank(value)) {
                         this.faces[this.curFace].setNonAbilityText(value);
                     }
@@ -557,7 +557,7 @@ public final class CardRules implements ICardCharacteristics {
         CardAiHints cah = new CardAiHints(true, true, true, null, null, null);
         CardFace[] faces = { new CardFace(name), null};
         faces[0].setColor(ColorSet.fromMask(0));
-        faces[0].setType(CardType.parse(""));
+        faces[0].setType(CardType.parse("", false));
         faces[0].setOracleText("This card is not supported by Forge. Whenever you start a game with this card, it will be bugged.");
         faces[0].setNonAbilityText("This card is not supported by Forge.\nWhenever you start a game with this card, it will be bugged.");
         faces[0].assignMissingFields();

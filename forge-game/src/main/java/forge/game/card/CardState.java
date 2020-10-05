@@ -48,7 +48,7 @@ import io.sentry.event.BreadcrumbBuilder;
 
 public class CardState extends GameObject {
     private String name = "";
-    private CardType type = new CardType();
+    private CardType type = new CardType(false);
     private ManaCost manaCost = ManaCost.NO_COST;
     private byte color = MagicColor.COLORLESS;
     private int basePower = 0;
