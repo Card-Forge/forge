@@ -327,7 +327,7 @@ public final class CardUtil {
     }
 
     public static CardState getFaceDownCharacteristic(Card c) {
-        final CardType type = new CardType();
+        final CardType type = new CardType(false);
         type.add("Creature");
 
         final CardState ret = new CardState(c, CardStateName.FaceDown);

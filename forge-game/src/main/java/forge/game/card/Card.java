@@ -3199,11 +3199,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         CardType addType = null;
         CardType removeType = null;
         if (types != null) {
-            addType = new CardType(types);
+            addType = new CardType(types, true);
         }
 
         if (removeTypes != null) {
-            removeType = new CardType(removeTypes);
+            removeType = new CardType(removeTypes, true);
         }
 
         addChangedCardTypes(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
@@ -3964,7 +3964,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addChangedTextTypeWord(final String originalWord, final String newWord, final Long timestamp) {
         changedTextTypes.add(timestamp, originalWord, newWord);
         if (getType().hasSubtype(originalWord)) {
-            addChangedCardTypes(CardType.parse(newWord), CardType.parse(originalWord),
+            addChangedCardTypes(CardType.parse(newWord, true), CardType.parse(originalWord, true),
                     false, false, false, false, false, false, false, timestamp);
         }
         updateKeywordsChangedText(timestamp);
@@ -5268,8 +5268,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void animateBestow(final boolean updateView) {
         bestowTimestamp = getGame().getNextTimestamp();
-        addChangedCardTypes(new CardType(Collections.singletonList("Aura")),
-                new CardType(Collections.singletonList("Creature")),
+        addChangedCardTypes(new CardType(Collections.singletonList("Aura"), true),
+                new CardType(Collections.singletonList("Creature"), true),
                 false, false, false, false, false, false, true, bestowTimestamp, updateView);
         addChangedCardKeywords(Collections.singletonList("Enchant creature"), Lists.newArrayList(),
                 false, false, bestowTimestamp, updateView);

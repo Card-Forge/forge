@@ -251,7 +251,7 @@ public class AnimateAi extends SpellAbilityAi {
                 && sa.getTargetRestrictions() != null
                 && sa.getTargetRestrictions().getMinTargets(sa.getHostCard(), sa) == 0;
         
-        final CardType types = new CardType();
+        final CardType types = new CardType(true);
         if (sa.hasParam("Types")) {
             types.addAll(Arrays.asList(sa.getParam("Types").split(",")));
         }
@@ -383,12 +383,12 @@ public class AnimateAi extends SpellAbilityAi {
             }
         }
 
-        final CardType types = new CardType();
+        final CardType types = new CardType(true);
         if (sa.hasParam("Types")) {
             types.addAll(Arrays.asList(sa.getParam("Types").split(",")));
         }
 
-        final CardType removeTypes = new CardType();
+        final CardType removeTypes = new CardType(true);
         if (sa.hasParam("RemoveTypes")) {
             removeTypes.addAll(Arrays.asList(sa.getParam("RemoveTypes").split(",")));
         }

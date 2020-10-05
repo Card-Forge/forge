@@ -50,7 +50,7 @@ import forge.util.Settable;
 public final class CardType implements Comparable<CardType>, CardTypeView {
     private static final long serialVersionUID = 4629853583167022151L;
 
-    public static final CardTypeView EMPTY = new CardType();
+    public static final CardTypeView EMPTY = new CardType(false);
 
     public static final String AllCreatureTypes = "AllCreatureTypes";
 
@@ -111,11 +111,14 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     private final Set<CoreType> coreTypes = EnumSet.noneOf(CoreType.class);
     private final Set<Supertype> supertypes = EnumSet.noneOf(Supertype.class);
     private final Set<String> subtypes = Sets.newLinkedHashSet();
+    private boolean incomplete = false;
     private transient String calculatedType = null;
 
-    public CardType() {
+    public CardType(boolean incomplete) {
+        this.incomplete = incomplete;
     }
-    public CardType(final Iterable<String> from0) {
+    public CardType(final Iterable<String> from0, boolean incomplete) {
+        this.incomplete = incomplete;
         addAll(from0);
     }
     public CardType(final CardType from0) {
@@ -516,6 +519,10 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     public void sanisfySubtypes() {
+        // incomplete types are used for changing effects
+        if (this.incomplete) {
+            return;
+        }
         if (!isCreature() && !isTribal()) {
             Iterables.removeIf(subtypes, Predicates.IS_CREATURE_TYPE);
             subtypes.remove(AllCreatureTypes);
@@ -637,11 +644,11 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return false;
     }
 
-    public static CardType parse(final String typeText) {
+    public static CardType parse(final String typeText, boolean incomplete) {
         // Most types and subtypes, except "Serra's Realm" and
         // "Bolas's Meditation Realm" consist of only one word
         final char space = ' ';
-        final CardType result = new CardType();
+        final CardType result = new CardType(incomplete);
 
         int iTypeStart = 0;
         int iSpace = typeText.indexOf(space);
@@ -661,7 +668,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     public static CardType combine(final CardType a, final CardType b) {
-        final CardType result = new CardType();
+        final CardType result = new CardType(false);
         result.supertypes.addAll(a.supertypes);
         result.supertypes.addAll(b.supertypes);
         result.coreTypes.addAll(a.coreTypes);
