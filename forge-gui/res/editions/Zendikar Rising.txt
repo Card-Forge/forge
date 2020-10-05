@@ -419,4 +419,3 @@ g_0_1_plant
 bg_x_x_hydra
 c_1_1_a_construct
 c_0_1_a_goblin_construct_noblock_ping
-copy
