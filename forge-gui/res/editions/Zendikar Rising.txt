@@ -6,7 +6,8 @@ Code2=ZNR
 MciCode=znr
 Type=Expansion
 BoosterCovers=3
-Booster=9 Common:!dfc:!fromSheet("ZNR Secret Cards"), 3 Uncommon:!dfc:!fromSheet("ZNR Secret Cards"), 1 RareMythic:!dfc:!fromSheet("ZNR Secret Cards"), 1 dfc:!fromSheet("ZNR Secret Cards"), 1 BasicLand
+Booster=10 Common:!dfc:!fromSheet("ZNR Secret Cards"), 3 Uncommon:!dfc:!fromSheet("ZNR Secret Cards"), 1 RareMythic:!dfc:!fromSheet("ZNR Secret Cards"), 1 BasicLand
+BoosterReplaceSlotFromPrintSheet=ZNRModalDoubleFaceCards
 Prerelease=6 Boosters, 1 RareMythic+
 
 [cards]
