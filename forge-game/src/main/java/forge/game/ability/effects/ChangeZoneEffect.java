@@ -36,6 +36,7 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.util.Localizer;
 import forge.util.CardTranslation;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -303,7 +304,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         final StringBuilder sbTargets = new StringBuilder();
-
         Iterable<Card> tgts;
         if (sa.usesTargeting()) {
             tgts = sa.getTargets().getTargetCards();
@@ -311,10 +311,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             // otherwise add self to list and go from there
             tgts = sa.knownDetermineDefined(sa.getParam("Defined"));
         }
-
-        for (final Card c : tgts) {
-            sbTargets.append(" ").append(c);
-        }
+        sbTargets.append(" ").append(StringUtils.join(tgts, ", "));
 
         final String targetname = sbTargets.toString();
 
