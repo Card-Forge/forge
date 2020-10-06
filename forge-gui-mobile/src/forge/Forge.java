@@ -149,9 +149,15 @@ public class Forge implements ApplicationListener {
 
                 //add reminder to preload
                 if (enablePreloadExtendedArt) {
-                    splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt")+"\nDetected RAM: " +totalDeviceRAM+"MB. Cache size: "+cacheSize);
+                    if(totalDeviceRAM>0)
+                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt")+"\nDetected RAM: " +totalDeviceRAM+"MB. Cache size: "+cacheSize);
+                    else
+                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt"));
                 } else {
-                    splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup")+"\nDetected RAM: " +totalDeviceRAM+"MB. Cache size: "+cacheSize);
+                    if(totalDeviceRAM>0)
+                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup")+"\nDetected RAM: " +totalDeviceRAM+"MB. Cache size: "+cacheSize);
+                    else
+                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup"));
                 }
 
                 Gdx.app.postRunnable(new Runnable() {
