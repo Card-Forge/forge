@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Instant
 SVar:AltCost:Cost$ tapXType<1/Creature/creature> | IsPresent$ Plains.YouCtrl | Description$ If you control a Plains, you may tap an untapped creature you control rather than pay this spell's mana cost.
 A:SP$ Effect | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect damage from | ReplacementEffects$ SelflessDamage | Triggers$ OutOfSight | SVars$ SelflessDmg,ExileEffect | References$ SelflessDamage,OutOfSight,SelflessDmg,ExileEffect | RememberObjects$ Targeted | StackDescription$ All damage that would be dealt to {c:Targeted} this turn is dealt to {p:You} instead. | SpellDescription$ All damage that would be dealt to target creature this turn is dealt to you instead.
-SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ Card.IsRemembered | ReplaceWith$ SelflessDmg | Description$ All damage that would be dealt to target creature this turn is dealt to you instead.
+SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ Card.IsRemembered | ReplaceWith$ SelflessDmg | DamageTarget$ You | Description$ All damage that would be dealt to target creature this turn is dealt to you instead.
 SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ You | VarType$ Player
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.IsRemembered | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
