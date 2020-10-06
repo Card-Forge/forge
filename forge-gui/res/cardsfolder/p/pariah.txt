@@ -3,8 +3,7 @@ ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Curse
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DmgEnchanted | Description$ All damage that would be dealt to you is dealt to enchanted creature instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DmgEnchanted | DamageTarget$ Enchanted | Description$ All damage that would be dealt to you is dealt to enchanted creature instead.
 SVar:DmgEnchanted:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Enchanted | VarType$ Card
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pariah.jpg
 Oracle:Enchant creature\nAll damage that would be dealt to you is dealt to enchanted creature instead.
