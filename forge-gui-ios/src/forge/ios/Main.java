@@ -32,8 +32,8 @@ public class Main extends IOSApplication.Delegate {
         config.useAccelerometer = false;
         config.useCompass = false;
         ForgePreferences prefs = FModel.getPreferences();
-        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
-        final ApplicationListener app = Forge.getApp(new IOSClipboard(), new IOSAdapter(), assetsDir, propertyConfig, false);
+        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);//todo get totalRAM
+        final ApplicationListener app = Forge.getApp(new IOSClipboard(), new IOSAdapter(), assetsDir, propertyConfig, false, 0);
         final IOSApplication iosApp = new IOSApplication(app, config);
         return iosApp;
     }
