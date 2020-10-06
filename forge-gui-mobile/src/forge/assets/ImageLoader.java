@@ -17,6 +17,7 @@ import forge.ImageKeys;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.tuple.Pair;
 
 import static forge.assets.ImageCache.croppedBorderImage;
 
@@ -34,7 +35,7 @@ final class ImageLoader extends CacheLoader<String, Texture> {
             try {
                 Texture t = new Texture(fh, textureFilter);
                 //update
-                ImageCache.updateBorders(t.toString(), extendedArt ? false: isCloserToWhite(getpixelColor(t)));
+                ImageCache.updateBorders(t.toString(), extendedArt ? Pair.of(Color.valueOf("#171717").toString(), false): isCloserToWhite(getpixelColor(t)));
                 if (textureFilter)
                     t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
                 if (extendedArt)
@@ -145,13 +146,13 @@ final class ImageLoader extends CacheLoader<String, Texture> {
         pixmap.dispose();
         return color.toString();
     }
-    public static boolean isCloserToWhite(String c){
+    public static Pair<String, Boolean> isCloserToWhite(String c){
         if (c == null || c == "")
-            return false;
+            return Pair.of(Color.valueOf("#171717").toString(), false);
         int c_r = Integer.parseInt(c.substring(0,2),16);
         int c_g = Integer.parseInt(c.substring(2,4),16);
         int c_b = Integer.parseInt(c.substring(4,6),16);
         int brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
-        return brightness > 155;
+        return  Pair.of(c,brightness > 155);
     }
 }

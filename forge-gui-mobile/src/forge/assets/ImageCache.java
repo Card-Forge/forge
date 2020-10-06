@@ -34,7 +34,6 @@ import forge.card.CardRenderer;
 import forge.deck.Deck;
 import forge.game.card.CardView;
 import forge.game.player.IHasIcon;
-import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -42,6 +41,7 @@ import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
 import java.util.HashMap;
@@ -84,7 +84,7 @@ public class ImageCache {
     public static final Texture defaultImage;
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
     public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
-    private static final Map<String, Boolean> imageBorder = new HashMap<>(1024);
+    private static final Map<String, Pair<String, Boolean>> imageBorder = new HashMap<>(1024);
 
     private static boolean imageLoaded, delayLoadRequested;
     public static void allowSingleLoad() {
@@ -224,7 +224,7 @@ public class ImageCache {
                 image = defaultImage;
                 cache.put(imageKey, defaultImage);
                 if (imageBorder.get(image.toString()) == null)
-                    imageBorder.put(image.toString(), false); //black border
+                    imageBorder.put(image.toString(), Pair.of(Color.valueOf("#171717").toString(), false)); //black border
             }
         }
         return image;
@@ -254,24 +254,10 @@ public class ImageCache {
         int ry = Math.round((image.getHeight() - rh)/2f)-2;
         return new TextureRegion(image, rx, ry, rw, rh);
     }
-    public static Color borderColor(IPaperCard c) {
-        if (c == null)
+    public static Color borderColor(Texture t) {
+        if (t == null)
             return Color.valueOf("#171717");
-
-        CardEdition ed = FModel.getMagicDb().getEditions().get(c.getEdition());
-        if (ed != null && ed.isWhiteBorder())
-            return Color.valueOf("#fffffd");
-        return Color.valueOf("#171717");
-    }
-    public static Color borderColor(CardView c) {
-        if (c == null)
-            return Color.valueOf("#171717");
-
-        CardView.CardStateView state = c.getCurrentState();
-        CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
-        if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0)
-            return Color.valueOf("#fffffd");
-        return Color.valueOf("#171717");
+        return Color.valueOf(imageBorder.get(t.toString()).getLeft());
     }
     public static int getFSkinBorders(CardView c) {
         if (c == null)
@@ -286,13 +272,13 @@ public class ImageCache {
     public static boolean isBorderlessCardArt(Texture t) {
         return ImageLoader.isBorderless(t);
     }
-    public static void updateBorders(String textureString, boolean val){
-        imageBorder.put(textureString, val);
+    public static void updateBorders(String textureString, Pair<String, Boolean> colorPair){
+        imageBorder.put(textureString, colorPair);
     }
     public static FImage getBorder(String textureString) {
         if (imageBorder.get(textureString) == null)
             return BlackBorder;
-        return imageBorder.get(textureString) ? WhiteBorder : BlackBorder;
+        return imageBorder.get(textureString).getRight() ? WhiteBorder : BlackBorder;
     }
     public static FImage getBorderImage(String textureString, boolean canshow) {
         if (!canshow)
