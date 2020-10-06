@@ -69,7 +69,7 @@ public class ImageCache {
 
     private static final Set<String> missingIconKeys = new HashSet<>();
     private static final LoadingCache<String, Texture> cache = CacheBuilder.newBuilder()
-            .maximumSize(400)
+            .maximumSize(Forge.cacheSize)
             .expireAfterAccess(15, TimeUnit.MINUTES)
             .removalListener(new RemovalListener<String, Texture>() {
                 @Override
