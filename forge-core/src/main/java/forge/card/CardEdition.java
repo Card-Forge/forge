@@ -123,6 +123,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private String additionalUnlockSet = "";
     private boolean smallSetOverride = false;
     private String boosterMustContain = "";
+    private String boosterReplaceSlotFromPrintSheet = "";
     private boolean doublePickToStartRound = false;
     private final CardInSet[] cards;
     private final Map<String, Integer> tokenNormalized;
@@ -193,6 +194,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public boolean getSmallSetOverride() { return smallSetOverride; }
     public boolean getDoublePickToStartRound() { return doublePickToStartRound; }
     public String getBoosterMustContain() { return boosterMustContain; }
+    public String getBoosterReplaceSlotFromPrintSheet() { return boosterReplaceSlotFromPrintSheet; }
     public CardInSet[] getCards() { return cards; }
     public boolean isModern() { return getDate().after(parseDate("2003-07-27")); } //8ED and above are modern except some promo cards and others
 
@@ -382,6 +384,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             res.doublePickToStartRound = section.getBoolean("DoublePick", false); // for "small" sets with over 200 cards (e.g. Eldritch Moon)
 
             res.boosterMustContain = section.get("BoosterMustContain", ""); // e.g. Dominaria guaranteed legendary creature
+            res.boosterReplaceSlotFromPrintSheet = section.get("BoosterReplaceSlotFromPrintSheet", ""); // e.g. Zendikar Rising guaranteed double-faced card
             return res;
         }
 

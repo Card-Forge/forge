@@ -339,6 +339,11 @@ public class BoosterGenerator {
             if (!boosterMustContain.isEmpty()) {
                 ensureGuaranteedCardInBooster(result, template, boosterMustContain);
             }
+
+            String boosterReplaceSlotFromPrintSheet = edition.getBoosterReplaceSlotFromPrintSheet();
+            if(!boosterReplaceSlotFromPrintSheet.isEmpty()) {
+                replaceCardFromExtraSheet(result, boosterReplaceSlotFromPrintSheet);
+            }
         }
 
         return result;
@@ -390,24 +395,66 @@ public class BoosterGenerator {
 
             if (!possibleCards.isEmpty()) {
                 PaperCard toAdd = Aggregates.random(possibleCards);
-                PaperCard toRepl = null;
-                CardRarity tgtRarity = toAdd.getRarity();
-
-                // remove the first card of the same rarity, replace it with toAdd. Keep the foil state.
-                for (PaperCard repl : result) {
-                    if (repl.getRarity() == tgtRarity) {
-                        toRepl = repl;
-                        break;
-                    }
-                }
-                if (toRepl != null) {
-                    if (toRepl.isFoil()) {
-                        toAdd = StaticData.instance().getCommonCards().getFoiled(toAdd);
-                    }
-                    result.remove(toRepl);
-                    result.add(toAdd);
-                }
+                BoosterGenerator.replaceCard(result, toAdd);
             }
+        }
+    }
+
+    /**
+     * Replaces an already present card in the booster with a card from the supplied print sheet.
+     * Nothing is replaced if there is no matching rarity found.
+     * @param booster in which a card gets replaced
+     * @param printSheetKey
+     */
+    public static void replaceCardFromExtraSheet(List<PaperCard> booster, String printSheetKey) {
+        PrintSheet replacementSheet = StaticData.instance().getPrintSheets().get(printSheetKey);
+        PaperCard toAdd = replacementSheet.random(1, false).get(0);
+        BoosterGenerator.replaceCard(booster, toAdd);
+    }
+
+    /**
+     * Replaces an already present card with the supplied card of the same (or similar in case or rare/mythic)
+     * rarity in the supplied booster. Nothing is replaced if there is no matching rarity found.
+     * @param booster in which a card gets replaced
+     * @param toAdd new card which replaces a card in the booster
+     */
+    public static void replaceCard(List<PaperCard> booster, PaperCard toAdd) {
+        Predicate<PaperCard> rarityPredicate = null;
+        switch(toAdd.getRarity()){
+            case BasicLand:
+                rarityPredicate = Presets.IS_BASIC_LAND;
+                break;
+            case Common:
+                rarityPredicate = Presets.IS_COMMON;
+                break;
+            case Uncommon:
+                rarityPredicate = Presets.IS_UNCOMMON;
+                break;
+            case Rare:
+            case MythicRare:
+                rarityPredicate = Presets.IS_RARE_OR_MYTHIC;
+                break;
+            default:
+                rarityPredicate = Presets.IS_SPECIAL;
+        }
+
+        PaperCard toReplace = null;
+        // Find first card in booster that matches the rarity
+        for (PaperCard card : booster) {
+            if(rarityPredicate.apply(card)) {
+                toReplace = card;
+                break;
+            }
+        }
+
+        // Replace card if match is found
+        if (toReplace != null) {
+            // Keep the foil state
+            if (toReplace.isFoil()) {
+                toAdd = StaticData.instance().getCommonCards().getFoiled(toAdd);
+            }
+            booster.remove(toReplace);
+            booster.add(toAdd);
         }
     }
 
