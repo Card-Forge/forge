@@ -1,10 +1,7 @@
 Name:Wildest Dreams
 ManaCost:X X G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X X G | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Card.YouOwn | TgtPrompt$ Select target card in your graveyard | Origin$ Graveyard | Destination$ Hand | References$ X,MaxTgts | SubAbility$ DBExile | SpellDescription$ Return X target cards from your graveyard to your hand. Exile CARDNAME
-SVar:DBExile:DB$ChangeZone | Origin$ Stack | Destination$ Exile 
-# It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
-SVar:X:Targeted$Amount
-SVar:MaxTgts:Count$InYourYard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wildest_dreams.jpg
+A:SP$ ChangeZone | Cost$ X X G | TargetMin$ X | TargetMax$ X | ValidTgts$ Card.YouOwn | TgtPrompt$ Select target card in your graveyard | Origin$ Graveyard | Destination$ Hand | References$ X | SubAbility$ DBExile | SpellDescription$ Return X target cards from your graveyard to your hand. Exile CARDNAME
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
+SVar:X:Count$xPaid
 Oracle:Return X target cards from your graveyard to your hand. Exile Wildest Dreams.
