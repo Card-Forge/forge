@@ -320,12 +320,16 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final String fromGraveyard = " from the graveyard";
 
         if (destination.equals(ZoneType.Battlefield)) {
-            sb.append("Put").append(targetname);
             if (ZoneType.Graveyard.equals(origin)) {
-                sb.append(fromGraveyard);
+                sb.append("Return").append(targetname);
+            } else {
+                sb.append("Put").append(targetname);
             }
-
-            sb.append(" onto the battlefield");
+            if (ZoneType.Graveyard.equals(origin)) {
+                sb.append(fromGraveyard).append(" to the battlefield");
+            } else {
+                sb.append(" onto the battlefield");
+            }
             if (sa.hasParam("Tapped")) {
                 sb.append(" tapped");
             }
