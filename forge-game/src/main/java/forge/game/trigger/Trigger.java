@@ -111,11 +111,9 @@ public abstract class Trigger extends TriggerReplacementBase {
         if (hasParam("TriggerDescription") && !this.isSuppressed()) {
 
             StringBuilder sb = new StringBuilder();
-            String desc = getParam("TriggerDescription");
-            if(active)
-                desc = TextUtil.fastReplace(desc, "CARDNAME", getHostCard().toString());
-            else
-                desc = TextUtil.fastReplace(desc, "CARDNAME", getHostCard().getName());
+            String currentName = (getHostCard().getName());
+            String desc1 = TextUtil.fastReplace(getParam("TriggerDescription"),"CARDNAME", currentName);
+            String desc = TextUtil.fastReplace(desc1,"NICKNAME", currentName.split(",")[0]);
             if (getHostCard().getEffectSource() != null) {
                 if(active)
                     desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().toString());
