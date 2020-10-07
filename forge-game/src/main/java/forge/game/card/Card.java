@@ -1719,8 +1719,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     final String costString2 = keyword.split(":")[2];
                     final Cost cost1 = new Cost(costString1, false);
                     final Cost cost2 = new Cost(costString2, false);
-                    sbLong.append("As an additional cost to cast ")
-                            .append(getName()).append(", ")
+                    sbLong.append("As an additional cost to cast this spell, ")
                             .append(cost1.toSimpleString())
                             .append(" or pay ")
                             .append(cost2.toSimpleString())
@@ -2209,8 +2208,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     final String[] k = keyword.split(":");
                     final Cost cost1 = new Cost(k[1], false);
                     final Cost cost2 = new Cost(k[2], false);
-                    sbBefore.append("As an additional cost to cast ")
-                            .append(state.getName()).append(", ")
+                    sbBefore.append("As an additional cost to cast this spell, ")
                             .append(cost1.toSimpleString())
                             .append(" or pay ")
                             .append(cost2.toSimpleString())

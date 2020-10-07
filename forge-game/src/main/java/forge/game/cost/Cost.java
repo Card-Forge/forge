@@ -706,7 +706,7 @@ public class Cost implements Serializable {
         boolean first = true;
 
         if (bFlag) {
-            cost.append("As an additional cost to cast CARDNAME, ");
+            cost.append("As an additional cost to cast this spell, ");
         } else {
             // usually no additional mana cost for spells
             // only three Alliances cards have additional mana costs, but they
@@ -724,7 +724,7 @@ public class Cost implements Serializable {
             if (!first) {
                 cost.append(" and ");
             }
-            cost.append(part.toString());
+            cost.append(part.toString().toLowerCase());
             first = false;
         }
 
