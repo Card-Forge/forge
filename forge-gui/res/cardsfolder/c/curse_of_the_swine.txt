@@ -3,7 +3,7 @@ ManaCost:X U U
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ X U U | ValidTgts$ Creature | TargetMin$ X | TargetMax$ X | References$ X | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ DBToken | SpellDescription$ Exile X target creatures. For each creature exiled this way, its controller creates a 2/2 green Boar creature token.
 SVar:DBToken:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemembered | RepeatSubAbility$ TokenBoar | SubAbility$ DBCleanup | ChangeZoneTable$ True
-SVar:TokenBoar:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_boar | TokenOwner$ ImprintedController | LegacyImage$ g 2 2 boar ths
+SVar:TokenBoar:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_boar | TokenOwner$ ImprintedController | SpellDescription$ For each creature exiled this way, its controller creates a 2/2 green Boar creature token.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
