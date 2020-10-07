@@ -724,7 +724,11 @@ public class Cost implements Serializable {
             if (!first) {
                 cost.append(" and ");
             }
-            cost.append(part.toString().toLowerCase());
+            if (bFlag) {
+                cost.append(StringUtils.uncapitalize(part.toString()));
+            } else {
+                cost.append(part.toString());
+            }
             first = false;
         }
 
