@@ -566,17 +566,25 @@ public class Graphics {
     }
     public float getfloatAlphaComposite() { return  alphaComposite; }
 
-
-    public void drawBorderImage(FImage image, Color color, float x, float y, float w, float h, boolean tint) {
-        image.draw(this, x, y, w, h);
+    public void drawBorderImage(FImage image, Color borderColor, Color tintColor, float x, float y, float w, float h, boolean tint) {
+        float oldalpha = alphaComposite;
         if(tint){
-            float oldalpha = alphaComposite;
-            setAlphaComposite(0.8f);
-            drawRoundRect(2f, Color.WHITE, x, y, w, h, (h-w)/12);
-            setAlphaComposite(1f);
-            fillRoundRect(color, x, y, w, h, (h-w)/12);
-            setAlphaComposite(oldalpha);
+            drawRoundRect(2f, borderLining(borderColor.toString()), x, y, w, h, (h-w)/12);
+            fillRoundRect(tintColor, x, y, w, h, (h-w)/12);
+        } else {
+            image.draw(this, x, y, w, h);
+            fillRoundRect(borderColor, x, y, w, h, (h-w)/10);//show corners edges
         }
+        setAlphaComposite(oldalpha);
+    }
+    public void drawborderImage(Color borderColor, float x, float y, float w, float h) {
+        float oldalpha = alphaComposite;
+        fillRoundRect(borderColor, x, y, w, h, (h-w)/12);
+        setAlphaComposite(oldalpha);
+    }
+    public void drawImage(FImage image, Color borderColor, float x, float y, float w, float h) {
+        image.draw(this, x, y, w, h);
+        fillRoundRect(borderColor, x+1, y+1, w-1.5f, h-1.5f, (h-w)/10);//used by zoom let some edges show...
     }
     public void drawImage(FImage image, float x, float y, float w, float h) {
         drawImage(image, x, y, w, h, false);
@@ -732,5 +740,14 @@ public class Graphics {
 
     public float adjustY(float y, float height) {
         return regionHeight - y - bounds.y - height; //flip y-axis
+    }
+    public Color borderLining(String c){
+        if (c == null || c == "")
+            return Color.valueOf("#fffffd");
+        int c_r = Integer.parseInt(c.substring(0,2),16);
+        int c_g = Integer.parseInt(c.substring(2,4),16);
+        int c_b = Integer.parseInt(c.substring(4,6),16);
+        int brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+        return  brightness > 155 ? Color.valueOf("#171717") : Color.valueOf("#fffffd");
     }
 }

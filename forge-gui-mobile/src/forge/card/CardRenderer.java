@@ -522,7 +522,7 @@ public class CardRenderer {
                             g.drawImage(image, x, y, w, h);
                         else {
                             boolean t = (card.getCurrentState().getOriginalColors() != card.getCurrentState().getColors()) || card.getCurrentState().hasChangeColors();
-                            g.drawBorderImage(ImageCache.getBorderImage(image.toString(), canshow), ImageCache.getTint(card), x, y, w, h, t); //tint check for changed colors
+                            g.drawBorderImage(ImageCache.getBorderImage(image.toString(), canshow), ImageCache.borderColor(image), ImageCache.getTint(card), x, y, w, h, t); //tint check for changed colors
                             g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
                         }
                     } else {
