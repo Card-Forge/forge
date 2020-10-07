@@ -1,0 +1,45 @@
+[shop]
+WinsToUnlock=0
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Nuts and Bolts
+Description=Small, inexpensive artifacts have been staples of the Magic game since its earliest days, but the Fifth Dawn expansion boosts their usefulness to another level. Cards like Auriok Salvagers and Leonin Squire bring cheap artifacts back from your graveyard and apply early attacking pressure. With sixteen artifacts that cost {1} or less, the Nuts and Bolts deck takes full advantage of your creatures' scavenging abilities.
+Deck Type=constructed
+Set=5DN
+Image=nuts_and_bolts.jpg
+[Main]
+1 Aether Spellbomb|MRD
+2 Ancient Den|MRD
+1 Auriok Glaivemaster|DST
+2 Auriok Salvagers|5DN
+1 Auriok Windwalker|5DN
+1 Bonesplitter|MRD
+3 Chromatic Sphere|MRD
+1 Conjurer's Bauble|5DN
+1 Ferropede|5DN
+1 Fold into Aether|5DN
+1 Healer's Headdress|5DN
+7 Island|MRD|1
+1 Leonin Bola|DST
+2 Leonin Elder|MRD
+3 Leonin Squire|5DN
+1 Myr Moonvessel|DST
+1 Ornithopter|MRD
+12 Plains|MRD|1
+2 Qumulox|5DN
+1 Salvaging Station|5DN
+2 Seat of the Synod|MRD
+1 Skullclamp|DST
+2 Skyhunter Prowler|5DN
+1 Skyhunter Skirmisher|5DN
+1 Steelshaper's Gift|5DN
+1 Sunbeam Spellbomb|MRD
+2 Synod Centurion|5DN
+3 Trinket Mage|5DN
+1 Vanquish|5DN
+1 Viridian Longbow|MRD
+[Sideboard]
+
+
