@@ -6,5 +6,4 @@ SVar:MaxTgts:Count$Valid Creature
 SVar:X:Count$XChoice
 #X Will get overwritten by Announce
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_harvest.jpg
-Oracle:As an additional cost to cast Infernal Harvest, return X Swamps you control to their owner's hand.\nInfernal Harvest deals X damage divided as you choose among any number of target creatures.
+Oracle:As an additional cost to cast this spell, return X Swamps you control to their owner's hand.\nInfernal Harvest deals X damage divided as you choose among any number of target creatures.

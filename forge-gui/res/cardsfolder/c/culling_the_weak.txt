@@ -5,5 +5,4 @@ A:SP$ Mana | Cost$ B Sac<1/Creature> | Produced$ B | Amount$ 4 | AILogic$ ManaRi
 SVar:AIPreference:SacCost$Creature.cmcLE2
 #TODO: Improve the mana ritual AI such that it does not "misfire" from time to time, and only then remove RemoveDeck here, because otherwise sometimes the AI will just sac the creature and not cast anything.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/culling_the_weak.jpg
-Oracle:As an additional cost to cast Culling the Weak, sacrifice a creature.\nAdd {B}{B}{B}{B}.
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nAdd {B}{B}{B}{B}.

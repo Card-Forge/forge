@@ -109,7 +109,7 @@ public enum Keyword {
     PERSIST("Persist", SimpleKeyword.class, false, "When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it."),
     PHASING("Phasing", SimpleKeyword.class, true, "This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist."),
     POISONOUS("Poisonous", KeywordWithAmount.class, false, "Whenever this creature deals combat damage to a player, that player gets {%d:poison counter}."),
-    PRESENCE("Presence", KeywordWithType.class, false, "As an additional cost to cast CARDNAME, you may reveal a %s card from your hand."),
+    PRESENCE("Presence", KeywordWithType.class, false, "As an additional cost to cast this spell, you may reveal a %s card from your hand."),
     PROTECTION("Protection", Protection.class, false, "This creature can't be blocked, targeted, dealt damage, or equipped/enchanted by %s."),
     PROVOKE("Provoke", SimpleKeyword.class, false, "Whenever this creature attacks, you may have target creature defending player controls untap and block it if able."),
     PROWESS("Prowess", SimpleKeyword.class, false, "Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn."),
