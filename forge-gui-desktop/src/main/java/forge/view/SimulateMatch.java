@@ -202,7 +202,14 @@ public class SimulateMatch {
             System.out.println(l);
         }
 
-        System.out.println(String.format("\nGame %d ended in %d ms. %s has won!\n", 1+iGame, sw.getTime(), g1.getOutcome().getWinningLobbyPlayer().getName()));
+        // If both players life totals to 0 in a single turn, the game should end in a draw
+        if(g1.getOutcome().getLifeDelta() == 0){
+            g1.setGameOver(GameEndReason.Draw);
+            System.out.println(String.format("Game %d ended in a Draw! Took %d ms.", 1+iGame, sw.getTime()));
+            sw.stop();
+        } else {
+            System.out.println(String.format("\nGame %d ended in %d ms. %s has won!\n", 1+iGame, sw.getTime(), g1.getOutcome().getWinningLobbyPlayer().getName()));
+        }
     }
 
     private static void simulateTournament(Map<String, List<String>> params, GameRules rules, boolean outputGamelog) {
