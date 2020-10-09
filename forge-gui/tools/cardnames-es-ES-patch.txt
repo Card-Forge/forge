@@ -78,7 +78,7 @@ Alena, Kessig Trapper|Alena, Trampera de Kessig|Criatura Legendaria — Explorad
 Alert Shu Infantry|Alerta de infantería Shu|Criatura - Soldado humano|Vigilancia
 Alexi's Cloak|Capa de Alexi|Encantamiento — Aura|Puedes jugar la Capa de Alexi cuando puedas jugar un instantáneo.\nLa criatura encantada no puede ser objetivo de hechizos ni habilidades.
 Alexi, Zephyr Mage|Alexi, Maga Céfira|Criatura Legendaria - Cambiahechizos Humano|{X}{U}, {T}, Descartar dos cartas de tu mano: Devuelve X criaturas objetivo a la mano de sus propietarios.
-Ali from Cairo|Ali de El Cairo|Criatura - Humano|El dañi que reduciría tu total de vidas a menos de 1 lo reduce a 1 en su lugar.
+Ali from Cairo|Ali de El Cairo|Criatura - Humano|El daño que reduciría tu total de vidas a menos de 1 lo reduce a 1 en su lugar.
 Ali Baba|Ali Baba|Criatura — Bribón Humano|{R}: Gira el muro objetivo.
 Aliban's Tower|Torre de Alibán|Instantáneo|La criatura bloqueando objetivo obtiene +3/+1 hasta el final del turno.
 Alive|Vivo|Conjuro|Crea una ficha de criatura Centauro verde 3/3.\nFusión (Puedes lanzar una o ambas mitades de esta carta de tu mano).
