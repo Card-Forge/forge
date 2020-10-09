@@ -5,8 +5,8 @@ import os
 import re
 import urllib.request
 
-database = 'all-cards-20200629052136.json'
-scryfalldburl = 'https://archive.scryfall.com/bulk-data/all-cards/' + database
+database = 'all-cards-20201009091832.json'
+scryfalldburl = 'https://c2.scryfall.com/file/scryfall-bulk/all-cards/' + database
 # 'scryfall lang code':'ISO 639 lang code'
 languages = {'es': 'es-ES', 'de': 'de-DE',
              'it': 'it-IT', 'zhs': 'zh-CN'}
