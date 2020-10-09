@@ -2,8 +2,8 @@ Name:Force of Virtue
 ManaCost:2 W W
 Types:Enchantment
 K:Flash
+SVar:AltCost:Cost$ ExileFromHand<1/Card.White+Other> | OpponentTurn$ True | Description$ If it's not your turn, you may exile a white card from your hand rather than pay this spell's mana cost.
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.
-SVar:AltCost:Cost$ ExileFromHand<1/Card.White> | OpponentTurn$ True | Description$ If it's not your turn, you may exile a white card from your hand rather than pay this spell's mana cost.
 SVar:BuffedBy:Creature
 AI:RemoveDeck:All
 Oracle:If it's not your turn, you may exile a white card from your hand rather than pay this spell's mana cost.\nFlash\nCreatures you control get +1/+1.

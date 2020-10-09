@@ -1,7 +1,6 @@
 Name:Snapback
 ManaCost:1 U
 Types:Instant
+SVar:AltCost:Cost$ ExileFromHand<1/Card.Blue+Other> | Description$ You may exile a blue card from your hand rather than pay this spell's mana cost.
 A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
-A:SP$ ChangeZone | Cost$ ExileFromHand<1/Card.Blue> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | CostDesc$ You may exile a blue card from your hand | SpellDescription$ rather than pay CARDNAME's mana cost.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/snapback.jpg
-Oracle:You may exile a blue card from your hand rather than pay Snapback's mana cost.\nReturn target creature to its owner's hand.
+Oracle:You may exile a blue card from your hand rather than pay this spell's mana cost.\nReturn target creature to its owner's hand.

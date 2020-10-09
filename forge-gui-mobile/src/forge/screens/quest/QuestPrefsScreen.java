@@ -106,6 +106,10 @@ public class QuestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption(localizer.getMessage("lblColorBias"), QPref.STARTING_POOL_COLOR_BIAS, PrefsGroup.DIFFICULTY_ALL));
         scroller.add(new PrefsOption(localizer.getMessage("lblPenaltyforLoss"), QPref.PENALTY_LOSS, PrefsGroup.DIFFICULTY_ALL));
 
+        //wild opponents addon
+        scroller.add(new PrefsOption(localizer.getMessage("lblWildOpponentMultiplier"), QPref.WILD_OPPONENTS_MULTIPLIER, PrefsGroup.DIFFICULTY_ALL));
+        scroller.add(new PrefsOption(localizer.getMessage("lblWildOpponentNumber"), QPref.WILD_OPPONENTS_NUMBER, PrefsGroup.DIFFICULTY_ALL));
+
         //Difficulty Adjustments (Easy)
         scroller.add(new PrefsHeader(localizer.getMessage("lblDifficultyAdjustmentsEasy"), FSkinImage.QUEST_NOTES, PrefsGroup.DIFFICULTY_EASY));
         scroller.add(new PrefsOption(localizer.getMessage("lblWinsForBooster"), QPref.WINS_BOOSTER_EASY, PrefsGroup.DIFFICULTY_EASY));

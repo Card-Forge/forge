@@ -3,6 +3,7 @@ package forge.deck;
 import forge.FThreads;
 import forge.Forge;
 import forge.GuiBase;
+import forge.assets.ImageCache;
 import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
 import forge.error.BugReporter;
@@ -472,6 +473,8 @@ public class FDeckChooser extends FScreen {
             break;
         }
         needRefreshOnActivate = true;
+        /*preload deck to cache*/
+        ImageCache.preloadCache(deck.getDeck());
         Forge.openScreen(new FDeckEditor(editorType, deck, true));
     }
 
@@ -1147,7 +1150,7 @@ public class FDeckChooser extends FScreen {
                         });
                     }
                 });
-                chooser.show(null, true);
+                chooser.show(null, false); /*setting selectMax to true will select all available option*/
             }
         });
     }

@@ -37,7 +37,6 @@ import forge.util.Localizer;
 import forge.util.Utils;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -71,14 +70,21 @@ public class Forge implements ApplicationListener {
     public static boolean hdbuttons = false;
     public static boolean hdstart = false;
     public static boolean isPortraitMode = false;
+    public static boolean gameInProgress = false;
+    public static int cacheSize = 400;
+    public static int totalDeviceRAM = 0;
 
-    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation) {
+    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM) {
         if (GuiBase.getInterface() == null) {
             clipboard = clipboard0;
             deviceAdapter = deviceAdapter0;
             GuiBase.setInterface(new GuiMobile(assetDir0));
             GuiBase.enablePropertyConfig(value);
             isPortraitMode = androidOrientation;
+            totalDeviceRAM = totalRAM;
+            //increase cacheSize for devices with RAM more than 5GB, default is 400. Some phones have more than 10GB RAM (Mi 10, OnePlus 8, S20, etc..)
+            if (totalDeviceRAM>5000) //devices with more than 10GB RAM will have 1000 Cache size, 700 Cache size for morethan 5GB RAM
+                cacheSize = totalDeviceRAM>10000 ? 1000: 700;
         }
         return app;
     }
@@ -142,8 +148,18 @@ public class Forge implements ApplicationListener {
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup"));
 
                 //add reminder to preload
-                if (enablePreloadExtendedArt)
-                    splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt"));
+                if (enablePreloadExtendedArt) {
+                    if(totalDeviceRAM>0)
+                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt")+"\nDetected RAM: " +totalDeviceRAM+"MB. Cache size: "+cacheSize);
+                    else
+                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt"));
+                } else {
+                    if(totalDeviceRAM>0)
+                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup")+"\nDetected RAM: " +totalDeviceRAM+"MB. Cache size: "+cacheSize);
+                    else
+                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup"));
+                }
+
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
                     public void run() {
@@ -160,25 +176,17 @@ public class Forge implements ApplicationListener {
     private void preloadExtendedArt() {
         if (!enablePreloadExtendedArt)
             return;
-        List<String> keys = new ArrayList<>();
-        File[] directories = new File(ForgeConstants.CACHE_CARD_PICS_DIR).listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                if (!file.getName().startsWith("MPS_"))
-                    return false;
-                return file.isDirectory();
-            }
-        });
-        for (File folder : directories) {
-            File[] files = new File(folder.toString()).listFiles();
-            for (File file : files) {
-                if (file.isFile()) {
-                    keys.add(folder.getName() + "/" +file.getName().replace(".jpg","").replace(".png",""));
-                }
-            }
+        List<String> borderlessCardlistkeys = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
+        if(borderlessCardlistkeys.isEmpty())
+            return;
+        List<String> filteredkeys = new ArrayList<>();
+        for (String cardname : borderlessCardlistkeys){
+            File image = new File(ForgeConstants.CACHE_CARD_PICS_DIR+ForgeConstants.PATH_SEPARATOR+cardname+".jpg");
+            if (image.exists())
+                filteredkeys.add(cardname);
         }
-        if (!keys.isEmpty())
-            ImageCache.preloadCache((Iterable<String>)keys);
+        if (!filteredkeys.isEmpty())
+            ImageCache.preloadCache(filteredkeys);
     }
 
     private void afterDbLoaded() {
@@ -402,11 +410,17 @@ public class Forge implements ApplicationListener {
     }
 
     private static void setCurrentScreen(FScreen screen0) {
+        String toNewScreen = screen0 != null ? screen0.toString() : "";
+        String previousScreen = currentScreen != null ? currentScreen.toString() : "";
+
+        gameInProgress = toNewScreen.toLowerCase().contains("match") || previousScreen.toLowerCase().contains("match");
+        boolean dispose = toNewScreen.toLowerCase().contains("homescreen");
         try {
             endKeyInput(); //end key input before switching screens
             ForgeAnimation.endAll(); //end all active animations before switching screens
             try {
-                ImageCache.disposeTexture();
+                if(dispose)
+                    ImageCache.disposeTexture();
             }
             catch (Exception ex)
             {

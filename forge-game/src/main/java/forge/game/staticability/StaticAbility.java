@@ -216,6 +216,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         if (hasParam("Description") && !this.isSuppressed()) {
             String desc = getParam("Description");
             desc = TextUtil.fastReplace(desc, "CARDNAME", this.hostCard.getName());
+            desc = TextUtil.fastReplace(desc, "NICKNAME", this.hostCard.getName().split(",")[0]);
 
             return desc;
         } else {

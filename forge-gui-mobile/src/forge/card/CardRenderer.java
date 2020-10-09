@@ -55,6 +55,7 @@ import forge.util.TextBounds;
 
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -192,7 +193,7 @@ public class CardRenderer {
         return Math.round(MANA_SYMBOL_SIZE + FSkinFont.get(12).getLineHeight() + 3 * FList.PADDING + 1);
     }
 
-    private static final Map<String, FImageComplex> cardArtCache = new HashMap<>();
+    private static final Map<String, FImageComplex> cardArtCache = new HashMap<>(1024);
     public static final float CARD_ART_RATIO = 1.302f;
     public static final float CARD_ART_HEIGHT_PERCENTAGE = 0.43f;
 
@@ -463,7 +464,7 @@ public class CardRenderer {
                     if (ImageCache.isBorderlessCardArt(image))
                         g.drawImage(image, x, y, w, h);
                     else {
-                        g.drawImage(ImageCache.getBorderImage(image), x, y, w, h);
+                        g.drawImage(ImageCache.getBorderImage(image.toString()), x, y, w, h);
                         g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
                     }
                 } else
@@ -484,8 +485,12 @@ public class CardRenderer {
         }
     }
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
+        drawCard(g, card, x, y, w, h, pos, rotate, false);
+    }
+    public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate, boolean showAltState) {
         boolean canshow = MatchController.instance.mayView(card);
-        Texture image = new RendererCachedCardImage(card, false).getImage(card.getCurrentState().getImageKey());
+        boolean showsleeves = card.isFaceDown() && card.isInZone(EnumSet.of(ZoneType.Exile)); //fix facedown card image ie gonti lord of luxury
+        Texture image = new RendererCachedCardImage(card, false).getImage( showAltState ? card.getAlternateState().getImageKey() : card.getCurrentState().getImageKey());
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         float radius = (h - w)/8;
         float croppedArea = isModernFrame(card) ? CROP_MULTIPLIER : 0.97f;
@@ -497,6 +502,8 @@ public class CardRenderer {
         if (image != null) {
             if (image == ImageCache.defaultImage) {
                 CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);
+            } else if (showsleeves) {
+                g.drawImage(sleeves, x, y, w, h);
             } else {
                 if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
                         && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()) && rotate){
@@ -515,7 +522,7 @@ public class CardRenderer {
                             g.drawImage(image, x, y, w, h);
                         else {
                             boolean t = (card.getCurrentState().getOriginalColors() != card.getCurrentState().getColors()) || card.getCurrentState().hasChangeColors();
-                            g.drawBorderImage(ImageCache.getBorderImage(image, canshow), ImageCache.getTint(card), x, y, w, h, t); //tint check for changed colors
+                            g.drawBorderImage(ImageCache.getBorderImage(image.toString(), canshow), ImageCache.borderColor(image), ImageCache.getTint(card), x, y, w, h, t); //tint check for changed colors
                             g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
                         }
                     } else {
@@ -536,15 +543,15 @@ public class CardRenderer {
     }
 
     public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
-        drawCardWithOverlays(g, card, x, y, w, h, pos, false);
+        drawCardWithOverlays(g, card, x, y, w, h, pos, false, false);
     }
-    public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean stackview) {
+    public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean stackview, boolean showAltState) {
         boolean canShow = MatchController.instance.mayView(card);
         float oldAlpha = g.getfloatAlphaComposite();
         boolean unselectable = !MatchController.instance.isSelectable(card) && MatchController.instance.isSelecting();
         float cx, cy, cw, ch;
         cx = x; cy = y; cw = w; ch = h;
-        drawCard(g, card, x, y, w, h, pos, false);
+        drawCard(g, card, x, y, w, h, pos, false, showAltState);
 
         float padding = w * PADDING_MULTIPLIER; //adjust for card border
         x += padding;
@@ -553,7 +560,7 @@ public class CardRenderer {
         h -= 2 * padding;
 
         // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
-        final CardStateView details = card.getCurrentState();
+        final CardStateView details = showAltState ? card.getAlternateState() : card.getCurrentState();
         final boolean isFaceDown = card.isFaceDown();
         final DetailColors borderColor = isFaceDown ? CardDetailUtil.DetailColors.FACE_DOWN : CardDetailUtil.getBorderColor(details, canShow); // canShow doesn't work here for face down Morphs
         Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
@@ -930,7 +937,7 @@ public class CardRenderer {
                     }
                 }
                 else {
-                    drawManaCost(g, card.getCurrentState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
+                    drawManaCost(g, showAltState ? card.getAlternateState().getManaCost() : card.getCurrentState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
                 }
             }
         }

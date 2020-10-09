@@ -374,7 +374,7 @@ public class AbilityUtils {
         if (StringUtils.isBlank(amount)) { return 0; }
         if (card == null) { return 0; }
         final Player player = card.getController();
-        final Game game = player.getGame();
+        final Game game = player == null ? card.getGame() : player.getGame();
 
         // Strip and save sign for calculations
         final boolean startsWithPlus = amount.charAt(0) == '+';
@@ -1593,6 +1593,8 @@ public class AbilityUtils {
         final String[] sq;
         sq = l[0].split("\\.");
 
+        final Game game = c.getGame();
+
         if (ctb != null) {
             // Count$Compare <int comparator value>.<True>.<False>
             if (sq[0].startsWith("Compare")) {
@@ -1775,6 +1777,13 @@ public class AbilityUtils {
                             return CardFactoryUtil.doXMath(tgtP.getLife(), expr, c);
                         }
                     }
+                }
+
+                if (l[0].startsWith("CountersAddedThisTurn")) {
+                    final String[] parts = l[0].split(" ");
+                    CounterType cType = CounterType.getType(parts[1]);
+
+                    return CardFactoryUtil.doXMath(game.getCounterAddedThisTurn(cType, parts[2], parts[3], c, sa.getActivatingPlayer(), sa), expr, c);
                 }
             }
         }

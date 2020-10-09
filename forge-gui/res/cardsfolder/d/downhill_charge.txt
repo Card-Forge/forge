@@ -1,8 +1,7 @@
 Name:Downhill Charge
 ManaCost:2 R
 Types:Instant
+SVar:AltCost:Cost$ Sac<1/Mountain> | Description$ You may sacrifice a Mountain rather than pay this spell's mana cost.
 A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | References$ X | SpellDescription$ Target creature gets +X/+0 until end of turn, where X is the number of Mountains you control.
-SVar:AltCost:Cost$ Sac<1/Mountain> | Description$ You may sacrifice a Mountain rather than pay CARDNAME's mana cost.
 SVar:X:Count$TypeYouCtrl.Mountain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/downhill_charge.jpg
-Oracle:You may sacrifice a Mountain rather than pay Downhill Charge's mana cost.\nTarget creature gets +X/+0 until end of turn, where X is the number of Mountains you control.
+Oracle:You may sacrifice a Mountain rather than pay this spell's mana cost.\nTarget creature gets +X/+0 until end of turn, where X is the number of Mountains you control.

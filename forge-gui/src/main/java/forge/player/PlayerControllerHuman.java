@@ -1,20 +1,8 @@
 package forge.player;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
@@ -39,11 +27,7 @@ import forge.StaticData;
 import forge.achievement.AchievementCollection;
 import forge.ai.GameState;
 import forge.assets.FSkinProp;
-import forge.card.CardDb;
-import forge.card.CardType;
-import forge.card.ColorSet;
-import forge.card.ICardFace;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.control.FControlGamePlayback;
@@ -51,27 +35,11 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.events.UiEventNextGameDecision;
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameEntityView;
-import forge.game.GameEntityViewMap;
-import forge.game.GameLogEntryType;
-import forge.game.GameObject;
-import forge.game.GameType;
-import forge.game.PlanarDice;
-import forge.game.ability.AbilityFactory;
+import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
-import forge.game.ability.effects.CharmEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFaceView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardView;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
+import forge.game.card.*;
+import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
@@ -82,20 +50,10 @@ import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
-import forge.game.player.DelayedReveal;
-import forge.game.player.Player;
-import forge.game.player.PlayerActionConfirmMode;
-import forge.game.player.PlayerController;
-import forge.game.player.PlayerView;
+import forge.game.player.*;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.spellability.AbilityManaPart;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.OptionalCostValue;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.SpellAbilityView;
-import forge.game.spellability.TargetChoices;
+import forge.game.spellability.*;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.MagicStack;
@@ -109,19 +67,7 @@ import forge.interfaces.IMacroSystem;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.match.NextGameDecision;
-import forge.match.input.Input;
-import forge.match.input.InputAttack;
-import forge.match.input.InputBlock;
-import forge.match.input.InputConfirm;
-import forge.match.input.InputConfirmMulligan;
-import forge.match.input.InputLondonMulligan;
-import forge.match.input.InputPassPriority;
-import forge.match.input.InputPayMana;
-import forge.match.input.InputProxy;
-import forge.match.input.InputQueue;
-import forge.match.input.InputSelectCardsForConvokeOrImprovise;
-import forge.match.input.InputSelectCardsFromList;
-import forge.match.input.InputSelectEntitiesFromList;
+import forge.match.input.*;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
@@ -624,7 +570,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // create a mapping between a spell's view and the spell itself
         Map<SpellAbilityView, SpellAbility> spellViewCache = SpellAbilityView.getMap(spells);
 
-        List<SpellAbilityView> chosen = getGui().many(title, "", num, Lists.newArrayList(spellViewCache.keySet()), sa.getHostCard().getView());
+        //override generic
+        List<SpellAbilityView> chosen = getGui().getChoices(title, num, num, Lists.newArrayList(spellViewCache.keySet()));
 
         for(SpellAbilityView view : chosen) {
             if (spellViewCache.containsKey(view)) {
@@ -1168,15 +1115,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private void sortCreatureTypes(List<String> types) {
         // build map of creature types in player's main deck against the
         // occurrences of each
-        CardCollection pool = CardLists.filterControlledBy(game.getCardsInGame(), player);
         Map<String, Integer> typesInDeck = Maps.newHashMap();
 
         // TODO JAVA 8 use getOrDefault
-        for (Card c : pool) {
+        for (Card c : player.getAllCards()) {
 
             // Changeling are all creature types, they are not interesting for
             // counting creature types
             if (c.hasStartOfKeyword(Keyword.CHANGELING.toString())) {
+                continue;
+            }
+            // same is true if it somehow has all creature types
+            if (c.getType().hasSubtype(CardType.AllCreatureTypes)) {
                 continue;
             }
             // ignore cards that does enter the battlefield as clones
@@ -1191,8 +1141,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 continue;
             }
 
-            Set<String> cardCreatureTypes = c.getType().getCreatureTypes();
-            for (String type : cardCreatureTypes) {
+            for (String type : c.getType().getCreatureTypes()) {
                 Integer count = typesInDeck.get(type);
                 if (count == null) {
                     count = 0;
@@ -1204,54 +1153,31 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (sa.getApi() != ApiType.Token) {
                     continue;
                 }
-                if (sa.hasParam("TokenTypes")) {
-                    for (String var : sa.getParam("TokenTypes").split(",")) {
-                        if (!CardType.isACreatureType(var)) {
-                            continue;
-                        }
-                        Integer count = typesInDeck.get(var);
+                if (sa.hasParam("TokenScript")) {
+                    Card protoType = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
+                    for (String type : protoType.getType().getCreatureTypes()) {
+                        Integer count = typesInDeck.get(type);
                         if (count == null) {
                             count = 0;
                         }
-                        typesInDeck.put(var, count + 1);
+                        typesInDeck.put(type, count + 1);
                     }
                 }
             }
             // same for Trigger that does make Tokens
             for (Trigger t : c.getTriggers()) {
-                SpellAbility sa = t.getOverridingAbility();
-                String sTokenTypes = null;
+                SpellAbility sa = t.ensureAbility();
                 if (sa != null) {
-                    if (sa.getApi() != ApiType.Token || !sa.hasParam("TokenTypes")) {
-                        continue;
+                    if (sa.hasParam("TokenScript")) {
+                        Card protoType = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
+                        for (String type : protoType.getType().getCreatureTypes()) {
+                            Integer count = typesInDeck.get(type);
+                            if (count == null) {
+                                count = 0;
+                            }
+                            typesInDeck.put(type, count + 1);
+                        }
                     }
-                    sTokenTypes = sa.getParam("TokenTypes");
-                } else if (t.hasParam("Execute")) {
-                    String name = t.getParam("Execute");
-                    if (!c.hasSVar(name)) {
-                        continue;
-                    }
-
-                    Map<String, String> params = AbilityFactory.getMapParams(c.getSVar(name));
-                    if (!params.containsKey("TokenTypes")) {
-                        continue;
-                    }
-                    sTokenTypes = params.get("TokenTypes");
-                }
-
-                if (sTokenTypes == null) {
-                    continue;
-                }
-
-                for (String var : sTokenTypes.split(",")) {
-                    if (!CardType.isACreatureType(var)) {
-                        continue;
-                    }
-                    Integer count = typesInDeck.get(var);
-                    if (count == null) {
-                        count = 0;
-                    }
-                    typesInDeck.put(var, count + 1);
                 }
             }
             // special rule for Fabricate and Servo
@@ -1591,14 +1517,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * spellability.SpellAbility, java.util.List, int, int)
      */
     @Override
-    public List<AbilitySub> chooseModeForAbility(final SpellAbility sa, final int min, final int num,
+    public List<AbilitySub> chooseModeForAbility(final SpellAbility sa, List<AbilitySub> possible, final int min, final int num,
             boolean allowRepeat) {
         boolean trackerFrozen = game.getTracker().isFrozen();
         if (trackerFrozen) {
             // The view tracker needs to be unfrozen to update the SpellAbilityViews at this point, or it may crash
             game.getTracker().unfreeze();
         }
-        final List<AbilitySub> possible = CharmEffect.makePossibleOptions(sa);
         Map<SpellAbilityView, AbilitySub> spellViewCache = SpellAbilityView.getMap(possible);
         if (trackerFrozen) {
             game.getTracker().freeze(); // refreeze if the tracker was frozen prior to this update
@@ -3098,8 +3023,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public void handleLandPlayed(Card land, Zone zone) {
         IGuiGame guiGame = getGui();
         guiGame.handleLandPlayed(land,zone);
-    }  
+    }
 
-    
+
 }
 

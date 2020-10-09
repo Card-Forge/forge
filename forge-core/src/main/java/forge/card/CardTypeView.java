@@ -19,6 +19,12 @@ public interface CardTypeView extends Iterable<String>, Serializable {
     boolean hasSupertype(Supertype supertype);
     boolean hasSubtype(String subtype);
     boolean hasCreatureType(String creatureType);
+
+    public boolean sharesCreaturetypeWith(final CardTypeView ctOther);
+    public boolean sharesLandTypeWith(final CardTypeView ctOther);
+    public boolean sharesPermanentTypeWith(final CardTypeView ctOther);
+    public boolean sharesCardTypeWith(final CardTypeView ctOther);
+
     boolean isPermanent();
     boolean isCreature();
     boolean isPlaneswalker();

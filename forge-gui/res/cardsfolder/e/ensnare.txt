@@ -1,8 +1,7 @@
 Name:Ensnare
 ManaCost:3 U
 Types:Instant
+SVar:AltCost:Cost$ Return<2/Island> | Description$ You may return two Islands you control to their owner's hand rather than pay this spell's mana cost.
 A:SP$ TapAll | Cost$ 3 U | ValidCards$ Creature | SpellDescription$ Tap all creatures.
-SVar:AltCost:Cost$ Return<2/Island>
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ensnare.jpg
-Oracle:You may return two Islands you control to their owner's hand rather than pay Ensnare's mana cost.\nTap all creatures.
+Oracle:You may return two Islands you control to their owner's hand rather than pay this spell's mana cost.\nTap all creatures.

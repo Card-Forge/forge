@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.GuiBase;
+import forge.assets.ImageCache;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -624,6 +625,10 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 }
                 if (isNewPanel) {
                     panel.setVisible(true);
+                }
+                if (Forge.gameInProgress) {
+                    /*preload deck to cache*/
+                    ImageCache.preloadCache(decks[i]);
                 }
                 Gdx.graphics.requestRendering();
             }

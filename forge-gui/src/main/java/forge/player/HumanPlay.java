@@ -85,7 +85,9 @@ public class HumanPlay {
         }
 
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-            CharmEffect.makeChoices(sa);
+            if (!CharmEffect.makeChoices(sa)) {
+                return false;
+            }
         }
 
         sa = AbilityUtils.addSpliceEffects(sa);
@@ -150,7 +152,9 @@ public class HumanPlay {
 
         if (!sa.isCopied()) {
             if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-                CharmEffect.makeChoices(sa);
+                if (!CharmEffect.makeChoices(sa)) {
+                    return;
+                }
             }
             sa = AbilityUtils.addSpliceEffects(sa);
         }

@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=0
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Snake's Path
+Description=If your opponents weren't afraid of snakes before, the "Snake's Path" deck will give them a new phobia! With tons of sss-slithery creatures with sss-super abilities, you will sss-seize control in mere sss-seconds!
+Deck Type=constructed
+Set=CHK
+Image=snakes_path.jpg
+
+[Main]
+24 Forest|CHK|1
+2 Hankyu|CHK
+1 Junkyo Bell|CHK
+3 Kashi-Tribe Reaver|CHK
+2 Kashi-Tribe Warriors|CHK
+1 Lure|CHK
+3 Matsu-Tribe Decoy|CHK
+1 Orochi Eggwatcher|CHK
+1 Orochi Hatchery|CHK
+3 Orochi Leafcaller|CHK
+3 Orochi Ranger|CHK
+4 Orochi Sustainer|CHK
+1 Sachi, Daughter of Seshiro|CHK
+3 Sakura-Tribe Elder|CHK
+1 Sensei's Divining Top|CHK
+2 Serpent Skin|CHK
+1 Sosuke, Son of Seshiro|CHK
+2 Strength of Cedars|CHK
+1 Time of Need|CHK
+1 Wear Away|CHK
+[Sideboard]

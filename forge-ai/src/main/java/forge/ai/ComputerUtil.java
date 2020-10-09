@@ -101,7 +101,9 @@ public class ComputerUtil {
         sa = GameActionUtil.addExtraKeywordCost(sa);
 
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-            CharmEffect.makeChoices(sa);
+            if (!CharmEffect.makeChoices(sa)) {
+                return false;
+            }
         }
         if (chooseTargets != null) {
             chooseTargets.run();
@@ -261,7 +263,9 @@ public class ComputerUtil {
             newSA.setHostCard(game.getAction().moveToStack(source, sa));
 
             if (newSA.getApi() == ApiType.Charm && !newSA.isWrapper()) {
-                CharmEffect.makeChoices(newSA);
+                if (!CharmEffect.makeChoices(sa)) {
+                    return false;
+                }
             }
         }
 

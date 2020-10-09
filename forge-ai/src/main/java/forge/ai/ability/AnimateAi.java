@@ -251,7 +251,7 @@ public class AnimateAi extends SpellAbilityAi {
                 && sa.getTargetRestrictions() != null
                 && sa.getTargetRestrictions().getMinTargets(sa.getHostCard(), sa) == 0;
         
-        final CardType types = new CardType();
+        final CardType types = new CardType(true);
         if (sa.hasParam("Types")) {
             types.addAll(Arrays.asList(sa.getParam("Types").split(",")));
         }
@@ -340,6 +340,14 @@ public class AnimateAi extends SpellAbilityAi {
 
             // select the worst of the best
             final Card worst = ComputerUtilCard.getWorstAI(maxList);
+            if (worst.isLand()) {
+                // e.g. Clan Guildmage, make sure we're not using the same land we want to animate to activate the ability
+                this.holdAnimatedTillMain2(ai, worst);
+                if (!ComputerUtilMana.canPayManaCost(sa, ai, 0)) {
+                    this.releaseHeldTillMain2(ai, worst);
+                    return false;
+                }
+            }
             this.rememberAnimatedThisTurn(ai, worst);
             sa.getTargets().add(worst);
             return true;            
@@ -383,12 +391,12 @@ public class AnimateAi extends SpellAbilityAi {
             }
         }
 
-        final CardType types = new CardType();
+        final CardType types = new CardType(true);
         if (sa.hasParam("Types")) {
             types.addAll(Arrays.asList(sa.getParam("Types").split(",")));
         }
 
-        final CardType removeTypes = new CardType();
+        final CardType removeTypes = new CardType(true);
         if (sa.hasParam("RemoveTypes")) {
             removeTypes.addAll(Arrays.asList(sa.getParam("RemoveTypes").split(",")));
         }
@@ -563,5 +571,13 @@ public class AnimateAi extends SpellAbilityAi {
 
     public static boolean isAnimatedThisTurn(Player ai, Card c) {
         return AiCardMemory.isRememberedCard(ai, c, AiCardMemory.MemorySet.ANIMATED_THIS_TURN);
+    }
+
+    private void holdAnimatedTillMain2(Player ai, Card c) {
+        AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2);
+    }
+
+    private void releaseHeldTillMain2(Player ai, Card c) {
+        AiCardMemory.forgetCard(ai, c, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2);
     }
 }

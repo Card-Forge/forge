@@ -19,6 +19,7 @@ package forge.quest.data;
 
 import forge.properties.ForgeConstants;
 import forge.properties.PreferencesStore;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 
 import java.io.Serializable;
@@ -173,6 +174,8 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         SHOP_WINS_FOR_NO_SELL_LIMIT("50"),
         // Duels of the current difficulty only, or that and all difficulties below it?
         MORE_DUEL_CHOICES("0"),
+        WILD_OPPONENTS_MULTIPLIER("2.0"),
+        WILD_OPPONENTS_NUMBER("0"),
 
         //The number of cards to keep before selling
         PLAYSET_SIZE("4"),
@@ -311,6 +314,11 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
             case UNLOCK_DISTANCE_MULTIPLIER:
                 if (val < 1) {
                     return "Value too small (minimum 1).";
+                }
+                break;
+            case WILD_OPPONENTS_NUMBER:
+                if(val < 0 || val > 3) {
+                    return Localizer.getInstance().getMessage("lblWildOpponentNumberError");
                 }
                 break;
             case BOOSTER_COMMONS:

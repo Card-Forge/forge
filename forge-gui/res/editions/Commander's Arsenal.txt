@@ -1,6 +1,6 @@
 [metadata]
 Code=CM1
-MciCode=cma
+MciCode=CM1
 Date=2012-11-02
 Name=Commander's Arsenal
 
@@ -16,12 +16,12 @@ Name=Commander's Arsenal
 9 M Kaalia of the Vast
 10 U Loyal Retainers
 11 M Maelstrom Wanderer
+12 M The Mimeoplasm
 13 R Mind's Eye
 14 R Mirari's Wake
 15 C Rhystic Study
 16 R Scroll Rack
 17 R Sylvan Library
-12 M The Mimeoplasm
 18 M Vela the Night-Clad
 
 [tokens]

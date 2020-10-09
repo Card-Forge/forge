@@ -841,14 +841,6 @@ public class CardFactoryUtil {
             return doXMath(maxNum, m, c);
         }
 
-        // Count$CountersAddedToPermYouCtrl <CounterType>
-        if (l[0].startsWith("CountersAddedToPermYouCtrl")) {
-            final String[] components = l[0].split(" ", 2);
-            final CounterType counterType = CounterType.getType(components[1]);
-            int n = cc.getCounterToPermThisTurn(counterType);
-            return doXMath(n, m, c);
-        }
-
         if (l[0].startsWith("CommanderCastFromCommandZone")) {
             // only used by Opal Palace, and it does add the trigger to the card
             return doXMath(cc.getCommanderCast(c), m, c);
@@ -1124,7 +1116,7 @@ public class CardFactoryUtil {
             for (Card card : cards) {
                 Iterables.addAll(creatTypes, card.getType().getCreatureTypes());
             }
-            int n = creatTypes.contains("AllCreatureTypes") ? CardType.getAllCreatureTypes().size() : creatTypes.size();
+            int n = creatTypes.contains(CardType.AllCreatureTypes) ? CardType.getAllCreatureTypes().size() : creatTypes.size();
             return doXMath(n, m, c);
         }
 
@@ -1206,7 +1198,7 @@ public class CardFactoryUtil {
             // Figure out how to count each class separately.
             for (Card card : adventurers) {
                 Set<String> creatureTypes = card.getType().getCreatureTypes();
-                boolean anyType = creatureTypes.contains("AllCreatureTypes");
+                boolean anyType = creatureTypes.contains(CardType.AllCreatureTypes);
                 creatureTypes.retainAll(partyTypes);
 
                 if (anyType || creatureTypes.size() == 4) {
@@ -2005,7 +1997,7 @@ public class CardFactoryUtil {
             // Remove Duplicated types
             final Set<String> creatureTypes = c.getType().getCreatureTypes();
             for (String creatureType : creatureTypes) {
-                if (creatureType.equals("AllCreatureTypes")) {
+                if (creatureType.equals(CardType.AllCreatureTypes)) {
                     allCreatureType++;
                 }
                 else {
@@ -2913,7 +2905,7 @@ public class CardFactoryUtil {
 
             final String repeatStr = "DB$ RepeatEach | RepeatPlayers$ OpponentsOtherThanDefendingPlayer | ChangeZoneTable$ True";
 
-            final String copyStr = "DB$ CopyPermanent | Defined$ Self | Tapped$ True | Optional$ True | TokenAttacking$ Remembered"
+            final String copyStr = "DB$ CopyPermanent | Defined$ Self | TokenTapped$ True | Optional$ True | TokenAttacking$ Remembered"
                     + " | ChoosePlayerOrPlaneswalker$  True | ImprintTokens$ True";
 
             final String delTrigStr = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | RememberObjects$ Imprinted"
@@ -4693,8 +4685,10 @@ public class CardFactoryUtil {
         }
         altCostSA.setRestrictions(restriction);
 
-        final String costDescription = params.containsKey("Description") ? params.get("Description")
-                : TextUtil.concatWithSpace("You may", abCost.toStringAlt(),"rather than pay", TextUtil.addSuffix(card.getName(),"'s mana cost."));
+        String costDescription = TextUtil.fastReplace(params.get("Description"),"CARDNAME", card.getName());
+        if (costDescription.isEmpty()) {
+            costDescription = TextUtil.concatWithSpace("You may", abCost.toStringAlt(), "rather than pay", TextUtil.addSuffix(card.getName(), "'s mana cost."));
+        }
 
         altCostSA.setDescription(costDescription);
         if (params.containsKey("References")) {

@@ -92,7 +92,7 @@ public class VGameMenu extends FDropDownMenu {
                 SettingsScreen.show(false);
             }
         }));
-        addItem(new FMenuItem(localizer.getMessage("lblShowWinLoseOverlay"), null, new FEventHandler() {
+        addItem(new FMenuItem(localizer.getMessage("lblShowWinLoseOverlay"), FSkinImage.ENDTURN, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 MatchController.instance.showWinlose();

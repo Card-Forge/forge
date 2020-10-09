@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=0
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Dead Again
+Description=In the "Dead Again" deck, life begins at death. The deck uses your life total and your graveyard as extra resources. It even uses your opponent's life total as a resource!
+Deck Type=constructed
+Set=9ED
+Image=dead_again.jpg
+
+[Main]
+1 Consume Spirit|9ED
+1 Contaminated Bond|9ED
+1 Dark Banishing|9ED
+1 Deathgazer|9ED
+1 Demon's Horn|9ED
+1 Drudge Skeletons|9ED
+2 Foul Imp|9ED
+2 Gravedigger|9ED
+2 Highway Robber|9ED
+2 Hollow Dogs|9ED
+1 Nekrataal|9ED
+1 Nightmare|9ED
+1 Phyrexian Gargantua|9ED
+1 Raise Dead|9ED
+2 Serpent Warrior|9ED
+17 Swamp|9ED|1
+1 Tanglebloom|9ED
+1 Underworld Dreams|9ED
+1 Unholy Strength|9ED
+[Sideboard]
+

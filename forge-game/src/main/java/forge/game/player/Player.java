@@ -114,8 +114,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private CardCollection sacrificedThisTurn = new CardCollection();
 
-    private Map<CounterType, Integer> countersAddedtoPermThisTurn = Maps.newHashMap();
-
     /** A list of tokens not in play, but on their way.
      * This list is kept in order to not break ETB-replacement
      * on tokens. */
@@ -2119,7 +2117,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasProwl(final String type) {
-        if (prowl.contains("AllCreatureTypes")) {
+        if (prowl.contains(CardType.AllCreatureTypes)) {
             return true;
         }
         return prowl.contains(type);
@@ -2287,20 +2285,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void resetSacrificedThisTurn() {
         sacrificedThisTurn.clear();
-    }
-
-    public final void addCounterToPermThisTurn(final CounterType type, final int x) {
-        countersAddedtoPermThisTurn.put(type, getCounterToPermThisTurn(type) + x);
-    }
-
-    public final Integer getCounterToPermThisTurn(final CounterType type) {
-        if (countersAddedtoPermThisTurn.containsKey(type))
-            return countersAddedtoPermThisTurn.get(type);
-        return 0;
-    }
-
-    public final void resetCounterToPermThisTurn() {
-        countersAddedtoPermThisTurn.clear();
     }
 
     public final int getSpellsCastThisTurn() {
@@ -2521,7 +2505,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetSurveilThisTurn();
         resetCycledThisTurn();
         resetSacrificedThisTurn();
-        resetCounterToPermThisTurn();
         clearAssignedDamage();
         resetAttackersDeclaredThisTurn();
         resetAttackedOpponentsThisTurn();

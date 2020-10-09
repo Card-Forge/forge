@@ -445,7 +445,6 @@ public class MatchController extends AbstractGuiGame {
     @Override
     public void afterGameEnd() {
         Forge.back();
-        ImageCache.disposeTexture();
         //view = null;
     }
 

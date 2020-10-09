@@ -229,3 +229,14 @@ w_1_1_warrior_vigilance
 b_2_2_zombie
 g_5_4_snake
 ur_1_1_insect_flying_haste
+
+[other]
+eternalize_adorned_pouncer
+eternalize_champion_of_wits
+eternalize_dreamstealer
+eternalize_earthshaker_khenra
+eternalize_proven_combatant
+eternalize_resilient_khenra
+eternalize_sinuous_striker
+eternalize_steadfast_sentinel
+eternalize_sunscourge_champion

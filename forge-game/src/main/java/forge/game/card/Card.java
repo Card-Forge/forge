@@ -26,7 +26,6 @@ import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
 import forge.card.CardDb.SetPreference;
-import forge.card.CardType.CoreType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.*;
@@ -34,7 +33,6 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.ability.effects.CharmEffect;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostSacrifice;
@@ -280,6 +278,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final Table<SpellAbility, StaticAbility, Integer> numberTurnActivationsStatic = HashBasedTable.create();
     private final Table<SpellAbility, StaticAbility, Integer> numberGameActivationsStatic = HashBasedTable.create();
 
+    private final Map<SpellAbility, List<String>> chosenModesTurn = Maps.newHashMap();
+    private final Map<SpellAbility, List<String>> chosenModesGame = Maps.newHashMap();
+
+    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesTurnStatic = HashBasedTable.create();
+    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesGameStatic = HashBasedTable.create();
 
     // Enumeration for CMC request types
     public enum SplitCMCMode {
@@ -664,6 +667,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
 
             facedown = false;
+            updateStateForView(); //fixes cards with backside viewable
             // need to run faceup commands, currently
             // it does cleanup the modified facedown state
             if (result) {
@@ -1239,7 +1243,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final int loyaltyBefore = getCurrentLoyalty();
 
                 setCounters(counterType, newValue);
-                getController().addCounterToPermThisTurn(counterType, addAmount);
+                getGame().addCounterAddedThisTurn(source, counterType, this, addAmount);
                 view.updateCounters(this);
 
                 //fire card stats changed event if p/t bonuses or loyalty changed from added counters
@@ -1267,7 +1271,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else {
             setCounters(counterType, newValue);
-            getController().addCounterToPermThisTurn(counterType, addAmount);
+
+            getGame().addCounterAddedThisTurn(source, counterType, this, addAmount);
             view.updateCounters(this);
         }
         if (newValue <= 0) {
@@ -1714,8 +1719,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     final String costString2 = keyword.split(":")[2];
                     final Cost cost1 = new Cost(costString1, false);
                     final Cost cost2 = new Cost(costString2, false);
-                    sbLong.append("As an additional cost to cast ")
-                            .append(getName()).append(", ")
+                    sbLong.append("As an additional cost to cast this spell, ")
                             .append(cost1.toSimpleString())
                             .append(" or pay ")
                             .append(cost2.toSimpleString())
@@ -2070,8 +2074,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                     final Card host = stAb.getHostCard();
                     if (isValid(stAb.getParam("ValidAttacker").split(","), host.getController(), host, null)) {
-                        String desc = stAb.toString();
-                        desc = TextUtil.fastReplace(desc, "CARDNAME", host.getName());
+                        String currentName = (host.getName());
+                        String desc1 = TextUtil.fastReplace(stAb.toString(), "CARDNAME", currentName);
+                        String desc = TextUtil.fastReplace(desc1,"NICKNAME", currentName.split(",")[0]);
                         if (host.getEffectSource() != null) {
                             desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", host.getEffectSource().getName());
                         }
@@ -2203,8 +2208,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     final String[] k = keyword.split(":");
                     final Cost cost1 = new Cost(k[1], false);
                     final Cost cost2 = new Cost(k[2], false);
-                    sbBefore.append("As an additional cost to cast ")
-                            .append(state.getName()).append(", ")
+                    sbBefore.append("As an additional cost to cast this spell, ")
                             .append(cost1.toSimpleString())
                             .append(" or pay ")
                             .append(cost2.toSimpleString())
@@ -2325,14 +2329,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private String formatSpellAbility(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final String elementText = sa.toString();
-
-        //Determine if a card has multiple choices, then format it in an easier to read list.
-        if (ApiType.Charm.equals(sa.getApi())) {
-            sb.append(CharmEffect.makeFormatedDescription(sa));
-        } else {
-            sb.append(elementText).append("\r\n");
-        }
+        sb.append(sa.toString()).append("\r\n");
         return sb.toString();
     }
 
@@ -3100,6 +3097,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         currentState.addType(type0);
     }
 
+    public final void addType(final Iterable<String> type0) {
+        currentState.addType(type0);
+    }
+
     public final void removeType(final CardType.Supertype st) {
         currentState.removeType(st);
     }
@@ -3197,11 +3198,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         CardType addType = null;
         CardType removeType = null;
         if (types != null) {
-            addType = new CardType(types);
+            addType = new CardType(types, true);
         }
 
         if (removeTypes != null) {
-            removeType = new CardType(removeTypes);
+            removeType = new CardType(removeTypes, true);
         }
 
         addChangedCardTypes(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
@@ -3962,7 +3963,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addChangedTextTypeWord(final String originalWord, final String newWord, final Long timestamp) {
         changedTextTypes.add(timestamp, originalWord, newWord);
         if (getType().hasSubtype(originalWord)) {
-            addChangedCardTypes(CardType.parse(newWord), CardType.parse(originalWord),
+            addChangedCardTypes(CardType.parse(newWord, true), CardType.parse(originalWord, true),
                     false, false, false, false, false, false, false, timestamp);
         }
         updateKeywordsChangedText(timestamp);
@@ -4603,82 +4604,32 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (c1 == null) {
             return false;
         }
-
-        for (final String type : getType().getCreatureTypes()) {
-            if (type.equals("AllCreatureTypes") && c1.hasACreatureType()) {
-                return true;
-            }
-            if (c1.getType().hasCreatureType(type)) {
-                return true;
-            }
-        }
-        return false;
+        return getType().sharesCreaturetypeWith(c1.getType());
     }
 
     public final boolean sharesLandTypeWith(final Card c1) {
         if (c1 == null) {
             return false;
         }
-
-        for (final String type : getType().getLandTypes()) {
-            if (c1.getType().hasSubtype(type)) {
-                return true;
-            }
-        }
-        return false;
+        return getType().sharesLandTypeWith(c1.getType());
     }
 
     public final boolean sharesPermanentTypeWith(final Card c1) {
         if (c1 == null) {
             return false;
         }
-
-        for (final CoreType type : getType().getCoreTypes()) {
-            if (type.isPermanent && c1.getType().hasType(type)) {
-                return true;
-            }
-        }
-        return false;
+        return getType().sharesPermanentTypeWith(c1.getType());
     }
 
     public final boolean sharesCardTypeWith(final Card c1) {
-        for (final CoreType type : getType().getCoreTypes()) {
-            if (c1.getType().hasType(type)) {
-                return true;
-            }
+        if (c1 == null) {
+            return false;
         }
-        return false;
-    }
-
-    public final boolean sharesTypeWith(final Card c1) {
-        for (final String type : getType()) {
-            if (c1.getType().hasStringType(type)) {
-                return true;
-            }
-        }
-        return false;
+        return getType().sharesCardTypeWith(c1.getType());
     }
 
     public final boolean sharesControllerWith(final Card c1) {
         return c1 != null && getController().equals(c1.getController());
-    }
-
-    public final boolean hasACreatureType() {
-        for (final String type : getType().getSubtypes()) {
-            if (forge.card.CardType.isACreatureType(type) ||  type.equals("AllCreatureTypes")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public final boolean hasALandType() {
-        for (final String type : getType().getSubtypes()) {
-            if (forge.card.CardType.isALandType(type) || forge.card.CardType.isABasicLandType(type)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public final boolean hasABasicLandType() {
@@ -5316,8 +5267,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void animateBestow(final boolean updateView) {
         bestowTimestamp = getGame().getNextTimestamp();
-        addChangedCardTypes(new CardType(Collections.singletonList("Aura")),
-                new CardType(Collections.singletonList("Creature")),
+        addChangedCardTypes(new CardType(Collections.singletonList("Aura"), true),
+                new CardType(Collections.singletonList("Creature"), true),
                 false, false, false, false, false, false, true, bestowTimestamp, updateView);
         addChangedCardKeywords(Collections.singletonList("Enchant creature"), Lists.newArrayList(),
                 false, false, bestowTimestamp, updateView);
@@ -5915,6 +5866,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         clearBlockedThisTurn();
         resetMayPlayTurn();
         resetExtertedThisTurn();
+        resetChosenModeTurn();
     }
 
     public boolean hasETBTrigger(final boolean drawbackOnly) {
@@ -6037,6 +5989,15 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         if (isCreature() && source.getActivatingPlayer().hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
+            Cost srcCost = source.getPayCosts();
+            if (srcCost != null) {
+                if (srcCost.hasSpecificCostType(CostSacrifice.class)) {
+                    return false;
+                }
+            }
+        }
+
+        if (isPermanent() && !isLand() && source.getActivatingPlayer().hasKeyword("You can't sacrifice nonland permanents to cast spells or activate abilities.")) {
             Cost srcCost = source.getPayCosts();
             if (srcCost != null) {
                 if (srcCost.hasSpecificCostType(CostSacrifice.class)) {
@@ -6580,6 +6541,94 @@ public class Card extends GameEntity implements Comparable<Card> {
     public void resetTurnActivations() {
         numberTurnActivations.clear();
         numberTurnActivationsStatic.clear();
+    }
+
+    public List<String> getChosenModesTurn(SpellAbility ability) {
+        SpellAbility original = null;
+        SpellAbility root = ability.getRootAbility();
+
+        // because trigger spell abilities are copied, try to get original one
+        if (root.isTrigger()) {
+            original = root.getTrigger().getOverridingAbility();
+        } else {
+            original = ability.getOriginalAbility();
+            if (original == null) {
+                original = ability;
+            }
+        }
+
+        if (ability.getGrantorStatic() != null) {
+            return chosenModesTurnStatic.get(original, ability.getGrantorStatic());
+        }
+        return chosenModesTurn.get(original);
+    }
+    public List<String> getChosenModesGame(SpellAbility ability) {
+        SpellAbility original = null;
+        SpellAbility root = ability.getRootAbility();
+
+        // because trigger spell abilities are copied, try to get original one
+        if (root.isTrigger()) {
+            original = root.getTrigger().getOverridingAbility();
+        } else {
+            original = ability.getOriginalAbility();
+            if (original == null) {
+                original = ability;
+            }
+        }
+
+        if (ability.getGrantorStatic() != null) {
+            return chosenModesGameStatic.get(original, ability.getGrantorStatic());
+        }
+        return chosenModesGame.get(original);
+    }
+
+    public void addChosenModes(SpellAbility ability, String mode) {
+        SpellAbility original = null;
+        SpellAbility root = ability.getRootAbility();
+
+        // because trigger spell abilities are copied, try to get original one
+        if (root.isTrigger()) {
+            original = root.getTrigger().getOverridingAbility();
+        } else {
+            original = ability.getOriginalAbility();
+            if (original == null) {
+                original = ability;
+            }
+        }
+
+        if (ability.getGrantorStatic() != null) {
+            List<String> result = chosenModesTurnStatic.get(original, ability.getGrantorStatic());
+            if (result == null) {
+                result = Lists.newArrayList();
+                chosenModesTurnStatic.put(original, ability.getGrantorStatic(), result);
+            }
+            result.add(mode);
+            result = chosenModesGameStatic.get(original, ability.getGrantorStatic());
+            if (result == null) {
+                result = Lists.newArrayList();
+                chosenModesGameStatic.put(original, ability.getGrantorStatic(), result);
+            }
+            result.add(mode);
+        } else {
+            List<String> result = chosenModesTurn.get(original);
+            if (result == null) {
+                result = Lists.newArrayList();
+                chosenModesTurn.put(original, result);
+            }
+            result.add(mode);
+
+            result = chosenModesGame.get(original);
+            if (result == null) {
+                result = Lists.newArrayList();
+                chosenModesGame.put(original, result);
+            }
+            result.add(mode);
+        }
+    }
+
+    public void resetChosenModeTurn() {
+        chosenModesTurn.clear();
+        chosenModesTurnStatic.clear();
     }
 
     public int getPlaneswalkerAbilityActivated() {

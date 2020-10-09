@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.Align;
 import forge.FThreads;
 import forge.Forge;
 import forge.assets.FSkinFont;
+import forge.assets.ImageCache;
 import forge.deck.DeckProxy;
 import forge.deck.DeckgenUtil;
 import forge.deck.FDeckChooser;
@@ -151,6 +152,9 @@ public class QuestDecksScreen extends FScreen {
     private void editSelectedDeck() {
         final DeckProxy deck = lstDecks.getSelectedItem();
         if (deck == null) { return; }
+
+        /*preload deck to cache*/
+        ImageCache.preloadCache(deck.getDeck());
 
         needRefreshOnActivate = true;
         Forge.openScreen(new QuestDeckEditor(deck));

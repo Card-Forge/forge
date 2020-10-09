@@ -36,7 +36,9 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.util.Localizer;
 import forge.util.CardTranslation;
+import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -201,6 +203,26 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
             sb.append(" Then shuffle that library.");
+        } else if (origin.equals("Sideboard")) {
+            sb.append(chooserNames);
+            //currently Reveal is always True in ChangeZone
+            if (sa.hasParam("Reveal")) {
+                sb.append(" may reveal ").append(num).append(" ").append(type).append(" from outside the game and put ");
+                if (num == 1) {
+                    sb.append("it ");
+                } else {
+                    sb.append("them ");
+                }
+                sb.append("into their ").append(destination.toLowerCase()).append(".");
+            } else {
+                if (sa.hasParam("Mandatory")) {
+                    sb.append(" puts ");
+                } else {
+                    sb.append(" may put ");
+                }
+                sb.append(num).append(" ").append(type).append(" from outside the game into their ");
+                sb.append(destination.toLowerCase()).append(".");
+            }
         } else if (origin.equals("Hand")) {
             sb.append(chooserNames);
             if (!chooserNames.equals(fetcherNames)) {
@@ -282,7 +304,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         final StringBuilder sbTargets = new StringBuilder();
-
         Iterable<Card> tgts;
         if (sa.usesTargeting()) {
             tgts = sa.getTargets().getTargetCards();
@@ -290,10 +311,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             // otherwise add self to list and go from there
             tgts = sa.knownDetermineDefined(sa.getParam("Defined"));
         }
-
-        for (final Card c : tgts) {
-            sbTargets.append(" ").append(c);
-        }
+        sbTargets.append(" ").append(StringUtils.join(tgts, ", "));
 
         final String targetname = sbTargets.toString();
 
@@ -302,12 +320,16 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final String fromGraveyard = " from the graveyard";
 
         if (destination.equals(ZoneType.Battlefield)) {
-            sb.append("Put").append(targetname);
             if (ZoneType.Graveyard.equals(origin)) {
-                sb.append(fromGraveyard);
+                sb.append("Return").append(targetname);
+            } else {
+                sb.append("Put").append(targetname);
             }
-
-            sb.append(" onto the battlefield");
+            if (ZoneType.Graveyard.equals(origin)) {
+                sb.append(fromGraveyard).append(" to the battlefield");
+            } else {
+                sb.append(" onto the battlefield");
+            }
             if (sa.hasParam("Tapped")) {
                 sb.append(" tapped");
             }
@@ -1159,9 +1181,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
 
                     if (sa.hasParam("FaceDownAddType")) {
-                        for (String type : sa.getParam("FaceDownAddType").split(",")) {
-                            c.addType(type);
-                        }
+                        c.addType(Arrays.asList(sa.getParam("FaceDownAddType").split(" & ")));
                     }
 
                     if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")

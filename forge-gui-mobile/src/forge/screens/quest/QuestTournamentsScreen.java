@@ -9,6 +9,7 @@ import forge.GuiBase;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.assets.ImageCache;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -25,6 +26,7 @@ import forge.quest.QuestEventDraft;
 import forge.quest.QuestTournamentController;
 import forge.quest.QuestDraftUtils.Mode;
 import forge.quest.data.QuestEventDraftContainer;
+import forge.screens.LoadingOverlay;
 import forge.screens.limited.DraftingProcessScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
@@ -227,7 +229,17 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
 
     @Override
     public void startDraft(BoosterDraft draft) {
-        Forge.openScreen(new DraftingProcessScreen(draft, EditorType.QuestDraft, controller));
+        FThreads.invokeInEdtLater(new Runnable() {
+            @Override
+            public void run() {
+                LoadingOverlay.show("Loading Quest Tournament", new Runnable() {
+                    @Override
+                    public void run() {
+                        Forge.openScreen(new DraftingProcessScreen(draft, EditorType.QuestDraft, controller));
+                    }
+                });
+            }
+        });
     }
     
     private Deck getDeck() {
@@ -241,6 +253,8 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     public void editDeck(boolean isExistingDeck) {
         Deck deck = getDeck();
         if (deck != null) {
+            /*preload deck to cache*/
+            ImageCache.preloadCache(deck);
             if (isExistingDeck) {
                 Forge.openScreen(new QuestDraftDeckEditor(deck.getName()));
             }

@@ -1,4 +1,233 @@
 //Rank|Name|Rarity|Set
+#1|Phylath, World Sculptor|R|ZNR
+#2|Zagras, Thief of Heartbeats|R|ZNR
+#3|Drana, the Last Bloodchief|M|ZNR
+#4|Zareth San, the Trickster|R|ZNR
+#5|Ashaya, Soul of the Wild|M|ZNR
+#6|Nahiri, Heir of the Ancients|M|ZNR
+#7|Nullpriest of Oblivion|R|ZNR
+#8|Ancient Greenwarden|M|ZNR
+#9|Leyline Tyrant|M|ZNR
+#10|Inscription of Abundance|R|ZNR
+#11|Maul of the Skyclaves|R|ZNR
+#12|Nighthawk Scavenger|R|ZNR
+#13|Omnath, Locus of Creation|M|ZNR
+#14|Akiri, Fearless Voyager|R|ZNR
+#15|Felidar Retreat|R|ZNR
+#16|Verazol, the Split Current|R|ZNR
+#17|Master of Winds|R|ZNR
+#18|Angel of Destiny|M|ZNR
+#19|Jace, Mirror Mage|M|ZNR
+#20|Moraug, Fury of Akoum|M|ZNR
+#21|Grakmaw, Skyclave Ravager|R|ZNR
+#22|Shatterskull Charger|R|ZNR
+#23|Yasharn, Implacable Earth|R|ZNR
+#24|Taborax, Hope's Demise|R|ZNR
+#25|Inscription of Ruin|R|ZNR
+#26|Tajuru Paragon|R|ZNR
+#27|Swarm Shambler|R|ZNR
+#28|Bloodchief's Thirst|U|ZNR
+#29|Nissa of Shadowed Boughs|M|ZNR
+#30|Orah, Skyclave Hierophant|R|ZNR
+#31|Tazri, Beacon of Unity|M|ZNR
+#32|Skyclave Shade|R|ZNR
+#33|Luminarch Aspirant|R|ZNR
+#34|Kargan Intimidator|R|ZNR
+#35|Lotus Cobra|R|ZNR
+#36|Lithoform Engine|M|ZNR
+#37|Scute Swarm|R|ZNR
+#38|Squad Commander|R|ZNR
+#39|Magmatic Channeler|R|ZNR
+#40|Inscription of Insight|R|ZNR
+#41|Thundering Rebuke|U|ZNR
+#42|Oran-Rief Ooze|R|ZNR
+#43|Charix, the Raging Isle|R|ZNR
+#44|Roost of Drakes|U|ZNR
+#45|Cragplate Baloth|R|ZNR
+#46|Soul Shatter|R|ZNR
+#47|Legion Angel|R|ZNR
+#48|Journey to Oblivion|U|ZNR
+#49|Murasa Sproutling|U|ZNR
+#50|Fearless Fledgling|U|ZNR
+#51|Sea Gate Stormcaller|M|ZNR
+#52|Crawling Barrens|R|ZNR
+#53|Coralhelm Chronicler|R|ZNR
+#54|Vine Gecko|U|ZNR
+#55|Spoils of Adventure|U|ZNR
+#56|Into the Roil|C|ZNR
+#57|Lullmage's Familiar|U|ZNR
+#58|Thieving Skydiver|R|ZNR
+#59|Merfolk Falconer|U|ZNR
+#60|Roil Eruption|C|ZNR
+#61|Umara Mystic|U|ZNR
+#62|Deadly Alliance|C|ZNR
+#63|Skyclave Apparition|R|ZNR
+#64|Archpriest of Iona|R|ZNR
+#65|Cleric of Life's Bond|U|ZNR
+#66|Linvala, Shield of Sea Gate|R|ZNR
+#67|Murasa Rootgrazer|U|ZNR
+#68|Myriad Construct|R|ZNR
+#69|Kargan Warleader|U|ZNR
+#70|Soaring Thought-Thief|U|ZNR
+#71|Ravager's Mace|U|ZNR
+#72|Thundering Sparkmage|U|ZNR
+#73|Vanquish the Weak|C|ZNR
+#74|Brushfire Elemental|U|ZNR
+#75|Rabid Bite|C|ZNR
+#76|Nahiri's Binding|C|ZNR
+#77|Moss-Pit Skeleton|U|ZNR
+#78|Shadows' Verdict|R|ZNR
+#79|Nimble Trapfinder|R|ZNR
+#80|Relic Robber|R|ZNR
+#81|Iridescent Hornbeetle|U|ZNR
+#82|Rockslide Sorcerer|U|ZNR
+#83|Bubble Snare|C|ZNR
+#84|Skyclave Geopede|U|ZNR
+#85|Valakut Exploration|R|ZNR
+#86|Thwart the Grave|U|ZNR
+#87|Kor Blademaster|U|ZNR
+#88|Synchronized Spellcraft|C|ZNR
+#89|Emeria Captain|U|ZNR
+#90|Skyclave Pick-Axe|U|ZNR
+#91|Canyon Jerboa|U|ZNR
+#92|Relic Amulet|U|ZNR
+#93|Scion of the Swarm|U|ZNR
+#94|Cunning Geysermage|C|ZNR
+#95|Attended Healer|U|ZNR
+#96|Paired Tactician|U|ZNR
+#97|Feed the Swarm|C|ZNR
+#98|Goma Fada Vanguard|U|ZNR
+#99|Taunting Arbormage|U|ZNR
+#100|Windrider Wizard|U|ZNR
+#101|Gnarlid Colony|C|ZNR
+#102|Veteran Adventurer|U|ZNR
+#103|Scourge of the Skyclaves|M|ZNR
+#104|Relic Axe|U|ZNR
+#105|Tazeem Roilmage|C|ZNR
+#106|Shatterskull Minotaur|U|ZNR
+#107|Shadow Stinger|U|ZNR
+#108|Skyclave Plunder|U|ZNR
+#109|Malakir Blood-Priest|C|ZNR
+#110|Roiling Regrowth|U|ZNR
+#111|Vastwood Surge|U|ZNR
+#112|Fissure Wizard|C|ZNR
+#113|Sure-Footed Infiltrator|U|ZNR
+#114|Mind Carver|U|ZNR
+#115|Demon's Disciple|U|ZNR
+#116|Acquisitions Expert|U|ZNR
+#117|Shepherd of Heroes|C|ZNR
+#118|Ruin Crab|U|ZNR
+#119|Maddening Cacophony|R|ZNR
+#120|Reclaim the Wastes|C|ZNR
+#121|Skyclave Shadowcat|U|ZNR
+#122|Relic Vial|U|ZNR
+#123|Risen Riptide|C|ZNR
+#124|Cinderclasm|U|ZNR
+#125|Archon of Emeria|R|ZNR
+#126|Joraga Visionary|C|ZNR
+#127|Lullmage's Domination|U|ZNR
+#128|Practiced Tactics|C|ZNR
+#129|Coveted Prize|R|ZNR
+#130|Grotag Bug-Catcher|C|ZNR
+#131|Expedition Diviner|C|ZNR
+#132|Grotag Night-Runner|U|ZNR
+#133|Merfolk Windrobber|U|ZNR
+#134|Tazeem Raptor|C|ZNR
+#135|Field Research|C|ZNR
+#136|Stonework Packbeast|C|ZNR
+#137|Kazandu Stomper|C|ZNR
+#138|Kor Celebrant|C|ZNR
+#139|Allied Assault|U|ZNR
+#140|Marauding Blight-Priest|C|ZNR
+#141|Springmantle Cleric|U|ZNR
+#142|Canopy Baloth|C|ZNR
+#143|Scale the Heights|C|ZNR
+#144|Kaza, Roil Chaser|R|ZNR
+#145|Subtle Strike|C|ZNR
+#146|Blood Beckoning|C|ZNR
+#147|Expedition Champion|C|ZNR
+#148|Sea Gate Colossus|C|ZNR
+#149|Expedition Skulker|C|ZNR
+#150|Dauntless Survivor|C|ZNR
+#151|Akoum Hellhound|C|ZNR
+#152|Kitesail Cleric|U|ZNR
+#153|Seafloor Stalker|C|ZNR
+#154|Ardent Electromancer|C|ZNR
+#155|Tajuru Blightblade|C|ZNR
+#156|Skyclave Relic|R|ZNR
+#157|Molten Blast|C|ZNR
+#158|Drana's Silencer|C|ZNR
+#159|Ghastly Gloomhunter|C|ZNR
+#160|Territorial Scythecat|C|ZNR
+#161|Nimana Skydancer|C|ZNR
+#162|Fireblade Charger|U|ZNR
+#163|Relic Golem|U|ZNR
+#164|Pyroclastic Hellion|C|ZNR
+#165|Expedition Healer|C|ZNR
+#166|Scorch Rider|C|ZNR
+#167|Dreadwurm|C|ZNR
+#168|Hagra Constrictor|C|ZNR
+#169|Resolute Strike|C|ZNR
+#170|Lithoform Blight|U|ZNR
+#171|Murasa Brute|C|ZNR
+#172|Angelheart Protector|C|ZNR
+#173|Prowling Felidar|C|ZNR
+#174|Spitfire Lagac|C|ZNR
+#175|Farsight Adept|C|ZNR
+#176|Might of Murasa|C|ZNR
+#177|Scavenged Blade|C|ZNR
+#178|Guul Draz Mucklord|C|ZNR
+#179|Skyclave Squid|C|ZNR
+#180|Deliberate|C|ZNR
+#181|Turntimber Ascetic|C|ZNR
+#182|Kazandu Nectarpot|C|ZNR
+#183|Makindi Ox|C|ZNR
+#184|Nissa's Zendikon|C|ZNR
+#185|Oblivion's Hunger|C|ZNR
+#186|Nimana Skitter-Sneak|C|ZNR
+#187|Sea Gate Banneret|C|ZNR
+#188|Cascade Seer|C|ZNR
+#189|Zulaport Duelist|C|ZNR
+#190|Anticognition|C|ZNR
+#191|Cliffhaven Sell-Sword|C|ZNR
+#192|Kabira Outrider|C|ZNR
+#193|Shell Shield|C|ZNR
+#194|Mind Drain|C|ZNR
+#195|Glacial Grasp|C|ZNR
+#196|Teeterpeak Ambusher|C|ZNR
+#197|Living Tempest|C|ZNR
+#198|Sizzling Barrage|C|ZNR
+#199|Strength of Solidarity|C|ZNR
+#200|Tormenting Voice|C|ZNR
+#201|Blood Price|C|ZNR
+#202|Chilling Trap|C|ZNR
+#203|Throne of Makindi|R|ZNR
+#204|Inordinate Rage|C|ZNR
+#205|Utility Knife|C|ZNR
+#206|Spare Supplies|C|ZNR
+#207|Adventure Awaits|C|ZNR
+#208|Highborn Vampire|C|ZNR
+#209|Cleansing Wildfire|C|ZNR
+#210|Sneaking Guide|C|ZNR
+#211|Tajuru Snarecaster|C|ZNR
+#212|Dauntless Unity|C|ZNR
+#213|Mesa Lynx|C|ZNR
+#214|Tuktuk Rubblefort|C|ZNR
+#215|Base Camp|U|ZNR
+#216|Skyclave Sentinel|C|ZNR
+#217|Cliffhaven Kitesail|C|ZNR
+#218|Pressure Point|C|ZNR
+#219|Disenchant|C|ZNR
+#220|Broken Wings|C|ZNR
+#221|Cleric of Chill Depths|C|ZNR
+#222|Confounding Conundrum|R|ZNR
+#223|Nahiri's Lithoforming|R|ZNR
+#224|Negate|C|ZNR
+#225|Smite the Monstrous|C|ZNR
+#226|Concerted Defense|U|ZNR
+#227|Forsaken Monument|M|ZNR
+#228|Wayward Guide-Beast|R|ZNR
+#229|Roiling Vortex|R|ZNR
 #1|Angel of Sanctions|M|AKR
 #2|Liliana, Death's Majesty|M|AKR
 #3|Glorybringer|R|AKR

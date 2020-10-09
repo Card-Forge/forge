@@ -16,7 +16,7 @@ import forge.util.TextBounds;
 
 //Encodes text for drawing with symbols and reminder text
 public class TextRenderer {
-    private static final Map<String, FSkinImage> symbolLookup = new HashMap<>();
+    private static final Map<String, FSkinImage> symbolLookup = new HashMap<>(64);
     static {
         symbolLookup.put("C", FSkinImage.MANA_COLORLESS);
         symbolLookup.put("W", FSkinImage.MANA_W);
