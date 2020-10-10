@@ -4,4 +4,4 @@ Types:Creature Elemental
 PT:6/3
 A:AB$ Pump | Cost$ 2 R | Defined$ Self | NumAtt$ 1 | KW$ Trample | SpellDescription$ CARDNAME gets +1/+0 and gains trample until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/miners_bane.jpg
-Oracle:{2}{R}: Miner's Bane gets +1/+0 and gains trample until end of turn. (It can deal excess combat damage to defending player or planeswalker while attacking.)
+Oracle:{2}{R}: Miner's Bane gets +1/+0 and gains trample until end of turn. (It can deal excess combat damage to the player or planeswalker it's attacking.)
