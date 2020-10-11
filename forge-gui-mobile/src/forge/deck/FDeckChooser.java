@@ -63,6 +63,7 @@ public class FDeckChooser extends FScreen {
     private Callback<Deck> callback;
     private NetDeckCategory netDeckCategory;
     private boolean refreshingDeckType;
+    private boolean firstactivation = true;
 
     private final DeckManager lstDecks;
     private final FButton btnNewDeck = new FButton(Localizer.getInstance().getMessage("lblNewDeck"));
@@ -226,6 +227,11 @@ public class FDeckChooser extends FScreen {
 
     @Override
     public void onActivate() {
+        //todo investigate why if we don't override, it will display blank for deckview when first activated
+        if(isAi() && firstactivation) {
+            needRefreshOnActivate = true;
+            firstactivation = false;
+        }
         if (needRefreshOnActivate) {
             needRefreshOnActivate = false;
             refreshDecksList(selectedDeckType, true, null);

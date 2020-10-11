@@ -1,17 +1,22 @@
 package forge.itemmanager.views;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
 import forge.assets.FImage;
+import forge.assets.FImageComplex;
+import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
+import forge.card.CardFaceSymbols;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom;
+import forge.card.ColorSet;
 import forge.deck.ArchetypeDeckGenerator;
 import forge.deck.CardThemedDeckGenerator;
 import forge.deck.CommanderDeckGenerator;
@@ -869,7 +874,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             ItemInfo item = getItemAtPoint(x + getLeft(), y + getTop());
             if (item != null) {
                 if(item.getKey() instanceof CardThemedDeckGenerator || item.getKey() instanceof CommanderDeckGenerator
-                        || item.getKey() instanceof ArchetypeDeckGenerator){
+                        || item.getKey() instanceof ArchetypeDeckGenerator || item.getKey() instanceof DeckProxy){
                     FDeckViewer.show(((DeckProxy)item.getKey()).getDeck());
                     return true;
                 }
@@ -922,6 +927,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private int index;
         private CardStackPosition pos;
         private boolean selected;
+        private final float IMAGE_SIZE = CardRenderer.MANA_SYMBOL_SIZE;
 
         private ItemInfo(T item0, Group group0) {
             item = item0;
@@ -955,7 +961,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             final float w = getWidth();
             final float h = getHeight();
 
-            if (selected) { //if round border is enabled, the select highlight is also rounded..
+            if (selected) {
+                //if round border is enabled, the select highlight is also rounded..
                 if (Forge.enableUIMask) {
                     //fillroundrect has rough/aliased corner
                     g.fillRoundRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE,
@@ -970,14 +977,56 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
 
             if (item instanceof PaperCard) {
-                CardRenderer.drawCard(g, (PaperCard)item, x, y, w, h, pos);
-            }
-            else {
+                CardRenderer.drawCard(g, (PaperCard) item, x, y, w, h, pos);
+            } else if (item instanceof DeckProxy) {
+                DeckProxy dp = ((DeckProxy) item);
+                ColorSet deckColor = dp.getColor();
+                float scale = 0.75f;
+                Texture img = ImageCache.getImage(item);
+                if (img != null) {//generated decks have missing info...
+                    if (Forge.enableUIMask){
+                        //commander bg
+                        g.drawImage(FSkin.getDeckbox().get(0),x, y, w, h);
+                        TextureRegion tr = ImageCache.croppedBorderImage(img);
+                        g.drawImage(tr, x+(w-w*scale)/2, y+(h-h*scale)/1.5f, w*scale, h*scale);
+                    } else {
+                        g.drawImage(img, x, y, w, h);
+                    }
+                    g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING*2, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
+                } else {
+                    if (!dp.isGeneratedDeck()){
+                        FImageComplex card = CardRenderer.getCardArt(dp.getHighestCMCCard().getImageKey(false), false, false, false);
+                        if (card != null){
+                            //card art
+                            card.draw(g, x+((w-w*scale)/2), y+((h-h*scale)/0.75f), w*scale, h*scale/1.85f);
+                            //deck box
+                            g.drawImage(FSkin.getDeckbox().get(1),x, y, w, h);
+                        }
+                    } else {
+                        //generic box
+                        g.drawImage(FSkin.getDeckbox().get(2),x, y, w, h);
+                    }
+                    if (deckColor != null) {
+                        //deck color identity
+                        float symbolSize = IMAGE_SIZE;
+                        if (columnCount == 4)
+                            symbolSize = IMAGE_SIZE * 1.25f;
+                        else if (columnCount == 3)
+                            symbolSize = IMAGE_SIZE * 1.5f;
+                        else if (columnCount == 2)
+                            symbolSize = IMAGE_SIZE * 1.75f;
+                        else if (columnCount == 1)
+                            symbolSize = IMAGE_SIZE * 2f;
+                        CardFaceSymbols.drawColorSet(g, deckColor, x +((w/2) - (CardFaceSymbols.getWidth(deckColor, symbolSize)/1.9f)), y + (h*0.8f), symbolSize);
+                    }
+                    //deck name
+                    g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + (h/16) + PADDING, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
+                }
+            } else {
                 Texture img = ImageCache.getImage(item);
                 if (img != null) {
                     g.drawImage(img, x, y, w, h);
-                }
-                else {
+                } else {
                     g.fillRect(Color.BLACK, x, y, w, h);
                     g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
                 }
