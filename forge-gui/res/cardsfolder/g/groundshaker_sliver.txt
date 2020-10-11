@@ -6,4 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Trample | D
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
 SVar:Picture:http://www.wizards.com/global/images/magic/general/groundshaker_sliver.jpg
-Oracle:Sliver creatures you control have trample. (They can deal excess combat damage to defending player or planeswalker while attacking.)
+Oracle:Sliver creatures you control have trample. (A creature with trample can deal excess combat damage to the player or planeswalker it's attacking.)

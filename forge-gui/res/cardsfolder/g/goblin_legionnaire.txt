@@ -6,4 +6,4 @@ A:AB$ DealDamage | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswa
 A:AB$ PreventDamage | Cost$ W Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to any target this turn.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_legionnaire.jpg
-Oracle:{R}, Sacrifice Goblin Legionnaire: Goblin Legionnaire deals 2 damage to any target.\n{W}, Sacrifice Goblin Legionnaire: Prevent the next 2 damage that would be dealt to any target this turn.
+Oracle:{R}, Sacrifice Goblin Legionnaire: It deals 2 damage to any target.\n{W}, Sacrifice Goblin Legionnaire: Prevent the next 2 damage that would be dealt to any target this turn.

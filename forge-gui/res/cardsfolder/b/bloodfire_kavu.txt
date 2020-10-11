@@ -5,4 +5,4 @@ PT:2/2
 A:AB$ DamageAll | Cost$ R Sac<1/CARDNAME> | ValidCards$ Creature | NumDmg$ 2 | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals 2 damage to each creature.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodfire_kavu.jpg
-Oracle:{R}, Sacrifice Bloodfire Kavu: Bloodfire Kavu deals 2 damage to each creature.
+Oracle:{R}, Sacrifice Bloodfire Kavu: It deals 2 damage to each creature.

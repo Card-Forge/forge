@@ -6,4 +6,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddKeyword$ Trample | C
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:BuffedBy:Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scrapyard_mongrel.jpg
-Oracle:As long as you control an artifact, Scrapyard Mongrel gets +2/+0 and has trample. (It can deal excess combat damage to defending player or planeswalker while attacking.)
+Oracle:As long as you control an artifact, Scrapyard Mongrel gets +2/+0 and has trample. (It can deal excess combat damage to the player or planeswalker it's attacking.)

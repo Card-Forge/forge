@@ -6,4 +6,4 @@ A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select targe
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | Description$ Enchanted creature gets +2/+0.
 A:AB$ DealDamage | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inferno_fist.jpg
-Oracle:Enchant creature you control\nEnchanted creature gets +2/+0.\n{R}, Sacrifice Inferno Fist: Inferno Fist deals 2 damage to any target.
+Oracle:Enchant creature you control\nEnchanted creature gets +2/+0.\n{R}, Sacrifice Inferno Fist: It deals 2 damage to any target.
