@@ -1006,7 +1006,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         //generic box
                         g.drawImage(FSkin.getDeckbox().get(2),x, y, w, h);
                     }
-                    if (deckColor != null) {
+                    if (deckColor != null && Forge.isLandscapeMode()) { //todo scale mana icons for decks on portrait mode
                         //deck color identity
                         float symbolSize = IMAGE_SIZE;
                         if (columnCount == 4)
