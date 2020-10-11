@@ -6,4 +6,4 @@ K:Flying
 A:AB$ Pump | Cost$ G | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 A:AB$ DealDamage | Cost$ 3 G Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unyaro_bees.jpg
-Oracle:Flying\n{G}: Unyaro Bees gets +1/+1 until end of turn.\n{3}{G}, Sacrifice Unyaro Bees: Unyaro Bees deals 2 damage to any target.
+Oracle:Flying\n{G}: Unyaro Bees gets +1/+1 until end of turn.\n{3}{G}, Sacrifice Unyaro Bees: It deals 2 damage to any target.

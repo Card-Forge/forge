@@ -7,4 +7,4 @@ A:AB$ DealDamage | Cost$ 2 B T SubCounter<X/P1P1> | ValidTgts$ Creature | TgtPro
 SVar:X:XChoice
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cruel_sadist.jpg
-Oracle:{B}, {T}, Pay 1 life: Put a +1/+1 counter on Cruel Sadist.\n{2}{B}, {T}, Remove X +1/+1 counters from Cruel Sadist: Cruel Sadist deals X damage to target creature.
+Oracle:{B}, {T}, Pay 1 life: Put a +1/+1 counter on Cruel Sadist.\n{2}{B}, {T}, Remove X +1/+1 counters from Cruel Sadist: It deals X damage to target creature.

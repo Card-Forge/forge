@@ -5,4 +5,4 @@ PT:1/1
 K:etbCounter:JAVELIN:1
 A:AB$ DealDamage | Cost$ T SubCounter<1/JAVELIN> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_javelineers.jpg
-Oracle:Icatian Javelineers enters the battlefield with a javelin counter on it.\n{T}, Remove a javelin counter from Icatian Javelineers: Icatian Javelineers deals 1 damage to any target.
+Oracle:Icatian Javelineers enters the battlefield with a javelin counter on it.\n{T}, Remove a javelin counter from Icatian Javelineers: It deals 1 damage to any target.

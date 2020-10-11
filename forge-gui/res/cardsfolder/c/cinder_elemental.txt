@@ -5,4 +5,4 @@ PT:2/2
 A:AB$ DealDamage | Cost$ X R T Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | AITgts$ BetterThanSource | SpellDescription$ CARDNAME deals X damage to any target.
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_elemental.jpg
-Oracle:{X}{R}, {T}, Sacrifice Cinder Elemental: Cinder Elemental deals X damage to any target.
+Oracle:{X}{R}, {T}, Sacrifice Cinder Elemental: It deals X damage to any target.
