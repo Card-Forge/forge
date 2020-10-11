@@ -4,4 +4,4 @@ Types:Instant
 A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals 3 damage to any target. Hellbent — CARDNAME deals 5 damage to that permanent or player instead if you have no cards in hand.
 SVar:X:Count$Hellbent.5.3
 SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card107258.jpg
-Oracle:Cackling Flames deals 3 damage to any target.\nHellbent — Cackling Flames deals 5 damage to that permanent or player instead if you have no cards in hand.
+Oracle:Cackling Flames deals 3 damage to any target.\nHellbent — Cackling Flames deals 5 damage instead if you have no cards in hand.
