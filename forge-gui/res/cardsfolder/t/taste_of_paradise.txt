@@ -7,4 +7,4 @@ A:SP$ GainLife | Cost$ 3 G | Defined$ You | LifeAmount$ Y | References$ X,Y | Sp
 SVar:Y:SVar$X/Plus.3
 SVar:X:Count$TimesPseudokicked/Times.3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taste_of_paradise.jpg
-Oracle:As an additional cost to cast Taste of Paradise, you may pay {1}{G} any number of times.\nYou gain 3 life plus an additional 3 life for each additional {1}{G} you paid.
+Oracle:As an additional cost to cast this spell, you may pay {1}{G} any number of times.\nYou gain 3 life plus an additional 3 life for each additional {1}{G} you paid.
