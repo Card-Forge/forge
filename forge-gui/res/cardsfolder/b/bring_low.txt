@@ -1,8 +1,8 @@
 Name:Bring Low
 ManaCost:3 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X,Y | SpellDescription$ CARDNAME deals 3 damage to target creature. If that creature has a +1/+1 counter on it, CARDNAME deals 5 damage to it instead.
+A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X,Y | SpellDescription$ CARDNAME deals 3 damage to target creature. If that creature has a +1/+1 counter on it, CARDNAME deals 5 damage instead.
 SVar:Y:Targeted$Valid Creature.counters_GE1_P1P1
 SVar:X:Count$Compare Y GE1.5.3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bring_low.jpg
-Oracle:Bring Low deals 3 damage to target creature. If that creature has a +1/+1 counter on it, Bring Low deals 5 damage to it instead.
+Oracle:Bring Low deals 3 damage to target creature. If that creature has a +1/+1 counter on it, Bring Low deals 5 damage instead.

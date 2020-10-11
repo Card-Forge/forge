@@ -4,4 +4,4 @@ Types:Creature Rhino
 PT:4/4
 K:Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stampeding_rhino.jpg
-Oracle:Trample (This creature can deal excess combat damage to defending player or planeswalker while attacking.)
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)

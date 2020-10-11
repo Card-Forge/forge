@@ -2,7 +2,7 @@ Name:Burst Lightning
 ManaCost:R
 Types:Instant
 K:Kicker:4
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ WasKicked | References$ WasKicked | SpellDescription$ CARDNAME deals 2 damage to any target. If CARDNAME was kicked, it deals 4 damage to that permanent or player instead.
+A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ WasKicked | References$ WasKicked | SpellDescription$ CARDNAME deals 2 damage to any target. If CARDNAME was kicked, it deals 4 damage instead.
 SVar:WasKicked:Count$Kicked.4.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burst_lightning.jpg
-Oracle:Kicker {4} (You may pay an additional {4} as you cast this spell.)\nBurst Lightning deals 2 damage to any target. If this spell was kicked, it deals 4 damage to that permanent or player instead.
+Oracle:Kicker {4} (You may pay an additional {4} as you cast this spell.)\nBurst Lightning deals 2 damage to any target. If this spell was kicked, it deals 4 damage instead.

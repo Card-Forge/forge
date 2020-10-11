@@ -2,9 +2,9 @@ Name:Goblin Kaboomist
 ManaCost:1 R
 Types:Creature Goblin Warrior
 PT:1/2
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a colorless artifact token named Land Mine with "{R}, Sacrifice this artifact: This artifact deals 2 damage to target attacking creature without flying." Then flip a coin. If you lose the flip, CARDNAME deals 2 damage to itself.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a colorless artifact token named Land Mine with "{R}, Sacrifice this artifact: It deals 2 damage to target attacking creature without flying." Then flip a coin. If you lose the flip, CARDNAME deals 2 damage to itself.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ land_mine | TokenOwner$ You | LegacyImage$ land mine m15 | SubAbility$ DBFlip
 SVar:DBFlip:DB$ FlipACoin | Caller$ You | LoseSubAbility$ DmgSelf
 SVar:DmgSelf:DB$ DealDamage | Defined$ Self | NumDmg$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_kaboomist.jpg
-Oracle:At the beginning of your upkeep, create a colorless artifact token named Land Mine with "{R}, Sacrifice this artifact: This artifact deals 2 damage to target attacking creature without flying." Then flip a coin. If you lose the flip, Goblin Kaboomist deals 2 damage to itself.
+Oracle:At the beginning of your upkeep, create a colorless artifact token named Land Mine with "{R}, Sacrifice this artifact: It deals 2 damage to target attacking creature without flying." Then flip a coin. If you lose the flip, Goblin Kaboomist deals 2 damage to itself.

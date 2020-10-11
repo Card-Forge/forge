@@ -8,4 +8,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 4 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 4
 AI:RemoveDeck:Random
-Oracle:When CARDNAME enters the battlefield, you draw 4 cards and you lose 4 life.\nAt the beginning of your upkeep, if you control four or more Demons with different names, you win the game.
+Oracle:When Liliana's Contract enters the battlefield, you draw 4 cards and you lose 4 life.\nAt the beginning of your upkeep, if you control four or more Demons with different names, you win the game.

@@ -7,4 +7,4 @@ A:AB$ Pump | Cost$ G | Defined$ Self | KW$ Trample | SpellDescription$ CARDNAME 
 SVar:X:Count$Valid Forest.YouCtrl
 DeckNeeds:Color$Green
 SVar:BuffedBy:Forest
-Oracle:Prized Elephant gets +1/+1 as long as you control a Forest.\n{G}: Prized Elephant gains trample until end of turn. (It can deal excess combat damage to defending player or planeswalker while attacking.)
+Oracle:Prized Elephant gets +1/+1 as long as you control a Forest.\n{G}: Prized Elephant gains trample until end of turn. (It can deal excess combat damage to the player or planeswalker it's attacking.)

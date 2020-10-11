@@ -8,4 +8,4 @@ SVar:X:Count$xPaid
 # The X cost won't be limited by the number of charge counters, but if enough aren't present, the spell will be cancelled.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talon_of_pain.jpg
-Oracle:Whenever a source you control other than Talon of Pain deals damage to an opponent, put a charge counter on Talon of Pain.\n{X}, {T}, Remove X charge counters from Talon of Pain: Talon of Pain deals X damage to any target.
+Oracle:Whenever a source you control other than Talon of Pain deals damage to an opponent, put a charge counter on Talon of Pain.\n{X}, {T}, Remove X charge counters from Talon of Pain: It deals X damage to any target.
