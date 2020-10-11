@@ -18,16 +18,15 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.ImageKeys;
 import forge.deck.Deck;
+import forge.deck.DeckProxy;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.DeckStorage;
-import forge.model.FModel;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventDifficulty;
 import forge.quest.QuestEventDuel;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
-import forge.util.storage.IStorage;
 import forge.util.storage.StorageReaderFolder;
 
 public class MainWorldDuelReader extends StorageReaderFolder<QuestEventDuel> {
@@ -77,10 +76,11 @@ public class MainWorldDuelReader extends StorageReaderFolder<QuestEventDuel> {
         }
 
         // then I add wild decks in constructed directory
-        IStorage<Deck> constructedDecks = FModel.getDecks().getConstructed();
-        Iterator it = constructedDecks.iterator();
+        Iterable<DeckProxy> constructedDecks = DeckProxy.getAllConstructedDecks();
+        Iterator<DeckProxy> it = constructedDecks.iterator();
+
         while(it.hasNext()) {
-            Deck currDeck = (Deck) it.next();
+            Deck currDeck = it.next().getDeck();
             final QuestEventDuel newDeck = read(currDeck);
             String newKey = keySelector.apply(newDeck);
             if (result.containsKey(newKey)) {
