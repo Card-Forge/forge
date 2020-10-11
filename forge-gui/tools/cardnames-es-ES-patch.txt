@@ -16,6 +16,7 @@ Abyssal Hunter|Cazador abismal|Criatura - Asesino Humano|{B}, {T}: Gira la criat
 Abyssal Nightstalker|Cazador nocturno abisal|Criatura — Cazador nocturno|Siempre que el Cazador nocturno abisal ataque y no sea bloqueado, el jugador defensor se descarta de una carta.
 Academy Rector|Rector de la Academia|Criatura - Clérigo Humano|Cuando el Rector de la Academia vaya a un cementerio desde el juego, puedes retirar del juego al Rector de la Academia. Si lo haces, busca en tu biblioteca una carta de encantamiento y pon esa carta en juego. Luego baraja tu biblioteca.
 Accumulated Knowledge|Conocimiento acumulado|Instantáneo|Roba una carta, luego roba cartas igual al número de cartas llamadas Conocimiento Acumulado en todos los cementerios.
+Acid Rain|Lluvia ácida|Conjuro|Destruye todos los Bosques.
 Acidic Dagger|Daga Corrosiva|Artefacto|{4}, {T}: Destruye la criatura no muro que ha recibido daño de combate de la criatura objetivo este turno. Si la criatura objetivo deja el juego, destruye la Daga Corrosiva y no puede ser regenerada. Usa esta habilidad sólo antes que la defensa sea asignada.
 Acidic Sliver|Fragmentado corrosivo|Criatura - Fragmentado|Todos los fragmentados tienen "{2}, Sacrifica esta criatura: Esta criatura hace 2 puntos de daño a la criatura o jugador objetivo."
 Acidic Soil|Suelo ácido|Conjuro|El Suelo ácido hace a cada jugador daño igual al número de tierras que controla.
@@ -73,6 +74,7 @@ Albino Troll|Troll albino|Criatura — Trol|Eco {1}{G} (Al comienzo de tu próxi
 Alchor's Tomb|Tumba de Alchor|Artefacto|{2}, {T}: El objetivo permanente que controlas se convierte en el color que elijas. (Este efecto dura indefinidamente).
 Aleatory|Azar|Instantáneo|Juega el Azar sólo durante el combate después de declarar bloqueadores.\nLanza una moneda. Si ganas el lanzamiento, la criatura objetivo obtiene +1/+1 hasta el final del turno.\nRoba una carta al comienzo del siguiente mantenimiento.
 Alela, Artful Provocateur|Alela, Provocadora ingeniosa|Criatura Legendaria - Hada Hechicera|Vuela, toque mortal, vínculo vital\nLas otras criaturas que controlas que vuelan obtienen +1/+0.\nSiempre que lances un hechizo de artefacto o encantamiento, crea un token de criatura Hada azul 1/1 con la habilidad de volar.
+Alena, Kessig Trapper|Alena, Trampera de Kessig|Criatura Legendaria — Explorador humano|Daña primero\n{T}: Agrega una cantidad de {R} igual a la fuerza mayor entre las criaturas que controlas que entraron al campo de batalla este turno.\nCamarada. (Puedes tener dos comandantes si ambos tienen camarada.)
 Alert Shu Infantry|Alerta de infantería Shu|Criatura - Soldado humano|Vigilancia
 Alexi's Cloak|Capa de Alexi|Encantamiento — Aura|Puedes jugar la Capa de Alexi cuando puedas jugar un instantáneo.\nLa criatura encantada no puede ser objetivo de hechizos ni habilidades.
 Alexi, Zephyr Mage|Alexi, Maga Céfira|Criatura Legendaria - Cambiahechizos Humano|{X}{U}, {T}, Descartar dos cartas de tu mano: Devuelve X criaturas objetivo a la mano de sus propietarios.
@@ -80,9 +82,11 @@ Ali from Cairo|Ali de El Cairo|Criatura - Humano|El daño que reduciría tu tota
 Ali Baba|Ali Baba|Criatura — Bribón Humano|{R}: Gira el muro objetivo.
 Aliban's Tower|Torre de Alibán|Instantáneo|La criatura bloqueando objetivo obtiene +3/+1 hasta el final del turno.
 Alive|Vivo|Conjuro|Crea una ficha de criatura Centauro verde 3/3.\nFusión (Puedes lanzar una o ambas mitades de esta carta de tu mano).
+All Hallow's Eve|Víspera de todos los santos|Conjuro|Exilia la Víspera de todos los santos con dos contadores de grito sobre él.\nAl comienzo de tu mantenimiento, si la Víspera de todos los santos se exilia con un contador de gritos sobre él, elimina un contador de gritos. Si no hay más contadores de gritos sobre él, ponlo en tu cementerio y cada jugador devuelve todas las cartas de criatura de su cementerio al campo de batalla.
 Allay|Mitigar|Instantáneo|Retorno {3} (Puedes tú pagas {3} además de cualquier otro coste cuando tú juegues este hechizo, ponlo en tu mano en vez de tu cementerio como parte de su resolución.)\nDestruye el encantamiento objetivo.
 Alley Grifters|Embaucadores callejeros|Criatura — Mercenario Humano|Siempre que los Embaucadores callejeros sean bloqueados, el jugador defensor se descarta de una carta de su mano.
 Allied Strategies|Estrategias Aliadas|Conjuro|Dominio - El jugador objetivo roba una carta por cada tipo de tierra básica que controle.
+Allosaurus Shepherd|Pastor Alosaurio|Criatura — Chamán elfo|El Pastor Alosaurio no puede ser contrarestado.\nLos hechizos verdes que controlas no pueden ser contrarrestados.\n{4}{G}{G}: Hasta el final del turno, cada criatura Elfo que controlas tiene fuerza y resistencia base 5/5 y se convierte en un Dinosaurio además de sus otros tipos de criaturas.
 Alloy Golem|Gólem de Aleación|Criatura artefacto — Gólem|Cuando el Gólem de Aleación entra en juego, elige un color.\nEl Gólem de Aleación es del color elegido. (Es todavía un artefacto.)
 Alluring Scent|Aroma seductor|Conjuro|Todas las criaturas capaces de bloquear a la criatura objetivo este turno lo hacen.
 Alms|Limosna|Encantamiento|{1}, Retirar del juego la carta superior en tu cementerio: Prevén el siguiente punto de daño que fuera a recibir la criatura objetivo este turno.
@@ -157,11 +161,17 @@ Apocalypse Chime|Campana del Apocalipsis|Artefacto|{2}, {T}, Sacrificar Campana 
 Apocalypse|Apocalipsis|Conjuro|Retira del juego todos los permanentes del juego. Descártate de tu mano.
 Apprentice Sorcerer|Hechicero aprendiz|Criatura — Hechicero Humano|{T}: El Hechicero aprendiz hace 1 punto de daño a cualquier objetivo. Activa esta habilidad sólo durante tu turno, antes de que los atacantes sean declarados.
 Apprentice Wizard|Aprendiz de brujo|Criatura — Hechicero Humano|{U}, {T}: Agrega {C}{C}{C}.
+Arboria|Arboria|Encantamiento mundial|Las criaturas no pueden atacar a un jugador a menos que ese jugador lance un hechizo o ponga un permanente que no sea ficha en el campo de batalla durante su último turno.
 Arc Mage|Mago arco|Criatura — Hechicero humano|{2}{R}, {T}, Descartar una carta de tu mano: el Mago arco hace 2 puntos de daño divididos como quieras entre entre cualquier número de criaturas y/o jugadores.
+Arcades Sabboth|Arcades Sabboth|Criatura legendaria — Dragón anciano|Vuela.\nAl comienzo de tu mantenimiento, sacrifica a Arcades Sabboth a menos que pagues {G}{W}{U}.\nCada criatura enderezada que controlas obtiene +0/+2 siempre que no esté atacando.\n{W}: Arcades Sabboth obtiene +0/+1 hasta el final del turno.
+Arcane Artisan|Artesano arcano|Criatura — Hechicero humano|{2}{U}, {T}: El jugador objetivo roba una carta, luego exilia una carta de su mano. Si una carta de criatura es exiliada de esta manera, ese jugador crea una ficha que es una copia de esa carta.\nCuando el Artesano arcano abandone el campo de batalla, exilia todas las fichas creadas con él al comienzo del siguiente paso final.
 Arcane Laboratory|Laboratorio arcano|Encantamiento|Cada jugador no puede lanzar más que un hechizo cada turno.
+Arcane Savant|Arcano Savant|Criatura — Hechicero humano|Antes de barajar tu mazo para comenzar el juego, puedes revelar esta carta de tu mazo y exiliar una carta instantáneo o de conjuro que hayas seleccionado y que no esté en tu mazo.\nCuando Arcano Savant entre al campo de batalla, copia una carta que exiliaste con cartas llamadas Arcano Savant. Puedes lanzar la copia sin pagar su coste de maná.
 Archaeological Dig|Excavación Arqueológica|Tierra|{T}: Agrega {C}.\n{T}, Sacrificar Excavación Arqueológica: Agrega una maná de cualquier color.
+Archaeomender|Arqueomántico|Criatura — Hechicero humano|Cuando el Arqueomántico entre al campo de batalla, regresa la carta de artefacto objetivo de tu cementerio a tu mano.
 Archangel|Arcángel|Criatura — Ángel|Vuela, vigilancia
 Archery Training|Entrenamiento de arquería|Encantamiento — Aura|Encantar criatura\nAl principio de tu mantenimiento, pon un contador de flecha sobre el Entrenamiento de arquería.\nLa criatura encantada tiene "{T}: Esta criatura hace X puntos de daño a la criatura atacante o bloqueadora, donde X es el número de contadores de flecha en el Entrenamiento de arquería."
+Archfiend of Despair|Archidemonio de la desesperación|Criatura — Demonio|Vuela.\nTus oponentes no pueden ganar vidas.\nAl comienzo de cada paso final, cada oponente pierde una vida igual a la que ese jugador perdió este turno. (El daño causa la pérdida de vida).
 Arctic Foxes|Zorros árticos|Criatura — Zorro|Las criaturas con fuerza 2 o superior no puede bloquear a los Zorros árticos mientras que el jugador defensor controla una tierra nevada.
 Arctic Merfolk|Tritón ártica|Criatura — Tritón|Estímulo — Devuelve una criatura de tu control a la mano de su propietario. (Puedes devolver una criatura de tu control a la mano de su propietario además de cualquier otro coste mientras juegues este hechizo.)\nSi la Tritón ártica fue estimulada, entra en juego con una contador +1/+1.
 Arctic Wolves|Lobos árticos|Criatura — Lobo|Mantenimiento acumulativo {2}\nCuando los Lobos árticos entran en juego, roba una carta.
@@ -2317,6 +2327,7 @@ Mounted Archers|Arqueros montados|Criatura - Arquero Soldado Humano|Los Arqueros
 Mournful Zombie|Zombie lastimero|Criatura - Zombie|{W}, {T}: El jugador objetivo gana una vida.
 Mourning|Luto|Encantamiento - Aura|La criatura encantada obtiene -2/-0.\n{B}: devuelve el Luto a la mano de su propietario.
 Mox Diamond|Diamante mox|Artefacto|Como coste adicional para jugar el Diamante mox, descártate de una carta de tierra de tu mano.\n{T}: añade un maná de cualquier color a tu reserva de maná.
+Mox Emerald|Esmeralda mox|Artefacto|{T}: Agrega {G}.
 Mox Pearl|Perla mox|Artefacto|{T}: Agrega {W}.
 Mox Ruby|Rubí mox|Artefacto|{T}: Agrega {R}.
 Mtenda Griffin|Grifo de Mtenda|Criatura - Grifo|Vuela\n{W}, {T}: devuelve el Grifo de Mtenda a la mano de su propietario y devuelve la carta de Grifo objetivo de tu cementerio a tu mano. Juega esta habilidad sólo durante tu mantenimiento.
@@ -3637,6 +3648,7 @@ Tsabo's Decree|Decreto de Tsabo|Instantáneo|Elige un tipo de criatura. El jugad
 Tsabo's Web|Red de Tsabo|Artefacto|Cuando la Red de Tsabo entra en juego, roba una carta.\nLas tierras con habilidades activadas que no producen maná no se enderezan durante el paso de enderezar de su controlador.
 Tsunami|Tsunami|Conjuro|Destruye todas las islas.
 Tundra Kavu|Kavu de tundra|Criatura - Kavu|{T}: la tierra objetivo es una llanura o una isla hasta el final del turno.
+Tundra|Tundra|Tierra — Llanura Isla|({T}: Agrega {W} o {U}.)
 Tunnel|Tunel|Instantáneo|Destruye el muro objetivo. No puede ser regenerado.
 Turf Wound|Herida del Territorio|Instantáneo|El jugador no puede jugar tierras este turno.\nRoba una carta.
 Turnabout|Cambio de posición|Instantáneo|Gira o endereza todos los artefactos, criaturas, o tierras que el jugador objetivo controla.
