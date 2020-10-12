@@ -989,14 +989,14 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 float scale = 0.75f;
 
                 if (dpImg != null) {//generated decks have missing info...
-                    if (selected)
-                        g.fillRoundRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE, (h - w) / 10);
                     if (Forge.enableUIMask){
                         //commander bg
-                        g.drawImage(FSkin.getDeckbox().get(0),x, y, w, h);
+                        g.drawImage(FSkin.getDeckbox().get(0), FSkin.getDeckbox().get(0), x, y, w, h, Color.GREEN, selected);
                         TextureRegion tr = ImageCache.croppedBorderImage(dpImg);
                         g.drawImage(tr, x+(w-w*scale)/2, y+(h-h*scale)/1.5f, w*scale, h*scale);
                     } else {
+                        if (selected)
+                            g.fillRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
                         g.drawImage(dpImg, x, y, w, h);
                     }
                     //fake labelname shadow
@@ -1006,19 +1006,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 } else {
                     if (!dp.isGeneratedDeck()){
                         FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard().getImageKey(false), false, false, false);
-                        //after getting cardArt we draw the selector first if selected here in deckSelectMode, we don't want to draw the selection before getting the cardArt
-                        if (selected)
-                            g.fillRoundRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, w + 12 * SEL_BORDER_SIZE, (h - w) / 10);
                         //draw the deckbox
                         if (cardArt != null){
-                            //card art
-                            cardArt.draw(g, x+((w-w*scale)/2), y+((h-h*scale)/3f), w*scale, h*scale/1.85f);
-                            //deck box
-                            g.drawImage(FSkin.getDeckbox().get(1),x, y-(h*0.25f), w, h);
+                            g.drawDeckBox(cardArt, scale, FSkin.getDeckbox().get(1), FSkin.getDeckbox().get(2), x, y, w, h, Color.GREEN, selected);
                         }
                     } else {
                         //generic box
-                        g.drawImage(FSkin.getDeckbox().get(2),x, y-(h*0.25f), w, h);
+                        g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y-(h*0.25f), w, h, Color.GREEN, selected);
                     }
                     if (deckColor != null) {
                         //deck color identity
