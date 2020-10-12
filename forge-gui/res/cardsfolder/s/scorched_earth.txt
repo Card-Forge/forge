@@ -1,11 +1,8 @@
 Name:Scorched Earth
 ManaCost:X R
 Types:Sorcery
-A:SP$ Destroy | Cost$ X R Discard<X/Land> | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Land | TgtPrompt$ Select target land | References$ X | SpellDescription$ Destroy X target lands. | AILogic$ ScorchedEarth
-# It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
-SVar:X:Targeted$Amount
-SVar:MaxTgts:Count$Valid Land
+A:SP$ Destroy | Cost$ X R Discard<X/Land/land cards> | TargetMin$ X | TargetMax$ X | ValidTgts$ Land | TgtPrompt$ Select X target lands | References$ X | SpellDescription$ Destroy X target lands. | AILogic$ ScorchedEarth
+SVar:X:Count$xPaid
 AI:RemoveDeck:Random
 SVar:PlayBeforeLandDrop:true
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scorched_earth.jpg
 Oracle:As an additional cost to cast Scorched Earth, discard X land cards.\nDestroy X target lands.
