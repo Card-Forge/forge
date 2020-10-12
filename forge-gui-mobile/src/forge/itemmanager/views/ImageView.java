@@ -41,6 +41,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.util.Localizer;
+import forge.util.TextUtil;
 import forge.util.Utils;
 
 import java.util.ArrayList;
@@ -960,67 +961,83 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             final float y = getTop() - group.getTop() - getScrollValue();
             final float w = getWidth();
             final float h = getHeight();
-
+            Texture dpImg = null;
+            boolean deckSelectMode = false;
+            if (item instanceof DeckProxy) {
+                dpImg = ImageCache.getImage(item);
+                deckSelectMode = true;
+            }
             if (selected) {
-                //if round border is enabled, the select highlight is also rounded..
-                if (Forge.enableUIMask) {
-                    //fillroundrect has rough/aliased corner
-                    g.fillRoundRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE,
-                            w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE, (h - w) / 10);
-                    //drawroundrect has GL_SMOOTH to `smoothen/faux` the aliased corner
-                    g.drawRoundRect(1f, Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE,
-                            w + 1.5f * SEL_BORDER_SIZE, h + 1.5f * SEL_BORDER_SIZE, (h - w) / 10);
+                if (!deckSelectMode) {
+                    //if round border is enabled, the select highlight is also rounded..
+                    if (Forge.enableUIMask) {
+                        //fillroundrect has rough/aliased corner
+                        g.fillRoundRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE, (h - w) / 10);
+                        //drawroundrect has GL_SMOOTH to `smoothen/faux` the aliased corner
+                        g.drawRoundRect(1f, Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 1.5f * SEL_BORDER_SIZE, h + 1.5f * SEL_BORDER_SIZE, (h - w) / 10);
+                    }
+                    else //default rectangle highlight
+                        g.fillRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
                 }
-                else //default rectangle highlight
-                    g.fillRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE,
-                            w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
             }
 
             if (item instanceof PaperCard) {
                 CardRenderer.drawCard(g, (PaperCard) item, x, y, w, h, pos);
-            } else if (item instanceof DeckProxy) {
+            } else if (deckSelectMode) {
                 DeckProxy dp = ((DeckProxy) item);
                 ColorSet deckColor = dp.getColor();
                 float scale = 0.75f;
-                Texture img = ImageCache.getImage(item);
-                if (img != null) {//generated decks have missing info...
+
+                if (dpImg != null) {//generated decks have missing info...
                     if (Forge.enableUIMask){
                         //commander bg
-                        g.drawImage(FSkin.getDeckbox().get(0),x, y, w, h);
-                        TextureRegion tr = ImageCache.croppedBorderImage(img);
+                        g.drawImage(FSkin.getDeckbox().get(0), FSkin.getDeckbox().get(0), x, y, w, h, Color.GREEN, selected);
+                        TextureRegion tr = ImageCache.croppedBorderImage(dpImg);
                         g.drawImage(tr, x+(w-w*scale)/2, y+(h-h*scale)/1.5f, w*scale, h*scale);
                     } else {
-                        g.drawImage(img, x, y, w, h);
+                        if (selected)
+                            g.fillRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
+                        g.drawImage(dpImg, x, y, w, h);
                     }
+                    //fake labelname shadow
+                    g.drawText(item.getName(), GROUP_HEADER_FONT, Color.BLACK, (x + PADDING)-1f, (y + PADDING*2)+1f, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
+                    //labelname
                     g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING*2, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
                 } else {
                     if (!dp.isGeneratedDeck()){
-                        FImageComplex card = CardRenderer.getCardArt(dp.getHighestCMCCard().getImageKey(false), false, false, false);
-                        if (card != null){
-                            //card art
-                            card.draw(g, x+((w-w*scale)/2), y+((h-h*scale)/0.75f), w*scale, h*scale/1.85f);
-                            //deck box
-                            g.drawImage(FSkin.getDeckbox().get(1),x, y, w, h);
+                        FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard().getImageKey(false), false, false, false);
+                        //draw the deckbox
+                        if (cardArt != null){
+                            g.drawDeckBox(cardArt, scale, FSkin.getDeckbox().get(1), FSkin.getDeckbox().get(2), x, y, w, h, Color.GREEN, selected);
                         }
                     } else {
                         //generic box
-                        g.drawImage(FSkin.getDeckbox().get(2),x, y, w, h);
+                        g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y-(h*0.25f), w, h, Color.GREEN, selected);
                     }
-                    if (deckColor != null && Forge.isLandscapeMode()) { //todo scale mana icons for decks on portrait mode
+                    if (deckColor != null) {
                         //deck color identity
                         float symbolSize = IMAGE_SIZE;
-                        if (columnCount == 4)
-                            symbolSize = IMAGE_SIZE * 1.25f;
-                        else if (columnCount == 3)
-                            symbolSize = IMAGE_SIZE * 1.5f;
-                        else if (columnCount == 2)
-                            symbolSize = IMAGE_SIZE * 1.75f;
-                        else if (columnCount == 1)
-                            symbolSize = IMAGE_SIZE * 2f;
-                        CardFaceSymbols.drawColorSet(g, deckColor, x +((w/2) - (CardFaceSymbols.getWidth(deckColor, symbolSize)/1.9f)), y + (h*0.8f), symbolSize);
+                        if (Forge.isLandscapeMode()) {
+                            if (columnCount == 4)
+                                symbolSize = IMAGE_SIZE * 1.5f;
+                            else if (columnCount == 3)
+                                symbolSize = IMAGE_SIZE * 2f;
+                            else if (columnCount == 2)
+                                symbolSize = IMAGE_SIZE * 3f;
+                            else if (columnCount == 1)
+                                symbolSize = IMAGE_SIZE * 4f;
+                        } else {
+                            if (columnCount > 2)
+                                symbolSize = IMAGE_SIZE * (0.5f);
+                        }
+                        //vertical mana icons
+                        CardFaceSymbols.drawColorSet(g, deckColor, x +(w-symbolSize), y+(h/8), symbolSize, true);
                     }
+                    String deckname = TextUtil.fastReplace(item.getName(),"] #", "]\n#");
+                    //deckname fakeshadow
+                    g.drawText(deckname, GROUP_HEADER_FONT, Color.BLACK, (x + PADDING)-1f, (y + (h/10) + PADDING)+1f, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, true);
                     //deck name
-                    g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + (h/16) + PADDING, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
+                    g.drawText(deckname, GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + (h/10) + PADDING, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, true);
                 }
             } else {
                 Texture img = ImageCache.getImage(item);

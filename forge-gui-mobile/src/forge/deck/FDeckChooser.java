@@ -227,8 +227,8 @@ public class FDeckChooser extends FScreen {
 
     @Override
     public void onActivate() {
-        //todo investigate why if we don't override, it will display blank for deckview when first activated
-        if(isAi() && firstactivation) {
+        //somehow a loaded deck state from startup don't refresh accordingly for imageview so refresh it on first activation
+        if(firstactivation) {
             needRefreshOnActivate = true;
             firstactivation = false;
         }

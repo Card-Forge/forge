@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Matrix4;
@@ -37,8 +38,75 @@ public class Graphics {
     private int failedClipCount;
     private float alphaComposite = 1;
     private int transformCount = 0;
+    private String sVertex = "uniform mat4 u_projTrans;\n" +
+            "\n" +
+            "attribute vec4 a_position;\n" +
+            "attribute vec2 a_texCoord0;\n" +
+            "attribute vec4 a_color;\n" +
+            "\n" +
+            "varying vec4 v_color;\n" +
+            "varying vec2 v_texCoord;\n" +
+            "\n" +
+            "uniform vec2 u_viewportInverse;\n" +
+            "\n" +
+            "void main() {\n" +
+            "    gl_Position = u_projTrans * a_position;\n" +
+            "    v_texCoord = a_texCoord0;\n" +
+            "    v_color = a_color;\n" +
+            "}";
+    private String sFragment = "#ifdef GL_ES\n" +
+            "precision mediump float;\n" +
+            "precision mediump int;\n" +
+            "#endif\n" +
+            "\n" +
+            "uniform sampler2D u_texture;\n" +
+            "\n" +
+            "// The inverse of the viewport dimensions along X and Y\n" +
+            "uniform vec2 u_viewportInverse;\n" +
+            "\n" +
+            "// Color of the outline\n" +
+            "uniform vec3 u_color;\n" +
+            "\n" +
+            "// Thickness of the outline\n" +
+            "uniform float u_offset;\n" +
+            "\n" +
+            "// Step to check for neighbors\n" +
+            "uniform float u_step;\n" +
+            "\n" +
+            "varying vec4 v_color;\n" +
+            "varying vec2 v_texCoord;\n" +
+            "\n" +
+            "#define ALPHA_VALUE_BORDER 0.5\n" +
+            "\n" +
+            "void main() {\n" +
+            "   vec2 T = v_texCoord.xy;\n" +
+            "\n" +
+            "   float alpha = 0.0;\n" +
+            "   bool allin = true;\n" +
+            "   for( float ix = -u_offset; ix < u_offset; ix += u_step )\n" +
+            "   {\n" +
+            "      for( float iy = -u_offset; iy < u_offset; iy += u_step )\n" +
+            "       {\n" +
+            "          float newAlpha = texture2D(u_texture, T + vec2(ix, iy) * u_viewportInverse).a;\n" +
+            "          allin = allin && newAlpha > ALPHA_VALUE_BORDER;\n" +
+            "          if (newAlpha > ALPHA_VALUE_BORDER && newAlpha >= alpha)\n" +
+            "          {\n" +
+            "             alpha = newAlpha;\n" +
+            "          }\n" +
+            "      }\n" +
+            "   }\n" +
+            "   if (allin)\n" +
+            "   {\n" +
+            "      alpha = 0.0;\n" +
+            "   }\n" +
+            "\n" +
+            "   gl_FragColor = vec4(u_color,alpha);\n" +
+            "}";
+
+    private final ShaderProgram shaderOutline = new ShaderProgram(sVertex, sFragment);
 
     public Graphics() {
+        ShaderProgram.pedantic = false;
     }
 
     public void begin(float regionWidth0, float regionHeight0) {
@@ -60,6 +128,7 @@ public class Graphics {
     public void dispose() {
         batch.dispose();
         shapeRenderer.dispose();
+        shaderOutline.dispose();
     }
 
     public SpriteBatch getBatch() {
@@ -603,6 +672,56 @@ public class Graphics {
     }
     public void drawImage(TextureRegion image, float x, float y, float w, float h) {
         batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+    }
+    public void drawImage(TextureRegion image, TextureRegion glowImageReference, float x, float y, float w, float h, Color glowColor, boolean selected) {
+         //1st image is the image on top of the shader, 2nd image is for the outline reference for the shader glow...
+        // if the 1st image don't have transparency in the middle (only on the sides, top and bottom, use the 1st image as outline reference...
+        if (!selected) {
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        } else {
+            batch.end();
+            shaderOutline.begin();
+            shaderOutline.setUniformf("u_viewportInverse", new Vector2(1f / w, 1f / h));
+            shaderOutline.setUniformf("u_offset", 3f);
+            shaderOutline.setUniformf("u_step", Math.min(1f, w / 70f));
+            shaderOutline.setUniformf("u_color", new Vector3(glowColor.r, glowColor.g, glowColor.b));
+            shaderOutline.end();
+            batch.setShader(shaderOutline);
+            batch.begin();
+            //glow
+            batch.draw(glowImageReference, adjustX(x), adjustY(y, h), w, h);
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+            //img
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        }
+    }
+    public void drawDeckBox(FImage cardArt, float scale, TextureRegion image, TextureRegion glowImageReference, float x, float y, float w, float h, Color glowColor, boolean selected) {
+        float yBox = y-(h*0.25f);
+        if (!selected) {
+            cardArt.draw(this,x+((w-w*scale)/2), y+((h-h*scale)/3f), w*scale, h*scale/1.85f);
+            batch.draw(image, adjustX(x), adjustY(yBox, h), w, h);
+        } else {
+            batch.end();
+            shaderOutline.begin();
+            shaderOutline.setUniformf("u_viewportInverse", new Vector2(1f / w, 1f / h));
+            shaderOutline.setUniformf("u_offset", 3f);
+            shaderOutline.setUniformf("u_step", Math.min(1f, w / 70f));
+            shaderOutline.setUniformf("u_color", new Vector3(glowColor.r, glowColor.g, glowColor.b));
+            shaderOutline.end();
+            batch.setShader(shaderOutline);
+            batch.begin();
+            //glow
+            batch.draw(glowImageReference, adjustX(x), adjustY(yBox, h), w, h);
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+            //cardart
+            cardArt.draw(this,x+((w-w*scale)/2), y+((h-h*scale)/3f), w*scale, h*scale/1.85f);
+            //deckbox
+            batch.draw(image, adjustX(x), adjustY(yBox, h), w, h);
+        }
     }
 
     public void drawRepeatingImage(Texture image, float x, float y, float w, float h) {

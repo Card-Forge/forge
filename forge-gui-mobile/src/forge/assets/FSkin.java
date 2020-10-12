@@ -338,7 +338,9 @@ public class FSkin {
             FSkin.borders.put(0, new TextureRegion(bordersBW, 2, 2, 672, 936));
             FSkin.borders.put(1, new TextureRegion(bordersBW, 676, 2, 672, 936));
             //deckboxes
-            Texture deckboxes = new Texture(f13);
+            Texture deckboxes = new Texture(f13, textureFilter);
+            if (textureFilter)
+                deckboxes.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
             //gold bg
             FSkin.deckbox.put(0, new TextureRegion(deckboxes, 2, 2, 488, 680));
             //deck box for card art
