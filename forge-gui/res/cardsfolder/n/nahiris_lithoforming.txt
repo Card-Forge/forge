@@ -12,4 +12,5 @@ SVar:X:Count$xPaid
 SVar:Y:Count$RememberedSize
 SVar:XLands:Number$0
 DeckHas:Ability$Sacrifice
+AI:RemoveDeck:All
 Oracle:Sacrifice X lands. For each land sacrificed this way, draw a card. You may play X additional lands this turn. Lands you control enter the battlefield tapped this turn.
