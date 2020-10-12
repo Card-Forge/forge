@@ -1,7 +1,7 @@
 Name:Part Water
 ManaCost:X X U
 Types:Sorcery
-A:SP$ Pump | Cost$ X X U | KW$ Islandwalk | TargetMin$ X | TargetMax$ X | References$ X | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | SpellDescription$ X target creatures gain islandwalk until end of turn.
+A:SP$ Pump | Cost$ X X U | KW$ Islandwalk | TargetMin$ X | TargetMax$ X | References$ X | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | StackDescription$ X target creatures [{c:Targeted}] gain islandwalk until end of turn. | SpellDescription$ X target creatures gain islandwalk until end of turn.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
