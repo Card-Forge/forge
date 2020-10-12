@@ -128,6 +128,7 @@ public class Graphics {
     public void dispose() {
         batch.dispose();
         shapeRenderer.dispose();
+        shaderOutline.dispose();
     }
 
     public SpriteBatch getBatch() {
