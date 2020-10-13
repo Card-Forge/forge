@@ -4,4 +4,4 @@ Order:101
 Type:Casual
 Subtype:Commander
 Sets:ELD, THB, IKO, M21, ZNR
-Banned:Drannith Magistrate; Lutri, the Spellchaser; Oko, Thief of Crowns; Sorcerous Spyglass; Winota, Joiner of Forces;
+Banned:Drannith Magistrate; Lutri, the Spellchaser; Oko, Thief of Crowns; Omnath, Locus of Creation; Sorcerous Spyglass; Winota, Joiner of Forces;
