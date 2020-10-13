@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Legendary Planeswalker Jace
 Loyalty:4
 K:Kicker:2
-T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ TrigCopy | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, create a token that's a copy of CARDNAME, except it's not legendary and its starting loyalty is 1.
+T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ TrigCopy | TriggerDescription$ When CARDNAME enters the battlefield, if NICKNAME was kicked, create a token that's a copy of CARDNAME, except it's not legendary and its starting loyalty is 1.
 SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self | NonLegendary$ True | SetLoyalty$ 1
 A:AB$ Scry | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ScryNum$ 1 | SpellDescription$ Scry 1.
 A:AB$ Draw | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumCards$ 1 | Reveal$ True | RememberDrawn$ True | SubAbility$ DBRemoveCounters | SpellDescription$ Draw a card and reveal it. Remove a number of loyalty counters equal to that card's converted mana cost from CARDNAME.
