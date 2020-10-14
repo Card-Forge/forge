@@ -288,15 +288,20 @@ public class ImageCache {
     public static FImage getBorderImage(String textureString) {
         return getBorder(textureString);
     }
-    public static Color getTint(CardView c) {
+    public static Color getTint(CardView c, Texture t) {
         if (c == null)
-            return Color.CLEAR;
+            return borderColor(t);
         if (c.isFaceDown())
-            return Color.CLEAR;
+            return Color.valueOf("#171717");
+
+        //todo: determine correct splitcards colors
 
         CardView.CardStateView state = c.getCurrentState();
-        if (state.getColors().isColorless()) //Moonlace -> target spell or permanent becomes colorless.
+        if (state.getColors().isColorless()) { //Moonlace -> target spell or permanent becomes colorless.
+            if (state.hasDevoid()) //devoid is colorless at all zones so return its corresponding border color...
+                return borderColor(t);
             return Color.valueOf("#A0A6A4");
+        }
         else if (state.getColors().isMonoColor()) {
             if (state.getColors().hasBlack())
                 return Color.valueOf("#48494a");
@@ -311,6 +316,7 @@ public class ImageCache {
         }
         else if (state.getColors().isMulticolor())
             return Color.valueOf("#F9E084");
-        return Color.CLEAR;
+
+        return borderColor(t);
     }
 }

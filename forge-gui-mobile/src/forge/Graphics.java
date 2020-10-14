@@ -637,7 +637,7 @@ public class Graphics {
 
     public void drawBorderImage(FImage image, Color borderColor, Color tintColor, float x, float y, float w, float h, boolean tint) {
         float oldalpha = alphaComposite;
-        if(tint){
+        if(tint && !tintColor.equals(borderColor)){
             drawRoundRect(2f, borderLining(borderColor.toString()), x, y, w, h, (h-w)/12);
             fillRoundRect(tintColor, x, y, w, h, (h-w)/12);
         } else {
