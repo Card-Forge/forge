@@ -185,7 +185,7 @@ public class CardImageRenderer {
         ManaCost mainManaCost = state.getManaCost();
         if (card.isSplitCard() && card.getAlternateState() != null) {
             //handle rendering both parts of split card
-            mainManaCost = state.getManaCost();
+            mainManaCost = card.getLeftSplitState().getManaCost();
             ManaCost otherManaCost = card.getAlternateState().getManaCost();
             manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, MANA_SYMBOL_SIZE) + HEADER_PADDING;
             CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
@@ -459,7 +459,7 @@ public class CardImageRenderer {
 
         y += cardNameBoxHeight + innerBorderThickness;
         Color[] textBoxColors = FSkinColor.tintColors(Color.WHITE, colors, CardRenderer.TEXT_BOX_TINT);
-        drawDetailsTextBox(g, state, gameView, canShow, textBoxColors, x, y, w, textBoxHeight);
+        drawDetailsTextBox(g, card.isSplitCard() && !altState ? card.getLeftSplitState() : state, gameView, canShow, textBoxColors, x, y, w, textBoxHeight);
 
         y += textBoxHeight + innerBorderThickness;
         Color[] ptColors = FSkinColor.tintColors(Color.WHITE, colors, CardRenderer.PT_BOX_TINT);
@@ -506,7 +506,7 @@ public class CardImageRenderer {
             ManaCost mainManaCost = state.getManaCost();
             if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && card.getZone() != ZoneType.Stack) { //only display current state's mana cost when on stack
                 //handle rendering both parts of split card
-                mainManaCost = state.getManaCost();
+                mainManaCost = card.getLeftSplitState().getManaCost();
                 ManaCost otherManaCost = card.getAlternateState().getManaCost();
                 manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, MANA_SYMBOL_SIZE) + HEADER_PADDING;
                 CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
