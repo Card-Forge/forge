@@ -101,10 +101,10 @@ public class TriggerTapsForMana extends Trigger {
                 if (!this.getHostCard().hasChosenColor() || !produced.contains(MagicColor.toShortString(this.getHostCard().getChosenColor()))) {
                     return false;
                 }
-                if (!produced.contains(MagicColor.toShortString(this.getParam("Produced")))) {
+            }
+            if (!produced.contains(MagicColor.toShortString(this.getParam("Produced")))) {
                     return false;
                 }
-            }
         }
 
         return true;
