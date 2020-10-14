@@ -32,7 +32,7 @@ public class SoundSystem {
         this.visualizer = new EventVisualizer(GamePlayerUtil.getGuiPlayer());
     }
     private static boolean isUsingAltSystem() {
-        return FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_SOUND_SYSTEM);
+        return !GuiBase.getInterface().isLibgdxPort() && FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_SOUND_SYSTEM);
     }
 
     /**
