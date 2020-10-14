@@ -4686,7 +4686,7 @@ public class CardFactoryUtil {
         altCostSA.setRestrictions(restriction);
 
         String costDescription = TextUtil.fastReplace(params.get("Description"),"CARDNAME", card.getName());
-        if (costDescription.isEmpty()) {
+        if (costDescription == null || costDescription.isEmpty()) {
             costDescription = TextUtil.concatWithSpace("You may", abCost.toStringAlt(), "rather than pay", TextUtil.addSuffix(card.getName(), "'s mana cost."));
         }
 

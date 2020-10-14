@@ -340,7 +340,7 @@ public class AnimateAi extends SpellAbilityAi {
 
             // select the worst of the best
             final Card worst = ComputerUtilCard.getWorstAI(maxList);
-            if (worst.isLand()) {
+            if (worst != null && worst.isLand()) {
                 // e.g. Clan Guildmage, make sure we're not using the same land we want to animate to activate the ability
                 this.holdAnimatedTillMain2(ai, worst);
                 if (!ComputerUtilMana.canPayManaCost(sa, ai, 0)) {
