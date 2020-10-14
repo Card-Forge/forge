@@ -1082,6 +1082,7 @@ public class CardView extends GameEntityView {
         public String getProtectionKey() { return get(TrackableProperty.ProtectionKey); }
         public String getHexproofKey() { return get(TrackableProperty.HexproofKey); }
         public boolean hasDeathtouch() { return get(TrackableProperty.HasDeathtouch); }
+        public boolean hasDevoid() { return get(TrackableProperty.HasDevoid); }
         public boolean hasDefender() { return get(TrackableProperty.HasDefender); }
         public boolean hasDoubleStrike() { return get(TrackableProperty.HasDoubleStrike); }
         public boolean hasFirstStrike() { return get(TrackableProperty.HasFirstStrike); }
@@ -1118,6 +1119,7 @@ public class CardView extends GameEntityView {
         void updateKeywords(Card c, CardState state) {
             c.updateKeywordsCache(state);
             set(TrackableProperty.HasDeathtouch, c.hasKeyword(Keyword.DEATHTOUCH, state));
+            set(TrackableProperty.HasDevoid, c.hasKeyword(Keyword.DEVOID, state));
             set(TrackableProperty.HasDefender, c.hasKeyword(Keyword.DEFENDER, state));
             set(TrackableProperty.HasDoubleStrike, c.hasKeyword(Keyword.DOUBLE_STRIKE, state));
             set(TrackableProperty.HasFirstStrike, c.hasKeyword(Keyword.FIRST_STRIKE, state));
