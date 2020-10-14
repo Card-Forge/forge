@@ -294,8 +294,6 @@ public class ImageCache {
         if (c.isFaceDown())
             return Color.valueOf("#171717");
 
-        //todo: determine correct splitcards colors
-
         CardView.CardStateView state = c.getCurrentState();
         if (state.getColors().isColorless()) { //Moonlace -> target spell or permanent becomes colorless.
             if (state.hasDevoid()) //devoid is colorless at all zones so return its corresponding border color...

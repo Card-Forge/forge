@@ -69,6 +69,8 @@ public enum TrackableProperty {
     PairedWith(TrackableTypes.CardViewType),
     CurrentState(TrackableTypes.CardStateViewType, FreezeMode.IgnoresFreeze),
     AlternateState(TrackableTypes.CardStateViewType, FreezeMode.IgnoresFreeze),
+    LeftSplitState(TrackableTypes.CardStateViewType, FreezeMode.IgnoresFreeze),
+    RightSplitState(TrackableTypes.CardStateViewType, FreezeMode.IgnoresFreeze),
     HiddenId(TrackableTypes.IntegerType),
     ExertedThisTurn(TrackableTypes.BooleanType),
 
@@ -76,6 +78,8 @@ public enum TrackableProperty {
     Name(TrackableTypes.StringType),
     Colors(TrackableTypes.ColorSetType),
     OriginalColors(TrackableTypes.ColorSetType),
+    LeftSplitColors(TrackableTypes.ColorSetType),
+    RightSplitColors(TrackableTypes.ColorSetType),
     ImageKey(TrackableTypes.StringType),
     Type(TrackableTypes.CardTypeViewType),
     ManaCost(TrackableTypes.ManaCostType),
