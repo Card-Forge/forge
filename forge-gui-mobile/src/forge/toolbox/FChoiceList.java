@@ -516,7 +516,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
             CardView cv = ((IHasCardView)value).getCardView();
             boolean showAlternate = showAlternate(cv, value.toString());
-            CardRenderer.drawCardWithOverlays(g, cv, x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top, false, showAlternate);
+            CardRenderer.drawCardWithOverlays(g, cv, x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top, false, showAlternate, true);
 
             float dx = VStack.CARD_WIDTH + FList.PADDING;
             x += dx;

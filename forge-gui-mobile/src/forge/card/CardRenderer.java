@@ -543,9 +543,9 @@ public class CardRenderer {
     }
 
     public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
-        drawCardWithOverlays(g, card, x, y, w, h, pos, false, false);
+        drawCardWithOverlays(g, card, x, y, w, h, pos, false, false, false);
     }
-    public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean stackview, boolean showAltState) {
+    public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean stackview, boolean showAltState, boolean isChoiceList) {
         boolean canShow = MatchController.instance.mayView(card);
         float oldAlpha = g.getfloatAlphaComposite();
         boolean unselectable = !MatchController.instance.isSelectable(card) && MatchController.instance.isSelecting();
@@ -560,7 +560,7 @@ public class CardRenderer {
         h -= 2 * padding;
 
         // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
-        final CardStateView details = showAltState ? card.getAlternateState() : card.getCurrentState();
+        final CardStateView details = showAltState ? card.getAlternateState() : isChoiceList && card.isSplitCard() ? card.getLeftSplitState() : card.getCurrentState();
         final boolean isFaceDown = card.isFaceDown();
         final DetailColors borderColor = isFaceDown ? CardDetailUtil.DetailColors.FACE_DOWN : CardDetailUtil.getBorderColor(details, canShow); // canShow doesn't work here for face down Morphs
         Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
@@ -932,8 +932,8 @@ public class CardRenderer {
                             dy *= -1; // flip card costs for Aftermath cards
                         }
 
-                        drawManaCost(g, card.getAlternateState().getManaCost(), x - padding, y - dy, w + 2 * padding, h, manaSymbolSize);
-                        drawManaCost(g, card.getCurrentState().getManaCost(), x - padding, y + dy, w + 2 * padding, h, manaSymbolSize);
+                        drawManaCost(g, card.getRightSplitState().getManaCost(), x - padding, y - dy, w + 2 * padding, h, manaSymbolSize);
+                        drawManaCost(g, card.getLeftSplitState().getManaCost(), x - padding, y + dy, w + 2 * padding, h, manaSymbolSize);
                     }
                 }
                 else {

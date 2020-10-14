@@ -382,7 +382,7 @@ public class VStack extends FDropDown {
 
             x += PADDING;
             y += PADDING;
-            CardRenderer.drawCardWithOverlays(g, stackInstance.getSourceCard(), x, y, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top, true, false);
+            CardRenderer.drawCardWithOverlays(g, stackInstance.getSourceCard(), x, y, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top, true, false, false);
 
             x += CARD_WIDTH + PADDING;
             w -= x + PADDING - BORDER_THICKNESS;
