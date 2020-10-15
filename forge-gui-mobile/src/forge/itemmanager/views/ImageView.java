@@ -22,6 +22,7 @@ import forge.deck.CardThemedDeckGenerator;
 import forge.deck.CommanderDeckGenerator;
 import forge.deck.DeckProxy;
 import forge.deck.FDeckViewer;
+import forge.deck.io.DeckPreferences;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
@@ -556,7 +557,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
         else if (count == 2) {
             if (item != null && item.selected) {
-                itemManager.activateSelectedItems();
+                if (!(item.getKey() instanceof DeckProxy))
+                    itemManager.activateSelectedItems();
             }
         }
         return true;
@@ -860,6 +862,19 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         public boolean tap(float x, float y, int count) {
+            ItemInfo item = getItemAtPoint(x + getLeft(), y + getTop());
+            if (item != null) {
+                if(item.getKey() instanceof DeckProxy) {
+                    DeckProxy dp = (DeckProxy)item.getKey();
+                    if (count >= 2 && !dp.isGeneratedDeck()) {
+                        //double tap to add to favorites or remove....
+                        if (DeckPreferences.getPrefs(dp).getStarCount() > 0)
+                            DeckPreferences.getPrefs(dp).setStarCount(0);
+                        else
+                            DeckPreferences.getPrefs(dp).setStarCount(1);
+                    }
+                }
+            }
             if (groupBy != null && !items.isEmpty() && y < GROUP_HEADER_HEIGHT) {
                 isCollapsed = !isCollapsed;
                 btnExpandCollapseAll.updateIsAllCollapsed();
@@ -1032,6 +1047,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         }
                         //vertical mana icons
                         CardFaceSymbols.drawColorSet(g, deckColor, x +(w-symbolSize), y+(h/8), symbolSize, true);
+                        if(!dp.isGeneratedDeck()) {
+                            if (Forge.hdbuttons)
+                                g.drawImage(DeckPreferences.getPrefs(dp).getStarCount() > 0 ? FSkinImage.HDSTAR_FILLED : FSkinImage.HDSTAR_OUTLINE, x, y, symbolSize, symbolSize);
+                            else
+                                g.drawImage(DeckPreferences.getPrefs(dp).getStarCount() > 0 ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTLINE, x, y, symbolSize, symbolSize);
+                        }
                     }
                     String deckname = TextUtil.fastReplace(item.getName(),"] #", "]\n#");
                     //deckname fakeshadow
