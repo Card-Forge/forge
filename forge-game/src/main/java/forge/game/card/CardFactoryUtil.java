@@ -4404,6 +4404,13 @@ public class CardFactoryUtil {
 
                     String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has suspended", c.getName(), "with", String.valueOf(counters),"time counters on it.");
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    //reveal suspended card
+                    for (Player p : game.getPlayers()){
+                        if(!p.isAI() && !p.getController().isAI()) {
+                            //reveal card to human player/controller only
+                            p.getController().reveal(new CardCollection(c), c.getZone().getZoneType(), c.getOwner(), c.getName() + " is suspended with " + counters + " time counters in ");
+                        }
+                    }
                 }
             };
             final StringBuilder sbDesc = new StringBuilder();
