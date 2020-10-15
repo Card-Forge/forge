@@ -866,7 +866,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             if (item != null) {
                 if(item.getKey() instanceof DeckProxy) {
                     DeckProxy dp = (DeckProxy)item.getKey();
-                    if (count >= 2) {
+                    if (count >= 2 && !dp.isGeneratedDeck()) {
                         //double tap to add to favorites or remove....
                         if (DeckPreferences.getPrefs(dp).getStarCount() > 0)
                             DeckPreferences.getPrefs(dp).setStarCount(0);
