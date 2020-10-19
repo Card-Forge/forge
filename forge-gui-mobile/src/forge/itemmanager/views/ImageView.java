@@ -1022,7 +1022,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     if (!dp.isGeneratedDeck()){
                         FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard().getImageKey(false), false, false, false);
                         //draw the deckbox
-                        if (cardArt != null){
+                        if (cardArt == null){
+                            //draw generic box if null or still loading
+                            g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y-(h*0.25f), w, h, Color.GREEN, selected);
+                        } else {
                             g.drawDeckBox(cardArt, scale, FSkin.getDeckbox().get(1), FSkin.getDeckbox().get(2), x, y, w, h, Color.GREEN, selected);
                         }
                     } else {
