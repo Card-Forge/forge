@@ -33,6 +33,7 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
 import forge.itemmanager.SItemManagerUtil;
 import forge.itemmanager.filters.ItemFilter;
+import forge.planarconquest.ConquestCommander;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FDisplayObject;
@@ -998,6 +999,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
             if (item instanceof PaperCard) {
                 CardRenderer.drawCard(g, (PaperCard) item, x, y, w, h, pos);
+            } else if (item instanceof ConquestCommander) {
+                CardRenderer.drawCard(g, ((ConquestCommander) item).getCard(), x, y, w, h, pos);
             } else if (deckSelectMode) {
                 DeckProxy dp = ((DeckProxy) item);
                 ColorSet deckColor = dp.getColor();
@@ -1022,7 +1025,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     if (!dp.isGeneratedDeck()){
                         FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard().getImageKey(false), false, false, false);
                         //draw the deckbox
-                        if (cardArt != null){
+                        if (cardArt == null){
+                            //draw generic box if null or still loading
+                            g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y-(h*0.25f), w, h, Color.GREEN, selected);
+                        } else {
                             g.drawDeckBox(cardArt, scale, FSkin.getDeckbox().get(1), FSkin.getDeckbox().get(2), x, y, w, h, Color.GREEN, selected);
                         }
                     } else {
