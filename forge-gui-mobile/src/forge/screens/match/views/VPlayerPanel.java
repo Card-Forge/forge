@@ -32,6 +32,7 @@ public class VPlayerPanel extends FContainer {
     private static final FSkinFont INFO_FONT = FSkinFont.get(12);
     private static final FSkinColor INFO_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor DISPLAY_AREA_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).alphaColor(0.5f);
+    private static final FSkinColor DELIRIUM_HIGHLIGHT = FSkinColor.get(Colors.CLR_PHASE_ACTIVE_ENABLED).alphaColor(0.5f);
     private static final float INFO_TAB_PADDING_X = Utils.scale(2);
     private static final float INFO_TAB_PADDING_Y = Utils.scale(2);
 
@@ -473,19 +474,22 @@ public class VPlayerPanel extends FContainer {
                     yAcross = y;
                     y--;
                     h++;
-                }
-                else {
+                } else {
                     h -= INFO_TAB_PADDING_Y;
                     yAcross = h;
                     y--;
                     h += 2;
                 }
-                g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
+                //change the graveyard tab selection color to active phase color to indicate the player has delirium
+                if ((icon == FSkinImage.HDGRAVEYARD || icon == FSkinImage.GRAVEYARD) && player.hasDelirium()) {
+                    g.fillRect(DELIRIUM_HIGHLIGHT, 0 ,isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
+                } else {
+                    g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
+                }
                 if (!Forge.isLandscapeMode()) {
                     if (isFlipped()) { //use clip to ensure all corners connect
                         g.startClip(-1, y, w + 2, h);
-                    }
-                    else {
+                    } else {
                         g.startClip(-1, y, w + 2, yAcross - y);
                     }
                     if (forMultiPlayer) {
@@ -533,8 +537,7 @@ public class VPlayerPanel extends FContainer {
                 if (lblLife.getRotate180()) {
                     g.endTransform();
                 }
-            }
-            else { //show image above text if taller than wide
+            } else { //show image above text if taller than wide
                 if (lblLife.getRotate180()) {
                     g.startRotateTransform(getWidth() / 2, getHeight() / 2, 180);
                 }
