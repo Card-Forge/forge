@@ -253,6 +253,13 @@ public class CardView extends GameEntityView {
         }
         return counters.equals(otherCard.getCounters());
     }
+    public boolean hasSamePT(CardView otherCard) {
+        if (getCurrentState().getPower() != otherCard.getCurrentState().getPower())
+            return false;
+        if (getCurrentState().getToughness() != otherCard.getCurrentState().getToughness())
+            return false;
+        return true;
+    }
     void updateCounters(Card c) {
         set(TrackableProperty.Counters, c.getCounters());
         updateLethalDamage(c);
