@@ -339,7 +339,7 @@ public class CostAdjustment {
 
         int value = Integer.parseInt(amount);
 
-        } if staticAbility.hasParam("RaiseTo") {
+        if staticAbility.hasParam("RaiseTo") {
             int cmc = manaCost.getConvertedManaCost();
             if (cmc < value) {
                 value = Integer.parseInt(amount) - cmc;
