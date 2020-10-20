@@ -2,7 +2,7 @@ Name:Runed Arch
 ManaCost:3
 Types:Artifact
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Pump | Cost$ X T Sac<1/CARDNAME> | KW$ HIDDEN Unblockable | TargetMin$ X | TargetMax$ X | References$ X | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select X target creatures with power 2 or less | SpellDescription$ X target creatures with power 2 or less can't be blocked this turn.
+A:AB$ Pump | Cost$ X T Sac<1/CARDNAME> | KW$ HIDDEN Unblockable | TargetMin$ X | TargetMax$ X | References$ X | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select X target creatures with power 2 or less | StackDescription$ X target creatures with power 2 or less [{c:Targeted}] can't be blocked this turn. | SpellDescription$ X target creatures with power 2 or less can't be blocked this turn.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:Runed Arch enters the battlefield tapped.\n{X}, {T}, Sacrifice Runed Arch: X target creatures with power 2 or less can't be blocked this turn.
