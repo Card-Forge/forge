@@ -20,7 +20,6 @@ package forge.limited;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
@@ -41,7 +40,6 @@ import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 import forge.util.Localizer;
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
@@ -181,33 +179,32 @@ public class BoosterDraft implements IBoosterDraft {
                 break;
 
             case Chaos:
+
+                final List<ThemedChaosDraft> themes = new ArrayList<>();
+                final IStorage<ThemedChaosDraft> themeStorage = FModel.getThemedChaosDrafts();
+
+                for (final ThemedChaosDraft theme : themeStorage) {
+                    themes.add(theme);
+                }
+
+                // TODO test oneOrNone behaviour
+                final ThemedChaosDraft theme = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseChaosTheme"), themes);
+                if (theme == null) {
+                    return false;
+                }
+
+                final Predicate<CardEdition> themeFilter = theme.getEditionFilter();
+
                 final CardEdition.Collection allEditions = StaticData.instance().getEditions();
-                final Iterable<CardEdition> chaosDraftEditions = Iterables.filter(allEditions.getOrderedEditions(), new Predicate<CardEdition>() {
-                    @Override
-                    public boolean apply(final CardEdition cardEdition) {
-                        boolean isExpansion = cardEdition.getType().equals(CardEdition.Type.EXPANSION);
-                        boolean isCoreSet = cardEdition.getType().equals(CardEdition.Type.CORE);
-                        boolean isReprintSet = cardEdition.getType().equals(CardEdition.Type.REPRINT);
-                        if (isExpansion || isCoreSet || isReprintSet) {
-                            // Only allow sets with 15 cards in booster packs
-                            if (cardEdition.hasBoosterTemplate()) {
-                                final List<Pair<String, Integer>> slots = cardEdition.getBoosterTemplate().getSlots();
-                                int boosterSize = 0;
-                                for (Pair<String, Integer> slot : slots) {
-                                    boosterSize += slot.getRight();
-                                }
-                                return boosterSize == 15;
-                            }
-                        }
-                        return false;
-                    }
-                });
+                final Iterable<CardEdition> chaosDraftEditions = Iterables.filter(allEditions.getOrderedEditions(), themeFilter);
 
-                // Randomize order of sets
-                List<CardEdition> shuffled = Lists.newArrayList(chaosDraftEditions);
-                Collections.shuffle(shuffled);
-
-                final Supplier<List<PaperCard>> ChaosDraftSupplier = new ChaosBoosterSupplier(shuffled);
+                final Supplier<List<PaperCard>> ChaosDraftSupplier;
+                try{
+                    ChaosDraftSupplier = new ChaosBoosterSupplier(chaosDraftEditions);
+                } catch(Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
 
                 for (int i = 0; i < 3; i++) {
                     this.product.add(ChaosDraftSupplier);

@@ -1,0 +1,5 @@
+# Order, Tag, Label
+1, DEFAULT, All sets (default)
+2, CORE_SET, Core Sets
+2, MASTER_SET, Masters Sets
+3, RAVNICA, Ravnica (Plane)
