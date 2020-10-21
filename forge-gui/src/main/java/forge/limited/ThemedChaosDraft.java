@@ -91,7 +91,7 @@ public class ThemedChaosDraft implements Comparable<ThemedChaosDraft> {
         return new Predicate<CardEdition>() {
             @Override
             public boolean apply(final CardEdition cardEdition){
-                return format.isSetLegal(cardEdition.getCode());
+                return DEFAULT_FILTER.apply(cardEdition) && format.isSetLegal(cardEdition.getCode());
             }
         };
     }
