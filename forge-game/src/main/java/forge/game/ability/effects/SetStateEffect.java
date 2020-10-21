@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.Lists;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
@@ -58,6 +59,7 @@ public class SetStateEffect extends SpellAbilityEffect {
         final boolean manifestUp = sa.hasParam("ManifestUp");
         final boolean hiddenAgenda = sa.hasParam("HiddenAgenda");
         final boolean optional = sa.hasParam("Optional");
+        final List<Card> transformedCards = Lists.newArrayList();
 
         GameEntityCounterTable table = new GameEntityCounterTable();
 
@@ -130,8 +132,17 @@ public class SetStateEffect extends SpellAbilityEffect {
                 if (remChanged) {
                     host.addRemembered(tgt);
                 }
+                transformedCards.add(tgt);
             }
         }
         table.triggerCountersPutAll(game);
+        if (!transformedCards.isEmpty()) {
+            //reveal transformed cards to human player/controller except activating player
+            for (Player observer : game.getPlayers()){
+                if(!observer.isAI() && !observer.getController().isAI() && observer != p) {
+                    observer.getController().reveal(new CardCollection(transformedCards), p.getZone(ZoneType.Battlefield).getZoneType(), p, "Transformed cards in ");
+                }
+            }
+        }
     }
 }
