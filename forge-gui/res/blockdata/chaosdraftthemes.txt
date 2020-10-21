@@ -1,5 +1,8 @@
 # Order, Tag, Label
 1, DEFAULT, All sets (default)
-2, CORE_SET, Core Sets
-2, MASTER_SET, Masters Sets
-3, RAVNICA, Ravnica (Plane)
+11, MODERN, Modern legal expansions
+12, PIONEER, Pioneer legal expansions
+13, STANDARD, Standard legal expansions
+21, CORE_SET, Core Sets
+22, MASTERS_SET, Masters Sets (paper only)
+31, RAVNICA, Ravnica (Plane)

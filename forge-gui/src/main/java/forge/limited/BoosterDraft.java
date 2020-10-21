@@ -186,9 +186,10 @@ public class BoosterDraft implements IBoosterDraft {
                 for (final ThemedChaosDraft theme : themeStorage) {
                     themes.add(theme);
                 }
+                Collections.sort(themes);
 
-                // TODO test oneOrNone behaviour
-                final ThemedChaosDraft theme = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseChaosTheme"), themes);
+                final String dialogQuestion = Localizer.getInstance().getMessage("lblChooseChaosTheme");
+                final ThemedChaosDraft theme = SGuiChoose.oneOrNone(dialogQuestion, themes);
                 if (theme == null) {
                     return false;
                 }
@@ -196,7 +197,9 @@ public class BoosterDraft implements IBoosterDraft {
                 final Predicate<CardEdition> themeFilter = theme.getEditionFilter();
 
                 final CardEdition.Collection allEditions = StaticData.instance().getEditions();
-                final Iterable<CardEdition> chaosDraftEditions = Iterables.filter(allEditions.getOrderedEditions(), themeFilter);
+                final Iterable<CardEdition> chaosDraftEditions = Iterables.filter(
+                        allEditions.getOrderedEditions(),
+                        themeFilter);
 
                 final Supplier<List<PaperCard>> ChaosDraftSupplier;
                 try{

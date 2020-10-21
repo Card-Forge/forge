@@ -4,6 +4,8 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.card.CardEdition;
+import forge.game.GameFormat;
+import forge.model.FModel;
 import forge.util.TextUtil;
 import forge.util.storage.StorageReaderFile;
 import org.apache.commons.lang3.tuple.Pair;
@@ -45,12 +47,20 @@ public class ThemedChaosDraft implements Comparable<ThemedChaosDraft> {
     public int getOrderNumber() { return orderNumber; }
 
     public Predicate<CardEdition> getEditionFilter() {
-        if (!tag.equals("DEFAULT")) {
-            System.out.println("Return themed filter for " + tag); // TODO remove
-            return themedFilter;
+        Predicate<CardEdition> filter;
+        switch(tag) {
+            case "DEFAULT":
+                filter = DEFAULT_FILTER;
+                break;
+            case "MODERN":
+            case "PIONEER":
+            case "STANDARD":
+                filter = getFormatFilter(tag);
+                break;
+            default:
+                filter = themedFilter;
         }
-        System.out.println("Return default filter");  // TODO remove
-        return DEFAULT_FILTER;
+        return filter;
     }
 
     private final Predicate<CardEdition> themedFilter = new Predicate<CardEdition>() {
@@ -63,6 +73,28 @@ public class ThemedChaosDraft implements Comparable<ThemedChaosDraft> {
             return false;
         }
     };
+
+    private Predicate<CardEdition> getFormatFilter(String formatName) {
+        GameFormat.Collection formats = FModel.getFormats();
+        GameFormat format;
+        switch(formatName) {
+            case "MODERN":
+                format = formats.getModern();
+                break;
+            case "PIONEER":
+                format = formats.getPioneer();
+                break;
+            case "STANDARD":
+            default:
+                format = formats.getStandard();
+        }
+        return new Predicate<CardEdition>() {
+            @Override
+            public boolean apply(final CardEdition cardEdition){
+                return format.isSetLegal(cardEdition.getCode());
+            }
+        };
+    }
 
     private static final Predicate<CardEdition> DEFAULT_FILTER = new Predicate<CardEdition>() {
         @Override
@@ -116,9 +148,9 @@ public class ThemedChaosDraft implements Comparable<ThemedChaosDraft> {
      */
     @Override
     public int compareTo(ThemedChaosDraft other) {
-        int order = this.orderNumber - other.orderNumber;
-        if (order != 0) return order;
-        return this.label.compareTo(other.label);
+        return (this.orderNumber != other.orderNumber)
+                ? this.orderNumber - other.orderNumber
+                : this.label.compareTo(other.label);
     }
 
     /*

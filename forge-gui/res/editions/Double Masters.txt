@@ -7,6 +7,7 @@ BoosterCovers=3
 Booster=8 Common, 3 Uncommon, 2 RareMythic, 2 fromSheet("2XM Foils")
 Foil=NotSupported
 DoublePick=true
+ChaosDraftThemes=MASTERS_SET
 
 [cards]
 1 M Karn Liberated
