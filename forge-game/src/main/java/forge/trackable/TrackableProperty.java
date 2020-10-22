@@ -187,6 +187,7 @@ public enum TrackableProperty {
     SubInstance(TrackableTypes.StackItemViewType),
     Ability(TrackableTypes.BooleanType),
     OptionalTrigger(TrackableTypes.BooleanType),
+    OptionalCosts(TrackableTypes.StringType),
 
     //Combat
     AttackersWithDefenders(TrackableTypes.GenericMapType, FreezeMode.IgnoresFreeze),
