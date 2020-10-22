@@ -19,6 +19,7 @@ public class BagRandomizer<T > implements Iterable<T>{
 
     public BagRandomizer(T[] items) {
         bag = items;
+        shuffleBag();
     }
 
     public BagRandomizer(Iterable<T> items) {
@@ -27,6 +28,7 @@ public class BagRandomizer<T > implements Iterable<T>{
             list.add(item);
         }
         bag = (T[]) list.toArray();
+        shuffleBag();
     }
 
     public T getNextItem() {
