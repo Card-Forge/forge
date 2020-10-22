@@ -207,9 +207,9 @@ public class BoosterDraft implements IBoosterDraft {
                         themeFilter);
                 // Add chaos "boosters" as special suppliers
                 final Supplier<List<PaperCard>> ChaosDraftSupplier;
-                try{
+                try {
                     ChaosDraftSupplier = new ChaosBoosterSupplier(chaosDraftEditions);
-                } catch(Exception e) {
+                } catch(IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                     return false;
                 }

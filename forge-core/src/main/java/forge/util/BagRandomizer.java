@@ -17,15 +17,21 @@ public class BagRandomizer<T > implements Iterable<T>{
     private T[] bag;
     private int currentPosition = 0;
 
-    public BagRandomizer(T[] items) {
+    public BagRandomizer(T[] items) throws IllegalArgumentException {
+        if (items.length == 0) {
+            throw new IllegalArgumentException("Must include at least one item!");
+        }
         bag = items;
         shuffleBag();
     }
 
-    public BagRandomizer(Iterable<T> items) {
+    public BagRandomizer(Iterable<T> items) throws IllegalArgumentException {
         ArrayList<T> list = new ArrayList<>();
         for (T item : items) {
             list.add(item);
+        }
+        if (list.size() == 0) {
+            throw new IllegalArgumentException("Must include at least one item!");
         }
         bag = (T[]) list.toArray();
         shuffleBag();
