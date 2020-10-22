@@ -7,3 +7,4 @@
 22, MASTERS_SET, Masters Sets (paper only)
 30, MIRRODIN, Mirrodin (Plane)
 30, RAVNICA, Ravnica (Plane)
+40, GRAVEYARD_MATTERS, Graveyard matters
