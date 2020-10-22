@@ -358,10 +358,10 @@ public class MatchScreen extends FScreen {
         if(gameMenu!=null) {
              if(gameMenu.getChildCount()>3){
                  if(viewWinLose == null) {
-                     gameMenu.getChildAt(0).setEnabled(true);
-                     gameMenu.getChildAt(1).setEnabled(true);
-                     gameMenu.getChildAt(2).setEnabled(true);
-                     gameMenu.getChildAt(3).setEnabled(true);
+                     gameMenu.getChildAt(0).setEnabled(!game.isMulligan());
+                     gameMenu.getChildAt(1).setEnabled(!game.isMulligan());
+                     gameMenu.getChildAt(2).setEnabled(!game.isMulligan());
+                     gameMenu.getChildAt(3).setEnabled(!game.isMulligan());
                      gameMenu.getChildAt(4).setEnabled(false);
                  } else {
                      gameMenu.getChildAt(0).setEnabled(false);
