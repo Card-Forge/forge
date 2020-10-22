@@ -10,6 +10,7 @@ import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameLogEntryType;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -431,6 +432,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final Player player = sa.getActivatingPlayer();
         final Card hostCard = sa.getHostCard();
         final Game game = player.getGame();
+        final List<Card> commandCards = Lists.newArrayList();
 
         ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<ZoneType> origin = Lists.newArrayList();
@@ -664,6 +666,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         tgtC.setExiledWith(host);
                     }
                     movedCard = game.getAction().moveTo(destination, tgtC, sa);
+                    if (ZoneType.Hand.equals(destination) && ZoneType.Command.equals(originZone.getZoneType())) {
+                        StringBuilder sb = new StringBuilder();
+                        sb.append(movedCard.getName()).append(" has moved from Command Zone to ").append(player).append("'s hand.");
+                        game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, sb.toString());
+                        commandCards.add(movedCard); //add to list to reveal the commandzone cards
+                    }
                     // If a card is Exiled from the stack, remove its spells from the stack
                     if (sa.hasParam("Fizzle")) {
                         if (tgtC.isInZone(ZoneType.Exile) || tgtC.isInZone(ZoneType.Hand)
@@ -705,6 +713,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 if (imprint != null) {
                     hostCard.addImprintedCard(movedCard);
+                }
+            }
+        }
+
+        //reveal command cards that changes zone from command zone to player's hand
+        if (!commandCards.isEmpty()) {
+            for (Player observer : game.getPlayers()){
+                if(!observer.isAI() && !observer.getController().isAI() && observer != player) {
+                    observer.getController().reveal(new CardCollection(commandCards), player.getZone(ZoneType.Hand).getZoneType(), player, "Revealed cards in ");
                 }
             }
         }
