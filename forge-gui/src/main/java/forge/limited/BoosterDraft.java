@@ -179,28 +179,33 @@ public class BoosterDraft implements IBoosterDraft {
                 break;
 
             case Chaos:
-
+                /**
+                 * A chaos draft consists of boosters from many different sets.
+                 * Default settings are boosters from all sets with a booster size of 15 cards.
+                 * Alternatively, the sets can be restricted to a format like Modern or to a theme.
+                 * Examples for themes: sets that take place on a certain plane, core sets, masters sets,
+                 * or sets that share a mechanic.
+                 */
+                // Get chaos draft themes
                 final List<ThemedChaosDraft> themes = new ArrayList<>();
                 final IStorage<ThemedChaosDraft> themeStorage = FModel.getThemedChaosDrafts();
-
                 for (final ThemedChaosDraft theme : themeStorage) {
                     themes.add(theme);
                 }
-                Collections.sort(themes);
-
+                Collections.sort(themes); // sort for user interface
+                // Ask user to select theme
                 final String dialogQuestion = Localizer.getInstance().getMessage("lblChooseChaosTheme");
                 final ThemedChaosDraft theme = SGuiChoose.oneOrNone(dialogQuestion, themes);
                 if (theme == null) {
-                    return false;
+                    return false; // abort if no theme is selected
                 }
-
+                // Filter all sets by theme restrictions
                 final Predicate<CardEdition> themeFilter = theme.getEditionFilter();
-
                 final CardEdition.Collection allEditions = StaticData.instance().getEditions();
                 final Iterable<CardEdition> chaosDraftEditions = Iterables.filter(
                         allEditions.getOrderedEditions(),
                         themeFilter);
-
+                // Add chaos "boosters" as special suppliers
                 final Supplier<List<PaperCard>> ChaosDraftSupplier;
                 try{
                     ChaosDraftSupplier = new ChaosBoosterSupplier(chaosDraftEditions);
@@ -208,7 +213,6 @@ public class BoosterDraft implements IBoosterDraft {
                     System.out.println(e.getMessage());
                     return false;
                 }
-
                 for (int i = 0; i < 3; i++) {
                     this.product.add(ChaosDraftSupplier);
                 }

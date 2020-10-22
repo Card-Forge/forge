@@ -46,6 +46,9 @@ public class ThemedChaosDraft implements Comparable<ThemedChaosDraft> {
      */
     public int getOrderNumber() { return orderNumber; }
 
+    /**
+     * @return Predicate to sort out editions not belonging to the chaos draft theme
+     */
     public Predicate<CardEdition> getEditionFilter() {
         Predicate<CardEdition> filter;
         switch(tag) {
@@ -63,6 +66,10 @@ public class ThemedChaosDraft implements Comparable<ThemedChaosDraft> {
         return filter;
     }
 
+    /**
+     * Filter to select editions by ChaosDraftThemes tag defined in edition files.
+     * Tag must be defined in res/blockdata/chaosdraftthemes.txt
+     */
     private final Predicate<CardEdition> themedFilter = new Predicate<CardEdition>() {
         @Override
         public boolean apply(final CardEdition cardEdition) {
@@ -74,6 +81,10 @@ public class ThemedChaosDraft implements Comparable<ThemedChaosDraft> {
         }
     };
 
+    /**
+     * @param formatName format to filter by, currently supported: MODERN, PIONEER, STANDARD
+     * @return Filter to select editions belonging to a certain constructed format.
+     */
     private Predicate<CardEdition> getFormatFilter(String formatName) {
         GameFormat.Collection formats = FModel.getFormats();
         GameFormat format;
@@ -96,6 +107,9 @@ public class ThemedChaosDraft implements Comparable<ThemedChaosDraft> {
         };
     }
 
+    /**
+     * Default filter that only allows actual sets that were printed as 15-card boosters
+     */
     private static final Predicate<CardEdition> DEFAULT_FILTER = new Predicate<CardEdition>() {
         @Override
         public boolean apply(final CardEdition cardEdition) {
