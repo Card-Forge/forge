@@ -337,7 +337,7 @@ Type=Expansion
 328 R Scavenger Grounds
 329 U Shefet Dunes
 330 R Sheltered Thicket
-331 C Sun scorched Desert
+331 C Sunscorched Desert
 332 L Swamp
 333 L Swamp
 334 L Swamp
