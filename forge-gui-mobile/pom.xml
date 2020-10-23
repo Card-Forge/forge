@@ -64,15 +64,11 @@
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx</artifactId>
             <version>1.9.11</version>
-            <scope>system</scope>
-            <systemPath>${pom.basedir}/libs/gdx.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-freetype</artifactId>
             <version>1.9.11</version>
-            <scope>system</scope>
-            <systemPath>${pom.basedir}/libs/gdx-freetype.jar</systemPath>
         </dependency>
     </dependencies>
 
