@@ -7,6 +7,7 @@ Type=Expansion
 BoosterCovers=3
 Booster=10 Common:!fromSheet("THB Secret Cards"), 3 Uncommon:!fromSheet("THB Secret Cards"), 1 RareMythic:!fromSheet("THB Secret Cards"), 1 BasicLand
 Prerelease=6 Boosters, 1 RareMythic+
+ChaosDraftThemes=GRAVEYARD_MATTERS
 
 [cards]
 1 U Alseid of Life's Bounty

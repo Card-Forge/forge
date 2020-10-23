@@ -9,6 +9,7 @@ BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
+ChaosDraftThemes=GRAVEYARD_MATTERS
 
 [cards]
 1 U Ancestor's Chosen
