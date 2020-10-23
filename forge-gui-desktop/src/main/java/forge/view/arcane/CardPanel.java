@@ -462,7 +462,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                     PaperCard pc = StaticData.instance().getCommonCards().getCard(card.getName());
                     int ofs = pc != null && Card.getCardForUi(pc).hasKeyword(Keyword.AFTERMATH) ? -12 : 12;
 
-                    drawManaCost(g, card.getCurrentState().getManaCost(), ofs);
+                    drawManaCost(g, card.getLeftSplitState().getManaCost(), ofs);
                     drawManaCost(g, card.getAlternateState().getManaCost(), -ofs);
                 }
             }

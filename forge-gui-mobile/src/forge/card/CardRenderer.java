@@ -370,6 +370,7 @@ public class CardRenderer {
         ManaCost mainManaCost = card.getCurrentState().getManaCost();
         if (card.isSplitCard()) {
             //handle rendering both parts of split card
+            mainManaCost = card.getLeftSplitState().getManaCost();
             ManaCost otherManaCost = card.getAlternateState().getManaCost();
             manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
             CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth + MANA_COST_PADDING, y, MANA_SYMBOL_SIZE);
