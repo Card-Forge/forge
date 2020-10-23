@@ -69,7 +69,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float GROUP_HEADER_GLYPH_WIDTH = Utils.scale(6);
     private static final float GROUP_HEADER_LINE_THICKNESS = Utils.scale(1);
     private static final float SEL_BORDER_SIZE = Utils.scale(1);
-    private static final int MIN_COLUMN_COUNT = 1;
+    private static final int MIN_COLUMN_COUNT = Forge.isLandscapeMode() ? 2 : 1;
     private static final int MAX_COLUMN_COUNT = 10;
 
     private final List<Integer> selectedIndices = new ArrayList<>();
