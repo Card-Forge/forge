@@ -206,6 +206,7 @@ public enum TrackableProperty {
     WinningPlayerName(TrackableTypes.StringType),
     WinningTeam(TrackableTypes.IntegerType),
     MatchOver(TrackableTypes.BooleanType),
+    Mulligan(TrackableTypes.BooleanType),
     NumGamesInMatch(TrackableTypes.IntegerType),
     NumPlayedGamesInMatch(TrackableTypes.IntegerType),
     Stack(TrackableTypes.StackItemViewListType),
