@@ -16,6 +16,7 @@ import forge.screens.match.views.VPrompt;
 import forge.toolbox.FButton.Corner;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.PhysicsObject;
+import forge.util.TextUtil;
 import forge.util.Utils;
 
 public abstract class FDialog extends FOverlay {
@@ -48,7 +49,7 @@ public abstract class FDialog extends FOverlay {
         buttonCount = buttonCount0;
         prompt = add(new VPrompt("", "", null, null));
         if (buttonCount < 3) {
-            title0 = title0.replaceAll(" - ", "\n"); //breakup into lines
+            title0 = TextUtil.fastReplace(title0," - ", "\n"); //breakup into lines
             btnMiddle = null;
             prompt.setMessage(title0); //only put title in message if no third button
         }
