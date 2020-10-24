@@ -432,7 +432,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final Player player = sa.getActivatingPlayer();
         final Card hostCard = sa.getHostCard();
         final Game game = player.getGame();
-        final List<Card> commandCards = Lists.newArrayList();
+        final CardCollection commandCards = new CardCollection();
 
         ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<ZoneType> origin = Lists.newArrayList();
@@ -719,11 +719,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         //reveal command cards that changes zone from command zone to player's hand
         if (!commandCards.isEmpty()) {
-            for (Player observer : game.getPlayers()){
-                if(!observer.isAI() && !observer.getController().isAI() && observer != player) {
-                    observer.getController().reveal(new CardCollection(commandCards), player.getZone(ZoneType.Hand).getZoneType(), player, "Revealed cards in ");
-                }
-            }
+            game.getAction().reveal(commandCards, player, true, "Revealed cards in ");
         }
 
         triggerList.triggerChangesZoneAll(game);
