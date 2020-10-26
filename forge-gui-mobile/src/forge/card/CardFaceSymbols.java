@@ -190,11 +190,17 @@ public class CardFaceSymbols {
     }
 
     public static void drawColorSet(Graphics g, ColorSet colorSet, float x, float y, final float imageSize) {
+        drawColorSet(g, colorSet, x, y, imageSize, false);
+    }
+    public static void drawColorSet(Graphics g, ColorSet colorSet, float x, float y, final float imageSize, boolean vertical) {
         final float dx = imageSize;
 
         for (final ManaCostShard s : colorSet.getOrderedShards()) {
             drawSymbol(s.getImageKey(), g, x, y, imageSize, imageSize);
-            x += dx;
+            if (!vertical)
+                x += dx;
+            else
+                y += dx;
         }
     }
 

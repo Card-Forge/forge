@@ -35,6 +35,7 @@ import forge.game.event.GameEventZone;
 import forge.game.event.IGameEventVisitor;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 import forge.util.maps.MapOfLists;
 
 /**
@@ -213,7 +214,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
                 }
             }
             // No interest if "colors together" or "alternative colors" - only interested in colors themselves
-            fullManaColors = new StringBuilder(fullManaColors.toString().replaceAll("\\s", ""));
+            fullManaColors = new StringBuilder(TextUtil.fastReplace(fullManaColors.toString()," ", ""));
 
             int fullManaColorsLength = fullManaColors.length();
 

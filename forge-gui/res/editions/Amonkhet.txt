@@ -9,6 +9,7 @@ BoosterCovers=5
 Booster=10 Common:!fromSheet("AKH Planeswalker Decks and Toolkit"), 3 Uncommon:!fromSheet("AKH Planeswalker Decks and Toolkit"), 1 RareMythic:!fromSheet("AKH Planeswalker Decks and Toolkit"), 1 BasicLand AKH
 AdditionalSheetForFoils=fromSheet("MPS Amonkhet Invocations")
 AdditionalSetUnlockedInQuest=MPS_AKH
+ChaosDraftThemes=GRAVEYARD_MATTERS
 
 [cards]
 1 M Angel of Sanctions

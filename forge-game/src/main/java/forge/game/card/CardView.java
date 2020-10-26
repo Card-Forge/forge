@@ -253,6 +253,13 @@ public class CardView extends GameEntityView {
         }
         return counters.equals(otherCard.getCounters());
     }
+    public boolean hasSamePT(CardView otherCard) {
+        if (getCurrentState().getPower() != otherCard.getCurrentState().getPower())
+            return false;
+        if (getCurrentState().getToughness() != otherCard.getCurrentState().getToughness())
+            return false;
+        return true;
+    }
     void updateCounters(Card c) {
         set(TrackableProperty.Counters, c.getCounters());
         updateLethalDamage(c);
@@ -691,6 +698,20 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.AlternateState);
     }
 
+    public boolean hasLeftSplitState() {
+        return getLeftSplitState() != null;
+    }
+    public CardStateView getLeftSplitState() {
+        return get(TrackableProperty.LeftSplitState);
+    }
+
+    public boolean hasRightSplitState() {
+        return getRightSplitState() != null;
+    }
+    public CardStateView getRightSplitState() {
+        return get(TrackableProperty.RightSplitState);
+    }
+
     public boolean hasBackSide() {
         return get(TrackableProperty.HasBackSide);
     }
@@ -731,9 +752,8 @@ public class CardView extends GameEntityView {
 
         CardState currentState = c.getCurrentState();
         if (isSplitCard) {
-            if (c.getCurrentStateName() != CardStateName.LeftSplit && c.getCurrentStateName() != CardStateName.RightSplit && c.getCurrentStateName() != CardStateName.FaceDown) {
-                currentState = c.getState(CardStateName.LeftSplit);
-            }
+            set(TrackableProperty.LeftSplitState, c.getState(CardStateName.LeftSplit).getView());
+            set(TrackableProperty.RightSplitState, c.getState(CardStateName.RightSplit).getView());
         }
 
         CardStateView currentStateView = currentState.getView();
@@ -901,6 +921,12 @@ public class CardView extends GameEntityView {
         public ColorSet getOriginalColors() {
             return get(TrackableProperty.OriginalColors);
         }
+        public ColorSet getLeftSplitColors() {
+            return get(TrackableProperty.LeftSplitColors);
+        }
+        public ColorSet getRightSplitColors() {
+            return get(TrackableProperty.RightSplitColors);
+        }
         void updateColors(Card c) {
             set(TrackableProperty.Colors, c.determineColor());
         }
@@ -909,6 +935,10 @@ public class CardView extends GameEntityView {
         }
         void setOriginalColors(Card c) {
             set(TrackableProperty.OriginalColors, c.determineColor());
+            if (c.isSplitCard()) {
+                set(TrackableProperty.LeftSplitColors, c.determineColor(c.getState(CardStateName.LeftSplit)));
+                set(TrackableProperty.RightSplitColors, c.determineColor(c.getState(CardStateName.RightSplit)));
+            }
         }
         void updateHasChangeColors(boolean hasChangeColor) {
             set(TrackableProperty.HasChangedColors, hasChangeColor);
@@ -1082,6 +1112,7 @@ public class CardView extends GameEntityView {
         public String getProtectionKey() { return get(TrackableProperty.ProtectionKey); }
         public String getHexproofKey() { return get(TrackableProperty.HexproofKey); }
         public boolean hasDeathtouch() { return get(TrackableProperty.HasDeathtouch); }
+        public boolean hasDevoid() { return get(TrackableProperty.HasDevoid); }
         public boolean hasDefender() { return get(TrackableProperty.HasDefender); }
         public boolean hasDoubleStrike() { return get(TrackableProperty.HasDoubleStrike); }
         public boolean hasFirstStrike() { return get(TrackableProperty.HasFirstStrike); }
@@ -1118,6 +1149,7 @@ public class CardView extends GameEntityView {
         void updateKeywords(Card c, CardState state) {
             c.updateKeywordsCache(state);
             set(TrackableProperty.HasDeathtouch, c.hasKeyword(Keyword.DEATHTOUCH, state));
+            set(TrackableProperty.HasDevoid, c.hasKeyword(Keyword.DEVOID, state));
             set(TrackableProperty.HasDefender, c.hasKeyword(Keyword.DEFENDER, state));
             set(TrackableProperty.HasDoubleStrike, c.hasKeyword(Keyword.DOUBLE_STRIKE, state));
             set(TrackableProperty.HasFirstStrike, c.hasKeyword(Keyword.FIRST_STRIKE, state));

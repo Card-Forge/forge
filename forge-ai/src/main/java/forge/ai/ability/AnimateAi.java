@@ -340,17 +340,19 @@ public class AnimateAi extends SpellAbilityAi {
 
             // select the worst of the best
             final Card worst = ComputerUtilCard.getWorstAI(maxList);
-            if (worst.isLand()) {
-                // e.g. Clan Guildmage, make sure we're not using the same land we want to animate to activate the ability
-                this.holdAnimatedTillMain2(ai, worst);
-                if (!ComputerUtilMana.canPayManaCost(sa, ai, 0)) {
-                    this.releaseHeldTillMain2(ai, worst);
-                    return false;
+            if (worst != null) {
+                if (worst.isLand()) {
+                    // e.g. Clan Guildmage, make sure we're not using the same land we want to animate to activate the ability
+                    this.holdAnimatedTillMain2(ai, worst);
+                    if (!ComputerUtilMana.canPayManaCost(sa, ai, 0)) {
+                        this.releaseHeldTillMain2(ai, worst);
+                        return false;
+                    }
                 }
+                this.rememberAnimatedThisTurn(ai, worst);
+                sa.getTargets().add(worst);
             }
-            this.rememberAnimatedThisTurn(ai, worst);
-            sa.getTargets().add(worst);
-            return true;            
+            return true;
         }
         
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or

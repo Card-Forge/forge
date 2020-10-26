@@ -108,7 +108,7 @@ public class AbilityUtils {
 
         else if (defined.equals("Enchanted")) {
             c = hostCard.getEnchantingCard();
-            if ((c == null) && (sa.getRootAbility() != null)
+            if ((c == null) && (sa != null) && (sa.getRootAbility() != null)
                     && (sa.getRootAbility().getPaidList("Sacrificed") != null)
                     && !sa.getRootAbility().getPaidList("Sacrificed").isEmpty()) {
                 c = sa.getRootAbility().getPaidList("Sacrificed").get(0).getEnchantingCard();

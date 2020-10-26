@@ -116,6 +116,14 @@ public class GameView extends TrackableObject {
     public boolean isMatchOver() {
         return get(TrackableProperty.MatchOver);
     }
+    public boolean isMulligan() {
+        if (get(TrackableProperty.Mulligan) == null)
+            return false;
+        return get(TrackableProperty.Mulligan);
+    }
+    public void updateIsMulligan(boolean value) {
+        set(TrackableProperty.Mulligan, value);
+    }
     public String getWinningPlayerName() {
         return get(TrackableProperty.WinningPlayerName);
     }
