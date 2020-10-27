@@ -1,6 +1,6 @@
 Name:Nymris, Oona's Trickster
 ManaCost:3 U B
-Types:Legendary Creature Human Knight
+Types:Legendary Creature Faerie Knight
 PT:1/6
 K:Flash
 K:Flying
