@@ -5,4 +5,5 @@ A:SP$ ChangeZone | Cost$ 6 U U U | ValidTgts$ Instant,Sorcery | TgtPrompt$ Selec
 SVar:DBPlay:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | CopyCard$ True | Amount$ 3 | AllowRepeats$ True | Controller$ You | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile
+DeckHints:Type$Instant|Sorcery
 Oracle:Exile target instant or sorcery card from a graveyard. Copy that card three times. You may cast the copies without paying their mana cost. Exile Mnemonic Deluge.
