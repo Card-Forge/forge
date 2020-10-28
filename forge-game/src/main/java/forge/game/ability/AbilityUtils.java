@@ -1802,9 +1802,12 @@ public class AbilityUtils {
             if (params.containsKey(key)) {
                 String convertTo = params.get(key);
                 byte convertByte = 0;
-                if ("All".equals(convertTo)) {
+                if ("Type".equals(convertTo)) {
                     // IMPORTANT! We need to use Mana Color here not Card Color.
                     convertByte = ManaAtom.ALL_MANA_TYPES;
+                } else if ("Color".equals(convertTo)) {
+                    // IMPORTANT! We need to use Mana Color here not Card Color.
+                    convertByte = ManaAtom.ALL_MANA_COLORS;
                 } else {
                     for (final String convertColor : convertTo.split(",")) {
                         convertByte |= ManaAtom.fromName(convertColor);
