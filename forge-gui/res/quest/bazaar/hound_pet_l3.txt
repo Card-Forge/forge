@@ -1,7 +1,7 @@
-Name:Hound Pet
+Name:Dog Pet
 ManaCost:no cost
 Colors:red
-Types:Creature Hound Pet
+Types:Creature Dog Pet
 PT:2/1
 K:Haste
 Oracle:Haste

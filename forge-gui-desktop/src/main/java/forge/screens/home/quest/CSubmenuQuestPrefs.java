@@ -7,6 +7,7 @@ import com.google.common.primitives.Ints;
 import forge.gui.framework.ICDoc;
 import forge.model.FModel;
 import forge.quest.data.QuestPreferences;
+import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.home.quest.VSubmenuQuestPrefs.PrefInput;
 import forge.util.Localizer;
 
@@ -50,16 +51,29 @@ public enum CSubmenuQuestPrefs implements ICDoc {
     public static void validateAndSave(final PrefInput i0) {
         if (i0.getText().equals(i0.getPreviousText())) { return; }
         final QuestPreferences prefs = FModel.getQuestPreferences();
-
-        final Integer val = Ints.tryParse(i0.getText());
-        resetErrors();
+        
+        String validationError = null;
         final Localizer localizer = Localizer.getInstance();
-        final String validationError = val == null ? localizer.getMessage("lblEnteraNumber") : prefs.validatePreference(i0.getQPref(), val.intValue());
+        resetErrors();
+
+        if(QPref.UNLOCK_DISTANCE_MULTIPLIER.equals(i0.getQPref())
+                || QPref.WILD_OPPONENTS_MULTIPLIER.equals(i0.getQPref())) {
+            Double val = null;
+            try {
+                val = new Double(i0.getText());
+            } catch (Exception e) {
+            }            
+            validationError = val == null ? localizer.getMessage("lblEnteraDecimal") : null;           
+        } else {
+            final Integer val = Ints.tryParse(i0.getText());
+            validationError = val == null ? localizer.getMessage("lblEnteraNumber") : prefs.validatePreference(i0.getQPref(), val.intValue());          
+        }
+
         if (validationError != null) {
             showError(i0, validationError);
             return;
-        }
-
+        }            
+        
         prefs.setPref(i0.getQPref(), i0.getText());
         prefs.save();
         i0.setPreviousText(i0.getText());

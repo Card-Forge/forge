@@ -11,7 +11,7 @@ import forge.toolbox.FOptionPane;
 import forge.util.Utils;
 
 public abstract class LaunchScreen extends FScreen {
-    private static final float MAX_START_BUTTON_HEIGHT = 2 * Utils.AVG_FINGER_HEIGHT;
+    private static final float MAX_START_BUTTON_HEIGHT = 1.75f * Utils.AVG_FINGER_HEIGHT;
     private float START_BUTTON_RATIO = 0.f;
     private static final float PADDING = FOptionPane.PADDING;
 

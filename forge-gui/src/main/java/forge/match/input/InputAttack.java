@@ -26,6 +26,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.event.GameEventCombatUpdate;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -327,13 +328,16 @@ public class InputAttack extends InputSyncronizedBase {
 
     private void updateMessage() {
         Localizer localizer = Localizer.getInstance();
-        String message = localizer.getMessage("lblSelectAttackCreatures") + currentDefender + localizer.getMessage("lblSelectAttackTarget");
+        String message = localizer.getMessage("lblSelectAttackCreatures") + " " + currentDefender + " " + localizer.getMessage("lblSelectAttackTarget");
         if (potentialBanding) {
             message += localizer.getMessage("lblSelectBandingTarget");
         }
         showMessage(message);
 
         updatePrompt();
+
+        if (combat != null)
+            getController().getGame().fireEvent(new GameEventCombatUpdate(combat.getAttackers(), combat.getAllBlockers()));
 
         getController().getGui().showCombat(); // redraw sword icons
     }

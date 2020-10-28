@@ -2,6 +2,7 @@ Name:Facevaulter
 ManaCost:B
 Types:Creature Goblin Warrior
 PT:1/1
-A:AB$ Pump | Cost$ B Sac<1/Goblin> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/facevaulter.jpg
+A:AB$ Pump | Cost$ B Sac<1/Goblin> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+DeckHints:Type$Goblin
+DeckHas:Ability$Sacrifice
 Oracle:{B}, Sacrifice a Goblin: Facevaulter gets +2/+2 until end of turn.

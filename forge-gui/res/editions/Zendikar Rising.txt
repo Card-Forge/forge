@@ -1,0 +1,422 @@
+[metadata]
+Code=ZNR
+Date=2020-09-25
+Name=Zendikar Rising
+Code2=ZNR
+MciCode=znr
+Type=Expansion
+BoosterCovers=3
+Booster=10 Common:!dfc:!fromSheet("ZNR Secret Cards"), 3 Uncommon:!dfc:!fromSheet("ZNR Secret Cards"), 1 RareMythic:!dfc:!fromSheet("ZNR Secret Cards"), 1 BasicLand
+BoosterReplaceSlotFromPrintSheet=ZNRModalDoubleFaceCards
+Prerelease=6 Boosters, 1 RareMythic+
+
+[cards]
+1 U Allied Assault
+2 M Angel of Destiny
+3 C Angelheart Protector
+4 R Archon of Emeria
+5 R Archpriest of Iona
+6 U Attended Healer
+7 U Canyon Jerboa
+8 C Cliffhaven Sell-Sword
+9 C Dauntless Unity
+10 C Disenchant
+11 U Emeria Captain
+12 M Emeria's Call
+13 C Expedition Healer
+14 C Farsight Adept
+15 U Fearless Fledgling
+16 R Felidar Retreat
+17 U Journey to Oblivion
+18 C Kabira Outrider
+19 U Kabira Takedown
+20 U Kitesail Cleric
+21 U Kor Blademaster
+22 C Kor Celebrant
+23 R Legion Angel
+24 R Luminarch Aspirant
+25 C Makindi Ox
+26 U Makindi Stampede
+27 R Maul of the Skyclaves
+28 C Mesa Lynx
+29 C Nahiri's Binding
+30 R Ondu Inversion
+31 U Paired Tactician
+32 C Practiced Tactics
+33 C Pressure Point
+34 C Prowling Felidar
+35 C Resolute Strike
+36 C Sea Gate Banneret
+37 U Sejiri Shelter
+38 C Shepherd of Heroes
+39 R Skyclave Apparition
+40 U Skyclave Cleric
+41 R Squad Commander
+42 C Smite the Monstrous
+43 C Tazeem Raptor
+44 M Tazri, Beacon of Unity
+45 C Anticognition
+46 U Beyeen Veil
+47 C Bubble Snare
+48 C Cascade Seer
+49 R Charix, the Raging Isle
+50 C Chilling Trap
+51 C Cleric of Chill Depths
+52 U Concerted Defense
+53 R Confounding Conundrum
+54 R Coralhelm Chronicler
+55 C Cunning Geysermage
+56 C Deliberate
+57 C Expedition Diviner
+58 C Field Research
+59 C Glacial Grasp
+60 R Glasspool Mimic
+61 R Inscription of Insight
+62 C Into the Roil
+63 M Jace, Mirror Mage
+64 U Jwari Disruption
+65 C Living Tempest
+66 U Lullmage's Domination
+67 R Maddening Cacophony
+68 R Master of Winds
+69 U Merfolk Falconer
+70 U Merfolk Windrobber
+71 C Negate
+72 R Nimble Trapfinder
+73 C Risen Riptide
+74 U Roost of Drakes
+75 U Ruin Crab
+76 M Sea Gate Restoration
+77 M Sea Gate Stormcaller
+78 C Seafloor Stalker
+79 C Shell Shield
+80 U Silundi Vision
+81 U Skyclave Plunder
+82 C Skyclave Squid
+83 U Sure-Footed Infiltrator
+84 C Tazeem Roilmage
+85 R Thieving Skydiver
+86 U Umara Wizard
+87 U Windrider Wizard
+88 C Zulaport Duelist
+89 U Acquisitions Expert
+90 M Agadeem's Awakening
+91 U Blackbloom Rogue
+92 C Blood Beckoning
+93 C Blood Price
+94 U Bloodchief's Thirst
+95 R Coveted Prize
+96 C Deadly Alliance
+97 U Demon's Disciple
+98 M Drana, the Last Bloodchief
+99 C Drana's Silencer
+100 C Dreadwurm
+101 C Expedition Skulker
+102 C Feed the Swarm
+103 C Ghastly Gloomhunter
+104 C Guul Draz Mucklord
+105 C Hagra Constrictor
+106 R Hagra Mauling
+107 C Highborn Vampire
+108 R Inscription of Ruin
+109 U Lithoform Blight
+110 C Malakir Blood-Priest
+111 U Malakir Rebirth
+112 C Marauding Blight-Priest
+113 U Mind Carver
+114 C Mind Drain
+115 R Nighthawk Scavenger
+116 C Nimana Skitter-Sneak
+117 C Nimana Skydancer
+118 R Nullpriest of Oblivion
+119 C Oblivion's Hunger
+120 U Pelakka Predation
+121 U Scion of the Swarm
+122 M Scourge of the Skyclaves
+123 U Shadow Stinger
+124 R Shadows' Verdict
+125 R Skyclave Shade
+126 U Skyclave Shadowcat
+127 R Soul Shatter
+128 C Subtle Strike
+129 R Taborax, Hope's Demise
+130 U Thwart the Grave
+131 C Vanquish the Weak
+132 U Zof Consumption
+133 C Akoum Hellhound
+134 U Akoum Warrior
+135 C Ardent Electromancer
+136 U Cinderclasm
+137 C Cleansing Wildfire
+138 C Expedition Champion
+139 U Fireblade Charger
+140 C Fissure Wizard
+141 U Goma Fada Vanguard
+142 C Grotag Bug-Catcher
+143 U Grotag Night-Runner
+144 C Inordinate Rage
+145 R Kargan Intimidator
+146 U Kazuul's Fury
+147 M Leyline Tyrant
+148 R Magmatic Channeler
+149 C Molten Blast
+150 M Moraug, Fury of Akoum
+151 R Nahiri's Lithoforming
+152 C Pyroclastic Hellion
+153 R Relic Robber
+154 U Rockslide Sorcerer
+155 C Roil Eruption
+156 R Roiling Vortex
+157 C Scavenged Blade
+158 C Scorch Rider
+159 R Shatterskull Charger
+160 U Shatterskull Minotaur
+161 M Shatterskull Smashing
+162 C Sizzling Barrage
+163 U Skyclave Geopede
+164 C Sneaking Guide
+165 U Song-Mad Treachery
+166 U Spikefield Hazard
+167 C Spitfire Lagac
+168 C Synchronized Spellcraft
+169 C Teeterpeak Ambusher
+170 U Thundering Rebuke
+171 U Thundering Sparkmage
+172 C Tormenting Voice
+173 C Tuktuk Rubblefort
+174 R Valakut Awakening
+175 R Valakut Exploration
+176 R Wayward Guide-Beast
+177 C Adventure Awaits
+178 M Ancient Greenwarden
+179 M Ashaya, Soul of the Wild
+180 U Bala Ged Recovery
+181 C Broken Wings
+182 C Canopy Baloth
+183 R Cragplate Baloth
+184 C Dauntless Survivor
+185 C Gnarlid Colony
+186 R Inscription of Abundance
+187 U Iridescent Hornbeetle
+188 C Joraga Visionary
+189 R Kazandu Mammoth
+190 C Kazandu Nectarpot
+191 C Kazandu Stomper
+192 U Khalni Ambush
+193 R Lotus Cobra
+194 C Might of Murasa
+195 C Murasa Brute
+196 U Murasa Sproutling
+197 C Nissa's Zendikon
+198 R Oran-Rief Ooze
+199 C Rabid Bite
+200 C Reclaim the Wastes
+201 U Roiling Regrowth
+202 C Scale the Heights
+203 R Scute Swarm
+204 U Skyclave Pick-Axe
+205 U Springmantle Cleric
+206 C Strength of Solidarity
+207 R Swarm Shambler
+208 C Tajuru Blightblade
+209 R Tajuru Paragon
+210 C Tajuru Snarecaster
+211 U Tangled Florahedron
+212 U Taunting Arbormage
+213 C Territorial Scythecat
+214 C Turntimber Ascetic
+215 M Turntimber Symbiosis
+216 U Vastwood Fortification
+217 U Vastwood Surge
+218 U Veteran Adventurer
+219 U Vine Gecko
+220 R Akiri, Fearless Voyager
+221 U Brushfire Elemental
+222 U Cleric of Life's Bond
+223 R Grakmaw, Skyclave Ravager
+224 U Kargan Warleader
+225 R Kaza, Roil Chaser
+226 R Linvala, Shield of Sea Gate
+227 U Lullmage's Familiar
+228 U Moss-Pit Skeleton
+229 U Murasa Rootgrazer
+230 M Nahiri, Heir of the Ancients
+231 M Nissa of Shadowed Boughs
+232 M Omnath, Locus of Creation
+233 R Orah, Skyclave Hierophant
+234 R Phylath, World Sculptor
+235 U Ravager's Mace
+236 U Soaring Thought-Thief
+237 U Spoils of Adventure
+238 U Umara Mystic
+239 R Verazol, the Split Current
+240 R Yasharn, Implacable Earth
+241 R Zagras, Thief of Heartbeats
+242 R Zareth San, the Trickster
+243 C Cliffhaven Kitesail
+244 M Forsaken Monument
+245 M Lithoform Engine
+246 R Myriad Construct
+247 U Relic Amulet
+248 U Relic Axe
+249 U Relic Golem
+250 U Relic Vial
+251 C Sea Gate Colossus
+252 R Skyclave Relic
+253 C Skyclave Sentinel
+254 C Spare Supplies
+255 C Stonework Packbeast
+256 C Utility Knife
+257 U Base Camp
+258 R Branchloft Pathway
+259 R Brightclimb Pathway
+260 R Clearwater Pathway
+261 R Cragcrown Pathway
+262 R Crawling Barrens
+263 R Needleverge Pathway
+264 R Riverglide Pathway
+265 R Throne of Makindi
+266 L Plains
+267 L Plains
+268 L Plains
+269 L Island
+270 L Island
+271 L Island
+272 L Swamp
+273 L Swamp
+274 L Swamp
+275 L Mountain
+276 L Mountain
+277 L Mountain
+278 L Forest
+279 L Forest
+280 L Forest
+#Alternate Art Borderless
+281 M Jace, Mirror Mage
+282 M Nahiri, Heir of the Ancients
+283 M Nissa of Shadowed Boughs
+284 R Branchloft Pathway
+285 R Brightclimb Pathway
+286 R Clearwater Pathway
+287 R Cragcrown Pathway
+288 R Needleverge Pathway
+289 R Riverglide Pathway
+#Showcase
+290 U Canyon Jerboa
+291 U Fearless Fledgling
+292 R Felidar Retreat
+293 C Makindi Ox
+294 C Prowling Felidar
+295 U Ruin Crab
+296 C Skyclave Squid
+297 C Dreadwurm
+298 R Skyclave Shade
+299 C Akoum Hellhound
+300 M Moraug, Fury of Akoum
+301 U Skyclave Geopede
+302 C Spitfire Lagac
+303 R Valakut Exploration
+304 C Canopy Baloth
+305 R Kazandu Mammoth
+306 C Kazandu Nectarpot
+307 R Lotus Cobra
+308 R Scute Swarm
+309 U Skyclave Pick-Axe
+310 C Territorial Scythecat
+311 U Brushfire Elemental
+312 M Omnath, Locus of Creation
+313 R Phylath, World Sculptor
+#Extended Art
+314 M Angel of Destiny
+315 R Archon of Emeria
+316 R Archpriest of Iona
+317 M Emeria's Call
+318 R Legion Angel
+319 R Luminarch Aspirant
+320 R Maul of the Skyclaves
+321 R Ondu Inversion
+322 R Skyclave Apparition
+323 R Squad Commander
+324 M Tazri, Beacon of Unity
+325 R Charix, the Raging Isle
+326 R Confounding Conundrum
+327 R Coralhelm Chronicler
+328 R Glasspool Mimic
+329 R Inscription of Insight
+330 R Maddening Cacophony
+331 R Master of Winds
+332 R Nimble Trapfinder
+333 M Sea Gate Restoration
+334 M Sea Gate Stormcaller
+335 R Thieving Skydiver
+336 M Agadeem's Awakening
+337 R Coveted Prize
+338 M Drana, the Last Bloodchief
+339 R Hagra Mauling
+340 R Inscription of Ruin
+341 R Nighthawk Scavenger
+342 R Nullpriest of Oblivion
+343 M Scourge of the Skyclaves
+344 R Shadows' Verdict
+345 R Soul Shatter
+346 R Taborax, Hope's Demise
+347 R Kargan Intimidator
+348 M Leyline Tyrant
+349 R Magmatic Channeler
+350 R Nahiri's Lithoforming
+351 R Relic Robber
+352 R Roiling Vortex
+353 R Shatterskull Charger
+354 M Shatterskull Smashing
+355 R Valakut Awakening
+356 R Wayward Guide-Beast
+357 M Ancient Greenwarden
+358 M Ashaya, Soul of the Wild
+359 R Cragplate Baloth
+360 R Inscription of Abundance
+361 R Oran-Rief Ooze
+362 R Swarm Shambler
+363 R Tajuru Paragon
+364 M Turntimber Symbiosis
+365 R Akiri, Fearless Voyager
+366 R Grakmaw, Skyclave Ravager
+367 R Kaza, Roil Chaser
+368 R Linvala, Shield of Sea Gate
+369 R Orah, Skyclave Hierophant
+370 R Verazol, the Split Current
+371 R Yasharn, Implacable Earth
+372 R Zagras, Thief of Heartbeats
+373 R Zareth San, the Trickster
+374 M Forsaken Monument
+375 M Lithoform Engine
+376 R Myriad Construct
+377 R Skyclave Relic
+378 R Crawling Barrens
+379 R Throne of Makindi
+380 L Plains
+381 L Island
+382 L Swamp
+383 L Mountain
+384 L Forest
+#Buy-A-Box
+385 R Orah, Skyclave Hierophant
+#Promos
+386 R Charix, the Raging Isle
+387 C Into the Roil
+388 U Bloodchief's Thirst
+389 C Roil Eruption
+390 U Roiling Regrowth
+391 U Kargan Warleader
+
+[tokens]
+w_4_4_angel_warrior_flying
+w_1_1_cat
+w_2_2_cat_beast
+w_1_1_kor_warrior
+u_2_2_drake_flying
+u_x_x_illusion
+g_1_1_insect
+g_0_1_plant
+bg_x_x_hydra
+c_1_1_a_construct
+c_0_1_a_goblin_construct_noblock_ping

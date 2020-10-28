@@ -4,7 +4,7 @@ import java.util.List;
 
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -219,12 +219,12 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         addCardToZone("Urborg, Tomb of Yawgmoth", p, ZoneType.Library);
         addCardToZone("Swamp", p, ZoneType.Library);
 
-        darkDepths.setCounters(CounterType.ICE, 10);
+        darkDepths.setCounters(CounterEnumType.ICE, 10);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        assertEquals(10, darkDepths.getCounters(CounterType.ICE));
+        assertEquals(10, darkDepths.getCounters(CounterEnumType.ICE));
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         assertEquals(cropRotation.getSpellAbilities().get(0), sa);

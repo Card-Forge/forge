@@ -1,0 +1,6 @@
+Name:Unicorn
+ManaCost:no cost
+Types:Creature Unicorn
+Colors:white
+PT:2/2
+Oracle:

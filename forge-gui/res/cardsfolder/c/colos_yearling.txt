@@ -3,6 +3,5 @@ ManaCost:2 R
 Types:Creature Goat Beast
 PT:1/1
 K:Mountainwalk
-A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/colos_yearling.jpg
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 Oracle:Mountainwalk (This creature can't be blocked as long as defending player controls a Mountain.)\n{R}: Colos Yearling gets +1/+0 until end of turn.

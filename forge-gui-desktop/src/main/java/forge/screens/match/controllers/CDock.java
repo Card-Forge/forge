@@ -33,6 +33,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VDock;
 import forge.toolbox.FSkin;
+import forge.util.Localizer;
 
 /**
  * Controls the dock panel in the match UI.
@@ -78,17 +79,17 @@ public class CDock implements ICDoc {
     private void refreshArcStateDisplay() {
         switch (arcState) {
         case OFF:
-            view.getBtnTargeting().setToolTipText("Targeting arcs: Off");
+            view.getBtnTargeting().setToolTipText(Localizer.getInstance().getMessage("lblTargetingArcsOff"));
             view.getBtnTargeting().setIcon(FSkin.getIcon(FSkinProp.ICO_ARCSOFF));
             view.getBtnTargeting().repaintSelf();
             break;
         case MOUSEOVER:
-            view.getBtnTargeting().setToolTipText("Targeting arcs: Card mouseover");
+            view.getBtnTargeting().setToolTipText(Localizer.getInstance().getMessage("lblTargetingArcsCardMouseover"));
             view.getBtnTargeting().setIcon(FSkin.getIcon(FSkinProp.ICO_ARCSHOVER));
             view.getBtnTargeting().repaintSelf();
             break;
         case ON:
-            view.getBtnTargeting().setToolTipText("Targeting arcs: Always on");
+            view.getBtnTargeting().setToolTipText(Localizer.getInstance().getMessage("lblTargetingArcsAlwaysOn"));
             view.getBtnTargeting().setIcon(FSkin.getIcon(FSkinProp.ICO_ARCSON));
             view.getBtnTargeting().repaintSelf();
             break;

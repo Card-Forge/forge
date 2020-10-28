@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Special Forces
+Description=The creatures of the "Special Forces" deck are all mission specialists - the attackers have huge power and the blockers have enormous toughness. Creatures like Dross Crocodile, Plasma Elemental, and Emissary of Despair inflict devastating damage, while Steel Wall and Arachnoid hold down a rock-solid defense.
+Deck Type=constructed
+Set=5DN
+Image=special_forces.jpg
+[Main]
+1 Acquire|5DN
+1 Annul|MRD
+2 Arachnoid|5DN
+2 Consume Spirit|MRD
+2 Devour in Shadow|5DN
+3 Dross Crocodile|5DN
+1 Ebon Drake|5DN
+2 Emissary of Despair|DST
+1 Ensouled Scimitar|5DN
+8 Island|MRD|1
+3 Leaden Myr|MRD
+1 Loxodon Warhammer|MRD
+1 Murderous Spoils|DST
+2 Myr Quadropod|5DN
+1 Pewter Golem|MRD
+2 Plasma Elemental|5DN
+1 Plunge into Darkness|5DN
+1 Shattered Dreams|5DN
+1 Silver Myr|MRD
+1 Slagwurm Armor|MRD
+1 Steel Wall|MRD
+16 Swamp|MRD|1
+1 Vulshok Gauntlets|MRD
+1 Whispersilk Cloak|DST
+1 Wizard Replica|MRD
+3 Yotian Soldier|MRD
+[Sideboard]

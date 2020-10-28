@@ -4,6 +4,5 @@ Types:Creature Bird
 PT:2/2
 K:Flying
 T:Mode$ AttackerBlocked | ValidCard$ Creature.withoutFlying | ValidBlocker$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks a creature without flying, CARDNAME gets +1/+0 and gains first strike until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 1 | KW$ First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crimson_roc.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | KW$ First Strike
 Oracle:Flying\nWhenever Crimson Roc blocks a creature without flying, Crimson Roc gets +1/+0 and gains first strike until end of turn.

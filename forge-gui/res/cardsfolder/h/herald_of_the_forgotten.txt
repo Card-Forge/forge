@@ -1,0 +1,9 @@
+Name:Herald of the Forgotten
+ManaCost:6 W W
+Types:Creature Cat Beast
+PT:6/6
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self+wasCast | Destination$ Battlefield | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, return any number of target permanent cards with cycling abilities from your graveyard to the battlefield.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.YouOwn+withCycling,Permanent.YouOwn+withTypeCycling | SelectPrompt$ Select any number of target permanent cards with cycling abilities to return to the battlefield | TargetMin$ 0 | TargetMax$ X | References$ X
+SVar:X:TriggeredCardController$ValidGraveyard Permanent.YouOwn+withCycling,Permanent.YouOwn+withTypeCycling
+Oracle:Flying\nWhen Herald of the Forgotten enters the battlefield, if you cast it, return any number of target permanent cards with cycling abilities from your graveyard to the battlefield.

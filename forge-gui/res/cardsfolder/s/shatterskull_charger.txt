@@ -1,0 +1,14 @@
+Name:Shatterskull Charger
+ManaCost:1 R R
+Types:Creature Giant Warrior
+PT:4/3
+K:Kicker:2
+K:Trample
+K:Haste
+K:etbCounter:P1P1:1:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with a +1/+1 counter on it.
+SVar:WasKicked:Count$Kicked.1.0
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigReturn | IsPresent$ Card.Self+counters_EQ0_P1P1 | TriggerDescription$ At the beginning of your end step, return Shatterskull Charger to its owner's hand unless it has a +1/+1 counter on it.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Self
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+Oracle:Kicker {2}\nTrample, haste\nIf Shatterskull Charger was kicked, it enters the battlefield with a +1/+1 counter on it.\nAt the beginning of your end step, return Shatterskull Charger to its owner's hand unless it has a +1/+1 counter on it.

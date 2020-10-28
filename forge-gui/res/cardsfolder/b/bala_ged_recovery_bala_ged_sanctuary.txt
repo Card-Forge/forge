@@ -1,0 +1,16 @@
+Name:Bala Ged Recovery
+ManaCost:2 G
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ 2 G | ValidTgts$ Card.YouOwn | TgtPrompt$ Select target card | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target card from your graveyard to your hand.
+DeckHas:Ability$Graveyard
+AlternateMode:Modal
+Oracle:Return target card from your graveyard to your hand.
+
+ALTERNATE
+
+Name:Bala Ged Sanctuary
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+Oracle:Bala Ged Sanctuary enters the battlefield tapped.\n{T}: Add {G}.

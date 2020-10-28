@@ -1,7 +1,7 @@
 Name:Aretopolis
 ManaCost:no cost
 Types:Plane Kephalai
-T:Mode$ PlaneswalkedTo | ValidCard$ Plane.Self | TriggerZones$ Command | Execute$ AcquireScrolls | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, put a scroll counter on CARDNAME, then you gain life equal to the number of scroll counters on it.
+T:Mode$ PlaneswalkedTo | ValidCard$ Plane.Self | Execute$ AcquireScrolls | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, put a scroll counter on CARDNAME, then you gain life equal to the number of scroll counters on it.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ AcquireScrolls | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, put a scroll counter on CARDNAME, then you gain life equal to the number of scroll counters on it.
 SVar:AcquireScrolls:DB$ PutCounter | Defined$ Self | CounterType$ SCROLL | CounterNum$ 1 | SubAbility$ ScrollsOfLife
 SVar:ScrollsOfLife:DB$ GainLife | Defined$ You | LifeAmount$ NumScrolls | References$ NumScrolls

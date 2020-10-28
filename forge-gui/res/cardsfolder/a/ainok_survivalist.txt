@@ -1,6 +1,6 @@
 Name:Ainok Survivalist
 ManaCost:1 G
-Types:Creature Hound Shaman
+Types:Creature Dog Shaman
 PT:2/1
 K:Megamorph:1 G
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, destroy target artifact or enchantment an opponent controls.

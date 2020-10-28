@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import com.google.common.collect.Maps;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -47,10 +48,6 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
 
         final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, sa.getHostCard(), sa.isIntrinsic());
 
-        if (sa.hasParam("CopyTriggeringObjects")) {
-            immediateTrig.setStoredTriggeredObjects(sa.getTriggeringObjects());
-        }
-
         // Need to copy paid costs
 
         if (triggerRemembered != null) {
@@ -71,8 +68,15 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
         }
 
         if (mapParams.containsKey("Execute") || sa.hasAdditionalAbility("Execute")) {
-            SpellAbility overridingSA = sa.getAdditionalAbility("Execute");
+            AbilitySub overridingSA = sa.getAdditionalAbility("Execute");
             overridingSA.setActivatingPlayer(sa.getActivatingPlayer());
+            // need to set Parent to null, otherwise it might have wrong root ability
+            overridingSA.setParent(null);
+
+            if (sa.hasParam("CopyTriggeringObjects")) {
+                overridingSA.setTriggeringObjects(sa.getTriggeringObjects());
+            }
+
             immediateTrig.setOverridingAbility(overridingSA);
         }
         final TriggerHandler trigHandler  = sa.getActivatingPlayer().getGame().getTriggerHandler();

@@ -9,6 +9,7 @@ import forge.quest.data.QuestData;
 import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinnedButton;
 import forge.toolbox.FSkin.SkinnedPanel;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -80,16 +81,16 @@ public class QuestFileLister extends JPanel {
         final SkinnedPanel rowTitle = new SkinnedPanel();
         rowTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
-        rowTitle.add(new FLabel.Builder().text("Name | Rank").fontAlign(SwingConstants.LEFT).build(), "w 60%!, h 20px!, gaptop 5px, gapleft 48px");
-        rowTitle.add(new FLabel.Builder().text("Mode | Difficulty").fontAlign(SwingConstants.LEFT).build(), "w 40% - 112px!, h 20px!, gaptop 5px, gapleft 4px");
-        rowTitle.add(new FLabel.Builder().text("Record | Assets").fontAlign(SwingConstants.LEFT).build(), "w 120px!, h 20px!, gaptop 5px, gapleft 4px");
+        rowTitle.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblNameAndRank")).fontAlign(SwingConstants.LEFT).build(), "w 60%!, h 20px!, gaptop 5px, gapleft 48px");
+        rowTitle.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblModeAndDifficulty")).fontAlign(SwingConstants.LEFT).build(), "w 40% - 112px!, h 20px!, gaptop 5px, gapleft 4px");
+        rowTitle.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblRecordAndAssets")).fontAlign(SwingConstants.LEFT).build(), "w 120px!, h 20px!, gaptop 5px, gapleft 4px");
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
 
 		Map<Integer, String> difficultyNameMap = new HashMap<>();
-		difficultyNameMap.put(0, "Easy");
-		difficultyNameMap.put(1, "Medium");
-		difficultyNameMap.put(2, "Hard");
-		difficultyNameMap.put(3, "Expert");
+		difficultyNameMap.put(0, Localizer.getInstance().getMessage("rbEasy"));
+		difficultyNameMap.put(1, Localizer.getInstance().getMessage("rbMedium"));
+		difficultyNameMap.put(2, Localizer.getInstance().getMessage("rbHard"));
+		difficultyNameMap.put(3, Localizer.getInstance().getMessage("rbExpert"));
 
         RowPanel row;
         String mode;
@@ -117,7 +118,7 @@ public class QuestFileLister extends JPanel {
 					.fontSize(12)
 					.build(), "h 20px!, pushx, gapbottom 5px, gapleft 4px, cell 3 1 1 1");
 
-            row.add(new FLabel.Builder().text(qd.getAchievements().getWin() + " W / " + qd.getAchievements().getLost() + " L")
+            row.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblXWinOfYLost", qd.getAchievements().getWin(), qd.getAchievements().getLost()))
                     .fontAlign(SwingConstants.RIGHT).build(), "h 20px!, gaptop 5px, gapleft 4px, gapright 5px, cell 4 0 1 1, align right");
 
 			FLabel cardsLabel = new FLabel.Builder().text(String.valueOf(qd.getAssets().getCardPool().countAll()))
@@ -160,7 +161,7 @@ public class QuestFileLister extends JPanel {
             setContentAreaFilled(false);
             setBorder((Border)null);
             setBorderPainted(false);
-            setToolTipText("Delete this quest");
+            setToolTipText(Localizer.getInstance().getMessage("lblDeleteThisQuest"));
 
             this.addMouseListener(new FMouseAdapter() {
                 @Override
@@ -196,7 +197,7 @@ public class QuestFileLister extends JPanel {
             setContentAreaFilled(false);
             setBorder((Border)null);
             setBorderPainted(false);
-            setToolTipText("Rename this quest");
+            setToolTipText(Localizer.getInstance().getMessage("lblRenameThisQuest"));
 
             this.addMouseListener(new FMouseAdapter() {
                 @Override
@@ -340,14 +341,14 @@ public class QuestFileLister extends JPanel {
         String questName;
         String oldQuestName = quest.getName();
         while (true) {
-            questName = FOptionPane.showInputDialog("Rename quest to:", "Quest Rename", null, oldQuestName);
+            questName = FOptionPane.showInputDialog(Localizer.getInstance().getMessage("lblRenameQuestTo") + ":", Localizer.getInstance().getMessage("lblQuestRename"), null, oldQuestName);
             if (questName == null) { return; }
 
             questName = QuestUtil.cleanString(questName);
             if (questName.equals(oldQuestName)) { return; } //quit if chose same name
 
             if (questName.isEmpty()) {
-                FOptionPane.showMessageDialog("Please specify a quest name.");
+                FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblQuestNameEmpty"));
                 continue;
             }
 
@@ -359,7 +360,7 @@ public class QuestFileLister extends JPanel {
                 }
             }
             if (exists) {
-                FOptionPane.showMessageDialog("A quest already exists with that name. Please pick another quest name.");
+                FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblQuestExists"));
                 continue;
             }
             break;
@@ -373,9 +374,9 @@ public class QuestFileLister extends JPanel {
     private void deleteFile(RowPanel r0) {
         final QuestData qd = r0.getQuestData();
 
-        if (!FOptionPane.showConfirmDialog(
-                "Are you sure you want to delete '" + qd.getName() + "'?",
-                "Delete Quest", "Delete", "Cancel")) {
+        if (!FOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblConfirmDelete") + " '" + qd.getName() + "'?",
+                Localizer.getInstance().getMessage("lblDeleteQuest"), Localizer.getInstance().getMessage("lblDelete"),
+                Localizer.getInstance().getMessage("lblCancel"), false)) {
             return;
         }
 

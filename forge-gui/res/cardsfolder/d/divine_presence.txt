@@ -1,10 +1,10 @@
 Name:Divine Presence
 ManaCost:2 W
 Types:Enchantment
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Permanent,Player | DamageAmount$ GE4 | ReplaceWith$ Dmg3 | Description$ If a source would deal 4 or more damage to a permanent or player, that source deals 3 damage to that permanent or player instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Permanent,Player | DamageAmount$ GE4 | ReplaceWith$ Dmg3 | Description$ If a source would deal 4 or more damage to a permanent or player, that source deals 3 damage instead.
 SVar:Dmg3:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ 3
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_presence.jpg
-Oracle:If a source would deal 4 or more damage to a permanent or player, that source deals 3 damage to that permanent or player instead.
+Oracle:If a source would deal 4 or more damage to a permanent or player, that source deals 3 damage instead.

@@ -28,6 +28,7 @@ import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 import forge.util.XmlUtil;
+import forge.util.Localizer;
 
 public abstract class AchievementCollection implements Iterable<Achievement> {
     protected final Map<String, Achievement> achievements = Maps.newLinkedHashMap();
@@ -85,7 +86,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
     }
     
     protected AchievementCollection(String name0, String filename0, boolean isLimitedFormat0, String path0) {
-        name = name0;
+        name = Localizer.getInstance().getMessage(name0);
         filename = filename0;
         isLimitedFormat = isLimitedFormat0;
         path = path0;

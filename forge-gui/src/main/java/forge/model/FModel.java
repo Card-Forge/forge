@@ -37,6 +37,7 @@ import forge.gauntlet.GauntletData;
 import forge.interfaces.IProgressBar;
 import forge.itemmanager.ItemManagerConfig;
 import forge.limited.GauntletMini;
+import forge.limited.ThemedChaosDraft;
 import forge.planarconquest.ConquestController;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPreferences;
@@ -91,6 +92,7 @@ public final class FModel {
 
     private static IStorage<CardBlock> blocks;
     private static IStorage<CardBlock> fantasyBlocks;
+    private static IStorage<ThemedChaosDraft> themedChaosDrafts;
     private static IStorage<ConquestPlane> planes;
     private static IStorage<QuestWorld> worlds;
     private static GameFormat.Collection formats;
@@ -152,7 +154,7 @@ public final class FModel {
                 FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
         final CardStorageReader tokenReader = new CardStorageReader(ForgeConstants.TOKEN_DATA_DIR, progressBarBridge,
                 FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
-        magicDb = new StaticData(reader, tokenReader, ForgeConstants.EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR);
+        magicDb = new StaticData(reader, tokenReader, ForgeConstants.EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR, FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_UNKNOWN_CARDS));
         CardTranslation.preloadTranslation(preferences.getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
 
         //create profile dirs if they don't already exist
@@ -187,6 +189,7 @@ public final class FModel {
         questPreferences = new QuestPreferences();
         conquestPreferences = new ConquestPreferences();
         fantasyBlocks = new StorageBase<>("Custom blocks", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "fantasyblocks.txt", magicDb.getEditions()));
+        themedChaosDrafts = new StorageBase<>("Themed Chaos Drafts", new ThemedChaosDraft.Reader(ForgeConstants.BLOCK_DATA_DIR + "chaosdraftthemes.txt"));
         planes = new StorageBase<>("Conquest planes", new ConquestPlane.Reader(ForgeConstants.CONQUEST_PLANES_DIR + "planes.txt"));
         Map<String, QuestWorld> standardWorlds = new QuestWorld.Reader(ForgeConstants.QUEST_WORLD_DIR + "worlds.txt").readAll();
         Map<String, QuestWorld> customWorlds = new QuestWorld.Reader(ForgeConstants.USER_QUEST_WORLD_DIR + "customworlds.txt").readAll();
@@ -381,6 +384,10 @@ public final class FModel {
 
     public static IStorage<CardBlock> getFantasyBlocks() {
         return fantasyBlocks;
+    }
+
+    public static IStorage<ThemedChaosDraft> getThemedChaosDrafts() {
+        return themedChaosDrafts;
     }
 
     public static TournamentData getTournamentData() { return tournamentData; }

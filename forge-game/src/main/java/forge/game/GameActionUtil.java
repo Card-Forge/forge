@@ -31,6 +31,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
@@ -218,23 +219,34 @@ public final class GameActionUtil {
             }
         }
 
-        if (!sa.isBasicSpell()) {
-            return alternatives;
-        }
-
+        // below are for some special cases of activated abilities
         if (sa.isCycling() && activator.hasKeyword("CyclingForZero")) {
-            // set the cost to this directly to buypass non mana cost
-            final SpellAbility newSA = sa.copyWithDefinedCost("Discard<1/CARDNAME>");
-            newSA.setActivatingPlayer(activator);
-            newSA.setBasicSpell(false);
-            newSA.getMapParams().put("CostDesc", ManaCostParser.parse("0"));
-            // makes new SpellDescription
-            final StringBuilder sb = new StringBuilder();
-            sb.append(newSA.getCostDescription());
-            sb.append(newSA.getParam("SpellDescription"));
-            newSA.setDescription(sb.toString());
             
-            alternatives.add(newSA);
+            for (final KeywordInterface inst : source.getKeywords()) {
+                // need to find the correct Keyword from which this Ability is from
+                if (!inst.getAbilities().contains(sa)) {
+                    continue;
+                }
+
+                // set the cost to this directly to buypass non mana cost
+                final SpellAbility newSA = sa.copyWithDefinedCost("Discard<1/CARDNAME>");
+                newSA.setActivatingPlayer(activator);
+                newSA.getMapParams().put("CostDesc", ManaCostParser.parse("0"));
+
+                // need to build a new Keyword to get better Reminder Text
+                String data[] = inst.getOriginal().split(":");
+                data[1] = "0";
+                KeywordInterface newKi = Keyword.getInstance(StringUtils.join(data, ":"));
+
+                // makes new SpellDescription
+                final StringBuilder sb = new StringBuilder();
+                sb.append(newSA.getCostDescription());
+                sb.append("(").append(newKi.getReminderText()).append(")");
+                newSA.setDescription(sb.toString());
+
+                alternatives.add(newSA);
+                break;
+            }
         }
 
         if (sa.hasParam("Equip") && activator.hasKeyword("EquipInstantSpeed")) {
@@ -443,7 +455,6 @@ public final class GameActionUtil {
                             eff.setTimestamp(game.getNextTimestamp());
                             eff.setName(c.getName() + "'s Effect");
                             eff.addType("Effect");
-                            eff.setToken(true); // Set token to true, so when leaving play it gets nuked
                             eff.setOwner(activator);
 
                             eff.setImageKey(c.getImageKey());
@@ -461,7 +472,7 @@ public final class GameActionUtil {
                             CardFactoryUtil.setupETBReplacementAbility(saAb);
 
                             String desc = "It enters the battlefield with ";
-                            desc += Lang.nounWithNumeral(v, CounterType.P1P1.getName() + " counter");
+                            desc += Lang.nounWithNumeral(v, CounterEnumType.P1P1.getName() + " counter");
                             desc += " on it.";
 
                             String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | Description$ " + desc;
@@ -575,14 +586,8 @@ public final class GameActionUtil {
             // Mark SAs with subAbilities as undoable. These are generally things like damage, and other stuff
             // that's hard to track and remove
             sa.setUndoable(false);
-        } else {
-            try {
-                if ((sa.getParam("Amount") != null) && (amount != Integer.parseInt(sa.getParam("Amount")))) {
-                    sa.setUndoable(false);
-                }
-            } catch (final NumberFormatException n) {
-                sa.setUndoable(false);
-            }
+        } else if ((sa.getParam("Amount") != null) && (amount != AbilityUtils.calculateAmount(sa.getHostCard(),sa.getParam("Amount"), sa))) {
+            sa.setUndoable(false);
         }
 
         final StringBuilder sb = new StringBuilder();

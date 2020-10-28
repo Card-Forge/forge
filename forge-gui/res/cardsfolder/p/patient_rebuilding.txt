@@ -1,9 +1,9 @@
 Name:Patient Rebuilding
 ManaCost:3 U U
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, target opponent puts the top three cards of their library into their graveyard, then you draw a card for each land card put into that graveyard this way.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, target opponent mills three cards, then you draw a card for each land card put into their graveyard this way.
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | RememberMilled$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ValidGraveyard Land.IsRemembered
-Oracle:At the beginning of your upkeep, target opponent puts the top three cards of their library into their graveyard, then you draw a card for each land card put into that graveyard this way.
+Oracle:At the beginning of your upkeep, target opponent mills three cards, then you draw a card for each land card put into their graveyard this way.

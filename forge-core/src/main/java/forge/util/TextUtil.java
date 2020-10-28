@@ -300,4 +300,10 @@ public class TextUtil {
         sb.append( str, idx1, str.length() );
         return sb.toString();
     }
+    //Convert to Mana String
+    public static String toManaString(String ManaProduced){
+        if (ManaProduced == "mana"|| ManaProduced.contains("Combo")|| ManaProduced.contains("Any"))
+            return "mana";//fix manamorphose stack description and probably others..
+        return "{"+TextUtil.fastReplace(ManaProduced," ","}{")+"}";
+    }
 }

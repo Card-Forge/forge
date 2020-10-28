@@ -3,6 +3,7 @@ package forge.screens.settings;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
+import forge.GuiBase;
 import forge.MulliganDefs;
 import forge.StaticData;
 import forge.ai.AiProfileUtil;
@@ -189,6 +190,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("cbEscapeEndsTurn"),
                 localizer.getMessage("nlEscapeEndsTurn")),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_PLAYERINFOLAYOUT,
+                localizer.getMessage("lblAltLifeDisplay"),
+                localizer.getMessage("nlAltLifeDisplay")){
+                @Override
+                public void select() {
+                    super.select();
+                    //update
+                    Forge.altPlayerLayout = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
+                }
+            },1);
 
         //Random Deck Generation
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_NOSMALL,
@@ -231,6 +242,37 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.LOAD_HISTORIC_FORMATS,
                 localizer.getMessage("cbLoadHistoricFormats"),
                 localizer.getMessage("nlLoadHistoricFormats")),
+                3);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_LOAD_UNKNOWN_CARDS,
+                        localizer.getMessage("lblEnableUnknownCards"),
+                        localizer.getMessage("nlEnableUnknownCards")) {
+                                @Override
+                                public void select() {
+                                    super.select();
+                                    FOptionPane.showConfirmDialog(
+                                            localizer.getMessage("lblRestartForgeDescription"),
+                                            localizer.getMessage("lblRestartForge"),
+                                            localizer.getMessage("lblRestart"),
+                                            localizer.getMessage("lblLater"), new Callback<Boolean>() {
+                                        @Override
+                                        public void run(Boolean result) {
+                                            if (result) {
+                                                Forge.restart(true);
+                                            }
+                                        }
+                                    });
+                                }
+                            },
+                3);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_NETPLAY_COMPAT,
+                        localizer.getMessage("lblExperimentalNetworkCompatibility"),
+                        localizer.getMessage("nlExperimentalNetworkCompatibility")) {
+                                @Override
+                                public void select() {
+                                    super.select();
+                                    GuiBase.enablePropertyConfig(FModel.getPreferences().getPrefBoolean(FPref.UI_NETPLAY_COMPAT));
+                                }
+                            },
                 3);
 
         //Graphic Options

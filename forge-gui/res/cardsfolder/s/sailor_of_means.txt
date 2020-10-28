@@ -2,7 +2,7 @@ Name:Sailor of Means
 ManaCost:2 U
 Types:Creature Human Pirate
 PT:1/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTreasure | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME enters the battlefield, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTreasure | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME enters the battlefield, create a Treasure token.
 SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | LegacyImage$ c a treasure sac xln
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sailor_of_means.jpg
-Oracle:When Sailor of Means enters the battlefield, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
+Oracle:When Sailor of Means enters the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

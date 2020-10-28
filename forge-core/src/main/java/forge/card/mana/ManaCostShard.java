@@ -289,13 +289,20 @@ public enum ManaCostShard {
         return BinaryUtil.bitCount(this.shard & COLORS_SUPERPOSITION) == 2;
     }
 
+    public boolean isGeneric() {
+    	return isOfKind(ManaAtom.GENERIC)|| isOfKind(ManaAtom.IS_X) || this.isSnow() || this.isOr2Generic();
+    }
     public boolean isOr2Generic() {
         return isOfKind(ManaAtom.OR_2_GENERIC);
+    }
+    
+    public boolean isColor(byte colorCode) {
+    	return (colorCode & this.shard) > 0;
     }
 
     public boolean canBePaidWithManaOfColor(byte colorCode) {
         return this.isOr2Generic() || ((COLORS_SUPERPOSITION | ManaAtom.COLORLESS) & this.shard) == 0 ||
-                (colorCode & this.shard) > 0;
+                this.isColor(colorCode);
     }
     
     public boolean isOfKind(int atom) {

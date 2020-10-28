@@ -4,5 +4,5 @@ Types:Creature Dragon
 Colors:red
 PT:2/2
 K:Flying
-A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 Oracle:Flying\n{R}: This creature gets +1/+0 until end of turn.

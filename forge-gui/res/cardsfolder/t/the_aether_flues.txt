@@ -1,7 +1,7 @@
 Name:The Aether Flues
 ManaCost:no cost
 Types:Plane Iquatana
-T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | TriggerZones$ Command | Execute$ FluesSacrifice | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, you may sacrifice a creature. If you do, reveal cards from the top of your library until you reveal a creature card, put that card onto the battlefield, then shuffle all other cards revealed this way into your library.
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ FluesSacrifice | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, you may sacrifice a creature. If you do, reveal cards from the top of your library until you reveal a creature card, put that card onto the battlefield, then shuffle all other cards revealed this way into your library.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ FluesSacrifice | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, you may sacrifice a creature. If you do, reveal cards from the top of your library until you reveal a creature card, put that card onto the battlefield, then shuffle all other cards revealed this way into your library.
 SVar:FluesSacrifice:DB$ Sacrifice | Optional$ True | SacValid$ Creature | Amount$ 1 | RememberSacrificed$ True | SubAbility$ FluesDig
 SVar:FluesDig:DB$ DigUntil | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | Shuffle$ True | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | SubAbility$ DBCleanup

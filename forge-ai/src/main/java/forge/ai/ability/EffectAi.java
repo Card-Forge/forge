@@ -113,7 +113,7 @@ public class EffectAi extends SpellAbilityAi {
             } else if (logic.equals("SpellCopy")) {
             	// fetch Instant or Sorcery and AI has reason to play this turn
             	// does not try to get itself
-                final ManaCost costSa = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : ManaCost.NO_COST;
+                final ManaCost costSa = sa.getPayCosts().getTotalMana();
             	final int count = CardLists.count(ai.getCardsIn(ZoneType.Hand), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
@@ -135,7 +135,7 @@ public class EffectAi extends SpellAbilityAi {
                             AiPlayDecision decision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(ab);
                             // see if we can pay both for this spell and for the Effect spell we're considering
                             if (decision == AiPlayDecision.WillPlay || decision == AiPlayDecision.WaitForMain2) {
-                                ManaCost costAb = ab.getPayCosts() != null ? ab.getPayCosts().getTotalMana() : ManaCost.NO_COST;
+                                ManaCost costAb = ab.getPayCosts().getTotalMana();
                                 ManaCost total = ManaCost.combine(costSa, costAb);
                                 SpellAbility combinedAb = ab.copyWithDefinedCost(new Cost(total, false));
                                 // can we pay both costs?

@@ -51,8 +51,12 @@ public class SOptionPane {
     }
 
     public static boolean showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText, final boolean defaultYes) {
+        return showConfirmDialog(message, title, yesButtonText, noButtonText, defaultYes, false);
+    }
+
+    public static boolean showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText, final boolean defaultYes, final boolean noicon) {
         final List<String> options = ImmutableList.of(yesButtonText, noButtonText);
-        final int reply = SOptionPane.showOptionDialog(message, title, QUESTION_ICON, options, defaultYes ? 0 : 1);
+        final int reply = SOptionPane.showOptionDialog(message, title, noicon ? null : QUESTION_ICON, options, defaultYes ? 0 : 1);
         return (reply == 0);
     }
 

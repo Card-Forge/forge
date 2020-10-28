@@ -1,8 +1,7 @@
 Name:Unmask
 ManaCost:3 B
 Types:Sorcery
+SVar:AltCost:Cost$ ExileFromHand<1/Card.Black+Other> | Description$ You may exile one black card from your hand rather than pay this spell's mana cost.
 A:SP$ Discard | Cost$ 3 B | ValidTgts$ Player | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand | NumCards$ 1 | SpellDescription$ Target player reveals their hand. You choose a nonland card from it. That player discards that card.
-SVar:AltCost:Cost$ ExileFromHand<1/Card.Black> | Description$ You may exile one black card from your hand rather than pay CARDNAME's mana cost.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/unmask.jpg
-Oracle:You may exile a black card from your hand rather than pay Unmask's mana cost.\nTarget player reveals their hand. You choose a nonland card from it. That player discards that card.
+Oracle:You may exile a black card from your hand rather than pay this spell's mana cost.\nTarget player reveals their hand. You choose a nonland card from it. That player discards that card.

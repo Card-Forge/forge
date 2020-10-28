@@ -2,9 +2,8 @@ Name:Bellowing Saddlebrute
 ManaCost:3 B
 Types:Creature Orc Warrior
 PT:4/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Raid — When CARDNAME enters the battlefield, you lose 4 life unless you attacked with a creature this turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Raid — When CARDNAME enters the battlefield, you lose 4 life unless you attacked this turn.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 4 | ConditionCheckSVar$ RaidTest | ConditionSVarCompare$ EQ0 | References$ RaidTest
 SVar:RaidTest:Count$AttackersDeclared
 SVar:NeedsToPlayVar:RaidTest GE1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bellowing_saddlebrute.jpg
-Oracle:Raid — When Bellowing Saddlebrute enters the battlefield, you lose 4 life unless you attacked with a creature this turn.
+Oracle:Raid — When Bellowing Saddlebrute enters the battlefield, you lose 4 life unless you attacked this turn.

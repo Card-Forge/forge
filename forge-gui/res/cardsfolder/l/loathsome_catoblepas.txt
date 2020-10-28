@@ -2,11 +2,10 @@ Name:Loathsome Catoblepas
 ManaCost:5 B
 Types:Creature Beast
 PT:3/3
-A:AB$ Pump | Cost$ 2 G | KW$ HIDDEN CARDNAME must be blocked if able. | AILogic$ Pump | SpellDescription$ CARDNAME must be blocked this turn if able.
+A:AB$ Pump | Cost$ 2 G | Defined$ Self | KW$ HIDDEN CARDNAME must be blocked if able. | AILogic$ Pump | SpellDescription$ CARDNAME must be blocked this turn if able.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPump | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, target creature an opponent controls gets -3/-3 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True
 AI:RemoveDeck:Random
 DeckNeeds:Color$Green
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/loathsome_catoblepas.jpg
 Oracle:{2}{G}: Loathsome Catoblepas must be blocked this turn if able.\nWhen Loathsome Catoblepas dies, target creature an opponent controls gets -3/-3 until end of turn.

@@ -3,8 +3,7 @@ ManaCost:3 R
 Types:Creature Human Barbarian
 PT:2/2
 K:First Strike
-A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+A:AB$ Pump | Cost$ B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 AI:RemoveDeck:Random
 DeckNeeds:Color$Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_collaborator.jpg
 Oracle:First strike\n{B}: Pardic Collaborator gets +1/+1 until end of turn.

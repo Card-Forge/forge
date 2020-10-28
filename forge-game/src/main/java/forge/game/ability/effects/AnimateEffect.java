@@ -64,12 +64,12 @@ public class AnimateEffect extends AnimateEffectBase {
 
         final boolean permanent = sa.hasParam("Permanent");
 
-        final CardType types = new CardType();
+        final CardType types = new CardType(true);
         if (sa.hasParam("Types")) {
             types.addAll(Arrays.asList(sa.getParam("Types").split(",")));
         }
 
-        final CardType removeTypes = new CardType();
+        final CardType removeTypes = new CardType(true);
         if (sa.hasParam("RemoveTypes")) {
             removeTypes.addAll(Arrays.asList(sa.getParam("RemoveTypes").split(",")));
         }

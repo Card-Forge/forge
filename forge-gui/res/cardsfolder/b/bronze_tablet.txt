@@ -3,7 +3,7 @@ ManaCost:6
 Types:Artifact
 K:Remove CARDNAME from your deck before playing if you're not playing for ante.
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Pump | Cost$ 4 T | ValidTgts$ Permanent.nonToken+OppOwn | TgtPrompt$ Select target nontoken permanent an opponent owns | RememberObjects$ TargetedController | SubAbility$ Choice1 | StackDescription$ SpellDescription | SpellDescription$ Exile CARDNAME and target nontoken permanent an opponent owns. That player may pay 10 life. If they do, put Bronze Tablet into its owner’s graveyard. Otherwise, that player owns Bronze Tablet and you own the other exiled card.
+A:AB$ Pump | Cost$ 4 T | ValidTgts$ Permanent.nonToken+OppOwn | TgtPrompt$ Select target nontoken permanent an opponent owns | RememberObjects$ TargetedController | SubAbility$ Choice1 | StackDescription$ SpellDescription | SpellDescription$ Exile CARDNAME and target nontoken permanent an opponent owns. That player may pay 10 life. If they do, put Bronze Tablet into its owner's graveyard. Otherwise, that player owns Bronze Tablet and you own the other exiled card.
 SVar:Choice1:DB$ GenericChoice | Choices$ ExchangeOwnership,Concede | Defined$ TargetedOwner | ConditionCheckSVar$ X | References$ X | ConditionSVarCompare$ LT10 | SubAbility$ Choice2 | StackDescription$ None
 SVar:Choice2:DB$ GenericChoice | Choices$ PayLife,ExchangeOwnership,Concede | Defined$ TargetedOwner | ConditionCheckSVar$ X | References$ X | ConditionSVarCompare$ GE10 | StackDescription$ None
 SVar:X:PlayerCountRemembered$LifeTotal
@@ -20,4 +20,4 @@ SVar:TargetToExile3:DB$ ChangeZone | Defined$ Targeted | Origin$ All | Destinati
 SVar:TabletToExile3:DB$ ChangeZone | Defined$ Self | Origin$ All | Destination$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-Oracle:Remove Bronze Tablet from your deck before playing if you’re not playing for ante.\nBronze Tablet enters the battlefield tapped.\n{4}, {T}: Exile Bronze Tablet and target nontoken permanent an opponent owns. That player may pay 10 life. If they do, put Bronze Tablet into its owner’s graveyard. Otherwise, that player owns Bronze Tablet and you own the other exiled card.
+Oracle:Remove Bronze Tablet from your deck before playing if you're not playing for ante.\nBronze Tablet enters the battlefield tapped.\n{4}, {T}: Exile Bronze Tablet and target nontoken permanent an opponent owns. That player may pay 10 life. If they do, put Bronze Tablet into its owner's graveyard. Otherwise, that player owns Bronze Tablet and you own the other exiled card.

@@ -17,7 +17,6 @@
  */
 package forge.game.trigger;
 
-import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -102,16 +101,13 @@ public class TriggerChangesZone extends Trigger {
 
         if (hasParam("ValidCard")) {
             Card moved = (Card) runParams.get(AbilityKey.Card);
-            final Game game = getHostCard().getGame();
             boolean leavesBattlefield = "Battlefield".equals(getParam("Origin"));
-            boolean isDiesTrig = leavesBattlefield && "Graveyard".equals(getParam("Destination"));
 
-            if (isDiesTrig) {
-                moved = game.getChangeZoneLKIInfo(moved);
+            if (leavesBattlefield) {
+                moved = (Card) runParams.get(AbilityKey.CardLKI);
             }
 
-            if (!moved.isValid(getParam("ValidCard").split(","), getHostCard().getController(),
-                    getHostCard(), null)) {
+            if (!matchesValid(moved, getParam("ValidCard").split(","), getHostCard())) {
                 return false;
             }
         }
@@ -124,9 +120,10 @@ public class TriggerChangesZone extends Trigger {
             if (cause == null) {
                 return false;
             }
-            if (!cause.getHostCard().isValid(getParam("ValidCause").split(","), getHostCard().getController(),
-                    getHostCard(), null)) {
-                return false;
+            if (!matchesValid(cause, getParam("ValidCause").split(","), getHostCard())) {
+                if (!matchesValid(cause.getHostCard(), getParam("ValidCause").split(","), getHostCard())) {
+                    return false;
+                }
             }
         }
 
@@ -151,17 +148,11 @@ public class TriggerChangesZone extends Trigger {
                 return false;
             }
 
-            final Card card;
-            final int rightSide;
-            try {
-                card = (Card) runParams.get(AbilityKey.Card);
-                rightSide = Integer.parseInt(cond.substring(2));
-            } catch (NumberFormatException | ClassCastException e) {
-                return false;
-            }
+            final Card card = (Card) runParams.get(AbilityKey.Card);
             if (card == null) {
                 return false;
             }
+            final int rightSide = AbilityUtils.calculateAmount(getHostCard(), cond.substring(2), this);
 
             // need to check the ChangeZone LKI copy for damage, otherwise it'll return 0 for a new object in the new zone
             Card lkiCard = card.getGame().getChangeZoneLKIInfo(card);
@@ -214,7 +205,11 @@ public class TriggerChangesZone extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
+        if ("Battlefield".equals(getParam("Origin"))) {
+            sa.setTriggeringObject(AbilityKey.Card, runParams.get(AbilityKey.CardLKI));
+        } else {
+            sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
+        }
     }
 
     @Override

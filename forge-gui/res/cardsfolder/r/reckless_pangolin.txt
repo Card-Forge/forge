@@ -1,7 +1,7 @@
 Name:Reckless Pangolin
 ManaCost:2 G
 Types:Creature Pangolin
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+1 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
-Oracle:Whenever Reckless Pangolin attacks, it gets +1/+1 until end of turn.
 PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
+Oracle:Whenever Reckless Pangolin attacks, it gets +1/+1 until end of turn.

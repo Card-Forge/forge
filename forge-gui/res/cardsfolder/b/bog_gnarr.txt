@@ -3,10 +3,9 @@ ManaCost:4 G
 Types:Creature Beast
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Card.Black | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a player casts a black spell, CARDNAME gets +2/+2 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 SVar:BuffedBy:Card.Black
 AI:RemoveDeck:Random
 DeckNeeds:Color$Black
 DeckHints:Color$Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_gnarr.jpg
 Oracle:Whenever a player casts a black spell, Bog Gnarr gets +2/+2 until end of turn.

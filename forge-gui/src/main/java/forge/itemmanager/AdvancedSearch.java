@@ -26,10 +26,12 @@ import forge.game.keyword.Keyword;
 import forge.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.item.SealedProduct;
 import forge.model.FModel;
 import forge.planarconquest.ConquestCommander;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestRegion;
+import forge.quest.QuestSpellShop;
 import forge.quest.QuestWorld;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
@@ -227,6 +229,257 @@ public class AdvancedSearch {
 
                 Collections.sort(cards, FModel.getMagicDb().getEditions().CARD_EDITION_COMPARATOR);
                 return cards.get(0) == input;
+            }
+        }),
+        INVITEM_NAME("lblName", InventoryItem.class, FilterOperator.STRING_OPS, new StringEvaluator<InventoryItem>() {
+            @Override
+            protected String getItemValue(InventoryItem input) {
+                return input.getName();
+            }
+        }),
+        INVITEM_RULES_TEXT("lblRulesText", InventoryItem.class, FilterOperator.STRING_OPS, new StringEvaluator<InventoryItem>() {
+            @Override
+            protected String getItemValue(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return "";
+                }
+                return ((PaperCard)input).getRules().getOracleText();
+            }
+        }),
+        INVITEM_KEYWORDS("lblKeywords", InventoryItem.class, FilterOperator.COLLECTION_OPS, new CustomListEvaluator<InventoryItem, Keyword>(Keyword.getAllKeywords()) {
+            @Override
+            protected Keyword getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<Keyword> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                return Keyword.getKeywordSet((PaperCard)input);
+            }
+        }),
+        INVITEM_SET("lblSet", InventoryItem.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<InventoryItem, CardEdition>(FModel.getMagicDb().getSortedEditions(), CardEdition.FN_GET_CODE) {
+            @Override
+            protected CardEdition getItemValue(InventoryItem input) {
+                if (input instanceof PaperCard) {
+                    return FModel.getMagicDb().getEditions().get(((PaperCard)input).getEdition());
+                } else if (input instanceof SealedProduct) {
+                    return FModel.getMagicDb().getEditions().get(((SealedProduct)input).getEdition());
+                } else {
+                    return CardEdition.UNKNOWN;
+                }
+            }
+        }),
+        INVITEM_FORMAT("lblFormat", InventoryItem.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<InventoryItem, GameFormat>((List<GameFormat>)FModel.getFormats().getFilterList()) {
+            @Override
+            protected GameFormat getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<GameFormat> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                return FModel.getFormats().getAllFormatsOfCard((PaperCard)input);
+            }
+        }),
+        INVITEM_PLANE("lblPlane", InventoryItem.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<InventoryItem, ConquestPlane>(ImmutableList.copyOf(FModel.getPlanes())) {
+            @Override
+            protected ConquestPlane getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<ConquestPlane> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                return ConquestPlane.getAllPlanesOfCard((PaperCard)input);
+            }
+        }),
+        INVITEM_REGION("lblRegion", InventoryItem.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<InventoryItem, ConquestRegion>(ConquestRegion.getAllRegions()) {
+            @Override
+            protected ConquestRegion getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<ConquestRegion> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                return ConquestRegion.getAllRegionsOfCard((PaperCard)input);
+            }
+        }),
+        INVITEM_QUEST_WORLD("lblQuestWorld", InventoryItem.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<InventoryItem, QuestWorld>(ImmutableList.copyOf(FModel.getWorlds())) {
+            @Override
+            protected QuestWorld getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<QuestWorld> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                return QuestWorld.getAllQuestWorldsOfCard(((PaperCard)input));
+            }
+        }),
+        INVITEM_COLOR("lblColor", InventoryItem.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<InventoryItem>() {
+            @Override
+            protected MagicColor.Color getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<MagicColor.Color> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                return ((PaperCard)input).getRules().getColor().toEnumSet();
+            }
+        }),
+        INVITEM_COLOR_IDENTITY("lblColorIdentity", InventoryItem.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<InventoryItem>() {
+            @Override
+            protected MagicColor.Color getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<MagicColor.Color> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                return ((PaperCard)input).getRules().getColorIdentity().toEnumSet();
+            }
+        }),
+        INVITEM_COLOR_COUNT("lblColorCount", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 5) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return 0;
+                }
+                return ((PaperCard)input).getRules().getColor().countColors();
+            }
+        }),
+        INVITEM_TYPE("lblType", InventoryItem.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<InventoryItem, String>(CardType.getCombinedSuperAndCoreTypes()) {
+            @Override
+            protected String getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<String> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                final CardType type = ((PaperCard)input).getRules().getType();
+                final Set<String> types = new HashSet<>();
+                for (Supertype t : type.getSupertypes()) {
+                    types.add(t.name());
+                }
+                for (CoreType t : type.getCoreTypes()) {
+                    types.add(t.name());
+                }
+                return types;
+            }
+        }),
+        INVITEM_SUB_TYPE("lblSubtype", InventoryItem.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<InventoryItem, String>(CardType.getSortedSubTypes()) {
+            @Override
+            protected String getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<String> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                return (Set<String>)((PaperCard)input).getRules().getType().getSubtypes();
+            }
+        }),
+        INVITEM_CMC("lblCMC", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 20) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return 0;
+                }
+                return ((PaperCard)input).getRules().getManaCost().getCMC();
+            }
+        }),
+        INVITEM_GENERIC_COST("lblGenericCost", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 20) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return 0;
+                }
+                return ((PaperCard)input).getRules().getManaCost().getGenericCost();
+            }
+        }),
+        INVITEM_POWER("lblPower", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 20) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return null;
+                }
+                CardRules rules = ((PaperCard)input).getRules();
+                if (rules.getType().isCreature()) {
+                    return rules.getIntPower();
+                }
+                return null;
+            }
+        }),
+        INVITEM_TOUGHNESS("lblToughness", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 20) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return null;
+                }
+                CardRules rules = ((PaperCard)input).getRules();
+                if (rules.getType().isCreature()) {
+                    return rules.getIntToughness();
+                }
+                return null;
+            }
+        }),
+        INVITEM_MANA_COST("lblManaCost", InventoryItem.class, FilterOperator.STRING_OPS, new StringEvaluator<InventoryItem>() {
+            @Override
+            protected String getItemValue(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return "";
+                }
+                return ((PaperCard)input).getRules().getManaCost().toString();
+            }
+        }),
+        INVITEM_FIRST_PRINTING("lblFirstPrinting", InventoryItem.class, FilterOperator.BOOLEAN_OPS, new BooleanEvaluator<InventoryItem>() {
+            @Override
+            protected Boolean getItemValue(InventoryItem input) {
+                List<PaperCard> cards = FModel.getMagicDb().getCommonCards().getAllCards(input.getName());
+                if (cards.size() <= 1) { return true; }
+
+                Collections.sort(cards, FModel.getMagicDb().getEditions().CARD_EDITION_COMPARATOR);
+                return cards.get(0) == input;
+            }
+        }),
+        INVITEM_RARITY("lblRarity", InventoryItem.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<InventoryItem, CardRarity>(Arrays.asList(CardRarity.FILTER_OPTIONS), CardRarity.FN_GET_LONG_NAME, CardRarity.FN_GET_LONG_NAME) {
+            @Override
+            protected CardRarity getItemValue(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return CardRarity.Special;
+                }
+                return ((PaperCard)input).getRarity();
+            }
+        }),
+        INVITEM_BUY_PRICE("lblBuyPrice", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 10000000) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                return (Integer) QuestSpellShop.fnPriceGet.apply(new AbstractMap.SimpleEntry<InventoryItem, Integer>(input, 1));
+            }
+        }),
+        INVITEM_SELL_PRICE("lblSellPrice", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 10000000) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                return (Integer) QuestSpellShop.fnPriceSellGet.apply(new AbstractMap.SimpleEntry<InventoryItem, Integer>(input, 1));
+            }
+        }),
+        INVITEM_USED_IN_QUEST_DECKS("lblUsedInQuestDecks", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 100) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                return (Integer) Integer.parseInt((String) QuestSpellShop.fnDeckGet.apply(new AbstractMap.SimpleEntry<InventoryItem, Integer>(input, 1)));
             }
         }),
         DECK_NAME("lblName", DeckProxy.class, FilterOperator.STRING_OPS, new StringEvaluator<DeckProxy>() {

@@ -3,6 +3,5 @@ ManaCost:R
 Types:Creature Goblin Warrior
 PT:1/1
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever an opponent casts a spell, CARDNAME gets +2/+2 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_sentry.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 Oracle:Whenever an opponent casts a spell, Mogg Sentry gets +2/+2 until end of turn.

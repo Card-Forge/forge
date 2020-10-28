@@ -66,6 +66,7 @@ Deserter:Deserters
 Devil:Devils
 Dinosaur:Dinosaurs
 Djinn:Djinns
+Dog:Dogs
 Dragon:Dragons
 Drake:Drakes
 Dreadnought:Dreadnoughts
@@ -110,7 +111,6 @@ Homarid:Homarids
 Homunculus:Homunculi
 Horror:Horrors
 Horse:Horses
-Hound:Hounds
 Human:Humans
 Hydra:Hydras
 Hyena:Hyenas
@@ -168,6 +168,7 @@ Ooze:Oozes
 Orb:Orbs
 Orc:Orcs
 Orgg:Orggs
+Otter:Otters
 Ouphe:Ouphes
 Ox:Oxen
 Oyster:Oysters
@@ -209,6 +210,7 @@ Servo:Servos
 Shade:Shades
 Shaman:Shamans
 Shapeshifter:Shapeshifters
+Shark:Sharks
 Sheep:Sheep
 Siren:Sirens
 Skeleton:Skeletons
@@ -288,6 +290,7 @@ Aminatou
 Angrath
 Arlinn
 Ashiok
+Basri
 Bolas
 Calix
 Chandra
@@ -309,6 +312,7 @@ Kaya
 Kiora
 Koth
 Liliana
+Lukka
 Nahiri
 Narset
 Nissa

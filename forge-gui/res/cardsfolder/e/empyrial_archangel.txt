@@ -4,7 +4,6 @@ Types:Creature Angel
 PT:5/8
 K:Flying
 K:Shroud
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DmgSelf | Description$ All damage that would be dealt to you is dealt to CARDNAME instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DmgSelf | DamageTarget$ Self | Description$ All damage that would be dealt to you is dealt to CARDNAME instead.
 SVar:DmgSelf:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Self | VarType$ Card
-SVar:Picture:http://www.wizards.com/global/images/magic/general/empyrial_archangel.jpg
 Oracle:Flying\nShroud (This creature can't be the target of spells or abilities.)\nAll damage that would be dealt to you is dealt to Empyrial Archangel instead.

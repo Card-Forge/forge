@@ -1,0 +1,8 @@
+Name:Tazeem Raptor
+ManaCost:2 W
+Types:Creature Bird
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return a land you control to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Land.YouCtrl | ChangeNum$ 1 | SelectPrompt$ Choose a land to return to its owner's hand
+Oracle:Flying\nWhen Tazeem Raptor enters the battlefield, you may return a land you control to its owner's hand.

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Iterator;
 import java.util.Map.Entry;
 
 import forge.item.InventoryItem;
@@ -46,11 +47,11 @@ public final class ItemManagerModel<T extends InventoryItem> {
 
     // same thing as above, it was copied to provide sorting (needed by table
     // views in deck editors)
-    private final transient List<Entry<T, Integer>> itemsOrdered = new ArrayList<>();
+    private final transient List<Entry<T, Integer>> itemsOrdered = Collections.synchronizedList(new ArrayList<>());
 
     protected transient boolean isListInSync = false;
 
-    public List<Entry<T, Integer>> getOrderedList() {
+    public synchronized List<Entry<T, Integer>> getOrderedList() {
         if (!isListInSync) {
             rebuildOrderedList();
         }
@@ -123,15 +124,16 @@ public final class ItemManagerModel<T extends InventoryItem> {
     }
 
     public void refreshSort() {
-        if (getOrderedList().isEmpty()) { return; }
-        //fix newdeck editor not loading on Android if a user deleted unwanted sets on edition folder
-        try { Collections.sort(getOrderedList(), new MyComparator()); }
+        final List<Entry<T, Integer>> list = getOrderedList();
+        if (list.isEmpty()) { return; }
+        try { Collections.sort(list, new MyComparator()); }
+        //fix NewDeck editor not loading on Android if a user deleted unwanted sets on edition folder
         catch (IllegalArgumentException ex) {}
     }
 
     //Manages sorting orders for multiple depths of sorting
     public final class CascadeManager {
-        private final List<ItemColumn> colsToSort = new ArrayList<>(3);
+        private final List<ItemColumn> colsToSort = Collections.synchronizedList(new ArrayList<>(3));
         private Sorter sorter = null;
 
         // Adds a column to sort cascade list.
@@ -187,12 +189,15 @@ public final class ItemManagerModel<T extends InventoryItem> {
         private Sorter createSorter() {
             final List<ItemPoolSorter<InventoryItem>> oneColSorters = new ArrayList<>(maxSortDepth);
 
-            for (final ItemColumn col : colsToSort) {
-                oneColSorters.add(new ItemPoolSorter<>(
-                        col.getFnSort(),
-                        col.getConfig().getSortState().equals(SortState.ASC)));
+            synchronized (colsToSort) {
+                final Iterator<ItemColumn> it = colsToSort.iterator();
+                while (it.hasNext()) {
+                    final ItemColumn col = it.next();
+                    oneColSorters.add(new ItemPoolSorter<>(
+                            col.getFnSort(),
+                            col.getConfig().getSortState().equals(SortState.ASC)));
+                }
             }
-
             return new Sorter(oneColSorters);
         }
 

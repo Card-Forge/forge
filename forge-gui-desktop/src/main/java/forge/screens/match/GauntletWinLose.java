@@ -28,6 +28,7 @@ import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
 import forge.game.GameView;
 import forge.gauntlet.GauntletWinLoseController;
+import forge.util.Localizer;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
@@ -50,7 +51,7 @@ public class GauntletWinLose extends ControlWinLose {
         controller = new GauntletWinLoseController(view0, game0) {
             @Override
             protected void showOutcome(boolean isMatchOver, String message1, String message2, FSkinProp icon, List<String> lstEventNames, List<String> lstEventRecords, int len, int num) {
-                final JLabel lblTitle = new FLabel.Builder().text("Gauntlet Progress")
+                final JLabel lblTitle = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblGauntletProgress"))
                         .fontAlign(SwingConstants.CENTER).fontSize(18).build();
 
                 final JPanel pnlResults = new JPanel();

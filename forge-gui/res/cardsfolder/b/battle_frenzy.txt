@@ -2,7 +2,6 @@ Name:Battle Frenzy
 ManaCost:2 R
 Types:Instant
 A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.nonGreen+YouCtrl | NumAtt$ +1 | SpellDescription$ Green creatures you control get +1/+1 until end of turn. Nongreen creatures you control get +1/+0 until end of turn. | SubAbility$ DBPumpAll
-SVar:DBPumpAll:DB$PumpAll | ValidCards$ Creature.Green+YouCtrl | NumAtt$ +1 | NumDef$ +1
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.Green+YouCtrl | NumAtt$ +1 | NumDef$ +1
 DeckHints:Color$Green
-SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_frenzy.jpg
 Oracle:Green creatures you control get +1/+1 until end of turn.\nNongreen creatures you control get +1/+0 until end of turn.

@@ -1,0 +1,13 @@
+Name:Emeria Captain
+ManaCost:3 W
+Types:Creature Angel Warrior
+PT:1/1
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on it for each creature in your party.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterNum$ X | CounterType$ P1P1 | References$ X
+SVar:X:Count$Party
+DeckHas:Ability$Party & Ability$Counters
+SVar:BuffedBy:Cleric,Rogue,Wizard
+DeckHints:Type$Cleric|Rogue|Wizard
+Oracle:Flying, vigilance\nWhen Emeria Captain enters the battlefield, put a +1/+1 counter on it for each creature in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)

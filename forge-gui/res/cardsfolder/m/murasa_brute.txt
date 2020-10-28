@@ -1,0 +1,5 @@
+Name:Murasa Brute
+ManaCost:2 G
+Types:Creature Troll Warrior
+PT:3/3
+Oracle:

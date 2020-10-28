@@ -5,7 +5,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -172,29 +171,29 @@ public class ComputerUtilCard {
     
         // if no non-basic lands, target the least represented basic land type
         String sminBL = "";
-        int iminBL = 20000; // hopefully no one will ever have more than 20000
-                            // lands of one type....
+        int iminBL = Integer.MAX_VALUE;
         int n = 0;
         for (String name : MagicColor.Constant.BASIC_LANDS) {
             n = CardLists.getType(land, name).size();
-            if ((n < iminBL) && (n > 0)) {
-                // if two or more are tied, only the
-                // first
-                // one checked will be used
+            if (n < iminBL && n > 0) {
                 iminBL = n;
                 sminBL = name;
             }
         }
-        if (iminBL == 20000) {
-            return null; // no basic land was a minimum
+        if (iminBL == Integer.MAX_VALUE) {
+            // All basic lands have no basic land type. Just return something
+            Iterator<Card> untapped = Iterables.filter(land, CardPredicates.Presets.UNTAPPED).iterator();
+            if (untapped.hasNext()) {
+                return untapped.next();
+            }
+            return land.get(0);
         }
     
         final List<Card> bLand = CardLists.getType(land, sminBL);
-    
+
         for (Card ut : Iterables.filter(bLand, CardPredicates.Presets.UNTAPPED)) {
             return ut;
         }
-    
     
         return Aggregates.random(bLand); // random tapped land of least represented type
     }
@@ -1423,8 +1422,8 @@ public class ComputerUtilCard {
             if (combat.isAttacking(c) && opp.getLife() > 0) {
                 int dmg = ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true);
                 int pumpedDmg = ComputerUtilCombat.damageIfUnblocked(pumped, opp, pumpedCombat, true);
-                int poisonOrig = opp.canReceiveCounters(CounterType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(c, ai) : 0;
-                int poisonPumped = opp.canReceiveCounters(CounterType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(pumped, ai) : 0;
+                int poisonOrig = opp.canReceiveCounters(CounterEnumType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(c, ai) : 0;
+                int poisonPumped = opp.canReceiveCounters(CounterEnumType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(pumped, ai) : 0;
 
                 // predict Infect
                 if (pumpedDmg == 0 && c.hasKeyword(Keyword.INFECT)) {
@@ -1447,7 +1446,7 @@ public class ComputerUtilCard {
                 }
                 if (pumpedDmg > dmg) {
                     if ((!c.hasKeyword(Keyword.INFECT) && pumpedDmg >= opp.getLife())
-                            || (c.hasKeyword(Keyword.INFECT) && opp.canReceiveCounters(CounterType.POISON) && pumpedDmg >= opp.getPoisonCounters())
+                            || (c.hasKeyword(Keyword.INFECT) && opp.canReceiveCounters(CounterEnumType.POISON) && pumpedDmg >= opp.getPoisonCounters())
                             || ("PumpForTrample".equals(sa.getParam("AILogic")))) {
                         return true;
                     }
@@ -1475,7 +1474,7 @@ public class ComputerUtilCard {
                     if (totalPowerUnblocked >= opp.getLife()) {
                         return true;
                     } else if (totalPowerUnblocked > dmg && sa.getHostCard() != null && sa.getHostCard().isInPlay()) {
-                        if (sa.getPayCosts() != null && sa.getPayCosts().hasNoManaCost()) {
+                        if (sa.getPayCosts().hasNoManaCost()) {
                             return true; // always activate abilities which cost no mana and which can increase unblocked damage
                         }
                     }
@@ -1766,10 +1765,10 @@ public class ComputerUtilCard {
     }
 
     public static boolean hasActiveUndyingOrPersist(final Card c) {
-        if (c.hasKeyword(Keyword.UNDYING) && c.getCounters(CounterType.P1P1) == 0) {
+        if (c.hasKeyword(Keyword.UNDYING) && c.getCounters(CounterEnumType.P1P1) == 0) {
             return true;
         }
-        if (c.hasKeyword(Keyword.PERSIST) && c.getCounters(CounterType.M1M1) == 0) {
+        if (c.hasKeyword(Keyword.PERSIST) && c.getCounters(CounterEnumType.M1M1) == 0) {
             return true;
         }
         return false;
@@ -1786,10 +1785,6 @@ public class ComputerUtilCard {
 
         for (Card c : otb) {
             for (SpellAbility sa : c.getSpellAbilities()) {
-                if (sa.getPayCosts() == null) {
-                    continue;
-                }
-
                 CostPayEnergy energyCost = sa.getPayCosts().getCostEnergy();
                 if (energyCost != null) {
                     int amount = energyCost.convertAmount();
@@ -1861,7 +1856,7 @@ public class ComputerUtilCard {
 
     public static AiPlayDecision checkNeedsToPlayReqs(final Card card, final SpellAbility sa) {
         Game game = card.getGame();
-        boolean isRightSplit = sa != null && sa.isRightSplit();
+        boolean isRightSplit = sa != null && sa.getCardState() != null;
         String needsToPlayName = isRightSplit ? "SplitNeedsToPlay" : "NeedsToPlay";
         String needsToPlayVarName = isRightSplit ? "SplitNeedsToPlayVar" : "NeedsToPlayVar";
 
@@ -1913,21 +1908,12 @@ public class ComputerUtilCard {
         }
         if (card.getSVar(needsToPlayVarName).length() > 0) {
             final String needsToPlay = card.getSVar(needsToPlayVarName);
-            int x = 0;
-            int y = 0;
             String sVar = needsToPlay.split(" ")[0];
             String comparator = needsToPlay.split(" ")[1];
             String compareTo = comparator.substring(2);
-            try {
-                x = Integer.parseInt(sVar);
-            } catch (final NumberFormatException e) {
-                x = CardFactoryUtil.xCount(card, card.getSVar(sVar));
-            }
-            try {
-                y = Integer.parseInt(compareTo);
-            } catch (final NumberFormatException e) {
-                y = CardFactoryUtil.xCount(card, card.getSVar(compareTo));
-            }
+            int x = AbilityUtils.calculateAmount(card, sVar, sa);
+            int y = AbilityUtils.calculateAmount(card, compareTo, sa);
+
             if (!Expressions.compare(x, comparator, y)) {
                 return AiPlayDecision.NeedsToPlayCriteriaNotMet;
             }
@@ -1943,5 +1929,8 @@ public class ComputerUtilCard {
     }
     public static boolean isCardRemRandomDeck(final Card card) {
         return card.getRules() != null && card.getRules().getAiHints().getRemRandomDecks();
+    }
+    public static boolean isCardRemNonCommanderDeck(final Card card) {
+        return card.getRules() != null && card.getRules().getAiHints().getRemNonCommanderDecks();
     }
 }

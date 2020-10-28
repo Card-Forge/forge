@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -21,6 +21,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameEntityView;
+import forge.game.GameEntityViewMap;
 import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
@@ -44,7 +46,7 @@ import java.util.Map;
  * <p>
  * Target_Selection class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: TargetSelection.java 25148 2014-03-12 08:28:52Z swordshine $
  */
@@ -63,14 +65,19 @@ public class TargetSelection {
 
     private boolean bTargetingDone = false;
 
+    private boolean isMandatory() {
+        // even if its an optionalTrigger, the targeting is still mandatory
+        return ability.isTrigger() || getTgt().getMandatory();
+    }
+
     public final boolean chooseTargets(Integer numTargets) {
         final TargetRestrictions tgt = getTgt();
         final boolean canTarget = tgt != null && tgt.doesTarget();
         if (!canTarget) {
             throw new RuntimeException("TargetSelection.chooseTargets called for ability that does not target - " + ability);
         }
-        
-        // Number of targets is explicitly set only if spell is being redirected (ex. Swerve or Redirect) 
+
+        // Number of targets is explicitly set only if spell is being redirected (ex. Swerve or Redirect)
         final int minTargets = numTargets != null ? numTargets.intValue() : tgt.getMinTargets(ability.getHostCard(), ability);
         final int maxTargets = numTargets != null ? numTargets.intValue() : tgt.getMaxTargets(ability.getHostCard(), ability);
         //final int maxTotalCMC = tgt.getMaxTotalCMC(ability.getHostCard(), ability);
@@ -95,14 +102,14 @@ public class TargetSelection {
             // Cancel ability if there aren't any valid Candidates
             return false;
         }
-        if (tgt.getMandatory() && !hasCandidates && hasEnoughTargets) {
+        if (isMandatory() && !hasCandidates && hasEnoughTargets) {
             // Mandatory target selection, that has no candidates but enough targets (Min == 0, but no choices)
             return true;
         }
-        
+
         final List<ZoneType> zones = tgt.getZone();
-        final boolean mandatory = tgt.getMandatory() && hasCandidates;
-        
+        final boolean mandatory = isMandatory() && hasCandidates;
+
         final boolean choiceResult;
         final boolean random = tgt.isRandomTarget();
         if (random) {
@@ -167,13 +174,15 @@ public class TargetSelection {
                 choiceResult = this.chooseCardFromList(validTargets, true, mandatory);
             }
         }
-        // some inputs choose cards one-by-one and need to be called again 
+        // some inputs choose cards one-by-one and need to be called again
         return choiceResult && chooseTargets(numTargets);
     }
 
     private final boolean chooseCardFromList(final List<Card> choices, final boolean targeted, final boolean mandatory) {
         // Send in a list of valid cards, and popup a choice box to target
         final Game game = ability.getActivatingPlayer().getGame();
+
+        GameEntityViewMap<Card, CardView> gameCacheChooseCard = GameEntityView.getMap(choices);
 
         final List<CardView> crdsBattle  = Lists.newArrayList();
         final List<CardView> crdsExile   = Lists.newArrayList();
@@ -228,7 +237,7 @@ public class TargetSelection {
             // is there a more elegant way of doing this?
             choicesFiltered.add(msgDone);
         }
-        
+
         Object chosen = null;
         if (!choices.isEmpty() && mandatory) {
             chosen = controller.getGui().one(getTgt().getVTSelection(), choicesFiltered);
@@ -245,7 +254,10 @@ public class TargetSelection {
         }
 
         if (chosen instanceof CardView) {
-            ability.getTargets().add(game.getCard((CardView) chosen));
+            if (!gameCacheChooseCard.containsKey(chosen)) {
+                return false;
+            }
+            ability.getTargets().add(gameCacheChooseCard.get((CardView) chosen));
         }
         return true;
     }
@@ -292,7 +304,7 @@ public class TargetSelection {
                 if (madeChoice instanceof StackItemView) {
                     ability.getTargets().add(stackItemViewCache.get(madeChoice).getSpellAbility(true));
                 }
-                else {// 'FINISH TARGETING' chosen 
+                else {// 'FINISH TARGETING' chosen
                     bTargetingDone = true;
                 }
             }

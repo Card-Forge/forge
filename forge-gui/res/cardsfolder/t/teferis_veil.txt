@@ -6,5 +6,6 @@ SVar:DelayedTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlay
 SVar:TrigPhase:DB$Phases | Defined$ DelayTriggerRemembered
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
+Svar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teferis_veil.jpg
 Oracle:Whenever a creature you control attacks, it phases out at end of combat. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)

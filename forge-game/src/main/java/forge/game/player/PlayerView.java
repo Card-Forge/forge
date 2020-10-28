@@ -20,6 +20,7 @@ import forge.card.MagicColor;
 import forge.game.GameEntityView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
+import forge.game.card.CounterEnumType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.trackable.TrackableCollection;
@@ -193,6 +194,9 @@ public class PlayerView extends GameEntityView {
             }
         }
         return 0;
+    }
+    public int getCounters(CounterEnumType counterType) {
+        return getCounters(CounterType.get(counterType));
     }
     void updateCounters(Player p) {
         set(TrackableProperty.Counters, p.getCounters());
@@ -435,6 +439,12 @@ public class PlayerView extends GameEntityView {
         return types.size();
     }
 
+    public boolean hasDelirium() {
+        if (get(TrackableProperty.HasDelirium) == null)
+            return false;
+        return get(TrackableProperty.HasDelirium);
+    }
+
     private static TrackableProperty getZoneProp(final ZoneType zone) {
         switch (zone) {
         case Ante:
@@ -462,8 +472,13 @@ public class PlayerView extends GameEntityView {
         if (prop == null) { return; }
         set(prop, CardView.getCollection(zone.getCards(false)));
 
+        //update delirium
+        if (ZoneType.Graveyard == zone.getZoneType())
+            set(TrackableProperty.HasDelirium, getZoneTypes(TrackableProperty.Graveyard) >= 4);
+
         //update flashback zone when graveyard, library, or exile zones updated
         switch (zone.getZoneType()) {
+        case Command:
         case Graveyard:
         case Library:
         case Exile:

@@ -46,9 +46,9 @@ public class DamageDealAi extends DamageAiBase {
         if ("MadSarkhanDigDmg".equals(logic)) {
             return SpecialCardAi.SarkhanTheMad.considerDig(ai, sa);
         }
-       
+
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$ChosenNumber")) {
-            int energy = ai.getCounters(CounterType.ENERGY);
+            int energy = ai.getCounters(CounterEnumType.ENERGY);
             for (SpellAbility s : source.getSpellAbilities()) {
                 if ("PayEnergy".equals(s.getParam("AILogic"))) {
                     energy += AbilityUtils.calculateAmount(source, s.getParam("CounterNum"), sa);
@@ -145,7 +145,7 @@ public class DamageDealAi extends DamageAiBase {
         if (sourceName.equals("Crater's Claws") && ai.hasFerocious()) {
             dmg += 2;
         }
-        
+
         String logic = sa.getParamOrDefault("AILogic", "");
         if ("DiscardLands".equals(logic)) {
             dmg = 2;
@@ -165,7 +165,7 @@ public class DamageDealAi extends DamageAiBase {
             List<Card> wolves = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), "Creature.Wolf+untapped+YouCtrl+Other", ai, source);
             dmg = Aggregates.sum(wolves, CardPredicates.Accessors.fnGetNetPower);
         } else if ("Triskelion".equals(logic)) {
-            final int n = source.getCounters(CounterType.P1P1);
+            final int n = source.getCounters(CounterEnumType.P1P1);
             if (n > 0) {
                 if (ComputerUtil.playImmediately(ai, sa)) {
                     /*
@@ -196,9 +196,9 @@ public class DamageDealAi extends DamageAiBase {
             }
             return false;
         }
-        
+
         if (sourceName.equals("Sorin, Grim Nemesis")) {
-            int loyalty = source.getCounters(CounterType.LOYALTY);
+            int loyalty = source.getCounters(CounterEnumType.LOYALTY);
             for (; loyalty > 0; loyalty--) {
                 if (this.damageTargetAI(ai, sa, loyalty, false)) {
                     dmg = ComputerUtilCombat.getEnoughDamageToKill(sa.getTargetCard(), loyalty, source, false, false);
@@ -228,7 +228,7 @@ public class DamageDealAi extends DamageAiBase {
         if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source)) {
             return false;
         }
-        
+
         if ("DiscardLands".equals(sa.getParam("AILogic")) && !ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
             return false;
         }
@@ -285,7 +285,7 @@ public class DamageDealAi extends DamageAiBase {
             }
         }
 
-        if ("XCountersDamage".equals(logic) && sa.getPayCosts() != null) {
+        if ("XCountersDamage".equals(logic)) {
             // Check to ensure that we have enough counters to remove per the defined PayX
             for (CostPart part : sa.getPayCosts().getCostParts()) {
                 if (part instanceof CostRemoveCounter) {
@@ -309,7 +309,7 @@ public class DamageDealAi extends DamageAiBase {
      * <p>
      * dealDamageChooseTgtC.
      * </p>
-     * 
+     *
      * @param d
      *            a int.
      * @param noPrevention
@@ -445,11 +445,11 @@ public class DamageDealAi extends DamageAiBase {
         // As of right now, ranks planeswalkers by their Current Loyalty * 10 + Big buff if close to "Ultimate"
         int bestScore = 0;
         for (Card pw : pws) {
-            int curLoyalty = pw.getCounters(CounterType.LOYALTY);
+            int curLoyalty = pw.getCounters(CounterEnumType.LOYALTY);
             int pwScore = curLoyalty * 10;
 
             for (SpellAbility sa : pw.getSpellAbilities()) {
-                if (sa.hasParam("Ultimate") && sa.getPayCosts() != null) {
+                if (sa.hasParam("Ultimate")) {
                     Integer loyaltyCost = 0;
                     CostRemoveCounter remLoyalty = sa.getPayCosts().getCostPartByType(CostRemoveCounter.class);
                     if (remLoyalty != null) {
@@ -478,7 +478,7 @@ public class DamageDealAi extends DamageAiBase {
 
         int bestScore = Integer.MAX_VALUE;
         for (Card pw : pws) {
-            int curLoyalty = pw.getCounters(CounterType.LOYALTY);
+            int curLoyalty = pw.getCounters(CounterEnumType.LOYALTY);
 
             if (curLoyalty < bestScore) {
                 bestScore = curLoyalty;
@@ -515,7 +515,7 @@ public class DamageDealAi extends DamageAiBase {
      * <p>
      * damageTargetAI.
      * </p>
-     * 
+     *
      * @param saMe
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param dmg
@@ -543,7 +543,7 @@ public class DamageDealAi extends DamageAiBase {
      * <p>
      * damageChoosingTargets.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param tgt
@@ -587,7 +587,7 @@ public class DamageDealAi extends DamageAiBase {
         if (tgt.getMaxTargets(source, sa) <= 0 && !logic.equals("AssumeAtLeastOneTarget")) {
             return false;
         }
-        
+
         immediately |= ComputerUtil.playImmediately(ai, sa);
 
         if (!(sa.getParent() != null && sa.getParent().isTargetNumberValid())) {
@@ -623,7 +623,7 @@ public class DamageDealAi extends DamageAiBase {
                     continue;
                 }
                 final int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(humanCreature, dmg, source, false, noPrevention);
-                if (assignedDamage <= dmg 
+                if (assignedDamage <= dmg
                         && humanCreature.getShieldCount() == 0 && !ComputerUtil.canRegenerate(humanCreature.getController(), humanCreature)) {
                     tcs.add(humanCreature);
                     tgt.addDividedAllocation(humanCreature, assignedDamage);
@@ -756,7 +756,7 @@ public class DamageDealAi extends DamageAiBase {
                         break;
                     }
                 }
-                
+
             } else if (tgt.canTgtCreature() || tgt.canTgtPlaneswalker()) {
                 final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
                 if (c != null) {
@@ -794,8 +794,7 @@ public class DamageDealAi extends DamageAiBase {
                 if (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (SpellAbilityAi.isSorcerySpeed(sa) && phase.is(PhaseType.MAIN2))
                         || ("PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai))
-                        || sa.getPayCosts() == null || immediately
-                        || this.shouldTgtP(ai, sa, dmg, noPrevention)) &&
+                        || immediately || shouldTgtP(ai, sa, dmg, noPrevention)) &&
                         (!avoidTargetP(ai, sa))) {
                 	tcs.add(enemy);
                     if (divided) {
@@ -826,8 +825,8 @@ public class DamageDealAi extends DamageAiBase {
      * <p>
      * damageChooseNontargeted.
      * </p>
-     * @param ai 
-     * 
+     * @param ai
+     *
      * @param saMe
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param dmg
@@ -882,7 +881,7 @@ public class DamageDealAi extends DamageAiBase {
      * <p>
      * damageChooseRequiredTargets.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param tgt
@@ -1007,7 +1006,7 @@ public class DamageDealAi extends DamageAiBase {
                 // If I can kill my target by paying less mana, do it
                 int actualPay = 0;
                 final boolean noPrevention = sa.hasParam("NoPrevention");
-                
+
                 //target is a player
                 if (!sa.getTargets().isTargetingAnyCard()) {
                     actualPay = dmg;
@@ -1038,15 +1037,15 @@ public class DamageDealAi extends DamageAiBase {
 
         Player opponent = ai.getOpponents().min(PlayerPredicates.compareByLife());
 
-        // TODO: somehow account for the possible cost reduction?      
+        // TODO: somehow account for the possible cost reduction?
         int dmg = ComputerUtilMana.determineLeftoverMana(sa, ai, saTgt.getParam("XColor"));
-        
+
         while (!ComputerUtilMana.canPayManaCost(sa, ai, dmg) && dmg > 0) {
             // TODO: ideally should never get here, currently put here as a precaution for complex mana base cases where the miscalculation might occur. Will remove later if it proves to never trigger.
             dmg--;
             System.out.println("Warning: AI could not pay mana cost for a XLifeDrain logic spell. Reducing X value to "+dmg);
         }
-        
+
         // set the color map for black X for the purpose of Soul Burn
         // TODO: somehow generalize this calculation to allow other potential similar cards to function in the future
         if ("Soul Burn".equals(sourceName)) {
@@ -1067,7 +1066,7 @@ public class DamageDealAi extends DamageAiBase {
             int toughness = c.getNetToughness();
             boolean canDie = !(c.hasKeyword(Keyword.INDESTRUCTIBLE) || ComputerUtil.canRegenerate(c.getController(), c));
 
-            // Currently will target creatures with toughness 3+ (or power 5+) 
+            // Currently will target creatures with toughness 3+ (or power 5+)
             // and only if the creature can actually die, do not "underdrain"
             // unless the creature has high power
             if (canDie && toughness <= dmg && ((toughness == dmg && toughness >= 3) || power >= 5)) {
@@ -1126,8 +1125,7 @@ public class DamageDealAi extends DamageAiBase {
                         continue;
                     }
                     // currently works only with cards that don't have additional costs (only mana is supported)
-                    if (ab.getPayCosts() != null
-                            && (ab.getPayCosts().hasNoManaCost() || ab.getPayCosts().hasOnlySpecificCostType(CostPartMana.class))) {
+                    if (ab.getPayCosts().hasNoManaCost() || ab.getPayCosts().hasOnlySpecificCostType(CostPartMana.class)) {
                         String dmgDef = "0";
                         if (ab.getApi() == ApiType.DealDamage) {
                             dmgDef = ab.getParamOrDefault("NumDmg", "0");
@@ -1151,7 +1149,7 @@ public class DamageDealAi extends DamageAiBase {
                                 }
 
                                 // FIXME: should it also check restrictions for targeting players?
-                                ManaCost costSa = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : ManaCost.NO_COST;
+                                ManaCost costSa = sa.getPayCosts().getTotalMana();
                                 ManaCost costAb = ab.getPayCosts().getTotalMana(); // checked for null above
                                 ManaCost total = ManaCost.combine(costSa, costAb);
                                 SpellAbility combinedAb = ab.copyWithDefinedCost(new Cost(total, false));

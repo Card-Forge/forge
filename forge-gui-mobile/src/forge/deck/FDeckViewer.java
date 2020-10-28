@@ -5,6 +5,7 @@ import forge.assets.FImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
+import forge.assets.ImageCache;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
@@ -102,7 +103,7 @@ public class FDeckViewer extends FScreen {
         }
 
         Forge.getClipboard().setContents(deckList.toString());
-        FOptionPane.showMessageDialog(String.format(Localizer.getInstance().getMessage("lblDeckListCopiedClipboard"), deck.getName()));
+        FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblDeckListCopiedClipboard", deck.getName()));
     }
 
     private final Deck deck;
@@ -111,6 +112,9 @@ public class FDeckViewer extends FScreen {
 
     public static void show(final Deck deck0) {
         if (deck0 == null) { return; }
+
+        /*preload deck to cache*/
+        ImageCache.preloadCache(deck0);
 
         deckViewer = new FDeckViewer(deck0);
         deckViewer.setRotate180(MatchController.getView() != null && MatchController.getView().isTopHumanPlayerActive());

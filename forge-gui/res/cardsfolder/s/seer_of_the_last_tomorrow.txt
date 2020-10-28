@@ -2,6 +2,6 @@ Name:Seer of the Last Tomorrow
 ManaCost:2 U
 Types:Creature Naga Cleric
 PT:1/4
-A:AB$ Mill | Cost$ U T Discard<1/Card> | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top three cards of their library into their graveyard.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seer_of_the_last_tomorrow.jpg
-Oracle:{U}, {T}, Discard a card: Target player puts the top three cards of their library into their graveyard.
+A:AB$ Mill | Cost$ U T Discard<1/Card> | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills three cards.
+DeckHas:Ability$Discard
+Oracle:{U}, {T}, Discard a card: Target player mills three cards.

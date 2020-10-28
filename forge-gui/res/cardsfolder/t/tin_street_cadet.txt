@@ -1,0 +1,7 @@
+Name:Tin Street Cadet
+ManaCost:R
+Types:Creature Goblin
+PT:1/1
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME becomes blocked, create a 1/1 red Goblin creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_goblin | TokenAmount$ 1
+Oracle:Whenever Tin Street Cadet becomes blocked, create a 1/1 red Goblin creature token.

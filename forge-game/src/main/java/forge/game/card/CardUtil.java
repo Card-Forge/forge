@@ -173,23 +173,12 @@ public final class CardUtil {
     }
 
     public static List<Card> getThisTurnCast(final String valid, final Card src) {
-        List<Card> res = Lists.newArrayList();
-        final Game game = src.getGame();
-        res.addAll(game.getStack().getSpellsCastThisTurn());
-
-        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src);
-
-        return res;
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, src.getController(), src);
     }
 
     public static List<Card> getLastTurnCast(final String valid, final Card src) {
-        List<Card> res = Lists.newArrayList();
-        final Game game = src.getGame();
-        res.addAll(game.getStack().getSpellsCastLastTurn());
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, src.getController(), src);
 
-        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src);
-
-        return res;
     }
 
     /**
@@ -206,7 +195,7 @@ public final class CardUtil {
                 .build()
         );
 
-        final Card newCopy = new Card(in.getId(), in.getPaperCard(), false, in.getGame());
+        final Card newCopy = new Card(in.getId(), in.getPaperCard(), in.getGame(), null);
         newCopy.setSetCode(in.getSetCode());
         newCopy.setOwner(in.getOwner());
         newCopy.setController(in.getController(), 0);
@@ -237,12 +226,17 @@ public final class CardUtil {
 
         newCopy.setType(new CardType(in.getType()));
         newCopy.setToken(in.isToken());
+        newCopy.setCopiedSpell(in.isCopiedSpell());
+        newCopy.setImmutable(in.isImmutable());
 
-        // lock in the current P/T without bonus from counters
-        newCopy.setBasePower(in.getCurrentPower() + in.getTempPowerBoost());
-        newCopy.setBaseToughness(in.getCurrentToughness() + in.getTempToughnessBoost());
+        // lock in the current P/T
+        newCopy.setBasePower(in.getCurrentPower());
+        newCopy.setBaseToughness(in.getCurrentToughness());
 
-        newCopy.setCounters(Maps.newEnumMap(in.getCounters()));
+        // extra copy PT boost
+        newCopy.setPTBoost(in.getPTBoostTable());
+
+        newCopy.setCounters(Maps.newHashMap(in.getCounters()));
 
         newCopy.setColor(in.determineColor().getColor());
         newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
@@ -293,7 +287,12 @@ public final class CardUtil {
             newCopy.addOptionalCostPaid(ocost);
         }
 
-        newCopy.setCastSA(in.getCastSA());
+        if (in.getCastSA() != null) {
+            SpellAbility castSA = in.getCastSA().copy(newCopy, true);
+            castSA.setLastStateBattlefield(CardCollection.EMPTY);
+            castSA.setLastStateGraveyard(CardCollection.EMPTY);
+            newCopy.setCastSA(castSA);
+        }
         newCopy.setCastFrom(in.getCastFrom());
 
         newCopy.setExiledWith(in.getExiledWith());
@@ -328,7 +327,7 @@ public final class CardUtil {
     }
 
     public static CardState getFaceDownCharacteristic(Card c) {
-        final CardType type = new CardType();
+        final CardType type = new CardType(false);
         type.add("Creature");
 
         final CardState ret = new CardState(c, CardStateName.FaceDown);
@@ -338,7 +337,8 @@ public final class CardUtil {
         ret.setName("");
         ret.setType(type);
 
-        ret.setImageKey(ImageKeys.getTokenKey(ImageKeys.MORPH_IMAGE));
+        //show hidden if exiled facedown
+        ret.setImageKey(ImageKeys.getTokenKey(c.isInZone(ZoneType.Exile) ? ImageKeys.HIDDEN_CARD : ImageKeys.MORPH_IMAGE));
         return ret;
     }
 

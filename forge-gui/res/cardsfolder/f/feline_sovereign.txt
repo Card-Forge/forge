@@ -1,0 +1,11 @@
+Name:Feline Sovereign
+ManaCost:2 G
+Types:Creature Cat
+PT:2/3
+S:Mode$ Continuous | Affected$ Cat.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Protection from Dogs | Description$ Other Cats you control get +1/+1 and have protection from Dogs.
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.Cat+YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever one or more Cats you control deal combat damage to a player, destroy up to one target artifact or enchantment that player controls.
+SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact,Enchantment | TargetsWithDefinedController$ TriggeredTarget | TgtPrompt$ Select up to one target artifact or enchantment that player controls
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Cat
+DeckHints:Type$Cat
+Oracle:Other Cats you control get +1/+1 and have protection from Dogs.\nWhenever one or more Cats you control deal combat damage to a player, destroy up to one target artifact or enchantment that player controls.

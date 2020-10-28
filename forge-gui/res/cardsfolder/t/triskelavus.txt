@@ -4,6 +4,6 @@ Types:Artifact Creature Construct
 PT:1/1
 K:Flying
 K:etbCounter:P1P1:3
-A:AB$ Token | Cost$ 1 SubCounter<1/P1P1> | TokenAmount$ 1 | TokenScript$ c_1_1_a_triskelavite_flying_ammo | TokenOwner$ You | LegacyImage$ c 1 1 a triskelavite flying ammo tsp | SpellDescription$ Create a 1/1 colorless Triskelavite artifact creature token with flying. It has "Sacrifice this creature: This creature deals 1 damage to any target."
+A:AB$ Token | Cost$ 1 SubCounter<1/P1P1> | TokenAmount$ 1 | TokenScript$ c_1_1_a_triskelavite_flying_ammo | TokenOwner$ You | LegacyImage$ c 1 1 a triskelavite flying ammo tsp | SpellDescription$ Create a 1/1 colorless Triskelavite artifact creature token with flying. It has "Sacrifice this creature: It deals 1 damage to any target."
 SVar:Picture:http://www.wizards.com/global/images/magic/general/triskelavus.jpg
-Oracle:Flying\nTriskelavus enters the battlefield with three +1/+1 counters on it.\n{1}, Remove a +1/+1 counter from Triskelavus: Create a 1/1 colorless Triskelavite artifact creature token with flying. It has "Sacrifice this creature: This creature deals 1 damage to any target."
+Oracle:Flying\nTriskelavus enters the battlefield with three +1/+1 counters on it.\n{1}, Remove a +1/+1 counter from Triskelavus: Create a 1/1 colorless Triskelavite artifact creature token with flying. It has "Sacrifice this creature: It deals 1 damage to any target."

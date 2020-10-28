@@ -48,11 +48,13 @@ import io.sentry.event.BreadcrumbBuilder;
 
 public class CardState extends GameObject {
     private String name = "";
-    private CardType type = new CardType();
+    private CardType type = new CardType(false);
     private ManaCost manaCost = ManaCost.NO_COST;
     private byte color = MagicColor.COLORLESS;
     private int basePower = 0;
     private int baseToughness = 0;
+    private String basePowerString = null;
+    private String baseToughnessString = null;
     private String baseLoyalty = "";
     private KeywordCollection intrinsicKeywords = new KeywordCollection();
 
@@ -111,6 +113,11 @@ public class CardState extends GameObject {
     }
     public final void addType(String type0) {
         if (type.add(type0)) {
+            view.updateType(this);
+        }
+    }
+    public final void addType(Iterable<String> type0) {
+        if (type.addAll(type0)) {
             view.updateType(this);
         }
     }
@@ -174,6 +181,24 @@ public class CardState extends GameObject {
         if (baseToughness == baseToughness0) { return; }
         baseToughness = baseToughness0;
         view.updateToughness(this);
+    }
+
+    // values that are printed on card
+    public final String getBasePowerString() {
+        return (null == basePowerString) ? "" + getBasePower() : basePowerString;
+    }
+
+    public final String getBaseToughnessString() {
+        return (null == baseToughnessString) ? "" + getBaseToughness() : baseToughnessString;
+    }
+
+    // values that are printed on card
+    public final void setBasePowerString(final String s) {
+        basePowerString = s;
+    }
+
+    public final void setBaseToughnessString(final String s) {
+        baseToughnessString = s;
     }
 
     public String getBaseLoyalty() {

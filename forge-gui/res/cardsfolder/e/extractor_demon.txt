@@ -4,7 +4,6 @@ Types:Creature Demon
 PT:5/5
 K:Flying
 K:Unearth:2 B
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMill | TriggerDescription$ Whenever another creature leaves the battlefield, you may have target player put the top two cards of their library into their graveyard.
-SVar:TrigMill:DB$Mill | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player
-SVar:Picture:http://www.wizards.com/global/images/magic/general/extractor_demon.jpg
-Oracle:Flying\nWhenever another creature leaves the battlefield, you may have target player put the top two cards of their library into their graveyard.\nUnearth {2}{B} ({2}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMill | TriggerDescription$ Whenever another creature leaves the battlefield, you may have target player mill two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player
+Oracle:Flying\nWhenever another creature leaves the battlefield, you may have target player mill two cards.\nUnearth {2}{B} ({2}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

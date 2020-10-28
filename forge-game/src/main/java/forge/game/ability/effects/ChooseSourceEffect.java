@@ -138,7 +138,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
                     final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseSource") + " ";
                     Card o = null;
                     do {
-                        o = p.getController().chooseSingleEntityForEffect(sourcesToChooseFrom, sa, choiceTitle);
+                        o = p.getController().chooseSingleEntityForEffect(sourcesToChooseFrom, sa, choiceTitle, null);
                     } while (o == null);
                     chosen.add(o);
                     sourcesToChooseFrom.remove(o);

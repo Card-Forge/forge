@@ -350,6 +350,10 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     }
 
     public boolean canPayForShardWithColor(ManaCostShard shard, byte color) {
+        if (shard.isOfKind(ManaAtom.COLORLESS) && color == ManaAtom.GENERIC) {
+            return false; // FIXME: testing Colorless against Generic is a recipe for disaster, but probably there should be a better fix.
+        }
+
         // TODO Debug this for Paying Gonti,
         byte line = getPossibleColorUses(color);
 

@@ -3,6 +3,7 @@ package forge.deck;
 import forge.FThreads;
 import forge.Forge;
 import forge.GuiBase;
+import forge.assets.ImageCache;
 import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
 import forge.error.BugReporter;
@@ -62,6 +63,7 @@ public class FDeckChooser extends FScreen {
     private Callback<Deck> callback;
     private NetDeckCategory netDeckCategory;
     private boolean refreshingDeckType;
+    private boolean firstactivation = true;
 
     private final DeckManager lstDecks;
     private final FButton btnNewDeck = new FButton(Localizer.getInstance().getMessage("lblNewDeck"));
@@ -225,6 +227,11 @@ public class FDeckChooser extends FScreen {
 
     @Override
     public void onActivate() {
+        //somehow a loaded deck state from startup don't refresh accordingly for imageview so refresh it on first activation
+        if(firstactivation) {
+            needRefreshOnActivate = true;
+            firstactivation = false;
+        }
         if (needRefreshOnActivate) {
             needRefreshOnActivate = false;
             refreshDecksList(selectedDeckType, true, null);
@@ -472,6 +479,8 @@ public class FDeckChooser extends FScreen {
             break;
         }
         needRefreshOnActivate = true;
+        /*preload deck to cache*/
+        ImageCache.preloadCache(deck.getDeck());
         Forge.openScreen(new FDeckEditor(editorType, deck, true));
     }
 
@@ -1147,7 +1156,7 @@ public class FDeckChooser extends FScreen {
                         });
                     }
                 });
-                chooser.show(null, true);
+                chooser.show(null, false); /*setting selectMax to true will select all available option*/
             }
         });
     }

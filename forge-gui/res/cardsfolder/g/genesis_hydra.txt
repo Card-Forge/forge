@@ -7,5 +7,6 @@ SVar:X:Count$xPaid
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When you cast CARDNAME, reveal the top X cards of your library. You may put a nonland permanent card with converted mana cost X or less from among them onto the battlefield. Then shuffle the rest into your library.
 SVar:TrigDig:DB$ Dig | DigNum$ X | Reveal$ True | ChangeNum$ 1 | ChangeValid$ Permanent.nonLand+cmcLEX | DestinationZone$ Battlefield | LibraryPosition2$ 0 | References$ X | SubAbility$ DBShuffle | Optional$ True | RestRandomOrder$ True
 SVar:DBShuffle:DB$ Shuffle | Defined$ You
+DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/genesis_hydra.jpg
 Oracle:When you cast Genesis Hydra, reveal the top X cards of your library. You may put a nonland permanent card with converted mana cost X or less from among them onto the battlefield. Then shuffle the rest into your library.\nGenesis Hydra enters the battlefield with X +1/+1 counters on it.

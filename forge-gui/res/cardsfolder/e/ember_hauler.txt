@@ -4,4 +4,4 @@ Types:Creature Goblin
 PT:2/2
 A:AB$ DealDamage | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_hauler.jpg
-Oracle:{1}, Sacrifice Ember Hauler: Ember Hauler deals 2 damage to any target.
+Oracle:{1}, Sacrifice Ember Hauler: It deals 2 damage to any target.

@@ -29,7 +29,7 @@ import java.util.StringTokenizer;
 
 public class CardFaceSymbols {
     public static final float FONT_SIZE_FACTOR = 0.85f;
-    private static final Map<String, FSkinImage> MANA_IMAGES = new HashMap<>();
+    private static final Map<String, FSkinImage> MANA_IMAGES = new HashMap<>(128);
 
     public static void loadImages() {
         for (int i = 0; i <= 20; i++) {
@@ -108,6 +108,7 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("doublestrike", FSkinImage.IMG_ABILITY_DOUBLE_STRIKE);
         MANA_IMAGES.put("firststrike", FSkinImage.IMG_ABILITY_FIRST_STRIKE);
         MANA_IMAGES.put("fear", FSkinImage.IMG_ABILITY_FEAR);
+        MANA_IMAGES.put("flash", FSkinImage.IMG_ABILITY_FLASH);
         MANA_IMAGES.put("flying", FSkinImage.IMG_ABILITY_FLYING);
         MANA_IMAGES.put("haste", FSkinImage.IMG_ABILITY_HASTE);
         MANA_IMAGES.put("hexproof", FSkinImage.IMG_ABILITY_HEXPROOF);
@@ -189,11 +190,17 @@ public class CardFaceSymbols {
     }
 
     public static void drawColorSet(Graphics g, ColorSet colorSet, float x, float y, final float imageSize) {
+        drawColorSet(g, colorSet, x, y, imageSize, false);
+    }
+    public static void drawColorSet(Graphics g, ColorSet colorSet, float x, float y, final float imageSize, boolean vertical) {
         final float dx = imageSize;
 
         for (final ManaCostShard s : colorSet.getOrderedShards()) {
             drawSymbol(s.getImageKey(), g, x, y, imageSize, imageSize);
-            x += dx;
+            if (!vertical)
+                x += dx;
+            else
+                y += dx;
         }
     }
 

@@ -81,7 +81,7 @@ public class CloneEffect extends SpellAbilityEffect {
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
 
             String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
-            cardToCopy = activator.getController().chooseSingleEntityForEffect(choices, sa, title, false);
+            cardToCopy = activator.getController().chooseSingleEntityForEffect(choices, sa, title, false, null);
         } else if (sa.hasParam("Defined")) {
             List<Card> cloneSources = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
             if (!cloneSources.isEmpty()) {

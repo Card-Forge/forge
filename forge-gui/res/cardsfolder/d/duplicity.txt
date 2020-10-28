@@ -2,7 +2,7 @@ Name:Duplicity
 ManaCost:3 U U
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile the top five cards of your library face down.
-SVar:TrigExile:DB$ Mill | NumCards$ 5 | Destination$ Exile | ExileFaceDown$ True | RememberMilled$ True
+SVar:TrigExile:DB$ Dig | DigNum$ 5 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChangeHandExile | TriggerDescription$ At the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with CARDNAME into your hand.
 SVar:TrigChangeHandExile:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | ChangeType$ Card.YouCtrl | RememberChanged$ True | Imprint$ True | SubAbility$ ChangeBack
 SVar:ChangeBack:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+IsNotImprinted | Origin$ Exile | Destination$ Hand | ForgetChanged$ True | SubAbility$ DBCleanup
@@ -14,5 +14,4 @@ T:Mode$ ChangesController | ValidCard$ Card.Self | TriggerZones$ Battlefield | E
 SVar:GoToYard:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Graveyard | ChangeType$ Card.IsRemembered | ForgetChanged$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/duplicity.jpg
 Oracle:When Duplicity enters the battlefield, exile the top five cards of your library face down.\nAt the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with Duplicity into your hand.\nAt the beginning of your end step, discard a card.\nWhen you lose control of Duplicity, put all cards exiled with Duplicity into their owner's graveyard.

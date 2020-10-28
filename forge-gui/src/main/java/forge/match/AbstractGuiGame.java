@@ -9,8 +9,6 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import forge.GuiBase;
-import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -20,13 +18,16 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.assets.FSkinProp;
 import forge.game.GameView;
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
+import forge.game.zone.Zone;
 import forge.interfaces.IGameController;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.IMayViewCards;
@@ -34,6 +35,7 @@ import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.trackable.TrackableTypes;
+import forge.util.Localizer;
 
 public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private PlayerView currentPlayer = null;
@@ -182,6 +184,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return true; //if not in game, card can be shown
         }
         if(GuiBase.getInterface().isLibgdxPort()){
+            if(gameView.isGameOver()) {
+                return true;
+            }
             if(spectator!=null) { //workaround fix!! this is needed on above code or it will
                 gameControllers.remove(spectator); //bug the UI! remove spectator here since its must not be here...
                 return true;
@@ -217,6 +222,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             case Flipped:
             case Transformed:
             case Meld:
+            case Modal:
                 return true;
             default:
                 return false;
@@ -266,6 +272,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
     public boolean isGamePaused() { return gamePause; }
     public void setgamePause(boolean pause) { gamePause = pause; }
+    public void pauseMatch() {
+        IGameController controller = spectator;
+        if(controller != null && !isGamePaused())
+            controller.selectButtonOk();
+    }
+    public void resumeMatch() {
+        IGameController controller = spectator;
+        if(controller != null && isGamePaused())
+            controller.selectButtonOk();
+    }
 
     /** Concede game, bring up WinLose UI. */
     public boolean concede() {
@@ -569,7 +585,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         for (int i = min; i <= cutoff; i++) {
             choices.add(Integer.valueOf(i));
         }
-        choices.add("...");
+        choices.add(Localizer.getInstance().getMessage("lblOtherInteger"));
 
         final Object choice = oneOrNone(message, choices.build());
         if (choice instanceof Integer || choice == null) {
@@ -581,12 +597,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         String prompt = "";
         if (min != Integer.MIN_VALUE) {
             if (max != Integer.MAX_VALUE) {
-                prompt = localizer.getMessage("lblEnterNumberBetweenMinAndMax").replace("%min", String.valueOf(min)).replace("%max", String.valueOf(max));
+                prompt = localizer.getMessage("lblEnterNumberBetweenMinAndMax", String.valueOf(min), String.valueOf(max));
             } else {
-                prompt = localizer.getMessage("lblEnterNumberGreaterThanOrEqualsToMin").replace("%min", String.valueOf(min));
+                prompt = localizer.getMessage("lblEnterNumberGreaterThanOrEqualsToMin", String.valueOf(min));
             }
         } else if (max != Integer.MAX_VALUE) {
-            prompt = localizer.getMessage("lblEnterNumberLessThanOrEqualsToMax").replace("%max", String.valueOf(max));
+            prompt = localizer.getMessage("lblEnterNumberLessThanOrEqualsToMax", String.valueOf(max));
         }
 
         while (true) {
@@ -705,5 +721,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public void notifyStackRemoval(GameEventSpellRemovedFromStack event) {
     }
     
+    @Override
+    public void handleLandPlayed(Card land, Zone zone) {
+    }  
+
     // End of Choice code
 }

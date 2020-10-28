@@ -9,6 +9,7 @@ SVar:DBDraw:DB$ Draw | NumCards$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower
 SVar:NeedsToPlay:Creature.YouCtrl
+DeckHas:Ability$LifeGain
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disciple_of_bolas.jpg
 Oracle:When Disciple of Bolas enters the battlefield, sacrifice another creature. You gain X life and draw X cards, where X is that creature's power.

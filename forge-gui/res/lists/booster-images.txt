@@ -140,6 +140,9 @@ https://downloads.cardforge.org/images/products/boosters/DTK_2.jpg
 https://downloads.cardforge.org/images/products/boosters/DTK_3.jpg
 https://downloads.cardforge.org/images/products/boosters/DTK_4.jpg
 https://downloads.cardforge.org/images/products/boosters/DTK_5.jpg
+https://downloads.cardforge.org/images/products/boosters/ELD_1.jpg
+https://downloads.cardforge.org/images/products/boosters/ELD_2.jpg
+https://downloads.cardforge.org/images/products/boosters/ELD_3.jpg
 https://downloads.cardforge.org/images/products/boosters/EMA_1.jpg
 https://downloads.cardforge.org/images/products/boosters/EMA_2.jpg
 https://downloads.cardforge.org/images/products/boosters/EMA_3.jpg
@@ -190,6 +193,9 @@ https://downloads.cardforge.org/images/products/boosters/ICE_2.jpg
 https://downloads.cardforge.org/images/products/boosters/ICE_3.jpg
 https://downloads.cardforge.org/images/products/boosters/ICE_4.jpg
 https://downloads.cardforge.org/images/products/boosters/ICE_5.jpg
+https://downloads.cardforge.org/images/products/boosters/IKO_1.jpg
+https://downloads.cardforge.org/images/products/boosters/IKO_2.jpg
+https://downloads.cardforge.org/images/products/boosters/IKO_3.jpg
 https://downloads.cardforge.org/images/products/boosters/INV.png
 https://downloads.cardforge.org/images/products/boosters/INV_1.jpg
 https://downloads.cardforge.org/images/products/boosters/INV_2.jpg
@@ -274,6 +280,9 @@ https://downloads.cardforge.org/images/products/boosters/M19_5.jpg
 https://downloads.cardforge.org/images/products/boosters/M20_1.png
 https://downloads.cardforge.org/images/products/boosters/M20_2.png
 https://downloads.cardforge.org/images/products/boosters/M20_3.png
+https://downloads.cardforge.org/images/products/boosters/M21_1.jpg
+https://downloads.cardforge.org/images/products/boosters/M21_2.jpg
+https://downloads.cardforge.org/images/products/boosters/M21_3.jpg
 https://downloads.cardforge.org/images/products/boosters/MBS.png
 https://downloads.cardforge.org/images/products/boosters/MBS_1.jpg
 https://downloads.cardforge.org/images/products/boosters/MBS_2.jpg

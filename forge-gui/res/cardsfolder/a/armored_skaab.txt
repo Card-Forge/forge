@@ -2,7 +2,6 @@ Name:Armored Skaab
 ManaCost:2 U
 Types:Creature Zombie Warrior
 PT:1/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, put the top four cards of your library into your graveyard.
-SVar:TrigMill:DB$Mill | NumCards$ 4 | Defined$ You
-SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_skaab.jpg
-Oracle:When Armored Skaab enters the battlefield, put the top four cards of your library into your graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill four cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You
+Oracle:When Armored Skaab enters the battlefield, mill four cards.

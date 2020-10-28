@@ -3,7 +3,7 @@ ManaCost:4 G
 Loyalty:4
 Types:Legendary Planeswalker Yanggu
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
-A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ mowu | TokenOwner$ You | LegacyImage$ mowu gs1 | SpellDescription$ If you don't control a creature named Mowu, create a legendary 3/3 green Hound creature token named Mowu. | IsPresent$ Creature.YouCtrl+namedMowu | PresentCompare$ EQ0
+A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ mowu | TokenOwner$ You | SpellDescription$ If you don't control a creature named Mowu, create Mowu, a legendary 3/3 green Dog creature token. | IsPresent$ Creature.YouCtrl+namedMowu | PresentCompare$ EQ0
 A:AB$ Pump | Cost$ SubCounter<5/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | References$ X | KW$ Trample | SpellDescription$ Until end of turn, target creature gains trample and gets +X/+X, where X is the number of lands you control.
 SVar:X:Count$TypeYouCtrl.Land
-Oracle:[+1]: Target creature gets +2/+2 until end of turn.\n[-1]: If you don't control a creature named Mowu, create a legendary 3/3 green Hound creature token named Mowu.\n[-5]: Until end of turn, target creature gains trample and gets +X/+X, where X is the number of lands you control.
+Oracle:[+1]: Target creature gets +2/+2 until end of turn.\n[-1]: If you don't control a creature named Mowu, create Mowu, a legendary 3/3 green Dog creature token.\n[-5]: Until end of turn, target creature gains trample and gets +X/+X, where X is the number of lands you control.

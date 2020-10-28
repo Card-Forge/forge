@@ -1,0 +1,25 @@
+[metadata]
+Code=AJMP
+Date=2020-07-17
+Name=Jumpstart Arena Exclusives
+Type=Other
+
+[cards]
+R Archon of Sun's Grace
+C Audacious Thief
+U Banishing Light
+U Bond of Revival
+R Carnifex Demon
+R Doomed Necromancer
+U Dryad Greenseeker
+U Fanatic of Mogis
+R Gadwick, the Wizened
+U Goblin Oriflamme
+R Lightning Serpent
+U Lightning Strike
+C Pollenbright Druid
+C Prey Upon
+C Scorching Dragonfire
+R Serra's Guardian
+U Weight of Memory
+R Woe Strider

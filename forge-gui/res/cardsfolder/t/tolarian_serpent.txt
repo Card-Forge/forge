@@ -2,7 +2,7 @@ Name:Tolarian Serpent
 ManaCost:5 U U
 Types:Creature Serpent
 PT:7/7
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, put the top seven cards of your library into your graveyard.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, mill seven cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 7
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tolarian_serpent.jpg
-Oracle:At the beginning of your upkeep, put the top seven cards of your library into your graveyard.
+DeckHints:Ability$Graveyard
+Oracle:At the beginning of your upkeep, mill seven cards.

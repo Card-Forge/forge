@@ -2,9 +2,9 @@ Name:Fleshgrafter
 ManaCost:2 B
 Types:Creature Human Warrior
 PT:2/2
-A:AB$ Pump | Cost$ Discard<1/Artifact> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+A:AB$ Pump | Cost$ Discard<1/Artifact> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 AI:RemoveDeck:Random
 SVar:AIPreference:DiscardCost$Artifact
 DeckHints:Type$Artifact
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fleshgrafter.jpg
+DeckHas:Ability$Discard
 Oracle:Discard an artifact card: Fleshgrafter gets +2/+2 until end of turn.

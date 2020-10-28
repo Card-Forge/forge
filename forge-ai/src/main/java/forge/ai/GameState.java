@@ -592,6 +592,7 @@ public abstract class GameState {
         cardToEnchantPlayerId.clear();
         cardToRememberedId.clear();
         cardToExiledWithId.clear();
+        cardToImprintedId.clear();
         markedDamage.clear();
         cardToChosenClrs.clear();
         cardToChosenCards.clear();
@@ -1090,11 +1091,11 @@ public abstract class GameState {
     }
 
     private void applyCountersToGameEntity(GameEntity entity, String counterString) {
-        entity.setCounters(Maps.newEnumMap(CounterType.class));
+        entity.setCounters(Maps.newHashMap());
         String[] allCounterStrings = counterString.split(",");
         for (final String counterPair : allCounterStrings) {
             String[] pair = counterPair.split("=", 2);
-            entity.addCounter(CounterType.valueOf(pair[0]), Integer.parseInt(pair[1]), null, false, false, null);
+            entity.addCounter(CounterType.getType(pair[0]), Integer.parseInt(pair[1]), null, false, false, null);
         }
     }
 
@@ -1136,7 +1137,7 @@ public abstract class GameState {
                     Map<CounterType, Integer> counters = c.getCounters();
                     // Note: Not clearCounters() since we want to keep the counters
                     // var as-is.
-                    c.setCounters(Maps.newEnumMap(CounterType.class));
+                    c.setCounters(Maps.newHashMap());
                     if (c.isAura()) {
                         // dummy "enchanting" to indicate that the card will be force-attached elsewhere
                         // (will be overridden later, so the actual value shouldn't matter)

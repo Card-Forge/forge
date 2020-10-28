@@ -72,3 +72,13 @@ M19: 10 Boosters, 80 BasicLands
 GRN: 10 Boosters, 80 BasicLands
 RNA: 10 Boosters, 80 BasicLands
 WAR: 10 Boosters, 80 BasicLands
+ELD: 10 Boosters, 40 BasicLands
+#needs to be 20 BasicLands, 20 Foil BasicLands, 1 Piper of the Swarm+|ELD|3
+THB: 10 Boosters, 40 BasicLands
+#needs to be 20 BasicLands, 20 Foil BasicLands, 1 Arasta of the Endless Web+|THB|3
+IKO: 10 Boosters, 40 BasicLands
+#needs to be 20 BasicLands, 20 Foil BasicLands, 1 Colossification+|IKO|3
+M21: 10 Boosters, 40 BasicLands
+#needs to be 20 BasicLands, 20 Foil BasicLands, 1 Pack Leader+|M21|3
+ZNR: 10 Boosters, 40 BasicLands
+#needs to be 20 BasicLands, 20 Foil BasicLands, 1 Charix, the Raging Isle+|ZNR|3

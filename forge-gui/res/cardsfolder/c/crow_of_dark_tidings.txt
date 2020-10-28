@@ -3,10 +3,9 @@ ManaCost:2 B
 Types:Creature Zombie Bird
 PT:2/1
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield or dies, put the top two cards of your library into your graveyard.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigMill | TriggerController$ TriggeredCardController | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or dies, put the top two cards of your library into your graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield or dies, mill two cards.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigMill | TriggerController$ TriggeredCardController | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or dies, mill two cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You
 DeckHints:Ability$Delirium
 DeckHas:Ability$Graveyard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crow_of_dark_tidings.jpg
-Oracle:Flying\nWhen Crow of Dark Tidings enters the battlefield or dies, put the top two cards of your library into your graveyard.
+Oracle:Flying\nWhen Crow of Dark Tidings enters the battlefield or dies, mill two cards.

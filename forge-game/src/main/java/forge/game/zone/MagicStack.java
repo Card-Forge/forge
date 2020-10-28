@@ -136,8 +136,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // if the ability is a spell, but not a copied spell and its not already
         // on the stack zone, move there
         if (ability.isSpell()) {
-            if (!source.isCopiedSpell() && !source.isInZone(ZoneType.Stack)) {
-                ability.setHostCard(game.getAction().moveToStack(source, ability));
+            if (!source.isCopiedSpell()) {
+                if (!source.isInZone(ZoneType.Stack)) {
+                    ability.setHostCard(game.getAction().moveToStack(source, ability));
+                }
+                if (ability.equals(source.getCastSA())) {
+                    source.setCastSA(ability.copy(source, true));
+                }
             }
         }
 
@@ -237,13 +242,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             if (spell.isCastFaceDown()) {
                 source.turnFaceDown();
             } else if (source.isFaceDown()) {
-                source.turnFaceUp();
+                source.turnFaceUp(null);
             }
         }
 
-        if (sp.getApi() == ApiType.Charm && sp.hasParam("RememberChoice")) {
+        if (sp.getApi() == ApiType.Charm && sp.hasParam("ChoiceRestriction")) {
             // Remember the Choice here for later handling
-            source.addRemembered(sp.getSubAbility());
+            source.addChosenModes(sp, sp.getSubAbility().getDescription());
         }
 
         //cancel auto-pass for all opponents of activating player
@@ -314,9 +319,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
             // Run Cycled triggers
             if (sp.isCycling()) {
-                runParams.clear();
-                runParams.put(AbilityKey.Card, sp.getHostCard());
-                game.getTriggerHandler().runTrigger(TriggerType.Cycled, runParams, false);
+                activator.addCycled(sp);
             }
             
             if (sp.hasParam("Crew")) {
@@ -639,6 +642,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         frozenStack.remove(si);
         game.updateStackForView();
         SpellAbility sa = si.getSpellAbility(true);
+        sa.setLastStateBattlefield(CardCollection.EMPTY);
+        sa.setLastStateGraveyard(CardCollection.EMPTY);
         game.fireEvent(new GameEventSpellRemovedFromStack(sa));
     }
 
@@ -780,6 +785,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public final void onNextTurn() {
+        game.getStackZone().resetCardsAddedThisTurn();
         if (thisTurnCast.isEmpty()) {
             lastTurnCast = Lists.newArrayList();
             return;

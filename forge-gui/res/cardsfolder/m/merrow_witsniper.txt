@@ -2,7 +2,6 @@ Name:Merrow Witsniper
 ManaCost:U
 Types:Creature Merfolk Rogue
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player puts the top card of their library into their graveyard.
-SVar:TrigMill:DB$Mill | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player
-SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_witsniper.jpg
-Oracle:When Merrow Witsniper enters the battlefield, target player puts the top card of their library into their graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player mills a card.
+SVar:TrigMill:DB$ Mill | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player
+Oracle:When Merrow Witsniper enters the battlefield, target player mills a card.

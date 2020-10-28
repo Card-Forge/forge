@@ -96,6 +96,15 @@ public class VStack extends FDropDown {
         restorablePlayerZones = null;
     }
 
+    public void checkEmptyStack() { //sort the bug in client when desynch happens
+        final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
+        if(stack!=null)
+            if(isVisible() && stack.isEmpty()) { //visible stack but empty already
+                hide();
+                getMenuTab().setText(Localizer.getInstance().getMessage("lblStack") + " (" + 0 + ")");
+            }
+    }
+
     @Override
     public void update() {
         activeItem = null;
@@ -356,6 +365,7 @@ public class VStack extends FDropDown {
             float y = 0;
             float w = getWidth();
             float h = preferredHeight;
+            CardView sourceCard = stackInstance.getSourceCard();
 
             boolean needAlpha = (activeStackInstance != stackInstance);
             if (needAlpha) { //use alpha for non-active items on stack
@@ -374,19 +384,21 @@ public class VStack extends FDropDown {
 
             x += PADDING;
             y += PADDING;
-            CardRenderer.drawCardWithOverlays(g, stackInstance.getSourceCard(), x, y, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top, true);
+            CardRenderer.drawCardWithOverlays(g, sourceCard, x, y, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top, true, false, false);
 
             x += CARD_WIDTH + PADDING;
             w -= x + PADDING - BORDER_THICKNESS;
             h -= y + PADDING - BORDER_THICKNESS;
 
-            String name = CardTranslation.getTranslatedName(stackInstance.getSourceCard().getName());
+            String name = sourceCard.getName();
             int index = text.indexOf(name);
             String newtext = "";
-            String cId =  "(" + stackInstance.getSourceCard().getId() + ")";
+            String cId =  "(" + sourceCard.getId() + ")";
+            String optionalCostString = !stackInstance.getOptionalCostString().equals("") ? " ("+ stackInstance.getOptionalCostString() + ")" : "";
 
             if (index == -1) {
                 newtext = TextUtil.fastReplace(TextUtil.fastReplace(text.trim(),"--","-"),"- -","-");
+                newtext = TextUtil.fastReplace(newtext, "- - ", "- ");
                 textRenderer.drawText(g, name + " " + (name.length() > 1 ? cId : "") + "\n" + (newtext.length() > 1 ? newtext : ""),
                         FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
 
@@ -396,10 +408,11 @@ public class VStack extends FDropDown {
                 newtext = TextUtil.fastReplace(trimSecond, " "+cId, name);
 
                 if(newtext.equals("\n"+name))
-                    textRenderer.drawText(g, name + " " + cId, FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
+                    textRenderer.drawText(g, name + " " + cId + optionalCostString, FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
                 else {
                     newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext,name+" -","-"), "\n ", "\n");
                     newtext = "\n"+ TextUtil.fastReplace(newtext.trim(),"--","-");
+                    newtext = TextUtil.fastReplace(newtext, "- - ", "- ");
                     textRenderer.drawText(g, name+" "+cId+newtext, FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
                 }
             }

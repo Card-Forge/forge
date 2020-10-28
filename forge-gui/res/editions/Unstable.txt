@@ -20,6 +20,8 @@ w_2_2_cat
 w_0_1_goat
 w_1_1_spirit_flying
 w_1_1_spirit_flying
+w_4_4_angel_flying
+w_4_4_angel_flying
 w_1_1_soldier
 u_1_1_faerie_spy_flying_haste_draw
 u_8_8_octopus
@@ -45,6 +47,7 @@ g_1_1_squirrel
 g_6_6_wurm
 gw_x_x_elemental_total_creatures
 gw_x_x_elemental_total_creatures
+wubrg_4_4_dragon
 c_a_clue_draw
 c_a_clue_draw
 c_x_x_a_construct

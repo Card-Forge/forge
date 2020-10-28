@@ -1,0 +1,19 @@
+Name:Sea Gate Restoration
+ManaCost:4 U U U
+Types:Sorcery
+A:SP$ Draw | Cost$ 4 U U U | NumCards$ X | References$ X | SubAbility$ DBEffect | SpellDescription$ Draw cards equal to the number of cards in your hand plus one. You have no maximum hand size for the rest of the game.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STHandSize | Duration$ Permanent | SpellDescription$ You have no maximum hand size for the rest of the game.
+SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size for the rest of the game.
+SVar:X:Count$NumCardsInYourHand/Plus.1
+AlternateMode:Modal
+Oracle:Draw cards equal to the number of cards in your hand plus one. You have no maximum hand size for the rest of the game.
+
+ALTERNATE
+
+Name:Sea Gate, Reborn
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:DBTap
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ PayLife<3> | UnlessPayer$ You | UnlessAI$ Shockland | StackDescription$ enters the battlefield tapped. | SpellDescription$ As CARDNAME enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+Oracle:As Sea Gate, Reborn enters the battlefield, you may pay 3 life. If you don’t, it enters the battlefield tapped.\n{T}: Add {U}.

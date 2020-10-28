@@ -4,6 +4,5 @@ Types:Creature Human
 PT:1/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/-2 until end of turn.
 A:AB$ Pump | Cost$ 1 R R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Mountainwalk | SpellDescription$ Target creature gains mountainwalk until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 1 | NumDef$ -2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cave_people.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ -2
 Oracle:Whenever Cave People attacks, it gets +1/-2 until end of turn.\n{1}{R}{R}, {T}: Target creature gains mountainwalk until end of turn. (It can't be blocked as long as defending player controls a Mountain.)

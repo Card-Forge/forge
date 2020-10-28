@@ -78,6 +78,16 @@ public class PrintSheet {
         return fetchRoulette(sum + 1, roulette, toSkip); // start over from beginning, in case last cards were to skip
     }
 
+    public List<PaperCard> all() {
+        List<PaperCard> result = new ArrayList<>();
+        for(Entry<PaperCard, Integer> kv : cardsWithWeights) {
+            for(int i = 0; i < kv.getValue(); i++) {
+                result.add(kv.getKey());
+            }
+        }
+        return result;
+    }
+
     public List<PaperCard> random(int number, boolean wantUnique) {
         List<PaperCard> result = new ArrayList<>();
 

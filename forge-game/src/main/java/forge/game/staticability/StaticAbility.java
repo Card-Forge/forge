@@ -216,6 +216,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         if (hasParam("Description") && !this.isSuppressed()) {
             String desc = getParam("Description");
             desc = TextUtil.fastReplace(desc, "CARDNAME", this.hostCard.getName());
+            desc = TextUtil.fastReplace(desc, "NICKNAME", this.hostCard.getName().split(",")[0]);
 
             return desc;
         } else {
@@ -674,7 +675,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             final String type = getParam("Presence");
 
             int revealed = AbilityUtils.calculateAmount(hostCard, "Revealed$Valid " + type, hostCard.getCastSA());
-            int ctrl = AbilityUtils.calculateAmount(hostCard, "Count$Valid " + type + ".inZoneBattlefield+YouCtrl", hostCard.getCastSA());
+            int ctrl = AbilityUtils.calculateAmount(hostCard, "Count$LastStateBattlefield " + type + ".YouCtrl", hostCard.getCastSA());
 
             if (revealed + ctrl == 0) {
                 return false;

@@ -1,0 +1,428 @@
+[metadata]
+Code=2XM
+Date=2020-08-07
+Name=Double Masters
+Type=Reprint
+BoosterCovers=3
+Booster=8 Common, 3 Uncommon, 2 RareMythic, 2 fromSheet("2XM Foils")
+Foil=NotSupported
+DoublePick=true
+ChaosDraftThemes=MASTERS_SET
+
+[cards]
+1 M Karn Liberated
+2 C Alabaster Mage
+3 C Ancestral Blade
+4 C Angel of the Dawn
+5 M Archangel of Thune
+6 U Auriok Salvagers
+7 R Austere Command
+8 M Avacyn, Angel of Hope
+9 R Blade Splicer
+10 R Boon Reflection
+11 R Council's Judgment
+12 C Crib Swap
+13 C Crusader of Odric
+14 R Ethersworn Canonist
+15 U Fencing Ace
+16 U Flickerwisp
+17 C Fortify
+18 C Glint-Sleeve Artisan
+19 R Kemba, Kha Regent
+20 M Land Tax
+21 R Leonin Abunas
+22 U Master Splicer
+23 U Myrsmith
+24 R Open the Vaults
+25 U Path to Exile
+26 R Puresteel Paladin
+27 C Remember the Fallen
+28 C Revoke Existence
+29 C Sanctum Gargoyle
+30 C Sanctum Spirit
+31 R Stoneforge Mystic
+32 R Stonehewer Giant
+33 C Strength of Arms
+34 R Tempered Steel
+35 C Thraben Inspector
+36 U Topple the Statue
+37 U Valor in Akros
+38 U Valorous Stance
+39 R Wrath of God
+40 C Apprentice Wizard
+41 M Arcum Dagsson
+42 C Argivian Restoration
+43 R Braids, Conjurer Adept
+44 C Brainstorm
+45 C Cloudreader Sphinx
+46 C Corridor Monitor
+47 R Cyclonic Rift
+48 R Deepglow Skate
+49 U Esperzoa
+50 C Faerie Mechanist
+51 M Force of Will
+52 C Frogify
+53 R Grand Architect
+54 U Hinder
+55 R Inkwell Leviathan
+56 M Jace, the Mind Sculptor
+57 R Master of Etherium
+58 R Master Transmuter
+59 C Metallic Rebuke
+60 C Parasitic Strix
+61 R Phyrexian Metamorph
+62 U Pongify
+63 C Relic Runner
+64 R Reshape
+65 U Riddlesmith
+66 U Rush of Knowledge
+67 U Sentinel of the Pearl Trident
+68 U Serra Sphinx
+69 C Sift
+70 C Steel Sabotage
+71 U Thirst for Knowledge
+72 R Thought Reflection
+73 U Treasure Mage
+74 C Vedalken Infuser
+75 R Well of Ideas
+76 R Ad Nauseam
+77 R Beacon of Unrest
+78 C Bone Picker
+79 C Cast Down
+80 C Costly Plunder
+81 M Dark Confidant
+82 R Death's Shadow
+83 C Defiant Salvager
+84 C Dire Fleet Hoarder
+85 R Disciple of Bolas
+86 U Disciple of the Vault
+87 C Divest
+88 R Doomed Necromancer
+89 U Dread Return
+90 C Driver of the Dead
+91 U Drown in Sorrow
+92 C Executioner's Capsule
+93 U Fatal Push
+94 M Geth, Lord of the Vault
+95 C Glaze Fiend
+96 C Heartless Pillage
+97 R Magus of the Abyss
+98 R Magus of the Will
+99 U Morkrut Banshee
+100 U Oubliette
+101 U Ovalchase Daredevil
+102 U Painsmith
+103 R Ravenous Trap
+104 R Salvage Titan
+105 C Silumgar Scavenger
+106 R Skirsdag High Priest
+107 M Skithiryx, the Blight Dragon
+108 C Supernatural Stamina
+109 R Thoughtseize
+110 R Toxic Deluge
+111 C Twisted Abomination
+112 U Vampire Hexmage
+113 R Wound Reflection
+114 C Abrade
+115 C Balduvian Rage
+116 C Battle-Rattle Shaman
+117 R Blasphemous Act
+118 R Blood Moon
+119 U Bloodshot Trainee
+120 U Brimstone Volley
+121 C Cathartic Reunion
+122 R Cragganwick Cremator
+123 U Dismantle
+124 R Dualcaster Mage
+125 U Galvanic Blast
+126 C Goblin Gaveleer
+127 R Goblin Guide
+128 R Godo, Bandit Warlord
+129 R Grim Lavamancer
+130 R Heat Shimmer
+131 M Imperial Recruiter
+132 R Ion Storm
+133 C Kazuul's Toll Collector
+134 U Kuldotha Flamefiend
+135 C Lightning Axe
+136 M Mana Echoes
+137 C Orcish Vandal
+138 U Pyrewild Shaman
+139 R Rage Reflection
+140 C Rapacious Dragon
+141 U Ravenous Intruder
+142 R Rolling Earthquake
+143 C Salivating Gremlins
+144 C Skinbrand Goblin
+145 M Sneak Attack
+146 C Temur Battle Rage
+147 U Thopter Engineer
+148 U Trash for Treasure
+149 R Tuktuk the Explorer
+150 C Weapon Surge
+151 C Ancient Stirrings
+152 M Avenger of Zendikar
+153 R Awakening Zone
+154 C Bloodbriar
+155 R Bloodspore Thrinax
+156 R Champion of Lambholt
+157 C Chatter of the Squirrel
+158 R Chord of Calling
+159 C Clear Shot
+160 C Conclave Naturalists
+161 U Crop Rotation
+162 C Crushing Vines
+163 C Death-Hood Cobra
+164 M Doubling Season
+165 C Elvish Aberration
+166 U Enlarge
+167 R Exploration
+168 C Fierce Empath
+169 U Gelatinous Genesis
+170 R Greater Good
+171 R Heartbeat of Spring
+172 U Invigorate
+173 C Kozilek's Predator
+174 R Liege of the Tangle
+175 R Mana Reflection
+176 C Might of the Masses
+177 R Noble Hierarch
+178 U Reclamation Sage
+179 R Shamanic Revelation
+180 U Skullmulcher
+181 C Sylvan Might
+182 R Terastodon
+183 R Thragtusk
+184 U Ulvenwald Mysteries
+185 M Vengevine
+186 U Veteran Explorer
+187 C Whisperer of the Wilds
+188 U Woodland Champion
+189 R Arixmethes, Slumbering Isle
+190 M Atraxa, Praetors' Voice
+191 R Baleful Strix
+192 M Breya, Etherium Shaper
+193 R Brudiclad, Telchor Engineer
+194 U Deathreap Ritual
+195 R Falkenrath Aristocrat
+196 R Fulminator Mage
+197 M Geist of Saint Traft
+198 U Ghor-Clan Rampager
+199 U Glassdust Hulk
+200 R Hanna, Ship's Navigator
+201 U Hidden Stockpile
+202 U Izzet Charm
+203 R Jhoira, Weatherlight Captain
+204 M Kaalia of the Vast
+205 M Karrthus, Tyrant of Jund
+206 M Maelstrom Nexus
+207 R Maelstrom Pulse
+208 U Manamorphose
+209 R Mazirek, Kraul Death Priest
+210 R Meddling Mage
+211 R Merciless Eviction
+212 R Progenitor Mimic
+213 R Rhys the Redeemed
+214 M Riku of Two Reflections
+215 R Savageborn Hydra
+216 M The Scarab God
+217 U Selesnya Guildmage
+218 M Sen Triplets
+219 R Sharuum the Hegemon
+220 U Sphinx Summoner
+221 R Swiftblade Vindicator
+222 U Thopter Foundry
+223 R Time Sieve
+224 U Unlicensed Disintegration
+225 R Vexing Shusher
+226 R Vish Kal, Blood Arbiter
+227 R Voice of Resurgence
+228 U Weapons Trainer
+229 U Yavimaya's Embrace
+230 C Accomplished Automaton
+231 R Adaptive Automaton
+232 U Basalt Monolith
+233 R Basilisk Collar
+234 M Batterskull
+235 M Blightsteel Colossus
+236 R Bosh, Iron Golem
+237 C Cathodion
+238 U Chief of the Foundry
+239 C Chromatic Star
+240 M Chrome Mox
+241 U Clone Shell
+242 U Cogwork Assembler
+243 R Conjurer's Closet
+244 U Coretapper
+245 U Cranial Plating
+246 U Culling Dais
+247 C Darksteel Axe
+248 M Darksteel Forge
+249 R Duplicant
+250 C Eager Construct
+251 R Endless Atlas
+252 R Engineered Explosives
+253 M Ensnaring Bridge
+254 C Everflowing Chalice
+255 C Expedition Map
+256 C Flayer Husk
+257 C Gleaming Barrier
+258 U Golem Artisan
+259 C Golem-Skin Gauntlets
+260 R Hammer of Nazahn
+261 C Ichor Wellspring
+262 C Iron Bully
+263 C Iron League Steed
+264 R Isochron Scepter
+265 U Jhoira's Familiar
+266 R Kuldotha Forgemaster
+267 U Lightning Greaves
+268 R Lux Cannon
+269 C Magnifying Glass
+270 M Mana Crypt
+271 R Masterwork of Ingenuity
+272 R Mesmeric Orb
+273 C Metalspinner's Puzzleknot
+274 U Mishra's Bauble
+275 M Mox Opal
+276 R Myr Battlesphere
+277 C Myr Retriever
+278 U O-Naginata
+279 R Oblivion Stone
+280 C Peace Strider
+281 U Pentad Prism
+282 R Phyrexian Revoker
+283 C Pyrite Spellbomb
+284 R Ratchet Bomb
+285 U Sandstone Oracle
+286 R Sculpting Steel
+287 C Sickleslicer
+288 C Skinwing
+289 R Spellskite
+290 U Sphinx of the Guildpact
+291 U Springleaf Drum
+292 R Sundering Titan
+293 R Sunforger
+294 C Surge Node
+295 M Sword of Body and Mind
+296 M Sword of Feast and Famine
+297 M Sword of Fire and Ice
+298 M Sword of Light and Shadow
+299 R Sword of the Meek
+300 M Sword of War and Peace
+301 U Throne of Geth
+302 U Treasure Keeper
+303 M Trinisphere
+304 C Tumble Magnet
+305 C Vulshok Gauntlets
+306 R Walking Ballista
+307 U Welding Jar
+308 M Wurmcoil Engine
+309 R Academy Ruins
+310 U Ash Barrens
+311 R Blinkmoth Nexus
+312 U Buried Ruin
+313 R Cascade Bluffs
+314 M Dark Depths
+315 U Darksteel Citadel
+316 R Fetid Heath
+317 R Fire-Lit Thicket
+318 R Flooded Grove
+319 R Glimmervoid
+320 R Graven Cairns
+321 R High Market
+322 R Maze of Ith
+323 U Mishra's Factory
+324 R Mystic Gate
+325 R Rugged Prairie
+326 R Sunken Ruins
+327 R Thespian's Stage
+328 R Twilight Mire
+329 C Urza's Mine
+330 C Urza's Power Plant
+331 C Urza's Tower
+332 R Wooded Bastion
+333 M Karn Liberated
+334 M Jace, the Mind Sculptor
+335 M Avacyn, Angel of Hope
+336 R Council's Judgment
+337 R Stoneforge Mystic
+338 R Brainstorm
+339 R Cyclonic Rift
+340 M Force of Will
+341 R Phyrexian Metamorph
+342 M Dark Confidant
+343 R Fatal Push
+344 R Thoughtseize
+345 R Toxic Deluge
+346 R Blood Moon
+347 R Goblin Guide
+348 M Sneak Attack
+349 R Crop Rotation
+350 M Doubling Season
+351 R Exploration
+352 R Noble Hierarch
+353 M Atraxa, Praetors' Voice
+354 M Kaalia of the Vast
+355 R Meddling Mage
+356 M Batterskull
+357 M Blightsteel Colossus
+358 M Chrome Mox
+359 R Expedition Map
+360 R Lightning Greaves
+361 M Mana Crypt
+362 M Mox Opal
+363 M Sword of Body and Mind
+364 M Sword of Feast and Famine
+365 M Sword of Fire and Ice
+366 M Sword of Light and Shadow
+367 M Sword of War and Peace
+368 M Wurmcoil Engine
+369 R Academy Ruins
+370 R Urza's Mine
+371 R Urza's Power Plant
+372 R Urza's Tower
+373 L Plains
+374 L Plains
+375 L Island
+376 L Island
+377 L Swamp
+378 L Swamp
+379 L Mountain
+380 L Mountain
+381 L Forest
+382 L Forest
+383 R Wrath of God
+384 R Chord of Calling
+
+[tokens]
+b_0_0_germ
+b_5_5_demon_flying
+c_0_1_eldrazi_spawn_sac
+c_1_1_a_myr
+c_1_1_a_servo
+c_1_1_a_thopter_flying
+c_1_1_shapeshifter_changeling
+c_3_3_a_golem
+c_3_3_a_wurm_deathtouch
+c_3_3_a_wurm_lifelink
+c_a_clue_draw
+c_a_treasure_sac
+g_0_1_plant
+g_1_1_saproling
+g_1_1_squirrel
+g_2_2_wolf
+g_3_3_ape
+g_3_3_beast
+g_3_3_elephant
+g_x_x_ooze
+gw_1_1_elf_warrior
+gw_x_x_elemental_total_creatures
+marit_lage
+tuktuk_the_returned
+u_1_1_a_thopter_flying
+u_2_1_a_myr
+w_1_1_human_soldier
+w_1_1_soldier
+w_2_2_cat
+w_4_4_angel_flying

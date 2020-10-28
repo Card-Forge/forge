@@ -17,10 +17,10 @@
  */
 package forge.game.replacement;
 
+import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
@@ -48,6 +48,7 @@ public class ReplaceDamage extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
+
         if (!(runParams.containsKey(AbilityKey.Prevention) == (hasParam("PreventionEffect") || hasParam("Prevent")))) {
             return false;
         }
@@ -97,12 +98,7 @@ public class ReplaceDamage extends ReplacementEffect {
             String full = getParam("DamageAmount");
             String operator = full.substring(0, 2);
             String operand = full.substring(2);
-            int intoperand = 0;
-            try {
-                intoperand = Integer.parseInt(operand);
-            } catch (NumberFormatException e) {
-                intoperand = CardFactoryUtil.xCount(getHostCard(), getHostCard().getSVar(operand));
-            }
+            int intoperand = AbilityUtils.calculateAmount(getHostCard(), operand, this);
 
             if (!Expressions.compare((Integer) runParams.get(AbilityKey.DamageAmount), operator, intoperand)) {
                 return false;
@@ -123,10 +119,15 @@ public class ReplaceDamage extends ReplacementEffect {
             return false;
         }
 
-        // check for DamageRedirection, the Thing where the damage is redirected to must be a creature or planeswalker or a player 
         if (hasParam("DamageTarget")) {
+            //Lava Burst and Whippoorwill check
+            SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
+            GameEntity affected = (GameEntity) runParams.get(AbilityKey.Affected);
+            if (((cause != null) && (cause.hasParam("NoRedirection")) || (affected.hasKeyword("Damage that would be dealt to CARDNAME can't be redirected.")))) {
+                return false;
+            }
+            // check for DamageRedirection, the Thing where the damage is redirected to must be a creature or planeswalker or a player
             String def = getParam("DamageTarget");
-
             for (Player p : AbilityUtils.getDefinedPlayers(hostCard, def, null)) {
                 if (!p.getGame().getPlayers().contains(p)) {
                     return false;

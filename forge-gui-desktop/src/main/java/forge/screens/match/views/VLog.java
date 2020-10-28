@@ -39,6 +39,7 @@ import forge.screens.match.GameLogPanel;
 import forge.screens.match.controllers.CLog;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinFont;
+import forge.util.Localizer;
 
 /**
  * Assembles Swing components of game log report.
@@ -56,7 +57,7 @@ public class VLog implements IVDoc<CLog> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Log");
+    private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblLog"));
 
     // Other fields
     private final GameLogPanel gameLog;

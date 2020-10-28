@@ -7,12 +7,14 @@ import forge.game.player.Player;
 import forge.item.IPaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
+import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 public class AltWinAchievements extends AchievementCollection {
     public static final AltWinAchievements instance = new AltWinAchievements();
 
     private AltWinAchievements() {
-        super("Alternate Win Conditions", ForgeConstants.ACHIEVEMENTS_DIR + "altwin.xml", false, ForgeConstants.ALTWIN_ACHIEVEMENT_LIST_FILE);
+        super("lblAlternateWinConditions", ForgeConstants.ACHIEVEMENTS_DIR + "altwin.xml", false, ForgeConstants.ALTWIN_ACHIEVEMENT_LIST_FILE);
     }
 
     @Override
@@ -40,6 +42,9 @@ public class AltWinAchievements extends AchievementCollection {
             }
 
             Achievement achievement = achievements.get(altWinCondition);
+            if (achievement == null) {
+                achievement = achievements.get("Emblem - " + altWinCondition); // indirectly winning through an emblem
+            }
             if (achievement != null) {
                 achievement.update(player);
                 save();
@@ -49,7 +54,7 @@ public class AltWinAchievements extends AchievementCollection {
 
     private class AltWinAchievement extends ProgressiveAchievement {
         private AltWinAchievement(String cardName0, String displayName0, String flavorText0) {
-            super(cardName0, displayName0, "Win a game with " + cardName0, flavorText0);
+            super(CardTranslation.getTranslatedName(cardName0), displayName0, Localizer.getInstance().getMessage("lblWinGameWithCard", CardTranslation.getTranslatedName(cardName0)), flavorText0);
         }
 
         @Override
@@ -64,7 +69,7 @@ public class AltWinAchievements extends AchievementCollection {
 
         @Override
         public String getNoun() {
-            return "Win";
+            return Localizer.getInstance().getMessage("lblWin");
         }
     }
 }

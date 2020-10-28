@@ -2,7 +2,6 @@ Name:Cursed Ronin
 ManaCost:3 B
 Types:Creature Human Samurai
 PT:1/1
-A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+A:AB$ Pump | Cost$ B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 K:Bushido:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_ronin.jpg
 Oracle:Bushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)\n{B}: Cursed Ronin gets +1/+1 until end of turn.

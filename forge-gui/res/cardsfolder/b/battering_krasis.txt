@@ -1,6 +1,6 @@
 Name:Battering Krasis
 ManaCost:2 G
-Types:Creature Fish Beast
+Types:Creature Shark Beast
 PT:2/1
 K:Evolve
 K:Trample

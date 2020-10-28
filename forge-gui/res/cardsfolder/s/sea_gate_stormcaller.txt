@@ -1,0 +1,16 @@
+Name:Sea Gate Stormcaller
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:2/1
+K:Kicker:4 U
+SVar:PlayMain1:TRUE
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notkicked | Execute$ TrigEffect | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, copy the next instant or sorcery spell with converted mana cost 2 or less you cast this turn when you cast it. You may choose new targets for the copy.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigEffectKicked | TriggerDescription$ When CARDNAME enters the battlefield, copy the next instant or sorcery spell with converted mana cost 2 or less you cast this turn when you cast it. If CARDNAME was kicked, copy that spell twice instead. You may choose new targets for the copies.
+SVar:TrigEffect:DB$ Effect | Triggers$ TrigCast | SVars$ TrigCopy
+SVar:TrigCast:Mode$ SpellCast | OneOff$ True | ValidActivatingPlayer$ You | ValidCard$ Instant.cmcLE2,Sorcery.cmcLE2 | TriggerZones$ Command | Execute$ TrigCopy | TriggerDescription$ Copy the next instant or sorcery spell with converted mana cost 2 or less you cast this turn when you cast it. You may choose new targets for the copy.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | AILogic$ Always
+SVar:TrigEffectKicked:DB$ Effect | Triggers$ TrigCastKicked | SVars$ TrigCopyKicked
+SVar:TrigCastKicked:Mode$ SpellCast | OneOff$ True | ValidActivatingPlayer$ You | ValidCard$ Instant.cmcLE2,Sorcery.cmcLE2 | TriggerZones$ Command | Execute$ TrigCopyKicked | TriggerDescription$ Copy the next instant or sorcery spell with converted mana cost 2 or less you cast this turn twice when you cast it. You may choose new targets for the copies.
+SVar:TrigCopyKicked:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | AILogic$ Always | Amount$ 2
+DeckNeeds:Type$Instant|Sorcery
+Oracle:Kicker {4}{U}\nWhen Sea Gate Stormcaller enters the battlefield, copy the next instant or sorcery spell with converted mana cost 2 or less you cast this turn when you cast it. If Sea Gate Stormcaller was kicked, copy that spell twice instead. You may choose new targets for the copies.

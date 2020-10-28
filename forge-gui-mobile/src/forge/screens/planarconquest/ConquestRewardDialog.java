@@ -101,17 +101,22 @@ public class ConquestRewardDialog extends FScrollPane {
 
         float startX = x;
         int cardCount = cardRevealers.size();
-        cardRevealers.get(0).setBounds(x, y, cardWidth, cardHeight);
-        for (int i = 1; i < cardCount; i++) {
-            if (i % columnCount == 0) {
-                x = startX;
-                y += cardHeight + PADDING;
+        try {
+            cardRevealers.get(0).setBounds(x, y, cardWidth, cardHeight);
+            for (int i = 1; i < cardCount; i++) {
+                if (i % columnCount == 0) {
+                    x = startX;
+                    y += cardHeight + PADDING;
+                }
+                else {
+                    x += cardWidth + PADDING;
+                }
+                cardRevealers.get(i).setBounds(x, y, cardWidth, cardHeight);
             }
-            else {
-                x += cardWidth + PADDING;
-            }
-            cardRevealers.get(i).setBounds(x, y, cardWidth, cardHeight);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
+
         return new ScrollBounds(visibleWidth, y + cardHeight + PADDING);
     }
 

@@ -1,0 +1,8 @@
+Name:Kazandu Nectarpot
+ManaCost:1 G
+Types:Creature Insect
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Landfall Whenever a land enters the battlefield under your control, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$LifeGain
+Oracle:Landfall — Whenever a land enters the battlefield under your control, you gain 1 life.

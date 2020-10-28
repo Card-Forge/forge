@@ -1,11 +1,17 @@
 package forge.interfaces;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Function;
+
 import forge.LobbyPlayer;
 import forge.assets.FSkinProp;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
@@ -14,16 +20,13 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 public interface IGuiGame {
     void setGameView(GameView gameView);
@@ -51,6 +54,7 @@ public interface IGuiGame {
     void updateStack();
     void notifyStackAddition(final GameEventSpellAbilityCast event);
     void notifyStackRemoval(final GameEventSpellRemovedFromStack event);
+    void handleLandPlayed(Card land, Zone zone);
     Iterable<PlayerZoneUpdate> tempShowZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate);
     void hideZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate);
     void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate);
@@ -62,7 +66,7 @@ public interface IGuiGame {
     void updateLives(Iterable<PlayerView> livesUpdate);
     void setPanelSelection(CardView hostCard);
     SpellAbilityView getAbilityToPlay(CardView hostCard, List<SpellAbilityView> abilities, ITriggerEvent triggerEvent);
-    Map<CardView, Integer> assignDamage(CardView attacker, List<CardView> blockers, int damage, GameEntityView defender, boolean overrideOrder);
+    Map<CardView, Integer> assignCombatDamage(CardView attacker, List<CardView> blockers, int damage, GameEntityView defender, boolean overrideOrder);
 
     void message(String message);
     void message(String message, String title);

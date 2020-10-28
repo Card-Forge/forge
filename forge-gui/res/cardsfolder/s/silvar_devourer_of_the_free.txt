@@ -1,0 +1,12 @@
+Name:Silvar, Devourer of the Free
+ManaCost:3 B R
+Types:Legendary Creature Cat Nightmare
+PT:4/2
+K:Partner:Trynn, Champion of Freedom:Trynn
+K:Menace
+A:AB$ PutCounter | Cost$ Sac<1/Human> | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on CARDNAME. It gains indestructible until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Indestructible
+DeckHints:Name$Trynn, Champion of Freedom & Type$Human
+DeckHas:Ability$Counters
+SVar:AIPreference:SacCost$Creature.Token+Human,Creature.Human+cmcLE2
+Oracle:Partner with Trynn, Champion of Freedom (When this creature enters the battlefield, target player may put Trynn into their hand from their library, then shuffle.)\nMenace\nSacrifice a Human: Put a +1/+1 counter on Silvar, Devourer of the Free. It gains indestructible until end of turn.

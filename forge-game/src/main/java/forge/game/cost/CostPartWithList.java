@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -45,7 +45,7 @@ public abstract class CostPartWithList extends CostPart {
     public final CardCollectionView getLKIList() {
         return lkiList;
     }
-    
+
     public final CardCollectionView getCardList() {
     	return cardList;
     }
@@ -61,13 +61,16 @@ public abstract class CostPartWithList extends CostPart {
 
     /**
      * Adds the list to hash.
-     * 
+     *
      * @param sa
      *            the sa
      * @param hash
      *            the hash
      */
     public final void reportPaidCardsTo(final SpellAbility sa) {
+        if (sa == null) {
+            return;
+        }
         final String lkiPaymentMethod = getHashForLKIList();
         for (final Card card : lkiList) {
             sa.addCostToHashList(card, lkiPaymentMethod);
@@ -77,18 +80,18 @@ public abstract class CostPartWithList extends CostPart {
             sa.addCostToHashList(card, cardPaymentMethod);
         }
     }
-    
-    // public abstract List<Card> getValidCards();  
+
+    // public abstract List<Card> getValidCards();
 
     /**
      * Instantiates a new cost part with list.
      */
     public CostPartWithList() {
     }
-    
+
     /**
      * Instantiates a new cost part with list.
-     * 
+     *
      * @param amount
      *            the amount
      * @param type
@@ -121,17 +124,19 @@ public abstract class CostPartWithList extends CostPart {
     }
 
     // always returns true, made this to inline with return
-    public boolean executePayment(SpellAbility ability, CardCollectionView targetCards) {
-        if (canPayListAtOnce()) { // This is used by reveal. Without it when opponent would reveal hand, you'll get N message boxes. 
-            lkiList.addAll(targetCards);
+    protected boolean executePayment(Player payer, SpellAbility ability, CardCollectionView targetCards) {
+        handleBeforePayment(payer, ability, targetCards);
+        if (canPayListAtOnce()) { // This is used by reveal. Without it when opponent would reveal hand, you'll get N message boxes.
+            for (Card c: targetCards) {
+                lkiList.add(CardUtil.getLKICopy(c));
+            }
             cardList.addAll(doListPayment(ability, targetCards));
-            handleChangeZoneTrigger(ability);
-            return true;
+        } else {
+            for (Card c : targetCards) {
+                executePayment(ability, c);
+            }
         }
-        for (Card c: targetCards) {
-            executePayment(ability, c);
-        }
-        handleChangeZoneTrigger(ability);
+        handleChangeZoneTrigger(payer, ability, targetCards);
         return true;
     }
 
@@ -152,15 +157,19 @@ public abstract class CostPartWithList extends CostPart {
      */
     public abstract String getHashForLKIList();
     public abstract String getHashForCardList();
-    
+
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
-        executePayment(ability, decision.cards);
+        executePayment(ai, ability, decision.cards);
         reportPaidCardsTo(ability);
         return true;
     }
 
-    protected void handleChangeZoneTrigger(SpellAbility ability) {
+    protected void handleBeforePayment(Player ai, SpellAbility ability, CardCollectionView targetCards) {
+
+    }
+
+    protected void handleChangeZoneTrigger(Player payer, SpellAbility ability, CardCollectionView targetCards) {
         if (table.isEmpty()) {
             return;
         }
@@ -168,7 +177,7 @@ public abstract class CostPartWithList extends CostPart {
         // copy table because the original get cleaned after the cost is done
         final CardZoneTable copyTable = new CardZoneTable();
         copyTable.putAll(table);
-        copyTable.triggerChangesZoneAll(ability.getHostCard().getGame());
+        copyTable.triggerChangesZoneAll(payer.getGame());
     }
 
 }

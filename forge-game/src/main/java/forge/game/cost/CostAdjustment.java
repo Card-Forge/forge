@@ -14,6 +14,7 @@ import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.Zone;
@@ -336,15 +337,12 @@ public class CostAdjustment {
             return;
         }
 
-        int value = 0;
-        if (StringUtils.isNumeric(amount)) {
-            value = Integer.parseInt(amount);
-        } else {
-            if ("Min3".equals(amount)) {
-                int cmc = manaCost.getConvertedManaCost();
-                if (cmc < 3) {
-                    value = 3 - cmc;
-                }
+        int value = Integer.parseInt(amount);
+
+        if (staticAbility.hasParam("RaiseTo")) {
+            int cmc = manaCost.getConvertedManaCost();
+            if (cmc < value) {
+                value = Integer.parseInt(amount) - cmc;
             }
         }
 
@@ -423,6 +421,7 @@ public class CostAdjustment {
         final Player controller = hostCard.getController();
         final Player activator = sa.getActivatingPlayer();
         final Card card = sa.getHostCard();
+        final Game game = hostCard.getGame();
 
         if (st.hasParam("ValidCard")
                 && !card.isValid(st.getParam("ValidCard").split(","), controller, hostCard, sa)) {
@@ -452,7 +451,19 @@ public class CostAdjustment {
                     if (activator == null ) {
                         return false;
                     }
-                    List<Card> list = CardUtil.getThisTurnCast(st.getParam("ValidCard"), hostCard);
+                    List<Card> list;
+                    if (st.hasParam("ValidCard")) {
+                        list = CardUtil.getThisTurnCast(st.getParam("ValidCard"), hostCard);
+                    } else {
+                        list = game.getStack().getSpellsCastThisTurn();
+                    }
+
+                    if (st.hasParam("ValidSpell")) {
+                        list = CardLists.filterAsList(list, CardPredicates.castSA(
+                            SpellAbilityPredicates.isValid(st.getParam("ValidSpell").split(","), controller, hostCard, sa))
+                        );
+                    }
+
                     if (CardLists.filterControlledBy(list, activator).size() > 0) {
                         return false;
                     }

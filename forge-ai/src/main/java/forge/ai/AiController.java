@@ -177,7 +177,7 @@ public class AiController {
                             && CardFactoryUtil.isCounterable(host)) {
                         return true;
                     } else if ("ChaliceOfTheVoid".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)
-                            && host.getCMC() == c.getCounters(CounterType.CHARGE)) {
+                            && host.getCMC() == c.getCounters(CounterEnumType.CHARGE)) {
                         return true;
                     }  else if ("BazaarOfWonders".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)) {
                         String hostName = host.getName();
@@ -769,7 +769,7 @@ public class AiController {
                 return AiPlayDecision.CantPlayAi;
             }
         }
-        else if (sa.getPayCosts() != null){
+        else {
             Cost payCosts = sa.getPayCosts();
             ManaCost mana = payCosts.getTotalMana();
             if (mana != null) {
@@ -858,7 +858,7 @@ public class AiController {
         int neededMana = 0;
         boolean dangerousRecurringCost = false;
 
-        Cost costWithBuyback = sa.getPayCosts() != null ? sa.getPayCosts().copy() : Cost.Zero;
+        Cost costWithBuyback = sa.getPayCosts().copy();
         for (OptionalCostValue opt : GameActionUtil.getOptionalCostValues(sa)) {
             if (opt.getType() == OptionalCost.Buyback) {
                 costWithBuyback.add(opt.getCost());
@@ -907,8 +907,8 @@ public class AiController {
         public int compare(final SpellAbility a, final SpellAbility b) {
             // sort from highest cost to lowest
             // we want the highest costs first
-            int a1 = a.getPayCosts() == null ? 0 : a.getPayCosts().getTotalMana().getCMC();
-            int b1 = b.getPayCosts() == null ? 0 : b.getPayCosts().getTotalMana().getCMC();
+            int a1 = a.getPayCosts().getTotalMana().getCMC();
+            int b1 = b.getPayCosts().getTotalMana().getCMC();
 
             // deprioritize SAs explicitly marked as preferred to be activated last compared to all other SAs
             if (a.hasParam("AIActivateLast") && !b.hasParam("AIActivateLast")) {
@@ -927,12 +927,12 @@ public class AiController {
             // deprioritize pump spells with pure energy cost (can be activated last,
             // since energy is generally scarce, plus can benefit e.g. Electrostatic Pummeler)
             int a2 = 0, b2 = 0;
-            if (a.getApi() == ApiType.Pump && a.getPayCosts() != null && a.getPayCosts().getCostEnergy() != null) {
+            if (a.getApi() == ApiType.Pump && a.getPayCosts().getCostEnergy() != null) {
                 if (a.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
                     a2 = a.getPayCosts().getCostEnergy().convertAmount();
                 }
             }
-            if (b.getApi() == ApiType.Pump && b.getPayCosts() != null && b.getPayCosts().getCostEnergy() != null) {
+            if (b.getApi() == ApiType.Pump && b.getPayCosts().getCostEnergy() != null) {
                 if (b.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
                     b2 = b.getPayCosts().getCostEnergy().convertAmount();
                 }
@@ -956,8 +956,7 @@ public class AiController {
                 return 1;
             }
 
-            if (a.getHostCard().equals(b.getHostCard()) && a.getApi() == b.getApi()
-                    && a.getPayCosts() != null && b.getPayCosts() != null) {
+            if (a.getHostCard().equals(b.getHostCard()) && a.getApi() == b.getApi()) {
                 // Cheaper Spectacle costs should be preferred
                 // FIXME: Any better way to identify that these are the same ability, one with Spectacle and one not?
                 // (looks like it's not a full-fledged alternative cost as such, and is not processed with other alt costs)
@@ -997,6 +996,10 @@ public class AiController {
                 // don't play equipments before having any creatures
                 if (source.isEquipment() && noCreatures) {
                     p -= 9;
+                }
+                // don't equip stuff in main 2 if there's more stuff to cast at the moment
+                if (sa.getApi() == ApiType.Attach && !sa.isCurse() && source.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                    p -= 1;
                 }
                 // 1. increase chance of using Surge effects
                 // 2. non-surged versions are usually inefficient
@@ -1479,7 +1482,7 @@ public class AiController {
                 }
 
                 for (SpellAbility sa : card.getSpellAbilities()) {
-                    if (sa.getPayCosts() != null && sa.isAbility()
+                    if (sa.isAbility()
                             && sa.getPayCosts().getCostMana() != null
                             && sa.getPayCosts().getCostMana().getMana().getCMC() > 0
                             && (!sa.getPayCosts().hasTapCost() || !isTapLand)
@@ -1802,7 +1805,7 @@ public class AiController {
         throw new UnsupportedOperationException("AI is not supposed to reach this code at the moment");
     }
 
-    public CardCollection chooseCardsForEffect(CardCollectionView pool, SpellAbility sa, int min, int max, boolean isOptional) {
+    public CardCollection chooseCardsForEffect(CardCollectionView pool, SpellAbility sa, int min, int max, boolean isOptional, Map<String, Object> params) {
         if (sa == null || sa.getApi() == null) {
             throw new UnsupportedOperationException();
         }
@@ -1835,7 +1838,7 @@ public class AiController {
             default:
                 CardCollection editablePool = new CardCollection(pool);
                 for (int i = 0; i < max; i++) {
-                    Card c = player.getController().chooseSingleEntityForEffect(editablePool, sa, null, isOptional);
+                    Card c = player.getController().chooseSingleEntityForEffect(editablePool, sa, null, isOptional, params);
                     if (c != null) {
                         result.add(c);
                         editablePool.remove(c);
@@ -1986,6 +1989,35 @@ public class AiController {
         return MyRandom.getRandom().nextBoolean();
     }
 
+    public boolean chooseEvenOdd(SpellAbility sa) {
+        String aiLogic = sa.getParamOrDefault("AILogic", "");
+
+        if (aiLogic.equals("AlwaysEven")) {
+            return false; // false is Even
+        } else if (aiLogic.equals("AlwaysOdd")) {
+            return true; // true is Odd
+        } else if (aiLogic.equals("Random")) {
+            return MyRandom.getRandom().nextBoolean();
+        } else if (aiLogic.equals("CMCInHand")) {
+            CardCollectionView hand = sa.getActivatingPlayer().getCardsIn(ZoneType.Hand);
+            int numEven = CardLists.filter(hand, CardPredicates.evenCMC()).size();
+            int numOdd = CardLists.filter(hand, CardPredicates.oddCMC()).size();
+            return numOdd > numEven;
+        } else if (aiLogic.equals("CMCOppControls")) {
+            CardCollectionView hand = sa.getActivatingPlayer().getOpponents().getCardsIn(ZoneType.Battlefield);
+            int numEven = CardLists.filter(hand, CardPredicates.evenCMC()).size();
+            int numOdd = CardLists.filter(hand, CardPredicates.oddCMC()).size();
+            return numOdd > numEven;
+        } else if (aiLogic.equals("CMCOppControlsByPower")) {
+            // TODO: improve this to check for how dangerous those creatures actually are relative to host card
+            CardCollectionView hand = sa.getActivatingPlayer().getOpponents().getCardsIn(ZoneType.Battlefield);
+            int powerEven = Aggregates.sum(CardLists.filter(hand, CardPredicates.evenCMC()), Accessors.fnGetNetPower);
+            int powerOdd = Aggregates.sum(CardLists.filter(hand, CardPredicates.oddCMC()), Accessors.fnGetNetPower);
+            return powerOdd > powerEven;
+        }
+        return MyRandom.getRandom().nextBoolean(); // outside of any specific logic, choose randomly
+    }
+
     public Card chooseCardToHiddenOriginChangeZone(ZoneType destination, List<ZoneType> origin, SpellAbility sa,
             CardCollection fetchList, Player player2, Player decider) {
         if (useSimulation) {
@@ -2071,9 +2103,9 @@ public class AiController {
         return filterList(list, CardTraitPredicates.hasParam("AiLogic", logic));
     }
 
-    public List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num, boolean allowRepeat) {
+    public List<AbilitySub> chooseModeForAbility(SpellAbility sa, List<AbilitySub> possible, int min, int num, boolean allowRepeat) {
         if (simPicker != null) {
-            return simPicker.chooseModeForAbility(sa, min, num, allowRepeat);
+            return simPicker.chooseModeForAbility(sa, possible, min, num, allowRepeat);
         }
         return null;
     }

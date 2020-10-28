@@ -40,7 +40,8 @@ public class ManifestEffect extends SpellAbilityEffect {
                     }
 
                     String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseCardToManifest") + " ";
-                    tgtCards = new CardCollection(activator.getController().chooseEntitiesForEffect(choices, amount, amount, null, sa, title, p));
+
+                    tgtCards = new CardCollection(activator.getController().chooseCardsForEffect(choices, sa, title, amount, amount, false, null));
                 } else if ("TopOfLibrary".equals(defined)) {
                     tgtCards = p.getTopXCardsFromLibrary(amount);
                 } else {

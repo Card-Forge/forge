@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.BitmapFontData;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.Glyph;
 import com.badlogic.gdx.graphics.g2d.PixmapPacker.Page;
 import com.badlogic.gdx.utils.Array;
+import forge.util.TextUtil;
 
 /**
  * This file is 'borrowed' from gdx-tools in the libgdx source
@@ -201,7 +202,7 @@ public class BitmapFontWriter {
             : " alphaChnl=0 redChnl=0 greenChnl=0 blueChnl=0";
 
         // INFO LINE
-        buf.append(xmlOpen).append("info face=\"").append(info.face == null ? "" : info.face.replaceAll("\"", "'"))
+        buf.append(xmlOpen).append("info face=\"").append(info.face == null ? "" : TextUtil.fastReplace(info.face,"\"", "'"))
             .append("\" size=").append(quote(info.size)).append(" bold=").append(quote(info.bold ? 1 : 0)).append(" italic=")
             .append(quote(info.italic ? 1 : 0)).append(" charset=\"").append(info.charset == null ? "" : info.charset)
             .append("\" unicode=").append(quote(info.unicode ? 1 : 0)).append(" stretchH=").append(quote(info.stretchH))

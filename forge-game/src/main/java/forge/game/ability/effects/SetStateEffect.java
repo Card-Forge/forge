@@ -8,7 +8,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -58,6 +58,7 @@ public class SetStateEffect extends SpellAbilityEffect {
         final boolean manifestUp = sa.hasParam("ManifestUp");
         final boolean hiddenAgenda = sa.hasParam("HiddenAgenda");
         final boolean optional = sa.hasParam("Optional");
+        final CardCollection transformedCards = new CardCollection();
 
         GameEntityCounterTable table = new GameEntityCounterTable();
 
@@ -76,7 +77,7 @@ public class SetStateEffect extends SpellAbilityEffect {
             if ("TurnFace".equals(mode) && tgt.isFaceDown() && tgt.isInZone(ZoneType.Battlefield)
                 && !tgt.getState(CardStateName.Original).getType().isPermanent()) {
                 Card lki = CardUtil.getLKICopy(tgt);
-                lki.turnFaceUp(true, false);
+                lki.forceTurnFaceUp();
                 game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, Localizer.getInstance().getMessage("lblFaceDownCardCantTurnFaceUp"));
 
                 continue;
@@ -106,11 +107,11 @@ public class SetStateEffect extends SpellAbilityEffect {
 
             boolean hasTransformed = false;
             if (morphUp) {
-                hasTransformed = tgt.turnFaceUp();
+                hasTransformed = tgt.turnFaceUp(sa);
             } else if (manifestUp) {
-                hasTransformed = tgt.turnFaceUp(true, true);
+                hasTransformed = tgt.turnFaceUp(true, true, sa);
             } else {
-                hasTransformed = tgt.changeCardState(mode, sa.getParam("NewState"));
+                hasTransformed = tgt.changeCardState(mode, sa.getParam("NewState"), sa);
             }
             if ( hasTransformed ) {
                 if (morphUp) {
@@ -125,13 +126,17 @@ public class SetStateEffect extends SpellAbilityEffect {
                 }
                 game.fireEvent(new GameEventCardStatsChanged(tgt));
                 if (sa.hasParam("Mega")) {
-                    tgt.addCounter(CounterType.P1P1, 1, p, true, table);
+                    tgt.addCounter(CounterEnumType.P1P1, 1, p, true, table);
                 }
                 if (remChanged) {
                     host.addRemembered(tgt);
                 }
+                transformedCards.add(tgt);
             }
         }
         table.triggerCountersPutAll(game);
+        if (!transformedCards.isEmpty()) {
+            game.getAction().reveal(transformedCards, p, true, "Transformed cards in ");
+        }
     }
 }

@@ -110,3 +110,8 @@ WAR: 36 Boosters
 MH1: 36 Boosters
 M20: 36 Boosters
 ELD: 36 Boosters
+THB: 36 Boosters
+MB1: 24 Boosters
+IKO: 36 Boosters
+M21: 36 Boosters
+ZNR: 36 Boosters

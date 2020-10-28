@@ -1,0 +1,8 @@
+Name:Dire Fleet Warmonger
+ManaCost:1 B R
+Types:Creature Orc Pirate
+PT:3/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, you may sacrifice another creature. If you do, CARDNAME gets +2/+2 and gains trample until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | KW$ Trample
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE1
+Oracle:At the beginning of combat on your turn, you may sacrifice another creature. If you do, Dire Fleet Warmonger gets +2/+2 and gains trample until end of turn. (It can deal excess combat damage to the player or planeswalker it's attacking.)

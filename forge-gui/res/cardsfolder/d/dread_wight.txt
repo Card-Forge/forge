@@ -2,7 +2,7 @@ Name:Dread Wight
 ManaCost:3 B B
 Types:Creature Zombie
 PT:3/4
-T:Mode$ Phase | Phase$ EndCombat | Execute$ TrigCounter | TriggerDescription$ At end of combat, put a paralyzation counter on each creature blocking or blocked by CARDNAME and tap those creatures. Each of those creatures doesn't untap during its controller's untap step for as long as it has a paralyzation counter on it. Each of those creatures gains "{4}: Remove a paralyzation counter from this creature."
+T:Mode$ Phase | Phase$ EndCombat | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ At end of combat, put a paralyzation counter on each creature blocking or blocked by CARDNAME and tap those creatures. Each of those creatures doesn't untap during its controller's untap step for as long as it has a paralyzation counter on it. Each of those creatures gains "{4}: Remove a paralyzation counter from this creature."
 SVar:TrigCounter:DB$ PutCounterAll | CounterType$ PARALYZATION | CounterNum$ 1 | ValidCards$ Creature.blockedBySource,Creature.blockingSource | SubAbility$ DBTap
 SVar:DBTap:DB$ TapAll | ValidCards$ Creature.blockedBySource,Creature.blockingSource | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Valid Creature.blockedBySource,Valid Creature.blockingSource | StaticAbilities$ DontUntap | Duration$ Permanent | ConditionPresent$ Creature.blockedBySource,Creature.blockingSource | SubAbility$ DBAnimate | ForgetOnMoved$ Battlefield | ForgetCounter$ PARALYZATION

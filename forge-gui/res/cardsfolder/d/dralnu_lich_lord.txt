@@ -3,9 +3,8 @@ ManaCost:3 U B
 Types:Legendary Creature Zombie Wizard
 PT:3/3
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ Sac | Description$ If damage would be dealt to CARDNAME, sacrifice that many permanents instead.
-SVar:Sac:DB$Sacrifice | Defined$ You | SacValid$ Permanent | SacMessage$ Permanent | Amount$ X | References$ X
+SVar:Sac:DB$ Sacrifice | Defined$ You | SacValid$ Permanent | SacMessage$ Permanent | Amount$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount
-A:AB$Pump | Cost$ T | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | KW$ Flashback | TgtZone$ Graveyard | PumpZone$ Graveyard | SpellDescription$ Target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost. (You may cast that card from your graveyard for its flashback cost. Then exile it.)
+A:AB$ Pump | Cost$ T | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | KW$ Flashback | TgtZone$ Graveyard | PumpZone$ Graveyard | SpellDescription$ Target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost. (You may cast that card from your graveyard for its flashback cost. Then exile it.)
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dralnu_lich_lord.jpg
 Oracle:If damage would be dealt to Dralnu, Lich Lord, sacrifice that many permanents instead.\n{T}: Target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost. (You may cast that card from your graveyard for its flashback cost. Then exile it.)

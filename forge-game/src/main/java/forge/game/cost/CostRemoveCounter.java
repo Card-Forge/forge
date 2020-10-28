@@ -21,6 +21,7 @@ import com.google.common.collect.Lists;
 
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -82,7 +83,7 @@ public class CostRemoveCounter extends CostPartWithList {
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
-        if (this.counter == CounterType.LOYALTY) {
+        if (this.counter.is(CounterEnumType.LOYALTY)) {
             sb.append("-").append(this.getAmount());
         } else {
             sb.append("Remove ");

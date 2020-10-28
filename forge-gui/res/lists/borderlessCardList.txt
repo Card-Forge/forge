@@ -1,0 +1,127 @@
+2XM/Academy Ruins2.fullborder
+2XM/Atraxa, Praetors' Voice2.fullborder
+2XM/Avacyn, Angel of Hope2.fullborder
+2XM/Batterskull2.fullborder
+2XM/Blightsteel Colossus2.fullborder
+2XM/Blood Moon2.fullborder
+2XM/Brainstorm2.fullborder
+2XM/Chrome Mox2.fullborder
+2XM/Council's Judgment2.fullborder
+2XM/Crop Rotation2.fullborder
+2XM/Cyclonic Rift2.fullborder
+2XM/Dark Confidant2.fullborder
+2XM/Doubling Season2.fullborder
+2XM/Expedition Map2.fullborder
+2XM/Exploration2.fullborder
+2XM/Fatal Push2.fullborder
+2XM/Force of Will2.fullborder
+2XM/Goblin Guide2.fullborder
+2XM/Jace, the Mind Sculptor2.fullborder
+2XM/Kaalia of the Vast2.fullborder
+2XM/Karn Liberated2.fullborder
+2XM/Lightning Greaves2.fullborder
+2XM/Mana Crypt2.fullborder
+2XM/Meddling Mage2.fullborder
+2XM/Mox Opal2.fullborder
+2XM/Noble Hierarch2.fullborder
+2XM/Phyrexian Metamorph2.fullborder
+2XM/Sneak Attack2.fullborder
+2XM/Stoneforge Mystic2.fullborder
+2XM/Sword of Body and Mind2.fullborder
+2XM/Sword of Feast and Famine2.fullborder
+2XM/Sword of Fire and Ice2.fullborder
+2XM/Sword of Light and Shadow2.fullborder
+2XM/Sword of War and Peace2.fullborder
+2XM/Thoughtseize2.fullborder
+2XM/Toxic Deluge2.fullborder
+2XM/Urza's Mine2.fullborder
+2XM/Urza's Power Plant2.fullborder
+2XM/Urza's Tower2.fullborder
+2XM/Wurmcoil Engine2.fullborder
+ELD/Garruk, Cursed Huntsman2.fullborder
+ELD/Oko, Thief of Crowns2.fullborder
+ELD/The Royal Scions2.fullborder
+IKO/Brokkos, Apex of Forever2.fullborder
+IKO/Brokkos, Apex of Forever3.fullborder
+IKO/Crystalline Giant3.fullborder
+IKO/Cubwarden2.fullborder
+IKO/Dirge Bat2.fullborder
+IKO/Dirge Bat3.fullborder
+IKO/Everquill Phoenix2.fullborder
+IKO/Everquill Phoenix3.fullborder
+IKO/Gemrazer2.fullborder
+IKO/Gemrazer3.fullborder
+IKO/Gyruda, Doom of Depths3.fullborder
+IKO/Huntmaster Liger2.fullborder
+IKO/Huntmaster Liger3.fullborder
+IKO/Illuna, Apex of Wishes2.fullborder
+IKO/Illuna, Apex of Wishes3.fullborder
+IKO/Indatha Triome2.fullborder
+IKO/Ketria Triome2.fullborder
+IKO/Lukka, Coppercoat Outcast2.fullborder
+IKO/Luminous Broodmoth3.fullborder
+IKO/Mysterious Egg2.fullborder
+IKO/Narset of the Ancient Way2.fullborder
+IKO/Nethroi, Apex of Death2.fullborder
+IKO/Nethroi, Apex of Death3.fullborder
+IKO/Pollywog Symbiote2.fullborder
+IKO/Raugrin Triome2.fullborder
+IKO/Savai Triome2.fullborder
+IKO/Sea-Dasher Octopus2.fullborder
+IKO/Snapdax, Apex of the Hunt2.fullborder
+IKO/Snapdax, Apex of the Hunt3.fullborder
+IKO/Sprite Dragon3.fullborder
+IKO/Titanoth Rex2.fullborder
+IKO/Vadrok, Apex of Thunder2.fullborder
+IKO/Vadrok, Apex of Thunder3.fullborder
+IKO/Vivien, Monsters' Advocate2.fullborder
+IKO/Void Beckoner2.fullborder
+IKO/Yidaro, Wandering Monster3.fullborder
+IKO/Zagoth Triome2.fullborder
+IKO/Zilortha, Strength Incarnate.fullborder
+M21/Basri Ket2.fullborder
+M21/Chandra, Heart of Fire2.fullborder
+M21/Containment Priest2.fullborder
+M21/Cultivate2.fullborder
+M21/Garruk, Unleashed2.fullborder
+M21/Grim Tutor2.fullborder
+M21/Liliana, Waker of the Dead2.fullborder
+M21/Massacre Wurm2.fullborder
+M21/Scavenging Ooze2.fullborder
+M21/Solemn Simulacrum2.fullborder
+M21/Teferi, Master of Time2.fullborder
+M21/Ugin, the Spirit Dragon2.fullborder
+M21/Ugin, the Spirit Dragon3.fullborder
+PLGS/Hangarback Walker.fullborder
+SLD/Acidic Slime.fullborder
+SLD/Captain Sisay.fullborder
+SLD/Meren of Clan Nel Toth.fullborder
+SLD/Narset, Enlightened Master.fullborder
+SLD/Necrotic Ooze.fullborder
+SLD/Oona, Queen of the Fae.fullborder
+SLD/Saskia the Unyielding.fullborder
+SLD/The Mimeoplasm.fullborder
+SLD/Voidslime.fullborder
+THB/Ashiok, Nightmare Muse2.fullborder
+THB/Calix, Destiny's Hand2.fullborder
+THB/Elspeth, Sun's Nemesis2.fullborder
+UST/Forest.fullborder
+UST/Island.fullborder
+UST/Mountain.fullborder
+UST/Plains.fullborder
+UST/Swamp.fullborder
+ZNR/Boulderloft Pathway2.fullborder
+ZNR/Branchloft Pathway2.fullborder
+ZNR/Brightclimb Pathway2.fullborder
+ZNR/Clearwater Pathway2.fullborder
+ZNR/Cragcrown Pathway2.fullborder
+ZNR/Grimclimb Pathway2.fullborder
+ZNR/Jace, Mirror Mage2.fullborder
+ZNR/Lavaglide Pathway2.fullborder
+ZNR/Murkwater Pathway2.fullborder
+ZNR/Nahiri, Heir of the Ancients2.fullborder
+ZNR/Needleverge Pathway2.fullborder
+ZNR/Nissa of Shadowed Boughs2.fullborder
+ZNR/Pillarverge Pathway2.fullborder
+ZNR/Riverglide Pathway2.fullborder
+ZNR/Timbercrown Pathway2.fullborder

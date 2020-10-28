@@ -210,6 +210,24 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         this.layer = layer0;
     }
 
+    public String getDescription() {
+        if (hasParam("Description") && !this.isSuppressed()) {
+            String desc = AbilityUtils.applyDescriptionTextChangeEffects(getParam("Description"), this);
+            if (desc.contains("CARDNAME")) {
+                desc = TextUtil.fastReplace(desc, "CARDNAME", getHostCard().toString());
+            }
+            if (desc.contains("EFFECTSOURCE")) {
+                desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().toString());
+            }
+            if (desc.contains("NICKNAME")) {
+                desc = TextUtil.fastReplace(desc, "NICKNAME", getHostCard().toString().split(",")[0]);
+            }
+            return desc;
+        } else {
+            return "";
+        }
+    }
+
     /**
      * To string.
      *
@@ -217,15 +235,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      */
     @Override
     public String toString() {
-        if (hasParam("Description") && !this.isSuppressed()) {
-            String desc = AbilityUtils.applyDescriptionTextChangeEffects(getParam("Description"), this);
-            if (desc.contains("CARDNAME")) {
-                desc = TextUtil.fastReplace(desc, "CARDNAME", getHostCard().toString());
-            }
-            return desc;
-        } else {
-            return "";
-        }
+        return getHostCard().toString() + " - " + getDescription();
     }
 
     /** {@inheritDoc} */

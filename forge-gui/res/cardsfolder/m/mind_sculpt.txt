@@ -1,6 +1,5 @@
 Name:Mind Sculpt
 ManaCost:1 U
 Types:Sorcery
-A:SP$ Mill | Cost$ 1 U | NumCards$ 7 | ValidTgts$ Opponent | SpellDescription$ Target opponent puts the top seven cards of their library into their graveyard.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_sculpt.jpg
-Oracle:Target opponent puts the top seven cards of their library into their graveyard.
+A:SP$ Mill | Cost$ 1 U | NumCards$ 7 | ValidTgts$ Opponent | SpellDescription$ Target opponent mills seven cards.
+Oracle:Target opponent mills seven cards.

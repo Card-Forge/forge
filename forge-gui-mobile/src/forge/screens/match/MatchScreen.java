@@ -9,6 +9,7 @@ import java.util.Set;
 
 import com.badlogic.gdx.graphics.Color;
 
+import forge.screens.match.winlose.ViewWinLose;
 import forge.util.Localizer;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -78,14 +79,20 @@ public class MatchScreen extends FScreen {
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
     private AbilityEffect activeEffect;
 
+    private ViewWinLose viewWinLose = null;
+
     public MatchScreen(List<VPlayerPanel> playerPanels0) {
         super(new FMenuBar());
 
         scroller = add(new FieldScroller());
 
+        int humanCount = 0;
+
         for (VPlayerPanel playerPanel : playerPanels0) {
             playerPanels.put(playerPanel.getPlayer(), scroller.add(playerPanel));
             playerPanel.setFlipped(true);
+            if(!playerPanel.getPlayer().isAI())
+                humanCount++;
         }
         bottomPlayerPanel = playerPanels0.get(0);
         bottomPlayerPanel.setFlipped(false);
@@ -110,10 +117,10 @@ public class MatchScreen extends FScreen {
                     }
                 }));
 
-        if (MatchController.instance.getLocalPlayerCount() <= 1 || MatchController.instance.hotSeatMode()) {
+        if (humanCount < 2 || MatchController.instance.hotSeatMode() || GuiBase.isNetworkplay())
             topPlayerPrompt = null;
-        }
-        else { //show top prompt if multiple human players and not playing in Hot Seat mode
+        else {
+            //show top prompt if multiple human players and not playing in Hot Seat mode and not in network play
             topPlayerPrompt = add(new VPrompt("", "",
                     new FEventHandler() {
                         @Override
@@ -288,6 +295,14 @@ public class MatchScreen extends FScreen {
         return topPlayerPanel;
     }
 
+    public void setViewWinLose( ViewWinLose viewWinLose ){
+        this.viewWinLose = viewWinLose;
+    }
+
+    public ViewWinLose getViewWinLose() {
+        return viewWinLose;
+    }
+
     public VPlayerPanel getBottomPlayerPanel() {
         return bottomPlayerPanel;
     }
@@ -339,6 +354,32 @@ public class MatchScreen extends FScreen {
     protected void drawOverlay(Graphics g) {
         final GameView game = MatchController.instance.getGameView();
         if (game == null) { return; }
+
+        if(gameMenu!=null) {
+             if(gameMenu.getChildCount()>3){
+                 if(viewWinLose == null) {
+                     gameMenu.getChildAt(0).setEnabled(!game.isMulligan());
+                     gameMenu.getChildAt(1).setEnabled(!game.isMulligan());
+                     gameMenu.getChildAt(2).setEnabled(!game.isMulligan());
+                     gameMenu.getChildAt(3).setEnabled(!game.isMulligan());
+                     gameMenu.getChildAt(4).setEnabled(false);
+                 } else {
+                     gameMenu.getChildAt(0).setEnabled(false);
+                     gameMenu.getChildAt(1).setEnabled(false);
+                     gameMenu.getChildAt(2).setEnabled(false);
+                     gameMenu.getChildAt(3).setEnabled(false);
+                     gameMenu.getChildAt(4).setEnabled(true);
+                 }
+             }
+        }
+        if(devMenu!=null) {
+            if(devMenu.isVisible()){
+                if(viewWinLose == null)
+                    devMenu.setEnabled(true);
+                else
+                    devMenu.setEnabled(false);
+            }
+        }
 
         //draw arrows for paired cards
         Set<CardView> pairedCards = new HashSet<>();
@@ -477,6 +518,20 @@ public class MatchScreen extends FScreen {
         }
     }
 
+    public void resetFields() {
+        CardAreaPanel.resetForNewGame();
+        for (VPlayerPanel playerPanel : getPlayerPanels().values()) {
+            for (CardAreaPanel p : playerPanel.getField().getCardPanels()){
+                p.reset();
+            }
+            playerPanel.getZoneTab(ZoneType.Hand).getDisplayArea().clear();
+            playerPanel.getZoneTab(ZoneType.Library).getDisplayArea().clear();
+            playerPanel.getZoneTab(ZoneType.Graveyard).getDisplayArea().clear();
+            playerPanel.getZoneTab(ZoneType.Exile).getDisplayArea().clear();
+
+        }
+    }
+
     public void updateZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
         for (final PlayerZoneUpdate update : zonesToUpdate) {
             final PlayerView owner = update.getPlayer();
@@ -561,6 +616,10 @@ public class MatchScreen extends FScreen {
             float x = 0;
             float y;
             float w = getWidth();
+            Color color = Color.CYAN;
+            GameView game = MatchController.instance.getGameView();
+            CombatView combat = game.getCombat();
+            PlayerView currentPlayer = MatchController.instance.getCurrentPlayer();
 
             //field separator lines
             if (!Forge.isLandscapeMode()) {
@@ -587,17 +646,36 @@ public class MatchScreen extends FScreen {
 
             //Draw Priority Human Multiplayer 2 player
             float oldAlphaComposite = g.getfloatAlphaComposite();
+            //TODO: support up to 4 players
             if ((getPlayerPanels().keySet().size() == 2) && (countHuman() == 2)){
                 for (VPlayerPanel playerPanel: playerPanelsList){
                     midField = playerPanel.getTop();
                     y = midField - 0.5f;
                     float adjustY = Forge.isLandscapeMode() ? y + 1f : midField;
                     float adjustH = Forge.isLandscapeMode() ? playerPanel.getField().getBottom() - 1f : playerPanel.getBottom() - 1f;
-                    if(playerPanel.getPlayer().getHasPriority() && !playerPanel.getPlayer().isAI())
+
+                    if(playerPanel.getPlayer().getHasPriority())
                         g.setAlphaComposite(0.8f);
                     else
                         g.setAlphaComposite(0f);
-                    g.drawRect(4f, Color.CYAN, playerPanel.getField().getLeft(), adjustY, playerPanel.getField().getWidth(), adjustH);
+
+                    if(game!= null) {
+                        if(combat!=null) {
+                            //hide rectangle
+                            if(playerPanel.getPlayer() == currentPlayer)
+                                g.setAlphaComposite(0.8f);
+                            else
+                                g.setAlphaComposite(0f);
+                            //color rectangle
+                            if(playerPanel.getPlayer() == game.getPlayerTurn())
+                                color = Color.RED; //attacking player
+                            else
+                                color = Color.LIME; //defending player
+                        } else {
+                            color = Color.CYAN;
+                        }
+                    }
+                    g.drawRect(4f, color, playerPanel.getField().getLeft(), adjustY, playerPanel.getField().getWidth(), adjustH);
                     g.setAlphaComposite(oldAlphaComposite);
                 }
             }

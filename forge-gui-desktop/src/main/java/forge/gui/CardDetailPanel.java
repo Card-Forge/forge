@@ -96,6 +96,8 @@ public class CardDetailPanel extends SkinnedPanel {
         cdArea.setFont(new Font("Dialog", 0, fontSizeR12));
         cdArea.setBorder(new EmptyBorder(2, 6, 2, 6));
         cdArea.setOpaque(false);
+        cdArea.setFocusable(true);
+        cdArea.getAccessibleContext().setAccessibleName("Card textbox");
         scrArea = new FScrollPane(cdArea, false);
 
         add(nameCostLabel);
@@ -202,7 +204,7 @@ public class CardDetailPanel extends SkinnedPanel {
         } else {
             final String manaCost;
             if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && card.getZone() != ZoneType.Stack) { //only display current state's mana cost when on stack
-                manaCost = card.getCurrentState().getManaCost() + " // " + card.getAlternateState().getManaCost();
+                manaCost = card.getLeftSplitState().getManaCost() + " // " + card.getAlternateState().getManaCost();
             } else {
                 manaCost = state.getManaCost().toString();
             }
@@ -254,7 +256,7 @@ public class CardDetailPanel extends SkinnedPanel {
         idLabel.setText(mayView ? CardDetailUtil.formatCardId(state) : "");
 
         // fill the card text
-        cdArea.setText(FSkin.encodeSymbols(CardDetailUtil.composeCardText(state, gameView, mayView), true));
+        cdArea.setText(FSkin.encodeSymbols(CardDetailUtil.composeCardText( card.isSplitCard() && !isInAltState ? card.getLeftSplitState() : state, gameView, mayView), true));
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {

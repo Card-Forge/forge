@@ -1,0 +1,7 @@
+Name:Angel Warrior
+ManaCost:no cost
+Types:Creature Angel Warrior
+Colors:white
+PT:4/4
+K:Flying
+Oracle:Flying

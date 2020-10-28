@@ -2,8 +2,7 @@ Name:Deadeye Tormentor
 ManaCost:2 B
 Types:Creature Human Pirate
 PT:2/2
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | CheckSVar$ RaidTest | Execute$ TrigDiscard | References$ RaidTest | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked with a creature this turn, target opponent discards a card.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | CheckSVar$ RaidTest | Execute$ TrigDiscard | References$ RaidTest | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked this turn, target opponent discards a card.
 SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose
 SVar:RaidTest:Count$AttackersDeclared
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deadeye_tormentor.jpg
-Oracle:Raid — When Deadeye Tormentor enters the battlefield, if you attacked with a creature this turn, target opponent discards a card.
+Oracle:Raid — When Deadeye Tormentor enters the battlefield, if you attacked this turn, target opponent discards a card.

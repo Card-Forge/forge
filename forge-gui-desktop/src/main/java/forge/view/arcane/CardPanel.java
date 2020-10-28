@@ -96,6 +96,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private boolean isAnimationPanel;
     private int cardXOffset, cardYOffset, cardWidth, cardHeight;
     private boolean isSelected;
+    private boolean hasFlash;
     private CachedCardImage cachedImage;
 
     private static Font smallCounterFont;
@@ -283,6 +284,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             g2d.setColor(Color.green);
             final int n = Math.max(1, Math.round(cardWidth * CardPanel.SELECTED_BORDER_SIZE));
             g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n , cornerSize + n);
+        } else if (hasFlash && (getCard() != null && matchUI.mayView(getCard()))) {
+            g2d.setColor(Color.cyan);
+            final int n = Math.max(1, Math.round(cardWidth * CardPanel.SELECTED_BORDER_SIZE));
+            g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n , cornerSize + n);
         }
 
         // Black fill - (will become an outline for white bordered cards)
@@ -457,7 +462,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                     PaperCard pc = StaticData.instance().getCommonCards().getCard(card.getName());
                     int ofs = pc != null && Card.getCardForUi(pc).hasKeyword(Keyword.AFTERMATH) ? -12 : 12;
 
-                    drawManaCost(g, card.getCurrentState().getManaCost(), ofs);
+                    drawManaCost(g, card.getLeftSplitState().getManaCost(), ofs);
                     drawManaCost(g, card.getAlternateState().getManaCost(), -ofs);
                 }
             }
@@ -512,6 +517,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         int abiX = cardXOffset + (cardWidth / 2) + (cardWidth / 3);
         int abiSpace = (cardWidth / 7);
         int abiY = cardWidth < 200 ? cardYOffset + 25 : cardYOffset + 50;
+        hasFlash = false;
         if (ZoneType.Battlefield.equals(card.getZone()) && showAbilityIcons()){
             if (card.getCurrentState().hasFlying()) {
                 CardFaceSymbols.drawAbilitySymbol("flying", g, abiX, abiY, abiScale, abiScale);
@@ -679,6 +685,17 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 else if (card.getCurrentState().getProtectionKey().contains("generic") || card.getCurrentState().getProtectionKey().length() > 2) {
                     CardFaceSymbols.drawAbilitySymbol("protectGeneric", g, abiX, abiY, abiScale, abiScale);
                     abiY += abiSpace;
+                }
+            }
+        } else if (!ZoneType.Battlefield.equals(card.getZone()) && showAbilityIcons()){
+            String keywordKey = card.getCurrentState().getKeywordKey();
+            String abilityText = card.getCurrentState().getAbilityText();
+            if ((keywordKey.indexOf("Flash") != -1)
+                    || ((abilityText.indexOf("May be played by") != -1)
+                    && (abilityText.indexOf("and as though it has flash") != -1))){
+                if (keywordKey.indexOf("Flashback") == -1) {
+                    hasFlash = !card.isFaceDown();
+                    CardFaceSymbols.drawAbilitySymbol("flash", g, cardXOffset + (cardWidth / 2) + (cardWidth / 3), cardWidth < 200 ? cardYOffset + 25 : cardYOffset + 50, cardWidth / 7, cardWidth / 7);
                 }
             }
         }
@@ -870,7 +887,14 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         // Card name overlay
         titleText.setText(CardTranslation.getTranslatedName(card.getCurrentState().getName()));
-
+        // Screen readers can't tell if a card is tapped.
+        if (isPreferenceEnabled(FPref.UI_SR_OPTIMIZE)) {
+                if (this.isTapped()) {
+                    titleText.getAccessibleContext().setAccessibleDescription("tapped");
+                } else {
+                    titleText.getAccessibleContext().setAccessibleDescription("");
+                }
+            }
         final int damage = card.getDamage();
         damageText.setText(damage > 0 ? "\u00BB " + damage + " \u00AB" : "");
 

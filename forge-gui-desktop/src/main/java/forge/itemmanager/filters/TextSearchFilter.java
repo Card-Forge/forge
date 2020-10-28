@@ -8,6 +8,7 @@ import forge.itemmanager.ItemManager;
 import forge.itemmanager.SFilterUtil;
 import forge.toolbox.FTextField;
 import forge.toolbox.LayoutHelper;
+import forge.util.Localizer;
 
 import javax.swing.*;
 
@@ -60,7 +61,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
 
     @Override
     protected void buildWidget(JPanel widget) {
-        txtSearch = new FTextField.Builder().ghostText("Search").build();
+        txtSearch = new FTextField.Builder().ghostText(Localizer.getInstance().getMessage("lblSearch")).build();
         widget.add(txtSearch);
 
         txtSearch.addKeyListener(new KeyAdapter() {

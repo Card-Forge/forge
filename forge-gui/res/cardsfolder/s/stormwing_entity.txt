@@ -1,0 +1,13 @@
+Name:Stormwing Entity
+ManaCost:3 U U
+Types:Creature Elemental
+PT:3/3
+S:Mode$ ReduceCost | ValidCard$ Card.Self | EffectZone$ All | Type$ Spell | Amount$ 2 | CheckSVar$ X | SVarCompare$ GE1 | References$ X | Description$ CARDNAME costs {2}{U} less to cast if you've cast an instant or sorcery spell this turn.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | EffectZone$ All | Type$ Spell | Amount$ 1 | Color$ U | CheckSVar$ X | SVarCompare$ GE1 | References$ X | Secondary$ True | Description$ CARDNAME costs {2}{U} less to cast if you've cast an instant or sorcery spell this turn.
+SVar:X:Count$ThisTurnCast_Instant.YouOwn,Sorcery.YouOwn
+DeckHints:Type$Instant|Sorcery
+K:Flying
+K:Prowess
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+Oracle:This spell costs {2}{U} less to cast if you've cast an instant or sorcery spell this turn.\nFlying\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhen Stormwing Entity enters the battlefield, scry 2.

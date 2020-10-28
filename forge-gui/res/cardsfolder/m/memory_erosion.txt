@@ -1,7 +1,6 @@
 Name:Memory Erosion
 ManaCost:1 U U
 Types:Enchantment
-T:Mode$ SpellCast | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever an opponent casts a spell, that player puts the top two cards of their library into their graveyard.
+T:Mode$ SpellCast | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever an opponent casts a spell, that player mills two cards.
 SVar:TrigMill:DB$ Mill | Defined$ TriggeredActivator | NumCards$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/memory_erosion.jpg
-Oracle:Whenever an opponent casts a spell, that player puts the top two cards of their library into their graveyard.
+Oracle:Whenever an opponent casts a spell, that player mills two cards.

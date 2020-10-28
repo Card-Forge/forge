@@ -19,7 +19,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
     }
 
     private PlaneswalkerAchievements() {
-        super("Planeswalker Ultimates", ForgeConstants.ACHIEVEMENTS_DIR + "planeswalkers.xml", false, ForgeConstants.PLANESWALKER_ACHIEVEMENT_LIST_FILE);
+        super("lblPlaneswalkerUltimates", ForgeConstants.ACHIEVEMENTS_DIR + "planeswalkers.xml", false, ForgeConstants.PLANESWALKER_ACHIEVEMENT_LIST_FILE);
     }
 
     @Override

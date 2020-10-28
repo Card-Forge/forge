@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Liliana
 Loyalty:6
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | TriggerController$ TriggeredCardController | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control dies, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
-A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | LegacyImage$ b 2 2 zombie akh | Planeswalker$ True | SpellDescription$ Create a 2/2 black Zombie creature token.
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create a 2/2 black Zombie creature token.
 A:AB$ Sacrifice | Cost$ SubCounter<4/LOYALTY> | Amount$ 2 | SacValid$ Creature | Defined$ Player | Planeswalker$ True | SpellDescription$ Each player sacrifices two creatures.
 A:AB$ RepeatEach | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True | RepeatPlayers$ Opponent | RepeatSubAbility$ ChooseArtf | SubAbility$ SacAllOthers | SpellDescription$ Each opponent chooses a permanent they control of each permanent type and sacrifices the rest.
 SVar:ChooseArtf:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Artifact.RememberedPlayerCtrl | ChoiceTitle$ Choose an artifact to keep | SubAbility$ ChooseCrtr | RememberChosen$ True | Mandatory$ True
@@ -15,4 +15,5 @@ SVar:ChoosePW:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Planes
 SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Permanent.IsNotRemembered+OppCtrl | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token & Ability$Sacrifice
-Oracle:[+1]:Create a 2/2 black Zombie creature token.\n[-4]:Each player sacrifices two creatures.\n[-9]: Each opponent chooses a permanent they control of each permanent type and sacrifices the rest.
+SVar:PlayMain1:TRUE
+Oracle:Whenever a creature you control dies, draw a card.\n[+1]:Create a 2/2 black Zombie creature token.\n[-4]:Each player sacrifices two creatures.\n[-9]: Each opponent chooses a permanent they control of each permanent type and sacrifices the rest.

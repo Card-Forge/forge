@@ -1,8 +1,7 @@
 Name:Firecannon Blast
 ManaCost:1 R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | AILogic$ ProcRaid.6 | ConditionCheckSVar$ RaidTest | ConditionSVarCompare$ EQ0 | References$ RaidTest | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 3 damage to target creature. Raid — CARDNAME deals 6 damage to that creature instead if you attacked with a creature this turn.
+A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | AILogic$ ProcRaid.6 | ConditionCheckSVar$ RaidTest | ConditionSVarCompare$ EQ0 | References$ RaidTest | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 3 damage to target creature. Raid — CARDNAME deals 6 damage instead if you attacked this turn.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ 6 | ConditionCheckSVar$ RaidTest | ConditionSVarCompare$ GE1 | References$ RaidTest
 SVar:RaidTest:Count$AttackersDeclared
-SVar:Picture:http://www.wizards.com/global/images/magic/general/firecannon_blast.jpg
-Oracle:Firecannon Blast deals 3 damage to target creature.\nRaid — Firecannon Blast deals 6 damage to that creature instead if you attacked with a creature this turn.
+Oracle:Firecannon Blast deals 3 damage to target creature.\nRaid — Firecannon Blast deals 6 damage instead if you attacked this turn.

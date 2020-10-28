@@ -16,6 +16,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.screens.workshop.controllers.CCardScript;
 import forge.toolbox.FTextPane;
+import forge.util.Localizer;
 
 /** 
  * Assembles Swing components of workshop card script tab.
@@ -28,7 +29,7 @@ public enum VCardScript implements IVDoc<CCardScript> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Card Script");
+    private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblCardScript"));
 
     private final FTextPane txtScript = new FTextPane();
     private final StyledDocument doc;

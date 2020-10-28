@@ -9,7 +9,6 @@ import forge.ai.ability.ExploreAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
 import forge.game.ability.ApiType;
-import forge.game.ability.effects.CharmEffect;
 import forge.game.card.*;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -371,14 +370,12 @@ public class SpellAbilityPicker {
         return bestScore;
     }
 
-    public List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num, boolean allowRepeat) {
+    public List<AbilitySub> chooseModeForAbility(SpellAbility sa, List<AbilitySub> choices, int min, int num, boolean allowRepeat) {
         if (interceptor != null) {
-            List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
             return interceptor.chooseModesForAbility(choices, min, num, allowRepeat);
         }
         if (plan != null && plan.getSelectedDecision() != null && plan.getSelectedDecision().modes != null) {
             Plan.Decision decision = plan.getSelectedDecision();
-            List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
             // TODO: Validate that there's no discrepancies between choices and modes?
             List<AbilitySub> plannedModes = SpellAbilityChoicesIterator.getModeCombination(choices, decision.modes);
             if (plan.getSelectedDecision().targets != null) {

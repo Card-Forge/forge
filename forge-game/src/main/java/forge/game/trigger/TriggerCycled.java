@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
@@ -53,7 +54,7 @@ public class TriggerCycled extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Cause);
     }
 
     @Override
@@ -68,8 +69,22 @@ public class TriggerCycled extends Trigger {
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("ValidCard")) {
-            return matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","),
-                    this.getHostCard());
+            if (!matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","), getHostCard())) {
+                return false;
+            }
+        }
+
+        if (hasParam("ValidPlayer")) {
+            Player p = (Player) runParams.get(AbilityKey.Player);
+            if (!matchesValid(p, getParam("ValidPlayer").split(","), getHostCard())) {
+                return false;
+            }
+        }
+
+        if (hasParam("OnlyFirst")) {
+            if ((int) runParams.get(AbilityKey.NumThisTurn) != 1) {
+                return false;
+            }
         }
         return true;
     }

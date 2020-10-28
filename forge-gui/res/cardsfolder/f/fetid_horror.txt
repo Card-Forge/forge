@@ -2,6 +2,5 @@ Name:Fetid Horror
 ManaCost:3 B
 Types:Creature Shade Horror
 PT:1/2
-A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fetid_horror.jpg
+A:AB$ Pump | Cost$ B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 Oracle:{B}: Fetid Horror gets +1/+1 until end of turn.

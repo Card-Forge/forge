@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.GuiBase;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -80,14 +81,12 @@ public abstract class FScreen extends FContainer {
 
     @Override
     protected final void doLayout(float width, float height) {
-        if (width > height) { //handle landscape layout special
-            doLandscapeLayout(width, height);
-        }
-        else if (header != null) {
+        if ((GuiBase.isAndroid() && Forge.isLandscapeMode())||(width > height)) {
+            doLandscapeLayout(width, height); //handle landscape layout special
+        } else if (header != null) {
             header.setBounds(0, 0, width, header.getPreferredHeight());
             doLayout(header.getHeight(), width, height);
-        }
-        else {
+        } else {
             doLayout(0, width, height);
         }
     }

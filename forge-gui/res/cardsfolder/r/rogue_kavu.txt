@@ -3,6 +3,5 @@ ManaCost:1 R
 Types:Creature Kavu
 PT:1/1
 T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks alone, it gets +2/+0 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rogue_kavu.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2
 Oracle:Whenever Rogue Kavu attacks alone, it gets +2/+0 until end of turn.
