@@ -10,5 +10,6 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | ConditionDefined$ Remembered
 SVar:DBDraw2:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.IsCommander | ConditionCompare$ GE1
 A:AB$ GainControl | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | AllValid$ Card.IsCommander | NewController$ You | SubAbility$ DBChangeZone | SpellDescription$ Gain control of all commanders. Put all commanders from the commander zone onto the battlefield under your control.
 SVar:DBChangeZone:DB$ ChangeZoneAll | ValidCards$ Card.IsCommander | Origin$ Command | Destination$ Battlefield | GainControl$ True
-DeckHas:Ability$Token
+DeckHas:Ability$Token & Ability$Sacrifice
+SVar:AIPreference:SacCost$Creature.token+powerLE2+toughnessLE2
 Oracle:[+2]: Create two 0/1 black Thrull creature tokens.\n[+1]: You may sacrifice a creature or planeswalker. If you do, draw two cards, then draw an additional card if the sacrificed permanent was a commander.\n[-10]: Gain control of all commanders, then put all commanders from the command zone onto the battlefield under your control.\nTevesh Szat, Doom of Fools can be your commander.\nPartner
