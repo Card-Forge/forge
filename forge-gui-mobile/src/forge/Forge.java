@@ -64,6 +64,7 @@ public class Forge implements ApplicationListener {
     public static float heigtModifier = 0.0f;
     private static boolean isloadingaMatch = false;
     public static boolean showFPS = false;
+    public static boolean altPlayerLayout = false;
     public static boolean enableUIMask = false;
     public static boolean enablePreloadExtendedArt = false;
     public static String locale = "en-US";
@@ -123,6 +124,7 @@ public class Forge implements ApplicationListener {
 
         textureFiltering = prefs.getPrefBoolean(FPref.UI_LIBGDX_TEXTURE_FILTERING);
         showFPS = prefs.getPrefBoolean(FPref.UI_SHOW_FPS);
+        altPlayerLayout = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
         enableUIMask = prefs.getPrefBoolean(FPref.UI_ENABLE_BORDER_MASKING);
         enablePreloadExtendedArt = prefs.getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
         locale = prefs.getPref(FPref.UI_LANGUAGE);

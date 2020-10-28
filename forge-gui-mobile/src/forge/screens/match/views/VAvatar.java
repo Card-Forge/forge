@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
@@ -68,6 +69,9 @@ public class VAvatar extends FDisplayObject {
         float w = getWidth();
         float h = getHeight();
         g.drawImage(image, 0, 0, w, h);
+
+        if (Forge.altPlayerLayout && Forge.isLandscapeMode())
+            return;
 
         //display XP in lower right corner of avatar
         int xp = player.getCounters(CounterEnumType.EXPERIENCE);

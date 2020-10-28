@@ -190,6 +190,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("cbEscapeEndsTurn"),
                 localizer.getMessage("nlEscapeEndsTurn")),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_PLAYERINFOLAYOUT,
+                localizer.getMessage("lblAltLifeDisplay"),
+                localizer.getMessage("nlAltLifeDisplay")){
+                @Override
+                public void select() {
+                    super.select();
+                    //update
+                    Forge.altPlayerLayout = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
+                }
+            },1);
 
         //Random Deck Generation
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_NOSMALL,
