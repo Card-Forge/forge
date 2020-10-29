@@ -73,10 +73,6 @@ public class PlayerProperty {
             if (!player.equals(game.getMonarch())) {
                 return false;
             }
-        } else if (property.equals("isNotMonarch")) {
-            if (player.equals(game.getMonarch())) {
-                return false;
-            }
         } else if (property.equals("hasBlessing")) {
             if (!player.hasBlessing()) {
                 return false;
