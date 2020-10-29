@@ -1,0 +1,8 @@
+Name:Belbe, Corrupted Observer
+ManaCost:B G
+Types:Legendary Creature Elf Zombie
+PT:2/2
+T:Mode$ Phase | Phase$ Main2 | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of each player's postcombat main phase, that player adds {C}{C} for each of your opponents that lost life this turn.
+SVar:TrigMana:DB$ Mana | Produced$ C | Amount$ X | References$ X | Defined$ TriggeredPlayer
+SVar:X:PlayerCountOpponents$HasPropertyLostLifeThisTurn/Twice
+Oracle:At the beginning of each player's postcombat main phase, that player adds {C}{C} for each of your opponents that lost life this turn.
