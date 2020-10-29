@@ -62,6 +62,11 @@ public class LifeExchangeEffect extends SpellAbilityEffect {
         final int life1 = p1.getLife();
         final int life2 = p2.getLife();
 
+        if (sa.hasParam("RememberDifference")) {
+            final int diff = life1 - life2;
+            source.addRemembered(diff);
+        }
+
         if ((life1 > life2) && p1.canLoseLife() && p2.canGainLife()) {
             final int diff = life1 - life2;
             p1.loseLife(diff);
