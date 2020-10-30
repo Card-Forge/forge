@@ -49,6 +49,7 @@ public enum Keyword {
     EMBALM("Embalm", KeywordWithCost.class, false, "%s, Exile this card from your graveyard: Create a token that's a copy of this card, except it's white, it has no mana cost, and it's a Zombie in addition to its other types. Embalm only as a sorcery."),
     EMERGE("Emerge", KeywordWithCost.class, false, "You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's converted mana cost."),
     ENCHANT("Enchant", KeywordWithType.class, false, "Target a %s as you cast this. This card enters the battlefield attached to that %s."),
+    ENCORE("Encore", KeywordWithCost.class, false, "%s, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery."),
     ENTWINE("Entwine", KeywordWithCost.class, true, "You may choose all modes of this spell instead of just one. If you do, you pay an additional %s."),
     EPIC("Epic", SimpleKeyword.class, true, "For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps for the rest of the game, copy this spell except for its epic ability. If the spell has any targets, you may choose new targets for the copy."),
     EQUIP("Equip", Equip.class, false, "%s: Attach to target %s you control. Equip only as a sorcery."),
