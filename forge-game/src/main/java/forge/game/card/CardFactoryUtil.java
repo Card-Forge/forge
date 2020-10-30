@@ -4357,13 +4357,15 @@ public class CardFactoryUtil {
                     "| SpellDescription$ (" + inst.getReminderText() + ")";
 
             final String copyStr = "DB$ CopyPermanent | Defined$ Self | ImprintTokens$ True " +
-                    "| AddKeywords$ Haste | TokenRemembered$ Player.IsRemembered";
+                    "| AddKeywords$ Haste | RememberTokens$ True | TokenRemembered$ Player.IsRemembered";
 
-            final String pumpStr = "DB$ Pump | Defined$ Imprinted | Permanent$ True " +
-                    "| KW$ HIDDEN CARDNAME attacks specific player each combat if able:Remembered";
+            final String pumpStr = "DB$ Animate | Defined$ Remembered " +
+                    "| HiddenKeywords$ CARDNAME attacks specific player each combat if able:Remembered";
+
+            final String pumpcleanStr = "DB$ Cleanup | ForgetDefined$ RememberedCard";
 
             final String delTrigStr = "DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Imprinted " +
-                    "| TriggerDescription$ Sacrifice them at the beginning of the next end step.";
+                    "| StackDescription$ None | TriggerDescription$ Sacrifice them at the beginning of the next end step.";
 
             final String sacStr = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered";
 
@@ -4378,6 +4380,9 @@ public class CardFactoryUtil {
 
             AbilitySub pumpSA = (AbilitySub) AbilityFactory.getAbility(pumpStr, card);
             copySA.setSubAbility(pumpSA);
+
+            AbilitySub pumpcleanSA = (AbilitySub) AbilityFactory.getAbility(pumpcleanStr, card);
+            pumpSA.setSubAbility(pumpcleanSA);
 
             AbilitySub delTrigSA = (AbilitySub) AbilityFactory.getAbility(delTrigStr, card);
             sa.setSubAbility(delTrigSA);
