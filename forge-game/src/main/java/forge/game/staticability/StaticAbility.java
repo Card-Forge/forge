@@ -631,6 +631,13 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             }
         }
 
+        if (hasParam("UnlessDefinedPlayer")) {
+            List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, getParam("UnlessDefinedPlayer"), null);
+            if (!players.isEmpty()) {
+                return false;
+            }
+        }
+
         if (hasParam("TopCardOfLibraryIs")) {
             if (controller.getCardsIn(ZoneType.Library).isEmpty()) {
                 return false;
