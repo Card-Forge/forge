@@ -4763,6 +4763,16 @@ public class CardFactoryUtil {
                     String opName = Expressions.operatorName(part.substring(kwLength, kwLength + 2));
                     String operand = part.substring(kwLength + 2);
                     postponedAdjectives.add(Pair.of(true, "power" + opName + operand));
+                } else if (part.startsWith("toughness")) {
+                    int kwLength = 9;
+                    String operand = part.substring(kwLength + 2);
+                    String opName = "";
+                    if (part.startsWith("toughnessGE")) {
+                        opName = " or greater";
+                    } else {
+                        opName = "update CardFactoryUtil line 4773";
+                    }
+                    postponedAdjectives.add(Pair.of(true, "toughness " + operand + opName));
                 } else if (CardType.isACreatureType(part)) {
                     if (creatures != null && CardType.isACreatureType(creatures)) { // e.g. Kor Castigator
                         creatures = StringUtils.capitalize(Lang.getPlural(part)) + creatures;
