@@ -6,4 +6,5 @@ T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Attacked$ Player.withMostLife | E
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
 SVar:HasAttackEffect:TRUE
 K:Equip:4
+DeckHas:Ability$Token
 Oracle:Equipped creature gets +2/+2.\nWhenever equipped creature attacks the player with the most life or tied for most life, create a 4/4 white Angel creature token with flying that's tapped and attacking that player.\nEquip {4}
