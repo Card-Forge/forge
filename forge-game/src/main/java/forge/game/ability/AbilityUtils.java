@@ -168,8 +168,8 @@ public class AbilityUtils {
 
             if (crd instanceof Card) {
                 c = game.getCardState((Card) crd);
-            } else if (crd instanceof List<?>) {
-                cards.addAll((CardCollection) crd);
+            } else if (crd instanceof Iterable<?>) {
+                cards.addAll(Iterables.filter((Iterable<?>) crd, Card.class));
             }
         }
         else if (defined.equals("Remembered") || defined.equals("RememberedCard")) {
@@ -657,9 +657,7 @@ public class AbilityUtils {
             if (calcX[0].startsWith("TriggeredPlayers")) {
                 key = "Triggered" + key.substring(16);
             }
-            final List<Player> players = new ArrayList<>();
-            Iterables.addAll(players, getDefinedPlayers(card, key, sa));
-            return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+            return CardFactoryUtil.playerXCount(getDefinedPlayers(card, key, sa), calcX[1], card) * multiplier;
         }
         if (calcX[0].startsWith("TriggeredPlayer") || calcX[0].startsWith("TriggeredTarget")) {
             final SpellAbility root = sa.getRootAbility();
@@ -1078,20 +1076,10 @@ public class AbilityUtils {
             }
             if (o != null) {
                 if (o instanceof Player) {
-                    final Player p = (Player) o;
-                    if (!players.contains(p)) {
-                        players.add(p);
-                    }
+                    players.add((Player) o);
                 }
-                if (o instanceof List) {
-                    final List<?> pList = (List<?>)o;
-                    if (!pList.isEmpty()) {
-                        for (final Object p : pList) {
-                            if (p instanceof Player && !players.contains(p)) {
-                                players.add((Player) p);
-                            }
-                        }
-                    }
+                if (o instanceof Iterable) {
+                    players.addAll(Iterables.filter((Iterable<?>)o, Player.class));
                 }
             }
         }
