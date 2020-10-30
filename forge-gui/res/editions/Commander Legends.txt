@@ -5,24 +5,107 @@ Name=Commander Legends
 Type=Other
 
 [cards]
+RTA U Reliquary Tower
+RTB U Reliquary Tower
+TVA U Three Visits
+TVB U Three Visits
 1 C The Prismatic Piper
 27 R Keeper of the Accord
+41 C Raise the Alarm
+42 U Rebbec, Architect of Ascension
+45 M Seraphic Greatsword
+60 U Brinelin, the Moon Kraken
+62 U Confiscate
+69 C "I Disagree And Furthermore"
+71 U "Ghost of Ramirez DePietro"
+73 U Horizon Scholar
+75 U Interpret the Signs
+76 C Kitesail Corsair
+77 C Kitesail Skirmisher
+79 U Malcom, Keen-Eyed Navigator
+81 U Merchant Raiders
+82 M Mnemonic Deluge
+86 C Prying Eyes
+95 U Siani, Eye of the Storm
+96 U Siren Stormtamer
+99 M Sphinx of the Second Sun
+102 U Supreme Will
+106 U Warden of Evos Isle
+111 C Briarblade Adept
+122 C Exquisite Huntmaster
+124 C Eyeblight Cullers
+131 U Keskit, the Flesh Sculptor
+141 R Opposition Agent
+145 M Profane Transfusion
 149 R Sengir, the Dark Baron
+152 R Szat's Will
+153 M Tevesh Szat, Doom of Fools
+154 C Thorn of the Black Rose
+156 M Vampiric Tutor
 160 U Alena, Kessig Trapper
+161 R "Aurora Phoenix"
+164 C Brazen Freebooter
+165 U Breeches, Brazen Plunderer
+168 U Coastline Marauders
+175 R "Captain of HMS Don't-Touch-My-Stuff"
+189 R Krark, the Thumbless
+224 C Entourage of Trest
 231 U Halana, Kessig Ranger
+239 R Kodama of the East Tree
+242 R Magus of the Order
+269 R "Averna, Soul of Ramp"
+286 R Liesa, Shroud of Dusk
+288 R Nymris, Oona's Trickster
+300 R Bladegriff Prototype
+303 C Charcoal Diamond
 306 C Commander's Sphere
+322 C Maelstrom Colossus
+323 C Marble Diamond
+324 U Mask of Memory
+326 U Mindless Automaton
+331 M Phyrexian Triniform
+334 C Prophetic Prism
+336 U Sandstone Oracle
 350 C Command Tower
 354 R Rejuvenating Springs
 356 R Spectator Seating
 358 R Training Center
 359 R Undergrowth Stadium
 360 R Vault of Champions
+421 U Acidic Slime
+512 M Tevesh Szat, Doom of Fools
+519 M Ikra Shidiqi, the Usurper
+524 M Kydele, Chosen of Kruphix
+526 M Maelstrom Wanderer
+529 M Nekusar, the Mindrazer
 530 M Prossh, Skyraider of Kher
+531 M Queen Marchesa
+535 M Sidar Kondo of Jamuraa
+536 M Silas Renn, Seeker Adept
+540 M Vial Smasher the Fierce
+541 M Xenagos, God of Revels
 546 C The Prismatic Piper
+553 U Radiant, Serra Archangel
+554 U Rebbec, Architect of Ascension
+555 U Brinelin, the Moon Kraken
+560 U Malcom, Keen-Eyed Navigator
+562 U Siani, Eye of the Storm
 568 R Sengir, the Dark Baron
 570 U Alena, Kessig Trapper
+571 U Breeches, Brazen Plunderer
 579 U Halana, Kessig Ranger
+582 R Kodama of the East Tree
+589 R "Averna, Soul of Ramp"
+606 R Liesa, Shroud of Dusk
 621 R Keeper of the Accord
+624 M Seraphic Greatsword
+638 M Mnemonic Deluge
+643 M Sphinx of the Second Sun
+651 R Opposition Agent
+655 R Szat's Will
+656 M Vampiric Tutor
+673 U Acidic Slime
+690 R Bladegriff Prototype
 693 C Commander's Sphere
 705 C Command Tower
 709 R Rejuvenating Springs
