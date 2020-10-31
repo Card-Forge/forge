@@ -2909,7 +2909,7 @@ public class CardFactoryUtil {
             final String repeatStr = "DB$ RepeatEach | RepeatPlayers$ OpponentsOtherThanDefendingPlayer | ChangeZoneTable$ True";
 
             final String copyStr = "DB$ CopyPermanent | Defined$ Self | TokenTapped$ True | Optional$ True | TokenAttacking$ Remembered"
-                    + " | ChoosePlayerOrPlaneswalker$  True | ImprintTokens$ True";
+                    + " | ChoosePlayerOrPlaneswalker$ True | ImprintTokens$ True";
 
             final String delTrigStr = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | RememberObjects$ Imprinted"
             + " | TriggerDescription$ Exile the tokens at end of combat.";
@@ -4359,8 +4359,8 @@ public class CardFactoryUtil {
             final String copyStr = "DB$ CopyPermanent | Defined$ Self | ImprintTokens$ True " +
                     "| AddKeywords$ Haste | RememberTokens$ True | TokenRemembered$ Player.IsRemembered";
 
-            final String pumpStr = "DB$ Animate | Defined$ Remembered " +
-                    "| HiddenKeywords$ CARDNAME attacks specific player each combat if able:Remembered";
+            final String pumpStr = "DB$ PumpAll | Defined$ Creature.IsRemembered " +
+                    "| KW$ HIDDEN CARDNAME attacks specific player each combat if able:Remembered";
 
             final String pumpcleanStr = "DB$ Cleanup | ForgetDefined$ RememberedCard";
 
@@ -4392,7 +4392,6 @@ public class CardFactoryUtil {
 
             AbilitySub cleanupSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
             delTrigSA.setSubAbility(cleanupSA);
-
 
         } else if (keyword.startsWith("Spectacle")) {
             final String[] k = keyword.split(":");
