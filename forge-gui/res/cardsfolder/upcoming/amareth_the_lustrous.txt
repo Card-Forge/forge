@@ -1,0 +1,8 @@
+Name:Amareth, the Lustrous
+ManaCost:3 G U W
+Types:Legendary Creature Dragon
+PT:6/6
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever another permanent enters the battlefield under your control, look at the top card of your library. If it shares a card type with that permanent, you may reveal that card and put it into your hand.
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | ForceRevealToController$ True | ChangeNum$ 1 | Optional$ True | LibraryPosition$ 0 | LibraryPosition2$ 0 | ChangeValid$ Card.sharesCardTypeWith TriggeredCard
+Oracle:Flying\nWhenever another permanent enters the battlefield under your control, look at the top card of your library. If it shares a card type with that permanent, you may reveal that card and put it into your hand.
