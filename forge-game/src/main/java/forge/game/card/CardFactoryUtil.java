@@ -4359,7 +4359,7 @@ public class CardFactoryUtil {
             final String copyStr = "DB$ CopyPermanent | Defined$ Self | ImprintTokens$ True " +
                     "| AddKeywords$ Haste | RememberTokens$ True | TokenRemembered$ Player.IsRemembered";
 
-            final String pumpStr = "DB$ PumpAll | Defined$ Creature.IsRemembered " +
+            final String pumpStr = "DB$ PumpAll | ValidCards$ Creature.IsRemembered " +
                     "| KW$ HIDDEN CARDNAME attacks specific player each combat if able:Remembered";
 
             final String pumpcleanStr = "DB$ Cleanup | ForgetDefined$ RememberedCard";
