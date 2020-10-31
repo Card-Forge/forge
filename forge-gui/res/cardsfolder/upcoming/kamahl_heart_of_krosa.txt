@@ -1,0 +1,9 @@
+Name:Kamahl, Heart of Krosa
+ManaCost:6 G G
+Types:Legendary Creature Human Druid
+PT:5/5
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ At the beginning of combat on your turn, creatures you control get +3/+3 and gain trample until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 3 | NumDef$ 3 | KW$ Trample
+A:AB$ Animate | Cost$ 1 G | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Power$ 1 | Toughness$ 1 | Types$ Elemental,Creature | Keywords$ Indestructible & Haste & Vigilance | SpellDescription$ Until end of turn, target land you control becomes a 1/1 creature with vigilance, indestructible, and haste. It's still a land.
+K:Partner
+Oracle:At the beginning of combat on your turn, creatures you control get +3/+3 and gain trample until end of turn.\n{1}{G}: Until end of turn, target land you control becomes a 1/1 Elemental creature with vigilance, indestructible, and haste. It's still a land.\nPartner (You can have two commanders if both have partner.)
