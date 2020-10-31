@@ -517,7 +517,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canLoseLife() {
-        return !hasKeyword("Your life total can't change.");
+        return !hasKeyword("Your life total can't change.") && !hasKeyword("Damage doesn't cause you to lose life.");
     }
 
     public final boolean canPayLife(final int lifePayment) {
