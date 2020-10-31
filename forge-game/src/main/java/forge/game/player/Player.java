@@ -517,7 +517,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canLoseLife() {
-        return !hasKeyword("Your life total can't change.") && !hasKeyword("Damage doesn't cause you to lose life.");
+        return !hasKeyword("Your life total can't change.");
     }
 
     public final boolean canPayLife(final int lifePayment) {
@@ -581,7 +581,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (infect) {
             addPoisonCounters(amount, source, counterTable);
         }
-        else {
+        else if (!hasKeyword("Damage doesn't cause you to lose life.")) {
             // Worship does not reduce the damage dealt but changes the effect
             // of the damage
             if (hasKeyword("DamageLifeThreshold:7") && life - 7 <= amount) {
