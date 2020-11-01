@@ -573,6 +573,11 @@ public class TriggerHandler {
             host.addRemembered(sa.getActivatingPlayer());
         }
 
+        if (regtrig.hasParam("RememberTriggeringCard")) {
+            Card triggeredCard = ((Card) sa.getTriggeringObject(AbilityKey.Card));
+            host.addRemembered(triggeredCard);
+        }
+
         sa.setStackDescription(sa.toString());
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
             // need to be set for demonic pact to look for chosen modes
