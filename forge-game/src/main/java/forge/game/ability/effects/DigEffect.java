@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameActionUtil;
@@ -317,19 +319,34 @@ public class DigEffect extends SpellAbilityEffect {
                                 }
                                 if (sa.hasParam("Attacking")) {
                                     final Combat combat = game.getCombat();
-                                        if ( null != combat ) {
-                                            final FCollectionView<GameEntity> e = combat.getDefenders();
-
-                                            final GameEntity defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(e, sa,
-                                                    Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), null);
-
-                                            if (defender != null) {
-                                                combat.addAttacker(c, defender);
-                                                game.getCombat().getBandOfAttacker(c).setBlocked(false);
-                                                game.fireEvent(new GameEventCombatChanged());
+                                    String attacking = sa.getParam("Attacking");
+                                    GameEntity defender = null;
+                                    FCollectionView<GameEntity> defs = null;
+                                    if (null != combat) {
+                                        if ("True".equalsIgnoreCase(attacking)) {
+                                            defs = combat.getDefenders();
+                                        } else if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
+                                            Player defendingPlayer = Iterables.getFirst(AbilityUtils.getDefinedPlayers(host,
+                                                    attacking, sa), null);
+                                            if (defendingPlayer != null) {
+                                                defs = game.getCombat().getDefendersControlledBy(defendingPlayer);
                                             }
                                         }
                                     }
+                                    if (defs != null) {
+                                        Map<String, Object> params = Maps.newHashMap();
+                                        params.put("Attacker", c);
+                                        defender = player.getController().chooseSingleEntityForEffect(defs, sa,
+                                                Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard",
+                                                        CardTranslation.getTranslatedName(c.getName())),false,
+                                                        params);
+                                    }
+                                    if (defender != null) {
+                                        combat.addAttacker(c, defender);
+                                        game.getCombat().getBandOfAttacker(c).setBlocked(false);
+                                        game.fireEvent(new GameEventCombatChanged());
+                                    }
+                                }
                             } else if (destZone1.equals(ZoneType.Exile)) {
                                 c.setExiledWith(effectHost);
                             }
