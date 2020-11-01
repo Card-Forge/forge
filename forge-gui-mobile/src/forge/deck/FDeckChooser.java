@@ -63,6 +63,7 @@ public class FDeckChooser extends FScreen {
     private Callback<Deck> callback;
     private NetDeckCategory netDeckCategory;
     private boolean refreshingDeckType;
+    private boolean firstactivation = true;
 
     private final DeckManager lstDecks;
     private final FButton btnNewDeck = new FButton(Localizer.getInstance().getMessage("lblNewDeck"));
@@ -226,6 +227,11 @@ public class FDeckChooser extends FScreen {
 
     @Override
     public void onActivate() {
+        //somehow a loaded deck state from startup don't refresh accordingly for imageview so refresh it on first activation
+        if(firstactivation) {
+            needRefreshOnActivate = true;
+            firstactivation = false;
+        }
         if (needRefreshOnActivate) {
             needRefreshOnActivate = false;
             refreshDecksList(selectedDeckType, true, null);

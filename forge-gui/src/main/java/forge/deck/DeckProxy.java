@@ -1,11 +1,15 @@
 package forge.deck;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import forge.card.CardSplitType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
@@ -258,6 +262,29 @@ public class DeckProxy implements InventoryItem {
             }
         }
         return highestRarity;
+    }
+
+    public PaperCard getHighestCMCCard() {
+        PaperCard key = null;
+        Map<PaperCard, Integer> keyCMC = new HashMap<>(64);
+
+        for (final Entry <PaperCard, Integer> pc : getDeck().getAllCardsInASinglePool()) {
+            if (pc.getKey().getRules().getManaCost() != null) {
+                if (pc.getKey().getRules().getSplitType() != CardSplitType.Split)
+                    keyCMC.put(pc.getKey(),pc.getKey().getRules().getManaCost().getCMC());
+            }
+        }
+
+        if (!keyCMC.isEmpty()) {
+            int max = Collections.max(keyCMC.values());
+            //get any max cmc
+            for (Entry<PaperCard, Integer> entry : keyCMC.entrySet()) {
+                if (entry.getValue()==max) {
+                    return entry.getKey();
+                }
+            }
+        }
+        return key;
     }
 
     public Set<GameFormat> getFormats() {

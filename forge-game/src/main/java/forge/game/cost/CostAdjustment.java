@@ -337,15 +337,12 @@ public class CostAdjustment {
             return;
         }
 
-        int value = 0;
-        if (StringUtils.isNumeric(amount)) {
-            value = Integer.parseInt(amount);
-        } else {
-            if ("Min3".equals(amount)) {
-                int cmc = manaCost.getConvertedManaCost();
-                if (cmc < 3) {
-                    value = 3 - cmc;
-                }
+        int value = Integer.parseInt(amount);
+
+        if (staticAbility.hasParam("RaiseTo")) {
+            int cmc = manaCost.getConvertedManaCost();
+            if (cmc < value) {
+                value = Integer.parseInt(amount) - cmc;
             }
         }
 

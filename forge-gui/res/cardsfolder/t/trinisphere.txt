@@ -1,7 +1,7 @@
 Name:Trinisphere
 ManaCost:3
 Types:Artifact
-S:Mode$ SetCost | ValidCard$ Card | Type$ Spell | Amount$ Min3 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ As long as CARDNAME is untapped, each spell that would cost less than three mana to cast costs three mana to cast.
+S:Mode$ SetCost | ValidCard$ Card | Type$ Spell | Amount$ 3 | RaiseTo$ True | CheckSVar$ X | SVarCompare$ EQ1 | Description$ As long as CARDNAME is untapped, each spell that would cost less than three mana to cast costs three mana to cast.
 SVar:X:Count$Valid Card.Self+untapped
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True

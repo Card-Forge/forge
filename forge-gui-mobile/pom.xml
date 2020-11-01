@@ -63,12 +63,12 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx</artifactId>
-            <version>1.9.10</version>
+            <version>1.9.11</version>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-freetype</artifactId>
-            <version>1.9.10</version>
+            <version>1.9.11</version>
         </dependency>
     </dependencies>
 

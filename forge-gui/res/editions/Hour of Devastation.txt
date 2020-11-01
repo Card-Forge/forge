@@ -10,6 +10,7 @@ Booster=10 Common:!fromSheet("HOU Planeswalker Decks and Toolkit"), 3 Uncommon:!
 AdditionalSheetForFoils=fromSheet("MPS Hour of Devastation Invocations")
 AdditionalSetUnlockedInQuest=MPS_AKH
 TreatAsSmallSet=true
+ChaosDraftThemes=GRAVEYARD_MATTERS
 
 [cards]
 1 C Act of Heroism

@@ -21,6 +21,7 @@ import forge.FThreads;
 import forge.assets.FSkinProp;
 import forge.game.GameView;
 import forge.gauntlet.GauntletWinLoseController;
+import forge.util.Localizer;
 import forge.util.gui.SOptionPane;
 
 import java.util.List;
@@ -70,7 +71,7 @@ public class GauntletWinLose extends ControlWinLose {
                             }
                         }
 
-                        SOptionPane.showMessageDialog(sb.toString(), "Gauntlet Progress", icon);
+                        SOptionPane.showMessageDialog(sb.toString(), Localizer.getInstance().getMessage("lblGauntletProgress"), icon);
                     }
                 });
             }

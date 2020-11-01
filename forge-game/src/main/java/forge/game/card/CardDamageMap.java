@@ -25,14 +25,14 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
     private Table<Card, GameEntity, Integer> dataMap = HashBasedTable.create();
 
     public CardDamageMap(Table<Card, GameEntity, Integer> damageMap) {
-        this.putAll(damageMap);
+        putAll(damageMap);
     }
 
     public CardDamageMap() {
     }
 
     public void triggerPreventDamage(boolean isCombat) {
-        for (Map.Entry<GameEntity, Map<Card, Integer>> e : this.columnMap().entrySet()) {
+        for (Map.Entry<GameEntity, Map<Card, Integer>> e : columnMap().entrySet()) {
             int sum = 0;
             for (final int i : e.getValue().values()) {
                 sum += i;
@@ -51,7 +51,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
 
     public void triggerDamageDoneOnce(boolean isCombat, final Game game, final SpellAbility sa) {
         // Source -> Targets
-        for (Map.Entry<Card, Map<GameEntity, Integer>> e : this.rowMap().entrySet()) {
+        for (Map.Entry<Card, Map<GameEntity, Integer>> e : rowMap().entrySet()) {
             final Card sourceLKI = e.getKey();
             int sum = 0;
             for (final Integer i : e.getValue().values()) {
@@ -71,7 +71,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
             }
         }
         // Targets -> Source
-        for (Map.Entry<GameEntity, Map<Card, Integer>> e : this.columnMap().entrySet()) {
+        for (Map.Entry<GameEntity, Map<Card, Integer>> e : columnMap().entrySet()) {
             int sum = 0;
             for (final int i : e.getValue().values()) {
                 sum += i;
@@ -106,9 +106,16 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
         return dataMap;
     }
 
-    public int filteredAmount(String validSource, String validTarget, Card host, SpellAbility sa) {
+    public int totalAmount() {
         int result = 0;
+        for (int i : values()) {
+            result += i;
+        }
+        return result;
+    }
 
+    public CardDamageMap filteredMap(String validSource, String validTarget, Card host, SpellAbility sa) {
+        CardDamageMap result = new CardDamageMap();
         Set<Card> filteredSource = null;
         Set<GameEntity> filteredTarget = null;
         if (validSource != null) {
@@ -125,7 +132,8 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
             if (filteredTarget != null && !filteredTarget.contains(c.getColumnKey())) {
                 continue;
             }
-            result += c.getValue();
+
+            result.put(c.getRowKey(), c.getColumnKey(), c.getValue());
         }
 
         return result;

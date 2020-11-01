@@ -6,29 +6,259 @@ Type=Other
 
 [cards]
 1 C The Prismatic Piper
+5 C Ancestral Blade
+9 M Archon of Coronation
+12 U "Tuia Bearclaw"
+14 C Cage of Hands
+15 C Captain's Call
+16 R Court of Grace
+17 C Court Street Denizen
+19 C Doomed Traveler
+22 U First Response
 27 R Keeper of the Accord
+28 U Keleth, Sunmane Familiar
+29 C Kinsbaile Courier
+30 C Kor Cartographer
+31 R Livio, Oathsworn Sentinel
+33 C Ninth Bridge Patrol
+37 U Patron of the Valiant
+38 U Prava of the Steel Legion
+39 R Promise of Tomorrow
+40 U Radiant, Serra Archangel
+41 C Raise the Alarm
+42 U Rebbec, Architect of Ascension
+43 U Return to Dust
+45 M Seraphic Greatsword
+47 R Slash the Ranks
+55 R Amphin Mutineer
+60 U Brinelin, the Moon Kraken
+62 U Confiscate
+63 R Court of Cunning
+66 R Eligeth, Crossroads Augur
+68 C Fall from Favor
+69 C Forceful Denial
+71 U Ghost of Ramirez DePietro
+73 U Horizon Scholar
+75 U Interpret the Signs
+76 C Kitesail Corsair
+77 C Kitesail Skirmisher
+78 R Laboratory Drudge
+79 U Malcolm, Keen-Eyed Navigator
+81 U Merchant Raiders
+82 M Mnemonic Deluge
+83 C Omenspeaker
+84 C Preordain
+86 C Prying Eyes
+87 C Run Away Together
+95 U Siani, Eye of the Storm
+96 U Siren Stormtamer
+99 M Sphinx of the Second Sun
+102 U Supreme Will
+106 U Warden of Evos Isle
+111 C Briarblade Adept
+112 U Cast Down
+114 R Court of Ambition
+118 U Demonic Lore
+122 C Exquisite Huntmaster
+124 C Eyeblight Cullers
+128 C Fleshbag Marauder
+131 U Keskit, the Flesh Sculptor
+140 U Null Caller
+141 R Opposition Agent
+142 C Phyrexian Rager
+145 M Profane Transfusion
 149 R Sengir, the Dark Baron
+152 R Szat's Will
+153 M Tevesh Szat, Doom of Fools
+154 C Thorn of the Black Rose
+156 M Vampiric Tutor
+159 U Vow of Torment
 160 U Alena, Kessig Trapper
+161 R Aurora Phoenix
+164 C Brazen Freebooter
+165 U Breeches, Brazen Plunderer
+168 U Coastline Marauders
+172 U Dargo, the Shipwrecker
+174 C Dragon Mantle
+175 R Emberwilde Captain
+181 U Furnace Celebration
+186 M Jeska, Thrice Reborn
+187 R Jeska's Will
+188 U Kediss, Emberclaw Familiar
+189 R Krark, the Thumbless
+191 C Makeshift Munitions
+192 U Meteoric Mace
+193 M Port Razer
+197 U Rograkh, Son of Rohgahh
+200 C Soul's Fire
+204 U "Toggo, Goblin Weaponsmith"
+206 C Valakut Invoker
+211 R "Wheel of Misfortune"
+224 C Entourage of Trest
+225 C Farhaven Elf
+228 C Fyndhorn Elves
+229 C Gift of Paradise
 231 U Halana, Kessig Ranger
+232 U Hunter's Insight
+234 R Immaculate Magistrate
+235 U Imperious Perfect
+237 M Kamahl, Heart of Krosa
+238 R Kamahl's Will
+239 R Kodama of the East Tree
+242 R Magus of the Order
+245 C Natural Reclamation
+246 U Numa, Joraga Chieftain
+257 C Soul's Might
+260 R Sweet-Gum Recluse
+261 U Three Visits
+266 R Amareth, the Lustrous
+268 R Archelos, Lagoon Mystic
+269 R Averna, the Chaos Bloom
+270 R Belbe, Corrupted Observer
+272 R Blim, Comedic Genius
+274 R Colfenor, the Last Yew
+275 R Ghen, Arcanum Weaver
+277 R Gor Muldrak, Amphinologist
+286 R Liesa, Shroud of Dusk
+288 R Nymris, Oona's Trickster
+291 U Thalisse, Reverent Medium
+293 R Yurlok of Scorch Thrash
+294 R Zara, Renegade Recruiter
+297 U Arcane Signet
+300 R Bladegriff Prototype
+303 C Charcoal Diamond
 306 C Commander's Sphere
+315 R Horizon Stone
+319 M Jeweled Lotus
+322 C Maelstrom Colossus
+323 C Marble Diamond
+324 U Mask of Memory
+326 U Mindless Automaton
+331 M Phyrexian Triniform
+334 C Prophetic Prism
+335 R Rings of Brighthearth
+336 U Sandstone Oracle
+337 M Scroll Rack
+341 C Sky Diamond
+343 R Staff of Domination
+349 R Command Beacon
 350 C Command Tower
+353 C Path of Ancestry
 354 R Rejuvenating Springs
 356 R Spectator Seating
 358 R Training Center
 359 R Undergrowth Stadium
 360 R Vault of Champions
+361 R War Room
+400 U Mulldrifter
+421 U Acidic Slime
+479 C Command Tower
+487 U Myriad Landscape
+488 U Reliquary Tower
+512 M Tevesh Szat, Doom of Fools
+513 M Jeska, Thrice Reborn
+514 M Najeela, the Blade-Blossom
+516 M Brago, King Eternal
+519 M Ikra Shidiqi, the Usurper
+524 M Kydele, Chosen of Kruphix
+525 M Ludevic, Necro-Alchemist
+526 M Maelstrom Wanderer
+529 M Nekusar, the Mindrazer
 530 M Prossh, Skyraider of Kher
+531 M Queen Marchesa
+532 M Rakdos, Lord of Riots
+535 M Sidar Kondo of Jamuraa
+536 M Silas Renn, Seeker Adept
+538 M Thrasios, Triton Hero
+539 M Tymna the Weaver
+540 M Vial Smasher the Fierce
+541 M Xenagos, God of Revels
+544 M Zur the Enchanter
+545 M Ramos, Dragon Engine
 546 C The Prismatic Piper
+550 U Keleth, Sunmane Familiar
+551 R Livio, Oathsworn Sentinel
+552 U Prava of the Steel Legion
+553 U Radiant, Serra Archangel
+554 U Rebbec, Architect of Ascension
+555 U Brinelin, the Moon Kraken
+556 R Eligeth, Crossroads Augur
+558 U Ghost of Ramirez DePietro
+560 U Malcolm, Keen-Eyed Navigator
+562 U Siani, Eye of the Storm
+565 U Keskit, the Flesh Sculptor
 568 R Sengir, the Dark Baron
 570 U Alena, Kessig Trapper
+571 U Breeches, Brazen Plunderer
+572 U Dargo, the Shipwrecker
+573 U Kediss, Emberclaw Familiar
+574 R Krark, the Thumbless
+575 U Rograkh, Son of Rohgahh
+576 U "Toggo, Goblin Weaponsmith"
 579 U Halana, Kessig Ranger
+581 M Kamahl, Heart of Krosa
+582 R Kodama of the East Tree
+583 U Numa, Joraga Chieftain
+586 R Amareth, the Lustrous
+588 R Archelos, Lagoon Mystic
+589 R Averna, the Chaos Bloom
+590 R Belbe, Corrupted Observer
+592 R Blim, Comedic Genius
+594 R Colfenor, the Last Yew
+595 R Ghen, Arcanum Weaver
+597 R Gor Muldrak, Amphinologist
+606 R Liesa, Shroud of Dusk
+608 R Nymris, Oona's Trickster
+611 U Thalisse, Reverent Medium
+613 R Yurlok of Scorch Thrash
+614 R Zara, Renegade Recruiter
+616 M Archon of Coronation
+619 R Court of Grace
 621 R Keeper of the Accord
+622 R Promise of Tomorrow
+623 U Return to Dust
+624 M Seraphic Greatsword
+625 R Slash the Ranks
+629 R Amphin Mutineer
+633 R Court of Cunning
+636 R Laboratory Drudge
+638 M Mnemonic Deluge
+639 U Mulldrifter
+640 C Preordain
+643 M Sphinx of the Second Sun
+645 R Court of Ambition
+651 R Opposition Agent
+653 M Profane Transfusion
+655 R Szat's Will
+656 M Vampiric Tutor
+660 R Aurora Phoenix
+664 R Emberwilde Captain
+668 R Jeska's Will
+669 M Port Razer
+672 R "Wheel of Misfortune"
+673 U Acidic Slime
+678 C Fyndhorn Elves
+679 R Immaculate Magistrate
+680 R Kamahl's Will
+682 R Magus of the Order
+685 R Sweet-Gum Recluse
+686 U Three Visits
+689 U Arcane Signet
+690 R Bladegriff Prototype
 693 C Commander's Sphere
+694 R Horizon Stone
+695 M Jeweled Lotus
+698 R Rings of Brighthearth
+699 M Scroll Rack
+701 R Staff of Domination
 705 C Command Tower
+706 U Myriad Landscape
 709 R Rejuvenating Springs
+710 U Reliquary Tower
 711 R Spectator Seating
 713 R Training Center
 714 R Undergrowth Stadium
 715 R Vault of Champions
+716 R War Room
 721 M Mana Confluence
 722 R Sengir, the Dark Baron

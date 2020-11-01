@@ -581,7 +581,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (infect) {
             addPoisonCounters(amount, source, counterTable);
         }
-        else {
+        else if (!hasKeyword("Damage doesn't cause you to lose life.")) {
             // Worship does not reduce the damage dealt but changes the effect
             // of the damage
             if (hasKeyword("DamageLifeThreshold:7") && life - 7 <= amount) {
@@ -740,6 +740,10 @@ public class Player extends GameEntity implements Comparable<Player> {
                     if (restDamage < 0) {
                         restDamage = 0;
                     }
+                }
+            } else if (c.getName().equals("Obosh, the Preypiercer")) {
+                if (c.getController().equals(source.getController()) && source.getCMC() % 2 != 0) {
+                    restDamage *= 2;
                 }
             }
         }

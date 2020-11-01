@@ -1845,6 +1845,28 @@ public class ComputerUtil {
                 }
             }
         }
+        //Generic curse auras
+        else if ((threatApi == ApiType.Attach && (topStack.isCurse() || "Curse".equals(topStack.getParam("AILogic"))))) {
+            AiController aic = aiPlayer.isAI() ? ((PlayerControllerAi)aiPlayer.getController()).getAi() : null;
+            boolean enableCurseAuraRemoval = aic != null ? aic.getBooleanProperty(AiProps.ACTIVELY_DESTROY_IMMEDIATELY_UNBLOCKABLE) : false;
+            if (enableCurseAuraRemoval) {
+                for (final Object o : objects) {
+                    if (o instanceof Card) {
+                        final Card c = (Card) o;
+                        // give Shroud to targeted creatures
+                        if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll && tgt == null) && !grantShroud) {
+                            continue;
+                        }
+                        if (saviourApi == ApiType.Protection) {
+                            if (tgt == null || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                                continue;
+                            }
+                        }
+                        threatened.add(c);
+                    }
+                }
+            }
+        }
 
         Iterables.addAll(threatened, ComputerUtil.predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
         return threatened;

@@ -56,8 +56,9 @@ public class CharmEffect extends SpellAbilityEffect {
 
         List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
         final int num;
-        // hotfix for Vindictive Lich when using getCardForUi
-        if (source.getController() == null && sa.getParamOrDefault("CharmNum", "1").contains("MaxUniqueOpponents")) {
+        boolean additionalDesc = sa.hasParam("AdditionalDescription");
+        // hotfix for complex cards when using getCardForUi
+        if (source.getController() == null && additionalDesc) {
             // using getCardForUi game is not set, so can't guess max charm
             num = Integer.MAX_VALUE;
         } else {
@@ -73,8 +74,8 @@ public class CharmEffect extends SpellAbilityEffect {
         sb.append(sa.getCostDescription());
         sb.append(oppChooses ? "An opponent chooses " : "Choose ");
 
-        if (num == min) {
-            sb.append(Lang.getNumeral(num));
+        if (num == min || num == Integer.MAX_VALUE) {
+            sb.append(Lang.getNumeral(min));
         } else if (min == 0) {
             sb.append("up to ").append(Lang.getNumeral(num));
         } else {
@@ -97,7 +98,6 @@ public class CharmEffect extends SpellAbilityEffect {
             sb.append(". You may choose the same mode more than once.");
         }
 
-        boolean additionalDesc = sa.hasParam("AdditionalDescription");
         if (additionalDesc) {
             sb.append(" ").append(sa.getParam("AdditionalDescription").trim());
         }

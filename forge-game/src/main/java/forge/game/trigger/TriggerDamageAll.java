@@ -29,24 +29,25 @@ public class TriggerDamageAll extends Trigger {
             }
         }
         final CardDamageMap table = (CardDamageMap) runParams.get(AbilityKey.DamageMap);
-        return filterTable(table) > 0;
+        return !table.filteredMap(getParam("ValidSource"), getParam("ValidTarget"), getHostCard(), null).isEmpty();
     }
 
     @Override
     public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        final CardDamageMap table = (CardDamageMap) runParams.get(AbilityKey.DamageMap);
+        CardDamageMap table = (CardDamageMap) runParams.get(AbilityKey.DamageMap);
+        table = table.filteredMap(getParam("ValidSource"), getParam("ValidTarget"), getHostCard(), null);
 
-        sa.setTriggeringObject(AbilityKey.DamageAmount, filterTable(table));
+        sa.setTriggeringObject(AbilityKey.DamageAmount, table.totalAmount());
+        sa.setTriggeringObject(AbilityKey.Sources, table.rowKeySet());
+        sa.setTriggeringObject(AbilityKey.Targets, table.columnKeySet());
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
+        sb.append(Localizer.getInstance().getMessage("lblDamageSource")).append(": ").append(sa.getTriggeringObject(AbilityKey.Sources)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblDamaged")).append(": ").append(sa.getTriggeringObject(AbilityKey.Targets)).append(", ");
         sb.append(Localizer.getInstance().getMessage("lblAmount")).append(": ").append(sa.getTriggeringObject(AbilityKey.DamageAmount));
         return sb.toString();
-    }
-
-    private int filterTable(CardDamageMap table) {
-        return table.filteredAmount(getParam("ValidSource"), getParam("ValidTarget"), getHostCard(), null);
     }
 }

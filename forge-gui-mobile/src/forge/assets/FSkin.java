@@ -30,7 +30,8 @@ public class FSkin {
     private static final Map<FSkinProp, FSkinImage> images = new HashMap<>(512);
     private static final Map<Integer, TextureRegion> avatars = new HashMap<>(150);
     private static final Map<Integer, TextureRegion> sleeves = new HashMap<>(64);
-    private static final Map<Integer, TextureRegion> borders = new HashMap<>(2);
+    private static final Map<Integer, TextureRegion> borders = new HashMap<>();
+    private static final Map<Integer, TextureRegion> deckbox = new HashMap<>();
 
     private static Array<String> allSkins;
     private static FileHandle preferredDir;
@@ -196,6 +197,7 @@ public class FSkin {
         final FileHandle f10 = getDefaultSkinFile(ForgeConstants.SPRITE_BORDER_FILE);
         final FileHandle f11 = getSkinFile(ForgeConstants.SPRITE_BUTTONS_FILE);
         final FileHandle f12 = getSkinFile(ForgeConstants.SPRITE_START_FILE);
+        final FileHandle f13 = getDefaultSkinFile(ForgeConstants.SPRITE_DECKBOX_FILE);
 
         try {
             textures.put(f1.path(), new Texture(f1));
@@ -331,10 +333,20 @@ public class FSkin {
                     FSkin.sleeves.put(scount++, new TextureRegion(txDefaultSleeves, i, j, 360, 500));
                 }
             }
-
+            //borders
             Texture bordersBW = new Texture(f10);
             FSkin.borders.put(0, new TextureRegion(bordersBW, 2, 2, 672, 936));
             FSkin.borders.put(1, new TextureRegion(bordersBW, 676, 2, 672, 936));
+            //deckboxes
+            Texture deckboxes = new Texture(f13, textureFilter);
+            if (textureFilter)
+                deckboxes.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+            //gold bg
+            FSkin.deckbox.put(0, new TextureRegion(deckboxes, 2, 2, 488, 680));
+            //deck box for card art
+            FSkin.deckbox.put(1, new TextureRegion(deckboxes, 492, 2, 488, 680));
+            //generic deck box
+            FSkin.deckbox.put(2, new TextureRegion(deckboxes, 982, 2, 488, 680));
 
             preferredIcons.dispose();
             pxDefaultAvatars.dispose();
@@ -428,6 +440,10 @@ public class FSkin {
 
     public static Map<Integer, TextureRegion> getBorders() {
         return borders;
+    }
+
+    public static Map<Integer, TextureRegion> getDeckbox() {
+        return deckbox;
     }
 
     public static boolean isLoaded() { return loaded; }
