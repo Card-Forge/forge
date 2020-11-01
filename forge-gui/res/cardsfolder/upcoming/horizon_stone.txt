@@ -1,0 +1,5 @@
+Name:Horizon Stone
+ManaCost:5
+Types:Artifact
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Convert unused mana to Colorless | Description$ If you would lose unspent mana, that mana becomes colorless instead.
+Oracle:If you would lose unspent mana, that mana becomes colorless instead.
