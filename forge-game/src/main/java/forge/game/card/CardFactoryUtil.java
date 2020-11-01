@@ -871,10 +871,12 @@ public class CardFactoryUtil {
         if (l[0].startsWith("SacrificedThisTurn")) {
             CardCollectionView list = cc.getSacrificedThisTurn();
             if (l[0].contains(" ")) {
-                final String[] components = l[0].split(" ", 2);
-                list = CardLists.getValidCards(list, components[1], cc, c);
+                String[] lparts = l[0].split(" ", 2);
+                String restrictions = TextUtil.fastReplace(l[0], TextUtil.addSuffix(lparts[0]," "), "");
+                final String[] rest = restrictions.split(",");
+                list = CardLists.getValidCards(list, rest, cc, c, null);
             }
-            return list.size();
+            return doXMath(list.size(), m, c);
         }
 
         final String[] sq;
