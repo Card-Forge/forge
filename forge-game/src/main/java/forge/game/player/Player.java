@@ -741,6 +741,10 @@ public class Player extends GameEntity implements Comparable<Player> {
                         restDamage = 0;
                     }
                 }
+            } else if (c.getName().equals("Obosh, the Preypiercer")) {
+                if (c.getController().equals(source.getController()) && source.getCMC() % 2 != 0) {
+                    restDamage *= 2;
+                }
             }
         }
 
