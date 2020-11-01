@@ -1,0 +1,10 @@
+Name:Hans Eriksson
+ManaCost:2 R G
+Types:Legendary Creature Human Scout
+PT:1/4
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME attacks, reveal the top card of your library. If it's a creature card, put it onto the battlefield tapped and attacking defending player or a planeswalker they control. Otherwise, put that card into your hand. When you put a creature card onto the battlefield this way, it fights CARDNAME.
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Optional$ True | Reveal$ True | ChangeValid$ Creature | DestinationZone$ Battlefield | DestinationZone2$ Hand | Tapped$ True | Attacking$ DefendingPlayer | ChoosePlayerOrPlaneswalker$ True | RememberChanged$ True | SubAbility$ DBFight
+SVar:DBFight:DB$ Fight | Defined$ Remembered | ExtraDefined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Hans Eriksson attacks, reveal the top card of your library. If it's a creature card, put it onto the battlefield tapped and attacking defending player or a planeswalker they control. Otherwise, put that card into your hand. When you put a creature card onto the battlefield this way, it fights Hans Eriksson.
