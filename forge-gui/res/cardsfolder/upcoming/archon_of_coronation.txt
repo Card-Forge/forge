@@ -1,0 +1,9 @@
+Name:Archon of Coronation
+ManaCost:4 W W
+Types:Creature Archon
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+S:Mode$ Continuous | Affected$ You | Condition$ You.isMonarch | AddKeyword$ Damage doesn't cause you to lose life. | Description$ As long as you're the monarch, damage doesn't cause you to lose life.
+Oracle:Flying\nWhen Archon of Coronation enters the battlefield, you become the monarch.\nAs long as you're the monarch, damage doesn't cause you to lose life.
