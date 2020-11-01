@@ -1,0 +1,12 @@
+Name:Emberwilde Captain
+ManaCost:3 R
+Types:Creature Djinn Pirate
+PT:4/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+T:Mode$ AttackersDeclared | AttackingPlayer$ Player.Opponent | AttackedTarget$ You | NoResolvingCheck$ True | CheckDefinedPlayer$ You.isMonarch | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever an opponent attacks you while you're the monarch, CARDNAME deals damage to that player equal to the number of cards in their hand.
+SVar:TrigPump:DB$ Pump | RememberObjects$ TriggeredAttackingPlayer | SubAbility$ DBDmg
+SVar:DBDmg:DB$ DealDamage | Defined$ Remembered | NumDmg$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidHand Card.RememberedPlayerCtrl
+Oracle:When Emberwilde Captain enters the battlefield, you become the monarch.\nWhenever an opponent attacks you while you're the monarch, Emberwilde Captain deals damage to that player equal to the number of cards in their hand.
