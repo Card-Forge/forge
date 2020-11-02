@@ -227,8 +227,7 @@ public class PlayerProperty {
             final String[] type = property.substring(8).split("_");
             final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type[0], sourceController, source);
             String comparator = type[1];
-            String compareTo = comparator.substring(2);
-            int y = StringUtils.isNumeric(compareTo) ? Integer.parseInt(compareTo) : 0;
+            int y = AbilityUtils.calculateAmount(source, comparator.substring(2), null);
             if (!Expressions.compare(list.size(), comparator, y)) {
                 return false;
             }
