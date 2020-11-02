@@ -1,0 +1,8 @@
+Name:Anara, Lupine Familiar
+ManaCost:3 G
+Types:Legendary Creature Wolf Beast
+PT:4/4
+S:Mode$ Continuous | Affected$ Permanent.IsCommander+YouCtrl | AddKeyword$ Indestructible | Condition$ PlayerTurn | Description$ As long as it's your turn, commanders you control have indestructible.
+K:Partner
+AI:RemoveDeck:NonCommander
+Oracle:As long as it's your turn, commanders you control have indestructible.\nPartner (You can have two commanders if both have partner.)
