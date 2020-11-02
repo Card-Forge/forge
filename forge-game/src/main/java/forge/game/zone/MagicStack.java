@@ -160,6 +160,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             add(sa);
         }
         // Add all waiting triggers onto the stack
+        game.getTriggerHandler().resetActiveTriggers();
         game.getTriggerHandler().runWaitingTriggers();
     }
 

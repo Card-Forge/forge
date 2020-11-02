@@ -2450,6 +2450,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             final PaperCard c = carddb.getUniqueByName(f.getName());
             final Card forgeCard = Card.fromPaperCard(c, p);
+            forgeCard.setTimestamp(game.getNextTimestamp());
 
             game.getAction().invoke(new Runnable() {
                 @Override
