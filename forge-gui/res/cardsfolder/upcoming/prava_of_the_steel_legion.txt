@@ -1,0 +1,9 @@
+Name:Prava of the Steel Legion
+ManaCost:2 W
+Types:Legendary Creature Cat Soldier
+PT:1/4
+K:Partner
+S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | Condition$ PlayerTurn | AddPower$ 1 | AddToughness$ 4| Description$ As long as it's your turn, creature tokens you control get +1/+4.
+A:AB$ Token | Cost$ 3 W | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You | SpellDescription$ Create a 1/1 white Soldier creature token.
+DeckHas:Ability$Token
+Oracle:As long as it's your turn, creature tokens you control get +1/+4./n{3}{W}: Create a 1/1 white Soldier creature token./nPartner (You can have two commanders if both have partner.)
