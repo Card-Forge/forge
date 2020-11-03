@@ -1,0 +1,11 @@
+Name:Livio, Oathsworn Sentinel
+ManaCost:1 W
+Types:Legendary Creature Human Knight
+PT:2/2
+A:AB$ Pump | Cost$ 1 W | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | SubAbility$ DBChange | StackDescription$ {p:You} chooses {c:Targeted}. | SpellDescription$ Choose another target creature. Its controller may exile it with an aegis counter on it.
+SVar:DBChange:DB$ ChangeZone | Defined$ Targeted | Optional$ True | Chooser$ TargetedController | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBPutCounter | StackDescription$ {p:TargetedController} may exile it with an aegis counter on it.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ AEGIS | CounterNum$ 1 | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ ChangeZoneAll | Cost$ 2 W T | ChangeType$ Creature.counters_GE1_AEGIS | Origin$ Exile | Destination$ Battlefield | SpellDescription$ Return all creatures with an aegis counter on them from exile to the battlefield under their owner's control.
+K:Partner
+Oracle:{1}{W}: Choose another target creature. Its controller may exile it with an aegis counter on it.\n{2}{W}, {T}: Return all creatures with an aegis counter on them from exile to the battlefield under their owner's control.\nPartner (You can have two commanders if both have partner.)
