@@ -7,5 +7,5 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigRepeat:DB$ RepeatEach | RepeatSubAbility$ TrigToken | RepeatPlayers$ Player.controlsCreature_EQX | References$ X
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_4_3_salamander_warrior | TokenOwner$ Player.IsRemembered
 SVar:X:PlayerCountPlayers$LowestValid Creature.YouCtrl
-AI:RemoveDeck:All
+DeckHas:Ability$Token
 Oracle:You and permanents you control have protection from Salamanders.\nAt the beginning of your end step, each player who controls the fewest creatures creates a 4/3 blue Salamander Warrior creature token.
