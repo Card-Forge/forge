@@ -618,12 +618,21 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("Attacking")) {
                         final Combat combat = game.getCombat();
-                        if ( null != combat ) {
-                            final FCollectionView<GameEntity> e = combat.getDefenders();
-
+                        if (null != combat) {
+                            FCollectionView<GameEntity> defs = null;
+                            String attacking = sa.getParam("Attacking");
+                            if ("True".equalsIgnoreCase(attacking)) {
+                                defs = combat.getDefenders();
+                            } else if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
+                                Player defendingPlayer = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard,
+                                        attacking, sa), null);
+                                if (defendingPlayer != null) {
+                                    defs = combat.getDefendersControlledBy(defendingPlayer);
+                                }
+                            }
                             GameEntity defender = null;
                             if (sa.hasParam("DefinedDefender")) {
-                                FCollection<GameObject> objs = AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("DefinedDefender"), sa);
+                                FCollection<GameObject> objs = AbilityUtils.getDefinedObjects(hostCard, sa.getParam("DefinedDefender"), sa);
                                 for(GameObject obj : objs) {
                                     if (obj instanceof GameEntity) {
                                         defender = (GameEntity)obj;
@@ -634,7 +643,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                 String title = Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(movedCard.getName()));
                                 Map<String, Object> params = Maps.newHashMap();
                                 params.put("Attacker", movedCard);
-                                defender = player.getController().chooseSingleEntityForEffect(e, sa, title, params);
+                                defender = player.getController().chooseSingleEntityForEffect(defs, sa, title,false,
+                                        params);
                             }
                             if (defender != null) {
                                 combat.addAttacker(movedCard, defender);
@@ -1140,23 +1150,35 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                 if (sa.hasParam("Attacking")) {
                     final Combat combat = game.getCombat();
-                    if ( null != combat ) {
-                        final FCollectionView<GameEntity> e = combat.getDefenders();
-
+                    if (null != combat) {
+                        FCollectionView<GameEntity> defs = null;
+                        String attacking = sa.getParam("Attacking");
+                        if ("True".equalsIgnoreCase(attacking)) {
+                            defs = combat.getDefenders();
+                        } else if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
+                            Player defendingPlayer = Iterables.getFirst(AbilityUtils.getDefinedPlayers(source,
+                                    attacking, sa), null);
+                            if (defendingPlayer != null) {
+                                defs = combat.getDefendersControlledBy(defendingPlayer);
+                            }
+                        }
                         GameEntity defender = null;
                         if (sa.hasParam("DefinedDefender")) {
-                            FCollection<GameObject> objs = AbilityUtils.getDefinedObjects(source, sa.getParam("DefinedDefender"), sa);
-                            for(GameObject obj : objs) {
+                            FCollection<GameObject> objs = AbilityUtils.getDefinedObjects(source,
+                                    sa.getParam("DefinedDefender"), sa);
+                            for (GameObject obj : objs) {
                                 if (obj instanceof GameEntity) {
-                                    defender = (GameEntity)obj;
+                                    defender = (GameEntity) obj;
                                     break;
                                 }
                             }
                         } else {
-                            String title =  Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName()));
+                            String title = Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard",
+                                    CardTranslation.getTranslatedName(c.getName()));
                             Map<String, Object> params = Maps.newHashMap();
                             params.put("Attacker", c);
-                            defender = player.getController().chooseSingleEntityForEffect(e, sa, title, params);
+                            defender = decider.getController().chooseSingleEntityForEffect(defs, sa, title,false,
+                                    params);
                         }
                         if (defender != null) {
                             combat.addAttacker(c, defender);
