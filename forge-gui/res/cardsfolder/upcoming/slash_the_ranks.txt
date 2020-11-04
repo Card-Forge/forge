@@ -1,7 +1,5 @@
 Name:Slash the Ranks
-ManaCost: 3 W W
+ManaCost:3 W W
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 3 W W | ValidCards$ Permanent.IsCommander | RememberAllPumped$ True | SubAbility$ Destroy | SpellDescription$ Destroy all creatures and planeswalkers except for commanders.
-SVar:Destroy:DB$ DestroyAll | ValidCards$ Creature.IsNotRemembered,Planeswalker.IsNotRemembered | SubAbility$ DBCleanup | StackDescription$ None
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ DestroyAll | Cost$ 3 W W | ValidCards$ Creature.IsNotCommander,Planeswalker.IsNotCommander | SpellDescription$ Destroy all creatures and planeswalkers except for commanders.
 Oracle:Destroy all creatures and planeswalkers except for commanders.

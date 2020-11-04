@@ -1779,6 +1779,10 @@ public class CardProperty {
             if (!card.isCommander()) {
                 return false;
             }
+        } else if (property.equals("IsNotCommander")) {
+            if (card.isCommander()) {
+                return false;
+            }
         } else if (property.startsWith("NotedFor")) {
             final String key = property.substring("NotedFor".length());
             for (String note : sourceController.getNotesForName(key)) {
