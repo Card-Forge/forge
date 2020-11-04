@@ -2,28 +2,21 @@ package forge.game.ability.effects;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import forge.GameCommand;
 import forge.game.Game;
-import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
-import forge.game.combat.Combat;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.collect.FCollectionView;
-import forge.util.Localizer;
-import forge.util.CardTranslation;
 
 public class ControlGainEffect extends SpellAbilityEffect {
 
@@ -86,7 +79,6 @@ public class ControlGainEffect extends SpellAbilityEffect {
         final boolean bTapOnLose = sa.hasParam("TapOnLose");
         final boolean remember = sa.hasParam("RememberControlled");
         final boolean forget = sa.hasParam("ForgetControlled");
-        final boolean attacking = sa.hasParam("Attacking");
         final List<String> keywords = sa.hasParam("AddKWs") ? Arrays.asList(sa.getParam("AddKWs").split(" & ")) : null;
         final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
 
@@ -109,6 +101,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             return;
         }
 
+        boolean combatChanged = false;
         for (Card tgtC : tgtCards) {
 
             if (!tgtC.isInPlay() || !tgtC.canBeControlledBy(newController)) {
@@ -209,23 +202,15 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
             game.getAction().controllerChangeZoneCorrection(tgtC);
 
-            if (attacking) {
-                final Combat combat = game.getCombat();
-                if ( null != combat ) {
-                    final FCollectionView<GameEntity> e = combat.getDefenders();
-                    String title = Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(tgtC.getName()));
-                    Map<String, Object> params = Maps.newHashMap();
-                    params.put("Attacker", tgtC);
-                    final GameEntity defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(e, sa, title, params);
-
-                    if (defender != null) {
-                        combat.addAttacker(tgtC, defender);
-                        game.getCombat().getBandOfAttacker(tgtC).setBlocked(false);
-                        game.fireEvent(new GameEventCombatChanged());
-                    }
-                }
+            if (addToCombat(tgtC, tgtC.getController(), sa, "Attacking", "Blocking")) {
+                combatChanged = true;
             }
         } // end foreach target
+
+        if (combatChanged) {
+            game.updateCombatForView();
+            game.fireEvent(new GameEventCombatChanged());
+        }
     }
 
     /**
