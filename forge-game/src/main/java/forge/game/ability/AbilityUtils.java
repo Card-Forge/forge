@@ -1660,12 +1660,8 @@ public class AbilityUtils {
 
                 // Count$Kicked.<numHB>.<numNotHB>
                 if (sq[0].startsWith("Kicked")) {
-                    if (((SpellAbility)ctb).isKicked()) {
-                        return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), expr, c); // Kicked
-                    }
-                    else {
-                        return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), expr, c); // not Kicked
-                    }
+                    boolean kicked = ((SpellAbility)ctb).isKicked() || c.getKickerMagnitude() > 0;
+                    return CardFactoryUtil.doXMath(Integer.parseInt(kicked ? sq[1] : sq[2]), expr, c);
                 }
 
                 //Count$SearchedLibrary.<DefinedPlayer>

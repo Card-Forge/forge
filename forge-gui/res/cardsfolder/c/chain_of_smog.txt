@@ -2,7 +2,6 @@ Name:Chain of Smog
 ManaCost:1 B
 Types:Sorcery
 A:SP$ Discard | Cost$ 1 B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBCopy | SpellDescription$ Target player discards two cards. That player may copy this spell and may choose a new target for that copy.
-SVar:DBCopy:DB$ CopySpellAbility | Defined$ Parent | Controller$ TargetedPlayer | Optional$ True | AILogic$ ChainOfSmog | StackDescription$ None
+SVar:DBCopy:DB$ CopySpellAbility | Defined$ Parent | Controller$ TargetedPlayer | Optional$ True | AILogic$ ChainOfSmog | StackDescription$ None | MayChooseTarget$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chain_of_smog.jpg
 Oracle:Target player discards two cards. That player may copy this spell and may choose a new target for that copy.

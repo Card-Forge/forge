@@ -269,7 +269,7 @@ public class TriggerSpellAbilityCast extends Trigger {
         final SpellAbility castSA = (SpellAbility) runParams.get(AbilityKey.CastSA);
         final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceFromSpellAbility(castSA);
         sa.setTriggeringObject(AbilityKey.Card, castSA.getHostCard());
-        sa.setTriggeringObject(AbilityKey.SpellAbility, castSA);
+        sa.setTriggeringObject(AbilityKey.SpellAbility, castSA.copy(castSA.getHostCard(), true));
         sa.setTriggeringObject(AbilityKey.StackInstance, si);
         sa.setTriggeringObject(AbilityKey.SpellAbilityTargetingCards, (si != null ? si.getSpellAbility(true) : castSA).getTargets().getTargetCards());
         sa.setTriggeringObjectsFrom(
