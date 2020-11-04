@@ -1,0 +1,16 @@
+Name:Armix, Filigree Thrasher
+ManaCost:2 B
+Types:Legendary Artifact Creature Golem
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDiscard | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may discard a card. When you do, target creature defending player controls gets -X/-X until end of turn, where X is the number of artifacts you control plus the number of artifact cards in your graveyard.
+SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBImmediateTriggerCheck
+SVar:DBImmediateTriggerCheck:DB$ ImmediateTrigger | Execute$ TrigPump | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | TriggerDescription$ When you do, target creature defending player controls gets -X/-X until end of turn, where X is the number of artifacts you control plus the number of artifact cards in your graveyard.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls | NumAtt$ -X | NumDef$ -X | IsCurse$ True | References$ X,Y | SubAbility$ DBCleanup
+SVar:X:Count$Valid Artifact.YouCtrl/Plus.Y
+SVar:Y:Count$TypeInYourYard.Artifact
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Partner
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Discard
+DeckNeeds:Type$Artifact
+Oracle:Whenever Armix, Filigree Thrasher attacks, you may discard a card. When you do, target creature defending player controls gets -X/-X until end of turn, where X is the number of artifacts you control plus the number of artifact cards in your graveyard.\nPartner (You can have two commanders if both have partner.)

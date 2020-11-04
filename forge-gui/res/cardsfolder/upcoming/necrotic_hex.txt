@@ -1,0 +1,7 @@
+Name:Necrotic Hex
+ManaCost:4 B B
+Types:Sorcery
+A:SP$ Sacrifice | Cost$ 4 B B | Amount$ 6 | SacValid$ Creature | Defined$ Player | SubAbility$ DBToken | SpellDescription$ Each player sacrifices six creatures. You create six tapped 2/2 black Zombie creature tokens.
+SVar:DBToken:DB$ Token | TokenOwner$ You | TokenScript$ b_2_2_zombie | TokenAmount$ 6 | TokenTapped$ True
+DeckHas:Ability$Sacrifice & Ability$Token
+Oracle:Each player sacrifices six creatures. You create six tapped 2/2 black Zombie creature tokens.
