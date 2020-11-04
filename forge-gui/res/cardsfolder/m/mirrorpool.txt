@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ CopySpellAbility | Cost$ 2 C T Sac<1/CARDNAME> | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TargetType$ Spell | SpellDescription$ Copy target instant or sorcery spell you control. You may choose new targets for the copy.
+A:AB$ CopySpellAbility | Cost$ 2 C T Sac<1/CARDNAME> | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TargetType$ Spell | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell you control. You may choose new targets for the copy.
 A:AB$ CopyPermanent | Cost$ 4 C T Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumCopies$ 1 | SpellDescription$ Create a token that's a copy of target creature you control.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mirrorpool.jpg
 Oracle:Mirrorpool enters the battlefield tapped.\n{T}: Add {C}.\n{2}{C}, {T}, Sacrifice Mirrorpool: Copy target instant or sorcery spell you control. You may choose new targets for the copy.\n{4}{C}, {T}, Sacrifice Mirrorpool: Create a token that's a copy of target creature you control.

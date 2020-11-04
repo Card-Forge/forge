@@ -104,8 +104,12 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         if (!c.isImmutable()) {
             final Zone oldZone = game.getZoneOf(c);
             final ZoneType zt = oldZone == null ? ZoneType.Stack : oldZone.getZoneType();
-            cardsAddedThisTurn.add(zt, c);
-            latestStateCardsAddedThisTurn.add(zt, latestState != null ? latestState : c);
+
+            // only if the zoneType differss from this
+            if (zt != zoneType) {
+                cardsAddedThisTurn.add(zt, c);
+                latestStateCardsAddedThisTurn.add(zt, latestState != null ? latestState : c);
+            }
         }
 
         c.setTurnInZone(game.getPhaseHandler().getTurn());

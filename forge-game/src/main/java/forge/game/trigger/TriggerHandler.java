@@ -516,10 +516,17 @@ public class TriggerHandler {
         else {
             // get CardState does not work for transformed cards
             // also its about LKI
+            // TODO remove this part after all spellAbility can handle LKI as host
+            // Currently only true for delayed Trigger
             if (host.isInZone(ZoneType.Battlefield) || !host.hasAlternateState()) {
                 // if host changes Zone with other cards, try to use original host
-                if (!regtrig.getMode().equals(TriggerType.ChangesZone))
-                    host = game.getCardState(host);
+                if (!regtrig.getMode().equals(TriggerType.ChangesZone)) {
+                    Card gameHost = game.getCardState(host);
+                    // TODO only set when the host equals the game state
+                    if (gameHost.equalsWithTimestamp(host)) {
+                        host = gameHost;
+                    }
+                }
             }
         }
 

@@ -3612,8 +3612,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (multiKickerMagnitude > 0) {
             return multiKickerMagnitude;
         }
-        boolean hasK1 = costsPaid.contains(OptionalCost.Kicker1);
-        return hasK1 == costsPaid.contains(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1;
+        boolean hasK1 = isOptionalCostPaid(OptionalCost.Kicker1);
+        return hasK1 == isOptionalCostPaid(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1;
     }
 
     private int pseudoKickerMagnitude = 0;

@@ -4,7 +4,7 @@ Types:Legendary Creature Human Wizard
 PT:3/3
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When CARDNAME enters the battlefield, copy target instant or sorcery spell you control. You may choose new targets for that copy.
-SVar:TrigCopy:DB$ CopySpellAbility | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TgtPrompt$ Select target instant or sorcery spell you control | TargetType$ Spell
+SVar:TrigCopy:DB$ CopySpellAbility | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TgtPrompt$ Select target instant or sorcery spell you control | TargetType$ Spell | MayChooseTarget$ True
 S:Mode$ Continuous | Affected$ Wizard.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Wizards you control get +1/+1.
 DeckHints:Type$Wizard
 Oracle:Flash\nWhen Naru Meha, Master Wizard enters the battlefield, copy target instant or sorcery spell you control. You may choose new targets for the copy.\nOther Wizards you control get +1/+1.

@@ -1,0 +1,15 @@
+Name:Verazol, the Split Current
+ManaCost:X G U
+Types:Legendary Creature Serpent
+PT:0/0
+K:etbCounter:P1P1:Y:no Condition:CARDNAME enters the battlefield with a +1/+1 counter on it for each mana spent to cast it.
+SVar:X:Count$xPaid
+SVar:Y:Count$FirstSpellTotalManaSpent
+T:Mode$ SpellCast | ValidSA$ Spell.Kicked | ValidActivatingPlayer$ You | Execute$ DBRemoveCounters | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a kicked spell, you may remove two +1/+1 counters from CARDNAME.
+SVar:DBRemoveCounters:DB$ RemoveCounter | CounterType$ P1P1 | CounterNum$ 2 | RememberRemoved$ True | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopySpellAbility | ConditionCheckSVar$ Z | ConditionSVarCompare$ GE1 | References$ Z | SubAbility$ DBCleanup | Defined$ TriggeredSpellAbility | AILogic$ Always | MayChooseTarget$ True | SpellDescription$ If you do, copy that spell. You may choose new targets for that copy. (A copy of a permanent spell becomes a token.)
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Z:Count$RememberedSize
+DeckHas:Ability$Counters
+Oracle:Verazol, the Split Current enters the battlefield with a +1/+1 counter on it for each mana spent to cast it.\nWhenever you cast a kicked spell, you may remove two +1/+1 counters from Verazol, the Split Current. If you do, copy that spell. You may choose new targets for that copy. (A copy of a permanent spell becomes a token.)
+

@@ -6,7 +6,7 @@ SVar:DBChangeZoneI:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Vali
 SVar:DBChangeZoneII:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Sorcery.YouCtrl | SpellDescription$ Return target sorcery card from your graveyard to your hand.
 SVar:DBEffect:DB$ Effect | Name$ The Mirari Conjecture Effect | Triggers$ InstantSorceryCast | SVars$ TrigCopySpell | SpellDescription$ Until end of turn, whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy.
 SVar:InstantSorceryCast:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ TrigCopySpell | TriggerZones$ Command | TriggerDescription$ Until end of turn, whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy.
-SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility
+SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 SVar:NeedsToPlayVar:Z GE1
 SVar:Z:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 DeckHints:Type$Instant|Sorcery

@@ -125,12 +125,13 @@ public class CardFactory {
      * which wouldn't ordinarily get set during a simple Card.copy() call.
      * </p>
      * */
-    private final static Card copySpellHost(final Card source, final Card original, final SpellAbility sa, final boolean bCopyDetails){
-        Player controller = sa.getActivatingPlayer();
+    private final static Card copySpellHost(final SpellAbility sourceSA, final SpellAbility targetSA){
+        final Card source = sourceSA.getHostCard();
+        final Card original = targetSA.getHostCard();
+        Player controller = sourceSA.getActivatingPlayer();
         final Card c = copyCard(original, true);
 
         // change the color of the copy (eg: Fork)
-        final SpellAbility sourceSA = source.getFirstSpellAbility();
         if (null != sourceSA && sourceSA.hasParam("CopyIsColor")) {
             String tmp = "";
             final String newColor = sourceSA.getParam("CopyIsColor");
@@ -148,13 +149,14 @@ public class CardFactory {
         c.setOwner(controller);
         c.setCopiedSpell(true);
 
-        if (bCopyDetails) {
-            c.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
-            c.setKickerMagnitude(original.getKickerMagnitude());
+        c.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
+        c.setKickerMagnitude(original.getKickerMagnitude());
 
-            for (OptionalCost cost : original.getOptionalCostsPaid()) {
-                c.addOptionalCostPaid(cost);
-            }
+        for (OptionalCost cost : original.getOptionalCostsPaid()) {
+            c.addOptionalCostPaid(cost);
+        }
+        if (targetSA.isBestow()) {
+            c.animateBestow();
         }
         return c;
     }
@@ -174,44 +176,33 @@ public class CardFactory {
      * @param bCopyDetails
      *            a boolean.
      */
-    public final static SpellAbility copySpellAbilityAndPossiblyHost(final Card source, final Card original, final SpellAbility sa, final boolean bCopyDetails) {
-        Player controller = sa.getActivatingPlayer();
+    public final static SpellAbility copySpellAbilityAndPossiblyHost(final SpellAbility sourceSA, final SpellAbility targetSA) {
+        Player controller = sourceSA.getActivatingPlayer();
 
         //it is only necessary to copy the host card if the SpellAbility is a spell, not an ability
-        final Card c;
-        if (sa.isSpell()){
-            c = copySpellHost(source, original, sa, bCopyDetails);
-        }
-        else {
-            c = original;
-        }
+        final Card c = targetSA.isSpell() ? copySpellHost(sourceSA, targetSA) : targetSA.getHostCard();
 
         final SpellAbility copySA;
-        if (sa.isTrigger() && sa.isWrapper()) {
-            copySA = getCopiedTriggeredAbility((WrappedAbility)sa, c);
+        if (targetSA.isTrigger() && targetSA.isWrapper()) {
+            copySA = getCopiedTriggeredAbility((WrappedAbility)targetSA, c);
         } else {
-            copySA = sa.copy(c, false);
-        }
-
-        if (sa.isSpell()){
-            //only update c's abilities if c is a copy.
-            //(it would be nice to move this into `copySpellHost`,
-            // so all the c-mutating code is together in one place.
-            // but copySA doesn't exist until after `copySpellHost` finishes executing,
-            // so it's hard to resolve that dependency.)
-            c.getCurrentState().setNonManaAbilities(copySA);
+            copySA = targetSA.copy(c, false);
         }
 
         copySA.setCopied(true);
+
+        if (targetSA.usesTargeting()) {
+            // do for SubAbilities too?
+            copySA.setTargets(targetSA.getTargets().clone());
+        }
+
         //remove all costs
         if (!copySA.isTrigger()) {
-            copySA.setPayCosts(new Cost("", sa.isAbility()));
+            copySA.setPayCosts(new Cost("", targetSA.isAbility()));
         }
         copySA.setActivatingPlayer(controller);
 
-        if (bCopyDetails) {
-            copySA.setPaidHash(sa.getPaidHash());
-        }
+        copySA.setPaidHash(targetSA.getPaidHash());
         return copySA;
     }
 

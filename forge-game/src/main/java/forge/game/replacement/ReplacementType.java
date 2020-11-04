@@ -14,6 +14,7 @@ public enum ReplacementType {
     AddCounter(ReplaceAddCounter.class),
     Attached(ReplaceAttached.class),
     Counter(ReplaceCounter.class),
+    CopySpell(ReplaceCopySpell.class),
     CreateToken(ReplaceToken.class),
     DamageDone(ReplaceDamage.class),
     Destroy(ReplaceDestroy.class),

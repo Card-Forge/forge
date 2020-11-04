@@ -25,6 +25,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class TargetChoices implements Cloneable {
 
     // Card or Player are legal targets.
     private final CardCollection targetCards = new CardCollection();
-    private final List<Player> targetPlayers = new ArrayList<>();
+    private final PlayerCollection targetPlayers = new PlayerCollection();
     private final List<SpellAbility> targetSpells = new ArrayList<>();
 
     public final int getNumTargeted() {
@@ -70,8 +71,7 @@ public class TargetChoices implements Cloneable {
     }
 
     private final boolean addTarget(final Card c) {
-        if (!targetCards.contains(c)) {
-            targetCards.add(c);
+        if (targetCards.add(c)) {
             numTargeted++;
             return true;
         }
@@ -79,8 +79,7 @@ public class TargetChoices implements Cloneable {
     }
 
     private final boolean addTarget(final Player p) {
-        if (!targetPlayers.contains(p)) {
-            targetPlayers.add(p);
+        if (targetPlayers.add(p)) {
             numTargeted++;
             return true;
         }
@@ -213,16 +212,10 @@ public class TargetChoices implements Cloneable {
         if (obj instanceof TargetChoices) {
             TargetChoices compare = (TargetChoices)obj;
 
-            if (this.getNumTargeted() != compare.getNumTargeted()) {
+            if (getNumTargeted() != compare.getNumTargeted()) {
                 return false;
             }
-            for (int i = 0; i < this.getTargets().size(); i++) {
-                if (!compare.getTargets().get(i).equals(this.getTargets().get(i))) {
-                    return false;
-                }
-            }
-            return true;
-
+            return getTargets().equals(compare.getTargets());
         } else {
             return false;
         }
