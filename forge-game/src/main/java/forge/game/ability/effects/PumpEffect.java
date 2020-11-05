@@ -401,6 +401,15 @@ public class PumpEffect extends SpellAbilityEffect {
                 continue;
             }
 
+            // substitute CardManaCost
+            if (sa.getParam("KW").contains("CardManaCost")) {
+                String defined = "CardManaCost";
+                String replaced = tgtC.getManaCost().getShortString();
+                for (int i = 0; i < keywords.size(); i++) {
+                    keywords.set(i, TextUtil.fastReplace(keywords.get(i), defined, replaced));
+                }
+            }
+
             applyPump(sa, tgtC, a, d, keywords, timestamp);
         }
 
