@@ -11,12 +11,10 @@ import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameLogEntryType;
-import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
-import forge.game.combat.Combat;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
@@ -483,6 +481,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         final boolean optional = sa.hasParam("Optional");
         final long ts = game.getNextTimestamp();
+        boolean combatChanged = false;
         
         for (final Card tgtC : tgtCards) {
             if (tgt != null && tgtC.isInPlay() && !tgtC.canBeTargetedBy(sa)) {
@@ -616,42 +615,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("FaceDown")) {
                         movedCard.turnFaceDown(true);
                     }
-                    if (sa.hasParam("Attacking")) {
-                        final Combat combat = game.getCombat();
-                        if (null != combat) {
-                            FCollectionView<GameEntity> defs = null;
-                            String attacking = sa.getParam("Attacking");
-                            if ("True".equalsIgnoreCase(attacking)) {
-                                defs = combat.getDefenders();
-                            } else if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
-                                Player defendingPlayer = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard,
-                                        attacking, sa), null);
-                                if (defendingPlayer != null) {
-                                    defs = combat.getDefendersControlledBy(defendingPlayer);
-                                }
-                            }
-                            GameEntity defender = null;
-                            if (sa.hasParam("DefinedDefender")) {
-                                FCollection<GameObject> objs = AbilityUtils.getDefinedObjects(hostCard, sa.getParam("DefinedDefender"), sa);
-                                for(GameObject obj : objs) {
-                                    if (obj instanceof GameEntity) {
-                                        defender = (GameEntity)obj;
-                                        break;
-                                    }
-                                }
-                            } else {
-                                String title = Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(movedCard.getName()));
-                                Map<String, Object> params = Maps.newHashMap();
-                                params.put("Attacker", movedCard);
-                                defender = player.getController().chooseSingleEntityForEffect(defs, sa, title,false,
-                                        params);
-                            }
-                            if (defender != null) {
-                                combat.addAttacker(movedCard, defender);
-                                game.getCombat().getBandOfAttacker(movedCard).setBlocked(false);
-                                game.fireEvent(new GameEventCombatChanged());
-                            }
-                        }
+                    if (addToCombat(movedCard, movedCard.getController(), sa, "Attacking", "Blocking")) {
+                        combatChanged = true;
                     }
                     if (sa.hasParam("Ninjutsu")) {
                         // Ninjutsu need to get the Defender of the Returned Creature 
@@ -659,7 +624,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         final GameEntity defender = game.getCombat().getDefenderByAttacker(returned);
                         game.getCombat().addAttacker(tgtC, defender);
                         game.getCombat().getBandOfAttacker(tgtC).setBlocked(false);
-                        game.fireEvent(new GameEventCombatChanged());
+                        combatChanged = true;
                     }
                     if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
                         tgtC.setTapped(true);
@@ -725,6 +690,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     hostCard.addImprintedCard(movedCard);
                 }
             }
+        }
+
+        if (combatChanged) {
+            game.updateCombatForView();
+            game.fireEvent(new GameEventCombatChanged());
         }
 
         //reveal command cards that changes zone from command zone to player's hand
@@ -1066,6 +1036,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         CardCollection movedCards = new CardCollection();
         long ts = game.getNextTimestamp();
         final CardZoneTable triggerList = new CardZoneTable();
+        boolean combatChanged = false;
         for (final Card c : chosenCards) {
             Card movedCard = null;
             final Zone originZone = game.getZoneOf(c);
@@ -1148,59 +1119,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
 
-                if (sa.hasParam("Attacking")) {
-                    final Combat combat = game.getCombat();
-                    if (null != combat) {
-                        FCollectionView<GameEntity> defs = null;
-                        String attacking = sa.getParam("Attacking");
-                        if ("True".equalsIgnoreCase(attacking)) {
-                            defs = combat.getDefenders();
-                        } else if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
-                            Player defendingPlayer = Iterables.getFirst(AbilityUtils.getDefinedPlayers(source,
-                                    attacking, sa), null);
-                            if (defendingPlayer != null) {
-                                defs = combat.getDefendersControlledBy(defendingPlayer);
-                            }
-                        }
-                        GameEntity defender = null;
-                        if (sa.hasParam("DefinedDefender")) {
-                            FCollection<GameObject> objs = AbilityUtils.getDefinedObjects(source,
-                                    sa.getParam("DefinedDefender"), sa);
-                            for (GameObject obj : objs) {
-                                if (obj instanceof GameEntity) {
-                                    defender = (GameEntity) obj;
-                                    break;
-                                }
-                            }
-                        } else {
-                            String title = Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard",
-                                    CardTranslation.getTranslatedName(c.getName()));
-                            Map<String, Object> params = Maps.newHashMap();
-                            params.put("Attacker", c);
-                            defender = decider.getController().chooseSingleEntityForEffect(defs, sa, title,false,
-                                    params);
-                        }
-                        if (defender != null) {
-                            combat.addAttacker(c, defender);
-                            game.getCombat().getBandOfAttacker(c).setBlocked(false);
-                            game.fireEvent(new GameEventCombatChanged());
-                        }
-                    }
+                if (addToCombat(c, c.getController(), sa, "Attacking", "Blocking")) {
+                    combatChanged = true;
                 }
-                if (sa.hasParam("Blocking")) {
-                    final Combat combat = game.getCombat();
-                    if ( null != combat ) {
-                        CardCollection attackers = AbilityUtils.getDefinedCards(source, sa.getParam("Blocking"), sa);
-                        if (!attackers.isEmpty()) {
-                            Card attacker = attackers.get(0);
-                            if (combat.isAttacking(attacker)) {
-                                combat.addBlocker(attacker, c);
-                                combat.orderAttackersForDamageAssignment(c);
-                                game.fireEvent(new GameEventCombatChanged());
-                            }
-                        }
-                    }
-                }
+
                 // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
                 if (sa.hasParam("FaceDown") && ZoneType.Battlefield.equals(destination)) {
                     c.turnFaceDown(true);
@@ -1302,6 +1224,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             player.shuffle(sa);
         }
 
+        if (combatChanged) {
+            game.updateCombatForView();
+            game.fireEvent(new GameEventCombatChanged());
+        }
         triggerList.triggerChangesZoneAll(game);
     }
 

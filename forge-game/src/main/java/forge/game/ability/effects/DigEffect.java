@@ -1,11 +1,8 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameActionUtil;
-import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -16,7 +13,6 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterType;
-import forge.game.combat.Combat;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
@@ -109,6 +105,7 @@ public class DigEffect extends SpellAbilityEffect {
 
         CardZoneTable table = new CardZoneTable();
         GameEntityCounterTable counterTable = new GameEntityCounterTable();
+        boolean combatChanged = false;
         for (final Player p : tgtPlayers) {
             if (tgt != null && !p.canBeTargetedBy(sa)) {
                 continue;
@@ -317,35 +314,8 @@ public class DigEffect extends SpellAbilityEffect {
                                 if (sa.hasParam("Tapped")) {
                                     c.setTapped(true);
                                 }
-                                if (sa.hasParam("Attacking")) {
-                                    final Combat combat = game.getCombat();
-                                    String attacking = sa.getParam("Attacking");
-                                    GameEntity defender = null;
-                                    FCollectionView<GameEntity> defs = null;
-                                    if (null != combat) {
-                                        if ("True".equalsIgnoreCase(attacking)) {
-                                            defs = combat.getDefenders();
-                                        } else if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
-                                            Player defendingPlayer = Iterables.getFirst(AbilityUtils.getDefinedPlayers(host,
-                                                    attacking, sa), null);
-                                            if (defendingPlayer != null) {
-                                                defs = game.getCombat().getDefendersControlledBy(defendingPlayer);
-                                            }
-                                        }
-                                    }
-                                    if (defs != null) {
-                                        Map<String, Object> params = Maps.newHashMap();
-                                        params.put("Attacker", c);
-                                        defender = player.getController().chooseSingleEntityForEffect(defs, sa,
-                                                Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard",
-                                                        CardTranslation.getTranslatedName(c.getName())),false,
-                                                        params);
-                                    }
-                                    if (defender != null) {
-                                        combat.addAttacker(c, defender);
-                                        game.getCombat().getBandOfAttacker(c).setBlocked(false);
-                                        game.fireEvent(new GameEventCombatChanged());
-                                    }
+                                if (addToCombat(c, c.getController(), sa, "Attacking", "Blocking")) {
+                                    combatChanged = true;
                                 }
                             } else if (destZone1.equals(ZoneType.Exile)) {
                                 c.setExiledWith(effectHost);
@@ -422,6 +392,10 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                 }
             }
+        }
+        if (combatChanged) {
+            game.updateCombatForView();
+            game.fireEvent(new GameEventCombatChanged());
         }
         //table trigger there
         table.triggerChangesZoneAll(game);
