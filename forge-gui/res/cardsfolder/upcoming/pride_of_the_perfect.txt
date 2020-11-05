@@ -1,0 +1,6 @@
+Name:Pride of the Perfect
+ManaCost:3 B
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Elf.YouCtrl | AddPower$ 2 | Description$ Elves you control get +2/+0.
+DeckNeeds:Type$Elf
+Oracle:Elves you control get +2/+0.
