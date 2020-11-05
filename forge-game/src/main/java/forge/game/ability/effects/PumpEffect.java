@@ -401,12 +401,11 @@ public class PumpEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            // substitute CardManaCost
+            // substitute specific tgtC mana cost for keyword placeholder CardManaCost
             if (sa.getParam("KW").contains("CardManaCost")) {
-                String defined = "CardManaCost";
-                String replaced = tgtC.getManaCost().getShortString();
+                String cost = tgtC.getManaCost().getShortString();
                 for (int i = 0; i < keywords.size(); i++) {
-                    keywords.set(i, TextUtil.fastReplace(keywords.get(i), defined, replaced));
+                    keywords.set(i, TextUtil.fastReplace(keywords.get(i), "CardManaCost", cost));
                 }
             }
 
