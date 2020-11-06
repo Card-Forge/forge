@@ -184,7 +184,7 @@ public class StaticData {
 
     public IStorage<PrintSheet> getPrintSheets() {
         if (printSheets == null)
-            printSheets = new StorageBase<>("Special print runs", new PrintSheet.Reader(new File(blockDataFolder, "printsheets.txt")));
+            printSheets = PrintSheet.initializePrintSheets(new File(blockDataFolder, "printsheets.txt"), getEditions());
         return printSheets;
     }
 
