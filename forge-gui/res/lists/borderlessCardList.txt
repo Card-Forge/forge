@@ -38,6 +38,8 @@
 2XM/Urza's Power Plant2.fullborder
 2XM/Urza's Tower2.fullborder
 2XM/Wurmcoil Engine2.fullborder
+CMR/Jeska, Thrice Reborn2.fullborder
+CMR/Tevesh Szat, Doom of Fools2.fullborder
 ELD/Garruk, Cursed Huntsman2.fullborder
 ELD/Oko, Thief of Crowns2.fullborder
 ELD/The Royal Scions2.fullborder
