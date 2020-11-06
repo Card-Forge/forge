@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import forge.GameCommand;
 import forge.card.CardType;
 import forge.game.Game;
@@ -399,6 +401,25 @@ public class PumpEffect extends SpellAbilityEffect {
             // if pump is a target, make sure we can still target now
             if (sa.usesTargeting() && !tgtC.canBeTargetedBy(sa)) {
                 continue;
+            }
+
+            // substitute specific tgtC mana cost for keyword placeholder CardManaCost
+            if (sa.getParam("KW").contains("CardManaCost")) {
+                String cost = tgtC.getManaCost().getShortString();
+                Iterables.removeIf(keywords, new Predicate<String>() {
+                    @Override
+                    public boolean apply(String input) {
+                        if (input.contains("CardManaCost")) {
+                            if (tgtC.getManaCost().isNoCost()) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                });
+                for (int i = 0; i < keywords.size(); i++) {
+                    keywords.set(i, TextUtil.fastReplace(keywords.get(i), "CardManaCost", cost));
+                }
             }
 
             applyPump(sa, tgtC, a, d, keywords, timestamp);
