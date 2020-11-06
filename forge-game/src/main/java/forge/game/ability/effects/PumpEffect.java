@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import forge.GameCommand;
@@ -304,10 +305,11 @@ public class PumpEffect extends SpellAbilityEffect {
         }
         if (sa.hasParam("DefinedLandwalk")) {
             final String landtype = sa.getParam("DefinedLandwalk");
-            final Card c = AbilityUtils.getDefinedCards(host, landtype, sa).get(0);
-            for (String type : c.getType()) {
-                if (CardType.isALandType(type)) {
-                    keywords.add(type + "walk");
+            for (final Card c : AbilityUtils.getDefinedCards(host, landtype, sa)) {
+                for (String type : c.getType()) {
+                    if (CardType.isALandType(type)) {
+                        keywords.add(type + "walk");
+                    }
                 }
             }
         }
@@ -394,7 +396,7 @@ public class PumpEffect extends SpellAbilityEffect {
             final Card tgtC = tgtCards.get(j);
 
             // only pump things in PumpZone
-            if (!game.getCardsIn(pumpZone).contains(tgtC)) {
+            if (!tgtC.isInZone(pumpZone)) {
                 continue;
             }
 
@@ -404,9 +406,10 @@ public class PumpEffect extends SpellAbilityEffect {
             }
 
             // substitute specific tgtC mana cost for keyword placeholder CardManaCost
-            if (sa.getParam("KW").contains("CardManaCost")) {
-                String cost = tgtC.getManaCost().getShortString();
-                Iterables.removeIf(keywords, new Predicate<String>() {
+            List<String> affectedKeywords = Lists.newArrayList(keywords);
+
+            if (!affectedKeywords.isEmpty()) {
+                Iterables.removeIf(affectedKeywords, new Predicate<String>() {
                     @Override
                     public boolean apply(String input) {
                         if (input.contains("CardManaCost")) {
@@ -417,12 +420,23 @@ public class PumpEffect extends SpellAbilityEffect {
                         return false;
                     }
                 });
-                for (int i = 0; i < keywords.size(); i++) {
-                    keywords.set(i, TextUtil.fastReplace(keywords.get(i), "CardManaCost", cost));
-                }
+
+                affectedKeywords = Lists.transform(affectedKeywords, new Function<String, String>() {
+
+                    @Override
+                    public String apply(String input) {
+                        if (input.contains("CardManaCost")) {
+                            input = input.replace("CardManaCost", tgtC.getManaCost().getShortString());
+                        } else if (input.contains("ConvertedManaCost")) {
+                            final String costcmc = Integer.toString(tgtC.getCMC());
+                            input = input.replace("ConvertedManaCost", costcmc);
+                        }
+                        return input;
+                    }
+                });
             }
 
-            applyPump(sa, tgtC, a, d, keywords, timestamp);
+            applyPump(sa, tgtC, a, d, affectedKeywords, timestamp);
         }
 
         if (sa.hasParam("AtEOT") && !tgtCards.isEmpty()) {
