@@ -1,0 +1,9 @@
+Name:Sakashima's Protege
+ManaCost:4 U U
+Types:Creature Shapeshifter
+PT:3/1
+K:Flash
+K:Cascade
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Permanent.enteredBattlefieldThisTurn+Other | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any permanent that entered the battlefield this turn.
+Oracle:Flash\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nYou may have Sakashima’s Protege enter the battlefield as a copy of any permanent that entered the battlefield this turn.
