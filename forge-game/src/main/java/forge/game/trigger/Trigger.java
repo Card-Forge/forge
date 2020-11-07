@@ -93,6 +93,16 @@ public abstract class Trigger extends TriggerReplacementBase {
         this.originalMapParams.putAll(params);
         this.mapParams.putAll(params);
         this.setHostCard(host);
+
+        String triggerZones = getParam("TriggerZones");
+        if (null != triggerZones) {
+            setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(triggerZones)));
+        }
+
+        String triggerPhases = getParam("Phase");
+        if (null != triggerPhases) {
+            setTriggerPhases(PhaseType.parseRange(triggerPhases));
+        }
     }
 
     /**

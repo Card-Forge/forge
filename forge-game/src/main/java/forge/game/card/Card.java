@@ -560,7 +560,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             // do the Transform trigger there, it can also happen if the resulting state doesn't change
 
             // Clear old dfc trigger from the trigger handler
-            getGame().getTriggerHandler().clearInstrinsicActiveTriggers(this, null);
+            getGame().getTriggerHandler().clearActiveTriggers(this, null);
             getGame().getTriggerHandler().registerActiveTrigger(this, false);
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Transformer, this);

@@ -25,7 +25,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.game.player.Player;
-import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
@@ -33,7 +32,6 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import forge.game.GameObject;
 
 import java.util.ArrayList;
@@ -99,7 +97,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
 
     private final List<ZoneType> zonesToOpen;
     private final Map<Player, Object> playersWithValidTargets;
-    private final Set<Trigger> oncePerEffectTriggers = Sets.newHashSet();
 
     private final StackItemView view;
 
@@ -278,14 +275,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
 
     public final Map<Player, Object> getPlayersWithValidTargets() {
         return playersWithValidTargets;
-    }
-
-    public final boolean hasOncePerEffectTrigger(Trigger trigger) {
-        return oncePerEffectTriggers.contains(trigger);
-    }
-
-    public final boolean addOncePerEffectTrigger(Trigger trigger) {
-        return oncePerEffectTriggers.add(trigger);
     }
 
     public void updateTarget(TargetChoices target) {
