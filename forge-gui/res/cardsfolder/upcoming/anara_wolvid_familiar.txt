@@ -1,4 +1,4 @@
-Name:Anara, Lupine Familiar
+Name:Anara, Wolvid Familiar
 ManaCost:3 G
 Types:Legendary Creature Wolf Beast
 PT:4/4
