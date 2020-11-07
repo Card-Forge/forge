@@ -1,0 +1,13 @@
+Name:Abomination of Llanowar
+ManaCost:1 B G
+Types:Legendary Creature Elf Horror
+PT:*/*
+K:Vigilance
+K:Menace
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X,Y | Description$ CARDNAME's power and toughness are each equal to the number of Elves you control plus the number of Elf cards in your graveyard.
+SVar:X:Count$Valid Elf.YouCtrl/Plus.Y
+SVar:Y:Count$TypeInYourYard.Elf
+SVar:NeedsToPlayVar:X GE1
+SVar:BuffedBy:Elf
+DeckNeeds:Type$Elf
+Oracle:Vigilance; menace (This creature can't be blocked except by two or more creatures.)\nAbomination of Llanowar's power and toughness are each equal to the number of Elves you control plus the number of Elf cards in your graveyard.

@@ -1,0 +1,9 @@
+Name:Akroma's Will
+ManaCost:3 W
+Types:Instant
+A:SP$ Charm | Cost$ 3 W | MinCharmNum$ 1 | CharmNum$ X | References$ X,Y | Choices$ DBFly,DBLife | SpellDescription$ If you control a commander as you cast this spell, you may choose both.
+SVar:DBFly:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Flying & Vigilance & Double Strike | SpellDescription$ Creatures you control gain flying, vigilance, and double strike until end of turn.
+SVar:DBLife:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Lifelink & Indestructible & Protection from all colors | SpellDescription$ Creatures you control gain lifelink, indestructible, and protection from all colors until end of turn.
+SVar:X:Count$Compare Y GE1.2.1
+SVar:Y:Count$Valid Card.IsCommander+YouCtrl
+Oracle:Choose one. If you control a commander as you cast this spell, you may choose both.\n• Creatures you control gain flying, vigilance, and double strike until end of turn.\n• Creatures you control gain lifelink, indestructible and protection from all colors until end of turn.
