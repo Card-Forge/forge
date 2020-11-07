@@ -8,7 +8,9 @@ import forge.card.MagicColor;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.GameCommand;
 import forge.card.CardType;
@@ -18,6 +20,7 @@ import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
+import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
@@ -28,8 +31,11 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.CardTranslation;
 import forge.util.Lang;
+import forge.util.Localizer;
 import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 
 /**
  * <p>
@@ -522,5 +528,59 @@ public abstract class SpellAbilityEffect {
             game.getAction().moveTo(ZoneType.Command, eff, sa);
             game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         }
+    }
+
+    protected static boolean addToCombat(Card c, Player controller, SpellAbility sa, String attackingParam, String blockingParam) {
+        final Card host = sa.getHostCard();
+        final Game game = controller.getGame();
+        if (!game.getPhaseHandler().inCombat()) {
+            return false;
+        }
+        boolean combatChanged = false;
+        final Combat combat = game.getCombat();
+
+        if (sa.hasParam(attackingParam) && combat.getAttackingPlayer().equals(controller)) {
+            String attacking = sa.getParam(attackingParam);
+            GameEntity defender = null;
+            FCollectionView<GameEntity> defs = null;
+            if ("True".equalsIgnoreCase(attacking)) {
+                defs = combat.getDefenders();
+            } else if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
+                Player defendingPlayer = Iterables.getFirst(AbilityUtils.getDefinedPlayers(host, attacking, sa), null);
+                if (defendingPlayer != null) {
+                    defs = game.getCombat().getDefendersControlledBy(defendingPlayer);
+                }
+            } else {
+                defs = AbilityUtils.getDefinedEntities(host, attacking, sa);
+            }
+
+            if (defs != null) {
+                Map<String, Object> params = Maps.newHashMap();
+                params.put("Attacker", c);
+                defender = controller.getController().chooseSingleEntityForEffect(defs, sa,
+                        Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false, params);
+            }
+
+            if (defender != null) {
+                combat.addAttacker(c, defender);
+                combatChanged = true;
+            }
+        }
+        if (sa.hasParam(blockingParam)) {
+            final Card attacker = Iterables.getFirst(AbilityUtils.getDefinedCards(host, sa.getParam(blockingParam), sa), null);
+            if (attacker != null) {
+                final boolean wasBlocked = combat.isBlocked(attacker);
+                combat.addBlocker(attacker, c);
+                combat.orderAttackersForDamageAssignment(c);
+
+                // Run triggers for new blocker and add it to damage assignment order
+                if (!wasBlocked) {
+                    combat.setBlocked(attacker, true);
+                    combat.addBlockerToDamageAssignmentOrder(attacker, c);
+                }
+                combatChanged = true;
+            }
+        }
+        return combatChanged;
     }
 }

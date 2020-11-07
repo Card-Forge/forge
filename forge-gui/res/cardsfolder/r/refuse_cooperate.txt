@@ -3,11 +3,9 @@ ManaCost:3 R
 AlternateMode: Split
 Types:Instant
 A:SP$ Pump | Cost$ 3 R | ValidTgts$ Card | TgtZone$ Stack | TgtPrompt$ Select target spell | PumpZone$ Stack | StackDescription$ None | SubAbility$ DBDmg | SpellDescription$ CARDNAME deals damage to target spell's controller equal to that spell's converted mana cost.
-
 SVar:DBDmg:DB$ DealDamage | Defined$ TargetedController | NumDmg$ X | References$ X
 SVar:X:Targeted$CardManaCost
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/refuse_cooperate.jpg
 Oracle:Refuse deals damage to target spell's controller equal to that spell's converted mana cost.
 
 ALTERNATE
@@ -16,5 +14,5 @@ Name:Cooperate
 ManaCost:2 U
 Types:Instant
 K:Aftermath
-A:SP$ CopySpellAbility | Cost$ 2 U | ValidTgts$ Instant,Sorcery | TargetType$ Spell | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.
+A:SP$ CopySpellAbility | Cost$ 2 U | ValidTgts$ Instant,Sorcery | TargetType$ Spell | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nCopy target instant or sorcery spell. You may choose new targets for the copy.

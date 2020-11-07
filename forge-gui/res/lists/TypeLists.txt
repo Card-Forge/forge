@@ -307,7 +307,9 @@ Gideon
 Huatli
 Jace
 Jaya
+Jeska
 Karn
+Kasmina
 Kaya
 Kiora
 Koth
@@ -325,6 +327,7 @@ Samut
 Sarkhan
 Serra
 Sorin
+Szat
 Tamiyo
 Teferi
 Teyo

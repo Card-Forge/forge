@@ -2,6 +2,5 @@ Name:Sigil Tracer
 ManaCost:1 U U
 Types:Creature Merfolk Wizard
 PT:2/2
-A:AB$CopySpellAbility | Cost$ 1 U tapXType<2/Wizard> | ValidTgts$ Instant,Sorcery | AILogic$ OnceIfViable | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_tracer.jpg
+A:AB$CopySpellAbility | Cost$ 1 U tapXType<2/Wizard> | ValidTgts$ Instant,Sorcery | AILogic$ OnceIfViable | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.
 Oracle:{1}{U}, Tap two untapped Wizards you control: Copy target instant or sorcery spell. You may choose new targets for the copy.

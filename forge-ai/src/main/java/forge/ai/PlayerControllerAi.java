@@ -970,8 +970,20 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
         for (final SpellAbility sa : getAi().orderPlaySa(activePlayerSAs)) {
-            if (prepareSingleSa(sa.getHostCard(),sa,true)) {
+            if (sa.isTrigger() && prepareSingleSa(sa.getHostCard(), sa, true)) {
                 ComputerUtil.playStack(sa, player, game);
+            } else {
+                if (sa.isSpell() && sa.isCopied()) {
+                    player.getGame().getStackZone().add(sa.getHostCard());
+                    // TODO check if static abilities needs to be run for things affecting the copy?
+                    if (sa.isMayChooseNewTargets() && !sa.setupTargets()) {
+                        // if targets can't be done, remove copy from existence
+                        sa.getHostCard().ceaseToExist();
+                        continue;
+                    }
+                }
+                // need finally add the new spell to the stack
+                player.getGame().getStack().add(sa);
             }
         }
     }

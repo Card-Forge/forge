@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -30,11 +30,9 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.keyword.KeywordInterface;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
@@ -146,16 +144,6 @@ public class TriggerHandler {
         try {
             final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));
             ret = type.createTrigger(mapParams, host, intrinsic);
-
-            String triggerZones = mapParams.get("TriggerZones");
-            if (null != triggerZones) {
-                ret.setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(triggerZones)));
-            }
-
-            String triggerPhases = mapParams.get("Phase");
-            if (null != triggerPhases) {
-                ret.setTriggerPhases(PhaseType.parseRange(triggerPhases));
-            }
         } catch (Exception e) {
             String msg = "TriggerHandler:parseTrigger failed to parse";
             Sentry.getContext().recordBreadcrumb(
@@ -215,36 +203,35 @@ public class TriggerHandler {
         if (collect) {
             collectTriggerForWaiting();
         }
-        buildActiveTrigger();        
+        buildActiveTrigger();
     }
 
-    public final void clearInstrinsicActiveTriggers(final Card c, Zone zoneFrom) {
-        final Iterator<Trigger> itr = activeTriggers.iterator();
-        Trigger t;
-        final List<Trigger> toBeRemoved = new ArrayList<>();
+    public final void clearActiveTriggers(final Card c, Zone zoneFrom) {
+        final List<Trigger> toBeRemoved = Lists.newArrayList();
 
-        while(itr.hasNext()) {
-            t = itr.next();
-
+        for (Trigger t : activeTriggers) {
             // Clear if no ZoneFrom, or not coming from the TriggerZone
-            if (c.getId() == t.getHostCard().getId() && t.isIntrinsic()) {
+            if (c.getId() == t.getHostCard().getId()) {
                 if (!c.getTriggers().contains(t) || !t.zonesCheck(zoneFrom))
                     toBeRemoved.add(t);
             }
         }
 
-        for (final Trigger removed : toBeRemoved) {
-            // This line was not removing the correct trigger for cloned tokens
-            activeTriggers.remove(removed);
-        }
+        activeTriggers.removeAll(toBeRemoved);
     }
 
     public final void registerActiveTrigger(final Card c, final boolean onlyExtrinsic) {
         for (final Trigger t : c.getTriggers()) {
             if (!onlyExtrinsic || c.isCloned() || !t.isIntrinsic() || t instanceof TriggerAlways) {
-                if (isTriggerActive(t)) {
-                    activeTriggers.add(t);
-                }
+                registerOneTrigger(t);
+            }
+        }
+    }
+
+    public final void registerActiveLTBTrigger(final Card c) {
+        for (final Trigger t : c.getTriggers()) {
+            if (TriggerType.ChangesZone.equals(t.getMode()) && "Battlefield".equals(t.getParam("Origin"))) {
+                registerOneTrigger(t);
             }
         }
     }
@@ -329,7 +316,7 @@ public class TriggerHandler {
             }
         }
 
-        // AP 
+        // AP
         checkStatics |= runNonStaticTriggersForPlayer(playerAP, wt, delayedTriggersWorkingCopy);
 
         // NAPs
@@ -371,14 +358,6 @@ public class TriggerHandler {
                         if (card.isCloned() || !t.isIntrinsic()) {
                             runParams.put(AbilityKey.Card, card);
                         }
-                    }
-                }
-
-                if (t.hasParam("OncePerEffect")) {
-                    SpellAbilityStackInstance si =
-                            (SpellAbilityStackInstance) runParams.get(AbilityKey.SpellAbilityStackInstance);
-                    if (si != null) {
-                        si.addOncePerEffectTrigger(t);
                     }
                 }
 
@@ -489,7 +468,7 @@ public class TriggerHandler {
                     }
                 }
             }
-        } 
+        }
         return true;
     }
 
@@ -516,10 +495,17 @@ public class TriggerHandler {
         else {
             // get CardState does not work for transformed cards
             // also its about LKI
+            // TODO remove this part after all spellAbility can handle LKI as host
+            // Currently only true for delayed Trigger
             if (host.isInZone(ZoneType.Battlefield) || !host.hasAlternateState()) {
                 // if host changes Zone with other cards, try to use original host
-                if (!regtrig.getMode().equals(TriggerType.ChangesZone))
-                    host = game.getCardState(host);
+                if (!regtrig.getMode().equals(TriggerType.ChangesZone)) {
+                    Card gameHost = game.getCardState(host);
+                    // TODO only set when the host equals the game state
+                    if (gameHost.equalsWithTimestamp(host)) {
+                        host = gameHost;
+                    }
+                }
             }
         }
 
@@ -665,8 +651,7 @@ public class TriggerHandler {
 
         if (t.getMode() == TriggerType.ChangesZone) {
             // iterate over all cards
-            final List<Card> lastCards = CardLists.filterControlledBy(p.getGame().getLastStateBattlefield(), p);
-            for (final Card ck : lastCards) {
+            for (final Card ck : CardLists.filterControlledBy(p.getGame().getLastStateBattlefield(), p)) {
                 for (final KeywordInterface ki : ck.getKeywords()) {
                     final String kw = ki.getOriginal();
                     if (kw.startsWith("Panharmonicon")) {
@@ -701,7 +686,7 @@ public class TriggerHandler {
             }
         } else if (t.getMode() == TriggerType.ChangesZoneAll) {
             final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
-            // iterate over all cards
+            // iterate over all cards that are on the battlefield right now, don't use last state
             for (final Card ck : p.getCardsIn(ZoneType.Battlefield)) {
                 for (final KeywordInterface ki : ck.getKeywords()) {
                     final String kw = ki.getOriginal();

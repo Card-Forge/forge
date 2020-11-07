@@ -104,11 +104,11 @@ public class CloneEffect extends SpellAbilityEffect {
             final List<Card> cloneTargets = AbilityUtils.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
             if (!cloneTargets.isEmpty()) {
                 tgtCard = cloneTargets.get(0);
-                game.getTriggerHandler().clearInstrinsicActiveTriggers(tgtCard, null);
+                game.getTriggerHandler().clearActiveTriggers(tgtCard, null);
             }
         } else if (sa.hasParam("Choices") && sa.usesTargeting()) {
             tgtCard = sa.getTargets().getFirstTargetedCard();
-            game.getTriggerHandler().clearInstrinsicActiveTriggers(tgtCard, null);
+            game.getTriggerHandler().clearActiveTriggers(tgtCard, null);
         }
 
         if (sa.hasParam("CloneZone")) {

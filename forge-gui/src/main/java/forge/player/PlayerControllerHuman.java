@@ -1671,7 +1671,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         List<SpellAbility> orderedSAs = activePlayerSAs;
         if (activePlayerSAs.size() > 1) {
             final String firstStr = activePlayerSAs.get(0).toString();
-            boolean needPrompt = false;
+            boolean needPrompt = !activePlayerSAs.get(0).isTrigger();
 
             // for the purpose of pre-ordering, no need for extra granularity
             Integer idxAdditionalInfo = firstStr.indexOf(" [");
@@ -1682,6 +1682,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 SpellAbility currentSa = activePlayerSAs.get(i);
                 String saStr = currentSa.toString();
 
+                // if current SA isn't a trigger and it uses Targeting, try to show prompt
+                if (!currentSa.isTrigger() && currentSa.usesTargeting()) {
+                    needPrompt = true;
+                }
                 if (!needPrompt && !saStr.equals(firstStr)) {
                     needPrompt = true; // prompt by default unless all abilities
                                        // are the same
@@ -1738,6 +1742,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (next.isTrigger()) {
                 HumanPlay.playSpellAbility(this, player, next);
             } else {
+                if (next.isSpell() && next.isCopied()) {
+                    // copied spell always add to stack
+                    player.getGame().getStackZone().add(next.getHostCard());
+                    // TODO check if static abilities needs to be run for things affecting the copy?
+                    if (next.isMayChooseNewTargets() && !next.setupTargets()) {
+                        // if targets can't be done, remove copy from existence
+                        next.getHostCard().ceaseToExist();
+                    }
+                }
                 player.getGame().getStack().add(next);
             }
         }
@@ -2450,6 +2463,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             final PaperCard c = carddb.getUniqueByName(f.getName());
             final Card forgeCard = Card.fromPaperCard(c, p);
+            forgeCard.setTimestamp(game.getNextTimestamp());
 
             game.getAction().invoke(new Runnable() {
                 @Override

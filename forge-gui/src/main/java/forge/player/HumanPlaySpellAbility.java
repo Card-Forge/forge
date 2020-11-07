@@ -38,7 +38,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.*;
 import forge.game.zone.Zone;
-import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collections;
@@ -151,7 +150,7 @@ public class HumanPlaySpellAbility {
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
         final boolean prerequisitesMet = announceValuesLikeX()
                 && announceType()
-                && (!mayChooseTargets || setupTargets()) // if you can choose targets, then do choose them.
+                && (!mayChooseTargets || ability.setupTargets()) // if you can choose targets, then do choose them.
                 && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, ability.getHostCard())));
 
         if (!prerequisitesMet) {
@@ -190,54 +189,13 @@ public class HumanPlaySpellAbility {
             // no worries here. The same thread must resolve, and by this moment ability will have been resolved already
             // Triggers haven't resolved yet ??
             if (mayChooseTargets) {
-                clearTargets(ability);
+                ability.clearTargets();
             }
             if (manaTypeConversion || manaColorConversion || keywordColor) {
                 manapool.restoreColorReplacements();
             }
         }
         return true;
-    }
-
-    private final boolean setupTargets() {
-        // Skip to paying if parent ability doesn't target and has no subAbilities.
-        // (or trigger case where its already targeted)
-        SpellAbility currentAbility = ability;
-        final Card source = ability.getHostCard();
-        do {
-            final TargetRestrictions tgt = currentAbility.getTargetRestrictions();
-            if (tgt != null && tgt.doesTarget()) {
-                clearTargets(currentAbility);
-                Player targetingPlayer;
-                if (currentAbility.hasParam("TargetingPlayer")) {
-                    final FCollection<Player> candidates = AbilityUtils.getDefinedPlayers(source, currentAbility.getParam("TargetingPlayer"), currentAbility);
-                    // activator chooses targeting player
-                    targetingPlayer = ability.getActivatingPlayer().getController().chooseSingleEntityForEffect(
-                            candidates, currentAbility, "Choose the targeting player", null);
-                } else {
-                    targetingPlayer = ability.getActivatingPlayer();
-                }
-                currentAbility.setTargetingPlayer(targetingPlayer);
-                if (!targetingPlayer.getController().chooseTargetsFor(currentAbility)) {
-                    return false;
-                }
-            }
-            final AbilitySub subAbility = currentAbility.getSubAbility();
-            if (subAbility != null) {
-                // This is necessary for "TargetsWithDefinedController$ ParentTarget"
-                subAbility.setParent(currentAbility);
-            }
-            currentAbility = subAbility;
-        } while (currentAbility != null);
-        return true;
-    }
-
-    public final void clearTargets(final SpellAbility ability) {
-        final TargetRestrictions tg = ability.getTargetRestrictions();
-        if (tg != null) {
-            ability.resetTargets();
-            tg.calculateStillToDivide(ability.getParam("DividedAsYouChoose"), ability.getHostCard(), ability);
-        }
     }
 
     private void rollbackAbility(final Zone fromZone, final int zonePosition, CostPayment payment) {
@@ -251,7 +209,7 @@ public class HumanPlaySpellAbility {
             game.getAction().moveTo(fromZone, ability.getHostCard(), zonePosition >= 0 ? Integer.valueOf(zonePosition) : null, null);
         }
 
-        clearTargets(ability);
+        ability.clearTargets();
 
         ability.resetOnceResolved();
         payment.refundPayment();

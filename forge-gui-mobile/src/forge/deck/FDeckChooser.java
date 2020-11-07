@@ -292,73 +292,94 @@ public class FDeckChooser extends FScreen {
         }
     }
 
+    private boolean isGeneratedDeck(DeckType deckType) {
+        switch (deckType) {
+            case COLOR_DECK:
+            case STANDARD_COLOR_DECK:
+            case STANDARD_CARDGEN_DECK:
+            case RANDOM_CARDGEN_COMMANDER_DECK:
+            case RANDOM_COMMANDER_DECK:
+            case MODERN_CARDGEN_DECK:
+            case PIONEER_CARDGEN_DECK:
+            case LEGACY_CARDGEN_DECK:
+            case VINTAGE_CARDGEN_DECK:
+            case MODERN_COLOR_DECK:
+            case THEME_DECK:
+            case RANDOM_DECK:
+                return true;
+            default:
+                return false;
+        }
+    }
     private void createNewDeck() {
-        FDeckEditor editor;
-        switch (selectedDeckType) {
-        case DRAFT_DECK:
+        final FDeckEditor[] editor = new FDeckEditor[1];
+        final DeckProxy deck = lstDecks.getSelectedItem();
+        String overlayText = "Loading ";
+        if (selectedDeckType == DeckType.DRAFT_DECK) {
             NewGameScreen.BoosterDraft.open();
             return;
-        case SEALED_DECK:
+        }
+        if (selectedDeckType == DeckType.SEALED_DECK) {
             NewGameScreen.SealedDeck.open();
             return;
-        case COLOR_DECK:
-        case STANDARD_COLOR_DECK:
-        case STANDARD_CARDGEN_DECK:
-        case RANDOM_CARDGEN_COMMANDER_DECK:
-        case RANDOM_COMMANDER_DECK:
-        case MODERN_CARDGEN_DECK:
-        case PIONEER_CARDGEN_DECK:
-        case LEGACY_CARDGEN_DECK:
-        case VINTAGE_CARDGEN_DECK:
-        case MODERN_COLOR_DECK:
-        case THEME_DECK:
-        case RANDOM_DECK:
-            final DeckProxy deck = lstDecks.getSelectedItem();
-            if (deck != null) {
-                Deck generatedDeck = deck.getDeck();
-                if (generatedDeck == null) { return; }
-
-                generatedDeck = (Deck)generatedDeck.copyTo(""); //prevent deck having a name by default
-                editor = new FDeckEditor(getEditorType(), generatedDeck, true);
-            }
-            else {
+        }
+        if (isGeneratedDeck(selectedDeckType)) {
+            overlayText += "Deck";
+            if (deck == null) {
                 FOptionPane.showErrorDialog(localizer.getMessage("lblMustSelectGenerateNewDeck"));
                 return;
             }
-            break;
-        default:
-            editor = new FDeckEditor(getEditorType(), "", false);
-            break;
+        } else {
+            overlayText += "Catalog";
         }
-        editor.setSaveHandler(new FEventHandler() {
+        String finalOverlay = overlayText;
+        FThreads.invokeInEdtLater(new Runnable() {
             @Override
-            public void handleEvent(FEvent e) {
-                //ensure user returns to proper deck type and that list is refreshed if new deck is saved
-                if (!needRefreshOnActivate) {
-                    needRefreshOnActivate = true;
-                    if (lstDecks.getGameType() == GameType.DeckManager) {
-                        switch (selectedDeckType) {
-                        case COMMANDER_DECK:
-                        case OATHBREAKER_DECK:
-                        case TINY_LEADERS_DECK:
-                        case BRAWL_DECK:
-                        case SCHEME_DECK:
-                        case PLANAR_DECK:
-                        case DRAFT_DECK:
-                        case SEALED_DECK:
-                            break;
-                        default:
-                            setSelectedDeckType(DeckType.CONSTRUCTED_DECK);
-                            break;
+            public void run() {
+                LoadingOverlay.show(finalOverlay, new Runnable() {
+                    @Override
+                    public void run() {
+                        if (isGeneratedDeck(selectedDeckType)) {
+                            Deck generatedDeck = deck.getDeck();
+                            if (generatedDeck == null) { return; }
+                            generatedDeck = (Deck)generatedDeck.copyTo(""); //prevent deck having a name by default
+                            editor[0] = new FDeckEditor(getEditorType(), generatedDeck, true);
+                        } else {
+                            editor[0] = new FDeckEditor(getEditorType(), "", false);
                         }
+                        editor[0].setSaveHandler(new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                //ensure user returns to proper deck type and that list is refreshed if new deck is saved
+                                if (!needRefreshOnActivate) {
+                                    needRefreshOnActivate = true;
+                                    if (lstDecks.getGameType() == GameType.DeckManager) {
+                                        switch (selectedDeckType) {
+                                            case COMMANDER_DECK:
+                                            case OATHBREAKER_DECK:
+                                            case TINY_LEADERS_DECK:
+                                            case BRAWL_DECK:
+                                            case SCHEME_DECK:
+                                            case PLANAR_DECK:
+                                            case DRAFT_DECK:
+                                            case SEALED_DECK:
+                                                break;
+                                            default:
+                                                setSelectedDeckType(DeckType.CONSTRUCTED_DECK);
+                                                break;
+                                        }
+                                    }
+                                    else {
+                                        setSelectedDeckType(DeckType.CUSTOM_DECK);
+                                    }
+                                }
+                            }
+                        });
+                        Forge.openScreen(editor[0]);
                     }
-                    else {
-                        setSelectedDeckType(DeckType.CUSTOM_DECK);
-                    }
-                }
+                });
             }
         });
-        Forge.openScreen(editor);
     }
 
     private void editSelectedDeck() {
