@@ -31,6 +31,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import com.google.common.collect.Lists;
 
 /**
  * Controls the draft submenu in the home UI.
@@ -86,6 +88,7 @@ public enum CSubmenuDraft implements ICDoc {
         view.getRadSingle().addActionListener(radioAction);
 
         view.getRadAll().addActionListener(radioAction);
+        view.getRadMultiple().addActionListener(radioAction);
     }
 
     /* (non-Javadoc)
@@ -117,7 +120,7 @@ public enum CSubmenuDraft implements ICDoc {
 
     private void startGame(final GameType gameType) {
         final Localizer localizer = Localizer.getInstance();
-        final boolean gauntlet = !VSubmenuDraft.SINGLETON_INSTANCE.isSingleSelected();
+        final boolean gauntlet = VSubmenuDraft.SINGLETON_INSTANCE.isGauntlet();
         final DeckProxy humanDeck = VSubmenuDraft.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
 
         if (humanDeck == null) {
@@ -154,17 +157,34 @@ public enum CSubmenuDraft implements ICDoc {
             }
         });
 
-        // Restore Zero Indexing
-        final int aiIndex = Integer.parseInt(duelType)-1;
-        final Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
-        if (aiDeck == null) {
-            throw new IllegalStateException("Draft: Computer deck is null!");
+        List<Deck> aiDecks = Lists.newArrayList();
+        if (VSubmenuDraft.SINGLETON_INSTANCE.isSingleSelected()) {
+            // Restore Zero Indexing
+            final int aiIndex = Integer.parseInt(duelType)-1;
+            final Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
+            if (aiDeck == null) {
+                throw new IllegalStateException("Draft: Computer deck is null!");
+            }
+            aiDecks.add(aiDeck);
+        } else {
+            final int numOpponents = Integer.parseInt(duelType);
+
+            List<Deck> randomOpponents = Lists.newArrayList(opponentDecks.getAiDecks());
+            Collections.shuffle(randomOpponents);
+            aiDecks = randomOpponents.subList(0, numOpponents);
+            for(Deck d : aiDecks) {
+                if (d == null) {
+                    throw new IllegalStateException("Draft: Computer deck is null!");
+                }
+            }
         }
 
         final List<RegisteredPlayer> starter = new ArrayList<>();
         final RegisteredPlayer human = new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
         starter.add(human);
-        starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
+        for(Deck aiDeck : aiDecks) {
+            starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
+        }
         for (final RegisteredPlayer pl : starter) {
             pl.assignConspiracies();
         }
@@ -219,10 +239,15 @@ public enum CSubmenuDraft implements ICDoc {
                 // 1-7 instead of 0-6
                 combo.addItem(String.valueOf(indx));
             }
-        } else {
+        } else if (VSubmenuDraft.SINGLETON_INSTANCE.isGauntlet()) {
             // Gauntlet/Tournament
             combo.addItem("Gauntlet");
             //combo.addItem("Tournament");
+        } else {
+            combo.addItem("2");
+            combo.addItem("3");
+            combo.addItem("4");
+            combo.addItem("5");
         }
     }
 
