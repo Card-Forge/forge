@@ -366,6 +366,8 @@ Type=Other
 359 R Undergrowth Stadium
 360 R Vault of Champions
 361 R War Room
+
+[commander decks]
 362 M Wyleth, Soul of Steel
 363 R Timely Ward
 364 R Blazing Sunsteel
