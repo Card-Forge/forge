@@ -2978,8 +2978,8 @@ public class CardFactoryUtil {
 
             inst.addTrigger(trigger);
         } else if (keyword.equals("Persist")) {
-            final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OncePerEffect$ True " +
-                    " | ValidCard$ Card.Self+counters_EQ0_M1M1 | Secondary$ True" +
+            final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard " +
+                    " | ValidCard$ Card.Self+counters_EQ0_M1M1 | TriggerZones$ Battlefield | Secondary$ True" +
                     " | TriggerDescription$ Persist (" + inst.getReminderText() + ")";
             final String effect = "DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ M1M1_1";
 
@@ -3287,8 +3287,8 @@ public class CardFactoryUtil {
 
             inst.addTrigger(parsedTrigger);
         } else if (keyword.equals("Undying")) {
-            final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OncePerEffect$ True " +
-                    " | Execute$ UndyingReturn | ValidCard$ Card.Self+counters_EQ0_P1P1 | TriggerZones$ Battlefield | Secondary$ True" +
+            final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard " +
+                    " | ValidCard$ Card.Self+counters_EQ0_P1P1 | TriggerZones$ Battlefield | Secondary$ True" +
                     " | TriggerDescription$ Undying (" + inst.getReminderText() + ")";
             final String effect = "DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ P1P1_1";
 

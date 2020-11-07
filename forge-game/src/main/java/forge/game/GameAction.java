@@ -382,8 +382,9 @@ public class GameAction {
 
         // Need to apply any static effects to produce correct triggers
         checkStaticAbilities();
-        game.getTriggerHandler().clearInstrinsicActiveTriggers(c, zoneFrom);
-        game.getTriggerHandler().registerActiveTrigger(lastKnownInfo, false);
+        game.getTriggerHandler().clearActiveTriggers(copied, null);
+        game.getTriggerHandler().registerActiveLTBTrigger(lastKnownInfo);
+        game.getTriggerHandler().registerActiveTrigger(copied, false);
 
         table.triggerCountersPutAll(game);
 
