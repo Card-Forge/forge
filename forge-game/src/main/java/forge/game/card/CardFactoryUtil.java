@@ -3729,11 +3729,11 @@ public class CardFactoryUtil {
                     + " | Description$ Totem armor (" + inst.getReminderText() + ")";
 
             String abprevDamage = "DB$ DealDamage | Defined$ ReplacedCard | Remove$ All ";
-            String abdestory = "DB$ Destroy | Defined$ Self";
+            String abdestroy = "DB$ Destroy | Defined$ Self";
 
             SpellAbility sa = AbilityFactory.getAbility(abprevDamage, card);
 
-            final AbilitySub dessub = (AbilitySub) AbilityFactory.getAbility(abdestory, card);
+            final AbilitySub dessub = (AbilitySub) AbilityFactory.getAbility(abdestroy, card);
 
             sa.setSubAbility(dessub);
 

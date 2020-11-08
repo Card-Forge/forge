@@ -6,7 +6,7 @@ A:SP$ Charm | Cost$ 2 B B | Choices$ DBEffect,DBEffect2 | CharmNum$ 1
 SVar:DBEffect:DB$ Effect | Name$ Shriveling Rot Effect | Triggers$ Trig1 | SVars$ SVar1 | SpellDescription$ Until end of turn, whenever a creature is dealt damage, destroy it.
 SVar:DBEffect2:DB$ Effect | Name$ Shriveling Rot Effect 2 | Triggers$ Trig2 | SVars$ SVar2,X | SpellDescription$ Until end of turn, whenever a creature dies, that creature's controller loses life equal to its toughness.
 SVar:Trig1:Mode$ DamageDoneOnce | ValidTarget$ Creature | Execute$ SVar1 | TriggerDescription$ Whenever a creature is dealt damage, destroy it.
-SVar:SVar1:DB$ Destroy | Defined$ TriggeredTarget
+SVar:SVar1:DB$ Destroy | Defined$ TriggeredTargetLKICopy
 SVar:Trig2:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | Execute$ SVar2 | TriggerDescription$ Whenever a creature dies, that creature's controller loses life equal to its toughness.
 SVar:SVar2:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ X | References$ X
 SVar:X:TriggeredCard$CardToughness

@@ -333,14 +333,7 @@ public final class CardUtil {
         return newCopy;
     }
 
-    public static CardCollection getRadiance(final SpellAbility sa, final Card origin) {
-        if (!sa.usesTargeting()) {
-            return new CardCollection();
-        }
-        return getRadiance(sa, origin, sa.getParam("ValidTgts").split(","));
-    }
-
-    public static <T> CardCollection getRadiance(final SpellAbility sa) {
+    public static CardCollection getRadiance(final SpellAbility sa) {
         if (!sa.usesTargeting() || !sa.hasParam("Radiance")) {
             return new CardCollection();
         }
@@ -371,25 +364,6 @@ public final class CardUtil {
             }
         }
 
-        return res;
-    }
-
-    public static CardCollection getRadiance(final SpellAbility sa, final Card origin, final String[] valid) {
-        final Card source = sa.getHostCard();
-        final CardCollection res = new CardCollection();
-
-        final Game game = source.getGame();
-        ColorSet cs = CardUtil.getColors(origin);
-        for (byte color : MagicColor.WUBRG) {
-            if(!cs.hasAnyColor(color))
-                continue;
-
-            for(final Card c : game.getColoredCardsInPlay(MagicColor.toLongString(color))) {
-                if (!res.contains(c) && c.isValid(valid, source.getController(), source, sa) && !c.equals(origin)) {
-                    res.add(c);
-                }
-            }
-        }
         return res;
     }
 

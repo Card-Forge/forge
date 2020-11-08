@@ -3,6 +3,6 @@ ManaCost:1 R G
 Types:Creature Human Shaman
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact.
-SVar:TrigDestroy:DB$Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vithian_renegades.jpg
 Oracle:When Vithian Renegades enters the battlefield, destroy target artifact.

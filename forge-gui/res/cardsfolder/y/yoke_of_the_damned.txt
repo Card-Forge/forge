@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When a creature dies, destroy enchanted creature.
-SVar:TrigDestroy:DB$Destroy | Defined$ Enchanted
+SVar:TrigDestroy:DB$ Destroy | Defined$ Enchanted
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yoke_of_the_damned.jpg
 Oracle:Enchant creature\nWhen a creature dies, destroy enchanted creature.

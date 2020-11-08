@@ -5,7 +5,7 @@ K:Equip:3
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ HotSoupDestroy | AddHiddenKeyword$ Unblockable | Description$ Equipped creature can't be blocked.
 SVar:HotSoupDestroy:SVar:DestroyWhenDamaged:True
 T:Mode$ DamageDoneOnce | ValidTarget$ Creature.EquippedBy | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When equipped creature is dealt damage, destroy it.
-SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTarget
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hot_soup.jpg
 Oracle:Equipped creature can't be blocked.\nWhenever equipped creature is dealt damage, destroy it.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

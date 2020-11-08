@@ -804,7 +804,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertNotNull(simBrood);
         assertEquals(0, simBrood.getDamage());
 
-        // destoryed because of to much redirected damage
+        // destroyed because of to much redirected damage
         assertNull(simPalisade);
         assertNotNull(simPridemate);
 
