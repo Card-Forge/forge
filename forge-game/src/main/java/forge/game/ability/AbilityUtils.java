@@ -149,6 +149,8 @@ public class AbilityUtils {
                 final Object crd = root.getTriggeringObject(type);
                 if (crd instanceof Card) {
                     c = (Card) crd;
+                } else if (crd instanceof Iterable) {
+                    cards.addAll(Iterables.filter((Iterable<?>) crd, Card.class));
                 }
             }
             else {

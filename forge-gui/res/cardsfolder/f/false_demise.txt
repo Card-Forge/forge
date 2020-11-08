@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AITgts$ Card.nonToken | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChange | TriggerDescription$ When enchanted creature dies, return that card to the battlefield under your control.
-SVar:TrigChange:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCard
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCardLKICopy
 SVar:Picture:http://www.wizards.com/global/images/magic/general/false_demise.jpg
 Oracle:Enchant creature\nWhen enchanted creature dies, return that card to the battlefield under your control.

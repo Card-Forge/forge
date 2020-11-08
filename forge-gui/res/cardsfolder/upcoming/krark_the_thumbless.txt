@@ -5,7 +5,7 @@ PT:2/2
 K:Partner
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ Whenever you cast an instant or sorcery spell, flip a coin. If you lose the flip, return that spell to its owner’s hand. If you win the flip, copy that spell, and you may choose new targets for the copy.
 SVar:TrigFlip:DB$ FlipACoin | WinSubAbility$ DBCopy | LoseSubAbility$ DBBounce
-SVar:DBBounce:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Stack | Destination$ Hand | Fizzle$ True
+SVar:DBBounce:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Stack | Destination$ Hand | Fizzle$ True
 SVar:DBCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | AILogic$ Always
 DeckNeeds:Type$Instant|Sorcery
 Oracle:Whenever you cast an instant or sorcery spell, flip a coin. If you lose the flip, return that spell to its owner’s hand. If you win the flip, copy that spell, and you may choose new targets for the copy.\nPartner (You can have two commanders if both have partner.)

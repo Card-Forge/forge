@@ -5,7 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddKeyword$ Trample | Description$ Enchanted creature gets +2/+0 and has trample.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
-SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredCard
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredCardLKICopy
 SVar:SacMe:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rancor.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+0 and has trample.\nWhen Rancor is put into a graveyard from the battlefield, return Rancor to its owner's hand.

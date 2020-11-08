@@ -4,7 +4,7 @@ Types:Creature Angel
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, exile CARDNAME and each other player creates a 3/3 black Angel creature token with flying.
-SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredCard | SubAbility$ DBToken
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredCardLKICopy | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_3_3_angel_flying | TokenOwner$ Player.Other | LegacyImage$ b 3 3 angel flying apc
 AI:RemoveDeck:Random
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card25910.jpg

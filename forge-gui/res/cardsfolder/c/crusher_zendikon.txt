@@ -5,6 +5,6 @@ K:Enchant land
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Land | AILogic$ Animate
 S:Mode$ Continuous | Affected$ Land.AttachedBy | AddType$ Creature & Beast | SetColor$ Red | SetPower$ 4 | SetToughness$ 2 | AddKeyword$ Trample | Description$ Enchanted land is a 4/2 red Beast creature with trample. It's still a land.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChangeZone | TriggerDescription$ When enchanted land dies, return that card to its owner's hand.
-SVar:TrigChangeZone:DB$ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Graveyard | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crusher_zendikon.jpg
 Oracle:Enchant land\nEnchanted land is a 4/2 red Beast creature with trample. It's still a land.\nWhen enchanted land dies, return that card to its owner's hand.

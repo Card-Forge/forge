@@ -7,8 +7,8 @@ T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ 
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_4_4_zombie_warrior_vigilance | TokenOwner$ You | LegacyImage$ b 4 4 zombie warrior vigilance war
 DeckHas:Ability$Token
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigFromGraveyard | OptionalDecider$ You | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.
-SVar:TrigFromGraveyard:DB$ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 2
+SVar:TrigFromGraveyard:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Exile | ValidCard$ Card.Self | Execute$ TrigFromExile | OptionalDecider$ You | TriggerController$ TriggeredCardController | Secondary$ True | TriggerDescription$ When CARDNAME dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.
-SVar:TrigFromExile:DB$ChangeZone | Defined$ TriggeredCard | Origin$ Exile | Destination$ Library | LibraryPosition$ 2
+SVar:TrigFromExile:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Exile | Destination$ Library | LibraryPosition$ 2
 DeckHas:Ability$Token
 Oracle:Double strike\nWhenever you cast a creature spell, create a 4/4 black Zombie Warrior creature token with vigilance.\nWhen God-Eternal Oketra dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.

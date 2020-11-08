@@ -11,13 +11,14 @@ import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 // Wrapper ability that checks the requirements again just before
 // resolving, for intervening if clauses.
@@ -26,6 +27,21 @@ import com.google.common.collect.Lists;
 // (The trigger can have a hardcoded OverridingAbility which can make
 // use of any of the methods)
 public class WrappedAbility extends Ability {
+
+    static List<ApiType> noTimestampCheck = ImmutableList.of(
+            ApiType.PutCounter,
+            ApiType.MoveCounter,
+            ApiType.MultiplyCounter,
+            ApiType.MoveCounter,
+            ApiType.RemoveCounter,
+            ApiType.AddOrRemoveCounter,
+            ApiType.MoveCounter,
+            ApiType.Draw,
+            ApiType.GainLife,
+            ApiType.LoseLife,
+            ApiType.ChangeZone,
+            ApiType.Token
+            );
 
     private final SpellAbility sa;
     private final Player decider;
@@ -450,10 +466,9 @@ public class WrappedAbility extends Ability {
 
         if (regtrig.hasParam("ResolvingCheck")) {
             // rare cases: Hidden Predators (state trigger, but have "Intervening If" to check IsPresent2) etc.
-            Map<String, String> recheck = new HashMap<>();
+            Map<String, String> recheck = Maps.newHashMap();
             String key = regtrig.getParam("ResolvingCheck");
-            String value = regtrig.getParam(key);
-            recheck.put(key, value);
+            recheck.put(key, regtrig.getParam(key));
             if (!meetsCommonRequirements(recheck)) {
                 return;
             }
@@ -479,20 +494,7 @@ public class WrappedAbility extends Ability {
     protected void timestampCheck() {
         final Game game = sa.getActivatingPlayer().getGame();
 
-        if (ApiType.PutCounter.equals(sa.getApi())
-                || ApiType.MoveCounter.equals(sa.getApi())
-                || ApiType.MultiplyCounter.equals(sa.getApi())
-                || ApiType.MoveCounter.equals(sa.getApi())
-                || ApiType.RemoveCounter.equals(sa.getApi())
-                || ApiType.AddOrRemoveCounter.equals(sa.getApi())
-                || ApiType.MoveCounter.equals(sa.getApi())
-                || ApiType.Draw.equals(sa.getApi())
-                || ApiType.GainLife.equals(sa.getApi())
-                || ApiType.LoseLife.equals(sa.getApi())
-
-                // Token has no Defined it should not be timestamp problems
-                || ApiType.Token.equals(sa.getApi())
-                ) {
+        if (noTimestampCheck.contains(sa.getApi())) {
             return;
         }
 

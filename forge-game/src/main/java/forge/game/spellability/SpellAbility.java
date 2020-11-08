@@ -88,7 +88,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private String originalStackDescription = "", stackDescription = "";
     private ManaCost multiKickerManaCost = null;
     private Player activatingPlayer = null;
-    private Player deltrigActivatingPlayer = null; // used by delayed triggers to ensure the original activator can be restored
     private Player targetingPlayer = null;
 
     private Card grantorCard = null; // card which grants the ability (equipment or owner of static ability that gave this one)
@@ -342,13 +341,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             view.updateCanPlay(this, false);
         }
         return updated;
-    }
-
-    public Player getDeltrigActivatingPlayer() {
-        return deltrigActivatingPlayer;
-    }
-    public void setDeltrigActivatingPlayer(final Player player) {
-        deltrigActivatingPlayer = player;
     }
 
     public Player getTargetingPlayer() {

@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Creature Zombie
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, exile CARDNAME.
-SVar:TrigChange:DB$ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredCard
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredCardLKICopy
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclopean_mummy.jpg
 Oracle:When Cyclopean Mummy dies, exile it.

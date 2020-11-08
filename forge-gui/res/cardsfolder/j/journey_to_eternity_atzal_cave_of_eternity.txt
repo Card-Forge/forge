@@ -4,7 +4,7 @@ Types:Legendary Enchantment Aura
 K:Enchant creature you control
 A:SP$ Attach | Cost$ 1 B G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EnchantedBy | Execute$ TrigChangeZone | TriggerDescription$ When enchanted creature dies, return it to the battlefield under your control, then return CARDNAME to the battlefield transformed under your control.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | GainControl$ True | SubAbility$ DBRemember
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCardLKICopy | GainControl$ True | SubAbility$ DBRemember
 SVar:DBRemember:DB$ Pump | RememberObjects$ Self | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Remembered | GainControl$ True | Transformed$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered $ True

@@ -5,7 +5,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPut:DB$PutCounter | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 2 | CounterType$ P1P1 | CounterNum$ 1
 A:AB$ Effect | Cost$ 1 | ValidTgts$ Creature.HasCounters | TgtPrompt$ Select target creature with a counter | Triggers$ ChangeZone | SVars$ TrigChangeZone | RememberObjects$ Targeted | SpellDescription$ Choose target creature with a counter on it. When that creature dies this turn, return that card to its owner's hand.
 SVar:ChangeZone:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.IsRemembered | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When that creature dies this turn, return that card to its owner's hand.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredCard
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredCardLKICopy
 SVar:NonStackingEffect:True
 DeckNeeds:Ability$Counters
 DeckHas:Ability$Counters

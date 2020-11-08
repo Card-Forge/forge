@@ -7,6 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 3 | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ChangeZone | Origin$ Hand | Destination$ Library | ChangeNum$ 2 | Mandatory$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, shuffle it into its owner's library, then scry 2.
-SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ TriggeredCard | SubAbility$ DBScry
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ TriggeredCardLKICopy | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 2
 Oracle:Flying\nWhen Cavalier of Gales enters the battlefield, draw three cards, then put two cards from your hand on top of your library in any order.\nWhen Cavalier of Gales dies, shuffle it into its owner's library, then scry 2.

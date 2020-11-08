@@ -3,6 +3,6 @@ ManaCost:B
 Types:Creature Skeleton Warrior
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerController$ TriggeredCardController | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, you may pay {1}{B}. If you do, return it to the battlefield tapped under its owner's control.
-SVar:TrigReturn:AB$ ChangeZone | Cost$ 1 B | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 1 B | Defined$ TriggeredCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tenacious_dead.jpg
 Oracle:When Tenacious Dead dies, you may pay {1}{B}. If you do, return it to the battlefield tapped under its owner's control.

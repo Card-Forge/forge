@@ -2,7 +2,7 @@ Name:Planar Void
 ManaCost:B
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Card.nonToken+Other | Execute$ TrigChange | TriggerDescription$ Whenever another card is put into a graveyard from anywhere, exile that card.
-SVar:TrigChange:DB$ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile
+SVar:TrigChange:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Graveyard | Destination$ Exile
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_void.jpg

@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+2/-3
 T:Mode$ ChangesZone | TriggerZones$ Command | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+YouOwn | OptionalDecider$ You | Execute$ GetUp | TriggerController$ TriggeredCardController | TriggerDescription$ Whenever a creature you control is put into your graveyard from the battlefield, you may put it on top of your library.
-SVar:GetUp:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Library
+SVar:GetUp:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Graveyard | Destination$ Library
 SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Volrath.full.jpg
 Oracle:Hand +2, life -3\nWhenever a creature you control is put into your graveyard from the battlefield, you may put it on top of your library.

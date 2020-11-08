@@ -10,8 +10,8 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Permanent.YouCtrl+Other
 SVar:DrawX:Remembered$Amount
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigFromGraveyard | OptionalDecider$ You | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.
-SVar:TrigFromGraveyard:DB$ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 2
+SVar:TrigFromGraveyard:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Exile | ValidCard$ Card.Self | Execute$ TrigFromExile | OptionalDecider$ You | TriggerController$ TriggeredCardController | Secondary$ True | TriggerDescription$ When CARDNAME dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.
-SVar:TrigFromExile:DB$ChangeZone | Defined$ TriggeredCard | Origin$ Exile | Destination$ Library | LibraryPosition$ 2
+SVar:TrigFromExile:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Exile | Destination$ Library | LibraryPosition$ 2
 AI:RemoveDeck:All
 Oracle:Menace\nWhen God-Eternal Bontu enters the battlefield, sacrifice any number of other permanents, then draw that many cards.\nWhen God-Eternal Bontu dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.

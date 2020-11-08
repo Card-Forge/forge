@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact
 S:Mode$ Continuous | Affected$ Player | AdjustLandPlays$ 1 | Description$ Each player may play an additional land during each of their turns.
 T:Mode$ TapsForMana | ValidCard$ Land | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ Whenever a land is tapped for mana, return it to its owner's hand.
-SVar:TrigBounce:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ TriggeredCard
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ TriggeredCardLKICopy
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_cauldron.jpg
 Oracle:Each player may play an additional land during each of their turns.\nWhenever a land is tapped for mana, return it to its owner's hand.
