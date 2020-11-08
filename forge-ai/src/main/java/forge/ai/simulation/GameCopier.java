@@ -165,7 +165,7 @@ public class GameCopier {
             if (newSa != null) {
                 newSa.setActivatingPlayer(map.map(origSa.getActivatingPlayer()));
                 if (origSa.usesTargeting()) {
-                    for (GameObject o : origSa.getTargets().getTargets()) {
+                    for (GameObject o : origSa.getTargets()) {
                         newSa.getTargets().add(map.map(o));
                     }
                 }

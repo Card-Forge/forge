@@ -279,7 +279,7 @@ public class TargetRestrictions {
      */
     public final boolean isMaxTargetsChosen(final Card c, final SpellAbility sa) {
         TargetChoices choice = sa.getTargets();
-        return this.getMaxTargets(c, sa) == choice.getNumTargeted();
+        return this.getMaxTargets(c, sa) == choice.size();
     }
 
     /**
@@ -298,7 +298,7 @@ public class TargetRestrictions {
             return true;
         }
         TargetChoices choice = sa.getTargets();
-        return this.getMinTargets(c, sa) <= choice.getNumTargeted();
+        return this.getMinTargets(c, sa) <= choice.size();
     }
 
     /**
@@ -490,7 +490,7 @@ public class TargetRestrictions {
                 if (isTargeted && !sa.canTarget(c)) {
                     continue;
                 }
-                if (sa.getTargets().isTargeting(c)) {
+                if (sa.getTargets().contains(c)) {
                     continue;
                 }
                 return true;
@@ -559,21 +559,12 @@ public class TargetRestrictions {
         }
 
         final Card srcCard = sa.getHostCard(); // should there be OrginalHost at any moment?
-        if (this.tgtZone.contains(ZoneType.Stack)) {
-            for (final Card c : game.getStackZone().getCards()) {
-                if (c.isValid(this.validTgts, srcCard.getController(), srcCard, sa)
-                        && (!isTargeted || sa.canTarget(c)) 
-                        && !sa.getTargets().isTargeting(c)) {
-                    candidates.add(c);
-                }
-            }
-        } else {
-            for (final Card c : game.getCardsIn(this.tgtZone)) {
-                if (c.isValid(this.validTgts, srcCard.getController(), srcCard, sa)
-                        && (!isTargeted || sa.canTarget(c)) 
-                        && !sa.getTargets().isTargeting(c)) {
-                    candidates.add(c);
-                }
+
+        for (final Card c : game.getCardsIn(this.tgtZone)) {
+            if (c.isValid(this.validTgts, srcCard.getController(), srcCard, sa)
+                    && (!isTargeted || sa.canTarget(c)) 
+                    && !sa.getTargets().contains(c)) {
+                candidates.add(c);
             }
         }
 

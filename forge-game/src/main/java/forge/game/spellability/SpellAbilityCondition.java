@@ -398,7 +398,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
             boolean result = false;
     
-            for (final GameObject o : matchTgt.getFirstTargetedSpell().getTargets().getTargets()) {
+            for (final GameObject o : matchTgt.getFirstTargetedSpell().getTargets()) {
                 if (o.isValid(this.getTargetValidTargeting().split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
                     result = true;
                     break;
@@ -419,7 +419,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
             Set<GameObject> targets = new HashSet<>();
             for (TargetChoices tc : sa.getAllTargetChoices()) {
-                targets.addAll(tc.getTargets());
+                targets.addAll(tc);
                 if (targets.size() > 1) {
                     return false;
                 }

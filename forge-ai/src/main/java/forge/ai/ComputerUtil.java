@@ -1573,7 +1573,7 @@ public class ComputerUtil {
                 return threatened;
             }
         } else {
-            objects = topStack.getTargets().getTargets();
+            objects = topStack.getTargets();
             final List<GameObject> canBeTargeted = new ArrayList<>();
             for (Object o : objects) {
                 if (o instanceof Card) {

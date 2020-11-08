@@ -215,7 +215,7 @@ public class WrappedAbility extends Ability {
         final StringBuilder sb = new StringBuilder(regtrig.replaceAbilityText(regtrig.toString(true), this));
         if (usesTargeting()) {
             sb.append(" (Targeting ");
-            for (final GameObject o : this.getTargets().getTargets()) {
+            for (final GameObject o : this.getTargets()) {
                 sb.append(o.toString());
                 sb.append(", ");
             }

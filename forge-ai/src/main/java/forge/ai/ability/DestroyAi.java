@@ -207,10 +207,10 @@ public class DestroyAi extends SpellAbilityAi {
             }
 
             // target loop
-            while (sa.getTargets().getNumTargeted() < maxTargets) {
+            while (sa.getTargets().size() < maxTargets) {
                 if (list.isEmpty()) {
-                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
-                        || (sa.getTargets().getNumTargeted() == 0)) {
+                    if ((sa.getTargets().size() < abTgt.getMinTargets(sa.getHostCard(), sa))
+                        || (sa.getTargets().size() == 0)) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -253,8 +253,8 @@ public class DestroyAi extends SpellAbilityAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
-                        || (sa.getTargets().getNumTargeted() == 0)) {
+                    if ((sa.getTargets().size() < abTgt.getMinTargets(sa.getHostCard(), sa))
+                        || (sa.getTargets().size() == 0)) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -344,10 +344,10 @@ public class DestroyAi extends SpellAbilityAi {
             	return false;
             }
 
-            while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
+            while (sa.getTargets().size() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
                 if (preferred.isEmpty()) {
-                    if (sa.getTargets().getNumTargeted() == 0
-                            || sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+                    if (sa.getTargets().size() == 0
+                            || sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                         if (!mandatory) {
                             sa.resetTargets();
                             return false;
@@ -371,7 +371,7 @@ public class DestroyAi extends SpellAbilityAi {
                 }
             }
 
-            while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+            while (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                 if (list.isEmpty()) {
                     break;
                 } else {
@@ -392,7 +392,7 @@ public class DestroyAi extends SpellAbilityAi {
                 }
             }
 
-            return sa.getTargets().getNumTargeted() >= tgt.getMinTargets(sa.getHostCard(), sa);
+            return sa.getTargets().size() >= tgt.getMinTargets(sa.getHostCard(), sa);
         } else {
             return mandatory;
         }

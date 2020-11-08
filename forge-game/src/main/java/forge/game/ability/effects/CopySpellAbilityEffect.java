@@ -95,7 +95,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 // Find subability or rootability that has targets
                 SpellAbility targetedSA = chosenSA;
                 while (targetedSA != null) {
-                    if (targetedSA.usesTargeting() && targetedSA.getTargets().getNumTargeted() != 0) {
+                    if (targetedSA.usesTargeting() && targetedSA.getTargets().size() != 0) {
                         break;
                     }
                     targetedSA = targetedSA.getSubAbility();

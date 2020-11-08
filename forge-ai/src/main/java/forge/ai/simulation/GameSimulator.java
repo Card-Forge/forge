@@ -174,7 +174,7 @@ public class GameSimulator {
                     final boolean divided = origSaOrSubSa.hasParam("DividedAsYouChoose");
                     final TargetRestrictions origTgtRes = origSaOrSubSa.getTargetRestrictions();
                     final TargetRestrictions tgtRes = saOrSubSa.getTargetRestrictions();
-                    for (final GameObject o : origSaOrSubSa.getTargets().getTargets()) {
+                    for (final GameObject o : origSaOrSubSa.getTargets()) {
                         final GameObject target = copier.find(o);
                         saOrSubSa.getTargets().add(target);
                         if (divided) {
@@ -189,7 +189,7 @@ public class GameSimulator {
             if (debugPrint && !sa.getAllTargetChoices().isEmpty()) {
                 debugPrint("Targets: ");
                 for (TargetChoices target : sa.getAllTargetChoices()) {
-                    System.out.print(target.getTargetedString());
+                    System.out.print(target);
                 }
                 System.out.println();
             }

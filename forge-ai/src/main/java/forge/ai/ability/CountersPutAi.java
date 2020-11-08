@@ -403,7 +403,7 @@ public class CountersPutAi extends SpellAbilityAi {
             if (sa.usesTargeting() && abTgt.getMinTargets(source, sa) < 2) {
                 if (ComputerUtilCard.canPumpAgainstRemoval(ai, sa)) {
                     Card c = sa.getTargets().getFirstTargetedCard();
-                    if (sa.getTargets().getNumTargeted() > 1) {
+                    if (sa.getTargets().size() > 1) {
                         sa.resetTargets();
                         sa.getTargets().add(c);
                     }
@@ -456,7 +456,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     && sa.hasParam("Planeswalker")
                     && sa.getPayCosts().hasOnlySpecificCostType(CostPutCounter.class)
                     && sa.isTargetNumberValid()
-                    && sa.getTargets().getNumTargeted() == 0
+                    && sa.getTargets().size() == 0
                     && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2, ai)) {
                 return true;
             }
@@ -475,7 +475,7 @@ public class CountersPutAi extends SpellAbilityAi {
                             abTgt.addDividedAllocation(c, i);
                             left -= i;
                         }
-                        if (left < i || sa.getTargets().getNumTargeted() == abTgt.getMaxTargets(source, sa)) {
+                        if (left < i || sa.getTargets().size() == abTgt.getMaxTargets(source, sa)) {
                             abTgt.addDividedAllocation(sa.getTargets().getFirstTargetedCard(), left + i);
                             left = 0;
                             break;
@@ -492,7 +492,7 @@ public class CountersPutAi extends SpellAbilityAi {
             // target loop
             while (sa.canAddMoreTarget()) {
                 if (list.isEmpty()) {
-                    if (!sa.isTargetNumberValid() || (sa.getTargets().getNumTargeted() == 0)) {
+                    if (!sa.isTargetNumberValid() || (sa.getTargets().size() == 0)) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -530,7 +530,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if (!sa.isTargetNumberValid() || sa.getTargets().getNumTargeted() == 0) {
+                    if (!sa.isTargetNumberValid() || sa.getTargets().size() == 0) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -637,7 +637,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
                 if (list.isEmpty()) {
                     if (!sa.isTargetNumberValid()
-                            || sa.getTargets().getNumTargeted() == 0) {
+                            || sa.getTargets().size() == 0) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -661,7 +661,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
                 if (choice == null) { // can't find anything left
                     if ((!sa.isTargetNumberValid())
-                            || (sa.getTargets().getNumTargeted() == 0)) {
+                            || (sa.getTargets().size() == 0)) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -819,7 +819,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     if (choice != null && divided) {
                         final TargetRestrictions abTgt = sa.getTargetRestrictions();
                         int alloc = Math.max(amount / totalTargets, 1);
-                        if (sa.getTargets().getNumTargeted() == Math.min(totalTargets, abTgt.getMaxTargets(sa.getHostCard(), sa)) - 1) {
+                        if (sa.getTargets().size() == Math.min(totalTargets, abTgt.getMaxTargets(sa.getHostCard(), sa)) - 1) {
                             abTgt.addDividedAllocation(choice, left);
                         } else {
                             abTgt.addDividedAllocation(choice, alloc);

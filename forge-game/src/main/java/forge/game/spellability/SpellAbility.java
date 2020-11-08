@@ -1413,11 +1413,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return false;
         }
 
-        return getTargets().getNumTargeted() < getTargetRestrictions().getMaxTargets(hostCard, this);
+        return getTargets().size() < getTargetRestrictions().getMaxTargets(hostCard, this);
     }
 
     public boolean isZeroTargets() {
-        return getTargetRestrictions().getMinTargets(hostCard, this) == 0 && getTargets().getNumTargeted() == 0;
+        return getTargetRestrictions().getMinTargets(hostCard, this) == 0 && getTargets().size() == 0;
     }
 
     public boolean isTargetNumberValid() {
@@ -1427,7 +1427,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         int minTargets = getTargetRestrictions().getMinTargets(hostCard, this);
         int maxTargets = getTargetRestrictions().getMaxTargets(hostCard, this);
-        int numTargets = getTargets().getNumTargeted();
+        int numTargets = getTargets().size();
 
         if (maxTargets == 0 && getPayCosts().hasSpecificCostType(CostRemoveCounter.class)
                 && hasSVar(getParam("TargetMax"))
@@ -1580,7 +1580,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         SpellAbility child = getParent();
         while (child != null) {
             if (child.getTargetRestrictions() != null) {
-                Iterables.addAll(targets, child.getTargets().getTargets());
+                Iterables.addAll(targets, child.getTargets());
             }
             child = child.getParent();
         }
@@ -1617,7 +1617,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             boolean result = false;
 
-            for (final GameObject o : matchTgt.getTargets()) {
+            for (final GameObject o : matchTgt) {
                 if (o.isValid(splitTargetRestrictions.split(","), getActivatingPlayer(), getHostCard(), this)) {
                     result = true;
                     break;
@@ -1633,7 +1633,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                         if (matchTgt == null) {
                             continue;
                         }
-                        for (final GameObject o : matchTgt.getTargets()) {
+                        for (final GameObject o : matchTgt) {
                             if (o.isValid(splitTargetRestrictions.split(","), getActivatingPlayer(), getHostCard(), this)) {
                                 result = true;
                                 break;
@@ -1652,7 +1652,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (tgt.isSingleTarget()) {
             Set<GameObject> targets = new HashSet<>();
             for (TargetChoices tc : topSA.getAllTargetChoices()) {
-                targets.addAll(tc.getTargets());
+                targets.addAll(tc);
                 if (targets.size() > 1) {
                     // As soon as we get more than one, bail out
                     return false;
@@ -1668,7 +1668,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isTargeting(GameObject o) {
-        if (getTargets().isTargeting(o)) {
+        if (getTargets().contains(o)) {
             return true;
         }
         SpellAbility p = getParent();

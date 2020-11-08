@@ -41,7 +41,7 @@ public class ChangeTargetsAi extends SpellAbilityAi {
             return false;
         }
 
-        if (sa.getTargets().getNumTargeted() != 0) {
+        if (sa.getTargets().size() != 0) {
             // something was already chosen before (e.g. in response to a trigger - Mizzium Meddler), so just proceed
             return true;
         }
@@ -80,7 +80,7 @@ public class ChangeTargetsAi extends SpellAbilityAi {
             ManaCost normalizedMana = manaCost.getNormalizedMana();
             boolean canPay = ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(normalizedMana), sa, aiPlayer);
             if (potentialDmg != -1 && potentialDmg <= payDamage && !canPay
-                    && topSa.getTargets().getTargets().contains(aiPlayer)) {
+                    && topSa.getTargets().contains(aiPlayer)) {
                 // do not pay Phyrexian mana if the spell is a damaging one but it deals less damage or the same damage as we'll pay life
                 return false;
             }

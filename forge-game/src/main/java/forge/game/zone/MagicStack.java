@@ -354,7 +354,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             Set<Object> distinctObjects = Sets.newHashSet();
             for (final TargetChoices tc : chosenTargets) {
                 if (tc != null && tc.getTargetCards() != null) {
-                    for (final Object tgt : tc.getTargets()) {
+                    for (final Object tgt : tc) {
                         // Track distinct objects so Becomes targets don't trigger for things like:
                         // Seeds of Strength
                         if (distinctObjects.contains(tgt)) {
@@ -369,7 +369,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         runParams.put(AbilityKey.Target, tgt);
                         game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
                     }
-                    runParams.put(AbilityKey.Targets, tc.getTargets());
+                    runParams.put(AbilityKey.Targets, tc);
                     game.getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
                 }
             }
@@ -580,7 +580,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 // With multi-targets, as long as one target is still legal,
                 // we'll try to go through as much as possible
                 final TargetChoices choices = sa.getTargets();
-                for (final GameObject o : sa.getTargets().getTargets()) {
+                for (final GameObject o : sa.getTargets()) {
                     boolean invalidTarget = false;
                     if (rememberTgt) {
                         source.addRemembered(o);

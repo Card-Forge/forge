@@ -1125,7 +1125,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // target loop
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
+        while (sa.getTargets().size() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
             // AI Targeting
             Card choice = null;
 
@@ -1190,7 +1190,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             if (choice == null) { // can't find anything left
-                if (sa.getTargets().getNumTargeted() == 0 || sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+                if (sa.getTargets().size() == 0 || sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -1204,7 +1204,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         boolean aiTgtsOK = false;
                         if (sa.hasParam("AIMinTgts")) {
                             int minTgts = Integer.parseInt(sa.getParam("AIMinTgts"));
-                            if (sa.getTargets().getNumTargeted() >= minTgts) {
+                            if (sa.getTargets().size() >= minTgts) {
                                 aiTgtsOK = true;
                             }
                         }
@@ -1382,7 +1382,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // target loop
-        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+        while (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             // AI Targeting
             Card choice = null;
 
@@ -1424,7 +1424,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             if (choice == null) { // can't find anything left
-                if (sa.getTargets().getNumTargeted() == 0 || sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+                if (sa.getTargets().size() == 0 || sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                     sa.resetTargets();
                     return false;
                 } else {

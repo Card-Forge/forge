@@ -124,7 +124,7 @@ public class CostAdjustment {
                 --count;
             } else if ("Strive".equals(amount)) {
                 for (TargetChoices tc : sa.getAllTargetChoices()) {
-                    count += tc.getNumTargeted();
+                    count += tc.size();
                 }
                 --count;
             } else {
@@ -531,7 +531,7 @@ public class CostAdjustment {
                     curSa = curSa.getSubAbility();
                     continue;
                 }
-                for (GameObject target : curSa.getTargets().getTargets()) {
+                for (GameObject target : curSa.getTargets()) {
                     if (target.isValid(st.getParam("ValidTarget").split(","), hostCard.getController(), hostCard, curSa)) {
                         targetValid = true;
                         break outer;

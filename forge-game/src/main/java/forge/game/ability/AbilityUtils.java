@@ -611,7 +611,7 @@ public class AbilityUtils {
             SpellAbility loopSA = sa.getRootAbility();
             while (loopSA != null) {
                 if (loopSA.getTargetRestrictions() != null) {
-                    Iterables.addAll(objects, loopSA.getTargets().getTargets());
+                    Iterables.addAll(objects, loopSA.getTargets());
                 }
                 loopSA = loopSA.getSubAbility();
             }
@@ -1288,7 +1288,7 @@ public class AbilityUtils {
                 // information so it's not lost if the calling code is interested in targets of the triggered SA.
                 if (triggeringType.equals("SpellAbility")) {
                     final CardCollectionView tgtList = (CardCollectionView)root.getTriggeringObject(AbilityKey.SpellAbilityTargetingCards);
-                    if (s.getTargets() != null && s.getTargets().getNumTargeted() == 0) {
+                    if (s.getTargets() != null && s.getTargets().size() == 0) {
                         if (tgtList != null && tgtList.size() > 0) {
                             TargetChoices tc = new TargetChoices();
                             for (Card c : tgtList) {
@@ -1510,7 +1510,7 @@ public class AbilityUtils {
             if (sa.hasParam("ForgetOtherTargets")) {
                 host.clearRemembered();
             }
-            for (final GameObject o : sa.getTargets().getTargets()) {
+            for (final GameObject o : sa.getTargets()) {
                 host.addRemembered(o);
             }
         }

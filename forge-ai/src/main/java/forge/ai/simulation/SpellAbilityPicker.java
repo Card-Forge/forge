@@ -284,7 +284,7 @@ public class SpellAbilityPicker {
                 SpellAbility saOrSubSa = sa;
                 do {
                     if (saOrSubSa.usesTargeting()) {
-                        saString.append(" (targets: ").append(saOrSubSa.getTargets().getTargetedString()).append(")");
+                        saString.append(" (targets: ").append(saOrSubSa.getTargets()).append(")");
                     }
                     saOrSubSa = saOrSubSa.getSubAbility();
                 } while (saOrSubSa != null);
