@@ -156,9 +156,9 @@ public abstract class SpellAbilityEffect {
             if ("}".equals(t)) { isPlainText = true; continue; }
 
             if (isPlainText) {
-                if(t.startsWith("NICKNAME")) {
+                if (t.startsWith("NICKNAME")) {
                     sb.append(TextUtil.fastReplace(t,"NICKNAME", sa.getHostCard().getName().split(",")[0]));
-                } else if(t.startsWith("CARDNAME")) {
+                } else if (t.startsWith("CARDNAME")) {
                     sb.append(TextUtil.fastReplace(t, "CARDNAME", sa.getHostCard().getName()));
                 }
             } else {
