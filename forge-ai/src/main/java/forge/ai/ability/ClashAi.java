@@ -106,7 +106,7 @@ public class ClashAi extends SpellAbilityAi {
             }
         }
 
-        return sa.getTargets().getNumTargeted() > 0;
+        return sa.getTargets().size() > 0;
     }
 
 }

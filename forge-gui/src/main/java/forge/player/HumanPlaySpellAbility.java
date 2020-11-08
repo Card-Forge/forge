@@ -314,7 +314,7 @@ public class HumanPlaySpellAbility {
         final StringBuilder sb = new StringBuilder();
         sb.append(ability.getHostCard().getName());
         if (ability.getTargetRestrictions() != null) {
-            final Iterable<GameObject> targets = ability.getTargets().getTargets();
+            final Iterable<GameObject> targets = ability.getTargets();
             if (!Iterables.isEmpty(targets)) {
                 sb.append(" - Targeting ");
                 for (final GameObject o : targets) {

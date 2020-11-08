@@ -175,7 +175,7 @@ public class UntapAi extends SpellAbilityAi {
         untapList.removeAll(toExclude);
 
         sa.resetTargets();
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
+        while (sa.getTargets().size() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
             Card choice = null;
 
             if (untapList.isEmpty()) {
@@ -183,7 +183,7 @@ public class UntapAi extends SpellAbilityAi {
                 if (sa.getSubAbility() != null && sa.getSubAbility().getApi() == ApiType.Animate && !list.isEmpty()
                         && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     choice = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
-                } else if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().getNumTargeted() == 0) {
+                } else if (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().size() == 0) {
                     sa.resetTargets();
                     return false;
                 } else {
@@ -204,7 +204,7 @@ public class UntapAi extends SpellAbilityAi {
             }
 
             if (choice == null) { // can't find anything left
-                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().getNumTargeted() == 0) {
+                if (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().size() == 0) {
                     sa.resetTargets();
                     return false;
                 } else {
@@ -271,11 +271,11 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
             Card choice = null;
 
             if (tapList.isEmpty()) {
-                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa) || sa.getTargets().getNumTargeted() == 0) {
+                if (sa.getTargets().size() < tgt.getMinTargets(source, sa) || sa.getTargets().size() == 0) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -293,7 +293,7 @@ public class UntapAi extends SpellAbilityAi {
             }
 
             if (choice == null) { // can't find anything left
-                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().getNumTargeted() == 0) {
+                if (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().size() == 0) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }

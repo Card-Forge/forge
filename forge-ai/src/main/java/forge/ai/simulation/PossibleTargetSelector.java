@@ -167,7 +167,7 @@ public class PossibleTargetSelector {
     private void selectTargetsByIndexImpl(int index) {
         targetingSa.resetTargets();
 
-        while (targetingSa.getTargets().getNumTargeted() < maxTargets && index < validTargets.size()) {
+        while (targetingSa.getTargets().size() < maxTargets && index < validTargets.size()) {
             targetingSa.getTargets().add(validTargets.get(index++));
         }
 
@@ -181,7 +181,7 @@ public class PossibleTargetSelector {
                 final int amountPerCard = amount / targetCount;
                 int amountLeftOver = amount - (amountPerCard * targetCount);
                 final TargetRestrictions tgtRes = targetingSa.getTargetRestrictions();
-                for (GameObject target : targetingSa.getTargets().getTargets()) {
+                for (GameObject target : targetingSa.getTargets()) {
                     tgtRes.addDividedAllocation(target, amountPerCard + amountLeftOver);
                     amountLeftOver = 0;
                 }
@@ -190,7 +190,7 @@ public class PossibleTargetSelector {
     }
 
     public Targets getLastSelectedTargets() {
-        return new Targets(targetingSaIndex, validTargets.size(), targetIndex - 1, targetingSa.getTargets().getTargetedString());
+        return new Targets(targetingSaIndex, validTargets.size(), targetIndex - 1, targetingSa.getTargets().toString());
     }
 
     public boolean selectTargetsByIndex(int targetIndex) {

@@ -819,7 +819,7 @@ public abstract class GameState {
         }
 
         if (sa.hasParam("RememberTargets")) {
-            for (final GameObject o : sa.getTargets().getTargets()) {
+            for (final GameObject o : sa.getTargets()) {
                 sa.getHostCard().addRemembered(o);
             }
         }

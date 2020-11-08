@@ -110,7 +110,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             targets.add(event.si.getTargetChoices());
             for (TargetChoices ch : targets) {
                 if (null != ch) {
-                    sb.append(ch.getTargetedString());
+                    sb.append(ch);
                 }
             }
             messageForLog = localizer.getMessage("lblLogPlayerActionObjectWitchTarget", player, action, object, sb.toString());

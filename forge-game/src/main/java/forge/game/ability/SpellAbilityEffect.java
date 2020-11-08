@@ -92,8 +92,8 @@ public abstract class SpellAbilityEffect {
                     String desc = TextUtil.fastReplace(desc1, "NICKNAME", currentName.split(",")[0]);
                     sb.append(desc);
                     }
-                    if (sa.getTargets() != null && !sa.getTargets().getTargets().isEmpty()) {
-                        sb.append(" (Targeting: ").append(sa.getTargets().getTargets()).append(")");
+                    if (sa.getTargets() != null && !sa.getTargets().isEmpty()) {
+                        sb.append(" (Targeting: ").append(sa.getTargets()).append(")");
                     }
             } else if (!"None".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
                 makeSpellDescription(sa, sb, stackDesc);
@@ -233,7 +233,7 @@ public abstract class SpellAbilityEffect {
 
     private static List<GameObject> getTargetables(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
-        return useTargets ? Lists.newArrayList(sa.getTargets().getTargets())
+        return useTargets ? Lists.newArrayList(sa.getTargets())
                 : AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
 

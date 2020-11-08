@@ -60,7 +60,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             }
             abilities.removeAll(saToRemove);
         
-            if (sa.usesTargeting() && sa.getTargets().isTargeting(p) && !p.canBeTargetedBy(sa)) {
+            if (sa.usesTargeting() && sa.getTargets().contains(p) && !p.canBeTargetedBy(sa)) {
                 continue;
             }
 

@@ -972,7 +972,7 @@ public class AttachAi extends SpellAbilityAi {
             targets = AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
         } else {
             AttachAi.attachPreference(sa, tgt, mandatory);
-            targets = sa.getTargets().getTargets();
+            targets = sa.getTargets();
         }
 
         if (!mandatory && card.isEquipment() && !targets.isEmpty()) {

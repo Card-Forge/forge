@@ -51,11 +51,11 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             return false;
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
             Card choice = null;
 
             if (tapList.size() == 0) {
-                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa) || sa.getTargets().getNumTargeted() == 0) {
+                if (sa.getTargets().size() < tgt.getMinTargets(source, sa) || sa.getTargets().size() == 0) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -76,7 +76,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             }
 
             if (choice == null) { // can't find anything left
-                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().getNumTargeted() == 0) {
+                if (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().size() == 0) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -166,11 +166,11 @@ public abstract class TapAiBase extends SpellAbilityAi  {
         }
 
         boolean goodTargets = false;
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
             Card choice = null;
 
             if (tapList.isEmpty()) {
-                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa) || sa.getTargets().getNumTargeted() == 0) {
+                if (sa.getTargets().size() < tgt.getMinTargets(source, sa) || sa.getTargets().size() == 0) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -231,7 +231,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             }
 
             if (choice == null) { // can't find anything left
-                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().getNumTargeted() == 0) {
+                if (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().size() == 0) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -249,7 +249,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
         }
 
         // Nothing was ever targeted, so we need to bail.
-        return sa.getTargets().getNumTargeted() != 0;
+        return sa.getTargets().size() != 0;
     }
 
     /**
@@ -277,7 +277,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             return true;
         }
         
-        if (sa.getTargets().getNumTargeted() >= tgt.getMinTargets(sa.getHostCard(), sa)) {
+        if (sa.getTargets().size() >= tgt.getMinTargets(sa.getHostCard(), sa)) {
             return true;
         }
 
@@ -296,7 +296,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             return true;
         }
         
-        if (sa.getTargets().getNumTargeted() >= tgt.getMinTargets(sa.getHostCard(), sa)) {
+        if (sa.getTargets().size() >= tgt.getMinTargets(sa.getHostCard(), sa)) {
             return true;
         }
 

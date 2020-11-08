@@ -1379,7 +1379,7 @@ public final class CMatchUI
         if (sa.getTargetRestrictions() != null) {
             sb.append(" targeting ");
             TargetChoices targets = si.getTargetChoices();
-            sb.append(targets.getTargetedString());
+            sb.append(targets);
         }
         sb.append(".");        
         String message1 = sb.toString();

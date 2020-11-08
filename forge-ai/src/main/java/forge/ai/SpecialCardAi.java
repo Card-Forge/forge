@@ -194,7 +194,7 @@ public class SpecialCardAi {
                 sa.getTargets().add(worstCreat);
             }
 
-            return sa.getTargets().getNumTargeted() > 0;
+            return sa.getTargets().size() > 0;
         }
     }
 
@@ -1302,7 +1302,7 @@ public class SpecialCardAi {
                 sa.getTargets().add(worstOwnCreat);
             }
 
-            return sa.getTargets().getNumTargeted() > 0;
+            return sa.getTargets().size() > 0;
         }
     }
 

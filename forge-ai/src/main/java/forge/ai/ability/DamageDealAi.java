@@ -234,7 +234,7 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-        	return false;
+            return false;
         }
 
         // Try to chain damage/debuff effects
@@ -497,7 +497,7 @@ public class DamageDealAi extends DamageAiBase {
             hPlay = CardLists.filterControlledBy(hPlay, pl);
         }
 
-        final List<GameObject> objects = Lists.newArrayList(sa.getTargets().getTargets());
+        final List<GameObject> objects = Lists.newArrayList(sa.getTargets());
         if (sa.hasParam("TargetUnique")) {
             objects.addAll(sa.getUniqueTargets());
         }
@@ -525,8 +525,8 @@ public class DamageDealAi extends DamageAiBase {
     private boolean damageTargetAI(final Player ai, final SpellAbility saMe, final int dmg, final boolean immediately) {
         final TargetRestrictions tgt = saMe.getTargetRestrictions();
         if ("Atarka's Command".equals(ComputerUtilAbility.getAbilitySourceName(saMe))) {
-        	// playReusable in damageChooseNontargeted wrongly assumes that CharmEffect options are re-usable
-        	return this.shouldTgtP(ai, saMe, dmg, false);
+            // playReusable in damageChooseNontargeted wrongly assumes that CharmEffect options are re-usable
+            return this.shouldTgtP(ai, saMe, dmg, false);
         }
         if (tgt == null) {
             return this.damageChooseNontargeted(ai, saMe, dmg);
@@ -655,13 +655,13 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         int totalTargetedSoFar = -1;
-        while (tcs.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
-            if (totalTargetedSoFar == tcs.getNumTargeted()) {
+        while (tcs.size() < tgt.getMaxTargets(source, sa)) {
+            if (totalTargetedSoFar == tcs.size()) {
                 // Avoid looping endlessly when choosing targets for cards with variable target number and type
                 // like Jaya's Immolating Inferno
                 break;
             }
-            totalTargetedSoFar = tcs.getNumTargeted();
+            totalTargetedSoFar = tcs.size();
             if (oppTargetsChoice && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
                 // canPlayAI (sa activated by ai)
                 Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
@@ -699,7 +699,7 @@ public class DamageDealAi extends DamageAiBase {
                     continue;
                 }
                 if ("RoundedDown".equals(sa.getParam("DivideEvenly"))) {
-                    dmg = dmg * sa.getTargets().getNumTargeted() / (sa.getTargets().getNumTargeted() +1);
+                    dmg = dmg * sa.getTargets().size() / (sa.getTargets().size() +1);
                 }
 
                 // look for creature targets; currently also catches planeswalkers that can be killed immediately
@@ -735,7 +735,7 @@ public class DamageDealAi extends DamageAiBase {
 
                 final Cost abCost = sa.getPayCosts();
                 boolean freePing = immediately || abCost == null
-                        || sa.getTargets().getNumTargeted() > 0;
+                        || sa.getTargets().size() > 0;
 
                 if (!source.isSpell()) {
                     if (phase.is(PhaseType.END_OF_TURN) && sa.isAbility() && abCost.isReusuableResource()) {
@@ -782,21 +782,21 @@ public class DamageDealAi extends DamageAiBase {
                     continue;
                 }
             } else if ("OppAtTenLife".equals(logic)) {
-            	for (final Player p : ai.getOpponents()) {
-            		if (sa.canTarget(p) && p.getLife() == 10 && tcs.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
-            			tcs.add(p);
-            		}
-            	}
+                for (final Player p : ai.getOpponents()) {
+                    if (sa.canTarget(p) && p.getLife() == 10 && tcs.size() < tgt.getMaxTargets(source, sa)) {
+                        tcs.add(p);
+                    }
+                }
             }
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
-            if (sa.canTarget(enemy) && tcs.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+            if (sa.canTarget(enemy) && tcs.size() < tgt.getMaxTargets(source, sa)) {
                 if (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (SpellAbilityAi.isSorcerySpeed(sa) && phase.is(PhaseType.MAIN2))
                         || ("PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai))
                         || immediately || shouldTgtP(ai, sa, dmg, noPrevention)) &&
                         (!avoidTargetP(ai, sa))) {
-                	tcs.add(enemy);
+                    tcs.add(enemy);
                     if (divided) {
                         tgt.addDividedAllocation(enemy, dmg);
                         break;
@@ -805,7 +805,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
             }
             // fell through all the choices, no targets left?
-            if (tcs.getNumTargeted() < tgt.getMinTargets(source, sa) || tcs.getNumTargeted() == 0) {
+            if (tcs.size() < tgt.getMinTargets(source, sa) || tcs.size() == 0) {
                 if (!mandatory) {
                     sa.resetTargets();
                     return false;
@@ -896,7 +896,7 @@ public class DamageDealAi extends DamageAiBase {
         final boolean divided = sa.hasParam("DividedAsYouChoose");
         final Player opp = ai.getWeakestOpponent();
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+        while (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             if (tgt.canTgtPlaneswalker()) {
                 final Card c = this.dealDamageChooseTgtPW(ai, sa, dmg, noPrevention, ai, true);
                 if (c != null) {

@@ -18,6 +18,7 @@
 package forge.game.spellability;
 
 import com.google.common.base.Predicates;
+import com.google.common.collect.ForwardingList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -29,7 +30,6 @@ import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.util.collect.FCollection;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,13 +40,9 @@ import java.util.List;
  * @author Forge
  * @version $Id$
  */
-public class TargetChoices implements Cloneable {
+public class TargetChoices extends ForwardingList<GameObject> implements Cloneable {
 
     private final FCollection<GameObject> targets = new FCollection<GameObject>();
-
-    public final int getNumTargeted() {
-        return targets.size();
-    }
 
     public final int getTotalTargetedCMC() {
         int totalCMC = 0;
@@ -58,14 +54,9 @@ public class TargetChoices implements Cloneable {
 
     public final boolean add(final GameObject o) {
         if (o instanceof Player || o instanceof Card || o instanceof SpellAbility) {
-            return targets.add(o);
+            super.add(o);
         }
         return false;
-    }
-
-    public final boolean remove(final GameObject target) {
-        // remove returns true if element was found in given list
-        return targets.remove(target);
     }
 
     public final CardCollectionView getTargetCards() {
@@ -84,41 +75,6 @@ public class TargetChoices implements Cloneable {
         return Lists.newArrayList(Iterables.filter(targets, GameEntity.class));
     }
 
-    public final List<GameObject> getTargets() {
-        return this.targets;
-    }
-
-
-    public final String getTargetedString() {
-        final List<GameObject> tgts = getTargets();
-        final StringBuilder sb = new StringBuilder();
-        boolean first = true;
-        for (final Object o : tgts) {
-            if (!first) {
-                sb.append(" ");
-            }
-            first = false;
-            if (o instanceof Player) {
-                final Player p = (Player) o;
-                sb.append(p.getName());
-            }
-            if (o instanceof Card) {
-                final Card c = (Card) o;
-                sb.append(c);
-            }
-            if (o instanceof SpellAbility) {
-                final SpellAbility sa = (SpellAbility) o;
-                sb.append(sa);
-            }
-        }
-        return sb.toString();
-    }
-
-    @Override
-    public final String toString() {
-        return this.getTargetedString();
-    }
-
     public final boolean isTargetingAnyCard() {
         return Iterables.any(targets, Predicates.instanceOf(Card.class));
     }
@@ -129,10 +85,6 @@ public class TargetChoices implements Cloneable {
 
     public final boolean isTargetingAnySpell() {
         return Iterables.any(targets, Predicates.instanceOf(SpellAbility.class));
-    }
-
-    public final boolean isTargeting(GameObject e) {
-        return targets.contains(e);
     }
 
     public final Card getFirstTargetedCard() {
@@ -147,28 +99,14 @@ public class TargetChoices implements Cloneable {
         return Iterables.getFirst(getTargetSpells(), null);
     }
 
-    public final boolean isEmpty() {
-        return targets.isEmpty();
-    }
-    
     @Override
     public TargetChoices clone() {
         TargetChoices tc = new TargetChoices();
         tc.targets.addAll(targets);
         return tc;
     }
-
     @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof TargetChoices) {
-            TargetChoices compare = (TargetChoices)obj;
-
-            if (getNumTargeted() != compare.getNumTargeted()) {
-                return false;
-            }
-            return getTargets().equals(compare.getTargets());
-        } else {
-            return false;
-        }
+    protected List<GameObject> delegate() {
+        return targets;
     }
 }
