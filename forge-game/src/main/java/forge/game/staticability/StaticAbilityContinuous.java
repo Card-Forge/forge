@@ -128,7 +128,6 @@ public final class StaticAbilityContinuous {
         String[] addTriggers = null;
         String[] addStatics = null;
         boolean removeAllAbilities = false;
-        boolean removeIntrinsicAbilities = false;
         boolean removeNonMana = false;
         boolean removeSuperTypes = false;
         boolean removeCardTypes = false;
@@ -298,11 +297,6 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("ExceptManaAbilities")) {
                 removeNonMana = true;
             }
-        }
-        // do this in type layer too in case of blood moon
-        if ((layer == StaticAbilityLayer.TYPE)
-                && params.containsKey("RemoveIntrinsicAbilities")) {
-            removeIntrinsicAbilities = true;
         }
 
         if (layer == StaticAbilityLayer.ABILITIES && params.containsKey("AddAbility")) {
@@ -612,7 +606,7 @@ public final class StaticAbilityContinuous {
             // add keywords
             // TODO regular keywords currently don't try to use keyword multiplier
             // (Although nothing uses it at this time)
-            if ((addKeywords != null) || (removeKeywords != null) || removeAllAbilities || removeIntrinsicAbilities) {
+            if ((addKeywords != null) || (removeKeywords != null) || removeAllAbilities || removeLandTypes) {
                 List<String> newKeywords = null;
                 if (addKeywords != null) {
                     newKeywords = Lists.newArrayList(addKeywords);
@@ -654,7 +648,7 @@ public final class StaticAbilityContinuous {
                 }
 
                 affectedCard.addChangedCardKeywords(newKeywords, removeKeywords,
-                        removeAllAbilities, removeIntrinsicAbilities,
+                        removeAllAbilities, removeLandTypes,
                         hostCard.getTimestamp());
             }
 
@@ -795,8 +789,8 @@ public final class StaticAbilityContinuous {
                 }
             }
 
-            if (layer == StaticAbilityLayer.TYPE && removeIntrinsicAbilities) {
-                affectedCard.addChangedCardTraits(null, null, null, null, null, false, false, removeIntrinsicAbilities, hostCard.getTimestamp());
+            if (layer == StaticAbilityLayer.TYPE && removeLandTypes) {
+                affectedCard.addChangedCardTraits(null, null, null, null, null, false, false, removeLandTypes, hostCard.getTimestamp());
             }
 
             // add Types
