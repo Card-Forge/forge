@@ -533,7 +533,7 @@ public class TriggerHandler {
             }
         } else {
             // need to copy the SA because of TriggeringObjects
-            sa = sa.copy(host, host.getController(), false);
+            sa = sa.copy(host, regtrig.getHostCard().getController(), false);
         }
 
         sa.setLastStateBattlefield(game.getLastStateBattlefield());
@@ -543,12 +543,6 @@ public class TriggerHandler {
         sa.setSourceTrigger(regtrig.getId());
         regtrig.setTriggeringObjects(sa, runParams);
         sa.setTriggerRemembered(regtrig.getTriggerRemembered());
-
-        if (sa.getDeltrigActivatingPlayer() != null) {
-            // make sure that the original delayed trigger activator is restored
-            // (may have been overwritten by the AI simulation routines, e.g. Rainbow Vale)
-            sa.setActivatingPlayer(sa.getDeltrigActivatingPlayer());
-        }
 
         if (regtrig.hasParam("TriggerController")) {
             Player p = AbilityUtils.getDefinedPlayers(regtrig.getHostCard(), regtrig.getParam("TriggerController"), sa).get(0);
