@@ -2,7 +2,7 @@ Name:Conversion
 ManaCost:2 W W
 Types:Enchantment
 K:UpkeepCost:W W
-S:Mode$ Continuous | Affected$ Mountain | AddType$ Plains | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True | Description$ All Mountains are Plains.
+S:Mode$ Continuous | Affected$ Mountain | AddType$ Plains | RemoveLandTypes$ True | Description$ All Mountains are Plains.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conversion.jpg
 Oracle:At the beginning of your upkeep, sacrifice Conversion unless you pay {W}{W}.\nAll Mountains are Plains.

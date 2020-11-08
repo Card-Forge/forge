@@ -6,7 +6,6 @@ import com.google.common.collect.Maps;
 import forge.ai.*;
 import forge.card.CardType;
 import forge.game.Game;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -14,15 +13,11 @@ import forge.game.cost.CostPutCounter;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.replacement.ReplacementEffect;
-import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityContinuous;
 import forge.game.staticability.StaticAbilityLayer;
-import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 
 import java.util.Arrays;
@@ -474,75 +469,15 @@ public class AnimateAi extends SpellAbilityAi {
             sVars.addAll(Arrays.asList(sa.getParam("sVars").split(",")));
         }
 
-        AnimateEffectBase.doAnimate(card, sa, power, toughness, types, removeTypes, finalDesc, keywords, removeKeywords, hiddenKeywords, timestamp);
+        AnimateEffectBase.doAnimate(card, sa, power, toughness, types, removeTypes, finalDesc,
+                keywords, removeKeywords, hiddenKeywords,
+                abilities, triggers, replacements, stAbs,
+                timestamp);
 
-
-        // remove abilities
-        final List<SpellAbility> removedAbilities = Lists.newArrayList();
-        boolean clearSpells = sa.hasParam("OverwriteSpells");
-        boolean removeAll = sa.hasParam("RemoveAllAbilities");
-        boolean removeIntrinsic = sa.hasParam("RemoveIntrinsicAbilities");
-
-        if (clearSpells) {
-            removedAbilities.addAll(Lists.newArrayList(card.getSpells()));
-        }
-
-        if (sa.hasParam("RemoveThisAbility") && !removedAbilities.contains(sa)) {
-            removedAbilities.add(sa);
-        }
-
-        // give abilities
-        final List<SpellAbility> addedAbilities = Lists.newArrayList();
-        if (abilities.size() > 0) {
-            for (final String s : abilities) {
-                final String actualAbility = source.getSVar(s);
-                addedAbilities.add(AbilityFactory.getAbility(actualAbility, card));
-            }
-        }
-
-        // Grant triggers
-        final List<Trigger> addedTriggers = Lists.newArrayList();
-        if (triggers.size() > 0) {
-            for (final String s : triggers) {
-                final String actualTrigger = source.getSVar(s);
-                final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, false);
-                addedTriggers.add(parsedTrigger);
-            }
-        }
-
-        // give replacement effects
-        final List<ReplacementEffect> addedReplacements = Lists.newArrayList();
-        if (replacements.size() > 0) {
-            for (final String s : replacements) {
-                final String actualReplacement = source.getSVar(s);
-                final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, card, false);
-                addedReplacements.add(parsedReplacement);
-            }
-        }
-
-        // give static abilities (should only be used by cards to give
-        // itself a static ability)
-        final List<StaticAbility> addedStaticAbilities = Lists.newArrayList();
-        if (stAbs.size() > 0) {
-            for (final String s : stAbs) {
-                final String actualAbility = source.getSVar(s);
-                addedStaticAbilities.add(new StaticAbility(actualAbility, card));
-            }
-        }
-
-        if (removeAll || removeIntrinsic
-                || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
-                || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
-            card.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
-                    addedStaticAbilities, removeAll, false, removeIntrinsic, timestamp);
-        }
-
-        // give static abilities (should only be used by cards to give
-        // itself a static ability)
-        if (stAbs.size() > 0) {
-            for (final String s : stAbs) {
-                final String actualAbility = source.getSVar(s);
-                final StaticAbility stAb = card.addStaticAbility(actualAbility);
+        // check if animate added static Abilities
+        CardTraitChanges traits = card.getChangedCardTraits().get(timestamp);
+        if (traits != null) {
+            for (StaticAbility stAb : traits.getStaticAbilities()) {
                 if ("Continuous".equals(stAb.getParam("Mode"))) {
                     for (final StaticAbilityLayer layer : stAb.getLayers()) {
                         StaticAbilityContinuous.applyContinuousAbility(stAb, new CardCollection(card), layer);

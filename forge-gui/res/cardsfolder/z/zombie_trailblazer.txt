@@ -2,7 +2,7 @@ Name:Zombie Trailblazer
 ManaCost:B B B
 Types:Creature Zombie Scout
 PT:2/2
-A:AB$ Animate | Cost$ tapXType<1/Zombie> | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Swamp | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True | SpellDescription$ Target land becomes a Swamp until end of turn.
+A:AB$ Animate | Cost$ tapXType<1/Zombie> | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Swamp | RemoveLandTypes$ True | SpellDescription$ Target land becomes a Swamp until end of turn.
 A:AB$ Pump | Cost$ tapXType<1/Zombie> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Swampwalk | SpellDescription$ Target creature gains swampwalk until end of turn.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_trailblazer.jpg

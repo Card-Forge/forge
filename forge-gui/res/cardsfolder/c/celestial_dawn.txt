@@ -1,7 +1,7 @@
 Name:Celestial Dawn
 ManaCost:1 W W
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Land.YouCtrl | AddType$ Plains | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True | Description$ Lands you control are Plains.
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddType$ Plains | RemoveLandTypes$ True | Description$ Lands you control are Plains.
 S:Mode$ Continuous | Affected$ Card.YouOwn+nonLand | SetColor$ White | AffectedZone$ Hand,Library,Graveyard,Exile,Command | Description$ Nonland permanents you control are white. The same is true for spells you control and nonland cards you own that aren't on the battlefield.
 S:Mode$ Continuous | Affected$ Card.YouCtrl+nonLand | SetColor$ White | AffectedZone$ Battlefield,Stack
 S:Mode$ Continuous | Affected$ You | ManaColorConversion$ Additive | WhiteConversion$ Color | Description$ You may spend white mana as though it were mana of any color.
