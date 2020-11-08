@@ -5,7 +5,7 @@ K:Enchant creature or planeswalker you control
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature.YouCtrl,Planeswalker.YouCtrl | TgtPrompt$ Select target creature or planeswalker you control | AITgts$ Card.nonToken | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | TriggerController$ TriggeredCardController | Execute$ TrigReturn | TriggerDescription$ When enchanted permanent dies or is put into exile, return that card to the battlefield under your control.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Exile | ValidCard$ Card.AttachedBy | TriggerController$ TriggeredCardController | Execute$ TrigReturn2 | Secondary$ True | TriggerDescription$ When enchanted permanent dies or is put into exile, return that card to the battlefield under your control.
-SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True
-SVar:TrigReturn2:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Exile | Destination$ Battlefield | GainControl$ True
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True
+SVar:TrigReturn2:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Exile | Destination$ Battlefield | GainControl$ True
 SVar:PlayMain1:TRUE
 Oracle:Enchant creature or planeswalker you control\nWhen enchanted permanent dies or is put into exile, return that card to the battlefield under your control.

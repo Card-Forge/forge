@@ -5,6 +5,5 @@ PT:6/4
 K:First Strike
 K:UpkeepCost:B B
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME deals damage to a creature, exile that creature.
-SVar:TrigExile:DB$ChangeZone | Defined$ TriggeredTarget | Origin$ Battlefield | Destination$ Exile
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pit_spawn.jpg
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredTargetLKICopy | Origin$ Battlefield | Destination$ Exile
 Oracle:First strike\nAt the beginning of your upkeep, sacrifice Pit Spawn unless you pay {B}{B}.\nWhenever Pit Spawn deals damage to a creature, exile that creature.

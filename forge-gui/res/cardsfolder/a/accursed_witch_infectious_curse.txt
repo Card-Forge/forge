@@ -5,7 +5,7 @@ PT:4/2
 S:Mode$ ReduceCost | ValidTarget$ Card.Self | Activator$ Player.Opponent | Type$ Spell | Amount$ 1 | Description$ Spells your opponents cast that target CARDNAME cost {1} less to cast.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, return it to the battlefield transformed under your control attached to target opponent.
 SVar:TrigChoose:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Choose a opponent | IsCurse$ True | SubAbility$ DBChange
-SVar:DBChange:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | AttachedToPlayer$ ParentTarget | Transformed$ True | GainControl$ True
+SVar:DBChange:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | AttachedToPlayer$ ParentTarget | Transformed$ True | GainControl$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/accursed_witch.jpg
 SVar:SacMe:4
 SVar:MustAttack:True

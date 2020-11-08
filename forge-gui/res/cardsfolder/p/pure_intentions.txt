@@ -3,7 +3,7 @@ ManaCost:W
 Types:Instant Arcane
 A:SP$ Effect | Cost$ W | Name$ Pure Intentions Effect | Triggers$ PureDiscarded | SVars$ TrigPureChange | SpellDescription$ Whenever a spell or ability an opponent controls causes you to discard cards this turn, return those cards from your graveyard to your hand.
 SVar:PureDiscarded:Mode$ Discarded | ValidCard$ Card.YouCtrl | ValidCause$ Card.OppCtrl | TriggerZones$ Command | Execute$ TrigPureChange | TriggerDescription$ Whenever a spell or ability an opponent controls causes you to discard cards this turn, return those cards from your graveyard to your hand.
-SVar:TrigPureChange:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand
+SVar:TrigPureChange:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Graveyard | Destination$ Hand
 T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ Card.OppCtrl | Execute$ TrigPureReturn | TriggerDescription$ When a spell or ability an opponent controls causes you to discard CARDNAME, return it to your hand.
 SVar:TrigPureReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand
 SVar:DiscardMeByOpp:1

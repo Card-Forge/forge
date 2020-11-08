@@ -4,6 +4,6 @@ Types:Creature Treefolk
 PT:5/3
 K:Trample
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, return CARDNAME to its owner's hand.
-SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredCard
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredCardLKICopy
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weatherseed_treefolk.jpg
 Oracle:Trample\nWhen Weatherseed Treefolk dies, return it to its owner's hand.

@@ -4,7 +4,7 @@ Types:Legendary Artifact Equipment
 K:Equip:2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ First Strike | Description$ Equipped creature gets +3/+3 and has first strike.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedByEquipped | Execute$ UnscytheTrigExile | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever a creature dealt damage by equipped creature this turn dies, you may exile that card. If you do, create a 2/2 black Zombie creature token.
-SVar:UnscytheTrigExile:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ UnscytheDBToken
+SVar:UnscytheTrigExile:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ UnscytheDBToken
 SVar:UnscytheDBToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | LegacyImage$ b 2 2 zombie arb | ConditionCheckSVar$ UnscytheX | ConditionSVarCompare$ GE1 | SubAbility$ UnscytheDBCleanup
 SVar:UnscytheDBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:UnscytheX:Remembered$Amount
