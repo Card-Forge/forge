@@ -2,7 +2,7 @@ Name:Dargo, the Shipwrecker
 ManaCost:6 R
 Types:Legendary Creature Giant Pirate
 PT:7/5
-A:SP$ PermanentCreature | Announce$ X | Cost$ 6 R Sac<X/Artifact;Creature/artifact or creature> | AILogic$ SacToReduceCost | References$ X,Y | CostDesc$ As an additional cost to cast this spell, you may sacrifice any number of artifacts and/or creatures. | SpellDescription$ As an additional cost to cast this spell, you may sacrifice any number of artifacts and/or creatures.
+A:SP$ PermanentCreature | Announce$ X | Cost$ 6 R Sac<X/Artifact;Creature/artifacts or creatures> | AILogic$ SacToReduceCost | References$ X,Y | CostDesc$ As an additional cost to cast this spell, you may sacrifice any number of artifacts and/or creatures. | SpellDescription$
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Y | EffectZone$ All | References$ Y | Description$ This spell costs {2} less to cast for each permanent sacrificed this way and {2} less to cast for each other artifact or creature you've sacrificed this turn.
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Z | EffectZone$ All | References$ Z | Secondary$ True | Description$ This spell costs {2} less to cast for each permanent sacrificed this way and {2} less to cast for each other artifact or creature you've sacrificed this turn.
 SVar:X:XChoice
