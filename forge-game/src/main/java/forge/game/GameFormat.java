@@ -200,7 +200,7 @@ public class GameFormat implements Comparable<GameFormat> {
         for (String setCode : allowedSetCodes_ro) {
             CardEdition edition = StaticData.instance().getEditions().get(setCode);
             if (edition != null) {
-                for (CardInSet card : edition.getCards()) {
+                for (CardInSet card : edition.getAllCardsInSet()) {
                     if (!bannedCardNames_ro.contains(card.name)) {
                         PaperCard pc = commonCards.getCard(card.name, setCode);
                         if (pc != null) {

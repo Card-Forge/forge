@@ -153,9 +153,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     public void loadCard(String cardName, CardRules cr) {
         rulesByName.put(cardName, cr);
+        // This seems very unperformant. Does this get called often?
+        System.out.println("Inside loading card");
 
         for (CardEdition e : editions) {
-            for (CardInSet cis : e.getCards()) {
+            for (CardInSet cis : e.getAllCardsInSet()) {
                 if (cis.name.equalsIgnoreCase(cardName)) {
                     addSetCard(e, cis, cr);
                 }
@@ -175,13 +177,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             boolean coreOrExpSet = e.getType() == CardEdition.Type.CORE || e.getType() == CardEdition.Type.EXPANSION;
             boolean isCoreExpSet = coreOrExpSet || e.getType() == CardEdition.Type.REPRINT;
             if (logMissingPerEdition && isCoreExpSet) {
-                System.out.print(e.getName() + " (" + e.getCards().length + " cards)");
+                System.out.print(e.getName() + " (" + e.getAllCardsInSet().size() + " cards)");
             }
-            if (coreOrExpSet && e.getDate().after(today)) {
+            if (coreOrExpSet && e.getDate().after(today) && upcomingSet == null) {
                 upcomingSet = e;
             }
 
-            for (CardEdition.CardInSet cis : e.getCards()) {
+            for (CardEdition.CardInSet cis : e.getAllCardsInSet()) {
                 CardRules cr = rulesByName.get(cis.name);
                 if (cr != null) {
                     addSetCard(e, cis, cr);
@@ -195,7 +197,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     System.out.println(" ... 100% ");
                 }
                 else {
-                    int missing = (e.getCards().length - missingCards.size()) * 10000 / e.getCards().length;
+                    int missing = (e.getAllCardsInSet().size() - missingCards.size()) * 10000 / e.getAllCardsInSet().size();
                     System.out.printf(" ... %.2f%% (%s missing: %s)%n", missing * 0.01f, Lang.nounWithAmount(missingCards.size(), "card"), StringUtils.join(missingCards, " | "));
                 }
             }
@@ -318,7 +320,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (edition == null)
             return null;
         int numMatches = 0;
-        for (CardInSet card : edition.getCards()) {
+        for (CardInSet card : edition.getAllCardsInSet()) {
             if (card.name.equalsIgnoreCase(cardName)) {
                 numMatches += 1;
                 if (numMatches == artIndex) {
@@ -562,7 +564,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public List<PaperCard> getAllCardsFromEdition(CardEdition edition) {
         List<PaperCard> cards = Lists.newArrayList();
 
-        for(CardInSet cis : edition.getCards()) {
+        for(CardInSet cis : edition.getAllCardsInSet()) {
             PaperCard card = this.getCard(cis.name, edition.getCode());
             if (card == null) {
                 // Just in case the card is listed in the edition file but Forge doesn't support it
@@ -654,7 +656,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         // May iterate over editions and find out if there is any card named 'cardName' but not implemented with Forge script.
         if (StringUtils.isBlank(request.edition)) {
             for (CardEdition edition : editions) {
-                for (CardInSet cardInSet : edition.getCards()) {
+                for (CardInSet cardInSet : edition.getAllCardsInSet()) {
                     if (cardInSet.name.equals(request.cardName)) {
                         cardEdition = edition;
                         cardRarity = cardInSet.rarity;
@@ -668,7 +670,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         } else {
             cardEdition = editions.get(request.edition);
             if (cardEdition != null) {
-                for (CardInSet cardInSet : cardEdition.getCards()) {
+                for (CardInSet cardInSet : cardEdition.getAllCardsInSet()) {
                     if (cardInSet.name.equals(request.cardName)) {
                         cardRarity = cardInSet.rarity;
                         break;
@@ -709,9 +711,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             // 1. generate all paper cards from edition data we have (either explicit, or found in res/editions, or add to unknown edition)
             List<PaperCard> paperCards = new ArrayList<>();
             if (null == whenItWasPrinted || whenItWasPrinted.isEmpty()) {
+                // TODO Not performant Each time we "putCard" we loop through ALL CARDS IN ALL editions
                 for (CardEdition e : editions.getOrderedEditions()) {
                     int artIdx = 1;
-                    for (CardInSet cis : e.getCards()) {
+                    for (CardInSet cis : e.getAllCardsInSet()) {
                         if (!cis.name.equals(cardName)) {
                             continue;
                         }

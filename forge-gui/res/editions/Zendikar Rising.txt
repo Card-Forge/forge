@@ -6,9 +6,10 @@ Code2=ZNR
 MciCode=znr
 Type=Expansion
 BoosterCovers=3
-Booster=10 Common:!dfc:!fromSheet("ZNR Secret Cards"), 3 Uncommon:!dfc:!fromSheet("ZNR Secret Cards"), 1 RareMythic:!dfc:!fromSheet("ZNR Secret Cards"), 1 BasicLand
+Booster=10 Common:!dfc:fromSheet("ZNR cards"), 3 Uncommon:!dfc:fromSheet("ZNR cards"), 1 RareMythic:!dfc:fromSheet("ZNR cards"), 1 BasicLand
 BoosterReplaceSlotFromPrintSheet=ZNRModalDoubleFaceCards
 Prerelease=6 Boosters, 1 RareMythic+
+#BoosterBox=36 Boosters, 1 fromSheet('buy a box')+
 
 [cards]
 1 U Allied Assault
@@ -291,7 +292,8 @@ Prerelease=6 Boosters, 1 RareMythic+
 278 L Forest
 279 L Forest
 280 L Forest
-#Alternate Art Borderless
+
+[borderless]
 281 M Jace, Mirror Mage
 282 M Nahiri, Heir of the Ancients
 283 M Nissa of Shadowed Boughs
@@ -301,7 +303,8 @@ Prerelease=6 Boosters, 1 RareMythic+
 287 R Cragcrown Pathway
 288 R Needleverge Pathway
 289 R Riverglide Pathway
-#Showcase
+
+[showcase]
 290 U Canyon Jerboa
 291 U Fearless Fledgling
 292 R Felidar Retreat
@@ -326,7 +329,8 @@ Prerelease=6 Boosters, 1 RareMythic+
 311 U Brushfire Elemental
 312 M Omnath, Locus of Creation
 313 R Phylath, World Sculptor
-#Extended Art
+
+[extended art]
 314 M Angel of Destiny
 315 R Archon of Emeria
 316 R Archpriest of Iona
@@ -398,9 +402,11 @@ Prerelease=6 Boosters, 1 RareMythic+
 382 L Swamp
 383 L Mountain
 384 L Forest
-#Buy-A-Box
+
+[buy a box]
 385 R Orah, Skyclave Hierophant
-#Promos
+
+[promos]
 386 R Charix, the Raging Isle
 387 C Into the Roil
 388 U Bloodchief's Thirst

@@ -5,6 +5,8 @@ import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
+import forge.util.storage.IStorage;
+import forge.util.storage.StorageExtendable;
 import forge.util.storage.StorageReaderFileSections;
 
 import java.io.File;
@@ -23,6 +25,18 @@ public class PrintSheet {
         @Override public final String apply(PrintSheet sheet) { return sheet.name; }
     };
 
+    public static final IStorage<PrintSheet> initializePrintSheets(File sheetsFile, CardEdition.Collection editions) {
+        IStorage<PrintSheet> sheets = new StorageExtendable<>("Special print runs", new PrintSheet.Reader(sheetsFile));
+
+        for(CardEdition edition : editions) {
+            for(PrintSheet ps : edition.getPrintSheetsBySection()) {
+                System.out.println(ps.name);
+                sheets.add(ps.name, ps);
+            }
+        }
+
+        return sheets;
+    }
 
     private final ItemPool<PaperCard> cardsWithWeights;
 

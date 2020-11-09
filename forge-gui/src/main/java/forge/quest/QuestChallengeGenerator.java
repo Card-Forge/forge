@@ -178,9 +178,10 @@ public class QuestChallengeGenerator {
         }
 
         @Override
-        public void add(QuestEventChallenge item) {
+        public void add(QuestEventChallenge item) { }
 
-        }
+        @Override
+        public void add(String name, QuestEventChallenge item) { }
 
         @Override
         public void delete(String id) {

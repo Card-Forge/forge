@@ -17,23 +17,33 @@
  */
 package forge.util.storage;
 
-import java.util.Collection;
-
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import forge.util.IItemReader;
 
-import forge.util.IHasName;
+import java.util.*;
 
-public interface IStorage<T> extends Iterable<T>, IHasName {
-    String getFullPath();
-    T get(String name);
-    T find(Predicate<T> condition);
-    Collection<String> getItemNames();
-    boolean contains(String name);
-    int size();
-    void add(T item);
-    void add(String name, T item);
-    void delete(String deckName);
-    IStorage<IStorage<T>> getFolders();
-    IStorage<T> tryGetFolder(String path);
-    IStorage<T> getFolderOrCreate(String path);
+/**
+ * <p>
+ * StorageBase class.
+ * </p>
+ *
+ * @param <T> the generic type
+ * @author Forge
+ * @version $Id: StorageBase.java 13590 2012-01-27 20:46:27Z Max mtg $
+ */
+public class StorageExtendable<T> extends StorageBase<T> {
+
+    public StorageExtendable(String name0, IItemReader<T> io) {
+        super(name0, io);
+    }
+
+    public StorageExtendable(final String name0, final String fullPath0, final Map<String, T> map0) {
+        super(name0, fullPath0, map0);
+    }
+
+    @Override
+    public void add(String name, T item) {
+        map.put(name, item);
+    }
 }

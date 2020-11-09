@@ -79,6 +79,11 @@ public class StorageBase<T> implements IStorage<T> {
     }
 
     @Override
+    public void add(String name, T item) {
+        throw new UnsupportedOperationException("This is a read-only storage");
+    }
+
+    @Override
     public void add(T item) {
         throw new UnsupportedOperationException("This is a read-only storage");
     }

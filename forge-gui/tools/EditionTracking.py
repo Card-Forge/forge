@@ -43,10 +43,11 @@ def initializeEditions():
 
 					else:
 						if line.startswith("[tokens]"):
+							# Hopefully tokens are last in the print sheet ordering
 							metadata = True
 							continue
 
-						if line.startswith("#"):
+						if line.startswith("#") or line.startswith("["):
 							continue
 
 						if line:
