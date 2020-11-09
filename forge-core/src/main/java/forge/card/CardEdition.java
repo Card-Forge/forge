@@ -76,7 +76,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
     public enum EditionSection {
         CARDS("cards"),
-        PLANESWALKER_DECKS("planeswalker decks"),
+        PRECON_PRODUCT("precon product"),
         BORDERLESS("borderless"),
         SHOWCASE("showcase"),
         EXTENDED_ART("extended art"),
