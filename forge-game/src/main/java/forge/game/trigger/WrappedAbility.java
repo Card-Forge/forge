@@ -51,8 +51,8 @@ public class WrappedAbility extends Ability {
     public WrappedAbility(final Trigger regtrig0, final SpellAbility sa0, final Player decider0) {
         super(sa0.getHostCard(), ManaCost.ZERO, sa0.getView());
         setTrigger(regtrig0);
-        setTrigger(true);
         sa = sa0;
+        sa.setTrigger(regtrig0);
         decider = decider0;
         sa.setDescription(this.getStackDescription());
     }
@@ -473,9 +473,6 @@ public class WrappedAbility extends Ability {
                 return;
             }
         }
-
-        // set Trigger
-        sa.setTrigger(regtrig);
 
         if (decider != null && !decider.getController().confirmTrigger(this)) {
             return;

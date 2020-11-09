@@ -539,7 +539,7 @@ public class TriggerHandler {
         sa.setLastStateBattlefield(game.getLastStateBattlefield());
         sa.setLastStateGraveyard(game.getLastStateGraveyard());
 
-        sa.setTrigger(true);
+        sa.setTrigger(regtrig);
         sa.setSourceTrigger(regtrig.getId());
         regtrig.setTriggeringObjects(sa, runParams);
         sa.setTriggerRemembered(regtrig.getTriggerRemembered());
@@ -560,8 +560,6 @@ public class TriggerHandler {
 
         sa.setStackDescription(sa.toString());
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-            // need to be set for demonic pact to look for chosen modes
-            sa.setTrigger(regtrig);
             if (!CharmEffect.makeChoices(sa)) {
                 // 603.3c If no mode is chosen, the ability is removed from the stack.
                 return;
