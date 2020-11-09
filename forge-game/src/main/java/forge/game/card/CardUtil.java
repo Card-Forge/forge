@@ -24,6 +24,7 @@ import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -37,6 +38,7 @@ import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public final class CardUtil {
@@ -181,11 +183,41 @@ public final class CardUtil {
 
     }
 
+    public static List<Card> getLKICopyList(final Iterable<Card> in, Map<Integer, Card> cachedMap) {
+        if (in == null) {
+            return null;
+        }
+        List<Card> result = Lists.newArrayList();
+        for (final Card c : in) {
+            result.add(getLKICopy(c, cachedMap));
+        }
+        return result;
+    }
+
+    public static GameEntity getLKICopy(final GameEntity in, Map<Integer, Card> cachedMap) {
+        if (in instanceof Card) {
+            return getLKICopy((Card)in, cachedMap);
+        }
+        return in;
+    }
     /**
      * @param in  a Card to copy.
      * @return a copy of C with LastKnownInfo stuff retained.
      */
     public static Card getLKICopy(final Card in) {
+        if (in == null) {
+            return null;
+        }
+        return getLKICopy(in, Maps.newHashMap());
+    }
+    public static Card getLKICopy(final Card in, Map<Integer, Card> cachedMap) {
+        if (in == null) {
+            return null;
+        }
+        Card cachedCard = cachedMap.get(in.getId());
+        if (cachedCard != null) {
+            return cachedCard;
+        }
         String msg = "CardUtil:getLKICopy copy object";
         Sentry.getContext().recordBreadcrumb(
                 new BreadcrumbBuilder().setMessage(msg)
@@ -196,6 +228,7 @@ public final class CardUtil {
         );
 
         final Card newCopy = new Card(in.getId(), in.getPaperCard(), in.getGame(), null);
+        cachedMap.put(in.getId(), newCopy);
         newCopy.setSetCode(in.getSetCode());
         newCopy.setOwner(in.getOwner());
         newCopy.setController(in.getController(), 0);
@@ -243,8 +276,8 @@ public final class CardUtil {
         newCopy.setReceivedDamageFromPlayerThisTurn(in.getReceivedDamageFromPlayerThisTurn());
         newCopy.getDamageHistory().setCreatureGotBlockedThisTurn(in.getDamageHistory().getCreatureGotBlockedThisTurn());
 
-        newCopy.setAttachedCards(in.getAttachedCards());
-        newCopy.setEntityAttachedTo(in.getEntityAttachedTo());
+        newCopy.setAttachedCards(getLKICopyList(in.getAttachedCards(), cachedMap));
+        newCopy.setEntityAttachedTo(getLKICopy(in.getEntityAttachedTo(), cachedMap));
 
         newCopy.setHaunting(in.getHaunting());
         newCopy.setCopiedPermanent(in.getCopiedPermanent());
@@ -272,7 +305,7 @@ public final class CardUtil {
 
         newCopy.copyChangedTextFrom(in);
 
-        newCopy.setMeldedWith(in.getMeldedWith());
+        newCopy.setMeldedWith(getLKICopy(in.getMeldedWith(), cachedMap));
 
         newCopy.setTimestamp(in.getTimestamp());
 
@@ -295,26 +328,42 @@ public final class CardUtil {
         }
         newCopy.setCastFrom(in.getCastFrom());
 
-        newCopy.setExiledWith(in.getExiledWith());
+        newCopy.setExiledWith(getLKICopy(in.getExiledWith(), cachedMap));
 
         return newCopy;
     }
 
-    public static CardCollection getRadiance(final Card source, final Card origin, final String[] valid) {
-        final CardCollection res = new CardCollection();
+    public static CardCollection getRadiance(final SpellAbility sa) {
+        if (!sa.usesTargeting() || !sa.hasParam("Radiance")) {
+            return new CardCollection();
+        }
 
+        final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        ColorSet cs = CardUtil.getColors(origin);
-        for (byte color : MagicColor.WUBRG) {
-            if(!cs.hasAnyColor(color))
-                continue;
+        final CardCollection res = new CardCollection();
+        final String[] valid = sa.getParam("ValidTgts").split(",");
+        final CardCollectionView tgts = sa.getTargets().getTargetCards();
 
+        byte combinedColor = 0;
+        for (Card tgt : tgts) {
+            ColorSet cs = CardUtil.getColors(tgt);
+            for (byte color : MagicColor.WUBRG) {
+                if(!cs.hasAnyColor(color))
+                    continue;
+                combinedColor |= color;
+            }
+        }
+        for (byte color : MagicColor.WUBRG) {
+            if ((combinedColor & color) == 0) {
+                continue;
+            }
             for(final Card c : game.getColoredCardsInPlay(MagicColor.toLongString(color))) {
-                if (!res.contains(c) && c.isValid(valid, source.getController(), source, null) && !c.equals(origin)) {
+                if (!res.contains(c) && !tgts.contains(c) && c.isValid(valid, source.getController(), source, sa)) {
                     res.add(c);
                 }
             }
         }
+
         return res;
     }
 

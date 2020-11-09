@@ -105,7 +105,22 @@ public class AbilityUtils {
         else if (defined.equals("Equipped")) {
             c = hostCard.getEquipping();
         }
-
+        else if (defined.startsWith("AttachedTo ")) {
+            String v = defined.split(" ")[1];
+            for (GameEntity ge : getDefinedEntities(hostCard, v, sa)) {
+                // TODO handle phased out inside attachedCards
+                Iterables.addAll(cards, ge.getAttachedCards());
+            }
+        }
+        else if (defined.startsWith("AttachedBy ")) {
+            String v = defined.split(" ")[1];
+            for (Card attachment : getDefinedCards(hostCard, v, sa)) {
+                Card attached = attachment.getAttachedTo();
+                if (attached != null) {
+                    cards.add(attached);
+                }
+            }
+        }
         else if (defined.equals("Enchanted")) {
             c = hostCard.getEnchantingCard();
             if ((c == null) && (sa != null) && (sa.getRootAbility() != null)

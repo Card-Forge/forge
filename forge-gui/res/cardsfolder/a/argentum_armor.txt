@@ -3,7 +3,7 @@ ManaCost:6
 Types:Artifact Equipment
 K:Equip:6
 T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigDestroy | TriggerDescription$ Whenever equipped creature attacks, destroy target permanent.
-SVar:TrigDestroy:DB$Destroy | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 6 | AddToughness$ 6 | AddSVar$ AE | Description$ Equipped creature gets +6/+6.
 SVar:AE:SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argentum_armor.jpg

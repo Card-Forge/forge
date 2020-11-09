@@ -5,5 +5,5 @@ Colors:black
 PT:1/1
 K:Deathtouch
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Planeswalker | TriggerZones$ Battlefield | Execute$ TrigDestroyPW | TriggerDescription$ Whenever this creature deals damage to a planeswalker, destroy that planeswalker.
-SVar:TrigDestroyPW:DB$ Destroy | Defined$ TriggeredTarget
+SVar:TrigDestroyPW:DB$ Destroy | Defined$ TriggeredTargetLKICopy
 Oracle:Deathtouch\nWhenever this creature deals damage to a planeswalker, destroy that planeswalker.

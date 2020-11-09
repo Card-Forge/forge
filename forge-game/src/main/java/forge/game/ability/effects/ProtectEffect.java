@@ -6,10 +6,10 @@ import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.Localizer;
@@ -129,14 +129,7 @@ public class ProtectEffect extends SpellAbilityEffect {
             gainsKWList.add(TextUtil.concatWithSpace("Protection from", color));
         }
 
-        final List<Card> untargetedCards = new ArrayList<>();
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
-        if (sa.hasParam("Radiance") && (tgt != null)) {
-            untargetedCards.addAll(CardUtil.getRadiance(host, tgtCards.get(0),
-                    sa.getParam("ValidTgts").split(",")));
-        }
-
+        final CardCollection untargetedCards = CardUtil.getRadiance(sa);
 
         final long timestamp = game.getNextTimestamp();
 
@@ -147,7 +140,7 @@ public class ProtectEffect extends SpellAbilityEffect {
             }
 
             // if this is a target, make sure we can still target now
-            if ((tgt != null) && !tgtC.canBeTargetedBy(sa)) {
+            if (sa.usesTargeting() && !tgtC.canBeTargetedBy(sa)) {
                 continue;
             }
 

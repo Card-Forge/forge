@@ -15,6 +15,9 @@ import forge.util.Localizer;
 import forge.util.CardTranslation;
 
 import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.Maps;
 
 /** 
  * PeeakAndReveal is a simplified why of handling something that could
@@ -65,18 +68,21 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
 
                 // Singletons.getModel().getGameAction().revealCardsToOtherPlayers(peekingPlayer, revealableCards);
                 if (rememberRevealed) {
+                    Map<Integer, Card> cachedMap = Maps.newHashMap();
                     for(Card c : revealableCards) {
-                        source.addRemembered(CardUtil.getLKICopy(c));
+                        source.addRemembered(CardUtil.getLKICopy(c, cachedMap));
                     }
                 }
                 if (imprintRevealed) {
+                    Map<Integer, Card> cachedMap = Maps.newHashMap();
                     for(Card c : revealableCards) {
-                        source.addImprintedCard(CardUtil.getLKICopy(c));
+                        source.addImprintedCard(CardUtil.getLKICopy(c, cachedMap));
                     }
                 }
             } else if (sa.hasParam("RememberPeeked")) {
+                Map<Integer, Card> cachedMap = Maps.newHashMap();
                 for(Card c : revealableCards) {
-                    source.addRemembered(CardUtil.getLKICopy(c));
+                    source.addRemembered(CardUtil.getLKICopy(c, cachedMap));
                 }
             }
         }

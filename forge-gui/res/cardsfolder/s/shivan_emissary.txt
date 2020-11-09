@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 PT:1/1
 K:Kicker:1 B
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, destroy target nonblack creature. It can't be regenerated.
-SVar:TrigKicker:DB$Destroy | ValidTgts$ Creature.nonBlack | NoRegen$ True | TgtPrompt$ Select target nonblack creature
+SVar:TrigKicker:DB$ Destroy | ValidTgts$ Creature.nonBlack | NoRegen$ True | TgtPrompt$ Select target nonblack creature
 DeckNeeds:Color$Black
 SVar:NeedsToPlayKicked:Creature.nonBlack+OppCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_emissary.jpg

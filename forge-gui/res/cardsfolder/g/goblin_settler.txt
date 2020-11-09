@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Creature Goblin
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target land.
-SVar:TrigDestroy:DB$Destroy | ValidTgts$ Land | TgtPrompt$ Select a land.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select a land.
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Starter_1999/goblin_settler.jpg
 Oracle:When Goblin Settler enters the battlefield, destroy target land.

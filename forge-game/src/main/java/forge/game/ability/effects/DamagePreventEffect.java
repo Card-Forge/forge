@@ -9,6 +9,7 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -69,21 +70,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
         int numDam = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
 
         final List<GameObject> tgts = getTargets(sa);
-        final List<Card> untargetedCards = new ArrayList<>();
-        
-        if (sa.hasParam("Radiance") && (sa.usesTargeting())) {
-            Card origin = null;
-            for (int i = 0; i < tgts.size(); i++) {
-                if (tgts.get(i) instanceof Card) {
-                    origin = (Card) tgts.get(i);
-                    break;
-                }
-            }
-            if (origin != null) {
-                // Can't radiate from a player
-                untargetedCards.addAll(CardUtil.getRadiance(host, origin, sa.getParam("ValidTgts").split(",")));
-            }
-        }
+        final CardCollection untargetedCards = CardUtil.getRadiance(sa);
 
         final boolean targeted = (sa.usesTargeting());
         final boolean preventionWithEffect = sa.hasParam("PreventionSubAbility");

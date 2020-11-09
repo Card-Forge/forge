@@ -300,14 +300,10 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         return zoneType.toString();
     }
     
-    public Zone getLKICopy() {
+    public Zone getLKICopy(Map<Integer, Card> cachedMap) {
         Zone result = new Zone(zoneType, game);
 
-        final CardCollection list = new CardCollection();
-        for (final Card c : getCards()) {
-            list.add(CardUtil.getLKICopy(c));
-        }
-        result.setCards(list);
+        result.setCards(CardUtil.getLKICopyList(getCards(), cachedMap));
 
         return result;
     }
