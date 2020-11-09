@@ -366,7 +366,8 @@ Type=Other
 359 R Undergrowth Stadium
 360 R Vault of Champions
 361 R War Room
-#[commander decks]
+
+[precon product]
 362 M Wyleth, Soul of Steel
 363 R Timely Ward
 364 R Blazing Sunsteel
@@ -517,10 +518,12 @@ Type=Other
 509 L Mountain
 510 L Forest
 511 L Forest
-#[borderless]
+
+[borderless]
 512 M Tevesh Szat, Doom of Fools
 513 M Jeska, Thrice Reborn
-#[showcase]
+
+[showcase]
 514 M Najeela, the Blade-Blossom
 515 M Akiri, Line-Slinger
 516 M Brago, King Eternal
@@ -622,7 +625,8 @@ Type=Other
 612 U Tuya Bearclaw
 613 R Yurlok of Scorch Thrash
 614 R Zara, Renegade Recruiter
-#[extended art]
+
+[extended art]
 615 R Akroma's Will
 616 M Archon of Coronation
 617 R Armored Skyhunter
@@ -725,7 +729,31 @@ Type=Other
 714 R Undergrowth Stadium
 715 R Vault of Champions
 716 R War Room
-#[buy a box]
+
+[buy a box]
 721 M Mana Confluence
-#[promos]
+
+[promo]
 722 R Sengir, the Dark Baron
+
+[tokens]
+w_4_4_angel_flying
+w_1_1_soldier
+w_1_1_spirit_flying
+u_4_3_salamander_warrior
+b_0_1_thrull
+b_2_2_zombie
+r_2_2_dragon_flying_firebreathing
+g_1_1_elf_warrior
+c_3_3_a_golem
+b_x_x_horror
+rock
+c_a_treasure_sac
+w_2_2_cat
+w_1_1_soldier
+u_1_1_illusion
+g_3_3_beast
+g_4_4_beast
+g_3_3_elephant
+g_0_1_plant
+g_1_1_saproling
