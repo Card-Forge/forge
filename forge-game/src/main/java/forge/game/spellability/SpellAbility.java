@@ -99,7 +99,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private CardCollection splicedCards = null;
 
     private boolean basicSpell = true;
-    private boolean trigger = false;
     private Trigger triggerObj = null;
     private boolean optionalTrigger = false;
     private ReplacementEffect replacementEffect = null;
@@ -938,10 +937,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isTrigger() {
-        return trigger;
-    }
-    public void setTrigger(final boolean trigger0) {
-        trigger = trigger0;
+        return triggerObj != null;
     }
 
     public Trigger getTrigger() {

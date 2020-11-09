@@ -299,18 +299,19 @@ public class CardFactory {
 
     private static void buildPlaneAbilities(Card card) {
         StringBuilder triggerSB = new StringBuilder();
-        triggerSB.append("Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | ");
-        triggerSB.append("Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the ");
-        triggerSB.append("bottom of its owner's planar deck face down, then move the top card of your planar deck off ");
-        triggerSB.append("that planar deck and turn it face up");
+        triggerSB.append("Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Secondary$ True | ");
+        triggerSB.append("TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, ");
+        triggerSB.append("then move the top card of your planar deck off that planar deck and turn it face up");
+
+        String rolledWalk = "DB$ Planeswalk";
+
+        Trigger planesWalkTrigger = TriggerHandler.parseTrigger(triggerSB.toString(), card, true);
+        planesWalkTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledWalk, card));
+        card.addTrigger(planesWalkTrigger);
 
         StringBuilder saSB = new StringBuilder();
         saSB.append("AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | Activator$ Player | ActivationZone$ Command | ");
         saSB.append("SpellDescription$ Roll the planar dice. X is equal to the amount of times the planar die has been rolled this turn.");
-
-        card.setSVar("RolledWalk", "DB$ Planeswalk | Cost$ 0");
-        Trigger planesWalkTrigger = TriggerHandler.parseTrigger(triggerSB.toString(), card, true);
-        card.addTrigger(planesWalkTrigger);
 
         SpellAbility planarRoll = AbilityFactory.getAbility(saSB.toString(), card);
         planarRoll.setSVar("X", "Count$RolledThisTurn");
