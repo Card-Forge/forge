@@ -17,8 +17,6 @@
  */
 package forge.util.storage;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import forge.util.IItemReader;
 
 import java.util.*;
