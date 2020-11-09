@@ -1,0 +1,12 @@
+Name:Fathom Fleet Swordjack
+ManaCost:3 R
+Types:Creature Orc Pirate
+PT:4/3
+K:Encore:5 R
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals damage to the player or planeswalker it's attacking equal to the number of artifacts you control.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredDefender | NumDmg$ X | References$ X
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:HasAttackEffect:TRUE
+DeckNeeds:Type$Artifact
+DeckHas:Ability$Token
+Oracle:Whenever Fathom Fleet Swordjack attacks, it deals damage to the player or planeswalker it's attacking equal to the number of artifacts you control.\nEncore {5}{R} ({5}{R}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)
