@@ -406,7 +406,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 [buy a box]
 385 R Orah, Skyclave Hierophant
 
-[promos]
+[promo]
 386 R Charix, the Raging Isle
 387 C Into the Roil
 388 U Bloodchief's Thirst
