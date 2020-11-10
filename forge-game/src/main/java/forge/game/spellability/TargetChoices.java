@@ -54,7 +54,7 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
 
     public final boolean add(final GameObject o) {
         if (o instanceof Player || o instanceof Card || o instanceof SpellAbility) {
-            super.add(o);
+            return super.add(o);
         }
         return false;
     }
