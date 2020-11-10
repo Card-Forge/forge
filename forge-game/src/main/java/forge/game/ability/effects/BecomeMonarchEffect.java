@@ -30,7 +30,9 @@ public class BecomeMonarchEffect extends SpellAbilityEffect {
 
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                p.getGame().getAction().becomeMonarch(p);
+                if (!p.hasKeyword("You can’t become the monarch this turn.")) {
+                    p.getGame().getAction().becomeMonarch(p);
+                }
             }
         }
     }
