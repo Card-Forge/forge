@@ -6,7 +6,11 @@ import com.google.common.collect.Lists;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
+
+import java.util.List;
 
 public class EndTurnEffect extends SpellAbilityEffect {
 
@@ -19,7 +23,14 @@ public class EndTurnEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        Game game = sa.getActivatingPlayer().getGame();
+        final List<Player> enders = getDefinedPlayersOrTargeted(sa, "Defined");
+        final Player ender = enders.isEmpty() ? sa.getActivatingPlayer() : enders.get(0);
+        if (sa.hasParam("Optional")) {
+            if (!ender.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantEndTurn"))) {
+                return;
+            }
+        }
+        Game game = ender.getGame();
         // Steps taken from gatherer's rulings on Time Stop.
         // 1) All spells and abilities on the stack are exiled. This includes
         // Time Stop, though it will continue to resolve. It also includes
