@@ -5,7 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ UpkeepCost:2 | Description$ At the beginning of the upkeep of enchanted creature's controller, that player sacrifices that creature unless they pay {2}.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredCardLKICopy
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredNewCardLKICopy
 SVar:SacMe:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/slow_motion.jpg
 Oracle:Enchant creature\nAt the beginning of the upkeep of enchanted creature's controller, that player sacrifices that creature unless they pay {2}.\nWhen Slow Motion is put into a graveyard from the battlefield, return Slow Motion to its owner's hand.

@@ -6,6 +6,6 @@ K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, reveal the top five cards of your library. You may put a land card from among them onto the battlefield. Put the rest into your graveyard.
 SVar:TrigDig:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | ChangeValid$ Land | Optional$ True | DestinationZone$ Battlefield | DestinationZone2$ Graveyard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may exile it. If you do, put another target card from your graveyard on top of your library.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredCardLKICopy | SubAbility$ DBChange
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredNewCardLKICopy | SubAbility$ DBChange
 SVar:DBChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Card.YouOwn+Other | TgtPrompt$ Select another target card from your graveyard | AITgts$ Card.Other | ChangeNum$ 1
 Oracle:Reach\nWhen Cavalier of Thorns enters the battlefield, reveal the top five cards of your library. You may put a land card from among them onto the battlefield. Put the rest into your graveyard.\nWhen Cavalier of Thorns dies, you may exile it. If you do, put another target card from your graveyard on top of your library.

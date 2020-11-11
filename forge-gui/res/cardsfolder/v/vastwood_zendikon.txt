@@ -5,6 +5,5 @@ K:Enchant land
 A:SP$ Attach | Cost$ 4 G | ValidTgts$ Land | AILogic$ Animate
 S:Mode$ Continuous | Affected$ Land.AttachedBy | AddType$ Creature & Elemental | SetColor$ Green | SetPower$ 6 | SetToughness$ 4 | Description$ Enchanted land is a 6/4 green Elemental creature. It's still a land.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChangeZone | TriggerDescription$ When enchanted land dies, return that card to its owner's hand.
-SVar:TrigChangeZone:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Graveyard | Destination$ Hand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vastwood_zendikon.jpg
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Hand
 Oracle:Enchant land\nEnchanted land is a 6/4 green Elemental creature. It's still a land.\nWhen enchanted land dies, return that card to its owner's hand.

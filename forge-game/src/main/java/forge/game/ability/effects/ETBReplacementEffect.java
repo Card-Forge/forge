@@ -1,6 +1,9 @@
 package forge.game.ability.effects;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
@@ -12,6 +15,10 @@ import forge.game.spellability.SpellAbility;
 public class ETBReplacementEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
-        sa.getActivatingPlayer().getGame().getAction().moveToPlay(((Card) sa.getReplacingObject(AbilityKey.Card)), sa);
+        final Card card = (Card) sa.getReplacingObject(AbilityKey.Card);
+        Map<AbilityKey, Object> params = AbilityKey.newMap();
+        params.put(AbilityKey.CardLKI, sa.getReplacingObject(AbilityKey.CardLKI));
+        params.put(AbilityKey.ReplacementEffect, sa.getReplacementEffect());
+        sa.getActivatingPlayer().getGame().getAction().moveToPlay(card, card.getController(), AbilityUtils.getCause(sa), params);
     }
 }

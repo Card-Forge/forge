@@ -188,11 +188,6 @@ public class TokenInfo {
         return list;
     }
 
-    @Deprecated
-    public List<Card> makeTokenWithMultiplier(final Player controller, int amount, final boolean applyMultiplier) {
-        return makeToken(makeOneToken(controller), controller, applyMultiplier, amount);
-    }
-
     static public List<Card> makeTokensFromPrototype(Card prototype, final Player owner, int amount, final boolean applyMultiplier) {
         return makeToken(prototype, owner, applyMultiplier, amount);
     }

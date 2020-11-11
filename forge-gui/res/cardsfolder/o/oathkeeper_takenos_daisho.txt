@@ -9,7 +9,7 @@ SVar:RememberNew:DB$ Pump | RememberObjects$ Equipped
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+equipping | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, exile equipped creature.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Remembered
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EquippedBy | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ Whenever equipped creature dies, return that card to the battlefield under your control if it's a Samurai card.
-SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCardLKICopy | GainControl$ True | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.Samurai | ConditionCompare$ GE1
+SVar:TrigReturn:DB$ ChangeZone | Destination$ Battlefield | Defined$ TriggeredNewCardLKICopy | GainControl$ True | ConditionDefined$ TriggeredNewCardLKICopy | ConditionPresent$ Card.Samurai | ConditionCompare$ GE1
 AI:RemoveDeck:Random
 DeckNeeds:Type$Samurai
 Oracle:Equipped creature gets +3/+1.\nWhenever equipped creature dies, return that card to the battlefield under your control if it's a Samurai card.\nWhen Oathkeeper, Takeno's Daisho is put into a graveyard from the battlefield, exile equipped creature.\nEquip {2}

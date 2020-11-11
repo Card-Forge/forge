@@ -19,7 +19,6 @@ package forge.game.ability.effects;
 
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
-import forge.game.ability.AbilityKey;
 import forge.game.card.token.TokenInfo;
 
 import forge.game.Game;
@@ -56,7 +55,6 @@ public class TokenEffect extends TokenEffectBase {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
-        final SpellAbility root = sa.getRootAbility();
 
         // linked Abilities, if it needs chosen values, but nothing is chosen, no token can be created
         if (sa.hasParam("TokenTypes")) {
@@ -72,13 +70,7 @@ public class TokenEffect extends TokenEffectBase {
 
         // Cause of the Token Effect, in general it should be this
         // but if its a Replacement Effect, it might be something else or null
-        SpellAbility cause = sa;
-        if (root.isReplacementAbility()) {
-            SpellAbility replacingObject = (SpellAbility) root.getReplacingObject(AbilityKey.Cause);
-            if (replacingObject != null) {
-                cause = replacingObject;
-            }
-        }
+        SpellAbility cause = AbilityUtils.getCause(sa);
 
         Card prototype = loadTokenPrototype(sa);
 

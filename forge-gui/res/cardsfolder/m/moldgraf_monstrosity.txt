@@ -4,7 +4,6 @@ Types:Creature Insect
 PT:8/8
 K:Trample
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, exile it, then return two creature cards at random from your graveyard to the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBChangeZone
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ChangeZone | ChangeType$ Creature.YouCtrl | ChangeNum$ 2 | Hidden$ True | Origin$ Graveyard | AtRandom$ True | Destination$ Battlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/moldgraf_monstrosity.jpg
 Oracle:Trample\nWhen Moldgraf Monstrosity dies, exile it, then return two creature cards at random from your graveyard to the battlefield.
