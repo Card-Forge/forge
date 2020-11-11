@@ -699,6 +699,18 @@ public class CardFactory {
                 }
             }
 
+            // static abilities to add to clone
+            if (sa.hasParam("AddStaticAbilities")) {
+                final String str = sa.getParam("AddStaticAbilities");
+                for (final String s : str.split(",")) {
+                    if (origSVars.containsKey(s)) {
+                        final String actualStatic = origSVars.get(s);
+                        final StaticAbility grantedStatic = new StaticAbility(actualStatic, out);
+                        state.addStaticAbility(grantedStatic);
+                    }
+                }
+            }
+
 
             if (sa.hasParam("GainThisAbility") && (sa instanceof SpellAbility)) {
                 SpellAbility root = ((SpellAbility) sa).getRootAbility();
