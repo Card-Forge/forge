@@ -623,6 +623,10 @@ public class CardFactoryUtil {
             return doXMath(player.getNumDiscardedThisTurn(), m, source);
         }
 
+        if (value.contains("TokensCreatedThisTurn")) {
+            return doXMath(player.getNumTokensCreatedThisTurn(), m, source);
+        }
+
         if (value.contains("AttackersDeclared")) {
             return doXMath(player.getAttackersDeclaredThisTurn(), m, source);
         }
