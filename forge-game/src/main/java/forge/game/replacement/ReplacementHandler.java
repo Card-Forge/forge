@@ -70,13 +70,12 @@ public class ReplacementHandler {
         if (ReplacementType.Moved.equals(event) && ZoneType.Battlefield.equals(runParams.get(AbilityKey.Destination))) {
             // if it was caused by an replacement effect, use the already calculated RE list
             // otherwise the RIOT card would cause a StackError
-            SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
-            if (cause != null && cause.isReplacementAbility()) {
-                final ReplacementEffect re = cause.getReplacementEffect();
+            final ReplacementEffect causeRE = (ReplacementEffect) runParams.get(AbilityKey.ReplacementEffect);
+            if (causeRE != null) {
                 // only return for same layer
-                if (ReplacementType.Moved.equals(re.getMode()) && layer.equals(re.getLayer())) {
-                    if (!re.getOtherChoices().isEmpty())
-                        return re.getOtherChoices();
+                if (ReplacementType.Moved.equals(causeRE.getMode()) && layer.equals(causeRE.getLayer())) {
+                    if (!causeRE.getOtherChoices().isEmpty())
+                        return causeRE.getOtherChoices();
                 }
             }
 

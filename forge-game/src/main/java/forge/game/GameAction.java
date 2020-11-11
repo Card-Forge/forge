@@ -127,6 +127,13 @@ public class GameAction {
         // get the LKI from above like ChangeZoneEffect
         if (params != null && params.containsKey(AbilityKey.CardLKI)) {
             lastKnownInfo = (Card) params.get(AbilityKey.CardLKI);
+        } else if (toBattlefield && cause != null && cause.isReplacementAbility()) {
+            // if to Battlefield and it is caused by an replacement effect,
+            // try to get previous LKI if able
+            ReplacementEffect re = cause.getReplacementEffect();
+            if (ReplacementType.Moved.equals(re.getMode())) {
+                lastKnownInfo = (Card) cause.getReplacingObject(AbilityKey.CardLKI);
+            }
         }
 
         if (c.isSplitCard()) {
@@ -164,17 +171,6 @@ public class GameAction {
         // and returning to hand (to recreate their spell ability information)
         if (suppress || (!fromBattlefield && !toHand)) {
             copied = c;
-
-            // if to Battlefield and it is caused by an replacement effect,
-            // try to get previous LKI if able
-            if (toBattlefield) {
-                if (cause != null && cause.isReplacementAbility()) {
-                    ReplacementEffect re = cause.getReplacementEffect();
-                    if (ReplacementType.Moved.equals(re.getMode())) {
-                        lastKnownInfo = (Card) cause.getReplacingObject(AbilityKey.CardLKI);
-                    }
-                }
-            }
 
             if (lastKnownInfo == null) {
                 lastKnownInfo = CardUtil.getLKICopy(c);

@@ -109,7 +109,7 @@ public class TriggerChangesZone extends Trigger {
         }
 
         if (hasParam("ValidCause")) {
-            if (!runParams.containsKey(AbilityKey.Cause) ) {
+            if (!runParams.containsKey(AbilityKey.Cause)) {
                 return false;
             }
             SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
@@ -159,6 +159,15 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
+        if (hasParam("NotThisAbility")) {
+            if (runParams.containsKey(AbilityKey.Cause)) {
+                SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
+                if (cause != null && this.equals(cause.getRootAbility().getTrigger())) {
+                    return false;
+                }
+            }
+        }
+
         /* this trigger can only be activated once per turn, verify it hasn't already run */
         if (hasParam("ActivationLimit")) {
             return this.getActivationsThisTurn() < Integer.parseInt(getParam("ActivationLimit"));
@@ -170,8 +179,10 @@ public class TriggerChangesZone extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        // TODO use better way to always copy both Card and CardLKI
         if ("Battlefield".equals(getParam("Origin"))) {
             sa.setTriggeringObject(AbilityKey.Card, runParams.get(AbilityKey.CardLKI));
+            sa.setTriggeringObject(AbilityKey.NewCard, runParams.get(AbilityKey.Card));
         } else {
             sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
         }
