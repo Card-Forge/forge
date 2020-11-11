@@ -5,8 +5,7 @@ PT:0/0
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ DeathCounterDistro | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may distribute a number of +1/+1 counters equal to the number of +1/+1 counters on CARDNAME among any number of creatures you control.
-SVar:DeathCounterDistro:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ VastwoodX | TargetMin$ 1 | TargetMax$ VastwoodX | DividedAsYouChoose$ VastwoodX | References$ VastwoodX
+SVar:DeathCounterDistro:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose any number of creatures you control to distribute counters to | CounterType$ P1P1 | CounterNum$ VastwoodX | ChoiceAmount$ VastwoodX | DividedAsYouChoose$ VastwoodX | References$ VastwoodX
 SVar:VastwoodX:TriggeredCard$CardCounters.P1P1
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vastwood_hydra.jpg
 Oracle:Vastwood Hydra enters the battlefield with X +1/+1 counters on it.\nWhen Vastwood Hydra dies, you may distribute a number of +1/+1 counters equal to the number of +1/+1 counters on Vastwood Hydra among any number of creatures you control.

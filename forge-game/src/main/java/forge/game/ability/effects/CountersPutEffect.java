@@ -163,7 +163,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
             CardCollection choices = new CardCollection(game.getCardsIn(choiceZone));
 
-            int n = sa.hasParam("ChoiceAmount") ? Integer.parseInt(sa.getParam("ChoiceAmount")) : 1;
+            int n = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("ChoiceAmount", "1"), sa);
 
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, card, sa);
 
@@ -172,7 +172,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 title = sa.getParam("ChoiceTitle");
                 // TODO might use better message
                 if (counterType != null) {
-                    title += " " + counterType.getName();
+                    title += " (" + counterType.getName() + ")";
                 }
             }
 
