@@ -5494,9 +5494,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
 
                     final String[] characteristics = characteristic.split(",");
-                    final String exception = kws.length > 3 ? kws[3] : null; // check "This effect cannot remove sth"
+                    final String[] exceptions = kws.length > 3 ? kws[3].split(",") : null; // check "This effect cannot remove sth"
                     if (source.isValid(characteristics, getController(), this, null)
-                            && (!checkSBA || exception == null || !source.isValid(exception, getController(), this, null))) {
+                            && (!checkSBA || exceptions == null || !source.isValid(exceptions, getController(), this, null))) {
                         return true;
                     }
                 }
