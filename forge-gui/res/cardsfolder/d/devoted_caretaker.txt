@@ -5,5 +5,4 @@ PT:1/2
 A:AB$ Pump | Cost$ W T | KW$ Protection:Spell.Instant,Spell.Sorcery:Protection from instant spells and from sorcery spells | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | SpellDescription$ Target permanent you control gains protection from instant spells and from sorcery spells until end of turn.
 AI:RemoveDeck:All
 SVar:NonCombatPriority:3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/devoted_caretaker.jpg
 Oracle:{W}, {T}: Target permanent you control gains protection from instant spells and from sorcery spells until end of turn.

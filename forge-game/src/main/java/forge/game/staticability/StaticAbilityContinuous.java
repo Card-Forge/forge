@@ -223,6 +223,16 @@ public final class StaticAbilityContinuous {
                         return true;
                     }
 
+                    if (input.contains("AllColors") || input.contains("allColors")) {
+                        for (byte color : MagicColor.WUBRG) {
+                            final String colorWord = MagicColor.toLongString(color);
+                            String y = input.replaceAll("AllColors", StringUtils.capitalize(colorWord));
+                            y = y.replaceAll("allColors", colorWord);
+                            newKeywords.add(y);
+                        }
+                        return true;
+                    }
+
                     // two variants for Red vs. red in keyword
                     if (input.contains("ColorsYouCtrl") || input.contains("colorsYouCtrl")) {
                         for (byte color : colorsYouCtrl) {
@@ -247,6 +257,7 @@ public final class StaticAbilityContinuous {
                 public String apply(String input) {
                     if (hostCard.hasChosenColor()) {
                         input = input.replaceAll("ChosenColor", StringUtils.capitalize(hostCard.getChosenColor()));
+                        input = input.replaceAll("chosenColor", hostCard.getChosenColor().toLowerCase());
                     }
                     if (hostCard.hasChosenType()) {
                         input = input.replaceAll("ChosenType", hostCard.getChosenType());

@@ -4,6 +4,5 @@ Types:Creature Sliver
 PT:2/2
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
-S:Mode$ Continuous | Affected$ Sliver | AddKeyword$ Protection:Card.ChosenColor:Protection from ChosenColor | Description$ All Slivers have protection from the chosen color.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ward_sliver.jpg
+S:Mode$ Continuous | Affected$ Sliver | AddKeyword$ Protection:Card.ChosenColor:Protection from chosenColor | Description$ All Slivers have protection from the chosen color.
 Oracle:As Ward Sliver enters the battlefield, choose a color.\nAll Slivers have protection from the chosen color.
