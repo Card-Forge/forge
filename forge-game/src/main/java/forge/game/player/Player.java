@@ -82,6 +82,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private int life = 20;
     private int startingLife = 20;
+    private int lifeStartedThisTurnWith = startingLife;
     private final Map<Card, Integer> assignedDamage = Maps.newHashMap();
     private final Map<Card, Integer> assignedCombatDamage = Maps.newHashMap();
     private int spellsCastThisTurn = 0;
@@ -1658,6 +1659,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void setNumCardsInHandStartedThisTurnWith(int num) {
         numCardsInHandStartedThisTurnWith = num;
+    }
+
+    public int getLifeStartedThisTurnWith() {
+        return lifeStartedThisTurnWith;
+    }
+    public void setLifeStartedThisTurnWith(int l) {
+        lifeStartedThisTurnWith = l;
     }
 
     public void addNoteForName(String notedFor, String noted) {
@@ -3265,6 +3273,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         lifeGainedThisTurn = 0;
         lifeGainedTimesThisTurn = 0;
         lifeGainedByTeamThisTurn = 0;
+        setLifeStartedThisTurnWith(getLife());
         setLibrarySearched(0);
         setNumManaConversion(0);
 
