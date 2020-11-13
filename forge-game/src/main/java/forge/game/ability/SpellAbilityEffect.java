@@ -563,6 +563,7 @@ public abstract class SpellAbilityEffect {
 
             if (defender != null) {
                 combat.addAttacker(c, defender);
+                combat.getBandOfAttacker(c).setBlocked(false);
                 combatChanged = true;
             }
         }
