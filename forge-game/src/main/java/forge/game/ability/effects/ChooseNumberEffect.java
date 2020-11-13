@@ -125,6 +125,23 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                     card.clearRemembered();
                 }
             }
+
+            if (sa.hasParam("NotLowest")) {
+                List<Player> notLowestNum = Lists.newArrayList();
+                for (Player p : chooseMap.keySet()) {
+                    if (!lowestNum.contains(p)) {
+                        notLowestNum.add(p);
+                    }
+                }
+                AbilitySub sub = sa.getAdditionalAbility("NotLowest");
+
+                for (Player p : notLowestNum) {
+                    card.addRemembered(p);
+                    AbilityUtils.resolve(sub);
+                    card.clearRemembered();
+                }
+            }
+
             if (sa.hasParam("Highest")) {
                 AbilitySub sub = sa.getAdditionalAbility("Highest");
 
