@@ -206,23 +206,22 @@ public class TriggerChangesZone extends Trigger {
             return;
         }
 
-        if (!hasParam("ValidCard") || !getHostCard().isValid(getParam("ValidCard").split(","),
-                getHostCard().getController(), getHostCard(), null)) {
+        if (!hasParam("ValidCard")) {
             return;
         }
 
         if (hasParam("Origin")) {
             // leave battlefield
             boolean leavesBattlefield = ArrayUtils.contains(
-                getParam("Origin").split(","), "Battlefield"
+                getParam("Origin").split(","), ZoneType.Battlefield.toString()
             );
             if (leavesBattlefield) {
                 setActiveZone(EnumSet.of(ZoneType.Battlefield));
             }
         }
 
-        // enter Zone Effect
-        if (!hasParam("Origin") || "Any".equals(getParam("Origin"))) {
+        // enter Zone Effect only for Self
+        if (getParam("ValidCard").contains("Self") && (!hasParam("Origin") || "Any".equals(getParam("Origin")))) {
             setActiveZone(Sets.newEnumSet(ZoneType.listValueOf(getParam("Destination")), ZoneType.class));
         }
     }
