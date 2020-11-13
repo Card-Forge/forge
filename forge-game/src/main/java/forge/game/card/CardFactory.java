@@ -97,6 +97,7 @@ public class CardFactory {
             CardFactory.copyState(in, state, out, state);
         }
         out.setState(in.getCurrentStateName(), true);
+        out.setBackSide(in.isBackSide());
 
         // this's necessary for forge.game.GameAction.unattachCardLeavingBattlefield(Card)
         out.setAttachedCards(in.getAttachedCards());

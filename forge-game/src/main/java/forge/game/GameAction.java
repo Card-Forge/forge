@@ -40,7 +40,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityLayer;
-import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
@@ -213,20 +212,11 @@ public class GameAction {
                     // (we need to do this on the object before copying it, or it won't work correctly e.g.
                     // on Transformed objects)
                     copied.setState(CardStateName.Original, false);
+                    copied.setBackSide(false);
                 }
 
                 copied.setUnearthed(c.isUnearthed());
                 copied.setTapped(false);
-
-                for (final Trigger trigger : copied.getTriggers()) {
-                    trigger.setHostCard(copied);
-                }
-                for (final ReplacementEffect repl : copied.getReplacementEffects()) {
-                    repl.setHostCard(copied);
-                }
-                for (final StaticAbility sa : copied.getStaticAbilities()) {
-                    sa.setHostCard(copied);
-                }
             } else { //Token
                 copied = c;
             }
@@ -494,7 +484,7 @@ public class GameAction {
 
         // Cards not on the battlefield / stack should not have controller
         if (!zoneTo.is(ZoneType.Battlefield) && !zoneTo.is(ZoneType.Stack)) {
-            c.clearControllers();
+            copied.clearControllers();
         }
 
         return copied;
