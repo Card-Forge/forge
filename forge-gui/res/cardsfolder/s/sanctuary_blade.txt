@@ -3,6 +3,6 @@ ManaCost:2
 Types:Artifact Equipment
 R:Event$ Attached | ValidCard$ Card.Self | ValidTarget$ Creature | ReplaceWith$ ChooseColor | ActiveZones$ Battlefield | Description$ As CARDNAME becomes attached to a creature, choose a color.
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Protection:Card.ChosenColor:Protection from ChosenColor | Description$ Equipped creature gets +2/+0 and has protection from the last chosen color.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Protection:Card.ChosenColor:Protection from chosenColor | Description$ Equipped creature gets +2/+0 and has protection from the last chosen color.
 K:Equip:3
 Oracle:As Sanctuary Blade becomes attached to a creature, choose a color.\nEquipped creature gets +2/+0 and has protection from the last chosen color.\nEquip {3}

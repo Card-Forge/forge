@@ -5,6 +5,5 @@ PT:0/1
 K:Defender
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInHumanDeck
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Card.ChosenColor:Protection from ChosenColor | Description$ CARDNAME has protection from the chosen color.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_stars.jpg
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Card.ChosenColor:Protection from chosenColor | Description$ CARDNAME has protection from the chosen color.
 Oracle:Defender (This creature can't attack.)\nAs Order of the Stars enters the battlefield, choose a color.\nOrder of the Stars has protection from the chosen color.

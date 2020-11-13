@@ -5443,32 +5443,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (source.isGreen() && !colorlessDamage) {
                     return true;
                 }
-            } else if (kw.equals("Protection from monocolored")) {
-                if (CardUtil.getColors(source).isMonoColor() && !colorlessDamage) {
-                    return true;
-                }
-            } else if (kw.equals("Protection from multicolored")) {
-                if (CardUtil.getColors(source).isMulticolor() && !colorlessDamage) {
-                    return true;
-                }
             } else if (kw.equals("Protection from all colors")) {
                 if (!source.isColorless() && !colorlessDamage) {
-                    return true;
-                }
-            } else if (kw.equals("Protection from colorless")) {
-                if (source.isColorless() || colorlessDamage) {
-                    return true;
-                }
-            } else if (kw.equals("Protection from creatures")) {
-                if (source.isCreature()) {
-                    return true;
-                }
-            } else if (kw.equals("Protection from artifacts")) {
-                if (source.isArtifact()) {
-                    return true;
-                }
-            } else if (kw.equals("Protection from enchantments")) {
-                if (source.isEnchantment()) {
                     return true;
                 }
             } else if (kw.equals("Protection from everything")) {
@@ -5483,12 +5459,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                         return true;
                     }
                 } else {
-                    // if colorlessDamage then it does only check damage color..
-                    if (colorlessDamage) {
+                    // if damageSource then it does only check damage color..
+                    if (damageSource) {
                         if (characteristic.endsWith("White") || characteristic.endsWith("Blue")
                             || characteristic.endsWith("Black") || characteristic.endsWith("Red")
                             || characteristic.endsWith("Green") || characteristic.endsWith("Colorless")
-                            || characteristic.endsWith("ChosenColor")) {
+                            || characteristic.endsWith("MonoColor") || characteristic.endsWith("MultiColor")) {
                             characteristic += "Source";
                         }
                     }
@@ -5499,10 +5475,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                             && (!checkSBA || exceptions == null || !source.isValid(exceptions, getController(), this, null))) {
                         return true;
                     }
-                }
-            } else if (kw.equals("Protection from colored spells")) {
-                if (source.isSpell() && !source.isColorless()) {
-                    return true;
                 }
             } else if (kw.startsWith("Protection from opponent of ")) {
                 final String playerName = kw.substring("Protection from opponent of ".length());
@@ -5526,27 +5498,27 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!kw.startsWith("Protection")) {
                 continue;
             }
-            if (kw.equals("Protection from red")) {
+            if (kw.contains("Protection from red")) {
                 if (!pR) {
                     pR = true;
                     protectKey += "R";
                 }
-            } else if (kw.equals("Protection from green")) {
+            } else if (kw.contains("Protection from green")) {
                 if (!pG) {
                     pG = true;
                     protectKey += "G";
                 }
-            } else if (kw.equals("Protection from black")) {
+            } else if (kw.contains("Protection from black")) {
                 if (!pB) {
                     pB = true;
                     protectKey += "B";
                 }
-            } else if (kw.equals("Protection from blue")) {
+            } else if (kw.contains("Protection from blue")) {
                 if (!pU) {
                     pU = true;
                     protectKey += "U";
                 }
-            } else if (kw.equals("Protection from white")) {
+            } else if (kw.contains("Protection from white")) {
                 if (!pW) {
                     pW = true;
                     protectKey += "W";
@@ -5569,7 +5541,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 protectKey += "everything:";
             } else if (kw.equals("Protection from colored spells")) {
                 protectKey += "coloredspells:";
-            } else if (kw.startsWith("Protection")) {
+            } else {
                 protectKey += "generic";
             }
         }
