@@ -1,0 +1,12 @@
+Name:Slurrk, All-Ingesting
+ManaCost:5 G
+Types:Legendary Creature Ooze
+PT:0/0
+K:etbCounter:P1P1:5
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl+counters_GE1_P1P1 | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever NICKNAME or another creature dies, if it had a +1/+1 counter on it, put a +1/+1 counter on each creature you control that has a +1/+1 counter on it.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+counters_GE1_P1P1 | Execute$ TrigPutCounterAll | Secondary$ True | TriggerDescription$ Whenever NICKNAME or another creature dies, if it had a +1/+1 counter on it, put a +1/+1 counter on each creature you control that has a +1/+1 counter on it.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+counters_GE1_P1P1 | CounterType$ P1P1 | CounterNum$ 1
+K:Partner
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:Slurrk, All-Ingesting enters the battlefield with five +1/+1 counters on it.\nWhenever Slurrk or another creature you control dies, if it had a +1/+1 counter on it, put a +1/+1 counter on each creature you control that has a +1/+1 counter on it.\nPartner (You can have two commanders if both have partner.)
