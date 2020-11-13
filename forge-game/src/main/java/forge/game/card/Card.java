@@ -1704,13 +1704,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                 } else if (keyword.startsWith("Echo")) {
                     sbLong.append("Echo ");
                     final String[] upkeepCostParams = keyword.split(":");
-                    sbLong.append(upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : ManaCostParser.parse(upkeepCostParams[1]));
+                    sbLong.append(upkeepCostParams.length > 2 ? "— " + upkeepCostParams[2] : ManaCostParser.parse(upkeepCostParams[1]));
                     sbLong.append(" (At the beginning of your upkeep, if CARDNAME came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)");
                     sbLong.append("\r\n");
                 } else if (keyword.startsWith("Cumulative upkeep")) {
                     sbLong.append("Cumulative upkeep ");
                     final String[] upkeepCostParams = keyword.split(":");
-                    sbLong.append(upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : ManaCostParser.parse(upkeepCostParams[1]));
+                    sbLong.append(upkeepCostParams.length > 2 ? "— " + upkeepCostParams[2] : ManaCostParser.parse(upkeepCostParams[1]));
                     sbLong.append("\r\n");
                 } else if (keyword.startsWith("Alternative Cost")) {
                     sbLong.append("Has alternative cost.");
@@ -1750,6 +1750,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                     final String[] k = keyword.split(":");
                     sbLong.append("Hexproof from ").append(k[2])
                         .append(" (").append(inst.getReminderText()).append(")").append("\r\n");
+                } else if (inst.getKeyword().equals(Keyword.COMPANION)) {
+                    sbLong.append("Companion — ");
+                    sbLong.append(((Companion)inst).getDescription());
                 } else if (keyword.endsWith(".") && !keyword.startsWith("Haunt")) {
                     sbLong.append(keyword).append("\r\n");
                 } else if (keyword.startsWith("Presence") || keyword.startsWith("MayFlash")) {
@@ -1856,9 +1859,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                     String desc = "(As this Saga enters and after your draw step, "
                         + " add a lore counter. Sacrifice after " + Strings.repeat("I", Integer.valueOf(k[1])) + ".)";
                     sbLong.append(desc);
-                } else if (inst.getKeyword().equals(Keyword.COMPANION)) {
-                    sbLong.append("Companion - ");
-                    sbLong.append(((Companion)inst).getDescription());
                 }
                 else {
                     if ((i != 0) && (sb.length() != 0)) {

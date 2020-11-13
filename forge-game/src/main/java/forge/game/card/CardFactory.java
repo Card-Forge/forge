@@ -694,6 +694,7 @@ public class CardFactory {
                     if (origSVars.containsKey(s)) {
                         final String actualAbility = origSVars.get(s);
                         final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, out);
+                        grantedAbility.setIntrinsic(true);
                         state.addSpellAbility(grantedAbility);
                     }
                 }
@@ -706,6 +707,7 @@ public class CardFactory {
                     if (origSVars.containsKey(s)) {
                         final String actualStatic = origSVars.get(s);
                         final StaticAbility grantedStatic = new StaticAbility(actualStatic, out);
+                        grantedStatic.setIntrinsic(true);
                         state.addStaticAbility(grantedStatic);
                     }
                 }
