@@ -6168,3 +6168,6 @@ Kargan Warleader|ZNR|2
 6 Umara Wizard|ZNR
 6 Vastwood Fortification|ZNR
 6 Zof Consumption|ZNR
+
+[KLR Box Topper]
+Sculpting Steel
