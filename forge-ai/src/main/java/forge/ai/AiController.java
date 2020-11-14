@@ -1762,6 +1762,8 @@ public class AiController {
             return Math.max(remaining, min) / 2;
         } else if ("LowestLoseLife".equals(logic)) {
             return MyRandom.getRandom().nextInt(Math.min(player.getLife() / 3, player.getWeakestOpponent().getLife())) + 1;
+        } else if ("HighestLoseLife".equals(logic)) {
+            return MyRandom.getRandom().nextInt(Math.max(player.getLife() / 3, player.getWeakestOpponent().getLife())) + 1;
         } else if ("HighestGetCounter".equals(logic)) {
             return MyRandom.getRandom().nextInt(3);
         } else if (source.hasSVar("EnergyToPay")) {
