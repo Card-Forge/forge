@@ -751,7 +751,7 @@ rock
 c_a_treasure_sac
 w_2_2_cat
 w_1_1_soldier
-u_1_1_illusion
+u_1_1_illusion_flying
 g_3_3_beast
 g_4_4_beast
 g_3_3_elephant
