@@ -1458,6 +1458,12 @@ public class CardProperty {
             if (property.equals("attacking"))    return combat.isAttacking(card);
             if (property.equals("attackingLKI")) return combat.isLKIAttacking(card);
             if (property.equals("attackingYou")) return combat.isAttacking(card, sourceController);
+            if (property.equals("attackingSame")) {
+                final GameEntity attacked = combat.getDefenderByAttacker(source);
+                if (!combat.isAttacking(card, attacked)) {
+                    return false;
+                }
+            }
             if (property.equals("attackingYouOrYourPW")) {
                 Player defender = combat.getDefenderPlayerByAttacker(card);
                 if (!sourceController.equals(defender)) {
