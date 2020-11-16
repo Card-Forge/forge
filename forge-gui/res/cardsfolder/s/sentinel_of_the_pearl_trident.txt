@@ -5,7 +5,7 @@ PT:3/3
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | Optional$ True | TriggerDescription$ When CARDNAME enters the battlefield, you may exile target historic permanent you control. If you do, return that card to the battlefield under its owner's control at the beginning of the next end step. (Artifacts, legendaries, and Sagas are historic.)
 SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent.Historic+YouCtrl | TgtPrompt$ Select target historic permanent you control | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrigEffect
-SVar:DelTrigEffect:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigReturn | RememberObjects$ Remembered | TriggerDescription$ Return the exiled card to the battlefield under its owner's control at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
-SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Exile | Destination$ Battlefield
+SVar:DelTrigEffect:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigReturn | RememberObjects$ RememberedLKI | TriggerDescription$ Return the exiled card to the battlefield under its owner's control at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Battlefield
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Flash\nWhen Sentinel of the Pearl Trident enters the battlefield, you may exile target historic permanent you control. If you do, return that card to the battlefield under its owner's control at the beginning of the next end step. (Artifacts, legendaries, and Sagas are historic.)

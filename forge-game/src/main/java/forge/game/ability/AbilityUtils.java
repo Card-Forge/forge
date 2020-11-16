@@ -257,6 +257,10 @@ public class AbilityUtils {
             if (o != null && o instanceof Card) {
                 cards.add(game.getCardState((Card) o));
             }
+        } else if (defined.equals("ImprintedLKI")) {
+            for (final Card imprint : hostCard.getImprintedCards()) {
+                cards.add(imprint);
+            }
         } else if (defined.equals("Imprinted")) {
             for (final Card imprint : hostCard.getImprintedCards()) {
                 cards.add(game.getCardState(imprint));

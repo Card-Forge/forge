@@ -296,15 +296,15 @@ public abstract class SpellAbilityEffect {
         }
         String trigSA = "";
         if (location.equals("Hand")) {
-            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Hand";
+            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand";
         } else if (location.equals("SacrificeCtrl")) {
             trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered";
         } else if (location.equals("Sacrifice")) {
             trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered | Controller$ You";
         } else if (location.equals("Exile")) {
-            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile";
+            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Exile";
         } else if (location.equals("Destroy")) {
-            trigSA = "DB$ Destroy | Defined$ DelayTriggerRemembered";
+            trigSA = "DB$ Destroy | Defined$ DelayTriggerRememberedLKI";
         }
         if (sa.hasParam("AtEOTCondition")) {
             String var = sa.getParam("AtEOTCondition");
