@@ -2,8 +2,8 @@ Name:Liesa, Shroud of Dusk
 ManaCost:2 W W B
 Types:Legendary Creature Angel
 PT:5/5
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ Command | Description$ Rather than pay {2} for each previous time you've cast this spell from the command zone this game, pay 2 life that many times.
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Cost$ PayLife<X> | References$ X | EffectZone$ Command | Secondary$ True
+S:Mode$ ReduceCost | ValidCard$ Card.Self+wasCastFromCommand | Type$ Spell | Amount$ X | References$ X | EffectZone$ Stack | Description$ Rather than pay {2} for each previous time you've cast this spell from the command zone this game, pay 2 life that many times.
+S:Mode$ RaiseCost | ValidCard$ Card.Self+wasCastFromCommand | Type$ Spell | Cost$ PayLife<X> | References$ X | EffectZone$ Stack | Secondary$ True
 SVar:X:Count$CommanderCastFromCommandZone/Times.2
 K:Flying
 K:Lifelink
