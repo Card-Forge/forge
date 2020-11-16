@@ -6,4 +6,5 @@ SVar:DBEffect:DB$ DelayedTrigger | AILogic$ SpellCopy | Execute$ EffTrigCopy | T
 SVar:RaidTest:Count$AttackersDeclared
 SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 SVar:AIPriorityModifier:9
+DeckNeeds:Type$Instant|Sorcery
 Oracle:When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.\nRaid — If you attacked this turn, when you cast your next instant or sorcery spell this turn, copy that spell an additional time. You may choose new targets for the copy.
