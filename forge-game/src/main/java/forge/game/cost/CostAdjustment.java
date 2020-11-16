@@ -340,10 +340,7 @@ public class CostAdjustment {
         int value = Integer.parseInt(amount);
 
         if (staticAbility.hasParam("RaiseTo")) {
-            int cmc = manaCost.getConvertedManaCost();
-            if (cmc < value) {
-                value = Integer.parseInt(amount) - cmc;
-            }
+            value = Math.max(value - manaCost.getConvertedManaCost(), 0);
         }
 
         manaCost.increaseGenericMana(value);
