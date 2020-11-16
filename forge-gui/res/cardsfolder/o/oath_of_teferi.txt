@@ -3,10 +3,9 @@ ManaCost:3 W U
 Types:Legendary Enchantment
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile another target permanent you control. Return that card to the battlefield under its owner's control at the beginning of the next end step.
 SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent.Other+YouCtrl | Mandatory$ True | TgtPrompt$ Select another target permanent you control | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrig
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigBounce | TriggerDescription$ Return exiled permanent to the battlefield. | RememberObjects$ Remembered | SubAbility$ DBCleanup
-SVar:TrigBounce:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRemembered
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigBounce | TriggerDescription$ Return exiled permanent to the battlefield. | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 S:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Planeswalker.YouCtrl | AddHiddenKeyword$ CARDNAME's loyalty abilities can be activated twice each turn rather than only once | Description$ You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.
 SVar:NeedsToPlay:Planeswalker.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oath_of_teferi.jpg
 Oracle:When Oath of Teferi enters the battlefield, exile another target permanent you control. Return it to the battlefield under its owner's control at the beginning of the next end step.\nYou may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.

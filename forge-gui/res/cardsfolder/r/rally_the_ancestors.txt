@@ -2,11 +2,10 @@ Name:Rally the Ancestors
 ManaCost:X W W
 Types:Instant
 A:SP$ ChangeZoneAll | Cost$ X W W | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouOwn+cmcLEX | RememberChanged$ True | References$ X | SubAbility$ DBDelTrig | SpellDescription$ Return each creature card with converted mana cost X or less from your graveyard to the battlefield. Exile those creatures at the beginning of your next upkeep. Exile CARDNAME.
-SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigExile | RememberObjects$ Remembered | SubAbility$ ExileSelf | TriggerDescription$ Exile those creatures at the beginning of your next upkeep.
-SVar:TrigExile:DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
+SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigExile | RememberObjects$ RememberedLKI | SubAbility$ ExileSelf | TriggerDescription$ Exile those creatures at the beginning of your next upkeep.
+SVar:TrigExile:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Exile
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rally_the_ancestors.jpg
 Oracle:Return each creature card with converted mana cost X or less from your graveyard to the battlefield. Exile those creatures at the beginning of your next upkeep. Exile Rally the Ancestors.

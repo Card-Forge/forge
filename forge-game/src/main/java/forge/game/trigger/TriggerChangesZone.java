@@ -21,6 +21,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardUtil;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -182,7 +183,7 @@ public class TriggerChangesZone extends Trigger {
         // TODO use better way to always copy both Card and CardLKI
         if ("Battlefield".equals(getParam("Origin"))) {
             sa.setTriggeringObject(AbilityKey.Card, runParams.get(AbilityKey.CardLKI));
-            sa.setTriggeringObject(AbilityKey.NewCard, runParams.get(AbilityKey.Card));
+            sa.setTriggeringObject(AbilityKey.NewCard, CardUtil.getLKICopy((Card)runParams.get(AbilityKey.Card)));
         } else {
             sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
         }

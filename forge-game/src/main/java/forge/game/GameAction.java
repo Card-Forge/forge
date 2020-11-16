@@ -168,20 +168,20 @@ public class GameAction {
 
         // Don't copy Tokens, copy only cards leaving the battlefield
         // and returning to hand (to recreate their spell ability information)
-        if (suppress || (!fromBattlefield && !toHand)) {
+        if (suppress || toBattlefield || zoneTo.is(ZoneType.Stack)) {
             copied = c;
 
             if (lastKnownInfo == null) {
                 lastKnownInfo = CardUtil.getLKICopy(c);
             }
 
-            if (!lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.") || zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library)) {
+            if (!lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.")) {
                 copied.clearCounters();
             }
         } else {
             // if from Battlefield to Graveyard and Card does exist in LastStateBattlefield
             // use that instead
-            if (fromBattlefield && zoneTo.is(ZoneType.Graveyard)) {
+            if (fromBattlefield) {
                 CardCollectionView lastBattlefield = game.getLastStateBattlefield();
                 int idx = lastBattlefield.indexOf(c);
                 if (idx != -1) {
@@ -217,6 +217,12 @@ public class GameAction {
 
                 copied.setUnearthed(c.isUnearthed());
                 copied.setTapped(false);
+
+                // need to copy counters when card enters another zone than hand or library
+                if (lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.") &&
+                        !(zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library))) {
+                    copied.setCounters(Maps.newHashMap(lastKnownInfo.getCounters()));
+                }
             } else { //Token
                 copied = c;
             }
@@ -349,13 +355,13 @@ public class GameAction {
         copied.updateStateForView();
 
         if (fromBattlefield) {
-            c.setDamage(0); //clear damage after a card leaves the battlefield
-            c.setHasBeenDealtDeathtouchDamage(false);
-            if (c.isTapped()) {
-                c.setTapped(false); //untap card after it leaves the battlefield if needed
+            copied.setDamage(0); //clear damage after a card leaves the battlefield
+            copied.setHasBeenDealtDeathtouchDamage(false);
+            if (copied.isTapped()) {
+                copied.setTapped(false); //untap card after it leaves the battlefield if needed
                 game.fireEvent(new GameEventCardTapped(c, false));
             }
-            c.setMustAttackEntity(null);
+            copied.setMustAttackEntity(null);
         }
 
         // for ETB trigger to work correct,

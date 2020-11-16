@@ -5,8 +5,8 @@ T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Command | Attacked
 SVar:TrigCopy:DB$ RepeatEach | RepeatPlayers$ OppNonTriggeredDefender | RepeatSubAbility$ DBCopy | ChangeZoneTable$ True | SubAbility$ DelTrig
 SVar:DBCopy:DB$ CopyPermanent | Defined$ TriggeredAttacker | NumCopies$ 1 | TokenAttacking$ Remembered | TokenTapped$ True | Optional$ True | ImprintTokens$ True
 # The DelayedTrigger is for all player, not just for each attacking, so can't use AtEOT there
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigExile | RememberObjects$ Imprinted | TriggerDescription$ At the beginning of the next end step, exile those tokens. | SubAbility$ DBCleanup
-SVar:TrigExile:DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigExile | RememberObjects$ ImprintedLKI | TriggerDescription$ At the beginning of the next end step, exile those tokens. | SubAbility$ DBCleanup
+SVar:TrigExile:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Exile
 
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, you may sacrifice any number of creatures. If you do, CARDNAME deals that much damage to target creature.
 SVar:RolledChaos:DB$ Sacrifice | Defined$ You | Amount$ SacX | References$ SacX | SacValid$ Creature | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDmg

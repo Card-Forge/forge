@@ -316,21 +316,6 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
-        if (hasParam("TriggerRememberedInZone")) {
-            // check delayed trigger remembered objects (Mnemonic Betrayal)
-            // make this check more general if possible
-            boolean bFlag = true;
-            for (Object o : getTriggerRemembered()) {
-                if (o instanceof Card && ((Card) o).isInZone(ZoneType.smartValueOf(getParam("TriggerRememberedInZone")))) {
-                    bFlag = false;
-                    break;
-                }
-            }
-            if (bFlag) {
-                return false;
-            }
-        }
-
         if ( !meetsCommonRequirements(this.mapParams))
             return false;
 
