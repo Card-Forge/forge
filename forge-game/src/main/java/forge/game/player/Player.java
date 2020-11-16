@@ -24,6 +24,7 @@ import forge.ImageKeys;
 import forge.LobbyPlayer;
 import forge.card.CardStateName;
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -2758,6 +2759,26 @@ public class Player extends GameEntity implements Comparable<Player> {
     public int getCommanderDamage(Card commander) {
         Integer damage = commanderDamage.get(commander);
         return damage == null ? 0 : damage.intValue();
+    }
+
+    public ColorSet getCommanderColorID() {
+        if (commanders.isEmpty()) {
+            return null;
+        }
+        byte ci = 0;
+        for (final Card c : commanders) {
+            ci |= c.getRules().getColorIdentity().getColor();
+        }
+        ColorSet identity = ColorSet.fromMask(ci);
+        return identity;
+    }
+
+    public ColorSet getNotCommanderColorID() {
+        if (commanders.isEmpty()) {
+            return null;
+        }
+        ColorSet identity = getCommanderColorID();
+        return identity.inverse();
     }
 
     public int getCommanderCast(Card commander) {
