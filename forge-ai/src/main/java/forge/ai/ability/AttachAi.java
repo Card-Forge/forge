@@ -1568,7 +1568,6 @@ public class AttachAi extends SpellAbilityAi {
         } else if (keyword.equals("Haste")) {
             return card.hasSickness() && ph.isPlayerTurn(sa.getActivatingPlayer()) && !card.isTapped()
                     && card.getNetCombatDamage() + powerBonus > 0
-                    && !card.hasKeyword("CARDNAME can attack as though it had haste.")
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.endsWith("Indestructible")) {
