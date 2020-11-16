@@ -632,12 +632,29 @@ public final class StaticAbilityContinuous {
                                 }
                             }
                             // replace one Keyword with list of keywords
-                            if (input.startsWith("Protection") && input.contains("CardColors")) {
-                                for (Byte color : affectedCard.determineColor()) {
-                                    extraKeywords.add(input.replace("CardColors", MagicColor.toLongString(color)));
+                            if (input.startsWith("Protection")) {
+                                if (input.contains("CardColors")) {
+                                    for (Byte color : affectedCard.determineColor()) {
+                                        extraKeywords.add(input.replace("CardColors", MagicColor.toLongString(color)));
+                                    }
+                                    return true;
                                 }
-                                return true;
+                                if (input.contains("CommanderColorID")) {
+                                    if (!affectedCard.getController().getCommanders().isEmpty()) {
+                                        if (input.contains("NotCommanderColorID")) {
+                                            for (Byte color : affectedCard.getController().getNotCommanderColorID()) {
+                                                extraKeywords.add(input.replace("NotCommanderColorID", MagicColor.toLongString(color)));
+                                            }
+                                            return true;
+                                        } else for (Byte color : affectedCard.getController().getCommanderColorID()) {
+                                            extraKeywords.add(input.replace("CommanderColorID", MagicColor.toLongString(color)));
+                                        }
+                                        return true;
+                                    }
+                                    return true;
+                                }
                             }
+
                             return false;
                         }
                     });
