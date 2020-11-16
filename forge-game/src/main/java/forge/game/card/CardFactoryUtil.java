@@ -1109,12 +1109,7 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].equals("ColorsColorIdentity")) {
-            byte ci = 0;
-            List<Card> commanders = c.getController().getCommanders();
-            for (final Card comm : commanders) {
-                ci |= comm.getRules().getColorIdentity().getColor();
-            }
-            return doXMath(ColorSet.fromMask(ci).countColors(), m, c);
+            return doXMath(c.getController().getCommanderColorID().countColors(), m, c);
         }
 
         if (sq[0].contains("CreatureType")) {
