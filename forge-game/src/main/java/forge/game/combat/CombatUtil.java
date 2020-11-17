@@ -176,7 +176,7 @@ public class CombatUtil {
         if (!forNextTurn && (
                    !attacker.isCreature()
                 || attacker.isTapped() || attacker.isPhasedOut()
-                || (attacker.hasSickness() && !attacker.hasKeyword("CARDNAME can attack as though it had haste."))
+                || isAttackerSick(attacker, defender)
                 || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
             return false;
         }
@@ -236,6 +236,22 @@ public class CombatUtil {
 
         return true;
     } // canAttack(Card, GameEntity)
+
+    public static boolean isAttackerSick(final Card attacker, final GameEntity defender) {
+        final Game game = attacker.getGame();
+        if (!attacker.isSick()) {
+            return false;
+        }
+
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("CanAttackIfHaste", attacker, defender)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
     /**
      * <p>
