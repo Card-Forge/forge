@@ -1,0 +1,10 @@
+Name:Form of the Squirrel
+ManaCost:G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Hexproof | Description$ You have hexproof.
+S:Mode$ CantBeCast | ValidCard$ Spell | Caster$ You | EffectZone$ Battlefield | Description$ You can't cast spells.
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Self | Execute$ TrigToken | TriggerDescription$ As CARDNAME enters the battlefield, create a 1/1 green Squirrel creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Squirrel | TokenTypes$ Creature,Squirrel | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2 | TokenTriggers$ TrigLTB
+SVar:TrigLTB:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLose | TriggerController$ TriggeredCardController | TriggerDescription$ You lose the game when this leaves the battlefield.
+SVar:TrigLose:DB$ LosesGame | Defined$ You
+Oracle:As Form of the Squirrel enters the battlefield, create a 1/1 green Squirrel creature token. You lose the game when it leaves the battlefield.\nCreatures can't attack you.\nYou have hexproof.\nYou can't play spells.

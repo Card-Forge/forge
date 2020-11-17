@@ -1,0 +1,14 @@
+Name:Old Fogey
+ManaCost:G G
+Types:Creature Dinosaur
+PT:7/7
+K:Phasing
+K:Cumulative upkeep: 1
+K:Echo:G G
+K:Fading:3
+K:Bands with Other Dinosaurs
+K:Snow plainswalk
+K:Protection:Homarid:Protection from Homarids
+K:Flanking
+K:Rampage 2
+Oracle:Phasing, cumulative upkeep {1}, echo {G}{G}, fading 3, bands with other Dinosaurs, protection from Homarids, snow-covered plainswalk, flanking, rampage 2
