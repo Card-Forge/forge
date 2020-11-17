@@ -651,6 +651,21 @@ public final class StaticAbilityContinuous {
                                 }
                                 return true;
                             }
+                            if (input.contains("EachCMCAmongDefined")) {
+                                String keywordDefined = params.get("KeywordDefined");
+                                CardCollectionView definedCards = game.getCardsIn(ZoneType.Battlefield);
+                                definedCards = CardLists.getValidCards(definedCards, keywordDefined, hostCard.getController(),
+                                        hostCard, null);
+                                for (Card c : definedCards) {
+                                    final int cmc = c.getCMC();
+                                    String newKW = (input.replace(" from EachCMCAmongDefined", ":Card.cmcEQ"
+                                            + (cmc) + ":Protection from converted mana cost " + (cmc)));
+                                    if (!extraKeywords.contains(newKW)) {
+                                        extraKeywords.add(newKW);
+                                    }
+                                }
+                                return true;
+                            }
 
                             return false;
                         }
