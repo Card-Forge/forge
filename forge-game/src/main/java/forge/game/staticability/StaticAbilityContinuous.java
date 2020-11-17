@@ -232,7 +232,20 @@ public final class StaticAbilityContinuous {
                         }
                         return true;
                     }
-
+                    if (input.contains("CommanderColorID")) {
+                        if (!hostCard.getController().getCommanders().isEmpty()) {
+                            if (input.contains("NotCommanderColorID")) {
+                                for (Byte color : hostCard.getController().getNotCommanderColorID()) {
+                                    newKeywords.add(input.replace("NotCommanderColorID", MagicColor.toLongString(color)));
+                                }
+                                return true;
+                            } else for (Byte color : hostCard.getController().getCommanderColorID()) {
+                                newKeywords.add(input.replace("CommanderColorID", MagicColor.toLongString(color)));
+                            }
+                            return true;
+                        }
+                        return true;
+                    }
                     // two variants for Red vs. red in keyword
                     if (input.contains("ColorsYouCtrl") || input.contains("colorsYouCtrl")) {
                         for (byte color : colorsYouCtrl) {
@@ -632,27 +645,11 @@ public final class StaticAbilityContinuous {
                                 }
                             }
                             // replace one Keyword with list of keywords
-                            if (input.startsWith("Protection")) {
-                                if (input.contains("CardColors")) {
-                                    for (Byte color : affectedCard.determineColor()) {
-                                        extraKeywords.add(input.replace("CardColors", MagicColor.toLongString(color)));
-                                    }
-                                    return true;
+                            if (input.startsWith("Protection") && input.contains("CardColors")) {
+                                for (Byte color : affectedCard.determineColor()) {
+                                    extraKeywords.add(input.replace("CardColors", MagicColor.toLongString(color)));
                                 }
-                                if (input.contains("CommanderColorID")) {
-                                    if (!affectedCard.getController().getCommanders().isEmpty()) {
-                                        if (input.contains("NotCommanderColorID")) {
-                                            for (Byte color : affectedCard.getController().getNotCommanderColorID()) {
-                                                extraKeywords.add(input.replace("NotCommanderColorID", MagicColor.toLongString(color)));
-                                            }
-                                            return true;
-                                        } else for (Byte color : affectedCard.getController().getCommanderColorID()) {
-                                            extraKeywords.add(input.replace("CommanderColorID", MagicColor.toLongString(color)));
-                                        }
-                                        return true;
-                                    }
-                                    return true;
-                                }
+                                return true;
                             }
 
                             return false;
