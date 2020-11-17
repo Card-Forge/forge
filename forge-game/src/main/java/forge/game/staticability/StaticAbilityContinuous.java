@@ -256,6 +256,21 @@ public final class StaticAbilityContinuous {
                         }
                         return true;
                     }
+                    if (input.contains("EachCMCAmongDefined")) {
+                        String keywordDefined = params.get("KeywordDefined");
+                        CardCollectionView definedCards = game.getCardsIn(ZoneType.Battlefield);
+                        definedCards = CardLists.getValidCards(definedCards, keywordDefined, hostCard.getController(),
+                                hostCard, null);
+                        for (Card c : definedCards) {
+                            final int cmc = c.getCMC();
+                            String y = (input.replace(" from EachCMCAmongDefined", ":Card.cmcEQ"
+                                    + (cmc) + ":Protection from converted mana cost " + (cmc)));
+                            if (!newKeywords.contains(y)) {
+                                newKeywords.add(y);
+                            }
+                        }
+                        return true;
+                    }
 
                     return false;
                 }
@@ -648,21 +663,6 @@ public final class StaticAbilityContinuous {
                             if (input.startsWith("Protection") && input.contains("CardColors")) {
                                 for (Byte color : affectedCard.determineColor()) {
                                     extraKeywords.add(input.replace("CardColors", MagicColor.toLongString(color)));
-                                }
-                                return true;
-                            }
-                            if (input.contains("EachCMCAmongDefined")) {
-                                String keywordDefined = params.get("KeywordDefined");
-                                CardCollectionView definedCards = game.getCardsIn(ZoneType.Battlefield);
-                                definedCards = CardLists.getValidCards(definedCards, keywordDefined, hostCard.getController(),
-                                        hostCard, null);
-                                for (Card c : definedCards) {
-                                    final int cmc = c.getCMC();
-                                    String newKW = (input.replace(" from EachCMCAmongDefined", ":Card.cmcEQ"
-                                            + (cmc) + ":Protection from converted mana cost " + (cmc)));
-                                    if (!extraKeywords.contains(newKW)) {
-                                        extraKeywords.add(newKW);
-                                    }
                                 }
                                 return true;
                             }
