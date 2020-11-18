@@ -2,12 +2,9 @@ Name:Stumpsquall Hydra
 ManaCost:X G G G
 Types:Creature Hydra
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChooseSelf | TriggerDescription$ When CARDNAME enters the battlefield, distribute X +1/+1 counters among it and any number of commanders.
-SVar:TrigChooseSelf:DB$ ChooseCard | Choices$ Card.Self | Mandatory$ True | RememberChosen$ True | SubAbility$ DBChooseComm
-SVar:DBChooseComm:DB$ ChooseCard | Choices$ Card.IsCommander | Amount$ Y | MinAmount$ 0 | References$ Y | ChoiceTitle$ Choose any number of commanders to distribute counters to | RememberChosen$ True | SubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | ChoiceAmount$ 1 | DividedAsYouChoose$ X | References$ X
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, distribute X +1/+1 counters among it and any number of commanders.
+SVar:TrigPutCounter:DB$ PutCounter | Choices$ Card.Self,Card.IsCommander | ChoiceTitle$ Choose this card and/or any number of commanders to distribute counters to | ChoiceAmount$ X | CounterType$ P1P1 | CounterNum$ X | DividedAsYouChoose$ X | References$ X
 SVar:X:Count$xPaid
-SVar:Y:SVar$X/Minus.1
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
 Oracle:When Stumpsquall Hydra enters the battlefield, distribute X +1/+1 counters among it and any number of commanders.
