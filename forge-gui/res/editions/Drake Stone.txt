@@ -1,0 +1,14 @@
+[metadata]
+Code=DS0
+Date=2010-07-14
+Name=Drake Stone
+Code2=DS0
+Type=Expansion
+MciCode=ds0
+
+[cards]
+1 U Illusory Thoughts
+2 U Concentrate
+3 U Distract
+4 U Enthrall
+5 M Drake Stone

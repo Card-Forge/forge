@@ -1,0 +1,12 @@
+Name:Earl of Squirrel
+ManaCost:4 G G
+Types:Creature Squirrel Advisor
+K:Squirrellink
+S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Token.Creature | AddType$ Squirrel | SpellDescription$ Creature tokens you control are Squirrels in addition to their other creature types.
+S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Squirrel.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | SpellDescription$ Other Squirrels you control get +1/+1.
+T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield 
+SVar:TrigToken:DB$ Token | TokenAmount$ X | References$ X | TokenName$ Squirrel | TokenTypes$ Creature,Squirrel | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 squirrel ust
+SVar:X:TriggerCount$DamageAmount
+DeckHas:Ability$ Token
+Oracle:Squirrellink (Damage dealt by this creature also causes you to create that many 1/1 green Squirrel creature tokens.)\nCreature tokens you control are Squirrels in addition to their other creature types.\nOther Squirrels you control get +1/+1.
+PT:4/4

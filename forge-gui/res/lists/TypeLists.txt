@@ -52,12 +52,14 @@ Centaur:Centaurs
 Cephalid:Cephalids
 Chimera:Chimeras
 Citizen:Citizens
+Clamfolk:Clamfolk
 Cleric:Clerics
 Cockatrice:Cockatrices
 Construct:Constructs
 Coward:Cowards
 Crab:Crabs
 Crocodile:Crocodiles
+Cyborg:Cyborgs
 Cyclops:Cyclopes
 Dauthi:Dauthis
 Demigod:Demigods
@@ -122,6 +124,7 @@ Jackal:Jackals
 Jellyfish:Jellyfishes
 Juggernaut:Juggernauts
 Kavu:Kavu
+Killbot:Killbots
 Kirin:Kirins
 Kithkin:Kithkins
 Knight:Knights
@@ -229,6 +232,7 @@ Spike:Spikes
 Spirit:Spirits
 Splinter:Splinters
 Sponge:Sponges
+Spy:Spies
 Squid:Squids
 Squirrel:Squirrels
 Starfish:Starfish
@@ -276,7 +280,7 @@ Curse
 Saga
 Shrine
 [ArtifactTypes]
-Clue
+Clue:Clues
 Contraption
 Equipment
 Food
@@ -327,6 +331,7 @@ Samut
 Sarkhan
 Serra
 Sorin
+Stone
 Szat
 Tamiyo
 Teferi

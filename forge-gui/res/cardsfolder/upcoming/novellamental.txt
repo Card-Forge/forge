@@ -1,0 +1,7 @@
+Name:Novellamental
+ManaCost:1 U
+Types:Creature Elemental
+K:Flying
+K:CARDNAME can block only creatures with flying.
+Oracle:Flying\nNovellamental can block only creatures with flying.
+PT:2/1

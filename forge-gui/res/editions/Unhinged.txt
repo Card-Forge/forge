@@ -3,14 +3,153 @@ Code=UNH
 Date=2004-11-20
 Name=Unhinged
 MciCode=uh
-Type=Other
+Type=OtherType=Expansion
+BoosterCovers=3
+Booster=10 Common, 3 Uncommon, 1 BasicLand, 1 Rare
+FoilAlwaysInCommonSlot=False
 
 [cards]
+1 U Atinlay Igpay
+2 C AWOL
+3 U Bosom Buddy
+4 C Cardpecker
+5 C Cheap Ass
+6 C Circle of Protection: Art
+7 R Collector Protector
+8 R Drawn Together
+9 U Emcee
+10 C Erase (Not the Urza's Legacy One)
+11 C Fascist Art Director
+12 U First Come, First Served
+13 R Frankie Peanuts
+14 U Head to Head
+15 U Ladies' Knight
+16 C Little Girl
+17 R Look at Me, I'm R&D
+18 C Man of Measure
+19 U Save Life
+20 C Standing Army
+21 R Staying Power
+22 C Wordmail
+23 U _
+24 R Ambiguity
+25 C Artful Looter
+26 R Avatar of Me
+27 C Brushstroke Paintermage
+28 C Bursting Beebles
+29 C Carnivorous Death-Parrot
+30 U Cheatyface
+31 C Double Header
+32 C Flaccify
+33 C Framed!
+34 R Greater Morphling
+35 R Johnny, Combo Player
+36 C Loose Lips
+37 U Magical Hacker
+38 U Mise
+39 C Moniker Mage
+40 U Mouth to Mouth
+41 R Now I Know My ABC's
+42 C Number Crunch
+43 U Question Elemental?
+44 R Richard Garfield, Ph.D.
+45 C Smart Ass
+46 U Spell Counter
+47 R Topsy Turvy
+48 R Aesthetic Consultation
+49 C Bad Ass
+50 C Bloodletter
+51 U Booster Tutor
+52 C Duh
+53 R Enter the Dungeon
+54 U Eye to Eye
+55 C The Fallen Apart
+56 C Farewell to Arms
+57 R Infernal Spawn of Infernal Spawn of Evil
+58 U Kill! Destroy!
+59 C Mother of Goons
+60 R Necro-Impotence
+61 U Persecute Artist
+62 U Phyrexian Librarian
+63 C Stop That
+64 C Tainted Monkey
+65 C Vile Bile
+66 C Wet Willie of the Damned
+67 C When Fluffy Bunnies Attack
+68 U Working Stiff
+69 U Zombie Fanboy
+70 R Zzzyxas's Abyss
+71 R Assquatch
+72 R Blast from the Past
+73 R Curse of the Fire Penguin
+74 U Deal Damage
+75 C Dumb Ass
+76 U Face to Face
+77 C Frazzled Editor
+78 C Goblin Mime
+79 C Goblin Secret Agent
+80 C Goblin S.W.A.T. Team
+81 C Mana Flair
+82 C Mons's Goblin Waiters
+83 C Orcish Paratroopers
+84 C Punctuate
+85 U Pygmy Giant
+86 C Red-Hot Hottie
+87 U Rocket-Powered Turbo Slug
+88 C Saute
+89 U Six-y Beast
+90 C Touch and Go
+91 R Yet Another Aether Vortex
+92 R B-I-N-G-O
+93 U Creature Guy
+94 U Elvish House Party
+95 C Fat Ass
+96 R Form of the Squirrel
+97 R Fraction Jackson
+98 U Gluetius Maximus
+99 U Granny's Payback
+100 C Graphic Violence
+101 C Keeper of the Sacred Word
+102 C Land Aid '04
+103 C Laughing Hyena
+104 C Monkey Monkey Monkey
+105 U Name Dropping
+106 R Old Fogey
+107 C Our Market Research Shows That Players Like Really Long Card Names So We Made this Card to Have the Absolute Longest Card Name Ever Elemental
+108 C Remodel
+109 C Shoe Tree
+110 U Side to Side
+111 C S.N.O.T.
+112 U Stone-Cold Basilisk
+113 C Supersize
+114 U Symbol Status
+115 R Uktabi Kong
+116 R "Ach! Hans, Run!"
+117 R Ass Whuppin'
+118 R Meddling Kids
+119 R Rare-B-Gone
+120 R Who // What // When // Where // Why
+121 R Gleemax
+122 R Letter Bomb
+123 U Mana Screw
+124 R Mox Lotus
+125 U My First Tome
+126 R Pointy Finger of Doom
+127 U Rod of Spanking
+128 R Time Machine
+129 U Togglodyte
+130 U Toy Boat
+131 U Urza's Hot Tub
+132 R Water Gun Balloon Game
+133 R World-Bottling Kit
+134 R City of Ass
+135 R R&D's Secret Lair
 136 L Plains
 137 L Island
 138 L Swamp
 139 L Mountain
 140 L Forest
+141 S Super Secret Tech
 
 [tokens]
 r_1_1_goblin
