@@ -232,7 +232,20 @@ public final class StaticAbilityContinuous {
                         }
                         return true;
                     }
-
+                    if (input.contains("CommanderColorID")) {
+                        if (!hostCard.getController().getCommanders().isEmpty()) {
+                            if (input.contains("NotCommanderColorID")) {
+                                for (Byte color : hostCard.getController().getNotCommanderColorID()) {
+                                    newKeywords.add(input.replace("NotCommanderColorID", MagicColor.toLongString(color)));
+                                }
+                                return true;
+                            } else for (Byte color : hostCard.getController().getCommanderColorID()) {
+                                newKeywords.add(input.replace("CommanderColorID", MagicColor.toLongString(color)));
+                            }
+                            return true;
+                        }
+                        return true;
+                    }
                     // two variants for Red vs. red in keyword
                     if (input.contains("ColorsYouCtrl") || input.contains("colorsYouCtrl")) {
                         for (byte color : colorsYouCtrl) {
@@ -240,6 +253,21 @@ public final class StaticAbilityContinuous {
                             String y = input.replaceAll("ColorsYouCtrl", StringUtils.capitalize(colorWord));
                             y = y.replaceAll("colorsYouCtrl", colorWord);
                             newKeywords.add(y);
+                        }
+                        return true;
+                    }
+                    if (input.contains("EachCMCAmongDefined")) {
+                        String keywordDefined = params.get("KeywordDefined");
+                        CardCollectionView definedCards = game.getCardsIn(ZoneType.Battlefield);
+                        definedCards = CardLists.getValidCards(definedCards, keywordDefined, hostCard.getController(),
+                                hostCard, null);
+                        for (Card c : definedCards) {
+                            final int cmc = c.getCMC();
+                            String y = (input.replace(" from EachCMCAmongDefined", ":Card.cmcEQ"
+                                    + (cmc) + ":Protection from converted mana cost " + (cmc)));
+                            if (!newKeywords.contains(y)) {
+                                newKeywords.add(y);
+                            }
                         }
                         return true;
                     }
@@ -638,6 +666,7 @@ public final class StaticAbilityContinuous {
                                 }
                                 return true;
                             }
+
                             return false;
                         }
                     });
