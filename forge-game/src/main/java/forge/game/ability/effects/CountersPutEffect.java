@@ -139,6 +139,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         boolean eachExistingCounter = sa.hasParam("EachExistingCounter");
 
         List<GameObject> tgtObjects = Lists.newArrayList();
+        int divrem = 0;
         if (sa.hasParam("Bolster")) {
             CardCollection creatsYouCtrl = CardLists.filter(activator.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             CardCollection leastToughness = new CardCollection(Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetDefense));
@@ -163,7 +164,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
             CardCollection choices = new CardCollection(game.getCardsIn(choiceZone));
 
-            int n = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("ChoiceAmount", "1"), sa);
+            int n = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("ChoiceAmount",
+                    "1"), sa);
+            int m = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("MinChoiceAmount",
+                    sa.getParamOrDefault("ChoiceAmount", "1")), sa);
 
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, card, sa);
 
@@ -178,11 +182,12 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
             Map<String, Object> params = Maps.newHashMap();
             params.put("CounterType", counterType);
-            Iterables.addAll(tgtObjects, chooser.getController().chooseCardsForEffect(choices, sa, title, n, n, sa.hasParam("ChoiceOptional"), params));
+            Iterables.addAll(tgtObjects, chooser.getController().chooseCardsForEffect(choices, sa, title, m, n, sa.hasParam("ChoiceOptional"), params));
         } else {
             tgtObjects.addAll(getDefinedOrTargeted(sa, "Defined"));
         }
 
+        int counterRemaining = counterAmount;
         for (final GameObject obj : tgtObjects) {
             // check if the object is still in game or if it was moved
             Card gameCard = null;
@@ -258,6 +263,20 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         params.put("Target", obj);
                         params.put("CounterType", counterType);
                         counterAmount = pc.chooseNumber(sa, Localizer.getInstance().getMessage("lblHowManyCounters"), 0, counterAmount, params);
+                    }
+                    if (sa.hasParam("DividedAsYouChoose")) {
+                        Map<String, Object> params = Maps.newHashMap();
+                        params.put("Target", obj);
+                        params.put("CounterType", counterType);
+                        if (!(divrem++ == tgtObjects.size() -1)) {
+                            counterAmount = pc.chooseNumber(sa, Localizer.getInstance().getMessage
+                                    ("lblHowManyCountersThis", CardTranslation.getTranslatedName(gameCard.getName())),
+                                    1, counterRemaining, params);
+                        } else if (divrem++ == tgtObjects.size() -1) {
+                            counterAmount = pc.chooseNumber(sa, Localizer.getInstance().getMessage
+                                    ("lblHowManyCountersThis", CardTranslation.getTranslatedName(gameCard.getName())),
+                                    counterRemaining, counterRemaining, params);
+                        }
                     }
 
                     // Adapt need extra logic
@@ -355,6 +374,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         card.addRemembered(gameCard);
                     }
                     game.updateLastStateForCard(gameCard);
+                    if (sa.hasParam("DividedAsYouChoose") && !sa.usesTargeting()) {
+                        counterRemaining = counterRemaining - counterAmount;
+                        divrem++;
+                    }
                 }
             } else if (obj instanceof Player) {
                 // Add Counters to players!
