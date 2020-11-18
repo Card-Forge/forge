@@ -182,12 +182,13 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
             Map<String, Object> params = Maps.newHashMap();
             params.put("CounterType", counterType);
-            Iterables.addAll(tgtObjects, chooser.getController().chooseCardsForEffect(choices, sa, title, m, n, sa.hasParam("ChoiceOptional"), params));
+            Iterables.addAll(tgtObjects, chooser.getController().chooseCardsForEffect(choices, sa, title, m, n,
+                    sa.hasParam("ChoiceOptional"), params));
         } else {
             tgtObjects.addAll(getDefinedOrTargeted(sa, "Defined"));
         }
 
-        int counterRemaining = counterAmount;
+        int counterRemain = counterAmount;
         for (final GameObject obj : tgtObjects) {
             // check if the object is still in game or if it was moved
             Card gameCard = null;
@@ -268,14 +269,12 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         Map<String, Object> params = Maps.newHashMap();
                         params.put("Target", obj);
                         params.put("CounterType", counterType);
-                        if (!(divrem++ == tgtObjects.size() -1)) {
+                        divrem++;
+                        if ((divrem == tgtObjects.size()) || (counterRemain == 1)) { counterAmount = counterRemain; }
+                        else {
                             counterAmount = pc.chooseNumber(sa, Localizer.getInstance().getMessage
                                     ("lblHowManyCountersThis", CardTranslation.getTranslatedName(gameCard.getName())),
-                                    1, counterRemaining, params);
-                        } else if (divrem++ == tgtObjects.size() -1) {
-                            counterAmount = pc.chooseNumber(sa, Localizer.getInstance().getMessage
-                                    ("lblHowManyCountersThis", CardTranslation.getTranslatedName(gameCard.getName())),
-                                    counterRemaining, counterRemaining, params);
+                                    1, counterRemain, params);
                         }
                     }
 
@@ -375,8 +374,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     }
                     game.updateLastStateForCard(gameCard);
                     if (sa.hasParam("DividedAsYouChoose") && !sa.usesTargeting()) {
-                        counterRemaining = counterRemaining - counterAmount;
-                        divrem++;
+                        counterRemain = counterRemain - counterAmount;
                     }
                 }
             } else if (obj instanceof Player) {
