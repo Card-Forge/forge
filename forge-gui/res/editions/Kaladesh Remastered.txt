@@ -3,7 +3,7 @@ Code=KLR
 Date=2020-11-12
 Name=Kaladesh Remastered
 BoosterCovers=1
-Booster=10 Common, 3 Uncommon, 1 RareMythic:!fromSheet("KLR Box Topper")
+Booster=10 Common, 3 Uncommon, 1 RareMythic:fromSheet("KLR cards")
 Type=Expansion
 
 [cards]
@@ -308,4 +308,6 @@ Type=Expansion
 299 L Forest
 300 L Forest
 301 L Forest
+
+[box topper]
 302 M Sculpting Steel
