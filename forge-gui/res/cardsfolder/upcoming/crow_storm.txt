@@ -2,5 +2,5 @@ Name:Crow Storm
 ManaCost:2 U
 Types:Sorcery
 K:Storm
-A:SP$ Token | Cost$ 2 U | TokenOwner$ You | TokenAmount$ 1 | TokenPower$ 1 | TokenToughness$ 2 | TokenColors$ Blue | TokenTypes$ Bird,Creature | TokenKeywords$ Flying | TokenName$ Storm Crow | TokenImage$ storm crow | SpellDescription$ Create a 1/2 blue Bird creature token with flying named Storm Crow.
+A:SP$ Token | Cost$ 2 U | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ storm_crow | LegacyImage$ storm crow ust | SpellDescription$ Create a 1/2 blue Bird creature token with flying named Storm Crow.
 Oracle:Create a 1/2 blue Bird creature token with flying named Storm Crow.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
