@@ -78,7 +78,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final CounterType counterType = getCounterType(sa);
 
-        if (!CounterEnumType.P1P1.equals(counterType) && counterType != null) {
+        if (counterType != null && !counterType.is(CounterEnumType.P1P1)) {
             if (!sa.hasParam("ActivationPhases")) {
                 // Don't use non P1P1/M1M1 counters before main 2 if possible
                 if (ph.getPhase().isBefore(PhaseType.MAIN2) && !ComputerUtil.castSpellInMain1(ai, sa)) {

@@ -49,7 +49,7 @@ public class CountersMoveAi extends SpellAbilityAi {
             return false;
         }
 
-        if (CounterEnumType.P1P1.equals(cType) && sa.hasParam("Source")) {
+        if (cType != null && cType.is(CounterEnumType.P1P1) && sa.hasParam("Source")) {
             int amount = calcAmount(sa, cType);
             final List<Card> srcCards = AbilityUtils.getDefinedCards(host, sa.getParam("Source"), sa);
             if (ph.getPlayerTurn().isOpponentOf(ai)) {
@@ -92,7 +92,7 @@ public class CountersMoveAi extends SpellAbilityAi {
             // for Simic Fluxmage and other
             return ph.getNextTurn().equals(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN);
 
-        } else if (CounterEnumType.P1P1.equals(cType) && sa.hasParam("Defined")) {
+        } else if (cType != null && cType.is(CounterEnumType.P1P1) && sa.hasParam("Defined")) {
             // something like Cyptoplast Root-kin
             if (ph.getPlayerTurn().isOpponentOf(ai)) {
                 if (ph.inCombat() && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
@@ -279,7 +279,7 @@ public class CountersMoveAi extends SpellAbilityAi {
 
                         // do not steal a P1P1 from Undying if it would die
                         // this way
-                        if (CounterEnumType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
+                        if (cType != null && cType.is(CounterEnumType.P1P1) && srcCardCpy.getNetToughness() <= 0) {
                             return srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING) || card.isToken();
                         }
                         return true;
@@ -322,13 +322,13 @@ public class CountersMoveAi extends SpellAbilityAi {
                         }
 
                         // try to remove P1P1 from undying or evolve
-                        if (CounterEnumType.P1P1.equals(cType)) {
+                        if (cType != null && cType.is(CounterEnumType.P1P1)) {
                             if (card.hasKeyword(Keyword.UNDYING) || card.hasKeyword(Keyword.EVOLVE)
                                     || card.hasKeyword(Keyword.ADAPT)) {
                                 return true;
                             }
                         }
-                        if (CounterEnumType.M1M1.equals(cType) && card.hasKeyword(Keyword.PERSIST)) {
+                        if (cType != null && cType.is(CounterEnumType.M1M1) && card.hasKeyword(Keyword.PERSIST)) {
                             return true;
                         }
 
@@ -383,10 +383,10 @@ public class CountersMoveAi extends SpellAbilityAi {
                         }
 
                         if (cType != null) {
-                            if (CounterEnumType.P1P1.equals(cType) && card.hasKeyword(Keyword.UNDYING)) {
+                            if (cType.is(CounterEnumType.P1P1) && card.hasKeyword(Keyword.UNDYING)) {
                                 return false;
                             }
-                            if (CounterEnumType.M1M1.equals(cType) && card.hasKeyword(Keyword.PERSIST)) {
+                            if (cType.is(CounterEnumType.M1M1) && card.hasKeyword(Keyword.PERSIST)) {
                                 return false;
                             }
 

@@ -183,7 +183,7 @@ public class PumpAi extends PumpAiBase {
                             // cant use substract on Copy
                             srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
-                            if (CounterEnumType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
+                            if (cType.is(CounterEnumType.P1P1) && srcCardCpy.getNetToughness() <= 0) {
                                 return srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING)
                                         || card.isToken();
                             }
@@ -233,7 +233,7 @@ public class PumpAi extends PumpAiBase {
                                 // cant use substract on Copy
                                 srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
-                                if (CounterEnumType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
+                                if (cType.is(CounterEnumType.P1P1) && srcCardCpy.getNetToughness() <= 0) {
                                     return srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING)
                                             || card.isToken();
                                 }
