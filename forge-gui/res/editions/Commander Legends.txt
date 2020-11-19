@@ -3,6 +3,7 @@ Code=CMR
 Date=2020-11-11
 Name=Commander Legends
 Type=Other
+DoublePick=Always
 
 [cards]
 1 C The Prismatic Piper

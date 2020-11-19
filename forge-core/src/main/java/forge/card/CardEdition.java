@@ -142,7 +142,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private String boosterMustContain = "";
     private String boosterReplaceSlotFromPrintSheet = "";
     private String[] chaosDraftThemes = new String[0];
-    private boolean doublePickToStartRound = false;
+    private String doublePickDuringDraft = "";
     private final ListMultimap<String, CardInSet> cardMap;
     private final Map<String, Integer> tokenNormalized;
 
@@ -211,7 +211,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public String getAdditionalSheetForFoils() { return additionalSheetForFoils; }
     public String getAdditionalUnlockSet() { return additionalUnlockSet; }
     public boolean getSmallSetOverride() { return smallSetOverride; }
-    public boolean getDoublePickToStartRound() { return doublePickToStartRound; }
+    public String getDoublePickDuringDraft() { return doublePickDuringDraft; }
     public String getBoosterMustContain() { return boosterMustContain; }
     public String getBoosterReplaceSlotFromPrintSheet() { return boosterReplaceSlotFromPrintSheet; }
     public String[] getChaosDraftThemes() { return chaosDraftThemes; }
@@ -441,7 +441,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             res.additionalUnlockSet = section.get("AdditionalSetUnlockedInQuest", ""); // e.g. Time Spiral Timeshifted (TSB) for Time Spiral
 
             res.smallSetOverride = section.getBoolean("TreatAsSmallSet", false); // for "small" sets with over 200 cards (e.g. Eldritch Moon)
-            res.doublePickToStartRound = section.getBoolean("DoublePick", false); // for getting two picks when opening a pack
+            res.doublePickDuringDraft = section.get("DoublePick", ""); // "FirstPick" or "Always"
 
             res.boosterMustContain = section.get("BoosterMustContain", ""); // e.g. Dominaria guaranteed legendary creature
             res.boosterReplaceSlotFromPrintSheet = section.get("BoosterReplaceSlotFromPrintSheet", ""); // e.g. Zendikar Rising guaranteed double-faced card
