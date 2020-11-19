@@ -580,7 +580,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 // With multi-targets, as long as one target is still legal,
                 // we'll try to go through as much as possible
                 final TargetChoices choices = sa.getTargets();
-                for (final GameObject o : sa.getTargets()) {
+                for (final GameObject o : Lists.newArrayList(sa.getTargets())) {
                     boolean invalidTarget = false;
                     if (rememberTgt) {
                         source.addRemembered(o);
