@@ -22,6 +22,7 @@ import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
+import java.util.EnumSet;
 import java.util.List;
 
 import com.google.common.collect.Iterables;
@@ -168,8 +169,9 @@ public class EffectEffect extends SpellAbilityEffect {
                     final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, eff, true);
                     final String ability = AbilityUtils.getSVar(sa, parsedTrigger.getParam("Execute"));
                     parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, eff));
-                    final Trigger addedTrigger = eff.addTrigger(parsedTrigger);
-                    addedTrigger.setIntrinsic(true);
+                    parsedTrigger.setActiveZone(EnumSet.of(ZoneType.Command));
+                    parsedTrigger.setIntrinsic(true);
+                    eff.addTrigger(parsedTrigger);
                 }
             }
 
@@ -178,6 +180,7 @@ public class EffectEffect extends SpellAbilityEffect {
                 for (final String s : effectStaticAbilities) {
                     final StaticAbility addedStaticAbility = eff.addStaticAbility(AbilityUtils.getSVar(sa, s));
                     if (addedStaticAbility != null) //prevent npe casting adventure card spell
+                        addedStaticAbility.getMapParams().put("EffectZone", "Command");
                         addedStaticAbility.setIntrinsic(true);
                 }
             }
@@ -188,8 +191,9 @@ public class EffectEffect extends SpellAbilityEffect {
                     final String actualReplacement = AbilityUtils.getSVar(sa, s);
 
                     final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, eff, true);
-                    final ReplacementEffect addedReplacement = eff.addReplacementEffect(parsedReplacement);
-                    addedReplacement.setIntrinsic(true);
+                    parsedReplacement.setActiveZone(EnumSet.of(ZoneType.Command));
+                    parsedReplacement.setIntrinsic(true);
+                    eff.addReplacementEffect(parsedReplacement);
                 }
             }
 
