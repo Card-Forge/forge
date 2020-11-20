@@ -91,3 +91,4 @@ Jumpstart, -/2/JMP, Meta-Choose(S(JMP Above the Clouds 1)Above the Clouds 1;S(JM
 Amonkhet Remastered, 3/6/AKR, AKR
 Double Masters, 3/6/2XM, 2XM
 Zendikar Rising, 3/6/ZNR, ZNR
+Kaladesh Remastered, 3/6/KLR, KLR
