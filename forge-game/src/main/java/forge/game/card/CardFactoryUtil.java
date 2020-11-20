@@ -4374,7 +4374,7 @@ public class CardFactoryUtil {
             final String manacost = k[1];
 
             String effect = "AB$ RepeatEach | Cost$ " + manacost + " ExileFromGrave<1/CARDNAME> " +
-                    "| ActivationZone$ Graveyard | RepeatPlayers$ Opponent" +
+                    "| ActivationZone$ Graveyard | ClearRememberedBeforeLoop$ True | RepeatPlayers$ Opponent" +
                     "| PrecostDesc$ Encore | CostDesc$ " + ManaCostParser.parse(manacost) +
                     "| SpellDescription$ (" + inst.getReminderText() + ")";
 
@@ -4391,7 +4391,7 @@ public class CardFactoryUtil {
 
             final String sacStr = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered";
 
-            final String cleanupStr = "DB$ Cleanup | ClearImprinted$ True";
+            final String cleanupStr = "DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
