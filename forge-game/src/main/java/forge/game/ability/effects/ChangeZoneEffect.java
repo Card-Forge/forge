@@ -538,6 +538,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
                         gameCard.setTapped(true);
                     }
+                    if (sa.hasParam("Untapped")) {
+                        gameCard.setTapped(false);
+                    }
                     if (sa.hasParam("Transformed")) {
                         if (gameCard.isDoubleFaced()) {
                             gameCard.changeCardState("Transform", null, sa);
@@ -650,6 +653,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
                         movedCard.setTapped(true);
+                    }
+                    if (sa.hasParam("Untapped")) {
+                        movedCard.setTapped(false);
                     }
                     movedCard.setTimestamp(ts);
                 } else {
@@ -1077,8 +1083,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             else if (destination.equals(ZoneType.Battlefield)) {
                 if (sa.hasParam("Tapped")) {
                     c.setTapped(true);
+                } else if (sa.hasParam("Untapped")) {
+                    c.setTapped(false);
                 }
-
                 Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
 
                 if (sa.hasAdditionalAbility("AnimateSubAbility")) {
@@ -1189,6 +1196,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 movedCard = game.getAction().moveTo(c.getController().getZone(destination), c, cause, moveParams);
                 if (sa.hasParam("Tapped")) {
                     movedCard.setTapped(true);
+                } else if (sa.hasParam("Untapped")) {
+                    c.setTapped(false);
                 }
 
                 // need to do that again?

@@ -442,37 +442,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return false;
     }
 
-    /**
-     * Apply ability.
-     *
-     * @param mode
-     *            the mode
-     * @param card
-     *            the card
-     * @return true, if successful
-     */
-    public final boolean applyAbility(final String mode, final Card card) {
-
-        // don't apply the ability if it hasn't got the right mode
-        if (!getParam("Mode").equals(mode)) {
-            return false;
-        }
-
-        if (this.isSuppressed() || !this.checkConditions()) {
-            return false;
-        }
-
-        if (mode.equals("ETBTapped")) {
-            return StaticAbilityETBTapped.applyETBTappedAbility(this, card);
-        }
-
-        if (mode.equals("GainAbilitiesOf")) {
-
-        }
-
-        return false;
-    }
-
     public final boolean applyAbility(final String mode, final Card card, final boolean isCombat) {
         // don't apply the ability if it hasn't got the right mode
         if (!getParam("Mode").equals(mode)) {
