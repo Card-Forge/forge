@@ -10,6 +10,10 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 FoilAlwaysInCommonSlot=False
 
 [cards]
+3 C Amateur Auteur
+3 C Amateur Auteur
+3 C Amateur Auteur
+3 C Amateur Auteur
 6 M Do-It-Yourself Seraph
 7 U Gimme Five
 8 C GO TO JAIL

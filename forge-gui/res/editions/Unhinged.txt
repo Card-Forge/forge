@@ -3,7 +3,8 @@ Code=UNH
 Date=2004-11-20
 Name=Unhinged
 MciCode=uh
-Type=OtherType=Expansion
+Type=Other
+Type=Expansion
 BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 BasicLand, 1 Rare
 FoilAlwaysInCommonSlot=False
