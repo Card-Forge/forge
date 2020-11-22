@@ -1,7 +1,9 @@
 Name:Wildest Dreams
 ManaCost:X X G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X X G | TargetMin$ X | TargetMax$ X | ValidTgts$ Card.YouOwn | TgtPrompt$ Select target card in your graveyard | Origin$ Graveyard | Destination$ Hand | References$ X | SubAbility$ DBExile | SpellDescription$ Return X target cards from your graveyard to your hand. Exile CARDNAME
+A:SP$ ChangeZone | Cost$ X X G | TargetMin$ X | TargetMax$ X | ValidTgts$ Card.YouOwn | TgtPrompt$ Select X target cards in your graveyard | Origin$ Graveyard | Destination$ Hand | R
+eferences$ X | SubAbility$ DBExile | SpellDescription$ Return X target cards from your graveyard to your hand. Exile CARDNAME.
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:X:Count$xPaid
+DeckHas:Ability$Graveyard
 Oracle:Return X target cards from your graveyard to your hand. Exile Wildest Dreams.
