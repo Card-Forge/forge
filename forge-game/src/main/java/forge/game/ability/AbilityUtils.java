@@ -1642,6 +1642,12 @@ public class AbilityUtils {
                             return CardFactoryUtil.doXMath(0, expr, c);
                         }
 
+                        // ImmediateTrigger should check for the Ability which created the trigger
+                        if (t.getSpawningAbility() != null) {
+                            root = t.getSpawningAbility().getRootAbility();
+                            return CardFactoryUtil.doXMath(root.getXManaCostPaid(), expr, c);
+                        }
+
                         // 107.3k If an object’s enters-the-battlefield triggered ability or replacement effect refers to X,
                         // and the spell that became that object as it resolved had a value of X chosen for any of its costs,
                         // the value of X for that ability is the same as the value of X for that spell, although the value of X for that permanent is 0.

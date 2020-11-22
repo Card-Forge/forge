@@ -4,11 +4,8 @@ Types:Legendary Creature Human Wizard
 K:Deathtouch
 PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may pay {X}. When you do, return target creature card with converted mana cost X from your graveyard to the battlefield with a corpse counter on it. If that creature would leave the battlefield, exile it instead of putting it anywhere else.
-SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ X | Execute$ TrigChange | RememberDefinedNumber$ X | References$ X | TriggerDescription$ When you do, return target creature card with converted mana cost X from your graveyard to the battlefield with a corpse counter on it. If that creature would leave the battlefield, exile it instead of putting it anywhere else.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ X | Execute$ TrigChange | References$ X | SpellDescription$ When you do, return target creature card with converted mana cost X from your graveyard to the battlefield with a corpse counter on it. If that creature would leave the battlefield, exile it instead of putting it anywhere else.
 SVar:X:Count$xPaid
-SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcEQY | TgtPrompt$ Choose target creature card with converted mana cost X | References$ Y | RememberTargets$ True | AILogic$ BeforeCombat | SubAbility$ DBPutCounter | SpellDescription$ Return target creature card with converted mana cost X from your graveyard to the battlefield.
-SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ CORPSE | CounterNum$ 1 | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Remembered | LeaveBattlefield$ Exile
-SVar:Y:Count$TriggerRememberAmount
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcEQX | TgtPrompt$ Choose target creature card with converted mana cost X | References$ X | WithCounters$ CORPSE_1 | AILogic$ BeforeCombat | LeaveBattlefield$ Exile | SpellDescription$ Return target creature card with converted mana cost X from your graveyard to the battlefield.
 SVar:HasAttackEffect:TRUE
 Oracle:Deathtouch\nWhenever Isareth the Awakener attacks, you may pay {X}. When you do, return target creature card with converted mana cost X from your graveyard to the battlefield with a corpse counter on it. If that creature would leave the battlefield, exile it instead of putting it anywhere else.

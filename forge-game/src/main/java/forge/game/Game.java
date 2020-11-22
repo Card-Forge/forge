@@ -719,7 +719,7 @@ public class Game {
             getNextPlayerAfter(p).initPlane();
         }
 
-        if (p != null && p.equals(getMonarch())) {
+        if (p != null && p.isMonarch()) {
             // if the player who lost was the Monarch, someone else will be the monarch
             if(p.equals(getPhaseHandler().getPlayerTurn())) {
                 getAction().becomeMonarch(getNextPlayerAfter(p));

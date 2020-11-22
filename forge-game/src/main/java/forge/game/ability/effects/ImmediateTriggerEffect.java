@@ -57,6 +57,7 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
         Card lki = CardUtil.getLKICopy(gameCard);
         lki.setOwner(sa.getActivatingPlayer());
         final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, lki, sa.isIntrinsic());
+        immediateTrig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
 
         // Need to copy paid costs
 
@@ -70,11 +71,6 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
                     immediateTrig.addRemembered(o);
                 }
             }
-        }
-
-        if (sa.hasParam("RememberDefinedNumber")) {
-            immediateTrig.addRemembered((Integer) AbilityUtils.calculateAmount(sa.getHostCard(),
-                    sa.getParam("RememberDefinedNumber"), sa));
         }
 
         if (mapParams.containsKey("Execute") || sa.hasAdditionalAbility("Execute")) {

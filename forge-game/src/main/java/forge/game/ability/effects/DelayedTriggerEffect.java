@@ -58,6 +58,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         Card lki = CardUtil.getLKICopy(gameCard);
         lki.setOwner(sa.getActivatingPlayer());
         final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, lki, sa.isIntrinsic());
+        delTrig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
 
         if (triggerRemembered != null) {
             for (final String rem : triggerRemembered.split(",")) {

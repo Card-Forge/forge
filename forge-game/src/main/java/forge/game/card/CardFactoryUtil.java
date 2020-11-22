@@ -1167,7 +1167,7 @@ public class CardFactoryUtil {
             return doXMath(Integer.parseInt(sq[cc.hasLandfall() ? 1 : 2]), m, c);
         }
         if (sq[0].contains("Monarch")) {
-            return doXMath(Integer.parseInt(sq[cc.equals(game.getMonarch()) ? 1 : 2]), m, c);
+            return doXMath(Integer.parseInt(sq[cc.isMonarch() ? 1 : 2]), m, c);
         }
         if (sq[0].contains("Blessing")) {
             return doXMath(Integer.parseInt(sq[cc.hasBlessing() ? 1 : 2]), m, c);
