@@ -302,6 +302,7 @@ public class GameAction {
             zoneFrom.remove(c);
             if (!zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Stack)) {
                 c.setExiledWith(null);
+                c.setExiledBy(null);
             }
 
             // cleanup Encoding

@@ -350,6 +350,13 @@ public class CardProperty {
             if (!card.equals(source)) {
                 return false;
             }
+        } else if (property.startsWith("ExiledByYou")) {
+            if (card.getExiledBy() == null) {
+                return false;
+            }
+            if (!card.getExiledBy().equals(sourceController)) {
+                return false;
+            }
         } else if (property.startsWith("ExiledWithSource")) {
             if (card.getExiledWith() == null) {
                 return false;

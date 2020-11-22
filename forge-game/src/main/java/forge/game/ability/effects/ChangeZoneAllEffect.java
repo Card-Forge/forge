@@ -188,6 +188,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                         host = sa.getHostCard();
                     }
                     movedCard.setExiledWith(host);
+                    movedCard.setExiledBy(host.getController());
                 }
                 if (sa.hasParam("ExileFaceDown")) {
                     movedCard.turnFaceDown(true);
