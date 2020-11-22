@@ -973,12 +973,16 @@ public class PlayerControllerAi extends PlayerController {
             if (sa.isTrigger() && prepareSingleSa(sa.getHostCard(), sa, true)) {
                 ComputerUtil.playStack(sa, player, game);
             } else {
-                if (sa.isSpell() && sa.isCopied()) {
-                    player.getGame().getStackZone().add(sa.getHostCard());
+                if (sa.isCopied()) {
+                    if (sa.isSpell()) {
+                        player.getGame().getStackZone().add(sa.getHostCard());
+                    }
                     // TODO check if static abilities needs to be run for things affecting the copy?
                     if (sa.isMayChooseNewTargets() && !sa.setupTargets()) {
                         // if targets can't be done, remove copy from existence
-                        sa.getHostCard().ceaseToExist();
+                        if (sa.isSpell()) {
+                            sa.getHostCard().ceaseToExist();
+                        }
                         continue;
                     }
                 }
