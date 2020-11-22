@@ -105,6 +105,8 @@ public enum CounterEnumType {
 
     FEATHER("FTHR", 195, 202, 165),
 
+    FETCH("FETCH", 180, 235, 52),
+
     FILIBUSTER("FLBTR", 255, 179, 119),
 
     FLAME("FLAME", 255, 143, 43),

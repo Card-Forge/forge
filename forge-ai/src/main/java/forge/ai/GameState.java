@@ -783,6 +783,7 @@ public abstract class GameState {
 
             Card exiledWith = idToCard.get(Integer.parseInt(id));
             c.setExiledWith(exiledWith);
+            c.setExiledBy(exiledWith.getController());
         }
     }
 
@@ -1241,6 +1242,7 @@ public abstract class GameState {
                     saAdventure.setActivatingPlayer(c.getOwner());
                     saAdventure.resolve();
                     c.setExiledWith(c); // This seems to be the way it's set up internally. Potentially not needed here?
+                    c.setExiledBy(c.getController());
                 } else if (info.startsWith("IsCommander")) {
                     // TODO: This doesn't seem to properly restore the ability to play the commander. Why?
                     c.setCommander(true);

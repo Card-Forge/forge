@@ -239,6 +239,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private String chosenMode = "";
 
     private Card exiledWith = null;
+    private Player exiledBy = null;
 
     private Map<Long, Player> goad = Maps.newTreeMap();
 
@@ -1461,6 +1462,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final void setExiledWith(final Card e) {
         exiledWith = e;
+    }
+
+    public final Player getExiledBy() { return exiledBy; }
+    public final void setExiledBy(final Player ep) {
+        exiledBy = ep;
     }
 
     // used for cards like Belbe's Portal, Conspiracy, Cover of Darkness, etc.
