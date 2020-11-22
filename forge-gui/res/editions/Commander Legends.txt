@@ -3,6 +3,8 @@ Code=CMR
 Date=2020-11-11
 Name=Commander Legends
 Type=Other
+Booster=13 Common:fromSheet("CMR cards"), 3 Uncommon:fromSheet("CMR cards"), 1 RareMythic:fromSheet("CMR cards"), 1 fromSheet("CMR Foils"), 2 fromSheet("CMR Legendaries")
+Foil=NotSupported
 DoublePick=Always
 
 [cards]
