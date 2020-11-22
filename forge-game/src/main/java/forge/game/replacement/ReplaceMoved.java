@@ -3,7 +3,6 @@ package forge.game.replacement;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -30,11 +29,9 @@ public class ReplaceMoved extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        final Player controller = getHostCard().getController();
-        final Card affected = (Card) runParams.get(AbilityKey.Affected);
 
         if (hasParam("ValidCard")) {
-            if (!matchesValid(affected, getParam("ValidCard").split(","), getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidCard").split(","), getHostCard())) {
                 return false;
             }
         }
@@ -78,35 +75,20 @@ public class ReplaceMoved extends ReplacementEffect {
         }
         
         if (hasParam("ValidStackSa")) {
-            if (!runParams.containsKey(AbilityKey.StackSa)) {
-                return false;
-            }
-            if (!((SpellAbility)runParams.get(AbilityKey.StackSa)).isValid(getParam("ValidStackSa").split(","), getHostCard().getController(), getHostCard(), null)) {
+            if (!matchesValid(runParams.get(AbilityKey.StackSa), getParam("ValidStackSa").split(","), getHostCard())) {
                 return false;
             }
         }
 
         if (hasParam("Cause")) {
-            if (!runParams.containsKey(AbilityKey.Cause)) {
-                return false;
-            }
-            SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
-            if (cause == null) {
-                return false;
-            }
-            if (!cause.isValid(getParam("Cause").split(","), controller, getHostCard(), null)) {
+            if (!matchesValid(runParams.get(AbilityKey.Cause), getParam("Cause").split(","), getHostCard())) {
                 return false;
             }
         }
 
         if (hasParam("NotCause")) {
-            if (runParams.containsKey(AbilityKey.Cause)) {
-                SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
-                if (cause != null) {
-                    if (cause.isValid(getParam("NotCause").split(","), controller, getHostCard(), null)) {
-                        return false;
-                    }
-                }
+            if (matchesValid(runParams.get(AbilityKey.Cause), getParam("NotCause").split(","), getHostCard())) {
+                return false;
             }
         }
 

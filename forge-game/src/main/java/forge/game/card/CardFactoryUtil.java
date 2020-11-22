@@ -3659,16 +3659,16 @@ public class CardFactoryUtil {
             }
             inst.addReplacement(re);
         } else if (keyword.equals("Rebound")) {
-            String repeffstr = "Event$ Moved | ValidCard$ Card.Self+wasCastFromHand+YouOwn+YouCtrl "
+            String repeffstr = "Event$ Moved | ValidLKI$ Card.Self+wasCastFromHand+YouOwn+YouCtrl "
             + " | Origin$ Stack | Destination$ Graveyard | Fizzle$ False "
             + " | Description$ Rebound (" + inst.getReminderText() + ")";
 
-            String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile";
+            String abExile = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile";
             String delTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You " +
-            " | OptionalDecider$ You | RememberObjects$ Self | TriggerDescription$"
+            " | OptionalDecider$ You | RememberObjects$ ReplacedCard | TriggerDescription$"
             + " At the beginning of your next upkeep, you may cast " + card.toString() + " without paying its mana cost.";
             // TODO add check for still in exile
-            String abPlay = "DB$ Play | Defined$ Self | WithoutManaCost$ True | Optional$ True";
+            String abPlay = "DB$ Play | Defined$ DelayTriggerRemembered | WithoutManaCost$ True | Optional$ True";
 
             SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
 
