@@ -265,7 +265,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         params.put("CounterType", counterType);
                         counterAmount = pc.chooseNumber(sa, Localizer.getInstance().getMessage("lblHowManyCounters"), 0, counterAmount, params);
                     }
-                    if (sa.hasParam("DividedAsYouChoose")) {
+                    if (sa.hasParam("DividedAsYouChoose") && !sa.usesTargeting()) {
                         Map<String, Object> params = Maps.newHashMap();
                         params.put("Target", obj);
                         params.put("CounterType", counterType);
