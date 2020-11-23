@@ -3113,6 +3113,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return view;
     }
 
+    public boolean isMonarch() {
+        return equals(game.getMonarch());
+    }
+
     public void createMonarchEffect() {
         final PlayerZone com = getZone(ZoneType.Command);
         if (monarchEffect == null) {

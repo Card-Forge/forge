@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -44,7 +44,7 @@ import forge.util.TextUtil;
  * <p>
  * Abstract Trigger class. Constructed by reflection only
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -74,11 +74,13 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     private Set<PhaseType> validPhases;
 
+    private SpellAbility spawningAbility = null;
+
     /**
      * <p>
      * Constructor for Trigger.
      * </p>
-     * 
+     *
      * @param params
      *            a {@link java.util.HashMap} object.
      * @param host
@@ -109,14 +111,14 @@ public abstract class Trigger extends TriggerReplacementBase {
      * <p>
      * toString.
      * </p>
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     @Override
     public final String toString() {
     	return toString(false);
     }
-    
+
     public String toString(boolean active) {
         if (hasParam("TriggerDescription") && !this.isSuppressed()) {
 
@@ -148,9 +150,9 @@ public abstract class Trigger extends TriggerReplacementBase {
         SpellAbility sa = ensureAbility();
 
         return replaceAbilityText(desc, sa);
-        
+
     }
-    
+
     public final String replaceAbilityText(final String desc, SpellAbility sa) {
         String result = desc;
 
@@ -204,7 +206,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      * <p>
      * phasesCheck.
      * </p>
-     * 
+     *
      * @return a boolean.
      */
     public final boolean phasesCheck(final Game game) {
@@ -270,7 +272,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      * <p>
      * requirementsCheck.
      * </p>
-     * @param game 
+     * @param game
      *
      * @return a boolean.
      */
@@ -398,7 +400,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      * <p>
      * performTest.
      * </p>
-     * 
+     *
      * @param runParams
      *            a {@link HashMap} object.
      * @return a boolean.
@@ -409,7 +411,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      * <p>
      * setTriggeringObjects.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
@@ -439,7 +441,7 @@ public abstract class Trigger extends TriggerReplacementBase {
     public void addRemembered(Object o) {
         this.triggerRemembered.add(o);
     }
-    
+
     public List<Object> getTriggerRemembered() {
         return this.triggerRemembered;
     }
@@ -453,7 +455,7 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     /**
-     * 
+     *
      * @param triggerType
      *            the triggerType to set
      * @param triggerType
@@ -492,6 +494,14 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     //public String getImportantStackObjects(SpellAbility sa) { return ""; };
     abstract public String getImportantStackObjects(SpellAbility sa);
+
+    public SpellAbility getSpawningAbility() {
+        return spawningAbility;
+    }
+
+    public void setSpawningAbility(SpellAbility ability) {
+        spawningAbility = ability;
+    }
 
     public int getActivationsThisTurn() {
         return this.numberTurnActivations;
