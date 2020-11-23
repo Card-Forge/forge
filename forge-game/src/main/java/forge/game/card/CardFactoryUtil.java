@@ -1175,6 +1175,11 @@ public class CardFactoryUtil {
         if (sq[0].contains("Threshold")) {
             return doXMath(Integer.parseInt(sq[cc.hasThreshold() ? 1 : 2]), m, c);
         }
+        if (sq[0].contains("Averna")) {
+            if (cc.hasKeyword("As you cascade, you may put a land card from among the exiled cards onto the" +
+                    " battlefield tapped.")) { return 1; }
+            else return 0;
+        }
         if (sq[0].startsWith("Kicked")) {
             return doXMath(Integer.parseInt(sq[c.getKickerMagnitude() > 0 ? 1 : 2]), m, c);
         }
