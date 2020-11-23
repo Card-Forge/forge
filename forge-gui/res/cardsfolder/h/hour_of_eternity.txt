@@ -1,12 +1,10 @@
 Name:Hour of Eternity
 ManaCost:X X U U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X X U U U | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ MaxTgts | References$ MaxTgts | SubAbility$ DBClone | RememberChanged$ True | SpellDescription$ Exile X target creature cards from your graveyard. For each card exiled this way, create a token that's a copy of that card, except it's a 4/4 black Zombie.
-SVar:DBClone:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 4 | SetToughness$ 4 | SetColor$ Black | SetCreatureTypes$ Zombie | NumCopies$ 1 | SubAbility$ DBCleanup
+A:SP$ ChangeZone | Cost$ X X U U U | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose X target creature cards from your graveyard | ValidTgts$ Creature.YouOwn | TargetMin$ X | TargetMax$ X | References$ X | SubAbility$ DBClone | RememberChanged$ True | StackDescription$ {p:You} exiles {c:Targeted} from their graveyard. | SpellDescription$ Exile X target creature cards from your graveyard. For each card exiled this way, create a token that's a copy of that card, except it's a 4/4 black Zombie.
+SVar:DBClone:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 4 | SetToughness$ 4 | SetColor$ Black | SetCreatureTypes$ Zombie | NumCopies$ 1 | SubAbility$ DBCleanup | StackDescription$ For each card exiled this way, create a token that's a copy of that card, except it's a 4/4 black Zombie.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Targeted$Amount
-SVar:MaxTgts:Count$TypeInYourYard.Creature
+SVar:X:Count$xPaid
 AI:RemoveDeck:All
-DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hour_of_eternity.jpg
+DeckHas:Ability$Token & Ability$Graveyard
 Oracle:Exile X target creature cards from your graveyard. For each card exiled this way, create a token that's a copy of that card, except it's a 4/4 black Zombie.
