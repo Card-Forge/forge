@@ -1081,6 +1081,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         for (final Card c : chosenCards) {
             Card movedCard = null;
             final Zone originZone = game.getZoneOf(c);
+            Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+            moveParams.put(AbilityKey.FoundSearchingLibrary, searchedLibrary);
             if (destination.equals(ZoneType.Library)) {
                 movedCard = game.getAction().moveToLibrary(c, libraryPos, cause);
             }
@@ -1090,8 +1092,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 } else if (sa.hasParam("Untapped")) {
                     c.setTapped(false);
                 }
-                Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
-
                 if (sa.hasAdditionalAbility("AnimateSubAbility")) {
                     // need LKI before Animate does apply
                     moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
@@ -1100,7 +1100,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     AbilityUtils.resolve(sa.getAdditionalAbility("AnimateSubAbility"));
                     source.removeRemembered(c);
                 }
-
                 if (sa.hasParam("GainControl")) {
                     Player newController = sa.getActivatingPlayer();
                     if (sa.hasParam("NewController")) {
