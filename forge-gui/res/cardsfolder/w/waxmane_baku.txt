@@ -4,8 +4,9 @@ Types:Creature Spirit
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
 SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ KI | CounterNum$ 1
-A:AB$ Tap | Announce$ X | Cost$ 1 SubCounter<X/KI> | CostDesc$ {1}, Remove X ki counters from CARDNAME: | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature | IsCurse$ True | AILogic$ TapForXCounters | TgtPrompt$ Select X target creatures | References$ X | SpellDescription$ Tap X target creatures.
-SVar:X:Count$XChoice
+A:AB$ Tap | Announce$ X | XMaxLimit$ Ki | Cost$ 1 SubCounter<X/KI> | CostDesc$ {1}, Remove X ki counters from CARDNAME: | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature | IsCurse$ True | AILogic$ TapForXCounters | TgtPrompt$ Select X target creatures | References$ X,Ki | SpellDescription$ Tap X target creatures.
+SVar:X:XChoice
+SVar:Ki:Count$CardCounters.KI
 AI:RemoveDeck:Random
 DeckHints:Type$Spirit|Arcane
 Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Waxmane Baku.\n{1}, Remove X ki counters from Waxmane Baku: Tap X target creatures.

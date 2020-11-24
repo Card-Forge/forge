@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
 
+import forge.game.ability.AbilityUtils;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -329,8 +330,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public Integer announceRequirements(final SpellAbility ability, final String announce,
             final boolean canChooseZero) {
         final int min = canChooseZero ? 0 : 1;
-        return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announce, CardTranslation.getTranslatedName(ability.getHostCard().getName())) , min,
-                Integer.MAX_VALUE, min + 9);
+        final int max = ability.hasParam("XMaxLimit") ? AbilityUtils.calculateAmount(ability.getHostCard(),
+                ability.getParam("XMaxLimit"), ability) : Integer.MAX_VALUE;
+        return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announce,
+                CardTranslation.getTranslatedName(ability.getHostCard().getName())) , min, max, min + 9);
     }
 
     @Override
