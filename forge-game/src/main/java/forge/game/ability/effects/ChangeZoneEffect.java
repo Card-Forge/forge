@@ -871,6 +871,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         String changeType = sa.getParam("ChangeType"); 
 
         CardCollection fetchList;
+        Player originalDecider = decider;
+        Player deciderControl = null;
+        PlayerCollection opps = decider.getOpponents();
+        for (Player o : opps) {
+            if (o.hasKeyword("You control your opponents while they're searching their libraries.")) {
+                deciderControl = o;
+            }
+        }
         boolean shuffleMandatory = true;
         boolean searchedLibrary = false;
         if (defined) {
@@ -887,11 +895,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             fetchList = new CardCollection(player.getCardsIn(origin));
             if (origin.contains(ZoneType.Library) && !sa.hasParam("NoLooking")) {
                 searchedLibrary = true;
+                if (deciderControl != null) { decider = deciderControl; }
+
                 if (decider.hasKeyword("LimitSearchLibrary")) { // Aven Mindcensor
                     fetchList.removeAll(player.getCardsIn(ZoneType.Library));
                     final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
                     if (fetchNum == 0) {
                         searchedLibrary = false;
+                        if (deciderControl != null) { decider = originalDecider; }
                     }
                     else {
                         fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
@@ -903,6 +914,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     // "then shuffle" is mandatory
                     shuffleMandatory = !sa.hasParam("ShuffleNonMandatory");
                     searchedLibrary = false;
+                    if (deciderControl != null) { decider = originalDecider; }
                 }
             }
         }
@@ -911,6 +923,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         DelayedReveal delayedReveal = null;
         if (!defined && !sa.hasParam("AlreadyRevealed")) {
             if (origin.contains(ZoneType.Library) && searchedLibrary) {
+                if (deciderControl != null) { decider = deciderControl; }
                 final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
                 CardCollectionView shown = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
                 // Look at whole library before moving onto choosing a card
@@ -922,6 +935,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         if (searchedLibrary) {
+            if (deciderControl != null) { decider = deciderControl; }
             if (decider.equals(player)) {
                 // should only count the number of searching player's own library
                 decider.incLibrarySearched();
@@ -1084,7 +1098,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
             moveParams.put(AbilityKey.FoundSearchingLibrary, searchedLibrary);
             if (destination.equals(ZoneType.Library)) {
-                movedCard = game.getAction().moveToLibrary(c, libraryPos, cause);
+                movedCard = game.getAction().moveToLibrary(c, libraryPos, cause, moveParams);
             }
             else if (destination.equals(ZoneType.Battlefield)) {
                 if (sa.hasParam("Tapped")) {
@@ -1210,7 +1224,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 movedCard.setTimestamp(ts);
             }
             else if (destination.equals(ZoneType.Exile)) {
-                movedCard = game.getAction().exile(c, sa);
+                movedCard = game.getAction().exile(c, sa, moveParams);
                 if (!c.isToken()) {
                     Card host = sa.getOriginalHost();
                     if (host == null) {
@@ -1224,7 +1238,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
             else {
-                movedCard = game.getAction().moveTo(destination, c, cause);
+                movedCard = game.getAction().moveTo(c.getController().getZone(destination), c, cause, moveParams);
             }
             
             movedCards.add(movedCard);
