@@ -230,7 +230,9 @@ public class TriggerHandler {
 
     public final void registerActiveLTBTrigger(final Card c) {
         for (final Trigger t : c.getTriggers()) {
-            if (TriggerType.ChangesZone.equals(t.getMode()) && "Battlefield".equals(t.getParam("Origin"))) {
+            if (
+                    TriggerType.Exploited.equals(t.getMode()) ||
+                    (TriggerType.ChangesZone.equals(t.getMode()) && "Battlefield".equals(t.getParam("Origin")))) {
                 registerOneTrigger(t);
             }
         }
