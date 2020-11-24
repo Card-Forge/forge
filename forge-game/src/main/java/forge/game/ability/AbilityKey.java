@@ -65,6 +65,7 @@ public enum AbilityKey {
     Fighters("Fighters"),
     FirstTime("FirstTime"),
     Fizzle("Fizzle"),
+    FoundSearchingLibrary("FoundSearchingLibrary"),
     IsCombat("IsCombat"), // TODO confirm that this and IsCombatDamage can be merged
     IsCombatDamage("IsCombatDamage"),
     IndividualCostPaymentInstance("IndividualCostPaymentInstance"),
