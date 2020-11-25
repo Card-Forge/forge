@@ -67,6 +67,7 @@ public class Forge implements ApplicationListener {
     public static boolean altPlayerLayout = false;
     public static boolean enableUIMask = false;
     public static boolean enablePreloadExtendedArt = false;
+    public static boolean isTabletDevice = false;
     public static String locale = "en-US";
     public static boolean hdbuttons = false;
     public static boolean hdstart = false;
@@ -75,7 +76,7 @@ public class Forge implements ApplicationListener {
     public static int cacheSize = 400;
     public static int totalDeviceRAM = 0;
 
-    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM) {
+    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet) {
         if (GuiBase.getInterface() == null) {
             clipboard = clipboard0;
             deviceAdapter = deviceAdapter0;
@@ -83,6 +84,7 @@ public class Forge implements ApplicationListener {
             GuiBase.enablePropertyConfig(value);
             isPortraitMode = androidOrientation;
             totalDeviceRAM = totalRAM;
+            isTabletDevice = isTablet;
             //increase cacheSize for devices with RAM more than 5GB, default is 400. Some phones have more than 10GB RAM (Mi 10, OnePlus 8, S20, etc..)
             if (totalDeviceRAM>5000) //devices with more than 10GB RAM will have 1000 Cache size, 700 Cache size for morethan 5GB RAM
                 cacheSize = totalDeviceRAM>10000 ? 1000: 700;
