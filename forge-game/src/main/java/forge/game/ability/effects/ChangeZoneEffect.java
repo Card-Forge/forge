@@ -874,9 +874,16 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         Player originalDecider = decider;
         Player deciderControl = null;
         PlayerCollection opps = decider.getOpponents();
+        long dcts = 0;
         for (Player o : opps) {
-            if (o.hasKeyword("You control your opponents while they're searching their libraries.")) {
-                deciderControl = o;
+            for (String k : o.getKeywords()) {
+                if (k.equals("You control your opponents while they're searching their libraries.")) {
+                    long ts = o.getKeywordCard().getTimestamp();
+                    if (deciderControl == null || ts > (dcts)) {
+                        deciderControl = o;
+                        dcts = ts;
+                    }
+                }
             }
         }
         boolean shuffleMandatory = true;
