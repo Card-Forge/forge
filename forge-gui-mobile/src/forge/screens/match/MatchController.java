@@ -143,7 +143,8 @@ public class MatchController extends AbstractGuiGame {
             }
         }
         view = new MatchScreen(playerPanels);
-        view.resetFields();
+        if(GuiBase.isNetworkplay())
+            view.resetFields();
         clearSelectables();  //fix uncleared selection
 
         if (noHumans) {
