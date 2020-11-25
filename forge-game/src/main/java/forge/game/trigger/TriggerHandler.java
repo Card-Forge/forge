@@ -232,6 +232,7 @@ public class TriggerHandler {
         for (final Trigger t : c.getTriggers()) {
             if (
                     TriggerType.Exploited.equals(t.getMode()) ||
+                    TriggerType.Sacrificed.equals(t.getMode()) ||
                     (TriggerType.ChangesZone.equals(t.getMode()) && "Battlefield".equals(t.getParam("Origin")))) {
                 registerOneTrigger(t);
             }
