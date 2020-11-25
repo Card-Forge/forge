@@ -2174,10 +2174,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     @Override
     public final boolean isValid(final String restriction, final Player sourceController, final Card source, SpellAbility spellAbility) {
-        // if the current player has already lost the game, he can't be a valid target
-        if (hasLost()) {
-            return false;
-        }
 
         final String[] incR = restriction.split("\\.", 2);
 
