@@ -5,4 +5,5 @@ Name=Happy Holidays
 Type=Other
 
 [cards]
+6 R Fruitcake Elemental
 9 R Season's Beatings
