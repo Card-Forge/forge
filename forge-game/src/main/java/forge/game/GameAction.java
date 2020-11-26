@@ -201,10 +201,6 @@ public class GameAction {
             }
 
             if (!c.isToken()) {
-                if (c.removeChangedState()) {
-                    c.updateStateForView();
-                }
-
                 copied = CardFactory.copyCard(c, false);
 
                 if (fromBattlefield) {

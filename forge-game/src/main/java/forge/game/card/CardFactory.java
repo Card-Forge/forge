@@ -85,17 +85,9 @@ public class CardFactory {
             // need to copy this values for the tokens
             out.setEmbalmed(in.isEmbalmed());
             out.setEternalized(in.isEternalized());
-
-            // add abilities
-            //for (SpellAbility sa : in.getIntrinsicSpellAbilities()) {
-            //    out.addSpellAbility(sa);
-            //}
         }
 
         out.setZone(in.getZone());
-        for (final CardStateName state : in.getStates()) {
-            CardFactory.copyState(in, state, out, state);
-        }
         out.setState(in.getCurrentStateName(), true);
         out.setBackSide(in.isBackSide());
 
