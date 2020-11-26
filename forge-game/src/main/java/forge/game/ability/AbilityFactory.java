@@ -455,7 +455,7 @@ public final class AbilityFactory {
         Map<String, String> leftMap = Maps.newHashMap(leftAbility.getMapParams());
         AbilityRecordType leftType = AbilityRecordType.getRecordType(leftMap);
         ApiType leftApi = leftType.getApiTypeOf(leftMap);
-        leftMap.put("StackDecription", leftMap.get("SpellDescription"));
+        leftMap.put("StackDescription", leftMap.get("SpellDescription"));
         leftMap.put("SpellDescription", "Fuse (you may cast both halves of this card from your hand).");
         leftMap.put("ActivationZone", "Hand");
 
@@ -465,7 +465,7 @@ public final class AbilityFactory {
 
         AbilityRecordType rightType = AbilityRecordType.getRecordType(leftMap);
         ApiType rightApi = leftType.getApiTypeOf(rightMap);
-        rightMap.put("StackDecription", rightMap.get("SpellDescription"));
+        rightMap.put("StackDescription", rightMap.get("SpellDescription"));
         rightMap.put("SpellDescription", "");
 
         Cost totalCost = parseAbilityCost(leftState, leftMap, leftType);
