@@ -442,6 +442,9 @@ public class CardDetailUtil {
                 area.append("Hidden");
             } else {
                 area.append(card.getNamedCard());
+                if (!card.getNamedCard2().isEmpty()) {
+                    area.append(", ").append(card.getNamedCard2());
+                }
             }
             area.append(")");
         }

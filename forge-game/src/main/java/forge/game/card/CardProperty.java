@@ -54,6 +54,10 @@ public class CardProperty {
             if (!card.sharesNameWith(source.getNamedCard())) {
                 return false;
             }
+        } else if (property.equals("NamedCard2")) {
+            if (!card.sharesNameWith(source.getNamedCard2())) {
+                return false;
+            }
         } else if (property.equals("NamedByRememberedPlayer")) {
             if (!source.hasRemembered()) {
                 final Card newCard = game.getCardState(source);

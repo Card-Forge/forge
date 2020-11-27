@@ -121,8 +121,14 @@ public class SetStateEffect extends SpellAbilityEffect {
                     String sb = p + " has unmanifested " + tgt.getName();
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                 } else if (hiddenAgenda) {
-                    String sb = p + " has revealed " + tgt.getName() + " with the chosen name " + tgt.getNamedCard();
-                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    if (tgt.hasKeyword("Double agenda")) {
+                        String sb = p + " has revealed " + tgt.getName() + " with the chosen names " +
+                                tgt.getNamedCard() + " and " + tgt.getNamedCard2();
+                        game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    } else {
+                        String sb = p + " has revealed " + tgt.getName() + " with the chosen name " + tgt.getNamedCard();                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                        game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    }
                 }
                 game.fireEvent(new GameEventCardStatsChanged(tgt));
                 if (sa.hasParam("Mega")) {

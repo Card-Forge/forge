@@ -232,6 +232,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private String chosenType = "";
     private List<String> chosenColors;
     private String chosenName = "";
+    private String chosenName2 = "";
     private Integer chosenNumber;
     private Player chosenPlayer;
     private EvenOdd chosenEvenOdd = null;
@@ -1542,6 +1543,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public boolean hasChosenName() {
         return chosenName != null;
     }
+    public boolean hasChosenName2() { return chosenName2 != null; }
 
     public String getChosenName() {
         return chosenName;
@@ -1549,6 +1551,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setChosenName(final String s) {
         chosenName = s;
         view.updateNamedCard(this);
+    }
+    public String getChosenName2() {
+        return chosenName2;
+    }
+    public final void setChosenName2(final String s) {
+        chosenName2 = s;
+        view.updateNamedCard2(this);
     }
 
     public boolean hasChosenEvenOdd() {
@@ -1570,6 +1579,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final void setNamedCard(final String s) {
         setChosenName(s);
+    }
+    public final String getNamedCard2() { return getChosenName2(); }
+    public final void setNamedCard2(final String s) {
+        setChosenName2(s);
     }
 
     public final boolean getDrawnThisTurn() {

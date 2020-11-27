@@ -369,6 +369,12 @@ public class CardView extends GameEntityView {
     void updateNamedCard(Card c) {
         set(TrackableProperty.NamedCard, c.getNamedCard());
     }
+    public String getNamedCard2() {
+        return get(TrackableProperty.NamedCard2);
+    }
+    void updateNamedCard2(Card c) {
+        set(TrackableProperty.NamedCard2, c.getNamedCard2());
+    }
 
     public boolean mayPlayerLook(PlayerView pv) {
         TrackableCollection<PlayerView> col = get(TrackableProperty.PlayerMayLook);

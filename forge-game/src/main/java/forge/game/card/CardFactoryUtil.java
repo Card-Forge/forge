@@ -198,9 +198,18 @@ public class CardFactoryUtil {
         Predicate<ICardFace> cpp = Predicates.alwaysTrue();
         //Predicate<Card> pc = Predicates.in(player.getAllCards());
         // TODO This would be better to send in the player's deck, not all cards
-        String name = player.getController().chooseCardName(sa, cpp, "Card", "Name a card for " + card.getName());
+        String name = player.getController().chooseCardName(sa, cpp, "Card",
+                "Name a card for " + card.getName());
         if (name == null || name.isEmpty()) {
             return false;
+        }
+        if (card.hasKeyword("Double agenda")) {
+            String name2 = player.getController().chooseCardName(sa, cpp, "Card",
+                    "Name a second card for " + card.getName());
+            if (name2 == null || name2.isEmpty()) {
+                return false;
+            }
+            card.setNamedCard2(name2);
         }
 
         card.setNamedCard(name);

@@ -342,7 +342,9 @@ public class GameCopier {
             if (!c.getNamedCard().isEmpty()) {
                 newCard.setNamedCard(c.getNamedCard());
             }
-
+            if (!c.getNamedCard2().isEmpty()) {
+                newCard.setNamedCard2(c.getNamedCard());
+            }
             newCard.setSVars(c.getSVars());
         }
 

@@ -1029,7 +1029,7 @@ Hymn of the Wilds
 Incendiary Dissent
 Natural Unity
 #Sovereign's Realm
-#Summoner's Bond
+Summoner's Bond
 Weight Advantage
 
 [KLD Planeswalker Decks]
@@ -3579,7 +3579,7 @@ Hymn of the Wilds
 Incendiary Dissent
 Natural Unity
 #Sovereign's Realm
-#Summoner's Bond
+Summoner's Bond
 Weight Advantage
 Kaya, Ghost Assassin|CN2|2
 
