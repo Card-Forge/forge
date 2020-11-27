@@ -4,8 +4,8 @@ Types:Legendary Creature Kor Scout
 PT:2/2
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigTarget | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of combat on your turn, you may attach any number of Auras and Equipment you control to target permanent or player.
 SVar:TrigTarget:DB$ Pump | ValidTgts$ Permanent,Player | TgtPrompt$ Select target permanent or player | RememberObjects$ Targeted | SubAbility$ DBAttach
-SVar:DBAttach:DB$ RepeatEach | UseImprinted$ True | RepeatSubAbility$ DBRepeatAttach | RepeatCards$ Aura.YouCtrl,Equipment.YouCtrl
-SVar:DBRepeatAttach:DB$ Attach | Defined$ Remembered | Object$ Imprinted | Optional$ True | SubAbility$ DBCleanup
+SVar:DBAttach:DB$ RepeatEach | UseImprinted$ True | RepeatSubAbility$ DBRepeatAttach | SubAbility$ DBCleanup | RepeatCards$ Aura.YouCtrl,Equipment.YouCtrl
+SVar:DBRepeatAttach:DB$ Attach | Defined$ Remembered | Object$ Imprinted | Optional$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Partner
 DeckHints:Type$Aura|Equipment
