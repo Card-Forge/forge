@@ -740,20 +740,22 @@ public class AiController {
         }
         else {
             Cost payCosts = sa.getPayCosts();
-            ManaCost mana = payCosts.getTotalMana();
-            if (mana != null) {
-                if(mana.countX() > 0) {
-                    // Set PayX here to maximum value.
-                    final int xPay = ComputerUtilMana.determineLeftoverMana(sa, player);
-                    if (xPay <= 0) {
-                        return AiPlayDecision.CantAffordX;
-                    }
-                    card.setSVar("PayX", Integer.toString(xPay));
-                } else if (mana.isZero()) {
-                    // if mana is zero, but card mana cost does have X, then something is wrong
-                    ManaCost cardCost = card.getManaCost(); 
-                    if (cardCost != null && cardCost.countX() > 0) {
-                        return AiPlayDecision.CantPlayAi;
+            if(payCosts != null) {
+                ManaCost mana = payCosts.getTotalMana();
+                if (mana != null) {
+                    if(mana.countX() > 0) {
+                        // Set PayX here to maximum value.
+                        final int xPay = ComputerUtilMana.determineLeftoverMana(sa, player);
+                        if (xPay <= 0) {
+                            return AiPlayDecision.CantAffordX;
+                        }
+                        card.setSVar("PayX", Integer.toString(xPay));
+                    } else if (mana.isZero()) {
+                        // if mana is zero, but card mana cost does have X, then something is wrong
+                        ManaCost cardCost = card.getManaCost();
+                        if (cardCost != null && cardCost.countX() > 0) {
+                            return AiPlayDecision.CantPlayAi;
+                        }
                     }
                 }
             }
