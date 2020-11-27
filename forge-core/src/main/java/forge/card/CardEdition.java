@@ -39,6 +39,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 
 /**
@@ -74,7 +75,11 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         MODERN // 8th Edition and newer
     }
 
-    public enum EditionSection {
+    // reserved names of sections inside edition files, that are not parsed as cards
+    private static final List<String> reservedSectionNames = ImmutableList.of("metadata", "tokens");
+
+    // commonly used printsheets with collector number
+    public enum EditionSectionWithCollectorNumbers {
         CARDS("cards"),
         PRECON_PRODUCT("precon product"),
         BORDERLESS("borderless"),
@@ -85,10 +90,14 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
         private final String name;
 
-        EditionSection(final String n) { this.name = n; }
+        EditionSectionWithCollectorNumbers(final String n) { this.name = n; }
 
         public String getName() {
             return name;
+        }
+
+        public static List<String> getNames() {
+            return Arrays.stream(EditionSectionWithCollectorNumbers.values()).map(s -> s.getName()).collect(Collectors.toList());
         }
     }
 
@@ -145,19 +154,23 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private String doublePickDuringDraft = "";
     private final ListMultimap<String, CardInSet> cardMap;
     private final Map<String, Integer> tokenNormalized;
+    // custom print sheets that will be loaded lazily
+    private final Map<String, List<String>> customPrintSheetsToParse;
 
     private int boosterArts = 1;
     private SealedProduct.Template boosterTpl = null;
 
-    private CardEdition(ListMultimap<String, CardInSet> cardMap, Map<String, Integer> tokens) {
+    private CardEdition(ListMultimap<String, CardInSet> cardMap, Map<String, Integer> tokens, Map<String, List<String>> customPrintSheetsToParse) {
         this.cardMap = cardMap;
         this.tokenNormalized = tokens;
+        this.customPrintSheetsToParse = customPrintSheetsToParse;
     }
 
     private CardEdition(CardInSet[] cards, Map<String, Integer> tokens) {
         this.cardMap = ArrayListMultimap.create();
         this.cardMap.replaceValues("cards", Arrays.asList(cards));
         this.tokenNormalized = tokens;
+        this.customPrintSheetsToParse = new HashMap<>();
     }
 
     /**
@@ -309,6 +322,14 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
             sheets.add(sheet);
         }
+
+        for(String sheetName : customPrintSheetsToParse.keySet()) {
+            List<String> sheetToParse = customPrintSheetsToParse.get(sheetName);
+            CardPool sheetPool = CardPool.fromCardList(sheetToParse);
+            PrintSheet sheet = new PrintSheet(String.format("%s %s", this.getCode(), sheetName), sheetPool);
+            sheets.add(sheet);
+        }
+
         return sheets;
     }
 
@@ -342,30 +363,39 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
             ListMultimap<String, CardInSet> cardMap = ArrayListMultimap.create();
             Map<String, Integer> tokenNormalized = new HashMap<>();
+            Map<String, List<String>> customPrintSheetsToParse = new HashMap<>();
+            List<String> editionSectionsWithCollectorNumbers = EditionSectionWithCollectorNumbers.getNames();
 
-            for(EditionSection section : EditionSection.values()) {
-                String name = section.getName();
-
-                if (!contents.containsKey(name)) {
+            for (String sectionName : contents.keySet()) {
+                // skip reserved section names like 'metadata' and 'tokens' that are handled separately
+                if (reservedSectionNames.contains(sectionName)) {
                     continue;
                 }
+                // parse sections of the format "<collector number> <rarity> <name>"
+                if (editionSectionsWithCollectorNumbers.contains(sectionName)) {
+                    for(String line : contents.get(sectionName)) {
+                        Matcher matcher = pattern.matcher(line);
 
-                for(String line : contents.get(name)) {
-                    Matcher matcher = pattern.matcher(line);
+                        if (!matcher.matches()) {
+                            continue;
+                        }
 
-                    if (!matcher.matches()) {
-                        continue;
+                        String collectorNumber = matcher.group(2);
+                        CardRarity r = CardRarity.smartValueOf(matcher.group(4));
+                        String cardName = matcher.group(5);
+                        CardInSet cis = new CardInSet(cardName, collectorNumber, r);
+
+                        cardMap.put(sectionName, cis);
                     }
-
-                    String collectorNumber = matcher.group(2);
-                    CardRarity r = CardRarity.smartValueOf(matcher.group(4));
-                    String cardName = matcher.group(5);
-                    CardInSet cis = new CardInSet(cardName, collectorNumber, r);
-
-                    cardMap.put(name, cis);
+                }
+                // save custom print sheets of the format "<amount> <name>|<setcode>|<art index>"
+                // to parse later when printsheets are loaded lazily (and the cardpool is already initialized)
+                else {
+                    customPrintSheetsToParse.put(sectionName, contents.get(sectionName));
                 }
             }
 
+            // parse tokens section
             if (contents.containsKey("tokens")) {
                 for(String line : contents.get("tokens")) {
                     if (StringUtils.isBlank(line))
@@ -379,8 +409,9 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 }
             }
 
-            CardEdition res = new CardEdition(cardMap, tokenNormalized);
+            CardEdition res = new CardEdition(cardMap, tokenNormalized, customPrintSheetsToParse);
 
+            // parse metadata section
             FileSection section = FileSection.parse(contents.get("metadata"), FileSection.EQUALS_KV_SEPARATOR);
             res.name  = section.get("name");
             res.date  = parseDate(section.get("date"));
