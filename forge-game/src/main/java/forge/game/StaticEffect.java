@@ -214,6 +214,7 @@ public class StaticEffect {
             p.removeMaxLandPlays(getTimestamp());
             p.removeMaxLandPlaysInfinite(getTimestamp());
 
+            p.removeControlledWhileSearching(getTimestamp());
             p.removeControlVote(getTimestamp());
             p.removeAdditionalVote(getTimestamp());
             p.removeAdditionalOptionalVote(getTimestamp());

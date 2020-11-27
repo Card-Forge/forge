@@ -421,7 +421,7 @@ public class Game {
     public synchronized void setGameOver(GameEndReason reason) {
         age = GameStage.GameOver;
         for (Player p : allPlayers) {
-            p.setMindSlaveMaster(null); // for correct totals
+            p.clearController();
         }
 
         for (Player p : getPlayers()) {
@@ -941,19 +941,6 @@ public class Game {
         long maxValue = 0;
         for (Player p : getPlayers()) {
             Long v = p.getHighestControlVote();
-            if (v != null && v > maxValue) {
-                maxValue = v;
-                result = p;
-            }
-        }
-        return result;
-    }
-
-    public Player getControlOppSearchLib() {
-        Player result = null;
-        long maxValue = 0;
-        for (Player p : getPlayers()) {
-            Long v = p.getHighestControlOppSearchLib();
             if (v != null && v > maxValue) {
                 maxValue = v;
                 result = p;

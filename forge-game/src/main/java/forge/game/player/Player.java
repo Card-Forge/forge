@@ -60,6 +60,7 @@ import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -144,8 +145,10 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private PlayerStatistics stats = new PlayerStatistics();
     private PlayerController controller;
-    private PlayerController controllerCreator = null;
-    private Player mindSlaveMaster = null;
+
+    private NavigableMap<Long, Pair<Player, PlayerController>> controlledBy = Maps.newTreeMap();
+
+    private NavigableMap<Long, Player> controlledWhileSearching = Maps.newTreeMap();
 
     private int teamNumber = -1;
     private Card activeScheme = null;
@@ -164,8 +167,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Map<Long, Integer> additionalVotes = Maps.newHashMap();
     private Map<Long, Integer> additionalOptionalVotes = Maps.newHashMap();
     private SortedSet<Long> controlVotes = Sets.newTreeSet();
-
-    private SortedSet<Long> controlOppSearchLib = Sets.newTreeSet();
 
     private final AchievementTracker achievementTracker = new AchievementTracker();
     private final PlayerView view;
@@ -1683,7 +1684,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         // Replacement effects
         final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(this);
         repRunParams.put(AbilityKey.Number, n);
-        
+
         if (destination == ZoneType.Graveyard && !bottom) {
             switch (getGame().getReplacementHandler().run(ReplacementType.Mill, repRunParams)) {
                 case NotReplaced:
@@ -2413,38 +2414,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final LobbyPlayer getOriginalLobbyPlayer() {
-        return controllerCreator.getLobbyPlayer();
+        return controller.getLobbyPlayer();
     }
 
     public final RegisteredPlayer getRegisteredPlayer() {
         return game.getMatch().getPlayers().get(game.getRegisteredPlayers().indexOf(this));
-    }
-
-    public final boolean isMindSlaved() {
-        return mindSlaveMaster != null;
-    }
-
-    public final Player getMindSlaveMaster() {
-        return mindSlaveMaster;
-    }
-
-    public final void setMindSlaveMaster(final Player mindSlaveMaster0) {
-        if (mindSlaveMaster == mindSlaveMaster0) {
-            return;
-        }
-        mindSlaveMaster = mindSlaveMaster0;
-        view.updateMindSlaveMaster(this);
-
-        if (mindSlaveMaster != null) {
-            final LobbyPlayer oldLobbyPlayer = getLobbyPlayer();
-            final PlayerController oldController = getController();
-            final IGameEntitiesFactory master = (IGameEntitiesFactory)mindSlaveMaster.getLobbyPlayer();
-            controller = master.createMindSlaveController(mindSlaveMaster, this);
-            game.fireEvent(new GameEventPlayerControl(this, oldLobbyPlayer, oldController, getLobbyPlayer(), controller));
-        } else {
-            controller = controllerCreator;
-            game.fireEvent(new GameEventPlayerControl(this, getLobbyPlayer(), controller, null, null));
-        }
     }
 
     private void setOutcome(PlayerOutcome outcome) {
@@ -2548,14 +2522,73 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final PlayerController getController() {
+        if (!controlledBy.isEmpty()) {
+            return controlledBy.lastEntry().getValue().getValue();
+        }
         return controller;
     }
 
+    public final Player getControllingPlayer() {
+        if (!controlledBy.isEmpty()) {
+            return controlledBy.lastEntry().getValue().getKey();
+        }
+        return null;
+    }
+
+    public void addController(long timestamp, Player pl) {
+        final IGameEntitiesFactory master = (IGameEntitiesFactory)pl.getLobbyPlayer();
+        addController(timestamp, master.createMindSlaveController(pl, this), true);
+    }
+
+    public void addController(long timestamp, PlayerController pc, boolean event) {
+        final LobbyPlayer oldLobbyPlayer = getLobbyPlayer();
+        final PlayerController oldController = getController();
+
+        controlledBy.put(timestamp, Pair.of(pc.getPlayer(), pc));
+        getView().updateMindSlaveMaster(this);
+
+        if (event) {
+            game.fireEvent(new GameEventPlayerControl(this, oldLobbyPlayer, oldController, getLobbyPlayer(), getController()));
+        }
+    }
+
+    public void removeController(long timestamp) {
+        removeController(timestamp, true);
+    }
+    public void removeController(long timestamp, boolean event) {
+        final LobbyPlayer oldLobbyPlayer = getLobbyPlayer();
+        final PlayerController oldController = getController();
+
+        controlledBy.remove(timestamp);
+        if (event) {
+            game.fireEvent(new GameEventPlayerControl(this, oldLobbyPlayer, oldController, getLobbyPlayer(), getController()));
+        }
+    }
+
+    public void clearController() {
+        controlledBy.clear();
+    }
+
+
+    public Map.Entry<Long, Player> getControlledWhileSearching() {
+        if (controlledWhileSearching.isEmpty()) {
+            return null;
+        }
+        return controlledWhileSearching.lastEntry();
+    }
+
+    public void addControlledWhileSearching(long timestamp, Player pl) {
+        controlledWhileSearching.put(timestamp, pl);
+    }
+
+    public void removeControlledWhileSearching(long timestamp) {
+        controlledWhileSearching.remove(timestamp);
+    }
+
     public final void setFirstController(PlayerController ctrlr) {
-        if (controllerCreator != null) {
+        if (controller != null) {
             throw new IllegalStateException("Controller creator already assigned");
         }
-        controllerCreator = ctrlr;
         controller = ctrlr;
         updateAvatar();
         updateSleeve();
@@ -2576,12 +2609,12 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Run a procedure using a different controller
      */
     public void runWithController(Runnable proc, PlayerController tempController) {
-        PlayerController oldController = controller;
-        controller = tempController;
+        long ts = game.getNextTimestamp();
+        this.addController(ts, tempController, false);
         try {
             proc.run();
         } finally {
-            controller = oldController;
+            this.removeController(ts, false);
         }
     }
 
@@ -3020,7 +3053,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         CardCollectionView view = CardCollection.getView(legalCompanions);
 
         SpellAbility fakeSa = new SpellAbility.EmptySa(ApiType.CompanionChoose,  legalCompanions.get(0), this);
-        return controller.chooseSingleEntityForEffect(view, fakeSa, Localizer.getInstance().getMessage("lblChooseACompanion"), true, null);
+        return player.chooseSingleEntityForEffect(view, fakeSa, Localizer.getInstance().getMessage("lblChooseACompanion"), true, null);
     }
 
     public boolean deckMatchesDeckRestriction(Card source, String restriction) {
@@ -3412,33 +3445,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             return null;
         }
         return controlVotes.last();
-    }
-
-    public boolean addControlOppSearchLib(long timestamp) {
-        if (controlOppSearchLib.add(timestamp)) {
-            updateControlOppSearchLib();
-            return true;
-        }
-        return false;
-    }
-
-    void updateControlOppSearchLib() { // needs to update all players
-        Player control = getGame().getControlOppSearchLib();
-        for (Player pl : getGame().getPlayers()) {
-            pl.getView().updateControlOppSearchLib(pl.equals(control));
-            getGame().fireEvent(new GameEventPlayerStatsChanged(pl, false));
-        }
-    }
-
-    public Set<Long> getControlOppSearchLib() {
-        return controlOppSearchLib;
-    }
-
-    public Long getHighestControlOppSearchLib() {
-        if (controlOppSearchLib.isEmpty()) {
-            return null;
-        }
-        return controlOppSearchLib.last();
     }
 
     public void addCycled(SpellAbility sp) {

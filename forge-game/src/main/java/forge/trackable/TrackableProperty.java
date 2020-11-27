@@ -149,7 +149,6 @@ public enum TrackableProperty {
     AdditionalVote(TrackableTypes.IntegerType),
     OptionalAdditionalVote(TrackableTypes.IntegerType),
     ControlVotes(TrackableTypes.BooleanType),
-    ControlOppSearchLib(TrackableTypes.BooleanType),
     Keywords(TrackableTypes.KeywordCollectionViewType, FreezeMode.IgnoresFreeze),
     Commander(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     CommanderCast(TrackableTypes.IntegerMapType),

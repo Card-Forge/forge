@@ -296,9 +296,6 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.ControlVotes, val);
     }
 
-    public boolean getControlOppSearchLib() { return get(TrackableProperty.ControlOppSearchLib); }
-    public void updateControlOppSearchLib(boolean val) { set(TrackableProperty.ControlOppSearchLib, val); }
-
     public ImmutableMultiset<String> getKeywords() {
         return get(TrackableProperty.Keywords);
     }
@@ -358,7 +355,7 @@ public class PlayerView extends GameEntityView {
         return get(TrackableProperty.MindSlaveMaster);
     }
     void updateMindSlaveMaster(Player p) {
-        set(TrackableProperty.MindSlaveMaster, PlayerView.get(p.getMindSlaveMaster()));
+        set(TrackableProperty.MindSlaveMaster, PlayerView.get(p.getControllingPlayer()));
     }
 
     public FCollectionView<CardView> getAnte() {

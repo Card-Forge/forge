@@ -43,7 +43,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
-    
+
     private boolean isHidden(SpellAbility sa) {
         boolean hidden = sa.hasParam("Hidden");
         if (!hidden && sa.hasParam("Origin")) {
@@ -484,7 +484,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final boolean optional = sa.hasParam("Optional");
         final long ts = game.getNextTimestamp();
         boolean combatChanged = false;
-        
+
         for (final Card tgtC : tgtCards) {
             final Card gameCard = game.getCardState(tgtC, null);
             // gameCard is LKI in that case, the card is not in game anymore
@@ -644,7 +644,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         combatChanged = true;
                     }
                     if (sa.hasParam("Ninjutsu")) {
-                        // Ninjutsu need to get the Defender of the Returned Creature 
+                        // Ninjutsu need to get the Defender of the Returned Creature
                         final Card returned = sa.getPaidList("Returned").getFirst();
                         final GameEntity defender = game.getCombat().getDefenderByAttacker(returned);
                         game.getCombat().addAttacker(movedCard, defender);
@@ -870,11 +870,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
 
-        String changeType = sa.getParam("ChangeType"); 
+        String changeType = sa.getParam("ChangeType");
 
         CardCollection fetchList;
-        Player originalDecider = decider;
-        Player deciderControl = game.getControlOppSearchLib();
         boolean shuffleMandatory = true;
         boolean searchedLibrary = false;
         if (defined) {
@@ -891,14 +889,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             fetchList = new CardCollection(player.getCardsIn(origin));
             if (origin.contains(ZoneType.Library) && !sa.hasParam("NoLooking")) {
                 searchedLibrary = true;
-                if (deciderControl != null) { decider = deciderControl; }
 
                 if (decider.hasKeyword("LimitSearchLibrary")) { // Aven Mindcensor
                     fetchList.removeAll(player.getCardsIn(ZoneType.Library));
                     final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
                     if (fetchNum == 0) {
                         searchedLibrary = false;
-                        if (deciderControl != null) { decider = originalDecider; }
                     }
                     else {
                         fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
@@ -906,11 +902,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 if (!decider.canSearchLibraryWith(sa, player)) {
                     fetchList.removeAll(player.getCardsIn(ZoneType.Library));
-                    // "if you do/sb does, shuffle" is not mandatory (usually a triggered ability), should has this param. 
+                    // "if you do/sb does, shuffle" is not mandatory (usually a triggered ability), should has this param.
                     // "then shuffle" is mandatory
                     shuffleMandatory = !sa.hasParam("ShuffleNonMandatory");
                     searchedLibrary = false;
-                    if (deciderControl != null) { decider = originalDecider; }
                 }
             }
         }
@@ -919,7 +914,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         DelayedReveal delayedReveal = null;
         if (!defined && !sa.hasParam("AlreadyRevealed")) {
             if (origin.contains(ZoneType.Library) && searchedLibrary) {
-                if (deciderControl != null) { decider = deciderControl; }
                 final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
                 CardCollectionView shown = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
                 // Look at whole library before moving onto choosing a card
@@ -930,11 +924,17 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
 
+        Long controlTimestamp = null;
         if (searchedLibrary) {
-            if (deciderControl != null) { decider = deciderControl; }
             if (decider.equals(player)) {
-                // should only count the number of searching player's own library
+                Map.Entry<Long, Player> searchControlPlayer = player.getControlledWhileSearching();
+                if (searchControlPlayer != null) {
+                    controlTimestamp = searchControlPlayer.getKey();
+                    player.addController(controlTimestamp, searchControlPlayer.getValue());
+                }
+
                 decider.incLibrarySearched();
+                // should only count the number of searching player's own library
                 // Panglacial Wurm
                 CardCollection canCastWhileSearching = CardLists.getKeyword(fetchList,
                         "While you're searching your library, you may cast CARDNAME from your library.");
@@ -1113,7 +1113,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     Player newController = sa.getActivatingPlayer();
                     if (sa.hasParam("NewController")) {
                         newController = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("NewController"), sa).get(0);
-                    } 
+                    }
                     c.setController(newController, game.getNextTimestamp());
                 }
                 if (sa.hasParam("WithCounters")) {
@@ -1235,7 +1235,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             else {
                 movedCard = game.getAction().moveTo(c.getController().getZone(destination), c, cause, moveParams);
             }
-            
+
             movedCards.add(movedCard);
 
             if (originZone != null) {
@@ -1247,7 +1247,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 runParams.put(AbilityKey.Championed, c);
                 game.getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
             }
-            
+
             if (remember) {
                 source.addRemembered(movedCard);
                 // addRememberedFromCardState ?
@@ -1271,7 +1271,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 || (sa.hasParam("Reveal") && !movedCards.isEmpty())) && !sa.hasParam("NoReveal")) {
             game.getAction().reveal(movedCards, player);
         }
-        
+
         if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined && shuffleMandatory)
                 || (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle")))) {
             player.shuffle(sa);
@@ -1282,6 +1282,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             game.fireEvent(new GameEventCombatChanged());
         }
         triggerList.triggerChangesZoneAll(game);
+
+        // remove Controlled While Searching
+        if (controlTimestamp != null) {
+            player.removeController(controlTimestamp);
+        }
     }
 
     private static boolean allowMultiSelect(Player decider, SpellAbility sa) {
@@ -1307,13 +1312,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      * @param si
      *            a {@link forge.game.spellability.SpellAbilityStackInstance}
      *            object.
-     * @param game 
+     * @param game
      */
     private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final Game game, CardZoneTable triggerList) {
         final Card tgtHost = tgtSA.getHostCard();
         final Zone originZone = tgtHost.getZone();
         game.getStack().remove(si);
-        
+
         Map<AbilityKey,Object> params = AbilityKey.newMap();
         params.put(AbilityKey.StackSa, tgtSA);
         params.put(AbilityKey.StackSi, si);
