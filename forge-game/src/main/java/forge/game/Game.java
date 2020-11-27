@@ -949,6 +949,19 @@ public class Game {
         return result;
     }
 
+    public Player getControlOppSearchLib() {
+        Player result = null;
+        long maxValue = 0;
+        for (Player p : getPlayers()) {
+            Long v = p.getHighestControlOppSearchLib();
+            if (v != null && v > maxValue) {
+                maxValue = v;
+                result = p;
+            }
+        }
+        return result;
+    }
+
     public void onCleanupPhase() {
         clearCounterAddedThisTurn();
         for (Player player : getPlayers()) {

@@ -296,6 +296,9 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.ControlVotes, val);
     }
 
+    public boolean getControlOppSearchLib() { return get(TrackableProperty.ControlOppSearchLib); }
+    public void updateControlOppSearchLib(boolean val) { set(TrackableProperty.ControlOppSearchLib, val); }
+
     public ImmutableMultiset<String> getKeywords() {
         return get(TrackableProperty.Keywords);
     }

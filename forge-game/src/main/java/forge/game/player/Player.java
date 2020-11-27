@@ -165,6 +165,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Map<Long, Integer> additionalOptionalVotes = Maps.newHashMap();
     private SortedSet<Long> controlVotes = Sets.newTreeSet();
 
+    private SortedSet<Long> controlOppSearchLib = Sets.newTreeSet();
+
     private final AchievementTracker achievementTracker = new AchievementTracker();
     private final PlayerView view;
 
@@ -3410,6 +3412,33 @@ public class Player extends GameEntity implements Comparable<Player> {
             return null;
         }
         return controlVotes.last();
+    }
+
+    public boolean addControlOppSearchLib(long timestamp) {
+        if (controlOppSearchLib.add(timestamp)) {
+            updateControlOppSearchLib();
+            return true;
+        }
+        return false;
+    }
+
+    void updateControlOppSearchLib() { // needs to update all players
+        Player control = getGame().getControlOppSearchLib();
+        for (Player pl : getGame().getPlayers()) {
+            pl.getView().updateControlOppSearchLib(pl.equals(control));
+            getGame().fireEvent(new GameEventPlayerStatsChanged(pl, false));
+        }
+    }
+
+    public Set<Long> getControlOppSearchLib() {
+        return controlOppSearchLib;
+    }
+
+    public Long getHighestControlOppSearchLib() {
+        if (controlOppSearchLib.isEmpty()) {
+            return null;
+        }
+        return controlOppSearchLib.last();
     }
 
     public void addCycled(SpellAbility sp) {

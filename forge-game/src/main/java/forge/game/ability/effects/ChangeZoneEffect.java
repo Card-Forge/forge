@@ -797,6 +797,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
     }
 
     private static void changeZonePlayerInvariant(Player decider, SpellAbility sa, Player player) {
+        final Game game = player.getGame();
+
         if (sa.usesTargeting()) {
             final List<Player> players = Lists.newArrayList(sa.getTargets().getTargetPlayers());
             player = sa.hasParam("DefinedPlayer") ? player : players.get(0);
@@ -872,20 +874,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         CardCollection fetchList;
         Player originalDecider = decider;
-        Player deciderControl = null;
-        PlayerCollection opps = decider.getOpponents();
-        long dcts = 0;
-        for (Player o : opps) {
-            for (String k : o.getKeywords()) {
-                if (k.equals("You control your opponents while they're searching their libraries.")) {
-                    long ts = o.getKeywordCard().getTimestamp();
-                    if (deciderControl == null || ts > (dcts)) {
-                        deciderControl = o;
-                        dcts = ts;
-                    }
-                }
-            }
-        }
+        Player deciderControl = game.getControlOppSearchLib();
         boolean shuffleMandatory = true;
         boolean searchedLibrary = false;
         if (defined) {
@@ -978,7 +967,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             shuffleMandatory = false;
         }
 
-        final Game game = player.getGame();
         if (sa.hasParam("Unimprint")) {
             source.clearImprintedCards();
         }
