@@ -39,7 +39,6 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 
 /**
@@ -97,7 +96,12 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         }
 
         public static List<String> getNames() {
-            return Arrays.stream(EditionSectionWithCollectorNumbers.values()).map(s -> s.getName()).collect(Collectors.toList());
+            List<String> list = new ArrayList<>();
+            for (EditionSectionWithCollectorNumbers s : EditionSectionWithCollectorNumbers.values()) {
+                String sName = s.getName();
+                list.add(sName);
+            }
+            return list;
         }
     }
 
