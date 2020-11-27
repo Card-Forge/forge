@@ -2537,14 +2537,14 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public void addController(long timestamp, Player pl) {
         final IGameEntitiesFactory master = (IGameEntitiesFactory)pl.getLobbyPlayer();
-        addController(timestamp, master.createMindSlaveController(pl, this), true);
+        addController(timestamp, pl, master.createMindSlaveController(pl, this), true);
     }
 
-    public void addController(long timestamp, PlayerController pc, boolean event) {
+    public void addController(long timestamp, Player pl, PlayerController pc, boolean event) {
         final LobbyPlayer oldLobbyPlayer = getLobbyPlayer();
         final PlayerController oldController = getController();
 
-        controlledBy.put(timestamp, Pair.of(pc.getPlayer(), pc));
+        controlledBy.put(timestamp, Pair.of(pl, pc));
         getView().updateMindSlaveMaster(this);
 
         if (event) {
@@ -2610,11 +2610,11 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public void runWithController(Runnable proc, PlayerController tempController) {
         long ts = game.getNextTimestamp();
-        this.addController(ts, tempController, false);
+        addController(ts, this, tempController, false);
         try {
             proc.run();
         } finally {
-            this.removeController(ts, false);
+            removeController(ts, false);
         }
     }
 
