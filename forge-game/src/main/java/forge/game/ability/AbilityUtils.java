@@ -37,6 +37,7 @@ import forge.util.collect.FCollectionView;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -758,9 +759,9 @@ public class AbilityUtils {
             final SpellAbility root = sa.getRootAbility();
             final String[] l = calcX[1].split("/");
             final String m = CardFactoryUtil.extractOperators(calcX[1]);
-            final int count = (Integer) root.getTriggeringObject(AbilityKey.fromString(l[0]));
+            final Integer count = (Integer) root.getTriggeringObject(AbilityKey.fromString(l[0]));
 
-            return CardFactoryUtil.doXMath(count, m, card) * multiplier;
+            return CardFactoryUtil.doXMath(ObjectUtils.firstNonNull(count, 0), m, card) * multiplier;
         }
         else if (calcX[0].startsWith("Replaced")) {
             final SpellAbility root = sa.getRootAbility();
@@ -772,9 +773,9 @@ public class AbilityUtils {
             final SpellAbility root = sa.getRootAbility();
             final String[] l = calcX[1].split("/");
             final String m = CardFactoryUtil.extractOperators(calcX[1]);
-            final int count = (Integer) root.getReplacingObject(AbilityKey.fromString(l[0]));
+            final Integer count = (Integer) root.getReplacingObject(AbilityKey.fromString(l[0]));
 
-            return CardFactoryUtil.doXMath(count, m, card) * multiplier;
+            return CardFactoryUtil.doXMath(ObjectUtils.firstNonNull(count, 0), m, card) * multiplier;
         }
         else {
             return 0;
