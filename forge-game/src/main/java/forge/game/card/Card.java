@@ -220,9 +220,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private Map<String, Integer> xManaCostPaidByColor;
 
-    private int sunburstValue = 0;
-    private byte colorsPaid = 0;
-
     private Player owner = null;
     private Player controller = null;
     private long controllerTimestamp = 0;
@@ -1053,20 +1050,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
             list.addAll(kw.getTriggers());
         }
-    }
-
-    public final int getSunburstValue() {
-        return sunburstValue;
-    }
-    public final void setSunburstValue(final int valueIn) {
-        sunburstValue = valueIn;
-    }
-
-    public final byte getColorsPaid() {
-        return colorsPaid;
-    }
-    public final void setColorsPaid(final byte s) {
-        colorsPaid |= s;
     }
 
     public final int getXManaCostPaid() {
@@ -6434,7 +6417,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         removeSVar("PayX"); // Temporary AI X announcement variable
         removeSVar("IsCastFromPlayEffect"); // Temporary SVar indicating that the spell is cast indirectly via AF Play
-        setSunburstValue(0); // Sunburst
         setXManaCostPaidByColor(null);
         setKickerMagnitude(0);
         setPseudoMultiKickerMagnitude(0);

@@ -766,8 +766,6 @@ public class HumanPlay {
             }
 
             source.setXManaCostPaidByColor(toPay.getXManaCostPaidByColor());
-            source.setColorsPaid(toPay.getColorsPaid());
-            source.setSunburstValue(toPay.getSunburst());
         }
 
         // Handle convoke and offerings

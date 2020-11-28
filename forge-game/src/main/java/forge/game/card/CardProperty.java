@@ -722,8 +722,11 @@ public class CardProperty {
                         }
                         break;
                     case "ActivationColor":
-                        byte manaSpent = source.getColorsPaid();
-                        if (!CardUtil.getColors(card).hasAnyColor(manaSpent)) {
+                        SpellAbility castSA = source.getCastSA();
+                        if (castSA == null) {
+                            return false;
+                        }
+                        if (!CardUtil.getColors(card).hasAnyColor(castSA.getPayingColors().getColor())) {
                             return false;
                         }
                         break;
