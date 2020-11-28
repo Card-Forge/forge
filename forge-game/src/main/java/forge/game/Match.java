@@ -29,11 +29,13 @@ public class Match {
     private final GameRules rules;
     private final String title;
 
-    private final List<GameOutcome> gamesPlayed = new ArrayList<>();
-    private final List<GameOutcome> gamesPlayedRo;
+    private Game lastGame = null;
+    private final Map<Integer, Game> runningGames = Maps.newHashMap();
+    private final Map<Integer, GameOutcome> gameOutcomes = Maps.newHashMap();
+
+    private GameOutcome lastOutcome = null;
 
     public Match(final GameRules rules0, final List<RegisteredPlayer> players0, final String title) {
-        gamesPlayedRo = Collections.unmodifiableList(gamesPlayed);
         players = Collections.unmodifiableList(Lists.newArrayList(players0));
         rules = rules0;
         this.title = title;
@@ -54,15 +56,12 @@ public class Match {
         return titleAppend.toString();
     }
 
-    public final List<GameOutcome> getPlayedGames() {
-        return gamesPlayedRo;
-    }
-
     public void addGamePlayed(Game finished) {
         if (!finished.isGameOver()) {
             throw new IllegalStateException("Game is not over yet.");
         }
-        gamesPlayed.add(finished.getOutcome());
+        lastOutcome = finished.getOutcome();
+        gameOutcomes.put(finished.getId(), finished.getOutcome());
     }
 
     public Game createGame() {
@@ -85,9 +84,7 @@ public class Match {
             game.fireEvent(new GameEventAnteCardsSelected(list));
         }
 
-        GameOutcome lastOutcome = gamesPlayed.isEmpty() ? null : gamesPlayed.get(gamesPlayed.size() - 1);
-
-        game.getAction().startGame(lastOutcome, startGameHook);
+        game.getAction().startGame(this.lastOutcome, startGameHook);
 
         if (rules.useAnte()) {
             executeAnte(game);
@@ -97,26 +94,44 @@ public class Match {
 
         // will pull UI dialog, when the UI is listening
         game.fireEvent(new GameEventGameFinished());
+        // FIXME needed to close the Match Dialog because that this moment there isn't any game
+        lastGame = game;
+        runningGames.remove(game.getId());
+
+        //run GC after game is finished
+        System.gc();
+    }
+
+    public Game getGameById(int id) {
+        if (runningGames.containsKey(id)) {
+            return runningGames.get(id);
+        }
+        // FIXME fallback for last game in case the UI is outdated
+        return lastGame;
+    }
+
+    public GameOutcome getOutcomeById(int id) {
+        return gameOutcomes.get(id);
+    }
+
+    public void addGame(Game game) {
+        runningGames.put(game.getId(), game);
     }
 
     public void clearGamesPlayed() {
-        gamesPlayed.clear();
+        gameOutcomes.clear();
         for (RegisteredPlayer p : players) {
             p.restoreDeck();
         }
     }
 
-    public void clearLastGame() {
-        gamesPlayed.remove(gamesPlayed.size() - 1);
-    }
-
-    public Iterable<GameOutcome> getOutcomes() {
-        return gamesPlayedRo;
+    public Collection<GameOutcome> getOutcomes() {
+        return gameOutcomes.values();
     }
 
     public boolean isMatchOver() {
         int[] victories = new int[players.size()];
-        for (GameOutcome go : gamesPlayed) {
+        for (GameOutcome go : getOutcomes()) {
             LobbyPlayer winner = go.getWinningLobbyPlayer();
             int i = 0;
             for (RegisteredPlayer p : players) {
@@ -136,7 +151,7 @@ public class Match {
 
     public int getGamesWonBy(LobbyPlayer questPlayer) {
         int sum = 0;
-        for (GameOutcome go : gamesPlayed) {
+        for (GameOutcome go : getOutcomes()) {
             if (questPlayer.equals(go.getWinningLobbyPlayer())) {
                 sum++;
             }
@@ -145,7 +160,7 @@ public class Match {
     }
     public Multiset<RegisteredPlayer> getGamesWon() {
         final Multiset<RegisteredPlayer> won = HashMultiset.create(players.size());
-        for (final GameOutcome go : gamesPlayedRo) {
+        for (final GameOutcome go : getOutcomes()) {
             if (go.getWinningPlayer() == null) {
                 // Game hasn't finished yet. Exit early.
                 return won;
@@ -161,7 +176,7 @@ public class Match {
 
     public RegisteredPlayer getWinner() {
         if (this.isMatchOver()) {
-            return gamesPlayedRo.get(gamesPlayedRo.size()-1).getWinningPlayer();
+            return lastOutcome.getWinningPlayer();
         }
         return null;
     }
@@ -189,7 +204,7 @@ public class Match {
         for (final Entry<PaperCard, Integer> stackOfCards : section) {
             final PaperCard cp = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
-                final Card card = Card.fromPaperCard(cp, player); 
+                final Card card = Card.fromPaperCard(cp, player);
 
                 // Assign card-specific foiling or random foiling on approximately 1:20 cards if enabled
                 if (cp.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
@@ -214,16 +229,16 @@ public class Match {
         final FCollectionView<Player> players = game.getPlayers();
         final List<RegisteredPlayer> playersConditions = game.getMatch().getPlayers();
 
-        boolean isFirstGame = game.getMatch().getPlayedGames().isEmpty();
+        boolean isFirstGame = gameOutcomes.isEmpty();
         boolean canSideBoard = !isFirstGame && rules.getGameType().isSideboardingAllowed();
         // Only allow this if feature flag is on AND for certain match types
         boolean sideboardForAIs = rules.getSideboardForAI() &&
             rules.getGameType().getDeckFormat().equals(DeckFormat.Constructed);
         PlayerController sideboardProxy = null;
         if (canSideBoard && sideboardForAIs) {
-            for (int i = 0; i < playersConditions.size(); i++) {
+            for (int i = 0; i < players.size(); i++) {
                 final Player player = players.get(i);
-                final RegisteredPlayer psc = playersConditions.get(i);
+                //final RegisteredPlayer psc = playersConditions.get(i);
                 if (!player.getController().isAI()) {
                     sideboardProxy = player.getController();
                     break;
@@ -337,11 +352,7 @@ public class Match {
                 for(Card c : lostOwnership) {
                     lostPaperOwnership.add((PaperCard)c.getPaperCard());
                 }
-                if (outcome.anteResult.containsKey(registered)) {
-                    outcome.anteResult.get(registered).addLost(lostPaperOwnership);
-                } else {
-                    outcome.anteResult.put(registered, GameOutcome.AnteResult.lost(lostPaperOwnership));
-                }
+                outcome.addAnteLost(registered, lostPaperOwnership);
             }
 
             if (!gainedOwnership.isEmpty()) {
@@ -349,12 +360,7 @@ public class Match {
                 for(Card c : gainedOwnership) {
                     gainedPaperOwnership.add((PaperCard)c.getPaperCard());
                 }
-                if (outcome.anteResult.containsKey(registered)) {
-                    outcome.anteResult.get(registered).addWon(gainedPaperOwnership);
-                }
-                else {
-                    outcome.anteResult.put(registered, GameOutcome.AnteResult.won(gainedPaperOwnership));
-                }
+                outcome.addAnteWon(registered, gainedPaperOwnership);
             }
 
             if (outcome.isDraw()) {
@@ -377,24 +383,14 @@ public class Match {
                 losses.add(toRemove);
             }
 
-            if (outcome.anteResult.containsKey(registered)) {
-                outcome.anteResult.get(registered).addLost(personalLosses);
-            }
-            else {
-                outcome.anteResult.put(registered, GameOutcome.AnteResult.lost(personalLosses));
-            }
+            outcome.addAnteLost(registered, personalLosses);
         }
 
         if (iWinner >= 0) {
             // Winner gains these cards always
             Player fromGame = lastGame.getRegisteredPlayers().get(iWinner);
             RegisteredPlayer registered = fromGame.getRegisteredPlayer();
-            if (outcome.anteResult.containsKey(registered)) {
-                outcome.anteResult.get(registered).addWon(losses);
-            }
-            else {
-                outcome.anteResult.put(registered, GameOutcome.AnteResult.won(losses));
-            }
+            outcome.addAnteWon(registered, losses);
 
             if (rules.getGameType().canAddWonCardsMidGame()) {
                 // But only certain game types lets you swap midgame

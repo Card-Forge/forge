@@ -85,7 +85,8 @@ public final class Main {
         System.exit(0);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     protected void finalize() throws Throwable {
         try {
             ExceptionHandler.unregisterErrorHandling();

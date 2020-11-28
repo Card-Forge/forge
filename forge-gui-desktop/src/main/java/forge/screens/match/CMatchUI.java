@@ -271,7 +271,7 @@ public final class CMatchUI
         if (!isInGame()) {
             return;
         }
-        final Deck deck = getGameView().getDeck(getCurrentPlayer().getLobbyPlayerName());
+        final Deck deck = getGameView().getDeck(getCurrentPlayer());
         if (deck != null) {
             FDeckViewer.show(deck);
         }

@@ -149,7 +149,7 @@ public class HostedMatch {
         if (game.getRules().getGameType() == GameType.Quest) {
             final QuestController qc = FModel.getQuest();
             // Reset new list when the Match round starts, not when each game starts
-            if (game.getMatch().getPlayedGames().isEmpty()) {
+            if (game.getMatch().getOutcomes().isEmpty()) {
                 qc.getCards().resetNewList();
             }
             game.subscribeToEvents(qc); // this one listens to player's mulligans ATM

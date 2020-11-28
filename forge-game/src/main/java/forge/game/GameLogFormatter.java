@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Iterables;
 import com.google.common.eventbus.Subscribe;
 
 import forge.LobbyPlayer;
@@ -131,8 +132,8 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, modeChoiceOutcome);
     }
 
-    private static GameLogEntry generateSummary(final List<GameOutcome> gamesPlayed) {
-        final GameOutcome outcome1 = gamesPlayed.get(0);
+    private static GameLogEntry generateSummary(final Collection<GameOutcome> gamesPlayed) {
+        final GameOutcome outcome1 = Iterables.getFirst(gamesPlayed, null);
         final HashMap<RegisteredPlayer, String> players = outcome1.getPlayerNames();
         final HashMap<RegisteredPlayer, Integer> winCount = new HashMap<>();
 
