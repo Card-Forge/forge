@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Lifelink | Description$ Enchanted creature has lifelink. (Damage dealt by the creature also causes its controller to gain that much life.)
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lifelink.jpg
-Oracle:
+Oracle:Enchant creature\nEnchanted creature has lifelink. (Damage dealt by the creature also causes its controller to gain that much life.)
