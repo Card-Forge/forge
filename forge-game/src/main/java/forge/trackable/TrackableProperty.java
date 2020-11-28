@@ -56,6 +56,7 @@ public enum TrackableProperty {
     ChosenMode(TrackableTypes.StringType),
     Remembered(TrackableTypes.StringType),
     NamedCard(TrackableTypes.StringType),
+    NamedCard2(TrackableTypes.StringType),
     PlayerMayLook(TrackableTypes.PlayerViewCollectionType, FreezeMode.IgnoresFreeze),
     EntityAttachedTo(TrackableTypes.GameEntityViewType),
     EncodedCards(TrackableTypes.CardViewCollectionType),

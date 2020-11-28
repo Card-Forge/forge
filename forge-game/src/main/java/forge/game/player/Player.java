@@ -104,6 +104,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private boolean unlimitedHandSize = false;
     private Card lastDrawnCard = null;
     private String namedCard = "";
+    private String namedCard2 = "";
     private int numDrawnThisTurn = 0;
     private int numDrawnThisDrawStep = 0;
     private int numDiscardedThisTurn = 0;
@@ -1905,6 +1906,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void setNamedCard(final String s) {
         namedCard = s;
     }
+    public final String getNamedCard2() { return namedCard2; }
+    public final void setNamedCard2(final String s) {
+        namedCard2 = s;
+    }
 
     public final int getTurn() {
         return stats.getTurnsPlayed();
@@ -2898,7 +2903,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         // Conspiracies
         for (IPaperCard cp : registeredPlayer.getConspiracies()) {
             Card conspire = Card.fromPaperCard(cp, this);
-            if (conspire.hasKeyword("Hidden agenda")) {
+            if (conspire.hasKeyword("Hidden agenda") || conspire.hasKeyword("Double agenda")) {
                 if (!CardFactoryUtil.handleHiddenAgenda(this, conspire)) {
                     continue;
                 }

@@ -79,6 +79,7 @@ public abstract class GameState {
     private final Map<Card, List<String>> cardToRememberedId = new HashMap<>();
     private final Map<Card, List<String>> cardToImprintedId = new HashMap<>();
     private final Map<Card, String> cardToNamedCard = new HashMap<>();
+    private final Map<Card, String> cardToNamedCard2 = new HashMap<>();
     private final Map<Card, String> cardToExiledWithId = new HashMap<>();
     private final Map<Card, Card> cardAttackMap = new HashMap<>();
 
@@ -324,6 +325,9 @@ public abstract class GameState {
             }
             if (!c.getNamedCard().isEmpty()) {
                 newText.append("|NamedCard:").append(c.getNamedCard());
+            }
+            if (!c.getNamedCard2().isEmpty()) {
+                newText.append("|NamedCard2:").append(c.getNamedCard2());
             }
 
             List<String> chosenCardIds = Lists.newArrayList();
@@ -1057,6 +1061,12 @@ public abstract class GameState {
             c.setNamedCard(entry.getValue());
         }
 
+        // Named card 2
+        for (Entry<Card,String> entry : cardToNamedCard2.entrySet()) {
+            Card c = entry.getKey();
+            c.setNamedCard2(entry.getValue());
+        }
+
         // Chosen cards
         for (Entry<Card, CardCollection> entry : cardToChosenCards.entrySet()) {
             Card c = entry.getKey();
@@ -1285,6 +1295,8 @@ public abstract class GameState {
                     cardToChosenCards.put(c, chosen);
                 } else if (info.startsWith("NamedCard:")) {
                     cardToNamedCard.put(c, info.substring(info.indexOf(':') + 1));
+                } else if (info.startsWith("NamedCard2:")) {
+                    cardToNamedCard2.put(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("ExecuteScript:")) {
                     cardToScript.put(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("RememberedCards:")) {
