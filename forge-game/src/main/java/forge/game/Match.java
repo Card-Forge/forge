@@ -1,6 +1,8 @@
 package forge.game;
 
 import com.google.common.collect.*;
+import com.google.common.eventbus.EventBus;
+
 import forge.LobbyPlayer;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -8,6 +10,7 @@ import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
+import forge.game.event.Event;
 import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventGameFinished;
 import forge.game.player.Player;
@@ -29,7 +32,7 @@ public class Match {
     private final GameRules rules;
     private final String title;
 
-    private Game lastGame = null;
+    private final EventBus events = new EventBus("match events");
     private final Map<Integer, Game> runningGames = Maps.newHashMap();
     private final Map<Integer, GameOutcome> gameOutcomes = Maps.newHashMap();
 
@@ -95,7 +98,6 @@ public class Match {
         // will pull UI dialog, when the UI is listening
         game.fireEvent(new GameEventGameFinished());
         // FIXME needed to close the Match Dialog because that this moment there isn't any game
-        lastGame = game;
         runningGames.remove(game.getId());
 
         //run GC after game is finished
@@ -103,11 +105,7 @@ public class Match {
     }
 
     public Game getGameById(int id) {
-        if (runningGames.containsKey(id)) {
-            return runningGames.get(id);
-        }
-        // FIXME fallback for last game in case the UI is outdated
-        return lastGame;
+        return runningGames.get(id);
     }
 
     public GameOutcome getOutcomeById(int id) {
@@ -405,4 +403,16 @@ public class Match {
             // Other game types (like Quest) need to do something in their own calls to actually update data
         }
     }
+
+    /**
+     * Fire only the events after they became real for gamestate and won't get replaced.<br>
+     * The events are sent to UI, log and sound system. Network listeners are under development.
+     */
+    public void fireEvent(final Event event) {
+        events.post(event);
+    }
+    public void subscribeToEvents(final Object subscriber) {
+        events.register(subscriber);
+    }
+
 }

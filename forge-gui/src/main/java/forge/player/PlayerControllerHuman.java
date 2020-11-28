@@ -2936,11 +2936,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void nextGameDecision(final NextGameDecision decision) {
-        Game game = getGame();
-        // in case the game ended before the button is pressed, then match doesn't remember the game anymore
-        if (game != null) {
-            game.fireEvent(new UiEventNextGameDecision(this, decision));
-        }
+        gameView.getMatch().fireEvent(new UiEventNextGameDecision(this, decision));
     }
 
     @Override

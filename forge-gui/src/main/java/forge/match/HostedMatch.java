@@ -126,6 +126,8 @@ public class HostedMatch {
             title = TextUtil.concatNoSpace("Multiplayer Game (", String.valueOf(sortedPlayers.size()), " players)");
         }
         this.match = new Match(gameRules, sortedPlayers, title);
+        this.match.subscribeToEvents(SoundSystem.instance);
+        this.match.subscribeToEvents(visitor);
         startGame();
     }
 
