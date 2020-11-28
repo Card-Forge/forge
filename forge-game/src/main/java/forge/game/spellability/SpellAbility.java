@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.card.CardStateName;
+import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
@@ -128,8 +129,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     protected ApiType api = null;
 
-    private final List<Mana> payingMana = Lists.newArrayList();
-    private final List<SpellAbility> paidAbilities = Lists.newArrayList();
+    private List<Mana> payingMana = Lists.newArrayList();
+    private List<SpellAbility> paidAbilities = Lists.newArrayList();
     private Integer xManaCostPaid = null;
 
     private HashMap<String, CardCollection> paidLists = Maps.newHashMap();
@@ -474,6 +475,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public final void clearManaPaid() {
         payingMana.clear();
+    }
+
+    public ColorSet getPayingColors() {
+        byte colors = 0;
+        for (Mana m : payingMana) {
+            colors |= m.getColor();
+        }
+        return ColorSet.fromMask(colors);
     }
 
     public List<SpellAbility> getPayingManaAbilities() {
@@ -879,6 +888,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 clone.changeZoneTable.putAll(changeZoneTable);
             }
 
+            clone.payingMana = Lists.newArrayList(payingMana);
+            clone.paidAbilities = Lists.newArrayList();
             clone.setPaidHash(Maps.newHashMap(getPaidHash()));
 
             if (usesTargeting()) {

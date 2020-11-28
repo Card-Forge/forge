@@ -387,15 +387,18 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
         }
     
         if (params.containsKey("ManaSpent")) {
-            byte spent = ManaAtom.fromName(params.get("ManaSpent"));
-            if ( 0 == (this.getHostCard().getColorsPaid() & spent)) {
+            SpellAbility castSA = getHostCard().getCastSA();
+            if (castSA == null) {
+                return false;
+            }
+            if (!castSA.getPayingColors().hasAllColors(ManaAtom.fromName(params.get("ManaSpent")))) {
                 return false;
             }
         }
 
         if (params.containsKey("ManaNotSpent")) {
-            byte spent = ManaAtom.fromName(params.get("ManaNotSpent"));
-            if ( 0 != (this.getHostCard().getColorsPaid() & spent)) {
+            SpellAbility castSA = getHostCard().getCastSA();
+            if (castSA != null && castSA.getPayingColors().hasAllColors(ManaAtom.fromName(params.get("ManaNotSpent")))) {
                 return false;
             }
         }

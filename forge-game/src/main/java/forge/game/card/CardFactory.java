@@ -95,7 +95,6 @@ public class CardFactory {
         out.setAttachedCards(in.getAttachedCards());
         out.setEntityAttachedTo(in.getEntityAttachedTo());
 
-        out.setCastSA(in.getCastSA());
         for (final Object o : in.getRemembered()) {
             out.addRemembered(o);
         }

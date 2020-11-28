@@ -1546,7 +1546,8 @@ public class CardFactoryUtil {
         }
         // Count$Converge
         if (sq[0].contains("Converge")) {
-            return doXMath(c.getSunburstValue(), m, c);
+            SpellAbility castSA = c.getCastSA();
+            return doXMath(castSA == null ? 0 : castSA.getPayingColors().countColors(), m, c);
         }
         // Count$ColoredCreatures *a DOMAIN for creatures*
         if (sq[0].contains("ColoredCreatures")) {
