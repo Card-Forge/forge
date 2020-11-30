@@ -609,9 +609,15 @@ public class CardFactoryUtil {
         if (value.contains("LifeGainedThisTurn")) {
             return doXMath(player.getLifeGainedThisTurn(), m, source);
         }
+
         if (value.contains("LifeGainedByTeamThisTurn")) {
             return doXMath(player.getLifeGainedByTeamThisTurn(), m, source);
         }
+
+        if (value.contains("LifeStartedThisTurnWith")) {
+            return doXMath(player.getLifeStartedThisTurnWith(), m, source);
+        }
+
         if (value.contains("PoisonCounters")) {
             return doXMath(player.getPoisonCounters(), m, source);
         }

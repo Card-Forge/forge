@@ -1,0 +1,13 @@
+Name:Curse of Vengeance
+ManaCost:B
+Types:Enchantment Aura Curse
+K:Enchant player
+A:SP$ Attach | Cost$ B | ValidTgts$ Player | AILogic$ Curse
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player.EnchantedBy | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player casts a spell, put a spite counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SPITE | CounterNum$ 1
+T:Mode$ LosesGame | ValidPlayer$ Player.EnchantedBy | Execute$ TrigGainLife | TriggerDescription$ When enchanted player loses the game, you gain X life and draw X cards, where X is the number of spite counters on CARDNAME.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X
+SVar:X:Count$CardCounters.SPITE
+DeckHas:Ability$Counters & Ability$LifeGain
+Oracle:Enchant player\nWhenever enchanted player casts a spell, put a spite counter on Curse of Vengeance. When enchanted player loses the game, you gain X life and draw X cards, where X is the number of spite counters on Curse of Vengeance.
