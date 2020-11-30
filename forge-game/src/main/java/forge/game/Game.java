@@ -421,7 +421,7 @@ public class Game {
     public synchronized void setGameOver(GameEndReason reason) {
         age = GameStage.GameOver;
         for (Player p : allPlayers) {
-            p.setMindSlaveMaster(null); // for correct totals
+            p.clearController();
         }
 
         for (Player p : getPlayers()) {

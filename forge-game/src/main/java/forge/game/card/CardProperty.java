@@ -1106,6 +1106,10 @@ public class CardProperty {
             if (!card.getDrawnThisTurn()) {
                 return false;
             }
+        } else if (property.startsWith("notDrawnThisTurn")) {
+            if (card.getDrawnThisTurn()) {
+                return false;
+            }
         } else if (property.startsWith("enteredBattlefieldThisTurn")) {
             if (!(card.getTurnInZone() == game.getPhaseHandler().getTurn())) {
                 return false;

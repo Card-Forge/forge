@@ -552,6 +552,10 @@ public final class StaticAbilityContinuous {
                         p.addMaxLandPlays(se.getTimestamp(), add);
                     }
                 }
+                if (params.containsKey("ControlOpponentsSearchingLibrary")) {
+                    Player cntl = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, params.get("ControlOpponentsSearchingLibrary"), null), null);
+                    p.addControlledWhileSearching(se.getTimestamp(), cntl);
+                }
 
                 if (params.containsKey("ControlVote")) {
                     p.addControlVote(se.getTimestamp());

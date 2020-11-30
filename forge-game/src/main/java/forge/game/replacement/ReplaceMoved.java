@@ -92,6 +92,14 @@ public class ReplaceMoved extends ReplacementEffect {
             }
         }
 
+        if (hasParam("FoundSearchingLibrary")) {
+            if (!runParams.containsKey(AbilityKey.FoundSearchingLibrary)) {
+                    return false;
+                }
+            Boolean val = (Boolean) runParams.get(AbilityKey.FoundSearchingLibrary);
+            if (!val) { return false; }
+        }
+
         return true;
     }
 
