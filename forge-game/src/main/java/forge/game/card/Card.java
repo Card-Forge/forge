@@ -111,8 +111,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private final Map<StaticAbility, CardPlayOption> mayPlay = Maps.newHashMap();
 
-    private final Multimap<Long, Player> withFlash = HashMultimap.create();
-
     // changes by AF animate and continuous static effects - timestamp is the key of maps
     private final Map<Long, CardChangedType> changedCardTypes = Maps.newTreeMap();
     private final NavigableMap<Long, String> changedCardNames = Maps.newTreeMap();
@@ -6431,21 +6429,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
         return n;
-    }
-
-    public boolean withFlash(Player p) {
-        if (hasKeyword(Keyword.FLASH)) {
-            return true;
-        }
-        return withFlash.containsValue(p);
-    }
-
-    public void addWithFlash(Long timestamp, Iterable<Player> players) {
-        withFlash.putAll(timestamp, players);
-    }
-
-    public void removeWithFlash(Long timestamp) {
-        withFlash.removeAll(timestamp);
     }
 
     public boolean canBeDiscardedBy(SpellAbility sa) {

@@ -697,6 +697,8 @@ public class AiController {
 
     public AiPlayDecision canPlaySa(SpellAbility sa) {
         final Card card = sa.getHostCard();
+        final boolean isRightTiming = sa.canCastTiming(player);
+
         if (!checkAiSpecificRestrictions(sa)) {
             return AiPlayDecision.CantPlayAi;
         }
@@ -764,6 +766,9 @@ public class AiController {
             return AiPlayDecision.CurseEffects;
         }
         if (sa instanceof SpellPermanent) {
+            if (!isRightTiming) {
+                return AiPlayDecision.AnotherTime;
+            }
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         }
         if (sa.usesTargeting() && !sa.isTargetNumberValid()) {
@@ -776,7 +781,13 @@ public class AiController {
                     && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
                 return AiPlayDecision.CurseEffects;
             }
+            if (!isRightTiming) {
+                return AiPlayDecision.AnotherTime;
+            }
             return canPlaySpellBasic(card, sa);
+        }
+        if (!isRightTiming) {
+            return AiPlayDecision.AnotherTime;
         }
         return AiPlayDecision.WillPlay;
     }

@@ -17,8 +17,6 @@
  */
 package forge.game.spellability;
 
-import com.google.common.collect.Sets;
-
 import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -95,41 +93,11 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        boolean lkicheck = false;
-
         // do performanceMode only for cases where the activator is different than controller
         if (!Spell.performanceMode && activator != null && !card.getController().equals(activator)) {
             // always make a lki copy in this case?
             card = CardUtil.getLKICopy(card);
             card.setController(activator, 0);
-            lkicheck = true;
-        }
-
-        Card lkiHost = getAlternateHost(card);
-        if (lkiHost != null) {
-            card = lkiHost;
-            lkicheck = true;
-        }
-
-        if (lkicheck) {
-            game.getTracker().freeze(); //prevent views flickering during while updating for state-based effects
-            game.getAction().checkStaticAbilities(false, Sets.newHashSet(card), new CardCollection(card));
-        }
-
-        boolean isInstant = card.isInstant();
-        boolean flash = card.withFlash(activator);
-
-        // reset static abilities
-        if (lkicheck) {
-            game.getAction().checkStaticAbilities(false);
-            // clear delayed changes, this check should not have updated the view
-            game.getTracker().clearDelayed();
-            game.getTracker().unfreeze();
-        }
-
-        if (!(isInstant || activator.canCastSorcery() || flash || getRestrictions().isInstantSpeed()
-               || hasSVar("IsCastFromPlayEffect"))) {
-            return false;
         }
 
         if (!this.getRestrictions().canPlay(getHostCard(), this)) {
