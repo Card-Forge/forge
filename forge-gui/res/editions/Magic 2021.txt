@@ -284,10 +284,10 @@ ChaosDraftThemes=CORE_SET
 273 L Forest
 274 L Forest
 
-[alternate art teferis]
-Teferi, Master of Time|M21|2
-Teferi, Master of Time|M21|3
-Teferi, Master of Time|M21|4
+[alternate art]
+275 M Teferi, Master of Time
+276 M Teferi, Master of Time
+277 M Teferi, Master of Time
 
 [buy a box]
 278 M Rin and Seri, Inseparable
