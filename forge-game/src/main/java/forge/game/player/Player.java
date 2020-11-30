@@ -1235,6 +1235,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public boolean hasProtectionFrom(final Card source, final boolean checkSBA, final boolean damageSource) {
+        final boolean colorlessDamage = damageSource && source.hasKeyword("Colorless Damage Source");
         for (String kw : keywords) {
             if (kw.startsWith("Protection")) {
                 if (kw.startsWith("Protection:")) { // uses isValid
@@ -1250,28 +1251,36 @@ public class Player extends GameEntity implements Comparable<Player> {
                             return true;
                         }
                     }
+                } else if (kw.equals("Protection from white")) {
+                    if (source.isWhite() && !colorlessDamage) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from blue")) {
+                    if (source.isBlue() && !colorlessDamage) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from black")) {
+                    if (source.isBlack() && !colorlessDamage) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from red")) {
+                    if (source.isRed() && !colorlessDamage) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from green")) {
+                    if (source.isGreen() && !colorlessDamage) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from all colors")) {
+                    if (!source.isColorless() && !colorlessDamage) {
+                        return true;
+                    }
                 } else if (kw.equals("Protection from everything")) {
                     return true;
-                }
-                else {
-                    final boolean colorlessDamage = damageSource && source.hasKeyword("Colorless Damage Source");
-
-                    switch (kw) {
-                    case "Protection from white":
-                        if (source.isWhite() && !colorlessDamage) { return true; }
-                        break;
-                    case "Protection from blue":
-                        if (source.isBlue() && !colorlessDamage) { return true; }
-                        break;
-                    case "Protection from black":
-                        if (source.isBlack() && !colorlessDamage) { return true; }
-                        break;
-                    case "Protection from red":
-                        if (source.isRed() && !colorlessDamage) { return true; }
-                        break;
-                    case "Protection from green":
-                        if (source.isGreen() && !colorlessDamage) { return true; }
-                        break;
+                } else if (kw.startsWith("Protection from ")) {
+                    final String protectType = CardType.getSingularType(kw.substring("Protection from ".length()));
+                    if (source.getType().hasStringType(protectType)) {
+                        return true;
                     }
                 }
             }
