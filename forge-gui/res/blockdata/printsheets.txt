@@ -682,11 +682,6 @@
 1 Wayfaring Temple|RTR
 1 Wild Beastmaster|RTR
 
-[ME4 UrzaLands]
-1 Urza's Tower|ME4
-1 Urza's Mine|ME4
-1 Urza's Power Plant|ME4
-
 [CNS Draft Matters]
 #1 Advantageous Proclamation|CNS
 #1 AEther Searcher|CNS
