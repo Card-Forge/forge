@@ -1152,41 +1152,6 @@ Zealot of the God-Pharaoh
 Visage of Bolas
 Cinder Barrens
 
-[XLN Planeswalker Decks and Toolkit]
-Jace, Ingenious Mind-Mage
-Castaway's Despair
-Grasping Current
-Jace's Sentinel
-Woodland Stream
-Huatli, Dinosaur Knight
-Huatli's Snubhorn 
-Huatli's Spurring
-Sun-Blessed Mount
-Stone Quarry
-
-[RIX Planeswalker Decks and Toolkit]
-Vraska, Scheming Gorgon
-Vampire Champion
-Vraska's Conquistador
-Vraska's Scorn
-Angrath, Minotaur Pirate
-Angrath's Ambusher
-Swab Goblin
-Angrath's Fury
-Cinder Barrens
-
-[RIX Basic Lands]
-4 Plains|XLN
-4 Island|XLN
-4 Swamp|XLN
-4 Mountain|XLN
-4 Forest|XLN
-1 Plains|RIX
-1 Island|RIX
-1 Swamp|RIX
-1 Mountain|RIX
-1 Forest|RIX
-
 [DOM Planeswalker Decks and Additional Promo]
 Teferi, Timebender
 Temporal Machinations
