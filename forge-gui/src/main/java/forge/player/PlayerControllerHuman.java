@@ -788,13 +788,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         GameEntityViewMap<Card, CardView> gameCacheManipulate = GameEntityView.getMap(cards);
         gameCacheManipulate.putAll(manipulable);
         List<CardView> views = getGui().manipulateCardList(title, CardView.getCollection(cards), CardView.getCollection(manipulable), toTop, toBottom, toAnywhere);
-        List<Card> result = new CardCollection();
-        gameCacheManipulate.addToList(views, result);
-        return result;
+        return gameCacheManipulate.addToList(views, new CardCollection());
     }
 
     public ImmutablePair<CardCollection, CardCollection> arrangeForMove(final String title, final FCollectionView<Card> cards, final List<Card> manipulable, final boolean topOK, final boolean bottomOK) {
-    List<Card> result = manipulateCardList(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cards, manipulable, topOK, bottomOK, false);
+    List<Card> result = manipulateCardList(title, cards, manipulable, topOK, bottomOK, false);
         CardCollection toBottom = new CardCollection();
         CardCollection toTop = new CardCollection();
         for (int i = 0; i<cards.size() && manipulable.contains(result.get(i)) ; i++ ) {
