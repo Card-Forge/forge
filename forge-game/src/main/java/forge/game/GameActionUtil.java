@@ -221,7 +221,6 @@ public final class GameActionUtil {
 
         // below are for some special cases of activated abilities
         if (sa.isCycling() && activator.hasKeyword("CyclingForZero")) {
-            
             for (final KeywordInterface inst : source.getKeywords()) {
                 // need to find the correct Keyword from which this Ability is from
                 if (!inst.getAbilities().contains(sa)) {
@@ -247,15 +246,6 @@ public final class GameActionUtil {
                 alternatives.add(newSA);
                 break;
             }
-        }
-
-        if (sa.hasParam("Equip") && activator.hasKeyword("EquipInstantSpeed")) {
-            final SpellAbility newSA = sa.copy(activator);
-            SpellAbilityRestriction sar = newSA.getRestrictions();
-            sar.setSorcerySpeed(false);
-            sar.setInstantSpeed(true);
-            newSA.setDescription(sa.getDescription() + " (you may activate any time you could cast an instant )");
-            alternatives.add(newSA);
         }
 
         return alternatives;

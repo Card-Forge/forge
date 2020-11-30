@@ -39,7 +39,6 @@ import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
-import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
@@ -142,7 +141,6 @@ public final class StaticAbilityContinuous {
         Set<Keyword> cantHaveKeyword = null;
 
         List<Player> mayLookAt = null;
-        List<Player> withFlash = null;
 
         boolean controllerMayPlay = false, mayPlayWithoutManaCost = false, mayPlayWithFlash = false;
         String mayPlayAltManaCost = null;
@@ -506,9 +504,6 @@ public final class StaticAbilityContinuous {
                     mayPlayGrantZonePermissions = false;
                 }
             }
-            if (params.containsKey("WithFlash")) {
-                withFlash = AbilityUtils.getDefinedPlayers(hostCard, params.get("WithFlash"), null);
-            }
 
             if (params.containsKey("IgnoreEffectCost")) {
                 String cost = params.get("IgnoreEffectCost");
@@ -756,7 +751,7 @@ public final class StaticAbilityContinuous {
 
                     for (Card c : cardsIGainedAbilitiesFrom) {
                         for (SpellAbility sa : c.getSpellAbilities()) {
-                            if (sa instanceof AbilityActivated) {
+                            if (sa.isActivatedAbility()) {
                                 if (loyaltyAB && !sa.isPwAbility()) {
                                     continue;
                                 }
@@ -864,9 +859,6 @@ public final class StaticAbilityContinuous {
 
             if (mayLookAt != null) {
                 affectedCard.addMayLookAt(se.getTimestamp(), mayLookAt);
-            }
-            if (withFlash != null) {
-                affectedCard.addWithFlash(se.getTimestamp(), withFlash);
             }
 
             if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {

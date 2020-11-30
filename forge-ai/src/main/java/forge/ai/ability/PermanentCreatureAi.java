@@ -86,7 +86,7 @@ public class PermanentCreatureAi extends PermanentAi {
         if (ai.getController().isAI()) {
             advancedFlash = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
         }
-        if (card.withFlash(ai)) {
+        if (!ai.canCastSorcery() && sa.canCastTiming(ai)) {
             if (advancedFlash) {
                 return doAdvancedFlashLogic(card, ai, sa);
             } else {

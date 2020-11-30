@@ -352,6 +352,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public boolean isSpell() { return false; }
     public boolean isAbility() { return true; }
+    public boolean isActivatedAbility() { return false; }
 
     public boolean isMorphUp() {
         return this.hasParam("MorphUp");
@@ -1734,7 +1735,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
         }
         else if (incR[0].equals("Activated")) {
-            if (!(root instanceof AbilityActivated)) {
+            if (!root.isActivatedAbility()) {
                 return false;
             }
         }
@@ -2035,4 +2036,46 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public void setXManaCostPaid(final Integer n) {
         xManaCostPaid = n;
     }
+
+    public boolean canCastTiming(Player activator) {
+        return canCastTiming(getHostCard(), activator);
+    }
+
+    public boolean canCastTiming(Card host, Player activator) {
+        // no spell or no activated ability, no check there
+        if (!isSpell() && !isActivatedAbility()) {
+            return true;
+        }
+
+        final Game game = activator.getGame();
+        if (activator.canCastSorcery() || getRestrictions().isInstantSpeed()) {
+            return true;
+        }
+
+        if (isSpell()) {
+            if (hasSVar("IsCastFromPlayEffect") || host.isInstant() || host.hasKeyword(Keyword.FLASH)) {
+                return true;
+            }
+        }
+
+        final CardCollection allp = new CardCollection(game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
+        allp.add(host);
+        for (final Card ca : allp) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("CastWithFlash", host, this, activator)) {
+                    return true;
+                }
+            }
+        }
+
+        // spells per default are sorcerySpeed
+        if (isSpell()) {
+            return false;
+        } else if (isActivatedAbility()) {
+            // Activated Abillties are instant speed per default
+            return !getRestrictions().isSorcerySpeed();
+        }
+        return true;
+    }
+
 }

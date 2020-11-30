@@ -503,10 +503,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             System.out.println(c.getName() + " Did not have activator set in SpellAbilityRestriction.canPlay()");
         }
 
-        if (this.isSorcerySpeed() && !activator.canCastSorcery()) {
-            return false;
-        }
-
         if (!sa.hasSVar("IsCastFromPlayEffect")) {
             if (!checkTimingRestrictions(c, sa)) {
                 return false;

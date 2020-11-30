@@ -88,7 +88,8 @@ public class AttachAi extends SpellAbilityAi {
         if (ai.getController().isAI()) {
             advancedFlash = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
         }
-        if (source.withFlash(ai) && source.isAura() && advancedFlash && !doAdvancedFlashAuraLogic(ai, sa, sa.getTargetCard())) {
+        if (!ai.canCastSorcery() && sa.canCastTiming(ai)
+                && source.isAura() && advancedFlash && !doAdvancedFlashAuraLogic(ai, sa, sa.getTargetCard())) {
             return false;
         }
 
