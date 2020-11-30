@@ -2047,25 +2047,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return true;
         }
 
-        final Game game = activator.getGame();
-        if (activator.canCastSorcery() || getRestrictions().isInstantSpeed()) {
+        if (activator.canCastSorcery() || withFlash(host, activator)) {
             return true;
-        }
-
-        if (isSpell()) {
-            if (hasSVar("IsCastFromPlayEffect") || host.isInstant() || host.hasKeyword(Keyword.FLASH)) {
-                return true;
-            }
-        }
-
-        final CardCollection allp = new CardCollection(game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
-        allp.add(host);
-        for (final Card ca : allp) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.applyAbility("CastWithFlash", host, this, activator)) {
-                    return true;
-                }
-            }
         }
 
         // spells per default are sorcerySpeed
@@ -2076,6 +2059,28 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return !getRestrictions().isSorcerySpeed();
         }
         return true;
+    }
+
+    public boolean withFlash(Card host, Player activator) {
+        if (getRestrictions().isInstantSpeed()) {
+            return true;
+        }
+        if (isSpell()) {
+            if (hasSVar("IsCastFromPlayEffect") || host.isInstant() || host.hasKeyword(Keyword.FLASH)) {
+                return true;
+            }
+        }
+        final Game game = activator.getGame();
+        final CardCollection allp = new CardCollection(game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
+        allp.add(host);
+        for (final Card ca : allp) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("CastWithFlash", host, this, activator)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }
