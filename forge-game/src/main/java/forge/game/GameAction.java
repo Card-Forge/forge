@@ -947,6 +947,7 @@ public class GameAction {
         // do this multiple times, sometimes creatures/permanents will survive when they shouldn't
         boolean orderedDesCreats = false;
         boolean orderedNoRegCreats = false;
+        CardCollection cardsToUpdateLKI = new CardCollection();
         for (int q = 0; q < 9; q++) {
             checkStaticAbilities(false, affectedCards, CardCollection.EMPTY);
             boolean checkAgain = false;
@@ -1020,7 +1021,7 @@ public class GameAction {
                     checkAgain = true;
                 }
                 if (checkAgain) {
-                    game.updateLastStateForCard(c);
+                    cardsToUpdateLKI.add(c);
                 }
             }
 
@@ -1097,6 +1098,10 @@ public class GameAction {
         // trigger reset above will activate the copy's Always trigger, which needs to be triggered at
         // this point.
         checkStaticAbilities(false, affectedCards, CardCollection.EMPTY);
+
+        for (final Card c : cardsToUpdateLKI) {
+            game.updateLastStateForCard(c);
+        }
 
         if (!refreeze) {
             game.getStack().unfreezeStack();
