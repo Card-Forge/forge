@@ -6,8 +6,8 @@ Code2=AER
 Type=Expansion
 MciCode=aer
 BoosterCovers=3
-Booster=10 Common:!fromSheet("AER Planeswalker Decks"), 3 Uncommon:!fromSheet("AER Planeswalker Decks"), 1 RareMythic:!fromSheet("AER Planeswalker Decks"), 1 BasicLand KLD
-AdditionalSheetForFoils=fromSheet("MPS Aether Revolt Inventions")
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand KLD
+AdditionalSheetForFoils=fromSheet("AER Aether Revolt Inventions")
 AdditionalSetUnlockedInQuest=MPS_KLD
 
 [cards]
@@ -197,6 +197,8 @@ AdditionalSetUnlockedInQuest=MPS_KLD
 184 R Spire of Industry
 185 M Ajani, Valiant Protector
 186 C Inspiring Roar
+
+[precon product]
 187 U Ajani's Comrade
 188 R Ajani's Aid
 189 C Tranquil Expanse
@@ -205,6 +207,32 @@ AdditionalSetUnlockedInQuest=MPS_KLD
 192 C Pendulum of Patterns
 193 U Tezzeret's Simulacrum
 194 C Submerged Boneyard
+
+[Aether Revolt Inventions]
+Arcbound Ravager|MPS_KLD
+Black Vise|MPS_KLD
+Chalice of the Void|MPS_KLD
+Defense Grid|MPS_KLD
+Duplicant|MPS_KLD
+Engineered Explosives|MPS_KLD
+Ensnaring Bridge|MPS_KLD
+Extraplanar Lens|MPS_KLD
+Grindstone|MPS_KLD
+Meekstone|MPS_KLD
+Oblivion Stone|MPS_KLD
+Ornithopter|MPS_KLD
+Paradox Engine|MPS_KLD
+Pithing Needle|MPS_KLD
+Planar Bridge|MPS_KLD
+Platinum Angel|MPS_KLD
+Sphere of Resistance|MPS_KLD
+Staff of Domination|MPS_KLD
+Sundering Titan|MPS_KLD
+Sword of Body and Mind|MPS_KLD
+Sword of War and Peace|MPS_KLD
+Trinisphere|MPS_KLD
+Vedalken Shackles|MPS_KLD
+Wurmcoil Engine|MPS_KLD
 
 [tokens]
 etherium_cell
