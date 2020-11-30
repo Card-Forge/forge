@@ -1019,6 +1019,9 @@ public class GameAction {
                     c.subtractCounter(dreamType,  c.getCounters(dreamType) - 7);
                     checkAgain = true;
                 }
+                if (checkAgain) {
+                    game.updateLastStateForCard(c);
+                }
             }
 
             // only check static abilities once after destroying all the creatures
@@ -1094,7 +1097,6 @@ public class GameAction {
         // trigger reset above will activate the copy's Always trigger, which needs to be triggered at
         // this point.
         checkStaticAbilities(false, affectedCards, CardCollection.EMPTY);
-        game.copyLastState();
 
         if (!refreeze) {
             game.getStack().unfreezeStack();
