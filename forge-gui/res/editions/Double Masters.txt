@@ -395,6 +395,344 @@ ChaosDraftThemes=MASTERS_SET
 383 R Wrath of God
 384 R Chord of Calling
 
+[Foils]
+# Commons
+21 Alabaster Mage+|2XM
+21 Ancestral Blade+|2XM
+21 Angel of the Dawn+|2XM
+21 Crib Swap+|2XM
+21 Crusader of Odric+|2XM
+21 Fortify+|2XM
+21 Glint-Sleeve Artisan+|2XM
+21 Remember the Fallen+|2XM
+21 Revoke Existence+|2XM
+21 Sanctum Gargoyle+|2XM
+21 Sanctum Spirit+|2XM
+21 Strength of Arms+|2XM
+21 Thraben Inspector+|2XM
+21 Apprentice Wizard+|2XM
+21 Argivian Restoration+|2XM
+21 Brainstorm+|2XM
+21 Cloudreader Sphinx+|2XM
+21 Corridor Monitor+|2XM
+21 Faerie Mechanist+|2XM
+21 Frogify+|2XM
+21 Metallic Rebuke+|2XM
+21 Parasitic Strix+|2XM
+21 Relic Runner+|2XM
+21 Sift+|2XM
+21 Steel Sabotage+|2XM
+21 Vedalken Infuser+|2XM
+21 Bone Picker+|2XM
+21 Cast Down+|2XM
+21 Costly Plunder+|2XM
+21 Defiant Salvager+|2XM
+21 Dire Fleet Hoarder+|2XM
+21 Divest+|2XM
+21 Driver of the Dead+|2XM
+21 Executioner's Capsule+|2XM
+21 Glaze Fiend+|2XM
+21 Heartless Pillage+|2XM
+21 Silumgar Scavenger+|2XM
+21 Supernatural Stamina+|2XM
+21 Twisted Abomination+|2XM
+21 Abrade+|2XM
+21 Balduvian Rage+|2XM
+21 Battle-Rattle Shaman+|2XM
+21 Cathartic Reunion+|2XM
+21 Goblin Gaveleer+|2XM
+21 Kazuul's Toll Collector+|2XM
+21 Lightning Axe+|2XM
+21 Orcish Vandal+|2XM
+21 Rapacious Dragon+|2XM
+21 Salivating Gremlins+|2XM
+21 Skinbrand Goblin+|2XM
+21 Temur Battle Rage+|2XM
+21 Weapon Surge+|2XM
+21 Ancient Stirrings+|2XM
+21 Bloodbriar+|2XM
+21 Chatter of the Squirrel+|2XM
+21 Clear Shot+|2XM
+21 Conclave Naturalists+|2XM
+21 Crushing Vines+|2XM
+21 Death-Hood Cobra+|2XM
+21 Elvish Aberration+|2XM
+21 Fierce Empath+|2XM
+21 Kozilek's Predator+|2XM
+21 Might of the Masses+|2XM
+21 Sylvan Might+|2XM
+21 Whisperer of the Wilds+|2XM
+21 Accomplished Automaton+|2XM
+21 Cathodion+|2XM
+21 Chromatic Star+|2XM
+21 Darksteel Axe+|2XM
+21 Eager Construct+|2XM
+21 Everflowing Chalice+|2XM
+21 Expedition Map+|2XM
+21 Flayer Husk+|2XM
+21 Gleaming Barrier+|2XM
+21 Golem-Skin Gauntlets+|2XM
+21 Ichor Wellspring+|2XM
+21 Iron Bully+|2XM
+21 Iron League Steed+|2XM
+21 Magnifying Glass+|2XM
+21 Metalspinner's Puzzleknot+|2XM
+21 Myr Retriever+|2XM
+21 Peace Strider+|2XM
+21 Pyrite Spellbomb+|2XM
+21 Sickleslicer+|2XM
+21 Skinwing+|2XM
+21 Surge Node+|2XM
+21 Tumble Magnet+|2XM
+21 Vulshok Gauntlets+|2XM
+21 Urza's Mine+|2XM
+21 Urza's Power Plant+|2XM
+21 Urza's Tower+|2XM
+# Uncommons
+7 Auriok Salvagers+|2XM
+7 Fencing Ace+|2XM
+7 Flickerwisp+|2XM
+7 Master Splicer+|2XM
+7 Myrsmith+|2XM
+7 Path to Exile+|2XM
+7 Topple the Statue+|2XM
+7 Valor in Akros+|2XM
+7 Valorous Stance+|2XM
+7 Esperzoa+|2XM
+7 Hinder+|2XM
+7 Pongify+|2XM
+7 Riddlesmith+|2XM
+7 Rush of Knowledge+|2XM
+7 Sentinel of the Pearl Trident+|2XM
+7 Serra Sphinx+|2XM
+7 Thirst for Knowledge+|2XM
+7 Treasure Mage+|2XM
+7 Disciple of the Vault+|2XM
+7 Dread Return+|2XM
+7 Drown in Sorrow+|2XM
+7 Fatal Push+|2XM
+7 Morkrut Banshee+|2XM
+7 Oubliette+|2XM
+7 Ovalchase Daredevil+|2XM
+7 Painsmith+|2XM
+7 Vampire Hexmage+|2XM
+7 Bloodshot Trainee+|2XM
+7 Brimstone Volley+|2XM
+7 Dismantle+|2XM
+7 Galvanic Blast+|2XM
+7 Kuldotha Flamefiend+|2XM
+7 Pyrewild Shaman+|2XM
+7 Ravenous Intruder+|2XM
+7 Thopter Engineer+|2XM
+7 Trash for Treasure+|2XM
+7 Crop Rotation+|2XM
+7 Enlarge+|2XM
+7 Gelatinous Genesis+|2XM
+7 Invigorate+|2XM
+7 Reclamation Sage+|2XM
+7 Skullmulcher+|2XM
+7 Ulvenwald Mysteries+|2XM
+7 Veteran Explorer+|2XM
+7 Woodland Champion+|2XM
+7 Deathreap Ritual+|2XM
+7 Ghor-Clan Rampager+|2XM
+7 Glassdust Hulk+|2XM
+7 Hidden Stockpile+|2XM
+7 Izzet Charm+|2XM
+7 Manamorphose+|2XM
+7 Selesnya Guildmage+|2XM
+7 Sphinx Summoner+|2XM
+7 Thopter Foundry+|2XM
+7 Unlicensed Disintegration+|2XM
+7 Weapons Trainer+|2XM
+7 Yavimaya's Embrace+|2XM
+7 Basalt Monolith+|2XM
+7 Chief of the Foundry+|2XM
+7 Clone Shell+|2XM
+7 Cogwork Assembler+|2XM
+7 Coretapper+|2XM
+7 Cranial Plating+|2XM
+7 Culling Dais+|2XM
+7 Golem Artisan+|2XM
+7 Jhoira's Familiar+|2XM
+7 Lightning Greaves+|2XM
+7 Mishra's Bauble+|2XM
+7 O-Naginata+|2XM
+7 Pentad Prism+|2XM
+7 Sandstone Oracle+|2XM
+7 Sphinx of the Guildpact+|2XM
+7 Springleaf Drum+|2XM
+7 Throne of Geth+|2XM
+7 Treasure Keeper+|2XM
+7 Welding Jar+|2XM
+7 Ash Barrens+|2XM
+7 Buried Ruin+|2XM
+7 Darksteel Citadel+|2XM
+7 Mishra's Factory+|2XM
+# Rares
+2 Austere Command+|2XM
+2 Blade Splicer+|2XM
+2 Boon Reflection+|2XM
+2 Council's Judgment+|2XM
+2 Ethersworn Canonist+|2XM
+2 Kemba, Kha Regent+|2XM
+2 Leonin Abunas+|2XM
+2 Open the Vaults+|2XM
+2 Puresteel Paladin+|2XM
+2 Stoneforge Mystic+|2XM
+2 Stonehewer Giant+|2XM
+2 Tempered Steel+|2XM
+2 Wrath of God+|2XM
+2 Braids, Conjurer Adept+|2XM
+2 Cyclonic Rift+|2XM
+2 Deepglow Skate+|2XM
+2 Grand Architect+|2XM
+2 Inkwell Leviathan+|2XM
+2 Master of Etherium+|2XM
+2 Master Transmuter+|2XM
+2 Phyrexian Metamorph+|2XM
+2 Reshape+|2XM
+2 Thought Reflection+|2XM
+2 Well of Ideas+|2XM
+2 Ad Nauseam+|2XM
+2 Beacon of Unrest+|2XM
+2 Death's Shadow+|2XM
+2 Disciple of Bolas+|2XM
+2 Doomed Necromancer+|2XM
+2 Magus of the Abyss+|2XM
+2 Magus of the Will+|2XM
+2 Ravenous Trap+|2XM
+2 Salvage Titan+|2XM
+2 Skirsdag High Priest+|2XM
+2 Thoughtseize+|2XM
+2 Toxic Deluge+|2XM
+2 Wound Reflection+|2XM
+2 Blasphemous Act+|2XM
+2 Blood Moon+|2XM
+2 Cragganwick Cremator+|2XM
+2 Dualcaster Mage+|2XM
+2 Goblin Guide+|2XM
+2 Godo, Bandit Warlord+|2XM
+2 Grim Lavamancer+|2XM
+2 Heat Shimmer+|2XM
+2 Ion Storm+|2XM
+2 Rage Reflection+|2XM
+2 Rolling Earthquake+|2XM
+2 Tuktuk the Explorer+|2XM
+2 Awakening Zone+|2XM
+2 Bloodspore Thrinax+|2XM
+2 Champion of Lambholt+|2XM
+2 Chord of Calling+|2XM
+2 Exploration+|2XM
+2 Greater Good+|2XM
+2 Heartbeat of Spring+|2XM
+2 Liege of the Tangle+|2XM
+2 Mana Reflection+|2XM
+2 Noble Hierarch+|2XM
+2 Shamanic Revelation+|2XM
+2 Terastodon+|2XM
+2 Thragtusk+|2XM
+2 Arixmethes, Slumbering Isle+|2XM
+2 Baleful Strix+|2XM
+2 Brudiclad, Telchor Engineer+|2XM
+2 Falkenrath Aristocrat+|2XM
+2 Fulminator Mage+|2XM
+2 Hanna, Ship's Navigator+|2XM
+2 Jhoira, Weatherlight Captain+|2XM
+2 Maelstrom Pulse+|2XM
+2 Mazirek, Kraul Death Priest+|2XM
+2 Meddling Mage+|2XM
+2 Merciless Eviction+|2XM
+2 Progenitor Mimic+|2XM
+2 Rhys the Redeemed+|2XM
+2 Savageborn Hydra+|2XM
+2 Sharuum the Hegemon+|2XM
+2 Swiftblade Vindicator+|2XM
+2 Time Sieve+|2XM
+2 Vexing Shusher+|2XM
+2 Vish Kal, Blood Arbiter+|2XM
+2 Voice of Resurgence+|2XM
+2 Adaptive Automaton+|2XM
+2 Basilisk Collar+|2XM
+2 Bosh, Iron Golem+|2XM
+2 Conjurer's Closet+|2XM
+2 Duplicant+|2XM
+2 Endless Atlas+|2XM
+2 Engineered Explosives+|2XM
+2 Hammer of Nazahn+|2XM
+2 Isochron Scepter+|2XM
+2 Kuldotha Forgemaster+|2XM
+2 Lux Cannon+|2XM
+2 Masterwork of Ingenuity+|2XM
+2 Mesmeric Orb+|2XM
+2 Myr Battlesphere+|2XM
+2 Oblivion Stone+|2XM
+2 Phyrexian Revoker+|2XM
+2 Ratchet Bomb+|2XM
+2 Sculpting Steel+|2XM
+2 Spellskite+|2XM
+2 Sundering Titan+|2XM
+2 Sunforger+|2XM
+2 Sword of the Meek+|2XM
+2 Walking Ballista+|2XM
+2 Academy Ruins+|2XM
+2 Blinkmoth Nexus+|2XM
+2 Cascade Bluffs+|2XM
+2 Fetid Heath+|2XM
+2 Fire-Lit Thicket+|2XM
+2 Flooded Grove+|2XM
+2 Glimmervoid+|2XM
+2 Graven Cairns+|2XM
+2 High Market+|2XM
+2 Maze of Ith+|2XM
+2 Mystic Gate+|2XM
+2 Rugged Prairie+|2XM
+2 Sunken Ruins+|2XM
+2 Thespian's Stage+|2XM
+2 Twilight Mire+|2XM
+2 Wooded Bastion+|2XM
+# Mythics
+1 Karn Liberated+|2XM
+1 Archangel of Thune+|2XM
+1 Avacyn, Angel of Hope+|2XM
+1 Land Tax+|2XM
+1 Arcum Dagsson+|2XM
+1 Force of Will+|2XM
+1 Jace, the Mind Sculptor+|2XM
+1 Dark Confidant+|2XM
+1 Geth, Lord of the Vault+|2XM
+1 Skithiryx, the Blight Dragon+|2XM
+1 Imperial Recruiter+|2XM
+1 Mana Echoes+|2XM
+1 Sneak Attack+|2XM
+1 Avenger of Zendikar+|2XM
+1 Doubling Season+|2XM
+1 Vengevine+|2XM
+1 Atraxa, Praetors' Voice+|2XM
+1 Breya, Etherium Shaper+|2XM
+1 Geist of Saint Traft+|2XM
+1 Kaalia of the Vast+|2XM
+1 Karrthus, Tyrant of Jund+|2XM
+1 Maelstrom Nexus+|2XM
+1 Riku of Two Reflections+|2XM
+1 The Scarab God+|2XM
+1 Sen Triplets+|2XM
+1 Batterskull+|2XM
+1 Blightsteel Colossus+|2XM
+1 Chrome Mox+|2XM
+1 Darksteel Forge+|2XM
+1 Ensnaring Bridge+|2XM
+1 Mana Crypt+|2XM
+1 Mox Opal+|2XM
+1 Sword of Body and Mind+|2XM
+1 Sword of Feast and Famine+|2XM
+1 Sword of Fire and Ice+|2XM
+1 Sword of Light and Shadow+|2XM
+1 Sword of War and Peace+|2XM
+1 Trinisphere+|2XM
+1 Wurmcoil Engine+|2XM
+1 Dark Depths+|2XM
+
 [tokens]
 b_0_0_germ
 b_5_5_demon_flying
