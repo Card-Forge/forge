@@ -26,6 +26,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PowerManager;
+import android.os.StrictMode;
 import android.provider.Settings;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
@@ -59,6 +60,14 @@ public class Main extends AndroidApplication {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /*
+         * workaroundfix FileUriExposed on TargetSDK >= 26
+         * (Tested with RealMe 6 PRO, Teclast M40 on Android 10, installs smoothly after downloading from FTP)
+         * should verify if working on Android 11 when the program updates...
+         */
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
 
         //get total device RAM in mb
         ActivityManager actManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
