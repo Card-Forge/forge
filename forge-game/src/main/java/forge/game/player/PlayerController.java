@@ -23,6 +23,7 @@ import forge.game.GameObject;
 import forge.game.GameOutcome.AnteResult;
 import forge.game.GameType;
 import forge.game.GameView;
+import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -90,6 +91,7 @@ public abstract class PlayerController {
     }
 
     public Game getGame() { return gameView.getGame(); }
+    public Match getMatch() { return gameView.getMatch(); }
     public Player getPlayer() { return player; }
     public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }
 
