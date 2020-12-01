@@ -22,6 +22,7 @@ import forge.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerOutcome;
 import forge.game.player.PlayerStatistics;
+import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.item.PaperCard;
 
@@ -45,18 +46,10 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
     public static class AnteResult implements Serializable {
         private static final long serialVersionUID = 5087554550408543192L;
 
-        public final List<PaperCard> lostCards;
-        public final List<PaperCard> wonCards;
+        public final List<PaperCard> lostCards = Lists.newArrayList();
+        public final List<PaperCard> wonCards = Lists.newArrayList();
 
-        private AnteResult(List<PaperCard> cards, boolean won) {
-            // Need empty lists for other results for addition of change ownership cards
-            if (won) {
-                this.wonCards = cards;
-                this.lostCards = new ArrayList<>();
-            } else {
-                this.lostCards = cards;
-                this.wonCards = new ArrayList<>();
-            }
+        public AnteResult() {
         }
 
         public void addWon(List<PaperCard> cards) {
@@ -65,14 +58,6 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
 
         public void addLost(List<PaperCard> cards) {
             this.lostCards.addAll(cards);
-        }
-
-        public static AnteResult won(List<PaperCard> cards) {
-            return new AnteResult(cards, true);
-        }
-
-        public static AnteResult lost(List<PaperCard> cards) {
-            return new AnteResult(cards, false);
         }
     }
 
@@ -83,7 +68,7 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
     private final HashMap<RegisteredPlayer, PlayerStatistics> playerRating = new HashMap<>();
     private final HashMap<RegisteredPlayer, String> playerNames = new HashMap<>();
 
-    public final Map<RegisteredPlayer, AnteResult> anteResult = new HashMap<>();
+    private final Map<RegisteredPlayer, AnteResult> anteResult = new HashMap<>();
     private GameEndReason winCondition;
 
     public GameOutcome(GameEndReason reason, final Iterable<Player> players) {
@@ -241,5 +226,32 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
 
     public String getOutcomeString(RegisteredPlayer player) {
         return playerNames.get(player) + " " + playerRating.get(player).getOutcome();
+    }
+
+    public void addAnteWon(RegisteredPlayer pl, List<PaperCard> cards) {
+        if (!anteResult.containsKey(pl)) {
+            anteResult.put(pl, new AnteResult());
+        }
+        anteResult.get(pl).addWon(cards);
+    }
+
+    public void addAnteLost(RegisteredPlayer pl, List<PaperCard> cards) {
+        if (!anteResult.containsKey(pl)) {
+            anteResult.put(pl, new AnteResult());
+        }
+        anteResult.get(pl).addWon(cards);
+    }
+
+    public AnteResult getAnteResult(RegisteredPlayer pl) {
+        return anteResult.get(pl);
+    }
+
+    public AnteResult getAnteResult(PlayerView pv) {
+        for (Map.Entry<RegisteredPlayer, AnteResult> e : this.anteResult.entrySet()) {
+            if (pv.isLobbyPlayer(e.getKey().getPlayer())) {
+                return e.getValue();
+            }
+        }
+        return null;
     }
 }

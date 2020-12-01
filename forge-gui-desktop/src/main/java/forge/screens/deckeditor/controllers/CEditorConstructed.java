@@ -128,6 +128,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
 
                 wantUnique = true;
                 break;
+            default:
         }
 
         catalogManager = new CardManager(getCDetailPicture(), wantUnique, false);
@@ -163,6 +164,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             case TinyLeaders:
                 this.controller = new DeckController<>(FModel.getDecks().getTinyLeaders(), this, newCreator);
                 break;
+            default:
         }
 
         getBtnAddBasicLands().setCommand(new UiCommand() {
@@ -189,6 +191,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 case TinyLeaders:
                 case Brawl:
                     return CardLimit.Singleton;
+                default:
             }
         }
         return CardLimit.None; //if not enforcing deck legality, don't enforce default limit
@@ -488,6 +491,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                     default:
                         break;
                 }
+            default:
         }
 
         this.sectionMode = sectionMode;
@@ -508,7 +512,6 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.ACEditorBase#show(forge.Command)
      */
-    @SuppressWarnings("serial")
     @Override
     public void update() {
         this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);

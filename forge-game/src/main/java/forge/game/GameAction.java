@@ -947,6 +947,7 @@ public class GameAction {
         // do this multiple times, sometimes creatures/permanents will survive when they shouldn't
         boolean orderedDesCreats = false;
         boolean orderedNoRegCreats = false;
+        CardCollection cardsToUpdateLKI = new CardCollection();
         for (int q = 0; q < 9; q++) {
             checkStaticAbilities(false, affectedCards, CardCollection.EMPTY);
             boolean checkAgain = false;
@@ -1018,6 +1019,9 @@ public class GameAction {
                 if (c.getCounters(dreamType) > 7 && c.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
                     c.subtractCounter(dreamType,  c.getCounters(dreamType) - 7);
                     checkAgain = true;
+                }
+                if (checkAgain) {
+                    cardsToUpdateLKI.add(c);
                 }
             }
 
@@ -1094,7 +1098,10 @@ public class GameAction {
         // trigger reset above will activate the copy's Always trigger, which needs to be triggered at
         // this point.
         checkStaticAbilities(false, affectedCards, CardCollection.EMPTY);
-        game.copyLastState();
+
+        for (final Card c : cardsToUpdateLKI) {
+            game.updateLastStateForCard(c);
+        }
 
         if (!refreeze) {
             game.getStack().unfreezeStack();
