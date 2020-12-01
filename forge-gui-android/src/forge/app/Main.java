@@ -61,14 +61,6 @@ public class Main extends AndroidApplication {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*
-         * workaroundfix FileUriExposed on TargetSDK >= 26
-         * (Tested with RealMe 6 PRO, Teclast M40 on Android 10, installs smoothly after downloading from FTP)
-         * should verify if working on Android 11 when the program updates...
-         */
-        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        StrictMode.setVmPolicy(builder.build());
-
         //get total device RAM in mb
         ActivityManager actManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
@@ -77,7 +69,7 @@ public class Main extends AndroidApplication {
 
         boolean permissiongranted =  checkPermission();
         Gadapter = new AndroidAdapter(this.getContext());
-        initForge(Gadapter, permissiongranted, totalMemory, isTabletDevice(this.getContext()));
+        initForge(Gadapter, permissiongranted, totalMemory, isTabletDevice(this.getContext()), android.os.Build.VERSION.SDK_INT);
 
         //permission
         if(!permissiongranted){
@@ -216,7 +208,7 @@ public class Main extends AndroidApplication {
             builder.show();
     }
 
-    private void initForge(AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice){
+    private void initForge(AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, int AndroidVersion){
         boolean isPortrait;
         if (permissiongranted){
             //establish assets directory
@@ -256,12 +248,12 @@ public class Main extends AndroidApplication {
                 Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
 
-            initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig, isPortrait, totalRAM, isTabletDevice));
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig, isPortrait, totalRAM, isTabletDevice, AndroidVersion));
         } else {
             isPortrait = true;
             //set current orientation
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, isPortrait, totalRAM, isTabletDevice));
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, isPortrait, totalRAM, isTabletDevice, AndroidVersion));
         }
 
     }
