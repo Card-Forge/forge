@@ -1172,7 +1172,7 @@ War Room+|CMR
 6 Kangee, Sky Warden|CMR
 6 Reyav, Master Smith|CMR
 6 Thalisse, Reverent Medium|CMR
-6 Tuya Bearclaw1|CMR
+6 Tuya Bearclaw|CMR
 
 [Non-Legendary Uncommons]
 Faith's Fetters|CMR
