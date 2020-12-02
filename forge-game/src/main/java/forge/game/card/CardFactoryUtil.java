@@ -386,13 +386,7 @@ public class CardFactoryUtil {
         }
 
         if (s.startsWith("Valid")) {
-            final CardCollection cards = new CardCollection();
-            for (Object o : objects) {
-                if (o instanceof Card) {
-                    cards.add((Card) o);
-                }
-            }
-            return CardFactoryUtil.handlePaid(cards, s, source);
+            return CardFactoryUtil.handlePaid(Iterables.filter(objects, Card.class), s, source);
         }
 
         int n = s.startsWith("Amount") ? objects.size() : 0;
@@ -1836,7 +1830,7 @@ public class CardFactoryUtil {
      *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
-    public static int handlePaid(final CardCollectionView paidList, final String string, final Card source) {
+    public static int handlePaid(final Iterable<Card> paidList, final String string, final Card source) {
         if (paidList == null) {
             if (string.contains(".")) {
                 final String[] splitString = string.split("\\.", 2);
@@ -1846,11 +1840,12 @@ public class CardFactoryUtil {
             }
         }
         if (string.startsWith("Amount")) {
+            int size = Iterables.size(paidList);
             if (string.contains(".")) {
                 final String[] splitString = string.split("\\.", 2);
-                return doXMath(paidList.size(), splitString[1], source);
+                return doXMath(size, splitString[1], source);
             } else {
-                return paidList.size();
+                return size;
             }
 
         }
@@ -1875,18 +1870,18 @@ public class CardFactoryUtil {
 
             final String[] splitString = string.split("/", 2);
             String valid = splitString[0].substring(6);
-            final CardCollection list = CardLists.getValidCards(paidList, valid, source.getController(), source);
+            final List<Card> list = CardLists.getValidCardsAsList(paidList, valid, source.getController(), source);
             return doXMath(list.size(), splitString.length > 1 ? splitString[1] : null, source);
         }
 
         String filteredString = string;
-        CardCollection filteredList = new CardCollection(paidList);
+        Iterable<Card> filteredList = paidList;
         final String[] filter = filteredString.split("_");
 
         if (string.startsWith("FilterControlledBy")) {
             final String pString = filter[0].substring(18);
             FCollectionView<Player> controllers = AbilityUtils.getDefinedPlayers(source, pString, null);
-            filteredList = CardLists.filterControlledBy(filteredList, controllers);
+            filteredList = CardLists.filterControlledByAsList(filteredList, controllers);
             filteredString = TextUtil.fastReplace(filteredString, pString, "");
             filteredString = TextUtil.fastReplace(filteredString, "FilterControlledBy_", "");
         }
