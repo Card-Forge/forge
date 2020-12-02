@@ -226,8 +226,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, localizer.getMessage("lblInventory"), FSkinImage.QUEST_BOX),
                     new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
-                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION),
-                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.QUEST_DECK_EDITOR)
+                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION)
             };
         case PlanarConquest:
             return new DeckEditorPage[] {
@@ -263,7 +262,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private FDeckEditor(EditorType editorType0, String editDeckName, String editDeckPath, Deck newDeck, boolean showMainDeck) {
         super(getPages(editorType0));
 
-        editorType = editorType0;
+        if (editorType0 == EditorType.QuestCommander) //fix saving quest commander
+            editorType = EditorType.Quest;
+        else
+            editorType = editorType0;
+
         editorType.getController().editor = this;
 
         //cache specific pages
@@ -1057,7 +1060,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)), PaperCard.class), true);
                 break;
             case Quest:
-            case QuestCommander:
                 final ItemPool<PaperCard> questPool = new ItemPool<>(PaperCard.class);
                 questPool.addAll(FModel.getQuest().getCards().getCardpool());
                 // remove bottom cards that are in the deck from the card pool
@@ -1069,6 +1071,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case PlanarConquest:
                 cardManager.setPool(ConquestUtil.getAvailablePool(parentScreen.getDeck()));
                 break;
+            case QuestCommander:
             case Commander:
             case Oathbreaker:
             case TinyLeaders:
@@ -1078,6 +1081,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     //if no commander set for deck, only show valid commanders
                     switch (editorType) {
                     case Commander:
+                    case QuestCommander:
                         additionalFilter = DeckFormat.Commander.isLegalCommanderPredicate();
                         cardManager.setCaption(localizer.getMessage("lblCommanders"));
                         break;
@@ -1101,6 +1105,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     //if a commander has been set, only show cards that match its color identity
                     switch (editorType) {
                     case Commander:
+                    case QuestCommander:
                         additionalFilter = DeckFormat.Commander.isLegalCardForCommanderPredicate(commanders);
                         break;
                     case Oathbreaker:
