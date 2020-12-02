@@ -930,15 +930,6 @@ public class CardFactoryUtil {
             return doXMath(cc.getSpellsCastThisGame(), m, c);
         }
 
-        if (sq[0].equals("FirstSpellTotalManaSpent")) {
-            try{
-                return doXMath(c.getFirstSpellAbility().getTotalManaSpent(), m, c);
-            } catch (NullPointerException e) {
-                // This spell was not cast
-                return 0;
-            }
-
-        }
         if (sq[0].equals("StormCount")) {
             return doXMath(game.getStack().getSpellsCastThisTurn().size() - 1, m, c);
         }

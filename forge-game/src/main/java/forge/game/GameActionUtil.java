@@ -131,7 +131,6 @@ public final class GameActionUtil {
                 }
                 sar.setZone(null);
                 newSA.setMayPlay(o.getAbility());
-                newSA.setMayPlayOriginal(sa);
 
                 if (changedManaCost) {
                     if ("0".equals(sa.getParam("ActivationLimit")) && sa.getHostCard().getManaCost().isNoCost()) {

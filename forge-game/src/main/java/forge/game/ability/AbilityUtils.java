@@ -1760,6 +1760,10 @@ public class AbilityUtils {
 
                     return CardFactoryUtil.doXMath(game.getCounterAddedThisTurn(cType, parts[2], parts[3], c, sa.getActivatingPlayer(), sa), expr, c);
                 }
+
+                if (sq[0].startsWith("CastTotalManaSpent")) {
+                    return CardFactoryUtil.doXMath(c.getCastSA() != null ? c.getCastSA().getTotalManaSpent() : 0, expr, c);
+                }
             }
         }
         return CardFactoryUtil.xCount(c, s2);
