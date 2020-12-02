@@ -27,11 +27,12 @@ public class BecomeMonarchEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         // TODO: improve ai and fix corner cases
+        final String set = sa.getHostCard().getSetCode();
 
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (!p.hasKeyword("You can’t become the monarch this turn.")) {
-                    p.getGame().getAction().becomeMonarch(p);
+                    p.getGame().getAction().becomeMonarch(p, set);
                 }
             }
         }
