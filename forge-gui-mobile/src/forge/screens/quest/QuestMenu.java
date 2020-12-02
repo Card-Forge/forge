@@ -183,6 +183,10 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     }
 
     public static void launchQuestMode(final LaunchReason reason) {
+        launchQuestMode(reason, false);
+    }
+    public static void launchQuestMode(final LaunchReason reason, boolean commanderMode) {
+        decksScreen.commanderMode = commanderMode;
         //attempt to load current quest
         final File dirQuests = new File(ForgeConstants.QUEST_SAVE_DIR);
         final String questname = FModel.getQuestPreferences().getPref(QPref.CURRENT_QUEST);
