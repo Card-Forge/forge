@@ -700,7 +700,7 @@ public class AbilityUtils {
         }
          */
 
-        CardCollectionView list;
+        Iterable<Card> list;
         if (calcX[0].startsWith("Sacrificed")) {
             list = sa.getRootAbility().getPaidList("Sacrificed");
         }
@@ -737,17 +737,11 @@ public class AbilityUtils {
         }
         else if (calcX[0].startsWith("TriggerRemembered")) {
             final SpellAbility root = sa.getRootAbility();
-            CardCollection result = new CardCollection();
-            for (Object o : root.getTriggerRemembered()) {
-                if (o instanceof Card) {
-                    result.add((Card) o);
-                }
-            }
-            list = result;
+            list = Iterables.filter(root.getTriggerRemembered(), Card.class);
         }
         else if (calcX[0].startsWith("TriggerObjects")) {
             final SpellAbility root = sa.getRootAbility();
-            list = (CardCollection) root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(14)));
+            list = Iterables.filter((Iterable<?>) root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(14))), Card.class);
         }
         else if (calcX[0].startsWith("Triggered")) {
             final SpellAbility root = sa.getRootAbility();
