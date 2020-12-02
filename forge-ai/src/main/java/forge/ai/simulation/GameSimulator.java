@@ -127,19 +127,11 @@ public class GameSimulator {
     private SpellAbility findSaInSimGame(SpellAbility sa) {
         Card origHostCard = sa.getHostCard();
         Card hostCard = (Card) copier.find(origHostCard);
-        SpellAbility saOriginal = sa.getMayPlayOriginal();
         String desc = sa.getDescription();
-        if (saOriginal != null) {
-            // This is needed when it's an alternate cost SA and the desc string has
-            // been modified to add "by Foo" to it. TODO: Do we also need to do this in
-            // other places where we compare descriptions?
-            desc = saOriginal.getDescription();
-            System.err.println(sa.getDescription() + "->" + desc);
-        }
         // FIXME: This is a hack that makes testManifest pass - figure out why it's needed.
         desc = TextUtil.fastReplace(desc, "Unmanifest {0}", "Unmanifest no cost");
         for (SpellAbility cSa : hostCard.getSpellAbilities()) {
-            if (desc.equals(cSa.getDescription())) {
+            if (desc.startsWith(cSa.getDescription())) {
                 return cSa;
             }
         }

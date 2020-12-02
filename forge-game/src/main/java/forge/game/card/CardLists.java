@@ -204,6 +204,14 @@ public class CardLists {
         return CardLists.filter(cardList, CardPredicates.isControlledByAnyOf(player));
     }
 
+    public static List<Card> filterControlledByAsList(Iterable<Card> cardList, Player player) {
+        return CardLists.filterAsList(cardList, CardPredicates.isController(player));
+    }
+
+    public static List<Card> filterControlledByAsList(Iterable<Card> cardList, FCollectionView<Player> player) {
+        return CardLists.filterAsList(cardList, CardPredicates.isControlledByAnyOf(player));
+    }
+
     public static CardCollection getValidCards(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source, SpellAbility spellAbility) {
         return CardLists.filter(cardList, CardPredicates.restriction(restrictions, sourceController, source, spellAbility));
     }

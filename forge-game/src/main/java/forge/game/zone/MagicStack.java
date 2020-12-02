@@ -140,7 +140,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 ability.setHostCard(game.getAction().moveToStack(source, ability));
             }
             if (ability.equals(source.getCastSA())) {
-                source.setCastSA(ability.copy(source, true));
+                SpellAbility cause = ability.copy(source, true);
+
+                cause.setLastStateBattlefield(game.getLastStateBattlefield());
+                cause.setLastStateGraveyard(game.getLastStateGraveyard());
+
+                source.setCastSA(cause);
             }
         }
 
@@ -286,9 +291,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         sp.setTotalManaSpent(totManaSpent);
-        if (sp.getMayPlayOriginal() != null) {
-            sp.getMayPlayOriginal().setTotalManaSpent(totManaSpent);
-        }
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -300,7 +302,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put(AbilityKey.CastSA, si.getSpellAbility(true));
             runParams.put(AbilityKey.CastSACMC, si.getSpellAbility(true).getHostCard().getCMC());
             runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
-            runParams.put(AbilityKey.CurrentCastSpells, new CardCollection(thisTurnCast));
+            runParams.put(AbilityKey.CurrentCastSpells, Lists.newArrayList(thisTurnCast));
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
 
             // Run SpellCast triggers

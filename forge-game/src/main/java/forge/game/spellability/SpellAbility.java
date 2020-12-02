@@ -95,8 +95,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private SpellAbility grantorOriginal = null;
     private StaticAbility grantorStatic = null;
 
-    private SpellAbility mayPlayOriginal = null;
-
     private CardCollection splicedCards = null;
 
     private boolean basicSpell = true;
@@ -386,15 +384,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 sa.setOriginalHost(c);
             }
         }
-    }
-
-
-    public SpellAbility getMayPlayOriginal() {
-        return mayPlayOriginal;
-    }
-
-    public void setMayPlayOriginal(SpellAbility mayPlayOriginal) {
-        this.mayPlayOriginal = mayPlayOriginal;
     }
 
     // If this is not null, then ability was made in a factory
