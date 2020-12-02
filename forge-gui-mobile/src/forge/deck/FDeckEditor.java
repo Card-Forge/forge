@@ -115,6 +115,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return new Deck();
             }
         }), null),
+        QuestCommander(new DeckController<>(null, new Supplier<Deck>() { //delay setting root folder until quest loaded
+            @Override
+            public Deck get() {
+                return new Deck();
+            }
+        }), null),
         QuestDraft(new DeckController<>(null, new Supplier<DeckGroup>() { //delay setting root folder until quest loaded
             @Override
             public DeckGroup get() {
@@ -214,6 +220,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, localizer.getMessage("lblInventory"), FSkinImage.QUEST_BOX),
                     new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
+                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.QUEST_DECK_EDITOR)
+            };
+        case QuestCommander:
+            return new DeckEditorPage[] {
+                    new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, localizer.getMessage("lblInventory"), FSkinImage.QUEST_BOX),
+                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
+                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION),
                     new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.QUEST_DECK_EDITOR)
             };
         case PlanarConquest:
@@ -520,6 +533,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         case QuestDraft:
             return CardLimit.None;
         case Commander:
+        case QuestCommander:
         case Oathbreaker:
         case TinyLeaders:
         case Brawl:
@@ -787,7 +801,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 if (isAddSource) {
                     qty = itemEntry.getValue();
                 }
-                else if (parentScreen.getEditorType() == EditorType.Quest) {
+                else if (parentScreen.getEditorType() == EditorType.Quest||parentScreen.getEditorType() == EditorType.QuestCommander) {
                     //prevent adding more than is in quest inventory
                     qty = parentScreen.getCatalogPage().cardManager.getItemCount(card);
                 }
@@ -991,7 +1005,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             super.initialize();
             cardManager.setCaption(getItemManagerCaption());
 
-            if (!isVisible() && parentScreen.getEditorType() != EditorType.Quest) {
+            if (!isVisible() && (parentScreen.getEditorType() != EditorType.Quest||parentScreen.getEditorType() != EditorType.QuestCommander)) {
                 needRefreshWhenShown = true;
                 return; //delay refreshing while hidden unless for quest inventory
             }
@@ -1043,6 +1057,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)), PaperCard.class), true);
                 break;
             case Quest:
+            case QuestCommander:
                 final ItemPool<PaperCard> questPool = new ItemPool<>(PaperCard.class);
                 questPool.addAll(FModel.getQuest().getCards().getCardpool());
                 // remove bottom cards that are in the deck from the card pool
@@ -1351,7 +1366,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         if (parentScreen.isLimitedEditor()) { //ensure card removed from sideboard before adding to main
                             parentScreen.getSideboardPage().removeCard(card, result);
                         }
-                        else if (parentScreen.getEditorType() == EditorType.Quest) {
+                        else if (parentScreen.getEditorType() == EditorType.Quest || parentScreen.getEditorType() == EditorType.QuestCommander) {
                             parentScreen.getCatalogPage().removeCard(card, result);
                         }
                         addCard(card, result);
@@ -1392,7 +1407,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         if (parentScreen.isLimitedEditor()) { //ensure card removed from main deck before adding to sideboard
                             parentScreen.getMainDeckPage().removeCard(card, result);
                         }
-                        else if (parentScreen.getEditorType() == EditorType.Quest) {
+                        else if (parentScreen.getEditorType() == EditorType.Quest || parentScreen.getEditorType() == EditorType.QuestCommander) {
                             parentScreen.getCatalogPage().removeCard(card, result);
                         }
                         addCard(card, result);
@@ -1741,6 +1756,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 DeckPreferences.setSealedDeck(deckStr);
                 break;
             case Quest:
+            case QuestCommander:
                 FModel.getQuest().setCurrentDeck(model.toString());
                 FModel.getQuest().save();
                 break;
