@@ -140,7 +140,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 ability.setHostCard(game.getAction().moveToStack(source, ability));
             }
             if (ability.equals(source.getCastSA())) {
-                source.setCastSA(ability.copy(source, true));
+                SpellAbility cause = ability.copy(source, true);
+
+                cause.setLastStateBattlefield(game.getLastStateBattlefield());
+                cause.setLastStateGraveyard(game.getLastStateGraveyard());
+
+                source.setCastSA(cause);
             }
         }
 
