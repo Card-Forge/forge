@@ -26,7 +26,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PowerManager;
-import android.os.StrictMode;
 import android.provider.Settings;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
