@@ -1591,10 +1591,18 @@ public class AiController {
             }
 
             sa.setActivatingPlayer(player);
-            sa.setLastStateBattlefield(game.getLastStateBattlefield());
-            sa.setLastStateGraveyard(game.getLastStateGraveyard());
+            SpellAbility root = sa.getRootAbility();
+
+            if (root.isSpell() || root.isTrigger() || root.isReplacementAbility()) {
+                sa.setLastStateBattlefield(game.getLastStateBattlefield());
+                sa.setLastStateGraveyard(game.getLastStateGraveyard());
+            }
 
             AiPlayDecision opinion = canPlayAndPayFor(sa);
+
+            // reset LastStateBattlefield
+            sa.setLastStateBattlefield(CardCollection.EMPTY);
+            sa.setLastStateGraveyard(CardCollection.EMPTY);
             // PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
             
