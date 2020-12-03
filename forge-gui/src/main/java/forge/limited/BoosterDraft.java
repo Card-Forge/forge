@@ -55,7 +55,7 @@ public class BoosterDraft implements IBoosterDraft {
     private final List<LimitedPlayer> players = new ArrayList<>();
     private LimitedPlayer localPlayer;
 
-    private boolean doublePickToStartRound = false;
+    private String doublePickDuringDraft = ""; // "FirstPick" or "Always"
     protected int nextBoosterGroup = 0;
     private int currentBoosterSize = 0;
     private int currentBoosterPick = 0;
@@ -143,7 +143,7 @@ public class BoosterDraft implements IBoosterDraft {
                 } else {
                     // Only one set is chosen. If that set lets you draft 2 cards to start adjust draft settings now
                     String setCode = sets.get(0);
-                    doublePickToStartRound = FModel.getMagicDb().getEditions().get(setCode).getDoublePickToStartRound();
+                    doublePickDuringDraft = FModel.getMagicDb().getEditions().get(setCode).getDoublePickDuringDraft();
 
                     final IUnOpenedProduct product1 = block.getBooster(setCode);
 
@@ -370,7 +370,10 @@ public class BoosterDraft implements IBoosterDraft {
     public void passPacks() {
         // Alternate direction of pack passing
         int adjust = this.nextBoosterGroup % 2 == 1 ? 1 : -1;
-        if (this.doublePickToStartRound && currentBoosterPick == 1) {
+        if ("FirstPick".equals(this.doublePickDuringDraft) && currentBoosterPick == 1) {
+            adjust = 0;
+        } else if (currentBoosterPick % 2 == 1 && "Always".equals(this.doublePickDuringDraft)) {
+            // This may not work with Conspiracy cards that mess with the draft
             adjust = 0;
         }
 

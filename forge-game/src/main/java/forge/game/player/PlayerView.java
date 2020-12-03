@@ -355,7 +355,7 @@ public class PlayerView extends GameEntityView {
         return get(TrackableProperty.MindSlaveMaster);
     }
     void updateMindSlaveMaster(Player p) {
-        set(TrackableProperty.MindSlaveMaster, PlayerView.get(p.getMindSlaveMaster()));
+        set(TrackableProperty.MindSlaveMaster, PlayerView.get(p.getControllingPlayer()));
     }
 
     public FCollectionView<CardView> getAnte() {

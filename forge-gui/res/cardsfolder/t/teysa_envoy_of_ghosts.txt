@@ -5,7 +5,7 @@ PT:4/4
 K:Vigilance
 K:Protection from creatures
 T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | CombatDamage$ True | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature deals combat damage to you, destroy that creature. Create a 1/1 white and black Spirit creature token with flying.
-SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredSource | SubAbility$ DBToken
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredSourceLKICopy | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ wb_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ wb 1 1 spirit flying dgm
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teysa_envoy_of_ghosts.jpg

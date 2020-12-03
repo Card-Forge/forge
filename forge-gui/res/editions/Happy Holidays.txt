@@ -1,0 +1,9 @@
+[metadata]
+Code=HHO
+Date=2006-12-31
+Name=Happy Holidays
+Type=Other
+
+[cards]
+6 R Fruitcake Elemental
+9 R Season's Beatings

@@ -1,0 +1,9 @@
+Name:Archelos, Lagoon Mystic
+ManaCost:1 B G U
+Types:Legendary Creature Turtle Shaman
+PT:2/4
+R:Event$ Moved | ValidCard$ Permanent | Destination$ Battlefield | IsPresent$ Card.Self+tapped | ReplaceWith$ ETBTapped | ActiveZones$ Battlefield | Description$ As long as CARDNAME is tapped, other permanents enter the battlefield tapped.
+SVar:ETBTapped:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Tapped$ True | Defined$ ReplacedCard
+R:Event$ Moved | ValidCard$ Permanent | Destination$ Battlefield | IsPresent$ Card.Self+untapped | ReplaceWith$ ETBUntapped | ActiveZones$ Battlefield | Description$ As long as NICKNAME is untapped, other permanents enter the battlefield untapped.
+SVar:ETBUntapped:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Untapped$ True | Defined$ ReplacedCard
+Oracle:As long as Archelos, Lagoon Mystic is tapped, other permanents enter the battlefield tapped.\nAs long as Archelos is untapped, other permanents enter the battlefield untapped.

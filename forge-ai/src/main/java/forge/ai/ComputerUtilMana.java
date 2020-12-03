@@ -484,7 +484,7 @@ public class ComputerUtilMana {
             SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test);
 
             if (saPayment != null && ComputerUtilCost.isSacrificeSelfCost(saPayment.getPayCosts())) {
-                if (sa.getTargets() != null && sa.getTargets().isTargeting(saPayment.getHostCard())) {
+                if (sa.getTargets() != null && sa.getTargets().contains(saPayment.getHostCard())) {
                     saExcludeList.add(saPayment); // not a good idea to sac a card that you're targeting with the SA you're paying for
                     continue;
                 }
@@ -622,13 +622,6 @@ public class ComputerUtilMana {
                 return false;
             }
         }
-
-        // Note: manaSpentToPay shouldn't be cleared here, since it needs to remain
-        // on the SpellAbility in order for effects that check mana spent cost to work.
-
-        sa.getHostCard().setColorsPaid(cost.getColorsPaid());
-        // if (sa instanceof Spell_Permanent) // should probably add this
-        sa.getHostCard().setSunburstValue(cost.getSunburst());
 
         if (test) {
             refundMana(manaSpentToPay, ai, sa);

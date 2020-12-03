@@ -1,4 +1,4 @@
-Name:Kodis, Emberclaw Familiar
+Name:Kediss, Emberclaw Familiar
 ManaCost:1 R
 Types:Legendary Creature Elemental Lizard
 PT:1/1

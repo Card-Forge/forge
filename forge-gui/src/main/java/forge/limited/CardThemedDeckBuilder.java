@@ -213,7 +213,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.FILTERED_HANDS)){
             baseLandParameter--;
         }
-        landsNeeded = new Double((baseLandParameter + 3.14f * avCMC) * targetSize/60f).intValue();
+        landsNeeded = Double.valueOf((baseLandParameter + 3.14f * avCMC) * targetSize/60f).intValue();
         if (logToConsole) {
             System.out.println("Required lands from linear regression : " + avCMC + " cmc, needed:  " + landsNeeded);
         }
@@ -425,8 +425,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
         @Override
         public boolean apply(CardRules subject) {
-            ManaCost mc = subject.getManaCost();
-            boolean generic = mc.isPureGeneric();
             return ((allowedColor.containsAllColorsFrom(subject.getColorIdentity().getColor())));
         }
     }

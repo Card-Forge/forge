@@ -3,6 +3,9 @@ Code=CMR
 Date=2020-11-11
 Name=Commander Legends
 Type=Other
+Booster=13 Common:fromSheet("CMR cards"), 3 fromSheet("CMR Non-Legendary Uncommons"), 1 fromSheet("CMR Non-Legendary RareMythics"), 1 fromSheet("CMR Foils"), 2 fromSheet("CMR Legendaries")
+Foil=NotSupported
+DoublePick=Always
 
 [cards]
 1 C The Prismatic Piper
@@ -367,7 +370,7 @@ Type=Other
 360 R Vault of Champions
 361 R War Room
 
-[commander decks]
+[precon product]
 362 M Wyleth, Soul of Steel
 363 R Timely Ward
 364 R Blazing Sunsteel
@@ -733,5 +736,615 @@ Type=Other
 [buy a box]
 721 M Mana Confluence
 
-[promos]
+[promo]
 722 R Sengir, the Dark Baron
+
+[Foils]
+The Prismatic Piper+|CMR
+Akroma, Vision of Ixidor+|CMR
+Akroma's Will+|CMR
+Alharu, Solemn Ritualist+|CMR
+Ancestral Blade+|CMR
+Angel of the Dawn+|CMR
+Angelic Gift+|CMR
+Anointer of Valor+|CMR
+Archon of Coronation+|CMR
+Ardenn, Intrepid Archaeologist+|CMR
+Armored Skyhunter+|CMR
+Austere Command+|CMR
+Benevolent Blessing+|CMR
+Cage of Hands+|CMR
+Captain's Call+|CMR
+Court of Grace+|CMR
+Court Street Denizen+|CMR
+Dispeller's Capsule+|CMR
+Doomed Traveler+|CMR
+Faith's Fetters+|CMR
+Fencing Ace+|CMR
+First Response+|CMR
+Inspiring Roar+|CMR
+Intangible Virtue+|CMR
+Iona's Judgment+|CMR
+Kangee's Lieutenant+|CMR
+Keeper of the Accord+|CMR
+Keleth, Sunmane Familiar+|CMR
+Kinsbaile Courier+|CMR
+Kor Cartographer+|CMR
+Livio, Oathsworn Sentinel+|CMR
+Make a Stand+|CMR
+Ninth Bridge Patrol+|CMR
+Open the Armory+|CMR
+Orzhov Advokist+|CMR
+Palace Sentinels+|CMR
+Patron of the Valiant+|CMR
+Prava of the Steel Legion+|CMR
+Promise of Tomorrow+|CMR
+Radiant, Serra Archangel+|CMR
+Raise the Alarm+|CMR
+Rebbec, Architect of Ascension+|CMR
+Return to Dust+|CMR
+Seraph of Dawn+|CMR
+Seraphic Greatsword+|CMR
+Skywhaler's Shot+|CMR
+Slash the Ranks+|CMR
+Slaughter the Strong+|CMR
+Slith Ascendant+|CMR
+Soul of Eternity+|CMR
+Squad Captain+|CMR
+Triumphant Reckoning+|CMR
+Trusty Packbeast+|CMR
+Vow of Duty+|CMR
+Amphin Mutineer+|CMR
+Aqueous Form+|CMR
+Aven Surveyor+|CMR
+Azure Fleet Admiral+|CMR
+Body of Knowledge+|CMR
+Brinelin, the Moon Kraken+|CMR
+Flood of Recollection+|CMR
+Confiscate+|CMR
+Court of Cunning+|CMR
+Daring Saboteur+|CMR
+Deranged Assistant+|CMR
+Eligeth, Crossroads Augur+|CMR
+Esior, Wardwing Familiar+|CMR
+Fall from Favor+|CMR
+Forceful Denial+|CMR
+Galestrike+|CMR
+Ghost of Ramirez DePietro+|CMR
+Glacian, Powerstone Engineer+|CMR
+Horizon Scholar+|CMR
+Hullbreacher+|CMR
+Interpret the Signs+|CMR
+Kitesail Corsair+|CMR
+Kitesail Skirmisher+|CMR
+Laboratory Drudge+|CMR
+Malcolm, Keen-Eyed Navigator+|CMR
+Mana Drain+|CMR
+Merchant Raiders+|CMR
+Mnemonic Deluge+|CMR
+Omenspeaker+|CMR
+Preordain+|CMR
+Prosperous Pirates+|CMR
+Prying Eyes+|CMR
+Run Away Together+|CMR
+Sailor of Means+|CMR
+Sakashima of a Thousand Faces+|CMR
+Sakashima's Protege+|CMR
+Sakashima's Will+|CMR
+Scholar of Stars+|CMR
+Scholar of the Ages+|CMR
+Scrapdiver Serpent+|CMR
+Siani, Eye of the Storm+|CMR
+Siren Stormtamer+|CMR
+Skaab Goliath+|CMR
+Skilled Animator+|CMR
+Sphinx of the Second Sun+|CMR
+Spontaneous Mutation+|CMR
+Strategic Planning+|CMR
+Supreme Will+|CMR
+Thirst for Knowledge+|CMR
+Trove Tracker+|CMR
+Vow of Flight+|CMR
+Warden of Evos Isle+|CMR
+Wrong Turn+|CMR
+Armix, Filigree Thrasher+|CMR
+Bitter Revelation+|CMR
+Bladebrand+|CMR
+Briarblade Adept+|CMR
+Cast Down+|CMR
+Corpse Churn+|CMR
+Court of Ambition+|CMR
+Crow of Dark Tidings+|CMR
+Cuombajj Witches+|CMR
+Defiant Salvager+|CMR
+Demonic Lore+|CMR
+Dhund Operative+|CMR
+Elvish Doomsayer+|CMR
+Elvish Dreadlord+|CMR
+Exquisite Huntmaster+|CMR
+Eyeblight Assassin+|CMR
+Eyeblight Cullers+|CMR
+Eyeblight Massacre+|CMR
+Falthis, Shadowcat Familiar+|CMR
+Feast of Succession+|CMR
+Fleshbag Marauder+|CMR
+Ghastly Demise+|CMR
+Gilt-Leaf Winnower+|CMR
+Keskit, the Flesh Sculptor+|CMR
+Maalfeld Twins+|CMR
+Miara, Thorn of the Glade+|CMR
+Murder+|CMR
+Nadier, Agent of the Duskenel+|CMR
+Nadier's Nightblade+|CMR
+Necrotic Hex+|CMR
+Nightshade Harvester+|CMR
+Noxious Dragon+|CMR
+Null Caller+|CMR
+Opposition Agent+|CMR
+Phyrexian Rager+|CMR
+Plague Reaver+|CMR
+Pride of the Perfect+|CMR
+Profane Transfusion+|CMR
+Rakshasa Debaser+|CMR
+Revenant+|CMR
+Sanitarium Skeleton+|CMR
+Sengir, the Dark Baron+|CMR
+Spark Harvest+|CMR
+Supernatural Stamina+|CMR
+Szat's Will+|CMR
+Tevesh Szat, Doom of Fools+|CMR
+Thorn of the Black Rose+|CMR
+Tormod, the Desecrator+|CMR
+Vampiric Tutor+|CMR
+Victimize+|CMR
+Viscera Seer+|CMR
+Vow of Torment+|CMR
+Alena, Kessig Trapper+|CMR
+Aurora Phoenix+|CMR
+Blasphemous Act+|CMR
+Boarding Party+|CMR
+Brazen Freebooter+|CMR
+Breeches, Brazen Plunderer+|CMR
+Burning Anger+|CMR
+Champion of the Flame+|CMR
+Coastline Marauders+|CMR
+Coercive Recruiter+|CMR
+Court of Ire+|CMR
+Crimson Fleet Commodore+|CMR
+Dargo, the Shipwrecker+|CMR
+Dragon Egg+|CMR
+Dragon Mantle+|CMR
+Emberwilde Captain+|CMR
+Explosion of Riches+|CMR
+Fathom Fleet Swordjack+|CMR
+Fiery Cannonade+|CMR
+Flamekin Herald+|CMR
+Frenzied Saddlebrute+|CMR
+Furnace Celebration+|CMR
+Goblin Trailblazer+|CMR
+Hellkite Courser+|CMR
+Humble Defector+|CMR
+Impulsive Pilferer+|CMR
+Jeska, Thrice Reborn+|CMR
+Jeska's Will+|CMR
+Kediss, Emberclaw Familiar+|CMR
+Krark, the Thumbless+|CMR
+Lightning-Rig Crew+|CMR
+Makeshift Munitions+|CMR
+Meteoric Mace+|CMR
+Port Razer+|CMR
+Portent of Betrayal+|CMR
+Renegade Tactics+|CMR
+Ripscale Predator+|CMR
+Rograkh, Son of Rohgahh+|CMR
+Rummaging Goblin+|CMR
+Skyraker Giant+|CMR
+Soul's Fire+|CMR
+Soulfire Eruption+|CMR
+Sparktongue Dragon+|CMR
+Stonefury+|CMR
+Toggo, Goblin Weaponsmith+|CMR
+Undying Rage+|CMR
+Valakut Invoker+|CMR
+Volcanic Dragon+|CMR
+Volcanic Torrent+|CMR
+Vow of Lightning+|CMR
+Welding Sparks+|CMR
+Wheel of Misfortune+|CMR
+Wild Celebrants+|CMR
+Ambush Viper+|CMR
+Anara, Wolvid Familiar+|CMR
+Ancient Animus+|CMR
+Annoyed Altisaur+|CMR
+Apex Devastator+|CMR
+Armorcraft Judge+|CMR
+Biowaste Blob+|CMR
+Court of Bounty+|CMR
+Crushing Vines+|CMR
+Dawnglade Regent+|CMR
+Elvish Visionary+|CMR
+Entourage of Trest+|CMR
+Farhaven Elf+|CMR
+Fertilid+|CMR
+Fin-Clade Fugitives+|CMR
+Fyndhorn Elves+|CMR
+Gift of Paradise+|CMR
+Gilanra, Caller of Wirewood+|CMR
+Halana, Kessig Ranger+|CMR
+Hunter's Insight+|CMR
+Ich-Tekik, Salvage Splicer+|CMR
+Immaculate Magistrate+|CMR
+Imperious Perfect+|CMR
+Ivy Lane Denizen+|CMR
+Kamahl, Heart of Krosa+|CMR
+Kamahl's Will+|CMR
+Kodama of the East Tree+|CMR
+Lifecrafter's Gift+|CMR
+Lys Alana Bowmaster+|CMR
+Magus of the Order+|CMR
+Molder Beast+|CMR
+Monstrous Onslaught+|CMR
+Natural Reclamation+|CMR
+Numa, Joraga Chieftain+|CMR
+Ordeal of Nylea+|CMR
+Reclamation Sage+|CMR
+Reshape the Earth+|CMR
+Rootweaver Druid+|CMR
+Scaled Behemoth+|CMR
+Scrounging Bandar+|CMR
+Sentinel Spider+|CMR
+Sifter Wurm+|CMR
+Silverback Shaman+|CMR
+Slurrk, All-Ingesting+|CMR
+Soul's Might+|CMR
+Stingerfling Spider+|CMR
+Strength of the Pack+|CMR
+Sweet-Gum Recluse+|CMR
+Three Visits+|CMR
+Vow of Wildness+|CMR
+Wildheart Invoker+|CMR
+Wildsize+|CMR
+Abomination of Llanowar+|CMR
+Amareth, the Lustrous+|CMR
+Araumi of the Dead Tide+|CMR
+Archelos, Lagoon Mystic+|CMR
+Averna, the Chaos Bloom+|CMR
+Belbe, Corrupted Observer+|CMR
+Bell Borca, Spectral Sergeant+|CMR
+Blim, Comedic Genius+|CMR
+Captain Vargus Wrath+|CMR
+Colfenor, the Last Yew+|CMR
+Ghen, Arcanum Weaver+|CMR
+Gnostro, Voice of the Crags+|CMR
+Gor Muldrak, Amphinologist+|CMR
+Hamza, Guardian of Arashin+|CMR
+Hans Eriksson+|CMR
+Imoti, Celebrant of Bounty+|CMR
+Jared Carthalion, True Heir+|CMR
+Juri, Master of the Revue+|CMR
+Kangee, Sky Warden+|CMR
+Kwain, Itinerant Meddler+|CMR
+Lathiel, the Bounteous Dawn+|CMR
+Liesa, Shroud of Dusk+|CMR
+Nevinyrral, Urborg Tyrant+|CMR
+Nymris, Oona's Trickster+|CMR
+Obeka, Brute Chronologist+|CMR
+Reyav, Master Smith+|CMR
+Thalisse, Reverent Medium+|CMR
+Tuya Bearclaw+|CMR
+Yurlok of Scorch Thrash+|CMR
+Zara, Renegade Recruiter+|CMR
+Amorphous Axe+|CMR
+Angelic Armaments+|CMR
+Arcane Signet+|CMR
+Armillary Sphere+|CMR
+Armory of Iroas+|CMR
+Bladegriff Prototype+|CMR
+Brass Herald+|CMR
+Burnished Hart+|CMR
+Charcoal Diamond+|CMR
+Codex Shredder+|CMR
+Commander's Plate+|CMR
+Commander's Sphere+|CMR
+Dreamstone Hedron+|CMR
+Filigree Familiar+|CMR
+Fire Diamond+|CMR
+Foundry Inspector+|CMR
+Golem Artisan+|CMR
+Grafted Wargear+|CMR
+Haunted Cloak+|CMR
+Hero's Blade+|CMR
+Horizon Stone+|CMR
+Howling Golem+|CMR
+Ingenuity Engine+|CMR
+Jalum Tome+|CMR
+Jeweled Lotus+|CMR
+Loreseeker's Stone+|CMR
+Lumengrid Gargoyle+|CMR
+Maelstrom Colossus+|CMR
+Marble Diamond+|CMR
+Mask of Memory+|CMR
+Meteor Golem+|CMR
+Mindless Automaton+|CMR
+Moss Diamond+|CMR
+Nevinyrral's Disk+|CMR
+Pennon Blade+|CMR
+Perilous Myr+|CMR
+Phyrexian Triniform+|CMR
+Pilgrim's Eye+|CMR
+Pirate's Cutlass+|CMR
+Prophetic Prism+|CMR
+Rings of Brighthearth+|CMR
+Sandstone Oracle+|CMR
+Scroll Rack+|CMR
+Seer's Lantern+|CMR
+Shimmer Myr+|CMR
+Sisay's Ring+|CMR
+Sky Diamond+|CMR
+Spectral Searchlight+|CMR
+Staff of Domination+|CMR
+Staunch Throneguard+|CMR
+Sunset Pyramid+|CMR
+Thought Vessel+|CMR
+Universal Solvent+|CMR
+Workshop Assistant+|CMR
+Command Beacon+|CMR
+Command Tower+|CMR
+Guildless Commons+|CMR
+Opal Palace+|CMR
+Path of Ancestry+|CMR
+Rejuvenating Springs+|CMR
+Rupture Spire+|CMR
+Spectator Seating+|CMR
+Terramorphic Expanse+|CMR
+Training Center+|CMR
+Undergrowth Stadium+|CMR
+Vault of Champions+|CMR
+War Room+|CMR
+
+[Legendaries]
+1 Akroma, Vision of Ixidor|CMR
+1 Sakashima of a Thousand Faces|CMR
+1 Tevesh Szat, Doom of Fools|CMR
+1 Jeska, Thrice Reborn|CMR
+1 Kamahl, Heart of Krosa|CMR
+2 Livio, Oathsworn Sentinel|CMR
+2 Eligeth, Crossroads Augur|CMR
+2 Sengir, the Dark Baron|CMR
+2 Krark, the Thumbless|CMR
+2 Kodama of the East Tree|CMR
+2 Amareth, the Lustrous|CMR
+2 Archelos, Lagoon Mystic|CMR
+2 Averna, the Chaos Bloom|CMR
+2 Belbe, Corrupted Observer|CMR
+2 Bell Borca, Spectral Sergeant|CMR
+2 Blim, Comedic Genius|CMR
+2 Colfenor, the Last Yew|CMR
+2 Ghen, Arcanum Weaver|CMR
+2 Gnostro, Voice of the Crags|CMR
+2 Gor Muldrak, Amphinologist|CMR
+2 Hans Eriksson|CMR
+2 Jared Carthalion, True Heir|CMR
+2 Kwain, Itinerant Meddler|CMR
+2 Lathiel, the Bounteous Dawn|CMR
+2 Liesa, Shroud of Dusk|CMR
+2 Nevinyrral, Urborg Tyrant|CMR
+2 Nymris, Oona's Trickster|CMR
+2 Obeka, Brute Chronologist|CMR
+2 Yurlok of Scorch Thrash|CMR
+2 Zara, Renegade Recruiter|CMR
+6 Alharu, Solemn Ritualist|CMR
+6 Ardenn, Intrepid Archaeologist|CMR
+6 Keleth, Sunmane Familiar|CMR
+6 Prava of the Steel Legion|CMR
+6 Radiant, Serra Archangel|CMR
+6 Rebbec, Architect of Ascension|CMR
+6 Brinelin, the Moon Kraken|CMR
+6 Esior, Wardwing Familiar|CMR
+6 Ghost of Ramirez DePietro|CMR
+6 Glacian, Powerstone Engineer|CMR
+6 Malcolm, Keen-Eyed Navigator|CMR
+6 Siani, Eye of the Storm|CMR
+6 Armix, Filigree Thrasher|CMR
+6 Falthis, Shadowcat Familiar|CMR
+6 Keskit, the Flesh Sculptor|CMR
+6 Miara, Thorn of the Glade|CMR
+6 Nadier, Agent of the Duskenel|CMR
+6 Tormod, the Desecrator|CMR
+6 Alena, Kessig Trapper|CMR
+6 Breeches, Brazen Plunderer|CMR
+6 Dargo, the Shipwrecker|CMR
+6 Kediss, Emberclaw Familiar|CMR
+6 Rograkh, Son of Rohgahh|CMR
+6 Toggo, Goblin Weaponsmith|CMR
+6 Anara, Wolvid Familiar|CMR
+6 Gilanra, Caller of Wirewood|CMR
+6 Halana, Kessig Ranger|CMR
+6 Ich-Tekik, Salvage Splicer|CMR
+6 Numa, Joraga Chieftain|CMR
+6 Slurrk, All-Ingesting|CMR
+6 Abomination of Llanowar|CMR
+6 Araumi of the Dead Tide|CMR
+6 Captain Vargus Wrath|CMR
+6 Hamza, Guardian of Arashin|CMR
+6 Imoti, Celebrant of Bounty|CMR
+6 Juri, Master of the Revue|CMR
+6 Kangee, Sky Warden|CMR
+6 Reyav, Master Smith|CMR
+6 Thalisse, Reverent Medium|CMR
+6 Tuya Bearclaw|CMR
+
+[Non-Legendary Uncommons]
+Faith's Fetters|CMR
+Fencing Ace|CMR
+First Response|CMR
+Intangible Virtue|CMR
+Kangee's Lieutenant|CMR
+Make a Stand|CMR
+Open the Armory|CMR
+Orzhov Advokist|CMR
+Patron of the Valiant|CMR
+Return to Dust|CMR
+Slaughter the Strong|CMR
+Vow of Duty|CMR
+Confiscate|CMR
+Daring Saboteur|CMR
+Horizon Scholar|CMR
+Interpret the Signs|CMR
+Merchant Raiders|CMR
+Scholar of the Ages|CMR
+Siren Stormtamer|CMR
+Skilled Animator|CMR
+Supreme Will|CMR
+Thirst for Knowledge|CMR
+Vow of Flight|CMR
+Warden of Evos Isle|CMR
+Cast Down|CMR
+Cuombajj Witches|CMR
+Demonic Lore|CMR
+Feast of Succession|CMR
+Gilt-Leaf Winnower|CMR
+Nadier's Nightblade|CMR
+Noxious Dragon|CMR
+Null Caller|CMR
+Pride of the Perfect|CMR
+Revenant|CMR
+Victimize|CMR
+Vow of Torment|CMR
+Burning Anger|CMR
+Coastline Marauders|CMR
+Explosion of Riches|CMR
+Fathom Fleet Swordjack|CMR
+Frenzied Saddlebrute|CMR
+Furnace Celebration|CMR
+Humble Defector|CMR
+Lightning-Rig Crew|CMR
+Meteoric Mace|CMR
+Volcanic Dragon|CMR
+Volcanic Torrent|CMR
+Vow of Lightning|CMR
+Armorcraft Judge|CMR
+Hunter's Insight|CMR
+Imperious Perfect|CMR
+Monstrous Onslaught|CMR
+Ordeal of Nylea|CMR
+Reclamation Sage|CMR
+Scaled Behemoth|CMR
+Sifter Wurm|CMR
+Stingerfling Spider|CMR
+Strength of the Pack|CMR
+Three Visits|CMR
+Vow of Wildness|CMR
+Angelic Armaments|CMR
+Arcane Signet|CMR
+Brass Herald|CMR
+Burnished Hart|CMR
+Codex Shredder|CMR
+Dreamstone Hedron|CMR
+Golem Artisan|CMR
+Grafted Wargear|CMR
+Hero's Blade|CMR
+Ingenuity Engine|CMR
+Loreseeker's Stone|CMR
+Mask of Memory|CMR
+Meteor Golem|CMR
+Mindless Automaton|CMR
+Pennon Blade|CMR
+Sandstone Oracle|CMR
+Shimmer Myr|CMR
+Sunset Pyramid|CMR
+Thought Vessel|CMR
+Guildless Commons|CMR
+
+[Non-Legendary RareMythics]
+2 Akroma's Will|CMR
+2 Armored Skyhunter|CMR
+2 Austere Command|CMR
+2 Court of Grace|CMR
+2 Keeper of the Accord|CMR
+2 Promise of Tomorrow|CMR
+2 Slash the Ranks|CMR
+2 Soul of Eternity|CMR
+2 Amphin Mutineer|CMR
+2 Body of Knowledge|CMR
+2 Court of Cunning|CMR
+2 Hullbreacher|CMR
+2 Laboratory Drudge|CMR
+2 Sakashima's Protege|CMR
+2 Sakashima's Will|CMR
+2 Wrong Turn|CMR
+2 Court of Ambition|CMR
+2 Elvish Dreadlord|CMR
+2 Necrotic Hex|CMR
+2 Nightshade Harvester|CMR
+2 Opposition Agent|CMR
+2 Plague Reaver|CMR
+2 Rakshasa Debaser|CMR
+2 Szat's Will|CMR
+2 Aurora Phoenix|CMR
+2 Blasphemous Act|CMR
+2 Coercive Recruiter|CMR
+2 Court of Ire|CMR
+2 Emberwilde Captain|CMR
+2 Flamekin Herald|CMR
+2 Jeska's Will|CMR
+2 Wheel of Misfortune|CMR
+2 Biowaste Blob|CMR
+2 Court of Bounty|CMR
+2 Dawnglade Regent|CMR
+2 Immaculate Magistrate|CMR
+2 Kamahl's Will|CMR
+2 Magus of the Order|CMR
+2 Rootweaver Druid|CMR
+2 Sweet-Gum Recluse|CMR
+2 Bladegriff Prototype|CMR
+2 Horizon Stone|CMR
+2 Nevinyrral's Disk|CMR
+2 Rings of Brighthearth|CMR
+2 Staff of Domination|CMR
+2 Command Beacon|CMR
+2 Rejuvenating Springs|CMR
+2 Spectator Seating|CMR
+2 Training Center|CMR
+2 Undergrowth Stadium|CMR
+2 Vault of Champions|CMR
+2 War Room|CMR
+1 Archon of Coronation|CMR
+1 Seraphic Greatsword|CMR
+1 Triumphant Reckoning|CMR
+1 Mana Drain|CMR
+1 Mnemonic Deluge|CMR
+1 Sphinx of the Second Sun|CMR
+1 Profane Transfusion|CMR
+1 Vampiric Tutor|CMR
+1 Hellkite Courser|CMR
+1 Port Razer|CMR
+1 Soulfire Eruption|CMR
+1 Apex Devastator|CMR
+1 Reshape the Earth|CMR
+1 Commander's Plate|CMR
+1 Jeweled Lotus|CMR
+1 Phyrexian Triniform|CMR
+1 Scroll Rack|CMR
+
+[tokens]
+w_4_4_angel_flying
+w_1_1_soldier
+w_1_1_spirit_flying
+u_4_3_salamander_warrior
+b_0_1_thrull
+b_2_2_zombie
+r_2_2_dragon_flying_firebreathing
+g_1_1_elf_warrior
+c_3_3_a_golem
+b_x_x_horror
+rock
+c_a_treasure_sac
+w_2_2_cat
+w_1_1_soldier
+u_1_1_illusion_flying
+g_3_3_beast
+g_4_4_beast
+g_3_3_elephant
+g_0_1_plant
+g_1_1_saproling

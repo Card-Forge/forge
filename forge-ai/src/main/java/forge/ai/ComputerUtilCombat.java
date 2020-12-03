@@ -43,7 +43,6 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
-import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -1011,7 +1010,7 @@ public class ComputerUtilCombat {
             return power;
         }
         for (SpellAbility ability : blocker.getAllSpellAbilities()) {
-            if (!(ability instanceof AbilityActivated)) {
+            if (!ability.isActivatedAbility()) {
                 continue;
             }
             if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
@@ -1145,7 +1144,7 @@ public class ComputerUtilCombat {
             return toughness;
         }
         for (SpellAbility ability : blocker.getAllSpellAbilities()) {
-            if (!(ability instanceof AbilityActivated)) {
+            if (!ability.isActivatedAbility()) {
                 continue;
             }
 
@@ -1368,7 +1367,7 @@ public class ComputerUtilCombat {
             return power;
         }
         for (SpellAbility ability : attacker.getAllSpellAbilities()) {
-            if (!(ability instanceof AbilityActivated)) {
+            if (!ability.isActivatedAbility()) {
                 continue;
             }
             if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
@@ -1591,7 +1590,7 @@ public class ComputerUtilCombat {
             return toughness;
         }
         for (SpellAbility ability : attacker.getAllSpellAbilities()) {
-            if (!(ability instanceof AbilityActivated)) {
+            if (!ability.isActivatedAbility()) {
                 continue;
             }
 
@@ -2445,7 +2444,7 @@ public class ComputerUtilCombat {
     	final Player controller = combatant.getController();
     	for (Card c : controller.getCardsIn(ZoneType.Battlefield)) {
 	    	for (SpellAbility ability : c.getAllSpellAbilities()) {
-	            if (!(ability instanceof AbilityActivated)) {
+	            if (!ability.isActivatedAbility()) {
 	                continue;
 	            }
 	            if (ability.getApi() != ApiType.Pump) {

@@ -17,7 +17,7 @@
  */
 package forge.game.spellability;
 
-import forge.card.MagicColor;
+import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.GameType;
@@ -398,7 +398,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
             boolean result = false;
     
-            for (final GameObject o : matchTgt.getFirstTargetedSpell().getTargets().getTargets()) {
+            for (final GameObject o : matchTgt.getFirstTargetedSpell().getTargets()) {
                 if (o.isValid(this.getTargetValidTargeting().split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
                     result = true;
                     break;
@@ -419,7 +419,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
             Set<GameObject> targets = new HashSet<>();
             for (TargetChoices tc : sa.getAllTargetChoices()) {
-                targets.addAll(tc.getTargets());
+                targets.addAll(tc);
                 if (targets.size() > 1) {
                     return false;
                 }
@@ -430,18 +430,17 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (StringUtils.isNotEmpty(getManaSpent())) {
-            for (String s : getManaSpent().split(" ")) {
-                byte manaSpent = MagicColor.fromName(s);
-                if( 0 == (manaSpent & sa.getHostCard().getColorsPaid())) // no match of colors
-                    return false;
+            SpellAbility castSa = sa.getHostCard().getCastSA();
+            if (castSa == null) {
+                return false;
+            }
+            if (!castSa.getPayingColors().hasAllColors(ColorSet.fromNames(getManaSpent().split(" ")).getColor())) {
+                return false;
             }
         }
         if (StringUtils.isNotEmpty(getManaNotSpent())) {
-            byte toPay = 0;
-            for (String s : getManaNotSpent().split(" ")) {
-                toPay |= MagicColor.fromName(s);
-            }
-            if (toPay == (toPay & sa.getHostCard().getColorsPaid())) {
+            SpellAbility castSa = sa.getHostCard().getCastSA();
+            if (castSa != null && castSa.getPayingColors().hasAllColors(ColorSet.fromNames(getManaNotSpent().split(" ")).getColor())) {
                 return false;
             }
         }

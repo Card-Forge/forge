@@ -1,0 +1,10 @@
+Name:Drake Stone
+ManaCost:U
+Types:Planeswalker Stone
+Loyalty:4
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 1 | References$ DBDiscard | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then each player discards a card.
+SVar:DBDiscard: DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | Defined$ Player | SpellDescription$ Each player discards a card.
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True  | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target permanent on the bottom of its owner's library.
+A:AB$ GainControl | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | TargetMin$ 0 | TargetMax$ 10 | ValidTgts$ Permanent | SpellDescription$ Gain control up to ten target permanents.
+SVar:MaxTargets:Count$Valid Creature
+Oracle:[+1] Draw a card, then each player discards a card.\n[-3] Put target permanent on the bottom of its owner's library.\n[-7] Gain control of up to ten target permanents.

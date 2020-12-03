@@ -4,7 +4,7 @@ Types:Legendary Creature Kirin Spirit
 PT:3/3
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, destroy all permanents with that spell's converted mana cost.
-SVar:TrigDestroyAll:DB$DestroyAll | ValidCards$ Permanent.cmcEQX | References$ X
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.cmcEQX | References$ X
 SVar:X:TriggerCount$CastSACMC
 AI:RemoveDeck:All
 DeckHints:Type$Spirit|Arcane

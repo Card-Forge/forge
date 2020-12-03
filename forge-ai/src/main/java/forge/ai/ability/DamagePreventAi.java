@@ -139,15 +139,15 @@ public class DamagePreventAi extends SpellAbilityAi {
                 ComputerUtilCard.sortByEvaluateCreature(combatants);
 
                 for (final Card c : combatants) {
-                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && tcs.getNumTargeted() < tgt.getMaxTargets(hostCard, sa)) {
+                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && tcs.size() < tgt.getMaxTargets(hostCard, sa)) {
                     	tcs.add(c);
                         chance = true;
                     }
                 }
             }
         }
-        if (tgt != null && sa.hasParam("DividedAsYouChoose") && sa.getTargets() != null && !sa.getTargets().getTargets().isEmpty()) {
-            tgt.addDividedAllocation(sa.getTargets().getTargets().get(0), AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa));
+        if (tgt != null && sa.hasParam("DividedAsYouChoose") && sa.getTargets() != null && !sa.getTargets().isEmpty()) {
+            tgt.addDividedAllocation(sa.getTargets().get(0), AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa));
         }
 
         return chance;

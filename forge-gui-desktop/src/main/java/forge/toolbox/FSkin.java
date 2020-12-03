@@ -2214,7 +2214,7 @@ public class FSkin {
         }
         private static class SkinScrollBarUI extends BasicScrollBarUI implements ILocalRepaint {
             @SuppressWarnings("serial")
-            private static JButton hiddenButton = new JButton() {
+            private static class HiddenButton extends JButton {
                 @Override
                 public Dimension getPreferredSize() {
                     return new Dimension(0, 0);
@@ -2229,24 +2229,40 @@ public class FSkin {
 
             private final boolean vertical;
             private boolean hovered;
+            private MouseAdapter hoverListener;
+
+            private static class SkinScrollBarListener extends MouseAdapter {
+                private SkinScrollBarUI barUI;
+
+                private SkinScrollBarListener(SkinScrollBarUI barUI) {
+                    this.barUI = barUI;
+                }
+
+                @Override
+                public void mouseEntered(final MouseEvent e) {
+                    barUI.hovered = true;
+                    barUI.repaintSelf();
+                }
+
+                @Override
+                public void mouseExited(final MouseEvent e) {
+                    barUI.hovered = false;
+                    barUI.repaintSelf();
+                }
+            }
 
             private SkinScrollBarUI(final JScrollBar scrollbar, final boolean vertical0) {
                 vertical = vertical0;
-                scrollbar.setOpaque(false);
-                scrollbar.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseEntered(final MouseEvent e) {
-                        hovered = true;
-                        repaintSelf();
-                    }
 
-                    @Override
-                    public void mouseExited(final MouseEvent e) {
-                        hovered = false;
-                        repaintSelf();
-                    }
-                });
+                hoverListener = new SkinScrollBarListener(this);
+                scrollbar.setOpaque(false);
+                scrollbar.addMouseListener(hoverListener);
                 scrollbar.setUI(this);
+            }
+
+            protected void uninstallListeners() {
+                super.uninstallListeners();
+                scrollbar.removeMouseListener(hoverListener);
             }
 
             @Override
@@ -2257,12 +2273,12 @@ public class FSkin {
 
             @Override
             protected JButton createIncreaseButton(final int orientation) {
-                return hiddenButton; //hide increase button
+                return new HiddenButton(); //hide increase button
             }
 
             @Override
             protected JButton createDecreaseButton(final int orientation) {
-                return hiddenButton; //hide decrease button
+                return new HiddenButton(); //hide decrease button
             }
 
             @Override

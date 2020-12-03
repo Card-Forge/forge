@@ -270,7 +270,6 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         } else if (keyword.endsWith("Haste")) {
             return card.hasSickness() && !ph.isPlayerTurn(opp) && !card.isTapped()
                     && newPower > 0
-                    && !card.hasKeyword("CARDNAME can attack as though it had haste.")
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.endsWith("Indestructible")) {

@@ -230,7 +230,10 @@ public class TriggerHandler {
 
     public final void registerActiveLTBTrigger(final Card c) {
         for (final Trigger t : c.getTriggers()) {
-            if (TriggerType.ChangesZone.equals(t.getMode()) && "Battlefield".equals(t.getParam("Origin"))) {
+            if (
+                    TriggerType.Exploited.equals(t.getMode()) ||
+                    TriggerType.Sacrificed.equals(t.getMode()) ||
+                    (TriggerType.ChangesZone.equals(t.getMode()) && "Battlefield".equals(t.getParam("Origin")))) {
                 registerOneTrigger(t);
             }
         }
@@ -533,22 +536,16 @@ public class TriggerHandler {
             }
         } else {
             // need to copy the SA because of TriggeringObjects
-            sa = sa.copy(host, host.getController(), false);
+            sa = sa.copy(host, regtrig.getHostCard().getController(), false);
         }
 
         sa.setLastStateBattlefield(game.getLastStateBattlefield());
         sa.setLastStateGraveyard(game.getLastStateGraveyard());
 
-        sa.setTrigger(true);
+        sa.setTrigger(regtrig);
         sa.setSourceTrigger(regtrig.getId());
         regtrig.setTriggeringObjects(sa, runParams);
         sa.setTriggerRemembered(regtrig.getTriggerRemembered());
-
-        if (sa.getDeltrigActivatingPlayer() != null) {
-            // make sure that the original delayed trigger activator is restored
-            // (may have been overwritten by the AI simulation routines, e.g. Rainbow Vale)
-            sa.setActivatingPlayer(sa.getDeltrigActivatingPlayer());
-        }
 
         if (regtrig.hasParam("TriggerController")) {
             Player p = AbilityUtils.getDefinedPlayers(regtrig.getHostCard(), regtrig.getParam("TriggerController"), sa).get(0);
@@ -566,8 +563,6 @@ public class TriggerHandler {
 
         sa.setStackDescription(sa.toString());
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-            // need to be set for demonic pact to look for chosen modes
-            sa.setTrigger(regtrig);
             if (!CharmEffect.makeChoices(sa)) {
                 // 603.3c If no mode is chosen, the ability is removed from the stack.
                 return;

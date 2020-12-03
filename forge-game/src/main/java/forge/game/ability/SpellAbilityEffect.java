@@ -22,6 +22,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
@@ -34,7 +35,6 @@ import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
-import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
 /**
@@ -92,8 +92,8 @@ public abstract class SpellAbilityEffect {
                     String desc = TextUtil.fastReplace(desc1, "NICKNAME", currentName.split(",")[0]);
                     sb.append(desc);
                     }
-                    if (sa.getTargets() != null && !sa.getTargets().getTargets().isEmpty()) {
-                        sb.append(" (Targeting: ").append(sa.getTargets().getTargets()).append(")");
+                    if (sa.getTargets() != null && !sa.getTargets().isEmpty()) {
+                        sb.append(" (Targeting: ").append(sa.getTargets()).append(")");
                     }
             } else if (!"None".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
                 makeSpellDescription(sa, sb, stackDesc);
@@ -156,7 +156,7 @@ public abstract class SpellAbilityEffect {
             if ("}".equals(t)) { isPlainText = true; continue; }
 
             if (isPlainText) {
-                if(t.startsWith("NICKNAME")) {
+                if (t.startsWith("NICKNAME")) {
                     sb.append(TextUtil.fastReplace(t,"NICKNAME", sa.getHostCard().getName().split(",")[0]));
                 } else {
                     sb.append(TextUtil.fastReplace(t, "CARDNAME", sa.getHostCard().getName()));
@@ -192,14 +192,14 @@ public abstract class SpellAbilityEffect {
     }
 
     // Players
-    protected final static FCollection<Player> getTargetPlayers(final SpellAbility sa) {                                       return getPlayers(false, "Defined",    sa); }
-    protected final static FCollection<Player> getTargetPlayers(final SpellAbility sa, final String definedParam) {            return getPlayers(false, definedParam, sa); }
-    protected final static FCollection<Player> getDefinedPlayersOrTargeted(final SpellAbility sa ) {                           return getPlayers(true,  "Defined",    sa); }
-    protected final static FCollection<Player> getDefinedPlayersOrTargeted(final SpellAbility sa, final String definedParam) { return getPlayers(true,  definedParam, sa); }
+    protected final static PlayerCollection getTargetPlayers(final SpellAbility sa) {                                       return getPlayers(false, "Defined",    sa); }
+    protected final static PlayerCollection getTargetPlayers(final SpellAbility sa, final String definedParam) {            return getPlayers(false, definedParam, sa); }
+    protected final static PlayerCollection getDefinedPlayersOrTargeted(final SpellAbility sa ) {                           return getPlayers(true,  "Defined",    sa); }
+    protected final static PlayerCollection getDefinedPlayersOrTargeted(final SpellAbility sa, final String definedParam) { return getPlayers(true,  definedParam, sa); }
 
-    private static FCollection<Player> getPlayers(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
+    private static PlayerCollection getPlayers(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
-        return useTargets ? new FCollection<>(sa.getTargets().getTargetPlayers())
+        return useTargets ? new PlayerCollection(sa.getTargets().getTargetPlayers())
                 : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
 
@@ -233,7 +233,7 @@ public abstract class SpellAbilityEffect {
 
     private static List<GameObject> getTargetables(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
-        return useTargets ? Lists.newArrayList(sa.getTargets().getTargets())
+        return useTargets ? Lists.newArrayList(sa.getTargets())
                 : AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
 
@@ -296,15 +296,15 @@ public abstract class SpellAbilityEffect {
         }
         String trigSA = "";
         if (location.equals("Hand")) {
-            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Hand";
+            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand";
         } else if (location.equals("SacrificeCtrl")) {
             trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered";
         } else if (location.equals("Sacrifice")) {
             trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered | Controller$ You";
         } else if (location.equals("Exile")) {
-            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile";
+            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Exile";
         } else if (location.equals("Destroy")) {
-            trigSA = "DB$ Destroy | Defined$ DelayTriggerRemembered";
+            trigSA = "DB$ Destroy | Defined$ DelayTriggerRememberedLKI";
         }
         if (sa.hasParam("AtEOTCondition")) {
             String var = sa.getParam("AtEOTCondition");
@@ -563,6 +563,7 @@ public abstract class SpellAbilityEffect {
 
             if (defender != null) {
                 combat.addAttacker(c, defender);
+                combat.getBandOfAttacker(c).setBlocked(false);
                 combatChanged = true;
             }
         }

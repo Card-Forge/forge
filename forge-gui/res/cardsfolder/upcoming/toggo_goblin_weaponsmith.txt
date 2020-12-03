@@ -1,0 +1,10 @@
+Name:Toggo, Goblin Weaponsmith
+ManaCost:2 R
+Types:Legendary Creature Goblin Artificer
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a land enters the battlefield under your control, create an artifact equipment token named Rock with "Equipped creature has '{1}, {T}, Sacrifice Rock: This creature deals 2 damage to any target'" and equip {1}.
+SVar:TrigToken:DB$ Token | TokenScript$ rock | TokenOwner$ You
+K:Partner
+SVar:BuffedBy:Land
+DeckHas:Ability$Token & Ability$Sacrifice
+Oracle:Whenever a land enters the battlefield under your control, create an artifact equipment token named Rock with "Equipped creature has '{1}, {T}, Sacrifice Rock: This creature deals 2 damage to any target'" and equip {1}.\nPartner (You can have two commanders if both have partner.)

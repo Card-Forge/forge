@@ -127,19 +127,11 @@ public class GameSimulator {
     private SpellAbility findSaInSimGame(SpellAbility sa) {
         Card origHostCard = sa.getHostCard();
         Card hostCard = (Card) copier.find(origHostCard);
-        SpellAbility saOriginal = sa.getMayPlayOriginal();
         String desc = sa.getDescription();
-        if (saOriginal != null) {
-            // This is needed when it's an alternate cost SA and the desc string has
-            // been modified to add "by Foo" to it. TODO: Do we also need to do this in
-            // other places where we compare descriptions?
-            desc = saOriginal.getDescription();
-            System.err.println(sa.getDescription() + "->" + desc);
-        }
         // FIXME: This is a hack that makes testManifest pass - figure out why it's needed.
         desc = TextUtil.fastReplace(desc, "Unmanifest {0}", "Unmanifest no cost");
         for (SpellAbility cSa : hostCard.getSpellAbilities()) {
-            if (desc.equals(cSa.getDescription())) {
+            if (desc.startsWith(cSa.getDescription())) {
                 return cSa;
             }
         }
@@ -174,7 +166,7 @@ public class GameSimulator {
                     final boolean divided = origSaOrSubSa.hasParam("DividedAsYouChoose");
                     final TargetRestrictions origTgtRes = origSaOrSubSa.getTargetRestrictions();
                     final TargetRestrictions tgtRes = saOrSubSa.getTargetRestrictions();
-                    for (final GameObject o : origSaOrSubSa.getTargets().getTargets()) {
+                    for (final GameObject o : origSaOrSubSa.getTargets()) {
                         final GameObject target = copier.find(o);
                         saOrSubSa.getTargets().add(target);
                         if (divided) {
@@ -189,7 +181,7 @@ public class GameSimulator {
             if (debugPrint && !sa.getAllTargetChoices().isEmpty()) {
                 debugPrint("Targets: ");
                 for (TargetChoices target : sa.getAllTargetChoices()) {
-                    System.out.print(target.getTargetedString());
+                    System.out.print(target);
                 }
                 System.out.println();
             }

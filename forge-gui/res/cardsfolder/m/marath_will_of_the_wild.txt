@@ -3,7 +3,7 @@ ManaCost:R G W
 Types:Legendary Creature Elemental Beast
 PT:0/0
 K:etbCounter:P1P1:Y:no Condition:CARDNAME enters the battlefield with a number of +1/+1 counters on it equal to the amount of mana spent to cast it.
-SVar:Y:Count$FirstSpellTotalManaSpent
+SVar:Y:Count$CastTotalManaSpent
 A:AB$ Charm | Cost$ X SubCounter<X/P1P1> | Announce$ X | XCantBe0$ True | Choices$ MarathCounters,MarathDmg,MarathToken | Defined$ You
 SVar:MarathCounters:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ Z | References$ Z | SpellDescription$ Put X +1/+1 counters on target creature. X can't be 0.
 SVar:MarathDmg:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ Z | References$ Z | SpellDescription$ CARDNAME deals X damage to any target. X can't be 0.

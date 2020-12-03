@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Teferi
 Loyalty:4
 S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Opponent | OnlySorcerySpeed$ True | Description$ Each opponent can cast spells only any time they could cast a sorcery.
 A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | StaticAbilities$ STPlay | Duration$ UntilYourNextTurn | AILogic$ Main2 | SpellDescription$ Until your next turn, you may cast sorcery spells as though they had flash.
-SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Sorcery | AffectedZone$ Exile,Graveyard,Hand,Library,Command | WithFlash$ You | Description$ Until your next turn, you may cast sorcery spells as though they had flash.
+SVar:STPlay:Mode$ CastWithFlash | ValidCard$ Sorcery | ValidSA$ Spell | EffectZone$ Command | Caster$ You | Description$ Until your next turn, you may cast sorcery spells as though they had flash.
 SVar:PlayMain1:TRUE
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Origin$ Battlefield | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact,Creature,Enchantment | TgtPrompt$ Select target artifact, creature, or enchantment | SpellDescription$ Return up to one target artifact, creature, or enchantment to its owner's hand. Draw a card. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1

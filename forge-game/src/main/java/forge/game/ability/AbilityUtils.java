@@ -37,6 +37,7 @@ import forge.util.collect.FCollectionView;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,7 +106,22 @@ public class AbilityUtils {
         else if (defined.equals("Equipped")) {
             c = hostCard.getEquipping();
         }
-
+        else if (defined.startsWith("AttachedTo ")) {
+            String v = defined.split(" ")[1];
+            for (GameEntity ge : getDefinedEntities(hostCard, v, sa)) {
+                // TODO handle phased out inside attachedCards
+                Iterables.addAll(cards, ge.getAttachedCards());
+            }
+        }
+        else if (defined.startsWith("AttachedBy ")) {
+            String v = defined.split(" ")[1];
+            for (Card attachment : getDefinedCards(hostCard, v, sa)) {
+                Card attached = attachment.getAttachedTo();
+                if (attached != null) {
+                    cards.add(attached);
+                }
+            }
+        }
         else if (defined.equals("Enchanted")) {
             c = hostCard.getEnchantingCard();
             if ((c == null) && (sa != null) && (sa.getRootAbility() != null)
@@ -149,6 +165,8 @@ public class AbilityUtils {
                 final Object crd = root.getTriggeringObject(type);
                 if (crd instanceof Card) {
                     c = (Card) crd;
+                } else if (crd instanceof Iterable) {
+                    cards.addAll(Iterables.filter((Iterable<?>) crd, Card.class));
                 }
             }
             else {
@@ -239,6 +257,10 @@ public class AbilityUtils {
             Object o = Iterables.getLast(hostCard.getRemembered(), null);
             if (o != null && o instanceof Card) {
                 cards.add(game.getCardState((Card) o));
+            }
+        } else if (defined.equals("ImprintedLKI")) {
+            for (final Card imprint : hostCard.getImprintedCards()) {
+                cards.add(imprint);
             }
         } else if (defined.equals("Imprinted")) {
             for (final Card imprint : hostCard.getImprintedCards()) {
@@ -611,7 +633,7 @@ public class AbilityUtils {
             SpellAbility loopSA = sa.getRootAbility();
             while (loopSA != null) {
                 if (loopSA.getTargetRestrictions() != null) {
-                    Iterables.addAll(objects, loopSA.getTargets().getTargets());
+                    Iterables.addAll(objects, loopSA.getTargets());
                 }
                 loopSA = loopSA.getSubAbility();
             }
@@ -678,7 +700,7 @@ public class AbilityUtils {
         }
          */
 
-        CardCollectionView list;
+        Iterable<Card> list;
         if (calcX[0].startsWith("Sacrificed")) {
             list = sa.getRootAbility().getPaidList("Sacrificed");
         }
@@ -715,17 +737,11 @@ public class AbilityUtils {
         }
         else if (calcX[0].startsWith("TriggerRemembered")) {
             final SpellAbility root = sa.getRootAbility();
-            CardCollection result = new CardCollection();
-            for (Object o : root.getTriggerRemembered()) {
-                if (o instanceof Card) {
-                    result.add((Card) o);
-                }
-            }
-            list = result;
+            list = Iterables.filter(root.getTriggerRemembered(), Card.class);
         }
         else if (calcX[0].startsWith("TriggerObjects")) {
             final SpellAbility root = sa.getRootAbility();
-            list = (CardCollection) root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(14)));
+            list = Iterables.filter((Iterable<?>) root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(14))), Card.class);
         }
         else if (calcX[0].startsWith("Triggered")) {
             final SpellAbility root = sa.getRootAbility();
@@ -737,9 +753,9 @@ public class AbilityUtils {
             final SpellAbility root = sa.getRootAbility();
             final String[] l = calcX[1].split("/");
             final String m = CardFactoryUtil.extractOperators(calcX[1]);
-            final int count = (Integer) root.getTriggeringObject(AbilityKey.fromString(l[0]));
+            final Integer count = (Integer) root.getTriggeringObject(AbilityKey.fromString(l[0]));
 
-            return CardFactoryUtil.doXMath(count, m, card) * multiplier;
+            return CardFactoryUtil.doXMath(ObjectUtils.firstNonNull(count, 0), m, card) * multiplier;
         }
         else if (calcX[0].startsWith("Replaced")) {
             final SpellAbility root = sa.getRootAbility();
@@ -751,9 +767,9 @@ public class AbilityUtils {
             final SpellAbility root = sa.getRootAbility();
             final String[] l = calcX[1].split("/");
             final String m = CardFactoryUtil.extractOperators(calcX[1]);
-            final int count = (Integer) root.getReplacingObject(AbilityKey.fromString(l[0]));
+            final Integer count = (Integer) root.getReplacingObject(AbilityKey.fromString(l[0]));
 
-            return CardFactoryUtil.doXMath(count, m, card) * multiplier;
+            return CardFactoryUtil.doXMath(ObjectUtils.firstNonNull(count, 0), m, card) * multiplier;
         }
         else {
             return 0;
@@ -962,30 +978,16 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("TargetedController")) {
-            final CardCollection list = getDefinedCards(card, "Targeted", sa);
-            final List<SpellAbility> sas = getDefinedSpellAbilities(card, "Targeted", sa);
-
-            for (final Card c : list) {
-                final Player p = c.getController();
-                if (!players.contains(p)) {
-                    players.add(p);
-                }
+            for (final Card c : getDefinedCards(card, "Targeted", sa)) {
+                players.add(c.getController());
             }
-            for (final SpellAbility s : sas) {
-                final Player p = s.getActivatingPlayer();
-                if (!players.contains(p)) {
-                    players.add(p);
-                }
+            for (final SpellAbility s : getDefinedSpellAbilities(card, "Targeted", sa)) {
+                players.add(s.getActivatingPlayer());
             }
         }
         else if (defined.equals("TargetedOwner")) {
-            final CardCollection list = getDefinedCards(card, "Targeted", sa);
-
-            for (final Card c : list) {
-                final Player p = c.getOwner();
-                if (!players.contains(p)) {
-                    players.add(p);
-                }
+            for (final Card c : getDefinedCards(card, "Targeted", sa)) {
+                players.add(c.getOwner());
             }
         }
         else if (defined.equals("TargetedAndYou")) {
@@ -996,20 +998,11 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("ParentTargetedController")) {
-            final CardCollection list = getDefinedCards(card, "ParentTarget", sa);
-            final List<SpellAbility> sas = getDefinedSpellAbilities(card, "Targeted", sa);
-
-            for (final Card c : list) {
-                final Player p = c.getController();
-                if (!players.contains(p)) {
-                    players.add(p);
-                }
+            for (final Card c : getDefinedCards(card, "ParentTarget", sa)) {
+                players.add(c.getController());
             }
-            for (final SpellAbility s : sas) {
-                final Player p = s.getActivatingPlayer();
-                if (!players.contains(p)) {
-                    players.add(p);
-                }
+            for (final SpellAbility s : getDefinedSpellAbilities(card, "Targeted", sa)) {
+                players.add(s.getActivatingPlayer());
             }
         }
         else if (defined.startsWith("Remembered")) {
@@ -1115,10 +1108,7 @@ public class AbilityUtils {
             }
             if (o != null) {
                 if (o instanceof Player) {
-                    final Player p = (Player) o;
-                    if (!players.contains(p)) {
-                        players.add(p);
-                    }
+                    players.add((Player) o);
                 }
             }
         }
@@ -1130,33 +1120,25 @@ public class AbilityUtils {
             if (card.getEnchantingCard() == null) {
                 return players;
             }
-            final Player p = card.getEnchantingCard().getController();
-            if (!players.contains(p)) {
-                players.add(p);
-            }
+            players.add(card.getEnchantingCard().getController());
         }
         else if (defined.equals("EnchantedOwner")) {
             if (card.getEnchantingCard() == null) {
                 return players;
             }
-            final Player p = card.getEnchantingCard().getOwner();
-            if (!players.contains(p)) {
-                players.add(p);
-            }
+            players.add(card.getEnchantingCard().getOwner());
         }
         else if (defined.equals("EnchantedPlayer")) {
             final Object o = sa.getHostCard().getEntityAttachedTo();
             if (o instanceof Player) {
-                if (!players.contains(o)) {
-                    players.add((Player) o);
-                }
+                players.add((Player) o);
             }
         }
         else if (defined.equals("AttackingPlayer")) {
-            final Player p = game.getCombat().getAttackingPlayer();
-            if (!players.contains(p)) {
-                players.add(p);
+            if (!game.getPhaseHandler().inCombat()) {
+                return players;
             }
+            players.add(game.getCombat().getAttackingPlayer());
         }
         else if (defined.equals("DefendingPlayer")) {
             players.add(game.getCombat().getDefendingPlayerRelatedTo(card));
@@ -1167,14 +1149,14 @@ public class AbilityUtils {
         }
         else if (defined.equals("ChosenPlayer")) {
             final Player p = card.getChosenPlayer();
-            if (p != null && !players.contains(p)) {
+            if (p != null) {
                 players.add(p);
             }
         }
         else if (defined.equals("ChosenAndYou")) {
             players.add(player);
             final Player p = card.getChosenPlayer();
-            if (p != null && !players.contains(p)) {
+            if (p != null) {
                 players.add(p);
             }
         }
@@ -1184,10 +1166,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("SourceController")) {
-            final Player p = sa.getHostCard().getController();
-            if (!players.contains(p)) {
-                players.add(p);
-            }
+            players.add(sa.getHostCard().getController());
         }
         else if (defined.equals("CardController")) {
             players.add(card.getController());
@@ -1288,7 +1267,7 @@ public class AbilityUtils {
                 // information so it's not lost if the calling code is interested in targets of the triggered SA.
                 if (triggeringType.equals("SpellAbility")) {
                     final CardCollectionView tgtList = (CardCollectionView)root.getTriggeringObject(AbilityKey.SpellAbilityTargetingCards);
-                    if (s.getTargets() != null && s.getTargets().getNumTargeted() == 0) {
+                    if (s.getTargets() != null && s.getTargets().size() == 0) {
                         if (tgtList != null && tgtList.size() > 0) {
                             TargetChoices tc = new TargetChoices();
                             for (Card c : tgtList) {
@@ -1510,7 +1489,7 @@ public class AbilityUtils {
             if (sa.hasParam("ForgetOtherTargets")) {
                 host.clearRemembered();
             }
-            for (final GameObject o : sa.getTargets().getTargets()) {
+            for (final GameObject o : sa.getTargets()) {
                 host.addRemembered(o);
             }
         }
@@ -1619,6 +1598,12 @@ public class AbilityUtils {
                         Trigger t = root.getTrigger();
                         if (t == null) {
                             return CardFactoryUtil.doXMath(0, expr, c);
+                        }
+
+                        // ImmediateTrigger should check for the Ability which created the trigger
+                        if (t.getSpawningAbility() != null) {
+                            root = t.getSpawningAbility().getRootAbility();
+                            return CardFactoryUtil.doXMath(root.getXManaCostPaid(), expr, c);
                         }
 
                         // 107.3k If an object’s enters-the-battlefield triggered ability or replacement effect refers to X,
@@ -1768,6 +1753,10 @@ public class AbilityUtils {
                     CounterType cType = CounterType.getType(parts[1]);
 
                     return CardFactoryUtil.doXMath(game.getCounterAddedThisTurn(cType, parts[2], parts[3], c, sa.getActivatingPlayer(), sa), expr, c);
+                }
+
+                if (sq[0].startsWith("CastTotalManaSpent")) {
+                    return CardFactoryUtil.doXMath(c.getCastSA() != null ? c.getCastSA().getTotalManaSpent() : 0, expr, c);
                 }
             }
         }
@@ -1952,7 +1941,20 @@ public class AbilityUtils {
             }
         }
     }
+
+    public static SpellAbility getCause(SpellAbility sa) {
+        final SpellAbility root = sa.getRootAbility();
+        SpellAbility cause = sa;
+        if (root.isReplacementAbility()) {
+            SpellAbility replacingObject = (SpellAbility) root.getReplacingObject(AbilityKey.Cause);
+            if (replacingObject != null) {
+                cause = replacingObject;
+            }
+        }
+        return cause;
+    }
     
+
     public static SpellAbility addSpliceEffects(final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Player player = sa.getActivatingPlayer();

@@ -2,6 +2,8 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
+
+import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
@@ -34,6 +36,8 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        final Game game = host.getGame();
         Map<String, String> mapParams = Maps.newHashMap(sa.getMapParams());
         mapParams.remove("Cost");
 
@@ -49,8 +53,12 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
             triggerRemembered = sa.getParam("RememberObjects");
         }
 
-        Card lki = CardUtil.getLKICopy(sa.getHostCard());
-        final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, lki, true);
+        // in case the card moved before the delayed trigger can be created, need to check the latest card state for right timestamp
+        Card gameCard = game.getCardState(host);
+        Card lki = CardUtil.getLKICopy(gameCard);
+        lki.setOwner(sa.getActivatingPlayer());
+        final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, lki, sa.isIntrinsic());
+        delTrig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
 
         if (triggerRemembered != null) {
             for (final String rem : triggerRemembered.split(",")) {
@@ -73,11 +81,9 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         }
 
         if (mapParams.containsKey("Execute") || sa.hasAdditionalAbility("Execute")) {
-            AbilitySub overridingSA = (AbilitySub)sa.getAdditionalAbility("Execute").copy(lki, false);
+            AbilitySub overridingSA = (AbilitySub)sa.getAdditionalAbility("Execute").copy(lki, sa.getActivatingPlayer(), false);
             // need to reset the parent, additionalAbility does set it to this
             overridingSA.setParent(null);
-            overridingSA.setActivatingPlayer(sa.getActivatingPlayer());
-            overridingSA.setDeltrigActivatingPlayer(sa.getActivatingPlayer()); // ensure that the original activator can be restored later
             // Set Transform timestamp when the delayed trigger is created
             if (ApiType.SetState == overridingSA.getApi()) {
                 overridingSA.setSVar("StoredTransform", String.valueOf(sa.getHostCard().getTransformedTimestamp()));

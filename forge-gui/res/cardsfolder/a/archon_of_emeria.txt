@@ -4,7 +4,8 @@ Types:Creature Archon
 PT:2/3
 K:Flying
 S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player | NumLimitEachTurn$ 1 | Description$ Each player can't cast more than one spell each turn.
-S:Mode$ ETBTapped | ValidCard$ Land.OppCtrl+nonBasic | Description$ Nonbasic lands your opponents control enter the battlefield tapped.
+R:Event$ Moved | ValidCard$ Land.OppCtrl+nonBasic | Destination$ Battlefield | ReplaceWith$ ETBTapped | ActiveZones$ Battlefield | Description$ Nonbasic lands your opponents control enter the battlefield tapped.
+SVar:ETBTapped:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Tapped$ True | Defined$ ReplacedCard
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 Oracle:Flying\nEach player can't cast more than one spell each turn.\nNonbasic lands your opponents control enter the battlefield tapped.

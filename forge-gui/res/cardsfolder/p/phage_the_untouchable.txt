@@ -5,7 +5,7 @@ PT:4/4
 T:Mode$ ChangesZone | ValidCard$ Card.wasNotCastFromHand+Self | Destination$ Battlefield | Execute$ TrigYouLose | TriggerDescription$ When CARDNAME enters the battlefield, if you didn't cast it from your hand, you lose the game.
 SVar:TrigYouLose:DB$ LosesGame | Defined$ You
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, destroy that creature. It can't be regenerated.
-SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTarget | NoRegen$ True
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy | NoRegen$ True
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTheyLose | TriggerDescription$ Whenever Phage deals combat damage to a player, that player loses the game.
 SVar:TrigTheyLose:DB$ LosesGame | Defined$ TriggeredTarget
 SVar:MustBeBlocked:True

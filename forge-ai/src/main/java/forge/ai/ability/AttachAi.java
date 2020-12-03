@@ -88,7 +88,8 @@ public class AttachAi extends SpellAbilityAi {
         if (ai.getController().isAI()) {
             advancedFlash = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
         }
-        if (source.withFlash(ai) && source.isAura() && advancedFlash && !doAdvancedFlashAuraLogic(ai, sa, sa.getTargetCard())) {
+        if (!ai.canCastSorcery() && sa.canCastTiming(ai)
+                && source.isAura() && advancedFlash && !doAdvancedFlashAuraLogic(ai, sa, sa.getTargetCard())) {
             return false;
         }
 
@@ -972,7 +973,7 @@ public class AttachAi extends SpellAbilityAi {
             targets = AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
         } else {
             AttachAi.attachPreference(sa, tgt, mandatory);
-            targets = sa.getTargets().getTargets();
+            targets = sa.getTargets();
         }
 
         if (!mandatory && card.isEquipment() && !targets.isEmpty()) {
@@ -1568,7 +1569,6 @@ public class AttachAi extends SpellAbilityAi {
         } else if (keyword.equals("Haste")) {
             return card.hasSickness() && ph.isPlayerTurn(sa.getActivatingPlayer()) && !card.isTapped()
                     && card.getNetCombatDamage() + powerBonus > 0
-                    && !card.hasKeyword("CARDNAME can attack as though it had haste.")
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.endsWith("Indestructible")) {

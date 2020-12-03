@@ -1,11 +1,8 @@
 Name:Rescue from the Underworld
 ManaCost:4 B
 Types:Instant
-A:SP$ Pump | Cost$ 4 B Sac<1/Creature> | RememberCostCards$ True | ValidTgts$ Creature.YouOwn | TgtZone$ Graveyard | TgtPrompt$ Choose target creature card in your graveyard | SubAbility$ DBDelTrig | SpellDescription$ Choose target creature card in your graveyard. Return that card and the sacrificed card to the battlefield under your control at the beginning of your next upkeep. Exile CARDNAME.
-SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ MoveToPlay | TriggerDescription$ Return that card and the sacrificed card to the battlefield under your control at the beginning of your next upkeep. | RememberObjects$ Targeted,Remembered | SubAbility$ DBExile
-SVar:MoveToPlay:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ DelayTriggerRemembered | GainControl$ True
-SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ DelayedTrigger | Cost$ 4 B Sac<1/Creature> | ValidTgts$ Creature.YouOwn | TgtZone$ Graveyard | TgtPrompt$ Choose target creature card in your graveyard | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ MoveToPlay | TriggerDescription$ Return that card and the sacrificed card to the battlefield under your control at the beginning of your next upkeep. | RememberObjects$ Targeted,Sacrificed | SubAbility$ DBExile | SpellDescription$ Choose target creature card in your graveyard. Return that card and the sacrificed card to the battlefield under your control at the beginning of your next upkeep. Exile CARDNAME.
+SVar:MoveToPlay:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI | GainControl$ True
+SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rescue_from_the_underworld.jpg
 Oracle:As an additional cost to cast Rescue from the Underworld, sacrifice a creature.\nChoose target creature card in your graveyard. Return that card and the sacrificed card to the battlefield under your control at the beginning of your next upkeep. Exile Rescue from the Underworld.

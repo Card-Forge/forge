@@ -197,11 +197,11 @@ public class ControlGainAi extends SpellAbilityAi {
             }
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
+        while (sa.getTargets().size() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
             Card t = null;
 
             if (list.isEmpty()) {
-                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+                if ((sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().size() == 0)) {
                     sa.resetTargets();
                     return false;
                 } else {

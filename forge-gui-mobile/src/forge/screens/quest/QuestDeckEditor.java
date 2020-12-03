@@ -12,11 +12,11 @@ import forge.model.FModel;
 import forge.quest.QuestSpellShop;
 
 public class QuestDeckEditor extends FDeckEditor {
-    public QuestDeckEditor() {
-        super(EditorType.Quest, "", false);
+    public QuestDeckEditor(boolean commander) {
+        super(commander ? EditorType.QuestCommander: EditorType.Quest, "", false);
     }
-    public QuestDeckEditor(DeckProxy editDeck) {
-        super(EditorType.Quest, editDeck, true);
+    public QuestDeckEditor(DeckProxy editDeck, boolean commander) {
+        super(commander ? EditorType.QuestCommander: EditorType.Quest, editDeck, true);
     }
 
     @Override

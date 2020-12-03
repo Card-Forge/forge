@@ -97,6 +97,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
         }
 
         final boolean remember = sa.hasParam("RememberFound");
+        final boolean imprint = sa.hasParam("ImprintFound");
 
         final ZoneType foundDest = ZoneType.smartValueOf(sa.getParam("FoundDestination"));
         final int foundLibPos = AbilityUtils.calculateAmount(host, sa.getParam("FoundLibraryPosition"), sa);
@@ -134,6 +135,9 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         found.add(c);
                         if (remember) {
                             host.addRemembered(c);
+                        }
+                        if (imprint) {
+                            host.addImprintedCard(c);
                         }
                         if (found.size() == untilAmount) {
                             break;

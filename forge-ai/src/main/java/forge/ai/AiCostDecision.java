@@ -835,7 +835,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 c = source.getCounters(cost.counter);
             } else if (sVar.equals("Targeted$CardManaCost")) {
                 c = 0;
-                if (ability.getTargets().getNumTargeted() > 0) {
+                if (ability.getTargets().size() > 0) {
                     for (Card tgt : ability.getTargets().getTargetCards()) {
                         if (tgt.getManaCost() != null) {
                             c += tgt.getManaCost().getCMC();

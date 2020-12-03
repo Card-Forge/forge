@@ -3,7 +3,6 @@ ManaCost:1 G
 Types:Creature Sliver
 PT:1/1
 K:Flash
-S:Mode$ Continuous | Affected$ Sliver | WithFlash$ Player | AffectedZone$ Exile,Graveyard,Hand,Library,Command | Description$ Any player may cast Sliver spells as though they had flash.
+S:Mode$ CastWithFlash | ValidCard$ Sliver | ValidSA$ Spell | Caster$ Player | Description$ Any player may cast Sliver spells as though they had flash.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/quick_sliver.jpg
 Oracle:Flash\nAny player may cast Sliver spells as though they had flash.

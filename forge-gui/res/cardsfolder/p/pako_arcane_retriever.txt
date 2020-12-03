@@ -1,0 +1,15 @@
+Name:Pako, Arcane Retriever
+ManaCost:3 R G
+Types:Legendary Creature Elemental Hound
+PT:3/3
+K:Partner:Haldan, Avid Arcanist:Haldan
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile the top card of each player's library and put a counter counter on each of them. Put a +1/+1 counter on CARDNAME for each noncreature card exiled this way.
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ Player | DestinationZone$ Exile | ExileWithCounter$ FETCH | RememberChanged$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidExile Card.IsRemembered+nonCreature
+DeckHas:Ability$Counters
+SVar:HasAttackEffect:TRUE
+DeckHints:Name$Haldan, Avid Arcanist
+Oracle:Partner with Haldan, Avid Arcanist\nHaste\nWhenever Pako, Arcane Retriever attacks, exile the top card of each player's library and put a fetch counter on each of them. Put a +1/+1 counter on Pako for each noncreature card exiled this way.

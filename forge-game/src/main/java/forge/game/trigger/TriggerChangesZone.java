@@ -21,6 +21,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardUtil;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -109,7 +110,7 @@ public class TriggerChangesZone extends Trigger {
         }
 
         if (hasParam("ValidCause")) {
-            if (!runParams.containsKey(AbilityKey.Cause) ) {
+            if (!runParams.containsKey(AbilityKey.Cause)) {
                 return false;
             }
             SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
@@ -159,6 +160,15 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
+        if (hasParam("NotThisAbility")) {
+            if (runParams.containsKey(AbilityKey.Cause)) {
+                SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
+                if (cause != null && this.equals(cause.getRootAbility().getTrigger())) {
+                    return false;
+                }
+            }
+        }
+
         /* this trigger can only be activated once per turn, verify it hasn't already run */
         if (hasParam("ActivationLimit")) {
             return this.getActivationsThisTurn() < Integer.parseInt(getParam("ActivationLimit"));
@@ -170,8 +180,10 @@ public class TriggerChangesZone extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        // TODO use better way to always copy both Card and CardLKI
         if ("Battlefield".equals(getParam("Origin"))) {
             sa.setTriggeringObject(AbilityKey.Card, runParams.get(AbilityKey.CardLKI));
+            sa.setTriggeringObject(AbilityKey.NewCard, CardUtil.getLKICopy((Card)runParams.get(AbilityKey.Card)));
         } else {
             sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
         }
@@ -195,23 +207,22 @@ public class TriggerChangesZone extends Trigger {
             return;
         }
 
-        if (!hasParam("ValidCard") || !getHostCard().isValid(getParam("ValidCard").split(","),
-                getHostCard().getController(), getHostCard(), null)) {
+        if (!hasParam("ValidCard")) {
             return;
         }
 
         if (hasParam("Origin")) {
             // leave battlefield
             boolean leavesBattlefield = ArrayUtils.contains(
-                getParam("Origin").split(","), "Battlefield"
+                getParam("Origin").split(","), ZoneType.Battlefield.toString()
             );
             if (leavesBattlefield) {
                 setActiveZone(EnumSet.of(ZoneType.Battlefield));
             }
         }
 
-        // enter Zone Effect
-        if (!hasParam("Origin") || "Any".equals(getParam("Origin"))) {
+        // enter Zone Effect only for Self
+        if (getParam("ValidCard").contains("Self") && (!hasParam("Origin") || "Any".equals(getParam("Origin")))) {
             setActiveZone(Sets.newEnumSet(ZoneType.listValueOf(getParam("Destination")), ZoneType.class));
         }
     }

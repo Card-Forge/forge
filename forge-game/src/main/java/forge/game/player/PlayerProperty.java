@@ -70,7 +70,11 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.equals("isMonarch")) {
-            if (!player.equals(game.getMonarch())) {
+            if (!player.isMonarch()) {
+                return false;
+            }
+        } else if (property.equals("isNotMonarch")) {
+            if (player.isMonarch()) {
                 return false;
             }
         } else if (property.equals("hasBlessing")) {

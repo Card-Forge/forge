@@ -6,7 +6,7 @@ Code2=XLN
 Type=Expansion
 MciCode=xln
 BoosterCovers=5
-Booster=10 Common:!fromSheet("XLN Planeswalker Decks and Toolkit"), 3 Uncommon:!fromSheet("XLN Planeswalker Decks and Toolkit"), 1 RareMythic:!fromSheet("XLN Planeswalker Decks and Toolkit"), 1 BasicLand
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 
 [cards]
 1 U Adanto Vanguard
@@ -288,6 +288,8 @@ Booster=10 Common:!fromSheet("XLN Planeswalker Decks and Toolkit"), 3 Uncommon:!
 277 L Forest
 278 L Forest
 279 L Forest
+
+[precon product]
 280 M Jace, Ingenious Mind-Mage
 281 C Castaway's Despair
 282 R Grasping Current

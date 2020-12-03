@@ -134,6 +134,7 @@ import forge.util.gui.SOptionPane;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.FloatingZone;
+import net.miginfocom.layout.LinkHandler;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -271,7 +272,7 @@ public final class CMatchUI
         if (!isInGame()) {
             return;
         }
-        final Deck deck = getGameView().getDeck(getCurrentPlayer().getLobbyPlayerName());
+        final Deck deck = getGameView().getDeck(getCurrentPlayer());
         if (deck != null) {
             FDeckViewer.show(deck);
         }
@@ -1028,6 +1029,7 @@ public final class CMatchUI
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override public void run() {
                 Singletons.getView().getNavigationBar().closeTab(screen);
+                LinkHandler.clearWeakReferencesNow();
             }
         });
     }
@@ -1379,7 +1381,7 @@ public final class CMatchUI
         if (sa.getTargetRestrictions() != null) {
             sb.append(" targeting ");
             TargetChoices targets = si.getTargetChoices();
-            sb.append(targets.getTargetedString());
+            sb.append(targets);
         }
         sb.append(".");        
         String message1 = sb.toString();

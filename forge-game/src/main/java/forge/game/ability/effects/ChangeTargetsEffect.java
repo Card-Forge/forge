@@ -60,7 +60,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 while(changingTgtSI != null) {
                     SpellAbility changedSa = changingTgtSI.getSpellAbility(true); 
                     if (changedSa.usesTargeting()) {
-                        for(GameObject it : changedSa.getTargets().getTargets())
+                        for(GameObject it : changedSa.getTargets())
                             allTargets.add(ImmutablePair.of(changingTgtSI, it));
                     }
                     changingTgtSI = changingTgtSI.getSubInstance();

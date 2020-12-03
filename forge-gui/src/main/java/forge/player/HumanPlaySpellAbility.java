@@ -128,7 +128,7 @@ public class HumanPlaySpellAbility {
             human.incNumManaConversion();
         }
         
-        if (ability.isAbility() && ability instanceof AbilityActivated) {
+        if (ability.isAbility() && ability.isActivatedAbility()) {
             final Map<String, String> params = Maps.newHashMap();
             params.put("ManaColorConversion", "Additive");
 
@@ -151,6 +151,7 @@ public class HumanPlaySpellAbility {
         final boolean prerequisitesMet = announceValuesLikeX()
                 && announceType()
                 && (!mayChooseTargets || ability.setupTargets()) // if you can choose targets, then do choose them.
+                && ability.canCastTiming(human)
                 && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, ability.getHostCard())));
 
         if (!prerequisitesMet) {
@@ -314,7 +315,7 @@ public class HumanPlaySpellAbility {
         final StringBuilder sb = new StringBuilder();
         sb.append(ability.getHostCard().getName());
         if (ability.getTargetRestrictions() != null) {
-            final Iterable<GameObject> targets = ability.getTargets().getTargets();
+            final Iterable<GameObject> targets = ability.getTargets();
             if (!Iterables.isEmpty(targets)) {
                 sb.append(" - Targeting ");
                 for (final GameObject o : targets) {

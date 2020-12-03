@@ -72,10 +72,13 @@ public class CloneEffect extends SpellAbilityEffect {
             // choices need to be filtered by LastState Battlefield or Graveyard
             // if a Clone enters the field as other cards it could clone,
             // the clone should not be able to clone them
-            if (choiceZone.equals(ZoneType.Battlefield)) {
-                choices.retainAll(sa.getLastStateBattlefield());
-            } else if (choiceZone.equals(ZoneType.Graveyard)) {
-                choices.retainAll(sa.getLastStateGraveyard());
+            // but do that only for Replacement Effects
+            if (sa.getRootAbility().isReplacementAbility()) {
+                if (choiceZone.equals(ZoneType.Battlefield)) {
+                    choices.retainAll(sa.getLastStateBattlefield());
+                } else if (choiceZone.equals(ZoneType.Graveyard)) {
+                    choices.retainAll(sa.getLastStateGraveyard());
+                }
             }
 
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);

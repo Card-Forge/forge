@@ -55,22 +55,23 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     public static final String AllCreatureTypes = "AllCreatureTypes";
 
     public enum CoreType {
-        Artifact(true),
-        Conspiracy(false),
-        Creature(true),
-        Emblem(false),
-        Enchantment(true),
-        Instant(false),
-        Land(true),
-        Phenomenon(false),
-        Plane(false),
-        Planeswalker(true),
-        Scheme(false),
-        Sorcery(false),
-        Tribal(false),
-        Vanguard(false);
+        Artifact(true, "artifacts"),
+        Conspiracy(false, "conspiracies"),
+        Creature(true, "creatures"),
+        Emblem(false, "emblems"),
+        Enchantment(true, "enchantments"),
+        Instant(false, "instants"),
+        Land(true, "lands"),
+        Phenomenon(false, "phenomenons"),
+        Plane(false, "planes"),
+        Planeswalker(true, "planeswalkers"),
+        Scheme(false, "schemes"),
+        Sorcery(false, "sorceries"),
+        Tribal(false, "tribals"),
+        Vanguard(false, "vanguards");
 
         public final boolean isPermanent;
+        public final String pluralName;
         private static Map<String, CoreType> stringToCoreType = EnumUtils.getEnumMap(CoreType.class);
         private static final Set<String> allCoreTypeNames = stringToCoreType.keySet();
 
@@ -82,8 +83,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             return stringToCoreType.containsKey(name);
         }
 
-        CoreType(final boolean permanent) {
+        CoreType(final boolean permanent, final String plural) {
             isPermanent = permanent;
+            pluralName = plural;
         }
     }
 
@@ -704,6 +706,12 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         public static final BiMap<String,String> pluralTypes = HashBiMap.create();
         // plural -> singular
         public static final BiMap<String,String> singularTypes = pluralTypes.inverse();
+
+        static {
+            for (CoreType c : CoreType.values()) {
+                pluralTypes.put(c.name(), c.pluralName);
+            }
+        }
     }
     public static class Predicates {
         public static Predicate<String> IS_LAND_TYPE = new Predicate<String>() {

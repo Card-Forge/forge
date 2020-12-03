@@ -4,9 +4,271 @@ Date=2017-12-08
 Name=Unstable
 MciCode=ust
 Type=Other
+Type=Expansion
+BoosterCovers=1
+Booster=11 Common, 3 Uncommon, 1 Rare
+FoilAlwaysInCommonSlot=False
 
 [cards]
+3 C Amateur Auteur
+3 C Amateur Auteur
+3 C Amateur Auteur
+3 C Amateur Auteur
+6 M Do-It-Yourself Seraph
+7 U Gimme Five
+8 C GO TO JAIL
+9 U Half-Kitten, Half-
+10 C Humming-
+11 R Jackknight
+U Knight of the Kitchen Sink A
+U Knight of the Kitchen Sink B
+U Knight of the Kitchen Sink C
+U Knight of the Kitchen Sink D
+U Knight of the Kitchen Sink E
+U Knight of the Kitchen Sink F
+13 U Knight of the Widget
+14 U Midlife Upgrade
+15 R Oddly Uneven
+16 C Old Guard
+17 C Ordinary // Pony
+18 U Rhino-
+19 C Riveting Rigger
+20 R Rules Lawyer
+21 C Sacrifice Play
+22 C Shaggy // Camel
+23 U Side Quest
+24 C Success!
+25 U Teacher's Pet
+26 R Animate Library
+27 C Blurry Beeble
+28 C Chipper Chopper
+29 R Clocknapper
+30 C Crafty // Octopus
+31 U Crow Storm
+32 C Defective Detective
+33 U Five-Finger Discount
+34 R Graveyard Busybody
+35 U Half-Shark, Half-
+36 R Incite Insight
+37 U Kindly Cognician
+38 C Magic Word
+39 C Mer // Man
+40 U More or Less
+C Novellamental
+C Novellamental
+C Novellamental
+C Novellamental
+42 C Numbing // Jellyfish
+43 U S.N.E.A.K. Dispatcher
+44 U Socketed Sprocketer
+45 C Spell Suck
+46 U Spy Eye
+47 U Suspicious Nanny
+48 C Time Out
+R Very Cryptic Command A
+R Very Cryptic Command B
+R Very Cryptic Command C
+R Very Cryptic Command D
+R Very Cryptic Command E
+R Very Cryptic Command F
+50 C Wall of Fortune
+51 C Big Boa // Constrictor
+52 C capital offense
+53 C Dirty // Rat
+C Extremely Slow Zombie
+C Extremely Slow Zombie
+C Extremely Slow Zombie
+C Extremely Slow Zombie
+55 C Finders, Keepers
+56 R Hangman
+57 C Hazmat Suit (Used)
+58 C Hoisted Hireling
+59 U Inhumaniac
+60 R Masterful Ninja
+61 U Ninja
+62 U Old-Fashioned Vampire
+63 R Over My Dead Bodies
+64 U Overt Operative
+65 U "Rumors of My Death..."
+66 U Skull Saucer
+U Sly Spy A
+U Sly Spy B
+U Sly Spy C
+U Sly Spy D
+U Sly Spy E
+U Sly Spy F
+68 C Snickering Squirrel
+69 R Spike, Tournament Grinder
+70 U Squirrel-Powered Scheme
+71 C Steady-Handed Mook
+72 C Stinging // Scorpion
+73 C Subcontract
+74 M Summon the Pack
+75 U Zombified
+76 R The Big Idea
+77 C Box of Free-Range Goblins
+78 C Bumbling // Pangolin
+79 C Common // Iguana
+80 R The Countdown Is at One
+81 C Feisty // Stegosaurus
+U Garbage Elemental A
+U Garbage Elemental B
+U Garbage Elemental C
+U Garbage Elemental D
+U Garbage Elemental E
+U Garbage Elemental F
+83 U Goblin Haberdasher
+84 U Half-Orc, Half-
+85 C Hammer Helper
+86 U Hammer Jammer
+87 U Hammerfest Boomtacular
+88 M Infinity Elemental
+89 C It That Gets Left Hanging
+90 C Just Desserts
+91 C Painiac
+92 U Party Crasher
 93 R Steamflogger Boss
+94 R Steamflogger of the Month
+95 U Steamflogger Temp
+96 U Steamfloggery
+97 U Super-Duper Death Ray
+C Target Minotaur
+C Target Minotaur
+C Target Minotaur
+C Target Minotaur
+99 R Three-Headed Goblin
+100 C Work a Double
+101 C Wrench-Rigger
+102 R As Luck Would Have It
+C Beast in Show
+C Beast in Show
+C Beast in Show
+C Beast in Show
+104 U Chittering Doom
+105 U Clever Combo
+106 U Druid of the Sacred Beaker
+107 C Eager // Beaver
+108 R Earl of Squirrel
+109 U First Pick
+110 U Ground Pounder
+111 U Half-Squirrel, Half-
+112 R Hydradoodle
+R Ineffable Blessing A
+R Ineffable Blessing B
+R Ineffable Blessing C
+R Ineffable Blessing D
+R Ineffable Blessing E
+R Ineffable Blessing F
+114 C Joyride Rigger
+115 U Monkey-
+116 C Mother // Kangaroo
+117 C Multi-Headed
+118 C Really Epic Punch
+119 C Selfie Preservation
+120 R Serpentine
+121 U Shellephant
+122 U Slaying Mantis
+123 C Squirrel Dealer
+124 U Steamflogger Service Rep
+125 C Wild // Crocodile
+126 C Willing Test Subject
+127 M Baron Von Count
+128 R Better Than One
+129 R Cramped Bunker
+130 M Dr. Julius Jumblemorph
+131 M The Grand Calcutron
+132 R Grusilda, Monster Masher
+133 R Hot Fix
+134 M Ol' Buzzbark
+135 M Phoebe, Head of S.N.E.A.K.
+136 M Urza, Academy Headmaster
+137 R X
+138 R Mary O'Kill
+139 R Angelic // Rocket
+140 U Border Guardian
+141 U Buzzing Whack-a-Doodle
+142 U Clock of DOOOOOOOOOOOOM!
+143 U Cogmentor
+144 U Contraption Cannon
+C Curious Killbot
+C Delighted Killbot
+C Despondent Killbot
+C Enraged Killbot
+146 U Entirely Normal Armchair
+R Everythingamajig A
+R Everythingamajig B
+R Everythingamajig C
+R Everythingamajig D
+R Everythingamajig E
+R Everythingamajig F
+148 C Gnome-Made // Engine
+149 R Handy Dandy Clone Machine
+150 R Kindslaver
+151 U Krark's Other Thumb
+152 U Labro // Bot
+153 U Lobe Lobber
+154 C Mad Science Fair Project
+155 R Modular Monstrosity
+156 U Proper Laboratory Attire
+157 U Robo-
+158 R Split Screen
+159 U Staff of the Letter Magus
+160 U Stamp of Approval
+161 U Steam-Powered
+162 U Steel Squirrel
+163 M Sword of Dungeons & Dragons
+164 C Voracious // Vacuum
+C Secret Base
+C Secret Base
+C Secret Base
+C Secret Base
+C Secret Base
+166 R Watermarket
+167 U Accessories to Murder
+168 C Applied Aeronautics
+169 U Arms Depot
+170 C Auto-Key
+171 M Bee-Bee Gun
+172 C Boomflinger
+173 C Buzz Buggy
+174 R Deadly Poison Sampler
+175 C Dictation Quillograph
+176 U Dispatch Dispensary
+177 C Division Table
+178 U Dogsnail Engine
+179 R Dual Doomsuits
+180 R Duplication Device
+181 M Faerie Aerie
+182 U Genetic Recombinator
+183 R Gift Horse
+184 U Gnomeball Machine
+185 R Goblin Slingshot
+186 R Guest List
+187 M Hard Hat Area
+188 C Head Banger
+189 R Hypnotic Swirly Disc
+190 C Inflation Station
+191 U Insufferable Syphon
+192 U Jamming Device
+193 C Lackey Recycler
+194 C Mandatory Friendship Shackles
+195 U Neural Network
+196 R Oaken Power Suit
+197 U Optical Optimizer
+198 M Pet Project
+199 C Quick-Stick Lick Trick
+200 M Rapid Prototyper
+201 R Record Store
+202 R Refibrillator
+203 C Sap Sucker
+204 U Sundering Fork
+205 U Targeting Rocket
+206 U Thud-for-Duds
+207 C Top-Secret Tunnel
+208 C Tread Mill
+209 U Turbo-Thwacking Auto-Hammer
+210 C Twiddlestick Charger
+211 U Widget Contraption
 212 L Plains
 213 L Island
 214 L Swamp

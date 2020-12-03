@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Sorcery
 A:SP$ DamageAll | StackDescription$ CARDNAME deals 3 damage to each opponent and | Cost$ 3 B | ValidPlayers$ Player.Opponent | NumDmg$ 3 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 3 damage to each opponent and you gain 3 life.
 T:Mode$ ChangesZone | Origin$ Library | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME is put into your graveyard from your library, you may exile it. If you do, then a opponent and you gain 3 life.
-SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBDamage
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 3 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 Oracle:Creeping Chill deals 3 damage to each opponent and you gain 3 life.\nWhen Creeping Chill is put into your graveyard from your library, you may exile it. If you do, Creeping Chill deals 3 damage to each opponent and you gain 3 life.

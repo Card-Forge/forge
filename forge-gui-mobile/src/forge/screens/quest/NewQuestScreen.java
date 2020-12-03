@@ -185,6 +185,7 @@ public class NewQuestScreen extends FScreen {
 
     private final FCheckBox cbAllowUnlocks = scroller.add(new FCheckBox(Localizer.getInstance().getMessage("lblAllowUnlockAdEd")));
     private final FCheckBox cbFantasy = scroller.add(new FCheckBox(Localizer.getInstance().getMessage("rbFantasyMode")));
+    private final FCheckBox cbCommander = scroller.add(new FCheckBox(Localizer.getInstance().getMessage("rbCommanderSubformat")));
 
     private final FLabel btnEmbark = add(new FLabel.ButtonBuilder()
             .font(FSkinFont.get(22)).text(Localizer.getInstance().getMessage("lblEmbark")).icon(FSkinImage.QUEST_ZEP).command(new FEventHandler() {
@@ -344,6 +345,15 @@ public class NewQuestScreen extends FScreen {
         // Fantasy box enabled by Default
         cbFantasy.setSelected(true);
         cbFantasy.setEnabled(true);
+        cbCommander.setSelected(false);
+        cbCommander.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                if (!isCommander())
+                    return;
+                cbxStartingWorld.setSelectedItem(FModel.getWorlds().get("Random Commander"));
+            }
+        });
 
     }
 
@@ -464,6 +474,7 @@ public class NewQuestScreen extends FScreen {
     public boolean isFantasy() {
         return cbFantasy.isSelected();
     }
+    public boolean isCommander() { return cbCommander.isSelected(); }
 
     public PoolType getPoolType() {
         if (radSurpriseMe.isSelected()) {
@@ -646,8 +657,7 @@ public class NewQuestScreen extends FScreen {
                                 new StartingPoolPreferences(getPoolType(), getPreferredColors(), cbIncludeArtifacts.isSelected(), startWithCompleteSet(), allowDuplicateCards(), numberOfBoostersField.getValue());
                         QuestController qc = FModel.getQuest();
 
-                        //DeckConstructionRules are only used for the desktop's commander quest mode
-                        DeckConstructionRules dcr = DeckConstructionRules.Default;
+                        DeckConstructionRules dcr = isCommander() ?  DeckConstructionRules.Commander: DeckConstructionRules.Default;
 
                         qc.newGame(questName, getSelectedDifficulty(), mode, fmtPrizes, isUnlockSetsAllowed(), dckStartPool, fmtStartPool, getStartingWorldName(), userPrefs, dcr);
                         qc.save();
@@ -656,7 +666,7 @@ public class NewQuestScreen extends FScreen {
                         FModel.getQuestPreferences().setPref(QPref.CURRENT_QUEST, questName + ".dat");
                         FModel.getQuestPreferences().save();
 
-                        QuestMenu.launchQuestMode(LaunchReason.NewQuest); //launch quest mode for new quest
+                        QuestMenu.launchQuestMode(LaunchReason.NewQuest, isCommander()); //launch quest mode for new quest
                     }
                 });
             }

@@ -3,11 +3,10 @@ ManaCost:3 W
 Types:Creature Human Knight
 PT:3/4
 K:Vigilance
-K:Protection from multicolored
+K:Protection:Card.MultiColor:Protection from multicolored
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+counters_GE1_P1P1 | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ Whenever CARDNAME or another creature you control dies, if it had a +1/+1 counter on it, create a 2/2 white Knight creature token with vigilance.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl+counters_GE1_P1P1 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerController$ TriggeredCardController | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature you control dies, if it had a +1/+1 counter on it, create a 2/2 white Knight creature token with vigilance.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+counters_GE1_P1P1,Creature.Other+YouCtrl+counters_GE1_P1P1 | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another creature you control dies, if it had a +1/+1 counter on it, create a 2/2 white Knight creature token with vigilance.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You
 DeckHas:Ability$Counters & Ability$Token
 Oracle:Vigilance, protection from multicolored\nWhen Basri's Lieutenant enters the battlefield, put a +1/+1 counter on target creature you control.\nWhenever Basri's Lieutenant or another creature you control dies, if it had a +1/+1 counter on it, create a 2/2 white Knight creature token with vigilance.

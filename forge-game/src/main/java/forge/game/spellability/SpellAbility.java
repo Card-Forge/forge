@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.card.CardStateName;
+import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
@@ -88,19 +89,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private String originalStackDescription = "", stackDescription = "";
     private ManaCost multiKickerManaCost = null;
     private Player activatingPlayer = null;
-    private Player deltrigActivatingPlayer = null; // used by delayed triggers to ensure the original activator can be restored
     private Player targetingPlayer = null;
 
     private Card grantorCard = null; // card which grants the ability (equipment or owner of static ability that gave this one)
     private SpellAbility grantorOriginal = null;
     private StaticAbility grantorStatic = null;
 
-    private SpellAbility mayPlayOriginal = null;
-
     private CardCollection splicedCards = null;
 
     private boolean basicSpell = true;
-    private boolean trigger = false;
     private Trigger triggerObj = null;
     private boolean optionalTrigger = false;
     private ReplacementEffect replacementEffect = null;
@@ -130,8 +127,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     protected ApiType api = null;
 
-    private final List<Mana> payingMana = Lists.newArrayList();
-    private final List<SpellAbility> paidAbilities = Lists.newArrayList();
+    private List<Mana> payingMana = Lists.newArrayList();
+    private List<SpellAbility> paidAbilities = Lists.newArrayList();
     private Integer xManaCostPaid = null;
 
     private HashMap<String, CardCollection> paidLists = Maps.newHashMap();
@@ -344,13 +341,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return updated;
     }
 
-    public Player getDeltrigActivatingPlayer() {
-        return deltrigActivatingPlayer;
-    }
-    public void setDeltrigActivatingPlayer(final Player player) {
-        deltrigActivatingPlayer = player;
-    }
-
     public Player getTargetingPlayer() {
         return targetingPlayer;
     }
@@ -360,6 +350,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public boolean isSpell() { return false; }
     public boolean isAbility() { return true; }
+    public boolean isActivatedAbility() { return false; }
 
     public boolean isMorphUp() {
         return this.hasParam("MorphUp");
@@ -393,15 +384,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 sa.setOriginalHost(c);
             }
         }
-    }
-
-
-    public SpellAbility getMayPlayOriginal() {
-        return mayPlayOriginal;
-    }
-
-    public void setMayPlayOriginal(SpellAbility mayPlayOriginal) {
-        this.mayPlayOriginal = mayPlayOriginal;
     }
 
     // If this is not null, then ability was made in a factory
@@ -483,6 +465,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public final void clearManaPaid() {
         payingMana.clear();
+    }
+
+    public ColorSet getPayingColors() {
+        byte colors = 0;
+        for (Mana m : payingMana) {
+            colors |= m.getColor();
+        }
+        return ColorSet.fromMask(colors);
     }
 
     public List<SpellAbility> getPayingManaAbilities() {
@@ -888,6 +878,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 clone.changeZoneTable.putAll(changeZoneTable);
             }
 
+            clone.payingMana = Lists.newArrayList(payingMana);
+            clone.paidAbilities = Lists.newArrayList();
             clone.setPaidHash(Maps.newHashMap(getPaidHash()));
 
             if (usesTargeting()) {
@@ -946,10 +938,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isTrigger() {
-        return trigger;
-    }
-    public void setTrigger(final boolean trigger0) {
-        trigger = trigger0;
+        return triggerObj != null;
     }
 
     public Trigger getTrigger() {
@@ -1413,11 +1402,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return false;
         }
 
-        return getTargets().getNumTargeted() < getTargetRestrictions().getMaxTargets(hostCard, this);
+        return getTargets().size() < getTargetRestrictions().getMaxTargets(hostCard, this);
     }
 
     public boolean isZeroTargets() {
-        return getTargetRestrictions().getMinTargets(hostCard, this) == 0 && getTargets().getNumTargeted() == 0;
+        return getTargetRestrictions().getMinTargets(hostCard, this) == 0 && getTargets().size() == 0;
     }
 
     public boolean isTargetNumberValid() {
@@ -1427,7 +1416,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         int minTargets = getTargetRestrictions().getMinTargets(hostCard, this);
         int maxTargets = getTargetRestrictions().getMaxTargets(hostCard, this);
-        int numTargets = getTargets().getNumTargeted();
+        int numTargets = getTargets().size();
 
         if (maxTargets == 0 && getPayCosts().hasSpecificCostType(CostRemoveCounter.class)
                 && hasSVar(getParam("TargetMax"))
@@ -1580,7 +1569,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         SpellAbility child = getParent();
         while (child != null) {
             if (child.getTargetRestrictions() != null) {
-                Iterables.addAll(targets, child.getTargets().getTargets());
+                Iterables.addAll(targets, child.getTargets());
             }
             child = child.getParent();
         }
@@ -1617,7 +1606,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             boolean result = false;
 
-            for (final GameObject o : matchTgt.getTargets()) {
+            for (final GameObject o : matchTgt) {
                 if (o.isValid(splitTargetRestrictions.split(","), getActivatingPlayer(), getHostCard(), this)) {
                     result = true;
                     break;
@@ -1633,7 +1622,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                         if (matchTgt == null) {
                             continue;
                         }
-                        for (final GameObject o : matchTgt.getTargets()) {
+                        for (final GameObject o : matchTgt) {
                             if (o.isValid(splitTargetRestrictions.split(","), getActivatingPlayer(), getHostCard(), this)) {
                                 result = true;
                                 break;
@@ -1652,7 +1641,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (tgt.isSingleTarget()) {
             Set<GameObject> targets = new HashSet<>();
             for (TargetChoices tc : topSA.getAllTargetChoices()) {
-                targets.addAll(tc.getTargets());
+                targets.addAll(tc);
                 if (targets.size() > 1) {
                     // As soon as we get more than one, bail out
                     return false;
@@ -1668,7 +1657,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isTargeting(GameObject o) {
-        if (getTargets().isTargeting(o)) {
+        if (getTargets().contains(o)) {
             return true;
         }
         SpellAbility p = getParent();
@@ -1735,7 +1724,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
         }
         else if (incR[0].equals("Activated")) {
-            if (!(root instanceof AbilityActivated)) {
+            if (!root.isActivatedAbility()) {
                 return false;
             }
         }
@@ -2036,4 +2025,51 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public void setXManaCostPaid(final Integer n) {
         xManaCostPaid = n;
     }
+
+    public boolean canCastTiming(Player activator) {
+        return canCastTiming(getHostCard(), activator);
+    }
+
+    public boolean canCastTiming(Card host, Player activator) {
+        // no spell or no activated ability, no check there
+        if (!isSpell() && !isActivatedAbility()) {
+            return true;
+        }
+
+        if (activator.canCastSorcery() || withFlash(host, activator)) {
+            return true;
+        }
+
+        // spells per default are sorcerySpeed
+        if (isSpell()) {
+            return false;
+        } else if (isActivatedAbility()) {
+            // Activated Abillties are instant speed per default
+            return !getRestrictions().isSorcerySpeed();
+        }
+        return true;
+    }
+
+    public boolean withFlash(Card host, Player activator) {
+        if (getRestrictions().isInstantSpeed()) {
+            return true;
+        }
+        if (isSpell()) {
+            if (hasSVar("IsCastFromPlayEffect") || host.isInstant() || host.hasKeyword(Keyword.FLASH)) {
+                return true;
+            }
+        }
+        final Game game = activator.getGame();
+        final CardCollection allp = new CardCollection(game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
+        allp.add(host);
+        for (final Card ca : allp) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("CastWithFlash", host, this, activator)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

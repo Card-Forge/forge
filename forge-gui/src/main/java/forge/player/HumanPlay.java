@@ -657,6 +657,8 @@ public class HumanPlay {
                 hostCard.addDelved(c);
                 final ZoneType o = c.getZone().getZoneType();
                 final Card d = game.getAction().exile(c, null);
+                d.setExiledWith(hostCard);
+                d.setExiledBy(hostCard.getController());
                 table.put(o, d.getZone().getZoneType(), d);
             }
         }
@@ -764,8 +766,6 @@ public class HumanPlay {
             }
 
             source.setXManaCostPaidByColor(toPay.getXManaCostPaidByColor());
-            source.setColorsPaid(toPay.getColorsPaid());
-            source.setSunburstValue(toPay.getSunburst());
         }
 
         // Handle convoke and offerings

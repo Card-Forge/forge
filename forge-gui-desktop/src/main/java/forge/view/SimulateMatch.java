@@ -172,8 +172,12 @@ public class SimulateMatch {
         } catch (Exception | StackOverflowError e) {
             e.printStackTrace();
         } finally {
-            g1.setGameOver(GameEndReason.Draw);
-            sw.stop();
+            if (sw.isStarted()) {
+                sw.stop();
+            }
+            if (!g1.isGameOver()) {
+                g1.setGameOver(GameEndReason.Draw);
+            }
         }
 
         List<GameLogEntry> log;

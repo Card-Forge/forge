@@ -1,0 +1,9 @@
+Name:Rakshasa Debaser
+ManaCost:4 B B
+Types:Creature Cat Demon
+PT:6/6
+K:Encore:6 B B
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ Whenever CARDNAME attacks, put target creature card from defending player's graveyard onto the battlefield under your control.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature card in defending player's graveyard | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True
+DeckHas:Ability$Graveyard & Ability$Token
+Oracle:Whenever Rakshasa Debaser attacks, put target creature card from defending player's graveyard onto the battlefield under your control.\nEncore {6}{B}{B} ({6}{B}{B}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

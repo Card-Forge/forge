@@ -54,6 +54,10 @@ public class CardProperty {
             if (!card.sharesNameWith(source.getNamedCard())) {
                 return false;
             }
+        } else if (property.equals("NamedCard2")) {
+            if (!card.sharesNameWith(source.getNamedCard2())) {
+                return false;
+            }
         } else if (property.equals("NamedByRememberedPlayer")) {
             if (!source.hasRemembered()) {
                 final Card newCard = game.getCardState(source);
@@ -348,6 +352,13 @@ public class CardProperty {
             }
         } else if (property.startsWith("Self")) {
             if (!card.equals(source)) {
+                return false;
+            }
+        } else if (property.startsWith("ExiledByYou")) {
+            if (card.getExiledBy() == null) {
+                return false;
+            }
+            if (!card.getExiledBy().equals(sourceController)) {
                 return false;
             }
         } else if (property.startsWith("ExiledWithSource")) {
@@ -711,8 +722,11 @@ public class CardProperty {
                         }
                         break;
                     case "ActivationColor":
-                        byte manaSpent = source.getColorsPaid();
-                        if (!CardUtil.getColors(card).hasAnyColor(manaSpent)) {
+                        SpellAbility castSA = source.getCastSA();
+                        if (castSA == null) {
+                            return false;
+                        }
+                        if (!CardUtil.getColors(card).hasAnyColor(castSA.getPayingColors().getColor())) {
                             return false;
                         }
                         break;
@@ -1092,6 +1106,10 @@ public class CardProperty {
             if (!card.getDrawnThisTurn()) {
                 return false;
             }
+        } else if (property.startsWith("notDrawnThisTurn")) {
+            if (card.getDrawnThisTurn()) {
+                return false;
+            }
         } else if (property.startsWith("enteredBattlefieldThisTurn")) {
             if (!(card.getTurnInZone() == game.getPhaseHandler().getTurn())) {
                 return false;
@@ -1458,6 +1476,12 @@ public class CardProperty {
             if (property.equals("attacking"))    return combat.isAttacking(card);
             if (property.equals("attackingLKI")) return combat.isLKIAttacking(card);
             if (property.equals("attackingYou")) return combat.isAttacking(card, sourceController);
+            if (property.equals("attackingSame")) {
+                final GameEntity attacked = combat.getDefenderByAttacker(source);
+                if (!combat.isAttacking(card, attacked)) {
+                    return false;
+                }
+            }
             if (property.equals("attackingYouOrYourPW")) {
                 Player defender = combat.getDefenderPlayerByAttacker(card);
                 if (!sourceController.equals(defender)) {

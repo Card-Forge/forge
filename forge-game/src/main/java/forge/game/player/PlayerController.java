@@ -22,6 +22,8 @@ import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.GameOutcome.AnteResult;
 import forge.game.GameType;
+import forge.game.GameView;
+import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -73,13 +75,13 @@ public abstract class PlayerController {
         AddOrRemove,
     }
 
-    protected final Game game;
+    protected final GameView gameView;
 
     protected final Player player;
     protected final LobbyPlayer lobbyPlayer;
 
     public PlayerController(Game game0, Player p, LobbyPlayer lp) {
-        game = game0;
+        gameView = game0.getView();
         player = p;
         lobbyPlayer = lp;
     }
@@ -88,7 +90,8 @@ public abstract class PlayerController {
         return false;
     }
 
-    public Game getGame() { return game; }
+    public Game getGame() { return gameView.getGame(); }
+    public Match getMatch() { return gameView.getMatch(); }
     public Player getPlayer() { return player; }
     public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }
 
@@ -280,7 +283,7 @@ public abstract class PlayerController {
     }
 
     public AnteResult getAnteResult() {
-        return game.getOutcome().anteResult.get(player.getRegisteredPlayer());
+        return gameView.getAnteResult(player.getView());
     }
 
     public abstract List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen, List<OptionalCostValue> optionalCostValues);

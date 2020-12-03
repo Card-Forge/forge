@@ -3,6 +3,6 @@ ManaCost:U
 Types:Enchantment Aura
 K:Enchant land
 A:SP$ Attach | Cost$ U | ValidTgts$ Land | AILogic$ ChangeType
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Island | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True | Description$ Enchanted land is an Island.
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Island | RemoveLandTypes$ True | Description$ Enchanted land is an Island.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seas_claim.jpg
 Oracle:Enchant land (Target a land as you cast this. This card enters the battlefield attached to that land.)\nEnchanted land is an Island.

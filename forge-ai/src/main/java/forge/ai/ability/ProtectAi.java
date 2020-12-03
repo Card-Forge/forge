@@ -226,12 +226,12 @@ public class ProtectAi extends SpellAbilityAi {
             return mandatory && protectMandatoryTarget(ai, sa, mandatory);
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
             Card t = null;
             // boolean goodt = false;
 
             if (list.isEmpty()) {
-                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) || sa.getTargets().getNumTargeted() == 0) {
+                if ((sa.getTargets().size() < tgt.getMinTargets(source, sa)) || sa.getTargets().size() == 0) {
                     if (mandatory) {
                         return protectMandatoryTarget(ai, sa, mandatory);
                     }
@@ -285,7 +285,7 @@ public class ProtectAi extends SpellAbilityAi {
         final List<Card> forced = CardLists.filterControlledBy(list, ai);
         final Card source = sa.getHostCard();
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
             if (pref.isEmpty()) {
                 break;
             }
@@ -302,7 +302,7 @@ public class ProtectAi extends SpellAbilityAi {
             sa.getTargets().add(c);
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
             if (pref2.isEmpty()) {
                 break;
             }
@@ -319,7 +319,7 @@ public class ProtectAi extends SpellAbilityAi {
             sa.getTargets().add(c);
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) {
+        while (sa.getTargets().size() < tgt.getMinTargets(source, sa)) {
             if (forced.isEmpty()) {
                 break;
             }
@@ -336,7 +336,7 @@ public class ProtectAi extends SpellAbilityAi {
             sa.getTargets().add(c);
         }
 
-        if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+        if (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();
             return false;
         }

@@ -1,29 +1,19 @@
 package forge.game.ability.effects;
 
-import forge.GameCommand;
 import forge.card.CardType;
-import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.game.Game;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
-import forge.game.phase.PhaseType;
-import forge.game.replacement.ReplacementEffect;
-import forge.game.replacement.ReplacementHandler;
-import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbility;
-import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
+
+import com.google.common.collect.Lists;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Lists;
 
 public class AnimateEffect extends AnimateEffectBase {
 
@@ -61,8 +51,6 @@ public class AnimateEffect extends AnimateEffectBase {
         final Game game = sa.getActivatingPlayer().getGame();
         // Every Animate event needs a unique time stamp
         final long timestamp = game.getNextTimestamp();
-
-        final boolean permanent = sa.hasParam("Permanent");
 
         final CardType types = new CardType(true);
         if (sa.hasParam("Types")) {
@@ -150,81 +138,23 @@ public class AnimateEffect extends AnimateEffectBase {
 
         for (final Card c : tgts) {
             doAnimate(c, sa, power, toughness, types, removeTypes, finalDesc,
-                    keywords, removeKeywords, hiddenKeywords, timestamp);
+                    keywords, removeKeywords, hiddenKeywords,
+                    abilities, triggers, replacements, stAbs, timestamp);
 
             if (sa.hasParam("Name")) {
                 c.addChangedName(sa.getParam("Name"), timestamp);
             }
 
-            if (sa.hasParam("LeaveBattlefield")) {
-                addLeaveBattlefieldReplacement(c, sa, sa.getParam("LeaveBattlefield"));
-            }
-
-            // remove abilities
-            final List<SpellAbility> removedAbilities = Lists.newArrayList();
-            boolean clearSpells = sa.hasParam("OverwriteSpells");
-            boolean removeAll = sa.hasParam("RemoveAllAbilities");
-            boolean removeIntrinsic = sa.hasParam("RemoveIntrinsicAbilities");
-
-            if (clearSpells) {
-                removedAbilities.addAll(Lists.newArrayList(c.getSpells()));
-            }
-
-            if (sa.hasParam("RemoveThisAbility") && !removedAbilities.contains(sa)) {
-                removedAbilities.add(sa);
-            }
-
-            // give abilities
-            final List<SpellAbility> addedAbilities = Lists.newArrayList();
-            if (abilities.size() > 0) {
-                for (final String s : abilities) {
-                    final String actualAbility = source.getSVar(s);
-                    addedAbilities.add(AbilityFactory.getAbility(actualAbility, c));
-                }
-            }
-
-            // Grant triggers
-            final List<Trigger> addedTriggers = Lists.newArrayList();
-            if (triggers.size() > 0) {
-                for (final String s : triggers) {
-                    final String actualTrigger = source.getSVar(s);
-                    final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, false);
-                    addedTriggers.add(parsedTrigger);
-                }
-            }
-
-            // give replacement effects
-            final List<ReplacementEffect> addedReplacements = Lists.newArrayList();
-            if (replacements.size() > 0) {
-                for (final String s : replacements) {
-                    final String actualReplacement = source.getSVar(s);
-                    final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, c, false);
-                    addedReplacements.add(parsedReplacement);
-                }
-            }
-
-            // give static abilities (should only be used by cards to give
-            // itself a static ability)
-            final List<StaticAbility> addedStaticAbilities = Lists.newArrayList();
-            if (stAbs.size() > 0) {
-                for (final String s : stAbs) {
-                    final String actualAbility = source.getSVar(s);
-                    addedStaticAbilities.add(new StaticAbility(actualAbility, c));
-                }
-            }
-
             // give sVars
-            if (sVars.size() > 0) {
-                for (final String s : sVars) {
-                    String actualsVar = source.getSVar(s);
-                    String name = s;
-                    if (actualsVar.startsWith("SVar:")) {
-                        actualsVar = actualsVar.split("SVar:")[1];
-                        name = actualsVar.split(":")[0];
-                        actualsVar = actualsVar.split(":")[1];
-                    }
-                    c.setSVar(name, actualsVar);
+            for (final String s : sVars) {
+                String actualsVar = AbilityUtils.getSVar(sa, s);
+                String name = s;
+                if (actualsVar.startsWith("SVar:")) {
+                    actualsVar = actualsVar.split("SVar:")[1];
+                    name = actualsVar.split(":")[0];
+                    actualsVar = actualsVar.split(":")[1];
                 }
+                c.setSVar(name, actualsVar);
             }
 
             // give Remembered
@@ -233,73 +163,6 @@ public class AnimateEffect extends AnimateEffectBase {
                     c.addRemembered(o);
                 }
             }
-
-            final GameCommand unanimate = new GameCommand() {
-                private static final long serialVersionUID = -5861759814760561373L;
-
-                @Override
-                public void run() {
-                    doUnanimate(c, sa, hiddenKeywords, timestamp);
-
-                    c.removeChangedName(timestamp);
-                    c.updateStateForView();
-
-                    game.fireEvent(new GameEventCardStatsChanged(c));
-                }
-            };
-
-
-            if (sa.hasParam("RevertCost")) {
-                final ManaCost cost = new ManaCost(new ManaCostParser(sa.getParam("RevertCost")));
-                final String desc = this.getStackDescription(sa);
-                final SpellAbility revertSA = new AbilityStatic(c, cost) {
-                    @Override
-                    public void resolve() {
-                        unanimate.run();
-                    }
-                    @Override
-                    public String getDescription() {
-                        return cost + ": End Effect: " + desc;
-                    }
-                };
-                addedAbilities.add(revertSA);
-            }
-
-            // after unanimate to add RevertCost
-            if (removeAll || removeIntrinsic
-                    || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
-                    || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
-                c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
-                        addedStaticAbilities, removeAll, false, removeIntrinsic, timestamp);
-            }
-
-            if (!permanent) {
-                if (sa.hasParam("UntilEndOfCombat")) {
-                    game.getEndOfCombat().addUntil(unanimate);
-                } else if (sa.hasParam("UntilHostLeavesPlay")) {
-                    source.addLeavesPlayCommand(unanimate);
-                } else if (sa.hasParam("UntilLoseControlOfHost")) {
-                    sa.getHostCard().addLeavesPlayCommand(unanimate);
-                    sa.getHostCard().addChangeControllerCommand(unanimate);
-                } else if (sa.hasParam("UntilYourNextUpkeep")) {
-                    game.getUpkeep().addUntil(source.getController(), unanimate);
-                } else if (sa.hasParam("UntilTheEndOfYourNextUpkeep")) {
-                    if (game.getPhaseHandler().is(PhaseType.UPKEEP)) {
-                        game.getUpkeep().registerUntilEnd(source.getController(), unanimate);
-                    } else {
-                        game.getUpkeep().addUntilEnd(source.getController(), unanimate);
-                    }
-                } else if (sa.hasParam("UntilControllerNextUntap")) {
-                    game.getUntap().addUntil(c.getController(), unanimate);
-                } else if (sa.hasParam("UntilAPlayerCastSpell")) {
-                    game.getStack().addCastCommand(sa.getParam("UntilAPlayerCastSpell"), unanimate);
-                } else if (sa.hasParam("UntilYourNextTurn")) {
-                    game.getCleanup().addUntil(source.getController(), unanimate);
-                } else {
-                    game.getEndOfTurn().addUntil(unanimate);
-                }
-            }
-
 
             game.fireEvent(new GameEventCardStatsChanged(c));
         }

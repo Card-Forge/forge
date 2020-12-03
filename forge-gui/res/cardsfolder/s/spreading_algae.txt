@@ -4,9 +4,8 @@ Types:Enchantment Aura
 K:Enchant Swamp
 A:SP$ Attach | Cost$ G | ValidTgts$ Swamp | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerDescription$ When enchanted land becomes tapped, destroy it.
-SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCard
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCardLKICopy
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredCard
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredNewCardLKICopy
 SVar:SacMe:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spreading_algae.jpg
 Oracle:Enchant Swamp\nWhen enchanted land becomes tapped, destroy it.\nWhen Spreading Algae is put into a graveyard from the battlefield, return Spreading Algae to its owner's hand.

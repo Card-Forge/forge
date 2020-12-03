@@ -1,0 +1,10 @@
+Name:Briarblade Adept
+ManaCost:4 B
+Types:Creature Elf Assassin
+PT:3/4
+K:Encore:3 B
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target creature an opponent controls gets -1/-1 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
+DeckHas:Ability$Token
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Briarblade Adept attacks, target creature an opponent controls gets -1/-1 until end of turn.\nEncore {​3}{​B} ({​3}{​B}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

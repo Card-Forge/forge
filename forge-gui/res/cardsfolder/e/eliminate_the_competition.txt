@@ -1,11 +1,6 @@
 Name:Eliminate the Competition
 ManaCost:4 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 4 B Sac<X/Creature> | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Creature | References$ X,MaxTgts | TgtPrompt$ Select target creatures | AIMaxTgtsCount$ Valid Creature.YouCtrl+cmcLE2 | SpellDescription$ Destroy X target creatures.
-# It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
-SVar:X:Targeted$Amount
-SVar:MaxTgts:Count$Valid Creature
-#ChosenX SVar created by Cost payment
+A:SP$ Destroy | Announce$ X | Cost$ 4 B Sac<X/Creature/creature(s)> | CostDesc$ As an additional cost to cast this spell, sacrifice X creatures. | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature | References$ X | TgtPrompt$ Select X target creatures | AIMaxTgtsCount$ Valid Creature.YouCtrl+cmcLE2 | SpellDescription$ Destroy X target creatures.
 SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eliminate_the_competition.jpg
-Oracle:As an additional cost to cast Eliminate the Competition, sacrifice X creatures.\nDestroy X target creatures.
+Oracle:As an additional cost to cast this spell, sacrifice X creatures.\nDestroy X target creatures.

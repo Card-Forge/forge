@@ -21,7 +21,7 @@ import java.util.Observable;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
-import forge.game.Game;
+import forge.game.GameView;
 import forge.player.PlayerControllerHuman;
 
 /**
@@ -34,10 +34,10 @@ import forge.player.PlayerControllerHuman;
  */
 public class InputQueue extends Observable {
     private final BlockingDeque<InputSynchronized> inputStack = new LinkedBlockingDeque<>();
-    private final Game game;
+    private final GameView gameView;
 
-    public InputQueue(final Game game, final InputProxy inputProxy) {
-        this.game = game;
+    public InputQueue(final GameView gameView, final InputProxy inputProxy) {
+        this.gameView = gameView;
         addObserver(inputProxy);
     }
 
@@ -64,10 +64,10 @@ public class InputQueue extends Observable {
 
     public final Input getActualInput(final PlayerControllerHuman controller) {
         final Input topMost = inputStack.peek(); // incoming input to Control
-        if (topMost != null && !game.isGameOver()) {
+        if (topMost != null && !gameView.isGameOver()) {
             return topMost;
         }
-        return new InputLockUI(game, this, controller);
+        return new InputLockUI(this, controller);
     } // getInput()
 
     // only for debug purposes

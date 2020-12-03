@@ -346,7 +346,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         if (mode.equals("CantBeCast")) {
             return StaticAbilityCantBeCast.applyCantBeCastAbility(this, card, player);
         }
-
         if (mode.equals("CantPlayLand")) {
             return StaticAbilityCantBeCast.applyCantPlayLandAbility(this, card, player);
         }
@@ -404,6 +403,24 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return false;
     }
 
+    public final boolean applyAbility(final String mode, final Card card, final SpellAbility spellAbility, final Player player) {
+
+        // don't apply the ability if it hasn't got the right mode
+        if (!getParam("Mode").equals(mode)) {
+            return false;
+        }
+
+        if (this.isSuppressed() || !this.checkConditions()) {
+            return false;
+        }
+
+        if (mode.equals("CastWithFlash")) {
+            return StaticAbilityCastWithFlash.applyWithFlashAbility(this, spellAbility, card, player);
+        }
+
+        return false;
+    }
+
     public final boolean applyAbility(String mode, Card card, CounterType type) {
 
         // don't apply the ability if it hasn't got the right mode
@@ -436,37 +453,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
         if (mode.equals("CantPutCounter")) {
             return StaticAbilityCantPutCounter.applyCantPutCounter(this, player, type);
-
-        }
-
-        return false;
-    }
-
-    /**
-     * Apply ability.
-     *
-     * @param mode
-     *            the mode
-     * @param card
-     *            the card
-     * @return true, if successful
-     */
-    public final boolean applyAbility(final String mode, final Card card) {
-
-        // don't apply the ability if it hasn't got the right mode
-        if (!getParam("Mode").equals(mode)) {
-            return false;
-        }
-
-        if (this.isSuppressed() || !this.checkConditions()) {
-            return false;
-        }
-
-        if (mode.equals("ETBTapped")) {
-            return StaticAbilityETBTapped.applyETBTappedAbility(this, card);
-        }
-
-        if (mode.equals("GainAbilitiesOf")) {
 
         }
 
@@ -518,6 +504,8 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             return StaticAbilityCantAttackBlock.applyCantBlockByAbility(this, card, (Card)target);
         } else if (mode.equals("CantAttach")) {
             return StaticAbilityCantAttach.applyCantAttachAbility(this, card, target);
+        } else if (mode.equals("CanAttackIfHaste")) {
+            return StaticAbilityCantAttackBlock.applyCanAttackHasteAbility(this, card, target);
         }
 
         return false;

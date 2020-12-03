@@ -62,6 +62,12 @@ import org.apache.commons.lang3.tuple.Pair;
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
  */
 public class Game {
+
+    private static int maxId = 0;
+    private static int nextId() { return ++maxId; }
+
+    /** The ID. */
+    private int id;
     private final GameRules rules;
     private final PlayerCollection allPlayers = new PlayerCollection();
     private final PlayerCollection ingamePlayers = new PlayerCollection();
@@ -106,6 +112,15 @@ public class Game {
 
     private final GameView view;
     private final Tracker tracker = new Tracker();
+
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    public int getId() {
+        return this.id;
+    }
 
     public Player getMonarch() {
         return monarch;
@@ -155,9 +170,10 @@ public class Game {
     public void copyLastState() {
         lastStateBattlefield.clear();
         lastStateGraveyard.clear();
+        Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (final Player p : getPlayers()) {
-            lastStateBattlefield.addAll(p.getZone(ZoneType.Battlefield).getLKICopy());
-            lastStateGraveyard.addAll(p.getZone(ZoneType.Graveyard).getLKICopy());
+            lastStateBattlefield.addAll(p.getZone(ZoneType.Battlefield).getLKICopy(cachedMap));
+            lastStateGraveyard.addAll(p.getZone(ZoneType.Graveyard).getLKICopy(cachedMap));
         }
     }
 
@@ -171,7 +187,8 @@ public class Game {
                 : zone.equals(ZoneType.Graveyard) ? lastStateGraveyard
                 : null;
 
-        if (lookup != null && lookup.remove(c)) {
+        if (lookup != null) {
+            lookup.remove(c);
             lookup.add(CardUtil.getLKICopy(c));
         }
     }
@@ -202,9 +219,10 @@ public class Game {
         changeZoneLKIInfo.clear();
     }
 
-    public Game(List<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */
+    public Game(Iterable<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */
         rules = rules0;
         match = match0;
+        this.id = nextId();
 
         int highestTeam = -1;
         for (RegisteredPlayer psc : players0) {
@@ -214,6 +232,9 @@ public class Game {
                 highestTeam = teamNum;
             }
         }
+
+        // View needs to be done before PlayerController
+        view = new GameView(this);
 
         int plId = 0;
         for (RegisteredPlayer psc : players0) {
@@ -246,7 +267,8 @@ public class Game {
         endOfCombat = new Phase(PhaseType.COMBAT_END);
         endOfTurn = new Phase(PhaseType.END_OF_TURN);
 
-        view = new GameView(this);
+        // update players
+        view.updatePlayers(this);
 
         subscribeToEvents(gameLog.getEventVisitor());
     }
@@ -419,7 +441,7 @@ public class Game {
     public synchronized void setGameOver(GameEndReason reason) {
         age = GameStage.GameOver;
         for (Player p : allPlayers) {
-            p.setMindSlaveMaster(null); // for correct totals
+            p.clearController();
         }
 
         for (Player p : getPlayers()) {
@@ -435,7 +457,7 @@ public class Game {
         view.updateGameOver(this);
 
         // The log shall listen to events and generate text internally
-        fireEvent(new GameEventGameOutcome(result, match.getPlayedGames()));
+        fireEvent(new GameEventGameOutcome(result, match.getOutcomes()));
     }
 
     public Zone getZoneOf(final Card card) {
@@ -717,12 +739,12 @@ public class Game {
             getNextPlayerAfter(p).initPlane();
         }
 
-        if (p != null && p.equals(getMonarch())) {
+        if (p != null && p.isMonarch()) {
             // if the player who lost was the Monarch, someone else will be the monarch
             if(p.equals(getPhaseHandler().getPlayerTurn())) {
-                getAction().becomeMonarch(getNextPlayerAfter(p));
+                getAction().becomeMonarch(getNextPlayerAfter(p), null);
             } else {
-                getAction().becomeMonarch(getPhaseHandler().getPlayerTurn());
+                getAction().becomeMonarch(getPhaseHandler().getPlayerTurn(), null);
             }
         }
 

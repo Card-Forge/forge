@@ -165,7 +165,7 @@ public class GameCopier {
             if (newSa != null) {
                 newSa.setActivatingPlayer(map.map(origSa.getActivatingPlayer()));
                 if (origSa.usesTargeting()) {
-                    for (GameObject o : origSa.getTargets().getTargets()) {
+                    for (GameObject o : origSa.getTargets()) {
                         newSa.getTargets().add(map.map(o));
                     }
                 }
@@ -342,7 +342,9 @@ public class GameCopier {
             if (!c.getNamedCard().isEmpty()) {
                 newCard.setNamedCard(c.getNamedCard());
             }
-
+            if (!c.getNamedCard2().isEmpty()) {
+                newCard.setNamedCard2(c.getNamedCard());
+            }
             newCard.setSVars(c.getSVars());
         }
 

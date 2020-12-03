@@ -6,7 +6,7 @@ Code2=IKO
 MciCode=iko
 Type=Expansion
 BoosterCovers=3
-Booster=10 Common:!fromSheet("IKO Secret Cards"), 3 Uncommon:!fromSheet("IKO Secret Cards"), 1 RareMythic:!fromSheet("IKO Secret Cards"), 1 BasicLand
+Booster=10 Common:!fromSheet("IKO Lands"), 3 Uncommon, 1 RareMythic, 1 fromSheet("IKO Lands")
 Prerelease=6 Boosters, 1 RareMythic+
 
 [cards]
@@ -284,13 +284,16 @@ Prerelease=6 Boosters, 1 RareMythic+
 272 L Forest
 273 L Forest
 274 L Forest
-#Buy-A-Box Promo
+
+[buy a box]
 275 M Zilortha, Strength Incarnate
-#Borderless Planeswalkers
+
+[borderless]
 276 M Lukka, Coppercoat Outcast
 277 M Vivien, Monsters' Advocate
 278 M Narset of the Ancient Way
-#Showcase Cards
+
+[showcase]
 279 R Cubwarden
 280 U Huntmaster Liger
 281 U Majestic Auricorn
@@ -326,7 +329,8 @@ Prerelease=6 Boosters, 1 RareMythic+
 311 R Raugrin Triome
 312 R Savai Triome
 313 R Zagoth Triome
-#Extended Art Cards
+
+[extended art]
 314 R Drannith Magistrate
 315 R Lavabrink Venturer
 316 M Luminous Broodmoth
@@ -377,32 +381,66 @@ Prerelease=6 Boosters, 1 RareMythic+
 361 R Crystalline Giant
 362 R The Ozolith
 363 R Bonders' Enclave
-#Promos
+
+[promo]
 364 R Colossification
 365 U Flourishing Fox
 366 U Heartless Act
 367 C Forbidden Friendship
 368 U Migration Path
 369 U Sprite Dragon
-#Godzilla Series Monsters
-370 U Huntmaster Liger
-371 M Luminous Broodmoth
-372 U Pollywog Symbiote
-373 U Void Beckoner
-374 R Everquill Phoenix
-375 R Yidaro, Wandering Monster
-376 R Gemrazer
-377 U Titanoth Rex
-378 M Brokkos, Apex of Forever
-379 M Illuna, Apex of Wishes
-380 M Nethroi, Apex of Death
-381 M Snapdax, Apex of the Hunt
-382 U Sprite Dragon
-383 M Vadrok, Apex of Thunder
-384 R Gyruda, Doom of Depths
-385 C Mysterious Egg
-386 R Dirge Bat
-387 R Crystalline Giant
+
+[Godzilla Series Monsters]
+Huntmaster Liger|IKO|2
+Luminous Broodmoth|IKO|3
+Pollywog Symbiote|IKO|2
+Void Beckoner|IKO|2
+Everquill Phoenix|IKO|3
+Yidaro, Wandering Monster|IKO|3
+Gemrazer|IKO|3
+Titanoth Rex|IKO|2
+Brokkos, Apex of Forever|IKO|3
+Illuna, Apex of Wishes|IKO|3
+Nethroi, Apex of Death|IKO|3
+Snapdax, Apex of the Hunt|IKO|3
+Sprite Dragon|IKO|3
+Vadrok, Apex of Thunder|IKO|3
+Gyruda, Doom of Depths|IKO|3
+Mysterious Egg|IKO|2
+Dirge Bat|IKO|3
+Crystalline Giant|IKO|3
+
+[Lands]
+10 Bloodfell Caves|IKO
+10 Blossoming Sands|IKO
+10 Dismal Backwater|IKO
+10 Jungle Hollow|IKO
+10 Rugged Highlands|IKO
+10 Scoured Barrens|IKO
+10 Swiftwater Cliffs|IKO
+10 Thornwood Falls|IKO
+10 Tranquil Cove|IKO
+10 Wind-Scarred Crag|IKO
+7 Plains|IKO|1
+7 Plains|IKO|2
+7 Plains|IKO|3
+7 Plains|IKO|4
+7 Island|IKO|1
+7 Island|IKO|2
+7 Island|IKO|3
+7 Island|IKO|4
+7 Swamp|IKO|1
+7 Swamp|IKO|2
+7 Swamp|IKO|3
+7 Swamp|IKO|4
+7 Mountain|IKO|1
+7 Mountain|IKO|2
+7 Mountain|IKO|3
+7 Mountain|IKO|4
+7 Forest|IKO|1
+7 Forest|IKO|2
+7 Forest|IKO|3
+7 Forest|IKO|4
 
 [tokens]
 c_a_feather_sac

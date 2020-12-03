@@ -387,9 +387,9 @@ public class CountersRemoveAi extends SpellAbilityAi {
         } else if (target instanceof Player) {
             Player targetPlayer = (Player) target;
             if (targetPlayer.isOpponentOf(player)) {
-                return !type.equals(CounterEnumType.POISON) ? max : min;
+                return !type.is(CounterEnumType.POISON) ? max : min;
             } else {
-                return type.equals(CounterEnumType.POISON) ? max : min;
+                return type.is(CounterEnumType.POISON) ? max : min;
             }
         }
 
@@ -438,13 +438,13 @@ public class CountersRemoveAi extends SpellAbilityAi {
             Player targetPlayer = (Player) target;
             if (targetPlayer.isOpponentOf(ai)) {
                 for (CounterType type : options) {
-                    if (!type.equals(CounterEnumType.POISON)) {
+                    if (!type.is(CounterEnumType.POISON)) {
                         return type;
                     }
                 }
             } else {
                 for (CounterType type : options) {
-                    if (type.equals(CounterEnumType.POISON)) {
+                    if (type.is(CounterEnumType.POISON)) {
                         return type;
                     }
                 }

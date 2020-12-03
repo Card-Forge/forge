@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Creature Goblin
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, destroy target land.
-SVar:TrigDestroy:DB$Destroy | ValidTgts$ Land | TgtPrompt$ Select target land
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_gardener.jpg
 Oracle:When Goblin Gardener dies, destroy target land.

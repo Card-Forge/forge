@@ -745,14 +745,9 @@ public class ComputerUtil {
             if (source.hasParam("Exploit")) {
                 for (Trigger t : host.getTriggers()) {
                     if (t.getMode() == TriggerType.Exploited) {
-                        final String execute = t.getParam("Execute");
-                        if (execute == null) {
-                            continue;
-                        }
-                        final SpellAbility exSA = AbilityFactory.getAbility(host.getSVar(execute), host);
+                        final SpellAbility exSA = t.ensureAbility().copy(ai);
 
-                        exSA.setActivatingPlayer(ai);
-                        exSA.setTrigger(true);
+                        exSA.setTrigger(t);
 
                         // Run non-mandatory trigger.
                         // These checks only work if the Executing SpellAbility is an Ability_Sub.
@@ -1573,7 +1568,7 @@ public class ComputerUtil {
                 return threatened;
             }
         } else {
-            objects = topStack.getTargets().getTargets();
+            objects = topStack.getTargets();
             final List<GameObject> canBeTargeted = new ArrayList<>();
             for (Object o : objects) {
                 if (o instanceof Card) {

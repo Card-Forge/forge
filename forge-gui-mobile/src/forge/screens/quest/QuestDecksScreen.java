@@ -53,6 +53,7 @@ public class QuestDecksScreen extends FScreen {
     };
 
     private boolean needRefreshOnActivate = true;
+    public boolean commanderMode = false;
 
     public QuestDecksScreen() {
         super("", QuestMenu.getMenu());
@@ -78,7 +79,7 @@ public class QuestDecksScreen extends FScreen {
                         FThreads.invokeInEdtLater(new Runnable() {
                             @Override
                             public void run() {
-                                QuestDeckEditor editor = new QuestDeckEditor();
+                                QuestDeckEditor editor = new QuestDeckEditor(commanderMode);
                                 editor.setSaveHandler(new FEventHandler() {
                                     @Override
                                     public void handleEvent(FEvent e) {
@@ -157,7 +158,7 @@ public class QuestDecksScreen extends FScreen {
         ImageCache.preloadCache(deck.getDeck());
 
         needRefreshOnActivate = true;
-        Forge.openScreen(new QuestDeckEditor(deck));
+        Forge.openScreen(new QuestDeckEditor(deck, commanderMode));
     }
 
     @Override

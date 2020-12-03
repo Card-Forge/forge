@@ -183,7 +183,7 @@ public class PumpAi extends PumpAiBase {
                             // cant use substract on Copy
                             srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
-                            if (CounterEnumType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
+                            if (cType.is(CounterEnumType.P1P1) && srcCardCpy.getNetToughness() <= 0) {
                                 return srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING)
                                         || card.isToken();
                             }
@@ -233,7 +233,7 @@ public class PumpAi extends PumpAiBase {
                                 // cant use substract on Copy
                                 srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
-                                if (CounterEnumType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
+                                if (cType.is(CounterEnumType.P1P1) && srcCardCpy.getNetToughness() <= 0) {
                                     return srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING)
                                             || card.isToken();
                                 }
@@ -573,12 +573,12 @@ public class PumpAi extends PumpAiBase {
             }
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
             Card t = null;
             // boolean goodt = false;
 
             if (list.isEmpty()) {
-                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa) || sa.getTargets().getNumTargeted() == 0) {
+                if (sa.getTargets().size() < tgt.getMinTargets(source, sa) || sa.getTargets().size() == 0) {
                     if (mandatory || ComputerUtil.activateForCost(sa, ai)) {
                         return pumpMandatoryTarget(ai, sa);
                     }
@@ -634,7 +634,7 @@ public class PumpAi extends PumpAiBase {
             forced = CardLists.filterControlledBy(list, ai.getOpponents());
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
             if (pref.isEmpty()) {
                 break;
             }
@@ -651,7 +651,7 @@ public class PumpAi extends PumpAiBase {
             sa.getTargets().add(c);
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) {
+        while (sa.getTargets().size() < tgt.getMinTargets(source, sa)) {
             if (forced.isEmpty()) {
                 break;
             }
@@ -668,7 +668,7 @@ public class PumpAi extends PumpAiBase {
             sa.getTargets().add(c);
         }
 
-        if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) {
+        if (sa.getTargets().size() < tgt.getMinTargets(source, sa)) {
             sa.resetTargets();
             return false;
         }

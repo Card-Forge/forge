@@ -1,10 +1,8 @@
 Name:Midnight Ritual
 ManaCost:X 2 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X 2 B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ MaxTgts | References$ MaxTgts | SubAbility$ DBToken | SpellDescription$ Exile X target creature cards from your graveyard. For each creature card exiled this way, create a 2/2 black Zombie creature token.
-SVar:DBToken:DB$ Token | LegacyImage$ b 2 2 zombie mmq | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ X | References$ X
-SVar:X:Targeted$Amount
-SVar:MaxTgts:Count$TypeInYourYard.Creature
+A:SP$ ChangeZone | Cost$ X 2 B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose X target creature cards in your graveyard | ValidTgts$ Creature.YouOwn | TargetMin$ X | TargetMax$ X | References$ X | SubAbility$ DBToken | StackDescription$ {p:You} exiles {c:Targeted} from their graveyard. For each creature card exiled this way, {p:You} creates a 2/2 black Zombie creature token. | SpellDescription$ Exile X target creature cards from your graveyard. For each creature card exiled this way, create a 2/2 black Zombie creature token.
+SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ X | References$ X
+SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/midnight_ritual.jpg
 Oracle:Exile X target creature cards from your graveyard. For each creature card exiled this way, create a 2/2 black Zombie creature token.

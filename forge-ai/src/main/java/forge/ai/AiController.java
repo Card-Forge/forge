@@ -31,7 +31,6 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.*;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellApiBased;
@@ -64,7 +63,6 @@ import forge.util.collect.FCollectionView;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
 
-import java.security.InvalidParameterException;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -204,24 +202,22 @@ public class AiController {
             return api == null;
         }
         boolean rightapi = false;
-        String battlefield = ZoneType.Battlefield.toString();
         Player activatingPlayer = sa.getActivatingPlayer();
         
         // Trigger play improvements
         for (final Trigger tr : card.getTriggers()) {
             // These triggers all care for ETB effects
 
-            final Map<String, String> params = tr.getMapParams();
             if (tr.getMode() != TriggerType.ChangesZone) {
                 continue;
             }
 
-            if (!params.get("Destination").equals(battlefield)) {
+            if (!ZoneType.Battlefield.toString().equals(tr.getParam("Destination"))) {
                 continue;
             }
 
-            if (params.containsKey("ValidCard")) {
-                String validCard = params.get("ValidCard");
+            if (tr.hasParam("ValidCard")) {
+                String validCard = tr.getParam("ValidCard");
                 if (!validCard.contains("Self")) {
                     continue;
                 }
@@ -245,21 +241,11 @@ public class AiController {
             }
 
             // if trigger is not mandatory - no problem
-            if (params.get("OptionalDecider") != null && api == null) {
+            if (tr.hasParam("OptionalDecider") && api == null) {
                 continue;
             }
 
-            SpellAbility exSA = tr.getOverridingAbility();
-
-            if (exSA == null) {
-                // Maybe better considerations
-                if (!params.containsKey("Execute")) {
-                    continue;
-                }
-                exSA = AbilityFactory.getAbility(card, params.get("Execute"));
-            } else {
-                exSA = exSA.copy();
-            }
+            SpellAbility exSA = tr.ensureAbility().copy(activatingPlayer);
 
             if (api != null) {
                 if (exSA.getApi() != api) {
@@ -273,13 +259,7 @@ public class AiController {
                 }
             }
 
-            if (sa != null) {
-                exSA.setActivatingPlayer(activatingPlayer);
-            }
-            else {
-                exSA.setActivatingPlayer(player);
-            }
-            exSA.setTrigger(true);
+            exSA.setTrigger(tr);
 
             // for trigger test, need to ignore the conditions
             SpellAbilityCondition cons = exSA.getConditions();
@@ -304,18 +284,16 @@ public class AiController {
         // Replacement effects
         for (final ReplacementEffect re : card.getReplacementEffects()) {
             // These Replacements all care for ETB effects
-
-            final Map<String, String> params = re.getMapParams();
             if (!(re instanceof ReplaceMoved)) {
                 continue;
             }
 
-            if (!params.get("Destination").equals(battlefield)) {
+            if (!ZoneType.Battlefield.toString().equals(re.getParam("Destination"))) {
                 continue;
             }
 
-            if (params.containsKey("ValidCard")) {
-                String validCard = params.get("ValidCard");
+            if (re.hasParam("ValidCard")) {
+                String validCard = re.getParam("ValidCard");
                 if (!validCard.contains("Self")) {
                     continue;
                 }
@@ -337,25 +315,16 @@ public class AiController {
             if (!re.requirementsCheck(game)) {
                 continue;
             }
-            final SpellAbility exSA = re.getOverridingAbility();
+            SpellAbility exSA = re.getOverridingAbility();
 
             if (exSA != null) {
-                if (sa != null) {
-                    exSA.setActivatingPlayer(activatingPlayer);
-                }
-                else {
-                    exSA.setActivatingPlayer(player);
-                }
+                exSA = exSA.copy(activatingPlayer);
 
-                if (exSA.getActivatingPlayer() == null) {
-                    throw new InvalidParameterException("Executing SpellAbility for Replacement Effect has no activating player");
+                // ETBReplacement uses overriding abilities.
+                // These checks only work if the Executing SpellAbility is an Ability_Sub.
+                if ((exSA instanceof AbilitySub) && !doTrigger(exSA, false)) {
+                    return false;
                 }
-            }
-
-            // ETBReplacement uses overriding abilities.
-            // These checks only work if the Executing SpellAbility is an Ability_Sub.
-            if (exSA != null && (exSA instanceof AbilitySub) && !doTrigger(exSA, false)) {
-                return false;
             }
         }
         return true;
@@ -728,6 +697,8 @@ public class AiController {
 
     public AiPlayDecision canPlaySa(SpellAbility sa) {
         final Card card = sa.getHostCard();
+        final boolean isRightTiming = sa.canCastTiming(player);
+
         if (!checkAiSpecificRestrictions(sa)) {
             return AiPlayDecision.CantPlayAi;
         }
@@ -771,20 +742,22 @@ public class AiController {
         }
         else {
             Cost payCosts = sa.getPayCosts();
-            ManaCost mana = payCosts.getTotalMana();
-            if (mana != null) {
-                if(mana.countX() > 0) {
-                    // Set PayX here to maximum value.
-                    final int xPay = ComputerUtilMana.determineLeftoverMana(sa, player);
-                    if (xPay <= 0) {
-                        return AiPlayDecision.CantAffordX;
-                    }
-                    card.setSVar("PayX", Integer.toString(xPay));
-                } else if (mana.isZero()) {
-                    // if mana is zero, but card mana cost does have X, then something is wrong
-                    ManaCost cardCost = card.getManaCost(); 
-                    if (cardCost != null && cardCost.countX() > 0) {
-                        return AiPlayDecision.CantPlayAi;
+            if(payCosts != null) {
+                ManaCost mana = payCosts.getTotalMana();
+                if (mana != null) {
+                    if(mana.countX() > 0) {
+                        // Set PayX here to maximum value.
+                        final int xPay = ComputerUtilMana.determineLeftoverMana(sa, player);
+                        if (xPay <= 0) {
+                            return AiPlayDecision.CantAffordX;
+                        }
+                        card.setSVar("PayX", Integer.toString(xPay));
+                    } else if (mana.isZero()) {
+                        // if mana is zero, but card mana cost does have X, then something is wrong
+                        ManaCost cardCost = card.getManaCost();
+                        if (cardCost != null && cardCost.countX() > 0) {
+                            return AiPlayDecision.CantPlayAi;
+                        }
                     }
                 }
             }
@@ -793,6 +766,9 @@ public class AiController {
             return AiPlayDecision.CurseEffects;
         }
         if (sa instanceof SpellPermanent) {
+            if (!isRightTiming) {
+                return AiPlayDecision.AnotherTime;
+            }
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         }
         if (sa.usesTargeting() && !sa.isTargetNumberValid()) {
@@ -805,7 +781,13 @@ public class AiController {
                     && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
                 return AiPlayDecision.CurseEffects;
             }
+            if (!isRightTiming) {
+                return AiPlayDecision.AnotherTime;
+            }
             return canPlaySpellBasic(card, sa);
+        }
+        if (!isRightTiming) {
+            return AiPlayDecision.AnotherTime;
         }
         return AiPlayDecision.WillPlay;
     }
@@ -1609,10 +1591,18 @@ public class AiController {
             }
 
             sa.setActivatingPlayer(player);
-            sa.setLastStateBattlefield(game.getLastStateBattlefield());
-            sa.setLastStateGraveyard(game.getLastStateGraveyard());
+            SpellAbility root = sa.getRootAbility();
+
+            if (root.isSpell() || root.isTrigger() || root.isReplacementAbility()) {
+                sa.setLastStateBattlefield(game.getLastStateBattlefield());
+                sa.setLastStateGraveyard(game.getLastStateGraveyard());
+            }
 
             AiPlayDecision opinion = canPlayAndPayFor(sa);
+
+            // reset LastStateBattlefield
+            sa.setLastStateBattlefield(CardCollection.EMPTY);
+            sa.setLastStateGraveyard(CardCollection.EMPTY);
             // PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
             
@@ -1793,6 +1783,8 @@ public class AiController {
             return Math.max(remaining, min) / 2;
         } else if ("LowestLoseLife".equals(logic)) {
             return MyRandom.getRandom().nextInt(Math.min(player.getLife() / 3, player.getWeakestOpponent().getLife())) + 1;
+        } else if ("HighestLoseLife".equals(logic)) {
+            return MyRandom.getRandom().nextInt(Math.max(player.getLife() / 3, player.getWeakestOpponent().getLife())) + 1;
         } else if ("HighestGetCounter".equals(logic)) {
             return MyRandom.getRandom().nextInt(3);
         } else if (source.hasSVar("EnergyToPay")) {
