@@ -3170,12 +3170,17 @@ public class Player extends GameEntity implements Comparable<Player> {
         return equals(game.getMonarch());
     }
 
-    public void createMonarchEffect() {
+    public void createMonarchEffect(final String set) {
         final PlayerZone com = getZone(ZoneType.Command);
         if (monarchEffect == null) {
             monarchEffect = new Card(game.nextCardId(), null, game);
             monarchEffect.setOwner(this);
-            monarchEffect.setImageKey("t:monarch");
+            if (set != null) {
+                monarchEffect.setImageKey("t:monarch_" + set.toLowerCase());
+                monarchEffect.setSetCode(set);
+            } else {
+                monarchEffect.setImageKey("t:monarch");
+            }
             monarchEffect.setName("The Monarch");
             monarchEffect.addType("Effect");
 

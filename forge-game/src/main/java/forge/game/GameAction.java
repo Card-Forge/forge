@@ -1765,7 +1765,7 @@ public class GameAction {
         }
     }
 
-    public void becomeMonarch(final Player p) {
+    public void becomeMonarch(final Player p, final String set) {
         final Player previous = game.getMonarch();
         if (p == null || p.equals(previous))
             return;
@@ -1773,7 +1773,7 @@ public class GameAction {
         if (previous != null)
             previous.removeMonarchEffect();
 
-        p.createMonarchEffect();
+        p.createMonarchEffect(set);
         game.setMonarch(p);
 
         // Run triggers
