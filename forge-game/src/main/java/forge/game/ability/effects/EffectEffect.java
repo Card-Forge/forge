@@ -137,6 +137,8 @@ public class EffectEffect extends SpellAbilityEffect {
 
         for (Player controller : effectOwner) {
             final Card eff = createEffect(sa, controller, name, image);
+            eff.setSetCode(sa.getHostCard().getSetCode());
+            eff.setRarity(sa.getHostCard().getRarity());
 
             // Grant SVars first in order to give references to granted abilities
             if (effectSVars != null) {
