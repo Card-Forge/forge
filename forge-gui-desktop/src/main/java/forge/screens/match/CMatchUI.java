@@ -134,6 +134,7 @@ import forge.util.gui.SOptionPane;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.FloatingZone;
+import net.miginfocom.layout.LinkHandler;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -1028,6 +1029,7 @@ public final class CMatchUI
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override public void run() {
                 Singletons.getView().getNavigationBar().closeTab(screen);
+                LinkHandler.clearWeakReferencesNow();
             }
         });
     }

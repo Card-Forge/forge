@@ -223,7 +223,6 @@ public class Game {
         rules = rules0;
         match = match0;
         this.id = nextId();
-        match.addGame(this);
 
         int highestTeam = -1;
         for (RegisteredPlayer psc : players0) {

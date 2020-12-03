@@ -33,7 +33,6 @@ public class Match {
     private final String title;
 
     private final EventBus events = new EventBus("match events");
-    private final Map<Integer, Game> runningGames = Maps.newHashMap();
     private final Map<Integer, GameOutcome> gameOutcomes = Maps.newHashMap();
 
     private GameOutcome lastOutcome = null;
@@ -97,23 +96,13 @@ public class Match {
 
         // will pull UI dialog, when the UI is listening
         game.fireEvent(new GameEventGameFinished());
-        // FIXME needed to close the Match Dialog because that this moment there isn't any game
-        runningGames.remove(game.getId());
 
         //run GC after game is finished
         System.gc();
     }
 
-    public Game getGameById(int id) {
-        return runningGames.get(id);
-    }
-
     public GameOutcome getOutcomeById(int id) {
         return gameOutcomes.get(id);
-    }
-
-    public void addGame(Game game) {
-        runningGames.put(game.getId(), game);
     }
 
     public void clearGamesPlayed() {

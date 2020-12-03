@@ -24,11 +24,13 @@ import java.util.List;
 public class GameView extends TrackableObject {
     private static final long serialVersionUID = 8522884512960961528L;
 
+    private final transient Game game; //TODO: Remove this when possible before network support added
     private final transient Match match; //TODO: Remove this when possible before network support added
 
     public GameView(final Game game) {
         super(game.getId(), game.getTracker());
         match = game.getMatch();
+        this.game = game;
         set(TrackableProperty.Title, game.getMatch().getTitle());
         set(TrackableProperty.WinningTeam, -1);
 
@@ -48,7 +50,7 @@ public class GameView extends TrackableObject {
     }
 
     public Game getGame() {
-        return getMatch().getGameById(getId()); // Match currently has only One running Game
+        return game;
     }
 
     public FCollectionView<PlayerView> getPlayers() {
