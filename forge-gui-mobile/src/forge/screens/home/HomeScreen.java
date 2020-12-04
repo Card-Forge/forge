@@ -37,6 +37,7 @@ public class HomeScreen extends FScreen {
     private final List<MenuButton> buttons = new ArrayList<>();
     private int activeButtonIndex, baseButtonCount;
     private FDeckChooser deckManager;
+    private boolean QuestCommander = false;
 
     private HomeScreen() {
         super((Header)null);
@@ -102,6 +103,14 @@ public class HomeScreen extends FScreen {
 
     private void addButton(String caption, FEventHandler command) {
         buttons.add(buttonScroller.add(new MenuButton(caption, command)));
+    }
+
+    public void updateQuestCommanderMode(boolean isCommander){
+        QuestCommander = isCommander;
+    }
+
+    public boolean getQuestCommanderMode() {
+        return QuestCommander;
     }
 
     public void addButtonForMode(String caption, final FEventHandler command) {

@@ -163,7 +163,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
             HomeScreen.instance.addButtonForMode(Localizer.getInstance().getMessage("lblQuestMode"), new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    launchQuestMode(LaunchReason.StartQuestMode);
+                    launchQuestMode(LaunchReason.StartQuestMode, HomeScreen.instance.getQuestCommanderMode());
                 }
             });
         }
@@ -182,10 +182,8 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         NewQuest
     }
 
-    public static void launchQuestMode(final LaunchReason reason) {
-        launchQuestMode(reason, false);
-    }
     public static void launchQuestMode(final LaunchReason reason, boolean commanderMode) {
+        HomeScreen.instance.updateQuestCommanderMode(commanderMode);
         decksScreen.commanderMode = commanderMode;
         //attempt to load current quest
         final File dirQuests = new File(ForgeConstants.QUEST_SAVE_DIR);
@@ -248,7 +246,8 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         addItem(spellShopItem); spellShopItem.setSelected(currentScreen == spellShopScreen);
         addItem(bazaarItem); bazaarItem.setSelected(currentScreen == bazaarScreen);
         addItem(unlockSetsItem);
-        addItem(travelItem);
+        if(!HomeScreen.instance.getQuestCommanderMode())
+            addItem(travelItem);
         addItem(statsItem); statsItem.setSelected(currentScreen == statsScreen);
         addItem(prefsItem); prefsItem.setSelected(currentScreen == prefsScreen);
     }
