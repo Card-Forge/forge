@@ -50,8 +50,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private final Map<String, String> alternateName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, Integer> artIds = new HashMap<>();
 
-    private final List<PaperCard> allCards = new ArrayList<>();
-    private final List<PaperCard> roAllCards = Collections.unmodifiableList(allCards);
+    private final Collection<PaperCard> roAllCards = Collections.unmodifiableCollection(allCardsByName.values());
     private final CardEdition.Collection editions;
 
     public enum SetPreference {
@@ -247,10 +246,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     private void reIndex() {
         uniqueCardsByName.clear();
-        allCards.clear();
         for (Entry<String, Collection<PaperCard>> kv : allCardsByName.asMap().entrySet()) {
             uniqueCardsByName.put(kv.getKey(), getFirstWithImage(kv.getValue()));
-            allCards.addAll(kv.getValue());
         }
     }
 
@@ -537,7 +534,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     @Override
-    public List<PaperCard> getAllCards() {
+    public Collection<PaperCard> getAllCards() {
         return roAllCards;
     }
 
