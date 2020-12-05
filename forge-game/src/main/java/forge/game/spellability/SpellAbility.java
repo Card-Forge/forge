@@ -47,6 +47,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityCastWithFlash;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
@@ -2059,17 +2060,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 return true;
             }
         }
-        final Game game = activator.getGame();
-        final CardCollection allp = new CardCollection(game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
-        allp.add(host);
-        for (final Card ca : allp) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.applyAbility("CastWithFlash", host, this, activator)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+
+        return StaticAbilityCastWithFlash.anyWithFlash(this, host, activator);
     }
 
 }
