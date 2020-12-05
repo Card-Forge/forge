@@ -160,7 +160,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     static {
         //the first time quest mode is launched, add button for it if in Landscape mode
         if (Forge.isLandscapeMode()) {
-            HomeScreen.instance.addButtonForMode(Localizer.getInstance().getMessage("lblQuestMode"), new FEventHandler() {
+            HomeScreen.instance.addButtonForMode("-"+Localizer.getInstance().getMessage("lblQuestMode"), new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     launchQuestMode(LaunchReason.StartQuestMode, HomeScreen.instance.getQuestCommanderMode());
