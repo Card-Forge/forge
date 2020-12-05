@@ -2,10 +2,13 @@ package forge.screens.quest;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
+import forge.FThreads;
 import forge.assets.FSkinFont;
 import forge.interfaces.IButton;
 import forge.model.FModel;
 import forge.quest.QuestEventDuel;
+import forge.screens.LoadingOverlay;
+import forge.screens.home.HomeScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
@@ -67,18 +70,32 @@ public class QuestDuelsScreen extends QuestLaunchScreen {
 
     @Override
     public void onUpdate() {
+        //add loading overlay for generated decks...
+        if (HomeScreen.instance.getQuestWorld().contains("Random")) {
+            FThreads.invokeInEdtLater(new Runnable() {
+                @Override
+                public void run() {
+                    LoadingOverlay.show("Loading Random Quest", new Runnable() {
+                        @Override
+                        public void run() {
+                            generateDuels();
+                        }
+                    });
+                }
+            });
+        } else {
+            generateDuels();
+        }
+    }
 
+    private void generateDuels() {
         pnlDuels.clear();
-
         List<QuestEventDuel> duels = FModel.getQuest().getDuelsManager().generateDuels();
-
         if (duels != null) {
             for (QuestEventDuel duel : duels) {
                 pnlDuels.add(new QuestEventPanel(duel, pnlDuels));
             }
         }
-
         pnlDuels.revalidate();
-
     }
 }

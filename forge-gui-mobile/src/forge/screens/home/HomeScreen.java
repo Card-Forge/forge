@@ -38,6 +38,7 @@ public class HomeScreen extends FScreen {
     private int activeButtonIndex, baseButtonCount;
     private FDeckChooser deckManager;
     private boolean QuestCommander = false;
+    private String QuestWorld = "";
 
     private HomeScreen() {
         super((Header)null);
@@ -109,8 +110,16 @@ public class HomeScreen extends FScreen {
         QuestCommander = isCommander;
     }
 
+    public void updateQuestWorld(String questWorld){
+        QuestWorld = questWorld;
+    }
+
     public boolean getQuestCommanderMode() {
         return QuestCommander;
+    }
+
+    public String getQuestWorld() {
+        return QuestWorld;
     }
 
     public void addButtonForMode(String caption, final FEventHandler command) {

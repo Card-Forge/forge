@@ -222,6 +222,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
                             LoadGameScreen.QuestMode.setAsBackScreen(true);
                         }
                     }
+                    HomeScreen.instance.updateQuestWorld(FModel.getQuest().getWorld() == null ? "" : FModel.getQuest().getWorld().toString());
                 }
             });
             return;
