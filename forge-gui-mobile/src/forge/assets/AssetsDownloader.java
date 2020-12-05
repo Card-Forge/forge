@@ -155,5 +155,11 @@ public class AssetsDownloader {
         //save version string to file once assets finish downloading
         //so they don't need to be re-downloaded until you upgrade again
         FileUtil.writeFile(versionFile, Forge.CURRENT_VERSION);
+
+        //add restart after assets update
+        switch (SOptionPane.showOptionDialog("Resource update finished. Please restart Forge.", "", null, ImmutableList.of("Ok"))) {
+            default:
+                Forge.restart(true);
+        }
     }
 }
