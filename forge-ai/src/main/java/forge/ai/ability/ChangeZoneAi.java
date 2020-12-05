@@ -1353,29 +1353,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final Card source = sa.getHostCard();
-        final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source, sa);
+        CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), ai, source, sa);
+        list = CardLists.getTargetableCards(list, sa);
 
-        // Narrow down the list:
-        if (origin.equals(ZoneType.Battlefield)) {
-            // filter out untargetables
-            list = CardLists.getTargetableCards(list, sa);
-
-            // if Destination is hand, either bounce opponents dangerous stuff
-            // or save my about to die stuff
-
-            // if Destination is exile, filter out my cards
-        }
-        else if (origin.equals(ZoneType.Graveyard)) {
-            // Retrieve from Graveyard to:
-        }
-
-        for (final Card c : sa.getTargets().getTargetCards()) {
-            list.remove(c);
-        }
+        list.removeAll(sa.getTargets().getTargetCards());
 
         if (list.isEmpty()) {
             return false;
@@ -1387,12 +1371,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
             Card choice = null;
 
             if (!list.isEmpty()) {
-                if (ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false).isCreature()
-                        && (destination.equals(ZoneType.Battlefield) || origin.equals(ZoneType.Battlefield))) {
+                Card mostExpensivePermanent = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false);
+                if (mostExpensivePermanent.isCreature()
+                        && (destination.equals(ZoneType.Battlefield) || tgt.getZone().contains(ZoneType.Battlefield))) {
                     // if a creature is most expensive take the best
                     choice = ComputerUtilCard.getBestCreatureToBounceAI(list);
-                } else if (destination.equals(ZoneType.Battlefield) || origin.equals(ZoneType.Battlefield)) {
-                    choice = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false);
+                } else if (destination.equals(ZoneType.Battlefield) || tgt.getZone().contains(ZoneType.Battlefield)) {
+                    choice = mostExpensivePermanent;
                 } else if (destination.equals(ZoneType.Hand) || destination.equals(ZoneType.Library)) {
                     List<Card> nonLands = CardLists.getNotType(list, "Land");
                     // Prefer to pull a creature, generally more useful for AI.
