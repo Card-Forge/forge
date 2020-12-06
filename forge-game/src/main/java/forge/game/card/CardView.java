@@ -1145,6 +1145,9 @@ public class CardView extends GameEntityView {
         public boolean hasStorm() {
             return get(TrackableProperty.HasStorm);
         }
+        public boolean hasLandwalk() {
+            return get(TrackableProperty.HasLandwalk);
+        }
 
         public String getAbilityText() {
             return get(TrackableProperty.AbilityText);
@@ -1175,6 +1178,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasHaste, c.hasKeyword(Keyword.HASTE, state));
             set(TrackableProperty.HasInfect, c.hasKeyword(Keyword.INFECT, state));
             set(TrackableProperty.HasStorm, c.hasKeyword(Keyword.STORM, state));
+            set(TrackableProperty.HasLandwalk, c.hasKeyword(Keyword.LANDWALK, state));
             updateAbilityText(c, state);
             //set protectionKey for Icons
             set(TrackableProperty.ProtectionKey, c.getProtectionKey());

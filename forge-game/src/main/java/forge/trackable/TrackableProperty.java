@@ -114,6 +114,7 @@ public enum TrackableProperty {
     HasShroud(TrackableTypes.BooleanType),
     HasTrample(TrackableTypes.BooleanType),
     HasVigilance(TrackableTypes.BooleanType),
+    HasLandwalk(TrackableTypes.BooleanType),
     //protectionkey
     ProtectionKey(TrackableTypes.StringType),
     //hexproofkey
