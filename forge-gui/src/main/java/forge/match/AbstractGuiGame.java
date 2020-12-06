@@ -188,7 +188,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 return true;
             }
             if(spectator!=null) { //workaround fix!! this is needed on above code or it will
-                gameControllers.remove(spectator); //bug the UI! remove spectator here since its must not be here...
+                for (Map.Entry<PlayerView, IGameController> e : gameControllers.entrySet()) {
+                    if (e.getValue().equals(spectator)) {
+                        gameControllers.remove(e.getKey());
+                        break;
+                    }
+                }
                 return true;
             }
             try{
@@ -368,11 +373,14 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return autoPassUntilEndOfTurn.contains(player);
     }
 
-    private final Timer awaitNextInputTimer = new Timer();
+    private Timer awaitNextInputTimer;
     private TimerTask awaitNextInputTask;
 
     @Override
     public final void awaitNextInput() {
+        if (awaitNextInputTimer == null) {
+            awaitNextInputTimer = new Timer("awaitNextInputTimer Game:" + this.gameView.getId() + " Player:" + this.currentPlayer.getLobbyPlayerName());
+        }
         //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
         awaitNextInputTask = new TimerTask() {
             @Override
@@ -400,6 +408,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final void cancelAwaitNextInput() {
+        if (awaitNextInputTimer == null) {
+            return;
+        }
         synchronized (awaitNextInputTimer) { //ensure task doesn't reset awaitNextInputTask during this block
             if (awaitNextInputTask != null) {
                 try {
@@ -725,5 +736,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public void handleLandPlayed(Card land, Zone zone) {
     }  
 
+
+    @Override
+    public void afterGameEnd() {
+        if (awaitNextInputTimer != null) {
+            awaitNextInputTimer.cancel();
+            awaitNextInputTimer = null;
+        }
+    }
     // End of Choice code
 }
