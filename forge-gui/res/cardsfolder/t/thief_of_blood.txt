@@ -4,10 +4,10 @@ Types:Creature Vampire
 PT:1/1
 K:Flying
 K:ETBReplacement:Other:DBRemoveCounterAll
-SVar:DBRemoveCounterAll:DB$ RemoveCounterAll | ValidCards$ Permanent | AllCounterTypes$ True | StackDescription$ SpellDescription | SubAbility$ DBPutCounters| RememberAmount$ True | SpellDescription$ As CARDNAME enters the battlefield, remove all counters from all permanents. CARDNAME enters the battlefield with a +1/+1 counter on it for each counter removed this way.
-SVar:DBPutCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBRemoveCounterAll:DB$ RemoveCounterAll | ValidCards$ Permanent | AllCounterTypes$ True | StackDescription$ SpellDescription | SubAbility$ DBPutCounters | RememberAmount$ True | SpellDescription$ As CARDNAME enters the battlefield, remove all counters from all permanents. CARDNAME enters the battlefield with a +1/+1 counter on it for each counter removed this way.
+SVar:DBPutCounters:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ChosenNumber
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thief_of_blood.jpg
+DeckHas:Ability$Counters
 Oracle:Flying\nAs Thief of Blood enters the battlefield, remove all counters from all permanents. Thief of Blood enters the battlefield with a +1/+1 counter on it for each counter removed this way.
