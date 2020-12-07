@@ -75,7 +75,7 @@ public class QuestDuelsScreen extends QuestLaunchScreen {
             FThreads.invokeInEdtLater(new Runnable() {
                 @Override
                 public void run() {
-                    LoadingOverlay.show("Loading Random Quest", new Runnable() {
+                    LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoadingCurrentQuest"), new Runnable() {
                         @Override
                         public void run() {
                             generateDuels();
