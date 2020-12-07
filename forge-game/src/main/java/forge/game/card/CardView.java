@@ -392,6 +392,7 @@ public class CardView extends GameEntityView {
         if (viewers == null || Iterables.isEmpty(viewers)) { return true; }
 
         return Iterables.any(viewers, new Predicate<PlayerView>() {
+            @Override
             public final boolean apply(final PlayerView input) {
                 return canBeShownTo(input);
             }
@@ -456,14 +457,17 @@ public class CardView extends GameEntityView {
     }
 
     public boolean canFaceDownBeShownToAny(final Iterable<PlayerView> viewers) {
+        if (viewers == null || Iterables.isEmpty(viewers)) { return true; }
+
         return Iterables.any(viewers, new Predicate<PlayerView>() {
-            @Override public final boolean apply(final PlayerView input) {
-                return canFaceDownBeShownTo(input);
+            @Override
+            public final boolean apply(final PlayerView input) {
+                return canFaceDownBeShownTo(input, false);
             }
         });
     }
 
-    private boolean canFaceDownBeShownTo(final PlayerView viewer) {
+    private boolean canFaceDownBeShownTo(final PlayerView viewer, boolean skip) {
         if (!isFaceDown()) {
             return true;
         }
@@ -472,13 +476,15 @@ public class CardView extends GameEntityView {
         if (mayPlayerLook(viewer)) {
             return true;
         }
-        final PlayerView controller = getController();
-        //if viewer is controlled by another player, also check if face can be shown to that player
-        final PlayerView mindSlaveMaster = viewer.getMindSlaveMaster();
-        if (mindSlaveMaster != null && mindSlaveMaster != controller && canFaceDownBeShownTo(mindSlaveMaster)) {
-            return true;
+        if (!skip) {
+            //if viewer is controlled by another player, also check if face can be shown to that player
+            final PlayerView mindSlaveMaster = viewer.getMindSlaveMaster();
+            if (mindSlaveMaster != null) {
+                return canFaceDownBeShownTo(mindSlaveMaster, true);
+            }
         }
-        return isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack, ZoneType.Sideboard)) && controller.equals(viewer);
+
+        return isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack, ZoneType.Sideboard)) && getController().equals(viewer);
     }
 
     public FCollectionView<CardView> getEncodedCards() {
