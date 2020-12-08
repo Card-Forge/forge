@@ -1,22 +1,20 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
-
 import com.google.common.base.Predicates;
 import forge.ai.*;
 import forge.card.MagicColor;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.game.combat.Combat;
 
 public class DestroyAllAi extends SpellAbilityAi {
 
