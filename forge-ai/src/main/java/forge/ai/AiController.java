@@ -1802,6 +1802,9 @@ public class AiController {
             throw new UnsupportedOperationException();
         }
         CardCollection result = new CardCollection();
+        if (sa.hasParam("AIMaxAmount")) {
+            max = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("AIMaxAmount"), sa);
+        }
         switch(sa.getApi()) {
             case TwoPiles:
                 // TODO: improve AI
