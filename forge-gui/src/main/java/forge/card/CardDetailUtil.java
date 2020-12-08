@@ -416,6 +416,14 @@ public class CardDetailUtil {
             area.append(")");
         }
 
+        // chosen number
+        if (!card.getChosenNumber().isEmpty()) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("(chosen number: ").append(card.getChosenNumber()).append(")");
+        }
+
         // chosen player
         if (card.getChosenPlayer() != null) {
             if (area.length() != 0) {

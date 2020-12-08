@@ -50,6 +50,7 @@ public enum TrackableProperty {
     ChosenType(TrackableTypes.StringType),
     ChosenColors(TrackableTypes.StringListType),
     ChosenCards(TrackableTypes.CardViewCollectionType),
+    ChosenNumber(TrackableTypes.StringType),
     ChosenPlayer(TrackableTypes.PlayerViewType),
     ChosenDirection(TrackableTypes.EnumType(Direction.class)),
     ChosenEvenOdd(TrackableTypes.EnumType(EvenOdd.class)),
