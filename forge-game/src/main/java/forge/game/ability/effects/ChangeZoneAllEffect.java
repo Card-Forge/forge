@@ -226,8 +226,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
         }
 
-        game.getTriggerHandler().resetActiveTriggers(false);
-
         triggerList.triggerChangesZoneAll(game);
 
         // if Shuffle parameter exists, and any amount of cards were owned by
