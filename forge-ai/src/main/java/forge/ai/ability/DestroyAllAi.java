@@ -2,10 +2,14 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 
+import com.google.common.base.Predicates;
 import forge.ai.*;
+import forge.card.MagicColor;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
@@ -104,6 +108,14 @@ public class DestroyAllAi extends SpellAbilityAi {
             } else {
                 return false;
             }
+        }
+
+        // Special handling for Raiding Party
+        if (logic.equals("RaidingParty")) {
+            int numAiCanSave = Math.min(CardLists.filter(ai.getCreaturesInPlay(), Predicates.and(CardPredicates.isColor(MagicColor.WHITE), CardPredicates.Presets.UNTAPPED)).size() * 2, ailist.size());
+            int numOppsCanSave = Math.min(CardLists.filter(ai.getOpponents().getCreaturesInPlay(), Predicates.and(CardPredicates.isColor(MagicColor.WHITE), CardPredicates.Presets.UNTAPPED)).size() * 2, opplist.size());
+
+            return numOppsCanSave < opplist.size() && (ailist.size() - numAiCanSave < opplist.size() - numOppsCanSave);
         }
 
         // If effect is destroying creatures and AI is about to lose, activate effect anyway no matter what!
