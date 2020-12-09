@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Legendary Creature Human Soldier
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +1/+1 for each color among other legendary permanents you control.
-SVar:X:Count$ColorsCtrl Permanent.YouCtrl+Other+Legendary+inZoneBattlefield
+SVar:X:Count$ColorsCtrl Permanent.Other+Legendary
 A:AB$ ChangeZone | Cost$ W U B R G | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Legendary+cmcLTY | ChangeNum$ 1 | References$ Y |  SpellDescription$ Search your library for a legendary permanent card with converted mana cost less than NICKNAME's power, put that card onto the battlefield, then shuffle your library.
 SVar:Y:Count$CardPower
 DeckHints:Type$Legendary
