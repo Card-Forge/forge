@@ -306,6 +306,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ChosenType, c.getChosenType());
     }
 
+    public String getChosenNumber() {
+        return get(TrackableProperty.ChosenNumber);
+    }
+    void updateChosenNumber(Card c) {
+        set(TrackableProperty.ChosenNumber, c.getChosenNumber().toString());
+    }
+
     public List<String> getChosenColors() {
         return get(TrackableProperty.ChosenColors);
     }

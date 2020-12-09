@@ -1437,6 +1437,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final void setChosenNumber(final int i) {
         chosenNumber = i;
+        view.updateChosenNumber(this);
     }
 
     public final Card getExiledWith() {
