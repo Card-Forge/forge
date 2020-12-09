@@ -1100,7 +1100,7 @@ public class CardFactoryUtil {
         if (sq[0].contains("ColorsCtrl")) {
             final String restriction = l[0].substring(11);
             final String[] rest = restriction.split(",");
-            final CardCollection list = CardLists.getValidCards(cc.getGame().getCardsInGame(), rest, cc, c, null);
+            final CardCollection list = CardLists.getValidCards(cc.getCardsIn(ZoneType.Battlefield), rest, cc, c, null);
             byte n = 0;
             for (final Card card : list) {
                 n |= card.determineColor().getColor();
@@ -1539,15 +1539,6 @@ public class CardFactoryUtil {
         if (sq[0].contains("Converge")) {
             SpellAbility castSA = c.getCastSA();
             return doXMath(castSA == null ? 0 : castSA.getPayingColors().countColors(), m, c);
-        }
-        // Count$ColoredCreatures *a DOMAIN for creatures*
-        if (sq[0].contains("ColoredCreatures")) {
-            int mask = 0;
-            CardCollection someCards = CardLists.filter(cc.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
-            for (final Card crd : someCards) {
-                mask |= CardUtil.getColors(crd).getColor();
-            }
-            return doXMath(ColorSet.fromMask(mask).countColors(), m, c);
         }
 
         // Count$CardMulticolor.<numMC>.<numNotMC>
