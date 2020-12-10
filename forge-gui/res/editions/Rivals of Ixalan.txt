@@ -6,7 +6,7 @@ Code2=RIX
 Type=Expansion
 MciCode=rix
 BoosterCovers=5
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand:fromSheet("RIX Basic Lands")
+Booster=10 Common:fromSheet("RIX cards"), 3 Uncommon:fromSheet("RIX cards"), 1 RareMythic:fromSheet("RIX cards"), 1 BasicLand:fromSheet("RIX Basic Lands")
 TreatAsSmallSet=true
 
 [cards]
