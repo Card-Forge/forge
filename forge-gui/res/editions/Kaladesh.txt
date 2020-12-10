@@ -6,7 +6,7 @@ Code2=KLD
 Type=Expansion
 MciCode=kld
 BoosterCovers=3
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+Booster=10 Common:fromSheet("KLD cards"), 3 Uncommon:fromSheet("KLD cards"), 1 RareMythic:fromSheet("KLD cards"), 1 BasicLand
 AdditionalSheetForFoils=fromSheet("KLD Kaladesh Inventions")
 AdditionalSetUnlockedInQuest=MPS_KLD
 

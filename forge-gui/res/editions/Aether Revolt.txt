@@ -6,7 +6,7 @@ Code2=AER
 Type=Expansion
 MciCode=aer
 BoosterCovers=3
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand KLD
+Booster=10 Common:fromSheet("AER cards"), 3 Uncommon:fromSheet("AER cards"), 1 RareMythic:fromSheet("AER cards"), 1 BasicLand KLD
 AdditionalSheetForFoils=fromSheet("AER Aether Revolt Inventions")
 AdditionalSetUnlockedInQuest=MPS_KLD
 
