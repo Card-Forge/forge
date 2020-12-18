@@ -80,7 +80,7 @@ import io.sentry.event.BreadcrumbBuilder;
  * @author Forge
  * @version $Id$
  */
-public class Card extends GameEntity implements Comparable<Card> {
+public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final Game game;
     private final IPaperCard paperCard;
 

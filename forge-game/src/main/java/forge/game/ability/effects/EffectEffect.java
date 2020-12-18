@@ -155,9 +155,7 @@ public class EffectEffect extends SpellAbilityEffect {
             // Grant abilities
             if (effectAbilities != null) {
                 for (final String s : effectAbilities) {
-                    final String actualAbility = AbilityUtils.getSVar(sa, s);
-
-                    final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, eff);
+                    final SpellAbility grantedAbility = AbilityFactory.getAbility(eff, s, sa);
                     eff.addSpellAbility(grantedAbility);
                     grantedAbility.setIntrinsic(true);
                 }
@@ -166,11 +164,8 @@ public class EffectEffect extends SpellAbilityEffect {
             // Grant triggers
             if (effectTriggers != null) {
                 for (final String s : effectTriggers) {
-                    final String actualTrigger = AbilityUtils.getSVar(sa, s);
-
-                    final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, eff, true);
-                    final String ability = AbilityUtils.getSVar(sa, parsedTrigger.getParam("Execute"));
-                    parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, eff));
+                    final Trigger parsedTrigger = TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), eff, true);
+                    parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(eff, parsedTrigger.getParam("Execute"), sa));
                     parsedTrigger.setActiveZone(EnumSet.of(ZoneType.Command));
                     parsedTrigger.setIntrinsic(true);
                     eff.addTrigger(parsedTrigger);

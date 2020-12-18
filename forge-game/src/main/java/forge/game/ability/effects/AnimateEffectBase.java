@@ -151,14 +151,17 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         // give abilities
         final List<SpellAbility> addedAbilities = Lists.newArrayList();
         for (final String s : abilities) {
-            addedAbilities.add(AbilityFactory.getAbility(AbilityUtils.getSVar(sa, s), c));
+            SpellAbility sSA = AbilityFactory.getAbility(c, s, sa);
+            sSA.setOriginalHost(source);
+            addedAbilities.add(sSA);
         }
 
         // Grant triggers
         final List<Trigger> addedTriggers = Lists.newArrayList();
         for (final String s : triggers) {
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), c, false);
-            parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(AbilityUtils.getSVar(sa, parsedTrigger.getParam("Execute")), c));
+            parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(c, parsedTrigger.getParam("Execute"), sa));
+            parsedTrigger.setOriginalHost(source);
             addedTriggers.add(parsedTrigger);
         }
 

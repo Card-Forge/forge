@@ -14,7 +14,6 @@ import forge.game.spellability.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -315,11 +314,6 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public String getSvarWithFallback(String name) {
-        return sa.getSvarWithFallback(name);
-    }
-
-    @Override
     public String getSVar(String name) {
         return sa.getSVar(name);
     }
@@ -330,7 +324,7 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public Set<String> getSVars() {
+    public Map<String, String> getSVars() {
         return sa.getSVars();
     }
 

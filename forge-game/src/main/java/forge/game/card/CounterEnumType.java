@@ -123,6 +123,8 @@ public enum CounterEnumType {
 
     GEM("GEM", 255, 99, 251),
 
+    GHOSTFORM("GHSTF", 223, 0, 254),
+
     GLYPH("GLYPH", 184, 202, 199),
 
     GOLD("GOLD", 248, 191, 0),

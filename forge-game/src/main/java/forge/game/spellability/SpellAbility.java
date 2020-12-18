@@ -92,7 +92,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private Player activatingPlayer = null;
     private Player targetingPlayer = null;
 
-    private Card grantorCard = null; // card which grants the ability (equipment or owner of static ability that gave this one)
     private SpellAbility grantorOriginal = null;
     private StaticAbility grantorStatic = null;
 
@@ -369,11 +368,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return this.isAlternativeCost(AlternativeCost.Cycling);
     }
 
-    public Card getOriginalHost() {
-        return grantorCard;
-    }
     public void setOriginalHost(final Card c) {
-        grantorCard = c;
+        super.setOriginalHost(c);
         if (subAbility != null) {
             subAbility.setOriginalHost(c);
         }
