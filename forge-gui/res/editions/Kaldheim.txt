@@ -9,6 +9,7 @@ Type=Expansion
 142 R Magda, Brazen Outlaw
 188 R Realmwalker
 218 M Kaya the Inexorable
+228 R Sarulf, Realm Eater
 229 R Showdown of the Skalds
 241 R Pyre of Heroes
 251 R Barkchannel Pathway
@@ -22,6 +23,7 @@ Type=Expansion
 293 R Hengegate Pathway
 299 M Halvar, God of Battle
 312 R Magda, Brazen Outlaw
+330 R Sarulf, Realm Eater
 370 R Pyre of Heroes
 374 R Valkyrie Harbinger
 375 R Surtland Elementalist
