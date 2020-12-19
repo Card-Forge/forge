@@ -288,34 +288,25 @@ public class ReplacementHandler {
             host = game.getCardState(host);
         }
 
-        if (mapParams.containsKey("ReplaceWith")) {
+        if (replacementEffect.getOverridingAbility() == null && mapParams.containsKey("ReplaceWith")) {
             final String effectSVar = mapParams.get("ReplaceWith");
-            final String effectAbString = host.getSVar(effectSVar);
             // TODO: the source of replacement effect should be the source of the original effect
-            effectSA = AbilityFactory.getAbility(effectAbString, host);
+            effectSA = AbilityFactory.getAbility(host, effectSVar, replacementEffect);
+            //replacementEffect.setOverridingAbility(effectSA);
             //effectSA.setTrigger(true);
-
-            SpellAbility tailend = effectSA;
-            do {
-                replacementEffect.setReplacingObjects(runParams, tailend);
-                //set original Params to update them later
-                tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
-                tailend = tailend.getSubAbility();
-            } while(tailend != null);
-
-        }
-        else if (replacementEffect.getOverridingAbility() != null) {
+        } else if (replacementEffect.getOverridingAbility() != null) {
             effectSA = replacementEffect.getOverridingAbility();
-            SpellAbility tailend = effectSA;
-            do {
-                replacementEffect.setReplacingObjects(runParams, tailend);
-                //set original Params to update them later
-                tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
-                tailend = tailend.getSubAbility();
-            } while(tailend != null);
         }
 
         if (effectSA != null) {
+            SpellAbility tailend = effectSA;
+            do {
+                replacementEffect.setReplacingObjects(runParams, tailend);
+                //set original Params to update them later
+                tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
+                tailend = tailend.getSubAbility();
+            } while(tailend != null);
+
             effectSA.setLastStateBattlefield(game.getLastStateBattlefield());
             effectSA.setLastStateGraveyard(game.getLastStateGraveyard());
             if (replacementEffect.isIntrinsic()) {

@@ -540,9 +540,6 @@ public class CardFactory {
             to.setActivatingPlayer(p, lki);
         }
 
-        for (String sVar : from.getSVars()) {
-            to.setSVar(sVar, from.getSVar(sVar));
-        }
         //to.changeText();
     }
 

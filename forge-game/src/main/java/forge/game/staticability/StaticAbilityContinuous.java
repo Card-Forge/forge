@@ -728,7 +728,7 @@ public final class StaticAbilityContinuous {
                             abilty = TextUtil.fastReplace(abilty, "ConvertedManaCost", costcmc);
                         }
                         if (abilty.startsWith("AB") || abilty.startsWith("ST")) { // grant the ability
-                            final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard);
+                            final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard, stAb);
                             sa.setIntrinsic(false);
                             sa.setOriginalHost(hostCard);
                             addedAbilities.add(sa);
@@ -790,15 +790,10 @@ public final class StaticAbilityContinuous {
                         // with that the TargetedCard does not need the Svars added to them anymore
                         // but only do it if the trigger doesn't already have a overriding ability
                         if (actualTrigger.hasParam("Execute") && actualTrigger.getOverridingAbility() == null) {
-                            String svar = AbilityUtils.getSVar(stAb, actualTrigger.getParam("Execute"));
-                            SpellAbility sa = AbilityFactory.getAbility(svar, hostCard);
-                            // set hostcard there so when the card is added to trigger, it doesn't make a copy of it
-                            sa.setHostCard(affectedCard);
-                            // set OriginalHost to get the owner of this static ability
-                            sa.setOriginalHost(hostCard);
                             // set overriding ability to the trigger
-                            actualTrigger.setOverridingAbility(sa);
+                            actualTrigger.setOverridingAbility(AbilityFactory.getAbility(affectedCard, actualTrigger.getParam("Execute"), stAb));
                         }
+                        actualTrigger.setOriginalHost(hostCard);
                         actualTrigger.setIntrinsic(false);
                         addedTrigger.add(actualTrigger);
                     }
@@ -814,6 +809,7 @@ public final class StaticAbilityContinuous {
 
                         StaticAbility stat = new StaticAbility(s, affectedCard);
                         stat.setIntrinsic(false);
+                        stat.setOriginalHost(hostCard);
                         addedStaticAbility.add(stat);
                     }
                 }

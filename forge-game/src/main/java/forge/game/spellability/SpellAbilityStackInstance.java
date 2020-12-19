@@ -39,6 +39,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 /**
@@ -141,10 +142,10 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         }
         // We probably should be storing SA svars too right?
         if (!sa.isWrapper()) {
-            for (final String store : sa.getSVars()) {
-                final String value = source.getSVar(store);
+            for (final Entry<String, String> e : sa.getSVars().entrySet()) {
+                final String value = e.getValue();
                 if (!StringUtils.isEmpty(value)) {
-                    storedSVars.put(store, value);
+                    storedSVars.put(e.getKey(), value);
                 }
             }
         }

@@ -19,12 +19,22 @@ public abstract class TriggerReplacementBase extends CardTraitBase implements II
 
     @Override
     public void setHostCard(final Card c) {
-        this.hostCard = c;
+        super.setHostCard(c);
 
         if (overridingAbility != null) {
             overridingAbility.setHostCard(c);
         }
     }
+
+    @Override
+    public void setOriginalHost(Card c) {
+        super.setOriginalHost(c);
+        if (overridingAbility != null) {
+            overridingAbility.setOriginalHost(c);
+        }
+    }
+
+
 
     public Set<ZoneType> getActiveZone() {
         return validHostZones;

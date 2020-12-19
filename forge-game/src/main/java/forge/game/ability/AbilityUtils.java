@@ -1901,16 +1901,6 @@ public class AbilityUtils {
 
     public static final String getSVar(final CardTraitBase ability, final String sVarName) {
         String val = ability.getSVar(sVarName);
-        if (StringUtils.isEmpty(val)) {
-            Card host = null;
-            if (ability instanceof SpellAbility) {
-                host = ((SpellAbility) ability).getOriginalHost();
-            }
-            if (host == null) {
-                host = ability.getHostCard();
-            }
-            val = host.getSVar(sVarName);
-        }
         if (!ability.isIntrinsic() || StringUtils.isEmpty(val)) {
             return val;
         }
@@ -2016,9 +2006,8 @@ public class AbilityUtils {
         
         SpellAbility firstSpell = c.getFirstSpellAbility();
         Map<String, String> params = Maps.newHashMap(firstSpell.getMapParams());
-        AbilityRecordType rc = AbilityRecordType.getRecordType(params);
-        ApiType api = rc.getApiTypeOf(params);
-        AbilitySub subAbility = (AbilitySub) AbilityFactory.getAbility(AbilityRecordType.SubAbility, api, params, null, c, null);
+        ApiType api = AbilityRecordType.getRecordType(params).getApiTypeOf(params);
+        AbilitySub subAbility = (AbilitySub) AbilityFactory.getAbility(AbilityRecordType.SubAbility, api, params, null, c.getCurrentState(), null);
 
         subAbility.setActivatingPlayer(sa.getActivatingPlayer());
         subAbility.setHostCard(sa.getHostCard());
