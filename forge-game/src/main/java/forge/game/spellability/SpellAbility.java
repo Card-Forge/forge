@@ -620,7 +620,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public String getStackDescription() {
         String text = getHostCard().getView().getText();
-        if (stackDescription.equals(text)) {
+        if (stackDescription.equals(text) && !text.isEmpty()) {
             return getHostCard().getName() + " - " + text;
         }
         return TextUtil.fastReplace(stackDescription, "CARDNAME", getHostCard().getName());

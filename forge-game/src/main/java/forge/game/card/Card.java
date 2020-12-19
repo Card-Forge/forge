@@ -6035,6 +6035,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
             }
         }
+        // Add Modal Spells
+        if (isModal() && hasState(CardStateName.Modal)) {
+            for (SpellAbility sa : getState(CardStateName.Modal).getSpellAbilities()) {
+                //add alternative costs as additional spell abilities
+                // only add Spells there
+                if (sa.isSpell()) {
+                    abilities.add(sa);
+                    abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
+                }
+            }
+        }
 
         final Collection<SpellAbility> toRemove = Lists.newArrayListWithCapacity(abilities.size());
         for (final SpellAbility sa : abilities) {
@@ -6050,7 +6061,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         abilities.removeAll(toRemove);
 
-        if (getState(CardStateName.Original).getType().isLand() && !getLastKnownZone().is(ZoneType.Battlefield)) {
+        // Land Abilities below, move them to CardFactory after MayPlayRefactor
+        if (getLastKnownZone().is(ZoneType.Battlefield)) {
+            return abilities;
+        }
+        if (getState(CardStateName.Original).getType().isLand()) {
             LandAbility la = new LandAbility(this, player, null);
             if (la.canPlay()) {
                 abilities.add(la);
@@ -6092,7 +6107,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         if (isModal() && hasState(CardStateName.Modal)) {
-            if (getState(CardStateName.Modal).getType().isLand() && !getLastKnownZone().is(ZoneType.Battlefield)) {
+            if (getState(CardStateName.Modal).getType().isLand()) {
                 LandAbility la = new LandAbility(this, player, null);
                 la.setCardState(CardStateName.Modal);
 
