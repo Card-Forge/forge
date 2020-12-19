@@ -14,7 +14,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityContinuous;
 import forge.game.staticability.StaticAbilityLayer;
@@ -38,15 +37,13 @@ import forge.game.ability.effects.AnimateEffectBase;
 public class AnimateAi extends SpellAbilityAi {
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getHostCard();
         final Game game = ai.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         if ("Attacking".equals(aiLogic)) { // Launch the Fleet
             if (ph.getPlayerTurn().isOpponentOf(ai) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
-            List<Card> list = CardLists.getValidCards(ai.getCreaturesInPlay(), tgt.getValidTgts(), ai, source, sa);
+            List<Card> list = CardLists.getTargetableCards(ai.getCreaturesInPlay(), sa);
             for (Card c : list) {
                 if (ComputerUtilCard.doesCreatureAttackAI(ai, c)) {
                     sa.getTargets().add(c);
@@ -224,10 +221,7 @@ public class AnimateAi extends SpellAbilityAi {
         } else if (sa.usesTargeting() && mandatory) {
             // fallback if animate is mandatory
             sa.resetTargets();
-            final TargetRestrictions tgt = sa.getTargetRestrictions();
-            final Card source = sa.getHostCard();
-            CardCollectionView list = aiPlayer.getGame().getCardsIn(tgt.getZone());
-            list = CardLists.getValidCards(list, tgt.getValidTgts(), aiPlayer, source, sa);
+            List<Card> list = CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa);
             if (list.isEmpty()) {
                 return false;
             }
@@ -253,12 +247,8 @@ public class AnimateAi extends SpellAbilityAi {
 
         // something is used for animate into creature
         if (types.isCreature()) {
-            final TargetRestrictions tgt = sa.getTargetRestrictions();
-            final Card source = sa.getHostCard();
-            CardCollectionView list = ai.getGame().getCardsIn(tgt.getZone());
-            list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, source, sa);
-            // need to targetable
-            list = CardLists.getTargetableCards(list, sa);
+            final Game game = ai.getGame();
+            CardCollectionView list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
 
             // Filter AI-specific targets if provided
             list = ComputerUtil.filterAITgts(sa, ai, (CardCollection)list, false);
