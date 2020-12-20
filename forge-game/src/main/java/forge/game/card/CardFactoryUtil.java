@@ -1176,14 +1176,9 @@ public class CardFactoryUtil {
             return doXMath(Integer.parseInt(sq[cc.hasThreshold() ? 1 : 2]), m, c);
         }
         if (sq[0].contains("Averna")) {
-            int kwcount = 0;
-            for (String kw : cc.getKeywords()) {
-                if (kw.equals("As you cascade, you may put a land card from among the exiled cards onto the " +
-                        "battlefield tapped.")) {
-                    kwcount++;
-                }
-            }
-            return kwcount;
+            String str = "As you cascade, you may put a land card from among the exiled cards onto the " +
+                    "battlefield tapped.";
+            return cc.getKeywords().getAmount(str);
         }
         if (sq[0].startsWith("Kicked")) {
             return doXMath(Integer.parseInt(sq[c.getKickerMagnitude() > 0 ? 1 : 2]), m, c);
