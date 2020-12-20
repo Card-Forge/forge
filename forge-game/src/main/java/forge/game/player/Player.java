@@ -1236,7 +1236,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public boolean hasProtectionFrom(final Card source, final boolean checkSBA, final boolean damageSource) {
         final boolean colorlessDamage = damageSource && source.hasKeyword("Colorless Damage Source");
-        for (String kw : keywords) {
+        for (KeywordInterface ki : keywords) {
+            String kw = ki.getOriginal();
             if (kw.startsWith("Protection")) {
                 if (kw.startsWith("Protection:")) { // uses isValid
                     final String characteristic = kw.split(":")[1];
@@ -3226,7 +3227,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         keywordEffect.updateAbilityTextForView();
         boolean headerAdded = false;
         StringBuilder kw = new StringBuilder();
-        for(String k : keywords) {
+        for(KeywordInterface k : keywords) {
             if(!headerAdded) {
                 headerAdded = true;
                 kw.append(this.getName()).append(" has: \n");
