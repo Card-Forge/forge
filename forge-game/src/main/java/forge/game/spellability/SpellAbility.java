@@ -114,8 +114,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private CardStateName stateName = null;
 
-    private int totalManaSpent = 0;
-
     /** The pay costs. */
     private Cost payCosts;
     private SpellAbilityRestriction restrictions = new SpellAbilityRestriction();
@@ -1785,12 +1783,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
     }
 
-    public void setTotalManaSpent(int totManaSpent) {
-        totalManaSpent = totManaSpent;
-    }
-
     public int getTotalManaSpent() {
-        return totalManaSpent;
+        return this.getPayingMana().size();
     }
 
     public List<AbilitySub> getChosenList() {

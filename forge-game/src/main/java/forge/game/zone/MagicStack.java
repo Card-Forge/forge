@@ -273,11 +273,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             frozenStack.push(si);
             return;
         }
-        int totManaSpent = sp.getPayingMana().size();
 
         if (sp instanceof AbilityStatic) {
-            // TODO: make working triggered ability
-            sp.setTotalManaSpent(totManaSpent);
             AbilityUtils.resolve(sp);
             // AbilityStatic should do nothing below
             return;
@@ -289,8 +286,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // The ability is added to stack HERE
             si = push(sp);
         }
-
-        sp.setTotalManaSpent(totManaSpent);
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();
