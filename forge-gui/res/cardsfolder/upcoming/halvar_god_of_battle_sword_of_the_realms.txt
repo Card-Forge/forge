@@ -1,0 +1,23 @@
+Name:Halvar, God of Battle
+ManaCost:2 W W
+Types:Legendary Creature God
+PT:4/4
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+enchanted,Creature.YouCtrl+equipped | AddKeyword$ Double Strike | Description$ Creatures you control that are enchanted or equipped gain double strike.
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigTargetAuraEquip | OptionalDecider$ You | TriggerDescription$ At the beginning of each combat, you may attach target Aura or Equipment attached to a creature you control to target creature you control.
+SVar:TrigTargetAuraEquip:DB$ Pump | ValidTgts$ Equipment.AttachedTo Creature.YouCtrl,Aura.AttachedTo Creature.YouCtrl | TgtPrompt$ Select target Aura or Equipment attached to a creature you control | SubAbility$ DBAttach | StackDescription$ None
+SVar:DBAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
+AlternateMode:Modal
+DeckHints:Type$Equipment|Aura
+Oracle:Creatures you control that are enchanted or equipped have double strike.\nAt the beginning of each combat, you may attach target Aura or Equipment attached to a creature you control to target creature you control.
+
+ALTERNATE
+
+Name:Sword of the Realms
+ManaCost:1 W
+Types:Legendary Artifact Equipment
+K:Equip:1 W
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Vigilance | Description$ Equipped creature gets +2/+0 and has vigilance.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigReturn | TriggerDescription$ Whenever equipped creature dies, return it to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Hand
+Oracle:Equipped creature gets +2/+0 and has vigilance.\nWhenever equipped creature dies, return it to its owner's hand.\nEquip {1} {W}
+
