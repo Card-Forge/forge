@@ -124,7 +124,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final PlayerCollection mayLookFaceDownExile = new PlayerCollection();
     private final PlayerCollection mayLookTemp = new PlayerCollection();
 
-    private final Multimap<Long, Keyword> cantHaveKeywords = MultimapBuilder.hashKeys().enumSetValues(Keyword.class).build();
+    // don't use Enum Set Values or it causes a slow down
+    private final Multimap<Long, Keyword> cantHaveKeywords = MultimapBuilder.hashKeys().hashSetValues().build();
 
     private final Map<CounterType, Long> counterTypeTimestamps = Maps.newHashMap();
 
