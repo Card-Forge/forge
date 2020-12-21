@@ -274,6 +274,29 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                                 }
                             },
                 3);
+        if (GuiBase.isAndroid()) { //this option does nothing except on Android
+            lstSettings.addItem(new BooleanSetting(FPref.UI_AUTO_CACHE_SIZE,
+                                        localizer.getMessage("lblAutoCacheSize"),
+                                        localizer.getMessage("nlAutoCacheSize")) {
+                                    @Override
+                                    public void select() {
+                                        super.select();
+                                        FOptionPane.showConfirmDialog(
+                                                localizer.getMessage("lblRestartForgeDescription"),
+                                                localizer.getMessage("lblRestartForge"),
+                                                localizer.getMessage("lblRestart"),
+                                                localizer.getMessage("lblLater"), new Callback<Boolean>() {
+                                                    @Override
+                                                    public void run(Boolean result) {
+                                                        if (result) {
+                                                            Forge.restart(true);
+                                                        }
+                                                    }
+                                                });
+                                    }
+                                },
+                    3);
+        }
 
         //Graphic Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER,

@@ -1023,7 +1023,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING*2, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
                 } else {
                     if (!dp.isGeneratedDeck()){
-                        FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard().getImageKey(false), false, false, false);
+                        //If deck has Commander, use it as cardArt reference
+                        String deckImageKey = dp.getDeck().getCommanders().isEmpty() ? dp.getHighestCMCCard().getImageKey(false) : dp.getDeck().getCommanders().get(0).getImageKey(false);
+                        FImageComplex cardArt = CardRenderer.getCardArt(deckImageKey, false, false, false);
                         //draw the deckbox
                         if (cardArt == null){
                             //draw generic box if null or still loading
