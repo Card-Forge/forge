@@ -8,5 +8,7 @@ SVar:DeployDwarf:DB$ RepeatEach | RepeatSubAbility$ ArmDwarf | RepeatCards$ Card
 SVar:ArmDwarf:DB$ Attach | Object$ Remembered | Defined$ Imprinted | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Count$Valid Equipment.YouCtrl
+DeckNeeds:Type$Vehicle|Dwarf
+DeckHints:Type$Equipment
 AI:RemoveDeck:All
 Oracle:Vehicles you control become artifact creatures until end of turn. Choose a Dwarf you control. Attach any number of Equipment you control to it.
