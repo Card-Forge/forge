@@ -6,4 +6,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost/Plus.1
 SVar:AIPreference:SacCost$Creature
 DeckHas:Ability$Sacrifice
+DeckNeeds:Type$Creature
 Oracle:{2}, {T}, Sacrifice a creature: Search your library for a creature card that shares a creature type with the sacrificed creature and has converted mana cost equal to 1 plus that creature's converted mana cost. Put that card onto the battlefield, then shuffle your library. Activate this ability only any time you could cast a sorcery.
