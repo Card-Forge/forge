@@ -460,8 +460,8 @@ public final class AbilityFactory {
         Cost totalCost = parseAbilityCost(leftState, leftMap, leftType);
         totalCost.add(parseAbilityCost(rightState, rightMap, rightType));
 
-        final SpellAbility left = getAbility(leftType, leftApi, leftMap, totalCost, leftState, null);
-        final AbilitySub right = (AbilitySub) getAbility(AbilityRecordType.SubAbility, rightApi, rightMap, null, rightState, left);
+        final SpellAbility left = getAbility(leftType, leftApi, leftMap, totalCost, leftState, leftState);
+        final AbilitySub right = (AbilitySub) getAbility(AbilityRecordType.SubAbility, rightApi, rightMap, null, rightState, rightState);
         left.appendSubAbility(right);
         return left;
     }
