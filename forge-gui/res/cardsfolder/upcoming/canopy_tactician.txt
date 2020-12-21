@@ -1,0 +1,8 @@
+Name:Canopy Tactician
+ManaCost:3 G
+Types:Creature Elf Warrior
+PT:3/3
+S:Mode$ Continuous | Affected$ Elf.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Elves you control get +1/+1.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 3 | SpellDescription$ Add {G}{G}{G}.
+DeckHints:Type$Elf
+Oracle:Other Elves you control get +1/+1.\n{T}: Add {G}{G}{G}.
