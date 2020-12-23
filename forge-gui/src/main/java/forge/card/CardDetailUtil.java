@@ -569,6 +569,14 @@ public class CardDetailUtil {
                 area.append("Current Storm Count: ").append(gameView.getStormCount());
             }
         }
+
+        //show owner if being controlled by a different player
+        if (card.getOwner() != card.getController()) {
+            if (area.length() != 0) {
+                area.append("\n\n");
+            }
+            area.append("Owner: ").append(card.getOwner().toString());
+        }
         return area.toString();
     }
 }
