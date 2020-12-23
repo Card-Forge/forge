@@ -1,0 +1,11 @@
+Name:Warchanter Skald
+ManaCost:2 W
+Types:Creature Dwarf Cleric
+PT:2/3
+T:Mode$ Taps | ValidCard$ Card.Self+enchanted,Card.Self+equipped | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever Warchanter Skald becomes tapped, if it's enchanted or equipped, create a 2/1 red Dwarf Berserker creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_2_1_dwarf_berserker | TokenOwner$ You
+SVar:EnchantMe:Once
+SVar:EquipMe:Once
+DeckNeeds:Type$Enchantment|Equipment
+DeckHas:Ability$Token
+Oracle:Whenever Warchanter Skald becomes tapped, if it's enchanted or equipped, create a 2/1 red Dwarf Berserker creature token.
