@@ -309,11 +309,6 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public boolean isXCost() {
-        return sa.isXCost();
-    }
-
-    @Override
     public String getSVar(String name) {
         return sa.getSVar(name);
     }
