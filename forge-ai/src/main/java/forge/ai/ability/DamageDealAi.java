@@ -12,7 +12,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
-import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
@@ -75,8 +74,8 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 // Set PayX here to maximum value.
-                dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
-                source.setSVar("PayX", Integer.toString(dmg));
+                dmg = ComputerUtilCost.getMaxXValue(sa, ai);
+                sa.setSVar("PayX", Integer.toString(dmg));
             } else if (sa.getSVar(damage).equals("Count$CardsInYourHand") && source.isInZone(ZoneType.Hand)) {
                 dmg--; // the card will be spent casting the spell, so actual damage is 1 less
             }
@@ -96,7 +95,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if (damage.equals("X")) {
             if (sa.getSVar(damage).equals("Count$xPaid") || sourceName.equals("Crater's Claws")) {
-                dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                dmg = ComputerUtilCost.getMaxXValue(sa, ai);
 
                 // Try not to waste spells like Blaze or Fireball on early targets, try to do more damage with them if possible
                 if (ai.getController().isAI()) {
@@ -113,7 +112,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 // Set PayX here to maximum value. It will be adjusted later depending on the target.
-                source.setSVar("PayX", Integer.toString(dmg));
+                sa.setSVar("PayX", Integer.toString(dmg));
             } else if (sa.getSVar(damage).contains("InYourHand") && source.isInZone(ZoneType.Hand)) {
                 dmg = CardFactoryUtil.xCount(source, sa.getSVar(damage)) - 1; // the card will be spent casting the spell, so actual damage is 1 less
             } else if (sa.getSVar(damage).equals("TargetedPlayer$CardsInHand")) {
@@ -225,7 +224,7 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source)) {
+        if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source, sa)) {
             return false;
         }
 
@@ -266,7 +265,7 @@ public class DamageDealAi extends DamageAiBase {
             }
         }
 
-        if ((damage.equals("X") && source.getSVar(damage).equals("Count$xPaid")) ||
+        if ((damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) ||
                 sourceName.equals("Crater's Claws")){
             // If I can kill my target by paying less mana, do it
             if (sa.usesTargeting() && !sa.getTargets().isTargetingAnyPlayer() && !sa.hasParam("DividedAsYouChoose")) {
@@ -281,25 +280,13 @@ public class DamageDealAi extends DamageAiBase {
                 if (sourceName.equals("Crater's Claws") && ai.hasFerocious()) {
                     actualPay = actualPay > 2 ? actualPay - 2 : 0;
                 }
-                source.setSVar("PayX", Integer.toString(actualPay));
-            }
-        }
-
-        if ("XCountersDamage".equals(logic)) {
-            // Check to ensure that we have enough counters to remove per the defined PayX
-            for (CostPart part : sa.getPayCosts().getCostParts()) {
-                if (part instanceof CostRemoveCounter) {
-                    if (source.getCounters(((CostRemoveCounter) part).counter) < Integer.valueOf(source.getSVar("PayX"))) {
-                        return false;
-                    }
-                    break;
-                }
+                sa.setSVar("PayX", Integer.toString(actualPay));
             }
         }
 
         if ("DiscardCMCX".equals(sa.getParam("AILogic"))) {
-            final int CMC = Integer.parseInt(source.getSVar("PayX"));
-            return !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(CMC)).isEmpty();
+            final int cmc = Integer.parseInt(sa.getSVar("PayX"));
+            return !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(cmc)).isEmpty();
         }
 
         return true;
@@ -990,7 +977,7 @@ public class DamageDealAi extends DamageAiBase {
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(dmg));
+            sa.setSVar("PayX", Integer.toString(dmg));
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -1002,7 +989,7 @@ public class DamageDealAi extends DamageAiBase {
                 return false;
             }
 
-            if (damage.equals("X") && source.getSVar(damage).equals("Count$xPaid") && !sa.hasParam("DividedAsYouChoose")) {
+            if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") && !sa.hasParam("DividedAsYouChoose")) {
                 // If I can kill my target by paying less mana, do it
                 int actualPay = 0;
                 final boolean noPrevention = sa.hasParam("NoPrevention");
@@ -1018,7 +1005,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
                 }
 
-                source.setSVar("PayX", Integer.toString(actualPay));
+                sa.setSVar("PayX", Integer.toString(actualPay));
             }
         }
 
@@ -1078,7 +1065,7 @@ public class DamageDealAi extends DamageAiBase {
         saTgt.resetTargets();
         saTgt.getTargets().add(tgtCreature != null && dmg < opponent.getLife() ? tgtCreature : opponent);
 
-        source.setSVar("PayX", Integer.toString(dmg));
+        sa.setSVar("PayX", Integer.toString(dmg));
         return true;
     }
 

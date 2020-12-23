@@ -157,7 +157,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                         if (!ComputerUtil.isNegativeCounter(aType, best)) {
                             sa.getTargets().add(best);
                             return true;
-                        } else if (!ComputerUtil.isUselessCounter(aType)) {
+                        } else if (!ComputerUtil.isUselessCounter(aType, best)) {
                             // whould remove positive counter
                             if (best.getCounters(aType) <= amount) {
                                 sa.getTargets().add(best);

@@ -51,7 +51,6 @@ import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Expressions;
@@ -225,50 +224,6 @@ public class CardFactoryUtil {
                 + " | HiddenAgenda$ True"
                 + " | Mode$ TurnFace | SpellDescription$ Reveal this Hidden Agenda at any time.";
         return AbilityFactory.getAbility(ab, sourceCard);
-    }
-
-    /**
-     * <p>
-     * isTargetStillValid.
-     * </p>
-     *
-     * @param ability
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param target
-     *            a {@link forge.game.card.Card} object.
-     * @return a boolean.
-     */
-    public static boolean isTargetStillValid(final SpellAbility ability, final Card target) {
-        Zone zone = target.getGame().getZoneOf(target);
-        if (zone == null) {
-            return false; // for tokens that disappeared
-        }
-
-        final Card source = ability.getHostCard();
-        final TargetRestrictions tgt = ability.getTargetRestrictions();
-        if (tgt != null) {
-            // Reconfirm the Validity of a TgtValid, or if the Creature is still
-            // a Creature
-            if (tgt.doesTarget()
-                    && !target.isValid(tgt.getValidTgts(), ability.getActivatingPlayer(), ability.getHostCard(), ability)) {
-                return false;
-            }
-
-            // Check if the target is in the zone it needs to be in to be targeted
-            if (!tgt.getZone().contains(zone.getZoneType())) {
-                return false;
-            }
-        }
-        else {
-            // If an Aura's target is removed before it resolves, the Aura
-            // fizzles
-            if (source.isAura() && !target.isInZone(ZoneType.Battlefield)) {
-                return false;
-            }
-        }
-
-        // Make sure it's still targetable as well
-        return ability.canTarget(target);
     }
 
     // does "target" have protection from "card"?

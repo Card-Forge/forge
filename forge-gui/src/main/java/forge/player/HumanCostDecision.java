@@ -3,18 +3,18 @@ package forge.player;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameEntityView;
 import forge.game.GameEntityViewMap;
 import forge.game.ability.AbilityUtils;
@@ -527,7 +527,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (c == null) {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
-        
+
         if (!player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblDoYouWantFlipNCoinAction", String.valueOf(c)), ability)) {
             return null;
         }
@@ -907,57 +907,59 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
-        CardCollectionView list = new CardCollection(player.getCardsIn(ZoneType.Battlefield));
-        list = CardLists.getValidCards(list, type.split(";"), player, source, ability);
+        CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player, source, ability);
+        list = CardLists.filter(list, CardPredicates.hasCounters());
 
-
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card card) {
-                return card.hasCounters();
-            }
-        });
-        final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, list, ability);
-        inp.setMessage(Localizer.getInstance().getMessage("lblSelectTargetCounter", cost.getDescriptiveType()));
-        inp.setCancelAllowed(false);
+        final InputSelectCardToRemoveCounter inp = new InputSelectCardToRemoveCounter(controller, c, cost, cost.counter, list, ability);
+        inp.setCancelAllowed(true);
         inp.showAndWait();
-        final Card selected = inp.getFirstSelected();
-        final Map<CounterType, Integer> tgtCounters = selected.getCounters();
-        final List<CounterType> typeChoices = new ArrayList<>();
-        for (final CounterType key : tgtCounters.keySet()) {
-            if (tgtCounters.get(key) > 0) {
-                typeChoices.add(key);
-            }
+        if (inp.hasCancelled()) {
+            return null;
         }
 
-        final String prompt = Localizer.getInstance().getMessage("lblSelectRemoveCounterType");
-        cost.setCounterType(controller.getGui().one(prompt, typeChoices));
-
-        return PaymentDecision.card(selected, cost.getCounter());
+        return PaymentDecision.counters(inp.getCounterTable());
     }
 
-    public static final class InputSelectCardToRemoveCounter extends InputSelectManyBase<Card> {
+    public static final class InputSelectCardToRemoveCounter extends InputSelectManyBase<GameEntity> {
         private static final long serialVersionUID = 2685832214519141903L;
 
-        private final Map<Card,Integer> cardsChosen;
         private final CounterType counterType;
         private final CardCollectionView validChoices;
 
-        public InputSelectCardToRemoveCounter(final PlayerControllerHuman controller, final int cntCounters, final CounterType cType, final CardCollectionView validCards, final SpellAbility sa) {
+        private final GameEntityCounterTable counterTable = new GameEntityCounterTable();
+
+        public InputSelectCardToRemoveCounter(final PlayerControllerHuman controller, final int cntCounters, final CostPart costPart, final CounterType cType, final CardCollectionView validCards, final SpellAbility sa) {
             super(controller, cntCounters, cntCounters, sa);
             this.validChoices = validCards;
             counterType = cType;
-            cardsChosen = cntCounters > 0 ? new HashMap<>() : null;
+
+            setMessage(Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostConfirm", "%d", counterType == null ? "any" : counterType.getName(), costPart.getDescriptiveType()));
         }
 
         @Override
         protected boolean onCardSelected(final Card c, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
-            if (!isValidChoice(c) || c.getCounters(counterType) <= getTimesSelected(c)) {
+            if (!isValidChoice(c)) {
                 return false;
             }
 
-            final int tc = getTimesSelected(c);
-            cardsChosen.put(c, tc + 1);
+            CounterType cType = this.counterType;
+            if (cType == null) {
+                Map<CounterType, Integer> cmap = counterTable.filterToRemove(c);
+
+                String prompt = Localizer.getInstance().getMessage("lblSelectCountersTypeToRemove");
+
+                cType = getController().chooseCounterType(Lists.newArrayList(cmap.keySet()), sa, prompt, null);
+            }
+
+            if (cType == null) {
+                return false;
+            }
+
+            if (c.getCounters(cType) <= counterTable.get(c, cType)) {
+                return false;
+            }
+
+            counterTable.put(c, cType, 1);
 
             onSelectStateChanged(c, true);
             refresh();
@@ -966,8 +968,24 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         @Override
         public String getActivateAction(final Card c) {
-            if (!isValidChoice(c) || c.getCounters(counterType) <= getTimesSelected(c)) {
+            if (!isValidChoice(c)) {
                 return null;
+            }
+            if (counterType != null) {
+                if (c.getCounters(counterType) <= counterTable.get(c, counterType)) {
+                    return null;
+                }
+            } else {
+                boolean found = false;
+                for (Map.Entry<CounterType, Integer> e : c.getCounters().entrySet()) {
+                    if (e.getValue() > counterTable.get(c, e.getKey())) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    return null;
+                }
             }
             return Localizer.getInstance().getMessage("lblRemoveCounterFromCard");
         }
@@ -992,9 +1010,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         private int getDistibutedCounters() {
             int sum = 0;
-            for (final Entry<Card, Integer> kv : cardsChosen.entrySet()) {
-                sum += kv.getValue().intValue();
+
+            for (Integer v : this.counterTable.values()) {
+                sum += v;
             }
+
             return sum;
         }
 
@@ -1002,13 +1022,13 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return validChoices.contains(choice);
         }
 
-        public int getTimesSelected(final Card c) {
-            return cardsChosen.containsKey(c) ? cardsChosen.get(c).intValue() : 0;
+        public GameEntityCounterTable getCounterTable() {
+            return this.counterTable;
         }
 
         @Override
-        public Collection<Card> getSelected() {
-            return cardsChosen.keySet();
+        public Collection<GameEntity> getSelected() {
+            return counterTable.rowKeySet();
         }
     }
 
@@ -1063,45 +1083,28 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(ability.getOriginalHost(), cntRemoved >= 0 ? cntRemoved : maxCounters);
         }
 
-        final CardCollectionView validCards = CardLists.getValidCards(player.getCardsIn(cost.zone), type.split(";"), player, source, ability);
-        if (cost.zone.equals(ZoneType.Battlefield)) {
-            if (cntRemoved == 0) {
-                return PaymentDecision.card(source, 0);
-            }
-
-            final InputSelectCardToRemoveCounter inp = new InputSelectCardToRemoveCounter(controller, cntRemoved, cost.counter, validCards, ability);
-            inp.setMessage(Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostConfirm", "%d", cost.counter.getName(), cost.getDescriptiveType()));
-            inp.setCancelAllowed(true);
-            inp.showAndWait();
-            if (inp.hasCancelled()) {
-                return null;
-            }
-
-            // Have to hack here: remove all counters minus one, without firing any triggers,
-            // triggers will fire when last is removed by executePayment.
-            // They don't care how many were removed anyway
-            // int sum = 0;
-            for (final Card crd : inp.getSelected()) {
-                final int removed = inp.getTimesSelected(crd);
-                // sum += removed;
-                if (removed < 2) {
-                    continue;
-                }
-                final int oldVal = crd.getCounters().get(cost.counter).intValue();
-                crd.getCounters().put(cost.counter, Integer.valueOf(oldVal - removed + 1));
-            }
-            return PaymentDecision.card(inp.getSelected(), 1);
-        }
-
-        // Rift Elemental only - always removes 1 counter, so there will be no code for N counters.
-        GameEntityViewMap<Card, CardView> gameCacheSuspended = GameEntityView.getMap(CardLists.filter(validCards, CardPredicates.hasCounter(cost.counter)));
-
-        final CardView cv = controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblRemoveCountersFromAInZoneCard", cost.zone.getTranslatedName()), gameCacheSuspended.getTrackableKeys());
-        if (cv == null || !gameCacheSuspended.containsKey(cv)) {
+        CardCollectionView validCards = CardLists.getValidCards(player.getCardsIn(cost.zone), type.split(";"), player, source, ability);
+        // you can only select 1 card to remove N counters from
+        validCards = CardLists.filter(validCards, CardPredicates.hasCounter(cost.counter, cntRemoved));
+        if (validCards.isEmpty()) {
             return null;
         }
 
-        return PaymentDecision.card(gameCacheSuspended.get(cv), c);
+        final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, validCards, ability);
+        inp.setMessage(Localizer.getInstance().getMessage("lblRemoveCountersFromAInZoneCard", cost.zone.getTranslatedName()));
+        inp.setCancelAllowed(true);
+        inp.showAndWait();
+
+        if (inp.hasCancelled()) {
+            return null;
+        }
+
+        final Card selected = inp.getFirstSelected();
+        if (selected == null) {
+            return null;
+        }
+
+        return PaymentDecision.card(selected, cntRemoved);
     }
 
     @Override

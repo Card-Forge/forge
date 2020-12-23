@@ -64,9 +64,7 @@ public abstract class AbilityActivated extends SpellAbility implements Cloneable
      */
     public AbilityActivated(final Card sourceCard, final Cost abCost, final TargetRestrictions tgt) {
         super(sourceCard, abCost);
-        if ((tgt != null) && tgt.doesTarget()) {
-            this.setTargetRestrictions(tgt);
-        }
+        this.setTargetRestrictions(tgt);
     }
 
     public boolean isActivatedAbility() { return true; }

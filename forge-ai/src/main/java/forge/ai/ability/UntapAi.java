@@ -51,27 +51,24 @@ public class UntapAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
         }
 
-        if (tgt == null) {
+        if (!sa.usesTargeting()) {
             final List<Card> pDefined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             return pDefined == null || !pDefined.get(0).isUntapped() || pDefined.get(0).getController() != ai;
         } else {
-            return untapPrefTargeting(ai, tgt, sa, false);
+            return untapPrefTargeting(ai, sa, false);
         }
 
     }
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
-        if (tgt == null) {
+        if (!sa.usesTargeting()) {
             if (mandatory) {
                 return true;
             }
@@ -80,7 +77,7 @@ public class UntapAi extends SpellAbilityAi {
             final List<Card> pDefined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             return pDefined == null || !pDefined.get(0).isUntapped() || pDefined.get(0).getController() != ai;
         } else {
-            if (untapPrefTargeting(ai, tgt, sa, mandatory)) {
+            if (untapPrefTargeting(ai, sa, mandatory)) {
                 return true;
             } else if (mandatory) {
                 // not enough preferred targets, but mandatory so keep going:
@@ -100,7 +97,7 @@ public class UntapAi extends SpellAbilityAi {
         if (tgt == null) {
             // who cares if its already untapped, it's only a subability?
         } else {
-            if (!untapPrefTargeting(ai, tgt, sa, false)) {
+            if (!untapPrefTargeting(ai, sa, false)) {
                 return false;
             }
         }
@@ -113,15 +110,13 @@ public class UntapAi extends SpellAbilityAi {
      * untapPrefTargeting.
      * </p>
      * 
-     * @param tgt
-     *            a {@link forge.game.spellability.TargetRestrictions} object.
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mandatory
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean untapPrefTargeting(final Player ai, final TargetRestrictions tgt, final SpellAbility sa, final boolean mandatory) {
+    private static boolean untapPrefTargeting(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getHostCard();
 
         Player targetController = ai;
@@ -131,7 +126,6 @@ public class UntapAi extends SpellAbilityAi {
         }
 
         CardCollection list = CardLists.getTargetableCards(targetController.getCardsIn(ZoneType.Battlefield), sa);
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
 
         if (list.isEmpty()) {
             return false;
@@ -175,7 +169,7 @@ public class UntapAi extends SpellAbilityAi {
         untapList.removeAll(toExclude);
 
         sa.resetTargets();
-        while (sa.getTargets().size() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
+        while (sa.canAddMoreTarget()) {
             Card choice = null;
 
             if (untapList.isEmpty()) {
@@ -183,7 +177,7 @@ public class UntapAi extends SpellAbilityAi {
                 if (sa.getSubAbility() != null && sa.getSubAbility().getApi() == ApiType.Animate && !list.isEmpty()
                         && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     choice = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
-                } else if (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().size() == 0) {
+                } else if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
                     sa.resetTargets();
                     return false;
                 } else {
@@ -204,7 +198,7 @@ public class UntapAi extends SpellAbilityAi {
             }
 
             if (choice == null) { // can't find anything left
-                if (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().size() == 0) {
+                if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
                     sa.resetTargets();
                     return false;
                 } else {

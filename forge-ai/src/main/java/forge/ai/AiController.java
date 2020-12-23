@@ -751,7 +751,7 @@ public class AiController {
                         if (xPay <= 0) {
                             return AiPlayDecision.CantAffordX;
                         }
-                        card.setSVar("PayX", Integer.toString(xPay));
+                        sa.setSVar("PayX", Integer.toString(xPay));
                     } else if (mana.isZero()) {
                         // if mana is zero, but card mana cost does have X, then something is wrong
                         ManaCost cardCost = card.getManaCost();
@@ -1061,8 +1061,8 @@ public class AiController {
             } else if ("VolrathsShapeshifter".equals(sa.getParam("AILogic"))) {
                 return SpecialCardAi.VolrathsShapeshifter.targetBestCreature(player, sa);
             } else if ("DiscardCMCX".equals(sa.getParam("AILogic"))) {
-                final int CMC = Integer.parseInt(sourceCard.getSVar("PayX"));
-                CardCollection discards = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(CMC));
+                final int cmc = Integer.parseInt(sa.getSVar("PayX"));
+                CardCollection discards = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(cmc));
                 if (discards.isEmpty()) {
                     return null;
                 } else {

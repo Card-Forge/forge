@@ -227,12 +227,6 @@ public class GameAction {
         // ensure that any leftover keyword/type changes are cleared in the state view
         copied.updateStateForView();
 
-        // Clean up temporary variables such as Sunburst value or announced PayX value
-        if (!(zoneTo.is(ZoneType.Stack) || zoneTo.is(ZoneType.Battlefield))) {
-            copied.clearTemporaryVars();
-        }
-
-
         if (!suppress) {
             if (zoneFrom == null) {
                 copied.getOwner().addInboundToken(copied);

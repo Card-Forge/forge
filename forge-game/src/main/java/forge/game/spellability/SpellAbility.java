@@ -39,7 +39,6 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
-import forge.game.cost.CostPartMana;
 import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
@@ -985,7 +984,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         final TargetRestrictions tr = getTargetRestrictions();
 
         // Restriction related to this ability
-        if (tr != null) {
+        if (usesTargeting()) {
             if (tr.isUniqueTargets() && getUniqueTargets().contains(entity))
                 return false;
 
@@ -1322,11 +1321,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         originalMapParams.put("Announce", announce + ";" + variable);
     }
 
-    public boolean isXCost() {
-        CostPartMana cm = payCosts != null ? getPayCosts().getCostMana() : null;
-        return cm != null && cm.getAmountOfX() > 0;
-    }
-
     @Override
     public boolean canBeTargetedBy(SpellAbility sa) {
         return sa.canTargetSpellAbility(this);
@@ -1404,14 +1398,22 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return getTargetRestrictions().getMinTargets(hostCard, this) == 0 && getTargets().size() == 0;
     }
 
+    public boolean isMinTargetChosen() {
+        return getTargetRestrictions().isMinTargetsChosen(hostCard, this);
+    }
+    public boolean isMaxTargetChosen() {
+        return getTargetRestrictions().isMaxTargetsChosen(hostCard, this);
+    }
+
     public boolean isTargetNumberValid() {
         if (!this.usesTargeting()) {
             return getTargets().isEmpty();
         }
 
-        int minTargets = getTargetRestrictions().getMinTargets(hostCard, this);
+        if (!isMinTargetChosen()) {
+            return false;
+        }
         int maxTargets = getTargetRestrictions().getMaxTargets(hostCard, this);
-        int numTargets = getTargets().size();
 
         if (maxTargets == 0 && getPayCosts().hasSpecificCostType(CostRemoveCounter.class)
                 && hasSVar(getParam("TargetMax"))
@@ -1424,7 +1426,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             maxTargets = Integer.parseInt(getHostCard().getSVar("CostCountersRemoved"));
         }
 
-        return minTargets <= numTargets && maxTargets >= numTargets;
+        return maxTargets >= getTargets().size();
     }
     /**
      * <p>
@@ -1665,8 +1667,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         SpellAbility currentAbility = this;
         final Card source = getHostCard();
         do {
-            final TargetRestrictions tgt = currentAbility.getTargetRestrictions();
-            if (tgt != null && tgt.doesTarget()) {
+            if (currentAbility.usesTargeting()) {
                 currentAbility.clearTargets();
                 Player targetingPlayer;
                 if (currentAbility.hasParam("TargetingPlayer")) {

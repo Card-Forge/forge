@@ -44,7 +44,7 @@ public class ChooseColorAi extends SpellAbilityAi {
             }
             // Set PayX here to maximum value.
             int x = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(x));
+            sa.setSVar("PayX", Integer.toString(x));
             return true;
         }
 

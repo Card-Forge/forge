@@ -82,10 +82,10 @@ public class CountersPutAllAi extends SpellAbilityAi {
         // TODO improve X value to don't overpay when extra mana won't do
         // anything more useful
         final int amount;
-        if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
+        if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             amount = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(amount));
+            sa.setSVar("PayX", Integer.toString(amount));
         } else {
             amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
         }

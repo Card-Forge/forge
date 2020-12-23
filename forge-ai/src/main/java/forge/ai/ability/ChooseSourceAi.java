@@ -60,7 +60,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source)) {
+            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source, sa)) {
                 return false;
             }
         }

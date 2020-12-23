@@ -321,8 +321,27 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public Integer announceRequirements(final SpellAbility ability, final String announce,
             final boolean canChooseZero) {
         final int min = canChooseZero ? 0 : 1;
-        final int max = ability.hasParam("XMaxLimit") ? AbilityUtils.calculateAmount(ability.getHostCard(),
-                ability.getParam("XMaxLimit"), ability) : Integer.MAX_VALUE;
+        int max = Integer.MAX_VALUE;
+
+        if ("X".equals(announce)) {
+            Cost cost = ability.getPayCosts();
+            if (ability.hasParam("XMaxLimit")) {
+                max = Math.min(max, AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("XMaxLimit"), ability));
+            }
+            if (cost != null) {
+                Integer costX = cost.getMaxForNonManaX(ability, player);
+                if (costX != null) {
+                    max = Math.min(max, min);
+                }
+            }
+        }
+
+        if (ability.usesTargeting()) {
+            // if announce is used as min targets, check what the max possible number would be
+            if (announce.equals(ability.getTargetRestrictions().getMinTargets())) {
+                max = Math.min(max, CardUtil.getValidCardsToTarget(ability.getTargetRestrictions(), ability).size());
+            }
+        }
         return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announce,
                 CardTranslation.getTranslatedName(ability.getHostCard().getName())) , min, max, min + 9);
     }

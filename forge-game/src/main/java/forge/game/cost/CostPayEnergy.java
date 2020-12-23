@@ -47,6 +47,10 @@ public class CostPayEnergy extends CostPart {
     @Override
     public int paymentOrder() { return 7; }
 
+    public Integer getMaxAmountX(final SpellAbility ability, final Player payer) {
+        return payer.getCounters(CounterEnumType.ENERGY);
+    }
+
     /*
      * (non-Javadoc)
      *

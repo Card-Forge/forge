@@ -6426,17 +6426,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return changed;
     }
 
-    public final void clearTemporaryVars() {
-        // Add cleanup for all variables that are set temporarily but that need
-        // to be restored to their original value if a card changes zones
-
-        removeSVar("PayX"); // Temporary AI X announcement variable
-        removeSVar("IsCastFromPlayEffect"); // Temporary SVar indicating that the spell is cast indirectly via AF Play
-        setXManaCostPaidByColor(null);
-        setKickerMagnitude(0);
-        setPseudoMultiKickerMagnitude(0);
-    }
-
     public final int getFinalChapterNr() {
         int n = 0;
         for (final Trigger t : getTriggers()) {

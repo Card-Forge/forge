@@ -164,7 +164,7 @@ public class ProtectAi extends SpellAbilityAi {
     
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
-        if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
+        if (!sa.usesTargeting()) {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             if (cards.size() == 0) {
                 return false;
@@ -359,12 +359,7 @@ public class ProtectAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        final Card host = sa.getHostCard();
-        if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
-            if (host.isCreature()) {
-                // TODO
-            }
-        } else {
+        if (sa.usesTargeting()) {
             return protectTgtAI(ai, sa, false);
         }
 
