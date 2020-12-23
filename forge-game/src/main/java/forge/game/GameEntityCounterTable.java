@@ -31,15 +31,43 @@ public class GameEntityCounterTable extends ForwardingTable<GameEntity, CounterT
      */
     @Override
     public Integer put(GameEntity rowKey, CounterType columnKey, Integer value) {
-        Integer old = contains(rowKey, columnKey) ? get(rowKey, columnKey) : 0;
-        return super.put(rowKey, columnKey, old + value);
+        return super.put(rowKey, columnKey, get(rowKey, columnKey) + value);
+    }
+
+
+    @Override
+    public Integer get(Object rowKey, Object columnKey) {
+        if (!contains(rowKey, columnKey)) {
+            return 0; // helper to not return null value
+        }
+        return super.get(rowKey, columnKey);
+    }
+
+
+    /*
+     * returns the counters that can still be removed from game entity
+     */
+    public Map<CounterType, Integer> filterToRemove(GameEntity ge) {
+        Map<CounterType, Integer> result = Maps.newHashMap();
+        if (!containsRow(ge)) {
+            result.putAll(ge.getCounters());
+            return result;
+        }
+        Map<CounterType, Integer> alreadyRemoved = row(ge);
+        for (Map.Entry<CounterType, Integer> e : ge.getCounters().entrySet()) {
+            Integer rest = e.getValue() - (alreadyRemoved.containsKey(e.getKey()) ? alreadyRemoved.get(e.getKey()) : 0);
+            if (rest > 0) {
+                result.put(e.getKey(), rest);
+            }
+        }
+        return result;
     }
 
     public Map<GameEntity, Integer> filterTable(CounterType type, String valid, Card host, SpellAbility sa) {
         Map<GameEntity, Integer> result = Maps.newHashMap();
 
         for (Map.Entry<GameEntity, Integer> e : column(type).entrySet()) {
-            if (e.getKey().isValid(valid, host.getController(), host, sa)) {
+            if (e.getValue() > 0 && e.getKey().isValid(valid, host.getController(), host, sa)) {
                 result.put(e.getKey(), e.getValue());
             }
         }

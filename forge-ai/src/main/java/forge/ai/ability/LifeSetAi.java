@@ -16,8 +16,6 @@ public class LifeSetAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        // Ability_Cost abCost = sa.getPayCosts();
-        final Card source = sa.getHostCard();
         final int myLife = ai.getLife();
         final Player opponent = ai.getWeakestOpponent();
         final int hlife = opponent.getLife();
@@ -42,10 +40,10 @@ public class LifeSetAi extends SpellAbilityAi {
         // would be paid
         int amount;
         // we shouldn't have to worry too much about PayX for SetLife
-        if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
+        if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(xPay));
+            sa.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
         } else {
             amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
@@ -114,10 +112,10 @@ public class LifeSetAi extends SpellAbilityAi {
         final String amountStr = sa.getParam("LifeAmount");
 
         int amount;
-        if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
+        if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(xPay));
+            sa.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
         } else {
             amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);

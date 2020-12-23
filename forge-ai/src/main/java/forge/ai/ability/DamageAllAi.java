@@ -83,7 +83,7 @@ public class  DamageAllAi extends SpellAbilityAi {
 
             if (best_x > 0) {
                 if (sa.getSVar(damage).equals("Count$xPaid")) {
-                    source.setSVar("PayX", Integer.toString(best_x));
+                    sa.setSVar("PayX", Integer.toString(best_x));
                 }
                 if (damage.equals("ChosenX")) {
                     source.setSVar("ChosenX", "Number$" + best_x);
@@ -203,7 +203,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(dmg));
+            sa.setSVar("PayX", Integer.toString(dmg));
         }
 
         if (sa.hasParam("ValidPlayers")) {
@@ -285,7 +285,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(dmg));
+            sa.setSVar("PayX", Integer.toString(dmg));
         }
 
         if (sa.hasParam("ValidPlayers")) {

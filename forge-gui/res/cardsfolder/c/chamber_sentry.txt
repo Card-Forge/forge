@@ -4,7 +4,7 @@ Types:Artifact Creature Construct
 PT:0/0
 K:etbCounter:P1P1:Y:no Condition:CARDNAME enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.
 SVar:Y:Count$Converge
-A:AB$ DealDamage | Announce$ X | Cost$ X T SubCounter<X/P1P1> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | AILogic$ XCountersDamage | SpellDescription$ CARDNAME deals X damage to any target.
+A:AB$ DealDamage | Cost$ X T SubCounter<X/P1P1> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to any target.
 SVar:X:Count$xPaid
 A:AB$ ChangeZone | Cost$ W U B R G | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
 SVar:DiscardMe:1

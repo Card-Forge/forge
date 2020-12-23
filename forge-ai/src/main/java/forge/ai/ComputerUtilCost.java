@@ -19,6 +19,8 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -53,9 +55,6 @@ public class ComputerUtilCost {
         return true;
     }
 
-    public static boolean checkRemoveCounterCost(final Cost cost, final Card source) {
-    	return checkRemoveCounterCost(cost, source, null);
-    }
     /**
      * Check remove counter cost.
      *
@@ -69,6 +68,7 @@ public class ComputerUtilCost {
         if (cost == null) {
             return true;
         }
+        final AiCostDecision decision = new AiCostDecision(sa.getActivatingPlayer(), sa);
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostRemoveCounter) {
                 final CostRemoveCounter remCounter = (CostRemoveCounter) part;
@@ -88,17 +88,17 @@ public class ComputerUtilCost {
 
                 // Remove X counters - set ChosenX to max possible value here, the SAs should correct that
                 // value later as the AI decides what to do (in checkApiLogic / checkAiLogic)
-                if (sa != null && sa.hasSVar(remCounter.getAmount())) {
+                if (sa.hasSVar(remCounter.getAmount())) {
                     final String sVar = sa.getSVar(remCounter.getAmount());
                     if (sVar.equals("XChoice") && !sa.hasSVar("ChosenX")) {
                         sa.setSVar("ChosenX", String.valueOf(source.getCounters(type)));
+                    } else if (sVar.equals("Count$xPaid") && sa.hasSVar("PayX")) {
+                        sa.setSVar("PayX", Integer.toString(Math.min(Integer.valueOf(sa.getSVar("PayX")), source.getCounters(type))));
                     }
                 }
 
-                // check the sa what the PaymentDecision is.
                 // ignore Loyality abilities with Zero as Cost
-                if (sa != null && !type.is(CounterEnumType.LOYALTY)) {
-                    final AiCostDecision decision = new AiCostDecision(sa.getActivatingPlayer(), sa);
+                if (!type.is(CounterEnumType.LOYALTY)) {
                     PaymentDecision pay = decision.visit(remCounter);
                     if (pay == null || pay.c <= 0) {
                         return false;
@@ -111,14 +111,10 @@ public class ComputerUtilCost {
                     return false;
                 }
             } else if (part instanceof CostRemoveAnyCounter) {
-                if (sa != null) {
-                    final CostRemoveAnyCounter remCounter = (CostRemoveAnyCounter) part;
+                final CostRemoveAnyCounter remCounter = (CostRemoveAnyCounter) part;
 
-                    PaymentDecision decision = new AiCostDecision(sa.getActivatingPlayer(), sa).visit(remCounter);
-                    return decision != null;
-                }
-
-                return false;
+                PaymentDecision pay = decision.visit(remCounter);
+                return pay != null;
             }
         }
         return true;
@@ -676,5 +672,27 @@ public class ComputerUtilCost {
             }
         }
         return false;
+    }
+
+    public static int getMaxXValue(SpellAbility sa, Player ai) {
+        final Cost abCost = sa.getPayCosts();
+        if (abCost == null || !abCost.hasXInAnyCostPart()) {
+            return 0;
+        }
+
+        Integer val = null;
+
+        if (sa.costHasManaX()) {
+            val = ComputerUtilMana.determineLeftoverMana(sa, ai);
+        }
+
+        if (sa.usesTargeting()) {
+            // if announce is used as min targets, check what the max possible number would be
+            if ("X".equals(sa.getTargetRestrictions().getMinTargets())) {
+                val = ObjectUtils.min(val, CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa).size());
+            }
+        }
+
+        return ObjectUtils.defaultIfNull(ObjectUtils.min(val, abCost.getMaxForNonManaX(sa, ai)), 0);
     }
 }

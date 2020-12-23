@@ -161,8 +161,6 @@ public class ComputerUtil {
 
         // Play higher costing spells first?
         final Cost cost = sa.getPayCosts();
-        // Convert cost to CMC
-        // String totalMana = source.getSVar("PayX"); // + cost.getCMC()
 
         // Consider the costs here for relative "scoring"
         if (hasDiscardHandCost(cost)) {
@@ -2809,7 +2807,17 @@ public class ComputerUtil {
     }
 
     // this countertypes has no effect
-    public static boolean isUselessCounter(CounterType type) {
+    public static boolean isUselessCounter(CounterType type, Card c) {
+
+        // Quest counter on a card without MaxQuestEffect are useless
+        if (type.is(CounterEnumType.QUEST)) {
+            int e = 0;
+            if ( c.hasSVar("MaxQuestEffect")) {
+                e = Integer.parseInt(c.getSVar("MaxQuestEffect"));
+            }
+            return c.getCounters(type) > e;
+        }
+
         return type.is(CounterEnumType.AWAKENING) || type.is(CounterEnumType.MANIFESTATION) || type.is(CounterEnumType.PETRIFICATION)
                 || type.is(CounterEnumType.TRAINING);
     }

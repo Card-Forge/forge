@@ -1360,7 +1360,7 @@ public class CardProperty {
             }
         } else if (property.startsWith("hasXCost")) {
             SpellAbility sa1 = card.getFirstSpellAbility();
-            if (sa1 != null && !sa1.isXCost()) {
+            if (sa1 != null && !sa1.costHasManaX()) {
                 return false;
             }
         } else if (property.startsWith("suspended")) {

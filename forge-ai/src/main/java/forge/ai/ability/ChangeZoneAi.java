@@ -339,10 +339,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         String type = sa.getParam("ChangeType");
         if (type != null) {
-            if (type.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+            if (type.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
                 final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-                source.setSVar("PayX", Integer.toString(xPay));
+                sa.setSVar("PayX", Integer.toString(xPay));
                 type = type.replace("X", Integer.toString(xPay));
             }
         }
@@ -384,11 +384,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             String num = sa.getParam("ChangeNum");
             if (num != null) {
-                if (num.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+                if (num.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
                     // Set PayX here to maximum value.
                     int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
                     xPay = Math.min(xPay, list.size());
-                    source.setSVar("PayX", Integer.toString(xPay));
+                    sa.setSVar("PayX", Integer.toString(xPay));
                 }
             }
 
@@ -474,8 +474,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // Fetching should occur fairly often as it helps cast more spells, and
         // have access to more mana
 
-        final Card source = sa.getHostCard();
-
         if (sa.hasParam("AILogic")) {
             if (sa.getParam("AILogic").equals("Never")) {
                 /*
@@ -496,10 +494,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // this works for hidden because the mana is paid first.
         final String type = sa.getParam("ChangeType");
-        if (type != null && type.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (type != null && type.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(xPay));
+            sa.setSVar("PayX", Integer.toString(xPay));
         }
 
         Iterable<Player> pDefined;
@@ -1830,7 +1828,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
                 int toPay = 0;
                 boolean setPayX = false;
-                if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {
+                if (unlessCost.equals("X") && sa.getSVar(unlessCost).equals("Count$xPaid")) {
                     setPayX = true;
                     toPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 } else {
@@ -1846,7 +1844,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
 
                 if (setPayX) {
-                    source.setSVar("PayX", Integer.toString(toPay));
+                    sa.setSVar("PayX", Integer.toString(toPay));
                 }
             }
         }

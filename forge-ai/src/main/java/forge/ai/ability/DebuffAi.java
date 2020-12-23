@@ -50,7 +50,7 @@ public class DebuffAi extends SpellAbilityAi {
             return false;
         }
 
-        if (!ComputerUtilCost.checkRemoveCounterCost(cost, source)) {
+        if (!ComputerUtilCost.checkRemoveCounterCost(cost, source, sa)) {
             return false;
         }
 
@@ -67,7 +67,7 @@ public class DebuffAi extends SpellAbilityAi {
             }
         }
 
-        if (!sa.usesTargeting() || !sa.getTargetRestrictions().doesTarget()) {
+        if (!sa.usesTargeting()) {
             List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
 
 
@@ -93,7 +93,7 @@ public class DebuffAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
+        if (!sa.usesTargeting()) {
             // TODO - copied from AF_Pump.pumpDrawbackAI() - what should be
             // here?
         } else {

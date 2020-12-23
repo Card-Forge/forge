@@ -49,7 +49,6 @@ public class TargetRestrictions {
     // Target Choices (which is specific for the StackInstance)
 
     // What this Object is restricted to targeting
-    private boolean tgtValid = false;
     private String[] originalValidTgts,
         validTgts;
     private String uiPrompt = "";
@@ -93,7 +92,6 @@ public class TargetRestrictions {
      *            a {@link forge.game.spellability.TargetRestrictions} object.
      */
     public TargetRestrictions(final TargetRestrictions target) {
-        this.tgtValid = true;
         this.uiPrompt = target.getVTSelection();
         this.originalValidTgts = target.getValidTgts();
         this.validTgts = this.originalValidTgts.clone();
@@ -129,7 +127,6 @@ public class TargetRestrictions {
      *            a {@link java.lang.String} object.
      */
     public TargetRestrictions(final String prompt, final String[] valid, final String min, final String max) {
-        this.tgtValid = true;
         this.uiPrompt = prompt;
         this.originalValidTgts = valid;
         this.validTgts = this.originalValidTgts.clone();
@@ -174,17 +171,6 @@ public class TargetRestrictions {
 
     /**
      * <p>
-     * doesTarget.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean doesTarget() {
-        return this.tgtValid;
-    }
-
-    /**
-     * <p>
      * getValidTgts.
      * </p>
      * 
@@ -210,7 +196,7 @@ public class TargetRestrictions {
      *
      * @return the min targets
      */
-    private final String getMinTargets() {
+    public final String getMinTargets() {
         return this.minTargets;
     }
 
@@ -219,7 +205,7 @@ public class TargetRestrictions {
      *
      * @return the max targets
      */
-    private final String getMaxTargets() {
+    public final String getMaxTargets() {
         return this.maxTargets;
     }
 
@@ -278,8 +264,7 @@ public class TargetRestrictions {
      * @return a boolean.
      */
     public final boolean isMaxTargetsChosen(final Card c, final SpellAbility sa) {
-        TargetChoices choice = sa.getTargets();
-        return this.getMaxTargets(c, sa) == choice.size();
+        return this.getMaxTargets(c, sa) == sa.getTargets().size();
     }
 
     /**
@@ -294,11 +279,11 @@ public class TargetRestrictions {
      * @return a boolean.
      */
     public final boolean isMinTargetsChosen(final Card c, final SpellAbility sa) {
-        if (this.getMinTargets(c, sa) == 0) {
+        int min = getMinTargets(c, sa);
+        if (min == 0) {
             return true;
         }
-        TargetChoices choice = sa.getTargets();
-        return this.getMinTargets(c, sa) <= choice.size();
+        return min <= sa.getTargets().size();
     }
 
     /**

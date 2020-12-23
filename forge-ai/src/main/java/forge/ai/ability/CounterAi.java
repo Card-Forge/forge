@@ -103,7 +103,7 @@ public class CounterAi extends SpellAbilityAi {
 
             int toPay = 0;
             boolean setPayX = false;
-            if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {
+            if (unlessCost.equals("X") && sa.getSVar(unlessCost).equals("Count$xPaid")) {
                 setPayX = true;
                 toPay = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), usableManaSources + 1);
             } else {
@@ -123,7 +123,7 @@ public class CounterAi extends SpellAbilityAi {
             }
 
             if (setPayX) {
-                source.setSVar("PayX", Integer.toString(toPay));
+                sa.setSVar("PayX", Integer.toString(toPay));
             }
         }
 
@@ -267,7 +267,7 @@ public class CounterAi extends SpellAbilityAi {
 
                 int toPay = 0;
                 boolean setPayX = false;
-                if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {
+                if (unlessCost.equals("X") && sa.getSVar(unlessCost).equals("Count$xPaid")) {
                     setPayX = true;
                     toPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 } else {
@@ -289,7 +289,7 @@ public class CounterAi extends SpellAbilityAi {
                 }
 
                 if (setPayX) {
-                    source.setSVar("PayX", Integer.toString(toPay));
+                    sa.setSVar("PayX", Integer.toString(toPay));
                 }
             }
         }

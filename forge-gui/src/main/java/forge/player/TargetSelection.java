@@ -71,11 +71,10 @@ public class TargetSelection {
     }
 
     public final boolean chooseTargets(Integer numTargets) {
-        final TargetRestrictions tgt = getTgt();
-        final boolean canTarget = tgt != null && tgt.doesTarget();
-        if (!canTarget) {
+        if (!ability.usesTargeting()) {
             throw new RuntimeException("TargetSelection.chooseTargets called for ability that does not target - " + ability);
         }
+        final TargetRestrictions tgt = getTgt();
 
         // Number of targets is explicitly set only if spell is being redirected (ex. Swerve or Redirect)
         final int minTargets = numTargets != null ? numTargets.intValue() : tgt.getMinTargets(ability.getHostCard(), ability);

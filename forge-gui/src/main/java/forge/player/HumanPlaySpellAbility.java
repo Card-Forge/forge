@@ -29,7 +29,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardPlayOption;
 import forge.game.cost.Cost;
-import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.cost.CostPayment;
 import forge.game.keyword.KeywordInterface;
@@ -256,16 +255,7 @@ public class HumanPlaySpellAbility {
         }
 
         if (needX && manaCost != null) {
-            boolean xInCost = manaCost.getAmountOfX() > 0;
-            if (!xInCost) {
-                for (final CostPart part : cost.getCostParts()) {
-                    if (part.getAmount().equals("X")) {
-                        xInCost = true;
-                        break;
-                    }
-                }
-            }
-            if (xInCost) {
+            if (cost.hasXInAnyCostPart()) {
                 final String sVar = ability.getSVar("X"); //only prompt for new X value if card doesn't determine it another way
                 if ("Count$xPaid".equals(sVar) || sVar.isEmpty()) {
                     final Integer value = controller.announceRequirements(ability, "X", allowZero && manaCost.canXbe0());

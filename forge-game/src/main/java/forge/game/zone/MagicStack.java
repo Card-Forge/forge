@@ -41,7 +41,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardUtil;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventCardStatsChanged;
@@ -593,7 +592,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         if (current != null) {
                             invalidTarget = current.getTimestamp() != card.getTimestamp();
                         }
-                        invalidTarget |= !(CardFactoryUtil.isTargetStillValid(sa, card));
+                        invalidTarget |= !sa.canTarget(card);
                     } else {
                         if (o instanceof SpellAbility) {
                             SpellAbilityStackInstance si = getInstanceFromSpellAbility((SpellAbility)o);
@@ -621,7 +620,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
         else if (sa.getTargetCard() != null) {
-            fizzle = !CardFactoryUtil.isTargetStillValid(sa, sa.getTargetCard());
+            fizzle = !sa.canTarget(sa.getTargetCard());
         }
         else {
             // Set fizzle to the same as the parent if there's no target info
