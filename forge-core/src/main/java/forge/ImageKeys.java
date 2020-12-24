@@ -167,8 +167,12 @@ public final class ImageKeys {
             file = findFile(dir, setlessFilename);
             if (file != null) { return file; }
 
-            // try lowering the art index to the minimum for regular cards
             if (setlessFilename.contains(".full")) {
+            	//try fullborder
+                String fullborderFile = TextUtil.fastReplace(setlessFilename, ".full", ".fullborder");
+                file = findFile(dir, fullborderFile);
+                if (file != null) { return file; }
+                // try lowering the art index to the minimum for regular cards
                 file = findFile(dir, setlessFilename.replaceAll("[0-9]*[.]full", "1.full"));
                 if (file != null) { return file; }
             }
