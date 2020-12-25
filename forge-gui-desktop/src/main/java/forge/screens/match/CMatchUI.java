@@ -793,9 +793,11 @@ public final class CMatchUI
         initHandViews();
         SLayoutIO.loadLayout(null);
         view.populate();
-        for (final VHand h : getHandViews()) {
-            h.getLayoutControl().updateHand();
+        final PlayerZoneUpdates zones = new PlayerZoneUpdates();
+        for (final PlayerView p : sortedPlayers) {
+        	zones.add(new PlayerZoneUpdate(p, ZoneType.Hand));
         }
+        updateZones(zones);
     }
 
     @Override

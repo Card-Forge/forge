@@ -439,10 +439,10 @@ public class Game {
     }
 
     public synchronized void setGameOver(GameEndReason reason) {
-        age = GameStage.GameOver;
         for (Player p : allPlayers) {
             p.clearController();
         }
+        age = GameStage.GameOver;
 
         for (Player p : getPlayers()) {
             p.onGameOver();
