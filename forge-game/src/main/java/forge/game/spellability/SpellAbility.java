@@ -1391,7 +1391,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return false;
         }
 
-        return getTargets().size() < getTargetRestrictions().getMaxTargets(hostCard, this);
+        return getTargets().size() < getMaxTargets();
     }
 
     public boolean isZeroTargets() {
@@ -1405,6 +1405,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return getTargetRestrictions().isMaxTargetsChosen(hostCard, this);
     }
 
+    public int getMinTargets() {
+        return getTargetRestrictions().getMinTargets(getHostCard(), this);
+    }
+
+    public int getMaxTargets() {
+        return getTargetRestrictions().getMaxTargets(getHostCard(), this);
+    }
+
     public boolean isTargetNumberValid() {
         if (!this.usesTargeting()) {
             return getTargets().isEmpty();
@@ -1413,7 +1421,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (!isMinTargetChosen()) {
             return false;
         }
-        int maxTargets = getTargetRestrictions().getMaxTargets(hostCard, this);
+        int maxTargets = getMaxTargets();
 
         if (maxTargets == 0 && getPayCosts().hasSpecificCostType(CostRemoveCounter.class)
                 && hasSVar(getParam("TargetMax"))

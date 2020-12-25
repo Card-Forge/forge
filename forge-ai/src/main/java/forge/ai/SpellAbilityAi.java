@@ -78,10 +78,14 @@ public abstract class SpellAbilityAi {
             }
         }
 
+        if (!checkApiLogic(ai, sa)) {
+            return false;
+        }
+        // needs to be after API logic because needs to check possible X Cost?
         if (cost != null && !willPayCosts(ai, sa, cost, source)) {
             return false;
         }
-        return checkApiLogic(ai, sa);
+        return true;
     }
 
     protected boolean checkConditions(final Player ai, final SpellAbility sa, SpellAbilityCondition con) {
