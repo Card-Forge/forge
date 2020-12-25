@@ -2574,6 +2574,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         final PlayerController oldController = getController();
 
         controlledBy.remove(timestamp);
+        getView().updateMindSlaveMaster(this);
+        
         if (event) {
             game.fireEvent(new GameEventPlayerControl(this, oldLobbyPlayer, oldController, getLobbyPlayer(), getController()));
         }
@@ -2581,8 +2583,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public void clearController() {
         controlledBy.clear();
+        game.fireEvent(new GameEventPlayerControl(this, null, null, getLobbyPlayer(), getController()));
     }
-
 
     public Map.Entry<Long, Player> getControlledWhileSearching() {
         if (controlledWhileSearching.isEmpty()) {
