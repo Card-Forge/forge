@@ -3,7 +3,6 @@ package forge.game.cost;
 import forge.game.GameEntityCounterTable;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CounterType;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
