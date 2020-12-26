@@ -1,6 +1,10 @@
 package forge.ai;
 
+import java.util.List;
+
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 import forge.ai.ability.TokenAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -12,8 +16,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
-import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
 /*
@@ -31,60 +33,83 @@ public class SpecialAiLogic {
         Card source = sa.getHostCard();
         Game game = source.getGame();
         PhaseHandler ph = game.getPhaseHandler();
-        TargetRestrictions tgt = sa.getTargetRestrictions();
+        boolean isDestroy = ApiType.Destroy.equals(sa.getApi());
+        SpellAbility tokenSA = sa.findSubAbilityByType(ApiType.Token);
+        if (tokenSA == null) {
+            // Used wrong AI logic?
+            return false;
+        }
 
-        CardCollection listOpp = CardLists.getValidCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, source, sa);
-        listOpp = CardLists.getTargetableCards(listOpp, sa);
+        List<Card> targetable = CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa);
 
-        Card choice = ComputerUtilCard.getMostExpensivePermanentAI(listOpp);
+        CardCollection listOpp = CardLists.filterControlledBy(targetable, ai.getOpponents());
+        if (isDestroy) {
+            listOpp = CardLists.getNotKeyword(listOpp, Keyword.INDESTRUCTIBLE);
+            // TODO add handling for cards like targeting dies
+        }
 
-        final Card token = choice != null ? TokenAi.spawnToken(choice.getController(), sa.getSubAbility()) : null;
-        if (token == null || !token.isCreature() || token.getNetToughness() < 1) {
-            return true;    // becomes Terminate
-        } else if (choice != null && choice.isPlaneswalker()) {
-            if (choice.getCurrentLoyalty() * 35 > ComputerUtilCard.evaluateCreature(token)) {
-                sa.resetTargets();
-                sa.getTargets().add(choice);
-                return true;
-            } else {
-                return false;
+        Card choice = null;
+        if (!listOpp.isEmpty()) {
+            choice = ComputerUtilCard.getMostExpensivePermanentAI(listOpp);
+            // can choice even be null?
+
+            if (choice != null) {
+                final Card token = TokenAi.spawnToken(choice.getController(), tokenSA);
+                if (!token.isCreature() || token.getNetToughness() < 1) {
+                    sa.resetTargets();
+                    sa.getTargets().add(choice);
+                    return true;
+                }
+                if (choice.isPlaneswalker()) {
+                    if (choice.getCurrentLoyalty() * 35 > ComputerUtilCard.evaluateCreature(token)) {
+                        sa.resetTargets();
+                        sa.getTargets().add(choice);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                if ((!choice.isCreature() || choice.isTapped()) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) && ph.isPlayerTurn(ai) // prevent surprise combatant
+                        || ComputerUtilCard.evaluateCreature(choice) < 1.5 * ComputerUtilCard.evaluateCreature(token)) {
+                    choice = null;
+                }
             }
-        } else {
-            boolean hasOppTarget = true;
-            if (choice != null
-                    && ((!choice.isCreature() || choice.isTapped()) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) && ph.getPlayerTurn() == ai) // prevent surprise combatant
-                    || ComputerUtilCard.evaluateCreature(choice) < 1.5 * ComputerUtilCard.evaluateCreature(token)) {
+        }
 
-                hasOppTarget = false;
+        // See if we have anything we can upgrade
+        if (choice == null) {
+            CardCollection listOwn = CardLists.filterControlledBy(targetable, ai);
+            final Card token = TokenAi.spawnToken(ai, tokenSA);
+
+            Card bestOwnCardToUpgrade = null;
+            if (isDestroy) {
+                // just choose any Indestructible
+                // TODO maybe filter something that doesn't like to be targeted, or does something benefit by targeting
+                bestOwnCardToUpgrade = Iterables.getFirst(CardLists.getKeyword(listOwn, Keyword.INDESTRUCTIBLE), null);
             }
-
-            // See if we have anything we can upgrade
-            if (!hasOppTarget) {
-                CardCollection listOwn = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, source, sa);
-                listOwn = CardLists.getTargetableCards(listOwn, sa);
-
-                Card bestOwnCardToUpgrade = ComputerUtilCard.getWorstCreatureAI(CardLists.filter(listOwn, new Predicate<Card>() {
+            if (bestOwnCardToUpgrade == null) {
+                bestOwnCardToUpgrade = ComputerUtilCard.getWorstCreatureAI(CardLists.filter(listOwn, new Predicate<Card>() {
                     @Override
                     public boolean apply(Card card) {
                         return card.isCreature() && (ComputerUtilCard.isUselessCreature(ai, card)
                                 || ComputerUtilCard.evaluateCreature(token) > 2 * ComputerUtilCard.evaluateCreature(card));
                     }
                 }));
-                if (bestOwnCardToUpgrade != null) {
-                    if (ComputerUtilCard.isUselessCreature(ai, bestOwnCardToUpgrade) || (ph.getPhase().isAfter(PhaseType.COMBAT_END) || ph.getPlayerTurn() != ai)) {
-                        sa.resetTargets();
-                        sa.getTargets().add(bestOwnCardToUpgrade);
-                        return true;
-                    }
-                }
-            } else {
-                sa.resetTargets();
-                sa.getTargets().add(choice);
-                return true;
             }
-
-            return hasOppTarget;
+            if (bestOwnCardToUpgrade != null) {
+                if (ComputerUtilCard.isUselessCreature(ai, bestOwnCardToUpgrade) || (ph.getPhase().isAfter(PhaseType.COMBAT_END) || !ph.isPlayerTurn(ai))) {
+                    choice = bestOwnCardToUpgrade;
+                }
+            }
         }
+
+        if (choice != null) {
+            sa.resetTargets();
+            sa.getTargets().add(choice);
+            return true;
+        }
+
+        return false;
     }
 
     // A logic for cards that say "Sacrifice a creature: CARDNAME gets +X/+X until EOT"
