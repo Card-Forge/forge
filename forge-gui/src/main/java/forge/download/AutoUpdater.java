@@ -79,7 +79,7 @@ public class AutoUpdater {
             String message = localizer.getMessage("lblYouHaventSetUpdateChannel");
             List<String> options = ImmutableList.of("Cancel", "release", "snapshot");
             int option = SOptionPane.showOptionDialog(message, localizer.getMessage("lblManualCheck"), null, options, 0);
-            if (option == 0) {
+            if (option < 1) {
                 return false;
             } else {
                 updateChannel = options.get(option);
