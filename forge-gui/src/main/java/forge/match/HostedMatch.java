@@ -138,8 +138,7 @@ public class HostedMatch {
 
     public void restartMatch() {
         endCurrentGame();
-        this.match = new Match(match.getRules(), match.getPlayers(), this.title);
-        startGame();
+        startMatch(match.getRules(), null, match.getPlayers(), this.guis);
     }
 
     public void startGame() {
