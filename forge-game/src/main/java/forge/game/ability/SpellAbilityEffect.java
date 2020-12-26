@@ -86,15 +86,12 @@ public abstract class SpellAbilityEffect {
         if (stackDesc != null) {
             // by typing "SpellDescription" they want to bypass the Effect's string builder
             if ("SpellDescription".equalsIgnoreCase(stackDesc)) {
-                if (params.get("SpellDescription") != null) {
-                    String currentName = (sa.getHostCard().getName());
-                    String desc1 = TextUtil.fastReplace(params.get("SpellDescription"), "CARDNAME", currentName);
-                    String desc = TextUtil.fastReplace(desc1, "NICKNAME", currentName.split(",")[0]);
-                    sb.append(desc);
-                    }
-                    if (sa.getTargets() != null && !sa.getTargets().isEmpty()) {
-                        sb.append(" (Targeting: ").append(sa.getTargets()).append(")");
-                    }
+            	if (params.get("SpellDescription") != null) {
+            		sb.append(params.get("SpellDescription"));
+            	}
+            	if (sa.getTargets() != null && !sa.getTargets().isEmpty()) {
+            		sb.append(" (Targeting: ").append(sa.getTargets()).append(")");
+            	}
             } else if (!"None".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
                 makeSpellDescription(sa, sb, stackDesc);
             }
@@ -129,7 +126,10 @@ public abstract class SpellAbilityEffect {
             }
         }
 
-        return sb.toString();
+        String currentName = (sa.getHostCard().getName());
+        String substitutedDesc = TextUtil.fastReplace(sb.toString(), "CARDNAME", currentName);
+        substitutedDesc = TextUtil.fastReplace(substitutedDesc, "NICKNAME", currentName.split(",")[0]);
+        return substitutedDesc;
     }
 
     /**
@@ -155,13 +155,7 @@ public abstract class SpellAbilityEffect {
             if ("{".equals(t)) { isPlainText = false; continue; }
             if ("}".equals(t)) { isPlainText = true; continue; }
 
-            if (isPlainText) {
-                if (t.startsWith("NICKNAME")) {
-                    sb.append(TextUtil.fastReplace(t,"NICKNAME", sa.getHostCard().getName().split(",")[0]));
-                } else {
-                    sb.append(TextUtil.fastReplace(t, "CARDNAME", sa.getHostCard().getName()));
-                }
-            } else {
+            if (!isPlainText) {
                 final List<? extends GameObject> objs;
                 if (t.startsWith("p:")) {
                     objs = AbilityUtils.getDefinedPlayers(sa.getHostCard(), t.substring(2), sa);
