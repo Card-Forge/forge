@@ -286,7 +286,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (defender != null && assignDamageAsIfNotBlocked(attacker)) {
             map.put(null, damageDealt);
         } else {
-            if ((attacker.hasKeyword(Keyword.TRAMPLE) && defender != null) || (blockers.size() > 1)) {
+            if ((attacker.hasKeyword(Keyword.TRAMPLE) && defender != null) || (blockers.size() > 1)
+                    || (attacker.hasKeyword("You may assign CARDNAME's combat damage divided as you choose among defending" +
+                    " player and/or any number of creatures they control.")) && overrideOrder && blockers.size() >0) {
                 GameEntityViewMap<Card, CardView> gameCacheBlockers = GameEntityView.getMap(blockers);
                 final CardView vAttacker = CardView.get(attacker);
                 final GameEntityView vDefender = GameEntityView.get(defender);

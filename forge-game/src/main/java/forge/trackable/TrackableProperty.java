@@ -100,6 +100,7 @@ public enum TrackableProperty {
     HasDeathtouch(TrackableTypes.BooleanType),
     HasDevoid(TrackableTypes.BooleanType),
     HasDefender(TrackableTypes.BooleanType),
+    HasDivideDamage(TrackableTypes.BooleanType),
     HasDoubleStrike(TrackableTypes.BooleanType),
     HasFirstStrike(TrackableTypes.BooleanType),
     HasFlying(TrackableTypes.BooleanType),
