@@ -78,16 +78,14 @@ public abstract class SpellAbilityAi {
             }
         }
 
-        if (sa.hasParam("AITgtBeforeCostEval")) {
-            // Cost payment requires a valid target to be specified, e.g. Quillmane Baku, so run the API logic first
-            // to set the target, then decide on paying costs (slower, so only use for cards where it matters)
-            return checkApiLogic(ai, sa) && (cost == null || willPayCosts(ai, sa, cost, source));
+        if (!checkApiLogic(ai, sa)) {
+            return false;
         }
-
+        // needs to be after API logic because needs to check possible X Cost?
         if (cost != null && !willPayCosts(ai, sa, cost, source)) {
             return false;
         }
-        return checkApiLogic(ai, sa);
+        return true;
     }
 
     protected boolean checkConditions(final Player ai, final SpellAbility sa, SpellAbilityCondition con) {

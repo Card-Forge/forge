@@ -875,7 +875,7 @@ public class SpecialCardAi {
                 tokenSize = 11;
             }
 
-            source.setSVar("PayX", Integer.toString(tokenSize));
+            sa.setSVar("PayX", Integer.toString(tokenSize));
 
             return true;
         }

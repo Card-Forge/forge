@@ -80,7 +80,7 @@ public class ManifestAi extends SpellAbilityAi {
             // Handle either Manifest X cards, or Manifest 1 card and give it X P1P1s
             // Set PayX here to maximum value.
             int x = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(x));
+            sa.setSVar("PayX", Integer.toString(x));
             if (x <= 0) {
                 return false;
             }

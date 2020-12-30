@@ -445,6 +445,7 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void afterGameEnd() {
+        super.afterGameEnd();
         Forge.back();
         //view = null;
     }

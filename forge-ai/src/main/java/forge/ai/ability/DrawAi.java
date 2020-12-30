@@ -238,17 +238,17 @@ public class DrawAi extends SpellAbilityAi {
         boolean xPaid = false;
         final String num = sa.getParam("NumCards");
         if (num != null && num.equals("X")) {
-            if (source.getSVar(num).equals("Count$xPaid")) {
+            if (sa.getSVar(num).equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                if (drawback && !source.getSVar("PayX").equals("")) {
-                    numCards = Integer.parseInt(source.getSVar("PayX"));
+                if (drawback && !sa.getSVar("PayX").equals("")) {
+                    numCards = Integer.parseInt(sa.getSVar("PayX"));
                 } else {
                     numCards = ComputerUtilMana.determineLeftoverMana(sa, ai);
                     // try not to overdraw
                     int safeDraw = Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3);
                     if (sa.getHostCard().isInstant() || sa.getHostCard().isSorcery()) { safeDraw++; } // card will be spent
                     numCards = Math.min(numCards, safeDraw);
-                    source.setSVar("PayX", Integer.toString(numCards));
+                    sa.setSVar("PayX", Integer.toString(numCards));
                     assumeSafeX = true;
                 }
                 xPaid = true;
@@ -340,7 +340,7 @@ public class DrawAi extends SpellAbilityAi {
                         // for drawing and losing life
                         if (numCards >= oppA.getLife()) {
                             if (xPaid) {
-                                source.setSVar("PayX", Integer.toString(oppA.getLife()));
+                                sa.setSVar("PayX", Integer.toString(oppA.getLife()));
                             }
                             sa.getTargets().add(oppA);
                             return true;
@@ -400,7 +400,7 @@ public class DrawAi extends SpellAbilityAi {
                 }
 
                 if (xPaid) {
-                    source.setSVar("PayX", Integer.toString(numCards));
+                    sa.setSVar("PayX", Integer.toString(numCards));
                 }
             }
 
@@ -411,7 +411,7 @@ public class DrawAi extends SpellAbilityAi {
                         if (sa.getHostCard().isInZone(ZoneType.Hand)) {
                             numCards++; // the card will be spent
                         }
-                        source.setSVar("PayX", Integer.toString(numCards));
+                        sa.setSVar("PayX", Integer.toString(numCards));
                     } else {
                         // Don't draw too many cards and then risk discarding
                         // cards at EOT

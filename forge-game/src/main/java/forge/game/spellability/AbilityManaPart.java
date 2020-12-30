@@ -348,7 +348,7 @@ public class AbilityManaPart implements java.io.Serializable {
             }
 
             if (restriction.startsWith("CostContainsX")) {
-                if (sa.isXCost()) {
+                if (sa.costHasManaX()) {
                     return true;
                 }
                 continue;

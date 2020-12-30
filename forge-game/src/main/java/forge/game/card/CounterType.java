@@ -45,6 +45,9 @@ public class CounterType implements Comparable<CounterType>, Serializable {
     }
 
     public static CounterType getType(String name) {
+        if ("Any".equalsIgnoreCase(name)) {
+            return null;
+        }
         try {
             return get(CounterEnumType.getType(name));
         } catch (final IllegalArgumentException ex) {

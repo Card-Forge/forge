@@ -311,7 +311,7 @@ public class PlayerView extends GameEntityView {
         return getKeywords().contains(keyword);
     }
     void updateKeywords(Player p) {
-        set(TrackableProperty.Keywords, ImmutableMultiset.copyOf(p.getKeywords()));
+        set(TrackableProperty.Keywords, ImmutableMultiset.copyOf(p.getKeywords().asStringList()));
     }
 
     public List<CardView> getCommanders() {

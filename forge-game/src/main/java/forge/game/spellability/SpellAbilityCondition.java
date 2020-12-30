@@ -24,7 +24,6 @@ import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.phase.PhaseHandler;
@@ -271,7 +270,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (this.isAllTargetsLegal()) {
             for (Card c : sa.getTargets().getTargetCards()) {
-                if (!CardFactoryUtil.isTargetStillValid(sa, c)) {
+                if (!sa.canTarget(c)) {
                     return false;
                 }
             }

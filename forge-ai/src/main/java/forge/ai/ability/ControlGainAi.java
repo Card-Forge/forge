@@ -280,7 +280,7 @@ public class ControlGainAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, final Player ai) {
         final Game game = ai.getGame();
-        if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
+        if (!sa.usesTargeting()) {
             if (sa.hasParam("AllValid")) {
                 CardCollectionView tgtCards = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
                 tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("AllValid"), sa);

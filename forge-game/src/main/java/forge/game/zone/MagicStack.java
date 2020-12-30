@@ -41,7 +41,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardUtil;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventCardStatsChanged;
@@ -273,11 +272,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             frozenStack.push(si);
             return;
         }
-        int totManaSpent = sp.getPayingMana().size();
 
         if (sp instanceof AbilityStatic) {
-            // TODO: make working triggered ability
-            sp.setTotalManaSpent(totManaSpent);
             AbilityUtils.resolve(sp);
             // AbilityStatic should do nothing below
             return;
@@ -289,8 +285,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // The ability is added to stack HERE
             si = push(sp);
         }
-
-        sp.setTotalManaSpent(totManaSpent);
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -593,7 +587,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         if (current != null) {
                             invalidTarget = current.getTimestamp() != card.getTimestamp();
                         }
-                        invalidTarget |= !(CardFactoryUtil.isTargetStillValid(sa, card));
+                        invalidTarget |= !sa.canTarget(card);
                     } else {
                         if (o instanceof SpellAbility) {
                             SpellAbilityStackInstance si = getInstanceFromSpellAbility((SpellAbility)o);
@@ -621,7 +615,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
         else if (sa.getTargetCard() != null) {
-            fizzle = !CardFactoryUtil.isTargetStillValid(sa, sa.getTargetCard());
+            fizzle = !sa.canTarget(sa.getTargetCard());
         }
         else {
             // Set fizzle to the same as the parent if there's no target info

@@ -793,9 +793,11 @@ public final class CMatchUI
         initHandViews();
         SLayoutIO.loadLayout(null);
         view.populate();
-        for (final VHand h : getHandViews()) {
-            h.getLayoutControl().updateHand();
+        final PlayerZoneUpdates zones = new PlayerZoneUpdates();
+        for (final PlayerView p : sortedPlayers) {
+        	zones.add(new PlayerZoneUpdate(p, ZoneType.Hand));
         }
+        updateZones(zones);
     }
 
     @Override
@@ -1025,6 +1027,7 @@ public final class CMatchUI
 
     @Override
     public void afterGameEnd() {
+        super.afterGameEnd();
         Singletons.getView().getLpnDocument().remove(targetingOverlay.getPanel());
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override public void run() {

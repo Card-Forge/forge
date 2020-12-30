@@ -13,7 +13,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 public class DestroyAi extends SpellAbilityAi {
@@ -23,89 +22,19 @@ public class DestroyAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean canPlayAI(final Player ai, SpellAbility sa) {
-        // AI needs to be expanded, since this function can be pretty complex
-        // based on what the expected targets could be
-        final Cost abCost = sa.getPayCosts();
-        final TargetRestrictions abTgt = sa.getTargetRestrictions();
+    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         final Card source = sa.getHostCard();
-        final boolean noRegen = sa.hasParam("NoRegen");
-        final String logic = sa.getParam("AILogic");
-        boolean hasXCost = false;
-
-        CardCollection list;
-
-        if (abCost != null) {
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
-                return false;
-            }
-
-            hasXCost = abCost.getCostMana() != null && abCost.getCostMana().getAmountOfX() > 0;
-        }
-
-        if ("AtOpponentsCombatOrAfter".equals(sa.getParam("AILogic"))) {
-            PhaseHandler ph = ai.getGame().getPhaseHandler();
-            if (ph.getPlayerTurn() == ai || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-                return false;
-            }
-        } else if ("AtEOT".equals(sa.getParam("AILogic"))) {
-            PhaseHandler ph = ai.getGame().getPhaseHandler();
-            if (!ph.is(PhaseType.END_OF_TURN)) {
-                return false;
-            }
-        } else if ("AtEOTIfNotAttacking".equals(sa.getParam("AILogic"))) {
-            PhaseHandler ph = ai.getGame().getPhaseHandler();
-            if (!ph.is(PhaseType.END_OF_TURN) || !ai.getCreaturesAttackedThisTurn().isEmpty()) {
-                return false;
-            }
-        }
-
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;
-        }
-
-        // Ability that's intended to destroy own useless token to trigger Grave Pacts
-        // should be fired at end of turn or when under attack after blocking to make opponent sac something
-        boolean havepact = false;
-
-        // TODO replace it with look for a dies -> sacrifice trigger check
-        havepact |= ai.isCardInPlay("Grave Pact");
-        havepact |= ai.isCardInPlay("Butcher of Malakir");
-        havepact |= ai.isCardInPlay("Dictate of Erebos");
-        if ("Pactivator".equals(logic) && havepact) {
-            if ((!ai.getGame().getPhaseHandler().isPlayerTurn(ai))
-                    && ((ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)) || (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)))
-                    && (ai.getOpponents().getCreaturesInPlay().size() > 0)) {
-                ai.getController().chooseTargetsFor(sa);
-                return true;
-            }
-        }
-
-        // Targeting
-        if (abTgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
-            if (sa.hasParam("TargetingPlayer")) {
-                Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
-                sa.setTargetingPlayer(targetingPlayer);
-                return targetingPlayer.getController().chooseTargetsFor(sa);
-            }
-            if ("MadSarkhanDragon".equals(logic)) {
+            if ("MadSarkhanDragon".equals(aiLogic)) {
                 return SpecialCardAi.SarkhanTheMad.considerMakeDragon(ai, sa);
-            } else if (logic != null && logic.startsWith("MinLoyalty.")) {
-                int minLoyalty = Integer.parseInt(logic.substring(logic.indexOf(".") + 1));
+            } else if (aiLogic.startsWith("MinLoyalty.")) {
+                int minLoyalty = Integer.parseInt(aiLogic.substring(aiLogic.indexOf(".") + 1));
                 if (source.getCounters(CounterEnumType.LOYALTY) < minLoyalty) {
                     return false;
                 }
-            } else if ("Polymorph".equals(logic)) {
-                list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
+            } else if ("Polymorph".equals(aiLogic)) {
+                CardCollection list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
                 if (list.isEmpty()) {
                     return false;
                 }
@@ -124,7 +53,108 @@ public class DestroyAi extends SpellAbilityAi {
                 }
                 sa.getTargets().add(worst);
                 return true;
+            } else if ("Pongify".equals(aiLogic)) {
+                return SpecialAiLogic.doPongifyLogic(ai, sa);
             }
+        }
+        return super.checkAiLogic(ai, sa, aiLogic);
+    }
+
+    protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph,
+            final String logic) {
+        if ("AtOpponentsCombatOrAfter".equals(logic)) {
+            if (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                return false;
+            }
+        } else if ("AtEOT".equals(logic)) {
+            if (!ph.is(PhaseType.END_OF_TURN)) {
+                return false;
+            }
+        } else if ("AtEOTIfNotAttacking".equals(logic)) {
+            if (!ph.is(PhaseType.END_OF_TURN) || !ai.getCreaturesAttackedThisTurn().isEmpty()) {
+                return false;
+            }
+        } else if ("Pactivator".equals(logic)) {
+            // Ability that's intended to destroy own useless token to trigger Grave Pacts
+            // should be fired at end of turn or when under attack after blocking to make opponent sac something
+            boolean havepact = false;
+
+            // TODO replace it with look for a dies -> sacrifice trigger check
+            havepact |= ai.isCardInPlay("Grave Pact");
+            havepact |= ai.isCardInPlay("Butcher of Malakir");
+            havepact |= ai.isCardInPlay("Dictate of Erebos");
+            if (havepact) {
+                if ((!ph.isPlayerTurn(ai))
+                        && ((ph.is(PhaseType.END_OF_TURN)) || (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)))
+                        && (ai.getOpponents().getCreaturesInPlay().size() > 0)) {
+                    CardCollection list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
+                    Card worst = ComputerUtilCard.getWorstAI(list);
+                    if (worst != null) {
+                        sa.getTargets().add(worst);
+                        return true;
+                    }
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+        final Card source = sa.getHostCard();
+        final boolean noRegen = sa.hasParam("NoRegen");
+        final String logic = sa.getParam("AILogic");
+
+        CardCollection list;
+
+
+
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return false;
+        }
+
+
+        // Targeting
+        if (sa.usesTargeting()) {
+            // Assume there where already enough targets chosen by AI Logic Above
+            if (!sa.canAddMoreTarget() && sa.isTargetNumberValid()) {
+                return true;
+            }
+
+            // reset targets before AI Logic part
+            sa.resetTargets();
+            int maxTargets;
+
+            if (sa.costHasManaX()) {
+                // TODO: currently the AI will maximize mana spent on X, trying to maximize damage. This may need improvement.
+                maxTargets = ComputerUtilCost.getMaxXValue(sa, ai);
+                // need to set XPaid to get the right number for
+                sa.setXManaCostPaid(maxTargets);
+                // need to check for maxTargets
+                maxTargets = Math.min(maxTargets, sa.getMaxTargets());
+            } else {
+                maxTargets = sa.getMaxTargets();
+            }
+            if (sa.hasParam("AIMaxTgtsCount")) {
+                // Cards that have confusing costs for the AI (e.g. Eliminate the Competition) can have forced max target constraints specified
+                // TODO: is there a better way to predict things like "sac X" costs without needing a special AI variable?
+                maxTargets = Math.min(CardFactoryUtil.xCount(sa.getHostCard(), "Count$" + sa.getParam("AIMaxTgtsCount")), maxTargets);
+            }
+
+            if (maxTargets == 0) {
+                // can't afford X or otherwise target anything
+                return false;
+            }
+
+            if (sa.hasParam("TargetingPlayer")) {
+                Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
+                sa.setTargetingPlayer(targetingPlayer);
+                return targetingPlayer.getController().chooseTargetsFor(sa);
+            }
+
+            // AI doesn't destroy own cards if it isn't defined in AI logic
             list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
             if ("FatalPush".equals(logic)) {
                 final int cmcMax = ai.hasRevolt() ? 4 : 2;
@@ -184,33 +214,12 @@ public class DestroyAi extends SpellAbilityAi {
                 return false;
             }
 
-            int maxTargets = abTgt.getMaxTargets(sa.getHostCard(), sa);
-
-            if (hasXCost) {
-                // TODO: currently the AI will maximize mana spent on X, trying to maximize damage. This may need improvement.
-                maxTargets = Math.min(ComputerUtilMana.determineMaxAffordableX(ai, sa), abTgt.getMaxTargets(sa.getHostCard(), sa));
-                // X can't be more than the lands we have in our hand for "discard X lands"!
-                if ("ScorchedEarth".equals(logic)) {
-                    int lands = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS).size();
-                    maxTargets = Math.min(maxTargets, lands);
-                }
-            }
-            if (sa.hasParam("AIMaxTgtsCount")) {
-                // Cards that have confusing costs for the AI (e.g. Eliminate the Competition) can have forced max target constraints specified
-                // TODO: is there a better way to predict things like "sac X" costs without needing a special AI variable?
-                maxTargets = Math.min(CardFactoryUtil.xCount(sa.getHostCard(), "Count$" + sa.getParam("AIMaxTgtsCount")), maxTargets);
-            }
-
-            if (maxTargets == 0) {
-                // can't afford X or otherwise target anything
-                return false;
-            }
 
             // target loop
+            // TODO use can add more Targets
             while (sa.getTargets().size() < maxTargets) {
                 if (list.isEmpty()) {
-                    if ((sa.getTargets().size() < abTgt.getMinTargets(sa.getHostCard(), sa))
-                        || (sa.getTargets().size() == 0)) {
+                    if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -222,10 +231,6 @@ public class DestroyAi extends SpellAbilityAi {
                 Card choice = null;
                 // If the targets are only of one type, take the best
                 if (CardLists.getNotType(list, "Creature").isEmpty()) {
-                    if ("Pongify".equals(logic)) {
-                        return SpecialAiLogic.doPongifyLogic(ai, sa);
-                    }
-
                     choice = ComputerUtilCard.getBestCreatureAI(list);
                     if ("OppDestroyYours".equals(logic)) {
                         Card aiBest = ComputerUtilCard.getBestCreatureAI(ai.getCreaturesInPlay());
@@ -246,15 +251,14 @@ public class DestroyAi extends SpellAbilityAi {
                     choice = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
                 }
                 //option to hold removal instead only applies for single targeted removal
-                if (!sa.isTrigger() && abTgt.getMaxTargets(sa.getHostCard(), sa) == 1) {
+                if (!sa.isTrigger() && sa.getMaxTargets() == 1) {
                     if (choice == null || !ComputerUtilCard.useRemovalNow(sa, choice, 0, ZoneType.Graveyard)) {
                         return false;
                     }
                 }
 
                 if (choice == null) { // can't find anything left
-                    if ((sa.getTargets().size() < abTgt.getMinTargets(sa.getHostCard(), sa))
-                        || (sa.getTargets().size() == 0)) {
+                    if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -298,21 +302,18 @@ public class DestroyAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getHostCard();
         final boolean noRegen = sa.hasParam("NoRegen");
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
 
             CardCollection list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
-            list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
+
+            if (list.isEmpty() || list.size() < sa.getMinTargets()) {
+                return false;
+            }
 
             // Try to avoid targeting creatures that are dead on board
             list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list, sa);
-
-            if (list.isEmpty() || list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
-                return false;
-            }
 
             CardCollection preferred = CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE);
             preferred = CardLists.filterControlledBy(preferred, ai.getOpponents());
@@ -344,10 +345,9 @@ public class DestroyAi extends SpellAbilityAi {
             	return false;
             }
 
-            while (sa.getTargets().size() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
+            while (sa.canAddMoreTarget()) {
                 if (preferred.isEmpty()) {
-                    if (sa.getTargets().size() == 0
-                            || sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+                    if (!sa.isMinTargetChosen()) {
                         if (!mandatory) {
                             sa.resetTargets();
                             return false;
@@ -371,7 +371,7 @@ public class DestroyAi extends SpellAbilityAi {
                 }
             }
 
-            while (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+            while (sa.canAddMoreTarget()) {
                 if (list.isEmpty()) {
                     break;
                 } else {
@@ -392,7 +392,7 @@ public class DestroyAi extends SpellAbilityAi {
                 }
             }
 
-            return sa.getTargets().size() >= tgt.getMinTargets(sa.getHostCard(), sa);
+            return sa.isTargetNumberValid();
         } else {
             return mandatory;
         }

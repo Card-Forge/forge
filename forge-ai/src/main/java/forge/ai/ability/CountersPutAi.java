@@ -338,7 +338,7 @@ public class CountersPutAi extends SpellAbilityAi {
         }
 
         if (amountStr.equals("X")) {
-            if (source.getSVar(amountStr).equals("Count$xPaid")) {
+            if (sa.getSVar(amountStr).equals("Count$xPaid")) {
                 // By default, set PayX here to maximum value (used for most SAs of this type).
                 amount = ComputerUtilMana.determineLeftoverMana(sa, ai);
 
@@ -359,7 +359,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     }
                 }
 
-                source.setSVar("PayX", Integer.toString(amount));
+                sa.setSVar("PayX", Integer.toString(amount));
             } else if ("ExiledCreatureFromGraveCMC".equals(logic)) {
                 // e.g. Necropolis
                 amount = Aggregates.max(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES), CardPredicates.Accessors.fnGetCmc);
@@ -698,8 +698,8 @@ public class CountersPutAi extends SpellAbilityAi {
             list = new CardCollection(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
 
             if (amountStr.equals("X")
-                    && !source.hasSVar("PayX") /* SubAbility on something that already had set PayX, e.g. Endless One ETB counters */
-                    && ((sa.hasParam(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) || source.getSVar(amountStr).equals("Count$xPaid") )) {
+                    && !sa.hasSVar("PayX") /* SubAbility on something that already had set PayX, e.g. Endless One ETB counters */
+                    && ((sa.hasParam(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")))) {
 
                 // detect if there's more than one X in the cost (Hangarback Walker, Walking Ballista, etc.)
                 SpellAbility testSa = sa;
@@ -725,7 +725,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 // Account for the multiple X in cost
                 if (countX > 1) { payX /= countX; }
 
-                source.setSVar("PayX", Integer.toString(payX));
+                sa.setSVar("PayX", Integer.toString(payX));
             }
 
             if (!mandatory) {
@@ -1031,7 +1031,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
             } else {
                 for (CounterType type : options) {
-                    if (!ComputerUtil.isNegativeCounter(type, c) && !ComputerUtil.isUselessCounter(type)) {
+                    if (!ComputerUtil.isNegativeCounter(type, c) && !ComputerUtil.isUselessCounter(type, c)) {
                         return type;
                     }
                 }

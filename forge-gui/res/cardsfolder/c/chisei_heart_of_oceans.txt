@@ -4,8 +4,8 @@ Types:Legendary Creature Spirit
 PT:4/4
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you remove a counter from a permanent you control.
-SVar:TrigSac:DB$ Sacrifice | Defined$ Self | UnlessPayer$ You | UnlessCost$ RemoveAnyCounter<1/Permanent.YouCtrl/a permanent you control>
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self | UnlessPayer$ You | UnlessCost$ RemoveAnyCounter<1/Any/Permanent.YouCtrl/a permanent you control>
 DeckNeeds:Ability$Counters
 SVar:NeedsToPlay:Creature.YouCtrl+HasCounters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chisei_heart_of_oceans.jpg
+SVar:AIRemoveCounterCostPriority:ANY
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Chisei, Heart of Oceans unless you remove a counter from a permanent you control.

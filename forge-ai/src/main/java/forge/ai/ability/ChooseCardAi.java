@@ -130,6 +130,12 @@ public class ChooseCardAi extends SpellAbilityAi {
 
             return (ComputerUtilCard.evaluateCreatureList(aiCreatures) + minGain) < ComputerUtilCard
                     .evaluateCreatureList(oppCreatures);
+        } else if (aiLogic.equals("OwnCard")) {
+            CardCollectionView ownChoices = CardLists.filter(choices, CardPredicates.isController(ai));
+            if (ownChoices.isEmpty()) {
+                ownChoices = CardLists.filter(choices, CardPredicates.isControlledByAnyOf(ai.getAllies()));
+            }
+            return !ownChoices.isEmpty();
         }
         return true;
     }
@@ -156,6 +162,12 @@ public class ChooseCardAi extends SpellAbilityAi {
             choice = ComputerUtilCard.getBestAI(options);
         } else if ("WorstCard".equals(logic)) {
             choice = ComputerUtilCard.getWorstAI(options);
+        } else if ("OwnCard".equals(logic)) {
+            CardCollectionView ownChoices = CardLists.filter(options, CardPredicates.isController(ai));
+            if (ownChoices.isEmpty()) {
+                ownChoices = CardLists.filter(options, CardPredicates.isControlledByAnyOf(ai.getAllies()));
+            }
+            choice = ComputerUtilCard.getBestAI(ownChoices);
         } else if (logic.equals("BestBlocker")) {
             if (!CardLists.filter(options, Presets.UNTAPPED).isEmpty()) {
                 options = CardLists.filter(options, Presets.UNTAPPED);

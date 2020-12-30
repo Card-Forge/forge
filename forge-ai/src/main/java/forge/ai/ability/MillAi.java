@@ -75,7 +75,6 @@ public class MillAi extends SpellAbilityAi {
          * - check for Laboratory Maniac effect (needs to check for actual
          * effect due to possibility of "lose abilities" effect)
          */
-        final Card source = sa.getHostCard();
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;   // prevents mill 0 infinite loop?
         }
@@ -90,10 +89,10 @@ public class MillAi extends SpellAbilityAi {
         }
 
         if ((sa.getParam("NumCards").equals("X") || sa.getParam("NumCards").equals("Z"))
-                && source.getSVar("X").startsWith("Count$xPaid")) {
+                && sa.getSVar("X").startsWith("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int cardsToDiscard = getNumToDiscard(ai, sa);
-            source.setSVar("PayX", Integer.toString(cardsToDiscard));
+            sa.setSVar("PayX", Integer.toString(cardsToDiscard));
             return cardsToDiscard > 0;
         }
         return true;
@@ -182,11 +181,10 @@ public class MillAi extends SpellAbilityAi {
             return false;
         }
 
-        final Card source = sa.getHostCard();
-        if (sa.getParam("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (sa.getParam("NumCards").equals("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int cardsToDiscard = getNumToDiscard(aiPlayer, sa);
-            source.setSVar("PayX", Integer.toString(cardsToDiscard));
+            sa.setSVar("PayX", Integer.toString(cardsToDiscard));
         }
 
         return true;

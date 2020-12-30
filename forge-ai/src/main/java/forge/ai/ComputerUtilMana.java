@@ -4,7 +4,6 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
 import forge.ai.ability.AnimateAi;
-import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -117,10 +116,6 @@ public class ComputerUtilMana {
         }
 
         return score;
-    }
-
-    private static void sortManaAbilities(final Multimap<ManaCostShard, SpellAbility> manaAbilityMap) {
-        sortManaAbilities(manaAbilityMap, null);
     }
 
     private static void sortManaAbilities(final Multimap<ManaCostShard, SpellAbility> manaAbilityMap, final SpellAbility sa) {
@@ -1194,11 +1189,11 @@ public class ComputerUtilMana {
             } else {
                 // For Count$xPaid set PayX in the AFs then use that here
                 // Else calculate it as appropriate.
-                final String xSvar = card.getSVar("X").startsWith("Count$xPaid") ? "PayX" : "X";
-                if (!sa.getSVar(xSvar).isEmpty() || card.hasSVar(xSvar) || card.getState(CardStateName.Original).hasSVar(xSvar)) {
-                    if (xSvar.equals("PayX") && (card.hasSVar(xSvar) || card.getState(CardStateName.Original).hasSVar(xSvar))) {
+                final String xSvar = sa.getSVar("X").startsWith("Count$xPaid") ? "PayX" : "X";
+                if (sa.hasSVar(xSvar)) {
+                    if (xSvar.equals("PayX")) {
                          // X SVar may end up being an empty string when copying a spell with no cost (e.g. Jhoira Avatar)
-                        String xValue = card.hasSVar(xSvar) ? card.getSVar(xSvar) : card.getState(CardStateName.Original).getSVar(xSvar);
+                        String xValue = sa.getSVar(xSvar);
                         manaToAdd = xValue.isEmpty() ? 0 : Integer.parseInt(xValue) * cost.getXcounter(); // X
                     } else {
                         manaToAdd = AbilityUtils.calculateAmount(card, xSvar, sa) * cost.getXcounter();
@@ -1206,9 +1201,7 @@ public class ComputerUtilMana {
                 }
             }
 
-            String manaXColor = sa.getParam("XColor");
-            ManaCostShard shardToGrow = ManaCostShard.parseNonGeneric(manaXColor == null ? "1" : manaXColor);
-            cost.increaseShard(shardToGrow, manaToAdd);
+            cost.increaseShard(ManaCostShard.parseNonGeneric(sa.getParamOrDefault("XColor", "1")), manaToAdd);
 
             if (!test) {
                 sa.setXManaCostPaid(manaToAdd / cost.getXcounter());

@@ -286,7 +286,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (defender != null && assignDamageAsIfNotBlocked(attacker)) {
             map.put(null, damageDealt);
         } else {
-            if ((attacker.hasKeyword(Keyword.TRAMPLE) && defender != null) || (blockers.size() > 1)) {
+            if ((attacker.hasKeyword(Keyword.TRAMPLE) && defender != null) || (blockers.size() > 1)
+                    || (attacker.hasKeyword("You may assign CARDNAME's combat damage divided as you choose among defending" +
+                    " player and/or any number of creatures they control.")) && overrideOrder && blockers.size() >0) {
                 GameEntityViewMap<Card, CardView> gameCacheBlockers = GameEntityView.getMap(blockers);
                 final CardView vAttacker = CardView.get(attacker);
                 final GameEntityView vDefender = GameEntityView.get(defender);
@@ -321,8 +323,27 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public Integer announceRequirements(final SpellAbility ability, final String announce,
             final boolean canChooseZero) {
         final int min = canChooseZero ? 0 : 1;
-        final int max = ability.hasParam("XMaxLimit") ? AbilityUtils.calculateAmount(ability.getHostCard(),
-                ability.getParam("XMaxLimit"), ability) : Integer.MAX_VALUE;
+        int max = Integer.MAX_VALUE;
+
+        if ("X".equals(announce)) {
+            Cost cost = ability.getPayCosts();
+            if (ability.hasParam("XMaxLimit")) {
+                max = Math.min(max, AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("XMaxLimit"), ability));
+            }
+            if (cost != null) {
+                Integer costX = cost.getMaxForNonManaX(ability, player);
+                if (costX != null) {
+                    max = Math.min(max, min);
+                }
+            }
+        }
+
+        if (ability.usesTargeting()) {
+            // if announce is used as min targets, check what the max possible number would be
+            if (announce.equals(ability.getTargetRestrictions().getMinTargets())) {
+                max = Math.min(max, CardUtil.getValidCardsToTarget(ability.getTargetRestrictions(), ability).size());
+            }
+        }
         return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announce,
                 CardTranslation.getTranslatedName(ability.getHostCard().getName())) , min, max, min + 9);
     }
@@ -2515,6 +2536,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                 // Human player is choosing targets for an ability
                                 // controlled by chosen player.
                                 sa.setActivatingPlayer(p);
+                                sa.setSVar("IsCastFromPlayEffect", "True");
                                 HumanPlay.playSaWithoutPayingManaCost(PlayerControllerHuman.this, getGame(), sa, true);
                             }
                             // playSa could fire some triggers

@@ -1,7 +1,6 @@
 Name:Maze of Ith
 ManaCost:no cost
 Types:Land
-A:AB$ Pump | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | KW$ Prevent all combat damage that would be dealt to and dealt by CARDNAME. | SubAbility$ DBUntap | IsCurse$ True | SpellDescription$ Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
-SVar:DBUntap:DB$Untap | Defined$ Targeted
-SVar:Picture:http://www.wizards.com/global/images/magic/general/maze_of_ith.jpg
+A:AB$ Untap | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ DBPump | IsCurse$ True | StackDescription$ Untap {c:Targeted}. | SpellDescription$ Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Prevent all combat damage that would be dealt to and dealt by CARDNAME. | StackDescription$ Prevent all combat damage that would be dealt to and dealt by that creature this turn.
 Oracle:{T}: Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.

@@ -1,0 +1,48 @@
+[metadata]
+Code=KHM
+Date=2021-02-05
+Name=Kaldheim
+Type=Expansion
+
+[cards]
+15 M Halvar, God of Battle
+142 R Magda, Brazen Outlaw
+188 R Realmwalker
+218 M Kaya the Inexorable
+228 R Sarulf, Realm Eater
+229 R Showdown of the Skalds
+241 R Pyre of Heroes
+251 R Barkchannel Pathway
+252 R Blightstep Pathway
+254 R Darkbore Pathway
+260 R Hengegate Pathway
+288 M Kaya the Inexorable
+290 R Barkchannel Pathway
+291 R Blightstep Pathway
+292 R Darkbore Pathway
+293 R Hengegate Pathway
+299 M Halvar, God of Battle
+312 R Magda, Brazen Outlaw
+330 R Sarulf, Realm Eater
+370 R Pyre of Heroes
+374 R Valkyrie Harbinger
+375 R Surtland Elementalist
+376 R Cleaving Reaper
+377 R Surtland Flinger
+378 R Canopy Tactician
+379 U Armed and Armored
+380 U Starnhiem Aspirant
+381 U Warchanter Skald
+382 U Youthful Valyrie
+383 U Absorb Identity
+384 U Giant's Grasp
+385 U Elderfang Ritualist
+386 U Renegade Reaper
+387 U Thornmantle Striker
+388 U Bearded Axe
+389 U Fire Giant's Fury
+390 U Gilded Assault Cart
+391 U Elven Ambush
+392 U Gladewalker Ritualist
+393 U Rampage of the Valkyries
+399 R Realmwalker

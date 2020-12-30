@@ -1,5 +1,5 @@
 Name:Bell Borca, Spectral Sergeant
-ManaCost:2 B R
+ManaCost:2 R W
 Types:Legendary Creature Spirit Soldier
 PT:*/5
 Text:Note the converted mana cost of each card as it's put into exile.

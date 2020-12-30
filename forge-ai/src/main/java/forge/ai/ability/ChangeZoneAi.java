@@ -339,10 +339,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         String type = sa.getParam("ChangeType");
         if (type != null) {
-            if (type.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+            if (type.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
                 final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-                source.setSVar("PayX", Integer.toString(xPay));
+                sa.setSVar("PayX", Integer.toString(xPay));
                 type = type.replace("X", Integer.toString(xPay));
             }
         }
@@ -384,11 +384,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             String num = sa.getParam("ChangeNum");
             if (num != null) {
-                if (num.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+                if (num.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
                     // Set PayX here to maximum value.
                     int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
                     xPay = Math.min(xPay, list.size());
-                    source.setSVar("PayX", Integer.toString(xPay));
+                    sa.setSVar("PayX", Integer.toString(xPay));
                 }
             }
 
@@ -474,8 +474,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // Fetching should occur fairly often as it helps cast more spells, and
         // have access to more mana
 
-        final Card source = sa.getHostCard();
-
         if (sa.hasParam("AILogic")) {
             if (sa.getParam("AILogic").equals("Never")) {
                 /*
@@ -496,10 +494,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // this works for hidden because the mana is paid first.
         final String type = sa.getParam("ChangeType");
-        if (type != null && type.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (type != null && type.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(xPay));
+            sa.setSVar("PayX", Integer.toString(xPay));
         }
 
         Iterable<Player> pDefined;
@@ -1353,29 +1351,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final Card source = sa.getHostCard();
-        final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source, sa);
+        CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), ai, source, sa);
+        list = CardLists.getTargetableCards(list, sa);
 
-        // Narrow down the list:
-        if (origin.equals(ZoneType.Battlefield)) {
-            // filter out untargetables
-            list = CardLists.getTargetableCards(list, sa);
-
-            // if Destination is hand, either bounce opponents dangerous stuff
-            // or save my about to die stuff
-
-            // if Destination is exile, filter out my cards
-        }
-        else if (origin.equals(ZoneType.Graveyard)) {
-            // Retrieve from Graveyard to:
-        }
-
-        for (final Card c : sa.getTargets().getTargetCards()) {
-            list.remove(c);
-        }
+        list.removeAll(sa.getTargets().getTargetCards());
 
         if (list.isEmpty()) {
             return false;
@@ -1387,12 +1369,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
             Card choice = null;
 
             if (!list.isEmpty()) {
-                if (ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false).isCreature()
-                        && (destination.equals(ZoneType.Battlefield) || origin.equals(ZoneType.Battlefield))) {
+                Card mostExpensivePermanent = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false);
+                if (mostExpensivePermanent.isCreature()
+                        && (destination.equals(ZoneType.Battlefield) || tgt.getZone().contains(ZoneType.Battlefield))) {
                     // if a creature is most expensive take the best
                     choice = ComputerUtilCard.getBestCreatureToBounceAI(list);
-                } else if (destination.equals(ZoneType.Battlefield) || origin.equals(ZoneType.Battlefield)) {
-                    choice = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false);
+                } else if (destination.equals(ZoneType.Battlefield) || tgt.getZone().contains(ZoneType.Battlefield)) {
+                    choice = mostExpensivePermanent;
                 } else if (destination.equals(ZoneType.Hand) || destination.equals(ZoneType.Library)) {
                     List<Card> nonLands = CardLists.getNotType(list, "Land");
                     // Prefer to pull a creature, generally more useful for AI.
@@ -1845,7 +1828,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
                 int toPay = 0;
                 boolean setPayX = false;
-                if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {
+                if (unlessCost.equals("X") && sa.getSVar(unlessCost).equals("Count$xPaid")) {
                     setPayX = true;
                     toPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 } else {
@@ -1861,7 +1844,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
 
                 if (setPayX) {
-                    source.setSVar("PayX", Integer.toString(toPay));
+                    sa.setSVar("PayX", Integer.toString(toPay));
                 }
             }
         }

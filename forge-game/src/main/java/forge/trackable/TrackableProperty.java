@@ -50,6 +50,7 @@ public enum TrackableProperty {
     ChosenType(TrackableTypes.StringType),
     ChosenColors(TrackableTypes.StringListType),
     ChosenCards(TrackableTypes.CardViewCollectionType),
+    ChosenNumber(TrackableTypes.StringType),
     ChosenPlayer(TrackableTypes.PlayerViewType),
     ChosenDirection(TrackableTypes.EnumType(Direction.class)),
     ChosenEvenOdd(TrackableTypes.EnumType(EvenOdd.class)),
@@ -99,6 +100,7 @@ public enum TrackableProperty {
     HasDeathtouch(TrackableTypes.BooleanType),
     HasDevoid(TrackableTypes.BooleanType),
     HasDefender(TrackableTypes.BooleanType),
+    HasDivideDamage(TrackableTypes.BooleanType),
     HasDoubleStrike(TrackableTypes.BooleanType),
     HasFirstStrike(TrackableTypes.BooleanType),
     HasFlying(TrackableTypes.BooleanType),
@@ -114,6 +116,7 @@ public enum TrackableProperty {
     HasShroud(TrackableTypes.BooleanType),
     HasTrample(TrackableTypes.BooleanType),
     HasVigilance(TrackableTypes.BooleanType),
+    HasLandwalk(TrackableTypes.BooleanType),
     //protectionkey
     ProtectionKey(TrackableTypes.StringType),
     //hexproofkey

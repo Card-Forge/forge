@@ -392,11 +392,18 @@ public class CardFactory {
         }
 
         // SpellPermanent only for Original State
-        if (c.getCurrentStateName() == CardStateName.Original) {
+        if (c.getCurrentStateName() == CardStateName.Original || c.getCurrentStateName() == CardStateName.Modal) {
             // this is the "default" spell for permanents like creatures and artifacts
             if (c.isPermanent() && !c.isAura() && !c.isLand()) {
-                c.addSpellAbility(new SpellPermanent(c));
+                SpellAbility sa = new SpellPermanent(c);
+
+                // Currently only for Modal, might react different when state is always set
+                if (c.getCurrentStateName() == CardStateName.Modal) {
+                    sa.setCardState(c.getCurrentStateName());
+                }
+                c.addSpellAbility(sa);
             }
+            // TODO add LandAbility there when refactor MayPlay
         }
 
         CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
@@ -540,9 +547,6 @@ public class CardFactory {
             to.setActivatingPlayer(p, lki);
         }
 
-        for (String sVar : from.getSVars()) {
-            to.setSVar(sVar, from.getSVar(sVar));
-        }
         //to.changeText();
     }
 

@@ -403,24 +403,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return false;
     }
 
-    public final boolean applyAbility(final String mode, final Card card, final SpellAbility spellAbility, final Player player) {
-
-        // don't apply the ability if it hasn't got the right mode
-        if (!getParam("Mode").equals(mode)) {
-            return false;
-        }
-
-        if (this.isSuppressed() || !this.checkConditions()) {
-            return false;
-        }
-
-        if (mode.equals("CastWithFlash")) {
-            return StaticAbilityCastWithFlash.applyWithFlashAbility(this, spellAbility, card, player);
-        }
-
-        return false;
-    }
-
     public final boolean applyAbility(String mode, Card card, CounterType type) {
 
         // don't apply the ability if it hasn't got the right mode
@@ -582,6 +564,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             if (condition.equals("Ferocious") && !controller.hasFerocious()) return false;
             if (condition.equals("Desert") && !controller.hasDesert()) return false;
             if (condition.equals("Blessing") && !controller.hasBlessing()) return false;
+            if (condition.equals("Monarch") & !controller.isMonarch()) return false;
 
             if (condition.equals("PlayerTurn")) {
                 if (!ph.isPlayerTurn(controller)) {

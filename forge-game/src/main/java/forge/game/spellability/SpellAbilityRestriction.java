@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,6 +24,7 @@ import forge.game.card.*;
 import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.staticability.StaticAbilityCastWithFlash;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -35,7 +36,7 @@ import java.util.Map;
  * <p>
  * SpellAbilityRestriction class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -61,7 +62,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      * <p>
      * setRestrictions.
      * </p>
-     * 
+     *
      * @param params
      *            a {@link java.util.HashMap} object.
      * @since 1.0.15
@@ -321,7 +322,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         String validPlayer = this.getActivator();
         return activator.isValid(validPlayer, c.getController(), c, sa);
     }
-    
+
     public final boolean checkOtherRestrictions(final Card c, final SpellAbility sa, final Player activator) {
         final Game game = activator.getGame();
 
@@ -484,7 +485,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      * <p>
      * canPlay.
      * </p>
-     * 
+     *
      * @param c
      *            a {@link forge.game.card.Card} object.
      * @param sa
@@ -503,6 +504,12 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             System.out.println(c.getName() + " Did not have activator set in SpellAbilityRestriction.canPlay()");
         }
 
+        if (!StaticAbilityCastWithFlash.anyWithFlashNeedsTargeting(sa, c, activator)) {
+            if (!sa.canCastTiming(c, activator)) {
+                return false;
+            }
+        }
+
         if (!sa.hasSVar("IsCastFromPlayEffect")) {
             if (!checkTimingRestrictions(c, sa)) {
                 return false;
@@ -516,7 +523,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (!checkZoneRestrictions(c, sa)) {
             return false;
         }
-        
+
         if (!checkOtherRestrictions(c, sa, activator)) {
             return false;
         }

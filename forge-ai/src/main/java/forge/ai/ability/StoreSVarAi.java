@@ -32,7 +32,7 @@ public class StoreSVarAi extends SpellAbilityAi {
                 // Set PayX here to half the remaining mana to allow for Main 2 and other combat shenanigans.
                 final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai) / 2;
                 if (xPay == 0) { return false; }
-                source.setSVar("PayX", Integer.toString(xPay));
+                sa.setSVar("PayX", Integer.toString(xPay));
             }
 
             final String logic = sa.getParam("AILogic");

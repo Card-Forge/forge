@@ -102,6 +102,7 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("foil19", FSkinImage.FOIL_19);
         MANA_IMAGES.put("foil20", FSkinImage.FOIL_20);
 
+        MANA_IMAGES.put("commander", FSkinImage.IMG_ABILITY_COMMANDER);
 
         MANA_IMAGES.put("deathtouch", FSkinImage.IMG_ABILITY_DEATHTOUCH);
         MANA_IMAGES.put("defender", FSkinImage.IMG_ABILITY_DEFENDER);
@@ -115,6 +116,7 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("horsemanship", FSkinImage.IMG_ABILITY_HORSEMANSHIP);
         MANA_IMAGES.put("indestructible", FSkinImage.IMG_ABILITY_INDESTRUCTIBLE);
         MANA_IMAGES.put("intimidate", FSkinImage.IMG_ABILITY_INTIMIDATE);
+        MANA_IMAGES.put("landwalk", FSkinImage.IMG_ABILITY_LANDWALK);
         MANA_IMAGES.put("lifelink", FSkinImage.IMG_ABILITY_LIFELINK);
         MANA_IMAGES.put("menace", FSkinImage.IMG_ABILITY_MENACE);
         MANA_IMAGES.put("reach", FSkinImage.IMG_ABILITY_REACH);

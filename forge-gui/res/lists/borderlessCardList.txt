@@ -104,6 +104,18 @@ SLD/Oona, Queen of the Fae.fullborder
 SLD/Saskia the Unyielding.fullborder
 SLD/The Mimeoplasm.fullborder
 SLD/Voidslime.fullborder
+SLU/Brightclimb Pathway.fullborder
+SLU/Clearwater Pathway.fullborder
+SLU/Cragcrown Pathway.fullborder
+SLU/Grimclimb Pathway.fullborder
+SLU/Lavaglide Pathway.fullborder
+SLU/Murkwater Pathway.fullborder
+SLU/Needleverge Pathway.fullborder
+SLU/Pillarverge Pathway.fullborder
+SLU/Riverglide Pathway.fullborder
+SLU/Timbercrown Pathway.fullborder
+SLU/Boulderloft Pathway.fullborder
+SLU/Branchloft Pathway.fullborder
 THB/Ashiok, Nightmare Muse2.fullborder
 THB/Calix, Destiny's Hand2.fullborder
 THB/Elspeth, Sun's Nemesis2.fullborder

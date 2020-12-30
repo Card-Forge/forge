@@ -17,6 +17,8 @@
  */
 package forge.game.spellability;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -100,7 +102,9 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             card.setController(activator, 0);
         }
 
-        if (!this.getRestrictions().canPlay(getHostCard(), this)) {
+        card = ObjectUtils.firstNonNull(getAlternateHost(card), card);
+
+        if (!this.getRestrictions().canPlay(card, this)) {
             return false;
         }
 

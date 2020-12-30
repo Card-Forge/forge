@@ -391,7 +391,9 @@ public enum FSkinProp {
     IMG_FAVNONE (new int[] {500, 0, 100, 100}, PropType.FAVICON),
  
     IMG_QUEST_DRAFT_DECK (new int[] {0, 0, 680, 475}, PropType.IMAGE),
-
+    //COMMANDER
+    IMG_ABILITY_COMMANDER      (new int[] {330, 576, 80, 80}, PropType.ABILITY),
+    //Ability Icons
     IMG_ABILITY_DEATHTOUCH     (new int[] {2, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_DEFENDER       (new int[] {84, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_DOUBLE_STRIKE  (new int[] {166, 2, 80, 80}, PropType.ABILITY),
@@ -404,6 +406,7 @@ public enum FSkinProp {
     IMG_ABILITY_HORSEMANSHIP   (new int[] {2, 576, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_INDESTRUCTIBLE (new int[] {2, 84, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_INTIMIDATE     (new int[] {166, 412, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_LANDWALK       (new int[] {248, 576, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_LIFELINK       (new int[] {84, 84, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_MENACE         (new int[] {166, 84, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_REACH          (new int[] {248, 330, 80, 80}, PropType.ABILITY),

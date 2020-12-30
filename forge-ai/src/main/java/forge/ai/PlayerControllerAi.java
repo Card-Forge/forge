@@ -957,9 +957,7 @@ public class PlayerControllerAi extends PlayerController {
         final Ability emptyAbility = new AbilityStatic(source, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
         emptyAbility.setActivatingPlayer(player);
         emptyAbility.setTriggeringObjects(sa.getTriggeringObjects());
-        for (String sVar : sa.getSVars()) {
-            emptyAbility.setSVar(sVar, sa.getSVar(sVar));
-        }
+        emptyAbility.setSVars(sa.getSVars());
         if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers) && ComputerUtilCost.canPayCost(emptyAbility, player)) {
             ComputerUtil.playNoStack(player, emptyAbility, getGame()); // AI needs something to resolve to pay that cost
             return true;
