@@ -61,6 +61,7 @@ public class VAssignCombatDamage extends FDialog {
     private final int totalDamageToAssign;
 
     private boolean attackerHasDeathtouch = false;
+    private boolean attackerHasDivideDamage = false;
     private boolean attackerHasTrample = false;
     private boolean attackerHasInfect = false;
     private boolean overrideCombatantOrder = false;
@@ -102,6 +103,7 @@ public class VAssignCombatDamage extends FDialog {
         totalDamageToAssign = damage0;
         defender = defender0;
         attackerHasDeathtouch = attacker.getCurrentState().hasDeathtouch();
+        attackerHasDivideDamage = attacker.getCurrentState().hasDivideDamage();
         attackerHasInfect = attacker.getCurrentState().hasInfect();
         attackerHasTrample = defender != null && attacker.getCurrentState().hasTrample();
         overrideCombatantOrder = overrideOrder;
@@ -166,7 +168,7 @@ public class VAssignCombatDamage extends FDialog {
                 addDamageTarget(c);
             }
 
-            if (attackerHasTrample) {
+            if (attackerHasTrample || (attackerHasDivideDamage && overrideCombatantOrder)) {
                 //add damage target for target of attack that trample damage will go through to
                 addDamageTarget(null);
             }
@@ -298,8 +300,10 @@ public class VAssignCombatDamage extends FDialog {
 
         // If trying to assign to the defender, follow the normal assignment rules
         // No need to check for "active" creature assignee when overiding combatant order
-        if ((source == null || source == defender || !overrideCombatantOrder) && isAdding && !canAssignTo(source)) {
-            return;
+        if (!attackerHasDivideDamage) { // Creatures with this can assign to defender
+            if ((source == null || source == defender || !overrideCombatantOrder) && isAdding && !canAssignTo(source)) {
+                return;
+            }
         }
 
         // If lethal damage has already been assigned just act like it's 0.
@@ -330,6 +334,9 @@ public class VAssignCombatDamage extends FDialog {
     }
 
     private void checkDamageQueue() {
+        if (overrideCombatantOrder && attackerHasDivideDamage) {
+            return;
+        }
         // Clear out any Damage that shouldn't be assigned to other combatants
         boolean hasAliveEnemy = false;
         for (DamageTarget dt : defenders) {
