@@ -27,7 +27,6 @@ import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -348,22 +347,10 @@ public class TriggerHandler {
         final Map<AbilityKey, Object> runParams = wt.getParams();
         final List<Trigger> triggers = wt.getTriggers() != null ? wt.getTriggers() : activeTriggers;
 
-        Card card = null;
         boolean checkStatics = false;
 
         for (final Trigger t : triggers) {
             if (!t.isStatic() && t.getHostCard().getController().equals(player) && canRunTrigger(t, mode, runParams)) {
-                if (runParams.containsKey(AbilityKey.Card) && runParams.get(AbilityKey.Card) instanceof Card) {
-                    card = (Card) runParams.get(AbilityKey.Card);
-                    if (runParams.containsKey(AbilityKey.Destination)
-                            && !ZoneType.Battlefield.name().equals(runParams.get(AbilityKey.Destination))) {
-                        card = CardUtil.getLKICopy(card);
-                        if (card.isCloned() || !t.isIntrinsic()) {
-                            runParams.put(AbilityKey.Card, card);
-                        }
-                    }
-                }
-
                 int x = 1 + handlePanharmonicon(t, runParams, player);
 
                 for (int i = 0; i < x; ++i) {
@@ -490,27 +477,6 @@ public class TriggerHandler {
 
         SpellAbility sa = null;
         Card host = regtrig.getHostCard();
-        final Card trigCard = (Card) runParams.get(AbilityKey.Card);
-
-        if (trigCard != null && (host.getId() == trigCard.getId())) {
-            host = trigCard;
-        }
-        else {
-            // get CardState does not work for transformed cards
-            // also its about LKI
-            // TODO remove this part after all spellAbility can handle LKI as host
-            // Currently only true for delayed Trigger
-            if (host.isInZone(ZoneType.Battlefield) || !host.hasAlternateState()) {
-                // if host changes Zone with other cards, try to use original host
-                if (!regtrig.getMode().equals(TriggerType.ChangesZone)) {
-                    Card gameHost = game.getCardState(host);
-                    // TODO only set when the host equals the game state
-                    if (gameHost.equalsWithTimestamp(host)) {
-                        host = gameHost;
-                    }
-                }
-            }
-        }
 
         sa = regtrig.getOverridingAbility();
         if (sa == null) {
@@ -536,7 +502,7 @@ public class TriggerHandler {
             }
         } else {
             // need to copy the SA because of TriggeringObjects
-            sa = sa.copy(host, regtrig.getHostCard().getController(), false);
+            sa = sa.copy(host, host.getController(), false);
         }
 
         sa.setLastStateBattlefield(game.getLastStateBattlefield());
