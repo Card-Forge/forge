@@ -56,6 +56,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         // in case the card moved before the delayed trigger can be created, need to check the latest card state for right timestamp
         Card gameCard = game.getCardState(host);
         Card lki = CardUtil.getLKICopy(gameCard);
+        lki.clearControllers();
         lki.setOwner(sa.getActivatingPlayer());
         final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, lki, sa.isIntrinsic());
         delTrig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
