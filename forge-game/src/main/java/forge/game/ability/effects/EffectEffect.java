@@ -24,6 +24,7 @@ import forge.game.zone.ZoneType;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -53,6 +54,7 @@ public class EffectEffect extends SpellAbilityEffect {
         String[] effectReplacementEffects = null;
         FCollection<GameObject> rememberList = null;
         String effectImprinted = null;
+        String noteCounterDefined = null;
         List<Player> effectOwner = null;
         boolean imprintOnHost = false;
 
@@ -99,6 +101,10 @@ public class EffectEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ImprintCards")) {
             effectImprinted = sa.getParam("ImprintCards");
+        }
+
+        if (sa.hasParam("NoteCounterDefined")) {
+            noteCounterDefined = sa.getParam("NoteCounterDefined");
         }
 
         String name = sa.getParam("Name");
@@ -224,6 +230,13 @@ public class EffectEffect extends SpellAbilityEffect {
                 }
             }
 
+            // Note counters on defined
+            if (noteCounterDefined != null) {
+                for (final Card c : AbilityUtils.getDefinedCards(hostCard, noteCounterDefined, sa)) {
+                    noteCounters(c, eff);
+                }
+            }
+
             // Set Chosen Color(s)
             if (hostCard.hasChosenColor()) {
                 eff.setChosenColors(Lists.newArrayList(hostCard.getChosenColors()));
@@ -321,6 +334,14 @@ public class EffectEffect extends SpellAbilityEffect {
             //if (effectTriggers != null) {
             //    game.getTriggerHandler().registerActiveTrigger(cmdEffect, false);
             //}
+        }
+    }
+
+    private void noteCounters(Card notee, Card source) {
+        for(Map.Entry<CounterType, Integer> counter : notee.getCounters().entrySet()) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("NoteCounters").append(counter.getKey().getName());
+            source.setSVar(sb.toString(), counter.getValue().toString());
         }
     }
 
