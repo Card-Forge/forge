@@ -40,6 +40,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -1400,7 +1401,7 @@ public class SpecialCardAi {
             int x = -1, best = 0;
             Card single = null;
             for (int i = 0; i < loyalty; i++) {
-                sa.setSVar("ChosenX", "Number$" + i);
+                sa.setXManaCostPaid(i);
                 oppType = CardLists.filterControlledBy(game.getCardsIn(origin), ai.getOpponents());
                 oppType = AbilityUtils.filterListByType(oppType, sa.getParam("ChangeType"), sa);
                 computerType = AbilityUtils.filterListByType(ai.getCardsIn(origin), sa.getParam("ChangeType"), sa);
@@ -1417,13 +1418,8 @@ public class SpecialCardAi {
             }
             // check if +1 would be sufficient
             if (single != null) {
-                SpellAbility ugin_burn = null;
-                for (final SpellAbility s : source.getSpellAbilities()) {
-                    if (s.getApi() == ApiType.DealDamage) {
-                        ugin_burn = s;
-                        break;
-                    }
-                }
+                // TODO use better logic to find the right Deal Damage Effect?
+                SpellAbility ugin_burn = Iterables.find(source.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.DealDamage), null);
                 if (ugin_burn != null) {
                     // basic logic copied from DamageDealAi::dealDamageChooseTgtC
                     if (ugin_burn.canTarget(single)) {
@@ -1434,17 +1430,18 @@ public class SpecialCardAi {
                         if (can_kill) {
                             return false;
                         }
-                    }
-                    // simple check to burn player instead of exiling planeswalker
-                    if (single.isPlaneswalker() && single.getCurrentLoyalty() <= 3) {
-                        return false;
+                        // simple check to burn player instead of exiling planeswalker
+                        if (single.isPlaneswalker() && single.getCurrentLoyalty() <= 3) {
+                            return false;
+                        }
                     }
                 }
             }
              if (x == -1) {
                 return false;
             }
-            sa.setSVar("ChosenX", "Number$" + x);
+            sa.setXManaCostPaid(x);
+            sa.setSVar("PayX", String.valueOf(x));
             return true;
         }
     }

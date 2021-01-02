@@ -1,7 +1,7 @@
 Name:Channeled Force
 ManaCost:2 U R
 Types:Instant
-A:SP$ Draw | Cost$ 2 U R Discard<X/Card/card> | CostDesc$ As an additional cost to cast this spell, discard X cards. | NumCards$ ChosenX | ValidTgts$ Player | TgtPrompt$ Choose a player | References$ X | SubAbility$ DBDamage | SpellDescription$ Target player draws X cards. CARDNAME deals X damage to up to one target creature or planeswalker.
-SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature or planeswalker. | NumDmg$ ChosenX | References$ X
-SVar:X:XChoice
+A:SP$ Draw | Cost$ 2 U R Discard<X/Card/card> | CostDesc$ As an additional cost to cast this spell, discard X cards. | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | References$ X | SubAbility$ DBDamage | SpellDescription$ Target player draws X cards. CARDNAME deals X damage to up to one target creature or planeswalker.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature or planeswalker. | NumDmg$ X | References$ X
+SVar:X:Count$xPaid
 Oracle:As an additional cost to cast this spell, discard X cards.\nTarget player draws X cards. Channeled Force deals X damage to up to one target creature or planeswalker.

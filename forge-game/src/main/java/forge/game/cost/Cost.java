@@ -124,7 +124,7 @@ public class Cost implements Serializable {
         Collections.sort(this.costParts, new Comparator<CostPart>() {
             @Override
             public int compare(CostPart o1, CostPart o2) {
-                return o1.paymentOrder() - o2.paymentOrder();
+                return ObjectUtils.compare(o1.paymentOrder(), o2.paymentOrder());
             }
         });
     }
@@ -254,34 +254,15 @@ public class Cost implements Serializable {
 
         }
 
-        if (parsedMana == null && manaParts.length() > 0) {
+        if (parsedMana == null && (manaParts.length() > 0 || xCantBe0)) {
             parsedMana = new CostPartMana(new ManaCost(new ManaCostParser(manaParts.toString())), xCantBe0 ? "XCantBe0" : null);
         }
         if (parsedMana != null) {
-            if(parsedMana.shouldPayLast()) // back from the brink pays mana after 'exile' part is paid
-                this.costParts.add(parsedMana);
-            else
-                this.costParts.add(0, parsedMana);
+            costParts.add(parsedMana);
         }
 
-        // inspect parts to set Sac, {T} and {Q} flags
-        for (int iCp = 0; iCp < costParts.size(); iCp++) {
-            CostPart cp = costParts.get(iCp);
-
-            // untap cost has to be last so that a card can't use e.g. its own mana ability while paying for a part of its own mana cost
-            // (e.g. Zhur-Taa Druid equipped with Umbral Mantle, paying the mana cost of {3}, {Q} )
-            if (cp instanceof CostUntap) {
-                costParts.remove(iCp);
-                costParts.add(cp);
-            }
-            // tap cost has to be first so that a card can't use e.g. its own mana ability while paying for a part of its own mana cost
-            // (e.g. Ally Encampment with the cost of 1, {T} )
-            if (cp instanceof CostTap) {
-                costParts.remove(iCp);
-                costParts.add(0, cp);
-            }
-        }
-
+        // technically the user might pay the costs in any order
+        // but needs to activate mana ability first
         sort();
     }
 

@@ -29,7 +29,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardPlayOption;
 import forge.game.cost.Cost;
-import forge.game.cost.CostPartMana;
 import forge.game.cost.CostPayment;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaPool;
@@ -221,9 +220,7 @@ public class HumanPlaySpellAbility {
         if (ability.isCopied()) { return true; } //don't re-announce for spell copies
 
         boolean needX = true;
-        final boolean allowZero = !ability.hasParam("XCantBe0");
         final Cost cost = ability.getPayCosts();
-        final CostPartMana manaCost = cost.getCostMana();
         final PlayerController controller = ability.getActivatingPlayer().getController();
         final Card card = ability.getHostCard();
 
@@ -237,7 +234,7 @@ public class HumanPlaySpellAbility {
                 final boolean isX = "X".equalsIgnoreCase(varName);
                 if (isX) { needX = false; }
 
-                final Integer value = controller.announceRequirements(ability, varName, allowZero && (!isX || manaCost == null || manaCost.canXbe0()));
+                final Integer value = controller.announceRequirements(ability, varName);
                 if (value == null) {
                     return false;
                 }
@@ -254,17 +251,17 @@ public class HumanPlaySpellAbility {
             }
         }
 
-        if (needX && manaCost != null) {
+        if (needX) {
             if (cost.hasXInAnyCostPart()) {
                 final String sVar = ability.getSVar("X"); //only prompt for new X value if card doesn't determine it another way
                 if ("Count$xPaid".equals(sVar) || sVar.isEmpty()) {
-                    final Integer value = controller.announceRequirements(ability, "X", allowZero && manaCost.canXbe0());
+                    final Integer value = controller.announceRequirements(ability, "X");
                     if (value == null) {
                         return false;
                     }
                     ability.setXManaCostPaid(value);
                 }
-            } else if (manaCost.getMana().isZero() && ability.isSpell()) {
+            } else {
                 ability.setXManaCostPaid(0);
             }
         }

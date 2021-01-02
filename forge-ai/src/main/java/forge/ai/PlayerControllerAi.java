@@ -103,7 +103,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Integer announceRequirements(SpellAbility ability, String announce, boolean allowZero) {
+    public Integer announceRequirements(SpellAbility ability, String announce) {
         // For now, these "announcements" are made within the AI classes of the appropriate SA effects
         if (ability.getApi() != null) {
             switch (ability.getApi()) {

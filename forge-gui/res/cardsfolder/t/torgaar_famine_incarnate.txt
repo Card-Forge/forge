@@ -2,10 +2,11 @@ Name:Torgaar, Famine Incarnate
 ManaCost:6 B B 
 Types:Legendary Creature Avatar 
 PT:7/6
-A:SP$ PermanentCreature | Cost$ 6 B B Sac<X/Creature> | Announce$ X | References$ X,Y | AILogic$ SacToReduceCost
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Y | EffectZone$ All | References$ Y | Description$ As an additional cost to cast this spell, you may sacrifice any number of creatures. This spell costs {2} less to cast for each creature sacrificed as an additional cost.
-SVar:X:XChoice
+A:SP$ PermanentCreature | Cost$ 6 B B Sac<X/Creature> | References$ X,Y | AILogic$ SacToReduceCost
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Y | EffectZone$ All | References$ X,Y | Relative$ True | Description$ As an additional cost to cast this spell, you may sacrifice any number of creatures. This spell costs {2} less to cast for each creature sacrificed as an additional cost.
+SVar:X:Count$xPaid
 SVar:Y:SVar$X/Times.2
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSetLife | TriggerDescription$ When CARDNAME enters the battlefield, up to one target player's life total becomes half their starting life total, rounded down.
 SVar:TrigSetLife:DB$ SetLife | ValidTgts$ Player | LifeAmount$ HalfLife | TargetMin$ 0 | TargetMax$ 1 | References$ HalfLife
 SVar:HalfLife:TargetedPlayer$StartingLife/HalfDown

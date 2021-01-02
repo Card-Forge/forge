@@ -102,7 +102,7 @@ public class PermanentAi extends SpellAbilityAi {
         ManaCost mana = sa.getPayCosts().getTotalMana();
         if (mana.countX() > 0) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
             final Card source = sa.getHostCard();
             if (source.hasConverge()) {
                 card.setSVar("PayX", Integer.toString(0));
@@ -132,6 +132,20 @@ public class PermanentAi extends SpellAbilityAi {
                 // AiPlayDecision.CantPlayAi
                 return false;
             }
+        }
+
+        if ("SacToReduceCost".equals(sa.getParam("AILogic"))) {
+            // reset X to better calculate
+            sa.setXManaCostPaid(0);
+            ManaCostBeingPaid paidCost = ComputerUtilMana.calculateManaCost(sa, true, 0);
+
+            int generic = paidCost.getGenericManaAmount();
+            // Set PayX here to maximum value.
+            int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            // currently cards with SacToReduceCost reduce by 2 generic
+            xPay = Math.min(xPay, generic / 2);
+            card.setSVar("PayX", Integer.toString(xPay));
+            sa.setXManaCostPaid(xPay);
         }
 
         if (sa.hasParam("Announce") && sa.getParam("Announce").startsWith("Multikicker")) {
@@ -258,7 +272,7 @@ public class PermanentAi extends SpellAbilityAi {
 
             return !dontCast;
         }
-        
+
         return true;
     }
 

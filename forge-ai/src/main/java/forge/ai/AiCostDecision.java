@@ -558,17 +558,14 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
+        final String amount = cost.getAmount();
         Integer c = cost.convertAmount();
+
         if (c == null) {
-            if (ability.getSVar(cost.getAmount()).equals("XChoice")) {
+            final String sVar = ability.getSVar(amount);
+            if (sVar.equals("XChoice")) {
                 String logic = ability.getParamOrDefault("AILogic", "");
-                if ("SacToReduceCost".equals(logic)) {
-                    // e.g. Torgaar, Famine Incarnate
-                    // TODO: currently returns an empty list, so the AI doesn't sacrifice anything. Trying to make
-                    // the AI decide on creatures to sac makes the AI sacrifice them, but the cost is not reduced and the
-                    // AI pays the full mana cost anyway (despite sacrificing creatures).
-                    return PaymentDecision.card(new CardCollection());
-                } else if (!logic.isEmpty() && !logic.equals("Never")) {
+                if (!logic.isEmpty() && !logic.equals("Never")) {
                     // If at least some other AI logic is specified, assume that the AI for that API knows how
                     // to define ChosenX and thus honor that value.
                     // Cards which have no special logic for this yet but which do work in a simple/suboptimal way
@@ -578,8 +575,10 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     // Other cards are assumed to be flagged AI:RemoveDeck:All for now
                     return null;
                 }
+            } else if (sVar.equals("Count$xPaid")) {
+                c = AbilityUtils.calculateAmount(source, "PayX", ability);
             } else {
-                c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
+                c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
         final AiController aic = ((PlayerControllerAi)player.getController()).getAi();

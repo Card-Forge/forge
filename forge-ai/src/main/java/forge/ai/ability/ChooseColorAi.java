@@ -20,7 +20,6 @@ public class ChooseColorAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Card source = sa.getHostCard();
         final Game game = ai.getGame();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final PhaseHandler ph = game.getPhaseHandler();

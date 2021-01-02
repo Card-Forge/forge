@@ -110,7 +110,7 @@ public abstract class PlayerController {
 
     public abstract Map<Card, Integer> assignCombatDamage(Card attacker, CardCollectionView blockers, int damageDealt, GameEntity defender, boolean overrideOrder);
 
-    public abstract Integer announceRequirements(SpellAbility ability, String announce, boolean allowZero);
+    public abstract Integer announceRequirements(SpellAbility ability, String announce);
     public abstract CardCollectionView choosePermanentsToSacrifice(SpellAbility sa, int min, int max, CardCollectionView validTargets, String message);
     public abstract CardCollectionView choosePermanentsToDestroy(SpellAbility sa, int min, int max, CardCollectionView validTargets, String message);
     public abstract TargetChoices chooseNewTargetsFor(SpellAbility ability);

@@ -3,8 +3,6 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ PutCounter | Cost$ T | Defined$ Self | CounterType$ STORAGE | CounterNum$ 1 | SpellDescription$ Put a storage counter on CARDNAME.
-A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ R | Amount$ ChosenX | References$ X | CostDesc$ {T}, Remove any number of storage counters from CARDNAME: | AILogic$ ManaRitualBattery | AINoRecursiveCheck$ True | SpellDescription$ Add {R} for each storage counter removed this way.
-SVar:X:XChoice
-#ChosenX SVar created by Cost payment
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mercadian_bazaar.jpg
+A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ R | Amount$ X | References$ X | CostDesc$ {T}, Remove any number of storage counters from CARDNAME: | AILogic$ ManaRitualBattery | AINoRecursiveCheck$ True | SpellDescription$ Add {R} for each storage counter removed this way.
+SVar:X:Count$xPaid
 Oracle:Mercadian Bazaar enters the battlefield tapped.\n{T}: Put a storage counter on Mercadian Bazaar.\n{T}, Remove any number of storage counters from Mercadian Bazaar: Add {R} for each storage counter removed this way.

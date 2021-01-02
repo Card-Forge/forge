@@ -1162,7 +1162,7 @@ public class ComputerUtilMana {
      * @param extraMana extraMana
      * @return ManaCost
      */
-    static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
+    public static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
     	Card card = sa.getHostCard();
         ZoneType castFromBackup = null;
         if (test && sa.isSpell()) {
@@ -1626,32 +1626,5 @@ public class ComputerUtilMana {
             convoke.put(list.get(i), ManaCostShard.GENERIC);
         }
         return convoke;
-    }
-
-    public static int determineMaxAffordableX(Player ai, SpellAbility sa) {
-        if (sa.getPayCosts().getCostMana() == null) {
-            return -1;
-        }
-
-        int numTgts = 0;
-        int numX = sa.getPayCosts().getCostMana().getAmountOfX();
-
-        if (numX == 0) {
-            return -1;
-        }
-
-        int testX = 1;
-        while (testX <= 100) {
-            if (ComputerUtilMana.canPayManaCost(sa, ai, testX)) {
-                numTgts++;
-            } else {
-                break;
-            }
-            testX++;
-        }
-
-        numTgts /= numX;
-
-        return numTgts;
     }
 }

@@ -23,8 +23,6 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.cost.*;
@@ -180,8 +178,7 @@ public class DrawAi extends SpellAbilityAi {
 
             int numHand = ai.getCardsIn(ZoneType.Hand).size();
             if ("Jace, Vryn's Prodigy".equals(sourceName) && ai.getCardsIn(ZoneType.Graveyard).size() > 3) {
-                return CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANESWALKERS,
-                        CardPredicates.isType("Jace")).size() <= 0;
+                return !ai.isCardInPlay("Jace, Telepath Unbound");
             }
             if (source.isSpell() && ai.getCardsIn(ZoneType.Hand).contains(source)) {
                 numHand--; // remember to count looter card if it is a spell in hand
@@ -222,6 +219,7 @@ public class DrawAi extends SpellAbilityAi {
         final int computerLibrarySize = ai.getCardsIn(ZoneType.Library).size();
         final int computerMaxHandSize = ai.getMaxHandSize();
 
+        final SpellAbility gainLife = sa.findSubAbilityByType(ApiType.GainLife);
         final SpellAbility loseLife = sa.findSubAbilityByType(ApiType.LoseLife);
         final SpellAbility getPoison = sa.findSubAbilityByType(ApiType.Poison);
 
@@ -243,7 +241,7 @@ public class DrawAi extends SpellAbilityAi {
                 if (drawback && !sa.getSVar("PayX").equals("")) {
                     numCards = Integer.parseInt(sa.getSVar("PayX"));
                 } else {
-                    numCards = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                    numCards = ComputerUtilCost.getMaxXValue(sa, ai);
                     // try not to overdraw
                     int safeDraw = Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3);
                     if (sa.getHostCard().isInstant() || sa.getHostCard().isSorcery()) { safeDraw++; } // card will be spent
@@ -252,8 +250,7 @@ public class DrawAi extends SpellAbilityAi {
                     assumeSafeX = true;
                 }
                 xPaid = true;
-            }
-            if (sa.getSVar(num).equals("Count$Converge")) {
+            } else if (sa.getSVar(num).equals("Count$Converge")) {
                 numCards = ComputerUtilMana.getConvergeCount(sa, ai);
             }
         }
@@ -269,14 +266,6 @@ public class DrawAi extends SpellAbilityAi {
                     // Maybe would be better to check for "serious danger" and take more risk?
                     while ((ComputerUtil.aiLifeInDanger(ai, false, numCards) && (numCards > 0))) {
                         numCards--;
-                    }
-                } else if (sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
-                    // [e.g. Krav, the Unredeemed and other cases which say "Sacrifice X creatures: draw X cards]
-                    // TODO: Add special logic to limit/otherwise modify the ChosenX value here
-
-                    // Skip this ability if nothing is to be chosen for sacrifice
-                    if (numCards <= 0) {
-                        return false;
                     }
                 }
 
@@ -347,6 +336,20 @@ public class DrawAi extends SpellAbilityAi {
                         }
                     }
                 }
+
+                // that opponent can gain life and also lose life and that life gain is negative
+                if (gainLife != null && oppA.canGainLife() && oppA.canLoseLife() && ComputerUtil.lifegainNegative(oppA, source)) {
+                    if (gainLife.hasParam("Defined") && "Targeted".equals(gainLife.getParam("Defined"))) {
+                        if (numCards >= oppA.getLife()) {
+                            if (xPaid) {
+                                sa.setSVar("PayX", Integer.toString(oppA.getLife()));
+                            }
+                            sa.getTargets().add(oppA);
+                            return true;
+                        }
+                    }
+                }
+
                 // try to make opponent lose to poison
                 // currently only Caress of Phyrexia
                 if (getPoison != null && oppA.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
