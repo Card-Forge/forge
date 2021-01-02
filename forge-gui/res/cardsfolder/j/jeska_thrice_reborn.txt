@@ -8,8 +8,8 @@ A:AB$ Effect | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Duration$ Unti
 SVar:TripleCombatDamage:Event$ DamageDone | ValidSource$ Creature.IsRemembered | CombatDamage$ True | ValidTarget$ Player.Opponent | ReplaceWith$ DmgTriple | Description$ Choose target creature. Until your next turn, if that creature would deal combat damage to one of your opponents, it deals triple that damage to that player instead.
 SVar:DmgTriple:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ Z | References$ Z
 SVar:Z:ReplaceCount$DamageAmount/Thrice
-A:AB$ DealDamage | Cost$ SubCounter<X/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Choose up to three targets | TargetMin$ 0 | TargetMax$ 3 | NumDmg$ ChosenX | References$ X | SpellDescription$ CARDNAME deals X damage to each of up to three targets.
-SVar:X:XChoice
+A:AB$ DealDamage | Cost$ SubCounter<X/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Choose up to three targets | TargetMin$ 0 | TargetMax$ 3 | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to each of up to three targets.
+SVar:X:Count$xPaid
 AI:RemoveDeck:NonCommander
 Text:CARDNAME can be your commander.
 K:Partner

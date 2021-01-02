@@ -137,11 +137,6 @@ public class DestroyAi extends SpellAbilityAi {
             } else {
                 maxTargets = sa.getMaxTargets();
             }
-            if (sa.hasParam("AIMaxTgtsCount")) {
-                // Cards that have confusing costs for the AI (e.g. Eliminate the Competition) can have forced max target constraints specified
-                // TODO: is there a better way to predict things like "sac X" costs without needing a special AI variable?
-                maxTargets = Math.min(CardFactoryUtil.xCount(sa.getHostCard(), "Count$" + sa.getParam("AIMaxTgtsCount")), maxTargets);
-            }
 
             if (maxTargets == 0) {
                 // can't afford X or otherwise target anything

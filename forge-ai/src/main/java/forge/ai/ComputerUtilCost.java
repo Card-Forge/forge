@@ -90,9 +90,7 @@ public class ComputerUtilCost {
                 // value later as the AI decides what to do (in checkApiLogic / checkAiLogic)
                 if (sa.hasSVar(remCounter.getAmount())) {
                     final String sVar = sa.getSVar(remCounter.getAmount());
-                    if (sVar.equals("XChoice") && !sa.hasSVar("ChosenX")) {
-                        sa.setSVar("ChosenX", String.valueOf(source.getCounters(type)));
-                    } else if (sVar.equals("Count$xPaid") && sa.hasSVar("PayX")) {
+                    if (sVar.equals("Count$xPaid") && sa.hasSVar("PayX")) {
                         sa.setSVar("PayX", Integer.toString(Math.min(Integer.valueOf(sa.getSVar("PayX")), source.getCounters(type))));
                     }
                 }
@@ -675,6 +673,7 @@ public class ComputerUtilCost {
     }
 
     public static int getMaxXValue(SpellAbility sa, Player ai) {
+        final Card source = sa.getHostCard();
         final Cost abCost = sa.getPayCosts();
         if (abCost == null || !abCost.hasXInAnyCostPart()) {
             return 0;
@@ -691,8 +690,42 @@ public class ComputerUtilCost {
             if ("X".equals(sa.getTargetRestrictions().getMinTargets())) {
                 val = ObjectUtils.min(val, CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa).size());
             }
+
+            if (sa.hasParam("AIMaxTgtsCount")) {
+                // Cards that have confusing costs for the AI (e.g. Eliminate the Competition) can have forced max target constraints specified
+                // TODO: is there a better way to predict things like "sac X" costs without needing a special AI variable?
+                val = ObjectUtils.min(val, AbilityUtils.calculateAmount(sa.getHostCard(), "Count$" + sa.getParam("AIMaxTgtsCount"), sa));
+            }
         }
 
-        return ObjectUtils.defaultIfNull(ObjectUtils.min(val, abCost.getMaxForNonManaX(sa, ai)), 0);
+        val = ObjectUtils.min(val, abCost.getMaxForNonManaX(sa, ai));
+
+        if (val != null && val > 0) {
+            // filter cost parts for preferences, don't choose X > than possible preferences
+            for (final CostPart part : abCost.getCostParts()) {
+                if (part instanceof CostSacrifice) {
+                    if (part.payCostFromSource()) {
+                        continue;
+                    }
+                    if (!part.getAmount().equals("X")) {
+                        continue;
+                    }
+
+                    final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), source.getController(), source, null);
+
+                    int count = 0;
+                    while (count < val) {
+                        Card prefCard = ComputerUtil.getCardPreference(ai, source, "SacCost", typeList);
+                        if (prefCard == null) {
+                            break;
+                        }
+                        typeList.remove(prefCard);
+                        count++;
+                    }
+                    val = ObjectUtils.min(val, count);
+                }
+            }
+        }
+        return ObjectUtils.defaultIfNull(val, 0);
     }
 }

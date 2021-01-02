@@ -60,7 +60,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                 } else {
                     String title = sa.hasParam("ListTitle") ? sa.getParam("ListTitle") : Localizer.getInstance().getMessage("lblChooseNumber");
                     if (anyNumber) {
-                        Integer value = p.getController().announceRequirements(sa, title, true);
+                        Integer value = p.getController().announceRequirements(sa, title);
                         chosen = (value == null ? 0 : value);
                     } else {
                         chosen = p.getController().chooseNumber(sa, title, min, max);

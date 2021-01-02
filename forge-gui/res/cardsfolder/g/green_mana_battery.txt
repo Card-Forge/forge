@@ -3,9 +3,7 @@ ManaCost:4
 Types:Artifact
 A:AB$ PutCounter | Cost$ 2 T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
 A:AB$ Mana | Cost$ T SubCounter<X/CHARGE> | Produced$ G | Amount$ Y | CostDesc$ {T}, Remove any number of charge counters from CARDNAME: | References$ X,Y | AILogic$ ManaRitualBattery.1 | AINoRecursiveCheck$ True | SpellDescription$ Add {G}, then add an additional {G} for each charge counter removed this way.
-SVar:Y:Number$1/Plus.ChosenX
-SVar:X:XChoice
-#ChosenX SVar created by Cost payment
+SVar:Y:SVar$X/Plus.1
+SVar:X:Count$xPaid
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/green_mana_battery.jpg
 Oracle:{2}, {T}: Put a charge counter on Green Mana Battery.\n{T}, Remove any number of charge counters from Green Mana Battery: Add {G}, then add an additional {G} for each charge counter removed this way.
