@@ -4,6 +4,6 @@ Types:Creature Eldrazi
 PT:11/11
 K:Annihilator:2
 T:Mode$ Sacrificed | ValidCard$ Permanent.nonToken+OppCtrl | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control.
-SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCardLKICopy
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/it_that_betrays.jpg
 Oracle:Annihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents.)\nWhenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control.
