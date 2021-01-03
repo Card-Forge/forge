@@ -7,7 +7,6 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
@@ -63,7 +62,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         }
 
         final String numericAmount = sa.getParamOrDefault("Amount", "1");
-        final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) : CardFactoryUtil.xCount(host, host.getSVar(numericAmount));
+        final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) : AbilityUtils.calculateAmount(host, numericAmount, sa);
         final int minAmount = sa.hasParam("MinAmount") ? Integer.parseInt(sa.getParam("MinAmount")) : validAmount;
 
         if (validAmount <= 0) {
