@@ -176,15 +176,25 @@ public final class AbilityFactory {
         if (type != AbilityRecordType.SubAbility) {
             String cost = mapParams.get("Cost");
             if (cost == null) {
-                throw new RuntimeException("AbilityFactory : getAbility -- no Cost in " + state.getName());
+                if (type == AbilityRecordType.Spell) {
+                    if (state.getFirstAbility() != null && state.getFirstAbility().isSpell()) {
+                        // TODO might remove when Enchant Keyword is refactored
+                        System.err.println(state.getName() + " already has Spell using mana cost");
+                    }
+                    // for a Spell if no Cost is used, use the card states ManaCost
+                    abCost = new Cost(state.getManaCost(), false);
+                } else {
+                    throw new RuntimeException("AbilityFactory : getAbility -- no Cost in " + state.getName());
+                }
+            } else {
+                abCost = new Cost(cost, type == AbilityRecordType.Ability);
             }
-            abCost = new Cost(cost, type == AbilityRecordType.Ability);
         }
         return abCost;
     }
 
     public static final SpellAbility getAbility(AbilityRecordType type, ApiType api, Map<String, String> mapParams,
-            Cost abCost,final CardState state, final IHasSVars sVarHolder) {
+            Cost abCost, final CardState state, final IHasSVars sVarHolder) {
         final Card hostCard = state.getCard();
         TargetRestrictions abTgt = mapParams.containsKey("ValidTgts") ? readTarget(mapParams) : null;
 
@@ -206,7 +216,6 @@ public final class AbilityFactory {
             }
         }
 
-
         SpellAbility spellAbility = type.buildSpellAbility(api, hostCard, abCost, abTgt, mapParams);
 
 
@@ -216,6 +225,20 @@ public final class AbilityFactory {
             msg.append(state.toString());
             msg.append(". Looking for API: ").append(api);
             throw new RuntimeException(msg.toString());
+        }
+
+        if (mapParams.containsKey("Forecast")) {
+            spellAbility.putParam("ActivationZone", "Hand");
+            spellAbility.putParam("ActivationLimit", "1");
+            spellAbility.putParam("ActivationPhases", "Upkeep");
+            spellAbility.putParam("PlayerTurn", "True");
+            spellAbility.putParam("PrecostDesc", "Forecast — ");
+        }
+        if (mapParams.containsKey("Boast")) {
+            spellAbility.putParam("ActivationLimit", "1");
+            spellAbility.putParam("PresentDefined", "Self");
+            spellAbility.putParam("IsPresent", "Card.attackedThisTurn");
+            spellAbility.putParam("PrecostDesc", "Boast — ");
         }
 
         // *********************************************
@@ -280,9 +303,9 @@ public final class AbilityFactory {
             spellAbility.setDescription("");
         }
 
-        initializeParams(spellAbility, mapParams);
-        makeRestrictions(spellAbility, mapParams);
-        makeConditions(spellAbility, mapParams);
+        initializeParams(spellAbility);
+        makeRestrictions(spellAbility);
+        makeConditions(spellAbility);
 
         return spellAbility;
     }
@@ -361,9 +384,9 @@ public final class AbilityFactory {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mapParams
      */
-    private static final void initializeParams(final SpellAbility sa, Map<String, String> mapParams) {
+    private static final void initializeParams(final SpellAbility sa) {
 
-        if (mapParams.containsKey("NonBasicSpell")) {
+        if (sa.hasParam("NonBasicSpell")) {
             sa.setBasicSpell(false);
         }
     }
@@ -377,10 +400,10 @@ public final class AbilityFactory {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mapParams
      */
-    private static final void makeRestrictions(final SpellAbility sa, Map<String, String> mapParams) {
+    private static final void makeRestrictions(final SpellAbility sa) {
         // SpellAbilityRestrictions should be added in here
         final SpellAbilityRestriction restrict = sa.getRestrictions();
-        restrict.setRestrictions(mapParams);
+        restrict.setRestrictions(sa.getMapParams());
     }
 
     /**
@@ -392,10 +415,10 @@ public final class AbilityFactory {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mapParams
      */
-    private static final void makeConditions(final SpellAbility sa, Map<String, String> mapParams) {
+    private static final void makeConditions(final SpellAbility sa) {
         // SpellAbilityRestrictions should be added in here
         final SpellAbilityCondition condition = sa.getConditions();
-        condition.setConditions(mapParams);
+        condition.setConditions(sa.getMapParams());
     }
 
     // Easy creation of SubAbilities

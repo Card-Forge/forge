@@ -147,6 +147,8 @@ public class ForgeScript {
             return sa.isMorphUp();
         } else if (property.equals("Equip")) {
             return sa.hasParam("Equip");
+        } else if (property.equals("Boast")) {
+            return sa.isBoast();
         } else if (property.equals("MayPlaySource")) {
             StaticAbility m = sa.getMayPlay();
             if (m == null) {

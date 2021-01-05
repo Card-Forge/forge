@@ -85,6 +85,9 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     public boolean hasParam(String key) {
         return mapParams.containsKey(key);
     }
+    public String putParam(String key, String value) {
+        return mapParams.put(key, value);
+    }
     /**
      * <p>
      * Getter for the field <code>mapParams</code>.

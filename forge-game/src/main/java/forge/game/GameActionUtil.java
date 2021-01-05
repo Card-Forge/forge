@@ -168,8 +168,8 @@ public final class GameActionUtil {
                         final SpellAbility newSA = sa.copyWithDefinedCost(escapeCost);
                         newSA.setActivatingPlayer(activator);
 
-                        newSA.getMapParams().put("PrecostDesc", "Escape—");
-                        newSA.getMapParams().put("CostDesc", escapeCost.toString());
+                        newSA.putParam("PrecostDesc", "Escape—");
+                        newSA.putParam("CostDesc", escapeCost.toString());
 
                         // makes new SpellDescription
                         final StringBuilder desc = new StringBuilder();
@@ -229,7 +229,7 @@ public final class GameActionUtil {
                 // set the cost to this directly to buypass non mana cost
                 final SpellAbility newSA = sa.copyWithDefinedCost("Discard<1/CARDNAME>");
                 newSA.setActivatingPlayer(activator);
-                newSA.getMapParams().put("CostDesc", ManaCostParser.parse("0"));
+                newSA.putParam("CostDesc", ManaCostParser.parse("0"));
 
                 // need to build a new Keyword to get better Reminder Text
                 String data[] = inst.getOriginal().split(":");
