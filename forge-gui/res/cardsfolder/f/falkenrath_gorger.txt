@@ -2,5 +2,5 @@ Name:Falkenrath Gorger
 ManaCost:R
 Types:Creature Vampire Berserker
 PT:2/1
-S:Mode$ Continuous | Affected$ Creature.YouOwn+Vampire | AffectedZone$ Hand | AddKeyword$ Madness:CardManaCost | Description$ Each Vampire creature card you own that isn't on the battlefield has madness. The madness cost is equal to its mana cost. (If you discard a card with madness, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
+S:Mode$ Continuous | Affected$ Creature.YouOwn+Vampire | AffectedZone$ Hand,Library,Graveyard,Exile,Command,Stack | AddKeyword$ Madness:CardManaCost | Description$ Each Vampire creature card you own that isn't on the battlefield has madness. The madness cost is equal to its mana cost. (If you discard a card with madness, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
 Oracle:Each Vampire creature card you own that isn't on the battlefield has madness. The madness cost is equal to its mana cost. (If you discard a card with madness, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

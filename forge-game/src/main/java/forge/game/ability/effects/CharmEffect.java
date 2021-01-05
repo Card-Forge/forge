@@ -200,7 +200,7 @@ public class CharmEffect extends SpellAbilityEffect {
             clone.setActivatingPlayer(sa.getActivatingPlayer());
 
             // make StackDescription be the SpellDescription
-            clone.getMapParams().put("StackDescription", "SpellDescription");
+            clone.putParam("StackDescription", "SpellDescription");
 
             // do not forget what was targeted by the subability
             SpellAbility ssa = sub;

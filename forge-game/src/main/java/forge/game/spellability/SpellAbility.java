@@ -365,6 +365,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return this.isAlternativeCost(AlternativeCost.Cycling);
     }
 
+    public boolean isBoast() {
+        return this.hasParam("Boast");
+    }
+
     public void setOriginalHost(final Card c) {
         super.setOriginalHost(c);
         if (subAbility != null) {

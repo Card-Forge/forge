@@ -70,7 +70,6 @@ public enum Keyword {
     FLASH("Flash", SimpleKeyword.class, true, "You may cast this spell any time you could cast an instant."),
     FLASHBACK("Flashback", KeywordWithCost.class, false, "You may cast this card from your graveyard by paying %s rather than paying its mana cost. If you do, exile it as it resolves."),
     FLYING("Flying", SimpleKeyword.class, true, "This creature can't be blocked except by creatures with flying or reach."),
-    FORECAST("Forecast", KeywordWithCost.class, false, "Activate this ability only during your upkeep and only once each turn."),
     FORTIFY("Fortify", KeywordWithCost.class, false, "%s: Attach to target land you control. Fortify only as a sorcery."),
     FRENZY("Frenzy", KeywordWithAmount.class, false, "Whenever this creature attacks and isn't blocked, it gets +%d/+0 until end of turn."),
     GRAFT("Graft", KeywordWithAmount.class, false, "This permanent enters the battlefield with {%d:+1/+1 counter} on it. Whenever another creature enters the battlefield, you may move a +1/+1 counter from this permanent onto it."),

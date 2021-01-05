@@ -53,17 +53,6 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
 
     private boolean castFaceDown = false;
 
-    /**
-     * <p>
-     * Constructor for Spell.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.game.card.Card} object.
-     */
-    public Spell(final Card sourceCard) {
-        this(sourceCard, new Cost(sourceCard.getManaCost(), false));
-    }
     public Spell(final Card sourceCard, final Cost abCost) {
         super(sourceCard, abCost);
 

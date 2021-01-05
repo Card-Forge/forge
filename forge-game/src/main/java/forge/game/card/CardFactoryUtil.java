@@ -193,7 +193,7 @@ public class CardFactoryUtil {
 
     public static boolean handleHiddenAgenda(Player player, Card card) {
         SpellAbility sa = new SpellAbility.EmptySa(card);
-        sa.getMapParams().put("AILogic", card.getSVar("AgendaLogic"));
+        sa.putParam("AILogic", card.getSVar("AgendaLogic"));
         Predicate<ICardFace> cpp = Predicates.alwaysTrue();
         //Predicate<Card> pc = Predicates.in(player.getAllCards());
         // TODO This would be better to send in the player's deck, not all cards
@@ -3857,7 +3857,7 @@ public class CardFactoryUtil {
                     costStr = Integer.toString(card.getCMC());
                 }
                 final Cost cost = new Cost(costStr, false).add(sa.getPayCosts().copyWithNoMana());
-                newSA.getMapParams().put("Secondary", "True");
+                newSA.putParam("Secondary", "True");
                 newSA.setPayCosts(cost);
                 newSA.setDescription(sa.getDescription() + " (by paying " + cost.toSimpleString() + " instead of its mana cost)");
                 newSA.setIntrinsic(intrinsic);
@@ -3979,7 +3979,7 @@ public class CardFactoryUtil {
             final SpellAbility newSA = sa.copyWithDefinedCost(new Cost(costStr, false));
 
             newSA.getRestrictions().setIsPresent("Creature.YouCtrl+CanBeSacrificedBy");
-            newSA.getMapParams().put("Secondary", "True");
+            newSA.putParam("Secondary", "True");
             newSA.setAlternativeCost(AlternativeCost.Emerge);
 
             newSA.setDescription(sa.getDescription() + " (Emerge)");
@@ -4275,10 +4275,10 @@ public class CardFactoryUtil {
             final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(prowlCost);
 
             if (card.isInstant() || card.isSorcery()) {
-                newSA.getMapParams().put("Secondary", "True");
+                newSA.putParam("Secondary", "True");
             }
-            newSA.getMapParams().put("PrecostDesc", "Prowl");
-            newSA.getMapParams().put("CostDesc", ManaCostParser.parse(k[1]));
+            newSA.putParam("PrecostDesc", "Prowl");
+            newSA.putParam("CostDesc", ManaCostParser.parse(k[1]));
 
             // makes new SpellDescription
             final StringBuilder sb = new StringBuilder();
@@ -4503,7 +4503,7 @@ public class CardFactoryUtil {
             sar.setIsPresent(offeringType + ".YouCtrl+CanBeSacrificedBy");
             sar.setInstantSpeed(true);
 
-            newSA.getMapParams().put("Secondary", "True");
+            newSA.putParam("Secondary", "True");
             newSA.setAlternativeCost(AlternativeCost.Offering);
             newSA.setPayCosts(sa.getPayCosts());
             newSA.setDescription(sa.getDescription() + " (" + offeringType + " offering)");

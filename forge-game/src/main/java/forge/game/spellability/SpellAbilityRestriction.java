@@ -148,6 +148,9 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
 
+        if (params.containsKey("PresentDefined")) {
+            this.setPresentDefined(params.get("PresentDefined"));
+        }
         if (params.containsKey("IsNotPresent")) {
             this.setIsPresent(params.get("IsNotPresent"));
             this.setPresentCompare("EQ0");
@@ -401,7 +404,12 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
         if (this.getIsPresent() != null) {
-            CardCollectionView list = game.getCardsIn(this.getPresentZone());
+            CardCollectionView list;
+            if (this.getPresentDefined() != null) {
+                list = AbilityUtils.getDefinedCards(sa.getHostCard(), this.getPresentDefined(), sa);
+            } else {
+                list = game.getCardsIn(this.getPresentZone());
+            }
 
             list = CardLists.getValidCards(list, this.getIsPresent().split(","), activator, c, sa);
 
