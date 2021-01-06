@@ -8,8 +8,11 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardDamageMap;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
+import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import java.util.List;
 import java.util.Map;
@@ -56,17 +59,24 @@ public class FightEffect extends DamageBaseEffect {
             }
         }
         
-        dealDamage(sa, fighters.get(0), fighters.get(1));
+        Player controller = host.getController();
+        boolean isOptional = sa.hasParam("Optional");
 
-        for (Card c : fighters) {
+        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeFight", CardTranslation.getTranslatedName(fighters.get(0).getName()), CardTranslation.getTranslatedName(fighters.get(1).getName())))) {
+            return;
+        } else {
+            dealDamage(sa, fighters.get(0), fighters.get(1));
+
+            for (Card c : fighters) {
+                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.Fighter, c);
+                game.getTriggerHandler().runTrigger(TriggerType.Fight, runParams, false);
+            }
+
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.Fighter, c);
-            game.getTriggerHandler().runTrigger(TriggerType.Fight, runParams, false);
+            runParams.put(AbilityKey.Fighters, fighters);
+            game.getTriggerHandler().runTrigger(TriggerType.FightOnce, runParams, false);
         }
-
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Fighters, fighters);
-        game.getTriggerHandler().runTrigger(TriggerType.FightOnce, runParams, false);
     }
 
     private static List<Card> getFighters(SpellAbility sa) {
