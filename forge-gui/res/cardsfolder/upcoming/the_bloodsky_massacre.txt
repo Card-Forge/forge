@@ -1,0 +1,14 @@
+Name:The Bloodsky Massacre
+ManaCost:1 B R
+Types:Enchantment Saga
+K:Saga:3:DBToken,DBEffect,DBMana
+SVar:DBToken:DB$ Token | TokenScript$ r_2_3_demon_berserker_menace | SpellDescription$ Create a 2/3 red Demon Berserker creature token with menace.
+SVar:DBEffect:DB$ Effect | Triggers$ TAttack | SVars$ TrigDraw,DBLoseLife | SpellDescription$ Whenever a Berserker attacks this turn, you draw a card and you lose 1 life.
+SVar:TAttack:Mode$ Attacks | ValidCard$ Berserker | Execute$ TrigDraw | TriggerDescription$ Whenever a Berserker attacks this turn, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+SVar:DBMana:DB$ Mana | Produced$ R | Amount$ X | References$ X | PersistentMana$ True | SpellDescription$ Add {R} for each Berserker you control. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:X:Count$Valid Berserker.YouCtrl
+DeckHas:Ability$Token
+DeckHints:Type$Berserker
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI - Create a 2/3 red Demon Berserker creature token with menace.\nII - Whenever a Berserker attacks this turn, you draw a card and you lose 1 life.\nIII - Add {R} for each Berserker you control. Until end of turn, you don't lose this mana as steps and phases end.
