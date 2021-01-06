@@ -1826,7 +1826,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
     }
 
     public static boolean doExileCombatThreatLogic(final Player aiPlayer, final SpellAbility sa) {
-        final Card host = sa.getHostCard();
         final Combat combat = aiPlayer.getGame().getCombat();
 
         if (combat == null) {
