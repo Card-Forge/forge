@@ -262,7 +262,7 @@ public class HumanPlaySpellAbility {
                     ability.setXManaCostPaid(value);
                 }
             } else {
-                ability.setXManaCostPaid(0);
+                ability.setXManaCostPaid(null);
             }
         }
         return true;
