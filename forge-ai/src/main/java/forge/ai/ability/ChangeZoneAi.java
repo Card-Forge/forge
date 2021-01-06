@@ -1837,23 +1837,27 @@ public class ChangeZoneAi extends SpellAbilityAi {
         int highestEval = -1;
         if (combat.getAttackingPlayer().isOpponentOf(aiPlayer)) {
             for (Card attacker : combat.getAttackers()) {
-                int eval = ComputerUtilCard.evaluateCreature(attacker);
-                if (combat.isUnblocked(attacker)) {
-                    eval += 100; // TODO: make this smarter
-                }
-                if (eval > highestEval) {
-                    highestEval = eval;
-                    choice = attacker;
+                if (sa.canTarget(attacker) && attacker.canBeTargetedBy(sa)) {
+                    int eval = ComputerUtilCard.evaluateCreature(attacker);
+                    if (combat.isUnblocked(attacker)) {
+                        eval += 100; // TODO: make this smarter
+                    }
+                    if (eval > highestEval) {
+                        highestEval = eval;
+                        choice = attacker;
+                    }
                 }
             }
         } else {
             // either the current AI player or one of its teammates is attacking, the opponent(s) are blocking
             for (Card blocker : combat.getAllBlockers()) {
-                if (blocker.getController().isOpponentOf(aiPlayer)) { // TODO: unnecessary sanity check?
-                    int eval = ComputerUtilCard.evaluateCreature(blocker);
-                    if (eval > highestEval) {
-                        highestEval = eval;
-                        choice = blocker;
+                if (sa.canTarget(blocker) && blocker.canBeTargetedBy(sa)) {
+                    if (blocker.getController().isOpponentOf(aiPlayer)) { // TODO: unnecessary sanity check?
+                        int eval = ComputerUtilCard.evaluateCreature(blocker);
+                        if (eval > highestEval) {
+                            highestEval = eval;
+                            choice = blocker;
+                        }
                     }
                 }
             }
