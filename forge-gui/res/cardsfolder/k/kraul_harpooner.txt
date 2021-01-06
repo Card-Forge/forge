@@ -5,6 +5,6 @@ PT:3/2
 K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, choose up to one target creature with flying you don't control. CARDNAME gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard, then you may have CARDNAME fight that creature.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | References$ X | SubAbility$ DBFight
-SVar:DBFight:DB$ Fight | Defined$ Self | ValidTgts$ Creature.withFlying+YouDontCtrl | TgtPrompt$ Select target creature with flying you don't control | TargetMin$ 0 | TargetMax$ 1
+SVar:DBFight:DB$ Fight | Defined$ Self | ValidTgts$ Creature.withFlying+YouDontCtrl | TgtPrompt$ Select target creature with flying you don't control | TargetMin$ 0 | TargetMax$ 1 | Optional$ True
 SVar:X:Count$TypeInYourYard.Creature
 Oracle:Reach\nUndergrowth — When Kraul Harpooner enters the battlefield, choose up to one target creature with flying you don't control. Kraul Harpooner gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard, then you may have Kraul Harpooner fight that creature.
