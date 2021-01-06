@@ -1445,10 +1445,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private static boolean knownOriginTriggerAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        if ("DeathgorgeScavenger".equals(sa.getParam("AILogic"))) {
+        final String logic = sa.getParamOrDefault("AILogic", "");
+
+        if ("DeathgorgeScavenger".equals(logic)) {
             return SpecialCardAi.DeathgorgeScavenger.consider(ai, sa);
-        } else if ("ExtraplanarLens".equals(sa.getParam("AILogic"))) {
+        } else if ("ExtraplanarLens".equals(logic)) {
             return SpecialCardAi.ExtraplanarLens.consider(ai, sa);
+        } else if ("ExileCombatThreat".equals(logic)) {
+            return doExileCombatThreatLogic(ai, sa);
         }
 
         if (sa.getTargetRestrictions() == null) {
@@ -1819,6 +1823,51 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // Normally we want the commander back in Command zone to recast him later
         return true;
+    }
+
+    public static boolean doExileCombatThreatLogic(final Player aiPlayer, final SpellAbility sa) {
+        final Combat combat = aiPlayer.getGame().getCombat();
+
+        if (combat == null) {
+            return false;
+        }
+
+        Card choice = null;
+        int highestEval = -1;
+        if (combat.getAttackingPlayer().isOpponentOf(aiPlayer)) {
+            for (Card attacker : combat.getAttackers()) {
+                if (sa.canTarget(attacker) && attacker.canBeTargetedBy(sa)) {
+                    int eval = ComputerUtilCard.evaluateCreature(attacker);
+                    if (combat.isUnblocked(attacker)) {
+                        eval += 100; // TODO: make this smarter
+                    }
+                    if (eval > highestEval) {
+                        highestEval = eval;
+                        choice = attacker;
+                    }
+                }
+            }
+        } else {
+            // either the current AI player or one of its teammates is attacking, the opponent(s) are blocking
+            for (Card blocker : combat.getAllBlockers()) {
+                if (sa.canTarget(blocker) && blocker.canBeTargetedBy(sa)) {
+                    if (blocker.getController().isOpponentOf(aiPlayer)) { // TODO: unnecessary sanity check?
+                        int eval = ComputerUtilCard.evaluateCreature(blocker);
+                        if (eval > highestEval) {
+                            highestEval = eval;
+                            choice = blocker;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (choice != null) {
+            sa.getTargets().add(choice);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private static CardCollection getSafeTargetsIfUnlessCostPaid(Player ai, SpellAbility sa, Iterable<Card> potentialTgts) {
