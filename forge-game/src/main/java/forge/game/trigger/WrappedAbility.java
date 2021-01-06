@@ -14,8 +14,9 @@ import forge.game.spellability.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -27,7 +28,7 @@ import com.google.common.collect.Maps;
 // use of any of the methods)
 public class WrappedAbility extends Ability {
 
-    static List<ApiType> noTimestampCheck = ImmutableList.of(
+    static Set<ApiType> noTimestampCheck = ImmutableSet.of(
             ApiType.PutCounter,
             ApiType.MoveCounter,
             ApiType.MultiplyCounter,
@@ -40,7 +41,8 @@ public class WrappedAbility extends Ability {
             ApiType.LoseLife,
             ApiType.ChangeZone,
             ApiType.Destroy,
-            ApiType.Token
+            ApiType.Token,
+            ApiType.SetState
             );
 
     private final SpellAbility sa;
