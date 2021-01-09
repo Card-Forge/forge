@@ -22,6 +22,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
@@ -40,6 +41,7 @@ import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostRemoveCounter;
+import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
@@ -463,6 +465,48 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public final void clearManaPaid() {
         payingMana.clear();
+    }
+    
+    public final void applyPayingManaEffects() {
+        Card host = getHostCard();
+        
+        for (Mana mana : getPayingMana()) {
+            if (mana.triggersWhenSpent()) {
+                mana.getManaAbility().addTriggersWhenSpent(this, host);
+            }
+            
+            if (mana.addsCounters(this)) {
+                mana.getManaAbility().createETBCounters(host, getActivatingPlayer());
+            }
+            
+            if (mana.addsNoCounterMagic(this) && host != null) {
+                host.setCanCounter(false);
+            }
+            
+            if (isSpell() && host != null) {
+                if (mana.addsKeywords(this) && mana.addsKeywordsType()
+                        && host.getType().hasStringType(mana.getManaAbility().getAddsKeywordsType())) {
+                    final long timestamp = host.getGame().getNextTimestamp();
+                    final List<String> kws = Arrays.asList(mana.getAddedKeywords().split(" & "));
+                    host.addChangedCardKeywords(kws, null, false, false, timestamp);
+                    if (mana.addsKeywordsUntil()) {
+                        final GameCommand untilEOT = new GameCommand() {
+                            private static final long serialVersionUID = -8285169579025607693L;
+
+                            @Override
+                            public void run() {
+                                host.removeChangedCardKeywords(timestamp);
+                                host.getGame().fireEvent(new GameEventCardStatsChanged(host));
+                            }
+                        };
+                        String until = mana.getManaAbility().getAddsKeywordsUntil();
+                        if ("UntilEOT".equals(until)) {
+                            host.getGame().getEndOfTurn().addUntil(untilEOT);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public ColorSet getPayingColors() {
