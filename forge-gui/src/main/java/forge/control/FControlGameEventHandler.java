@@ -407,6 +407,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     public Void visit(final GameEventLandPlayed event) {
         processPlayer(event.player, livesUpdate);
+        matchController.handleLandPlayed(event.land);
         return processCard(event.land, cardsRefreshDetails);
     }
 

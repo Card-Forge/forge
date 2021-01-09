@@ -108,32 +108,18 @@ public final class CardUtil {
      * @param src   a Card object
      * @return a CardCollection that matches the given criteria
      */
-    public static CardCollection getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src) {
-        return getThisTurnEntered(to, from, valid, src, true);
-    }
-
-    /**
-     * getThisTurnEntered.
-     *
-     * @param to    zone going to
-     * @param from  zone coming from
-     * @param valid a isValid expression
-     * @param src   a Card object
-     * @param checkLatestState  a boolean, true if the latest state of the card as it left the original zone needs to be checked
-     * @return a CardCollection that matches the given criteria
-     */
-    public static CardCollection getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final boolean checkLatestState) {
-        CardCollection res = new CardCollection();
+    public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src) {
+        List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
         if (to != ZoneType.Stack) {
             for (Player p : game.getPlayers()) {
-                res.addAll(p.getZone(to).getCardsAddedThisTurn(from, checkLatestState));
+                res.addAll(p.getZone(to).getCardsAddedThisTurn(from));
             }
         }
         else {
-            res.addAll(game.getStackZone().getCardsAddedThisTurn(from, checkLatestState));
+            res.addAll(game.getStackZone().getCardsAddedThisTurn(from));
         }
-        res = CardLists.getValidCards(res, valid, src.getController(), src);
+        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src);
         return res;
     }
 
@@ -146,31 +132,18 @@ public final class CardUtil {
      * @param src   a Card object
      * @return a CardCollection that matches the given criteria
      */
-    public static CardCollection getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src) {
-        return getLastTurnEntered(to, from, valid, src, true);
-    }
-
-    /**
-     * getLastTurnEntered.
-     *
-     * @param to    zone going to
-     * @param from  zone coming from
-     * @param valid a isValid expression
-     * @param src   a Card object
-     * @return a CardCollection that matches the given criteria
-     */
-    public static CardCollection getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final boolean checkLatestState) {
-        CardCollection res = new CardCollection();
+    public static List<Card> getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src) {
+        List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
         if (to != ZoneType.Stack) {
             for (Player p : game.getPlayers()) {
-                res.addAll(p.getZone(to).getCardsAddedLastTurn(from, checkLatestState));
+                res.addAll(p.getZone(to).getCardsAddedLastTurn(from));
             }
         }
         else {
-            res.addAll(game.getStackZone().getCardsAddedLastTurn(from, checkLatestState));
+            res.addAll(game.getStackZone().getCardsAddedLastTurn(from));
         }
-        res = CardLists.getValidCards(res, valid, src.getController(), src);
+        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src);
         return res;
     }
 

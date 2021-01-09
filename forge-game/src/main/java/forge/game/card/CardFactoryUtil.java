@@ -1337,10 +1337,9 @@ public class CardFactoryUtil {
             ZoneType origin = hasFrom ? ZoneType.smartValueOf(workingCopy[3]) : null;
             String validFilter = workingCopy[hasFrom ? 4 : 2] ;
 
-            final CardCollection res = CardUtil.getThisTurnEntered(destination, origin, validFilter, c);
+            final List<Card> res = CardUtil.getThisTurnEntered(destination, origin, validFilter, c);
             if (origin == null) { // Remove cards on the battlefield that changed controller
-                CardCollectionView sameDest = CardUtil.getThisTurnEntered(destination, destination, validFilter, c);
-                res.removeAll(sameDest);
+                res.removeAll(CardUtil.getThisTurnEntered(destination, destination, validFilter, c));
             }
             return doXMath(res.size(), m, c);
         }
@@ -1354,10 +1353,9 @@ public class CardFactoryUtil {
             ZoneType origin = hasFrom ? ZoneType.smartValueOf(workingCopy[3]) : null;
             String validFilter = workingCopy[hasFrom ? 4 : 2] ;
 
-            final CardCollection res = CardUtil.getLastTurnEntered(destination, origin, validFilter, c);
+            final List<Card> res = CardUtil.getLastTurnEntered(destination, origin, validFilter, c);
             if (origin == null) { // Remove cards on the battlefield that changed controller
-                CardCollectionView sameDest = CardUtil.getLastTurnEntered(destination, destination, validFilter, c);
-                res.removeAll(sameDest);
+                res.removeAll(CardUtil.getLastTurnEntered(destination, destination, validFilter, c));
             }
             return doXMath(res.size(), m, c);
         }
@@ -1395,11 +1393,8 @@ public class CardFactoryUtil {
 
         // Count$Morbid.<True>.<False>
         if (sq[0].startsWith("Morbid")) {
-            final CardCollection res = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Battlefield, "Creature", c, true);
-            if (res.size() > 0) {
-                return doXMath(Integer.parseInt(sq[1]), m, c);
-            }
-            return doXMath(Integer.parseInt(sq[2]), m, c);
+            final List<Card> res = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Battlefield, "Creature", c);
+            return doXMath(Integer.parseInt(sq[res.size() > 0 ? 1 : 2]), m, c);
         }
 
         // Count$Madness.<True>.<False>

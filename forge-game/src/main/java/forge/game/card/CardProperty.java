@@ -1032,7 +1032,7 @@ public class CardProperty {
             if (res.length > 1 && res[1].equals("from")) {
                 origin = ZoneType.smartValueOf(res[2]);
             }
-            CardCollectionView cards = CardUtil.getThisTurnEntered(destination,
+            List<Card> cards = CardUtil.getThisTurnEntered(destination,
                     origin, "Card", source);
             if (!cards.contains(card)) {
                 return false;
@@ -1042,7 +1042,7 @@ public class CardProperty {
                 return false;
             }
 
-            CardCollectionView cards = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Hand, "Card", source);
+            List<Card> cards = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Hand, "Card", source);
             if (!cards.contains(card) && !card.getMadnessWithoutCast()) {
                 return false;
             }
