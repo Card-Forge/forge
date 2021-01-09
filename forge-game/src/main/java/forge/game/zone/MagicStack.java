@@ -298,7 +298,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
             runParams.put(AbilityKey.CurrentCastSpells, Lists.newArrayList(thisTurnCast));
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
-
+            
+            sp.applyPayingManaEffects();
+            
             // Run SpellCast triggers
             if (sp.isSpell()) {
                 if (source.isCommander() && (ZoneType.Command == source.getCastFrom())

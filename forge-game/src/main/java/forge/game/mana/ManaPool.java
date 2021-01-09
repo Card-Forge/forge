@@ -20,14 +20,11 @@ package forge.game.mana;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import forge.GameCommand;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.game.GlobalRuleChange;
-import forge.game.card.Card;
 import forge.game.event.EventValueChangeType;
-import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventManaPool;
 import forge.game.event.GameEventZone;
 import forge.game.phase.PhaseType;
@@ -222,44 +219,6 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         manaCost.payMana(mana, this);
         removeMana(mana);
 
-        if (test) {
-            // If just testing, should I be running special mana bonuses?
-            return true;
-        }
-
-        if (mana.addsNoCounterMagic(sa) && sa.getHostCard() != null) {
-            sa.getHostCard().setCanCounter(false);
-        }
-        if (sa.isSpell() && sa.getHostCard() != null) {
-            final Card host = sa.getHostCard();
-            if (mana.addsKeywords(sa) && mana.addsKeywordsType()
-                    && host.getType().hasStringType(mana.getManaAbility().getAddsKeywordsType())) {
-                final long timestamp = host.getGame().getNextTimestamp();
-                final List<String> kws = Arrays.asList(mana.getAddedKeywords().split(" & "));
-                host.addChangedCardKeywords(kws, null, false, false, timestamp);
-                if (mana.addsKeywordsUntil()) {
-                    final GameCommand untilEOT = new GameCommand() {
-                        private static final long serialVersionUID = -8285169579025607693L;
-
-                        @Override
-                        public void run() {
-                            host.removeChangedCardKeywords(timestamp);
-                            host.getGame().fireEvent(new GameEventCardStatsChanged(host));
-                        }
-                    };
-                    String until = mana.getManaAbility().getAddsKeywordsUntil();
-                    if ("UntilEOT".equals(until)) {
-                        host.getGame().getEndOfTurn().addUntil(untilEOT);
-                    }
-                }
-            }
-            if (mana.addsCounters(sa)) {
-                mana.getManaAbility().createETBCounters(host, this.owner);
-            }
-            if (mana.triggersWhenSpent()) {
-                mana.getManaAbility().addTriggersWhenSpent(sa, host);
-            }
-        }
         return true;
     }
 
