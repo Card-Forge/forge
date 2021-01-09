@@ -716,7 +716,6 @@ public class ComputerUtil {
         CardCollection remaining = new CardCollection(cardlist);
         final CardCollection sacrificed = new CardCollection();
         final Card host = source.getHostCard();
-        final boolean considerSacLogic = "ConsiderSac".equals(source.getParam("AILogic"));
         final int considerSacThreshold = getAIPreferenceParameter(host, "CreatureEvalThreshold");
 
         if ("OpponentOnly".equals(source.getParam("AILogic"))) {
@@ -732,14 +731,14 @@ public class ComputerUtil {
                 if (!ai.canLoseLife() || ai.cantLose()) {
                     return sacrificed; // sacrifice none
                 }
-            } else if (!considerSacLogic) {
+            } else {
                 return sacrificed; // sacrifice none
             }
         }
         boolean exceptSelf = "ExceptSelf".equals(source.getParam("AILogic"));
         boolean removedSelf = false;
 
-        if (isOptional && source.hasParam("Devour") || source.hasParam("Exploit") || considerSacLogic) {
+        if (isOptional && source.hasParam("Devour") || source.hasParam("Exploit")) {
             if (source.hasParam("Exploit")) {
                 for (Trigger t : host.getTriggers()) {
                     if (t.getMode() == TriggerType.Exploited) {
@@ -761,17 +760,21 @@ public class ComputerUtil {
                 public boolean apply(final Card c) {
                     int sacThreshold = 190;
 
-                    if ("HeartPiercer".equals(source.getParam("SacrificeParam"))) {
-                        if (c.getNetPower() == 0) {
+                    String logic = source.getParamOrDefault("AILogic", "");
+                    if (logic.startsWith("SacForDamage")) {
+                        if (c.getNetPower() <= 0) {
                             return false;
                         } else if (c.getNetPower() >= ai.getOpponentsSmallestLifeTotal()) {
                             return true;
+                        } else if (logic.endsWith(".GiantX2") && c.getType().hasCreatureType("Giant")
+                                && c.getNetPower() * 2 >= ai.getOpponentsSmallestLifeTotal()) {
+                            return true; // TODO: generalize this for any type and actually make the AI prefer giants?
                         }
                     }
 
                     if ("DesecrationDemon".equals(source.getParam("AILogic"))) {
                         sacThreshold = SpecialCardAi.DesecrationDemon.getSacThreshold();
-                    } else if (considerSacLogic && considerSacThreshold != -1) {
+                    } else if (considerSacThreshold != -1) {
                         sacThreshold = considerSacThreshold;
                     }
 

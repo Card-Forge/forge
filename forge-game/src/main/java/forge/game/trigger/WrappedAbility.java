@@ -17,7 +17,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 // Wrapper ability that checks the requirements again just before
@@ -487,18 +486,6 @@ public class WrappedAbility extends Ability {
             return;
         }
 
-        // Check timestamps of triggered objects
-        final List<Object> original = Lists.newArrayList(sa.getTriggerRemembered());
-        for (Object o : original) {
-            if (o instanceof Card) {
-                Card card = (Card) o;
-                Card current = game.getCardState(card);
-                if (current.getTimestamp() != card.getTimestamp()) {
-                    // TODO: figure out if NoTimestampCheck should be the default for ChangesZone triggers
-                    sa.getTriggerRemembered().remove(o);
-                }
-            }
-        }
         final Map<AbilityKey, Object> triggerMap = AbilityKey.newMap(sa.getTriggeringObjects());
         for (Entry<AbilityKey, Object> ev : triggerMap.entrySet()) {
             if (ev.getValue() instanceof Card) {
