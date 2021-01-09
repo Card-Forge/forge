@@ -22,7 +22,6 @@ import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
-import forge.util.TextUtil;
 import forge.ImageKeys;
 
 import java.io.File;
