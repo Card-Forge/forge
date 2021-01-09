@@ -127,6 +127,10 @@ public class PhaseHandler implements java.io.Serializable {
         game.updatePlayerTurnForView();
         setPriority(playerTurn);
     }
+    
+    public final void endPlayerLostTurn() {
+        setPlayerTurn(handleNextTurn());
+    }
 
     public final Player getPriorityPlayer() {
         return pPlayerPriority;

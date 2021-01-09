@@ -2943,7 +2943,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public void autoPassUntilEndOfTurn() {
-        getGui().autoPassUntilEndOfTurn(getLocalPlayerView());
+        // if we already conceded just skip everything
+        if (player.getOutcome() != null) {
+            player.getGame().getPhaseHandler().endPlayerLostTurn();
+        }
+        else {
+            getGui().autoPassUntilEndOfTurn(getLocalPlayerView());
+        }
     }
 
     @Override
