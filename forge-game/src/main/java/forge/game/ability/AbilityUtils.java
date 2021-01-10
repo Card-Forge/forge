@@ -280,7 +280,12 @@ public class AbilityUtils {
                 validFilter = workingCopy[2];
             }
             for (final Card cl : CardUtil.getThisTurnEntered(destination, origin, validFilter, hostCard)) {
-                cards.add(game.getCardState(cl));
+                Card gameState = game.getCardState(cl, null);
+                // cards that use this should only care about if it is still in that zone
+                // TODO if all LKI needs to be returned, need to change CardCollection return from this function
+                if (gameState != null && gameState.equalsWithTimestamp(cl)) {
+                    cards.add(gameState);
+                }
             }
         } else if (defined.equals("ChosenCard")) {
             for (final Card chosen : hostCard.getChosenCards()) {

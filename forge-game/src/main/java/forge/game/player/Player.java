@@ -1810,6 +1810,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, AbilityKey.mapFromCard(land), false);
         game.getStack().unfreezeStack();
         addLandPlayedThisTurn();
+
         return c;
     }
 
@@ -2112,8 +2113,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasLandfall() {
-        final CardCollectionView list = getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null);
-        return Iterables.any(list, CardPredicates.Presets.LANDS);
+        return Iterables.any(getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null), CardPredicates.Presets.LANDS);
     }
 
     public final boolean hasBloodthirst() {
