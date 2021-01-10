@@ -1176,7 +1176,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
 
                 // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
-                if (sa.hasParam("FaceDown") && ZoneType.Battlefield.equals(destination)) {
+                if (sa.hasParam("FaceDown")) {
                     c.turnFaceDown(true);
 
                     // set New Pt doesn't work because this values need to be copyable for clone effects
@@ -1207,17 +1207,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         c.addFaceupCommand(unanimate);
                     }
                 }
-                movedCard = game.getAction().moveTo(c.getController().getZone(destination), c, cause, moveParams);
+                movedCard = game.getAction().moveToPlay(c, c.getController(), cause, moveParams);
                 if (sa.hasParam("Tapped")) {
                     movedCard.setTapped(true);
                 } else if (sa.hasParam("Untapped")) {
                     c.setTapped(false);
                 }
 
-                // need to do that again?
-                if (sa.hasParam("FaceDown") && !ZoneType.Battlefield.equals(destination)) {
-                    movedCard.turnFaceDown(true);
-                }
                 movedCard.setTimestamp(ts);
             }
             else if (destination.equals(ZoneType.Exile)) {
@@ -1235,7 +1231,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
             else {
-                movedCard = game.getAction().moveTo(c.getController().getZone(destination), c, cause, moveParams);
+                movedCard = game.getAction().moveTo(destination, c, 0, cause, moveParams);
             }
 
             movedCards.add(movedCard);

@@ -98,7 +98,6 @@ public class GameAction {
 
         boolean toBattlefield = zoneTo.is(ZoneType.Battlefield);
         boolean fromBattlefield = zoneFrom != null && zoneFrom.is(ZoneType.Battlefield);
-        boolean toHand = zoneTo.is(ZoneType.Hand);
         boolean wasFacedown = c.isFaceDown();
 
         //Rule 110.5g: A token that has left the battlefield can't move to another zone
@@ -193,10 +192,7 @@ public class GameAction {
                 lastKnownInfo = CardUtil.getLKICopy(c);
             }
 
-            // Cards returned from exile face-down must be reset to their original state, otherwise
-            // all sort of funky shenanigans may happen later (e.g. their ETB replacement effects are set
-            // up on the wrong card state etc.).
-            if (wasFacedown && (fromBattlefield || (toHand && zoneFrom.is(ZoneType.Exile)))) {
+            if (wasFacedown) {
                 c.forceTurnFaceUp();
             }
 
