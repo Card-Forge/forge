@@ -295,6 +295,12 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             return;
         }
 
+        if (player.hasLost()) {
+            showMessage(sa.getHostCard() + " - Cannot target this player - already lost.");
+            return;
+        }
+
+        //TODO return the correct reason to display
         if (!sa.canTarget(player)) {
             showMessage(sa.getHostCard() + " - Cannot target this player (Hexproof? Protection? Restrictions?).");
             return;
