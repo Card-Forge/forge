@@ -83,6 +83,15 @@ public class RestartGameEffect extends SpellAbilityEffect {
             player.setLandsPlayedLastTurn(0);
             player.resetLandsPlayedThisTurn();
             player.resetInvestigatedThisTurn();
+            player.resetCycledThisTurn();
+            player.resetNumDiscardedThisTurn();
+            player.resetNumDrawnThisTurn();
+            player.resetNumTokenCreatedThisTurn();
+            player.resetProwl();
+            player.resetSacrificedThisTurn();
+            player.resetSpellsCastThisTurn();
+            player.resetPreventNextDamage();
+            player.resetPreventNextDamageWithEffect();
 
             List<Card> newLibrary = playerLibraries.get(player);
             for (Card c : newLibrary) {
