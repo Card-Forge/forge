@@ -4,7 +4,7 @@ Types:Legendary Creature God
 PT:1/4
 K:Vigilance
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
-S:Mode$ Continuous | Affected$ Creature.Legendary+YouCtrl | AddAbility$ Mana | Description$ Legendary creatures you control have "{T}: Add one mana of any color."
+S:Mode$ Continuous | Affected$ Creature.Legendary+Other+YouCtrl | AddAbility$ Mana | AddKeyword$ Vigilance | Description$ Other legendary creatures you control have vigilance and "{T}: Add one mana of any color."
 SVar:Mana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 AlternateMode:Modal
 DeckHints:Type$Legendary
