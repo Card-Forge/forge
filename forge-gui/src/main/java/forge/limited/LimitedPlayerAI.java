@@ -51,8 +51,8 @@ public class LimitedPlayerAI extends LimitedPlayer {
         return bestPick;
     }
 
-    public Deck buildDeck() {
+    public Deck buildDeck(String landSetCode) {
         CardPool section = deck.getOrCreate(DeckSection.Sideboard);
-        return new BoosterDeckBuilder(section.toFlatList(), deckCols).buildDeck();
+        return new BoosterDeckBuilder(section.toFlatList(), deckCols).buildDeck(landSetCode);
     }
 }
