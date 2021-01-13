@@ -1003,6 +1003,9 @@ public class PhaseHandler implements java.io.Serializable {
                         return;
                     }
 
+                    chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
+
+                    // this needs to come after chosenSa so it sees you conceding on own turn
                     if (playerTurn.hasLost() && pPlayerPriority.equals(playerTurn) && pFirstPriority.equals(playerTurn)) {
                         // If the active player has lost, and they have priority, set the next player to have priority
                         System.out.println("Active player is no longer in the game...");
@@ -1010,7 +1013,6 @@ public class PhaseHandler implements java.io.Serializable {
                         pFirstPriority = pPlayerPriority;
                     }
 
-                    chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
                     if (chosenSa == null) {
                         break; // that means 'I pass'
                     }
