@@ -45,7 +45,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private final Map<PlayerView, IGameController> originalGameControllers = Maps.newHashMap();
     private boolean gamePause = false;
     private boolean ignoreConcedeChain = false;
-    
+
     public final boolean hasLocalPlayers() {
         return !gameControllers.isEmpty();
     }
@@ -318,7 +318,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             }
             else {
                 return !ignoreConcedeChain;
-
             }
             if (gameView.isGameOver()) {
                 // Don't immediately close, wait for win/lose screen
