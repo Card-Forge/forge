@@ -33,20 +33,30 @@ public class RestartGameEffect extends SpellAbilityEffect {
 
         // Don't grab Ante Zones
         List<ZoneType> restartZones = new ArrayList<>(Arrays.asList(ZoneType.Battlefield,
-                ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command));
+                ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile));
 
         ZoneType leaveZone = ZoneType.smartValueOf(sa.hasParam("RestrictFromZone") ? sa.getParam("RestrictFromZone") : null);
         restartZones.remove(leaveZone);
         String leaveRestriction = sa.hasParam("RestrictFromValid") ? sa.getParam("RestrictFromValid") : "Card";
 
         for (Player p : players) {
-            CardCollection newLibrary = new CardCollection(p.getCardsIn(restartZones));
+            CardCollection newLibrary = new CardCollection(p.getCardsIn(restartZones, false));
             List<Card> filteredCards = null;
             if (leaveZone != null) {
                 filteredCards = CardLists.filter(p.getCardsIn(leaveZone),
                         CardPredicates.restriction(leaveRestriction.split(","), p, sa.getHostCard(), null));
                 newLibrary.addAll(filteredCards);
             }
+
+            // special handling for Karn to filter out non-cards
+            CardCollection cmdCards = new CardCollection(p.getCardsIn(ZoneType.Command));
+            for (Card c : cmdCards) {
+                if (c.isCommander()) {
+                    newLibrary.add(c);
+                }
+            }
+            p.getZone(ZoneType.Command).removeAllCards(true);
+
             playerLibraries.put(p, newLibrary);
         }
         
@@ -73,6 +83,15 @@ public class RestartGameEffect extends SpellAbilityEffect {
             player.setLandsPlayedLastTurn(0);
             player.resetLandsPlayedThisTurn();
             player.resetInvestigatedThisTurn();
+            player.resetCycledThisTurn();
+            player.resetNumDiscardedThisTurn();
+            player.resetNumDrawnThisTurn();
+            player.resetNumTokenCreatedThisTurn();
+            player.resetProwl();
+            player.resetSacrificedThisTurn();
+            player.resetSpellsCastThisTurn();
+            player.resetPreventNextDamage();
+            player.resetPreventNextDamageWithEffect();
 
             List<Card> newLibrary = playerLibraries.get(player);
             for (Card c : newLibrary) {

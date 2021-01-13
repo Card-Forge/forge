@@ -1512,9 +1512,12 @@ public class Player extends GameEntity implements Comparable<Player> {
      * gets a list of all cards in a given player's requested zones.
      */
     public final CardCollectionView getCardsIn(final Iterable<ZoneType> zones) {
+        return getCardsIn(zones, true);
+    }
+    public final CardCollectionView getCardsIn(final Iterable<ZoneType> zones, boolean filterOutPhasedOut) {
         final CardCollection result = new CardCollection();
         for (final ZoneType z : zones) {
-            result.addAll(getCardsIn(z));
+            result.addAll(getCardsIn(z, filterOutPhasedOut));
         }
         return result;
     }
