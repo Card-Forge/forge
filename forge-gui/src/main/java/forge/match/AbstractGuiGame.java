@@ -317,12 +317,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 }
             }
             else {
-                if (ignoreConcedeChain) {
-                    return false;
-                }
-                else {
-                    return true;
-                }
+                return !ignoreConcedeChain;
 
             }
             if (gameView.isGameOver()) {
