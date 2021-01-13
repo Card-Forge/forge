@@ -378,6 +378,13 @@ public class CardProperty {
             if (!card.getExiledWith().equals(host)) {
                 return false;
             }
+        } else if (property.equals("ExiledWithEffectSource")) {
+            if (card.getExiledWith() == null) {
+                return false;
+            }
+            if (!card.getExiledWith().equals(source.getEffectSource())) {
+                return false;
+            }
         } else if (property.equals("EncodedWithSource")) {
             if (!card.getEncodedCards().contains(source)) {
                 return false;
