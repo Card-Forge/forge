@@ -52,6 +52,11 @@ public class RevealHandEffect extends SpellAbilityEffect {
                         host.addRemembered(c);
                     }
                 }
+                if (sa.hasParam("ImprintRevealed")) {
+                    for (final Card c : hand) {
+                        host.addImprintedCard(c);
+                    }
+                }
                 if (sa.hasParam("RememberRevealedPlayer")) {
                     host.addRemembered(p);
                 }
