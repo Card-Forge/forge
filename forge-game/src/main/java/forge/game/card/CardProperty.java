@@ -1825,6 +1825,12 @@ public class CardProperty {
                 }
             }
             return false;
+        } else if (property.startsWith("NotTriggered")) {
+            final String key = property.substring("NotTriggered".length());
+            Object obj = spellAbility.getTriggeringObject(AbilityKey.fromString(key));
+            if (card.equals(obj)) {
+                return false;
+            }
         } else {
             // StringType done in CardState
             if (!card.getCurrentState().hasProperty(property, sourceController, source, spellAbility)) {

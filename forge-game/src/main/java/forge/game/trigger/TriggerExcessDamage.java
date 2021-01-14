@@ -21,25 +21,18 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.spellability.SpellAbility;
-import forge.util.Expressions;
 import forge.util.Localizer;
 
 import java.util.Map;
 
 /**
- * <p>
- * Trigger_DamageDone class.
- * </p>
  *
  * @author Forge
  * @version $Id$
  */
-public class TriggerDamageDone extends Trigger {
+public class TriggerExcessDamage extends Trigger {
 
     /**
-     * <p>
-     * Constructor for Trigger_DamageDone.
-     * </p>
      *
      * @param params
      *            a {@link java.util.HashMap} object.
@@ -48,7 +41,7 @@ public class TriggerDamageDone extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerDamageDone(final Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerExcessDamage(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -74,18 +67,6 @@ public class TriggerDamageDone extends Trigger {
             }
         }
 
-        if (hasParam("DamageAmount")) {
-            final String fullParam = getParam("DamageAmount");
-
-            final String operator = fullParam.substring(0, 2);
-            final int operand = Integer.parseInt(fullParam.substring(2));
-            final int actualAmount = (Integer) runParams.get(AbilityKey.DamageAmount);
-
-            if (!Expressions.compare(actualAmount, operator, operand)) {
-                return false;
-            }
-        }
-
         return true;
     }
 
@@ -94,12 +75,7 @@ public class TriggerDamageDone extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
         sa.setTriggeringObject(AbilityKey.Source, CardUtil.getLKICopy((Card)runParams.get(AbilityKey.DamageSource)));
         sa.setTriggeringObject(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
-        sa.setTriggeringObjectsFrom(
-            runParams,
-            AbilityKey.DamageAmount,
-            // This parameter is here because LKI information related to combat doesn't work properly
-            AbilityKey.DefendingPlayer
-        );
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.DamageAmount);
     }
 
     @Override
