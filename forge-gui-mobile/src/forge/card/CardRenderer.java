@@ -679,15 +679,14 @@ public class CardRenderer {
                 float manaSymbolSize = w / 4.5f;
                 if (card.isSplitCard() && card.hasAlternateState()) {
                     if (!card.isFaceDown()) { // no need to draw mana symbols on face down split cards (e.g. manifested)
-                        float dy = manaSymbolSize / 2 + Utils.scale(5);
-
-                        PaperCard pc = StaticData.instance().getCommonCards().getCard(card.getName());
-                        if (Card.getCardForUi(pc).hasKeyword(Keyword.AFTERMATH)){
-                            dy *= -1; // flip card costs for Aftermath cards
+                        if (isChoiceList) {
+                            if (card.getRightSplitState().getName().equals(details.getName()))
+                                drawManaCost(g, card.getRightSplitState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
+                            else
+                                drawManaCost(g, card.getLeftSplitState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
+                        } else {
+                            drawManaCost(g, card.getCurrentState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
                         }
-
-                        drawManaCost(g, card.getRightSplitState().getManaCost(), x - padding, y - dy, w + 2 * padding, h, manaSymbolSize);
-                        drawManaCost(g, card.getLeftSplitState().getManaCost(), x - padding, y + dy, w + 2 * padding, h, manaSymbolSize);
                     }
                 }
                 else {
