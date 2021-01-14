@@ -33,6 +33,7 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.mulligan.MulliganService;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
@@ -537,6 +538,10 @@ public class GameAction {
             // TODO Need a way to override this for Abilities that put Auras
             // into play attached to things
             AttachEffect.attachAuraOnIndirectEnterBattlefield(c);
+        }
+
+        if (c.isCommander()) {
+            c.setMoveToCommandZone(true);
         }
 
         return c;
@@ -1048,6 +1053,17 @@ public class GameAction {
                     checkAgain = true;
                 }
 
+                if (game.getRules().hasAppliedVariant(GameType.Commander) && !checkAgain) {
+                    Iterable<Card> cards = p.getCardsIn(ZoneType.Graveyard).threadSafeIterable();
+                    for (final Card c : cards) {
+                        checkAgain |= stateBasedAction903_9a(c);
+                    }
+                    cards = p.getCardsIn(ZoneType.Exile).threadSafeIterable();
+                    for (final Card c : cards) {
+                        checkAgain |= stateBasedAction903_9a(c);
+                    }
+                }
+
                 if (handlePlaneswalkerRule(p, table)) {
                     checkAgain = true;
                 }
@@ -1140,6 +1156,17 @@ public class GameAction {
             checkAgain = true;
         }
         return checkAgain;
+    }
+
+    private boolean stateBasedAction903_9a(Card c) {
+        if (c.isCommander() && c.canMoveToCommandZone()) {
+            c.setMoveToCommandZone(false);
+            if (c.getOwner().getController().confirmAction(c.getSpellPermanent(), PlayerActionConfirmMode.ChangeZoneToAltDestination, c.getName() + ": If a commander is in a graveyard or in exile and that card was put into that zone since the last time state-based actions were checked, its owner may put it into the command zone.")) {
+                moveTo(c.getOwner().getZone(ZoneType.Command), c, null);
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean stateBasedAction704_5r(Card c) {
