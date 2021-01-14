@@ -74,6 +74,12 @@ public class PumpAi extends PumpAiBase {
             if (ai.getCardsIn(ZoneType.Hand).size() + 3 >= ai.getMaxHandSize()) {
                 return false;
             }
+        } else if (aiLogic.equals("SwitchPT")) {
+            // Some more AI would be even better, but this is a good start to prevent spamming
+            if (sa.isAbility() && sa.getActivationsThisTurn() > 0 && !sa.usesTargeting()) {
+                // Will prevent flipping back and forth
+                return false;
+            }
         }
 
         return super.checkAiLogic(ai, sa, aiLogic);
@@ -92,6 +98,11 @@ public class PumpAi extends PumpAiBase {
         } else if (logic.equals("Aristocrat")) {
             final boolean isThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(sa.getHostCard());
             if (!ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && !isThreatened) {
+                return false;
+            }
+        } else if (logic.equals("SwitchPT")) {
+            // Some more AI would be even better, but this is a good start to prevent spamming
+            if (ph.getPhase().isAfter(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE) || !ph.inCombat()) {
                 return false;
             }
         }
