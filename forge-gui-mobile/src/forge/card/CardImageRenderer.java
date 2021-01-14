@@ -459,7 +459,7 @@ public class CardImageRenderer {
 
         y += cardNameBoxHeight + innerBorderThickness;
         Color[] textBoxColors = FSkinColor.tintColors(Color.WHITE, colors, CardRenderer.TEXT_BOX_TINT);
-        drawDetailsTextBox(g, card.isSplitCard() && !altState ? card.getLeftSplitState() : state, gameView, canShow, textBoxColors, x, y, w, textBoxHeight);
+        drawDetailsTextBox(g, state, gameView, canShow, textBoxColors, x, y, w, textBoxHeight);
 
         y += textBoxHeight + innerBorderThickness;
         Color[] ptColors = FSkinColor.tintColors(Color.WHITE, colors, CardRenderer.PT_BOX_TINT);
