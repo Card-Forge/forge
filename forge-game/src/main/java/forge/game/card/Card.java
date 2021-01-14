@@ -153,6 +153,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final Map<Card, Integer> assignedDamageMap = Maps.newTreeMap();
 
     private boolean isCommander = false;
+    private boolean canMoveToCommandZone = false;    
+
     private boolean startsGameInPlay = false;
     private boolean drawnThisTurn = false;
     private boolean becameTargetThisTurn = false;
@@ -5997,6 +5999,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (isCommander == b) { return; }
         isCommander = b;
         view.updateCommander(this);
+    }
+
+    public boolean canMoveToCommandZone() {
+        return canMoveToCommandZone;
+    }
+    public void setMoveToCommandZone(boolean b) {
+        canMoveToCommandZone = b;
     }
 
     public void setSplitStateToPlayAbility(final SpellAbility sa) {
