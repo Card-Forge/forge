@@ -60,7 +60,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source)) {
+            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source, sa)) {
                 return false;
             }
         }
@@ -93,7 +93,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
                     if (!topStack.usesTargeting() && topStack.hasParam("ValidPlayers") && !topStack.hasParam("Defined")) {
                         objects = AbilityUtils.getDefinedPlayers(threatSource, topStack.getParam("ValidPlayers"), topStack);
                     }
-                    
+
                     if (!objects.contains(ai) || topStack.hasParam("NoPrevention")) {
                         return false;
                     }
@@ -123,9 +123,9 @@ public class ChooseSourceAi extends SpellAbilityAi {
 
         return true;
     }
-    
-    
-    
+
+
+
     @Override
     public Card chooseSingleCard(final Player aiChoser, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         if ("NeedsPrevention".equals(sa.getParam("AILogic"))) {
@@ -139,11 +139,11 @@ public class ChooseSourceAi extends SpellAbilityAi {
             }
 
             final Combat combat = game.getCombat();
-            
+
             List<Card> permanentSources = CardLists.filter(options, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    if (c == null || c.getZone() == null || c.getZone().getZoneType() != ZoneType.Battlefield 
+                    if (c == null || c.getZone() == null || c.getZone().getZoneType() != ZoneType.Battlefield
                     		|| combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
                         return false;
                     }
@@ -186,12 +186,12 @@ public class ChooseSourceAi extends SpellAbilityAi {
             return ComputerUtilCard.getBestAI(options);
         }
     }
-    
+
     private Card chooseCardOnStack(SpellAbility sa, Player ai, Game game) {
         for (SpellAbilityStackInstance si : game.getStack()) {
             final Card source = si.getSourceCard();
             final SpellAbility abilityOnStack = si.getSpellAbility(true);
-            
+
             if (sa.hasParam("Choices") && !abilityOnStack.getHostCard().isValid(sa.getParam("Choices"), ai, sa.getHostCard(), sa)) {
                 continue;
             }
@@ -202,9 +202,9 @@ public class ChooseSourceAi extends SpellAbilityAi {
 
             List<? extends GameObject> objects = getTargets(abilityOnStack);
 
-            if (!abilityOnStack.usesTargeting() && !abilityOnStack.hasParam("Defined") && abilityOnStack.hasParam("ValidPlayers")) 
+            if (!abilityOnStack.usesTargeting() && !abilityOnStack.hasParam("Defined") && abilityOnStack.hasParam("ValidPlayers"))
                 objects = AbilityUtils.getDefinedPlayers(source, abilityOnStack.getParam("ValidPlayers"), abilityOnStack);
-            
+
             if (!objects.contains(ai) || abilityOnStack.hasParam("NoPrevention")) {
                 continue;
             }
@@ -215,11 +215,11 @@ public class ChooseSourceAi extends SpellAbilityAi {
             return source;
         }
         return null;
-    }    
+    }
 
     private static List<GameObject> getTargets(final SpellAbility sa) {
         return sa.usesTargeting() && (!sa.hasParam("Defined"))
-                ? Lists.newArrayList(sa.getTargets().getTargets()) 
+                ? Lists.newArrayList(sa.getTargets())
                 : AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
     }
 }

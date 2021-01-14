@@ -6,19 +6,22 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.game.zone;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.card.Card;
@@ -40,7 +43,7 @@ import java.util.Map.Entry;
  * <p>
  * DefaultPlayerZone class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: PlayerZone.java 17582 2012-10-19 22:39:09Z Max mtg $
  */
@@ -53,8 +56,6 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     protected final transient MapOfLists<ZoneType, Card> cardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.arrayLists());
     protected final transient MapOfLists<ZoneType, Card> cardsAddedLastTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.arrayLists());
-    protected final transient MapOfLists<ZoneType, Card> latestStateCardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.arrayLists());
-    protected final transient MapOfLists<ZoneType, Card> latestStateCardsAddedLastTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.arrayLists());
 
     public Zone(final ZoneType zone0, Game game0) {
         zoneType = zone0;
@@ -102,8 +103,11 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         if (!c.isImmutable()) {
             final Zone oldZone = game.getZoneOf(c);
             final ZoneType zt = oldZone == null ? ZoneType.Stack : oldZone.getZoneType();
-            cardsAddedThisTurn.add(zt, c);
-            latestStateCardsAddedThisTurn.add(zt, latestState != null ? latestState : c);
+
+            // only if the zoneType differss from this
+            if (zt != zoneType) {
+                cardsAddedThisTurn.add(zt, latestState != null ? latestState : c);
+            }
         }
 
         c.setTurnInZone(game.getPhaseHandler().getTurn());
@@ -123,8 +127,9 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
             }
         }
         onChanged();
+
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
-    }
+   }
 
     public final boolean contains(final Card c) {
         return cardList.contains(c);
@@ -196,56 +201,28 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         return cardList.isEmpty();
     }
 
-    public final MapOfLists<ZoneType, Card> getCardsAddedThisTurn() {
-        return cardsAddedThisTurn;
-    }
-
-    public final MapOfLists<ZoneType, Card> getCardsAddedThisTurn(boolean latestState) {
-        if (latestState) {
-            return latestStateCardsAddedThisTurn;
-        } else {
-            return cardsAddedThisTurn;
-        }
-    }
-    
-    public final MapOfLists<ZoneType, Card> getCardsAddedLastTurn() {
-        return cardsAddedLastTurn;
-    }
-
-    public final MapOfLists<ZoneType, Card> getCardsAddedLastTurn(boolean latestState) {
-        if (latestState) {
-            return latestStateCardsAddedLastTurn;
-        } else {
-            return cardsAddedLastTurn;
-        }
-    }
-
-    public final CardCollectionView getCardsAddedThisTurn(final ZoneType origin) {
-        return getCardsAddedThisTurn(origin, true);
-    }
-
-    public final CardCollectionView getCardsAddedThisTurn(final ZoneType origin, boolean latestState) {
+    public final List<Card> getCardsAddedThisTurn(final ZoneType origin) {
         //System.out.print("Request cards put into " + getZoneType() + " from " + origin + ".Amount: ");
-        return getCardsAdded(latestState ? latestStateCardsAddedThisTurn : cardsAddedThisTurn, origin);
+        return getCardsAdded(cardsAddedThisTurn, origin);
     }
 
-    public final CardCollectionView getCardsAddedLastTurn(final ZoneType origin) {
-        return getCardsAddedLastTurn(origin, true);
-    }
-
-    public final CardCollectionView getCardsAddedLastTurn(final ZoneType origin, boolean latestState) {
+    public final List<Card> getCardsAddedLastTurn(final ZoneType origin) {
         //System.out.print("Last turn - Request cards put into " + getZoneType() + " from " + origin + ".Amount: ");
-        return getCardsAdded(latestState ? latestStateCardsAddedLastTurn : cardsAddedLastTurn, origin);
+        return getCardsAdded(cardsAddedLastTurn, origin);
     }
 
-    private static CardCollectionView getCardsAdded(final MapOfLists<ZoneType, Card> cardsAdded, final ZoneType origin) {
+    private static List<Card> getCardsAdded(final MapOfLists<ZoneType, Card> cardsAdded, final ZoneType origin) {
         if (origin != null) {
             final Collection<Card> cards = cardsAdded.get(origin);
-            return cards == null ? CardCollection.EMPTY : new CardCollection(cards);
+            return cards == null ? ImmutableList.of() : Lists.newArrayList(cards);
+        }
+
+        if (cardsAdded.isEmpty()) {
+            return ImmutableList.of();
         }
 
         // all cards if key == null
-        final CardCollection ret = new CardCollection();
+        final List<Card> ret = Lists.newArrayList();
         for (final Collection<Card> kv : cardsAdded.values()) {
             ret.addAll(kv);
         }
@@ -254,15 +231,10 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     public final void resetCardsAddedThisTurn() {
         cardsAddedLastTurn.clear();
-        latestStateCardsAddedLastTurn.clear();
         for (final Entry<ZoneType, Collection<Card>> entry : cardsAddedThisTurn.entrySet()) {
             cardsAddedLastTurn.addAll(entry.getKey(), entry.getValue());
         }
-        for (final Entry<ZoneType, Collection<Card>> entry : latestStateCardsAddedThisTurn.entrySet()) {
-            latestStateCardsAddedLastTurn.addAll(entry.getKey(), entry.getValue());
-        }
         cardsAddedThisTurn.clear();
-        latestStateCardsAddedThisTurn.clear();
     }
 
     @Override
@@ -279,15 +251,11 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     public String toString() {
         return zoneType.toString();
     }
-    
-    public Zone getLKICopy() {
+
+    public Zone getLKICopy(Map<Integer, Card> cachedMap) {
         Zone result = new Zone(zoneType, game);
 
-        final CardCollection list = new CardCollection();
-        for (final Card c : getCards()) {
-            list.add(CardUtil.getLKICopy(c));
-        }
-        result.setCards(list);
+        result.setCards(CardUtil.getLKICopyList(getCards(), cachedMap));
 
         return result;
     }

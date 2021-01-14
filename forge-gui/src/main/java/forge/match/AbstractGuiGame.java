@@ -9,8 +9,6 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import forge.GuiBase;
-import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -20,8 +18,10 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.assets.FSkinProp;
 import forge.game.GameView;
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEventSpellAbilityCast;
@@ -34,6 +34,7 @@ import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.trackable.TrackableTypes;
+import forge.util.Localizer;
 
 public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private PlayerView currentPlayer = null;
@@ -186,7 +187,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 return true;
             }
             if(spectator!=null) { //workaround fix!! this is needed on above code or it will
-                gameControllers.remove(spectator); //bug the UI! remove spectator here since its must not be here...
+                for (Map.Entry<PlayerView, IGameController> e : gameControllers.entrySet()) {
+                    if (e.getValue().equals(spectator)) {
+                        gameControllers.remove(e.getKey());
+                        break;
+                    }
+                }
                 return true;
             }
             try{
@@ -220,6 +226,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             case Flipped:
             case Transformed:
             case Meld:
+            case Modal:
                 return true;
             default:
                 return false;
@@ -269,6 +276,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
     public boolean isGamePaused() { return gamePause; }
     public void setgamePause(boolean pause) { gamePause = pause; }
+    public void pauseMatch() {
+        IGameController controller = spectator;
+        if(controller != null && !isGamePaused())
+            controller.selectButtonOk();
+    }
+    public void resumeMatch() {
+        IGameController controller = spectator;
+        if(controller != null && isGamePaused())
+            controller.selectButtonOk();
+    }
 
     /** Concede game, bring up WinLose UI. */
     public boolean concede() {
@@ -355,11 +372,14 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return autoPassUntilEndOfTurn.contains(player);
     }
 
-    private final Timer awaitNextInputTimer = new Timer();
+    private Timer awaitNextInputTimer;
     private TimerTask awaitNextInputTask;
 
     @Override
     public final void awaitNextInput() {
+        if (awaitNextInputTimer == null) {
+            awaitNextInputTimer = new Timer("awaitNextInputTimer Game:" + this.gameView.getId() + " Player:" + this.currentPlayer.getLobbyPlayerName());
+        }
         //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
         awaitNextInputTask = new TimerTask() {
             @Override
@@ -387,6 +407,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final void cancelAwaitNextInput() {
+        if (awaitNextInputTimer == null) {
+            return;
+        }
         synchronized (awaitNextInputTimer) { //ensure task doesn't reset awaitNextInputTask during this block
             if (awaitNextInputTask != null) {
                 try {
@@ -708,5 +731,17 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public void notifyStackRemoval(GameEventSpellRemovedFromStack event) {
     }
     
+    @Override
+    public void handleLandPlayed(Card land) {
+    }  
+
+
+    @Override
+    public void afterGameEnd() {
+        if (awaitNextInputTimer != null) {
+            awaitNextInputTimer.cancel();
+            awaitNextInputTimer = null;
+        }
+    }
     // End of Choice code
 }

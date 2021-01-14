@@ -339,10 +339,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         String type = sa.getParam("ChangeType");
         if (type != null) {
-            if (type.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+            if (type.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
                 final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-                source.setSVar("PayX", Integer.toString(xPay));
+                sa.setSVar("PayX", Integer.toString(xPay));
                 type = type.replace("X", Integer.toString(xPay));
             }
         }
@@ -384,11 +384,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             String num = sa.getParam("ChangeNum");
             if (num != null) {
-                if (num.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+                if (num.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
                     // Set PayX here to maximum value.
                     int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
                     xPay = Math.min(xPay, list.size());
-                    source.setSVar("PayX", Integer.toString(xPay));
+                    sa.setSVar("PayX", Integer.toString(xPay));
                 }
             }
 
@@ -474,8 +474,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // Fetching should occur fairly often as it helps cast more spells, and
         // have access to more mana
 
-        final Card source = sa.getHostCard();
-
         if (sa.hasParam("AILogic")) {
             if (sa.getParam("AILogic").equals("Never")) {
                 /*
@@ -496,10 +494,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // this works for hidden because the mana is paid first.
         final String type = sa.getParam("ChangeType");
-        if (type != null && type.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (type != null && type.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(xPay));
+            sa.setSVar("PayX", Integer.toString(xPay));
         }
 
         Iterable<Player> pDefined;
@@ -847,7 +845,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = ai.getGame();
 
         final AbilitySub abSub = sa.getSubAbility();
@@ -861,8 +858,17 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         sa.resetTargets();
-        CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), ai, source, sa);
-        list = CardLists.getTargetableCards(list, sa);
+        // X controls the minimum targets
+        if ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid")) {
+            // Set PayX here to maximum value.
+            int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            sa.setSVar("PayX", Integer.toString(xPay));
+
+            // TODO need to set XManaCostPaid for targets, maybe doesn't need PayX anymore?
+            sa.setXManaCostPaid(xPay);
+            // TODO since change of PayX. the shouldCastLessThanMax logic might be faulty
+        }
+        CardCollection list = CardLists.getTargetableCards(game.getCardsIn(origin), sa);
 
         // Filter AI-specific targets if provided
         list = ComputerUtil.filterAITgts(sa, ai, list, true);
@@ -898,7 +904,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             //System.out.println("isPreferredTarget ok " + list);
         }
 
-        if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+        if (list.size() < sa.getMinTargets()) {
             return false;
         }
 
@@ -923,7 +929,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             // Combat bouncing
-            if (tgt.getMinTargets(sa.getHostCard(), sa) <= 1) {
+            if (sa.getMinTargets() <= 1) {
                 if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     Combat currCombat = game.getCombat();
                     CardCollection attackers = currCombat.getAttackers();
@@ -966,7 +972,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // if it's blink or bounce, try to save my about to die stuff
             final boolean blink = (destination.equals(ZoneType.Exile) && (subApi == ApiType.DelayedTrigger
                     || "DelayedBlink".equals(sa.getParam("AILogic")) || (subApi == ApiType.ChangeZone && subAffected.equals("Remembered"))));
-            if ((destination.equals(ZoneType.Hand) || blink) && (tgt.getMinTargets(sa.getHostCard(), sa) <= 1)) {
+            if ((destination.equals(ZoneType.Hand) || blink) && (sa.getMinTargets() <= 1)) {
                 // save my about to die stuff
                 Card tobounce = canBouncePermanent(ai, sa, list);
                 if (tobounce != null) {
@@ -976,7 +982,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
                     sa.getTargets().add(tobounce);
 
-                    boolean saheeliFelidarCombo = sa.getHostCard().getName().equals("Felidar Guardian")
+                    boolean saheeliFelidarCombo = ComputerUtilAbility.getAbilitySourceName(sa).equals("Felidar Guardian")
                             && tobounce.getName().equals("Saheeli Rai")
                             && CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Felidar Guardian")).size() <
                             CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Creature")).size() + ai.getOpponentsGreatestLifeTotal() + 10;
@@ -1109,7 +1115,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         boolean doWithoutTarget = sa.hasParam("Planeswalker") && sa.usesTargeting()
-                && sa.getTargetRestrictions().getMinTargets(source, sa) == 0
+                && sa.getMinTargets() == 0
                 && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class);
 
         if (list.isEmpty() && !doWithoutTarget) {
@@ -1120,12 +1126,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // the Unless cost (for example, Erratic Portal)
         list.removeAll(getSafeTargetsIfUnlessCostPaid(ai, sa, list));
 
-        if (!mandatory && list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+        if (!mandatory && sa.isTargetNumberValid()) {
             return false;
         }
 
         // target loop
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
+        while (sa.canAddMoreTarget()) {
             // AI Targeting
             Card choice = null;
 
@@ -1154,7 +1160,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
 
                     //option to hold removal instead only applies for single targeted removal
-                    if (!immediately && tgt.getMaxTargets(source, sa) == 1) {
+                    if (!immediately && sa.getMaxTargets() == 1) {
                         if (!ComputerUtilCard.useRemovalNow(sa, choice, 0, destination)) {
                             return false;
                         }
@@ -1190,7 +1196,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             if (choice == null) { // can't find anything left
-                if (sa.getTargets().getNumTargeted() == 0 || sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+                if (sa.getTargets().size() == 0 || !sa.isTargetNumberValid()) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -1204,7 +1210,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         boolean aiTgtsOK = false;
                         if (sa.hasParam("AIMinTgts")) {
                             int minTgts = Integer.parseInt(sa.getParam("AIMinTgts"));
-                            if (sa.getTargets().getNumTargeted() >= minTgts) {
+                            if (sa.getTargets().size() >= minTgts) {
                                 aiTgtsOK = true;
                             }
                         }
@@ -1225,7 +1231,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             // honor the Same Creature Type restriction
-            if (tgt.isWithSameCreatureType()) {
+            if (sa.getTargetRestrictions().isWithSameCreatureType()) {
                 Card firstTarget = sa.getTargetCard();
                 if (firstTarget != null && !choice.sharesCreatureTypeWith(firstTarget)) {
                     list.remove(choice);
@@ -1353,46 +1359,31 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final Card source = sa.getHostCard();
-        final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source, sa);
+        CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), ai, source, sa);
+        list = CardLists.getTargetableCards(list, sa);
 
-        // Narrow down the list:
-        if (origin.equals(ZoneType.Battlefield)) {
-            // filter out untargetables
-            list = CardLists.getTargetableCards(list, sa);
-
-            // if Destination is hand, either bounce opponents dangerous stuff
-            // or save my about to die stuff
-
-            // if Destination is exile, filter out my cards
-        }
-        else if (origin.equals(ZoneType.Graveyard)) {
-            // Retrieve from Graveyard to:
-        }
-
-        for (final Card c : sa.getTargets().getTargetCards()) {
-            list.remove(c);
-        }
+        list.removeAll(sa.getTargets().getTargetCards());
 
         if (list.isEmpty()) {
             return false;
         }
 
         // target loop
-        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+        while (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             // AI Targeting
             Card choice = null;
 
             if (!list.isEmpty()) {
-                if (ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false).isCreature()
-                        && (destination.equals(ZoneType.Battlefield) || origin.equals(ZoneType.Battlefield))) {
+                Card mostExpensivePermanent = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false);
+                if (mostExpensivePermanent.isCreature()
+                        && (destination.equals(ZoneType.Battlefield) || tgt.getZone().contains(ZoneType.Battlefield))) {
                     // if a creature is most expensive take the best
                     choice = ComputerUtilCard.getBestCreatureToBounceAI(list);
-                } else if (destination.equals(ZoneType.Battlefield) || origin.equals(ZoneType.Battlefield)) {
-                    choice = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false);
+                } else if (destination.equals(ZoneType.Battlefield) || tgt.getZone().contains(ZoneType.Battlefield)) {
+                    choice = mostExpensivePermanent;
                 } else if (destination.equals(ZoneType.Hand) || destination.equals(ZoneType.Library)) {
                     List<Card> nonLands = CardLists.getNotType(list, "Land");
                     // Prefer to pull a creature, generally more useful for AI.
@@ -1424,7 +1415,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             if (choice == null) { // can't find anything left
-                if (sa.getTargets().getNumTargeted() == 0 || sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+                if (sa.getTargets().size() == 0 || sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                     sa.resetTargets();
                     return false;
                 } else {
@@ -1454,10 +1445,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private static boolean knownOriginTriggerAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        if ("DeathgorgeScavenger".equals(sa.getParam("AILogic"))) {
+        final String logic = sa.getParamOrDefault("AILogic", "");
+
+        if ("DeathgorgeScavenger".equals(logic)) {
             return SpecialCardAi.DeathgorgeScavenger.consider(ai, sa);
-        } else if ("ExtraplanarLens".equals(sa.getParam("AILogic"))) {
+        } else if ("ExtraplanarLens".equals(logic)) {
             return SpecialCardAi.ExtraplanarLens.consider(ai, sa);
+        } else if ("ExileCombatThreat".equals(logic)) {
+            return doExileCombatThreatLogic(ai, sa);
         }
 
         if (sa.getTargetRestrictions() == null) {
@@ -1485,7 +1480,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             String logic = sa.getParam("AILogic");
             if ("NeverBounceItself".equals(logic)) {
                 Card source = sa.getHostCard();
-                if (fetchList.contains(source) && (fetchList.size() > 1 && !sa.getTriggeringAbility().isMandatory())) {
+                if (fetchList.contains(source) && (fetchList.size() > 1 || !sa.getTriggeringAbility().isMandatory())) {
                     // For cards that should never be bounced back to hand with their own [e.g. triggered] abilities, such as guild lands.
                     fetchList.remove(source);
                 }
@@ -1830,6 +1825,51 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return true;
     }
 
+    public static boolean doExileCombatThreatLogic(final Player aiPlayer, final SpellAbility sa) {
+        final Combat combat = aiPlayer.getGame().getCombat();
+
+        if (combat == null) {
+            return false;
+        }
+
+        Card choice = null;
+        int highestEval = -1;
+        if (combat.getAttackingPlayer().isOpponentOf(aiPlayer)) {
+            for (Card attacker : combat.getAttackers()) {
+                if (sa.canTarget(attacker) && attacker.canBeTargetedBy(sa)) {
+                    int eval = ComputerUtilCard.evaluateCreature(attacker);
+                    if (combat.isUnblocked(attacker)) {
+                        eval += 100; // TODO: make this smarter
+                    }
+                    if (eval > highestEval) {
+                        highestEval = eval;
+                        choice = attacker;
+                    }
+                }
+            }
+        } else {
+            // either the current AI player or one of its teammates is attacking, the opponent(s) are blocking
+            for (Card blocker : combat.getAllBlockers()) {
+                if (sa.canTarget(blocker) && blocker.canBeTargetedBy(sa)) {
+                    if (blocker.getController().isOpponentOf(aiPlayer)) { // TODO: unnecessary sanity check?
+                        int eval = ComputerUtilCard.evaluateCreature(blocker);
+                        if (eval > highestEval) {
+                            highestEval = eval;
+                            choice = blocker;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (choice != null) {
+            sa.getTargets().add(choice);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private static CardCollection getSafeTargetsIfUnlessCostPaid(Player ai, SpellAbility sa, Iterable<Card> potentialTgts) {
         // Determines if the controller of each potential target can negate the ChangeZone effect
         // by paying the Unless cost. Returns the list of targets that can be saved that way.
@@ -1845,7 +1885,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
                 int toPay = 0;
                 boolean setPayX = false;
-                if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {
+                if (unlessCost.equals("X") && sa.getSVar(unlessCost).equals("Count$xPaid")) {
                     setPayX = true;
                     toPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 } else {
@@ -1861,7 +1901,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
 
                 if (setPayX) {
-                    source.setSVar("PayX", Integer.toString(toPay));
+                    sa.setSVar("PayX", Integer.toString(toPay));
                 }
             }
         }

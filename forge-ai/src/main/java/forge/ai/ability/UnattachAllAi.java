@@ -46,7 +46,7 @@ public class UnattachAllAi extends SpellAbilityAi {
                 return false;
             }
 
-            source.setSVar("PayX", Integer.toString(xPay));
+            sa.setSVar("PayX", Integer.toString(xPay));
         }
 
         if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)

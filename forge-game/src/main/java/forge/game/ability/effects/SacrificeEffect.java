@@ -18,6 +18,8 @@ import forge.util.Aggregates;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Maps;
+
 import java.util.List;
 import java.util.Map;
 
@@ -139,8 +141,9 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     choosenToSacrifice = GameActionUtil.orderCardsByTheirOwners(game, choosenToSacrifice, ZoneType.Graveyard);
                 }
 
+                Map<Integer, Card> cachedMap = Maps.newHashMap();
                 for (Card sac : choosenToSacrifice) {
-                    final Card lKICopy = CardUtil.getLKICopy(sac);
+                    final Card lKICopy = CardUtil.getLKICopy(sac, cachedMap);
                     boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa, table) != null;
                     boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa, true, table);
                     // Run Devour Trigger

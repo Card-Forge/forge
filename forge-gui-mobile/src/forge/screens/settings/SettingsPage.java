@@ -190,6 +190,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("cbEscapeEndsTurn"),
                 localizer.getMessage("nlEscapeEndsTurn")),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_PLAYERINFOLAYOUT,
+                localizer.getMessage("lblAltLifeDisplay"),
+                localizer.getMessage("nlAltLifeDisplay")){
+                @Override
+                public void select() {
+                    super.select();
+                    //update
+                    Forge.altPlayerLayout = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
+                }
+            },1);
 
         //Random Deck Generation
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_NOSMALL,
@@ -264,6 +274,29 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                                 }
                             },
                 3);
+        if (GuiBase.isAndroid()) { //this option does nothing except on Android
+            lstSettings.addItem(new BooleanSetting(FPref.UI_AUTO_CACHE_SIZE,
+                                        localizer.getMessage("lblAutoCacheSize"),
+                                        localizer.getMessage("nlAutoCacheSize")) {
+                                    @Override
+                                    public void select() {
+                                        super.select();
+                                        FOptionPane.showConfirmDialog(
+                                                localizer.getMessage("lblRestartForgeDescription"),
+                                                localizer.getMessage("lblRestartForge"),
+                                                localizer.getMessage("lblRestart"),
+                                                localizer.getMessage("lblLater"), new Callback<Boolean>() {
+                                                    @Override
+                                                    public void run(Boolean result) {
+                                                        if (result) {
+                                                            Forge.restart(true);
+                                                        }
+                                                    }
+                                                });
+                                    }
+                                },
+                    3);
+        }
 
         //Graphic Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER,

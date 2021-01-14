@@ -32,6 +32,10 @@ public class DigAi extends SpellAbilityAi {
         final Card host = sa.getHostCard();
         Player libraryOwner = ai;
 
+        if (!willPayCosts(ai, sa, sa.getPayCosts(), host)) {
+            return false;
+        }
+
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (!opp.canBeTargetedBy(sa)) {
@@ -71,9 +75,9 @@ public class DigAi extends SpellAbilityAi {
 
         final String num = sa.getParam("DigNum");
         final boolean payXLogic = sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("PayX");
-        if (num != null && (num.equals("X") && host.getSVar(num).equals("Count$xPaid")) || payXLogic) {
+        if (num != null && (num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) || payXLogic) {
             // By default, set PayX here to maximum value.
-            if (!(sa instanceof AbilitySub) || host.getSVar("PayX").equals("")) {
+            if (!(sa instanceof AbilitySub) || sa.getSVar("PayX").equals("")) {
                 int manaToSave = 0;
 
                 // Special logic that asks the AI to conserve a certain amount of mana when paying X
@@ -85,7 +89,7 @@ public class DigAi extends SpellAbilityAi {
                 if (numCards <= 0) {
                     return false;
                 }
-                host.setSVar("PayX", Integer.toString(numCards));
+                sa.setSVar("PayX", Integer.toString(numCards));
             }
         }
 

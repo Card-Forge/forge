@@ -1,8 +1,16 @@
 package forge.game.player;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimap;
+
 import forge.LobbyPlayer;
 import forge.card.ColorSet;
 import forge.card.ICardFace;
@@ -14,7 +22,13 @@ import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.GameOutcome.AnteResult;
 import forge.game.GameType;
-import forge.game.card.*;
+import forge.game.GameView;
+import forge.game.Match;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardView;
+import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
@@ -23,18 +37,16 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.replacement.ReplacementEffect;
-import forge.game.spellability.*;
+import forge.game.spellability.AbilitySub;
+import forge.game.spellability.OptionalCostValue;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.TargetChoices;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.ITriggerEvent;
 import forge.util.collect.FCollectionView;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /** 
  * A prototype for player controller class
@@ -62,13 +74,13 @@ public abstract class PlayerController {
         AddOrRemove,
     }
 
-    protected final Game game;
+    protected final GameView gameView;
 
     protected final Player player;
     protected final LobbyPlayer lobbyPlayer;
 
     public PlayerController(Game game0, Player p, LobbyPlayer lp) {
-        game = game0;
+        gameView = game0.getView();
         player = p;
         lobbyPlayer = lp;
     }
@@ -77,7 +89,8 @@ public abstract class PlayerController {
         return false;
     }
 
-    public Game getGame() { return game; }
+    public Game getGame() { return gameView.getGame(); }
+    public Match getMatch() { return gameView.getMatch(); }
     public Player getPlayer() { return player; }
     public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }
 
@@ -96,7 +109,7 @@ public abstract class PlayerController {
 
     public abstract Map<Card, Integer> assignCombatDamage(Card attacker, CardCollectionView blockers, int damageDealt, GameEntity defender, boolean overrideOrder);
 
-    public abstract Integer announceRequirements(SpellAbility ability, String announce, boolean allowZero);
+    public abstract Integer announceRequirements(SpellAbility ability, String announce);
     public abstract CardCollectionView choosePermanentsToSacrifice(SpellAbility sa, int min, int max, CardCollectionView validTargets, String message);
     public abstract CardCollectionView choosePermanentsToDestroy(SpellAbility sa, int min, int max, CardCollectionView validTargets, String message);
     public abstract TargetChoices chooseNewTargetsFor(SpellAbility ability);
@@ -202,7 +215,7 @@ public abstract class PlayerController {
     public abstract boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean[] results, boolean call);
     public abstract Card chooseProtectionShield(GameEntity entityBeingDamaged, List<String> options, Map<String, Card> choiceMap);
 
-    public abstract List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num, boolean allowRepeat);
+    public abstract List<AbilitySub> chooseModeForAbility(SpellAbility sa, List<AbilitySub> possible, int min, int num, boolean allowRepeat);
 
     public abstract byte chooseColor(String message, SpellAbility sa, ColorSet colors);
     public abstract byte chooseColorAllowColorless(String message, Card c, ColorSet colors);
@@ -269,7 +282,7 @@ public abstract class PlayerController {
     }
 
     public AnteResult getAnteResult() {
-        return game.getOutcome().anteResult.get(player.getRegisteredPlayer());
+        return gameView.getAnteResult(player.getView());
     }
 
     public abstract List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen, List<OptionalCostValue> optionalCostValues);
@@ -278,4 +291,5 @@ public abstract class PlayerController {
 
     public abstract CardCollection chooseCardsForEffectMultiple(Map<String, CardCollection> validMap,
             SpellAbility sa, String title, boolean isOptional);
+
 }

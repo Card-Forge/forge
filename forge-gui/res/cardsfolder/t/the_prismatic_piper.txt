@@ -1,0 +1,10 @@
+Name:The Prismatic Piper
+ManaCost:5
+Types:Legendary Creature Shapeshifter
+PT:3/3
+K:Partner
+K:If CARDNAME is your commander, choose a color before the game begins.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | Affected$ Card.Self | SetColor$ ChosenColor | Description$ CARDNAME is the chosen color.
+AI:RemoveDeck:NonCommander
+AI:RemoveDeck:All
+Oracle:If The Prismatic Piper is your commander, choose a color before the game begins. The Prismatic Piper is the chosen color.\nPartner (You can have two commanders if both have partner.)

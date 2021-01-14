@@ -311,7 +311,7 @@ public class PlayerView extends GameEntityView {
         return getKeywords().contains(keyword);
     }
     void updateKeywords(Player p) {
-        set(TrackableProperty.Keywords, ImmutableMultiset.copyOf(p.getKeywords()));
+        set(TrackableProperty.Keywords, ImmutableMultiset.copyOf(p.getKeywords().asStringList()));
     }
 
     public List<CardView> getCommanders() {
@@ -355,7 +355,7 @@ public class PlayerView extends GameEntityView {
         return get(TrackableProperty.MindSlaveMaster);
     }
     void updateMindSlaveMaster(Player p) {
-        set(TrackableProperty.MindSlaveMaster, PlayerView.get(p.getMindSlaveMaster()));
+        set(TrackableProperty.MindSlaveMaster, PlayerView.get(p.getControllingPlayer()));
     }
 
     public FCollectionView<CardView> getAnte() {
@@ -439,6 +439,12 @@ public class PlayerView extends GameEntityView {
         return types.size();
     }
 
+    public boolean hasDelirium() {
+        if (get(TrackableProperty.HasDelirium) == null)
+            return false;
+        return get(TrackableProperty.HasDelirium);
+    }
+
     private static TrackableProperty getZoneProp(final ZoneType zone) {
         switch (zone) {
         case Ante:
@@ -465,6 +471,10 @@ public class PlayerView extends GameEntityView {
         TrackableProperty prop = getZoneProp(zone.getZoneType());
         if (prop == null) { return; }
         set(prop, CardView.getCollection(zone.getCards(false)));
+
+        //update delirium
+        if (ZoneType.Graveyard == zone.getZoneType())
+            set(TrackableProperty.HasDelirium, getZoneTypes(TrackableProperty.Graveyard) >= 4);
 
         //update flashback zone when graveyard, library, or exile zones updated
         switch (zone.getZoneType()) {

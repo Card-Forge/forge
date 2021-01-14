@@ -49,7 +49,6 @@ public class TargetRestrictions {
     // Target Choices (which is specific for the StackInstance)
 
     // What this Object is restricted to targeting
-    private boolean tgtValid = false;
     private String[] originalValidTgts,
         validTgts;
     private String uiPrompt = "";
@@ -62,6 +61,7 @@ public class TargetRestrictions {
     private boolean uniqueTargets = false;
     private boolean singleZone = false;
     private boolean differentControllers = false;
+    private boolean differentCMC = false;
     private boolean sameController = false;
     private boolean withoutSameCreatureType = false;
     private boolean withSameCreatureType = false;
@@ -92,7 +92,6 @@ public class TargetRestrictions {
      *            a {@link forge.game.spellability.TargetRestrictions} object.
      */
     public TargetRestrictions(final TargetRestrictions target) {
-        this.tgtValid = true;
         this.uiPrompt = target.getVTSelection();
         this.originalValidTgts = target.getValidTgts();
         this.validTgts = this.originalValidTgts.clone();
@@ -105,6 +104,7 @@ public class TargetRestrictions {
         this.uniqueTargets = target.isUniqueTargets();
         this.singleZone = target.isSingleZone();
         this.differentControllers = target.isDifferentControllers();
+        this.differentCMC = target.isDifferentCMC();
         this.sameController = target.isSameController();
         this.withoutSameCreatureType = target.isWithoutSameCreatureType();
         this.withSameCreatureType = target.isWithSameCreatureType();
@@ -127,7 +127,6 @@ public class TargetRestrictions {
      *            a {@link java.lang.String} object.
      */
     public TargetRestrictions(final String prompt, final String[] valid, final String min, final String max) {
-        this.tgtValid = true;
         this.uiPrompt = prompt;
         this.originalValidTgts = valid;
         this.validTgts = this.originalValidTgts.clone();
@@ -172,17 +171,6 @@ public class TargetRestrictions {
 
     /**
      * <p>
-     * doesTarget.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean doesTarget() {
-        return this.tgtValid;
-    }
-
-    /**
-     * <p>
      * getValidTgts.
      * </p>
      * 
@@ -208,7 +196,7 @@ public class TargetRestrictions {
      *
      * @return the min targets
      */
-    private final String getMinTargets() {
+    public final String getMinTargets() {
         return this.minTargets;
     }
 
@@ -217,7 +205,7 @@ public class TargetRestrictions {
      *
      * @return the max targets
      */
-    private final String getMaxTargets() {
+    public final String getMaxTargets() {
         return this.maxTargets;
     }
 
@@ -276,8 +264,7 @@ public class TargetRestrictions {
      * @return a boolean.
      */
     public final boolean isMaxTargetsChosen(final Card c, final SpellAbility sa) {
-        TargetChoices choice = sa.getTargets();
-        return this.getMaxTargets(c, sa) == choice.getNumTargeted();
+        return this.getMaxTargets(c, sa) == sa.getTargets().size();
     }
 
     /**
@@ -292,11 +279,11 @@ public class TargetRestrictions {
      * @return a boolean.
      */
     public final boolean isMinTargetsChosen(final Card c, final SpellAbility sa) {
-        if (this.getMinTargets(c, sa) == 0) {
+        int min = getMinTargets(c, sa);
+        if (min == 0) {
             return true;
         }
-        TargetChoices choice = sa.getTargets();
-        return this.getMinTargets(c, sa) <= choice.getNumTargeted();
+        return min <= sa.getTargets().size();
     }
 
     /**
@@ -488,7 +475,7 @@ public class TargetRestrictions {
                 if (isTargeted && !sa.canTarget(c)) {
                     continue;
                 }
-                if (sa.getTargets().isTargeting(c)) {
+                if (sa.getTargets().contains(c)) {
                     continue;
                 }
                 return true;
@@ -557,21 +544,12 @@ public class TargetRestrictions {
         }
 
         final Card srcCard = sa.getHostCard(); // should there be OrginalHost at any moment?
-        if (this.tgtZone.contains(ZoneType.Stack)) {
-            for (final Card c : game.getStackZone().getCards()) {
-                if (c.isValid(this.validTgts, srcCard.getController(), srcCard, sa)
-                        && (!isTargeted || sa.canTarget(c)) 
-                        && !sa.getTargets().isTargeting(c)) {
-                    candidates.add(c);
-                }
-            }
-        } else {
-            for (final Card c : game.getCardsIn(this.tgtZone)) {
-                if (c.isValid(this.validTgts, srcCard.getController(), srcCard, sa)
-                        && (!isTargeted || sa.canTarget(c)) 
-                        && !sa.getTargets().isTargeting(c)) {
-                    candidates.add(c);
-                }
+
+        for (final Card c : game.getCardsIn(this.tgtZone)) {
+            if (c.isValid(this.validTgts, srcCard.getController(), srcCard, sa)
+                    && (!isTargeted || sa.canTarget(c)) 
+                    && !sa.getTargets().contains(c)) {
+                candidates.add(c);
             }
         }
 
@@ -675,6 +653,19 @@ public class TargetRestrictions {
         this.randomTarget = random;
     }
 
+    /**
+     * @return the differentCMC
+     */
+    public boolean isDifferentCMC() {
+        return differentCMC;
+    }
+
+    /**
+     * @param different the differentCMC to set
+     */
+    public void setDifferentCMC(boolean different) {
+        this.differentCMC = different;
+    }
     /**
      * @return the differentControllers
      */

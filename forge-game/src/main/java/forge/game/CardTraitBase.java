@@ -21,14 +21,16 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
-/** 
+/**
  * Base class for Triggers,ReplacementEffects and StaticAbilities.
- * 
+ *
  */
-public abstract class CardTraitBase extends GameObject implements IHasCardView {
+public abstract class CardTraitBase extends GameObject implements IHasCardView, IHasSVars {
 
     /** The host card. */
     protected Card hostCard;
+
+    private Card grantorCard = null; // card which grants the ability (equipment or owner of static ability that gave this one)
 
     /** The map params. */
     protected Map<String, String> originalMapParams = Maps.newHashMap(),
@@ -40,7 +42,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     /** The suppressed. */
     protected boolean suppressed = false;
 
-    protected Map<String, String> sVars = Maps.newHashMap();
+    protected Map<String, String> sVars = Maps.newTreeMap();
 
     protected Map<String, String> intrinsicChangedTextColors = Maps.newHashMap();
     protected Map<String, String> intrinsicChangedTextTypes = Maps.newHashMap();
@@ -82,7 +84,10 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
 
     public boolean hasParam(String key) {
         return mapParams.containsKey(key);
-    }    
+    }
+    public String putParam(String key, String value) {
+        return mapParams.put(key, value);
+    }
     /**
      * <p>
      * Getter for the field <code>mapParams</code>.
@@ -110,7 +115,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
      * <p>
      * Getter for the field <code>hostCard</code>.
      * </p>
-     * 
+     *
      * @return a {@link forge.game.card.Card} object.
      */
     public Card getHostCard() {
@@ -133,7 +138,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
      * <p>
      * isSecondary.
      * </p>
-     * 
+     *
      * @return a boolean.
      */
     public final boolean isSecondary() {
@@ -144,7 +149,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
      * <p>
      * matchesValid.
      * </p>
-     * 
+     *
      * @param o
      *            a {@link java.lang.Object} object.
      * @param valids
@@ -164,7 +169,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
 
     /**
      * Sets the suppressed.
-     * 
+     *
      * @param supp
      *            the new suppressed
      */
@@ -174,7 +179,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
 
     /**
      * Checks if is suppressed.
-     * 
+     *
      * @return true, if is suppressed
      */
     public final boolean isSuppressed() {
@@ -184,7 +189,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     protected boolean meetsCommonRequirements(Map<String, String> params) {
         final Player hostController = this.getHostCard().getController();
         final Game game = hostController.getGame();
-        
+
         if (params.containsKey("Metalcraft")) {
             if ("True".equalsIgnoreCase(params.get("Metalcraft")) != hostController.hasMetalcraft()) return false;
         }
@@ -212,7 +217,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
         if (params.containsKey("Blessing")) {
             if ("True".equalsIgnoreCase(params.get("Blessing")) != hostController.hasBlessing()) return false;
         }
-        
+
         if (params.containsKey("Adamant")) {
             if (hostCard.getCastSA() == null) {
                 return false;
@@ -307,18 +312,18 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
                 }
             }
             list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), null);
-    
+
 
             final String rightString = presentCompare.substring(2);
             int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
             final int left = list.size();
-    
+
             if (!Expressions.compare(left, presentCompare, right)) {
                 return false;
             }
-    
+
         }
-    
+
         if (params.containsKey("IsPresent2")) {
             final String sIsPresent = params.get("IsPresent2");
             String presentCompare = "GE1";
@@ -342,13 +347,13 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
                     list.addAll(p.getCardsIn(presentZone));
                 }
             }
-    
+
             list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), null);
-    
+
             final String rightString = presentCompare.substring(2);
             int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
             final int left = list.size();
-    
+
             if (!Expressions.compare(left, presentCompare, right)) {
                 return false;
             }
@@ -371,7 +376,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
                 return false;
             }
         }
-    
+
         if (params.containsKey("CheckSVar")) {
             final int sVar = AbilityUtils.calculateAmount(game.getCardState(this.getHostCard()), params.get("CheckSVar"), this);
             String comparator = "GE1";
@@ -385,17 +390,20 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
                 return false;
             }
         }
-    
+
         if (params.containsKey("ManaSpent")) {
-            byte spent = ManaAtom.fromName(params.get("ManaSpent"));
-            if ( 0 == (this.getHostCard().getColorsPaid() & spent)) {
+            SpellAbility castSA = getHostCard().getCastSA();
+            if (castSA == null) {
+                return false;
+            }
+            if (!castSA.getPayingColors().hasAllColors(ManaAtom.fromName(params.get("ManaSpent")))) {
                 return false;
             }
         }
 
         if (params.containsKey("ManaNotSpent")) {
-            byte spent = ManaAtom.fromName(params.get("ManaNotSpent"));
-            if ( 0 != (this.getHostCard().getColorsPaid() & spent)) {
+            SpellAbility castSA = getHostCard().getCastSA();
+            if (castSA != null && castSA.getPayingColors().hasAllColors(ManaAtom.fromName(params.get("ManaNotSpent")))) {
                 return false;
             }
         }
@@ -459,28 +467,29 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
         return CardView.get(hostCard);
     }
 
-    public String getSvarWithFallback(final String name) {
-        String var = sVars.get(name);
-        if (var == null) {
-            var = hostCard.getSVar(name);
+    protected IHasSVars getSVarFallback() {
+        if (getOriginalHost() != null) {
+            return getOriginalHost();
         }
-        return var;
+        return getHostCard();
     }
 
+    @Override
     public String getSVar(final String name) {
-        String var = sVars.get(name);
-        if (var == null) {
-            var = "";
+        if (sVars.containsKey(name)) {
+            return sVars.get(name);
+        } else {
+            return getSVarFallback().getSVar(name);
         }
-        return var;
     }
 
+    @Override
     public boolean hasSVar(final String name) {
-        return sVars.containsKey(name);
+        return sVars.containsKey(name) || getSVarFallback().hasSVar(name);
     }
 
     public Integer getSVarInt(final String name) {
-        String var = sVars.get(name);
+        String var = this.getSVar(name);
         if (var != null) {
             try {
                 return Integer.parseInt(var);
@@ -490,12 +499,32 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
         return null;
     }
 
+    @Override
     public final void setSVar(final String name, final String value) {
         sVars.put(name, value);
     }
 
-    public Set<String> getSVars() {
-        return sVars.keySet();
+    @Override
+    public Map<String, String> getSVars() {
+        return sVars;
+    }
+
+    @Override
+    public void setSVars(Map<String, String> newSVars) {
+        sVars = Maps.newTreeMap();
+        sVars.putAll(newSVars);
+    }
+
+    @Override
+    public void removeSVar(String var) {
+        sVars.remove(var);
+    }
+
+    public Card getOriginalHost() {
+        return grantorCard;
+    }
+    public void setOriginalHost(final Card c) {
+        grantorCard = c;
     }
 
     public Map<String, String> getChangedTextColors() {
@@ -550,7 +579,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     protected void copyHelper(CardTraitBase copy, Card host) {
         copy.originalMapParams = Maps.newHashMap(originalMapParams);
         copy.mapParams = Maps.newHashMap(originalMapParams);
-        copy.sVars = Maps.newHashMap(sVars);
+        copy.setSVars(sVars);
         // dont use setHostCard to not trigger the not copied parts yet
         copy.hostCard = host;
     }

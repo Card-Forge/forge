@@ -3,8 +3,8 @@ ManaCost:3 B/R B/R
 Types:Legendary Creature Hellion Horror
 PT:3/5
 K:Companion:Card.cmcM21,Land:Your starting deck contains only cards with odd converted mana costs and land cards.
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.YouCtrl+cmcM21 | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwice | Description$ If a source you control with an odd converted mana cost would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.YouCtrl+cmcM21 | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwice | Description$ If a source you control with an odd converted mana cost would deal damage to a permanent or player, it deals double that damage instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ Y | References$ Y
 SVar:Y:ReplaceCount$DamageAmount/Twice
 SVar:PlayMain1:TRUE
-Oracle:Companion — Your starting deck contains only cards with odd converted mana costs and land cards. (If this card is your chosen companion, you may cast it once from outside the game.)\nIf a source you control with an odd converted mana cost would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.
+Oracle:Companion — Your starting deck contains only cards with odd converted mana costs and land cards. (If this card is your chosen companion, you may cast it once from outside the game.)\nIf a source you control with an odd converted mana cost would deal damage to a permanent or player, it deals double that damage instead.

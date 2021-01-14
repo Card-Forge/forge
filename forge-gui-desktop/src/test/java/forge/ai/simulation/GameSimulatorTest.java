@@ -804,7 +804,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertNotNull(simBrood);
         assertEquals(0, simBrood.getDamage());
 
-        // destoryed because of to much redirected damage
+        // destroyed because of to much redirected damage
         assertNull(simPalisade);
         assertNotNull(simPridemate);
 
@@ -1657,7 +1657,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Game simGame = sim.getSimulatedGameState();
 
         // One cards drawn
-        assertEquals(1, simGame.getPlayers().get(0).getZone(ZoneType.Hand).size());
+        assertEquals(0, simGame.getPlayers().get(0).getZone(ZoneType.Hand).size());
     }
 
     public void testTeysaKarlovGitrogMonsterTeysaDies() {

@@ -1,11 +1,10 @@
 Name:Wake the Dead
 ManaCost:X B B
 Types:Instant
-Text:Cast CARDNAME only during combat on an opponent's turn.
-A:SP$ ChangeZone | Cost$ X B B | TargetMin$ 0 | TargetMax$ MaxTgts | OpponentTurn$ True | ActivationPhases$ BeginCombat->EndCombat | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creatures in your graveyard | GainControl$ True | SubAbility$ DBPump | References$ X,MaxTgts | SpellDescription$ Return X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step.
-SVar:X:Targeted$Amount
-SVar:MaxTgts:Count$TypeInYourYard.Creature
+Text:Cast this spell only during combat on an opponent's turn.
+A:SP$ ChangeZone | Cost$ X B B | TargetMin$ X | TargetMax$ X | OpponentTurn$ True | ActivationPhases$ BeginCombat->EndCombat | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select X target creatures in your graveyard | GainControl$ True | SubAbility$ DBPump | References$ X | StackDescription$ Return X target creature cards [{c:Targeted}] from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step. | SpellDescription$ Return X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | AtEOT$ Sacrifice
+SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wake_the_dead.jpg
-Oracle:Cast Wake the Dead only during combat on an opponent's turn.\nReturn X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step.
+DeckHas:Ability$Graveyard & Ability$Sacrifice
+Oracle:Cast this spell only during combat on an opponent's turn.\nReturn X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step.

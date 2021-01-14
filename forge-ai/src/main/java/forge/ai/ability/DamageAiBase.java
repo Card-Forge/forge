@@ -66,7 +66,7 @@ public abstract class DamageAiBase extends SpellAbilityAi {
         if (!sa.canTarget(enemy)) {
             return false;
         }
-        if (sa.getTargets() != null && sa.getTargets().getTargets().contains(enemy)) {
+        if (sa.getTargets() != null && sa.getTargets().contains(enemy)) {
             return false;
         }
 

@@ -108,6 +108,9 @@ SAC_TO_REATTACH_TARGET_EVAL_THRESHOLD=350
 PREDICT_SPELLS_FOR_MAIN2=true
 RESERVE_MANA_FOR_MAIN2_CHANCE=100
 
+# If enabled, the AI will protect its permanents against curse auras with Hexproof, Shroud, and Protection
+ACTIVELY_PROTECT_VS_CURSE_AURAS=true
+
 # If enabled, the AI will target artifacts and non-aura enchantments with removal aggressively
 ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS=true
 

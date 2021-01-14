@@ -20,9 +20,12 @@ package forge.game;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Table;
 import com.google.common.eventbus.EventBus;
 import forge.card.CardRarity;
 import forge.card.CardStateName;
@@ -53,10 +56,18 @@ import forge.util.Visitor;
 
 import java.util.*;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
  */
 public class Game {
+
+    private static int maxId = 0;
+    private static int nextId() { return ++maxId; }
+
+    /** The ID. */
+    private int id;
     private final GameRules rules;
     private final PlayerCollection allPlayers = new PlayerCollection();
     private final PlayerCollection ingamePlayers = new PlayerCollection();
@@ -86,6 +97,8 @@ public class Game {
     private Map<Player, PlayerCollection> attackedThisTurn = Maps.newHashMap();
     private Map<Player, PlayerCollection> attackedLastTurn = Maps.newHashMap();
 
+    private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
+
     private Player monarch = null;
     private Player monarchBeginTurn = null;
 
@@ -99,6 +112,15 @@ public class Game {
 
     private final GameView view;
     private final Tracker tracker = new Tracker();
+
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    public int getId() {
+        return this.id;
+    }
 
     public Player getMonarch() {
         return monarch;
@@ -148,9 +170,10 @@ public class Game {
     public void copyLastState() {
         lastStateBattlefield.clear();
         lastStateGraveyard.clear();
+        Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (final Player p : getPlayers()) {
-            lastStateBattlefield.addAll(p.getZone(ZoneType.Battlefield).getLKICopy());
-            lastStateGraveyard.addAll(p.getZone(ZoneType.Graveyard).getLKICopy());
+            lastStateBattlefield.addAll(p.getZone(ZoneType.Battlefield).getLKICopy(cachedMap));
+            lastStateGraveyard.addAll(p.getZone(ZoneType.Graveyard).getLKICopy(cachedMap));
         }
     }
 
@@ -164,7 +187,8 @@ public class Game {
                 : zone.equals(ZoneType.Graveyard) ? lastStateGraveyard
                 : null;
 
-        if (lookup != null && lookup.remove(c)) {
+        if (lookup != null) {
+            lookup.remove(c);
             lookup.add(CardUtil.getLKICopy(c));
         }
     }
@@ -195,9 +219,10 @@ public class Game {
         changeZoneLKIInfo.clear();
     }
 
-    public Game(List<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */
+    public Game(Iterable<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */
         rules = rules0;
         match = match0;
+        this.id = nextId();
 
         int highestTeam = -1;
         for (RegisteredPlayer psc : players0) {
@@ -207,6 +232,9 @@ public class Game {
                 highestTeam = teamNum;
             }
         }
+
+        // View needs to be done before PlayerController
+        view = new GameView(this);
 
         int plId = 0;
         for (RegisteredPlayer psc : players0) {
@@ -239,7 +267,8 @@ public class Game {
         endOfCombat = new Phase(PhaseType.COMBAT_END);
         endOfTurn = new Phase(PhaseType.END_OF_TURN);
 
-        view = new GameView(this);
+        // update players
+        view.updatePlayers(this);
 
         subscribeToEvents(gameLog.getEventVisitor());
     }
@@ -410,10 +439,10 @@ public class Game {
     }
 
     public synchronized void setGameOver(GameEndReason reason) {
-        age = GameStage.GameOver;
         for (Player p : allPlayers) {
-            p.setMindSlaveMaster(null); // for correct totals
+            p.clearController();
         }
+        age = GameStage.GameOver;
 
         for (Player p : getPlayers()) {
             p.onGameOver();
@@ -428,7 +457,7 @@ public class Game {
         view.updateGameOver(this);
 
         // The log shall listen to events and generate text internally
-        fireEvent(new GameEventGameOutcome(result, match.getPlayedGames()));
+        fireEvent(new GameEventGameOutcome(result, match.getOutcomes()));
     }
 
     public Zone getZoneOf(final Card card) {
@@ -710,12 +739,12 @@ public class Game {
             getNextPlayerAfter(p).initPlane();
         }
 
-        if (p != null && p.equals(getMonarch())) {
+        if (p != null && p.isMonarch()) {
             // if the player who lost was the Monarch, someone else will be the monarch
             if(p.equals(getPhaseHandler().getPlayerTurn())) {
-                getAction().becomeMonarch(getNextPlayerAfter(p));
+                getAction().becomeMonarch(getNextPlayerAfter(p), null);
             } else {
-                getAction().becomeMonarch(getPhaseHandler().getPlayerTurn());
+                getAction().becomeMonarch(getPhaseHandler().getPlayerTurn(), null);
             }
         }
 
@@ -938,5 +967,47 @@ public class Game {
             }
         }
         return result;
+    }
+
+    public void onCleanupPhase() {
+        clearCounterAddedThisTurn();
+        for (Player player : getPlayers()) {
+            player.onCleanupPhase();
+        }
+    }
+
+    public void addCounterAddedThisTurn(Player putter, CounterType cType, Card card, Integer value) {
+        if (putter == null || card == null || value <= 0) {
+            return;
+        }
+        List<Pair<Card, Integer>> result = countersAddedThisTurn.get(cType, putter);
+        if (result == null) {
+            result = Lists.newArrayList();
+        }
+        result.add(Pair.of(CardUtil.getLKICopy(card), value));
+        if (!countersAddedThisTurn.contains(cType, putter)) {
+            countersAddedThisTurn.put(cType, putter, result);
+        }
+    }
+
+    public int getCounterAddedThisTurn(CounterType cType, String validPlayer, String validCard, Card source, Player sourceController, SpellAbility spellAbility) {
+        int result = 0;
+        if (!countersAddedThisTurn.containsRow(cType)) {
+            return result;
+        }
+        for (Map.Entry<Player, List<Pair<Card, Integer>>> e : countersAddedThisTurn.row(cType).entrySet()) {
+           if (e.getKey().isValid(validPlayer.split(","), sourceController, source, spellAbility)) {
+               for (Pair<Card, Integer> p : e.getValue()) {
+                   if (p.getKey().isValid(validCard.split(","), sourceController, source, spellAbility)) {
+                       result += p.getValue();
+                   }
+               }
+           }
+        }
+        return result;
+    }
+
+    public void clearCounterAddedThisTurn() {
+        countersAddedThisTurn.clear();
     }
 }

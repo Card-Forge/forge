@@ -355,6 +355,32 @@ public class MatchScreen extends FScreen {
         final GameView game = MatchController.instance.getGameView();
         if (game == null) { return; }
 
+        if(gameMenu!=null) {
+             if(gameMenu.getChildCount()>3){
+                 if(viewWinLose == null) {
+                     gameMenu.getChildAt(0).setEnabled(!game.isMulligan());
+                     gameMenu.getChildAt(1).setEnabled(!game.isMulligan());
+                     gameMenu.getChildAt(2).setEnabled(!game.isMulligan());
+                     gameMenu.getChildAt(3).setEnabled(!game.isMulligan());
+                     gameMenu.getChildAt(4).setEnabled(false);
+                 } else {
+                     gameMenu.getChildAt(0).setEnabled(false);
+                     gameMenu.getChildAt(1).setEnabled(false);
+                     gameMenu.getChildAt(2).setEnabled(false);
+                     gameMenu.getChildAt(3).setEnabled(false);
+                     gameMenu.getChildAt(4).setEnabled(true);
+                 }
+             }
+        }
+        if(devMenu!=null) {
+            if(devMenu.isVisible()){
+                if(viewWinLose == null)
+                    devMenu.setEnabled(true);
+                else
+                    devMenu.setEnabled(false);
+            }
+        }
+
         //draw arrows for paired cards
         Set<CardView> pairedCards = new HashSet<>();
         for (VPlayerPanel playerPanel : playerPanels.values()) {

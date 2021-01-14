@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -76,15 +77,12 @@ public class PlayEffect extends SpellAbilityEffect {
         CardCollection showCards = new CardCollection();
 
         if (sa.hasParam("Valid")) {
-            ZoneType zone = ZoneType.Hand;
-            if (sa.hasParam("ValidZone")) {
-                zone = ZoneType.smartValueOf(sa.getParam("ValidZone"));
-            }
+            List<ZoneType> zones = sa.hasParam("ValidZone") ? ZoneType.listValueOf(sa.getParam("ValidZone")) : ImmutableList.of(ZoneType.Hand);
             tgtCards = new CardCollection(
-                AbilityUtils.filterListByType(game.getCardsIn(zone), sa.getParam("Valid"), sa)
+                AbilityUtils.filterListByType(game.getCardsIn(zones), sa.getParam("Valid"), sa)
             );
             if ( sa.hasParam("ShowCards") ) {
-                showCards = new CardCollection(AbilityUtils.filterListByType(game.getCardsIn(zone), sa.getParam("ShowCards"), sa));
+                showCards = new CardCollection(AbilityUtils.filterListByType(game.getCardsIn(zones), sa.getParam("ShowCards"), sa));
             }
         }
         else if (sa.hasParam("AnySupportedCard")) {
@@ -241,7 +239,7 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("PlayReduceCost")) {
                 // for Kefnet only can reduce colorless cost
                 String reduce = sa.getParam("PlayReduceCost");
-                tgtSA.getMapParams().put("ReduceCost", reduce);
+                tgtSA.putParam("ReduceCost", reduce);
                 if (!StringUtils.isNumeric(reduce)) {
                     tgtSA.setSVar(reduce, sa.getSVar(reduce));
                 }

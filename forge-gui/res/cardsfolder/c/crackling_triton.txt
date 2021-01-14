@@ -4,4 +4,4 @@ Types:Creature Merfolk Wizard
 PT:2/3
 A:AB$ DealDamage | Cost$ 2 R Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crackling_triton.jpg
-Oracle:{2}{R}, Sacrifice Crackling Triton: Crackling Triton deals 2 damage to any target.
+Oracle:{2}{R}, Sacrifice Crackling Triton: It deals 2 damage to any target.

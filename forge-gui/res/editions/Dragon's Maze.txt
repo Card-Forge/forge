@@ -7,6 +7,7 @@ MciCode=dgm
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:!land, 3 Uncommon, 1 RareMythic:!land, 1 fromSheet("DGM Lands")
+ChaosDraftThemes=RAVNICA
 
 [cards]
 1 C Boros Mastiff
@@ -165,6 +166,29 @@ Booster=10 Common:!land, 3 Uncommon, 1 RareMythic:!land, 1 fromSheet("DGM Lands"
 154 C Rakdos Guildgate
 155 C Selesnya Guildgate
 156 C Simic Guildgate
+
+[Lands]
+10 Azorius Guildgate|DGM
+10 Boros Guildgate|DGM
+10 Dimir Guildgate|DGM
+10 Golgari Guildgate|DGM
+10 Gruul Guildgate|DGM
+10 Izzet Guildgate|DGM
+10 Orzhov Guildgate|DGM
+10 Rakdos Guildgate|DGM
+10 Selesnya Guildgate|DGM
+10 Simic Guildgate|DGM
+2 Blood Crypt|RTR
+2 Hallowed Fountain|RTR
+2 Overgrown Tomb|RTR
+2 Steam Vents|RTR
+2 Temple Garden|RTR
+2 Breeding Pool|GTC
+2 Godless Shrine|GTC
+2 Sacred Foundry|GTC
+2 Stomping Ground|GTC
+2 Watery Grave|GTC
+1 Maze's End|DGM
 
 [tokens]
 w_1_1_bird_flying

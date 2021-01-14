@@ -414,7 +414,7 @@ public final class CardScriptParser {
             "IsTargetingSource", "sharesPermanentTypeWith",
             "canProduceSameManaTypeWith", "SecondSpellCastThisTurn",
             "ThisTurnCast", "withFlashback", "tapped", "untapped", "faceDown",
-            "faceUp", "hasLevelUp", "DrawnThisTurn",
+            "faceUp", "hasLevelUp", "DrawnThisTurn", "notDrawnThisTurn",
             "enteredBattlefieldThisTurn", "notEnteredBattlefieldThisTurn",
             "firstTurnControlled", "notFirstTurnControlled",
             "startedTheTurnUntapped", "attackedOrBlockedSinceYourLastUpkeep",
@@ -446,7 +446,7 @@ public final class CardScriptParser {
             "hasActivatedAbility", "hasManaAbility",
             "hasNonManaActivatedAbility", "NoAbilities", "HasCounters",
             "wasNotCast", "ChosenType", "IsNotChosenType", "IsCommander",
-            "IsRenowned", "IsNotRenowned");
+            "IsNotCommander","IsRenowned", "IsNotRenowned");
     private static final Set<String> VALID_EXCLUSIVE_STARTSWITH = ImmutableSortedSet
             .of("named", "notnamed", "OwnedBy", "ControlledBy",
                     "ControllerControls", "AttachedTo", "EnchantedBy",

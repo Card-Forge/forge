@@ -12,8 +12,8 @@ import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
-import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.Zone;
@@ -123,7 +123,7 @@ public class CostAdjustment {
                 --count;
             } else if ("Strive".equals(amount)) {
                 for (TargetChoices tc : sa.getAllTargetChoices()) {
-                    count += tc.getNumTargeted();
+                    count += tc.size();
                 }
                 --count;
             } else {
@@ -224,6 +224,8 @@ public class CostAdjustment {
                     } else if (!test) {
                         sa.getHostCard().addDelved(c);
                         final Card d = game.getAction().exile(c, null);
+                        d.setExiledWith(sa.getHostCard());
+                        d.setExiledBy(sa.getHostCard().getController());
                         table.put(ZoneType.Graveyard, d.getZone().getZoneType(), d);
                     }
                 }
@@ -336,16 +338,10 @@ public class CostAdjustment {
             return;
         }
 
-        int value = 0;
-        if (StringUtils.isNumeric(amount)) {
-            value = Integer.parseInt(amount);
-        } else {
-            if ("Min3".equals(amount)) {
-                int cmc = manaCost.getConvertedManaCost();
-                if (cmc < 3) {
-                    value = 3 - cmc;
-                }
-            }
+        int value = Integer.parseInt(amount);
+
+        if (staticAbility.hasParam("RaiseTo")) {
+            value = Math.max(value - manaCost.getConvertedManaCost(), 0);
         }
 
         manaCost.increaseGenericMana(value);
@@ -423,6 +419,7 @@ public class CostAdjustment {
         final Player controller = hostCard.getController();
         final Player activator = sa.getActivatingPlayer();
         final Card card = sa.getHostCard();
+        final Game game = hostCard.getGame();
 
         if (st.hasParam("ValidCard")
                 && !card.isValid(st.getParam("ValidCard").split(","), controller, hostCard, sa)) {
@@ -452,17 +449,29 @@ public class CostAdjustment {
                     if (activator == null ) {
                         return false;
                     }
-                    List<Card> list = CardUtil.getThisTurnCast(st.getParam("ValidCard"), hostCard);
+                    List<Card> list;
+                    if (st.hasParam("ValidCard")) {
+                        list = CardUtil.getThisTurnCast(st.getParam("ValidCard"), hostCard);
+                    } else {
+                        list = game.getStack().getSpellsCastThisTurn();
+                    }
+
+                    if (st.hasParam("ValidSpell")) {
+                        list = CardLists.filterAsList(list, CardPredicates.castSA(
+                            SpellAbilityPredicates.isValid(st.getParam("ValidSpell").split(","), controller, hostCard, sa))
+                        );
+                    }
+
                     if (CardLists.filterControlledBy(list, activator).size() > 0) {
                         return false;
                     }
                 }
             } else if (type.equals("Ability")) {
-                if (!(sa instanceof AbilityActivated) || sa.isReplacementAbility()) {
+                if (!sa.isActivatedAbility() || sa.isReplacementAbility()) {
                     return false;
                 }
             } else if (type.equals("NonManaAbility")) {
-                if (!(sa instanceof AbilityActivated) || sa.isManaAbility() || sa.isReplacementAbility()) {
+                if (!sa.isActivatedAbility() || sa.isManaAbility() || sa.isReplacementAbility()) {
                     return false;
                 }
             } else if (type.equals("Buyback")) {
@@ -478,7 +487,7 @@ public class CostAdjustment {
                     return false;
                 }
             } else if (type.equals("Equip")) {
-                if (!(sa instanceof AbilityActivated) || !sa.hasParam("Equip")) {
+                if (!sa.isActivatedAbility() || !sa.hasParam("Equip")) {
                     return false;
                 }
             } else if (type.equals("Flashback")) {
@@ -520,7 +529,7 @@ public class CostAdjustment {
                     curSa = curSa.getSubAbility();
                     continue;
                 }
-                for (GameObject target : curSa.getTargets().getTargets()) {
+                for (GameObject target : curSa.getTargets()) {
                     if (target.isValid(st.getParam("ValidTarget").split(","), hostCard.getController(), hostCard, curSa)) {
                         targetValid = true;
                         break outer;

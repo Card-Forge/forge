@@ -335,3 +335,6 @@ w_3_3_bird_flying
 w_3_4_bird_flying
 u_2_2_drake_flying
 
+[other]
+embalm_angel_of_sanctions
+embalm_heart-piercer_manticore

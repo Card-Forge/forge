@@ -4,8 +4,8 @@ Types:Enchantment Aura Curse
 K:Enchant player
 A:SP$ Attach | Cost$ 4 U | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ Player.EnchantedBy | Execute$ TrigCopy | TriggerZones$ Battlefield | OptionalDecider$ TriggeredCardOpponent | TriggerDescription$ Whenever enchanted player casts an instant or sorcery spell, each other player may copy that spell and may choose new targets for the copy they control.
-SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Controller$ TriggeredCardOpponent
+# TODO each player should copy it for multiplayer
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Controller$ TriggeredCardOpponent | MayChooseTarget$ True
 AI:RemoveDeck:All
 SVar:RemMultiplayer:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_echoes.jpg
 Oracle:Enchant player\nWhenever enchanted player casts an instant or sorcery spell, each other player may copy that spell and may choose new targets for the copy they control.

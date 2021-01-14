@@ -1,0 +1,14 @@
+Name:Laboratory Drudge
+ManaCost:3 U
+Types:Creature Zombie Horror
+PT:3/4
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ1 | Execute$ TrigDraw | TriggerDescription$ At the beginning of each end step, draw a card if you've cast a spell from a graveyard this turn or activated an ability of a card in a graveyard this turn.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | ValidCard$ Card.wasCastFromGraveyard | Execute$ TrigStore | TriggerZones$ Battlefield | Static$ True
+T:Mode$ AbilityCast | ValidActivatingPlayer$ You | ValidCard$ Card.inZoneGraveyard | Execute$ TrigStore | TriggerZones$ Battlefield | Static$ True
+SVar:TrigStore:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 1 | References$ X
+SVar:X:Number$0
+T:Mode$ TurnBegin | Execute$ TrigReset | Static$ True
+SVar:TrigReset:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 0 | References$ X
+DeckHas:Ability$Graveyard
+Oracle:At the beginning of each end step, draw a card if you've cast a spell from a graveyard this turn or activated an ability of a card in a graveyard this turn.

@@ -143,7 +143,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             // variable amount for Hex Parasite
             int amount;
             boolean xPay = false;
-            if (amountStr.equals("X") && source.getSVar("X").equals("Count$xPaid")) {
+            if (amountStr.equals("X") && sa.getSVar("X").equals("Count$xPaid")) {
                 final int manaLeft = ComputerUtilMana.determineLeftoverMana(sa, ai);
 
                 if (manaLeft == 0) {
@@ -167,7 +167,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
                     if (amount >= ice) {
                         sa.getTargets().add(depth);
                         if (xPay) {
-                            source.setSVar("PayX", Integer.toString(ice));
+                            sa.setSVar("PayX", Integer.toString(ice));
                         }
                         return true;
                     }
@@ -186,7 +186,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 Card best = ComputerUtilCard.getBestPlaneswalkerAI(planeswalkerList);
                 sa.getTargets().add(best);
                 if (xPay) {
-                    source.setSVar("PayX", Integer.toString(best.getCurrentLoyalty()));
+                    sa.setSVar("PayX", Integer.toString(best.getCurrentLoyalty()));
                 }
                 return true;
             }
@@ -297,7 +297,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             int amount;
             boolean xPay = false;
             // Timecrafting has X R
-            if (amountStr.equals("X") && source.getSVar("X").equals("Count$xPaid")) {
+            if (amountStr.equals("X") && sa.getSVar("X").equals("Count$xPaid")) {
                 final int manaLeft = ComputerUtilMana.determineLeftoverMana(sa, ai);
 
                 if (manaLeft == 0) {
@@ -317,7 +317,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 int timeCount = best.getCounters(CounterEnumType.TIME);
                 sa.getTargets().add(best);
                 if (xPay) {
-                    source.setSVar("PayX", Integer.toString(timeCount));
+                    sa.setSVar("PayX", Integer.toString(timeCount));
                 }
                 return true;
             }
@@ -387,9 +387,9 @@ public class CountersRemoveAi extends SpellAbilityAi {
         } else if (target instanceof Player) {
             Player targetPlayer = (Player) target;
             if (targetPlayer.isOpponentOf(player)) {
-                return !type.equals(CounterEnumType.POISON) ? max : min;
+                return !type.is(CounterEnumType.POISON) ? max : min;
             } else {
-                return type.equals(CounterEnumType.POISON) ? max : min;
+                return type.is(CounterEnumType.POISON) ? max : min;
             }
         }
 
@@ -438,13 +438,13 @@ public class CountersRemoveAi extends SpellAbilityAi {
             Player targetPlayer = (Player) target;
             if (targetPlayer.isOpponentOf(ai)) {
                 for (CounterType type : options) {
-                    if (!type.equals(CounterEnumType.POISON)) {
+                    if (!type.is(CounterEnumType.POISON)) {
                         return type;
                     }
                 }
             } else {
                 for (CounterType type : options) {
-                    if (type.equals(CounterEnumType.POISON)) {
+                    if (type.is(CounterEnumType.POISON)) {
                         return type;
                     }
                 }

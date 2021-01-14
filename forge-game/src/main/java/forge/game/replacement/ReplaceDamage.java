@@ -17,6 +17,8 @@
  */
 package forge.game.replacement;
 
+import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -47,6 +49,8 @@ public class ReplaceDamage extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
+        final Game game = getHostCard().getGame();
+
         if (!(runParams.containsKey(AbilityKey.Prevention) == (hasParam("PreventionEffect") || hasParam("Prevent")))) {
             return false;
         }
@@ -117,21 +121,42 @@ public class ReplaceDamage extends ReplacementEffect {
             return false;
         }
 
-        // check for DamageRedirection, the Thing where the damage is redirected to must be a creature or planeswalker or a player 
         if (hasParam("DamageTarget")) {
-            String def = getParam("DamageTarget");
-
-            for (Player p : AbilityUtils.getDefinedPlayers(hostCard, def, null)) {
-                if (!p.getGame().getPlayers().contains(p)) {
-                    return false;
-                }
+            //Lava Burst and Whippoorwill check
+            SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
+            GameEntity affected = (GameEntity) runParams.get(AbilityKey.Affected);
+            if (((cause != null) && (cause.hasParam("NoRedirection")) || (affected.hasKeyword("Damage that would be dealt to CARDNAME can't be redirected.")))) {
+                return false;
             }
-            for (Card c : AbilityUtils.getDefinedCards(hostCard, def, null)) {
-                if (!c.isCreature() && !c.isPlaneswalker()) {
+            // check for DamageRedirection, the Thing where the damage is redirected to must be a creature or planeswalker or a player
+            String def = getParam("DamageTarget");
+            if (def.startsWith("Replaced")) {
+                // this can't work with the Defined below because the replaced objects aren't set to a possible SA yet
+                if (def.equals("ReplacedSourceController")) {
+                    Card source = (Card) runParams.get(AbilityKey.DamageSource);
+                    if (!game.getPlayers().contains(source.getController())) {
+                        return false;
+                    }
+                } else if (def.equals("ReplacedTargetController")) {
+                    if (!(affected instanceof Card) || !game.getPlayers().contains(((Card) affected).getController())) {
+                        return false;
+                    }
+                } else {
                     return false;
                 }
-                if (!c.isInPlay()) {
-                    return false;
+            } else {
+                for (Player p : AbilityUtils.getDefinedPlayers(getHostCard(), def, null)) {
+                    if (!game.getPlayers().contains(p)) {
+                        return false;
+                    }
+                }
+                for (Card c : AbilityUtils.getDefinedCards(getHostCard(), def, null)) {
+                    if (!c.isCreature() && !c.isPlaneswalker()) {
+                        return false;
+                    }
+                    if (!c.isInPlay()) {
+                        return false;
+                    }
                 }
             }
         }

@@ -17,7 +17,7 @@
  */
 package forge.game.spellability;
 
-import com.google.common.collect.Sets;
+import org.apache.commons.lang3.ObjectUtils;
 
 import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
@@ -53,17 +53,6 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
 
     private boolean castFaceDown = false;
 
-    /**
-     * <p>
-     * Constructor for Spell.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.game.card.Card} object.
-     */
-    public Spell(final Card sourceCard) {
-        this(sourceCard, new Cost(sourceCard.getManaCost(), false));
-    }
     public Spell(final Card sourceCard, final Cost abCost) {
         super(sourceCard, abCost);
 
@@ -95,44 +84,16 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        boolean lkicheck = false;
-
         // do performanceMode only for cases where the activator is different than controller
         if (!Spell.performanceMode && activator != null && !card.getController().equals(activator)) {
             // always make a lki copy in this case?
             card = CardUtil.getLKICopy(card);
             card.setController(activator, 0);
-            lkicheck = true;
         }
 
-        Card lkiHost = getAlternateHost(card);
-        if (lkiHost != null) {
-            card = lkiHost;
-            lkicheck = true;
-        }
+        card = ObjectUtils.firstNonNull(getAlternateHost(card), card);
 
-        if (lkicheck) {
-            game.getTracker().freeze(); //prevent views flickering during while updating for state-based effects
-            game.getAction().checkStaticAbilities(false, Sets.newHashSet(card), new CardCollection(card));
-        }
-
-        boolean isInstant = card.isInstant();
-        boolean flash = card.withFlash(activator);
-
-        // reset static abilities
-        if (lkicheck) {
-            game.getAction().checkStaticAbilities(false);
-            // clear delayed changes, this check should not have updated the view
-            game.getTracker().clearDelayed();
-            game.getTracker().unfreeze();
-        }
-
-        if (!(isInstant || activator.canCastSorcery() || flash || getRestrictions().isInstantSpeed()
-               || hasSVar("IsCastFromPlayEffect"))) {
-            return false;
-        }
-
-        if (!this.getRestrictions().canPlay(getHostCard(), this)) {
+        if (!this.getRestrictions().canPlay(card, this)) {
             return false;
         }
 
@@ -227,39 +188,19 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             }
             source.turnFaceDownNoUpdate();
             lkicheck = true;
-        } else if (isAdventure()) {
+        } else if (getCardState() != null) {
             if (!source.isLKI()) {
                 source = CardUtil.getLKICopy(source);
             }
-
-            source.setState(CardStateName.Adventure, false);
-
-            // need to reset CMC
-            source.setLKICMC(-1);
-            source.setLKICMC(source.getCMC());
-            lkicheck = true;
-        } else if (source.isSplitCard() && (isLeftSplit() || isRightSplit())) {
-            if (!source.isLKI()) {
-                source = CardUtil.getLKICopy(source);
-            }
-            if (isLeftSplit()) {
-                if (!source.hasState(CardStateName.LeftSplit)) {
-                    source.addAlternateState(CardStateName.LeftSplit, false);
-                    source.getState(CardStateName.LeftSplit).copyFrom(
-                            getHostCard().getState(CardStateName.LeftSplit), true);
-                }
-
-                source.setState(CardStateName.LeftSplit, false);
+            CardStateName stateName = getCardState();
+            if (!source.hasState(stateName)) {
+                source.addAlternateState(stateName, false);
+                source.getState(stateName).copyFrom(getHostCard().getState(stateName), true);
             }
 
-            if (isRightSplit()) {
-                if (!source.hasState(CardStateName.RightSplit)) {
-                    source.addAlternateState(CardStateName.RightSplit, false);
-                    source.getState(CardStateName.RightSplit).copyFrom(
-                            getHostCard().getState(CardStateName.RightSplit), true);
-                }
-
-                source.setState(CardStateName.RightSplit, false);
+            source.setState(stateName, false);
+            if (getHostCard().hasBackSide()) {
+                source.setBackSide(getHostCard().getRules().getSplitType().getChangedStateName().equals(stateName));
             }
 
             // need to reset CMC

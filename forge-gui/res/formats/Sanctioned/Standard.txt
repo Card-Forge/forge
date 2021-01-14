@@ -3,5 +3,5 @@ Name:Standard
 Order:101
 Subtype:Standard
 Type:Sanctioned
-Sets:GRN, RNA, WAR, M20, ELD, THB, IKO, M21
-Banned:Agent of Treachery; Field of the Dead; Fires of Invention; Oko, Thief of Crowns; Once Upon a Time; Veil of Summer
+Sets:ELD, THB, IKO, M21, ZNR
+Banned:Cauldron Familiar; Escape to the Wilds; Fires of Invention; Lucky Clover; Oko, Thief of Crowns; Omnath, Locus of Creation; Once Upon a Time; Uro, Titan of Nature's Wrath; Veil of Summer

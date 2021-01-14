@@ -50,7 +50,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     private int preventNextDamage = 0;
     protected CardCollection attachedCards;
     private Map<Card, Map<String, String>> preventionShieldsWithEffects = Maps.newTreeMap();
-    protected Map<CounterType, Integer> counters = Maps.newTreeMap();
+    protected Map<CounterType, Integer> counters = Maps.newHashMap();
 
     protected GameEntity(int id0) {
         id = id0;

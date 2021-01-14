@@ -13,10 +13,13 @@ import forge.assets.FSkinProp;
 import forge.assets.IHasSkinProp;
 import forge.assets.TextRenderer;
 import forge.assets.FSkinColor.Colors;
+import forge.card.CardFaceSymbols;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom.ActivateHandler;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.game.player.PlayerView;
@@ -29,7 +32,10 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.screens.match.MatchController;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VStack;
+import forge.util.TextUtil;
 import forge.util.Utils;
+
+import static forge.card.CardRenderer.MANA_SYMBOL_SIZE;
 
 public class FChoiceList<T> extends FList<T> implements ActivateHandler {
     public static final FSkinColor ITEM_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
@@ -337,7 +343,17 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, allowDefaultItemWrap(), Align.left, true);
+            //update manacost text to draw symbols instead
+            if (value.toString().contains(" {")){
+                String[] values = value.toString().split(" ");
+                String cost = TextUtil.fastReplace(values[1],"}{", " ");
+                cost = TextUtil.fastReplace(TextUtil.fastReplace(cost,"{", ""),"}", "");
+                ManaCost manaCost = new ManaCost(new ManaCostParser(cost));
+                CardFaceSymbols.drawManaCost(g, manaCost, x + font.getBounds(values[0]+" ").width, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
+                g.drawText(values[0], font, foreColor, x, y, w, h, allowDefaultItemWrap(), Align.left, true);
+            } else {
+                g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, allowDefaultItemWrap(), Align.left, true);
+            }
         }
     }
     protected class NumberRenderer extends DefaultItemRenderer {
@@ -366,6 +382,24 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
             g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, false, Align.center, true);
         }
+    }
+    //simple check for cardview needed on some special renderer for cards
+    private boolean showAlternate(CardView cardView, String value){
+        boolean showAlt = false;
+        if(cardView.hasAlternateState()){
+            if(cardView.hasBackSide())
+                showAlt = value.contains(cardView.getBackSideName());
+            else if (cardView.isAdventureCard())
+                showAlt = value.equals(cardView.getAlternateState().getAbilityText());
+            else if (cardView.isSplitCard()) {
+                //special case if aftermath cards can be cast from graveyard like yawgmoths will, you will have choices
+                if (cardView.getAlternateState().getOracleText().contains("Aftermath"))
+                    showAlt = cardView.getAlternateState().getOracleText().contains(value);
+                else
+                    showAlt = value.equals(cardView.getAlternateState().getAbilityText());
+            }
+        }
+        return showAlt;
     }
     //special renderer for cards
     protected class PaperCardItemRenderer extends ItemRenderer {
@@ -464,7 +498,8 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         @Override
         public boolean tap(Integer index, T value, float x, float y, int count) {
             if (x <= VStack.CARD_WIDTH + 2 * FList.PADDING) {
-                CardZoom.show(((IHasCardView)value).getCardView());
+                CardView cv = ((IHasCardView)value).getCardView();
+                CardZoom.show(cv, showAlternate(cv, value.toString()));
                 return true;
             }
             return false;
@@ -472,13 +507,16 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
 
         @Override
         public boolean longPress(Integer index, T value, float x, float y) {
-            CardZoom.show(((IHasCardView)value).getCardView());
+            CardView cv = ((IHasCardView)value).getCardView();
+            CardZoom.show(cv, showAlternate(cv, value.toString()));
             return true;
         }
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            CardRenderer.drawCardWithOverlays(g, ((IHasCardView)value).getCardView(), x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top);
+            CardView cv = ((IHasCardView)value).getCardView();
+            boolean showAlternate = showAlternate(cv, value.toString());
+            CardRenderer.drawCardWithOverlays(g, cv, x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top, false, showAlternate, true);
 
             float dx = VStack.CARD_WIDTH + FList.PADDING;
             x += dx;

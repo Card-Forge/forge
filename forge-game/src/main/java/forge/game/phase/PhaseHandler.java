@@ -452,7 +452,8 @@ public class PhaseHandler implements java.io.Serializable {
         for (Player p : game.getPlayers()) {
             int burn = p.getManaPool().clearPool(true).size();
 
-            boolean manaBurns = game.getRules().hasManaBurn();
+            boolean manaBurns = game.getRules().hasManaBurn() ||
+                    (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manaBurn));
             if (manaBurns) {
                 p.loseLife(burn,true);
             }
@@ -501,9 +502,7 @@ public class PhaseHandler implements java.io.Serializable {
                 bPreventCombatDamageThisTurn = false;
                 if (!bRepeatCleanup) {
                     // only call onCleanupPhase when Cleanup is not repeated
-                    for (Player player : game.getPlayers()) {
-                        player.onCleanupPhase();
-                    }
+                    game.onCleanupPhase();
                     setPlayerTurn(handleNextTurn());
                     // "Trigger" for begin turn to get around a phase skipping
                     final Map<AbilityKey, Object> runParams = AbilityKey.newMap();

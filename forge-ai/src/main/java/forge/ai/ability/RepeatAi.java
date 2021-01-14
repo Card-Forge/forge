@@ -2,22 +2,18 @@ package forge.ai.ability;
 
 
 import forge.ai.*;
-import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 
 public class RepeatAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-    	final Card source = sa.getHostCard();
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player opp = ai.getWeakestOpponent();
 
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             if (!opp.canBeTargetedBy(sa)) {
                 return false;
             }
@@ -31,7 +27,7 @@ public class RepeatAi extends SpellAbilityAi {
             }
             // Set PayX here to maximum value.
             final int max = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(max));
+            sa.setSVar("PayX", Integer.toString(max));
             return max > 0;
         }
         return true;

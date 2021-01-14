@@ -5,7 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't block. | Description$ Enchanted creature can't block.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredCard
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredNewCardLKICopy
 SVar:SacMe:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sluggishness.jpg
 Oracle:Enchant creature\nEnchanted creature can't block.\nWhen Sluggishness is put into a graveyard from the battlefield, return Sluggishness to its owner's hand.

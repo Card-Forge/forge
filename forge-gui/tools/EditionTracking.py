@@ -4,6 +4,7 @@
 import json
 import os,sys,fnmatch,re
 import requests
+import pdb
 
 toolsDir = os.path.abspath(os.path.dirname( __file__ ))
 resDir = os.path.abspath(os.path.join(toolsDir, '..', 'res'))
@@ -13,6 +14,8 @@ allJsonUrl = 'http://mtgjson.com/json/AllCards.json'
 
 def initializeEditions():
 	ignoredTypes = [ "From_the_Vault", "Duel_Decks", "Online", "Premium_Deck_Series" ]
+	editionSections = [ "[cards]", "[precon product]", "[borderless]", "[showcase]", "[extended art]", "[buy a box]", "[promo]" ]
+
 	print("Parsing Editions folder")
 	for root, dirnames, filenames in os.walk(editionsDir):
 		for fileName in fnmatch.filter(filenames, '*.txt'):
@@ -23,10 +26,11 @@ def initializeEditions():
 				metadata = True
 				setcode = setname = settype = None
 				for line in currentEdition.readlines():
+					line = line.strip()
 					if metadata:
-						if line.startswith("[cards]"):
+						if line in editionSections:
 							metadata = False
-							if setcode:
+							if setcode and setcode not in setCodes:
 								setCodes.append(setcode)
 								setCodeToName[setcode] = setname
 								if settype in ignoredTypes:
@@ -42,23 +46,29 @@ def initializeEditions():
 							settype = line.split("=")[1].rstrip()
 
 					else:
-						if line.startswith("[tokens]"):
-							metadata = True
+						if not line:
+							continue
+
+						if line.startswith("["):
+							if line not in editionSections:
+								metadata = True
 							continue
 
 						if line.startswith("#"):
 							continue
 
-						if line:
-							hasSetNumbers = line[0].isdigit()
+						hasSetNumbers = line[0].isdigit()
+						card = line.split(" ", 2 if hasSetNumbers else 1)[-1].rstrip().split('|')[0]
 
-							card = line.split(" ", 2 if hasSetNumbers else 1)[-1].rstrip()
-							if card not in mtgDataCards:
-								#print card
-								mtgDataCards[card] = [setcode]
+						if card.endswith('+'):
+							card = card[:-1]
 
-							else:
-								mtgDataCards[card].append(setcode)
+						if card not in mtgDataCards:
+							#print card
+							mtgDataCards[card] = [setcode]
+
+						else:
+							mtgDataCards[card].append(setcode)
 
 	print "Total Cards Found in all editions", len(mtgDataCards)
 	print "These sets will be ignored in some output files", ignoredSet
@@ -89,7 +99,7 @@ def initializeOracleText():
 	return oracleDict
 
 def normalizeOracle(oracle):
-	return oracle.replace(u'\u2014', '-').replace(u'\u2212', '-').replace(u'\u2018', "'").replace(u'\u201c', '"').replace(u'\u201d', '"').replace(u'\u2022', '-').replace(u'\xc6', 'AE').replace(u'\xf6', 'o')
+	return oracle.replace(u'\u2014', '-').replace(u'\u2212', '-').replace(u'\u2018', "'").replace(u'\u201c', '"').replace(u'\u201d', '"').replace(u'\u2022', '-').replace(u'\xc6', 'AE').replace(u'\xf6', 'o').replace(u'\xb2', '^2').replace(u'\xae', '(R)').replace(u'\u221e', 'INF')
 
 
 def initializeForgeCards():
@@ -346,7 +356,10 @@ if __name__ == '__main__':
 				except:
 					text = ''
 
-				output.write(text + '\n\n')
+				try:
+					output.write(text + '\n\n')
+				except:
+					print everyMissing
 			output.write("\n")
 			output.write("Total: " + str(total) + "\n")
 			output.write("Percentage implemented: " + str(round(percentage,2)) + "%\n")

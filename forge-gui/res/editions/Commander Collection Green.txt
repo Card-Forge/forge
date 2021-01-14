@@ -1,0 +1,15 @@
+[metadata]
+Code=CC1
+Date=2020-12-04
+Name=Commander Collection Green
+Type=Reprint
+
+[cards]
+1 R Freyalise, Llanowar's Fury
+2 M Omnath, Locus of Mana
+3 R Bane of Progress
+4 R Seedborn Muse
+5 R Sylvan Library
+6 R Worldly Tutor
+7 R Sol Ring
+8 R Command Tower

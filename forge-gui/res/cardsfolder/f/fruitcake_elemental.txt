@@ -1,0 +1,10 @@
+Name:Fruitcake Elemental
+ManaCost:1 G G
+Types:Creature Elemental
+PT:7/7
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | Description$ CARDNAME is indestructible.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ At the end of your turn, CARDNAME deals 7 damage to you.
+SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 7
+A:AB$ Pump | Cost$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player | AILogic$ Curse | SubAbility$ DBGainControl | StackDescription$ {p:Targeted} gains control of CARDNAME. | SpellDescription$ Target player gains control of CARDNAME.
+SVar:DBGainControl:DB$ GainControl | Defined$ Self | NewController$ TargetedPlayer | StackDescription$ None
+Oracle:Fruitcake Elemental is indestructible.\nAt the end of your turn, Fruitcake Elemental deals 7 damage to you.\n{3}: Target player gains control of Fruitcake Elemental.

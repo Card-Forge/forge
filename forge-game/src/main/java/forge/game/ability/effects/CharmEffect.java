@@ -20,95 +20,61 @@ public class CharmEffect extends SpellAbilityEffect {
 
     public static List<AbilitySub> makePossibleOptions(final SpellAbility sa) {
         final Card source = sa.getHostCard();
-        Iterable<Object> restriction = null;
+        List<String> restriction = null;
 
         if (sa.hasParam("ChoiceRestriction")) {
             String rest = sa.getParam("ChoiceRestriction");
-            if (rest.equals("NotRemembered")) {
-                restriction = source.getRemembered();
+            if (rest.equals("ThisGame")) {
+                restriction = source.getChosenModesGame(sa);
+            } else if (rest.equals("ThisTurn")) {
+                restriction = source.getChosenModesTurn(sa);
             }
         }
-        
+
         int indx = 0;
         List<AbilitySub> choices = Lists.newArrayList(sa.getAdditionalAbilityList("Choices"));
         if (restriction != null) {
             List<AbilitySub> toRemove = Lists.newArrayList();
-            for (Object o : restriction) {
-                if (o instanceof AbilitySub) {
-                    String abText = ((AbilitySub)o).getDescription();
-                    for (AbilitySub ch : choices) {
-                        if (ch.getDescription().equals(abText)) {
-                            toRemove.add(ch);
-                        }
-                    }
+            for (AbilitySub ch : choices) {
+                if (restriction.contains(ch.getDescription())) {
+                    toRemove.add(ch);
                 }
             }
             choices.removeAll(toRemove);
         }
         // set CharmOrder
         for (AbilitySub sub : choices) {
-            sub.setTrigger(sa.isTrigger());
             sub.setSVar("CharmOrder", Integer.toString(indx));
             indx++;
         }
         return choices;
     }
 
-    public static String makeSpellDescription(SpellAbility sa) {
-        int num = Integer.parseInt(sa.getParamOrDefault("CharmNum", "1"));
-        int min = Integer.parseInt(sa.getParamOrDefault("MinCharmNum", String.valueOf(num)));
-        boolean repeat = sa.hasParam("CanRepeatModes");
-        boolean random = sa.hasParam("Random");
-        boolean oppChooses = "Opponent".equals(sa.getParam("Chooser"));
-
-        List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(sa.getCostDescription());
-        sb.append(oppChooses ? "An opponent chooses " : "Choose ");
-
-        if (num == min) {
-            sb.append(Lang.getNumeral(num));
-        } else if (min == 0) {
-            sb.append("up to ").append(Lang.getNumeral(num));
-        } else {
-            sb.append(Lang.getNumeral(min)).append(" or ").append(list.size() == 2 ? "both" : "more");
-        }
-
-        if (random) {
-            sb.append("at random.");
-        }
-        if (repeat) {
-            sb.append(". You may choose the same mode more than once.");
-        }
-        sb.append(" - ");
-        int i = 0;
-        for (AbilitySub sub : list) {
-            if (i > 0) {
-                sb.append("; ");
-            }
-            sb.append(sub.getParam("SpellDescription"));
-            ++i;
-        }
-
-        return sb.toString();
-    }
-
     public static String makeFormatedDescription(SpellAbility sa) {
-        int num = Integer.parseInt(sa.getParamOrDefault("CharmNum", "1"));
-        int min = Integer.parseInt(sa.getParamOrDefault("MinCharmNum", String.valueOf(num)));
+        Card source = sa.getHostCard();
+
+        List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
+        final int num;
+        boolean additionalDesc = sa.hasParam("AdditionalDescription");
+        // hotfix for complex cards when using getCardForUi
+        if (source.getController() == null && additionalDesc) {
+            // using getCardForUi game is not set, so can't guess max charm
+            num = Integer.MAX_VALUE;
+        } else {
+            num = Math.min(AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa), list.size());
+        }
+        final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParamOrDefault("MinCharmNum", "1"), sa) : num;
+
         boolean repeat = sa.hasParam("CanRepeatModes");
         boolean random = sa.hasParam("Random");
         boolean oppChooses = "Opponent".equals(sa.getParam("Chooser"));
-
-        List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
 
         StringBuilder sb = new StringBuilder();
         sb.append(sa.getCostDescription());
         sb.append(oppChooses ? "An opponent chooses " : "Choose ");
 
-        if (num == min) {
-            sb.append(Lang.getNumeral(num));
+        if (num == min || num == Integer.MAX_VALUE) {
+            sb.append(Lang.getNumeral(min));
         } else if (min == 0) {
             sb.append("up to ").append(Lang.getNumeral(num));
         } else {
@@ -117,8 +83,10 @@ public class CharmEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ChoiceRestriction")) {
             String rest = sa.getParam("ChoiceRestriction");
-            if (rest.equals("NotRemembered")) {
+            if (rest.equals("ThisGame")) {
                 sb.append(" that hasn't been chosen");
+            } else if (rest.equals("ThisTurn")) {
+                sb.append(" that hasn't been chosen this turn");
             }
         }
 
@@ -129,7 +97,6 @@ public class CharmEffect extends SpellAbilityEffect {
             sb.append(". You may choose the same mode more than once.");
         }
 
-        boolean additionalDesc = sa.hasParam("AdditionalDescription");
         if (additionalDesc) {
             sb.append(" ").append(sa.getParam("AdditionalDescription").trim());
         }
@@ -163,39 +130,52 @@ public class CharmEffect extends SpellAbilityEffect {
         //this resets all previous choices
         sa.setSubAbility(null);
 
+        List<AbilitySub> choices = makePossibleOptions(sa);
+
         // Entwine does use all Choices
         if (sa.isEntwine()) {
-            chainAbilities(sa, makePossibleOptions(sa));
-            return true;
-        }
-
-        final int num = sa.hasParam("CharmNumOnResolve") ?
-                AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CharmNumOnResolve"), sa)
-                : Integer.parseInt(sa.getParamOrDefault("CharmNum", "1"));
-        final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
-
-        if (sa.hasParam("Random")) {
-            chainAbilities(sa, Aggregates.random(makePossibleOptions(sa), num));
+            chainAbilities(sa, choices);
             return true;
         }
 
         Card source = sa.getHostCard();
         Player activator = sa.getActivatingPlayer();
+
+        final int num = Math.min(AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa), choices.size());
+        final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParamOrDefault("MinCharmNum", "1"), sa) : num;
+
+        // if the amount of choices is smaller than min then they can't be chosen
+        if (min > choices.size()) {
+            return false;
+        }
+
+        if (sa.hasParam("Random")) {
+            chainAbilities(sa, Aggregates.random(choices, num));
+            return true;
+        }
+
         Player chooser = sa.getActivatingPlayer();
 
         if (sa.hasParam("Chooser")) {
             // Three modal cards require you to choose a player to make the modal choice'
             // Two of these also reference the chosen player during the spell effect
-            
-            //String choosers = sa.getParam("Chooser"); 
+
+            //String choosers = sa.getParam("Chooser");
             FCollection<Player> opponents = activator.getOpponents(); // all cards have Choser$ Opponent, so it's hardcoded here
             chooser = activator.getController().chooseSingleEntityForEffect(opponents, sa, "Choose an opponent", null);
             source.setChosenPlayer(chooser);
         }
-        
-        List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, min, num, sa.hasParam("CanRepeatModes"));
+
+        List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, choices, min, num, sa.hasParam("CanRepeatModes"));
         chainAbilities(sa, chosen);
-        return chosen != null && !chosen.isEmpty();
+
+        // trigger without chosen modes are removed from stack
+        if (sa.isTrigger()) {
+            return chosen != null && !chosen.isEmpty();
+        }
+
+        // for spells and activated abilities it is possible to chose zero if minCharmNum allows it
+        return true;
     }
 
     private static void chainAbilities(SpellAbility sa, List<AbilitySub> chosen) {
@@ -220,7 +200,7 @@ public class CharmEffect extends SpellAbilityEffect {
             clone.setActivatingPlayer(sa.getActivatingPlayer());
 
             // make StackDescription be the SpellDescription
-            clone.getMapParams().put("StackDescription", "SpellDescription");
+            clone.putParam("StackDescription", "SpellDescription");
 
             // do not forget what was targeted by the subability
             SpellAbility ssa = sub;
@@ -239,7 +219,7 @@ public class CharmEffect extends SpellAbilityEffect {
             // add Clone to Tail of sa
             sa.appendSubAbility(clone);
         }
-        
+
     }
 
 

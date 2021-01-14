@@ -5,6 +5,6 @@ A:SP$ Pump | Cost$ X R R | ValidTgts$ Instant.YouOwn+cmcLEX | TgtZone$ Graveyard
 SVar:DBPump:DB$ Pump | ValidTgts$ Sorcery.YouOwn+cmcLEX | TgtZone$ Graveyard | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target sorcery card in your graveyard with converted mana cost X or less | RememberObjects$ Targeted | SubAbility$ DBPlay | References$ X | StackDescription$ None
 SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Graveyard | Controller$ You | CopyCard$ True | CopyOnce$ True | WithoutManaCost$ True | Optional$ True | Amount$ All | SubAbility$ DBRepeat
 SVar:DBRepeat:DB$ RepeatEach | DefinedCards$ Remembered | ClearRemembered$ True | ChooseOrder$ True | RepeatSubAbility$ DBCopy | References$ X | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10
-SVar:DBCopy:DB$ CopySpellAbility | Amount$ 2 | Defined$ Remembered
+SVar:DBCopy:DB$ CopySpellAbility | Amount$ 2 | Defined$ Remembered | MayChooseTarget$ True
 SVar:X:Count$xPaid
 Oracle:You may cast up to one target instant card and/or sorcery card from your graveyard each with converted mana cost X or less without paying their mana costs. If a card cast this way would be put into your graveyard this turn, exile it instead. If X is 10 or more, copy each of those spells twice. You may choose new targets for the copies.

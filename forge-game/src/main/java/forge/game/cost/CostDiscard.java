@@ -65,6 +65,16 @@ public class CostDiscard extends CostPartWithList {
 
     public int paymentOrder() { return 10; }
 
+    @Override
+    public Integer getMaxAmountX(SpellAbility ability, Player payer) {
+        final Card source = ability.getHostCard();
+        String type = this.getType();
+        CardCollectionView handList = payer.canDiscardBy(ability) ? payer.getCardsIn(ZoneType.Hand) : CardCollection.EMPTY;
+
+        handList = CardLists.getValidCards(handList, type.split(";"), payer, source, ability);
+        return handList.size();
+    }
+
     /*
      * (non-Javadoc)
      *

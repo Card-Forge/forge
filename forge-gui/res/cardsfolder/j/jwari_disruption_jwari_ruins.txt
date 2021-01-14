@@ -1,0 +1,15 @@
+Name:Jwari Disruption
+ManaCost:1 U
+Types:Instant
+A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays {1}.
+AlternateMode:Modal
+Oracle:Counter target spell unless its controller pays {1}.
+
+ALTERNATE
+
+Name:Jwari Ruins
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+Oracle:Jwari Ruins enters the battlefield tapped.\n{T}: Add {U}.

@@ -20,7 +20,6 @@ public class ChooseColorAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Card source = sa.getHostCard();
         final Game game = ai.getGame();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final PhaseHandler ph = game.getPhaseHandler();
@@ -44,7 +43,7 @@ public class ChooseColorAi extends SpellAbilityAi {
             }
             // Set PayX here to maximum value.
             int x = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(x));
+            sa.setSVar("PayX", Integer.toString(x));
             return true;
         }
 

@@ -76,14 +76,14 @@ public class DigUntilAi extends SpellAbilityAi {
         }
 
         final String num = sa.getParam("Amount");
-        if ((num != null) && num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
+        if ((num != null) && num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            if (!(sa instanceof AbilitySub) || source.getSVar("PayX").equals("")) {
+            if (!(sa instanceof AbilitySub) || sa.getSVar("PayX").equals("")) {
                 int numCards = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 if (numCards <= 0) {
                     return false;
                 }
-                source.setSVar("PayX", Integer.toString(numCards));
+                sa.setSVar("PayX", Integer.toString(numCards));
             }
         }
 

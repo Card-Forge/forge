@@ -118,8 +118,7 @@ public class ManaEffectAi extends SpellAbilityAi {
 
         int numCounters = 0;
         int manaSurplus = 0;
-        if ("XChoice".equals(host.getSVar("X"))
-                && sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class)) {
+        if ("Count$xPaid".equals(host.getSVar("X")) && sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class)) {
             CounterType ctrType = CounterType.get(CounterEnumType.KI); // Petalmane Baku
             for (CostPart part : sa.getPayCosts().getCostParts()) {
                 if (part instanceof CostRemoveCounter) {
@@ -206,7 +205,9 @@ public class ManaEffectAi extends SpellAbilityAi {
             // Don't remove more counters than would be needed to cast the more expensive thing we want to cast,
             // otherwise the AI grabs too many counters at once.
             int maxCtrs = Aggregates.max(castableSpells, CardPredicates.Accessors.fnGetCmc) - manaSurplus;
-            sa.setSVar("ChosenX", "Number$" + Math.min(numCounters, maxCtrs));
+            int min = Math.min(numCounters, maxCtrs);
+            sa.setXManaCostPaid(min);
+            sa.setSVar("PayX", Integer.toString(min));
         }
 
         // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.

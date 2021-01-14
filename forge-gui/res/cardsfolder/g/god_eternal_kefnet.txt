@@ -8,9 +8,7 @@ SVar:DBReveal:DB$ Reveal | Defined$ You | RevealDefined$ TriggeredCard | Remembe
 SVar:DBTrigger:DB$ ImmediateTrigger | RememberObjects$ RememberedCard | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery | SubAbility$ DBCleanup | Execute$ DBPlay | TriggerDescription$ Whenever you reveal an instant or sorcery card this way, copy that card and you may cast the copy. That copy costs {2} less to cast.
 SVar:DBPlay:DB$ Play | Defined$ DelayTriggerRemembered | PlayReduceCost$ 2 | CopyOnce$ True | Optional$ True | CopyCard$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigFromGraveyard | OptionalDecider$ You | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.
-SVar:TrigFromGraveyard:DB$ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 2
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Exile | ValidCard$ Card.Self | Execute$ TrigFromExile | OptionalDecider$ You | TriggerController$ TriggeredCardController | Secondary$ True | TriggerDescription$ When CARDNAME dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.
-SVar:TrigFromExile:DB$ChangeZone | Defined$ TriggeredCard | Origin$ Exile | Destination$ Library | LibraryPosition$ 2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard,Exile | ValidCard$ Card.Self | Execute$ TriReturn | OptionalDecider$ You | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.
+SVar:TriReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Destination$ Library | LibraryPosition$ 2
 Oracle:Flying\nYou may reveal the first card you draw each turn as you draw it. Whenever you reveal an instant or sorcery card this way, copy that card and you may cast the copy. That copy costs {2} less to cast.\nWhen God-Eternal Kefnet dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.
 

@@ -3,8 +3,8 @@ ManaCost:7 G G
 Types:Creature Bringer
 PT:5/5
 K:Trample
-SVar:AltCost:Cost$ W U B R G | Description$ You may pay {W}{U}{B}{R}{G} rather than pay CARDNAME's mana cost.
+SVar:AltCost:Cost$ W U B R G | Description$ You may pay {W}{U}{B}{R}{G} rather than pay this spell's mana cost.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, you may create a 3/3 green Beast creature token.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You | LegacyImage$ g 3 3 beast 5dn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bringer_of_the_green_dawn.jpg
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You
+DeckHas:Ability$Token
 Oracle:You may pay {W}{U}{B}{R}{G} rather than pay this spell's mana cost.\nTrample\nAt the beginning of your upkeep, you may create a 3/3 green Beast creature token.

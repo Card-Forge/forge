@@ -1,0 +1,15 @@
+Name:Kaza, Roil Chaser
+ManaCost:U R
+Types:Legendary Creature Human Wizard
+PT:1/2
+K:Flying
+K:Haste
+A:AB$ StoreSVar | Cost$ T | SVar$ WizNum | Type$ CountSVar | Expression$ X | SubAbility$ DBEffect | SpellDescription$ The next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of Wizards you control as this ability resolves.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell | SVars$ RemoveEffect,WizNum
+SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | ValidCard$ Instant,Sorcery | Activator$ You | Amount$ WizNum | References$ WizNum | Description$ The next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of Wizards you controlled at the time EFFECTSOURCE's ability resolved.
+SVar:TrigCastSpell:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
+SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
+SVar:WizNum:Number$0
+SVar:X:Count$Valid Wizard.YouCtrl
+DeckHints:Type$Instant|Sorcery|Wizard
+Oracle:Flying, haste\n{T}: The next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of Wizards you control as this ability resolves.

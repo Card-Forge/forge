@@ -37,13 +37,17 @@ public class GameEntityViewMap<Entity extends GameEntity, View extends GameEntit
         }
     }
 
-    public void addToList(Iterable<View> views, List<Entity> list) {
+    public List<Entity> addToList(Iterable<View> views, List<Entity> list) {
+        if (views == null) {
+            return list;
+        }
         for (View view : views) {
             Entity entity = get(view);
             if (entity != null) {
                 list.add(entity);
             }
         }
+        return list;
     }
 
     public TrackableCollection<View> getTrackableKeys() {

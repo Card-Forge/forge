@@ -1,0 +1,9 @@
+Name:Confounding Conundrum
+ManaCost:1 U
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.OppCtrl | CheckOnTriggeredCard$ X GT1 | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever a land enters the battlefield under an opponent's control, if that player had another land enter the battlefield under their control this turn, they return a land they control to its owner’s hand.
+SVar:TrigReturn:DB$ ChangeZone | Chooser$ TriggeredCardController | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Land.ControlledBy TriggeredCardController | ChangeNum$ 1
+SVar:X:ThisTurnEntered_Battlefield_Land.YouCtrl
+Oracle:When Confounding Conundrum enters the battlefield, draw a card.\nWhenever a land enters the battlefield under an opponent's control, if that player had another land enter the battlefield under their control this turn, they return a land they control to its owner’s hand.

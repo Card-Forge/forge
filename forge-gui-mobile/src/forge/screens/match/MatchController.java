@@ -143,7 +143,8 @@ public class MatchController extends AbstractGuiGame {
             }
         }
         view = new MatchScreen(playerPanels);
-        view.resetFields();
+        if(GuiBase.isNetworkplay())
+            view.resetFields();
         clearSelectables();  //fix uncleared selection
 
         if (noHumans) {
@@ -444,8 +445,8 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void afterGameEnd() {
+        super.afterGameEnd();
         Forge.back();
-        ImageCache.disposeTexture();
         //view = null;
     }
 

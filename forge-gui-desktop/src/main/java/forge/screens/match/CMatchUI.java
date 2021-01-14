@@ -17,11 +17,40 @@
  */
 package forge.screens.match;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicReference;
+
+import javax.swing.JMenu;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import forge.*;
+
+import forge.FThreads;
+import forge.GuiBase;
+import forge.ImageCache;
+import forge.LobbyPlayer;
+import forge.Singletons;
+import forge.StaticData;
 import forge.assets.FSkinProp;
 import forge.card.CardStateName;
 import forge.control.KeyboardShortcuts;
@@ -42,11 +71,27 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
+import forge.game.player.Player;
 import forge.game.player.PlayerView;
-import forge.game.spellability.*;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.SpellAbilityView;
+import forge.game.spellability.StackItemView;
+import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
-import forge.gui.*;
-import forge.gui.framework.*;
+import forge.gui.FNetOverlay;
+import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
+import forge.gui.GuiUtils;
+import forge.gui.SOverlayUtils;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
+import forge.gui.framework.SDisplayUtil;
+import forge.gui.framework.SLayoutIO;
+import forge.gui.framework.VEmptyDoc;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.match.AbstractGuiGame;
@@ -57,12 +102,23 @@ import forge.player.PlayerZoneUpdates;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.screens.match.controllers.*;
+import forge.screens.match.controllers.CAntes;
+import forge.screens.match.controllers.CCombat;
+import forge.screens.match.controllers.CDetailPicture;
+import forge.screens.match.controllers.CDev;
+import forge.screens.match.controllers.CDock;
+import forge.screens.match.controllers.CLog;
+import forge.screens.match.controllers.CPrompt;
+import forge.screens.match.controllers.CStack;
 import forge.screens.match.menus.CMatchUIMenus;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
-import forge.toolbox.*;
+import forge.toolbox.FButton;
+import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
+import forge.toolbox.FTextArea;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
@@ -77,18 +133,8 @@ import forge.util.gui.SOptionPane;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.FloatingZone;
+import net.miginfocom.layout.LinkHandler;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.util.*;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Constructs instance of match UI controller, used as a single point of
@@ -225,7 +271,7 @@ public final class CMatchUI
         if (!isInGame()) {
             return;
         }
-        final Deck deck = getGameView().getDeck(getCurrentPlayer().getLobbyPlayerName());
+        final Deck deck = getGameView().getDeck(getCurrentPlayer());
         if (deck != null) {
             FDeckViewer.show(deck);
         }
@@ -746,9 +792,11 @@ public final class CMatchUI
         initHandViews();
         SLayoutIO.loadLayout(null);
         view.populate();
-        for (final VHand h : getHandViews()) {
-            h.getLayoutControl().updateHand();
+        final PlayerZoneUpdates zones = new PlayerZoneUpdates();
+        for (final PlayerView p : sortedPlayers) {
+        	zones.add(new PlayerZoneUpdate(p, ZoneType.Hand));
         }
+        updateZones(zones);
     }
 
     @Override
@@ -978,10 +1026,12 @@ public final class CMatchUI
 
     @Override
     public void afterGameEnd() {
+        super.afterGameEnd();
         Singletons.getView().getLpnDocument().remove(targetingOverlay.getPanel());
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override public void run() {
                 Singletons.getView().getNavigationBar().closeTab(screen);
+                LinkHandler.clearWeakReferencesNow();
             }
         });
     }
@@ -1333,7 +1383,7 @@ public final class CMatchUI
         if (sa.getTargetRestrictions() != null) {
             sb.append(" targeting ");
             TargetChoices targets = si.getTargetChoices();
-            sb.append(targets.getTargetedString());
+            sb.append(targets);
         }
         sb.append(".");        
         String message1 = sb.toString();
@@ -1392,4 +1442,57 @@ public final class CMatchUI
         nextNotifiableStackIndex--;
     }
 
+    @Override
+    public void handleLandPlayed(Card land) {
+        Runnable createPopupThread = new Runnable() {
+            @Override
+            public void run() {
+                createLandPopupPanel(land);
+            }
+        };
+        GuiBase.getInterface().invokeInEdtAndWait(createPopupThread);        
+    }
+
+    private void createLandPopupPanel(Card land) {
+        
+        String landPlayedNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_LAND_PLAYED_NOTIFICATION_POLICY);
+        Player cardController = land.getController();       
+        boolean isAi = cardController.isAI();         
+        if(ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS.equals(landPlayedNotificationPolicy) 
+                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI.equals(landPlayedNotificationPolicy) && (isAi))
+                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.isBasicLand())
+                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.isBasicLand()) && (isAi)) {
+            String title = "Forge";            
+            List<String> options = ImmutableList.of(Localizer.getInstance().getMessage("lblOK"));
+            
+            MigLayout migLayout = new MigLayout("insets 15, left, gap 30, fill");
+            JPanel mainPanel = new JPanel(migLayout);
+            final Dimension parentSize = JOptionPane.getRootFrame().getSize();
+            Dimension maxSize = new Dimension(1400, parentSize.height - 100);
+            mainPanel.setMaximumSize(maxSize);
+            mainPanel.setOpaque(false);   
+            
+            int rotation = getRotation(land.getView());
+
+            FImagePanel imagePanel = new FImagePanel();               
+            BufferedImage bufferedImage = FImageUtil.getImage(land.getCurrentState().getView()); 
+            imagePanel.setImage(bufferedImage, rotation, AutoSizeImageMode.SOURCE);
+            int imageWidth = 433;
+            int imageHeight = 600;
+            Dimension imagePanelDimension = new Dimension(imageWidth,imageHeight);
+            imagePanel.setMinimumSize(imagePanelDimension);
+                    
+            mainPanel.add(imagePanel, "cell 0 0, spany 3");
+            
+            String msg = cardController.toString() + " puts " + land.toString() + " into play into " + ZoneType.Battlefield.toString() + "."; 
+            
+            final FTextArea prompt1 = new FTextArea(msg);
+            prompt1.setFont(FSkin.getFont(21));
+            prompt1.setAutoSize(true);
+            prompt1.setMinimumSize(new Dimension(475,200));
+            mainPanel.add(prompt1, "cell 1 0, aligny top");    
+            
+            FOptionPane.showOptionDialog(null, title, null, mainPanel, options);                      
+        }      
+    }
 }

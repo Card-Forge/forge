@@ -19,6 +19,8 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -45,7 +47,7 @@ public class ComputerUtilCost {
                 final CostPutCounter addCounter = (CostPutCounter) part;
                 final CounterType type = addCounter.getCounter();
 
-                if (type.equals(CounterEnumType.M1M1)) {
+                if (type.is(CounterEnumType.M1M1)) {
                     return false;
                 }
             }
@@ -53,9 +55,6 @@ public class ComputerUtilCost {
         return true;
     }
 
-    public static boolean checkRemoveCounterCost(final Cost cost, final Card source) {
-    	return checkRemoveCounterCost(cost, source, null);
-    }
     /**
      * Check remove counter cost.
      *
@@ -69,13 +68,14 @@ public class ComputerUtilCost {
         if (cost == null) {
             return true;
         }
+        final AiCostDecision decision = new AiCostDecision(sa.getActivatingPlayer(), sa);
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostRemoveCounter) {
                 final CostRemoveCounter remCounter = (CostRemoveCounter) part;
 
                 final CounterType type = remCounter.counter;
                 if (!part.payCostFromSource()) {
-                    if (CounterEnumType.P1P1.equals(type)) {
+                    if (type.is(CounterEnumType.P1P1)) {
                         return false;
                     }
                     continue;
@@ -88,17 +88,15 @@ public class ComputerUtilCost {
 
                 // Remove X counters - set ChosenX to max possible value here, the SAs should correct that
                 // value later as the AI decides what to do (in checkApiLogic / checkAiLogic)
-                if (sa != null && sa.hasSVar(remCounter.getAmount())) {
+                if (sa.hasSVar(remCounter.getAmount())) {
                     final String sVar = sa.getSVar(remCounter.getAmount());
-                    if (sVar.equals("XChoice") && !sa.hasSVar("ChosenX")) {
-                        sa.setSVar("ChosenX", String.valueOf(source.getCounters(type)));
+                    if (sVar.equals("Count$xPaid") && sa.hasSVar("PayX")) {
+                        sa.setSVar("PayX", Integer.toString(Math.min(Integer.valueOf(sa.getSVar("PayX")), source.getCounters(type))));
                     }
                 }
 
-                // check the sa what the PaymentDecision is.
                 // ignore Loyality abilities with Zero as Cost
-                if (sa != null && !CounterEnumType.LOYALTY.equals(type)) {
-                    final AiCostDecision decision = new AiCostDecision(sa.getActivatingPlayer(), sa);
+                if (!type.is(CounterEnumType.LOYALTY)) {
                     PaymentDecision pay = decision.visit(remCounter);
                     if (pay == null || pay.c <= 0) {
                         return false;
@@ -106,19 +104,15 @@ public class ComputerUtilCost {
                 }
 
                 //don't kill the creature
-                if (CounterEnumType.P1P1.equals(type) && source.getLethalDamage() <= 1
+                if (type.is(CounterEnumType.P1P1) && source.getLethalDamage() <= 1
                         && !source.hasKeyword(Keyword.UNDYING)) {
                     return false;
                 }
             } else if (part instanceof CostRemoveAnyCounter) {
-                if (sa != null) {
-                    final CostRemoveAnyCounter remCounter = (CostRemoveAnyCounter) part;
+                final CostRemoveAnyCounter remCounter = (CostRemoveAnyCounter) part;
 
-                    PaymentDecision decision = new AiCostDecision(sa.getActivatingPlayer(), sa).visit(remCounter);
-                    return decision != null;
-                }
-
-                return false;
+                PaymentDecision pay = decision.visit(remCounter);
+                return pay != null;
             }
         }
         return true;
@@ -619,7 +613,8 @@ public class ComputerUtilCost {
             if (combat.getAttackers().isEmpty()) {
                 return false;
             }
-        } else if ("nonToken".equals(aiLogic) && AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0).isToken()) {
+        } else if ("nonToken".equals(aiLogic) && !AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).isEmpty()
+                && AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0).isToken()) {
             return false;
         } else if ("LowPriority".equals(aiLogic) && MyRandom.getRandom().nextInt(100) < 67) {
             return false;
@@ -675,5 +670,62 @@ public class ComputerUtilCost {
             }
         }
         return false;
+    }
+
+    public static int getMaxXValue(SpellAbility sa, Player ai) {
+        final Card source = sa.getHostCard();
+        final Cost abCost = sa.getPayCosts();
+        if (abCost == null || !abCost.hasXInAnyCostPart()) {
+            return 0;
+        }
+
+        Integer val = null;
+
+        if (sa.costHasManaX()) {
+            val = ComputerUtilMana.determineLeftoverMana(sa, ai);
+        }
+
+        if (sa.usesTargeting()) {
+            // if announce is used as min targets, check what the max possible number would be
+            if ("X".equals(sa.getTargetRestrictions().getMinTargets())) {
+                val = ObjectUtils.min(val, CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa).size());
+            }
+
+            if (sa.hasParam("AIMaxTgtsCount")) {
+                // Cards that have confusing costs for the AI (e.g. Eliminate the Competition) can have forced max target constraints specified
+                // TODO: is there a better way to predict things like "sac X" costs without needing a special AI variable?
+                val = ObjectUtils.min(val, AbilityUtils.calculateAmount(sa.getHostCard(), "Count$" + sa.getParam("AIMaxTgtsCount"), sa));
+            }
+        }
+
+        val = ObjectUtils.min(val, abCost.getMaxForNonManaX(sa, ai));
+
+        if (val != null && val > 0) {
+            // filter cost parts for preferences, don't choose X > than possible preferences
+            for (final CostPart part : abCost.getCostParts()) {
+                if (part instanceof CostSacrifice) {
+                    if (part.payCostFromSource()) {
+                        continue;
+                    }
+                    if (!part.getAmount().equals("X")) {
+                        continue;
+                    }
+
+                    final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), source.getController(), source, null);
+
+                    int count = 0;
+                    while (count < val) {
+                        Card prefCard = ComputerUtil.getCardPreference(ai, source, "SacCost", typeList);
+                        if (prefCard == null) {
+                            break;
+                        }
+                        typeList.remove(prefCard);
+                        count++;
+                    }
+                    val = ObjectUtils.min(val, count);
+                }
+            }
+        }
+        return ObjectUtils.defaultIfNull(val, 0);
     }
 }

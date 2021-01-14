@@ -166,7 +166,7 @@ public class TriggerSpellAbilityCast extends Trigger {
             final CardCollection candidates = new CardCollection();
             SpellAbility targetedSA = spellAbility;
             while (targetedSA != null) {
-                if (targetedSA.usesTargeting() && targetedSA.getTargets().getNumTargeted() != 0) {
+                if (targetedSA.usesTargeting() && targetedSA.getTargets().size() != 0) {
                     break;
                 }
                 targetedSA = targetedSA.getSubAbility();
@@ -233,7 +233,7 @@ public class TriggerSpellAbilityCast extends Trigger {
         if (hasParam("IsSingleTarget")) {
             Set<GameObject> targets = Sets.newHashSet();
             for (TargetChoices tc : spellAbility.getAllTargetChoices()) {
-                targets.addAll(tc.getTargets());
+                targets.addAll(tc);
                 if (targets.size() > 1) {
                     return false;
                 }
@@ -269,7 +269,7 @@ public class TriggerSpellAbilityCast extends Trigger {
         final SpellAbility castSA = (SpellAbility) runParams.get(AbilityKey.CastSA);
         final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceFromSpellAbility(castSA);
         sa.setTriggeringObject(AbilityKey.Card, castSA.getHostCard());
-        sa.setTriggeringObject(AbilityKey.SpellAbility, castSA);
+        sa.setTriggeringObject(AbilityKey.SpellAbility, castSA.copy(castSA.getHostCard(), true));
         sa.setTriggeringObject(AbilityKey.StackInstance, si);
         sa.setTriggeringObject(AbilityKey.SpellAbilityTargetingCards, (si != null ? si.getSpellAbility(true) : castSA).getTargets().getTargetCards());
         sa.setTriggeringObjectsFrom(

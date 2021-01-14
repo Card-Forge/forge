@@ -24,14 +24,23 @@ import java.util.List;
 public class AttachEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
-        if (sa.getHostCard().isAura() && sa.isSpell()) {
-
+        final Card host = sa.getHostCard();
+        if (host.isAura() && sa.isSpell()) {
             final Player ap = sa.getActivatingPlayer();
             // The Spell_Permanent (Auras) version of this AF needs to
             // move the card into play before Attaching
 
-            sa.getHostCard().setController(ap, 0);
-            final Card c = ap.getGame().getAction().moveTo(ap.getZone(ZoneType.Battlefield), sa.getHostCard(), sa);
+            host.setController(ap, 0);
+
+            // 111.11. A copy of a permanent spell becomes a token as it resolves.
+            // The token has the characteristics of the spell that became that token.
+            // The token is not “created” for the purposes of any replacement effects or triggered abilities that refer to creating a token.
+            if (host.isCopiedSpell()) {
+                host.setCopiedSpell(false);
+                host.setToken(true);
+            }
+
+            final Card c = ap.getGame().getAction().moveToPlay(host, ap, sa);
             sa.setHostCard(c);
         }
 

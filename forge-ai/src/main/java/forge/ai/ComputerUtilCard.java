@@ -1856,7 +1856,7 @@ public class ComputerUtilCard {
 
     public static AiPlayDecision checkNeedsToPlayReqs(final Card card, final SpellAbility sa) {
         Game game = card.getGame();
-        boolean isRightSplit = sa != null && sa.isRightSplit();
+        boolean isRightSplit = sa != null && sa.getCardState() != null;
         String needsToPlayName = isRightSplit ? "SplitNeedsToPlay" : "NeedsToPlay";
         String needsToPlayVarName = isRightSplit ? "SplitNeedsToPlayVar" : "NeedsToPlayVar";
 

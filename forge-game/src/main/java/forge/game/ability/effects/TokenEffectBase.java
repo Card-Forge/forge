@@ -2,13 +2,11 @@ package forge.game.ability.effects;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.GameCommand;
@@ -22,14 +20,10 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.card.token.TokenInfo;
-import forge.game.combat.Combat;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
-import forge.util.Localizer;
-import forge.util.collect.FCollectionView;
 
 public abstract class TokenEffectBase extends SpellAbilityEffect {
 
@@ -80,7 +74,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 addSelfTrigger(sa, sa.getParam("AtEOTTrig"), c);
             }
 
-            if (addTokenToCombat(game, c, tok.getController(), sa, host)) {
+            if (addToCombat(c, tok.getController(), sa, "TokenAttacking", "TokenBlocking")) {
                 combatChanged.setTrue();
             }
 
@@ -91,19 +85,18 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
             c.updateStateForView();
 
             if (sa.hasParam("RememberTokens")) {
-                game.getCardState(sa.getHostCard()).addRemembered(c);
+                host.addRemembered(c);
             }
             if (sa.hasParam("ImprintTokens")) {
-                game.getCardState(sa.getHostCard()).addImprintedCard(c);
+                host.addImprintedCard(c);
             }
             if (sa.hasParam("RememberSource")) {
-                game.getCardState(c).addRemembered(host);
+                c.addRemembered(host);
             }
             if (sa.hasParam("TokenRemembered")) {
-                final Card token = game.getCardState(c);
                 final String remembered = sa.getParam("TokenRemembered");
                 for (final Object o : AbilityUtils.getDefinedObjects(host, remembered, sa)) {
-                    token.addRemembered(o);
+                    c.addRemembered(o);
                 }
             }
             allTokens.add(c);
@@ -113,58 +106,6 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), allTokens);
         }
         return allTokens;
-    }
-
-    private boolean addTokenToCombat(Game game, Card c, Player controller, SpellAbility sa, Card host) {
-        if (!game.getPhaseHandler().inCombat()) {
-            return false;
-        }
-        boolean combatChanged = false;
-        final Combat combat = game.getCombat();
-
-        if (sa.hasParam("TokenAttacking") && combat.getAttackingPlayer().equals(controller)) {
-            String attacking = sa.getParam("TokenAttacking");
-            GameEntity defender = null;
-            FCollectionView<GameEntity> defs = null;
-            if ("True".equalsIgnoreCase(attacking)) {
-                defs = combat.getDefenders();
-            } else if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
-                Player defendingPlayer = Iterables.getFirst(AbilityUtils.getDefinedPlayers(host, attacking, sa), null);
-                if (defendingPlayer != null) {
-                    defs = game.getCombat().getDefendersControlledBy(defendingPlayer);
-                }
-            } else {
-                defs = AbilityUtils.getDefinedEntities(host, attacking, sa);
-            }
-
-            if (defs != null) {
-                Map<String, Object> params = Maps.newHashMap();
-                params.put("Attacker", c);
-                defender = controller.getController().chooseSingleEntityForEffect(defs, sa,
-                        Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false, params);
-            }
-
-            if (defender != null) {
-                combat.addAttacker(c, defender);
-                combatChanged = true;
-            }
-        }
-        if (sa.hasParam("TokenBlocking")) {
-            final Card attacker = Iterables.getFirst(AbilityUtils.getDefinedCards(host, sa.getParam("TokenBlocking"), sa), null);
-            if (attacker != null) {
-                final boolean wasBlocked = combat.isBlocked(attacker);
-                combat.addBlocker(attacker, c);
-                combat.orderAttackersForDamageAssignment(c);
-
-                // Run triggers for new blocker and add it to damage assignment order
-                if (!wasBlocked) {
-                    combat.setBlocked(attacker, true);
-                    combat.addBlockerToDamageAssignmentOrder(attacker, c);
-                }
-                combatChanged = true;
-            }
-        }
-        return combatChanged;
     }
 
     private boolean attachTokenTo(Card tok, SpellAbility sa) {

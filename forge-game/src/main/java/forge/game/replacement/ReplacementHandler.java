@@ -70,13 +70,12 @@ public class ReplacementHandler {
         if (ReplacementType.Moved.equals(event) && ZoneType.Battlefield.equals(runParams.get(AbilityKey.Destination))) {
             // if it was caused by an replacement effect, use the already calculated RE list
             // otherwise the RIOT card would cause a StackError
-            SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
-            if (cause != null && cause.isReplacementAbility()) {
-                final ReplacementEffect re = cause.getReplacementEffect();
+            final ReplacementEffect causeRE = (ReplacementEffect) runParams.get(AbilityKey.ReplacementEffect);
+            if (causeRE != null) {
                 // only return for same layer
-                if (ReplacementType.Moved.equals(re.getMode()) && layer.equals(re.getLayer())) {
-                    if (!re.getOtherChoices().isEmpty())
-                        return re.getOtherChoices();
+                if (ReplacementType.Moved.equals(causeRE.getMode()) && layer.equals(causeRE.getLayer())) {
+                    if (!causeRE.getOtherChoices().isEmpty())
+                        return causeRE.getOtherChoices();
                 }
             }
 
@@ -289,34 +288,25 @@ public class ReplacementHandler {
             host = game.getCardState(host);
         }
 
-        if (mapParams.containsKey("ReplaceWith")) {
+        if (replacementEffect.getOverridingAbility() == null && mapParams.containsKey("ReplaceWith")) {
             final String effectSVar = mapParams.get("ReplaceWith");
-            final String effectAbString = host.getSVar(effectSVar);
             // TODO: the source of replacement effect should be the source of the original effect
-            effectSA = AbilityFactory.getAbility(effectAbString, host);
+            effectSA = AbilityFactory.getAbility(host, effectSVar, replacementEffect);
+            //replacementEffect.setOverridingAbility(effectSA);
             //effectSA.setTrigger(true);
-
-            SpellAbility tailend = effectSA;
-            do {
-                replacementEffect.setReplacingObjects(runParams, tailend);
-                //set original Params to update them later
-                tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
-                tailend = tailend.getSubAbility();
-            } while(tailend != null);
-
-        }
-        else if (replacementEffect.getOverridingAbility() != null) {
+        } else if (replacementEffect.getOverridingAbility() != null) {
             effectSA = replacementEffect.getOverridingAbility();
-            SpellAbility tailend = effectSA;
-            do {
-                replacementEffect.setReplacingObjects(runParams, tailend);
-                //set original Params to update them later
-                tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
-                tailend = tailend.getSubAbility();
-            } while(tailend != null);
         }
 
         if (effectSA != null) {
+            SpellAbility tailend = effectSA;
+            do {
+                replacementEffect.setReplacingObjects(runParams, tailend);
+                //set original Params to update them later
+                tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
+                tailend = tailend.getSubAbility();
+            } while(tailend != null);
+
             effectSA.setLastStateBattlefield(game.getLastStateBattlefield());
             effectSA.setLastStateGraveyard(game.getLastStateGraveyard());
             if (replacementEffect.isIntrinsic()) {

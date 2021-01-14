@@ -21,7 +21,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
-import forge.game.staticability.StaticAbility;
 
 /**
  * <p>
@@ -62,19 +61,6 @@ public class PlayerZoneBattlefield extends PlayerZone {
         }
 
         super.add(c, position, latestState);
-
-        if (trigger) {
-            // ETBTapped static abilities
-            for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-                for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                    if (stAb.applyAbility("ETBTapped", c)) {
-                        // it enters the battlefield this way, and should
-                        // not fire triggers
-                        c.setTapped(true);
-                    }
-                }
-            }
-        }
 
         if (trigger) {
             c.setSickness(true); // summoning sickness

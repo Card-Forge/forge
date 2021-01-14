@@ -4,4 +4,4 @@ Types:Artifact Creature Triskelavite
 K:Flying
 PT:1/1
 A:AB$DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
-Oracle:Flying\nSacrifice this creature: This creature deals 1 damage to any target.
+Oracle:Flying\nSacrifice this creature: It deals 1 damage to any target.

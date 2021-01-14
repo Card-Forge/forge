@@ -1,0 +1,7 @@
+Name:Jeweled Lotus
+ManaCost:0
+Types:Artifact
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 3 | RestrictValid$ Spell.IsCommander | SpellDescription$ Add three mana of any one color. Spend this mana only to cast your commander.
+DeckHas:Ability$Sacrifice
+AI:RemoveDeck:NonCommander
+Oracle:{​T}, Sacrifice Jeweled Lotus: Add three mana of any one color. Spend this mana only to cast your commander.

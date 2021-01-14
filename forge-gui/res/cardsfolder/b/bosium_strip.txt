@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 A:AB$ Effect | Cost$ 3 T | ReplacementEffects$ REBosiumStrip | StaticAbilities$ STBosiumStrip | SVars$ MoveExile | SpellDescription$ Until end of turn, if the top card of your graveyard is an instant or sorcery card, you may cast that card. If a card cast this way would be put into a graveyard this turn, exile it instead.
 SVar:STBosiumStrip:Mode$ Continuous | Affected$ Card.TopGraveyard+Instant+YouCtrl,Card.TopGraveyard+Sorcery+YouCtrl | MayPlay$ True | EffectZone$ Command | AffectedZone$ Graveyard | Description$ Until end of turn, if the top card of your graveyard is an instant or sorcery card, you may cast that card. If a card cast this way would be put into a graveyard this turn, exile it instead.
-SVar:REBosiumStrip:Event$ Moved | ValidCard$ Card.CastSa Spell.MayPlaySource | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile
+SVar:REBosiumStrip:Event$ Moved | ValidLKI$ Card.CastSa Spell.MayPlaySource | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile
 SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile
 SVar:NeedsOrderedGraveyard:TRUE
 AI:RemoveDeck:All

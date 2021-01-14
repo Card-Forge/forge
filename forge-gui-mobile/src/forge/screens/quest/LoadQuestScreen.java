@@ -23,6 +23,7 @@ import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestUtil;
+import forge.quest.data.DeckConstructionRules;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
@@ -196,7 +197,7 @@ public class LoadQuestScreen extends LaunchScreen {
 
         FModel.getQuestPreferences().setPref(QPref.CURRENT_QUEST, quest.getName() + ".dat");
         FModel.getQuestPreferences().save();
-        QuestMenu.launchQuestMode(LaunchReason.LoadQuest);
+        QuestMenu.launchQuestMode(LaunchReason.LoadQuest,quest.deckConstructionRules == DeckConstructionRules.Commander);
     }
 
     private void renameQuest(final QuestData quest) {

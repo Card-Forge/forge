@@ -2,8 +2,8 @@ Name:Brazen Freebooter
 ManaCost:3 R
 Types:Creature Human Pirate
 PT:3/3
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBToken | TriggerDescription$ When CARDNAME enters the battlefield, create a colorless Treasure artifact token with "{T}, sacrifice this artifact: Add one mana of any color."
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Treasure token.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | LegacyImage$ c a treasure sac rix
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brazen_freebooter.jpg
 DeckHas:Ability$Token
-Oracle:When Brazen Freebooter enters the battlefield, create a colorless Treasure artifact token with "{T}, sacrifice this artifact: Add one mana of any color."
+Oracle:When Brazen Freebooter enters the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

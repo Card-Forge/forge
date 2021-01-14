@@ -34,9 +34,7 @@ import forge.util.collect.FCollectionView;
  * @author Forge
  * @version $Id$
  */
-public abstract class AbilityActivated extends SpellAbility implements java.io.Serializable, Cloneable {
-    /** Constant <code>serialVersionUID=1L</code>. */
-    private static final long serialVersionUID = 1L;
+public abstract class AbilityActivated extends SpellAbility implements Cloneable {
 
     /**
      * <p>
@@ -66,10 +64,10 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
      */
     public AbilityActivated(final Card sourceCard, final Cost abCost, final TargetRestrictions tgt) {
         super(sourceCard, abCost);
-        if ((tgt != null) && tgt.doesTarget()) {
-            this.setTargetRestrictions(tgt);
-        }
+        this.setTargetRestrictions(tgt);
     }
+
+    public boolean isActivatedAbility() { return true; }
 
     /** {@inheritDoc} */
     @Override

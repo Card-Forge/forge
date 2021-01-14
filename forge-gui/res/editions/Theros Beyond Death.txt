@@ -4,9 +4,10 @@ Date=2020-01-24
 Name=Theros: Beyond Death
 MciCode=thb
 Type=Expansion
-BoosterCovers=5
-Booster=10 Common:!fromSheet("THB Secret Cards"), 3 Uncommon:!fromSheet("THB Secret Cards"), 1 RareMythic:!fromSheet("THB Secret Cards"), 1 BasicLand
+BoosterCovers=3
+Booster=10 Common:fromSheet("THB Commons"), 3 Uncommon:fromSheet("THB Uncommons"), 1 RareMythic:fromSheet("THB RareMythics"), 1 BasicLand
 Prerelease=6 Boosters, 1 RareMythic+
+ChaosDraftThemes=GRAVEYARD_MATTERS
 
 [cards]
 1 U Alseid of Life's Bounty
@@ -263,11 +264,15 @@ Prerelease=6 Boosters, 1 RareMythic+
 252 L Swamp
 253 L Mountain
 254 L Forest
+
+[borderless]
 #Statue borderless planeswalkers
 255 M Elspeth, Sun's Nemesis
 256 M Ashiok, Nightmare Muse
-#Constellation Gods and Demigods
 257 M Calix, Destiny's Hand
+
+[showcase]
+#Constellation Gods and Demigods
 258 U Daxos, Blessed by the Sun
 259 M Heliod, Sun-Crowned
 260 U Callaphe, Beloved of the Sea
@@ -279,8 +284,11 @@ Prerelease=6 Boosters, 1 RareMythic+
 266 M Nylea, Keen-Eyed
 267 U Renata, Called to the Hunt
 268 M Klothys, God of Destiny
-#Buy-A-Box Promo
+
+[buy a box]
 269 M Athreos, Shroud-Veiled
+
+[precon product]
 #Planeswalker Deck Cards
 270 M Elspeth, Undaunted Hero
 271 U Eidolon of Inspiration
@@ -311,7 +319,8 @@ Prerelease=6 Boosters, 1 RareMythic+
 295 R Terror of Mount Velus
 296 R Ironscale Hydra
 297 R Treeshaker Chimera
-#Borderless art rares and mythics
+
+[extended art]
 298 R Archon of Sun's Grace
 299 R Eidolon of Obstruction
 300 R Heliod's Intervention
@@ -366,6 +375,8 @@ Prerelease=6 Boosters, 1 RareMythic+
 349 R Temple of Enlightenment
 350 R Temple of Malice
 351 R Temple of Plenty
+
+[promo]
 #Bundle promo
 352 R Arasta of the Endless Web
 #Promo Pack
@@ -374,6 +385,277 @@ Prerelease=6 Boosters, 1 RareMythic+
 355 U Gray Merchant of Asphodel
 356 C Thrill of Possibility
 357 U Wolfwillow Haven
+
+# custom rarity print runs to ensure correct art
+# (only generate those available in regular boosters + correct collation)
+[Commons]
+Captivating Unicorn|THB|1
+Daybreak Chimera|THB|1
+Dreadful Apathy|THB|1
+Flicker of Fate|THB|1
+Glory Bearers|THB|1
+Heliod's Pilgrim|THB|1
+Hero of the Pride|THB|1
+Indomitable Will|THB|1
+Karametra's Blessing|THB|1
+Leonin of the Lost Pride|THB|1
+Nyxborn Courser|THB|1
+Omen of the Sun|THB|1
+Pious Wayfarer|THB|1
+Revoke Existence|THB|1
+Rumbling Sentry|THB|1
+Sentinel's Eyes|THB|1
+Sunmane Pegasus|THB|1
+Transcendent Envoy|THB|1
+Triumphant Surge|THB|1
+Brine Giant|THB|1
+Chain to Memory|THB|1
+Deny the Divine|THB|1
+Eidolon of Philosophy|THB|1
+Elite Instructor|THB|1
+Ichthyomorphosis|THB|1
+Memory Drain|THB|1
+Naiad of Hidden Coves|THB|1
+Nyxborn Seaguard|THB|1
+Omen of the Sea|THB|1
+Riptide Turtle|THB|1
+Sleep of the Dead|THB|1
+Starlit Mantle|THB|1
+Stern Dismissal|THB|1
+Thirst for Meaning|THB|1
+Towering-Wave Mystic|THB|1
+Triton Waverider|THB|1
+Vexing Gull|THB|1
+Witness of Tomorrows|THB|1
+Aspect of Lamprey|THB|1
+Blight-Breath Catoblepas|THB|1
+Discordant Piper|THB|1
+Final Death|THB|1
+Fruit of Tizerus|THB|1
+Funeral Rites|THB|1
+Grim Physician|THB|1
+Lampad of Death's Vigil|THB|1
+Mire's Grasp|THB|1
+Mogis's Favor|THB|1
+Nyxborn Marauder|THB|1
+Omen of the Dead|THB|1
+Pharika's Libation|THB|1
+Rage-Scarred Berserker|THB|1
+Scavenging Harpy|THB|1
+Soulreaper of Mogis|THB|1
+Temple Thief|THB|1
+Underworld Charger|THB|1
+Venomous Hierophant|THB|1
+Arena Trickster|THB|1
+Aspect of Manticore|THB|1
+Final Flare|THB|1
+Flummoxed Cyclops|THB|1
+Hero of the Games|THB|1
+Incendiary Oracle|THB|1
+Infuriate|THB|1
+Iroas's Blessing|THB|1
+Irreverent Revelers|THB|1
+Nyxborn Brute|THB|1
+Omen of the Forge|THB|1
+Oread of Mountain's Blaze|THB|1
+Portent of Betrayal|THB|1
+Satyr's Cunning|THB|1
+Skophos Warleader|THB|1
+Stampede Rider|THB|1
+Thrill of Possibility|THB|1
+Underworld Rage-Hound|THB|1
+Wrap in Flames|THB|1
+Gift of Strength|THB|1
+Hyrax Tower Scout|THB|1
+Ilysian Caryatid|THB|1
+Inspire Awe|THB|1
+Loathsome Chimera|THB|1
+Moss Viper|THB|1
+Nexus Wardens|THB|1
+Nylea's Forerunner|THB|1
+Nylea's Huntmaster|THB|1
+Nyxborn Colossus|THB|1
+Omen of the Hunt|THB|1
+Plummet|THB|1
+Relentless Pursuit|THB|1
+Return to Nature|THB|1
+Setessan Skirmisher|THB|1
+Setessan Training|THB|1
+Skola Grovedancer|THB|1
+Voracious Typhon|THB|1
+Warbriar Blessing|THB|1
+Altar of the Pantheon|THB|1
+Bronze Sword|THB|1
+Thaumaturge's Familiar|THB|1
+Traveler's Amulet|THB|1
+Wings of Hubris|THB|1
+Unknown Shores|THB|1
+
+[Uncommons]
+3 Alseid of Life's Bounty|THB|1
+3 Archon of Falling Stars|THB|1
+3 Banishing Light|THB|1
+3 The Birth of Meletis|THB|1
+3 Commanding Presence|THB|1
+3 Dawn Evangel|THB|1
+2 Daxos, Blessed by the Sun|THB|1
+1 Daxos, Blessed by the Sun|THB|2
+3 Favored of Iroas|THB|1
+3 Heliod's Punishment|THB|1
+3 Hero of the Winds|THB|1
+3 Lagonna-Band Storyteller|THB|1
+3 Phalanx Tactics|THB|1
+3 Reverent Hoplite|THB|1
+3 Alirios, Enraptured|THB|1
+2 Callaphe, Beloved of the Sea|THB|1
+1 Callaphe, Beloved of the Sea|THB|2
+3 Glimpse of Freedom|THB|1
+3 Medomai's Prophecy|THB|1
+3 One with the Stars|THB|1
+3 Sage of Mysteries|THB|1
+3 Sea God's Scorn|THB|1
+3 Shimmerwing Chimera|THB|1
+3 Shoal Kraken|THB|1
+3 Stinging Lionfish|THB|1
+3 Sweet Oblivion|THB|1
+3 Threnody Singer|THB|1
+3 Whirlwind Denial|THB|1
+3 Agonizing Remorse|THB|1
+3 Cling to Dust|THB|1
+3 Drag to the Underworld|THB|1
+3 Elspeth's Nightmare|THB|1
+3 Enemy of Enlightenment|THB|1
+3 Gray Merchant of Asphodel|THB|1
+3 Hateful Eidolon|THB|1
+3 Inevitable End|THB|1
+3 Minion's Return|THB|1
+3 Mire Triton|THB|1
+3 Pharika's Spawn|THB|1
+2 Tymaret, Chosen from Death|THB|1
+1 Tymaret, Chosen from Death|THB|2
+3 Underworld Dreams|THB|1
+2 Anax, Hardened in the Forge|THB|1
+1 Anax, Hardened in the Forge|THB|2
+3 Blood Aspirant|THB|1
+3 Careless Celebrant|THB|1
+3 Dreamshaper Shaman|THB|1
+3 Dreamstalker Manticore|THB|1
+3 Escape Velocity|THB|1
+3 Fateful End|THB|1
+3 Furious Rise|THB|1
+3 Heroes of the Revel|THB|1
+3 Impending Doom|THB|1
+3 Skophos Maze-Warden|THB|1
+3 The Triumph of Anax|THB|1
+3 Underworld Fires|THB|1
+3 The Binding of the Titans|THB|1
+3 Chainweb Aracnir|THB|1
+3 Destiny Spinner|THB|1
+3 Hydra's Growth|THB|1
+3 Klothys's Design|THB|1
+3 Mystic Repeal|THB|1
+3 Nessian Hornbeetle|THB|1
+3 Nessian Wanderer|THB|1
+3 Nyx Herald|THB|1
+3 Pheres-Band Brawler|THB|1
+2 Renata, Called to the Hunt|THB|1
+1 Renata, Called to the Hunt|THB|2
+3 Setessan Petitioner|THB|1
+3 Wolfwillow Haven|THB|1
+3 Acolyte of Affliction|THB|1
+3 Devourer of Memory|THB|1
+3 Eutropia the Twice-Favored|THB|1
+3 Hero of the Nyxborn|THB|1
+3 Mischievous Chimera|THB|1
+3 Rise to Glory|THB|1
+3 Siona, Captain of the Pyleas|THB|1
+3 Slaughter-Priest of Mogis|THB|1
+3 Staggering Insight|THB|1
+3 Warden of the Chained|THB|1
+3 Entrancing Lyre|THB|1
+3 Mirror Shield|THB|1
+3 Soul-Guide Lantern|THB|1
+3 Thundering Chariot|THB|1
+3 Field of Ruin|THB|1
+
+[RareMythics]
+6 Archon of Sun's Grace|THB|1
+6 Eidolon of Obstruction|THB|1
+6 Elspeth Conquers Death|THB|1
+6 Heliod's Intervention|THB|1
+6 Idyllic Tutor|THB|1
+6 Shatter the Sky|THB|1
+6 Taranika, Akroan Veteran|THB|1
+6 Ashiok's Erasure|THB|1
+6 Nadir Kraken|THB|1
+6 Protean Thaumaturge|THB|1
+6 Thassa's Intervention|THB|1
+6 Thassa's Oracle|THB|1
+6 Thryx, the Sudden Storm|THB|1
+6 Wavebreak Hippocamp|THB|1
+6 Aphemia, the Cacophony|THB|1
+6 Eat to Extinction|THB|1
+6 Erebos's Intervention|THB|1
+6 Gravebreaker Lamia|THB|1
+6 Nightmare Shepherd|THB|1
+6 Treacherous Blessing|THB|1
+6 Tymaret Calls the Dead|THB|1
+6 Woe Strider|THB|1
+6 The Akroan War|THB|1
+6 Phoenix of Ash|THB|1
+6 Purphoros's Intervention|THB|1
+6 Storm Herald|THB|1
+6 Storm's Wrath|THB|1
+6 Tectonic Giant|THB|1
+6 Underworld Breach|THB|1
+6 Arasta of the Endless Web|THB|1
+6 Dryad of the Ilysian Grove|THB|1
+6 The First Iroan Games|THB|1
+6 Mantle of the Wolf|THB|1
+6 Nessian Boar|THB|1
+6 Nylea's Intervention|THB|1
+6 Setessan Champion|THB|1
+6 Allure of the Unknown|THB|1
+6 Atris, Oracle of Half-Truths|THB|1
+6 Bronzehide Lion|THB|1
+6 Dalakos, Crafter of Wonders|THB|1
+6 Dream Trawler|THB|1
+6 Enigmatic Incarnation|THB|1
+6 Gallia of the Endless Dance|THB|1
+6 Haktos the Unscarred|THB|1
+6 Kunoros, Hound of Athreos|THB|1
+6 Nyx Lotus|THB|1
+6 Shadowspear|THB|1
+6 Labyrinth of Skophos|THB|1
+6 Temple of Abandon|THB|1
+6 Temple of Deceit|THB|1
+6 Temple of Enlightenment|THB|1
+6 Temple of Malice|THB|1
+6 Temple of Plenty|THB|1
+2 Elspeth, Sun's Nemesis|THB|1
+1 Elspeth, Sun's Nemesis|THB|2
+2 Heliod, Sun-Crowned|THB|1
+1 Heliod, Sun-Crowned|THB|2
+3 Kiora Bests the Sea God|THB|1
+2 Thassa, Deep-Dwelling|THB|1
+1 Thassa, Deep-Dwelling|THB|2
+2 Erebos, Bleak-Hearted|THB|1
+1 Erebos, Bleak-Hearted|THB|2
+3 Ox of Agonas|THB|1
+2 Purphoros, Bronze-Blooded|THB|1
+1 Purphoros, Bronze-Blooded|THB|2
+2 Nylea, Keen-Eyed|THB|1
+1 Nylea, Keen-Eyed|THB|2
+3 Nyxbloom Ancient|THB|1
+2 Ashiok, Nightmare Muse|THB|1
+1 Ashiok, Nightmare Muse|THB|2
+2 Calix, Destiny's Hand|THB|1
+1 Calix, Destiny's Hand|THB|2
+2 Klothys, God of Destiny|THB|1
+1 Klothys, God of Destiny|THB|2
+3 Kroxa, Titan of Death's Hunger|THB|1
+3 Polukranos, Unchained|THB|1
+3 Uro, Titan of Nature's Wrath|THB|1
 
 [tokens]
 b_2_2_zombie

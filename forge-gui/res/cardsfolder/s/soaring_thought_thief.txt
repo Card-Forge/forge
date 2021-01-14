@@ -1,0 +1,13 @@
+Name:Soaring Thought-Thief
+ManaCost:U B
+Types:Creature Human Rogue
+PT:1/3
+K:Flash
+K:Flying
+S:Mode$ Continuous | Affected$ Rogue.YouCtrl | AddPower$ 1 | CheckSVar$ X | SVarCompare$ GE8 | Description$ As long as an opponent has eight or more cards in their graveyard, Rogues you control get +1/+0.
+SVar:X:PlayerCountOpponents$HighestCardsInGraveyard
+T:Mode$ AttackersDeclared | ValidAttackers$ Rogue.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever one or more Rogues you control attack, each opponent mills two cards.
+SVar:TrigMill:DB$ Mill | Defined$ Player.Opponent | NumCards$ 2
+DeckHints:Type$Rogue
+DeckHas:Ability$Mill
+Oracle:Flash\nFlying\nAs long as an opponent has eight or more cards in their graveyard, Rogues you control get +1/+0.\nWhenever one or more Rogues you control attack, each opponent mills two cards.

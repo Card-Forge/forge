@@ -66,21 +66,21 @@ public class TargetSelection {
     private boolean bTargetingDone = false;
 
     private boolean isMandatory() {
-        return ability.isMandatory() || getTgt().getMandatory();
+        // even if its an optionalTrigger, the targeting is still mandatory
+        return ability.isTrigger() || getTgt().getMandatory();
     }
 
     public final boolean chooseTargets(Integer numTargets) {
-        final TargetRestrictions tgt = getTgt();
-        final boolean canTarget = tgt != null && tgt.doesTarget();
-        if (!canTarget) {
+        if (!ability.usesTargeting()) {
             throw new RuntimeException("TargetSelection.chooseTargets called for ability that does not target - " + ability);
         }
+        final TargetRestrictions tgt = getTgt();
 
         // Number of targets is explicitly set only if spell is being redirected (ex. Swerve or Redirect)
         final int minTargets = numTargets != null ? numTargets.intValue() : tgt.getMinTargets(ability.getHostCard(), ability);
         final int maxTargets = numTargets != null ? numTargets.intValue() : tgt.getMaxTargets(ability.getHostCard(), ability);
         //final int maxTotalCMC = tgt.getMaxTotalCMC(ability.getHostCard(), ability);
-        final int numTargeted = ability.getTargets().getNumTargeted();
+        final int numTargeted = ability.getTargets().size();
         final boolean isSingleZone = ability.getTargetRestrictions().isSingleZone();
 
         final boolean hasEnoughTargets = minTargets == 0 || numTargeted >= minTargets;

@@ -86,7 +86,7 @@ public class InputBlock extends InputSyncronizedBase {
         }
         else {
             String attackerName = currentAttacker.isFaceDown() ? localizer.getMessage("lblMorph") : currentAttacker.getName() + " (" + currentAttacker.getId() + ")";
-            String message = localizer.getMessage("lblSelectBlocker") + attackerName + localizer.getMessage("lblOrSelectBlockTarget");
+            String message = localizer.getMessage("lblSelectBlocker") + attackerName + " " + localizer.getMessage("lblOrSelectBlockTarget");
             showMessage(message);
         }
 
@@ -122,7 +122,7 @@ public class InputBlock extends InputSyncronizedBase {
         boolean isCorrectAction = false;
         if (triggerEvent != null && triggerEvent.getButton() == 3 && card.getController() == defender) {
             combat.removeFromCombat(card);
-            card.getGame().fireEvent(new UiEventBlockerAssigned(CardView.get(card), null));
+            card.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(CardView.get(card), null));
             isCorrectAction = true;
         }
         else {
@@ -137,14 +137,14 @@ public class InputBlock extends InputSyncronizedBase {
                     if (combat.isBlocking(card, currentAttacker)) {
                         //if creature already blocking current attacker, remove blocker from combat
                         combat.removeBlockAssignment(currentAttacker, card);
-                        card.getGame().fireEvent(new UiEventBlockerAssigned(CardView.get(card), null));
+                        card.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(CardView.get(card), null));
                         isCorrectAction = true;
                     }
                     else {
                         isCorrectAction = CombatUtil.canBlock(currentAttacker, card, combat);
                         if (isCorrectAction) {
                             combat.addBlocker(currentAttacker, card);
-                            card.getGame().fireEvent(new UiEventBlockerAssigned(
+                            card.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(
                                     CardView.get(card),
                                     CardView.get(currentAttacker)));
                         }

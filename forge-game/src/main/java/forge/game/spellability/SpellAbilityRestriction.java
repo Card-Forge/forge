@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -21,10 +21,10 @@ import forge.game.Game;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
-import forge.game.combat.Combat;
 import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.staticability.StaticAbilityCastWithFlash;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -36,7 +36,7 @@ import java.util.Map;
  * <p>
  * SpellAbilityRestriction class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -62,7 +62,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      * <p>
      * setRestrictions.
      * </p>
-     * 
+     *
      * @param params
      *            a {@link java.util.HashMap} object.
      * @since 1.0.15
@@ -148,6 +148,9 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
 
+        if (params.containsKey("PresentDefined")) {
+            this.setPresentDefined(params.get("PresentDefined"));
+        }
         if (params.containsKey("IsNotPresent")) {
             this.setIsPresent(params.get("IsNotPresent"));
             this.setPresentCompare("EQ0");
@@ -255,7 +258,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     }
 
                     // TODO: this is an exception for Aftermath. Needs to be somehow generalized.
-                    if (this.getZone() != ZoneType.Graveyard && sa.isAftermath() && sa.isRightSplit()) {
+                    if (this.getZone() != ZoneType.Graveyard && sa.isAftermath() && sa.getCardState() != null) {
                         return false;
                     }
 
@@ -310,8 +313,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      */
     public final boolean checkActivatorRestrictions(final Card c, final SpellAbility sa) {
         Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
-        final Combat combat = game.getPhaseHandler().getCombat();
 
         if (sa.isSpell()) {
             // Spells should always default to "controller" but use mayPlay check.
@@ -324,7 +325,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         String validPlayer = this.getActivator();
         return activator.isValid(validPlayer, c.getController(), c, sa);
     }
-    
+
     public final boolean checkOtherRestrictions(final Card c, final SpellAbility sa, final Player activator) {
         final Game game = activator.getGame();
 
@@ -403,7 +404,12 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
         if (this.getIsPresent() != null) {
-            CardCollectionView list = game.getCardsIn(this.getPresentZone());
+            CardCollectionView list;
+            if (this.getPresentDefined() != null) {
+                list = AbilityUtils.getDefinedCards(sa.getHostCard(), this.getPresentDefined(), sa);
+            } else {
+                list = game.getCardsIn(this.getPresentZone());
+            }
 
             list = CardLists.getValidCards(list, this.getIsPresent().split(","), activator, c, sa);
 
@@ -487,7 +493,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      * <p>
      * canPlay.
      * </p>
-     * 
+     *
      * @param c
      *            a {@link forge.game.card.Card} object.
      * @param sa
@@ -506,8 +512,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             System.out.println(c.getName() + " Did not have activator set in SpellAbilityRestriction.canPlay()");
         }
 
-        if (this.isSorcerySpeed() && !activator.canCastSorcery()) {
-            return false;
+        if (!StaticAbilityCastWithFlash.anyWithFlashNeedsTargeting(sa, c, activator)) {
+            if (!sa.canCastTiming(c, activator)) {
+                return false;
+            }
         }
 
         if (!sa.hasSVar("IsCastFromPlayEffect")) {
@@ -523,7 +531,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (!checkZoneRestrictions(c, sa)) {
             return false;
         }
-        
+
         if (!checkOtherRestrictions(c, sa, activator)) {
             return false;
         }

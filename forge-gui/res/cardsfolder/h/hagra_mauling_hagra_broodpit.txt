@@ -1,0 +1,17 @@
+Name:Hagra Mauling
+ManaCost:2 B B
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | CheckSVar$ X | SVarCompare$ EQ0 | References$ X | Description$ This spell costs {1} less to cast if an opponent controls no basic lands.
+SVar:X:PlayerCountOpponents$LowestValid Land.Basic+YouCtrl
+A:SP$ Destroy | Cost$ 2 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+AlternateMode:Modal
+Oracle:This spell costs {1} less to cast if an opponent controls no basic lands.\nDestroy target creature.
+
+ALTERNATE
+
+Name:Hagra Broodpit
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+Oracle:Hagra Broodpit enters the battlefield tapped.\n{T}: Add {B}.

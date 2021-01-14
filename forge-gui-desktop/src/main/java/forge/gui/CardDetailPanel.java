@@ -204,7 +204,7 @@ public class CardDetailPanel extends SkinnedPanel {
         } else {
             final String manaCost;
             if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && card.getZone() != ZoneType.Stack) { //only display current state's mana cost when on stack
-                manaCost = card.getCurrentState().getManaCost() + " // " + card.getAlternateState().getManaCost();
+                manaCost = card.getLeftSplitState().getManaCost() + " // " + card.getAlternateState().getManaCost();
             } else {
                 manaCost = state.getManaCost().toString();
             }
@@ -256,7 +256,7 @@ public class CardDetailPanel extends SkinnedPanel {
         idLabel.setText(mayView ? CardDetailUtil.formatCardId(state) : "");
 
         // fill the card text
-        cdArea.setText(FSkin.encodeSymbols(CardDetailUtil.composeCardText(state, gameView, mayView), true));
+        cdArea.setText(FSkin.encodeSymbols(CardDetailUtil.composeCardText( state, gameView, mayView), true));
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {

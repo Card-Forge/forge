@@ -1,0 +1,10 @@
+Name:Daryl, Hunter of Walkers
+ManaCost:2 R G
+Types:Legendary Creature Human Archer
+PT:4/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, target opponent creates three Walker tokens.
+SVar:TrigToken:DB$ Token | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | TokenAmount$ 3 | TokenScript$ walker | TokenOwner$ TargetedPlayer
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SpellDescription$ NICKNAME deals 2 damage to target creature.
+T:Mode$ ChangesZone | ValidCard$ Zombie.OppCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a Zombie an opponent controls dies, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:At the beginning of your upkeep, target opponent creates three Walker tokens.\n{T}: Daryl deals 2 damage to target creature.\nWhenever a Zombie an opponent controls dies, draw a card.

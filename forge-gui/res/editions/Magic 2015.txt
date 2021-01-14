@@ -7,6 +7,7 @@ MciCode=m15
 Type=Core
 BoosterCovers=5
 Booster=10 Common:!fromSheet("M15 Sample Cards"), 3 Uncommon:!fromSheet("M15 Sample Cards"), 1 RareMythic:!fromSheet("M15 Sample Cards"), 1 BasicLand
+ChaosDraftThemes=CORE_SET
 
 [cards]
 1 M Ajani Steadfast

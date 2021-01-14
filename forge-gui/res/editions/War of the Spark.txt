@@ -8,6 +8,7 @@ Type=Expansion
 BoosterCovers=3
 Booster=10 Common:!fromSheet("WAR Secret Cards"), 3 Uncommon:!fromSheet("WAR Secret Cards"), 1 RareMythic:!fromSheet("WAR Secret Cards"), 1 BasicLand
 BoosterMustContain=Planeswalker
+ChaosDraftThemes=RAVNICA
 
 [cards]
 1 R Karn, the Great Creator
@@ -327,7 +328,7 @@ wubrg_2_2_citizen
 b_0_0_zombie_army
 b_0_0_zombie_army
 b_0_0_zombie_army
-b_1_1_assassin_deathtouch
+b_1_1_assassin_deathtouch_pwdestroy
 b_2_2_zombie
 b_4_4_zombie_warrior_vigilance
 c_1_1_a_servo

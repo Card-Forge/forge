@@ -1,0 +1,19 @@
+Name:Valakut Awakening
+ManaCost:2 R
+Types:Instant
+A:SP$ ChangeZone | Cost$ 2 R | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | ChangeType$ Card | ChangeNum$ X | References$ X | RememberChanged$ True | SubAbility$ DBDraw | StackDescription$ {p:You} puts any number of cards from their hand on the bottom of their library, | SpellDescription$ Put any number of cards from your hand on the bottom of your library, then draw that many cards plus one.
+SVar:DBDraw:DB$ Draw | NumCards$ Y | References$ Y | SubAbility$ DBCleanup | StackDescription$ then draws that many cards plus one.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$InYourHand
+SVar:Y:Count$RememberedSize/Plus.1
+AlternateMode:Modal
+Oracle:Put any number of cards from your hand on the bottom of your library, then draw that many cards plus one.
+
+ALTERNATE
+
+Name:Valakut Stoneforge
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+Oracle:Valakut Stoneforge enters the battlefield tapped.\n{T}: Add {R}.

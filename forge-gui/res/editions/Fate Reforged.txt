@@ -6,6 +6,7 @@ MciCode=frf
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:!land, 3 Uncommon, 1 RareMythic, 1 fromSheet("FRF Lands"), 0 fromSheet("FRF Basic Lands")
+ChaosDraftThemes=GRAVEYARD_MATTERS
 
 [cards]
 1 M Ugin, the Spirit Dragon
@@ -193,6 +194,30 @@ Booster=10 Common:!land, 3 Uncommon, 1 RareMythic, 1 fromSheet("FRF Lands"), 0 f
 183 L Mountain
 184 L Forest
 185 L Forest
+
+[Lands]
+4 Bloodstained Mire|KTK
+4 Flooded Strand|KTK
+4 Polluted Delta|KTK
+4 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+45 Bloodfell Caves|FRF
+45 Blossoming Sands|FRF
+45 Dismal Backwater|FRF
+45 Jungle Hollow|FRF
+45 Rugged Highlands|FRF
+45 Scoured Barrens|FRF
+45 Swiftwater Cliffs|FRF
+45 Thornwood Falls|FRF
+45 Tranquil Cove|FRF
+45 Wind-Scarred Crag|FRF
+
+[Basic Lands]
+1 Swamp|FRF
+1 Plains|FRF
+1 Forest|FRF
+1 Mountain|FRF
+1 Island|FRF
 
 [tokens]
 w_1_1_monk_prowess

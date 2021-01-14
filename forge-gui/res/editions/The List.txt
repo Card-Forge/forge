@@ -1,0 +1,355 @@
+[metadata]
+Code=PLIST
+Date=2020-09-26
+Name=The List
+Type=Reprint
+
+[cards]
+1 U Iterative Analysis
+2 M Emrakul, the Aeons Torn
+3 U Lashweed Lurker
+4 R Thought-Knot Seer
+5 R Ancestor's Prophet
+6 R Angel's Grace
+7 C Anointer Priest
+8 C Aven Riftwatcher
+9 U Belfry Spirit
+10 U Calming Licid
+11 U Cloudgoat Ranger
+12 R Council's Judgment
+13 R Disenchant
+14 R Eldrazi Displacer
+15 R Emeria Angel
+16 U Enlightened Tutor
+17 M Entreat the Angels
+18 M Gideon, Ally of Zendikar
+19 C Goldenglow Moth
+20 M History of Benalia
+21 R Hundred-Handed One
+22 U Kazandu Blademaster
+23 M Land Tax
+24 U Loyal Unicorn
+25 M Monastery Mentor
+26 M Nahiri, the Lithomancer
+27 R Parallax Wave
+28 U Pegasus Stampede
+29 R Regal Caracal
+30 R Rest in Peace
+31 R Reveillark
+32 R Sensei Golden-Tail
+33 C Snubhorn Sentry
+34 U Soltari Monk
+35 U Splicer's Skill
+36 U Springjack Shepherd
+37 U Sunscape Battlemage
+38 C Triplicate Spirits
+39 C Trokin High Guard
+40 U Vanguard of Brimaz
+41 R Winds of Abandon
+42 U Wizened Cenn
+43 R Wrath of God
+44 C Amoeboid Changeling
+45 R Battle of Wits
+46 U Brain Freeze
+47 R Brainstorm
+48 M Brazen Borrower // Petty Theft
+49 R Broodstar
+50 U Chemister's Insight
+51 U Coveted Peacock
+52 R Cryptic Command
+53 C Drift of Phantasms
+54 U Enclave Cryptologist
+55 R Eternal Dominion
+56 U Evermind
+57 R Eye of the Storm
+58 U Fabricate
+59 R Forced Fruition
+60 R Ixidor, Reality Sculptor
+61 R Jwari Shapeshifter
+62 R Keeper of the Nine Gales
+63 C Latchkey Faerie
+64 M Lorthos, the Tidemaker
+65 C Man-o'-War
+66 R Mischievous Quanar
+67 U Moon-Eating Dog
+68 R Negate
+69 U Noble Benefactor
+70 R Octopus Umbra
+71 R Pact of Negation
+72 R Patron Wizard
+73 U Pouncing Shoreshark
+74 U Pteramander
+75 U Reality Shift
+76 U Retreat to Coralhelm
+77 U Ruination Guide
+78 C Spined Thopter
+79 C Stonybrook Banneret
+80 M Temporal Manipulation
+81 R Training Grounds
+82 U Vodalian Illusionist
+83 R Ancient Craving
+84 U Beseech the Queen
+85 R Bloodghast
+86 M Bloodlord of Vaasgoth
+87 R Body Snatcher
+88 R Bogbrew Witch
+89 R Brink of Madness
+90 C Cadaverous Knight
+91 R Cruel Tutor
+92 R Doom Blade
+93 R Doomwake Giant
+94 R Endling
+95 R Extinction
+96 U Gatekeeper of Malakir
+97 C Gempalm Polluter
+98 U Golgari Thug
+99 R Grim Haruspex
+100 C Grim Harvest
+101 R Kalastria Highborn
+102 R Korlash, Heir to Blackblade
+103 R Living Death
+104 R Lord of the Undead
+105 U Murderous Cut
+106 R Necravolver
+107 U Necromancy
+108 U Nezumi Graverobber // Nighteyes the Desecrator
+109 U Oubliette
+110 M Phyrexian Obliterator
+111 R Promise of Power
+112 U Relentless Rats
+113 M Skithiryx, the Blight Dragon
+114 R Tombstalker
+115 C Tortured Existence
+116 U Unburial Rites
+117 C Urborg Panther
+118 U Vampire Nighthawk
+119 M Vampire Nocturnus
+120 U Victimize
+121 R Virtus the Veiled
+122 U Abrade
+123 U Anax, Hardened in the Forge
+124 C Boggart Arsonists
+125 U Brothers Yamazaki
+126 R Burst Lightning
+127 R Decree of Annihilation
+128 R Fall of the Titans
+129 U The Flame of Keld
+130 C Fomori Nomad
+131 R Goblin Chieftain
+132 U Goblin Grenade
+133 U Goblin Lore
+134 U Hammer Mage
+135 R Hammer of Purphoros
+136 R Hell's Thunder
+137 R Hidetsugu's Second Rite
+138 R Hunted Dragon
+139 R Jaya's Immolating Inferno
+140 R Kilnmouth Dragon
+141 C Lash Out
+142 R Lightning Bolt
+143 R Lightning Crafter
+144 U Light Up the Stage
+145 R Marauding Raptor
+146 R Moggcatcher
+147 R Patron of the Akki
+148 C Plated Geopede
+149 R Puppet's Verdict
+150 R Pyromancer Ascension
+151 M Scourge of the Throne
+152 R Sedge Sliver
+153 U Shivan Meteor
+154 C Simian Spirit Guide
+155 C Skred
+156 C Stone Rain
+157 R Tuktuk the Explorer
+158 R Voracious Dragon
+159 R Warp World
+160 R Wild Research
+161 U Alpha Kavu
+162 R Awakening
+163 U Cradle Guard
+164 C Curious Pair // Treats to Share
+165 R Elvish Archdruid
+166 U Eternal Witness
+167 R Food Chain
+168 R Gaea's Anthem
+169 R Genesis Hydra
+170 R Gigantosaurus
+171 R Gorm the Great
+172 U Grizzly Fate
+173 R Groundbreaker
+174 R Harmonize
+175 R Helix Pinnacle
+176 R Hua Tuo, Honored Physician
+177 R Imperious Perfect
+178 M Ishkanah, Grafwidow
+179 R Jadelight Ranger
+180 M Kalonian Hydra
+181 M Khalni Hydra
+182 C Moonmist
+183 C Muscle Sliver
+184 C Nightshade Peddler
+185 M Nissa Revane
+186 M Nylea, God of the Hunt
+187 R Parallel Evolution
+188 R Primal Vigor
+189 U Rootrunner
+190 U Saber Ants
+191 R Skyshroud Behemoth
+192 R Song of the Dryads
+193 M Soul of Zendikar
+194 R Spike Weaver
+195 R Squirrel Mob
+196 U Ulvenwald Mysteries
+197 C Willow Dryad
+198 C Yavimaya Scion
+199 R Zendikar Resurgent
+200 U Army Ants
+201 U Boros Challenger
+202 M Chromanticore
+203 M Chulane, Teller of Tales
+204 U Crystalline Sliver
+205 U Diregraf Captain
+206 R Doran, the Siege Tower
+207 R Dromar, the Banisher
+208 R Dune-Brood Nephilim
+209 R Etherium-Horn Sorcerer
+210 M Ezuri, Claw of Progress
+211 R Fathom Mage
+212 R Fiery Justice
+213 M Godsire
+214 R Ith, High Arcanist
+215 C Kingpin's Pet
+216 M Lazav, the Multifarious
+217 R Lightning Angel
+218 M Maelstrom Nexus
+219 U Merfolk Mistbinder
+220 M Muldrotha, the Gravetide
+221 U Necrotic Sliver
+222 R Nicol Bolas
+223 M Oloro, Ageless Ascetic
+224 M Omnath, Locus of Rage
+225 R Phyrexian Tyranny
+226 M Progenitus
+227 C Shambling Shell
+228 U Sky Hussar
+229 U Slimefoot, the Stowaway
+230 R Terminate
+231 U Vitu-Ghazi Guildmage
+232 M Wrenn and Six
+233 U Zendikar Incarnate
+234 U Angrath, Captain of Chaos
+235 R Djinn Illuminatus
+236 U Murderous Redcap
+237 U Noggle Hedge-Mage
+238 R Beck // Call
+239 R Cut // Ribbons
+240 R Odds // Ends
+241 R Acorn Catapult
+242 R Akroma's Memorial
+243 U Arcbound Slith
+244 C Arcum's Astrolabe
+245 C Blight Sickle
+246 R Bonehoard
+247 M The Chain Veil
+248 R Clearwater Goblet
+249 R Contagion Engine
+250 U Crown of Empires
+251 R Door to Nothingness
+252 R Electrostatic Pummeler
+253 R Erratic Portal
+254 U Everflowing Chalice
+255 U Fellwar Stone
+256 U Fodder Cannon
+257 C Fractured Powerstone
+258 R Helm of Kaldra
+259 U Isochron Scepter
+260 R Krark's Thumb
+261 R Lotus Bloom
+262 U Memnite
+263 R Mycosynth Golem
+264 R Panharmonicon
+265 M Platinum Angel
+266 R Prismatic Geoscope
+267 R Scarecrone
+268 R Scroll Rack
+269 U Shuriken
+270 U Skullclamp
+271 U Swiftfoot Boots
+272 R Tamiyo's Journal
+273 R Tek
+274 C Thought Vessel
+275 R Thrumming Stone
+276 U Trusty Machete
+277 R Urza's Blueprints
+278 C Wayfarer's Bauble
+279 M Weatherlight
+280 R Workhorse
+281 U Worn Powerstone
+282 C Bojuka Bog
+283 R Cathedral of War
+284 R Command Beacon
+285 U Dryad Arbor
+286 U Eldrazi Temple
+287 R Emeria, the Sky Ruin
+288 R Gemstone Mine
+289 U Hashep Oasis
+290 R Inventors' Fair
+291 R Kher Keep
+292 U Llanowar Reborn
+293 R Nykthos, Shrine to Nyx
+294 R Phyrexian Tower
+295 R Riptide Laboratory
+296 R Shelldock Isle
+297 C Tree of Tales
+298 R Vesuva
+299 L Wastes
+300 L Plains
+301 M Morophon, the Boundless
+302 R Adarkar Valkyrie
+303 M Crested Sunmare
+304 U Daxos, Blessed by the Sun
+305 R Elspeth Conquers Death
+306 R Giver of Runes
+307 U Jotun Grunt
+308 U Release the Dogs
+309 M Frost Titan
+310 R Ice Cave
+311 R Jokulmorder
+312 R Kindred Discovery
+313 R Mystical Tutor
+314 R Read the Runes
+315 R Desolation Angel
+316 U Liliana's Devotee
+317 R Skyclave Shade
+318 R Bonecrusher Giant
+319 M Brallin, Skyshark Rider
+320 M Combustible Gearhulk
+321 C Pillage
+322 R Rite of Flame
+323 C Seething Song
+324 U Tibalt, Rakish Instigator
+325 U Beanstalk Giant
+326 M Freyalise, Llanowar's Fury
+327 R Hunted Troll
+328 C Into the North
+329 R Ohran Frostfang
+330 R Panglacial Wurm
+331 R Vernal Equinox
+332 M Vorinclex, Voice of Hunger
+333 R Hans Eriksson
+334 R Ice-Fang Coatl
+335 M Kaya, Ghost Assassin
+336 M Korvold, Fae-Cursed King
+337 U Parcelbeast
+338 M Shabraz, the Skyshark
+339 R Yore-Tiller Nephilim
+340 U Birthing Boughs
+341 R Cold Storage
+342 C Cranial Plating
+343 U Herald's Horn
+344 C Horned Helm
+345 C Runed Stalactite
+346 R Cavern of Souls
+347 R Dark Depths
+348 R Scrying Sheets

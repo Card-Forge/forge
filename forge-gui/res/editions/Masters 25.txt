@@ -7,6 +7,7 @@ Type=Reprint
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 RareMythic
 FoilChanceInBooster=100
+ChaosDraftThemes=MASTERS_SET
 
 [cards]
 1 C Act of Heroism
@@ -54,7 +55,7 @@ FoilChanceInBooster=100
 43 U Blue Elemental Blast
 44 R Blue Sun's Zenith
 45 C Borrowing 100,000 Arrows
-46 U Brainstorm
+46 C Brainstorm
 47 U Brine Elemental
 48 C Choking Tethers
 49 C Coralhelm Guide

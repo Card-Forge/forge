@@ -110,18 +110,6 @@ public class SpellAbilityVariables implements Cloneable {
     /** The b any player. */
     private String activator = "You";
 
-    /** The b opponent only. */
-    private boolean opponentOnly = false;
-
-    /** The b opponent only. */
-    private boolean enchantedControllerOnly = false;
-
-    /** The b opponent only. */
-    private boolean attackedPlayerOnly = false;
-
-    /** The b owner only. */
-    private boolean ownerOnly = false;
-
     /** The b opponent turn. */
     private boolean opponentTurn = false;
 

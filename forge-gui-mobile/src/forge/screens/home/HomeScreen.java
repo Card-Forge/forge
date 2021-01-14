@@ -6,6 +6,8 @@ import java.util.List;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
+import forge.assets.FImage;
+import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinImage;
@@ -32,11 +34,32 @@ public class HomeScreen extends FScreen {
 
     public static final HomeScreen instance = new HomeScreen();
 
-    private final FLabel lblLogo = add(new FLabel.Builder().icon(FSkinImage.LOGO).iconInBackground().iconScaleFactor(1).build());
+    private final FLabel lblLogo = add(new FLabel.Builder().icon(
+            new FImage() {
+                final float size = Forge.getScreenWidth() * 0.6f;
+                @Override
+                public float getWidth() {
+                    return size;
+                }
+                @Override
+                public float getHeight() {
+                    return size;
+                }
+                @Override
+                public void draw(Graphics g, float x, float y, float w, float h) {
+                    if (FSkin.hdLogo == null)
+                        FSkinImage.LOGO.draw(g, x, y, w, h);
+                    else
+                        g.drawImage(FSkin.hdLogo, x, y, w, h);
+                }
+            }
+    ).iconInBackground().iconScaleFactor(1).build());
     private final ButtonScroller buttonScroller = add(new ButtonScroller());
     private final List<MenuButton> buttons = new ArrayList<>();
     private int activeButtonIndex, baseButtonCount;
     private FDeckChooser deckManager;
+    private boolean QuestCommander = false;
+    private String QuestWorld = "";
 
     private HomeScreen() {
         super((Header)null);
@@ -102,6 +125,22 @@ public class HomeScreen extends FScreen {
 
     private void addButton(String caption, FEventHandler command) {
         buttons.add(buttonScroller.add(new MenuButton(caption, command)));
+    }
+
+    public void updateQuestCommanderMode(boolean isCommander){
+        QuestCommander = isCommander;
+    }
+
+    public void updateQuestWorld(String questWorld){
+        QuestWorld = questWorld;
+    }
+
+    public boolean getQuestCommanderMode() {
+        return QuestCommander;
+    }
+
+    public String getQuestWorld() {
+        return QuestWorld;
     }
 
     public void addButtonForMode(String caption, final FEventHandler command) {

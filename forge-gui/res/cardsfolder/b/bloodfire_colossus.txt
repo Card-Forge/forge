@@ -4,4 +4,4 @@ Types:Creature Giant
 PT:6/6
 A:AB$ DamageAll | Cost$ R Sac<1/CARDNAME> | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ 6 | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 6 damage to each creature and each player.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodfire_colossus.jpg
-Oracle:{R}, Sacrifice Bloodfire Colossus: Bloodfire Colossus deals 6 damage to each creature and each player.
+Oracle:{R}, Sacrifice Bloodfire Colossus: It deals 6 damage to each creature and each player.

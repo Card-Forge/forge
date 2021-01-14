@@ -1,0 +1,10 @@
+Name:Elderfang Ritualist
+ManaCost:2 B
+Types:Creature Elf Cleric
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME dies, return another target Elf card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Elf.Other+YouOwn | TgtPrompt$ Select another target Elf card from your graveyard
+SVar:SacMe:2
+DeckNeeds:Type$Elf
+DeckHas:Ability$Graveyard
+Oracle:When Elderfang Ritualist dies, return another target Elf card from your graveyard to your hand.

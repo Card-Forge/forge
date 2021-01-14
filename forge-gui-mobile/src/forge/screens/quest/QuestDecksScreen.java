@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.Align;
 import forge.FThreads;
 import forge.Forge;
 import forge.assets.FSkinFont;
+import forge.assets.ImageCache;
 import forge.deck.DeckProxy;
 import forge.deck.DeckgenUtil;
 import forge.deck.FDeckChooser;
@@ -52,6 +53,7 @@ public class QuestDecksScreen extends FScreen {
     };
 
     private boolean needRefreshOnActivate = true;
+    public boolean commanderMode = false;
 
     public QuestDecksScreen() {
         super("", QuestMenu.getMenu());
@@ -77,7 +79,7 @@ public class QuestDecksScreen extends FScreen {
                         FThreads.invokeInEdtLater(new Runnable() {
                             @Override
                             public void run() {
-                                QuestDeckEditor editor = new QuestDeckEditor();
+                                QuestDeckEditor editor = new QuestDeckEditor(commanderMode);
                                 editor.setSaveHandler(new FEventHandler() {
                                     @Override
                                     public void handleEvent(FEvent e) {
@@ -152,8 +154,11 @@ public class QuestDecksScreen extends FScreen {
         final DeckProxy deck = lstDecks.getSelectedItem();
         if (deck == null) { return; }
 
+        /*preload deck to cache*/
+        ImageCache.preloadCache(deck.getDeck());
+
         needRefreshOnActivate = true;
-        Forge.openScreen(new QuestDeckEditor(deck));
+        Forge.openScreen(new QuestDeckEditor(deck, commanderMode));
     }
 
     @Override

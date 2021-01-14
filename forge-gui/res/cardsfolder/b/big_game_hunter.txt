@@ -3,7 +3,7 @@ ManaCost:1 B B
 Types:Creature Human Rebel Assassin
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target creature with power 4 or greater. It can't be regenerated.
-SVar:TrigDestroy:DB$Destroy | ValidTgts$ Creature.powerGE4 | NoRegen$ True | TgtPrompt$ Select target creature with power 4 or greater.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.powerGE4 | NoRegen$ True | TgtPrompt$ Select target creature with power 4 or greater.
 K:Madness:B
 SVar:Picture:http://www.wizards.com/global/images/magic/general/big_game_hunter.jpg
 Oracle:When Big Game Hunter enters the battlefield, destroy target creature with power 4 or greater. It can't be regenerated.\nMadness {B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

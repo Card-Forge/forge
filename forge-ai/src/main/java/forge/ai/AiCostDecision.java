@@ -4,12 +4,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
 import forge.card.CardType;
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -20,6 +23,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.cost.*;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -31,7 +35,7 @@ import forge.util.collect.FCollectionView;
 public class AiCostDecision extends CostDecisionMakerBase {
     private final SpellAbility ability;
     private final Card source;
-    
+
     private final CardCollection discarded;
     private final CardCollection tapped;
 
@@ -47,11 +51,11 @@ public class AiCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(CostAddMana cost) {
         Integer c = cost.convertAmount();
-    
+
         if (c == null) {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
-    
+
         return PaymentDecision.number(c);
     }
 
@@ -321,17 +325,17 @@ public class AiCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(CostGainLife cost) {
         final List<Player> oppsThatCanGainLife = Lists.newArrayList();
-        
+
         for (final Player opp : cost.getPotentialTargets(player, source)) {
             if (opp.canGainLife()) {
                 oppsThatCanGainLife.add(opp);
             }
         }
-    
+
         if (oppsThatCanGainLife.size() == 0) {
             return null;
         }
-    
+
         return PaymentDecision.players(oppsThatCanGainLife);
     }
 
@@ -554,17 +558,14 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
+        final String amount = cost.getAmount();
         Integer c = cost.convertAmount();
+
         if (c == null) {
-            if (ability.getSVar(cost.getAmount()).equals("XChoice")) {
+            final String sVar = ability.getSVar(amount);
+            if (sVar.equals("XChoice")) {
                 String logic = ability.getParamOrDefault("AILogic", "");
-                if ("SacToReduceCost".equals(logic)) {
-                    // e.g. Torgaar, Famine Incarnate
-                    // TODO: currently returns an empty list, so the AI doesn't sacrifice anything. Trying to make
-                    // the AI decide on creatures to sac makes the AI sacrifice them, but the cost is not reduced and the
-                    // AI pays the full mana cost anyway (despite sacrificing creatures).
-                    return PaymentDecision.card(new CardCollection());
-                } else if (!logic.isEmpty() && !logic.equals("Never")) {
+                if (!logic.isEmpty() && !logic.equals("Never")) {
                     // If at least some other AI logic is specified, assume that the AI for that API knows how
                     // to define ChosenX and thus honor that value.
                     // Cards which have no special logic for this yet but which do work in a simple/suboptimal way
@@ -574,8 +575,10 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     // Other cards are assumed to be flagged AI:RemoveDeck:All for now
                     return null;
                 }
+            } else if (sVar.equals("Count$xPaid")) {
+                c = AbilityUtils.calculateAmount(source, "PayX", ability);
             } else {
-                c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
+                c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
         final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
@@ -587,7 +590,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(CostReturn cost) {
         if (cost.payCostFromSource())
             return PaymentDecision.card(source);
-        
+
         Integer c = cost.convertAmount();
         if (c == null) {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
@@ -616,7 +619,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         if (cost.getType().equals("SameColor")) {
             return null;
         }
-            
+
         hand = CardLists.getValidCards(hand, type.split(";"), player, source, ability);
         Integer c = cost.convertAmount();
         if (c == null) {
@@ -632,60 +635,162 @@ public class AiCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.card(aic.getCardsToDiscard(c, type.split(";"), ability));
     }
 
+    protected int removeCounter(GameEntityCounterTable table, List<Card> prefs, CounterEnumType cType, int stillToRemove) {
+        int removed = 0;
+        if (!prefs.isEmpty() && stillToRemove > 0) {
+            Collections.sort(prefs, CardPredicates.compareByCounterType(cType));
+
+            for (Card prefCard : prefs) {
+                // already enough removed
+                if (stillToRemove <= removed) {
+                    break;
+                }
+                int thisRemove = Math.min(prefCard.getCounters(cType), stillToRemove);
+                if (thisRemove > 0) {
+                    removed += thisRemove;
+                    table.put(prefCard, CounterType.get(cType), thisRemove);
+                }
+            }
+        }
+        return removed;
+    }
+
     @Override
     public PaymentDecision visit(CostRemoveAnyCounter cost) {
         final String amount = cost.getAmount();
         final int c = AbilityUtils.calculateAmount(source, amount, ability);
-        final String type = cost.getType();
+        final Card originalHost = ObjectUtils.defaultIfNull(ability.getOriginalHost(), source);
 
-        CardCollectionView typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player, source, ability);
+        if (c <= 0) {
+            return null;
+        }
+
+        CardCollectionView typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, source, ability);
+        // only cards with counters are of interest
+        typeList = CardLists.filter(typeList, CardPredicates.hasCounters());
 
         // no target
         if (typeList.isEmpty()) {
             return null;
         }
 
+        // TODO fill up a GameEntityCounterTable
+        // cost now has counter type or null
+        // the amount might be different from 1, could be X
+        // currently if amount is bigger than one,
+        // it tries to remove all counters from one source and type at once
+
+
+        int toRemove = 0;
+        final GameEntityCounterTable table = new GameEntityCounterTable();
+
+        // currently the only one using remove any counter using a type uses p1p1
+
         // the first things are benefit from removing counters
 
-        // try to remove +1/+1 counter from undying creature
-        List<Card> prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterEnumType.P1P1, c),
-                CardPredicates.hasKeyword("Undying"));
-
-        if (!prefs.isEmpty()) {
-            Collections.sort(prefs, CardPredicates.compareByCounterType(CounterEnumType.P1P1));
-            PaymentDecision result = PaymentDecision.card(prefs);
-            result.ct = CounterType.get(CounterEnumType.P1P1);
-            return result;
-        }
-
         // try to remove -1/-1 counter from persist creature
-        prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterEnumType.M1M1, c),
-                CardPredicates.hasKeyword("Persist"));
+        if (c > toRemove && (cost.counter == null || cost.counter.is(CounterEnumType.M1M1))) {
+            List<Card> prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterEnumType.M1M1), CardPredicates.hasKeyword(Keyword.PERSIST));
 
-        if (!prefs.isEmpty()) {
-            Collections.sort(prefs, CardPredicates.compareByCounterType(CounterEnumType.M1M1));
-            PaymentDecision result = PaymentDecision.card(prefs);
-            result.ct = CounterType.get(CounterEnumType.M1M1);
-            return result;
+            toRemove += removeCounter(table, prefs, CounterEnumType.M1M1, c - toRemove);
         }
 
-        // try to remove Time counter from Chronozoa, it will generate more
-        prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterEnumType.TIME, c),
-                CardPredicates.nameEquals("Chronozoa"));
+        // try to remove +1/+1 counter from undying creature
+        if (c > toRemove && (cost.counter == null || cost.counter.is(CounterEnumType.P1P1))) {
+            List<Card> prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterEnumType.P1P1), CardPredicates.hasKeyword(Keyword.UNDYING));
 
-        if (!prefs.isEmpty()) {
-            Collections.sort(prefs, CardPredicates.compareByCounterType(CounterEnumType.TIME));
-            PaymentDecision result = PaymentDecision.card(prefs);
-            result.ct = CounterType.get(CounterEnumType.TIME);
-            return result;
+            toRemove += removeCounter(table, prefs, CounterEnumType.P1P1, c - toRemove);
+        }
+
+        if (c > toRemove && cost.counter == null && originalHost.hasSVar("AIRemoveCounterCostPriority") && !"ANY".equalsIgnoreCase(originalHost.getSVar("AIRemoveCounterCostPriority"))) {
+            String[] counters = TextUtil.split(originalHost.getSVar("AIRemoveCounterCostPriority"), ',');
+
+            for (final String ctr : counters) {
+                CounterType ctype = CounterType.getType(ctr);
+                // ctype == null means any type
+                // any type is just used to return null for this
+
+                for (Card card : CardLists.filter(typeList, CardPredicates.hasCounter(ctype))) {
+                    int thisRemove = Math.min(card.getCounters(ctype), c - toRemove);
+                    if (thisRemove > 0) {
+                        toRemove += thisRemove;
+                        table.put(card, ctype, thisRemove);
+                    }
+                }
+            }
+        }
+
+        // filter for negative counters
+        if (c > toRemove && cost.counter == null) {
+            List<Card> negatives = CardLists.filter(typeList, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card crd) {
+                    for (CounterType cType : table.filterToRemove(crd).keySet()) {
+                        if (ComputerUtil.isNegativeCounter(cType, crd)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+
+            if (!negatives.isEmpty()) {
+                // TODO sort negatives to remove from best Cards first?
+                for (final Card crd : negatives) {
+                    for (Map.Entry<CounterType, Integer> e : table.filterToRemove(crd).entrySet()) {
+                        if (ComputerUtil.isNegativeCounter(e.getKey(), crd)) {
+                            int over = Math.min(e.getValue(), c - toRemove);
+                            if (over > 0) {
+                                toRemove += over;
+                                table.put(crd, e.getKey(), over);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // filter for useless counters
+        // they have no effect on the card, if they are there or removed
+        if (c > toRemove && cost.counter == null) {
+            List<Card> useless = CardLists.filter(typeList, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card crd) {
+                    for (CounterType ctype : table.filterToRemove(crd).keySet()) {
+                        if (ComputerUtil.isUselessCounter(ctype, crd)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+
+            if (!useless.isEmpty()) {
+                for (final Card crd : useless) {
+                    for (Map.Entry<CounterType, Integer> e : table.filterToRemove(crd).entrySet()) {
+                        if (ComputerUtil.isUselessCounter(e.getKey(), crd)) {
+                            int over = Math.min(e.getValue(), c - toRemove);
+                            if (over > 0) {
+                                toRemove += over;
+                                table.put(crd, e.getKey(), over);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // try to remove Time counter from Chronozoa, it will generate more token
+        if (c > toRemove && (cost.counter == null || cost.counter.is(CounterEnumType.TIME))) {
+            List<Card> prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterEnumType.TIME), CardPredicates.nameEquals("Chronozoa"));
+
+            toRemove += removeCounter(table, prefs, CounterEnumType.TIME, c - toRemove);
         }
 
         // try to remove Quest counter on something with enough counters for the
         // effect to continue
-        prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterEnumType.QUEST, c));
-
-        if (!prefs.isEmpty()) {
-            prefs = CardLists.filter(prefs, new Predicate<Card>() {
+        if (c > toRemove && (cost.counter == null || cost.counter.is(CounterEnumType.QUEST))) {
+            List<Card> prefs = CardLists.filter(typeList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card crd) {
                     // a Card without MaxQuestEffect doesn't need any Quest
@@ -694,130 +799,65 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     if (crd.hasSVar("MaxQuestEffect")) {
                         e = Integer.parseInt(crd.getSVar("MaxQuestEffect"));
                     }
-                    return crd.getCounters(CounterEnumType.QUEST) >= e + c;
+                    return crd.getCounters(CounterEnumType.QUEST) > e;
                 }
             });
             Collections.sort(prefs, Collections.reverseOrder(CardPredicates.compareByCounterType(CounterEnumType.QUEST)));
-            PaymentDecision result = PaymentDecision.card(prefs);
-            result.ct =  CounterType.get(CounterEnumType.QUEST);
-            return result;
+
+            for (final Card crd : prefs) {
+                int e = 0;
+                if (crd.hasSVar("MaxQuestEffect")) {
+                    e = Integer.parseInt(crd.getSVar("MaxQuestEffect"));
+                }
+                int over = Math.min(crd.getCounters(CounterEnumType.QUEST) - e, c - toRemove);
+                if (over > 0) {
+                    toRemove += over;
+                    table.put(crd, CounterType.get(CounterEnumType.QUEST), over);
+                }
+            }
         }
 
-        // filter for only cards with enough counters
-        typeList = CardLists.filter(typeList, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card crd) {
-                for (Integer i : crd.getCounters().values()) {
-                    if (i >= c) {
-                        return true;
+        // remove Lore counters from Sagas to keep them longer
+        if (c > toRemove && (cost.counter == null || cost.counter.is(CounterEnumType.LORE))) {
+            List<Card> prefs = CardLists.filter(typeList, CardPredicates.hasCounter(CounterEnumType.LORE), CardPredicates.isType("Saga"));
+            // TODO add Svars and other stuff to keep the Sagas on specific levels
+            // also add a way for the AI to respond to the last Chapter ability to keep the Saga on the field if wanted
+            toRemove += removeCounter(table, prefs, CounterEnumType.LORE, c - toRemove);
+        }
+
+
+        // TODO add logic to remove positive counters?
+        if (c > toRemove && cost.counter != null) {
+            // TODO add logic for Ooze Flux, should probably try to make a token as big as possible
+            // without killing own non undying creatures in the process
+            // the amount of X should probably be tweaked for this
+            List<Card> withCtr = CardLists.filter(typeList, CardPredicates.hasCounter(cost.counter));
+            for (Card card : withCtr) {
+                int thisRemove = Math.min(card.getCounters(cost.counter), c - toRemove);
+                if (thisRemove > 0) {
+                    toRemove += thisRemove;
+                    table.put(card, cost.counter, thisRemove);
+                }
+            }
+        }
+
+        // Used to not return null
+        // Special part for CostPriority Any
+        if (c > toRemove && cost.counter == null && originalHost.hasSVar("AIRemoveCounterCostPriority") && "ANY".equalsIgnoreCase(originalHost.getSVar("AIRemoveCounterCostPriority"))) {
+            for (Card card : typeList) {
+                // TODO try not to remove to much positive counters from the same card
+                for (Map.Entry<CounterType, Integer> e : table.filterToRemove(card).entrySet()) {
+                    int thisRemove = Math.min(e.getValue(), c - toRemove);
+                    if (thisRemove > 0) {
+                        toRemove += thisRemove;
+                        table.put(card, e.getKey(), thisRemove);
                     }
                 }
-                return false;
-            }
-        });
-
-        // nothing with enough counters of any type
-        if (typeList.isEmpty()) {
-            return null;
-        }
-
-        // filter for negative counters
-        List<Card> negatives = CardLists.filter(typeList, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card crd) {
-                for (Map.Entry<CounterType, Integer> e : crd.getCounters().entrySet()) {
-                    if (e.getValue() >= c && ComputerUtil.isNegativeCounter(e.getKey(), crd)) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
-
-        if (!negatives.isEmpty()) {
-            final Card card = ComputerUtilCard.getBestAI(negatives);
-            PaymentDecision result = PaymentDecision.card(card);
-
-            for (Map.Entry<CounterType, Integer> e : card.getCounters().entrySet()) {
-                if (e.getValue() >= c && ComputerUtil.isNegativeCounter(e.getKey(), card)) {
-                    result.ct = e.getKey();
-                    break;
-                }
-            }
-            return result;
-        }
-
-        // filter for useless counters
-        // they have no effect on the card, if they are there or removed
-        List<Card> useless = CardLists.filter(typeList, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card crd) {
-                for (Map.Entry<CounterType, Integer> e : crd.getCounters().entrySet()) {
-                    if (e.getValue() >= c && ComputerUtil.isUselessCounter(e.getKey())) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
-
-        if (!useless.isEmpty()) {
-            final Card card = useless.get(0);
-            PaymentDecision result = PaymentDecision.card(card);
-
-            for (Map.Entry<CounterType, Integer> e : card.getCounters().entrySet()) {
-                if (e.getValue() >= c && ComputerUtil.isUselessCounter(e.getKey())) {
-                    result.ct = e.getKey();
-                    break;
-                }
-            }
-            return result;
-        }
-        
-        // try a way to pay unless cost
-        if ("Chisei, Heart of Oceans".equals(ComputerUtilAbility.getAbilitySourceName(ability))) {
-            final Card card = ComputerUtilCard.getWorstAI(typeList);
-            PaymentDecision result = PaymentDecision.card(card);
-            for (Map.Entry<CounterType, Integer> e : card.getCounters().entrySet()) {
-                if (e.getValue() >= c) {
-                    result.ct = e.getKey();
-                    break;
-                }
-            }
-            return result;
-        }
-
-        // check if the card defines its own priorities for counter removal as cost
-        if (source.hasSVar("AIRemoveCounterCostPriority")) {
-            String[] counters = TextUtil.split(source.getSVar("AIRemoveCounterCostPriority"), ',');
-            
-            for (final String ctr : counters) {
-                List<Card> withCtr = CardLists.filter(typeList, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card crd) {
-                        for (Map.Entry<CounterType, Integer> e : crd.getCounters().entrySet()) {
-                            if (e.getValue() >= c && (ctr.equals("ANY") || e.getKey().equals(CounterType.getType(ctr)))) {
-                                return true;
-                            }
-                        }
-                        return false;
-                    }
-                });
-                if (!withCtr.isEmpty()) {
-                    final Card card = withCtr.get(0);
-                    PaymentDecision result = PaymentDecision.card(card);
-
-                    for (Map.Entry<CounterType, Integer> e : card.getCounters().entrySet()) {
-                        if (e.getValue() >= c && (ctr.equals("ANY") || e.getKey().equals(CounterType.getType(ctr)))) {
-                            result.ct = e.getKey();
-                            break;
-                        }
-                    }
-                    return result;
-                }
             }
         }
-        return null;
+
+        // if table is empty, than no counter was removed
+        return table.isEmpty() ? null : PaymentDecision.counters(table);
     }
 
     @Override
@@ -835,7 +875,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 c = source.getCounters(cost.counter);
             } else if (sVar.equals("Targeted$CardManaCost")) {
                 c = 0;
-                if (ability.getTargets().getNumTargeted() > 0) {
+                if (ability.getTargets().size() > 0) {
                     for (Card tgt : ability.getTargets().getTargetCards()) {
                         if (tgt.getManaCost() != null) {
                             c += tgt.getManaCost().getCMC();
@@ -843,7 +883,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     }
                 }
             } else if (sVar.equals("Count$xPaid")) {
-                c = AbilityUtils.calculateAmount(source, "PayX", null);
+                c = AbilityUtils.calculateAmount(source, "PayX", ability);
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
@@ -898,7 +938,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             System.out.println("Couldn't find a valid card to untap for: " + source.getName());
             return null;
         }
-    
+
         return PaymentDecision.card(list);
     }
 

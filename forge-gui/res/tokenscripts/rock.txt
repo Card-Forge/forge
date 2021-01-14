@@ -1,0 +1,7 @@
+Name:Rock
+ManaCost:no cost
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ ThrowRock | Description$ Equipped creature has "{1}, {T}, Sacrifice Rock: This creature deals 2 damage to any target."
+SVar:ThrowRock:AB$ DealDamage | Cost$ 1 T Sac<1/Card.Attached+namedRock/Rock> | CostDesc$ {1}, {T}, Sacrifice Rock: | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ This creature deals 2 damage to any target.
+K:Equip:1
+Oracle:Equipped creature has "{1}, {T}, Sacrifice Rock: This creature deals 2 damage to any target."\nEquip {1}

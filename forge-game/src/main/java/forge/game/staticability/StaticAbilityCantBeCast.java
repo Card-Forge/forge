@@ -172,7 +172,7 @@ public class StaticAbilityCantBeCast {
         if (stAb.hasParam("Origin")) {
             List<ZoneType> src = ZoneType.listValueOf(stAb.getParam("Origin"));
 
-            if (!src.contains(card.getZone().getZoneType())) {
+            if (!src.contains(card.getLastKnownZone().getZoneType())) {
                 return false;
             }
         }

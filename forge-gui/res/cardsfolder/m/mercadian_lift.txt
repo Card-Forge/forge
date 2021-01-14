@@ -2,8 +2,7 @@ Name:Mercadian Lift
 ManaCost:2
 Types:Artifact
 A:AB$ PutCounter | Cost$ 1 T | CounterType$ WINCH | CounterNum$ 1 | SpellDescription$ Put a winch counter on CARDNAME.
-A:AB$ ChangeZone | Cost$ T SubCounter<X/WINCH> | ChangeNum$ 1 | ChangeType$ Creature.cmcEQChosenX | Origin$ Hand | Destination$ Battlefield | References$ X | Optional$ True | SpellDescription$ You may put a creature card with converted mana cost X from your hand onto the battlefield.
-SVar:X:XChoice
+A:AB$ ChangeZone | Cost$ T SubCounter<X/WINCH> | ChangeNum$ 1 | ChangeType$ Creature.cmcEQX | Origin$ Hand | Destination$ Battlefield | References$ X | Optional$ True | SpellDescription$ You may put a creature card with converted mana cost X from your hand onto the battlefield.
+SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mercadian_lift.jpg
 Oracle:{1}, {T}: Put a winch counter on Mercadian Lift.\n{T}, Remove X winch counters from Mercadian Lift: You may put a creature card with converted mana cost X from your hand onto the battlefield.

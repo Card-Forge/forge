@@ -6,4 +6,5 @@ A:AB$ Dig | Cost$ 1 Sac<1/Creature> | DigNum$ 1 | ChangeNum$ All | DestinationZo
 SVar:DBEffect:DB$ Effect | StaticAbilities$ EffSModeContinuous | ExileOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
 SVar:EffSModeContinuous:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ You may play that card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE1
 Oracle:{1}, Sacrifice a creature: Exile the top card of your library. You may play that card this turn. (You still pay its costs. You can play a land this way only if you have an available land play remaining.)

@@ -34,14 +34,14 @@ public class LifeLoseAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final String amountStr = sa.getParam("LifeAmount");
         int amount = 0;
-        if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
+        if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // something already set PayX
-            if (source.hasSVar("PayX")) {
-                amount = Integer.parseInt(source.getSVar("PayX"));
+            if (sa.hasSVar("PayX")) {
+                amount = Integer.parseInt(sa.getSVar("PayX"));
             } else {
                 // Set PayX here to maximum value.
                 final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-                source.setSVar("PayX", Integer.toString(xPay));
+                sa.setSVar("PayX", Integer.toString(xPay));
                 amount = xPay;
             }
         } else {
@@ -72,10 +72,9 @@ public class LifeLoseAi extends SpellAbilityAi {
         final String amountStr = sa.getParam("LifeAmount");
         int amount = 0;
 
-        if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
+        if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             amount = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            // source.setSVar("PayX", Integer.toString(amount));
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
@@ -101,10 +100,10 @@ public class LifeLoseAi extends SpellAbilityAi {
         final String amountStr = sa.getParam("LifeAmount");
         int amount = 0;
 
-        if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
+        if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             amount = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(amount));
+            sa.setSVar("PayX", Integer.toString(amount));
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
@@ -172,10 +171,10 @@ public class LifeLoseAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final String amountStr = sa.getParam("LifeAmount");
         int amount = 0;
-        if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
+        if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(xPay));
+            sa.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);

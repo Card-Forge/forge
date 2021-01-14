@@ -65,7 +65,7 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-platform</artifactId>
-            <version>1.2.0</version>
+            <version>1.9.10</version>
             <classifier>natives-desktop</classifier>
         </dependency>
         <dependency>

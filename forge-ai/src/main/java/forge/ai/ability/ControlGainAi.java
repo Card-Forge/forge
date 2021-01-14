@@ -197,11 +197,11 @@ public class ControlGainAi extends SpellAbilityAi {
             }
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
+        while (sa.getTargets().size() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
             Card t = null;
 
             if (list.isEmpty()) {
-                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+                if ((sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().size() == 0)) {
                     sa.resetTargets();
                     return false;
                 } else {
@@ -280,7 +280,7 @@ public class ControlGainAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, final Player ai) {
         final Game game = ai.getGame();
-        if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
+        if (!sa.usesTargeting()) {
             if (sa.hasParam("AllValid")) {
                 CardCollectionView tgtCards = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
                 tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("AllValid"), sa);

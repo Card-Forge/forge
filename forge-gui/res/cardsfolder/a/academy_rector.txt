@@ -3,10 +3,9 @@ ManaCost:3 W
 Types:Creature Human Cleric
 PT:1/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may exile it. If you do, search your library for an enchantment card and put that card onto the battlefield. Then shuffle your library.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredCard | SubAbility$ DBReturn
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredNewCardLKICopy | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Enchantment.YouOwn | ChangeNum$ 1
 SVar:SacMe:4
 AI:RemoveDeck:Random
 DeckNeeds:Type$Enchantment
-SVar:Picture:http://www.wizards.com/global/images/magic/general/academy_rector.jpg
 Oracle:When Academy Rector dies, you may exile it. If you do, search your library for an enchantment card, put that card onto the battlefield, then shuffle your library.

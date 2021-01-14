@@ -6,7 +6,7 @@ Code2=ELD
 MciCode=eld
 Type=Expansion
 BoosterCovers=3
-Booster=10 Common:!fromSheet("ELD Secret Cards"), 3 Uncommon:!fromSheet("ELD Secret Cards"), 1 RareMythic:!fromSheet("ELD Secret Cards"), 1 BasicLand
+Booster=10 Common:fromSheet("ELD cards"), 3 Uncommon:fromSheet("ELD cards"), 1 RareMythic:fromSheet("ELD cards"), 1 BasicLand
 Prerelease=6 Boosters, 1 RareMythic+
 
 [cards]
@@ -279,11 +279,13 @@ Prerelease=6 Boosters, 1 RareMythic+
 267 L Forest
 268 L Forest
 269 L Forest
-#Borderless Planeswalkers
+
+[borderless]
 270 M Garruk, Cursed Huntsman
 271 M Oko, Thief of Crowns
 272 M The Royal Scions
-#Storybook Frames
+
+[showcase]
 273 C Ardenvale Tactician
 274 C Faerie Guidemother
 275 R Giant Killer
@@ -314,9 +316,11 @@ Prerelease=6 Boosters, 1 RareMythic+
 300 C Rosethorn Acolyte
 301 C Tuinvale Treefolk
 302 U Oakhame Ranger
-#Buy-A-Box Promo
+
+[buy a box]
 303 M Kenrith, the Returned King
-#Planeswalker Deck Cards
+
+[precon product]
 304 M Rowan, Fearless Sparkmage
 305 C Garrison Griffin
 306 U Rowan's Battleguard
@@ -347,7 +351,8 @@ Prerelease=6 Boosters, 1 RareMythic+
 331 C Arcane Signet
 332 R Tome of Legends
 333 C Command Tower
-#Borderless art rares and mythics
+
+[extended art]
 334 R Acclaimed Contender
 335 R Charming Prince
 336 M The Circle of Loyalty
@@ -406,9 +411,9 @@ Prerelease=6 Boosters, 1 RareMythic+
 389 R Castle Locthwain
 390 R Castle Vantress
 391 R Fabled Passage
-#Bundle promo
+
+[promo]
 392 R Piper of the Swarm
-#Promo Pack
 393 U Glass Casket
 394 U Slaying Fire
 395 U Kenrith's Transformation

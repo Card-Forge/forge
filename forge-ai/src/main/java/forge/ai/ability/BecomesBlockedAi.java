@@ -33,7 +33,7 @@ public class BecomesBlockedAi extends SpellAbilityAi {
 	        list = CardLists.getTargetableCards(list, sa);
 	        list = CardLists.getNotKeyword(list, Keyword.TRAMPLE);
 	
-	        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+	        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
 	            Card choice = null;
 	
 	            if (list.isEmpty()) {

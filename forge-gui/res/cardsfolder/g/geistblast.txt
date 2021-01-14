@@ -2,7 +2,6 @@ Name:Geistblast
 ManaCost:2 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
-A:AB$ CopySpellAbility | Cost$ 2 U ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TargetType$ Spell | SpellDescription$ Copy target instant or sorcery spell you control. You may choose new targets for the copy.
+A:AB$ CopySpellAbility | Cost$ 2 U ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TargetType$ Spell | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell you control. You may choose new targets for the copy.
 SVar:AIPreference:ExileFromGraveCost$Card.Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/geistblast.jpg
 Oracle:Geistblast deals 2 damage to any target.\n{2}{U}, Exile Geistblast from your graveyard: Copy target instant or sorcery spell you control. You may choose new targets for the copy.

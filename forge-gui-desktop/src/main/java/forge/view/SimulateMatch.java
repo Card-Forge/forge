@@ -1,34 +1,33 @@
 package forge.view;
 
+import forge.LobbyPlayer;
+import forge.deck.Deck;
+import forge.deck.DeckGroup;
+import forge.deck.io.DeckSerializer;
+import forge.game.*;
+import forge.game.player.RegisteredPlayer;
+import forge.model.FModel;
+import forge.player.GamePlayerUtil;
+import forge.properties.ForgeConstants;
+import forge.tournament.system.*;
+import forge.util.Lang;
+import forge.util.TextUtil;
+import forge.util.WordUtil;
+import forge.util.storage.IStorage;
+import org.apache.commons.lang3.time.StopWatch;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import forge.LobbyPlayer;
-import forge.deck.DeckGroup;
-import forge.game.*;
-import forge.properties.ForgeConstants;
-import forge.tournament.system.*;
-import forge.util.TextUtil;
-import forge.util.WordUtil;
-import forge.util.storage.IStorage;
-import org.apache.commons.lang3.time.StopWatch;
-
-import forge.deck.Deck;
-import forge.deck.io.DeckSerializer;
-import forge.game.player.RegisteredPlayer;
-import forge.model.FModel;
-import forge.player.GamePlayerUtil;
-import forge.util.Lang;
-
 public class SimulateMatch {
     public static void simulate(String[] args) {
         FModel.initialize(null, null);
 
         System.out.println("Simulation mode");
-        if(args.length < 4) {
+        if (args.length < 4) {
             argumentHelp();
             return;
         }
@@ -49,11 +48,9 @@ public class SimulateMatch {
 
                 options = new ArrayList<>();
                 params.put(a.substring(1), options);
-            }
-            else if (options != null) {
+            } else if (options != null) {
                 options.add(a);
-            }
-            else {
+            } else {
                 System.err.println("Illegal parameter usage");
                 return;
             }
@@ -97,7 +94,7 @@ public class SimulateMatch {
         int i = 1;
 
         if (params.containsKey("d")) {
-            for(String deck : params.get("d")) {
+            for (String deck : params.get("d")) {
                 Deck d = deckFromCommandLineParameter(deck, type);
                 if (d == null) {
                     System.out.println(TextUtil.concatNoSpace("Could not load deck - ", deck, ", match cannot start"));
@@ -130,7 +127,7 @@ public class SimulateMatch {
 
         if (matchSize != 0) {
             int iGame = 0;
-            while(!mc.isMatchOver()) {
+            while (!mc.isMatchOver()) {
                 // play games until the match ends
                 simulateSingleMatch(mc, iGame, outputGamelog);
                 iGame++;
@@ -159,37 +156,29 @@ public class SimulateMatch {
     }
 
 
-
     public static void simulateSingleMatch(final Match mc, int iGame, boolean outputGamelog) {
         final StopWatch sw = new StopWatch();
         sw.start();
 
         final Game g1 = mc.createGame();
         // will run match in the same thread
-
-        long startTime = System.currentTimeMillis();
         try {
-            TimeLimitedCodeBlock.runWithTimeout(new Runnable() {
-                @Override
-                public void run() {
-                    mc.startGame(g1);
-                    sw.stop();
-                }
+            TimeLimitedCodeBlock.runWithTimeout(() -> {
+                mc.startGame(g1);
+                sw.stop();
             }, 120, TimeUnit.SECONDS);
-        }
-        catch (TimeoutException e) {
+        } catch (TimeoutException e) {
             System.out.println("Stopping slow match as draw");
-            g1.setGameOver(GameEndReason.Draw);
-            sw.stop();
-        }catch (Exception e){
+        } catch (Exception | StackOverflowError e) {
             e.printStackTrace();
-            g1.setGameOver(GameEndReason.Draw);
-            sw.stop();
-        }catch(StackOverflowError e){
-            g1.setGameOver(GameEndReason.Draw);
-            sw.stop();
+        } finally {
+            if (sw.isStarted()) {
+                sw.stop();
+            }
+            if (!g1.isGameOver()) {
+                g1.setGameOver(GameEndReason.Draw);
+            }
         }
-
 
         List<GameLogEntry> log;
         if (outputGamelog) {
@@ -198,11 +187,16 @@ public class SimulateMatch {
             log = g1.getGameLog().getLogEntries(GameLogEntryType.MATCH_RESULTS);
         }
         Collections.reverse(log);
-        for(GameLogEntry l : log) {
+        for (GameLogEntry l : log) {
             System.out.println(l);
         }
 
-        System.out.println(String.format("\nGame %d ended in %d ms. %s has won!\n", 1+iGame, sw.getTime(), g1.getOutcome().getWinningLobbyPlayer().getName()));
+        // If both players life totals to 0 in a single turn, the game should end in a draw
+        if (g1.getOutcome().isDraw()) {
+            System.out.printf("\nGame Result: Game %d ended in a Draw! Took %d ms.%n", 1 + iGame, sw.getTime());
+        } else {
+            System.out.printf("\nGame Result: Game %d ended in %d ms. %s has won!\n%n", 1 + iGame, sw.getTime(), g1.getOutcome().getWinningLobbyPlayer().getName());
+        }
     }
 
     private static void simulateTournament(Map<String, List<String>> params, GameRules rules, boolean outputGamelog) {
@@ -214,7 +208,7 @@ public class SimulateMatch {
         List<TournamentPlayer> players = new ArrayList<>();
         int numPlayers = 0;
         if (params.containsKey("d")) {
-            for(String deck : params.get("d")) {
+            for (String deck : params.get("d")) {
                 Deck d = deckFromCommandLineParameter(deck, rules.getGameType());
                 if (d == null) {
                     System.out.println(TextUtil.concatNoSpace("Could not load deck - ", deck, ", match cannot start"));
@@ -234,7 +228,7 @@ public class SimulateMatch {
             if (!folder.isDirectory()) {
                 System.out.println("Directory not found - " + foldName);
             } else {
-                for(File deck : folder.listFiles(new FilenameFilter() {
+                for (File deck : folder.listFiles(new FilenameFilter() {
                     @Override
                     public boolean accept(File dir, String name) {
                         return name.endsWith(".dck");
@@ -276,16 +270,16 @@ public class SimulateMatch {
         System.out.println(TextUtil.concatNoSpace("Starting a ", tournament, " tournament with ",
                 String.valueOf(numPlayers), " players over ",
                 String.valueOf(tourney.getTotalRounds()), " rounds"));
-        while(!tourney.isTournamentOver()) {
+        while (!tourney.isTournamentOver()) {
             if (tourney.getActiveRound() != curRound) {
                 if (curRound != 0) {
                     System.out.println(TextUtil.concatNoSpace("End Round - ", String.valueOf(curRound)));
                 }
                 curRound = tourney.getActiveRound();
                 System.out.println();
-                System.out.println(TextUtil.concatNoSpace("Round ", String.valueOf(curRound) ," Pairings:"));
+                System.out.println(TextUtil.concatNoSpace("Round ", String.valueOf(curRound), " Pairings:"));
 
-                for(TournamentPairing pairing : tourney.getActivePairings()) {
+                for (TournamentPairing pairing : tourney.getActivePairings()) {
                     System.out.println(pairing.outputHeader());
                 }
                 System.out.println();
@@ -306,10 +300,10 @@ public class SimulateMatch {
                 int iGame = 0;
                 while (!mc.isMatchOver()) {
                     // play games until the match ends
-                    try{
+                    try {
                         simulateSingleMatch(mc, iGame, outputGamelog);
                         iGame++;
-                    } catch(Exception e) {
+                    } catch (Exception e) {
                         exceptions++;
                         System.out.println(e.toString());
                         if (exceptions > 5) {
@@ -344,10 +338,10 @@ public class SimulateMatch {
 
     private static Deck deckFromCommandLineParameter(String deckname, GameType type) {
         int dotpos = deckname.lastIndexOf('.');
-        if(dotpos > 0 && dotpos == deckname.length()-4) {
+        if (dotpos > 0 && dotpos == deckname.length() - 4) {
             String baseDir = type.equals(GameType.Commander) ?
                     ForgeConstants.DECK_COMMANDER_DIR : ForgeConstants.DECK_CONSTRUCTED_DIR;
-            return DeckSerializer.fromFile(new File(baseDir+deckname));
+            return DeckSerializer.fromFile(new File(baseDir + deckname));
         }
 
         IStorage<Deck> deckStore = null;

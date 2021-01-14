@@ -2,6 +2,9 @@ package forge.quest;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.model.FModel;
+import forge.quest.data.QuestPreferences.QPref;
+
 /** 
  * TODO: Write javadoc for this type.
  *
@@ -10,7 +13,8 @@ public enum QuestEventDifficulty {
     EASY  ("easy",      1. ),
     MEDIUM("medium",    1.5),
     HARD  ("hard",      2. ),
-    EXPERT("very hard", 3. );
+    EXPERT("very hard", 3. ),
+    WILD("wild", FModel.getQuestPreferences().getPrefDouble(QPref.WILD_OPPONENTS_MULTIPLIER) );
 
     private final String inFile;
     private final double multiplier;

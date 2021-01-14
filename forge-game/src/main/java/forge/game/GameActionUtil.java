@@ -131,7 +131,6 @@ public final class GameActionUtil {
                 }
                 sar.setZone(null);
                 newSA.setMayPlay(o.getAbility());
-                newSA.setMayPlayOriginal(sa);
 
                 if (changedManaCost) {
                     if ("0".equals(sa.getParam("ActivationLimit")) && sa.getHostCard().getManaCost().isNoCost()) {
@@ -169,8 +168,8 @@ public final class GameActionUtil {
                         final SpellAbility newSA = sa.copyWithDefinedCost(escapeCost);
                         newSA.setActivatingPlayer(activator);
 
-                        newSA.getMapParams().put("PrecostDesc", "Escape—");
-                        newSA.getMapParams().put("CostDesc", escapeCost.toString());
+                        newSA.putParam("PrecostDesc", "Escape—");
+                        newSA.putParam("CostDesc", escapeCost.toString());
 
                         // makes new SpellDescription
                         final StringBuilder desc = new StringBuilder();
@@ -221,7 +220,6 @@ public final class GameActionUtil {
 
         // below are for some special cases of activated abilities
         if (sa.isCycling() && activator.hasKeyword("CyclingForZero")) {
-            
             for (final KeywordInterface inst : source.getKeywords()) {
                 // need to find the correct Keyword from which this Ability is from
                 if (!inst.getAbilities().contains(sa)) {
@@ -231,7 +229,7 @@ public final class GameActionUtil {
                 // set the cost to this directly to buypass non mana cost
                 final SpellAbility newSA = sa.copyWithDefinedCost("Discard<1/CARDNAME>");
                 newSA.setActivatingPlayer(activator);
-                newSA.getMapParams().put("CostDesc", ManaCostParser.parse("0"));
+                newSA.putParam("CostDesc", ManaCostParser.parse("0"));
 
                 // need to build a new Keyword to get better Reminder Text
                 String data[] = inst.getOriginal().split(":");
@@ -247,15 +245,6 @@ public final class GameActionUtil {
                 alternatives.add(newSA);
                 break;
             }
-        }
-
-        if (sa.hasParam("Equip") && activator.hasKeyword("EquipInstantSpeed")) {
-            final SpellAbility newSA = sa.copy(activator);
-            SpellAbilityRestriction sar = newSA.getRestrictions();
-            sar.setSorcerySpeed(false);
-            sar.setInstantSpeed(true);
-            newSA.setDescription(sa.getDescription() + " (you may activate any time you could cast an instant )");
-            alternatives.add(newSA);
         }
 
         return alternatives;

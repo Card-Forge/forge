@@ -2,5 +2,5 @@ Name:Earthshaking Si
 ManaCost:5 G
 Types:Creature Beast
 K:Trample
-Oracle:Trample (This creature can deal excess combat damage to defending player or planeswalker while attacking.)
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)
 PT:5/5

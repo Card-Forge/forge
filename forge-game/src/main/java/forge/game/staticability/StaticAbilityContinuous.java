@@ -39,7 +39,6 @@ import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
-import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
@@ -128,7 +127,6 @@ public final class StaticAbilityContinuous {
         String[] addTriggers = null;
         String[] addStatics = null;
         boolean removeAllAbilities = false;
-        boolean removeIntrinsicAbilities = false;
         boolean removeNonMana = false;
         boolean removeSuperTypes = false;
         boolean removeCardTypes = false;
@@ -143,7 +141,6 @@ public final class StaticAbilityContinuous {
         Set<Keyword> cantHaveKeyword = null;
 
         List<Player> mayLookAt = null;
-        List<Player> withFlash = null;
 
         boolean controllerMayPlay = false, mayPlayWithoutManaCost = false, mayPlayWithFlash = false;
         String mayPlayAltManaCost = null;
@@ -224,6 +221,29 @@ public final class StaticAbilityContinuous {
                         return true;
                     }
 
+                    if (input.contains("AllColors") || input.contains("allColors")) {
+                        for (byte color : MagicColor.WUBRG) {
+                            final String colorWord = MagicColor.toLongString(color);
+                            String y = input.replaceAll("AllColors", StringUtils.capitalize(colorWord));
+                            y = y.replaceAll("allColors", colorWord);
+                            newKeywords.add(y);
+                        }
+                        return true;
+                    }
+                    if (input.contains("CommanderColorID")) {
+                        if (!hostCard.getController().getCommanders().isEmpty()) {
+                            if (input.contains("NotCommanderColorID")) {
+                                for (Byte color : hostCard.getController().getNotCommanderColorID()) {
+                                    newKeywords.add(input.replace("NotCommanderColorID", MagicColor.toLongString(color)));
+                                }
+                                return true;
+                            } else for (Byte color : hostCard.getController().getCommanderColorID()) {
+                                newKeywords.add(input.replace("CommanderColorID", MagicColor.toLongString(color)));
+                            }
+                            return true;
+                        }
+                        return true;
+                    }
                     // two variants for Red vs. red in keyword
                     if (input.contains("ColorsYouCtrl") || input.contains("colorsYouCtrl")) {
                         for (byte color : colorsYouCtrl) {
@@ -231,6 +251,21 @@ public final class StaticAbilityContinuous {
                             String y = input.replaceAll("ColorsYouCtrl", StringUtils.capitalize(colorWord));
                             y = y.replaceAll("colorsYouCtrl", colorWord);
                             newKeywords.add(y);
+                        }
+                        return true;
+                    }
+                    if (input.contains("EachCMCAmongDefined")) {
+                        String keywordDefined = params.get("KeywordDefined");
+                        CardCollectionView definedCards = game.getCardsIn(ZoneType.Battlefield);
+                        definedCards = CardLists.getValidCards(definedCards, keywordDefined, hostCard.getController(),
+                                hostCard, null);
+                        for (Card c : definedCards) {
+                            final int cmc = c.getCMC();
+                            String y = (input.replace(" from EachCMCAmongDefined", ":Card.cmcEQ"
+                                    + (cmc) + ":Protection from converted mana cost " + (cmc)));
+                            if (!newKeywords.contains(y)) {
+                                newKeywords.add(y);
+                            }
                         }
                         return true;
                     }
@@ -248,6 +283,7 @@ public final class StaticAbilityContinuous {
                 public String apply(String input) {
                     if (hostCard.hasChosenColor()) {
                         input = input.replaceAll("ChosenColor", StringUtils.capitalize(hostCard.getChosenColor()));
+                        input = input.replaceAll("chosenColor", hostCard.getChosenColor().toLowerCase());
                     }
                     if (hostCard.hasChosenType()) {
                         input = input.replaceAll("ChosenType", hostCard.getChosenType());
@@ -298,11 +334,6 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("ExceptManaAbilities")) {
                 removeNonMana = true;
             }
-        }
-        // do this in type layer too in case of blood moon
-        if ((layer == StaticAbilityLayer.TYPE)
-                && params.containsKey("RemoveIntrinsicAbilities")) {
-            removeIntrinsicAbilities = true;
         }
 
         if (layer == StaticAbilityLayer.ABILITIES && params.containsKey("AddAbility")) {
@@ -473,9 +504,6 @@ public final class StaticAbilityContinuous {
                     mayPlayGrantZonePermissions = false;
                 }
             }
-            if (params.containsKey("WithFlash")) {
-                withFlash = AbilityUtils.getDefinedPlayers(hostCard, params.get("WithFlash"), null);
-            }
 
             if (params.containsKey("IgnoreEffectCost")) {
                 String cost = params.get("IgnoreEffectCost");
@@ -518,6 +546,10 @@ public final class StaticAbilityContinuous {
                         int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
                         p.addMaxLandPlays(se.getTimestamp(), add);
                     }
+                }
+                if (params.containsKey("ControlOpponentsSearchingLibrary")) {
+                    Player cntl = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, params.get("ControlOpponentsSearchingLibrary"), null), null);
+                    p.addControlledWhileSearching(se.getTimestamp(), cntl);
                 }
 
                 if (params.containsKey("ControlVote")) {
@@ -612,7 +644,7 @@ public final class StaticAbilityContinuous {
             // add keywords
             // TODO regular keywords currently don't try to use keyword multiplier
             // (Although nothing uses it at this time)
-            if ((addKeywords != null) || (removeKeywords != null) || removeAllAbilities || removeIntrinsicAbilities) {
+            if ((addKeywords != null) || (removeKeywords != null) || removeAllAbilities || removeLandTypes) {
                 List<String> newKeywords = null;
                 if (addKeywords != null) {
                     newKeywords = Lists.newArrayList(addKeywords);
@@ -633,6 +665,7 @@ public final class StaticAbilityContinuous {
                                 }
                                 return true;
                             }
+
                             return false;
                         }
                     });
@@ -654,7 +687,7 @@ public final class StaticAbilityContinuous {
                 }
 
                 affectedCard.addChangedCardKeywords(newKeywords, removeKeywords,
-                        removeAllAbilities, removeIntrinsicAbilities,
+                        removeAllAbilities, removeLandTypes,
                         hostCard.getTimestamp());
             }
 
@@ -695,7 +728,7 @@ public final class StaticAbilityContinuous {
                             abilty = TextUtil.fastReplace(abilty, "ConvertedManaCost", costcmc);
                         }
                         if (abilty.startsWith("AB") || abilty.startsWith("ST")) { // grant the ability
-                            final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard);
+                            final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard, stAb);
                             sa.setIntrinsic(false);
                             sa.setOriginalHost(hostCard);
                             addedAbilities.add(sa);
@@ -718,7 +751,7 @@ public final class StaticAbilityContinuous {
 
                     for (Card c : cardsIGainedAbilitiesFrom) {
                         for (SpellAbility sa : c.getSpellAbilities()) {
-                            if (sa instanceof AbilityActivated) {
+                            if (sa.isActivatedAbility()) {
                                 if (loyaltyAB && !sa.isPwAbility()) {
                                     continue;
                                 }
@@ -757,15 +790,10 @@ public final class StaticAbilityContinuous {
                         // with that the TargetedCard does not need the Svars added to them anymore
                         // but only do it if the trigger doesn't already have a overriding ability
                         if (actualTrigger.hasParam("Execute") && actualTrigger.getOverridingAbility() == null) {
-                            String svar = AbilityUtils.getSVar(stAb, actualTrigger.getParam("Execute"));
-                            SpellAbility sa = AbilityFactory.getAbility(svar, hostCard);
-                            // set hostcard there so when the card is added to trigger, it doesn't make a copy of it
-                            sa.setHostCard(affectedCard);
-                            // set OriginalHost to get the owner of this static ability
-                            sa.setOriginalHost(hostCard);
                             // set overriding ability to the trigger
-                            actualTrigger.setOverridingAbility(sa);
+                            actualTrigger.setOverridingAbility(AbilityFactory.getAbility(affectedCard, actualTrigger.getParam("Execute"), stAb));
                         }
+                        actualTrigger.setOriginalHost(hostCard);
                         actualTrigger.setIntrinsic(false);
                         addedTrigger.add(actualTrigger);
                     }
@@ -781,6 +809,7 @@ public final class StaticAbilityContinuous {
 
                         StaticAbility stat = new StaticAbility(s, affectedCard);
                         stat.setIntrinsic(false);
+                        stat.setOriginalHost(hostCard);
                         addedStaticAbility.add(stat);
                     }
                 }
@@ -795,8 +824,8 @@ public final class StaticAbilityContinuous {
                 }
             }
 
-            if (layer == StaticAbilityLayer.TYPE && removeIntrinsicAbilities) {
-                affectedCard.addChangedCardTraits(null, null, null, null, null, false, false, removeIntrinsicAbilities, hostCard.getTimestamp());
+            if (layer == StaticAbilityLayer.TYPE && removeLandTypes) {
+                affectedCard.addChangedCardTraits(null, null, null, null, null, false, false, removeLandTypes, hostCard.getTimestamp());
             }
 
             // add Types
@@ -826,9 +855,6 @@ public final class StaticAbilityContinuous {
 
             if (mayLookAt != null) {
                 affectedCard.addMayLookAt(se.getTimestamp(), mayLookAt);
-            }
-            if (withFlash != null) {
-                affectedCard.addWithFlash(se.getTimestamp(), withFlash);
             }
 
             if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {

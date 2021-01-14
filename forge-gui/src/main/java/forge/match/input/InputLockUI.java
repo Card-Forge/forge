@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import forge.FThreads;
-import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -17,10 +16,8 @@ public class InputLockUI implements Input {
     private final AtomicInteger iCall = new AtomicInteger();
 
     private final InputQueue inputQueue;
-    private final Game game;
     private final PlayerControllerHuman controller;
-    public InputLockUI(final Game game0, final InputQueue inputQueue0, final PlayerControllerHuman controller) {
-        game = game0;
+    public InputLockUI(final InputQueue inputQueue0, final PlayerControllerHuman controller) {
         inputQueue = inputQueue0;
         this.controller = controller;
     }
@@ -90,7 +87,7 @@ public class InputLockUI implements Input {
     @Override
     public void selectButtonCancel() {
         //cancel auto pass for all players
-        for (final Player player : game.getPlayers()) {
+        for (final Player player : controller.getGame().getPlayers()) {
             player.getController().autoPassCancel();
         }
     }

@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -21,13 +21,13 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
-import forge.game.cost.IndividualCostPaymentInstance;
+import forge.game.card.CardUtil;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
+import java.util.EnumSet;
 import java.util.Map;
-import java.util.Set;
 
 import forge.util.Localizer;
 import org.apache.commons.lang3.ArrayUtils;
@@ -38,21 +38,17 @@ import com.google.common.collect.Sets;
  * <p>
  * Trigger_ChangesZone class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
 public class TriggerChangesZone extends Trigger {
 
-    // stores the costs when this trigger has already been run (to prevent multiple card draw triggers for single
-    // discard event of multiple cards on the Gitrog Moster for instance)
-    private Set<Integer> processedCostEffects = Sets.newHashSet();
-
     /**
      * <p>
      * Constructor for Trigger_ChangesZone.
      * </p>
-     * 
+     *
      * @param params
      *            a {@link java.util.HashMap} object.
      * @param host
@@ -62,6 +58,7 @@ public class TriggerChangesZone extends Trigger {
      */
     public TriggerChangesZone(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
+        correctZones();
     }
 
     /** {@inheritDoc}
@@ -113,7 +110,7 @@ public class TriggerChangesZone extends Trigger {
         }
 
         if (hasParam("ValidCause")) {
-            if (!runParams.containsKey(AbilityKey.Cause) ) {
+            if (!runParams.containsKey(AbilityKey.Cause)) {
                 return false;
             }
             SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
@@ -163,34 +160,12 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
-        if (hasParam("OncePerEffect")) {
-            // A "once per effect" trigger will only trigger once regardless of how many things the effect caused
-            // to change zones.
-
-            // check if this is triggered by a cost payment & only fire if it isn't a duplicate trigger
-            IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams.get(AbilityKey.IndividualCostPaymentInstance);
-            if (currentPayment != null) {  // only if there is an active cost
-
-                // each cost in a payment can trigger the effect for example Sinsiter Concoction has five costs:
-                // {B}, Pay one life, Mill a card, Discard a Card, and sacrifice Sinister Concoction
-                // If you mill a land and discard a land, The Gitrog Moster should trigger twice since each of these
-                // costs is an independent action
-                // however, due to forge implementation multiple triggers may be created for a single cost. For example,
-                // Zombie Infestation has a cost of "Discard two cards".  If you discard two lands, The Gitrog Moster
-                // should only trigger once because discarding two lands is a single action.
-                return this.processedCostEffects.add(currentPayment.getId());
-            }
-            // otherwise use the stack ability
-            else {
-                // The SpellAbilityStackInstance keeps track of which host cards with "OncePerEffect"
-                // triggers already fired as a result of that effect.
-                // TODO This isn't quite ideal, since it really should be keeping track of the SpellAbility of the host
-                // card, rather than keeping track of the host card itself - but it's good enough for now - since there
-                // are no cards with multiple different OncePerEffect triggers.
-                SpellAbilityStackInstance si = (SpellAbilityStackInstance) runParams.get(AbilityKey.SpellAbilityStackInstance);
-
-                // si == null means the stack is empty
-                return si == null || !si.hasOncePerEffectTrigger(this);
+        if (hasParam("NotThisAbility")) {
+            if (runParams.containsKey(AbilityKey.Cause)) {
+                SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
+                if (cause != null && this.equals(cause.getRootAbility().getTrigger())) {
+                    return false;
+                }
             }
         }
 
@@ -205,8 +180,10 @@ public class TriggerChangesZone extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        // TODO use better way to always copy both Card and CardLKI
         if ("Battlefield".equals(getParam("Origin"))) {
             sa.setTriggeringObject(AbilityKey.Card, runParams.get(AbilityKey.CardLKI));
+            sa.setTriggeringObject(AbilityKey.NewCard, CardUtil.getLKICopy((Card)runParams.get(AbilityKey.Card)));
         } else {
             sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
         }
@@ -219,10 +196,35 @@ public class TriggerChangesZone extends Trigger {
         return sb.toString();
     }
 
-    @Override
-    // Resets the state stored each turn for per-instance restriction
-    public void resetTurnState() {
-        super.resetTurnState();
-        this.processedCostEffects.clear();
+    protected void correctZones() {
+        // only if host zones isn't set
+        if (validHostZones != null) {
+            return;
+        }
+
+        // in case the game is null (for GUI) the later check does fail
+        if (getHostCard().getGame() == null) {
+            return;
+        }
+
+        if (!hasParam("ValidCard")) {
+            return;
+        }
+
+        if (hasParam("Origin")) {
+            // leave battlefield
+            boolean leavesBattlefield = ArrayUtils.contains(
+                getParam("Origin").split(","), ZoneType.Battlefield.toString()
+            );
+            if (leavesBattlefield) {
+                setActiveZone(EnumSet.of(ZoneType.Battlefield));
+            }
+        }
+
+        // enter Zone Effect only for Self
+        if (getParam("ValidCard").contains("Self") && (!hasParam("Origin") || "Any".equals(getParam("Origin")))) {
+            setActiveZone(Sets.newEnumSet(ZoneType.listValueOf(getParam("Destination")), ZoneType.class));
+        }
     }
+
 }

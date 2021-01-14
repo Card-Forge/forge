@@ -1,0 +1,17 @@
+Name:Kazuul's Fury
+ManaCost:2 R
+Types:Instant
+A:SP$ DealDamage | Cost$ 2 R Sac<1/Creature> | NumDmg$ X | References$ X | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to any target.
+SVar:X:Sacrificed$CardPower
+DeckHas:Ability$Sacrifice
+AlternateMode:Modal
+Oracle:As an additional cost to cast this spell, sacrifice a creature. Kazuul's Fury deals damage equal to the sacrificed creature's power to any target.
+
+ALTERNATE
+
+Name:Kazuul's Cliffs
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+Oracle:Kazuul's Cliffs enters the battlefield tapped.\n{T}: Add {R}.

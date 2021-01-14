@@ -37,3 +37,4 @@ Current Pauper Metagame | https://downloads.cardforge.org/decks/currentpaupermet
 Current Pioneer Metagame | https://downloads.cardforge.org/decks/currentpioneermetagame.zip
 Current Historic Metagame | https://downloads.cardforge.org/decks/currenthistoricmetagame.zip
 Current Penny Dreadful Metagame | https://downloads.cardforge.org/decks/currentpennydreadfulmetagame.zip
+Current Vintage Metagame | https://downloads.cardforge.org/decks/currentvintagemetagame.zip

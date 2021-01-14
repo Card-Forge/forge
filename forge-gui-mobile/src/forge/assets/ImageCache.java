@@ -27,21 +27,27 @@ import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalCause;
 import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
+import forge.Forge;
 import forge.ImageKeys;
 import forge.card.CardEdition;
 import forge.card.CardRenderer;
+import forge.deck.Deck;
 import forge.game.card.CardView;
 import forge.game.player.IHasIcon;
-import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -63,7 +69,7 @@ public class ImageCache {
 
     private static final Set<String> missingIconKeys = new HashSet<>();
     private static final LoadingCache<String, Texture> cache = CacheBuilder.newBuilder()
-            .maximumSize(400)
+            .maximumSize(Forge.cacheSize)
             .expireAfterAccess(15, TimeUnit.MINUTES)
             .removalListener(new RemovalListener<String, Texture>() {
                 @Override
@@ -71,12 +77,14 @@ public class ImageCache {
                     if(removalNotification.wasEvicted()||removalNotification.getCause() == RemovalCause.EXPIRED) {
                         removalNotification.getValue().dispose();
                     }
+                    CardRenderer.clearcardArtCache();
                 }
             })
             .build(new ImageLoader());
     public static final Texture defaultImage;
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
     public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
+    private static final Map<String, Pair<String, Boolean>> imageBorder = new HashMap<>(1024);
 
     private static boolean imageLoaded, delayLoadRequested;
     public static void allowSingleLoad() {
@@ -103,7 +111,9 @@ public class ImageCache {
 
     public static void disposeTexture(){
         for (Texture t: cache.asMap().values()) {
-            t.dispose();
+            if (!t.toString().contains("pics/icons")) //fixes quest avatars black texture. todo: filter textures that are safe to dispose...
+                if(!t.toString().contains("@"))  //generated texture don't need to be disposed manually
+                    t.dispose();
         }
         CardRenderer.clearcardArtCache();
         clear();
@@ -125,6 +135,39 @@ public class ImageCache {
             return FSkinImage.UNKNOWN;
         }
         return new FTextureImage(icon);
+    }
+
+    /**
+     * checks the card image exists from the disk.
+     */
+    public static boolean imageKeyFileExists(String imageKey) {
+        if (StringUtils.isEmpty(imageKey))
+            return false;
+
+        if (imageKey.length() < 2)
+            return false;
+
+        final String prefix = imageKey.substring(0, 2);
+
+        if (prefix.equals(ImageKeys.CARD_PREFIX)) {
+            PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
+            if (paperCard == null)
+                return false;
+
+            final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
+            final String cardfilename = ImageUtil.getImageKey(paperCard, backFace, true);
+            if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + cardfilename + ".jpg").exists())
+                if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + cardfilename + ".png").exists())
+                    if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + TextUtil.fastReplace(cardfilename,".full", ".fullborder") + ".jpg").exists())
+                        return false;
+        } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
+            final String tokenfilename = imageKey.substring(2) + ".jpg";
+
+            if (!new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, tokenfilename).exists())
+                return false;
+        }
+
+        return true;
     }
 
     /**
@@ -180,19 +223,29 @@ public class ImageCache {
             if (useDefaultIfNotFound) {
                 image = defaultImage;
                 cache.put(imageKey, defaultImage);
+                if (imageBorder.get(image.toString()) == null)
+                    imageBorder.put(image.toString(), Pair.of(Color.valueOf("#171717").toString(), false)); //black border
             }
         }
         return image;
     }
     public static void preloadCache(Iterable<String> keys) {
-        try {
-            cache.getAll(keys);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        for (String imageKey : keys){
+            if(getImage(imageKey, false) == null)
+                System.err.println("could not load card image:"+imageKey);
         }
     }
-    public static TextureRegion croppedBorderImage(Texture image, boolean fullborder) {
-        if (!fullborder)
+    public static void preloadCache(Deck deck) {
+        if(deck == null||!Forge.enablePreloadExtendedArt)
+            return;
+        for (PaperCard p : deck.getAllCardsInASinglePool().toFlatList()) {
+            if (getImage(p.getImageKey(false),false) == null)
+                System.err.println("could not load card image:"+p.toString());
+        }
+
+    }
+    public static TextureRegion croppedBorderImage(Texture image) {
+        if (!image.toString().contains(".fullborder."))
             return new TextureRegion(image);
         float rscale = 0.96f;
         int rw = Math.round(image.getWidth()*rscale);
@@ -201,43 +254,10 @@ public class ImageCache {
         int ry = Math.round((image.getHeight() - rh)/2f)-2;
         return new TextureRegion(image, rx, ry, rw, rh);
     }
-    public static boolean isWhiteBordered(IPaperCard c) {
-        if (c == null)
-            return false;
-
-        CardEdition ed = FModel.getMagicDb().getEditions().get(c.getEdition());
-        if (ed != null && ed.isWhiteBorder())
-            return true;
-        return false;
-    }
-    public static boolean isWhiteBordered(CardView c) {
-        if (c == null)
-            return false;
-
-        CardView.CardStateView state = c.getCurrentState();
-        CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
-        if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0)
-            return true;
-        return false;
-    }
-    public static Color borderColor(IPaperCard c) {
-        if (c == null)
+    public static Color borderColor(Texture t) {
+        if (t == null)
             return Color.valueOf("#171717");
-
-        CardEdition ed = FModel.getMagicDb().getEditions().get(c.getEdition());
-        if (ed != null && ed.isWhiteBorder())
-            return Color.valueOf("#fffffd");
-        return Color.valueOf("#171717");
-    }
-    public static Color borderColor(CardView c) {
-        if (c == null)
-            return Color.valueOf("#171717");
-
-        CardView.CardStateView state = c.getCurrentState();
-        CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
-        if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0)
-            return Color.valueOf("#fffffd");
-        return Color.valueOf("#171717");
+        return Color.valueOf(imageBorder.get(t.toString()).getLeft());
     }
     public static int getFSkinBorders(CardView c) {
         if (c == null)
@@ -249,48 +269,37 @@ public class ImageCache {
             return 1;
         return 0;
     }
-    public static boolean isExtendedArt(CardView c) {
-        if (c == null)
-            return false;
-
-        CardView.CardStateView state = c.getCurrentState();
-        if (state.getSetCode().contains("MPS_"))
-            return true;
-        if (state.getSetCode().equalsIgnoreCase("UST"))
-            return true;
-        return false;
+    public static boolean isBorderlessCardArt(Texture t) {
+        return ImageLoader.isBorderless(t);
     }
-    public static boolean isExtendedArt(IPaperCard c) {
-        if (c == null)
-            return false;
-
-        if (c.getEdition().contains("MPS_"))
-            return true;
-        if (c.getEdition().equalsIgnoreCase("UST"))
-            return true;
-        return false;
+    public static void updateBorders(String textureString, Pair<String, Boolean> colorPair){
+        imageBorder.put(textureString, colorPair);
     }
-    public static FImage getBorderImage(CardView c, boolean canshow) {
+    public static FImage getBorder(String textureString) {
+        if (imageBorder.get(textureString) == null)
+            return BlackBorder;
+        return imageBorder.get(textureString).getRight() ? WhiteBorder : BlackBorder;
+    }
+    public static FImage getBorderImage(String textureString, boolean canshow) {
         if (!canshow)
             return BlackBorder;
-        if (isWhiteBordered(c))
-            return WhiteBorder;
-        return BlackBorder;
+        return getBorder(textureString);
     }
-    public static FImage getBorderImage(IPaperCard c) {
-        if (isWhiteBordered(c))
-            return WhiteBorder;
-        return BlackBorder;
+    public static FImage getBorderImage(String textureString) {
+        return getBorder(textureString);
     }
-    public static Color getTint(CardView c) {
+    public static Color getTint(CardView c, Texture t) {
         if (c == null)
-            return Color.CLEAR;
+            return borderColor(t);
         if (c.isFaceDown())
-            return Color.CLEAR;
+            return Color.valueOf("#171717");
 
         CardView.CardStateView state = c.getCurrentState();
-        if (state.getColors().isColorless()) //Moonlace -> target spell or permanent becomes colorless.
+        if (state.getColors().isColorless()) { //Moonlace -> target spell or permanent becomes colorless.
+            if (state.hasDevoid()) //devoid is colorless at all zones so return its corresponding border color...
+                return borderColor(t);
             return Color.valueOf("#A0A6A4");
+        }
         else if (state.getColors().isMonoColor()) {
             if (state.getColors().hasBlack())
                 return Color.valueOf("#48494a");
@@ -305,6 +314,7 @@ public class ImageCache {
         }
         else if (state.getColors().isMulticolor())
             return Color.valueOf("#F9E084");
-        return Color.CLEAR;
+
+        return borderColor(t);
     }
 }

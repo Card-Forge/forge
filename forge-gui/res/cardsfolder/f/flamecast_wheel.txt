@@ -3,4 +3,4 @@ ManaCost:1
 Types:Artifact
 A:AB$ DealDamage | Cost$ 5 T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flamecast_wheel.jpg
-Oracle:{5}, {T}, Sacrifice Flamecast Wheel: Flamecast Wheel deals 3 damage to target creature.
+Oracle:{5}, {T}, Sacrifice Flamecast Wheel: It deals 3 damage to target creature.

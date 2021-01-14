@@ -2,7 +2,7 @@ Name:Possibility Storm
 ManaCost:3 R R
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card.wasCastFromHand | Execute$ TrigExileSpell | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell from their hand, that player exiles it, then exiles cards from the top of their library until they exile a card that shares a card type with it. That player may cast that card without paying its mana cost. Then they put all cards exiled with CARDNAME on the bottom of their library in a random order.
-SVar:TrigExileSpell:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Stack | Destination$ Exile | Fizzle$ True | SubAbility$ DBDig | Imprint$ True
+SVar:TrigExileSpell:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Stack | Destination$ Exile | Fizzle$ True | SubAbility$ DBDig | Imprint$ True
 SVar:DBDig:DB$ DigUntil | Defined$ TriggeredCardController | Valid$ Card.sharesCardTypeWith TriggeredCard | ValidDescription$ shares a card type with exiled card | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | ImprintRevealed$ True | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Defined$ Remembered | Controller$ TriggeredCardController | WithoutManaCost$ True | Optional$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZoneAll | Origin$ Exile | ChangeType$ Card.IsRemembered,Card.IsImprinted | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBPossibilityCleanup

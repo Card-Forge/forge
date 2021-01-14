@@ -1,0 +1,13 @@
+Name:Body of Knowledge
+ManaCost:3 U U
+Types:Creature Avatar
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME is dealt damage, draw that many cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ Y | References$ Y
+SVar:X:Count$InYourHand
+SVar:Y:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
+SVar:NeedsToPlayVar:X GE2
+Oracle:Body of Knowledge's power and toughness are each equal to the number of cards in your hand.\nYou have no maximum hand size.\nWhenever Body of Knowledge is dealt damage, draw that many cards.

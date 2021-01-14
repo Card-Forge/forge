@@ -292,6 +292,10 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlDifficulty.add(new PrefInput(QPref.PENALTY_LOSS, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
         pnlDifficulty.add(new FLabel.Builder().text(localizer.getMessage("lblMoreDuelChoices")).fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlDifficulty.add(new PrefInput(QPref.MORE_DUEL_CHOICES, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
+        pnlDifficulty.add(new FLabel.Builder().text(localizer.getMessage("lblWildOpponentMultiplier")).fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
+        pnlDifficulty.add(new PrefInput(QPref.WILD_OPPONENTS_MULTIPLIER, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");        
+        pnlDifficulty.add(new FLabel.Builder().text(localizer.getMessage("lblWildOpponentNumber")).fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
+        pnlDifficulty.add(new PrefInput(QPref.WILD_OPPONENTS_NUMBER, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");        
     }
     private void populateBooster() {
         pnlBooster.setOpaque(false);

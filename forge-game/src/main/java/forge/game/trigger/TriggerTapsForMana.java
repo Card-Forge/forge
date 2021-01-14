@@ -26,6 +26,8 @@ import forge.util.Localizer;
 
 import java.util.Map;
 
+import static forge.util.TextUtil.toManaString;
+
 /**
  * <p>
  * Trigger_TapsForMana class.
@@ -99,6 +101,8 @@ public class TriggerTapsForMana extends Trigger {
                 if (!this.getHostCard().hasChosenColor() || !produced.contains(MagicColor.toShortString(this.getHostCard().getChosenColor()))) {
                     return false;
                 }
+            } else if (!produced.contains(MagicColor.toShortString(this.getParam("Produced")))) {
+                    return false;
             }
         }
 
@@ -116,7 +120,7 @@ public class TriggerTapsForMana extends Trigger {
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
         sb.append(Localizer.getInstance().getMessage("lblTappedForMana")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
-        sb.append(Localizer.getInstance().getMessage("lblProduced")).append(": ").append(sa.getTriggeringObject(AbilityKey.Produced));
+        sb.append(Localizer.getInstance().getMessage("lblProduced")).append(": ").append(toManaString(sa.getTriggeringObject(AbilityKey.Produced).toString()));
         return sb.toString();
     }
 

@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import com.google.common.collect.Lists;
 import forge.GameCommand;
 import forge.game.Game;
+import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
@@ -111,6 +112,18 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 source.addRemembered(card);
                 AbilityUtils.resolve(repeat);
                 source.removeRemembered(card);
+            }
+        }
+
+        // for a mixed list of target permanents and players, e.g. Soulfire Eruption
+        if (sa.hasParam("RepeatTargeted")) {
+            final List <GameObject> tgts = getTargets(sa);
+            if (tgts != null) {
+                for (final Object o : tgts) {
+                    source.addRemembered(o);
+                    AbilityUtils.resolve(repeat);
+                    source.removeRemembered(o);
+                }
             }
         }
 

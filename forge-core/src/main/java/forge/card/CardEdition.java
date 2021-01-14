@@ -19,8 +19,7 @@ package forge.card;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
+import com.google.common.collect.*;
 import forge.StaticData;
 import forge.card.CardDb.SetPreference;
 import forge.deck.CardPool;
@@ -75,6 +74,38 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         MODERN // 8th Edition and newer
     }
 
+    // reserved names of sections inside edition files, that are not parsed as cards
+    private static final List<String> reservedSectionNames = ImmutableList.of("metadata", "tokens");
+
+    // commonly used printsheets with collector number
+    public enum EditionSectionWithCollectorNumbers {
+        CARDS("cards"),
+        PRECON_PRODUCT("precon product"),
+        BORDERLESS("borderless"),
+        SHOWCASE("showcase"),
+        EXTENDED_ART("extended art"),
+        ALTERNATE_ART("alternate art"),
+        BUY_A_BOX("buy a box"),
+        PROMO("promo");
+
+        private final String name;
+
+        EditionSectionWithCollectorNumbers(final String n) { this.name = n; }
+
+        public String getName() {
+            return name;
+        }
+
+        public static List<String> getNames() {
+            List<String> list = new ArrayList<>();
+            for (EditionSectionWithCollectorNumbers s : EditionSectionWithCollectorNumbers.values()) {
+                String sName = s.getName();
+                list.add(sName);
+            }
+            return list;
+        }
+    }
+
     public static class CardInSet {
         public final CardRarity rarity;
         public final String collectorNumber;
@@ -123,20 +154,28 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private String additionalUnlockSet = "";
     private boolean smallSetOverride = false;
     private String boosterMustContain = "";
-    private final CardInSet[] cards;
+    private String boosterReplaceSlotFromPrintSheet = "";
+    private String[] chaosDraftThemes = new String[0];
+    private String doublePickDuringDraft = "";
+    private final ListMultimap<String, CardInSet> cardMap;
     private final Map<String, Integer> tokenNormalized;
+    // custom print sheets that will be loaded lazily
+    private final Map<String, List<String>> customPrintSheetsToParse;
 
     private int boosterArts = 1;
     private SealedProduct.Template boosterTpl = null;
 
-    private CardEdition(CardInSet[] cards) {
-        this.cards = cards;
-        tokenNormalized = new HashMap<>();
+    private CardEdition(ListMultimap<String, CardInSet> cardMap, Map<String, Integer> tokens, Map<String, List<String>> customPrintSheetsToParse) {
+        this.cardMap = cardMap;
+        this.tokenNormalized = tokens;
+        this.customPrintSheetsToParse = customPrintSheetsToParse;
     }
 
     private CardEdition(CardInSet[] cards, Map<String, Integer> tokens) {
-        this.cards = cards;
+        this.cardMap = ArrayListMultimap.create();
+        this.cardMap.replaceValues("cards", Arrays.asList(cards));
         this.tokenNormalized = tokens;
+        this.customPrintSheetsToParse = new HashMap<>();
     }
 
     /**
@@ -154,7 +193,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
      * @param cards the cards in the set
      */
     private CardEdition(String date, String code, String code2, String mciCode, Type type, String name, FoilType foil, CardInSet[] cards) {
-        this(cards);
+        this(cards, new HashMap<>());
         this.code  = code;
         this.code2 = code2;
         this.mciCode = mciCode;
@@ -190,8 +229,16 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public String getAdditionalSheetForFoils() { return additionalSheetForFoils; }
     public String getAdditionalUnlockSet() { return additionalUnlockSet; }
     public boolean getSmallSetOverride() { return smallSetOverride; }
+    public String getDoublePickDuringDraft() { return doublePickDuringDraft; }
     public String getBoosterMustContain() { return boosterMustContain; }
-    public CardInSet[] getCards() { return cards; }
+    public String getBoosterReplaceSlotFromPrintSheet() { return boosterReplaceSlotFromPrintSheet; }
+    public String[] getChaosDraftThemes() { return chaosDraftThemes; }
+
+    public List<CardInSet> getCards() { return cardMap.get("cards"); }
+    public List<CardInSet> getAllCardsInSet() {
+        return Lists.newArrayList(cardMap.values());
+    }
+
     public boolean isModern() { return getDate().after(parseDate("2003-07-27")); } //8ED and above are modern except some promo cards and others
 
     public Map<String, Integer> getTokens() { return tokenNormalized; }
@@ -242,7 +289,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     }
 
     public boolean isLargeSet() {
-        return cards.length > 200 && !smallSetOverride;
+        return getAllCardsInSet().size() > 200 && !smallSetOverride;
     }
 
     public int getCntBoosterPictures() {
@@ -257,6 +304,40 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         return boosterTpl != null;
     }
 
+    public List<PrintSheet> getPrintSheetsBySection() {
+        final CardDb cardDb = StaticData.instance().getCommonCards();
+        Map<String, Integer> cardToIndex = new HashMap<>();
+
+        List<PrintSheet> sheets = Lists.newArrayList();
+        for(String sectionName : cardMap.keySet()) {
+            PrintSheet sheet = new PrintSheet(String.format("%s %s", this.getCode(), sectionName));
+
+            List<CardInSet> cards = cardMap.get(sectionName);
+            for(CardInSet card : cards) {
+                int index = 1;
+                if (cardToIndex.containsKey(card.name)) {
+                    index = cardToIndex.get(card.name);
+                }
+
+                cardToIndex.put(card.name, index);
+
+                PaperCard pCard = cardDb.getCard(card.name, this.getCode(), index);
+                sheet.add(pCard);
+            }
+
+            sheets.add(sheet);
+        }
+
+        for(String sheetName : customPrintSheetsToParse.keySet()) {
+            List<String> sheetToParse = customPrintSheetsToParse.get(sheetName);
+            CardPool sheetPool = CardPool.fromCardList(sheetToParse);
+            PrintSheet sheet = new PrintSheet(String.format("%s %s", this.getCode(), sheetName), sheetPool);
+            sheets.add(sheet);
+        }
+
+        return sheets;
+    }
+
     public static class Reader extends StorageReaderFolder<CardEdition> {
         public Reader(File path) {
             super(path, CardEdition.FN_GET_CODE);
@@ -266,39 +347,60 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         protected CardEdition read(File file) {
             final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(file));
 
+            final Pattern pattern = Pattern.compile(
+            /*
+            The following pattern will match the WAR Japanese art entries,
+            it should also match the Un-set and older alternate art cards
+            like Merseine from FEM (should the editions files ever be updated)
+             */
+            //"(^(?<cnum>[0-9]+.?) )?((?<rarity>[SCURML]) )?(?<name>.*)$"
+            /*  Ideally we'd use the named group above, but Android 6 and
+                earlier don't appear to support named groups.
+                So, untill support for those devices is officially dropped,
+                we'll have to suffice with numbered groups.
+                We are looking for:
+                    * cnum - grouping #2
+                    * rarity - grouping #4
+                    * name - grouping #5
+             */
+                "(^([0-9]+.?) )?(([SCURML]) )?(.*)$"
+            );
+
+            ListMultimap<String, CardInSet> cardMap = ArrayListMultimap.create();
             Map<String, Integer> tokenNormalized = new HashMap<>();
-            List<CardEdition.CardInSet> processedCards = new ArrayList<>();
-            if (contents.containsKey("cards")) {
-                final Pattern pattern = Pattern.compile(
-                        /*
-                        The following pattern will match the WAR Japanese art entries,
-                        it should also match the Un-set and older alternate art cards
-                        like Merseine from FEM (should the editions files ever be updated)
-                         */
-                        //"(^(?<cnum>[0-9]+.?) )?((?<rarity>[SCURML]) )?(?<name>.*)$"
-                        /*  Ideally we'd use the named group above, but Android 6 and
-                            earlier don't appear to support named groups.
-                            So, untill support for those devices is officially dropped,
-                            we'll have to suffice with numbered groups.
-                            We are looking for:
-                                * cnum - grouping #2
-                                * rarity - grouping #4
-                                * name - grouping #5
-                         */
-                        "(^([0-9]+.?) )?(([SCURML]) )?(.*)$"
-                );
-                for(String line : contents.get("cards")) {
-                    Matcher matcher = pattern.matcher(line);
-                    if (matcher.matches()) {
+            Map<String, List<String>> customPrintSheetsToParse = new HashMap<>();
+            List<String> editionSectionsWithCollectorNumbers = EditionSectionWithCollectorNumbers.getNames();
+
+            for (String sectionName : contents.keySet()) {
+                // skip reserved section names like 'metadata' and 'tokens' that are handled separately
+                if (reservedSectionNames.contains(sectionName)) {
+                    continue;
+                }
+                // parse sections of the format "<collector number> <rarity> <name>"
+                if (editionSectionsWithCollectorNumbers.contains(sectionName)) {
+                    for(String line : contents.get(sectionName)) {
+                        Matcher matcher = pattern.matcher(line);
+
+                        if (!matcher.matches()) {
+                            continue;
+                        }
+
                         String collectorNumber = matcher.group(2);
                         CardRarity r = CardRarity.smartValueOf(matcher.group(4));
                         String cardName = matcher.group(5);
                         CardInSet cis = new CardInSet(cardName, collectorNumber, r);
-                        processedCards.add(cis);
+
+                        cardMap.put(sectionName, cis);
                     }
+                }
+                // save custom print sheets of the format "<amount> <name>|<setcode>|<art index>"
+                // to parse later when printsheets are loaded lazily (and the cardpool is already initialized)
+                else {
+                    customPrintSheetsToParse.put(sectionName, contents.get(sectionName));
                 }
             }
 
+            // parse tokens section
             if (contents.containsKey("tokens")) {
                 for(String line : contents.get("tokens")) {
                     if (StringUtils.isBlank(line))
@@ -312,11 +414,9 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 }
             }
 
-            CardEdition res = new CardEdition(
-                processedCards.toArray(new CardInSet[processedCards.size()]),
-                tokenNormalized
-            );
+            CardEdition res = new CardEdition(cardMap, tokenNormalized, customPrintSheetsToParse);
 
+            // parse metadata section
             FileSection section = FileSection.parse(contents.get("metadata"), FileSection.EQUALS_KV_SEPARATOR);
             res.name  = section.get("name");
             res.date  = parseDate(section.get("date"));
@@ -377,8 +477,13 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             res.additionalUnlockSet = section.get("AdditionalSetUnlockedInQuest", ""); // e.g. Time Spiral Timeshifted (TSB) for Time Spiral
 
             res.smallSetOverride = section.getBoolean("TreatAsSmallSet", false); // for "small" sets with over 200 cards (e.g. Eldritch Moon)
+            res.doublePickDuringDraft = section.get("DoublePick", ""); // "FirstPick" or "Always"
 
             res.boosterMustContain = section.get("BoosterMustContain", ""); // e.g. Dominaria guaranteed legendary creature
+            res.boosterReplaceSlotFromPrintSheet = section.get("BoosterReplaceSlotFromPrintSheet", ""); // e.g. Zendikar Rising guaranteed double-faced card
+
+            res.chaosDraftThemes = section.get("ChaosDraftThemes", "").split(";"); // semicolon separated list of theme names
+
             return res;
         }
 

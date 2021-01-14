@@ -1,0 +1,8 @@
+Name:Falthis, Shadowcat Familiar
+ManaCost:2 B
+Types:Legendary Creature Nightmare Cat
+PT:2/2
+K:Partner
+S:Mode$ Continuous | Affected$ Card.YouCtrl+IsCommander | AddKeyword$ Menace & Deathtouch | Description$ Commanders you control have menace and deathtouch.
+AI:RemoveDeck:NonCommander
+Oracle:Commanders you control have menace and deathtouch.\nPartner (You can have two commanders if both have partner.)

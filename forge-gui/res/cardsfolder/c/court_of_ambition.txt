@@ -1,0 +1,11 @@
+Name:Court of Ambition
+ManaCost:2 B B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRepeat | TriggerDescription$ At the beginning of your upkeep, each opponent loses 3 life unless they discard a card. If you’re the monarch, instead each opponent loses 6 life unless they discard two cards.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBDrain
+SVar:DBDrain:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X | References$ X,Y | UnlessCost$ Discard<Y/Card> | UnlessPayer$ Player.IsRemembered
+SVar:X:Count$Monarch.6.3
+SVar:Y:Count$Monarch.2.1
+Oracle:When Court of Ambition enters the battlefield, you become the monarch. \n At the beginning of your upkeep, each opponent loses 3 life unless they discard a card. If you’re the monarch, instead each opponent loses 6 life unless they discard two cards.

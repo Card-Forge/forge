@@ -5,14 +5,16 @@ import os
 import re
 import urllib.request
 
-database = 'all-cards-20200629052136.json'
-scryfalldburl = 'https://archive.scryfall.com/bulk-data/all-cards/' + database
 # 'scryfall lang code':'ISO 639 lang code'
 languages = {'es': 'es-ES', 'de': 'de-DE',
              'it': 'it-IT', 'zhs': 'zh-CN'}
 langfiles = {'es': None, 'de': None, 'it': None, 'zhs': None}
 
-urllib.request.urlretrieve(scryfalldburl, database)
+# Request Scryfall API to download all_cards json file
+request = urllib.request.urlopen('https://api.scryfall.com/bulk-data')
+data = json.load(request)['data']
+scryfalldburl = [x for x in data if x['type'] == 'all_cards'][0]['download_uri']
+urllib.request.urlretrieve(scryfalldburl, 'cards.json')
 
 # Sort file and remove duplicates
 
@@ -94,7 +96,7 @@ def patchtranslations(filename):
     patchfile.close()
     ffinal.close()
 
-with open(database, mode='r', encoding='utf8') as json_file:
+with open('cards.json', mode='r', encoding='utf8') as json_file:
     # todo:all cards json size >= 800MB,using json iteration library,avoid load all content in to memory.
     data = json.load(json_file)
 

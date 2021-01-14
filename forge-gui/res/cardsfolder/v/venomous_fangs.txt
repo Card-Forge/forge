@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever enchanted creature deals damage to a creature, destroy the other creature.
-SVar:TrigDestroy:DB$Destroy | Defined$ TriggeredTarget
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venomous_fangs.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals damage to a creature, destroy the other creature.

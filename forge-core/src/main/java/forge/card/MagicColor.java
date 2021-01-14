@@ -139,16 +139,22 @@ public final class MagicColor {
         public static final ImmutableList<String> SNOW_LANDS = ImmutableList.of("Snow-Covered Plains", "Snow-Covered Island", "Snow-Covered Swamp", "Snow-Covered Mountain", "Snow-Covered Forest");
         public static final ImmutableMap<String, String> ANY_COLOR_CONVERSION = new ImmutableMap.Builder<String, String>()
                 .put("ManaColorConversion", "Additive")
-                .put("WhiteConversion", "All")
-                .put("BlueConversion", "All")
-                .put("BlackConversion", "All")
-                .put("RedConversion", "All")
-                .put("GreenConversion", "All")
+                .put("WhiteConversion", "Color")
+                .put("BlueConversion", "Color")
+                .put("BlackConversion", "Color")
+                .put("RedConversion", "Color")
+                .put("GreenConversion", "Color")
+                .put("ColorlessConversion", "Color")
                 .build();
 
         public static final ImmutableMap<String, String> ANY_TYPE_CONVERSION = new ImmutableMap.Builder<String, String>()
-                .putAll(ANY_COLOR_CONVERSION)
-                .put("ColorlessConversion", "All")
+                .put("ManaColorConversion", "Additive")
+                .put("WhiteConversion", "Type")
+                .put("BlueConversion", "Type")
+                .put("BlackConversion", "Type")
+                .put("RedConversion", "Type")
+                .put("GreenConversion", "Type")
+                .put("ColorlessConversion", "Type")
                 .build();
         /**
          * Private constructor to prevent instantiation.

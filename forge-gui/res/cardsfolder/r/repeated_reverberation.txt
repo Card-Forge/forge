@@ -1,9 +1,6 @@
 Name:Repeated Reverberation
 ManaCost:2 R R
 Types:Instant
-A:SP$ Effect | Cost$ 2 R R | AILogic$ SpellCopy | Name$ Repeated Reverberation Effect | Triggers$ TrigCopy,TrigCopy2 | SVars$ TrigCopyMain,DBCleanup | SpellDescription$ When you next cast an instant spell, cast a sorcery spell, or activate a loyalty ability this turn, copy that spell or ability twice. You may choose new targets for the copies.
-SVar:TrigCopy:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | OneOff$ True | Execute$ TrigCopyMain | TriggerZones$ Command | TriggerDescription$ When you next cast an instant spell, cast a sorcery spell, or activate a loyalty ability this turn, copy that spell or ability twice. You may choose new targets for the copies.
-SVar:TrigCopy2:Mode$ AbilityCast | ValidSA$ Activated.Loyalty | ValidActivatingPlayer$ You | OneOff$ True | Execute$ TrigCopyMain | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you next cast an instant spell, cast a sorcery spell, or activate a loyalty ability this turn, copy that spell or ability twice. You may choose new targets for the copies.
-SVar:TrigCopyMain:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 2 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+A:SP$ DelayedTrigger | Cost$ 2 R R | AILogic$ SpellCopy | Mode$ SpellAbilityCast | ValidSA$ Spell.Instant,Spell.Sorcery,Activated.Loyalty | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ EffTrigCopy | SpellDescription$ When you next cast an instant spell, cast a sorcery spell, or activate a loyalty ability this turn, copy that spell or ability twice. You may choose new targets for the copies.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 2 | MayChooseTarget$ True
 Oracle:When you next cast an instant spell, cast a sorcery spell, or activate a loyalty ability this turn, copy that spell or ability twice. You may choose new targets for the copies.

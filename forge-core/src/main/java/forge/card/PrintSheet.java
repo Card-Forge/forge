@@ -5,6 +5,8 @@ import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
+import forge.util.storage.IStorage;
+import forge.util.storage.StorageExtendable;
 import forge.util.storage.StorageReaderFileSections;
 
 import java.io.File;
@@ -23,6 +25,18 @@ public class PrintSheet {
         @Override public final String apply(PrintSheet sheet) { return sheet.name; }
     };
 
+    public static final IStorage<PrintSheet> initializePrintSheets(File sheetsFile, CardEdition.Collection editions) {
+        IStorage<PrintSheet> sheets = new StorageExtendable<>("Special print runs", new PrintSheet.Reader(sheetsFile));
+
+        for(CardEdition edition : editions) {
+            for(PrintSheet ps : edition.getPrintSheetsBySection()) {
+                System.out.println(ps.name);
+                sheets.add(ps.name, ps);
+            }
+        }
+
+        return sheets;
+    }
 
     private final ItemPool<PaperCard> cardsWithWeights;
 
@@ -76,6 +90,16 @@ public class PrintSheet {
             throw new IllegalStateException("Print sheet does not have enough unique cards");
 
         return fetchRoulette(sum + 1, roulette, toSkip); // start over from beginning, in case last cards were to skip
+    }
+
+    public List<PaperCard> all() {
+        List<PaperCard> result = new ArrayList<>();
+        for(Entry<PaperCard, Integer> kv : cardsWithWeights) {
+            for(int i = 0; i < kv.getValue(); i++) {
+                result.add(kv.getKey());
+            }
+        }
+        return result;
     }
 
     public List<PaperCard> random(int number, boolean wantUnique) {

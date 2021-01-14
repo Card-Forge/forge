@@ -1,0 +1,10 @@
+Name:Rampage of the Valkyries
+ManaCost:3 W B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 4/4 white Angel creature token with flying and vigilance.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying_vigilance | TokenOwner$ You
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Angel.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever an Angel you control dies, each opponent sacrifices a creature.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature
+DeckHints:Type$Angel
+DeckHas:Ability$Token
+Oracle:When Rampage of the Valkyries enters the battlefield, create a 4/4 white Angel token with flying and vigilance.\nWhenever a creature you control dies, each opponent sacrifices a creature.

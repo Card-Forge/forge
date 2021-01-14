@@ -15,10 +15,8 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
+import forge.util.Lang;
 import forge.util.Localizer;
-
-import java.util.Iterator;
-import java.util.List;
 
 public class SetStateEffect extends SpellAbilityEffect {
 
@@ -26,22 +24,13 @@ public class SetStateEffect extends SpellAbilityEffect {
     protected String getStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<Card> tgtCards = getTargetCards(sa);
-
         if (sa.hasParam("Flip")) {
-            sb.append("Flip");
+            sb.append("Flip ");
         } else {
             sb.append("Transform ");
         }
 
-        final Iterator<Card> it = tgtCards.iterator();
-        while (it.hasNext()) {
-            sb.append(it.next());
-
-            if (it.hasNext()) {
-                sb.append(", ");
-            }
-        }
+        sb.append(Lang.joinHomogenous(getTargetCards(sa)));
         sb.append(".");
         return sb.toString();
     }
@@ -58,24 +47,34 @@ public class SetStateEffect extends SpellAbilityEffect {
         final boolean manifestUp = sa.hasParam("ManifestUp");
         final boolean hiddenAgenda = sa.hasParam("HiddenAgenda");
         final boolean optional = sa.hasParam("Optional");
+        final CardCollection transformedCards = new CardCollection();
 
         GameEntityCounterTable table = new GameEntityCounterTable();
 
-        for (final Card tgt : getTargetCards(sa)) {
-            if (sa.usesTargeting() && !tgt.canBeTargetedBy(sa)) {
+        for (final Card tgtCard : getTargetCards(sa)) {
+            // check if the object is still in game or if it was moved
+            Card gameCard = game.getCardState(tgtCard, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !tgtCard.equalsWithTimestamp(gameCard)) {
+                continue;
+            }
+
+            if (sa.usesTargeting() && !gameCard.canBeTargetedBy(sa)) {
                 continue;
             }
 
             // Cards which are not on the battlefield should not be able to transform.
             // TurnFace should be allowed in other zones like Exil too
-            if (!"TurnFace".equals(mode) && !tgt.isInZone(ZoneType.Battlefield)) {
+            if (!"TurnFace".equals(mode) && !gameCard.isInZone(ZoneType.Battlefield)) {
                 continue;
             }
 
             // facedown cards that are not Permanent, can't turn faceup there
-            if ("TurnFace".equals(mode) && tgt.isFaceDown() && tgt.isInZone(ZoneType.Battlefield)
-                && !tgt.getState(CardStateName.Original).getType().isPermanent()) {
-                Card lki = CardUtil.getLKICopy(tgt);
+            if ("TurnFace".equals(mode) && gameCard.isFaceDown() && gameCard.isInZone(ZoneType.Battlefield)
+                && !gameCard.getState(CardStateName.Original).getType().isPermanent()) {
+                Card lki = CardUtil.getLKICopy(gameCard);
                 lki.forceTurnFaceUp();
                 game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, Localizer.getInstance().getMessage("lblFaceDownCardCantTurnFaceUp"));
 
@@ -83,13 +82,13 @@ public class SetStateEffect extends SpellAbilityEffect {
             }
 
             // for reasons it can't transform, skip
-            if ("Transform".equals(mode) && !tgt.canTransform()) {
+            if ("Transform".equals(mode) && !gameCard.canTransform()) {
                 continue;
             }
 
-            if ("Transform".equals(mode) && tgt.equals(host) && sa.hasSVar("StoredTransform")) {
+            if ("Transform".equals(mode) && gameCard.equals(host) && sa.hasSVar("StoredTransform")) {
                 // If want to Transform, and host is trying to transform self, skip if not in alignment
-                boolean skip = tgt.getTransformedTimestamp() != Long.parseLong(sa.getSVar("StoredTransform"));
+                boolean skip = gameCard.getTransformedTimestamp() != Long.parseLong(sa.getSVar("StoredTransform"));
                 // Clear SVar from SA so it doesn't get reused accidentally
                 sa.getSVars().remove("StoredTransform");
                 if (skip) {
@@ -98,7 +97,7 @@ public class SetStateEffect extends SpellAbilityEffect {
             }
 
             if (optional) {
-                String message = TextUtil.concatWithSpace("Transform", host.getName(), "?");
+                String message = TextUtil.concatWithSpace("Transform", gameCard.getName(), "?");
                 if (!p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, message)) {
                     return;
                 }
@@ -106,32 +105,42 @@ public class SetStateEffect extends SpellAbilityEffect {
 
             boolean hasTransformed = false;
             if (morphUp) {
-                hasTransformed = tgt.turnFaceUp(sa);
+                hasTransformed = gameCard.turnFaceUp(sa);
             } else if (manifestUp) {
-                hasTransformed = tgt.turnFaceUp(true, true, sa);
+                hasTransformed = gameCard.turnFaceUp(true, true, sa);
             } else {
-                hasTransformed = tgt.changeCardState(mode, sa.getParam("NewState"), sa);
+                hasTransformed = gameCard.changeCardState(mode, sa.getParam("NewState"), sa);
             }
-            if ( hasTransformed ) {
+            if (hasTransformed) {
                 if (morphUp) {
-                    String sb = p + " has unmorphed " + tgt.getName();
+                    String sb = p + " has unmorphed " + gameCard.getName();
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                 } else if (manifestUp) {
-                    String sb = p + " has unmanifested " + tgt.getName();
+                    String sb = p + " has unmanifested " + gameCard.getName();
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                 } else if (hiddenAgenda) {
-                    String sb = p + " has revealed " + tgt.getName() + " with the chosen name " + tgt.getNamedCard();
-                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    if (gameCard.hasKeyword("Double agenda")) {
+                        String sb = p + " has revealed " + gameCard.getName() + " with the chosen names " +
+                                gameCard.getNamedCard() + " and " + gameCard.getNamedCard2();
+                        game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    } else {
+                        String sb = p + " has revealed " + gameCard.getName() + " with the chosen name " + gameCard.getNamedCard();
+                        game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    }
                 }
-                game.fireEvent(new GameEventCardStatsChanged(tgt));
+                game.fireEvent(new GameEventCardStatsChanged(gameCard));
                 if (sa.hasParam("Mega")) {
-                    tgt.addCounter(CounterEnumType.P1P1, 1, p, true, table);
+                    gameCard.addCounter(CounterEnumType.P1P1, 1, p, true, table);
                 }
                 if (remChanged) {
-                    host.addRemembered(tgt);
+                    host.addRemembered(gameCard);
                 }
+                transformedCards.add(gameCard);
             }
         }
         table.triggerCountersPutAll(game);
+        if (!transformedCards.isEmpty()) {
+            game.getAction().reveal(transformedCards, p, true, "Transformed cards in ");
+        }
     }
 }

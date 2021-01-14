@@ -216,6 +216,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         if (hasParam("Description") && !this.isSuppressed()) {
             String desc = getParam("Description");
             desc = TextUtil.fastReplace(desc, "CARDNAME", this.hostCard.getName());
+            desc = TextUtil.fastReplace(desc, "NICKNAME", this.hostCard.getName().split(",")[0]);
 
             return desc;
         } else {
@@ -345,7 +346,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         if (mode.equals("CantBeCast")) {
             return StaticAbilityCantBeCast.applyCantBeCastAbility(this, card, player);
         }
-
         if (mode.equals("CantPlayLand")) {
             return StaticAbilityCantBeCast.applyCantPlayLandAbility(this, card, player);
         }
@@ -441,37 +441,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return false;
     }
 
-    /**
-     * Apply ability.
-     *
-     * @param mode
-     *            the mode
-     * @param card
-     *            the card
-     * @return true, if successful
-     */
-    public final boolean applyAbility(final String mode, final Card card) {
-
-        // don't apply the ability if it hasn't got the right mode
-        if (!getParam("Mode").equals(mode)) {
-            return false;
-        }
-
-        if (this.isSuppressed() || !this.checkConditions()) {
-            return false;
-        }
-
-        if (mode.equals("ETBTapped")) {
-            return StaticAbilityETBTapped.applyETBTappedAbility(this, card);
-        }
-
-        if (mode.equals("GainAbilitiesOf")) {
-
-        }
-
-        return false;
-    }
-
     public final boolean applyAbility(final String mode, final Card card, final boolean isCombat) {
         // don't apply the ability if it hasn't got the right mode
         if (!getParam("Mode").equals(mode)) {
@@ -517,6 +486,8 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             return StaticAbilityCantAttackBlock.applyCantBlockByAbility(this, card, (Card)target);
         } else if (mode.equals("CantAttach")) {
             return StaticAbilityCantAttach.applyCantAttachAbility(this, card, target);
+        } else if (mode.equals("CanAttackIfHaste")) {
+            return StaticAbilityCantAttackBlock.applyCanAttackHasteAbility(this, card, target);
         }
 
         return false;
@@ -593,6 +564,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             if (condition.equals("Ferocious") && !controller.hasFerocious()) return false;
             if (condition.equals("Desert") && !controller.hasDesert()) return false;
             if (condition.equals("Blessing") && !controller.hasBlessing()) return false;
+            if (condition.equals("Monarch") & !controller.isMonarch()) return false;
 
             if (condition.equals("PlayerTurn")) {
                 if (!ph.isPlayerTurn(controller)) {
@@ -626,6 +598,13 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         if (hasParam("PlayerTurn")) {
             List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, getParam("PlayerTurn"), null);
             if (!players.contains(ph.getPlayerTurn())) {
+                return false;
+            }
+        }
+
+        if (hasParam("UnlessDefinedPlayer")) {
+            List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, getParam("UnlessDefinedPlayer"), null);
+            if (!players.isEmpty()) {
                 return false;
             }
         }

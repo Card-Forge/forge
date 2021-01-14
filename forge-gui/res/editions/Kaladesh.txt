@@ -6,8 +6,8 @@ Code2=KLD
 Type=Expansion
 MciCode=kld
 BoosterCovers=3
-Booster=10 Common:!fromSheet("KLD Planeswalker Decks"), 3 Uncommon:!fromSheet("KLD Planeswalker Decks"), 1 RareMythic:!fromSheet("KLD Planeswalker Decks"), 1 BasicLand
-AdditionalSheetForFoils=fromSheet("MPS Kaladesh Inventions")
+Booster=10 Common:fromSheet("KLD cards"), 3 Uncommon:fromSheet("KLD cards"), 1 RareMythic:fromSheet("KLD cards"), 1 BasicLand
+AdditionalSheetForFoils=fromSheet("KLD Kaladesh Inventions")
 AdditionalSetUnlockedInQuest=MPS_KLD
 
 [cards]
@@ -275,6 +275,9 @@ AdditionalSetUnlockedInQuest=MPS_KLD
 262 L Forest
 263 L Forest
 264 L Forest
+
+[precon product]
+# Planeswalker Decks
 265 M Chandra, Pyrogenius
 266 C Flame Lash
 267 R Liberating Combustion
@@ -285,6 +288,38 @@ AdditionalSetUnlockedInQuest=MPS_KLD
 272 C Terrain Elemental
 272 R Verdant Crescendo
 273 C Woodland Stream
+
+[Kaladesh Inventions]
+Cataclysmic Gearhulk|MPS_KLD
+Torrential Gearhulk|MPS_KLD
+Noxious Gearhulk|MPS_KLD
+Combustible Gearhulk|MPS_KLD
+Verdurous Gearhulk|MPS_KLD
+AEther Vial|MPS_KLD
+Champion's Helm|MPS_KLD
+Chromatic Lantern|MPS_KLD
+Chrome Mox|MPS_KLD
+Cloudstone Curio|MPS_KLD
+Crucible of Worlds|MPS_KLD
+Gauntlet of Power|MPS_KLD
+Hangarback Walker|MPS_KLD
+Lightning Greaves|MPS_KLD
+Lotus Petal|MPS_KLD
+Mana Crypt|MPS_KLD
+Mana Vault|MPS_KLD
+Mind's Eye|MPS_KLD
+Mox Opal|MPS_KLD
+Painter's Servant|MPS_KLD
+Rings of Brighthearth|MPS_KLD
+Scroll Rack|MPS_KLD
+Sculpting Steel|MPS_KLD
+Sol Ring|MPS_KLD
+Solemn Simulacrum|MPS_KLD
+Static Orb|MPS_KLD
+Steel Overseer|MPS_KLD
+Sword of Feast and Famine|MPS_KLD
+Sword of Fire and Ice|MPS_KLD
+Sword of Light and Shadow|MPS_KLD
 
 [tokens]
 c_6_6_a_beast

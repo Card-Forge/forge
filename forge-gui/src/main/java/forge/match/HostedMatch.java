@@ -126,6 +126,8 @@ public class HostedMatch {
             title = TextUtil.concatNoSpace("Multiplayer Game (", String.valueOf(sortedPlayers.size()), " players)");
         }
         this.match = new Match(gameRules, sortedPlayers, title);
+        this.match.subscribeToEvents(SoundSystem.instance);
+        this.match.subscribeToEvents(visitor);
         startGame();
     }
 
@@ -136,8 +138,7 @@ public class HostedMatch {
 
     public void restartMatch() {
         endCurrentGame();
-        this.match = new Match(match.getRules(), match.getPlayers(), this.title);
-        startGame();
+        startMatch(match.getRules(), null, match.getPlayers(), this.guis);
     }
 
     public void startGame() {
@@ -149,7 +150,7 @@ public class HostedMatch {
         if (game.getRules().getGameType() == GameType.Quest) {
             final QuestController qc = FModel.getQuest();
             // Reset new list when the Match round starts, not when each game starts
-            if (game.getMatch().getPlayedGames().isEmpty()) {
+            if (game.getMatch().getOutcomes().isEmpty()) {
                 qc.getCards().resetNewList();
             }
             game.subscribeToEvents(qc); // this one listens to player's mulligans ATM

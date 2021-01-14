@@ -1,5 +1,7 @@
 package forge.app;
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -27,6 +29,8 @@ import android.os.PowerManager;
 import android.provider.Settings;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -56,9 +60,15 @@ public class Main extends AndroidApplication {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //get total device RAM in mb
+        ActivityManager actManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
+        actManager.getMemoryInfo(memInfo);
+        int totalMemory = Math.round(memInfo.totalMem / 1024f / 1024f);
+
         boolean permissiongranted =  checkPermission();
         Gadapter = new AndroidAdapter(this.getContext());
-        initForge(Gadapter, permissiongranted);
+        initForge(Gadapter, permissiongranted, totalMemory, isTabletDevice(this.getContext()), android.os.Build.VERSION.SDK_INT);
 
         //permission
         if(!permissiongranted){
@@ -66,7 +76,19 @@ public class Main extends AndroidApplication {
             displayMessage(Gadapter);
         }
     }
+    private static boolean isTabletDevice(Context activityContext) {
+        Display display = ((Activity)   activityContext).getWindowManager().getDefaultDisplay();
+        DisplayMetrics metrics = new DisplayMetrics();
+        display.getMetrics(metrics);
 
+        float widthInches = metrics.widthPixels / metrics.xdpi;
+        float heightInches = metrics.heightPixels / metrics.ydpi;
+        double diagonalInches = Math.sqrt(Math.pow(widthInches, 2) + Math.pow(heightInches, 2));
+        if (diagonalInches >= 7.0) {
+            return true;
+        }
+        return false;
+    }
     private void displayMessage(AndroidAdapter adapter){
         TableLayout TL = new TableLayout(this);
         TableRow row = new TableRow(this);
@@ -185,7 +207,7 @@ public class Main extends AndroidApplication {
             builder.show();
     }
 
-    private void initForge(AndroidAdapter adapter, boolean permissiongranted){
+    private void initForge(AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, int AndroidVersion){
         boolean isPortrait;
         if (permissiongranted){
             //establish assets directory
@@ -225,12 +247,12 @@ public class Main extends AndroidApplication {
                 Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
 
-            initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig, isPortrait));
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig, isPortrait, totalRAM, isTabletDevice, AndroidVersion));
         } else {
             isPortrait = true;
             //set current orientation
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, isPortrait));
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, isPortrait, totalRAM, isTabletDevice, AndroidVersion));
         }
 
     }

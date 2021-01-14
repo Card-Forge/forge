@@ -4,12 +4,11 @@ Types:Legendary Enchantment Aura
 K:Enchant creature you control
 A:SP$ Attach | Cost$ 1 B G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EnchantedBy | Execute$ TrigChangeZone | TriggerDescription$ When enchanted creature dies, return it to the battlefield under your control, then return CARDNAME to the battlefield transformed under your control.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | GainControl$ True | SubAbility$ DBRemember
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredNewCardLKICopy | GainControl$ True | SubAbility$ DBRemember
 SVar:DBRemember:DB$ Pump | RememberObjects$ Self | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Remembered | GainControl$ True | Transformed$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered $ True
 AlternateMode:DoubleFaced
-SVar:Picture:http://www.wizards.com/global/images/magic/general/journey_to_eternity.jpg
 Oracle:Enchant creature you control\nWhen enchanted creature dies, return it to the battlefield under your control, then return Journey to Eternity to the battlefield transformed under your control.
 
 ALTERNATE
@@ -19,5 +18,4 @@ ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 A:AB$ ChangeZone | Cost$ 3 B G T | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature card in your graveyard | SpellDescription$ Return target creature card from your graveyard to the battlefield.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/atzal_cave_of_eternity.jpg
 Oracle:(Transforms from Journey to Eternity.)\n{T}: Add one mana of any color.\n{3}{B}{G}, {T}: Return target creature card from your graveyard to the battlefield.

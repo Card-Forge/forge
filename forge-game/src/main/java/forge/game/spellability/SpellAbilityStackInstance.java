@@ -25,7 +25,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.game.player.Player;
-import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
@@ -33,7 +32,6 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import forge.game.GameObject;
 
 import java.util.ArrayList;
@@ -41,6 +39,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 /**
@@ -99,7 +98,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
 
     private final List<ZoneType> zonesToOpen;
     private final Map<Player, Object> playersWithValidTargets;
-    private final Set<Trigger> oncePerEffectTriggers = Sets.newHashSet();
 
     private final StackItemView view;
 
@@ -144,10 +142,10 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         }
         // We probably should be storing SA svars too right?
         if (!sa.isWrapper()) {
-            for (final String store : sa.getSVars()) {
-                final String value = source.getSVar(store);
+            for (final Entry<String, String> e : sa.getSVars().entrySet()) {
+                final String value = e.getValue();
                 if (!StringUtils.isEmpty(value)) {
-                    storedSVars.put(store, value);
+                    storedSVars.put(e.getKey(), value);
                 }
             }
         }
@@ -280,14 +278,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         return playersWithValidTargets;
     }
 
-    public final boolean hasOncePerEffectTrigger(Trigger trigger) {
-        return oncePerEffectTriggers.contains(trigger);
-    }
-
-    public final boolean addOncePerEffectTrigger(Trigger trigger) {
-        return oncePerEffectTriggers.add(trigger);
-    }
-
     public void updateTarget(TargetChoices target) {
         updateTarget(target, null, null);
     }
@@ -313,7 +303,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
                     // try to deduce which target has been replaced
                     // (this may be imprecise, updateTarget should specify old target if possible)
                     for (Object obj : map.keySet()) {
-                        if (!target.getTargets().contains(obj)) {
+                        if (!target.contains(obj)) {
                             toRemove = obj;
                             break;
                         }
@@ -325,7 +315,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
                 } else {
                     // try to deduce which target was added
                     // (this may be imprecise, updateTarget should specify new target if possible)
-                    for (Object newTgts : target.getTargets()) {
+                    for (Object newTgts : target) {
                         if (!map.containsKey(newTgts)) {
                             toAdd = newTgts;
                             break;
@@ -344,7 +334,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.SourceSA, ability);
             Set<Object> distinctObjects = new HashSet<>();
-            for (final Object tgt : target.getTargets()) {
+            for (final Object tgt : target) {
                 if (distinctObjects.contains(tgt)) {
                     continue;
                 }
@@ -357,7 +347,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
                 runParams.put(AbilityKey.Target, tgt);
                 getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
             }
-            runParams.put(AbilityKey.Targets, target.getTargets());
+            runParams.put(AbilityKey.Targets, target);
             getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
         }
     }

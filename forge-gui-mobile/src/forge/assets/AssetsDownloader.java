@@ -44,14 +44,22 @@ public class AssetsDownloader {
                     if (!Forge.getDeviceAdapter().isConnectedToWifi()) {
                         message += " If so, you may want to connect to wifi first. The download is around 6.5MB.";
                     }
-                    if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later")) {
+                    if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later", true, true)) {
                         String filename = "forge-android-" + version + "-signed-aligned.apk";
                         String apkFile = new GuiDownloadZipService("", "update",
                                 "https://releases.cardforge.org/forge/forge-gui-android/" + version + "/" + filename,
                                 Forge.getDeviceAdapter().getDownloadsDir(), null, splashScreen.getProgressBar()).download(filename);
                         if (apkFile != null) {
-                            Forge.getDeviceAdapter().openFile(apkFile);
-                            Forge.exit(true);
+                            if (Forge.androidVersion < 29) { //Android 9 and below...
+                                Forge.getDeviceAdapter().openFile(apkFile);
+                                Forge.exit(true);
+                                return;
+                            }
+                            //Android 10 and newer manual apk installation
+                            switch (SOptionPane.showOptionDialog("Download Successful. Go to your downloads folder and install " + filename +" to update Forge. Forge will now exit.", "", null, ImmutableList.of("Ok"))) {
+                                default:
+                                    Forge.exit(true);
+                            }
                             return;
                         }
                         SOptionPane.showMessageDialog("Could not download update. " +
@@ -147,5 +155,11 @@ public class AssetsDownloader {
         //save version string to file once assets finish downloading
         //so they don't need to be re-downloaded until you upgrade again
         FileUtil.writeFile(versionFile, Forge.CURRENT_VERSION);
+
+        //add restart after assets update
+        switch (SOptionPane.showOptionDialog("Resource update finished. Please restart Forge.", "", null, ImmutableList.of("Ok"))) {
+            default:
+                Forge.restart(true);
+        }
     }
 }

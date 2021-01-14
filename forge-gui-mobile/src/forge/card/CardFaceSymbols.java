@@ -29,7 +29,7 @@ import java.util.StringTokenizer;
 
 public class CardFaceSymbols {
     public static final float FONT_SIZE_FACTOR = 0.85f;
-    private static final Map<String, FSkinImage> MANA_IMAGES = new HashMap<>();
+    private static final Map<String, FSkinImage> MANA_IMAGES = new HashMap<>(128);
 
     public static void loadImages() {
         for (int i = 0; i <= 20; i++) {
@@ -102,6 +102,7 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("foil19", FSkinImage.FOIL_19);
         MANA_IMAGES.put("foil20", FSkinImage.FOIL_20);
 
+        MANA_IMAGES.put("commander", FSkinImage.IMG_ABILITY_COMMANDER);
 
         MANA_IMAGES.put("deathtouch", FSkinImage.IMG_ABILITY_DEATHTOUCH);
         MANA_IMAGES.put("defender", FSkinImage.IMG_ABILITY_DEFENDER);
@@ -115,6 +116,7 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("horsemanship", FSkinImage.IMG_ABILITY_HORSEMANSHIP);
         MANA_IMAGES.put("indestructible", FSkinImage.IMG_ABILITY_INDESTRUCTIBLE);
         MANA_IMAGES.put("intimidate", FSkinImage.IMG_ABILITY_INTIMIDATE);
+        MANA_IMAGES.put("landwalk", FSkinImage.IMG_ABILITY_LANDWALK);
         MANA_IMAGES.put("lifelink", FSkinImage.IMG_ABILITY_LIFELINK);
         MANA_IMAGES.put("menace", FSkinImage.IMG_ABILITY_MENACE);
         MANA_IMAGES.put("reach", FSkinImage.IMG_ABILITY_REACH);
@@ -190,11 +192,17 @@ public class CardFaceSymbols {
     }
 
     public static void drawColorSet(Graphics g, ColorSet colorSet, float x, float y, final float imageSize) {
+        drawColorSet(g, colorSet, x, y, imageSize, false);
+    }
+    public static void drawColorSet(Graphics g, ColorSet colorSet, float x, float y, final float imageSize, boolean vertical) {
         final float dx = imageSize;
 
         for (final ManaCostShard s : colorSet.getOrderedShards()) {
             drawSymbol(s.getImageKey(), g, x, y, imageSize, imageSize);
-            x += dx;
+            if (!vertical)
+                x += dx;
+            else
+                y += dx;
         }
     }
 

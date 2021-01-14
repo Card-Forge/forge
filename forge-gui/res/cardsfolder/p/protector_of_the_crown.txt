@@ -4,7 +4,6 @@ Types:Creature Giant Soldier
 PT:2/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DmgSelf | Description$ All damage that would be dealt to you is dealt to CARDNAME instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DmgSelf | DamageTarget$ Self | Description$ All damage that would be dealt to you is dealt to CARDNAME instead.
 SVar:DmgSelf:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Self | VarType$ Card
-SVar:Picture:http://www.wizards.com/global/images/magic/general/protector_of_the_crown.jpg
 Oracle:When Protector of the Crown enters the battlefield, you become the monarch.\nAll damage that would be dealt to you is dealt to Protector of the Crown instead.

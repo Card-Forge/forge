@@ -2,7 +2,7 @@ Name:Deepwood Elder
 ManaCost:G G
 Types:Creature Dryad Spellshaper
 PT:2/2
-A:AB$ Animate | Cost$ X G G T Discard<1/Card> | TargetMin$ 0 | TargetMax$ Maxtgt | ValidTgts$ Land | TgtPrompt$ Select target land to become forest | Types$ Forest | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True | References$ MaxTgt | SpellDescription$ X target lands become Forests until end of turn.
+A:AB$ Animate | Cost$ X G G T Discard<1/Card> | TargetMin$ 0 | TargetMax$ Maxtgt | ValidTgts$ Land | TgtPrompt$ Select target land to become forest | Types$ Forest | RemoveLandTypes$ True | References$ MaxTgt | SpellDescription$ X target lands become Forests until end of turn.
 SVar:X:TargetedObjects$Amount
 AI:RemoveDeck:All
 SVar:Maxtgt:Count$Valid Land

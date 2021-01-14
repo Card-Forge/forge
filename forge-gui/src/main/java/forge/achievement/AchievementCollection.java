@@ -18,8 +18,8 @@ import org.w3c.dom.NodeList;
 
 import com.google.common.collect.Maps;
 
-import forge.game.Game;
 import forge.game.GameType;
+import forge.game.Match;
 import forge.game.player.Player;
 import forge.interfaces.IComboBox;
 import forge.model.FModel;
@@ -45,7 +45,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
             return;
         }
 
-        final Game game = controller.getGame();
+        final Match match = controller.getMatch();
         final Player player = controller.getPlayer();
 
         //update all achievements for GUI player after game finished
@@ -54,16 +54,16 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
             ThreadUtil.invokeInGameThread(new Runnable() {
                 @Override
                 public void run() {
-                    doUpdateAllAchievements(game, player);
+                    doUpdateAllAchievements(match, player);
                 }
             });
         } else {
-            doUpdateAllAchievements(game, player);
+            doUpdateAllAchievements(match, player);
         }
     }
 
-    private static void doUpdateAllAchievements(final Game game, final Player player) {
-        FModel.getAchievements(game.getRules().getGameType()).updateAll(player);
+    private static void doUpdateAllAchievements(final Match match, final Player player) {
+        FModel.getAchievements(match.getRules().getGameType()).updateAll(player);
         AltWinAchievements.instance.updateAll(player);
         PlaneswalkerAchievements.instance.updateAll(player);
         ChallengeAchievements.instance.updateAll(player);

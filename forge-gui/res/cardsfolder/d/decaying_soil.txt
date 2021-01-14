@@ -5,7 +5,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigExile:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1 | DefinedPlayer$ You | Origin$ Graveyard | Destination$ Exile
 S:Mode$ Continuous | Affected$ Card.Self | AddTrigger$ TrigDies | AddAbility$ TrigReturn | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME has "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand."
 SVar:TrigDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+YouOwn | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand."
-SVar:TrigReturn:AB$ ChangeZone | Cost$ 1 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 1 | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Hand
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/decaying_soil.jpg
 Oracle:At the beginning of your upkeep, exile a card from your graveyard.\nThreshold — As long as seven or more cards are in your graveyard, Decaying Soil has "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand."

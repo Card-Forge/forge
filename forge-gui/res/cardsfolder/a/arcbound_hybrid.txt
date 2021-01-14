@@ -6,4 +6,4 @@ K:Haste
 K:Modular:2
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_hybrid.jpg
-Oracle:Haste\nModular 2 (This enters the battlefield with two +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
+Oracle:Haste\nModular 2 (This creature enters the battlefield with two +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
