@@ -620,13 +620,14 @@ public class CardView extends GameEntityView {
 
         if (isSplitCard() && !isFaceDown()) {
             // TODO: Translation?
-            CardStateView view = state.getState() == CardStateName.LeftSplit ? state : getAlternateState();
             if (getZone() != ZoneType.Stack) {
                 sb.append("(");
-                sb.append(view.getName());
+                sb.append(getLeftSplitState().getName());
                 sb.append(") ");
+                sb.append(getLeftSplitState().getAbilityText());
+            }  else {
+                sb.append(state.getAbilityText());
             }
-            sb.append(view.getAbilityText());
         } else {
             if (toracle.isEmpty()) sb.append(state.getAbilityText());
         }
