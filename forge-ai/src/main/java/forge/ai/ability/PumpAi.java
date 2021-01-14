@@ -76,7 +76,7 @@ public class PumpAi extends PumpAiBase {
             }
         } else if (aiLogic.equals("SwitchPT")) {
             // Some more AI would be even better, but this is a good start to prevent spamming
-            if (sa.isAbility() && sa.getActivationsThisTurn() > 0 && sa.getTargetRestrictions() == null) {
+            if (sa.isAbility() && sa.getActivationsThisTurn() > 0 && !sa.usesTargeting()) {
                 // Will prevent flipping back and forth
                 return false;
             }
