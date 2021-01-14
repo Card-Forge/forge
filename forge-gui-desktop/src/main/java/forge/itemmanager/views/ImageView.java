@@ -45,6 +45,7 @@ import forge.itemmanager.ItemManagerModel;
 import forge.itemmanager.SItemManagerUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
+import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinColor;
@@ -771,6 +772,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         final CDetailPicture cDetailPicture = itemManager.getCDetailPicture();
         if (cDetailPicture != null) {
             cDetailPicture.showItem(item);
+        }
+        else {
+            // if opened from lobby ItemManager has no own
+            CDeckEditorUI.SINGLETON_INSTANCE.setCard(item);
         }
     }
 
