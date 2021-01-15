@@ -56,6 +56,7 @@ public enum TriggerType {
     DiscardedAll(TriggerDiscardedAll.class),
     Drawn(TriggerDrawn.class),
     Evolved(TriggerEvolved.class),
+    ExcessDamage(TriggerExcessDamage.class),
     Exerted(TriggerExerted.class),
     Exiled(TriggerExiled.class),
     Exploited(TriggerExploited.class),

@@ -5083,15 +5083,24 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     @Override
     public final int addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat, CardDamageMap damageMap, GameEntityCounterTable counterTable) {
 
-        if (damageIn == 0) {
+        if (damageIn <= 0) {
             return 0; // Rule 119.8
+        }
+
+        // 120.1a Damage can’t be dealt to an object that’s neither a creature nor a planeswalker.
+        if (!isPlaneswalker() && !isCreature()) {
+            return 0;
+        }
+
+        if (!isInPlay()) { // if target is not in play it can't receive any damage
+            return 0;
         }
 
         addReceivedDamageFromThisTurn(source, damageIn);
         source.addDealtDamageToThisTurn(this, damageIn);
 
         // Run triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.DamageSource, source);
         runParams.put(AbilityKey.DamageTarget, this);
         runParams.put(AbilityKey.DamageAmount, damageIn);
@@ -5103,8 +5112,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         runParams.put(AbilityKey.DefendingPlayer, game.getCombat() != null ? game.getCombat().getDefendingPlayerRelatedTo(source) : null);
         getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
 
+        int excess = damageIn - getLethalDamage();
+
         GameEventCardDamaged.DamageType damageType = DamageType.Normal;
-        if (isPlaneswalker()) {
+        if (isPlaneswalker()) { // 120.3c
             subtractCounter(CounterType.get(CounterEnumType.LOYALTY), damageIn);
         }
         if (isCreature()) {
@@ -5113,15 +5124,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             boolean wither = (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.alwaysWither)
                     || source.hasKeyword(Keyword.WITHER) || source.hasKeyword(Keyword.INFECT));
 
-            if (isInPlay()) {
-                if (wither) {
-                    addCounter(CounterType.get(CounterEnumType.M1M1), damageIn, source.getController(), true, counterTable);
-                    damageType = DamageType.M1M1Counters;
-                }
-                else {
-                    damage += damageIn;
-                    view.updateDamage(this);
-                }
+            if (wither) { // 120.3d
+                addCounter(CounterType.get(CounterEnumType.M1M1), damageIn, source.getController(), true, counterTable);
+                damageType = DamageType.M1M1Counters;
+            }
+            else { // 120.3e
+                damage += damageIn;
+                view.updateDamage(this);
             }
 
             if (source.hasKeyword(Keyword.DEATHTOUCH) && isCreature()) {
@@ -5133,8 +5142,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             game.fireEvent(new GameEventCardDamaged(this, source, damageIn, damageType));
         }
 
-        if (damageIn > 0) {
-            damageMap.put(source, this, damageIn);
+        damageMap.put(source, this, damageIn);
+
+        if (excess > 0) {
+            // Run triggers
+            runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.DamageSource, source);
+            runParams.put(AbilityKey.DamageTarget, this);
+            runParams.put(AbilityKey.DamageAmount, excess);
+            runParams.put(AbilityKey.IsCombatDamage, isCombat);
+            getGame().getTriggerHandler().runTrigger(TriggerType.ExcessDamage, runParams, false);
         }
 
         return damageIn;
