@@ -66,6 +66,8 @@ public class RestartGameEffect extends SpellAbilityEffect {
         TriggerHandler trigHandler = game.getTriggerHandler();
         trigHandler.clearDelayedTrigger();
         trigHandler.suppressMode(TriggerType.ChangesZone);
+        // Avoid Psychic Surgery trigger in new game
+        trigHandler.suppressMode(TriggerType.Shuffled);
 
         game.getStack().reset();
         GameAction action = game.getAction();
@@ -80,18 +82,8 @@ public class RestartGameEffect extends SpellAbilityEffect {
             player.setStartingLife(psc.getStartingLife());
             player.setPoisonCounters(0, sa.getHostCard());
             player.resetSpellCastThisGame();
+            player.onCleanupPhase();
             player.setLandsPlayedLastTurn(0);
-            player.resetLandsPlayedThisTurn();
-            player.resetInvestigatedThisTurn();
-            player.resetCycledThisTurn();
-            player.resetNumDiscardedThisTurn();
-            player.resetNumDrawnThisTurn();
-            player.resetNumTokenCreatedThisTurn();
-            player.resetProwl();
-            player.resetSacrificedThisTurn();
-            player.resetSpellsCastThisTurn();
-            player.resetPreventNextDamage();
-            player.resetPreventNextDamageWithEffect();
 
             List<Card> newLibrary = playerLibraries.get(player);
             for (Card c : newLibrary) {
@@ -101,7 +93,8 @@ public class RestartGameEffect extends SpellAbilityEffect {
 
             player.shuffle(null);
         }
-    
+
+        trigHandler.clearSuppression(TriggerType.Shuffled);
         trigHandler.clearSuppression(TriggerType.ChangesZone);
     
         game.resetTurnOrder();
