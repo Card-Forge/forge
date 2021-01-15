@@ -1,0 +1,5 @@
+Name:Glacial Floodplain
+ManaCost:no cost
+Types:Snow Land Plains Island
+K:CARDNAME enters the battlefield tapped.
+Oracle:({T}: Add {W} or {U}.)\nGlacial Floodplain enters the battlefield tapped.
