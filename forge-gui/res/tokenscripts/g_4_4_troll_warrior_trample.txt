@@ -1,0 +1,7 @@
+Name:Troll Warrior
+Colors:green
+ManaCost:no cost
+PT:4/4
+Types:Creature Troll Warrior
+K:Trample
+Oracle:Trample
