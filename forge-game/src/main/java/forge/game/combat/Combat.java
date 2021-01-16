@@ -24,6 +24,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
 import forge.util.CardTranslation;
@@ -673,7 +674,10 @@ public class Combat {
             if (firstStrikeDamage) {
                 combatantsThatDealtFirstStrikeDamage.add(blocker);
             }
-            
+
+            // Run replacement effects
+            blocker.getGame().getReplacementHandler().run(ReplacementType.AssignDealDamage, AbilityKey.mapFromAffected(blocker));
+
             CardCollection attackers = attackersOrderedForDamageAssignment.get(blocker);
 
             final int damage = blocker.getNetCombatDamage();
@@ -709,7 +713,10 @@ public class Combat {
             if (firstStrikeDamage) {
                 combatantsThatDealtFirstStrikeDamage.add(attacker);
             }
-            
+
+            // Run replacement effects
+            attacker.getGame().getReplacementHandler().run(ReplacementType.AssignDealDamage, AbilityKey.mapFromAffected(attacker));
+
             // If potential damage is 0, continue along
             final int damageDealt = attacker.getNetCombatDamage();
             if (damageDealt <= 0) {

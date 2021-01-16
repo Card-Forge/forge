@@ -243,7 +243,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             source.setController(activator, 0);
             final Spell spell = (Spell) sp;
             if (spell.isCastFaceDown()) {
-                source.turnFaceDown();
+                // Need to override for double faced cards
+                source.turnFaceDown(true);
             } else if (source.isFaceDown()) {
                 source.turnFaceUp(null);
             }

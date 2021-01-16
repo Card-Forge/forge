@@ -3,6 +3,7 @@ package forge.game.card;
 import com.google.common.collect.Iterables;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaCostShard;
 import forge.game.Direction;
 import forge.game.EvenOdd;
 import forge.game.Game;
@@ -14,6 +15,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
+import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
@@ -24,6 +26,7 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -1831,6 +1834,61 @@ public class CardProperty {
             if (card.equals(obj)) {
                 return false;
             }
+        } else if (property.equals("CanPayManaCost")) {
+            final class CheckCanPayManaCost {
+                private List<Mana> manaPaid;
+                private List<ManaCostShard> manaCost;
+                // check shards recursively
+                boolean checkShard(int index) {
+                    if (index >= manaCost.size()) {
+                        return true;
+                    }
+                    ManaCostShard shard = manaCost.get(index);
+                    // ignore X cost
+                    if (shard == ManaCostShard.X) {
+                        return checkShard(index + 1);
+                    }
+                    for (int i = 0; i < manaPaid.size(); i++) {
+                        Mana mana = manaPaid.get(i);
+                        if (shard.isColor(mana.getColor()) || (shard.isSnow() && mana.isSnow())) {
+                            manaPaid.remove(i);
+                            if (checkShard(index + 1)) {
+                                return true;
+                            }
+                            manaPaid.add(i, mana);
+                        }
+                        if (shard.isGeneric() && !shard.isSnow()) {
+                            // Handle 2 generic mana
+                            if (shard.getCmc() == 2) {
+                                manaCost.add(ManaCostShard.GENERIC);
+                            }
+                            manaPaid.remove(i);
+                            if (checkShard(index + 1)) {
+                                return true;
+                            }
+                            manaPaid.add(i, mana);
+                            if (shard.getCmc() == 2) {
+                                manaCost.remove(manaCost.size() - 1);
+                            }
+                        }
+                    }
+                    return false;
+                }
+                boolean check() {
+                    manaPaid = new ArrayList<>(spellAbility.getPayingMana());
+                    manaCost = new ArrayList<>();
+                    card.getManaCost().forEach(manaCost::add);
+                    Collections.sort(manaCost);
+                    //It seems the above codes didn't add generic mana cost ?
+                    //Add generic cost below to fix it.
+                    int genericCost = card.getManaCost().getGenericCost();
+                    while (genericCost-- > 0) {
+                        manaCost.add(ManaCostShard.GENERIC);
+                    }
+                    return checkShard(0);
+                }
+            }
+            return new CheckCanPayManaCost().check();
         } else {
             // StringType done in CardState
             if (!card.getCurrentState().hasProperty(property, sourceController, source, spellAbility)) {
