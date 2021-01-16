@@ -20,6 +20,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardFactoryUtil;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -216,8 +217,16 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtCards.remove(original);
             }
 
-            // only one mode can be used
-            SpellAbility tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(tgtCard, sas);
+            SpellAbility tgtSA;
+
+            if (!sa.hasParam("CastFaceDown")) {
+                // only one mode can be used
+                tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(tgtCard, sas);
+            } else {
+                // For Illusionary Mask effect
+                tgtSA = CardFactoryUtil.abilityMorphDown(tgtCard);
+            }
+
             final boolean noManaCost = sa.hasParam("WithoutManaCost");
             if (noManaCost) {
                 tgtSA = tgtSA.copyWithNoManaCost();
@@ -257,7 +266,12 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("ReplaceGraveyard")) {
                 addReplaceGraveyardEffect(tgtCard, sa, sa.getParam("ReplaceGraveyard"));
             }
-            
+
+            // For Illusionary Mask effect
+            if (sa.hasParam("ReplaceIlluMask")) {
+                addIllusionaryMaskReplace(tgtCard, sa);
+            }
+
             tgtSA.setSVar("IsCastFromPlayEffect", "True");
 
             if (controller.getController().playSaFromPlayEffect(tgtSA)) {
@@ -279,7 +293,7 @@ public class PlayEffect extends SpellAbilityEffect {
         }
     } // end resolve
 
-    
+
     protected void addReplaceGraveyardEffect(Card c, SpellAbility sa, String zone) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
@@ -322,6 +336,44 @@ public class PlayEffect extends SpellAbilityEffect {
         eff.updateStateForView();
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
+        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        game.getAction().moveTo(ZoneType.Command, eff, sa);
+        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+    }
+
+
+    protected void addIllusionaryMaskReplace(Card c, SpellAbility sa) {
+        final Card hostCard = sa.getHostCard();
+        final Game game = hostCard.getGame();
+        final Player controller = sa.getActivatingPlayer();
+        final String name = hostCard.getName() + "'s Effect";
+        final String image = hostCard.getImageKey();
+        final Card eff = createEffect(sa, controller, name, image);
+
+        eff.addRemembered(c);
+
+        String [] repeffstrs = {
+            "Event$ AssignDealDamage | ValidCard$ Card.IsRemembered+faceDown " +
+            "| Description$ If the creature that spell becomes as it resolves has not been turned face up" +
+            " and would assign or deal damage, be dealt damage, or become tapped, instead it's turned face up" +
+            " and assigns or deals damage, is dealt damage, or becomes tapped.",
+            "Event$ DealtDamage | ValidCard$ Card.IsRemembered+faceDown",
+            "Event$ Tap | ValidCard$ Card.IsRemembered+faceDown"
+        };
+        String effect = "DB$ SetState | Defined$ ReplacedCard | Mode$ TurnFace";
+
+        for (int i = 0; i < 3; ++i) {
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstrs[i], eff, true);
+            re.setLayer(ReplacementLayer.Other);
+            re.setOverridingAbility(AbilityFactory.getAbility(effect, eff));
+            eff.addReplacementEffect(re);
+        }
+
+        addExileOnMovedTrigger(eff, "Battlefield");
+        addExileOnCounteredTrigger(eff);
+
+        eff.updateStateForView();
+
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         game.getAction().moveTo(ZoneType.Command, eff, sa);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);

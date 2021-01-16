@@ -7,6 +7,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -15,6 +16,7 @@ import forge.game.card.CardDamageMap;
 import forge.game.card.CardUtil;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
 import forge.util.Localizer;
@@ -128,6 +130,16 @@ public class DamageDealEffect extends DamageBaseEffect {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
 
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(hostCard, sa.getParam("DamageSource"), sa);
+        if (definedSources == null || definedSources.isEmpty()) {
+            return;
+        }
+
+        for (Card source : definedSources) {
+            // Run replacement effects
+            game.getReplacementHandler().run(ReplacementType.AssignDealDamage, AbilityKey.mapFromAffected(source));
+        }
+
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(hostCard, damage, sa);
 
@@ -170,11 +182,6 @@ public class DamageDealEffect extends DamageBaseEffect {
             sa.setDamageMap(damageMap);
             sa.setPreventMap(preventMap);
             usedDamageMap = true;
-        }
-
-        final List<Card> definedSources = AbilityUtils.getDefinedCards(hostCard, sa.getParam("DamageSource"), sa);
-        if (definedSources == null || definedSources.isEmpty()) {
-            return;
         }
 
         for (Card source : definedSources) {

@@ -3677,6 +3677,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void tap(boolean attacker) {
         if (tapped) { return; }
 
+        // Run replacement effects
+        getGame().getReplacementHandler().run(ReplacementType.Tap, AbilityKey.mapFromAffected(this));
+
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
         runParams.put(AbilityKey.Attacker, attacker);
@@ -5095,6 +5098,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (!isInPlay()) { // if target is not in play it can't receive any damage
             return 0;
         }
+
+        // Run replacement effects
+        getGame().getReplacementHandler().run(ReplacementType.DealtDamage, AbilityKey.mapFromAffected(this));
 
         addReceivedDamageFromThisTurn(source, damageIn);
         source.addDealtDamageToThisTurn(this, damageIn);

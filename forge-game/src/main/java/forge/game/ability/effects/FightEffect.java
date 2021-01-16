@@ -9,6 +9,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardDamageMap;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.util.Localizer;
@@ -153,6 +154,10 @@ public class FightEffect extends DamageBaseEffect {
             preventMap = new CardDamageMap();
             usedDamageMap = false;
         }
+
+        // Run replacement effects
+        fighterA.getGame().getReplacementHandler().run(ReplacementType.AssignDealDamage, AbilityKey.mapFromAffected(fighterA));
+        fighterB.getGame().getReplacementHandler().run(ReplacementType.AssignDealDamage, AbilityKey.mapFromAffected(fighterB));
 
         // 701.12c If a creature fights itself, it deals damage to itself equal to twice its power.
 
