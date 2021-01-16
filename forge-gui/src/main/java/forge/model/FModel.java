@@ -102,7 +102,7 @@ public final class FModel {
         System.out.println("Forge v." + GuiBase.getInterface().getCurrentVersion() + " (" + GuiBase.getInterface() + ")");
         //Device
         if (GuiBase.isAndroid()) //todo get device on other mobile platforms
-            System.out.println(GuiBase.getDeviceName() + " (Android " + GuiBase.getAndroidRelease() + " API Level " + GuiBase.getAndroidAPILevel() + ")");
+            System.out.println(GuiBase.getDeviceName() + " (RAM: " + GuiBase.getDeviceRAM() + "MB, Android " + GuiBase.getAndroidRelease() + " API Level " + GuiBase.getAndroidAPILevel() + ")");
         else
             System.out.println(System.getProperty("os.name") + " (" + System.getProperty("os.version") + " " + System.getProperty("os.arch") + ")");
 

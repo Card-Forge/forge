@@ -75,6 +75,7 @@ public class Forge implements ApplicationListener {
     public static boolean gameInProgress = false;
     public static int cacheSize = 400;
     public static int totalDeviceRAM = 0;
+    public static int androidVersion = 0;
     public static boolean autoCache = false;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
@@ -86,8 +87,9 @@ public class Forge implements ApplicationListener {
             isPortraitMode = androidOrientation;
             totalDeviceRAM = totalRAM;
             isTabletDevice = isTablet;
+            androidVersion = AndroidAPI;
         }
-        GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI);
+        GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
         return app;
     }
 
