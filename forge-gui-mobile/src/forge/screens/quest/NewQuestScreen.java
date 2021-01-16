@@ -131,8 +131,8 @@ public class NewQuestScreen extends FScreen {
     @SuppressWarnings("unused")
     private final FLabel lblDifficulty = scroller.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblDifficulty") + ":").build());
     private final FComboBox<String> cbxDifficulty = scroller.add(new FComboBox<>(new String[]{
-        Localizer.getInstance().getMessage("rbEasy"), Localizer.getInstance().getMessage("rbMedium"),
-        Localizer.getInstance().getMessage("rbHard"), Localizer.getInstance().getMessage("rbExpert")
+        Localizer.getInstance().getMessage("questDifficultyEasy"), Localizer.getInstance().getMessage("questDifficultyMedium"),
+        Localizer.getInstance().getMessage("questDifficultyHard"), Localizer.getInstance().getMessage("questDifficultyExpert")
     }));
 
     @SuppressWarnings("unused")

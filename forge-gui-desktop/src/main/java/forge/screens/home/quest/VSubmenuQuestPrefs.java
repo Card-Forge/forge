@@ -228,10 +228,10 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlDifficulty.removeAll();
         pnlDifficulty.add(lblErrDifficulty, "w 100%!, h 30px!, span 5 1");
         pnlDifficulty.add(new FLabel.Builder().text("").build(), labelConstraints);
-        pnlDifficulty.add(new FLabel.Builder().text(localizer.getMessage("lblEasy")).build(), fieldConstraints);
-        pnlDifficulty.add(new FLabel.Builder().text(localizer.getMessage("lblMedium")).build(), fieldConstraints);
-        pnlDifficulty.add(new FLabel.Builder().text(localizer.getMessage("lblHard")).build(), fieldConstraints);
-        pnlDifficulty.add(new FLabel.Builder().text(localizer.getMessage("lblExpert")).build(), fieldConstraints);
+        pnlDifficulty.add(new FLabel.Builder().text(localizer.getMessage("questDifficultyEasy")).build(), fieldConstraints);
+        pnlDifficulty.add(new FLabel.Builder().text(localizer.getMessage("questDifficultyMedium")).build(), fieldConstraints);
+        pnlDifficulty.add(new FLabel.Builder().text(localizer.getMessage("questDifficultyHard")).build(), fieldConstraints);
+        pnlDifficulty.add(new FLabel.Builder().text(localizer.getMessage("questDifficultyExpert")).build(), fieldConstraints);
         pnlDifficulty.add(new FLabel.Builder().text(localizer.getMessage("lblWinsforBooster")).fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlDifficulty.add(new PrefInput(QPref.WINS_BOOSTER_EASY, QuestPreferencesErrType.DIFFICULTY), fieldConstraints);
         pnlDifficulty.add(new PrefInput(QPref.WINS_BOOSTER_MEDIUM, QuestPreferencesErrType.DIFFICULTY), fieldConstraints);

@@ -48,10 +48,10 @@ public enum VSubmenuQuestStart implements IVSubmenu<CSubmenuQuestStart> {
     private final JPanel pnlOptions = new JPanel();
 
     /* First column */
-    private final FRadioButton radEasy = new FRadioButton(localizer.getMessage("rbEasy"));
-    private final FRadioButton radMedium = new FRadioButton(localizer.getMessage("rbMedium"));
-    private final FRadioButton radHard = new FRadioButton(localizer.getMessage("rbHard"));
-    private final FRadioButton radExpert = new FRadioButton(localizer.getMessage("rbExpert"));
+    private final FRadioButton radEasy = new FRadioButton(localizer.getMessage("questDifficultyEasy"));
+    private final FRadioButton radMedium = new FRadioButton(localizer.getMessage("questDifficultyMedium"));
+    private final FRadioButton radHard = new FRadioButton(localizer.getMessage("questDifficultyHard"));
+    private final FRadioButton radExpert = new FRadioButton(localizer.getMessage("questDifficultyExpert"));
     private final FCheckBox boxFantasy = new FCheckBox(localizer.getMessage("rbFantasyMode"));
     private final FCheckBox boxCommander = new FCheckBox(localizer.getMessage("rbCommanderSubformat"));
 
