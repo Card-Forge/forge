@@ -41,7 +41,8 @@ public class WrappedAbility extends Ability {
             ApiType.ChangeZone,
             ApiType.Destroy,
             ApiType.Token,
-            ApiType.SetState
+            ApiType.SetState,
+            ApiType.Play
             );
 
     private final SpellAbility sa;

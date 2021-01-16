@@ -131,7 +131,14 @@ public class PlayEffect extends SpellAbilityEffect {
             }
         }
         else {
-            tgtCards = getTargetCards(sa);
+            tgtCards = new CardCollection();
+            // filter only cards that didn't changed zones
+            for (Card c : getTargetCards(sa)) {
+                Card gameCard = game.getCardState(c, null);
+                if (c.equalsWithTimestamp(gameCard)) {
+                    tgtCards.add(gameCard);
+                }
+            }
         }
 
         if (tgtCards.isEmpty()) {
