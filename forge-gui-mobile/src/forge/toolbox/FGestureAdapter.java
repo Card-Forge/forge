@@ -20,6 +20,7 @@ public abstract class FGestureAdapter extends InputAdapter {
     public abstract boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical);
     public abstract boolean panStop(float x, float y);
     public abstract boolean zoom(float x, float y, float amount);
+    public abstract boolean scrolled(float amountX, float amountY);
 
     private float tapSquareSize, longPressDelay, lastTapX, lastTapY, tapSquareCenterX, tapSquareCenterY;
     private long tapCountInterval, flingDelay, lastTapTime;

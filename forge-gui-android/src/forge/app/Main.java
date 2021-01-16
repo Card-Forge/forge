@@ -68,7 +68,7 @@ public class Main extends AndroidApplication {
 
         boolean permissiongranted =  checkPermission();
         Gadapter = new AndroidAdapter(this.getContext());
-        initForge(Gadapter, permissiongranted, totalMemory, isTabletDevice(this.getContext()), android.os.Build.VERSION.SDK_INT);
+        initForge(Gadapter, permissiongranted, totalMemory, isTabletDevice(this.getContext()), Build.VERSION.SDK_INT, Build.VERSION.RELEASE);
 
         //permission
         if(!permissiongranted){
@@ -207,7 +207,7 @@ public class Main extends AndroidApplication {
             builder.show();
     }
 
-    private void initForge(AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, int AndroidVersion){
+    private void initForge(AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, int AndroidAPI, String AndroidRelease){
         boolean isPortrait;
         if (permissiongranted){
             //establish assets directory
@@ -247,12 +247,12 @@ public class Main extends AndroidApplication {
                 Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
 
-            initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig, isPortrait, totalRAM, isTabletDevice, AndroidVersion));
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig, isPortrait, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
         } else {
             isPortrait = true;
             //set current orientation
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, isPortrait, totalRAM, isTabletDevice, AndroidVersion));
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, isPortrait, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
         }
 
     }
@@ -290,6 +290,19 @@ public class Main extends AndroidApplication {
     //special clipboard that words on Android
     private class AndroidClipboard implements com.badlogic.gdx.utils.Clipboard {
         private final ClipboardManager cm = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+
+        @Override
+        public boolean hasContents() {
+            if (cm.getPrimaryClip().getItemCount() > 0) {
+                try {
+                    return cm.getPrimaryClip().getItemAt(0).coerceToText(getContext()).length() > 0;
+                }
+                catch (Exception ex) {
+                    return false;
+                }
+            }
+            return false;
+        }
 
         @Override
         public String getContents() {
@@ -438,6 +451,28 @@ public class Main extends AndroidApplication {
         public void convertToJPEG(InputStream input, OutputStream output) {
             Bitmap bmp = BitmapFactory.decodeStream(input);
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, output);
+        }
+    }
+
+    public String getDeviceName() {
+        String manufacturer = Build.MANUFACTURER;
+        String model = Build.MODEL;
+        if (model.toLowerCase().startsWith(manufacturer.toLowerCase())) {
+            return capitalize(model);
+        } else {
+            return capitalize(manufacturer) + " " + model;
+        }
+    }
+
+    private String capitalize(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+        char first = s.charAt(0);
+        if (Character.isUpperCase(first)) {
+            return s;
+        } else {
+            return Character.toUpperCase(first) + s.substring(1);
         }
     }
 }
