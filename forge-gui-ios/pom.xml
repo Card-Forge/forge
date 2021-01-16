@@ -73,7 +73,7 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-backend-robovm</artifactId>
-            <version>1.9.10</version>
+            <version>1.9.13</version>
         </dependency>
     </dependencies>
 </project>

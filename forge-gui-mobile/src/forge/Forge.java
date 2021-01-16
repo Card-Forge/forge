@@ -75,10 +75,9 @@ public class Forge implements ApplicationListener {
     public static boolean gameInProgress = false;
     public static int cacheSize = 400;
     public static int totalDeviceRAM = 0;
-    public static int androidVersion = 0;
     public static boolean autoCache = false;
 
-    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidVersion) {
+    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
         if (GuiBase.getInterface() == null) {
             clipboard = clipboard0;
             deviceAdapter = deviceAdapter0;
@@ -87,8 +86,8 @@ public class Forge implements ApplicationListener {
             isPortraitMode = androidOrientation;
             totalDeviceRAM = totalRAM;
             isTabletDevice = isTablet;
-            androidVersion = AndroidVersion;
         }
+        GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI);
         return app;
     }
 
@@ -877,19 +876,19 @@ public class Forge implements ApplicationListener {
         }
 
         @Override
-        public boolean scrolled(int amount) {
+        public boolean scrolled(float amountX, float amountY) {
             updatePotentialListeners(mouseMovedX, mouseMovedY);
 
             if (KeyInputAdapter.isCtrlKeyDown()) { //zoom in or out based on amount
-                return zoom(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amount);
+                return zoom(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amountY);
             }
 
             boolean handled;
             if (KeyInputAdapter.isShiftKeyDown()) {
-                handled = pan(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amount, 0, false);
+                handled = pan(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amountX, 0, false);
             }
             else {
-                handled = pan(mouseMovedX, mouseMovedY, 0, -Utils.AVG_FINGER_HEIGHT * amount, true);
+                handled = pan(mouseMovedX, mouseMovedY, 0, -Utils.AVG_FINGER_HEIGHT * amountY, true);
             }
             if (panStop(mouseMovedX, mouseMovedY)) {
                 handled = true;

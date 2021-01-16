@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.google.common.collect.ImmutableList;
 import forge.FThreads;
 import forge.Forge;
+import forge.GuiBase;
 import forge.download.GuiDownloadZipService;
 import forge.properties.ForgeConstants;
 import forge.screens.SplashScreen;
@@ -50,7 +51,7 @@ public class AssetsDownloader {
                                 "https://releases.cardforge.org/forge/forge-gui-android/" + version + "/" + filename,
                                 Forge.getDeviceAdapter().getDownloadsDir(), null, splashScreen.getProgressBar()).download(filename);
                         if (apkFile != null) {
-                            if (Forge.androidVersion < 29) { //Android 9 and below...
+                            if (GuiBase.getAndroidAPILevel() < 29) { //Android 9 and below...
                                 Forge.getDeviceAdapter().openFile(apkFile);
                                 Forge.exit(true);
                                 return;

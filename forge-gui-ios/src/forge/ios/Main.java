@@ -33,7 +33,7 @@ public class Main extends IOSApplication.Delegate {
         config.useCompass = false;
         ForgePreferences prefs = FModel.getPreferences();
         boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);//todo get totalRAM && isTabletDevice
-        final ApplicationListener app = Forge.getApp(new IOSClipboard(), new IOSAdapter(), assetsDir, propertyConfig, false, 0, false, 0);
+        final ApplicationListener app = Forge.getApp(new IOSClipboard(), new IOSAdapter(), assetsDir, propertyConfig, false, 0, false, 0, "", "");
         final IOSApplication iosApp = new IOSApplication(app, config);
         return iosApp;
     }
@@ -46,6 +46,11 @@ public class Main extends IOSApplication.Delegate {
 
     //special clipboard that works on iOS
     private static final class IOSClipboard implements com.badlogic.gdx.utils.Clipboard {
+        @Override
+        public boolean hasContents() {
+            return UIPasteboard.getGeneralPasteboard().toString().length() > 0;
+        }
+
         @Override
         public String getContents() {
             return UIPasteboard.getGeneralPasteboard().getString();
