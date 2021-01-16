@@ -11,6 +11,7 @@ public class GuiBase {
     private static String deviceName = "";
     private static String androidRelease = "";
     private static int androidAPI = 0;
+    private static int deviceRAM = 0;
 
     public static IGuiBase getInterface() { return guiInterface; }
     public static void setInterface(IGuiBase i0) { guiInterface = i0; }
@@ -18,10 +19,16 @@ public class GuiBase {
     public static void setIsAndroid(boolean value) { isAndroidport = value; }
     public static boolean isAndroid() { return isAndroidport; }
 
-    public static void setDeviceInfo(String device, String androidName, int androidAPI) { deviceName = device; androidRelease = androidName; androidAPI = androidAPI; }
+    public static void setDeviceInfo(String DeviceName, String AndroidName, int AndroidAPI, int RAM) {
+        deviceName = DeviceName;
+        androidRelease = AndroidName;
+        androidAPI = AndroidAPI;
+        deviceRAM = RAM;
+    }
     public static String getDeviceName() { return deviceName; }
     public static String getAndroidRelease() { return androidRelease; }
     public static int getAndroidAPILevel() { return androidAPI; }
+    public static int getDeviceRAM() { return deviceRAM; }
 
     public static boolean isNetworkplay() { return networkplay; }
     public static void setNetworkplay(boolean value) { networkplay = value; }
