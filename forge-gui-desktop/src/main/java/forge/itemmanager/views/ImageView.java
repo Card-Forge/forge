@@ -225,7 +225,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                                     group.isCollapsed = !group.isCollapsed;
                                     btnExpandCollapseAll.updateIsAllCollapsed();
                                     clearSelection(); //must clear selection since indices and visible items will be changing
-                                    updateLayout(false);
+                                    updateLayout(true);
                                 }
                                 break;
                             }
