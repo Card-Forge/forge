@@ -31,4 +31,4 @@ Simic Ascendancy|The Ascension|As you can see, we are going through a period of 
 Test of Endurance|The Test|So... did I pass?
 Thassa's Oracle|The Prophecy of Victory|I see... nothing. We must've won.
 Triskaidekaphobia|The Fear of 13|It's just a silly ancient superstition... right?
-Vraska, Golgari Queen|The Flurry of Assassins|How good is your dodging?
+Emblem - Vraska, Golgari Queen|The Flurry of Assassins|How good is your dodging?
