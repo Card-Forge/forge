@@ -1877,7 +1877,10 @@ public class CardProperty {
                 boolean check() {
                     manaPaid = new ArrayList<>(spellAbility.getPayingMana());
                     manaCost = new ArrayList<>();
-                    card.getManaCost().forEach(manaCost::add);
+                    List<ManaCostShard> manaCostShards = manaCost;
+                    for (ManaCostShard manaCostShard : card.getManaCost()) {
+                        manaCostShards.add(manaCostShard);
+                    }
                     Collections.sort(manaCost);
                     //It seems the above codes didn't add generic mana cost ?
                     //Add generic cost below to fix it.
