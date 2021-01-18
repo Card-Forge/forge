@@ -1,6 +1,8 @@
 package forge.game.card;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
@@ -26,7 +28,6 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -1875,8 +1876,8 @@ public class CardProperty {
                     return false;
                 }
                 boolean check() {
-                    manaPaid = new ArrayList<>(spellAbility.getPayingMana());
-                    manaCost = new ArrayList<>(card.getManaCost());
+                    manaPaid = Lists.newArrayList(spellAbility.getPayingMana());
+                    manaCost = Lists.newArrayList(card.getManaCost());
                     Collections.sort(manaCost);
                     //It seems the above codes didn't add generic mana cost ?
                     //Add generic cost below to fix it.
