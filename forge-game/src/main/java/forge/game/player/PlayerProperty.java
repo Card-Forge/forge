@@ -69,6 +69,10 @@ public class PlayerProperty {
             if (player.equals(source.getOwner())) {
                 return false;
             }
+        } else if (property.equals("CardOwner")) {
+            if (!player.equals(source.getOwner())) {
+                return false;
+            }
         } else if (property.equals("isMonarch")) {
             if (!player.isMonarch()) {
                 return false;
