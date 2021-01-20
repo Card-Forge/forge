@@ -9,4 +9,5 @@ SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggeredCard$CardToughness
 SVar:PlayMain1:TRUE
 DeckHints:Type$Elf
+DeckHas:Ability$LifeGain & Ability$Token
 Oracle:At the beginning of each upkeep, create a 1/1 green Elf Warrior creature token.\nWhenever another Elf enters the battlefield under your control, you gain life equal to it's thoughness
