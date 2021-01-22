@@ -2012,7 +2012,7 @@ public class AbilityUtils {
         SpellAbility firstSpell = c.getFirstSpellAbility();
         Map<String, String> params = Maps.newHashMap(firstSpell.getMapParams());
         ApiType api = AbilityRecordType.getRecordType(params).getApiTypeOf(params);
-        AbilitySub subAbility = (AbilitySub) AbilityFactory.getAbility(AbilityRecordType.SubAbility, api, params, null, c.getCurrentState(), null);
+        AbilitySub subAbility = (AbilitySub) AbilityFactory.getAbility(AbilityRecordType.SubAbility, api, params, null, c.getCurrentState(), c.getCurrentState());
 
         subAbility.setActivatingPlayer(sa.getActivatingPlayer());
         subAbility.setHostCard(sa.getHostCard());
