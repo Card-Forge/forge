@@ -169,6 +169,14 @@ public class AbilityUtils {
                     cards.addAll(Iterables.filter((Iterable<?>) crd, Card.class));
                 }
             }
+            else if (defined.contains("HostCard")) { //Triggered*HostCard
+                int hcPosition = defined.indexOf("HostCard");
+                AbilityKey type = AbilityKey.fromString(defined.substring(9, hcPosition));
+                final Object o = root.getTriggeringObject(type);
+                if (o instanceof SpellAbility) {
+                    c = ((SpellAbility) o).getHostCard();
+                }
+            }
             else {
                 AbilityKey type = AbilityKey.fromString(defined.substring(9));
                 final Object crd = root.getTriggeringObject(type);
