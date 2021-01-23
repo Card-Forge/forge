@@ -21,7 +21,6 @@ import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.Iterables;
 import java.util.List;
 
 import static forge.util.TextUtil.toManaString;
