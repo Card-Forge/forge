@@ -28,6 +28,7 @@ import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.NameGenerator;
 import forge.util.gui.SOptionPane;
+import forge.view.FView;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -517,6 +518,11 @@ public class VLobby implements ILobbyView {
     }
 
     private void selectMainDeck(final int playerIndex) {
+        // not fully done loading yet, avoid any changes
+        if (FView.SINGLETON_INSTANCE.getSplash() != null) {
+            return;
+        }
+
         if (hasVariant(GameType.Commander) || hasVariant(GameType.Oathbreaker) || hasVariant(GameType.TinyLeaders) || hasVariant(GameType.Brawl)) {
             // These game types use specific deck panel
             return;
@@ -524,6 +530,10 @@ public class VLobby implements ILobbyView {
         final FDeckChooser mainChooser = getDeckChooser(playerIndex);
         final DeckType type = mainChooser.getSelectedDeckType();
         final Deck deck = mainChooser.getDeck();
+        // something went wrong, clear selection to prevent error loop
+        if (deck == null) {
+            mainChooser.getLstDecks().setSelectedIndex(0);
+        }
         final Collection<DeckProxy> selectedDecks = mainChooser.getLstDecks().getSelectedItems();
         if (playerIndex < activePlayersNum && lobby.mayEdit(playerIndex)) {
             final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
