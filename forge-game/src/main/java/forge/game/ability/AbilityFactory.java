@@ -235,7 +235,6 @@ public final class AbilityFactory {
             spellAbility.putParam("PrecostDesc", "Forecast — ");
         }
         if (mapParams.containsKey("Boast")) {
-            spellAbility.putParam("ActivationLimit", "1");
             spellAbility.putParam("PresentDefined", "Self");
             spellAbility.putParam("IsPresent", "Card.attackedThisTurn");
             spellAbility.putParam("PrecostDesc", "Boast — ");
