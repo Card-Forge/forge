@@ -1,4 +1,4 @@
-Name:Firja's Judgment
+Name:Firja's Retribution
 ManaCost:1 W W B
 Types:Enchantment Saga
 K:Saga:3:TrigAngel,DBAnimateAll,TrigPump
