@@ -431,22 +431,22 @@ Prerelease=6 Boosters, 1 RareMythic+
 405 C Masked Vandal
 
 [ModalDoubleFaceCards]
-0 Alrund, God of the Cosmos|KHM
-0 Barkchannel Pathway|KHM
-0 Birgi, God of Storytelling|KHM
-0 Blightstep Pathway|KHM
-0 Cosima, God of the Voyage|KHM
-0 Darkbore Pathway|KHM
-0 Egon, God of Death|KHM
-0 Esika, God of the Tree|KHM
-0 Halvar, God of Battle|KHM
-0 Hengegate Pathway|KHM
-0 Jorn, God of Winter|KHM
-0 Kolvori, God of Kinship|KHM
-0 Reidane, God of the Worthy|KHM
-0 Tergrid, God of Fright|KHM
-0 Toralf, God of Fury|KHM
-0 Valki, God of Lies|KHM
+1 Alrund, God of the Cosmos|KHM
+1 Esika, God of the Tree|KHM
+1 Halvar, God of Battle|KHM
+1 Toralf, God of Fury|KHM
+1 Valki, God of Lies|KHM
+2 Barkchannel Pathway|KHM
+2 Birgi, God of Storytelling|KHM
+2 Blightstep Pathway|KHM
+2 Cosima, God of the Voyage|KHM
+2 Darkbore Pathway|KHM
+2 Egon, God of Death|KHM
+2 Hengegate Pathway|KHM
+2 Jorn, God of Winter|KHM
+2 Kolvori, God of Kinship|KHM
+2 Reidane, God of the Worthy|KHM
+2 Tergrid, God of Fright|KHM
 
 [tokens]
 ce_shard
