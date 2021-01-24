@@ -28,7 +28,6 @@ import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.NameGenerator;
 import forge.util.gui.SOptionPane;
-import forge.view.FView;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -518,11 +517,6 @@ public class VLobby implements ILobbyView {
     }
 
     private void selectMainDeck(final int playerIndex) {
-        // not fully done loading yet, avoid any changes
-        if (FView.SINGLETON_INSTANCE.getSplash() != null) {
-            return;
-        }
-
         if (hasVariant(GameType.Commander) || hasVariant(GameType.Oathbreaker) || hasVariant(GameType.TinyLeaders) || hasVariant(GameType.Brawl)) {
             // These game types use specific deck panel
             return;
