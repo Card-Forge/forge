@@ -1,0 +1,24 @@
+[metadata]
+Code=KHC
+Date=2021-02-05
+Name=Kaldheim Commander
+Type=Other
+
+[cards]
+1 M Lathril, Blade of the Elves
+2 M Ranar the Ever-Watchful
+3 R Cosmic Intervention
+4 R Hero of Bretagard
+5 R Stoic Farmer
+6 R Sage of the Beyond
+7 R Spectral Deluge
+8 R Tales of the Ancestors
+9 R Pact of the Serpent
+10 R Ruthless Winnower
+11 R Serpent's Soul-Jar
+12 R Bounty of Skemfar
+13 R Crown of Skemfar
+14 R Wolverine Riders
+15 R Elderfang Venom
+16 R Ethereal Valkyrie
+40 M Inspired Sphinx
