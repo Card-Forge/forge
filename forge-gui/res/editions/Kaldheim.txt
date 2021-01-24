@@ -392,7 +392,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 372 R Tyrite Sanctum
 373 R The World Tree
 
-[theme booster]
+[precon product]
 374 R Valkyrie Harbinger
 375 R Surtland Elementalist
 376 R Cleaving Reaper
