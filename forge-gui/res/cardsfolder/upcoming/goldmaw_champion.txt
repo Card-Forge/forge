@@ -2,6 +2,6 @@ Name:Goldmaw Champion
 ManaCost:2 W
 Types:Creature Dwarf Warrior
 PT:2/3
-A:AB$ Tap | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Boast$ True | SpellDescription$ Tap target creature.
+A:AB$ Tap | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Boast$ True | SpellDescription$ Tap target creature.
 SVar:NonCombatPriority:10
 Oracle:Boast — {1}{W}: Tap target creature. (Activate this ability only if this creature attacked this turn and only once each turn.)
