@@ -76,6 +76,7 @@ public abstract class GameState {
     private final Map<Card, List<String>> cardToChosenClrs = new HashMap<>();
     private final Map<Card, CardCollection> cardToChosenCards = new HashMap<>();
     private final Map<Card, String> cardToChosenType = new HashMap<>();
+    private final Map<Card, String> cardToChosenType2 = new HashMap<>();
     private final Map<Card, List<String>> cardToRememberedId = new HashMap<>();
     private final Map<Card, List<String>> cardToImprintedId = new HashMap<>();
     private final Map<Card, String> cardToNamedCard = new HashMap<>();
@@ -322,6 +323,9 @@ public abstract class GameState {
             }
             if (!c.getChosenType().isEmpty()) {
                 newText.append("|ChosenType:").append(c.getChosenType());
+            }
+            if (!c.getChosenType2().isEmpty()) {
+                newText.append("|ChosenType2:").append(c.getChosenType2());
             }
             if (!c.getNamedCard().isEmpty()) {
                 newText.append("|NamedCard:").append(c.getNamedCard());
@@ -601,6 +605,7 @@ public abstract class GameState {
         cardToChosenClrs.clear();
         cardToChosenCards.clear();
         cardToChosenType.clear();
+        cardToChosenType2.clear();
         cardToScript.clear();
         cardAttackMap.clear();
 
@@ -1055,6 +1060,12 @@ public abstract class GameState {
             c.setChosenType(entry.getValue());
         }
 
+        // Chosen type 2
+        for (Entry<Card, String> entry : cardToChosenType2.entrySet()) {
+            Card c = entry.getKey();
+            c.setChosenType2(entry.getValue());
+        }
+
         // Named card
         for (Entry<Card, String> entry : cardToNamedCard.entrySet()) {
             Card c = entry.getKey();
@@ -1286,6 +1297,8 @@ public abstract class GameState {
                     cardToChosenClrs.put(c, Arrays.asList(info.substring(info.indexOf(':') + 1).split(",")));
                 } else if (info.startsWith("ChosenType:")) {
                     cardToChosenType.put(c, info.substring(info.indexOf(':') + 1));
+                } else if (info.startsWith("ChosenType2:")) {
+                    cardToChosenType2.put(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("ChosenCards:")) {
                     CardCollection chosen = new CardCollection();
                     String[] idlist = info.substring(info.indexOf(':') + 1).split(",");
