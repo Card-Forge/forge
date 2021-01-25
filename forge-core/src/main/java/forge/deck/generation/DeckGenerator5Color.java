@@ -69,7 +69,8 @@ public class DeckGenerator5Color extends DeckGeneratorBase {
      */
     public DeckGenerator5Color(IDeckGenPool pool0, DeckFormat format0, Predicate<PaperCard> formatFilter0) {
         super(pool0, format0, formatFilter0);
-
+        format0.adjustCMCLevels(cmcLevels);
+        colors = ColorSet.fromMask(0).inverse();
     }
 
     public DeckGenerator5Color(IDeckGenPool pool0, DeckFormat format0) {
