@@ -11,4 +11,5 @@ SVar:Eff:DB$ ChangeZone | ValidTgts$ Creature | TargetsWithDefinedController$ Tr
 A:AB $ DealDamage | Cost$ SubCounter<1/LOYALTY> | ValidTgts$ Creature.tapped | NumDmg$ Y | References$ Y | TgtPrompt$ Select target tapped creature | SpellDescription$ Niko Aris deals 2 damage to target tapped creature for each card you’ve drawn this turn.
 SVar:Y:Count$YouDrewThisTurn/Twice
 A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | TokenAmount$ 1 | TokenScript$ shard | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create a Shard token.
+DeckHas:Ability$Token
 Oracle:When Niko Aris enters the battlefield, create X Shard tokens. (They’re enchantments with “{2}, Sacrifice this enchantment: Scry 1, then draw a card.”)\n[+1]: Up to one target creature you control can’t be blocked this turn. Whenever that creature deals damage this turn, return it to its owner’s hand.\n[−1]: Niko Aris deals 2 damage to target tapped creature for each card you’ve drawn this turn.\n[−1]: Create a Shard token.
