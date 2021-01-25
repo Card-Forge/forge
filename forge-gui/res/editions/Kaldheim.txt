@@ -2,38 +2,406 @@
 Code=KHM
 Date=2021-02-05
 Name=Kaldheim
+Code2=KHM
+MciCode=khm
 Type=Expansion
+BoosterCovers=3
+Booster=10 Common:!dfc:fromSheet("KHM cards"), 3 Uncommon:!dfc:fromSheet("KHM cards"), 1 RareMythic:!dfc:fromSheet("KHM cards"), 1 BasicLand
+BoosterReplaceSlotFromPrintSheet=KHM ModalDoubleFaceCards
+Prerelease=6 Boosters, 1 RareMythic+
+#BoosterBox=36 Boosters, 1 fromSheet('KHM buy a box')+
 
 [cards]
+1 C Axgard Braggart
+2 U Battershield Warrior
+3 C Battlefield Raptor
+4 C Beskir Shieldmate
+5 C Bound in Gold
+6 U Clarion Spirit
+7 C Codespell Cleric
+8 U Divine Gambit
+9 R Doomskar
+10 C Doomskar Oracle
+11 C Giant Ox
+12 R Glorious Protector
+13 C Gods' Hall Guardian
+14 C Goldmaw Champion
 15 M Halvar, God of Battle
+16 C Invoke the Divine
+17 C Iron Verdict
+18 U Kaya's Onslaught
+19 C Master Skald
+20 R Rally the Ranks
+21 R Reidane, God of the Worthy
+22 M Resplendent Marshal
+23 C Revitalize
+24 R Righteous Valkyrie
+25 U Rune of Sustenance
+26 R Runeforge Champion
+27 R Search for Glory
+28 U Shepherd of the Cosmos
+29 R Sigrid, God-Favored
+30 U Spectral Steel
+31 C Stalwart Valkyrie
+32 C Starnheim Courser
+33 M Starnheim Unleashed
+34 C Story Seeker
+35 U Usher of the Fallen
+36 U Valkyrie's Sword
+37 C Valor of the Worthy
+38 C Warhorn Blast
+39 C Wings of the Cosmos
+40 M Alrund, God of the Cosmos
+41 M Alrund's Epiphany
+42 C Annul
+43 R Ascendant Spirit
+44 C Augury Raven
+45 U Avalanche Caller
+46 C Behold the Multiverse
+47 C Berg Strider
+48 C Bind the Monster
+49 C Brinebarrow Intruder
+50 R Cosima, God of the Voyage
+51 R Cosmos Charger
+52 R Cyclone Summoner
+53 C Depart the Realm
+54 C Disdainful Stroke
+55 C Draugr Thought-Thief
+56 U Frost Augur
+57 C Frostpeak Yeti
+58 U Frostpyre Arcanist
+59 U Giant's Amulet
+60 U Glimpse the Cosmos
+61 R Graven Lore
+62 U Icebind Pillar
+63 R Icebreaker Kraken
+64 U Inga Rune-Eyes
+65 C Karfell Harbinger
+66 C Littjara Kinseekers
+67 C Mists of Littjara
+68 C Mistwalker
+69 R Mystic Reflection
+70 M Orvar, the All-Form
+71 C Pilfering Hawk
+72 C Ravenform
+73 R Reflections of Littjara
+74 C Run Ashore
+75 U Rune of Flight
+76 U Saw It Coming
+77 C Strategic Planning
+78 C Undersea Invader
+79 R Blood on the Snow
+80 U Bloodsky Berserker
+81 M Burning-Rune Demon
+82 R Crippling Fear
+83 C Deathknell Berserker
+84 C Demonic Gifts
+85 C Dogged Pursuit
+86 R Draugr Necromancer
+87 C Draugr Recruiter
+88 U Draugr's Helm
+89 C Dread Rider
+90 R Dream Devourer
+91 C Duskwielder
+92 R Egon, God of Death
+93 C Elderfang Disciple
+94 M Eradicator Valkyrie
+95 C Feed the Serpent
+96 C Grim Draugr
+97 U Hailstorm Valkyrie
+98 M Haunting Voyage
+99 C Infernal Pet
+100 C Jarl of the Forsaken
+101 C Karfell Kennel-Master
+102 C Koma's Faithful
+103 U Poison the Cup
+104 C Priest of the Haunted Edge
+105 C Raise the Draugr
+106 U Return Upon the Tide
+107 R Rise of the Dread Marn
+108 U Rune of Mortality
+109 R Skemfar Avenger
+110 U Skemfar Shadowsage
+111 C Skull Raid
+112 R Tergrid, God of Fright
+113 U Tergrid's Shadow
+114 M Valki, God of Lies
+115 R Varragoth, Bloodsky Sire
+116 U Vengeful Reaper
+117 C Village Rites
+118 C Weigh Down
+119 C Withercrown
+120 R Arni Brokenbrow
+121 C Axgard Cavalry
+122 U Basalt Ravager
+123 R Birgi, God of Storytelling
+124 C Breakneck Berserker
+125 R Calamity Bearer
+126 C Cinderheart Giant
+127 C Craven Hulk
+128 U Crush the Weak
+129 C Demon Bolt
+130 U Doomskar Titan
+131 R Dragonkin Berserker
+132 U Dual Strike
+133 U Dwarven Hammer
+134 C Dwarven Reinforcements
+135 U Fearless Liberator
+136 C Fearless Pup
+137 U Frenzied Raider
+138 C Frost Bite
+139 M Goldspan Dragon
+140 C Hagi Mob
+141 C Immersturm Raider
 142 R Magda, Brazen Outlaw
+143 C Open the Omenpaths
+144 U Provoke the Trolls
+145 M Quakebringer
+146 R Reckless Crew
+147 C Run Amok
+148 U Rune of Speed
+149 C Seize the Spoils
+150 C Shackles of Treachery
+151 C Smashing Success
+152 C Squash
+153 R Tibalt's Trickery
+154 M Toralf, God of Fury
+155 C Tormentor's Helm
+156 R Tundra Fumarole
+157 C Tuskeri Firewalker
+158 C Vault Robber
+159 C Arachnoform
+160 M Battle Mammoth
+161 R Blessing of Frost
+162 U Blizzard Brawl
+163 U Boreal Outrider
+164 C Broken Wings
+165 C Elderleaf Mentor
+166 U Elven Bow
+167 R Elvish Warmaster
+168 M Esika, God of the Tree
+169 R Esika's Chariot
+170 U Fynn, the Fangbearer
+171 C Glittering Frost
+172 C Gnottvold Recluse
+173 C Grizzled Outrider
+174 C Guardian Gladewalker
+175 C Horizon Seeker
+176 C Icehide Troll
+177 R In Search of Greatness
+178 C Jaspera Sentinel
+179 R Jorn, God of Winter
+180 C King Harald's Revenge
+181 R Kolvori, God of Kinship
+182 U Littjara Glade-Warden
+183 C Mammoth Growth
+184 C Masked Vandal
+185 R Old-Growth Troll
+186 U Path to the World Tree
+187 C Ravenous Lindwurm
 188 R Realmwalker
+189 U Rootless Yew
+190 C Roots of Wisdom
+191 U Rune of Might
+192 C Sarulf's Packmate
+193 C Sculptor of Winter
+194 C Snakeskin Veil
+195 U Spirit of the Aldergard
+196 C Struggle for Skemfar
+197 R Toski, Bearer of Secrets
+198 M Tyvar Kell
+199 M Vorinclex, Monstrous Raider
+200 U Aegar, the Freezing Flame
+201 U Arni Slays the Troll
+202 U Ascent of the Worthy
+203 R Battle for Bretagard
+204 R Battle of Frost and Fire
+205 R The Bears of Littjara
+206 U Binding the Old Gods
+207 R The Bloodsky Massacre
+208 U Fall of the Impostor
+209 U Firja, Judge of Valor
+210 R Firja's Retribution
+211 U Forging the Tyrite Sword
+212 U Harald, King of Skemfar
+213 R Harald Unites the Elves
+214 R Immersturm Predator
+215 U Invasion of the Giants
+216 U Kardur, Doomscourge
+217 U Kardur's Vicious Return
 218 M Kaya the Inexorable
+219 R King Narfi's Betrayal
+220 U Koll, the Forgemaster
+221 M Koma, Cosmos Serpent
+222 U Maja, Bretagard Protector
+223 U Moritte of the Frost
+224 U Narfi, Betrayer King
+225 M Niko Aris
+226 U Niko Defies Destiny
+227 R The Raven's Warning
 228 R Sarulf, Realm Eater
 229 R Showdown of the Skalds
+230 U Svella, Ice Shaper
+231 U The Three Seasons
+232 U The Trickster-God's Heist
+233 U Vega, the Watcher
+234 R Waking the Trolls
+235 U Bloodline Pretender
+236 U Colossal Plow
+237 R Cosmos Elixir
+238 C Funeral Longboat
+239 C Goldvein Pick
+240 R Maskwood Nexus
 241 R Pyre of Heroes
+242 C Raiders' Karve
+243 C Raven Wings
+244 U Replicating Ring
+245 U Runed Crown
+246 C Scorn Effigy
+247 U Weathered Runestone
+248 C Alpine Meadow
+249 C Arctic Treeline
+250 U Axgard Armory
 251 R Barkchannel Pathway
 252 R Blightstep Pathway
+253 U Bretagard Stronghold
 254 R Darkbore Pathway
+255 R Faceless Haven
+256 U Gates of Istfell
+257 C Glacial Floodplain
+258 U Gnottvold Slumbermound
+259 U Great Hall of Starnheim
 260 R Hengegate Pathway
+261 C Highland Forest
+262 C Ice Tunnel
+263 U Immersturm Skullcairn
+264 U Littjara Mirrorlake
+265 U Port of Karfell
+266 C Rimewood Falls
+267 C Shimmerdrift Vale
+268 U Skemfar Elderhall
+269 C Snowfield Sinkhole
+270 C Sulfurous Mire
+271 U Surtland Frostpyre
+272 R Tyrite Sanctum
+273 C Volatile Fjord
+274 C Woodland Chasm
+275 R The World Tree
+276 C Snow-Covered Plains
+277 C Snow-Covered Plains
+278 C Snow-Covered Island
+279 C Snow-Covered Island
+280 C Snow-Covered Swamp
+281 C Snow-Covered Swamp
+282 C Snow-Covered Mountain
+283 C Snow-Covered Mountain
+284 C Snow-Covered Forest
+285 C Snow-Covered Forest
+
+[borderless]
+286 M Valki, God of Lies
+287 M Tyvar Kell
 288 M Kaya the Inexorable
+289 M Niko Aris
 290 R Barkchannel Pathway
 291 R Blightstep Pathway
 292 R Darkbore Pathway
 293 R Hengegate Pathway
+294 M Starnheim Unleashed
+295 M Alrund's Epiphany
+296 M Haunting Voyage
+297 M Quakebringer
+298 M Battle Mammoth
+
+[showcase]
 299 M Halvar, God of Battle
+300 R Reidane, God of the Worthy
+301 R Sigrid, God-Favored
+302 M Alrund, God of the Cosmos
+303 R Cosima, God of the Voyage
+304 U Inga Rune-Eyes
+305 M Orvar, the All-Form
+306 R Egon, God of Death
+307 R Tergrid, God of Fright
+308 M Valki, God of Lies
+309 R Varragoth, Bloodsky Sire
+310 R Arni Brokenbrow
+311 R Birgi, God of Storytelling
 312 R Magda, Brazen Outlaw
+313 M Toralf, God of Fury
+314 M Esika, God of the Tree
+315 R Esika's Chariot
+316 U Fynn, the Fangbearer
+317 R Jorn, God of Winter
+318 R Kolvori, God of Kinship
+319 R Toski, Bearer of Secrets
+320 M Vorinclex, Monstrous Raider
+321 U Aegar, the Freezing Flame
+322 U Firja, Judge of Valor
+323 U Harald, King of Skemfar
+324 U Kardur, Doomscourge
+325 U Koll, the Forgemaster
+326 M Koma, Cosmos Serpent
+327 U Maja, Bretagard Protector
+328 U Moritte of the Frost
+329 U Narfi, Betrayer King
 330 R Sarulf, Realm Eater
+331 U Svella, Ice Shaper
+332 U Vega, the Watcher
+333 M Vorinclex, Monstrous Raider
+
+[extended art]
+334 R Doomskar
+335 R Glorious Protector
+336 R Rally the Ranks
+337 M Resplendent Marshal
+338 R Righteous Valkyrie
+339 R Runeforge Champion
+340 R Search for Glory
+341 R Ascendant Spirit
+342 R Cosmos Charger
+343 R Cyclone Summoner
+344 R Graven Lore
+345 R Icebreaker Kraken
+346 R Mystic Reflection
+347 R Reflections of Littjara
+348 R Blood on the Snow
+349 M Burning-Rune Demon
+350 R Crippling Fear
+351 R Draugr Necromancer
+352 R Dream Devourer
+353 M Eradicator Valkyrie
+354 R Rise of the Dread Marn
+355 R Skemfar Avenger
+356 R Calamity Bearer
+357 R Dragonkin Berserker
+358 M Goldspan Dragon
+359 R Reckless Crew
+360 R Tibalt's Trickery
+361 R Tundra Fumarole
+362 R Blessing of Frost
+363 R Elvish Warmaster
+364 R In Search of Greatness
+365 R Old-Growth Troll
+366 R Realmwalker
+367 R Immersturm Predator
+368 R Cosmos Elixir
+369 R Maskwood Nexus
 370 R Pyre of Heroes
+371 R Faceless Haven
+372 R Tyrite Sanctum
+373 R The World Tree
+
+[precon product]
 374 R Valkyrie Harbinger
 375 R Surtland Elementalist
 376 R Cleaving Reaper
 377 R Surtland Flinger
 378 R Canopy Tactician
 379 U Armed and Armored
-380 U Starnhiem Aspirant
+380 U Starnheim Aspirant
 381 U Warchanter Skald
-382 U Youthful Valyrie
+382 U Youthful Valkyrie
 383 U Absorb Identity
 384 U Giant's Grasp
 385 U Elderfang Ritualist
@@ -45,4 +413,58 @@ Type=Expansion
 391 U Elven Ambush
 392 U Gladewalker Ritualist
 393 U Rampage of the Valkyries
+394 L Plains
+395 L Island
+396 L Swamp
+397 L Mountain
+398 L Forest
+
+[buy a box]
 399 R Realmwalker
+
+[promo]
+400 R Reflections of Littjara
+401 U Usher of the Fallen
+402 C Strategic Planning
+403 U Poison the Cup
+404 C Frost Bite
+405 C Masked Vandal
+
+[ModalDoubleFaceCards]
+1 Alrund, God of the Cosmos|KHM
+1 Esika, God of the Tree|KHM
+1 Halvar, God of Battle|KHM
+1 Toralf, God of Fury|KHM
+1 Valki, God of Lies|KHM
+2 Barkchannel Pathway|KHM
+2 Birgi, God of Storytelling|KHM
+2 Blightstep Pathway|KHM
+2 Cosima, God of the Voyage|KHM
+2 Darkbore Pathway|KHM
+2 Egon, God of Death|KHM
+2 Hengegate Pathway|KHM
+2 Jorn, God of Winter|KHM
+2 Kolvori, God of Kinship|KHM
+2 Reidane, God of the Worthy|KHM
+2 Tergrid, God of Fright|KHM
+
+[tokens]
+ce_shard
+w_4_4_angel_warrior_flying_vigilance
+w_1_1_human_warrior
+w_1_1_spirit_flying
+u_1_1_bird_flying
+u_4_4_giant_wizard
+u_3_3_serpent_komas_coil
+u_2_2_shapeshifter_changeling
+b_2_2_zombie_berserker
+r_2_3_demon_berserker_menance
+r_5_5_dragon_flying
+r_2_1_dwarf_berserker
+g_2_2_bear
+g_2_2_cat
+g_1_1_elf_warrior
+g_4_4_troll_warrior_trample
+csa_icy_manalith
+csa_replicated_ring
+ca_treasure_sac
