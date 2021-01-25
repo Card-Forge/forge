@@ -1,0 +1,6 @@
+Name:Shard
+ManaCost:no cost
+Types:Enchantment
+A:AB$ Scry | Cost$ Sac<2/CARDNAME> | ScryNum$ 1 | SubAbility$ DBDraw | SpellDescription$ {2}, Sacrifice this enchantment: Scry 1, then draw a card.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:{2}, Sacrifice this enchantment: Scry 1, then draw a card.
