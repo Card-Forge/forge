@@ -1,0 +1,11 @@
+Name:Maja, Bretagard Protector
+ManaCost:2 G W W
+Types:Legendary Creature Human Warrior
+PT:2/3
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever a land enters the battlefield under your control, create a 1/1 white Human Warrior creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human_warrior | TokenOwner$ You | TokenImage$ g 1 1 saproling m14
+SVar:BuffedBy:Land
+DeckHas:Ability$Token
+Oracle:Other creatures you control get +1/+1.\nWhenever a land enters the battlefield under your control, create a 1/1 white Human Warrior creature token.
