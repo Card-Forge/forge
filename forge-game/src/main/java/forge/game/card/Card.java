@@ -228,6 +228,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private String originalText = "", text = "";
     private String chosenType = "";
+    private String chosenType2 = "";
     private List<String> chosenColors;
     private String chosenName = "";
     private String chosenName2 = "";
@@ -1467,6 +1468,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final boolean hasChosenType() {
         return chosenType != null && !chosenType.isEmpty();
+    }
+
+    // used by card Illusionary Terrain
+    public final String getChosenType2() {
+        return chosenType2;
+    }
+
+    public final void setChosenType2(final String s) {
+        chosenType2 = s;
+        view.updateChosenType2(this);
+    }
+
+    public final boolean hasChosenType2() {
+        return chosenType2 != null && !chosenType2.isEmpty();
     }
 
     public final String getChosenColor() {

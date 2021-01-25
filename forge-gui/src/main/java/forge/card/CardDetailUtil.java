@@ -393,6 +393,9 @@ public class CardDetailUtil {
             }
             area.append("(chosen type: ");
             area.append(card.getChosenType());
+            if (!card.getChosenType2().isEmpty()) {
+                area.append(", ").append(card.getChosenType2());
+            }
             area.append(")");
         }
 

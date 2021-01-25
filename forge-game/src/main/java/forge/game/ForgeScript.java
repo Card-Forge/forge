@@ -73,6 +73,10 @@ public class ForgeScript {
             return cardState.getTypeWithChanges().hasStringType(source.getChosenType());
         } else if (property.equals("IsNotChosenType")) {
             return !cardState.getTypeWithChanges().hasStringType(source.getChosenType());
+        } else if (property.equals("ChosenType2")) {
+            return cardState.getTypeWithChanges().hasStringType(source.getChosenType2());
+        } else if (property.equals("IsNotChosenType2")) {
+            return !cardState.getTypeWithChanges().hasStringType(source.getChosenType2());
         } else if (property.startsWith("HasSubtype")) {
             final String subType = property.substring(11);
             return cardState.getTypeWithChanges().hasSubtype(subType);

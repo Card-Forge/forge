@@ -367,6 +367,9 @@ public final class StaticAbilityContinuous {
                     if (input.equals("ChosenType") && !hostCard.hasChosenType()) {
                         return true;
                     }
+                    if (input.equals("ChosenType2") && !hostCard.hasChosenType2()) {
+                        return true;
+                    }
                     if (input.equals("ImprintedCreatureType")) {
                         if (hostCard.hasImprintedCard()) {
                             newTypes.addAll(hostCard.getImprintedCards().getLast().getType().getCreatureTypes());
@@ -385,6 +388,9 @@ public final class StaticAbilityContinuous {
             addTypes = Lists.transform(addTypes, new Function<String, String>() {
                 @Override
                 public String apply(String input) {
+                    if (hostCard.hasChosenType2()) {
+                        input = input.replaceAll("ChosenType2", hostCard.getChosenType2());
+                    }
                     if (hostCard.hasChosenType()) {
                         input = input.replaceAll("ChosenType", hostCard.getChosenType());
                     }
