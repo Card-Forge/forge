@@ -990,7 +990,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public CardCollectionView chooseCardsToDiscardFrom(final Player p, final SpellAbility sa,
             final CardCollection valid, final int min, final int max) {
-        if (p != player) {
+        if (p != player || GuiBase.getInterface().isLibgdxPort()) {
             tempShowCards(valid);
             GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(valid);
             List<CardView> views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), min),
@@ -1366,6 +1366,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public CardCollection chooseCardsToDiscardToMaximumHandSize(final int nDiscard) {
         final int max = player.getMaxHandSize();
+
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            tempShowCards(player.getCardsIn(ZoneType.Hand));
+            GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(player.getCardsIn(ZoneType.Hand));
+            List<CardView> views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), nDiscard),
+                    localizer.getMessage("lblDiscarded"), nDiscard, nDiscard, gameCacheDiscard.getTrackableKeys(), null);
+            endTempShowCards();
+            final CardCollection choices = new CardCollection();
+            gameCacheDiscard.addToList(views, choices);
+            return choices;
+        }
 
         @SuppressWarnings("serial")
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, nDiscard, nDiscard,
