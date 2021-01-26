@@ -180,6 +180,8 @@ public class HumanPlaySpellAbility {
 
             if (skipStack) {
                 AbilityUtils.resolve(ability);
+                // Should unfreeze stack
+                game.getStack().unfreezeStack();
             } else {
                 enusureAbilityHasDescription(ability);
                 game.getStack().addAndUnfreeze(ability);

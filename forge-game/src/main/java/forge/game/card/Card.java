@@ -190,6 +190,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private boolean phasedOut = false;
     private boolean directlyPhasedOut = true;
+    private boolean wontPhaseInNormal = false;
 
     private boolean usedToPayCost = false;
 
@@ -4303,13 +4304,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updatePhasedOut(this);
     }
 
-    public final void phase() {
-        phase(true);
+    public final void phase(final boolean fromUntapStep) {
+        phase(fromUntapStep, true);
     }
-    public final void phase(final boolean direct) {
+    public final void phase(final boolean fromUntapStep, final boolean direct) {
         final boolean phasingIn = isPhasedOut();
 
-        if (!switchPhaseState()) {
+        if (!switchPhaseState(fromUntapStep)) {
             // Switch Phase State bails early if the Permanent can't Phase Out
             return;
         }
@@ -4321,7 +4322,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (hasCardAttachments()) {
             for (final Card eq : getAttachedCards()) {
                 if (eq.isPhasedOut() == phasingIn) {
-                    eq.phase(false);
+                    eq.phase(fromUntapStep, false);
                 }
             }
         }
@@ -4329,13 +4330,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         getGame().fireEvent(new GameEventCardPhased(this, isPhasedOut()));
     }
 
-    private boolean switchPhaseState() {
+    private boolean switchPhaseState(final boolean fromUntapStep) {
 
         if (phasedOut && hasKeyword("CARDNAME can't phase in.")) {
             return false;
         }
 
         if (!phasedOut && hasKeyword("CARDNAME can't phase out.")) {
+            return false;
+        }
+
+        if (phasedOut && fromUntapStep && wontPhaseInNormal) {
             return false;
         }
 
@@ -4367,6 +4372,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setDirectlyPhasedOut(final boolean direct) {
         directlyPhasedOut = direct;
+    }
+
+    public final boolean isWontPhaseInNormal() {
+        return wontPhaseInNormal;
+    }
+    public final void setWontPhaseInNormal(final boolean phaseFlag) {
+        wontPhaseInNormal = phaseFlag;
     }
 
     public final boolean isReflectedLand() {

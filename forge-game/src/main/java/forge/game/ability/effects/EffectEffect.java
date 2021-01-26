@@ -218,6 +218,9 @@ public class EffectEffect extends SpellAbilityEffect {
                 } else if (sa.hasParam("ExileOnMoved")) {
                     addExileOnMovedTrigger(eff, sa.getParam("ExileOnMoved"));
                 }
+                if (sa.hasParam("ForgetOnPhasedIn")) {
+                    addForgetOnPhasedInTrigger(eff);
+                }
                 if (sa.hasParam("ForgetCounter")) {
                     addForgetCounterTrigger(eff, sa.getParam("ForgetCounter"));
                 }
