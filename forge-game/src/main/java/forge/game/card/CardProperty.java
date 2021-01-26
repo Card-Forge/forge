@@ -1109,6 +1109,14 @@ public class CardProperty {
             if (card.isFaceDown()) {
                 return false;
             }
+        } else if (property.startsWith("phasedOut")) {
+            if (!card.isPhasedOut()) {
+                return false;
+            }
+        } else if (property.startsWith("phasedIn")) {
+            if (card.isPhasedOut()) {
+                return false;
+            }
         } else if (property.startsWith("manifested")) {
             if (!card.isManifested()) {
                 return false;
