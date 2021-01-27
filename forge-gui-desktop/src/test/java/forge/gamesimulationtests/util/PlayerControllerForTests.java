@@ -609,9 +609,9 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public void playChosenSpellAbility(SpellAbility sa) {
+    public boolean playChosenSpellAbility(SpellAbility sa) {
         // TODO Play abilities from here
-        
+        return true;
     }
 
     @Override

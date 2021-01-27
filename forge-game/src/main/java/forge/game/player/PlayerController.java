@@ -192,7 +192,7 @@ public abstract class PlayerController {
     public abstract void declareAttackers(Player attacker, Combat combat);
     public abstract void declareBlockers(Player defender, Combat combat);
     public abstract List<SpellAbility> chooseSpellAbilityToPlay();
-    public abstract void playChosenSpellAbility(SpellAbility sa);
+    public abstract boolean playChosenSpellAbility(SpellAbility sa);
 
     public abstract CardCollection chooseCardsToDiscardToMaximumHandSize(int numDiscard);
     public abstract boolean payManaOptional(Card card, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose);

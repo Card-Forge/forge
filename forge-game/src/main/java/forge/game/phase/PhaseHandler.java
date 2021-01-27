@@ -1019,13 +1019,13 @@ public class PhaseHandler implements java.io.Serializable {
                     if (DEBUG_PHASES) {
                         System.out.print("... " + pPlayerPriority + " plays " + chosenSa);
                     }
-                    pFirstPriority = pPlayerPriority; // all opponents have to pass before stack is allowed to resolve
                     for (SpellAbility sa : chosenSa) {
                         Card saHost = sa.getHostCard();
                         final Zone originZone = saHost.getZone();
 
-                        // TODO it has no return value if successful
-                        pPlayerPriority.getController().playChosenSpellAbility(sa);
+                        if (pPlayerPriority.getController().playChosenSpellAbility(sa)) {
+                            pFirstPriority = pPlayerPriority; // all opponents have to pass before stack is allowed to resolve
+                        }
 
                         saHost = game.getCardState(saHost);
                         final Zone currentZone = saHost.getZone();
