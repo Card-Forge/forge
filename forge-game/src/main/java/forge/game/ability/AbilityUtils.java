@@ -20,6 +20,7 @@ import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -1770,6 +1771,18 @@ public class AbilityUtils {
 
                 if (sq[0].startsWith("CastTotalManaSpent")) {
                     return CardFactoryUtil.doXMath(c.getCastSA() != null ? c.getCastSA().getTotalManaSpent() : 0, expr, c);
+                }
+
+                if (sq[0].equals("CastTotalSnowManaSpent")) {
+                    int v = 0;
+                    if (c.getCastSA() != null) {
+                        for (Mana m : c.getCastSA().getPayingMana()) {
+                            if (m.isSnow()) {
+                                v += 1;
+                            }
+                        }
+                    }
+                    return CardFactoryUtil.doXMath(v, expr, c);
                 }
             }
         }
