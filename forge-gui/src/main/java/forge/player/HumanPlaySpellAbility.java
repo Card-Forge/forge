@@ -74,24 +74,11 @@ public class HumanPlaySpellAbility {
         boolean manaTypeConversion = false;
         boolean manaColorConversion = false;
 
-        if (ability.isSpell()) {
-            if (c.hasKeyword("May spend mana as though it were mana of any type to cast CARDNAME")
-                    || (option != null && option.isIgnoreManaCostType())) {
-                manaTypeConversion = true;
-            } else  if (c.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")
-                    || (option != null && option.isIgnoreManaCostColor())) {
-                manaColorConversion = true;
-            }
-        }
-        
-        final boolean playerManaConversion = human.hasManaConversion()
-                && human.getController().confirmAction(ability, null, "Do you want to spend mana as though it were mana of any color to pay the cost?");
-
         boolean keywordColor = false;
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
         game.getStack().freezeStack();
 
-        if (ability instanceof Spell && !c.isCopiedSpell()) {
+        if (ability.isSpell() && !c.isCopiedSpell()) {
             fromZone = game.getZoneOf(c);
             fromState = c.getCurrentStateName();
             if (fromZone != null) {
@@ -111,6 +98,20 @@ public class HumanPlaySpellAbility {
 
         ability = GameActionUtil.addExtraKeywordCost(ability);
 
+        if (ability.isSpell() && !ability.isCopied()) { // These hidden keywords should only apply on the Stack
+            final Card host = ability.getHostCard();
+            if (host.hasKeyword("May spend mana as though it were mana of any type to cast CARDNAME")
+                    || (option != null && option.isIgnoreManaCostType())) {
+                manaTypeConversion = true;
+            } else if (host.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")
+                    || (option != null && option.isIgnoreManaCostColor())) {
+                manaColorConversion = true;
+            }
+        }
+
+        final boolean playerManaConversion = human.hasManaConversion()
+                && human.getController().confirmAction(ability, null, "Do you want to spend mana as though it were mana of any color to pay the cost?");
+
         Cost abCost = ability.getPayCosts();
         CostPayment payment = new CostPayment(abCost, ability);
 
@@ -125,7 +126,7 @@ public class HumanPlaySpellAbility {
             AbilityUtils.applyManaColorConversion(manapool, MagicColor.Constant.ANY_COLOR_CONVERSION);
             human.incNumManaConversion();
         }
-        
+
         if (ability.isAbility() && ability.isActivatedAbility()) {
             final Map<String, String> params = Maps.newHashMap();
             params.put("ManaColorConversion", "Additive");
