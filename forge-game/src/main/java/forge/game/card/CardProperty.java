@@ -1213,6 +1213,8 @@ public class CardProperty {
             if (card.getTotalDamageDoneBy() == 0) {
                 return false;
             }
+        } else if (property.startsWith("dealtDamagetoAny")) {
+            return card.getHasdealtDamagetoAny();
         } else if (property.startsWith("attackedThisTurn")) {
             if (!card.getDamageHistory().getCreatureAttackedThisTurn()) {
                 return false;
