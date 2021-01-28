@@ -2504,6 +2504,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 @Override
                 public void run() {
                     if (targetZone == ZoneType.Battlefield) {
+                        if (!forgeCard.getName().equals(f.getName())) {
+                            forgeCard.changeToState(CardStateName.Flipped);
+                            forgeCard.changeToState(CardStateName.Transformed);
+                            forgeCard.changeToState(CardStateName.Modal);
+                        }
+
                         if (noTriggers) {
                             if (forgeCard.isPermanent() && !forgeCard.isAura()) {
                                 if (forgeCard.isCreature()) {
