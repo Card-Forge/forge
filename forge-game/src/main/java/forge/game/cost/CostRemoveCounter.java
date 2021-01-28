@@ -176,13 +176,7 @@ public class CostRemoveCounter extends CostPart {
         Card source = ability.getHostCard();
 
         int removed = 0;
-        final int toRemove;
-        if (getAmount().equals("All")) {
-            toRemove = source.getCounters(counter);
-        }
-        else {
-            toRemove = AbilityUtils.calculateAmount(source, getAmount(), ability);
-        }
+        final int toRemove = decision.c;
 
         // for this cost, the list should be only one
         for (Card c : decision.cards) {
