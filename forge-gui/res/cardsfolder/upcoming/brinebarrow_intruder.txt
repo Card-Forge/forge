@@ -1,0 +1,8 @@
+Name:Brinebarrow Intruder
+ManaCost:U
+Types:Creature Human Rogue
+PT:1/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature an opponent controls gets -2/-0 until end of turn.
+SVar:DBPump:DB$ Pump | NumAtt$ -2 | IsCurse$ True | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature
+Oracle:Flash\nWhen Brinebarrow Intruder enters the battlefield, target creature an opponent controls gets -2/-0 until end of turn.
