@@ -974,7 +974,7 @@ public class GameAction {
                         checkAgain = true;
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
                         for (final Integer dmg : c.getReceivedDamageFromThisTurn().values()) {
-                            if (c.getLethal() <= dmg.intValue()) {
+                            if (c.getLethal() <= dmg.intValue() || c.hasBeenDealtDeathtouchDamage()) {
                                 if (desCreats == null) {
                                     desCreats = new CardCollection();
                                 }
