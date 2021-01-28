@@ -151,6 +151,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Map<Card, Integer> dealtDamageToThisTurn = Maps.newTreeMap();
     private Map<String, Integer> dealtDamageToPlayerThisTurn = Maps.newTreeMap();
     private final Map<Card, Integer> assignedDamageMap = Maps.newTreeMap();
+    private boolean hasdealtDamagetoAny = false;
 
     private boolean isCommander = false;
     private boolean canMoveToCommandZone = false;    
@@ -4748,6 +4749,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             currentDamage = dealtDamageToThisTurn.get(c);
         }
         dealtDamageToThisTurn.put(c, damage+currentDamage);
+        hasdealtDamagetoAny = true;
     }
     public final void resetDealtDamageToThisTurn() {
         dealtDamageToThisTurn.clear();
@@ -4765,6 +4767,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             currentDamage = dealtDamageToPlayerThisTurn.get(player);
         }
         dealtDamageToPlayerThisTurn.put(player, damage+currentDamage);
+        hasdealtDamagetoAny = true;
     }
     public final void resetDealtDamageToPlayerThisTurn() {
         dealtDamageToPlayerThisTurn.clear();
@@ -5437,6 +5440,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return sum;
     }
 
+    public boolean getHasdealtDamagetoAny() {
+        return hasdealtDamagetoAny;
+    }
 
     public boolean hasProtectionFrom(final Card source) {
         return hasProtectionFrom(source, false, false);
