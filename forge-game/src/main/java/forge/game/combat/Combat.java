@@ -594,7 +594,19 @@ public class Combat {
                 unregisterDefender(c, be.getKey());
             }
         }
-        
+
+        for (Card pw : getDefendingPlaneswalkers()) {
+            if (pw.equals(c)) {
+                Collection<AttackingBand> bands = attackedByBands.get(pw);
+                for (AttackingBand abPW : bands) {
+                    unregisterDefender(c, abPW);
+                    // Rule 506.4c keep creature in combat
+                    attackedByBands.put(c.getController(), abPW);
+                }
+                bands.clear();
+            }
+        }
+
         // remove card from map
         while (blockedBands.values().remove(c));
         c.updateBlockingForView();
