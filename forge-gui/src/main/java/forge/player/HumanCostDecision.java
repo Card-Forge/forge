@@ -1042,7 +1042,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         int cntRemoved = 1;
         if (c != null) {
             cntRemoved = c.intValue();
-        } else if (!"XChoice".equals(sVarAmount)) {
+        } else if (!"XChoice".equals(sVarAmount) && !amount.equals("All")) {
             cntRemoved = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
