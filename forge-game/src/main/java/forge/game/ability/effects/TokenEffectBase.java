@@ -50,6 +50,12 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 tok.addEtbCounter(CounterType.getType(parse[0]), Integer.parseInt(parse[1]), creator);
             }
 
+            if (sa.hasParam("WithCountersType")) {
+                CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                int cAmount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                tok.addEtbCounter(cType, cAmount, creator);
+            }
+
             if (clone) {
                 tok.setCopiedPermanent(prototype);
             }
