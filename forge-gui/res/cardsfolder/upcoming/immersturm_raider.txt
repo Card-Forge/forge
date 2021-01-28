@@ -1,0 +1,9 @@
+Name:Immersturm Raider
+ManaCost:1 R
+Types:Creature Demon Berserker
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, you may discard a card. If you do, draw a card.
+SVar:TrigDiscard:AB$ Draw | Cost$ Discard<1/Card> | NumCards$ 1
+DeckHas:Ability$Discard
+DeckHints:Ability$Delirium
+Oracle:When Immersturm Raider enters the battlefield, you may discard a card. If you do, draw a card.
