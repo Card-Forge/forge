@@ -1,0 +1,6 @@
+Name:Sculptor of Winter
+ManaCost:1 G
+Types:Snow Creature Elf Rogue
+PT:2/2
+A:AB$ Untap | Cost$ T | ValidTgts$ Land.Snow | TgtPrompt$ Select target land | AILogic$ PoolExtraMana | SpellDescription$ Untap target snow land.
+Oracle:{T}: Untap target snow land.
