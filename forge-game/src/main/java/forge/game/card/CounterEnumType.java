@@ -307,6 +307,8 @@ public enum CounterEnumType {
 
     VORTEX("VORTX", 142, 200, 255),
 
+    VOYAGE("VOYAGE", 38, 150, 137),
+
     WAGE("WAGE", 242, 190, 106),
 
     WINCH("WINCH", 208, 195, 203),

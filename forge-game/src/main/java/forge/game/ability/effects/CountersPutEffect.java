@@ -188,6 +188,11 @@ public class CountersPutEffect extends SpellAbilityEffect {
             tgtObjects.addAll(getDefinedOrTargeted(sa, "Defined"));
         }
 
+        if (sa.hasParam("Optional") && !pc.confirmAction
+                (sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCounter"))) {
+            return;
+        }
+
         int counterRemain = counterAmount;
         for (final GameObject obj : tgtObjects) {
             // check if the object is still in game or if it was moved
