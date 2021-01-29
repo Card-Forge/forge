@@ -1,0 +1,6 @@
+Name:Gnottvold Recluse
+ManaCost:2 G
+Types:Creature Spider
+PT:4/2
+K:Reach
+Oracle:Reach
