@@ -81,24 +81,24 @@ IKO/Void Beckoner2.fullborder
 IKO/Yidaro, Wandering Monster3.fullborder
 IKO/Zagoth Triome2.fullborder
 IKO/Zilortha, Strength Incarnate.fullborder
-KHM/Alrund's Epiphany
-KHM/Barkchannel Pathway
-KHM/Battle Mammoth
-KHM/Blightstep Pathway
-KHM/Darkbore Pathway
-KHM/Haunting Voyage
-KHM/Hengegate Pathway
-KHM/Kaya the Inexorable
-KHM/Mistgate Pathway
-KHM/Niko Aris
-KHM/Quakebringer
-KHM/Searstep Pathway
-KHM/Slitherbore Pathway
-KHM/Starnheim Unleashed
-KHM/Tibalt, Cosmic Impostor
-KHM/Tidechannel Pathway
-KHM/Tyvar Kell
-KHM/Valki, God of Lies
+KHM/Alrund's Epiphany2.fullborder
+KHM/Barkchannel Pathway2.fullborder
+KHM/Battle Mammoth2.fullborder
+KHM/Blightstep Pathway2.fullborder
+KHM/Darkbore Pathway2.fullborder
+KHM/Haunting Voyage2.fullborder
+KHM/Hengegate Pathway2.fullborder
+KHM/Kaya the Inexorable2.fullborder
+KHM/Mistgate Pathway2.fullborder
+KHM/Niko Aris2.fullborder
+KHM/Quakebringer2.fullborder
+KHM/Searstep Pathway2.fullborder
+KHM/Slitherbore Pathway2.fullborder
+KHM/Starnheim Unleashed2.fullborder
+KHM/Tibalt, Cosmic Impostor2.fullborder
+KHM/Tidechannel Pathway2.fullborder
+KHM/Tyvar Kell2.fullborder
+KHM/Valki, God of Lies2.fullborder
 M21/Basri Ket2.fullborder
 M21/Chandra, Heart of Fire2.fullborder
 M21/Containment Priest2.fullborder
