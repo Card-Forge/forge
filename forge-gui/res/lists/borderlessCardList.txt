@@ -81,6 +81,24 @@ IKO/Void Beckoner2.fullborder
 IKO/Yidaro, Wandering Monster3.fullborder
 IKO/Zagoth Triome2.fullborder
 IKO/Zilortha, Strength Incarnate.fullborder
+KHM/Alrund's Epiphany
+KHM/Barkchannel Pathway
+KHM/Battle Mammoth
+KHM/Blightstep Pathway
+KHM/Darkbore Pathway
+KHM/Haunting Voyage
+KHM/Hengegate Pathway
+KHM/Kaya the Inexorable
+KHM/Mistgate Pathway
+KHM/Niko Aris
+KHM/Quakebringer
+KHM/Searstep Pathway
+KHM/Slitherbore Pathway
+KHM/Starnheim Unleashed
+KHM/Tibalt, Cosmic Impostor
+KHM/Tidechannel Pathway
+KHM/Tyvar Kell
+KHM/Valki, God of Lies
 M21/Basri Ket2.fullborder
 M21/Chandra, Heart of Fire2.fullborder
 M21/Containment Priest2.fullborder
@@ -95,6 +113,7 @@ M21/Teferi, Master of Time2.fullborder
 M21/Ugin, the Spirit Dragon2.fullborder
 M21/Ugin, the Spirit Dragon3.fullborder
 PLGS/Hangarback Walker.fullborder
+PSLD/Tibalt, the Fiend-Blooded.fullborder
 SLD/Acidic Slime.fullborder
 SLD/Captain Sisay.fullborder
 SLD/Meren of Clan Nel Toth.fullborder
@@ -102,6 +121,7 @@ SLD/Narset, Enlightened Master.fullborder
 SLD/Necrotic Ooze.fullborder
 SLD/Oona, Queen of the Fae.fullborder
 SLD/Saskia the Unyielding.fullborder
+SLD/Scavenging Ooze.fullborder
 SLD/The Mimeoplasm.fullborder
 SLD/Voidslime.fullborder
 SLU/Brightclimb Pathway.fullborder
