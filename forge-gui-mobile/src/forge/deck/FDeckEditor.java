@@ -806,7 +806,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
                 else if (parentScreen.getEditorType() == EditorType.Quest||parentScreen.getEditorType() == EditorType.QuestCommander) {
                     //prevent adding more than is in quest inventory
-                    qty = parentScreen.getCatalogPage().cardManager.getItemCount(card);
+                    try {
+                        qty = parentScreen.getCatalogPage().cardManager.getItemCount(card);
+                    } catch (Exception e) {
+                        //prevent NPE
+                        qty = 0;
+                    }
                 }
                 else {
                     //if not source of items being added, use max directly if unlimited pool
