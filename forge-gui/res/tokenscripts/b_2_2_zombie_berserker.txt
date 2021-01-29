@@ -1,0 +1,6 @@
+Name:Zombie Berserker
+ManaCost:no cost
+Types:Creature Zombie Berserker
+Colors:black
+PT:2/2
+Oracle
