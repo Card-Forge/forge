@@ -133,6 +133,9 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     revealed.add(c);
                     if (c.isValid(type, sa.getActivatingPlayer(), host, sa)) {
                         found.add(c);
+                        if (sa.hasParam("ForgetOtherRemembered")) {
+                            host.clearRemembered();
+                        }
                         if (remember) {
                             host.addRemembered(c);
                         }
