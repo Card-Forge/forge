@@ -1,4 +1,4 @@
-Name:DeathKnell Berserker
+Name:Deathknell Berserker
 ManaCost:1 B
 Types:Creature Elf Berserker
 PT:2/2
