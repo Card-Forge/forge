@@ -484,6 +484,7 @@ public class QuestController {
     }
 
     public HashSet<StarRating> GetRating() {
+        if (model == null) return null;
         return model.Ratings;
     }
 
