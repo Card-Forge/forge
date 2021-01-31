@@ -7,4 +7,5 @@ SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNu
 SVar:TrigPump:DB$ Pump | KW$ Flying | Defined$ Self
 SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
 SVar:BuffedBy:Card
+DeckHas:Ability$Counters
 Oracle:Whenever you cast your second spell each turn, put a +1/+1 counter on Infernal Pet and it gains flying until end of turn.
