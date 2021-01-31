@@ -101,7 +101,7 @@ public class DigEffect extends SpellAbilityEffect {
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
+        final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
 
         CardZoneTable table = new CardZoneTable();
         GameEntityCounterTable counterTable = new GameEntityCounterTable();
