@@ -4,4 +4,5 @@ Types:Creature Elf Warrior
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 green Elf Warrior creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You
+DeckHas:Ability$Token
 Oracle:When Elderleaf Mentor enters the battlefield, create a 1/1 green Elf Warrior creature token.
