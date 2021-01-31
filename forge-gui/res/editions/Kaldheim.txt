@@ -449,7 +449,6 @@ Prerelease=6 Boosters, 1 RareMythic+
 2 Tergrid, God of Fright|KHM
 
 [tokens]
-ce_shard
 w_4_4_angel_warrior_flying_vigilance
 w_1_1_human_warrior
 w_1_1_spirit_flying
@@ -465,6 +464,7 @@ g_2_2_bear
 g_2_2_cat
 g_1_1_elf_warrior
 g_4_4_troll_warrior_trample
-csa_icy_manalith
-csa_replicated_ring
-ca_treasure_sac
+c_a_treasure_sac
+icy_manalith
+replicated_ring
+shard
