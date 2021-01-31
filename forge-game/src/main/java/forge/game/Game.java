@@ -716,6 +716,8 @@ public class Game {
             }
 
             if(isMultiplayer) {
+                // unattach all "Enchant Player"
+                c.removeAttachedTo(p);
                 if (c.getOwner().equals(p)) {
                     for(Card cc : cards) {
                         cc.removeImprintedCard(c);
