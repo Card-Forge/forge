@@ -1,0 +1,8 @@
+Name:Spectral Steel
+ManaCost:1 W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump | SpellDescription$ Enchanted creature gets +2/+2. {1}{W}, Exile CARDNAME from your graveyard: Return another target Aura or Equipment card from your graveyard to your hand.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2. {1}{W}, Exile CARDNAME from your graveyard: Return another target Aura or Equipment card from your graveyard to your hand.
+A:AB$ ChangeZone | Cost$ 1 W ExileFromGrave<1/CARDNAME> | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Aura.Other.YouOwn,Equipment.YouOwn | ActivationZone$ Graveyard | TgtPrompt$ Choose target aura or equipment card in your graveyard
+Oracle:Enchant creature\nEnchanted creature gets +2/+2.\n{1}{W}, Exile Spectral Steel from your graveyard: Return another target Aura or Equipment card from your graveyard to your hand.
