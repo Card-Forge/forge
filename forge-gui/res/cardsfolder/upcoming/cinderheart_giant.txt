@@ -5,5 +5,4 @@ PT:7/6
 K:Trample
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME dies, it deals 7 damage to a creature an opponent controls chosen at random.
 SVar:TrigDealDamage:DB$ DealDamage | NumDmg$ 7 | ValidTgts$ Creature.OppCtrl | TargetsAtRandom$ True
-AI:RemoveDeck:All
 Oracle:Trample\nWhen Cinderheart Giant dies, it deals 7 damage to a creature an opponent controls chosen at random.
