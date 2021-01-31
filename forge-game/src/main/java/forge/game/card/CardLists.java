@@ -401,11 +401,15 @@ public class CardLists {
      * 
      * @param cardList the list of creature cards for which to sum the power
      * @param ignoreNegativePower if true, treats negative power as 0
+     * @param crew for cards that crew with toughness rather than power
      */
-    public static int getTotalPower(Iterable<Card> cardList, boolean ignoreNegativePower) {
+    public static int getTotalPower(Iterable<Card> cardList, boolean ignoreNegativePower, boolean crew) {
         int total = 0;
         for (final Card crd : cardList) {
-            total += ignoreNegativePower ? Math.max(0, crd.getNetPower()) : crd.getNetPower();
+            if (crew && crd.hasKeyword("CARDNAME crews Vehicles using its toughness rather than its power.")) {
+                total += ignoreNegativePower ? Math.max(0, crd.getNetToughness()) : crd.getNetToughness();
+            }
+            else total += ignoreNegativePower ? Math.max(0, crd.getNetPower()) : crd.getNetPower();
         }
         return total;
     }
