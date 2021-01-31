@@ -717,8 +717,18 @@ public class Game {
 
             if(isMultiplayer) {
                 if (c.getOwner().equals(p)) {
+                    for(Card cc : cards) {
+                        cc.removeImprintedCard(c);
+                        cc.removeEncodedCard(c);
+                        cc.removeRemembered(c);
+                    }
                     c.ceaseToExist();
                 } else {
+                    // return stolen permanents
+                    if (c.getController().equals(p) && c.isInZone(ZoneType.Battlefield)) {
+                        c.removeTempController(p);
+                        getAction().controllerChangeZoneCorrection(c);
+                    }
                     c.removeTempController(p);
                     if (c.getController().equals(p)) {
                         this.getAction().exile(c, null);
