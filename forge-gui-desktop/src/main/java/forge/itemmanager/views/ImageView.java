@@ -37,6 +37,7 @@ import forge.game.card.CardView;
 import forge.gui.framework.ILocalRepaint;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.GroupDef;
 import forge.itemmanager.ItemManager;
@@ -79,6 +80,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private ItemInfo hoveredItem;
     private ItemInfo focalItem;
     private boolean panelOptionsCreated = false;
+    // cards with alternate states are added twice for displaying
+    private InventoryItem lastAltCard = null;
 
     private final List<ItemInfo> orderedItems = new ArrayList<>();
     private final List<Group> groups = new ArrayList<>();
@@ -1141,7 +1144,27 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             g.fillRoundRect(bounds.x, bounds.y, bounds.width, bounds.height, cornerSize, cornerSize);
 
             InventoryItem item = itemInfo.item;
-            BufferedImage img = ImageCache.getImage(itemInfo.item, bounds.width - 2 * borderSize, bounds.height - 2 * borderSize);
+
+            boolean tryAltState = false;
+            if (hoveredItem == null || hoveredItem.item != item) {
+                if (item instanceof PaperCard) {
+                    if (((PaperCard)item).getRules().getOtherPart() != null) {
+                        if (item.equals(lastAltCard)) {
+                            tryAltState = true;
+                            lastAltCard = null;
+                        }
+                        else {
+                            lastAltCard = item;
+                        }
+                    }
+                    else {
+                        lastAltCard = null;
+                    }
+                }
+            }
+
+            BufferedImage img = ImageCache.getImage(item, bounds.width - 2 * borderSize, bounds.height - 2 * borderSize, tryAltState);
+
             if (img != null) {
                 g.drawImage(img, null, bounds.x + borderSize, bounds.y + borderSize);
             }
@@ -1149,7 +1172,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 g.setColor(Color.white);
                 Shape clip = g.getClip();
                 g.setClip(bounds);
-                g.drawString(itemInfo.item.getName(), bounds.x + 10, bounds.y + 20);
+                g.drawString(item.getName(), bounds.x + 10, bounds.y + 20);
                 g.setClip(clip);
             }
 
