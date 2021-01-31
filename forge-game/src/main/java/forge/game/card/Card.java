@@ -3797,6 +3797,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             keyword = keyword.substring(7);
         }
 
+        // shortcut for hidden keywords
+        if (this.hiddenExtrinsicKeyword.contains(keyword)) {
+            return true;
+        }
+
         HasKeywordVisitor visitor = new HasKeywordVisitor(keyword, false);
         visitKeywords(state, visitor);
         return visitor.getResult();

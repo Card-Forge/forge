@@ -654,7 +654,8 @@ public class PhaseHandler implements java.io.Serializable {
                 List<Card> remainingBlockers = CardLists.filterControlledBy(combat.getAllBlockers(), p);
                 for (Card c : remainingBlockers) {
                     boolean removeBlocker = false;
-                    if (remainingBlockers.size() < 2 && c.hasKeyword("CARDNAME can't attack or block alone.")) {
+                    boolean cantBlockAlone = c.hasKeyword("CARDNAME can't attack or block alone.") || c.hasKeyword("CARDNAME can't block alone.");
+                    if (remainingBlockers.size() < 2 && cantBlockAlone) {
                         removeBlocker = true;
                     } else if (remainingBlockers.size() < 3 && c.hasKeyword("CARDNAME can't block unless at least two other creatures block.")) {
                         removeBlocker = true;
