@@ -1,6 +1,6 @@
 Name:Pilfering Hawk
 ManaCost:1 U
-Types:Snow Creature bird
+Types:Snow Creature Bird
 PT:1/2
 K:Flying
 A:AB$ Draw | Cost$ S T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
