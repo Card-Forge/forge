@@ -823,6 +823,7 @@ public class GameAction {
                         for (final StaticAbility st2 : c.getStaticAbilities()) {
                             if (!staticAbilities.contains(st2)) {
                                 toAdd.add(st2);
+                                st2.applyContinuousAbilityBefore(layer, preList);
                             }
                         }
                     }
