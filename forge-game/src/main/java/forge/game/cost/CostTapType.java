@@ -131,8 +131,10 @@ public class CostTapType extends CostPartWithList {
         }
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
 
+        boolean isCrew=false;
         if (ability.hasParam("Crew")) {
             typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
+            isCrew=true;
         }
 
         if (sameType) {
@@ -146,7 +148,7 @@ public class CostTapType extends CostPartWithList {
 
         if (totalPower) {
             final int i = Integer.parseInt(totalP);
-            return CardLists.getTotalPower(typeList, true) >= i;
+            return CardLists.getTotalPower(typeList, true, isCrew) >= i;
         }
 
         final Integer amount = this.convertAmount();
