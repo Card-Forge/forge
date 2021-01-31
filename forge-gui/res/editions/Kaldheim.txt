@@ -458,7 +458,7 @@ u_4_4_giant_wizard
 u_3_3_serpent_komas_coil
 u_2_2_shapeshifter_changeling
 b_2_2_zombie_berserker
-r_2_3_demon_berserker_menance
+r_2_3_demon_berserker_menace
 r_5_5_dragon_flying
 r_2_1_dwarf_berserker
 g_2_2_bear
