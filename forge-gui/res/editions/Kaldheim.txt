@@ -454,7 +454,7 @@ w_1_1_human_warrior
 w_1_1_spirit_flying
 u_1_1_bird_flying
 u_4_4_giant_wizard
-u_3_3_serpent_komas_coil
+komas_coil
 u_2_2_shapeshifter_changeling
 b_2_2_zombie_berserker
 r_2_3_demon_berserker_menace
