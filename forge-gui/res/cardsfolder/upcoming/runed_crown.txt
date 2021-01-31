@@ -1,0 +1,10 @@
+Name:Runed Crown
+ManaCost:3
+Types:Artifact Equipment
+K:Equip:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library, hand and/or graveyard for a Rune card and put it onto the battlefield attached to CARDNAME. If you search your library this way, shuffle it.
+SVar:TrigSearch:DB$ ChangeZone | Hidden$ True | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard,Hand | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Battlefield | ChangeType$ Rune | AttachedTo$ Self | ShuffleNonMandatory$ True
+AI:RemoveDeck:Random
+DeckNeeds:Type$Rune
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
+Oracle:Equipped creature gets +1/+1.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
