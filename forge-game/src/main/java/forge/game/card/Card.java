@@ -6371,6 +6371,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public void ceaseToExist() {
         getGame().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         getZone().remove(this);
+        setZone(null);
         getGame().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 
