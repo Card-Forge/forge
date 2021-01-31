@@ -439,8 +439,10 @@ public class CombatUtil {
             return false;
         }
 
+        boolean cantBlockAlone = blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone.");
+
         final List<Card> list = blocker.getController().getCreaturesInPlay();
-        return list.size() >= 2 || !blocker.hasKeyword("CARDNAME can't attack or block alone.");
+        return list.size() >= 2 || !cantBlockAlone;
     }
 
     public static boolean canBlockMoreCreatures(final Card blocker, final CardCollectionView blockedBy) {
@@ -732,7 +734,8 @@ public class CombatUtil {
 
         // Creatures that aren't allowed to block unless certain restrictions are met.
         for (final Card blocker : blockers) {
-            if (blockers.size() < 2 && blocker.hasKeyword("CARDNAME can't attack or block alone.")) {
+            boolean cantBlockAlone = blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone.");
+            if (blockers.size() < 2 && cantBlockAlone) {
                 return TextUtil.concatWithSpace(blocker.toString(),"can't block alone.");
             } else if (blockers.size() < 3 && blocker.hasKeyword("CARDNAME can't block unless at least two other creatures block.")) {
                 return TextUtil.concatWithSpace(blocker.toString(),"can't block unless at least two other creatures block.");
