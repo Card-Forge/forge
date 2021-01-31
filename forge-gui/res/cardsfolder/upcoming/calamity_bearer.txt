@@ -6,4 +6,5 @@ R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Giant.YouCtrl | Va
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:PlayMain1:TRUE
+DeckHints:Type$Giant
 Oracle:If a Giant source you control would deal damage to a permanent or player, it deals double that damage instead.
