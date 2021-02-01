@@ -212,7 +212,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public SpellAbility getAbilityToPlay(final Card hostCard, final List<SpellAbility> abilities,
             final ITriggerEvent triggerEvent) {
         // make sure another human player can't choose opponents cards just because he might see them
-        if (!hostCard.isInZone(ZoneType.Battlefield) && !hostCard.getOwner().equals(player) && !hostCard.getController().equals(player) && hostCard.mayPlay(player).size() == 0) {
+        if (triggerEvent != null && !hostCard.isInZone(ZoneType.Battlefield) && !hostCard.getOwner().equals(player) && !hostCard.getController().equals(player) && hostCard.mayPlay(player).size() == 0) {
             return null;
         }
         spellViewCache = SpellAbilityView.getMap(abilities);
