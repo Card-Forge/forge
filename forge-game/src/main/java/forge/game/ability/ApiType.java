@@ -154,6 +154,7 @@ public enum ApiType {
     StoreSVar (StoreSVarEffect.class),
     StoreMap (StoreMapEffect.class),
     Surveil (SurveilEffect.class),
+    SwitchBlock (SwitchBlockEffect.class),
     Tap (TapEffect.class),
     TapAll (TapAllEffect.class),
     TapOrUntap (TapOrUntapEffect.class),
