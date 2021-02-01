@@ -594,7 +594,24 @@ public class Combat {
                 unregisterDefender(c, be.getKey());
             }
         }
-        
+
+        for (Card pw : getDefendingPlaneswalkers()) {
+            if (pw.equals(c)) {
+                Multimap<GameEntity, AttackingBand> attackerBuffer = ArrayListMultimap.create();
+                Collection<AttackingBand> bands = attackedByBands.get(pw);
+                for (AttackingBand abPW : bands) {
+                    unregisterDefender(c, abPW);
+                    // Rule 506.4c workaround to keep creatures in combat
+                    Card fake = new Card(-1, c.getGame());
+                    fake.setName("<Nothing>");
+                    fake.setController(c.getController(), 0);
+                    attackerBuffer.put(fake, abPW);
+                }
+                bands.clear();
+                attackedByBands.putAll(attackerBuffer);
+            }
+        }
+
         // remove card from map
         while (blockedBands.values().remove(c));
         c.updateBlockingForView();
