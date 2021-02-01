@@ -1187,10 +1187,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 source, ability);
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
 
-        boolean isCrew=false;
         if (ability.hasParam("Crew")) {
             typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
-            isCrew=true;
         }
 
         if (c == null && !amount.equals("Any")) {
@@ -1249,7 +1247,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp.setCancelAllowed(true);
             inp.showAndWait();
 
-            if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected(), true, isCrew) < i) {
+            if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected(), true, ability.hasParam("Crew")) < i) {
                 return null;
             }
             return PaymentDecision.card(inp.getSelected());
