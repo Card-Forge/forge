@@ -5,6 +5,6 @@ Colors:red
 PT:0/1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ RekindlingPhoenixTrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice this creature and return target card named Rekindling Phoenix from your graveyard to the battlefield. It gains haste until end of turn.
 SVar:RekindlingPhoenixTrigSac:DB$ Sacrifice | SacValid$ Self | SubAbility$ RekindlingPhoenixDBChangeZone
-SVar:RekindlingPhoenixDBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Card.YouCtrl+namedRekindling Phoenix | TgtPrompt$ Choose target card named Rekindling Phoenix in your graveyard | SubAbility$ RekindlingPhoenixDBAnimate
+SVar:RekindlingPhoenixDBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Card.YouCtrl+namedRekindling Phoenix | ChangeNum$ 1 | TgtPrompt$ Choose target card named Rekindling Phoenix in your graveyard | SubAbility$ RekindlingPhoenixDBAnimate
 SVar:RekindlingPhoenixDBAnimate:DB$ Animate | Defined$ Targeted | Keywords$ Haste
 Oracle:At the beginning of your upkeep, sacrifice this creature and return target card named Rekindling Phoenix from your graveyard to the battlefield. It gains haste until end of turn.
