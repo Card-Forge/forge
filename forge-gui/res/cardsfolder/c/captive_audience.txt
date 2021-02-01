@@ -3,7 +3,7 @@ ManaCost:5 B R
 Types:Enchantment
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBChooseOpp | Layer$ Control | Description$ CARDNAME enters the battlefield under the control of an opponent of your choice.
 SVar:DBChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to give control to: | AILogic$ Curse | SubAbility$ MoveToPlay
-SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | GainControl$ True | NewController$ ChosenPlayer | SubAbility$ ClearRemembered
+SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | GainControl$ True | NewController$ ChosenPlayer
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ LifePact,DiscardPact,ZombiesPact | ChoiceRestriction$ ThisGame | CharmNum$ 1
 SVar:LifePact:DB$ SetLife | Defined$ You | LifeAmount$ 4 | SpellDescription$ Your life total becomes 4.
