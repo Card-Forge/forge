@@ -1,0 +1,11 @@
+Name:Valkyrie's Sword
+ManaCost:1 W
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 1 | Description$ Equipped creature gets +2/+1.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {4}{W}. If you do, create a 4/4 white Angel Warrior creature token with flying and vigilance, then attach CARDNAME to it.
+SVar:TrigToken:AB$ Token | Cost$ 4 W | LegacyImage$ w 4 4 angel warrior flying vigilance khm | TokenScript$ w_4_4_angel_warrior_flying_vigilance | TokenAmount$ 1 | TokenOwner$ You | RememberTokens$ True | Optional$ True | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Object$ TriggeredCard | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token
+Oracle:When Valkyrie's Sword enters the battlefield, you may pay {4}{W}. If you do, create a 4/4 white Angel Warrior creature token with flying and vigilance, then attach CARDNAME to it.\nEquipped creature gets +2/+1.\nEquip: {3}
