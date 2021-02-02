@@ -203,6 +203,7 @@ public class HumanPlaySpellAbility {
             // skip GameAction
             oldCard.getZone().remove(oldCard);
             fromZone.add(oldCard, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
+            ability.setHostCard(oldCard);
         }
 
         ability.clearTargets();
