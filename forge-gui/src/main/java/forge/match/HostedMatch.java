@@ -69,6 +69,7 @@ public class HostedMatch {
     private final MatchUiEventVisitor visitor = new MatchUiEventVisitor();
     private final Map<PlayerControllerHuman, NextGameDecision> nextGameDecisions = Maps.newHashMap();
     private boolean isMatchOver = false;
+    public int subGameCount = 0;
 
     public HostedMatch() {}
 
@@ -362,6 +363,7 @@ public class HostedMatch {
 
         @Override
         public Void visit(final GameEventSubgameStart event) {
+            subGameCount++;
             event.subgame.subscribeToEvents(SoundSystem.instance);
             event.subgame.subscribeToEvents(visitor);
 
@@ -387,7 +389,10 @@ public class HostedMatch {
                     }
                 }
             };
-            GuiBase.getInterface().invokeInEdtAndWait(switchGameView);
+            if (GuiBase.getInterface().isLibgdxPort())
+                GuiBase.getInterface().invokeInEdtNow(switchGameView);
+            else
+                GuiBase.getInterface().invokeInEdtAndWait(switchGameView);
 
             //ensure opponents set properly
             for (final Player p : event.subgame.getPlayers()) {
@@ -419,7 +424,11 @@ public class HostedMatch {
                     }
                 }
             };
-            GuiBase.getInterface().invokeInEdtAndWait(switchGameView);
+            if (GuiBase.getInterface().isLibgdxPort())
+                GuiBase.getInterface().invokeInEdtNow(switchGameView);
+            else
+                GuiBase.getInterface().invokeInEdtAndWait(switchGameView);
+
             return null;
         }
 

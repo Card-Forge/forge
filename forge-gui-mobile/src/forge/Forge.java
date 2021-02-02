@@ -202,6 +202,10 @@ public class Forge implements ApplicationListener {
             ImageCache.preloadCache(filteredkeys);
     }
 
+    public static void openHomeScreen() {
+        openScreen(HomeScreen.instance);
+    }
+
     private void afterDbLoaded() {
         stopContinuousRendering(); //save power consumption by disabling continuous rendering once assets loaded
 
@@ -210,7 +214,7 @@ public class Forge implements ApplicationListener {
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
         destroyThis = false; //Allow back()
         Gdx.input.setCatchKey(Keys.MENU, true);
-        openScreen(HomeScreen.instance);
+        openHomeScreen();
         splashScreen = null;
 
         boolean isLandscapeMode = isLandscapeMode();

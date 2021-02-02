@@ -185,7 +185,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return true; //if not in game, card can be shown
         }
         if(GuiBase.getInterface().isLibgdxPort()){
-            if(gameView.isGameOver()) {
+            if(gameView != null && gameView.isGameOver()) {
                 return true;
             }
             if(spectator!=null) { //workaround fix!! this is needed on above code or it will
