@@ -5,4 +5,5 @@ A:SP$ ChangeZone | Cost$ 4 B | Origin$ Graveyard | Destination$ Battlefield | Tg
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_1_1_elf_warrior | LegacyImage$ g 1 1 elf warrior khm | TokenOwner$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X
 SVar:X:Targeted$Valid Elf
 K:ForeTell:3 B
+DeckHas:Ability$Token
 Oracle:Return target creature card from your graveyard to the battlefield. If it's an Elf, create two 1/1 green Elf Warrior creature tokens.\nForetell {3}{B} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)
