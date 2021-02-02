@@ -516,6 +516,18 @@ public class GameAction {
 
         c = changeZone(zoneFrom, zoneTo, c, position, cause, params);
 
+        // Move card in maingame if take card from subgame
+        // 720.4a
+        if (zoneFrom != null && zoneFrom.is(ZoneType.Sideboard) && game.getMaingame() != null) {
+            Card maingameCard = c.getOwner().getMappingMaingameCard(c);
+            if (maingameCard != null) {
+                if (maingameCard.getZone().is(ZoneType.Stack)) {
+                    game.getMaingame().getStack().remove(maingameCard);
+                }
+                game.getMaingame().getAction().moveTo(ZoneType.Subgame, maingameCard, null);
+            }
+        }
+
         if (zoneFrom == null) {
             c.setCastFrom(null);
             c.setCastSA(null);

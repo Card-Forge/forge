@@ -77,7 +77,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
 public class Player extends GameEntity implements Comparable<Player> {
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
-            ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck));
+            ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck, ZoneType.Subgame));
 
     private final Map<Card, Integer> commanderDamage = Maps.newHashMap();
 
@@ -141,6 +141,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final Map<ZoneType, PlayerZone> zones = Maps.newEnumMap(ZoneType.class);
     private final Map<Long, Integer> adjustLandPlays = Maps.newHashMap();
     private final Set<Long> adjustLandPlaysInfinite = Sets.newHashSet();
+    private Map<Card, Card> maingameCardsMap = Maps.newHashMap();;
 
     private CardCollection currentPlanes = new CardCollection();
     private Set<String> prowl = Sets.newHashSet();
@@ -1920,6 +1921,14 @@ public class Player extends GameEntity implements Comparable<Player> {
             return true;
         }
         return !adjustLandPlaysInfinite.isEmpty();
+    }
+
+    public final void addMaingameCardMapping(Card subgameCard, Card maingameCard) {
+        maingameCardsMap.put(subgameCard, maingameCard);
+    }
+
+    public final Card getMappingMaingameCard(Card subgameCard) {
+        return maingameCardsMap.get(subgameCard);
     }
 
     public final ManaPool getManaPool() {
