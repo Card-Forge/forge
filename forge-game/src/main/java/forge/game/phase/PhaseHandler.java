@@ -26,7 +26,6 @@ import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardZoneTable;
@@ -175,8 +174,7 @@ public class PhaseHandler implements java.io.Serializable {
             game.fireEvent(new GameEventTurnBegan(playerTurn, turn));
 
             // Tokens starting game in play should suffer from Sum. Sickness
-            final CardCollectionView list = playerTurn.getCardsIncludePhasingIn(ZoneType.Battlefield);
-            for (final Card c : list) {
+            for (final Card c : playerTurn.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
                 if (playerTurn.getTurn() > 0 || !c.isStartsGameInPlay()) {
                     c.setSickness(false);
                 }

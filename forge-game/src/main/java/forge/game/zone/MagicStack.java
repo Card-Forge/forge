@@ -52,7 +52,6 @@ import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.OptionalCost;
-import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
@@ -241,8 +240,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         if (sp.isSpell()) {
             source.setController(activator, 0);
-            final Spell spell = (Spell) sp;
-            if (spell.isCastFaceDown()) {
+            if (sp.isCastFaceDown()) {
                 // Need to override for double faced cards
                 source.turnFaceDown(true);
             } else if (source.isFaceDown()) {

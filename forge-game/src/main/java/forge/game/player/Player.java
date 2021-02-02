@@ -111,6 +111,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numDrawnThisDrawStep = 0;
     private int numDiscardedThisTurn = 0;
     private int numTokenCreatedThisTurn = 0;
+    private int numForetoldThisTurn = 0;
     private int numCardsInHandStartedThisTurnWith = 0;
     private final Map<String, FCollection<String>> notes = Maps.newHashMap();
 
@@ -1666,6 +1667,22 @@ public class Player extends GameEntity implements Comparable<Player> {
         numTokenCreatedThisTurn = 0;
     }
 
+    public final int getNumForetoldThisTurn() {
+        return numForetoldThisTurn;
+    }
+
+    public final void addForetoldThisTurn() {
+        numForetoldThisTurn++;
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Player, this);
+        runParams.put(AbilityKey.Num, numForetoldThisTurn);
+        game.getTriggerHandler().runTrigger(TriggerType.Foretell, runParams, false);
+    }
+
+    public final void resetNumForetoldThisTurn() {
+        numForetoldThisTurn = 0;
+    }
+
     public final int getNumDiscardedThisTurn() {
         return numDiscardedThisTurn;
     }
@@ -2581,7 +2598,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         controlledBy.remove(timestamp);
         getView().updateMindSlaveMaster(this);
-        
+
         if (event) {
             game.fireEvent(new GameEventPlayerControl(this, oldLobbyPlayer, oldController, getLobbyPlayer(), getController()));
         }

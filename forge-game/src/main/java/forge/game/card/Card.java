@@ -154,7 +154,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean hasdealtDamagetoAny = false;
 
     private boolean isCommander = false;
-    private boolean canMoveToCommandZone = false;    
+    private boolean canMoveToCommandZone = false;
 
     private boolean startsGameInPlay = false;
     private boolean drawnThisTurn = false;
@@ -176,6 +176,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean renowned = false;
 
     private boolean manifested = false;
+
+    private boolean foretold = false;
+    private boolean foretoldThisTurn = false;
+    private boolean foretoldByEffect = false;
 
     private long bestowTimestamp = -1;
     private long transformedTimestamp = 0;
@@ -1694,7 +1698,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     } else {
                         sbLong.append(parts[0]).append(" ").append(ManaCostParser.parse(parts[1])).append("\r\n");
                     }
-                } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph") || keyword.startsWith("Escape")) {
+                } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph") || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")) {
                     String[] k = keyword.split(":");
                     sbLong.append(k[0]);
                     if (k.length > 1) {
@@ -1789,6 +1793,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Changeling") || keyword.equals("Delve")
                         || keyword.equals("Split second") || keyword.equals("Sunburst")
                         || keyword.equals("Suspend") // for the ones without amounnt
+                        || keyword.equals("Foretell") // for the ones without cost
                         || keyword.equals("Hideaway") || keyword.equals("Ascend")
                         || keyword.equals("Totem armor") || keyword.equals("Battle cry")
                         || keyword.equals("Devoid") || keyword.equals("Riot")){
@@ -2236,7 +2241,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbBefore.append("\r\n");
                 } else if (keyword.startsWith("Entwine") || keyword.startsWith("Madness")
                         || keyword.startsWith("Miracle") || keyword.startsWith("Recover")
-                        || keyword.startsWith("Escape")) {
+                        || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")) {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);
 
@@ -5319,6 +5324,42 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
 
+    public final boolean isForetold() {
+        // in exile and foretold
+        if (this.isInZone(ZoneType.Exile)) {
+            return this.foretold;
+        }
+        // cast as foretold, currently only spells
+        if (this.getCastSA() != null) {
+            return this.getCastSA().isForetold();
+        }
+        return false;
+    }
+
+    public final void setForetold(final boolean foretold) {
+        this.foretold = foretold;
+    }
+
+    public boolean isForetoldByEffect() {
+        return foretoldByEffect;
+    }
+
+    public void setForetoldByEffect(final boolean val) {
+        this.foretoldByEffect = val;
+    }
+
+    public boolean isForetoldThisTurn() {
+        return foretoldThisTurn;
+    }
+
+    public final void setForetoldThisTurn(final boolean foretoldThisTurn) {
+        this.foretoldThisTurn = foretoldThisTurn;
+    }
+
+    public void resetForetoldThisTurn() {
+        foretoldThisTurn = false;
+    }
+
     public final void animateBestow() {
         animateBestow(true);
     }
@@ -6565,11 +6606,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return 0;
         }
         return numberGameActivations.containsKey(original) ? numberGameActivations.get(original) : 0;
-    }
-
-    public void resetTurnActivations() {
-        numberTurnActivations.clear();
-        numberTurnActivationsStatic.clear();
     }
 
     public List<String> getChosenModesTurn(SpellAbility ability) {

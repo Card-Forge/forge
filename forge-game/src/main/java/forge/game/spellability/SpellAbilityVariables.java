@@ -405,6 +405,7 @@ public class SpellAbilityVariables implements Cloneable {
     protected boolean optionalCostPaid = false; // Undergrowth other Pseudo-kickers
     protected boolean optionalBoolean = true; // Just in case you need to check if something wasn't kicked, etc
     protected boolean surgeCostPaid = false;
+    protected boolean foretold = false;
 
     /**
      * @return the allTargetsLegal

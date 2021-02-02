@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -54,7 +54,7 @@ import java.util.List;
  * <p>
  * GameActionUtil class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -68,7 +68,7 @@ public final class GameActionUtil {
      * <p>
      * Find the alternative costs to a {@link SpellAbility}.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link SpellAbility}.
      * @param activator
@@ -204,7 +204,50 @@ public final class GameActionUtil {
                             flashback.setPayCosts(new Cost(k[1], false));
                         }
                         alternatives.add(flashback);
+                    } else if (keyword.startsWith("Foretell")) {
+                        // Fortell cast only from Exile
+                        if (!source.isInZone(ZoneType.Exile) || !source.isForetold() || source.isForetoldThisTurn()) {
+                            continue;
+                        }
+                        // skip this part for fortell by external source
+                        if (keyword.equals("Foretell")) {
+                            continue;
+                        }
+
+                        final SpellAbility foretold = sa.copy(activator);
+                        foretold.setAlternativeCost(AlternativeCost.Foretold);
+                        foretold.getRestrictions().setZone(ZoneType.Exile);
+
+                        // Stack Description only for Permanent or it might crash
+                        if (source.isPermanent()) {
+                            final StringBuilder sbStack = new StringBuilder();
+                            sbStack.append(sa.getStackDescription()).append(" (Foretold)");
+                            foretold.setStackDescription(sbStack.toString());
+                        }
+
+                        final String[] k = keyword.split(":");
+                        foretold.setPayCosts(new Cost(k[1], false));
+
+                        alternatives.add(foretold);
                     }
+                }
+
+                // foretell by external source
+                if (source.isForetoldByEffect() && source.isInZone(ZoneType.Exile) && source.isForetold() && !source.isForetoldThisTurn() && !source.getManaCost().isNoCost()) {
+                    // Its foretell cost is equal to its mana cost reduced by {2}.
+                    final SpellAbility foretold = sa.copy(activator);
+                    foretold.putParam("ReduceCost", "2");
+                    foretold.setAlternativeCost(AlternativeCost.Foretold);
+                    foretold.getRestrictions().setZone(ZoneType.Exile);
+
+                    // Stack Description only for Permanent or it might crash
+                    if (source.isPermanent()) {
+                        final StringBuilder sbStack = new StringBuilder();
+                        sbStack.append(sa.getStackDescription()).append(" (Foretold)");
+                        foretold.setStackDescription(sbStack.toString());
+                    }
+
+                    alternatives.add(foretold);
                 }
             }
 
@@ -295,12 +338,12 @@ public final class GameActionUtil {
                 final Cost cost = new Cost(k[1], false);
                 costs.add(new OptionalCostValue(OptionalCost.Flash, cost));
             }
-            
+
             // Surge while having OptionalCost is none of them
         }
         return costs;
     }
-    
+
     public static SpellAbility addOptionalCosts(final SpellAbility sa, List<OptionalCostValue> list) {
         if (sa == null || list.isEmpty()) {
             return sa;
@@ -309,7 +352,7 @@ public final class GameActionUtil {
         for (OptionalCostValue v : list) {
             result.getPayCosts().add(v.getCost());
             result.addOptionalCost(v.getType());
-            
+
             // add some extra logic, try to move it to other parts
             switch (v.getType()) {
             case Retrace:
@@ -325,7 +368,7 @@ public final class GameActionUtil {
         }
         return result;
     }
-    
+
     public static List<SpellAbility> getAdditionalCostSpell(final SpellAbility sa) {
         final List<SpellAbility> abilities = Lists.newArrayList(sa);
         if (!sa.isSpell()) {
@@ -358,14 +401,14 @@ public final class GameActionUtil {
                 if (newSA2.canPlay()) {
                     newAbilities.add(newSA2);
                 }
-                
+
                 abilities.clear();
                 abilities.addAll(newAbilities);
             }
         }
         return abilities;
     }
-    
+
     public static SpellAbility addExtraKeywordCost(final SpellAbility sa) {
         if (!sa.isSpell() || sa.isCopied()) {
             return sa;

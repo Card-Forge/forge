@@ -1670,36 +1670,40 @@ public class CardProperty {
             if (property.equals("pseudokicked")) {
                 if (!card.isOptionalCostPaid(OptionalCost.Generic)) return false;
             }
-        } else if (property.startsWith("surged")) {
+        } else if (property.equals("surged")) {
             if (card.getCastSA() == null) {
                 return false;
             }
             return card.getCastSA().isSurged();
-        } else if (property.startsWith("dashed")) {
+        } else if (property.equals("dashed")) {
             if (card.getCastSA() == null) {
                 return false;
             }
             return card.getCastSA().isDash();
-        } else if (property.startsWith("escaped")) {
+        } else if (property.equals("escaped")) {
             if (card.getCastSA() == null) {
                 return false;
             }
             return card.getCastSA().isEscape();
-        } else if (property.startsWith("evoked")) {
+        } else if (property.equals("evoked")) {
             if (card.getCastSA() == null) {
                 return false;
             }
             return card.getCastSA().isEvoke();
-        } else if (property.startsWith("prowled")) {
+        } else if (property.equals("prowled")) {
             if (card.getCastSA() == null) {
                 return false;
             }
             return card.getCastSA().isProwl();
-        } else if (property.startsWith("spectacle")) {
+        } else if (property.equals("spectacle")) {
             if (card.getCastSA() == null) {
                 return false;
             }
             return card.getCastSA().isSpectacle();
+        } else if (property.equals("foretold")) {
+            if (!card.isForetold()) {
+                return false;
+            }
         } else if (property.equals("HasDevoured")) {
             if (card.getDevouredCards().isEmpty()) {
                 return false;

@@ -466,23 +466,23 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public final void clearManaPaid() {
         payingMana.clear();
     }
-    
+
     public final void applyPayingManaEffects() {
         Card host = getHostCard();
-        
+
         for (Mana mana : getPayingMana()) {
             if (mana.triggersWhenSpent()) {
                 mana.getManaAbility().addTriggersWhenSpent(this, host);
             }
-            
+
             if (mana.addsCounters(this)) {
                 mana.getManaAbility().createETBCounters(host, getActivatingPlayer());
             }
-            
+
             if (mana.addsNoCounterMagic(this) && host != null) {
                 host.setCanCounter(false);
             }
-            
+
             if (isSpell() && host != null) {
                 if (mana.addsKeywords(this) && mana.addsKeywordsType()
                         && host.getType().hasStringType(mana.getManaAbility().getAddsKeywordsType())) {
@@ -822,6 +822,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isFlashBackAbility() {
         return this.isAlternativeCost(AlternativeCost.Flashback);
     }
+
+    public boolean isForetelling() {
+        return false;
+    }
+    public boolean isForetold() {
+        return this.isAlternativeCost(AlternativeCost.Foretold);
+    }
+
 
     /**
      * @return the aftermath
@@ -1777,6 +1785,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         else if (incR[0].equals("Activated")) {
             if (!root.isActivatedAbility()) {
+                return false;
+            }
+        }
+        else if (incR[0].equals("Static")) {
+            if (!(root instanceof AbilityStatic)) {
                 return false;
             }
         }

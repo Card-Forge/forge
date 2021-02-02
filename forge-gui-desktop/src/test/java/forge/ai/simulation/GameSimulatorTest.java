@@ -1847,7 +1847,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         sim.simulateSpellAbility(gideonSA);
         sim.simulateSpellAbility(sparkDoubleSA);
 
-        Card simSpark = (Card)sim.getGameCopier().find(sparkDouble);
+        Card simSpark = sim.getSimulatedGameState().findById(sparkDouble.getId());
 
         assertNotNull(simSpark);
         assertTrue(simSpark.isInZone(ZoneType.Battlefield));
