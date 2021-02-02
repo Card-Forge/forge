@@ -145,7 +145,9 @@ public class TriggerSpellAbilityCast extends Trigger {
                     if (tgt.isValid(getParam("TargetsValid").split(","), getHostCard()
                             .getController(), getHostCard(), null)) {
                         validTgtFound = true;
-                        break;
+                        if (this.hasParam("RememberValidCards")) {
+                            this.getHostCard().addRemembered(tgt);
+                        } else break;
                     }
                 }
 
