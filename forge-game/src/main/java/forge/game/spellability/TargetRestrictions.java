@@ -65,6 +65,7 @@ public class TargetRestrictions {
     private boolean sameController = false;
     private boolean withoutSameCreatureType = false;
     private boolean withSameCreatureType = false;
+    private boolean withSameCardType = false;
     private boolean singleTarget = false;
     private boolean randomTarget = false;
 
@@ -108,6 +109,7 @@ public class TargetRestrictions {
         this.sameController = target.isSameController();
         this.withoutSameCreatureType = target.isWithoutSameCreatureType();
         this.withSameCreatureType = target.isWithSameCreatureType();
+        this.withSameCardType = target.isWithSameCardType();
         this.singleTarget = target.isSingleTarget();
         this.randomTarget = target.isRandomTarget();
     }
@@ -620,6 +622,20 @@ public class TargetRestrictions {
      */
     public void setWithSameCreatureType(boolean b) {
         this.withSameCreatureType = b;
+    }
+
+    /**
+     * @return the withSameCardType
+     */
+    public boolean isWithSameCardType() {
+        return withSameCardType;
+    }
+
+    /**
+     * @param b the withSameCardType to set
+     */
+    public void setWithSameCardType(boolean b) {
+        this.withSameCardType = b;
     }
 
     /**
