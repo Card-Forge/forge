@@ -1,0 +1,7 @@
+Name:Augury Raven
+ManaCost:3 U
+Types:Creature Bird
+PT:3/3
+K:Flying
+K:Foretell:1 U
+Oracle:Flying\nForetell {1}{U} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)
