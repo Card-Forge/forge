@@ -91,9 +91,8 @@ public class ControlWinLose {
         if(humancount == 0) {
             Forge.back();
         }
-        //todo Refresh the layout
         if (openHomeScreen)
-            Forge.openHomeScreen();
+            Forge.openHomeScreen(true);
     }
 
     /**
