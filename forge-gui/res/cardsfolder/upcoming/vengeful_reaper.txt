@@ -1,0 +1,9 @@
+Name:Vengeful Reaper
+ManaCost:3 B
+Types:Creature Angel Cleric
+PT:2/3
+K:Flying
+K:Deathtouch
+K:Haste
+K:Foretell:1 B
+Oracle:Flying, deathtouch, haste\nForetell {1}{B} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)
