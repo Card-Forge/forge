@@ -278,6 +278,10 @@ public final class CardUtil {
 
         newCopy.copyChangedTextFrom(in);
 
+        newCopy.setForetold(in.isForetold());
+        newCopy.setForetoldThisTurn(in.isForetoldThisTurn());
+        newCopy.setForetoldByEffect(in.isForetoldByEffect());
+
         newCopy.setMeldedWith(getLKICopy(in.getMeldedWith(), cachedMap));
 
         newCopy.setTimestamp(in.getTimestamp());

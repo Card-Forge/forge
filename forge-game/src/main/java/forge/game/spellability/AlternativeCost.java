@@ -9,6 +9,7 @@ public enum AlternativeCost {
     Escape,
     Evoke,
     Flashback,
+    Foretold,
     Madness,
     Offering,
     Outlast, // ActivatedAbility

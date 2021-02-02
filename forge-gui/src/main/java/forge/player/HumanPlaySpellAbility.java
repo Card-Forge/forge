@@ -19,7 +19,6 @@ package forge.player;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -64,7 +63,6 @@ public class HumanPlaySpellAbility {
 
         // used to rollback
         Zone fromZone = null;
-        CardStateName fromState = null;
         int zonePosition = 0;
         final ManaPool manapool = human.getManaPool();
 
@@ -80,14 +78,8 @@ public class HumanPlaySpellAbility {
 
         if (ability.isSpell() && !c.isCopiedSpell()) {
             fromZone = game.getZoneOf(c);
-            fromState = c.getCurrentStateName();
             if (fromZone != null) {
                 zonePosition = fromZone.getCards().indexOf(c);
-            }
-            // This is should happen earlier, before the Modal spell is chosen
-            // Turn face-down card face up (except case of morph spell)
-            if (ability.isSpell() && !ability.isCastFaceDown() && fromState == CardStateName.FaceDown) {
-                c.turnFaceUp(null);
             }
             ability.setHostCard(game.getAction().moveToStack(c, ability));
         }
@@ -155,7 +147,7 @@ public class HumanPlaySpellAbility {
 
         if (!prerequisitesMet) {
             if (!ability.isTrigger()) {
-                rollbackAbility(fromZone, zonePosition, payment);
+                rollbackAbility(fromZone, zonePosition, payment, c);
                 if (ability.getHostCard().isMadness()) {
                     // if a player failed to play madness cost, move the card to graveyard
                     Card newCard = game.getAction().moveToGraveyard(c, null);
@@ -200,15 +192,17 @@ public class HumanPlaySpellAbility {
         return true;
     }
 
-    private void rollbackAbility(final Zone fromZone, final int zonePosition, CostPayment payment) {
+    private void rollbackAbility(final Zone fromZone, final int zonePosition, CostPayment payment, Card oldCard) {
         // cancel ability during target choosing
         final Game game = ability.getActivatingPlayer().getGame();
 
         if (fromZone != null) { // and not a copy
-            ability.getHostCard().setCastSA(null);
-            ability.getHostCard().setCastFrom(null);
-            // add back to where it came from
-            game.getAction().moveTo(fromZone, ability.getHostCard(), zonePosition >= 0 ? Integer.valueOf(zonePosition) : null, null);
+            oldCard.setCastSA(null);
+            oldCard.setCastFrom(null);
+            // add back to where it came from, hopefully old state
+            // skip GameAction
+            oldCard.getZone().remove(oldCard);
+            fromZone.add(oldCard, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
         }
 
         ability.clearTargets();

@@ -66,7 +66,6 @@ import java.util.Map.Entry;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
 
-
 /**
  * <p>
  * CardFactoryUtil class.
@@ -1404,6 +1403,13 @@ public class CardFactoryUtil {
             return doXMath(StringUtils.isNumeric(v) ? Integer.parseInt(v) : xCount(c, c.getSVar(v)), m, c);
         }
 
+        // Count$Foretold.<True>.<False>
+        if (sq[0].startsWith("Foretold")) {
+            String v = c.isForetold() ? sq[1] : sq[2];
+            // TODO move this to AbilityUtils
+            return doXMath(StringUtils.isNumeric(v) ? Integer.parseInt(v) : xCount(c, c.getSVar(v)), m, c);
+        }
+
         // Count$Presence_<Type>.<True>.<False>
         if (sq[0].startsWith("Presence")) {
             final String type = sq[0].split("_")[1];
@@ -1448,7 +1454,6 @@ public class CardFactoryUtil {
 
             return forge.util.MyRandom.getRandom().nextInt(1+max-min) + min;
         }
-
 
         // Count$Domain
         if (sq[0].startsWith("Domain")) {
@@ -1997,7 +2002,6 @@ public class CardFactoryUtil {
         final Set<String> hexproofkw = Sets.newHashSet();
         final Set<String> allkw = Sets.newHashSet();
 
-
         for (Card c : CardLists.getValidCards(cardlist, restrictions, p, host, null)) {
             for (KeywordInterface inst : c.getKeywords()) {
                 final String k = inst.getOriginal();
@@ -2154,7 +2158,6 @@ public class CardFactoryUtil {
 
         return re;
     }
-
 
     public static ReplacementEffect makeEtbCounter(final String kw, final Card card, final boolean intrinsic)
     {
@@ -4095,6 +4098,60 @@ public class CardFactoryUtil {
             newSA.setAlternativeCost(AlternativeCost.Evoke);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Foretell")) {
+
+            final SpellAbility foretell = new AbilityStatic(card, new Cost(ManaCost.TWO, false), null) {
+                @Override
+                public boolean canPlay() {
+                    if (!getRestrictions().canPlay(getHostCard(), this)) {
+                        return false;
+                    }
+
+                    Player activator = this.getActivatingPlayer();
+                    final Game game = activator.getGame();
+
+                    if (!activator.hasKeyword("Foretell on any player’s turn") && !game.getPhaseHandler().isPlayerTurn(activator)) {
+                        return false;
+                    }
+
+                    return true;
+                }
+
+                @Override
+                public boolean isForetelling() {
+                    return true;
+                }
+
+                @Override
+                public void resolve() {
+                    final Game game = getHostCard().getGame();
+                    final Card c = game.getAction().exile(getHostCard(), this);
+                    c.setForetold(true);
+                    c.setForetoldThisTurn(true);
+                    c.turnFaceDown(true);
+                    // look at the exiled card
+                    c.addMayLookTemp(getActivatingPlayer());
+
+                    // only done when the card is foretold by the static ability
+                    getActivatingPlayer().addForetoldThisTurn();
+
+                    if (!isIntrinsic()) {
+                        // because it doesn't work other wise
+                        c.setForetoldByEffect(true);
+                    }
+                    String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has foretold.");
+                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                }
+            };
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("Foretell (").append(inst.getReminderText()).append(")");
+            foretell.setDescription(sbDesc.toString());
+            foretell.putParam("Secondary", "True");
+
+            foretell.getRestrictions().setZone(ZoneType.Hand);
+            foretell.setIntrinsic(intrinsic);
+            inst.addSpellAbility(foretell);
+
         } else if (keyword.startsWith("Fortify")) {
             String[] k = keyword.split(":");
             // Get cost string
