@@ -332,8 +332,7 @@ public abstract class SpellAbilityEffect {
         }
     }
 
-    protected static void addForgetOnMovedTrigger(final Card card, final String zone) {
-        String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | Destination$ Any | TriggerZones$ Command | Static$ True";
+    protected static SpellAbility getForgetSpellAbility(final Card card) {
         String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
         String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
                 + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
@@ -341,11 +340,23 @@ public abstract class SpellAbilityEffect {
         SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, card);
         AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, card);
         saForget.setSubAbility(saExile);
+        return saForget;
+    }
+
+    protected static void addForgetOnMovedTrigger(final Card card, final String zone) {
+        String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | ExcludedDestinations$ Stack | Destination$ Any | TriggerZones$ Command | Static$ True";
 
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
-        parsedTrigger.setOverridingAbility(saForget);
-        final Trigger addedTrigger = card.addTrigger(parsedTrigger);
-        addedTrigger.setIntrinsic(true);
+        parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
+        card.addTrigger(parsedTrigger);
+    }
+
+    protected static void addForgetOnCastTrigger(final Card card) {
+        String trig = "Mode$ SpellCast | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Static$ True";
+
+        final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
+        parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
+        card.addTrigger(parsedTrigger);
     }
 
     protected static void addExileOnMovedTrigger(final Card card, final String zone) {
@@ -368,35 +379,18 @@ public abstract class SpellAbilityEffect {
 
     protected static void addForgetOnPhasedInTrigger(final Card card) {
         String trig = "Mode$ PhaseIn | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Static$ True";
-        String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
-        String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
-                + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
-
-        SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, card);
-        AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, card);
-        saForget.setSubAbility(saExile);
 
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
-        parsedTrigger.setOverridingAbility(saForget);
-        final Trigger addedTrigger = card.addTrigger(parsedTrigger);
-        addedTrigger.setIntrinsic(true);
+        parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
+        card.addTrigger(parsedTrigger);
     }
 
     protected static void addForgetCounterTrigger(final Card card, final String counterType) {
         String trig = "Mode$ CounterRemoved | TriggerZones$ Command | ValidCard$ Card.IsRemembered | CounterType$ " + counterType + " | NewCounterAmount$ 0 | Static$ True";
 
-        String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
-        String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
-                + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
-
-        SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, card);
-        AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, card);
-        saForget.setSubAbility(saExile);
-
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
-        parsedTrigger.setOverridingAbility(saForget);
-        final Trigger addedTrigger = card.addTrigger(parsedTrigger);
-        addedTrigger.setIntrinsic(true);
+        parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
+        card.addTrigger(parsedTrigger);
     }
 
     protected static void addLeaveBattlefieldReplacement(final Card card, final SpellAbility sa, final String zone) {
