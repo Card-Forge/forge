@@ -1179,7 +1179,7 @@ public class AiAttackController {
                 CardPredicates.hasKeyword(Keyword.LIFELINK))).isEmpty();
 
         // total power of the defending creatures, used in predicting whether a gang block can kill the attacker
-        int defPower = CardLists.getTotalPower(validBlockers, true);
+        int defPower = CardLists.getTotalPower(validBlockers, true, false);
 
         if (!hasCombatEffect) {
             for (KeywordInterface inst : attacker.getKeywords()) {
