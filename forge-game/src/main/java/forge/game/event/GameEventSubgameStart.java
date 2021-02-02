@@ -1,7 +1,6 @@
 package forge.game.event;
 
 import forge.game.Game;
-import forge.game.card.Card;
 
 public class GameEventSubgameStart extends GameEvent {
     public final Game subgame;

@@ -77,14 +77,23 @@ public class ControlWinLose {
 
     /** Action performed when "quit" button is pressed in default win/lose UI. */
     public void actionOnQuit() {
+        boolean openHomeScreen = false;
         // Reset other stuff
         saveOptions();
-        try { MatchController.getHostedMatch().endCurrentGame();
+        try {
+            if(MatchController.getHostedMatch().subGameCount > 0) {
+                openHomeScreen = true;
+                MatchController.getHostedMatch().subGameCount--;
+            }
+            MatchController.getHostedMatch().endCurrentGame();
         } catch (NullPointerException e) {}
         view.hide();
         if(humancount == 0) {
             Forge.back();
         }
+        //todo Refresh the layout
+        if (openHomeScreen)
+            Forge.openHomeScreen();
     }
 
     /**
