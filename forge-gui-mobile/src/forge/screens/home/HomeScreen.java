@@ -135,6 +135,10 @@ public class HomeScreen extends FScreen {
         QuestWorld = questWorld;
     }
 
+    public void openNewGamMenu(){
+        NewGameMenu.getPreferredScreen().open();
+    }
+
     public boolean getQuestCommanderMode() {
         return QuestCommander;
     }
