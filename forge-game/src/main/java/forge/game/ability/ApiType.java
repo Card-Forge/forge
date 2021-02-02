@@ -153,6 +153,7 @@ public enum ApiType {
     SkipTurn (SkipTurnEffect.class),
     StoreSVar (StoreSVarEffect.class),
     StoreMap (StoreMapEffect.class),
+    Subgame (SubgameEffect.class),
     Surveil (SurveilEffect.class),
     SwitchBlock (SwitchBlockEffect.class),
     Tap (TapEffect.class),
