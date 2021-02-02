@@ -19,7 +19,6 @@ package forge.game.cost;
 
 import com.google.common.collect.Lists;
 
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CounterEnumType;
