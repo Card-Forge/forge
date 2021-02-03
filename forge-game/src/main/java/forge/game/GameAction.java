@@ -170,7 +170,7 @@ public class GameAction {
 
         // Don't copy Tokens, copy only cards leaving the battlefield
         // and returning to hand (to recreate their spell ability information)
-        if (suppress || toBattlefield) {
+        if (suppress || toBattlefield || zoneTo.is(ZoneType.Stack)) {
             copied = c;
 
             if (lastKnownInfo == null) {
