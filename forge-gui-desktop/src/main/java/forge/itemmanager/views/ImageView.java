@@ -53,6 +53,7 @@ import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.special.CardZoomer;
+import forge.util.ImageUtil;
 import forge.util.Localizer;
 import forge.view.arcane.CardPanel;
 
@@ -1148,7 +1149,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             boolean tryAltState = false;
             if (hoveredItem == null || hoveredItem.item != item) {
                 if (item instanceof PaperCard) {
-                    if (((PaperCard)item).getRules().getOtherPart() != null) {
+                    if (ImageUtil.hasBackFacePicture(((PaperCard)item))) {
                         if (item.equals(lastAltCard)) {
                             tryAltState = true;
                             lastAltCard = null;
