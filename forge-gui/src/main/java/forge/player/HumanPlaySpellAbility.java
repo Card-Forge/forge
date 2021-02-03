@@ -152,8 +152,6 @@ public class HumanPlaySpellAbility {
                     // if a player failed to play madness cost, move the card to graveyard
                     Card newCard = game.getAction().moveToGraveyard(c, null);
                     newCard.setMadnessWithoutCast(true);
-                } else if (ability.getHostCard().isBestowed()) {
-                    ability.getHostCard().unanimateBestow();
                 }
             }
 
@@ -204,6 +202,10 @@ public class HumanPlaySpellAbility {
             oldCard.getZone().remove(oldCard);
             fromZone.add(oldCard, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
             ability.setHostCard(oldCard);
+
+            oldCard.setBackSide(false);
+            oldCard.setState(oldCard.getFaceupCardStateName(), true);
+            oldCard.unanimateBestow();
         }
 
         ability.clearTargets();

@@ -231,26 +231,27 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
-        if (!hasLegalTargeting(sp, source)) {
-            String str = source + " - [Couldn't add to stack, failed to target] - " + sp.getDescription();
-            System.err.println(str + sp.getAllTargetChoices());
-            game.getGameLog().add(GameLogEntryType.STACK_ADD, str);
-            return;
-        }
-
         if (sp.isSpell()) {
             source.setController(activator, 0);
-            if (sp.isCastFaceDown()) {
-                // Need to override for double faced cards
-                source.turnFaceDown(true);
-            } else if (source.isFaceDown()) {
+
+            if (source.isFaceDown() && !sp.isCastFaceDown()) {
                 source.turnFaceUp(null);
             }
+
+            // force the card be altered for alt states
+            source.setSplitStateToPlayAbility(sp);
 
             // copied always add to stack zone
             if (source.isCopiedSpell()) {
                 game.getStackZone().add(source);
             }
+        }
+
+        if (!hasLegalTargeting(sp, source)) {
+            String str = source + " - [Couldn't add to stack, failed to target] - " + sp.getDescription();
+            System.err.println(str + sp.getAllTargetChoices());
+            game.getGameLog().add(GameLogEntryType.STACK_ADD, str);
+            return;
         }
 
         if (sp.getApi() == ApiType.Charm && sp.hasParam("ChoiceRestriction")) {
