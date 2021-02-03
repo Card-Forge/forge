@@ -119,6 +119,10 @@ public class HumanPlaySpellAbility {
             human.incNumManaConversion();
         }
 
+        if (option != null && option.isIgnoreSnowSourceManaCostColor()) {
+            payment.setSnowForColor(true);
+        }
+
         if (ability.isAbility() && ability.isActivatedAbility()) {
             final Map<String, String> params = Maps.newHashMap();
             params.put("ManaColorConversion", "Additive");
