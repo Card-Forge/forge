@@ -92,7 +92,7 @@ public class ControlWinLose {
             Forge.back();
         }
         if (openHomeScreen)
-            Forge.openHomeScreen(true);
+            Forge.openHomeScreen(Forge.lastButtonIndex);
     }
 
     /**
