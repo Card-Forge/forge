@@ -410,6 +410,13 @@ public class TriggerHandler {
             return false; // Not the right mode.
         }
 
+        /* this trigger can only be activated once per turn, verify it hasn't already run */
+        if (regtrig.hasParam("ActivationLimit")) {
+            if (regtrig.getActivationsThisTurn() >= Integer.parseInt(regtrig.getParam("ActivationLimit"))) {
+                return false;
+            }
+        }
+
         if (!regtrig.requirementsCheck(game)) {
             return false; // Conditions aren't right.
         }
