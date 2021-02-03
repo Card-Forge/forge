@@ -5365,6 +5365,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void animateBestow(final boolean updateView) {
+        if (isBestowed()) {
+            return;
+        }
+
         bestowTimestamp = getGame().getNextTimestamp();
         addChangedCardTypes(new CardType(Collections.singletonList("Aura"), true),
                 new CardType(Collections.singletonList("Creature"), true),
@@ -5378,6 +5382,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void unanimateBestow(final boolean updateView) {
+        if (!isBestowed()) {
+            return;
+        }
+
         removeChangedCardKeywords(bestowTimestamp, updateView);
         removeChangedCardTypes(bestowTimestamp, updateView);
         bestowTimestamp = -1;
@@ -6111,6 +6119,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void setSplitStateToPlayAbility(final SpellAbility sa) {
+        if (sa.isBestow()) {
+            animateBestow();
+        }
         CardStateName stateName = sa.getCardState();
         if (hasState(stateName)) {
             setState(stateName, true);
@@ -6118,6 +6129,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (hasBackSide()) {
                 setBackSide(getRules().getSplitType().getChangedStateName().equals(stateName));
             }
+        }
+
+        if (sa.isCastFaceDown()) {
+            turnFaceDown(true);
         }
     }
 

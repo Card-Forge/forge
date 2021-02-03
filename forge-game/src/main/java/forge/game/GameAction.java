@@ -170,7 +170,7 @@ public class GameAction {
 
         // Don't copy Tokens, copy only cards leaving the battlefield
         // and returning to hand (to recreate their spell ability information)
-        if (suppress || toBattlefield || zoneTo.is(ZoneType.Stack)) {
+        if (suppress || toBattlefield) {
             copied = c;
 
             if (lastKnownInfo == null) {
@@ -348,14 +348,6 @@ public class GameAction {
                 game.fireEvent(new GameEventCardTapped(c, false));
             }
             copied.setMustAttackEntity(null);
-        }
-
-        // for ETB trigger to work correct,
-        // the LKI needs to be the Card itself,
-        // or it might not updated correctly
-        // TODO be reworked when ZoneTrigger Update is done
-        if (toBattlefield || zoneTo.is(ZoneType.Stack)) {
-            lastKnownInfo = c;
         }
 
         // Need to apply any static effects to produce correct triggers
