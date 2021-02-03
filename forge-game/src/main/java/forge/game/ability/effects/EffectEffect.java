@@ -149,11 +149,7 @@ public class EffectEffect extends SpellAbilityEffect {
             // Grant SVars first in order to give references to granted abilities
             if (effectSVars != null) {
                 for (final String s : effectSVars) {
-                    Card host = sa.getOriginalHost() != null && sa.getHostCard().getSVar(s).isEmpty()
-                            && sa.getOriginalHost().hasSVar(s) ? sa.getOriginalHost() : sa.getHostCard();
-
-                    final String actualSVar = host.getSVar(s);
-                    eff.setSVar(s, actualSVar);
+                    eff.setSVar(s, AbilityUtils.getSVar(sa, s));
                 }
             }
 
