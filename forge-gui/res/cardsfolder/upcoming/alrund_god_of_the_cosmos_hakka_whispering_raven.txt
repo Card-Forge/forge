@@ -1,0 +1,27 @@
+Name:Alrund, God of the Cosmos
+ManaCost:3 U U
+Types:Legendary Creature God
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ Z | AddToughness$ Z | References$ X,Y,Z | Description$ NICKNAME gets +1/+1 for each card in your hand and each foretold card you own in exile.
+SVar:X:Count$InYourHand
+SVar:Y:Count$ValidExile Card.foretold+YouOwn
+SVar:Z:SVar$X/Plus.Y
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChooseCardType | TriggerDescription$ At the beginning of your end step, choose a card type, then reveal the top two cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest on the bottom of your library in any order.
+SVar:TrigChooseCardType:DB$ ChooseType | Defined$ You | Type$ Card | SubAbility$ DBDig
+SVar:DBDig:DB$ Dig | DigNum$ 2 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card.ChosenType | DestinationZone2$ Library | LibraryPosition$ -1
+AlternateMode:Modal
+DeckHints:Ability$Foretell
+AI:RemoveDeck:All
+Oracle:Alrund gets +1/+1 for each card in your hand and each foretold card you own in exile.\nAt the beginning of your end step, choose a card type, then reveal the top two cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest on the bottom of your library in any order.
+
+ALTERNATE
+
+Name:Hakka, Whispering Raven
+ManaCost:1 U
+Types:Legendary Creature Bird
+PT:2/3
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReturn | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, return it to its owner's hand, then scry 2.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 2
+Oracle:Flying\nWhenever Hakka, Whispering Raven deals combat damage to a player, return it to its owner's hand, then scry 2.
