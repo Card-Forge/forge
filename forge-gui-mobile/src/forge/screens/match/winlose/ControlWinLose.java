@@ -88,10 +88,7 @@ public class ControlWinLose {
             MatchController.getHostedMatch().endCurrentGame();
         } catch (NullPointerException e) {}
         view.hide();
-        if(humancount == 0) {
-            Forge.back();
-        }
-        if (openHomeScreen)
+        if (openHomeScreen || humancount == 0)
             Forge.openHomeScreen(Forge.lastButtonIndex);
     }
 
