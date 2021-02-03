@@ -216,7 +216,7 @@ public class Forge implements ApplicationListener {
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
         destroyThis = false; //Allow back()
         Gdx.input.setCatchKey(Keys.MENU, true);
-        openHomeScreen(0); //default for startup
+        openHomeScreen(-1); //default for startup
         splashScreen = null;
 
         boolean isLandscapeMode = isLandscapeMode();
@@ -293,7 +293,7 @@ public class Forge implements ApplicationListener {
     public static void back() {
         if(destroyThis && isLandscapeMode())
             return;
-        if (Dscreens.size() < 2) {
+        if (Dscreens.size() < 2 || (currentScreen == HomeScreen.instance && Forge.isPortraitMode)) {
             exit(false); //prompt to exit if attempting to go back from home screen
             return;
         }

@@ -144,13 +144,15 @@ public class HomeScreen extends FScreen {
     }
 
     public void openMenu(int index){
-        if (index == 0)
-            return; //menu on startup for portrait mode
-        if (index < 6)
+        if (index < 0)
+            return; //menu on startup
+        if (index == 2)
+            OnlineScreen.Lobby.open();
+        else if (index < 6)
             NewGameMenu.getPreferredScreen().open();
-        if (index == 6)
+        else if (index == 6)
             QuestMenu.launchQuestMode(QuestMenu.LaunchReason.StartQuestMode, HomeScreen.instance.getQuestCommanderMode());
-        if (index == 7)
+        else if (index == 7)
             ConquestMenu.launchPlanarConquest(ConquestMenu.LaunchReason.StartPlanarConquest);
     }
 
@@ -163,10 +165,6 @@ public class HomeScreen extends FScreen {
     }
 
     public void addButtonForMode(String caption, final FEventHandler command) {
-        if (caption.contains(Localizer.getInstance().getMessage("lblPlanarConquest")))
-            Forge.lastButtonIndex = 7;
-        else
-            Forge.lastButtonIndex = 6;
         //ensure we don't add the same mode button more than once
         for (int i = baseButtonCount; i < buttons.size(); i++) {
             if (buttons.get(i).getText().equals(caption)) {
@@ -175,6 +173,7 @@ public class HomeScreen extends FScreen {
                     @Override
                     public void handleEvent(FEvent e) {
                         activeButtonIndex = index;
+                        Forge.lastButtonIndex = activeButtonIndex;
                         command.handleEvent(e);
                     }
                 });
@@ -188,6 +187,7 @@ public class HomeScreen extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = index;
+                Forge.lastButtonIndex = activeButtonIndex;
                 command.handleEvent(e);
             }
         });
