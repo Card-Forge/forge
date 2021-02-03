@@ -77,6 +77,7 @@ public class Forge implements ApplicationListener {
     public static int totalDeviceRAM = 0;
     public static int androidVersion = 0;
     public static boolean autoCache = false;
+    public static int lastButtonIndex = 0;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
         if (GuiBase.getInterface() == null) {
@@ -202,10 +203,9 @@ public class Forge implements ApplicationListener {
             ImageCache.preloadCache(filteredkeys);
     }
 
-    public static void openHomeScreen(boolean openNewGameMenu) {
+    public static void openHomeScreen(int index) {
         openScreen(HomeScreen.instance);
-        if(openNewGameMenu)
-            HomeScreen.instance.openNewGamMenu();
+        HomeScreen.instance.openMenu(index);
     }
 
     private void afterDbLoaded() {
@@ -216,7 +216,7 @@ public class Forge implements ApplicationListener {
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
         destroyThis = false; //Allow back()
         Gdx.input.setCatchKey(Keys.MENU, true);
-        openHomeScreen(false);
+        openHomeScreen(1);
         splashScreen = null;
 
         boolean isLandscapeMode = isLandscapeMode();
