@@ -106,6 +106,9 @@ public class ManaEffect extends SpellAbilityEffect {
                         choiceString.append(" ");
                     }
                     choiceString.append(choice);
+                    if (sa.hasParam("TwoEach")) {
+                        choiceString.append(" ").append(choice);
+                    }
                 }
 
                 if (choiceString.toString().isEmpty() && "Combo ColorIdentity".equals(abMana.getOrigProduced())) {
