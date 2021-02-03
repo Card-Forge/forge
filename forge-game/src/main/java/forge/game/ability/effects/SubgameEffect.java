@@ -114,6 +114,10 @@ public class SubgameEffect extends SpellAbilityEffect {
             final CardCollectionView outsideCards = maingame.getCardsInOwnedBy(outsideZones, maingamePlayer);
             if (!outsideCards.isEmpty()) {
                 setCardsInZone(player, ZoneType.Sideboard, outsideCards, true);
+                // Update card view so it shows the origin zone in text.
+                for (Card c : player.getCardsIn(ZoneType.Sideboard)) {
+                    c.updateStateForView();
+                }
 
                 // Assign Companion
                 PlayerController person = player.getController();
