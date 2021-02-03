@@ -1,4 +1,270 @@
 //Rank|Name|Rarity|Set
+#1|Starnheim Unleashed|M|KHM
+#2|Valki, God of Lies|M|KHM
+#3|Halvar, God of Battle|M|KHM
+#4|Quakebringer|M|KHM
+#5|Toralf, God of Fury|M|KHM
+#6|Tyvar Kell|M|KHM
+#7|Burning-Rune Demon|M|KHM
+#8|Eradicator Valkyrie|M|KHM
+#9|Battle Mammoth|M|KHM
+#10|Koma, Cosmos Serpent|M|KHM
+#11|Vorinclex, Monstrous Raider|M|KHM
+#12|Kaya the Inexorable|M|KHM
+#13|Firja's Retribution|R|KHM
+#14|Glorious Protector|R|KHM
+#15|Draugr Necromancer|R|KHM
+#16|Esika's Chariot|R|KHM
+#17|Niko Aris|M|KHM
+#18|Immersturm Predator|R|KHM
+#19|Birgi, God of Storytelling|R|KHM
+#20|Resplendent Marshal|M|KHM
+#21|Dragonkin Berserker|R|KHM
+#22|Alrund's Epiphany|M|KHM
+#23|Alrund, God of the Cosmos|M|KHM
+#24|Tergrid, God of Fright|R|KHM
+#25|Elvish Warmaster|R|KHM
+#26|Sarulf, Realm Eater|R|KHM
+#27|Cosima, God of the Voyage|R|KHM
+#28|Goldspan Dragon|M|KHM
+#29|Varragoth, Bloodsky Sire|R|KHM
+#30|Binding the Old Gods|U|KHM
+#31|Old-Growth Troll|R|KHM
+#32|Battle for Bretagard|R|KHM
+#33|Orvar, the All-Form|M|KHM
+#34|Righteous Valkyrie|R|KHM
+#35|Cosmos Charger|R|KHM
+#36|Sigrid, God-Favored|R|KHM
+#37|Jorn, God of Winter|R|KHM
+#38|Poison the Cup|U|KHM
+#39|Doomskar|R|KHM
+#40|Egon, God of Death|R|KHM
+#41|The Bears of Littjara|R|KHM
+#42|Tundra Fumarole|R|KHM
+#43|Kolvori, God of Kinship|R|KHM
+#44|Calamity Bearer|R|KHM
+#45|Realmwalker|R|KHM
+#46|Skemfar Avenger|R|KHM
+#47|Ascendant Spirit|R|KHM
+#48|Crippling Fear|R|KHM
+#49|Icebreaker Kraken|R|KHM
+#50|Toski, Bearer of Secrets|R|KHM
+#51|Showdown of the Skalds|R|KHM
+#52|Cosmos Elixir|R|KHM
+#53|Icebind Pillar|U|KHM
+#54|Harald, King of Skemfar|U|KHM
+#55|Narfi, Betrayer King|U|KHM
+#56|Battle of Frost and Fire|R|KHM
+#57|Magda, Brazen Outlaw|R|KHM
+#58|Fall of the Impostor|U|KHM
+#59|Kardur, Doomscourge|U|KHM
+#60|Demon Bolt|C|KHM
+#61|Reidane, God of the Worthy|R|KHM
+#62|Arni Slays the Troll|U|KHM
+#63|Arni Brokenbrow|R|KHM
+#64|Blood on the Snow|R|KHM
+#65|The Bloodsky Massacre|R|KHM
+#66|Firja, Judge of Valor|U|KHM
+#67|Koll, the Forgemaster|U|KHM
+#68|Invasion of the Giants|U|KHM
+#69|Harald Unites the Elves|R|KHM
+#70|Aegar, the Freezing Flame|U|KHM
+#71|The Raven's Warning|R|KHM
+#72|Maja, Bretagard Protector|U|KHM
+#73|Svella, Ice Shaper|U|KHM
+#74|Dream Devourer|R|KHM
+#75|Moritte of the Frost|U|KHM
+#76|Maskwood Nexus|R|KHM
+#77|Vega, the Watcher|U|KHM
+#78|Behold the Multiverse|C|KHM
+#79|Sarulf's Packmate|C|KHM
+#80|Feed the Serpent|C|KHM
+#81|Basalt Ravager|U|KHM
+#82|Clarion Spirit|U|KHM
+#83|Cyclone Summoner|R|KHM
+#84|Avalanche Caller|U|KHM
+#85|Fynn, the Fangbearer|U|KHM
+#86|Bloodsky Berserker|U|KHM
+#87|Spirit of the Aldergard|U|KHM
+#88|Reflections of Littjara|R|KHM
+#89|Frost Bite|C|KHM
+#90|Boreal Outrider|U|KHM
+#91|Haunting Voyage|M|KHM
+#92|In Search of Greatness|R|KHM
+#93|Vengeful Reaper|U|KHM
+#94|Skemfar Shadowsage|U|KHM
+#95|Iron Verdict|C|KHM
+#96|Giant's Amulet|U|KHM
+#97|Bound in Gold|C|KHM
+#98|Shepherd of the Cosmos|U|KHM
+#99|Draugr's Helm|U|KHM
+#100|Niko Defies Destiny|U|KHM
+#101|Usher of the Fallen|U|KHM
+#102|Doomskar Titan|U|KHM
+#103|Graven Lore|R|KHM
+#104|Blessing of Frost|R|KHM
+#105|King Narfi's Betrayal|R|KHM
+#106|The Three Seasons|U|KHM
+#107|Runeforge Champion|R|KHM
+#108|Elven Bow|U|KHM
+#109|Struggle for Skemfar|C|KHM
+#110|Blizzard Brawl|U|KHM
+#111|Sculptor of Winter|C|KHM
+#112|Pyre of Heroes|R|KHM
+#113|Elderfang Disciple|C|KHM
+#114|Gates of Istfell|U|KHM
+#115|Fearless Liberator|U|KHM
+#116|Valkyrie's Sword|U|KHM
+#117|Rootless Yew|U|KHM
+#118|Battershield Warrior|U|KHM
+#119|Dwarven Hammer|U|KHM
+#120|Frenzied Raider|U|KHM
+#121|Mistwalker|C|KHM
+#122|Kaya's Onslaught|U|KHM
+#123|Rally the Ranks|R|KHM
+#124|Rise of the Dread Marn|R|KHM
+#125|Reckless Crew|R|KHM
+#126|Waking the Trolls|R|KHM
+#127|Doomskar Oracle|C|KHM
+#128|Hailstorm Valkyrie|U|KHM
+#129|Glimpse the Cosmos|U|KHM
+#130|Augury Raven|C|KHM
+#131|Axgard Cavalry|C|KHM
+#132|Kardur's Vicious Return|U|KHM
+#133|Tergrid's Shadow|U|KHM
+#134|Elderleaf Mentor|C|KHM
+#135|Squash|C|KHM
+#136|Axgard Armory|U|KHM
+#137|Stalwart Valkyrie|C|KHM
+#138|Skemfar Elderhall|U|KHM
+#139|Littjara Glade-Warden|U|KHM
+#140|Provoke the Trolls|U|KHM
+#141|Shimmerdrift Vale|C|KHM
+#142|Bind the Monster|C|KHM
+#143|Guardian Gladewalker|C|KHM
+#144|The World Tree|R|KHM
+#145|Esika, God of the Tree|M|KHM
+#146|Path to the World Tree|U|KHM
+#147|The Trickster-God's Heist|U|KHM
+#148|Bretagard Stronghold|U|KHM
+#149|Inga Rune-Eyes|U|KHM
+#150|Frostpyre Arcanist|U|KHM
+#151|Run Amok|C|KHM
+#152|Berg Strider|C|KHM
+#153|Surtland Frostpyre|U|KHM
+#154|Tuskeri Firewalker|C|KHM
+#155|Goldmaw Champion|C|KHM
+#156|Gnottvold Slumbermound|U|KHM
+#157|Dwarven Reinforcements|C|KHM
+#158|Frost Augur|U|KHM
+#159|Colossal Plow|U|KHM
+#160|Littjara Mirrorlake|U|KHM
+#161|Immersturm Raider|C|KHM
+#162|Port of Karfell|U|KHM
+#163|Great Hall of Starnheim|U|KHM
+#164|Weigh Down|C|KHM
+#165|Depart the Realm|C|KHM
+#166|Littjara Kinseekers|C|KHM
+#167|Bloodline Pretender|U|KHM
+#168|Faceless Haven|R|KHM
+#169|Grim Draugr|C|KHM
+#170|Spectral Steel|U|KHM
+#171|Saw It Coming|U|KHM
+#172|Ravenform|C|KHM
+#173|Barkchannel Pathway|R|KHM
+#174|Hengegate Pathway|R|KHM
+#175|Blightstep Pathway|R|KHM
+#176|Darkbore Pathway|R|KHM
+#177|Divine Gambit|U|KHM
+#178|Rune of Flight|U|KHM
+#179|Infernal Pet|C|KHM
+#180|Dual Strike|U|KHM
+#181|Crush the Weak|U|KHM
+#182|Runed Crown|U|KHM
+#183|Mystic Reflection|R|KHM
+#184|Breakneck Berserker|C|KHM
+#185|Beskir Shieldmate|C|KHM
+#186|Axgard Braggart|C|KHM
+#187|Ascent of the Worthy|U|KHM
+#188|Ravenous Lindwurm|C|KHM
+#189|Grizzled Outrider|C|KHM
+#190|Return Upon the Tide|U|KHM
+#191|Icehide Troll|C|KHM
+#192|Draugr Thought-Thief|C|KHM
+#193|Tyrite Sanctum|R|KHM
+#194|Horizon Seeker|C|KHM
+#195|Priest of the Haunted Edge|C|KHM
+#196|Immersturm Skullcairn|U|KHM
+#197|Starnheim Courser|C|KHM
+#198|Craven Hulk|C|KHM
+#199|Rune of Might|U|KHM
+#200|Rune of Speed|U|KHM
+#201|Mists of Littjara|C|KHM
+#202|Rune of Mortality|U|KHM
+#203|Rune Of Sustenance|U|KHM
+#204|Draugr Recruiter|C|KHM
+#205|Deathknell Berserker|C|KHM
+#206|Snakeskin Veil|C|KHM
+#207|Gods' Hall Guardian|C|KHM
+#208|Koma's Faithful|C|KHM
+#209|Forging the Tyrite Sword|U|KHM
+#210|Glittering Frost|C|KHM
+#211|Withercrown|C|KHM
+#212|Tormentor's Helm|C|KHM
+#213|Raise the Draugr|C|KHM
+#214|Run Ashore|C|KHM
+#215|Search for Glory|R|KHM
+#216|Jaspera Sentinel|C|KHM
+#217|Karfell Kennel-Master|C|KHM
+#218|Gnottvold Recluse|C|KHM
+#219|Karfell Harbinger|C|KHM
+#220|Story Seeker|C|KHM
+#221|Battlefield Raptor|C|KHM
+#222|Disdainful Stroke|C|KHM
+#223|Skull Raid|C|KHM
+#224|Brinebarrow Intruder|C|KHM
+#225|Hagi Mob|C|KHM
+#226|Replicating Ring|U|KHM
+#227|Village Rites|C|KHM
+#228|Raiders' Karve|C|KHM
+#229|Giant Ox|C|KHM
+#230|Cinderheart Giant|C|KHM
+#231|Pilfering Hawk|C|KHM
+#232|Mammoth Growth|C|KHM
+#233|Frostpeak Yeti|C|KHM
+#234|Funeral Longboat|C|KHM
+#235|Wings of the Cosmos|C|KHM
+#236|Duskwielder|C|KHM
+#237|Scorn Effigy|C|KHM
+#238|Raven Wings|C|KHM
+#239|Master Skald|C|KHM
+#240|Fearless Pup|C|KHM
+#241|Jarl of the Forsaken|C|KHM
+#242|Valor of the Worthy|C|KHM
+#243|Undersea Invader|C|KHM
+#244|Seize the Spoils|C|KHM
+#245|Masked Vandal|C|KHM
+#246|Roots of Wisdom|C|KHM
+#247|Dogged Pursuit|C|KHM
+#248|Open the Omenpaths|C|KHM
+#249|Dread Rider|C|KHM
+#250|Codespell Cleric|C|KHM
+#251|Goldvein Pick|C|KHM
+#252|King Harald's Revenge|C|KHM
+#253|Vault Robber|C|KHM
+#254|Revitalize|C|KHM
+#255|Strategic Planning|C|KHM
+#256|Warhorn Blast|C|KHM
+#257|Arachnoform|C|KHM
+#258|Demonic Gifts|C|KHM
+#259|Shackles of Treachery|C|KHM
+#260|Broken Wings|C|KHM
+#261|Smashing Success|C|KHM
+#262|Invoke the Divine|C|KHM
+#263|Annul|C|KHM
+#264|Weathered Runestone|U|KHM
+#265|Tibalt's Trickery|R|KHM
+//Rank|Name|Rarity|Set
 #1|Phylath, World Sculptor|R|ZNR
 #2|Zagras, Thief of Heartbeats|R|ZNR
 #3|Drana, the Last Bloodchief|M|ZNR
