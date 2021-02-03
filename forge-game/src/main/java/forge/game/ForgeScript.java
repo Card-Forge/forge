@@ -153,6 +153,10 @@ public class ForgeScript {
             return sa.hasParam("Equip");
         } else if (property.equals("Boast")) {
             return sa.isBoast();
+        } else if (property.equals("Foretelling")) {
+            return sa.isForetelling();
+        } else if (property.equals("Foretold")) {
+            return sa.isForetold();
         } else if (property.equals("MayPlaySource")) {
             StaticAbility m = sa.getMayPlay();
             if (m == null) {

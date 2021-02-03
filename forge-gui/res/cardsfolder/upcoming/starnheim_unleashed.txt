@@ -1,0 +1,9 @@
+Name:Starnheim Unleashed
+ManaCost:2 W W
+Types:Sorcery
+A:SP$ Token | Cost$ 2 W W | TokenAmount$ Y | TokenScript$ w_4_4_angel_warrior_flying_vigilance | References$ X,Y | SpellDescription$ Create a 4/4 white Angel Warrior creature token with flying and vigilance. If this spell was foretold, create X of those tokens instead.
+SVar:Y:Count$Foretold.X.1
+SVar:X:Count$xPaid
+K:Foretell:X X W
+DeckHas:Ability$Token
+Oracle:Create a 4/4 white Angel Warrior creature token with flying and vigilance. If this spell was foretold, create X of those tokens instead.\nForetell {X}{X}{W} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

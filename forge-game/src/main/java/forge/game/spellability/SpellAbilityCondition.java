@@ -118,6 +118,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
                 this.optionalCostPaid = true;
             }
 
+            if (value.equals("Foretold")) {
+                this.foretold = true;
+            }
+
             if (params.containsKey("ConditionOptionalPaid")) {
                 this.optionalBoolean = Boolean.parseBoolean(params.get("ConditionOptionalPaid"));
             }
@@ -250,6 +254,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.kicked2 && !sa.isOptionalCostPaid(OptionalCost.Kicker2)) return false;
         if (this.altCostPaid && !sa.isOptionalCostPaid(OptionalCost.AltCost)) return false;
         if (this.surgeCostPaid && !sa.isSurged()) return false;
+        if (this.foretold && !sa.isForetold()) return false;
 
         if (this.optionalCostPaid && this.optionalBoolean && !sa.isOptionalCostPaid(OptionalCost.Generic)) return false;
         if (this.optionalCostPaid && !this.optionalBoolean && sa.isOptionalCostPaid(OptionalCost.Generic)) return false;

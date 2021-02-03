@@ -44,6 +44,8 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventSpellAbilityCast gameEventSpellAbilityCast);
     T visit(GameEventSpellResolved event);
     T visit(GameEventSpellRemovedFromStack event);
+    T visit(GameEventSubgameStart event);
+    T visit(GameEventSubgameEnd event);
     T visit(GameEventSurveil event);
     T visit(GameEventTokenCreated event);
     T visit(GameEventTurnBegan gameEventTurnBegan);
@@ -92,6 +94,8 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventSpellResolved event) { return null; }
         public T visit(GameEventSpellAbilityCast event) { return null; }
         public T visit(GameEventSpellRemovedFromStack event) { return null; }
+        public T visit(GameEventSubgameStart event) { return null; }
+        public T visit(GameEventSubgameEnd event) { return null; }
         public T visit(GameEventSurveil event) { return null; }
         public T visit(GameEventTokenCreated event) { return null; }
         public T visit(GameEventTurnBegan event) { return null; }

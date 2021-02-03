@@ -352,6 +352,9 @@ public final class AbilityFactory {
         if (mapParams.containsKey("TargetsWithSameCreatureType")) {
             abTgt.setWithSameCreatureType(true);
         }
+        if (mapParams.containsKey("TargetsWithSameCardType")) {
+            abTgt.setWithSameCardType(true);
+        }
         if (mapParams.containsKey("TargetsWithSameController")) {
             abTgt.setSameController(true);
         }

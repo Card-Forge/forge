@@ -109,6 +109,7 @@ public class Game {
     private final Match match;
     private GameStage age = GameStage.BeforeMulligan;
     private GameOutcome outcome;
+    private Game maingame = null;
 
     private final GameView view;
     private final Tracker tracker = new Tracker();
@@ -219,7 +220,11 @@ public class Game {
         changeZoneLKIInfo.clear();
     }
 
-    public Game(Iterable<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */
+    public Game(Iterable<RegisteredPlayer> players0, GameRules rules0, Match match0) {
+        this(players0, rules0, match0, -1);
+    }
+
+    public Game(Iterable<RegisteredPlayer> players0, GameRules rules0, Match match0, int startingLife) { /* no more zones to map here */
         rules = rules0;
         match = match0;
         this.id = nextId();
@@ -243,7 +248,11 @@ public class Game {
             allPlayers.add(pl);
             ingamePlayers.add(pl);
 
-            pl.setStartingLife(psc.getStartingLife());
+            if (startingLife != -1) {
+                pl.setStartingLife(startingLife);
+            } else {
+                pl.setStartingLife(psc.getStartingLife());
+            }
             pl.setMaxHandSize(psc.getStartingHand());
             pl.setStartingHandSize(psc.getStartingHand());
 
@@ -430,6 +439,14 @@ public class Game {
         return outcome;
     }
 
+    public final Game getMaingame() {
+        return maingame;
+    }
+
+    public void setMaingame(final Game maingame0) {
+        maingame = maingame0;
+    }
+
     public ReplacementHandler getReplacementHandler() {
         return replacementHandler;
     }
@@ -452,12 +469,16 @@ public class Game {
         result.setTurnsPlayed(getPhaseHandler().getTurn());
 
         outcome = result;
-        match.addGamePlayed(this);
+        if (maingame == null) {
+            match.addGamePlayed(this);
+        }
 
         view.updateGameOver(this);
 
         // The log shall listen to events and generate text internally
-        fireEvent(new GameEventGameOutcome(result, match.getOutcomes()));
+        if (maingame == null) {
+            fireEvent(new GameEventGameOutcome(result, match.getOutcomes()));
+        }
     }
 
     public Zone getZoneOf(final Card card) {
@@ -490,6 +511,14 @@ public class Game {
             cards.addAll(getCardsIn(z));
         }
         return cards;
+    }
+
+    public CardCollectionView getCardsInOwnedBy(final Iterable<ZoneType> zones, Player p) {
+        CardCollection cards = new CardCollection();
+        for (final ZoneType z : zones) {
+            cards.addAll(getCardsIncludePhasingIn(z));
+        }
+        return CardLists.filter(cards, CardPredicates.isOwner(p));
     }
 
     public boolean isCardExiled(final Card c) {

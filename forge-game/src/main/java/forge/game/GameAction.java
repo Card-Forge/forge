@@ -73,6 +73,8 @@ public class GameAction {
         // Reset Activations per Turn
         for (final Card card : game.getCardsInGame()) {
             card.resetActivationsPerTurn();
+            // need to reset this in exile
+            card.resetForetoldThisTurn();
         }
     }
 
@@ -168,7 +170,7 @@ public class GameAction {
 
         // Don't copy Tokens, copy only cards leaving the battlefield
         // and returning to hand (to recreate their spell ability information)
-        if (suppress || toBattlefield || zoneTo.is(ZoneType.Stack)) {
+        if (suppress || toBattlefield) {
             copied = c;
 
             if (lastKnownInfo == null) {
@@ -191,10 +193,6 @@ public class GameAction {
 
             if (lastKnownInfo == null) {
                 lastKnownInfo = CardUtil.getLKICopy(c);
-            }
-
-            if (wasFacedown) {
-                c.forceTurnFaceUp();
             }
 
             if (!c.isToken()) {
@@ -517,6 +515,18 @@ public class GameAction {
         // Card lastKnownInfo = c;
 
         c = changeZone(zoneFrom, zoneTo, c, position, cause, params);
+
+        // Move card in maingame if take card from subgame
+        // 720.4a
+        if (zoneFrom != null && zoneFrom.is(ZoneType.Sideboard) && game.getMaingame() != null) {
+            Card maingameCard = c.getOwner().getMappingMaingameCard(c);
+            if (maingameCard != null) {
+                if (maingameCard.getZone().is(ZoneType.Stack)) {
+                    game.getMaingame().getStack().remove(maingameCard);
+                }
+                game.getMaingame().getAction().moveTo(ZoneType.Subgame, maingameCard, null);
+            }
+        }
 
         if (zoneFrom == null) {
             c.setCastFrom(null);

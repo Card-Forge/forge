@@ -701,6 +701,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("ExileFaceDown")) {
                         movedCard.turnFaceDown(true);
                     }
+                    if (sa.hasParam("Foretold")) {
+                        movedCard.setForetold(true);
+                        movedCard.setForetoldThisTurn(true);
+                        movedCard.setForetoldByEffect(true);
+                        // look at the exiled card
+                        movedCard.addMayLookTemp(sa.getActivatingPlayer());
+                    }
 
                     if (sa.hasParam("TrackDiscarded")) {
                         movedCard.setMadnessWithoutCast(true);
@@ -1239,6 +1246,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 if (sa.hasParam("ExileFaceDown")) {
                     movedCard.turnFaceDown(true);
+                }
+                if (sa.hasParam("Foretold")) {
+                    movedCard.setForetold(true);
+                    movedCard.setForetoldThisTurn(true);
+                    movedCard.setForetoldByEffect(true);
+                    // look at the exiled card
+                    movedCard.addMayLookTemp(sa.getActivatingPlayer());
                 }
             }
             else {

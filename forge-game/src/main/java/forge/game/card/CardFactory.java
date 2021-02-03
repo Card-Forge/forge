@@ -88,7 +88,7 @@ public class CardFactory {
         }
 
         out.setZone(in.getZone());
-        out.setState(in.getCurrentStateName(), true);
+        out.setState(in.getFaceupCardStateName(), true);
         out.setBackSide(in.isBackSide());
 
         // this's necessary for forge.game.GameAction.unattachCardLeavingBattlefield(Card)

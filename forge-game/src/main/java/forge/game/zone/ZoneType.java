@@ -24,6 +24,7 @@ public enum ZoneType {
     Ante(false, "lblAnteZone"),
     SchemeDeck(true, "lblSchemeDeckZone"),
     PlanarDeck(true, "lblPlanarDeckZone"),
+    Subgame(true, "lblSubgameZone"),
     None(true, "lblNoneZone");
 
     public static final List<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = Arrays.asList(Battlefield, Graveyard, Exile, Command/*, Hand*/);

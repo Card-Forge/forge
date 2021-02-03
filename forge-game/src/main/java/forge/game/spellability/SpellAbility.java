@@ -466,23 +466,23 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public final void clearManaPaid() {
         payingMana.clear();
     }
-    
+
     public final void applyPayingManaEffects() {
         Card host = getHostCard();
-        
+
         for (Mana mana : getPayingMana()) {
             if (mana.triggersWhenSpent()) {
                 mana.getManaAbility().addTriggersWhenSpent(this, host);
             }
-            
+
             if (mana.addsCounters(this)) {
                 mana.getManaAbility().createETBCounters(host, getActivatingPlayer());
             }
-            
+
             if (mana.addsNoCounterMagic(this) && host != null) {
                 host.setCanCounter(false);
             }
-            
+
             if (isSpell() && host != null) {
                 if (mana.addsKeywords(this) && mana.addsKeywordsType()
                         && host.getType().hasStringType(mana.getManaAbility().getAddsKeywordsType())) {
@@ -823,6 +823,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return this.isAlternativeCost(AlternativeCost.Flashback);
     }
 
+    public boolean isForetelling() {
+        return false;
+    }
+    public boolean isForetold() {
+        return this.isAlternativeCost(AlternativeCost.Foretold);
+    }
+
+
     /**
      * @return the aftermath
      */
@@ -1048,29 +1056,26 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 final Card c = (Card) entity;
                 CardCollection pl = AbilityUtils.getDefinedCards(getHostCard(), getParam("TargetsWithSharedCardType"), this);
                 for (final Card crd : pl) {
-                    if (!c.sharesCardTypeWith(crd)) {
-                        return false;
+                    // one of those types
+                    if (hasParam("TargetsWithSharedTypes")) {
+                        boolean flag = false;
+                        for (final String type : getParam("TargetsWithSharedTypes").split(",")) {
+                            if (c.getType().hasStringType(type) && crd.getType().hasStringType(type)) {
+                                flag = true;
+                                break;
+                            }
+                        }
+                        if (!flag) {
+                            return false;
+                        }
+                    } else {
+                        if (!c.sharesCardTypeWith(crd)) {
+                            return false;
+                        }
                     }
                 }
             }
-            if (hasParam("TargetsWithSharedTypes") && entity instanceof Card) {
-                final Card c = (Card) entity;
-                final SpellAbility parent = getParentTargetingCard();
-                final Card parentTargeted = parent != null ? parent.getTargetCard() : null;
-                if (parentTargeted == null) {
-                    return false;
-                }
-                boolean flag = false;
-                for (final String type : getParam("TargetsWithSharedTypes").split(",")) {
-                    if (c.getType().hasStringType(type) && parentTargeted.getType().hasStringType(type)) {
-                        flag = true;
-                        break;
-                    }
-                }
-                if (!flag) {
-                    return false;
-                }
-            }
+
             if (hasParam("TargetsWithControllerProperty") && entity instanceof Card) {
                 final String prop = getParam("TargetsWithControllerProperty");
                 final Card c = (Card) entity;
@@ -1158,6 +1163,16 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 if (entity instanceof Card) {
                     for (final Card c : targetChosen.getTargetCards()) {
                         if (entity != c && !c.sharesCreatureTypeWith((Card) entity)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            if (tr.isWithSameCardType()) {
+                if (entity instanceof Card) {
+                    for (final Card c : targetChosen.getTargetCards()) {
+                        if (entity != c && !c.sharesCardTypeWith((Card) entity)) {
                             return false;
                         }
                     }
@@ -1777,6 +1792,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         else if (incR[0].equals("Activated")) {
             if (!root.isActivatedAbility()) {
+                return false;
+            }
+        }
+        else if (incR[0].equals("Static")) {
+            if (!(root instanceof AbilityStatic)) {
                 return false;
             }
         }
