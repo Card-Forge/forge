@@ -22,6 +22,8 @@ import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
 import forge.util.Lang;
+import forge.util.Localizer;
+import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 
@@ -757,6 +759,7 @@ public class CardView extends GameEntityView {
     }
     void updateState(Card c) {
         updateName(c);
+        updateZoneText(c);
         updateDamage(c);
 
         boolean isSplitCard = c.isSplitCard();
@@ -871,9 +874,40 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.CantHaveKeyword, keywords);
     }
 
+    private String zoneText = "";
+    private String getZoneText() {
+        return zoneText;
+    }
+
+    void updateZoneText(Card c) {
+        if (c.getZone() != null && c.getZone().is(ZoneType.Sideboard) && c.getGame().getMaingame() != null) {
+            Card parentCard = c.getOwner().getMappingMaingameCard(c);
+            StringBuilder sb = new StringBuilder();
+            int parentLevel = 0;
+            while (parentCard != null) {
+                parentLevel++;
+                if (!parentCard.getZone().is(ZoneType.Sideboard)) {
+                    sb.append('[');
+                    if (parentCard.getGame().getMaingame() == null) {
+                        sb.append(Localizer.getInstance().getMessage("lblMainGame"));
+                    } else {
+                        sb.append(Localizer.getInstance().getMessage("lblSubgame", parentLevel));
+                    }
+                    sb.append(": ");
+                    sb.append(TextUtil.capitalize(parentCard.getZone().getZoneType().getTranslatedName()));
+                    sb.append(']');
+                    break;
+                }
+                parentCard = parentCard.getOwner().getMappingMaingameCard(parentCard);
+            }
+            zoneText = sb.toString();
+        }
+    }
+
     @Override
     public String toString() {
         String name = getName();
+        String zone = getZoneText();
         if (getId() <= 0) { //if fake card, just return name
             return name;
         }
@@ -888,7 +922,7 @@ public class CardView extends GameEntityView {
                 }
             }
         }
-        return (name + " (" + getId() + ")").trim();
+        return (zone + ' ' + name + " (" + getId() + ")").trim();
     }
 
     public class CardStateView extends TrackableObject {
