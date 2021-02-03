@@ -6,4 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X
 SVar:X:Count$MostProminentCreatureType Creature.YouCtrl
 SVar:PlayMain1:TRUE
-Oracle:When Basalt Ravager enters the battlefield, it deals 4 damage to target creature.
+Oracle:When Basalt Ravager enters the battlefield, it deals X damage to any target, where X is the greatest number of creatures you control that have a creature type in common.
