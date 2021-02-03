@@ -216,7 +216,7 @@ public class Forge implements ApplicationListener {
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
         destroyThis = false; //Allow back()
         Gdx.input.setCatchKey(Keys.MENU, true);
-        openHomeScreen(1);
+        openHomeScreen(0); //default for startup
         splashScreen = null;
 
         boolean isLandscapeMode = isLandscapeMode();

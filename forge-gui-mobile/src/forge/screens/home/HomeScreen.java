@@ -144,6 +144,8 @@ public class HomeScreen extends FScreen {
     }
 
     public void openMenu(int index){
+        if (index == 0)
+            return; //menu on startup for portrait mode
         if (index < 6)
             NewGameMenu.getPreferredScreen().open();
         if (index == 6)
