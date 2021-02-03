@@ -1,0 +1,10 @@
+Name:Elvish Warmaster
+ManaCost:1 G
+Types:Creature Elf Warrior
+PT:2/2
+T:Mode$ ChangesZoneAll | ValidCards$ Elf.Other+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigToken | TriggerDescription$ Whenever one or more other Elves enter the battlefield under your control, create a 1/1 green Elf Warrior creature token. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 |TokenScript$ g_1_1_elf_warrior | TokenOwner$ You
+A:AB$ PumpAll | Cost$ 5 G G | ValidCards$ Elf.YouCtrl | KW$ Deathtouch | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Elves you control get +2/+2 and gain deathtouch until end of turn.
+DeckHints:Type$Elf
+DeckHas:Ability$Token
+Oracle:Whenever one or more other Elves enter the battlefield under your control, create a 1/1 green Elf Warrior creature token. This ability triggers only once each turn.\n{5}{G}{G}: Elves you control get +2/+2 and gain deathtouch until end of turn.

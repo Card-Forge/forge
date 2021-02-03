@@ -171,11 +171,6 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
-        /* this trigger can only be activated once per turn, verify it hasn't already run */
-        if (hasParam("ActivationLimit")) {
-            return this.getActivationsThisTurn() < Integer.parseInt(getParam("ActivationLimit"));
-        }
-
         return true;
     }
 
