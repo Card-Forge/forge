@@ -45,6 +45,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -176,13 +177,8 @@ public final class GameActionUtil {
                         desc.append(newSA.getCostDescription());
                         desc.append("(").append(inst.getReminderText()).append(")");
                         newSA.setDescription(desc.toString());
+                        newSA.putParam("AfterDescription", "(Escaped)");
 
-                        // Stack Description only for Permanent or it might crash
-                        if (source.isPermanent()) {
-                            final StringBuilder sbStack = new StringBuilder();
-                            sbStack.append(sa.getStackDescription()).append(" (Escaped)");
-                            newSA.setStackDescription(sbStack.toString());
-                        }
                         newSA.setAlternativeCost(AlternativeCost.Escape);
                         newSA.getRestrictions().setZone(ZoneType.Graveyard);
 
@@ -217,13 +213,7 @@ public final class GameActionUtil {
                         final SpellAbility foretold = sa.copy(activator);
                         foretold.setAlternativeCost(AlternativeCost.Foretold);
                         foretold.getRestrictions().setZone(ZoneType.Exile);
-
-                        // Stack Description only for Permanent or it might crash
-                        if (source.isPermanent()) {
-                            final StringBuilder sbStack = new StringBuilder();
-                            sbStack.append(sa.getStackDescription()).append(" (Foretold)");
-                            foretold.setStackDescription(sbStack.toString());
-                        }
+                        foretold.putParam("AfterDescription", "(Foretold)");
 
                         final String[] k = keyword.split(":");
                         foretold.setPayCosts(new Cost(k[1], false));
