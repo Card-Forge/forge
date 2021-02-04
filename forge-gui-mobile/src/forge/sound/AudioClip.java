@@ -40,7 +40,7 @@ public class AudioClip implements IAudioClip {
         }
     }
 
-    public final void play() {
+    public final void play(float value) {
         if (clip == null) {
             return;
         }
@@ -50,7 +50,7 @@ public class AudioClip implements IAudioClip {
         catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-        clip.play();
+        clip.play(value);
     }
 
     public final void loop() {

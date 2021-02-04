@@ -438,20 +438,58 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("nlVibrateAfterLongPress")),
                 6);
         //Sound Options
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_SOUNDS,
-                localizer.getMessage("cbEnableSounds"),
-                localizer.getMessage("nlEnableSounds")),
-                7);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_MUSIC,
-                localizer.getMessage("cbEnableMusic"),
-                localizer.getMessage("nlEnableMusic")) {
-                    @Override
-                    public void select() {
-                        super.select();
-                        //update background music when this setting changes
-                        SoundSystem.instance.changeBackgroundTrack();
+        if(GuiBase.getInterface().isLibgdxPort()) {
+            lstSettings.addItem(new CustomSelectSetting(FPref.UI_VOL_SOUNDS,
+                localizer.getMessage("cbAdjustSoundsVolume"),
+                localizer.getMessage("nlAdjustSoundsVolume"),
+                new String[]{"0", "25", "50", "75", "100"}) {
+                @Override
+                public void valueChanged(String newValue) {
+                    super.valueChanged(newValue);
+                    try {
+                        int val = Integer.parseInt(newValue);
+                        Forge.clipVol = val/100f;
                     }
-                },7);
+                    catch (Exception e) {
+                        Forge.clipVol = 1f;
+                    }
+                }
+            }, 7);
+            lstSettings.addItem(new CustomSelectSetting(FPref.UI_VOL_MUSIC,
+                    localizer.getMessage("cbAdjustMusicVolume"),
+                    localizer.getMessage("nlAdjustMusicVolume"),
+                    new String[]{"0", "25", "50", "75", "100"}) {
+                @Override
+                public void valueChanged(String newValue) {
+                    super.valueChanged(newValue);
+                    try {
+                        int val = Integer.parseInt(newValue);
+                        Forge.musicVol = val/100f;
+                    }
+                    catch (Exception e) {
+                        Forge.musicVol = 1f;
+                    }
+                    //update background music when this setting changes
+                    SoundSystem.instance.changeBackgroundTrack();
+                    SoundSystem.instance.adjustVolume(Forge.musicVol);
+                }
+            }, 7);
+        } else {
+            lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_SOUNDS,
+                    localizer.getMessage("cbEnableSounds"),
+                    localizer.getMessage("nlEnableSounds")),
+                    7);
+            lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_MUSIC,
+                    localizer.getMessage("cbEnableMusic"),
+                    localizer.getMessage("nlEnableMusic")) {
+                @Override
+                public void select() {
+                    super.select();
+                    //update background music when this setting changes
+                    SoundSystem.instance.changeBackgroundTrack();
+                }
+            },7);
+        }
         /*lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_SOUND_SYSTEM,
                 "Use Alternate Sound System",
                 "Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."),

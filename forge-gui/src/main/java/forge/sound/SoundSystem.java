@@ -43,8 +43,14 @@ public class SoundSystem {
      *         was unavailable or failed to load.
      */
     protected IAudioClip fetchResource(final SoundEffectType type) {
-        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
-            return emptySound;
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            if (FModel.getPreferences().getPrefInt(FPref.UI_VOL_SOUNDS)<1) {
+                return emptySound;
+            }
+        } else {
+            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
+                return emptySound;
+            }
         }
 
         IAudioClip clip = loadedClips.get(type);
@@ -66,8 +72,14 @@ public class SoundSystem {
      *         was unavailable or failed to load.
      */
     protected IAudioClip fetchResource(final String fileName) {
-        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
-            return emptySound;
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            if (FModel.getPreferences().getPrefInt(FPref.UI_VOL_SOUNDS)<1) {
+                return emptySound;
+            }
+        } else {
+            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
+                return emptySound;
+            }
         }
 
         IAudioClip clip = loadedScriptClips.get(fileName);
@@ -101,7 +113,7 @@ public class SoundSystem {
         else {
             final IAudioClip snd = fetchResource(resourceFileName);
             if (!isSynchronized || snd.isDone()) {
-                snd.play();
+                snd.play(FModel.getPreferences().getPrefInt(FPref.UI_VOL_SOUNDS)/100f);
             }
         }
     }
@@ -116,7 +128,7 @@ public class SoundSystem {
         else {
             final IAudioClip snd = fetchResource(type);
             if (!isSynchronized || snd.isDone()) {
-                snd.play();
+                snd.play(FModel.getPreferences().getPrefInt(FPref.UI_VOL_SOUNDS)/100f);
             }
         }
     }
@@ -182,6 +194,12 @@ public class SoundSystem {
         changeBackgroundTrack();
     }
 
+    public void adjustVolume(float value) {
+        if (currentTrack != null) {
+            currentTrack.setVolume(value);
+        }
+    }
+
     public void changeBackgroundTrack() {
         //ensure old track stopped and disposed of if needed
         if (currentTrack != null) {
@@ -189,7 +207,9 @@ public class SoundSystem {
             currentTrack = null;
         }
 
-        if (currentPlaylist == null || !FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_MUSIC)) {
+        if (currentPlaylist == null || GuiBase.getInterface().isLibgdxPort()
+                ? FModel.getPreferences().getPrefInt(FPref.UI_VOL_MUSIC) < 1
+                : !FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_MUSIC)) {
             return;
         }
 
