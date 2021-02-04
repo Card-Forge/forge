@@ -194,12 +194,6 @@ public class SoundSystem {
         changeBackgroundTrack();
     }
 
-    public void adjustVolume(float value) {
-        if (currentTrack != null) {
-            currentTrack.setVolume(value);
-        }
-    }
-
     public void changeBackgroundTrack() {
         //ensure old track stopped and disposed of if needed
         if (currentTrack != null) {
@@ -228,6 +222,7 @@ public class SoundSystem {
                     changeBackgroundTrack(); //change track when music completes on its own
                 }
             });
+            currentTrack.setVolume(FModel.getPreferences().getPrefInt(FPref.UI_VOL_MUSIC)/100f);
         } catch (final Exception ex) {
             System.err.println("Unable to load music file: " + filename);
         }

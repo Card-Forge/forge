@@ -442,19 +442,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             lstSettings.addItem(new CustomSelectSetting(FPref.UI_VOL_SOUNDS,
                 localizer.getMessage("cbAdjustSoundsVolume"),
                 localizer.getMessage("nlAdjustSoundsVolume"),
-                new String[]{"0", "25", "50", "75", "100"}) {
-                @Override
-                public void valueChanged(String newValue) {
-                    super.valueChanged(newValue);
-                    try {
-                        int val = Integer.parseInt(newValue);
-                        Forge.clipVol = val/100f;
-                    }
-                    catch (Exception e) {
-                        Forge.clipVol = 1f;
-                    }
-                }
-            }, 7);
+                new String[]{"0", "25", "50", "75", "100"}),
+                7);
             lstSettings.addItem(new CustomSelectSetting(FPref.UI_VOL_MUSIC,
                     localizer.getMessage("cbAdjustMusicVolume"),
                     localizer.getMessage("nlAdjustMusicVolume"),
@@ -462,16 +451,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 @Override
                 public void valueChanged(String newValue) {
                     super.valueChanged(newValue);
-                    try {
-                        int val = Integer.parseInt(newValue);
-                        Forge.musicVol = val/100f;
-                    }
-                    catch (Exception e) {
-                        Forge.musicVol = 1f;
-                    }
                     //update background music when this setting changes
                     SoundSystem.instance.changeBackgroundTrack();
-                    SoundSystem.instance.adjustVolume(Forge.musicVol);
                 }
             }, 7);
         } else {
