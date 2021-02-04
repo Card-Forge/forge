@@ -182,14 +182,8 @@ public class AudioClip implements IAudioClip {
             if (!fSound.exists()) {
                 throw new IllegalArgumentException("Sound file " + fSound.toString() + " does not exist, cannot make a clip of it");
             }
-            InputStream inputStream = null;
             try {
-                inputStream = Files.asByteSource(fSound).openStream();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                ByteArrayInputStream bis = new ByteArrayInputStream(Converter.convertFrom(inputStream).toByteArray());
+                ByteArrayInputStream bis = new ByteArrayInputStream(Converter.convertFrom(Files.asByteSource(fSound).openStream()).toByteArray());
                 AudioInputStream stream = AudioSystem.getAudioInputStream(bis);
                 AudioFormat format = stream.getFormat();
                 DataLine.Info info = new DataLine.Info(Clip.class, stream.getFormat(), ((int) stream.getFrameLength() * format.getFrameSize()));
