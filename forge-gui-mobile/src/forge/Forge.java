@@ -78,8 +78,6 @@ public class Forge implements ApplicationListener {
     public static int androidVersion = 0;
     public static boolean autoCache = false;
     public static int lastButtonIndex = 0;
-    public static float clipVol = 1f;
-    public static float musicVol = 1f;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
         if (GuiBase.getInterface() == null) {
@@ -119,9 +117,6 @@ public class Forge implements ApplicationListener {
         Gdx.input.setCatchKey(Keys.BACK, true);
         destroyThis = true; //Prevent back()
         ForgePreferences prefs = new ForgePreferences();
-
-        clipVol = prefs.getPrefInt(FPref.UI_VOL_SOUNDS)/100f;
-        musicVol = prefs.getPrefInt(FPref.UI_VOL_SOUNDS)/100f;
 
         String skinName;
         if (FileUtil.doesFileExist(ForgeConstants.MAIN_PREFS_FILE)) {
