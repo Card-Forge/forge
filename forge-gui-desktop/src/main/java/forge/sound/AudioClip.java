@@ -20,10 +20,14 @@ package forge.sound;
 
 import javax.sound.sampled.*;
 
+import com.google.common.io.Files;
+import com.sipgate.mp3wav.Converter;
 import forge.properties.ForgeConstants;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.MissingResourceException;
@@ -178,9 +182,15 @@ public class AudioClip implements IAudioClip {
             if (!fSound.exists()) {
                 throw new IllegalArgumentException("Sound file " + fSound.toString() + " does not exist, cannot make a clip of it");
             }
-
+            InputStream inputStream = null;
             try {
-                AudioInputStream stream = AudioSystem.getAudioInputStream(fSound);
+                inputStream = Files.asByteSource(fSound).openStream();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Converter.convertFrom(inputStream).toByteArray());
+                AudioInputStream stream = AudioSystem.getAudioInputStream(bis);
                 AudioFormat format = stream.getFormat();
                 DataLine.Info info = new DataLine.Info(Clip.class, stream.getFormat(), ((int) stream.getFrameLength() * format.getFrameSize()));
                 Clip clip = (Clip) AudioSystem.getLine(info);

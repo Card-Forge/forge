@@ -203,6 +203,11 @@
             <version>1.27</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>com.sipgate</groupId>
+            <artifactId>mp3-wav</artifactId>
+            <version>1.0.3</version>
+        </dependency>
     </dependencies>
 
     <profiles>
