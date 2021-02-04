@@ -97,11 +97,15 @@ public abstract class SpellAbilityEffect {
             }
         } else {
             final String conditionDesc = sa.getParam("ConditionDescription");
+            final String afterDesc = sa.getParam("AfterDescription");
             final String baseDesc = this.getStackDescription(sa);
             if (conditionDesc != null) {
                 sb.append(conditionDesc).append(" ");
             }
             sb.append(baseDesc);
+            if (afterDesc != null) {
+                sb.append(" ").append(afterDesc);
+            }
         }
 
         // only add to StackDescription if its not a Permanent Spell
