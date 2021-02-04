@@ -8,6 +8,7 @@ SVar:DBGangUp:DB$ Pump | ValidTgts$ Creature,Planeswalker | TargetMin$ 0 | Targe
 SVar:DBRepeatEach:DB$ RepeatEach | RepeatCards$ Creature.YouCtrl+powerGE4 | RepeatSubAbility$ DBDamage | DamageMap$ True | SubAbility$ DBCleanup | SpellDescription$ Choose up to one target creature or planeswalker. Each creature with power 4 or greater you control deals damage equal to its power to that permanent.
 SVar:DBDamage:DB$ DealDamage | Defined$ Imprinted | DamageSource$ Remembered | NumDmg$ Z | References$ Z
 SVar:MaxTargets:Count$Valid Creature.Shapeshifter+YouCtrl
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Z:Remembered$CardPower
 DeckHas:Ability$Token
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create a 2/2 blue Shapeshifter creature token with changeling.\nII — Any number of target Shapeshifter creatures you control have base power and toughness 4/4.\nIII — Choose up to one target creature or planeswalker. Each creature with power 4 or greater you control deals damage equal to its power to that permanent.
