@@ -298,16 +298,6 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         p.getGame().fireEvent(new GameEventZone(ZoneType.Battlefield, p, EventValueChangeType.ComplexUpdate, null));
     }
 
-    public byte getPossibleColorUses(byte color) {
-        // Take the current conversion value, AND with restrictions to get mana usage
-        int rowIdx = ManaAtom.getIndexOfFirstManaType(color);
-        int matrixIdx = rowIdx < 0 ? identityMatrix.length - 1 : rowIdx;
-
-        byte colorUse = colorConversionMatrix[matrixIdx];
-        colorUse &= colorRestrictionMatrix[matrixIdx];
-        return colorUse;
-    }
-
     public boolean canPayForShardWithColor(ManaCostShard shard, byte color) {
         if (shard.isOfKind(ManaAtom.COLORLESS) && color == ManaAtom.GENERIC) {
             return false; // FIXME: testing Colorless against Generic is a recipe for disaster, but probably there should be a better fix.

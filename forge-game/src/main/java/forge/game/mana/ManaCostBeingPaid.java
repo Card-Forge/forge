@@ -547,6 +547,11 @@ public class ManaCostBeingPaid {
         	return false;
         }
 
+        // snow can be paid for any color
+        if (shard.getColorMask() != 0 && mana.isSnow() && pool.isSnowForColor()) {
+            return true;
+        }
+
         byte color = mana.getColor();
         return pool.canPayForShardWithColor(shard, color);
     }
