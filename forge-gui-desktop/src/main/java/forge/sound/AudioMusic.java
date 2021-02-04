@@ -114,4 +114,9 @@ public class AudioMusic implements IAudioMusic {
         close();
         canResume = false;
     }
+
+    @Override
+    public void setVolume(float value) {
+        //todo
+    }
 }

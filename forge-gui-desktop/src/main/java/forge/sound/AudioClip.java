@@ -58,7 +58,7 @@ public class AudioClip implements IAudioClip {
     }
 
     @Override
-    public final void play() {
+    public final void play(float value) {
         if (clips.stream().anyMatch(ClipWrapper::isRunning)) {
             // introduce small delay to make a batch sounds more granular,
             // e.g. when you auto-tap 4 lands the 4 tap sounds should

@@ -1,5 +1,6 @@
 package forge.animation;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.properties.ForgeConstants;
 import forge.sound.AudioClip;
@@ -23,7 +24,7 @@ public enum AbilityEffect {
         if (soundClip == null) {
             soundClip = AudioClip.createClip(ForgeConstants.EFFECTS_DIR + wav);
         }
-        soundClip.play();
+        soundClip.play(Forge.clipVol);
         animation.start();
     }
 

@@ -40,4 +40,9 @@ public class AudioMusic implements IAudioMusic {
         stop();
         music.dispose();
     }
+
+    @Override
+    public void setVolume(float value) {
+        music.setVolume(value);
+    }
 }
