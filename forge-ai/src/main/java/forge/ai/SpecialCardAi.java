@@ -865,7 +865,7 @@ public class SpecialCardAi {
             }
 
             // Set PayX here to maximum value.
-            int tokenSize = ComputerUtilMana.determineLeftoverMana(sa, ai);
+            int tokenSize = ComputerUtilCost.getMaxXValue(sa, ai);
 
             // Some basic strategy for Momir
             if (tokenSize < 2) {
@@ -876,7 +876,7 @@ public class SpecialCardAi {
                 tokenSize = 11;
             }
 
-            sa.setSVar("PayX", Integer.toString(tokenSize));
+            sa.setXManaCostPaid(tokenSize);
 
             return true;
         }
@@ -1441,7 +1441,6 @@ public class SpecialCardAi {
                 return false;
             }
             sa.setXManaCostPaid(x);
-            sa.setSVar("PayX", String.valueOf(x));
             return true;
         }
     }

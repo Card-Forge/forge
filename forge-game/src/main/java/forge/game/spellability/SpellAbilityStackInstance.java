@@ -132,14 +132,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
 
         final Card source = ability.getHostCard();
 
-        // Store SVars and Clear
-        for (final String store : Card.getStorableSVars()) {
-            final String value = source.getSVar(store);
-            if (!StringUtils.isEmpty(value)) {
-                storedSVars.put(store, value);
-                source.setSVar(store, "");
-            }
-        }
         // We probably should be storing SA svars too right?
         if (!sa.isWrapper()) {
             for (final Entry<String, String> e : sa.getSVars().entrySet()) {
@@ -204,15 +196,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
             ability.setTriggerRemembered(triggerRemembered);
 
             // Add SVars back in
-            final Card source = ability.getHostCard();
-            for (final String store : Card.getStorableSVars()) {
-                final String value = storedSVars.get(store);
-                if (!StringUtils.isEmpty(value)) {
-                    source.setSVar(store, value);
-                    storedSVars.remove(store);
-                }
-            }
-
             final SpellAbility sa = ability.isWrapper() ? ((WrappedAbility) ability).getWrappedAbility() : ability;
             for (final String store : storedSVars.keySet()) {
                 final String value = storedSVars.get(store);

@@ -36,9 +36,6 @@ public class CleanUpEffect extends SpellAbilityEffect {
             source.clearImprintedCards();
             game.getCardState(source).clearImprintedCards();
         }
-        if (sa.hasParam("ClearChosenX")) {
-            source.setSVar("ChosenX", "");
-        }
         if (sa.hasParam("ClearTriggered")) {
             game.getTriggerHandler().clearDelayedTrigger(source);
         }

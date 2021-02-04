@@ -6,7 +6,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
@@ -47,10 +46,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         	dmg = ComputerUtilMana.getConvergeCount(sa, ai);
         }
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
-            x = ComputerUtilMana.determineLeftoverMana(sa, ai);
-        }
-        if (damage.equals("ChosenX")) {
-            x = source.getCounters(CounterEnumType.LOYALTY);
+            x = ComputerUtilCost.getMaxXValue(sa, ai);
         }
         if (x == -1) {
             if (determineOppToKill(ai, sa, source, dmg) != null) {
@@ -83,10 +79,7 @@ public class  DamageAllAi extends SpellAbilityAi {
 
             if (best_x > 0) {
                 if (sa.getSVar(damage).equals("Count$xPaid")) {
-                    sa.setSVar("PayX", Integer.toString(best_x));
-                }
-                if (damage.equals("ChosenX")) {
-                    source.setSVar("ChosenX", "Number$" + best_x);
+                    sa.setXManaCostPaid(best_x);
                 }
                 return true;
             }
@@ -198,12 +191,13 @@ public class  DamageAllAi extends SpellAbilityAi {
         String validP = "";
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
-
+        int dmg;
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            sa.setSVar("PayX", Integer.toString(dmg));
+            dmg = ComputerUtilCost.getMaxXValue(sa, ai);
+            sa.setXManaCostPaid(dmg);
+        } else {
+            dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
         }
 
         if (sa.hasParam("ValidPlayers")) {
@@ -280,12 +274,14 @@ public class  DamageAllAi extends SpellAbilityAi {
         String validP = "";
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
+        int dmg;
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            sa.setSVar("PayX", Integer.toString(dmg));
+            dmg = ComputerUtilCost.getMaxXValue(sa, ai);
+            sa.setXManaCostPaid(dmg);
+        } else {
+            dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
         }
 
         if (sa.hasParam("ValidPlayers")) {

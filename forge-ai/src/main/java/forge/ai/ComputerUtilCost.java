@@ -86,15 +86,6 @@ public class ComputerUtilCost {
                     return false;
                 }
 
-                // Remove X counters - set ChosenX to max possible value here, the SAs should correct that
-                // value later as the AI decides what to do (in checkApiLogic / checkAiLogic)
-                if (sa.hasSVar(remCounter.getAmount())) {
-                    final String sVar = sa.getSVar(remCounter.getAmount());
-                    if (sVar.equals("Count$xPaid") && sa.hasSVar("PayX")) {
-                        sa.setSVar("PayX", Integer.toString(Math.min(Integer.valueOf(sa.getSVar("PayX")), source.getCounters(type))));
-                    }
-                }
-
                 // ignore Loyality abilities with Zero as Cost
                 if (!type.is(CounterEnumType.LOYALTY)) {
                     PaymentDecision pay = decision.visit(remCounter);
@@ -674,6 +665,7 @@ public class ComputerUtilCost {
 
     public static int getMaxXValue(SpellAbility sa, Player ai) {
         final Card source = sa.getHostCard();
+        final SpellAbility root = sa.getRootAbility();
         final Cost abCost = sa.getPayCosts();
         if (abCost == null || !abCost.hasXInAnyCostPart()) {
             return 0;
@@ -682,7 +674,7 @@ public class ComputerUtilCost {
         Integer val = null;
 
         if (sa.costHasManaX()) {
-            val = ComputerUtilMana.determineLeftoverMana(sa, ai);
+            val = ComputerUtilMana.determineLeftoverMana(root, ai);
         }
 
         if (sa.usesTargeting()) {
@@ -698,7 +690,7 @@ public class ComputerUtilCost {
             }
         }
 
-        val = ObjectUtils.min(val, abCost.getMaxForNonManaX(sa, ai));
+        val = ObjectUtils.min(val, abCost.getMaxForNonManaX(root, ai));
 
         if (val != null && val > 0) {
             // filter cost parts for preferences, don't choose X > than possible preferences

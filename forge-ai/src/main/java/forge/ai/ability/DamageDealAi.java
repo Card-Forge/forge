@@ -75,7 +75,7 @@ public class DamageDealAi extends DamageAiBase {
 
                 // Set PayX here to maximum value.
                 dmg = ComputerUtilCost.getMaxXValue(sa, ai);
-                sa.setSVar("PayX", Integer.toString(dmg));
+                sa.setXManaCostPaid(dmg);
             } else if (sa.getSVar(damage).equals("Count$CardsInYourHand") && source.isInZone(ZoneType.Hand)) {
                 dmg--; // the card will be spent casting the spell, so actual damage is 1 less
             }
@@ -112,7 +112,6 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 // Set PayX here to maximum value. It will be adjusted later depending on the target.
-                sa.setSVar("PayX", Integer.toString(dmg));
             } else if (sa.getSVar(damage).contains("InYourHand") && source.isInZone(ZoneType.Hand)) {
                 dmg = CardFactoryUtil.xCount(source, sa.getSVar(damage)) - 1; // the card will be spent casting the spell, so actual damage is 1 less
             } else if (sa.getSVar(damage).equals("TargetedPlayer$CardsInHand")) {
@@ -204,7 +203,7 @@ public class DamageDealAi extends DamageAiBase {
                     if (dmg > loyalty || dmg < 1) {
                         continue;   // in case the calculation gets messed up somewhere
                     }
-                    source.setSVar("ChosenX", "Number$" + dmg);
+                    sa.setXManaCostPaid(dmg);
                     return true;
                 }
             }
@@ -280,12 +279,12 @@ public class DamageDealAi extends DamageAiBase {
                 if (sourceName.equals("Crater's Claws") && ai.hasFerocious()) {
                     actualPay = actualPay > 2 ? actualPay - 2 : 0;
                 }
-                sa.setSVar("PayX", Integer.toString(actualPay));
+                sa.setXManaCostPaid(actualPay);
             }
         }
 
         if ("DiscardCMCX".equals(sa.getParam("AILogic"))) {
-            final int cmc = Integer.parseInt(sa.getSVar("PayX"));
+            final int cmc = sa.getXManaCostPaid();
             return !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(cmc)).isEmpty();
         }
 
@@ -976,16 +975,15 @@ public class DamageDealAi extends DamageAiBase {
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            sa.setSVar("PayX", Integer.toString(dmg));
+            dmg = ComputerUtilCost.getMaxXValue(sa, ai);
+            sa.setXManaCostPaid(dmg);
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt == null) {
+        if (!sa.usesTargeting()) {
             // If it's not mandatory check a few things
             return mandatory || this.damageChooseNontargeted(ai, sa, dmg);
         } else {
-            if (!this.damageChoosingTargets(ai, sa, tgt, dmg, mandatory, true) && !mandatory) {
+            if (!this.damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mandatory, true) && !mandatory) {
                 return false;
             }
 
@@ -1005,7 +1003,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
                 }
 
-                sa.setSVar("PayX", Integer.toString(actualPay));
+                sa.setXManaCostPaid(actualPay);
             }
         }
 
@@ -1065,7 +1063,7 @@ public class DamageDealAi extends DamageAiBase {
         saTgt.resetTargets();
         saTgt.getTargets().add(tgtCreature != null && dmg < opponent.getLife() ? tgtCreature : opponent);
 
-        sa.setSVar("PayX", Integer.toString(dmg));
+        sa.setXManaCostPaid(dmg);
         return true;
     }
 

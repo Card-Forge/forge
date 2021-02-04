@@ -258,8 +258,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final List<GameCommand> facedownCommandList = Lists.newArrayList();
     private final List<Object[]> staticCommandList = Lists.newArrayList();
 
-    private final static ImmutableList<String> storableSVars = ImmutableList.of("ChosenX");
-
     // Zone-changing spells should store card's zone here
     private Zone currentZone = null;
 
@@ -823,10 +821,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public boolean isCloned() {
         return !clonedStates.isEmpty();
-    }
-
-    public static List<String> getStorableSVars() {
-        return Card.storableSVars;
     }
 
     public final CardCollectionView getDevouredCards() {
@@ -6010,7 +6004,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         int xPaid = 0;
 
         // 2012-07-22 - If a card is on the stack, count the xManaCost in with it's CMC
-        if (getGame().getCardsIn(ZoneType.Stack).contains(this) && getManaCost() != null) {
+        if (isInZone(ZoneType.Stack) && getManaCost() != null) {
             xPaid = getXManaCostPaid() * getManaCost().countX();
         }
 

@@ -147,6 +147,7 @@ public class HumanPlaySpellAbility {
                 && announceType()
                 && (!mayChooseTargets || ability.setupTargets()) // if you can choose targets, then do choose them.
                 && ability.canCastTiming(human)
+                && ability.checkRestrictions(human)
                 && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, ability.getHostCard())));
 
         if (!prerequisitesMet) {

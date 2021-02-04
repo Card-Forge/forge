@@ -96,13 +96,13 @@ public class AttachAi extends SpellAbilityAi {
         if (abCost.getTotalMana().countX() > 0 && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value. (Endless Scream and Venarian
             // Gold)
-            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
 
             if (xPay == 0) {
                 return false;
             }
 
-            sa.setSVar("PayX", Integer.toString(xPay));
+            sa.setXManaCostPaid(xPay);
         }
 
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Chained to the Rocks")) {

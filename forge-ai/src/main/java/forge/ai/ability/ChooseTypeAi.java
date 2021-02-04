@@ -82,7 +82,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
                 }
 
                 if (maxX > avgPower && maxX > maxOppPower && maxX >= maxOppToughness) {
-                    sa.setSVar("PayX", String.valueOf(maxX));
+                    sa.setXManaCostPaid(maxX);
                     AiCardMemory.rememberCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ANIMATED_THIS_TURN);
                     return true;
                 }

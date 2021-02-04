@@ -340,7 +340,7 @@ public class CountersPutAi extends SpellAbilityAi {
         if (amountStr.equals("X")) {
             if (sa.getSVar(amountStr).equals("Count$xPaid")) {
                 // By default, set PayX here to maximum value (used for most SAs of this type).
-                amount = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                amount = ComputerUtilCost.getMaxXValue(sa, ai);
 
                 if (isClockwork) {
                     // Clockwork Avian and other similar cards: do not tap all mana for X,
@@ -359,7 +359,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     }
                 }
 
-                sa.setSVar("PayX", Integer.toString(amount));
+                sa.setXManaCostPaid(amount);
             } else if ("ExiledCreatureFromGraveCMC".equals(logic)) {
                 // e.g. Necropolis
                 amount = Aggregates.max(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES), CardPredicates.Accessors.fnGetCmc);
@@ -683,6 +683,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        final SpellAbility root = sa.getRootAbility();
         final Card source = sa.getHostCard();
         // boolean chance = true;
         boolean preferred = true;
@@ -698,8 +699,8 @@ public class CountersPutAi extends SpellAbilityAi {
             list = new CardCollection(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
 
             if (amountStr.equals("X")
-                    && !sa.hasSVar("PayX") /* SubAbility on something that already had set PayX, e.g. Endless One ETB counters */
-                    && ((sa.hasParam(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")))) {
+                    && root.getXManaCostPaid() != null /* SubAbility on something that already had set PayX, e.g. Endless One ETB counters */
+                    && sa.hasParam(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) {
 
                 // detect if there's more than one X in the cost (Hangarback Walker, Walking Ballista, etc.)
                 SpellAbility testSa = sa;
@@ -717,7 +718,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 // Spend all remaining mana to add X counters (eg. Hero of Leina Tower)
-                int payX = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                int payX = ComputerUtilCost.getMaxXValue(sa, ai);
 
                 // Account for the possible presence of additional glyphs in cost (e.g. Mikaeus, the Lunarch; Primordial Hydra)
                 payX -= nonXGlyphs;
@@ -725,7 +726,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 // Account for the multiple X in cost
                 if (countX > 1) { payX /= countX; }
 
-                sa.setSVar("PayX", Integer.toString(payX));
+                root.setXManaCostPaid(payX);
             }
 
             if (!mandatory) {

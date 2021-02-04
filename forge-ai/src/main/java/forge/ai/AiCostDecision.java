@@ -19,7 +19,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.cost.*;
@@ -97,10 +96,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
         }
         Integer c = cost.convertAmount();
         if (c == null) {
-            final String sVar = ability.getSVar(cost.getAmount());
-            if (sVar.equals("XChoice")) {
-                return null;
-            }
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
@@ -145,13 +140,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         Integer c = cost.convertAmount();
 
         if (c == null) {
-            final String sVar = ability.getSVar(cost.getAmount());
-            // Generalize cost
-            if (sVar.equals("XChoice")) {
-                return null; // cannot pay
-            } else {
-                c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-            }
+            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
         return PaymentDecision.number(c);
@@ -183,11 +172,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         Integer c = cost.convertAmount();
         if (c == null) {
-            final String sVar = ability.getSVar(cost.getAmount());
-            // Generalize cost
-            if (sVar.equals("XChoice")) {
-                return null;
-            }
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
@@ -209,11 +193,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         Integer c = cost.convertAmount();
         if (c == null) {
-            final String sVar = ability.getSVar(cost.getAmount());
-            // Generalize cost
-            if (sVar.equals("XChoice")) {
-                return null;
-            }
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
         List<SpellAbility> chosen = Lists.newArrayList();
@@ -259,10 +238,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         Integer c = cost.convertAmount();
         if (c == null) {
-            if (ability.getSVar(cost.getAmount()).equals("XChoice")) {
-                return null;
-            }
-
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
@@ -285,11 +260,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(CostFlipCoin cost) {
         Integer c = cost.convertAmount();
         if (c == null) {
-            final String sVar = ability.getSVar(cost.getAmount());
-            // Generalize cost
-            if (sVar.equals("XChoice")) {
-                return null;
-            }
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
         return PaymentDecision.number(c);
@@ -344,12 +314,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(CostMill cost) {
         Integer c = cost.convertAmount();
         if (c == null) {
-            final String sVar = ability.getSVar(cost.getAmount());
-            // Generalize cost
-            if (sVar.equals("XChoice")) {
-                return null;
-            }
-
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
@@ -366,19 +330,8 @@ public class AiCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(CostPayLife cost) {
         Integer c = cost.convertAmount();
         if (c == null) {
-            final String sVar = ability.getSVar(cost.getAmount());
             // Generalize cost
-            if (sVar.equals("XChoice")) {
-                if (source.getName().equals("Maralen of the Mornsong Avatar")) {
-                    return PaymentDecision.number(2);
-                }
-                if (source.getName().equals("Necrologia")) {
-                    return PaymentDecision.number(Integer.parseInt(ability.getSVar("ChosenX")));
-                }
-                return null;
-            } else {
-                c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-            }
+            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
         if (!player.canPayLife(c)) {
             return null;
@@ -391,13 +344,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(CostPayEnergy cost) {
         Integer c = cost.convertAmount();
         if (c == null) {
-            final String sVar = ability.getSVar(cost.getAmount());
-            // Generalize cost
-            if (sVar.equals("XChoice")) {
-                return null;
-            } else {
-                c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-            }
+            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
         if (!player.canPayEnergy(c)) {
             return null;
@@ -424,11 +371,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
         }
 
         if (c == null) {
-            final String sVar = ability.getSVar(cost.getAmount());
-            // Generalize cost
-            if (sVar.equals("XChoice")) {
-                return null;
-            }
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
@@ -488,24 +430,8 @@ public class AiCostDecision extends CostDecisionMakerBase {
         CardCollection exclude = new CardCollection();
         exclude.addAll(tapped);
 
-        if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            if (sVar.equals("XChoice")) {
-                CardCollectionView typeList =
-                        CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"),
-                                ability.getActivatingPlayer(), ability.getHostCard(), ability);
-                typeList = CardLists.filter(typeList, Presets.UNTAPPED);
-                c = typeList.size();
-                // account for the fact that the activated card may be tapped in the process
-                if (ability.getPayCosts().hasTapCost() && typeList.contains(ability.getHostCard())) {
-                    c--;
-                }
-                source.setSVar("ChosenX", "Number$" + c);
-            } else {
-                if (!isVehicle) {
-                    c = AbilityUtils.calculateAmount(source, amount, ability);
-                }
-            }
+        if (c == null && !isVehicle) {
+            c = AbilityUtils.calculateAmount(source, amount, ability);
         }
         if (type.contains("sharesCreatureTypeWith")) {
             return null;
@@ -562,24 +488,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         Integer c = cost.convertAmount();
 
         if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            if (sVar.equals("XChoice")) {
-                String logic = ability.getParamOrDefault("AILogic", "");
-                if (!logic.isEmpty() && !logic.equals("Never")) {
-                    // If at least some other AI logic is specified, assume that the AI for that API knows how
-                    // to define ChosenX and thus honor that value.
-                    // Cards which have no special logic for this yet but which do work in a simple/suboptimal way
-                    // are currently conventionally flagged with AILogic$ DoSacrifice.
-                    c = AbilityUtils.calculateAmount(source, source.getSVar("ChosenX"), null);
-                } else {
-                    // Other cards are assumed to be flagged AI:RemoveDeck:All for now
-                    return null;
-                }
-            } else if (sVar.equals("Count$xPaid")) {
-                c = AbilityUtils.calculateAmount(source, "PayX", ability);
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
+            c = AbilityUtils.calculateAmount(source, amount, ability);
         }
         final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
         CardCollectionView list = aic.chooseSacrificeType(cost.getType(), ability, c);
@@ -623,12 +532,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         hand = CardLists.getValidCards(hand, type.split(";"), player, source, ability);
         Integer c = cost.convertAmount();
         if (c == null) {
-            final String sVar = ability.getSVar(cost.getAmount());
-            if (sVar.equals("XChoice")) {
-                c = hand.size();
-            } else {
-                c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-            }
+            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
         final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
@@ -868,10 +772,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         if (c == null) {
             final String sVar = ability.getSVar(amount);
-            if (sVar.equals("XChoice")) {
-                c = AbilityUtils.calculateAmount(source, "ChosenX", ability);
-                source.setSVar("ChosenX", "Number$" + c);
-            } else if (amount.equals("All")) {
+            if (amount.equals("All")) {
                 c = source.getCounters(cost.counter);
             } else if (sVar.equals("Targeted$CardManaCost")) {
                 c = 0;
@@ -882,8 +783,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
                         }
                     }
                 }
-            } else if (sVar.equals("Count$xPaid")) {
-                c = AbilityUtils.calculateAmount(source, "PayX", ability);
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
@@ -917,19 +816,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         final String amount = cost.getAmount();
         Integer c = cost.convertAmount();
         if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            if (sVar.equals("XChoice")) {
-                CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield),
-                        cost.getType().split(";"), player, ability.getHostCard(), ability);
-                if (!cost.canUntapSource) {
-                    typeList.remove(source);
-                }
-                typeList = CardLists.filter(typeList, Presets.TAPPED);
-                c = typeList.size();
-                source.setSVar("ChosenX", "Number$" + c);
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
+            c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
         CardCollectionView list = ComputerUtil.chooseUntapType(player, cost.getType(), source, cost.canUntapSource, c);

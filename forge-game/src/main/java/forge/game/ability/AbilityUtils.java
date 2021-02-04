@@ -436,19 +436,13 @@ public class AbilityUtils {
             svarval = ability.getSVar(amount);
         }
         if (StringUtils.isBlank(svarval)) {
-            if ((ability != null) && (ability instanceof SpellAbility) && !(ability instanceof SpellPermanent) && !amount.equals("ChosenX")) {
+            if ((ability != null) && (ability instanceof SpellAbility) && !(ability instanceof SpellPermanent)) {
                 System.err.printf("SVar '%s' not found in ability, fallback to Card (%s). Ability is (%s)%n", amount, card.getName(), ability);
             }
             svarval = card.getSVar(amount);
         }
 
         if (StringUtils.isBlank(svarval)) {
-            // Some variables may be not chosen yet at this moment
-            // So return 0 and don't issue an error.
-            if (amount.equals("ChosenX")) {
-                // isn't made yet
-                return 0;
-            }
             // cost hasn't been paid yet
             if (amount.startsWith("Cost")) {
                 return 0;
@@ -1833,8 +1827,7 @@ public class AbilityUtils {
             // timing restrictions still apply
             if (res.checkTimingRestrictions(tgtCard, newSA)
                     // still need to check the other restrictions like Aftermath
-                    && res.checkOtherRestrictions(tgtCard, newSA, controller)
-                    && newSA.checkOtherRestrictions(tgtCard)) {
+                    && res.checkOtherRestrictions(tgtCard, newSA, controller)) {
                 sas.add(newSA);
             }
         }

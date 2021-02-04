@@ -3,7 +3,7 @@ package forge.ai.ability;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilMana;
+import forge.ai.ComputerUtilCost;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
@@ -92,7 +92,7 @@ public class MillAi extends SpellAbilityAi {
                 && sa.getSVar("X").startsWith("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int cardsToDiscard = getNumToDiscard(ai, sa);
-            sa.setSVar("PayX", Integer.toString(cardsToDiscard));
+            sa.setXManaCostPaid(cardsToDiscard);
             return cardsToDiscard > 0;
         }
         return true;
@@ -183,8 +183,7 @@ public class MillAi extends SpellAbilityAi {
 
         if (sa.getParam("NumCards").equals("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int cardsToDiscard = getNumToDiscard(aiPlayer, sa);
-            sa.setSVar("PayX", Integer.toString(cardsToDiscard));
+            sa.setXManaCostPaid(getNumToDiscard(aiPlayer, sa));
         }
 
         return true;
@@ -229,6 +228,6 @@ public class MillAi extends SpellAbilityAi {
             cardsToDiscard = Math.min(ai.getCardsIn(ZoneType.Library).size() - 5, cardsToDiscard);
         }
 
-        return Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), cardsToDiscard);
+        return Math.min(ComputerUtilCost.getMaxXValue(sa, ai), cardsToDiscard);
     }
 }

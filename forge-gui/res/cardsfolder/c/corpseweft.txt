@@ -1,8 +1,8 @@
 Name:Corpseweft
 ManaCost:2 B
 Types:Enchantment
-A:AB$ Token | Announce$ X | XCantBe0$ True | Cost$ 1 B ExileFromGrave<X/Creature> | TokenAmount$ 1 | TokenScript$ b_x_x_zombie_horror | TokenOwner$ You | TokenPower$ Y | TokenToughness$ Y | References$ Y | TokenTapped$ True | LegacyImage$ b x x zombie horror dtk | SpellDescription$ Create a tapped X/X black Zombie Horror creature token, where X is twice the number of cards exiled this way.
+A:AB$ Token | XCantBe0$ True | Cost$ 1 B ExileFromGrave<X/Creature> | TokenAmount$ 1 | TokenScript$ b_x_x_zombie_horror | TokenOwner$ You | TokenPower$ Y | TokenToughness$ Y | References$ Y | TokenTapped$ True | LegacyImage$ b x x zombie horror dtk | SpellDescription$ Create a tapped X/X black Zombie Horror creature token, where X is twice the number of cards exiled this way.
+SVar:X:Count$xPaid
 SVar:Y:ExiledCards$Amount.Twice
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/corpseweft.jpg
 Oracle:{1}{B}, Exile one or more creature cards from your graveyard: Create a tapped X/X black Zombie Horror creature token, where X is twice the number of cards exiled this way.
