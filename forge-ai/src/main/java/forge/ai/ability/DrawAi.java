@@ -219,6 +219,8 @@ public class DrawAi extends SpellAbilityAi {
         final int computerLibrarySize = ai.getCardsIn(ZoneType.Library).size();
         final int computerMaxHandSize = ai.getMaxHandSize();
 
+        final SpellAbility root = sa.getRootAbility();
+
         final SpellAbility gainLife = sa.findSubAbilityByType(ApiType.GainLife);
         final SpellAbility loseLife = sa.findSubAbilityByType(ApiType.LoseLife);
         final SpellAbility getPoison = sa.findSubAbilityByType(ApiType.Poison);
@@ -238,39 +240,31 @@ public class DrawAi extends SpellAbilityAi {
         if (num != null && num.equals("X")) {
             if (sa.getSVar(num).equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                if (drawback && !sa.getSVar("PayX").equals("")) {
-                    numCards = Integer.parseInt(sa.getSVar("PayX"));
+                if (drawback && root.getXManaCostPaid() != null) {
+                    numCards = root.getXManaCostPaid();
                 } else {
                     numCards = ComputerUtilCost.getMaxXValue(sa, ai);
                     // try not to overdraw
                     int safeDraw = Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3);
                     if (sa.getHostCard().isInstant() || sa.getHostCard().isSorcery()) { safeDraw++; } // card will be spent
                     numCards = Math.min(numCards, safeDraw);
-                    sa.setSVar("PayX", Integer.toString(numCards));
+
+                    // assuming CostPayLife is the one with X
+                    if (sa.getPayCosts().hasSpecificCostType(CostPayLife.class)) {
+                        // [Necrologia, Pay X Life : Draw X Cards]
+                        // Don't draw more than what's "safe" and don't risk a near death experience
+                        // Maybe would be better to check for "serious danger" and take more risk?
+                        while ((ComputerUtil.aiLifeInDanger(ai, false, numCards) && (numCards > 0))) {
+                            numCards--;
+                        }
+                    }
+
+                    root.setXManaCostPaid(numCards);
                     assumeSafeX = true;
                 }
                 xPaid = true;
             } else if (sa.getSVar(num).equals("Count$Converge")) {
                 numCards = ComputerUtilMana.getConvergeCount(sa, ai);
-            }
-        }
-
-        if (num != null && num.equals("ChosenX")) {
-            if (sa.getSVar("X").equals("XChoice")) {
-                // Draw up to max hand size but leave at least 3 in library
-                numCards = Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3);
-
-                if (sa.getPayCosts().hasSpecificCostType(CostPayLife.class)) {
-                    // [Necrologia, Pay X Life : Draw X Cards]
-                    // Don't draw more than what's "safe" and don't risk a near death experience
-                    // Maybe would be better to check for "serious danger" and take more risk?
-                    while ((ComputerUtil.aiLifeInDanger(ai, false, numCards) && (numCards > 0))) {
-                        numCards--;
-                    }
-                }
-
-                sa.setSVar("ChosenX", Integer.toString(numCards));
-                source.setSVar("ChosenX", Integer.toString(numCards));
             }
         }
 
@@ -329,7 +323,7 @@ public class DrawAi extends SpellAbilityAi {
                         // for drawing and losing life
                         if (numCards >= oppA.getLife()) {
                             if (xPaid) {
-                                sa.setSVar("PayX", Integer.toString(oppA.getLife()));
+                                root.setXManaCostPaid(oppA.getLife());
                             }
                             sa.getTargets().add(oppA);
                             return true;
@@ -342,7 +336,7 @@ public class DrawAi extends SpellAbilityAi {
                     if (gainLife.hasParam("Defined") && "Targeted".equals(gainLife.getParam("Defined"))) {
                         if (numCards >= oppA.getLife()) {
                             if (xPaid) {
-                                sa.setSVar("PayX", Integer.toString(oppA.getLife()));
+                                root.setXManaCostPaid(oppA.getLife());
                             }
                             sa.getTargets().add(oppA);
                             return true;
@@ -403,7 +397,7 @@ public class DrawAi extends SpellAbilityAi {
                 }
 
                 if (xPaid) {
-                    sa.setSVar("PayX", Integer.toString(numCards));
+                    root.setXManaCostPaid(numCards);
                 }
             }
 
@@ -414,7 +408,7 @@ public class DrawAi extends SpellAbilityAi {
                         if (sa.getHostCard().isInZone(ZoneType.Hand)) {
                             numCards++; // the card will be spent
                         }
-                        sa.setSVar("PayX", Integer.toString(numCards));
+                        root.setXManaCostPaid(numCards);
                     } else {
                         // Don't draw too many cards and then risk discarding
                         // cards at EOT

@@ -2,9 +2,6 @@ Name:Channel
 ManaCost:G G
 Types:Sorcery
 A:SP$ Effect | Cost$ G G | Name$ Channel Effect | Abilities$ ABMana,ABMultiMana | SVars$ X | SpellDescription$ Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, Add {C}.
-SVar:ABMana:AB$Mana | Cost$ PayLife<1> | ActivationZone$ Command | Produced$ C | Amount$ 1 | SpellDescription$ Add {C}.
-SVar:ABMultiMana:AB$Mana | Cost$ PayLife<X> | ActivationZone$ Command | Produced$ C | Amount$ ChosenX | References$ X | SpellDescription$ Add {X}.
-SVar:X:XChoice
+SVar:ABMana:AB$ Mana | Cost$ PayLife<1> | ActivationZone$ Command | Produced$ C | Amount$ 1 | SpellDescription$ Add {C}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/channel.jpg
 Oracle:Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, Add {C}.

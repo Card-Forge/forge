@@ -644,14 +644,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         // reset last state when finished resolving
         setLastStateBattlefield(CardCollection.EMPTY);
         setLastStateGraveyard(CardCollection.EMPTY);
-
-        // Clear SVars
-        for (final String store : Card.getStorableSVars()) {
-            final String value = hostCard.getSVar(store);
-            if (value.length() > 0) {
-                hostCard.setSVar(store, "");
-            }
-        }
     }
 
     // key for autoyield - the card description (including number) (if there is a card) plus the effect description
@@ -2131,4 +2123,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return StaticAbilityCastWithFlash.anyWithFlash(this, host, activator);
     }
 
+    public boolean checkRestrictions(Player activator) {
+        return checkRestrictions(getHostCard(), activator);
+    }
+
+    public boolean checkRestrictions(Card host, Player activator) {
+        return true;
+    }
 }

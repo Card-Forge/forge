@@ -105,6 +105,7 @@ public class CounterAi extends SpellAbilityAi {
             boolean setPayX = false;
             if (unlessCost.equals("X") && sa.getSVar(unlessCost).equals("Count$xPaid")) {
                 setPayX = true;
+                // TODO use ComputerUtilCost.getMaxXValue
                 toPay = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), usableManaSources + 1);
             } else {
                 toPay = AbilityUtils.calculateAmount(source, unlessCost, sa);
@@ -123,7 +124,7 @@ public class CounterAi extends SpellAbilityAi {
             }
 
             if (setPayX) {
-                sa.setSVar("PayX", Integer.toString(toPay));
+                sa.setXManaCostPaid(toPay);
             }
         }
 
@@ -289,7 +290,7 @@ public class CounterAi extends SpellAbilityAi {
                 }
 
                 if (setPayX) {
-                    sa.setSVar("PayX", Integer.toString(toPay));
+                    sa.setXManaCostPaid(toPay);
                 }
             }
         }

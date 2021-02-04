@@ -127,8 +127,8 @@ public class LifeGainAi extends SpellAbilityAi {
         boolean activateForCost = ComputerUtil.activateForCost(sa, ai);
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            sa.setSVar("PayX", Integer.toString(xPay));
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            sa.setXManaCostPaid(xPay);
             lifeAmount = xPay;
         } else {
             lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
@@ -216,8 +216,8 @@ public class LifeGainAi extends SpellAbilityAi {
         final String amountStr = sa.getParam("LifeAmount");
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            sa.setSVar("PayX", Integer.toString(xPay));
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            sa.setXManaCostPaid(xPay);
         }
 
         return true;

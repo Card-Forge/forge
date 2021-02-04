@@ -1187,18 +1187,7 @@ public class ComputerUtilMana {
                 final int multiplicator = Math.max(cost.getXcounter(), 1);
                 manaToAdd = extraMana * multiplicator;
             } else {
-                // For Count$xPaid set PayX in the AFs then use that here
-                // Else calculate it as appropriate.
-                final String xSvar = sa.getSVar("X").startsWith("Count$xPaid") ? "PayX" : "X";
-                if (sa.hasSVar(xSvar)) {
-                    if (xSvar.equals("PayX")) {
-                         // X SVar may end up being an empty string when copying a spell with no cost (e.g. Jhoira Avatar)
-                        String xValue = sa.getSVar(xSvar);
-                        manaToAdd = xValue.isEmpty() ? 0 : Integer.parseInt(xValue) * cost.getXcounter(); // X
-                    } else {
-                        manaToAdd = AbilityUtils.calculateAmount(card, xSvar, sa) * cost.getXcounter();
-                    }
-                }
+                manaToAdd = AbilityUtils.calculateAmount(card, "X", sa) * cost.getXcounter();
             }
 
             cost.increaseShard(ManaCostShard.parseNonGeneric(sa.getParamOrDefault("XColor", "1")), manaToAdd);

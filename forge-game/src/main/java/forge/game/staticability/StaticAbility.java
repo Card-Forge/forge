@@ -322,38 +322,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     }
 
     /**
-     * Apply ability if it has the right mode.
-     *
-     * @param mode
-     *            the mode
-     * @param card
-     *            the card
-     * @param player
-     *            the activator
-     * @return true, if successful
-     */
-    public final boolean applyAbility(final String mode, final Card card, final Player player) {
-
-        // don't apply the ability if it hasn't got the right mode
-        if (!getParam("Mode").equals(mode)) {
-            return false;
-        }
-
-        if (this.isSuppressed() || !this.checkPlayerSpecificConditions(player)) {
-            return false;
-        }
-
-        if (mode.equals("CantBeCast")) {
-            return StaticAbilityCantBeCast.applyCantBeCastAbility(this, card, player);
-        }
-        if (mode.equals("CantPlayLand")) {
-            return StaticAbilityCantBeCast.applyCantPlayLandAbility(this, card, player);
-        }
-
-        return false;
-    }
-
-    /**
      * Apply ability.
      *
      * @param mode
@@ -373,10 +341,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
         if (this.isSuppressed() || !this.checkConditions()) {
             return false;
-        }
-
-        if (mode.equals("CantBeActivated")) {
-            return StaticAbilityCantBeCast.applyCantBeActivatedAbility(this, card, spellAbility);
         }
 
         if (mode.equals("CantTarget")) {

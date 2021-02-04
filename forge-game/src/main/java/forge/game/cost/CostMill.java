@@ -66,11 +66,6 @@ public class CostMill extends CostPart {
         Integer i = this.convertAmount();
 
         if (i == null) {
-            final String sVar = ability.getSVar(this.getAmount());
-            if (sVar.equals("XChoice")) {
-                return true;
-            }
-
             i = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
         }
 

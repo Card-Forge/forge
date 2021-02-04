@@ -1,7 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilMana;
+import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -42,8 +42,8 @@ public class LifeSetAi extends SpellAbilityAi {
         // we shouldn't have to worry too much about PayX for SetLife
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            sa.setSVar("PayX", Integer.toString(xPay));
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            sa.setXManaCostPaid(xPay);
             amount = xPay;
         } else {
             amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
@@ -114,8 +114,8 @@ public class LifeSetAi extends SpellAbilityAi {
         int amount;
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            sa.setSVar("PayX", Integer.toString(xPay));
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            sa.setXManaCostPaid(xPay);
             amount = xPay;
         } else {
             amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);

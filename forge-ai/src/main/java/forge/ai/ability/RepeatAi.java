@@ -26,8 +26,8 @@ public class RepeatAi extends SpellAbilityAi {
                 return false;
             }
             // Set PayX here to maximum value.
-            final int max = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            sa.setSVar("PayX", Integer.toString(max));
+            final int max = ComputerUtilCost.getMaxXValue(sa, ai);
+            sa.setXManaCostPaid(max);
             return max > 0;
         }
         return true;

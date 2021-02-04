@@ -54,6 +54,26 @@ public class CostTapType extends CostPartWithList {
     }
 
     @Override
+    public Integer getMaxAmountX(SpellAbility ability, Player payer) {
+        final Card source = ability.getHostCard();
+
+        // extend if cards use X with different conditions
+
+        CardCollection typeList = CardLists.getValidCards(payer.getCardsIn(ZoneType.Battlefield), getType().split(";"), payer, source, ability);
+
+        if (!canTapSource) {
+            typeList.remove(source);
+        }
+        typeList = CardLists.filter(typeList, Presets.UNTAPPED);
+
+        if (ability.hasParam("Crew")) {
+            typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
+        }
+
+        return typeList.size();
+    }
+
+    @Override
     public boolean isReusable() { return true; }
 
     @Override

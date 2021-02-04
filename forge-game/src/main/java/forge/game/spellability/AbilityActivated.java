@@ -22,9 +22,7 @@ import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
 import forge.game.player.Player;
-import forge.game.staticability.StaticAbility;
-import forge.game.zone.ZoneType;
-import forge.util.collect.FCollectionView;
+import forge.game.staticability.StaticAbilityCantBeCast;
 
 /**
  * <p>
@@ -84,16 +82,6 @@ public abstract class AbilityActivated extends SpellAbility implements Cloneable
 
         final Card c = this.getHostCard();
 
-        // CantBeActivated static abilities
-        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            final FCollectionView<StaticAbility> staticAbilities = ca.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
-                if (stAb.applyAbility("CantBeActivated", c, this)) {
-                    return false;
-                }
-            }
-        }
-
         if (c.hasKeyword("CARDNAME's activated abilities can't be activated.") || this.isSuppressed()) {
             return false;
         }
@@ -104,7 +92,13 @@ public abstract class AbilityActivated extends SpellAbility implements Cloneable
 
         return CostPayment.canPayAdditionalCosts(this.getPayCosts(), this);
     }
-    
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean checkRestrictions(Card host, Player activator) {
+        return !StaticAbilityCantBeCast.cantBeActivatedAbility(this, host, activator);
+    }
+
     /** {@inheritDoc} */
     @Override
     public boolean isPossible() {

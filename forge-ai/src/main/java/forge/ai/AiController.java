@@ -747,11 +747,11 @@ public class AiController {
                 if (mana != null) {
                     if(mana.countX() > 0) {
                         // Set PayX here to maximum value.
-                        final int xPay = ComputerUtilMana.determineLeftoverMana(sa, player);
+                        final int xPay = ComputerUtilCost.getMaxXValue(sa, player);
                         if (xPay <= 0) {
                             return AiPlayDecision.CantAffordX;
                         }
-                        sa.setSVar("PayX", Integer.toString(xPay));
+                        sa.setXManaCostPaid(xPay);
                     } else if (mana.isZero()) {
                         // if mana is zero, but card mana cost does have X, then something is wrong
                         ManaCost cardCost = card.getManaCost();
@@ -764,6 +764,15 @@ public class AiController {
         }
         if (checkCurseEffects(sa)) {
             return AiPlayDecision.CurseEffects;
+        }
+        Card spellHost = card;
+        if (sa.isSpell()) {
+            spellHost = CardUtil.getLKICopy(spellHost);
+            spellHost.setLKICMC(-1); // to reset the cmc
+            spellHost.setLastKnownZone(game.getStackZone()); // need to add to stack to make check Restrictions respect stack cmc
+        }
+        if (!sa.checkRestrictions(spellHost, player)) {
+            return AiPlayDecision.AnotherTime;
         }
         if (sa instanceof SpellPermanent) {
             if (!isRightTiming) {
@@ -1061,7 +1070,7 @@ public class AiController {
             } else if ("VolrathsShapeshifter".equals(sa.getParam("AILogic"))) {
                 return SpecialCardAi.VolrathsShapeshifter.targetBestCreature(player, sa);
             } else if ("DiscardCMCX".equals(sa.getParam("AILogic"))) {
-                final int cmc = Integer.parseInt(sa.getSVar("PayX"));
+                final int cmc = sa.getXManaCostPaid();
                 CardCollection discards = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(cmc));
                 if (discards.isEmpty()) {
                     return null;

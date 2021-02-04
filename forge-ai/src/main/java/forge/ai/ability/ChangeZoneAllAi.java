@@ -63,7 +63,6 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             computerType = CardLists.filter(computerType, Predicates.not(CardPredicates.inZone(ZoneType.Library)));
         }
 
-        // Ugin check need to be done before filterListByType because of ChosenX
         // Ugin AI: always try to sweep before considering +1
         if (sourceName.equals("Ugin, the Spirit Dragon")) {
             return SpecialCardAi.UginTheSpiritDragon.considerPWAbilityPriority(ai, sa, origin, oppType, computerType);
