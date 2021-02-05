@@ -39,7 +39,7 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Version;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import forge.Forge;
 import forge.interfaces.IDeviceAdapter;
@@ -59,7 +59,6 @@ public class Main extends AndroidApplication {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //get total device RAM in mb
         ActivityManager actManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
@@ -69,12 +68,6 @@ public class Main extends AndroidApplication {
         boolean permissiongranted =  checkPermission();
         Gadapter = new AndroidAdapter(this.getContext());
         initForge(Gadapter, permissiongranted, totalMemory, isTabletDevice(this.getContext()), Build.VERSION.SDK_INT, Build.VERSION.RELEASE);
-
-        //permission
-        if(!permissiongranted){
-            //requestPermission();
-            displayMessage(Gadapter);
-        }
     }
     private static boolean isTabletDevice(Context activityContext) {
         Display display = ((Activity)   activityContext).getWindowManager().getDefaultDisplay();
@@ -89,7 +82,7 @@ public class Main extends AndroidApplication {
         }
         return false;
     }
-    private void displayMessage(AndroidAdapter adapter){
+    private void displayMessage(AndroidAdapter adapter, boolean ex, String msg){
         TableLayout TL = new TableLayout(this);
         TableRow row = new TableRow(this);
         TableRow row2 = new TableRow(this);
@@ -103,6 +96,10 @@ public class Main extends AndroidApplication {
                 " 2) Tap Permissions\n"+
                 " 3) Turn on the Storage Permission.\n\n"+
                 "(You can tap anywhere to exit and restart the app)\n\n";
+        if (ex) {
+            title = "Forge didn't initialize!\n";
+            steps = msg + "\n\n";
+        }
 
         SpannableString ss1=  new SpannableString(title);
         ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, ss1.length(), 0);
@@ -212,14 +209,16 @@ public class Main extends AndroidApplication {
         if (permissiongranted){
             //establish assets directory
             if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-                Gdx.app.error("Forge", "Can't access external storage");
-                adapter.exit();
+                /*Gdx.app.error("Forge", "Can't access external storage");
+                adapter.exit();*/
+                displayMessage(adapter, true, getDeviceName()+"\n"+"Android "+AndroidRelease+"\n"+"RAM "+ totalRAM+"MB" +"\n"+"LibGDX "+ Version.VERSION+"\n"+"Can't access external storage");
                 return;
             }
             String assetsDir = Environment.getExternalStorageDirectory() + "/Forge/";
             if (!FileUtil.ensureDirectoryExists(assetsDir)) {
-                Gdx.app.error("Forge", "Can't access external storage");
-                adapter.exit();
+                /*Gdx.app.error("Forge", "Can't access external storage");
+                adapter.exit();*/
+                displayMessage(adapter, true, getDeviceName()+"\n"+"Android "+AndroidRelease+"\n"+"RAM "+ totalRAM+"MB" +"\n"+"LibGDX "+ Version.VERSION+"\n"+"Path: " + assetsDir);
                 return;
             }
 
@@ -253,6 +252,7 @@ public class Main extends AndroidApplication {
             //set current orientation
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
             initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, isPortrait, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
+            displayMessage(adapter, false, "");
         }
 
     }
