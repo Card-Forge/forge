@@ -157,7 +157,7 @@ public class AssetsDownloader {
         FileUtil.writeFile(versionFile, Forge.CURRENT_VERSION);
 
         //add restart after assets update
-        switch (SOptionPane.showOptionDialog("Resource update finished. Please restart Forge.", "", null, ImmutableList.of("Ok"))) {
+        switch (SOptionPane.showOptionDialog("Resource update finished...", "", null, ImmutableList.of("Restart"))) {
             default:
                 Forge.restart(true);
         }
