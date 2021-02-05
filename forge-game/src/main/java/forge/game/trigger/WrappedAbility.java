@@ -444,7 +444,7 @@ public class WrappedAbility extends Ability {
         final Game game = sa.getActivatingPlayer().getGame();
         final Trigger regtrig = getTrigger();
 
-        if (!(regtrig instanceof TriggerAlways) && !regtrig.hasParam("NoResolvingCheck")) {
+        if (!(TriggerType.Always.equals(regtrig.getMode())) && !regtrig.hasParam("NoResolvingCheck")) {
             // Most State triggers don't have "Intervening If"
             if (!regtrig.requirementsCheck(game)) {
                 return;

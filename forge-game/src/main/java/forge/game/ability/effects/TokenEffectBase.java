@@ -64,6 +64,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
             Card c = game.getAction().moveToPlay(tok, sa);
             if (c == null || c.getZone() == null) {
                 // in case token can't enter the battlefield, it isn't created
+                triggerList.put(ZoneType.None, ZoneType.None, c);
                 continue;
             }
             triggerList.put(ZoneType.None, c.getZone().getZoneType(), c);

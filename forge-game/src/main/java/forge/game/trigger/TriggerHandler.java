@@ -221,7 +221,7 @@ public class TriggerHandler {
 
     public final void registerActiveTrigger(final Card c, final boolean onlyExtrinsic) {
         for (final Trigger t : c.getTriggers()) {
-            if (!onlyExtrinsic || c.isCloned() || !t.isIntrinsic() || t instanceof TriggerAlways) {
+            if (!onlyExtrinsic || c.isCloned() || !t.isIntrinsic() || TriggerType.Always.equals(t.getMode())) {
                 registerOneTrigger(t);
             }
         }
@@ -379,7 +379,7 @@ public class TriggerHandler {
         if (regtrig.getHostCard().isFaceDown() && regtrig.isIntrinsic()) {
             return false; // Morphed cards only have pumped triggers go off.
         }
-        if (regtrig instanceof TriggerAlways) {
+        if (TriggerType.Always.equals(regtrig.getMode())) {
             if (game.getStack().hasStateTrigger(regtrig.getId())) {
                 return false; // State triggers that are already on the stack
                 // don't trigger again.
@@ -432,7 +432,7 @@ public class TriggerHandler {
             return false; // Trigger removed by effect
         }
 
-        if (regtrig instanceof TriggerAlways) {
+        if (TriggerType.Always.equals(regtrig.getMode())) {
             if (game.getStack().hasStateTrigger(regtrig.getId())) {
                 return false; // State triggers that are already on the stack
                 // don't trigger again.
