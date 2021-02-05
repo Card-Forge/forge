@@ -6,85 +6,85 @@ MciCode=ddf
 Type=Duel_Decks
 
 [cards]
-61 C AEther Spellbomb
-29 U Abolish
-20 R Angel of Salvation
-40 C Arcbound Worker
-69 U Argivian Restoration
-45 U Assembly-Worker
-28 C Blinding Beam
-11 C Burrenton Bombardier
-18 R Catapult Master
-14 U Celestial Crusader
-50 C Clockwork Condor
-55 U Clockwork Hydra
-19 C Conclave Equenaut
-16 U Conclave Phalanx
-63 U Contagion Clasp
-27 R Crusade
-72 C Darksteel Citadel
-32 U Daru Encampment
-66 C Echoing Truth
-2 U Elite Vanguard
-62 U Elixir of Immortality
 1 M Elspeth, Knight-Errant
-64 U Energy Chamber
-47 U Esperzoa
-60 U Everflowing Chalice
-54 C Faerie Mechanist
-70 U Foil
-51 C Frogmite
-7 C Glory Seeker
+2 U Elite Vanguard
 3 C Goldmeadow Harrier
 4 C Infantry Veteran
-76 L Island
-76 L Island
-76 L Island
-76 L Island
-23 C Journey to Nowhere
-52 U Juggernaut
-33 C Kabira Crossroads
-13 C Kemba's Skyguard
-10 U Kor Aeronaut
-12 C Kor Hookmaster
-8 C Kor Skyfisher
 5 R Loyal Sentry
-48 R Master of Etherium
-24 C Mighty Leap
-73 U Mishra's Factory
-67 C Moonglove Extract
 6 C Mosquito Guard
-58 R Pentavus
-37 L Plains
-37 L Plains
-37 L Plains
-37 L Plains
-59 U Qumulox
+7 C Glory Seeker
+8 C Kor Skyfisher
+9 C Temple Acolyte
+10 U Kor Aeronaut
+11 C Burrenton Bombardier
+12 C Kor Hookmaster
+13 C Kemba's Skyguard
+14 U Celestial Crusader
+15 U Seasoned Marshal
+16 U Conclave Phalanx
+17 U Stormfront Riders
+18 R Catapult Master
+19 C Conclave Equenaut
+20 R Angel of Salvation
+21 C Sunlance
+22 U Swords to Plowshares
+23 C Journey to Nowhere
+24 C Mighty Leap
 25 C Raise the Alarm
 26 C Razor Barrier
-56 R Razormane Masticore
-42 U Runed Servitor
-34 R Rustic Clachan
+27 R Crusade
+28 C Blinding Beam
+29 U Abolish
 30 U Saltblast
-15 U Seasoned Marshal
-74 C Seat of the Synod
-46 U Serrated Biskelion
-43 C Silver Myr
-75 U Stalking Stones
-44 R Steel Overseer
-41 C Steel Wall
-17 U Stormfront Riders
-21 C Sunlance
 31 U Swell of Courage
-22 U Swords to Plowshares
-53 U Synod Centurion
-9 C Temple Acolyte
+32 U Daru Encampment
+33 C Kabira Crossroads
+34 R Rustic Clachan
+35 L Plains
+36 L Plains
+37 L Plains
+38 L Plains
 39 M Tezzeret the Seeker
-68 U Thirst for Knowledge
-71 C Thoughtcast
+40 C Arcbound Worker
+41 C Steel Wall
+42 U Runed Servitor
+43 C Silver Myr
+44 R Steel Overseer
+45 U Assembly-Worker
+46 U Serrated Biskelion
+47 U Esperzoa
+48 R Master of Etherium
 49 C Trinket Mage
-65 U Trip Noose
+50 C Clockwork Condor
+51 C Frogmite
+52 U Juggernaut
+53 U Synod Centurion
+54 C Faerie Mechanist
+55 U Clockwork Hydra
+56 R Razormane Masticore
 57 R Triskelion
+58 R Pentavus
+59 U Qumulox
+60 U Everflowing Chalice
+61 C Aether Spellbomb
+62 U Elixir of Immortality
+63 U Contagion Clasp
+64 U Energy Chamber
+65 U Trip Noose
+66 C Echoing Truth
+67 C Moonglove Extract
+68 U Thirst for Knowledge
+69 U Argivian Restoration
+70 U Foil
+71 C Thoughtcast
+72 C Darksteel Citadel
+73 U Mishra's Factory
+74 C Seat of the Synod
+75 U Stalking Stones
+76 L Island
+77 L Island
+78 L Island
+79 L Island
 
 [tokens]
 w_1_1_soldier

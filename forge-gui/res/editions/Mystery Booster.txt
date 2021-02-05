@@ -754,7 +754,7 @@ Foil=NotSupported
 744 C Rakshasa's Secret
 745 U Ravenous Chupacabra
 746 C Read the Bones
-747 C Reaper of Night // Harvest Fear
+747 C Reaper of Night
 748 U Reassembling Skeleton
 749 C Reckless Imp
 750 U Reckless Spite
