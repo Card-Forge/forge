@@ -333,10 +333,12 @@ public class FSkinFont {
         if (langUniqueCharacterSet.containsKey(langCode)) {
             return langUniqueCharacterSet.get(langCode);
         }
-        String characters = commonCharacterSet;
-        Set<Character> characterSet = new HashSet<>();
-        for (char ch : commonCharacterSet.toCharArray()) {
-            characterSet.add(ch);
+        StringBuilder characters = new StringBuilder(commonCharacterSet);
+        Set<Integer> characterSet = new HashSet<>();
+        for (int offset = 0; offset < commonCharacterSet.length();) {
+            final int codePoint = commonCharacterSet.codePointAt(offset);
+            characterSet.add(codePoint);
+            offset += Character.charCount(codePoint);
         }
         String[] translationFilePaths = { ForgeConstants.LANG_DIR + "cardnames-" + langCode + ".txt",
                 ForgeConstants.LANG_DIR + langCode + ".properties" };
@@ -344,12 +346,14 @@ public class FSkinFont {
             try (LineReader translationFile = new LineReader(new FileInputStream(translationFilePaths[i]),
                     StandardCharsets.UTF_8)) {
                 for (String fileLine : translationFile.readLines()) {
-                    for (int index = 0; index < fileLine.length(); index++) {
-                        Character ch = fileLine.charAt(index);
-                        if (!characterSet.contains(ch)) {
-                            characterSet.add(ch);
-                            characters += ch;
+                    final int stringLength = fileLine.length();
+                    for (int offset = 0; offset < stringLength;) {
+                        final int codePoint = fileLine.codePointAt(offset);
+                        if (!characterSet.contains(codePoint)) {
+                            characterSet.add(codePoint);
+                            characters.append(Character.toChars(codePoint));
                         }
+                        offset += Character.charCount(codePoint);
                     }
                 }
                 translationFile.close();
@@ -357,9 +361,9 @@ public class FSkinFont {
                 System.err.println("Error reading translation file: " + translationFilePaths[i]);
             }
         }
-        langUniqueCharacterSet.put(langCode, characters);
+        langUniqueCharacterSet.put(langCode, characters.toString());
 
-        return characters;
+        return characters.toString();
     }
 
     private void updateFont() {
