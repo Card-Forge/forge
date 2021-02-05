@@ -201,8 +201,8 @@ public final class GameActionUtil {
                         }
                         alternatives.add(flashback);
                     } else if (keyword.startsWith("Foretell")) {
-                        // Fortell cast only from Exile
-                        if (!source.isInZone(ZoneType.Exile) || !source.isForetold() || source.isForetoldThisTurn()) {
+                        // Foretell cast only from Exile
+                        if (!source.isInZone(ZoneType.Exile) || !source.isForetold() || source.isForetoldThisTurn() || !activator.equals(source.getOwner())) {
                             continue;
                         }
                         // skip this part for fortell by external source
@@ -223,7 +223,8 @@ public final class GameActionUtil {
                 }
 
                 // foretell by external source
-                if (source.isForetoldByEffect() && source.isInZone(ZoneType.Exile) && source.isForetold() && !source.isForetoldThisTurn() && !source.getManaCost().isNoCost()) {
+                if (source.isForetoldByEffect() && source.isInZone(ZoneType.Exile) && activator.equals(source.getOwner())
+                        && source.isForetold() && !source.isForetoldThisTurn() && !source.getManaCost().isNoCost()) {
                     // Its foretell cost is equal to its mana cost reduced by {2}.
                     final SpellAbility foretold = sa.copy(activator);
                     foretold.putParam("ReduceCost", "2");
