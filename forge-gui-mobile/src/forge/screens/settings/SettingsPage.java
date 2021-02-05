@@ -438,39 +438,22 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("nlVibrateAfterLongPress")),
                 6);
         //Sound Options
-        if(GuiBase.getInterface().isLibgdxPort()) {
-            lstSettings.addItem(new CustomSelectSetting(FPref.UI_VOL_SOUNDS,
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_VOL_SOUNDS,
                 localizer.getMessage("cbAdjustSoundsVolume"),
                 localizer.getMessage("nlAdjustSoundsVolume"),
-                new String[]{"0", "25", "50", "75", "100"}),
+                new String[]{"0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"}),
                 7);
-            lstSettings.addItem(new CustomSelectSetting(FPref.UI_VOL_MUSIC,
-                    localizer.getMessage("cbAdjustMusicVolume"),
-                    localizer.getMessage("nlAdjustMusicVolume"),
-                    new String[]{"0", "25", "50", "75", "100"}) {
-                @Override
-                public void valueChanged(String newValue) {
-                    super.valueChanged(newValue);
-                    //update background music when this setting changes
-                    SoundSystem.instance.changeBackgroundTrack();
-                }
-            }, 7);
-        } else {
-            lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_SOUNDS,
-                    localizer.getMessage("cbEnableSounds"),
-                    localizer.getMessage("nlEnableSounds")),
-                    7);
-            lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_MUSIC,
-                    localizer.getMessage("cbEnableMusic"),
-                    localizer.getMessage("nlEnableMusic")) {
-                @Override
-                public void select() {
-                    super.select();
-                    //update background music when this setting changes
-                    SoundSystem.instance.changeBackgroundTrack();
-                }
-            },7);
-        }
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_VOL_MUSIC,
+                localizer.getMessage("cbAdjustMusicVolume"),
+                localizer.getMessage("nlAdjustMusicVolume"),
+                new String[]{"0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"}) {
+                    @Override
+                        public void valueChanged(String newValue) {
+                            super.valueChanged(newValue);
+                            //update background music when this setting changes
+                            SoundSystem.instance.changeBackgroundTrack();
+                        }
+                }, 7);
         /*lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_SOUND_SYSTEM,
                 "Use Alternate Sound System",
                 "Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."),
