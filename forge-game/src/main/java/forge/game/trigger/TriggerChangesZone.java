@@ -17,16 +17,17 @@
  */
 package forge.game.trigger;
 
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Map;
 
 import forge.util.Localizer;
@@ -168,6 +169,20 @@ public class TriggerChangesZone extends Trigger {
                 if (cause != null && this.equals(cause.getRootAbility().getTrigger())) {
                     return false;
                 }
+            }
+        }
+
+        /* this trigger only activates for the nth spell you cast this turn */
+        if (hasParam("ConditionYouCastThisTurn")) {
+            final String compare = getParam("ConditionYouCastThisTurn");
+            List<Card> thisTurnCast = CardUtil.getThisTurnCast("Card", getHostCard());
+            thisTurnCast = CardLists.filterControlledByAsList(thisTurnCast, getHostCard().getController());
+
+            // checks which card this spell was the castSA
+            int left = Iterables.indexOf(thisTurnCast, CardPredicates.castSA(Predicates.equalTo(getHostCard().getCastSA())));
+            int right = Integer.parseInt(compare.substring(2));
+            if (!Expressions.compare(left + 1, compare, right)) {
+                return false;
             }
         }
 
