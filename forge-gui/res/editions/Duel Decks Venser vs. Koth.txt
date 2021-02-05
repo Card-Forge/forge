@@ -6,80 +6,80 @@ MciCode=ddi
 Type=Duel_Decks
 
 [cards]
-48 U AEther Membrane
-27 U Angelic Shield
-51 U Anger
-64 C Armillary Sphere
+1 M Venser, the Sojourner
+2 C Whitemane Lion
 3 C Augury Owl
-33 C Azorius Chancery
-62 R Bloodfire Colossus
-54 U Bloodfire Kavu
-18 U Cache Raiders
-59 C Chartooth Cougar
-14 R Clone
 4 U Coral Fighters
-52 C Cosi's Ravager
-15 U Cryptic Annelid
-69 C Downhill Charge
-60 U Earth Servant
-49 C Fiery Hellhound
-34 U Flood Plain
-12 R Galepowder Mage
-56 U Geyser Glider
-61 U Greater Stone Spirit
-41 L Island
-41 L Island
-41 L Island
-72 U Jaws of Stone
-20 C Jedit's Dragoons
-65 R Journeyer's Kite
-13 C Kor Cartographer
-44 M Koth of the Hammer
-57 R Lithophage
 5 U Minamo Sightbender
 6 U Mistmeadow Witch
-74 L Mountain
-74 L Mountain
-74 L Mountain
-74 L Mountain
-8 C Neurok Invisimancer
-35 U New Benalia
-28 U Oblivion Ring
-32 C Overrule
-23 U Path to Exile
-47 C Pilgrim's Eye
-40 L Plains
-40 L Plains
-40 L Plains
-45 C Plated Geopede
-24 C Preordain
-16 C Primal Plasma
-46 C Pygmy Pyrosaur
-26 C Revoke Existence
-29 C Safe Passage
-17 U Sawtooth Loon
 7 C Scroll Thief
-67 C Searing Blaze
-70 C Seismic Strike
-36 U Sejiri Refuge
-25 C Sigil of Sleep
-10 U Sky Spirit
+8 C Neurok Invisimancer
 9 U Slith Strider
-37 C Soaring Seacliff
-22 R Sphinx of Uthuun
-71 C Spire Barrage
-30 C Steel of the Godhead
-55 U Stone Giant
-21 R Sunblast Angel
-58 R Torchling
-31 U Vanish into Memory
-1 M Venser, the Sojourner
-73 R Volley of Boulders
-68 U Vulshok Battlegear
-53 C Vulshok Berserker
-66 U Vulshok Morningstar
-50 C Vulshok Sorcerer
+10 U Sky Spirit
 11 U Wall of Denial
-63 C Wayfarer's Bauble
-2 C Whitemane Lion
+12 R Galepowder Mage
+13 C Kor Cartographer
+14 R Clone
+15 U Cryptic Annelid
+16 C Primal Plasma
+17 U Sawtooth Loon
+18 U Cache Raiders
 19 R Windreaver
+20 C Jedit's Dragoons
+21 R Sunblast Angel
+22 R Sphinx of Uthuun
+23 U Path to Exile
+24 C Preordain
+25 C Sigil of Sleep
+26 C Revoke Existence
+27 U Angelic Shield
+28 U Oblivion Ring
+29 C Safe Passage
+30 C Steel of the Godhead
+31 U Vanish into Memory
+32 C Overrule
+33 C Azorius Chancery
+34 U Flood Plain
+35 U New Benalia
+36 U Sejiri Refuge
+37 C Soaring Seacliff
+38 L Plains
+39 L Plains
+40 L Plains
+41 L Island
+42 L Island
+43 L Island
+44 M Koth of the Hammer
+45 C Plated Geopede
+46 C Pygmy Pyrosaur
+47 C Pilgrim's Eye
+48 U Aether Membrane
+49 C Fiery Hellhound
+50 C Vulshok Sorcerer
+51 U Anger
+52 C Cosi's Ravager
+53 C Vulshok Berserker
+54 U Bloodfire Kavu
+55 U Stone Giant
+56 U Geyser Glider
+57 R Lithophage
+58 R Torchling
+59 C Chartooth Cougar
+60 U Earth Servant
+61 U Greater Stone Spirit
+62 R Bloodfire Colossus
+63 C Wayfarer's Bauble
+64 C Armillary Sphere
+65 R Journeyer's Kite
+66 U Vulshok Morningstar
+67 C Searing Blaze
+68 U Vulshok Battlegear
+69 C Downhill Charge
+70 C Seismic Strike
+71 C Spire Barrage
+72 U Jaws of Stone
+73 R Volley of Boulders
+74 L Mountain
+75 L Mountain
+76 L Mountain
+77 L Mountain

@@ -266,13 +266,11 @@ ChaosDraftThemes=GRAVEYARD_MATTERS
 254 L Forest
 
 [borderless]
-#Statue borderless planeswalkers
 255 M Elspeth, Sun's Nemesis
 256 M Ashiok, Nightmare Muse
 257 M Calix, Destiny's Hand
 
 [showcase]
-#Constellation Gods and Demigods
 258 U Daxos, Blessed by the Sun
 259 M Heliod, Sun-Crowned
 260 U Callaphe, Beloved of the Sea
@@ -289,7 +287,6 @@ ChaosDraftThemes=GRAVEYARD_MATTERS
 269 M Athreos, Shroud-Veiled
 
 [precon product]
-#Planeswalker Deck Cards
 270 M Elspeth, Undaunted Hero
 271 U Eidolon of Inspiration
 272 R Elspeth's Devotee
@@ -308,7 +305,6 @@ ChaosDraftThemes=GRAVEYARD_MATTERS
 285 L Mountain
 286 L Forest
 287 L Forest
-#Theme Booster Exclusive Rares
 288 R Grasping Giant
 289 R Victory's Envoy
 290 R Sphinx Mindbreaker
@@ -377,17 +373,13 @@ ChaosDraftThemes=GRAVEYARD_MATTERS
 351 R Temple of Plenty
 
 [promo]
-#Bundle promo
 352 R Arasta of the Endless Web
-#Promo Pack
 353 U Alseid of Life's Bounty
 354 C Thirst for Meaning
 355 U Gray Merchant of Asphodel
 356 C Thrill of Possibility
 357 U Wolfwillow Haven
 
-# custom rarity print runs to ensure correct art
-# (only generate those available in regular boosters + correct collation)
 [Commons]
 Captivating Unicorn|THB|1
 Daybreak Chimera|THB|1

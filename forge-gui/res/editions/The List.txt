@@ -52,7 +52,7 @@ Type=Reprint
 45 R Battle of Wits
 46 U Brain Freeze
 47 R Brainstorm
-48 M Brazen Borrower // Petty Theft
+48 M Brazen Borrower
 49 R Broodstar
 50 U Chemister's Insight
 51 U Coveted Peacock
@@ -112,7 +112,7 @@ Type=Reprint
 105 U Murderous Cut
 106 R Necravolver
 107 U Necromancy
-108 U Nezumi Graverobber // Nighteyes the Desecrator
+108 U Nezumi Graverobber
 109 U Oubliette
 110 M Phyrexian Obliterator
 111 R Promise of Power
@@ -168,7 +168,7 @@ Type=Reprint
 161 U Alpha Kavu
 162 R Awakening
 163 U Cradle Guard
-164 C Curious Pair // Treats to Share
+164 C Curious Pair
 165 R Elvish Archdruid
 166 U Eternal Witness
 167 R Food Chain

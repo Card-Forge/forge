@@ -367,5 +367,5 @@ w_1_1_pegasus_flying
 w_2_2_reflection
 w_1_1_spirit_flying
 b_2_2_zombie
-g_1_1_hound
+g_1_1_dog
 g_1_1_saproling
