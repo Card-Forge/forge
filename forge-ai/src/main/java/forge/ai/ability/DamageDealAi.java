@@ -112,6 +112,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 // Set PayX here to maximum value. It will be adjusted later depending on the target.
+                sa.setXManaCostPaid(dmg);
             } else if (sa.getSVar(damage).contains("InYourHand") && source.isInZone(ZoneType.Hand)) {
                 dmg = CardFactoryUtil.xCount(source, sa.getSVar(damage)) - 1; // the card will be spent casting the spell, so actual damage is 1 less
             } else if (sa.getSVar(damage).equals("TargetedPlayer$CardsInHand")) {
