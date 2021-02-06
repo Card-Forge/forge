@@ -2,10 +2,12 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
 
+import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.player.Player;
+import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 
 public class PermanentEffect extends SpellAbilityEffect {
 
@@ -18,25 +20,26 @@ public class PermanentEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        Player p = sa.getActivatingPlayer();
-        sa.getHostCard().setController(p, 0);
         final Card host = sa.getHostCard();
+        final Game game = host.getGame();
+        CardZoneTable table = new CardZoneTable();
+        ZoneType previousZone = host.getZone().getZoneType();
 
-        // 111.11. A copy of a permanent spell becomes a token as it resolves.
-        // The token has the characteristics of the spell that became that token.
-        // The token is not “created” for the purposes of any replacement effects or triggered abilities that refer to creating a token.
-        if (host.isCopiedSpell()) {
-            host.setCopiedSpell(false);
-            host.setToken(true);
-        }
+        host.setController(sa.getActivatingPlayer(), 0);
 
-        final Card c = p.getGame().getAction().moveToPlay(host, p, sa);
+        final Card c = game.getAction().moveToPlay(host, sa);
         sa.setHostCard(c);
 
         // some extra for Dashing
-        if (sa.isDash()) {
+        if (sa.isDash() && c.isInPlay()) {
             c.setSVar("EndOfTurnLeavePlay", "Dash");
             registerDelayedTrigger(sa, "Hand", Lists.newArrayList(c));
         }
+
+        ZoneType newZone = c.getZone().getZoneType();
+        if (newZone != previousZone) {
+            table.put(previousZone, newZone, c);
+        }
+        table.triggerChangesZoneAll(game);
     }
 }

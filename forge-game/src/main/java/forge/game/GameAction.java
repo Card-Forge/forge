@@ -83,6 +83,14 @@ public class GameAction {
     }
 
     private Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause, Map<AbilityKey, Object> params) {
+        // 111.11. A copy of a permanent spell becomes a token as it resolves.
+        // The token has the characteristics of the spell that became that token.
+        // The token is not “created” for the purposes of any replacement effects or triggered abilities that refer to creating a token.
+        if (c.isCopiedSpell() && zoneTo.is(ZoneType.Battlefield) && c.isPermanent() && cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
+            c.setCopiedSpell(false);
+            c.setToken(true);
+        }
+
         if (c.isCopiedSpell() || (c.isImmutable() && zoneTo.is(ZoneType.Exile))) {
             // Remove Effect from command immediately, this is essential when some replacement
             // effects happen during the resolving of a spellability ("the next time ..." effect)
