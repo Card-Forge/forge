@@ -192,7 +192,12 @@ public class CostDiscard extends CostPartWithList {
      */
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard) {
-        return targetCard.getController().discard(targetCard, null, null);
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        if (ability.isCycling() && targetCard.equals(ability.getHostCard())) {
+            // discard itself for cycling cost
+            runParams.put(AbilityKey.Cycling, true);
+        }
+        return targetCard.getController().discard(targetCard, null, null, runParams);
     }
 
     /* (non-Javadoc)
