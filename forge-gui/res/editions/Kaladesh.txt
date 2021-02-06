@@ -277,7 +277,6 @@ AdditionalSetUnlockedInQuest=MPS_KLD
 264 L Forest
 
 [precon product]
-# Planeswalker Decks
 265 M Chandra, Pyrogenius
 266 C Flame Lash
 267 R Liberating Combustion

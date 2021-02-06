@@ -133,4 +133,4 @@ g_7_7_elemental_trample
 w_1_1_bird_flying
 w_1_1_kithkin_soldier
 w_1_1_soldier
-w_1_1_pegasus
+w_1_1_pegasus_flying

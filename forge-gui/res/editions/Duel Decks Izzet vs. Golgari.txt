@@ -6,96 +6,96 @@ MciCode=ddj
 Type=Duel_Decks
 
 [cards]
-78 C Barren Moor
-51 U Boneyard Wurm
-58 C Brain Weevil
-13 C Brainstorm
-18 C Call to Heel
-79 U Dakmor Salvage
-25 U Dissipate
-12 R Djinn Illuminatus
-65 R Doomgape
-56 U Dreg Mangler
-47 C Elves of Deep Shadow
-55 U Eternal Witness
-72 C Feast or Famine
-32 U Fire // Ice
-14 C Force Spike
-89 L Forest
-89 L Forest
-89 L Forest
-89 L Forest
-33 C Forgotten Cave
-10 R Galvanoth
-5 U Gelectrode
-67 U Ghoul's Feast
-64 R Gleancrawler
-3 C Goblin Electromancer
-70 U Golgari Germination
-60 R Golgari Grave-Troll
-80 C Golgari Rot Farm
-63 C Golgari Rotwurm
-66 C Golgari Signet
-48 U Golgari Thug
-59 C Greater Mossdog
-75 U Grim Flowering
-31 R Invoke the Firemind
-38 L Island
-38 L Island
-38 L Island
-38 L Island
-16 U Isochron Scepter
-34 C Izzet Boilerworks
-21 U Izzet Charm
-11 C Izzet Chronarch
-4 U Izzet Guildmage
-17 C Izzet Signet
-45 M Jarad, Golgari Lich Lord
-2 C Kiln Fiend
-52 U Korozda Guildmage
-77 U Life // Death
-69 R Life from the Loam
-35 C Lonely Sandbar
-15 C Magma Spray
-42 L Mountain
-42 L Mountain
-42 L Mountain
-42 L Mountain
-73 U Nightmare Void
 1 M Niv-Mizzet, the Firemind
-36 U Nivix, Aerie of the Firemind
+2 C Kiln Fiend
+3 C Goblin Electromancer
+4 U Izzet Guildmage
+5 U Gelectrode
+6 C Wee Dragonauts
+7 C Steamcore Weird
+8 U Shrewd Hatchling
 9 C Ogre Savant
-28 U Overwhelming Intellect
-46 U Plagued Rusalka
-27 R Prophetic Bolt
-71 U Putrefy
-53 C Putrid Leech
+10 R Galvanoth
+11 C Izzet Chronarch
+12 R Djinn Illuminatus
+13 C Brainstorm
+14 C Force Spike
+15 C Magma Spray
+16 U Isochron Scepter
+17 C Izzet Signet
+18 C Call to Heel
+19 C Train of Thought
 20 C Pyromatics
+21 U Izzet Charm
+22 U Reminisce
+23 U Thunderheads
+24 U Vacuumelt
+25 U Dissipate
 26 C Quicksilver Dagger
+27 R Prophetic Bolt
+28 U Overwhelming Intellect
+29 R Sphinx-Bone Wand
+30 U Street Spasm
+31 R Invoke the Firemind
+32 U Fire // Ice
+33 C Forgotten Cave
+34 C Izzet Boilerworks
+35 C Lonely Sandbar
+36 U Nivix, Aerie of the Firemind
+37 L Island
+38 L Island
+39 L Island
+40 L Island
+41 L Mountain
+42 L Mountain
+43 L Mountain
+44 L Mountain
+45 M Jarad, Golgari Lich Lord
+46 U Plagued Rusalka
+47 C Elves of Deep Shadow
+48 U Golgari Thug
 49 C Ravenous Rats
 50 U Reassembling Skeleton
-22 U Reminisce
-62 U Sadistic Hypnotist
-57 C Shambling Shell
-8 U Shrewd Hatchling
-29 R Sphinx-Bone Wand
-7 C Steamcore Weird
-61 U Stingerfling Spider
+51 U Boneyard Wurm
+52 U Korozda Guildmage
+53 C Putrid Leech
 54 C Stinkweed Imp
-30 U Street Spasm
-81 U Svogthos, the Restless Tomb
-85 L Swamp
-85 L Swamp
-85 L Swamp
-85 L Swamp
-23 U Thunderheads
-19 C Train of Thought
-82 C Tranquil Thicket
-76 R Twilight's Call
-24 U Vacuumelt
-74 U Vigor Mortis
-6 C Wee Dragonauts
+55 U Eternal Witness
+56 U Dreg Mangler
+57 C Shambling Shell
+58 C Brain Weevil
+59 C Greater Mossdog
+60 R Golgari Grave-Troll
+61 U Stingerfling Spider
+62 U Sadistic Hypnotist
+63 C Golgari Rotwurm
+64 R Gleancrawler
+65 R Doomgape
+66 C Golgari Signet
+67 U Ghoul's Feast
 68 C Yoke of the Damned
+69 R Life from the Loam
+70 U Golgari Germination
+71 U Putrefy
+72 C Feast or Famine
+73 U Nightmare Void
+74 U Vigor Mortis
+75 U Grim Flowering
+76 R Twilight's Call
+77 U Life // Death
+78 C Barren Moor
+79 U Dakmor Salvage
+80 C Golgari Rot Farm
+81 U Svogthos, the Restless Tomb
+82 C Tranquil Thicket
+83 L Swamp
+84 L Swamp
+85 L Swamp
+86 L Swamp
+87 L Forest
+88 L Forest
+89 L Forest
+90 L Forest
 
 [tokens]
 u_3_3_weird_defender_flying
