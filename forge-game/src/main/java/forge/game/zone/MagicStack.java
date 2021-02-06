@@ -465,8 +465,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 // the effect making it an Aura spell ends.
                 // It continues resolving as a creature spell.
                 source.unanimateBestow();
+                SpellAbility first = source.getFirstSpellAbility();
+                // need to set activating player
+                first.setActivatingPlayer(sa.getActivatingPlayer());
                 game.fireEvent(new GameEventCardStatsChanged(source));
-                AbilityUtils.resolve(sa.getHostCard().getFirstSpellAbility());
+                AbilityUtils.resolve(first);
             } else {
                 // TODO: Spell fizzles, what's the best way to alert player?
                 Log.debug(source.getName() + " ability fizzles.");
