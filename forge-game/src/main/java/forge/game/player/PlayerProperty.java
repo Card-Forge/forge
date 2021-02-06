@@ -243,8 +243,7 @@ public class PlayerProperty {
             final String[] type = property.substring(10).split("_");
             final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.smartValueOf(type[0])), type[1], sourceController, source);
             String comparator = type[2];
-            String compareTo = comparator.substring(2);
-            int y = StringUtils.isNumeric(compareTo) ? Integer.parseInt(compareTo) : 0;
+            int y = AbilityUtils.calculateAmount(source, comparator.substring(2), null);
             if (!Expressions.compare(list.size(), comparator, y)) {
                 return false;
             }
