@@ -45,6 +45,7 @@ public enum AbilityKey {
     CumulativeUpkeepPaid("CumulativeUpkeepPaid"),
     CurrentCastSpells("CurrentCastSpells"),
     CurrentStormCount("CurrentStormCount"),
+    Cycling("Cycling"),
     DamageAmount("DamageAmount"),
     DamageMap("DamageMap"),
     DamageSource("DamageSource"),

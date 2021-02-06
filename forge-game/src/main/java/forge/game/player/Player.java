@@ -1583,6 +1583,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final Card discard(final Card c, final SpellAbility sa, CardZoneTable table) {
+        return discard(c, sa , table, null);
+    }
+    public final Card discard(final Card c, final SpellAbility sa, CardZoneTable table, Map<AbilityKey, Object> params) {
         if (!c.canBeDiscardedBy(sa)) {
             return null;
         }
@@ -1604,6 +1607,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromCard(c);
             repRunParams.put(AbilityKey.Source, source);
             repRunParams.put(AbilityKey.Affected, this);
+            if (params != null) {
+                repRunParams.putAll(params);
+            }
 
             if (game.getReplacementHandler().run(ReplacementType.Discard, repRunParams) != ReplacementResult.NotReplaced) {
                 return null;
@@ -1614,16 +1620,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         sb.append(this).append(" discards ").append(c);
         final Card newCard;
         if (discardToTopOfLibrary) {
-            newCard = game.getAction().moveToLibrary(c, 0, sa);
+            newCard = game.getAction().moveToLibrary(c, 0, sa, params);
             sb.append(" to the library");
             // Play the Discard sound
         }
         else if (discardMadness) {
-            newCard = game.getAction().exile(c, sa);
+            newCard = game.getAction().exile(c, sa, params);
             sb.append(" with Madness");
         }
         else {
-            newCard = game.getAction().moveToGraveyard(c, sa);
+            newCard = game.getAction().moveToGraveyard(c, sa, params);
             // Play the Discard sound
         }
         if (table != null) {
@@ -1648,6 +1654,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         runParams.put(AbilityKey.Card, c);
         runParams.put(AbilityKey.Cause, cause);
         runParams.put(AbilityKey.IsMadness, discardMadness);
+        if (params != null) {
+            runParams.putAll(params);
+        }
         game.getTriggerHandler().runTrigger(TriggerType.Discarded, runParams, false);
         game.getGameLog().add(GameLogEntryType.DISCARD, sb.toString());
         return newCard;
