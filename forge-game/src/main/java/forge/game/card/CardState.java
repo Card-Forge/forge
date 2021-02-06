@@ -563,6 +563,51 @@ public class CardState extends GameObject implements IHasSVars {
         }
     }
 
+    public final void addAbilitiesFrom(final CardState source, final boolean lki) {
+        // TODO: what happens if SVar has the same name ?
+        sVars.putAll(source.getSVars());
+
+        for (SpellAbility sa : source.manaAbilities) {
+            if (sa.isIntrinsic()) {
+                manaAbilities.add(sa.copy(card, lki));
+            }
+        }
+
+        for (SpellAbility sa : source.nonManaAbilities) {
+            if (sa.isIntrinsic()) {
+                nonManaAbilities.add(sa.copy(card, lki));
+            }
+        }
+
+        for (KeywordInterface k : source.intrinsicKeywords) {
+            intrinsicKeywords.insert(k.copy(card, lki));
+        }
+
+        for (Trigger tr : source.triggers) {
+            if (tr.isIntrinsic()) {
+                triggers.add(tr.copy(card, lki));
+            }
+        }
+
+        for (ReplacementEffect re : source.replacementEffects) {
+            if (re.isIntrinsic()) {
+                replacementEffects.add(re.copy(card, lki));
+            }
+        }
+
+        staticAbilities.clear();
+        for (StaticAbility sa : source.staticAbilities) {
+            if (sa.isIntrinsic()) {
+                staticAbilities.add(sa.copy(card, lki));
+            }
+        }
+
+        // Not sure if this is needed
+        if (lki && source.loyaltyRep != null) {
+            this.loyaltyRep = source.loyaltyRep.copy(card, lki);
+        }
+    }
+
     public CardState copy(final Card host, CardStateName name, final boolean lki) {
         CardState result = new CardState(host, name);
         result.copyFrom(this, lki);

@@ -62,7 +62,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
 
         super.add(c, position, latestState);
 
-        if (trigger) {
+        if (trigger && !c.isMerged()) {
             c.setSickness(true); // summoning sickness
             c.runComesIntoPlayCommands();
         }
@@ -84,18 +84,20 @@ public class PlayerZoneBattlefield extends PlayerZone {
     }
 
     @Override
-    public final CardCollectionView getCards(final boolean filter) {
+    public final CardCollectionView getCards(final boolean filterOutPhasedOut, final boolean filterOutMerged) {
         // Battlefield filters out Phased Out cards by default. Needs to call
         // getCards(false) to get Phased Out cards
+        // For merged permanent, also filter out all merged cards except the top one
 
-        CardCollectionView cards = super.getCards(false);
-        if (!filter) {
+        CardCollectionView cards = super.getCards(false, false);
+        if (!filterOutPhasedOut && !filterOutMerged) {
             return cards;
         }
 
         boolean hasFilteredCard = false;
         for (Card c : cards) {
-            if (c.isPhasedOut()) {
+            if (filterOutPhasedOut && c.isPhasedOut() ||
+                    filterOutMerged && c.getMergedToCard() != null) {
                 hasFilteredCard = true;
                 break;
             }
@@ -104,7 +106,8 @@ public class PlayerZoneBattlefield extends PlayerZone {
         if (hasFilteredCard) {
             CardCollection filteredCollection = new CardCollection();
             for (Card c : cards) {
-                if (!c.isPhasedOut()) {
+                if ((!filterOutPhasedOut || !c.isPhasedOut()) &&
+                        (!filterOutMerged || c.getMergedToCard() == null)) {
                     filteredCollection.add(c);
                 }
             }

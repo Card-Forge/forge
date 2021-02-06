@@ -1497,7 +1497,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         PlayerZone zone = getZone(zoneType);
-        return zone == null ? CardCollection.EMPTY : zone.getCards(filterOutPhasedOut);
+        return zone == null ? CardCollection.EMPTY : zone.getCards(filterOutPhasedOut, true);
     }
 
     public final CardCollectionView getCardsIncludePhasingIn(final ZoneType zone) {

@@ -106,7 +106,7 @@ public class PlayerZone extends Zone {
     }
 
     public CardCollectionView getCardsPlayerCanActivate(Player who) {
-        CardCollectionView cl = getCards(false);
+        CardCollectionView cl = getCards(false, true);
         boolean checkingForOwner = who == player;
 
         if (checkingForOwner && (is(ZoneType.Battlefield) || is(ZoneType.Hand))) {

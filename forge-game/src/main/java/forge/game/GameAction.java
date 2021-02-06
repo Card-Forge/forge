@@ -120,7 +120,7 @@ public class GameAction {
             game.addChangeZoneLKIInfo(c);
         }
 
-        boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
+        boolean suppress = (!c.isToken() && zoneFrom.equals(zoneTo)) || c.isMerged();
 
         Card copied = null;
         Card lastKnownInfo = null;
@@ -339,6 +339,13 @@ public class GameAction {
 
         // update state for view
         copied.updateStateForView();
+        if (copied.isMerged()) {
+            if (copied.getMergedToCard() != null) {
+                copied.getMergedToCard().updateStateForView();
+            } else {
+                copied.getMergedCards().get(0).updateStateForView();
+            }
+        }
 
         if (fromBattlefield) {
             copied.setDamage(0); //clear damage after a card leaves the battlefield

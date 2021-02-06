@@ -471,8 +471,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 game.fireEvent(new GameEventCardStatsChanged(source));
                 AbilityUtils.resolve(first);
             } else if (sa.isMutate()) {
+                SpellAbility first = source.getFirstSpellAbility();
+                // need to set activating player
+                first.setActivatingPlayer(sa.getActivatingPlayer());
                 game.fireEvent(new GameEventCardStatsChanged(source));
-                AbilityUtils.resolve(sa.getHostCard().getFirstSpellAbility());
+                AbilityUtils.resolve(first);
             } else {
                 // TODO: Spell fizzles, what's the best way to alert player?
                 Log.debug(source.getName() + " ability fizzles.");

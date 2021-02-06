@@ -190,10 +190,10 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     }
 
     public final CardCollectionView getCards() {
-        return getCards(true);
+        return getCards(true, true);
     }
 
-    public CardCollectionView getCards(final boolean filter) {
+    public CardCollectionView getCards(final boolean filterOutPhasedOut, final boolean filterOutMerged) {
         return cardList; // Non-Battlefield PlayerZones don't care about the filter
     }
 

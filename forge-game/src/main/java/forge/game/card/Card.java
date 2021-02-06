@@ -1025,6 +1025,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         mergedTo = view.setCard(mergedTo, c, TrackableProperty.MergedTo);
     }
 
+    public final boolean isMerged() {
+        return !getMergedCards().isEmpty() || getMergedToCard() != null;
+    }
+
     public final String getFlipResult(final Player flipper) {
         if (flipResult == null) {
             return null;
@@ -3716,6 +3720,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (tapped == tapped0) { return; }
         tapped = tapped0;
         view.updateTapped(this);
+        for (final Card c : getMergedCards()) {
+            c.setTapped(tapped0);
+        }
     }
 
     public final void tap() {
