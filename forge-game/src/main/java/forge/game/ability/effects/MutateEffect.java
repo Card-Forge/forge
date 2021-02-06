@@ -43,11 +43,11 @@ public class MutateEffect extends SpellAbilityEffect {
         }
         target.setAttachedCards(null);
         host.setAttachedCards(attached);
-        
+
         // TODO: move all remembered, imprinted objects to new top card
         //       and possibly many other needs to be migrated.
     }
-    
+
     @Override
     public void resolve(SpellAbility sa) {
         final Player p = sa.getActivatingPlayer();
@@ -88,7 +88,7 @@ public class MutateEffect extends SpellAbilityEffect {
             target.addMergedCard(host);
             host.setMergedToCard(target);
         }
-        
+
         // Now the top card always have all abilities from bottom cards
         final Long ts = game.getNextTimestamp();
         if (topCard == target) {
