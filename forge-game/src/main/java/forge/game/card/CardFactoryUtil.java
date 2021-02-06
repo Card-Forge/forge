@@ -1563,6 +1563,17 @@ public class CardFactoryUtil {
             }
         }
 
+        if (sq[0].contains("InRememberedHand")) {
+            if (c.getRemembered() != null) {
+                for (final Object o : c.getRemembered()) {
+                    if (o instanceof Player) {
+                        Player remPlayer = (Player) o;
+                        someCards.addAll(remPlayer.getCardsIn(ZoneType.Hand));
+                    }
+                }
+            }
+        }
+
         if (sq[0].contains("InChosenYard")) {
             if (c.getChosenPlayer() != null) {
                 someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Graveyard));
