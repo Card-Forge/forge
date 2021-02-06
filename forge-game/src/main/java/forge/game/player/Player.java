@@ -3146,6 +3146,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             String moved = "Event$ Moved | ValidCard$ Card.EffectSource+YouOwn | Secondary$ True | Optional$ True | OptionalDecider$ You | ReplaceWith$ CommanderMoveReplacement ";
             if (game.getRules().hasAppliedVariant(GameType.TinyLeaders)) {
                 moved += " | Destination$ Graveyard,Exile | Description$ If a commander would be put into its owner's graveyard or exile from anywhere, that player may put it into the command zone instead.";
+            }
+            else if (game.getRules().hasAppliedVariant(GameType.Oathbreaker)) {
+                moved += " | Destination$ Graveyard,Exile,Hand,Library | Description$ If a commander would be exiled or put into hand, graveyard, or library from anywhere, that player may put it into the command zone instead.";
             } else {
             	// rule 903.9b
                 moved += " | Destination$ Hand,Library | Description$ If a commander would be put into its owner’s hand or library from anywhere, its owner may put it into the command zone instead.";
