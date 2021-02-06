@@ -507,6 +507,17 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.EncodedCards);
     }
 
+    public FCollectionView<CardView> getMergedCards() {
+        return get(TrackableProperty.MergedCards);
+    }
+    public boolean hasMergedCards() {
+        return getMergedCards() != null;
+    }
+
+    public CardView getMergedTo() {
+        return get(TrackableProperty.MergedTo);
+    }
+
     public GameEntityView getEntityAttachedTo() {
         return get(TrackableProperty.EntityAttachedTo);
     }

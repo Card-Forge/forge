@@ -98,9 +98,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // cards attached or otherwise linked to this card
     private CardCollection hauntedBy, devouredCards, exploitedCards, delvedCards, convokedCards, imprintedCards, encodedCards;
     private CardCollection mustBlockCards, gainControlTargets, chosenCards, blockedThisTurn, blockedByThisTurn;
+    private CardCollection mergedCards;
 
     // if this card is attached or linked to something, what card is it currently attached to
     private Card encoding, cloneOrigin, haunting, effectSource, pairedWith, meldedWith;
+    private Card mergedTo;
 
     private SpellAbility effectSourceAbility = null;
 
@@ -994,6 +996,35 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         encoding = e;
     }
 
+    public final CardCollectionView getMergedCards() {
+        return CardCollection.getView(mergedCards);
+    }
+    public final boolean hasMergedCard() {
+        return FCollection.hasElements(mergedCards);
+    }
+    public final boolean hasMergedCard(Card c) {
+        return FCollection.hasElement(mergedCards, c);
+    }
+    public final void addMergedCard(final Card c) {
+        mergedCards = view.addCard(mergedCards, c, TrackableProperty.MergedCards);
+    }
+    public final void addMergedCards(final Iterable<Card> cards) {
+        mergedCards = view.addCards(mergedCards, cards, TrackableProperty.MergedCards);
+    }
+    public final void removeMergedCard(final Card c) {
+        mergedCards = view.removeCard(mergedCards, c, TrackableProperty.MergedCards);
+    }
+    public final void clearMergedCards() {
+        mergedCards = view.clearCards(mergedCards, TrackableProperty.MergedCards);
+    }
+
+    public final Card getMergedToCard() {
+        return mergedTo;
+    }
+    public final void setMergedToCard(final Card c) {
+        mergedTo = view.setCard(mergedTo, c, TrackableProperty.MergedTo);
+    }
+
     public final String getFlipResult(final Player flipper) {
         if (flipResult == null) {
             return null;
@@ -1842,7 +1873,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Adapt")
                         || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap")
                         || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
-                        || keyword.startsWith("Encore")) {
+                        || keyword.startsWith("Encore") || keyword.startsWith("Mutate")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.startsWith("CantBeBlockedByAmount")) {
                     sbLong.append(getName()).append(" can't be blocked ");

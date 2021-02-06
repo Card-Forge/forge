@@ -4273,6 +4273,22 @@ public class CardFactoryUtil {
             } else {
                 sa.addAnnounceVar("Multikicker");
             }
+        } else if (keyword.startsWith("Mutate")) {
+            final String[] params = keyword.split(":");
+            final String cost = params[1];
+
+            final StringBuilder sbMutate = new StringBuilder();
+            sbMutate.append("SP$ Mutate | Cost$ ");
+            sbMutate.append(cost);
+            sbMutate.append(" | Mutate True | ValidTgts$ Creature.YouOwn+nonHuman");
+
+            final SpellAbility sa = AbilityFactory.getAbility(sbMutate.toString(), card);
+            sa.setDescription("Mutate " + ManaCostParser.parse(cost) +
+                    " (" + inst.getReminderText() + ")");
+            sa.setStackDescription("Mutate - " + card.getName());
+            sa.setAlternativeCost(AlternativeCost.Mutate);
+            sa.setIntrinsic(intrinsic);
+            inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Ninjutsu")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
