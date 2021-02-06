@@ -205,37 +205,38 @@ public class Main extends AndroidApplication {
     }
 
     private void initForge(AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, int AndroidAPI, String AndroidRelease){
+        if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+            //fake init for error message
+            //set current orientation
+            Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, true, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
+            displayMessage(adapter, true, getDeviceName()+"\n"+"Android "+AndroidRelease+"\n"+"RAM "+ totalRAM+"MB" +"\n"
+                    +"LibGDX "+ Version.VERSION+"\n"+"Can't access external storage");
+            return;
+        }
+        String assetsDir = Environment.getExternalStorageDirectory() + "/Forge/";
+        if (!FileUtil.ensureDirectoryExists(assetsDir)) {
+            //fake init for error message
+            //set current orientation
+            Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, true, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
+            displayMessage(adapter, true, getDeviceName()+"\n"+"Android "+AndroidRelease+"\n"+"RAM "+ totalRAM+"MB" +"\n"
+                    +"LibGDX "+ Version.VERSION+"\n"+"Can't access external storage\nPath: " + assetsDir);
+            return;
+        }
         boolean isPortrait;
-        if (permissiongranted){
-            //establish assets directory
-            if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-                /*Gdx.app.error("Forge", "Can't access external storage");
-                adapter.exit();*/
-                displayMessage(adapter, true, getDeviceName()+"\n"+"Android "+AndroidRelease+"\n"+"RAM "+ totalRAM+"MB" +"\n"+"LibGDX "+ Version.VERSION+"\n"+"Can't access external storage");
-                return;
-            }
-            String assetsDir = Environment.getExternalStorageDirectory() + "/Forge/";
-            if (!FileUtil.ensureDirectoryExists(assetsDir)) {
-                /*Gdx.app.error("Forge", "Can't access external storage");
-                adapter.exit();*/
-                displayMessage(adapter, true, getDeviceName()+"\n"+"Android "+AndroidRelease+"\n"+"RAM "+ totalRAM+"MB" +"\n"+"LibGDX "+ Version.VERSION+"\n"+"Path: " + assetsDir);
-                return;
-            }
-
+        if (permissiongranted) {
             //ensure .nomedia file exists in Forge directory so its images
             //and other media files don't appear in Gallery or other apps
             String noMediaFile = assetsDir + ".nomedia";
             if (!FileUtil.doesFileExist(noMediaFile)) {
                 FileUtil.writeFile(noMediaFile, "");
             }
-
             //enforce orientation based on whether device is a tablet and user preference
             adapter.switchOrientationFile = assetsDir + "switch_orientation.ini";
             boolean landscapeMode = adapter.isTablet == !FileUtil.doesFileExist(adapter.switchOrientationFile);
-
             ForgePreferences prefs = FModel.getPreferences();
             boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
-
             if (landscapeMode) {
                 isPortrait = false;
                 Main.this.setRequestedOrientation(Build.VERSION.SDK_INT >= 26 ?
@@ -245,16 +246,14 @@ public class Main extends AndroidApplication {
                 isPortrait = true;
                 Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
-
             initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig, isPortrait, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
         } else {
             isPortrait = true;
-            //set current orientation
+            //fake init for permission instruction
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
             initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, isPortrait, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
             displayMessage(adapter, false, "");
         }
-
     }
 
     /*@Override
