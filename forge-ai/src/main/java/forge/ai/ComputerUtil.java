@@ -108,9 +108,6 @@ public class ComputerUtil {
         if (chooseTargets != null) {
             chooseTargets.run();
         }
-        if (sa.isBestow()) {
-            sa.getHostCard().animateBestow();
-        }
 
         final Cost cost = sa.getPayCosts();
         // TODO: update mana color conversion for Daxos of Meletis

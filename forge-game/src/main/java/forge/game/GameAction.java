@@ -618,8 +618,11 @@ public class GameAction {
     }
 
     public final Card moveToStack(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
-        final Zone stack = game.getStackZone();
-        return moveTo(stack, c, cause, params);
+        Card result = moveTo(game.getStackZone(), c, cause, params);
+        if (cause != null && cause.isSpell() && result.equals(cause.getHostCard())) {
+            result.setSplitStateToPlayAbility(cause);
+        }
+        return result;
     }
 
     public final Card moveToGraveyard(final Card c, SpellAbility cause) {
