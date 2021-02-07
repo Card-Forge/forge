@@ -9,7 +9,7 @@ SVar:LoseTrack:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
 T:Mode$ TurnBegin | Execute$ DBCleanup | Static$ True
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | IsPresent$ Card.Self | Execute$ TrigChange | TriggerDescription$ At the beginning of each end step, if a creature dealt damage by CARDNAME this turn died, put that card onto the battlefield under your control. Sacrifice it when you lose control of CARDNAME.
-SVar:TrigChange:DB$ ChangeZoneAll | ChangeType$ Creature.IsRemembered+ThisTurnEntered_Graveyard_from_Battlefield | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ TrigDelay
+SVar:TrigChange:DB$ ChangeZoneAll | ChangeType$ Creature.IsRemembered+ThisTurnEnteredFrom_Battlefield | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ TrigDelay
 SVar:TrigDelay:DB$ DelayedTrigger | Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | RememberObjects$ Remembered | Execute$ TrigSac | Secondary$ True | SubAbility$ DBCleanup | SpellDescription$ Sacrifice it when you lose control of CARDNAME.
 SVar:TrigSac:DB$ SacrificeAll | Defined$ DelayTriggerRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
