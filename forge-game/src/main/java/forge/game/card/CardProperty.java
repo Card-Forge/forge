@@ -651,24 +651,28 @@ public class CardProperty {
             if ((property.endsWith("Source") || property.equals("DamagedBy")) &&
                     !card.getReceivedDamageFromThisTurn().containsKey(source)) {
                 return false;
-            } else if (property.endsWith("Remembered")) {
-                boolean matched = false;
-                for (final Object obj : source.getRemembered()) {
-                    if (!(obj instanceof Card)) {
-                        continue;
+            } else {
+                String prop = property.substring("DamagedBy".length());
+
+                boolean found = false;
+                for (Card d : card.getReceivedDamageFromThisTurn().keySet()) {
+                    if (d.isValid(prop, sourceController, source, spellAbility)) {
+                        found = true;
+                        break;
                     }
-                    matched |= card.getReceivedDamageFromThisTurn().containsKey(obj);
                 }
-                if (!matched)
+
+                if (!found) {
+                    for (Card d : AbilityUtils.getDefinedCards(source, prop, spellAbility)) {
+                        if (card.getReceivedDamageFromThisTurn().containsKey(d)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                if (!found) {
                     return false;
-            } else if (property.endsWith("Equipped")) {
-                final Card equipee = source.getEquipping();
-                if (equipee == null || !card.getReceivedDamageFromThisTurn().containsKey(equipee))
-                    return false;
-            } else if (property.endsWith("Enchanted")) {
-                final Card equipee = source.getEnchantingCard();
-                if (equipee == null || !card.getReceivedDamageFromThisTurn().containsKey(equipee))
-                    return false;
+                }
             }
         } else if (property.startsWith("Damaged")) {
             if (!card.getDealtDamageToThisTurn().containsKey(source)) {
