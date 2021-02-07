@@ -1053,7 +1053,7 @@ public class CardProperty {
                 return false;
             }
 
-            if (card.getZone().isCardAddedThisTurn(card, origin)) {
+            if (!card.getZone().isCardAddedThisTurn(card, origin)) {
                 return false;
             }
         } else if (property.equals("DiscardedThisTurn")) {
