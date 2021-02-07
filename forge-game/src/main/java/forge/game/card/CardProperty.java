@@ -1039,17 +1039,21 @@ public class CardProperty {
                 }
             }
             return false;
-        } else if (property.startsWith("ThisTurnEntered")) {
-            final String restrictions = property.split("ThisTurnEntered_")[1];
-            final String[] res = restrictions.split("_");
-            final ZoneType destination = ZoneType.smartValueOf(res[0]);
-            ZoneType origin = null;
-            if (res.length > 1 && res[1].equals("from")) {
-                origin = ZoneType.smartValueOf(res[2]);
+        } else if (property.equals("ThisTurnEntered")) {
+            // only check if it entered the Zone this turn
+            if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
+                return false;
             }
-            List<Card> cards = CardUtil.getThisTurnEntered(destination,
-                    origin, "Card", source);
-            if (!cards.contains(card)) {
+        } else if (property.startsWith("ThisTurnEnteredFrom")) {
+            final String restrictions = property.split("ThisTurnEnteredFrom_")[1];
+            final String[] res = restrictions.split("_");
+            final ZoneType origin = ZoneType.smartValueOf(res[0]);
+
+            if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
+                return false;
+            }
+
+            if (card.getZone().isCardAddedThisTurn(card, origin)) {
                 return false;
             }
         } else if (property.equals("DiscardedThisTurn")) {
