@@ -185,6 +185,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private long bestowTimestamp = -1;
     private long transformedTimestamp = 0;
+    private long mutatedTimestamp = -1;
+    private int timesMutated = 0;
     private boolean tributed = false;
     private boolean embalmed = false;
     private boolean eternalized = false;
@@ -822,7 +824,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean isCloned() {
-        return !clonedStates.isEmpty();
+        return !clonedStates.isEmpty() && clonedStates.lastEntry().getKey() != mutatedTimestamp;
     }
 
     public final CardCollectionView getDevouredCards() {
@@ -1027,6 +1029,24 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final boolean isMerged() {
         return !getMergedCards().isEmpty() || getMergedToCard() != null;
+    }
+
+    public final boolean isMutated() {
+        return mutatedTimestamp != -1;
+    }
+
+    public final long getMutatedTimestamp() {
+        return mutatedTimestamp;
+    }
+    public final void setMutatedTimestamp(final long t) {
+        mutatedTimestamp = t;
+    }
+
+    public final int getTimesMutated() {
+        return timesMutated;
+    }
+    public final void setTimesMutated(final int t) {
+        timesMutated = t;
     }
 
     public final String getFlipResult(final Player flipper) {

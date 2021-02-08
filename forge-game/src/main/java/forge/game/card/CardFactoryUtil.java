@@ -1319,6 +1319,9 @@ public class CardFactoryUtil {
         if (sq[0].contains("TimesPseudokicked")) {
             return doXMath(c.getPseudoKickerMagnitude(), m, c);
         }
+        if (sq[0].contains("TimesMutated")) {
+            return doXMath(c.getTimesMutated(), m, c);
+        }
 
         // Count$IfCastInOwnMainPhase.<numMain>.<numNotMain> // 7/10
         if (sq[0].contains("IfCastInOwnMainPhase")) {

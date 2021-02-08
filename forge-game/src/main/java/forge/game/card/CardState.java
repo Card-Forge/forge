@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -68,7 +68,7 @@ public class CardState extends GameObject implements IHasSVars {
     private Map<String, String> sVars = Maps.newTreeMap();
 
     private KeywordCollection cachedKeywords = new KeywordCollection();
-    
+
     private CardRarity rarity = CardRarity.Unknown;
     private String setCode = CardEdition.UNKNOWN.getCode();
 
@@ -138,7 +138,7 @@ public class CardState extends GameObject implements IHasSVars {
             view.updateType(this);
         }
     }
-    
+
     public final void setCreatureTypes(Collection<String> ctypes) {
         if (type.setCreatureTypes(ctypes)) {
             view.updateType(this);
@@ -595,16 +595,10 @@ public class CardState extends GameObject implements IHasSVars {
             }
         }
 
-        staticAbilities.clear();
         for (StaticAbility sa : source.staticAbilities) {
             if (sa.isIntrinsic()) {
                 staticAbilities.add(sa.copy(card, lki));
             }
-        }
-
-        // Not sure if this is needed
-        if (lki && source.loyaltyRep != null) {
-            this.loyaltyRep = source.loyaltyRep.copy(card, lki);
         }
     }
 
@@ -625,11 +619,11 @@ public class CardState extends GameObject implements IHasSVars {
     public String getSetCode() {
         return setCode;
     }
-    
+
     public CardTypeView getTypeWithChanges() {
         return getType().getTypeWithChanges(card.getChangedCardTypes());
     }
-    
+
     public void setSetCode(String setCode0) {
         setCode = setCode0;
         view.updateSetCode(this);

@@ -3,8 +3,8 @@ package forge.game.ability.effects;
 import java.util.*;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
+import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
@@ -13,40 +13,8 @@ import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
-import forge.util.Lang;
 
 public class MutateEffect extends SpellAbilityEffect {
-
-    private void migrateTopCard(final Card host, final Card target) {
-        // Copy all status from target card and migrate all counters
-        // Also update all reference of target card to new top card
-
-        // TODO: find out all necessary status that should be copied
-        host.setTapped(target.isTapped());
-        host.setSickness(target.isFirstTurnControlled());
-        host.setFlipped(target.isFlipped());
-        host.setDamage(target.getDamage());
-        host.setMonstrous(target.isMonstrous());
-        host.setRenowned(target.isRenowned());
-
-        // Migrate counters
-        Map<CounterType, Integer> counters = target.getCounters();
-        if (!counters.isEmpty()) {
-            host.setCounters(Maps.newHashMap(counters));
-        }
-        target.clearCounters();
-
-        // Migrate attached cards
-        CardCollectionView attached = target.getAttachedCards();
-        for (final Card c : attached) {
-            c.setEntityAttachedTo(host);
-        }
-        target.setAttachedCards(null);
-        host.setAttachedCards(attached);
-
-        // TODO: move all remembered, imprinted objects to new top card
-        //       and possibly many other needs to be migrated.
-    }
 
     @Override
     public void resolve(SpellAbility sa) {
@@ -89,33 +57,34 @@ public class MutateEffect extends SpellAbilityEffect {
             host.setMergedToCard(target);
         }
 
-        // Now the top card always have all abilities from bottom cards
+
+        // First remove current mutated states
+        if (target.getMutatedTimestamp() != -1) {
+            target.removeCloneState(target.getMutatedTimestamp());
+            target.setMutatedTimestamp(-1);
+        }
+        // Now add all abilities from bottom cards
         final Long ts = game.getNextTimestamp();
+        if (topCard.getCurrentStateName() != CardStateName.FaceDown) {
+            final CardCloneStates mutatedStates = CardFactory.getMutatedCloneStates(topCard, sa);
+            topCard.addCloneState(mutatedStates, ts);
+            topCard.setMutatedTimestamp(ts);
+        }
         if (topCard == target) {
-            final CardCloneStates cloneStates = CardFactory.getCloneStates(target, target, sa);
-            final CardState targetState = cloneStates.get(target.getCurrentStateName());
-            final CardState newState = host.getCurrentState();
-            targetState.addAbilitiesFrom(newState, false);
-            target.addCloneState(cloneStates, ts);
             // Re-register triggers for target card
             game.getTriggerHandler().clearActiveTriggers(target, null);
             game.getTriggerHandler().registerActiveTrigger(target, false);
-        } else {
-            final CardCloneStates cloneStates = CardFactory.getCloneStates(host, host, sa);
-            final CardState newState = cloneStates.get(host.getCurrentStateName());
-            final CardState targetState = target.getCurrentState();
-            newState.addAbilitiesFrom(targetState, false);
-            host.addCloneState(cloneStates, ts);
         }
 
         game.getAction().moveToPlay(host, p, sa);
 
         if (topCard == host) {
-            migrateTopCard(host, target);
+            CardFactory.migrateTopCard(host, target);
         } else {
             host.setTapped(target.isTapped());
             host.setFlipped(target.isFlipped());
         }
+        topCard.setTimesMutated(topCard.getTimesMutated() + 1);
 
         game.getTriggerHandler().runTrigger(TriggerType.Mutates, AbilityKey.mapFromCard(topCard), false);
     }
