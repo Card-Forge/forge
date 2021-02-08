@@ -1,6 +1,9 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.ai.*;
 import forge.card.CardStateName;
 import forge.card.CardTypeView;
@@ -14,11 +17,13 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +55,21 @@ public class PlayAi extends SpellAbilityAi {
             }
         } else if (!sa.hasParam("Valid")) {
             cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+            if (cards.isEmpty()) {
+                return false;
+            }
+        }
+
+        if (sa.hasParam("ValidSA")) {
+            final String valid[] = {sa.getParam("ValidSA")};
+            final Iterator<Card> itr = cards.iterator();
+            while (itr.hasNext()) {
+                final Card c = itr.next();
+                final List<SpellAbility> validSA = Lists.newArrayList(Iterables.filter(AbilityUtils.getBasicSpellsFromPlayEffect(c, ai), SpellAbilityPredicates.isValid(valid, ai , c, sa)));
+                if (validSA.size() == 0) {
+                    itr.remove();
+                }
+            }
             if (cards.isEmpty()) {
                 return false;
             }
