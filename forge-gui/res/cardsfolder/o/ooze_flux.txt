@@ -1,9 +1,8 @@
 Name:Ooze Flux
 ManaCost:3 G
 Types:Enchantment
-A:AB$ Token | Announce$ X | Cost$ XCantBe0 1 G SubCounter<X/P1P1/Creature/among creatures you control> | TokenAmount$ 1 | TokenScript$ g_x_x_ooze | TokenOwner$ You | LegacyImage$ g x x ooze gtc | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X green Ooze creature token, where X is the number of +1/+1 counters removed this way.
+A:AB$ Token | Cost$ XCantBe0 1 G RemoveAnyCounter<X/P1P1/Creature.YouCtrl/among creatures you control> | TokenAmount$ 1 | TokenScript$ g_x_x_ooze | TokenOwner$ You | LegacyImage$ g x x ooze gtc | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X green Ooze creature token, where X is the number of +1/+1 counters removed this way.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 DeckHints:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ooze_flux.jpg
 Oracle:{1}{G}, Remove one or more +1/+1 counters from among creatures you control: Create an X/X green Ooze creature token, where X is the number of +1/+1 counters removed this way.

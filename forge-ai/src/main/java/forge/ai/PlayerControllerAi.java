@@ -103,7 +103,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Integer announceRequirements(SpellAbility ability, String announce, boolean allowZero) {
+    public Integer announceRequirements(SpellAbility ability, String announce) {
         // For now, these "announcements" are made within the AI classes of the appropriate SA effects
         if (ability.getApi() != null) {
             switch (ability.getApi()) {
@@ -267,7 +267,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Player chooseStartingPlayer(boolean isFirstGame) {
+    public Player chooseStartingPlayer(boolean isFirstgame) {
         return this.player; // AI is brave :)
     }
 
@@ -364,7 +364,7 @@ public class PlayerControllerAi extends PlayerController {
 
         if (destinationZone == ZoneType.Graveyard) {
             // In presence of Volrath's Shapeshifter in deck, try to place the best creature on top of the graveyard
-            if (!CardLists.filter(game.getCardsInGame(), new Predicate<Card>() {
+            if (!CardLists.filter(getGame().getCardsInGame(), new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
                     // need a custom predicate here since Volrath's Shapeshifter may have a different name OTB
@@ -485,7 +485,7 @@ public class PlayerControllerAi extends PlayerController {
     public void playSpellAbilityNoStack(SpellAbility effectSA, boolean canSetupTargets) {
         if (canSetupTargets)
             brains.doTrigger(effectSA, true); // first parameter does not matter, since return value won't be used
-        ComputerUtil.playNoStack(player, effectSA, game);
+        ComputerUtil.playNoStack(player, effectSA, getGame());
     }
 
     @Override
@@ -522,7 +522,7 @@ public class PlayerControllerAi extends PlayerController {
             chosen = validTypes.iterator().next();
             System.err.println("AI has no idea how to choose " + kindOfType +", defaulting to arbitrary element: chosen");
         }
-        game.getAction().nofityOfValue(sa, player, chosen, player);
+        getGame().getAction().nofityOfValue(sa, player, chosen, player);
         return chosen;
     }
 
@@ -612,16 +612,17 @@ public class PlayerControllerAi extends PlayerController {
     }
     
     @Override
-    public void playChosenSpellAbility(SpellAbility sa) {
+    public boolean playChosenSpellAbility(SpellAbility sa) {
         // System.out.println("Playing sa: " + sa);
         if (sa instanceof LandAbility) {
             if (sa.canPlay()) {
                 sa.resolve();
-                game.updateLastStateForCard(sa.getHostCard());
+                getGame().updateLastStateForCard(sa.getHostCard());
             }
         } else {
-            ComputerUtil.handlePlayingSpellAbility(player, sa, game);
+            ComputerUtil.handlePlayingSpellAbility(player, sa, getGame());
         }
+        return true;
     }    
 
     @Override
@@ -659,7 +660,7 @@ public class PlayerControllerAi extends PlayerController {
         // - End of hack for Exile a card from library Cumulative Upkeep -
 
         if (ComputerUtilCost.canPayCost(ability, c.getController())) {
-            ComputerUtil.playNoStack(c.getController(), ability, game);
+            ComputerUtil.playNoStack(c.getController(), ability, getGame());
             return true;
         }
         return false;
@@ -889,8 +890,8 @@ public class PlayerControllerAi extends PlayerController {
     public String chooseProtectionType(String string, SpellAbility sa, List<String> choices) {
         String choice = choices.get(0);
         SpellAbility hostsa = null;     //for Protect sub-ability
-        if (game.stack.size() > 1) {
-            for (SpellAbilityStackInstance si : game.getStack()) {
+        if (getGame().stack.size() > 1) {
+            for (SpellAbilityStackInstance si : getGame().getStack()) {
                 SpellAbility spell = si.getSpellAbility(true);
                 if (sa != spell && sa.getHostCard() != spell.getHostCard()) {
                     String s = ProtectAi.toProtectFrom(spell.getHostCard(), sa);
@@ -901,10 +902,10 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
         }
-        final Combat combat = game.getCombat();
+        final Combat combat = getGame().getCombat();
         if (combat != null) {
-            if (game.stack.size() == 1) {
-                SpellAbility topstack = game.stack.peekAbility();
+            if (getGame().stack.size() == 1) {
+                SpellAbility topstack = getGame().stack.peekAbility();
                 if (topstack.getSubAbility() == sa) {
                     hostsa = topstack;
                 }
@@ -927,7 +928,7 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
         }
-        final PhaseHandler ph = game.getPhaseHandler();
+        final PhaseHandler ph = getGame().getPhaseHandler();
         if (ph.getPlayerTurn() == sa.getActivatingPlayer() && ph.getPhase() == PhaseType.MAIN1 && sa.getTargetCard() != null) {
             AiAttackController aiAtk = new AiAttackController(sa.getActivatingPlayer(), sa.getTargetCard());
             String s = aiAtk.toProtectAttacker(sa);
@@ -942,7 +943,7 @@ public class PlayerControllerAi extends PlayerController {
                 list.addAll(opp.getCreaturesInPlay());
             }
             if (list.isEmpty()) {
-                list = CardLists.filterControlledBy(game.getCardsInGame(), player.getOpponents());
+                list = CardLists.filterControlledBy(getGame().getCardsInGame(), player.getOpponents());
             }
             if (!list.isEmpty()) {
                 choice = ComputerUtilCard.getMostProminentColor(list);
@@ -957,11 +958,9 @@ public class PlayerControllerAi extends PlayerController {
         final Ability emptyAbility = new AbilityStatic(source, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
         emptyAbility.setActivatingPlayer(player);
         emptyAbility.setTriggeringObjects(sa.getTriggeringObjects());
-        for (String sVar : sa.getSVars()) {
-            emptyAbility.setSVar(sVar, sa.getSVar(sVar));
-        }
+        emptyAbility.setSVars(sa.getSVars());
         if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers) && ComputerUtilCost.canPayCost(emptyAbility, player)) {
-            ComputerUtil.playNoStack(player, emptyAbility, game); // AI needs something to resolve to pay that cost
+            ComputerUtil.playNoStack(player, emptyAbility, getGame()); // AI needs something to resolve to pay that cost
             return true;
         }
         return false;
@@ -970,8 +969,26 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
         for (final SpellAbility sa : getAi().orderPlaySa(activePlayerSAs)) {
-            if (prepareSingleSa(sa.getHostCard(),sa,true)) {
-                ComputerUtil.playStack(sa, player, game);
+            if (sa.isTrigger()) {
+                if (prepareSingleSa(sa.getHostCard(), sa, true)) {
+                    ComputerUtil.playStack(sa, player, getGame());
+                }
+            } else {
+                if (sa.isCopied()) {
+                    if (sa.isSpell()) {
+                        player.getGame().getStackZone().add(sa.getHostCard());
+                    }
+                    // TODO check if static abilities needs to be run for things affecting the copy?
+                    if (sa.isMayChooseNewTargets() && !sa.setupTargets()) {
+                        // if targets can't be done, remove copy from existence
+                        if (sa.isSpell()) {
+                            sa.getHostCard().ceaseToExist();
+                        }
+                        continue;
+                    }
+                }
+                // need finally add the new spell to the stack
+                player.getGame().getStack().add(sa);
             }
         }
     }
@@ -989,7 +1006,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory) {
         if (prepareSingleSa(host, wrapperAbility, isMandatory)) {
-            ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, game);
+            ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, getGame());
         }
     }
 
@@ -1001,9 +1018,9 @@ public class PlayerControllerAi extends PlayerController {
             Spell spell = (Spell) tgtSA;
             if (brains.canPlayFromEffectAI(spell, !optional, noManaCost) == AiPlayDecision.WillPlay || !optional) {
                 if (noManaCost) {
-                    return ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, tgtSA, game);
+                    return ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, tgtSA, getGame());
                 } else {
-                    return ComputerUtil.playStack(tgtSA, player, game);
+                    return ComputerUtil.playStack(tgtSA, player, getGame());
                 }
             } else 
                 return false; // didn't play spell
@@ -1149,7 +1166,7 @@ public class PlayerControllerAi extends PlayerController {
                 return SpecialCardAi.CursedScroll.chooseCard(player, sa);
             }
         } else {
-            CardCollectionView list = CardLists.filterControlledBy(game.getCardsInGame(), player.getOpponents());
+            CardCollectionView list = CardLists.filterControlledBy(getGame().getCardsInGame(), player.getOpponents());
             list = CardLists.filter(list, Predicates.not(Presets.LANDS));
             if (!list.isEmpty()) {
                 return list.get(0).getName();

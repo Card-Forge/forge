@@ -4,12 +4,12 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice CARDNAME.
-SVar:TrigPutCounter:DB$ PutCounter | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBSac
-SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionCheckSVar$ EnchantedCounters | ConditionSVarCompare$ GE3 | References$ EnchantedCounters
-SVar:EnchantedCounters:Enchanted$CardCounters.P1P1
-T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Card.Self | Execute$ TrigDmg | TriggerDescription$ When you sacrifice CARDNAME, it deals 3 damage to any target.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBSac
+SVar:DBSac:DB$ Destroy | Defined$ Self | Sacrifice$ True | ConditionDefined$ TriggeredAttacker | ConditionPresent$ Card.counters_GE3_P1P1
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Card.Self | Execute$ TrigDmg | TriggerZones$ Battlefield | TriggerDescription$ When you sacrifice CARDNAME, it deals 3 damage to any target.
 SVar:TrigDmg:DB$ DealDamage | NumDmg$ 3 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ordeal_of_purphoros.jpg
+SVar:SacMe:4
+DeckHas:Ability$Counters
 Oracle:Enchant creature\nWhenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice Ordeal of Purphoros.\nWhen you sacrifice Ordeal of Purphoros, it deals 3 damage to any target.

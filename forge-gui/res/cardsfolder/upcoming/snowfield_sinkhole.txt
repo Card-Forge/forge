@@ -1,0 +1,5 @@
+Name:Snowfield Sinkhole
+ManaCost:no cost
+Types:Snow Land Plains Swamp
+K:CARDNAME enters the battlefield tapped.
+Oracle:({T}: Add {W} or {B}.)\nSnowfield Sinkhole enters the battlefield tapped.

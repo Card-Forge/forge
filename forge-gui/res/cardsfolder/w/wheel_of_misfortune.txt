@@ -1,0 +1,10 @@
+Name:Wheel of Misfortune
+ManaCost:2 R
+Types:Sorcery
+A:SP$ ChooseNumber | Cost$ 2 R | Defined$ Player | SecretlyChoose$ True | Highest$ DBLoseLife | NotLowest$ DBDiscard | AILogic$ HighestLoseLife | StackDescription$ SpellDescription | SpellDescription$ Each player secretly chooses a number 0 or greater, then all players reveal those numbers simultaneously and determine the highest and lowest numbers revealed this way. CARDNAME deals damage equal to the highest number to each player who chose that number. Each player who didn’t choose the lowest number discards their hand, then draws seven cards.
+SVar:DBLoseLife:DB$ DealDamage | Defined$ Remembered | References$ X | NumDmg$ X
+SVar:X:Count$ChosenNumber
+SVar:DBDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Remembered | NumCards$ 7
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Each player secretly chooses a number 0 or greater, then all players reveal those numbers simultaneously and determine the highest and lowest numbers revealed this way. Wheel of Misfortune deals damage equal to the highest number to each player who chose that number. Each player who didn’t choose the lowest number discards their hand, then draws seven cards.

@@ -5,7 +5,6 @@ import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -63,7 +62,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
                 }
             }
 
-            if (top.isWrapper() || !(top instanceof SpellAbility || top instanceof AbilityActivated)) {
+            if (top.isWrapper() || !(top instanceof SpellAbility || top.isActivatedAbility())) {
                 // Shouldn't even try with triggered or wrapped abilities at this time, will crash
                 return false;
             } else if (top.getApi() == ApiType.CopySpellAbility) {
@@ -91,7 +90,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
                 AiPlayDecision decision = AiPlayDecision.CantPlaySa;
                 if (top instanceof Spell) {
                     decision = ((PlayerControllerAi) aiPlayer.getController()).getAi().canPlayFromEffectAI((Spell) topCopy, true, true);
-                } else if (top instanceof AbilityActivated && top.getActivatingPlayer().equals(aiPlayer)
+                } else if (top.isActivatedAbility() && top.getActivatingPlayer().equals(aiPlayer)
                         && logic.contains("CopyActivatedAbilities")) {
                     decision = AiPlayDecision.WillPlay; // FIXME: we activated it once, why not again? Or bad idea?
                 }

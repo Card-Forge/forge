@@ -1,0 +1,11 @@
+Name:Gor Muldrak, Amphinologist
+ManaCost:1 G U
+Types:Legendary Creature Human Scout
+PT:3/2
+S:Mode$ Continuous | Affected$ You,Permanent.YouCtrl | AddKeyword$ Protection from Salamanders | Description$ You and permanents you control have protection from Salamanders.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRepeat | TriggerDescription$ At the beginning of your end step, each player who controls the fewest creatures creates a 4/3 blue Salamander Warrior creature token.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatSubAbility$ TrigToken | RepeatPlayers$ Player.controlsCreature_EQX | References$ X
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_4_3_salamander_warrior | TokenOwner$ Player.IsRemembered
+SVar:X:PlayerCountPlayers$LowestValid Creature.YouCtrl
+DeckHas:Ability$Token
+Oracle:You and permanents you control have protection from Salamanders.\nAt the beginning of your end step, each player who controls the fewest creatures creates a 4/3 blue Salamander Warrior creature token.

@@ -5,7 +5,7 @@ PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Sliver.Self | TriggerZones$ Battlefield | Execute$ HarmonicDestroy | TriggerDescription$ When this permanent enters the battlefield, destroy target artifact or enchantment.
 S:Mode$ Continuous | Affected$ Sliver.Other | EffectZone$ Battlefield | AffectedZone$ Exile,Graveyard,Hand,Library,Stack,Battlefield,Command | AddTrigger$ HarmonicETB | AddSVar$ HarmonicDestroy | Description$ All Slivers have "When this permanent enters the battlefield, destroy target artifact or enchantment."
 SVar:HarmonicETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Sliver.Self | TriggerZones$ Battlefield | Execute$ HarmonicDestroy | TriggerDescription$ When this permanent enters the battlefield, destroy target artifact or enchantment.
-SVar:HarmonicDestroy:DB$Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment.
+SVar:HarmonicDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment.
 SVar:BuffedBy:Sliver
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harmonic_sliver.jpg
 Oracle:All Slivers have "When this permanent enters the battlefield, destroy target artifact or enchantment."

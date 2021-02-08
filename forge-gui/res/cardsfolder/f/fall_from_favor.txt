@@ -1,0 +1,10 @@
+Name:Fall from Favor
+ManaCost:2 U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ KeepTapped | AITgts$ Card.cmcGE2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted creature and you become the monarch.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBMonarch
+SVar:DBMonarch:DB$ BecomeMonarch | Defined$ You
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | UnlessDefinedPlayer$ EnchantedController.isMonarch | Description$ Enchanted creature doesn't untap during its controller's untap step unless that player is the monarch.
+Oracle:Enchant creature\nWhen Fall from Favor enters the battlefield, tap enchanted creature and you become the monarch.\nEnchanted creature doesn't untap during its controller's untap step unless that player is the monarch.

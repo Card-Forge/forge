@@ -1,0 +1,9 @@
+Name:Urza's Miter
+ManaCost:3
+Types:Artifact
+T:Mode$ Sacrificed | Static$ True | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | ValidPlayer$ You | RememberTriggeringCard$ True | Execute$ DelTrigChangeZone
+SVar:DelTrigChangeZone:DB$ DelayedTrigger | Mode$ ChangesZone | Static$ True | ValidCard$ Artifact.YouCtrl+IsRemembered | Origin$ Battlefield | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigCleanup
+SVar:TrigCleanup:DB$ Cleanup | ClearRemembered$ True | ClearTriggered$ True
+T:Mode$ ChangesZone | ValidCard$ Artifact.YouCtrl+IsNotRemembered | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever an artifact you control is put into a graveyard from the battlefield, if it wasn't sacrificed, you may pay {3}. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 3 | NumCards$ 1 | Defined$ You
+Oracle:Whenever an artifact you control is put into a graveyard from the battlefield, if it wasn't sacrificed, you may pay {3}. If you do, draw a card.

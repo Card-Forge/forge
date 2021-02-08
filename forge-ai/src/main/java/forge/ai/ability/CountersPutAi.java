@@ -338,9 +338,9 @@ public class CountersPutAi extends SpellAbilityAi {
         }
 
         if (amountStr.equals("X")) {
-            if (source.getSVar(amountStr).equals("Count$xPaid")) {
+            if (sa.getSVar(amountStr).equals("Count$xPaid")) {
                 // By default, set PayX here to maximum value (used for most SAs of this type).
-                amount = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                amount = ComputerUtilCost.getMaxXValue(sa, ai);
 
                 if (isClockwork) {
                     // Clockwork Avian and other similar cards: do not tap all mana for X,
@@ -359,7 +359,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     }
                 }
 
-                source.setSVar("PayX", Integer.toString(amount));
+                sa.setXManaCostPaid(amount);
             } else if ("ExiledCreatureFromGraveCMC".equals(logic)) {
                 // e.g. Necropolis
                 amount = Aggregates.max(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES), CardPredicates.Accessors.fnGetCmc);
@@ -403,7 +403,7 @@ public class CountersPutAi extends SpellAbilityAi {
             if (sa.usesTargeting() && abTgt.getMinTargets(source, sa) < 2) {
                 if (ComputerUtilCard.canPumpAgainstRemoval(ai, sa)) {
                     Card c = sa.getTargets().getFirstTargetedCard();
-                    if (sa.getTargets().getNumTargeted() > 1) {
+                    if (sa.getTargets().size() > 1) {
                         sa.resetTargets();
                         sa.getTargets().add(c);
                     }
@@ -456,7 +456,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     && sa.hasParam("Planeswalker")
                     && sa.getPayCosts().hasOnlySpecificCostType(CostPutCounter.class)
                     && sa.isTargetNumberValid()
-                    && sa.getTargets().getNumTargeted() == 0
+                    && sa.getTargets().size() == 0
                     && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2, ai)) {
                 return true;
             }
@@ -475,7 +475,7 @@ public class CountersPutAi extends SpellAbilityAi {
                             abTgt.addDividedAllocation(c, i);
                             left -= i;
                         }
-                        if (left < i || sa.getTargets().getNumTargeted() == abTgt.getMaxTargets(source, sa)) {
+                        if (left < i || sa.getTargets().size() == abTgt.getMaxTargets(source, sa)) {
                             abTgt.addDividedAllocation(sa.getTargets().getFirstTargetedCard(), left + i);
                             left = 0;
                             break;
@@ -492,7 +492,7 @@ public class CountersPutAi extends SpellAbilityAi {
             // target loop
             while (sa.canAddMoreTarget()) {
                 if (list.isEmpty()) {
-                    if (!sa.isTargetNumberValid() || (sa.getTargets().getNumTargeted() == 0)) {
+                    if (!sa.isTargetNumberValid() || (sa.getTargets().size() == 0)) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -530,7 +530,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if (!sa.isTargetNumberValid() || sa.getTargets().getNumTargeted() == 0) {
+                    if (!sa.isTargetNumberValid() || sa.getTargets().size() == 0) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -637,7 +637,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
                 if (list.isEmpty()) {
                     if (!sa.isTargetNumberValid()
-                            || sa.getTargets().getNumTargeted() == 0) {
+                            || sa.getTargets().size() == 0) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -661,7 +661,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
                 if (choice == null) { // can't find anything left
                     if ((!sa.isTargetNumberValid())
-                            || (sa.getTargets().getNumTargeted() == 0)) {
+                            || (sa.getTargets().size() == 0)) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -683,6 +683,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        final SpellAbility root = sa.getRootAbility();
         final Card source = sa.getHostCard();
         // boolean chance = true;
         boolean preferred = true;
@@ -698,8 +699,8 @@ public class CountersPutAi extends SpellAbilityAi {
             list = new CardCollection(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
 
             if (amountStr.equals("X")
-                    && !source.hasSVar("PayX") /* SubAbility on something that already had set PayX, e.g. Endless One ETB counters */
-                    && ((sa.hasParam(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) || source.getSVar(amountStr).equals("Count$xPaid") )) {
+                    && root.getXManaCostPaid() != null /* SubAbility on something that already had set PayX, e.g. Endless One ETB counters */
+                    && sa.hasParam(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) {
 
                 // detect if there's more than one X in the cost (Hangarback Walker, Walking Ballista, etc.)
                 SpellAbility testSa = sa;
@@ -717,7 +718,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 // Spend all remaining mana to add X counters (eg. Hero of Leina Tower)
-                int payX = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                int payX = ComputerUtilCost.getMaxXValue(sa, ai);
 
                 // Account for the possible presence of additional glyphs in cost (e.g. Mikaeus, the Lunarch; Primordial Hydra)
                 payX -= nonXGlyphs;
@@ -725,7 +726,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 // Account for the multiple X in cost
                 if (countX > 1) { payX /= countX; }
 
-                source.setSVar("PayX", Integer.toString(payX));
+                root.setXManaCostPaid(payX);
             }
 
             if (!mandatory) {
@@ -819,7 +820,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     if (choice != null && divided) {
                         final TargetRestrictions abTgt = sa.getTargetRestrictions();
                         int alloc = Math.max(amount / totalTargets, 1);
-                        if (sa.getTargets().getNumTargeted() == Math.min(totalTargets, abTgt.getMaxTargets(sa.getHostCard(), sa)) - 1) {
+                        if (sa.getTargets().size() == Math.min(totalTargets, abTgt.getMaxTargets(sa.getHostCard(), sa)) - 1) {
                             abTgt.addDividedAllocation(choice, left);
                         } else {
                             abTgt.addDividedAllocation(choice, alloc);
@@ -1031,7 +1032,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
             } else {
                 for (CounterType type : options) {
-                    if (!ComputerUtil.isNegativeCounter(type, c) && !ComputerUtil.isUselessCounter(type)) {
+                    if (!ComputerUtil.isNegativeCounter(type, c) && !ComputerUtil.isUselessCounter(type, c)) {
                         return type;
                     }
                 }

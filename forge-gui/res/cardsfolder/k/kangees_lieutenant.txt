@@ -1,0 +1,12 @@
+Name:Kangee's Lieutenant
+ManaCost:2 W
+Types:Creature Bird Soldier
+PT:1/1
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, attacking creatures with flying get +1/+1 until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.attacking+withFlying | NumAtt$ 1 | NumDef$ 1
+K:Encore:5 W
+DeckHas:Ability$Token
+DeckHints:Keyword$Flying
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Kangee's Lieutenant attacks, attacking creatures with flying get +1/+1 until end of turn.\nEncore {5}{W} ({5}{W}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

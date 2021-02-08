@@ -10,6 +10,7 @@ import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
+import forge.screens.home.HomeScreen;
 import forge.screens.home.LoadGameMenu.LoadGameScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -81,6 +82,18 @@ public class ConquestMenu extends FPopupMenu {
         Forge.openScreen(screen0, Forge.getCurrentScreen() != multiverseScreen);
     }
 
+    static {
+        //the first time planarconquest mode is launched, add button for it if in Landscape mode
+        if (Forge.isLandscapeMode()) {
+            HomeScreen.instance.addButtonForMode("-"+Localizer.getInstance().getMessage("lblPlanarConquest"), new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    launchPlanarConquest(LaunchReason.StartPlanarConquest);
+                }
+            });
+        }
+    }
+
     public static ConquestMenu getMenu() {
         return conquestMenu;
     }
@@ -95,6 +108,7 @@ public class ConquestMenu extends FPopupMenu {
     }
 
     public static void launchPlanarConquest(final LaunchReason reason) {
+        Forge.lastButtonIndex = 7;
         LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoadingCurrentConquest"), new Runnable() {
             @Override
             @SuppressWarnings("unchecked")

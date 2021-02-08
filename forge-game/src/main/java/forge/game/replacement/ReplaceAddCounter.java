@@ -45,7 +45,7 @@ public class ReplaceAddCounter extends ReplacementEffect {
             if (!(o instanceof Card)) {
                 return false;
             }
-            if (!matchesValid(o, getParam("ValidCard").split(","), this.getHostCard())) {
+            if (!matchesValid(o, getParam("ValidCard").split(","), getHostCard())) {
                 return false;
             }
         } else if (hasParam("ValidPlayer")) {
@@ -53,7 +53,17 @@ public class ReplaceAddCounter extends ReplacementEffect {
             if (!(o instanceof Player)) {
                 return false;
             }
-            if (!matchesValid(o, getParam("ValidPlayer").split(","), this.getHostCard())) {
+            if (!matchesValid(o, getParam("ValidPlayer").split(","), getHostCard())) {
+                return false;
+            }
+        } else if (hasParam("ValidObject")) {
+            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidObject").split(","), getHostCard())) {
+                return false;
+            }
+        }
+
+        if (hasParam("ValidSource")) {
+            if (!matchesValid(runParams.get(AbilityKey.Source), getParam("ValidSource").split(","), getHostCard())) {
                 return false;
             }
         }
@@ -81,6 +91,7 @@ public class ReplaceAddCounter extends ReplacementEffect {
         } else if (o instanceof Player) {
             sa.setReplacingObject(AbilityKey.Player, o);
         }
+        sa.setReplacingObject(AbilityKey.Object, o);
     }
 
 }

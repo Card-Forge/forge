@@ -4,6 +4,5 @@ Types:Creature Angel
 PT:3/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may shuffle it into its owner's library.
-SVar:TrigChange:DB$ChangeZone | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ TriggeredCard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_fury.jpg
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ TriggeredNewCardLKICopy
 Oracle:Flying\nWhen Angel of Fury dies, you may shuffle it into its owner's library.

@@ -4,7 +4,7 @@ Types:Creature Treefolk Druid
 PT:0/0
 K:Vigilance
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each color among permanents you control.
-SVar:X:Count$ColorsCtrl Permanent.YouCtrl+inZoneBattlefield
+SVar:X:Count$ColorsCtrl Permanent
 A:AB$ Mana | Cost$ T | Produced$ Special EachColorAmong_Permanent.YouCtrl | SpellDescription$ For each color among permanents you control, add one mana of that color.
 AI:RemoveDeck:All
 Oracle:Vigilance\nFaeburrow Elder gets +1/+1 for each color among permanents you control.\n{T}: For each color among permanents you control, add one mana of that color.

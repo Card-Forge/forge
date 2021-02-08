@@ -1,8 +1,7 @@
 Name:Root Maze
 ManaCost:G
 Types:Enchantment
-S:Mode$ ETBTapped | ValidCard$ Artifact,Land | Description$ Artifacts and lands enter the battlefield tapped.
-SVar:NonStackingEffect:True
+R:Event$ Moved | ValidCard$ Artifact,Land | Destination$ Battlefield | ReplaceWith$ ETBTapped | ActiveZones$ Battlefield | Description$ Artifacts and lands enter the battlefield tapped.
+SVar:ETBTapped:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Tapped$ True | Defined$ ReplacedCard
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/root_maze.jpg
 Oracle:Artifacts and lands enter the battlefield tapped.

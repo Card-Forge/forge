@@ -1,10 +1,7 @@
 Name:Release the Gremlins
 ManaCost:X X R
 Types:Sorcery
-A:SP$ Destroy | Cost$ X X R | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | References$ X,MaxTgts | SpellDescription$ Destroy X target artifacts. Create X 2/2 red Gremlin creature tokens. | SubAbility$ DBToken
-# It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
-SVar:X:Targeted$Amount
-SVar:MaxTgts:Count$Valid Artifact
-SVar:DBToken:DB$Token | TokenAmount$ X | TokenScript$ r_2_2_gremlin | TokenOwner$ You | LegacyImage$ r 2 2 gremlin aer
-SVar:Picture:http://www.wizards.com/global/images/magic/general/release_the_gremlins.jpg
+A:SP$ Destroy | Cost$ X X R | TargetMin$ X | TargetMax$ X | ValidTgts$ Artifact | TgtPrompt$ Select X target artifacts | References$ X | SubAbility$ DBToken | SpellDescription$ Destroy X target artifacts.
+SVar:DBToken:DB$ Token | TokenAmount$ X | References$ X | TokenScript$ r_2_2_gremlin | TokenOwner$ You | SpellDescription$ Create X 2/2 red Gremlin creature tokens.
+SVar:X:Count$xPaid
 Oracle:Destroy X target artifacts. Create X 2/2 red Gremlin creature tokens.

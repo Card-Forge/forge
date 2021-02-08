@@ -6,7 +6,5 @@ SVar:MaxTgts:PlayerCountPlayers$Amount/Plus.NumCreatures
 SVar:NumCreatures:Count$Valid Creature,Planeswalker
 SVar:Min:SVar$X/LimitMax.1
 SVar:X:Count$xPaid
-#X Will get overwritten by Announce
 K:Flashback:R R Discard<X/Card/card>
-SVar:Picture:http://www.wizards.com/global/images/magic/general/conflagrate.jpg
 Oracle:Conflagrate deals X damage divided as you choose among any number of targets.\nFlashback—{R}{R}, Discard X cards. (You may cast this card from your graveyard for its flashback cost. Then exile it.)

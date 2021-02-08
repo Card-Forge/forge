@@ -6,9 +6,10 @@ Code2=ZNR
 MciCode=znr
 Type=Expansion
 BoosterCovers=3
-Booster=10 Common:!dfc:!fromSheet("ZNR Secret Cards"), 3 Uncommon:!dfc:!fromSheet("ZNR Secret Cards"), 1 RareMythic:!dfc:!fromSheet("ZNR Secret Cards"), 1 BasicLand
-BoosterReplaceSlotFromPrintSheet=ZNRModalDoubleFaceCards
+Booster=10 Common:!dfc:fromSheet("ZNR cards"), 3 Uncommon:!dfc:fromSheet("ZNR cards"), 1 RareMythic:!dfc:fromSheet("ZNR cards"), 1 BasicLand
+BoosterReplaceSlotFromPrintSheet=ZNR ModalDoubleFaceCards
 Prerelease=6 Boosters, 1 RareMythic+
+#BoosterBox=36 Boosters, 1 fromSheet('ZNR buy a box')+
 
 [cards]
 1 U Allied Assault
@@ -291,7 +292,8 @@ Prerelease=6 Boosters, 1 RareMythic+
 278 L Forest
 279 L Forest
 280 L Forest
-#Alternate Art Borderless
+
+[borderless]
 281 M Jace, Mirror Mage
 282 M Nahiri, Heir of the Ancients
 283 M Nissa of Shadowed Boughs
@@ -301,7 +303,8 @@ Prerelease=6 Boosters, 1 RareMythic+
 287 R Cragcrown Pathway
 288 R Needleverge Pathway
 289 R Riverglide Pathway
-#Showcase
+
+[showcase]
 290 U Canyon Jerboa
 291 U Fearless Fledgling
 292 R Felidar Retreat
@@ -326,7 +329,8 @@ Prerelease=6 Boosters, 1 RareMythic+
 311 U Brushfire Elemental
 312 M Omnath, Locus of Creation
 313 R Phylath, World Sculptor
-#Extended Art
+
+[extended art]
 314 M Angel of Destiny
 315 R Archon of Emeria
 316 R Archpriest of Iona
@@ -398,15 +402,55 @@ Prerelease=6 Boosters, 1 RareMythic+
 382 L Swamp
 383 L Mountain
 384 L Forest
-#Buy-A-Box
+
+[buy a box]
 385 R Orah, Skyclave Hierophant
-#Promos
+
+[promo]
 386 R Charix, the Raging Isle
 387 C Into the Roil
 388 U Bloodchief's Thirst
 389 C Roil Eruption
 390 U Roiling Regrowth
 391 U Kargan Warleader
+
+[ModalDoubleFaceCards]
+1 Agadeem's Awakening|ZNR
+1 Emeria's Call|ZNR
+1 Sea Gate Restoration|ZNR
+1 Shatterskull Smashing|ZNR
+1 Turntimber Symbiosis|ZNR
+2 Branchloft Pathway|ZNR
+2 Brightclimb Pathway|ZNR
+2 Clearwater Pathway|ZNR
+2 Cragcrown Pathway|ZNR
+2 Glasspool Mimic|ZNR
+2 Hagra Mauling|ZNR
+2 Kazandu Mammoth|ZNR
+2 Needleverge Pathway|ZNR
+2 Ondu Inversion|ZNR
+2 Riverglide Pathway|ZNR
+2 Valakut Awakening|ZNR
+6 Akoum Warrior|ZNR
+6 Bala Ged Recovery|ZNR
+6 Beyeen Veil|ZNR
+6 Blackbloom Rogue|ZNR
+6 Jwari Disruption|ZNR
+6 Kabira Takedown|ZNR
+6 Kazuul's Fury|ZNR
+6 Khalni Ambush|ZNR
+6 Makindi Stampede|ZNR
+6 Malakir Rebirth|ZNR
+6 Pelakka Predation|ZNR
+6 Sejiri Shelter|ZNR
+6 Silundi Vision|ZNR
+6 Skyclave Cleric|ZNR
+6 Song-Mad Treachery|ZNR
+6 Spikefield Hazard|ZNR
+6 Tangled Florahedron|ZNR
+6 Umara Wizard|ZNR
+6 Vastwood Fortification|ZNR
+6 Zof Consumption|ZNR
 
 [tokens]
 w_4_4_angel_warrior_flying

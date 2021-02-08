@@ -108,9 +108,6 @@ public class ComputerUtil {
         if (chooseTargets != null) {
             chooseTargets.run();
         }
-        if (sa.isBestow()) {
-            sa.getHostCard().animateBestow();
-        }
 
         final Cost cost = sa.getPayCosts();
         // TODO: update mana color conversion for Daxos of Meletis
@@ -161,8 +158,6 @@ public class ComputerUtil {
 
         // Play higher costing spells first?
         final Cost cost = sa.getPayCosts();
-        // Convert cost to CMC
-        // String totalMana = source.getSVar("PayX"); // + cost.getCMC()
 
         // Consider the costs here for relative "scoring"
         if (hasDiscardHandCost(cost)) {
@@ -718,7 +713,6 @@ public class ComputerUtil {
         CardCollection remaining = new CardCollection(cardlist);
         final CardCollection sacrificed = new CardCollection();
         final Card host = source.getHostCard();
-        final boolean considerSacLogic = "ConsiderSac".equals(source.getParam("AILogic"));
         final int considerSacThreshold = getAIPreferenceParameter(host, "CreatureEvalThreshold");
 
         if ("OpponentOnly".equals(source.getParam("AILogic"))) {
@@ -734,25 +728,20 @@ public class ComputerUtil {
                 if (!ai.canLoseLife() || ai.cantLose()) {
                     return sacrificed; // sacrifice none
                 }
-            } else if (!considerSacLogic) {
+            } else {
                 return sacrificed; // sacrifice none
             }
         }
         boolean exceptSelf = "ExceptSelf".equals(source.getParam("AILogic"));
         boolean removedSelf = false;
 
-        if (isOptional && source.hasParam("Devour") || source.hasParam("Exploit") || considerSacLogic) {
+        if (isOptional && source.hasParam("Devour") || source.hasParam("Exploit")) {
             if (source.hasParam("Exploit")) {
                 for (Trigger t : host.getTriggers()) {
                     if (t.getMode() == TriggerType.Exploited) {
-                        final String execute = t.getParam("Execute");
-                        if (execute == null) {
-                            continue;
-                        }
-                        final SpellAbility exSA = AbilityFactory.getAbility(host.getSVar(execute), host);
+                        final SpellAbility exSA = t.ensureAbility().copy(ai);
 
-                        exSA.setActivatingPlayer(ai);
-                        exSA.setTrigger(true);
+                        exSA.setTrigger(t);
 
                         // Run non-mandatory trigger.
                         // These checks only work if the Executing SpellAbility is an Ability_Sub.
@@ -768,17 +757,21 @@ public class ComputerUtil {
                 public boolean apply(final Card c) {
                     int sacThreshold = 190;
 
-                    if ("HeartPiercer".equals(source.getParam("SacrificeParam"))) {
-                        if (c.getNetPower() == 0) {
+                    String logic = source.getParamOrDefault("AILogic", "");
+                    if (logic.startsWith("SacForDamage")) {
+                        if (c.getNetPower() <= 0) {
                             return false;
                         } else if (c.getNetPower() >= ai.getOpponentsSmallestLifeTotal()) {
                             return true;
+                        } else if (logic.endsWith(".GiantX2") && c.getType().hasCreatureType("Giant")
+                                && c.getNetPower() * 2 >= ai.getOpponentsSmallestLifeTotal()) {
+                            return true; // TODO: generalize this for any type and actually make the AI prefer giants?
                         }
                     }
 
                     if ("DesecrationDemon".equals(source.getParam("AILogic"))) {
                         sacThreshold = SpecialCardAi.DesecrationDemon.getSacThreshold();
-                    } else if (considerSacLogic && considerSacThreshold != -1) {
+                    } else if (considerSacThreshold != -1) {
                         sacThreshold = considerSacThreshold;
                     }
 
@@ -1573,7 +1566,7 @@ public class ComputerUtil {
                 return threatened;
             }
         } else {
-            objects = topStack.getTargets().getTargets();
+            objects = topStack.getTargets();
             final List<GameObject> canBeTargeted = new ArrayList<>();
             for (Object o : objects) {
                 if (o instanceof Card) {
@@ -1842,6 +1835,28 @@ public class ComputerUtil {
                         }
                     }
                     threatened.add(c);
+                }
+            }
+        }
+        //Generic curse auras
+        else if ((threatApi == ApiType.Attach && (topStack.isCurse() || "Curse".equals(topStack.getParam("AILogic"))))) {
+            AiController aic = aiPlayer.isAI() ? ((PlayerControllerAi)aiPlayer.getController()).getAi() : null;
+            boolean enableCurseAuraRemoval = aic != null ? aic.getBooleanProperty(AiProps.ACTIVELY_DESTROY_IMMEDIATELY_UNBLOCKABLE) : false;
+            if (enableCurseAuraRemoval) {
+                for (final Object o : objects) {
+                    if (o instanceof Card) {
+                        final Card c = (Card) o;
+                        // give Shroud to targeted creatures
+                        if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll && tgt == null) && !grantShroud) {
+                            continue;
+                        }
+                        if (saviourApi == ApiType.Protection) {
+                            if (tgt == null || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                                continue;
+                            }
+                        }
+                        threatened.add(c);
+                    }
                 }
             }
         }
@@ -2792,7 +2807,17 @@ public class ComputerUtil {
     }
 
     // this countertypes has no effect
-    public static boolean isUselessCounter(CounterType type) {
+    public static boolean isUselessCounter(CounterType type, Card c) {
+
+        // Quest counter on a card without MaxQuestEffect are useless
+        if (type.is(CounterEnumType.QUEST)) {
+            int e = 0;
+            if ( c.hasSVar("MaxQuestEffect")) {
+                e = Integer.parseInt(c.getSVar("MaxQuestEffect"));
+            }
+            return c.getCounters(type) > e;
+        }
+
         return type.is(CounterEnumType.AWAKENING) || type.is(CounterEnumType.MANIFESTATION) || type.is(CounterEnumType.PETRIFICATION)
                 || type.is(CounterEnumType.TRAINING);
     }

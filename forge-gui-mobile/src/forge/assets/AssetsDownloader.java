@@ -50,8 +50,16 @@ public class AssetsDownloader {
                                 "https://releases.cardforge.org/forge/forge-gui-android/" + version + "/" + filename,
                                 Forge.getDeviceAdapter().getDownloadsDir(), null, splashScreen.getProgressBar()).download(filename);
                         if (apkFile != null) {
-                            Forge.getDeviceAdapter().openFile(apkFile);
-                            Forge.exit(true);
+                            if (Forge.androidVersion < 29) { //Android 9 and below...
+                                Forge.getDeviceAdapter().openFile(apkFile);
+                                Forge.exit(true);
+                                return;
+                            }
+                            //Android 10 and newer manual apk installation
+                            switch (SOptionPane.showOptionDialog("Download Successful. Go to your downloads folder and install " + filename +" to update Forge. Forge will now exit.", "", null, ImmutableList.of("Ok"))) {
+                                default:
+                                    Forge.exit(true);
+                            }
                             return;
                         }
                         SOptionPane.showMessageDialog("Could not download update. " +
@@ -147,5 +155,11 @@ public class AssetsDownloader {
         //save version string to file once assets finish downloading
         //so they don't need to be re-downloaded until you upgrade again
         FileUtil.writeFile(versionFile, Forge.CURRENT_VERSION);
+
+        //add restart after assets update
+        switch (SOptionPane.showOptionDialog("Resource update finished...", "", null, ImmutableList.of("Restart"))) {
+            default:
+                Forge.restart(true);
+        }
     }
 }

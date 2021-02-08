@@ -115,7 +115,7 @@ public class ScryAi extends SpellAbilityAi {
                 }
                 // has spell that can be cast if one counter is removed
                 if (!CardLists.filter(hand, CardPredicates.hasCMC(counterNum)).isEmpty()) {
-                    sa.setSVar("ChosenX", "Number$1");
+                    sa.setXManaCostPaid(1);
                     return true;
                 }
             }
@@ -140,12 +140,12 @@ public class ScryAi extends SpellAbilityAi {
                 int maxToRemove = counterNum - maxCMC + 1;
                 // no Scry 0, even if its catched from later stuff 
                 if (maxToRemove <= 0) {
-                	return false;
+                    return false;
                 }
-                sa.setSVar("ChosenX", "Number$" + maxToRemove);
+                sa.setXManaCostPaid(maxToRemove);
             } else {
                 // no Instant or Sorceries anymore, just scry
-                sa.setSVar("ChosenX", "Number$" + Math.min(counterNum, libsize));
+                sa.setXManaCostPaid(Math.min(counterNum, libsize));
             }
         }
         return true;

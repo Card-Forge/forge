@@ -1,0 +1,8 @@
+Name:Rise of the Dread Marn
+ManaCost:2 B
+Types:Instant
+A:SP$ Token | Cost$ 2 B | LegacyImage$ b 2 2 zombie berserker khm | TokenAmount$ X | References$ X | TokenScript$ b_2_2_zombie_berserker | TokenOwner$ You | SpellDescription$ Create X 2/2 black Zombie Berserker creature tokens, where X is the number of nontoken creatures that died this turn.
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.nonToken
+K:Foretell:B
+DeckHas:Ability$Token
+Oracle:Create X 2/2 black Zombie Berserker creature tokens, where X is the number of nontoken creatures that died this turn.\nForetell {B} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

@@ -22,6 +22,8 @@ import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.GameOutcome.AnteResult;
 import forge.game.GameType;
+import forge.game.GameView;
+import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -41,7 +43,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.trigger.WrappedAbility;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.ITriggerEvent;
@@ -73,13 +74,13 @@ public abstract class PlayerController {
         AddOrRemove,
     }
 
-    protected final Game game;
+    protected final GameView gameView;
 
     protected final Player player;
     protected final LobbyPlayer lobbyPlayer;
 
     public PlayerController(Game game0, Player p, LobbyPlayer lp) {
-        game = game0;
+        gameView = game0.getView();
         player = p;
         lobbyPlayer = lp;
     }
@@ -88,7 +89,8 @@ public abstract class PlayerController {
         return false;
     }
 
-    public Game getGame() { return game; }
+    public Game getGame() { return gameView.getGame(); }
+    public Match getMatch() { return gameView.getMatch(); }
     public Player getPlayer() { return player; }
     public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }
 
@@ -107,7 +109,7 @@ public abstract class PlayerController {
 
     public abstract Map<Card, Integer> assignCombatDamage(Card attacker, CardCollectionView blockers, int damageDealt, GameEntity defender, boolean overrideOrder);
 
-    public abstract Integer announceRequirements(SpellAbility ability, String announce, boolean allowZero);
+    public abstract Integer announceRequirements(SpellAbility ability, String announce);
     public abstract CardCollectionView choosePermanentsToSacrifice(SpellAbility sa, int min, int max, CardCollectionView validTargets, String message);
     public abstract CardCollectionView choosePermanentsToDestroy(SpellAbility sa, int min, int max, CardCollectionView validTargets, String message);
     public abstract TargetChoices chooseNewTargetsFor(SpellAbility ability);
@@ -190,7 +192,7 @@ public abstract class PlayerController {
     public abstract void declareAttackers(Player attacker, Combat combat);
     public abstract void declareBlockers(Player defender, Combat combat);
     public abstract List<SpellAbility> chooseSpellAbilityToPlay();
-    public abstract void playChosenSpellAbility(SpellAbility sa);
+    public abstract boolean playChosenSpellAbility(SpellAbility sa);
 
     public abstract CardCollection chooseCardsToDiscardToMaximumHandSize(int numDiscard);
     public abstract boolean payManaOptional(Card card, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose);
@@ -280,7 +282,7 @@ public abstract class PlayerController {
     }
 
     public AnteResult getAnteResult() {
-        return game.getOutcome().anteResult.get(player.getRegisteredPlayer());
+        return gameView.getAnteResult(player.getView());
     }
 
     public abstract List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen, List<OptionalCostValue> optionalCostValues);
@@ -289,7 +291,5 @@ public abstract class PlayerController {
 
     public abstract CardCollection chooseCardsForEffectMultiple(Map<String, CardCollection> validMap,
             SpellAbility sa, String title, boolean isOptional);
-    
-    public void handleLandPlayed(Card land, Zone zone) {
-    }
+
 }

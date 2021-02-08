@@ -86,13 +86,13 @@ public class SetStateAi extends SpellAbilityAi {
                 for (final Card c : list) {
                     if (shouldTransformCard(c, ai, ph) || "Always".equals(logic)) {
                         sa.getTargets().add(c);
-                        if (sa.getTargets().getNumTargeted() == tgt.getMaxTargets(source, sa)) {
+                        if (sa.getTargets().size() == tgt.getMaxTargets(source, sa)) {
                             break;
                         }
                     }
                 }
 
-                return sa.getTargets().getNumTargeted() >= tgt.getMinTargets(source, sa);
+                return sa.getTargets().size() >= tgt.getMinTargets(source, sa);
             }
         } else if ("TurnFace".equals(mode)) {
             if (!sa.usesTargeting()) {
@@ -115,13 +115,13 @@ public class SetStateAi extends SpellAbilityAi {
                 for (final Card c : list) {
                     if (shouldTurnFace(c, ai, ph) || "Always".equals(logic)) {
                         sa.getTargets().add(c);
-                        if (sa.getTargets().getNumTargeted() == tgt.getMaxTargets(source, sa)) {
+                        if (sa.getTargets().size() == tgt.getMaxTargets(source, sa)) {
                             break;
                         }
                     }
                 }
 
-                return sa.getTargets().getNumTargeted() >= tgt.getMinTargets(source, sa);
+                return sa.getTargets().size() >= tgt.getMinTargets(source, sa);
             }
         }
         return true;

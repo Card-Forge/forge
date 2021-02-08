@@ -4,15 +4,14 @@ Types:Creature
 PT:*/*
 K:Trample
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ PayLife | Description$ As CARDNAME enters the battlefield, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.
-SVar:PayLife:AB$ StoreSVar | Cost$ PayLife<X> | References$ X,Limit,Active,Buried | SVar$ LifePaidOnETB | Type$ CountSVar | Expression$ ChosenX | SubAbility$ MoveToPlay
+SVar:PayLife:AB$ StoreSVar | Cost$ PayLife<X> | XMaxLimit$ Limit | References$ X,Limit,Active,Buried | SVar$ LifePaidOnETB | Type$ CountSVar | Expression$ X | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ All | Destination$ Battlefield
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ LifePaidOnETB | SetToughness$ LifePaidOnETB | References$ LifePaidOnETB | Description$ CARDNAME's power and toughness are each equal to the life paid as it entered the battlefield.
-SVar:X:XChoice/LimitMax.Limit
+SVar:X:Count$xPaid
 SVar:Limit:SVar$Active/Plus.Buried
 SVar:Active:Count$Valid Permanent.White+nonToken+OppCtrl
 SVar:Buried:Count$ValidGraveyard Card.White+OppCtrl
 SVar:LifePaidOnETB:Number$0
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nameless_race.jpg
 Oracle:Trample\nAs Nameless Race enters the battlefield, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.\nNameless Race's power and toughness are each equal to the life paid as it entered the battlefield.

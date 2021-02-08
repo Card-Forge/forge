@@ -1,10 +1,8 @@
 Name:Winter Blast
 ManaCost:X G
 Types:Sorcery
-A:SP$ Tap | Cost$ X G | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgts | RememberTargets$ True | SubAbility$ DBDamage | SpellDescription$ Tap X target creatures. CARDNAME deals 2 damage to each of those creatures with flying.
-SVar:DBDamage:DB$ DamageAll | NumDmg$ 2 | ValidCards$ Card.IsRemembered+withFlying | SubAbility$ DBCleanup
+A:SP$ Tap | Cost$ X G | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | TargetMin$ X | TargetMax$ X | References$ X | RememberTargets$ True | SubAbility$ DBDamage | SpellDescription$ Tap X target creatures. CARDNAME deals 2 damage to each of those creatures with flying.
+SVar:DBDamage:DB$ DamageAll | NumDmg$ 2 | ValidCards$ Card.IsRemembered+withFlying | SubAbility$ DBCleanup | StackDescription$ CARDNAME deals 2 damage to each of those creatures with flying.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Targeted$Amount
-SVar:MaxTgts:Count$Valid Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/winter_blast.jpg
+SVar:X:Count$xPaid
 Oracle:Tap X target creatures. Winter Blast deals 2 damage to each of those creatures with flying.

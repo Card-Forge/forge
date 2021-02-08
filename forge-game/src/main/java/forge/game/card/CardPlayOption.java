@@ -54,11 +54,15 @@ public final class CardPlayOption {
     public boolean isIgnoreManaCostColor() {
         return sta.hasParam("MayPlayIgnoreColor");
     }
-    
+
     public boolean isIgnoreManaCostType() {
         return sta.hasParam("MayPlayIgnoreType");
     }
-    
+
+    public boolean isIgnoreSnowSourceManaCostColor() {
+        return sta.hasParam("MayPlaySnowIgnoreColor");
+    }
+
     public boolean isWithFlash() {
     	return withFlash;
     }

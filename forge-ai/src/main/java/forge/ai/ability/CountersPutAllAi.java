@@ -3,7 +3,6 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -82,10 +81,10 @@ public class CountersPutAllAi extends SpellAbilityAi {
         // TODO improve X value to don't overpay when extra mana won't do
         // anything more useful
         final int amount;
-        if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
+        if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            amount = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(amount));
+            amount = ComputerUtilCost.getMaxXValue(sa, ai);
+            sa.setXManaCostPaid(amount);
         } else {
             amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
         }

@@ -300,7 +300,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      */
     @Override
     public boolean canSwitchAway(boolean isClosing) {
-        if (isClosing && !saved) {
+        if (isClosing && !saved && this.boosterDraft.hasNextChoice()) {
             String userPrompt = localizer.getMessage("lblEndDraftConfirm");
             return FOptionPane.showConfirmDialog(userPrompt, localizer.getMessage("lblLeaveDraft"), localizer.getMessage("lblLeave"), localizer.getMessage("lblCancel"), false);
         }

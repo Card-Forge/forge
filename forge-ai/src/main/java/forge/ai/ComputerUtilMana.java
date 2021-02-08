@@ -4,7 +4,6 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
 import forge.ai.ability.AnimateAi;
-import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -117,10 +116,6 @@ public class ComputerUtilMana {
         }
 
         return score;
-    }
-
-    private static void sortManaAbilities(final Multimap<ManaCostShard, SpellAbility> manaAbilityMap) {
-        sortManaAbilities(manaAbilityMap, null);
     }
 
     private static void sortManaAbilities(final Multimap<ManaCostShard, SpellAbility> manaAbilityMap, final SpellAbility sa) {
@@ -484,7 +479,7 @@ public class ComputerUtilMana {
             SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test);
 
             if (saPayment != null && ComputerUtilCost.isSacrificeSelfCost(saPayment.getPayCosts())) {
-                if (sa.getTargets() != null && sa.getTargets().isTargeting(saPayment.getHostCard())) {
+                if (sa.getTargets() != null && sa.getTargets().contains(saPayment.getHostCard())) {
                     saExcludeList.add(saPayment); // not a good idea to sac a card that you're targeting with the SA you're paying for
                     continue;
                 }
@@ -622,13 +617,6 @@ public class ComputerUtilMana {
                 return false;
             }
         }
-
-        // Note: manaSpentToPay shouldn't be cleared here, since it needs to remain
-        // on the SpellAbility in order for effects that check mana spent cost to work.
-
-        sa.getHostCard().setColorsPaid(cost.getColorsPaid());
-        // if (sa instanceof Spell_Permanent) // should probably add this
-        sa.getHostCard().setSunburstValue(cost.getSunburst());
 
         if (test) {
             refundMana(manaSpentToPay, ai, sa);
@@ -1174,7 +1162,7 @@ public class ComputerUtilMana {
      * @param extraMana extraMana
      * @return ManaCost
      */
-    static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
+    public static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
     	Card card = sa.getHostCard();
         ZoneType castFromBackup = null;
         if (test && sa.isSpell()) {
@@ -1199,23 +1187,10 @@ public class ComputerUtilMana {
                 final int multiplicator = Math.max(cost.getXcounter(), 1);
                 manaToAdd = extraMana * multiplicator;
             } else {
-                // For Count$xPaid set PayX in the AFs then use that here
-                // Else calculate it as appropriate.
-                final String xSvar = card.getSVar("X").startsWith("Count$xPaid") ? "PayX" : "X";
-                if (!sa.getSVar(xSvar).isEmpty() || card.hasSVar(xSvar) || card.getState(CardStateName.Original).hasSVar(xSvar)) {
-                    if (xSvar.equals("PayX") && (card.hasSVar(xSvar) || card.getState(CardStateName.Original).hasSVar(xSvar))) {
-                         // X SVar may end up being an empty string when copying a spell with no cost (e.g. Jhoira Avatar)
-                        String xValue = card.hasSVar(xSvar) ? card.getSVar(xSvar) : card.getState(CardStateName.Original).getSVar(xSvar);
-                        manaToAdd = xValue.isEmpty() ? 0 : Integer.parseInt(xValue) * cost.getXcounter(); // X
-                    } else {
-                        manaToAdd = AbilityUtils.calculateAmount(card, xSvar, sa) * cost.getXcounter();
-                    }
-                }
+                manaToAdd = AbilityUtils.calculateAmount(card, "X", sa) * cost.getXcounter();
             }
 
-            String manaXColor = sa.getParam("XColor");
-            ManaCostShard shardToGrow = ManaCostShard.parseNonGeneric(manaXColor == null ? "1" : manaXColor);
-            cost.increaseShard(shardToGrow, manaToAdd);
+            cost.increaseShard(ManaCostShard.parseNonGeneric(sa.getParamOrDefault("XColor", "1")), manaToAdd);
 
             if (!test) {
                 sa.setXManaCostPaid(manaToAdd / cost.getXcounter());
@@ -1640,32 +1615,5 @@ public class ComputerUtilMana {
             convoke.put(list.get(i), ManaCostShard.GENERIC);
         }
         return convoke;
-    }
-
-    public static int determineMaxAffordableX(Player ai, SpellAbility sa) {
-        if (sa.getPayCosts().getCostMana() == null) {
-            return -1;
-        }
-
-        int numTgts = 0;
-        int numX = sa.getPayCosts().getCostMana().getAmountOfX();
-
-        if (numX == 0) {
-            return -1;
-        }
-
-        int testX = 1;
-        while (testX <= 100) {
-            if (ComputerUtilMana.canPayManaCost(sa, ai, testX)) {
-                numTgts++;
-            } else {
-                break;
-            }
-            testX++;
-        }
-
-        numTgts /= numX;
-
-        return numTgts;
     }
 }

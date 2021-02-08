@@ -281,6 +281,21 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
+    public Void visit(final GameEventSubgameEnd event) {
+        if (event.maingame != null) {
+            for (Player p : event.maingame.getPlayers()) {
+                updateZone(p, ZoneType.Battlefield);
+                updateZone(p, ZoneType.Hand);
+                updateZone(p, ZoneType.Graveyard);
+                updateZone(p, ZoneType.Exile);
+                updateZone(p, ZoneType.Command);
+            }
+            return processEvent();
+        }
+        return null;
+    }
+
+    @Override
     public Void visit(final GameEventZone event) {
         if (event.player != null) {
             // anything except stack will get here
@@ -407,6 +422,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     public Void visit(final GameEventLandPlayed event) {
         processPlayer(event.player, livesUpdate);
+        matchController.handleLandPlayed(event.land);
         return processCard(event.land, cardsRefreshDetails);
     }
 

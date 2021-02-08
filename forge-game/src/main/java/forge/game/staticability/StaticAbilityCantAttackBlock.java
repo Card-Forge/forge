@@ -27,8 +27,6 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
-import java.util.Map;
-
 import com.google.common.collect.Iterables;
 
 /**
@@ -46,42 +44,41 @@ public class StaticAbilityCantAttackBlock {
      * @return a Cost
      */
     public static boolean applyCantAttackAbility(final StaticAbility stAb, final Card card, final GameEntity target) {
-        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
-        if (params.containsKey("ValidCard")
-                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
+        if (stAb.hasParam("ValidCard")
+                && !card.isValid(stAb.getParam("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
             return false;
         }
 
-        if (params.containsKey("Target")
-                && !target.isValid(params.get("Target").split(","), hostCard.getController(), hostCard, null)) {
+        if (stAb.hasParam("Target")
+                && !target.isValid(stAb.getParam("Target").split(","), hostCard.getController(), hostCard, null)) {
             return false;
         }
 
         final Player defender = target instanceof Card ? ((Card) target).getController() : (Player) target;
 
-        if (params.containsKey("UnlessDefenderControls")) {
-            String type = params.get("UnlessDefenderControls");
+        if (stAb.hasParam("UnlessDefenderControls")) {
+            String type = stAb.getParam("UnlessDefenderControls");
             CardCollectionView list = defender.getCardsIn(ZoneType.Battlefield);
             if (Iterables.any(list, CardPredicates.restriction(type.split(","), hostCard.getController(), hostCard, null))) {
                 return false;
             }
         }
-        if (params.containsKey("IfDefenderControls")) {
-            String type = params.get("IfDefenderControls");
+        if (stAb.hasParam("IfDefenderControls")) {
+            String type = stAb.getParam("IfDefenderControls");
             CardCollectionView list = defender.getCardsIn(ZoneType.Battlefield);
             if (!Iterables.any(list, CardPredicates.restriction(type.split(","), hostCard.getController(), hostCard, null))) {
                 return false;
             }
         }
-        if (params.containsKey("DefenderNotNearestToYouInChosenDirection")
+        if (stAb.hasParam("DefenderNotNearestToYouInChosenDirection")
                 && hostCard.getChosenDirection() != null
                 && defender.equals(hostCard.getGame().getNextPlayerAfter(card.getController(), hostCard.getChosenDirection()))) {
             return false;
         }
-        if (params.containsKey("UnlessDefender")) {
-        	final String type = params.get("UnlessDefender");
+        if (stAb.hasParam("UnlessDefender")) {
+            final String type = stAb.getParam("UnlessDefender");
             if (defender.hasProperty(type, hostCard.getController(), hostCard, null)) {
                 return false;
             }
@@ -140,25 +137,24 @@ public class StaticAbilityCantAttackBlock {
      * @return a Cost
      */
     public static Cost getAttackCost(final StaticAbility stAb, final Card card, final GameEntity target) {
-        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
-        if (params.containsKey("ValidCard")
-                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
+        if (stAb.hasParam("ValidCard")
+                && !card.isValid(stAb.getParam("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
             return null;
         }
 
-        if (params.containsKey("Target")
-                && !target.isValid(params.get("Target").split(","), hostCard.getController(), hostCard, null)) {
+        if (stAb.hasParam("Target")
+                && !target.isValid(stAb.getParam("Target").split(","), hostCard.getController(), hostCard, null)) {
             return null;
         }
-        String costString = params.get("Cost");
+        String costString = stAb.getParam("Cost");
         if ("X".equals(costString)) {
             costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X")));
         } else if ("Y".equals(costString)) {
             costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y")));
-        } else if (params.containsKey("References")) {
-            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar(params.get("References"))));
+        } else if (stAb.hasParam("References")) {
+            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar(stAb.getParam("References"))));
         }
 
         final Cost cost = new Cost(costString, true);
@@ -176,25 +172,24 @@ public class StaticAbilityCantAttackBlock {
      * @return a Cost
      */
     public static Cost getBlockCost(final StaticAbility stAb, final Card blocker, final GameEntity attacker) {
-        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
-        if (params.containsKey("ValidCard")
-                && !blocker.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
+        if (stAb.hasParam("ValidCard")
+                && !blocker.isValid(stAb.getParam("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
             return null;
         }
         
-        if (params.containsKey("Attacker") && attacker != null
-                && !attacker.isValid(params.get("Attacker").split(","), hostCard.getController(), hostCard, null)) {
+        if (stAb.hasParam("Attacker") && attacker != null
+                && !attacker.isValid(stAb.getParam("Attacker").split(","), hostCard.getController(), hostCard, null)) {
             return null;
         }
-        String costString = params.get("Cost");
+        String costString = stAb.getParam("Cost");
         if ("X".equals(costString)) {
             costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X")));
         } else if ("Y".equals(costString)) {
             costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y")));
-        } else if (params.containsKey("References")) {
-            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar(params.get("References"))));
+        } else if (stAb.hasParam("References")) {
+            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar(stAb.getParam("References"))));
         }
 
         final Cost cost = new Cost(costString, true);
@@ -202,4 +197,23 @@ public class StaticAbilityCantAttackBlock {
         return cost;
     }
 
+    public static boolean applyCanAttackHasteAbility(final StaticAbility stAb, final Card card, final GameEntity target) {
+        final Card hostCard = stAb.getHostCard();
+        if (stAb.hasParam("ValidCard")
+                && !card.isValid(stAb.getParam("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
+            return false;
+        }
+
+        if (stAb.hasParam("ValidTarget")
+                && !target.isValid(stAb.getParam("ValidTarget").split(","), hostCard.getController(), hostCard, null)) {
+            return false;
+        }
+
+        final Player defender = target instanceof Card ? ((Card) target).getController() : (Player) target;
+        if (stAb.hasParam("ValidDefender")
+                && !defender.isValid(stAb.getParam("ValidDefender").split(","), hostCard.getController(), hostCard, null)) {
+            return false;
+        }
+        return true;
+    }
 }

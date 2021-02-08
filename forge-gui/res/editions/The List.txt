@@ -52,7 +52,7 @@ Type=Reprint
 45 R Battle of Wits
 46 U Brain Freeze
 47 R Brainstorm
-48 M Brazen Borrower // Petty Theft
+48 M Brazen Borrower
 49 R Broodstar
 50 U Chemister's Insight
 51 U Coveted Peacock
@@ -112,7 +112,7 @@ Type=Reprint
 105 U Murderous Cut
 106 R Necravolver
 107 U Necromancy
-108 U Nezumi Graverobber // Nighteyes the Desecrator
+108 U Nezumi Graverobber
 109 U Oubliette
 110 M Phyrexian Obliterator
 111 R Promise of Power
@@ -168,7 +168,7 @@ Type=Reprint
 161 U Alpha Kavu
 162 R Awakening
 163 U Cradle Guard
-164 C Curious Pair // Treats to Share
+164 C Curious Pair
 165 R Elvish Archdruid
 166 U Eternal Witness
 167 R Food Chain
@@ -305,3 +305,51 @@ Type=Reprint
 298 R Vesuva
 299 L Wastes
 300 L Plains
+301 M Morophon, the Boundless
+302 R Adarkar Valkyrie
+303 M Crested Sunmare
+304 U Daxos, Blessed by the Sun
+305 R Elspeth Conquers Death
+306 R Giver of Runes
+307 U Jotun Grunt
+308 U Release the Dogs
+309 M Frost Titan
+310 R Ice Cave
+311 R Jokulmorder
+312 R Kindred Discovery
+313 R Mystical Tutor
+314 R Read the Runes
+315 R Desolation Angel
+316 U Liliana's Devotee
+317 R Skyclave Shade
+318 R Bonecrusher Giant
+319 M Brallin, Skyshark Rider
+320 M Combustible Gearhulk
+321 C Pillage
+322 R Rite of Flame
+323 C Seething Song
+324 U Tibalt, Rakish Instigator
+325 U Beanstalk Giant
+326 M Freyalise, Llanowar's Fury
+327 R Hunted Troll
+328 C Into the North
+329 R Ohran Frostfang
+330 R Panglacial Wurm
+331 R Vernal Equinox
+332 M Vorinclex, Voice of Hunger
+333 R Hans Eriksson
+334 R Ice-Fang Coatl
+335 M Kaya, Ghost Assassin
+336 M Korvold, Fae-Cursed King
+337 U Parcelbeast
+338 M Shabraz, the Skyshark
+339 R Yore-Tiller Nephilim
+340 U Birthing Boughs
+341 R Cold Storage
+342 C Cranial Plating
+343 U Herald's Horn
+344 C Horned Helm
+345 C Runed Stalactite
+346 R Cavern of Souls
+347 R Dark Depths
+348 R Scrying Sheets

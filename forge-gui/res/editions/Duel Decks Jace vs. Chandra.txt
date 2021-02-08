@@ -6,69 +6,68 @@ MciCode=jvc
 Type=Duel_Decks
 
 [cards]
-17 C AEthersnipe
-13 U Air Elemental
-21 R Ancestral Vision
-7 U Bottle Gnomes
-18 U Brine Elemental
-34 M Chandra Nalaar
-47 C Chartooth Cougar
-28 C Condescend
-54 U Cone of Flame
-24 C Counterspell
-23 C Daze
-57 R Demonfire
-C Elemental Shaman
-20 C Errant Ephemeron
-26 U Fact or Fiction
-3 C Fathom Seer
-56 U Fireball
-55 C Fireblast
-49 C Firebolt
-36 C Fireslinger
-53 U Flame Javelin
-35 C Flamekin Brawler
-42 U Flametongue Kavu
-40 U Flamewave Invoker
-10 U Fledgling Mawcor
-43 U Furnace Whelp
-14 R Guile
-27 C Gush
-48 R Hostility
-51 C Incinerate
-45 C Ingot Chewer
-41 C Inner-Flame Acolyte
-33 L Island
-33 L Island
-33 L Island
-33 L Island
 1 M Jace Beleren
-58 U Keldon Megaliths
-52 U Magma Jet
-8 C Man-o'-War
 2 C Martyr of Frost
-22 U Mind Stone
-60 L Mountain
-60 L Mountain
-60 L Mountain
-60 L Mountain
-12 C Mulldrifter
-9 C Ophidian
-46 C Oxidda Golem
-38 U Pyre Charger
-19 R Quicksilver Dragon
-44 R Rakdos Pit Dragon
-25 C Repulse
-15 U Riftwing Cloudskate
-50 C Seal of Fire
-39 U Slith Firewalker
-37 C Soulbright Flamekin
-16 C Spire Golem
-29 U Terrain Generator
+3 C Fathom Seer
 4 C Voidmage Apprentice
 5 U Wall of Deceit
-11 U Waterspout Djinn
 6 U Willbender
+7 U Bottle Gnomes
+8 C Man-o'-War
+9 C Ophidian
+10 U Fledgling Mawcor
+11 U Waterspout Djinn
+12 C Mulldrifter
+13 U Air Elemental
+14 R Guile
+15 U Riftwing Cloudskate
+16 C Spire Golem
+17 C AEthersnipe
+18 U Brine Elemental
+19 R Quicksilver Dragon
+20 C Errant Ephemeron
+21 R Ancestral Vision
+22 U Mind Stone
+23 C Daze
+24 C Counterspell
+25 C Repulse
+26 U Fact or Fiction
+27 C Gush
+28 C Condescend
+29 U Terrain Generator
+30 L Island
+31 L Island
+32 L Island
+33 L Island
+34 M Chandra Nalaar
+35 C Flamekin Brawler
+36 C Fireslinger
+37 C Soulbright Flamekin
+38 U Pyre Charger
+39 U Slith Firewalker
+40 U Flamewave Invoker
+41 C Inner-Flame Acolyte
+42 U Flametongue Kavu
+43 U Furnace Whelp
+44 R Rakdos Pit Dragon
+45 C Ingot Chewer
+46 C Oxidda Golem
+47 C Chartooth Cougar
+48 R Hostility
+49 C Firebolt
+50 C Seal of Fire
+51 C Incinerate
+52 U Magma Jet
+53 U Flame Javelin
+54 U Cone of Flame
+55 C Fireblast
+56 U Fireball
+57 R Demonfire
+58 U Keldon Megaliths
+59 L Mountain
+60 L Mountain
+61 L Mountain
+62 L Mountain
 
 [tokens]
 r_3_1_elemental_shaman_haste

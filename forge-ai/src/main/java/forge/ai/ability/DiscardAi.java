@@ -41,7 +41,7 @@ public class DiscardAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source)) {
+            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source, sa)) {
                 return false;
             }
 
@@ -85,14 +85,14 @@ public class DiscardAi extends SpellAbilityAi {
         }
 
         if (sa.hasParam("NumCards")) {
-           if (sa.getParam("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
+           if (sa.getParam("NumCards").equals("X") && sa.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                final int cardsToDiscard = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), ai.getWeakestOpponent()
+                final int cardsToDiscard = Math.min(ComputerUtilCost.getMaxXValue(sa, ai), ai.getWeakestOpponent()
                         .getCardsIn(ZoneType.Hand).size());
                 if (cardsToDiscard < 1) {
                     return false;
                 }
-                source.setSVar("PayX", Integer.toString(cardsToDiscard));
+                sa.setXManaCostPaid(cardsToDiscard);
             } else {
                 if (AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) < 1) {
                     return false;
@@ -191,11 +191,11 @@ public class DiscardAi extends SpellAbilityAi {
             		}
             	}
             }
-            if ("X".equals(sa.getParam("RevealNumber")) && sa.getHostCard().getSVar("X").equals("Count$xPaid")) {
+            if ("X".equals(sa.getParam("RevealNumber")) && sa.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                final int cardsToDiscard = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), ai.getWeakestOpponent()
+                final int cardsToDiscard = Math.min(ComputerUtilCost.getMaxXValue(sa, ai), ai.getWeakestOpponent()
                         .getCardsIn(ZoneType.Hand).size());
-                sa.getHostCard().setSVar("PayX", Integer.toString(cardsToDiscard));
+                sa.setXManaCostPaid(cardsToDiscard);
             }
         }
 

@@ -27,11 +27,11 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
-import forge.game.zone.Zone;
 import forge.interfaces.IGameController;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.IMayViewCards;
 import forge.model.FModel;
+import forge.player.PlayerControllerHuman;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.trackable.TrackableTypes;
@@ -43,6 +43,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private final Map<PlayerView, IGameController> gameControllers = Maps.newHashMap();
     private final Map<PlayerView, IGameController> originalGameControllers = Maps.newHashMap();
     private boolean gamePause = false;
+    private boolean ignoreConcedeChain = false;
 
     public final boolean hasLocalPlayers() {
         return !gameControllers.isEmpty();
@@ -184,11 +185,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return true; //if not in game, card can be shown
         }
         if(GuiBase.getInterface().isLibgdxPort()){
-            if(gameView.isGameOver()) {
+            if(gameView != null && gameView.isGameOver()) {
                 return true;
             }
             if(spectator!=null) { //workaround fix!! this is needed on above code or it will
-                gameControllers.remove(spectator); //bug the UI! remove spectator here since its must not be here...
+                for (Map.Entry<PlayerView, IGameController> e : gameControllers.entrySet()) {
+                    if (e.getValue().equals(spectator)) {
+                        gameControllers.remove(e.getKey());
+                        break;
+                    }
+                }
                 return true;
             }
             try{
@@ -289,23 +295,42 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return true;
         }
         if (hasLocalPlayers()) {
-            if (showConfirmDialog(Localizer.getInstance().getMessage("lblConcedeCurrentGame"), Localizer.getInstance().getMessage("lblConcedeTitle"), Localizer.getInstance().getMessage("lblConcede"), Localizer.getInstance().getMessage("lblCancel"))) {
-                for (final IGameController c : getOriginalGameControllers()) {
-                    // Concede each player on this Gui (except mind-controlled players)
-                    c.concede();
+            boolean concedeNeeded = false;
+            // check if anyone still needs to confirm
+            for (final IGameController c : getOriginalGameControllers()) {
+                if (c instanceof PlayerControllerHuman) {
+                    if (((PlayerControllerHuman) c).getPlayer().getOutcome() == null) {
+                        concedeNeeded = true;
+                    }
                 }
-            } else {
-                return false;
+            }
+            if (concedeNeeded) {
+                if (showConfirmDialog(Localizer.getInstance().getMessage("lblConcedeCurrentGame"), Localizer.getInstance().getMessage("lblConcedeTitle"), Localizer.getInstance().getMessage("lblConcede"), Localizer.getInstance().getMessage("lblCancel"))) {
+                    for (final IGameController c : getOriginalGameControllers()) {
+                        // Concede each player on this Gui (except mind-controlled players)
+                        c.concede();
+                    }
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return !ignoreConcedeChain;
             }
             if (gameView.isGameOver()) {
                 // Don't immediately close, wait for win/lose screen
                 return false;
-            } else {
-                for (PlayerView player : getLocalPlayers()){
-                    if (!player.isAI()){
+            }
+            else {
+                // since the nextGameDecision might come from somewhere else it will try and concede too
+                ignoreConcedeChain = true;
+                for (PlayerView player : getLocalPlayers()) {
+                    if (!player.isAI()) {
                         getGameController(player).nextGameDecision(NextGameDecision.QUIT);
                     }
                 }
+                ignoreConcedeChain = false;
                 return false;
             }
         }
@@ -368,11 +393,14 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return autoPassUntilEndOfTurn.contains(player);
     }
 
-    private final Timer awaitNextInputTimer = new Timer();
+    private Timer awaitNextInputTimer;
     private TimerTask awaitNextInputTask;
 
     @Override
     public final void awaitNextInput() {
+        if (awaitNextInputTimer == null) {
+            awaitNextInputTimer = new Timer("awaitNextInputTimer Game:" + this.gameView.getId() + " Player:" + this.currentPlayer.getLobbyPlayerName());
+        }
         //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
         awaitNextInputTask = new TimerTask() {
             @Override
@@ -400,6 +428,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final void cancelAwaitNextInput() {
+        if (awaitNextInputTimer == null) {
+            return;
+        }
         synchronized (awaitNextInputTimer) { //ensure task doesn't reset awaitNextInputTask during this block
             if (awaitNextInputTask != null) {
                 try {
@@ -722,8 +753,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
     
     @Override
-    public void handleLandPlayed(Card land, Zone zone) {
+    public void handleLandPlayed(Card land) {
     }  
 
+
+    @Override
+    public void afterGameEnd() {
+        if (awaitNextInputTimer != null) {
+            awaitNextInputTimer.cancel();
+            awaitNextInputTimer = null;
+        }
+    }
     // End of Choice code
 }

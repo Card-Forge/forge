@@ -1,0 +1,11 @@
+Name:Bind the Monster
+ManaCost:U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ KeepTapped
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted creature. It deals damage to you equal to its power.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBDealDamage
+SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ X | References$ X
+SVar:X:Enchanted$CardPower
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
+Oracle:Enchant creature\nWhen Bind the Monster enters the battlefield, tap enchanted creature. It deals damage to you equal to its power.\nEnchanted creature doesn’t untap during its controller’s untap step.

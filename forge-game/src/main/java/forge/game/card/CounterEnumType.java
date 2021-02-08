@@ -33,6 +33,8 @@ public enum CounterEnumType {
 
     LOYALTY("LOYAL", 198, 198, 198),
 
+    AEGIS("AEGIS", 207, 207, 207),
+
     AGE("AGE", 255, 137, 57),
 
     AIM("AIM", 255, 180, 0),
@@ -103,6 +105,8 @@ public enum CounterEnumType {
 
     FEATHER("FTHR", 195, 202, 165),
 
+    FETCH("FETCH", 180, 235, 52),
+
     FILIBUSTER("FLBTR", 255, 179, 119),
 
     FLAME("FLAME", 255, 143, 43),
@@ -118,6 +122,8 @@ public enum CounterEnumType {
     FUSE("FUSE", 255, 122, 85),
 
     GEM("GEM", 255, 99, 251),
+
+    GHOSTFORM("GHSTF", 223, 0, 254),
 
     GLYPH("GLYPH", 184, 202, 199),
 
@@ -300,6 +306,8 @@ public enum CounterEnumType {
     VITALITY("VITAL", 255, 94, 142),
 
     VORTEX("VORTX", 142, 200, 255),
+
+    VOYAGE("VOYAGE", 38, 150, 137),
 
     WAGE("WAGE", 242, 190, 106),
 

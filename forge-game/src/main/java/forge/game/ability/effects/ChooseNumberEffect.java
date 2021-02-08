@@ -60,7 +60,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                 } else {
                     String title = sa.hasParam("ListTitle") ? sa.getParam("ListTitle") : Localizer.getInstance().getMessage("lblChooseNumber");
                     if (anyNumber) {
-                        Integer value = p.getController().announceRequirements(sa, title, true);
+                        Integer value = p.getController().announceRequirements(sa, title);
                         chosen = (value == null ? 0 : value);
                     } else {
                         chosen = p.getController().chooseNumber(sa, title, min, max);
@@ -125,6 +125,23 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                     card.clearRemembered();
                 }
             }
+
+            if (sa.hasParam("NotLowest")) {
+                List<Player> notLowestNum = Lists.newArrayList();
+                for (Player p : chooseMap.keySet()) {
+                    if (!lowestNum.contains(p)) {
+                        notLowestNum.add(p);
+                    }
+                }
+                AbilitySub sub = sa.getAdditionalAbility("NotLowest");
+
+                for (Player p : notLowestNum) {
+                    card.addRemembered(p);
+                    AbilityUtils.resolve(sub);
+                    card.clearRemembered();
+                }
+            }
+
             if (sa.hasParam("Highest")) {
                 AbilitySub sub = sa.getAdditionalAbility("Highest");
 

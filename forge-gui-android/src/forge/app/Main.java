@@ -1,5 +1,6 @@
 package forge.app;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -28,6 +29,8 @@ import android.os.PowerManager;
 import android.provider.Settings;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -36,7 +39,7 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Version;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import forge.Forge;
 import forge.interfaces.IDeviceAdapter;
@@ -56,7 +59,6 @@ public class Main extends AndroidApplication {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //get total device RAM in mb
         ActivityManager actManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
@@ -65,16 +67,22 @@ public class Main extends AndroidApplication {
 
         boolean permissiongranted =  checkPermission();
         Gadapter = new AndroidAdapter(this.getContext());
-        initForge(Gadapter, permissiongranted, totalMemory);
-
-        //permission
-        if(!permissiongranted){
-            //requestPermission();
-            displayMessage(Gadapter);
-        }
+        initForge(Gadapter, permissiongranted, totalMemory, isTabletDevice(this.getContext()), Build.VERSION.SDK_INT, Build.VERSION.RELEASE);
     }
+    private static boolean isTabletDevice(Context activityContext) {
+        Display display = ((Activity)   activityContext).getWindowManager().getDefaultDisplay();
+        DisplayMetrics metrics = new DisplayMetrics();
+        display.getMetrics(metrics);
 
-    private void displayMessage(AndroidAdapter adapter){
+        float widthInches = metrics.widthPixels / metrics.xdpi;
+        float heightInches = metrics.heightPixels / metrics.ydpi;
+        double diagonalInches = Math.sqrt(Math.pow(widthInches, 2) + Math.pow(heightInches, 2));
+        if (diagonalInches >= 7.0) {
+            return true;
+        }
+        return false;
+    }
+    private void displayMessage(AndroidAdapter adapter, boolean ex, String msg){
         TableLayout TL = new TableLayout(this);
         TableRow row = new TableRow(this);
         TableRow row2 = new TableRow(this);
@@ -88,6 +96,10 @@ public class Main extends AndroidApplication {
                 " 2) Tap Permissions\n"+
                 " 3) Turn on the Storage Permission.\n\n"+
                 "(You can tap anywhere to exit and restart the app)\n\n";
+        if (ex) {
+            title = "Forge didn't initialize!\n";
+            steps = msg + "\n\n";
+        }
 
         SpannableString ss1=  new SpannableString(title);
         ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, ss1.length(), 0);
@@ -192,36 +204,39 @@ public class Main extends AndroidApplication {
             builder.show();
     }
 
-    private void initForge(AndroidAdapter adapter, boolean permissiongranted, int totalRAM){
+    private void initForge(AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, int AndroidAPI, String AndroidRelease){
+        if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+            //fake init for error message
+            //set current orientation
+            Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, true, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
+            displayMessage(adapter, true, getDeviceName()+"\n"+"Android "+AndroidRelease+"\n"+"RAM "+ totalRAM+"MB" +"\n"
+                    +"LibGDX "+ Version.VERSION+"\n"+"Can't access external storage");
+            return;
+        }
+        String assetsDir = Environment.getExternalStorageDirectory() + "/Forge/";
+        if (!FileUtil.ensureDirectoryExists(assetsDir)) {
+            //fake init for error message
+            //set current orientation
+            Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, true, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
+            displayMessage(adapter, true, getDeviceName()+"\n"+"Android "+AndroidRelease+"\n"+"RAM "+ totalRAM+"MB" +"\n"
+                    +"LibGDX "+ Version.VERSION+"\n"+"Can't access external storage\nPath: " + assetsDir);
+            return;
+        }
         boolean isPortrait;
-        if (permissiongranted){
-            //establish assets directory
-            if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-                Gdx.app.error("Forge", "Can't access external storage");
-                adapter.exit();
-                return;
-            }
-            String assetsDir = Environment.getExternalStorageDirectory() + "/Forge/";
-            if (!FileUtil.ensureDirectoryExists(assetsDir)) {
-                Gdx.app.error("Forge", "Can't access external storage");
-                adapter.exit();
-                return;
-            }
-
+        if (permissiongranted) {
             //ensure .nomedia file exists in Forge directory so its images
             //and other media files don't appear in Gallery or other apps
             String noMediaFile = assetsDir + ".nomedia";
             if (!FileUtil.doesFileExist(noMediaFile)) {
                 FileUtil.writeFile(noMediaFile, "");
             }
-
             //enforce orientation based on whether device is a tablet and user preference
             adapter.switchOrientationFile = assetsDir + "switch_orientation.ini";
             boolean landscapeMode = adapter.isTablet == !FileUtil.doesFileExist(adapter.switchOrientationFile);
-
             ForgePreferences prefs = FModel.getPreferences();
             boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
-
             if (landscapeMode) {
                 isPortrait = false;
                 Main.this.setRequestedOrientation(Build.VERSION.SDK_INT >= 26 ?
@@ -231,15 +246,14 @@ public class Main extends AndroidApplication {
                 isPortrait = true;
                 Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
-
-            initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig, isPortrait, totalRAM));
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig, isPortrait, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
         } else {
             isPortrait = true;
-            //set current orientation
+            //fake init for permission instruction
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, isPortrait, totalRAM));
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, isPortrait, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
+            displayMessage(adapter, false, "");
         }
-
     }
 
     /*@Override
@@ -275,6 +289,19 @@ public class Main extends AndroidApplication {
     //special clipboard that words on Android
     private class AndroidClipboard implements com.badlogic.gdx.utils.Clipboard {
         private final ClipboardManager cm = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+
+        @Override
+        public boolean hasContents() {
+            if (cm.getPrimaryClip().getItemCount() > 0) {
+                try {
+                    return cm.getPrimaryClip().getItemAt(0).coerceToText(getContext()).length() > 0;
+                }
+                catch (Exception ex) {
+                    return false;
+                }
+            }
+            return false;
+        }
 
         @Override
         public String getContents() {
@@ -423,6 +450,28 @@ public class Main extends AndroidApplication {
         public void convertToJPEG(InputStream input, OutputStream output) {
             Bitmap bmp = BitmapFactory.decodeStream(input);
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, output);
+        }
+    }
+
+    public String getDeviceName() {
+        String manufacturer = Build.MANUFACTURER;
+        String model = Build.MODEL;
+        if (model.toLowerCase().startsWith(manufacturer.toLowerCase())) {
+            return capitalize(model);
+        } else {
+            return capitalize(manufacturer) + " " + model;
+        }
+    }
+
+    private String capitalize(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+        char first = s.charAt(0);
+        if (Character.isUpperCase(first)) {
+            return s;
+        } else {
+            return Character.toUpperCase(first) + s.substring(1);
         }
     }
 }

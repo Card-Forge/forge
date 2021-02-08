@@ -6,16 +6,20 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.game.cost;
+
+import org.apache.commons.lang3.ObjectUtils;
+
+import com.google.common.collect.Iterables;
 
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -38,7 +42,7 @@ public class CostSacrifice extends CostPartWithList {
 
     /**
      * Instantiates a new cost sacrifice.
-     * 
+     *
      * @param amount
      *            the amount
      * @param type
@@ -53,9 +57,19 @@ public class CostSacrifice extends CostPartWithList {
     @Override
     public int paymentOrder() { return 15; }
 
+
+    @Override
+    public Integer getMaxAmountX(SpellAbility ability, Player payer) {
+        final Card source = ability.getHostCard();
+        CardCollectionView typeList = payer.getCardsIn(ZoneType.Battlefield);
+        typeList = CardLists.getValidCards(typeList, getType().split(";"), payer, source, ability);
+        typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability));
+        return typeList.size();
+    }
+
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.card.cost.CostPart#toString()
      */
     @Override
@@ -63,24 +77,18 @@ public class CostSacrifice extends CostPartWithList {
         final StringBuilder sb = new StringBuilder();
         sb.append("Sacrifice ");
 
-        final Integer i = this.convertAmount();
-
-        if (this.payCostFromSource()) {
-            sb.append(this.getType());
+        if (payCostFromSource()) {
+            sb.append(getType());
         } else {
-            final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
-            if (i != null) {
-                sb.append(Cost.convertIntAndTypeToWords(i, desc));
-            } else {
-                sb.append(Cost.convertAmountTypeToWords(this.getAmount(), desc));
-            }
+            final String desc = ObjectUtils.firstNonNull(getTypeDescription(), getType());
+            sb.append(Cost.convertAmountTypeToWords(convertAmount(), getAmount(), desc));
         }
         return sb.toString();
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
      * forge.Card, forge.Player, forge.card.cost.Cost)
@@ -90,21 +98,20 @@ public class CostSacrifice extends CostPartWithList {
         final Card source = ability.getHostCard();
 
         // You can always sac all
-        if (!this.payCostFromSource()) {
-            // If the sacrificed type is dependant on an annoucement, can't necesarily rule out the CanPlay call
-            boolean needsAnnoucement = ability.hasParam("Announce") && this.getType().contains(ability.getParam("Announce"));
+        if (!payCostFromSource()) {
+            if ("All".equalsIgnoreCase(getAmount())) {
+                CardCollectionView typeList = activator.getCardsIn(ZoneType.Battlefield);
+                typeList = CardLists.getValidCards(typeList, getType().split(";"), activator, source, ability);
+                // it needs to check if everything can be sacrificed
+                return Iterables.all(typeList, CardPredicates.canBeSacrificedBy(ability));
+            }
 
-            CardCollectionView typeList = activator.getCardsIn(ZoneType.Battlefield);
-            typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source, ability);
             Integer amount = this.convertAmount();
             if (amount == null) {
                 amount = AbilityUtils.calculateAmount(source, getAmount(), ability);
             }
 
-            typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability));
-
-            return needsAnnoucement || (amount == null) || (typeList.size() >= amount);
-
+            return getMaxAmountX(ability, activator) >= amount;
             // If amount is null, it's either "ALL" or "X"
             // if X is defined, it needs to be calculated and checked, if X is
             // choice, it can be Paid even if it's 0

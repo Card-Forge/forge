@@ -148,3 +148,16 @@ Type=Other
 141 U Submerged Boneyard
 142 C Terramorphic Expanse
 
+[tokens]
+w_1_1_bird_flying
+w_1_1_kor_ally
+g_1_1_saproling
+g_2_2_elemental
+g_4_4_beast
+b_0_0_germ
+b_1_1_faerie_rogue_flying
+b_1_1_goblin_rogue
+b_1_1_rat
+rg_5_5_elemental
+c_1_1_a_thopter_flying
+

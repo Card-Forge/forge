@@ -1,0 +1,20 @@
+Name:Birgi, God of Storytelling
+ManaCost:2 R
+Types:Legendary Creature God
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigMana | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, add {R}. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:TrigMana:DB$ Mana | Produced$ R | PersistentMana$ True
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Creatures you control can boast twice during each of your turns rather than once. | Description$ Creatures you control can boast twice during each of your turns rather than once.
+AlternateMode:Modal
+Oracle:Whenever you cast a spell, add {R}. Until end of turn, you don't lose this mana as steps and phases end.\nCreatures you control can boast twice during each of your turns rather than once.
+
+ALTERNATE
+
+Name:Harnfel, Horn of Bounty
+ManaCost:4 R
+Types:Legendary Artifact
+A:AB$ Dig | Cost$ Discard<1/Card> | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Exile the top two cards of your library, then choose one of them. You may play that card this turn.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ StaticMayPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:StaticMayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Exile | MayPlay$ True | Description$ You may play those cards this turn.
+Oracle:Discard a card: Exile the top two cards of your library. You may play those cards this turn.

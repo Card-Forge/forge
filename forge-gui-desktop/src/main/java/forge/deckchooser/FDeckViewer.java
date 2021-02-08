@@ -28,6 +28,7 @@ import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -129,9 +130,13 @@ public class FDeckViewer extends FDialog {
         }
         else {
             GraphicsDevice gd = this.getGraphicsConfiguration().getDevice();
+            GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+            AffineTransform t = gc.getDefaultTransform();
+            double scaleX = t.getScaleX();
+            double scaleY = t.getScaleY();
 
-            width = (int)(gd.getDisplayMode().getWidth() * 0.8);
-            height = (int)(gd.getDisplayMode().getHeight() * 0.9);
+            width = (int)(gd.getDisplayMode().getWidth() * 0.8 / scaleX);
+            height = (int)(gd.getDisplayMode().getHeight() * 0.9 / scaleY);
         }
 
         this.setPreferredSize(new Dimension(width, height));

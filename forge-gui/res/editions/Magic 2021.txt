@@ -4,7 +4,7 @@ Date=2020-06-04
 Name=Core Set 2021
 Type=Core
 BoosterCovers=3
-Booster=10 Common:!fromSheet("M21 Secret Cards"), 3 Uncommon:!fromSheet("M21 Secret Cards"), 1 RareMythic:!fromSheet("M21 Secret Cards"), 1 fromSheet("M21 Lands")
+Booster=10 Common:fromSheet("M21 cards"):!fromSheet("M21 Lands"), 3 Uncommon:fromSheet("M21 cards"), 1 RareMythic:fromSheet("M21 cards"), 1 fromSheet("M21 Lands")
 Prerelease=6 Boosters, 1 RareMythic+
 ChaosDraftThemes=CORE_SET
 
@@ -283,19 +283,24 @@ ChaosDraftThemes=CORE_SET
 272 L Forest
 273 L Forest
 274 L Forest
+
+[alternate art]
 275 M Teferi, Master of Time
 276 M Teferi, Master of Time
 277 M Teferi, Master of Time
-#Buy-A-Box Promo
+
+[buy a box]
 278 M Rin and Seri, Inseparable
-#Borderless Planeswalkers
+
+[borderless]
 279 M Ugin, the Spirit Dragon
 280 M Basri Ket
 281 M Teferi, Master of Time
 282 M Liliana, Waker of the Dead
 283 M Chandra, Heart of Fire
 284 M Garruk, Unleashed
-#Showcase Frame Cards
+
+[showcase]
 285 M Ugin, the Spirit Dragon
 286 M Basri Ket
 287 C Basri's Acolyte
@@ -325,14 +330,14 @@ ChaosDraftThemes=CORE_SET
 311 L Swamp
 312 L Mountain
 313 L Forest
-#Alternate-Art Borderless Cards
 314 R Containment Priest
 315 M Grim Tutor
 316 M Massacre Wurm
 317 R Cultivate
 318 R Scavenging Ooze
 319 R Solemn Simulacrum
-#Planeswalker Deck Cards
+
+[precon product]
 320 M Basri, Devoted Paladin
 321 C Adherent of Hope
 322 R Basri's Aegis
@@ -353,7 +358,8 @@ ChaosDraftThemes=CORE_SET
 337 R Garruk's Warsteed
 338 U Predatory Wurm
 339 C Wildwood Patrol
-#Extended Art Cards
+
+[extended art]
 340 M Baneslayer Angel
 341 R Glorious Anthem
 342 R Idol of Endurance
@@ -406,13 +412,46 @@ ChaosDraftThemes=CORE_SET
 389 R Temple of Mystery
 390 R Temple of Silence
 391 R Temple of Triumph
-#Promos
+
+[promo]
 392 R Pack Leader
 393 U Selfless Savior
 394 C Frantic Inventory
 395 U Eliminate
 396 U Heartfire Immolator
 397 C Llanowar Visionary
+
+[Lands]
+6 Bloodfell Caves|M21
+6 Blossoming Sands|M21
+6 Dismal Backwater|M21
+6 Jungle Hollow|M21
+6 Rugged Highlands|M21
+6 Scoured Barrens|M21
+6 Swiftwater Cliffs|M21
+6 Thornwood Falls|M21
+6 Tranquil Cove|M21
+6 Wind-Scarred Crag|M21
+3 Plains|M21|1
+3 Plains|M21|2
+3 Plains|M21|4
+3 Plains|M21|3
+3 Island|M21|1
+3 Island|M21|2
+3 Island|M21|4
+3 Island|M21|3
+3 Swamp|M21|1
+3 Swamp|M21|2
+3 Swamp|M21|4
+3 Swamp|M21|3
+3 Mountain|M21|1
+3 Mountain|M21|2
+3 Mountain|M21|4
+3 Mountain|M21|3
+3 Forest|M21|1
+3 Forest|M21|2
+3 Forest|M21|4
+3 Forest|M21|3
 
 [tokens]
 b_2_2_zombie

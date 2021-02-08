@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Creature Dinosaur 
 PT:2/3
 K:Flying
-S:Mode$ ETBTapped | ValidCard$ Creature.OppCtrl | Description$ Creatures your opponents control enter the battlefield tapped.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kinjallis_sunwing.jpg
+R:Event$ Moved | ValidCard$ Creature.OppCtrl | Destination$ Battlefield | ReplaceWith$ ETBTapped | ActiveZones$ Battlefield | Description$ Creatures your opponents control enter the battlefield tapped.
+SVar:ETBTapped:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Tapped$ True | Defined$ ReplacedCard
 Oracle:Flying\nCreatures your opponents control enter the battlefield tapped.

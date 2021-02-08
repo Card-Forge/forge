@@ -8,7 +8,9 @@ import forge.card.MagicColor;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.GameCommand;
 import forge.card.CardType;
@@ -18,7 +20,9 @@ import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
+import forge.game.combat.Combat;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
@@ -28,8 +32,10 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.CardTranslation;
 import forge.util.Lang;
-import forge.util.collect.FCollection;
+import forge.util.Localizer;
+import forge.util.collect.FCollectionView;
 
 /**
  * <p>
@@ -80,25 +86,26 @@ public abstract class SpellAbilityEffect {
         if (stackDesc != null) {
             // by typing "SpellDescription" they want to bypass the Effect's string builder
             if ("SpellDescription".equalsIgnoreCase(stackDesc)) {
-                if (params.get("SpellDescription") != null) {
-                    String currentName = (sa.getHostCard().getName());
-                    String desc1 = TextUtil.fastReplace(params.get("SpellDescription"), "CARDNAME", currentName);
-                    String desc = TextUtil.fastReplace(desc1, "NICKNAME", currentName.split(",")[0]);
-                    sb.append(desc);
-                    }
-                    if (sa.getTargets() != null && !sa.getTargets().getTargets().isEmpty()) {
-                        sb.append(" (Targeting: ").append(sa.getTargets().getTargets()).append(")");
-                    }
+            	if (params.get("SpellDescription") != null) {
+            		sb.append(params.get("SpellDescription"));
+            	}
+            	if (sa.getTargets() != null && !sa.getTargets().isEmpty()) {
+            		sb.append(" (Targeting: ").append(sa.getTargets()).append(")");
+            	}
             } else if (!"None".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
                 makeSpellDescription(sa, sb, stackDesc);
             }
         } else {
             final String conditionDesc = sa.getParam("ConditionDescription");
+            final String afterDesc = sa.getParam("AfterDescription");
             final String baseDesc = this.getStackDescription(sa);
             if (conditionDesc != null) {
                 sb.append(conditionDesc).append(" ");
             }
             sb.append(baseDesc);
+            if (afterDesc != null) {
+                sb.append(" ").append(afterDesc);
+            }
         }
 
         // only add to StackDescription if its not a Permanent Spell
@@ -123,7 +130,10 @@ public abstract class SpellAbilityEffect {
             }
         }
 
-        return sb.toString();
+        String currentName = (sa.getHostCard().getName());
+        String substitutedDesc = TextUtil.fastReplace(sb.toString(), "CARDNAME", currentName);
+        substitutedDesc = TextUtil.fastReplace(substitutedDesc, "NICKNAME", currentName.split(",")[0]);
+        return substitutedDesc;
     }
 
     /**
@@ -149,13 +159,7 @@ public abstract class SpellAbilityEffect {
             if ("{".equals(t)) { isPlainText = false; continue; }
             if ("}".equals(t)) { isPlainText = true; continue; }
 
-            if (isPlainText) {
-                if(t.startsWith("NICKNAME")) {
-                    sb.append(TextUtil.fastReplace(t,"NICKNAME", sa.getHostCard().getName().split(",")[0]));
-                } else {
-                    sb.append(TextUtil.fastReplace(t, "CARDNAME", sa.getHostCard().getName()));
-                }
-            } else {
+            if (!isPlainText) {
                 final List<? extends GameObject> objs;
                 if (t.startsWith("p:")) {
                     objs = AbilityUtils.getDefinedPlayers(sa.getHostCard(), t.substring(2), sa);
@@ -186,14 +190,14 @@ public abstract class SpellAbilityEffect {
     }
 
     // Players
-    protected final static FCollection<Player> getTargetPlayers(final SpellAbility sa) {                                       return getPlayers(false, "Defined",    sa); }
-    protected final static FCollection<Player> getTargetPlayers(final SpellAbility sa, final String definedParam) {            return getPlayers(false, definedParam, sa); }
-    protected final static FCollection<Player> getDefinedPlayersOrTargeted(final SpellAbility sa ) {                           return getPlayers(true,  "Defined",    sa); }
-    protected final static FCollection<Player> getDefinedPlayersOrTargeted(final SpellAbility sa, final String definedParam) { return getPlayers(true,  definedParam, sa); }
+    protected final static PlayerCollection getTargetPlayers(final SpellAbility sa) {                                       return getPlayers(false, "Defined",    sa); }
+    protected final static PlayerCollection getTargetPlayers(final SpellAbility sa, final String definedParam) {            return getPlayers(false, definedParam, sa); }
+    protected final static PlayerCollection getDefinedPlayersOrTargeted(final SpellAbility sa ) {                           return getPlayers(true,  "Defined",    sa); }
+    protected final static PlayerCollection getDefinedPlayersOrTargeted(final SpellAbility sa, final String definedParam) { return getPlayers(true,  definedParam, sa); }
 
-    private static FCollection<Player> getPlayers(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
+    private static PlayerCollection getPlayers(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
-        return useTargets ? new FCollection<>(sa.getTargets().getTargetPlayers())
+        return useTargets ? new PlayerCollection(sa.getTargets().getTargetPlayers())
                 : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
 
@@ -227,7 +231,7 @@ public abstract class SpellAbilityEffect {
 
     private static List<GameObject> getTargetables(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
-        return useTargets ? Lists.newArrayList(sa.getTargets().getTargets())
+        return useTargets ? Lists.newArrayList(sa.getTargets())
                 : AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
 
@@ -290,15 +294,15 @@ public abstract class SpellAbilityEffect {
         }
         String trigSA = "";
         if (location.equals("Hand")) {
-            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Hand";
+            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand";
         } else if (location.equals("SacrificeCtrl")) {
             trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered";
         } else if (location.equals("Sacrifice")) {
             trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered | Controller$ You";
         } else if (location.equals("Exile")) {
-            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile";
+            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Exile";
         } else if (location.equals("Destroy")) {
-            trigSA = "DB$ Destroy | Defined$ DelayTriggerRemembered";
+            trigSA = "DB$ Destroy | Defined$ DelayTriggerRememberedLKI";
         }
         if (sa.hasParam("AtEOTCondition")) {
             String var = sa.getParam("AtEOTCondition");
@@ -332,8 +336,7 @@ public abstract class SpellAbilityEffect {
         }
     }
 
-    protected static void addForgetOnMovedTrigger(final Card card, final String zone) {
-        String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | Destination$ Any | TriggerZones$ Command | Static$ True";
+    protected static SpellAbility getForgetSpellAbility(final Card card) {
         String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
         String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
                 + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
@@ -341,11 +344,23 @@ public abstract class SpellAbilityEffect {
         SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, card);
         AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, card);
         saForget.setSubAbility(saExile);
+        return saForget;
+    }
+
+    protected static void addForgetOnMovedTrigger(final Card card, final String zone) {
+        String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | ExcludedDestinations$ Stack | Destination$ Any | TriggerZones$ Command | Static$ True";
 
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
-        parsedTrigger.setOverridingAbility(saForget);
-        final Trigger addedTrigger = card.addTrigger(parsedTrigger);
-        addedTrigger.setIntrinsic(true);
+        parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
+        card.addTrigger(parsedTrigger);
+    }
+
+    protected static void addForgetOnCastTrigger(final Card card) {
+        String trig = "Mode$ SpellCast | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Static$ True";
+
+        final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
+        parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
+        card.addTrigger(parsedTrigger);
     }
 
     protected static void addExileOnMovedTrigger(final Card card, final String zone) {
@@ -357,21 +372,29 @@ public abstract class SpellAbilityEffect {
         addedTrigger.setIntrinsic(true);
     }
 
+    protected static void addExileOnCounteredTrigger(final Card card) {
+        String trig = "Mode$ Countered | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Static$ True";
+        String effect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
+        final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
+        parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+        final Trigger addedTrigger = card.addTrigger(parsedTrigger);
+        addedTrigger.setIntrinsic(true);
+    }
+
+    protected static void addForgetOnPhasedInTrigger(final Card card) {
+        String trig = "Mode$ PhaseIn | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Static$ True";
+
+        final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
+        parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
+        card.addTrigger(parsedTrigger);
+    }
+
     protected static void addForgetCounterTrigger(final Card card, final String counterType) {
         String trig = "Mode$ CounterRemoved | TriggerZones$ Command | ValidCard$ Card.IsRemembered | CounterType$ " + counterType + " | NewCounterAmount$ 0 | Static$ True";
 
-        String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
-        String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
-                + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
-
-        SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, card);
-        AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, card);
-        saForget.setSubAbility(saExile);
-
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
-        parsedTrigger.setOverridingAbility(saForget);
-        final Trigger addedTrigger = card.addTrigger(parsedTrigger);
-        addedTrigger.setIntrinsic(true);
+        parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
+        card.addTrigger(parsedTrigger);
     }
 
     protected static void addLeaveBattlefieldReplacement(final Card card, final SpellAbility sa, final String zone) {
@@ -522,5 +545,60 @@ public abstract class SpellAbilityEffect {
             game.getAction().moveTo(ZoneType.Command, eff, sa);
             game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         }
+    }
+
+    protected static boolean addToCombat(Card c, Player controller, SpellAbility sa, String attackingParam, String blockingParam) {
+        final Card host = sa.getHostCard();
+        final Game game = controller.getGame();
+        if (!game.getPhaseHandler().inCombat()) {
+            return false;
+        }
+        boolean combatChanged = false;
+        final Combat combat = game.getCombat();
+
+        if (sa.hasParam(attackingParam) && combat.getAttackingPlayer().equals(controller)) {
+            String attacking = sa.getParam(attackingParam);
+            GameEntity defender = null;
+            FCollectionView<GameEntity> defs = null;
+            if ("True".equalsIgnoreCase(attacking)) {
+                defs = combat.getDefenders();
+            } else if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
+                Player defendingPlayer = Iterables.getFirst(AbilityUtils.getDefinedPlayers(host, attacking, sa), null);
+                if (defendingPlayer != null) {
+                    defs = game.getCombat().getDefendersControlledBy(defendingPlayer);
+                }
+            } else {
+                defs = AbilityUtils.getDefinedEntities(host, attacking, sa);
+            }
+
+            if (defs != null) {
+                Map<String, Object> params = Maps.newHashMap();
+                params.put("Attacker", c);
+                defender = controller.getController().chooseSingleEntityForEffect(defs, sa,
+                        Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false, params);
+            }
+
+            if (defender != null) {
+                combat.addAttacker(c, defender);
+                combat.getBandOfAttacker(c).setBlocked(false);
+                combatChanged = true;
+            }
+        }
+        if (sa.hasParam(blockingParam)) {
+            final Card attacker = Iterables.getFirst(AbilityUtils.getDefinedCards(host, sa.getParam(blockingParam), sa), null);
+            if (attacker != null) {
+                final boolean wasBlocked = combat.isBlocked(attacker);
+                combat.addBlocker(attacker, c);
+                combat.orderAttackersForDamageAssignment(c);
+
+                // Run triggers for new blocker and add it to damage assignment order
+                if (!wasBlocked) {
+                    combat.setBlocked(attacker, true);
+                    combat.addBlockerToDamageAssignmentOrder(attacker, c);
+                }
+                combatChanged = true;
+            }
+        }
+        return combatChanged;
     }
 }

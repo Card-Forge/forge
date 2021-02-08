@@ -1,12 +1,11 @@
 package forge.ai.ability;
 
 import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilMana;
+import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -23,30 +22,23 @@ public class UnattachAllAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getHostCard();
-
-        if (abCost != null) {
-            // No Aura spells have Additional Costs
-        }
 
         // prevent run-away activations - first time will always return true
         boolean chance = MyRandom.getRandom().nextFloat() <= .9;
 
         // Attach spells always have a target
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
         }
 
-        if (abCost != null && abCost.getTotalMana().countX() > 0 && source.getSVar("X").equals("Count$xPaid")) {
-            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
+        if (sa.getSVar("X").equals("Count$xPaid")) {
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
 
             if (xPay == 0) {
                 return false;
             }
 
-            source.setSVar("PayX", Integer.toString(xPay));
+            sa.setXManaCostPaid(xPay);
         }
 
         if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)

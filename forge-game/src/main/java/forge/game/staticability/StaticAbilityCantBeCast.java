@@ -6,18 +6,20 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.game.staticability;
 
+import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
@@ -31,9 +33,62 @@ import java.util.List;
  */
 public class StaticAbilityCantBeCast {
 
+    static String CantBeCast = "CantBeCast";
+    static String CantBeActivated = "CantBeActivated";
+    static String CantPlayLand = "CantPlayLand";
+
+    public static boolean cantBeCastAbility(final SpellAbility spell, final Card card, final Player activator) {
+        card.setCastSA(spell);
+
+        final Game game = activator.getGame();
+        final CardCollection allp = new CardCollection(game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
+        allp.add(card);
+        for (final Card ca : allp) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.getParam("Mode").equals(CantBeCast) || stAb.isSuppressed() || !stAb.checkConditions()) {
+                    continue;
+                }
+                if (applyCantBeCastAbility(stAb, spell, card, activator)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean cantBeActivatedAbility(final SpellAbility spell, final Card card, final Player activator) {
+        final Game game = activator.getGame();
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.getParam("Mode").equals(CantBeActivated) || stAb.isSuppressed() || !stAb.checkConditions()) {
+                    continue;
+                }
+                if (applyCantBeActivatedAbility(stAb, spell, card, activator)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean cantPlayLandAbility(final SpellAbility spell, final Card card, final Player activator) {
+        final Game game = activator.getGame();
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.getParam("Mode").equals(CantPlayLand) || stAb.isSuppressed() || !stAb.checkConditions()) {
+                    continue;
+                }
+                if (applyCantPlayLandAbility(stAb, card, activator)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * TODO Write javadoc for this method.
-     * 
+     *
      * @param stAb
      *            a StaticAbility
      * @param card
@@ -42,7 +97,7 @@ public class StaticAbilityCantBeCast {
      *            the activator
      * @return true, if successful
      */
-    public static boolean applyCantBeCastAbility(final StaticAbility stAb, final Card card, final Player activator) {
+    public static boolean applyCantBeCastAbility(final StaticAbility stAb, final SpellAbility spell, final Card card, final Player activator) {
         final Card hostCard = stAb.getHostCard();
 
         if (stAb.hasParam("ValidCard")
@@ -91,7 +146,7 @@ public class StaticAbilityCantBeCast {
 
     /**
      * Applies Cant Be Activated ability.
-     * 
+     *
      * @param stAb
      *            a StaticAbility
      * @param card
@@ -100,10 +155,8 @@ public class StaticAbilityCantBeCast {
      *            a SpellAbility
      * @return true, if successful
      */
-    public static boolean applyCantBeActivatedAbility(final StaticAbility stAb, final Card card,
-            final SpellAbility spellAbility) {
+    public static boolean applyCantBeActivatedAbility(final StaticAbility stAb, final SpellAbility spellAbility, final Card card, final Player activator) {
         final Card hostCard = stAb.getHostCard();
-        final Player activator = spellAbility.getActivatingPlayer();
 
         if (stAb.hasParam("ValidCard")
                 && !card.isValid(stAb.getParam("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
@@ -152,7 +205,7 @@ public class StaticAbilityCantBeCast {
 
     /**
      * TODO Write javadoc for this method.
-     * 
+     *
      * @param stAb
      *            a StaticAbility
      * @param card
@@ -172,7 +225,7 @@ public class StaticAbilityCantBeCast {
         if (stAb.hasParam("Origin")) {
             List<ZoneType> src = ZoneType.listValueOf(stAb.getParam("Origin"));
 
-            if (!src.contains(card.getZone().getZoneType())) {
+            if (!src.contains(card.getLastKnownZone().getZoneType())) {
                 return false;
             }
         }

@@ -38,3 +38,4 @@ Current Pioneer Metagame | https://downloads.cardforge.org/decks/currentpioneerm
 Current Historic Metagame | https://downloads.cardforge.org/decks/currenthistoricmetagame.zip
 Current Penny Dreadful Metagame | https://downloads.cardforge.org/decks/currentpennydreadfulmetagame.zip
 Current Vintage Metagame | https://downloads.cardforge.org/decks/currentvintagemetagame.zip
+Modern on a Budget | https://downloads.cardforge.org/decks/modernonabudget.zip

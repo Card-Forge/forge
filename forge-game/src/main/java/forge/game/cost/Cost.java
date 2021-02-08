@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
@@ -42,7 +43,7 @@ import forge.util.TextUtil;
  * <p>
  * Cost class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -105,7 +106,7 @@ public class Cost implements Serializable {
 
     /**
      * Gets the cost parts.
-     * 
+     *
      * @return the cost parts
      */
     public final List<CostPart> getCostParts() {
@@ -123,15 +124,15 @@ public class Cost implements Serializable {
         Collections.sort(this.costParts, new Comparator<CostPart>() {
             @Override
             public int compare(CostPart o1, CostPart o2) {
-                return o1.paymentOrder() - o2.paymentOrder();
+                return ObjectUtils.compare(o1.paymentOrder(), o2.paymentOrder());
             }
         });
     }
-    
+
     /**
      * Get the cost parts, always including a mana cost part (which may be
      * zero).
-     * 
+     *
      * @return the cost parts, possibly with an extra zero mana {@link
      * CostPartMana}.
      */
@@ -149,7 +150,7 @@ public class Cost implements Serializable {
      * <p>
      * isOnlyManaCost.
      * </p>
-     * 
+     *
      * @return a boolean.
      */
     public final boolean isOnlyManaCost() {
@@ -167,7 +168,7 @@ public class Cost implements Serializable {
      * <p>
      * getTotalMana.
      * </p>
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public final ManaCost getTotalMana() {
@@ -179,17 +180,17 @@ public class Cost implements Serializable {
      * <p>
      * isMandatory
      * </p>
-     * 
+     *
      * @return boolean
      */
     public final boolean isMandatory() {
         return this.isMandatory;
     }
-    
+
     public final boolean isAbility() {
         return this.isAbility;
     }
-    
+
     private Cost() {
     	
     }
@@ -253,34 +254,15 @@ public class Cost implements Serializable {
 
         }
 
-        if (parsedMana == null && manaParts.length() > 0) {
+        if (parsedMana == null && (manaParts.length() > 0 || xCantBe0)) {
             parsedMana = new CostPartMana(new ManaCost(new ManaCostParser(manaParts.toString())), xCantBe0 ? "XCantBe0" : null);
         }
         if (parsedMana != null) {
-            if(parsedMana.shouldPayLast()) // back from the brink pays mana after 'exile' part is paid
-                this.costParts.add(parsedMana);
-            else
-                this.costParts.add(0, parsedMana);
+            costParts.add(parsedMana);
         }
 
-        // inspect parts to set Sac, {T} and {Q} flags
-        for (int iCp = 0; iCp < costParts.size(); iCp++) {
-            CostPart cp = costParts.get(iCp);
-
-            // untap cost has to be last so that a card can't use e.g. its own mana ability while paying for a part of its own mana cost
-            // (e.g. Zhur-Taa Druid equipped with Umbral Mantle, paying the mana cost of {3}, {Q} )
-            if (cp instanceof CostUntap) {
-                costParts.remove(iCp);
-                costParts.add(cp);
-            }
-            // tap cost has to be first so that a card can't use e.g. its own mana ability while paying for a part of its own mana cost
-            // (e.g. Ally Encampment with the cost of 1, {T} )
-            if (cp instanceof CostTap) {
-                costParts.remove(iCp);
-                costParts.add(0, cp);
-            }
-        }
-
+        // technically the user might pay the costs in any order
+        // but needs to activate mana ability first
         sort();
     }
 
@@ -400,9 +382,9 @@ public class Cost implements Serializable {
         }
 
         if (parse.startsWith("RemoveAnyCounter<")) {
-            final String[] splitStr = abCostParse(parse, 3);
-            final String description = splitStr.length > 2 ? splitStr[2] : null;
-            return new CostRemoveAnyCounter(splitStr[0], splitStr[1], description);
+            final String[] splitStr = abCostParse(parse, 4);
+            final String description = splitStr.length > 3 ? splitStr[3] : null;
+            return new CostRemoveAnyCounter(splitStr[0], CounterType.getType(splitStr[1]), splitStr[2], description);
         }
 
         if (parse.startsWith("Exile<")) {
@@ -515,7 +497,7 @@ public class Cost implements Serializable {
      * <p>
      * abCostParse.
      * </p>
-     * 
+     *
      * @param parse
      *            a {@link java.lang.String} object.
      * @param numParse
@@ -539,7 +521,7 @@ public class Cost implements Serializable {
         toRet.cacheTapCost();
         return toRet;
     }
-    
+
     public final Cost copyWithNoMana() {
         Cost toRet = new Cost(0);
         toRet.isAbility = this.isAbility;
@@ -580,7 +562,7 @@ public class Cost implements Serializable {
      * <p>
      * refundPaidCost.
      * </p>
-     * 
+     *
      * @param source
      *            a {@link forge.game.card.Card} object.
      */
@@ -595,7 +577,7 @@ public class Cost implements Serializable {
      * <p>
      * isUndoable.
      * </p>
-     * 
+     *
      * @return a boolean.
      */
     public final boolean isUndoable() {
@@ -612,7 +594,7 @@ public class Cost implements Serializable {
      * <p>
      * isReusuableResource.
      * </p>
-     * 
+     *
      * @return a boolean.
      */
     public final boolean isReusuableResource() {
@@ -629,7 +611,7 @@ public class Cost implements Serializable {
      * <p>
      * isRenewableResource.
      * </p>
-     * 
+     *
      * @return a boolean.
      */
     public final boolean isRenewableResource() {
@@ -646,7 +628,7 @@ public class Cost implements Serializable {
      * <p>
      * toString.
      * </p>
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     @Override
@@ -665,7 +647,7 @@ public class Cost implements Serializable {
      * <p>
      * toStringAlt.
      * </p>
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public final String toStringAlt() {
@@ -676,7 +658,7 @@ public class Cost implements Serializable {
      * <p>
      * toSimpleString.
      * </p>
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public final String toSimpleString() {
@@ -696,7 +678,7 @@ public class Cost implements Serializable {
      * <p>
      * spellToString.
      * </p>
-     * 
+     *
      * @param bFlag
      *            a boolean.
      * @return a {@link java.lang.String} object.
@@ -747,7 +729,7 @@ public class Cost implements Serializable {
      * <p>
      * abilityToString.
      * </p>
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     private String abilityToString() {
@@ -788,7 +770,7 @@ public class Cost implements Serializable {
 
     /**
      * Convert amount type to words.
-     * 
+     *
      * @param i
      *            the i
      * @param amount
@@ -809,7 +791,7 @@ public class Cost implements Serializable {
      * <p>
      * convertIntAndTypeToWords.
      * </p>
-     * 
+     *
      * @param i
      *            a int.
      * @param type
@@ -848,7 +830,7 @@ public class Cost implements Serializable {
 
     /**
      * Convert amount type to words.
-     * 
+     *
      * @param amount
      *            the amount
      * @param type
@@ -887,12 +869,12 @@ public class Cost implements Serializable {
                 } else {
                     costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r));
                 }
-            } else if (part instanceof CostDiscard || part instanceof CostTapType || 
+            } else if (part instanceof CostDiscard || part instanceof CostTapType ||
                     part instanceof CostAddMana || part instanceof CostPayLife) {
                 boolean alreadyAdded = false;
                 for (final CostPart other : costParts) {
                     if (other.getClass().equals(part.getClass()) &&
-                            part.getType().equals(other.getType()) && 
+                            part.getType().equals(other.getType()) &&
                             StringUtils.isNumeric(part.getAmount()) &&
                             StringUtils.isNumeric(other.getAmount())) {
                         final String amount = String.valueOf(Integer.parseInt(part.getAmount()) + Integer.parseInt(other.getAmount()));
@@ -959,5 +941,20 @@ public class Cost implements Serializable {
         return xCost;
     }
 
+    public Integer getMaxForNonManaX(final SpellAbility ability, final Player payer) {
+        Integer val = null;
+        for (CostPart p : getCostParts()) {
+            if (!p.getAmount().equals("X")) {
+                continue;
+            }
+
+            val = ObjectUtils.min(val, p.getMaxAmountX(ability, payer));
+        }
+        // extra 0 check
+        if (val != null && val <= 0 && hasManaCost() && !getCostMana().canXbe0()) {
+            val = null;
+        }
+        return val;
+    }
     public static final Cost Zero = new Cost(0);
 }

@@ -1,9 +1,0 @@
-Name:Vault of Champions
-ManaCost:no cost
-Types:Land
-K:ETBReplacement:Other:LandTapped
-SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ LT2 | References$ ETBCheckSVar2 | SpellDescription$ CARDNAME enters the battlefield tapped unless you have two or more opponents.
-SVar:ETBCheckSVar2:PlayerCountOpponents$Amount
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-Oracle:Rejuvenating Springs enters the battlefield tapped unless you have two or more opponents.\n{T}: Add {W} or {B}.

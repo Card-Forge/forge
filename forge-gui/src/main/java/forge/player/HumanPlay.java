@@ -1,6 +1,6 @@
 package forge.player;
 
-import com.google.common.base.Predicate;
+
 import com.google.common.collect.Iterables;
 import forge.FThreads;
 import forge.card.mana.ManaCost;
@@ -29,12 +29,10 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import forge.util.gui.SGuiChoose;
 import forge.util.Localizer;
-import forge.util.CardTranslation;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 public class HumanPlay {
@@ -67,7 +65,7 @@ public class HumanPlay {
         boolean castFaceDown = sa.isCastFaceDown();
 
         sa.setActivatingPlayer(p);
-        boolean flippedToCast = sa instanceof Spell && source.isFaceDown();
+        boolean flippedToCast = sa.isSpell() && source.isFaceDown();
 
         source.setSplitStateToPlayAbility(sa);
         sa = chooseOptionalAdditionalCosts(p, sa);
@@ -100,7 +98,12 @@ public class HumanPlay {
         final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
         if (!req.playAbility(true, false, false)) {
             if (flippedToCast && !castFaceDown) {
-                source.turnFaceDown(true);
+                // need to get the changed card if able
+                Card rollback = p.getGame().getCardState(sa.getHostCard());
+                rollback.turnFaceDown(true);
+                if (rollback.isInZone(ZoneType.Exile)) {
+                    rollback.addMayLookTemp(p);
+                }
             }
             return false;
         }
@@ -362,74 +365,20 @@ public class HumanPlay {
                     part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostRemoveCounter) {
-                CounterType counterType = ((CostRemoveCounter) part).counter;
-                int amount = getAmountFromPartX(part, source, sourceAbility);
+                PaymentDecision pd = part.accept(hcd);
 
-                if (!part.canPay(sourceAbility, p)) {
+                if (pd == null)
                     return false;
-                }
-
-                if (!mandatory) {
-                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantRemoveNTargetTypeCounterFromCard", String.valueOf(amount), counterType.getName(), CardTranslation.getTranslatedName(source.getName())), sourceAbility)) {
-                        return false;
-                    }
-                }
-
-                source.subtractCounter(counterType, amount);
+                else
+                    part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostRemoveAnyCounter) {
-                int amount = getAmountFromPartX(part, source, sourceAbility);
-                CardCollectionView list = p.getCardsIn(ZoneType.Battlefield);
-                int allCounters = 0;
-                for (Card c : list) {
-                    final Map<CounterType, Integer> tgtCounters = c.getCounters();
-                    for (Integer value : tgtCounters.values()) {
-                        allCounters += value;
-                    }
-                }
-                if (allCounters < amount) { return false; }
+                PaymentDecision pd = part.accept(hcd);
 
-                if (!mandatory) {
-                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantRemoveCountersFromCard", part.getDescriptiveType()), sourceAbility)) {
-                        return false;
-                    }
-                }
-
-                list = CardLists.getValidCards(list, part.getType().split(";"), p, source, sourceAbility);
-                while (amount > 0) {
-                    final CounterType counterType;
-                    list = CardLists.filter(list, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card card) {
-                            return card.hasCounters();
-                        }
-                    });
-                    if (list.isEmpty()) { return false; }
-                    InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, list, sourceAbility);
-                    inp.setMessage(Localizer.getInstance().getMessage("lblSelectRemoveCounterCard"));
-                    inp.setCancelAllowed(true);
-                    inp.showAndWait();
-                    if (inp.hasCancelled()) {
-                        continue;
-                    }
-                    Card selected = inp.getFirstSelected();
-                    final Map<CounterType, Integer> tgtCounters = selected.getCounters();
-                    final List<CounterType> typeChoices = new ArrayList<>();
-                    for (CounterType key : tgtCounters.keySet()) {
-                        if (tgtCounters.get(key) > 0) {
-                            typeChoices.add(key);
-                        }
-                    }
-                    if (typeChoices.size() > 1) {
-                        String cprompt = Localizer.getInstance().getMessage("lblSelectRemoveCounterType");
-                        counterType = controller.getGui().one(cprompt, typeChoices);
-                    }
-                    else {
-                        counterType = typeChoices.get(0);
-                    }
-                    selected.subtractCounter(counterType, 1);
-                    amount--;
-                }
+                if (pd == null)
+                    return false;
+                else
+                    part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostExile) {
                 CostExile costExile = (CostExile) part;
@@ -657,6 +606,8 @@ public class HumanPlay {
                 hostCard.addDelved(c);
                 final ZoneType o = c.getZone().getZoneType();
                 final Card d = game.getAction().exile(c, null);
+                d.setExiledWith(hostCard);
+                d.setExiledBy(hostCard.getController());
                 table.put(o, d.getZone().getZoneType(), d);
             }
         }
@@ -764,8 +715,6 @@ public class HumanPlay {
             }
 
             source.setXManaCostPaidByColor(toPay.getXManaCostPaidByColor());
-            source.setColorsPaid(toPay.getColorsPaid());
-            source.setSunburstValue(toPay.getSunburst());
         }
 
         // Handle convoke and offerings

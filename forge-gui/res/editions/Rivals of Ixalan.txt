@@ -6,7 +6,7 @@ Code2=RIX
 Type=Expansion
 MciCode=rix
 BoosterCovers=5
-Booster=10 Common:!fromSheet("RIX Planeswalker Decks and Toolkit"), 3 Uncommon:!fromSheet("RIX Planeswalker Decks and Toolkit"), 1 RareMythic:!fromSheet("RIX Planeswalker Decks and Toolkit"), 1 BasicLand:fromSheet("RIX Basic Lands")
+Booster=10 Common:fromSheet("RIX cards"), 3 Uncommon:fromSheet("RIX cards"), 1 RareMythic:fromSheet("RIX cards"), 1 BasicLand:fromSheet("RIX Basic Lands")
 TreatAsSmallSet=true
 
 [cards]
@@ -206,6 +206,8 @@ TreatAsSmallSet=true
 194 L Swamp
 195 L Mountain
 196 L Forest
+
+[precon product]
 197 M Vraska, Scheming Gorgon
 198 C Vampire Champion
 199 U Vraska's Conquistador
@@ -215,6 +217,18 @@ TreatAsSmallSet=true
 203 C Swab Goblin
 204 R Angrath's Fury
 205 C Cinder Barrens
+
+[Basic Lands]
+4 Plains|XLN
+4 Island|XLN
+4 Swamp|XLN
+4 Mountain|XLN
+4 Forest|XLN
+1 Plains|RIX
+1 Island|RIX
+1 Swamp|RIX
+1 Mountain|RIX
+1 Forest|RIX
 
 [tokens]
 w_1_1_vampire_lifelink

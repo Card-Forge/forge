@@ -47,9 +47,7 @@ public abstract class AbilityStatic extends Ability implements Cloneable {
 
     public AbilityStatic(final Card sourceCard, final Cost abCost, final TargetRestrictions tgt) {
         super(sourceCard, abCost);
-        if ((tgt != null) && tgt.doesTarget()) {
-            this.setTargetRestrictions(tgt);
-        }
+        this.setTargetRestrictions(tgt);
     }
     @Override
     public boolean canPlay() {

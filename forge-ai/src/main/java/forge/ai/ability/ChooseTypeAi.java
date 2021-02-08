@@ -45,7 +45,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
             return false;
         }
 
-        int maxX = ComputerUtilMana.determineMaxAffordableX(aiPlayer, sa);
+        int maxX = ComputerUtilMana.determineLeftoverMana(sa, aiPlayer);
         int avgPower = 0;
         
         // predict the opposition
@@ -82,7 +82,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
                 }
 
                 if (maxX > avgPower && maxX > maxOppPower && maxX >= maxOppToughness) {
-                    sa.setSVar("PayX", String.valueOf(maxX));
+                    sa.setXManaCostPaid(maxX);
                     AiCardMemory.rememberCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ANIMATED_THIS_TURN);
                     return true;
                 }

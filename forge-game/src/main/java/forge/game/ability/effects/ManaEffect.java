@@ -21,7 +21,6 @@ import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.Iterables;
 import java.util.List;
 
 import static forge.util.TextUtil.toManaString;
@@ -107,6 +106,9 @@ public class ManaEffect extends SpellAbilityEffect {
                         choiceString.append(" ");
                     }
                     choiceString.append(choice);
+                    if (sa.hasParam("TwoEach")) {
+                        choiceString.append(" ").append(choice);
+                    }
                 }
 
                 if (choiceString.toString().isEmpty() && "Combo ColorIdentity".equals(abMana.getOrigProduced())) {
@@ -181,12 +183,21 @@ public class ManaEffect extends SpellAbilityEffect {
                     }
                     abMana.setExpressChoice(sb.toString().trim());
                 } else if (type.equals("LastNotedType")) {
-                    Mana manaType = (Mana) Iterables.getFirst(card.getRemembered(), null);
-                    if (manaType == null) {
+                    final StringBuilder sb = new StringBuilder();
+                    int nMana = 0;
+                    for (Object o : card.getRemembered()) {
+                        if (o instanceof Mana) {
+                            if (nMana > 0) {
+                                sb.append(" ");
+                            }
+                            sb.append(o.toString());
+                            nMana++;
+                        }
+                    }
+                    if (nMana == 0) {
                         return;
                     }
-                    String  cs = manaType.toString();
-                    abMana.setExpressChoice(cs);
+                    abMana.setExpressChoice(sb.toString());
                 } else if (type.startsWith("EachColorAmong")) {
                     final String res = type.split("_")[1];
                     final CardCollection list = CardLists.getValidCards(card.getGame().getCardsIn(ZoneType.Battlefield),

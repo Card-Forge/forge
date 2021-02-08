@@ -146,7 +146,7 @@ public class SpellAbilityPicker {
             return false;
         }
         if (sa.isSpell()) {
-            return !sa.getHostCard().isInstant() && !sa.getHostCard().withFlash(player);
+            return !sa.withFlash(sa.getHostCard(), player);
         }
         if (sa.isPwAbility()) {
             return !sa.getHostCard().hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed.");
@@ -284,7 +284,7 @@ public class SpellAbilityPicker {
                 SpellAbility saOrSubSa = sa;
                 do {
                     if (saOrSubSa.usesTargeting()) {
-                        saString.append(" (targets: ").append(saOrSubSa.getTargets().getTargetedString()).append(")");
+                        saString.append(" (targets: ").append(saOrSubSa.getTargets()).append(")");
                     }
                     saOrSubSa = saOrSubSa.getSubAbility();
                 } while (saOrSubSa != null);

@@ -85,10 +85,10 @@ public class TokenAi extends SpellAbilityAi {
             if (source.getSVar("X").equals("Count$Converge")) {
                 x = ComputerUtilMana.getConvergeCount(sa, ai);
             }
-            if (source.getSVar("X").equals("Count$xPaid")) {
+            if (sa.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                x = ComputerUtilMana.determineLeftoverMana(sa, ai);
-                source.setSVar("PayX", Integer.toString(x));
+                x = ComputerUtilCost.getMaxXValue(sa, ai);
+                sa.setXManaCostPaid(x);
             }
             if (x <= 0) {
                 return false; // 0 tokens or 0 toughness token(s)
@@ -261,10 +261,10 @@ public class TokenAi extends SpellAbilityAi {
 
         if ("X".equals(tokenAmount) || "X".equals(tokenPower) || "X".equals(tokenToughness)) {
             int x = AbilityUtils.calculateAmount(source, tokenAmount, sa);
-            if (source.getSVar("X").equals("Count$xPaid")) {
+            if (sa.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                x = ComputerUtilMana.determineLeftoverMana(sa, ai);
-                source.setSVar("PayX", Integer.toString(x));
+                x = ComputerUtilCost.getMaxXValue(sa, ai);
+                sa.setXManaCostPaid(x);
             }
             if (x <= 0) {
                 return false;

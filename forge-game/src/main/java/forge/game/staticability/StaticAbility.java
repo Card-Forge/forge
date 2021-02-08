@@ -322,39 +322,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     }
 
     /**
-     * Apply ability if it has the right mode.
-     *
-     * @param mode
-     *            the mode
-     * @param card
-     *            the card
-     * @param player
-     *            the activator
-     * @return true, if successful
-     */
-    public final boolean applyAbility(final String mode, final Card card, final Player player) {
-
-        // don't apply the ability if it hasn't got the right mode
-        if (!getParam("Mode").equals(mode)) {
-            return false;
-        }
-
-        if (this.isSuppressed() || !this.checkPlayerSpecificConditions(player)) {
-            return false;
-        }
-
-        if (mode.equals("CantBeCast")) {
-            return StaticAbilityCantBeCast.applyCantBeCastAbility(this, card, player);
-        }
-
-        if (mode.equals("CantPlayLand")) {
-            return StaticAbilityCantBeCast.applyCantPlayLandAbility(this, card, player);
-        }
-
-        return false;
-    }
-
-    /**
      * Apply ability.
      *
      * @param mode
@@ -374,10 +341,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
         if (this.isSuppressed() || !this.checkConditions()) {
             return false;
-        }
-
-        if (mode.equals("CantBeActivated")) {
-            return StaticAbilityCantBeCast.applyCantBeActivatedAbility(this, card, spellAbility);
         }
 
         if (mode.equals("CantTarget")) {
@@ -442,37 +405,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return false;
     }
 
-    /**
-     * Apply ability.
-     *
-     * @param mode
-     *            the mode
-     * @param card
-     *            the card
-     * @return true, if successful
-     */
-    public final boolean applyAbility(final String mode, final Card card) {
-
-        // don't apply the ability if it hasn't got the right mode
-        if (!getParam("Mode").equals(mode)) {
-            return false;
-        }
-
-        if (this.isSuppressed() || !this.checkConditions()) {
-            return false;
-        }
-
-        if (mode.equals("ETBTapped")) {
-            return StaticAbilityETBTapped.applyETBTappedAbility(this, card);
-        }
-
-        if (mode.equals("GainAbilitiesOf")) {
-
-        }
-
-        return false;
-    }
-
     public final boolean applyAbility(final String mode, final Card card, final boolean isCombat) {
         // don't apply the ability if it hasn't got the right mode
         if (!getParam("Mode").equals(mode)) {
@@ -518,6 +450,8 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             return StaticAbilityCantAttackBlock.applyCantBlockByAbility(this, card, (Card)target);
         } else if (mode.equals("CantAttach")) {
             return StaticAbilityCantAttach.applyCantAttachAbility(this, card, target);
+        } else if (mode.equals("CanAttackIfHaste")) {
+            return StaticAbilityCantAttackBlock.applyCanAttackHasteAbility(this, card, target);
         }
 
         return false;
@@ -594,6 +528,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             if (condition.equals("Ferocious") && !controller.hasFerocious()) return false;
             if (condition.equals("Desert") && !controller.hasDesert()) return false;
             if (condition.equals("Blessing") && !controller.hasBlessing()) return false;
+            if (condition.equals("Monarch") & !controller.isMonarch()) return false;
 
             if (condition.equals("PlayerTurn")) {
                 if (!ph.isPlayerTurn(controller)) {
@@ -627,6 +562,13 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         if (hasParam("PlayerTurn")) {
             List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, getParam("PlayerTurn"), null);
             if (!players.contains(ph.getPlayerTurn())) {
+                return false;
+            }
+        }
+
+        if (hasParam("UnlessDefinedPlayer")) {
+            List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, getParam("UnlessDefinedPlayer"), null);
+            if (!players.isEmpty()) {
                 return false;
             }
         }

@@ -115,3 +115,4 @@ MB1: 24 Boosters
 IKO: 36 Boosters
 M21: 36 Boosters
 ZNR: 36 Boosters
+KHM: 36 Boosters

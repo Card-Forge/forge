@@ -7,71 +7,68 @@ MciCode=dvd
 Type=Duel_Decks
 
 [cards]
-31 C Abyssal Gatekeeper
-40 U Abyssal Specter
 1 M Akroma, Angel of Wrath
-9 U Angel of Mercy
-23 U Angel's Feather
-19 U Angelic Benediction
+2 U Icatian Priest
 3 C Angelic Page
+4 C Charging Paladin
+5 C Venerable Monk
 6 U Angelic Protector
+7 U Serra Advocate
+8 U Sustainer of the Realm
+9 U Angel of Mercy
+10 R Serra Angel
+11 R Twilight Shepherd
+12 R Luminous Angel
+13 R Reya Dawnbringer
+14 C Healing Salve
 15 C Angelsong
-58 C Barren Moor
+16 U Otherworldly Journey
+17 C Pacifism
+18 U Serra's Boon
+19 U Angelic Benediction
+20 C Faith's Fetters
+21 U Serra's Embrace
+22 U Righteous Cause
+23 U Angel's Feather
+24 U Marble Diamond
+25 C Secluded Steppe
+26 L Plains
+27 L Plains
+28 L Plains
+29 L Plains
+30 M Lord of the Pit
+31 C Abyssal Gatekeeper
+32 C Foul Imp
+33 U Daggerclaw Imp
+34 C Dusk Imp
+35 C Overeager Apprentice
+36 C Stinkweed Imp
+37 U Soot Imp
+38 C Demon's Jester
+39 U Souldrinker
+40 U Abyssal Specter
+41 C Cackling Imp
+42 R Fallen Angel
+43 R Reiver Demon
+44 R Kuro, Pitlord
+45 C Dark Ritual
+46 C Duress
+47 C Unholy Strength
+48 U Cruel Edict
+49 U Demonic Tutor
+50 C Dark Banishing
+51 U Oni Possession
 52 U Barter in Blood
 53 U Breeding Pit
-41 C Cackling Imp
-4 C Charging Paladin
-56 U Consume Spirit
-55 U Corrupt
-48 U Cruel Edict
-33 U Daggerclaw Imp
-50 C Dark Banishing
-45 C Dark Ritual
-C Demon
-57 U Demon's Horn
-38 C Demon's Jester
-49 U Demonic Tutor
-46 C Duress
-34 C Dusk Imp
-20 C Faith's Fetters
-42 R Fallen Angel
-32 C Foul Imp
-14 C Healing Salve
-2 U Icatian Priest
-44 R Kuro, Pitlord
-30 M Lord of the Pit
-12 R Luminous Angel
-24 U Marble Diamond
-51 U Oni Possession
-16 U Otherworldly Journey
-35 C Overeager Apprentice
-17 C Pacifism
-28 L Plains
-28 L Plains
-28 L Plains
-28 L Plains
 54 R Promise of Power
-43 R Reiver Demon
-13 R Reya Dawnbringer
-22 U Righteous Cause
-25 C Secluded Steppe
-7 U Serra Advocate
-10 R Serra Angel
-18 U Serra's Boon
-21 U Serra's Embrace
-37 U Soot Imp
-39 U Souldrinker
-C Spirit
-36 C Stinkweed Imp
-8 U Sustainer of the Realm
+55 U Corrupt
+56 U Consume Spirit
+57 U Demon's Horn
+58 C Barren Moor
 59 L Swamp
-59 L Swamp
-59 L Swamp
-59 L Swamp
-C Thrull
-11 R Twilight Shepherd
-47 C Unholy Strength
-5 C Venerable Monk
+60 L Swamp
+61 L Swamp
+62 L Swamp
 
 [tokens]
 w_1_1_spirit_flying

@@ -40,17 +40,13 @@ Type=Duel_Decks
 32 C Evolving Wilds
 33 U Ghitu Encampment
 34 U Nomad Outpost
-78 L Mountain
-78 L Mountain
-78 L Mountain
-78 L Mountain
-81 L Plains
-81 L Plains
-81 L Plains
-81 L Plains
+35 L Mountain
+36 L Mountain
+37 L Mountain
+38 L Plains
+39 L Swamp
 40 L Swamp
-40 L Swamp
-40 L Swamp
+41 L Swamp
 42 M Arcanis the Omnipotent
 43 U Faerie Impostor
 44 C Coral Trickster
@@ -85,8 +81,12 @@ Type=Duel_Decks
 73 U Mystic Monastery
 74 C Terramorphic Expanse
 75 L Island
-75 L Island
-75 L Island
+76 L Island
+77 L Island
+78 L Mountain
+79 L Plains
+80 L Plains
+81 L Plains
 
 [tokens]
 r_1_1_goblin

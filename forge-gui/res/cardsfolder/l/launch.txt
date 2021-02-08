@@ -5,7 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
-SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredCard
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredNewCardLKICopy
 SVar:SacMe:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/launch.jpg
 Oracle:Enchant creature\nEnchanted creature has flying.\nWhen Launch is put into a graveyard from the battlefield, return Launch to its owner's hand.

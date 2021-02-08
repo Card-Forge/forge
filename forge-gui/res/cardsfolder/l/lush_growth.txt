@@ -3,7 +3,7 @@ ManaCost:G
 Types:Enchantment Aura
 K:Enchant land
 A:SP$ Attach | Cost$ G | ValidTgts$ Land | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Mountain & Forest & Plains | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True | Description$ Enchanted land is a Mountain, Forest, and Plains.
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Mountain & Forest & Plains | RemoveLandTypes$ True | Description$ Enchanted land is a Mountain, Forest, and Plains.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lush_growth.jpg
 Oracle:Enchant land\nEnchanted land is a Mountain, Forest, and Plains.

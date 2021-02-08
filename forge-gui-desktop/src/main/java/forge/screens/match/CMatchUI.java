@@ -78,7 +78,6 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.game.spellability.TargetChoices;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.FNetOverlay;
 import forge.gui.GuiChoose;
@@ -134,6 +133,7 @@ import forge.util.gui.SOptionPane;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.FloatingZone;
+import net.miginfocom.layout.LinkHandler;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -271,7 +271,7 @@ public final class CMatchUI
         if (!isInGame()) {
             return;
         }
-        final Deck deck = getGameView().getDeck(getCurrentPlayer().getLobbyPlayerName());
+        final Deck deck = getGameView().getDeck(getCurrentPlayer());
         if (deck != null) {
             FDeckViewer.show(deck);
         }
@@ -792,9 +792,11 @@ public final class CMatchUI
         initHandViews();
         SLayoutIO.loadLayout(null);
         view.populate();
-        for (final VHand h : getHandViews()) {
-            h.getLayoutControl().updateHand();
+        final PlayerZoneUpdates zones = new PlayerZoneUpdates();
+        for (final PlayerView p : sortedPlayers) {
+        	zones.add(new PlayerZoneUpdate(p, ZoneType.Hand));
         }
+        updateZones(zones);
     }
 
     @Override
@@ -1024,10 +1026,12 @@ public final class CMatchUI
 
     @Override
     public void afterGameEnd() {
+        super.afterGameEnd();
         Singletons.getView().getLpnDocument().remove(targetingOverlay.getPanel());
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override public void run() {
                 Singletons.getView().getNavigationBar().closeTab(screen);
+                LinkHandler.clearWeakReferencesNow();
             }
         });
     }
@@ -1379,7 +1383,7 @@ public final class CMatchUI
         if (sa.getTargetRestrictions() != null) {
             sb.append(" targeting ");
             TargetChoices targets = si.getTargetChoices();
-            sb.append(targets.getTargetedString());
+            sb.append(targets);
         }
         sb.append(".");        
         String message1 = sb.toString();
@@ -1439,17 +1443,17 @@ public final class CMatchUI
     }
 
     @Override
-    public void handleLandPlayed(Card land, Zone zone) {
+    public void handleLandPlayed(Card land) {
         Runnable createPopupThread = new Runnable() {
             @Override
             public void run() {
-                createLandPopupPanel(land,zone);
+                createLandPopupPanel(land);
             }
         };
         GuiBase.getInterface().invokeInEdtAndWait(createPopupThread);        
     }
 
-    private void createLandPopupPanel(Card land, Zone zone) {
+    private void createLandPopupPanel(Card land) {
         
         String landPlayedNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_LAND_PLAYED_NOTIFICATION_POLICY);
         Player cardController = land.getController();       
@@ -1480,7 +1484,7 @@ public final class CMatchUI
                     
             mainPanel.add(imagePanel, "cell 0 0, spany 3");
             
-            String msg = cardController.toString() + " puts " + land.toString() + " into play into " + zone.toString() + "."; 
+            String msg = cardController.toString() + " puts " + land.toString() + " into play into " + ZoneType.Battlefield.toString() + "."; 
             
             final FTextArea prompt1 = new FTextArea(msg);
             prompt1.setFont(FSkin.getFont(21));

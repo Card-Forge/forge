@@ -5,8 +5,8 @@ PT:3/3
 K:Kicker:W W
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notkicked | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy all other creatures you control. If it was kicked, destroy all other creatures instead.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Secondary$ True | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, destroy all other creatures.
-SVar:TrigDestroy:DB$DestroyAll | ValidCards$ Creature.Other+YouCtrl
-SVar:TrigKicker:DB$DestroyAll | ValidCards$ Creature.Other
+SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Creature.Other+YouCtrl
+SVar:TrigKicker:DB$ DestroyAll | ValidCards$ Creature.Other
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 DeckNeeds:Color$white

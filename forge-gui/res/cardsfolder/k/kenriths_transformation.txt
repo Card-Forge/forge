@@ -5,6 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 3 | SetToughness$ 3 | SetColor$ Green | RemoveAllAbilities$ True | AddType$ Creature & Elk | RemoveCardTypes$ True | Description$ Enchanted creature loses all abilities and is a green Elk creature with base power and toughness 3/3. (It loses all other card types and creature types.)
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 3 | SetToughness$ 3 | SetColor$ Green | RemoveAllAbilities$ True | AddType$ Creature & Elk | RemoveCardTypes$ True | RemoveCreatureTypes$ True | Description$ Enchanted creature loses all abilities and is a green Elk creature with base power and toughness 3/3. (It loses all other card types and creature types.)
 AI:RemoveDeck:All
 Oracle:Enchant creature\nWhen Kenrith's Transformation enters the battlefield, draw a card.\nEnchanted creature loses all abilities and is a green Elk creature with base power and toughness 3/3. (It loses all other card types and creature types.)

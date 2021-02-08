@@ -3,18 +3,11 @@ package forge.ai.ability;
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
 import forge.game.cost.Cost;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostRemoveCounter;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
-
-import java.util.List;
 
 public class TapAi extends TapAiBase {
     @Override
@@ -48,7 +41,6 @@ public class TapAi extends TapAiBase {
             return false;
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
         final Cost abCost = sa.getPayCosts();
         if (abCost != null) {
@@ -57,32 +49,24 @@ public class TapAi extends TapAiBase {
             }
         }
 
-        if (tgt == null) {
-            final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
-
+        if (!sa.usesTargeting()) {
             boolean bFlag = false;
-            for (final Card c : defined) {
+            for (final Card c : AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa)) {
                 bFlag |= c.isUntapped();
             }
 
             return bFlag;
         } else {
-            if ("TapForXCounters".equals(sa.getParam("AILogic"))) {
-                // e.g. Waxmane Baku
-                CounterType ctrType = CounterType.get(CounterEnumType.KI);
-                for (CostPart part : sa.getPayCosts().getCostParts()) {
-                    if (part instanceof CostRemoveCounter) {
-                        ctrType = ((CostRemoveCounter)part).counter;
-                        break;
-                    }
-                }
-
-                int numTargetable = Math.min(sa.getHostCard().getCounters(ctrType), ai.getOpponents().getCreaturesInPlay().size());
-                sa.setSVar("ChosenX", String.valueOf(numTargetable));
+            // X controls the minimum targets
+            if ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid")) {
+                // Set PayX here to maximum value.
+                // TODO need to set XManaCostPaid for targets, maybe doesn't need PayX anymore?
+                sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai));
+                // TODO since change of PayX. the shouldCastLessThanMax logic might be faulty
             }
 
             sa.resetTargets();
-            return tapPrefTargeting(ai, source, tgt, sa, false);
+            return tapPrefTargeting(ai, source, sa, false);
         }
 
     }

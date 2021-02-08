@@ -17,20 +17,18 @@
  */
 package forge.game.spellability;
 
-import com.google.common.collect.Sets;
+import org.apache.commons.lang3.ObjectUtils;
 
 import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
 import forge.game.player.Player;
-import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityCantBeCast;
 import forge.game.zone.ZoneType;
-import forge.util.collect.FCollectionView;
 
 /**
  * <p>
@@ -53,17 +51,6 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
 
     private boolean castFaceDown = false;
 
-    /**
-     * <p>
-     * Constructor for Spell.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.game.card.Card} object.
-     */
-    public Spell(final Card sourceCard) {
-        this(sourceCard, new Cost(sourceCard.getManaCost(), false));
-    }
     public Spell(final Card sourceCard, final Cost abCost) {
         super(sourceCard, abCost);
 
@@ -95,44 +82,16 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        boolean lkicheck = false;
-
         // do performanceMode only for cases where the activator is different than controller
         if (!Spell.performanceMode && activator != null && !card.getController().equals(activator)) {
             // always make a lki copy in this case?
             card = CardUtil.getLKICopy(card);
             card.setController(activator, 0);
-            lkicheck = true;
         }
 
-        Card lkiHost = getAlternateHost(card);
-        if (lkiHost != null) {
-            card = lkiHost;
-            lkicheck = true;
-        }
+        card = ObjectUtils.firstNonNull(getAlternateHost(card), card);
 
-        if (lkicheck) {
-            game.getTracker().freeze(); //prevent views flickering during while updating for state-based effects
-            game.getAction().checkStaticAbilities(false, Sets.newHashSet(card), new CardCollection(card));
-        }
-
-        boolean isInstant = card.isInstant();
-        boolean flash = card.withFlash(activator);
-
-        // reset static abilities
-        if (lkicheck) {
-            game.getAction().checkStaticAbilities(false);
-            // clear delayed changes, this check should not have updated the view
-            game.getTracker().clearDelayed();
-            game.getTracker().unfreeze();
-        }
-
-        if (!(isInstant || activator.canCastSorcery() || flash || getRestrictions().isInstantSpeed()
-               || hasSVar("IsCastFromPlayEffect"))) {
-            return false;
-        }
-
-        if (!this.getRestrictions().canPlay(getHostCard(), this)) {
+        if (!this.getRestrictions().canPlay(card, this)) {
             return false;
         }
 
@@ -149,24 +108,13 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        return checkOtherRestrictions(card);
-    } // canPlay()
-    
-    public boolean checkOtherRestrictions(final Card source) {
-        Player activator = getActivatingPlayer();
-        final Game game = activator.getGame();
-        // CantBeCast static abilities
-        final CardCollection allp = new CardCollection(game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
-        allp.add(source);
-        for (final Card ca : allp) {
-            final FCollectionView<StaticAbility> staticAbilities = ca.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
-                if (stAb.applyAbility("CantBeCast", source, activator)) {
-                    return false;
-                }
-            }
-        }
         return true;
+    } // canPlay()
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean checkRestrictions(Card host, Player activator) {
+        return !StaticAbilityCantBeCast.cantBeCastAbility(this, host, activator);
     }
 
     /** {@inheritDoc} */

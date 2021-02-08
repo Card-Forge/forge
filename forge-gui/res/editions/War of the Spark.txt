@@ -328,7 +328,7 @@ wubrg_2_2_citizen
 b_0_0_zombie_army
 b_0_0_zombie_army
 b_0_0_zombie_army
-b_1_1_assassin_deathtouch
+b_1_1_assassin_deathtouch_pwdestroy
 b_2_2_zombie
 b_4_4_zombie_warrior_vigilance
 c_1_1_a_servo

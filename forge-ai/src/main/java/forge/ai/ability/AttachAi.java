@@ -88,20 +88,21 @@ public class AttachAi extends SpellAbilityAi {
         if (ai.getController().isAI()) {
             advancedFlash = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
         }
-        if (source.withFlash(ai) && source.isAura() && advancedFlash && !doAdvancedFlashAuraLogic(ai, sa, sa.getTargetCard())) {
+        if (!ai.canCastSorcery() && sa.canCastTiming(ai)
+                && source.isAura() && advancedFlash && !doAdvancedFlashAuraLogic(ai, sa, sa.getTargetCard())) {
             return false;
         }
 
-        if (abCost.getTotalMana().countX() > 0 && source.getSVar("X").equals("Count$xPaid")) {
+        if (abCost.getTotalMana().countX() > 0 && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value. (Endless Scream and Venarian
             // Gold)
-            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
 
             if (xPay == 0) {
                 return false;
             }
 
-            source.setSVar("PayX", Integer.toString(xPay));
+            sa.setXManaCostPaid(xPay);
         }
 
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Chained to the Rocks")) {
@@ -972,7 +973,7 @@ public class AttachAi extends SpellAbilityAi {
             targets = AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
         } else {
             AttachAi.attachPreference(sa, tgt, mandatory);
-            targets = sa.getTargets().getTargets();
+            targets = sa.getTargets();
         }
 
         if (!mandatory && card.isEquipment() && !targets.isEmpty()) {
@@ -1568,7 +1569,6 @@ public class AttachAi extends SpellAbilityAi {
         } else if (keyword.equals("Haste")) {
             return card.hasSickness() && ph.isPlayerTurn(sa.getActivatingPlayer()) && !card.isTapped()
                     && card.getNetCombatDamage() + powerBonus > 0
-                    && !card.hasKeyword("CARDNAME can attack as though it had haste.")
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.endsWith("Indestructible")) {

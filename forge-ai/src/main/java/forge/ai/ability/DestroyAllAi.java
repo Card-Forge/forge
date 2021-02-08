@@ -1,18 +1,20 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
-
+import com.google.common.base.Predicates;
 import forge.ai.*;
+import forge.card.MagicColor;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.game.combat.Combat;
 
 public class DestroyAllAi extends SpellAbilityAi {
 
@@ -78,10 +80,10 @@ public class DestroyAllAi extends SpellAbilityAi {
             valid = sa.getParam("ValidCards");
         }
 
-        if (valid.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (valid.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(xPay));
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            sa.setXManaCostPaid(xPay);
             valid = valid.replace("X", Integer.toString(xPay));
         }
 
@@ -104,6 +106,14 @@ public class DestroyAllAi extends SpellAbilityAi {
             } else {
                 return false;
             }
+        }
+
+        // Special handling for Raiding Party
+        if (logic.equals("RaidingParty")) {
+            int numAiCanSave = Math.min(CardLists.filter(ai.getCreaturesInPlay(), Predicates.and(CardPredicates.isColor(MagicColor.WHITE), CardPredicates.Presets.UNTAPPED)).size() * 2, ailist.size());
+            int numOppsCanSave = Math.min(CardLists.filter(ai.getOpponents().getCreaturesInPlay(), Predicates.and(CardPredicates.isColor(MagicColor.WHITE), CardPredicates.Presets.UNTAPPED)).size() * 2, opplist.size());
+
+            return numOppsCanSave < opplist.size() && (ailist.size() - numAiCanSave < opplist.size() - numOppsCanSave);
         }
 
         // If effect is destroying creatures and AI is about to lose, activate effect anyway no matter what!

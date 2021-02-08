@@ -67,6 +67,7 @@ public class Forge implements ApplicationListener {
     public static boolean altPlayerLayout = false;
     public static boolean enableUIMask = false;
     public static boolean enablePreloadExtendedArt = false;
+    public static boolean isTabletDevice = false;
     public static String locale = "en-US";
     public static boolean hdbuttons = false;
     public static boolean hdstart = false;
@@ -74,8 +75,11 @@ public class Forge implements ApplicationListener {
     public static boolean gameInProgress = false;
     public static int cacheSize = 400;
     public static int totalDeviceRAM = 0;
+    public static int androidVersion = 0;
+    public static boolean autoCache = false;
+    public static int lastButtonIndex = 0;
 
-    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM) {
+    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
         if (GuiBase.getInterface() == null) {
             clipboard = clipboard0;
             deviceAdapter = deviceAdapter0;
@@ -83,10 +87,10 @@ public class Forge implements ApplicationListener {
             GuiBase.enablePropertyConfig(value);
             isPortraitMode = androidOrientation;
             totalDeviceRAM = totalRAM;
-            //increase cacheSize for devices with RAM more than 5GB, default is 400. Some phones have more than 10GB RAM (Mi 10, OnePlus 8, S20, etc..)
-            if (totalDeviceRAM>5000) //devices with more than 10GB RAM will have 1000 Cache size, 700 Cache size for morethan 5GB RAM
-                cacheSize = totalDeviceRAM>10000 ? 1000: 700;
+            isTabletDevice = isTablet;
+            androidVersion = AndroidAPI;
         }
+        GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
         return app;
     }
 
@@ -99,6 +103,7 @@ public class Forge implements ApplicationListener {
         ExceptionHandler.registerErrorHandling();
 
         GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
+
         graphics = new Graphics();
         splashScreen = new SplashScreen();
         frameRate = new FrameRate();
@@ -128,6 +133,13 @@ public class Forge implements ApplicationListener {
         enableUIMask = prefs.getPrefBoolean(FPref.UI_ENABLE_BORDER_MASKING);
         enablePreloadExtendedArt = prefs.getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
         locale = prefs.getPref(FPref.UI_LANGUAGE);
+        autoCache = prefs.getPrefBoolean(FPref.UI_AUTO_CACHE_SIZE);
+
+        if (autoCache) {
+            //increase cacheSize for devices with RAM more than 5GB, default is 400. Some phones have more than 10GB RAM (Mi 10, OnePlus 8, S20, etc..)
+            if (totalDeviceRAM>5000) //devices with more than 10GB RAM will have 1000 Cache size, 700 Cache size for morethan 5GB RAM
+                cacheSize = totalDeviceRAM>10000 ? 1000: 700;
+        }
 
         final Localizer localizer = Localizer.getInstance();
 
@@ -151,12 +163,12 @@ public class Forge implements ApplicationListener {
 
                 //add reminder to preload
                 if (enablePreloadExtendedArt) {
-                    if(totalDeviceRAM>0)
+                    if(autoCache)
                         splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt")+"\nDetected RAM: " +totalDeviceRAM+"MB. Cache size: "+cacheSize);
                     else
                         splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt"));
                 } else {
-                    if(totalDeviceRAM>0)
+                    if(autoCache)
                         splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup")+"\nDetected RAM: " +totalDeviceRAM+"MB. Cache size: "+cacheSize);
                     else
                         splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup"));
@@ -191,6 +203,11 @@ public class Forge implements ApplicationListener {
             ImageCache.preloadCache(filteredkeys);
     }
 
+    public static void openHomeScreen(int index) {
+        openScreen(HomeScreen.instance);
+        HomeScreen.instance.openMenu(index);
+    }
+
     private void afterDbLoaded() {
         stopContinuousRendering(); //save power consumption by disabling continuous rendering once assets loaded
 
@@ -199,7 +216,7 @@ public class Forge implements ApplicationListener {
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
         destroyThis = false; //Allow back()
         Gdx.input.setCatchKey(Keys.MENU, true);
-        openScreen(HomeScreen.instance);
+        openHomeScreen(-1); //default for startup
         splashScreen = null;
 
         boolean isLandscapeMode = isLandscapeMode();
@@ -276,7 +293,7 @@ public class Forge implements ApplicationListener {
     public static void back() {
         if(destroyThis && isLandscapeMode())
             return;
-        if (Dscreens.size() < 2) {
+        if (Dscreens.size() < 2 || (currentScreen == HomeScreen.instance && Forge.isPortraitMode)) {
             exit(false); //prompt to exit if attempting to go back from home screen
             return;
         }
@@ -867,19 +884,19 @@ public class Forge implements ApplicationListener {
         }
 
         @Override
-        public boolean scrolled(int amount) {
+        public boolean scrolled(float amountX, float amountY) {
             updatePotentialListeners(mouseMovedX, mouseMovedY);
 
             if (KeyInputAdapter.isCtrlKeyDown()) { //zoom in or out based on amount
-                return zoom(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amount);
+                return zoom(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amountY);
             }
 
             boolean handled;
             if (KeyInputAdapter.isShiftKeyDown()) {
-                handled = pan(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amount, 0, false);
+                handled = pan(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amountX, 0, false);
             }
             else {
-                handled = pan(mouseMovedX, mouseMovedY, 0, -Utils.AVG_FINGER_HEIGHT * amount, true);
+                handled = pan(mouseMovedX, mouseMovedY, 0, -Utils.AVG_FINGER_HEIGHT * amountY, true);
             }
             if (panStop(mouseMovedX, mouseMovedY)) {
                 handled = true;

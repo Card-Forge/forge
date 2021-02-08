@@ -348,7 +348,7 @@ public class AbilityManaPart implements java.io.Serializable {
             }
 
             if (restriction.startsWith("CostContainsX")) {
-                if (sa.isXCost()) {
+                if (sa.costHasManaX()) {
                     return true;
                 }
                 continue;
@@ -615,14 +615,8 @@ public class AbilityManaPart implements java.io.Serializable {
         if (commanders.isEmpty()) {
             return "";
         }
-
-        byte ci = 0;
-        for (final Card c : commanders) {
-            ci |= c.getRules().getColorIdentity().getColor();
-        }
-
         StringBuilder sb = new StringBuilder();
-        ColorSet identity = ColorSet.fromMask(ci);
+        ColorSet identity = getSourceCard().getController().getCommanderColorID();
         if (identity.hasWhite()) { sb.append("W "); }
         if (identity.hasBlue())  { sb.append("U "); }
         if (identity.hasBlack()) { sb.append("B "); }

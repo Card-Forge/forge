@@ -60,7 +60,7 @@ public enum CSubmenuQuestPrefs implements ICDoc {
                 || QPref.WILD_OPPONENTS_MULTIPLIER.equals(i0.getQPref())) {
             Double val = null;
             try {
-                val = new Double(i0.getText());
+                val = Double.valueOf(i0.getText());
             } catch (Exception e) {
             }            
             validationError = val == null ? localizer.getMessage("lblEnteraDecimal") : null;           

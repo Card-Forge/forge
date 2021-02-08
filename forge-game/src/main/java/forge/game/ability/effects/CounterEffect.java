@@ -29,10 +29,18 @@ public class CounterEffect extends SpellAbilityEffect {
         final List<SpellAbility> sas;
 
         if (sa.hasParam("AllType")) {
+            boolean countersSpells = sa.getParam("AllType").contains("Spell");
+            boolean countersActivated = sa.getParam("AllType").contains("Activated");
+            boolean countersTriggers = sa.getParam("AllType").contains("Triggered");
+
             sas = Lists.newArrayList();
             for (SpellAbilityStackInstance si : game.getStack()) {
                 SpellAbility spell = si.getSpellAbility(true);
-                if (sa.getParam("AllType").equals("Spell") && !spell.isSpell()) {
+                if (spell.isSpell() && !countersSpells) {
+                    continue;
+                } else if (spell.isActivatedAbility() && !countersActivated) {
+                    continue;
+                } else if (spell.isTrigger() && !countersTriggers) {
                     continue;
                 }
                 if (sa.hasParam("AllValid")) {
@@ -74,10 +82,18 @@ public class CounterEffect extends SpellAbilityEffect {
         final List<SpellAbility> sas;
 
         if (sa.hasParam("AllType")) {
+            boolean countersSpells = sa.getParam("AllType").contains("Spell");
+            boolean countersActivated = sa.getParam("AllType").contains("Activated");
+            boolean countersTriggers = sa.getParam("AllType").contains("Triggered");
+
             sas = Lists.newArrayList();
             for (SpellAbilityStackInstance si : game.getStack()) {
                 SpellAbility spell = si.getSpellAbility(true);
-                if (sa.getParam("AllType").equals("Spell") && !spell.isSpell()) {
+                if (spell.isSpell() && !countersSpells) {
+                    continue;
+                } else if (spell.isActivatedAbility() && !countersActivated) {
+                    continue;
+                } else if (spell.isTrigger() && !countersTriggers) {
                     continue;
                 }
                 if (sa.hasParam("AllValid")) {

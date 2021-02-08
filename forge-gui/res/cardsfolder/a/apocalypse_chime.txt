@@ -1,7 +1,7 @@
 Name:Apocalypse Chime
 ManaCost:2
 Types:Artifact
-A:AB$DestroyAll | Cost$ 2 T Sac<1/CARDNAME> | ValidCards$ Permanent.nonToken+setHML | NoRegen$ True | SpellDescription$ Destroy all nontoken permanents with a name originally printed in the Homelands expansion. They can't be regenerated.
+A:AB$ DestroyAll | Cost$ 2 T Sac<1/CARDNAME> | ValidCards$ Permanent.nonToken+setHML | NoRegen$ True | SpellDescription$ Destroy all nontoken permanents with a name originally printed in the Homelands expansion. They can't be regenerated.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apocalypse_chime.jpg
 Oracle:{2}, {T}, Sacrifice Apocalypse Chime: Destroy all nontoken permanents with a name originally printed in the Homelands expansion. They can't be regenerated.

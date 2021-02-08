@@ -5,7 +5,6 @@ PT:5/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.YouCtrl
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may exile it. If you do, you may return target card from your graveyard to your hand.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredCard | SubAbility$ DBReturn
+SVar:TrigExile:DB$ ChangeZone | Destination$ Exile | Defined$ TriggeredNewCardLKICopy | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/greenwarden_of_murasa.jpg
 Oracle:When Greenwarden of Murasa enters the battlefield, you may return target card from your graveyard to your hand.\nWhen Greenwarden of Murasa dies, you may exile it. If you do, you may return target card from your graveyard to your hand.

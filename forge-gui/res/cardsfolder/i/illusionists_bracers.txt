@@ -3,6 +3,5 @@ ManaCost:2
 Types:Artifact Equipment
 K:Equip:3
 T:Mode$ AbilityCast | ValidCard$ Creature.EquippedBy | TriggerZones$ Battlefield | Execute$ TrigCopyAbility | OptionalDecider$ You | TriggerDescription$ Whenever an ability of equipped creature is activated, if it isn't a mana ability, copy that ability. You may choose new targets for the copy.
-SVar:TrigCopyAbility:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility
-SVar:Picture:http://www.wizards.com/global/images/magic/general/illusionists_bracers.jpg
+SVar:TrigCopyAbility:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 Oracle:Whenever an ability of equipped creature is activated, if it isn't a mana ability, copy that ability. You may choose new targets for the copy.\nEquip {3}

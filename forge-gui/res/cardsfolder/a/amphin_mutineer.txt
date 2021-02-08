@@ -1,0 +1,10 @@
+Name:Amphin Mutineer
+ManaCost:3 U
+Types:Creature Salamander Pirate
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile up to one target non-Salamander creature. That creature's controller creates a 4/3 blue Salamander Warrior creature token.
+SVar:TrigExile:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.nonSalamander | TgtPrompt$ Select up to one target non-Salamander creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_4_3_salamander_warrior | TokenOwner$ TargetedController
+K:Encore:4 U U
+DeckHas:Ablity$Token
+Oracle:When Amphin Mutineer enters the battlefield, exile up to one target non-Salamander creature. That creature's controller creates a 4/3 blue Salamander Warrior creature token.\nEncore {4}{U}{U} ({4}{U}{U}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

@@ -2,13 +2,13 @@ package forge.game.event;
 
 import forge.game.GameOutcome;
 
-import java.util.List;
+import java.util.Collection;
 
 public class GameEventGameOutcome extends GameEvent {
     public final GameOutcome result;
-    public final List<GameOutcome> history;
+    public final Collection<GameOutcome> history;
 
-    public GameEventGameOutcome(GameOutcome lastOne, List<GameOutcome> history) {
+    public GameEventGameOutcome(GameOutcome lastOne, Collection<GameOutcome> history) {
         this.result = lastOne;
         this.history = history;
     }

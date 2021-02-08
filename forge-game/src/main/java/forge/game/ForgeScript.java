@@ -73,6 +73,10 @@ public class ForgeScript {
             return cardState.getTypeWithChanges().hasStringType(source.getChosenType());
         } else if (property.equals("IsNotChosenType")) {
             return !cardState.getTypeWithChanges().hasStringType(source.getChosenType());
+        } else if (property.equals("ChosenType2")) {
+            return cardState.getTypeWithChanges().hasStringType(source.getChosenType2());
+        } else if (property.equals("IsNotChosenType2")) {
+            return !cardState.getTypeWithChanges().hasStringType(source.getChosenType2());
         } else if (property.startsWith("HasSubtype")) {
             final String subType = property.substring(11);
             return cardState.getTypeWithChanges().hasSubtype(subType);
@@ -126,7 +130,7 @@ public class ForgeScript {
         } else if (property.equals("nonManaAbility")) {
             return !sa.isManaAbility();
         } else if (property.equals("withoutXCost")) {
-            return !sa.isXCost();
+            return !sa.costHasManaX();
         } else if (property.equals("Buyback")) {
             return sa.isBuyBackAbility();
         } else if (property.equals("Cycling")) {
@@ -147,6 +151,12 @@ public class ForgeScript {
             return sa.isMorphUp();
         } else if (property.equals("Equip")) {
             return sa.hasParam("Equip");
+        } else if (property.equals("Boast")) {
+            return sa.isBoast();
+        } else if (property.equals("Foretelling")) {
+            return sa.isForetelling();
+        } else if (property.equals("Foretold")) {
+            return sa.isForetold();
         } else if (property.equals("MayPlaySource")) {
             StaticAbility m = sa.getMayPlay();
             if (m == null) {

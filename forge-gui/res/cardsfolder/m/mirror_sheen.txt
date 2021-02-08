@@ -1,6 +1,5 @@
 Name:Mirror Sheen
 ManaCost:1 UR UR
 Types:Enchantment
-A:AB$ CopySpellAbility | Cost$ 1 UR UR | ValidTgts$ Instant,Sorcery | TargetType$ Spell | TargetValidTargeting$ You | AILogic$ AlwaysIfViable | SpellDescription$ Copy target instant or sorcery spell that targets you. You may choose new targets for the copy.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_sheen.jpg
+A:AB$ CopySpellAbility | Cost$ 1 UR UR | ValidTgts$ Instant,Sorcery | TargetType$ Spell | TargetValidTargeting$ You | AILogic$ AlwaysIfViable | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell that targets you. You may choose new targets for the copy.
 Oracle:{1}{U/R}{U/R}: Copy target instant or sorcery spell that targets you. You may choose new targets for the copy.

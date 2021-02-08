@@ -351,7 +351,11 @@ public final class CardRulesPredicates {
             boolean shouldContain;
             switch (this.field) {
             case NAME:
-                return (op(CardTranslation.getTranslatedName(card.getName()), this.operand) || op(card.getName(), this.operand));
+                boolean otherName = false;
+                if (card.getOtherPart() != null) {
+                    otherName = (op(CardTranslation.getTranslatedName(card.getOtherPart().getName()), this.operand) || op(card.getOtherPart().getName(), this.operand));
+                }
+                return otherName || (op(CardTranslation.getTranslatedName(card.getName()), this.operand) || op(card.getName(), this.operand));
             case SUBTYPE:
                 shouldContain = (this.getOperator() == StringOp.CONTAINS) || (this.getOperator() == StringOp.EQUALS);
                 return shouldContain == card.getType().hasSubtype(this.operand);

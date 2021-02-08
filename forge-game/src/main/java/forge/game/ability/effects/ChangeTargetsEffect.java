@@ -36,7 +36,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
 
         final MagicStack stack = activator.getGame().getStack();
         for (final SpellAbility tgtSA : sas) {
-            SpellAbilityStackInstance si = stack.getInstanceFromSpellAbility(tgtSA);
+            SpellAbilityStackInstance si = stack.getInstanceMatchingSpellAbilityID(tgtSA);
             if (si == null) {
                 // If there isn't a Stack Instance, there isn't really a target
                 continue;
@@ -60,7 +60,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 while(changingTgtSI != null) {
                     SpellAbility changedSa = changingTgtSI.getSpellAbility(true); 
                     if (changedSa.usesTargeting()) {
-                        for(GameObject it : changedSa.getTargets().getTargets())
+                        for(GameObject it : changedSa.getTargets())
                             allTargets.add(ImmutablePair.of(changingTgtSI, it));
                     }
                     changingTgtSI = changingTgtSI.getSubInstance();

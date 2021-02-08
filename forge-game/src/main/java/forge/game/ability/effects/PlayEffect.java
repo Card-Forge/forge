@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -19,6 +20,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardFactoryUtil;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -76,15 +78,12 @@ public class PlayEffect extends SpellAbilityEffect {
         CardCollection showCards = new CardCollection();
 
         if (sa.hasParam("Valid")) {
-            ZoneType zone = ZoneType.Hand;
-            if (sa.hasParam("ValidZone")) {
-                zone = ZoneType.smartValueOf(sa.getParam("ValidZone"));
-            }
+            List<ZoneType> zones = sa.hasParam("ValidZone") ? ZoneType.listValueOf(sa.getParam("ValidZone")) : ImmutableList.of(ZoneType.Hand);
             tgtCards = new CardCollection(
-                AbilityUtils.filterListByType(game.getCardsIn(zone), sa.getParam("Valid"), sa)
+                AbilityUtils.filterListByType(game.getCardsIn(zones), sa.getParam("Valid"), sa)
             );
             if ( sa.hasParam("ShowCards") ) {
-                showCards = new CardCollection(AbilityUtils.filterListByType(game.getCardsIn(zone), sa.getParam("ShowCards"), sa));
+                showCards = new CardCollection(AbilityUtils.filterListByType(game.getCardsIn(zones), sa.getParam("ShowCards"), sa));
             }
         }
         else if (sa.hasParam("AnySupportedCard")) {
@@ -132,7 +131,14 @@ public class PlayEffect extends SpellAbilityEffect {
             }
         }
         else {
-            tgtCards = getTargetCards(sa);
+            tgtCards = new CardCollection();
+            // filter only cards that didn't changed zones
+            for (Card c : getTargetCards(sa)) {
+                Card gameCard = game.getCardState(c, null);
+                if (c.equalsWithTimestamp(gameCard)) {
+                    tgtCards.add(gameCard);
+                }
+            }
         }
 
         if (tgtCards.isEmpty()) {
@@ -218,8 +224,16 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtCards.remove(original);
             }
 
-            // only one mode can be used
-            SpellAbility tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(tgtCard, sas);
+            SpellAbility tgtSA;
+
+            if (!sa.hasParam("CastFaceDown")) {
+                // only one mode can be used
+                tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(tgtCard, sas);
+            } else {
+                // For Illusionary Mask effect
+                tgtSA = CardFactoryUtil.abilityMorphDown(tgtCard);
+            }
+
             final boolean noManaCost = sa.hasParam("WithoutManaCost");
             if (noManaCost) {
                 tgtSA = tgtSA.copyWithNoManaCost();
@@ -241,7 +255,7 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("PlayReduceCost")) {
                 // for Kefnet only can reduce colorless cost
                 String reduce = sa.getParam("PlayReduceCost");
-                tgtSA.getMapParams().put("ReduceCost", reduce);
+                tgtSA.putParam("ReduceCost", reduce);
                 if (!StringUtils.isNumeric(reduce)) {
                     tgtSA.setSVar(reduce, sa.getSVar(reduce));
                 }
@@ -259,7 +273,12 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("ReplaceGraveyard")) {
                 addReplaceGraveyardEffect(tgtCard, sa, sa.getParam("ReplaceGraveyard"));
             }
-            
+
+            // For Illusionary Mask effect
+            if (sa.hasParam("ReplaceIlluMask")) {
+                addIllusionaryMaskReplace(tgtCard, sa);
+            }
+
             tgtSA.setSVar("IsCastFromPlayEffect", "True");
 
             if (controller.getController().playSaFromPlayEffect(tgtSA)) {
@@ -281,7 +300,7 @@ public class PlayEffect extends SpellAbilityEffect {
         }
     } // end resolve
 
-    
+
     protected void addReplaceGraveyardEffect(Card c, SpellAbility sa, String zone) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
@@ -324,6 +343,44 @@ public class PlayEffect extends SpellAbilityEffect {
         eff.updateStateForView();
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
+        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        game.getAction().moveTo(ZoneType.Command, eff, sa);
+        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+    }
+
+
+    protected void addIllusionaryMaskReplace(Card c, SpellAbility sa) {
+        final Card hostCard = sa.getHostCard();
+        final Game game = hostCard.getGame();
+        final Player controller = sa.getActivatingPlayer();
+        final String name = hostCard.getName() + "'s Effect";
+        final String image = hostCard.getImageKey();
+        final Card eff = createEffect(sa, controller, name, image);
+
+        eff.addRemembered(c);
+
+        String [] repeffstrs = {
+            "Event$ AssignDealDamage | ValidCard$ Card.IsRemembered+faceDown " +
+            "| Description$ If the creature that spell becomes as it resolves has not been turned face up" +
+            " and would assign or deal damage, be dealt damage, or become tapped, instead it's turned face up" +
+            " and assigns or deals damage, is dealt damage, or becomes tapped.",
+            "Event$ DealtDamage | ValidCard$ Card.IsRemembered+faceDown",
+            "Event$ Tap | ValidCard$ Card.IsRemembered+faceDown"
+        };
+        String effect = "DB$ SetState | Defined$ ReplacedCard | Mode$ TurnFace";
+
+        for (int i = 0; i < 3; ++i) {
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstrs[i], eff, true);
+            re.setLayer(ReplacementLayer.Other);
+            re.setOverridingAbility(AbilityFactory.getAbility(effect, eff));
+            eff.addReplacementEffect(re);
+        }
+
+        addExileOnMovedTrigger(eff, "Battlefield");
+        addExileOnCounteredTrigger(eff);
+
+        eff.updateStateForView();
+
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         game.getAction().moveTo(ZoneType.Command, eff, sa);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);

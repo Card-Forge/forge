@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ TurnFaceUp | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When enchanted creature is turned face up, destroy it. It can't be regenerated.
-SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCard | NoRegen$ True
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCardLKICopy | NoRegen$ True
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fatal_mutation.jpg

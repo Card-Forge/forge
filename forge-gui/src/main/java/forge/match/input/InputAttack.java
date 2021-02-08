@@ -269,7 +269,7 @@ public class InputAttack extends InputSyncronizedBase {
         combat.addAttacker(card, currentDefender, activeBand);
         activateBand(activeBand);
 
-        card.getGame().fireEvent(new UiEventAttackerDeclared(
+        card.getGame().getMatch().fireEvent(new UiEventAttackerDeclared(
                 CardView.get(card),
                 GameEntityView.get(currentDefender)));
     }
@@ -280,7 +280,7 @@ public class InputAttack extends InputSyncronizedBase {
         // When removing an attacker clear the attacking band
         activateBand(null);
 
-        card.getGame().fireEvent(new UiEventAttackerDeclared(
+        card.getGame().getMatch().fireEvent(new UiEventAttackerDeclared(
                 CardView.get(card), null));
         return true;
     }

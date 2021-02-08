@@ -1,0 +1,8 @@
+Name:Dawnglade Regent
+ManaCost:5 G G
+Types:Creature Elk
+PT:8/8
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+S:Mode$ Continuous | Affected$ Permanent.YouCtrl | AddKeyword$ Hexproof | Condition$ Monarch | Description$ As long as you're the monarch, permanents you control have hexproof.
+Oracle:When Dawnglade Regent enters the battlefield, you become the monarch.\nAs long as you're the monarch, permanents you control have hexproof.

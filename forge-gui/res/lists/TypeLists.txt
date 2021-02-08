@@ -52,12 +52,14 @@ Centaur:Centaurs
 Cephalid:Cephalids
 Chimera:Chimeras
 Citizen:Citizens
+Clamfolk:Clamfolk
 Cleric:Clerics
 Cockatrice:Cockatrices
 Construct:Constructs
 Coward:Cowards
 Crab:Crabs
 Crocodile:Crocodiles
+Cyborg:Cyborgs
 Cyclops:Cyclopes
 Dauthi:Dauthis
 Demigod:Demigods
@@ -122,6 +124,7 @@ Jackal:Jackals
 Jellyfish:Jellyfishes
 Juggernaut:Juggernauts
 Kavu:Kavu
+Killbot:Killbots
 Kirin:Kirins
 Kithkin:Kithkins
 Knight:Knights
@@ -179,6 +182,7 @@ Pentavite:Pentavites
 Pest:Pests
 Phelddagrif:Phelddagrifs
 Phoenix:Phoenixes
+Phyrexian:Phyrexians
 Pilot:Pilots
 Pincher:Pinchers
 Pirate:Pirates
@@ -229,6 +233,7 @@ Spike:Spikes
 Spirit:Spirits
 Splinter:Splinters
 Sponge:Sponges
+Spy:Spies
 Squid:Squids
 Squirrel:Squirrels
 Starfish:Starfish
@@ -273,10 +278,11 @@ Trap
 Aura
 Cartouche
 Curse
+Rune
 Saga
 Shrine
 [ArtifactTypes]
-Clue
+Clue:Clues
 Contraption
 Equipment
 Food
@@ -307,7 +313,9 @@ Gideon
 Huatli
 Jace
 Jaya
+Jeska
 Karn
+Kasmina
 Kaya
 Kiora
 Koth
@@ -315,6 +323,7 @@ Liliana
 Lukka
 Nahiri
 Narset
+Niko
 Nissa
 Nixilis
 Oko
@@ -325,11 +334,14 @@ Samut
 Sarkhan
 Serra
 Sorin
+Stone
+Szat
 Tamiyo
 Teferi
 Teyo
 Tezzeret
 Tibalt
+Tyvar
 Ugin
 Venser
 Vivien

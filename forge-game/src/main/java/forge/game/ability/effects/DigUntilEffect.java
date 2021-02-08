@@ -1,26 +1,20 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
-import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardZoneTable;
-import forge.game.combat.Combat;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
 import forge.util.MyRandom;
 import forge.util.Localizer;
-import forge.util.collect.FCollectionView;
 
 import java.util.*;
-
-import com.google.common.collect.Maps;
 
 public class DigUntilEffect extends SpellAbilityEffect {
 
@@ -103,6 +97,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
         }
 
         final boolean remember = sa.hasParam("RememberFound");
+        final boolean imprint = sa.hasParam("ImprintFound");
 
         final ZoneType foundDest = ZoneType.smartValueOf(sa.getParam("FoundDestination"));
         final int foundLibPos = AbilityUtils.calculateAmount(host, sa.getParam("FoundLibraryPosition"), sa);
@@ -116,6 +111,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
         final boolean optionalFound = sa.hasParam("OptionalFoundMove");
 
         CardZoneTable table = new CardZoneTable();
+        boolean combatChanged = false;
 
         for (final Player p : getTargetPlayers(sa)) {
             if (p == null) {
@@ -137,8 +133,14 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     revealed.add(c);
                     if (c.isValid(type, sa.getActivatingPlayer(), host, sa)) {
                         found.add(c);
+                        if (sa.hasParam("ForgetOtherRemembered")) {
+                            host.clearRemembered();
+                        }
                         if (remember) {
                             host.addRemembered(c);
+                        }
+                        if (imprint) {
+                            host.addImprintedCard(c);
                         }
                         if (found.size() == untilAmount) {
                             break;
@@ -178,23 +180,8 @@ public class DigUntilEffect extends SpellAbilityEffect {
                                 if (sa.hasParam("Tapped")) {
                                     c.setTapped(true);
                                 }
-                                if (sa.hasParam("Attacking")) {
-                                    final Combat combat = game.getCombat();
-                                    if (null != combat) {
-                                        final FCollectionView<GameEntity> e = combat.getDefenders();
-
-                                        Map<String, Object> params = Maps.newHashMap();
-                                        params.put("Attacker", c);
-
-                                        final GameEntity defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(e, sa,
-                                                Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), params);
-
-                                        if (defender != null) {
-                                            combat.addAttacker(c, defender);
-                                            combat.getBandOfAttacker(c).setBlocked(false);
-                                            game.fireEvent(new GameEventCombatChanged());
-                                        }
-                                    }
+                                if (addToCombat(c, c.getController(), sa, "Attacking", "Blocking")) {
+                                    combatChanged = true;
                                 }
                             } else if (sa.hasParam("NoMoveFound") && foundDest.equals(ZoneType.Library)) {
                                 //Don't do anything
@@ -267,6 +254,10 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     p.shuffle(sa);
                 }
             } // end foreach player
+        }
+        if (combatChanged) {
+            game.updateCombatForView();
+            game.fireEvent(new GameEventCombatChanged());
         }
         table.triggerChangesZoneAll(game);
     } // end resolve

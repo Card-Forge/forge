@@ -5,7 +5,6 @@ PT:6/6
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may put it on the top or bottom of its owner's library.
 SVar:TrigChange:DB$ GenericChoice | Defined$ TriggeredCardController | ShowCurrentCard$ TriggeredCard | Choices$ DBTop,DBBottom
-SVar:DBTop:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put it on the top of library
-SVar:DBBottom:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put it on the bottom of library
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arashin_soverign.jpg
+SVar:DBTop:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put it on the top of library
+SVar:DBBottom:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put it on the bottom of library
 Oracle:Flying\nWhen Arashin Sovereign dies, you may put it on the top or bottom of its owner's library.

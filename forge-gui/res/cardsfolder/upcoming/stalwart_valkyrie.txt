@@ -1,0 +1,7 @@
+Name:Stalwart Valkyrie
+ManaCost:3 W
+Types:Creature Angel Warrior
+PT:3/2
+K:Flying
+SVar:AltCost:Cost$ 1 W ExileFromGrave<1/Creature> | Description$ You may pay {1}{W} and exile a creature card from your graveyard rather than pay CARDNAME's mana cost
+Oracle:You may pay {1}{W} and exile a creature card from your graveyard rather than pay this spell's mana cost.\nFlying

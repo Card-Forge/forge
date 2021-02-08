@@ -98,7 +98,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
 
         final int maxTargets = tgt.getMaxTargets(sa.getHostCard(), sa);
-        final int targeted = sa.getTargets().getNumTargeted();
+        final int targeted = sa.getTargets().size();
         if(maxTargets > 1) {
             sb.append(TextUtil.concatNoSpace("\n(", String.valueOf(maxTargets - targeted), " more can be targeted)"));
         }
@@ -108,7 +108,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 "(Targeting ERROR)", "");
         showMessage(message, sa.getView());
 
-        if (tgt.isDividedAsYouChoose() && tgt.getMinTargets(sa.getHostCard(), sa) == 0 && sa.getTargets().getNumTargeted() == 0) {
+        if (tgt.isDividedAsYouChoose() && tgt.getMinTargets(sa.getHostCard(), sa) == 0 && sa.getTargets().size() == 0) {
             // extra logic for Divided with min targets = 0, should only work if num targets are 0 too
             getController().getGui().updateButtons(getOwner(), true, true, false);
         } else if (!tgt.isMinTargetsChosen(sa.getHostCard(), sa) || tgt.isDividedAsYouChoose()) {
@@ -243,7 +243,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             final int stillToDivide = tgt.getStillToDivide();
             int allocatedPortion = 0;
             // allow allocation only if the max targets isn't reached and there are more candidates
-            if ((sa.getTargets().getNumTargeted() + 1 < tgt.getMaxTargets(sa.getHostCard(), sa))
+            if ((sa.getTargets().size() + 1 < tgt.getMaxTargets(sa.getHostCard(), sa))
                     && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
                 final ImmutableList.Builder<Integer> choices = ImmutableList.builder();
                 for (int i = 1; i <= stillToDivide; i++) {
@@ -295,6 +295,12 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             return;
         }
 
+        if (player.hasLost()) {
+            showMessage(sa.getHostCard() + " - Cannot target this player - already lost.");
+            return;
+        }
+
+        //TODO return the correct reason to display
         if (!sa.canTarget(player)) {
             showMessage(sa.getHostCard() + " - Cannot target this player (Hexproof? Protection? Restrictions?).");
             return;
@@ -304,7 +310,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             final int stillToDivide = tgt.getStillToDivide();
             int allocatedPortion = 0;
             // allow allocation only if the max targets isn't reached and there are more candidates
-            if ((sa.getTargets().getNumTargeted() + 1 < tgt.getMaxTargets(sa.getHostCard(), sa)) && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
+            if ((sa.getTargets().size() + 1 < tgt.getMaxTargets(sa.getHostCard(), sa)) && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
                 final ImmutableList.Builder<Integer> choices = ImmutableList.builder();
                 for (int i = 1; i <= stillToDivide; i++) {
                     choices.add(Integer.valueOf(i));

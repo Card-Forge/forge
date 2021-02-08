@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -49,7 +49,7 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
 
     /**
      * Instantiates a new cost part.
-     * 
+     *
      * @param amount
      *            the amount
      * @param type
@@ -67,16 +67,19 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
 
     /**
      * Gets the amount.
-     * 
+     *
      * @return the amount
      */
     public final String getAmount() {
         return this.amount;
     }
 
+    public Integer getMaxAmountX(final SpellAbility ability, final Player payer) {
+        return null;
+    }
     /**
      * Gets the type.
-     * 
+     *
      * @return the type
      */
     public final String getType() {
@@ -85,7 +88,7 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
 
     /**
      * Gets the this.
-     * 
+     *
      * @return the this
      */
     public final boolean payCostFromSource() {
@@ -94,7 +97,7 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
 
     /**
      * Gets the type description.
-     * 
+     *
      * @return the type description
      */
     public final String getTypeDescription() {
@@ -108,16 +111,16 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
 
     /**
      * Checks if is reusable.
-     * 
+     *
      * @return true, if is reusable
      */
     public boolean isReusable() {
         return false;
     }
-    
+
     /**
      * Checks if is renewable.
-     * 
+     *
      * @return true, if is renewable
      */
     public boolean isRenewable() {
@@ -126,7 +129,7 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
 
     /**
      * Checks if is undoable.
-     * 
+     *
      * @return true, if is undoable
      */
     public boolean isUndoable() {
@@ -135,19 +138,19 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
 
     /**
      * Convert amount.
-     * 
+     *
      * @return the integer
      */
     public final Integer convertAmount() {
-        return StringUtils.isNumeric(amount) ? Integer.parseInt(amount) : null; 
+        return StringUtils.isNumeric(amount) ? Integer.parseInt(amount) : null;
     }
 
     /**
      * Can pay.
-     * 
+     *
      * @param ability
      *            the ability
-     * @param payer 
+     * @param payer
      * @return true, if successful
      */
     public abstract boolean canPay(SpellAbility ability, Player payer);
@@ -156,7 +159,7 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
@@ -164,7 +167,7 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
 
     /**
      * Refund. Overridden in classes which know how to refund.
-     * 
+     *
      * @param source
      *            the source
      */
@@ -173,7 +176,7 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
 
     /**
      * Sets the amount.
-     * 
+     *
      * @param amountIn
      *            the amount to set
      */

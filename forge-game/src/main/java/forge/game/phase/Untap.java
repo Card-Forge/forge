@@ -29,6 +29,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
@@ -125,7 +126,8 @@ public class Untap extends Phase {
 
         final Map<String, Integer> restrictUntap = Maps.newHashMap();
         boolean hasChosen = false;
-        for (String kw : player.getKeywords()) {
+        for (KeywordInterface ki : player.getKeywords()) {
+            String kw = ki.getOriginal();
             if (kw.startsWith("UntapAdjust")) {
                 String[] parse = kw.split(":");
                 if (!restrictUntap.containsKey(parse[1])
@@ -258,7 +260,7 @@ public class Untap extends Phase {
         // to attach back to that thing when it comes back
         for (final Card c : list) {
             if (c.isPhasedOut()) {
-                c.phase();
+                c.phase(true);
             } else if (c.hasKeyword(Keyword.PHASING)) {
                 // 702.23g If an object would simultaneously phase out directly
                 // and indirectly, it just phases out indirectly.
@@ -272,7 +274,7 @@ public class Untap extends Phase {
                         continue;
                     }
                 }
-                c.phase();
+                c.phase(true);
             }
         }
     }

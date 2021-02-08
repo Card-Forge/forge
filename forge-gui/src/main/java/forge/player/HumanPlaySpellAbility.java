@@ -19,7 +19,6 @@ package forge.player;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -29,8 +28,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardPlayOption;
 import forge.game.cost.Cost;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPartMana;
 import forge.game.cost.CostPayment;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaPool;
@@ -38,7 +35,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.*;
 import forge.game.zone.Zone;
-import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collections;
@@ -67,7 +63,6 @@ public class HumanPlaySpellAbility {
 
         // used to rollback
         Zone fromZone = null;
-        CardStateName fromState = null;
         int zonePosition = 0;
         final ManaPool manapool = human.getManaPool();
 
@@ -77,33 +72,14 @@ public class HumanPlaySpellAbility {
         boolean manaTypeConversion = false;
         boolean manaColorConversion = false;
 
-        if (ability.isSpell()) {
-            if (c.hasKeyword("May spend mana as though it were mana of any type to cast CARDNAME")
-                    || (option != null && option.isIgnoreManaCostType())) {
-                manaTypeConversion = true;
-            } else  if (c.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")
-                    || (option != null && option.isIgnoreManaCostColor())) {
-                manaColorConversion = true;
-            }
-        }
-        
-        final boolean playerManaConversion = human.hasManaConversion()
-                && human.getController().confirmAction(ability, null, "Do you want to spend mana as though it were mana of any color to pay the cost?");
-
         boolean keywordColor = false;
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
         game.getStack().freezeStack();
 
-        if (ability instanceof Spell && !c.isCopiedSpell()) {
+        if (ability.isSpell() && !c.isCopiedSpell()) {
             fromZone = game.getZoneOf(c);
-            fromState = c.getCurrentStateName();
             if (fromZone != null) {
                 zonePosition = fromZone.getCards().indexOf(c);
-            }
-            // This is should happen earlier, before the Modal spell is chosen
-            // Turn face-down card face up (except case of morph spell)
-            if (ability.isSpell() && !ability.isCastFaceDown() && fromState == CardStateName.FaceDown) {
-                c.turnFaceUp(null);
             }
             ability.setHostCard(game.getAction().moveToStack(c, ability));
         }
@@ -113,6 +89,20 @@ public class HumanPlaySpellAbility {
         }
 
         ability = GameActionUtil.addExtraKeywordCost(ability);
+
+        if (ability.isSpell() && !ability.isCopied()) { // These hidden keywords should only apply on the Stack
+            final Card host = ability.getHostCard();
+            if (host.hasKeyword("May spend mana as though it were mana of any type to cast CARDNAME")
+                    || (option != null && option.isIgnoreManaCostType())) {
+                manaTypeConversion = true;
+            } else if (host.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")
+                    || (option != null && option.isIgnoreManaCostColor())) {
+                manaColorConversion = true;
+            }
+        }
+
+        final boolean playerManaConversion = human.hasManaConversion()
+                && human.getController().confirmAction(ability, null, "Do you want to spend mana as though it were mana of any color to pay the cost?");
 
         Cost abCost = ability.getPayCosts();
         CostPayment payment = new CostPayment(abCost, ability);
@@ -128,8 +118,12 @@ public class HumanPlaySpellAbility {
             AbilityUtils.applyManaColorConversion(manapool, MagicColor.Constant.ANY_COLOR_CONVERSION);
             human.incNumManaConversion();
         }
-        
-        if (ability.isAbility() && ability instanceof AbilityActivated) {
+
+        if (option != null && option.isIgnoreSnowSourceManaCostColor()) {
+            payment.setSnowForColor(true);
+        }
+
+        if (ability.isAbility() && ability.isActivatedAbility()) {
             final Map<String, String> params = Maps.newHashMap();
             params.put("ManaColorConversion", "Additive");
 
@@ -151,18 +145,18 @@ public class HumanPlaySpellAbility {
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
         final boolean prerequisitesMet = announceValuesLikeX()
                 && announceType()
-                && (!mayChooseTargets || setupTargets()) // if you can choose targets, then do choose them.
+                && (!mayChooseTargets || ability.setupTargets()) // if you can choose targets, then do choose them.
+                && ability.canCastTiming(human)
+                && ability.checkRestrictions(human)
                 && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, ability.getHostCard())));
 
         if (!prerequisitesMet) {
             if (!ability.isTrigger()) {
-                rollbackAbility(fromZone, zonePosition, payment);
+                rollbackAbility(fromZone, zonePosition, payment, c);
                 if (ability.getHostCard().isMadness()) {
                     // if a player failed to play madness cost, move the card to graveyard
                     Card newCard = game.getAction().moveToGraveyard(c, null);
                     newCard.setMadnessWithoutCast(true);
-                } else if (ability.getHostCard().isBestowed()) {
-                    ability.getHostCard().unanimateBestow();
                 }
             }
 
@@ -182,6 +176,8 @@ public class HumanPlaySpellAbility {
 
             if (skipStack) {
                 AbilityUtils.resolve(ability);
+                // Should unfreeze stack
+                game.getStack().unfreezeStack();
             } else {
                 enusureAbilityHasDescription(ability);
                 game.getStack().addAndUnfreeze(ability);
@@ -190,7 +186,7 @@ public class HumanPlaySpellAbility {
             // no worries here. The same thread must resolve, and by this moment ability will have been resolved already
             // Triggers haven't resolved yet ??
             if (mayChooseTargets) {
-                clearTargets(ability);
+                ability.clearTargets();
             }
             if (manaTypeConversion || manaColorConversion || keywordColor) {
                 manapool.restoreColorReplacements();
@@ -199,59 +195,25 @@ public class HumanPlaySpellAbility {
         return true;
     }
 
-    private final boolean setupTargets() {
-        // Skip to paying if parent ability doesn't target and has no subAbilities.
-        // (or trigger case where its already targeted)
-        SpellAbility currentAbility = ability;
-        final Card source = ability.getHostCard();
-        do {
-            final TargetRestrictions tgt = currentAbility.getTargetRestrictions();
-            if (tgt != null && tgt.doesTarget()) {
-                clearTargets(currentAbility);
-                Player targetingPlayer;
-                if (currentAbility.hasParam("TargetingPlayer")) {
-                    final FCollection<Player> candidates = AbilityUtils.getDefinedPlayers(source, currentAbility.getParam("TargetingPlayer"), currentAbility);
-                    // activator chooses targeting player
-                    targetingPlayer = ability.getActivatingPlayer().getController().chooseSingleEntityForEffect(
-                            candidates, currentAbility, "Choose the targeting player", null);
-                } else {
-                    targetingPlayer = ability.getActivatingPlayer();
-                }
-                currentAbility.setTargetingPlayer(targetingPlayer);
-                if (!targetingPlayer.getController().chooseTargetsFor(currentAbility)) {
-                    return false;
-                }
-            }
-            final AbilitySub subAbility = currentAbility.getSubAbility();
-            if (subAbility != null) {
-                // This is necessary for "TargetsWithDefinedController$ ParentTarget"
-                subAbility.setParent(currentAbility);
-            }
-            currentAbility = subAbility;
-        } while (currentAbility != null);
-        return true;
-    }
-
-    public final void clearTargets(final SpellAbility ability) {
-        final TargetRestrictions tg = ability.getTargetRestrictions();
-        if (tg != null) {
-            ability.resetTargets();
-            tg.calculateStillToDivide(ability.getParam("DividedAsYouChoose"), ability.getHostCard(), ability);
-        }
-    }
-
-    private void rollbackAbility(final Zone fromZone, final int zonePosition, CostPayment payment) {
+    private void rollbackAbility(final Zone fromZone, final int zonePosition, CostPayment payment, Card oldCard) {
         // cancel ability during target choosing
         final Game game = ability.getActivatingPlayer().getGame();
 
         if (fromZone != null) { // and not a copy
-            ability.getHostCard().setCastSA(null);
-            ability.getHostCard().setCastFrom(null);
-            // add back to where it came from
-            game.getAction().moveTo(fromZone, ability.getHostCard(), zonePosition >= 0 ? Integer.valueOf(zonePosition) : null, null);
+            oldCard.setCastSA(null);
+            oldCard.setCastFrom(null);
+            // add back to where it came from, hopefully old state
+            // skip GameAction
+            oldCard.getZone().remove(oldCard);
+            fromZone.add(oldCard, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
+            ability.setHostCard(oldCard);
+
+            oldCard.setBackSide(false);
+            oldCard.setState(oldCard.getFaceupCardStateName(), true);
+            oldCard.unanimateBestow();
         }
 
-        clearTargets(ability);
+        ability.clearTargets();
 
         ability.resetOnceResolved();
         payment.refundPayment();
@@ -263,9 +225,7 @@ public class HumanPlaySpellAbility {
         if (ability.isCopied()) { return true; } //don't re-announce for spell copies
 
         boolean needX = true;
-        final boolean allowZero = !ability.hasParam("XCantBe0");
         final Cost cost = ability.getPayCosts();
-        final CostPartMana manaCost = cost.getCostMana();
         final PlayerController controller = ability.getActivatingPlayer().getController();
         final Card card = ability.getHostCard();
 
@@ -279,7 +239,7 @@ public class HumanPlaySpellAbility {
                 final boolean isX = "X".equalsIgnoreCase(varName);
                 if (isX) { needX = false; }
 
-                final Integer value = controller.announceRequirements(ability, varName, allowZero && (!isX || manaCost == null || manaCost.canXbe0()));
+                final Integer value = controller.announceRequirements(ability, varName);
                 if (value == null) {
                     return false;
                 }
@@ -296,27 +256,18 @@ public class HumanPlaySpellAbility {
             }
         }
 
-        if (needX && manaCost != null) {
-            boolean xInCost = manaCost.getAmountOfX() > 0;
-            if (!xInCost) {
-                for (final CostPart part : cost.getCostParts()) {
-                    if (part.getAmount().equals("X")) {
-                        xInCost = true;
-                        break;
-                    }
-                }
-            }
-            if (xInCost) {
+        if (needX) {
+            if (cost.hasXInAnyCostPart()) {
                 final String sVar = ability.getSVar("X"); //only prompt for new X value if card doesn't determine it another way
                 if ("Count$xPaid".equals(sVar) || sVar.isEmpty()) {
-                    final Integer value = controller.announceRequirements(ability, "X", allowZero && manaCost.canXbe0());
+                    final Integer value = controller.announceRequirements(ability, "X");
                     if (value == null) {
                         return false;
                     }
                     ability.setXManaCostPaid(value);
                 }
-            } else if (manaCost.getMana().isZero() && ability.isSpell()) {
-                ability.setXManaCostPaid(0);
+            } else {
+                ability.setXManaCostPaid(null);
             }
         }
         return true;
@@ -356,7 +307,7 @@ public class HumanPlaySpellAbility {
         final StringBuilder sb = new StringBuilder();
         sb.append(ability.getHostCard().getName());
         if (ability.getTargetRestrictions() != null) {
-            final Iterable<GameObject> targets = ability.getTargets().getTargets();
+            final Iterable<GameObject> targets = ability.getTargets();
             if (!Iterables.isEmpty(targets)) {
                 sb.append(" - Targeting ");
                 for (final GameObject o : targets) {

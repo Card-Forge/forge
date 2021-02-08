@@ -38,6 +38,8 @@
 2XM/Urza's Power Plant2.fullborder
 2XM/Urza's Tower2.fullborder
 2XM/Wurmcoil Engine2.fullborder
+CMR/Jeska, Thrice Reborn2.fullborder
+CMR/Tevesh Szat, Doom of Fools2.fullborder
 ELD/Garruk, Cursed Huntsman2.fullborder
 ELD/Oko, Thief of Crowns2.fullborder
 ELD/The Royal Scions2.fullborder
@@ -79,6 +81,24 @@ IKO/Void Beckoner2.fullborder
 IKO/Yidaro, Wandering Monster3.fullborder
 IKO/Zagoth Triome2.fullborder
 IKO/Zilortha, Strength Incarnate.fullborder
+KHM/Alrund's Epiphany2.fullborder
+KHM/Barkchannel Pathway2.fullborder
+KHM/Battle Mammoth2.fullborder
+KHM/Blightstep Pathway2.fullborder
+KHM/Darkbore Pathway2.fullborder
+KHM/Haunting Voyage2.fullborder
+KHM/Hengegate Pathway2.fullborder
+KHM/Kaya the Inexorable2.fullborder
+KHM/Mistgate Pathway2.fullborder
+KHM/Niko Aris2.fullborder
+KHM/Quakebringer2.fullborder
+KHM/Searstep Pathway2.fullborder
+KHM/Slitherbore Pathway2.fullborder
+KHM/Starnheim Unleashed2.fullborder
+KHM/Tibalt, Cosmic Impostor2.fullborder
+KHM/Tidechannel Pathway2.fullborder
+KHM/Tyvar Kell2.fullborder
+KHM/Valki, God of Lies2.fullborder
 M21/Basri Ket2.fullborder
 M21/Chandra, Heart of Fire2.fullborder
 M21/Containment Priest2.fullborder
@@ -93,6 +113,7 @@ M21/Teferi, Master of Time2.fullborder
 M21/Ugin, the Spirit Dragon2.fullborder
 M21/Ugin, the Spirit Dragon3.fullborder
 PLGS/Hangarback Walker.fullborder
+PSLD/Tibalt, the Fiend-Blooded.fullborder
 SLD/Acidic Slime.fullborder
 SLD/Captain Sisay.fullborder
 SLD/Meren of Clan Nel Toth.fullborder
@@ -100,8 +121,21 @@ SLD/Narset, Enlightened Master.fullborder
 SLD/Necrotic Ooze.fullborder
 SLD/Oona, Queen of the Fae.fullborder
 SLD/Saskia the Unyielding.fullborder
+SLD/Scavenging Ooze.fullborder
 SLD/The Mimeoplasm.fullborder
 SLD/Voidslime.fullborder
+SLU/Brightclimb Pathway.fullborder
+SLU/Clearwater Pathway.fullborder
+SLU/Cragcrown Pathway.fullborder
+SLU/Grimclimb Pathway.fullborder
+SLU/Lavaglide Pathway.fullborder
+SLU/Murkwater Pathway.fullborder
+SLU/Needleverge Pathway.fullborder
+SLU/Pillarverge Pathway.fullborder
+SLU/Riverglide Pathway.fullborder
+SLU/Timbercrown Pathway.fullborder
+SLU/Boulderloft Pathway.fullborder
+SLU/Branchloft Pathway.fullborder
 THB/Ashiok, Nightmare Muse2.fullborder
 THB/Calix, Destiny's Hand2.fullborder
 THB/Elspeth, Sun's Nemesis2.fullborder

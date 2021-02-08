@@ -1,0 +1,7 @@
+Name:Battlefield Raptor
+ManaCost:W
+Types:Creature Bird
+PT:1/2
+K:Flying
+K:First Strike
+Oracle:Flying, first strike

@@ -131,8 +131,8 @@
         </dependency>
         <dependency>
             <groupId>com.miglayout</groupId>
-            <artifactId>miglayout</artifactId>
-            <version>3.7.4</version>
+            <artifactId>miglayout-swing</artifactId>
+            <version>4.2</version>
         </dependency>
         <dependency>
             <groupId>com.mortennobel</groupId>
@@ -202,6 +202,11 @@
             <artifactId>jcommander</artifactId>
             <version>1.27</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.sipgate</groupId>
+            <artifactId>mp3-wav</artifactId>
+            <version>1.0.3</version>
         </dependency>
     </dependencies>
 

@@ -10,7 +10,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,8 +68,16 @@ public class PlayerProperty {
             if (player.equals(source.getOwner())) {
                 return false;
             }
+        } else if (property.equals("CardOwner")) {
+            if (!player.equals(source.getOwner())) {
+                return false;
+            }
         } else if (property.equals("isMonarch")) {
-            if (!player.equals(game.getMonarch())) {
+            if (!player.isMonarch()) {
+                return false;
+            }
+        } else if (property.equals("isNotMonarch")) {
+            if (player.isMonarch()) {
                 return false;
             }
         } else if (property.equals("hasBlessing")) {
@@ -227,8 +234,7 @@ public class PlayerProperty {
             final String[] type = property.substring(8).split("_");
             final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type[0], sourceController, source);
             String comparator = type[1];
-            String compareTo = comparator.substring(2);
-            int y = StringUtils.isNumeric(compareTo) ? Integer.parseInt(compareTo) : 0;
+            int y = AbilityUtils.calculateAmount(source, comparator.substring(2), null);
             if (!Expressions.compare(list.size(), comparator, y)) {
                 return false;
             }
@@ -236,8 +242,7 @@ public class PlayerProperty {
             final String[] type = property.substring(10).split("_");
             final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.smartValueOf(type[0])), type[1], sourceController, source);
             String comparator = type[2];
-            String compareTo = comparator.substring(2);
-            int y = StringUtils.isNumeric(compareTo) ? Integer.parseInt(compareTo) : 0;
+            int y = AbilityUtils.calculateAmount(source, comparator.substring(2), null);
             if (!Expressions.compare(list.size(), comparator, y)) {
                 return false;
             }

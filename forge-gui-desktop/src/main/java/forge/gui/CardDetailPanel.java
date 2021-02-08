@@ -256,7 +256,7 @@ public class CardDetailPanel extends SkinnedPanel {
         idLabel.setText(mayView ? CardDetailUtil.formatCardId(state) : "");
 
         // fill the card text
-        cdArea.setText(FSkin.encodeSymbols(CardDetailUtil.composeCardText( card.isSplitCard() && !isInAltState ? card.getLeftSplitState() : state, gameView, mayView), true));
+        cdArea.setText(FSkin.encodeSymbols(CardDetailUtil.composeCardText( state, gameView, mayView), true));
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {

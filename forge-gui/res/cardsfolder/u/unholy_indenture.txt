@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChange | TriggerDescription$ When enchanted creature dies, return that card to the battlefield under your control with a +1/+1 counter on it.
-SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ P1P1_1 | Defined$ TriggeredCard | GainControl$ True
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ P1P1_1 | Defined$ TriggeredNewCardLKICopy | GainControl$ True
 DeckHas:Ability$Counters
 Oracle:Enchant creature\nWhen enchanted creature dies, return that card to the battlefield under your control with a +1/+1 counter on it.

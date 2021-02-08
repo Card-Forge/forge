@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -58,6 +58,25 @@ public class CostExile extends CostPartWithList {
         super(amount, type, description);
         this.from = from != null ? from : ZoneType.Battlefield;
         this.sameZone = sameZone;
+    }
+
+
+    @Override
+    public Integer getMaxAmountX(SpellAbility ability, Player payer) {
+        final Card source = ability.getHostCard();
+        final Game game = source.getGame();
+
+        CardCollectionView typeList;
+        if (this.sameZone) {
+            typeList = game.getCardsIn(this.from);
+        }
+        else {
+            typeList = payer.getCardsIn(this.from);
+        }
+
+        typeList = CardLists.getValidCards(typeList, getType().split(";"), payer, source, ability);
+
+        return typeList.size();
     }
 
     @Override

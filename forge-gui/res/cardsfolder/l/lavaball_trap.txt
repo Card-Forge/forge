@@ -4,5 +4,5 @@ Types:Instant Trap
 SVar:AltCost:Cost$ 3 R R | CheckSVar$ LandsEntered | SVarCompare$ GE2 | References$ LandsEntered | Description$ If an opponent had two or more lands enter the battlefield under their control this turn, you may pay {3}{R}{R} rather than pay this spell's mana cost.
 A:SP$ Destroy | Cost$ 6 R R | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Land | TgtPrompt$ Select two target lands | SubAbility$ DBDamageAll | SpellDescription$ Destroy two target lands. CARDNAME deals 4 damage to each creature.
 SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature | NumDmg$ 4 | ValidDescription$ each creature.
-SVar:LandsEntered:PlayerCountOpponents$HighestValid Card.ThisTurnEntered_Battlefield_Land.YouCtrl
+SVar:LandsEntered:PlayerCountOpponents$HighestValid Land.YouCtrl+ThisTurnEntered
 Oracle:If an opponent had two or more lands enter the battlefield under their control this turn, you may pay {3}{R}{R} rather than pay this spell's mana cost.\nDestroy two target lands. Lavaball Trap deals 4 damage to each creature.

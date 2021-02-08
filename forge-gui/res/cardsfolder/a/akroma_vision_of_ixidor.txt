@@ -1,0 +1,25 @@
+Name:Akroma, Vision of Ixidor
+ManaCost:5 W W
+Types:Legendary Creature Angel
+PT:6/6
+K:Flying
+K:First Strike
+K:Vigilance
+K:Trample
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ Flying | TriggerDescription$ At the beginning of each combat, until end of turn, each other creature you control gets +1/+1 if it has flying, +1/+1 if it has first strike, and so on for double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, vigilance, and partner.
+SVar:Flying:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withFlying | NumAtt$ +1 | NumDef$ +1 | SubAbility$ FirstStrike
+SVar:FirstStrike:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withFirst Strike | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DoubleStrike
+SVar:DoubleStrike:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withDouble Strike | NumAtt$ +1 | NumDef$ +1 | SubAbility$ Deathtouch
+SVar:Deathtouch:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withDeathtouch | NumAtt$ +1 | NumDef$ +1 | SubAbility$ Haste
+SVar:Haste:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withHaste | NumAtt$ +1 | NumDef$ +1 | SubAbility$ Hexproof
+SVar:Hexproof:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withHexproof | NumAtt$ +1 | NumDef$ +1 | SubAbility$ Indestructible
+SVar:Indestructible:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withIndestructible | NumAtt$ +1 | NumDef$ +1 | SubAbility$ Lifelink
+SVar:Lifelink:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withLifelink | NumAtt$ +1 | NumDef$ +1 | SubAbility$ Menace
+SVar:Menace:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withMenace | NumAtt$ +1 | NumDef$ +1 | SubAbility$ Protection
+SVar:Protection:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withProtection | NumAtt$ +1 | NumDef$ +1 | SubAbility$ Reach
+SVar:Reach:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withReach | NumAtt$ +1 | NumDef$ +1 | SubAbility$ Trample
+SVar:Trample:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withTrample | NumAtt$ +1 | NumDef$ +1 | SubAbility$ Vigilance
+SVar:Vigilance:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withVigilance | NumAtt$ +1 | NumDef$ +1 | SubAbility$ Partner
+SVar:Partner:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withPartner | NumAtt$ +1 | NumDef$ +1
+K:Partner
+Oracle:Flying, first strike, vigilance, trample\nAt the beginning of each combat, until end of turn, each other creature you control gets +1/+1 if it has flying, +1/+1 if it has first strike, and so on for double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, vigilance, and partner.\nPartner

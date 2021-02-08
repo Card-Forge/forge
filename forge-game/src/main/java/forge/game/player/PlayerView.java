@@ -311,7 +311,7 @@ public class PlayerView extends GameEntityView {
         return getKeywords().contains(keyword);
     }
     void updateKeywords(Player p) {
-        set(TrackableProperty.Keywords, ImmutableMultiset.copyOf(p.getKeywords()));
+        set(TrackableProperty.Keywords, ImmutableMultiset.copyOf(p.getKeywords().asStringList()));
     }
 
     public List<CardView> getCommanders() {
@@ -355,7 +355,7 @@ public class PlayerView extends GameEntityView {
         return get(TrackableProperty.MindSlaveMaster);
     }
     void updateMindSlaveMaster(Player p) {
-        set(TrackableProperty.MindSlaveMaster, PlayerView.get(p.getMindSlaveMaster()));
+        set(TrackableProperty.MindSlaveMaster, PlayerView.get(p.getControllingPlayer()));
     }
 
     public FCollectionView<CardView> getAnte() {

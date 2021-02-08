@@ -22,7 +22,9 @@ import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -52,6 +54,7 @@ public class EffectEffect extends SpellAbilityEffect {
         String[] effectReplacementEffects = null;
         FCollection<GameObject> rememberList = null;
         String effectImprinted = null;
+        String noteCounterDefined = null;
         List<Player> effectOwner = null;
         boolean imprintOnHost = false;
 
@@ -100,6 +103,10 @@ public class EffectEffect extends SpellAbilityEffect {
             effectImprinted = sa.getParam("ImprintCards");
         }
 
+        if (sa.hasParam("NoteCounterDefined")) {
+            noteCounterDefined = sa.getParam("NoteCounterDefined");
+        }
+
         String name = sa.getParam("Name");
         if (name == null) {
             name = hostCard.getName() + "'s Effect";
@@ -136,15 +143,13 @@ public class EffectEffect extends SpellAbilityEffect {
 
         for (Player controller : effectOwner) {
             final Card eff = createEffect(sa, controller, name, image);
+            eff.setSetCode(sa.getHostCard().getSetCode());
+            eff.setRarity(sa.getHostCard().getRarity());
 
             // Grant SVars first in order to give references to granted abilities
             if (effectSVars != null) {
                 for (final String s : effectSVars) {
-                    Card host = sa.getOriginalHost() != null && sa.getHostCard().getSVar(s).isEmpty()
-                            && sa.getOriginalHost().hasSVar(s) ? sa.getOriginalHost() : sa.getHostCard();
-
-                    final String actualSVar = host.getSVar(s);
-                    eff.setSVar(s, actualSVar);
+                    eff.setSVar(s, AbilityUtils.getSVar(sa, s));
                 }
             }
 
@@ -152,9 +157,7 @@ public class EffectEffect extends SpellAbilityEffect {
             // Grant abilities
             if (effectAbilities != null) {
                 for (final String s : effectAbilities) {
-                    final String actualAbility = AbilityUtils.getSVar(sa, s);
-
-                    final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, eff);
+                    final SpellAbility grantedAbility = AbilityFactory.getAbility(eff, s, sa);
                     eff.addSpellAbility(grantedAbility);
                     grantedAbility.setIntrinsic(true);
                 }
@@ -163,13 +166,11 @@ public class EffectEffect extends SpellAbilityEffect {
             // Grant triggers
             if (effectTriggers != null) {
                 for (final String s : effectTriggers) {
-                    final String actualTrigger = AbilityUtils.getSVar(sa, s);
-
-                    final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, eff, true);
-                    final String ability = AbilityUtils.getSVar(sa, parsedTrigger.getParam("Execute"));
-                    parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, eff));
-                    final Trigger addedTrigger = eff.addTrigger(parsedTrigger);
-                    addedTrigger.setIntrinsic(true);
+                    final Trigger parsedTrigger = TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), eff, true);
+                    parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(eff, parsedTrigger.getParam("Execute"), sa));
+                    parsedTrigger.setActiveZone(EnumSet.of(ZoneType.Command));
+                    parsedTrigger.setIntrinsic(true);
+                    eff.addTrigger(parsedTrigger);
                 }
             }
 
@@ -178,6 +179,7 @@ public class EffectEffect extends SpellAbilityEffect {
                 for (final String s : effectStaticAbilities) {
                     final StaticAbility addedStaticAbility = eff.addStaticAbility(AbilityUtils.getSVar(sa, s));
                     if (addedStaticAbility != null) //prevent npe casting adventure card spell
+                        addedStaticAbility.putParam("EffectZone", "Command");
                         addedStaticAbility.setIntrinsic(true);
                 }
             }
@@ -188,8 +190,9 @@ public class EffectEffect extends SpellAbilityEffect {
                     final String actualReplacement = AbilityUtils.getSVar(sa, s);
 
                     final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, eff, true);
-                    final ReplacementEffect addedReplacement = eff.addReplacementEffect(parsedReplacement);
-                    addedReplacement.setIntrinsic(true);
+                    parsedReplacement.setActiveZone(EnumSet.of(ZoneType.Command));
+                    parsedReplacement.setIntrinsic(true);
+                    eff.addReplacementEffect(parsedReplacement);
                 }
             }
 
@@ -208,8 +211,14 @@ public class EffectEffect extends SpellAbilityEffect {
                 }
                 if (sa.hasParam("ForgetOnMoved")) {
                     addForgetOnMovedTrigger(eff, sa.getParam("ForgetOnMoved"));
+                    if (!"Stack".equals(sa.getParam("ForgetOnMoved"))) {
+                        addForgetOnCastTrigger(eff);
+                    }
                 } else if (sa.hasParam("ExileOnMoved")) {
                     addExileOnMovedTrigger(eff, sa.getParam("ExileOnMoved"));
+                }
+                if (sa.hasParam("ForgetOnPhasedIn")) {
+                    addForgetOnPhasedInTrigger(eff);
                 }
                 if (sa.hasParam("ForgetCounter")) {
                     addForgetCounterTrigger(eff, sa.getParam("ForgetCounter"));
@@ -220,6 +229,13 @@ public class EffectEffect extends SpellAbilityEffect {
             if (effectImprinted != null) {
                 for (final Card c : AbilityUtils.getDefinedCards(hostCard, effectImprinted, sa)) {
                     eff.addImprintedCard(c);
+                }
+            }
+
+            // Note counters on defined
+            if (noteCounterDefined != null) {
+                for (final Card c : AbilityUtils.getDefinedCards(hostCard, noteCounterDefined, sa)) {
+                    noteCounters(c, eff);
                 }
             }
 
@@ -320,6 +336,14 @@ public class EffectEffect extends SpellAbilityEffect {
             //if (effectTriggers != null) {
             //    game.getTriggerHandler().registerActiveTrigger(cmdEffect, false);
             //}
+        }
+    }
+
+    private void noteCounters(Card notee, Card source) {
+        for(Map.Entry<CounterType, Integer> counter : notee.getCounters().entrySet()) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("NoteCounters").append(counter.getKey().getName());
+            source.setSVar(sb.toString(), counter.getValue().toString());
         }
     }
 

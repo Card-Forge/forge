@@ -165,7 +165,7 @@ public class GameCopier {
             if (newSa != null) {
                 newSa.setActivatingPlayer(map.map(origSa.getActivatingPlayer()));
                 if (origSa.usesTargeting()) {
-                    for (GameObject o : origSa.getTargets().getTargets()) {
+                    for (GameObject o : origSa.getTargets()) {
                         newSa.getTargets().add(map.map(o));
                     }
                 }
@@ -336,13 +336,18 @@ public class GameCopier {
             if (!c.getChosenType().isEmpty()) {
                 newCard.setChosenType(c.getChosenType());
             }
+            if (!c.getChosenType2().isEmpty()) {
+                newCard.setChosenType2(c.getChosenType2());
+            }
             if (c.getChosenColors() != null) {
                 newCard.setChosenColors(Lists.newArrayList(c.getChosenColors()));
             }
             if (!c.getNamedCard().isEmpty()) {
                 newCard.setNamedCard(c.getNamedCard());
             }
-
+            if (!c.getNamedCard2().isEmpty()) {
+                newCard.setNamedCard2(c.getNamedCard());
+            }
             newCard.setSVars(c.getSVars());
         }
 

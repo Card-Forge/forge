@@ -6,16 +6,19 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
  *
  */
 public enum ReplacementType {
     AddCounter(ReplaceAddCounter.class),
+    AssignDealDamage(ReplaceAssignDealDamage.class),
     Attached(ReplaceAttached.class),
     Counter(ReplaceCounter.class),
+    CopySpell(ReplaceCopySpell.class),
     CreateToken(ReplaceToken.class),
     DamageDone(ReplaceDamage.class),
+    DealtDamage(ReplaceDealtDamage.class),
     Destroy(ReplaceDestroy.class),
     Discard(ReplaceDiscard.class),
     Draw(ReplaceDraw.class),
@@ -25,8 +28,10 @@ public enum ReplacementType {
     Mill(ReplaceMill.class),
     Moved(ReplaceMoved.class),
     ProduceMana(ReplaceProduceMana.class),
+    Scry(ReplaceScry.class),
     SetInMotion(ReplaceSetInMotion.class),
     Surveil(ReplaceSurveil.class),
+    Tap(ReplaceTap.class),
     TurnFaceUp(ReplaceTurnFaceUp.class),
     Untap(ReplaceUntap.class);
 
@@ -44,7 +49,7 @@ public enum ReplacementType {
         }
         throw new RuntimeException("Element " + value + " not found in TriggerType enum");
     }
-    
+
     /**
      * TODO: Write javadoc for this method.
      * @param mapParams

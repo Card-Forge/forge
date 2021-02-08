@@ -84,10 +84,6 @@ public class PlayerControllerForTests extends PlayerController {
         return player;
     }
 
-    public Game getGame() {
-        return game;
-    }
-
     @Override
     public void playSpellAbilityForFree(SpellAbility copySA, boolean mayChoseNewTargets) {
         throw new IllegalStateException("Callers of this method currently assume that it performs extra functionality!");
@@ -131,7 +127,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public Integer announceRequirements(SpellAbility ability, String announce, boolean allowZero) {
+    public Integer announceRequirements(SpellAbility ability, String announce) {
         throw new IllegalStateException("Erring on the side of caution here...");
     }
 
@@ -202,7 +198,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public Player chooseStartingPlayer(boolean isFirstGame) {
+    public Player chooseStartingPlayer(boolean isFirstgame) {
         return this.player;
     }
 
@@ -320,7 +316,7 @@ public class PlayerControllerForTests extends PlayerController {
         if (playerActions == null) {
             return;
         }
-        DeclareAttackersAction declareAttackers = playerActions.getNextActionIfApplicable(player, game, DeclareAttackersAction.class);
+        DeclareAttackersAction declareAttackers = playerActions.getNextActionIfApplicable(player, getGame(), DeclareAttackersAction.class);
         if (declareAttackers == null) {
             return;
         }
@@ -330,11 +326,11 @@ public class PlayerControllerForTests extends PlayerController {
         //TODO: banding (don't really care at the moment...)
 
         for (Map.Entry<CardSpecification, PlayerSpecification> playerAttackAssignment : declareAttackers.getPlayerAttackAssignments().entrySet()) {
-            Player defender = getPlayerBeingAttacked(game, player, playerAttackAssignment.getValue());
+            Player defender = getPlayerBeingAttacked(getGame(), player, playerAttackAssignment.getValue());
             attack(combat, playerAttackAssignment.getKey(), defender);
         }
         for (Map.Entry<CardSpecification, CardSpecification> planeswalkerAttackAssignment: declareAttackers.getPlaneswalkerAttackAssignments().entrySet()) {
-            Card defender = CardSpecificationHandler.INSTANCE.find(game.getCardsInGame(), planeswalkerAttackAssignment.getKey());
+            Card defender = CardSpecificationHandler.INSTANCE.find(getGame().getCardsInGame(), planeswalkerAttackAssignment.getKey());
             attack(combat, planeswalkerAttackAssignment.getKey(), defender);
         }
 
@@ -345,12 +341,12 @@ public class PlayerControllerForTests extends PlayerController {
 
     private Player getPlayerBeingAttacked(Game game, Player attacker, PlayerSpecification defenderSpecification) {
         if (defenderSpecification != null) {
-            return PlayerSpecificationHandler.INSTANCE.find(game.getPlayers(), defenderSpecification);
+            return PlayerSpecificationHandler.INSTANCE.find(getGame().getPlayers(), defenderSpecification);
         }
-        if (game.getPlayers().size() != 2) {
+        if (getGame().getPlayers().size() != 2) {
             throw new IllegalStateException("Can't use implicit defender specification in this situation!");
         }
-        for (Player player : game.getPlayers()) {
+        for (Player player : getGame().getPlayers()) {
             if (!attacker.equals(player)) {
                 return player;
             }
@@ -372,7 +368,7 @@ public class PlayerControllerForTests extends PlayerController {
         if (playerActions == null) {
             return;
         }
-        DeclareBlockersAction declareBlockers = playerActions.getNextActionIfApplicable(player, game, DeclareBlockersAction.class);
+        DeclareBlockersAction declareBlockers = playerActions.getNextActionIfApplicable(player, getGame(), DeclareBlockersAction.class);
         if (declareBlockers == null) {
             return;
         }
@@ -384,7 +380,7 @@ public class PlayerControllerForTests extends PlayerController {
         for (Map.Entry<CardSpecification, Collection<CardSpecification>> blockingAssignment : declareBlockers.getBlockingAssignments().asMap().entrySet()) {
             Card attacker = CardSpecificationHandler.INSTANCE.find(combat.getAttackers(), blockingAssignment.getKey());
             for (CardSpecification blockerSpecification : blockingAssignment.getValue()) {
-                Card blocker = CardSpecificationHandler.INSTANCE.find(game, blockerSpecification);
+                Card blocker = CardSpecificationHandler.INSTANCE.find(getGame(), blockerSpecification);
                 if (!CombatUtil.canBlock(attacker, blocker)) {
                     throw new IllegalStateException(blocker + " can't block " + blocker);
                 }
@@ -402,14 +398,14 @@ public class PlayerControllerForTests extends PlayerController {
         //TODO: This method has to return the spellability chosen by player
         // It should not play the sa right from here. The code has been left as it is to quickly adapt to changed playercontroller interface 
         if (playerActions != null) {
-            CastSpellFromHandAction castSpellFromHand = playerActions.getNextActionIfApplicable(player, game, CastSpellFromHandAction.class);
+            CastSpellFromHandAction castSpellFromHand = playerActions.getNextActionIfApplicable(player, getGame(), CastSpellFromHandAction.class);
             if (castSpellFromHand != null) {
-                castSpellFromHand.castSpellFromHand(player, game);
+                castSpellFromHand.castSpellFromHand(player, getGame());
             }
 
-            ActivateAbilityAction activateAbilityAction = playerActions.getNextActionIfApplicable(player, game, ActivateAbilityAction.class);
+            ActivateAbilityAction activateAbilityAction = playerActions.getNextActionIfApplicable(player, getGame(), ActivateAbilityAction.class);
             if (activateAbilityAction != null) {
-                activateAbilityAction.activateAbility(player, game);
+                activateAbilityAction.activateAbility(player, getGame());
             }
         }
         return null;
@@ -526,7 +522,7 @@ public class PlayerControllerForTests extends PlayerController {
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
         for (final SpellAbility sa : activePlayerSAs) {
             prepareSingleSa(sa.getHostCard(),sa,true);
-            ComputerUtil.playStack(sa, player, game);
+            ComputerUtil.playStack(sa, player, getGame());
         }
     }
     
@@ -544,7 +540,7 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public void playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory) {
         prepareSingleSa(host, wrapperAbility, isMandatory);
-        ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, game);
+        ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, getGame());
     }
 
     @Override
@@ -557,9 +553,9 @@ public class PlayerControllerForTests extends PlayerController {
             // if (spell.canPlayFromEffectAI(player, !optional, noManaCost) || !optional) {  -- could not save this part
             if (spell.canPlay() || !optional) {
                 if (noManaCost) {
-                    ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, tgtSA, game);
+                    ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, tgtSA, getGame());
                 } else {
-                    ComputerUtil.playStack(tgtSA, player, game);
+                    ComputerUtil.playStack(tgtSA, player, getGame());
                 }
             } else 
                 return false; // didn't play spell
@@ -613,9 +609,9 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public void playChosenSpellAbility(SpellAbility sa) {
+    public boolean playChosenSpellAbility(SpellAbility sa) {
         // TODO Play abilities from here
-        
+        return true;
     }
 
     @Override

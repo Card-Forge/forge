@@ -2,9 +2,9 @@ Name:Suleiman's Legacy
 ManaCost:R W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME enters the battlefield, destroy all Djinns and Efreets. They can't be regenerated.
-SVar:TrigDestroyAll:DB$DestroyAll | ValidCards$ Djinn,Efreet | NoRegen$ True
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Djinn,Efreet | NoRegen$ True
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Djinn,Efreet | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a Djinn or Efreet enters the battlefield, destroy it. It can't be regenerated.
-SVar:TrigDestroy:DB$Destroy | Defined$ TriggeredCard | NoRegen$ True
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCardLKICopy | NoRegen$ True
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suleimans_legacy.jpg

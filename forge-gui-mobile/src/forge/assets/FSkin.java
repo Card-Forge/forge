@@ -37,6 +37,7 @@ public class FSkin {
     private static FileHandle preferredDir;
     private static String preferredName;
     private static boolean loaded = false;
+    public static Texture hdLogo = null;
 
     public static void changeSkin(final String skinName) {
         final ForgePreferences prefs = FModel.getPreferences();
@@ -124,6 +125,9 @@ public class FSkin {
 
         if (splashScreen != null) {
             final FileHandle f = getSkinFile("bg_splash.png");
+            final FileHandle f2 = getSkinFile("bg_splash_hd.png"); //HD Splashscreen
+            final FileHandle f3 = getSkinFile("hd_logo.png");
+
             if (!f.exists()) {
                 if (!skinName.equals("default")) {
                     FSkin.loadLight("default", splashScreen);
@@ -136,7 +140,21 @@ public class FSkin {
                 final int w = txSplash.getWidth();
                 final int h = txSplash.getHeight();
 
-                splashScreen.setBackground(new TextureRegion(txSplash, 0, 0, w, h - 100));
+                if (f2.exists()) {
+                    Texture txSplashHD = new Texture(f2, true);
+                    txSplashHD.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+                    splashScreen.setBackground(new TextureRegion(txSplashHD));
+                } else {
+                    splashScreen.setBackground(new TextureRegion(txSplash, 0, 0, w, h - 100));
+                }
+
+                if (f3.exists()) {
+                    Texture txOverlay = new Texture(f3, true);
+                    txOverlay.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+                    hdLogo = txOverlay;
+                } else {
+                    hdLogo = null;
+                }
 
                 Pixmap pxSplash = new Pixmap(f);
                 FProgressBar.BACK_COLOR = new Color(pxSplash.getPixel(25, h - 75));

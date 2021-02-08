@@ -6,7 +6,7 @@ R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.Zombie+Yo
 SVar:Mill:DB$ Mill | Defined$ ReplacedTarget | NumCards$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount
 T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+OppOwn | Origin$ Library | Destination$ Graveyard | Execute$ ExileAndToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature card is put into an opponent's graveyard from their library, exile that card and create a 2/2 black Zombie creature token.
-SVar:ExileAndToken:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBToken
+SVar:ExileAndToken:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1
 DeckHas:Ability$Token
 DeckHints:Type$Zombie
