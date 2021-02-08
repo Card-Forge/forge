@@ -2,7 +2,7 @@ Name:Bag of Holding
 ManaCost:1
 Types:Artifact
 T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever you discard a card, exile that card from your graveyard.
-SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Graveyard | Destination$ Exile
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile
 A:AB$ Draw | Cost$ 2 T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 AI:RemoveDeck:All
