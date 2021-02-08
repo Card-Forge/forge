@@ -4283,7 +4283,7 @@ public class CardFactoryUtil {
             final StringBuilder sbMutate = new StringBuilder();
             sbMutate.append("SP$ Mutate | Cost$ ");
             sbMutate.append(cost);
-            sbMutate.append(" | Mutate True | ValidTgts$ Creature.YouOwn+nonHuman");
+            sbMutate.append(" | Mutate True | ValidTgts$ Creature.sharesOwnerWith+nonHuman");
 
             final SpellAbility sa = AbilityFactory.getAbility(sbMutate.toString(), card);
             sa.setDescription("Mutate " + ManaCostParser.parse(cost) +

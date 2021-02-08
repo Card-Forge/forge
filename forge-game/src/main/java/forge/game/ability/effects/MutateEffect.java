@@ -18,14 +18,9 @@ public class MutateEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Player p = sa.getActivatingPlayer();
         final Card host = sa.getHostCard();
+        final Player p = host.getOwner();
         final Game game = host.getGame();
-        // There shouldn't be any mutate abilities, but for now.
-        if (sa.isSpell()) {
-            host.setController(p, 0);
-        }
-
         // 111.11. A copy of a permanent spell becomes a token as it resolves.
         // The token has the characteristics of the spell that became that token.
         // The token is not “created” for the purposes of any replacement effects or triggered abilities that refer to creating a token.
@@ -47,6 +42,11 @@ public class MutateEffect extends SpellAbilityEffect {
         );
         final boolean putOnTop = (topCard == host);
 
+        // There shouldn't be any mutate abilities, but for now.
+        if (sa.isSpell()) {
+            host.setController(p, 0);
+        }
+
         host.setMergedToCard(target);
         // If first time mutate, add target first.
         if (target.getMergedCards().isEmpty()) {
@@ -64,8 +64,8 @@ public class MutateEffect extends SpellAbilityEffect {
             target.setMutatedTimestamp(-1);
         }
         // Now add all abilities from bottom cards
-        final Long ts = game.getNextTimestamp();
         if (topCard.getCurrentStateName() != CardStateName.FaceDown) {
+            final Long ts = game.getNextTimestamp();
             final CardCloneStates mutatedStates = CardFactory.getMutatedCloneStates(target, sa);
             target.addCloneState(mutatedStates, ts);
             target.setMutatedTimestamp(ts);

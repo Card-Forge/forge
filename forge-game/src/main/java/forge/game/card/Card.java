@@ -2681,6 +2681,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // is this "Card" supposed to be a token?
     public final boolean isToken() {
+        if (!getMergedCards().isEmpty()) {
+            return getMergedCards().get(0).token;
+        }
         return token;
     }
     public final void setToken(boolean token0) {
@@ -2707,6 +2710,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final boolean isFaceDown() {
         //return currentStateName == CardStateName.FaceDown;
+        if (!getMergedCards().isEmpty()) {
+            return getMergedCards().get(0).facedown;
+        }
         return facedown;
     }
 
