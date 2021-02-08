@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +29,7 @@ import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.AlternativeCost;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -82,7 +84,7 @@ public class PlayEffect extends SpellAbilityEffect {
             tgtCards = new CardCollection(
                 AbilityUtils.filterListByType(game.getCardsIn(zones), sa.getParam("Valid"), sa)
             );
-            if ( sa.hasParam("ShowCards") ) {
+            if (sa.hasParam("ShowCards")) {
                 showCards = new CardCollection(AbilityUtils.filterListByType(game.getCardsIn(zones), sa.getParam("ShowCards"), sa));
             }
         }
@@ -102,7 +104,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 final CardCollection choice = new CardCollection();
                 final String num = sa.hasParam("RandomNum") ? sa.getParam("RandomNum") : "1";
                 int ncopied = AbilityUtils.calculateAmount(source, num, sa);
-                while(ncopied > 0) {
+                while (ncopied > 0) {
                     final PaperCard cp = Aggregates.random(copysource);
                     final Card possibleCard = Card.fromPaperCard(cp, sa.getActivatingPlayer());
                     // Need to temporarily set the Owner so the Game is set
@@ -143,6 +145,21 @@ public class PlayEffect extends SpellAbilityEffect {
 
         if (tgtCards.isEmpty()) {
             return;
+        }
+
+        if (sa.hasParam("ValidSA")) {
+            final String valid[] = {sa.getParam("ValidSA")};
+            final Iterator<Card> itr = tgtCards.iterator();
+            while (itr.hasNext()) {
+                final Card c = itr.next();
+                final List<SpellAbility> validSA = Lists.newArrayList(Iterables.filter(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , c, sa)));
+                if (validSA.size() == 0) {
+                    itr.remove();
+                }
+            }
+            if (tgtCards.isEmpty()) {
+                return;
+            }
         }
 
         if (sa.hasParam("Amount") && sa.getParam("Amount").equals("All")) {
@@ -214,7 +231,12 @@ public class PlayEffect extends SpellAbilityEffect {
             }
 
             // get basic spells (no flashback, etc.)
-            final List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, controller);
+            List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, controller);
+            if (sa.hasParam("ValidSA")) {
+                final String valid[] = {sa.getParam("ValidSA")};
+                sas = Lists.newArrayList(Iterables.filter(sas, SpellAbilityPredicates.isValid(valid, controller , source, sa)));
+            }
+
             if (sas.isEmpty()) {
                 continue;
             }
@@ -232,6 +254,10 @@ public class PlayEffect extends SpellAbilityEffect {
             } else {
                 // For Illusionary Mask effect
                 tgtSA = CardFactoryUtil.abilityMorphDown(tgtCard);
+            }
+            // in case player canceled from choice dialog
+            if (tgtSA == null) {
+                continue;
             }
 
             final boolean noManaCost = sa.hasParam("WithoutManaCost");
