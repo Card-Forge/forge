@@ -2,7 +2,7 @@ Name:Firja's Retribution
 ManaCost:1 W W B
 Types:Enchantment Saga
 K:Saga:3:TrigAngel,DBAnimateAll,TrigPump
-SVar:TrigAngel:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying_vigilance | TokenOwner$ You | SpellDescription$ Create a 4/4 white Angel creature token with flying and vigilance.
+SVar:TrigAngel:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_warrior_flying_vigilance | TokenOwner$ You | SpellDescription$ Create a 4/4 white Angel creature token with flying and vigilance.
 SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Angel.YouCtrl | Abilities$ TapDestroy | SpellDescription$ Until the end of turn, Angels you control gain "{T}: Destroy target creature with power less than this creature."
 SVar:TapDestroy:AB$ Destroy | Cost$ T | ValidTgts$ Creature.powerLTX | References$ X | TgtPrompt$ Select target creature with power less than this creature | SpellDescription$ Destroy target creature with power less than this creature.
 SVar:X:Count$CardPower
