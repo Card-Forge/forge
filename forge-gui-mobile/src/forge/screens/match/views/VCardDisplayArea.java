@@ -62,7 +62,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
         if (isVisible()) { //only revalidate if currently visible
             revalidate();
-
+    
             if (newCardPanel != null) { //if new cards added, ensure first new card is scrolled into view
                 scrollIntoView(newCardPanel);
             }
@@ -286,17 +286,6 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
             attachedPanels.clear();
 
-            // Treat merged cards like attached cards
-            if (card.hasMergedCards()) {
-                final Iterable<CardView> merged = card.getMergedCards();
-                for (final CardView c : merged) {
-                    final CardAreaPanel cardC = CardAreaPanel.get(c);
-                    if (cardC != null) {
-                        attachedPanels.add(cardC);
-                    }
-                }
-            }
-
             if (card.hasCardAttachments()) {
                 final Iterable<CardView> enchants = card.getAttachedCards();
                 for (final CardView e : enchants) {
@@ -306,11 +295,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                     }
                 }
             }
-
-            if (card.getMergedTo() != null ) {
-                setAttachedToPanel(CardAreaPanel.get(card.getMergedTo()));
-            }
-            else if (card.getAttachedTo() != null) {
+       
+            if (card.getAttachedTo() != null) {
                 setAttachedToPanel(CardAreaPanel.get(card.getAttachedTo()));
             }
             else {

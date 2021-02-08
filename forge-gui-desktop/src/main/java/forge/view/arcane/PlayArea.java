@@ -685,21 +685,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         toPanel.getAttachedPanels().clear();
 
-        // Treat merged cards like attached cards
-        if (card.hasMergedCards()) {
-            final Iterable<CardView> merged = card.getMergedCards();
-            for (final CardView c : merged) {
-                final CardPanel cardC = getCardPanel(c.getId());
-                if (cardC != null) {
-                    if (cardC.getAttachedToPanel() != toPanel) {
-                        cardC.setAttachedToPanel(toPanel);
-                        needLayoutRefresh = true; //ensure layout refreshed if any attachments change
-                    }
-                    toPanel.getAttachedPanels().add(cardC);
-                }
-            }
-        }
-
         if (card.hasCardAttachments()) {
             final Iterable<CardView> enchants = card.getAttachedCards();
             for (final CardView e : enchants) {
@@ -714,13 +699,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             }
         }
 
-        // Treat merged cards like attached cards
         CardPanel attachedToPanel;
-        if (card.getMergedTo() != null) {
-            attachedToPanel = getCardPanel(card.getMergedTo().getId());
-        } else if (card.getAttachedTo() != null) {
+        if (card.getAttachedTo() != null) {
             attachedToPanel = getCardPanel(card.getAttachedTo().getId());
-        } else {
+        }
+        else {
             attachedToPanel = null;
         }
         if (toPanel.getAttachedToPanel() != attachedToPanel) {

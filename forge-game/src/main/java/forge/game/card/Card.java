@@ -1010,8 +1010,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void addMergedCard(final Card c) {
         mergedCards = view.addCard(mergedCards, c, TrackableProperty.MergedCards);
     }
-    public final void addMergedCards(final Iterable<Card> cards) {
-        mergedCards = view.addCards(mergedCards, cards, TrackableProperty.MergedCards);
+    public final void addMergedCardToTop(final Card c) {
+        mergedCards.add(0, c);
+        view.setCards(mergedCards, mergedCards, TrackableProperty.MergedCards);
     }
     public final void removeMergedCard(final Card c) {
         mergedCards = view.removeCard(mergedCards, c, TrackableProperty.MergedCards);
@@ -1028,7 +1029,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean isMerged() {
-        return !getMergedCards().isEmpty() || getMergedToCard() != null;
+        return getMergedToCard() != null;
     }
 
     public final boolean isMutated() {
@@ -3740,9 +3741,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (tapped == tapped0) { return; }
         tapped = tapped0;
         view.updateTapped(this);
-        for (final Card c : getMergedCards()) {
-            c.setTapped(tapped0);
-        }
     }
 
     public final void tap() {

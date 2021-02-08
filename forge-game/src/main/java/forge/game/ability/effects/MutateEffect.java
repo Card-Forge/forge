@@ -47,16 +47,16 @@ public class MutateEffect extends SpellAbilityEffect {
         );
         final boolean putOnTop = (topCard == host);
 
+        host.setMergedToCard(target);
+        // If first time mutate, add target first.
+        if (target.getMergedCards().isEmpty()) {
+            target.addMergedCard(target);
+        }
         if (putOnTop) {
-            host.addMergedCard(target);
-            host.addMergedCards(target.getMergedCards());
-            target.clearMergedCards();
-            target.setMergedToCard(host);
+            target.addMergedCardToTop(host);
         } else {
             target.addMergedCard(host);
-            host.setMergedToCard(target);
         }
-
 
         // First remove current mutated states
         if (target.getMutatedTimestamp() != -1) {
@@ -66,27 +66,21 @@ public class MutateEffect extends SpellAbilityEffect {
         // Now add all abilities from bottom cards
         final Long ts = game.getNextTimestamp();
         if (topCard.getCurrentStateName() != CardStateName.FaceDown) {
-            final CardCloneStates mutatedStates = CardFactory.getMutatedCloneStates(topCard, sa);
-            topCard.addCloneState(mutatedStates, ts);
-            topCard.setMutatedTimestamp(ts);
+            final CardCloneStates mutatedStates = CardFactory.getMutatedCloneStates(target, sa);
+            target.addCloneState(mutatedStates, ts);
+            target.setMutatedTimestamp(ts);
         }
-        if (topCard == target) {
-            // Re-register triggers for target card
-            game.getTriggerHandler().clearActiveTriggers(target, null);
-            game.getTriggerHandler().registerActiveTrigger(target, false);
-        }
+        // Re-register triggers for target card
+        game.getTriggerHandler().clearActiveTriggers(target, null);
+        game.getTriggerHandler().registerActiveTrigger(target, false);
 
         game.getAction().moveToPlay(host, p, sa);
 
-        if (topCard == host) {
-            CardFactory.migrateTopCard(host, target);
-        } else {
-            host.setTapped(target.isTapped());
-            host.setFlipped(target.isFlipped());
-        }
-        topCard.setTimesMutated(topCard.getTimesMutated() + 1);
+        host.setTapped(target.isTapped());
+        host.setFlipped(target.isFlipped());
+        target.setTimesMutated(target.getTimesMutated() + 1);
 
-        game.getTriggerHandler().runTrigger(TriggerType.Mutates, AbilityKey.mapFromCard(topCard), false);
+        game.getTriggerHandler().runTrigger(TriggerType.Mutates, AbilityKey.mapFromCard(target), false);
     }
 
 }

@@ -823,49 +823,23 @@ public class CardFactory {
     }
 
     public static CardCloneStates getMutatedCloneStates(final Card card, final CardTraitBase sa) {
-        final CardStateName state = card.getCurrentStateName();
+        final Card top = card.getMergedCards().get(0);
+        final CardStateName state = top.getCurrentStateName();
         final CardState ret = new CardState(card, state);
-        ret.copyFrom(card.getState(state, true), false);
+        ret.copyFrom(top.getState(state, true), false);
 
+        boolean first = true;
         for (final Card c : card.getMergedCards()) {
+            if (first) {
+                first = false;
+                continue;
+            }
             ret.addAbilitiesFrom(c.getCurrentState(), false);
         }
 
-        final CardCloneStates result = new CardCloneStates(card, sa);
+        final CardCloneStates result = new CardCloneStates(top, sa);
         result.put(state, ret);
         return result;
-    }
-
-    public static void migrateTopCard(final Card host, final Card target) {
-        // Copy all status from target card and migrate all counters
-        // Also update all reference of target card to new top card
-
-        // TODO: find out all necessary status that should be copied
-        host.setTapped(target.isTapped());
-        host.setSickness(target.isFirstTurnControlled());
-        host.setFlipped(target.isFlipped());
-        host.setDamage(target.getDamage());
-        host.setTimesMutated(target.getTimesMutated());
-        host.setMonstrous(target.isMonstrous());
-        host.setRenowned(target.isRenowned());
-
-        // Migrate counters
-        Map<CounterType, Integer> counters = target.getCounters();
-        if (!counters.isEmpty()) {
-            host.setCounters(Maps.newHashMap(counters));
-        }
-        target.clearCounters();
-
-        // Migrate attached cards
-        CardCollectionView attached = target.getAttachedCards();
-        for (final Card c : attached) {
-            c.setEntityAttachedTo(host);
-        }
-        target.setAttachedCards(null);
-        host.setAttachedCards(attached);
-
-        // TODO: move all remembered, imprinted objects to new top card
-        //       and possibly many other needs to be migrated.
     }
 
 } // end class AbstractCardFactory

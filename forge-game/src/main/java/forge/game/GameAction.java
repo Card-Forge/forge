@@ -338,13 +338,10 @@ public class GameAction {
         }
 
         // update state for view
-        copied.updateStateForView();
         if (copied.isMerged()) {
-            if (copied.getMergedToCard() != null) {
-                copied.getMergedToCard().updateStateForView();
-            } else {
-                copied.getMergedCards().get(0).updateStateForView();
-            }
+            copied.getMergedToCard().updateStateForView();
+        } else {
+            copied.updateStateForView();
         }
 
         if (fromBattlefield) {
