@@ -78,7 +78,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
 public class Player extends GameEntity implements Comparable<Player> {
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
-            ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck, ZoneType.Subgame));
+            ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck, ZoneType.Merged, ZoneType.Subgame));
 
     private final Map<Card, Integer> commanderDamage = Maps.newHashMap();
 
@@ -3021,7 +3021,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             Set<CardStateName> cardStateNames = c.isSplitCard() ?  EnumSet.of(CardStateName.LeftSplit, CardStateName.RightSplit) : EnumSet.of(CardStateName.Original);
         	Set<ManaCostShard> coloredManaSymbols = new HashSet<>();
         	Set<Integer> genericManaSymbols = new HashSet<>();
-        	
+
         	for (final CardStateName cardStateName : cardStateNames) {
         		final ManaCost manaCost = c.getState(cardStateName).getManaCost();
 	        	for (final ManaCostShard manaSymbol : manaCost) {

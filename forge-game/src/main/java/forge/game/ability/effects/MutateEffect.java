@@ -13,6 +13,7 @@ import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
 
 public class MutateEffect extends SpellAbilityEffect {
 
@@ -49,7 +50,7 @@ public class MutateEffect extends SpellAbilityEffect {
 
         host.setMergedToCard(target);
         // If first time mutate, add target first.
-        if (target.getMergedCards().isEmpty()) {
+        if (!target.hasMergedCard()) {
             target.addMergedCard(target);
         }
         if (putOnTop) {
@@ -74,7 +75,7 @@ public class MutateEffect extends SpellAbilityEffect {
         game.getTriggerHandler().clearActiveTriggers(target, null);
         game.getTriggerHandler().registerActiveTrigger(target, false);
 
-        game.getAction().moveToPlay(host, p, sa);
+        game.getAction().moveTo(p.getZone(ZoneType.Merged), host, sa);
 
         host.setTapped(target.isTapped());
         host.setFlipped(target.isFlipped());

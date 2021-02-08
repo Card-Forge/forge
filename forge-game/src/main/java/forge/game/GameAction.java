@@ -83,6 +83,29 @@ public class GameAction {
     }
 
     private Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause, Map<AbilityKey, Object> params) {
+        // Handle merged permanent
+        boolean fromBattlefield = zoneFrom != null && zoneFrom.is(ZoneType.Battlefield);
+        if (fromBattlefield && c.hasMergedCard()) {
+            Card ret = null;
+            c.setTimesMutated(0);
+            c.removeCloneState(c.getMutatedTimestamp());
+            c.setMutatedTimestamp(-1);
+            CardCollection cards = (CardCollection)c.getMergedCards();
+            cards = (CardCollection) c.getController().getController().orderMoveToZoneList(cards, zoneTo.getZoneType());
+            Integer mergedPos = position == null ? 0 : position;
+            for (final Card card : cards) {
+                card.setMergedToCard(null);
+                Card t = changeZoneWrapped(card.getZone(), zoneTo, card, mergedPos, cause, params);
+                if (card == c) ret = t;
+                mergedPos++;
+            }
+            return ret;
+        } else {
+            return changeZoneWrapped(zoneFrom, zoneTo, c, position, cause, params);
+        }
+    }
+
+    private Card changeZoneWrapped(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause, Map<AbilityKey, Object> params) {
         if (c.isCopiedSpell() || (c.isImmutable() && zoneTo.is(ZoneType.Exile))) {
             // Remove Effect from command immediately, this is essential when some replacement
             // effects happen during the resolving of a spellability ("the next time ..." effect)
@@ -120,7 +143,7 @@ public class GameAction {
             game.addChangeZoneLKIInfo(c);
         }
 
-        boolean suppress = (!c.isToken() && zoneFrom.equals(zoneTo)) || c.isMerged();
+        boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
 
         Card copied = null;
         Card lastKnownInfo = null;
@@ -432,7 +455,7 @@ public class GameAction {
                     // Ask controller if it wants to be on top or bottom of other meld.
                     unmeldPosition++;
                 }
-                changeZone(null, zoneTo, unmeld, position, cause, params);
+                changeZoneWrapped(null, zoneTo, unmeld, position, cause, params);
             }
             // Reveal if face-down
             if (wasFacedown) {

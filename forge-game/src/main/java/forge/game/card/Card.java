@@ -1001,11 +1001,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final CardCollectionView getMergedCards() {
         return CardCollection.getView(mergedCards);
     }
+    public final Card getTopMergedCard() {
+        return mergedCards.get(0);
+    }
     public final boolean hasMergedCard() {
         return FCollection.hasElements(mergedCards);
-    }
-    public final boolean hasMergedCard(Card c) {
-        return FCollection.hasElement(mergedCards, c);
     }
     public final void addMergedCard(final Card c) {
         mergedCards = view.addCard(mergedCards, c, TrackableProperty.MergedCards);
@@ -1027,7 +1027,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setMergedToCard(final Card c) {
         mergedTo = view.setCard(mergedTo, c, TrackableProperty.MergedTo);
     }
-
     public final boolean isMerged() {
         return getMergedToCard() != null;
     }
@@ -1035,7 +1034,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isMutated() {
         return mutatedTimestamp != -1;
     }
-
     public final long getMutatedTimestamp() {
         return mutatedTimestamp;
     }
@@ -2681,8 +2679,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // is this "Card" supposed to be a token?
     public final boolean isToken() {
-        if (!getMergedCards().isEmpty()) {
-            return getMergedCards().get(0).token;
+        if (hasMergedCard()) {
+            return getTopMergedCard().token;
         }
         return token;
     }
@@ -2710,8 +2708,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final boolean isFaceDown() {
         //return currentStateName == CardStateName.FaceDown;
-        if (!getMergedCards().isEmpty()) {
-            return getMergedCards().get(0).facedown;
+        if (hasMergedCard()) {
+            return getTopMergedCard().facedown;
         }
         return facedown;
     }

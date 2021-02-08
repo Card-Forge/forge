@@ -372,6 +372,12 @@ public class AbilityUtils {
             // When remembering a card that flickers, also remember it's meld pair
             coll.add(game.getCardState(c.getMeldedWith()));
         }
+        if (c.hasMergedCard()) {
+            for (final Card card : c.getMergedCards()) {
+                if (card == c) continue;
+                coll.add(game.getCardState(card));
+            }
+        }
         coll.add(newState);
         return coll;
     }
@@ -392,7 +398,7 @@ public class AbilityUtils {
      * <p>
      * calculateAmount.
      * </p>
-     * 
+     *
      * @param card
      *            a {@link forge.game.card.Card} object.
      * @param amount
@@ -789,7 +795,7 @@ public class AbilityUtils {
      * <p>
      * getDefinedObjects.
      * </p>
-     * 
+     *
      * @param card
      *            a {@link forge.game.card.Card} object.
      * @param def
@@ -819,7 +825,7 @@ public class AbilityUtils {
 
     /**
      * Filter list by type.
-     * 
+     *
      * @param list
      *            a CardList
      * @param type
@@ -948,7 +954,7 @@ public class AbilityUtils {
      * <p>
      * getDefinedPlayers.
      * </p>
-     * 
+     *
      * @param card
      *            a {@link forge.game.card.Card} object.
      * @param def
@@ -1222,7 +1228,7 @@ public class AbilityUtils {
      * <p>
      * getDefinedSpellAbilities.
      * </p>
-     * 
+     *
      * @param card
      *            a {@link forge.game.card.Card} object.
      * @param def
@@ -1486,7 +1492,7 @@ public class AbilityUtils {
      * <p>
      * handleRemembering.
      * </p>
-     * 
+     *
      * @param sa
      *            a SpellAbility object.
      */
@@ -1551,7 +1557,7 @@ public class AbilityUtils {
      * <p>
      * Parse non-mana X variables.
      * </p>
-     * 
+     *
      * @param c
      *            a {@link forge.game.card.Card} object.
      * @param s
@@ -1713,7 +1719,7 @@ public class AbilityUtils {
                     final String payingMana = StringUtils.join(sa.getRootAbility().getPayingMana());
                     final int num = sq[0].length() > 7 ? Integer.parseInt(sq[0].split("_")[1]) : 3;
                     final boolean adamant = StringUtils.countMatches(payingMana, MagicColor.toShortString(sq[1])) >= num;
-                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[adamant ? 2 : 3]), expr, c); 
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[adamant ? 2 : 3]), expr, c);
                 }
 
                 if (l[0].startsWith("LastStateBattlefield")) {
@@ -1962,7 +1968,7 @@ public class AbilityUtils {
         }
         return cause;
     }
-    
+
 
     public static SpellAbility addSpliceEffects(final SpellAbility sa) {
         final Card source = sa.getHostCard();
@@ -2022,7 +2028,7 @@ public class AbilityUtils {
 
         if (spliceCost == null)
             return;
-        
+
         SpellAbility firstSpell = c.getFirstSpellAbility();
         Map<String, String> params = Maps.newHashMap(firstSpell.getMapParams());
         ApiType api = AbilityRecordType.getRecordType(params).getApiTypeOf(params);

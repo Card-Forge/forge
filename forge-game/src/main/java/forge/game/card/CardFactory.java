@@ -823,7 +823,7 @@ public class CardFactory {
     }
 
     public static CardCloneStates getMutatedCloneStates(final Card card, final CardTraitBase sa) {
-        final Card top = card.getMergedCards().get(0);
+        final Card top = card.getTopMergedCard();
         final CardStateName state = top.getCurrentStateName();
         final CardState ret = new CardState(card, state);
         ret.copyFrom(top.getState(state, true), false);
