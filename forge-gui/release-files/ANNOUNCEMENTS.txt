@@ -1,6 +1,5 @@
 #Add one announcement per line
-Keyboard shortcut change: to help improve accessibility, the arrow key shortcuts to move between deck editor tables now require control or Command, depending on which platform you're on.
-Jumpstart sealed!
-Double Masters (including double pick)
-Lots of art updates and fixes
+Sorry for the long wait between releases. Pandemic + Technology issues caused some issues we couldn't hurdle. 
+Get in the discord if you aren't yet.
+Lots of new cards including Kaldheim.
 No update on Mutate yet. Trust us, you'll know when it's here. 
