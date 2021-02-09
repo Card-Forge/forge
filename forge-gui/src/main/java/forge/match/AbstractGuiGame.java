@@ -230,6 +230,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             case Meld:
             case Modal:
                 return true;
+            case Adventure:
+                if (cv.isFaceDown()) {
+                    return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());
+                }
+                return false;
             default:
                 return false;
         }

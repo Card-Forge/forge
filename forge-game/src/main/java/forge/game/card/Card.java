@@ -597,10 +597,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public Card manifest(Player p, SpellAbility sa) {
         // Turn Face Down (even if it's DFC).
-        ManaCost cost = getState(CardStateName.Original).getManaCost();
-
-        boolean isCreature = isCreature();
-
         // Sometimes cards are manifested while already being face down
         if (!turnFaceDown(true) && !isFaceDown()) {
             return null;
@@ -615,11 +611,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         setManifested(true);
 
         Card c = game.getAction().moveToPlay(this, p, sa);
-
-        // Add manifest demorph static ability for creatures
-        if (c.isManifested() && isCreature && !cost.isNoCost()) {
-            // Add Manifest to original State
-            c.getState(CardStateName.Original).addSpellAbility(CardFactoryUtil.abilityManifestFaceUp(c, cost));
+        if (c.isInPlay()) {
+            c.setManifested(true);
+            c.turnFaceDown(true);
             c.updateStateForView();
         }
 
@@ -5307,15 +5301,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // Note: This should only be called after state has been set to CardStateName.FaceDown,
         // so the below call should be valid since the state should have been created already.
         getState(CardStateName.FaceDown).setImageKey(ImageKeys.getTokenKey(image));
-        if (!manifested) {
-            // remove Manifest Up abilities from Original State
-            CardState original = getState(CardStateName.Original);
-            for (SpellAbility sa : original.getNonManaAbilities()) {
-                if (sa.isManifestUp()) {
-                    original.removeSpellAbility(sa);
-                }
-            }
-        }
     }
 
     public final boolean isForetold() {
@@ -6165,6 +6150,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     abilities.add(sa);
                     abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
                 }
+            }
+        }
+
+        if (isInPlay() && isFaceDown() && isManifested()) {
+            CardState oState = getState(CardStateName.Original);
+            ManaCost cost = oState.getManaCost();
+            if (oState.getType().isCreature()) {
+                abilities.add(CardFactoryUtil.abilityManifestFaceUp(this, cost));
             }
         }
 
