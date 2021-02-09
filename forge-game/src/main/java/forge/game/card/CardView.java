@@ -25,6 +25,7 @@ import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
+import forge.util.CardTranslation;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.EnumSet;
@@ -922,7 +923,7 @@ public class CardView extends GameEntityView {
                 }
             }
         }
-        return (zone + ' ' + name + " (" + getId() + ")").trim();
+        return (zone + ' ' + CardTranslation.getTranslatedName(name) + " (" + getId() + ")").trim();
     }
 
     public class CardStateView extends TrackableObject {
