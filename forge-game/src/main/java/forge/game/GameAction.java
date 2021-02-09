@@ -206,7 +206,7 @@ public class GameAction {
             if (!c.isToken()) {
                 copied = CardFactory.copyCard(c, false);
 
-                if (fromBattlefield) {
+                if (!zoneTo.is(ZoneType.Stack)) {
                     // when a card leaves the battlefield, ensure it's in its original state
                     // (we need to do this on the object before copying it, or it won't work correctly e.g.
                     // on Transformed objects)
