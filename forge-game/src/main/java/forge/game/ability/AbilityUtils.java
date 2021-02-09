@@ -3,7 +3,10 @@ package forge.game.ability;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
+import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -1820,7 +1823,11 @@ public class AbilityUtils {
 
     public static final List<SpellAbility> getBasicSpellsFromPlayEffect(final Card tgtCard, final Player controller) {
         List<SpellAbility> sas = new ArrayList<>();
-        for (SpellAbility s : tgtCard.getBasicSpells()) {
+        List<SpellAbility> list = Lists.newArrayList(tgtCard.getBasicSpells());
+        if (tgtCard.isModal()) {
+            list.addAll(Lists.newArrayList(tgtCard.getBasicSpells(tgtCard.getState(CardStateName.Modal))));
+        }
+        for (SpellAbility s : list) {
             final Spell newSA = (Spell) s.copy();
             newSA.setActivatingPlayer(controller);
             SpellAbilityRestriction res = new SpellAbilityRestriction();

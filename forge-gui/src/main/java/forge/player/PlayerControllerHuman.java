@@ -1655,12 +1655,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         CardFaceView cardFaceView;
         List<CardFaceView> choices = new ArrayList<>();
         for (ICardFace cardFace : cards) {
-            cardFaceView = new CardFaceView(cardFace.getName());
+            cardFaceView = new CardFaceView(CardTranslation.getTranslatedName(cardFace.getName()), cardFace.getName());
             choices.add(cardFaceView);
         }
         Collections.sort(choices);
         cardFaceView = getGui().one(message, choices);
-        return StaticData.instance().getCommonCards().getFaceByName(cardFaceView.getName());
+        return StaticData.instance().getCommonCards().getFaceByName(cardFaceView.getOracleName());
     }
 
     @Override
@@ -2071,7 +2071,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public class DevModeCheats implements IDevModeCheats {
-        private ICardFace lastAdded;
+        private CardFaceView lastAdded;
         private ZoneType lastAddedZone;
         private Player lastAddedPlayer;
         private SpellAbility lastAddedSA;
@@ -2504,15 +2504,21 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             final CardDb carddb = FModel.getMagicDb().getCommonCards();
             final List<ICardFace> faces = Lists.newArrayList(carddb.getAllFaces());
-            Collections.sort(faces);
+            List<CardFaceView> choices = new ArrayList<>();
+            CardFaceView cardFaceView;
+            for (ICardFace cardFace : faces) {
+                cardFaceView = new CardFaceView(CardTranslation.getTranslatedName(cardFace.getName()), cardFace.getName());
+                choices.add(cardFaceView);
+            }
+            Collections.sort(choices);
 
             // use standard forge's list selection dialog
-            final ICardFace f = repeatLast ? lastAdded : getGui().oneOrNone(localizer.getMessage("lblNameTheCard"), faces);
+            final CardFaceView f = repeatLast ? lastAdded : getGui().oneOrNone(localizer.getMessage("lblNameTheCard"), choices);
             if (f == null) {
                 return;
             }
 
-            final PaperCard c = carddb.getUniqueByName(f.getName());
+            final PaperCard c = carddb.getUniqueByName(f.getOracleName());
             final Card forgeCard = Card.fromPaperCard(c, p);
             forgeCard.setTimestamp(getGame().getNextTimestamp());
 

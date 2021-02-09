@@ -3,24 +3,40 @@ package forge.game.card;
 import java.io.Serializable;
 
 public class CardFaceView implements Serializable, Comparable<CardFaceView> {
-    private String name;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1874016432028306386L;
+    private String displayName;
+    private String oracleName;
 
-    public CardFaceView(String faceName) {
-        this.name = faceName;
+    public CardFaceView(String displayName) {
+        this(displayName, displayName);
     }
 
-    public String getName() { return name;}
+    public CardFaceView(String displayFaceName, String oracleFaceName ) {
+        this.displayName = displayFaceName;
+        this.oracleName = oracleFaceName;
+    }
+
+    public String getName() { return displayName;}
 
     public void setName(String name) {
-        this.name = name;
+        this.displayName = name;
+    }
+
+    public String getOracleName() { return oracleName; }
+
+    public void setOracleName(String name) {
+        this.oracleName = name;
     }
 
     public String toString() {
-        return name;
+        return displayName;
     }
 
     @Override
     public int compareTo(CardFaceView o) {
-        return this.getName().compareTo(o.getName());
+        return this.getOracleName().compareTo(o.getOracleName());
     }
 }

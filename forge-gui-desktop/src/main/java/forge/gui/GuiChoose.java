@@ -167,7 +167,7 @@ public class GuiChoose {
                                 if (sel instanceof ICardFace) {
                                     faceName = ((ICardFace) sel).getName();
                                 } else {
-                                    faceName = ((CardFaceView) sel).getName();
+                                    faceName = ((CardFaceView) sel).getOracleName();
                                 }
                                 PaperCard paper = FModel.getMagicDb().getCommonCards().getUniqueByName(faceName);
                                 if (paper == null) {

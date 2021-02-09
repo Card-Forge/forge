@@ -177,6 +177,12 @@ public class ForgeScript {
             return sa.getActivatingPlayer().equals(sourceController);
         } else if (property.equals("OppCtrl")) {
             return sa.getActivatingPlayer().isOpponentOf(sourceController);
+        } else if (property.startsWith("cmc")) {
+            int y = sa.getPayCosts().getTotalMana().getCMC();
+            int x = AbilityUtils.calculateAmount(spellAbility.getHostCard(), property.substring(5), spellAbility);
+            if (!Expressions.compare(y, property, x)) {
+                return false;
+            }
         } else if (sa.getHostCard() != null) {
             return sa.getHostCard().hasProperty(property, sourceController, source, spellAbility);
         }

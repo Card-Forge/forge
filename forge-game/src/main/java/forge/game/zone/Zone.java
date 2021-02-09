@@ -211,6 +211,13 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         return getCardsAdded(cardsAddedLastTurn, origin);
     }
 
+    public final boolean isCardAddedThisTurn(final Card card, final ZoneType origin) {
+        if (!cardsAddedThisTurn.containsKey(origin)) {
+            return false;
+        }
+        return cardsAddedThisTurn.get(origin).contains(card);
+    }
+
     private static List<Card> getCardsAdded(final MapOfLists<ZoneType, Card> cardsAdded, final ZoneType origin) {
         if (origin != null) {
             final Collection<Card> cards = cardsAdded.get(origin);
