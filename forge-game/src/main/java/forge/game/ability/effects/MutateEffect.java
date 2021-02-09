@@ -62,15 +62,14 @@ public class MutateEffect extends SpellAbilityEffect {
         // First remove current mutated states
         if (target.getMutatedTimestamp() != -1) {
             target.removeCloneState(target.getMutatedTimestamp());
-            target.setMutatedTimestamp(-1);
         }
         // Now add all abilities from bottom cards
+        final Long ts = game.getNextTimestamp();
         if (topCard.getCurrentStateName() != CardStateName.FaceDown) {
-            final Long ts = game.getNextTimestamp();
             final CardCloneStates mutatedStates = CardFactory.getMutatedCloneStates(target, sa);
             target.addCloneState(mutatedStates, ts);
-            target.setMutatedTimestamp(ts);
         }
+        target.setMutatedTimestamp(ts);
         // Re-register triggers for target card
         game.getTriggerHandler().clearActiveTriggers(target, null);
         game.getTriggerHandler().registerActiveTrigger(target, false);

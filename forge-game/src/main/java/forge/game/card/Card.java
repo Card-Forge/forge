@@ -551,18 +551,30 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // and then any effect have it turn upface again and demand its former flip state to be restored
         // Proof: Morph cards never have ability that makes them flip, Ixidron does not suppose cards to be turned face up again,
         // Illusionary Mask affects cards in hand.
-        CardStateName oldState = getCurrentStateName();
-        if (mode.equals("Transform") && isDoubleFaced()) {
+        if (mode.equals("Transform") && (isDoubleFaced() || hasMergedCard())) {
             if (!canTransform()) {
                 return false;
             }
 
-            backside = !backside;
+            if (hasMergedCard()) {
+                removeMutatedStates();
+            }
+            CardCollectionView cards = hasMergedCard() ? getMergedCards() : new CardCollection(this);
+            boolean retResult = false;
+            for (final Card c : cards) {
+                if (!c.isDoubleFaced()) {
+                    continue;
+                }
+                c.backside = !c.backside;
 
-            boolean result = changeToState(backside ? CardStateName.Transformed : CardStateName.Original);
+                boolean result = c.changeToState(c.backside ? CardStateName.Transformed : CardStateName.Original);
+                retResult = retResult || result;
+            }
+            if (hasMergedCard()) {
+                rebuildMutatedStates(cause);
+            }
 
             // do the Transform trigger there, it can also happen if the resulting state doesn't change
-
             // Clear old dfc trigger from the trigger handler
             getGame().getTriggerHandler().clearActiveTriggers(this, null);
             getGame().getTriggerHandler().registerActiveTrigger(this, false);
@@ -571,23 +583,35 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             getGame().getTriggerHandler().runTrigger(TriggerType.Transformed, runParams, false);
             incrementTransformedTimestamp();
 
-            return result;
+            return retResult;
 
-        } else if (mode.equals("Flip") && isFlipCard()) {
+        } else if (mode.equals("Flip") && (isFlipCard() || hasMergedCard())) {
             // 709.4. Flipping a permanent is a one-way process.
             if (isFlipped()) {
                 return false;
             }
 
-            flipped = true;
-
-            // a facedown card does flip but the state doesn't change
-            if (isFaceDown()) {
-                return false;
+            if (hasMergedCard()) {
+                removeMutatedStates();
             }
+            CardCollectionView cards = hasMergedCard() ? getMergedCards() : new CardCollection(this);
+            boolean retResult = false;
+            for (final Card c : cards) {
+                c.flipped = true;
+                // a facedown card does flip but the state doesn't change
+                if (c.facedown) continue;
 
-            return changeToState(CardStateName.Flipped);
+                boolean result = c.changeToState(CardStateName.Flipped);
+                retResult = retResult || result;
+            }
+            if (retResult && hasMergedCard()) {
+                rebuildMutatedStates(cause);
+                game.getTriggerHandler().clearActiveTriggers(this, null);
+                game.getTriggerHandler().registerActiveTrigger(this, false);
+            }
+            return retResult;
         } else if (mode.equals("TurnFace")) {
+            CardStateName oldState = getCurrentStateName();
             if (oldState == CardStateName.Original || oldState == CardStateName.Flipped) {
                 return turnFaceDown();
             } else if (isFaceDown()) {
@@ -635,14 +659,26 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean turnFaceDown(boolean override) {
-        if (override || !hasBackSide()) {
-            facedown = true;
-            if (setState(CardStateName.FaceDown, true)) {
-                runFacedownCommands();
-                return true;
+        if (hasMergedCard()) {
+            removeMutatedStates();
+        }
+        CardCollectionView cards = hasMergedCard() ? getMergedCards() : new CardCollection(this);
+        boolean retResult = false;
+        for (final Card c : cards) {
+            if (override || !c.hasBackSide()) {
+                c.facedown = true;
+                if (c.setState(CardStateName.FaceDown, true)) {
+                    c.runFacedownCommands();
+                    retResult = true;
+                }
             }
         }
-        return false;
+        if (hasMergedCard()) {
+            rebuildMutatedStates(null);
+            game.getTriggerHandler().clearActiveTriggers(this, null);
+            game.getTriggerHandler().registerActiveTrigger(this, false);
+        }
+        return retResult;
     }
 
     public boolean turnFaceDownNoUpdate() {
@@ -663,22 +699,34 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 return false;
             }
 
-            boolean result;
-            if (isFlipped() && isFlipCard()) {
-                result = setState(CardStateName.Flipped, true);
-            } else {
-                result = setState(CardStateName.Original, true);
+            if (hasMergedCard()) {
+                removeMutatedStates();
             }
+            CardCollectionView cards = hasMergedCard() ? getMergedCards() : new CardCollection(this);
+            boolean retResult = false;
+            for (final Card c : cards) {
+                boolean result;
+                if (c.isFlipped() && c.isFlipCard()) {
+                    result = c.setState(CardStateName.Flipped, true);
+                } else {
+                    result = c.setState(CardStateName.Original, true);
+                }
 
-            facedown = false;
-            updateStateForView(); //fixes cards with backside viewable
-            // need to run faceup commands, currently
-            // it does cleanup the modified facedown state
-            if (result) {
-                runFaceupCommands();
+                c.facedown = false;
+                c.updateStateForView(); //fixes cards with backside viewable
+                // need to run faceup commands, currently
+                // it does cleanup the modified facedown state
+                if (result) {
+                    c.runFaceupCommands();
+                }
+                retResult = retResult || result;
             }
-
-            if (result && runTriggers) {
+            if (hasMergedCard()) {
+                rebuildMutatedStates(cause);
+                game.getTriggerHandler().clearActiveTriggers(this, null);
+                game.getTriggerHandler().registerActiveTrigger(this, false);
+            }
+            if (retResult && runTriggers) {
                 // Run replacement effects
                 getGame().getReplacementHandler().run(ReplacementType.TurnFaceUp, AbilityKey.mapFromAffected(this));
 
@@ -689,17 +737,33 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 getGame().getTriggerHandler().registerActiveTrigger(this, false);
                 getGame().getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, runParams, false);
             }
-            return result;
+            return retResult;
         }
         return false;
     }
 
     public boolean canTransform() {
-        if (isFaceDown() || !isDoubleFaced()) {
+        if (isFaceDown()) {
+            return false;
+        }
+        Card transformCard = this;
+        if (hasMergedCard()) {
+            boolean hasTransformCard = false;
+            for (final Card c : getMergedCards()) {
+                if (c.isDoubleFaced()) {
+                    hasTransformCard = true;
+                    transformCard = c;
+                    break;
+                }
+            }
+            if (!hasTransformCard) {
+                return false;
+            }
+        } else if (!isDoubleFaced()) {
             return false;
         }
 
-        CardStateName destState = backside ? CardStateName.Original : CardStateName.Transformed;
+        CardStateName destState = transformCard.backside ? CardStateName.Original : CardStateName.Transformed;
 
         // below only when in play
         if (!isInPlay()) {
@@ -707,7 +771,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         // use Original State for the transform check
-        if (!getOriginalState(destState).getType().isPermanent()) {
+        if (!transformCard.getOriginalState(destState).getType().isPermanent()) {
             return false;
         }
 
@@ -1046,6 +1110,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setTimesMutated(final int t) {
         timesMutated = t;
+    }
+
+    public final void removeMutatedStates() {
+        if (getMutatedTimestamp() != -1) {
+            removeCloneState(getMutatedTimestamp());
+        }
+    }
+    public final void rebuildMutatedStates(final CardTraitBase sa) {
+        if (getCurrentStateName() != CardStateName.FaceDown) {
+            final CardCloneStates mutatedStates = CardFactory.getMutatedCloneStates(this, sa);
+            addCloneState(mutatedStates, getMutatedTimestamp());
+        }
     }
 
     public final String getFlipResult(final Player flipper) {
