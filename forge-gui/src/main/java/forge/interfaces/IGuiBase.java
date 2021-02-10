@@ -42,6 +42,7 @@ public interface IGuiBase {
     String showFileDialog(String title, String defaultDir);
     File getSaveFile(File defaultFile);
     void download(GuiDownloadService service, Callback<Boolean> callback);
+    void refreshSkin();
     void showCardList(String title, String message, List<PaperCard> list);
     boolean showBoxedProduct(String title, String message, List<PaperCard> list);
     PaperCard chooseCard(String title, String message, List<PaperCard> list);
