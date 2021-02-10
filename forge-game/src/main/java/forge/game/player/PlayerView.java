@@ -470,7 +470,7 @@ public class PlayerView extends GameEntityView {
     void updateZone(PlayerZone zone) {
         TrackableProperty prop = getZoneProp(zone.getZoneType());
         if (prop == null) { return; }
-        set(prop, CardView.getCollection(zone.getCards(false, true)));
+        set(prop, CardView.getCollection(zone.getCards(false)));
 
         //update delirium
         if (ZoneType.Graveyard == zone.getZoneType())

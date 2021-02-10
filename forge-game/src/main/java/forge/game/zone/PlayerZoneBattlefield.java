@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -26,7 +26,7 @@ import forge.game.player.Player;
  * <p>
  * PlayerZoneComesIntoPlay class.
  * </p>
- *
+ * 
  * @author Forge
 
  * @version $Id$
@@ -84,20 +84,18 @@ public class PlayerZoneBattlefield extends PlayerZone {
     }
 
     @Override
-    public final CardCollectionView getCards(final boolean filterOutPhasedOut, final boolean filterOutMerged) {
+    public final CardCollectionView getCards(final boolean filter) {
         // Battlefield filters out Phased Out cards by default. Needs to call
         // getCards(false) to get Phased Out cards
-        // For merged permanent, also filter out all merged cards except the top one
 
-        CardCollectionView cards = super.getCards(false, false);
-        if (!filterOutPhasedOut && !filterOutMerged) {
+        CardCollectionView cards = super.getCards(false);
+        if (!filter) {
             return cards;
         }
 
         boolean hasFilteredCard = false;
         for (Card c : cards) {
-            if (filterOutPhasedOut && c.isPhasedOut() ||
-                    filterOutMerged && c.getMergedToCard() != null) {
+            if (c.isPhasedOut()) {
                 hasFilteredCard = true;
                 break;
             }
@@ -106,8 +104,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
         if (hasFilteredCard) {
             CardCollection filteredCollection = new CardCollection();
             for (Card c : cards) {
-                if ((!filterOutPhasedOut || !c.isPhasedOut()) &&
-                        (!filterOutMerged || c.getMergedToCard() == null)) {
+                if (!c.isPhasedOut()) {
                     filteredCollection.add(c);
                 }
             }

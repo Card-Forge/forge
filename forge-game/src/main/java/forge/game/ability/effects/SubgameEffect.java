@@ -100,7 +100,7 @@ public class SubgameEffect extends SpellAbilityEffect {
         final FCollectionView<Player> players = subgame.getPlayers();
         final FCollectionView<Player> maingamePlayers = maingame.getPlayers();
         final List<ZoneType> outsideZones = Arrays.asList(ZoneType.Hand, ZoneType.Battlefield,
-                ZoneType.Graveyard, ZoneType.Exile, ZoneType.Stack, ZoneType.Sideboard, ZoneType.Ante);
+                ZoneType.Graveyard, ZoneType.Exile, ZoneType.Stack, ZoneType.Sideboard, ZoneType.Ante, ZoneType.Merged);
 
         for (int i = 0; i < players.size(); i++) {
             final Player player = players.get(i);
