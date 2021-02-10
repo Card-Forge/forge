@@ -247,7 +247,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
 
-        if (!hasLegalTargeting(sp, source)) {
+        if (!sp.isCopied() && !hasLegalTargeting(sp, source)) {
             String str = source + " - [Couldn't add to stack, failed to target] - " + sp.getDescription();
             System.err.println(str + sp.getAllTargetChoices());
             game.getGameLog().add(GameLogEntryType.STACK_ADD, str);

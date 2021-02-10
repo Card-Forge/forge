@@ -112,7 +112,7 @@ public abstract class PlayerController {
     public abstract Integer announceRequirements(SpellAbility ability, String announce);
     public abstract CardCollectionView choosePermanentsToSacrifice(SpellAbility sa, int min, int max, CardCollectionView validTargets, String message);
     public abstract CardCollectionView choosePermanentsToDestroy(SpellAbility sa, int min, int max, CardCollectionView validTargets, String message);
-    public abstract TargetChoices chooseNewTargetsFor(SpellAbility ability);
+    public abstract TargetChoices chooseNewTargetsFor(SpellAbility ability, Predicate<GameObject> filter, boolean optional);
     public abstract boolean chooseTargetsFor(SpellAbility currentAbility); // this is bad a function for it assigns targets to sa inside its body 
 
     // Specify a target of a spell (Spellskite)

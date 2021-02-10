@@ -1,8 +1,7 @@
 Name:Detonate
 ManaCost:X R
 Types:Sorcery
-A:SP$ Destroy | Cost$ X R | ValidTgts$ Artifact | ValidTgtsWithoutManaCost$ Artifact.cmcEQ0 | TgtPrompt$ Select target artifact | NoRegen$ True | SubAbility$ DBDamage | References$ X | SpellDescription$ Destroy target artifact with converted mana cost X. It can't be regenerated. CARDNAME deals X damage to that artifact's controller.
+A:SP$ Destroy | Cost$ X R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | NoRegen$ True | SubAbility$ DBDamage | References$ X | SpellDescription$ Destroy target artifact with converted mana cost X. It can't be regenerated. CARDNAME deals X damage to that artifact's controller.
 SVar:DBDamage:DB$DealDamage | Defined$ TargetedController | NumDmg$ X | References$ X
-SVar:X:Targeted$CardManaCost
-SVar:Picture:http://www.wizards.com/global/images/magic/general/detonate.jpg
+SVar:X:Count$xPaid
 Oracle:Destroy target artifact with converted mana cost X. It can't be regenerated. Detonate deals X damage to that artifact's controller.
