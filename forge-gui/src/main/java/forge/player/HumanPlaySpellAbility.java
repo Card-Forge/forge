@@ -35,6 +35,8 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.*;
 import forge.game.zone.Zone;
+import forge.game.zone.ZoneType;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collections;
@@ -207,6 +209,12 @@ public class HumanPlaySpellAbility {
             oldCard.getZone().remove(oldCard);
             fromZone.add(oldCard, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
             ability.setHostCard(oldCard);
+            // better safe than sorry approach in case rolled back ability was copy (from addExtraKeywordCost)
+            for (SpellAbility sa : oldCard.getSpells()) {
+                sa.setHostCard(oldCard);
+            }
+            //for Chorus of the Conclave
+            ability.rollback();
 
             oldCard.setBackSide(false);
             oldCard.setState(oldCard.getFaceupCardStateName(), true);

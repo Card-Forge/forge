@@ -24,12 +24,9 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
-import forge.game.Game;
-import forge.game.ability.AbilityFactory;
+import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CounterType;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
@@ -37,8 +34,6 @@ import forge.game.replacement.*;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.ZoneType;
-import forge.util.Lang;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -236,61 +231,7 @@ public class AbilityManaPart implements java.io.Serializable {
         String[] parse = this.addsCounters.split("_");
         // Convert random SVars if there are other cards with this effect
         if (c.isValid(parse[0], c.getController(), c, null)) {
-            final Game game = this.sourceCard.getGame();
-            final Card eff = new Card(game.nextCardId(), game);
-            eff.setTimestamp(game.getNextTimestamp());
-            eff.setName(sourceCard.getName() + "'s Effect");
-            eff.addType("Effect");
-            eff.setOwner(controller);
-
-            eff.setImageKey(sourceCard.getImageKey());
-            eff.setColor(MagicColor.COLORLESS);
-            eff.setImmutable(true);
-            // try to get the SpellAbility from the mana ability
-            //eff.setEffectSource((SpellAbility)null);
-
-            eff.addRemembered(c);
-
-            String abStr = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ " + parse[1]
-                    + " | ETB$ True | CounterNum$ " + parse[2];
-
-            SpellAbility sa = AbilityFactory.getAbility(abStr, c);
-            if (!StringUtils.isNumeric(parse[2])) {
-                sa.setSVar(parse[2], sourceCard.getSVar(parse[2]));
-            }
-            CardFactoryUtil.setupETBReplacementAbility(sa);
-
-            String desc = "It enters the battlefield with ";
-            desc += Lang.nounWithNumeral(parse[2], CounterType.getType(parse[1]).getName() + " counter");
-            desc += " on it.";
-
-            String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | Description$ " + desc;
-
-            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
-            re.setLayer(ReplacementLayer.Other);
-            re.setOverridingAbility(sa);
-
-            eff.addReplacementEffect(re);
-
-            // Forgot Trigger
-            String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Any | TriggerZones$ Command | Static$ True";
-            String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
-            String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
-                    + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
-
-            SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, eff);
-            AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, eff);
-            saForget.setSubAbility(saExile);
-
-            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, eff, true);
-            parsedTrigger.setOverridingAbility(saForget);
-            eff.addTrigger(parsedTrigger);
-            eff.updateStateForView();
-
-            // TODO: Add targeting to the effect so it knows who it's dealing with
-            game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-            game.getAction().moveTo(ZoneType.Command, eff, null);
-            game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+            GameActionUtil.createETBCountersEffect(sourceCard, c, controller, parse[1], parse[2]);
         }
     }
 
