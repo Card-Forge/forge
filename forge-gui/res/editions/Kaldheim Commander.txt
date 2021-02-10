@@ -61,7 +61,7 @@ Type=Other
 54 R Beast Whisperer
 55 R Cultivator of Blades
 56 R Dwynen, Gilt-Leaf Daen
-57 R Elvish Arcdruid
+57 R Elvish Archdruid
 58 C Elvish Mystic
 59 U Elvish Promenade
 60 C Elvish Rejuvenator
@@ -75,7 +75,7 @@ Type=Other
 68 R Marwyn, the Nurturer
 69 R Masked Admirers
 70 U Nullmage Shepherd
-71 U Numa, Joraga Chieftrain
+71 U Numa, Joraga Chieftain
 72 U Reclamation Sage
 73 R Rhys the Exiled
 74 C Springbloom Druid
