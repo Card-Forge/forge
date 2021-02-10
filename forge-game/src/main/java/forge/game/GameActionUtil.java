@@ -473,62 +473,12 @@ public final class GameActionUtil {
                         int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
 
                         if (v > 0) {
-
-                            final Card eff = new Card(game.nextCardId(), game);
-                            eff.setTimestamp(game.getNextTimestamp());
-                            eff.setName(c.getName() + "'s Effect");
-                            eff.addType("Effect");
-                            eff.setOwner(activator);
-
-                            eff.setImageKey(c.getImageKey());
-                            eff.setColor(MagicColor.COLORLESS);
-                            eff.setImmutable(true);
-                            // try to get the SpellAbility from the mana ability
-                            //eff.setEffectSource((SpellAbility)null);
-
-                            eff.addRemembered(host);
-
-                            String abStr = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ " + v;
-
-                            SpellAbility saAb = AbilityFactory.getAbility(abStr, c);
-
-                            CardFactoryUtil.setupETBReplacementAbility(saAb);
-
-                            String desc = "It enters the battlefield with ";
-                            desc += Lang.nounWithNumeral(v, CounterEnumType.P1P1.getName() + " counter");
-                            desc += " on it.";
-
-                            String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | Description$ " + desc;
-
-                            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
-                            re.setLayer(ReplacementLayer.Other);
-                            re.setOverridingAbility(saAb);
-
-                            eff.addReplacementEffect(re);
-
-                            // Forgot Trigger
-                            String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Any | TriggerZones$ Command | Static$ True";
-                            String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
-                            String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
-                                    + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
-
-                            SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, eff);
-                            AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, eff);
-                            saForget.setSubAbility(saExile);
-
-                            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, eff, true);
-                            parsedTrigger.setOverridingAbility(saForget);
-                            eff.addTrigger(parsedTrigger);
-                            eff.updateStateForView();
-
-                            // TODO: Add targeting to the effect so it knows who it's dealing with
-                            game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-                            game.getAction().moveTo(ZoneType.Command, eff, null);
-                            game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+                            Card eff = createETBCountersEffect(c, host, activator, "P1P1", String.valueOf(v));
 
                             if (result == null) {
                                 result = sa.copy();
                             }
+                            result.addRollbackEffect(eff);
                             for (int i = 0; i < v; i++) {
                                 result.getPayCosts().add(cost);
                             }
@@ -544,6 +494,66 @@ public final class GameActionUtil {
         }
 
         return result != null ? result : sa;
+    }
+
+    public static Card createETBCountersEffect(Card sourceCard, Card c, Player controller, String counter, String amount) {
+        final Game game = sourceCard.getGame();
+        final Card eff = new Card(game.nextCardId(), game);
+        eff.setTimestamp(game.getNextTimestamp());
+        eff.setName(sourceCard.getName() + "'s Effect");
+        eff.addType("Effect");
+        eff.setOwner(controller);
+
+        eff.setImageKey(sourceCard.getImageKey());
+        eff.setColor(MagicColor.COLORLESS);
+        eff.setImmutable(true);
+        // try to get the SpellAbility from the mana ability
+        //eff.setEffectSource((SpellAbility)null);
+
+        eff.addRemembered(c);
+
+        String abStr = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ " + counter
+                + " | ETB$ True | CounterNum$ " + amount;
+
+        SpellAbility sa = AbilityFactory.getAbility(abStr, c);
+        if (!StringUtils.isNumeric(amount)) {
+            sa.setSVar(amount, sourceCard.getSVar(amount));
+        }
+        CardFactoryUtil.setupETBReplacementAbility(sa);
+
+        String desc = "It enters the battlefield with ";
+        desc += Lang.nounWithNumeral(amount, CounterType.getType(counter).getName() + " counter");
+        desc += " on it.";
+
+        String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | Description$ " + desc;
+
+        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
+        re.setLayer(ReplacementLayer.Other);
+        re.setOverridingAbility(sa);
+
+        eff.addReplacementEffect(re);
+
+        // Forgot Trigger
+        String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Any | TriggerZones$ Command | Static$ True";
+        String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
+        String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
+                + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
+
+        SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, eff);
+        AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, eff);
+        saForget.setSubAbility(saExile);
+
+        final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, eff, true);
+        parsedTrigger.setOverridingAbility(saForget);
+        eff.addTrigger(parsedTrigger);
+        eff.updateStateForView();
+
+        // TODO: Add targeting to the effect so it knows who it's dealing with
+        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        game.getAction().moveTo(ZoneType.Command, eff, null);
+        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        
+        return eff;
     }
 
     private static boolean hasUrzaLands(final Player p) {

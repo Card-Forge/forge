@@ -161,6 +161,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private CardCollection lastStateBattlefield = null;
     private CardCollection lastStateGraveyard = null;
 
+    private CardCollection rollbackEffects = new CardCollection();
+
     private CardDamageMap damageMap = null;
     private CardDamageMap preventMap = null;
     private CardZoneTable changeZoneTable = null;
@@ -2181,5 +2183,16 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public boolean checkRestrictions(Card host, Player activator) {
         return true;
+    }
+
+    public void addRollbackEffect(Card eff) {
+        rollbackEffects.add(eff);
+    }
+
+    public void rollback() {
+        for (Card c : rollbackEffects) {
+            c.ceaseToExist();
+        }
+        rollbackEffects.clear();
     }
 }
