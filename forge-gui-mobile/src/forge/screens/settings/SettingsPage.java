@@ -510,8 +510,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         public CustomSelectSetting(FPref pref0, String label0, String description0, Iterable<String> options0) {
             super(pref0, label0 + ":", description0);
 
-            for (String option : options0) {
-                options.add(option);
+            if (options0 != null) {
+                for (String option : options0) {
+                    options.add(option);
+                }
             }
         }
         public <E extends Enum<E>> CustomSelectSetting(FPref pref0, String label0, String description0, Class<E> enumData) {
