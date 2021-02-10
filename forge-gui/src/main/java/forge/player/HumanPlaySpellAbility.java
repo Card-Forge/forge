@@ -35,7 +35,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.*;
 import forge.game.zone.Zone;
-import forge.game.zone.ZoneType;
 
 import org.apache.commons.lang3.StringUtils;
 
