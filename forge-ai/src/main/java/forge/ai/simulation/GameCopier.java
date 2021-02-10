@@ -6,7 +6,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.LobbyPlayer;
 import forge.ai.LobbyPlayerAi;
-import forge.card.CardStateName;
 import forge.game.*;
 import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
@@ -289,8 +288,6 @@ public class GameCopier {
                 newCard.setTapped(true);
             }
             if (c.isFaceDown()) {
-                boolean isCreature = newCard.isCreature();
-                boolean hasManaCost = !newCard.getManaCost().isNoCost();
                 newCard.turnFaceDown(true);
                 if (c.isManifested()) {
                     newCard.setManifested(true);
