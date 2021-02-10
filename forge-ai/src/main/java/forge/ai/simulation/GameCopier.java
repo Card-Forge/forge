@@ -288,8 +288,6 @@ public class GameCopier {
                 newCard.setTapped(true);
             }
             if (c.isFaceDown()) {
-                boolean isCreature = newCard.isCreature();
-                boolean hasManaCost = !newCard.getManaCost().isNoCost();
                 newCard.turnFaceDown(true);
                 if (c.isManifested()) {
                     newCard.setManifested(true);
