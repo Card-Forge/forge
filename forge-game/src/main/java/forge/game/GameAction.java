@@ -83,29 +83,6 @@ public class GameAction {
     }
 
     private Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause, Map<AbilityKey, Object> params) {
-        // Handle merged permanent
-        boolean fromBattlefield = zoneFrom != null && zoneFrom.is(ZoneType.Battlefield);
-        if (fromBattlefield && c.hasMergedCard()) {
-            Card ret = null;
-            c.setTimesMutated(0);
-            c.removeCloneState(c.getMutatedTimestamp());
-            c.setMutatedTimestamp(-1);
-            CardCollection cards = (CardCollection)c.getMergedCards();
-            cards = (CardCollection) c.getController().getController().orderMoveToZoneList(cards, zoneTo.getZoneType());
-            Integer mergedPos = position == null ? 0 : position;
-            for (final Card card : cards) {
-                card.setMergedToCard(null);
-                Card t = changeZoneWrapped(card.getZone(), zoneTo, card, mergedPos, cause, params);
-                if (card == c) ret = t;
-                mergedPos++;
-            }
-            return ret;
-        } else {
-            return changeZoneWrapped(zoneFrom, zoneTo, c, position, cause, params);
-        }
-    }
-
-    private Card changeZoneWrapped(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause, Map<AbilityKey, Object> params) {
         // 111.11. A copy of a permanent spell becomes a token as it resolves.
         // The token has the characteristics of the spell that became that token.
         // The token is not “created” for the purposes of any replacement effects or triggered abilities that refer to creating a token.
@@ -130,7 +107,7 @@ public class GameAction {
             return c;
         }
 
-        boolean toBattlefield = zoneTo.is(ZoneType.Battlefield);
+        boolean toBattlefield = zoneTo.is(ZoneType.Battlefield) || zoneTo.is(ZoneType.Merged);
         boolean fromBattlefield = zoneFrom != null && zoneFrom.is(ZoneType.Battlefield);
         boolean wasFacedown = c.isFaceDown();
 
@@ -300,6 +277,23 @@ public class GameAction {
 
         copied.getOwner().removeInboundToken(copied);
 
+        // Handle merged permanent here so all replacement effects are already applied.
+        if (fromBattlefield && c.hasMergedCard()) {
+            Card ret = null;
+            CardCollection cards = new CardCollection(c.getMergedCards());
+            cards = (CardCollection) c.getController().getController().orderMoveToZoneList(cards, zoneTo.getZoneType());
+            if (zoneTo.is(ZoneType.Library)) {
+                java.util.Collections.reverse(cards);
+            }
+            c.clearMergedCards();
+            for (final Card card : cards) {
+                card.setMergedToCard(null);
+                Card t = changeZone(card.getZone(), zoneTo, card, position, cause, params);
+                if (card == c) ret = t;
+            }
+            return ret;
+        }
+
         if (suppress) {
             game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         }
@@ -369,11 +363,7 @@ public class GameAction {
         }
 
         // update state for view
-        if (copied.isMerged()) {
-            copied.getMergedToCard().updateStateForView();
-        } else {
-            copied.updateStateForView();
-        }
+        copied.updateStateForView();
 
         if (fromBattlefield) {
             copied.setDamage(0); //clear damage after a card leaves the battlefield
@@ -463,7 +453,7 @@ public class GameAction {
                     // Ask controller if it wants to be on top or bottom of other meld.
                     unmeldPosition++;
                 }
-                changeZoneWrapped(null, zoneTo, unmeld, position, cause, params);
+                changeZone(null, zoneTo, unmeld, position, cause, params);
             }
             // Reveal if face-down
             if (wasFacedown) {
