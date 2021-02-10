@@ -536,20 +536,6 @@ public class CardDetailUtil {
             area.append("Encoded: ").append(card.getEncodedCards());
         }
 
-        // Merge
-        if (card.getMergedCards() != null) {
-            if (area.length() != 0) {
-                area.append("\n");
-            }
-            area.append("Merged: ").append(card.getMergedCards());
-        }
-        if (card.getMergedTo() != null) {
-            if (area.length() != 0) {
-                area.append("\n");
-            }
-            area.append("Merged to: ").append(card.getMergedTo());
-        }
-
         // must block
         if (card.getMustBlockCards() != null) {
             if (area.length() != 0) {

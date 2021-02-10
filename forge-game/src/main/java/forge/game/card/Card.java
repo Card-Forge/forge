@@ -1072,24 +1072,26 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return FCollection.hasElements(mergedCards);
     }
     public final void addMergedCard(final Card c) {
-        mergedCards = view.addCard(mergedCards, c, TrackableProperty.MergedCards);
+        if (mergedCards == null) {
+            mergedCards = new CardCollection();
+        }
+        mergedCards.add(c);
     }
     public final void addMergedCardToTop(final Card c) {
         mergedCards.add(0, c);
-        view.setCards(mergedCards, mergedCards, TrackableProperty.MergedCards);
     }
     public final void removeMergedCard(final Card c) {
-        mergedCards = view.removeCard(mergedCards, c, TrackableProperty.MergedCards);
+        mergedCards.remove(c);
     }
     public final void clearMergedCards() {
-        mergedCards = view.clearCards(mergedCards, TrackableProperty.MergedCards);
+        mergedCards.clear();
     }
 
     public final Card getMergedToCard() {
         return mergedTo;
     }
     public final void setMergedToCard(final Card c) {
-        mergedTo = view.setCard(mergedTo, c, TrackableProperty.MergedTo);
+        mergedTo = c;
     }
     public final boolean isMerged() {
         return getMergedToCard() != null;
@@ -3498,7 +3500,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final Card getCloner() {
         CardCloneStates clStates = getLastClonedState();
-        if (clStates == null) {
+        if (!isCloned() || clStates == null) {
             return null;
         }
         return clStates.getHost();

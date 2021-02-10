@@ -826,7 +826,11 @@ public class CardFactory {
         final Card top = card.getTopMergedCard();
         final CardStateName state = top.getCurrentStateName();
         final CardState ret = new CardState(card, state);
-        ret.copyFrom(top.getState(state, true), false);
+        if (top.isCloned()) {
+            ret.copyFrom(top.getState(state, true), false);
+        } else {
+            ret.copyFrom(top.getOriginalState(state), false);
+        }
 
         boolean first = true;
         for (final Card c : card.getMergedCards()) {
