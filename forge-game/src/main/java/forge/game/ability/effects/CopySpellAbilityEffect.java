@@ -111,7 +111,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                         candidates.remove(p);
 
                     for (GameEntity o : candidates) {
-                        SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA);
+                        SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
                         resetFirstTargetOnCopy(copy, o, targetedSA);
                         copies.add(copy);
                     }
@@ -144,12 +144,12 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                     }
 
                     for (final Card c : valid) {
-                        SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA);
+                        SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
                         resetFirstTargetOnCopy(copy, c, targetedSA);
                         copies.add(copy);
                     }
                     for (final Player p : players) {
-                        SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA);
+                        SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
                         resetFirstTargetOnCopy(copy, p, targetedSA);
                         copies.add(copy);
                     }
@@ -157,12 +157,9 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             }
             else {
                 for (int i = 0; i < amount; i++) {
-                    SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA);
+                    SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
                     if (sa.hasParam("MayChooseTarget")) {
                         copy.setMayChooseNewTargets(true);
-                        if (copy.usesTargeting()) {
-                            copy.getTargetRestrictions().setMandatory(true);
-                        }
                     }
 
                     // extra case for Epic to remove the keyword and the last part of the SpellAbility
@@ -206,12 +203,9 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             }
             int extraAmount = addAmount - copies.size();
             for (int i = 0; i < extraAmount; i++) {
-                SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA);
+                SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
                 // extra copies added with CopySpellReplacenment currently always has new choose targets
                 copy.setMayChooseNewTargets(true);
-                if (copy.usesTargeting()) {
-                    copy.getTargetRestrictions().setMandatory(true);
-                }
                 copies.add(copy);
             }
 

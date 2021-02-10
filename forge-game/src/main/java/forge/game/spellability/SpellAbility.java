@@ -152,6 +152,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private TargetRestrictions targetRestrictions = null;
     private TargetChoices targetChosen = new TargetChoices();
 
+    private Integer dividedValue = null;
+
     private SpellAbilityView view;
 
     private StaticAbility mayPlay = null;
@@ -1101,7 +1103,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             if (hasParam("TargetingPlayerControls") && entity instanceof Card) {
                 final Card c = (Card) entity;
-                if (!c.getController().equals(targetingPlayer)) {
+                if (!c.getController().equals(getTargetingPlayer())) {
                     return false;
                 }
             }
@@ -1418,22 +1420,50 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     /**
+     * @return a boolean dividedAsYouChoose
+     */
+    public boolean isDividedAsYouChoose() {
+        return hasParam("DividedAsYouChoose");
+    }
+
+    public final void addDividedAllocation(final GameObject tgt, final Integer portionAllocated) {
+        getTargets().addDividedAllocation(tgt, portionAllocated);
+    }
+    public Integer getDividedValue(GameObject c) {
+        return getTargets().getDividedValue(c);
+    }
+
+    public int getTotalDividedValue() {
+        return getTargets().getTotalDividedValue();
+    }
+
+    public Integer getDividedValue() {
+        return this.dividedValue;
+    }
+
+    public int getStillToDivide() {
+        if (!isDividedAsYouChoose() || dividedValue == null) {
+            return 0;
+        }
+        return dividedValue - getTotalDividedValue();
+    }
+
+    /**
      * Reset the first target.
      *
      */
     public void resetFirstTarget(GameObject c, SpellAbility originalSA) {
         SpellAbility sa = this;
         while (sa != null) {
-            if (sa.targetRestrictions != null) {
-                sa.targetChosen = new TargetChoices();
-                sa.targetChosen.add(c);
-                if (!originalSA.targetRestrictions.getDividedMap().isEmpty()) {
-                    sa.targetRestrictions.addDividedAllocation(c,
-                            Iterables.getFirst(originalSA.targetRestrictions.getDividedMap().values(), null));
+            if (sa.usesTargeting()) {
+                sa.resetTargets();
+                sa.getTargets().add(c);
+                if (!originalSA.getTargets().getDividedValues().isEmpty()) {
+                    sa.addDividedAllocation(c, Iterables.getFirst(originalSA.getTargets().getDividedValues(), null));
                 }
                 break;
             }
-            sa = sa.subAbility;
+            sa = sa.getSubAbility();
         }
     }
 
@@ -1450,7 +1480,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isZeroTargets() {
-        return getTargetRestrictions().getMinTargets(hostCard, this) == 0 && getTargets().size() == 0;
+        return getMinTargets() == 0 && getTargets().size() == 0;
     }
 
     public boolean isMinTargetChosen() {
@@ -1724,6 +1754,27 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return p != null && p.isTargeting(o);
     }
 
+    public boolean setupNewTargets(Player forceTargetingPlayer) {
+        // Skip to paying if parent ability doesn't target and has no subAbilities.
+        // (or trigger case where its already targeted)
+        SpellAbility currentAbility = this;
+        do {
+            if (currentAbility.usesTargeting()) {
+                TargetChoices oldTargets = currentAbility.getTargets();
+                if (forceTargetingPlayer.getController().chooseNewTargetsFor(currentAbility, null, true) == null) {
+                    currentAbility.setTargets(oldTargets);
+                }
+            }
+            final AbilitySub subAbility = currentAbility.getSubAbility();
+            if (subAbility != null) {
+                // This is necessary for "TargetsWithDefinedController$ ParentTarget"
+                subAbility.setParent(currentAbility);
+            }
+            currentAbility = subAbility;
+        } while (currentAbility != null);
+        return true;
+    }
+
     public boolean setupTargets() {
         // Skip to paying if parent ability doesn't target and has no subAbilities.
         // (or trigger case where its already targeted)
@@ -1741,6 +1792,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 } else {
                     targetingPlayer = getActivatingPlayer();
                 }
+                // don't set targeting player when forceful target,
+                // "targeting player controls" should not be reset when the spell is copied
                 currentAbility.setTargetingPlayer(targetingPlayer);
                 if (!targetingPlayer.getController().chooseTargetsFor(currentAbility)) {
                     return false;
@@ -1756,11 +1809,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return true;
     }
     public final void clearTargets() {
-        final TargetRestrictions tg = getTargetRestrictions();
-        if (tg != null) {
+        if (usesTargeting()) {
             resetTargets();
-            if (hasParam("DividedAsYouChoose")) {
-                tg.calculateStillToDivide(getParam("DividedAsYouChoose"), getHostCard(), this);
+            if (isDividedAsYouChoose()) {
+                this.dividedValue = AbilityUtils.calculateAmount(getHostCard(), this.getParam("DividedAsYouChoose"), this);
             }
         }
     }

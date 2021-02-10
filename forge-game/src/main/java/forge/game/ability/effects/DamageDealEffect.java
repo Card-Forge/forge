@@ -61,7 +61,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         if (spellAbility.usesTargeting()) {
             if (spellAbility.hasParam("DivideEvenly")) {
                 stringBuilder.append("divided evenly (rounded down) to\n");
-            } else if (spellAbility.hasParam("DividedAsYouChoose")) {
+            } else if (spellAbility.isDividedAsYouChoose()) {
                 stringBuilder.append("divided to\n");
             } else
                 stringBuilder.append("to ");
@@ -75,8 +75,9 @@ public class DamageDealEffect extends DamageBaseEffect {
             for (int i = 0; i < targetCards.size(); i++) {
                 Card targetCard = targetCards.get(i);
                 stringBuilder.append(targetCard);
-                if (spellAbility.getTargetRestrictions().getDividedMap().get(targetCard) != null) //fix null damage stack description
-                    stringBuilder.append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetCard)).append(" damage)");
+                Integer v = spellAbility.getDividedValue(targetCard);
+                if (v != null) //fix null damage stack description
+                    stringBuilder.append(" (").append(v).append(" damage)");
 
                 if (i == targetCount - 2) {
                     stringBuilder.append(" and ");
@@ -89,8 +90,9 @@ public class DamageDealEffect extends DamageBaseEffect {
             for (int i = 0; i < players.size(); i++) {
                 Player targetPlayer = players.get(i);
                 stringBuilder.append(targetPlayer);
-                if (spellAbility.getTargetRestrictions().getDividedMap().get(targetPlayer) != null) //fix null damage stack description
-                    stringBuilder.append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetPlayer)).append(" damage)");
+                Integer v = spellAbility.getDividedValue(targetPlayer);
+                if (v != null) //fix null damage stack description
+                    stringBuilder.append(" (").append(v).append(" damage)");
 
                 if (i == players.size() - 2) {
                     stringBuilder.append(" and ");
@@ -102,7 +104,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         } else {
             if (spellAbility.hasParam("DivideEvenly")) {
                 stringBuilder.append("divided evenly (rounded down) ");
-            } else if (spellAbility.hasParam("DividedAsYouChoose")) {
+            } else if (spellAbility.isDividedAsYouChoose()) {
                 stringBuilder.append("divided as you choose ");
             }
             stringBuilder.append("to ").append(Lang.joinHomogenous(targets));
@@ -229,7 +231,7 @@ public class DamageDealEffect extends DamageBaseEffect {
 
             for (final GameObject o : tgts) {
                 if (!removeDamage) {
-                    dmg = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(o) : dmg;
+                    dmg = (sa.usesTargeting() && sa.isDividedAsYouChoose()) ? sa.getDividedValue(o) : dmg;
                     if (dmg <= 0) {
                         continue;
                     }

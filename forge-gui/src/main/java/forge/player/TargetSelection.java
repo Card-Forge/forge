@@ -17,6 +17,8 @@
  */
 package forge.player;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.game.Game;
@@ -25,6 +27,7 @@ import forge.game.GameEntityView;
 import forge.game.GameEntityViewMap;
 import forge.game.GameObject;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
@@ -38,6 +41,7 @@ import forge.match.input.InputSelectTargets;
 import forge.util.Aggregates;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,15 +74,15 @@ public class TargetSelection {
         return ability.isTrigger() || getTgt().getMandatory();
     }
 
-    public final boolean chooseTargets(Integer numTargets) {
+    public final boolean chooseTargets(Integer numTargets, Collection<Integer> divisionValues, Predicate<GameObject> filter, boolean optional) {
         if (!ability.usesTargeting()) {
             throw new RuntimeException("TargetSelection.chooseTargets called for ability that does not target - " + ability);
         }
         final TargetRestrictions tgt = getTgt();
 
         // Number of targets is explicitly set only if spell is being redirected (ex. Swerve or Redirect)
-        final int minTargets = numTargets != null ? numTargets.intValue() : tgt.getMinTargets(ability.getHostCard(), ability);
-        final int maxTargets = numTargets != null ? numTargets.intValue() : tgt.getMaxTargets(ability.getHostCard(), ability);
+        final int minTargets = numTargets != null ? numTargets.intValue() : ability.getMinTargets();
+        final int maxTargets = numTargets != null ? numTargets.intValue() : ability.getMaxTargets();
         //final int maxTotalCMC = tgt.getMaxTotalCMC(ability.getHostCard(), ability);
         final int numTargeted = ability.getTargets().size();
         final boolean isSingleZone = ability.getTargetRestrictions().isSingleZone();
@@ -92,7 +96,7 @@ public class TargetSelection {
             return false;
         }
 
-        if (this.bTargetingDone && hasEnoughTargets || hasAllTargets || tgt.isDividedAsYouChoose() && tgt.getStillToDivide() == 0) {
+        if (this.bTargetingDone && hasEnoughTargets || hasAllTargets || ability.isDividedAsYouChoose() && divisionValues == null && ability.getStillToDivide() == 0) {
             return true;
         }
 
@@ -107,11 +111,10 @@ public class TargetSelection {
         }
 
         final List<ZoneType> zones = tgt.getZone();
-        final boolean mandatory = isMandatory() && hasCandidates;
+        final boolean mandatory = isMandatory() && hasCandidates && !optional;
 
         final boolean choiceResult;
-        final boolean random = tgt.isRandomTarget();
-        if (random) {
+        if (tgt.isRandomTarget() && numTargets == null) {
             final List<GameEntity> candidates = tgt.getAllCandidates(this.ability, true);
             final GameObject choice = Aggregates.random(candidates);
             return ability.getTargets().add(choice);
@@ -122,7 +125,11 @@ public class TargetSelection {
             return this.chooseCardFromStack(mandatory);
         }
         else {
-            final List<Card> validTargets = CardUtil.getValidCardsToTarget(tgt, ability);
+            List<Card> validTargets = CardUtil.getValidCardsToTarget(tgt, ability);
+            if (filter != null) {
+                validTargets = new CardCollection(Iterables.filter(validTargets, filter));
+            }
+
             // single zone
             if (isSingleZone) {
                 final List<Card> removeCandidates = new ArrayList<>();
@@ -149,8 +156,8 @@ public class TargetSelection {
                 //if only one valid target card for triggered ability, auto-target that card
                 //only do this for triggered abilities to prevent auto-targeting when user chooses
                 //to play a spell or activat an ability
-                if (tgt.isDividedAsYouChoose()) {
-                    tgt.addDividedAllocation(validTargets.get(0), tgt.getStillToDivide());
+                if (ability.isDividedAsYouChoose()) {
+                    ability.addDividedAllocation(validTargets.get(0), ability.getStillToDivide());
                 }
                 return ability.getTargets().add(validTargets.get(0));
             }
@@ -162,7 +169,7 @@ public class TargetSelection {
             PlayerView playerView = controller.getLocalPlayerView();
             PlayerZoneUpdates playerZoneUpdates = controller.getGui().openZones(playerView, zones, playersWithValidTargets);
             if (!zones.contains(ZoneType.Stack)) {
-                InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory);
+                InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory, divisionValues, filter);
                 inp.showAndWait();
                 choiceResult = !inp.hasCancelled();
                 bTargetingDone = inp.hasPressedOk();
@@ -174,7 +181,7 @@ public class TargetSelection {
             }
         }
         // some inputs choose cards one-by-one and need to be called again
-        return choiceResult && chooseTargets(numTargets);
+        return choiceResult && chooseTargets(numTargets, divisionValues, filter, optional);
     }
 
     private final boolean chooseCardFromList(final List<Card> choices, final boolean targeted, final boolean mandatory) {
@@ -232,7 +239,7 @@ public class TargetSelection {
         }
 
         final String msgDone = "[FINISH TARGETING]";
-        if (this.getTgt().isMinTargetsChosen(this.ability.getHostCard(), this.ability)) {
+        if (ability.isMinTargetChosen()) {
             // is there a more elegant way of doing this?
             choicesFiltered.add(msgDone);
         }
@@ -282,12 +289,12 @@ public class TargetSelection {
         }
 
         while(!bTargetingDone) {
-            if (tgt.isMaxTargetsChosen(this.ability.getHostCard(), this.ability)) {
+            if (ability.isMaxTargetChosen()) {
                 bTargetingDone = true;
                 return true;
             }
 
-            if (!selectOptions.contains("[FINISH TARGETING]") && tgt.isMinTargetsChosen(this.ability.getHostCard(), this.ability)) {
+            if (!selectOptions.contains("[FINISH TARGETING]") && ability.isMinTargetChosen()) {
                 selectOptions.add("[FINISH TARGETING]");
             }
 

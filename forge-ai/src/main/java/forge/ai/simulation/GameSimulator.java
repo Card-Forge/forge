@@ -16,7 +16,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
-import forge.game.spellability.TargetRestrictions;
 
 public class GameSimulator {
     public static boolean COPY_STACK = false;
@@ -164,14 +163,12 @@ public class GameSimulator {
             SpellAbility saOrSubSa = sa;
             do {
                 if (origSaOrSubSa.usesTargeting()) {
-                    final boolean divided = origSaOrSubSa.hasParam("DividedAsYouChoose");
-                    final TargetRestrictions origTgtRes = origSaOrSubSa.getTargetRestrictions();
-                    final TargetRestrictions tgtRes = saOrSubSa.getTargetRestrictions();
+                    final boolean divided = origSaOrSubSa.isDividedAsYouChoose();
                     for (final GameObject o : origSaOrSubSa.getTargets()) {
                         final GameObject target = copier.find(o);
                         saOrSubSa.getTargets().add(target);
                         if (divided) {
-                            tgtRes.addDividedAllocation(target, origTgtRes.getDividedValue(o));
+                            saOrSubSa.addDividedAllocation(target, origSaOrSubSa.getDividedValue(o));
                         }
                     }
                 }

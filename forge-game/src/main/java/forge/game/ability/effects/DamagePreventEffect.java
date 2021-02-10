@@ -25,7 +25,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
         sb.append("Prevent the next ");
         sb.append(sa.getParam("Amount"));
         sb.append(" damage that would be dealt ");
-        if (sa.hasParam("DividedAsYouChoose")) {
+        if (sa.isDividedAsYouChoose()) {
             sb.append("between ");
         } else {
             sb.append("to ");
@@ -75,8 +75,8 @@ public class DamagePreventEffect extends SpellAbilityEffect {
         final boolean targeted = (sa.usesTargeting());
         final boolean preventionWithEffect = sa.hasParam("PreventionSubAbility");
 
-        for (final Object o : tgts) {
-            numDam = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(o) : numDam;
+        for (final GameObject o : tgts) {
+            numDam = (sa.usesTargeting() && sa.isDividedAsYouChoose()) ? sa.getDividedValue(o) : numDam;
             if (o instanceof Card) {
                 final Card c = (Card) o;
                 if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
