@@ -49,6 +49,7 @@ public final class ForgeConstants {
     public static final String NET_DECKS_COMMANDER_LIST_FILE         = LISTS_DIR + "net-decks-commander.txt";
     public static final String NET_DECKS_BRAWL_LIST_FILE             = LISTS_DIR + "net-decks-brawl.txt";
     public static final String BORDERLESS_CARD_LIST_FILE             = LISTS_DIR + "borderlessCardList.txt";
+    public static final String SKINS_LIST_FILE                       = LISTS_DIR + "skinsList.txt";
 
 
     public static final String CHANGES_FILE            = ASSETS_DIR + "README.txt";
@@ -89,9 +90,9 @@ public final class ForgeConstants {
     private static final String CONQUEST_DIR       = RES_DIR + "conquest" + PATH_SEPARATOR;
     public static final String CONQUEST_PLANES_DIR = CONQUEST_DIR + "planes" + PATH_SEPARATOR;
 
-    public static final String SKINS_DIR              = RES_DIR + "skins" + PATH_SEPARATOR;
+    public static final String BASE_SKINS_DIR         = RES_DIR + "skins" + PATH_SEPARATOR;
     public static final String COMMON_FONTS_DIR       = RES_DIR + "fonts" + PATH_SEPARATOR;
-    public static final String DEFAULT_SKINS_DIR      = SKINS_DIR + "default" + PATH_SEPARATOR;
+    public static final String DEFAULT_SKINS_DIR      = BASE_SKINS_DIR + "default" + PATH_SEPARATOR;
     //don't associate these skin files with a directory since skin directory will be determined later
     public static final String SPRITE_ICONS_FILE      = "sprite_icons.png";
     public static final String SPRITE_FOILS_FILE      = "sprite_foils.png";
@@ -258,6 +259,7 @@ public final class ForgeConstants {
     private static final String PICS_DIR                     = CACHE_DIR + "pics" + PATH_SEPARATOR;
     public static final String DB_DIR                        = CACHE_DIR + "db" + PATH_SEPARATOR;
     public static final String FONTS_DIR                     = CACHE_DIR + "fonts" + PATH_SEPARATOR;
+    public static final String CACHE_SKINS_DIR               = CACHE_DIR + "skins" + PATH_SEPARATOR;
     public static final String CACHE_TOKEN_PICS_DIR          = PICS_DIR + "tokens" + PATH_SEPARATOR;
     public static final String CACHE_ICON_PICS_DIR           = PICS_DIR + "icons" + PATH_SEPARATOR;
     public static final String CACHE_SYMBOLS_DIR             = PICS_DIR + "symbols" + PATH_SEPARATOR;

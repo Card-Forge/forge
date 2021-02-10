@@ -8,6 +8,7 @@ import forge.download.GuiDownloadQuestImages;
 import forge.download.GuiDownloadSetPicturesLQ;
 import forge.download.GuiDownloadService;
 
+import forge.download.GuiDownloadSkins;
 import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
@@ -76,7 +77,13 @@ public class FilesPage extends TabPage<SettingsScreen> {
                 return new GuiDownloadPrices();
             }
         }, 0);
-
+        lstItems.addItem(new ContentDownloader(localizer.getMessage("btnDownloadSkins"),
+                localizer.getMessage("lblDownloadSkins")) {
+            @Override
+            protected GuiDownloadService createService() {
+                return new GuiDownloadSkins();
+            }
+        }, 0);
         //storage locations
         final StorageOption cardPicsOption = new StorageOption(localizer.getMessage("lblCardPicsLocation"), ForgeProfileProperties.getCardPicsDir()) {
             @Override

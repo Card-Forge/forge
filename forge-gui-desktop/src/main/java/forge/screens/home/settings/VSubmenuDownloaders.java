@@ -66,6 +66,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     private final FLabel btnImportPictures            = _makeButton(localizer.getMessage("btnImportPictures"));
     private final FLabel btnHowToPlay                 = _makeButton(localizer.getMessage("btnHowToPlay"));
     private final FLabel btnDownloadPrices            = _makeButton(localizer.getMessage("btnDownloadPrices"));
+    private final FLabel btnDownloadSkins             = _makeButton(localizer.getMessage("btnDownloadSkins"));
     private final FLabel btnLicensing                 = _makeButton(localizer.getMessage("btnLicensing"));
 
     /**
@@ -101,6 +102,9 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
             pnlContent.add(btnDownloadPrices, constraintsBTN);
             pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPrices")), constraintsLBL);
+
+            pnlContent.add(btnDownloadSkins, constraintsBTN);
+            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadSkins")), constraintsLBL);
 
         } else {
 
@@ -178,6 +182,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     public void setHowToPlayCommand(UiCommand command)                 { btnHowToPlay.setCommand(command);           }
     public void setDownloadPricesCommand(UiCommand command)            { btnDownloadPrices.setCommand(command);      }
     public void setLicensingCommand(UiCommand command)                 { btnLicensing.setCommand(command);           }
+    public void setDownloadSkinsCommand(UiCommand command)             { btnDownloadSkins.setCommand(command);           }
 
     public void focusTopButton() {
         btnDownloadPics.requestFocusInWindow();
