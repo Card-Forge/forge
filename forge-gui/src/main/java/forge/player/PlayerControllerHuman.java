@@ -971,6 +971,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         case Graveyard:
             choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutIntoGraveyard"), localizer.getMessage("lblClosestToBottom"), choices, null);
             break;
+        case Exile:
+            choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutIntoExile"), localizer.getMessage("lblPutFirst"), choices, null);
+            break;
         case PlanarDeck:
             choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutIntoPlanarDeck"), localizer.getMessage("lblClosestToTop"), choices, null);
             break;

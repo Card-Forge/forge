@@ -281,7 +281,15 @@ public class GameAction {
         CardCollection mergedCards = null;
         if (fromBattlefield && !toBattlefield && c.hasMergedCard()) {
             CardCollection cards = new CardCollection(c.getMergedCards());
-            cards = (CardCollection) c.getController().getController().orderMoveToZoneList(cards, zoneTo.getZoneType());
+            // replace top card with copied card for correct name for human to choose.
+            cards.set(cards.indexOf(c), copied);
+            // 721.3b
+            if (zoneTo.getZoneType() == ZoneType.Exile) {
+                cards = (CardCollection) cause.getHostCard().getController().getController().orderMoveToZoneList(cards, zoneTo.getZoneType());
+            } else {
+                cards = (CardCollection) c.getOwner().getController().orderMoveToZoneList(cards, zoneTo.getZoneType());
+            }
+            cards.set(cards.indexOf(copied), c);
             if (zoneTo.is(ZoneType.Library)) {
                 java.util.Collections.reverse(cards);
             }
