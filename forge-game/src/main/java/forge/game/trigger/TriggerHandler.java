@@ -25,6 +25,7 @@ import forge.game.ability.ApiType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
@@ -469,10 +470,39 @@ public class TriggerHandler {
         return true;
     }
 
+    private void runSingleTrigger(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
+        // If the runParams contains MergedCards, it is called from GameAction.changeZone()
+        if (runParams.get(AbilityKey.MergedCards) != null) {
+            // Check if the trigger cares the origin is from battlefield
+            Card original = (Card) runParams.get(AbilityKey.Card);
+            Card lastKnownInfo = (Card) runParams.get(AbilityKey.CardLKI);
+            CardCollection mergedCards = (CardCollection) runParams.get(AbilityKey.MergedCards);
+            CardCollection mergedCardsLKI = new CardCollection(mergedCards);
+            mergedCards.set(mergedCards.indexOf(original), original);
+            mergedCardsLKI.set(mergedCardsLKI.indexOf(original), lastKnownInfo);
+            Map<AbilityKey, Object> newParams = AbilityKey.mapFromCard(original);
+            newParams.putAll(runParams);
+            if ("Battlefield".equals(regtrig.getParam("Origin"))) {
+                // If yes, only trigger once
+                newParams.put(AbilityKey.Card, mergedCards);
+                newParams.put(AbilityKey.CardLKI, mergedCardsLKI);
+                runSingleTriggerInternal(regtrig, newParams);
+            } else {
+                // Else, trigger for each merged components
+                for (final Card c : mergedCards) {
+                    newParams.put(AbilityKey.Card, c);
+                    runSingleTriggerInternal(regtrig, newParams);
+                }
+            }
+        } else {
+            runSingleTriggerInternal(regtrig, runParams);
+        }
+    }
+
     // Checks if the conditions are right for a single trigger to go off, and
     // runs it if so.
     // Return true if the trigger went off, false otherwise.
-    private void runSingleTrigger(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
+    private void runSingleTriggerInternal(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
 
         // All tests passed, execute ability.
         if (regtrig instanceof TriggerTapsForMana) {

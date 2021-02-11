@@ -278,20 +278,24 @@ public class GameAction {
         copied.getOwner().removeInboundToken(copied);
 
         // Handle merged permanent here so all replacement effects are already applied.
-        if (fromBattlefield && c.hasMergedCard()) {
-            Card ret = null;
+        CardCollection mergedCards = null;
+        if (fromBattlefield && !toBattlefield && c.hasMergedCard()) {
             CardCollection cards = new CardCollection(c.getMergedCards());
             cards = (CardCollection) c.getController().getController().orderMoveToZoneList(cards, zoneTo.getZoneType());
             if (zoneTo.is(ZoneType.Library)) {
                 java.util.Collections.reverse(cards);
             }
-            c.clearMergedCards();
-            for (final Card card : cards) {
-                card.setMergedToCard(null);
-                Card t = changeZone(card.getZone(), zoneTo, card, position, cause, params);
-                if (card == c) ret = t;
+            mergedCards = cards;
+            final SpellAbility saTargeting = cause.getSATargetingCard();
+            if (saTargeting != null) {
+                saTargeting.getTargets().replaceTargetCard(c, cards);
             }
-            return ret;
+            // Replace host rememberd cards
+            Card hostCard = cause.getHostCard();
+            if (hostCard.isRemembered(c)) {
+                hostCard.removeRemembered(c);
+                hostCard.addRemembered(cards);
+            }
         }
 
         if (suppress) {
@@ -308,6 +312,11 @@ public class GameAction {
             if ((zoneFrom.is(ZoneType.Library) || zoneFrom.is(ZoneType.PlanarDeck) || zoneFrom.is(ZoneType.SchemeDeck))
                     && zoneFrom == zoneTo && position.equals(zoneFrom.size()) && position != 0) {
                 position--;
+            }
+            if (mergedCards != null) {
+                for (final Card card : mergedCards) {
+                    c.getOwner().getZone(ZoneType.Merged).remove(card);
+                }
             }
             zoneFrom.remove(c);
             if (!zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Stack)) {
@@ -347,8 +356,18 @@ public class GameAction {
 
         // "enter the battlefield as a copy" - apply code here
         // but how to query for input here and continue later while the callers assume synchronous result?
-        zoneTo.add(copied, position, lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
-        c.setZone(zoneTo);
+        if (mergedCards != null) {
+            for (final Card card : mergedCards) {
+                if (card == c) {
+                    zoneTo.add(copied, position, lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
+                } else {
+                    zoneTo.add(card, position);
+                }
+            }
+        } else {
+            zoneTo.add(copied, position, lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
+            c.setZone(zoneTo);
+        }
 
         // do ETB counters after zone add
         if (!suppress) {
@@ -393,6 +412,7 @@ public class GameAction {
         runParams.put(AbilityKey.Destination, zoneTo.getZoneType().name());
         runParams.put(AbilityKey.SpellAbilityStackInstance, game.stack.peek());
         runParams.put(AbilityKey.IndividualCostPaymentInstance, game.costPaymentStack.peek());
+        runParams.put(AbilityKey.MergedCards, mergedCards);
 
         if (params != null) {
             runParams.putAll(params);

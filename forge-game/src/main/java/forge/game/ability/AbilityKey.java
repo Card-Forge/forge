@@ -74,6 +74,7 @@ public enum AbilityKey {
     LifeAmount("LifeAmount"), //TODO confirm that this and LifeGained can be merged
     LifeGained("LifeGained"),
     Mana("Mana"),
+    MergedCards("MergedCards"),
     MonstrosityAmount("MonstrosityAmount"),
     NewCard("NewCard"),
     NewCounterAmount("NewCounterAmount"),
