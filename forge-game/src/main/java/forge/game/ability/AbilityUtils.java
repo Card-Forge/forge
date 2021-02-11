@@ -395,7 +395,7 @@ public class AbilityUtils {
      * <p>
      * calculateAmount.
      * </p>
-     * 
+     *
      * @param card
      *            a {@link forge.game.card.Card} object.
      * @param amount
@@ -792,7 +792,7 @@ public class AbilityUtils {
      * <p>
      * getDefinedObjects.
      * </p>
-     * 
+     *
      * @param card
      *            a {@link forge.game.card.Card} object.
      * @param def
@@ -822,7 +822,7 @@ public class AbilityUtils {
 
     /**
      * Filter list by type.
-     * 
+     *
      * @param list
      *            a CardList
      * @param type
@@ -951,7 +951,7 @@ public class AbilityUtils {
      * <p>
      * getDefinedPlayers.
      * </p>
-     * 
+     *
      * @param card
      *            a {@link forge.game.card.Card} object.
      * @param def
@@ -1054,6 +1054,10 @@ public class AbilityUtils {
                 if (c instanceof SpellAbility) {
                     o = ((SpellAbility) c).getActivatingPlayer();
                 }
+                // For merged permanent
+                if (c instanceof CardCollection) {
+                    o = ((CardCollection) c).get(0).getController();
+                }
             }
             else if (defParsed.endsWith("Opponent")) {
                 String triggeringType = defParsed.substring(9);
@@ -1065,6 +1069,10 @@ public class AbilityUtils {
                 if (c instanceof SpellAbility) {
                     o = ((SpellAbility) c).getActivatingPlayer().getOpponents();
                 }
+                // For merged permanent
+                if (c instanceof CardCollection) {
+                    o = ((CardCollection) c).get(0).getController().getOpponents();;
+                }
             }
             else if (defParsed.endsWith("Owner")) {
                 String triggeringType = defParsed.substring(9);
@@ -1072,6 +1080,10 @@ public class AbilityUtils {
                 final Object c = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
                 if (c instanceof Card) {
                     o = ((Card) c).getOwner();
+                }
+                // For merged permanent
+                if (c instanceof CardCollection) {
+                    o = ((CardCollection) c).get(0).getOwner();
                 }
             }
             else {
@@ -1225,7 +1237,7 @@ public class AbilityUtils {
      * <p>
      * getDefinedSpellAbilities.
      * </p>
-     * 
+     *
      * @param card
      *            a {@link forge.game.card.Card} object.
      * @param def
@@ -1489,7 +1501,7 @@ public class AbilityUtils {
      * <p>
      * handleRemembering.
      * </p>
-     * 
+     *
      * @param sa
      *            a SpellAbility object.
      */
@@ -1554,7 +1566,7 @@ public class AbilityUtils {
      * <p>
      * Parse non-mana X variables.
      * </p>
-     * 
+     *
      * @param c
      *            a {@link forge.game.card.Card} object.
      * @param s
@@ -1716,7 +1728,7 @@ public class AbilityUtils {
                     final String payingMana = StringUtils.join(sa.getRootAbility().getPayingMana());
                     final int num = sq[0].length() > 7 ? Integer.parseInt(sq[0].split("_")[1]) : 3;
                     final boolean adamant = StringUtils.countMatches(payingMana, MagicColor.toShortString(sq[1])) >= num;
-                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[adamant ? 2 : 3]), expr, c); 
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[adamant ? 2 : 3]), expr, c);
                 }
 
                 if (l[0].startsWith("LastStateBattlefield")) {
@@ -1969,7 +1981,7 @@ public class AbilityUtils {
         }
         return cause;
     }
-    
+
 
     public static SpellAbility addSpliceEffects(final SpellAbility sa) {
         final Card source = sa.getHostCard();
@@ -2029,7 +2041,7 @@ public class AbilityUtils {
 
         if (spliceCost == null)
             return;
-        
+
         SpellAbility firstSpell = c.getFirstSpellAbility();
         Map<String, String> params = Maps.newHashMap(firstSpell.getMapParams());
         ApiType api = AbilityRecordType.getRecordType(params).getApiTypeOf(params);
