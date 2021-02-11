@@ -2762,9 +2762,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         return token;
     }
+    public final boolean isRealToken() {
+        return token;
+    }
     public final void setToken(boolean token0) {
         if (token == token0) { return; }
         token = token0;
+        view.updateToken(this);
+    }
+    public final void updateTokenView() {
         view.updateToken(this);
     }
 
@@ -2785,7 +2791,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean isFaceDown() {
-        //return currentStateName == CardStateName.FaceDown;
         if (hasMergedCard()) {
             return getTopMergedCard().facedown;
         }

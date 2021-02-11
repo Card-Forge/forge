@@ -203,7 +203,7 @@ public class GameAction {
                 lastKnownInfo = CardUtil.getLKICopy(c);
             }
 
-            if (!c.isToken()) {
+            if (!c.isRealToken()) {
                 copied = CardFactory.copyCard(c, false);
 
                 if (fromBattlefield) {
@@ -366,11 +366,27 @@ public class GameAction {
         // but how to query for input here and continue later while the callers assume synchronous result?
         if (mergedCards != null) {
             for (final Card card : mergedCards) {
+                // 721.3e
+                if (c.isToken()) {
+                    Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(card);
+                    repParams.put(AbilityKey.CardLKI, card);
+                    repParams.put(AbilityKey.Cause, cause);
+                    repParams.put(AbilityKey.Origin, zoneFrom != null ? zoneFrom.getZoneType() : null);
+                    repParams.put(AbilityKey.Destination, zoneTo.getZoneType());
+
+                    if (params != null) {
+                        repParams.putAll(params);
+                    }
+
+                    ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.Moved, repParams);
+                    if (repres != ReplacementResult.NotReplaced) continue;
+                }
                 if (card == c) {
                     zoneTo.add(copied, position, lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
                 } else {
                     zoneTo.add(card, position);
                 }
+                card.setZone(zoneTo);
             }
         } else {
             zoneTo.add(copied, position, lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
@@ -445,7 +461,7 @@ public class GameAction {
             return copied;
         }
 
-        if (!c.isToken() && !toBattlefield) {
+        if (!c.isRealToken() && !toBattlefield) {
             copied.clearDevoured();
             copied.clearDelved();
             copied.clearConvoked();
@@ -460,13 +476,13 @@ public class GameAction {
         }
 
         if (fromBattlefield) {
-            if (!c.isToken()) {
+            if (!c.isRealToken()) {
                 copied.setState(CardStateName.Original, true);
             }
             // Soulbond unpairing
             if (c.isPaired()) {
                 c.getPairedWith().setPairedWith(null);
-                if (!c.isToken()) {
+                if (!c.isRealToken()) {
                     c.setPairedWith(null);
                 }
             }
@@ -1250,7 +1266,7 @@ public class GameAction {
     // If a token is in a zone other than the battlefield, it ceases to exist.
     private boolean stateBasedAction704_5d(Card c) {
         boolean checkAgain = false;
-        if (c.isToken()) {
+        if (c.isRealToken()) {
             final Zone zoneFrom = game.getZoneOf(c);
             if (!zoneFrom.is(ZoneType.Battlefield)) {
                 zoneFrom.remove(c);

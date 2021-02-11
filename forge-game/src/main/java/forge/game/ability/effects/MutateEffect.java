@@ -79,6 +79,7 @@ public class MutateEffect extends SpellAbilityEffect {
         host.setTapped(target.isTapped());
         host.setFlipped(target.isFlipped());
         target.setTimesMutated(target.getTimesMutated() + 1);
+        target.updateTokenView();
 
         game.getTriggerHandler().runTrigger(TriggerType.Mutates, AbilityKey.mapFromCard(target), false);
     }
