@@ -351,6 +351,15 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.CommanderCast, map);
     }
 
+    void updateMergedCommanderCast(Player p, Card target, Card commander) {
+        Map<Integer, Integer> map = get(TrackableProperty.CommanderCast);
+        if (map == null) {
+            map = Maps.newHashMap();
+        }
+        map.put(target.getId(), p.getCommanderCast(commander));
+        set(TrackableProperty.CommanderCast, map);
+    }
+
     public PlayerView getMindSlaveMaster() {
         return get(TrackableProperty.MindSlaveMaster);
     }

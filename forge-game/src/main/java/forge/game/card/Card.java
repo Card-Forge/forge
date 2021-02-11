@@ -2757,7 +2757,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // is this "Card" supposed to be a token?
     public final boolean isToken() {
-        if (hasMergedCard()) {
+        if (isInZone(ZoneType.Battlefield) && hasMergedCard()) {
             return getTopMergedCard().token;
         }
         return token;
@@ -6240,11 +6240,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public boolean isCommander() {
         if (this.getMeldedWith() != null && this.getMeldedWith().isCommander())
             return true;
+        if (isInZone(ZoneType.Battlefield) && hasMergedCard()) {
+            for (final Card c : getMergedCards())
+                if (c.isCommander) return true;
+        }
+        return isCommander;
+    }
+    public boolean isRealCommander() {
         return isCommander;
     }
     public void setCommander(boolean b) {
         if (isCommander == b) { return; }
         isCommander = b;
+        view.updateCommander(this);
+    }
+    public void updateCommanderView() {
         view.updateCommander(this);
     }
 

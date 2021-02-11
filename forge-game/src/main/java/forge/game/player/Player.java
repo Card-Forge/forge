@@ -2886,6 +2886,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
     }
 
+    public void updateMergedCommanderCast(Card target, Card commander) {
+        getView().updateMergedCommanderCast(this, target, commander);
+    }
+
     public int getTotalCommanderCast() {
         int result = 0;
         for (Integer i : commanderCast.values()) {

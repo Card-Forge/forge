@@ -132,6 +132,7 @@ public class GameAction {
 
         Card copied = null;
         Card lastKnownInfo = null;
+        Card commanderEffect = null; // The effect card of commander replacement effect
 
         // get the LKI from above like ChangeZoneEffect
         if (params != null && params.containsKey(AbilityKey.CardLKI)) {
@@ -231,6 +232,26 @@ public class GameAction {
         copied.updateStateForView();
 
         if (!suppress) {
+            // Temporary disable commander replacement effect
+            // 903.9a
+            if (fromBattlefield && c.isCommander() && c.hasMergedCard()) {
+                // Find the commander replacement effect "card"
+                CardCollectionView comCards = c.getOwner().getCardsIn(ZoneType.Command);
+                for (final Card effCard : comCards) {
+                    for (final ReplacementEffect re : effCard.getReplacementEffects()) {
+                        if (re.getMode() == ReplacementType.Moved && "Card.EffectSource+YouOwn".equals(re.getParam("ValidCard"))) {
+                            commanderEffect = effCard;
+                            break;
+                        }
+                    }
+                    if (commanderEffect != null) break;
+                }
+                // Disable the commander replacement effect
+                for (final ReplacementEffect re : commanderEffect.getReplacementEffects()) {
+                    re.setSuppressed(true);
+                }
+            }
+
             if (zoneFrom == null) {
                 copied.getOwner().addInboundToken(copied);
             }
@@ -362,12 +383,24 @@ public class GameAction {
             }
         }
 
-        // "enter the battlefield as a copy" - apply code here
-        // but how to query for input here and continue later while the callers assume synchronous result?
         if (mergedCards != null) {
+            // Move components of merged permanet here
+            // Also handle 721.3e and 903.9a
+            boolean wasToken = c.isToken();
+            if (commanderEffect != null) {
+                for (final ReplacementEffect re : commanderEffect.getReplacementEffects()) {
+                    re.setSuppressed(false);
+                }
+            }
+            // Change zone of original card so components isToken() and isCommander() return correct value
+            // when running replacement effects here
+            c.setZone(zoneTo);
             for (final Card card : mergedCards) {
-                // 721.3e
-                if (c.isToken()) {
+                if (card.isRealCommander()) {
+                    card.setMoveToCommandZone(true);
+                }
+                // 721.3e & 903.9a
+                if (wasToken && !card.isToken() || card.isRealCommander()) {
                     Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(card);
                     repParams.put(AbilityKey.CardLKI, card);
                     repParams.put(AbilityKey.Cause, cause);
@@ -389,6 +422,8 @@ public class GameAction {
                 card.setZone(zoneTo);
             }
         } else {
+            // "enter the battlefield as a copy" - apply code here
+            // but how to query for input here and continue later while the callers assume synchronous result?
             zoneTo.add(copied, position, lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
             c.setZone(zoneTo);
         }
@@ -611,7 +646,7 @@ public class GameAction {
             AttachEffect.attachAuraOnIndirectEnterBattlefield(c);
         }
 
-        if (c.isCommander()) {
+        if (c.isRealCommander()) {
             c.setMoveToCommandZone(true);
         }
 
@@ -1234,7 +1269,7 @@ public class GameAction {
     }
 
     private boolean stateBasedAction903_9a(Card c) {
-        if (c.isCommander() && c.canMoveToCommandZone()) {
+        if (c.isRealCommander() && c.canMoveToCommandZone()) {
             c.setMoveToCommandZone(false);
             if (c.getOwner().getController().confirmAction(c.getSpellPermanent(), PlayerActionConfirmMode.ChangeZoneToAltDestination, c.getName() + ": If a commander is in a graveyard or in exile and that card was put into that zone since the last time state-based actions were checked, its owner may put it into the command zone.")) {
                 moveTo(c.getOwner().getZone(ZoneType.Command), c, null);

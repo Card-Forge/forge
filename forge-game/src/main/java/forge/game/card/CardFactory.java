@@ -101,7 +101,7 @@ public class CardFactory {
         for (final Card o : in.getImprintedCards()) {
             out.addImprintedCard(o);
         }
-        out.setCommander(in.isCommander());
+        out.setCommander(in.isRealCommander());
         //out.setFaceDown(in.isFaceDown());
 
         return out;
