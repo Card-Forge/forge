@@ -1,7 +1,6 @@
 package forge.game.ability.effects;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -149,14 +148,13 @@ public class PlayEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ValidSA")) {
             final String valid[] = {sa.getParam("ValidSA")};
-            final Iterator<Card> itr = tgtCards.iterator();
-            while (itr.hasNext()) {
-                final Card c = itr.next();
-                final List<SpellAbility> validSA = Lists.newArrayList(Iterables.filter(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , c, sa)));
-                if (validSA.size() == 0) {
-                    itr.remove();
+            List<Card> toRemove = Lists.newArrayList();
+            for (Card c : tgtCards) {
+                if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , c, sa))) {
+                    toRemove.add(c);
                 }
             }
+            tgtCards.removeAll(toRemove);
             if (tgtCards.isEmpty()) {
                 return;
             }
