@@ -2,7 +2,18 @@ package forge.game;
 
 import com.google.common.base.Predicate;
 
+import forge.game.card.Card;
+
 public class CardTraitPredicates {
+
+    public static final Predicate<CardTraitBase> isHostCard(final Card host) {
+        return new Predicate<CardTraitBase>() {
+            @Override
+            public boolean apply(final CardTraitBase sa) {
+                return host.equals(sa.getHostCard());
+            }
+        };
+    }
 
     public static final Predicate<CardTraitBase> hasParam(final String name) {
         return new Predicate<CardTraitBase>() {

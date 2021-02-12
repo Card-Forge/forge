@@ -19,6 +19,7 @@ package forge.game.replacement;
 
 import forge.game.Game;
 import forge.game.TriggerReplacementBase;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -270,5 +271,14 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
     void setMode(ReplacementType mode) {
         this.mode = mode;
+    }
+
+    public SpellAbility ensureAbility() {
+        SpellAbility sa = getOverridingAbility();
+        if (sa == null && hasParam("ReplaceWith")) {
+            sa = AbilityFactory.getAbility(getHostCard(), getParam("ReplaceWith"));
+            setOverridingAbility(sa);
+        }
+        return sa;
     }
 }

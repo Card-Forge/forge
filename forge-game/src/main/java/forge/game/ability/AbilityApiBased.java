@@ -1,9 +1,5 @@
 package forge.game.ability;
 
-import forge.game.ability.effects.ChangeZoneAllEffect;
-import forge.game.ability.effects.ChangeZoneEffect;
-import forge.game.ability.effects.ManaEffect;
-import forge.game.ability.effects.ManaReflectedEffect;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.spellability.AbilityActivated;
@@ -15,8 +11,6 @@ import java.util.Map;
 public class AbilityApiBased extends AbilityActivated {
     private final SpellAbilityEffect effect;
 
-    private static final long serialVersionUID = -4183793555528531978L;
-
     public AbilityApiBased(ApiType api0, Card sourceCard, Cost abCost, TargetRestrictions tgt, Map<String, String> params0) {
         super(sourceCard, abCost, tgt);
         originalMapParams.putAll(params0);
@@ -24,13 +18,12 @@ public class AbilityApiBased extends AbilityActivated {
         api = api0;
         effect = api.getSpellEffect();
 
-        if (effect instanceof ManaEffect || effect instanceof ManaReflectedEffect) {
-
+        if (api.equals(ApiType.Mana) || api.equals(ApiType.ManaReflected)) {
             this.setManaPart(new AbilityManaPart(sourceCard, mapParams));
             this.setUndoable(true); // will try at least
         }
 
-        if (effect instanceof ChangeZoneEffect || effect instanceof ChangeZoneAllEffect) {
+        if (api.equals(ApiType.ChangeZone) || api.equals(ApiType.ChangeZoneAll)) {
             AbilityFactory.adjustChangeZoneTarget(mapParams, this);
         }
     }

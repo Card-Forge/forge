@@ -17,7 +17,6 @@
  */
 package forge.game.replacement;
 
-import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
@@ -259,12 +258,17 @@ public class ReplacementHandler {
         chosenRE.setHasRun(false);
         hasRun.remove(chosenRE);
         chosenRE.setOtherChoices(null);
-        String message = chosenRE.getDescription();
-        if ( !StringUtils.isEmpty(message))
-            if (chosenRE.getHostCard() != null) {
-                message = TextUtil.fastReplace(message, "CARDNAME", chosenRE.getHostCard().getName());
-            }
-            game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
+
+        // Updated Replacements need to be logged elsewhere because its otherwise in the wrong order
+        if (res != ReplacementResult.Updated) {
+            String message = chosenRE.getDescription();
+            if ( !StringUtils.isEmpty(message))
+                if (chosenRE.getHostCard() != null) {
+                    message = TextUtil.fastReplace(message, "CARDNAME", chosenRE.getHostCard().getName());
+                }
+                game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
+        }
+
         return res;
     }
 
@@ -344,25 +348,11 @@ public class ReplacementHandler {
 
         Player player = host.getController();
 
-        if (mapParams.containsKey("ManaReplacement")) {
-            final SpellAbility manaAb = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
-            final Player player1 = (Player) runParams.get(AbilityKey.Player);
-            final String rep = (String) runParams.get(AbilityKey.Mana);
-            // Replaced mana type
-            final Card repHost = host;
-            String repType = repHost.getSVar(mapParams.get("ManaReplacement"));
-            if (repType.contains("Chosen") && repHost.hasChosenColor()) {
-                repType = TextUtil.fastReplace(repType, "Chosen", MagicColor.toShortString(repHost.getChosenColor()));
-            }
-            manaAb.getManaPart().setManaReplaceType(repType);
-            manaAb.getManaPart().produceMana(rep, player1, manaAb);
-        } else {
-            player.getController().playSpellAbilityNoStack(effectSA, true);
-            // if the spellability is a replace effect then its some new logic
-            // if ReplacementResult is set in run params use that instead
-            if (runParams.containsKey(AbilityKey.ReplacementResult)) {
-                return (ReplacementResult) runParams.get(AbilityKey.ReplacementResult);
-            }
+        player.getController().playSpellAbilityNoStack(effectSA, true);
+        // if the spellability is a replace effect then its some new logic
+        // if ReplacementResult is set in run params use that instead
+        if (runParams.containsKey(AbilityKey.ReplacementResult)) {
+            return (ReplacementResult) runParams.get(AbilityKey.ReplacementResult);
         }
 
         return ReplacementResult.Replaced;
@@ -405,6 +395,10 @@ public class ReplacementHandler {
         String activeZones = mapParams.get("ActiveZones");
         if (null != activeZones) {
             ret.setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(activeZones)));
+        }
+
+        if (mapParams.containsKey("ReplaceWith")) {
+            ret.setOverridingAbility(AbilityFactory.getAbility(host, mapParams.get("ReplaceWith"), ret));
         }
 
         return ret;

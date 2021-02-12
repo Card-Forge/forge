@@ -237,19 +237,101 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         view.updateDescription(this); //description can change if host card does
     }
 
+    public boolean canThisProduce(final String s) {
+        AbilityManaPart mp = getManaPart();
+        if (mp != null && metConditions() && mp.canProduce(s, this)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean canProduce(final String s) {
+        if (canThisProduce(s)) {
+            return true;
+        }
+
+        return this.subAbility != null ? this.subAbility.canProduce(s) : false;
+    }
+
+    public boolean isManaAbilityFor(SpellAbility saPaidFor, byte colorNeeded) {
+        // is root ability
+        if (this.getParent() == null) {
+            if (!canPlay()) {
+                return false;
+            }
+            if (isAbility() && getRestrictions().isInstantSpeed()) {
+                return false;
+            }
+        }
+
+        AbilityManaPart mp = getManaPart();
+        if (mp != null && metConditions() && mp.meetsManaRestrictions(saPaidFor) && mp.abilityProducesManaColor(this, colorNeeded)) {
+            return true;
+        }
+        return this.subAbility != null ? this.subAbility.isManaAbilityFor(saPaidFor, colorNeeded) : false;
+    }
+
+    public boolean isManaCannotCounter(SpellAbility saPaidFor) {
+        AbilityManaPart mp = getManaPart();
+        if (mp != null && metConditions() && mp.meetsManaRestrictions(saPaidFor) && mp.cannotCounterPaidWith(saPaidFor)) {
+            return true;
+        }
+        return this.subAbility != null ? this.subAbility.isManaCannotCounter(saPaidFor) : false;
+    }
+
+    public int amountOfManaGenerated(boolean multiply) {
+        int result = 0;
+        AbilityManaPart mp = getManaPart();
+        if (mp != null && metConditions()) {
+            int amount = hasParam("Amount") ? AbilityUtils.calculateAmount(getHostCard(), getParam("Amount"), this) : 1;
+
+            if (!multiply || mp.isAnyMana() || mp.isComboMana() || mp.isSpecialMana()) {
+                result += amount;
+            } else {
+                // For cards that produce like {C}{R} vs cards that produce {R}{R}.
+                result += mp.mana().split(" ").length * amount;
+            }
+        }
+        return result;
+    }
+
+    public int totalAmountOfManaGenerated(SpellAbility saPaidFor, boolean multiply) {
+        int result = 0;
+        AbilityManaPart mp = getManaPart();
+        if (mp != null && metConditions() && mp.meetsManaRestrictions(saPaidFor)) {
+            result += amountOfManaGenerated(multiply);
+        }
+        result += subAbility != null ? subAbility.totalAmountOfManaGenerated(saPaidFor, multiply) : 0;
+        return result;
+    }
+
+    public void setManaExpressChoice(ColorSet cs) {
+        AbilityManaPart mp = getManaPart();
+        if (mp != null) {
+            mp.setExpressChoice(cs);
+        }
+        if (subAbility != null) {
+            subAbility.setManaExpressChoice(cs);
+        }
+    }
+
     public final AbilityManaPart getManaPart() {
         return manaPart;
     }
 
-    public final AbilityManaPart getManaPartRecursive() {
-        SpellAbility tail = this;
-        while (tail != null) {
-            if (tail.manaPart != null) {
-                return tail.manaPart;
-            }
-            tail = tail.getSubAbility();
+    public final List<AbilityManaPart> getAllManaParts() {
+        AbilityManaPart mp = getManaPart();
+        if (mp == null && subAbility == null) {
+            return ImmutableList.of();
         }
-        return null;
+        List<AbilityManaPart> result = Lists.newArrayList();
+        if (mp != null) {
+            result.add(mp);
+        }
+        if (subAbility != null) {
+            result.addAll(subAbility.getAllManaParts());
+        }
+        return result;
     }
 
     public final boolean isManaAbility() {
@@ -266,7 +348,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return false;
         }
 
-        return getManaPartRecursive() != null;
+        SpellAbility tail = this;
+        while (tail != null) {
+            if (tail.manaPart != null) {
+                return true;
+            }
+            tail = tail.getSubAbility();
+        }
+        return false;
     }
 
     protected final void setManaPart(AbilityManaPart manaPart0) {
@@ -462,6 +551,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public final void setConditions(final SpellAbilityCondition condition) {
         conditions = condition;
+    }
+
+    public boolean metConditions() {
+        return getConditions() != null && getConditions().areMet(this);
     }
 
     public List<Mana> getPayingMana() {
@@ -1880,9 +1973,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean tracksManaSpent() {
         if (hostCard == null || hostCard.getRules() == null) { return false; }
 
-        if (hostCard.hasKeyword(Keyword.SUNBURST)) {
+        if (isSpell() && hostCard.hasConverge()) {
             return true;
         }
+
         String text = hostCard.getRules().getOracleText();
         if (isSpell() && text.contains("was spent to cast")) {
             return true;
@@ -2019,7 +2113,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             String mana = manaPart.mana();
             if (!mana.equals("Any")) {
                 score += mana.length();
-                if (!manaPart.canProduce("C")) {
+                if (!canProduce("C")) {
                     // Producing colorless should produce a slightly lower score
                     score += 1;
                 }

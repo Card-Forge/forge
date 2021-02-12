@@ -429,8 +429,7 @@ public class AiController {
                     byte color = MagicColor.fromName(c);
                     for (Card land : landList) {
                         for (final SpellAbility m : ComputerUtilMana.getAIPlayableMana(land)) {
-                            AbilityManaPart mp = m.getManaPart();
-                            if (mp.canProduce(MagicColor.toShortString(color), m)) {
+                            if (m.canProduce(MagicColor.toShortString(color))) {
                                 return land;
                             }
                         }
@@ -483,8 +482,7 @@ public class AiController {
                             return land;
                         }
                         for (final SpellAbility m : ComputerUtilMana.getAIPlayableMana(land)) {
-                            AbilityManaPart mp = m.getManaPart();
-                            if (mp.canProduce(MagicColor.toShortString(color), m)) {
+                            if (m.canProduce(MagicColor.toShortString(color))) {
                                 return land;
                             }
                         }

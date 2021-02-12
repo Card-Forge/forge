@@ -2,9 +2,8 @@ Name:Deep Water
 ManaCost:U U
 Types:Enchantment
 A:AB$ Effect | Cost$ U | ReplacementEffects$ ReplaceU | SVars$ ProduceU | SpellDescription$ Until end of turn, if you tap a land you control for mana, it produces {U} instead of any other type.
-SVar:ReplaceU:Event$ ProduceMana | ActiveZones$ Command | ValidCard$ Land.YouCtrl | ManaReplacement$ ProduceU | Description$ If you tap a land you control for mana, it produces U instead of any other type.
-SVar:ProduceU:C->U & B->U & R->U & G->U & W->U
+SVar:ReplaceU:Event$ ProduceMana | ActiveZones$ Command | ValidPlayer$ You | ValidCard$ Land.YouCtrl | ValidAbility$ Activated.hasTapCost | ReplaceWith$ ProduceU | Description$ If you tap a land you control for mana, it produces U instead of any other type.
+SVar:ProduceU:DB$ ReplaceMana | ReplaceType$ U
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deep_water.jpg
 Oracle:{U}: Until end of turn, if you tap a land you control for mana, it produces {U} instead of any other type.

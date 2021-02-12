@@ -2353,7 +2353,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (ab.getApi() == ApiType.ManaReflected) {
                 colors.addAll(CardUtil.getReflectableManaColors(ab));
             } else {
-                colors = CardUtil.canProduce(6, ab.getManaPart(), colors);
+                colors = CardUtil.canProduce(6, ab, colors);
             }
         }
 
@@ -2364,7 +2364,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         return true;
                     }
                 } else {
-                    if (mana.getManaPart().canProduce(MagicColor.toShortString(s))) {
+                    if (mana.canProduce(MagicColor.toShortString(s))) {
                         return true;
                     }
                 }

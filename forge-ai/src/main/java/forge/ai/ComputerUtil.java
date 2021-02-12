@@ -2075,9 +2075,8 @@ public class ComputerUtil {
 
             for (Card c : lands) {
                 for (SpellAbility sa : c.getManaAbilities()) {
-                    AbilityManaPart abmana = sa.getManaPart();
                     for (byte col : MagicColor.WUBRG) {
-                        if (abmana.canProduce(MagicColor.toLongString(col))) {
+                        if (sa.canProduce(MagicColor.toLongString(col))) {
                             numProducers.get(col).add(c);
                         }
                     }
