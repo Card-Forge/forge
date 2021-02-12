@@ -450,6 +450,21 @@ public class Forge implements ApplicationListener {
             currentScreen = screen0;
             currentScreen.setSize(screenWidth, screenHeight);
             currentScreen.onActivate();
+            //keep Dscreens growing
+            if (Dscreens.size() > 3) {
+                for(int x = Dscreens.size(); x > 3; x--) {
+                    Dscreens.removeLast();
+                }
+            }
+            /* for checking only
+            if (!Dscreens.isEmpty()) {
+                int x = 0;
+                for(FScreen fScreen : Dscreens) {
+                    System.out.println("Screen ["+x+"]: "+fScreen.toString());
+                    x++;
+                }
+                System.out.println("---------------");
+            }*/
         }
         catch (Exception ex) {
             graphics.end();
