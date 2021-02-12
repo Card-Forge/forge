@@ -5932,21 +5932,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public boolean hasETBTrigger(final boolean drawbackOnly) {
         for (final Trigger tr : getTriggers()) {
-            final Map<String, String> params = tr.getMapParams();
             if (tr.getMode() != TriggerType.ChangesZone) {
                 continue;
             }
 
-            if (!params.get("Destination").equals(ZoneType.Battlefield.toString())) {
+            if (!tr.getParam("Destination").equals(ZoneType.Battlefield.toString())) {
                 continue;
             }
 
-            if (params.containsKey("ValidCard") && !params.get("ValidCard").contains("Self")) {
+            if (tr.hasParam("ValidCard") && !tr.getParam("ValidCard").contains("Self")) {
                 continue;
             }
-            if (drawbackOnly && params.containsKey("Execute")){
-                String exec = this.getSVar(params.get("Execute"));
-                if (exec.contains("AB$")) {
+            if (drawbackOnly) {
+                SpellAbility sa = tr.ensureAbility();
+                if (sa == null || sa.isActivatedAbility()) {
                     continue;
                 }
             }

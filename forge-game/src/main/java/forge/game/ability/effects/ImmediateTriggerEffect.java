@@ -57,7 +57,7 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
         Card lki = CardUtil.getLKICopy(gameCard);
         lki.clearControllers();
         lki.setOwner(sa.getActivatingPlayer());
-        final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, lki, sa.isIntrinsic());
+        final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, lki, sa.isIntrinsic(), null);
         immediateTrig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
 
         // Need to copy paid costs
@@ -74,7 +74,7 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
             }
         }
 
-        if (mapParams.containsKey("Execute") || sa.hasAdditionalAbility("Execute")) {
+        if (sa.hasAdditionalAbility("Execute")) {
             AbilitySub overridingSA = (AbilitySub)sa.getAdditionalAbility("Execute").copy(lki, sa.getActivatingPlayer(), false);
             // need to set Parent to null, otherwise it might have wrong root ability
             overridingSA.setParent(null);
@@ -85,9 +85,8 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
 
             immediateTrig.setOverridingAbility(overridingSA);
         }
-        final TriggerHandler trigHandler  = sa.getActivatingPlayer().getGame().getTriggerHandler();
 
         // Instead of registering this, add to the delayed triggers as an immediate trigger type? Which means it'll fire as soon as possible
-        trigHandler.registerDelayedTrigger(immediateTrig);
+        game.getTriggerHandler().registerDelayedTrigger(immediateTrig);
     }
 }

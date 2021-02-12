@@ -582,6 +582,9 @@ public final class GameActionUtil {
     public static String generatedMana(final SpellAbility sa) {
         int amount = sa.amountOfManaGenerated(false);
         AbilityManaPart abMana = sa.getManaPart();
+        if (abMana == null) {
+            return "";
+        }
         String baseMana;
 
         if (abMana.isComboMana()) {

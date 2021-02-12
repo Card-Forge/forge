@@ -26,7 +26,7 @@ public final class CardRelationMatrixGenerator {
 
     public static HashMap<String,HashMap<String,List<Map.Entry<PaperCard,Integer>>>> cardPools = new HashMap<>();
 
-    public static Map<String, Map<String,List<List<String>>>> ldaPools = new HashMap();
+    public static Map<String, Map<String,List<List<String>>>> ldaPools = new HashMap<>();
     /**
         To ensure that only cards with at least 14 connections (as 14*4+4=60) are included in the card based deck
         generation pools

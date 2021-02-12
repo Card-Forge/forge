@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import forge.ai.*;
-import forge.game.ability.AbilityFactory;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -16,12 +15,11 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
             return true;
         }
 
-        SpellAbility trigsa = null;
-        if (sa.hasAdditionalAbility("Execute")) {
-            trigsa = sa.getAdditionalAbility("Execute");
-        } else {
-            trigsa = AbilityFactory.getAbility(sa.getHostCard(), sa.getParam("Execute"));
+        SpellAbility trigsa = sa.getAdditionalAbility("Execute");
+        if (trigsa == null) {
+            return false;
         }
+
         trigsa.setActivatingPlayer(ai);
 
         if (trigsa instanceof AbilitySub) {
@@ -33,12 +31,11 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        SpellAbility trigsa = null;
-        if (sa.hasAdditionalAbility("Execute")) {
-            trigsa = sa.getAdditionalAbility("Execute");
-        } else {
-            trigsa = AbilityFactory.getAbility(sa.getHostCard(), sa.getParam("Execute"));
+        SpellAbility trigsa = sa.getAdditionalAbility("Execute");
+        if (trigsa == null) {
+            return false;
         }
+
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         trigsa.setActivatingPlayer(ai);
 
@@ -56,12 +53,11 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
             return true;
         }
 
-        SpellAbility trigsa = null;
-        if (sa.hasAdditionalAbility("Execute")) {
-            trigsa = sa.getAdditionalAbility("Execute");
-        } else {
-            trigsa = AbilityFactory.getAbility(sa.getHostCard(), sa.getParam("Execute"));
+        SpellAbility trigsa = sa.getAdditionalAbility("Execute");
+        if (trigsa == null) {
+            return false;
         }
+
         trigsa.setActivatingPlayer(ai);
         return AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
     }

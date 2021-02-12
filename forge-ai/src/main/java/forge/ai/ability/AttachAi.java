@@ -1086,12 +1086,7 @@ public class AttachAi extends SpellAbilityAi {
                 final Map<String, String> params = t.getMapParams();
                 if ("Card.Self".equals(params.get("ValidCard"))
                         && "Battlefield".equals(params.get("Destination"))) {
-                    SpellAbility trigSa = null;
-                    if (t.hasParam("Execute") && attachSource.hasSVar(t.getParam("Execute"))) {
-                        trigSa = AbilityFactory.getAbility(attachSource.getSVar(params.get("Execute")), attachSource);
-                    } else if (t.getOverridingAbility() != null) {
-                        trigSa = t.getOverridingAbility();
-                    }
+                    SpellAbility trigSa = t.ensureAbility();
                     if (trigSa != null && trigSa.getApi() == ApiType.DealDamage && "Enchanted".equals(trigSa.getParam("Defined"))) {
                         for (Card target : list) {
                             if (!target.getController().isOpponentOf(ai)) {
