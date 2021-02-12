@@ -117,10 +117,9 @@ public class CardFactory {
      * which wouldn't ordinarily get set during a simple Card.copy() call.
      * </p>
      * */
-    private final static Card copySpellHost(final SpellAbility sourceSA, final SpellAbility targetSA){
+    private final static Card copySpellHost(final SpellAbility sourceSA, final SpellAbility targetSA, Player controller) {
         final Card source = sourceSA.getHostCard();
         final Card original = targetSA.getHostCard();
-        Player controller = sourceSA.getActivatingPlayer();
         final Card c = copyCard(original, true);
 
         // change the color of the copy (eg: Fork)
@@ -168,17 +167,15 @@ public class CardFactory {
      * @param bCopyDetails
      *            a boolean.
      */
-    public final static SpellAbility copySpellAbilityAndPossiblyHost(final SpellAbility sourceSA, final SpellAbility targetSA) {
-        Player controller = sourceSA.getActivatingPlayer();
-
+    public final static SpellAbility copySpellAbilityAndPossiblyHost(final SpellAbility sourceSA, final SpellAbility targetSA, final Player controller) {
         //it is only necessary to copy the host card if the SpellAbility is a spell, not an ability
-        final Card c = targetSA.isSpell() ? copySpellHost(sourceSA, targetSA) : targetSA.getHostCard();
+        final Card c = targetSA.isSpell() ? copySpellHost(sourceSA, targetSA, controller) : targetSA.getHostCard();
 
         final SpellAbility copySA;
         if (targetSA.isTrigger() && targetSA.isWrapper()) {
-            copySA = getCopiedTriggeredAbility((WrappedAbility)targetSA, c);
+            copySA = getCopiedTriggeredAbility((WrappedAbility)targetSA, c, controller);
         } else {
-            copySA = targetSA.copy(c, false);
+            copySA = targetSA.copy(c, controller, false);
         }
 
         copySA.setCopied(true);
@@ -361,11 +358,11 @@ public class CardFactory {
         // Name first so Senty has the Card name
         c.setName(face.getName());
 
+        for (Entry<String, String> v : face.getVariables())  c.setSVar(v.getKey(), v.getValue());
+
         for (String r : face.getReplacements())              c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true));
         for (String s : face.getStaticAbilities())           c.addStaticAbility(s);
         for (String t : face.getTriggers())                  c.addTrigger(TriggerHandler.parseTrigger(t, c, true));
-
-        for (Entry<String, String> v : face.getVariables())  c.setSVar(v.getKey(), v.getValue());
 
         // keywords not before variables
         c.addIntrinsicKeywords(face.getKeywords(), false);
@@ -555,12 +552,12 @@ public class CardFactory {
      *
      * return a wrapped ability
      */
-    public static SpellAbility getCopiedTriggeredAbility(final WrappedAbility sa, final Card newHost) {
+    public static SpellAbility getCopiedTriggeredAbility(final WrappedAbility sa, final Card newHost, final Player controller) {
         if (!sa.isTrigger()) {
             return null;
         }
 
-        return new WrappedAbility(sa.getTrigger(), sa.getWrappedAbility().copy(newHost, false), sa.getDecider());
+        return new WrappedAbility(sa.getTrigger(), sa.getWrappedAbility().copy(newHost, controller, false), controller);
     }
 
     public static CardCloneStates getCloneStates(final Card in, final Card out, final CardTraitBase sa) {
@@ -667,6 +664,7 @@ public class CardFactory {
                     if (origSVars.containsKey(s)) {
                         final String actualTrigger = origSVars.get(s);
                         final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, out, true);
+                        parsedTrigger.setOriginalHost(host);
                         state.addTrigger(parsedTrigger);
                     }
                 }
@@ -690,6 +688,7 @@ public class CardFactory {
                     if (origSVars.containsKey(s)) {
                         final String actualAbility = origSVars.get(s);
                         final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, out);
+                        grantedAbility.setOriginalHost(host);
                         grantedAbility.setIntrinsic(true);
                         state.addSpellAbility(grantedAbility);
                     }
@@ -703,6 +702,7 @@ public class CardFactory {
                     if (origSVars.containsKey(s)) {
                         final String actualStatic = origSVars.get(s);
                         final StaticAbility grantedStatic = new StaticAbility(actualStatic, out);
+                        grantedStatic.setOriginalHost(host);
                         grantedStatic.setIntrinsic(true);
                         state.addStaticAbility(grantedStatic);
                     }

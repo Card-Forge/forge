@@ -429,7 +429,7 @@ public abstract class SpellAbilityEffect {
                 + " exile it instead of putting it anywhere else.";
         String effect = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ " + zone;
 
-        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
+        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true, null);
         re.setLayer(ReplacementLayer.Other);
 
         re.setOverridingAbility(AbilityFactory.getAbility(effect, eff));

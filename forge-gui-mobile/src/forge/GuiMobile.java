@@ -268,6 +268,11 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
+    public void refreshSkin() {
+        //todo refresh skin selector
+    }
+
+    @Override
     public void copyToClipboard(final String text) {
         Forge.getClipboard().setContents(text);
     }

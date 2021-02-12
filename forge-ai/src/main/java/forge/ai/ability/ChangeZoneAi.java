@@ -304,10 +304,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // don't play if the conditions aren't met, unless it would trigger a beneficial sub-condition
-        if (!activateForCost && !sa.getConditions().areMet(sa)) {
+        if (!activateForCost && !sa.metConditions()) {
             final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null && !sa.isWrapper() && "True".equals(source.getSVar("AIPlayForSub"))) {
-                if (!abSub.getConditions().areMet(abSub)) {
+                if (!abSub.metConditions()) {
                     return false;
                 }
             } else {
@@ -1811,7 +1811,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             } else // This is an intrinsic effect that blinks the card (e.g. Obzedat, Ghost Council), no need to
                 // return the commander to the Command zone.
                 if (subApi == ApiType.DelayedTrigger) {
-                SpellAbility exec = causeSub.getAdditionalAbility("Execute");
+                    SpellAbility exec = causeSub.getAdditionalAbility("Execute");
                 if (exec != null && exec.getApi() == ApiType.ChangeZone) {
                     // A blink effect implemented using a delayed trigger
                     return !"Exile".equals(exec.getParam("Origin")) || !"Battlefield".equals(exec.getParam("Destination"));

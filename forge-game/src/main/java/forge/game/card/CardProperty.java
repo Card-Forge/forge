@@ -648,9 +648,10 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("DamagedBy")) {
-            if ((property.endsWith("Source") || property.equals("DamagedBy")) &&
-                    !card.getReceivedDamageFromThisTurn().containsKey(source)) {
-                return false;
+            if (property.endsWith("Source") || property.equals("DamagedBy")) {
+                if (!card.getReceivedDamageFromThisTurn().containsKey(source)) {
+                    return false;
+                }
             } else {
                 String prop = property.substring("DamagedBy".length());
 
@@ -911,7 +912,7 @@ public class CardProperty {
         } else if (property.startsWith("canProduceManaColor")) {
             final String color = property.split("canProduceManaColor ")[1];
             for (SpellAbility ma : card.getManaAbilities()) {
-                if (ma.getManaPart().canProduce(MagicColor.toShortString(color))) {
+                if (ma.canProduce(MagicColor.toShortString(color))) {
                     return true;
                 }
             }

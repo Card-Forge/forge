@@ -28,7 +28,6 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.game.*;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -1468,15 +1467,13 @@ public class ComputerUtil {
             // Triggered abilities
             if (c.isCreature() && c.isInZone(ZoneType.Battlefield) && CombatUtil.canAttack(c)) {
                 for (final Trigger t : c.getTriggers()) {
-                    if ("Attacks".equals(t.getParam("Mode")) && t.hasParam("Execute")) {
-                        String exec = c.getSVar(t.getParam("Execute"));
-                        if (!exec.isEmpty()) {
-                            SpellAbility trigSa = AbilityFactory.getAbility(exec, c);
-                            if (trigSa != null && trigSa.getApi() == ApiType.LoseLife
-                                    && trigSa.getParamOrDefault("Defined", "").contains("Opponent")) {
-                                trigSa.setHostCard(c);
-                                damage += AbilityUtils.calculateAmount(trigSa.getHostCard(), trigSa.getParam("LifeAmount"), trigSa);
-                            }
+                    if (TriggerType.Attacks.equals(t.getMode())) {
+                        SpellAbility sa = t.ensureAbility();
+                        if (sa == null) {
+                            continue;
+                        }
+                        if (sa.getApi() == ApiType.LoseLife && sa.getParamOrDefault("Defined", "").contains("Opponent")) {
+                            damage += AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
                         }
                     }
                 }
@@ -2075,9 +2072,8 @@ public class ComputerUtil {
 
             for (Card c : lands) {
                 for (SpellAbility sa : c.getManaAbilities()) {
-                    AbilityManaPart abmana = sa.getManaPart();
                     for (byte col : MagicColor.WUBRG) {
-                        if (abmana.canProduce(MagicColor.toLongString(col))) {
+                        if (sa.canProduce(MagicColor.toLongString(col))) {
                             numProducers.get(col).add(c);
                         }
                     }
@@ -2613,7 +2609,6 @@ public class ComputerUtil {
             theTriggers.addAll(c.getTriggers());
         }
         for (Trigger trigger : theTriggers) {
-            Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
 
@@ -2623,73 +2618,43 @@ public class ComputerUtil {
             if (!trigger.requirementsCheck(game)) {
                 continue;
             }
-            TriggerType mode = trigger.getMode();
-            if (mode != TriggerType.SpellCast) {
+            if (trigger.getMode() != TriggerType.SpellCast) {
                 continue;
             }
-            if (trigParams.containsKey("ValidCard")) {
-                if (!card.isValid(trigParams.get("ValidCard"), source.getController(), source, sa)) {
+            if (trigger.hasParam("ValidCard")) {
+                if (!card.isValid(trigger.getParam("ValidCard"), source.getController(), source, sa)) {
                     continue;
                 }
             }
 
-            if (trigParams.containsKey("ValidActivatingPlayer")) {
-                if (!player.isValid(trigParams.get("ValidActivatingPlayer"), source.getController(), source, sa)) {
+            if (trigger.hasParam("ValidActivatingPlayer")) {
+                if (!player.isValid(trigger.getParam("ValidActivatingPlayer"), source.getController(), source, sa)) {
                     continue;
                 }
             }
 
-            if (!trigParams.containsKey("Execute")) {
-                // fall back for OverridingAbility
-                SpellAbility trigSa = trigger.getOverridingAbility();
-                if (trigSa == null) {
+            // fall back for OverridingAbility
+            SpellAbility trigSa = trigger.ensureAbility();
+            if (trigSa == null) {
+                continue;
+            }
+            if (trigSa.getApi() == ApiType.DealDamage) {
+                if (!"TriggeredActivator".equals(trigSa.getParam("Defined"))) {
                     continue;
                 }
-                if (trigSa.getApi() == ApiType.DealDamage) {
-                    if (!"TriggeredActivator".equals(trigSa.getParam("Defined"))) {
-                        continue;
-                    }
-                    if (!trigSa.hasParam("NumDmg")) {
-                        continue;
-                    }
-                    damage += ComputerUtilCombat.predictDamageTo(player,
-                            AbilityUtils.calculateAmount(source, trigSa.getParam("NumDmg"), trigSa), source, false);
-                } else if (trigSa.getApi() == ApiType.LoseLife) {
-                    if (!"TriggeredActivator".equals(trigSa.getParam("Defined"))) {
-                        continue;
-                    }
-                    if (!trigSa.hasParam("LifeAmount")) {
-                        continue;
-                    }
-                    damage += AbilityUtils.calculateAmount(source, trigSa.getParam("LifeAmount"), trigSa);
-                }
-            } else {
-                String ability = source.getSVar(trigParams.get("Execute"));
-                if (ability.isEmpty()) {
+                if (!trigSa.hasParam("NumDmg")) {
                     continue;
                 }
-
-                final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
-                if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("DealDamage"))
-                        || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("DealDamage"))) {
-                    if (!"TriggeredActivator".equals(abilityParams.get("Defined"))) {
-                        continue;
-                    }
-                    if (!abilityParams.containsKey("NumDmg")) {
-                        continue;
-                    }
-                    damage += ComputerUtilCombat.predictDamageTo(player,
-                            AbilityUtils.calculateAmount(source, abilityParams.get("NumDmg"), null), source, false);
-                } else if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("LoseLife"))
-                        || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("LoseLife"))) {
-                    if (!"TriggeredActivator".equals(abilityParams.get("Defined"))) {
-                        continue;
-                    }
-                    if (!abilityParams.containsKey("LifeAmount")) {
-                        continue;
-                    }
-                    damage += AbilityUtils.calculateAmount(source, abilityParams.get("LifeAmount"), null);
+                damage += ComputerUtilCombat.predictDamageTo(player,
+                        AbilityUtils.calculateAmount(source, trigSa.getParam("NumDmg"), trigSa), source, false);
+            } else if (trigSa.getApi() == ApiType.LoseLife) {
+                if (!"TriggeredActivator".equals(trigSa.getParam("Defined"))) {
+                    continue;
                 }
+                if (!trigSa.hasParam("LifeAmount")) {
+                    continue;
+                }
+                damage += AbilityUtils.calculateAmount(source, trigSa.getParam("LifeAmount"), trigSa);
             }
         }
 
@@ -2705,7 +2670,6 @@ public class ComputerUtil {
             theTriggers.addAll(card.getTriggers());
         }
         for (Trigger trigger : theTriggers) {
-            Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
 
@@ -2715,74 +2679,43 @@ public class ComputerUtil {
             if (!trigger.requirementsCheck(game)) {
                 continue;
             }
-            if (trigParams.containsKey("CheckOnTriggeredCard")
-                    && AbilityUtils.getDefinedCards(permanent, source.getSVar(trigParams.get("CheckOnTriggeredCard").split(" ")[0]), null).isEmpty()) {
+            if (trigger.hasParam("CheckOnTriggeredCard")
+                    && AbilityUtils.getDefinedCards(permanent, source.getSVar(trigger.getParam("CheckOnTriggeredCard").split(" ")[0]), null).isEmpty()) {
                 continue;
             }
-            TriggerType mode = trigger.getMode();
-            if (mode != TriggerType.ChangesZone) {
+            if (trigger.getMode() != TriggerType.ChangesZone) {
                 continue;
             }
-            if (!"Battlefield".equals(trigParams.get("Destination"))) {
+            if (!"Battlefield".equals(trigger.getParam("Destination"))) {
                 continue;
             }
-            if (trigParams.containsKey("ValidCard")) {
-                if (!permanent.isValid(trigParams.get("ValidCard"), source.getController(), source, null)) {
+            if (trigger.hasParam("ValidCard")) {
+                if (!permanent.isValid(trigger.getParam("ValidCard"), source.getController(), source, null)) {
                     continue;
                 }
             }
-            if (!trigParams.containsKey("Execute")) {
-                // fall back for OverridingAbility
-                SpellAbility trigSa = trigger.getOverridingAbility();
-                if (trigSa == null) {
+            // fall back for OverridingAbility
+            SpellAbility trigSa = trigger.ensureAbility();
+            if (trigSa == null) {
+                continue;
+            }
+            if (trigSa.getApi() == ApiType.DealDamage) {
+                if (!"TriggeredCardController".equals(trigSa.getParam("Defined"))) {
                     continue;
                 }
-                if (trigSa.getApi() == ApiType.DealDamage) {
-                    if (!"TriggeredCardController".equals(trigSa.getParam("Defined"))) {
-                        continue;
-                    }
-                    if (!trigSa.hasParam("NumDmg")) {
-                        continue;
-                    }
-                    damage += ComputerUtilCombat.predictDamageTo(player,
-                            AbilityUtils.calculateAmount(source, trigSa.getParam("NumDmg"), trigSa), source, false);
-                } else if (trigSa.getApi() == ApiType.LoseLife) {
-                    if (!"TriggeredCardController".equals(trigSa.getParam("Defined"))) {
-                        continue;
-                    }
-                    if (!trigSa.hasParam("LifeAmount")) {
-                        continue;
-                    }
-                    damage += AbilityUtils.calculateAmount(source, trigSa.getParam("LifeAmount"), trigSa);
-                }
-            } else {
-                String ability = source.getSVar(trigParams.get("Execute"));
-                if (ability.isEmpty()) {
+                if (!trigSa.hasParam("NumDmg")) {
                     continue;
                 }
-
-                final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
-                // Destroy triggers
-                if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("DealDamage"))
-                        || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("DealDamage"))) {
-                    if (!"TriggeredCardController".equals(abilityParams.get("Defined"))) {
-                        continue;
-                    }
-                    if (!abilityParams.containsKey("NumDmg")) {
-                        continue;
-                    }
-                    damage += ComputerUtilCombat.predictDamageTo(player,
-                            AbilityUtils.calculateAmount(source, abilityParams.get("NumDmg"), null), source, false);
-                } else if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("LoseLife"))
-                        || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("LoseLife"))) {
-                    if (!"TriggeredCardController".equals(abilityParams.get("Defined"))) {
-                        continue;
-                    }
-                    if (!abilityParams.containsKey("LifeAmount")) {
-                        continue;
-                    }
-                    damage += AbilityUtils.calculateAmount(source, abilityParams.get("LifeAmount"), null);
+                damage += ComputerUtilCombat.predictDamageTo(player,
+                        AbilityUtils.calculateAmount(source, trigSa.getParam("NumDmg"), trigSa), source, false);
+            } else if (trigSa.getApi() == ApiType.LoseLife) {
+                if (!"TriggeredCardController".equals(trigSa.getParam("Defined"))) {
+                    continue;
                 }
+                if (!trigSa.hasParam("LifeAmount")) {
+                    continue;
+                }
+                damage += AbilityUtils.calculateAmount(source, trigSa.getParam("LifeAmount"), trigSa);
             }
         }
         return damage;

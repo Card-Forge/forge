@@ -17,7 +17,6 @@
  */
 package forge.game;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -252,6 +251,18 @@ public final class GameActionUtil {
             }
         }
 
+        if (sa.isManaAbility() && sa.isActivatedAbility() && activator.hasKeyword("Piracy") && source.isLand() && source.isInPlay() && !activator.equals(source.getController()) && sa.getPayCosts().hasTapCost()) {
+            SpellAbility newSA = sa.copy(activator);
+            // to bypass Activator restriction, set Activator to Player
+            sa.getRestrictions().setActivator("Player");
+
+            // extra Mana restriction to only Spells
+            for (AbilityManaPart mp : newSA.getAllManaParts()) {
+                mp.setExtraManaRestriction("Spell");
+            }
+            alternatives.add(newSA);
+        }
+
         // below are for some special cases of activated abilities
         if (sa.isCycling() && activator.hasKeyword("CyclingForZero")) {
             for (final KeywordInterface inst : source.getKeywords()) {
@@ -277,7 +288,6 @@ public final class GameActionUtil {
                 newSA.setDescription(sb.toString());
 
                 alternatives.add(newSA);
-                break;
             }
         }
 
@@ -473,62 +483,12 @@ public final class GameActionUtil {
                         int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
 
                         if (v > 0) {
-
-                            final Card eff = new Card(game.nextCardId(), game);
-                            eff.setTimestamp(game.getNextTimestamp());
-                            eff.setName(c.getName() + "'s Effect");
-                            eff.addType("Effect");
-                            eff.setOwner(activator);
-
-                            eff.setImageKey(c.getImageKey());
-                            eff.setColor(MagicColor.COLORLESS);
-                            eff.setImmutable(true);
-                            // try to get the SpellAbility from the mana ability
-                            //eff.setEffectSource((SpellAbility)null);
-
-                            eff.addRemembered(host);
-
-                            String abStr = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ " + v;
-
-                            SpellAbility saAb = AbilityFactory.getAbility(abStr, c);
-
-                            CardFactoryUtil.setupETBReplacementAbility(saAb);
-
-                            String desc = "It enters the battlefield with ";
-                            desc += Lang.nounWithNumeral(v, CounterEnumType.P1P1.getName() + " counter");
-                            desc += " on it.";
-
-                            String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | Description$ " + desc;
-
-                            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
-                            re.setLayer(ReplacementLayer.Other);
-                            re.setOverridingAbility(saAb);
-
-                            eff.addReplacementEffect(re);
-
-                            // Forgot Trigger
-                            String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Any | TriggerZones$ Command | Static$ True";
-                            String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
-                            String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
-                                    + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
-
-                            SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, eff);
-                            AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, eff);
-                            saForget.setSubAbility(saExile);
-
-                            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, eff, true);
-                            parsedTrigger.setOverridingAbility(saForget);
-                            eff.addTrigger(parsedTrigger);
-                            eff.updateStateForView();
-
-                            // TODO: Add targeting to the effect so it knows who it's dealing with
-                            game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-                            game.getAction().moveTo(ZoneType.Command, eff, null);
-                            game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+                            Card eff = createETBCountersEffect(c, host, activator, "P1P1", String.valueOf(v));
 
                             if (result == null) {
                                 result = sa.copy();
                             }
+                            result.addRollbackEffect(eff);
                             for (int i = 0; i < v; i++) {
                                 result.getPayCosts().add(cost);
                             }
@@ -546,45 +506,85 @@ public final class GameActionUtil {
         return result != null ? result : sa;
     }
 
-    private static boolean hasUrzaLands(final Player p) {
-        final CardCollectionView landsControlled = p.getCardsIn(ZoneType.Battlefield);
-        return Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Mine")))
-                && Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Power-Plant")))
-                && Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Tower")));
+    public static Card createETBCountersEffect(Card sourceCard, Card c, Player controller, String counter, String amount) {
+        final Game game = sourceCard.getGame();
+        final Card eff = new Card(game.nextCardId(), game);
+        eff.setTimestamp(game.getNextTimestamp());
+        eff.setName(sourceCard.getName() + "'s Effect");
+        eff.addType("Effect");
+        eff.setOwner(controller);
+
+        eff.setImageKey(sourceCard.getImageKey());
+        eff.setColor(MagicColor.COLORLESS);
+        eff.setImmutable(true);
+        // try to get the SpellAbility from the mana ability
+        //eff.setEffectSource((SpellAbility)null);
+
+        eff.addRemembered(c);
+
+        String abStr = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ " + counter
+                + " | ETB$ True | CounterNum$ " + amount;
+
+        SpellAbility sa = AbilityFactory.getAbility(abStr, c);
+        if (!StringUtils.isNumeric(amount)) {
+            sa.setSVar(amount, sourceCard.getSVar(amount));
+        }
+        CardFactoryUtil.setupETBReplacementAbility(sa);
+
+        String desc = "It enters the battlefield with ";
+        desc += Lang.nounWithNumeral(amount, CounterType.getType(counter).getName() + " counter");
+        desc += " on it.";
+
+        String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | Description$ " + desc;
+
+        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
+        re.setLayer(ReplacementLayer.Other);
+        re.setOverridingAbility(sa);
+
+        eff.addReplacementEffect(re);
+
+        // Forgot Trigger
+        String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Any | TriggerZones$ Command | Static$ True";
+        String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
+        String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
+                + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
+
+        SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, eff);
+        AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, eff);
+        saForget.setSubAbility(saExile);
+
+        final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, eff, true);
+        parsedTrigger.setOverridingAbility(saForget);
+        eff.addTrigger(parsedTrigger);
+        eff.updateStateForView();
+
+        // TODO: Add targeting to the effect so it knows who it's dealing with
+        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        game.getAction().moveTo(ZoneType.Command, eff, null);
+        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        
+        return eff;
     }
 
-    public static int amountOfManaGenerated(final SpellAbility sa, boolean multiply) {
-        // Calculate generated mana here for stack description and resolving
-
-        int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa) : 1;
-        AbilityManaPart abMana = sa.getManaPartRecursive();
-
-        if (sa.hasParam("Bonus")) {
-            // For mana abilities that get a bonus
-            // Bonus currently MULTIPLIES the base amount. Base Amounts should
-            // ALWAYS be Base
-            int bonus = 0;
-            if (sa.getParam("Bonus").equals("UrzaLands")) {
-                if (hasUrzaLands(sa.getActivatingPlayer())) {
-                    bonus = Integer.parseInt(sa.getParam("BonusProduced"));
-                }
+    public static String generatedTotalMana(final SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        SpellAbility tail = sa;
+        while (tail != null) {
+            String value = generatedMana(tail);
+            if (!value.isEmpty() && !"0".equals(value)) {
+                sb.append(value).append(" ");
             }
-
-            amount += bonus;
+            tail = tail.getSubAbility();
         }
-
-        if (!multiply || abMana.isAnyMana() || abMana.isComboMana() || abMana.isSpecialMana()) {
-            return amount;
-        } else {
-            // For cards that produce like {C}{R} vs cards that produce {R}{R}.
-            return abMana.mana().split(" ").length * amount;
-        }
+        return sb.toString().trim();
     }
-
 
     public static String generatedMana(final SpellAbility sa) {
-        int amount = amountOfManaGenerated(sa, false);
+        int amount = sa.amountOfManaGenerated(false);
         AbilityManaPart abMana = sa.getManaPart();
+        if (abMana == null) {
+            return "";
+        }
         String baseMana;
 
         if (abMana.isComboMana()) {

@@ -3539,4 +3539,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void resetCycledThisTurn() {
         cycledThisTurn = 0;
     }
+
+    public boolean hasUrzaLands() {
+        final CardCollectionView landsControlled = getCardsIn(ZoneType.Battlefield);
+        return Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Mine")))
+                && Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Power-Plant")))
+                && Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Tower")));
+    }
 }

@@ -494,7 +494,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public TargetChoices chooseNewTargetsFor(SpellAbility ability) {
+    public TargetChoices chooseNewTargetsFor(SpellAbility ability, Predicate<GameObject> filter, boolean optional) {
         // AI currently can't do this. But when it can it will need to be based on Ability API
         return null;
     }
@@ -833,6 +833,9 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public byte chooseColor(String message, SpellAbility sa, ColorSet colors) {
+        if (colors.countColors() < 2) {
+            return Iterables.getFirst(colors, MagicColor.WHITE);
+        }
         // You may switch on sa.getApi() here and use sa.getParam("AILogic")
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
         if (sa.getApi() == ApiType.Mana) {
@@ -978,9 +981,13 @@ public class PlayerControllerAi extends PlayerController {
                     if (sa.isSpell()) {
                         player.getGame().getStackZone().add(sa.getHostCard());
                     }
-                    // TODO check if static abilities needs to be run for things affecting the copy?
+
+                    /* FIXME: the new implementation (below) requires implementing setupNewTargets in the AI controller, among other possible changes, otherwise breaks AI
+                    if (sa.isMayChooseNewTargets()) {
+                        sa.setupNewTargets(player);
+                    }
+                    */
                     if (sa.isMayChooseNewTargets() && !sa.setupTargets()) {
-                        // if targets can't be done, remove copy from existence
                         if (sa.isSpell()) {
                             sa.getHostCard().ceaseToExist();
                         }

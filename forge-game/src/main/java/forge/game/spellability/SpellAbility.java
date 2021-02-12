@@ -152,12 +152,16 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private TargetRestrictions targetRestrictions = null;
     private TargetChoices targetChosen = new TargetChoices();
 
+    private Integer dividedValue = null;
+
     private SpellAbilityView view;
 
     private StaticAbility mayPlay = null;
 
     private CardCollection lastStateBattlefield = null;
     private CardCollection lastStateGraveyard = null;
+
+    private CardCollection rollbackEffects = new CardCollection();
 
     private CardDamageMap damageMap = null;
     private CardDamageMap preventMap = null;
@@ -233,19 +237,101 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         view.updateDescription(this); //description can change if host card does
     }
 
+    public boolean canThisProduce(final String s) {
+        AbilityManaPart mp = getManaPart();
+        if (mp != null && metConditions() && mp.canProduce(s, this)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean canProduce(final String s) {
+        if (canThisProduce(s)) {
+            return true;
+        }
+
+        return this.subAbility != null ? this.subAbility.canProduce(s) : false;
+    }
+
+    public boolean isManaAbilityFor(SpellAbility saPaidFor, byte colorNeeded) {
+        // is root ability
+        if (this.getParent() == null) {
+            if (!canPlay()) {
+                return false;
+            }
+            if (isAbility() && getRestrictions().isInstantSpeed()) {
+                return false;
+            }
+        }
+
+        AbilityManaPart mp = getManaPart();
+        if (mp != null && metConditions() && mp.meetsManaRestrictions(saPaidFor) && mp.abilityProducesManaColor(this, colorNeeded)) {
+            return true;
+        }
+        return this.subAbility != null ? this.subAbility.isManaAbilityFor(saPaidFor, colorNeeded) : false;
+    }
+
+    public boolean isManaCannotCounter(SpellAbility saPaidFor) {
+        AbilityManaPart mp = getManaPart();
+        if (mp != null && metConditions() && mp.meetsManaRestrictions(saPaidFor) && mp.cannotCounterPaidWith(saPaidFor)) {
+            return true;
+        }
+        return this.subAbility != null ? this.subAbility.isManaCannotCounter(saPaidFor) : false;
+    }
+
+    public int amountOfManaGenerated(boolean multiply) {
+        int result = 0;
+        AbilityManaPart mp = getManaPart();
+        if (mp != null && metConditions()) {
+            int amount = hasParam("Amount") ? AbilityUtils.calculateAmount(getHostCard(), getParam("Amount"), this) : 1;
+
+            if (!multiply || mp.isAnyMana() || mp.isComboMana() || mp.isSpecialMana()) {
+                result += amount;
+            } else {
+                // For cards that produce like {C}{R} vs cards that produce {R}{R}.
+                result += mp.mana().split(" ").length * amount;
+            }
+        }
+        return result;
+    }
+
+    public int totalAmountOfManaGenerated(SpellAbility saPaidFor, boolean multiply) {
+        int result = 0;
+        AbilityManaPart mp = getManaPart();
+        if (mp != null && metConditions() && mp.meetsManaRestrictions(saPaidFor)) {
+            result += amountOfManaGenerated(multiply);
+        }
+        result += subAbility != null ? subAbility.totalAmountOfManaGenerated(saPaidFor, multiply) : 0;
+        return result;
+    }
+
+    public void setManaExpressChoice(ColorSet cs) {
+        AbilityManaPart mp = getManaPart();
+        if (mp != null) {
+            mp.setExpressChoice(cs);
+        }
+        if (subAbility != null) {
+            subAbility.setManaExpressChoice(cs);
+        }
+    }
+
     public final AbilityManaPart getManaPart() {
         return manaPart;
     }
 
-    public final AbilityManaPart getManaPartRecursive() {
-        SpellAbility tail = this;
-        while (tail != null) {
-            if (tail.manaPart != null) {
-                return tail.manaPart;
-            }
-            tail = tail.getSubAbility();
+    public final List<AbilityManaPart> getAllManaParts() {
+        AbilityManaPart mp = getManaPart();
+        if (mp == null && subAbility == null) {
+            return ImmutableList.of();
         }
-        return null;
+        List<AbilityManaPart> result = Lists.newArrayList();
+        if (mp != null) {
+            result.add(mp);
+        }
+        if (subAbility != null) {
+            result.addAll(subAbility.getAllManaParts());
+        }
+        return result;
     }
 
     public final boolean isManaAbility() {
@@ -262,7 +348,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return false;
         }
 
-        return getManaPartRecursive() != null;
+        SpellAbility tail = this;
+        while (tail != null) {
+            if (tail.manaPart != null) {
+                return true;
+            }
+            tail = tail.getSubAbility();
+        }
+        return false;
     }
 
     protected final void setManaPart(AbilityManaPart manaPart0) {
@@ -458,6 +551,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public final void setConditions(final SpellAbilityCondition condition) {
         conditions = condition;
+    }
+
+    public boolean metConditions() {
+        return getConditions() != null && getConditions().areMet(this);
     }
 
     public List<Mana> getPayingMana() {
@@ -1101,7 +1198,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             if (hasParam("TargetingPlayerControls") && entity instanceof Card) {
                 final Card c = (Card) entity;
-                if (!c.getController().equals(targetingPlayer)) {
+                if (!c.getController().equals(getTargetingPlayer())) {
                     return false;
                 }
             }
@@ -1422,22 +1519,50 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     /**
+     * @return a boolean dividedAsYouChoose
+     */
+    public boolean isDividedAsYouChoose() {
+        return hasParam("DividedAsYouChoose");
+    }
+
+    public final void addDividedAllocation(final GameObject tgt, final Integer portionAllocated) {
+        getTargets().addDividedAllocation(tgt, portionAllocated);
+    }
+    public Integer getDividedValue(GameObject c) {
+        return getTargets().getDividedValue(c);
+    }
+
+    public int getTotalDividedValue() {
+        return getTargets().getTotalDividedValue();
+    }
+
+    public Integer getDividedValue() {
+        return this.dividedValue;
+    }
+
+    public int getStillToDivide() {
+        if (!isDividedAsYouChoose() || dividedValue == null) {
+            return 0;
+        }
+        return dividedValue - getTotalDividedValue();
+    }
+
+    /**
      * Reset the first target.
      *
      */
     public void resetFirstTarget(GameObject c, SpellAbility originalSA) {
         SpellAbility sa = this;
         while (sa != null) {
-            if (sa.targetRestrictions != null) {
-                sa.targetChosen = new TargetChoices();
-                sa.targetChosen.add(c);
-                if (!originalSA.targetRestrictions.getDividedMap().isEmpty()) {
-                    sa.targetRestrictions.addDividedAllocation(c,
-                            Iterables.getFirst(originalSA.targetRestrictions.getDividedMap().values(), null));
+            if (sa.usesTargeting()) {
+                sa.resetTargets();
+                sa.getTargets().add(c);
+                if (!originalSA.getTargets().getDividedValues().isEmpty()) {
+                    sa.addDividedAllocation(c, Iterables.getFirst(originalSA.getTargets().getDividedValues(), null));
                 }
                 break;
             }
-            sa = sa.subAbility;
+            sa = sa.getSubAbility();
         }
     }
 
@@ -1454,7 +1579,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isZeroTargets() {
-        return getTargetRestrictions().getMinTargets(hostCard, this) == 0 && getTargets().size() == 0;
+        return getMinTargets() == 0 && getTargets().size() == 0;
     }
 
     public boolean isMinTargetChosen() {
@@ -1728,6 +1853,27 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return p != null && p.isTargeting(o);
     }
 
+    public boolean setupNewTargets(Player forceTargetingPlayer) {
+        // Skip to paying if parent ability doesn't target and has no subAbilities.
+        // (or trigger case where its already targeted)
+        SpellAbility currentAbility = this;
+        do {
+            if (currentAbility.usesTargeting()) {
+                TargetChoices oldTargets = currentAbility.getTargets();
+                if (forceTargetingPlayer.getController().chooseNewTargetsFor(currentAbility, null, true) == null) {
+                    currentAbility.setTargets(oldTargets);
+                }
+            }
+            final AbilitySub subAbility = currentAbility.getSubAbility();
+            if (subAbility != null) {
+                // This is necessary for "TargetsWithDefinedController$ ParentTarget"
+                subAbility.setParent(currentAbility);
+            }
+            currentAbility = subAbility;
+        } while (currentAbility != null);
+        return true;
+    }
+
     public boolean setupTargets() {
         // Skip to paying if parent ability doesn't target and has no subAbilities.
         // (or trigger case where its already targeted)
@@ -1745,6 +1891,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 } else {
                     targetingPlayer = getActivatingPlayer();
                 }
+                // don't set targeting player when forceful target,
+                // "targeting player controls" should not be reset when the spell is copied
                 currentAbility.setTargetingPlayer(targetingPlayer);
                 if (!targetingPlayer.getController().chooseTargetsFor(currentAbility)) {
                     return false;
@@ -1760,11 +1908,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return true;
     }
     public final void clearTargets() {
-        final TargetRestrictions tg = getTargetRestrictions();
-        if (tg != null) {
+        if (usesTargeting()) {
             resetTargets();
-            if (hasParam("DividedAsYouChoose")) {
-                tg.calculateStillToDivide(getParam("DividedAsYouChoose"), getHostCard(), this);
+            if (isDividedAsYouChoose()) {
+                this.dividedValue = AbilityUtils.calculateAmount(getHostCard(), this.getParam("DividedAsYouChoose"), this);
             }
         }
     }
@@ -1830,9 +1977,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean tracksManaSpent() {
         if (hostCard == null || hostCard.getRules() == null) { return false; }
 
-        if (hostCard.hasKeyword(Keyword.SUNBURST)) {
+        if (isSpell() && hostCard.hasConverge()) {
             return true;
         }
+
         String text = hostCard.getRules().getOracleText();
         if (isSpell() && text.contains("was spent to cast")) {
             return true;
@@ -1969,7 +2117,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             String mana = manaPart.mana();
             if (!mana.equals("Any")) {
                 score += mana.length();
-                if (!manaPart.canProduce("C")) {
+                if (!canProduce("C")) {
                     // Producing colorless should produce a slightly lower score
                     score += 1;
                 }
@@ -2133,5 +2281,16 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public boolean checkRestrictions(Card host, Player activator) {
         return true;
+    }
+
+    public void addRollbackEffect(Card eff) {
+        rollbackEffects.add(eff);
+    }
+
+    public void rollback() {
+        for (Card c : rollbackEffects) {
+            c.ceaseToExist();
+        }
+        rollbackEffects.clear();
     }
 }

@@ -625,10 +625,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public Card manifest(Player p, SpellAbility sa) {
         // Turn Face Down (even if it's DFC).
-        ManaCost cost = getState(CardStateName.Original).getManaCost();
-
-        boolean isCreature = isCreature();
-
         // Sometimes cards are manifested while already being face down
         if (!turnFaceDown(true) && !isFaceDown()) {
             return null;
@@ -643,11 +639,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         setManifested(true);
 
         Card c = game.getAction().moveToPlay(this, p, sa);
-
-        // Add manifest demorph static ability for creatures
-        if (c.isManifested() && isCreature && !cost.isNoCost()) {
-            // Add Manifest to original State
-            c.getState(CardStateName.Original).addSpellAbility(CardFactoryUtil.abilityManifestFaceUp(c, cost));
+        if (c.isInPlay()) {
+            c.setManifested(true);
+            c.turnFaceDown(true);
             c.updateStateForView();
         }
 
@@ -2491,7 +2485,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (ab.getApi() == ApiType.ManaReflected) {
                 colors.addAll(CardUtil.getReflectableManaColors(ab));
             } else {
-                colors = CardUtil.canProduce(6, ab.getManaPart(), colors);
+                colors = CardUtil.canProduce(6, ab, colors);
             }
         }
 
@@ -2502,7 +2496,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         return true;
                     }
                 } else {
-                    if (mana.getManaPart().canProduce(MagicColor.toShortString(s))) {
+                    if (mana.canProduce(MagicColor.toShortString(s))) {
                         return true;
                     }
                 }
@@ -5450,15 +5444,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // Note: This should only be called after state has been set to CardStateName.FaceDown,
         // so the below call should be valid since the state should have been created already.
         getState(CardStateName.FaceDown).setImageKey(ImageKeys.getTokenKey(image));
-        if (!manifested) {
-            // remove Manifest Up abilities from Original State
-            CardState original = getState(CardStateName.Original);
-            for (SpellAbility sa : original.getNonManaAbilities()) {
-                if (sa.isManifestUp()) {
-                    original.removeSpellAbility(sa);
-                }
-            }
-        }
     }
 
     public final boolean isForetold() {
@@ -6090,21 +6075,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public boolean hasETBTrigger(final boolean drawbackOnly) {
         for (final Trigger tr : getTriggers()) {
-            final Map<String, String> params = tr.getMapParams();
             if (tr.getMode() != TriggerType.ChangesZone) {
                 continue;
             }
 
-            if (!params.get("Destination").equals(ZoneType.Battlefield.toString())) {
+            if (!tr.getParam("Destination").equals(ZoneType.Battlefield.toString())) {
                 continue;
             }
 
-            if (params.containsKey("ValidCard") && !params.get("ValidCard").contains("Self")) {
+            if (tr.hasParam("ValidCard") && !tr.getParam("ValidCard").contains("Self")) {
                 continue;
             }
-            if (drawbackOnly && params.containsKey("Execute")){
-                String exec = this.getSVar(params.get("Execute"));
-                if (exec.contains("AB$")) {
+            if (drawbackOnly) {
+                SpellAbility sa = tr.ensureAbility();
+                if (sa == null || sa.isActivatedAbility()) {
                     continue;
                 }
             }
@@ -6329,6 +6313,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     abilities.add(sa);
                     abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
                 }
+            }
+        }
+
+        if (isInPlay() && isFaceDown() && isManifested()) {
+            CardState oState = getState(CardStateName.Original);
+            ManaCost cost = oState.getManaCost();
+            if (oState.getType().isCreature()) {
+                abilities.add(CardFactoryUtil.abilityManifestFaceUp(this, cost));
             }
         }
 

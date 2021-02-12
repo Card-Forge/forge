@@ -32,11 +32,10 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+
 import forge.game.GameObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -85,7 +84,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     private Integer xManaPaid = null;
 
     // Other Paid things
-    private final HashMap<String, CardCollection> paidHash;
+    private final Map<String, CardCollection> paidHash;
 
     // Additional info
     // is Kicked, is Buyback
@@ -96,7 +95,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
 
     private final Map<String, String> storedSVars = Maps.newHashMap();
 
-    private final List<ZoneType> zonesToOpen;
     private final Map<Player, Object> playersWithValidTargets;
 
     private final StackItemView view;
@@ -109,7 +107,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         activatingPlayer = sa.getActivatingPlayer();
 
         // Payment info
-        paidHash = new HashMap<>(ability.getPaidHash());
+        paidHash = Maps.newHashMap(ability.getPaidHash());
         ability.resetPaidHash();
         splicedCards = sa.getSplicedCards();
 
@@ -149,18 +147,13 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
 
         //store zones to open and players to open them for at the time the SpellAbility first goes on the stack based on the selected targets
         if (tc == null) {
-            zonesToOpen = null;
             playersWithValidTargets = null;
         }
         else {
-            zonesToOpen = new ArrayList<>();
-            playersWithValidTargets = new HashMap<>();
+            playersWithValidTargets = Maps.newHashMap();
             for (Card card : tc.getTargetCards()) {
                 ZoneType zoneType = card.getZone() != null ? card.getZone().getZoneType() : null;
                 if (zoneType != ZoneType.Battlefield) { //don't need to worry about targets on battlefield
-                    if (zoneType != null && !zonesToOpen.contains(zoneType)) {
-                        zonesToOpen.add(zoneType);
-                    }
                     playersWithValidTargets.put(card.getController(), null);
                 }
             }
@@ -253,75 +246,32 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         return tc;
     }
 
-    public final List<ZoneType> getZonesToOpen() {
-        return zonesToOpen;
-    }
-
     public final Map<Player, Object> getPlayersWithValidTargets() {
         return playersWithValidTargets;
     }
 
     public void updateTarget(TargetChoices target) {
-        updateTarget(target, null, null);
-    }
-
-    public void updateTarget(TargetChoices target, GameObject oldTarget, GameObject newTarget) {
         if (target != null) {
+            TargetChoices oldTarget = tc;
             tc = target;
             ability.setTargets(tc);
             stackDescription = ability.getStackDescription();
             view.updateTargetCards(this);
             view.updateTargetPlayers(this);
             view.updateText(this);
-
-            if (ability.hasParam("DividedAsYouChoose")) {
-                // try to update DividedAsYouChoose after retargeting
-                Object toRemove = null;
-                Object toAdd = null;
-                HashMap<Object,Integer> map = ability.getTargetRestrictions().getDividedMap();
-
-                if (oldTarget != null) {
-                    toRemove = oldTarget;
-                } else {
-                    // try to deduce which target has been replaced
-                    // (this may be imprecise, updateTarget should specify old target if possible)
-                    for (Object obj : map.keySet()) {
-                        if (!target.contains(obj)) {
-                            toRemove = obj;
-                            break;
-                        }
-                    }
-                }
-
-                if (newTarget != null) {
-                    toAdd = newTarget;
-                } else {
-                    // try to deduce which target was added
-                    // (this may be imprecise, updateTarget should specify new target if possible)
-                    for (Object newTgts : target) {
-                        if (!map.containsKey(newTgts)) {
-                            toAdd = newTgts;
-                            break;
-                        }
-                    }
-                }
-
-                if (toRemove != null && toAdd != null) {
-                    int div = map.get(toRemove);
-                    map.remove(toRemove);
-                    ability.getTargetRestrictions().addDividedAllocation(toAdd, div);
-                }
-            }
             
             // Run BecomesTargetTrigger
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.SourceSA, ability);
-            Set<Object> distinctObjects = new HashSet<>();
-            for (final Object tgt : target) {
-                if (distinctObjects.contains(tgt)) {
+            Set<GameObject> distinctObjects = Sets.newHashSet();
+            for (final GameObject tgt : target) {
+                if (oldTarget != null && oldTarget.contains(tgt)) {
+                    // it was an old target, so don't trigger becomes target
                     continue;
                 }
-                distinctObjects.add(tgt);
+                if (!distinctObjects.add(tgt)) {
+                    continue;
+                }
 
                 if (tgt instanceof Card && !((Card) tgt).hasBecomeTargetThisTurn()) {
                     runParams.put(AbilityKey.FirstTime, null);
@@ -330,7 +280,8 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
                 runParams.put(AbilityKey.Target, tgt);
                 getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
             }
-            runParams.put(AbilityKey.Targets, target);
+            runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Targets, distinctObjects);
             getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
         }
     }

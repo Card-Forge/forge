@@ -3,9 +3,8 @@ ManaCost:1 W
 Types:Sorcery
 A:SP$ Effect | Cost$ 1 W | ReplacementEffects$ FDRep | StaticAbilities$ FDManaConvertion | SVars$ ProduceW | SubAbility$ DBDraw | SpellDescription$ Until end of turn, spells and abilities you control that would add colored mana add that much white mana instead. Until end of turn, you may spend white mana as though it were mana of any color. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
-SVar:FDRep:Event$ ProduceMana | ActiveZones$ Command | ValidCard$ Card.YouCtrl | NoTapCheck$ True | ManaReplacement$ ProduceW | Description$ Spells and abilities you control that would add colored mana add that much white mana instead.
-SVar:ProduceW:R->W & B->W & U->W & G->W
+SVar:FDRep:Event$ ProduceMana | ActiveZones$ Command | ValidCard$ Card.YouCtrl | ReplaceWith$ ProduceW | Description$ Spells and abilities you control that would add colored mana add that much white mana instead.
+SVar:ProduceW:DB$ ReplaceMana | ReplaceColor$ W
 SVar:FDManaConvertion:Mode$ Continuous | EffectZone$ Command | Affected$ You | ManaColorConversion$ Additive | WhiteConversion$ Color | Description$ You may spend white mana as though it were mana of any color.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/false_dawn.jpg
 Oracle:Until end of turn, spells and abilities you control that would add colored mana add that much white mana instead. Until end of turn, you may spend white mana as though it were mana of any color.\nDraw a card.

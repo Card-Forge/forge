@@ -177,7 +177,7 @@ public class CardFactoryUtil {
         // Cost need to be set later
         StringBuilder sb = new StringBuilder();
         sb.append("ST$ SetState | Cost$ 0 | CostDesc$ Unmanifest ").append(costDesc);
-        sb.append(" | ManifestUp$ True | Secondary$ True | IsPresent$ Card.Self+faceDown+manifested");
+        sb.append(" | ManifestUp$ True | Secondary$ True | PresentDefined$ Self | IsPresent$ Card.faceDown+manifested");
         sb.append(" | Mode$ TurnFace | SpellDescription$ (Turn this face up any time for its mana cost.)");
 
         final SpellAbility manifestUp = AbilityFactory.getAbility(sb.toString(), sourceCard);
@@ -1478,7 +1478,7 @@ public class CardFactoryUtil {
                 for (Card card : otb) {
                     if (!card.isTapped() || !untappedOnly) {
                         for (SpellAbility ma : card.getManaAbilities()) {
-                            if (ma.getManaPart().canProduce(MagicColor.toShortString(color))) {
+                            if (ma.canProduce(MagicColor.toShortString(color))) {
                                 uniqueColors++;
                                 continue outer;
                             }
@@ -2230,7 +2230,7 @@ public class CardFactoryUtil {
             final String abStringAfflict = "DB$ LoseLife | Defined$ TriggeredDefendingPlayer" +
                     " | LifeAmount$ " + n;
 
-            final Trigger afflictTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            final Trigger afflictTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic, null);
             afflictTrigger.setOverridingAbility(AbilityFactory.getAbility(abStringAfflict, card));
 
             inst.addTrigger(afflictTrigger);

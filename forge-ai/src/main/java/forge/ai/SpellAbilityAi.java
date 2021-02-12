@@ -111,7 +111,7 @@ public abstract class SpellAbilityAi {
         if (aiLogic.equals("CheckCondition")) {
             SpellAbility saCopy = sa.copy();
             saCopy.setActivatingPlayer(ai);
-            return saCopy.getConditions().areMet(saCopy);
+            return saCopy.metConditions();
         }
 
         return !("Never".equals(aiLogic));

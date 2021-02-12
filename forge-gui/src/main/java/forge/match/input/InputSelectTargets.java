@@ -1,6 +1,9 @@
 package forge.match.input;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+
 import forge.FThreads;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -22,6 +25,7 @@ import forge.util.ITriggerEvent;
 import forge.util.TextUtil;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,21 +37,25 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private final Map<GameEntity, Integer> targetDepth = new HashMap<>();
     private final TargetRestrictions tgt;
     private final SpellAbility sa;
+    private final Collection<Integer> divisionValues;
     private Card lastTarget = null;
     private boolean bCancel = false;
     private boolean bOk = false;
     private final boolean mandatory;
+    private Predicate<GameObject> filter;
     private static final long serialVersionUID = -1091595663541356356L;
 
     public final boolean hasCancelled() { return bCancel; }
     public final boolean hasPressedOk() { return bOk; }
 
-    public InputSelectTargets(final PlayerControllerHuman controller, final List<Card> choices, final SpellAbility sa, final boolean mandatory) {
+    public InputSelectTargets(final PlayerControllerHuman controller, final List<Card> choices, final SpellAbility sa, final boolean mandatory, Collection<Integer> divisionValues, Predicate<GameObject> filter) {
         super(controller);
         this.choices = choices;
         this.tgt = sa.getTargetRestrictions();
         this.sa = sa;
         this.mandatory = mandatory;
+        this.divisionValues = divisionValues;
+        this.filter = filter;
         controller.getGui().setSelectables(CardView.getCollection(choices));
         final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
         for (final Card c : choices) {
@@ -97,7 +105,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             sb.append(sa.getUniqueTargets());
         }
 
-        final int maxTargets = tgt.getMaxTargets(sa.getHostCard(), sa);
+        final int maxTargets = sa.getMaxTargets();
         final int targeted = sa.getTargets().size();
         if(maxTargets > 1) {
             sb.append(TextUtil.concatNoSpace("\n(", String.valueOf(maxTargets - targeted), " more can be targeted)"));
@@ -108,10 +116,10 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 "(Targeting ERROR)", "");
         showMessage(message, sa.getView());
 
-        if (tgt.isDividedAsYouChoose() && tgt.getMinTargets(sa.getHostCard(), sa) == 0 && sa.getTargets().size() == 0) {
+        if (sa.isDividedAsYouChoose() && sa.getMinTargets() == 0 && sa.getTargets().size() == 0) {
             // extra logic for Divided with min targets = 0, should only work if num targets are 0 too
             getController().getGui().updateButtons(getOwner(), true, true, false);
-        } else if (!tgt.isMinTargetsChosen(sa.getHostCard(), sa) || tgt.isDividedAsYouChoose()) {
+        } else if (!sa.isMinTargetChosen() || sa.isDividedAsYouChoose()) {
             // If reached Minimum targets, enable OK button
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target
@@ -239,40 +247,11 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             return false;
         }
 
-        if (tgt.isDividedAsYouChoose()) {
-            final int stillToDivide = tgt.getStillToDivide();
-            int allocatedPortion = 0;
-            // allow allocation only if the max targets isn't reached and there are more candidates
-            if ((sa.getTargets().size() + 1 < tgt.getMaxTargets(sa.getHostCard(), sa))
-                    && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
-                final ImmutableList.Builder<Integer> choices = ImmutableList.builder();
-                for (int i = 1; i <= stillToDivide; i++) {
-                    choices.add(Integer.valueOf(i));
-                }
-                String apiBasedMessage = "Distribute how much to ";
-                if (sa.getApi() == ApiType.DealDamage) {
-                    apiBasedMessage = "Select how much damage to deal to ";
-                }
-                else if (sa.getApi() == ApiType.PreventDamage) {
-                    apiBasedMessage = "Select how much damage to prevent to ";
-                }
-                else if (sa.getApi() == ApiType.PutCounter) {
-                    apiBasedMessage = "Select how many counters to distribute to ";
-                }
-                final StringBuilder sb = new StringBuilder();
-                sb.append(apiBasedMessage);
-                sb.append(card.toString());
-                final Integer chosen = getController().getGui().oneOrNone(sb.toString(), choices.build());
-                if (chosen == null) {
-                    return true; //still return true since there was a valid choice
-                }
-                allocatedPortion = chosen;
+        if (sa.isDividedAsYouChoose()) {
+            Boolean val = onDividedAsYouChoose(card);
+            if (val != null) {
+                return val;
             }
-            else { // otherwise assign the rest of the damage/protection
-                allocatedPortion = stillToDivide;
-            }
-            tgt.setStillToDivide(stillToDivide - allocatedPortion);
-            tgt.addDividedAllocation(card, allocatedPortion);
         }
         addTarget(card);
         return true;
@@ -305,12 +284,49 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             showMessage(sa.getHostCard() + " - Cannot target this player (Hexproof? Protection? Restrictions?).");
             return;
         }
+        if (filter != null && !filter.apply(player)) {
+            showMessage(sa.getHostCard() + " - Cannot target this player (Hexproof? Protection? Restrictions?).");
+            return;
+        }
 
-        if (tgt.isDividedAsYouChoose()) {
-            final int stillToDivide = tgt.getStillToDivide();
+        if (sa.isDividedAsYouChoose()) {
+            Boolean val = onDividedAsYouChoose(player);
+            if (val != null) {
+                return;
+            }
+        }
+        addTarget(player);
+    }
+
+    protected Boolean onDividedAsYouChoose(GameObject go) {
+        if (divisionValues != null) {
+            if (divisionValues.isEmpty()) {
+                return false;
+            }
+            String apiBasedMessage = "Distribute how much to ";
+            if (sa.getApi() == ApiType.DealDamage) {
+                apiBasedMessage = "Select how much damage to deal to ";
+            }
+            else if (sa.getApi() == ApiType.PreventDamage) {
+                apiBasedMessage = "Select how much damage to prevent to ";
+            }
+            else if (sa.getApi() == ApiType.PutCounter) {
+                apiBasedMessage = "Select how many counters to distribute to ";
+            }
+            final StringBuilder sb = new StringBuilder();
+            sb.append(apiBasedMessage);
+            sb.append(go.toString());
+            final Integer chosen = getController().getGui().oneOrNone(sb.toString(), Lists.newArrayList(divisionValues));
+            if (chosen == null) {
+                return true; //still return true since there was a valid choice
+            }
+            divisionValues.remove(chosen);
+            sa.addDividedAllocation(go, chosen);
+        } else {
+            final int stillToDivide = sa.getStillToDivide();
             int allocatedPortion = 0;
             // allow allocation only if the max targets isn't reached and there are more candidates
-            if ((sa.getTargets().size() + 1 < tgt.getMaxTargets(sa.getHostCard(), sa)) && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
+            if ((sa.getTargets().size() + 1 < sa.getMaxTargets()) && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
                 final ImmutableList.Builder<Integer> choices = ImmutableList.builder();
                 for (int i = 1; i <= stillToDivide; i++) {
                     choices.add(Integer.valueOf(i));
@@ -323,19 +339,18 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 }
                 final StringBuilder sb = new StringBuilder();
                 sb.append(apiBasedMessage);
-                sb.append(player.getName());
+                sb.append(go.toString());
                 final Integer chosen = getController().getGui().oneOrNone(sb.toString(), choices.build());
                 if (null == chosen) {
-                    return;
+                    return true;
                 }
                 allocatedPortion = chosen;
             } else { // otherwise assign the rest of the damage/protection
                 allocatedPortion = stillToDivide;
             }
-            tgt.setStillToDivide(stillToDivide - allocatedPortion);
-            tgt.addDividedAllocation(player, allocatedPortion);
+            sa.addDividedAllocation(go, allocatedPortion);
         }
-        addTarget(player);
+        return null;
     }
 
     private void addTarget(final GameEntity ge) {
@@ -366,7 +381,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     private boolean hasAllTargets() {
-        return tgt.isMaxTargetsChosen(sa.getHostCard(), sa) || ( tgt.getStillToDivide() == 0 && tgt.isDividedAsYouChoose());
+        return sa.isMaxTargetChosen() || (sa.isDividedAsYouChoose() && sa.getStillToDivide() == 0);
     }
 
     @Override

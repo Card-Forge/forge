@@ -26,7 +26,6 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameType;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -636,10 +635,7 @@ public class SpecialCardAi {
                         boolean canRetFromGrave = false;
                         String name = c.getName().replace(',', ';');
                         for (Trigger t : c.getTriggers()) {
-                            SpellAbility ab = null;
-                            if (t.hasParam("Execute")) {
-                                ab = AbilityFactory.getAbility(c.getSVar(t.getParam("Execute")), c);
-                            }
+                            SpellAbility ab = t.ensureAbility();
                             if (ab == null) { continue; }
 
                             if (ab.getApi() == ApiType.ChangeZone

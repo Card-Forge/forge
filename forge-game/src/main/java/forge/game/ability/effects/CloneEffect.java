@@ -108,6 +108,8 @@ public class CloneEffect extends SpellAbilityEffect {
             if (!cloneTargets.isEmpty()) {
                 tgtCard = cloneTargets.get(0);
                 game.getTriggerHandler().clearActiveTriggers(tgtCard, null);
+            } else {
+                return;
             }
         } else if (sa.hasParam("Choices") && sa.usesTargeting()) {
             tgtCard = sa.getTargets().getFirstTargetedCard();

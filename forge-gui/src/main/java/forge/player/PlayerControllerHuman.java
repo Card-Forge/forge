@@ -1064,19 +1064,20 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * SpellAbility, forge.card.spellability.SpellAbilityStackInstance)
      */
     @Override
-    public TargetChoices chooseNewTargetsFor(final SpellAbility ability) {
+    public TargetChoices chooseNewTargetsFor(final SpellAbility ability, Predicate<GameObject> filter, boolean optional) {
         final SpellAbility sa = ability.isWrapper() ? ((WrappedAbility) ability).getWrappedAbility() : ability;
-        if (sa.getTargetRestrictions() == null) {
+        if (!sa.usesTargeting()) {
             return null;
         }
         final TargetChoices oldTarget = sa.getTargets();
         final TargetSelection select = new TargetSelection(this, sa);
         sa.resetTargets();
-        if (select.chooseTargets(oldTarget.size())) {
+        if (select.chooseTargets(oldTarget.size(), Lists.newArrayList(oldTarget.getDividedValues()), filter, optional)) {
             return sa.getTargets();
         } else {
+            sa.setTargets(oldTarget);
             // Return old target, since we had to reset them above
-            return oldTarget;
+            return null;
         }
     }
 
@@ -1798,11 +1799,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                         player.getGame().getStackZone().add(next.getHostCard());
                     }
                     // TODO check if static abilities needs to be run for things affecting the copy?
-                    if (next.isMayChooseNewTargets() && !next.setupTargets()) {
-                        // if targets can't be done, remove copy from existence
-                        if (next.isSpell()) {
-                            next.getHostCard().ceaseToExist();
-                        }
+                    if (next.isMayChooseNewTargets()) {
+                        next.setupNewTargets(player);
                     }
                 }
                 player.getGame().getStack().add(next);
@@ -1823,7 +1821,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean chooseTargetsFor(final SpellAbility currentAbility) {
         final TargetSelection select = new TargetSelection(this, currentAbility);
-        return select.chooseTargets(null);
+        return select.chooseTargets(null, null, null, false);
     }
 
     @Override

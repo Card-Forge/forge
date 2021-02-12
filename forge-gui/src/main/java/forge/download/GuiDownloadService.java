@@ -270,7 +270,7 @@ public abstract class GuiDownloadService implements Runnable {
             String decodedKey = decodeURL(kv.getKey());
             File fileDest = new File(decodedKey);
             final String filePath = fileDest.getPath();
-            final String subLastIndex = filePath.contains("pics") ? "\\pics\\" : "\\db\\";
+            final String subLastIndex = filePath.contains("pics") ? "\\pics\\" : filePath.contains("skins") ? "\\"+FileUtil.getParent(filePath)+"\\" : "\\db\\";
 
             System.out.println(count + "/" + totalCount + " - .." + filePath.substring(filePath.lastIndexOf(subLastIndex)+1));
 
@@ -409,8 +409,11 @@ public abstract class GuiDownloadService implements Runnable {
     protected abstract Map<String, String> getNeededFiles();
 
     protected static void addMissingItems(Map<String, String> list, String nameUrlFile, String dir) {
+        addMissingItems(list, nameUrlFile, dir, false);
+    }
+    protected static void addMissingItems(Map<String, String> list, String nameUrlFile, String dir, boolean includeParent) {
         for (Pair<String, String> nameUrlPair : FileUtil.readNameUrlFile(nameUrlFile)) {
-            File f = new File(dir, decodeURL(nameUrlPair.getLeft()));
+            File f = new File(includeParent? dir+FileUtil.getParent(nameUrlPair.getRight()) : dir , decodeURL(nameUrlPair.getLeft()));
             //System.out.println(f.getAbsolutePath());
             if (!f.exists()) {
                 list.put(f.getAbsolutePath(), nameUrlPair.getRight());

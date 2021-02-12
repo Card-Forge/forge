@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
+import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -124,9 +125,13 @@ public class TriggerHandler {
     }
 
     public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic) {
+        return parseTrigger(trigParse, host, intrinsic, host);
+    }
+
+    public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic, final IHasSVars sVarHolder) {
         try {
             final Map<String, String> mapParams = TriggerHandler.parseParams(trigParse);
-            return TriggerHandler.parseTrigger(mapParams, host, intrinsic);
+            return TriggerHandler.parseTrigger(mapParams, host, intrinsic, sVarHolder);
         } catch (Exception e) {
             String msg = "TriggerHandler:parseTrigger failed to parse";
             Sentry.getContext().recordBreadcrumb(
@@ -138,12 +143,15 @@ public class TriggerHandler {
         }
     }
 
-    public static Trigger parseTrigger(final Map<String, String> mapParams, final Card host, final boolean intrinsic) {
+    public static Trigger parseTrigger(final Map<String, String> mapParams, final Card host, final boolean intrinsic, final IHasSVars sVarHolder) {
         Trigger ret = null;
 
         try {
             final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));
             ret = type.createTrigger(mapParams, host, intrinsic);
+            if (sVarHolder != null) {
+                ret.ensureAbility(sVarHolder);
+            }
         } catch (Exception e) {
             String msg = "TriggerHandler:parseTrigger failed to parse";
             Sentry.getContext().recordBreadcrumb(
@@ -170,13 +178,7 @@ public class TriggerHandler {
             if (wt.getTriggers() != null)
                 continue;
 
-            List<Trigger> trigger = Lists.newArrayList();
-            for (final Trigger t : activeTriggers) {
-                if (canRunTrigger(t,wt.getMode(),wt.getParams())) {
-                    trigger.add(t);
-                }
-            }
-            wt.setTriggers(trigger);
+            wt.setTriggers(getActiveTrigger(wt.getMode(), wt.getParams()));
         }
     }
 
@@ -707,5 +709,15 @@ public class TriggerHandler {
         }
 
         return n;
+    }
+
+    public List<Trigger> getActiveTrigger(final TriggerType mode, final Map<AbilityKey, Object> runParams) {
+        List<Trigger> trigger = Lists.newArrayList();
+        for (final Trigger t : activeTriggers) {
+            if (canRunTrigger(t, mode, runParams)) {
+                trigger.add(t);
+            }
+        }
+        return trigger;
     }
 }

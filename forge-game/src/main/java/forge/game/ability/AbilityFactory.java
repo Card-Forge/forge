@@ -249,7 +249,7 @@ public final class AbilityFactory {
             }
         }
 
-        if (api == ApiType.DelayedTrigger && mapParams.containsKey("Execute")) {
+        if ((api == ApiType.DelayedTrigger || api == ApiType.ImmediateTrigger) && mapParams.containsKey("Execute")) {
             spellAbility.setSVar(mapParams.get("Execute"), sVarHolder.getSVar(mapParams.get("Execute")));
         }
 
@@ -363,10 +363,6 @@ public final class AbilityFactory {
         }
         if (mapParams.containsKey("TargetsWithDifferentCMC")) {
             abTgt.setDifferentCMC(true);
-        }
-        if (mapParams.containsKey("DividedAsYouChoose")) {
-            abTgt.calculateStillToDivide(mapParams.get("DividedAsYouChoose"), null, null);
-            abTgt.setDividedAsYouChoose(true);
         }
         if (mapParams.containsKey("TargetsAtRandom")) {
             abTgt.setRandomTarget(true);

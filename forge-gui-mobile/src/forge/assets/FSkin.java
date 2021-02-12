@@ -97,7 +97,7 @@ public class FSkin {
         Forge.hdstart = false;
 
         //ensure skins directory exists
-        final FileHandle dir = Gdx.files.absolute(ForgeConstants.SKINS_DIR);
+        final FileHandle dir = Gdx.files.absolute(ForgeConstants.CACHE_SKINS_DIR);
         if (!dir.exists() || !dir.isDirectory()) {
             //if skins directory doesn't exist, point to internal assets/skin directory instead for the sake of the splash screen
             preferredDir = Gdx.files.internal("fallback_skin");
@@ -106,6 +106,7 @@ public class FSkin {
             if (splashScreen != null) {
                 if (allSkins == null) { //initialize
                     allSkins = new Array<>();
+                    allSkins.add("Default"); //init default
                     final Array<String> skinDirectoryNames = getSkinDirectoryNames();
                     for (final String skinDirectoryName : skinDirectoryNames) {
                         allSkins.add(WordUtil.capitalize(skinDirectoryName.replace('_', ' ')));
@@ -115,7 +116,7 @@ public class FSkin {
             }
 
             // Non-default (preferred) skin name and dir.
-            preferredDir = Gdx.files.absolute(ForgeConstants.SKINS_DIR + preferredName);
+            preferredDir = Gdx.files.absolute(preferredName.equals("default") ? ForgeConstants.BASE_SKINS_DIR + preferredName : ForgeConstants.CACHE_SKINS_DIR + preferredName);
             if (!preferredDir.exists() || !preferredDir.isDirectory()) {
                 preferredDir.mkdirs();
             }
@@ -219,8 +220,12 @@ public class FSkin {
 
         try {
             textures.put(f1.path(), new Texture(f1));
-            textures.put(f2.path(), new Texture(f2));
-            Pixmap preferredIcons = new Pixmap(f2);
+            Pixmap preferredIcons = new Pixmap(f1);
+            if (f2.exists()) {
+                textures.put(f2.path(), new Texture(f2));
+                preferredIcons = new Pixmap(f2);
+            }
+
             textures.put(f3.path(), new Texture(f3));
             if (f6.exists()) {
                 textures.put(f6.path(), new Texture(f6));
@@ -429,7 +434,7 @@ public class FSkin {
     public static Array<String> getSkinDirectoryNames() {
         final Array<String> mySkins = new Array<>();
 
-        final FileHandle dir = Gdx.files.absolute(ForgeConstants.SKINS_DIR);
+        final FileHandle dir = Gdx.files.absolute(ForgeConstants.CACHE_SKINS_DIR);
         for (FileHandle skinFile : dir.list()) {
             String skinName = skinFile.name();
             if (skinName.equalsIgnoreCase(".svn")) { continue; }
