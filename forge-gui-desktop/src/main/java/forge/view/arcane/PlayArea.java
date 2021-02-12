@@ -33,7 +33,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.MouseTriggerEvent;
@@ -58,7 +58,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private static final float STACK_SPACING_X = 0.12f;
     private static final float STACK_SPACING_Y = 0.12f;
 
-    //private final int creatureStackMax = 4;
+    private final int creatureStackMax = 4;
     private final int landStackMax = 5;
     private final int tokenStackMax = 5;
     private final int othersStackMax = 4;
@@ -76,6 +76,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private final ZoneType zone;
 
     private boolean makeTokenRow = true;
+    private boolean stackCreatures = false;
 
     public PlayArea(final CMatchUI matchUI, final FScrollPane scrollPane, final boolean mirror, final PlayerView player, final ZoneType zone) {
         super(matchUI, scrollPane);
@@ -83,7 +84,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.mirror = mirror;
         this.model = player;
         this.zone = zone;
-        this.makeTokenRow = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_TOKENS_IN_SEPARATE_ROW);
+        this.makeTokenRow = FModel.getPreferences().getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW);
+        this.stackCreatures = FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES);
     }
 
     private final CardStackRow collectAllLands() {
@@ -193,12 +195,14 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         return allTokens;
     }
 
-    /*private final CardStackRow collectAllCreatures() {
+    private final CardStackRow collectAllCreatures() {
         final CardStackRow allCreatures = new CardStackRow();
         outerLoop:
         //
         for (final CardPanel panel : this.getCardPanels()) {
-            if (!panel.getCard().isCreature() || panel.getCard().isToken()) {
+            final CardView card = panel.getCard();
+            final CardStateView state = card.getCurrentState();
+            if (!state.isCreature() || card.isToken()) {
                 continue;
             }
 
@@ -208,7 +212,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (int i = 0, n = allCreatures.size(); i < n; i++) {
                 final CardStack stack = allCreatures.get(i);
                 final CardPanel firstPanel = stack.get(0);
-                if (firstPanel.getCard().getName().equals(panel.getCard().getName())) {
+                final CardView firstCard = firstPanel.getCard();
+                final CardStateView firstState = firstCard.getCurrentState();
+                if (firstCard.getName().equals(card.getName())) {
                     if (!firstPanel.getAttachedPanels().isEmpty()) {
                         // Put this creature to the left of creatures with the same
                         // name and attachments.
@@ -216,13 +222,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         break;
                     }
                     if (!panel.getAttachedPanels().isEmpty()
-                            || panel.getCard().isEnchanted()
-                            || panel.getCard().isCloned()
-                            || panel.getCard().isCopiedSpell()
-                            || !panel.getCard().getCounters().equals(firstPanel.getCard().getCounters())
-                            || (panel.getCard().isSick() != firstPanel.getCard().isSick())
-                            || (panel.getCard().getNetPower() != firstPanel.getCard().getNetPower())
-                            || (panel.getCard().getNetToughness() != firstPanel.getCard().getNetToughness())
+                            || card.isCloned()
+                            || !card.hasSameCounters(firstCard)
+                            || (card.isSick() != firstCard.isSick())
+                            || (state.getPower() != firstState.getPower())
+                            || (state.getToughness() != firstState.getToughness())
                             || (stack.size() == creatureStackMax)) {
                         // If this creature has attachments or the stack is full,
                         // put it to the right.
@@ -243,7 +247,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             allCreatures.add(insertIndex == -1 ? allCreatures.size() : insertIndex, stack);
         }
         return allCreatures;
-    }*/
+    }
 
     @Override
     public final CardPanel addCard(final CardView card) {
@@ -263,11 +267,16 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         final CardStackRow lands = collectAllLands();
         final CardStackRow tokens = collectAllTokens();
-        //final CardStackRow creaturesRegular = new CardStackRow(this.getCardPanels(), RowType.CreatureNonToken);
-        //final CardStackRow collectedCreatures = collectAllCreatures();
-        final CardStackRow creatures = new CardStackRow(this.getCardPanels(), RowType.CreatureNonToken);
+        CardStackRow creatures = new CardStackRow(this.getCardPanels(), RowType.CreatureNonToken);
         final CardStackRow others = new CardStackRow(this.getCardPanels(), RowType.Other);
-        
+
+        if (stackCreatures) {
+            final CardStackRow collectedCreatures = collectAllCreatures();
+            if (!collectedCreatures.isEmpty()) {
+                creatures = collectedCreatures;
+            }
+        }
+
         if (!makeTokenRow) {
             for (CardStack s : tokens) {
                 if (!s.isEmpty()) {
@@ -279,12 +288,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             tokens.clear();
         }
 
-        /*if (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES) && !collectedCreatures.isEmpty()) {
-            creatures = collectedCreatures;
-        } else {
-            creatures = creaturesRegular;
-        }*/
-        
         // should find an appropriate width of card
         int maxCardWidth = this.getCardWidthMax();
         setCardWidth(maxCardWidth);
