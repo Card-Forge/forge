@@ -2,8 +2,7 @@ Name:Sisay
 ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:-2/-3
-T:Mode$ TapsForMana | TriggerZones$ Command | ValidCard$ Land.YouCtrl | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever you tap a land for mana, add one mana of any type that land produced.
-SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | Valid$ Defined.Triggered | ReflectProperty$ Produced | Defined$ TriggeredPlayer
+T:Mode$ TapsForMana | TriggerZones$ Command | ValidCard$ Land | Activator$ You | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever you tap a land for mana, add one mana of any type that land produced.
+SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ You
 AI:RemoveDeck:All
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Sisay.full.jpg
 Oracle:Hand -2, life -3\nWhenever you tap a land for mana, add one mana of any type that land produced.

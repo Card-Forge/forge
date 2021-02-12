@@ -304,10 +304,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // don't play if the conditions aren't met, unless it would trigger a beneficial sub-condition
-        if (!activateForCost && !sa.getConditions().areMet(sa)) {
+        if (!activateForCost && !sa.metConditions()) {
             final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null && !sa.isWrapper() && "True".equals(source.getSVar("AIPlayForSub"))) {
-                if (!abSub.getConditions().areMet(abSub)) {
+                if (!abSub.metConditions()) {
                     return false;
                 }
             } else {

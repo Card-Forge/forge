@@ -1388,7 +1388,7 @@ public class AbilityUtils {
         );
 
         // check conditions
-        if (sa.getConditions().areMet(sa)) {
+        if (sa.metConditions()) {
             if (sa.isWrapper() || StringUtils.isBlank(sa.getParam("UnlessCost"))) {
                 sa.resolve();
             }
@@ -1656,8 +1656,13 @@ public class AbilityUtils {
 
                 // Count$Kicked.<numHB>.<numNotHB>
                 if (sq[0].startsWith("Kicked")) {
-                    boolean kicked = ((SpellAbility)ctb).isKicked() || c.getKickerMagnitude() > 0;
+                    boolean kicked = sa.isKicked() || c.getKickerMagnitude() > 0;
                     return CardFactoryUtil.doXMath(Integer.parseInt(kicked ? sq[1] : sq[2]), expr, c);
+                }
+
+                // Count$UrzaLands.<numHB>.<numNotHB>
+                if (sq[0].startsWith("UrzaLands")) {
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sa.getActivatingPlayer().hasUrzaLands() ? sq[1] : sq[2]), expr, c);
                 }
 
                 //Count$SearchedLibrary.<DefinedPlayer>

@@ -122,7 +122,7 @@ public class AnimateAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final Game game = aiPlayer.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
-        if (sa.getConditions() != null && !sa.getConditions().areMet(sa) && sa.getSubAbility() == null) {
+        if (!sa.metConditions() && sa.getSubAbility() == null) {
             return false;  // what is this for?
         }
         if (!game.getStack().isEmpty() && game.getStack().peekAbility().getApi() == ApiType.Sacrifice) {

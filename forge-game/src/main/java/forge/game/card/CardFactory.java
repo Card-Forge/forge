@@ -358,11 +358,11 @@ public class CardFactory {
         // Name first so Senty has the Card name
         c.setName(face.getName());
 
+        for (Entry<String, String> v : face.getVariables())  c.setSVar(v.getKey(), v.getValue());
+
         for (String r : face.getReplacements())              c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true));
         for (String s : face.getStaticAbilities())           c.addStaticAbility(s);
         for (String t : face.getTriggers())                  c.addTrigger(TriggerHandler.parseTrigger(t, c, true));
-
-        for (Entry<String, String> v : face.getVariables())  c.setSVar(v.getKey(), v.getValue());
 
         // keywords not before variables
         c.addIntrinsicKeywords(face.getKeywords(), false);

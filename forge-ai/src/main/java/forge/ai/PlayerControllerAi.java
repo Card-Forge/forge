@@ -833,6 +833,9 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public byte chooseColor(String message, SpellAbility sa, ColorSet colors) {
+        if (colors.countColors() < 2) {
+            return Iterables.getFirst(colors, MagicColor.WHITE);
+        }
         // You may switch on sa.getApi() here and use sa.getParam("AILogic")
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
         if (sa.getApi() == ApiType.Mana) {

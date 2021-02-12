@@ -2,9 +2,9 @@ Name:Quarum Trench Gnomes
 ManaCost:3 R
 Types:Creature Gnome
 PT:1/1
-A:AB$ Animate | Cost$ T | ValidTgts$ Plains | IsCurse$ True | TgtPrompt$ Choose target plains | Replacements$ QuarumReplacement | sVars$ QuarumProduce | Permanent$ True | StackDescription$ If target {c:Targeted} is tapped for mana, it produces colorless mana instead of white mana. (This effect lasts indefinitely.) | SpellDescription$ If target Plains is tapped for mana, it produces colorless mana instead of white mana. (This effect lasts indefinitely.)
-SVar:QuarumReplacement:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Card.Plains+Self | ManaReplacement$ QuarumProduce | Description$ If CARDNAME is tapped for mana, it produces colorless mana instead of white mana.
-SVar:QuarumProduce:W->1
+A:AB$ Effect | Cost$ T | ValidTgts$ Plains | IsCurse$ True | TgtPrompt$ Choose target plains | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | Duration$ Permanent | ReplacementEffects$ QuarumReplacement | SVars$ QuarumProduce | StackDescription$ If target {c:Targeted} is tapped for mana, it produces colorless mana instead of white mana. (This effect lasts indefinitely.) | SpellDescription$ If target Plains is tapped for mana, it produces colorless mana instead of white mana. (This effect lasts indefinitely.)
+SVar:QuarumReplacement:Event$ ProduceMana | ValidCard$ Card.IsRemembered | ReplaceWith$ QuarumProduce | Description$ If this Land is tapped for mana, it produces colorless mana instead of white mana.
+SVar:QuarumProduce:DB$ ReplaceMana | ReplaceColor$ C | ReplaceOnly$ W
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quarum_trench_gnomes.jpg
