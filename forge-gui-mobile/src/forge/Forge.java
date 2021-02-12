@@ -437,15 +437,6 @@ public class Forge implements ApplicationListener {
         try {
             endKeyInput(); //end key input before switching screens
             ForgeAnimation.endAll(); //end all active animations before switching screens
-            try {
-                if(dispose)
-                    ImageCache.disposeTexture();
-            }
-            catch (Exception ex)
-            {
-                // FIXME: This isn't supposed to be necessary, but disposeTexture crashes e.g. in Quest Tournaments on mobile, needs proper fixing.
-                System.err.println("Warning: caught an exception while trying to call ImageCache.disposeTexture() in setCurrentScreen.");
-            }
 
             currentScreen = screen0;
             currentScreen.setSize(screenWidth, screenHeight);
@@ -470,6 +461,8 @@ public class Forge implements ApplicationListener {
             graphics.end();
             BugReporter.reportException(ex);
         }
+        if(dispose)
+            ImageCache.disposeTexture();
     }
 
     @Override
