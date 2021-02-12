@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.IHasSVars;
 import forge.game.TriggerReplacementBase;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
@@ -562,12 +563,16 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
     }
 
-    public SpellAbility ensureAbility() {
+    public SpellAbility ensureAbility(final IHasSVars sVarHolder) {
         SpellAbility sa = getOverridingAbility();
         if (sa == null && hasParam("Execute")) {
-            sa = AbilityFactory.getAbility(getHostCard(), getParam("Execute"));
+            sa = AbilityFactory.getAbility(getHostCard(), getParam("Execute"), sVarHolder);
             setOverridingAbility(sa);
         }
         return sa;
+    }
+
+    public SpellAbility ensureAbility() {
+        return ensureAbility(this);
     }
 }

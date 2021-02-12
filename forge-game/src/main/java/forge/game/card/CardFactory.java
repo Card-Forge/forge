@@ -664,6 +664,7 @@ public class CardFactory {
                     if (origSVars.containsKey(s)) {
                         final String actualTrigger = origSVars.get(s);
                         final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, out, true);
+                        parsedTrigger.setOriginalHost(host);
                         state.addTrigger(parsedTrigger);
                     }
                 }
@@ -687,6 +688,7 @@ public class CardFactory {
                     if (origSVars.containsKey(s)) {
                         final String actualAbility = origSVars.get(s);
                         final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, out);
+                        grantedAbility.setOriginalHost(host);
                         grantedAbility.setIntrinsic(true);
                         state.addSpellAbility(grantedAbility);
                     }
@@ -700,6 +702,7 @@ public class CardFactory {
                     if (origSVars.containsKey(s)) {
                         final String actualStatic = origSVars.get(s);
                         final StaticAbility grantedStatic = new StaticAbility(actualStatic, out);
+                        grantedStatic.setOriginalHost(host);
                         grantedStatic.setIntrinsic(true);
                         state.addStaticAbility(grantedStatic);
                     }

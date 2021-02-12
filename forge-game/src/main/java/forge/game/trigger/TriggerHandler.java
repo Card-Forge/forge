@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
+import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -123,9 +124,13 @@ public class TriggerHandler {
     }
 
     public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic) {
+        return parseTrigger(trigParse, host, intrinsic, host);
+    }
+
+    public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic, final IHasSVars sVarHolder) {
         try {
             final Map<String, String> mapParams = TriggerHandler.parseParams(trigParse);
-            return TriggerHandler.parseTrigger(mapParams, host, intrinsic);
+            return TriggerHandler.parseTrigger(mapParams, host, intrinsic, sVarHolder);
         } catch (Exception e) {
             String msg = "TriggerHandler:parseTrigger failed to parse";
             Sentry.getContext().recordBreadcrumb(
@@ -137,12 +142,15 @@ public class TriggerHandler {
         }
     }
 
-    public static Trigger parseTrigger(final Map<String, String> mapParams, final Card host, final boolean intrinsic) {
+    public static Trigger parseTrigger(final Map<String, String> mapParams, final Card host, final boolean intrinsic, final IHasSVars sVarHolder) {
         Trigger ret = null;
 
         try {
             final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));
             ret = type.createTrigger(mapParams, host, intrinsic);
+            if (sVarHolder != null) {
+                ret.ensureAbility(sVarHolder);
+            }
         } catch (Exception e) {
             String msg = "TriggerHandler:parseTrigger failed to parse";
             Sentry.getContext().recordBreadcrumb(
