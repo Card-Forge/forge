@@ -239,7 +239,7 @@ public class GameAction {
                 CardCollectionView comCards = c.getOwner().getCardsIn(ZoneType.Command);
                 for (final Card effCard : comCards) {
                     for (final ReplacementEffect re : effCard.getReplacementEffects()) {
-                        if (re.getMode() == ReplacementType.Moved && "Card.EffectSource+YouOwn".equals(re.getParam("ValidCard"))) {
+                        if (re.hasSVar("CommanderMoveReplacement")) {
                             commanderEffect = effCard;
                             break;
                         }
@@ -315,15 +315,17 @@ public class GameAction {
                 java.util.Collections.reverse(cards);
             }
             mergedCards = cards;
-            final SpellAbility saTargeting = cause.getSATargetingCard();
-            if (saTargeting != null) {
-                saTargeting.getTargets().replaceTargetCard(c, cards);
-            }
-            // Replace host rememberd cards
-            Card hostCard = cause.getHostCard();
-            if (hostCard.isRemembered(c)) {
-                hostCard.removeRemembered(c);
-                hostCard.addRemembered(cards);
+            if (cause != null) {
+                final SpellAbility saTargeting = cause.getSATargetingCard();
+                if (saTargeting != null) {
+                    saTargeting.getTargets().replaceTargetCard(c, cards);
+                }
+                // Replace host rememberd cards
+                Card hostCard = cause.getHostCard();
+                if (hostCard.isRemembered(c)) {
+                    hostCard.removeRemembered(c);
+                    hostCard.addRemembered(cards);
+                }
             }
         }
 

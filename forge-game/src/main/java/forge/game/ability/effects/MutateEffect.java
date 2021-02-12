@@ -14,6 +14,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 public class MutateEffect extends SpellAbilityEffect {
 
@@ -37,7 +38,7 @@ public class MutateEffect extends SpellAbilityEffect {
         final Card topCard = host.getController().getController().chooseSingleEntityForEffect(
                 view,
                 sa,
-                "Choose which creature to be on top",
+                Localizer.getInstance().getMessage("lblChooseCreatureToBeTop"),
                 false,
                 new HashMap<>()
         );
@@ -81,8 +82,8 @@ public class MutateEffect extends SpellAbilityEffect {
         target.setTimesMutated(target.getTimesMutated() + 1);
         target.updateTokenView();
         if (host.isCommander()) {
+            host.getOwner().updateMergedCommanderInfo(target, host);
             target.updateCommanderView();
-            host.getOwner().updateMergedCommanderCast(target, host);
         }
 
         game.getTriggerHandler().runTrigger(TriggerType.Mutates, AbilityKey.mapFromCard(target), false);

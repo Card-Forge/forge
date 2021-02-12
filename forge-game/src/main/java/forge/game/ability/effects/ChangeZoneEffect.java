@@ -1286,6 +1286,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         source.addRemembered(meld);
                     }
                 }
+                if (c.hasMergedCard()) {
+                    for (final Card card : c.getMergedCards()) {
+                        if (card == c) continue;
+                        source.addRemembered(card);
+                    }
+                }
             }
             if (forget) {
                 source.removeRemembered(movedCard);

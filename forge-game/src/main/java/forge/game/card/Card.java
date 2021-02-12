@@ -6257,6 +6257,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public void updateCommanderView() {
         view.updateCommander(this);
     }
+    public Card getRealCommander() {
+        if (isCommander)
+            return this;
+        if (this.getMeldedWith() != null && this.getMeldedWith().isCommander())
+            return this.getMeldedWith();
+        if (isInZone(ZoneType.Battlefield) && hasMergedCard()) {
+            for (final Card c : getMergedCards())
+                if (c.isCommander) return c;
+        }
+        return null;
+    }
 
     public boolean canMoveToCommandZone() {
         return canMoveToCommandZone;

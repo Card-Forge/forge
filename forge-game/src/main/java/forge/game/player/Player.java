@@ -610,8 +610,14 @@ public class Player extends GameEntity implements Comparable<Player> {
                 && !this.getGame().getRules().hasAppliedVariant(GameType.Oathbreaker)
                 && !this.getGame().getRules().hasAppliedVariant(GameType.TinyLeaders)
                 && !this.getGame().getRules().hasAppliedVariant(GameType.Brawl)) {
-            commanderDamage.put(source, getCommanderDamage(source) + amount);
+            // In case that commander is merged permanent, get the real commander card
+            final Card realCommander = source.getRealCommander();
+            int damage = getCommanderDamage(realCommander) + amount;
+            commanderDamage.put(realCommander, damage);
             view.updateCommanderDamage(this);
+            if (realCommander != source) {
+                view.updateMergedCommanderDamage(source, realCommander);
+            }
         }
 
         int old = assignedDamage.containsKey(source) ? assignedDamage.get(source) : 0;
@@ -2886,8 +2892,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
     }
 
-    public void updateMergedCommanderCast(Card target, Card commander) {
+    public void updateMergedCommanderInfo(Card target, Card commander) {
         getView().updateMergedCommanderCast(this, target, commander);
+        getView().updateMergedCommanderDamage(target, commander);
     }
 
     public int getTotalCommanderCast() {
