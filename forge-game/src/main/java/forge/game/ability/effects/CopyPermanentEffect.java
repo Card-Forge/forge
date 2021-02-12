@@ -30,7 +30,6 @@ import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class CopyPermanentEffect extends TokenEffectBase {
@@ -59,16 +58,11 @@ public class CopyPermanentEffect extends TokenEffectBase {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Game game = host.getGame();
-        final List<String> pumpKeywords = Lists.newArrayList();
 
         if (sa.hasParam("Optional")) {
             if (!activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblCopyPermanentConfirm"))) {
                 return;
             }
-        }
-
-        if (sa.hasParam("PumpKeywords")) {
-            pumpKeywords.addAll(Arrays.asList(sa.getParam("PumpKeywords").split(" & ")));
         }
 
         final int numCopies = sa.hasParam("NumCopies") ? AbilityUtils.calculateAmount(host,
