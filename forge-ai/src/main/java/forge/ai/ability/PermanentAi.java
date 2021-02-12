@@ -279,7 +279,7 @@ public class PermanentAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final Cost cost = sa.getPayCosts();
 
-        if (sa.getConditions() != null && !sa.getConditions().areMet(sa)) {
+        if (!sa.metConditions()) {
             return false;
         }
 

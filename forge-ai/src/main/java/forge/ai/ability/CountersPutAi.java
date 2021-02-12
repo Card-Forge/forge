@@ -290,7 +290,7 @@ public class CountersPutAi extends SpellAbilityAi {
             return doMoveCounterLogic(ai, sa, ph);
         }
 
-        if (sa.getConditions() != null && !sa.getConditions().areMet(sa) && sa.getSubAbility() == null) {
+        if (!sa.metConditions() && sa.getSubAbility() == null) {
             return false;
         }
 

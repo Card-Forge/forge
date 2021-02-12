@@ -2,10 +2,6 @@ package forge.game.ability;
 
 import java.util.Map;
 
-import forge.game.ability.effects.ChangeZoneAllEffect;
-import forge.game.ability.effects.ChangeZoneEffect;
-import forge.game.ability.effects.ManaEffect;
-import forge.game.ability.effects.ManaReflectedEffect;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.spellability.AbilityManaPart;
@@ -28,11 +24,11 @@ public class SpellApiBased extends Spell {
         // A spell is always intrinsic
         this.setIntrinsic(true);
 
-        if (effect instanceof ManaEffect || effect instanceof ManaReflectedEffect) {
+        if (api.equals(ApiType.Mana) || api.equals(ApiType.ManaReflected)) {
             this.setManaPart(new AbilityManaPart(sourceCard, mapParams));
         }
 
-        if (effect instanceof ChangeZoneEffect || effect instanceof ChangeZoneAllEffect) {
+        if (api.equals(ApiType.ChangeZone) || api.equals(ApiType.ChangeZoneAll)) {
             AbilityFactory.adjustChangeZoneTarget(mapParams, this);
         }
     }

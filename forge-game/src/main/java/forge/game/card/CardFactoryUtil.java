@@ -1475,7 +1475,7 @@ public class CardFactoryUtil {
                 for (Card card : otb) {
                     if (!card.isTapped() || !untappedOnly) {
                         for (SpellAbility ma : card.getManaAbilities()) {
-                            if (ma.getManaPart().canProduce(MagicColor.toShortString(color))) {
+                            if (ma.canProduce(MagicColor.toShortString(color))) {
                                 uniqueColors++;
                                 continue outer;
                             }

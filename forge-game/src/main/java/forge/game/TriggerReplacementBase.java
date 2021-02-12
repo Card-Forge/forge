@@ -77,4 +77,5 @@ public abstract class TriggerReplacementBase extends CardTraitBase implements II
         this.overridingAbility = overridingAbility0;
     }
 
+    abstract public SpellAbility ensureAbility();
 }

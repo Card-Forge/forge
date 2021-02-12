@@ -5,6 +5,7 @@ import forge.card.MagicColor;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardState;
+import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
@@ -131,6 +132,9 @@ public class ForgeScript {
             return !sa.isManaAbility();
         } else if (property.equals("withoutXCost")) {
             return !sa.costHasManaX();
+        } else if (property.equals("hasTapCost")) {
+            Cost cost = sa.getPayCosts();
+            return cost != null && cost.hasTapCost();
         } else if (property.equals("Buyback")) {
             return sa.isBuyBackAbility();
         } else if (property.equals("Cycling")) {

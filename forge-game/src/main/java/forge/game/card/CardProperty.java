@@ -912,7 +912,7 @@ public class CardProperty {
         } else if (property.startsWith("canProduceManaColor")) {
             final String color = property.split("canProduceManaColor ")[1];
             for (SpellAbility ma : card.getManaAbilities()) {
-                if (ma.getManaPart().canProduce(MagicColor.toShortString(color))) {
+                if (ma.canProduce(MagicColor.toShortString(color))) {
                     return true;
                 }
             }

@@ -169,13 +169,7 @@ public class TriggerHandler {
             if (wt.getTriggers() != null)
                 continue;
 
-            List<Trigger> trigger = Lists.newArrayList();
-            for (final Trigger t : activeTriggers) {
-                if (canRunTrigger(t,wt.getMode(),wt.getParams())) {
-                    trigger.add(t);
-                }
-            }
-            wt.setTriggers(trigger);
+            wt.setTriggers(getActiveTrigger(wt.getMode(), wt.getParams()));
         }
     }
 
@@ -677,5 +671,15 @@ public class TriggerHandler {
         }
 
         return n;
+    }
+
+    public List<Trigger> getActiveTrigger(final TriggerType mode, final Map<AbilityKey, Object> runParams) {
+        List<Trigger> trigger = Lists.newArrayList();
+        for (final Trigger t : activeTriggers) {
+            if (canRunTrigger(t, mode, runParams)) {
+                trigger.add(t);
+            }
+        }
+        return trigger;
     }
 }
