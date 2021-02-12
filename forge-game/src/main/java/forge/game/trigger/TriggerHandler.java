@@ -477,17 +477,13 @@ public class TriggerHandler {
         if (runParams.get(AbilityKey.MergedCards) != null) {
             // Check if the trigger cares the origin is from battlefield
             Card original = (Card) runParams.get(AbilityKey.Card);
-            Card lastKnownInfo = (Card) runParams.get(AbilityKey.CardLKI);
             CardCollection mergedCards = (CardCollection) runParams.get(AbilityKey.MergedCards);
-            CardCollection mergedCardsLKI = new CardCollection(mergedCards);
             mergedCards.set(mergedCards.indexOf(original), original);
-            mergedCardsLKI.set(mergedCardsLKI.indexOf(original), lastKnownInfo);
             Map<AbilityKey, Object> newParams = AbilityKey.mapFromCard(original);
             newParams.putAll(runParams);
             if ("Battlefield".equals(regtrig.getParam("Origin"))) {
                 // If yes, only trigger once
                 newParams.put(AbilityKey.Card, mergedCards);
-                newParams.put(AbilityKey.CardLKI, mergedCardsLKI);
                 runSingleTriggerInternal(regtrig, newParams);
             } else {
                 // Else, trigger for each merged components

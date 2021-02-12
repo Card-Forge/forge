@@ -564,9 +564,6 @@ public class CardState extends GameObject implements IHasSVars {
     }
 
     public final void addAbilitiesFrom(final CardState source, final boolean lki) {
-        // TODO: what happens if SVar has the same name ?
-        sVars.putAll(source.getSVars());
-
         for (SpellAbility sa : source.manaAbilities) {
             if (sa.isIntrinsic()) {
                 manaAbilities.add(sa.copy(card, lki));
