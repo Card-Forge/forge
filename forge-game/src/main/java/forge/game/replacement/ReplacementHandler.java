@@ -19,6 +19,7 @@ package forge.game.replacement;
 
 import forge.game.Game;
 import forge.game.GameLogEntryType;
+import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -370,7 +371,10 @@ public class ReplacementHandler {
      * @return A finished instance
      */
     public static ReplacementEffect parseReplacement(final String repParse, final Card host, final boolean intrinsic) {
-        return ReplacementHandler.parseReplacement(parseParams(repParse), host, intrinsic);
+        return parseReplacement(repParse, host, intrinsic, host);
+    }
+    public static ReplacementEffect parseReplacement(final String repParse, final Card host, final boolean intrinsic, final IHasSVars sVarHolder) {
+        return ReplacementHandler.parseReplacement(parseParams(repParse), host, intrinsic, sVarHolder);
     }
 
     public static Map<String, String> parseParams(final String repParse) {
@@ -388,7 +392,7 @@ public class ReplacementHandler {
      *            The card that hosts the replacement effect
      * @return The finished instance
      */
-    private static ReplacementEffect parseReplacement(final Map<String, String> mapParams, final Card host, final boolean intrinsic) {
+    private static ReplacementEffect parseReplacement(final Map<String, String> mapParams, final Card host, final boolean intrinsic, final IHasSVars sVarHolder) {
         final ReplacementType rt = ReplacementType.smartValueOf(mapParams.get("Event"));
         ReplacementEffect ret = rt.createReplacement(mapParams, host, intrinsic);
 
@@ -397,8 +401,8 @@ public class ReplacementHandler {
             ret.setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(activeZones)));
         }
 
-        if (mapParams.containsKey("ReplaceWith")) {
-            ret.setOverridingAbility(AbilityFactory.getAbility(host, mapParams.get("ReplaceWith"), ret));
+        if (mapParams.containsKey("ReplaceWith") && sVarHolder != null) {
+            ret.setOverridingAbility(AbilityFactory.getAbility(host, mapParams.get("ReplaceWith"), sVarHolder));
         }
 
         return ret;

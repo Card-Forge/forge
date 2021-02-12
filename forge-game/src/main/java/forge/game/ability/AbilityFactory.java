@@ -249,7 +249,7 @@ public final class AbilityFactory {
             }
         }
 
-        if (api == ApiType.DelayedTrigger && mapParams.containsKey("Execute")) {
+        if ((api == ApiType.DelayedTrigger || api == ApiType.ImmediateTrigger) && mapParams.containsKey("Execute")) {
             spellAbility.setSVar(mapParams.get("Execute"), sVarHolder.getSVar(mapParams.get("Execute")));
         }
 
