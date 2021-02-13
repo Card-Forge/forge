@@ -4,9 +4,10 @@ Types:Creature
 PT:*/*
 K:Trample
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ PayLife | Description$ As CARDNAME enters the battlefield, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.
-SVar:PayLife:AB$ StoreSVar | Cost$ PayLife<X> | XMaxLimit$ Limit | References$ X,Limit,Active,Buried | SVar$ LifePaidOnETB | Type$ CountSVar | Expression$ X | SubAbility$ MoveToPlay
+SVar:PayLife:AB$ StoreSVar | Cost$ PayLife<X> | XMaxLimit$ Limit | References$ X,Limit,Active,Buried | SVar$ LifePaidOnETB | Type$ Calculate | Expression$ X | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ All | Destination$ Battlefield
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ LifePaidOnETB | SetToughness$ LifePaidOnETB | References$ LifePaidOnETB | Description$ CARDNAME's power and toughness are each equal to the life paid as it entered the battlefield.
+#Dont use References, when the variable is set by StoreSVar
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ LifePaidOnETB | SetToughness$ LifePaidOnETB | Description$ CARDNAME's power and toughness are each equal to the life paid as it entered the battlefield.
 SVar:X:Count$xPaid
 SVar:Limit:SVar$Active/Plus.Buried
 SVar:Active:Count$Valid Permanent.White+nonToken+OppCtrl
