@@ -43,7 +43,7 @@ import java.util.Deque;
 import java.util.List;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.37.001";
+    public static final String CURRENT_VERSION = "1.6.38.001";
 
     private static final ApplicationListener app = new Forge();
     private static Clipboard clipboard;
