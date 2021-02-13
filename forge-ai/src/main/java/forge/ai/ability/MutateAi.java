@@ -12,7 +12,6 @@ import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
-import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 import java.util.Map;
 
@@ -29,7 +28,7 @@ public class MutateAi extends SpellAbilityAi {
                 CardPredicates.hasKeyword("CARDNAME can't block."),
                 new Predicate<Card>() {
                     @Override
-                    public boolean apply(@NullableDecl Card card) {
+                    public boolean apply(final Card card) {
                         return ComputerUtilCard.isUselessCreature(aiPlayer, card);
                     }
                 }
