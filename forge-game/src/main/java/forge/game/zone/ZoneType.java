@@ -22,6 +22,7 @@ public enum ZoneType {
     Stack(false, "lblStackZone"),
     Sideboard(true, "lblSideboardZone"),
     Ante(false, "lblAnteZone"),
+    Merged(false, "lblBattlefieldZone"),
     SchemeDeck(true, "lblSchemeDeckZone"),
     PlanarDeck(true, "lblPlanarDeckZone"),
     Subgame(true, "lblSubgameZone"),

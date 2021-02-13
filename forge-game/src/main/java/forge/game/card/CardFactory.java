@@ -101,7 +101,7 @@ public class CardFactory {
         for (final Card o : in.getImprintedCards()) {
             out.addImprintedCard(o);
         }
-        out.setCommander(in.isCommander());
+        out.setCommander(in.isRealCommander());
         //out.setFaceDown(in.isFaceDown());
 
         return out;
@@ -817,6 +817,38 @@ public class CardFactory {
 
         // Dont copy the facedown state, make new one
         result.put(CardStateName.FaceDown, CardUtil.getFaceDownCharacteristic(out));
+        return result;
+    }
+
+    public static CardCloneStates getMutatedCloneStates(final Card card, final CardTraitBase sa) {
+        final Card top = card.getTopMergedCard();
+        final CardStateName state = top.getCurrentStateName();
+        final CardState ret = new CardState(card, state);
+        if (top.isCloned()) {
+            ret.copyFrom(top.getState(state, true), false);
+        } else {
+            ret.copyFrom(top.getOriginalState(state), false);
+        }
+
+        boolean first = true;
+        for (final Card c : card.getMergedCards()) {
+            if (first) {
+                first = false;
+                continue;
+            }
+            ret.addAbilitiesFrom(c.getCurrentState(), false);
+        }
+
+        final CardCloneStates result = new CardCloneStates(top, sa);
+        result.put(state, ret);
+
+        // For transformed card or melded card, also copy the original state to avoid crash
+        if (state == CardStateName.Transformed || state == CardStateName.Meld) {
+            final CardState ret1 = new CardState(card, CardStateName.Original);
+            ret1.copyFrom(top.getState(CardStateName.Original, true), false);
+            result.put(CardStateName.Original, ret1);
+        }
+
         return result;
     }
 

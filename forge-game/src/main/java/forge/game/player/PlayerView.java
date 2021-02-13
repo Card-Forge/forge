@@ -334,6 +334,15 @@ public class PlayerView extends GameEntityView {
         }
         set(TrackableProperty.CommanderDamage, map);
     }
+    void updateMergedCommanderDamage(Card card, Card commander) {
+        // Add commander damage to top card for card view panel info
+        for (final PlayerView p : Iterables.concat(Collections.singleton(this), getOpponents())) {
+            Map<Integer, Integer> map = p.get(TrackableProperty.CommanderDamage);
+            if (map == null) continue;
+            Integer damage = map.get(commander.getId());
+            map.put(card.getId(), damage);
+        }
+    }
 
     public int getCommanderCast(CardView commander) {
         Map<Integer, Integer> map = get(TrackableProperty.CommanderCast);
@@ -348,6 +357,15 @@ public class PlayerView extends GameEntityView {
             map = Maps.newHashMap();
         }
         map.put(c.getId(), p.getCommanderCast(c));
+        set(TrackableProperty.CommanderCast, map);
+    }
+
+    void updateMergedCommanderCast(Player p, Card target, Card commander) {
+        Map<Integer, Integer> map = get(TrackableProperty.CommanderCast);
+        if (map == null) {
+            map = Maps.newHashMap();
+        }
+        map.put(target.getId(), p.getCommanderCast(commander));
         set(TrackableProperty.CommanderCast, map);
     }
 

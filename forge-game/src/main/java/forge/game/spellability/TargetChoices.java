@@ -121,6 +121,11 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
         return Iterables.getFirst(getTargetSpells(), null);
     }
 
+    public final void replaceTargetCard(final Card old, final CardCollectionView replace) {
+        targets.remove(old);
+        targets.addAll(replace);
+    }
+
     @Override
     public TargetChoices clone() {
         TargetChoices tc = new TargetChoices();

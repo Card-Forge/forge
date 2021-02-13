@@ -72,13 +72,45 @@ public class SetStateEffect extends SpellAbilityEffect {
             }
 
             // facedown cards that are not Permanent, can't turn faceup there
-            if ("TurnFace".equals(mode) && gameCard.isFaceDown() && gameCard.isInZone(ZoneType.Battlefield)
-                && !gameCard.getState(CardStateName.Original).getType().isPermanent()) {
-                Card lki = CardUtil.getLKICopy(gameCard);
-                lki.forceTurnFaceUp();
-                game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, Localizer.getInstance().getMessage("lblFaceDownCardCantTurnFaceUp"));
+            if ("TurnFace".equals(mode) && gameCard.isFaceDown() && gameCard.isInZone(ZoneType.Battlefield)) {
+                if (gameCard.hasMergedCard()) {
+                    boolean hasNonPermanent = false;
+                    Card nonPermanentCard = null;
+                    for (final Card c : gameCard.getMergedCards()) {
+                        if (!c.getState(CardStateName.Original).getType().isPermanent()) {
+                            hasNonPermanent = true;
+                            nonPermanentCard = c;
+                            break;
+                        }
+                    }
+                    if (hasNonPermanent) {
+                        Card lki = CardUtil.getLKICopy(nonPermanentCard);
+                        lki.forceTurnFaceUp();
+                        game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, Localizer.getInstance().getMessage("lblFaceDownCardCantTurnFaceUp"));
+                        continue;
+                    }
+                } else if (!gameCard.getState(CardStateName.Original).getType().isPermanent()) {
+                    Card lki = CardUtil.getLKICopy(gameCard);
+                    lki.forceTurnFaceUp();
+                    game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, Localizer.getInstance().getMessage("lblFaceDownCardCantTurnFaceUp"));
 
-                continue;
+                    continue;
+                }
+            }
+
+            // Merged faceup permanent that have double faced cards can't turn face down
+            if ("TurnFace".equals(mode) && !gameCard.isFaceDown() && gameCard.isInZone(ZoneType.Battlefield)
+                    && gameCard.hasMergedCard()) {
+                boolean hasBackSide = false;
+                for (final Card c : gameCard.getMergedCards()) {
+                    if (c.hasBackSide()) {
+                        hasBackSide = true;
+                        break;
+                    }
+                }
+                if (hasBackSide) {
+                    continue;
+                }
             }
 
             // for reasons it can't transform, skip

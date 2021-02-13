@@ -714,6 +714,11 @@ public class CardView extends GameEntityView {
             sb.append("\r\nCloned by: ").append(cloner);
         }
 
+        String mergedCards = get(TrackableProperty.MergedCards);
+        if (!mergedCards.isEmpty()) {
+            sb.append("\r\n\r\nMerged Cards: ").append(mergedCards);
+        }
+
         return sb.toString().trim();
     }
 
@@ -780,6 +785,18 @@ public class CardView extends GameEntityView {
 
         //CardStateView cloner = CardView.getState(c, CardStateName.Cloner);
         set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
+
+        if (c.hasMergedCard()) {
+            StringBuilder sb = new StringBuilder();
+            CardCollectionView mergedCards = c.getMergedCards();
+            for (int i = 1; i < mergedCards.size(); i++) {
+                final Card card = mergedCards.get(i);
+                if (i > 1) sb.append(", ");
+                sb.append(card.getOriginalState(card.getCurrentStateName()).getName());
+                sb.append(" (").append(card.getId()).append(")");
+            }
+            set(TrackableProperty.MergedCards, sb.toString());
+        }
 
         CardState currentState = c.getCurrentState();
         if (isSplitCard) {

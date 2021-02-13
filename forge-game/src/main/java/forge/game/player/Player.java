@@ -78,7 +78,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
 public class Player extends GameEntity implements Comparable<Player> {
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
-            ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck, ZoneType.Subgame));
+            ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck, ZoneType.Merged, ZoneType.Subgame));
 
     private final Map<Card, Integer> commanderDamage = Maps.newHashMap();
 
@@ -610,8 +610,14 @@ public class Player extends GameEntity implements Comparable<Player> {
                 && !this.getGame().getRules().hasAppliedVariant(GameType.Oathbreaker)
                 && !this.getGame().getRules().hasAppliedVariant(GameType.TinyLeaders)
                 && !this.getGame().getRules().hasAppliedVariant(GameType.Brawl)) {
-            commanderDamage.put(source, getCommanderDamage(source) + amount);
+            // In case that commander is merged permanent, get the real commander card
+            final Card realCommander = source.getRealCommander();
+            int damage = getCommanderDamage(realCommander) + amount;
+            commanderDamage.put(realCommander, damage);
             view.updateCommanderDamage(this);
+            if (realCommander != source) {
+                view.updateMergedCommanderDamage(source, realCommander);
+            }
         }
 
         int old = assignedDamage.containsKey(source) ? assignedDamage.get(source) : 0;
@@ -2886,6 +2892,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
     }
 
+    public void updateMergedCommanderInfo(Card target, Card commander) {
+        getView().updateMergedCommanderCast(this, target, commander);
+        getView().updateMergedCommanderDamage(target, commander);
+    }
+
     public int getTotalCommanderCast() {
         int result = 0;
         for (Integer i : commanderCast.values()) {
@@ -3021,7 +3032,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             Set<CardStateName> cardStateNames = c.isSplitCard() ?  EnumSet.of(CardStateName.LeftSplit, CardStateName.RightSplit) : EnumSet.of(CardStateName.Original);
         	Set<ManaCostShard> coloredManaSymbols = new HashSet<>();
         	Set<Integer> genericManaSymbols = new HashSet<>();
-        	
+
         	for (final CardStateName cardStateName : cardStateNames) {
         		final ManaCost manaCost = c.getState(cardStateName).getManaCost();
 	        	for (final ManaCostShard manaSymbol : manaCost) {

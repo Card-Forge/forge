@@ -195,7 +195,7 @@ public class TriggerChangesZone extends Trigger {
         // TODO use better way to always copy both Card and CardLKI
         if ("Battlefield".equals(getParam("Origin"))) {
             sa.setTriggeringObject(AbilityKey.Card, runParams.get(AbilityKey.CardLKI));
-            sa.setTriggeringObject(AbilityKey.NewCard, CardUtil.getLKICopy((Card)runParams.get(AbilityKey.Card)));
+            sa.setTriggeringObject(AbilityKey.NewCard, runParams.get(AbilityKey.Card));
         } else {
             sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
         }

@@ -34,6 +34,7 @@ public enum TrackableProperty {
     Cloned(TrackableTypes.BooleanType),
     FlipCard(TrackableTypes.BooleanType),
     SplitCard(TrackableTypes.BooleanType),
+    MergedCards(TrackableTypes.StringType),
 
     Attacking(TrackableTypes.BooleanType),
     Blocking(TrackableTypes.BooleanType),
