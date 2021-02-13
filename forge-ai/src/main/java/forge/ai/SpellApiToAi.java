@@ -105,6 +105,7 @@ public enum SpellApiToAi {
             .put(ApiType.MultiplyCounter, CountersMultiplyAi.class)
             .put(ApiType.MustAttack, MustAttackAi.class)
             .put(ApiType.MustBlock, MustBlockAi.class)
+            .put(ApiType.Mutate, MutateAi.class)
             .put(ApiType.NameCard, ChooseCardNameAi.class)
             .put(ApiType.NoteCounters, AlwaysPlayAi.class)
             .put(ApiType.PeekAndReveal, PeekAndRevealAi.class)
