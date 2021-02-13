@@ -592,6 +592,11 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 return true;
             }
         }
+        for (final String type : ctOther.getCreatureTypes()) {
+            if (this.hasCreatureType(type)) {
+                return true;
+            }
+        }
         return false;
     }
 
