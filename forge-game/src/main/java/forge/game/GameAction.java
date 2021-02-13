@@ -234,7 +234,7 @@ public class GameAction {
         if (!suppress) {
             // Temporary disable commander replacement effect
             // 903.9a
-            if (fromBattlefield && c.isCommander() && c.hasMergedCard()) {
+            if (fromBattlefield && !toBattlefield && c.isCommander() && c.hasMergedCard()) {
                 // Find the commander replacement effect "card"
                 CardCollectionView comCards = c.getOwner().getCardsIn(ZoneType.Command);
                 for (final Card effCard : comCards) {
@@ -305,7 +305,7 @@ public class GameAction {
             // replace top card with copied card for correct name for human to choose.
             cards.set(cards.indexOf(c), copied);
             // 721.3b
-            if (zoneTo.getZoneType() == ZoneType.Exile) {
+            if (cause != null && zoneTo.getZoneType() == ZoneType.Exile) {
                 cards = (CardCollection) cause.getHostCard().getController().getController().orderMoveToZoneList(cards, zoneTo.getZoneType());
             } else {
                 cards = (CardCollection) c.getOwner().getController().orderMoveToZoneList(cards, zoneTo.getZoneType());
@@ -316,6 +316,7 @@ public class GameAction {
             }
             mergedCards = cards;
             if (cause != null) {
+                // Replace sa targeting cards
                 final SpellAbility saTargeting = cause.getSATargetingCard();
                 if (saTargeting != null) {
                     saTargeting.getTargets().replaceTargetCard(c, cards);
@@ -402,7 +403,7 @@ public class GameAction {
                     card.setMoveToCommandZone(true);
                 }
                 // 721.3e & 903.9a
-                if (wasToken && !card.isToken() || card.isRealCommander()) {
+                if (wasToken && !card.isRealToken() || card.isRealCommander()) {
                     Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(card);
                     repParams.put(AbilityKey.CardLKI, card);
                     repParams.put(AbilityKey.Cause, cause);
