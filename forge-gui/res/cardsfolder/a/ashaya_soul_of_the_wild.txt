@@ -2,7 +2,7 @@ Name:Ashaya, Soul of the Wild
 ManaCost:3 G G
 Types:Legendary Creature Elemental
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of lands you control.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X, Y, Z | Description$ CARDNAME's power and toughness are each equal to the number of lands you control.
 S:Mode$ Continuous | Affected$ Creature.nonToken+YouCtrl | AddType$ Forest & Land | Description$ Nontoken creatures you control are Forest lands in addition to their other types. (They're still affected by summoning sickness.)
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Y:Count$Valid Creature.nonToken+YouCtrl

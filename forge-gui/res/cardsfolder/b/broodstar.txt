@@ -4,7 +4,7 @@ Types:Creature Beast
 PT:*/*
 K:Affinity:Artifact
 K:Flying
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of artifacts you control.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of artifacts you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:NeedsToPlayVar:X GE3
 AI:RemoveDeck:Random
