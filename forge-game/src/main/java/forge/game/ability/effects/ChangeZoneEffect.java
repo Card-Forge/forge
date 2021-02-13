@@ -738,6 +738,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 if (imprint != null) {
                     hostCard.addImprintedCard(movedCard);
+                    if (gameCard.hasMergedCard()) {
+                        for (final Card c : gameCard.getMergedCards()) {
+                            if (c == gameCard) continue;
+                            hostCard.addImprintedCard(c);
+                        }
+                    }
                 }
             }
         }
@@ -1299,6 +1305,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             // for imprinted since this doesn't use Target
             if (imprint) {
                 source.addImprintedCard(movedCard);
+                if (c.hasMergedCard()) {
+                    for (final Card card : c.getMergedCards()) {
+                        if (card == c) continue;
+                        source.addImprintedCard(card);
+                    }
+                }
             }
         }
 
