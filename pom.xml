@@ -5,7 +5,7 @@
     <artifactId>forge</artifactId>
     <packaging>pom</packaging>
     <name>Forge Parent</name>
-    <version>1.6.38-SNAPSHOT</version>
+    <version>1.6.38</version>
 
     <description>
         Forge lets you play the card game Magic: The Gathering against a computer opponent using all of the rules.
@@ -175,7 +175,7 @@
     <scm>
         <connection>scm:git:ssh://git@git.cardforge.org/core-developers/forge.git</connection>
         <developerConnection>scm:git:ssh://git@git.cardforge.org/core-developers/forge.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>forge-1.6.38</tag>
     </scm>
 
     <mailingLists>
