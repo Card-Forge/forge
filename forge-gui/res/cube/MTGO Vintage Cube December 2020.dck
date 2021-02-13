@@ -1,5 +1,5 @@
 [metadata]
-Name=MTGO Vintage Cube July 2020
+Name=MTGO Vintage Cube December 2020
 [main]
 1 Kytheon, Hero of Akros|ORI
 1 Mother of Runes|EMA
@@ -15,34 +15,26 @@ Name=MTGO Vintage Cube July 2020
 1 Tithe Taker|RNA
 1 Wall of Omens|EMA
 1 Blade Splicer|2XM
-1 Brightling
 1 Brimaz, King of Oreskos|BNG
-1 Fairgrounds Warden|KLD
 1 Flickerwisp|2XM
 1 Monastery Mentor|FRF
 1 Recruiter of the Guard|CN2
 1 Silverblade Paladin|AVR
-1 Emeria Angel|IMA
 1 Hero of Bladehold|MBS
 1 Linvala, Keeper of Silence|MM3
 1 Restoration Angel|IMA
-1 Angel of Invention|KLD
-1 Elspeth Conquers Death|THB
 1 Archangel Avacyn|SOI
 1 Baneslayer Angel|M21
 1 Lyra Dawnbringer|DOM
 1 Reveillark|UMA
 1 Sun Titan|M12
-1 Angel of Serenity|RTR
 1 Elesh Norn, Grand Cenobite|IMA
 1 Iona, Shield of Emeria|MM2
 1 Gideon Blackblade|WAR
-1 Elspeth, Knight-Errant|MMA
 1 Gideon, Ally of Zendikar|BFZ
 1 Gideon Jura|M12
 1 Elspeth, Sun's Champion|THS
 1 Condemn|M11
-1 Enlightened Tutor|EMA
 1 Mana Tithe|PLC
 1 Path to Exile|2XM
 1 Swords to Plowshares|A25
@@ -55,25 +47,19 @@ Name=MTGO Vintage Cube July 2020
 1 Day of Judgment|M12
 1 Ravages of War|PTK
 1 Wrath of God|AKR
-1 Terminus|MM3
 1 Land Tax|2XM
 1 Legion's Landing|XLN
 1 Honor of the Pure|M12
 1 Banishing Light|THB
 1 Oblivion Ring|MM2
 1 Faith's Fetters|M21
-1 Moat|LEG
 1 Parallax Wave|VMA
-1 Spear of Heliod|THS
 1 Karakas|UMA
-1 Thassa's Oracle|THB
 1 Baral, Chief of Compliance|AER
 1 Jace, Vryn's Prodigy|ORI
 1 Looter il-Kor|TSP
 1 Phantasmal Image|MM3
 1 Snapcaster Mage|UMA
-1 Thing in the Ice|SOI
-1 Shark Typhoon|IKO
 1 Deceiver Exarch|CN2
 1 Pestermite|MMA
 1 Spellseeker
@@ -90,7 +76,6 @@ Name=MTGO Vintage Cube July 2020
 1 Torrential Gearhulk|MPS_KLD
 1 Palinchron|VMA
 1 Inkwell Leviathan|2XM
-1 Jace Beleren|M11
 1 Jace, the Mind Sculptor|VMA
 1 Tezzeret the Seeker|MM2
 1 Ancestral Recall|VMA
@@ -110,11 +95,9 @@ Name=MTGO Vintage Cube July 2020
 1 Thirst for Knowledge|2XM
 1 Cryptic Command|IMA
 1 Fact or Fiction|MH1
-1 Gifts Ungiven|MM3
 1 Turnabout|VMA
 1 Force of Will|2XM
 1 Gush|VMA
-1 Mystic Confluence|C15
 1 Repeal|IMA
 1 Dig Through Time|UMA
 1 Ancestral Vision|IMA
@@ -132,7 +115,6 @@ Name=MTGO Vintage Cube July 2020
 1 Time Spiral|USG
 1 Upheaval|VMA
 1 Treasure Cruise|UMA
-1 Search for Azcanta|XLN
 1 Control Magic|EMA
 1 Opposition|MPS_AKH
 1 Treachery|UDS
@@ -144,18 +126,12 @@ Name=MTGO Vintage Cube July 2020
 1 Mesmeric Fiend|A25
 1 Oona's Prowler|LRW
 1 Pack Rat|RTR
-1 Vampire Hexmage|2XM
 1 Bone Shredder|ULG
-1 Hypnotic Specter|M10
 1 Ophiomancer|C13
-1 Plaguecrafter|GRN
-1 Vampire Nighthawk|MM3
 1 Gonti, Lord of Luxury|KLD
-1 Nekrataal|EMA
 1 Ravenous Chupacabra|A25
 1 Shriekmaw|UMA
 1 Grave Titan|M12
-1 Ink-Eyes, Servant of Oni|PCA
 1 Massacre Wurm|M21
 1 Tasigur, the Golden Fang|FRF
 1 Sheoldred, Whispering One|IMA
@@ -167,10 +143,8 @@ Name=MTGO Vintage Cube July 2020
 1 Fatal Push|2XM
 1 Vampiric Tutor|EMA
 1 Cabal Ritual|VMA
-1 Go for the Throat|MBS
 1 Liliana's Triumph|WAR
 1 Shallow Grave|MIR
-1 Heartless Act|IKO
 1 Corpse Dance|TPR
 1 Dismember|MM2
 1 Hero's Downfall|THS
@@ -185,7 +159,6 @@ Name=MTGO Vintage Cube July 2020
 1 Exhume|USG
 1 Hymn to Tourach|EMA
 1 Night's Whisper|EMA
-1 Buried Alive|UMA
 1 Toxic Deluge|2XM
 1 Yawgmoth's Will|USG
 1 Damnation|MPS_AKH
@@ -198,13 +171,11 @@ Name=MTGO Vintage Cube July 2020
 1 Animate Dead|EMA
 1 Bitterblossom|UMA
 1 Necromancy|VIS
-1 Phyrexian Arena|CN2
 1 Recurring Nightmare|TPR
 1 Yawgmoth's Bargain|UDS
 1 Goblin Guide|2XM
 1 Goblin Welder|ULG
 1 Grim Lavamancer|2XM
-1 Soul-Scar Mage|AKR
 1 Monastery Swiftspear|IMA
 1 Zurgo Bellstriker|DTK
 1 Abbot of Keral Keep|ORI
@@ -214,13 +185,11 @@ Name=MTGO Vintage Cube July 2020
 1 Young Pyromancer|UMA
 1 Goblin Rabblemaster|M15
 1 Imperial Recruiter|2XM
-1 Magus of the Moon|IMA
 1 Avalanche Riders|TSB
 1 Flametongue Kavu|VMA
 1 Hazoret the Fervent|AKR
 1 Hellrider|MM3
 1 Pia and Kiran Nalaar|ORI
-1 Terror of the Peaks|M21
 1 Glorybringer|AKR
 1 Goblin Dark-Dwellers|OGW
 1 Kiki-Jiki, Mirror Breaker|IMA
@@ -251,15 +220,12 @@ Name=MTGO Vintage Cube July 2020
 1 Mizzium Mortars|MM3
 1 Pyroclasm|A25
 1 Light Up the Stage|RNA
-1 Lukka, Coppercoat Outcast|IKO
 1 Wheel of Fortune|VMA
 1 Empty the Warrens|MMA
-1 Fiery Confluence|C15
 1 Past in Flames|MM3
 1 Banefire|M19
 1 Burning of Xinye|VMA
 1 Wildfire|MM2
-1 Bonfire of the Damned|MM3
 1 Mana Flare|5ED
 1 Sulfuric Vortex|EMA
 1 Sneak Attack|2XM
@@ -273,10 +239,8 @@ Name=MTGO Vintage Cube July 2020
 1 Joraga Treespeaker|ROE
 1 Llanowar Elves|DOM
 1 Noble Hierarch|2XM
-1 Den Protector|DTK
 1 Devoted Druid|UMA
 1 Fauna Shaman|UMA
-1 Gilded Goose|ELD
 1 Lotus Cobra|ZNR
 1 Rofellos, Llanowar Emissary|VMA
 1 Sakura-Tribe Elder|CNS
@@ -290,7 +254,6 @@ Name=MTGO Vintage Cube July 2020
 1 Reclamation Sage|2XM
 1 Tireless Tracker|SOI
 1 Yavimaya Elder|VMA
-1 Master of the Wild Hunt|A25
 1 Oracle of Mul Daya|ZEN
 1 Polukranos, World Eater|THS
 1 Acidic Slime|M13
@@ -304,16 +267,12 @@ Name=MTGO Vintage Cube July 2020
 1 Craterhoof Behemoth|MM3
 1 Terastodon|2XM
 1 Woodfall Primus|UMA
-1 Dryad of the Ilysian Grove|THB
 1 Garruk Relentless|ISD
 1 Garruk Wildspeaker|M11
-1 Vivien, Monsters' Advocate|IKO
-1 Vivien Reid|M19
 1 Nature's Claim|IMA
 1 Beast Within|CN2
 1 Channel|IMA
 1 Regrowth|MH1
-1 Cultivate|M21
 1 Search for Tomorrow|IMA
 1 Eureka|VMA
 1 Harmonize|MM3
@@ -322,17 +281,13 @@ Name=MTGO Vintage Cube July 2020
 1 Primal Command|MM3
 1 Green Sun's Zenith|EMA
 1 Finale of Devastation|WAR
-1 Tooth and Nail|MMA
 1 Fastbond|VMA
 1 Oath of Druids|TPR
 1 Survival of the Fittest|TPR
 1 Sylvan Library|EMA
 1 Heartbeat of Spring|2XM
-1 Elder Gargaroth|M21
 1 Gaea's Cradle|USG
-1 Yorion, Sky Nomad|IKO
 1 Teferi, Hero of Dominaria|DOM
-1 Sphinx's Revelation|AKR
 1 Fractured Identity|C17
 1 Celestial Colonnade|UMA
 1 Flooded Strand|EXP
@@ -349,7 +304,6 @@ Name=MTGO Vintage Cube July 2020
 1 Underground Sea|VMA
 1 Watery Grave|GRN
 1 Daretti, Ingenious Iconoclast|CN2
-1 Kroxa, Titan of Death's Hunger|THB
 1 Kolaghan's Command|DTK
 1 Rakdos's Return|RTR
 1 Badlands|VMA
@@ -369,7 +323,6 @@ Name=MTGO Vintage Cube July 2020
 1 Kitchen Finks|UMA
 1 Knight of Autumn|GRN
 1 Knight of the Reliquary|IMA
-1 Trostani Discordant|GRN
 1 Mirari's Wake|CNS
 1 Razorverge Thicket|SOM
 1 Savannah|VMA
@@ -397,10 +350,8 @@ Name=MTGO Vintage Cube July 2020
 1 Hissing Quagmire|OGW
 1 Overgrown Tomb|GRN
 1 Verdant Catacombs|MM3
-1 Edric, Spymaster of Trest|VMA
 1 Trygon Predator|EMA
 1 Hydroid Krasis|RNA
-1 Uro, Titan of Nature's Wrath|THB
 1 Botanical Sanctum|KLD
 1 Breeding Pool|RNA
 1 Lumbering Falls|BFZ
@@ -425,7 +376,6 @@ Name=MTGO Vintage Cube July 2020
 1 Plateau|VMA
 1 Sacred Foundry|GRN
 1 Sphinx of the Steel Wind|EMA
-1 Nicol Bolas, Dragon-God|WAR
 1 Leovold, Emissary of Trest|UMA
 1 Progenitus|MMA
 1 Kozilek, Butcher of Truth|UMA
@@ -472,7 +422,6 @@ Name=MTGO Vintage Cube July 2020
 1 Grim Monolith|ULG
 1 Gruul Signet|MM3
 1 Izzet Signet|MM3
-1 Lightning Greaves|2XM
 1 Orzhov Signet|MM3
 1 Rakdos Signet|MM3
 1 Selesnya Signet|MM3
@@ -488,8 +437,6 @@ Name=MTGO Vintage Cube July 2020
 1 Sword of Body and Mind|2XM
 1 Sword of Feast and Famine|2XM
 1 Sword of Fire and Ice|2XM
-1 Sword of Light and Shadow|2XM
-1 Sword of War and Peace|2XM
 1 Tangle Wire|NMS
 1 Worn Powerstone|EMA
 1 Coercive Portal|VMA
@@ -515,7 +462,6 @@ Name=MTGO Vintage Cube July 2020
 1 Expansion // Explosion|GRN
 1 Giver of Runes|MH1
 1 Winds of Abandon|MH1
-1 Hallowed Spiritkeeper|C14
 1 Thraben Inspector|2XM
 1 Narset, Parter of Veils|WAR
 1 Force of Negation|MH1
@@ -537,7 +483,61 @@ Name=MTGO Vintage Cube July 2020
 1 Fallen Shinobi|MH1
 1 Wrenn and Six|MH1
 1 Oko, Thief of Crowns|ELD
-1 Fiend Artisan|IKO
 1 Prismatic Vista|MH1
 1 Golos, Tireless Pilgrim|M20
 1 Stonecoil Serpent|ELD
+1 Elspeth Conquers Death|THB
+1 Thassa's Oracle|THB
+1 Gilded Goose|ELD
+1 Dryad of the Ilysian Grove|THB
+1 Kroxa, Titan of Death's Hunger|THB
+1 Uro, Titan of Nature's Wrath|THB
+1 Elspeth, Knight-Errant|MMA
+1 Shark Typhoon|IKO
+1 Heartless Act|IKO
+1 Soul-Scar Mage|AKR
+1 Cultivate|M21
+1 Elder Gargaroth|M21
+1 Yorion, Sky Nomad|IKO
+1 Spirit of the Labyrinth|BNG
+1 Vryn Wingmare|M21
+1 Eidolon of Obstruction|THB
+1 Seasoned Hallowblade|M21
+1 Skyclave Apparition|ZNR
+1 Emeria's Call
+1 Lapse of Certainty|CFX
+1 Felidar Retreat|ZNR
+1 Oust|ROE
+1 Sea Gate Stormcaller|ZNR
+1 Thieving Skydiver|ZNR
+1 The Mirari Conjecture|DOM
+1 Nullpriest of Oblivion|ZNR
+1 Woe Strider|THB
+1 Nighthawk Scavenger|ZNR
+1 Sling-Gang Lieutenant|MH1
+1 Phyrexian Rager|IMA
+1 Midnight Reaper|GRN
+1 Agadeem's Awakening
+1 Bloodchief's Thirst|ZNR
+1 Shatterskull Smashing
+1 Earthshaker Khenra|AKR
+1 Rampaging Ferocidon|XLN
+1 Experimental Frenzy|GRN
+1 Hexdrinker|MH1
+1 Nissa, Vastwood Seer|ORI
+1 Turntimber Symbiosis
+1 Freyalise, Llanowar's Fury|CMA
+1 Birthing Pod|NPH
+1 Geist of Saint Traft|2XM
+1 Prime Speaker Vannifar|RNA
+1 Casualties of War|WAR
+1 Omnath, Locus of Creation|ZNR
+1 Niv-Mizzet Reborn|WAR
+1 Lotus Petal|MPS_KLD
+1 Gilded Lotus|DOM
+1 Benevolent Bodyguard|EMA
+1 Commit // Memory|AKR
+1 Hullbreacher
+1 Opposition Agent
+1 Krark, the Thumbless
+1 Qasali Pridemage|ARB
