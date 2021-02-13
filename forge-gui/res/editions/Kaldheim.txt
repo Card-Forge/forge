@@ -6,7 +6,7 @@ Code2=KHM
 MciCode=khm
 Type=Expansion
 BoosterCovers=3
-Booster=10 Common:!dfc:fromSheet("KHM cards"), 3 Uncommon:!dfc:fromSheet("KHM cards"), 1 RareMythic:!dfc:fromSheet("KHM cards"), 1 BasicLand
+Booster=10 Common:!fromSheet("KHM SnowLands"), 3 Uncommon:!dfc:fromSheet("KHM cards"), 1 RareMythic:!dfc:fromSheet("KHM cards"), 1 fromSheet("KHM SnowLands")
 BoosterReplaceSlotFromPrintSheet=KHM ModalDoubleFaceCards
 Prerelease=6 Boosters, 1 RareMythic+
 #BoosterBox=36 Boosters, 1 fromSheet('KHM buy a box')+
@@ -287,16 +287,16 @@ Prerelease=6 Boosters, 1 RareMythic+
 273 C Volatile Fjord
 274 C Woodland Chasm
 275 R The World Tree
-276 C Snow-Covered Plains
-277 C Snow-Covered Plains
-278 C Snow-Covered Island
-279 C Snow-Covered Island
-280 C Snow-Covered Swamp
-281 C Snow-Covered Swamp
-282 C Snow-Covered Mountain
-283 C Snow-Covered Mountain
-284 C Snow-Covered Forest
-285 C Snow-Covered Forest
+276 L Snow-Covered Plains
+277 L Snow-Covered Plains
+278 L Snow-Covered Island
+279 L Snow-Covered Island
+280 L Snow-Covered Swamp
+281 L Snow-Covered Swamp
+282 L Snow-Covered Mountain
+283 L Snow-Covered Mountain
+284 L Snow-Covered Forest
+285 L Snow-Covered Forest
 
 [borderless]
 286 M Valki, God of Lies
@@ -447,6 +447,28 @@ Prerelease=6 Boosters, 1 RareMythic+
 2 Kolvori, God of Kinship|KHM
 2 Reidane, God of the Worthy|KHM
 2 Tergrid, God of Fright|KHM
+
+[SnowLands]
+5 Snow-Covered Plains|KHM|1
+5 Snow-Covered Plains|KHM|2
+5 Snow-Covered Island|KHM|1
+5 Snow-Covered Island|KHM|2
+5 Snow-Covered Swamp|KHM|1
+5 Snow-Covered Swamp|KHM|2
+5 Snow-Covered Mountain|KHM|1
+5 Snow-Covered Mountain|KHM|2
+5 Snow-Covered Forest|KHM|1
+5 Snow-Covered Forest|KHM|2
+2 Alpine Meadow|KHM
+2 Arctic Treeline|KHM
+2 Glacial Floodplain|KHM
+2 Highland Forest|KHM
+2 Ice Tunnel|KHM
+2 Rimewood Falls|KHM
+2 Snowfield Sinkhole|KHM
+2 Sulfurous Mire|KHM
+2 Volatile Fjord|KHM
+2 Woodland Chasm|KHM
 
 [tokens]
 w_4_4_angel_warrior_flying_vigilance
