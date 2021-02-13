@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
@@ -11,21 +12,27 @@ import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
+import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 import java.util.Map;
 
 public class MutateAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        CardCollectionView mutateTgts = CardLists.filter(CardLists.getTargetableCards(aiPlayer.getCreaturesInPlay(), sa),
-                Predicates.not(CardPredicates.isType("Human")));
+        CardCollectionView mutateTgts = CardLists.getTargetableCards(aiPlayer.getCreaturesInPlay(), sa);
 
         // Filter out some abilities that are useless
         // TODO: add other stuff useless for Mutate here
         mutateTgts = CardLists.filter(mutateTgts, Predicates.not(Predicates.or(
                 CardPredicates.hasKeyword(Keyword.DEFENDER),
                 CardPredicates.hasKeyword("CARDNAME can't attack."),
-                CardPredicates.hasKeyword("CARDNAME can't block.")
+                CardPredicates.hasKeyword("CARDNAME can't block."),
+                new Predicate<Card>() {
+                    @Override
+                    public boolean apply(@NullableDecl Card card) {
+                        return ComputerUtilCard.isUselessCreature(aiPlayer, card);
+                    }
+                }
         )));
 
         if (mutateTgts.isEmpty()) {
