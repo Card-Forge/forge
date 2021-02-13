@@ -166,8 +166,7 @@ public class EffectEffect extends SpellAbilityEffect {
             // Grant triggers
             if (effectTriggers != null) {
                 for (final String s : effectTriggers) {
-                    final Trigger parsedTrigger = TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), eff, true);
-                    parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(eff, parsedTrigger.getParam("Execute"), sa));
+                    final Trigger parsedTrigger = TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), eff, true, sa);
                     parsedTrigger.setActiveZone(EnumSet.of(ZoneType.Command));
                     parsedTrigger.setIntrinsic(true);
                     eff.addTrigger(parsedTrigger);
