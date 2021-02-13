@@ -2,7 +2,7 @@ Name:Kagemaro, First to Suffer
 ManaCost:3 B B
 Types:Legendary Creature Demon Spirit
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
 A:AB$ PumpAll | Cost$ B Sac<1/CARDNAME> | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | References$ X | SpellDescription$ All creatures get -X/-X until end of turn, where X is the number of cards in your hand.
 SVar:X:Count$InYourHand
 AI:RemoveDeck:All
