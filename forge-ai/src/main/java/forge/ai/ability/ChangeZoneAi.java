@@ -1229,6 +1229,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
 
+            // if max power exceeded, do not choose this card (but keep looking for other options)
+            if (sa.hasParam("MaxTotalTargetPower")) {
+                if (choice.getNetPower() > sa.getTargetRestrictions().getMaxTotalPower(choice, sa) -sa.getTargets().getTotalTargetedPower()) {
+                    list.remove(choice);
+                    continue;
+                }
+            }
+
             // honor the Same Creature Type restriction
             if (sa.getTargetRestrictions().isWithSameCreatureType()) {
                 Card firstTarget = sa.getTargetCard();

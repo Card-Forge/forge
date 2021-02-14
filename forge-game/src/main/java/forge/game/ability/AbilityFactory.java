@@ -331,6 +331,11 @@ public final class AbilityFactory {
             abTgt.setMaxTotalCMC(mapParams.get("MaxTotalTargetCMC"));
         }
 
+        if (mapParams.containsKey("MaxTotalTargetPower")) {
+            // only target cards up to a certain total max power
+            abTgt.setMaxTotalPower(mapParams.get("MaxTotalTargetPower"));
+        }
+
         // TargetValidTargeting most for Counter: e.g. target spell that
         // targets X.
         if (mapParams.containsKey("TargetValidTargeting")) {

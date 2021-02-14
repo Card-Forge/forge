@@ -547,6 +547,21 @@ public final class CardUtil {
             }
         }
 
+        // Remove cards exceeding total power
+        if (ability.hasParam("MaxTotalTargetPower")) {
+            int totalPowerTargeted = 0;
+            for (final Card c : targeted) {
+                totalPowerTargeted += c.getNetPower();
+            }
+
+            final List<Card> choicesCopy = Lists.newArrayList(choices);
+            for (final Card c : choicesCopy) {
+                if (c.getNetPower() > tgt.getMaxTotalPower(c, ability) - totalPowerTargeted) {
+                    choices.remove(c);
+                }
+            }
+        }
+
         // If all cards (including subability targets) must have the same controller
         if (tgt.isSameController() && !targetedObjects.isEmpty()) {
             final List<Card> list = Lists.newArrayList();
