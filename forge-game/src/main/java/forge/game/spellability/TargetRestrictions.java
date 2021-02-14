@@ -73,7 +73,10 @@ public class TargetRestrictions {
 
     // What's the max total CMC of targets?
     private String maxTotalCMC;
-    
+
+    // What's the max total power of targets?
+    private String maxTotalPower;
+
     // Not sure what's up with Mandatory? Why wouldn't targeting be mandatory?
     private boolean bMandatory = false;
 
@@ -92,6 +95,7 @@ public class TargetRestrictions {
         this.minTargets = target.getMinTargets();
         this.maxTargets = target.getMaxTargets();
         this.maxTotalCMC = target.getMaxTotalCMC();
+        this.maxTotalPower = target.getMaxTotalPower();
         this.tgtZone = target.getZone();
         this.saValidTargeting = target.getSAValidTargeting();
         this.uniqueTargets = target.isUniqueTargets();
@@ -165,6 +169,29 @@ public class TargetRestrictions {
 
     /**
      * <p>
+     * setMaxTotalPower.
+     * </p>
+     *
+     * @param power
+     *              a String.
+     */
+    public final void setMaxTotalPower(final String power) {
+        this.maxTotalPower = power;
+    }
+
+    /**
+     * <p>
+     * doesTarget.
+     * </p>
+     *
+     * @return a boolean.
+     */
+    public final boolean doesTarget() {
+        return this.tgtValid;
+    }
+
+    /**
+     * <p>
      * getValidTgts.
      * </p>
      * 
@@ -214,6 +241,19 @@ public class TargetRestrictions {
 
     public final int getMaxTotalCMC(final Card c, final SpellAbility sa) {
         return AbilityUtils.calculateAmount(c, this.maxTotalCMC, sa);
+    }
+
+    /**
+     * Gets the max targets.
+     *
+     * @return the max targets
+     */
+    private final String getMaxTotalPower() {
+        return this.maxTotalPower;
+    }
+
+    public final int getMaxTotalPower(final Card c, final SpellAbility sa) {
+        return AbilityUtils.calculateAmount(c, this.maxTotalPower, sa);
     }
 
     /**
@@ -541,7 +581,7 @@ public class TargetRestrictions {
 
         for (final Card c : game.getCardsIn(this.tgtZone)) {
             if (c.isValid(this.validTgts, srcCard.getController(), srcCard, sa)
-                    && (!isTargeted || sa.canTarget(c)) 
+                    && (!isTargeted || sa.canTarget(c))
                     && !sa.getTargets().contains(c)) {
                 candidates.add(c);
             }

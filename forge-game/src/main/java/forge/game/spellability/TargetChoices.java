@@ -58,6 +58,14 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
     }
 
     @Override
+    public final int getTotalTargetedPower() {
+        int totalPower = 0;
+        for (Card c : Iterables.filter(targets, Card.class)) {
+            totalPower += c.getNetPower();
+        }
+        return totalPower;
+    }
+
     public final boolean add(final GameObject o) {
         if (o instanceof Player || o instanceof Card || o instanceof SpellAbility) {
             return super.add(o);
