@@ -1125,7 +1125,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // the Unless cost (for example, Erratic Portal)
         list.removeAll(getSafeTargetsIfUnlessCostPaid(ai, sa, list));
 
-        if (!mandatory && sa.isTargetNumberValid()) {
+        if (!mandatory && list.size() < sa.getTargetRestrictions().getMinTargets(sa.getHostCard(), sa)) {
             return false;
         }
 
