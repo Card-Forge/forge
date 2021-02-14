@@ -70,14 +70,14 @@ def initializeEditions():
 						else:
 							mtgDataCards[card].append(setcode)
 
-	print "Total Cards Found in all editions", len(mtgDataCards)
-	print "These sets will be ignored in some output files", ignoredSet
+	print("Total Cards Found in all editions", len(mtgDataCards))
+	print("These sets will be ignored in some output files", ignoredSet)
 
 def initializeOracleText():
-	print "Initializing Oracle text"
+	print("Initializing Oracle text")
 	oracleDict = None
 	if not os.path.exists(allJson):
-		print "Need to download Json file..."
+		print("Need to download Json file...")
 		r = requests.get(allJsonUrl)
 		with open(allJson, 'w') as f:
 			f.write(r.text.encode("utf-8"))
@@ -90,12 +90,12 @@ def initializeOracleText():
 
 
 	aes = [k for k in oracleDict.keys() if u'\xc6' in k or u'\xf6' in k]
-	print "Normalizing %s names" % len(aes)
+	print("Normalizing %s names" % len(aes))
 	for ae in aes:
 		data = oracleDict.pop(ae)
 		oracleDict[normalizeOracle(ae)] = data
 
-	print "Found Oracle text for ", len(oracleDict)
+	print("Found Oracle text for ", len(oracleDict))
 	return oracleDict
 
 def normalizeOracle(oracle):
@@ -128,7 +128,7 @@ def initializeForgeCards():
 def initializeFormats():
 	formats = {}
 	formatLocation = os.path.join(resDir, 'formats', 'Sanctioned')
-	print "Looking for formats in ", formatLocation
+	print("Looking for formats in ", formatLocation)
 	for root, dirnames, filenames in os.walk(formatLocation):
 		for fileName in fnmatch.filter(filenames, '*.txt'):
 			if fileName not in ['Standard.txt', 'Modern.txt']:
@@ -184,7 +184,7 @@ def printOverallEditions(totalDataList, setCodeToName, releaseFile=None):
 			totalMissing += dataKey[1]
 			fullTotal += dataKey[2]
 			if dataKey[2] == 0:
-				print "SetCode unknown", k
+				print("SetCode unknown", k)
 				continue
 			writeToFiles(setCodeToName[k].lstrip() + ": " + str(dataKey[0]) + " (" + str(dataKey[1]) + ") / " + str(dataKey[2]) + " = " + str(round(dataKey[3], 2)) + "%\n", files)
 		totalPercentage = totalImplemented / fullTotal
@@ -199,10 +199,10 @@ def printCardSet(implementedSet, missingSet, fileName, setCoverage=None, printIm
 	impCount = len(implementedSet)
 	misCount = len(missingSet)
 	totalCount = impCount + misCount
-	print fileName, "Counts: ", impCount, misCount, totalCount
+	print(fileName, "Counts: ", impCount, misCount, totalCount)
 
 	if totalCount == 0:
-		print "Something definitely wrong, why is total count 0 for ", fileName
+		print("Something definitely wrong, why is total count 0 for ", fileName)
 		return
 
 	if releaseFile:
@@ -250,7 +250,7 @@ def printDistinctOracle(missingSet, fileName):
 					outfile.write("%s\n%s\n\n" % (s, oracle))
 				except:
 					outfile.write("%s\n\n" % (s))
-					print "Failed to grab oracle for ", s
+					print("Failed to grab oracle for ", s)
 		outfile.write("\n")
 
 
@@ -346,7 +346,7 @@ if __name__ == '__main__':
 					if 'loyalty' in orc:
 						output.write('Loyalty:' + orc.get('loyalty'))
 				except Exception as e:
-					print "some issue?", str(e)
+					print("some issue?", str(e))
 
 				# Blah
 
@@ -359,7 +359,7 @@ if __name__ == '__main__':
 				try:
 					output.write(text + '\n\n')
 				except:
-					print everyMissing
+					print(everyMissing)
 			output.write("\n")
 			output.write("Total: " + str(total) + "\n")
 			output.write("Percentage implemented: " + str(round(percentage,2)) + "%\n")
@@ -390,4 +390,4 @@ if __name__ == '__main__':
 
 	releaseOutput.close()
 
-	print ("Done!")
+	print("Done!")
