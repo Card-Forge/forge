@@ -1,0 +1,9 @@
+Name:Pouncing Shoreshark
+ManaCost:4 U
+Types:Creature Shark Beast
+PT:4/3
+K:Mutate:3 U
+K:Flash
+T:Mode$ Mutates | ValidCard$ Card.Self | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigBounce | TriggerDescription$ Whenever this creature mutates, you may return target creature an opponent controls to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select target creature an opponent controls
+Oracle:Mutate {3}{U} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nFlash\nWhenever this creature mutates, you may return target creature an opponent controls to its owner's hand.

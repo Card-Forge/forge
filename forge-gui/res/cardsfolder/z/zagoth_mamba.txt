@@ -1,0 +1,7 @@
+Name:Zagoth Mamba
+ManaCost:B
+Types:Creature Nightmare Snake
+PT:1/1
+T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature mutates, target creature an opponent controls gets -2/-2 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True
+Oracle:Whenever this creature mutates, target creature an opponent controls gets -2/-2 until end of turn.

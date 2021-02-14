@@ -1,0 +1,9 @@
+Name:Otrimi, the Ever-Playful
+ManaCost:3 B G U
+Types:Legendary Creature Nightmare Beast
+PT:6/6
+K:Mutate:1 B G U
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, return target creature card with mutate from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl+withMutate
+Oracle:Mutate {1}{B}{G}{U} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nTrample\nWhenever this creature deals combat damage to a player, return target creature card with mutate from your graveyard to your hand.
