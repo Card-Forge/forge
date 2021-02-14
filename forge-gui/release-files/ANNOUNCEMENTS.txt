@@ -1,5 +1,5 @@
 #Add one announcement per line
-Sorry for the long wait between releases. Pandemic + Technology issues caused some issues we couldn't hurdle. 
 Get in the discord if you aren't yet.
-Lots of new cards including Kaldheim.
-No update on Mutate yet. Trust us, you'll know when it's here. 
+Mutate is now implemented, with only one unscripted Mutate card remaining.
+Draft cubes have been updated to account for the newly supported cards, MTGO Vintage December 2020 cube was added.
+New Possibility Storm puzzles were added to the Puzzle Mode (IKO/M21/ZNR/KHM), including puzzles that utilize Mutate.
