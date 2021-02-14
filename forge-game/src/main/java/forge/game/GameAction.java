@@ -207,7 +207,17 @@ public class GameAction {
             if (!c.isRealToken()) {
                 copied = CardFactory.copyCard(c, false);
 
-                if (!zoneTo.is(ZoneType.Stack)) {
+                if (zoneTo.is(ZoneType.Stack)) {
+                    // when moving to stack, copy changed card infomation
+                    copied.setChangedCardColors(c.getChangedCardColors());
+                    copied.setChangedCardKeywords(c.getChangedCardKeywords());
+                    copied.setChangedCardTypes(c.getChangedCardTypesMap());
+                    copied.setChangedCardNames(c.getChangedCardNames());
+                    copied.setChangedCardTraits(c.getChangedCardTraits());
+
+                    copied.copyChangedTextFrom(c);
+
+                } else {
                     // when a card leaves the battlefield, ensure it's in its original state
                     // (we need to do this on the object before copying it, or it won't work correctly e.g.
                     // on Transformed objects)
