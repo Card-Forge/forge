@@ -441,7 +441,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 7 Forest|IKO|4
 
 [tokens]
-c_a_feather_sac
+feather
 g_3_3_beast
 g_x_x_dinosaur_beast_trample
 r_1_1_dinosaur_haste

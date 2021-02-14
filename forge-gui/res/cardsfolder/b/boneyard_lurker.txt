@@ -1,0 +1,8 @@
+Name:Boneyard Lurker
+ManaCost:2 B G
+Types:Creature Nightmare Beast
+PT:4/4
+K:Mutate:2 BG BG
+T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Whenever this creature mutates, return target permanent card from your graveyard to your hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouOwn
+Oracle:Mutate {2}{B/G}{B/G} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nWhenever this creature mutates, return target permanent card from your graveyard to your hand.
