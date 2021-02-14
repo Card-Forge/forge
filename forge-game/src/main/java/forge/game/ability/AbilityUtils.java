@@ -18,6 +18,7 @@ import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
+import forge.game.TriggerReplacementBase;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
@@ -1797,6 +1798,14 @@ public class AbilityUtils {
                         }
                     }
                     return CardFactoryUtil.doXMath(v, expr, c);
+                }
+            }
+            if (ctb instanceof TriggerReplacementBase) {
+                if (l[0].startsWith("CountersAddedThisTurn")) {
+                    final String[] parts = l[0].split(" ");
+                    CounterType cType = CounterType.getType(parts[1]);
+
+                    return CardFactoryUtil.doXMath(game.getCounterAddedThisTurn(cType, parts[2], parts[3], c, ctb.getHostCard().getController(), null), expr, c);
                 }
             }
         }
