@@ -57,7 +57,6 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
         return totalCMC;
     }
 
-    @Override
     public final int getTotalTargetedPower() {
         int totalPower = 0;
         for (Card c : Iterables.filter(targets, Card.class)) {

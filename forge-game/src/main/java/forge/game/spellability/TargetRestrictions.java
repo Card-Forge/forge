@@ -181,17 +181,6 @@ public class TargetRestrictions {
 
     /**
      * <p>
-     * doesTarget.
-     * </p>
-     *
-     * @return a boolean.
-     */
-    public final boolean doesTarget() {
-        return this.tgtValid;
-    }
-
-    /**
-     * <p>
      * getValidTgts.
      * </p>
      * 
