@@ -79,6 +79,7 @@ public abstract class GameState {
     private final Map<Card, String> cardToChosenType2 = new HashMap<>();
     private final Map<Card, List<String>> cardToRememberedId = new HashMap<>();
     private final Map<Card, List<String>> cardToImprintedId = new HashMap<>();
+    private final Map<Card, List<String>> cardToMergedCards = new HashMap<>();
     private final Map<Card, String> cardToNamedCard = new HashMap<>();
     private final Map<Card, String> cardToNamedCard2 = new HashMap<>();
     private final Map<Card, String> cardToExiledWithId = new HashMap<>();
@@ -364,6 +365,17 @@ public abstract class GameState {
             if (!imprintedCardIds.isEmpty()) {
                 newText.append("|Imprinting:").append(TextUtil.join(imprintedCardIds, ","));
             }
+
+            if (!c.getMergedCards().isEmpty()) {
+                List<String> mergedCardNames = new ArrayList<>();
+                for (Card merged : c.getMergedCards()) {
+                    if (merged.getId() == c.getId()) {
+                        continue;
+                    }
+                    mergedCardNames.add(merged.getName());
+                }
+                newText.append("|MergedCards:").append(TextUtil.join(mergedCardNames, ","));
+            }
         }
 
         if (zoneType == ZoneType.Exile) {
@@ -606,6 +618,7 @@ public abstract class GameState {
         cardToChosenCards.clear();
         cardToChosenType.clear();
         cardToChosenType2.clear();
+        cardToMergedCards.clear();
         cardToScript.clear();
         cardAttackMap.clear();
 
@@ -638,6 +651,7 @@ public abstract class GameState {
         handleCardAttachments();
         handleChosenEntities();
         handleRememberedEntities();
+        handleMergedCards();
         handleScriptExecution(game);
         handlePrecastSpells(game);
         handleMarkedDamage();
@@ -1112,6 +1126,56 @@ public abstract class GameState {
         }
     }
 
+    private void handleMergedCards() {
+        for(Entry<Card, List<String>> entry : cardToMergedCards.entrySet()) {
+            Card mergedTo = entry.getKey();
+            for(String mergedCardName : entry.getValue()) {
+                Card c;
+                PaperCard pc = StaticData.instance().getCommonCards().getCard(mergedCardName); // FIXME: is set relevant here?
+                if (pc == null) {
+                    System.err.println("ERROR: Tried to create a non-existent card named " + mergedCardName + " (as a merged card) when loading game state!");
+                    continue;
+                }
+
+                c = Card.fromPaperCard(pc, mergedTo.getOwner());
+                emulateMergeViaMutate(mergedTo, c);
+            }
+        }
+    }
+
+    private void emulateMergeViaMutate(Card top, Card bottom) {
+        if (top == null || bottom == null) {
+            System.err.println("ERROR: Tried to call emulateMergeViaMutate with a null card!");
+            return;
+        }
+
+        Game game = top.getGame();
+        Player p = top.getOwner();
+
+        bottom.setMergedToCard(top);
+        if (!top.hasMergedCard()) {
+            top.addMergedCard(top);
+        }
+        top.addMergedCard(bottom);
+
+        if (top.getMutatedTimestamp() != -1) {
+            top.removeCloneState(top.getMutatedTimestamp());
+        }
+
+        final Long ts = game.getNextTimestamp();
+        top.setMutatedTimestamp(ts);
+        if (top.getCurrentStateName() != CardStateName.FaceDown) {
+            final CardCloneStates mutatedStates = CardFactory.getMutatedCloneStates(top, null/*FIXME*/);
+            top.addCloneState(mutatedStates, ts);
+        }
+        bottom.setTapped(top.isTapped());
+        bottom.setFlipped(top.isFlipped());
+        top.setTimesMutated(top.getTimesMutated() + 1);
+        top.updateTokenView();
+
+        // TODO: Merged commanders aren't supported yet
+    }
+
     private void applyCountersToGameEntity(GameEntity entity, String counterString) {
         entity.setCounters(Maps.newHashMap());
         String[] allCounterStrings = counterString.split(",");
@@ -1306,6 +1370,9 @@ public abstract class GameState {
                         chosen.add(idToCard.get(Integer.parseInt(id)));
                     }
                     cardToChosenCards.put(c, chosen);
+                } else if (info.startsWith("MergedCards:")) {
+                    List<String> cardNames = Arrays.asList(info.substring(info.indexOf(':') + 1).split(","));
+                    cardToMergedCards.put(c, cardNames);
                 } else if (info.startsWith("NamedCard:")) {
                     cardToNamedCard.put(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("NamedCard2:")) {
