@@ -11,6 +11,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
@@ -24,7 +25,6 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.game.ability.AbilityKey;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -1150,7 +1150,6 @@ public abstract class GameState {
         }
 
         Game game = top.getGame();
-        Player p = top.getOwner();
 
         bottom.setMergedToCard(top);
         if (!top.hasMergedCard()) {
