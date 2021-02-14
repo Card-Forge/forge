@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Zendikar Rising #05
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/12/162.-ZNR5-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Remember that your solution must satisfy all blocking scenarios.
+[state]
+humanlife=20
+ailife=5
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Faerie Guidemother;Furor of the Bitten;Sejiri Shelter;Furor of the Bitten
+humanbattlefield=Fearless Fledgling|Counters:P1P1=1;Fireblade Charger;Celestial Enforcer;Plains;Plains;Plains;Mountain;Mountain
+aibattlefield=Snarespinner;Living Tempest
