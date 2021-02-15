@@ -263,7 +263,22 @@ public class TargetSelection {
             if (!gameCacheChooseCard.containsKey(chosen)) {
                 return false;
             }
-            ability.getTargets().add(gameCacheChooseCard.get((CardView) chosen));
+            if (((CardView) chosen).getZone().equals(ZoneType.Stack)) {
+                for (final SpellAbilityStackInstance si : game.getStack()) {
+                    // avoid peeking own SI so target is not changed
+                    if (si.compareToSpellAbility(ability)) {
+                        continue;
+                    }
+                    SpellAbility abilityOnStack = si.getSpellAbility(true);
+                    if (abilityOnStack.getHostCard().getView().equals(chosen)) {
+                        ability.getTargets().add(abilityOnStack);
+                        break;
+                    }
+                }
+            }
+            else {
+                ability.getTargets().add(gameCacheChooseCard.get((CardView) chosen));
+            }
         }
         return true;
     }
@@ -277,12 +292,12 @@ public class TargetSelection {
 
         final Game game = ability.getActivatingPlayer().getGame();
         for (final SpellAbilityStackInstance si : game.getStack()) {
-            SpellAbility abilityOnStack = si.getSpellAbility(true);
-            if (ability.equals(abilityOnStack)) {
-                // By peeking at stack item, target is set to its SI state. So set it back before adding targets
-                ability.resetTargets();
+            // avoid peeking own SI so target is not changed
+            if (si.compareToSpellAbility(ability)) {
+                continue;
             }
-            else if (ability.canTargetSpellAbility(abilityOnStack)) {
+            SpellAbility abilityOnStack = si.getSpellAbility(true);
+            if (ability.canTargetSpellAbility(abilityOnStack)) {
                 stackItemViewCache.put(si.getView(), si);
                 selectOptions.add(si.getView());
             }
