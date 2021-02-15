@@ -474,6 +474,15 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     return false;
                 }
             }
+            if (!sa.isSpecialPayment()) {
+                IndividualCostPaymentInstance i = game.costPaymentStack.peek();
+                if (i != null) {
+                    SpellAbility saPay = i.getPayment().getAbility();
+                    if (saPay.isPayingSpecial()) {
+                        return false;
+                    }
+                }
+            }
         }
 
         if (this.getsVarToCheck() != null) {
@@ -508,7 +517,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      * @return a boolean.
      */
     public final boolean canPlay(final Card c, final SpellAbility sa) {
-        if (c.isPhasedOut() || c.isUsedToPay()) {
+        if (c.isPhasedOut()) {
             return false;
         }
 

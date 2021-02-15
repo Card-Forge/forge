@@ -172,40 +172,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         return false;
     }
 
-    @Deprecated
-    public List<SpellAbility> getUsefulManaAbilities(Card card) {
-        List<SpellAbility> abilities = new ArrayList<>();
-
-        if (card.getController() != player) {
-            return abilities;
-        }
-
-        byte colorCanUse = 0;
-        for (final byte color : ManaAtom.MANATYPES) {
-            if (manaCost.isAnyPartPayableWith(color, player.getManaPool())) {
-                colorCanUse |= color;
-            }
-        }
-        if (manaCost.isAnyPartPayableWith((byte) ManaAtom.GENERIC, player.getManaPool())) {
-            colorCanUse |= ManaAtom.GENERIC;
-        }
-        if (colorCanUse == 0) { // no mana cost or something
-            return abilities;
-        }
-
-        final String typeRes = manaCost.getSourceRestriction();
-        if (StringUtils.isNotBlank(typeRes) && !card.getType().hasStringType(typeRes)) {
-            return abilities;
-        }
-
-        for (SpellAbility ma : getAllManaAbilities(card)) {
-            ma.setActivatingPlayer(player);
-            if (ma.isManaAbilityFor(saPaidFor, colorCanUse))
-                abilities.add(ma);
-        }
-        return abilities;
-    }
-
     public void useManaFromPool(byte colorCode) {
         // find the matching mana in pool.
         if (player.getManaPool().tryPayCostWithColor(colorCode, saPaidFor, manaCost)) {
@@ -352,7 +318,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             @Override
             public void run() {
                 if (HumanPlay.playSpellAbility(getController(), chosen.getActivatingPlayer(), chosen)) {
-                    if (chosen.isConvoke() || chosen.isImprovise() || chosen.isDelve()) {
+                    if (chosen.isSpecialPayment()) {
                         saPaidFor.getPayingManaAbilities().add(chosen);
                         // bypass the mana from Ability part
                     } else if (chosen.getManaPart().meetsManaRestrictions(saPaidFor)) {

@@ -446,10 +446,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isAbility() { return true; }
     public boolean isActivatedAbility() { return false; }
 
-
     public boolean isPayingSpecial() {
         for (SpellAbility sa : getPayingManaAbilities()) {
-            if (sa.isImprovise() || sa.isConvoke() || sa.isDelve()) {
+            if (sa.isSpecialPayment()) {
                 return true;
             }
         }
@@ -460,6 +459,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isConvoke() { return false; }
     public boolean isImprovise() { return false; }
     public boolean isDelve() { return false; }
+
+    public boolean isSpecialPayment() {
+        return isConvoke() || isImprovise() || isDelve();
+    }
 
     public final CardCollectionView getDelved() {
         return CardCollection.getView(delvedCards);
