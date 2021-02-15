@@ -519,8 +519,16 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         int abiY = cardWidth < 200 ? cardYOffset + 25 : cardYOffset + 50;
         hasFlash = false;
         if (ZoneType.Battlefield.equals(card.getZone()) && showAbilityIcons()){
+            if (card.isCommander()) {
+                CardFaceSymbols.drawAbilitySymbol("commander", g, abiX, abiY, abiScale, abiScale);
+                abiY += abiSpace;
+            }
             if (card.getCurrentState().hasFlying()) {
                 CardFaceSymbols.drawAbilitySymbol("flying", g, abiX, abiY, abiScale, abiScale);
+                abiY += abiSpace;
+            }
+            if (card.getCurrentState().hasHaste()) {
+                CardFaceSymbols.drawAbilitySymbol("haste", g, abiX, abiY, abiScale, abiScale);
                 abiY += abiSpace;
             }
             if (card.getCurrentState().hasDoubleStrike()) {
