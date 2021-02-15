@@ -35,7 +35,7 @@ public class SubgameEffect extends SpellAbilityEffect {
             players.add(p.getRegisteredPlayer());
         }
 
-        return new Game(players, maingame.getRules(), maingame.getMatch(), startingLife);
+        return new Game(players, maingame.getRules(), maingame.getMatch(), maingame, startingLife);
     }
 
     private final void setCardsInZone(Player player, final ZoneType zoneType, final CardCollectionView oldCards, boolean addMapping) {
@@ -157,7 +157,6 @@ public class SubgameEffect extends SpellAbilityEffect {
             startingLife = Integer.parseInt(sa.getParam("StartingLife"));
         }
         Game subgame = createSubGame(maingame, startingLife);
-        subgame.setMaingame(maingame);
 
         String startMessage = Localizer.getInstance().getMessage("lblSubgameStart",
                 CardTranslation.getTranslatedName(hostCard.getName()));
