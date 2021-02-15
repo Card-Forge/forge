@@ -1420,7 +1420,7 @@ public class ComputerUtilMana {
             }
         }
 
-        CostAdjustment.adjust(cost, sa, null, test);
+        CostAdjustment.adjust(cost, sa, test);
 
         int timesMultikicked = card.getKickerMagnitude();
         if (timesMultikicked > 0 && sa.hasParam("Announce") && sa.getParam("Announce").startsWith("Multikicker")) {

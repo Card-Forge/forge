@@ -41,6 +41,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -51,6 +52,7 @@ import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Expressions;
@@ -4990,5 +4992,150 @@ public class CardFactoryUtil {
 
         re.setOverridingAbility(saExile);
         card.addReplacementEffect(re);
+    }
+
+    public static SpellAbility buildConvokeAbility(final Card host, Player player, final ManaCostShard shard, final ManaCostBeingPaid manaCost, final SpellAbility saPaidFor) {
+        SpellAbility result = new AbilityStatic(host, Cost.Zero, null) {
+
+            @Override
+            public boolean isConvoke() {
+                return true;
+            }
+
+            @Override
+            public boolean isManaAbility() {
+                return true;
+            }
+
+            public boolean canPlay() {
+                if (!manaCost.canDecreaseShard(shard)) {
+                    return false;
+                }
+
+                return super.canPlay();
+            }
+
+            @Override
+            public boolean undo() {
+                saPaidFor.removeTappedForConvoke(host);
+                host.setTapped(false);
+                manaCost.increaseShard(shard, 1);
+                return true;
+            }
+
+            @Override
+            public void resolve() {
+                player.getGame().getTriggerHandler().suppressMode(TriggerType.Taps);
+                saPaidFor.addTappedForConvoke(host);
+                host.setTapped(false);
+                host.tap();
+                manaCost.decreaseShard(shard, 1);
+                player.getGame().getTriggerHandler().clearSuppression(TriggerType.Taps);
+            }
+
+        };
+        result.setDescription("Convoke " + shard.toString());
+        result.setUndoable(true);
+        result.setActivatingPlayer(player);
+        return result;
+    }
+
+    public static Collection<SpellAbility> buildConvokeAbility(final Card host, Player player, final ManaCostBeingPaid manaCost, final SpellAbility saPaidFor) {
+        List<SpellAbility> result = Lists.newArrayList();
+        for (ManaCostShard shard : host.determineColor().getOrderedShards()) {
+            if (!shard.isOfKind(ManaAtom.COLORLESS)) {
+                result.add(buildConvokeAbility(host, player, shard, manaCost, saPaidFor));
+            }
+        }
+        result.add(buildConvokeAbility(host, player, ManaCostShard.GENERIC, manaCost, saPaidFor));
+        return result;
+    }
+
+    public static SpellAbility buildImproviseAbility(final Card host, Player player, final ManaCostBeingPaid manaCost) {
+        SpellAbility result = new AbilityStatic(host, Cost.Zero, null) {
+
+            @Override
+            public boolean isImprovise() {
+                return true;
+            }
+
+            @Override
+            public boolean isManaAbility() {
+                return true;
+            }
+
+            public boolean canPlay() {
+                if (!manaCost.canDecreaseShard(ManaCostShard.GENERIC)) {
+                    return false;
+                }
+
+                return super.canPlay();
+            }
+
+            @Override
+            public boolean undo() {
+                host.setTapped(false);
+                manaCost.increaseGenericMana(1);
+                return true;
+            }
+
+            @Override
+            public void resolve() {
+                player.getGame().getTriggerHandler().suppressMode(TriggerType.Taps);
+                host.setTapped(false);
+                host.tap();
+                manaCost.decreaseGenericMana(1);
+                player.getGame().getTriggerHandler().clearSuppression(TriggerType.Taps);
+            }
+
+        };
+        result.setDescription("Improvise");
+        result.setUndoable(true);
+        result.setActivatingPlayer(player);
+        return result;
+    }
+
+    public static SpellAbility buildDelveAbility(final Card host, Player player, final ManaCostBeingPaid manaCost, final SpellAbility saPaidFor) {
+        SpellAbility result = new AbilityStatic(host, Cost.Zero, null) {
+
+            @Override
+            public boolean isDelve() {
+                return true;
+            }
+
+            @Override
+            public boolean isManaAbility() {
+                return true;
+            }
+
+            public boolean canPlay() {
+                if (saPaidFor.getDelved().contains(host)) {
+                    return false;
+                }
+                if (!manaCost.canDecreaseShard(ManaCostShard.GENERIC)) {
+                    return false;
+                }
+
+                return super.canPlay();
+            }
+
+            @Override
+            public boolean undo() {
+                saPaidFor.removeDelved(host);
+                manaCost.increaseGenericMana(1);
+                return true;
+            }
+
+            @Override
+            public void resolve() {
+                saPaidFor.addDelved(host);
+                manaCost.decreaseGenericMana(1);
+            }
+
+        };
+        result.setDescription("Delve");
+        result.setUndoable(true);
+        result.setActivatingPlayer(player);
+        return result;
     }
 }

@@ -53,7 +53,7 @@ public class TokenDb implements ITokenDatabase {
 
     @Override
     public PaperToken getToken(String tokenName, String edition) {
-        String fullName = String.format("%s_%s", tokenName, edition.toLowerCase());
+        String fullName = String.format("%s_%s", tokenName, edition.toLowerCase(Locale.ENGLISH));
 
         if (!tokensByName.containsKey(fullName)) {
             try {

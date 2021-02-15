@@ -8,7 +8,6 @@ import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
-import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -20,8 +19,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
@@ -148,7 +145,7 @@ public class CostAdjustment {
     
     // If cardsToDelveOut is null, will immediately exile the delved cards and remember them on the host card.
     // Otherwise, will return them in cardsToDelveOut and the caller is responsible for doing the above.
-    public static final void adjust(ManaCostBeingPaid cost, final SpellAbility sa, CardCollection cardsToDelveOut, boolean test) {
+    public static final void adjust(ManaCostBeingPaid cost, final SpellAbility sa, boolean test) {
         final Game game = sa.getActivatingPlayer().getGame();
         final Card originalCard = sa.getHostCard();
     
@@ -209,36 +206,6 @@ public class CostAdjustment {
             applySetCostAbility(stAb, sa, cost);
         }
 
-        if (sa.isSpell()) {
-            if (sa.getHostCard().hasKeyword(Keyword.DELVE)) {
-                sa.getHostCard().clearDelved();
-
-                final CardZoneTable table = new CardZoneTable();
-                final Player pc = sa.getActivatingPlayer();
-                final CardCollection mutableGrave = new CardCollection(pc.getCardsIn(ZoneType.Graveyard));
-                final CardCollectionView toExile = pc.getController().chooseCardsToDelve(cost.getUnpaidShards(ManaCostShard.GENERIC), mutableGrave);
-                for (final Card c : toExile) {
-                    cost.decreaseGenericMana(1);
-                    if (cardsToDelveOut != null) {
-                        cardsToDelveOut.add(c);
-                    } else if (!test) {
-                        sa.getHostCard().addDelved(c);
-                        final Card d = game.getAction().exile(c, null);
-                        d.setExiledWith(sa.getHostCard());
-                        d.setExiledBy(sa.getHostCard().getController());
-                        table.put(ZoneType.Graveyard, d.getZone().getZoneType(), d);
-                    }
-                }
-                table.triggerChangesZoneAll(game);
-            }
-            if (sa.getHostCard().hasKeyword(Keyword.CONVOKE)) {
-                adjustCostByConvokeOrImprovise(cost, sa, false, test);
-            }
-            if (sa.getHostCard().hasKeyword(Keyword.IMPROVISE)) {
-                adjustCostByConvokeOrImprovise(cost, sa, true, test);
-            }
-        } // isSpell
-
         // Reset card state (if changed)
         if (isStateChangeToFaceDown) {
             originalCard.setFaceDown(false);
@@ -246,32 +213,6 @@ public class CostAdjustment {
         }
     }
     // GetSpellCostChange
-
-    private static void adjustCostByConvokeOrImprovise(ManaCostBeingPaid cost, final SpellAbility sa, boolean improvise, boolean test) {
-        CardCollectionView untappedCards = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.UNTAPPED);
-        if (improvise) {
-            untappedCards = CardLists.filter(untappedCards, CardPredicates.Presets.ARTIFACTS);
-        } else {
-            untappedCards = CardLists.filter(untappedCards, CardPredicates.Presets.CREATURES);
-        }
-
-        Map<Card, ManaCostShard> convokedCards = sa.getActivatingPlayer().getController().chooseCardsForConvokeOrImprovise(sa, cost.toManaCost(), untappedCards, improvise);
-        
-        // Convoked creats are tapped here, setting up their taps triggers,
-        // Then again when payment is done(In InputPayManaCost.done()) with suppression of Taps triggers.
-        // This is to make sure that triggers go off at the right time
-        // AND that you can't use mana tapabilities of convoked creatures to pay the convoked cost.
-        for (final Entry<Card, ManaCostShard> conv : convokedCards.entrySet()) {
-            sa.addTappedForConvoke(conv.getKey());
-            cost.decreaseShard(conv.getValue(), 1);
-            if (!test) {
-                conv.getKey().tap();
-                if (!improvise) {
-                    sa.getHostCard().addConvoked(conv.getKey());
-                }
-            }
-        }
-    }
 
     private static void adjustCostByOffering(final ManaCostBeingPaid cost, final SpellAbility sa) {
         String offeringType = "";

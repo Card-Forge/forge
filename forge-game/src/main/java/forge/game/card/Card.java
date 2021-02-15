@@ -1136,7 +1136,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     newTop = c;
                 }
             }
-            
+
             if (newTop != null) {
                 removeMutatedStates();
                 newTop.mergedCards = mergedCards;
@@ -6248,8 +6248,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return false;
         }
 
-        if (source == null){
+        if (source == null) {
             return true;
+        }
+
+        // can't sacrifice it for mana ability if it is already marked as sacrifice
+        if (source.isManaAbility() && isUsedToPay()) {
+            return false;
         }
 
         if (isCreature() && source.getActivatingPlayer().hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {

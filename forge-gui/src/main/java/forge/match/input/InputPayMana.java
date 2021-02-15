@@ -4,6 +4,7 @@ import java.util.*;
 
 import forge.GuiBase;
 import forge.game.spellability.SpellAbilityView;
+import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -18,6 +19,8 @@ import forge.card.mana.ManaAtom;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
+import forge.game.keyword.Keyword;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -100,21 +103,40 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     protected List<SpellAbility> getAllManaAbilities(Card card) {
         List<SpellAbility> result = Lists.newArrayList();
-        for (SpellAbility sa : card.getManaAbilities()) {
-            result.add(sa);
-            result.addAll(GameActionUtil.getAlternativeCosts(sa, player));
-        }
-        final Collection<SpellAbility> toRemove = Lists.newArrayListWithCapacity(result.size());
-        for (final SpellAbility sa : result) {
-            sa.setActivatingPlayer(player);
-            // fix things like retrace
-            // check only if SA can't be cast normally
-            if (sa.canPlay(true)) {
-                continue;
+
+        if (!saPaidFor.isPayingSpecial()) {
+            for (SpellAbility sa : card.getManaAbilities()) {
+                result.add(sa);
+                result.addAll(GameActionUtil.getAlternativeCosts(sa, player));
             }
-            toRemove.add(sa);
+            final Collection<SpellAbility> toRemove = Lists.newArrayListWithCapacity(result.size());
+            for (final SpellAbility sa : result) {
+                sa.setActivatingPlayer(player);
+                // fix things like retrace
+                // check only if SA can't be cast normally
+                if (sa.canPlay(true)) {
+                    continue;
+                }
+                toRemove.add(sa);
+            }
+            result.removeAll(toRemove);
         }
-        result.removeAll(toRemove);
+        if (saPaidFor.isSpell()) {
+            if (card.isInPlay() && card.isUntapped()) {
+                if (saPaidFor.getHostCard().hasKeyword(Keyword.CONVOKE) && card.isCreature()) {
+                    result.addAll(CardFactoryUtil.buildConvokeAbility(card, player, manaCost, saPaidFor));
+                }
+
+                if (saPaidFor.getHostCard().hasKeyword(Keyword.IMPROVISE) && card.isArtifact()) {
+                    result.add(CardFactoryUtil.buildImproviseAbility(card, player, manaCost));
+                }
+            }
+            if (card.isInZone(ZoneType.Graveyard)) {
+                if (saPaidFor.getHostCard().hasKeyword(Keyword.DELVE)) {
+                    result.add(CardFactoryUtil.buildDelveAbility(card, player, manaCost, saPaidFor));
+                }
+            }
+        }
         return result;
     }
 
@@ -330,10 +352,15 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             @Override
             public void run() {
                 if (HumanPlay.playSpellAbility(getController(), chosen.getActivatingPlayer(), chosen)) {
-                    if (chosen.getManaPart().meetsManaRestrictions(saPaidFor)) {
+                    if (chosen.isConvoke() || chosen.isImprovise() || chosen.isDelve()) {
+                        saPaidFor.getPayingManaAbilities().add(chosen);
+                        // bypass the mana from Ability part
+                    } else if (chosen.getManaPart().meetsManaRestrictions(saPaidFor)) {
                         player.getManaPool().payManaFromAbility(saPaidFor, InputPayMana.this.manaCost, chosen);
+
+                        onManaAbilityPaid();
                     }
-                    onManaAbilityPaid();
+
                     onStateChanged();
                 }
             }

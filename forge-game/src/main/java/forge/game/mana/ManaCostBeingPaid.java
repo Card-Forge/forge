@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -38,7 +38,7 @@ import org.apache.commons.lang3.StringUtils;
  * <p>
  * ManaCostBeingPaid class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -283,6 +283,35 @@ public class ManaCostBeingPaid {
         decreaseShard(ManaCostShard.GENERIC, manaToSubtract);
     }
 
+    public boolean canDecreaseShard(final ManaCostShard shard) {
+        ShardCount sc = unpaidShards.get(shard);
+        if (sc != null) {
+            return true;
+        }
+        // only special rules for Mono Color Shards and for Generic
+        if (!shard.isMonoColor() && shard != ManaCostShard.GENERIC) {
+            return false;
+        }
+        if (shard.isMonoColor()) {
+            for (Entry<ManaCostShard, ShardCount> e : unpaidShards.entrySet()) {
+                final ManaCostShard eShard = e.getKey();
+                if (eShard.isOfKind(shard.getShard()) && (!eShard.isMonoColor() || eShard.isOr2Generic() || eShard.isPhyrexian())) {
+                    return true;
+                }
+            }
+        } else if (shard == ManaCostShard.GENERIC) {
+            // try to remove 2 generic hybrid shards WITH generic shard
+            for (Entry<ManaCostShard, ShardCount> e : unpaidShards.entrySet()) {
+                final ManaCostShard eShard = e.getKey();
+                if (eShard.isOr2Generic()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public final void decreaseShard(final ManaCostShard shard, final int manaToSubtract) {
         if (manaToSubtract <= 0) {
             return;
@@ -296,9 +325,9 @@ public class ManaCostBeingPaid {
             }
             int otherSubtract = manaToSubtract;
             List<ManaCostShard> toRemove = Lists.newArrayList();
-            
+
             //TODO move that for parts into extra function if able
-            
+
             // try to remove multicolored hybrid shards
             // for that, this shard need to be mono colored
             if (shard.isMonoColor()) {
@@ -383,15 +412,15 @@ public class ManaCostBeingPaid {
                     }
                 }
             }
-            
+
             unpaidShards.keySet().removeAll(toRemove);
             //System.out.println("Tried to substract a " + shard.toString() + " shard that is not present in this ManaCostBeingPaid");
             return;
         }
-        
-        
-        int difference = manaToSubtract - sc.totalCount;  
-        
+
+
+        int difference = manaToSubtract - sc.totalCount;
+
         if (manaToSubtract >= sc.totalCount) {
             sc.xCount = 0;
             sc.totalCount = 0;
@@ -419,7 +448,7 @@ public class ManaCostBeingPaid {
      * <p>
      * addMana.
      * </p>
-     * 
+     *
      * @param mana
      *            a {@link java.lang.String} object.
      * @return a boolean.
@@ -446,7 +475,7 @@ public class ManaCostBeingPaid {
      * <p>
      * addMana.
      * </p>
-     * 
+     *
      * @param mana
      *            a {@link forge.game.mana.Mana} object.
      * @return a boolean.
@@ -467,7 +496,7 @@ public class ManaCostBeingPaid {
         byte outColor = pool.getPossibleColorUses(inColor);
         return tryPayMana(inColor, Iterables.filter(unpaidShards.keySet(), predCanBePaid), outColor) != null;
     }
-    
+
     public final ManaCostShard payManaViaConvoke(final byte color) {
         Predicate<ManaCostShard> predCanBePaid = new Predicate<ManaCostShard>() {
             @Override
@@ -592,7 +621,7 @@ public class ManaCostBeingPaid {
 
     /**
      * To string.
-     * 
+     *
      * @param addX
      *            the add x
      * @return the string
@@ -629,7 +658,7 @@ public class ManaCostBeingPaid {
             if (shard == ManaCostShard.GENERIC) {
                 continue;
             }
-            
+
             final String str = shard.toString();
             final int count = unpaidShards.get(shard).totalCount;
             for (int i = 0; i < count; i++) {
@@ -650,7 +679,7 @@ public class ManaCostBeingPaid {
      * <p>
      * getConvertedManaCost.
      * </p>
-     * 
+     *
      * @return a int.
      */
     public final int getConvertedManaCost() {
@@ -710,7 +739,7 @@ public class ManaCostBeingPaid {
         }
         return result;
     }
-    
+
     public boolean hasAnyKind(int kind) {
         for (ManaCostShard s : unpaidShards.keySet()) {
             if (s.isOfKind(kind)) {

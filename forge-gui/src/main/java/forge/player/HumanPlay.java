@@ -20,7 +20,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerView;
 import forge.game.spellability.*;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.match.input.InputPayMana;
 import forge.match.input.InputPayManaOfCostPayment;
@@ -596,13 +595,13 @@ public class HumanPlay {
     }
 
 
-    private static boolean handleOfferingConvokeAndDelve(final SpellAbility ability, CardCollection cardsToDelve, boolean manaInputCancelled) {
+    private static boolean handleOfferingConvokeAndDelve(final SpellAbility ability, boolean manaInputCancelled) {
         Card hostCard = ability.getHostCard();
         final Game game = hostCard.getGame();
 
         final CardZoneTable table = new CardZoneTable();
-        if (!manaInputCancelled && !cardsToDelve.isEmpty()) {
-            for (final Card c : cardsToDelve) {
+        if (!manaInputCancelled) {
+            for (final Card c : ability.getDelved()) {
                 hostCard.addDelved(c);
                 final ZoneType o = c.getZone().getZoneType();
                 final Card d = game.getAction().exile(c, null);
@@ -627,15 +626,16 @@ public class HumanPlay {
             }
             ability.resetSacrificedAsEmerge();
         }
-        if (ability.getTappedForConvoke() != null) {
-            for (final Card c : ability.getTappedForConvoke()) {
-                c.setTapped(false);
-                if (!manaInputCancelled) {
-                    c.tap();
-                }
+
+        for (final Card c : ability.getTappedForConvoke()) {
+            c.setTapped(false);
+            if (!manaInputCancelled) {
+                c.tap();
+                ability.getHostCard().addConvoked(c);
             }
-            ability.clearTappedForConvoke();
         }
+        ability.clearTappedForConvoke();
+
         if (!table.isEmpty() && !manaInputCancelled) {
             table.triggerChangesZoneAll(game);
         }
@@ -680,75 +680,32 @@ public class HumanPlay {
             }
         }
 
-        CardCollection cardsToDelve = new CardCollection();
         if (isActivatedSa) {
-            CostAdjustment.adjust(toPay, ability, cardsToDelve, false);
+            CostAdjustment.adjust(toPay, ability, false);
         }
-
-        Card offering = null;
-        Card emerge = null;
 
         InputPayMana inpPayment;
-        if (ability.isOffering()) {
-            if (ability.getSacrificedAsOffering() == null) {
-                System.out.println("Sacrifice input for Offering cancelled");
-                return false;
-            } else {
-                offering = ability.getSacrificedAsOffering();
-            }
+        if (ability.isOffering() && ability.getSacrificedAsOffering() == null) {
+            System.out.println("Sacrifice input for Offering cancelled");
+            return false;
         }
-        if (ability.isEmerge()) {
-            if (ability.getSacrificedAsEmerge() == null) {
-                System.out.println("Sacrifice input for Emerge cancelled");
-                return false;
-            } else {
-                emerge = ability.getSacrificedAsEmerge();
-            }
+        if (ability.isEmerge() && ability.getSacrificedAsEmerge() == null) {
+            System.out.println("Sacrifice input for Emerge cancelled");
+            return false;
         }
+
         if (!toPay.isPaid()) {
             // Input is somehow clearing out the offering card?
             inpPayment = new InputPayManaOfCostPayment(controller, toPay, ability, activator, matrix);
             inpPayment.setMessagePrefix(prompt);
             inpPayment.showAndWait();
             if (!inpPayment.isPaid()) {
-                return handleOfferingConvokeAndDelve(ability, cardsToDelve, true);
+                return handleOfferingConvokeAndDelve(ability, true);
             }
 
             source.setXManaCostPaidByColor(toPay.getXManaCostPaidByColor());
         }
 
-        // Handle convoke and offerings
-        if (ability.isOffering()) {
-            if (ability.getSacrificedAsOffering() == null && offering != null) {
-                ability.setSacrificedAsOffering(offering);
-            }
-            if (ability.getSacrificedAsOffering() != null) {
-                System.out.println("Finishing up Offering");
-                offering.setUsedToPay(false);
-                activator.getGame().getAction().sacrifice(offering, ability, null);
-                ability.resetSacrificedAsOffering();
-            }
-        }
-        if (ability.isEmerge()) {
-            if (ability.getSacrificedAsEmerge() == null && emerge != null) {
-                ability.setSacrificedAsEmerge(emerge);
-            }
-            if (ability.getSacrificedAsEmerge() != null) {
-                System.out.println("Finishing up Emerge");
-                emerge.setUsedToPay(false);
-                activator.getGame().getAction().sacrifice(emerge, ability, null);
-                ability.resetSacrificedAsEmerge();
-            }
-        }
-        if (ability.getTappedForConvoke() != null) {
-            activator.getGame().getTriggerHandler().suppressMode(TriggerType.Taps);
-            for (final Card c : ability.getTappedForConvoke()) {
-                c.setTapped(false);
-                c.tap();
-            }
-            activator.getGame().getTriggerHandler().clearSuppression(TriggerType.Taps);
-            ability.clearTappedForConvoke();
-        }
-        return handleOfferingConvokeAndDelve(ability, cardsToDelve, false);
+        return handleOfferingConvokeAndDelve(ability, false);
     }
 }

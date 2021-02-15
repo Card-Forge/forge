@@ -138,6 +138,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private List<AbilitySub> chosenList = null;
     private CardCollection tappedForConvoke = new CardCollection();
+    private CardCollection delvedCards = new CardCollection();
+
     private Card sacrificedAsOffering = null;
     private Card sacrificedAsEmerge = null;
 
@@ -334,7 +336,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return result;
     }
 
-    public final boolean isManaAbility() {
+    public boolean isManaAbility() {
         // Check whether spell or ability first
         if (isSpell()) {
             return false;
@@ -443,6 +445,36 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isSpell() { return false; }
     public boolean isAbility() { return true; }
     public boolean isActivatedAbility() { return false; }
+
+
+    public boolean isPayingSpecial() {
+        for (SpellAbility sa : getPayingManaAbilities()) {
+            if (sa.isImprovise() || sa.isConvoke() || sa.isDelve()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // special cost for improvise
+    public boolean isConvoke() { return false; }
+    public boolean isImprovise() { return false; }
+    public boolean isDelve() { return false; }
+
+    public final CardCollectionView getDelved() {
+        return CardCollection.getView(delvedCards);
+    }
+    public final void addDelved(final Card c) {
+        delvedCards.add(c);
+    }
+
+    public final void removeDelved(final Card c) {
+        delvedCards.remove(c);
+    }
+
+    public final void clearDelved() {
+        delvedCards.clear();
+    }
 
     public boolean isMorphUp() {
         return this.hasParam("MorphUp");
@@ -1349,15 +1381,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return tappedForConvoke;
     }
     public void addTappedForConvoke(final Card c) {
-        if (tappedForConvoke == null) {
-            tappedForConvoke = new CardCollection();
-        }
         tappedForConvoke.add(c);
     }
+    public void removeTappedForConvoke(final Card c) {
+        tappedForConvoke.remove(c);
+    }
     public void clearTappedForConvoke() {
-        if (tappedForConvoke != null) {
-            tappedForConvoke.clear();
-        }
+        tappedForConvoke.clear();
     }
 
     public boolean isEmerge() {
