@@ -3,11 +3,10 @@ ManaCost:2 B B
 Types:Enchantment Creature Demon
 PT:4/4
 K:Flying
-T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | RememberTriggeringCard$ True | Execute$ TrigImprint | OptionalDecider$ You | TriggerDescription$ Whenever another nontoken creature you control dies, you may exile it. If you do, create a token that's a copy of that creature, except it's 1/1 and it's Nightmare in addition to its other types.
-SVar:TrigImprint:DB$ Pump | ImprintCards$ RememberedLKI | SubAbility$ DBExile
-SVar:DBExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | ForgetOtherRemembered$ True | RememberChanged$ True | SubAbility$ DBCopy
-SVar:DBCopy:DB$ CopyPermanent | Defined$ ImprintedLKI | SetPower$ 1 | SetToughness$ 1 | AddTypes$ Nightmare | ConditionDefined$ TriggeredNewCardLKICopy | ConditionPresent$ Card | ConditionCompare$ EQExiledCount | References$ ExiledCount | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Whenever another nontoken creature you control dies, you may exile it. If you do, create a token that's a copy of that creature, except it's 1/1 and it's Nightmare in addition to its other types.
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | SetPower$ 1 | SetToughness$ 1 | AddTypes$ Nightmare | ConditionDefined$ TriggeredNewCardLKICopy | ConditionPresent$ Card | ConditionCompare$ EQExiledCount | References$ ExiledCount | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:ExiledCount:Count$RememberedSize
 DeckHas:Ability$Token
 Oracle:Flying\nWhenever another nontoken creature you control dies, you may exile it. If you do, create a token that's a copy of that creature, except it's 1/1 and it's a Nightmare in addition to its other types.
