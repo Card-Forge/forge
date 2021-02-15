@@ -1120,6 +1120,54 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
 
+    public final void moveMergedToSubgame(SpellAbility cause) {
+        if (hasMergedCard()) {
+            Zone zone = getZone();
+            int pos = -1;
+            for (int i = 0; i < zone.size(); i++) {
+                if (zone.get(i) == this) {
+                    pos = i;
+                    break;
+                }
+            }
+            Card newTop = null;
+            for (final Card c : mergedCards) {
+                if (c != this) {
+                    newTop = c;
+                }
+            }
+            
+            if (newTop != null) {
+                removeMutatedStates();
+                newTop.mergedCards = mergedCards;
+                newTop.mergedTo = null;
+                mergedCards = null;
+                mergedTo = newTop;
+
+                newTop.mutatedTimestamp = mutatedTimestamp;
+                newTop.timesMutated = timesMutated;
+                mutatedTimestamp = -1;
+                timesMutated = 0;
+
+                zone.remove(this);
+                newTop.getZone().add(this);
+                setZone(newTop.getZone());
+
+                newTop.getZone().remove(newTop);
+                zone.add(newTop, pos);
+                newTop.setZone(zone);
+            }
+        }
+
+        Card topCard = getMergedToCard();
+        if (topCard != null) {
+            setMergedToCard(null);
+            topCard.removeMergedCard(this);
+            topCard.removeMutatedStates();
+            topCard.rebuildMutatedStates(cause);
+        }
+    }
+
     public final String getFlipResult(final Player flipper) {
         if (flipResult == null) {
             return null;

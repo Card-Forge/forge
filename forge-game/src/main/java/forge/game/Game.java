@@ -109,7 +109,7 @@ public class Game {
     private final Match match;
     private GameStage age = GameStage.BeforeMulligan;
     private GameOutcome outcome;
-    private Game maingame = null;
+    private final Game maingame;
 
     private final GameView view;
     private final Tracker tracker = new Tracker();
@@ -221,12 +221,13 @@ public class Game {
     }
 
     public Game(Iterable<RegisteredPlayer> players0, GameRules rules0, Match match0) {
-        this(players0, rules0, match0, -1);
+        this(players0, rules0, match0, null, -1);
     }
 
-    public Game(Iterable<RegisteredPlayer> players0, GameRules rules0, Match match0, int startingLife) { /* no more zones to map here */
+    public Game(Iterable<RegisteredPlayer> players0, GameRules rules0, Match match0, Game maingame0, int startingLife) { /* no more zones to map here */
         rules = rules0;
         match = match0;
+        maingame = maingame0;
         this.id = nextId();
 
         int highestTeam = -1;
@@ -441,10 +442,6 @@ public class Game {
 
     public final Game getMaingame() {
         return maingame;
-    }
-
-    public void setMaingame(final Game maingame0) {
-        maingame = maingame0;
     }
 
     public ReplacementHandler getReplacementHandler() {

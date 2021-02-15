@@ -624,6 +624,11 @@ public class GameAction {
 
         // Card lastKnownInfo = c;
 
+        // Handle the case that one component of a merged permanent got take to the subgame
+        if (zoneTo.is(ZoneType.Subgame) && (c.hasMergedCard() || c.isMerged())) {
+            c.moveMergedToSubgame(cause);
+        }
+
         c = changeZone(zoneFrom, zoneTo, c, position, cause, params);
 
         // Move card in maingame if take card from subgame
