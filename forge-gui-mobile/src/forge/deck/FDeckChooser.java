@@ -536,6 +536,7 @@ public class FDeckChooser extends FScreen {
             case TinyLeaders:
             case Brawl:
                 cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
+                cmbDeckTypes.addItem(DeckType.PRECON_COMMANDER_DECK);
                 cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
                 if(FModel.isdeckGenMatrixLoaded()) {
                     cmbDeckTypes.addItem(DeckType.RANDOM_CARDGEN_COMMANDER_DECK);
@@ -554,6 +555,7 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.DRAFT_DECK);
                 cmbDeckTypes.addItem(DeckType.SEALED_DECK);
                 cmbDeckTypes.addItem(DeckType.PRECONSTRUCTED_DECK);
+                cmbDeckTypes.addItem(DeckType.PRECON_COMMANDER_DECK);
                 cmbDeckTypes.addItem(DeckType.QUEST_OPPONENT_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_COMMANDER_DECK);
@@ -675,6 +677,10 @@ public class FDeckChooser extends FScreen {
             break;
         case COMMANDER_DECK:
             pool = DeckProxy.getAllCommanderDecks();
+            config = ItemManagerConfig.COMMANDER_DECKS;
+            break;
+        case PRECON_COMMANDER_DECK:
+            pool = DeckProxy.getAllCommanderPreconDecks();
             config = ItemManagerConfig.COMMANDER_DECKS;
             break;
         case OATHBREAKER_DECK:

@@ -17,6 +17,7 @@ public enum DeckType {
     DRAFT_DECK("lblDraftDecks"),
     SEALED_DECK("lblSealedDecks"),
     PRECONSTRUCTED_DECK("lblPreconstructedDecks"),
+    PRECON_COMMANDER_DECK("lblPreconCommanderDecks"),
     QUEST_OPPONENT_DECK("lblQuestOpponentDecks"),
     COLOR_DECK("lblRandomColorDecks"),
     STANDARD_CARDGEN_DECK("lblRandomStandardArchetypeDecks"),
@@ -70,6 +71,7 @@ public enum DeckType {
         if (FModel.isdeckGenMatrixLoaded()) {
             CommanderOptions = new DeckType[]{
                     DeckType.COMMANDER_DECK,
+                    DeckType.PRECON_COMMANDER_DECK,
                     DeckType.RANDOM_COMMANDER_DECK,
                     DeckType.RANDOM_CARDGEN_COMMANDER_DECK,
                     DeckType.RANDOM_DECK,
@@ -78,6 +80,7 @@ public enum DeckType {
         }else{
             CommanderOptions = new DeckType[]{
                     DeckType.COMMANDER_DECK,
+                    DeckType.PRECON_COMMANDER_DECK,
                     DeckType.RANDOM_COMMANDER_DECK,
                     DeckType.RANDOM_DECK,
                     DeckType.NET_COMMANDER_DECK
