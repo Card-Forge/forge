@@ -2336,8 +2336,9 @@ public class CardFactoryUtil {
             landPut.setSVar("X", "Count$Averna");
             dig.setSubAbility(landPut);
 
-            final String dbCascadeCast = "DB$ Play | Defined$ Imprinted | WithoutManaCost$ True | Optional$ True";
+            final String dbCascadeCast = "DB$ Play | Defined$ Imprinted | WithoutManaCost$ True | Optional$ True | ValidSA$ Spell.cmcLTCascadeX";
             AbilitySub cascadeCast = (AbilitySub)AbilityFactory.getAbility(dbCascadeCast, card);
+            cascadeCast.setSVar("CascadeX", "Count$CardManaCost");
             landPut.setSubAbility(cascadeCast);
 
             final String dbMoveToLib = "DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Card.IsImprinted"
