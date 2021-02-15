@@ -1,0 +1,16 @@
+Name:Puresteel Angel
+ManaCost:8
+Types:Artifact Creature Angel
+PT:4/4
+K:Flying
+K:Indestructible
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile all artifacts that are not colorless.
+SVar:TrigExile:DB$ChangeZoneAll | ChangeType$ Artifact.nonColorless | Origin$ Battlefield | Destination$ Exile
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigEmblem | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you get an emblem with "If you would lose the game, instead your life total becomes 20, shuffle your graveyard into your library, you lose all poison counters, and you lose this emblem."
+SVar:TrigEmblem:DB$ Effect | Name$ Emblem - Puresteel Angel | ReplacementEffects$ LoseReplace | SVars$ ExileEffect,DBSetLife,DBShuffle,DBPoison | Duration$ Permanent
+SVar:LoseReplace:Event$ GameLoss | ActiveZones$ Command | ValidPlayer$ You | ReplaceWith$ DBSetLife | Description$ The next time you would lose the game, instead your life total becomes 20, shuffle your graveyard into your library, you lose all poison counters, and you lose this emblem.
+SVar:DBSetLife:DB$ SetLife | Defined$ You | LifeAmount$ 20 | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ ChangeZoneAll | Defined$ You | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBPoison
+SVar:DBPoison:DB$ RemoveCounter | Defined$ You | CounterType$ POISON | CounterNum$ All | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:Flying, Indestructible\nWhen Puresteel Angel enters the battlefield, exile all artifacts that are not colorless.\nWhenever Puresteel Angel deals combat daamge to a player, you get an emblem with "If you would lose the game, instead your life total becomes 20, shuffle your graveyard into your library, you lose all poison counters, and you lose this emblem."
