@@ -45,8 +45,10 @@ public class CardZoom extends FOverlay {
     private static ActivateHandler activateHandler;
     private static String currentActivateAction;
     private static Rectangle flipIconBounds;
+    private static Rectangle mutateIconBounds;
     private static boolean showAltState;
     private static boolean showBackSide = false;
+    private static boolean showMerged = false;
 
     public static void show(Object item) {
         show(item, false);
@@ -116,6 +118,7 @@ public class CardZoom extends FOverlay {
     }
 
     private static void onCardChanged() {
+        mutateIconBounds = null;
         if (activateHandler != null) {
             currentActivateAction = activateHandler.getActivateAction(currentIndex);
         }
@@ -123,6 +126,11 @@ public class CardZoom extends FOverlay {
             flipIconBounds = new Rectangle();
         } else {
             flipIconBounds = null;
+        }
+        if (currentCard != null) {
+            if (currentCard.getMergedCardsCollection() != null )
+                if (currentCard.getMergedCardsCollection().size() > 0)
+                    mutateIconBounds = new Rectangle();
         }
         showAltState = false;
     }
@@ -162,6 +170,15 @@ public class CardZoom extends FOverlay {
 
     @Override
     public boolean tap(float x, float y, int count) {
+        if (mutateIconBounds != null && mutateIconBounds.contains(x, y)) {
+            if(showMerged) {
+                showMerged = false;
+            } else {
+                showMerged = true;
+                show(currentCard.getMergedCardsCollection(), 0, null);
+            }
+            return true;
+        }
         if (flipIconBounds != null && flipIconBounds.contains(x, y)) {
             if (!showBackSide)
                 showAltState = !showAltState;
@@ -172,6 +189,7 @@ public class CardZoom extends FOverlay {
         hide();
         showBackSide = false;
         showAltState = false;
+        showMerged = false;
         return true;
     }
 
@@ -303,17 +321,22 @@ public class CardZoom extends FOverlay {
             CardImageRenderer.drawDetails(g, currentCard, gameView, showBackSide? showBackSide : showAltState, x, y, cardWidth, cardHeight);
         }
 
-        if (flipIconBounds != null) {
-            float imageWidth = cardWidth / 2;
-            if (Forge.hdbuttons){
-                float imageHeight = imageWidth * FSkinImage.HDFLIPCARD.getHeight() / FSkinImage.HDFLIPCARD.getWidth();
-                flipIconBounds.set(x + (cardWidth - imageWidth) / 2, y + (cardHeight - imageHeight) / 2, imageWidth, imageHeight);
-                g.drawImage(FSkinImage.HDFLIPCARD, flipIconBounds.x, flipIconBounds.y, flipIconBounds.width, flipIconBounds.height);
-            } else {
-                float imageHeight = imageWidth * FSkinImage.FLIPCARD.getHeight() / FSkinImage.FLIPCARD.getWidth();
-                flipIconBounds.set(x + (cardWidth - imageWidth) / 2, y + (cardHeight - imageHeight) / 2, imageWidth, imageHeight);
-                g.drawImage(FSkinImage.FLIPCARD, flipIconBounds.x, flipIconBounds.y, flipIconBounds.width, flipIconBounds.height);
+        if (!showMerged) {
+            if (mutateIconBounds != null) {
+                float oldAlpha = g.getfloatAlphaComposite();
+                try {
+                    g.setAlphaComposite(0.6f);
+                    drawIconBounds(g, mutateIconBounds, Forge.hdbuttons ? FSkinImage.HDLIBRARY : FSkinImage.LIBRARY, x, y, cardWidth, cardHeight);
+                    g.setAlphaComposite(oldAlpha);
+                } catch (Exception e) {
+                    mutateIconBounds = null;
+                    g.setAlphaComposite(oldAlpha);
+                }
+            } else if (flipIconBounds != null) {
+                drawIconBounds(g, flipIconBounds, Forge.hdbuttons ? FSkinImage.HDFLIPCARD : FSkinImage.FLIPCARD, x, y, cardWidth, cardHeight);
             }
+        } else if (flipIconBounds != null) {
+            drawIconBounds(g, flipIconBounds, Forge.hdbuttons ? FSkinImage.HDFLIPCARD : FSkinImage.FLIPCARD, x, y, cardWidth, cardHeight);
         }
 
         if (currentActivateAction != null) {
@@ -324,6 +347,13 @@ public class CardZoom extends FOverlay {
         g.drawText(zoomMode ? Localizer.getInstance().getMessage("lblSwipeDownDetailView") : Localizer.getInstance().getMessage("lblSwipeDownPictureView"), FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, h - messageHeight, w, messageHeight, false, Align.center, true);
 
         interrupt(false);
+    }
+
+    private void drawIconBounds(Graphics g, Rectangle iconBounds, FSkinImage skinImage, float x, float y, float cardWidth, float cardHeight) {
+        float imageWidth = cardWidth / 2;
+        float imageHeight = imageWidth * skinImage.getHeight() / skinImage.getWidth();
+        iconBounds.set(x + (cardWidth - imageWidth) / 2, y + (cardHeight - imageHeight) / 2, imageWidth, imageHeight);
+        g.drawImage(skinImage, iconBounds.x, iconBounds.y, iconBounds.width, iconBounds.height);
     }
 
     @Override

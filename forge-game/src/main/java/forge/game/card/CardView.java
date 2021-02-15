@@ -330,6 +330,10 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ChosenColors, c.getChosenColors());
     }
 
+    public FCollectionView<CardView> getMergedCardsCollection() {
+        return get(TrackableProperty.MergedCardsCollection);
+    }
+
     public FCollectionView<CardView> getChosenCards() {
         return get(TrackableProperty.ChosenCards);
     }
@@ -433,6 +437,7 @@ public class CardView extends GameEntityView {
             //cards in these zones are visible to all
             return true;
         case Exile:
+        case Merged:
             //in exile, only face up cards and face down cards you can look at should be shown (since "exile face down" is a thing)
             if (!isFaceDown()) {
                 return true;
@@ -786,6 +791,7 @@ public class CardView extends GameEntityView {
         //CardStateView cloner = CardView.getState(c, CardStateName.Cloner);
         set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
 
+        CardCollection mergedCollection = new CardCollection();
         if (c.hasMergedCard()) {
             StringBuilder sb = new StringBuilder();
             CardCollectionView mergedCards = c.getMergedCards();
@@ -796,7 +802,19 @@ public class CardView extends GameEntityView {
                 sb.append(" (").append(card.getId()).append(")");
             }
             set(TrackableProperty.MergedCards, sb.toString());
+            for (int i = 0; i < mergedCards.size(); i++) {
+                final Card card = mergedCards.get(i);
+                if (i == 0) { //get the original view of the top card
+                    if (!card.isFaceDown())
+                        mergedCollection.add(Card.getCardForUi(c.getPaperCard()));
+                    else
+                        mergedCollection.add(card);
+                } else {
+                    mergedCollection.add(card);
+                }
+            }
         }
+        updateMergeCollections(mergedCollection);
 
         CardState currentState = c.getCurrentState();
         if (isSplitCard) {
@@ -1406,5 +1424,19 @@ public class CardView extends GameEntityView {
             set(key, null);
         }
         return null;
+    }
+    void updateMergeCollections(CardCollection cards) {
+        TrackableCollection<CardView> views = get(TrackableProperty.MergedCardsCollection);
+        if (views == null) {
+            views = new TrackableCollection<>();
+            set(TrackableProperty.MergedCardsCollection, views);
+        } else {
+            views.clear();
+        }
+        if (cards != null) {
+            for (Card c : cards)
+                views.add(c.getView());
+        }
+        flagAsChanged(TrackableProperty.MergedCardsCollection);
     }
 }
