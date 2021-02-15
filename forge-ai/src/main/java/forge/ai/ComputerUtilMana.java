@@ -796,8 +796,6 @@ public class ComputerUtilMana {
 //                    extraMana, sa.getHostCard(), sa.toUnsuppressedString(), StringUtils.join(paymentPlan, "\n\t"));
 //        }
 
-        manapool.restoreColorReplacements(); // FIXME: is this needed here, or does it sort itself out for the next iteration?
-
         // The cost is still unpaid, so refund the mana and report
         if (!cost.isPaid()) {
             refundMana(manaSpentToPay, ai, sa);
