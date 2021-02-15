@@ -80,6 +80,7 @@ public class MutateEffect extends SpellAbilityEffect {
         host.setTapped(target.isTapped());
         host.setFlipped(target.isFlipped());
         target.setTimesMutated(target.getTimesMutated() + 1);
+        target.updateStateForView();
         target.updateTokenView();
         if (host.isCommander()) {
             host.getOwner().updateMergedCommanderInfo(target, host);
