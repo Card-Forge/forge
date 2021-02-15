@@ -743,6 +743,17 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             if (c == gameCard) continue;
                             hostCard.addImprintedCard(c);
                         }
+                        // For Duplicant
+                        if (sa.hasParam("ImprintLast")) {
+                            Card lastCard = null;
+                            for (final Card c : movedCard.getOwner().getCardsIn(destination)) {
+                                if (hostCard.hasImprintedCard(c)) {
+                                    hostCard.removeImprintedCard(c);
+                                    lastCard = c;
+                                }
+                            }
+                            hostCard.addImprintedCard(lastCard);
+                        }
                     }
                 }
             }
