@@ -4,10 +4,10 @@ Types:Legendary Creature Elemental Beast
 PT:0/0
 K:etbCounter:P1P1:Y:no Condition:CARDNAME enters the battlefield with a number of +1/+1 counters on it equal to the amount of mana spent to cast it.
 SVar:Y:Count$CastTotalManaSpent
-A:AB$ Charm | Cost$ XCantBe0 X SubCounter<X/P1P1> | Choices$ MarathCounters,MarathDmg,MarathToken | Defined$ You
-SVar:MarathCounters:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ Z | References$ Z | SpellDescription$ Put X +1/+1 counters on target creature. X can't be 0.
-SVar:MarathDmg:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ Z | References$ Z | SpellDescription$ CARDNAME deals X damage to any target. X can't be 0.
-SVar:MarathToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_x_x_elemental | TokenOwner$ You | TokenPower$ Z | TokenToughness$ Z | References$ Z | LegacyImage$ g x x elemental c13 | SpellDescription$ Create an X/X green Elemental creature token. X can't be 0.
-SVar:Z:SVar$CostCountersRemoved
+A:AB$ Charm | Cost$ XCantBe0 X SubCounter<X/P1P1> | Choices$ MarathCounters,MarathDmg,MarathToken | Defined$ You | References$ X
+SVar:MarathCounters:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ X | References$ X | SpellDescription$ Put X +1/+1 counters on target creature. X can't be 0.
+SVar:MarathDmg:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to any target. X can't be 0.
+SVar:MarathToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_x_x_elemental | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | References$ X | LegacyImage$ g x x elemental c13 | SpellDescription$ Create an X/X green Elemental creature token. X can't be 0.
+SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:Marath, Will of the Wild enters the battlefield with a number of +1/+1 counters on it equal to the amount of mana spent to cast it.\n{X}, Remove X +1/+1 counters from Marath: Choose one —\n• Put X +1/+1 counters on target creature. X can't be 0.\n• Marath deals X damage to any target. X can't be 0.\n• Create an X/X green Elemental creature token. X can't be 0.
