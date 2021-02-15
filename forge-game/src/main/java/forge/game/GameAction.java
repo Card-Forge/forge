@@ -332,8 +332,9 @@ public class GameAction {
                     saTargeting.getTargets().replaceTargetCard(c, cards);
                 }
                 // Replace host rememberd cards
+                // But not replace RememberLKI, since it wants to refer to the last known info.
                 Card hostCard = cause.getHostCard();
-                if (hostCard.isRemembered(c)) {
+                if (!cause.hasParam("RememberLKI") && hostCard.isRemembered(c)) {
                     hostCard.removeRemembered(c);
                     hostCard.addRemembered(cards);
                 }
