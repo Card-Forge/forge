@@ -228,7 +228,8 @@ public class TriggerChangesZone extends Trigger {
             boolean leavesBattlefield = ArrayUtils.contains(
                 getParam("Origin").split(","), ZoneType.Battlefield.toString()
             );
-            if (leavesBattlefield) {
+            // Static triggers aren't triggered abilities rules-wise
+            if (leavesBattlefield && !isStatic()) {
                 setActiveZone(EnumSet.of(ZoneType.Battlefield));
             }
         }
