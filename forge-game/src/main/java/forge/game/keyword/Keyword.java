@@ -120,6 +120,7 @@ public enum Keyword {
     REACH("Reach", SimpleKeyword.class, true, "This creature can block creatures with flying."),
     REBOUND("Rebound", SimpleKeyword.class, true, "If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost."),
     RECOVER("Recover", KeywordWithCost.class, false, "When a creature is put into your graveyard from the battlefield, you may pay %s. If you do, return this card from your graveyard to your hand. Otherwise, exile this card."),
+    REFLECT("Reflect", KeywordWithCost.class, false, "As this enters the battlefield, each opponent may pay %s. When they do, they create a token copy of this except it lacks this ability."),
     REINFORCE("Reinforce", KeywordWithCostAndAmount.class, false, "%s, Discard this card: Put {%d:+1/+1 counter} on target creature."),
     RENOWN("Renown", KeywordWithAmount.class, false, "When this creature deals combat damage to a player, if it isn't renowned, put {%d:+1/+1 counter} on it and it becomes renowned."),
     REPLICATE("Replicate", KeywordWithCost.class, false, "As an additional cost to cast this spell, you may pay %s any number of times. If you do, copy it that many times. You may choose new targets for the copies."),
