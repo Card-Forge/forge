@@ -28,6 +28,7 @@ public enum MusicPlaylist {
                     }
                 };
                 filenames = new File(ForgeConstants.MUSIC_DIR + subDir).list(filter);
+                if (filenames == null) filenames = new String[0];
             }
             catch (Exception e) {
                 e.printStackTrace();
