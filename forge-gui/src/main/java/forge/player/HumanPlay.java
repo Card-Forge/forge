@@ -602,7 +602,6 @@ public class HumanPlay {
         final CardZoneTable table = new CardZoneTable();
         if (!manaInputCancelled) {
             for (final Card c : ability.getDelved()) {
-                hostCard.addDelved(c);
                 final ZoneType o = c.getZone().getZoneType();
                 final Card d = game.getAction().exile(c, null);
                 d.setExiledWith(hostCard);
@@ -634,7 +633,13 @@ public class HumanPlay {
                 ability.getHostCard().addConvoked(c);
             }
         }
-        ability.clearTappedForConvoke();
+
+        for (final Card c : ability.getTappedForImprovise()) {
+            c.setTapped(false);
+            if (!manaInputCancelled) {
+                c.tap();
+            }
+        }
 
         if (!table.isEmpty() && !manaInputCancelled) {
             table.triggerChangesZoneAll(game);

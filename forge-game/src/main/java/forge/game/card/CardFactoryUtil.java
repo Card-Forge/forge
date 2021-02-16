@@ -5008,6 +5008,9 @@ public class CardFactoryUtil {
             }
 
             public boolean canPlay() {
+                if (getHostCard().isTapped()) {
+                    return false;
+                }
                 if (!manaCost.canDecreaseShard(shard)) {
                     return false;
                 }
@@ -5048,7 +5051,7 @@ public class CardFactoryUtil {
         return result;
     }
 
-    public static SpellAbility buildImproviseAbility(final Card host, final ManaCostBeingPaid manaCost) {
+    public static SpellAbility buildImproviseAbility(final Card host, final ManaCostBeingPaid manaCost, final SpellAbility saPaidFor) {
         SpellAbility result = new AbilityStatic(host, Cost.Zero, null) {
 
             @Override
@@ -5062,6 +5065,9 @@ public class CardFactoryUtil {
             }
 
             public boolean canPlay() {
+                if (getHostCard().isTapped()) {
+                    return false;
+                }
                 if (!manaCost.canDecreaseShard(ManaCostShard.GENERIC)) {
                     return false;
                 }
@@ -5071,6 +5077,7 @@ public class CardFactoryUtil {
 
             @Override
             public boolean undo() {
+                saPaidFor.removeTappedForImprovise(host);
                 host.setTapped(false);
                 manaCost.increaseGenericMana(1);
                 return true;
@@ -5079,6 +5086,7 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 host.getGame().getTriggerHandler().suppressMode(TriggerType.Taps);
+                saPaidFor.addTappedForImprovise(host);
                 host.setTapped(false);
                 host.tap();
                 manaCost.decreaseGenericMana(1);

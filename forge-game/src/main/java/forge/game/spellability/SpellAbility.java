@@ -138,6 +138,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private List<AbilitySub> chosenList = null;
     private CardCollection tappedForConvoke = new CardCollection();
+    private CardCollection tappedForImprovise = new CardCollection();
     private CardCollection delvedCards = new CardCollection();
 
     private Card sacrificedAsOffering = null;
@@ -1391,6 +1392,19 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void clearTappedForConvoke() {
         tappedForConvoke.clear();
+    }
+
+    public CardCollection getTappedForImprovise() {
+        return tappedForImprovise;
+    }
+    public void addTappedForImprovise(final Card c) {
+        tappedForImprovise.add(c);
+    }
+    public void removeTappedForImprovise(final Card c) {
+        tappedForImprovise.remove(c);
+    }
+    public void clearTappedForImprovise() {
+        tappedForImprovise.clear();
     }
 
     public boolean isEmerge() {

@@ -291,8 +291,6 @@ public class GameAction {
                     }
 
                     copied.clearDevoured();
-                    copied.clearDelved();
-                    copied.clearConvoked();
                     copied.clearExploited();
                 }
 
@@ -512,8 +510,6 @@ public class GameAction {
 
         if (!c.isRealToken() && !toBattlefield) {
             copied.clearDevoured();
-            copied.clearDelved();
-            copied.clearConvoked();
             copied.clearExploited();
         }
 

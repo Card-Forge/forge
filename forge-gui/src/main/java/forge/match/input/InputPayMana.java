@@ -129,7 +129,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 }
 
                 if (saPaidFor.getHostCard().hasKeyword(Keyword.IMPROVISE) && card.isArtifact()) {
-                    specialAbilities.add(CardFactoryUtil.buildImproviseAbility(card, manaCost));
+                    specialAbilities.add(CardFactoryUtil.buildImproviseAbility(card, manaCost, saPaidFor));
                 }
             }
             if (card.isInZone(ZoneType.Graveyard)) {

@@ -96,7 +96,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final KeywordCollection hiddenExtrinsicKeyword = new KeywordCollection();
 
     // cards attached or otherwise linked to this card
-    private CardCollection hauntedBy, devouredCards, exploitedCards, delvedCards, convokedCards, imprintedCards, encodedCards;
+    private CardCollection hauntedBy, devouredCards, exploitedCards, imprintedCards, encodedCards;
     private CardCollection mustBlockCards, gainControlTargets, chosenCards, blockedThisTurn, blockedByThisTurn;
     private CardCollection mergedCards;
 
@@ -913,31 +913,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final CardCollectionView getDelved() {
-        return CardCollection.getView(delvedCards);
-    }
-    public final void addDelved(final Card c) {
-        if (delvedCards == null) {
-            delvedCards = new CardCollection();
+        if (getCastSA() == null) {
+            return CardCollection.EMPTY;
         }
-        delvedCards.add(c);
+        return getCastSA().getDelved();
     }
-
-    public final void clearDelved() {
-        delvedCards = null;
-    }
-
 
     public final CardCollectionView getConvoked() {
-        return CardCollection.getView(convokedCards);
+        if (getCastSA() == null) {
+            return CardCollection.EMPTY;
+        }
+        return getCastSA().getTappedForConvoke();
     }
     public final void addConvoked(final Card c) {
-        if (convokedCards == null) {
-            convokedCards = new CardCollection();
-        }
-        convokedCards.add(c);
     }
     public final void clearConvoked() {
-        convokedCards = null;
     }
 
     public MapOfLists<GameEntity, Object> getRememberMap() {
@@ -5474,7 +5464,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean isMadness() {
-        if (this.getCastSA() == null) {
+        if (getCastSA() == null) {
             return false;
         }
         return getCastSA().isMadness();
@@ -5509,12 +5499,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final boolean isForetold() {
         // in exile and foretold
-        if (this.isInZone(ZoneType.Exile)) {
-            return this.foretold;
+        if (isInZone(ZoneType.Exile)) {
+            return foretold;
         }
         // cast as foretold, currently only spells
-        if (this.getCastSA() != null) {
-            return this.getCastSA().isForetold();
+        if (getCastSA() != null) {
+            return getCastSA().isForetold();
         }
         return false;
     }
