@@ -314,7 +314,7 @@ public class FDeckChooser extends FScreen {
     private void createNewDeck() {
         final FDeckEditor[] editor = new FDeckEditor[1];
         final DeckProxy deck = lstDecks.getSelectedItem();
-        String overlayText = "Loading ";
+        String overlayText = localizer.getMessage("lblLoading");;
         if (selectedDeckType == DeckType.DRAFT_DECK) {
             NewGameScreen.BoosterDraft.open();
             return;
@@ -324,13 +324,13 @@ public class FDeckChooser extends FScreen {
             return;
         }
         if (isGeneratedDeck(selectedDeckType)) {
-            overlayText += "Deck";
+            overlayText += localizer.getMessage("lblDeck");
             if (deck == null) {
                 FOptionPane.showErrorDialog(localizer.getMessage("lblMustSelectGenerateNewDeck"));
                 return;
             }
         } else {
-            overlayText += "Catalog";
+            overlayText += localizer.getMessage("lblCatalog");
         }
         String finalOverlay = overlayText;
         FThreads.invokeInEdtLater(new Runnable() {
