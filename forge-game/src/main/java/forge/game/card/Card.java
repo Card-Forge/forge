@@ -925,10 +925,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         return getCastSA().getTappedForConvoke();
     }
-    public final void addConvoked(final Card c) {
-    }
-    public final void clearConvoked() {
-    }
 
     public MapOfLists<GameEntity, Object> getRememberMap() {
         return rememberMap;

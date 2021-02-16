@@ -630,7 +630,6 @@ public class HumanPlay {
             c.setTapped(false);
             if (!manaInputCancelled) {
                 c.tap();
-                ability.getHostCard().addConvoked(c);
             }
         }
 
