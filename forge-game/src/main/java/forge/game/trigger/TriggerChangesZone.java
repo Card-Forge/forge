@@ -90,7 +90,7 @@ public class TriggerChangesZone extends Trigger {
         }
 
         if (hasParam("ExcludedDestinations")) {
-            if (!ArrayUtils.contains(
+            if (ArrayUtils.contains(
                 getParam("ExcludedDestinations").split(","), runParams.get(AbilityKey.Destination)
             )) {
                 return false;
