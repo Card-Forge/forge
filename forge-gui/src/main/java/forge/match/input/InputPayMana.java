@@ -122,19 +122,25 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             result.removeAll(toRemove);
         }
         if (saPaidFor.isSpell()) {
+            Collection<SpellAbility> specialAbilities = Lists.newArrayList();
             if (card.isInPlay() && card.isUntapped()) {
                 if (saPaidFor.getHostCard().hasKeyword(Keyword.CONVOKE) && card.isCreature()) {
-                    result.addAll(CardFactoryUtil.buildConvokeAbility(card, player, manaCost, saPaidFor));
+                    specialAbilities.addAll(CardFactoryUtil.buildConvokeAbility(card, manaCost, saPaidFor));
                 }
 
                 if (saPaidFor.getHostCard().hasKeyword(Keyword.IMPROVISE) && card.isArtifact()) {
-                    result.add(CardFactoryUtil.buildImproviseAbility(card, player, manaCost));
+                    specialAbilities.add(CardFactoryUtil.buildImproviseAbility(card, manaCost));
                 }
             }
             if (card.isInZone(ZoneType.Graveyard)) {
                 if (saPaidFor.getHostCard().hasKeyword(Keyword.DELVE)) {
-                    result.add(CardFactoryUtil.buildDelveAbility(card, player, manaCost, saPaidFor));
+                    specialAbilities.add(CardFactoryUtil.buildDelveAbility(card, manaCost, saPaidFor));
                 }
+            }
+            // set the activating player
+            for (final SpellAbility sa : specialAbilities) {
+                sa.setActivatingPlayer(player);
+                result.add(sa);
             }
         }
         return result;

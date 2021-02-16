@@ -4994,7 +4994,7 @@ public class CardFactoryUtil {
         card.addReplacementEffect(re);
     }
 
-    public static SpellAbility buildConvokeAbility(final Card host, Player player, final ManaCostShard shard, final ManaCostBeingPaid manaCost, final SpellAbility saPaidFor) {
+    public static SpellAbility buildConvokeAbility(final Card host, final ManaCostShard shard, final ManaCostBeingPaid manaCost, final SpellAbility saPaidFor) {
         SpellAbility result = new AbilityStatic(host, Cost.Zero, null) {
 
             @Override
@@ -5025,33 +5025,30 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                player.getGame().getTriggerHandler().suppressMode(TriggerType.Taps);
+                host.getGame().getTriggerHandler().suppressMode(TriggerType.Taps);
                 saPaidFor.addTappedForConvoke(host);
                 host.setTapped(false);
                 host.tap();
                 manaCost.decreaseShard(shard, 1);
-                player.getGame().getTriggerHandler().clearSuppression(TriggerType.Taps);
+                host.getGame().getTriggerHandler().clearSuppression(TriggerType.Taps);
             }
 
         };
         result.setDescription("Convoke " + shard.toString());
         result.setUndoable(true);
-        result.setActivatingPlayer(player);
         return result;
     }
 
-    public static Collection<SpellAbility> buildConvokeAbility(final Card host, Player player, final ManaCostBeingPaid manaCost, final SpellAbility saPaidFor) {
+    public static Collection<SpellAbility> buildConvokeAbility(final Card host, final ManaCostBeingPaid manaCost, final SpellAbility saPaidFor) {
         List<SpellAbility> result = Lists.newArrayList();
-        for (ManaCostShard shard : host.determineColor().getOrderedShards()) {
-            if (!shard.isOfKind(ManaAtom.COLORLESS)) {
-                result.add(buildConvokeAbility(host, player, shard, manaCost, saPaidFor));
-            }
+        for (byte color : host.determineColor()) {
+            result.add(buildConvokeAbility(host, ManaCostShard.valueOf(color), manaCost, saPaidFor));
         }
-        result.add(buildConvokeAbility(host, player, ManaCostShard.GENERIC, manaCost, saPaidFor));
+        result.add(buildConvokeAbility(host, ManaCostShard.GENERIC, manaCost, saPaidFor));
         return result;
     }
 
-    public static SpellAbility buildImproviseAbility(final Card host, Player player, final ManaCostBeingPaid manaCost) {
+    public static SpellAbility buildImproviseAbility(final Card host, final ManaCostBeingPaid manaCost) {
         SpellAbility result = new AbilityStatic(host, Cost.Zero, null) {
 
             @Override
@@ -5081,21 +5078,20 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                player.getGame().getTriggerHandler().suppressMode(TriggerType.Taps);
+                host.getGame().getTriggerHandler().suppressMode(TriggerType.Taps);
                 host.setTapped(false);
                 host.tap();
                 manaCost.decreaseGenericMana(1);
-                player.getGame().getTriggerHandler().clearSuppression(TriggerType.Taps);
+                host.getGame().getTriggerHandler().clearSuppression(TriggerType.Taps);
             }
 
         };
         result.setDescription("Improvise");
         result.setUndoable(true);
-        result.setActivatingPlayer(player);
         return result;
     }
 
-    public static SpellAbility buildDelveAbility(final Card host, Player player, final ManaCostBeingPaid manaCost, final SpellAbility saPaidFor) {
+    public static SpellAbility buildDelveAbility(final Card host, final ManaCostBeingPaid manaCost, final SpellAbility saPaidFor) {
         SpellAbility result = new AbilityStatic(host, Cost.Zero, null) {
 
             @Override
@@ -5135,7 +5131,6 @@ public class CardFactoryUtil {
         };
         result.setDescription("Delve");
         result.setUndoable(true);
-        result.setActivatingPlayer(player);
         return result;
     }
 }
