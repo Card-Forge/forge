@@ -51,7 +51,11 @@ public class FightAi extends SpellAbilityAi {
 
         // assumes the triggered card belongs to the ai
         if (sa.hasParam("Defined")) {
-            Card fighter1 = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0);
+            CardCollection fighter1List = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
+            if (fighter1List.isEmpty()) {
+                return true;
+            }
+            Card fighter1 = fighter1List.get(0);
             for (Card humanCreature : humCreatures) {
                 if (ComputerUtilCombat.getDamageToKill(humanCreature) <= fighter1.getNetPower()
                         && humanCreature.getNetPower() < ComputerUtilCombat.getDamageToKill(fighter1)) {
