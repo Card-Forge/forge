@@ -702,8 +702,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                     || ((abilityText.indexOf("May be played by") != -1)
                     && (abilityText.indexOf("and as though it has flash") != -1))){
                 if (keywordKey.indexOf("Flashback") == -1) {
-                    hasFlash = !card.isFaceDown();
-                    CardFaceSymbols.drawAbilitySymbol("flash", g, cardXOffset + (cardWidth / 2) + (cardWidth / 3), cardWidth < 200 ? cardYOffset + 25 : cardYOffset + 50, cardWidth / 7, cardWidth / 7);
+                    hasFlash = !card.isFaceDown() && (!ZoneType.Library.equals(card.getZone()) || matchUI.mayView(card));
+                    if (hasFlash) {
+                        CardFaceSymbols.drawAbilitySymbol("flash", g, cardXOffset + (cardWidth / 2) + (cardWidth / 3), cardWidth < 200 ? cardYOffset + 25 : cardYOffset + 50, cardWidth / 7, cardWidth / 7);
+                    }
                 }
             }
         }
