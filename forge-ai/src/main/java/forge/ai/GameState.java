@@ -262,7 +262,12 @@ public abstract class GameState {
             if (c.getPaperCard() == null) {
                 return;
             }
-            newText.append(c.getPaperCard().getName());
+            if (c.getMergedCards().isEmpty()) {
+                newText.append(c.getPaperCard().getName());
+            } else {
+                // we have to go by the current top card name here
+                newText.append(c.getTopMergedCard().getPaperCard().getName());
+            }
         }
         if (c.isCommander()) {
             newText.append("|IsCommander");
@@ -369,10 +374,10 @@ public abstract class GameState {
             if (!c.getMergedCards().isEmpty()) {
                 List<String> mergedCardNames = new ArrayList<>();
                 for (Card merged : c.getMergedCards()) {
-                    if (merged.getId() == c.getId()) {
+                    if (c.getTopMergedCard() == merged) {
                         continue;
                     }
-                    mergedCardNames.add(merged.getName());
+                    mergedCardNames.add(merged.getPaperCard().getName().replace(",", "^"));
                 }
                 newText.append("|MergedCards:").append(TextUtil.join(mergedCardNames, ","));
             }
@@ -1131,7 +1136,7 @@ public abstract class GameState {
             Card mergedTo = entry.getKey();
             for(String mergedCardName : entry.getValue()) {
                 Card c;
-                PaperCard pc = StaticData.instance().getCommonCards().getCard(mergedCardName); // FIXME: is set relevant here?
+                PaperCard pc = StaticData.instance().getCommonCards().getCard(mergedCardName. replace("^", ","));
                 if (pc == null) {
                     System.err.println("ERROR: Tried to create a non-existent card named " + mergedCardName + " (as a merged card) when loading game state!");
                     continue;
