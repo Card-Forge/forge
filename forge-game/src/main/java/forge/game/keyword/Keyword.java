@@ -92,6 +92,7 @@ public enum Keyword {
     LIFELINK("Lifelink", SimpleKeyword.class, true, "Damage dealt by this creature also causes its controller to gain that much life."),
     LIVING_WEAPON("Living weapon", SimpleKeyword.class, true, "When this Equipment enters the battlefield, create a 0/0 black Germ creature token, then attach this to it."),
     MADNESS("Madness", KeywordWithCost.class, false, "If you discard this card, discard it into exile. When you do, cast it for %s  or put it into your graveyard."),
+    MEGALEGENDARY("Megalegendary", SimpleKeyword.class, true, "Your deck can have only one copy of this card."),
     MELEE("Melee", SimpleKeyword.class, false, "Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat."),
     MENTOR("Mentor", SimpleKeyword.class, false, "Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power."),
     MENACE("Menace", SimpleKeyword.class, true, "This creature can't be blocked except by two or more creatures."),
