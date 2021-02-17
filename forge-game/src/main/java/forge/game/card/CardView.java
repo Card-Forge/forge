@@ -1427,16 +1427,21 @@ public class CardView extends GameEntityView {
     }
     void updateMergeCollections(CardCollection cards) {
         TrackableCollection<CardView> views = get(TrackableProperty.MergedCardsCollection);
+        boolean needFlagAsChanged = false;
         if (views == null) {
             views = new TrackableCollection<>();
             set(TrackableProperty.MergedCardsCollection, views);
         } else {
+            if (!views.isEmpty())
+                needFlagAsChanged = true;
             views.clear();
         }
         if (cards != null) {
             for (Card c : cards)
-                views.add(c.getView());
+                if (views.add(c.getView()))
+                    needFlagAsChanged = true;
         }
-        flagAsChanged(TrackableProperty.MergedCardsCollection);
+        if (needFlagAsChanged)
+            flagAsChanged(TrackableProperty.MergedCardsCollection);
     }
 }
