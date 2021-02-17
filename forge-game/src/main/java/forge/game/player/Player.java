@@ -3546,4 +3546,23 @@ public class Player extends GameEntity implements Comparable<Player> {
                 && Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Power-Plant")))
                 && Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Tower")));
     }
+
+    public void revealFaceDownCards() {
+        final List<List<ZoneType>> revealZones = Arrays.asList(Arrays.asList(ZoneType.Battlefield, ZoneType.Merged), Arrays.asList(ZoneType.Exile));
+        final PlayerCollection otherPlayers = new PlayerCollection(game.getRegisteredPlayers());
+        otherPlayers.remove(this);
+
+        for (List<ZoneType> z : revealZones) {
+            CardCollection revealCards = new CardCollection();
+            for (Card c : game.getCardsInOwnedBy(z, this)) {
+                if (!c.isRealFaceDown()) continue;
+
+                Card lki = CardUtil.getLKICopy(c);
+                lki.forceTurnFaceUp();
+                lki.setZone(c.getZone());
+                revealCards.add(lki);
+            }
+            game.getAction().revealTo(revealCards, otherPlayers, Localizer.getInstance().getMessage("lblRevealFaceDownCards"));
+        }
+    }
 }

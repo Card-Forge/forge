@@ -2839,6 +2839,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return facedown;
     }
 
+    public final boolean isRealFaceDown() {
+        return facedown;
+    }
+
     public final void setFaceDown(boolean value) {
         facedown = value;
     }
