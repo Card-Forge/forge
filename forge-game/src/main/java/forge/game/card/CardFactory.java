@@ -565,6 +565,7 @@ public class CardFactory {
         final Map<String,String> origSVars = host.getSVars();
         final List<String> types = Lists.newArrayList();
         final List<String> keywords = Lists.newArrayList();
+        final List<String> removeKeywords = Lists.newArrayList();
         List<String> creatureTypes = null;
         final CardCloneStates result = new CardCloneStates(in, sa);
 
@@ -577,6 +578,10 @@ public class CardFactory {
 
         if (sa.hasParam("AddKeywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("AddKeywords").split(" & ")));
+        }
+
+        if (sa.hasParam("RemoveKeywords")) {
+            removeKeywords.addAll(Arrays.asList(sa.getParam("RemoveKeywords").split(" & ")));
         }
 
         if (sa.hasParam("SetColor")) {
@@ -646,6 +651,9 @@ public class CardFactory {
             }
 
             state.addIntrinsicKeywords(keywords);
+            for (String kw : removeKeywords) {
+                state.removeIntrinsicKeyword(kw);
+            }
 
             if (sa.hasParam("SetPower")) {
                 state.setBasePower(Integer.parseInt(sa.getParam("SetPower")));

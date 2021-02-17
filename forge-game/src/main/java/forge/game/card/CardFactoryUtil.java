@@ -3659,6 +3659,23 @@ public class CardFactoryUtil {
             re.setOverridingAbility(saExile);
 
             inst.addReplacement(re);
+        } else if (keyword.startsWith("Reflect:")) {
+            final String[] k = keyword.split(":");
+
+            final String repeatStr = "DB$ RepeatEach | RepeatPlayers$ Opponent";
+            final String payStr = "DB$ ImmediateTrigger | RememberObjects$ Player.IsRemembered | TriggerDescription$ Copy CARDNAME | "
+                    + "UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True | UnlessCost$ " + k[1];
+            final String copyStr = "DB$ CopyPermanent | Defined$ Self | Controller$ Player.IsRemembered | RemoveKeywords$ Reflect";
+
+            SpellAbility repeatSA = AbilityFactory.getAbility(repeatStr, card);
+            AbilitySub paySA = (AbilitySub) AbilityFactory.getAbility(payStr, card);
+            AbilitySub copySA = (AbilitySub) AbilityFactory.getAbility(copyStr, card);
+
+            repeatSA.setAdditionalAbility("RepeatSubAbility", paySA);
+            paySA.setAdditionalAbility("Execute", copySA);
+
+            ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, repeatSA, false, true, intrinsic, "Card.Self", "");
+            inst.addReplacement(cardre);
         } else if (keyword.startsWith("Riot")) {
             final String choose = "DB$ GenericChoice | AILogic$ Riot | SpellDescription$ Riot";
 

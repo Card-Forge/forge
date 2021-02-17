@@ -89,12 +89,17 @@ public class AltSoundSystem extends Thread {
 
         Mixer.Info selectedMixer = null;
 
-        for (Mixer.Info mixerInfo : AudioSystem.getMixerInfo()) {
-            Mixer mixer = AudioSystem.getMixer(mixerInfo);
-            if (mixer.isLineSupported(info)) {
-                selectedMixer = mixerInfo;
-                break;
+        try {
+            for (Mixer.Info mixerInfo : AudioSystem.getMixerInfo()) {
+                Mixer mixer = AudioSystem.getMixer(mixerInfo);
+                if (mixer.isLineSupported(info)) {
+                    selectedMixer = mixerInfo;
+                    break;
+                }
             }
+        } catch (Exception e) {
+            System.err.println(e.getMessage()); // print a warning but don't crash
+            return;
         }
 
         if (selectedMixer == null)
