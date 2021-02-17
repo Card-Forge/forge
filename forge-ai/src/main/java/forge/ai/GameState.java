@@ -262,11 +262,12 @@ public abstract class GameState {
             if (c.getPaperCard() == null) {
                 return;
             }
-            if (c.getMergedCards().isEmpty()) {
-                newText.append(c.getPaperCard().getName());
-            } else {
+
+            if (!c.getMergedCards().isEmpty()) {
                 // we have to go by the current top card name here
                 newText.append(c.getTopMergedCard().getPaperCard().getName());
+            } else {
+                newText.append(c.getPaperCard().getName());
             }
         }
         if (c.isCommander()) {
