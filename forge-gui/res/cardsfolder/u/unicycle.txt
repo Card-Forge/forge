@@ -1,0 +1,10 @@
+Name:Unicycle
+ManaCost:2
+Types:Artifact Equipment Vehicle
+PT:3/1
+K:Haste
+K:First Strike
+K:Crew:1
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Haste & First Strike | Description$ Equipped creature has first strike and haste.
+Oracle:First Strike, Haste\nEquipped creature has first strike and haste\nEquip {1}\nCrew 1
