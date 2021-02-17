@@ -465,7 +465,7 @@ public enum FSkinImage implements FImage {
             }
         }
         if (texture != null) {
-            if (sourceFile != SourceFile.ICONS) { //just return region for preferred file if not icons file
+            if (sourceFile != SourceFile.ICONS && sourceFile != SourceFile.MANAICONS) { //just return region for preferred file if not icons file
                 textureRegion = new TextureRegion(texture, x, y, w, h);
                 return;
             }
