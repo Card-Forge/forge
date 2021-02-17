@@ -66,7 +66,7 @@ public class FSkin {
                             public void run() {
                                 FSkinFont.deleteCachedFiles(); //delete cached font files so font can be update for new skin
                                 FSkinFont.updateAll();
-                                CardImageRenderer.forceStaticFieldUpdate();
+                                //CardImageRenderer.forceStaticFieldUpdate();
                                 FThreads.invokeInEdtLater(new Runnable() {
                                     @Override
                                     public void run() {
