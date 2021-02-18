@@ -101,6 +101,17 @@ public abstract class CountersAi {
                 }
             });
             choice = ComputerUtilCard.getMostExpensivePermanentAI(boon, null, false);
+        } else if (type.equals("Deathtouch") || type.equals("Double Strike") || type.equals("First Strike")
+                || type.equals("Flying") || type.equals("Hexproof") || type.equals("Indestructible")
+                || type.equals("Lifelink") || type.equals("Menace") || type.equals("Reach")
+                || type.equals("Trample") || type.equals("Vigilance")) {
+            final CardCollection boon = CardLists.filter(list, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    return !c.hasKeyword(Keyword.getInstance(type).getKeyword());
+                }
+            });
+            choice = ComputerUtilCard.getBestCreatureAI(boon);
         } else {
             // The AI really should put counters on cards that can use it.
             // Charge counters on things with Charge abilities, etc. Expand
