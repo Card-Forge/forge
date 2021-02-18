@@ -458,7 +458,7 @@ public class ComputerUtilMana {
                 continue;
             }
             if (ApiType.Mana.equals(trSA.getApi())) {
-                int pAmount = trSA.hasParam("Amount") ? Integer.valueOf(trSA.getParam("Amount")) : 1;
+                int pAmount = AbilityUtils.calculateAmount(trSA.getHostCard(), trSA.getParamOrDefault("Amount",  "1"), trSA);
                 String produced = trSA.getParam("Produced");
                 if (produced.equals("Chosen")) {
                     produced = MagicColor.toShortString(trSA.getHostCard().getChosenColor());
