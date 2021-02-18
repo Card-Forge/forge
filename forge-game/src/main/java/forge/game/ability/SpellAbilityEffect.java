@@ -172,6 +172,8 @@ public abstract class SpellAbilityEffect {
                 }
 
                 sb.append(StringUtils.join(objs, ", "));
+            } else {
+                sb.append(t);
             }
         }
     }
