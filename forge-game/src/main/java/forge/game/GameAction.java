@@ -1756,7 +1756,7 @@ public class GameAction {
                 first.initPlane();
             }
 
-            runOpeningHandActions(first);
+            first =  runOpeningHandActions(first);
             checkStateEffects(true); // why?
 
             // Run Trigger beginning of the game
@@ -1861,8 +1861,10 @@ public class GameAction {
         } while (takesAction != first);
     }
 
-    private void runOpeningHandActions(final Player first) {
+    // Returns the new player to go first
+    private Player runOpeningHandActions(final Player first) {
         Player takesAction = first;
+        Player newFirst = first;
         do {
             List<SpellAbility> usableFromOpeningHand = Lists.newArrayList();
 
@@ -1896,10 +1898,14 @@ public class GameAction {
                 }
 
                 takesAction.getController().playSpellAbilityNoStack(sa, true);
+                if (sa.hasParam("BecomeStartingPlayer")) {
+                    newFirst = takesAction;
+                }
             }
             takesAction = game.getNextPlayerAfter(takesAction);
         } while (takesAction != first);
         // state effects are checked only when someone gets priority
+        return newFirst;
     }
 
     // Invokes given runnable in Game thread pool - used to start game and perform actions from UI (when game-0 waits for input)
