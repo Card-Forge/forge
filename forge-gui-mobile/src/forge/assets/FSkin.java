@@ -210,14 +210,13 @@ public class FSkin {
         final FileHandle f4 = getDefaultSkinFile(ForgeConstants.SPRITE_AVATARS_FILE);
         final FileHandle f5 = getSkinFile(ForgeConstants.SPRITE_AVATARS_FILE);
         final FileHandle f6 = getDefaultSkinFile(SourceFile.OLD_FOILS.getFilename());
-        final FileHandle f7 = getDefaultSkinFile(ForgeConstants.SPRITE_MANAICONS_FILE);
+        final FileHandle f7 = getSkinFile(ForgeConstants.SPRITE_MANAICONS_FILE);
         final FileHandle f8 = getDefaultSkinFile(ForgeConstants.SPRITE_SLEEVES_FILE);
         final FileHandle f9 = getDefaultSkinFile(ForgeConstants.SPRITE_SLEEVES2_FILE);
         final FileHandle f10 = getDefaultSkinFile(ForgeConstants.SPRITE_BORDER_FILE);
         final FileHandle f11 = getSkinFile(ForgeConstants.SPRITE_BUTTONS_FILE);
         final FileHandle f12 = getSkinFile(ForgeConstants.SPRITE_START_FILE);
         final FileHandle f13 = getDefaultSkinFile(ForgeConstants.SPRITE_DECKBOX_FILE);
-        final FileHandle f14 = getSkinFile(ForgeConstants.SPRITE_MANAICONS_FILE);
 
         try {
             textures.put(f1.path(), new Texture(f1));
@@ -238,11 +237,6 @@ public class FSkin {
                 Texture t = new Texture(f7, true);
                 //t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
                 textures.put(f7.path(), t);
-            } //preferred mana icons
-            Pixmap preferredManaIcons = new Pixmap(f7);
-            if (f14.exists()) {
-                textures.put(f14.path(), new Texture(f14, true));
-                preferredManaIcons = new Pixmap(f14);
             }
 
             //hdbuttons
@@ -266,7 +260,6 @@ public class FSkin {
             //load images
             for (FSkinImage image : FSkinImage.values()) {
                 image.load(textures, preferredIcons);
-                image.load(textures, preferredManaIcons);
             }
             for (FSkinTexture texture : FSkinTexture.values()) {
                 if (texture != FSkinTexture.BG_TEXTURE) {
@@ -382,7 +375,6 @@ public class FSkin {
             preferredIcons.dispose();
             pxDefaultAvatars.dispose();
             pxDefaultSleeves.dispose();
-            preferredManaIcons.dispose();
         }
         catch (final Exception e) {
             System.err.println("FSkin$loadFull: Missing a sprite (default icons, "
