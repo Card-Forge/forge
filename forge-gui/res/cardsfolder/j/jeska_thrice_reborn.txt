@@ -2,7 +2,7 @@ Name:Jeska, Thrice Reborn
 ManaCost:2 R
 Types:Legendary Planeswalker Jeska
 Loyalty:0
-K:etbCounter:LOYALTY:Y:no Condition:CARDNAME enters the battlefield with a loyalty counter on it for each time you’ve cast a commander from the command zone this game.
+K:etbCounter:LOYALTY:Y:no Condition:CARDNAME enters the battlefield with a loyalty counter on her for each time you’ve cast a commander from the command zone this game.
 SVar:Y:Count$TotalCommanderCastFromCommandZone
 A:AB$ Effect | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Duration$ UntilYourNextTurn | ValidTgts$ Creature | TgtPrompt$ Choose target creature | AILogic$ Pump | RememberObjects$ Targeted | ReplacementEffects$ TripleCombatDamage | SVars$ DmgTriple,Z | SpellDescription$ Choose target creature. Until your next turn, if that creature would deal combat damage to one of your opponents, it deals triple that damage to that player instead.
 SVar:TripleCombatDamage:Event$ DamageDone | ValidSource$ Creature.IsRemembered | CombatDamage$ True | ValidTarget$ Player.Opponent | ReplaceWith$ DmgTriple | Description$ Choose target creature. Until your next turn, if that creature would deal combat damage to one of your opponents, it deals triple that damage to that player instead.
@@ -13,4 +13,4 @@ SVar:X:Count$xPaid
 AI:RemoveDeck:NonCommander
 Text:CARDNAME can be your commander.
 K:Partner
-Oracle:Jeska, Thrice Reborn enters the battlefield with a loyalty counter on it for each time you've cast a commander from the command zone this game.\n[+0]: Choose target creature. Until your next turn, if that creature would deal combat damage to one of your opponents, it deals triple that damage to that player instead.\n[−X]: Jeska, Thrice Reborn deals X damage to each of up to three targets.\nJeska, Thrice Reborn can be your commander.\nPartner (You can have two commanders if both have partner.)
+Oracle:Jeska, Thrice Reborn enters the battlefield with a loyalty counter on her for each time you've cast a commander from the command zone this game.\n[+0]: Choose target creature. Until your next turn, if that creature would deal combat damage to one of your opponents, it deals triple that damage to that player instead.\n[−X]: Jeska, Thrice Reborn deals X damage to each of up to three targets.\nJeska, Thrice Reborn can be your commander.\nPartner (You can have two commanders if both have partner.)
