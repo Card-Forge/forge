@@ -10,6 +10,7 @@ import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -455,6 +456,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         final CardZoneTable triggerList = new CardZoneTable();
+        GameEntityCounterTable counterTable = new GameEntityCounterTable();
         // changing zones for spells on the stack
         for (final SpellAbility tgtSA : getTargetSpells(sa)) {
             if (!tgtSA.isSpell()) { // Catch any abilities or triggers that slip through somehow
@@ -487,12 +489,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         Player chooser = player;
         if (sa.hasParam("Chooser")) {
-            final String choose = sa.getParam("Chooser");
-            if (choose.equals("Targeted") && sa.getTargets().isTargetingAnyPlayer()) {
-                chooser = sa.getTargets().getFirstTargetedPlayer();
-            } else {
-                chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), choose, sa).get(0);
-            }
+            chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa).get(0);
         }
 
         for (final Card tgtC : tgtCards) {
@@ -708,6 +705,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
 
+                    if (sa.hasParam("WithCountersType")) {
+                        CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                        int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                        movedCard.addCounter(cType, cAmount, player, true, counterTable);
+                    }
+
                     if (sa.hasParam("ExileFaceDown")) {
                         movedCard.turnFaceDown(true);
                     }
@@ -780,6 +783,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         triggerList.triggerChangesZoneAll(game);
+        counterTable.triggerCountersPutAll(game);
 
         // for things like Gaea's Blessing
         if (destination.equals(ZoneType.Library) && sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle"))) {
