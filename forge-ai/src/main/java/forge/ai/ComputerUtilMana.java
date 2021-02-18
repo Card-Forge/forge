@@ -17,6 +17,7 @@ import forge.game.ability.*;
 import forge.game.card.*;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
+import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.mana.ManaPool;
@@ -1804,6 +1805,34 @@ public class ComputerUtilMana {
             }
         }
         return res;
+    }
+
+    // Convoke, Delve, Improvise
+    public static List<SpellAbility> getAIPlayableSpecialAbilities(Card card, Player ai, SpellAbility saPaidFor, ManaCostBeingPaid manaCost) {
+        List<SpellAbility> result = new ArrayList<>();
+        if (saPaidFor.isSpell()) {
+            Collection<SpellAbility> specialAbilities = Lists.newArrayList();
+            if (card.isInPlay() && card.isUntapped()) {
+                if (saPaidFor.getHostCard().hasKeyword(Keyword.CONVOKE) && card.isCreature()) {
+                    specialAbilities.addAll(CardFactoryUtil.buildConvokeAbility(card, manaCost, saPaidFor));
+                }
+
+                if (saPaidFor.getHostCard().hasKeyword(Keyword.IMPROVISE) && card.isArtifact()) {
+                    specialAbilities.add(CardFactoryUtil.buildImproviseAbility(card, manaCost, saPaidFor));
+                }
+            }
+            if (card.isInZone(ZoneType.Graveyard)) {
+                if (saPaidFor.getHostCard().hasKeyword(Keyword.DELVE)) {
+                    specialAbilities.add(CardFactoryUtil.buildDelveAbility(card, manaCost, saPaidFor));
+                }
+            }
+            // set the activating player
+            for (final SpellAbility sa : specialAbilities) {
+                sa.setActivatingPlayer(ai);
+                result.add(sa);
+            }
+        }
+        return result;
     }
 
     private static void handleOfferingsAI(final SpellAbility sa, boolean test, boolean costIsPaid) {
