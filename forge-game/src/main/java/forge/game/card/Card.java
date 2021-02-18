@@ -5342,7 +5342,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         runParams.put(AbilityKey.DefendingPlayer, game.getCombat() != null ? game.getCombat().getDefendingPlayerRelatedTo(source) : null);
         getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
 
-        int excess = damageIn - getLethalDamage();
+        int excess = 0;
+        if (isPlaneswalker()) {
+            excess = damageIn - getCurrentLoyalty();
+        } else if (getDamage() > getLethal()) {
+            // Creature already has lethal damage
+            excess = damageIn;
+        } else {
+            excess = damageIn + getDamage() - getLethal();
+        }
 
         GameEventCardDamaged.DamageType damageType = DamageType.Normal;
         if (isPlaneswalker()) { // 120.3c
