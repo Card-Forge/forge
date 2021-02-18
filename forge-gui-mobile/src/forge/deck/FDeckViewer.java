@@ -74,7 +74,7 @@ public class FDeckViewer extends FScreen {
                 }
                 addItem(item);
             }
-            addItem(new FMenuItem(Localizer.getInstance().getMessage("btnCopyToClipboard"), new FEventHandler() {
+            addItem(new FMenuItem(Localizer.getInstance().getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     copyDeckToClipboard(deckViewer.deck);
