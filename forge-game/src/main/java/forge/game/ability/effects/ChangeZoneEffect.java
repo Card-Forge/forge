@@ -485,6 +485,16 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final long ts = game.getNextTimestamp();
         boolean combatChanged = false;
 
+        Player chooser = player;
+        if (sa.hasParam("Chooser")) {
+            final String choose = sa.getParam("Chooser");
+            if (choose.equals("Targeted") && sa.getTargets().isTargetingAnyPlayer()) {
+                chooser = sa.getTargets().getFirstTargetedPlayer();
+            } else {
+                chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), choose, sa).get(0);
+            }
+        }
+
         for (final Card tgtC : tgtCards) {
             final Card gameCard = game.getCardState(tgtC, null);
             // gameCard is LKI in that case, the card is not in game anymore
@@ -501,7 +511,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblDoYouWantMoveTargetFromOriToDest", CardTranslation.getTranslatedName(gameCard.getName()), Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME), destination.getTranslatedName()));
-            if (optional && !player.getController().confirmAction(sa, null, prompt) )
+            if (optional && !chooser.getController().confirmAction(sa, null, prompt) )
                 continue;
 
             final Zone originZone = game.getZoneOf(gameCard);
