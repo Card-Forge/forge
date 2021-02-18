@@ -67,7 +67,7 @@ public class VGameMenu extends FDropDownMenu {
                 FOptionPane.showMessageDialog(localizer.getMessage("lblNoPlayerPriorityNoDeckListViewed"));
             }
         }));
-        addItem(new FMenuItem(localizer.getMessage("lblAutoYields"), FSkinImage.WARNING, new FEventHandler() {
+        addItem(new FMenuItem(localizer.getMessage("lblAutoYields"), Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 final boolean autoYieldsDisabled = MatchController.instance.getDisableAutoYields();

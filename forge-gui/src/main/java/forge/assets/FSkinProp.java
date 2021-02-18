@@ -188,6 +188,7 @@ public enum FSkinProp {
     ICO_HDPREFERENCE (new int[] {262, 1792, 128, 128}, PropType.BUTTONS),
     ICO_HDIMPORT     (new int[] {2, 1922, 128, 128}, PropType.BUTTONS),
     ICO_HDEXPORT     (new int[] {132, 1922, 128, 128}, PropType.BUTTONS),
+    ICO_HDYIELD      (new int[] {262, 1922, 128, 128}, PropType.BUTTONS),
     ICO_BLANK        (new int[] {2, 2, 2, 2}, PropType.ICON), //safe coords, lower than 2 will cause crash on desktop
     IMG_LANDLOGO     (new int[] {84, 822, 80, 80}, PropType.MANAICONS),
 

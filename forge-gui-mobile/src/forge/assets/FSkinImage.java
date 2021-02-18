@@ -132,6 +132,7 @@ public enum FSkinImage implements FImage {
     HDPREFERENCE (FSkinProp.ICO_HDPREFERENCE, SourceFile.BUTTONS),
     HDIMPORT     (FSkinProp.ICO_HDIMPORT, SourceFile.BUTTONS),
     HDEXPORT     (FSkinProp.ICO_HDEXPORT, SourceFile.BUTTONS),
+    HDYIELD      (FSkinProp.ICO_HDYIELD, SourceFile.BUTTONS),
     BLANK        (FSkinProp.ICO_BLANK, SourceFile.ICONS),
 
     //Achievement Trophies
