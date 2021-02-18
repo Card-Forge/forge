@@ -407,6 +407,7 @@ public class PhaseHandler implements java.io.Serializable {
                     playerTurn.removeKeyword("Skip all combat phases of this turn.");
                     nUpkeepsThisTurn = 0;
                     nMain1sThisTurn = 0;
+                    game.getStack().resetMaxDistinctSources();
 
                     // Rule 514.3
                     givePriorityToPlayer = false;

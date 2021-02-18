@@ -1450,6 +1450,10 @@ public class CardFactoryUtil {
             return doXMath(game.getPhaseHandler().getTurn(), m, c);
         }
 
+        if (sq[0].equals("MaxDistinctOnStack")) {
+            return game.getStack().getMaxDistinctSources();
+        }
+
         //Count$Random.<Min>.<Max>
         if (sq[0].equals("Random")) {
             int min = StringUtils.isNumeric(sq[1]) ? Integer.parseInt(sq[1]) : xCount(c, c.getSVar(sq[1]));

@@ -17,13 +17,8 @@
  */
 package forge.game.zone;
 
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Stack;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import com.esotericsoftware.minlog.Log;
@@ -96,6 +91,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     public final void setFrozen(final boolean frozen0) {
         frozen = frozen0;
     }
+
+    private int maxDistinctSources = 0;
+    public int getMaxDistinctSources() { return maxDistinctSources; }
+    public void resetMaxDistinctSources() { maxDistinctSources = 0; }
 
     public final void reset() {
         clear();
@@ -415,6 +414,18 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         stack.addFirst(si);
         int stackIndex = stack.size() - 1;
+
+        int distinctSources = 0;
+        Set<Integer> sources = new TreeSet<>();
+        for (SpellAbilityStackInstance s : stack) {
+            if (s.isSpell()) {
+                distinctSources += 1;
+            } else {
+                sources.add(s.getSourceCard().getId());
+            }
+        }
+        distinctSources += sources.size();
+        if (distinctSources > maxDistinctSources) maxDistinctSources = distinctSources;
 
         // 2012-07-21 the following comparison needs to move below the pushes but somehow screws up priority
         // When it's down there. That makes absolutely no sense to me, so i'm putting it back for now
