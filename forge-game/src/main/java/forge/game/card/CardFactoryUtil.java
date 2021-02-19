@@ -1980,14 +1980,13 @@ public class CardFactoryUtil {
         for (final Card c : list) {
             // Remove Duplicated types
             final Set<String> creatureTypes = c.getType().getCreatureTypes();
+            if (creatureTypes.contains(CardType.AllCreatureTypes)) {
+                allCreatureType++;
+                continue;
+            }
             for (String creatureType : creatureTypes) {
-                if (creatureType.equals(CardType.AllCreatureTypes)) {
-                    allCreatureType++;
-                }
-                else {
-                    Integer count = map.get(creatureType);
-                    map.put(creatureType, count == null ? 1 : count + 1);
-                }
+                Integer count = map.get(creatureType);
+                map.put(creatureType, count == null ? 1 : count + 1);
             }
         }
 
