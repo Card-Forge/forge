@@ -1,0 +1,10 @@
+Name:Organ Harvest
+ManaCost:B
+Types:Sorcery
+A:SP$ RepeatEach | Cost$ B | RepeatSubAbility$ DBSac | RepeatPlayers$ NonOpponent | ChangeZoneTable$ True | SpellDescription$ Your team may sacrifice any number of creatures. For each creature sacrificed this way, you add {B}{B}.
+SVar:DBSac:DB$ Sacrifice | Defined$ Remembered | Amount$ SacX | References$ SacX | SacValid$ Creature | RememberSacrificed$ True | Optional$ True | SubAbility$ DBMana
+SVar:DBMana:DB$ Mana | Produced$ B | Amount$ ManaX | References$ ManaX | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:SacX:Count$Valid Creature
+SVar:ManaX:Remembered$Amount.Twice
+Oracle:Your team may sacrifice any number of creatures. For each creature sacrificed this way, you add {B}{B}.

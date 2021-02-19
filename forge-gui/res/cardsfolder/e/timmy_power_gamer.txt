@@ -1,0 +1,6 @@
+Name:Timmy, Power Gamer
+ManaCost:2 G G
+Types:Legendary Creature Human Gamer
+PT:1/1
+A:AB$ ChangeZone | Cost$ 4 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ You may put a creature card from your hand onto the battlefield.
+Oracle:{4}: You may put a creature card from your hand onto the battlefield.

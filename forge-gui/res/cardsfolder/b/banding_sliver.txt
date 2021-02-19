@@ -1,0 +1,7 @@
+Name:Banding Sliver
+ManaCost:3 W W
+Types:Creature Sliver
+PT:3/3
+S:Mode$ Continuous | Affected$ Permanent.Sliver | AddKeyword$ Banding | Description$ All Slivers have banding.
+SVar:PlayMain1:TRUE
+Oracle:All Slivers have banding.

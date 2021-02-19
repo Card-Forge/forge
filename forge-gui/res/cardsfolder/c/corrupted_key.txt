@@ -1,0 +1,7 @@
+Name:Corrupted Key
+ManaCost:B
+Types:Artifact Key
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Menace & Deathtouch | IsPresent$ Card.Self+tapped | Description$ As long as CARDNAME is tapped, creatures you control have menace and deathtouch.
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+Oracle:As long as Corrupted Key is tapped, creatures you control have menace and deathtouch.
