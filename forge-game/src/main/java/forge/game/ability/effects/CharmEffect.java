@@ -67,6 +67,7 @@ public class CharmEffect extends SpellAbilityEffect {
 
         boolean repeat = sa.hasParam("CanRepeatModes");
         boolean random = sa.hasParam("Random");
+        boolean limit = sa.hasParam("ActivationLimit");
         boolean oppChooses = "Opponent".equals(sa.getParam("Chooser"));
 
         StringBuilder sb = new StringBuilder();
@@ -96,13 +97,21 @@ public class CharmEffect extends SpellAbilityEffect {
         if (repeat) {
             sb.append(". You may choose the same mode more than once.");
         }
+        if (limit) {
+            int limitNum = AbilityUtils.calculateAmount(source, sa.getParam("ActivationLimit"), sa);
+            if (limitNum == 1) {
+                sb.append(". Activate this ability only once each turn.");
+            } else {
+                sb.append(". Additional code needed in CharmEffect.");
+            }
+        }
 
         if (additionalDesc) {
             sb.append(" ").append(sa.getParam("AdditionalDescription").trim());
         }
 
         if (!list.isEmpty()) {
-            if (!repeat && !additionalDesc) {
+            if (!repeat && !additionalDesc && !limit) {
                 sb.append(" \u2014");
             }
             sb.append("\r\n");
