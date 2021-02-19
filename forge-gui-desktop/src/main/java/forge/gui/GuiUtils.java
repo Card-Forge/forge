@@ -25,11 +25,15 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
+
+import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 
 /**
  * <p>
@@ -66,6 +70,13 @@ public final class GuiUtils {
         } catch (final IOException e) {
             System.err.println("GuiUtils > newFont: can't find \"" + filename + "\"");
         }
+
+        if ("ja-JP".equals(FModel.getPreferences().getPref(FPref.UI_LANGUAGE)) && !ttf.canDisplay('鍮') ||
+            "zh-CN".equals(FModel.getPreferences().getPref(FPref.UI_LANGUAGE)) && !ttf.canDisplay('鹫')) {
+            // Use the system default font if can't display the above character
+            ttf = new JLabel().getFont();
+        }
+
         return ttf;
     }
 

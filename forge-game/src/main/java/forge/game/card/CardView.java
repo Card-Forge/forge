@@ -585,8 +585,6 @@ public class CardView extends GameEntityView {
     }
     public String getText(CardStateView state, HashMap<String, String> translationsText) {
         final StringBuilder sb = new StringBuilder();
-        //final boolean isSplitCard = (state.getState() == CardStateName.LeftSplit);
-
         String tname = "", toracle = "", taltname = "", taltoracle = "";
 
         // If we have translations, use them
@@ -594,37 +592,54 @@ public class CardView extends GameEntityView {
             tname = translationsText.get("name");
             taltname = translationsText.get("altname");
 
-            // Don't translate oracles if the card is a cloned one
-            if (((String) get(TrackableProperty.Cloner)).isEmpty()) {
+            // TODO: Translate for cloned or mutated cards
+            // For now, don't translate oracles if the card is a cloned or mutated
+            if (((String) get(TrackableProperty.Cloner)).isEmpty() &&
+                    ((String) get(TrackableProperty.MergedCards)).isEmpty()) {
                 toracle = translationsText.get("oracle");
                 taltoracle = translationsText.get("altoracle");
             }
         }
 
-        tname = tname.isEmpty() ? state.getName() : tname;
-
         if (isSplitCard()) {
-            taltname = getAlternateState().getName();
-            taltoracle = getAlternateState().getOracleText();
+            tname = tname.isEmpty() ? getLeftSplitState().getName() : tname;
+            taltname = taltname.isEmpty() ? getRightSplitState().getName() : taltname;
+            if (getId() < 0) {
+                toracle = toracle.isEmpty() ? getLeftSplitState().getOracleText() : toracle;
+                taltoracle = taltoracle.isEmpty() ? getRightSplitState().getOracleText() : taltoracle;
+            }
+        } else {
+            tname = tname.isEmpty() ? state.getName() : tname;
+            if (getId() < 0) {
+                toracle = toracle.isEmpty() ? state.getOracleText() : toracle;
+            }
         }
 
         if (getId() < 0) {
-            toracle = toracle.isEmpty() ? state.getOracleText() : toracle;
+            if (isSplitCard() && !toracle.isEmpty()) {
+                sb.append("(").append(tname).append(") ");
+                sb.append(toracle);
+                sb.append("\r\n\r\n");
+                sb.append("(").append(taltname).append(") ");
+                sb.append(taltoracle);
+            } else {
+                sb.append(toracle);
+            }
+            return sb.toString();
+        }
+
+        final String rulesText = state.getRulesText();
+        if (!toracle.isEmpty() && !isFaceDown()) {
             if (isSplitCard()) {
                 sb.append("(").append(tname).append(") ");
                 sb.append(toracle);
                 sb.append("\r\n\r\n");
                 sb.append("(").append(taltname).append(") ");
                 sb.append(taltoracle);
-                return sb.toString().trim();
             } else {
-                return toracle;
+                sb.append(toracle);
             }
-        }
-
-        final String rulesText = state.getRulesText();
-        if (!toracle.isEmpty()) {
-            sb.append(toracle).append("\r\n\r\n");
+            sb.append("\r\n\r\n");
         } else if (!rulesText.isEmpty()) {
             sb.append(rulesText).append("\r\n\r\n");
         }
@@ -633,23 +648,15 @@ public class CardView extends GameEntityView {
             sb.append(getOwner().getCommanderInfo(this)).append("\r\n");
         }
 
-        if (isSplitCard() && !isFaceDown()) {
-            // TODO: Translation?
-            if (getZone() != ZoneType.Stack) {
-                sb.append("(");
-                sb.append(getLeftSplitState().getName());
-                sb.append(") ");
+        if (toracle.isEmpty()) {
+            if (isSplitCard() && !isFaceDown() && getZone() != ZoneType.Stack) {
+                sb.append("(").append(getLeftSplitState().getName()).append(") ");
                 sb.append(getLeftSplitState().getAbilityText());
-            }  else {
+                sb.append("\r\n\r\n").append("(").append(getRightSplitState().getName()).append(") ");
+                sb.append(getRightSplitState().getAbilityText());
+            } else {
                 sb.append(state.getAbilityText());
             }
-        } else {
-            if (toracle.isEmpty()) sb.append(state.getAbilityText());
-        }
-
-        if (isSplitCard() && !isFaceDown() && getZone() != ZoneType.Stack) {
-            //ensure ability text for right half of split card is included unless spell is on stack
-            sb.append("\r\n\r\n").append("(").append(taltname).append(") ").append(taltoracle);
         }
 
         String nonAbilityText = get(TrackableProperty.NonAbilityText);

@@ -77,7 +77,7 @@ public class FSkinFont {
     //pre-load all supported font sizes
     public static void preloadAll(String language) {
         //todo:really check the language glyph is a lot
-        MAX_FONT_SIZE = (language.equals("zh-CN")) ? MAX_FONT_SIZE_MANY_GLYPHS : MAX_FONT_SIZE_LESS_GLYPHS;
+        MAX_FONT_SIZE = (language.equals("zh-CN") || language.equals("ja-JP")) ? MAX_FONT_SIZE_MANY_GLYPHS : MAX_FONT_SIZE_LESS_GLYPHS;
         for (int size = MIN_FONT_SIZE; size <= MAX_FONT_SIZE; size++) {
             _get(size);
         }

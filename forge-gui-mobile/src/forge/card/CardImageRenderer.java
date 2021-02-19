@@ -276,7 +276,8 @@ public class CardImageRenderer {
             g.drawImage(image, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize, iconSize);
         }
         else {
-            final String text = card.getText(state, CardTranslation.getTranslationTexts(state.getName(), ""));
+            final String text = !card.isSplitCard() ? card.getText(state, CardTranslation.getTranslationTexts(state.getName(), "")) :
+                card.getText(state, CardTranslation.getTranslationTexts(card.getLeftSplitState().getName(), card.getRightSplitState().getName()));
             if (StringUtils.isEmpty(text)) { return; }
 
             float padding = TEXT_FONT.getCapHeight() * 0.75f;
