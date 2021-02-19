@@ -1537,11 +1537,11 @@ public class AiController {
             top = game.getStack().peekAbility();
         }
         final boolean topOwnedByAI = top != null && top.getActivatingPlayer().equals(player);
+        final boolean mustRespond = top != null && top.hasParam("AIRespondsToOwnAbility");
 
         if (topOwnedByAI) {
             // AI's own spell: should probably let my stuff resolve first, but may want to copy the SA or respond to it
             // in a scripted timed fashion.
-            final boolean mustRespond = top.hasParam("AIRespondsToOwnAbility");
 
             if (!mustRespond) {
                 saList = ComputerUtilAbility.getSpellAbilities(cards, player); // get the SA list early to check for copy SAs
@@ -1566,6 +1566,10 @@ public class AiController {
         }
 
         SpellAbility chosenSa = chooseSpellAbilityToPlayFromList(saList, true);
+
+        if (topOwnedByAI && !mustRespond && chosenSa != ComputerUtilAbility.getFirstCopySASpell(saList)) {
+            return null; // not planning to copy the spell and not marked as something the AI would respond to
+        }
 
         return chosenSa;
     }
