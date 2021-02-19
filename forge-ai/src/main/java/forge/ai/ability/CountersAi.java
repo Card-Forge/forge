@@ -98,7 +98,7 @@ public abstract class CountersAi {
             });
             choice = ComputerUtilCard.getMostExpensivePermanentAI(boon, null, false);
         } else if (CounterType.get(type).isKeywordCounter()) {
-            choice = ComputerUtilCard.getBestCreatureAI(CardLists.getNotKeyword(list, Keyword.getInstance(type).getKeyword()));
+            choice = ComputerUtilCard.getBestCreatureAI(CardLists.getNotKeyword(list, type));
         } else {
             // The AI really should put counters on cards that can use it.
             // Charge counters on things with Charge abilities, etc. Expand
