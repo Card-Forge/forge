@@ -1252,6 +1252,9 @@ public abstract class GameState {
                 zone.setCards(kv.getValue());
             }
         }
+        for (Card cmd : p.getCommanders()) {
+            p.getZone(ZoneType.Command).add(Player.createCommanderEffect(p.getGame(), cmd));
+        }
     }
 
     /**
@@ -1334,10 +1337,8 @@ public abstract class GameState {
                     c.setExiledWith(c); // This seems to be the way it's set up internally. Potentially not needed here?
                     c.setExiledBy(c.getController());
                 } else if (info.startsWith("IsCommander")) {
-                    // TODO: This doesn't seem to properly restore the ability to play the commander. Why?
                     c.setCommander(true);
                     player.setCommanders(Lists.newArrayList(c));
-                    player.getZone(ZoneType.Command).add(Player.createCommanderEffect(player.getGame(), c));
                 } else if (info.startsWith("Id:")) {
                     int id = Integer.parseInt(info.substring(3));
                     idToCard.put(id, c);
