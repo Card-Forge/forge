@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ CastWithFlash | ValidCard$ Card.Self | ValidSA$ Spell | EffectZone$ All | Caster$ You | Targeting$ Card.Commander | Description$ You may cast this spell as though it had flash if it targets a commander.
+S:Mode$ CastWithFlash | ValidCard$ Card.Self | ValidSA$ Spell | EffectZone$ All | Caster$ You | Targeting$ Card.IsCommander | Description$ You may cast this spell as though it had flash if it targets a commander.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Indestructible | Description$ Enchanted creature has indestructible.
 AI:RemoveDeck:All
 Oracle:You may cast this spell as though it had flash if it targets a commander.\nEnchant creature\nEnchanted creature has indestructible.
