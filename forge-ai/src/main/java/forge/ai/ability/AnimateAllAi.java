@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.player.Player;
