@@ -3,7 +3,7 @@ Code=HTR18
 Date=2019-08-01
 Name=2018 Heroes of the Realm
 Code2=HTR18
-MciCode=htr
+MciCode=htr18
 Type=Other
 
 [cards]
