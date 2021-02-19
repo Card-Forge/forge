@@ -420,27 +420,32 @@ public class VPlayerPanel extends FContainer {
             adjustHeight = 1;
             if(Forge.altPlayerLayout && Forge.isLandscapeMode()) {
                 if (poisonCounters == 0 && energyCounters == 0 && experienceCounters == 0) {
-                    g.drawOutlinedText(lifeStr, INFO2_FONT, INFO_FORE_COLOR.getColor(), Color.BLACK, 0, 0, getWidth(), getHeight(), false, Align.left, false);
+                    g.fillRect(Color.DARK_GRAY, 0, 0, INFO2_FONT.getBounds(lifeStr).width+1, INFO2_FONT.getBounds(lifeStr).height+1);
+                    g.drawText(lifeStr, INFO2_FONT, INFO_FORE_COLOR.getColor(), 0, 0, getWidth(), getHeight(), false, Align.left, false);
                 } else {
                     float halfHeight = getHeight() / 2;
                     float textStart = halfHeight + Utils.scale(1);
                     float textWidth = getWidth() - textStart;
                     int mod = 1;
+                    g.fillRect(Color.DARK_GRAY, 0, 0, INFO_FONT.getBounds(lifeStr).width+halfHeight+1, INFO_FONT.getBounds(lifeStr).height+1);
                     g.drawImage(FSkinImage.QUEST_LIFE, 0, 0, halfHeight, halfHeight);
-                    g.drawOutlinedText(lifeStr, INFO_FONT, INFO_FORE_COLOR.getColor(), Color.BLACK, textStart, 0, textWidth, halfHeight, false, Align.left, false);
+                    g.drawText(lifeStr, INFO_FONT, INFO_FORE_COLOR.getColor(), textStart, 0, textWidth, halfHeight, false, Align.left, false);
                     if (poisonCounters > 0) {
+                        g.fillRect(Color.DARK_GRAY, 0, halfHeight+2, INFO_FONT.getBounds(String.valueOf(poisonCounters)).width+halfHeight+1, INFO_FONT.getBounds(String.valueOf(poisonCounters)).height+1);
                         g.drawImage(FSkinImage.POISON, 0, halfHeight+2, halfHeight, halfHeight);
-                        g.drawOutlinedText(String.valueOf(poisonCounters), INFO_FONT, INFO_FORE_COLOR.getColor(), Color.BLACK, textStart, halfHeight+2, textWidth, halfHeight, false, Align.left, false);
+                        g.drawText(String.valueOf(poisonCounters), INFO_FONT, INFO_FORE_COLOR.getColor(), textStart, halfHeight+2, textWidth, halfHeight, false, Align.left, false);
                         mod+=1;
                     }
                     if (energyCounters > 0) {
+                        g.fillRect(Color.DARK_GRAY, 0, (halfHeight*mod)+2, INFO_FONT.getBounds(String.valueOf(energyCounters)).width+halfHeight+1, INFO_FONT.getBounds(String.valueOf(energyCounters)).height+1);
                         g.drawImage(FSkinImage.ENERGY, 0, (halfHeight*mod)+2, halfHeight, halfHeight);
-                        g.drawOutlinedText(String.valueOf(energyCounters), INFO_FONT, INFO_FORE_COLOR.getColor(), Color.BLACK, textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
+                        g.drawText(String.valueOf(energyCounters), INFO_FONT, INFO_FORE_COLOR.getColor(), textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
                         mod+=1;
                     }
                     if (experienceCounters > 0) {
+                        g.fillRect(Color.DARK_GRAY, 0, (halfHeight*mod)+2, INFO_FONT.getBounds(String.valueOf(experienceCounters)).width+halfHeight+1, INFO_FONT.getBounds(String.valueOf(experienceCounters)).height+1);
                         g.drawImage(FSkinImage.COMMANDER, 0, (halfHeight*mod)+2, halfHeight, halfHeight);
-                        g.drawOutlinedText(String.valueOf(experienceCounters), INFO_FONT, INFO_FORE_COLOR.getColor(), Color.BLACK, textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
+                        g.drawText(String.valueOf(experienceCounters), INFO_FONT, INFO_FORE_COLOR.getColor(), textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
                         mod+=1;
                     }
                     adjustHeight = (mod > 2) && (avatar.getHeight() < halfHeight*mod)? mod : 1;
