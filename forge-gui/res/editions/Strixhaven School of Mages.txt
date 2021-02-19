@@ -1,5 +1,5 @@
 [metadata]
-Code=KHM
+Code=STX
 Date=2021-04-23
 Name=Strixhaven: School of Mages
 Code2=STX
