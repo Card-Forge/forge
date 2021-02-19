@@ -310,6 +310,8 @@ public abstract class GameState {
                 newText.append("|Flipped");
             } else if (c.getCurrentStateName().equals(CardStateName.Meld)) {
                 newText.append("|Meld");
+            } else if (c.getCurrentStateName().equals(CardStateName.Modal)) {
+                newText.append("|Modal");
             }
             if (c.isAttachedToEntity()) {
                 newText.append("|AttachedTo:").append(c.getEntityAttachedTo().getId());
@@ -1252,6 +1254,9 @@ public abstract class GameState {
                 zone.setCards(kv.getValue());
             }
         }
+        for (Card cmd : p.getCommanders()) {
+            p.getZone(ZoneType.Command).add(Player.createCommanderEffect(p.getGame(), cmd));
+        }
     }
 
     /**
@@ -1322,7 +1327,10 @@ public abstract class GameState {
                     c.setState(CardStateName.Flipped, true);
                 } else if (info.startsWith("Meld")) {
                     c.setState(CardStateName.Meld, true);
-                } else if (info.startsWith("OnAdventure")) {
+                } else if (info.startsWith("Modal")) {
+                    c.setState(CardStateName.Modal, true);
+                } 
+                else if (info.startsWith("OnAdventure")) {
                     String abAdventure = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ExileOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.nonCopiedSpell";
                     AbilitySub saAdventure = (AbilitySub)AbilityFactory.getAbility(abAdventure, c);
                     StringBuilder sbPlay = new StringBuilder();
@@ -1334,10 +1342,8 @@ public abstract class GameState {
                     c.setExiledWith(c); // This seems to be the way it's set up internally. Potentially not needed here?
                     c.setExiledBy(c.getController());
                 } else if (info.startsWith("IsCommander")) {
-                    // TODO: This doesn't seem to properly restore the ability to play the commander. Why?
                     c.setCommander(true);
                     player.setCommanders(Lists.newArrayList(c));
-                    player.getZone(ZoneType.Command).add(Player.createCommanderEffect(player.getGame(), c));
                 } else if (info.startsWith("Id:")) {
                     int id = Integer.parseInt(info.substring(3));
                     idToCard.put(id, c);
