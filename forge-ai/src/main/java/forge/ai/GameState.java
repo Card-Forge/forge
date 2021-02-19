@@ -310,6 +310,8 @@ public abstract class GameState {
                 newText.append("|Flipped");
             } else if (c.getCurrentStateName().equals(CardStateName.Meld)) {
                 newText.append("|Meld");
+            } else if (c.getCurrentStateName().equals(CardStateName.Modal)) {
+                newText.append("|Modal");
             }
             if (c.isAttachedToEntity()) {
                 newText.append("|AttachedTo:").append(c.getEntityAttachedTo().getId());
@@ -1322,7 +1324,10 @@ public abstract class GameState {
                     c.setState(CardStateName.Flipped, true);
                 } else if (info.startsWith("Meld")) {
                     c.setState(CardStateName.Meld, true);
-                } else if (info.startsWith("OnAdventure")) {
+                } else if (info.startsWith("Modal")) {
+                    c.setState(CardStateName.Modal, true);
+                } 
+                else if (info.startsWith("OnAdventure")) {
                     String abAdventure = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ExileOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.nonCopiedSpell";
                     AbilitySub saAdventure = (AbilitySub)AbilityFactory.getAbility(abAdventure, c);
                     StringBuilder sbPlay = new StringBuilder();
