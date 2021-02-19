@@ -288,7 +288,7 @@ public class AnimateAi extends SpellAbilityAi {
                 // evaluate their value to check if it becomes better
                 if (c.isCreature()) {
                     int cValue = ComputerUtilCard.evaluateCreature(c);
-                    if (cValue <= aValue)
+                    if (cValue >= aValue)
                         continue;
                 }
 
