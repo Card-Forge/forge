@@ -16,7 +16,6 @@ SVar:DBClone:DB$ Clone | Defined$ ChosenCard | SubAbility$ DBClearChosen
 SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True
 SVar:X:Count$xPaid
 SVar:PlayMain1:TRUE
-SVar:OblivionRing:TRUE
 AlternateMode:Modal
 Oracle: When Valki enters the battlefield, each opponent reveals their hand. For each opponent, exile a creature card they revealed this way until Valki leaves the battlefield.\n{X}: Choose a creature card exiled with Valki with converted mana cost X. Valki becomes a copy of that card.
 
