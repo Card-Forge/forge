@@ -7,4 +7,5 @@ SVar:DBLoot:DB$ Draw | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a pla
 SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 2 | Mode$ TgtChoose
 SVar:DBTreasure:DB$ Token | ValidTgts$ Player | TgtPrompt$ Select target player | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Target player creates a Treasure token.
 SVar:DBShatter:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Destroy target artifact.
+DeckHas:Ability$Token
 Oracle:Choose two--\n• Prismari Command deals 2 damage to any target.\nTarget player draws two cards, then discards two cards.\nTarget player creates a Treasure token.\nDestroy target artifact.
