@@ -472,13 +472,13 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
                             FTextureRegionImage avatar1 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j]));
                             FTextureRegionImage avatar2 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j + 1]));
 
-                            FLabel PlayerA = add(new FLabel.Builder().icon(avatar1).iconScaleAuto(true).build());
-                            FLabel PlayerB = add(new FLabel.Builder().icon(avatar2).iconScaleAuto(true).build());
+                            FLabel PlayerA = add(new FLabel.Builder().icon(avatar1).build());
+                            FLabel PlayerB = add(new FLabel.Builder().icon(avatar2).build());
 
                             if (currentMatch) {
-                                float avatarWidth = w / 4;
-                                PlayerA.setBounds(0, 0, avatarWidth, avatarWidth);
-                                PlayerB.setBounds(w - PlayerA.getAutoSizeBounds().width, 0, avatarWidth, avatarWidth);
+                                float avatarSize = FSkinFont.get(20).getLineHeight()*4;
+                                PlayerA.setBounds(PADDING*2, 0, avatarSize, avatarSize);
+                                PlayerB.setBounds(width - avatarSize - PADDING, 0, avatarSize, avatarSize);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
