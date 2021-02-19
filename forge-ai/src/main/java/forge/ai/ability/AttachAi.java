@@ -1362,7 +1362,7 @@ public class AttachAi extends SpellAbilityAi {
         if (c != null && attachSource.isEquipment()
                 && attachSource.isEquipping()
                 && attachSource.getEquipping().getController() == aiPlayer) {
-            if (c.equals(attachSource.getEquipping())) {
+            if (c.equals(attachSource.getEquipping()) && !mandatory) {
                 // Do not equip if equipping the same card already
                 return null;
             }
@@ -1373,13 +1373,13 @@ public class AttachAi extends SpellAbilityAi {
 
             boolean uselessCreature = ComputerUtilCard.isUselessCreature(aiPlayer, attachSource.getEquipping());
 
-            if (aic.getProperty(AiProps.MOVE_EQUIPMENT_TO_BETTER_CREATURES).equals("never")) {
+            if (aic.getProperty(AiProps.MOVE_EQUIPMENT_TO_BETTER_CREATURES).equals("never") && !mandatory) {
                 // Do not equip other creatures if the AI profile does not allow moving equipment around
                 return null;
             } else if (aic.getProperty(AiProps.MOVE_EQUIPMENT_TO_BETTER_CREATURES).equals("from_useless_only")) {
                 // Do not equip other creatures if the AI profile only allows moving equipment from useless creatures
                 // and the equipped creature is still useful (not non-untapping+tapped and not set to can't attack/block)
-                if (!uselessCreature) {
+                if (!uselessCreature && !mandatory) {
                     return null;
                 }
             }
@@ -1395,13 +1395,13 @@ public class AttachAi extends SpellAbilityAi {
             }
 
             // avoid randomly moving the equipment back and forth between several creatures in one turn
-            if (AiCardMemory.isRememberedCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ATTACHED_THIS_TURN)) {
+            if (AiCardMemory.isRememberedCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ATTACHED_THIS_TURN) && !mandatory) {
                 return null;
             }
 
             // do not equip if the new creature is not significantly better than the previous one (evaluates at least better by evalT)
             int evalT = aic.getIntProperty(AiProps.MOVE_EQUIPMENT_CREATURE_EVAL_THRESHOLD);
-            if (!decideMoveFromUseless && ComputerUtilCard.evaluateCreature(c) - ComputerUtilCard.evaluateCreature(attachSource.getEquipping()) < evalT) {
+            if (!decideMoveFromUseless && ComputerUtilCard.evaluateCreature(c) - ComputerUtilCard.evaluateCreature(attachSource.getEquipping()) < evalT && !mandatory) {
                 return null;
             }
         }
