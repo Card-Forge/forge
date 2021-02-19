@@ -8,5 +8,6 @@ SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.nonCreature+nonLand+cmcLE2 | T
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -1 | SpellDescription$ Target creature gets -3/-1 until end of turn.
 SVar:DBLoseLife:DB$ LoseLife | ValidTgts$ Player.Opponent | TgtPrompt$ Select target opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 2 life and you gain 2 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+DeckHas:Ability$LifeGain
 Oracle:Choose two —\n• Target player mills three cards, then you return a land card from your graveyard to your hand.\n• Destroy target noncreature, nonland permanent with mana value 2 or less.\n• Target creature gets -3/-1 until end of turn.\n• Target opponent loses 2 life and you gain 2 life.
 
