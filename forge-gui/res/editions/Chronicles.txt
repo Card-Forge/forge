@@ -8,6 +8,7 @@ Type=Reprint
 Border=White
 BoosterCovers=1
 Booster=9 Common, 3 UncommonRare
+BoosterBox=45
 Foil=NotSupported
 
 [cards]

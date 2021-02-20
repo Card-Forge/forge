@@ -36,7 +36,10 @@ public class BoosterBox extends BoxedProduct {
     public static final Function<CardEdition, BoosterBox> FN_FROM_SET = new Function<CardEdition, BoosterBox>() {
         @Override
         public BoosterBox apply(final CardEdition arg1) {
-            BoosterBox.Template d = StaticData.instance().getBoosterBoxes().get(arg1.getCode());
+            if (arg1.getBoosterBoxCount() <= 0) {
+                return null;
+            }
+            BoosterBox.Template d = new Template(arg1);
             if (d == null) { return null; }
             return new BoosterBox(arg1.getName(), d, d.cntBoosters);
         }
@@ -72,40 +75,13 @@ public class BoosterBox extends BoxedProduct {
     public static class Template extends SealedProduct.Template {
         private final int cntBoosters;
 
-
         public int getCntBoosters() { return cntBoosters; }
 
-        private Template(String edition, int boosters, Iterable<Pair<String, Integer>> itrSlots)
-        {
-            super(edition, itrSlots);
-            cntBoosters = boosters;
+        private Template(CardEdition edition) {
+            super(edition.getCode(), new ArrayList<>());
+            cntBoosters = edition.getBoosterBoxCount();
         }
 
-        public static final class Reader extends StorageReaderFile<Template> {
-            public Reader(String pathname) {
-                super(pathname, FN_GET_NAME);
-            }
-
-            @Override
-            protected Template read(String line, int i) {
-                String[] headAndData = TextUtil.split(line, ':', 2);
-                final String edition = headAndData[0];
-                final String[] data = TextUtil.splitWithParenthesis(headAndData[1], ',');
-                int nBoosters = 6;
-
-                List<Pair<String, Integer>> slots = new ArrayList<>();
-                for(String slotDesc : data) {
-                    String[] kv = TextUtil.split(slotDesc, ' ', 2);
-                    if (kv[1].startsWith("Booster"))
-                        nBoosters = Integer.parseInt(kv[0]);
-                    else
-                        slots.add(ImmutablePair.of(kv[1], Integer.parseInt(kv[0])));
-                }
-
-                return new BoosterBox.Template(edition, nBoosters, slots);
-            }
-        }
-        
         @Override
         public String toString() {
             if (0 >= cntBoosters) {

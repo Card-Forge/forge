@@ -6,6 +6,7 @@ MciCode=mm3
 Type=Reprint
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 RareMythic
+BoosterBox=24
 FoilChanceInBooster=100
 ChaosDraftThemes=MASTERS_SET;GRAVEYARD_MATTERS
 

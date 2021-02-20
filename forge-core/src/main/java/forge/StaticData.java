@@ -149,17 +149,12 @@ public class StaticData {
         }
     }
 
+    // TODO Remove these in favor of them being associated to the Edition
     /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */
     public IStorage<FatPack.Template> getFatPacks() {
         if (fatPacks == null)
             fatPacks = new StorageBase<>("Fat packs", new FatPack.Template.Reader(blockDataFolder + "fatpacks.txt"));
         return fatPacks;
-    }
-
-    public IStorage<BoosterBox.Template> getBoosterBoxes() {
-        if (boosterBoxes == null)
-            boosterBoxes = new StorageBase<>("Booster boxes", new BoosterBox.Template.Reader(blockDataFolder + "boosterboxes.txt"));
-        return boosterBoxes;
     }
 
     /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */
