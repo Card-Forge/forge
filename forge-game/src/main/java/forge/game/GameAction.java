@@ -1199,7 +1199,8 @@ public class GameAction {
                     checkAgain = true;
                 }
 
-                if (game.getRules().hasAppliedVariant(GameType.Commander) && !checkAgain) {
+                if ((game.getRules().hasAppliedVariant(GameType.Commander)
+                        || game.getRules().hasAppliedVariant(GameType.Planeswalker)) && !checkAgain) {
                     Iterable<Card> cards = p.getCardsIn(ZoneType.Graveyard).threadSafeIterable();
                     for (final Card c : cards) {
                         checkAgain |= stateBasedAction903_9a(c);
