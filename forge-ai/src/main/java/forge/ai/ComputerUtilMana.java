@@ -1241,7 +1241,7 @@ public class ComputerUtilMana {
                     choice = abMana.getExpressChoice();
                     abMana.clearExpressChoice();
                     byte colorMask = ManaAtom.fromName(choice);
-                    if (manaAb.canProduce(choice) && testCost.isAnyPartPayableWith(colorMask, ai.getManaPool())) {
+                    if (manaAb.canProduce(choice) && satisfiesColorChoice(abMana, choiceString, choice) && testCost.isAnyPartPayableWith(colorMask, ai.getManaPool())) {
                         choiceString.append(choice);
                         payMultipleMana(testCost, choice, ai);
                         continue;
@@ -1251,7 +1251,7 @@ public class ComputerUtilMana {
                 if (!testCost.isPaid()) {
                     // Loop over combo colors
                     for (String color : comboColors) {
-                        if (testCost.isAnyPartPayableWith(ManaAtom.fromName(color), ai.getManaPool())) {
+                        if (satisfiesColorChoice(abMana, choiceString, choice) && testCost.isAnyPartPayableWith(ManaAtom.fromName(color), ai.getManaPool())) {
                             payMultipleMana(testCost, color, ai);
                             if (nMana != 1) {
                                 choiceString.append(" ");
@@ -1266,14 +1266,18 @@ public class ComputerUtilMana {
                     }
                 }
                 // check if combo mana can produce most common color in hand
-                String commonColor = ComputerUtilCard.getMostProminentColor(ai.getCardsIn(
-                        ZoneType.Hand));
-                if (!commonColor.isEmpty() && abMana.getComboColors().contains(MagicColor.toShortString(commonColor))) {
+                String commonColor = ComputerUtilCard.getMostProminentColor(ai.getCardsIn(ZoneType.Hand));
+                if (!commonColor.isEmpty() && satisfiesColorChoice(abMana, choiceString, MagicColor.toShortString(commonColor)) && abMana.getComboColors().contains(MagicColor.toShortString(commonColor))) {
                     choice = MagicColor.toShortString(commonColor);
                 }
                 else {
-                    // default to first color
-                    choice = comboColors[0];
+                    // default to first available color
+                    for (String c : comboColors) {
+                        if (satisfiesColorChoice(abMana, choiceString, c)) {
+                            choice = c;
+                            break;
+                        }
+                    }
                 }
                 if (nMana != 1) {
                     choiceString.append(" ");
@@ -1286,6 +1290,10 @@ public class ComputerUtilMana {
         }
 
         abMana.setExpressChoice(choiceString.toString());
+    }
+
+    private static boolean satisfiesColorChoice(AbilityManaPart abMana, StringBuilder choices, String choice) {
+        return !abMana.getOrigProduced().contains("Different") || !choices.toString().contains(choice);
     }
 
     /**

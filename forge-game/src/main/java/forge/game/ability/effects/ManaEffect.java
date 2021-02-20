@@ -72,14 +72,16 @@ public class ManaEffect extends SpellAbilityEffect {
                         choice = colorsProduced[differentChoice ? nMana : 0];
                     } else {
                         byte chosenColor = p.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa,
-                                differentChoice ? fullOptions : colorOptions);
+                                differentChoice && (colorsNeeded == null || colorsNeeded.length <= nMana) ? fullOptions : colorOptions);
                         if (chosenColor == 0)
                             throw new RuntimeException("ManaEffect::resolve() /*combo mana*/ - " + p + " color mana choice is empty for " + card.getName());
-                        
-                        fullOptions = ColorSet.fromMask(fullOptions.getMyColor() - chosenColor);
+
+                        if (differentChoice) {
+                            fullOptions = ColorSet.fromMask(fullOptions.getColor() - chosenColor);
+                        }
                         choice = MagicColor.toShortString(chosenColor);
                     }
-                    
+
                     if (nMana > 0) {
                         choiceString.append(" ");
                     }
