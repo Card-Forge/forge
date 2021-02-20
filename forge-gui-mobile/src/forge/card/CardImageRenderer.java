@@ -379,34 +379,40 @@ public class CardImageRenderer {
                 minusxy = 0.135f*radius;
             }
             if (rotatePlane && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane())) {
-                if (Forge.enableUIMask){
+                if (Forge.enableUIMask.equals("Full")){
                     if (ImageCache.isBorderlessCardArt(image))
                         g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
                     else {
                         g.drawRotatedImage(FSkin.getBorders().get(0), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
                         g.drawRotatedImage(ImageCache.croppedBorderImage(image), new_x+radius/2-minusxy, new_y+radius/2-minusxy, new_w*croppedArea, new_h*croppedArea, (new_x+radius/2-minusxy) + (new_w*croppedArea) / 2, (new_y+radius/2-minusxy) + (new_h*croppedArea) / 2, -90);
                     }
+                } else if (Forge.enableUIMask.equals("Crop")) {
+                    g.drawRotatedImage(ImageCache.croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
                 } else
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
             } else if (rotateSplit && isCurrentCard && card.isSplitCard() && canshow) {
                 boolean isAftermath = card.getText().contains("Aftermath") || card.getAlternateState().getOracleText().contains("Aftermath");
-                if (Forge.enableUIMask) {
+                if (Forge.enableUIMask.equals("Full")) {
                     if (ImageCache.isBorderlessCardArt(image))
                         g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
                     else {
                         g.drawRotatedImage(FSkin.getBorders().get(ImageCache.getFSkinBorders(card)), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
                         g.drawRotatedImage(ImageCache.croppedBorderImage(image), new_x + radius / 2-minusxy, new_y + radius / 2-minusxy, new_w * croppedArea, new_h * croppedArea, (new_x + radius / 2-minusxy) + (new_w * croppedArea) / 2, (new_y + radius / 2-minusxy) + (new_h * croppedArea) / 2, isAftermath ? 90 : -90);
                     }
+                } else if (Forge.enableUIMask.equals("Crop")) {
+                    g.drawRotatedImage(ImageCache.croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
                 } else
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
             } else {
-                if (Forge.enableUIMask && canshow) {
+                if (Forge.enableUIMask.equals("Full") && canshow) {
                     if (ImageCache.isBorderlessCardArt(image))
                         g.drawImage(image, x, y, w, h);
                     else {
                         g.drawImage(ImageCache.getBorderImage(image.toString()), ImageCache.borderColor(image), x, y, w, h);
                         g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
                     }
+                } else if (Forge.enableUIMask.equals("Crop") && canshow) {
+                    g.drawImage(ImageCache.croppedBorderImage(image), x, y, w, h);
                 } else {
                     if (canshow)
                         g.drawImage(image, x, y, w, h);

@@ -457,7 +457,7 @@ public class CardRenderer {
             if (image == ImageCache.defaultImage) {
                 CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
             } else {
-                if (Forge.enableUIMask) {
+                if (Forge.enableUIMask.equals("Full")) {
                     if (ImageCache.isBorderlessCardArt(image))
                         g.drawImage(image, x, y, w, h);
                     else {
@@ -465,6 +465,8 @@ public class CardRenderer {
                         g.drawImage(ImageCache.getBorderImage(image.toString()), ImageCache.borderColor(image), x, y, w, h);
                         g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
                     }
+                } else if (Forge.enableUIMask.equals("Crop")) {
+                    g.drawImage(ImageCache.croppedBorderImage(image), x, y, w, h);
                 } else
                     g.drawImage(image, x, y, w, h);
             }
@@ -476,7 +478,7 @@ public class CardRenderer {
                 drawFoilEffect(g, card, x, y, w, h, false);
             }
         } else {
-            if (Forge.enableUIMask) //render this if mask is still loading
+            if (!Forge.enableUIMask.equals("Off")) //render this if mask is still loading
                 CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
             else //draw cards without textures as just a black rectangle
                 g.fillRect(Color.BLACK, x, y, w, h);
@@ -505,17 +507,19 @@ public class CardRenderer {
             } else {
                 if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
                         && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()) && rotate){
-                    if (Forge.enableUIMask) {
+                    if (Forge.enableUIMask.equals("Full")) {
                         if (ImageCache.isBorderlessCardArt(image))
                             g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                         else {
                             g.drawRotatedImage(FSkin.getBorders().get(0), x, y, w, h, x + w / 2, y + h / 2, -90);
                             g.drawRotatedImage(ImageCache.croppedBorderImage(image), x+radius/2.3f-minusxy, y+radius/2-minusxy, w*croppedArea, h*croppedArea, (x+radius/2.3f-minusxy) + (w*croppedArea) / 2, (y+radius/2-minusxy) + (h*croppedArea) / 2, -90);
                         }
+                    } else if (Forge.enableUIMask.equals("Crop")) {
+                        g.drawRotatedImage(ImageCache.croppedBorderImage(image),x, y, w, h, x + w / 2, y + h / 2, -90);
                     } else
                         g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                 } else {
-                    if (Forge.enableUIMask && canshow) {
+                    if (Forge.enableUIMask.equals("Full") && canshow) {
                         if (ImageCache.isBorderlessCardArt(image))
                             g.drawImage(image, x, y, w, h);
                         else {
@@ -523,6 +527,8 @@ public class CardRenderer {
                             g.drawBorderImage(ImageCache.getBorderImage(image.toString(), canshow), ImageCache.borderColor(image), ImageCache.getTint(card, image), x, y, w, h, t); //tint check for changed colors
                             g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
                         }
+                    } else if (Forge.enableUIMask.equals("Crop") && canshow) {
+                        g.drawImage(ImageCache.croppedBorderImage(image), x, y, w, h);
                     } else {
                         if (canshow)
                             g.drawImage(image, x, y, w, h);
@@ -533,7 +539,7 @@ public class CardRenderer {
             }
             drawFoilEffect(g, card, x, y, w, h, false);
         } else {
-            if (Forge.enableUIMask) //render this if mask is still loading
+            if (!Forge.enableUIMask.equals("Off")) //render this if mask is still loading
                 CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);
             else //draw cards without textures as just a black rectangle
                 g.fillRect(Color.BLACK, x, y, w, h);
@@ -1140,7 +1146,7 @@ public class CardRenderer {
             croppedArea = 0.975f;
             minusxy = 0.135f*radius;
         }
-        if (Forge.enableUIMask) {
+        if (Forge.enableUIMask.equals("Full")) {
             new_x += radius/2.4f-minusxy; new_y += radius/2-minusxy; new_w = w * croppedArea; new_h = h * croppedArea;
         }
         if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT) && MatchController.instance.mayView(card)) {

@@ -366,16 +366,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         localizer.getMessage("lblDisableCardEffect"),
                         localizer.getMessage("nlDisableCardEffect")),
                 4);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_BORDER_MASKING,
-                        localizer.getMessage("lblEnableRoundBorder"),
-                        localizer.getMessage("nlEnableRoundBorder")){
-                    @Override
-                    public void select() {
-                        super.select();
-                        //update
-                        Forge.enableUIMask = FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_BORDER_MASKING);
-                    }
-                },4);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_ENABLE_BORDER_MASKING,
+                localizer.getMessage("lblBorderMaskOption"),
+                localizer.getMessage("nlBorderMaskOption"),
+                new String[]{"Off", "Crop", "Full"}) {
+            @Override
+            public void valueChanged(String newValue) {
+                super.valueChanged(newValue);
+                Forge.enableUIMask = FModel.getPreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING);
+            }
+        }, 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART,
                         localizer.getMessage("lblPreloadExtendedArtCards"),
                         localizer.getMessage("nlPreloadExtendedArtCards")){
