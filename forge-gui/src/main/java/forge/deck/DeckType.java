@@ -30,7 +30,8 @@ public enum DeckType {
     THEME_DECK("lblRandomThemeDecks"),
     RANDOM_DECK("lblRandomDecks"),
     NET_DECK("lblNetDecks"),
-    NET_COMMANDER_DECK("lblNetCommanderDecks");
+    NET_COMMANDER_DECK("lblNetCommanderDecks"),
+    NET_ARCHIVE_STANDARD_DECK("lblNetArchiveStandardDecks");
 
     public static DeckType[] ConstructedOptions;
     public static DeckType[] CommanderOptions;
@@ -51,7 +52,8 @@ public enum DeckType {
                     DeckType.MODERN_COLOR_DECK,
                     DeckType.THEME_DECK,
                     DeckType.RANDOM_DECK,
-                    DeckType.NET_DECK
+                    DeckType.NET_DECK,
+                    DeckType.NET_ARCHIVE_STANDARD_DECK
             };
         } else {
             ConstructedOptions = new DeckType[]{
@@ -63,7 +65,8 @@ public enum DeckType {
                     DeckType.MODERN_COLOR_DECK,
                     DeckType.THEME_DECK,
                     DeckType.RANDOM_DECK,
-                    DeckType.NET_DECK
+                    DeckType.NET_DECK,
+                    DeckType.NET_ARCHIVE_STANDARD_DECK
             };
         }
     }
