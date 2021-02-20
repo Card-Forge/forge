@@ -27,7 +27,7 @@ final class ImageLoader extends CacheLoader<String, Texture> {
     Texture n;
     @Override
     public Texture load(String key) {
-        boolean extendedArt = isBorderless(key);
+        boolean extendedArt = isBorderless(key) && Forge.enableUIMask.equals("Full");
         boolean textureFilter = Forge.isTextureFilteringEnabled();
         File file = ImageKeys.getImageFile(key);
         if (file != null) {

@@ -986,7 +986,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             if (selected) {
                 if (!deckSelectMode) {
                     //if round border is enabled, the select highlight is also rounded..
-                    if (Forge.enableUIMask) {
+                    if (Forge.enableUIMask.equals("Full")) {
                         //fillroundrect has rough/aliased corner
                         g.fillRoundRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE, (h - w) / 10);
                         //drawroundrect has GL_SMOOTH to `smoothen/faux` the aliased corner
@@ -1007,7 +1007,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 float scale = 0.75f;
 
                 if (dpImg != null) {//generated decks have missing info...
-                    if (Forge.enableUIMask){
+                    if (Forge.enableUIMask.equals("Full")){
                         //commander bg
                         g.drawImage(FSkin.getDeckbox().get(0), FSkin.getDeckbox().get(0), x, y, w, h, Color.GREEN, selected);
                         TextureRegion tr = ImageCache.croppedBorderImage(dpImg);
