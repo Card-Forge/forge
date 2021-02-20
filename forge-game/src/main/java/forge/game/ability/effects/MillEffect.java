@@ -56,12 +56,10 @@ public class MillEffect extends SpellAbilityEffect {
                     p.getGame().getGameLog().add(GameLogEntryType.ZONE_CHANGE, sb.toString());
                 }
                 if (destination.equals(ZoneType.Exile)) {
-                    Card host = sa.getOriginalHost();
-                    if (host == null) {
-                        host = sa.getHostCard();
-                    }
                     for (final Card c : milled) {
-                        c.setExiledWith(host);
+                        c.setExiledWith(source);
+                        source.addExiledWith(source, sa);
+                        c.setExiledBy(sa.getActivatingPlayer());
                         if (facedown) {
                             c.turnFaceDown(true);
                         }

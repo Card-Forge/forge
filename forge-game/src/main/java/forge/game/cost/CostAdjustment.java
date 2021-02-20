@@ -233,7 +233,8 @@ public class CostAdjustment {
                         sa.getHostCard().addDelved(c);
                         final Card d = game.getAction().exile(c, null);
                         d.setExiledWith(sa.getHostCard());
-                        d.setExiledBy(sa.getHostCard().getController());
+                        sa.getHostCard().addExiledWith(d, sa);
+                        d.setExiledBy(sa.getActivatingPlayer());
                         table.put(ZoneType.Graveyard, d.getZone().getZoneType(), d);
                     }
                 }

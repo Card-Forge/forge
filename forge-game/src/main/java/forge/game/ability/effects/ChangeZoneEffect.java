@@ -685,16 +685,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     movedCard.setTimestamp(ts);
                 } else {
-                    // might set before card is moved only for nontoken
-                    Card host = null;
-                    if (destination.equals(ZoneType.Exile) && !gameCard.isToken()) {
-                        host = sa.getOriginalHost();
-                        if (host == null) {
-                            host = sa.getHostCard();
-                        }
-                        gameCard.setExiledWith(host);
-                        gameCard.setExiledBy(host.getController());
-                    }
                     movedCard = game.getAction().moveTo(destination, gameCard, cause);
                     if (ZoneType.Hand.equals(destination) && ZoneType.Command.equals(originZone.getZoneType())) {
                         StringBuilder sb = new StringBuilder();
@@ -713,10 +703,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                     // might set after card is moved again if something has changed
                     if (destination.equals(ZoneType.Exile) && !movedCard.isToken()) {
-                        movedCard.setExiledWith(host);
-                        if (host != null) {
-                            movedCard.setExiledBy(host.getController());
-                        }
+                        movedCard.setExiledWith(hostCard);
+                        hostCard.addExiledWith(movedCard, sa);
+                        movedCard.setExiledBy(sa.getActivatingPlayer());
                     }
 
                     if (sa.hasParam("WithCountersType")) {
@@ -809,7 +798,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         triggerList.triggerChangesZoneAll(game);
         counterTable.triggerCountersPutAll(game);
-
 
         if (sa.hasParam("AtEOT") && !triggerList.isEmpty()) {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), triggerList.allCards());
@@ -1307,12 +1295,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             else if (destination.equals(ZoneType.Exile)) {
                 movedCard = game.getAction().exile(c, sa, moveParams);
                 if (!c.isToken()) {
-                    Card host = sa.getOriginalHost();
-                    if (host == null) {
-                        host = sa.getHostCard();
-                    }
-                    movedCard.setExiledWith(host);
-                    movedCard.setExiledBy(host.getController());
+                    movedCard.setExiledWith(source);
+                    source.addExiledWith(movedCard, sa);
+                    movedCard.setExiledBy(sa.getActivatingPlayer());
                 }
                 if (sa.hasParam("ExileFaceDown")) {
                     movedCard.turnFaceDown(true);
@@ -1459,13 +1444,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             } else if (srcSA.getParam("Destination").equals("Graveyard")) {
                 movedCard = game.getAction().moveToGraveyard(tgtHost, srcSA, params);
             } else if (srcSA.getParam("Destination").equals("Exile")) {
-                Card host = srcSA.getOriginalHost();
-                if (host == null) {
-                    host = srcSA.getHostCard();
-                }
+                Card hostCard = srcSA.getHostCard();
                 movedCard = game.getAction().exile(tgtHost, srcSA, params);
-                movedCard.setExiledWith(host);
-                movedCard.setExiledBy(host.getController());
+
+                movedCard.setExiledWith(hostCard);
+                hostCard.addExiledWith(movedCard, srcSA);
+                movedCard.setExiledBy(srcSA.getActivatingPlayer());
             } else if (srcSA.getParam("Destination").equals("TopOfLibrary")) {
                 movedCard = game.getAction().moveToLibrary(tgtHost, srcSA, params);
             } else if (srcSA.getParam("Destination").equals("Hand")) {
@@ -1502,4 +1486,5 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
     }
+
 }

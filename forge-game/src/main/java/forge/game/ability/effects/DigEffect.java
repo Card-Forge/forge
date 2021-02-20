@@ -296,10 +296,6 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                     Collections.reverse(movedCards);
 
-                    Card effectHost = sa.getOriginalHost();
-                    if (effectHost == null) {
-                        effectHost = sa.getHostCard();
-                    }
                     for (Card c : movedCards) {
                         final ZoneType origin = c.getZone().getZoneType();
                         final PlayerZone zone = c.getOwner().getZone(destZone1);
@@ -324,8 +320,9 @@ public class DigEffect extends SpellAbilityEffect {
                                     c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")),
                                             1, player, true, counterTable);
                                 }
-                                c.setExiledWith(effectHost);
-                                c.setExiledBy(effectHost.getController());
+                                c.setExiledWith(host);
+                                host.addExiledWith(c, sa);
+                                c.setExiledBy(sa.getActivatingPlayer());
                             }
                         }
                         if (!origin.equals(c.getZone().getZoneType())) {
@@ -393,8 +390,9 @@ public class DigEffect extends SpellAbilityEffect {
                                     c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")),
                                             1, player, true, counterTable);
                                 }
-                                c.setExiledWith(effectHost);
-                                c.setExiledBy(effectHost.getController());
+                                c.setExiledWith(host);
+                                host.addExiledWith(c, sa);
+                                c.setExiledBy(host.getController());
                             }
                         }
                     }

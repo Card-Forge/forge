@@ -317,6 +317,9 @@ public final class CardUtil {
         newCopy.setCastFrom(in.getCastFrom());
 
         newCopy.setExiledWith(getLKICopy(in.getExiledWith(), cachedMap));
+        newCopy.setExiledBy(in.getExiledBy());
+
+        newCopy.setExiledWithTable(in.getExiledWithTable());
 
         return newCopy;
     }

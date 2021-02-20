@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -22,6 +23,7 @@ import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
@@ -34,6 +36,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     /** The host card. */
     protected Card hostCard;
     protected CardState cardState = null;
+    private StaticAbility grantorStatic = null;
 
     /** The map params. */
     protected Map<String, String> originalMapParams = Maps.newHashMap(),
@@ -487,7 +490,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     protected IHasSVars getSVarFallback() {
         if (getCardState() != null)
             return getCardState();
-        return getHostCard();
+        return getOriginalOrHost();
     }
 
     @Override
@@ -501,7 +504,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
 
     @Override
     public boolean hasSVar(final String name) {
-        return sVars.containsKey(name) || getSVarFallback().hasSVar(name);
+        return sVars.containsKey(name) || getOriginalOrHost().hasSVar(name);
     }
 
     public Integer getSVarInt(final String name) {
@@ -562,6 +565,19 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             return false;
         }
         return !getHostCard().equals(getCardState().getCard());
+    }
+
+    public Card getOriginalOrHost() {
+        return ObjectUtils.defaultIfNull(getOriginalHost(), getHostCard());
+    }
+
+
+    public StaticAbility getGrantorStatic() {
+        return grantorStatic;
+    }
+
+    public void setGrantorStatic(final StaticAbility st) {
+        grantorStatic = st;
     }
 
     public Map<String, String> getChangedTextColors() {

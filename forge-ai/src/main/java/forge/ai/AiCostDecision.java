@@ -601,7 +601,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(CostRemoveAnyCounter cost) {
         final String amount = cost.getAmount();
         final int c = AbilityUtils.calculateAmount(source, amount, ability);
-        final Card originalHost = ObjectUtils.defaultIfNull(ability.getOriginalHost(), source);
+        final Card originalHost = ability.getOriginalOrHost();
 
         if (c <= 0) {
             return null;

@@ -378,23 +378,23 @@ public class CardProperty {
                 return false;
             }
 
-            Card host = source;
             //Static Abilites doesn't have spellAbility or OriginalHost
-            if (spellAbility != null) {
-                host = spellAbility.getOriginalHost();
-                if (host == null) {
-                    host = spellAbility.getHostCard();
-                }
+
+            if (!source.isExiledWith(card, spellAbility)) {
+                return false;
             }
 
-            if (!card.getExiledWith().equals(host)) {
+            if (!card.getExiledWith().equals(source)) {
                 return false;
             }
         } else if (property.equals("ExiledWithEffectSource")) {
             if (card.getExiledWith() == null) {
                 return false;
             }
-            if (!card.getExiledWith().equals(source.getEffectSource())) {
+            if (!source.isEmblem() && !source.getType().hasSubtype("Effect")) {
+                return false;
+            }
+            if (!source.getEffectSource().isExiledWith(card, spellAbility)) {
                 return false;
             }
         } else if (property.equals("EncodedWithSource")) {

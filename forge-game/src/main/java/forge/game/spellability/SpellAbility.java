@@ -110,7 +110,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private Player targetingPlayer = null;
 
     private SpellAbility grantorOriginal = null;
-    private StaticAbility grantorStatic = null;
 
     private CardCollection splicedCards = null;
 
@@ -2201,14 +2200,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public void setOriginalAbility(final SpellAbility sa) {
         grantorOriginal = sa;
-    }
-
-    public StaticAbility getGrantorStatic() {
-        return grantorStatic;
-    }
-
-    public void setGrantorStatic(final StaticAbility st) {
-        grantorStatic = st;
     }
 
     public boolean isAlternativeCost(AlternativeCost ac) {

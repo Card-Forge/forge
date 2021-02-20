@@ -3,13 +3,7 @@ ManaCost:4 B B G G
 Types:Legendary Creature Gorgon
 PT:7/5
 A:AB$ MustBlock | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Target creature blocks CARDNAME this turn if able.
-A:AB$ ChangeZone | Cost$ B G | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.blockingSource,Creature.blockedBySource | TgtPrompt$ Select target creature blocking Sisters of Stone Death | RememberTargets$ True | SpellDescription$ Exile target creature blocking or blocked by CARDNAME.
-A:AB$ ChooseCard | Cost$ 2 B | Choices$ Creature.IsRemembered+ExiledWithSource | ChoiceZone$ Exile | AILogic$ AtLeast1 | Mandatory$ True | SubAbility$ DBChangeZone | SpellDescription$ Put a creature card exiled with CARDNAME onto the battlefield under your control.
-SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Exile | Destination$ Battlefield | ChangeType$ Creature.IsRemembered+ExiledWithSource | ChangeNum$ 1 | GainControl$ True
-T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
-SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ DBCleanup | Static$ True | Secondary$ True | TriggerDescription$ Forget all remembered cards.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sisters_of_stone_death.jpg
+A:AB$ ChangeZone | Cost$ B G | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.blockingSource,Creature.blockedBySource | TgtPrompt$ Select target creature blocking Sisters of Stone Death | SpellDescription$ Exile target creature blocking or blocked by CARDNAME.
+A:AB$ ChangeZone | Cost$ 2 B | Hidden$ True | Origin$ Exile | Destination$ Battlefield | ChangeType$ Creature.ExiledWithSource | ChangeNum$ 1 | GainControl$ True | StackDescription$ SpellDescription | SpellDescription$ Put a creature card exiled with CARDNAME onto the battlefield under your control.
 Oracle:{G}: Target creature blocks Sisters of Stone Death this turn if able.\n{B}{G}: Exile target creature blocking or blocked by Sisters of Stone Death.\n{2}{B}: Put a creature card exiled with Sisters of Stone Death onto the battlefield under your control.
 

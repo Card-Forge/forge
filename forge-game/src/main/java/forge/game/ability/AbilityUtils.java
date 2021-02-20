@@ -125,6 +125,10 @@ public class AbilityUtils {
                 c = AbilityUtils.findEffectRoot(hostCard);
             }
         }
+        else if (defined.equals("ExiledWith")) {
+            // should not be needed to check timestamp there
+            Iterables.addAll(cards, hostCard.getExiledWith(sa));
+        }
         else if (defined.equals("Equipped")) {
             c = hostCard.getEquipping();
         }
@@ -578,6 +582,10 @@ public class AbilityUtils {
 
         if (calcX[0].equals("OriginalHost")) {
             return AbilityUtils.xCount(ability.getOriginalHost(), calcX[1], ability) * multiplier;
+        }
+
+        if (calcX[0].equals("ExiledWith")) {
+            return CardFactoryUtil.handlePaid(card.getExiledWith(ability), calcX[1], card) * multiplier;
         }
 
         if (calcX[0].startsWith("Remembered")) {
@@ -1833,6 +1841,12 @@ public class AbilityUtils {
                 CounterType cType = CounterType.getType(parts[1]);
 
                 return CardFactoryUtil.doXMath(game.getCounterAddedThisTurn(cType, parts[2], parts[3], c, player, ctb), expr, c);
+            }
+
+            if (ctb instanceof CardTraitBase) {
+                if (l[0].startsWith("ExiledWith")) {
+                    return CardFactoryUtil.doXMath(c.getExiledWith(ctb).size(), expr, c);
+                }
             }
         }
         return CardFactoryUtil.xCount(c, s2);

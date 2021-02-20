@@ -193,12 +193,9 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             } else {
                 movedCard = game.getAction().moveTo(destination, c, libraryPos, sa, moveParams);
                 if (destination == ZoneType.Exile && !c.isToken()) {
-                    Card host = sa.getOriginalHost();
-                    if (host == null) {
-                        host = sa.getHostCard();
-                    }
-                    movedCard.setExiledWith(host);
-                    movedCard.setExiledBy(host.getController());
+                    c.setExiledWith(source);
+                    source.addExiledWith(c, sa);
+                    c.setExiledBy(sa.getActivatingPlayer());
                 }
                 if (sa.hasParam("ExileFaceDown")) {
                     movedCard.turnFaceDown(true);
@@ -250,11 +247,13 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 movedCard.setTimestamp(ts);
             }
 
+
             if (!movedCard.getZone().equals(originZone)) {
+                Card meld = null;
                 triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
 
                 if (c.getMeldedWith() != null) {
-                    Card meld = game.getCardState(c.getMeldedWith(), null);
+                    meld = game.getCardState(c.getMeldedWith(), null);
                     if (meld != null) {
                         triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), meld);
                     }

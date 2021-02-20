@@ -171,12 +171,8 @@ public class ComputerUtilAbility {
         return sa;
     }
 
-    public static Card getAbilitySource(SpellAbility sa) {
-        return sa.getOriginalHost() != null ? sa.getOriginalHost() : sa.getHostCard();
-    }
-
     public static String getAbilitySourceName(SpellAbility sa) {
-        final Card c = getAbilitySource(sa);
+        final Card c = sa.getOriginalOrHost();
         return c != null ? c.getName() : "";
     }
 
