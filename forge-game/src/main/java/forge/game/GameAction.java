@@ -1141,6 +1141,23 @@ public class GameAction {
                     c.subtractCounter(dreamType,  c.getCounters(dreamType) - 7);
                     checkAgain = true;
                 }
+
+                if (c.hasKeyword("The number of loyalty counters on CARDNAME is equal to the number of Beebles you control.")) {
+                    int beeble = CardLists.getValidCardCount(game.getCardsIn(ZoneType.Battlefield), "Beeble.YouCtrl", c.getController(), c);
+                    int loyal = c.getCounters(CounterEnumType.LOYALTY);
+                    if (loyal < beeble) {
+                        GameEntityCounterTable counterTable = new GameEntityCounterTable();
+                        c.addCounter(CounterEnumType.LOYALTY, beeble - loyal, c.getController(), false, counterTable);
+                        counterTable.triggerCountersPutAll(game);
+                    } else if (loyal > beeble) {
+                        c.subtractCounter(CounterEnumType.LOYALTY, loyal - beeble);
+                    }
+                    // Only check again if counters actually changed
+                    if (c.getCounters(CounterEnumType.LOYALTY) != loyal) {
+                        checkAgain = true;
+                    }
+                }
+
                 if (checkAgain) {
                     cardsToUpdateLKI.add(c);
                 }
