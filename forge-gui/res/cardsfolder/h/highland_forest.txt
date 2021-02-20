@@ -1,0 +1,6 @@
+Name:Highland Forest
+ManaCost:no cost
+Types:Snow Land Mountain Forest
+K:CARDNAME enters the battlefield tapped.
+Oracle:({T}: Add {R} or {G}.)\nHighland Forest enters the battlefield tapped.
+

@@ -6,9 +6,11 @@ import com.badlogic.gdx.utils.Align;
 import forge.FThreads;
 import forge.Forge;
 import forge.GuiBase;
+import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.assets.FTextureRegionImage;
 import forge.assets.ImageCache;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -465,10 +467,23 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
                             && (playerIDs[j].equals(pairedPlayer2) || playerIDs[j + 1].equals(pairedPlayer2));
                     String labelText = playerIDs[j] + " vs. " + playerIDs[j + 1];
 
-                    /* TODO: Implement drawing avatar pictures next to player names
-                    FTextureRegionImage avatar1 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j]));
-                    FTextureRegionImage avatar2 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j+1]));
-                     */
+                    if (Forge.isLandscapeMode()) {
+                        try {
+                            FTextureRegionImage avatar1 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j]));
+                            FTextureRegionImage avatar2 = new FTextureRegionImage(FSkin.getAvatars().get(iconIDs[j + 1]));
+
+                            FLabel PlayerA = add(new FLabel.Builder().icon(avatar1).build());
+                            FLabel PlayerB = add(new FLabel.Builder().icon(avatar2).build());
+
+                            if (currentMatch) {
+                                float avatarSize = FSkinFont.get(20).getLineHeight()*4;
+                                PlayerA.setBounds(PADDING*2, 0, avatarSize, avatarSize);
+                                PlayerB.setBounds(width - avatarSize - PADDING, 0, avatarSize, avatarSize);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
                     if (Forge.hdbuttons)
                         labels[j] = add(new FLabel.Builder().icon(currentMatch ? FSkinImage.HDSTAR_FILLED : FSkinImage.HDSTAR_OUTLINE).text(labelText).align(Align.center).font(FSkinFont.get(16)).build());
                     else

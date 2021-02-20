@@ -3,6 +3,7 @@ package forge.ai.ability;
 import forge.ai.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -50,7 +51,11 @@ public class FightAi extends SpellAbilityAi {
 
         // assumes the triggered card belongs to the ai
         if (sa.hasParam("Defined")) {
-            Card fighter1 = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0);
+            CardCollection fighter1List = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
+            if (fighter1List.isEmpty()) {
+                return true;
+            }
+            Card fighter1 = fighter1List.get(0);
             for (Card humanCreature : humCreatures) {
                 if (ComputerUtilCombat.getDamageToKill(humanCreature) <= fighter1.getNetPower()
                         && humanCreature.getNetPower() < ComputerUtilCombat.getDamageToKill(fighter1)) {
@@ -193,7 +198,7 @@ public class FightAi extends SpellAbilityAi {
         for (Card humanCreature : humCreatures) {
             for (Card aiCreature : aiCreatures) {
                 if (source.isSpell()) {   // heroic triggers adding counters and prowess
-                	final int bonus = getSpellBonus(aiCreature);
+                    final int bonus = getSpellBonus(aiCreature);
                     power += bonus;
                     toughness += bonus;
                 }
@@ -247,28 +252,32 @@ public class FightAi extends SpellAbilityAi {
         return false;
     }
 
-	/**
-	 * Compute the bonus from Heroic +1/+1 counters or Prowess
-	 */
-	private static int getSpellBonus(final Card aiCreature) {
-		for (Trigger t : aiCreature.getTriggers()) {
-		    if (t.getMode() == TriggerType.SpellCast) {
-		        final Map<String, String> params = t.getMapParams();
-		        if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer"))
-		                && params.containsKey("Execute")) {
-		            SpellAbility heroic = AbilityFactory.getAbility(aiCreature.getSVar(params.get("Execute")),aiCreature);
-		            if ("Self".equals(heroic.getParam("Defined")) && "P1P1".equals(heroic.getParam("CounterType"))) {
-		                return AbilityUtils.calculateAmount(aiCreature, heroic.getParam("CounterNum"), heroic);
-		            }
-		            break;
-		        }
-		        if ("ProwessPump".equals(params.get("Execute"))) {
-		        	return 1;
-		        }
-		    }
-		}
-		return 0;
-	}
+    /**
+     * Compute the bonus from Heroic +1/+1 counters or Prowess
+     */
+    private static int getSpellBonus(final Card aiCreature) {
+        for (Trigger t : aiCreature.getTriggers()) {
+            if (t.getMode() == TriggerType.SpellCast) {
+                SpellAbility sa = t.ensureAbility();
+                final Map<String, String> params = t.getMapParams();
+                if (sa == null) {
+                    continue;
+                }
+                if (ApiType.PutCounter.equals(sa.getApi())) {
+                    if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer"))) {
+                        SpellAbility heroic = AbilityFactory.getAbility(aiCreature.getSVar(params.get("Execute")),aiCreature);
+                        if ("Self".equals(heroic.getParam("Defined")) && "P1P1".equals(heroic.getParam("CounterType"))) {
+                            return AbilityUtils.calculateAmount(aiCreature, heroic.getParam("CounterNum"), heroic);
+                        }
+                        break;
+                    }
+                } else if (ApiType.Pump.equals(sa.getApi())) {
+                    // TODO add prowess boost
+                }
+            }
+        }
+        return 0;
+    }
     
     private static boolean shouldFight(Card fighter, Card opponent, int pumpAttack, int pumpDefense) {
     	if (canKill(fighter, opponent, pumpAttack)) {

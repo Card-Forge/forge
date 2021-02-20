@@ -108,6 +108,7 @@ public class ConquestMenu extends FPopupMenu {
     }
 
     public static void launchPlanarConquest(final LaunchReason reason) {
+        Forge.lastButtonIndex = 7;
         LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoadingCurrentConquest"), new Runnable() {
             @Override
             @SuppressWarnings("unchecked")

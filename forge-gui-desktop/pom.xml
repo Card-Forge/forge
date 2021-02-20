@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>forge</artifactId>
 		<groupId>forge</groupId>
-		<version>1.6.37-SNAPSHOT</version>
+		<version>1.6.39-SNAPSHOT</version>
 	</parent>
 
     <artifactId>forge-gui-desktop</artifactId>
@@ -202,6 +202,11 @@
             <artifactId>jcommander</artifactId>
             <version>1.27</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.sipgate</groupId>
+            <artifactId>mp3-wav</artifactId>
+            <version>1.0.3</version>
         </dependency>
     </dependencies>
 

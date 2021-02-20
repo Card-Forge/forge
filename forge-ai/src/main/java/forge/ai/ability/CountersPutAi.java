@@ -126,7 +126,7 @@ public class CountersPutAi extends SpellAbilityAi {
         Card choice = null;
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParamOrDefault("CounterNum", "1");
-        final boolean divided = sa.hasParam("DividedAsYouChoose");
+        final boolean divided = sa.isDividedAsYouChoose();
         final String logic = sa.getParamOrDefault("AILogic", "");
         PhaseHandler ph = ai.getGame().getPhaseHandler();
 
@@ -290,7 +290,7 @@ public class CountersPutAi extends SpellAbilityAi {
             return doMoveCounterLogic(ai, sa, ph);
         }
 
-        if (sa.getConditions() != null && !sa.getConditions().areMet(sa) && sa.getSubAbility() == null) {
+        if (!sa.metConditions() && sa.getSubAbility() == null) {
             return false;
         }
 
@@ -340,7 +340,7 @@ public class CountersPutAi extends SpellAbilityAi {
         if (amountStr.equals("X")) {
             if (sa.getSVar(amountStr).equals("Count$xPaid")) {
                 // By default, set PayX here to maximum value (used for most SAs of this type).
-                amount = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                amount = ComputerUtilCost.getMaxXValue(sa, ai);
 
                 if (isClockwork) {
                     // Clockwork Avian and other similar cards: do not tap all mana for X,
@@ -359,7 +359,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     }
                 }
 
-                sa.setSVar("PayX", Integer.toString(amount));
+                sa.setXManaCostPaid(amount);
             } else if ("ExiledCreatureFromGraveCMC".equals(logic)) {
                 // e.g. Necropolis
                 amount = Aggregates.max(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES), CardPredicates.Accessors.fnGetCmc);
@@ -398,16 +398,15 @@ public class CountersPutAi extends SpellAbilityAi {
         }
 
         if (!ai.getGame().getStack().isEmpty() && !SpellAbilityAi.isSorcerySpeed(sa)) {
-            final TargetRestrictions abTgt = sa.getTargetRestrictions();
             // only evaluates case where all tokens are placed on a single target
-            if (sa.usesTargeting() && abTgt.getMinTargets(source, sa) < 2) {
+            if (sa.usesTargeting() && sa.getMinTargets() < 2) {
                 if (ComputerUtilCard.canPumpAgainstRemoval(ai, sa)) {
                     Card c = sa.getTargets().getFirstTargetedCard();
                     if (sa.getTargets().size() > 1) {
                         sa.resetTargets();
                         sa.getTargets().add(c);
                     }
-                    abTgt.addDividedAllocation(sa.getTargetCard(), amount);
+                    sa.addDividedAllocation(sa.getTargetCard(), amount);
                     return true;
                 } else {
                     return false;
@@ -462,7 +461,6 @@ public class CountersPutAi extends SpellAbilityAi {
             }
 
             if (sourceName.equals("Abzan Charm")) {
-                final TargetRestrictions abTgt = sa.getTargetRestrictions();
                 // specific AI for instant with distribute two +1/+1 counters
                 ComputerUtilCard.sortByEvaluateCreature(list);
                 // maximise the number of targets
@@ -472,11 +470,11 @@ public class CountersPutAi extends SpellAbilityAi {
                         if (ComputerUtilCard.shouldPumpCard(ai, sa, c, i, i,
                                 Lists.newArrayList())) {
                             sa.getTargets().add(c);
-                            abTgt.addDividedAllocation(c, i);
+                            sa.addDividedAllocation(c, i);
                             left -= i;
                         }
-                        if (left < i || sa.getTargets().size() == abTgt.getMaxTargets(source, sa)) {
-                            abTgt.addDividedAllocation(sa.getTargets().getFirstTargetedCard(), left + i);
+                        if (left < i || sa.getTargets().size() == sa.getMaxTargets()) {
+                            sa.addDividedAllocation(sa.getTargets().getFirstTargetedCard(), left + i);
                             left = 0;
                             break;
                         }
@@ -542,7 +540,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 list.remove(choice);
                 sa.getTargets().add(choice);
                 if (divided) {
-                    sa.getTargetRestrictions().addDividedAllocation(choice, amount);
+                    sa.addDividedAllocation(choice, amount);
                     break;
                 }
                 choice = null;
@@ -609,7 +607,7 @@ public class CountersPutAi extends SpellAbilityAi {
         final String logic = sa.getParamOrDefault("AILogic", "");
 
         final String amountStr = sa.getParamOrDefault("CounterNum", "1");
-        final boolean divided = sa.hasParam("DividedAsYouChoose");
+        final boolean divided = sa.isDividedAsYouChoose();
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
 
         final boolean isMandatoryTrigger = (sa.isTrigger() && !sa.isOptionalTrigger())
@@ -672,7 +670,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 list.remove(choice);
                 sa.getTargets().add(choice);
                 if (divided) {
-                    sa.getTargetRestrictions().addDividedAllocation(choice, amount);
+                    sa.addDividedAllocation(choice, amount);
                     break;
                 }
             }
@@ -683,13 +681,14 @@ public class CountersPutAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        final SpellAbility root = sa.getRootAbility();
         final Card source = sa.getHostCard();
         // boolean chance = true;
         boolean preferred = true;
         CardCollection list;
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParamOrDefault("CounterNum", "1");
-        final boolean divided = sa.hasParam("DividedAsYouChoose");
+        final boolean divided = sa.isDividedAsYouChoose();
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
         int left = amount;
 
@@ -698,8 +697,8 @@ public class CountersPutAi extends SpellAbilityAi {
             list = new CardCollection(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
 
             if (amountStr.equals("X")
-                    && !sa.hasSVar("PayX") /* SubAbility on something that already had set PayX, e.g. Endless One ETB counters */
-                    && ((sa.hasParam(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")))) {
+                    && root.getXManaCostPaid() != null /* SubAbility on something that already had set PayX, e.g. Endless One ETB counters */
+                    && sa.hasParam(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) {
 
                 // detect if there's more than one X in the cost (Hangarback Walker, Walking Ballista, etc.)
                 SpellAbility testSa = sa;
@@ -717,7 +716,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 // Spend all remaining mana to add X counters (eg. Hero of Leina Tower)
-                int payX = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                int payX = ComputerUtilCost.getMaxXValue(sa, ai);
 
                 // Account for the possible presence of additional glyphs in cost (e.g. Mikaeus, the Lunarch; Primordial Hydra)
                 payX -= nonXGlyphs;
@@ -725,7 +724,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 // Account for the multiple X in cost
                 if (countX > 1) { payX /= countX; }
 
-                sa.setSVar("PayX", Integer.toString(payX));
+                root.setXManaCostPaid(payX);
             }
 
             if (!mandatory) {
@@ -817,12 +816,11 @@ public class CountersPutAi extends SpellAbilityAi {
                         }
                     }
                     if (choice != null && divided) {
-                        final TargetRestrictions abTgt = sa.getTargetRestrictions();
                         int alloc = Math.max(amount / totalTargets, 1);
-                        if (sa.getTargets().size() == Math.min(totalTargets, abTgt.getMaxTargets(sa.getHostCard(), sa)) - 1) {
-                            abTgt.addDividedAllocation(choice, left);
+                        if (sa.getTargets().size() == Math.min(totalTargets, sa.getMaxTargets()) - 1) {
+                            sa.addDividedAllocation(choice, left);
                         } else {
-                            abTgt.addDividedAllocation(choice, alloc);
+                            sa.addDividedAllocation(choice, alloc);
                             left -= alloc;
                         }
                     }

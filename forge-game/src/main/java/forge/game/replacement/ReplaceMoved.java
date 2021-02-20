@@ -92,6 +92,12 @@ public class ReplaceMoved extends ReplacementEffect {
             }
         }
 
+        if (hasParam("Cycling")) { // Cycling is by cost, not by effect so cause is null
+            if (getParam("Cycling").equalsIgnoreCase("True") != runParams.containsKey(AbilityKey.Cycling)) {
+                return false;
+            }
+        }
+
         if (hasParam("FoundSearchingLibrary")) {
             if (!runParams.containsKey(AbilityKey.FoundSearchingLibrary)) {
                     return false;

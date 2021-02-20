@@ -4,8 +4,7 @@ Types:World Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player chooses a color. Until end of turn, lands tapped for mana produce mana of the chosen color instead of any other color.
 SVar:TrigChoose:DB$ ChooseColor | Defined$ TriggeredPlayer | AILogic$ MostProminentInActivePlayerHand | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ ReplaceChosen | SVars$ ProduceChosen
-SVar:ReplaceChosen:Event$ ProduceMana | ActiveZones$ Command | ValidCard$ Land | ManaReplacement$ ProduceChosen | Description$ Lands tapped for mana produce mana of the chosen color instead of any other color.
-SVar:ProduceChosen:C->Chosen & U->Chosen & B->Chosen & R->Chosen & G->Chosen & W->Chosen
+SVar:ReplaceChosen:Event$ ProduceMana | ActiveZones$ Command | ValidCard$ Land | ValidAbility$ Activated.hasTapCost | ReplaceWith$ ProduceChosen | Description$ Lands tapped for mana produce mana of the chosen color instead of any other color.
+SVar:ProduceChosen:DB$ ReplaceMana | ReplaceColor$ Chosen
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hall_of_gemstone.jpg
 Oracle:At the beginning of each player's upkeep, that player chooses a color. Until end of turn, lands tapped for mana produce mana of the chosen color instead of any other color.

@@ -6,87 +6,87 @@ MciCode=ddg
 Type=Duel_Decks
 
 [cards]
-18 U Alaborn Cavalier
-62 C Armillary Sphere
-12 C Benalish Lancer
-50 U Bloodmark Mentor
-47 M Bogardan Hellkite
-57 C Bogardan Rager
-64 U Breath of Darigaaz
-68 U Captive Flame
+1 M Knight of the Reliquary
 2 C Caravan Escort
-48 C Cinder Wall
-72 C Claws of Valakut
-75 U Cone of Flame
-65 C Dragon Fodder
-54 U Dragon Whelp
-63 U Dragon's Claw
-53 U Dragonspeaker Shaman
-25 C Edge of Autumn
-76 C Fiery Fall
-51 C Fire-Belly Changeling
-44 L Forest
-44 L Forest
-44 L Forest
-44 L Forest
-69 C Ghostfire
-35 U Grasslands
-33 U Griffin Guide
-23 U Harm's Way
-55 U Henge Guardian
-29 U Heroes' Reunion
-77 U Jaws of Stone
-21 U Juniper Order Ranger
-16 U Kabira Vindicator
-59 R Kilnmouth Dragon
-17 R Kinsbaile Cavalier
-14 R Knight Exemplar
+3 C Lionheart Maverick
 4 C Knight of Cliffhaven
 5 U Knight of Meadowgrain
-1 M Knight of the Reliquary
 6 R Knight of the White Orchid
-10 R Knotvine Paladin
 7 U Leonin Skyhunter
-3 C Lionheart Maverick
-31 R Loxodon Warhammer
-26 C Mighty Leap
-58 R Mordant Dragon
-78 L Mountain
-78 L Mountain
-78 L Mountain
-78 L Mountain
-52 C Mudbutton Torchrunner
-34 C Oblivion Ring
-22 U Paladin of Prahv
-42 L Plains
-42 L Plains
-42 L Plains
-42 L Plains
+8 U Silver Knight
+9 U White Knight
+10 R Knotvine Paladin
+11 C Steward of Valeron
+12 C Benalish Lancer
+13 U Zhalfirin Commander
+14 R Knight Exemplar
+15 U Wilt-Leaf Cavaliers
+16 U Kabira Vindicator
+17 R Kinsbaile Cavalier
+18 U Alaborn Cavalier
+19 C Skyhunter Patrol
 20 C Plover Knights
-66 U Punishing Fire
+21 U Juniper Order Ranger
+22 U Paladin of Prahv
+23 U Harm's Way
 24 U Reciprocate
+25 C Edge of Autumn
+26 C Mighty Leap
 27 U Reprisal
-70 C Seething Song
-71 C Seismic Strike
+28 U Test of Faith
+29 U Heroes' Reunion
+30 C Sigil Blessing
+31 R Loxodon Warhammer
+32 C Spidersilk Armor
+33 U Griffin Guide
+34 C Oblivion Ring
+35 U Grasslands
 36 C Sejiri Steppe
 37 C Selesnya Sanctuary
-74 U Shiv's Embrace
-60 R Shivan Hellkite
-30 C Sigil Blessing
-8 U Silver Knight
-49 C Skirk Prospector
-19 C Skyhunter Patrol
-32 C Spidersilk Armor
-67 C Spitting Earth
-11 C Steward of Valeron
-73 U Temporary Insanity
-28 U Test of Faith
-61 R Thunder Dragon
 38 U Treetop Village
+39 L Plains
+40 L Plains
+41 L Plains
+42 L Plains
+43 L Forest
+44 L Forest
+45 L Forest
+46 L Forest
+47 M Bogardan Hellkite
+48 C Cinder Wall
+49 C Skirk Prospector
+50 U Bloodmark Mentor
+51 C Fire-Belly Changeling
+52 C Mudbutton Torchrunner
+53 U Dragonspeaker Shaman
+54 U Dragon Whelp
+55 U Henge Guardian
 56 R Voracious Dragon
-9 U White Knight
-15 U Wilt-Leaf Cavaliers
-13 U Zhalfirin Commander
+57 C Bogardan Rager
+58 R Mordant Dragon
+59 R Kilnmouth Dragon
+60 R Shivan Hellkite
+61 R Thunder Dragon
+62 C Armillary Sphere
+63 U Dragon's Claw
+64 U Breath of Darigaaz
+65 C Dragon Fodder
+66 U Punishing Fire
+67 C Spitting Earth
+68 U Captive Flame
+69 C Ghostfire
+70 C Seething Song
+71 C Seismic Strike
+72 C Claws of Valakut
+73 U Temporary Insanity
+74 U Shiv's Embrace
+75 U Cone of Flame
+76 C Fiery Fall
+77 U Jaws of Stone
+78 L Mountain
+79 L Mountain
+80 L Mountain
+81 L Mountain
 
 [tokens]
 w_2_2_griffin_flying

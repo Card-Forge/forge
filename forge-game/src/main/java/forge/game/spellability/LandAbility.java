@@ -20,6 +20,7 @@ package forge.game.spellability;
 import org.apache.commons.lang3.ObjectUtils;
 
 import forge.card.CardStateName;
+import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
@@ -30,7 +31,7 @@ import forge.game.zone.ZoneType;
 public class LandAbility extends Ability {
 
     public LandAbility(Card sourceCard, Player p, StaticAbility mayPlay) {
-        super(sourceCard, (Cost)null);
+        super(sourceCard, new Cost(ManaCost.NO_COST, false));
         setActivatingPlayer(p);
         setMayPlay(mayPlay);
     }

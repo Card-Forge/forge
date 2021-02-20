@@ -3,7 +3,10 @@ package forge.game.ability;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
+import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -15,11 +18,13 @@ import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
+import forge.game.TriggerReplacementBase;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -167,6 +172,14 @@ public class AbilityUtils {
                     c = (Card) crd;
                 } else if (crd instanceof Iterable) {
                     cards.addAll(Iterables.filter((Iterable<?>) crd, Card.class));
+                }
+            }
+            else if (defined.contains("HostCard")) { //Triggered*HostCard
+                int hcPosition = defined.indexOf("HostCard");
+                AbilityKey type = AbilityKey.fromString(defined.substring(9, hcPosition));
+                final Object o = root.getTriggeringObject(type);
+                if (o instanceof SpellAbility) {
+                    c = ((SpellAbility) o).getHostCard();
                 }
             }
             else {
@@ -383,7 +396,7 @@ public class AbilityUtils {
      * <p>
      * calculateAmount.
      * </p>
-     * 
+     *
      * @param card
      *            a {@link forge.game.card.Card} object.
      * @param amount
@@ -427,19 +440,13 @@ public class AbilityUtils {
             svarval = ability.getSVar(amount);
         }
         if (StringUtils.isBlank(svarval)) {
-            if ((ability != null) && (ability instanceof SpellAbility) && !(ability instanceof SpellPermanent) && !amount.equals("ChosenX")) {
+            if ((ability != null) && (ability instanceof SpellAbility) && !(ability instanceof SpellPermanent)) {
                 System.err.printf("SVar '%s' not found in ability, fallback to Card (%s). Ability is (%s)%n", amount, card.getName(), ability);
             }
             svarval = card.getSVar(amount);
         }
 
         if (StringUtils.isBlank(svarval)) {
-            // Some variables may be not chosen yet at this moment
-            // So return 0 and don't issue an error.
-            if (amount.equals("ChosenX")) {
-                // isn't made yet
-                return 0;
-            }
             // cost hasn't been paid yet
             if (amount.startsWith("Cost")) {
                 return 0;
@@ -786,7 +793,7 @@ public class AbilityUtils {
      * <p>
      * getDefinedObjects.
      * </p>
-     * 
+     *
      * @param card
      *            a {@link forge.game.card.Card} object.
      * @param def
@@ -816,7 +823,7 @@ public class AbilityUtils {
 
     /**
      * Filter list by type.
-     * 
+     *
      * @param list
      *            a CardList
      * @param type
@@ -945,7 +952,7 @@ public class AbilityUtils {
      * <p>
      * getDefinedPlayers.
      * </p>
-     * 
+     *
      * @param card
      *            a {@link forge.game.card.Card} object.
      * @param def
@@ -1048,6 +1055,10 @@ public class AbilityUtils {
                 if (c instanceof SpellAbility) {
                     o = ((SpellAbility) c).getActivatingPlayer();
                 }
+                // For merged permanent
+                if (c instanceof CardCollection) {
+                    o = ((CardCollection) c).get(0).getController();
+                }
             }
             else if (defParsed.endsWith("Opponent")) {
                 String triggeringType = defParsed.substring(9);
@@ -1059,6 +1070,10 @@ public class AbilityUtils {
                 if (c instanceof SpellAbility) {
                     o = ((SpellAbility) c).getActivatingPlayer().getOpponents();
                 }
+                // For merged permanent
+                if (c instanceof CardCollection) {
+                    o = ((CardCollection) c).get(0).getController().getOpponents();;
+                }
             }
             else if (defParsed.endsWith("Owner")) {
                 String triggeringType = defParsed.substring(9);
@@ -1066,6 +1081,10 @@ public class AbilityUtils {
                 final Object c = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
                 if (c instanceof Card) {
                     o = ((Card) c).getOwner();
+                }
+                // For merged permanent
+                if (c instanceof CardCollection) {
+                    o = ((CardCollection) c).get(0).getOwner();
                 }
             }
             else {
@@ -1219,7 +1238,7 @@ public class AbilityUtils {
      * <p>
      * getDefinedSpellAbilities.
      * </p>
-     * 
+     *
      * @param card
      *            a {@link forge.game.card.Card} object.
      * @param def
@@ -1382,7 +1401,7 @@ public class AbilityUtils {
         );
 
         // check conditions
-        if (sa.getConditions().areMet(sa)) {
+        if (sa.metConditions()) {
             if (sa.isWrapper() || StringUtils.isBlank(sa.getParam("UnlessCost"))) {
                 sa.resolve();
             }
@@ -1483,7 +1502,7 @@ public class AbilityUtils {
      * <p>
      * handleRemembering.
      * </p>
-     * 
+     *
      * @param sa
      *            a SpellAbility object.
      */
@@ -1548,7 +1567,7 @@ public class AbilityUtils {
      * <p>
      * Parse non-mana X variables.
      * </p>
-     * 
+     *
      * @param c
      *            a {@link forge.game.card.Card} object.
      * @param s
@@ -1650,8 +1669,13 @@ public class AbilityUtils {
 
                 // Count$Kicked.<numHB>.<numNotHB>
                 if (sq[0].startsWith("Kicked")) {
-                    boolean kicked = ((SpellAbility)ctb).isKicked() || c.getKickerMagnitude() > 0;
+                    boolean kicked = sa.isKicked() || c.getKickerMagnitude() > 0;
                     return CardFactoryUtil.doXMath(Integer.parseInt(kicked ? sq[1] : sq[2]), expr, c);
+                }
+
+                // Count$UrzaLands.<numHB>.<numNotHB>
+                if (sq[0].startsWith("UrzaLands")) {
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sa.getActivatingPlayer().hasUrzaLands() ? sq[1] : sq[2]), expr, c);
                 }
 
                 //Count$SearchedLibrary.<DefinedPlayer>
@@ -1710,7 +1734,7 @@ public class AbilityUtils {
                     final String payingMana = StringUtils.join(sa.getRootAbility().getPayingMana());
                     final int num = sq[0].length() > 7 ? Integer.parseInt(sq[0].split("_")[1]) : 3;
                     final boolean adamant = StringUtils.countMatches(payingMana, MagicColor.toShortString(sq[1])) >= num;
-                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[adamant ? 2 : 3]), expr, c); 
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[adamant ? 2 : 3]), expr, c);
                 }
 
                 if (l[0].startsWith("LastStateBattlefield")) {
@@ -1763,6 +1787,26 @@ public class AbilityUtils {
                 if (sq[0].startsWith("CastTotalManaSpent")) {
                     return CardFactoryUtil.doXMath(c.getCastSA() != null ? c.getCastSA().getTotalManaSpent() : 0, expr, c);
                 }
+
+                if (sq[0].equals("CastTotalSnowManaSpent")) {
+                    int v = 0;
+                    if (c.getCastSA() != null) {
+                        for (Mana m : c.getCastSA().getPayingMana()) {
+                            if (m.isSnow()) {
+                                v += 1;
+                            }
+                        }
+                    }
+                    return CardFactoryUtil.doXMath(v, expr, c);
+                }
+            }
+            if (ctb instanceof TriggerReplacementBase) {
+                if (l[0].startsWith("CountersAddedThisTurn")) {
+                    final String[] parts = l[0].split(" ");
+                    CounterType cType = CounterType.getType(parts[1]);
+
+                    return CardFactoryUtil.doXMath(game.getCounterAddedThisTurn(cType, parts[2], parts[3], c, ctb.getHostCard().getController(), null), expr, c);
+                }
             }
         }
         return CardFactoryUtil.xCount(c, s2);
@@ -1799,7 +1843,11 @@ public class AbilityUtils {
 
     public static final List<SpellAbility> getBasicSpellsFromPlayEffect(final Card tgtCard, final Player controller) {
         List<SpellAbility> sas = new ArrayList<>();
-        for (SpellAbility s : tgtCard.getBasicSpells()) {
+        List<SpellAbility> list = Lists.newArrayList(tgtCard.getBasicSpells());
+        if (tgtCard.isModal()) {
+            list.addAll(Lists.newArrayList(tgtCard.getBasicSpells(tgtCard.getState(CardStateName.Modal))));
+        }
+        for (SpellAbility s : list) {
             final Spell newSA = (Spell) s.copy();
             newSA.setActivatingPlayer(controller);
             SpellAbilityRestriction res = new SpellAbilityRestriction();
@@ -1812,8 +1860,7 @@ public class AbilityUtils {
             // timing restrictions still apply
             if (res.checkTimingRestrictions(tgtCard, newSA)
                     // still need to check the other restrictions like Aftermath
-                    && res.checkOtherRestrictions(tgtCard, newSA, controller)
-                    && newSA.checkOtherRestrictions(tgtCard)) {
+                    && res.checkOtherRestrictions(tgtCard, newSA, controller)) {
                 sas.add(newSA);
             }
         }
@@ -1948,7 +1995,7 @@ public class AbilityUtils {
         }
         return cause;
     }
-    
+
 
     public static SpellAbility addSpliceEffects(final SpellAbility sa) {
         final Card source = sa.getHostCard();
@@ -2008,11 +2055,11 @@ public class AbilityUtils {
 
         if (spliceCost == null)
             return;
-        
+
         SpellAbility firstSpell = c.getFirstSpellAbility();
         Map<String, String> params = Maps.newHashMap(firstSpell.getMapParams());
         ApiType api = AbilityRecordType.getRecordType(params).getApiTypeOf(params);
-        AbilitySub subAbility = (AbilitySub) AbilityFactory.getAbility(AbilityRecordType.SubAbility, api, params, null, c.getCurrentState(), null);
+        AbilitySub subAbility = (AbilitySub) AbilityFactory.getAbility(AbilityRecordType.SubAbility, api, params, null, c.getCurrentState(), c.getCurrentState());
 
         subAbility.setActivatingPlayer(sa.getActivatingPlayer());
         subAbility.setHostCard(sa.getHostCard());

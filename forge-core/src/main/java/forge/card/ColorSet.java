@@ -41,7 +41,6 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
     private static final long serialVersionUID = 794691267379929080L;
 
     private final byte myColor;
-    public byte getMyColor() { return myColor; }
     private final float orderWeight;
 
     private static final ColorSet[] cache = new ColorSet[32];

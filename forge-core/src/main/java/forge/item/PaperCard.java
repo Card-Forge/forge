@@ -28,6 +28,7 @@ import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 
@@ -187,7 +188,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
      */
     @Override
     public String toString() {
-        return name;
+        return CardTranslation.getTranslatedName(name);
         // cannot still decide, if this "name|set" format is needed anymore
         // return String.format("%s|%s", name, cardSet);
     }

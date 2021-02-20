@@ -126,10 +126,6 @@ public class CostPutCardToLib extends CostPartWithList {
         Integer i = convertAmount();
 
         if (i == null) {
-            final String sVar = ability.getSVar(getAmount());
-            if (sVar.equals("XChoice")) {
-                return true;
-            }
             i = AbilityUtils.calculateAmount(source, getAmount(), ability);
         }
 

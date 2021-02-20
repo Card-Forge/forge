@@ -19,12 +19,14 @@ package forge.game.trigger;
 
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
+import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
@@ -123,9 +125,13 @@ public class TriggerHandler {
     }
 
     public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic) {
+        return parseTrigger(trigParse, host, intrinsic, host);
+    }
+
+    public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic, final IHasSVars sVarHolder) {
         try {
             final Map<String, String> mapParams = TriggerHandler.parseParams(trigParse);
-            return TriggerHandler.parseTrigger(mapParams, host, intrinsic);
+            return TriggerHandler.parseTrigger(mapParams, host, intrinsic, sVarHolder);
         } catch (Exception e) {
             String msg = "TriggerHandler:parseTrigger failed to parse";
             Sentry.getContext().recordBreadcrumb(
@@ -137,12 +143,15 @@ public class TriggerHandler {
         }
     }
 
-    public static Trigger parseTrigger(final Map<String, String> mapParams, final Card host, final boolean intrinsic) {
+    public static Trigger parseTrigger(final Map<String, String> mapParams, final Card host, final boolean intrinsic, final IHasSVars sVarHolder) {
         Trigger ret = null;
 
         try {
             final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));
             ret = type.createTrigger(mapParams, host, intrinsic);
+            if (sVarHolder != null) {
+                ret.ensureAbility(sVarHolder);
+            }
         } catch (Exception e) {
             String msg = "TriggerHandler:parseTrigger failed to parse";
             Sentry.getContext().recordBreadcrumb(
@@ -169,13 +178,7 @@ public class TriggerHandler {
             if (wt.getTriggers() != null)
                 continue;
 
-            List<Trigger> trigger = Lists.newArrayList();
-            for (final Trigger t : activeTriggers) {
-                if (canRunTrigger(t,wt.getMode(),wt.getParams())) {
-                    trigger.add(t);
-                }
-            }
-            wt.setTriggers(trigger);
+            wt.setTriggers(getActiveTrigger(wt.getMode(), wt.getParams()));
         }
     }
 
@@ -221,7 +224,7 @@ public class TriggerHandler {
 
     public final void registerActiveTrigger(final Card c, final boolean onlyExtrinsic) {
         for (final Trigger t : c.getTriggers()) {
-            if (!onlyExtrinsic || c.isCloned() || !t.isIntrinsic() || t instanceof TriggerAlways) {
+            if (!onlyExtrinsic || c.isCloned() || !t.isIntrinsic() || TriggerType.Always.equals(t.getMode())) {
                 registerOneTrigger(t);
             }
         }
@@ -379,7 +382,7 @@ public class TriggerHandler {
         if (regtrig.getHostCard().isFaceDown() && regtrig.isIntrinsic()) {
             return false; // Morphed cards only have pumped triggers go off.
         }
-        if (regtrig instanceof TriggerAlways) {
+        if (TriggerType.Always.equals(regtrig.getMode())) {
             if (game.getStack().hasStateTrigger(regtrig.getId())) {
                 return false; // State triggers that are already on the stack
                 // don't trigger again.
@@ -410,6 +413,13 @@ public class TriggerHandler {
             return false; // Not the right mode.
         }
 
+        /* this trigger can only be activated once per turn, verify it hasn't already run */
+        if (regtrig.hasParam("ActivationLimit")) {
+            if (regtrig.getActivationsThisTurn() >= Integer.parseInt(regtrig.getParam("ActivationLimit"))) {
+                return false;
+            }
+        }
+
         if (!regtrig.requirementsCheck(game)) {
             return false; // Conditions aren't right.
         }
@@ -425,7 +435,7 @@ public class TriggerHandler {
             return false; // Trigger removed by effect
         }
 
-        if (regtrig instanceof TriggerAlways) {
+        if (TriggerType.Always.equals(regtrig.getMode())) {
             if (game.getStack().hasStateTrigger(regtrig.getId())) {
                 return false; // State triggers that are already on the stack
                 // don't trigger again.
@@ -462,10 +472,35 @@ public class TriggerHandler {
         return true;
     }
 
+    private void runSingleTrigger(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
+        // If the runParams contains MergedCards, it is called from GameAction.changeZone()
+        if (runParams.get(AbilityKey.MergedCards) != null) {
+            // Check if the trigger cares the origin is from battlefield
+            Card original = (Card) runParams.get(AbilityKey.Card);
+            CardCollection mergedCards = (CardCollection) runParams.get(AbilityKey.MergedCards);
+            mergedCards.set(mergedCards.indexOf(original), original);
+            Map<AbilityKey, Object> newParams = AbilityKey.mapFromCard(original);
+            newParams.putAll(runParams);
+            if ("Battlefield".equals(regtrig.getParam("Origin"))) {
+                // If yes, only trigger once
+                newParams.put(AbilityKey.Card, mergedCards);
+                runSingleTriggerInternal(regtrig, newParams);
+            } else {
+                // Else, trigger for each merged components
+                for (final Card c : mergedCards) {
+                    newParams.put(AbilityKey.Card, c);
+                    runSingleTriggerInternal(regtrig, newParams);
+                }
+            }
+        } else {
+            runSingleTriggerInternal(regtrig, runParams);
+        }
+    }
+
     // Checks if the conditions are right for a single trigger to go off, and
     // runs it if so.
     // Return true if the trigger went off, false otherwise.
-    private void runSingleTrigger(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
+    private void runSingleTriggerInternal(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
 
         // All tests passed, execute ability.
         if (regtrig instanceof TriggerTapsForMana) {
@@ -670,5 +705,15 @@ public class TriggerHandler {
         }
 
         return n;
+    }
+
+    public List<Trigger> getActiveTrigger(final TriggerType mode, final Map<AbilityKey, Object> runParams) {
+        List<Trigger> trigger = Lists.newArrayList();
+        for (final Trigger t : activeTriggers) {
+            if (canRunTrigger(t, mode, runParams)) {
+                trigger.add(t);
+            }
+        }
+        return trigger;
     }
 }

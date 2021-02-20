@@ -10,6 +10,7 @@ import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -455,6 +456,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         final CardZoneTable triggerList = new CardZoneTable();
+        GameEntityCounterTable counterTable = new GameEntityCounterTable();
         // changing zones for spells on the stack
         for (final SpellAbility tgtSA : getTargetSpells(sa)) {
             if (!tgtSA.isSpell()) { // Catch any abilities or triggers that slip through somehow
@@ -485,6 +487,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final long ts = game.getNextTimestamp();
         boolean combatChanged = false;
 
+        Player chooser = player;
+        if (sa.hasParam("Chooser")) {
+            chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa).get(0);
+        }
+
         for (final Card tgtC : tgtCards) {
             final Card gameCard = game.getCardState(tgtC, null);
             // gameCard is LKI in that case, the card is not in game anymore
@@ -501,7 +508,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblDoYouWantMoveTargetFromOriToDest", CardTranslation.getTranslatedName(gameCard.getName()), Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME), destination.getTranslatedName()));
-            if (optional && !player.getController().confirmAction(sa, null, prompt) )
+            if (optional && !chooser.getController().confirmAction(sa, null, prompt) )
                 continue;
 
             final Zone originZone = game.getZoneOf(gameCard);
@@ -552,6 +559,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("WithCounters")) {
                         String[] parse = sa.getParam("WithCounters").split("_");
                         gameCard.addEtbCounter(CounterType.getType(parse[0]), Integer.parseInt(parse[1]), player);
+                    }
+                    if (sa.hasParam("WithCountersType")) {
+                        CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                        int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                        gameCard.addEtbCounter(cType, cAmount, player);
                     }
                     if (sa.hasParam("GainControl")) {
                         if (sa.hasParam("NewController")) {
@@ -693,8 +705,21 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
 
+                    if (sa.hasParam("WithCountersType")) {
+                        CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                        int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                        movedCard.addCounter(cType, cAmount, player, true, counterTable);
+                    }
+
                     if (sa.hasParam("ExileFaceDown")) {
                         movedCard.turnFaceDown(true);
+                    }
+                    if (sa.hasParam("Foretold")) {
+                        movedCard.setForetold(true);
+                        movedCard.setForetoldThisTurn(true);
+                        movedCard.setForetoldByEffect(true);
+                        // look at the exiled card
+                        movedCard.addMayLookTemp(sa.getActivatingPlayer());
                     }
 
                     if (sa.hasParam("TrackDiscarded")) {
@@ -714,12 +739,35 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             hostCard.addRemembered(meld);
                         }
                     }
+                    if (gameCard.hasMergedCard()) {
+                        for (final Card c : gameCard.getMergedCards()) {
+                            if (c == gameCard) continue;
+                            hostCard.addRemembered(c);
+                        }
+                    }
                 }
                 if (forget != null) {
                     hostCard.removeRemembered(movedCard);
                 }
                 if (imprint != null) {
                     hostCard.addImprintedCard(movedCard);
+                    if (gameCard.hasMergedCard()) {
+                        for (final Card c : gameCard.getMergedCards()) {
+                            if (c == gameCard) continue;
+                            hostCard.addImprintedCard(c);
+                        }
+                        // For Duplicant
+                        if (sa.hasParam("ImprintLast")) {
+                            Card lastCard = null;
+                            for (final Card c : movedCard.getOwner().getCardsIn(destination)) {
+                                if (hostCard.hasImprintedCard(c)) {
+                                    hostCard.removeImprintedCard(c);
+                                    lastCard = c;
+                                }
+                            }
+                            hostCard.addImprintedCard(lastCard);
+                        }
+                    }
                 }
             }
         }
@@ -735,6 +783,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         triggerList.triggerChangesZoneAll(game);
+        counterTable.triggerCountersPutAll(game);
 
         // for things like Gaea's Blessing
         if (destination.equals(ZoneType.Library) && sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle"))) {
@@ -1122,6 +1171,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     String[] parse = sa.getParam("WithCounters").split("_");
                     c.addEtbCounter(CounterType.getType(parse[0]), Integer.parseInt(parse[1]), player);
                 }
+
+                if (sa.hasParam("WithCountersType")) {
+                    CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                    int cAmount = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                    c.addEtbCounter(cType, cAmount, player);
+                }
                 if (sa.hasParam("Transformed")) {
                     if (c.isDoubleFaced()) {
                         c.changeCardState("Transform", null, sa);
@@ -1229,6 +1284,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ExileFaceDown")) {
                     movedCard.turnFaceDown(true);
                 }
+                if (sa.hasParam("Foretold")) {
+                    movedCard.setForetold(true);
+                    movedCard.setForetoldThisTurn(true);
+                    movedCard.setForetoldByEffect(true);
+                    // look at the exiled card
+                    movedCard.addMayLookTemp(sa.getActivatingPlayer());
+                }
             }
             else {
                 movedCard = game.getAction().moveTo(destination, c, 0, cause, moveParams);
@@ -1255,6 +1317,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         source.addRemembered(meld);
                     }
                 }
+                if (c.hasMergedCard()) {
+                    for (final Card card : c.getMergedCards()) {
+                        if (card == c) continue;
+                        source.addRemembered(card);
+                    }
+                }
             }
             if (forget) {
                 source.removeRemembered(movedCard);
@@ -1262,6 +1330,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             // for imprinted since this doesn't use Target
             if (imprint) {
                 source.addImprintedCard(movedCard);
+                if (c.hasMergedCard()) {
+                    for (final Card card : c.getMergedCards()) {
+                        if (card == c) continue;
+                        source.addImprintedCard(card);
+                    }
+                }
             }
         }
 

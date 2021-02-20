@@ -37,8 +37,14 @@ public class CardTranslation {
 
     public static String getTranslatedName(String name) {
         if (needsTranslation()) {
+            if (name.contains(" // ")) {
+                int splitIndex = name.indexOf(" // ");
+                String leftname = name.substring(0, splitIndex);
+                String rightname = name.substring(splitIndex + 4, name.length());
+                return translatednames.get(leftname) + " // " + translatednames.get(rightname);
+            }
             String tname = translatednames.get(name);
-            return tname == null ? name : tname;
+            return (tname == null || tname.isEmpty()) ? name : tname;
         }
 
         return name;
@@ -63,6 +69,7 @@ public class CardTranslation {
     }
 
     public static HashMap<String, String> getTranslationTexts(String cardname, String altcardname) {
+        if (!needsTranslation()) return null;
         HashMap<String, String> translations = new HashMap<>();
         translations.put("name", getTranslatedName(cardname));
         translations.put("oracle", getTranslatedOracle(cardname));

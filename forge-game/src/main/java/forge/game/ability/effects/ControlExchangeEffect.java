@@ -1,14 +1,16 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
+
+import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
+import forge.util.CardTranslation;
+import forge.util.Localizer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,19 +23,25 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         Card object1 = null;
         Card object2 = null;
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        List<Card> tgts = tgt == null ? new ArrayList<>() : Lists.newArrayList(sa.getTargets().getTargetCards());
-        if (tgts.size() > 0) {
-            object1 = tgts.get(0);
+        List<Card> tgts = null;
+        if (sa.usesTargeting()) {
+            tgts = Lists.newArrayList(sa.getTargets().getTargetCards());
+            if (tgts.size() > 0) {
+                object1 = tgts.get(0);
+            }
         }
         if (sa.hasParam("Defined")) {
             List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             object2 = cards.isEmpty() ? null : cards.get(0);
-            if (cards.size() > 1 && sa.hasParam("BothDefined")) {
+            if (cards.size() > 1 && !sa.usesTargeting()) {
                 object1 = cards.get(1);
             }
         } else if (tgts.size() > 1) {
             object2 = tgts.get(1);
+        }
+
+        if (object1 == null || object2 == null) {
+            return "";
         }
 
         return object1 + " exchanges controller with " + object2;
@@ -44,17 +52,22 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
+        Card host = sa.getHostCard();
+        Game game = host.getGame();
         Card object1 = null;
         Card object2 = null;
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        List<Card> tgts = tgt == null ? new ArrayList<>() : Lists.newArrayList(sa.getTargets().getTargetCards());
-        if (tgts.size() > 0) {
-            object1 = tgts.get(0);
+
+        List<Card> tgts = null;
+        if (sa.usesTargeting()) {
+            tgts = Lists.newArrayList(sa.getTargets().getTargetCards());
+            if (tgts.size() > 0) {
+                object1 = tgts.get(0);
+            }
         }
         if (sa.hasParam("Defined")) {
-            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+            final List<Card> cards = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
             object2 = cards.isEmpty() ? null : cards.get(0);
-            if (cards.size() > 1 && sa.hasParam("BothDefined")) {
+            if (cards.size() > 1 && !sa.usesTargeting()) {
                 object1 = cards.get(1);
             }
         } else if (tgts.size() > 1) {
@@ -73,7 +86,16 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
             return;
         }
 
-        final long tStamp = sa.getActivatingPlayer().getGame().getNextTimestamp();
+        if (sa.hasParam("Optional")) {
+            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null,
+                    Localizer.getInstance().getMessage("lblExchangeControl",
+                            CardTranslation.getTranslatedName(object1.getName()),
+                            CardTranslation.getTranslatedName(object2.getName())))) {
+                return;
+            }
+        }
+
+        final long tStamp = game.getNextTimestamp();
         object2.setController(player1, tStamp);
         object1.setController(player2, tStamp);
         if (sa.hasParam("RememberExchanged")) {

@@ -389,26 +389,24 @@ Prerelease=6 Boosters, 1 RareMythic+
 367 C Forbidden Friendship
 368 U Migration Path
 369 U Sprite Dragon
-
-[Godzilla Series Monsters]
-Huntmaster Liger|IKO|2
-Luminous Broodmoth|IKO|3
-Pollywog Symbiote|IKO|2
-Void Beckoner|IKO|2
-Everquill Phoenix|IKO|3
-Yidaro, Wandering Monster|IKO|3
-Gemrazer|IKO|3
-Titanoth Rex|IKO|2
-Brokkos, Apex of Forever|IKO|3
-Illuna, Apex of Wishes|IKO|3
-Nethroi, Apex of Death|IKO|3
-Snapdax, Apex of the Hunt|IKO|3
-Sprite Dragon|IKO|3
-Vadrok, Apex of Thunder|IKO|3
-Gyruda, Doom of Depths|IKO|3
-Mysterious Egg|IKO|2
-Dirge Bat|IKO|3
-Crystalline Giant|IKO|3
+370 U Huntmaster Liger
+371 M Luminous Broodmoth
+372 U Pollywog Symbiote
+373 U Void Beckoner
+374 R Everquill Phoenix
+375 R Yidaro, Wandering Monster
+376 R Gemrazer
+377 U Titanoth Rex
+378 M Brokkos, Apex of Forever
+379 M Illuna, Apex of Wishes
+380 M Nethroi, Apex of Death
+381 M Snapdax, Apex of the Hunt
+382 U Sprite Dragon
+383 M Vadrok, Apex of Thunder
+384 R Gyruda, Doom of Depths
+385 C Mysterious Egg
+386 R Dirge Bat
+387 R Crystalline Giant
 
 [Lands]
 10 Bloodfell Caves|IKO
@@ -443,7 +441,7 @@ Crystalline Giant|IKO|3
 7 Forest|IKO|4
 
 [tokens]
-c_a_feather_sac
+feather
 g_3_3_beast
 g_x_x_dinosaur_beast_trample
 r_1_1_dinosaur_haste

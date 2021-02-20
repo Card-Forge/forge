@@ -1089,6 +1089,7 @@ public class FSkin {
 
             if (allSkins == null) { //initialize
                 allSkins = new ArrayList<>();
+                allSkins.add("Default");//init default
                 final List<String> skinDirectoryNames = getSkinDirectoryNames();
                 for (String skinDirectoryName : skinDirectoryNames) {
                     allSkins.add(WordUtil.capitalize(skinDirectoryName.replace('_', ' ')));
@@ -1101,7 +1102,7 @@ public class FSkin {
 
         // Non-default (preferred) skin name and dir.
         preferredName = skinName.toLowerCase().replace(' ', '_');
-        preferredDir = ForgeConstants.SKINS_DIR + preferredName + "/";
+        preferredDir = preferredName.equals("default") ? ForgeConstants.DEFAULT_SKINS_DIR : ForgeConstants.CACHE_SKINS_DIR + preferredName + "/";
 
         if (onInit) {
             final File f = new File(preferredDir + ForgeConstants.SPLASH_BG_FILE);
@@ -1371,7 +1372,7 @@ public class FSkin {
     public static List<String> getSkinDirectoryNames() {
         final List<String> mySkins = new ArrayList<>();
 
-        final File dir = new File(ForgeConstants.SKINS_DIR);
+        final File dir = new File(ForgeConstants.CACHE_SKINS_DIR);
         final String[] children = dir.list();
         if (children == null) {
             System.err.println("FSkin > can't find skins directory!");

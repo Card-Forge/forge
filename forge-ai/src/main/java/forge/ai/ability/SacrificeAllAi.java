@@ -31,7 +31,6 @@ public class SacrificeAllAi extends SpellAbilityAi {
         if (valid.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            sa.setSVar("PayX", Integer.toString(xPay));
             valid = TextUtil.fastReplace(valid, "X", Integer.toString(xPay));
         }
 

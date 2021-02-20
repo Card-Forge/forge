@@ -23,7 +23,6 @@ import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -64,9 +63,8 @@ public class TriggerBecomesTargetOnce extends Trigger {
             }
         }
         if (hasParam("ValidTarget")) {
-            List<GameObject> targets = (List<GameObject>) runParams.get(AbilityKey.Targets);
             boolean valid = false;
-            for (GameObject b : targets) {
+            for (GameObject b : (Iterable<GameObject>) runParams.get(AbilityKey.Targets)) {
                 if (matchesValid(b, getParam("ValidTarget").split(","), this.getHostCard())) {
                     valid = true;
                     break;

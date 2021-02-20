@@ -15,15 +15,23 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
+
 import forge.FThreads;
 import forge.Forge;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
+import forge.util.LineReader;
 import forge.util.TextBounds;
 import forge.util.Utils;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class FSkinFont {
     private static final int MIN_FONT_SIZE = 8;
@@ -34,6 +42,11 @@ public class FSkinFont {
 
     private static final String TTF_FILE = "font1.ttf";
     private static final Map<Integer, FSkinFont> fonts = new HashMap<>();
+
+    private static final String commonCharacterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklm"
+            + "nopqrstuvwxyz1234567890\"!?'.,;:()[]{}<>|/@\\^$-%+=#_&*\u2014"
+            + "\u2022ÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÑñÄËÏÖÜäëïöüẞß¿¡";
+    private static Map<String, String> langUniqueCharacterSet = new HashMap<>();
 
     static {
         FileUtil.ensureDirectoryExists(ForgeConstants.FONTS_DIR);
@@ -64,7 +77,7 @@ public class FSkinFont {
     //pre-load all supported font sizes
     public static void preloadAll(String language) {
         //todo:really check the language glyph is a lot
-        MAX_FONT_SIZE = (language.equals("zh-CN")) ? MAX_FONT_SIZE_MANY_GLYPHS : MAX_FONT_SIZE_LESS_GLYPHS;
+        MAX_FONT_SIZE = (language.equals("zh-CN") || language.equals("ja-JP")) ? MAX_FONT_SIZE_MANY_GLYPHS : MAX_FONT_SIZE_LESS_GLYPHS;
         for (int size = MIN_FONT_SIZE; size <= MAX_FONT_SIZE; size++) {
             _get(size);
         }
@@ -316,6 +329,43 @@ public class FSkinFont {
         return _get(fontSize - 1);
     }
 
+    public String getCharacterSet(String langCode) {
+        if (langUniqueCharacterSet.containsKey(langCode)) {
+            return langUniqueCharacterSet.get(langCode);
+        }
+        StringBuilder characters = new StringBuilder(commonCharacterSet);
+        Set<Integer> characterSet = new HashSet<>();
+        for (int offset = 0; offset < commonCharacterSet.length();) {
+            final int codePoint = commonCharacterSet.codePointAt(offset);
+            characterSet.add(codePoint);
+            offset += Character.charCount(codePoint);
+        }
+        String[] translationFilePaths = { ForgeConstants.LANG_DIR + "cardnames-" + langCode + ".txt",
+                ForgeConstants.LANG_DIR + langCode + ".properties" };
+        for (int i = 0; i < translationFilePaths.length; i++) {
+            try (LineReader translationFile = new LineReader(new FileInputStream(translationFilePaths[i]),
+                    StandardCharsets.UTF_8)) {
+                for (String fileLine : translationFile.readLines()) {
+                    final int stringLength = fileLine.length();
+                    for (int offset = 0; offset < stringLength;) {
+                        final int codePoint = fileLine.codePointAt(offset);
+                        if (!characterSet.contains(codePoint)) {
+                            characterSet.add(codePoint);
+                            characters.append(Character.toChars(codePoint));
+                        }
+                        offset += Character.charCount(codePoint);
+                    }
+                }
+                translationFile.close();
+            } catch (IOException e) {
+                System.err.println("Error reading translation file: " + translationFilePaths[i]);
+            }
+        }
+        langUniqueCharacterSet.put(langCode, characters.toString());
+
+        return characters.toString();
+    }
+
     private void updateFont() {
         if (scale != 1) { //re-use font inside range if possible
             if (fontSize > MAX_FONT_SIZE) {
@@ -355,128 +405,9 @@ public class FSkinFont {
             pageSize = 128;
         }
 
-        //only generate images for characters that could be used by Forge
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890\"!?'.,;:()[]{}<>|/@\\^$-%+=#_&*\u2014\u2022";
-        chars += "ÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÑñÄËÏÖÜäëïöüẞß¿¡";
-        //generate from zh-CN.properties,and cardnames-zh-CN.txt
-        //forge generate 3000+ characters cache need Take some time(MIN_FONT_SIZE - MAX_FONT_SIZE all size)
-        if (Forge.locale.equals("zh-CN"))
-            chars   += "~·Æâû​‘’“”‧−●、。「」『』一丁七万三上下"
-                    + "不与丑专且世丘业丛东丝丢两严丧个中丰串临丸丹为主丽举乃久么义"
-                    + "之乌乍乎乐乔乖乘乙九也习乡书买乱乳乾了予争事二于云互五井亘亚"
-                    + "些亡亢交亥亦产享京亭亮亲亵人亿什仁仅仆仇今介仍从仑仓仕他仗付"
-                    + "仙代令以仪们仰仲件价任份仿伊伍伏伐休众优伙会伟传伤伦伪伯伱伴"
-                    + "伶伸伺似伽但位低住佐佑体何余佚佛作你佣佩佬佯佳使例侍侏供依侠"
-                    + "侣侥侦侧侪侬侮侯侵便促俄俊俐俑俗俘保信修俯俸個倍倒候借倡倦倨"
-                    + "倪债值倾假偏做停健偶偷偿傀傅傍储催傲像僚僧僭僵僻儒儡儿兀允元"
-                    + "兄充兆兇先光克免兑兔兕党入全八公六兰共关兴兵其具典兹养兼兽内"
-                    + "册再冑冒冕写军农冠冢冥冬冰冲决况冶冷冻净准凋凌减凑凛凝几凡凤"
-                    + "凭凯凰凶凸出击凿刀刃分切刈刍刑划列刘则刚创初删判利别刮到制刷"
-                    + "券刹刺刻刽剁剂剃削剌前剎剐剑剖剜剥剧剩剪副割剽劈力劝办功加务"
-                    + "劣动助努劫励劲劳势勃勇勉勋勒勘募勤勾包匍匐匕化北匙匝匠匪匹区"
-                    + "医匿十千升午半华协卑卒卓单卖南博卜占卡卢卤卦卧卫印危即却卵卷"
-                    + "卸厂厄厅历厉压厌厚原厢厥厦厨去参叉及友双反发叔取受变叙叛叠口"
-                    + "古句另叨只叫召叮可台史右叶号司叹吁吃各合吉吊同名后吏吐向吓吕"
-                    + "吗君吞吟否含听吮启吱吴吸吹吻吼呆告呕员周味呼命咆和咏咒咕咬咯"
-                    + "咳咸咽哀品哄哇哈响哑哔哗哥哨哩哪哭哮哲哺唐唤售唯唱啃啄商啜啪"
-                    + "啮啸喀喂善喉喊喋喘喙喜喝喧喰喷嗄嗅嗔嗜嗡嗣嗫嘉嘎嘘嘲嘴嘶噜噤"
-                    + "器噬嚎嚣嚼囊囚四回因团囤园困囱围固国图圆圈團土圣在圮地场圾址"
-                    + "均坊坍坎坏坐坑块坚坛坝坞坟坠坡坤坦坪坷垂垃垄型垒垛垠垢垣垦垮"
-                    + "埃埋城埔域培基堂堆堌堑堕堡堤堪堰塌塑塔塘塞填境墓墙增墟墨壁壅"
-                    + "壕壤士壬壮声壳壶处备复夏外多夜够大天太夫央失头夷夸夹夺奇奈奉"
-                    + "奋奎契奔奖套奚奠奢奥女奴她好如妃妄妆妇妈妖妙妣妥妪妮妲妹姆姊"
-                    + "始姓委姜姥姬姿威娃娅娘娜娥娱婆婉婚婪婴婶媒嫁嫩嬉子孑孔孕字存"
-                    + "孙孚孟孢季孤学孪孳孵孽宁它宅宇守安完宏宗官宙定宛宜宝实宠审客"
-                    + "宣室宪宫宰害宴宵家容宽宾宿寂寄密寇富寒寓寝察寡寨寰寸对寺寻导"
-                    + "封射将尉尊小少尔尖尘尚尝尤尬就尸尹尺尼尽尾局屁层居屈届屋屏屑"
-                    + "展属屠履屯山屹屿岁岑岔岖岗岚岛岩岭岱岳岸峋峡峭峰峻崇崎崔崖崩"
-                    + "崽嵌嶙巅巍川州巡巢工左巧巨巩巫差己已巳巴巷巾币市布帅帆师希帐"
-                    + "帕帖帘帚帜帝带席帮帷常帼帽幄幅幔幕干平年并幸幻幼幽广庄庆庇床"
-                    + "序庐库应底店庙府庞废度座庭庶康庸廉廊廓延建开异弃弄弊式弑弒弓"
-                    + "引弗弘弟张弥弦弧弩弯弱張弹强归当录彗形彩彰影役彻彼往征径待很"
-                    + "徊律後徒徕得徘徙從御復循微徵德徽心必忆忌忍忏忒志忘忠忧快忱念"
-                    + "忽忾忿怀态怎怒怖思怠急性怨怪怯总恋恍恐恒恕恢恣恨恩恫恭息恰恳"
-                    + "恶恸恼悉悍悔悖悟患悦悬悯悲悼情惇惊惑惘惚惠惧惨惩惫惯惰想惹愁"
-                    + "愈愎意愚感愣愤愧愿慈慌慎慑慕慢慧慨慰慷憎憩懈懒懦懿戈戍戎戏成"
-                    + "我戒戕或战戟截戮戳戴户戾房所扁扇扈手才扎扑扒打托扣执扩扫扬扭"
-                    + "扮扯扰找承技抄抉把抑抓投抖抗折抚抛抢护报披抱抵抹押抽拂拆拇拉"
-                    + "拌拍拒拓拔拖拗拘拙招拜拟拣拥拦拧拨择括拯拱拳拷拼拽拾拿持挂指"
-                    + "按挑挖挚挛挞挟挠挡挣挤挥挪挫振挺挽捆捉捍捐捕捞损换捣捧据捷捻"
-                    + "掀授掉掌掐排掘掠探接控推掩措掮掳掷揍描提插握揭援揽搁搅搏搐搜"
-                    + "搞搧搬搭携摄摆摇摈摘摧摩摸摹撒撕撞撤撬播撵撼擂擅操擎擒擞擢擦"
-                    + "攀攫支收攸改攻放政故效敌敏救敕教敞敢散敦敬数敲整文斐斑斓斗斜"
-                    + "斤斥斧斩断斯新方於施旁旅旋族旗无既日旧旨早旭旱时旷旸旺昂昆昌"
-                    + "明昏易昔昙星映春昨昭是昵昼显晃晋晒晓晕晖晚晦晨普景晰晴晶晷智"
-                    + "暂暖暗暦暮暴曙曜曝曦曲曳更曹曼曾替最月有服朗望朝期朦木未末本"
-                    + "札术朵机朽杀杂权杉李杏材村杖杜束条来杨杯杰松板极构析林枚果枝"
-                    + "枢枪枭枯架枷柄柏某染柜查柩柯柱柳柴栅标栈栋栏树栓栖栗校株样核"
-                    + "根格栽桂桃框案桌桎桑桓桠档桥桦桨桩桶梁梅梏梓梢梣梦梧梨梭梯械"
-                    + "检棄棍棒棕棘棚森棱棺椁植椎椒椽楂楔楚楣楼概榄榆榔榜榨榴槁槌槛"
-                    + "槽模横樱樵橇橡橫檀檄檐次欢欣欧欲欺款歇歉歌止正此步武歧歪死歼"
-                    + "殁殆殇殉殊残殍殒殓殖殡殴段殷殿毁毅母每毒比毕毛毡毯氅氏民氓气"
-                    + "氛氤氦氧氲水永汀汁求汇汉汐汗汛池污汤汨汪汰汲汹汽沃沈沉沌沐沙"
-                    + "沟没沥沦沫沮河沸油治沼沾沿泄泉泊法泛泞泡波泣泥注泪泯泰泳泽洁"
-                    + "洋洒洗洛洞津洪洲活洼派流浅浆浇浊测济浏浑浓浚浩浪浮浴海浸涂涅"
-                    + "消涉涌涎涛涟涡涤润涨涩液涵涸淆淋淘淝淡淤淬深混淹添清渊渎渐渔"
-                    + "渗渝渠渡渣渥温港渲渴游渺湍湖湛湮湾湿溃溅源溜溢溪溯溶溺滋滑滓"
-                    + "滔滚滞满滤滥滨滩滴漂漏演漠漩漫漾潘潜潭潮澄澈澜澹激濑濒瀑瀚灌"
-                    + "火灭灯灰灵灶灼灾灿炉炎炙炫炬炭炮炸点炼炽烁烂烈烙烛烟烤烦烧烨"
-                    + "烫烬热烽焉焊焚焦焰然煌煎煞煤照煮煽熄熊熏熔熙熟熠熵燃燎燕燧爆"
-                    + "爪爬爱爵父片版牌牒牙牛牝牡牢牦牧物牲牵特牺犀犁犄犒犧犬犯状狂"
-                    + "狄狈狐狒狗狙狞狠狡狨狩独狭狮狰狱狷狸狼猁猎猖猛猜猧猩猪猫献猴"
-                    + "猾猿獒獗獠獭獴獾玄率玉王玖玛玩玫环现玷玺玻珀珂珊珍珑珠班球理"
-                    + "琉琐琥琳琴琵琼瑕瑙瑚瑛瑜瑞瑟瑰瑾璃璞璧瓜瓣瓦瓮瓯瓶瓷甄甘甜生"
-                    + "用甩甫田由甲申电男画畅界畏留畜略番畸畿疆疏疑疗疚疡疣疤疫疮疯"
-                    + "疲疵疹疼疽疾病症痉痍痕痛痞痢痣痨痪痴痹瘟瘠瘤瘫瘴癖癣癫癸登白"
-                    + "百的皆皇皈皮皱皿盆盈益盎盐监盒盔盖盗盘盛盟目盲直相盾省看真眠"
-                    + "眨眩眷眺眼着睁睡督睥睨睿瞄瞌瞒瞥瞪瞬瞭瞰瞳矛矢知矫短矮石矾矿"
-                    + "码砂砍研砖砦砧破砸砾础硌硕硫硬确碍碎碑碛碟碧碰碳碴碻碾磁磊磐"
-                    + "磨磷磺礁示礼社祀祈祓祖祝神祟祠祥票祭祷祸禁禄福禳离禽私秃秉秋"
-                    + "种科秘秣秤秩积称移秽稀程稍税稚稳稻稼穆穗穰穴究穷穹空穿突窃窄"
-                    + "窍窑窒窖窗窘窜窝窟窥立竖站竞章童竭端竹笏笑笔笛笞符笨第笼等筑"
-                    + "筒答策筛筝筱筹签简箔算箝管箭箱箴篇篓篮篱篷簇簧簪簸籍米类粉粒"
-                    + "粖粗粘粮粹精糊糖糙糜糟系素索紧紫累絮縛繁纂纠红约级纪纬纯纱纳"
-                    + "纵纶纷纸纹纺纽线练组绅细织终绊绍经绑绒结绕绘给绚络绝绞统绣绥"
-                    + "继绩绪续绮绯绳维绵综绽绿缀缄缅缆缇缉缍缎缓缕编缘缚缝缠缤缧缩"
-                    + "缪缰缸缺罅网罔罕罗罚罡罩罪置署罵羁羊美羔羚羞群羽翁翅翎翔翘翟"
-                    + "翠翡翦翰翱翻翼耀老考者而耍耐耕耗耘耙耳耶耸耽聊聋职聒联聚聪肃"
-                    + "肆肇肉肋肌肖肝肠肢肤肥肩肮肯育肴肺肿胀胁胃胆背胎胖胜胞胡胧胫"
-                    + "胶胸能脂脆脉脊脏脐脑脓脚脱脸腐腑腔腕腥腱腹腾腿膂膏膛膜膝臂臃"
-                    + "臣自臭至致舌舍舒舞舟航般舰舱船艇良艰色艺艾节芒芙芜芥芬芭芮花"
-                    + "芳芽苇苍苏苔苗苛苜苟若苦英茁茂范茅茉茎茜茧茨茫茸茹荀荆草荒荚"
-                    + "荡荣荨荫药荷荻莉莎莓莫莱莲莳获莽菁菇菈菊菌菜菲萃萌萍萎萝萤营"
-                    + "萦萧萨萼落著葛董葬葱葵蒂蒙蒸蒺蓄蓑蓓蓝蓟蓿蔑蔓蔚蔷蔻蔽蕈蕊蕨"
-                    + "蕴蕾薄薇薙薛薪薮藉藏藐藓藜藤藻虎虏虐虑虔虚虫虱虹蚀蚁蚂蚊蚋蚣"
-                    + "蚪蚺蛆蛇蛊蛋蛎蛙蛛蛞蛭蛮蛰蛸蛾蜀蜂蜃蜇蜈蜉蜍蜒蜓蜕蜗蜘蜜蜡蜥"
-                    + "蜴蜷蜻蜿蝇蝉蝌蝎蝓蝗蝙蝠蝣蝾螂螃螅融螫螯螳螺蟀蟋蟑蟒蟥蟹蟾蠕"
-                    + "蠢蠹血衅行衍街衡衣补表衫衰衷袁袂袋袍袖被袭袱裁裂装裔裕裘裸褐"
-                    + "褛褪褫褴褶襄西要覆见观规觅视览觉觊角解触言詹誉誓警计认讧讨让"
-                    + "训议讯记讲许论讽设访诀证评诅识诈诉词译试诗诘诚诛话诞诡该详诫"
-                    + "语误诱诲说诵请诸诺读谀谁调谆谈谊谋谍谎谐谕谗谜谟谢谣谤谦谧谨"
-                    + "谬谭谱谴谵谷豁豆豚象豢豪豹豺貂貌贝贞负贡财责贤败货质贩贪贫贬"
-                    + "购贮贯贱贴贵贷贸费贺贼贾贿赂赃资赋赌赎赏赐赔赖赘赛赞赠赢赤赦"
-                    + "赫走赵赶起趁超越趋足趾跃跄跑跖跚跛距跟跨路跳践跺踉踏踝踢踩踪"
-                    + "踵踽蹂蹄蹊蹋蹒蹦蹬躁躏身躯躲車车轨轩转轭轮软轰轴轻载较辉辏辐"
-                    + "辑输辖辗辙辛辜辞辟辨辩辫辰辱边辽达迁迂迅过迈迎运近返还这进远"
-                    + "违连迟迦迩迪迫迭述迳迷迸迹追退送适逃逆选逊透逐递途逗通逝逞速"
-                    + "造逡逢逮逸逻逼遁遂遇遍遏道遗遣遥遨遭遮遵遽避邀邃還邑那邦邪邬"
-                    + "邸郁郊郎部都鄙酋配酒酬酷酸酿醉醒采釉释里重野量金鉴鑫针钉钓钗"
-                    + "钙钛钜钝钟钢钥钦钨钩钮钯钱钳钴钵钻钽铁铃铅铎铐铜铠铬铭铲银铸"
-                    + "铺链销锁锄锅锈锋锐错锡锢锤锥锦锭键锯锹锺锻镇镋镐镕镖镜镬镰镳"
-                    + "镶长間闇门闩闪闭问闯闲间闷闸闹闻阀阁阅阔队阱防阳阴阵阶阻阿陀"
-                    + "附际陆陋降限院除陨险陪陲陵陶陷隆随隐隔隘隙障隧隶隼难雀雄雅集"
-                    + "雇雉雏雕雨雪雯雳零雷雹雾需霆震霉霍霓霖霜霞霰露霸霹霾青靖静非"
-                    + "靠靡面革靴靶靼鞋鞍鞑鞭韧韩音韵韶页顶项顺须顽顾顿颂预颅领颈颊"
-                    + "颌频颓题颚颜额颠颤风飒飓飘飙飞食飨餍餐餮饕饥饭饮饰饱饴饵饶饼"
-                    + "饿馆馈馐馑首香馨马驭驮驯驰驱驳驹驻驼驽驾驿骁骂骄骆骇验骏骐骑"
-                    + "骗骚骡骤骨骰骶骷骸骼髅髑髓高鬃鬓鬣鬼魁魂魄魅魇魈魏魔魟魯鰴鱆"
-                    + "鱼鲁鲜鲤鲨鲮鲸鲽鳃鳄鳍鳐鳖鳗鳝鳞鴶鵰鸟鸠鸡鸢鸣鸥鸦鸽鸿鹂鹅鹉"
-                    + "鹊鹏鹗鹞鹤鹦鹩鹫鹭鹰鹿麋麒麟麦麻黄黎黏黑默黛黜黝點黠黯鼎鼓鼠"
-                    + "鼬鼹鼻齐齑齿龇龙龟！（），．／：；？～";
-
         final PixmapPacker packer = new PixmapPacker(pageSize, pageSize, Pixmap.Format.RGBA8888, 2, false);
         final FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.characters = chars;
+        parameter.characters = getCharacterSet(Forge.locale);
         parameter.size = fontSize;
         parameter.packer = packer;
         final FreeTypeFontGenerator.FreeTypeBitmapFontData fontData = generator.generateData(parameter);

@@ -149,11 +149,7 @@ public class EffectEffect extends SpellAbilityEffect {
             // Grant SVars first in order to give references to granted abilities
             if (effectSVars != null) {
                 for (final String s : effectSVars) {
-                    Card host = sa.getOriginalHost() != null && sa.getHostCard().getSVar(s).isEmpty()
-                            && sa.getOriginalHost().hasSVar(s) ? sa.getOriginalHost() : sa.getHostCard();
-
-                    final String actualSVar = host.getSVar(s);
-                    eff.setSVar(s, actualSVar);
+                    eff.setSVar(s, AbilityUtils.getSVar(sa, s));
                 }
             }
 
@@ -170,8 +166,7 @@ public class EffectEffect extends SpellAbilityEffect {
             // Grant triggers
             if (effectTriggers != null) {
                 for (final String s : effectTriggers) {
-                    final Trigger parsedTrigger = TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), eff, true);
-                    parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(eff, parsedTrigger.getParam("Execute"), sa));
+                    final Trigger parsedTrigger = TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), eff, true, sa);
                     parsedTrigger.setActiveZone(EnumSet.of(ZoneType.Command));
                     parsedTrigger.setIntrinsic(true);
                     eff.addTrigger(parsedTrigger);
@@ -193,7 +188,7 @@ public class EffectEffect extends SpellAbilityEffect {
                 for (final String s : effectReplacementEffects) {
                     final String actualReplacement = AbilityUtils.getSVar(sa, s);
 
-                    final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, eff, true);
+                    final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, eff, true, sa);
                     parsedReplacement.setActiveZone(EnumSet.of(ZoneType.Command));
                     parsedReplacement.setIntrinsic(true);
                     eff.addReplacementEffect(parsedReplacement);
@@ -215,8 +210,14 @@ public class EffectEffect extends SpellAbilityEffect {
                 }
                 if (sa.hasParam("ForgetOnMoved")) {
                     addForgetOnMovedTrigger(eff, sa.getParam("ForgetOnMoved"));
+                    if (!"Stack".equals(sa.getParam("ForgetOnMoved"))) {
+                        addForgetOnCastTrigger(eff);
+                    }
                 } else if (sa.hasParam("ExileOnMoved")) {
                     addExileOnMovedTrigger(eff, sa.getParam("ExileOnMoved"));
+                }
+                if (sa.hasParam("ForgetOnPhasedIn")) {
+                    addForgetOnPhasedInTrigger(eff);
                 }
                 if (sa.hasParam("ForgetCounter")) {
                     addForgetCounterTrigger(eff, sa.getParam("ForgetCounter"));

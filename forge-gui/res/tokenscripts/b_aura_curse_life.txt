@@ -1,0 +1,8 @@
+Name:Aura Curse
+ManaCost:no cost
+Types:Enchantment Aura Curse
+Colors:black
+K:Enchant Player
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigLife | TriggerDescription$ At the beginning of enchanted player's upkeep, that player loses 1 life.
+SVar:TrigLife:DB$ LoseLife | LifeAmount$ 1 | Defined$ TriggeredPlayer | SpellDescription$ You lose 1 life
+Oracle:

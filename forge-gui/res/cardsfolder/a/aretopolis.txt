@@ -7,6 +7,7 @@ SVar:AcquireScrolls:DB$ PutCounter | Defined$ Self | CounterType$ SCROLL | Count
 SVar:ScrollsOfLife:DB$ GainLife | Defined$ You | LifeAmount$ NumScrolls | References$ NumScrolls
 SVar:NumScrolls:Count$CardCounters.SCROLL
 T:Mode$ Always | TriggerZones$ Command | CheckSVar$ NumScrolls | SVarCompare$ GE10 | Execute$ RolledWalk | TriggerDescription$ When CARDNAME has ten or more scroll counters on it, planeswalk.
+SVar:RolledWalk:DB$ Planeswalk
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, put a scroll counter on CARDNAME, then draw cards equal to the number of scroll counters on it.
 SVar:RolledChaos:DB$ PutCounter | Defined$ Self | CounterType$ SCROLL | CounterNum$ 1 | SubAbility$ ScrollsOfKnowledge
 SVar:ScrollsOfKnowledge:DB$ Draw | Defined$ You | NumCards$ NumScrolls | References$ NumScrolls

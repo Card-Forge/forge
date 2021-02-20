@@ -1,0 +1,25 @@
+Name:Egon, God of Death
+ManaCost:2 B
+Types:Legendary Creature God
+PT:6/6
+K:Deathtouch
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At the beginning of your upkeep, exile two cards from your graveyard. If you can't, sacrifice NICKNAME and draw a card.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.YouOwn | ChangeNum$ 2 | RememberChanged$ True | Hidden$ True | Mandatory$ True | SubAbility$ DBSacSelf
+SVar:DBSacSelf:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+AlternateMode:Modal
+DeckHints:Ability$Discard & Ability$Graveyard
+Oracle:Deathtouch\nAt the beginning of your upkeep, exile two cards from your graveyard. If you can’t, sacrifice Egon and draw a card.
+
+ALTERNATE
+
+Name:Throne of Death
+ManaCost:B
+Types:Legendary Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, mill a card.
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 1
+A:AB$ Draw | Cost$ 2 B T ExileFromGrave<1/Creature> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Mill
+Oracle:At the beginning of your upkeep, mill a card.\n{2}{B}, {T}, Exile a creature card from your graveyard: Draw a card.

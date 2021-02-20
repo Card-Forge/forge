@@ -43,6 +43,16 @@ public class CostExiledMoveToGrave extends CostPartWithList {
     public int paymentOrder() { return 15; }
 
     @Override
+    public Integer getMaxAmountX(SpellAbility ability, Player payer) {
+        final Card source = ability.getHostCard();
+        CardCollectionView typeList = payer.getGame().getCardsIn(ZoneType.Exile);
+
+        typeList = CardLists.getValidCards(typeList, getType().split(";"), payer, source, ability);
+
+        return typeList.size();
+    }
+
+    @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
         final Integer i = convertAmount();
@@ -75,10 +85,7 @@ public class CostExiledMoveToGrave extends CostPartWithList {
             i = AbilityUtils.calculateAmount(source, getAmount(), ability);
         }
 
-        CardCollectionView typeList = payer.getGame().getCardsIn(ZoneType.Exile);
-
-        typeList = CardLists.getValidCards(typeList, getType().split(";"), payer, source, ability);
-        return typeList.size() >= i;
+        return getMaxAmountX(ability, payer) >= i;
     }
 
     @Override

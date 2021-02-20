@@ -460,6 +460,13 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
 
+        if (sa.isBoast()) {
+            int limit = activator.hasKeyword("Creatures you control can boast twice during each of your turns rather than once.") ? 2 : 1;
+            if (limit <= sa.getActivationsThisTurn()) {
+                return false;
+            }
+        }
+
         // Rule 605.3c about Mana Abilities
         if (sa.isManaAbility()) {
             for (IndividualCostPaymentInstance i : game.costPaymentStack) {

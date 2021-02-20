@@ -1,8 +1,9 @@
 Name:Superior Numbers
 ManaCost:G G
 Types:Sorcery
-A:SP$ DealDamage | Cost$ G G | NumDmg$ X | References$ X,Y | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ CARDNAME deals damage to target creature equal to the number of creatures you control in excess of the number of creatures target opponent controls.
+A:SP$ Pump | Cost$ G G | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals damage to target creature equal to the number of creatures you control in excess of the number of creatures target opponent controls. | StackDescription$ SpellDescription
+SVar:DBDealDamage:DB$ DealDamage | NumDmg$ X | References$ X,Y | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:X:Count$Valid Creature.YouCtrl/Minus.Y
-SVar:Y:Count$Valid Creature.OppCtrl
+SVar:Y:Count$Valid Creature.TargetedPlayerCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/superior_numbers.jpg
 Oracle:Superior Numbers deals damage to target creature equal to the number of creatures you control in excess of the number of creatures target opponent controls.

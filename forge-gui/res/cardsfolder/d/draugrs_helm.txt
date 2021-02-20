@@ -1,0 +1,11 @@
+Name:Draugr's Helm
+ManaCost:1 B
+Types:Artifact Equipment
+K:Equip:4
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Menace | Description$ Equipped creature gets +2/+2 and has menace.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {2}{B}. If you do, create a 2/2 black Zombie Berserker creature token, then attach CARDNAME to it.
+SVar:TrigToken:AB$ Token | Cost$ 2 B | LegacyImage$ b 2 2 zombie berserker khm | TokenScript$ b_2_2_zombie_berserker | TokenAmount$ 1 | TokenOwner$ You | RememberTokens$ True | Optional$ True | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Object$ TriggeredCard | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token
+Oracle:When Draugr's Helm enters the battlefield, you may pay {2}{B}. If you do, create a 2/2 black Zombie Berserker creature token, then attach Draugr's Helm to it.\nEquipped creature gets +2/+2 and has menace. (It can't be blocked except by two or more creatures.)\nEquip: {4}

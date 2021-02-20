@@ -1,0 +1,11 @@
+Name:Infernal Pet
+ManaCost:2 B
+Types:Creature Imp
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ DBPutCounter | CheckSVar$ YouCastThisTurn | SVarCompare$ EQ2 | NoResolvingCheck$ True | TriggerDescription$ Whenever you cast your second spell each turn, put a +1/+1 counter on CARDNAME and it gains flying until end of turn.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ TrigPump
+SVar:TrigPump:DB$ Pump | KW$ Flying | Defined$ Self
+SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
+SVar:BuffedBy:Card
+DeckHas:Ability$Counters
+Oracle:Whenever you cast your second spell each turn, put a +1/+1 counter on Infernal Pet and it gains flying until end of turn.

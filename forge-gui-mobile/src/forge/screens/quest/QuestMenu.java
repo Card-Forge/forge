@@ -183,6 +183,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     }
 
     public static void launchQuestMode(final LaunchReason reason, boolean commanderMode) {
+        Forge.lastButtonIndex = 6;
         HomeScreen.instance.updateQuestCommanderMode(commanderMode);
         decksScreen.commanderMode = commanderMode;
         //attempt to load current quest

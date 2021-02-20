@@ -1,0 +1,9 @@
+Name:Cavern Whisperer
+ManaCost:4 B
+Types:Creature Nightmare
+PT:4/4
+K:Mutate:3 B
+K:Menace
+T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever this creature mutates, each opponent discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Mutate {3}{B} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nMenace (This creature can't be blocked except by two or more creatures.)\nWhenever this creature mutates, each opponent discards a card.

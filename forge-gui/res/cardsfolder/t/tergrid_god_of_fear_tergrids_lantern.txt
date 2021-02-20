@@ -1,0 +1,25 @@
+Name:Tergrid, God of Fright
+ManaCost:3 B B
+Types:Legendary Creature God
+PT:4/5
+K:Menace
+T:Mode$ Sacrificed | ValidCard$ Permanent.nonToken+OppCtrl | OptionalDecider$ You | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent sacrifices a nontoken permanent, you may put that card from a graveyard onto the battlefield under your control.
+T:Mode$ Discarded | ValidCard$ Permanent.nonToken+OppCtrl | OptionalDecider$ You | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent discards a permanent card, you may put that card from a graveyard onto the battlefield under your control.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCard
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever an opponent sacrifices a nontoken permanent or discards a permanent card, you may put that card onto the battlefield under your control from their graveyard.
+SVar:PlayMain1:TRUE
+AlternateMode:Modal
+
+ALTERNATE
+
+Name:Tergrid's Lantern
+ManaCost:3 B
+Types:Legendary Artifact
+A:AB$ Pump | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ TrigGenericChoice | SpellDescription$ Target player loses 3 life unless they sacrifice a nonland permanent or discard a card.
+A:AB$ Untap | Cost$ 3 B | SpellDescription$ Untap CARDNAME.
+SVar:TrigGenericChoice:DB$ GenericChoice | Defined$ Targeted | Choices$ PaySac,PayDiscard | FallbackAbility$ LoseLifeFallback | AILogic$ PayUnlessCost
+SVar:PaySac:DB$ LoseLife | LifeAmount$ 3 | Defined$ Targeted | UnlessCost$ Sac<1/Permanent.nonland/nonland permanent> | UnlessPayer$ Targeted | UnlessAI$ LifeLE3 | SpellDescription$ You lose 3 life unless you sacrifice a nonland permanent
+SVar:PayDiscard:DB$ LoseLife | LifeAmount$ 3 | Defined$ Targeted | UnlessCost$ Discard<1/Card> | UnlessPayer$ Targeted | UnlessAI$ LifeLE3 | SpellDescription$ You lose 3 life unless you discard a card
+# TODO: Most likely the ChooseGenericEffect code can be simplified somehow to avoid the necessity of having a dedicated fallback ability
+SVar:LoseLifeFallback:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 3
+Oracle:{T}: Target player loses 3 life unless they sacrifice a nonland permanent or discard a card.\n{3}{B}: Untap Tergrid's Lantern.

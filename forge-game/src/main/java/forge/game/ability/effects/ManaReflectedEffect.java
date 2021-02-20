@@ -11,7 +11,6 @@ import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -29,8 +28,7 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
 
         final Collection<String> colors = CardUtil.getReflectableManaColors(sa);
 
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
-        for (final Player player : tgtPlayers) {
+        for (final Player player : getTargetPlayers(sa)) {
             final String generated = generatedReflectedMana(sa, colors, player);
             ma.produceMana(generated, player, sa);
         }

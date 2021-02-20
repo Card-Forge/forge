@@ -87,12 +87,12 @@ public class DiscardAi extends SpellAbilityAi {
         if (sa.hasParam("NumCards")) {
            if (sa.getParam("NumCards").equals("X") && sa.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                final int cardsToDiscard = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), ai.getWeakestOpponent()
+                final int cardsToDiscard = Math.min(ComputerUtilCost.getMaxXValue(sa, ai), ai.getWeakestOpponent()
                         .getCardsIn(ZoneType.Hand).size());
                 if (cardsToDiscard < 1) {
                     return false;
                 }
-                sa.setSVar("PayX", Integer.toString(cardsToDiscard));
+                sa.setXManaCostPaid(cardsToDiscard);
             } else {
                 if (AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) < 1) {
                     return false;
@@ -130,10 +130,18 @@ public class DiscardAi extends SpellAbilityAi {
             }
         }
 
-        // Don't use draw abilities before main 2 if possible
+        // Don't use discard abilities before main 2 if possible
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !sa.hasParam("ActivationPhases")) {
+                && !sa.hasParam("ActivationPhases") && !aiLogic.startsWith("AnyPhase")) {
             return false;
+        }
+
+        if (aiLogic.equals("AnyPhaseIfFavored")) {
+            if (ai.getGame().getCombat() != null) {
+                if (ai.getCardsIn(ZoneType.Hand).size() < ai.getGame().getCombat().getDefenderPlayerByAttacker(source).getCardsIn(ZoneType.Hand).size()) {
+                    return false;
+                }
+            }
         }
 
         // Don't tap creatures that may be able to block
@@ -191,11 +199,11 @@ public class DiscardAi extends SpellAbilityAi {
             		}
             	}
             }
-            if ("X".equals(sa.getParam("RevealNumber")) && sa.getHostCard().getSVar("X").equals("Count$xPaid")) {
+            if ("X".equals(sa.getParam("RevealNumber")) && sa.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                final int cardsToDiscard = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), ai.getWeakestOpponent()
+                final int cardsToDiscard = Math.min(ComputerUtilCost.getMaxXValue(sa, ai), ai.getWeakestOpponent()
                         .getCardsIn(ZoneType.Hand).size());
-                sa.getHostCard().setSVar("PayX", Integer.toString(cardsToDiscard));
+                sa.setXManaCostPaid(cardsToDiscard);
             }
         }
 

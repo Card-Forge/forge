@@ -2,8 +2,6 @@ Name:Plaguebearer
 ManaCost:1 B
 Types:Creature Zombie
 PT:1/1
-A:AB$ Destroy | Cost$ X X B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | References$ X | SpellDescription$ Destroy target nonblack creature with converted mana cost X.
-# It may seem wrong to not use X in the target, but since the Target is what defines X, it's redundant (and not supported by the code)
-SVar:X:Targeted$CardManaCost
-SVar:Picture:http://www.wizards.com/global/images/magic/general/plaguebearer.jpg
+A:AB$ Destroy | Cost$ X X B | ValidTgts$ Creature.nonBlack+cmcEQX | TgtPrompt$ Select target nonblack creature | References$ X | SpellDescription$ Destroy target nonblack creature with converted mana cost X.
+SVar:X:Count$xPaid
 Oracle:{X}{X}{B}: Destroy target nonblack creature with converted mana cost X.

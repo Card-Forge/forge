@@ -1,0 +1,7 @@
+Name:Jaspera Sentinel
+ManaCost:G
+Types:Creature Elf Rogue
+PT:1/2
+K:Reach
+A:AB$ Mana | Cost$ T tapXType<1/Creature> | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:Reach\n{T}, Tap an untapped creature you control: Add one mana of any color.

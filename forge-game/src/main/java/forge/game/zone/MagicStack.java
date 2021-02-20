@@ -17,13 +17,8 @@
  */
 package forge.game.zone;
 
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Stack;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import com.esotericsoftware.minlog.Log;
@@ -52,7 +47,6 @@ import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.OptionalCost;
-import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
@@ -97,6 +91,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     public final void setFrozen(final boolean frozen0) {
         frozen = frozen0;
     }
+
+    private int maxDistinctSources = 0;
+    public int getMaxDistinctSources() { return maxDistinctSources; }
+    public void resetMaxDistinctSources() { maxDistinctSources = 0; }
 
     public final void reset() {
         clear();
@@ -232,26 +230,27 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
-        if (!hasLegalTargeting(sp, source)) {
-            String str = source + " - [Couldn't add to stack, failed to target] - " + sp.getDescription();
-            System.err.println(str + sp.getAllTargetChoices());
-            game.getGameLog().add(GameLogEntryType.STACK_ADD, str);
-            return;
-        }
-
         if (sp.isSpell()) {
             source.setController(activator, 0);
-            final Spell spell = (Spell) sp;
-            if (spell.isCastFaceDown()) {
-                source.turnFaceDown();
-            } else if (source.isFaceDown()) {
+
+            if (source.isFaceDown() && !sp.isCastFaceDown()) {
                 source.turnFaceUp(null);
             }
+
+            // force the card be altered for alt states
+            source.setSplitStateToPlayAbility(sp);
 
             // copied always add to stack zone
             if (source.isCopiedSpell()) {
                 game.getStackZone().add(source);
             }
+        }
+
+        if (!sp.isCopied() && !hasLegalTargeting(sp, source)) {
+            String str = source + " - [Couldn't add to stack, failed to target] - " + sp.getDescription();
+            System.err.println(str + sp.getAllTargetChoices());
+            game.getGameLog().add(GameLogEntryType.STACK_ADD, str);
+            return;
         }
 
         if (sp.getApi() == ApiType.Charm && sp.hasParam("ChoiceRestriction")) {
@@ -416,6 +415,18 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         stack.addFirst(si);
         int stackIndex = stack.size() - 1;
 
+        int distinctSources = 0;
+        Set<Integer> sources = new TreeSet<>();
+        for (SpellAbilityStackInstance s : stack) {
+            if (s.isSpell()) {
+                distinctSources += 1;
+            } else {
+                sources.add(s.getSourceCard().getId());
+            }
+        }
+        distinctSources += sources.size();
+        if (distinctSources > maxDistinctSources) maxDistinctSources = distinctSources;
+
         // 2012-07-21 the following comparison needs to move below the pushes but somehow screws up priority
         // When it's down there. That makes absolutely no sense to me, so i'm putting it back for now
         if (!(sp.isTrigger() || (sp instanceof AbilityStatic))) {
@@ -465,8 +476,17 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 // the effect making it an Aura spell ends.
                 // It continues resolving as a creature spell.
                 source.unanimateBestow();
+                SpellAbility first = source.getFirstSpellAbility();
+                // need to set activating player
+                first.setActivatingPlayer(sa.getActivatingPlayer());
                 game.fireEvent(new GameEventCardStatsChanged(source));
-                AbilityUtils.resolve(sa.getHostCard().getFirstSpellAbility());
+                AbilityUtils.resolve(first);
+            } else if (sa.isMutate()) {
+                SpellAbility first = source.getFirstSpellAbility();
+                // need to set activating player
+                first.setActivatingPlayer(sa.getActivatingPlayer());
+                game.fireEvent(new GameEventCardStatsChanged(source));
+                AbilityUtils.resolve(first);
             } else {
                 // TODO: Spell fizzles, what's the best way to alert player?
                 Log.debug(source.getName() + " ability fizzles.");

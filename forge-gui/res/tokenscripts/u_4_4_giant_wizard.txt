@@ -1,0 +1,6 @@
+Name:Giant Wizard
+ManaCost:no cost
+Types:Creature Giant Wizard
+Colors:blue
+PT:4/4
+Oracle:

@@ -280,7 +280,8 @@ public class CardDetailUtil {
             area.append("\n");
         }
 
-        String text = card.getText(state, CardTranslation.getTranslationTexts(state.getName(), ""));
+        String text = !card.isSplitCard() ? card.getText(state, CardTranslation.getTranslationTexts(state.getName(), "")) :
+            card.getText(state, CardTranslation.getTranslationTexts(card.getLeftSplitState().getName(), card.getRightSplitState().getName()));
 
         // LEVEL [0-9]+-[0-9]+
         // LEVEL [0-9]+\+
@@ -393,6 +394,9 @@ public class CardDetailUtil {
             }
             area.append("(chosen type: ");
             area.append(card.getChosenType());
+            if (!card.getChosenType2().isEmpty()) {
+                area.append(", ").append(card.getChosenType2());
+            }
             area.append(")");
         }
 

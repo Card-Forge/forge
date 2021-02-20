@@ -2,7 +2,7 @@ Name:Korlash, Heir to Blackblade
 ManaCost:2 B B
 Types:Legendary Creature Zombie Warrior
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Swamps you control.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of Swamps you control.
 SVar:X:Count$Valid Swamp.YouCtrl
 A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 A:AB$ ChangeZone | Cost$ Discard<1/Card.namedKorlash, Heir to Blackblade> | Origin$ Library | Destination$ Battlefield | ChangeType$ Swamp | ChangeNum$ 2 | Tapped$ True | CostDesc$ Grandeur — Discard another card named Korlash, Heir to Blackblade: | SpellDescription$ Search your library for up to two Swamp cards, put them onto the battlefield tapped, then shuffle your library.

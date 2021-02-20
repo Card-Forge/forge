@@ -2,14 +2,11 @@ Name:Suffer the Past
 ManaCost:X B
 Types:Instant
 A:SP$ Pump | Cost$ X B | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBExileTargets | References$ X | SpellDescription$ Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life and you gain 1 life. | StackDescription$ None
-SVar:DBExileTargets:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ MaxTgts | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TargetsWithDefinedController$ ParentTarget | TgtPrompt$ Select target card targeted player owns | References$ X,MaxTgts | RememberChanged$ True | SubAbility$ DBSyphonLife
-# It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
+SVar:DBExileTargets:DB$ ChangeZone | TargetMin$ X | TargetMax$ X | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TargetsWithDefinedController$ ParentTarget | TgtPrompt$ Select target card targeted player owns | References$ X,MaxTgts | RememberChanged$ True | SubAbility$ DBSyphonLife
 SVar:DBSyphonLife:DB$ LoseLife | Defined$ Targeted | LifeAmount$ Y | References$ Y | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y | References$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:TargetedObjects$Amount/Minus.1
-SVar:MaxTgts:TargetedPlayer$ValidGraveyard Card
+SVar:X:Count$xPaid
 SVar:Y:Remembered$Amount
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/suffer_the_past.jpg
 Oracle:Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life and you gain 1 life.

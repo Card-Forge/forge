@@ -33,7 +33,7 @@ public class CostAdjustment {
         final Card host = sa.getHostCard();
         final Game game = player.getGame();
 
-        if (sa.isTrigger()) {
+        if (sa.isTrigger() || cost == null) {
             return cost;
         }
 

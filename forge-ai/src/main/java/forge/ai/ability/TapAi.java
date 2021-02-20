@@ -60,11 +60,8 @@ public class TapAi extends TapAiBase {
             // X controls the minimum targets
             if ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
-                sa.setSVar("PayX", Integer.toString(xPay));
-
                 // TODO need to set XManaCostPaid for targets, maybe doesn't need PayX anymore?
-                sa.setXManaCostPaid(xPay);
+                sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai));
                 // TODO since change of PayX. the shouldCastLessThanMax logic might be faulty
             }
 

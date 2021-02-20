@@ -41,16 +41,30 @@ import forge.util.CardTranslation;
 public class AdvancedSearch {
     public enum FilterOption {
         NONE("lblNone", null, null, null),
-        CARD_NAME("lblName", PaperCard.class, FilterOperator.STRING_OPS, new StringEvaluator<PaperCard>() {
+        CARD_NAME("lblName", PaperCard.class, FilterOperator.STRINGS_OPS, new StringEvaluator<PaperCard>() {
             @Override
             protected String getItemValue(PaperCard input) {
-                return input.getName();
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<String> getItemValues(PaperCard input) {
+                Set<String> names = new HashSet<>();
+                names.add(input.getName());
+                names.add(CardTranslation.getTranslatedName(input.getName()));
+                return names;
             }
         }),
-        CARD_RULES_TEXT("lblRulesText", PaperCard.class, FilterOperator.STRING_OPS, new StringEvaluator<PaperCard>() {
+        CARD_RULES_TEXT("lblRulesText", PaperCard.class, FilterOperator.STRINGS_OPS, new StringEvaluator<PaperCard>() {
             @Override
             protected String getItemValue(PaperCard input) {
-                return input.getRules().getOracleText();
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<String> getItemValues(PaperCard input) {
+                Set<String> names = new HashSet<>();
+                names.add(input.getRules().getOracleText());
+                names.add(CardTranslation.getTranslatedOracle(input.getName()));
+                return names;
             }
         }),
         CARD_KEYWORDS("lblKeywords", PaperCard.class, FilterOperator.COLLECTION_OPS, new CustomListEvaluator<PaperCard, Keyword>(Keyword.getAllKeywords()) {
@@ -737,6 +751,18 @@ public class AdvancedSearch {
                 }
                 return false;
             }
+            @Override
+            public boolean apply(Set<String> inputs, List<String> values) {
+                if (inputs != null && !inputs.isEmpty() && !values.isEmpty()) {
+                    for (String input : inputs) {
+                        if (apply(input, values)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                return false;
+            }
         }),
         STARTS_WITH("lblStartsWith", "%1$s starts with '%2$s'", FilterValueCount.ONE, new OperatorEvaluator<String>() {
             @Override
@@ -746,12 +772,36 @@ public class AdvancedSearch {
                 }
                 return false;
             }
+            @Override
+            public boolean apply(Set<String> inputs, List<String> values) {
+                if (inputs != null && !inputs.isEmpty() && !values.isEmpty()) {
+                    for (String input : inputs) {
+                        if (apply(input, values)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                return false;
+            }
         }),
         ENDS_WITH("lblEndsWith", "%1$s ends with '%2$s'", FilterValueCount.ONE, new OperatorEvaluator<String>() {
             @Override
             public boolean apply(String input, List<String> values) {
                 if (input != null) {
                     return input.toLowerCase().endsWith(values.get(0).toLowerCase());
+                }
+                return false;
+            }
+            @Override
+            public boolean apply(Set<String> inputs, List<String> values) {
+                if (inputs != null && !inputs.isEmpty() && !values.isEmpty()) {
+                    for (String input : inputs) {
+                        if (apply(input, values)) {
+                            return true;
+                        }
+                    }
+                    return false;
                 }
                 return false;
             }
@@ -915,6 +965,9 @@ public class AdvancedSearch {
         public static final FilterOperator[] STRING_OPS = new FilterOperator[] {
             CONTAINS, STARTS_WITH, ENDS_WITH
         };
+        public static final FilterOperator[] STRINGS_OPS = new FilterOperator[] {
+            CONTAINS, STARTS_WITH, ENDS_WITH
+        };
         public static final FilterOperator[] SINGLE_LIST_OPS = new FilterOperator[] {
             IS_ANY
         };
@@ -969,27 +1022,32 @@ public class AdvancedSearch {
         @SuppressWarnings("unchecked")
         public final Filter<T> createFilter(FilterOption option, FilterOperator operator) {
             final List<V> values = getValues(option, operator);
-            if (values == null || values.isEmpty()) { return null; }
+            if (values == null || values.isEmpty()) {
+                return null;
+            }
 
             String caption = getCaption(values, option, operator);
 
-            final OperatorEvaluator<V> evaluator = (OperatorEvaluator<V>)operator.evaluator;
-            Predicate<T> predicate;
-            if (option.operatorOptions == FilterOperator.MULTI_LIST_OPS || option.operatorOptions == FilterOperator.COMBINATION_OPS || option.operatorOptions == FilterOperator.COLLECTION_OPS) {
-                predicate = new Predicate<T>() {
-                    @Override
-                    public boolean apply(T input) {
-                        return evaluator.apply(getItemValues(input), values);
-                    }
-                };
-            }
-            else {
-                predicate = new Predicate<T>() {
-                    @Override
-                    public boolean apply(T input) {
-                        return evaluator.apply(getItemValue(input), values);
-                    }
-                };
+            final OperatorEvaluator<V> evaluator = (OperatorEvaluator<V>) operator.evaluator;
+            Predicate<T> predicate = new Predicate<T>() {
+                @Override
+                public boolean apply(T input) {
+                    return evaluator.apply(getItemValue(input), values);
+                }
+            };
+            ;
+            final FilterOperator[][] manyValueOperators = { FilterOperator.MULTI_LIST_OPS,
+                    FilterOperator.COMBINATION_OPS, FilterOperator.COLLECTION_OPS, FilterOperator.STRINGS_OPS };
+            for (FilterOperator[] oper : manyValueOperators) {
+                if (option.operatorOptions == oper) {
+                    predicate = new Predicate<T>() {
+                        @Override
+                        public boolean apply(T input) {
+                            return evaluator.apply(getItemValues(input), values);
+                        }
+                    };
+                    break;
+                }
             }
             return new Filter<>(option, operator, caption, predicate);
         }

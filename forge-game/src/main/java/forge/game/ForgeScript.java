@@ -5,6 +5,7 @@ import forge.card.MagicColor;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardState;
+import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
@@ -73,6 +74,10 @@ public class ForgeScript {
             return cardState.getTypeWithChanges().hasStringType(source.getChosenType());
         } else if (property.equals("IsNotChosenType")) {
             return !cardState.getTypeWithChanges().hasStringType(source.getChosenType());
+        } else if (property.equals("ChosenType2")) {
+            return cardState.getTypeWithChanges().hasStringType(source.getChosenType2());
+        } else if (property.equals("IsNotChosenType2")) {
+            return !cardState.getTypeWithChanges().hasStringType(source.getChosenType2());
         } else if (property.startsWith("HasSubtype")) {
             final String subType = property.substring(11);
             return cardState.getTypeWithChanges().hasSubtype(subType);
@@ -127,6 +132,9 @@ public class ForgeScript {
             return !sa.isManaAbility();
         } else if (property.equals("withoutXCost")) {
             return !sa.costHasManaX();
+        } else if (property.equals("hasTapCost")) {
+            Cost cost = sa.getPayCosts();
+            return cost != null && cost.hasTapCost();
         } else if (property.equals("Buyback")) {
             return sa.isBuyBackAbility();
         } else if (property.equals("Cycling")) {
@@ -149,6 +157,10 @@ public class ForgeScript {
             return sa.hasParam("Equip");
         } else if (property.equals("Boast")) {
             return sa.isBoast();
+        } else if (property.equals("Foretelling")) {
+            return sa.isForetelling();
+        } else if (property.equals("Foretold")) {
+            return sa.isForetold();
         } else if (property.equals("MayPlaySource")) {
             StaticAbility m = sa.getMayPlay();
             if (m == null) {
@@ -169,6 +181,12 @@ public class ForgeScript {
             return sa.getActivatingPlayer().equals(sourceController);
         } else if (property.equals("OppCtrl")) {
             return sa.getActivatingPlayer().isOpponentOf(sourceController);
+        } else if (property.startsWith("cmc")) {
+            int y = sa.getPayCosts().getTotalMana().getCMC();
+            int x = AbilityUtils.calculateAmount(spellAbility.getHostCard(), property.substring(5), spellAbility);
+            if (!Expressions.compare(y, property, x)) {
+                return false;
+            }
         } else if (sa.getHostCard() != null) {
             return sa.getHostCard().hasProperty(property, sourceController, source, spellAbility);
         }

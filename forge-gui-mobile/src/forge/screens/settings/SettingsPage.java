@@ -438,20 +438,22 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("nlVibrateAfterLongPress")),
                 6);
         //Sound Options
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_SOUNDS,
-                localizer.getMessage("cbEnableSounds"),
-                localizer.getMessage("nlEnableSounds")),
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_VOL_SOUNDS,
+                localizer.getMessage("cbAdjustSoundsVolume"),
+                localizer.getMessage("nlAdjustSoundsVolume"),
+                new String[]{"0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"}),
                 7);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_MUSIC,
-                localizer.getMessage("cbEnableMusic"),
-                localizer.getMessage("nlEnableMusic")) {
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_VOL_MUSIC,
+                localizer.getMessage("cbAdjustMusicVolume"),
+                localizer.getMessage("nlAdjustMusicVolume"),
+                new String[]{"0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"}) {
                     @Override
-                    public void select() {
-                        super.select();
-                        //update background music when this setting changes
-                        SoundSystem.instance.changeBackgroundTrack();
-                    }
-                },7);
+                        public void valueChanged(String newValue) {
+                            super.valueChanged(newValue);
+                            //update background music when this setting changes
+                            SoundSystem.instance.changeBackgroundTrack();
+                        }
+                }, 7);
         /*lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_SOUND_SYSTEM,
                 "Use Alternate Sound System",
                 "Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."),
@@ -508,8 +510,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         public CustomSelectSetting(FPref pref0, String label0, String description0, Iterable<String> options0) {
             super(pref0, label0 + ":", description0);
 
-            for (String option : options0) {
-                options.add(option);
+            if (options0 != null) {
+                for (String option : options0) {
+                    options.add(option);
+                }
             }
         }
         public <E extends Enum<E>> CustomSelectSetting(FPref pref0, String label0, String description0, Class<E> enumData) {

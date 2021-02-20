@@ -1,0 +1,6 @@
+Name:Mirrored Lotus
+ManaCost:0
+Types:Artifact
+K:Reflect:0
+A:AB$ Mana | Cost$ T Exile<1/CARDNAME> | Produced$ Any | Amount$ 3 | AILogic$ BlackLotus | SpellDescription$ Add three mana of any one color.
+Oracle:Reflect {0} (As this enters the battlefield, each opponent may pay {0}. When they do, they create a token copy of this except it lacks this ability.)\n{T}, Exile Mirrored Lotus: Add three mana of any one color.

@@ -143,20 +143,26 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private Type   type;
     private String name;
     private String alias = null;
-    private String prerelease = null;
     private boolean whiteBorder = false;
+
+    // SealedProduct
+    private String prerelease = null;
+    private int boosterBoxCount = 36;
+
+    // Booster/draft info
+    private boolean smallSetOverride = false;
+    private boolean foilAlwaysInCommonSlot = false;
     private FoilType foilType = FoilType.NOT_SUPPORTED;
     private double foilChanceInBooster = 0;
-    private boolean foilAlwaysInCommonSlot = false;
     private double chanceReplaceCommonWith = 0;
     private String slotReplaceCommonWith = "Common";
     private String additionalSheetForFoils = "";
     private String additionalUnlockSet = "";
-    private boolean smallSetOverride = false;
     private String boosterMustContain = "";
     private String boosterReplaceSlotFromPrintSheet = "";
-    private String[] chaosDraftThemes = new String[0];
     private String doublePickDuringDraft = "";
+    private String[] chaosDraftThemes = new String[0];
+
     private final ListMultimap<String, CardInSet> cardMap;
     private final Map<String, Integer> tokenNormalized;
     // custom print sheets that will be loaded lazily
@@ -220,7 +226,10 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public Type   getType()  { return type;  }
     public String getName()  { return name;  }
     public String getAlias() { return alias; }
+
     public String getPrerelease() { return prerelease; }
+    public int getBoosterBoxCount() { return boosterBoxCount; }
+
     public FoilType getFoilType() { return foilType; }
     public double getFoilChanceInBooster() { return foilChanceInBooster; }
     public boolean getFoilAlwaysInCommonSlot() { return foilAlwaysInCommonSlot; }
@@ -448,6 +457,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             }
             res.type = enumType;
             res.prerelease = section.get("Prerelease", null);
+            res.boosterBoxCount = Integer.parseInt(section.get("BoosterBox", "36"));
 
             switch(section.get("foil", "newstyle").toLowerCase()) {
                 case "notsupported":
@@ -671,7 +681,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         private static class CanMakeBoosterBox implements Predicate<CardEdition> {
             @Override
             public boolean apply(final CardEdition subject) {
-                return StaticData.instance().getBoosterBoxes().contains(subject.getCode());
+                return subject.getBoosterBoxCount() > 0;
             }
         }
 

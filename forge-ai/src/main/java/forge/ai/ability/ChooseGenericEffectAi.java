@@ -41,6 +41,8 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             }
         } else if ("GideonBlackblade".equals(aiLogic)) {
             return SpecialCardAi.GideonBlackblade.consider(ai, sa);
+        } else if ("SoulEcho".equals(aiLogic)) {
+            return doTriggerAINoCost(ai, sa, true);
         }
         return false;
     }
@@ -60,7 +62,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        if ("CombustibleGearhulk".equals(sa.getParam("AILogic"))) {
+        if ("CombustibleGearhulk".equals(sa.getParam("AILogic")) || "SoulEcho".equals(sa.getParam("AILogic"))) {
             for (final Player p : aiPlayer.getOpponents()) {
                 if (p.canBeTargetedBy(sa)) {
                     sa.resetTargets();
@@ -328,6 +330,10 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
 
             int bestGuessDamage = totalCMC * 3 / revealedCards.size();
             return life <= bestGuessDamage ? spells.get(0) : spells.get(1);
+        }  else if ("SoulEcho".equals(logic)) {
+            Player target = sa.getTargetingPlayer();
+            int life = target.getLife();
+            return life < 10 ? spells.get(0) : Aggregates.random(spells);
         } else if ("Pump".equals(logic) || "BestOption".equals(logic)) {
             List<SpellAbility> filtered = Lists.newArrayList();
             // filter first for the spells which can be done

@@ -22,7 +22,10 @@ import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
 import forge.util.Lang;
+import forge.util.Localizer;
+import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
+import forge.util.CardTranslation;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.EnumSet;
@@ -306,6 +309,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ChosenType, c.getChosenType());
     }
 
+    public String getChosenType2() {
+        return get(TrackableProperty.ChosenType2);
+    }
+    void updateChosenType2(Card c) {
+        set(TrackableProperty.ChosenType2, c.getChosenType2());
+    }
+
     public String getChosenNumber() {
         return get(TrackableProperty.ChosenNumber);
     }
@@ -318,6 +328,10 @@ public class CardView extends GameEntityView {
     }
     void updateChosenColors(Card c) {
         set(TrackableProperty.ChosenColors, c.getChosenColors());
+    }
+
+    public FCollectionView<CardView> getMergedCardsCollection() {
+        return get(TrackableProperty.MergedCardsCollection);
     }
 
     public FCollectionView<CardView> getChosenCards() {
@@ -423,6 +437,7 @@ public class CardView extends GameEntityView {
             //cards in these zones are visible to all
             return true;
         case Exile:
+        case Merged:
             //in exile, only face up cards and face down cards you can look at should be shown (since "exile face down" is a thing)
             if (!isFaceDown()) {
                 return true;
@@ -570,8 +585,6 @@ public class CardView extends GameEntityView {
     }
     public String getText(CardStateView state, HashMap<String, String> translationsText) {
         final StringBuilder sb = new StringBuilder();
-        //final boolean isSplitCard = (state.getState() == CardStateName.LeftSplit);
-
         String tname = "", toracle = "", taltname = "", taltoracle = "";
 
         // If we have translations, use them
@@ -579,37 +592,54 @@ public class CardView extends GameEntityView {
             tname = translationsText.get("name");
             taltname = translationsText.get("altname");
 
-            // Don't translate oracles if the card is a cloned one
-            if (((String) get(TrackableProperty.Cloner)).isEmpty()) {
+            // TODO: Translate for cloned or mutated cards
+            // For now, don't translate oracles if the card is a cloned or mutated
+            if (((String) get(TrackableProperty.Cloner)).isEmpty() &&
+                    ((String) get(TrackableProperty.MergedCards)).isEmpty()) {
                 toracle = translationsText.get("oracle");
                 taltoracle = translationsText.get("altoracle");
             }
         }
 
-        tname = tname.isEmpty() ? state.getName() : tname;
-
         if (isSplitCard()) {
-            taltname = getAlternateState().getName();
-            taltoracle = getAlternateState().getOracleText();
+            tname = tname.isEmpty() ? getLeftSplitState().getName() : tname;
+            taltname = taltname.isEmpty() ? getRightSplitState().getName() : taltname;
+            if (getId() < 0) {
+                toracle = toracle.isEmpty() ? getLeftSplitState().getOracleText() : toracle;
+                taltoracle = taltoracle.isEmpty() ? getRightSplitState().getOracleText() : taltoracle;
+            }
+        } else {
+            tname = tname.isEmpty() ? state.getName() : tname;
+            if (getId() < 0) {
+                toracle = toracle.isEmpty() ? state.getOracleText() : toracle;
+            }
         }
 
         if (getId() < 0) {
-            toracle = toracle.isEmpty() ? state.getOracleText() : toracle;
+            if (isSplitCard() && !toracle.isEmpty()) {
+                sb.append("(").append(tname).append(") ");
+                sb.append(toracle);
+                sb.append("\r\n\r\n");
+                sb.append("(").append(taltname).append(") ");
+                sb.append(taltoracle);
+            } else {
+                sb.append(toracle);
+            }
+            return sb.toString();
+        }
+
+        final String rulesText = state.getRulesText();
+        if (!toracle.isEmpty() && !isFaceDown()) {
             if (isSplitCard()) {
                 sb.append("(").append(tname).append(") ");
                 sb.append(toracle);
                 sb.append("\r\n\r\n");
                 sb.append("(").append(taltname).append(") ");
                 sb.append(taltoracle);
-                return sb.toString().trim();
             } else {
-                return toracle;
+                sb.append(toracle);
             }
-        }
-
-        final String rulesText = state.getRulesText();
-        if (!toracle.isEmpty()) {
-            sb.append(toracle).append("\r\n\r\n");
+            sb.append("\r\n\r\n");
         } else if (!rulesText.isEmpty()) {
             sb.append(rulesText).append("\r\n\r\n");
         }
@@ -618,23 +648,15 @@ public class CardView extends GameEntityView {
             sb.append(getOwner().getCommanderInfo(this)).append("\r\n");
         }
 
-        if (isSplitCard() && !isFaceDown()) {
-            // TODO: Translation?
-            if (getZone() != ZoneType.Stack) {
-                sb.append("(");
-                sb.append(getLeftSplitState().getName());
-                sb.append(") ");
+        if (toracle.isEmpty()) {
+            if (isSplitCard() && !isFaceDown() && getZone() != ZoneType.Stack) {
+                sb.append("(").append(getLeftSplitState().getName()).append(") ");
                 sb.append(getLeftSplitState().getAbilityText());
-            }  else {
+                sb.append("\r\n\r\n").append("(").append(getRightSplitState().getName()).append(") ");
+                sb.append(getRightSplitState().getAbilityText());
+            } else {
                 sb.append(state.getAbilityText());
             }
-        } else {
-            if (toracle.isEmpty()) sb.append(state.getAbilityText());
-        }
-
-        if (isSplitCard() && !isFaceDown() && getZone() != ZoneType.Stack) {
-            //ensure ability text for right half of split card is included unless spell is on stack
-            sb.append("\r\n\r\n").append("(").append(taltname).append(") ").append(taltoracle);
         }
 
         String nonAbilityText = get(TrackableProperty.NonAbilityText);
@@ -704,6 +726,11 @@ public class CardView extends GameEntityView {
             sb.append("\r\nCloned by: ").append(cloner);
         }
 
+        String mergedCards = get(TrackableProperty.MergedCards);
+        if (!mergedCards.isEmpty()) {
+            sb.append("\r\n\r\nMerged Cards: ").append(mergedCards);
+        }
+
         return sb.toString().trim();
     }
 
@@ -750,6 +777,7 @@ public class CardView extends GameEntityView {
     }
     void updateState(Card c) {
         updateName(c);
+        updateZoneText(c);
         updateDamage(c);
 
         boolean isSplitCard = c.isSplitCard();
@@ -769,6 +797,31 @@ public class CardView extends GameEntityView {
 
         //CardStateView cloner = CardView.getState(c, CardStateName.Cloner);
         set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
+
+        CardCollection mergedCollection = new CardCollection();
+        if (c.hasMergedCard()) {
+            StringBuilder sb = new StringBuilder();
+            CardCollectionView mergedCards = c.getMergedCards();
+            for (int i = 1; i < mergedCards.size(); i++) {
+                final Card card = mergedCards.get(i);
+                if (i > 1) sb.append(", ");
+                sb.append(card.getOriginalState(card.getCurrentStateName()).getName());
+                sb.append(" (").append(card.getId()).append(")");
+            }
+            set(TrackableProperty.MergedCards, sb.toString());
+            for (int i = 0; i < mergedCards.size(); i++) {
+                final Card card = mergedCards.get(i);
+                if (i == 0) { //get the original view of the top card
+                    if (!card.isFaceDown())
+                        mergedCollection.add(Card.getCardForUi(c.getPaperCard()));
+                    else
+                        mergedCollection.add(card);
+                } else {
+                    mergedCollection.add(card);
+                }
+            }
+        }
+        updateMergeCollections(mergedCollection);
 
         CardState currentState = c.getCurrentState();
         if (isSplitCard) {
@@ -864,9 +917,40 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.CantHaveKeyword, keywords);
     }
 
+    private String zoneText = "";
+    private String getZoneText() {
+        return zoneText;
+    }
+
+    void updateZoneText(Card c) {
+        if (c.getZone() != null && c.getZone().is(ZoneType.Sideboard) && c.getGame().getMaingame() != null) {
+            Card parentCard = c.getOwner().getMappingMaingameCard(c);
+            StringBuilder sb = new StringBuilder();
+            int parentLevel = 0;
+            while (parentCard != null) {
+                parentLevel++;
+                if (!parentCard.getZone().is(ZoneType.Sideboard)) {
+                    sb.append('[');
+                    if (parentCard.getGame().getMaingame() == null) {
+                        sb.append(Localizer.getInstance().getMessage("lblMainGame"));
+                    } else {
+                        sb.append(Localizer.getInstance().getMessage("lblSubgame", parentLevel));
+                    }
+                    sb.append(": ");
+                    sb.append(TextUtil.capitalize(parentCard.getZone().getZoneType().getTranslatedName()));
+                    sb.append(']');
+                    break;
+                }
+                parentCard = parentCard.getOwner().getMappingMaingameCard(parentCard);
+            }
+            zoneText = sb.toString();
+        }
+    }
+
     @Override
     public String toString() {
         String name = getName();
+        String zone = getZoneText();
         if (getId() <= 0) { //if fake card, just return name
             return name;
         }
@@ -881,7 +965,7 @@ public class CardView extends GameEntityView {
                 }
             }
         }
-        return (name + " (" + getId() + ")").trim();
+        return (zone + ' ' + CardTranslation.getTranslatedName(name) + " (" + getId() + ")").trim();
     }
 
     public class CardStateView extends TrackableObject {
@@ -1347,5 +1431,24 @@ public class CardView extends GameEntityView {
             set(key, null);
         }
         return null;
+    }
+    void updateMergeCollections(CardCollection cards) {
+        TrackableCollection<CardView> views = get(TrackableProperty.MergedCardsCollection);
+        boolean needFlagAsChanged = false;
+        if (views == null) {
+            views = new TrackableCollection<>();
+            set(TrackableProperty.MergedCardsCollection, views);
+        } else {
+            if (!views.isEmpty())
+                needFlagAsChanged = true;
+            views.clear();
+        }
+        if (cards != null) {
+            for (Card c : cards)
+                if (views.add(c.getView()))
+                    needFlagAsChanged = true;
+        }
+        if (needFlagAsChanged)
+            flagAsChanged(TrackableProperty.MergedCardsCollection);
     }
 }

@@ -20,6 +20,7 @@ import com.google.common.collect.ImmutableList;
 import forge.assets.FSkinProp;
 import forge.toolbox.FSkin.SkinImage;
 import forge.view.FDialog;
+import forge.view.FView;
 import forge.util.Localizer;
 
 /**
@@ -84,6 +85,11 @@ public class FOptionPane extends FDialog {
     }
     
     public static int showOptionDialog(final String message, final String title, final SkinImage icon, final List<String> options, final int defaultOption) {
+        // not fully done loading yet, avoid crash when called by colorCheck for random decks (as each item gets selected after another)
+        if (FView.SINGLETON_INSTANCE.getSplash() != null) {
+            return 0;
+        }
+
         final FOptionPane optionPane = new FOptionPane(message, title, icon, null, options, defaultOption);
         optionPane.setVisible(true);
         final int dialogResult = optionPane.result;

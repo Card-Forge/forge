@@ -1,6 +1,5 @@
 #Add one announcement per line
-Keyboard shortcut change: to help improve accessibility, the arrow key shortcuts to move between deck editor tables now require control or Command, depending on which platform you're on.
-Jumpstart sealed!
-Double Masters (including double pick)
-Lots of art updates and fixes
-No update on Mutate yet. Trust us, you'll know when it's here. 
+Get in the discord if you aren't yet.
+Mutate is now implemented, with only one unscripted Mutate card remaining.
+Draft cubes have been updated to account for the newly supported cards, MTGO Vintage December 2020 cube was added.
+New Possibility Storm puzzles were added to the Puzzle Mode (IKO/M21/ZNR/KHM), including puzzles that utilize Mutate.

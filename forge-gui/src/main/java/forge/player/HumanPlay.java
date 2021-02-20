@@ -65,7 +65,7 @@ public class HumanPlay {
         boolean castFaceDown = sa.isCastFaceDown();
 
         sa.setActivatingPlayer(p);
-        boolean flippedToCast = sa instanceof Spell && source.isFaceDown();
+        boolean flippedToCast = sa.isSpell() && source.isFaceDown();
 
         source.setSplitStateToPlayAbility(sa);
         sa = chooseOptionalAdditionalCosts(p, sa);
@@ -98,7 +98,12 @@ public class HumanPlay {
         final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
         if (!req.playAbility(true, false, false)) {
             if (flippedToCast && !castFaceDown) {
-                source.turnFaceDown(true);
+                // need to get the changed card if able
+                Card rollback = p.getGame().getCardState(sa.getHostCard());
+                rollback.turnFaceDown(true);
+                if (rollback.isInZone(ZoneType.Exile)) {
+                    rollback.addMayLookTemp(p);
+                }
             }
             return false;
         }

@@ -7,8 +7,28 @@ public class ManaConversionMatrix {
 
     // Conversion matrix ORs byte values to make mana more payable
     // Restrictive matrix ANDs byte values to make mana less payable
-    byte[] colorConversionMatrix = new byte[ManaAtom.MANATYPES.length];
-    byte[] colorRestrictionMatrix = new byte[ManaAtom.MANATYPES.length];
+    protected byte[] colorConversionMatrix = new byte[ManaAtom.MANATYPES.length];
+    protected byte[] colorRestrictionMatrix = new byte[ManaAtom.MANATYPES.length];
+
+    protected boolean snowForColor = false;
+
+    public boolean isSnowForColor() {
+        return snowForColor;
+    }
+
+    public void setSnowForColor(boolean value) {
+        snowForColor = value;
+    }
+
+    public byte getPossibleColorUses(byte color) {
+        // Take the current conversion value, AND with restrictions to get mana usage
+        int rowIdx = ManaAtom.getIndexOfFirstManaType(color);
+        int matrixIdx = rowIdx < 0 ? identityMatrix.length - 1 : rowIdx;
+
+        byte colorUse = colorConversionMatrix[matrixIdx];
+        colorUse &= colorRestrictionMatrix[matrixIdx];
+        return colorUse;
+    }
 
     public void adjustColorReplacement(byte originalColor, byte replacementColor, boolean additive) {
         // Fix the index without hardcodes
@@ -30,6 +50,7 @@ public class ManaConversionMatrix {
         for (int i = 0; i < colorRestrictionMatrix.length; i++) {
             colorRestrictionMatrix[i] &= extraMatrix.colorRestrictionMatrix[i];
         }
+        setSnowForColor(extraMatrix.isSnowForColor());
     }
 
     public void restoreColorReplacements() {
@@ -41,5 +62,6 @@ public class ManaConversionMatrix {
         for (int i = 0; i < colorRestrictionMatrix.length; i++) {
             colorRestrictionMatrix[i] = ManaAtom.ALL_MANA_TYPES;
         }
+        snowForColor = false;
     }
 }

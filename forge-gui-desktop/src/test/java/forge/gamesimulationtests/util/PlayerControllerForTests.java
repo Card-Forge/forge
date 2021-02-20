@@ -142,7 +142,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public TargetChoices chooseNewTargetsFor(SpellAbility ability) {
+    public TargetChoices chooseNewTargetsFor(SpellAbility ability, Predicate<GameObject> filter, boolean optional) {
         throw new IllegalStateException("Erring on the side of caution here...");
     }
 
@@ -609,9 +609,9 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public void playChosenSpellAbility(SpellAbility sa) {
+    public boolean playChosenSpellAbility(SpellAbility sa) {
         // TODO Play abilities from here
-        
+        return true;
     }
 
     @Override

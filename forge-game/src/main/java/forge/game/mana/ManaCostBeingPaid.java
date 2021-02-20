@@ -20,6 +20,8 @@ package forge.game.mana;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.IParserManaCost;
@@ -105,11 +107,16 @@ public class ManaCostBeingPaid {
             xCount = copy.xCount;
             totalCount = copy.totalCount;
         }
+
+        @Override
+        public String toString() {
+            return "{x=" + xCount + " total=" + totalCount + "}";
+        }
     }
 
     // holds Mana_Part objects
     // ManaPartColor is stored before ManaPartGeneric
-    private final Map<ManaCostShard, ShardCount> unpaidShards = new HashMap<>();
+    private final Map<ManaCostShard, ShardCount> unpaidShards = Maps.newHashMap();
     private Map<String, Integer> xManaCostPaidByColor;
     private final String sourceRestriction;
     private byte sunburstMap = 0;
@@ -124,7 +131,7 @@ public class ManaCostBeingPaid {
             unpaidShards.put(m.getKey(), new ShardCount(m.getValue()));
         }
         if (manaCostBeingPaid.xManaCostPaidByColor != null) {
-            xManaCostPaidByColor = new HashMap<>(manaCostBeingPaid.xManaCostPaidByColor);
+            xManaCostPaidByColor = Maps.newHashMap(manaCostBeingPaid.xManaCostPaidByColor);
         }
         sourceRestriction = manaCostBeingPaid.sourceRestriction;
         sunburstMap = manaCostBeingPaid.sunburstMap;
@@ -503,7 +510,7 @@ public class ManaCostBeingPaid {
             sc.xCount--;
             String color = MagicColor.toShortString(colorMask);
             if (xManaCostPaidByColor == null) {
-                xManaCostPaidByColor = new HashMap<>();
+                xManaCostPaidByColor = Maps.newHashMap();
             }
             Integer xColor = xManaCostPaidByColor.get(color);
             if (xColor == null) {
@@ -545,6 +552,11 @@ public class ManaCostBeingPaid {
         }
         if (mana.isRestricted() && !mana.getManaAbility().meetsManaShardRestrictions(shard, mana.getColor())) {
         	return false;
+        }
+
+        // snow can be paid for any color
+        if (shard.getColorMask() != 0 && mana.isSnow() && pool.isSnowForColor()) {
+            return true;
         }
 
         byte color = mana.getColor();
@@ -597,19 +609,7 @@ public class ManaCostBeingPaid {
         }
 
         int nGeneric = getGenericManaAmount();
-        List<ManaCostShard> shards = new ArrayList<>(unpaidShards.keySet());
-
-        // TODO Fix this. Should we really be changing Shards here?
-        if (false && pool != null) { //replace shards with generic mana if they can be paid with any color mana
-            for (int i = 0; i < shards.size(); i++) {
-                ManaCostShard shard = shards.get(i);
-                if (shard != ManaCostShard.GENERIC && pool.getPossibleColorUses(shard.getColorMask()) == ManaAtom.ALL_MANA_TYPES) {
-                    nGeneric += unpaidShards.get(shard).totalCount;
-                    shards.remove(i);
-                    i--;
-                }
-            }
-        }
+        List<ManaCostShard> shards = Lists.newArrayList(unpaidShards.keySet());
 
         if (nGeneric > 0) {
             if (nGeneric <= 20) {

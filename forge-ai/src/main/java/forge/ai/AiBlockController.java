@@ -70,7 +70,8 @@ public class AiBlockController {
         for (final Card blocker : blockersLeft) {
             // if the blocker can block a creature with lure it can't block a creature without
             if (CombatUtil.canBlock(attacker, blocker, combat)) {
-                if (solo && blocker.hasKeyword("CARDNAME can't attack or block alone.")) {
+                boolean cantBlockAlone = blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone.");
+                if (solo && cantBlockAlone) {
                     continue;
                 }
                 blockers.add(blocker);

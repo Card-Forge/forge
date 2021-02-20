@@ -102,7 +102,6 @@ public class ChooseCardAi extends SpellAbilityAi {
         } else if (aiLogic.equals("Ashiok")) {
             final int loyalty = host.getCounters(CounterEnumType.LOYALTY) - 1;
             for (int i = loyalty; i >= 0; i--) {
-                sa.setSVar("PayX", String.valueOf(i));
                 sa.setXManaCostPaid(i);
                 choices = ai.getGame().getCardsIn(choiceZone);
                 choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host, sa);

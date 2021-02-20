@@ -56,31 +56,21 @@ public class TriggerDamageDone extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Card src = (Card) runParams.get(AbilityKey.DamageSource);
-        final Object tgt = runParams.get(AbilityKey.DamageTarget);
-
         if (hasParam("ValidSource")) {
-            if (!src.isValid(getParam("ValidSource").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
+            if (!matchesValid(runParams.get(AbilityKey.DamageSource), getParam("ValidSource").split(","), getHostCard())) {
                 return false;
             }
         }
 
         if (hasParam("ValidTarget")) {
-            if (!matchesValid(tgt, getParam("ValidTarget").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.DamageTarget), getParam("ValidTarget").split(","), getHostCard())) {
                 return false;
             }
         }
 
         if (hasParam("CombatDamage")) {
-            if (getParam("CombatDamage").equals("True")) {
-                if (!((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
-                    return false;
-                }
-            } else if (getParam("CombatDamage").equals("False")) {
-                if (((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
-                    return false;
-                }
+            if (getParam("CombatDamage").equalsIgnoreCase("True") != (Boolean) runParams.get(AbilityKey.IsCombatDamage)) {
+                return false;
             }
         }
 
@@ -94,11 +84,6 @@ public class TriggerDamageDone extends Trigger {
             if (!Expressions.compare(actualAmount, operator, operand)) {
                 return false;
             }
-
-            System.out.print("DamageDone Amount Operator: ");
-            System.out.println(operator);
-            System.out.print("DamageDone Amount Operand: ");
-            System.out.println(operand);
         }
 
         return true;

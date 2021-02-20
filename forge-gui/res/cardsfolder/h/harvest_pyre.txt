@@ -1,9 +1,7 @@
 Name:Harvest Pyre
 ManaCost:1 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R ExileFromGrave<X/Card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ Y | References$ X,Y | SpellDescription$ CARDNAME deals X damage to target creature.
-SVar:Y:Number$0/Plus.ChosenX
-SVar:X:XChoice
+A:SP$ DealDamage | Cost$ 1 R ExileFromGrave<X/Card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature.
+SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/harvest_pyre.jpg
 Oracle:As an additional cost to cast Harvest Pyre, exile X cards from your graveyard.\nHarvest Pyre deals X damage to target creature.

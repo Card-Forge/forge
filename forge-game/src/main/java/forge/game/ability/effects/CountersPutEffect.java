@@ -46,7 +46,6 @@ public class CountersPutEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility spellAbility) {
         final StringBuilder stringBuilder = new StringBuilder();
         final Card card = spellAbility.getHostCard();
-        final boolean dividedAsYouChoose = spellAbility.hasParam("DividedAsYouChoose");
 
         final int amount = AbilityUtils.calculateAmount(card, spellAbility.getParamOrDefault("CounterNum", "1"), spellAbility);
         //skip the StringBuilder if no targets are chosen ("up to" scenario)
@@ -60,7 +59,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             stringBuilder.append("Bolster ").append(amount);
             return stringBuilder.toString();
         }
-        if (dividedAsYouChoose) {
+        if (spellAbility.isDividedAsYouChoose()) {
             stringBuilder.append("Distribute ");
         } else {
             stringBuilder.append("Put ");
@@ -84,7 +83,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             stringBuilder.append("s");
         }
 
-        if (dividedAsYouChoose) {
+        if (spellAbility.isDividedAsYouChoose()) {
             stringBuilder.append(" among ");
         } else {
             stringBuilder.append(" on ");
@@ -96,8 +95,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
             for(int i = 0; i < targetCards.size(); i++) {
                 Card targetCard = targetCards.get(i);
                 stringBuilder.append(targetCard);
-                if (spellAbility.getTargetRestrictions().getDividedMap().get(targetCard) != null) // fix null counter stack description
-                    stringBuilder.append(" (").append(spellAbility.getTargetRestrictions().getDividedMap().get(targetCard)).append(" counter)");
+                Integer v = spellAbility.getDividedValue(targetCard);
+                if (v != null) // fix null counter stack description
+                    stringBuilder.append(" (").append(v).append(" counter)");
 
                 if(i == targetCards.size() - 2) {
                     stringBuilder.append(" and ");
@@ -188,6 +188,11 @@ public class CountersPutEffect extends SpellAbilityEffect {
             tgtObjects.addAll(getDefinedOrTargeted(sa, "Defined"));
         }
 
+        if (sa.hasParam("Optional") && !pc.confirmAction
+                (sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCounter"))) {
+            return;
+        }
+
         int counterRemain = counterAmount;
         for (final GameObject obj : tgtObjects) {
             // check if the object is still in game or if it was moved
@@ -254,7 +259,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
             if (obj instanceof Card) {
                 boolean counterAdded = false;
-                counterAmount = sa.usesTargeting() && sa.hasParam("DividedAsYouChoose") ? sa.getTargetRestrictions().getDividedValue(gameCard) : counterAmount;
+                counterAmount = sa.usesTargeting() && sa.isDividedAsYouChoose() ? sa.getDividedValue(gameCard) : counterAmount;
                 if (!sa.usesTargeting() || gameCard.canBeTargetedBy(sa)) {
                     if (max != -1) {
                         counterAmount = Math.max(Math.min(max - gameCard.getCounters(counterType), counterAmount), 0);
@@ -265,7 +270,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         params.put("CounterType", counterType);
                         counterAmount = pc.chooseNumber(sa, Localizer.getInstance().getMessage("lblHowManyCounters"), 0, counterAmount, params);
                     }
-                    if (sa.hasParam("DividedAsYouChoose") && !sa.usesTargeting()) {
+                    if (sa.isDividedAsYouChoose() && !sa.usesTargeting()) {
                         Map<String, Object> params = Maps.newHashMap();
                         params.put("Target", obj);
                         params.put("CounterType", counterType);
@@ -373,7 +378,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         card.addRemembered(gameCard);
                     }
                     game.updateLastStateForCard(gameCard);
-                    if (sa.hasParam("DividedAsYouChoose") && !sa.usesTargeting()) {
+                    if (sa.isDividedAsYouChoose() && !sa.usesTargeting()) {
                         counterRemain = counterRemain - counterAmount;
                     }
                 }

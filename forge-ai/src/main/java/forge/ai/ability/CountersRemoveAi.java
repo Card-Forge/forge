@@ -3,7 +3,7 @@ package forge.ai.ability;
 import com.google.common.base.Predicates;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilMana;
+import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -144,7 +144,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             int amount;
             boolean xPay = false;
             if (amountStr.equals("X") && sa.getSVar("X").equals("Count$xPaid")) {
-                final int manaLeft = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                final int manaLeft = ComputerUtilCost.getMaxXValue(sa, ai);
 
                 if (manaLeft == 0) {
                     return false;
@@ -167,7 +167,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
                     if (amount >= ice) {
                         sa.getTargets().add(depth);
                         if (xPay) {
-                            sa.setSVar("PayX", Integer.toString(ice));
+                            sa.setXManaCostPaid(ice);
                         }
                         return true;
                     }
@@ -186,7 +186,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 Card best = ComputerUtilCard.getBestPlaneswalkerAI(planeswalkerList);
                 sa.getTargets().add(best);
                 if (xPay) {
-                    sa.setSVar("PayX", Integer.toString(best.getCurrentLoyalty()));
+                    sa.setXManaCostPaid(best.getCurrentLoyalty());
                 }
                 return true;
             }
@@ -298,7 +298,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             boolean xPay = false;
             // Timecrafting has X R
             if (amountStr.equals("X") && sa.getSVar("X").equals("Count$xPaid")) {
-                final int manaLeft = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                final int manaLeft = ComputerUtilCost.getMaxXValue(sa, ai);
 
                 if (manaLeft == 0) {
                     return false;
@@ -317,7 +317,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 int timeCount = best.getCounters(CounterEnumType.TIME);
                 sa.getTargets().add(best);
                 if (xPay) {
-                    sa.setSVar("PayX", Integer.toString(timeCount));
+                    sa.setXManaCostPaid(timeCount);
                 }
                 return true;
             }

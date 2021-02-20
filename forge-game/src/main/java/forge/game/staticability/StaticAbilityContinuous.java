@@ -367,6 +367,9 @@ public final class StaticAbilityContinuous {
                     if (input.equals("ChosenType") && !hostCard.hasChosenType()) {
                         return true;
                     }
+                    if (input.equals("ChosenType2") && !hostCard.hasChosenType2()) {
+                        return true;
+                    }
                     if (input.equals("ImprintedCreatureType")) {
                         if (hostCard.hasImprintedCard()) {
                             newTypes.addAll(hostCard.getImprintedCards().getLast().getType().getCreatureTypes());
@@ -385,6 +388,9 @@ public final class StaticAbilityContinuous {
             addTypes = Lists.transform(addTypes, new Function<String, String>() {
                 @Override
                 public String apply(String input) {
+                    if (hostCard.hasChosenType2()) {
+                        input = input.replaceAll("ChosenType2", hostCard.getChosenType2());
+                    }
                     if (hostCard.hasChosenType()) {
                         input = input.replaceAll("ChosenType", hostCard.getChosenType());
                     }
@@ -775,8 +781,7 @@ public final class StaticAbilityContinuous {
                 // add Replacement effects
                 if (addReplacements != null) {
                     for (String rep : addReplacements) {
-                        final ReplacementEffect actualRep = ReplacementHandler.parseReplacement(rep, affectedCard, false);
-                        actualRep.setIntrinsic(false);
+                        final ReplacementEffect actualRep = ReplacementHandler.parseReplacement(rep, affectedCard, false, stAb);
                         addedReplacementEffects.add(actualRep);
                     }
                 }
@@ -784,17 +789,12 @@ public final class StaticAbilityContinuous {
                 // add triggers
                 if (addTriggers != null) {
                     for (final String trigger : addTriggers) {
-                        final Trigger actualTrigger = TriggerHandler.parseTrigger(trigger, affectedCard, false);
+                        final Trigger actualTrigger = TriggerHandler.parseTrigger(trigger, affectedCard, false, stAb);
                         // if the trigger has Execute param, which most trigger gained by Static Abilties should have
                         // turn them into SpellAbility object before adding to card
                         // with that the TargetedCard does not need the Svars added to them anymore
                         // but only do it if the trigger doesn't already have a overriding ability
-                        if (actualTrigger.hasParam("Execute") && actualTrigger.getOverridingAbility() == null) {
-                            // set overriding ability to the trigger
-                            actualTrigger.setOverridingAbility(AbilityFactory.getAbility(affectedCard, actualTrigger.getParam("Execute"), stAb));
-                        }
                         actualTrigger.setOriginalHost(hostCard);
-                        actualTrigger.setIntrinsic(false);
                         addedTrigger.add(actualTrigger);
                     }
                 }

@@ -109,6 +109,7 @@ public class Game {
     private final Match match;
     private GameStage age = GameStage.BeforeMulligan;
     private GameOutcome outcome;
+    private final Game maingame;
 
     private final GameView view;
     private final Tracker tracker = new Tracker();
@@ -219,9 +220,14 @@ public class Game {
         changeZoneLKIInfo.clear();
     }
 
-    public Game(Iterable<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */
+    public Game(Iterable<RegisteredPlayer> players0, GameRules rules0, Match match0) {
+        this(players0, rules0, match0, null, -1);
+    }
+
+    public Game(Iterable<RegisteredPlayer> players0, GameRules rules0, Match match0, Game maingame0, int startingLife) { /* no more zones to map here */
         rules = rules0;
         match = match0;
+        maingame = maingame0;
         this.id = nextId();
 
         int highestTeam = -1;
@@ -243,7 +249,11 @@ public class Game {
             allPlayers.add(pl);
             ingamePlayers.add(pl);
 
-            pl.setStartingLife(psc.getStartingLife());
+            if (startingLife != -1) {
+                pl.setStartingLife(startingLife);
+            } else {
+                pl.setStartingLife(psc.getStartingLife());
+            }
             pl.setMaxHandSize(psc.getStartingHand());
             pl.setStartingHandSize(psc.getStartingHand());
 
@@ -430,6 +440,10 @@ public class Game {
         return outcome;
     }
 
+    public final Game getMaingame() {
+        return maingame;
+    }
+
     public ReplacementHandler getReplacementHandler() {
         return replacementHandler;
     }
@@ -452,12 +466,16 @@ public class Game {
         result.setTurnsPlayed(getPhaseHandler().getTurn());
 
         outcome = result;
-        match.addGamePlayed(this);
+        if (maingame == null) {
+            match.addGamePlayed(this);
+        }
 
         view.updateGameOver(this);
 
         // The log shall listen to events and generate text internally
-        fireEvent(new GameEventGameOutcome(result, match.getOutcomes()));
+        if (maingame == null) {
+            fireEvent(new GameEventGameOutcome(result, match.getOutcomes()));
+        }
     }
 
     public Zone getZoneOf(final Card card) {
@@ -490,6 +508,14 @@ public class Game {
             cards.addAll(getCardsIn(z));
         }
         return cards;
+    }
+
+    public CardCollectionView getCardsInOwnedBy(final Iterable<ZoneType> zones, Player p) {
+        CardCollection cards = new CardCollection();
+        for (final ZoneType z : zones) {
+            cards.addAll(getCardsIncludePhasingIn(z));
+        }
+        return CardLists.filter(cards, CardPredicates.isOwner(p));
     }
 
     public boolean isCardExiled(final Card c) {
@@ -710,15 +736,38 @@ public class Game {
         boolean planarControllerLost = false;
         boolean isMultiplayer = this.getPlayers().size() > 2;
 
+        // 702.142f & 707.9
+        // If a player leaves the game, all face-down cards that player owns must be revealed to all players.
+        // At the end of each game, all face-down cards must be revealed to all players.
+        if (!isMultiplayer) {
+            for (Player pl : getPlayers()) {
+                pl.revealFaceDownCards();
+            }
+        } else {
+            p.revealFaceDownCards();
+        }
+
         for(Card c : cards) {
             if (c.getController().equals(p) && (c.isPlane() || c.isPhenomenon())) {
                 planarControllerLost = true;
             }
 
             if(isMultiplayer) {
+                // unattach all "Enchant Player"
+                c.removeAttachedTo(p);
                 if (c.getOwner().equals(p)) {
+                    for(Card cc : cards) {
+                        cc.removeImprintedCard(c);
+                        cc.removeEncodedCard(c);
+                        cc.removeRemembered(c);
+                    }
                     c.ceaseToExist();
                 } else {
+                    // return stolen permanents
+                    if (c.getController().equals(p) && c.isInZone(ZoneType.Battlefield)) {
+                        c.removeTempController(p);
+                        getAction().controllerChangeZoneCorrection(c);
+                    }
                     c.removeTempController(p);
                     if (c.getController().equals(p)) {
                         this.getAction().exile(c, null);

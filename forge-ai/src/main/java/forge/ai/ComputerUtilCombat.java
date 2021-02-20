@@ -28,7 +28,6 @@ import com.google.common.collect.Maps;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -46,7 +45,6 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -1274,44 +1272,26 @@ public class ComputerUtilCombat {
         }
 
         for (final Trigger trigger : theTriggers) {
-            final Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
             if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, combat)) {
                 continue;
             }
 
-            Map<String, String> abilityParams = null;
-            if (trigger.getOverridingAbility() != null) {
-                abilityParams = trigger.getOverridingAbility().getMapParams();
-            } else if (trigParams.containsKey("Execute")) {
-                final String ability = source.getSVar(trigParams.get("Execute"));
-                abilityParams = AbilityFactory.getMapParams(ability);
-            } else {
+            SpellAbility sa = trigger.ensureAbility();
+            if (sa == null) {
                 continue;
             }
 
-            if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
+            if (sa.usesTargeting()) {
                 continue; // targeted pumping not supported
             }
-            if (abilityParams.containsKey("AB") && !abilityParams.get("AB").equals("Pump")
-                    && !abilityParams.get("AB").equals("PumpAll")) {
-                continue;
-            }
-            if (abilityParams.containsKey("DB") && !abilityParams.get("DB").equals("Pump")
-                    && !abilityParams.get("DB").equals("PumpAll")) {
+
+            if (!ApiType.Pump.equals(sa.getApi()) && !ApiType.PumpAll.equals(sa.getApi())) {
                 continue;
             }
 
-            if (abilityParams.containsKey("Cost")) {
-                SpellAbility sa = null;
-                if (trigger.getOverridingAbility() != null) {
-                    sa = trigger.getOverridingAbility();
-                } else {
-                    final String ability = source.getSVar(trigParams.get("Execute"));
-                    sa = AbilityFactory.getAbility(ability, source);
-                }
-
+            if (sa.hasParam("Cost")) {
                 sa.setActivatingPlayer(source.getController());
                 if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
                     continue;
@@ -1319,15 +1299,15 @@ public class ComputerUtilCombat {
             }
 
             List<Card> list = Lists.newArrayList();
-            if (!abilityParams.containsKey("ValidCards")) {
-                list = AbilityUtils.getDefinedCards(source, abilityParams.get("Defined"), null);
+            if (!sa.hasParam("ValidCards")) {
+                list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), null);
             }
-            if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredAttacker")) {
+            if (sa.hasParam("Defined") && sa.getParam("Defined").equals("TriggeredAttacker")) {
                 list.add(attacker);
             }
-            if (abilityParams.containsKey("ValidCards")) {
-                if (attacker.isValid(abilityParams.get("ValidCards").split(","), source.getController(), source, null)
-                        || attacker.isValid(abilityParams.get("ValidCards").replace("attacking+", "").split(","),
+            if (sa.hasParam("ValidCards")) {
+                if (attacker.isValid(sa.getParam("ValidCards").split(","), source.getController(), source, null)
+                        || attacker.isValid(sa.getParam("ValidCards").replace("attacking+", "").split(","),
                                 source.getController(), source, null)) {
                     list.add(attacker);
                 }
@@ -1338,11 +1318,11 @@ public class ComputerUtilCombat {
             if (!list.contains(attacker)) {
                 continue;
             }
-            if (!abilityParams.containsKey("NumAtt")) {
+            if (!sa.hasParam("NumAtt")) {
                 continue;
             }
 
-            String att = abilityParams.get("NumAtt");
+            String att = sa.getParam("NumAtt");
             if (att.startsWith("+")) {
                 att = att.substring(1);
             }
@@ -1657,35 +1637,26 @@ public class ComputerUtilCombat {
             theTriggers.addAll(card.getTriggers());
         }
         for (Trigger trigger : theTriggers) {
-            Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
             if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
                 continue;
             }
-            //consider delayed triggers
-            if (trigParams.containsKey("DelayedTrigger")) {
-                String sVarName = trigParams.get("DelayedTrigger");
-                trigger = TriggerHandler.parseTrigger(source.getSVar(sVarName), trigger.getHostCard(), true);
-                trigParams = trigger.getMapParams();
-            }
-            if (!trigParams.containsKey("Execute")) {
+            SpellAbility sa = trigger.ensureAbility();
+            if (sa == null) {
                 continue;
             }
-            String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
-            if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
-                    || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {
-                if (!abilityParams.containsKey("Defined")) {
+            if (ApiType.Destroy.equals(sa.getApi())) {
+                if (!sa.hasParam("Defined")) {
                     continue;
                 }
-                if (abilityParams.get("Defined").equals("TriggeredAttacker")) {
+                if (sa.getParam("Defined").equals("TriggeredAttacker")) {
                     return true;
                 }
-                if (abilityParams.get("Defined").equals("Self") && source.equals(attacker)) {
+                if (sa.getParam("Defined").equals("Self") && source.equals(attacker)) {
                     return true;
                 }
-                if (abilityParams.get("Defined").equals("TriggeredTarget") && source.equals(blocker)) {
+                if (sa.getParam("Defined").equals("TriggeredTarget") && source.equals(blocker)) {
                     return true;
                 }
             }
@@ -1935,36 +1906,27 @@ public class ComputerUtilCombat {
             theTriggers.addAll(card.getTriggers());
         }
         for (Trigger trigger : theTriggers) {
-            Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
             if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
                 continue;
             }
-            //consider delayed triggers
-            if (trigParams.containsKey("DelayedTrigger")) {
-                String sVarName = trigParams.get("DelayedTrigger");
-                trigger = TriggerHandler.parseTrigger(source.getSVar(sVarName), trigger.getHostCard(), true);
-                trigParams = trigger.getMapParams();
-            }
-            if (!trigParams.containsKey("Execute")) {
+            SpellAbility sa = trigger.ensureAbility();
+            if (sa == null) {
                 continue;
             }
-            String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
             // Destroy triggers
-            if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
-                    || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {
-                if (!abilityParams.containsKey("Defined")) {
+            if (ApiType.Destroy.equals(sa.getApi())) {
+                if (!sa.hasParam("Defined")) {
                     continue;
                 }
-                if (abilityParams.get("Defined").equals("TriggeredBlocker")) {
+                if (sa.getParam("Defined").equals("TriggeredBlocker")) {
                     return true;
                 }
-                if (abilityParams.get("Defined").equals("Self") && source.equals(blocker)) {
+                if (sa.getParam("Defined").equals("Self") && source.equals(blocker)) {
                     return true;
                 }
-                if (abilityParams.get("Defined").equals("TriggeredTarget") && source.equals(attacker)) {
+                if (sa.getParam("Defined").equals("TriggeredTarget") && source.equals(attacker)) {
                     return true;
                 }
             }
@@ -2578,26 +2540,24 @@ public class ComputerUtilCombat {
 
         // Test for some special triggers that can change the creature in combat
         for (Trigger t : attacker.getTriggers()) {
-            if (t.getMode() == TriggerType.Attacks && t.hasParam("Execute")) {
-                if (!attacker.hasSVar(t.getParam("Execute"))) {
+            if (t.getMode() == TriggerType.Attacks) {
+                SpellAbility exec = t.ensureAbility();
+                if (exec == null) {
                     continue;
                 }
-                SpellAbility exec = AbilityFactory.getAbility(attacker, t.getParam("Execute"));
-                if (exec != null) {
-                    if (exec.getApi() == ApiType.Clone && "Self".equals(exec.getParam("CloneTarget"))
-                            && exec.hasParam("ValidTgts") && exec.getParam("ValidTgts").contains("Creature")
-                            && exec.getParam("ValidTgts").contains("attacking")) {
-                        // Tilonalli's Skinshifter and potentially other similar cards that can clone other stuff
-                        // while attacking
-                        if (exec.getParam("ValidTgts").contains("nonLegendary") && attacker.getType().isLegendary()) {
-                            continue;
-                        }
-                        int maxPwr = 0;
-                        for (Card c : attacker.getController().getCreaturesInPlay()) {
-                            if (c.getNetPower() > maxPwr || (c.getNetPower() == maxPwr && ComputerUtilCard.evaluateCreature(c) > ComputerUtilCard.evaluateCreature(attackerAfterTrigs))) {
-                                maxPwr = c.getNetPower();
-                                attackerAfterTrigs = c;
-                            }
+                if (exec.getApi() == ApiType.Clone && "Self".equals(exec.getParam("CloneTarget"))
+                        && exec.hasParam("ValidTgts") && exec.getParam("ValidTgts").contains("Creature")
+                        && exec.getParam("ValidTgts").contains("attacking")) {
+                    // Tilonalli's Skinshifter and potentially other similar cards that can clone other stuff
+                    // while attacking
+                    if (exec.getParam("ValidTgts").contains("nonLegendary") && attacker.getType().isLegendary()) {
+                        continue;
+                    }
+                    int maxPwr = 0;
+                    for (Card c : attacker.getController().getCreaturesInPlay()) {
+                        if (c.getNetPower() > maxPwr || (c.getNetPower() == maxPwr && ComputerUtilCard.evaluateCreature(c) > ComputerUtilCard.evaluateCreature(attackerAfterTrigs))) {
+                            maxPwr = c.getNetPower();
+                            attackerAfterTrigs = c;
                         }
                     }
                 }

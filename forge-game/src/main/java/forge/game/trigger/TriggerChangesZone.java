@@ -17,16 +17,17 @@
  */
 package forge.game.trigger;
 
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Map;
 
 import forge.util.Localizer;
@@ -89,7 +90,7 @@ public class TriggerChangesZone extends Trigger {
         }
 
         if (hasParam("ExcludedDestinations")) {
-            if (!ArrayUtils.contains(
+            if (ArrayUtils.contains(
                 getParam("ExcludedDestinations").split(","), runParams.get(AbilityKey.Destination)
             )) {
                 return false;
@@ -98,9 +99,11 @@ public class TriggerChangesZone extends Trigger {
 
         if (hasParam("ValidCard")) {
             Card moved = (Card) runParams.get(AbilityKey.Card);
-            boolean leavesBattlefield = "Battlefield".equals(getParam("Origin"));
+            boolean leavesLKIZone = "Battlefield".equals(getParam("Origin"));
+            //TODO make this smarter if there ever is a card that lets you play anything from exile
+            leavesLKIZone |= "Exile".equals(getParam("Origin")) && (moved.getZone().is(ZoneType.Graveyard) || moved.getZone().is(ZoneType.Command));
 
-            if (leavesBattlefield) {
+            if (leavesLKIZone) {
                 moved = (Card) runParams.get(AbilityKey.CardLKI);
             }
 
@@ -169,9 +172,18 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
-        /* this trigger can only be activated once per turn, verify it hasn't already run */
-        if (hasParam("ActivationLimit")) {
-            return this.getActivationsThisTurn() < Integer.parseInt(getParam("ActivationLimit"));
+        /* this trigger only activates for the nth spell you cast this turn */
+        if (hasParam("ConditionYouCastThisTurn")) {
+            final String compare = getParam("ConditionYouCastThisTurn");
+            List<Card> thisTurnCast = CardUtil.getThisTurnCast("Card", getHostCard());
+            thisTurnCast = CardLists.filterControlledByAsList(thisTurnCast, getHostCard().getController());
+
+            // checks which card this spell was the castSA
+            int left = Iterables.indexOf(thisTurnCast, CardPredicates.castSA(Predicates.equalTo(getHostCard().getCastSA())));
+            int right = Integer.parseInt(compare.substring(2));
+            if (!Expressions.compare(left + 1, compare, right)) {
+                return false;
+            }
         }
 
         return true;
@@ -183,7 +195,7 @@ public class TriggerChangesZone extends Trigger {
         // TODO use better way to always copy both Card and CardLKI
         if ("Battlefield".equals(getParam("Origin"))) {
             sa.setTriggeringObject(AbilityKey.Card, runParams.get(AbilityKey.CardLKI));
-            sa.setTriggeringObject(AbilityKey.NewCard, CardUtil.getLKICopy((Card)runParams.get(AbilityKey.Card)));
+            sa.setTriggeringObject(AbilityKey.NewCard, runParams.get(AbilityKey.Card));
         } else {
             sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
         }
@@ -216,7 +228,8 @@ public class TriggerChangesZone extends Trigger {
             boolean leavesBattlefield = ArrayUtils.contains(
                 getParam("Origin").split(","), ZoneType.Battlefield.toString()
             );
-            if (leavesBattlefield) {
+            // Static triggers aren't triggered abilities rules-wise
+            if (leavesBattlefield && !isStatic()) {
                 setActiveZone(EnumSet.of(ZoneType.Battlefield));
             }
         }

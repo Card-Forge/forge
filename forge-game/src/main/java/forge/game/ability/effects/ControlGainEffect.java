@@ -149,7 +149,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
             if (lose != null) {
                 final GameCommand loseControl = getLoseControlCommand(tgtC, tStamp, bTapOnLose, source);
-                if (lose.contains("LeavesPlay")) {
+                if (lose.contains("LeavesPlay") && sa.getHostCard() != tgtC) { // Only return control if host and target are different cards
                     sa.getHostCard().addLeavesPlayCommand(loseControl);
                 }
                 if (lose.contains("Untap")) {

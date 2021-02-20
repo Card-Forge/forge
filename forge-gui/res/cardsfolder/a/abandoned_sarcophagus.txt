@@ -2,7 +2,7 @@ Name:Abandoned Sarcophagus
 ManaCost:3
 Types:Artifact
 S:Mode$ Continuous | Affected$ Card.nonLand+YouOwn+withCycling,Card.nonLand+YouOwn+withTypeCycling | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may cast nonland cards with cycling from your graveyard.
-R:Event$ Moved | ValidCard$ Card.YouOwn+withCycling,Card.YouOwn+withTypeCycling | Destination$ Graveyard | NotCause$ Activated.Cycling | ReplaceWith$ Exile | ActiveZones$ Battlefield | Description$ If a card with cycling would be put into your graveyard from anywhere and it wasn't cycled, exile it instead.
+R:Event$ Moved | ValidCard$ Card.YouOwn+withCycling,Card.YouOwn+withTypeCycling | Destination$ Graveyard | Cycling$ False | ReplaceWith$ Exile | ActiveZones$ Battlefield | Description$ If a card with cycling would be put into your graveyard from anywhere and it wasn't cycled, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 #TODO: Add Ability$Cycling to Cycling cards for the purpose of this and other similar cards for deck hints
 AI:RemoveDeck:Random

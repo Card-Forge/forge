@@ -8,6 +8,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
+import forge.util.CardTranslation;
 import forge.util.ComparableOp;
 import forge.util.PredicateString;
 
@@ -350,14 +351,18 @@ public final class CardRulesPredicates {
             boolean shouldContain;
             switch (this.field) {
             case NAME:
-                return op(card.getName(), this.operand);
+                boolean otherName = false;
+                if (card.getOtherPart() != null) {
+                    otherName = (op(CardTranslation.getTranslatedName(card.getOtherPart().getName()), this.operand) || op(card.getOtherPart().getName(), this.operand));
+                }
+                return otherName || (op(CardTranslation.getTranslatedName(card.getName()), this.operand) || op(card.getName(), this.operand));
             case SUBTYPE:
                 shouldContain = (this.getOperator() == StringOp.CONTAINS) || (this.getOperator() == StringOp.EQUALS);
                 return shouldContain == card.getType().hasSubtype(this.operand);
             case ORACLE_TEXT:
-                return op(card.getOracleText(), operand);
+                return (op(CardTranslation.getTranslatedOracle(card.getName()), operand) || op(card.getOracleText(), this.operand));
             case JOINED_TYPE:
-                return op(card.getType().toString(), operand);
+                return (op(CardTranslation.getTranslatedType(card.getName(), card.getType().toString()), operand) || op(card.getType().toString(), operand));
             case COST:
                 final String cost = card.getManaCost().toString();
                 return op(cost, operand);

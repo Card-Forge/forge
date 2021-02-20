@@ -166,23 +166,27 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         owner.updateManaForView();
     }
 
-    private void removeMana(final Mana mana) {
-        Collection<Mana> cm = floatingMana.get(mana.getColor());
-        if (cm.remove(mana)) {
+    private boolean removeMana(final Mana mana) {
+        if (floatingMana.remove(mana.getColor(), mana)) {
             owner.updateManaForView();
             owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Removed, mana));
+            return true;
         }
+        return false;
     }
 
     public final void payManaFromAbility(final SpellAbility saPaidFor, ManaCostBeingPaid manaCost, final SpellAbility saPayment) {
         // Mana restriction must be checked before this method is called
         final List<SpellAbility> paidAbs = saPaidFor.getPayingManaAbilities();
-        AbilityManaPart abManaPart = saPayment.getManaPartRecursive();
 
         paidAbs.add(saPayment); // assumes some part on the mana produced by the ability will get used
-        for (final Mana mana : abManaPart.getLastManaProduced()) {
-            if (tryPayCostWithMana(saPaidFor, manaCost, mana, false)) {
-                saPaidFor.getPayingMana().add(0, mana);
+
+        // need to get all mana from all ManaAbilities of the SpellAbility
+        for (AbilityManaPart mp : saPayment.getAllManaParts()) {
+            for (final Mana mana : mp.getLastManaProduced()) {
+                if (tryPayCostWithMana(saPaidFor, manaCost, mana, false)) {
+                    saPaidFor.getPayingMana().add(0, mana);
+                }
             }
         }
     }
@@ -216,8 +220,12 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         if (!manaCost.isNeeded(mana, this)) {
             return false;
         }
+        // only pay mana into manaCost when the Mana could be removed from the Mana pool
+        // if the mana wasn't in the mana pool then something is wrong
+        if (!removeMana(mana)) {
+            return false;
+        }
         manaCost.payMana(mana, this);
-        removeMana(mana);
 
         return true;
     }
@@ -296,16 +304,6 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         // update battlefield of activating player - to redraw cards used to pay mana as untapped
         Player p = sa.getActivatingPlayer();
         p.getGame().fireEvent(new GameEventZone(ZoneType.Battlefield, p, EventValueChangeType.ComplexUpdate, null));
-    }
-
-    public byte getPossibleColorUses(byte color) {
-        // Take the current conversion value, AND with restrictions to get mana usage
-        int rowIdx = ManaAtom.getIndexOfFirstManaType(color);
-        int matrixIdx = rowIdx < 0 ? identityMatrix.length - 1 : rowIdx;
-
-        byte colorUse = colorConversionMatrix[matrixIdx];
-        colorUse &= colorRestrictionMatrix[matrixIdx];
-        return colorUse;
     }
 
     public boolean canPayForShardWithColor(ManaCostShard shard, byte color) {

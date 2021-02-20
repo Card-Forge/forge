@@ -1,0 +1,9 @@
+Name:Vega, the Watcher
+ManaCost:1 W U
+Types:Legendary Creature Bird Spirit
+PT:2/2
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.wasNotCastFromHand | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you cast a spell from anywhere other than your hand, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:Random
+Oracle:Flying\nWhenever you cast a spell from anywhere other than your hand, draw a card.

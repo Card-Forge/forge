@@ -244,7 +244,7 @@ public enum CardZoomer {
         pnlMain = new JPanel();
         pnlMain.setOpaque(false);
         overlay.setLayout(new MigLayout("insets 0, w 100%!, h 100%!"));
-        pnlMain.setLayout(new MigLayout("insets 0, wrap, align center"));
+        pnlMain.setLayout(new MigLayout("insets 0, wrap, ax center, ay center"));
         overlay.add(pnlMain, "w 100%!, h 100%!");
     }
 

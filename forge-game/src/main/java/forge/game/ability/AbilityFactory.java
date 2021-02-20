@@ -235,7 +235,6 @@ public final class AbilityFactory {
             spellAbility.putParam("PrecostDesc", "Forecast — ");
         }
         if (mapParams.containsKey("Boast")) {
-            spellAbility.putParam("ActivationLimit", "1");
             spellAbility.putParam("PresentDefined", "Self");
             spellAbility.putParam("IsPresent", "Card.attackedThisTurn");
             spellAbility.putParam("PrecostDesc", "Boast — ");
@@ -250,7 +249,7 @@ public final class AbilityFactory {
             }
         }
 
-        if (api == ApiType.DelayedTrigger && mapParams.containsKey("Execute")) {
+        if ((api == ApiType.DelayedTrigger || api == ApiType.ImmediateTrigger) && mapParams.containsKey("Execute")) {
             spellAbility.setSVar(mapParams.get("Execute"), sVarHolder.getSVar(mapParams.get("Execute")));
         }
 
@@ -332,6 +331,11 @@ public final class AbilityFactory {
             abTgt.setMaxTotalCMC(mapParams.get("MaxTotalTargetCMC"));
         }
 
+        if (mapParams.containsKey("MaxTotalTargetPower")) {
+            // only target cards up to a certain total max power
+            abTgt.setMaxTotalPower(mapParams.get("MaxTotalTargetPower"));
+        }
+
         // TargetValidTargeting most for Counter: e.g. target spell that
         // targets X.
         if (mapParams.containsKey("TargetValidTargeting")) {
@@ -353,6 +357,9 @@ public final class AbilityFactory {
         if (mapParams.containsKey("TargetsWithSameCreatureType")) {
             abTgt.setWithSameCreatureType(true);
         }
+        if (mapParams.containsKey("TargetsWithSameCardType")) {
+            abTgt.setWithSameCardType(true);
+        }
         if (mapParams.containsKey("TargetsWithSameController")) {
             abTgt.setSameController(true);
         }
@@ -361,10 +368,6 @@ public final class AbilityFactory {
         }
         if (mapParams.containsKey("TargetsWithDifferentCMC")) {
             abTgt.setDifferentCMC(true);
-        }
-        if (mapParams.containsKey("DividedAsYouChoose")) {
-            abTgt.calculateStillToDivide(mapParams.get("DividedAsYouChoose"), null, null);
-            abTgt.setDividedAsYouChoose(true);
         }
         if (mapParams.containsKey("TargetsAtRandom")) {
             abTgt.setRandomTarget(true);

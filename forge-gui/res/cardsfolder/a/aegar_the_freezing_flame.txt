@@ -1,0 +1,8 @@
+Name:Aegar, the Freezing Flame
+ManaCost:1 U R
+Types:Legendary Creature Giant Wizard
+PT:3/3
+T:Mode$ ExcessDamage | ValidTarget$ Creature.OppCtrl+DamagedByGiant.YouCtrl,Creature.OppCtrl+DamagedByWizard.YouCtrl,Creature.OppCtrl+DamagedBySpell.YouCtrl,Planeswalker.OppCtrl+DamagedByGiant.YouCtrl,Planeswalker.OppCtrl+DamagedByWizard.YouCtrl,Planeswalker.OppCtrl+DamagedBySpell.YouCtrl  | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature or planeswalker an opponent controls is dealt excess damage, if a Giant, Wizard, or spell you controlled dealt damage to it this turn, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Whenever a creature or planeswalker an opponent controls is dealt excess damage, if a Giant, Wizard, or spell you controlled dealt damage to it this turn, draw a card.
+

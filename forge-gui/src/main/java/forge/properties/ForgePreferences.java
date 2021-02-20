@@ -111,6 +111,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_TIMED_TARGETING_OVERLAY_UPDATES ("true"),
         UI_ENABLE_SOUNDS ("true"),
         UI_ENABLE_MUSIC ("true"),
+        UI_VOL_SOUNDS ("100"),
+        UI_VOL_MUSIC ("100"),
         UI_ALT_SOUND_SYSTEM ("false"),
         UI_CURRENT_AI_PROFILE ("Default"),
         UI_CLONE_MODE_SOURCE ("false"),

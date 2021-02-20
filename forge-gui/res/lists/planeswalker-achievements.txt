@@ -82,6 +82,7 @@ Jace, Unraveler of Secrets|Jace's Perfect Plan|So, I've read about this neat guy
 Jace, Wielder of Mysteries|Jace's Neat Solution|Everything is solved. No loose ends.
 Jaya Ballard|Jaya's Flashback|Fire is easily rekindled.
 Karn Liberated|Karn's Reset|Let's do this again!
+Kaya the Inexorable|Kaya's Dimensional Breach|A little help here?
 Kaya, Ghost Assassin|Kaya's Syphon|You don't MIND, do you?
 Kaya, Orzhov Usurper|Kaya's Revenge of Emptiness|Nothing I do can hurt you. Literally.
 Kiora, Master of the Depths|Kiora's Fight Club|First rule is not to talk about the sucker punches
@@ -160,7 +161,9 @@ Tezzeret, Cruel Machinist|Tezzeret's Artificial Morph|Ixidor, Ugin... THIS is ho
 Tezzeret, Master of Metal|Tezzeret's Confiscation|Your stuff will serve a grander design - mine.
 Tezzeret, Master of the Bridge|Tezzeret's Mass Transit|Just for today, everyone rides free.
 The Royal Scions|Kenrith Twins' Ultimate Combo|You hit them, I'll tell you where.
+Tibalt, Cosmic Impostor|Tibalt's Heist|Who says crime doesn't pay?
 Tibalt, the Fiend-Blooded|Tibalt's Treason|My side is the winning side!
+Tyvar Kell|Tyvar's Charge|To arms! To arms! And remember -- look fabulous!
 Ugin, the Spirit Dragon|Ugin's Anti-Ultimatum|A ragtag band of misfits, brought from the future...
 Venser, the Sojourner|Venser's Oblivion|Let's just clean this up a bit...
 Vivien of the Arkbow|Vivien's Overrun|No, never heard of a 'Garruk' -- why do you ask?

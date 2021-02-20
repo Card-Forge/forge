@@ -211,6 +211,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public SpellAbility getAbilityToPlay(final Card hostCard, final List<SpellAbility> abilities,
             final ITriggerEvent triggerEvent) {
+        // make sure another human player can't choose opponents cards just because he might see them
+        if (triggerEvent != null && !hostCard.isInZone(ZoneType.Battlefield) && !hostCard.getOwner().equals(player) && !hostCard.getController().equals(player) && hostCard.mayPlay(player).size() == 0) {
+            return null;
+        }
         spellViewCache = SpellAbilityView.getMap(abilities);
         final SpellAbilityView resultView = getGui().getAbilityToPlay(CardView.get(hostCard),
                 Lists.newArrayList(spellViewCache.keySet()), triggerEvent);
@@ -967,6 +971,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         case Graveyard:
             choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutIntoGraveyard"), localizer.getMessage("lblClosestToBottom"), choices, null);
             break;
+        case Exile:
+            choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutIntoExile"), localizer.getMessage("lblPutFirst"), choices, null);
+            break;
         case PlanarDeck:
             choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutIntoPlanarDeck"), localizer.getMessage("lblClosestToTop"), choices, null);
             break;
@@ -990,6 +997,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public CardCollectionView chooseCardsToDiscardFrom(final Player p, final SpellAbility sa,
             final CardCollection valid, final int min, final int max) {
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            boolean optional = min == 0;
+            tempShowCards(valid);
+            GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(valid);
+            List<CardView> views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min),
+                    localizer.getMessage("lblDiscarded"), min, max, gameCacheDiscard.getTrackableKeys(), null);
+            endTempShowCards();
+            final CardCollection choices = new CardCollection();
+            gameCacheDiscard.addToList(views, choices);
+            return choices;
+        }
+
         if (p != player) {
             tempShowCards(valid);
             GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(valid);
@@ -1045,19 +1064,20 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * SpellAbility, forge.card.spellability.SpellAbilityStackInstance)
      */
     @Override
-    public TargetChoices chooseNewTargetsFor(final SpellAbility ability) {
+    public TargetChoices chooseNewTargetsFor(final SpellAbility ability, Predicate<GameObject> filter, boolean optional) {
         final SpellAbility sa = ability.isWrapper() ? ((WrappedAbility) ability).getWrappedAbility() : ability;
-        if (sa.getTargetRestrictions() == null) {
+        if (!sa.usesTargeting()) {
             return null;
         }
         final TargetChoices oldTarget = sa.getTargets();
         final TargetSelection select = new TargetSelection(this, sa);
         sa.resetTargets();
-        if (select.chooseTargets(oldTarget.size())) {
+        if (select.chooseTargets(oldTarget.size(), Lists.newArrayList(oldTarget.getDividedValues()), filter, optional)) {
             return sa.getTargets();
         } else {
+            sa.setTargets(oldTarget);
             // Return old target, since we had to reset them above
-            return oldTarget;
+            return null;
         }
     }
 
@@ -1359,13 +1379,24 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void playChosenSpellAbility(final SpellAbility chosenSa) {
-        HumanPlay.playSpellAbility(this, player, chosenSa);
+    public boolean playChosenSpellAbility(final SpellAbility chosenSa) {
+        return HumanPlay.playSpellAbility(this, player, chosenSa);
     }
 
     @Override
     public CardCollection chooseCardsToDiscardToMaximumHandSize(final int nDiscard) {
         final int max = player.getMaxHandSize();
+
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            tempShowCards(player.getCardsIn(ZoneType.Hand));
+            GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(player.getCardsIn(ZoneType.Hand));
+            List<CardView> views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), nDiscard),
+                    localizer.getMessage("lblDiscarded"), nDiscard, nDiscard, gameCacheDiscard.getTrackableKeys(), null);
+            endTempShowCards();
+            final CardCollection choices = new CardCollection();
+            gameCacheDiscard.addToList(views, choices);
+            return choices;
+        }
 
         @SuppressWarnings("serial")
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, nDiscard, nDiscard,
@@ -1628,12 +1659,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         CardFaceView cardFaceView;
         List<CardFaceView> choices = new ArrayList<>();
         for (ICardFace cardFace : cards) {
-            cardFaceView = new CardFaceView(cardFace.getName());
+            cardFaceView = new CardFaceView(CardTranslation.getTranslatedName(cardFace.getName()), cardFace.getName());
             choices.add(cardFaceView);
         }
         Collections.sort(choices);
         cardFaceView = getGui().one(message, choices);
-        return StaticData.instance().getCommonCards().getFaceByName(cardFaceView.getName());
+        return StaticData.instance().getCommonCards().getFaceByName(cardFaceView.getOracleName());
     }
 
     @Override
@@ -1768,11 +1799,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                         player.getGame().getStackZone().add(next.getHostCard());
                     }
                     // TODO check if static abilities needs to be run for things affecting the copy?
-                    if (next.isMayChooseNewTargets() && !next.setupTargets()) {
-                        // if targets can't be done, remove copy from existence
-                        if (next.isSpell()) {
-                            next.getHostCard().ceaseToExist();
-                        }
+                    if (next.isMayChooseNewTargets()) {
+                        next.setupNewTargets(player);
                     }
                 }
                 player.getGame().getStack().add(next);
@@ -1793,7 +1821,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean chooseTargetsFor(final SpellAbility currentAbility) {
         final TargetSelection select = new TargetSelection(this, currentAbility);
-        return select.chooseTargets(null);
+        return select.chooseTargets(null, null, null, false);
     }
 
     @Override
@@ -2044,7 +2072,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public class DevModeCheats implements IDevModeCheats {
-        private ICardFace lastAdded;
+        private CardFaceView lastAdded;
         private ZoneType lastAddedZone;
         private Player lastAddedPlayer;
         private SpellAbility lastAddedSA;
@@ -2477,15 +2505,21 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             final CardDb carddb = FModel.getMagicDb().getCommonCards();
             final List<ICardFace> faces = Lists.newArrayList(carddb.getAllFaces());
-            Collections.sort(faces);
+            List<CardFaceView> choices = new ArrayList<>();
+            CardFaceView cardFaceView;
+            for (ICardFace cardFace : faces) {
+                cardFaceView = new CardFaceView(CardTranslation.getTranslatedName(cardFace.getName()), cardFace.getName());
+                choices.add(cardFaceView);
+            }
+            Collections.sort(choices);
 
             // use standard forge's list selection dialog
-            final ICardFace f = repeatLast ? lastAdded : getGui().oneOrNone(localizer.getMessage("lblNameTheCard"), faces);
+            final CardFaceView f = repeatLast ? lastAdded : getGui().oneOrNone(localizer.getMessage("lblNameTheCard"), choices);
             if (f == null) {
                 return;
             }
 
-            final PaperCard c = carddb.getUniqueByName(f.getName());
+            final PaperCard c = carddb.getUniqueByName(f.getOracleName());
             final Card forgeCard = Card.fromPaperCard(c, p);
             forgeCard.setTimestamp(getGame().getNextTimestamp());
 
@@ -2493,6 +2527,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 @Override
                 public void run() {
                     if (targetZone == ZoneType.Battlefield) {
+                        if (!forgeCard.getName().equals(f.getName())) {
+                            forgeCard.changeToState(CardStateName.Flipped);
+                            forgeCard.changeToState(CardStateName.Transformed);
+                            forgeCard.changeToState(CardStateName.Modal);
+                        }
+
                         if (noTriggers) {
                             if (forgeCard.isPermanent() && !forgeCard.isAura()) {
                                 if (forgeCard.isCreature()) {

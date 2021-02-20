@@ -3,7 +3,7 @@ package forge.ai.ability;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilMana;
+import forge.ai.ComputerUtilCost;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.card.MagicColor;
@@ -42,8 +42,7 @@ public class ChooseColorAi extends SpellAbilityAi {
                 return false;
             }
             // Set PayX here to maximum value.
-            int x = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            sa.setSVar("PayX", Integer.toString(x));
+            sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai));
             return true;
         }
 

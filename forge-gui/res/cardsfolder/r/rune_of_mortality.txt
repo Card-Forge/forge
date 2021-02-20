@@ -1,0 +1,12 @@
+Name:Rune of Mortality
+ManaCost:1 B
+Types:Enchantment Aura Rune
+K:Enchant permanent
+A:SP$ Attach | Cost$ 1 B | ValidTgts$ Permanent | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Deathtouch | Description$ As long as enchanted permanent is a creature, it has deathtouch.
+S:Mode$ Continuous | Affected$ Equipment.EnchantedBy | AddStaticAbility$ RuneMortalityST | Description$ As long as enchanted permanent is an Equipment, it has "Equipped creature has deathtouch."
+SVar:RuneMortalityST:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Deathtouch | Description$ Equipped creature has deathtouch.
+Oracle:Enchant permanent\nWhen Rune of Mortality enters the battlefield, draw a card.\nAs long as enchanted permanent is a creature, it has deathtouch.\nAs long as enchanted permanent is an Equipment, it has "Equipped creature has deathtouch."
+

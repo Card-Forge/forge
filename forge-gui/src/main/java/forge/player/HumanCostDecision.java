@@ -56,18 +56,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         this.source = source;
     }
 
-    protected int chooseXValue(final int maxValue) {
-        /*final String chosen = sa.getSVar("ChosenX");
-        if (chosen.length() > 0) {
-            return AbilityFactory.calculateAmount(card, "ChosenX", null);
-        }*/
-
-        final int chosenX = player.getController().chooseNumber(ability, Localizer.getInstance().getMessage("lblChooseXValueForCard", CardTranslation.getTranslatedName(source.getName())), 0, maxValue);
-        ability.setSVar("ChosenX", Integer.toString(chosenX));
-        source.setSVar("ChosenX", Integer.toString(chosenX));
-        return chosenX;
-    }
-
     @Override
     public PaymentDecision visit(final CostAddMana cost) {
         Integer c = cost.convertAmount();
@@ -112,14 +100,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         if (discardType.equals("Random")) {
             if (c == null) {
-                final String sVar = ability.getSVar(amount);
-                // Generalize this
-                if (sVar.equals("XChoice")) {
-                    c = chooseXValue(hand.size());
-                }
-                else {
-                    c = AbilityUtils.calculateAmount(source, amount, ability);
-                }
+                c = AbilityUtils.calculateAmount(source, amount, ability);
             }
 
             CardCollectionView randomSubset = Aggregates.random(hand, c, new CardCollection());
@@ -187,14 +168,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         hand = CardLists.getValidCards(hand, validType, player, source, ability);
 
         if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(hand.size());
-            }
-            else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
+            c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, hand, ability);
@@ -210,18 +184,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(final CostDamage cost) {
         final String amount = cost.getAmount();
-        final int life = player.getLife();
 
         Integer c = cost.convertAmount();
         if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(life);
-            }
-            else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
+            c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
         if (controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblDoYouWantCardDealNDamageToYou", CardTranslation.getTranslatedName(source.getName()), String.valueOf(c)), ability)) {
@@ -282,14 +248,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
         list = CardLists.getValidCards(list, type.split(";"), player, source, ability);
         if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(list.size());
-            }
-            else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
+            c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
         if (cost.from == ZoneType.Battlefield || cost.from == ZoneType.Hand) {
@@ -381,14 +340,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.spellabilities(saList);
         }
         if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(saList.size());
-            }
-            else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
+            c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
         if (saList.size() < c) {
@@ -494,12 +446,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         Integer c = cost.convertAmount();
         if (c == null) {
-            // Generalize this
-            if (ability.getSVar(amount).equals("XChoice")) {
-                c = chooseXValue(list.size());
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
+            c = AbilityUtils.calculateAmount(source, amount, ability);
         }
         if (0 == c.intValue()) {
             return PaymentDecision.number(0);
@@ -560,17 +507,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(final CostGainLife cost) {
         final String amount = cost.getAmount();
 
-        final int life = player.getLife();
-
         Integer c = cost.convertAmount();
         if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(life);
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
+            c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
         final List<Player> oppsThatCanGainLife = new ArrayList<>();
@@ -610,22 +549,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(final CostPayLife cost) {
         final String amount = cost.getAmount();
-        final int life = player.getLife();
 
         Integer c = cost.convertAmount();
         if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.startsWith("XChoice")) {
-                int limit = life;
-                if (sVar.contains("LimitMax")) {
-                    limit = AbilityUtils.calculateAmount(source, sVar.split("LimitMax.")[1], ability);
-                }
-                final int maxLifePayment = limit < life ? limit : life;
-                c = chooseXValue(maxLifePayment);
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
+            c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
         if (player.canPayLife(c) && player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblPayNLifeConfirm", String.valueOf(c)),ability)) {
@@ -637,19 +564,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(final CostPayEnergy cost) {
         final String amount = cost.getAmount();
-        final int energy = player.getCounters(CounterEnumType.ENERGY);
 
         Integer c = cost.convertAmount();
         if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.startsWith("XChoice")) {
-                int limit = energy;
-                final int maxLifePayment = limit < energy ? limit : energy;
-                c = chooseXValue(maxLifePayment);
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
+            c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
         if (player.canPayEnergy(c) &&
@@ -671,13 +589,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         Integer c = cost.convertAmount();
 
         if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(cost.getLKIList().size());
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
+            c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
         final CardCollection list = CardLists.getValidCards(cost.sameZone ? player.getGame().getCardsIn(cost.getFrom()) :
@@ -787,15 +699,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final String amount = cost.getAmount();
         Integer c = cost.convertAmount();
 
-        final CardCollectionView list = player.getCardsIn(ZoneType.Battlefield);
         if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(list.size());
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
+            c = AbilityUtils.calculateAmount(source, amount, ability);
         }
         if (cost.payCostFromSource()) {
             final Card card = ability.getHostCard();
@@ -870,12 +775,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             hand = CardLists.getValidCards(hand, cost.getType().split(";"), player, source, ability);
 
             if (num == null) {
-                final String sVar = ability.getSVar(amount);
-                if (sVar.equals("XChoice")) {
-                    num = chooseXValue(hand.size());
-                } else {
-                    num = AbilityUtils.calculateAmount(source, amount, ability);
-                }
+                num = AbilityUtils.calculateAmount(source, amount, ability);
             }
             if (hand.size() < num) {
                 return null;
@@ -1038,11 +938,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final Integer c = cost.convertAmount();
         final String type = cost.getType();
 
-        final String sVarAmount = ability.getSVar(amount);
         int cntRemoved = 1;
         if (c != null) {
             cntRemoved = c.intValue();
-        } else if (!"XChoice".equals(sVarAmount)) {
+        } else if (!amount.equals("All")) {
             cntRemoved = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
@@ -1053,9 +952,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                     return null;
                 }
                 cntRemoved = maxCounters;
-            }
-            else if (c == null && "XChoice".equals(sVarAmount)) {
-                cntRemoved = chooseXValue(maxCounters);
             } else if (ability != null && !ability.isPwAbility()) {
                 // ignore Planeswalker abilities for this
                 if (maxCounters < cntRemoved) {
@@ -1130,12 +1026,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         Integer c = cost.convertAmount();
         if (c == null) {
-            // Generalize this
-            if (ability.getSVar(amount).equals("XChoice")) {
-                c = chooseXValue(list.size());
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
+            c = AbilityUtils.calculateAmount(source, amount, ability);
         }
         if (0 == c.intValue()) {
             return PaymentDecision.number(0);
@@ -1192,13 +1083,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         if (c == null && !amount.equals("Any")) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(typeList.size());
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
+            c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
         if (sameType) {
@@ -1247,7 +1132,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp.setCancelAllowed(true);
             inp.showAndWait();
 
-            if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected(), true) < i) {
+            if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected(), true, ability.hasParam("Crew")) < i) {
                 return null;
             }
             return PaymentDecision.card(inp.getSelected());
@@ -1279,13 +1164,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final String amount = cost.getAmount();
         Integer c = cost.convertAmount();
         if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(typeList.size());
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
+            c = AbilityUtils.calculateAmount(source, amount, ability);
         }
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, typeList, ability);
         inp.setCancelAllowed(true);

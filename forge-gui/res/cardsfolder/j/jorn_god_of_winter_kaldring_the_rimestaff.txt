@@ -1,0 +1,28 @@
+Name:Jorn, God of Winter
+ManaCost:2 G
+Types:Legendary Snow Creature God
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUntapAllSnow | TriggerDescription$ Whenever CARDNAME attacks, untap each snow permanent you control.
+SVar:TrigUntapAllSnow:DB$ UntapAll | ValidCards$ Permanent.Snow+YouCtrl
+SVar:PlayMain1:TRUE
+AlternateMode:Modal
+DeckNeeds:Type$Snow
+DeckHas:Ability$Graveyard
+Oracle:Whenever Jorn attacks, untap each snow permanent you control.
+
+ALTERNATE
+
+Name:Kaldring, the Rimestaff
+ManaCost:1 U B
+Types:Legendary Snow Artifact
+A:AB$ Effect | Cost$ T | TgtZone$ Graveyard | ValidTgts$ Permanent.Snow+YouCtrl | TgtPrompt$ Choose target snow permanent card in your graveyard | StaticAbilities$ STPlay | RememberObjects$ Targeted | ForgetOnMoved$ Graveyard | SubAbility$ DBEffect | SpellDescription$ You may play target snow permanent card from your graveyard this turn. If you do, it enters the battlefield tapped.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may play target snow permanent card from your graveyard this turn.
+SVar:DBEffect:DB$ Effect | RememberObjects$ ParentTarget | ForgetOnMoved$ Stack | ReplacementEffects$ ETBCreat | SVars$ DBTap,ToBattlefield,DBExile | References$ ETBCreat,DBTap,ToBattlefield,DBExile
+SVar:ETBCreat:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplaceWith$ DBTap | Description$ If you do, it enters the battlefield tapped.
+SVar:DBTap:DB$ Tap | Defined$ ReplacedCard | ETB$ True | SubAbility$ ToBattlefield
+SVar:ToBattlefield:DB$ InternalEtbReplacement | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:STTapped:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ CARDNAME enters the battlefield tapped.
+DeckNeeds:Type$Snow
+DeckHas:Ability$Graveyard
+Oracle:{T}: You may play target snow permanent card from your graveyard this turn. If you do, it enters the battlefield tapped.

@@ -22,11 +22,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import forge.ai.ComputerUtilCard;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CounterEnumType;
+import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.util.Aggregates;
 
@@ -101,6 +97,8 @@ public abstract class CountersAi {
                 }
             });
             choice = ComputerUtilCard.getMostExpensivePermanentAI(boon, null, false);
+        } else if (CounterType.get(type).isKeywordCounter()) {
+            choice = ComputerUtilCard.getBestCreatureAI(CardLists.getNotKeyword(list, type));
         } else {
             // The AI really should put counters on cards that can use it.
             // Charge counters on things with Charge abilities, etc. Expand

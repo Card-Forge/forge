@@ -23,14 +23,12 @@ import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
 import forge.game.player.Player;
-import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityCantBeCast;
 import forge.game.zone.ZoneType;
-import forge.util.collect.FCollectionView;
 
 /**
  * <p>
@@ -110,24 +108,13 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        return checkOtherRestrictions(card);
-    } // canPlay()
-    
-    public boolean checkOtherRestrictions(final Card source) {
-        Player activator = getActivatingPlayer();
-        final Game game = activator.getGame();
-        // CantBeCast static abilities
-        final CardCollection allp = new CardCollection(game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
-        allp.add(source);
-        for (final Card ca : allp) {
-            final FCollectionView<StaticAbility> staticAbilities = ca.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
-                if (stAb.applyAbility("CantBeCast", source, activator)) {
-                    return false;
-                }
-            }
-        }
         return true;
+    } // canPlay()
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean checkRestrictions(Card host, Player activator) {
+        return !StaticAbilityCantBeCast.cantBeCastAbility(this, host, activator);
     }
 
     /** {@inheritDoc} */

@@ -206,7 +206,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         float y2 = height - dy - h;
         btnCopyLog.setBounds(width / 4, y2, width / 2, h);
         txtLog.setBounds(x, y, w, y2 - y - dy);
-        btnMinimize.setBounds(0, 0, width, h);
+        btnMinimize.setBounds(width / 4,0,width / 2, h);
     }
 
     private static class OutcomesPanel extends FContainer {

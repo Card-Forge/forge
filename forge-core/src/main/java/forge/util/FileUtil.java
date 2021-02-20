@@ -286,4 +286,11 @@ public final class FileUtil {
         }, 5000); //abort reading file if it takes longer than 5 seconds
         return lines;
     }
+
+    public static String getParent(final String resourcePath) {
+        File f = new File(resourcePath);
+        if (f.getParentFile().getName() != null)
+            return f.getParentFile().getName();
+        return "";
+    }
 }

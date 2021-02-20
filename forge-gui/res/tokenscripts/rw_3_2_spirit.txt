@@ -1,0 +1,6 @@
+Name:Spirit
+Types:Creature Spirit
+Colors:red,white
+ManaCost:no cost
+PT:3/2
+Oracle:

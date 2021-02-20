@@ -20,8 +20,11 @@ package forge.sound;
 
 import javax.sound.sampled.*;
 
+import com.google.common.io.Files;
+import com.sipgate.mp3wav.Converter;
 import forge.properties.ForgeConstants;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,7 +57,7 @@ public class AudioClip implements IAudioClip {
     }
 
     @Override
-    public final void play() {
+    public final void play(float value) {
         if (clips.stream().anyMatch(ClipWrapper::isRunning)) {
             // introduce small delay to make a batch sounds more granular,
             // e.g. when you auto-tap 4 lands the 4 tap sounds should
@@ -178,9 +181,9 @@ public class AudioClip implements IAudioClip {
             if (!fSound.exists()) {
                 throw new IllegalArgumentException("Sound file " + fSound.toString() + " does not exist, cannot make a clip of it");
             }
-
             try {
-                AudioInputStream stream = AudioSystem.getAudioInputStream(fSound);
+                ByteArrayInputStream bis = new ByteArrayInputStream(Converter.convertFrom(Files.asByteSource(fSound).openStream()).toByteArray());
+                AudioInputStream stream = AudioSystem.getAudioInputStream(bis);
                 AudioFormat format = stream.getFormat();
                 DataLine.Info info = new DataLine.Info(Clip.class, stream.getFormat(), ((int) stream.getFrameLength() * format.getFrameSize()));
                 Clip clip = (Clip) AudioSystem.getLine(info);

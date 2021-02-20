@@ -304,14 +304,18 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card manifestedCreature = findCardWithName(simGame, "");
         assertNotNull(manifestedCreature);
 
-        SpellAbility unmanifestSA = findSAWithPrefix(manifestedCreature, "Unmanifest");
+        SpellAbility unmanifestSA = findSAWithPrefix(manifestedCreature.getAllPossibleAbilities(p, false), "Unmanifest");
         assertNotNull(unmanifestSA);
         assertEquals(2, manifestedCreature.getNetPower());
         assertFalse(manifestedCreature.hasKeyword("Flying"));
 
         GameSimulator sim2 = createSimulator(simGame, simGame.getPlayers().get(1));
-        sim2.simulateSpellAbility(unmanifestSA);
         Game simGame2 = sim2.getSimulatedGameState();
+        manifestedCreature = findCardWithName(simGame2, "");
+        unmanifestSA = findSAWithPrefix(manifestedCreature.getAllPossibleAbilities(simGame2.getPlayers().get(1), false), "Unmanifest");
+
+        sim2.simulateSpellAbility(unmanifestSA);
+
         Card ornithopter = findCardWithName(simGame2, "Ornithopter");
         assertEquals(0, ornithopter.getNetPower());
         assertTrue(ornithopter.hasKeyword("Flying"));
@@ -1847,7 +1851,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         sim.simulateSpellAbility(gideonSA);
         sim.simulateSpellAbility(sparkDoubleSA);
 
-        Card simSpark = (Card)sim.getGameCopier().find(sparkDouble);
+        Card simSpark = sim.getSimulatedGameState().findById(sparkDouble.getId());
 
         assertNotNull(simSpark);
         assertTrue(simSpark.isInZone(ZoneType.Battlefield));

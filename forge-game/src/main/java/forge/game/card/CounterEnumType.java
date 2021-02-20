@@ -147,7 +147,7 @@ public enum CounterEnumType {
 
     ICE("ICE", 0, 239, 255),
 
-    INCARNATION("INCARNATION", 247, 206, 64),
+    INCARNATION("INCRN", 247, 206, 64),
 
     INFECTION("INFCT", 0, 230, 66),
 
@@ -159,7 +159,7 @@ public enum CounterEnumType {
 
     KI("KI", 190, 189, 255),
 
-    KNOWLEDGE("KNOWLEDGE", 0, 115, 255),
+    KNOWLEDGE("KNOWL", 0, 115, 255),
 
     LANDMARK("LNMRK", 186, 28, 28),
 
@@ -306,6 +306,8 @@ public enum CounterEnumType {
     VITALITY("VITAL", 255, 94, 142),
 
     VORTEX("VORTX", 142, 200, 255),
+
+    VOYAGE("VOYAGE", 38, 150, 137),
 
     WAGE("WAGE", 242, 190, 106),
 

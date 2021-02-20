@@ -31,6 +31,7 @@ import forge.interfaces.IGameController;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.IMayViewCards;
 import forge.model.FModel;
+import forge.player.PlayerControllerHuman;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.trackable.TrackableTypes;
@@ -42,6 +43,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private final Map<PlayerView, IGameController> gameControllers = Maps.newHashMap();
     private final Map<PlayerView, IGameController> originalGameControllers = Maps.newHashMap();
     private boolean gamePause = false;
+    private boolean ignoreConcedeChain = false;
 
     public final boolean hasLocalPlayers() {
         return !gameControllers.isEmpty();
@@ -183,7 +185,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return true; //if not in game, card can be shown
         }
         if(GuiBase.getInterface().isLibgdxPort()){
-            if(gameView.isGameOver()) {
+            if(gameView != null && gameView.isGameOver()) {
                 return true;
             }
             if(spectator!=null) { //workaround fix!! this is needed on above code or it will
@@ -228,6 +230,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             case Meld:
             case Modal:
                 return true;
+            case Adventure:
+                if (cv.isFaceDown()) {
+                    return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());
+                }
+                return false;
             default:
                 return false;
         }
@@ -293,23 +300,42 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return true;
         }
         if (hasLocalPlayers()) {
-            if (showConfirmDialog(Localizer.getInstance().getMessage("lblConcedeCurrentGame"), Localizer.getInstance().getMessage("lblConcedeTitle"), Localizer.getInstance().getMessage("lblConcede"), Localizer.getInstance().getMessage("lblCancel"))) {
-                for (final IGameController c : getOriginalGameControllers()) {
-                    // Concede each player on this Gui (except mind-controlled players)
-                    c.concede();
+            boolean concedeNeeded = false;
+            // check if anyone still needs to confirm
+            for (final IGameController c : getOriginalGameControllers()) {
+                if (c instanceof PlayerControllerHuman) {
+                    if (((PlayerControllerHuman) c).getPlayer().getOutcome() == null) {
+                        concedeNeeded = true;
+                    }
                 }
-            } else {
-                return false;
+            }
+            if (concedeNeeded) {
+                if (showConfirmDialog(Localizer.getInstance().getMessage("lblConcedeCurrentGame"), Localizer.getInstance().getMessage("lblConcedeTitle"), Localizer.getInstance().getMessage("lblConcede"), Localizer.getInstance().getMessage("lblCancel"))) {
+                    for (final IGameController c : getOriginalGameControllers()) {
+                        // Concede each player on this Gui (except mind-controlled players)
+                        c.concede();
+                    }
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return !ignoreConcedeChain;
             }
             if (gameView.isGameOver()) {
                 // Don't immediately close, wait for win/lose screen
                 return false;
-            } else {
-                for (PlayerView player : getLocalPlayers()){
-                    if (!player.isAI()){
+            }
+            else {
+                // since the nextGameDecision might come from somewhere else it will try and concede too
+                ignoreConcedeChain = true;
+                for (PlayerView player : getLocalPlayers()) {
+                    if (!player.isAI()) {
                         getGameController(player).nextGameDecision(NextGameDecision.QUIT);
                     }
                 }
+                ignoreConcedeChain = false;
                 return false;
             }
         }

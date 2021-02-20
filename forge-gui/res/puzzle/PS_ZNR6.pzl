@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Zendikar Rising #06
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/12/163.-ZNR6-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. You have ZERO cards left in your library! Your Robber of the Rich is exiling a Roil Eruption.
+[state]
+humanlife=20
+ailife=15
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Flicker of Fate;Glasspool Mimic;Deadly Alliance;Maul of the Skyclaves
+humanbattlefield=Robber of the Rich|RememberedCards:1|ExecuteScript:DBEffect;Nimble Trapfinder;Archpriest of Iona;Thundering Sparkmage;Kabira Outrider;Base Camp;Base Camp;Base Camp;Savai Triome;Savai Triome
+aiexile=Roil Eruption|Id:1
+aibattlefield=Ruin Crab;Alseid of Life's Bounty;Ruin Crab

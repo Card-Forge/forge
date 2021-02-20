@@ -228,3 +228,7 @@ for lang in languages.keys():
 # Sort file and remove duplicates
 for lang in languages.keys():
     cleanfile("cardnames-{0}".format(languages[lang]), ".tmp3", ".txt")
+
+# Call the Japanese translation script
+import JapaneseTranslations
+JapaneseTranslations.main()

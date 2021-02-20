@@ -20,7 +20,6 @@ package forge.game.trigger;
 import forge.card.MagicColor;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
@@ -68,25 +67,19 @@ public class TriggerTapsForMana extends Trigger {
         }
 
         if (hasParam("ValidCard")) {
-            final Card tapper = (Card) runParams.get(AbilityKey.Card);
-            if (!tapper.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
+            if (!matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","), getHostCard())) {
                 return false;
             }
         }
 
         if (hasParam("Player")) {
-            final Player player = (Player) runParams.get(AbilityKey.Player);
-            if (!player.isValid(getParam("Player").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
+            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("Player").split(","), getHostCard())) {
                 return false;
             }
         }
 
         if (hasParam("Activator")) {
-            final SpellAbility sa = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
-            if (sa == null) return false;
-            final Player activator = sa.getActivatingPlayer();
-            if (!activator.isValid(getParam("Activator").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
+            if (!matchesValid(runParams.get(AbilityKey.Activator), getParam("Activator").split(","), getHostCard())) {
                 return false;
             }
         }
@@ -113,7 +106,7 @@ public class TriggerTapsForMana extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Player, AbilityKey.Produced);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Player, AbilityKey.Produced, AbilityKey.Activator);
     }
 
     @Override

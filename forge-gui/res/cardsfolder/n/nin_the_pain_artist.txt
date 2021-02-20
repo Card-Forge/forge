@@ -2,9 +2,8 @@ Name:Nin, the Pain Artist
 ManaCost:U R
 Types:Legendary Creature Vedalken Wizard
 PT:1/1
-A:AB$ DealDamage | Cost$ X U R T | Announce$ X | References$ X | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBDraw | AILogic$ NinThePainArtist | SpellDescription$ CARDNAME deals X damage to target creature. That creature's controller draws X cards.
+A:AB$ DealDamage | Cost$ X U R T | References$ X | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBDraw | AILogic$ NinThePainArtist | SpellDescription$ CARDNAME deals X damage to target creature. That creature's controller draws X cards.
 SVar:DBDraw:DB$Draw | Defined$ TargetedController | NumCards$ X | References$ X
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nin_the_pain_artist.jpg
 Oracle:{X}{U}{R}, {T}: Nin, the Pain Artist deals X damage to target creature. That creature's controller draws X cards.

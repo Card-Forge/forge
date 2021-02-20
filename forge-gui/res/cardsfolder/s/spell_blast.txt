@@ -1,7 +1,6 @@
 Name:Spell Blast
 ManaCost:X U
 Types:Instant
-A:SP$Counter | Cost$ X U | TargetType$ Spell | ValidTgts$ Card | References$ X | SpellDescription$ Counter target spell with converted mana cost X.
-SVar:X:Targeted$CardManaCost
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_blast.jpg
+A:SP$ Counter | Cost$ X U | TargetType$ Spell | ValidTgts$ Card.cmcEQX | References$ X | SpellDescription$ Counter target spell with converted mana cost X.
+SVar:X:Count$xPaid
 Oracle:Counter target spell with converted mana cost X.

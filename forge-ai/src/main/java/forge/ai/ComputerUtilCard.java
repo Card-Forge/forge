@@ -14,7 +14,6 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.Game;
 import forge.game.GameObject;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -697,39 +696,21 @@ public class ComputerUtilCard {
             }
             // same for Trigger that does make Tokens
             for(Trigger t:c.getTriggers()){
-                SpellAbility sa = t.getOverridingAbility();
-                String sTokenTypes = null;
+                SpellAbility sa = t.ensureAbility();
                 if (sa != null) {
                     if (sa.getApi() != ApiType.Token || !sa.hasParam("TokenTypes")) {
                         continue;
                     }
-                    sTokenTypes = sa.getParam("TokenTypes");
-                } else if (t.hasParam("Execute")) {
-                    String name = t.getParam("Execute");
-                    if (!c.hasSVar(name)) {
-                        continue;
+                    for (String var : sa.getParam("TokenTypes").split(",")) {
+                        if (!CardType.isACreatureType(var)) {
+                            continue;
+                        }
+                        Integer count = typesInDeck.get(var);
+                        if (count == null) {
+                            count = 0;
+                        }
+                        typesInDeck.put(var, count + 1);
                     }
-
-                    Map<String, String> params = AbilityFactory.getMapParams(c.getSVar(name));
-                    if (!params.containsKey("TokenTypes")) {
-                        continue;
-                    }
-                    sTokenTypes = params.get("TokenTypes");
-                }
-
-                if (sTokenTypes == null) {
-                    continue;
-                }
-
-                for (String var : sTokenTypes.split(",")) {
-                    if (!CardType.isACreatureType(var)) {
-                        continue;
-                    }
-                    Integer count = typesInDeck.get(var);
-                    if (count == null) {
-                        count = 0;
-                    }
-                    typesInDeck.put(var, count + 1);
                 }
             }
             // special rule for Fabricate and Servo

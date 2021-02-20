@@ -304,10 +304,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // don't play if the conditions aren't met, unless it would trigger a beneficial sub-condition
-        if (!activateForCost && !sa.getConditions().areMet(sa)) {
+        if (!activateForCost && !sa.metConditions()) {
             final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null && !sa.isWrapper() && "True".equals(source.getSVar("AIPlayForSub"))) {
-                if (!abSub.getConditions().areMet(abSub)) {
+                if (!abSub.metConditions()) {
                     return false;
                 }
             } else {
@@ -341,8 +341,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (type != null) {
             if (type.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-                sa.setSVar("PayX", Integer.toString(xPay));
+                final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+                sa.setXManaCostPaid(xPay);
                 type = type.replace("X", Integer.toString(xPay));
             }
         }
@@ -386,9 +386,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (num != null) {
                 if (num.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
                     // Set PayX here to maximum value.
-                    int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                    int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
                     xPay = Math.min(xPay, list.size());
-                    sa.setSVar("PayX", Integer.toString(xPay));
+                    sa.setXManaCostPaid(xPay);
                 }
             }
 
@@ -496,8 +496,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final String type = sa.getParam("ChangeType");
         if (type != null && type.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            sa.setSVar("PayX", Integer.toString(xPay));
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            sa.setXManaCostPaid(xPay);
         }
 
         Iterable<Player> pDefined;
@@ -862,7 +862,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
-            sa.setSVar("PayX", Integer.toString(xPay));
 
             // TODO need to set XManaCostPaid for targets, maybe doesn't need PayX anymore?
             sa.setXManaCostPaid(xPay);
@@ -1126,7 +1125,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // the Unless cost (for example, Erratic Portal)
         list.removeAll(getSafeTargetsIfUnlessCostPaid(ai, sa, list));
 
-        if (!mandatory && sa.isTargetNumberValid()) {
+        if (!mandatory && list.size() < sa.getTargetRestrictions().getMinTargets(sa.getHostCard(), sa)) {
             return false;
         }
 
@@ -1225,6 +1224,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // if max CMC exceeded, do not choose this card (but keep looking for other options)
             if (sa.hasParam("MaxTotalTargetCMC")) {
                 if (choice.getCMC() > sa.getTargetRestrictions().getMaxTotalCMC(choice, sa) - sa.getTargets().getTotalTargetedCMC()) {
+                    list.remove(choice);
+                    continue;
+                }
+            }
+
+            // if max power exceeded, do not choose this card (but keep looking for other options)
+            if (sa.hasParam("MaxTotalTargetPower")) {
+                if (choice.getNetPower() > sa.getTargetRestrictions().getMaxTotalPower(choice, sa) -sa.getTargets().getTotalTargetedPower()) {
                     list.remove(choice);
                     continue;
                 }
@@ -1812,7 +1819,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             } else // This is an intrinsic effect that blinks the card (e.g. Obzedat, Ghost Council), no need to
                 // return the commander to the Command zone.
                 if (subApi == ApiType.DelayedTrigger) {
-                SpellAbility exec = causeSub.getAdditionalAbility("Execute");
+                    SpellAbility exec = causeSub.getAdditionalAbility("Execute");
                 if (exec != null && exec.getApi() == ApiType.ChangeZone) {
                     // A blink effect implemented using a delayed trigger
                     return !"Exile".equals(exec.getParam("Origin")) || !"Battlefield".equals(exec.getParam("Destination"));
@@ -1887,6 +1894,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 boolean setPayX = false;
                 if (unlessCost.equals("X") && sa.getSVar(unlessCost).equals("Count$xPaid")) {
                     setPayX = true;
+                    // TODO use ComputerUtilCost.getMaxXValue if able
                     toPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 } else {
                     toPay = AbilityUtils.calculateAmount(source, unlessCost, sa);
@@ -1901,7 +1909,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
 
                 if (setPayX) {
-                    sa.setSVar("PayX", Integer.toString(toPay));
+                    sa.setXManaCostPaid(toPay);
                 }
             }
         }

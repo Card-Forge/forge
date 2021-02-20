@@ -23,6 +23,7 @@ import java.util.Set;
 
 import com.google.common.collect.Sets;
 
+import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -32,6 +33,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
+import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -145,7 +147,9 @@ public class TriggerSpellAbilityCast extends Trigger {
                     if (tgt.isValid(getParam("TargetsValid").split(","), getHostCard()
                             .getController(), getHostCard(), null)) {
                         validTgtFound = true;
-                        break;
+                        if (this.hasParam("RememberValidCards")) {
+                            this.getHostCard().addRemembered(tgt);
+                        } else break;
                     }
                 }
 
@@ -256,6 +260,22 @@ public class TriggerSpellAbilityCast extends Trigger {
                 }
             }
             if (!sameNameFound) {
+                return false;
+            }
+        }
+
+        if (hasParam("SnowSpentForCardsColor")) {
+            boolean found = false;
+            for (Mana m : spellAbility.getPayingMana()) {
+                if (!m.isSnow()) {
+                    continue;
+                }
+                if (cast.determineColor().sharesColorWith(ColorSet.fromMask(m.getColor()))) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
                 return false;
             }
         }

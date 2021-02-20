@@ -19,7 +19,6 @@ package forge.game.cost;
 
 import com.google.common.collect.Lists;
 
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CounterEnumType;
@@ -140,7 +139,13 @@ public class CostRemoveCounter extends CostPart {
         final Card source = ability.getHostCard();
         final String type = this.getType();
 
-        final Integer amount = this.convertAmount();
+        final Integer amount;
+        if (getAmount().equals("All")) {
+            amount = source.getCounters(cntrs);
+        }
+        else {
+            amount = this.convertAmount();
+        }
         if (this.payCostFromSource()) {
             return (amount == null) || ((source.getCounters(cntrs) - amount) >= 0);
         }
@@ -170,7 +175,8 @@ public class CostRemoveCounter extends CostPart {
         Card source = ability.getHostCard();
 
         int removed = 0;
-        int toRemove = AbilityUtils.calculateAmount(source, getAmount(), ability);
+        final int toRemove = decision.c;
+
         // for this cost, the list should be only one
         for (Card c : decision.cards) {
             removed += toRemove;

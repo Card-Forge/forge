@@ -1,0 +1,10 @@
+Name:Hungry Hungry Heifer
+ManaCost:2 G
+Types:Creature Cow
+PT:3/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, you may remove a counter from a permanent you control. If you don’t, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self | UnlessPayer$ You | UnlessCost$ RemoveAnyCounter<1/Any/Permanent.YouCtrl/a permanent you control>
+DeckNeeds:Ability$Counters
+SVar:NeedsToPlay:Permanent.YouCtrl+HasCounters
+SVar:AIRemoveCounterCostPriority:ANY
+Oracle:At the beginning of your upkeep, you may remove a counter from a permanent you control. If you don’t, sacrifice Hungry Hungry Heifer.

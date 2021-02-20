@@ -30,5 +30,6 @@ Revel in Riches|The Dead Man's Chest|Yo-ho-ho, and a bottle of rum!
 Simic Ascendancy|The Ascension|As you can see, we are going through a period of unprecedented growth.
 Test of Endurance|The Test|So... did I pass?
 Thassa's Oracle|The Prophecy of Victory|I see... nothing. We must've won.
+The Cheese Stands Alone|The Cheese|It's cheesy, but hey, it works!
 Triskaidekaphobia|The Fear of 13|It's just a silly ancient superstition... right?
-Vraska, Golgari Queen|The Flurry of Assassins|How good is your dodging?
+Emblem - Vraska, Golgari Queen|The Flurry of Assassins|How good is your dodging?

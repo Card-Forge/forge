@@ -23,7 +23,6 @@ import com.google.common.collect.Lists;
 import forge.ai.ability.AnimateAi;
 import forge.card.CardTypeView;
 import forge.game.GameEntity;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.ProtectEffect;
@@ -196,12 +195,12 @@ public class AiAttackController {
         for (Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
             for (Trigger t : c.getTriggers()) {
                 if (t.getMode() == TriggerType.Attacks) {
-                    SpellAbility sa = t.getOverridingAbility();
-                    if (sa == null && t.hasParam("Execute")) {
-                        sa = AbilityFactory.getAbility(c, t.getParam("Execute"));
+                    SpellAbility sa = t.ensureAbility();
+                    if (sa == null) {
+                        continue;
                     }
 
-                    if (sa != null && sa.getApi() == ApiType.EachDamage && "TriggeredAttacker".equals(sa.getParam("DefinedPlayers"))) {
+                    if (sa.getApi() == ApiType.EachDamage && "TriggeredAttacker".equals(sa.getParam("DefinedPlayers"))) {
                         List<Card> valid = CardLists.getValidCards(c.getController().getCreaturesInPlay(), sa.getParam("ValidCards"), c.getController(), c, sa);
                         // TODO: this assumes that 1 damage is dealt per creature. Improve this to check the parameter/X to determine
                         // how much damage is dealt by each of the creatures in the valid list.
@@ -1179,7 +1178,7 @@ public class AiAttackController {
                 CardPredicates.hasKeyword(Keyword.LIFELINK))).isEmpty();
 
         // total power of the defending creatures, used in predicting whether a gang block can kill the attacker
-        int defPower = CardLists.getTotalPower(validBlockers, true);
+        int defPower = CardLists.getTotalPower(validBlockers, true, false);
 
         if (!hasCombatEffect) {
             for (KeywordInterface inst : attacker.getKeywords()) {
@@ -1349,9 +1348,9 @@ public class AiAttackController {
                 if (!TriggerType.Exerted.equals(t.getMode())) {
                     continue;
                 }
-                SpellAbility sa = t.getOverridingAbility();
+                SpellAbility sa = t.ensureAbility();
                 if (sa == null) {
-                    sa = AbilityFactory.getAbility(c, t.getParam("Execute"));
+                    continue;
                 }
                 if (sa.usesTargeting()) {
                     sa.setActivatingPlayer(c.getController());

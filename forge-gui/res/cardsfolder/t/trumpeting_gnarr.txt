@@ -1,0 +1,9 @@
+Name:Trumpeting Gnarr
+ManaCost:1 G U
+Types:Creature Beast
+PT:3/3
+K:Mutate:3 GU GU
+T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever this creature mutates, create a 3/3 green Beast creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Mutate {3}{G/U}{G/U} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nWhenever this creature mutates, create a 3/3 green Beast creature token.

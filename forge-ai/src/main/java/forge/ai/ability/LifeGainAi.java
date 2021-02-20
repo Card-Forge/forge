@@ -127,8 +127,8 @@ public class LifeGainAi extends SpellAbilityAi {
         boolean activateForCost = ComputerUtil.activateForCost(sa, ai);
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            sa.setSVar("PayX", Integer.toString(xPay));
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            sa.setXManaCostPaid(xPay);
             lifeAmount = xPay;
         } else {
             lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
@@ -146,7 +146,7 @@ public class LifeGainAi extends SpellAbilityAi {
         }
         // don't play if the conditions aren't met, unless it would trigger a
         // beneficial sub-condition
-        if (!activateForCost && !sa.getConditions().areMet(sa)) {
+        if (!activateForCost && !sa.metConditions()) {
             final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null && !sa.isWrapper() && "True".equals(source.getSVar("AIPlayForSub"))) {
                 if (!abSub.getConditions().areMet(abSub)) {
@@ -216,8 +216,8 @@ public class LifeGainAi extends SpellAbilityAi {
         final String amountStr = sa.getParam("LifeAmount");
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            sa.setSVar("PayX", Integer.toString(xPay));
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            sa.setXManaCostPaid(xPay);
         }
 
         return true;

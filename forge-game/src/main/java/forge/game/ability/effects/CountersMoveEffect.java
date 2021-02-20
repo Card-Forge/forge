@@ -27,13 +27,12 @@ public class CountersMoveEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
 
         final List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
 
         Card source = null;
-        if (sa.usesTargeting() && sa.getTargetRestrictions().getMinTargets(host, sa) == 2) {
+        if (sa.usesTargeting() && sa.getMinTargets() == 2) {
             if (tgtCards.size() < 2) {
                 return "";
             }
@@ -241,7 +240,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             Card source = null;
             List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
             // special logic for moving from Target to Target
-            if (sa.usesTargeting() && sa.getTargetRestrictions().getMinTargets(host, sa) == 2) {
+            if (sa.usesTargeting() && sa.getMinTargets() == 2) {
                 if (tgtCards.size() < 2) {
                     return;
                 }

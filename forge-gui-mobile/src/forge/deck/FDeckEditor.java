@@ -195,15 +195,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         case Brawl:
             return new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.CARD_CATALOG),
-                    new DeckSectionPage(DeckSection.Main),
                     new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION),
+                    new DeckSectionPage(DeckSection.Main),
                     new DeckSectionPage(DeckSection.Sideboard)
             };
         case Oathbreaker:
             return new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.CARD_CATALOG),
-                    new DeckSectionPage(DeckSection.Main),
                     new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.OATHBREAKER_SECTION, localizer.getMessage("lblOathbreaker"), FSkinImage.COMMANDER),
+                    new DeckSectionPage(DeckSection.Main),
                     new DeckSectionPage(DeckSection.Sideboard)
             };
         case Archenemy:
@@ -225,14 +225,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         case QuestCommander:
             return new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, localizer.getMessage("lblInventory"), FSkinImage.QUEST_BOX),
-                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
-                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION)
+                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION),
+                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR)
             };
         case PlanarConquest:
             return new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.CONQUEST_COLLECTION, localizer.getMessage("lblCollection"), FSkinImage.SPELLBOOK),
-                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.CONQUEST_DECK_EDITOR, localizer.getMessage("lblDeck"), FSkinImage.DECKLIST),
-                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION)
+                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION),
+                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.CONQUEST_DECK_EDITOR, localizer.getMessage("lblDeck"), Forge.hdbuttons ? FSkinImage.HDLIBRARY : FSkinImage.DECKLIST)
             };
         }
     }
@@ -806,7 +806,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
                 else if (parentScreen.getEditorType() == EditorType.Quest||parentScreen.getEditorType() == EditorType.QuestCommander) {
                     //prevent adding more than is in quest inventory
-                    qty = parentScreen.getCatalogPage().cardManager.getItemCount(card);
+                    try {
+                        qty = parentScreen.getCatalogPage().cardManager.getItemCount(card);
+                    } catch (Exception e) {
+                        //prevent NPE
+                        qty = 0;
+                    }
                 }
                 else {
                     //if not source of items being added, use max directly if unlimited pool

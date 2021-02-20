@@ -429,8 +429,7 @@ public class AiController {
                     byte color = MagicColor.fromName(c);
                     for (Card land : landList) {
                         for (final SpellAbility m : ComputerUtilMana.getAIPlayableMana(land)) {
-                            AbilityManaPart mp = m.getManaPart();
-                            if (mp.canProduce(MagicColor.toShortString(color), m)) {
+                            if (m.canProduce(MagicColor.toShortString(color))) {
                                 return land;
                             }
                         }
@@ -483,8 +482,7 @@ public class AiController {
                             return land;
                         }
                         for (final SpellAbility m : ComputerUtilMana.getAIPlayableMana(land)) {
-                            AbilityManaPart mp = m.getManaPart();
-                            if (mp.canProduce(MagicColor.toShortString(color), m)) {
+                            if (m.canProduce(MagicColor.toShortString(color))) {
                                 return land;
                             }
                         }
@@ -747,11 +745,11 @@ public class AiController {
                 if (mana != null) {
                     if(mana.countX() > 0) {
                         // Set PayX here to maximum value.
-                        final int xPay = ComputerUtilMana.determineLeftoverMana(sa, player);
+                        final int xPay = ComputerUtilCost.getMaxXValue(sa, player);
                         if (xPay <= 0) {
                             return AiPlayDecision.CantAffordX;
                         }
-                        sa.setSVar("PayX", Integer.toString(xPay));
+                        sa.setXManaCostPaid(xPay);
                     } else if (mana.isZero()) {
                         // if mana is zero, but card mana cost does have X, then something is wrong
                         ManaCost cardCost = card.getManaCost();
@@ -764,6 +762,16 @@ public class AiController {
         }
         if (checkCurseEffects(sa)) {
             return AiPlayDecision.CurseEffects;
+        }
+        Card spellHost = card;
+        if (sa.isSpell()) {
+            spellHost = CardUtil.getLKICopy(spellHost);
+            spellHost.setLKICMC(-1); // to reset the cmc
+            spellHost.setLastKnownZone(game.getStackZone()); // need to add to stack to make check Restrictions respect stack cmc
+            spellHost.setCastFrom(card.getZone().getZoneType());
+        }
+        if (!sa.checkRestrictions(spellHost, player)) {
+            return AiPlayDecision.AnotherTime;
         }
         if (sa instanceof SpellPermanent) {
             if (!isRightTiming) {
@@ -1061,7 +1069,7 @@ public class AiController {
             } else if ("VolrathsShapeshifter".equals(sa.getParam("AILogic"))) {
                 return SpecialCardAi.VolrathsShapeshifter.targetBestCreature(player, sa);
             } else if ("DiscardCMCX".equals(sa.getParam("AILogic"))) {
-                final int cmc = Integer.parseInt(sa.getSVar("PayX"));
+                final int cmc = sa.getXManaCostPaid();
                 CardCollection discards = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(cmc));
                 if (discards.isEmpty()) {
                     return null;
@@ -1529,11 +1537,11 @@ public class AiController {
             top = game.getStack().peekAbility();
         }
         final boolean topOwnedByAI = top != null && top.getActivatingPlayer().equals(player);
+        final boolean mustRespond = top != null && top.hasParam("AIRespondsToOwnAbility");
 
         if (topOwnedByAI) {
             // AI's own spell: should probably let my stuff resolve first, but may want to copy the SA or respond to it
             // in a scripted timed fashion.
-            final boolean mustRespond = top.hasParam("AIRespondsToOwnAbility");
 
             if (!mustRespond) {
                 saList = ComputerUtilAbility.getSpellAbilities(cards, player); // get the SA list early to check for copy SAs
@@ -1558,6 +1566,10 @@ public class AiController {
         }
 
         SpellAbility chosenSa = chooseSpellAbilityToPlayFromList(saList, true);
+
+        if (topOwnedByAI && !mustRespond && chosenSa != ComputerUtilAbility.getFirstCopySASpell(saList)) {
+            return null; // not planning to copy the spell and not marked as something the AI would respond to
+        }
 
         return chosenSa;
     }

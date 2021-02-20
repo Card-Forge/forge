@@ -58,7 +58,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         Card lki = CardUtil.getLKICopy(gameCard);
         lki.clearControllers();
         lki.setOwner(sa.getActivatingPlayer());
-        final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, lki, sa.isIntrinsic());
+        final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, lki, sa.isIntrinsic(), null);
         delTrig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
 
         if (triggerRemembered != null) {
@@ -81,7 +81,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
             }
         }
 
-        if (mapParams.containsKey("Execute") || sa.hasAdditionalAbility("Execute")) {
+        if (sa.hasAdditionalAbility("Execute")) {
             AbilitySub overridingSA = (AbilitySub)sa.getAdditionalAbility("Execute").copy(lki, sa.getActivatingPlayer(), false);
             // need to reset the parent, additionalAbility does set it to this
             overridingSA.setParent(null);
@@ -96,7 +96,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
 
             delTrig.setOverridingAbility(overridingSA);
         }
-        final TriggerHandler trigHandler  = sa.getActivatingPlayer().getGame().getTriggerHandler();
+        final TriggerHandler trigHandler  = game.getTriggerHandler();
         if (mapParams.containsKey("DelayedTriggerDefinedPlayer")) { // on sb's next turn
             Player p = Iterables.getFirst(AbilityUtils.getDefinedPlayers(sa.getHostCard(), mapParams.get("DelayedTriggerDefinedPlayer"), sa), null);
             trigHandler.registerPlayerDefinedDelayedTrigger(p, delTrig);

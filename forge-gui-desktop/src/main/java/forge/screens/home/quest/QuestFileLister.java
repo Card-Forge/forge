@@ -87,10 +87,10 @@ public class QuestFileLister extends JPanel {
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
 
 		Map<Integer, String> difficultyNameMap = new HashMap<>();
-		difficultyNameMap.put(0, Localizer.getInstance().getMessage("rbEasy"));
-		difficultyNameMap.put(1, Localizer.getInstance().getMessage("rbMedium"));
-		difficultyNameMap.put(2, Localizer.getInstance().getMessage("rbHard"));
-		difficultyNameMap.put(3, Localizer.getInstance().getMessage("rbExpert"));
+		difficultyNameMap.put(0, Localizer.getInstance().getMessage("questDifficultyEasy"));
+		difficultyNameMap.put(1, Localizer.getInstance().getMessage("questDifficultyMedium"));
+		difficultyNameMap.put(2, Localizer.getInstance().getMessage("questDifficultyHard"));
+		difficultyNameMap.put(3, Localizer.getInstance().getMessage("questDifficultyExpert"));
 
         RowPanel row;
         String mode;

@@ -205,9 +205,7 @@ public class ManaEffectAi extends SpellAbilityAi {
             // Don't remove more counters than would be needed to cast the more expensive thing we want to cast,
             // otherwise the AI grabs too many counters at once.
             int maxCtrs = Aggregates.max(castableSpells, CardPredicates.Accessors.fnGetCmc) - manaSurplus;
-            int min = Math.min(numCounters, maxCtrs);
-            sa.setXManaCostPaid(min);
-            sa.setSVar("PayX", Integer.toString(min));
+            sa.setXManaCostPaid(Math.min(numCounters, maxCtrs));
         }
 
         // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.

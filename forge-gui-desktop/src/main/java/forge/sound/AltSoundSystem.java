@@ -1,6 +1,10 @@
 package forge.sound;
 
+import com.google.common.io.Files;
+import com.sipgate.mp3wav.Converter;
+
 import javax.sound.sampled.*;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -40,7 +44,7 @@ class AsyncSoundRegistry {
     }
 }
 
-public class AltSoundSystem extends Thread { 
+public class AltSoundSystem extends Thread {
 
     private String filename;
     private boolean isSync;
@@ -48,13 +52,13 @@ public class AltSoundSystem extends Thread {
     private final int EXTERNAL_BUFFER_SIZE = 524288;
     private final int MAX_SOUND_ITERATIONS = 5;
 
-    public AltSoundSystem(String wavfile, boolean synced) { 
+    public AltSoundSystem(String wavfile, boolean synced) {
         filename = wavfile;
         isSync = synced;
-    } 
+    }
 
     @Override
-    public void run() { 
+    public void run() {
         if (isSync && AsyncSoundRegistry.getNumIterations(filename) >= 1) {
             return;
         }
@@ -63,31 +67,50 @@ public class AltSoundSystem extends Thread {
         }
 
         File soundFile = new File(filename);
-        if (!soundFile.exists()) { 
+        if (!soundFile.exists()) {
             return;
-        } 
+        }
 
         AudioInputStream audioInputStream = null;
-        try { 
-            audioInputStream = AudioSystem.getAudioInputStream(soundFile);
-        } catch (UnsupportedAudioFileException e) { 
+        try {
+            ByteArrayInputStream bis = new ByteArrayInputStream(Converter.convertFrom(Files.asByteSource(soundFile).openStream()).toByteArray());
+            audioInputStream = AudioSystem.getAudioInputStream(bis);
+        } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
             return;
-        } catch (IOException e) { 
+        } catch (IOException e) {
             e.printStackTrace();
             return;
-        } 
+        }
 
         AudioFormat format = audioInputStream.getFormat();
         SourceDataLine audioLine = null;
         DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
 
-        try { 
-            audioLine = (SourceDataLine) AudioSystem.getLine(info);
-            audioLine.open(format);
-        } catch (Exception e) { 
+        Mixer.Info selectedMixer = null;
+
+        try {
+            for (Mixer.Info mixerInfo : AudioSystem.getMixerInfo()) {
+                Mixer mixer = AudioSystem.getMixer(mixerInfo);
+                if (mixer.isLineSupported(info)) {
+                    selectedMixer = mixerInfo;
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage()); // print a warning but don't crash
             return;
-        } 
+        }
+
+        if (selectedMixer == null)
+            return;
+
+        try {
+            audioLine = AudioSystem.getSourceDataLine(format, selectedMixer);
+            audioLine.open(format);
+        } catch (Exception e) {
+            return;
+        }
 
         audioLine.start();
         AsyncSoundRegistry.registerSound(filename);
@@ -95,16 +118,16 @@ public class AltSoundSystem extends Thread {
         int nBytesRead = 0;
         byte[] audioBufData = new byte[EXTERNAL_BUFFER_SIZE];
 
-        try { 
-            while (nBytesRead != -1) { 
+        try {
+            while (nBytesRead != -1) {
                 nBytesRead = audioInputStream.read(audioBufData, 0, audioBufData.length);
-                if (nBytesRead >= 0) 
+                if (nBytesRead >= 0)
                     audioLine.write(audioBufData, 0, nBytesRead);
-            } 
-        } catch (IOException e) { 
+            }
+        } catch (IOException e) {
             e.printStackTrace();
             return;
-        } finally { 
+        } finally {
             audioLine.drain();
             audioLine.close();
             try {
@@ -113,6 +136,6 @@ public class AltSoundSystem extends Thread {
                 // Can't do much if closing it fails.
             }
             AsyncSoundRegistry.unregisterSound(filename);
-        } 
-    } 
-} 
+        }
+    }
+}

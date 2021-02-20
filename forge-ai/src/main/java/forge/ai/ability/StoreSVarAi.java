@@ -32,7 +32,7 @@ public class StoreSVarAi extends SpellAbilityAi {
                 // Set PayX here to half the remaining mana to allow for Main 2 and other combat shenanigans.
                 final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai) / 2;
                 if (xPay == 0) { return false; }
-                sa.setSVar("PayX", Integer.toString(xPay));
+                sa.setXManaCostPaid(xPay);
             }
 
             final String logic = sa.getParam("AILogic");
@@ -75,8 +75,7 @@ public class StoreSVarAi extends SpellAbilityAi {
         if (sa instanceof WrappedAbility) {
             SpellAbility origSa = ((WrappedAbility)sa).getWrappedAbility();
             if (origSa.getHostCard().getName().equals("Maralen of the Mornsong Avatar")) {
-                origSa.setSVar("PayX", "2");
-                origSa.getHostCard().setSVar("ChosenX", "2");
+                origSa.setXManaCostPaid(2);
             }
         }
 

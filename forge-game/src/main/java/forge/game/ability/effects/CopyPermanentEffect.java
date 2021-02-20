@@ -13,9 +13,11 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
@@ -28,7 +30,6 @@ import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class CopyPermanentEffect extends TokenEffectBase {
@@ -57,16 +58,11 @@ public class CopyPermanentEffect extends TokenEffectBase {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Game game = host.getGame();
-        final List<String> pumpKeywords = Lists.newArrayList();
 
         if (sa.hasParam("Optional")) {
             if (!activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblCopyPermanentConfirm"))) {
                 return;
             }
-        }
-
-        if (sa.hasParam("PumpKeywords")) {
-            pumpKeywords.addAll(Arrays.asList(sa.getParam("PumpKeywords").split(" & ")));
         }
 
         final int numCopies = sa.hasParam("NumCopies") ? AbilityUtils.calculateAmount(host,
@@ -138,15 +134,29 @@ public class CopyPermanentEffect extends TokenEffectBase {
                 chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), choose, sa).get(0);
             }
 
-            CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
+            // For Mimic Vat with mutated creature, need to choose one imprinted card
+            CardCollectionView choices = sa.hasParam("Defined") ? getDefinedCardsOrTargeted(sa) : game.getCardsIn(ZoneType.Battlefield);
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
             if (!choices.isEmpty()) {
-                String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") +" ";
+                String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard");
 
-                Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, false, null);
+                if (sa.hasParam("WithDifferentNames")) {
+                    // any Number of choices with different names
+                    while (!choices.isEmpty()) {
+                        Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, true, null);
 
-                if (choosen != null) {
-                    tgtCards.add(choosen);
+                        if (choosen != null) {
+                            tgtCards.add(choosen);
+                            choices = CardLists.filter(choices, Predicates.not(CardPredicates.sharesNameWith(choosen)));
+                        } else if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, Localizer.getInstance().getMessage("lblCancelChooseConfirm"))) {
+                            break;
+                        }
+                    }
+                } else {
+                    Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, false, null);
+                    if (choosen != null) {
+                        tgtCards.add(choosen);
+                    }
                 }
             }
         } else {
@@ -208,3 +218,5 @@ public class CopyPermanentEffect extends TokenEffectBase {
         return copy;
     }
 }
+
+

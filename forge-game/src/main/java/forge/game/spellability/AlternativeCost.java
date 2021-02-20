@@ -9,7 +9,9 @@ public enum AlternativeCost {
     Escape,
     Evoke,
     Flashback,
+    Foretold,
     Madness,
+    Mutate,
     Offering,
     Outlast, // ActivatedAbility
     Prowl,

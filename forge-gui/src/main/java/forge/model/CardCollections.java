@@ -41,6 +41,7 @@ public class CardCollections {
     private IStorage<Deck> scheme;
     private IStorage<Deck> plane;
     private IStorage<Deck> commander;
+    private IStorage<Deck> commanderPrecons;
     private IStorage<Deck> oathbreaker;
     private IStorage<Deck> tinyLeaders;
     private IStorage<Deck> brawl;
@@ -119,6 +120,14 @@ public class CardCollections {
                     new DeckStorage(new File(ForgeConstants.DECK_OATHBREAKER_DIR), ForgeConstants.DECK_BASE_DIR));
         }
         return oathbreaker;
+    }
+
+    public IStorage<Deck> getCommanderPrecons() {
+        if (commanderPrecons == null) {
+            commanderPrecons = new StorageImmediatelySerialized<Deck>("Commander Precon decks",
+                    new DeckStorage(new File(ForgeConstants.COMMANDER_PRECON_DIR), ForgeConstants.QUEST_PRECON_DIR));
+        }
+        return commanderPrecons;
     }
 
     public IStorage<Deck> getTinyLeaders() {

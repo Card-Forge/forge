@@ -10,6 +10,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -25,27 +26,27 @@ public class AttachEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
+        final Game game = host.getGame();
+
         if (host.isAura() && sa.isSpell()) {
-            final Player ap = sa.getActivatingPlayer();
+            CardZoneTable table = new CardZoneTable();
+            host.setController(sa.getActivatingPlayer(), 0);
+
+            ZoneType previousZone = host.getZone().getZoneType();
+
             // The Spell_Permanent (Auras) version of this AF needs to
             // move the card into play before Attaching
-
-            host.setController(ap, 0);
-
-            // 111.11. A copy of a permanent spell becomes a token as it resolves.
-            // The token has the characteristics of the spell that became that token.
-            // The token is not “created” for the purposes of any replacement effects or triggered abilities that refer to creating a token.
-            if (host.isCopiedSpell()) {
-                host.setCopiedSpell(false);
-                host.setToken(true);
-            }
-
-            final Card c = ap.getGame().getAction().moveToPlay(host, ap, sa);
+            final Card c = game.getAction().moveToPlay(host, sa);
             sa.setHostCard(c);
+
+            ZoneType newZone = c.getZone().getZoneType();
+            if (newZone != previousZone) {
+                table.put(previousZone, newZone, c);
+            }
+            table.triggerChangesZoneAll(game);
         }
 
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
 
         CardCollection attachments;
         final List<GameObject> targets = getDefinedOrTargeted(sa, "Defined");
