@@ -249,7 +249,7 @@ public class GameAction {
                 CardCollectionView comCards = c.getOwner().getCardsIn(ZoneType.Command);
                 for (final Card effCard : comCards) {
                     for (final ReplacementEffect re : effCard.getReplacementEffects()) {
-                        if (re.hasSVar("CommanderMoveReplacement")) {
+                        if (re.hasSVar("CommanderMoveReplacement") && effCard.getEffectSource().getName().equals(c.getRealCommander().getName())) {
                             commanderEffect = effCard;
                             break;
                         }
