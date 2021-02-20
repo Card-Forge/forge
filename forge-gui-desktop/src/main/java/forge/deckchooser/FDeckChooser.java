@@ -326,7 +326,33 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     @Override
     public void deckTypeSelected(final DecksComboBoxEvent ev) {
-        if ((ev.getDeckType() == DeckType.NET_DECK || ev.getDeckType() == DeckType.NET_COMMANDER_DECK) && !refreshingDeckType) {
+        if (ev.getDeckType() == DeckType.NET_ARCHIVE_STANDARD_DECK&& !refreshingDeckType) {
+            if(lstDecks.getGameType() != GameType.Constructed)
+                return;
+            FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
+                @Override
+                public void run() {
+                    final NetDeckArchiveStandard category = NetDeckArchiveStandard.selectAndLoad(lstDecks.getGameType());
+
+                    FThreads.invokeInEdtLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (category == null) {
+                                decksComboBox.setDeckType(selectedDeckType); //restore old selection if user cancels
+                                if (selectedDeckType == DeckType.NET_ARCHIVE_STANDARD_DECK && NetDeckArchiveStandard != null) {
+                                    decksComboBox.setText(NetDeckArchiveStandard.getDeckType());
+                                }
+                                return;
+                            }
+
+                            NetDeckArchiveStandard = category;
+                            refreshDecksList(ev.getDeckType(), true, ev);
+                        }
+                    });
+                }
+            });
+            return;
+        } else if ((ev.getDeckType() == DeckType.NET_DECK || ev.getDeckType() == DeckType.NET_COMMANDER_DECK) && !refreshingDeckType) {
             FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                 @Override
                 public void run() {
