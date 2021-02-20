@@ -50,6 +50,7 @@ public final class ForgeConstants {
     public static final String NET_DECKS_BRAWL_LIST_FILE             = LISTS_DIR + "net-decks-brawl.txt";
     public static final String BORDERLESS_CARD_LIST_FILE             = LISTS_DIR + "borderlessCardList.txt";
     public static final String SKINS_LIST_FILE                       = LISTS_DIR + "skinsList.txt";
+    public static final String NET_ARCHIVE_STANDARD_DECKS_LIST_FILE  = LISTS_DIR + "net-decks-archive-standard.txt";
 
 
     public static final String CHANGES_FILE            = ASSETS_DIR + "README.txt";
@@ -234,6 +235,7 @@ public final class ForgeConstants {
     public static final String COMMANDER_PRECON_DIR = QUEST_DIR + "commanderprecons" + PATH_SEPARATOR;
     public static final String DECK_OATHBREAKER_DIR = DECK_BASE_DIR + "oathbreaker" + PATH_SEPARATOR;
     public static final String DECK_NET_DIR         = DECK_BASE_DIR + "net" + PATH_SEPARATOR;
+    public static final String DECK_NET_ARCHIVE_DIR = DECK_BASE_DIR + "archive" + PATH_SEPARATOR;
     public static final String QUEST_SAVE_DIR       = USER_QUEST_DIR + "saves" + PATH_SEPARATOR;
     public static final String CONQUEST_SAVE_DIR    = USER_CONQUEST_DIR + "saves" + PATH_SEPARATOR;
     public static final String DECK_TINY_LEADERS_DIR= DECK_BASE_DIR + "tiny_leaders" + PATH_SEPARATOR;
