@@ -13,5 +13,12 @@ Type=Expansion
 232 R Silverquill Command
 248 R Witherbloom Command
 
+[extended art]
+345 R Lorehold Command
+348 R Prismari Command
+349 R Quandrix Command
+352 R Silverquill Command
+356 R Witherbloom Command
+
 [tokens]
 rw_3_2_spirit
