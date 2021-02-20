@@ -1,0 +1,8 @@
+Name:Brokkos, Apex of Forever
+ManaCost:2 B G U
+Types:Legendary Creature Nightmare Beast Elemental
+PT:6/6
+K:Mutate:2 UB G G
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | ValidSA$ Spell.Mutate | AffectedZone$ Graveyard | EffectZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard using its mutate ability.
+Oracle:Mutate {2}{U/B}{G}{G} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nTrample\nYou may cast Brokkos, Apex of Forever from your graveyard using its mutate ability.

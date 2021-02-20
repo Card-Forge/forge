@@ -257,6 +257,12 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                         }
                     }
 
+                    if (params.containsKey("ValidSA")) {
+                        if (!sa.isValid(params.get("ValidSA").split(","), activator, o.getHost(), null)) {
+                            return false;
+                        }
+                    }
+
                     // TODO: this is an exception for Aftermath. Needs to be somehow generalized.
                     if (this.getZone() != ZoneType.Graveyard && sa.isAftermath() && sa.getCardState() != null) {
                         return false;
