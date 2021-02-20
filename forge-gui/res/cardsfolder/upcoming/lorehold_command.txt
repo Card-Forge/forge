@@ -1,0 +1,12 @@
+Name:Lorehold Command
+ManaCost:3 W R
+Types:Instant
+A:SP$ Charm | Cost$ 3 W R | Choices$ DBSpirit,DBIndestructible,DBHelix,DBSacrifice | CharmNum$ 2
+SVar:DBSpirit:DB$ Token | TokenAmount$ 1 | TokenScript$ rw_3_2_spirit | TokenOwner$ You | SpellDescription$ Create a 3/2 red and white Spirit token.
+SVar:DBIndestructible:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ Indestructible & haste | SpellDescription$ Creatures you control get +1/+0 and gain indestructible and haste until end of turn.
+SVar:DBHelix:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 3 damage to any target. Target player gains 3 life.
+SVar:DBGainLife:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player (to gain 3 life) | LifeAmount$ 3 | SpellDescription$ Target player gains 3 life.
+SVar:DBSacrifice:DB$ Sacrifice | Defined$ You | SacValid$ Permanent | SubAbility$ DBDraw |
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SpellDescription$ Sacrifice a permanent,draw two cards.
+DeckHas:Ability$Token & Ability$LifeGain
+Oracle:Choose two —\n• Create a 3/2 red and white Spirit creature token.\nCreatures you control get +1/+0 and gain indestructible and haste until end of turn.\nLorehold Command deals 3 damage to any target. Target player gains 3 life.\nSacrifice a permanent, then draw 2 cards.
