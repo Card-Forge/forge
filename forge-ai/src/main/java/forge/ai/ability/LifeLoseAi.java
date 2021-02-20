@@ -137,7 +137,7 @@ public class LifeLoseAi extends SpellAbilityAi {
 
         // Don't use loselife before main 2 if possible
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
-                && !ComputerUtil.castSpellInMain1(ai, sa)) {
+                && !ComputerUtil.castSpellInMain1(ai, sa) && !"AnyPhase".equals(sa.getParam("AILogic"))) {
             return false;
         }
 

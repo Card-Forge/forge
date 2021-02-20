@@ -130,10 +130,18 @@ public class DiscardAi extends SpellAbilityAi {
             }
         }
 
-        // Don't use draw abilities before main 2 if possible
+        // Don't use discard abilities before main 2 if possible
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !sa.hasParam("ActivationPhases")) {
+                && !sa.hasParam("ActivationPhases") && !aiLogic.startsWith("AnyPhase")) {
             return false;
+        }
+
+        if (aiLogic.equals("AnyPhaseIfFavored")) {
+            if (ai.getGame().getCombat() != null) {
+                if (ai.getCardsIn(ZoneType.Hand).size() < ai.getGame().getCombat().getDefenderPlayerByAttacker(source).getCardsIn(ZoneType.Hand).size()) {
+                    return false;
+                }
+            }
         }
 
         // Don't tap creatures that may be able to block
