@@ -1,7 +1,6 @@
 Name:Disembowel
 ManaCost:X B
 Types:Instant
-A:SP$ Destroy | Cost$ X B | ValidTgts$ Creature | References$ X | SpellDescription$ Destroy target creature with converted mana cost X.
-SVar:X:Targeted$CardManaCost
-SVar:Picture:http://www.wizards.com/global/images/magic/general/disembowel.jpg
+A:SP$ Destroy | Cost$ X B | ValidTgts$ Creature.cmcEQX | References$ X | SpellDescription$ Destroy target creature with converted mana cost X.
+SVar:X:Count$xPaid
 Oracle:Destroy target creature with converted mana cost X.

@@ -1,8 +1,7 @@
 Name:Molder
 ManaCost:X G
 Types:Instant
-A:SP$ Destroy | Cost$ X G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | NoRegen$ True | References$ X | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact or enchantment with converted mana cost X. It can't be regenerated. You gain X life.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
-SVar:X:Targeted$CardManaCost
-SVar:Picture:http://www.wizards.com/global/images/magic/general/molder.jpg
+A:SP$ Destroy | Cost$ X G | ValidTgts$ Artifact.cmcEQX,Enchantment.cmcEQX | TgtPrompt$ Select target artifact or enchantment | NoRegen$ True | References$ X | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact or enchantment with converted mana cost X. It can't be regenerated. You gain X life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
+SVar:X:Count$xPaid
 Oracle:Destroy target artifact or enchantment with converted mana cost X. It can't be regenerated. You gain X life.
