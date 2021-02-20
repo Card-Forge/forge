@@ -143,6 +143,8 @@ public class PhaseHandler implements java.io.Serializable {
 
     private void advanceToNextPhase() {
         PhaseType oldPhase = phase;
+        boolean isTopsy = playerTurn.hasKeyword("The phases of your turn are reversed.");
+        boolean turnEnded = false;
 
         if (bRepeatCleanup) { // for when Cleanup needs to repeat itself
             bRepeatCleanup = false;
@@ -160,15 +162,16 @@ public class PhaseHandler implements java.io.Serializable {
                 setPhase(nextPhase);
             }
             else {
-                setPhase(PhaseType.getNext(phase));
+                turnEnded = PhaseType.isLast(phase, isTopsy);
+                setPhase(PhaseType.getNext(phase, isTopsy));
             }
         }
 
         game.getStack().clearUndoStack(); //can't undo action from previous phase
 
-        String phaseType = oldPhase == phase ? "Repeat" : phase == PhaseType.getNext(oldPhase) ? "" : "Additional";
+        String phaseType = oldPhase == phase ? "Repeat" : phase == PhaseType.getNext(oldPhase, isTopsy) ? "" : "Additional";
 
-        if (phase == PhaseType.UNTAP) {
+        if (turnEnded) {
             turn++;
             game.updateTurnForView();
             game.fireEvent(new GameEventTurnBegan(playerTurn, turn));
@@ -1127,7 +1130,7 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final boolean devAdvanceToPhase(PhaseType targetPhase) {
-        while (phase.isBefore(targetPhase)) {
+        while (phase.isBefore(targetPhase, playerTurn.hasKeyword("The phases of your turn are reversed."))) {
             if (checkStateBasedEffects()) {
                 return false;
             }

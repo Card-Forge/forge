@@ -306,7 +306,7 @@ public class Game {
      * Gets the players who are still fighting to win, in turn order.
      */
     public final PlayerCollection getPlayersInTurnOrder() {
-        if (turnOrder.isDefaultDirection()) {
+        if (getTurnOrder().isDefaultDirection()) {
             return ingamePlayers;
         }
         final PlayerCollection players = new PlayerCollection(ingamePlayers);
@@ -321,7 +321,7 @@ public class Game {
         // Don't use getPlayersInTurnOrder to prevent copying the player collection twice
         final PlayerCollection players = new PlayerCollection(ingamePlayers);
         players.remove(phaseHandler.getPlayerTurn());
-        if (!turnOrder.isDefaultDirection()) {
+        if (!getTurnOrder().isDefaultDirection()) {
             Collections.reverse(players);
         }
         return players;
@@ -416,6 +416,9 @@ public class Game {
      * The Direction in which the turn order of this Game currently proceeds.
      */
     public final Direction getTurnOrder() {
+        if (phaseHandler.getPlayerTurn() != null && phaseHandler.getPlayerTurn().hasKeyword("The turn order is reversed.")) {
+            return turnOrder.getOtherDirection();
+        }
     	return turnOrder;
     }
     public final void reverseTurnOrder() {
@@ -677,7 +680,7 @@ public class Game {
      * {@code null} if there are no players in the game.
      */
     public Player getNextPlayerAfter(final Player playerTurn) {
-        return getNextPlayerAfter(playerTurn, turnOrder);
+        return getNextPlayerAfter(playerTurn, getTurnOrder());
     }
 
     /**
