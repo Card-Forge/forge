@@ -6,6 +6,7 @@ Code2=COM
 Alias=CMD
 MciCode=cmd
 Type=Other
+BoosterBox=0
 
 [cards]
 39 C AEthersnipe
