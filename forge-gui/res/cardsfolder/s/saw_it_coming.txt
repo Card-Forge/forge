@@ -1,4 +1,4 @@
-Name:Saw it Coming
+Name:Saw It Coming
 ManaCost:1 U U
 Types:Instant
 A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
