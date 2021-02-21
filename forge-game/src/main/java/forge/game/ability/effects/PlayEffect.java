@@ -88,32 +88,32 @@ public class PlayEffect extends SpellAbilityEffect {
             }
         }
         else if (sa.hasParam("AnySupportedCard")) {
-            List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
             final String valid = sa.getParam("AnySupportedCard");
-            if (StringUtils.containsIgnoreCase(valid, "sorcery")) {
+            List<PaperCard> cards = null;
+            if (valid.startsWith("Names:")){
+                cards = new ArrayList<>();
+                for (String name : valid.substring(6).split(",")) {
+                    name = name.replace(";", ",");
+                    cards.add(StaticData.instance().getCommonCards().getUniqueByName(name));
+                }
+            } else if (valid.equalsIgnoreCase("sorcery")) {
+                cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
                 final Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_SORCERY, PaperCard.FN_GET_RULES);
                 cards = Lists.newArrayList(Iterables.filter(cards, cpp));
-            }
-            if (StringUtils.containsIgnoreCase(valid, "instant")) {
+            } else if (valid.equalsIgnoreCase("instant")) {
+                cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
                 final Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_INSTANT, PaperCard.FN_GET_RULES);
                 cards = Lists.newArrayList(Iterables.filter(cards, cpp));
             }
             if (sa.hasParam("RandomCopied")) {
-                final List<PaperCard> copysource = new ArrayList<>(cards);
                 final CardCollection choice = new CardCollection();
                 final String num = sa.hasParam("RandomNum") ? sa.getParam("RandomNum") : "1";
                 int ncopied = AbilityUtils.calculateAmount(source, num, sa);
-                while (ncopied > 0) {
-                    final PaperCard cp = Aggregates.random(copysource);
+                for (PaperCard cp : Aggregates.random(cards, ncopied)) {
                     final Card possibleCard = Card.fromPaperCard(cp, sa.getActivatingPlayer());
                     // Need to temporarily set the Owner so the Game is set
                     possibleCard.setOwner(sa.getActivatingPlayer());
-
-                    if (possibleCard.isValid(valid, source.getController(), source, sa)) {
-                        choice.add(possibleCard);
-                        copysource.remove(cp);
-                        ncopied -= 1;
-                    }
+                    choice.add(possibleCard);
                 }
                 if (sa.hasParam("ChoiceNum")) {
                     final int choicenum = AbilityUtils.calculateAmount(source, sa.getParam("ChoiceNum"), sa);
