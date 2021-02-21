@@ -101,6 +101,12 @@ public class LifeLoseAi extends SpellAbilityAi {
         final String amountStr = sa.getParam("LifeAmount");
         int amount = 0;
 
+        if (sa.usesTargeting()) {
+            if (!doTgt(ai, sa, false)) {
+                return false;
+            }
+        }
+
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             amount = ComputerUtilCost.getMaxXValue(sa, ai);
@@ -117,11 +123,6 @@ public class LifeLoseAi extends SpellAbilityAi {
             return false;
         }
 
-        if (sa.usesTargeting()) {
-            if (!doTgt(ai, sa, false)) {
-                return false;
-            }
-        }
         final PlayerCollection tgtPlayers = getPlayers(ai, sa);
 
         if (ComputerUtil.playImmediately(ai, sa)) {

@@ -1,11 +1,8 @@
 package forge.ai.ability;
 
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.ApiType;
@@ -20,6 +17,8 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.List;
 
 public class EffectAi extends SpellAbilityAi {
     @Override
@@ -102,11 +101,15 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 randomReturn = true;
             } else if (logic.equals("ChainVeil")) {
-                if (!phase.isPlayerTurn(ai) || !phase.getPhase().equals(PhaseType.MAIN2) 
-                		|| CardLists.getType(ai.getCardsIn(ZoneType.Battlefield), "Planeswalker").isEmpty()) {
+                if (!phase.isPlayerTurn(ai) || !phase.getPhase().equals(PhaseType.MAIN2)
+                        || CardLists.getType(ai.getCardsIn(ZoneType.Battlefield), "Planeswalker").isEmpty()) {
                     return false;
                 }
                 randomReturn = true;
+            } else if (logic.equals("WillCastCreature") && ai.isAI()) {
+                AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+                SpellAbility saCreature = aic.predictSpellToCastInMain2(ApiType.PermanentCreature);
+                randomReturn = saCreature != null && ComputerUtilMana.canPayManaCost(saCreature, ai, 0);
             } else if (logic.equals("Always")) {
                 randomReturn = true;
             } else if (logic.equals("Main1")) {

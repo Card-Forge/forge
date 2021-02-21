@@ -43,6 +43,8 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             return SpecialCardAi.GideonBlackblade.consider(ai, sa);
         } else if ("SoulEcho".equals(aiLogic)) {
             return doTriggerAINoCost(ai, sa, true);
+        } else if ("Always".equals(aiLogic)) {
+            return true;
         }
         return false;
     }
