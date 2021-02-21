@@ -117,7 +117,7 @@ public class ComputerUtil {
         final Cost cost = sa.getPayCosts();
 
         // Remember the now-forgotten kicker cost? Why is this needed?
-        sa.getHostCard().setKickerMagnitude(source.getKickerMagnitude()); // the card will disappear
+        sa.getHostCard().setKickerMagnitude(source.getKickerMagnitude());
 
         // TODO: update mana color conversion for Daxos of Meletis
         if (cost == null) {
