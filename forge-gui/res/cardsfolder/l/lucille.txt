@@ -5,5 +5,6 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ M
 T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigSac | TriggerDescription$ Whenever equipped creature attacks, defending player sacrifices a creature. If they do, you create a Walker token.
 SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredDefendingPlayer | SacValid$ Creature | Amount$ 1 | RememberSacrificed$ True | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | TokenAmount$ 1 | TokenScript$ walker | TokenOwner$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Equip:4
 Oracle:Equipped creature gets +2/+0 and has menace.\nWhenever equipped creature attacks, defending player sacrifices a creature. If they do, you create a Walker token.\nEquip {4}
