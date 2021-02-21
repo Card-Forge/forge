@@ -156,6 +156,7 @@ public class PermanentAi extends SpellAbilityAi {
                 ManaCostBeingPaid mcbp = new ManaCostBeingPaid(mCost);
                 if (!ComputerUtilMana.canPayManaCost(mcbp, sa, ai)) {
                     card.setKickerMagnitude(i);
+                    sa.setSVar("Multikicker", String.valueOf(i));
                     break;
                 }
                 card.setKickerMagnitude(i + 1);
