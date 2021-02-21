@@ -1,4 +1,4 @@
-This file lists all cards the scripted abilities of which are referenced in Puzzle Mode puzzles. Changing these abilities' names or reimplementing them differently will require an update in the relevant puzzle(s), a grep search over the .pzl files will be required to detect which puzzles are affected.
+This file lists all cards the scripted abilities of which are referenced in Puzzle Mode puzzles. Changing these abilities' names or reimplementing them differently will require an update in the relevant puzzle(s), a grep search over the .pzl files will be required to detect which puzzles are affected. The script references appear either in "ExecuteScript" parts or in the "aiprecast" / "humanprecast" declarations.
 
 Abstruse Interference -> DBToken
 Aether Chaser -> TrigEnergy
