@@ -966,7 +966,7 @@ public class CardProperty {
                 final String restriction = property.split("sharesControllerWith ")[1];
                 if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted")) {
                     CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                    return !CardLists.filter(list, CardPredicates.sharesControllerWith(card)).isEmpty();
+                    return Iterables.any(list, CardPredicates.sharesControllerWith(card));
                 }
             }
         } else if (property.startsWith("sharesOwnerWith")) {
