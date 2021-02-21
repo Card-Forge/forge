@@ -1,0 +1,34 @@
+This file lists all cards the scripted abilities of which are referenced in Puzzle Mode puzzles. Changing these abilities' names or reimplementing them differently will require an update in the relevant puzzle(s), a grep search over the .pzl files will be required to detect which puzzles are affected.
+
+Abstruse Interference -> DBToken
+Aether Chaser -> TrigEnergy
+Archon of Sun's Grace -> TrigToken
+Cast Out - TrigExile
+Clone -> DBCopy
+Crested Sunmare -> TrigToken
+Cubwarden -> TrigToken
+Deeproot Waters -> TrigToken
+Deputy of Detention - TrigExile
+Dragonlord Silumgar -> TrigChange
+Dream Trawler -> TrigPump
+Embodiment of Fury - TrigAnimate
+Enchanted Carriage -> TrigToken
+Fairgrounds Warden -> TrigExile
+Forbidding Spirit -> TempAttackTax
+God-Eternal Oketra -> TrigToken
+Gonti, Lord of Luxury -> TrigDig
+Helm of the Host - TrigCopy
+Hostage Taker - TrigExile
+Lazav, Dimir Mastermind -> LazavCopy
+Oblivion Ring -> TrigExile
+Ondu Rising -> Keyword Awaken + target
+Opportunistic Dragon -> TrigGainControl
+Pirate's Prize -> DBTreasure
+Robber of the Rich -> DBEffect
+Smothering Tither -> TrigToken
+Sporeweb Weaver -> DBToken
+Suspension Field -> DBEffect (will be: TrigExile)
+The Akroan War - DBGainControl
+The Circle of Loyalty -> TrigToken
+Thief of Sanity - DBEffect
+Trail of Crumbs -> TrigToken
