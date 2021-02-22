@@ -102,7 +102,7 @@ public class PlayerZone extends Zone {
 
     @Override
     public final String toString() {
-        return TextUtil.concatWithSpace(Lang.getPossesive(player.toString()), zoneType.toString());
+        return TextUtil.concatWithSpace(Lang.getInstance().getPossesive(player.toString()), zoneType.toString());
     }
 
     public CardCollectionView getCardsPlayerCanActivate(Player who) {

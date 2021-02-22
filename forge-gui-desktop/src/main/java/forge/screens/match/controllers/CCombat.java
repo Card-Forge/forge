@@ -81,7 +81,7 @@ public class CCombat implements ICDoc {
 
         if (defender instanceof CardView) {
             final PlayerView controller = ((CardView) defender).getController();
-            display.append(Lang.getPossesive(controller.getName())).append(" ");
+            display.append(Lang.getInstance().getPossesive(controller.getName())).append(" ");
         }
 
         display.append(defender).append(" is attacked by:\n");

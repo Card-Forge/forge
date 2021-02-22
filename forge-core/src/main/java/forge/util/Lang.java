@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.util.lang.*;
+
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -13,12 +15,39 @@ import com.google.common.collect.Lists;
 /**
  * Static library containing language-related utility methods.
  */
-public final class Lang {
+public abstract class Lang {
 
-    /**
-     * Private constructor to prevent instantiation.
-     */
-    private Lang() {
+	private static Lang instance;
+
+    protected String languageCode;
+    protected String countryCode;
+
+    public static void createInstance(String localeID) {
+		String[] splitLocale = localeID.split("-");
+        String language = splitLocale[0];
+        String country = splitLocale[1];
+        if (language.equals("de")) {
+            instance = new LangGerman();
+        } else if (language.equals("es")) {
+            instance = new LangSpanish();
+        } else if (language.equals("it")) {
+            instance = new LangItalian();
+        } else if (language.equals("zh")) {
+            instance = new LangChinese();
+        } else if (language.equals("ja")) {
+            instance = new LangJapanese();
+        } else { // default is English
+            instance = new LangEnglish();
+        }
+        instance.languageCode = language;
+        instance.countryCode = country;
+    }
+
+	public static Lang getInstance() {
+		return instance;
+	}
+	
+    protected Lang() {
     }
 
     /**
@@ -29,17 +58,7 @@ public final class Lang {
      *            the number to get the ordinal suffix for.
      * @return a string containing two characters.
      */
-    public static String getOrdinal(final int position) {
-        final String[] sufixes = new String[] { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th" };
-        switch (position % 100) {
-        case 11:
-        case 12:
-        case 13:
-            return position + "th";
-        default:
-            return position + sufixes[position % 10];
-        }
-    }
+    public abstract String getOrdinal(final int position);
 
     public static String joinHomogenous(final String s1, final String s2) {
         final boolean has1 = StringUtils.isNotBlank(s1);
@@ -121,16 +140,8 @@ public final class Lang {
         }
     }
 
-    public static String getPossesive(final String name) {
-        if ("You".equalsIgnoreCase(name)) {
-            return name + "r"; // to get "your"
-        }
-        return name.endsWith("s") ? name + "'" : name + "'s";
-    }
-
-    public static String getPossessedObject(final String owner, final String object) {
-        return getPossesive(owner) + " " + object;
-    }
+    public abstract String getPossesive(final String name);
+    public abstract String getPossessedObject(final String owner, final String object);
 
     public static boolean startsWithVowel(final String word) {
         return isVowel(word.trim().charAt(0));

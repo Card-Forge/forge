@@ -67,7 +67,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         }
         else {
             sb.append(startingPlayer.getName()).append(" ").append(localizer.getMessage("lblIsGoingFirst")).append(".\n");
-            sb.append(player).append(", ").append(localizer.getMessage("lblYouAreGoing")).append(" ").append(Lang.getOrdinal(game.getPosition(player, startingPlayer))).append(".\n\n");
+            sb.append(player).append(", ").append(localizer.getMessage("lblYouAreGoing")).append(" ").append(Lang.getInstance().getOrdinal(game.getPosition(player, startingPlayer))).append(".\n\n");
         }
 
         getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblKeep"), localizer.getMessage("lblMulligan"), true, true, true);
