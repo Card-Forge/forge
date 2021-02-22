@@ -51,6 +51,7 @@ public final class ForgeConstants {
     public static final String BORDERLESS_CARD_LIST_FILE             = LISTS_DIR + "borderlessCardList.txt";
     public static final String SKINS_LIST_FILE                       = LISTS_DIR + "skinsList.txt";
     public static final String NET_ARCHIVE_STANDARD_DECKS_LIST_FILE  = LISTS_DIR + "net-decks-archive-standard.txt";
+    public static final String NET_ARCHIVE_MODERN_DECKS_LIST_FILE = LISTS_DIR + "net-decks-archive-modern.txt";
 
 
     public static final String CHANGES_FILE            = ASSETS_DIR + "README.txt";
