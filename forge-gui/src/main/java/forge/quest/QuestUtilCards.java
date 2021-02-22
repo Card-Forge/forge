@@ -102,6 +102,9 @@ public final class QuestUtilCards {
             if (usedFormat.isSetLegal("CSP")) {
                 snowLandCodes.add("CSP");
             }
+            if (usedFormat.isSetLegal("KHM")) {
+                snowLandCodes.add("KHM");
+            }
 
             if (usedFormat.isSetLegal("OGW")) {
                 wastesCodes.add("OGW");
@@ -113,6 +116,7 @@ public final class QuestUtilCards {
             }
             snowLandCodes.add("ICE");
             snowLandCodes.add("CSP");
+            snowLandCodes.add("KHM");
             wastesCodes.add("OGW");
         }
 
@@ -563,41 +567,19 @@ public final class QuestUtilCards {
      * @param quantity the count
      */
     private void generateSinglesInShop(final int quantity) {
-
-    	if (questController.getFormat() == null) {
-		    SealedProduct.Template boosterTemplate = getShopBoosterTemplate();
+        // This is the spot we need to change
+        SealedProduct.Template boosterTemplate = getShopBoosterTemplate();
+        if (questController.getFormat() == null) {
 		    for (int i = 0; i < quantity; i++) {
 			    questAssets.getShopList().addAllOfTypeFlat(new UnOpenedProduct(boosterTemplate).get());
 		    }
 		    return;
-	    }
-
-	    int commons = questPreferences.getPrefInt(QPref.SHOP_SINGLES_COMMON) * quantity;
-	    int uncommons = questPreferences.getPrefInt(QPref.SHOP_SINGLES_UNCOMMON) * quantity;
-	    int rareOrMythics = questPreferences.getPrefInt(QPref.SHOP_SINGLES_RARE) * quantity;
-
-	    int attempts = commons + uncommons + rareOrMythics + 50;
-
-	    List<PaperCard> toAdd = new ArrayList<>();
-
-	    do {
-
-	    	List<PaperCard> cards = ((BoosterPack) BoosterUtils.generateRandomBoosterPacks(1, questController).get(0)).getCards();
-
-	    	if (commons > 0) {
-			    commons = getRandomCardFromBooster(cards, COMMON_PREDICATE, toAdd, commons);
-		    } else if (uncommons > 0) {
-			    uncommons = getRandomCardFromBooster(cards, UNCOMMON_PREDICATE, toAdd, uncommons);
-		    } else if (rareOrMythics > 0) {
-			    rareOrMythics = getRandomCardFromBooster(cards, RARE_PREDICATE, toAdd, rareOrMythics);
-		    } else {
-	    		break;
-		    }
-
-	    } while (commons + uncommons + rareOrMythics > 0 && attempts-- > 0);
-
-	    questAssets.getShopList().addAllOfTypeFlat(toAdd);
-
+	    } else {
+            for (int i = 0; i < quantity; i++) {
+                // Unopened product based on format of the cards?
+                questAssets.getShopList().addAllOfTypeFlat(new UnOpenedProduct(boosterTemplate, questController.getFormat().getFilterPrinted()).get());
+            }
+        }
     }
 
     private static int getRandomCardFromBooster(final List<PaperCard> cards, final Predicate<PaperCard> predicate, final List<PaperCard> toAddTo, final int amount) {
