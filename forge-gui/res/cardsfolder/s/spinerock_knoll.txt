@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Land
 K:Hideaway
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-A:AB$ Play | Cost$ R T | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7 | ForgetRemembered$ True | AILogic$ CheckCondition | SpellDescription$ You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn.
+A:AB$ Play | Cost$ R T | Defined$ ExiledWith | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7 | AILogic$ CheckCondition | SpellDescription$ You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn.
 SVar:X:Count$MaxOppDamageThisTurn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spinerock_knoll.jpg
 Oracle:Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\n{T}: Add {R}.\n{R}, {T}: You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn.

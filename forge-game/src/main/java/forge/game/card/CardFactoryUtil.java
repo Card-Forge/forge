@@ -2751,8 +2751,8 @@ public class CardFactoryUtil {
             sb.append(", then put the rest on the bottom of your library.");
             final Trigger hideawayTrigger = TriggerHandler.parseTrigger(sb.toString(), card, intrinsic);
 
-            String hideawayDig = "DB$ Dig | Defined$ You | DigNum$ 4 | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True";
-            String hideawayEffect = "DB$ Effect | StaticAbilities$ STHideawayEffectLookAtCard | ForgetOnMoved$ Exile | RememberObjects$ Remembered | Duration$ Permanent";
+            String hideawayDig = "DB$ Dig | Defined$ You | DigNum$ 4 | DestinationZone$ Exile | ExileFaceDown$ True";
+            String hideawayEffect = "DB$ Effect | StaticAbilities$ STHideawayEffectLookAtCard | ForgetOnMoved$ Exile | RememberObjects$ ExiledWith | Duration$ Permanent";
 
             String lookAtCard = "Mode$ Continuous | Affected$ Card.IsRemembered | MayLookAt$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ You may look at the exiled card.";
 
@@ -2770,12 +2770,6 @@ public class CardFactoryUtil {
             final Trigger gainControlTrigger = TriggerHandler.parseTrigger("Mode$ ChangesController | ValidCard$ Card.Self | Static$ True", card, intrinsic);
             gainControlTrigger.setOverridingAbility((AbilitySub)effectSA.copy());
             triggers.add(gainControlTrigger);
-
-            // when the card with hideaway leaves the battlefield, forget all exiled cards
-            final Trigger changeZoneTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | TriggerZone$ Battlefield | Static$ True", card, intrinsic);
-            String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
-            changeZoneTrigger.setOverridingAbility(AbilityFactory.getAbility(cleanupStr, card));
-            triggers.add(changeZoneTrigger);
 
             for (final Trigger trigger : triggers) {
                 inst.addTrigger(trigger);

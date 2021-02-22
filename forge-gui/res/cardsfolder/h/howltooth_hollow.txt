@@ -3,8 +3,7 @@ ManaCost:no cost
 Types:Land
 K:Hideaway
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-A:AB$ Play | Cost$ B T | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ Hands | ConditionSVarCompare$ EQ0 | ForgetRemembered$ True | AILogic$ CheckCondition | SpellDescription$ You may play the exiled card without paying its mana cost if each player has no cards in hand.
+A:AB$ Play | Cost$ B T | Defined$ ExiledWith | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ Hands | ConditionSVarCompare$ EQ0 | AILogic$ CheckCondition | SpellDescription$ You may play the exiled card without paying its mana cost if each player has no cards in hand.
 SVar:Hands:Count$NumInAllHands
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/howltooth_hollow.jpg
 Oracle:Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\n{T}: Add {B}.\n{B}, {T}: You may play the exiled card without paying its mana cost if each player has no cards in hand.
