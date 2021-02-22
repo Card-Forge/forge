@@ -1846,10 +1846,8 @@ public class AbilityUtils {
                 return CardFactoryUtil.doXMath(game.getCounterAddedThisTurn(cType, parts[2], parts[3], c, player, ctb), expr, c);
             }
 
-            if (ctb instanceof CardTraitBase) {
-                if (l[0].startsWith("ExiledWith")) {
-                    return CardFactoryUtil.doXMath(c.getExiledWith(ctb).size(), expr, c);
-                }
+            if (l[0].startsWith("ExiledWith")) {
+                return CardFactoryUtil.doXMath(c.getExiledWith(ctb).size(), expr, c);
             }
         }
         return CardFactoryUtil.xCount(c, s2);
