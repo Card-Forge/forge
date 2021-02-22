@@ -74,9 +74,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        if (sa.getHostCard() != null && sa.getHostCard().hasSVar("AIPreferenceOverride")) {
+        Card host = sa.getHostCard();
+
+        if (host != null && host.hasSVar("AIPreferenceOverride")) {
             // currently used by SacAndUpgrade logic, might need simplification
-            sa.getHostCard().removeSVar("AIPreferenceOverride");
+            host.removeSVar("AIPreferenceOverride");
         }
 
         if (aiLogic.equals("BeforeCombat")) {
@@ -90,7 +92,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         } else if (aiLogic.equals("PriorityOptionalCost")) {
             boolean highPriority = false;
             // if we have more than one of these in hand, might not be worth waiting for optional cost payment on the additional copy
-            highPriority |= CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(sa.getHostCard().getName())).size() > 1;
+            highPriority |= CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(host.getName())).size() > 1;
             // if we are in danger in combat, no need to wait to pay the optional cost
             highPriority |= ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
                     && ai.getGame().getCombat() != null && ComputerUtilCombat.lifeInDanger(ai, ai.getGame().getCombat());
@@ -125,6 +127,18 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return true;
         } else if (aiLogic.equals("Pongify")) {
             return SpecialAiLogic.doPongifyLogic(ai, sa);
+        } else if (aiLogic.equals("Ashiok")) {
+            final int loyalty = host.getCurrentLoyalty() - 1;
+            CardCollectionView choices = new CardCollection();
+            for (int i = loyalty; i >= 0; i--) {
+                sa.setXManaCostPaid(i);
+                choices = ai.getGame().getCardsIn(ZoneType.listValueOf(sa.getParam("Origin")));
+                choices = CardLists.getValidCards(choices, sa.getParam("ChangeType"), host.getController(), host, sa);
+                if (!choices.isEmpty()) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         return super.checkAiLogic(ai, sa, aiLogic);
@@ -161,6 +175,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return SpecialCardAi.MazesEnd.consider(aiPlayer, sa);
             } else if (aiLogic.equals("Pongify")) {
                 return sa.isTargetNumberValid(); // Pre-targeted in checkAiLogic
+            } else if (aiLogic.equals("Ashiok")) {
+                return true; // If checkAiLogic returns true, then we should be good to go
             }
         }
         if (isHidden(sa)) {
