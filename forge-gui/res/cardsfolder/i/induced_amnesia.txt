@@ -2,10 +2,10 @@ Name:Induced Amnesia
 ManaCost:2 U
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, target player exiles all cards from their hand face down.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return the exiled cards to their owner's hand.
-SVar:TrigExile:DB$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBDraw | SpellDescription$ Target player exiles all cards from their hand face down, then draws that many cards.
+SVar:TrigExile:DB$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | SubAbility$ DBDraw | SpellDescription$ Target player exiles all cards from their hand face down, then draws that many cards.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return the exiled cards to their owner's hand.
 SVar:DBDraw:DB$ Draw | Defined$ Targeted | NumCards$ X
-SVar:X:Count$RememberedSize
-SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | ChangeType$ Card.IsRemembered | Destination$ Hand
+SVar:X:ExiledWith$Amount
+SVar:TrigReturn:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Hand
 SVar:PlayMain1:TRUE
 Oracle:When Induced Amnesia enters the battlefield, target player exiles all cards from their hand face down, then draws that many cards.\nWhen Induced Amnesia is put into a graveyard from the battlefield, return the exiled cards to their owner's hand.

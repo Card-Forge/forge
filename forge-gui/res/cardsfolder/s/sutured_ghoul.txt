@@ -4,13 +4,12 @@ Types:Creature Zombie
 PT:*/*
 K:Trample
 K:ETBReplacement:Copy:ChooseCreatures
-SVar:ChooseCreatures:DB$ ChooseCard | Defined$ You | Amount$ X | Choices$ Creature.YouOwn | ChoiceTitle$ Exile any number of creature cards from your graveyard. | ChoiceZone$ Graveyard | RememberChosen$ True | SubAbility$ ExileCreatures | SpellDescription$ As CARDNAME enters the battlefield, exile any number of creature cards from your graveyard. CARDNAME's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
-SVar:ExileCreatures:DB$ ChangeZoneAll | ChangeType$ Remembered | Origin$ Graveyard | Destination$ Exile | SubAbility$ AnimateSuture
-SVar:AnimateSuture:DB$ Animate | Defined$ Self | Power$ TotalPower | Toughness$ TotalToughness | Permanent$ True | SubAbility$ DBCleanup
+SVar:ChooseCreatures:DB$ ChooseCard | Defined$ You | Amount$ X | Choices$ Creature.YouOwn | ChoiceTitle$ Exile any number of creature cards from your graveyard. | ChoiceZone$ Graveyard | RememberChosen$ True | SubAbility$ ExileCreatures | SpellDescription$ As CARDNAME enters the battlefield, exile any number of creature cards from your graveyard.
+SVar:ExileCreatures:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:TotalPower:Remembered$CardPower
-SVar:TotalToughness:Remembered$CardToughness
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ TotalPower | SetToughness$ TotalToughness | References$ TotalPower,TotalToughness | Description$ CARDNAME's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
+SVar:TotalPower:ExiledWith$CardPower
+SVar:TotalToughness:ExiledWith$CardToughness
 SVar:X:Count$TypeInYourYard.Creature
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sutured_ghoul.jpg
 Oracle:Trample\nAs Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard.\nSutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.

@@ -2,11 +2,6 @@ Name:Exclusion Ritual
 ManaCost:4 W W
 Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, exile target nonland permanent.
-SVar:TrigExile:DB$ ChangeZone | Imprint$ True | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Exile
-S:Mode$ CantBeCast | ValidCard$ Card.sharesNameWith Imprinted | Description$ Players can't cast spells with the same name as the exiled card.
-T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
-T:Mode$ ChangesZone | ValidCard$ Card.IsImprinted+ExiledWithSource | Origin$ Exile | Execute$ DBForget | Static$ True
-SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
-SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/exclusion_ritual.jpg
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Exile
+S:Mode$ CantBeCast | ValidCard$ Card.sharesNameWith ExiledWith | Description$ Players can't cast spells with the same name as the exiled card.
 Oracle:Imprint — When Exclusion Ritual enters the battlefield, exile target nonland permanent.\nPlayers can't cast spells with the same name as the exiled card.

@@ -4,10 +4,8 @@ Types:Creature Nightmare Drake
 PT:3/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ETBExileAbility | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you exile a creature you control other than CARDNAME.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ ETBExileReturn | Secondary$ True | TriggerDescription$ When this leaves the battlefield, that card returns to the battlefield."
-SVar:ETBExileAbility:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | Hidden$ True | Optional$ True | SubAbility$ ETBExileSacrifice | ChangeType$ Creature.Other+YouCtrl
-SVar:ETBExileSacrifice:DB$ Sacrifice | Defined$ Card.Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0
-SVar:ETBExileReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ ETBExileCleanup
-SVar:ETBExileCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_drake.jpg
+SVar:ETBExileAbility:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Hidden$ True | Optional$ True | SubAbility$ ETBExileSacrifice | ChangeType$ Creature.Other+YouCtrl
+SVar:ETBExileSacrifice:DB$ Sacrifice | Defined$ Card.Self | ConditionDefined$ ExiledWith | ConditionPresent$ Card | ConditionCompare$ EQ0
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ ETBExileReturn | Secondary$ True | TriggerDescription$ When this leaves the battlefield, that card returns to the battlefield.
+SVar:ETBExileReturn:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Battlefield
 Oracle:Flying\nWhen Wormfang Drake enters the battlefield, sacrifice it unless you exile a creature you control other than Wormfang Drake.\nWhen Wormfang Drake leaves the battlefield, return the exiled card to the battlefield under its owner's control.

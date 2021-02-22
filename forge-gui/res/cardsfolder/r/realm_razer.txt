@@ -3,10 +3,8 @@ ManaCost:3 R G W
 Types:Creature Beast
 PT:4/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile all lands.
-SVar:TrigExile:DB$ ChangeZoneAll | ChangeType$ Land | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigRecall | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled cards to the battlefield tapped under their owners' control.
-SVar:TrigRecall:DB$ ChangeZoneAll | ChangeType$ Remembered.ExiledWithSource | Origin$ Exile | Destination$ Battlefield | Tapped$ True | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigExile:DB$ ChangeZoneAll | ChangeType$ Land | Origin$ Battlefield | Destination$ Exile
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigRecall | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled cards to the battlefield tapped under their owners' control.
+SVar:TrigRecall:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Battlefield | Tapped$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/realm_razer.jpg
 Oracle:When Realm Razer enters the battlefield, exile all lands.\nWhen Realm Razer leaves the battlefield, return the exiled cards to the battlefield tapped under their owners' control.

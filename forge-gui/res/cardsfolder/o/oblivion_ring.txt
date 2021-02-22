@@ -2,10 +2,9 @@ Name:Oblivion Ring
 ManaCost:2 W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile another target nonland permanent.
+SVar:TrigExile:DB$ ChangeZone | TargetMin$ 1 | IsCurse$ True | ValidTgts$ Permanent.nonLand+Other | TgtPrompt$ Choose target nonland permanent other than Oblivion Ring | Destination$ Exile
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-SVar:TrigExile:DB$ ChangeZone | TargetMin$ 1 | IsCurse$ True | ValidTgts$ Permanent.nonLand+Other | TgtPrompt$ Choose target nonland permanent other than Oblivion Ring | RememberTargets$ True | ForgetOtherTargets$ True | Origin$ Battlefield | Destination$ Exile
-SVar:TrigReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
+SVar:TrigReturn:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Battlefield
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE
-SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139414.jpg
 Oracle:When Oblivion Ring enters the battlefield, exile another target nonland permanent.\nWhen Oblivion Ring leaves the battlefield, return the exiled card to the battlefield under its owner's control.
