@@ -274,6 +274,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                                 }
                             },
                 3);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_DISPOSE_TEXTURES,
+                        localizer.getMessage("lblDisposeTextures"),
+                        localizer.getMessage("nlDisposeTextures")) {
+                                @Override
+                                public void select() {
+                                    super.select();
+                                    Forge.disposeTextures = FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_DISPOSE_TEXTURES);
+                                }
+                            },
+                3);
         if (GuiBase.isAndroid()) { //this option does nothing except on Android
             lstSettings.addItem(new BooleanSetting(FPref.UI_AUTO_CACHE_SIZE,
                                         localizer.getMessage("lblAutoCacheSize"),
