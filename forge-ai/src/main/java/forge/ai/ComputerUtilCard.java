@@ -1851,7 +1851,7 @@ public class ComputerUtilCard {
                 if (card.hasSVar("NeedsToPlayEvokedVar")) {
                     needsToPlayVarName = "NeedsToPlayEvokedVar";
                 }
-            } else if (sa.isKicked() || card.getKickerMagnitude() > 0) {
+            } else if (sa.isKicked()) {
                 // if the spell is kicked, uses NeedsToPlayKicked if able and locks out the regular NeedsToPlay check
                 // for unkicked spells, uses NeedsToPlay
                 if (card.hasSVar("NeedsToPlayKicked")) {
