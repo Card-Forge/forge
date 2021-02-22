@@ -12,5 +12,5 @@ Name:Tomb of the Dusk Rose
 ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
-A:AB$ ChangeZone | Cost$ 2 W B T | Hidden$ True | Origin$ Exile | Destination$ Battlefield | ChangeType$ Creature.ExiledWithSource | ChangeNum$ 1 | GainControl$ True | Mandatory$ True | StackDescription$ SpellDescription | SpellDescription$ Put a creature card exiled with this permanent onto the battlefield under your control.
-Oracle:(Transforms from Profane Procession.)\n{T}: Add one mana of any color.\n{2}{W}{B}, {T}: Put a creature card exiled with this permanent onto the battlefield under your control.
+A:AB$ ChangeZone | Cost$ 2 W B T | Hidden$ True | Origin$ Exile | Destination$ Battlefield | ChangeType$ Creature.ExiledWithSource | ChangeNum$ 1 | GainControl$ True | Mandatory$ True | AILogic$ BestCard | StackDescription$ SpellDescription | SpellDescription$ Put a creature card exiled with CARDNAME onto the battlefield under your control.
+Oracle:(Transforms from Profane Procession.)\n{T}: Add one mana of any color.\n{2}{W}{B}，{T}: Put a creature card exiled with this permanent onto the battlefield under your control.

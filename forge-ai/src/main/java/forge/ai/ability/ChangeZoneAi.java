@@ -139,6 +139,28 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             return false;
+        } else if (aiLogic.equals("BestCard")) {
+            CardCollectionView choices = ai.getGame().getCardsIn(ZoneType.listValueOf(sa.getParam("Origin")));
+            choices = CardLists.getValidCards(choices, sa.getParam("ChangeType"), host.getController(), host, sa);
+            if (!choices.isEmpty()) {
+                return true;
+            }
+        } else if (aiLogic.startsWith("DiscardAllAndRetExiled")) {
+            int numExiledWithSrc = CardLists.filter(ai.getCardsIn(ZoneType.Exile), CardPredicates.isExiledWith(host)).size();
+            int curHandSize = ai.getCardsIn(ZoneType.Hand).size();
+
+            // minimum card advantage unless the hand will be fully reloaded
+            int minAdv = aiLogic.contains(".minAdv") ? Integer.parseInt(aiLogic.substring(aiLogic.indexOf(".minAdv") + 7)) : 0;
+
+            if (numExiledWithSrc > curHandSize) {
+                if (ComputerUtil.predictThreatenedObjects(ai, sa, true).contains(host)) {
+                    // Try to gain some card advantage if the card will die anyway
+                    // TODO: ideally, should evaluate the hand value and not discard good hands to it
+                    return true;
+                }
+            }
+
+              return (curHandSize + minAdv - 1 < numExiledWithSrc) || (numExiledWithSrc >= ai.getMaxHandSize());
         }
 
         return super.checkAiLogic(ai, sa, aiLogic);
@@ -177,8 +199,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return sa.isTargetNumberValid(); // Pre-targeted in checkAiLogic
             } else if (aiLogic.equals("Ashiok")) {
                 return true; // If checkAiLogic returns true, then we should be good to go
+            } else if (aiLogic.equals("BestCard")) {
+                return true; // If checkAiLogic returns true, then we should be good to go
+            } else if (aiLogic.startsWith("DiscardAllAndRetExiled")) {
+                return true; // If checkAiLogic returns true, then we should be good to go
             }
         }
+
         if (isHidden(sa)) {
             return hiddenOriginCanPlayAI(aiPlayer, sa);
         }

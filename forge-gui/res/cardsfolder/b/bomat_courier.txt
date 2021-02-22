@@ -7,5 +7,6 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Batt
 SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | NoReveal$ True
 A:AB$ ChangeZone | Cost$ R Discard<1/Hand> Sac<1/CARDNAME> | Defined$ ExiledWith | Origin$ Exile | Destination$ Hand | AILogic$ DiscardAllAndRetExiled.minAdv2 | SpellDescription$ Put all cards exiled with CARDNAME into their owners' hands.
 DeckNeeds:Color$Red
+SVar:AISkipDiscardCostCheck:TRUE
 AI:RemoveDeck:Random
 Oracle:Haste\nWhenever Bomat Courier attacks, exile the top card of your library face down. (You can't look at it.)\n{R}, Discard your hand, Sacrifice Bomat Courier: Put all cards exiled with Bomat Courier into their owners' hands.

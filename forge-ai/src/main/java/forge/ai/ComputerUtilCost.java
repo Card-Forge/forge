@@ -137,8 +137,9 @@ public class ComputerUtilCost {
      *            the source
      * @return true, if successful
      */
+
     public static boolean checkDiscardCost(final Player ai, final Cost cost, final Card source, SpellAbility sa) {
-        if (cost == null) {
+        if (cost == null || source.hasSVar("AISkipDiscardCostCheck") /* FIXME: should not be needed! */ ) {
             return true;
         }
 

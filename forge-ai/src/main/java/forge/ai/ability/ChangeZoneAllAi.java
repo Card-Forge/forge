@@ -245,25 +245,8 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                         && !ComputerUtil.isPlayingReanimator(ai);
             }
         } else if (origin.equals(ZoneType.Exile)) {
-            String logic = sa.getParam("AILogic");
-
-            if (logic != null && logic.startsWith("DiscardAllAndRetExiled")) {
-                int numExiledWithSrc = CardLists.filter(ai.getCardsIn(ZoneType.Exile), CardPredicates.isExiledWith(source)).size();
-                int curHandSize = ai.getCardsIn(ZoneType.Hand).size();
-            
-                // minimum card advantage unless the hand will be fully reloaded
-                int minAdv = logic.contains(".minAdv") ? Integer.parseInt(logic.substring(logic.indexOf(".minAdv") + 7)) : 0;
-
-                if (numExiledWithSrc > curHandSize) {
-                    if (ComputerUtil.predictThreatenedObjects(ai, sa, true).contains(source)) {
-                        // Try to gain some card advantage if the card will die anyway
-                        // TODO: ideally, should evaluate the hand value and not discard good hands to it
-                        return true;
-                    }
-                }
-
-                return (curHandSize + minAdv - 1 < numExiledWithSrc) || (numExiledWithSrc >= ai.getMaxHandSize());
-            }
+            // TODO: nothing to do here at the moment
+            return false;
         } else if (origin.equals(ZoneType.Stack)) {
             // time stop can do something like this:
             // Origin$ Stack | Destination$ Exile | SubAbility$ DBSkip
