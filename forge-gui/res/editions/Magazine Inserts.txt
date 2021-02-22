@@ -39,4 +39,8 @@ Type=Reprint
 37 R Staggering Insight
 38 C Dark Ritual 
 39 R Sprite Dragon
+40 R Hypnotic Sprite
+41 R Heliod's Pilgrim
+42 R Crop Rotation
+43 R Tangled Florahedron
 
