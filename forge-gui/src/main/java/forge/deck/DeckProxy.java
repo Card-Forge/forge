@@ -624,7 +624,15 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
-    public static List<DeckProxy> getNetArchiveDecks(final NetDeckArchiveStandard category) {
+    public static List<DeckProxy> getNetArchiveStandardDecks(final NetDeckArchiveStandard category) {
+        final List<DeckProxy> decks = new ArrayList<>();
+        if (category != null) {
+            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
+        }
+        return decks;
+    }
+
+    public static List<DeckProxy> getNetArchiveModernDecks(final NetDeckArchiveModern category) {
         final List<DeckProxy> decks = new ArrayList<>();
         if (category != null) {
             addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
