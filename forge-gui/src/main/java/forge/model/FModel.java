@@ -52,6 +52,7 @@ import forge.quest.data.QuestPreferences;
 import forge.tournament.TournamentData;
 import forge.util.CardTranslation;
 import forge.util.FileUtil;
+import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
@@ -126,6 +127,7 @@ public final class FModel {
             throw new RuntimeException(exn);
         }
 
+        Lang.createInstance(FModel.getPreferences().getPref(FPref.UI_LANGUAGE));
         Localizer.getInstance().initialize(FModel.getPreferences().getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
 
         final ProgressObserver progressBarBridge = (progressBar == null) ?

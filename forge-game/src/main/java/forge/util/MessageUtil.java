@@ -14,7 +14,7 @@ public class MessageUtil {
     public static String formatMessage(String message, Player player, Object related) {
         if (related instanceof Player && message.indexOf("{player") >= 0) {
             String noun = mayBeYou(player, related);
-            message = TextUtil.fastReplace(TextUtil.fastReplace(message, "{player}", noun),"{player's}", Lang.getPossesive(noun));
+            message = TextUtil.fastReplace(TextUtil.fastReplace(message, "{player}", noun),"{player's}", Lang.getInstance().getPossesive(noun));
         }
         return message;
     }
@@ -22,7 +22,7 @@ public class MessageUtil {
     public static String formatMessage(String message, PlayerView player, Object related) {
         if (related instanceof PlayerView && message.indexOf("{player") >= 0) {
             String noun = mayBeYou(player, related);
-            message = TextUtil.fastReplace(TextUtil.fastReplace(message, "{player}", noun),"{player's}", Lang.getPossesive(noun));
+            message = TextUtil.fastReplace(TextUtil.fastReplace(message, "{player}", noun),"{player's}", Lang.getInstance().getPossesive(noun));
         }
         return message;
     }
@@ -48,7 +48,7 @@ public class MessageUtil {
             case FlipACoin:
                 String flipper = StringUtils.capitalize(mayBeYou(player, target));
                 return sa.hasParam("NoCall")
-                        ? Localizer.getInstance().getMessage("lblPlayerFlipComesUpValue", Lang.getPossesive(flipper), value)
+                        ? Localizer.getInstance().getMessage("lblPlayerFlipComesUpValue", Lang.getInstance().getPossesive(flipper), value)
                         : Localizer.getInstance().getMessage("lblPlayerActionFlip", flipper, Lang.joinVerb(flipper, value));
             case Protection:
                 return Localizer.getInstance().getMessage("lblPlayerChooseValue", choser, value);
@@ -66,9 +66,9 @@ public class MessageUtil {
     }
 
     public static String mayBeYou(Player player, Object what) {
-        return what == null ? "(null)" : what == player ? "you" : what.toString();
+        return what == null ? "(null)" : what == player ? Localizer.getInstance().getMessage("lblYou") : what.toString();
     }
     public static String mayBeYou(PlayerView player, Object what) {
-        return what == null ? "(null)" : what == player ? "you" : what.toString();
+        return what == null ? "(null)" : what == player ? Localizer.getInstance().getMessage("lblYou") : what.toString();
     }
 }

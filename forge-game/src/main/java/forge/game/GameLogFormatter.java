@@ -172,7 +172,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     @Override
     public GameLogEntry visit(GameEventTurnPhase ev) {
         Player p = ev.playerTurn;
-        return new GameLogEntry(GameLogEntryType.PHASE, ev.phaseDesc + Lang.getPossesive(p.getName()) + " " + ev.phase.nameForUi);
+        return new GameLogEntry(GameLogEntryType.PHASE, ev.phaseDesc + Lang.getInstance().getPossesive(p.getName()) + " " + ev.phase.nameForUi);
     }
 
     @Override

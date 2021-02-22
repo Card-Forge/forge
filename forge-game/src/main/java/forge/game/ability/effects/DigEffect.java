@@ -46,7 +46,7 @@ public class DigEffect extends SpellAbilityEffect {
         }
         else {
             for (final Player p : tgtPlayers) {
-                sb.append(Lang.getPossesive(p.getName())).append(" ");
+                sb.append(Lang.getInstance().getPossesive(p.getName())).append(" ");
             }
         }
         sb.append("library.");

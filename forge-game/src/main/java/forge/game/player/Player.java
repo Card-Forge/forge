@@ -215,7 +215,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (!haveDuplicates) {
                 return nameCandidate;
             }
-            nameCandidate = Lang.getOrdinal(i) + " " + originalName;
+            nameCandidate = Lang.getInstance().getOrdinal(i) + " " + originalName;
         }
         return nameCandidate;
     }
@@ -3131,7 +3131,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      }
 
     public static DetachedCardEffect createCompanionEffect(Game game, Card companion) {
-        final String name = Lang.getPossesive(companion.getName()) + " Companion Effect";
+        final String name = Lang.getInstance().getPossesive(companion.getName()) + " Companion Effect";
         DetachedCardEffect eff = new DetachedCardEffect(companion, name);
 
         String addToHandAbility = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouOwn+EffectSource | AffectedZone$ Command | AddAbility$ MoveToHand";
@@ -3144,7 +3144,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public static DetachedCardEffect createCommanderEffect(Game game, Card commander) {
-        final String name = Lang.getPossesive(commander.getName()) + " Commander Effect";
+        final String name = Lang.getInstance().getPossesive(commander.getName()) + " Commander Effect";
         DetachedCardEffect eff = new DetachedCardEffect(commander, name);
 
         if (game.getRules().hasAppliedVariant(GameType.Oathbreaker) && commander.getRules().canBeSignatureSpell()) {

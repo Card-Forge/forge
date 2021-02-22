@@ -1874,7 +1874,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public void revealAnte(final String message, final Multimap<Player, PaperCard> removedAnteCards) {
         for (final Player p : removedAnteCards.keySet()) {
-            getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
+            getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
                     ImmutableList.copyOf(removedAnteCards.get(p)));
         }
     }

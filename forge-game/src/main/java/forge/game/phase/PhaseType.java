@@ -3,23 +3,25 @@ package forge.game.phase;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 
+import forge.util.Localizer;
+
 import java.util.*;
 
 
 public enum PhaseType {
-    UNTAP("Untap"),
-    UPKEEP("Upkeep"),
-    DRAW("Draw"),
-    MAIN1("Main, precombat", "Main1"),
-    COMBAT_BEGIN("Begin Combat", "BeginCombat"),
-    COMBAT_DECLARE_ATTACKERS("Declare Attackers"),
-    COMBAT_DECLARE_BLOCKERS("Declare Blockers"),
-    COMBAT_FIRST_STRIKE_DAMAGE("First Strike Damage"),
-    COMBAT_DAMAGE("Combat Damage"),
-    COMBAT_END("End Combat", "EndCombat"),
-    MAIN2("Main, postcombat", "Main2"),
-    END_OF_TURN("End of Turn"),
-    CLEANUP("Cleanup");
+    UNTAP("lblUntapStep", "Untap"),
+    UPKEEP("lblUpkeepStep", "Upkeep"),
+    DRAW("lblDrawStep", "Draw"),
+    MAIN1("lblMainPhase1", "Main1"),
+    COMBAT_BEGIN("lblCombatBeginStep", "BeginCombat"),
+    COMBAT_DECLARE_ATTACKERS("lblCombatDeclareAttackersStep", "Declare Attackers"),
+    COMBAT_DECLARE_BLOCKERS("lblCombatDeclareBlockersStep", "Declare Blockers"),
+    COMBAT_FIRST_STRIKE_DAMAGE("lblCombatFirstStrikeDamageStep", "First Strike Damage"),
+    COMBAT_DAMAGE("lblCombatDamageStep", "Combat Damage"),
+    COMBAT_END("lblCombatEndStep", "EndCombat"),
+    MAIN2("lblMainPhase2", "Main2"),
+    END_OF_TURN("lblEndStep", "End of Turn"),
+    CLEANUP("lblCleanupStep", "Cleanup");
 
     public static final List<List<PhaseType>> PHASE_GROUPS = Arrays.asList(
                     Arrays.asList(UNTAP, UPKEEP, DRAW),
@@ -50,11 +52,8 @@ public enum PhaseType {
     public final String nameForUi;
     public final String nameForScripts;
     
-    PhaseType(String name) {
-        this(name, name);
-    }
     PhaseType(String name, String name_for_scripts) {
-        nameForUi = name;
+        nameForUi = Localizer.getInstance().getMessage(name);
         nameForScripts = name_for_scripts;
     }
 
