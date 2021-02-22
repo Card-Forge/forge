@@ -1,6 +1,6 @@
 Name:Inga Rune-Eyes
 ManaCost:3 U
-Types:Creature Human Wizard
+Types:Legendary Creature Human Wizard
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 3. (To scry 3, look at the top three cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw three cards if three or more creatures died this turn.
