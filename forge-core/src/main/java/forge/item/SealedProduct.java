@@ -57,7 +57,9 @@ public abstract class SealedProduct implements InventoryItemFromSet {
 
     public SealedProduct(String name0, Template boosterData) {
         if (null == name0)       { throw new IllegalArgumentException("name0 must not be null");       }
-        if (null == boosterData) { throw new IllegalArgumentException("boosterData must not be null"); }
+        if (null == boosterData) {
+            throw new IllegalArgumentException("boosterData must not be null");
+        }
         contents = boosterData;
         name = name0;
         hash = name.hashCode() ^ getClass().hashCode() ^ contents.hashCode();

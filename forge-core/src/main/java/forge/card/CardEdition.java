@@ -65,7 +65,17 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         FROM_THE_VAULT,
 
         OTHER,
-        THIRDPARTY // custom sets
+        THIRDPARTY; // custom sets
+
+        public String getBoosterBoxDefault() {
+            switch (this) {
+                case CORE:
+                case EXPANSION:
+                    return "36";
+                default:
+                    return "0";
+            }
+        }
     }
 
     public enum FoilType {
@@ -457,7 +467,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             }
             res.type = enumType;
             res.prerelease = section.get("Prerelease", null);
-            res.boosterBoxCount = Integer.parseInt(section.get("BoosterBox", "36"));
+            res.boosterBoxCount = Integer.parseInt(section.get("BoosterBox", enumType.getBoosterBoxDefault()));
 
             switch(section.get("foil", "newstyle").toLowerCase()) {
                 case "notsupported":
