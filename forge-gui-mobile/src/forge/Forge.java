@@ -73,6 +73,7 @@ public class Forge implements ApplicationListener {
     public static boolean hdstart = false;
     public static boolean isPortraitMode = false;
     public static boolean gameInProgress = false;
+    public static boolean disposeTextures = false;
     public static int cacheSize = 400;
     public static int totalDeviceRAM = 0;
     public static int androidVersion = 0;
@@ -138,6 +139,7 @@ public class Forge implements ApplicationListener {
         enablePreloadExtendedArt = prefs.getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
         locale = prefs.getPref(FPref.UI_LANGUAGE);
         autoCache = prefs.getPrefBoolean(FPref.UI_AUTO_CACHE_SIZE);
+        disposeTextures = prefs.getPrefBoolean(FPref.UI_ENABLE_DISPOSE_TEXTURES);
 
         if (autoCache) {
             //increase cacheSize for devices with RAM more than 5GB, default is 400. Some phones have more than 10GB RAM (Mi 10, OnePlus 8, S20, etc..)
@@ -437,7 +439,7 @@ public class Forge implements ApplicationListener {
         String previousScreen = currentScreen != null ? currentScreen.toString() : "";
 
         gameInProgress = toNewScreen.toLowerCase().contains("match") || previousScreen.toLowerCase().contains("match");
-        boolean dispose = toNewScreen.toLowerCase().contains("homescreen");
+        boolean dispose = toNewScreen.toLowerCase().contains("homescreen") && disposeTextures;
         try {
             endKeyInput(); //end key input before switching screens
             ForgeAnimation.endAll(); //end all active animations before switching screens
@@ -464,9 +466,10 @@ public class Forge implements ApplicationListener {
         catch (Exception ex) {
             graphics.end();
             BugReporter.reportException(ex);
+        } finally {
+            if(dispose)
+                ImageCache.disposeTexture();
         }
-        if(dispose)
-            ImageCache.disposeTexture();
     }
 
     @Override
