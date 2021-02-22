@@ -1058,6 +1058,9 @@ public class AbilityUtils {
                 players.add(s.getActivatingPlayer());
             }
         }
+        else if (defined.startsWith("ExiledWith")) {
+            addPlayer(Lists.newArrayList(card.getExiledWith(sa)), defined, players);
+        }
         else if (defined.startsWith("Remembered")) {
             addPlayer(card.getRemembered(), defined, players);
         }

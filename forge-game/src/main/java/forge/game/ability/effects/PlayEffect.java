@@ -70,11 +70,11 @@ public class PlayEffect extends SpellAbilityEffect {
             amount = AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa);
         }
 
+        Player controller = activator;
         if (sa.hasParam("Controller")) {
-            activator = AbilityUtils.getDefinedPlayers(source, sa.getParam("Controller"), sa).get(0);
+            controller = AbilityUtils.getDefinedPlayers(source, sa.getParam("Controller"), sa).get(0);
         }
 
-        final Player controller = activator;
         CardCollection tgtCards;
         CardCollection showCards = new CardCollection();
 
@@ -118,7 +118,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ChoiceNum")) {
                     final int choicenum = AbilityUtils.calculateAmount(source, sa.getParam("ChoiceNum"), sa);
                     tgtCards = new CardCollection(
-                        activator.getController().chooseCardsForEffect(choice, sa,
+                            controller.getController().chooseCardsForEffect(choice, sa,
                             source + " - " + Localizer.getInstance().getMessage("lblChooseUpTo") + " " + Lang.nounWithNumeral(choicenum, "card"), 0, choicenum, true, null
                         )
                     );
@@ -166,9 +166,9 @@ public class PlayEffect extends SpellAbilityEffect {
 
         final CardCollection saidNoTo = new CardCollection();
         while (tgtCards.size() > saidNoTo.size() && saidNoTo.size() < amount && amount > 0) {
-            activator.getController().tempShowCards(showCards);
+            controller.getController().tempShowCards(showCards);
             Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), null);
-            activator.getController().endTempShowCards();
+            controller.getController().endTempShowCards();
             if (tgtCard == null) {
                 return;
             }

@@ -4,6 +4,6 @@ Types:Legendary Creature Gorgon
 PT:7/5
 A:AB$ MustBlock | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Target creature blocks CARDNAME this turn if able.
 A:AB$ ChangeZone | Cost$ B G | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.blockingSource,Creature.blockedBySource | TgtPrompt$ Select target creature blocking Sisters of Stone Death | SpellDescription$ Exile target creature blocking or blocked by CARDNAME.
-A:AB$ ChangeZone | Cost$ 2 B | Hidden$ True | Origin$ Exile | Destination$ Battlefield | ChangeType$ Creature.ExiledWithSource | ChangeNum$ 1 | GainControl$ True | StackDescription$ SpellDescription | SpellDescription$ Put a creature card exiled with CARDNAME onto the battlefield under your control.
+A:AB$ ChangeZone | Cost$ 2 B | Hidden$ True | Origin$ Exile | Destination$ Battlefield | ChangeType$ Creature.ExiledWithSource | ChangeNum$ 1 | GainControl$ True | Mandatory$ True | StackDescription$ SpellDescription | SpellDescription$ Put a creature card exiled with CARDNAME onto the battlefield under your control.
 Oracle:{G}: Target creature blocks Sisters of Stone Death this turn if able.\n{B}{G}: Exile target creature blocking or blocked by Sisters of Stone Death.\n{2}{B}: Put a creature card exiled with Sisters of Stone Death onto the battlefield under your control.
 

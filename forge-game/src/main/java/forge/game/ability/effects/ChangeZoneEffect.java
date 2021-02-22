@@ -717,6 +717,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("ExileFaceDown") || sa.hasParam("FaceDown")) {
                         movedCard.turnFaceDown(true);
                     }
+                    if (sa.hasParam("ExilePeek")) {
+                        movedCard.addMayLookTemp(player);
+                    }
                     if (sa.hasParam("Foretold")) {
                         movedCard.setForetold(true);
                         movedCard.setForetoldThisTurn(true);

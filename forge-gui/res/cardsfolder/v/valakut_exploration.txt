@@ -7,7 +7,7 @@ SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | Duration$ Permanent | Forg
 SVar:MayPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Exile | Description$ You may play this card for as long as it remains exiled.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigGraveyard | CheckSVar$ Y | SVarCompare$ GT0 | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if there are cards exiled with CARDNAME, put them into their owner's graveyard, then CARDNAME deals that much damage to each opponent.
-SVar:TrigGraveyard:DB$ ChangeZoneAll | ChangeType$ Card.ExiledWithSource | Origin$ Exile | Destination$ Graveyard | RememberChanged$ True | SubAbility$ DBDamageAll
+SVar:TrigGraveyard:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Graveyard | RememberChanged$ True | SubAbility$ DBDamageAll
 SVar:DBDamageAll:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ X | SubAbility$ DBCleanup
 SVar:X:Remembered$Amount
 SVar:Y:Count$ValidExile Card.ExiledWithSource

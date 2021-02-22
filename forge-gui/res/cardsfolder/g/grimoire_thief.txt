@@ -3,14 +3,10 @@ ManaCost:U U
 Types:Creature Merfolk Rogue
 PT:2/2
 T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME becomes tapped, exile the top three cards of target opponent's library face down.
-SVar:TrigExile:DB$ Dig | ValidTgts$ Opponent | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True
-S:Mode$ Continuous | Affected$ Card.IsRemembered+ExiledWithSource | AffectedZone$ Exile | MayLookAt$ You | Description$ You may look at cards exiled with CARDNAME.
-A:AB$ SetState | Cost$ U Sac<1/CARDNAME> | Defined$ Remembered | Mode$ TurnFace | SubAbility$ DBCounter | SpellDescription$ Turn all cards exiled with CARDNAME face up. Counter all spells with those names.
-SVar:DBCounter:DB$ Counter | AllType$ Spell | AllValid$ Card.sharesNameWith Remembered.ExiledWithSource | SubAbility$ DBCleanup
-T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
-SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigExile:DB$ Dig | ValidTgts$ Opponent | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True
+S:Mode$ Continuous | Affected$ Card.ExiledWithSource | AffectedZone$ Exile | MayLookAt$ You | Description$ You may look at cards exiled with CARDNAME.
+A:AB$ SetState | Cost$ U Sac<1/CARDNAME> | Defined$ ExiledWith | Mode$ TurnFace | SubAbility$ DBCounter | SpellDescription$ Turn all cards exiled with CARDNAME face up. Counter all spells with those names.
+SVar:DBCounter:DB$ Counter | AllType$ Spell | AllValid$ Card.sharesNameWith ExiledWith | SubAbility$ DBCleanup
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 Oracle:Whenever Grimoire Thief becomes tapped, exile the top three cards of target opponent's library face down.\nYou may look at cards exiled with Grimoire Thief.\n{U}, Sacrifice Grimoire Thief: Turn all cards exiled with Grimoire Thief face up. Counter all spells with those names.

@@ -2,15 +2,9 @@ Name:Ashiok, Nightmare Weaver
 ManaCost:1 U B
 Types:Legendary Planeswalker Ashiok
 Loyalty:3
-A:AB$ Dig | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Opponent | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SpellDescription$ Exile the top three cards of target opponent's library.
-A:AB$ ChooseCard | Cost$ SubCounter<X/LOYALTY> | Choices$ Creature.cmcEQX+IsRemembered+ExiledWithSource | ChoiceZone$ Exile | Planeswalker$ True | SubAbility$ DBChangeZone | AILogic$ Ashiok | SpellDescription$ Put a creature card with converted mana cost X exiled with CARDNAME onto the battlefield under your control. That creature is a Nightmare in addition to its other types.
-SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Exile | Destination$ Battlefield | ChangeType$ Creature.cmcEQX+IsRemembered+ExiledWithSource | ChangeNum$ 1 | GainControl$ True | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | Types$ Nightmare | Permanent$ True | SubAbility$ DBCleanMinus
-SVar:DBCleanMinus:DB$ Cleanup | ForgetDefined$ ChosenCard | ClearChosenCard$ True
+A:AB$ Dig | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Opponent | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | SpellDescription$ Exile the top three cards of target opponent's library.
+A:AB$ ChangeZone | Cost$ SubCounter<X/LOYALTY> | Planeswalker$ True | Hidden$ True | Origin$ Exile | Destination$ Battlefield | ChangeType$ Creature.cmcEQX+ExiledWithSource | ChangeNum$ 1 | GainControl$ True | AnimateSubAbility$ DBAnimate | AILogic$ Ashiok | Mandatory$ True | StackDescription$ SpellDescription | SpellDescription$ Put a creature card exiled with CARDNAME onto the battlefield under your control.
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Nightmare | Permanent$ True
 SVar:X:Count$xPaid
-A:AB$ ChangeZoneAll | Cost$ SubCounter<10/LOYALTY> | ChangeType$ Card.OppCtrl | Origin$ Graveyard,Hand | Destination$ Exile | RememberChanged$ True | Planeswalker$ True | Ultimate$ True | SpellDescription$ Exile all cards from all opponents' hands and graveyards.
-T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
-SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ ChangeZoneAll | Cost$ SubCounter<10/LOYALTY> | ChangeType$ Card.OppCtrl | Origin$ Graveyard,Hand | Destination$ Exile | Planeswalker$ True | Ultimate$ True | SpellDescription$ Exile all cards from all opponents' hands and graveyards.
 Oracle:[+2]: Exile the top three cards of target opponent's library.\n[−X]: Put a creature card with converted mana cost X exiled with Ashiok, Nightmare Weaver onto the battlefield under your control. That creature is a Nightmare in addition to its other types.\n[−10]: Exile all cards from all opponents' hands and graveyards.

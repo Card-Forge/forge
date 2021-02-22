@@ -895,23 +895,22 @@ public class CardProperty {
                     return Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("ThisTurnCast")) {
                     return Iterables.any(CardUtil.getThisTurnCast("Card", source), CardPredicates.sharesNameWith(card));
-                } else if (restriction.equals("MovedToGrave")) {
-                    for (final SpellAbility sa : source.getCurrentState().getNonManaAbilities()) {
-                        final SpellAbility root = sa.getRootAbility();
-                        if (root != null && (root.getPaidList("MovedToGrave") != null)
-                                && !root.getPaidList("MovedToGrave").isEmpty()) {
-                            final CardCollectionView cards = root.getPaidList("MovedToGrave");
-                            for (final Card c : cards) {
-                                String name = c.getName();
-                                if (StringUtils.isEmpty(name)) {
-                                    name = c.getPaperCard().getName();
-                                }
-                                if (card.getName().equals(name)) {
-                                    return true;
-                                }
+                } else if (restriction.equals("MovedToGrave") && spellAbility instanceof SpellAbility) {
+                    final SpellAbility root = ((SpellAbility)spellAbility).getRootAbility();
+                    if (root != null && (root.getPaidList("MovedToGrave") != null)
+                            && !root.getPaidList("MovedToGrave").isEmpty()) {
+                        final CardCollectionView cards = root.getPaidList("MovedToGrave");
+                        for (final Card c : cards) {
+                            String name = c.getName();
+                            if (StringUtils.isEmpty(name)) {
+                                name = c.getPaperCard().getName();
+                            }
+                            if (card.getName().equals(name)) {
+                                return true;
                             }
                         }
                     }
+
                     return false;
                 } else if (restriction.equals("NonToken")) {
                     return !CardLists.filter(game.getCardsIn(ZoneType.Battlefield),

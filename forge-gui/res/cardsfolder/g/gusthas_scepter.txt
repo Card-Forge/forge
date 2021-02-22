@@ -1,16 +1,10 @@
 Name:Gustha's Scepter
 ManaCost:0
 Types:Artifact
-A:AB$ ChangeZone | Cost$ T | ChangeType$ Card | ChangeNum$ 1 | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | Mandatory$ True | SubAbility$ DBEffect | SpellDescription$ Exile a card from your hand face down. You may look at it for as long as it remains exiled.
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STLook | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:STLook:Mode$ Continuous | MayLookAt$ You | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at it for as long as it remains exiled.
-A:AB$ ChooseCard | Cost$ T | Defined$ You | Amount$ 1 | Mandatory$ True | AILogic$ AtLeast1 | ChoiceTitle$ Choose a card you own to put into your hand | Choices$ Card.IsRemembered+YouOwn+ExiledWithSource | ChoiceZone$ Exile | SubAbility$ MoveChosen | SpellDescription$ Return a card you own exiled with CARDNAME to your hand.
-SVar:MoveChosen:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ ChosenCard
-T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
-SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBChangeZoneAll | TriggerDescription$ When you lose control of CARDNAME, put all cards exiled with CARDNAME into their owner's graveyard.
-T:Mode$ ChangesController | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ DBChangeZoneAll | Secondary$ True | TriggerDescription$ When you lose control of CARDNAME, put all cards exiled with CARDNAME into their owner's graveyard.
-SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Graveyard | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ ChangeZone | Cost$ T | ChangeType$ Card | ChangeNum$ 1 | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | ExilePeek$ True | Mandatory$ True | SpellDescription$ Exile a card from your hand face down. You may look at it for as long as it remains exiled.
+A:AB$ ChangeZone | Cost$ T | Hidden$ True | Origin$ Exile | Destination$ Hand | ChangeType$ Creature.ExiledWithSource+YouOwn | ChangeNum$ 1 | Mandatory$ True | StackDescription$ SpellDescription | SpellDescription$ Return a card you own exiled with CARDNAME to your hand.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBChangeZone | TriggerDescription$ When you lose control of CARDNAME, put all cards exiled with CARDNAME into their owner's graveyard.
+T:Mode$ ChangesController | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ DBChangeZone | Secondary$ True | TriggerDescription$ When you lose control of CARDNAME, put all cards exiled with CARDNAME into their owner's graveyard.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Graveyard
 AI:RemoveDeck:All
 Oracle:{T}: Exile a card from your hand face down. You may look at it for as long as it remains exiled.\n{T}: Return a card you own exiled with Gustha's Scepter to your hand.\nWhen you lose control of Gustha's Scepter, put all cards exiled with Gustha's Scepter into their owner's graveyard.
