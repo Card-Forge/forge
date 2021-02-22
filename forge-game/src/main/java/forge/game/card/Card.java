@@ -6958,7 +6958,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return updateState;
     }
 
-
     public CardEdition.BorderColor borderColor() {
         CardEdition edition = StaticData.instance().getEditions().get(getSetCode());
         if (edition == null || isBasicLand()) {
@@ -6966,6 +6965,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         return edition.getBorderColor();
     }
+
 
     public final void addUntilLeavesBattlefield(final Card c) {
         untilLeavesBattlefield = view.addCard(untilLeavesBattlefield, c, TrackableProperty.UntilLeavesBattlefield);
@@ -6981,6 +6981,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void clearUntilLeavesBattlefield() {
         untilLeavesBattlefield = view.clearCards(untilLeavesBattlefield, TrackableProperty.UntilLeavesBattlefield);
+    }
+
+    public void addExiledWith(Card object) {
+        this.exiledWithTable.put(object, this);
     }
 
     public void addExiledWith(Card object, CardTraitBase ctb) {

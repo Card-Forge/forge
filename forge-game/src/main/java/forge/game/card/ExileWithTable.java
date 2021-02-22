@@ -27,11 +27,9 @@ public class ExileWithTable extends ForwardingTable<Card, Optional<StaticAbility
         return dataTable;
     }
 
-
-    public CardCollection put(Card object, CardTraitBase ctb) {
-        Card host = ctb.getOriginalOrHost();
+    protected CardCollection putInternal(Card object, Card host, StaticAbility stAb) {
         host = ObjectUtils.defaultIfNull(host.getEffectSource(), host);
-        Optional<StaticAbility> st = Optional.fromNullable(ctb.getGrantorStatic());
+        Optional<StaticAbility> st = Optional.fromNullable(stAb);
         CardCollection old;
         if (contains(host, st)) {
             old = get(host, st);
@@ -41,6 +39,14 @@ public class ExileWithTable extends ForwardingTable<Card, Optional<StaticAbility
             delegate().put(host, st, old);
         }
         return old;
+    }
+
+    public CardCollection put(Card object, Card host) {
+        return putInternal(object, host, null);
+    }
+
+    public CardCollection put(Card object, CardTraitBase ctb) {
+        return putInternal(object, ctb.getOriginalOrHost(), ctb.getGrantorStatic());
     }
 
     public CardCollectionView get(CardTraitBase ctb) {

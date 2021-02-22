@@ -829,6 +829,7 @@ public abstract class GameState {
             Card exiledWith = idToCard.get(Integer.parseInt(id));
             c.setExiledWith(exiledWith);
             c.setExiledBy(exiledWith.getController());
+            exiledWith.addExiledWith(c);
         }
     }
 
