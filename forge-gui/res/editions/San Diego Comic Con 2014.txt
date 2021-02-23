@@ -8,6 +8,6 @@ Type=Reprint
 1 M Ajani Steadfast
 62 M Jace, the Living Guildpact
 103 M Liliana Vess
-134 M Chandra, Pyromancer
+134 M Chandra, Pyromaster
 187 M Nissa, Worldwaker
 210 M Garruk, Apex Predator
