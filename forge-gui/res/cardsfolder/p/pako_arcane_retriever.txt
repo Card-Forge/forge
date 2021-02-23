@@ -1,6 +1,6 @@
 Name:Pako, Arcane Retriever
 ManaCost:3 R G
-Types:Legendary Creature Elemental Hound
+Types:Legendary Creature Elemental Dog
 PT:3/3
 K:Partner:Haldan, Avid Arcanist:Haldan
 K:Haste

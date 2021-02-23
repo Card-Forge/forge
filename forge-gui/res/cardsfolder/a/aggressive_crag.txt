@@ -1,0 +1,8 @@
+Name:Aggressive Crag
+ManaCost:no cost
+Types:Land
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TapThis | TriggerDescription$ At the beginning of combat on your turn, tap CARDNAME.
+SVar:TapThis:DB$ Tap | Defined$ Self
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+Oracle:At the beginning of your combat step, tap Aggressive Crag.\n{T}: Add {R} or {W}.

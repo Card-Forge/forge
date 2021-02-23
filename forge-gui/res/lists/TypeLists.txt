@@ -37,6 +37,7 @@ Bat:Bats
 Bear:Bears
 Beast:Beasts
 Beeble:Beebles
+Beholder:Beholders
 Berserker:Berserkers
 Bird:Birds
 Blinkmoth:Blinkmoths
@@ -56,6 +57,7 @@ Clamfolk:Clamfolk
 Cleric:Clerics
 Cockatrice:Cockatrices
 Construct:Constructs
+Cow:Cows
 Coward:Cowards
 Crab:Crabs
 Crocodile:Crocodiles
@@ -92,6 +94,7 @@ Flagbearer:Flagbearers
 Fox:Foxes
 Frog:Frogs
 Fungus:Fungi
+Gamer:Gamers
 Gargoyle:Gargoyles
 Germ:Germs
 Giant:Giants
@@ -138,6 +141,8 @@ Leviathan:Leviathans
 Lhurgoyf:Lhurgoyfs
 Licid:Licids
 Lizard:Lizards
+Lobster:Lobsters
+Mammoth:Mammoths
 Manticore:Manticores
 Masticore:Masticores
 Mercenary:Mercenaries
@@ -288,6 +293,7 @@ Equipment
 Food
 Fortification
 Gold
+Key:Keys
 Treasure
 Vehicle
 [WalkerTypes]
@@ -296,6 +302,7 @@ Aminatou
 Angrath
 Arlinn
 Ashiok
+B.O.B.
 Basri
 Bolas
 Calix
@@ -305,12 +312,14 @@ Daretti
 Davriel
 Domri
 Dovin
+Duck
 Elspeth
 Estrid
 Freyalise
 Garruk
 Gideon
 Huatli
+Inzerva
 Jace
 Jaya
 Jeska
