@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.Direction;
 import forge.game.EvenOdd;
@@ -1389,8 +1390,8 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("hasXCost")) {
-            SpellAbility sa1 = card.getFirstSpellAbility();
-            if (sa1 != null && !sa1.costHasManaX()) {
+            ManaCost cost = card.getManaCost();
+            if (cost == null || cost.countX() <= 0) {
                 return false;
             }
         } else if (property.startsWith("suspended")) {
