@@ -385,10 +385,6 @@ public final class CardUtil {
             return colors;
         }
 
-        if (!parents.contains(card)) {
-            parents.add(card);
-        }
-
         final String colorOrType = sa.getParam("ColorOrType");
         // currently Color or Type, Type is colors + colorless
         final String reflectProperty = sa.getParam("ReflectProperty");
