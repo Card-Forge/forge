@@ -99,6 +99,8 @@ public enum CounterEnumType {
 
     EYEBALL("EYE", 184, 202, 201),
 
+    EYESTALK("EYES", 184, 202, 201),
+
     FADE("FADE", 159, 209, 192),
 
     FATE("FATE", 255, 164, 226),

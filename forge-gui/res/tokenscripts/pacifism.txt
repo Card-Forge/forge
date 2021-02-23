@@ -1,0 +1,8 @@
+Name:Pacifism
+ManaCost:1 W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Enchanted creature can't attack or block.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pacifism.jpg
+Oracle:Enchant creature\nEnchanted creature can't attack or block.
