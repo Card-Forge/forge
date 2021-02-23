@@ -171,6 +171,8 @@ public enum CounterEnumType {
 
     LUCK("LUCK", 185, 174, 255),
 
+    MANABOND("MANA", 0, 255, 0),
+
     M0M1("-0/-1", "-0/-1", 255, 110, 106),
 
     M0M2("-0/-2", "-0/-2", 255, 110, 106),
