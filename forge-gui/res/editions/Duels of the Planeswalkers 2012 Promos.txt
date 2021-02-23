@@ -1,0 +1,10 @@
+[metadata]
+Code=PDP12
+Date=2011-01-01
+Name=Duels of the Planeswalkers 2012 Promos
+Type=Reprint
+
+[cards]
+1 M Frost Titan
+2 M Grave Titan
+3 M Inferno Titan

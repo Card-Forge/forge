@@ -1,0 +1,12 @@
+[metadata]
+Code=P11
+Date=2011-01-01
+Name=Magic Player Rewards 2011
+Type=Reprint
+
+[cards]
+1 R Day of Judgement
+2 R Brave the Elements
+3 R Doom Blade
+4 R Treasure Hunt
+5 R Searing Blaze

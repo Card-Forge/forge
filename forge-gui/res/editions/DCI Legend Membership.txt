@@ -1,0 +1,9 @@
+[metadata]
+Code=PLGM
+Date=1995-01-01
+Name=DCI Legend Membership
+Type=Reprint
+
+[cards]
+1 R Counterspell
+2 R Incinerate

@@ -1,0 +1,12 @@
+[metadata]
+Code=PKLD
+Date=2016-01-01
+Name=Kaladesh Promos
+Type=Reprint
+
+[cards]
+62 R Saheeli's Artistry
+80 U Essence Extraction
+130 R Skyship Stalker
+151 Cultivator of Blades
+200 U Chief of the Foundry

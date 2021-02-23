@@ -1,0 +1,9 @@
+[metadata]
+Code=P9ED
+Date=2005-07-29
+Name=Ninth Edition Promos
+Type=Reprint
+
+[cards]
+219 R Shivan Dragon
+242 R Force of Nature

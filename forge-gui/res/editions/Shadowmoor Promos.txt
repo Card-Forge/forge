@@ -1,0 +1,9 @@
+[metadata]
+Code=PSHM
+Date=2008-05-02
+Name=Shadowmoor Promos
+Type=Reprint
+
+[cards]
+183 R Demigod of Revenge
+222 R Vexing Shusher

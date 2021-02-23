@@ -1,0 +1,17 @@
+[metadata]
+Code=PRW2
+Date=2019-02-16
+Name=RNA Ravnica Weekend
+Type=Reprint
+
+[cards]
+1 C Plains
+2 C Island
+3 C Plains
+4 C Swamp
+5 C Swamp
+6 C Mountain
+7 C Mountain
+8 C Forest
+9 C Forest
+10 C Island

@@ -1,0 +1,19 @@
+[metadata]
+Code=F14
+Date=2014-01-01
+Name=Friday Night Magic 2014
+Type=Reprint
+
+[cards]
+1 R Warleader's Helix
+2 R Elvish Mystic
+3 R Banisher Priest
+4 R Encroaching Wastes
+5 R Tormented Hero
+6 R Dissolve
+7 R Magma Spray
+8 R Bile Blight
+9 R Banishing Light
+10 R Fanatic of Xenagos
+11 R Brain Maggot
+12 R Stoke the Flames

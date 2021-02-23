@@ -1,0 +1,12 @@
+[metadata]
+Code=PSS3
+Date=2018-07-13
+Name=M19 Standard Showdown
+Type=Reprint
+
+[cards]
+1 R Plains
+2 R Island
+3 R Swamp
+4 R Mountain
+5 R Forest

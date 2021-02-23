@@ -1,0 +1,12 @@
+[metadata]
+Code=PMPS07
+Date=2007-01-01
+Name=Magic Premiere Shop 2007
+Type=Reprint
+
+[cards]
+1 R Plains
+2 R Island
+3 R Swamp
+4 R Mountain
+5 R Forest

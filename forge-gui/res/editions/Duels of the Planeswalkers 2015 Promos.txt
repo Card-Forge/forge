@@ -1,0 +1,9 @@
+[metadata]
+Code=PDP15
+Date=2014-01-01
+Name=Duels of the Planeswalkers 2015 Promos
+Type=Reprint
+
+[cards]
+1 M Soul of Ravnica
+2 M Soul of Zendikar

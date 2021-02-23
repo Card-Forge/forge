@@ -1,0 +1,11 @@
+[metadata]
+Code=PCSP
+Date=2006-07-21
+Name=Coldsnap Promos
+Type=Reprint
+
+[cards]
+101 R Allosaurus Rider
+
+[tokens]
+marit_lage

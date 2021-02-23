@@ -1,0 +1,15 @@
+[metadata]
+Code=PAL 03
+Date=2003-01-01
+Name=Arena League 2003
+Type=Reprint
+
+[cards]
+1 R Plains
+2 R Island
+3 R Swamp
+4 R Mountain
+5 R Forest
+6 R Skirk Marauder
+7 R Elvish Aberration
+8 R Bonesplitter

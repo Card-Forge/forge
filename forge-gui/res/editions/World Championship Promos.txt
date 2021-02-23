@@ -1,0 +1,9 @@
+[metadata]
+Code=PWOR
+Date=1999-08-04
+Name=World Championship Promos
+Type=Reprint
+
+[cards]
+1 R Balduvian Horde
+2019 M Crucible of Worlds

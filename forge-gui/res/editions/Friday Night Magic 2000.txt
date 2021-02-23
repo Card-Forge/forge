@@ -1,0 +1,18 @@
+[metadata]
+Code=FNM
+Date=2000-01-01
+Name=Friday Night Magic 2000 
+Type=Reprint
+
+[cards]
+1 R River Boa
+2 R Terror
+3 R Longbow Archer
+4 R Volcanic Geyser
+5 R Mind Warp
+6 R Shock
+8 R Giant Growth
+9 R Prodigal Sorcerer
+10 R Stone Rain
+11 R Llanowar Elves
+12 R Staunch Defenders

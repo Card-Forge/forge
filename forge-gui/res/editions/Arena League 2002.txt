@@ -1,0 +1,12 @@
+[metadata]
+Code=PAL02
+Date=2002-01-01
+Name=Arena League 2002
+Type=Reprint
+
+[cards]
+1 R Island
+2 R Man-o'-War
+3 R Arc Lightning
+4 R Dauthi Slayer
+5 R Mana Leak

@@ -1,0 +1,18 @@
+[metadata]
+Code=J13
+Date=2013-01-01
+Name=Judge Gift Cards 2013
+Type=Reprint
+
+[cards]
+1 R Swords to Plowshares
+2 R Bribery
+3 R Imperial Recruiter
+4 R Crucible of Worlds
+5 R Genesis
+6 R Overwhelming Forces
+7 R Vindicate
+8 R Show and Tell
+
+[tokens]
+c_3_3_e_a_golem

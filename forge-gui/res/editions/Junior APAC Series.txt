@@ -1,0 +1,13 @@
+[metadata]
+Code=PJAS
+Date=2006-01-01
+Name=Junior APAC Series
+Type=Reprint
+
+[cards]
+6 R Sakura-Tribe Elder
+7 R Soltari Priest
+8 R Glorious Anthem
+9 R Shard Phoenix
+10 R Whirling Dervish
+11 R Elvish Champion

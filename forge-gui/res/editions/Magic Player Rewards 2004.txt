@@ -1,0 +1,15 @@
+[metadata]
+Code=P04
+Date=2004-01-01
+Name=Magic Player Rewards 2004
+Type=Reprint
+
+[cards]
+1 R Powder Keg
+
+[tokens]
+w_4_4_angel_flying
+c_1_1_a_pentavite_flying
+c_1_1_a_myr
+g_3_3_beast
+c_1_1_spirit

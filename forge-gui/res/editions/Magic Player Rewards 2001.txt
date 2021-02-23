@@ -1,0 +1,17 @@
+[metadata]
+Code=MPR
+Date=2001-01-01
+Name=Magic Player Rewards 2001
+Type=Reprint
+
+[cards]
+1 R Wasteland
+
+[tokens]
+g_1_1_saproling
+g_3_3_elephant
+u_1_1_bird_flying
+w_1_1_spirit_flying
+rw_1_1_goblin_soldier
+g_2_2_bear
+g_4_4_beast

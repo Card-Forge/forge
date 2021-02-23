@@ -1,0 +1,19 @@
+[metadata]
+Code=PCMP
+Date=2006-03-18
+Name=Champs and States
+Type=Reprint
+
+[cards]
+1 R Electrolyze
+2 R Niv-Mizzet, the Firemind
+3 R Rakdos Guildmage
+4 R Voidslime
+5 R Urza's Factory
+6 R Serra Avenger
+7 R Blood Knight
+8 R Groundbreaker
+9 R Imperious Perfect
+10 R Doran, the Siege Tower
+11 R Bramblewood Paragon
+12 R Mutavault

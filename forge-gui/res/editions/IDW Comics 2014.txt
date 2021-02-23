@@ -1,0 +1,10 @@
+[metadata]
+Code=PI14
+Date=2014-01-01
+Name=IDW Comics 2014
+Type=Reprint
+
+[cards]
+15 R Wash Out
+16 R Acquire
+17 R Duress

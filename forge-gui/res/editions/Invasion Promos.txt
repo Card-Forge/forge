@@ -1,0 +1,8 @@
+[metadata]
+Code=PINV
+Date=2000-10-02
+Name=Invasion Promos
+Type=Reprint
+
+[cards]
+262 R Kavu Furens

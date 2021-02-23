@@ -1,0 +1,8 @@
+[metadata]
+Code=PLNY
+Date=2018-02-16
+Name=2018 Lunar New Year
+Type=Reprint
+
+[tokens]
+c_a_treasure_sac

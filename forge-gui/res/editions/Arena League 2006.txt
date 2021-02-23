@@ -1,0 +1,16 @@
+[metadata]
+Code=PAL06
+Date=2006-01-01
+Name=Arena League 2006
+Type=Reprint
+
+[cards]
+1 R Plains
+2 R Island
+3 R Swamp
+4 R Mountain
+5 R Forest
+6 R Castigate
+7 R Wee Dragonauts
+8 R Coiling Oracle
+9 R Surging Flame

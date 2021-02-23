@@ -1,0 +1,17 @@
+[metadata]
+Code=PXTC
+Date=2017-11-24
+Name=XLN Treasure Chest
+Type=Reprint
+
+[cards]
+22 R Legion's Landing
+74 Search for Azcanta
+90 R Arguel's Blood Fast
+173 Vance's Blasting Cannons
+191 Growing Rites of Itlimoc
+234 Conqueror's Galleon
+235 Dowsing Dagger
+243 Primal Amulet
+249 Thaumatic Compass
+250 Treasure Map

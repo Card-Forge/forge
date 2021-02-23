@@ -1,0 +1,8 @@
+[metadata]
+Code=PUST
+Date=2017-11-13
+Name=Unstable Promos
+Type=Reprint
+
+[cards]
+108 R Earl of Squirrel

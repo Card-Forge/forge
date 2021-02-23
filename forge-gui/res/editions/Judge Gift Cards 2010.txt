@@ -1,0 +1,15 @@
+[metadata]
+Code=G10
+Date=2010-01-01
+Name=Judge Gift Cards 2010
+Type=Reprint
+
+[cards]
+1 R Sinkhole
+2 R Natural Order
+3 R Phyrexian Dreadnought
+4 R Thawing Glaciers
+5 R Land Tax
+6 R Morphling
+7 R Wheel of Fortune
+8 R Wasteland

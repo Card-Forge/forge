@@ -1,0 +1,13 @@
+[metadata]
+Code=PS17
+Date=2017-07-20
+Name=San Diego Comic-Con 2017
+Type=Reprint
+
+[cards]
+14 M Gideon of the Trials
+69 M Jace, Unraveler of Secrets
+97 M Liliana, Death's Majesty
+110 M Chandra, Torch of Defiance
+140 M Nicol Bolas, God-Pharaoh
+204 M Nissa, Steward of Elements

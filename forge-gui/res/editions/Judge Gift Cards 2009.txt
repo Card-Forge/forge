@@ -1,0 +1,17 @@
+[metadata]
+Code=G09
+Date=2009-01-01
+Name=Judge Gift Cards 2009
+Type=Reprint
+
+[cards]
+1 R Dark Ritual
+2 R Maze of Ith
+3 R Stifle
+4 R Survival of the Fittest
+5 R Burning Wish
+6 R Bloodstained Mire
+7 R Flooded Strand
+8 R Polluted Delta
+9 R Windswept Heath
+10 R Wooded Foothills

@@ -1,0 +1,13 @@
+[metadata]
+Code=G04
+Date=2004-01-01
+Name=Judge Gift Cards 2004
+Type=Reprint
+
+[cards]
+1 R Armageddon
+2 R Balance
+3 R Time Warp
+4 R Phyrexian Negator
+5 R Deranged Hermit
+6 R Hermit Druid

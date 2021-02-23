@@ -1,0 +1,11 @@
+[metadata]
+Code=PTKDF
+Date=2015-04-03
+Name=Tarkir Dragonfury
+Type=Reprint
+
+[cards]
+135 C Dragon Fodder
+138 U Dragonlord's Servant
+187 R Foe-Razer Regent
+248 C Evolving Wilds

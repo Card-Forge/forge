@@ -1,0 +1,12 @@
+[metadata]
+Code=PS15
+Date=2015-07-09
+Name=San Diego Comic-Con 2015
+Type=Reprint
+
+[cards]
+23 M Kytheon, Hero of Akros
+60 M Jace, Vryn's Prodigy
+106 M Liliana, Heretical Healer
+135 M Chandra, Fire of Kaladesh
+189 M Nissa, Vastwood Seer

@@ -1,0 +1,16 @@
+[metadata]
+Code=PM15
+Date=2014-07-17
+Name=Magic 2015 Promos
+Type=Reprint
+
+[cards]
+28 R Resolute Archangel
+47 R Chief Engineer
+68 R Mercurial Pretender
+100 R In Garruk's Wake
+101 R Indulgent Tormentor
+145 R Goblin Rabblemaster
+162 R Siege Dragon
+191 R Phytotitan
+194 U Reclamation Sage

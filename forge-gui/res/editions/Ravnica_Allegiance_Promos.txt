@@ -1,0 +1,14 @@
+[metadata]
+Code=PRNA
+Date=2019-01-25
+Name=Ravnica Allegiance Promos
+Type=Reprint
+
+[cards]
+107 U Light Up the Stage
+178 C Growth Spiral
+189 R Lavinia, Azorius Renegade
+192 U Mortify
+197 U Rakdos Firewheeler
+207 R Simic Ascendancy
+232 U Gate Colossus

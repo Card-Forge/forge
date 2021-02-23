@@ -1,0 +1,12 @@
+[metadata]
+Code=PHJ
+Date=2002-07-21
+Name=Hobby Japan Promos
+Type=Reprint
+
+[cards]
+1 R Goblin Mutant
+2 R Ihsan's Shade
+3 R Krovikan Vampire
+4 R Surge of Strenght
+5 R Yavimaya Ants
