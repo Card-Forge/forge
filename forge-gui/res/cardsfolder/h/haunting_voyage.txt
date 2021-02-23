@@ -1,7 +1,7 @@
 Name:Haunting Voyage
 ManaCost:4 B B
 Types:Sorcery
-A:SP$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeck | SubAbility$ DBBranch | SpellDescription$ Choose a creature type. Return up to two creature cards of that type from your graveyard to the battlefield. If this spell was foretold, return all creature cards of that type from your graveyard to the battlefield instead.
+A:SP$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerGraveyard | SubAbility$ DBBranch | SpellDescription$ Choose a creature type. Return up to two creature cards of that type from your graveyard to the battlefield. If this spell was foretold, return all creature cards of that type from your graveyard to the battlefield instead.
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | References$ X | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ ReturnAll | FalseSubAbility$ ReturnUpToTwo | StackDescription$ None
 SVar:ReturnUpToTwo:DB$ ChangeZone | ChangeType$ Creature.ChosenType+YouOwn | Origin$ Graveyard | Destination$ Battlefield | ChangeNum$ 2 | Hidden$ True
 SVar:ReturnAll:DB$ ChangeZoneAll | ChangeType$ Creature.ChosenType+YouOwn | Origin$ Graveyard | Destination$ Battlefield
