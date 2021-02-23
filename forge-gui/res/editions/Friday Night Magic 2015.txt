@@ -9,7 +9,7 @@ Type=Reprint
 2 R Disdainful Stroke
 3 R Hordeling Outburst
 4 R Suspension Field
-5 R Abzan Beastmaker
+5 R Abzan Beastmaster
 6 R Frost Walker
 7 R Path to Exile
 8 R Serum Visions
