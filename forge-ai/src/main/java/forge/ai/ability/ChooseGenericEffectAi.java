@@ -8,6 +8,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
@@ -31,6 +32,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityCantBeCast;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.collect.FCollection;
@@ -228,11 +230,10 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
                 return allow;
             }
 
-            //if Iona does prevent from casting, allow it to draw
-            for (final Card io : player.getCardsIn(ZoneType.Battlefield, "Iona, Shield of Emeria")) {
-                if (CardUtil.getColors(imprinted).hasAnyColor(MagicColor.fromName(io.getChosenColor()))) {
-                    return allow;
-                }
+            SpellAbility firstSpell = imprinted.getFirstSpellAbility();
+            // check if something would prevent it from casting
+            if (firstSpell == null || StaticAbilityCantBeCast.cantBeCastAbility(firstSpell, imprinted, owner)) {
+                return allow;
             }
 
             if (dmg == 0) {

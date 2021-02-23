@@ -71,6 +71,7 @@ public class AbilityManaPart implements java.io.Serializable {
     private transient List<Mana> lastManaProduced = Lists.newArrayList();
 
     private transient Card sourceCard;
+    private transient SpellAbility spellAbility;
 
 
     // Spells paid with this mana spell can't be countered.
@@ -84,8 +85,9 @@ public class AbilityManaPart implements java.io.Serializable {
      * @param sourceCard
      *            a {@link forge.game.card.Card} object.
      */
-    public AbilityManaPart(final Card sourceCard, final Map<String, String> params) {
+    public AbilityManaPart(final Card sourceCard, final SpellAbility sa, final Map<String, String> params) {
         this.sourceCard = sourceCard;
+        this.spellAbility = sa;
 
         origProduced = params.containsKey("Produced") ? params.get("Produced") : "1";
         this.manaRestrictions = params.containsKey("RestrictValid") ? params.get("RestrictValid") : "";
@@ -413,9 +415,11 @@ public class AbilityManaPart implements java.io.Serializable {
      * @return a {@link java.lang.String} object.
      */
     public final String mana() {
-        if (this.getOrigProduced().contains("Chosen")) {
-            if (this.getSourceCard() != null && this.getSourceCard().hasChosenColor()) {
-                return MagicColor.toShortString(this.getSourceCard().getChosenColor());
+        if (getOrigProduced().contains("Chosen")) {
+            if (spellAbility == null) {
+                return "";
+            } else {
+                return MagicColor.toShortString(spellAbility.getChosenColor());
             }
         }
         return this.getOrigProduced();
@@ -499,15 +503,15 @@ public class AbilityManaPart implements java.io.Serializable {
      *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public final boolean canProduce(final String s, final SpellAbility sa) {
+    public final boolean canProduce(final String s) {
         // Any mana never means Colorless?
         if (isAnyMana() && !s.equals("C")) {
             return true;
         }
 
         String origProduced = getOrigProduced();
-        if (origProduced.contains("Chosen") && sourceCard != null ) {
-            if (getSourceCard().hasChosenColor() && MagicColor.toShortString(getSourceCard().getChosenColor()).contains(s)) {
+        if (origProduced.contains("Chosen") && spellAbility != null ) {
+            if (spellAbility.hasChosenColor() && MagicColor.toShortString(spellAbility.getChosenColor()).contains(s)) {
                 return true;
             }
         }

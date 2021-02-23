@@ -2186,7 +2186,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             dummy.setOwner(pPriority);
             final Map<String, String> produced = Maps.newHashMap();
             produced.put("Produced", "W W W W W W W U U U U U U U B B B B B B B G G G G G G G R R R R R R R 7");
-            final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);
+            final AbilityManaPart abMana = new AbilityManaPart(dummy, null, produced);
             getGame().getAction().invoke(new Runnable() {
                 @Override
                 public void run() {

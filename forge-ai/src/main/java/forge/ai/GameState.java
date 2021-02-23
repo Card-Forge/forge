@@ -341,8 +341,9 @@ public abstract class GameState {
                 newText.append("|Damage:").append(c.getDamage());
             }
 
-            if (!c.getChosenColor().isEmpty()) {
-                newText.append("|ChosenColor:").append(TextUtil.join(c.getChosenColors(), ","));
+            SpellAbility first = c.getFirstSpellAbility();
+            if (first != null) {
+                newText.append("|ChosenColor:").append(TextUtil.join(first.getChosenColors(), ","));
             }
             if (!c.getChosenType().isEmpty()) {
                 newText.append("|ChosenType:").append(c.getChosenType());
@@ -734,7 +735,7 @@ public abstract class GameState {
             if (persistent) {
                 produced.put("PersistentMana", "True");
             }
-            final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);
+            final AbilityManaPart abMana = new AbilityManaPart(dummy, null, produced);
             game.getAction().invoke(new Runnable() {
                 @Override
                 public void run() {
@@ -1088,7 +1089,7 @@ public abstract class GameState {
             Card c = entry.getKey();
             List<String> colors = entry.getValue();
 
-            c.setChosenColors(colors);
+            c.setChosenColors(colors, c.getFirstSpellAbility());
         }
 
         // Chosen type

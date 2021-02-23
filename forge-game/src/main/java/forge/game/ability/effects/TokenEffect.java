@@ -62,7 +62,7 @@ public class TokenEffect extends TokenEffectBase {
             }
         }
         if (sa.hasParam("TokenColors")) {
-            if (sa.getParam("TokenColors").contains("ChosenColor") && !host.hasChosenColor()) {
+            if (sa.getParam("TokenColors").contains("ChosenColor") && !sa.hasChosenColor()) {
                 return;
             }
         }

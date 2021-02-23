@@ -54,13 +54,13 @@ public class ForgeScript {
         } else if (property.startsWith("ChosenColor")) {
             if (property.endsWith("Source") && isColorlessSource)
                 return false;
-            return source.hasChosenColor() && colors.hasAnyColor(MagicColor.fromName(source.getChosenColor()));
+            return spellAbility.hasChosenColor() && colors.hasAnyColor(MagicColor.fromName(spellAbility.getChosenColor()));
 
         } else if (property.startsWith("AnyChosenColor")) {
             if (property.endsWith("Source") && isColorlessSource)
                 return false;
-            return source.hasChosenColor()
-                    && colors.hasAnyColor(ColorSet.fromNames(source.getChosenColors()).getColor());
+            return spellAbility.hasChosenColor()
+                    && colors.hasAnyColor(ColorSet.fromNames(spellAbility.getChosenColors()).getColor());
 
         } else if (property.startsWith("non")) {
             // ... Other Card types

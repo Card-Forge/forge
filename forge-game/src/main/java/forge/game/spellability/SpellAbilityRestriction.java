@@ -362,7 +362,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (getColorToCheck() != null) {
-            if (!sa.getHostCard().hasChosenColor(getColorToCheck())) {
+            if (!sa.hasChosenColor(getColorToCheck())) {
                 return false;
             }
         }

@@ -81,8 +81,8 @@ public class SubgameEffect extends SpellAbilityEffect {
                     List<String> chosenColors;
                     SpellAbility cmdColorsa = new SpellAbility.EmptySa(ApiType.ChooseColor, cmd, player);
                     chosenColors = player.getController().chooseColors(prompt,cmdColorsa, 1, 1, colorChoices);
-                    cmd.setChosenColors(chosenColors);
-                    subgame.getAction().notifyOfValue(cmdColorsa, cmd, Localizer.getInstance().getMessage("lblPlayerPickedChosen", player.getName(), Lang.joinHomogenous(chosenColors)), player);
+                    cmd.setChosenColors(chosenColors, cmdColorsa);
+                    subgame.getAction().nofityOfValue(cmdColorsa, cmd, Localizer.getInstance().getMessage("lblPlayerPickedChosen", player.getName(), Lang.joinHomogenous(chosenColors)), player);
                 }
                 cmd.setCommander(true);
                 com.add(cmd);

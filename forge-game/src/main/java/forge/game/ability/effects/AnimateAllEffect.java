@@ -89,7 +89,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
         if (sa.hasParam("Colors")) {
             final String colors = sa.getParam("Colors");
             if (colors.equals("ChosenColor")) {
-                tmpDesc = CardUtil.getShortColorsString(host.getChosenColors());
+                tmpDesc = CardUtil.getShortColorsString(sa.getChosenColors());
             } else {
                 tmpDesc = CardUtil.getShortColorsString(new ArrayList<>(Arrays.asList(colors.split(","))));
             }

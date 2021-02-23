@@ -97,7 +97,6 @@ public class ProtectEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card host = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
 
         final boolean isChoice = sa.getParam("Gains").contains("Choice");
@@ -117,7 +116,7 @@ public class ProtectEffect extends SpellAbilityEffect {
             game.getAction().notifyOfValue(sa, choser, Lang.joinHomogenous(gains), choser);
         } else {
             if (sa.getParam("Gains").equals("ChosenColor")) {
-                for (final String color : host.getChosenColors()) {
+                for (final String color : sa.getChosenColors()) {
                     gains.add(color.toLowerCase());
                 }
             } else {

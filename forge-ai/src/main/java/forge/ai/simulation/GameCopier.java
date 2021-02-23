@@ -55,15 +55,15 @@ public class GameCopier {
     public GameCopier(Game origGame) {
         this.origGame = origGame;
     }
-    
+
     public Game getOriginalGame() {
         return origGame;
     }
-    
+
     public Game getCopiedGame() {
         return gameObjectMap.getGame();
     }
-    
+
     public Game makeCopy() {
         return makeCopy(null);
     }
@@ -101,7 +101,7 @@ public class GameCopier {
         for (Player p : newGame.getPlayers()) {
             ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(false);
         }
-        
+
         copyGameState(newGame);
 
         for (Player p : newGame.getPlayers()) {
@@ -124,7 +124,6 @@ public class GameCopier {
                         System.err.println(c + " Remembered: " + o + "/" + o.getClass());
                         c.addRemembered(o);
                     }
-                    
                 }
             }
             for (SpellAbility sa : c.getSpellAbilities()) {
@@ -153,7 +152,7 @@ public class GameCopier {
         if (advanceToPhase != null) {
             newGame.getPhaseHandler().devAdvanceToPhase(advanceToPhase);
         }
-        
+
         return newGame;
     }
 
@@ -180,7 +179,7 @@ public class GameCopier {
                 }
                 newGame.getStack().add(newSa);
             }
-        } 
+        }
     }
 
     private RegisteredPlayer clonePlayer(RegisteredPlayer p) {
@@ -227,7 +226,7 @@ public class GameCopier {
             // TODO: Verify that the above relationships are preserved bi-directionally or not.
         }
     }
-    
+
     private static final boolean USE_FROM_PAPER_CARD = true;
     private Card createCardCopy(Game newGame, Player newOwner, Card c) {
         if (c.isToken() && !c.isEmblem()) {
@@ -277,7 +276,7 @@ public class GameCopier {
             // TODO: Controllers' list with timestamps should be copied.
             zoneOwner = playerMap.get(c.getController());
             newCard.setController(zoneOwner, 0);
-            
+
             int setPower = c.getSetPower();
             int setToughness = c.getSetToughness();
             if (setPower != Integer.MAX_VALUE || setToughness != Integer.MAX_VALUE)  {
@@ -286,7 +285,7 @@ public class GameCopier {
             }
             newCard.setPTBoost(c.getPTBoostTable());
             newCard.setDamage(c.getDamage());
-            
+
             newCard.setChangedCardTypes(c.getChangedCardTypesMap());
             newCard.setChangedCardKeywords(c.getChangedCardKeywords());
             newCard.setChangedCardNames(c.getChangedCardNames());
@@ -341,9 +340,13 @@ public class GameCopier {
             if (!c.getChosenType2().isEmpty()) {
                 newCard.setChosenType2(c.getChosenType2());
             }
-            if (c.getChosenColors() != null) {
-                newCard.setChosenColors(Lists.newArrayList(c.getChosenColors()));
+
+            SpellAbility first = c.getFirstSpellAbility();
+
+            if (first != null && first.hasChosenColor()) {
+                newCard.setChosenColors(Lists.newArrayList(first.getChosenColors()), newCard.getFirstSpellAbility());
             }
+
             if (!c.getNamedCard().isEmpty()) {
                 newCard.setNamedCard(c.getNamedCard());
             }
@@ -359,7 +362,7 @@ public class GameCopier {
             zoneOwner.getZone(zone).add(newCard);
         }
     }
-    
+
     private static SpellAbility findSAInCard(SpellAbility sa, Card c) {
         String saDesc = sa.getDescription();
         for (SpellAbility cardSa : c.getAllSpellAbilities()) {
@@ -387,7 +390,7 @@ public class GameCopier {
             return find(o);
         }
     }
- 
+
     public GameObject find(GameObject o) {
         GameObject result = cardMap.get(o);
         if (result != null)

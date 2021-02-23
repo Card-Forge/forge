@@ -83,7 +83,14 @@ public class TriggerTapsForMana extends Trigger {
             }
             String produced = (String) prod;
             if ("ChosenColor".equals(getParam("Produced"))) {
-                if (!this.getHostCard().hasChosenColor() || !produced.contains(MagicColor.toShortString(this.getHostCard().getChosenColor()))) {
+                boolean found = false;
+                for (String color : this.getChosenColors()) {
+                    if (produced.contains(MagicColor.toShortString(color))) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
                     return false;
                 }
             } else if (!produced.contains(MagicColor.toShortString(this.getParam("Produced")))) {

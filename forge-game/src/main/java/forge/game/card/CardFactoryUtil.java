@@ -1052,28 +1052,6 @@ public class CardFactoryUtil {
             }
             return doXMath(colorOcurrencices, m, c);
         }
-        // Count$DevotionDual.<color name>.<color name>
-        // Count$Devotion.<color name>
-        if (sq[0].contains("Devotion")) {
-            int colorOcurrencices = 0;
-            String colorName = sq[1];
-            if (colorName.contains("Chosen")) {
-                colorName = MagicColor.toShortString(c.getChosenColor());
-            }
-            byte colorCode = ManaAtom.fromName(colorName);
-            if (sq[0].equals("DevotionDual")) {
-                colorCode |= ManaAtom.fromName(sq[2]);
-            }
-            for (Card c0 : cc.getCardsIn(ZoneType.Battlefield)) {
-                for (ManaCostShard sh : c0.getManaCost()) {
-                    if ((sh.getColorMask() & colorCode) != 0) {
-                        colorOcurrencices++;
-                    }
-                }
-                colorOcurrencices += c0.getAmountOfKeyword("Your devotion to each color and each combination of colors is increased by one.");
-            }
-            return doXMath(colorOcurrencices, m, c);
-        }
 
         if (sq[0].contains("ColorsCtrl")) {
             final String restriction = l[0].substring(11);

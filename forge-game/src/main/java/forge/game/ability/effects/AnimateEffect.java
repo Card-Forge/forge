@@ -100,7 +100,7 @@ public class AnimateEffect extends AnimateEffectBase {
             final String colors = sa.getParam("Colors");
             if (colors.equals("ChosenColor")) {
 
-                tmpDesc = CardUtil.getShortColorsString(source.getChosenColors());
+                tmpDesc = CardUtil.getShortColorsString(sa.getChosenColors());
             } else {
                 tmpDesc = CardUtil.getShortColorsString(Arrays.asList(colors.split(",")));
             }

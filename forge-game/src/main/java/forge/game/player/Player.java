@@ -3039,8 +3039,8 @@ public class Player extends GameEntity implements Comparable<Player> {
                     List<String> chosenColors;
                     SpellAbility cmdColorsa = new SpellAbility.EmptySa(ApiType.ChooseColor, cmd, p);
                     chosenColors = p.getController().chooseColors(prompt,cmdColorsa, 1, 1, colorChoices);
-                    cmd.setChosenColors(chosenColors);
-                    p.getGame().getAction().notifyOfValue(cmdColorsa, cmd, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), Lang.joinHomogenous(chosenColors)), p);
+                    cmd.setChosenColors(chosenColors, cmdColorsa);
+                    p.getGame().getAction().nofityOfValue(cmdColorsa, cmd, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), Lang.joinHomogenous(chosenColors)), p);
                 }
                 cmd.setCommander(true);
                 com.add(cmd);

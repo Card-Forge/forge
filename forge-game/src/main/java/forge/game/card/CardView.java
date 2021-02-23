@@ -344,7 +344,7 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.ChosenColors);
     }
     void updateChosenColors(Card c) {
-        set(TrackableProperty.ChosenColors, c.getChosenColors());
+        //set(TrackableProperty.ChosenColors, c.getChosenColors());
     }
 
     public FCollectionView<CardView> getMergedCardsCollection() {

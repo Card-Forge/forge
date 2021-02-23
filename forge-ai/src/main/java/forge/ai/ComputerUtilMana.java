@@ -414,7 +414,6 @@ public class ComputerUtilMana {
         // then apply this one
         if (!replaceType.isEmpty()) {
             for (SpellAbility saMana : replaceAmount) {
-                Card card = saMana.getHostCard();
                 if (saMana.hasParam("ReplaceType")) {
                     // replace color and colorless
                     String color = saMana.getParam("ReplaceType");
@@ -436,8 +435,8 @@ public class ComputerUtilMana {
                     // replace color
                     String color = saMana.getParam("ReplaceColor");
                     if ("Chosen".equals(color)) {
-                        if (card.hasChosenColor()) {
-                            color = MagicColor.toShortString(card.getChosenColor());
+                        if (saMana.hasChosenColor()) {
+                            color = MagicColor.toShortString(saMana.getChosenColor());
                         }
                     }
                     if (saMana.hasParam("ReplaceOnly")) {
@@ -489,7 +488,7 @@ public class ComputerUtilMana {
                 int pAmount = AbilityUtils.calculateAmount(trSA.getHostCard(), trSA.getParamOrDefault("Amount",  "1"), trSA);
                 String produced = trSA.getParam("Produced");
                 if (produced.equals("Chosen")) {
-                    produced = MagicColor.toShortString(trSA.getHostCard().getChosenColor());
+                    produced = MagicColor.toShortString(trSA.getHostCard().getChosenColor(trSA));
                 }
                 manaProduced += " " + StringUtils.repeat(produced, pAmount);
             } else if (ApiType.ManaReflected.equals(trSA.getApi())) {

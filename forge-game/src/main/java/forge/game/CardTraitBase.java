@@ -637,4 +637,20 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         // dont use setHostCard to not trigger the not copied parts yet
         copy.hostCard = host;
     }
+
+
+    public String getChosenColor() {
+        return getHostCard().getChosenColor(this);
+    }
+    public final Iterable<String> getChosenColors() {
+        return getHostCard().getChosenColors(this);
+    }
+
+    public final boolean hasChosenColor() {
+        return getHostCard().hasChosenColor(this);
+    }
+
+    public final boolean hasChosenColor(String s) {
+        return getHostCard().hasChosenColor(s, this);
+    }
 }

@@ -25,7 +25,7 @@ public class SpellApiBased extends Spell {
         this.setIntrinsic(true);
 
         if (api.equals(ApiType.Mana) || api.equals(ApiType.ManaReflected)) {
-            this.setManaPart(new AbilityManaPart(sourceCard, mapParams));
+            this.setManaPart(new AbilityManaPart(sourceCard, this, mapParams));
         }
 
         if (api.equals(ApiType.ChangeZone) || api.equals(ApiType.ChangeZoneAll)) {

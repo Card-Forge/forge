@@ -432,7 +432,7 @@ public class AnimateAi extends SpellAbilityAi {
         if (sa.hasParam("Colors")) {
             final String colors = sa.getParam("Colors");
             if (colors.equals("ChosenColor")) {
-                tmpDesc = CardUtil.getShortColorsString(source.getChosenColors());
+                tmpDesc = CardUtil.getShortColorsString(sa.getChosenColors());
             } else {
                 tmpDesc = CardUtil.getShortColorsString(Lists.newArrayList(Arrays.asList(colors.split(","))));
             }

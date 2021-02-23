@@ -232,8 +232,8 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             // Set Chosen Color(s)
-            if (hostCard.hasChosenColor()) {
-                eff.setChosenColors(Lists.newArrayList(hostCard.getChosenColors()));
+            if (sa.hasChosenColor()) {
+                eff.setChosenColors(Lists.newArrayList(sa.getChosenColors()), sa);
             }
 
             // Set Chosen Cards

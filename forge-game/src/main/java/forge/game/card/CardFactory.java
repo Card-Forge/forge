@@ -129,7 +129,6 @@ public class CardFactory {
      * </p>
      * */
     private final static Card copySpellHost(final SpellAbility sourceSA, final SpellAbility targetSA, Player controller) {
-        final Card source = sourceSA.getHostCard();
         final Card original = targetSA.getHostCard();
         final Card c = copyCard(original, true);
 
@@ -138,7 +137,7 @@ public class CardFactory {
             String tmp = "";
             final String newColor = sourceSA.getParam("CopyIsColor");
             if (newColor.equals("ChosenColor")) {
-                tmp = CardUtil.getShortColorsString(source.getChosenColors());
+                tmp = CardUtil.getShortColorsString(sourceSA.getChosenColors());
             } else {
                 tmp = CardUtil.getShortColorsString(Lists.newArrayList(newColor.split(",")));
             }

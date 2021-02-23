@@ -1,76 +1,18 @@
 package forge.game.card;
 
-import org.apache.commons.lang3.ObjectUtils;
-
 import com.google.common.base.Optional;
-import com.google.common.collect.ForwardingTable;
-import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 
-import forge.game.CardTraitBase;
 import forge.game.staticability.StaticAbility;
+import forge.util.collect.FCollection;
 
-public class ExileWithTable extends ForwardingTable<Card, Optional<StaticAbility>, CardCollection> {
-    private Table<Card, Optional<StaticAbility>, CardCollection> dataTable = HashBasedTable.create();
+public class ExileWithTable extends LinkedAbilityTable<Card> {
 
-    public ExileWithTable(Table<Card, Optional<StaticAbility>, CardCollection> map) {
+    public ExileWithTable(Table<Card, Optional<StaticAbility>, FCollection<Card>> map) {
         this.putAll(map);
     }
 
 
     public ExileWithTable() {
-    }
-
-
-    @Override
-    protected Table<Card, Optional<StaticAbility>, CardCollection> delegate() {
-        return dataTable;
-    }
-
-    protected CardCollection putInternal(Card object, Card host, StaticAbility stAb) {
-        host = ObjectUtils.defaultIfNull(host.getEffectSource(), host);
-        Optional<StaticAbility> st = Optional.fromNullable(stAb);
-        CardCollection old;
-        if (contains(host, st)) {
-            old = get(host, st);
-            old.add(object);
-        } else {
-            old = new CardCollection(object);
-            delegate().put(host, st, old);
-        }
-        return old;
-    }
-
-    public CardCollection put(Card object, Card host) {
-        return putInternal(object, host, null);
-    }
-
-    public CardCollection put(Card object, CardTraitBase ctb) {
-        return putInternal(object, ctb.getOriginalOrHost(), ctb.getGrantorStatic());
-    }
-
-    public CardCollectionView get(CardTraitBase ctb) {
-        Card host = ctb.getOriginalOrHost();
-        host = ObjectUtils.defaultIfNull(host.getEffectSource(), host);
-        Optional<StaticAbility> st = Optional.fromNullable(ctb.getGrantorStatic());
-        if (contains(host, st)) {
-            return get(host, st);
-        } else {
-            return CardCollection.EMPTY;
-        }
-    }
-
-    public boolean contains(Card object, CardTraitBase ctb) {
-        return get(ctb).contains(object);
-    }
-
-    public boolean remove(Card value) {
-        boolean changed = false;
-        for (CardCollection col : delegate().values()) {
-            if (col.remove(value)) {
-                changed = true;
-            }
-        }
-        return changed;
     }
 }

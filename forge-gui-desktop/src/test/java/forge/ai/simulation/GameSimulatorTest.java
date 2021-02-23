@@ -482,7 +482,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Player p = game.getPlayers().get(1);
         Card bear = addCard(bearCardName, p);
         Card hall = addCard("Hall of Triumph", p);
-        hall.setChosenColors(Lists.newArrayList("green"));
+        hall.setChosenColors(Lists.newArrayList("green"), hall.getFirstSpellAbility());
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
         assertEquals(3, bear.getNetToughness());

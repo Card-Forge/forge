@@ -215,7 +215,7 @@ public final class StaticAbilityContinuous {
             Iterables.removeIf(addKeywords, new Predicate<String>() {
                 @Override
                 public boolean apply(String input) {
-                    if (!hostCard.hasChosenColor() && input.contains("ChosenColor")) {
+                    if (!stAb.hasChosenColor() && input.contains("ChosenColor")) {
                         return true;
                     }
                     if (!hostCard.hasChosenType() && input.contains("ChosenType")) {
@@ -294,9 +294,9 @@ public final class StaticAbilityContinuous {
 
                 @Override
                 public String apply(String input) {
-                    if (hostCard.hasChosenColor()) {
-                        input = input.replaceAll("ChosenColor", StringUtils.capitalize(hostCard.getChosenColor()));
-                        input = input.replaceAll("chosenColor", hostCard.getChosenColor().toLowerCase());
+                    if (stAb.hasChosenColor()) {
+                        input = input.replaceAll("ChosenColor", StringUtils.capitalize(stAb.getChosenColor()));
+                        input = input.replaceAll("chosenColor", stAb.getChosenColor().toLowerCase());
                     }
                     if (hostCard.hasChosenType()) {
                         input = input.replaceAll("ChosenType", hostCard.getChosenType());
@@ -458,7 +458,7 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("AddColor")) {
                 final String colors = params.get("AddColor");
                 if (colors.equals("ChosenColor")) {
-                    addColors = CardUtil.getShortColorsString(hostCard.getChosenColors());
+                    addColors = CardUtil.getShortColorsString(stAb.getChosenColors());
                 } else if (colors.equals("All")) {
                     addColors = "W U B R G";
                 } else {
@@ -469,7 +469,7 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("SetColor")) {
                 final String colors = params.get("SetColor");
                 if (colors.equals("ChosenColor")) {
-                    addColors = CardUtil.getShortColorsString(hostCard.getChosenColors());
+                    addColors = CardUtil.getShortColorsString(stAb.getChosenColors());
                 } else if (colors.equals("All")) {
                     addColors = "W U B R G";
                 } else {
@@ -619,8 +619,8 @@ public final class StaticAbilityContinuous {
             if (changeColorWordsTo != null) {
                 final byte color;
                 if (changeColorWordsTo.equals("ChosenColor")) {
-                    if (hostCard.hasChosenColor()) {
-                        color = MagicColor.fromName(Iterables.getFirst(hostCard.getChosenColors(), null));
+                    if (stAb.hasChosenColor()) {
+                        color = MagicColor.fromName(stAb.getChosenColor());
                     } else {
                         color = 0;
                     }

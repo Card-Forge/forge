@@ -60,7 +60,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
             game.getAction().notifyOfValue(sa, choser, Lang.joinHomogenous(gains), choser);
         } else {
             if (sa.getParam("Gains").equals("ChosenColor")) {
-                for (final String color : host.getChosenColors()) {
+                for (final String color : sa.getChosenColors()) {
                     gains.add(color.toLowerCase());
                 }
             } else if (sa.getParam("Gains").equals("TargetedCardColor")) {

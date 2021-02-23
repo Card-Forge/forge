@@ -297,7 +297,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private String originalText = "", text = "";
     private String chosenType = "";
     private String chosenType2 = "";
-    private List<String> chosenColors;
+    private LinkedAbilityTable<String> chosenColorsTable = new LinkedAbilityTable<String>();
     private String chosenName = "";
     private String chosenName2 = "";
     private Integer chosenNumber;
@@ -1710,27 +1710,24 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return chosenType2 != null && !chosenType2.isEmpty();
     }
 
-    public final String getChosenColor() {
-        if (hasChosenColor()) {
-            return chosenColors.get(0);
-        }
-        return "";
+    public String getChosenColor(CardTraitBase ctb) {
+        return Iterables.getFirst(chosenColorsTable.get(ctb), null);
     }
-    public final Iterable<String> getChosenColors() {
-        if (chosenColors == null) {
-            return Lists.newArrayList();
-        }
-        return chosenColors;
+    public final Iterable<String> getChosenColors(CardTraitBase ctb) {
+        return chosenColorsTable.get(ctb);
     }
-    public final void setChosenColors(final List<String> s) {
-        chosenColors = s;
+
+    public final boolean hasChosenColor(CardTraitBase ctb) {
+        return !chosenColorsTable.get(ctb).isEmpty();
+    }
+
+    public final boolean hasChosenColor(String s, CardTraitBase ctb) {
+        return chosenColorsTable.contains(s, ctb);
+    }
+
+    public void setChosenColors(final Iterable<String> colors, CardTraitBase ctb) {
+        chosenColorsTable.set(colors, ctb);
         view.updateChosenColors(this);
-    }
-    public boolean hasChosenColor() {
-        return chosenColors != null && !chosenColors.isEmpty();
-    }
-    public boolean hasChosenColor(String s) {
-        return chosenColors != null && chosenColors.contains(s);
     }
 
     public final Card getChosenCard() {
@@ -6999,11 +6996,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return exiledWithTable;
     }
 
-    public void setExiledWithTable(Table<Card, Optional<StaticAbility>, CardCollection> map) {
+    public void setExiledWithTable(Table<Card, Optional<StaticAbility>, FCollection<Card>> map) {
         exiledWithTable = new ExileWithTable(map);
     }
 
-    public CardCollectionView getExiledWith(CardTraitBase ctb) {
+    public FCollection<Card> getExiledWith(CardTraitBase ctb) {
         return exiledWithTable.get(ctb);
     }
 
