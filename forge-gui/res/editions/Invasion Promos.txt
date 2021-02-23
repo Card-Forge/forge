@@ -5,4 +5,4 @@ Name=Invasion Promos
 Type=Reprint
 
 [cards]
-262 R Kavu Furens
+262 R Raging Kavu
