@@ -11,5 +11,5 @@ Type=Reprint
 16 R Gravedigger
 17 R Boggart Ram-Gang
 18 R Wilt-Leaf Cavaliers
-19 R Duergard Hedge-Mage
+19 R Duergar Hedge-Mage
 20 R Selkie Hedge-Mage

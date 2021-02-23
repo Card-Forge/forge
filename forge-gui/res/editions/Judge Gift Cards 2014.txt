@@ -5,7 +5,7 @@ Name=Judge Gift Cards 2014
 Type=Reprint
 
 [cards]
-1 R Karador, Ghost Chieftrain
+1 R Karador, Ghost Chieftain
 2 R Greater Good
 3 R Riku of Two Reflections
 4 R Force of Will

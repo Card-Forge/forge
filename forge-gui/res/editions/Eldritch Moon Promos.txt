@@ -12,6 +12,5 @@ Type=Reprint
 79 U Unsubstantiate
 98 R Noosegraf Mob
 117 R Assembled Alphas
-130 R Hanweir, the Writhing Township
 176 R Ulvenwald Observer
 185 R Heron's Grace Champion

@@ -110,7 +110,7 @@ Type=Reprint
 103 S Khabal Ghoul
 104 S Kjeldoran Outpost
 105 S Kjeldoran Outpost
-106 S Kongming, Sleeping Dragon
+106 S Kongming, "Sleeping Dragon"
 107 S Kozilek, the Great Distortion
 108 S Lake of the Dead
 109 S Lake of the Dead

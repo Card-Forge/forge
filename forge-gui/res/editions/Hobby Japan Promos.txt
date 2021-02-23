@@ -8,5 +8,5 @@ Type=Reprint
 1 R Goblin Mutant
 2 R Ihsan's Shade
 3 R Krovikan Vampire
-4 R Surge of Strenght
+4 R Surge of Strength
 5 R Yavimaya Ants

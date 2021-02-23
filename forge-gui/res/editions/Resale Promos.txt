@@ -19,7 +19,7 @@ Type=Reprint
 12 R Xathrid Necromancer
 13 U Loam Lion
 26 R Felidar Sovereign
-47 R Thalia's Lancer
+47 R Thalia's Lancers
 49 R Curator of Mysteries
 100 R Etali, Primal Storm
 123 R Beast Whisperer

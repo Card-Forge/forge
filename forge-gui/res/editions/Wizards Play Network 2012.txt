@@ -5,6 +5,6 @@ Name=Wizards Play Network 2012
 Type=Reprint
 
 [cards]
-79 R Gather of Townsfolk
+79 R Gather the Townsfolk
 81 R Curse of Thirst
 82 R Nearheath Stalker
