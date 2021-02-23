@@ -1,0 +1,8 @@
+[metadata]
+Code=P5DN
+Date=2004-06-04
+Name=Fifth Dawn Promos
+Type=Reprint
+
+[cards]
+131 R Helm of Kaldra

@@ -1,0 +1,12 @@
+[metadata]
+Code=PXLN
+Date=2017-09-29
+Name=Ixalan Promos
+Type=Reprint
+
+[cards]
+5 R Bishop of Rebirth
+130 U Walk the Plank
+135 R Burning Sun's Avatar
+185 R Deeproot Champion
+258 U Unclaimed Territory

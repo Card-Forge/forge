@@ -1,0 +1,11 @@
+[metadata]
+Code=G05
+Date=2005-01-01
+Name=Judge Gift Cards 2005
+Type=Reprint
+
+[cards]
+1 R Gemstone Mine
+2 R Regrowth
+3 R Sol Ring
+4 R Mishra's Factory

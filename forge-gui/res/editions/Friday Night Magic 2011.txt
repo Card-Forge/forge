@@ -1,0 +1,19 @@
+[metadata]
+Code=F11
+Date=2011-01-01
+Name=Friday Night Magic 2011
+Type=Reprint
+
+[cards]
+1 R Everflowing Chalice
+2 R Spellstutter Sprite
+3 R Wall of Omens
+4 R Artisan of Kozilek
+5 R Squadron Hawk
+6 R Rhox War Monk
+7 R Jace's Ingenuity
+8 R Cultivate
+9 R Teetering Peaks
+10 R Contagion Clasp
+11 R Go for the Throat
+12 R Savage Lands

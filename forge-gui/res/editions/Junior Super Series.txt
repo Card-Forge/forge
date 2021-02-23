@@ -1,0 +1,25 @@
+[metadata]
+Code=PSUS
+Date=1999-12-01
+Name=Junior Super Series
+Type=Reprint
+
+[cards]
+1 R Thran Quarry
+2 R Serra Avatar
+3 R Lord of Atlantis
+4 R Crusade
+5 R Elvish Lyrist
+6 R City of Brass
+7 R Volcanic Hammer
+8 R Giant Growth
+9 R Two-Headed Dragon
+10 R Slith Firewalker
+11 R Royal Assassin
+12 R Sakura-Tribe Elder
+13 R Shard Phoenix
+14 R Soltari Priest
+15 R Whirling Dervish
+16 R Glorious Anthem
+17 R Elvish Champion
+18 R Mad Auntie

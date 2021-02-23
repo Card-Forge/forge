@@ -1,0 +1,19 @@
+[metadata]
+Code=F09
+Date=2009-01-01
+Name=Friday Night Magic 2009
+Type=Reprint
+
+[cards]
+1 R Magma Jet
+2 R Myr Enforcer
+3 R Kitchen Finks
+4 R Merrow Reejerey
+5 R Wren's Run Vanquisher
+6 R Mulldrifter
+7 R Murderous Redcap
+8 R Lightning Greaves
+9 R Watchwolf
+10 R Browbeat
+11 R Oblivion Ring
+12 R Sakura-Tribe Elder

@@ -1,0 +1,18 @@
+[metadata]
+Code=PAL00
+Date=2000-01-01
+Name=Arena League 2000
+Type=Reprint
+
+[cards]
+2 R Duress
+3 R Uktabi Orangutan
+4 R Chill
+5 R Pillage
+6 R Enlightened Tutor
+7 R Stupor
+8 R Plains
+9 R Island
+10 R Swamp
+11 R Mountain
+12 R Forest

@@ -1,0 +1,17 @@
+[metadata]
+Code=PWP10
+Date=2010-01-01
+Name=Wizards Play Network 2010
+Type=Reprint
+
+[cards]
+36 R Kor Firewalker
+37 R leatherback Baloth
+40 R Syphon Mind
+46 R Pathrazer of Ulamog
+47 R Curse of Wizardry
+50 R Fling
+51 R Sylvan Ranger
+59 R Plague Stinger
+60 R Golem's Heart
+63 R Skinrender

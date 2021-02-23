@@ -1,0 +1,10 @@
+[metadata]
+Code=PDP14
+Date=2013-01-01
+Name=Duels of the Planeswalkers 2014 Promos
+Type=Reprint
+
+[cards]
+1 R Bonescythe Sliver
+2 R Ogre Battledriver
+3 R Scavenging Ooze

@@ -1,0 +1,12 @@
+[metadata]
+Code=PSOM
+Date=2010-09-30
+Name=Scars of Mirrodin Promos
+Type=Reprint
+
+[cards]
+24 R Tempered Steel
+69 R Memoricide
+174 U Memnite
+205 R Steel Hellkite
+223 M Wurmcoil Engine

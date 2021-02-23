@@ -1,0 +1,8 @@
+[metadata]
+Code=PTMP
+Date=1997-10-14
+Name=Tempest Promos
+Type=Reprint
+
+[cards]
+221 R Dirtcowl Wurm

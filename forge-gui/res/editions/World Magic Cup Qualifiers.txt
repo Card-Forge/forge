@@ -1,0 +1,12 @@
+[metadata]
+Code=PWCQ
+Date=2013-04-06
+Name=World Magic Cup Qualifiers
+Type=Reprint
+
+[cards]
+2013 M Vengevine
+2014 M Geist of Saint Traft
+2015 R Thalia, Guardian of Thraben
+2016 R Abrupt Decay
+2017 R Inkmoth Nexus

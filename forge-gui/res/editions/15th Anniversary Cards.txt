@@ -1,0 +1,9 @@
+[metadata]
+Code=P15A
+Date=2008-04-01
+Name=15th Anniversary Cards
+Type=Reprint
+
+[cards]
+1 R Char
+2 R Kamahl, Pit Fighter

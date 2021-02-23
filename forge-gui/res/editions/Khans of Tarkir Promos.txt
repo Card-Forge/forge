@@ -1,0 +1,16 @@
+[metadata]
+Code=PKTK
+Date=2014-09-27
+Name=Khans of Tarkir Promos
+Type=Reprint
+
+[cards]
+134 U Heir of the Wilds
+144 R Rattleclaw Mystic
+164 R Ankle Shanker
+166 R Avalanche Tusker
+179 R Ivorytusk Fortress
+193 R Rakshasa Vizier
+195 R Sage of the Inward Eye
+204 U Sultai Charm
+219 R Dragon Throne of Tarkir

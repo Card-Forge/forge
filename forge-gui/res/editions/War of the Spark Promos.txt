@@ -1,0 +1,14 @@
+[metadata]
+Code=PWAR
+Date=2019-05-04
+Name=War of the Spark Promos
+Type=Reprint
+
+[cards]
+41 U Augur of Bolas
+79 R Bolas's Citadel
+98 U Liliana's Triumph
+171 U Paradise Druid
+193 U Dovin's Veto
+223 R Time Wipe
+248 R Karn's Bastion

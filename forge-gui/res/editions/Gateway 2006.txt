@@ -1,0 +1,10 @@
+[metadata]
+Code=PGTW
+Date=2006-01-01
+Name=Gateway 2006
+Type=Reprint
+
+[cards]
+1 R Wood Elves
+2 R Icatian Javelineers
+3 R Fiery Temper

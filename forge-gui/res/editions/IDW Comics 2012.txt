@@ -1,0 +1,16 @@
+[metadata]
+Code=PIDW
+Date=2012-01-01
+Name=IDW Comics 2012
+Type=Reprint
+
+[cards]
+1 R Treasure Hunt
+2 R Faithless Looting
+3 R Electrolyze
+4 R Feast of Blood
+5 R Arrest
+6 R Consume Spirit
+7 R Standstill
+8 R Breath of Malfegor
+9 R Turnabout

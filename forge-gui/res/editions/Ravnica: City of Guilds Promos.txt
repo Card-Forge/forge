@@ -1,0 +1,9 @@
+[metadata]
+Code=PRAV
+Date=2005-10-07
+Name=Ravnica: City of Guilds Promos
+Type=Reprint
+
+[cards]
+245 R Dimir Guildmage
+247 R Gleancrawler

@@ -1,0 +1,16 @@
+[metadata]
+Code=P09
+Date=2009-01-01
+Name=Magic Player Rewards 2009
+Type=Reprint
+
+[cards]
+1 R Cryptic Command
+2 R Flame Javelin
+3 R Unmake
+4 R Nameless Inversion
+5 R Remove Soul
+6 R Blightning
+7 R Rampant Growth
+8 R Negate
+9 R Terminate

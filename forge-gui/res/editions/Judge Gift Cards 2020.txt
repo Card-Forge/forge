@@ -1,0 +1,17 @@
+[metadata]
+Code=J20
+Date=2020-01-01
+Name=Judge Gift Cards 2020
+Type=Reprint
+
+[cards]
+1 R Arena Rector
+2 R Enlightened Tutor
+3 R Spellseeker
+4 R Demonic Tutor
+5 R Infernal Tutor
+6 R Gamble
+7 R Birthing Pod
+8 R Sylvan Tutor
+9 R Sterling Grove
+10 R Eye of Ugin

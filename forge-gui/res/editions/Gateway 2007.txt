@@ -1,0 +1,16 @@
+[metadata]
+Code=PG07
+Date=2007-01-01
+Name=Gateway 2007
+Type=Reprint
+
+[cards]
+4 R Boomerang
+5 R Calciderm
+6 R Reckless Wurm
+7 R Yixlid Jailer
+8 R Zoetic Cavern
+9 R Llanowar Elves
+10 R Mogg Fanatic
+11 R Mind Stone
+12 R Dauntless Dourbark

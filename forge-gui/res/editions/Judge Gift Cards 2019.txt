@@ -1,0 +1,15 @@
+[metadata]
+Code=J19
+Date=2019-04-10
+Name=Judge Gift Cards 2019
+Type=Reprint
+
+[cards]
+1 M Mirri's Guile
+2 M Sliver Legion
+3 M Mox Opal
+4 M Isolated Watchtower
+5 M Monastery Mentor
+6 R Yuriko, the Tiger's Shadow
+7 R Chalice of the Void
+8 R Reflecting Pool

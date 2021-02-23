@@ -1,0 +1,19 @@
+[metadata]
+Code=PJJT
+Date=2003-01-01
+Name=Japan Junior Tournament
+Type=Reprint
+
+[cards]
+3 R Volcanic Hammer
+4 R Giant Growth
+5 R Slith Firewalker
+6 R Sakura-Tribe Elder
+7 R Soltari Priest
+8 R Glorious Anthem
+9 R Two-Headed Dragon
+10 R Royal Assassin
+11 R Shard Phoenix
+12 R Whirling Dervish
+13 R Elvish Champion
+14 R Mad Auntie

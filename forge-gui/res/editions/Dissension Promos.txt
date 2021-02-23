@@ -1,0 +1,9 @@
+[metadata]
+Code=PDIS
+Date=2006-05-05
+Name=Dissension Promos
+Type=Reprint
+
+[cards]
+140 R Avatar of Discord
+141 R Azorius Guildmage

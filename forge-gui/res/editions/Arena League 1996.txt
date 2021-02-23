@@ -1,0 +1,14 @@
+[metadata]
+Code=PARL
+Date=1996-08-02
+Name=Arena League 1996
+Type=Reprint
+
+[cards]
+1 R Plains
+2 R Island
+3 R Swamp
+4 R Mountain
+5 R Forest
+6 R Disenchant
+7 R Fireball

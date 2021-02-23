@@ -1,0 +1,12 @@
+[metadata]
+Code=PS16
+Date=2016-01-01
+Name=San Diego Comic-Con 2016
+Type=Reprint
+
+[cards]
+29 M Gideon, Ally of Zendikar
+69 M Jace, Unraveler of Secrets
+93 M Liliana, the Last Hope
+104 M Chandra, Flamecaller
+138 M Nissa, Voice of Zendikar

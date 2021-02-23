@@ -1,0 +1,19 @@
+[metadata]
+Code=F08
+Date=2008-01-01
+Name=Friday Night Magic 2008 
+Type=Reprint
+
+[cards]
+1 R Remand
+2 R Tormod's Crypt
+3 R Eternal Witness
+4 R Tendrils of Agony
+5 R Pendelhaven
+6 R Resurrection
+7 R Wall of Roots
+8 R Desert
+9 R Thirst for Knowledge
+10 R Serrated Arrows
+11 R Isochron Scepter
+12 R Shrapnel Blast

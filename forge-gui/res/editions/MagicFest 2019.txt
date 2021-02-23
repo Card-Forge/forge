@@ -1,0 +1,14 @@
+[metadata]
+Code=PF19
+Date=2019-01-01
+Name=MagicFest 2019
+Type=Reprint
+
+[cards]
+1 R Lightning Bolt
+2 R Plains
+3 R Island
+4 R Swamp
+5 R Mountain
+6 R Forest
+7 R Sol Ring

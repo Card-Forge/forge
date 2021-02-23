@@ -1,0 +1,33 @@
+[metadata]
+Code=PRES
+Date=2007-01-01
+Name=Resale Promos
+Type=Reprint
+
+[cards]
+1 R Jaya Ballard, Task Mage
+2 R Brion Stoutarm
+3 R Broodmate Dragon
+4 R Retaliator Griffin
+5 R Terra Stomper
+6 R Terastodon
+7 R Knight Exemplar
+8 R Sunblast Angel
+9 R Angel of Glory's Rise
+10 R Hamletback Goliath
+11 R Angelic Skirmisher
+12 R Xathrid Necromancer
+13 U Loam Lion
+26 R Felidar Sovereign
+47 R Thalia's Lancer
+49 R Curator of Mysteries
+100 R Etali, Primal Storm
+123 R Beast Whisperer
+141 R Goblin Chieftain
+147 R Bristling Hydra
+149 R Atarka, World Render
+149 R Lathliss, Dragon Queen
+172 R Gargos, Vicious Watcher
+174 R Genesis Hydra
+193 R Outland Colossus
+221 R Oran-Rief, the Vastwood
