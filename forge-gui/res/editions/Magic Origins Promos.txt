@@ -7,9 +7,9 @@ Type=Reprint
 [cards]
 19 R Hixus, Prison Warden
 29 R Relic Seeker
-43 Alhammarret, Hight Arbiter
+43 R Alhammarret, High Arbiter
 64 R Mizzium Meddler
-104 R Kothophed, Sould Hoarder
+104 R Kothophed, Soul Hoarder
 105 R Languish
 157 R Pia and Kiran Nalaar
 171 U Conclave Naturalists
