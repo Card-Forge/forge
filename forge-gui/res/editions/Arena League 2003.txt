@@ -1,5 +1,5 @@
 [metadata]
-Code=PAL 03
+Code=PAL03
 Date=2003-01-01
 Name=Arena League 2003
 Type=Reprint
