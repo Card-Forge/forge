@@ -68,6 +68,8 @@ Type=Duel_Decks
 60 L Mountain
 61 L Mountain
 62 L Mountain
+1★ M Jace Beleren
+34★ M Chandra Nalaar
 
 [tokens]
 r_3_1_elemental_shaman_haste
