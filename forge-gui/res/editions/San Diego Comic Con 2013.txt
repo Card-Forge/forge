@@ -8,5 +8,5 @@ Type=Reprint
 1 M Ajani, Caller of the Pride
 60 M Jace, Memory Adept
 102 M Liliana of the Dark Realms
-132 M Chandra Pyromaster
+132 M Chandra, Pyromaster
 172 M Garruk, Caller of Beasts
