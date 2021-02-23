@@ -1,6 +1,6 @@
 Name:Personal Decoy
 ManaCost:5 W U
-Types:Legendary Planeswalker Chandra
+Types:Planeswalker Duck
 Loyalty:X
 Text:CARDNAME enters the battlefield with a number of loyalty counters on it equal to your life total.
 SVar:X:Count$YourLifeTotal
