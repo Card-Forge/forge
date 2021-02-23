@@ -5,7 +5,7 @@ Name=Magic Player Rewards 2011
 Type=Reprint
 
 [cards]
-1 R Day of Judgement
+1 R Day of Judgment
 2 R Brave the Elements
 3 R Doom Blade
 4 R Treasure Hunt
