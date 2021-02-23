@@ -1000,7 +1000,7 @@ public class SpecialCardAi {
                 return false;
             }
             String prominentColor = ComputerUtilCard.getMostProminentColor(ai.getCardsIn(ZoneType.Battlefield));
-            int devotion = CardFactoryUtil.xCount(sa.getHostCard(), "Count$Devotion." + prominentColor);
+            int devotion = AbilityUtils.calculateAmount(sa.getHostCard(), "Count$Devotion." + prominentColor, sa);
             int activationCost = sa.getPayCosts().getTotalMana().getCMC() + (sa.getPayCosts().hasTapCost() ? 1 : 0);
 
             // do not use this SA if devotion to most prominent color is less than its own activation cost + 1 (to actually get advantage)

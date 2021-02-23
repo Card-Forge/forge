@@ -982,7 +982,7 @@ public class ComputerUtilCard {
                 for(byte c : MagicColor.WUBRG) {
                     String devotionCode = "Count$Devotion." + MagicColor.toLongString(c);
 
-                    int devotion = CardFactoryUtil.xCount(sa.getHostCard(), devotionCode);
+                    int devotion = AbilityUtils.calculateAmount(sa.getHostCard(), devotionCode, sa);
                     if (devotion > curDevotion && !CardLists.filter(hand, CardPredicates.isColor(c)).isEmpty()) {
                         curDevotion = devotion;
                         chosenColor = MagicColor.toLongString(c);
