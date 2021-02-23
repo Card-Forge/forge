@@ -6,8 +6,7 @@ Code2=KHM
 MciCode=khm
 Type=Expansion
 BoosterCovers=3
-Booster=10 Common:!fromSheet("KHM SnowLands"), 3 Uncommon:!dfc:fromSheet("KHM cards"), 1 RareMythic:!dfc:fromSheet("KHM cards"), 1 fromSheet("KHM SnowLands")
-BoosterReplaceSlotFromPrintSheet=KHM ModalDoubleFaceCards
+Booster=10 Common:!fromSheet("KHM Snow Lands"):fromsheet("KHM cards"), 3 Uncommon:fromSheet("KHM cards"), 1 RareMythic:fromSheet("KHM cards"), 1 fromSheet("KHM Snow Lands")
 Prerelease=6 Boosters, 1 RareMythic+
 #BoosterBox=36 Boosters, 1 fromSheet('KHM buy a box')+
 
@@ -287,16 +286,16 @@ Prerelease=6 Boosters, 1 RareMythic+
 273 C Volatile Fjord
 274 C Woodland Chasm
 275 R The World Tree
-276 L Snow-Covered Plains
-277 L Snow-Covered Plains
-278 L Snow-Covered Island
-279 L Snow-Covered Island
-280 L Snow-Covered Swamp
-281 L Snow-Covered Swamp
-282 L Snow-Covered Mountain
-283 L Snow-Covered Mountain
-284 L Snow-Covered Forest
-285 L Snow-Covered Forest
+276 C Snow-Covered Plains
+277 C Snow-Covered Plains
+278 C Snow-Covered Island
+279 C Snow-Covered Island
+280 C Snow-Covered Swamp
+281 C Snow-Covered Swamp
+282 C Snow-Covered Mountain
+283 C Snow-Covered Mountain
+284 C Snow-Covered Forest
+285 C Snow-Covered Forest
 
 [borderless]
 286 M Valki, God of Lies
@@ -430,25 +429,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 404 C Frost Bite
 405 C Masked Vandal
 
-[ModalDoubleFaceCards]
-1 Alrund, God of the Cosmos|KHM
-1 Esika, God of the Tree|KHM
-1 Halvar, God of Battle|KHM
-1 Toralf, God of Fury|KHM
-1 Valki, God of Lies|KHM
-2 Barkchannel Pathway|KHM
-2 Birgi, God of Storytelling|KHM
-2 Blightstep Pathway|KHM
-2 Cosima, God of the Voyage|KHM
-2 Darkbore Pathway|KHM
-2 Egon, God of Death|KHM
-2 Hengegate Pathway|KHM
-2 Jorn, God of Winter|KHM
-2 Kolvori, God of Kinship|KHM
-2 Reidane, God of the Worthy|KHM
-2 Tergrid, God of Fright|KHM
-
-[SnowLands]
+[Snow Lands]
 5 Snow-Covered Plains|KHM|1
 5 Snow-Covered Plains|KHM|2
 5 Snow-Covered Island|KHM|1
