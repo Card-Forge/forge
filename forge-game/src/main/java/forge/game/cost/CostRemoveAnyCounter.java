@@ -115,6 +115,9 @@ public class CostRemoveAnyCounter extends CostPart {
         for (Table.Cell<GameEntity, CounterType, Integer> cell : decision.counterTable.cellSet()) {
             removed += cell.getValue();
             cell.getRowKey().subtractCounter(cell.getColumnKey(), cell.getValue());
+            if (cell.getRowKey() instanceof Card) {
+                cell.getRowKey().getGame().updateLastStateForCard((Card) cell.getRowKey());
+            }
         }
 
         source.setSVar("CostCountersRemoved", Integer.toString(removed));

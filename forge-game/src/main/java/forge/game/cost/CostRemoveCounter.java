@@ -181,6 +181,7 @@ public class CostRemoveCounter extends CostPart {
         for (Card c : decision.cards) {
             removed += toRemove;
             c.subtractCounter(counter, toRemove);
+            c.getGame().updateLastStateForCard(c);
         }
 
         source.setSVar("CostCountersRemoved", Integer.toString(removed));
