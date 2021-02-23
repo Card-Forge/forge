@@ -31,9 +31,15 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        String logic = sa.getParamOrDefault("AILogic", "");
+
         SpellAbility trigsa = sa.getAdditionalAbility("Execute");
         if (trigsa == null) {
             return false;
+        }
+
+        if (logic.equals("MaxX")) {
+            sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai));
         }
 
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
