@@ -3,6 +3,8 @@ package forge.game.ability.effects;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
@@ -289,7 +291,7 @@ public class PumpEffect extends SpellAbilityEffect {
             String defined = sa.getParam("DefinedKW");
             String replaced = "";
             if (defined.equals("ChosenType")) {
-                replaced = host.getChosenType();
+                replaced = ObjectUtils.defaultIfNull(sa.getChosenType(0), "");
             } else if (defined.equals("CardUIDSource")) {
                 replaced = "CardUID_" + host.getId();
             } else if (defined.equals("ActivatorName")) {

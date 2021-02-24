@@ -2,7 +2,6 @@ package forge.game.card;
 
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -319,32 +318,11 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ShieldCount, c.getShieldCount());
     }
 
-    public String getChosenType() {
-        return get(TrackableProperty.ChosenType);
-    }
-    void updateChosenType(Card c) {
-        set(TrackableProperty.ChosenType, c.getChosenType());
-    }
-
-    public String getChosenType2() {
-        return get(TrackableProperty.ChosenType2);
-    }
-    void updateChosenType2(Card c) {
-        set(TrackableProperty.ChosenType2, c.getChosenType2());
-    }
-
     public String getChosenNumber() {
         return get(TrackableProperty.ChosenNumber);
     }
     void updateChosenNumber(Card c) {
         set(TrackableProperty.ChosenNumber, c.getChosenNumber().toString());
-    }
-
-    public List<String> getChosenColors() {
-        return get(TrackableProperty.ChosenColors);
-    }
-    void updateChosenColors(Card c) {
-        //set(TrackableProperty.ChosenColors, c.getChosenColors());
     }
 
     public FCollectionView<CardView> getMergedCardsCollection() {

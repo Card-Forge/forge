@@ -401,7 +401,7 @@ public class AnimateAi extends SpellAbilityAi {
         // allow ChosenType - overrides anything else specified
         if (types.hasSubtype("ChosenType")) {
             types.clear();
-            types.add(source.getChosenType());
+            types.addAll(sa.getChosenType());
         }
 
         final List<String> keywords = Lists.newArrayList();

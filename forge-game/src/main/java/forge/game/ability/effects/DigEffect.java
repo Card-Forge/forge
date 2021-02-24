@@ -31,6 +31,8 @@ import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class DigEffect extends SpellAbilityEffect {
 
     @Override
@@ -187,7 +189,7 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                     else if (!changeValid.isEmpty()) {
                         if (changeValid.contains("ChosenType")) {
-                            changeValid = changeValid.replace("ChosenType", host.getChosenType());
+                            changeValid = changeValid.replace("ChosenType", StringUtils.join(sa.getChosenType(),","));
                         }
                         valid = CardLists.getValidCards(top, changeValid.split(","), host.getController(), host, sa);
                     }

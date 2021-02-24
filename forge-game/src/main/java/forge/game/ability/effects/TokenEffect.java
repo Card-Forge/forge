@@ -57,7 +57,7 @@ public class TokenEffect extends TokenEffectBase {
 
         // linked Abilities, if it needs chosen values, but nothing is chosen, no token can be created
         if (sa.hasParam("TokenTypes")) {
-            if (sa.getParam("TokenTypes").contains("ChosenType") && !host.hasChosenType()) {
+            if (sa.getParam("TokenTypes").contains("ChosenType") && !sa.hasChosenType()) {
                 return;
             }
         }

@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -79,7 +78,6 @@ import forge.util.ITriggerEvent;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-
 
 /** 
  * A prototype for player controller class
@@ -545,13 +543,12 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, List<String> invalidTypes, boolean isOptional) {
-        String chosen = ComputerUtil.chooseSomeType(player, kindOfType, sa.getParam("AILogic"), validTypes, invalidTypes);
-        if (StringUtils.isBlank(chosen) && !validTypes.isEmpty()) {
-            chosen = validTypes.iterator().next();
-            System.err.println("AI has no idea how to choose " + kindOfType +", defaulting to arbitrary element: chosen");
+    public List<String> chooseSomeType(String kindOfType, SpellAbility sa, int min, int max, List<String> validTypes) {
+        List<String> chosen = ComputerUtil.chooseSomeType(player, kindOfType, sa.getParam("AILogic"), min, max, validTypes);
+        if (chosen.isEmpty()) {
+            return validTypes.subList(0, min);
         }
-        getGame().getAction().notifyOfValue(sa, player, chosen, player);
+        getGame().getAction().notifyOfValue(sa, player, chosen.toString(), player);
         return chosen;
     }
 

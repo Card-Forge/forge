@@ -55,7 +55,7 @@ public class CostChooseCreatureType extends CostPart {
     
     @Override
     public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa) {
-        sa.getHostCard().setChosenType(pd.type);
+        sa.getHostCard().setChosenType(pd.types, sa);
         return true;
     }
     

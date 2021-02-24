@@ -76,7 +76,7 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                     return;
                 }
                 card.setChosenColors(chosenColors, sa);
-                p.getGame().getAction().nofityOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), Lang.joinHomogenous(chosenColors)), p);
+                p.getGame().getAction().notifyOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), Lang.joinHomogenous(chosenColors)), p);
             }
         }
     }

@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.List;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
@@ -72,7 +73,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
                     validTypes.addAll(CardType.Constant.CREATURE_TYPES);
                     kindOfType = "creature";
                 }
-                changedTypeWordOriginal = sa.getActivatingPlayer().getController().chooseSomeType(kindOfType, sa, validTypes, Lists.newArrayList());
+                changedTypeWordOriginal = Iterables.getFirst(sa.getActivatingPlayer().getController().chooseSomeType(kindOfType, sa, 1, 1, validTypes), changedTypeWordsArray[1]);
             } else {
                 changedTypeWordOriginal = changedTypeWordsArray[0];
             }
@@ -88,7 +89,8 @@ public class ChangeTextEffect extends SpellAbilityEffect {
                     validTypes.addAll(CardType.Constant.CREATURE_TYPES);
                     kindOfType = "creature";
                 }
-                changedTypeWordNew = sa.getActivatingPlayer().getController().chooseSomeType(kindOfType, sa, validTypes, forbiddenTypes);
+                validTypes.removeAll(forbiddenTypes);
+                changedTypeWordNew = Iterables.getFirst(sa.getActivatingPlayer().getController().chooseSomeType(kindOfType, sa, 1, 1, validTypes), changedTypeWordsArray[1]);
             } else {
                 changedTypeWordNew = changedTypeWordsArray[1];
             }

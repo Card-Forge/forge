@@ -247,8 +247,8 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             // Set Chosen Type
-            if (!hostCard.getChosenType().isEmpty()) {
-                eff.setChosenType(hostCard.getChosenType());
+            if (sa.hasChosenType()) {
+                eff.setChosenType(Lists.newArrayList(hostCard.getChosenType(sa)), sa);
             }
 
             // Set Chosen name

@@ -1186,28 +1186,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return manaChoices.get(Integer.parseInt(idx) - 1);
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see forge.game.player.PlayerController#chooseSomeType(java.lang.String,
-     * java.lang.String, java.util.List, java.util.List, java.lang.String)
-     */
-    @Override
-    public String chooseSomeType(final String kindOfType, final SpellAbility sa, final Collection<String> validTypes,
-            final List<String> invalidTypes, final boolean isOptional) {
-        final List<String> types = Lists.newArrayList(validTypes);
-        if (invalidTypes != null && !invalidTypes.isEmpty()) {
-            Iterables.removeAll(types, invalidTypes);
-        }
-        if (kindOfType.equals("Creature")) {
-            sortCreatureTypes(types);
-        }
-        if (isOptional) {
-            return getGui().oneOrNone(localizer.getMessage("lblChooseATargetType", kindOfType.toLowerCase()), types);
-        }
-        return getGui().one(localizer.getMessage("lblChooseATargetType", kindOfType.toLowerCase()), types);
-    }
-
     // sort creature types such that those most prevalent in player's deck are
     // sorted to the top
     private void sortCreatureTypes(List<String> types) {
@@ -1553,6 +1531,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         case AddOrRemove:
             labels = ImmutableList.of(localizer.getMessage("lblAddCounter"), localizer.getMessage("lblRemoveCounter"));
             break;
+        case BottomOfLibraryOrTopOfLibrary:
+            labels = ImmutableList.of(localizer.getMessage("lblBottomOfLibrary"), localizer.getMessage("lblTopOfLibrary"));
+            break;
         default:
             labels = ImmutableList.copyOf(kindOfChoice.toString().split("Or"));
         }
@@ -1663,6 +1644,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public List<String> chooseColors(final String message, final SpellAbility sa, final int min, final int max,
             final List<String> options) {
         return getGui().getChoices(message, min, max, options);
+    }
+
+    @Override
+    public List<String> chooseSomeType(String kindOfType, SpellAbility sa, int min, int max, List<String> validTypes)
+    {
+        String message = localizer.getMessage("lblChooseATargetType", kindOfType.toLowerCase());
+        List<String> types = Lists.newArrayList(validTypes);
+        if (kindOfType.equals("Creature")) {
+            sortCreatureTypes(types);
+        }
+
+        return getGui().getChoices(message, min, max, types);
     }
 
     @Override

@@ -1,16 +1,17 @@
 package forge.game.ability.effects;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import forge.card.CardType;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
+
+import com.google.common.collect.Lists;
 
 public class ChooseTypeEffect extends SpellAbilityEffect {
 
@@ -30,14 +31,12 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
         final String type = sa.getParam("Type");
-        final List<String> invalidTypes = sa.hasParam("InvalidTypes") ? Arrays.asList(sa.getParam("InvalidTypes").split(",")) : new ArrayList<>();
+        int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Amount", "1"), sa);
 
-        final List<String> validTypes = new ArrayList<>();
+        final List<String> validTypes = Lists.newArrayList();
         if (sa.hasParam("ValidTypes")) {
             validTypes.addAll(Arrays.asList(sa.getParam("ValidTypes").split(",")));
-        }
-
-        if (validTypes.isEmpty()) {
+        } else {
             switch (type) {
             case "Card":
                 validTypes.addAll(CardType.getAllCardTypes());
@@ -54,22 +53,22 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
             }
         }
 
-        for (final String s : invalidTypes) {
-            validTypes.remove(s);
+        if (sa.hasParam("InvalidTypes")) {
+            for (final String s : sa.getParam("InvalidTypes").split(",")) {
+                validTypes.remove(s);
+            }
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
-
         if (!validTypes.isEmpty()) {
-            for (final Player p : tgtPlayers) {
-                if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                    String choice = p.getController().chooseSomeType(type, sa, validTypes, invalidTypes);
-                    if (!sa.hasParam("Secondary")) {
-                        card.setChosenType(choice);
-                    } else {
-                        card.setChosenType2(choice);
+            for (final Player p : getTargetPlayers(sa)) {
+                if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
+                    List<String> choices = Lists.newArrayList();
+                    for (int i = 0; i < amount; i++) {
+                        // the only one with multiple amount currently cares about the order
+                        choices.addAll(p.getController().chooseSomeType(type, sa, 1, 1, validTypes));
+                        validTypes.removeAll(choices);
                     }
+                    card.setChosenType(choices, sa);
                 }
             }
         }

@@ -334,17 +334,14 @@ public class GameCopier {
             if (c.getChosenPlayer() != null) {
                 newCard.setChosenPlayer(playerMap.get(c.getChosenPlayer()));
             }
-            if (!c.getChosenType().isEmpty()) {
-                newCard.setChosenType(c.getChosenType());
-            }
-            if (!c.getChosenType2().isEmpty()) {
-                newCard.setChosenType2(c.getChosenType2());
-            }
 
             SpellAbility first = c.getFirstSpellAbility();
 
             if (first != null && first.hasChosenColor()) {
                 newCard.setChosenColors(Lists.newArrayList(first.getChosenColors()), newCard.getFirstSpellAbility());
+            }
+            if (first != null && first.hasChosenType()) {
+                newCard.setChosenColors(Lists.newArrayList(first.getChosenType()), newCard.getFirstSpellAbility());
             }
 
             if (!c.getNamedCard().isEmpty()) {

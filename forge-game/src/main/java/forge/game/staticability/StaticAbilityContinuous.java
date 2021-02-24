@@ -218,7 +218,7 @@ public final class StaticAbilityContinuous {
                     if (!stAb.hasChosenColor() && input.contains("ChosenColor")) {
                         return true;
                     }
-                    if (!hostCard.hasChosenType() && input.contains("ChosenType")) {
+                    if (!stAb.hasChosenType() && input.contains("ChosenType")) {
                         return true;
                     }
                     if (!hostCard.hasChosenNumber() && input.contains("ChosenNumber")) {
@@ -298,8 +298,8 @@ public final class StaticAbilityContinuous {
                         input = input.replaceAll("ChosenColor", StringUtils.capitalize(stAb.getChosenColor()));
                         input = input.replaceAll("chosenColor", stAb.getChosenColor().toLowerCase());
                     }
-                    if (hostCard.hasChosenType()) {
-                        input = input.replaceAll("ChosenType", hostCard.getChosenType());
+                    if (stAb.hasChosenType()) {
+                        input = input.replaceAll("ChosenType", stAb.getChosenType(0));
                     }
                     if (hostCard.hasChosenNumber()) {
                         input = input.replaceAll("ChosenNumber", String.valueOf(hostCard.getChosenNumber()));
@@ -377,10 +377,10 @@ public final class StaticAbilityContinuous {
             Iterables.removeIf(addTypes, new Predicate<String>() {
                 @Override
                 public boolean apply(String input) {
-                    if (input.equals("ChosenType") && !hostCard.hasChosenType()) {
+                    if (input.equals("ChosenType") && !stAb.hasChosenType()) {
                         return true;
                     }
-                    if (input.equals("ChosenType2") && !hostCard.hasChosenType2()) {
+                    if (input.equals("ChosenType2") && stAb.getChosenType(1) == null) {
                         return true;
                     }
                     if (input.equals("ImprintedCreatureType")) {
@@ -401,11 +401,11 @@ public final class StaticAbilityContinuous {
             addTypes = Lists.transform(addTypes, new Function<String, String>() {
                 @Override
                 public String apply(String input) {
-                    if (hostCard.hasChosenType2()) {
-                        input = input.replaceAll("ChosenType2", hostCard.getChosenType2());
+                    if (stAb.getChosenType(1) != null) {
+                        input = input.replaceAll("ChosenType2", stAb.getChosenType(1));
                     }
-                    if (hostCard.hasChosenType()) {
-                        input = input.replaceAll("ChosenType", hostCard.getChosenType());
+                    if (stAb.getChosenType(0) != null) {
+                        input = input.replaceAll("ChosenType", stAb.getChosenType(0));
                     }
                     return input;
                 }
@@ -419,7 +419,7 @@ public final class StaticAbilityContinuous {
             Iterables.removeIf(removeTypes, new Predicate<String>() {
                 @Override
                 public boolean apply(String input) {
-                    if (input.equals("ChosenType") && !hostCard.hasChosenType()) {
+                    if (input.equals("ChosenType") && !stAb.hasChosenType()) {
                         return true;
                     }
                     return false;

@@ -295,8 +295,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private NavigableMap<Long, Player> tempControllers = Maps.newTreeMap();
 
     private String originalText = "", text = "";
-    private String chosenType = "";
-    private String chosenType2 = "";
+    private LinkedAbilityTable<String> chosenTypesTable = new LinkedAbilityTable<String>();
     private LinkedAbilityTable<String> chosenColorsTable = new LinkedAbilityTable<String>();
     private String chosenName = "";
     private String chosenName2 = "";
@@ -1682,32 +1681,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         exiledBy = ep;
     }
 
-    // used for cards like Belbe's Portal, Conspiracy, Cover of Darkness, etc.
-    public final String getChosenType() {
-        return chosenType;
+    public final Iterable<String> getChosenType(CardTraitBase ctb) {
+        return chosenTypesTable.get(ctb);
     }
 
-    public final void setChosenType(final String s) {
-        chosenType = s;
-        view.updateChosenType(this);
+    public final String getChosenType(CardTraitBase ctb, int index) {
+        return Iterables.get(chosenTypesTable.get(ctb), index, null);
     }
 
-    public final boolean hasChosenType() {
-        return chosenType != null && !chosenType.isEmpty();
+    public final boolean hasChosenType(CardTraitBase ctb) {
+        return !chosenTypesTable.get(ctb).isEmpty();
     }
 
-    // used by card Illusionary Terrain
-    public final String getChosenType2() {
-        return chosenType2;
-    }
-
-    public final void setChosenType2(final String s) {
-        chosenType2 = s;
-        view.updateChosenType2(this);
-    }
-
-    public final boolean hasChosenType2() {
-        return chosenType2 != null && !chosenType2.isEmpty();
+    public void setChosenType(final Iterable<String> types, CardTraitBase ctb) {
+        chosenTypesTable.set(types, ctb);
     }
 
     public String getChosenColor(CardTraitBase ctb) {
@@ -1727,7 +1714,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public void setChosenColors(final Iterable<String> colors, CardTraitBase ctb) {
         chosenColorsTable.set(colors, ctb);
-        view.updateChosenColors(this);
     }
 
     public final Card getChosenCard() {

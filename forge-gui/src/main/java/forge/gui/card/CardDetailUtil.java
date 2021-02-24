@@ -402,6 +402,7 @@ public class CardDetailUtil {
         }
 
         // chosen type
+        /*
         if (!card.getChosenType().isEmpty()) {
             if (area.length() != 0) {
                 area.append("\n");
@@ -413,8 +414,10 @@ public class CardDetailUtil {
             }
             area.append(")");
         }
+        //*/
 
         // chosen color
+        /*
         if (card.getChosenColors() != null) {
             if (area.length() != 0) {
                 area.append("\n");
@@ -423,6 +426,7 @@ public class CardDetailUtil {
             area.append(Lang.joinHomogenous(card.getChosenColors()));
             area.append(")");
         }
+        //*/
 
         // chosen cards
         if (card.getChosenCards() != null) {

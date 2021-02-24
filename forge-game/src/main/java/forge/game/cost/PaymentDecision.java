@@ -12,7 +12,7 @@ import forge.util.TextUtil;
 
 public class PaymentDecision {
     public int c = 0;
-    public String type;
+    public Iterable<String> types = null;
 
     public final CardCollection cards = new CardCollection();
     public final List<Mana> mana;
@@ -43,9 +43,9 @@ public class PaymentDecision {
         cards.add(chosen);
     }
 
-    public PaymentDecision(String choice) {
+    public PaymentDecision(Iterable<String> choices) {
         this(null, null, null, null, null);
-        type = choice;
+        types = choices;
     }
 
     public static PaymentDecision card(Card chosen) {
@@ -86,8 +86,8 @@ public class PaymentDecision {
         return  TextUtil.concatWithSpace("Payment Decision:", TextUtil.addSuffix(String.valueOf(c),","), cards.toString());
     }
 
-    public static PaymentDecision type(String choice) {
-        return new PaymentDecision(choice);
+    public static PaymentDecision types(Iterable<String> choices) {
+        return new PaymentDecision(choices);
     }
 
     public static PaymentDecision players(List<Player> players) {

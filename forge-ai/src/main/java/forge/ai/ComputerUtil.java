@@ -2256,17 +2256,16 @@ public class ComputerUtil {
         return getCardsToDiscardFromOpponent(aiChooser, p, sa, validCards, min, max);
     }
 
-    public static String chooseSomeType(Player ai, String kindOfType, String logic, Collection<String> validTypes, List<String> invalidTypes) {
-        if (invalidTypes == null) {
-            invalidTypes = ImmutableList.of();
-        }
+    public static List<String> chooseSomeType(Player ai, String kindOfType, String logic, int min, int max, Collection<String> validTypes) {
         if (validTypes == null) {
             validTypes = ImmutableList.of();
         }
 
         final Game game = ai.getGame();
-        String chosen = "";
+        List<String> chosenList = Lists.newArrayList();
         if (kindOfType.equals("Card")) {
+            String chosen = "";
+
             // TODO
             // computer will need to choose a type
             // based on whether it needs a creature or land,
@@ -2274,24 +2273,25 @@ public class ComputerUtil {
             // then, reveal chosenType to Human
             if (game.getPhaseHandler().is(PhaseType.UNTAP) && logic == null) { // Storage Matrix
                 double amount = 0;
-                for (String type : CardType.getAllCardTypes()) {
-                    if (!invalidTypes.contains(type)) {
-                        CardCollection list = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(type), Presets.TAPPED);
-                        double i = type.equals("Creature") ? list.size() * 1.5 : list.size();
-                        if (i > amount) {
-                            amount = i;
-                            chosen = type;
-                        }
+                for (String type : validTypes) {
+                    CardCollection list = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(type), Presets.TAPPED);
+                    double i = type.equals("Creature") ? list.size() * 1.5 : list.size();
+                    if (i > amount) {
+                        amount = i;
+                        chosen = type;
                     }
                 }
+            } else if (logic == "MostProminentInComputerDeck") {
+                chosen = ComputerUtilCard.getMostProminentType(ai.getAllCards(), validTypes);
             }
             if (StringUtils.isEmpty(chosen)) {
                 chosen = validTypes.isEmpty() ? "Creature" : Aggregates.random(validTypes);
             }
+            chosenList.add(chosen);
         } else if (kindOfType.equals("Creature")) {
+            String chosen = "";
             if (logic != null) {
-                List <String> valid = Lists.newArrayList(CardType.getAllCreatureTypes());
-                valid.removeAll(invalidTypes);
+                List <String> valid = Lists.newArrayList(validTypes);
 
                 if (logic.equals("MostProminentOnBattlefield")) {
                     chosen = ComputerUtilCard.getMostProminentType(game.getCardsIn(ZoneType.Battlefield), valid);
@@ -2302,7 +2302,7 @@ public class ComputerUtil {
                 else if (logic.equals("MostProminentOppControls")) {
                     CardCollection list = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
                     chosen = ComputerUtilCard.getMostProminentType(list, valid);
-                    if (!CardType.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
+                    if (!CardType.isACreatureType(chosen) || !validTypes.contains(chosen)) {
                         list = CardLists.filterControlledBy(game.getCardsInGame(), ai.getOpponents());
                         chosen = ComputerUtilCard.getMostProminentType(list, valid);
                     }
@@ -2314,16 +2314,17 @@ public class ComputerUtil {
                     chosen = ComputerUtilCard.getMostProminentType(ai.getCardsIn(ZoneType.Graveyard), valid);
                 }
             }
-            if (!CardType.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
-                chosen = "Sliver";
+            if (!CardType.isACreatureType(chosen) || !validTypes.contains(chosen)) {
+                chosen = Iterables.getFirst(validTypes, null);
             }
 
+            chosenList.add(chosen);
         } else if (kindOfType.equals("Basic Land")) {
+            String chosen = "";
             if (logic != null) {
                 if (logic.equals("MostProminentOppControls")) {
                     CardCollection list = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
-                    List<String> valid = Lists.newArrayList(CardType.getBasicTypes());
-                    valid.removeAll(invalidTypes);
+                    List<String> valid = Lists.newArrayList(validTypes);
 
                     chosen = ComputerUtilCard.getMostProminentType(list, valid);
                 } else  if (logic.equals("MostNeededType")) {
@@ -2346,9 +2347,9 @@ public class ComputerUtil {
                     }
                 }
                 else if (logic.equals("ChosenLandwalk")) {
-                    for (Card c : ComputerUtil.getOpponentFor(ai).getLandsInPlay()) {
+                    for (Card c : ai.getWeakestOpponent().getLandsInPlay()) {
                         for (String t : c.getType()) {
-                            if (!invalidTypes.contains(t) && CardType.isABasicLandType(t)) {
+                            if (validTypes.contains(t) && CardType.isABasicLandType(t)) {
                                 chosen = t;
                                 break;
                             }
@@ -2357,16 +2358,28 @@ public class ComputerUtil {
                 }
             }
 
-            if (!CardType.isABasicLandType(chosen) || invalidTypes.contains(chosen)) {
-                chosen = "Island";
+            if (!CardType.isABasicLandType(chosen) || !validTypes.contains(chosen)) {
+                chosen = Iterables.getFirst(validTypes, null);
+            }
+            chosenList.add(chosen);
+            // the only one with choosing two types is Illusionary Terrain
+            // and it needs other AI logic
+            while (chosenList.size() < min) {
+                validTypes.remove(chosen);
+                chosen = Iterables.getFirst(validTypes, null);
+                if (chosen == null) {
+                    return Lists.newArrayList();
+                }
+                chosenList.add(chosen);
             }
         }
         else if (kindOfType.equals("Land")) {
+            String chosen = "";
             if (logic != null) {
                 if (logic.equals("ChosenLandwalk")) {
-                    for (Card c : ComputerUtil.getOpponentFor(ai).getLandsInPlay()) {
+                    for (Card c : ai.getWeakestOpponent().getLandsInPlay()) {
                         for (String t : c.getType().getLandTypes()) {
-                            if (!invalidTypes.contains(t)) {
+                            if (validTypes.contains(t)) {
                                 chosen = t;
                                 break;
                             }
@@ -2375,10 +2388,11 @@ public class ComputerUtil {
                 }
             }
             if (StringUtils.isEmpty(chosen)) {
-                chosen = "Island";
+                chosen = Iterables.getFirst(validTypes, null);
             }
+            chosenList.add(chosen);
         }
-        return chosen;
+        return chosenList;
     }
 
     public static Object vote(Player ai, List<Object> options, SpellAbility sa, Multimap<Object, Player> votes, Player forPlayer) {

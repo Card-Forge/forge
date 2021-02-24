@@ -662,4 +662,20 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     public boolean isExiledWith(Card object) {
         return getHostCard().isExiledWith(object, this);
     }
+
+    public final Iterable<String> getChosenType() {
+        return getHostCard().getChosenType(this);
+    }
+
+    public final String getChosenType(int index) {
+        return getHostCard().getChosenType(this, index);
+    }
+
+    public final boolean hasChosenType() {
+        return getHostCard().hasChosenType(this);
+    }
+
+    public void setChosenType(final Iterable<String> types) {
+        getHostCard().setChosenType(types, this);
+    }
 }

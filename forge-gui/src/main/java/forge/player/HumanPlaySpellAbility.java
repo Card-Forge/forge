@@ -17,12 +17,12 @@
  */
 package forge.player;
 
-import java.util.Collections;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.card.CardType;
@@ -291,8 +291,8 @@ public class HumanPlaySpellAbility {
             for (final String aVar : announce.split(",")) {
                 final String varName = aVar.trim();
                 if ("CreatureType".equals(varName)) {
-                    final String choice = pc.chooseSomeType("Creature", ability, CardType.Constant.CREATURE_TYPES, Collections.emptyList());
-                    ability.getHostCard().setChosenType(choice);
+                    final Iterable<String> choices = pc.chooseSomeType("Creature", ability, 1, 1, Lists.newArrayList(CardType.getAllCreatureTypes()));
+                    ability.setChosenType(choices);
                 }
                 if ("ChooseNumber".equals(varName)) {
                     final int min = Integer.parseInt(ability.getParam("Min"));

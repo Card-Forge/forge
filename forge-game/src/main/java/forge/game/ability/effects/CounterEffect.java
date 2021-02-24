@@ -12,6 +12,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
+import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
@@ -158,7 +159,7 @@ public class CounterEffect extends SpellAbilityEffect {
      * <p>
      * removeFromStack.
      * </p>
-     * 
+     *
      * @param tgtSA
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param srcSA
@@ -170,7 +171,7 @@ public class CounterEffect extends SpellAbilityEffect {
     private static void removeFromStack(final SpellAbility tgtSA,
             final SpellAbility srcSA, final SpellAbilityStackInstance si) {
         final Game game = tgtSA.getActivatingPlayer().getGame();
-        // Run any applicable replacement effects. 
+        // Run any applicable replacement effects.
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(tgtSA.getHostCard());
         repParams.put(AbilityKey.TgtSA, tgtSA);
         repParams.put(AbilityKey.Cause, srcSA.getHostCard());
@@ -191,7 +192,10 @@ public class CounterEffect extends SpellAbilityEffect {
         String destination =  srcSA.hasParam("Destination") ? srcSA.getParam("Destination") : tgtSA.isAftermath() ? "Exile" : "Graveyard";
         if (srcSA.hasParam("DestinationChoice")) {//Hinder
             List<String> pos = Arrays.asList(srcSA.getParam("DestinationChoice").split(","));
-            destination = srcSA.getActivatingPlayer().getController().chooseSomeType(Localizer.getInstance().getMessage("lblRemoveDestination"), tgtSA, pos, null);
+
+            boolean value = srcSA.getActivatingPlayer().getController().chooseBinary(srcSA, Localizer.getInstance().getMessage("lblRemoveDestination"), BinaryChoiceType.BottomOfLibraryOrTopOfLibrary);
+
+            destination = pos.get(value ? 1 : 0);
         }
         if (tgtSA.isAbility()) {
             // For Ability-targeted counterspells - do not move it anywhere,
@@ -229,7 +233,6 @@ public class CounterEffect extends SpellAbilityEffect {
         runParams.put(AbilityKey.Cause, srcSA.getHostCard());
         runParams.put(AbilityKey.CounteredSA, tgtSA);
         game.getTriggerHandler().runTrigger(TriggerType.Countered, runParams, false);
-        
 
         if (!tgtSA.isAbility()) {
             game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, "Send countered spell to " + destination);

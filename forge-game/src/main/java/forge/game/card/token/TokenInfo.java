@@ -358,14 +358,16 @@ public class TokenInfo {
         // need to be done after text change so it isn't affected by that
         if (sa.hasParam("TokenTypes")) {
             String types = sa.getParam("TokenTypes");
-            types = types.replace("ChosenType", sa.getHostCard().getChosenType());
+            if (sa.hasChosenType()) {
+                types = types.replace("ChosenType", Iterables.getFirst(sa.getChosenType(), null));
+            }
             result.addType(types);
             result.setName(types);
         }
 
         if (sa.hasParam("TokenColors")) {
             String colors = sa.getParam("TokenColors");
-            colors = colors.replace("ChosenColor", sa.getHostCard().getChosenColor(sa));
+            colors = colors.replace("ChosenColor", sa.getChosenColor());
             result.setColor(MagicColor.toShortString(colors));
         }
 

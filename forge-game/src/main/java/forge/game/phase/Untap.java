@@ -24,10 +24,9 @@ import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.Lists;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
-import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -138,10 +137,9 @@ public class Untap extends Phase {
             }
             if (kw.startsWith("OnlyUntapChosen") && !hasChosen) {
                 List<String> validTypes = Arrays.asList(kw.split(":")[1].split(","));
-                List<String> invalidTypes = Lists.newArrayList(CardType.getAllCardTypes());
-                invalidTypes.removeAll(validTypes);
-                final String chosen = player.getController().chooseSomeType("Card", new SpellAbility.EmptySa(ApiType.ChooseType, null, player), validTypes, invalidTypes);
-                list = CardLists.getType(list,chosen);
+                SpellAbility emptySA = new SpellAbility.EmptySa(ApiType.ChooseType, null, player);
+                final String chosen = Iterables.getFirst(player.getController().chooseSomeType("Card", emptySA, 1, 1, validTypes), "");
+                list = CardLists.getType(list, chosen);
                 hasChosen = true;
             }
         }
