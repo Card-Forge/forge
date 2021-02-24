@@ -229,14 +229,7 @@ public final class GameActionUtil {
                     foretold.putParam("ReduceCost", "2");
                     foretold.setAlternativeCost(AlternativeCost.Foretold);
                     foretold.getRestrictions().setZone(ZoneType.Exile);
-
-                    // Stack Description only for Permanent or it might crash
-                    if (source.isPermanent()) {
-                        final StringBuilder sbStack = new StringBuilder();
-                        sbStack.append(sa.getStackDescription()).append(" (Foretold)");
-                        foretold.setStackDescription(sbStack.toString());
-                    }
-
+                    foretold.putParam("AfterDescription", "(Foretold)");
                     alternatives.add(foretold);
                 }
             }
