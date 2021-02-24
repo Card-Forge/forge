@@ -20,7 +20,6 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
