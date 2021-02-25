@@ -1,5 +1,7 @@
 [metadata]
 Name=Jace, the Mind Sculptor
+[Commander]
+1 Jace, the Mind Sculptor|WWK
 [Main]
 1 Adverse Conditions|BFZ
 1 Archive Trap|ZEN
@@ -17,7 +19,6 @@ Name=Jace, the Mind Sculptor
 1 Island|COM|2
 4 Island|COM|3
 4 Island|COM|4
-1 Jace, the Mind Sculptor|WWK
 1 Lighthouse Chronologist|ROE
 1 Lullmage Mentor|ZEN
 1 Mind Control|M12

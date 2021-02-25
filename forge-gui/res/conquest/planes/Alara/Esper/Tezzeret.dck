@@ -1,5 +1,7 @@
 [metadata]
 Name=Tezzeret
+[Commander]
+1 Tezzeret the Seeker|ALA
 [Main]
 1 Call to Heel|ALA
 1 Cancel|ALA
@@ -25,6 +27,5 @@ Name=Tezzeret
 1 Spell Snip|ALA
 1 Steelclad Serpent|ALA
 1 Telemin Performance|CFX
-1 Tezzeret the Seeker|ALA
 1 Traumatic Visions|CFX
 1 Unsummon|CFX

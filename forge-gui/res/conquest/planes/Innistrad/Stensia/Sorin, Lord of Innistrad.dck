@@ -1,5 +1,7 @@
 [metadata]
 Name=Sorin, Lord of Innistrad
+[Commander]
+1 Sorin, Lord of Innistrad|DDK
 [Main]
 1 Always Watching|SOI
 1 Blood Artist|EMA
@@ -24,7 +26,6 @@ Name=Sorin, Lord of Innistrad
 1 Murder|EMN
 2 Plains|SOI|1
 1 Plains|SOI|3
-1 Sorin, Lord of Innistrad|DDK
 1 Stromkirk Condemned|EMN
 1 Stromkirk Mentor|SOI
 1 Stromkirk Patrol|ISD

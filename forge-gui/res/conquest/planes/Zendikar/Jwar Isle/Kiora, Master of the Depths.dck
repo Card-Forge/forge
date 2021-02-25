@@ -1,5 +1,7 @@
 [metadata]
 Name=Kiora, Master of the Depths
+[Commander]
+1 Kiora, Master of the Depths|BFZ
 [Main]
 1 Beastmaster Ascension|C15
 1 Bring to Light|BFZ
@@ -16,7 +18,6 @@ Name=Kiora, Master of the Depths
 1 Island|ZEN|4
 2 Island|ZEN|5
 2 Island|ZEN|7
-1 Kiora, Master of the Depths|BFZ
 1 Kraken Hatchling|M13
 1 Lorthos, the Tidemaker|C14
 1 Lullmage Mentor|ZEN

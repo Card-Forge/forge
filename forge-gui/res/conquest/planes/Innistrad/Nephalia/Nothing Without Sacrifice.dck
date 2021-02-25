@@ -1,5 +1,7 @@
 [metadata]
 Name=Nothing Without Sacrifice
+[Commander]
+1 Liliana of the Veil|ISD
 [Main]
 1 Alchemist's Apprentice|AVR
 2 Altar's Reap|C15
@@ -19,7 +21,6 @@ Name=Nothing Without Sacrifice
 4 Island|ISD|2
 2 Island|ISD|3
 1 Killing Wave|AVR
-1 Liliana of the Veil|ISD
 2 Skirsdag Flayer|DKA
 1 Stitcher's Apprentice|ISD
 4 Swamp|ISD|2

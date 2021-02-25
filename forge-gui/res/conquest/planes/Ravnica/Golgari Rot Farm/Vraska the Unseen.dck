@@ -1,5 +1,7 @@
 [metadata]
 Name=Vraska the Unseen
+[Commander]
+1 Vraska the Unseen|RTR
 [Main]
 1 Abrupt Decay|RTR
 1 Corpsejack Menace|RTR
@@ -36,6 +38,5 @@ Name=Vraska the Unseen
 3 Swamp|RTR|5
 1 Transguild Promenade|C13
 1 Treasured Find|RTR
-1 Vraska the Unseen|RTR
 1 Vulturous Zombie|C15
 1 Woodwraith Corrupter|RAV

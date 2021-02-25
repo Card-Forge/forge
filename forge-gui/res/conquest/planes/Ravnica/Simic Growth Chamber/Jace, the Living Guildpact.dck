@@ -1,5 +1,7 @@
 [metadata]
 Name=Jace, the Living Guildpact
+[Commander]
+1 Jace, the Living Guildpact|M15
 [Main]
 1 Azorius Guildgate|C13
 1 Beck // Call|DGM
@@ -16,7 +18,6 @@ Name=Jace, the Living Guildpact
 1 Golgari Guildgate|C15
 1 Gruul Guildgate|C13
 1 Izzet Guildgate|C15
-1 Jace, the Living Guildpact|M15
 1 Lavinia of the Tenth|DGM
 1 Lobber Crew|RTR
 1 Maze Abomination|DGM

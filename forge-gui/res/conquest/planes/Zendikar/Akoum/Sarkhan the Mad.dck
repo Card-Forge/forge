@@ -1,5 +1,7 @@
 [metadata]
 Name=Sarkhan the Mad
+[Commander]
+1 Sarkhan the Mad|ROE
 [Main]
 1 Akoum Firebird|BFZ
 1 Akoum Hellkite|BFZ
@@ -28,7 +30,6 @@ Name=Sarkhan the Mad
 1 Mountain|ROE|3
 2 Mountain|ROE|4
 1 Obsidian Fireheart|ZEN
-1 Sarkhan the Mad|ROE
 1 Smoldering Marsh|EXP
 1 Swamp|ROE|1
 2 Swamp|ROE|2

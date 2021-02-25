@@ -1,5 +1,7 @@
 [metadata]
 Name=Nahiri, the Lithomancer
+[Commander]
+1 Nahiri, the Lithomancer|C14
 [Main]
 1 Armament Master|ZEN
 1 Basilisk Collar|WWK
@@ -16,7 +18,6 @@ Name=Nahiri, the Lithomancer
 1 Kor Outfitter|ZEN
 1 Kor Scythemaster|OGW
 1 Munda's Vanguard|OGW
-1 Nahiri, the Lithomancer|C14
 1 Nomads' Assembly|C14
 1 Oath of Gideon|OGW
 1 Pennon Blade|ROE

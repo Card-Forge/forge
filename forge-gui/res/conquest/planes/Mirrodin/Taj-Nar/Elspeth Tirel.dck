@@ -1,5 +1,7 @@
 [metadata]
 Name=Elspeth Tirel
+[Commander]
+1 Elspeth Tirel|SOM
 [Main]
 1 Abuna Acolyte|SOM
 1 Accorder Paladin|MBS
@@ -9,7 +11,6 @@ Name=Elspeth Tirel
 1 Contested War Zone|MBS
 1 Darksteel Plate|MBS
 1 Divine Offering|MBS
-1 Elspeth Tirel|SOM
 1 Glimmerpoint Stag|SOM
 1 Hero of Bladehold|MBS
 1 Kemba's Skyguard|SOM

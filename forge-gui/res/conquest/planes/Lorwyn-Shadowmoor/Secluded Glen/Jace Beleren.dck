@@ -1,5 +1,7 @@
 [metadata]
 Name=Jace Beleren
+[Commander]
+1 Jace Beleren|M11
 [Main]
 1 Advice from the Fae|SHM
 1 Biting Tether|SHM
@@ -15,7 +17,6 @@ Name=Jace Beleren
 1 Ink Dissolver|MOR
 1 Inundate|EVE
 15 Island|LRW|4
-1 Jace Beleren|M11
 1 Merrow Commerce|LRW
 1 Merrow Harbinger|LRW
 1 Merrow Reejerey|LRW

@@ -1,5 +1,7 @@
 [metadata]
 Name=Sorin, Solemn Visitor
+[Commander]
+1 Sorin, Solemn Visitor|KTK
 [Main]
 1 Bellowing Saddlebrute|KTK
 1 Bitter Revelation|KTK
@@ -24,7 +26,6 @@ Name=Sorin, Solemn Visitor
 1 Scoured Barrens|KTK
 1 Seeker of the Way|KTK
 1 Smite the Monstrous|KTK
-1 Sorin, Solemn Visitor|KTK
 1 Sultai Scavenger|KTK
 2 Swamp|KTK|1
 3 Swamp|KTK|2

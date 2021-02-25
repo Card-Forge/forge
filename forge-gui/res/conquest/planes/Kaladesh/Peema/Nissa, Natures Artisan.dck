@@ -1,5 +1,7 @@
 [metadata]
 Name=Nissa, Nature's Artisan
+[Commander]
+1 Nissa, Nature's Artisan|KLD
 [Main]
 1 Aid from the Cowl|AER
 1 Architect of the Untamed|KLD
@@ -17,7 +19,6 @@ Name=Nissa, Nature's Artisan
 1 Hunt the Weak|KLD
 1 Lifecrafter's Gift|AER
 1 Nature's Way|KLD
-1 Nissa, Nature's Artisan|KLD
 1 Oviya Pashiri, Sage Lifecrafter|KLD
 1 Prey Upon|AER
 1 Ridgescale Tusker|AER
