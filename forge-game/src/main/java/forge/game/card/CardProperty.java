@@ -789,46 +789,11 @@ public class CardProperty {
             } else {
                 final String restriction = property.split("sharesCreatureTypeWith ")[1];
                 switch (restriction) {
-                    case "TopCardOfLibrary":
-                        final CardCollectionView cards = sourceController.getCardsIn(ZoneType.Library);
-                        if (cards.isEmpty() || !card.sharesCreatureTypeWith(cards.get(0))) {
-                            return false;
-                        }
-                        break;
                     case "Commander":
                         final List<Card> cmdrs = sourceController.getCommanders();
                         for (Card cmdr : cmdrs) {
                             if (card.sharesCreatureTypeWith(cmdr)) {
                                 return true;
-                            }
-                        }
-                        return false;
-                    case "Enchanted":
-                        for (final SpellAbility sa : source.getCurrentState().getNonManaAbilities()) {
-                            final SpellAbility root = sa.getRootAbility();
-                            Card c = source.getEnchantingCard();
-                            if ((c == null) && (root != null)
-                                    && (root.getPaidList("Sacrificed") != null)
-                                    && !root.getPaidList("Sacrificed").isEmpty()) {
-                                c = root.getPaidList("Sacrificed").get(0).getEnchantingCard();
-                                if (!card.sharesCreatureTypeWith(c)) {
-                                    return false;
-                                }
-                            }
-                        }
-                        break;
-                    case "Equipped":
-                        if (source.isEquipping() && card.sharesCreatureTypeWith(source.getEquipping())) {
-                            return true;
-                        }
-                        return false;
-                    case "Remembered":
-                        for (final Object rem : source.getRemembered()) {
-                            if (rem instanceof Card) {
-                                final Card c = (Card) rem;
-                                if (card.sharesCreatureTypeWith(c)) {
-                                    return true;
-                                }
                             }
                         }
                         return false;
@@ -843,13 +808,7 @@ public class CardProperty {
                         }
                         break;
                     default:
-                        boolean shares = false;
-                        for (final Card c : sourceController.getCardsIn(ZoneType.Battlefield)) {
-                            if (c.isValid(restriction, sourceController, source, spellAbility) && card.sharesCreatureTypeWith(c)) {
-                                shares = true;
-                            }
-                        }
-                        if (!shares) {
+                        if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesCreatureTypeWith(card))) {
                             return false;
                         }
                         break;
@@ -891,14 +850,8 @@ public class CardProperty {
                         }
                         return false;
                     default:
-                        final CardCollection cards1 = AbilityUtils.getDefinedCards(card, restriction, spellAbility);
-                        if (cards1.isEmpty()) {
+                        if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesCardTypeWith(card))) {
                             return false;
-                        }
-                        for (Card c : cards1) {
-                            if (!card.sharesCardTypeWith(c)) {
-                                return false;
-                            }
                         }
                 }
             }
@@ -935,9 +888,6 @@ public class CardProperty {
                     return !CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.sharesNameWith(card)).isEmpty();
                 } else if (restriction.equals("ThisTurnCast")) {
                     return !CardLists.filter(CardUtil.getThisTurnCast("Card", source), CardPredicates.sharesNameWith(card)).isEmpty();
-                } else if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted")) {
-                    CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                    return !CardLists.filter(list, CardPredicates.sharesNameWith(card)).isEmpty();
                 } else if (restriction.equals("MovedToGrave")) {
                     for (final SpellAbility sa : source.getCurrentState().getNonManaAbilities()) {
                         final SpellAbility root = sa.getRootAbility();
@@ -969,6 +919,10 @@ public class CardProperty {
                         }
                     }
                     return false;
+                } else {
+                    if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesNameWith(card))) {
+                        return false;
+                    }
                 }
             }
         } else if (property.startsWith("doesNotShareNameWith")) {
@@ -1857,6 +1811,11 @@ public class CardProperty {
             final String key = property.substring("NotTriggered".length());
             Object obj = spellAbility.getTriggeringObject(AbilityKey.fromString(key));
             if (card.equals(obj)) {
+                return false;
+            }
+        } else if (property.startsWith("NotDefined")) {
+            final String key = property.substring("NotDefined".length());
+            if (Iterables.contains(AbilityUtils.getDefinedCards(source, key, spellAbility), card)) {
                 return false;
             }
         } else if (property.equals("CanPayManaCost")) {

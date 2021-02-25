@@ -140,6 +140,7 @@ public class CardFactory {
         c.clearControllers();
         c.setOwner(controller);
         c.setCopiedSpell(true);
+        c.setCopiedPermanent(original);
 
         c.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
         c.setKickerMagnitude(original.getKickerMagnitude());
