@@ -1,9 +1,8 @@
 Name:Bonds of Mortality
 ManaCost:1 G
 Types:Enchantment
+A:AB$ AnimateAll | Cost$ G | ValidCards$ Creature.OppCtrl | RemoveKeywords$ Hexproof & Indestructible | SpellDescription$ Creatures your opponents control lose hexproof and indestructible until end of turn. | StackDescription$ SpellDescription
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
-A:AB$ Effect | Cost$ G | StaticAbilities$ STLoseAB | SpellDescription$ Creatures your opponents control lose hexproof and indestructible until end of turn.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
-SVar:STLoseAB:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.OppCtrl | RemoveKeyword$ Hexproof & Indestructible | Description$ Creatures your opponents control lose hexproof and indestructible until end of turn.
 AI:RemoveDeck:All
 Oracle:When Bonds of Mortality enters the battlefield, draw a card.\n{G}: Creatures your opponents control lose hexproof and indestructible until end of turn.
