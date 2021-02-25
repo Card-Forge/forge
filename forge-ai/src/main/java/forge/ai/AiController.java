@@ -1565,6 +1565,13 @@ public class AiController {
             saList = ComputerUtilAbility.getSpellAbilities(cards, player);
         }
 
+        Iterables.removeIf(saList, new Predicate<SpellAbility>() {
+            @Override
+            public boolean apply(final SpellAbility spellAbility) {
+                return spellAbility instanceof LandAbility;
+            }
+        });
+
         SpellAbility chosenSa = chooseSpellAbilityToPlayFromList(saList, true);
 
         if (topOwnedByAI && !mustRespond && chosenSa != ComputerUtilAbility.getFirstCopySASpell(saList)) {
