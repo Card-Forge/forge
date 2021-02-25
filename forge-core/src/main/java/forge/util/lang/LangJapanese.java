@@ -19,4 +19,11 @@ public class LangJapanese extends Lang {
         return getPossesive(owner) + object;
     }
 
+    @Override
+    public String getNickName(final String name) {
+        String [] splitName = name.split("、");
+        if (splitName.length > 1) return splitName[1];
+        return name;
+    }
+
 }

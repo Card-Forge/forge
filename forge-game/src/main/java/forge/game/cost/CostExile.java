@@ -27,7 +27,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-import forge.util.Localizer;
 
 /**
  * The Class CostExile.
@@ -89,32 +88,32 @@ public class CostExile extends CostPartWithList {
 
         if (this.payCostFromSource()) {
             if (!this.from.equals(ZoneType.Battlefield)) {
-                return Localizer.getInstance().getMessage("lblExileTargetsFromYourZone", this.getType(), this.from.getTranslatedName());
+                return String.format("Exile %s from your %s", this.getType(), this.from.name());
             }
-            return Localizer.getInstance().getMessage("lblExileTarget", this.getType());
+            return String.format("Exile %s", this.getType());
         } else if (this.getType().equals("All")) {
-            return Localizer.getInstance().getMessage("lblExileAllCardsFromYourZone", this.from.getTranslatedName());
+            return String.format("Exile all cards from your %s", this.from.name());
         }
 
         if (this.from.equals(ZoneType.Battlefield)) {
             if (!this.payCostFromSource()) {
-                return Localizer.getInstance().getMessage("lblExileTargetsYourControl", Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
+                return String.format("Exile %s you control", Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
             }
-            return Localizer.getInstance().getMessage("lblExileTarget", Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
+            return String.format("Exile %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
         }
 
         if (!desc.equals("Card") && !desc.endsWith("card")) {
             if (this.sameZone) {
-                return Localizer.getInstance().getMessage("lblExileNCardFromSameZone", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.getTranslatedName());
+                return String.format("Exile card %s from the same %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.name());
             }
-            return Localizer.getInstance().getMessage("lblExileNCardFromYourZone", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.getTranslatedName());
+            return String.format("Exile card %s from your %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.name());
         }
 
         if (this.sameZone) {
-            return Localizer.getInstance().getMessage("lblExileNTargetFromSameZone", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.getTranslatedName());
+            return String.format("Exile %s from the same %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.name());
         }
 
-        return Localizer.getInstance().getMessage("lblExileTargetsFromYourZone", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.getTranslatedName());
+        return String.format("Exile %s from your %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.name());
     }
 
     @Override

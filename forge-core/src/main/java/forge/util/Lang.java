@@ -18,6 +18,7 @@ import com.google.common.collect.Lists;
 public abstract class Lang {
 
 	private static Lang instance;
+    private static Lang englishInstance;
 
     protected String languageCode;
     protected String countryCode;
@@ -41,11 +42,20 @@ public abstract class Lang {
         }
         instance.languageCode = language;
         instance.countryCode = country;
+
+        // Create english instance for internal usage
+        englishInstance = new LangEnglish();
+        englishInstance.languageCode = "en";
+        englishInstance.countryCode = "US";
     }
 
 	public static Lang getInstance() {
 		return instance;
 	}
+
+    public static Lang getEnglishInstance() {
+        return englishInstance;
+    }
 	
     protected Lang() {
     }
@@ -170,4 +180,6 @@ public abstract class Lang {
         }
         return Integer.toString(n);
     }
+
+    public abstract String getNickName(final String name);
 }
