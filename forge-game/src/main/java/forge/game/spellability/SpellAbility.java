@@ -1077,10 +1077,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isTrigger() {
-        return triggerObj != null;
+        return getTrigger() != null;
     }
 
     public Trigger getTrigger() {
+        if (getParent() != null) {
+            return getParent().getTrigger();
+        }
         return triggerObj;
     }
 
