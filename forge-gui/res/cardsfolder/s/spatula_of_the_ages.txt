@@ -1,0 +1,5 @@
+Name:Spatula of the Ages
+ManaCost:4
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 4 T Sac<1/CARDNAME> | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent.BorderColorSilver | ChangeNum$ 1 | SpellDescription$ You may put a silver-bordered permanent card from your hand onto the battlefield.
+Oracle:{4}, {T}, Sacrifice Spatula of the Ages: You may put a silver-bordered permanent card from your hand onto the battlefield.

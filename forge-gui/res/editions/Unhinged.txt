@@ -5,6 +5,7 @@ Name=Unhinged
 MciCode=uh
 Type=Other
 Type=Expansion
+Border=Silver
 BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 BasicLand, 1 Rare
 FoilAlwaysInCommonSlot=False

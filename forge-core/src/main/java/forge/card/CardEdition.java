@@ -84,6 +84,13 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         MODERN // 8th Edition and newer
     }
 
+    public enum BorderColor {
+        WHITE,
+        BLACK,
+        SILVER,
+        GOLD
+    }
+
     // reserved names of sections inside edition files, that are not parsed as cards
     private static final List<String> reservedSectionNames = ImmutableList.of("metadata", "tokens");
 
@@ -153,7 +160,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private Type   type;
     private String name;
     private String alias = null;
-    private boolean whiteBorder = false;
+    private BorderColor borderColor = BorderColor.BLACK;
 
     // SealedProduct
     private String prerelease = null;
@@ -303,8 +310,8 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         return this.name + " (" + this.code + ")";
     }
 
-    public boolean isWhiteBorder() {
-        return whiteBorder;
+    public BorderColor getBorderColor() {
+        return borderColor;
     }
 
     public boolean isLargeSet() {
@@ -454,7 +461,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             res.boosterTpl = boosterDesc == null ? null : new SealedProduct.Template(res.code, SealedProduct.Template.Reader.parseSlots(boosterDesc));
 
             res.alias = section.get("alias");
-            res.whiteBorder = "white".equalsIgnoreCase(section.get("border"));
+            res.borderColor = BorderColor.valueOf(section.get("border", "Black").toUpperCase());
             String type  = section.get("type");
             Type enumType = Type.UNKNOWN;
             if (null != type && !type.isEmpty()) {

@@ -5,6 +5,7 @@ Date=2020-02-29
 Name=Unsanctioned
 MciCode=und
 Type=Other
+Border=Silver
 
 [cards]
 1 C Adorable // Kitten
