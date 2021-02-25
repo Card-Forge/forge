@@ -1,7 +1,7 @@
 [metadata]
 Name=Garruk Wildspeaker
-[Avatar]
-
+[Commander]
+1 Garruk Wildspeaker|M11
 [Main]
 1 Chameleon Colossus|C15
 1 Changeling Titan|LRW
@@ -12,7 +12,6 @@ Name=Garruk Wildspeaker
 1 Duskdale Wurm|M13
 1 Epic Proportions|LRW
 15 Forest|LRW|4
-1 Garruk Wildspeaker|M11
 1 Howl of the Night Pack|M14
 1 Incremental Growth|KTK
 1 Mana Reflection|SHM
@@ -31,10 +30,3 @@ Name=Garruk Wildspeaker
 1 Witherscale Wurm|SHM
 1 Woodland Guidance|LRW
 [Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-

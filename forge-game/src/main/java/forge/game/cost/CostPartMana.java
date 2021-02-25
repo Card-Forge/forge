@@ -18,7 +18,6 @@
 package forge.game.cost;
 
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostShard;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -77,7 +76,7 @@ public class CostPartMana extends CostPart {
     }
 
     public final int getAmountOfX() {
-        return this.cost.getShardCount(ManaCostShard.X);
+        return this.cost.countX();
     }
 
     /**

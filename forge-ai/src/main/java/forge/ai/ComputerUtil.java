@@ -29,7 +29,6 @@ import forge.ai.ability.TokenAi;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -2880,7 +2879,7 @@ public class ComputerUtil {
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         Card targetSpellCard = null;
         for (Card c : options) {
-            if (withoutPayingManaCost && c.getManaCost() != null && c.getManaCost().getShardCount(ManaCostShard.X) > 0) {
+            if (withoutPayingManaCost && c.getManaCost() != null && c.getManaCost().countX() > 0) {
                 // The AI will otherwise cheat with the mana payment, announcing X > 0 for spells like Heat Ray when replaying them
                 // without paying their mana cost.
                 continue;

@@ -1,5 +1,7 @@
 [metadata]
 Name=Saheeli Rai
+[Commander]
+1 Saheeli Rai|KLD
 [Main]
 1 Aether Hub|KLD
 1 Aetherworks Marvel|KLD
@@ -24,7 +26,6 @@ Name=Saheeli Rai
 1 Panharmonicon|KLD
 1 Quicksmith Rebel|AER
 1 Reclusive Artificer|ORI
-1 Saheeli Rai|KLD
 1 Saheeli's Artistry|KLD
 1 Scrap Trawler|AER
 1 Shrewd Negotiation|KLD

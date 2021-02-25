@@ -2081,7 +2081,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             sbLong.append("\r\n");
         }
         sb.append(sbLong);
-        return sb.toString();
+        return CardTranslation.translateMultipleDescriptionText(sb.toString(), getName());
     }
 
     private static String getTextForKwCantBeBlockedByAmount(final String keyword) {
@@ -2119,7 +2119,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             while (result.endsWith("\r\n")) {
                 result = result.substring(0, result.length() - 2);
             }
-            return TextUtil.fastReplace(result, "CARDNAME", state.getName());
+            return TextUtil.fastReplace(result, "CARDNAME", CardTranslation.getTranslatedName(state.getName()));
         }
 
         if (monstrous) {
@@ -2140,7 +2140,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         for (final ReplacementEffect replacementEffect : state.getReplacementEffects()) {
             if (!replacementEffect.isSecondary()) {
                 String text = replacementEffect.getDescription();
-                if (text.contains("enters the battlefield")) {
+                // Get original description since text might be translated
+                if (replacementEffect.hasParam("Description") &&
+                        replacementEffect.getParam("Description").contains("enters the battlefield")) {
                     sb.append(text).append("\r\n");
                 } else {
                     replacementEffects.append(text).append("\r\n");
@@ -2226,8 +2228,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
             // add Adventure to AbilityText
             if (sa.isAdventure() && state.getView().getState().equals(CardStateName.Original)) {
+                CardState advState = getState(CardStateName.Adventure);
                 StringBuilder sbSA = new StringBuilder();
-                sbSA.append("Adventure — ").append(getState(CardStateName.Adventure).getName());
+                sbSA.append(Localizer.getInstance().getMessage("lblAdventure"));
+                sbSA.append(" — ").append(CardTranslation.getTranslatedName(advState.getName()));
                 sbSA.append(" ").append(sa.getPayCosts().toSimpleString());
                 sbSA.append(": ");
                 sbSA.append(sAbility);
@@ -2299,7 +2303,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             start = sb.lastIndexOf(s);
         }
 
-        String desc = TextUtil.fastReplace(sb.toString(), "CARDNAME", state.getName());
+        String desc = TextUtil.fastReplace(sb.toString(), "CARDNAME", CardTranslation.getTranslatedName(state.getName()));
         if (getEffectSource() != null) {
             desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getEffectSource().getName());
         }
@@ -2485,7 +2489,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         }
 
-        sb.append(sbBefore);
+        sb.append(CardTranslation.translateMultipleDescriptionText(sbBefore.toString(), state.getName()));
 
         // add Spells there to main StringBuilder
         sb.append(strSpell);
@@ -2514,13 +2518,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         }
 
-        sb.append(sbAfter);
+        sb.append(CardTranslation.translateMultipleDescriptionText(sbAfter.toString(), state.getName()));
         return sb;
     }
 
     private String formatSpellAbility(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        sb.append(sa.toString()).append("\r\n");
+        sb.append(sa.toString()).append("\r\n\r\n");
         return sb.toString();
     }
 

@@ -1,5 +1,7 @@
 [metadata]
 Name=Sarkhan Unbroken
+[Commander]
+1 Sarkhan Unbroken|DTK
 [Main]
 1 Atarka Monument|DTK
 1 Atarka, World Render|FRF
@@ -25,7 +27,6 @@ Name=Sarkhan Unbroken
 1 Lightning Shrieker|FRF
 8 Mountain|DTK|2
 1 Outpost Siege|FRF
-1 Sarkhan Unbroken|DTK
 1 Sarkhan's Rage|DTK
 1 Sarkhan's Triumph|DTK
 1 Savage Ventmaw|DTK

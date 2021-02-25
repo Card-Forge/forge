@@ -19,4 +19,9 @@ public class LangChinese extends Lang {
         return getPossesive(owner) + object;
     }
 
+    @Override
+    public String getNickName(final String name) {
+        return name;
+    }
+
 }

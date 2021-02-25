@@ -162,6 +162,15 @@ public final class CardPredicates {
         };
     }
 
+    public static Predicate<Card> sharesCardTypeWith(final Card card) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.sharesCardTypeWith(card);
+            }
+        };
+    }
+
     public static Predicate<Card> sharesCreatureTypeWith(final Card card) {
         return new Predicate<Card>() {
             @Override

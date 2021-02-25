@@ -39,6 +39,8 @@ import java.util.*;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+import forge.util.CardTranslation;
+import forge.util.Lang;
 import forge.util.TextUtil;
 
 /**
@@ -124,9 +126,13 @@ public abstract class Trigger extends TriggerReplacementBase {
         if (hasParam("TriggerDescription") && !this.isSuppressed()) {
 
             StringBuilder sb = new StringBuilder();
-            String currentName = (getHostCard().getName());
-            String desc1 = TextUtil.fastReplace(getParam("TriggerDescription"),"CARDNAME", currentName);
-            String desc = TextUtil.fastReplace(desc1,"NICKNAME", currentName.split(",")[0]);
+            String currentName = getHostCard().getName();
+            String desc = getParam("TriggerDescription");
+            if (!desc.contains("ABILITY")) {
+                desc = CardTranslation.translateSingleDescriptionText(getParam("TriggerDescription"), currentName);
+                desc = TextUtil.fastReplace(desc,"CARDNAME", CardTranslation.getTranslatedName(currentName));
+                desc = TextUtil.fastReplace(desc,"NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
+            }
             if (getHostCard().getEffectSource() != null) {
                 if(active)
                     desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().toString());
@@ -198,6 +204,11 @@ public abstract class Trigger extends TriggerReplacementBase {
                 saDesc = "<take no action>"; // printed in case nothing is chosen for the ability (e.g. Charm with Up to X)
             }
             result = TextUtil.fastReplace(result, "ABILITY", saDesc);
+
+            String currentName = sa.getHostCard().getName();
+            result = CardTranslation.translateMultipleDescriptionText(result, currentName);
+            result = TextUtil.fastReplace(result,"CARDNAME", CardTranslation.getTranslatedName(currentName));
+            result = TextUtil.fastReplace(result,"NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
         }
 
         return result;

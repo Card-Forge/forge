@@ -1,5 +1,7 @@
 [metadata]
 Name=Nissa, Vital Force
+[Commander]
+1 Nissa, Vital Force|KLD
 [Main]
 1 Aetherstream Leopard|AER
 1 Aetherwind Basker|AER
@@ -21,7 +23,6 @@ Name=Nissa, Vital Force
 1 Monstrous Onslaught|AER
 1 Narnam Renegade|AER
 1 Natural Obsolescence|AER
-1 Nissa, Vital Force|KLD
 1 Riparian Tiger|KLD
 1 Rishkar's Expertise|AER
 1 Rishkar, Peema Renegade|AER

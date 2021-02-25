@@ -1,0 +1,9 @@
+Name:Stoked Flames|Deck:Stoked Flames.dck|Variant:Commander|Avatar:Torbran, Thane of Red Fell|Desc:
+Name:Red Dwarf Wins|Deck:Red Dwarf Wins.dck|Variant:None|Avatar:Seven Dwarves|Desc:
+Name:Grumgully, the Generous|Deck:Grumgully, the Generous.dck|Variant:Commander|Avatar:Grumgully, the Generous|Desc:
+Name:Syr Carah, the Bold|Deck:Syr Carah, the Bold.dck|Variant:Commander|Avatar:Syr Carah, the Bold|Desc:
+Name:Syr Gwyn, Hero of Ashvale|Deck:Syr Gwyn, Hero of Ashvale.dck|Variant:Commander|Avatar:Syr Gwyn, Hero of Ashvale|Desc:
+Name:Korvold, Fae-Cursed King|Deck:Korvold, Fae-Cursed King.dck|Variant:Commander|Avatar:Korvold, Fae-Cursed King|Desc:
+Name:Rowan, Fearless Sparkmage|Deck:Rowan, Fearless Sparkmage.dck|Variant:Planeswalker|Avatar:Rowan, Fearless Sparkmage|Desc:
+Name:The Royal Scions|Deck:The Royal Scions.dck|Variant:Planeswalker|Avatar:The Royal Scions|Desc:
+Name:Random Embereth|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

@@ -1,5 +1,7 @@
 [metadata]
 Name=Liliana Vess
+[Commander]
+1 Liliana Vess|M15
 [Main]
 1 Beseech the Queen|SHM
 1 Bitterblossom|MOR
@@ -11,7 +13,6 @@ Name=Liliana Vess
 1 Gilt-Leaf Winnower|ORI
 1 Gloomlance|SHM
 1 Incremental Blight|SHM
-1 Liliana Vess|M15
 1 Makeshift Mannequin|LRW
 1 Midnight Banshee|SHM
 1 Mind Shatter|M10

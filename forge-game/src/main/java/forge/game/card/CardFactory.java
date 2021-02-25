@@ -38,6 +38,7 @@ import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.WrappedAbility;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.util.CardTranslation;
 import forge.util.TextUtil;
 
 import java.util.Arrays;
@@ -139,6 +140,7 @@ public class CardFactory {
         c.clearControllers();
         c.setOwner(controller);
         c.setCopiedSpell(true);
+        c.setCopiedPermanent(original);
 
         c.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
         c.setKickerMagnitude(original.getKickerMagnitude());
@@ -354,6 +356,10 @@ public class CardFactory {
     }
 
     private static void readCardFace(Card c, ICardFace face) {
+        // Build English oracle and translated oracle mapping
+        if (c.getId() >= 0) {
+            CardTranslation.buildOracleMapping(face.getName(), face.getOracleText());
+        }
 
         // Name first so Senty has the Card name
         c.setName(face.getName());

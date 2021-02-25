@@ -1,5 +1,7 @@
 [metadata]
 Name=Ugin, the Spirit Dragon
+[Commander]
+1 Ugin, the Spirit Dragon|FRF
 [Main]
 1 Arashin War Beast|FRF
 1 Bloodfell Caves|FRF
@@ -37,7 +39,6 @@ Name=Ugin, the Spirit Dragon
 1 Tranquil Cove|FRF
 1 Ugin's Construct|FRF
 1 Ugin's Nexus|KTK
-1 Ugin, the Spirit Dragon|FRF
 1 Whisperwood Elemental|FRF
 1 Wildcall|FRF
 1 Wind-Scarred Crag|FRF

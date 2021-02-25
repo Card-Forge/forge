@@ -39,7 +39,9 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.CardTranslation;
 import forge.util.Expressions;
+import forge.util.Lang;
 import forge.util.TextUtil;
 
 import java.util.EnumSet;
@@ -214,9 +216,10 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     @Override
     public final String toString() {
         if (hasParam("Description") && !this.isSuppressed()) {
-            String desc = getParam("Description");
-            desc = TextUtil.fastReplace(desc, "CARDNAME", this.hostCard.getName());
-            desc = TextUtil.fastReplace(desc, "NICKNAME", this.hostCard.getName().split(",")[0]);
+            String currentName = this.hostCard.getName();
+            String desc = CardTranslation.translateSingleDescriptionText(getParam("Description"), currentName);
+            desc = TextUtil.fastReplace(desc, "CARDNAME", CardTranslation.getTranslatedName(currentName));
+            desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
 
             return desc;
         } else {

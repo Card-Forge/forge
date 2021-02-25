@@ -54,7 +54,9 @@ import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.CardTranslation;
 import forge.util.Expressions;
+import forge.util.Lang;
 import forge.util.TextUtil;
 
 import org.apache.commons.lang3.StringUtils;
@@ -671,14 +673,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return saRoot.optionalCosts.contains(cost);
     }
 
-    public SpellAbility getTriggeringAbility() {
-        SpellAbility sa = this;
-        while (sa.getParent() != null && !sa.isTrigger()) {
-            sa = sa.getParent();
-        }
-        return sa;
-    }
-
     public Map<AbilityKey, Object> getTriggeringObjects() {
         return triggeringObjects;
     }
@@ -822,8 +816,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
             String desc = node.getDescription();
             if (node.getHostCard() != null) {
-                desc = TextUtil.fastReplace(desc, "CARDNAME", node.getHostCard().getName());
-                desc = TextUtil.fastReplace(desc,"NICKNAME",node.getHostCard().getName().split(",")[0]);
+                String currentName = node.getHostCard().getName();
+                desc = CardTranslation.translateMultipleDescriptionText(desc, currentName);
+                desc = TextUtil.fastReplace(desc, "CARDNAME", CardTranslation.getTranslatedName(currentName));
+                desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
                 if (node.getOriginalHost() != null) {
                     desc = TextUtil.fastReplace(desc, "ORIGINALHOST", node.getOriginalHost().getName());
                 }
@@ -1077,10 +1073,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isTrigger() {
-        return triggerObj != null;
+        return getTrigger() != null;
     }
 
     public Trigger getTrigger() {
+        if (getParent() != null) {
+            return getParent().getTrigger();
+        }
         return triggerObj;
     }
 
@@ -1645,13 +1644,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         final List<TargetChoices> res = Lists.newArrayList();
 
         SpellAbility sa = getRootAbility();
-        if (sa.getTargetRestrictions() != null) {
+        if (sa.usesTargeting()) {
             res.add(sa.getTargets());
         }
         while (sa.getSubAbility() != null) {
             sa = sa.getSubAbility();
 
-            if (sa.getTargetRestrictions() != null) {
+            if (sa.usesTargeting()) {
                 res.add(sa.getTargets());
             }
         }

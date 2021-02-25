@@ -1,5 +1,7 @@
 [metadata]
 Name=Ob Nixilis Reignited
+[Commander]
+1 Ob Nixilis Reignited|BFZ
 [Main]
 1 Abyssal Persecutor|C14
 1 Baneful Omen|ROE
@@ -22,7 +24,6 @@ Name=Ob Nixilis Reignited
 1 Mirrorpool|OGW
 1 Nirkana Revenant|ROE
 1 Null Caller|OGW
-1 Ob Nixilis Reignited|BFZ
 1 Pawn of Ulamog|ROE
 1 Pestilence Demon|C14
 1 Sifter of Skulls|OGW

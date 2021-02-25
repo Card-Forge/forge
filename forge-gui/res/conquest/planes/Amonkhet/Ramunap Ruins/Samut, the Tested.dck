@@ -1,5 +1,7 @@
 [metadata]
 Name=Samut, the Tested
+[Commander]
+1 Samut, the Tested|HOU
 [Main]
 1 Bloodrage Brawler|AKH
 1 Champion of Rhonas|AKH
@@ -24,7 +26,6 @@ Name=Samut, the Tested
 1 Overcome|HOU
 1 Prowling Serpopard|AKH
 1 Quarry Beetle|HOU
-1 Samut, the Tested|HOU
 1 Scaled Behemoth|AKH
 1 Shefet Monitor|AKH
 1 Sheltered Thicket|AKH

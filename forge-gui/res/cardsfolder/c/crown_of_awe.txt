@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection from black & Protection from red | Description$ Enchanted creature has protection from black and from red.
-A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.sharesCreatureTypeWith Enchanted | KW$ Protection from black & Protection from red | SpellDescription$ Enchanted creature and other creatures that share a creature type with it gain protection from black and from red until end of turn.
+A:AB$ Pump | Cost$ Sac<1/CARDNAME> | Defined$ AttachedBy Sacrificed | KW$ Protection from black & Protection from red | SubAbility$ DBPumpAll | SpellDescription$ Enchanted creature and other creatures that share a creature type with it gain protection from black and from red until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.NotDefinedAttachedBy Sacrificed+sharesCreatureTypeWith AttachedBy Sacrificed | KW$ Protection from black & Protection from red
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crown_of_awe.jpg
 Oracle:Enchant creature\nEnchanted creature has protection from black and from red.\nSacrifice Crown of Awe: Enchanted creature and other creatures that share a creature type with it gain protection from black and from red until end of turn.

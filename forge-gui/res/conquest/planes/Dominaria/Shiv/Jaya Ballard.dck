@@ -1,5 +1,7 @@
 [metadata]
 Name=Jaya Ballard
+[Commander]
+1 Jaya Ballard|DOM
 [Main]
 1 Banefire|M19
 1 Blasphemous Act|C18
@@ -12,7 +14,6 @@ Name=Jaya Ballard
 1 Ghitu Journeymage|DOM
 1 Ghitu Lavarunner|DOM
 1 Guttersnipe|M19
-1 Jaya Ballard|DOM
 1 Jaya's Immolating Inferno|DOM
 1 Karplusan Hound|DOM
 1 Lava Axe|M19
