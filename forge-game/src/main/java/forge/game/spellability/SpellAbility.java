@@ -1648,13 +1648,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         final List<TargetChoices> res = Lists.newArrayList();
 
         SpellAbility sa = getRootAbility();
-        if (sa.getTargetRestrictions() != null) {
+        if (sa.usesTargeting()) {
             res.add(sa.getTargets());
         }
         while (sa.getSubAbility() != null) {
             sa = sa.getSubAbility();
 
-            if (sa.getTargetRestrictions() != null) {
+            if (sa.usesTargeting()) {
                 res.add(sa.getTargets());
             }
         }
