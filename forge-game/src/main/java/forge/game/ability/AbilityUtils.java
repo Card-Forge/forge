@@ -240,9 +240,9 @@ public class AbilityUtils {
                 }
             }
         } else if (defined.equals("DelayTriggerRememberedLKI")) {
-            SpellAbility trigSa = sa.getTriggeringAbility();
-            if (trigSa != null) {
-                for (Object o : trigSa.getTriggerRemembered()) {
+            SpellAbility root = sa.getRootAbility();
+            if (root != null) {
+                for (Object o : root.getTriggerRemembered()) {
                     if (o instanceof Card) {
                         cards.add((Card)o);
                     }
@@ -251,9 +251,9 @@ public class AbilityUtils {
                 System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
             }
         } else if (defined.equals("DelayTriggerRemembered")) {
-            SpellAbility trigSa = sa.getTriggeringAbility();
-            if (trigSa != null) {
-                for (Object o : trigSa.getTriggerRemembered()) {
+            SpellAbility root = sa.getRootAbility();
+            if (root != null) {
+                for (Object o : root.getTriggerRemembered()) {
                     if (o instanceof Card) {
                         cards.addAll(addRememberedFromCardState(game, (Card)o));
                     }
@@ -1021,9 +1021,9 @@ public class AbilityUtils {
             addPlayer(card.getRemembered(), defined, players);
         }
         else if (defined.startsWith("DelayTriggerRemembered")) {
-            SpellAbility trigSa = sa.getTriggeringAbility();
-            if (trigSa != null) {
-                addPlayer(trigSa.getTriggerRemembered(), defined, players);
+            SpellAbility root = sa.getRootAbility();
+            if (root != null) {
+                addPlayer(root.getTriggerRemembered(), defined, players);
             } else {
                 System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
             }
@@ -1696,9 +1696,9 @@ public class AbilityUtils {
                     return sum;
                 }
                 if (sq[0].startsWith("TriggerRememberAmount")) {
-                    SpellAbility trigSa = sa.getTriggeringAbility();
+                    SpellAbility root = sa.getRootAbility();
                     int count = 0;
-                    for (final Object o : trigSa.getTriggerRemembered()) {
+                    for (final Object o : root.getTriggerRemembered()) {
                         if (o instanceof Integer) {
                             count += (Integer) o;
                         }
