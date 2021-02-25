@@ -1,5 +1,7 @@
 [metadata]
 Name=Teferi, Hero of Dominaria
+[Commander]
+1 Teferi, Hero of Dominaria|DOM
 [Main]
 1 Blink of an Eye|DOM
 1 Disperse|M19
@@ -26,7 +28,6 @@ Name=Teferi, Hero of Dominaria
 1 Soul Snare|C18
 1 Syncopate|DOM
 1 Take Vengeance|M19
-1 Teferi, Hero of Dominaria|DOM
 1 Teferi, Timebender|DOM
 1 Time of Ice|DOM
 1 Tranquil Cove|C18

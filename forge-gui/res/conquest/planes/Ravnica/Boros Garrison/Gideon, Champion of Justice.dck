@@ -1,5 +1,7 @@
 [metadata]
 Name=Gideon, Champion of Justice
+[Commander]
+1 Gideon, Champion of Justice|GTC
 [Main]
 1 Angel of Serenity|C15
 1 Angelic Skirmisher|GTC
@@ -9,7 +11,6 @@ Name=Gideon, Champion of Justice
 1 Concerted Effort|RAV
 1 Condemn|C14
 1 Fencing Ace|RTR
-1 Gideon, Champion of Justice|GTC
 1 Guardian of the Guildpact|DIS
 1 Holy Mantle|GTC
 1 Knight Watch|GTC

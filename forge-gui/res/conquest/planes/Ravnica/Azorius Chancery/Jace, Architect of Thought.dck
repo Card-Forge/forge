@@ -1,5 +1,7 @@
 [metadata]
 Name=Jace Architect of Thought
+[Commander]
+1 Jace, Architect of Thought|RTR
 [Main]
 1 AEtherize|C15
 1 AEtherling|DGM
@@ -18,7 +20,6 @@ Name=Jace Architect of Thought
 1 Island|RAV|2
 7 Island|RAV|3
 4 Island|RAV|4
-1 Jace, Architect of Thought|RTR
 1 Leyline of Anticipation|M11
 1 Mindeye Drake|GTC
 1 Mnemonic Nexus|RAV

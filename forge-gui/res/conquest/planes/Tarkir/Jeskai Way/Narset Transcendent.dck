@@ -1,5 +1,7 @@
 [metadata]
 Name=Narset Transcendent
+[Commander]
+1 Narset Transcendent|DTK
 [Main]
 1 Artful Maneuver|DTK
 1 Blessed Reincarnation|DTK
@@ -12,7 +14,6 @@ Name=Narset Transcendent
 2 Island|DTK|3
 1 Kill Shot|KTK
 1 Learn from the Past|DTK
-1 Narset Transcendent|DTK
 1 Ojutai Monument|DTK
 1 Ojutai's Breath|DTK
 1 Ojutai's Command|DTK

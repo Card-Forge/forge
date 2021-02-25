@@ -1,5 +1,7 @@
 [metadata]
 Name=Nicol Bolas
+[Commander]
+1 Nicol Bolas, Planeswalker|CFX
 [Main]
 1 Agony Warp|ALA
 1 Armillary Sphere|CFX
@@ -18,7 +20,6 @@ Name=Nicol Bolas
 1 Lich Lord of Unx|ARB
 1 Lightning Reaver|ARB
 4 Mountain|ALA|1
-1 Nicol Bolas, Planeswalker|CFX
 1 Obelisk of Grixis|ALA
 1 Rakka Mar|CFX
 1 Rupture Spire|CFX

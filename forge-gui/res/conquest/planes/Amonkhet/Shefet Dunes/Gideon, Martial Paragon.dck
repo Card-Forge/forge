@@ -1,5 +1,7 @@
 [metadata]
 Name=Gideon, Martial Paragon
+[Commander]
+1 Gideon, Martial Paragon|AKH
 [Main]
 1 Act of Heroism|HOU
 1 Angel of Condemnation|HOU
@@ -13,7 +15,6 @@ Name=Gideon, Martial Paragon
 1 Forsake the Worldly|AKH
 1 Gideon's Intervention|AKH
 1 Gideon's Resolve|AKH
-1 Gideon, Martial Paragon|AKH
 1 Glory-Bound Initiate|AKH
 1 Gust Walker|AKH
 1 Impeccable Timing|KLD

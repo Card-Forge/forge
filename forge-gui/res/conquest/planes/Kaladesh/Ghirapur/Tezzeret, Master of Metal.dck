@@ -1,5 +1,7 @@
 [metadata]
-Name=Tezzert, Master of Metal
+Name=Tezzeret, Master of Metal
+[Commander]
+1 Tezzeret, Master of Metal|AER
 [Main]
 1 Battle at the Bridge|AER
 1 Confiscation Coup|KLD
@@ -29,7 +31,6 @@ Name=Tezzert, Master of Metal
 1 Tezzeret's Betrayal|AER
 1 Tezzeret's Simulacrum|AER
 1 Tezzeret's Touch|AER
-1 Tezzeret, Master of Metal|AER
 1 Thopter Spy Network|ORI
 1 Torrential Gearhulk|MPS_KLD
 1 Walking Ballista|AER
