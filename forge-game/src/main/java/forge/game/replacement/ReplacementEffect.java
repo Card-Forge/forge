@@ -25,6 +25,8 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.spellability.SpellAbility;
+import forge.util.CardTranslation;
+import forge.util.Lang;
 import forge.util.TextUtil;
 
 import java.util.List;
@@ -214,14 +216,12 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     public String getDescription() {
         if (hasParam("Description") && !this.isSuppressed()) {
             String desc = AbilityUtils.applyDescriptionTextChangeEffects(getParam("Description"), this);
-            if (desc.contains("CARDNAME")) {
-                desc = TextUtil.fastReplace(desc, "CARDNAME", getHostCard().toString());
-            }
+            String currentName = getHostCard().getName();
+            desc = CardTranslation.translateSingleDescriptionText(desc, currentName);
+            desc = TextUtil.fastReplace(desc, "CARDNAME", CardTranslation.getTranslatedName(currentName));
+            desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
             if (desc.contains("EFFECTSOURCE")) {
                 desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().toString());
-            }
-            if (desc.contains("NICKNAME")) {
-                desc = TextUtil.fastReplace(desc, "NICKNAME", getHostCard().toString().split(",")[0]);
             }
             return desc;
         } else {

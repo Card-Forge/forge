@@ -87,7 +87,7 @@ public abstract class SpellAbilityEffect {
             // by typing "SpellDescription" they want to bypass the Effect's string builder
             if ("SpellDescription".equalsIgnoreCase(stackDesc)) {
             	if (params.get("SpellDescription") != null) {
-            		sb.append(params.get("SpellDescription"));
+            		sb.append(CardTranslation.translateSingleDescriptionText(params.get("SpellDescription"), sa.getHostCard().getName()));
             	}
             	if (sa.getTargets() != null && !sa.getTargets().isEmpty()) {
             		sb.append(" (Targeting: ").append(sa.getTargets()).append(")");
@@ -98,7 +98,7 @@ public abstract class SpellAbilityEffect {
         } else {
             final String conditionDesc = sa.getParam("ConditionDescription");
             final String afterDesc = sa.getParam("AfterDescription");
-            final String baseDesc = this.getStackDescription(sa);
+            final String baseDesc = CardTranslation.translateSingleDescriptionText(this.getStackDescription(sa), sa.getHostCard().getName());
             if (conditionDesc != null) {
                 sb.append(conditionDesc).append(" ");
             }
@@ -131,8 +131,8 @@ public abstract class SpellAbilityEffect {
         }
 
         String currentName = (sa.getHostCard().getName());
-        String substitutedDesc = TextUtil.fastReplace(sb.toString(), "CARDNAME", currentName);
-        substitutedDesc = TextUtil.fastReplace(substitutedDesc, "NICKNAME", currentName.split(",")[0]);
+        String substitutedDesc = TextUtil.fastReplace(sb.toString(), "CARDNAME", CardTranslation.getTranslatedName(currentName));
+        substitutedDesc = TextUtil.fastReplace(substitutedDesc, "NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
         return substitutedDesc;
     }
 
