@@ -29,7 +29,6 @@ import forge.ai.ability.TokenAi;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
