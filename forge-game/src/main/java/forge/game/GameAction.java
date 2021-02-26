@@ -419,6 +419,7 @@ public class GameAction {
                 Card with = c.getExiledWith();
                 if (with != null) {
                     with.removeUntilLeavesBattlefield(c);
+                    with.removeExiledWith(c);
                 }
 
                 c.setExiledWith(null);

@@ -783,6 +783,10 @@ public class Game {
                         cc.removeEncodedCard(c);
                         cc.removeRemembered(c);
                     }
+                    Card exile = c.getExiledWith();
+                    if (exile != null) {
+                        exile.removeExiledWith(c);
+                    }
                     c.ceaseToExist();
                 } else {
                     // return stolen permanents
