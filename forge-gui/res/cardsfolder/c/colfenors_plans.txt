@@ -1,9 +1,9 @@
 Name:Colfenor's Plans
 ManaCost:2 B B
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile the top seven cards of your library face down. You may look at and play cards exiled with CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile the top seven cards of your library face down. You may look at the cards exiled with CARDNAME, and you may play lands and cast spells from among those cards.
 SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 7 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | ExileFaceDown$ True | NoReveal$ True
-S:Mode$ Continuous | Affected$ Card.IsRemembered+ExiledWithSource | AffectedZone$ Exile | MayPlay$ True | MayLookAt$ You | Description$ You may look at and play cards exiled with CARDNAME.
+S:Mode$ Continuous | Affected$ Card.IsRemembered+ExiledWithSource | AffectedZone$ Exile | MayPlay$ True | MayLookAt$ You | Description$ You may look at the cards exiled with CARDNAME, and you may play lands and cast spells from among those cards.
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Skip your draw step. | Description$ Skip your draw step.
 S:Mode$ CantBeCast | ValidCard$ Card | Caster$ You | NumLimitEachTurn$ 1 | Description$ You can't cast more than one spell each turn.
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
@@ -12,4 +12,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | Va
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/colfenors_plans.jpg
-Oracle:When Colfenor's Plans enters the battlefield, exile the top seven cards of your library face down.\nYou may look at and play cards exiled with Colfenor's Plans.\nSkip your draw step.\nYou can't cast more than one spell each turn.
+Oracle:When Colfenor's Plans enters the battlefield, exile the top seven cards of your library face down.\nYou may look at the cards exiled with Colfenor's Plans, and you may play lands and cast spells from among those cards.\nSkip your draw step.\nYou can't cast more than one spell each turn.

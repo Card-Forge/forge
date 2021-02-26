@@ -10,4 +10,4 @@ SVar:DBExile:DB$ Dig | Defined$ TriggeredTarget | DigNum$ 4 | ChangeNum$ All | D
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$DifferentCardNames_Card.IsRemembered
 SVar:Y:Count$RememberedSize
-Oracle:Flying\nWhenever Scalpelexis deals combat damage to a player, that player exiles the top four cards of their library. If two or more of those cards have the same name, repeat this process.
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever Scalpelexis deals combat damage to a player, that player exiles the top four cards of their library. If two or more of those cards have the same name, repeat this process.

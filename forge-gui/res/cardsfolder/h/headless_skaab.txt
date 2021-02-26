@@ -5,4 +5,4 @@ PT:3/6
 K:CARDNAME enters the battlefield tapped.
 A:SP$ PermanentCreature | Cost$ 2 U ExileFromGrave<1/Creature>
 SVar:Picture:http://www.wizards.com/global/images/magic/general/headless_skaab.jpg
-Oracle:As an additional cost to cast Headless Skaab, exile a creature card from your graveyard.\nHeadless Skaab enters the battlefield tapped.
+Oracle:As an additional cost to cast this spell, exile a creature card from your graveyard.\nHeadless Skaab enters the battlefield tapped.

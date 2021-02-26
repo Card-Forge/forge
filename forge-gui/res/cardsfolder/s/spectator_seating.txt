@@ -6,4 +6,4 @@ SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBChe
 SVar:ETBCheckSVar2:PlayerCountOpponents$Amount
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-Oracle:Rejuvenating Springs enters the battlefield tapped unless you have two or more opponents.\n{T}: Add {R} or {W}.
+Oracle:Spectator Seating enters the battlefield tapped unless you have two or more opponents.\n{T}: Add {R} or {W}.

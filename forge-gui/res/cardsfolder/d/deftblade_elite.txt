@@ -5,4 +5,4 @@ PT:1/1
 K:Provoke
 A:AB$ Pump | Cost$ 1 W | Defined$ Self | KW$ Prevent all combat damage that would be dealt to and dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt to and dealt by CARDNAME this turn.
 AI:RemoveDeck:All
-Oracle:Provoke (When this attacks, you may have target creature defending player controls untap and block it if able.)\n{1}{W}: Prevent all combat damage that would be dealt to and dealt by Deftblade Elite this turn.
+Oracle:Provoke (Whenever this creature attacks, you may have target creature defending player controls untap and block it if able.)\n{1}{W}: Prevent all combat damage that would be dealt to and dealt by Deftblade Elite this turn.

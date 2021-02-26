@@ -5,4 +5,4 @@ PT:2/2
 K:First Strike
 K:Provoke
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lowland_tracker.jpg
-Oracle:First strike\nProvoke (When this attacks, you may have target creature defending player controls untap and block it if able.)
+Oracle:First strike\nProvoke (Whenever this creature attacks, you may have target creature defending player controls untap and block it if able.)

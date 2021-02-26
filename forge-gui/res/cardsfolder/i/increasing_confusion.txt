@@ -6,4 +6,4 @@ A:SP$ Mill | Cost$ X U | NumCards$ Z | ValidTgts$ Player | TgtPrompt$ Choose a p
 SVar:Z:SVar$X/Times.Y
 SVar:X:Count$xPaid
 SVar:Y:wasCastFromGraveyard.2.1
-Oracle:Target player mills X cards. If this spell was cast from a graveyard, that player puts twice that many cards into their graveyard instead.\nFlashback {X}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+Oracle:Target player mills X cards. If this spell was cast from a graveyard, that player mills twice that many cards instead.\nFlashback {X}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

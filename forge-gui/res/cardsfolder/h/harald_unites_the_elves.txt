@@ -10,4 +10,4 @@ SVar:TrigAttack:Mode$ Attacks | ValidCard$ Creature.Elf+YouCtrl | Execute$ TrigP
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 DeckHints:Type$Elf|Tyvar
 DeckHas:Ability$Counters
-Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI - Mill three cards. You may put an Elf card or Tyvar card from your graveyard onto the battlefield.\nII - Put a +1/+1 counter on each Elf you control.\nIII - Whenever an Elf you control attacks this turn, target creature an opponent controls gets -1/-1 until end of turn.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Mill three cards. You may put an Elf or Tyvar card from your graveyard onto the battlefield.\nII — Put a +1/+1 counter on each Elf you control.\nIII — Whenever an Elf you control attacks this turn, target creature an opponent controls gets -1/-1 until end of turn.

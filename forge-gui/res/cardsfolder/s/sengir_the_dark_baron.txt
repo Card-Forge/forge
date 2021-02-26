@@ -10,4 +10,4 @@ T:Mode$ LosesGame | ValidPlayer$ Player.Other | TriggerZones$ Battlefield | Exec
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggeredPlayer$LifeStartedThisTurnWith
 DeckHas:Ability$Counters & Ability$LifeGain
-Oracle:Whenever another creature dies, put two +1/+1 counters on Sengir, the Dark Baron.\nWhenever another player loses the game, you gain life equal to that player's life total as the turn began.\nPartner (You can have two commanders if both have partner.)
+Oracle:Flying\nWhenever another creature dies, put two +1/+1 counters on Sengir, the Dark Baron.\nWhenever another player loses the game, you gain life equal to that player's life total as the turn began.\nPartner (You can have two commanders if both have partner.)

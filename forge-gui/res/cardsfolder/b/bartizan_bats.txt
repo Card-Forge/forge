@@ -3,4 +3,4 @@ ManaCost:3 B
 Types:Creature Bat
 PT:3/1
 K:Flying
-Oracle:Flying
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)

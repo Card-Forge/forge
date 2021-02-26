@@ -5,7 +5,7 @@ A:SP$ DealDamage | Cost$ 2 R Sac<1/Creature> | NumDmg$ X | References$ X | Valid
 SVar:X:Sacrificed$CardPower
 DeckHas:Ability$Sacrifice
 AlternateMode:Modal
-Oracle:As an additional cost to cast this spell, sacrifice a creature. Kazuul's Fury deals damage equal to the sacrificed creature's power to any target.
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nKazuul's Fury deals damage equal to the sacrificed creature's power to any target.
 
 ALTERNATE
 

@@ -6,4 +6,4 @@ K:First Strike
 K:Forestwalk
 K:Vigilance
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirri_cat_warrior.jpg
-Oracle:First strike, vigilance\nForestwalk (This creature can't be blocked as long as defending player controls a Forest)
+Oracle:First strike, forestwalk, vigilance (This creature deals combat damage before creatures without first strike, it can't be blocked as long as defending player controls a Forest, and attacking doesn't cause this creature to tap.)

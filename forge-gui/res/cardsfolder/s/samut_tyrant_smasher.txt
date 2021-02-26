@@ -7,4 +7,4 @@ SVar:PlayMain1:TRUE
 SVar:BuffedBy:Creature
 A:AB$ Pump | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +1 | KW$ Haste | SubAbility$ DBScry | SpellDescription$ Target creature gets +2/+1 and gains haste until end of turn. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
-Oracle:Creatures you control have haste.\n[-1]: Target creature gets +2/+1 and gains haste until end of turn. Scry 1.
+Oracle:Creatures you control have haste.\n[−1]: Target creature gets +2/+1 and gains haste until end of turn. Scry 1.

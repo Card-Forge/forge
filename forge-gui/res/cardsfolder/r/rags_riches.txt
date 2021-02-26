@@ -15,4 +15,4 @@ A:SP$ RepeatEach | Cost$ 5 U U | AILogic$ OpponentHasCreatures | RepeatPlayers$ 
 SVar:ChooseCreature:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.RememberedPlayerCtrl | ChoiceTitle$ Choose a creature to be stolen | AILogic$ WorstCard | RememberChosen$ True | Mandatory$ True
 SVar:StealChosen:DB$ GainControl | AllValid$ Permanent.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosen$ True
-Oracle:Aftermath (Cast this spell only from your graveyard, then exile it.)\nEach opponent chooses a creature they control. You gain control of those creatures.
+Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nEach opponent chooses a creature they control. You gain control of those creatures.

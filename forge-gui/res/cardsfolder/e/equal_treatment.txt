@@ -1,10 +1,10 @@
 Name:Equal Treatment
 ManaCost:1 W
 Types:Instant
-A:SP$ Effect | Cost$ 1 W | Name$ Equal Treatment Effect | ReplacementEffects$ EqualEvent | SVars$ DmgTwo | SubAbility$ DBDraw | SpellDescription$ If any source would deal 1 or more damage to a permanent or player this turn, it deals 2 damage instead. Draw a card.
-SVar:EqualEvent:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card,Emblem | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwo | Description$ If any source would deal 1 or more damage to a permanent or player this turn, it deals 2 damage instead.
+A:SP$ Effect | Cost$ 1 W | Name$ Equal Treatment Effect | ReplacementEffects$ EqualEvent | SVars$ DmgTwo | SubAbility$ DBDraw | SpellDescription$ If any source would deal 1 or more damage to a permanent or player this turn, it deals 2 damage to that permanent or player instead. Draw a card.
+SVar:EqualEvent:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card,Emblem | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwo | Description$ If any source would deal 1 or more damage to a permanent or player this turn, it deals 2 damage to that permanent or player instead.
 SVar:DmgTwo:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ 2
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/equal_treatment.jpg
-Oracle:If any source would deal 1 or more damage to a permanent or player this turn, it deals 2 damage instead.\nDraw a card.
+Oracle:If any source would deal 1 or more damage to a permanent or player this turn, it deals 2 damage to that permanent or player instead.\nDraw a card.

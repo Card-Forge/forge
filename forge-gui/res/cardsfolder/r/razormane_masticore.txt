@@ -8,4 +8,4 @@ T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | OptionalDecider$ You | Execute$
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razormane_masticore.jpg
-Oracle:First strike\nAt the beginning of your upkeep, sacrifice Razormane Masticore unless you discard a card.\nAt the beginning of your draw step, you may have Razormane Masticore deal 3 damage to target creature.
+Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nAt the beginning of your upkeep, sacrifice Razormane Masticore unless you discard a card.\nAt the beginning of your draw step, you may have Razormane Masticore deal 3 damage to target creature.

@@ -5,4 +5,4 @@ PT:8/8
 K:Trample
 K:CARDNAME can't be countered.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terra_stomper.jpg
-Oracle:Terra Stomper can't be countered.\nTrample
+Oracle:This spell can't be countered.\nTrample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)

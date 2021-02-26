@@ -2,11 +2,11 @@ Name:Shell of the Last Kappa
 ManaCost:3
 Types:Legendary Artifact
 A:AB$ ChangeZone | Cost$ 3 T | Origin$ Stack | Destination$ Exile | TargetValidTargeting$ You | TgtPrompt$ Choose target instant or sorcery spell that targets you | ValidTgts$ Card.Instant,Card.Sorcery | RememberChanged$ True | SpellDescription$ Exile target instant or sorcery spell that targets you. (The spell has no effect.)
-A:AB$ Play | Cost$ 3 T Sac<1/CARDNAME> | Valid$ Card.IsRemembered+ExiledWithSource | ValidZone$ Exile | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True | SubAbility$ DBCleanup | SpellDescription$ You may cast a card exiled with CARDNAME without paying its mana cost.
+A:AB$ Play | Cost$ 3 T Sac<1/CARDNAME> | Valid$ Card.IsRemembered+ExiledWithSource | ValidZone$ Exile | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True | SubAbility$ DBCleanup | SpellDescription$ You may cast a spell from among cards exiled with CARDNAME without paying its mana cost.
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shell_of_the_last_kappa.jpg
-Oracle:{3}, {T}: Exile target instant or sorcery spell that targets you. (The spell has no effect.)\n{3}, {T}, Sacrifice Shell of the Last Kappa: You may cast a card exiled with Shell of the Last Kappa without paying its mana cost.
+Oracle:{3}, {T}: Exile target instant or sorcery spell that targets you. (The spell has no effect.)\n{3}, {T}, Sacrifice Shell of the Last Kappa: You may cast a spell from among cards exiled with Shell of the Last Kappa without paying its mana cost.

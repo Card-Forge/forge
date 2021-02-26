@@ -7,4 +7,4 @@ K:CARDNAME can't be countered.
 K:Reach
 K:Protection from blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skylasher.jpg
-Oracle:Flash\nSkylasher can't be countered.\nReach, protection from blue
+Oracle:Flash\nThis spell can't be countered.\nReach, protection from blue

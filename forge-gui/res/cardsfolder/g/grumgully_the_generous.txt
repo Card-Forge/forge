@@ -3,6 +3,6 @@ ManaCost:1 R G
 Types:Legendary Creature Goblin Shaman
 PT:3/3
 K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.YouCtrl+Other+nonHuman
-SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Each other non-Human creature you controls enters the battlefield with an additional +1/+1 counter on it.
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Each other non-Human creature you control enters the battlefield with an additional +1/+1 counter on it.
 DeckHas:Ability$Counters
-Oracle:Each other non-Human creature you controls enters the battlefield with an additional +1/+1 counter on it.
+Oracle:Each other non-Human creature you control enters the battlefield with an additional +1/+1 counter on it.

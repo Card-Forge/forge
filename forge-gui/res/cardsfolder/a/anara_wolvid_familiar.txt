@@ -2,7 +2,7 @@ Name:Anara, Wolvid Familiar
 ManaCost:3 G
 Types:Legendary Creature Wolf Beast
 PT:4/4
-S:Mode$ Continuous | Affected$ Permanent.IsCommander+YouCtrl | AddKeyword$ Indestructible | Condition$ PlayerTurn | Description$ As long as it's your turn, commanders you control have indestructible.
+S:Mode$ Continuous | Affected$ Permanent.IsCommander+YouCtrl | AddKeyword$ Indestructible | Condition$ PlayerTurn | Description$ As long as it's your turn, commanders you control have indestructible. (Effects that say "destroy" don't destroy them. A creature with indestructible can't be destroyed by damage.)
 K:Partner
 AI:RemoveDeck:NonCommander
-Oracle:As long as it's your turn, commanders you control have indestructible.\nPartner (You can have two commanders if both have partner.)
+Oracle:As long as it's your turn, commanders you control have indestructible. (Effects that say "destroy" don't destroy them. A creature with indestructible can't be destroyed by damage.)\nPartner (You can have two commanders if both have partner.)

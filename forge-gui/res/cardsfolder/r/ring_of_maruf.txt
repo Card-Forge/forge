@@ -7,4 +7,4 @@ SVar:TutorSideboard:DB$ ChangeZone | Origin$ Sideboard | Destination$ Hand | Cha
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-Oracle:{5}, {T}, Exile Ring of Ma'ruf: The next time you would draw a card this turn, instead put a card you own from outside the game into your hand.
+Oracle:{5}, {T}, Exile Ring of Ma'rûf: The next time you would draw a card this turn, instead put a card you own from outside the game into your hand.

@@ -6,4 +6,4 @@ K:Swampwalk
 A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sewerdreg.jpg
-Oracle:Swampwalk\nSacrifice Sewerdreg: Exile target card from a graveyard.
+Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\nSacrifice Sewerdreg: Exile target card from a graveyard.

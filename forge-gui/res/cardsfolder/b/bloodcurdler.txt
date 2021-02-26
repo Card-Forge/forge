@@ -3,11 +3,11 @@ ManaCost:1 B
 Types:Creature Horror
 PT:1/1
 K:Flying
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, put the top card of your library into your graveyard.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, mill a card.
 SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddTrigger$ EndScream | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1 and has "At the beginning of your end step, exile two cards from your graveyard."
 SVar:EndScream:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ BloodExile | Secondary$ True | TriggerDescription$ At the beginning of your end step, exile two cards from your graveyard.
 SVar:BloodExile:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Card.YouCtrl | ChangeNum$ 2 | DefinedPlayer$ You | Origin$ Graveyard | Destination$ Exile
 DeckHints:Ability$Graveyard
 AI:RemoveDeck:Random
-Oracle:Flying\nAt the beginning of your upkeep, put the top card of your library into your graveyard.\nThreshold — As long as seven or more cards are in your graveyard, Bloodcurdler gets +1/+1 and has "At the beginning of your end step, exile two cards from your graveyard."
+Oracle:Flying\nAt the beginning of your upkeep, mill a card.\nThreshold — As long as seven or more cards are in your graveyard, Bloodcurdler gets +1/+1 and has "At the beginning of your end step, exile two cards from your graveyard."

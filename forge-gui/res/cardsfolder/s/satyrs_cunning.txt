@@ -5,4 +5,4 @@ A:SP$ Token | Cost$ R | TokenAmount$ 1 | TokenScript$ r_1_1_satyr_noblock | Toke
 K:Escape:2 R ExileFromGrave<2/Card.Other/other>
 SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
 DeckHas:Ability$Token
-Oracle:Create a 1/1 red Satyr creature token with "This creature can't block."\nEscape — {2}{R}, Exile two other cards from your graveyard. (You may cast this card from your graveyard for its escape cost).
+Oracle:Create a 1/1 red Satyr creature token with "This creature can't block."\nEscape—{2}{R}, Exile two other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)

@@ -5,4 +5,4 @@ A:SP$ DealDamage | Cost$ 2 B B Sac<1/Creature> | ValidTgts$ Opponent,Planeswalke
 SVar:X:Sacrificed$CardPower
 AI:RemoveDeck:All
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/final_strike.jpg
-Oracle:As an additional cost to cast Final Strike, sacrifice a creature.\nFinal Strike deals damage to target opponent or planeswalker equal to the sacrificed creature's power.
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nFinal Strike deals damage to target opponent or planeswalker equal to the sacrificed creature's power.

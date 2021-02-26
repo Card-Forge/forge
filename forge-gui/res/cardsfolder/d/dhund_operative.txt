@@ -6,4 +6,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddKeyword$ Deathtouch 
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:BuffedBy:Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dhund_operative.jpg
-Oracle:As long as you control an artifact, Dhund Operative gets +1/+0 and has deathtouch. (Any amount of damage it deals to a creature is enough to destroy it.)
+Oracle:As long as you control an artifact, Dhund Operative gets +1/+0 and has deathtouch.

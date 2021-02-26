@@ -8,4 +8,4 @@ SVar:DBStackDesc:DB$ Pump | StackDescription$ {p:You} puts one of those cards in
 SVar:X:Count$xPaid
 DeckNeeds:Type$Artifact
 DeckHas:Ability$Graveyard
-Oracle:{T}, Tap X untapped artifacts you control: Look at the top X cards of your library. Put one of those cards into your hand and the rest into your graveyard./n Partner
+Oracle:{T}, Tap X untapped artifacts you control: Look at the top X cards of your library. Put one of those cards into your hand and the rest into your graveyard.\nPartner (You can have two commanders if both have partner.)

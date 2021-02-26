@@ -1,10 +1,10 @@
 Name:Jaws of Stone
 ManaCost:5 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 5 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to distribute damage to | NumDmg$ OrigMountains | TargetMin$ Min | TargetMax$ OrigMountains | References$ Min,OrigMountains | DividedAsYouChoose$ OrigMountains | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of targets, where X is the number of Mountains you control as you cast CARDNAME.
+A:SP$ DealDamage | Cost$ 5 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to distribute damage to | NumDmg$ OrigMountains | TargetMin$ Min | TargetMax$ OrigMountains | References$ Min,OrigMountains | DividedAsYouChoose$ OrigMountains | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of targets, where X is the number of Mountains you control as you cast this spell.
 T:Mode$ SpellCast | ValidCard$ Card.Self | Static$ True | Execute$ CountMountainsAtCast
 SVar:CountMountainsAtCast:DB$ StoreSVar | SVar$ OrigMountains | Type$ Count | Expression$ Valid Mountain.YouCtrl
 SVar:OrigMountains:Count$Valid Mountain.YouCtrl
 SVar:Min:SVar$OrigMountains/LimitMax.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jaws_of_stone.jpg
-Oracle:Jaws of Stone deals X damage divided as you choose among any number of targets, where X is the number of Mountains you control as you cast Jaws of Stone.
+Oracle:Jaws of Stone deals X damage divided as you choose among any number of targets, where X is the number of Mountains you control as you cast this spell.

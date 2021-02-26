@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 AlternateMode:Modal
-Oracle:Add {W}.
+Oracle:{T}: Add {W}.
 
 ALTERNATE
 
@@ -11,4 +11,4 @@ Name:Mistgate Pathway
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-Oracle:Add {U}.
+Oracle:{T}: Add {U}.

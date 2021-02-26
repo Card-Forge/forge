@@ -6,4 +6,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | Condition$ Delirium | D
 DeckHints:Ability$Graveyard & Ability$Discard
 DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moldgraf_scavenger.jpg
-Oracle:Delirium — Moldfraf Scavenger gets +3/+0 as long as there are four or more card types among cards in your graveyard.
+Oracle:Delirium — Moldgraf Scavenger gets +3/+0 as long as there are four or more card types among cards in your graveyard.

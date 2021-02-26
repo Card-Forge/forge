@@ -1,8 +1,8 @@
 Name:Unified Front
 ManaCost:3 W
 Types:Sorcery
-A:SP$ Token | Cost$ 3 W | TokenAmount$ X | References$ X | TokenScript$ w_1_1_kor_ally | TokenOwner$ You | LegacyImage$ w 1 1 kor ally bfz | SpellDescription$ Converge — Create a 1/1 white Kor Ally creature token for each color of mana spent to cast CARDNAME.
+A:SP$ Token | Cost$ 3 W | TokenAmount$ X | References$ X | TokenScript$ w_1_1_kor_ally | TokenOwner$ You | LegacyImage$ w 1 1 kor ally bfz | SpellDescription$ Converge — Create a 1/1 white Kor Ally creature token for each color of mana spent to cast this spell.
 SVar:X:Count$Converge
 DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unified_front.jpg
-Oracle:Converge — Create a 1/1 white Kor Ally creature token for each color of mana spent to cast Unified Front.
+Oracle:Converge — Create a 1/1 white Kor Ally creature token for each color of mana spent to cast this spell.

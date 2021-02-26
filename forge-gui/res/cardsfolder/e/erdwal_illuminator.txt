@@ -3,8 +3,8 @@ ManaCost:1 U
 Types:Creature Spirit
 PT:1/3
 K:Flying
-T:Mode$ Investigated | ValidPlayer$ You | TriggerZones$ Battlefield | OnlyFirst$ True | Execute$ TrigInvestigate | TriggerDescription$ Whenever you investigate for the first time each turn, investigate an additional time. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+T:Mode$ Investigated | ValidPlayer$ You | TriggerZones$ Battlefield | OnlyFirst$ True | Execute$ TrigInvestigate | TriggerDescription$ Whenever you investigate for the first time each turn, investigate an additional time.
 SVar:TrigInvestigate:DB$ Investigate
 DeckHints:Ability$Investigate
 DeckHas:Ability$Token
-Oracle:Flying\nWhenever you investigate for the first time each turn, investigate an additional time. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+Oracle:Flying\nWhenever you investigate for the first time each turn, investigate an additional time.

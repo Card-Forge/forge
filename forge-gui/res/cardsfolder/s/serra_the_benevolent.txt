@@ -8,4 +8,4 @@ A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Name$ Emblem - Serra the Benevolent
 SVar:STWorship:Mode$ Continuous | EffectZone$ Command | Affected$ You | AddKeyword$ DamageLifeThreshold:1 | IsPresent$ Creature.YouCtrl | Description$ If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_the_benevolent.jpg
-Oracle:[+2]: Creatures you control with flying get +1/+1 until end of turn.\n[-3]: Create a 4/4 white Angel creature token with flying and vigilance.\n[-6]: You get an emblem with "If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead."
+Oracle:[+2]: Creatures you control with flying get +1/+1 until end of turn.\n[−3]: Create a 4/4 white Angel creature token with flying and vigilance.\n[−6]: You get an emblem with "If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead."

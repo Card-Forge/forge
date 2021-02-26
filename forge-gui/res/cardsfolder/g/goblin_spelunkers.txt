@@ -4,4 +4,4 @@ Types:Creature Goblin Warrior
 PT:2/2
 K:Mountainwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card83803.jpg
-Oracle:Mountainwalk
+Oracle:Mountainwalk (This creature can't be blocked as long as defending player controls a Mountain.)

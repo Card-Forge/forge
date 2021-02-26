@@ -1,10 +1,10 @@
 Name:Rolling Spoil
 ManaCost:2 G G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 G G | ValidTgts$ Land| TgtPrompt$ Select target land | SubAbility$ PumpAll | SpellDescription$ Destroy target land. If {B} was spent to cast CARDNAME, all creatures get -1/-1 until end of turn.
+A:SP$ Destroy | Cost$ 2 G G | ValidTgts$ Land| TgtPrompt$ Select target land | SubAbility$ PumpAll | SpellDescription$ Destroy target land. If {B} was spent to cast this spell, all creatures get -1/-1 until end of turn.
 SVar:PumpAll:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | ConditionManaSpent$ B | IsCurse$ True
 SVar:ManaNeededToAvoidNegativeEffect:black
 AI:RemoveDeck:Random
 DeckNeeds:Color$Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rolling_spoil.jpg
-Oracle:Destroy target land. If {B} was spent to cast Rolling Spoil, all creatures get -1/-1 until end of turn.
+Oracle:Destroy target land. If {B} was spent to cast this spell, all creatures get -1/-1 until end of turn.

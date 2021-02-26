@@ -5,4 +5,4 @@ PT:3/2
 A:AB$ Token | Cost$ 2 B ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | LegacyImage$ b 2 2 zombie m19 | TokenTapped$ True | SpellDescription$ Exile target creature card from your graveyard: Create a 2/2 black Zombie creature token.
 SVar:AIPreference:ExileFromGraveCost$Creature.cmcLE1+inZoneGraveyard
 DeckHas:Ability$Token
-Oracle:{2}{B}, Exile target creature card from your graveyard: Create a tapped 2/2 black Zombie creature token.
+Oracle:{2}{B}, Exile a creature card from your graveyard: Create a tapped 2/2 black Zombie creature token.

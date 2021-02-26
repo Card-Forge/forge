@@ -4,8 +4,8 @@ Types:Legendary Creature Human Cleric
 PT:2/2
 K:Partner:Yannik, Scavenging Sentinel:Yannik
 K:Menace
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever another creature you control leaves the battlefield, if it had one or more counters on it, you draw a card and lose 1 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever another creature you control leaves the battlefield, if it had one or more counters on it, you draw a card and you lose 1 life.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionCheckSVar$ X | References$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | ConditionCheckSVar$ X | References$ X | ConditionSVarCompare$ GE1
 SVar:X:TriggeredCard$CardCounters.ALL
-Oracle:Partner with Yannik, Scavenging Sentinel (When this creature enters the battlefield, target player may put Yannik into their hand from their library, then shuffle.)\nMenace\nWhenever another creature you control leaves the battlefield, if it had one or more counters on it, you draw a card and lose 1 life.
+Oracle:Partner with Yannik, Scavenging Sentinel (When this creature enters the battlefield, target player may put Yannik into their hand from their library, then shuffle.)\nMenace\nWhenever another creature you control leaves the battlefield, if it had one or more counters on it, you draw a card and you lose 1 life.

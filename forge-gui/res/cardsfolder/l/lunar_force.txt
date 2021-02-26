@@ -1,8 +1,8 @@
 Name:Lunar Force
 ManaCost:2 U
 Types:Enchantment
-T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts a spell, sacrifice CARDNAME and counter that spell.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ When an opponent casts a spell, sacrifice CARDNAME and counter that spell.
 SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility | SubAbility$ DBSacrifice
 SVar:DBSacrifice:DB$ Sacrifice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lunar_force.jpg
-Oracle:Whenever an opponent casts a spell, sacrifice Lunar Force and counter that spell. 
+Oracle:When an opponent casts a spell, sacrifice Lunar Force and counter that spell.

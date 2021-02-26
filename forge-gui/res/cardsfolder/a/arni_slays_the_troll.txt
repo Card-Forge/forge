@@ -9,4 +9,4 @@ SVar:DBRedMana:DB$Mana | Produced$ R
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | SpellDescription$ You gain life equal to the greatest power among creatures you control.
 SVar:X:Count$GreatestPower_Creature.YouCtrl
 DeckHas:Ability$Counters & Ability$LifeGain
-Oracle:I - Target creature you control fights up to one target creature you don't control.\nII - Add {R}. Put two +1/+1 counters on up to one target creature you control.\nIII - You gain life equal to the greatest power among creatures you control.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Target creature you control fights up to one target creature you don't control.\nII — Add {R}. Put two +1/+1 counters on up to one target creature you control.\nIII — You gain life equal to the greatest power among creatures you control.

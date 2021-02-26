@@ -4,8 +4,8 @@ Types:Creature Phoenix
 PT:3/2
 K:Flying
 K:Haste
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Graveyard | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ At the beginning of combat on your turn, if you've cast three or more instant and sorcery spells this turn, you may return CARDNAME from your graveyard to the battlefield.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Graveyard | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ At the beginning of combat on your turn, if you've cast three or more instant and sorcery spells this turn, return CARDNAME from your graveyard to the battlefield.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
 SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl
 DeckNeeds:Type$Instant|Sorcery
-Oracle:Flying, Haste\nAt the beginning of combat on your turn, if you've cast three or more instant and sorcery spells this turn, you may return Arclight Phoenix from your graveyard to the battlefield.
+Oracle:Flying, haste\nAt the beginning of combat on your turn, if you've cast three or more instant and sorcery spells this turn, return Arclight Phoenix from your graveyard to the battlefield.

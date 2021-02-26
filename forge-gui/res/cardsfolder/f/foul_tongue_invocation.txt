@@ -2,8 +2,8 @@ Name:Foul-Tongue Invocation
 ManaCost:2 B
 Types:Instant
 K:Presence:Dragon
-A:SP$ Sacrifice | Cost$ 2 B | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | SubAbility$ DBGainLife | SpellDescription$ Target player sacrifices a creature. If you revealed a Dragon card or controlled a Dragon as you cast CARDNAME, you gain 4 life. | StackDescription$ SpellDescription
+A:SP$ Sacrifice | Cost$ 2 B | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | SubAbility$ DBGainLife | SpellDescription$ Target player sacrifices a creature. If you revealed a Dragon card or controlled a Dragon as you cast this spell, you gain 4 life. | StackDescription$ SpellDescription
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4 | Presence$ Dragon
 DeckHints:Type$Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foul_tongue_invocation.jpg
-Oracle:As an additional cost to cast Foul-Tongue Invocation, you may reveal a Dragon card from your hand.\nTarget player sacrifices a creature. If you revealed a Dragon card or controlled a Dragon as you cast Foul-Tongue Invocation, you gain 4 life.
+Oracle:As an additional cost to cast this spell, you may reveal a Dragon card from your hand.\nTarget player sacrifices a creature. If you revealed a Dragon card or controlled a Dragon as you cast this spell, you gain 4 life.

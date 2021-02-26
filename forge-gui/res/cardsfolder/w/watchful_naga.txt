@@ -5,4 +5,4 @@ PT:2/2
 K:You may exert CARDNAME as it attacks.
 T:Mode$ Exerted | ValidCard$ Card.Self | Execute$ DBDraw | TriggerDescription$ When you exert CARDNAME, draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ TriggeredPlayer
-Oracle:You may exert Watchful Naga as it attacks. When you do, draw a card.
+Oracle:You may exert Watchful Naga as it attacks. When you do, draw a card. (An exerted creature won't untap during your next untap step.)

@@ -7,4 +7,4 @@ T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | Execute$ TrigMana | Static$ T
 SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ 1 | Defined$ TriggeredCardController
 A:AB$ Token | Cost$ 4 G Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You | LegacyImage$ g 2 2 wolf thb | PlayerTurn$ True | SpellDescription$ Create a 2/2 green Wolf creature token. Activate this ability only during your turn.
 DeckHas:Ability$Token
-Oracle:Enchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional {G}.\n{4}{G},Sacrifice Wolfwillow Haven: Create a 2/2 green Wolf creature token. Activate this ability only during your turn.
+Oracle:Enchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional {G}.\n{4}{G}, Sacrifice Wolfwillow Haven: Create a 2/2 green Wolf creature token. Activate this ability only during your turn.

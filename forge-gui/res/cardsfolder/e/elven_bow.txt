@@ -8,4 +8,4 @@ SVar:TrigToken:AB$ Token | Cost$ 2 | LegacyImage$ g 1 1 elf warrior khm | TokenS
 SVar:DBAttach:DB$ Attach | Object$ TriggeredCard | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token
-Oracle:When Elven Bow enters the battlefield, you may pay {2}. If you do, create a 1/1 green Elf Warrior creature token, then attach CARDNAME to it.\nEquipped creature gets +1/+2 and has reach.\nEquip: {3}
+Oracle:When Elven Bow enters the battlefield, you may pay {2}. If you do, create a 1/1 green Elf Warrior creature token, then attach Elven Bow to it.\nEquipped creature gets +1/+2 and has reach.\nEquip {3}

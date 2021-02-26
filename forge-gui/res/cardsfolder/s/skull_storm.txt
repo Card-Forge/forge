@@ -10,4 +10,4 @@ SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ Y | Re
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:PlayerCountRemembered$LifeTotal/HalfUp
 SVar:Z:RememberedLKI$Valid Card.RememberedPlayerCtrl
-Oracle:When you cast this spell, copy it for each time you've cast your commander from the command zone this game. You may choose new targets for the copies.\nEach opponent sacrifices a creature. Each opponent who can't loses half their life, rounded up.
+Oracle:When you cast this spell, copy it for each time you've cast your commander from the command zone this game.\nEach opponent sacrifices a creature. Each opponent who can't loses half their life, rounded up.

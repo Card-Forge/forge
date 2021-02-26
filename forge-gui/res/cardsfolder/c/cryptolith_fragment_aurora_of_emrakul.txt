@@ -23,4 +23,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription
 SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 3
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aurora_of_emrakul.jpg
-Oracle:Flying, Deathtouch.\nWhenever Aurora of Emrakul attacks, each opponent loses 3 life.
+Oracle:Flying, deathtouch\nWhenever Aurora of Emrakul attacks, each opponent loses 3 life.

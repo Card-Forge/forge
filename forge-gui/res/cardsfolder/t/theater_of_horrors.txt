@@ -3,11 +3,11 @@ ManaCost:1 B R
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library.
 SVar:TrigExile:DB$ Dig | Defined$ You | DestinationZone$ Exile | DigNum$ 1 | ChangeNum$ All | RememberChanged$ True
-S:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlay$ True | Condition$ PlayerTurn | CheckSVar$ X | References$ X | Description$ During your turn, if an opponent lost life this turn, you may play cards exiled with CARDNAME.
+S:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlay$ True | Condition$ PlayerTurn | CheckSVar$ X | References$ X | Description$ During your turn, if an opponent lost life this turn, you may play lands and cast spells from among cards exiled with CARDNAME.
 SVar:X:Count$LifeOppsLostThisTurn
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
 SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ DealDamage | Cost$ 3 R | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target opponent or planeswalker.
-Oracle:At the beginning of your upkeep, exile the top card of your library.\nDuring your turn, if an opponent lost life this turn, you may play cards exiled with Theater of Horrors.\n{3}{R}: Theater of Horrors deals 1 damage to target opponent or planeswalker.
+Oracle:At the beginning of your upkeep, exile the top card of your library.\nDuring your turn, if an opponent lost life this turn, you may play lands and cast spells from among cards exiled with Theater of Horrors.\n{3}{R}: Theater of Horrors deals 1 damage to target opponent or planeswalker.

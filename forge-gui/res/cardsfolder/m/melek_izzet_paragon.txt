@@ -3,9 +3,9 @@ ManaCost:4 U R
 Types:Legendary Creature Weird Wizard
 PT:2/4
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ Player | Description$ Play with the top card of your library revealed.
-S:Mode$ Continuous | Affected$ Instant.TopLibrary+YouCtrl,Sorcery.TopLibrary+YouCtrl | AffectedZone$ Library | EffectZone$ Battlefield | MayPlay$ True | Description$ You may cast the top card of your library if it's an instant or sorcery card.
+S:Mode$ Continuous | Affected$ Instant.TopLibrary+YouCtrl,Sorcery.TopLibrary+YouCtrl | AffectedZone$ Library | EffectZone$ Battlefield | MayPlay$ True | Description$ You may cast instant and sorcery spells from the top of your library.
 T:Mode$ SpellCast | ValidCard$ Instant.wasCastFromLibrary,Sorcery.wasCastFromLibrary | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell from your library, copy it. You may choose new targets for this copy.
 SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 DeckNeeds:Type$Instant|Sorcery
 SVar:Picture:http://www.wizards.com/global/images/magic/general/melek_izzet_paragon.jpg
-Oracle:Play with the top card of your library revealed.\nYou may cast the top card of your library if it's an instant or sorcery card.\nWhenever you cast an instant or sorcery spell from your library, copy it. You may choose new targets for the copy.
+Oracle:Play with the top card of your library revealed.\nYou may cast instant and sorcery spells from the top of your library.\nWhenever you cast an instant or sorcery spell from your library, copy it. You may choose new targets for the copy.

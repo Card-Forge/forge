@@ -11,4 +11,4 @@ SVar:X:Count$xPaid
 SVar:Y:Count$CastTotalManaSpent
 SVar:Z:Count$CardPower
 SVar:HasAttackEffect:TRUE
-Oracle:Gyrus, Walker of Corpses enters the battlefield with a number of +1/+1 counters on it equal to the amount of mana spent to cast it.\nWhenever Gyrus attacks, you may exile target creature card with lesser power from your graveyard. If you do, create a token that's a copy of that card and that's tapped and attacking. Exile the token at the end of combat.
+Oracle:Gyrus, Waker of Corpses enters the battlefield with a number of +1/+1 counters on it equal to the amount of mana spent to cast it.\nWhenever Gyrus attacks, you may exile target creature card with lesser power from your graveyard. If you do, create a token that's a copy of that card and that's tapped and attacking. Exile the token at end of combat.

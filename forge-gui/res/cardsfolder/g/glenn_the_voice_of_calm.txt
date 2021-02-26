@@ -6,4 +6,4 @@ K:Skulk
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, draw cards equal to his power.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X
 SVar:X:Count$CardPower
-Oracle:Skulk (This creature can’t be blocked by creatures with greater power.)\nWhenever Glenn deals combat damage to a player, draw cards equal to his power.
+Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nWhenever Glenn deals combat damage to a player, draw cards equal to his power.

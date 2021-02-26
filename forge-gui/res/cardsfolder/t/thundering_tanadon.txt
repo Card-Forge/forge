@@ -4,4 +4,4 @@ Types:Artifact Creature Beast
 PT:5/4
 K:Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thundering_tanadon.jpg
-Oracle:({P/G} can be paid with either {G} or 2 life.)\nTrample
+Oracle:({G/P} can be paid with either {G} or 2 life.)\nTrample

@@ -8,4 +8,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:ThunderDamage:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.withFlying+OppCtrl | ValidDescription$ each creature with flying you don't control | SubAbility$ ThunderTap
 SVar:ThunderTap:DB$ TapAll | ValidCards$ Creature.withFlying+OppCtrl | ValidDescription$ each creature with flying you don't control
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thundermaw_hellkite.jpg
-Oracle:Flying, haste\nWhen Thundermaw Hellkite enters the battlefield, it deals 1 damage to each creature with flying your opponents control. Tap those creatures.
+Oracle:Flying\nHaste (This creature can attack and {T} as soon as it comes under your control.)\nWhen Thundermaw Hellkite enters the battlefield, it deals 1 damage to each creature with flying your opponents control. Tap those creatures.

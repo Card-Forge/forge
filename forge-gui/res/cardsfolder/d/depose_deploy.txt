@@ -4,7 +4,7 @@ AlternateMode: Split
 Types:Instant
 A:SP$ Tap | Cost$ 1 WU | ValidTgts$ Creature | SubAbility$ DBDraw | SpellDescription$ Tap target creature. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
-Oracle:Tap target creature. Draw a card.
+Oracle:Tap target creature.\nDraw a card.
 
 ALTERNATE
 

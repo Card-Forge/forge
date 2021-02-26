@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Angel Illusion
 PT:4/4
 K:Flying
-S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | SVarCompare$ LE0 | Description$ Cast CARDNAME only if you've cast another spell this turn.
+S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | SVarCompare$ LE0 | Description$ Flying
 SVar:X:Count$ThisTurnCast_Card.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illusory_angel.jpg
-Oracle:Flying\nCast Illusory Angel only if you've cast another spell this turn.
+Oracle:Cast this spell only if you've cast another spell this turn.\nFlying

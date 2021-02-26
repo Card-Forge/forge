@@ -4,10 +4,10 @@ Types:Legendary Creature Elf Scout
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, create Voja, Friend to Elves, a legendary 3/3 green and white Wolf creature token.
 SVar:TrigChangeZone:DB$ Token | TokenAmount$ 1 | TokenScript$ voja_friend_to_elves | TokenOwner$ You
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Wolf.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a Wolf enters the battlefield under your control, you gain 3 life and you may have that creature fight up to one target creature an opponent controls.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Wolf.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a Wolf enters the battlefield under your control, you gain 3 life and that creature fights up to one target creature you don't control.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | SubAbility$ DBFight
 SVar:DBFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls | TargetMin$ 0 | TargetMax$ 1
 SVar:PlayMain1:TRUE
 DeckHints:Type$Wolf
 DeckHas:Ability$Token & Ability$LifeGain
-Oracle:When Tolsimir, Friend to Wolves enters the battlefield, create Voja, Friend to Elves, a legendary 3/3 green and white Wolf creature token.\nWhenever a Wolf enters the battlefield under your control, you gain 3 life and you may have that creature fight up to one target creature an opponent controls.
+Oracle:When Tolsimir, Friend to Wolves enters the battlefield, create Voja, Friend to Elves, a legendary 3/3 green and white Wolf creature token.\nWhenever a Wolf enters the battlefield under your control, you gain 3 life and that creature fights up to one target creature you don't control.

@@ -4,4 +4,4 @@ Types:Creature Human Monk
 PT:1/1
 K:Forestwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80525.jpg
-Oracle:Forestwalk
+Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)

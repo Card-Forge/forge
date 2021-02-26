@@ -8,4 +8,4 @@ S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
 DeckHints:Name$Renowned Weaponsmith
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_piercer_bow.jpg
-Oracle:Whenever equipped creature attacks, Heart-Piercer Bow deals 1 damage to target creature defending player controls.\nEquip {1}
+Oracle:Whenever equipped creature attacks, Heart-Piercer Bow deals 1 damage to target creature defending player controls.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

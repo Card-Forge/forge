@@ -3,6 +3,6 @@ ManaCost:3 G
 Types:Creature Naga Cleric
 PT:3/4
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
-S:Mode$ Continuous | Affected$ Creature.TopLibrary+YouCtrl+nonLand | AffectedZone$ Library | MayPlay$ True | Description$ You may cast the top card of your library if it's a creature card.
+S:Mode$ Continuous | Affected$ Creature.TopLibrary+YouCtrl+nonLand | AffectedZone$ Library | MayPlay$ True | Description$ You may cast creature spells from the top of your library.
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Stack | AddHiddenKeyword$ May spend mana as though it were mana of any type to cast CARDNAME | Description$ You may spend mana as though it were mana of any type to cast creature spells.
-Oracle:You may look at the top card of your library any time.\nYou may cast the top card of your library if it's a creature card.\nYou may spend mana as though it were mana of any type to cast creature spells.
+Oracle:You may look at the top card of your library any time.\nYou may cast creature spells from the top of your library.\nYou may spend mana as though it were mana of any type to cast creature spells.

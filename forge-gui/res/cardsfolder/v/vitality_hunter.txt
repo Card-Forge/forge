@@ -9,4 +9,4 @@ SVar:TrigPutCounter:DB$ PutCounter | CounterNum$ 1 | CounterType$ Lifelink | Tar
 SVar:X:Count$xPaid
 SVar:MaxTgts:TriggerCount$MonstrosityAmount
 DeckHas:Ability$Counters
-Oracle:Lifelink\n{X}{W}{W}: Monstrosity X (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)\nWhen Vitality Hunter becomes monstrous, put a lifelink counter on each of up to X target creatures.
+Oracle:Lifelink\n{X}{W}{W}: Monstrosity X. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)\nWhen Vitality Hunter becomes monstrous, put a lifelink counter on each of up to X target creatures.

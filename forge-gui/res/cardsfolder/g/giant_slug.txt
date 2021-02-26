@@ -2,9 +2,9 @@ Name:Giant Slug
 ManaCost:1 B
 Types:Creature Slug
 PT:1/1
-A:AB$ DelayedTrigger | Cost$ 5 | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ ChooseB | RememberObjects$ Self | StackDescription$ SpellDescription | SpellDescription$ At the beginning of your next upkeep, choose a basic land type. CARDNAME gains landwalk of the chosen type until the end of that turn.
+A:AB$ DelayedTrigger | Cost$ 5 | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ ChooseB | RememberObjects$ Self | StackDescription$ SpellDescription | SpellDescription$ At the beginning of your next upkeep, choose a basic land type. CARDNAME gains landwalk of the chosen type until the end of that turn. (It can't be blocked as long as defending player controls a land of that type.)
 SVar:ChooseB:DB$ ChooseType | Defined$ You | Type$ Basic Land | AILogic$ ChosenLandwalk | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ DelayTriggerRemembered | KW$ ChosenTypewalk | DefinedKW$ ChosenType | ConditionDefined$ DelayTriggerRemembered | ConditionPresent$ Card.StrictlySelf
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_slug.jpg
-Oracle:{5}: At the beginning of your next upkeep, choose a basic land type. Giant Slug gains landwalk of the chosen type until the end of that turn.
+Oracle:{5}: At the beginning of your next upkeep, choose a basic land type. Giant Slug gains landwalk of the chosen type until the end of that turn. (It can't be blocked as long as defending player controls a land of that type.)

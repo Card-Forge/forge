@@ -1,6 +1,6 @@
 Name:Force of Will
 ManaCost:3 U U
 Types:Instant
-SVar:AltCost:Cost$ PayLife<1> ExileFromHand<1/Card.Blue+Other> | Description$ You may pay 1 life and exile a blue card from your hand rather than pay CARDNAME's mana cost.
+SVar:AltCost:Cost$ PayLife<1> ExileFromHand<1/Card.Blue+Other> | Description$ You may pay 1 life and exile a blue card from your hand rather than pay this spell's mana cost.
 A:SP$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Graveyard | AILogic$ MinCMC.3 | SpellDescription$ Counter target spell.
-Oracle:You may pay 1 life and exile a blue card from your hand rather than pay Force of Will's mana cost.\nCounter target spell.
+Oracle:You may pay 1 life and exile a blue card from your hand rather than pay this spell's mana cost.\nCounter target spell.

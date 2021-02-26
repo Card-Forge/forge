@@ -5,4 +5,4 @@ PT:2/2
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, other creatures you control get +1/+0 until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl | NumAtt$ +1
-Oracle:Haste\nWhenever Bolt Hound attacks, other creatures you control get +1/+0 until end of turn.
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nWhenever Bolt Hound attacks, other creatures you control get +1/+0 until end of turn.

@@ -5,4 +5,4 @@ Loyalty:5
 S:Mode$ Continuous | Affected$ Player.Opponent | AddKeyword$ You can't gain life. | Description$ Your opponents can't gain life.
 A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | TokenAmount$ 1 | TokenScript$ r_1_1_devil_burn | TokenOwner$ You | LegacyImage$ r 1 1 devil burn war | Planeswalker$ True | SpellDescription$ Create a 1/1 red Devil creature token "When this creature dies, it deals 1 damage to any target."
 DeckHas:Ability$Token
-Oracle:Your opponents can't gain life.\n[-2]: Create a 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."
+Oracle:Your opponents can't gain life.\n[−2]: Create a 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."

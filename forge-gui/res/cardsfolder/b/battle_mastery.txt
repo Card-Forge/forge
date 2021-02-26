@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Double Strike | Description$ Enchanted creature has double strike.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Double Strike | Description$ Enchanted creature has double strike. (It deals both first-strike and regular combat damage.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_mastery.jpg
-Oracle:Enchant creature\nEnchanted creature has double strike.
+Oracle:Enchant creature\nEnchanted creature has double strike. (It deals both first-strike and regular combat damage.)

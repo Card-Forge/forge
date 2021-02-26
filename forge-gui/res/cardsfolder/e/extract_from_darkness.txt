@@ -1,9 +1,9 @@
 Name:Extract from Darkness
 ManaCost:3 U B
 Types:Sorcery
-A:SP$ Mill | Cost$ 3 U B | NumCards$ 2 | Defined$ Player | SubAbility$ DBChoose | SpellDescription$ Each player mills two cards. Then put a creature card from a graveyard onto the battlefield under your control.
+A:SP$ Mill | Cost$ 3 U B | NumCards$ 2 | Defined$ Player | SubAbility$ DBChoose | SpellDescription$ Each player mills two cards. Then you put a creature card from a graveyard onto the battlefield under your control.
 SVar:DBChoose:DB$ ChooseCard | Defined$ You | Choices$ Creature | ChoiceZone$ Graveyard | Mandatory$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ ChosenCard | GainControl$ True
 AI:RemoveDeck:Random
 DeckHas:Ability$Graveyard
-Oracle:Each player mills two cards. Then put a creature card from a graveyard onto the battlefield under your control.
+Oracle:Each player mills two cards. Then you put a creature card from a graveyard onto the battlefield under your control.

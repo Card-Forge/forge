@@ -6,4 +6,4 @@ K:Escape:4 G ExileFromGrave<3/Card.Other/other>
 K:etbCounter:P1P1:1:ValidCard$ Card.Self+escaped:CARDNAME escapes with a +1/+1 counter on it.
 SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
 DeckHas:Ability$Counters
-Oracle:Escape-{4}{G}, exile three other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)\nLoathsome Chimera escapes with a +1/+1 counter on it.
+Oracle:Escape—{4}{G}, Exile three other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)\nLoathsome Chimera escapes with a +1/+1 counter on it.

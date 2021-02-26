@@ -13,7 +13,7 @@ SVar:Loy:Count$CardCounters.LOYALTY
 SVar:Beeb:Count$Valid Beeble.YouCtrl
 K:The number of loyalty counters on CARDNAME is equal to the number of Beebles you control.
 SVar:NHand:Count$InYourHand
-A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Beeble | TargetMin$ 0 | TargetMax$ NHand | References$ NHand | KW$ HIDDEN Unblockable | TgtPrompt$ Select target creature | SpellDescription$ Up to X target Beebles can’t be blocked this turn, where X is the number of cards in your hand.
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Beeble | TargetMin$ 0 | TargetMax$ NHand | References$ NHand | KW$ HIDDEN Unblockable | TgtPrompt$ Select target creature | SpellDescription$ Up to X target Beebles can't be blocked this turn, where X is the number of cards in your hand.
 A:AB$ Draw | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card.
 DeckHas:Ability$Token
-Oracle:As B.O.B. (Bevy of Beebles) enters the battlefield, create four 1/1 blue Beeble creature tokens.\nThe number of loyalty counters on B.O.B. is equal to the number of Beebles you control. (Create or sacrifice Beebles whenever B.O.B. gains or loses loyalty.)\n[+1]: Up to X target Beebles can’t be blocked this turn, where X is the number of cards in your hand.\n[−1]: Draw a card.
+Oracle:As B.O.B. (Bevy of Beebles) enters the battlefield, create four 1/1 blue Beeble creature tokens.\nThe number of loyalty counters on B.O.B. is equal to the number of Beebles you control. (Create or sacrifice Beebles whenever B.O.B. gains or loses loyalty.)\n[+1]: Up to X target Beebles can't be blocked this turn, where X is the number of cards in your hand.\n[−1]: Draw a card.

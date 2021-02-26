@@ -2,7 +2,7 @@ Name:Kaya, Bane of the Dead
 ManaCost:3 W/B W/B W/B
 Types:Legendary Planeswalker Kaya
 Loyalty:7
-S:Mode$ Continuous | Affected$ You | AddKeyword$ IgnoreHexproof:Permanent.OppCtrl,Opponent | Description$ Your opponents and permanents your opponents control with hexproof can be the target of spells and abilities you control as though they didn't have hexproof.
+S:Mode$ Continuous | Affected$ You | AddKeyword$ IgnoreHexproof:Permanent.OppCtrl,Opponent | Description$ Your opponents and permanents your opponents control with hexproof can be the targets of spells and abilities you control as though they didn't have hexproof.
 SVar:PlayMain1:TRUE
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ true | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
-Oracle:Your opponents and permanents your opponents control with hexproof can be the target of spells and abilities you control as though they didn't have hexproof.\n[-3]: Exile target creature.
+Oracle:Your opponents and permanents your opponents control with hexproof can be the targets of spells and abilities you control as though they didn't have hexproof.\n[−3]: Exile target creature.

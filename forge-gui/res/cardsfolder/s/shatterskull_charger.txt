@@ -11,4 +11,4 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigReturn | Is
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Self
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
-Oracle:Kicker {2}\nTrample, haste\nIf Shatterskull Charger was kicked, it enters the battlefield with a +1/+1 counter on it.\nAt the beginning of your end step, return Shatterskull Charger to its owner's hand unless it has a +1/+1 counter on it.
+Oracle:Kicker {2}\nTrample, haste\nIf Shatterskull Charger was kicked, it enters the battlefield with a +1/+1 counter on it.\nAt the beginning of your end step, if Shatterskull Charger doesn't have a +1/+1 counter on it, return it to its owner's hand.

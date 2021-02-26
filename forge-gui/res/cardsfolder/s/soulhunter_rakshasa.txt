@@ -5,4 +5,4 @@ PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDmg | TriggerDescription$ When CARDNAME enters the battlefield, it deals 5 damage to target opponent.
 SVar:TrigDmg:DB$ DealDamage | Cost$ 3 B B | NumDmg$ 5 | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent. | SpellDescription$ CARDNAME deals 5 damage to target opponent.
 K:CARDNAME can't block.
-Oracle:Soulhunter Rakshasa can't block.\nWhen Soulhunter Rakshasa enters the battlefied, it deals 5 damage to target opponent.
+Oracle:Soulhunter Rakshasa can't block.\nWhen Soulhunter Rakshasa enters the battlefield, if you cast it from your hand, it deals 1 damage to target opponent for each Swamp you control.

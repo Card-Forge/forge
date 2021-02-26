@@ -8,4 +8,4 @@ SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBDealDamage
 SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ X | References$ X | DamageSource$ Enchanted
 SVar:X:Enchanted$CardPower
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
-Oracle:Enchant creature\nWhen Bind the Monster enters the battlefield, tap enchanted creature. It deals damage to you equal to its power.\nEnchanted creature doesn’t untap during its controller’s untap step.
+Oracle:Enchant creature\nWhen Bind the Monster enters the battlefield, tap enchanted creature. It deals damage to you equal to its power.\nEnchanted creature doesn't untap during its controller's untap step.

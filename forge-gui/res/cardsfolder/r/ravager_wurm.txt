@@ -4,8 +4,8 @@ Types:Creature Wurm
 PT:4/5
 K:Riot
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
-SVar:TrigCharm:DB$ Charm | MinCharmNum$ 0 | CharmNum$ 1 | Choices$ DBFight,DBDestroy 
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 0 | CharmNum$ 1 | Choices$ DBFight,DBDestroy
 SVar:DBFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | SpellDescription$ CARDNAME fights target creature you don't control.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Land.hasNonManaActivatedAbility | TgtPrompt$ Select target land with an activated ability that isn't a mana ability | SpellDescription$ Destroy target land with an activated ability that isn't a mana ability.
 DeckHas:Ability$Counters
-Oracle:Riot (This creature enters the battlefield with your choice of a +1/+1 counter or haste.)\nWhen Ravager Wurm enters the battlefield, choose up to one -\n- Ravager Wurm fights target creature you don't control.\n- Destroy target land with an activated ability that isn't a mana ability.
+Oracle:Riot (This creature enters the battlefield with your choice of a +1/+1 counter or haste.)\nWhen Ravager Wurm enters the battlefield, choose up to one —\n• Ravager Wurm fights target creature you don't control.\n• Destroy target land with an activated ability that isn't a mana ability.

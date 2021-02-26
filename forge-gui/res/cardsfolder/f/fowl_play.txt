@@ -5,4 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 1 | SetToughness$ 1 | RemoveAllAbilities$ True | AddType$ Creature & Bird | RemoveCardTypes$ True | RemoveCreatureTypes$ True | Description$ Enchanted creature loses all abilities and is a Bird creature with base power and toughness 1/1.
 SVar:NonStackingAttachEffect:True
-Oracle:Enchant creature\nEnchanted creature loses all abilities and is a Bird creature with base power and toughness 1/1. (It loses all other card types and creature types.)
+Oracle:Enchant creature\nEnchanted creature loses all abilities and is a Bird creature with base power and toughness 1/1.

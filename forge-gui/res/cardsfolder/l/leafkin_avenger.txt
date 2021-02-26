@@ -6,4 +6,4 @@ A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescriptio
 SVar:X:Count$Valid Creature.YouCtrl+powerGE4
 A:AB$ DealDamage | Cost$ 7 R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ Y | References$ Y | SpellDescription$ CARDNAME deals damage equal to its power to target player or planeswalker.
 SVar:Y:Count$CardPower
-Oracle:{T}: Add {G} for each creature you control with power 4 or greater.\n{7}{R}: Leafkin Avenger deals damage equal to its power to target player or planeswalker.
+Oracle:{T}: Add {G} for each creature with power 4 or greater you control.\n{7}{R}: Leafkin Avenger deals damage equal to its power to target player or planeswalker.

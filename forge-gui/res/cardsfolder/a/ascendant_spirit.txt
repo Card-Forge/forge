@@ -11,4 +11,4 @@ SVar:DamageDraw:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player 
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 DeckHas:Ability$Counters
 DeckNeeds:Type$Snow
-Oracle:{S}{S}: Ascendant Spirit becomes a Spirit Warrior with base power and toughness 2/3.\n{S}{S}{S}:If Ascendant Spirit is a Warrior, put a flying counter on it and it becomes a Spirit Warrior Angel with base power and toughness 4/4.\n{S}{S}{S}{S}:If Ascendant Spirit is an Angel, put two +1/+1 counters on it and it gains "Whenever this creature deals combat damage to a player, draw a card."
+Oracle:{S}{S}: Ascendant Spirit becomes a Spirit Warrior with base power and toughness 2/3.\n{S}{S}{S}: If Ascendant Spirit is a Warrior, put a flying counter on it and it becomes a Spirit Warrior Angel with base power and toughness 4/4.\n{S}{S}{S}{S}: If Ascendant Spirit is an Angel, put two +1/+1 counters on it and it gains "Whenever this creature deals combat damage to a player, draw a card."

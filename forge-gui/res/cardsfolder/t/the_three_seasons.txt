@@ -7,4 +7,4 @@ SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Targ
 SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChangeZone2 | SpellDescription$ Choose three cards in each graveyard. Their owners shuffle those cards into their libraries.
 SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ChangeType$ Card.RememberedPlayerCtrl | DefinedPlayer$ Player.IsRemembered | Chooser$ You | ChangeNum$ 3 | Hidden$ True | Shuffle$ True | Mandatory$ True
 DeckHas:Ability$Mill
-Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI - Mill three cards.\nII - Return up to two target snow permanent cards from your graveyard to your hand.\nIII - Choose three cards in each graveyard. Their owners shuffle those cards into their libraries.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Mill three cards.\nII — Return up to two target snow permanent cards from your graveyard to your hand.\nIII — Choose three cards in each graveyard. Their owners shuffle those cards into their libraries.

@@ -4,7 +4,7 @@ Types:Creature Human Rogue Mutant
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckDefinedPlayer$ You.isMonarch | Execute$ TrigUnblockable | TriggerDescription$ At the beginning of your upkeep, if you are the monarch, creatures you control can't be blocked this turn.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckDefinedPlayer$ You.isMonarch | Execute$ TrigUnblockable | TriggerDescription$ At the beginning of your upkeep, if you're the monarch, creatures you control can't be blocked this turn.
 SVar:TrigUnblockable:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ HIDDEN Unblockable
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_keys.jpg
-Oracle:When Keeper of Keys enters the battlefield, you become the monarch.\nAt the beginning of your upkeep, if you are the monarch, creatures you control can't be blocked this turn.
+Oracle:When Keeper of Keys enters the battlefield, you become the monarch.\nAt the beginning of your upkeep, if you're the monarch, creatures you control can't be blocked this turn.

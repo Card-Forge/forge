@@ -9,4 +9,4 @@ SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | References$ X
 SVar:X:Count$Valid Land.DefenderCtrl
 SVar:HasAttackEffect:TRUE
 DeckHas:Ablity$Token
-Oracle:Whenever Coastline Marauders attacks, it gets +1/+0 until end of turn for each land defending player controls.\nEncore {​4}{​R}{​R} ({​4}{​R}{​R}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)
+Oracle:Trample\nWhenever Coastline Marauders attacks, it gets +1/+0 until end of turn for each land defending player controls.\nEncore {4}{R}{R} ({4}{R}{R}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

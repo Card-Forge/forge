@@ -3,6 +3,6 @@ ManaCost:U
 Types:Creature Wall
 PT:0/4
 K:Defender
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 1.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
 SVar:TrigScry:DB$ Scry | ScryNum$ 1
-Oracle:Defender\nWhen Wall of Runes enters the battlefield, scry 1.
+Oracle:Defender (This creature can't attack.)\nWhen Wall of Runes enters the battlefield, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

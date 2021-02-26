@@ -3,6 +3,6 @@ ManaCost:W/B W/B W/B W/B
 Types:Creature Human Knight
 PT:4/2
 A:AB$ Pump | Cost$ W/B W/B | KW$ Lifelink | Defined$ Self | SpellDescription$ CARDNAME gains lifelink until end of turn.
-A:AB$ Pump | Cost$ W/B W/B W/B | KW$ Indestructible | Defined$ Self | SpellDescription$ CARDNAME gains indestructible until end of turn.
+A:AB$ Pump | Cost$ W/B W/B W/B | KW$ Indestructible | Defined$ Self | SpellDescription$ CARDNAME gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
 DeckHas:Ability$LifeGain
-Oracle:{W/B}{W/B}: Resolute Rider gains lifelink until end of turn.\n{W/B}{W/B}{W/B}: Resolute Rider gains indestructible until end of turn.
+Oracle:{W/B}{W/B}: Resolute Rider gains lifelink until end of turn.\n{W/B}{W/B}{W/B}: Resolute Rider gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

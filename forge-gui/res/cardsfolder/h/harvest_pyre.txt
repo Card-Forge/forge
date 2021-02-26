@@ -4,4 +4,4 @@ Types:Instant
 A:SP$ DealDamage | Cost$ 1 R ExileFromGrave<X/Card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-Oracle:As an additional cost to cast Harvest Pyre, exile X cards from your graveyard.\nHarvest Pyre deals X damage to target creature.
+Oracle:As an additional cost to cast this spell, exile X cards from your graveyard.\nHarvest Pyre deals X damage to target creature.

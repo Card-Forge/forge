@@ -3,4 +3,4 @@ ManaCost:1 W
 Types:Creature Dog
 PT:2/2
 K:Vigilance
-Oracle:Vigilance
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)

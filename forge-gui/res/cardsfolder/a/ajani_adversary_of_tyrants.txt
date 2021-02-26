@@ -7,5 +7,5 @@ A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True
 SVar:EffPhase:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ EmblemTrigToken | TriggerDescription$ At the beginning of your end step, create three 1/1 white Cat creature tokens with lifelink.
 SVar:EmblemTrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 3 | TokenScript$ w_1_1_cat_lifelink | LegacyImage$ w 1 1 cat lifelink m19
 DeckHas:Ability$Counters & Ability$Token
-Oracle:[+1]: Put a +1/+1 counter on each of up to two target creatures.\n[-2]: Return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.\n[-7]: You get an emblem with "At the beginning of your end step, create three 1/1 white Cat creature tokens with lifelink."
+Oracle:[+1]: Put a +1/+1 counter on each of up to two target creatures.\n[−2]: Return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.\n[−7]: You get an emblem with "At the beginning of your end step, create three 1/1 white Cat creature tokens with lifelink."
 Loyalty:4

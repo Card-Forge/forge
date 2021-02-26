@@ -3,4 +3,4 @@ ManaCost:1 PB PB
 Types:Instant
 A:SP$ Pump | Cost$ 1 PB PB | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -5 | NumDef$ -5 | SpellDescription$ Target creature gets -5/-5 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dismember.jpg
-Oracle:({P/B} can be paid with either {B} or 2 life.)\nTarget creature gets -5/-5 until end of turn.
+Oracle:({B/P} can be paid with either {B} or 2 life.)\nTarget creature gets -5/-5 until end of turn.

@@ -17,4 +17,4 @@ K:Aftermath
 A:SP$ AnimateAll | Cost$ 1 B | ValidCards$ Creature.YouCtrl | Keywords$ Menace | Triggers$ Trig2 | sVars$ Eff2 | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, creatures you control gain menace and "Whenever this creature deals combat damage to a player, that player discards a card."
 SVar:Trig2:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Eff2 | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player, that player discards a card.
 SVar:Eff2:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
-Oracle:Aftermath\nUntil end of turn, creatures you control gain menace and "Whenever this creature deals combat damage to a player, that player discards a card."
+Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nUntil end of turn, creatures you control gain menace and "Whenever this creature deals combat damage to a player, that player discards a card."

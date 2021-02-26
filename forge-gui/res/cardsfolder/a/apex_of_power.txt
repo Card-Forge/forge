@@ -6,4 +6,4 @@ SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Ef
 SVar:EffSModeContinuous:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.nonLand+IsRemembered | AffectedZone$ Exile | Description$ You may cast nonland cards exiled this way.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBMana
 SVar:DBMana:DB$ Mana | Produced$ Any | Amount$ 10 | ConditionDefined$ Self | ConditionPresent$ Card.wasCastFromHand | ConditionCompare$ EQ1 | AILogic$ ManaRitual | AINoRecursiveCheck$ True
-Oracle:Exile the top seven cards of your library. Until end of turn, you may cast nonland cards exiled this way.\nIf this spell was cast from your hand, add ten mana of any one color.
+Oracle:Exile the top seven cards of your library. Until end of turn, you may cast spells from among them.\nIf this spell was cast from your hand, add ten mana of any one color.

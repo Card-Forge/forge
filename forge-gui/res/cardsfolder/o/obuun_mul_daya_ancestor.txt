@@ -9,4 +9,4 @@ SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select tar
 SVar:X:Count$CardPower
 DeckHas:Ability$Counters
 SVar:BuffedBy:Land
-Oracle:At the beginning of combat on your turn, up to one target land you control becomes an X/X Elemental creature with trample and haste until end of turn, where X is Obuun’s power. It’s still a land.\nLandfall — Whenever land enters the battlefield under your control, put a +1/+1 counter on target creature.
+Oracle:At the beginning of combat on your turn, up to one target land you control becomes an X/X Elemental creature with trample and haste until end of turn, where X is Obuun's power. It's still a land.\nLandfall — Whenever a land enters the battlefield under your control, put a +1/+1 counter on target creature.

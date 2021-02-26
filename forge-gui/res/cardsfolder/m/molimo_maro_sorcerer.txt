@@ -8,4 +8,4 @@ SVar:X:Count$Valid Land.YouCtrl
 SVar:BuffedBy:Land
 SVar:NeedsToPlayVar:X GE5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molimo_maro_sorcerer.jpg
-Oracle:Trample\nMolimo, Maro-Sorcerer's power and toughness are each equal to the number of lands you control.
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nMolimo, Maro-Sorcerer's power and toughness are each equal to the number of lands you control.

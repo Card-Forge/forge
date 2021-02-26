@@ -8,4 +8,4 @@ SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ kobolds_of_kher_keep | 
 SVar:X:Count$CastTotalManaSpent
 A:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 DeckHas:Ability$Sacrifice & Ability$Token
-Oracle:Flying\nWhen you cast Prossh, Skyraider of Kher, create X 0/1 red Kobold creature tokens named Kobolds of Kher Keep, where X is the amount of mana spent to cast Prossh.\nSacrifice another creature: Prossh gets +1/+0 until end of turn.
+Oracle:When you cast this spell, create X 0/1 red Kobold creature tokens named Kobolds of Kher Keep, where X is the amount of mana spent to cast it.\nFlying\nSacrifice another creature: Prossh, Skyraider of Kher gets +1/+0 until end of turn.

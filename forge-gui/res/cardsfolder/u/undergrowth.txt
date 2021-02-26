@@ -2,9 +2,9 @@ Name:Undergrowth
 ManaCost:G
 Types:Instant
 K:Kicker:2 R:Generic
-A:SP$ Fog | Cost$ G | CostDesc$ As an additional cost to cast this spell, you may pay {2}{R}. | Condition$ OptionalCost | ConditionOptionalPaid$ False | SubAbility$ DBEffect | SpellDescription$ Prevent all combat damage that would be dealt this turn. If its additional cost was paid, CARDNAME doesn't affect combat damage that would be dealt by red creatures. | StackDescription$ SpellDescription
+A:SP$ Fog | Cost$ G | CostDesc$ As an additional cost to cast this spell, you may pay {2}{R}. | Condition$ OptionalCost | ConditionOptionalPaid$ False | SubAbility$ DBEffect | SpellDescription$ Prevent all combat damage that would be dealt this turn. If this spell's additional cost was paid, this effect doesn't affect combat damage that would be dealt by red creatures. | StackDescription$ SpellDescription
 SVar:DBEffect:DB$ Effect | Condition$ OptionalCost | ConditionOptionalPaid$ True | Name$ Undergrowth Effect | StaticAbilities$ KWPump
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.nonRed | AddKeyword$ Prevent all combat damage that would be dealt by CARDNAME. | Description$ Prevent all combat damage this turn except that from red creatures.
 AI:RemoveDeck:All
 DeckHints:Color$Red
-Oracle:As an additional cost to cast this spell, you may pay {2}{R}.\nPrevent all combat damage that would be dealt this turn. If its additional cost was paid, Undergrowth doesn't affect combat damage that would be dealt by red creatures.
+Oracle:As an additional cost to cast this spell, you may pay {2}{R}.\nPrevent all combat damage that would be dealt this turn. If this spell's additional cost was paid, this effect doesn't affect combat damage that would be dealt by red creatures.

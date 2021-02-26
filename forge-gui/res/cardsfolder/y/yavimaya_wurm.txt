@@ -4,4 +4,4 @@ Types:Creature Wurm
 PT:6/4
 K:Trample
 SVar:Picture:http://resources.wizards.com/magic/cards/bd/en-us/card26631.jpg
-Oracle:Trample
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)

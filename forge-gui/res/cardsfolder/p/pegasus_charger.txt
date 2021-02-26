@@ -5,4 +5,4 @@ PT:2/1
 K:Flying
 K:First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pegasus_charger.jpg
-Oracle:Flying, first strike
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nFirst strike (This creature deals combat damage before creatures without first strike.)

@@ -11,7 +11,7 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 AlternateMode:Modal
 DeckHints:Ability$Discard & Ability$Graveyard
-Oracle:Deathtouch\nAt the beginning of your upkeep, exile two cards from your graveyard. If you can’t, sacrifice Egon and draw a card.
+Oracle:Deathtouch\nAt the beginning of your upkeep, exile two cards from your graveyard. If you can't, sacrifice Egon and draw a card.
 
 ALTERNATE
 

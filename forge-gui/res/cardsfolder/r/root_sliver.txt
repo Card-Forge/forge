@@ -3,6 +3,6 @@ ManaCost:3 G
 Types:Creature Sliver
 PT:2/2
 K:CARDNAME can't be countered.
-S:Mode$ Continuous | Affected$ Sliver | AddHiddenKeyword$ CARDNAME can't be countered. | AffectedZone$ Stack | Description$ Sliver spells can't be countered by spells or abilities.
+S:Mode$ Continuous | Affected$ Sliver | AddHiddenKeyword$ This spell can't be countered. | AffectedZone$ Stack | Description$ Sliver spells can't be countered.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/root_sliver.jpg
-Oracle:Root Sliver can't be countered.\nSliver spells can't be countered by spells or abilities.
+Oracle:This spell can't be countered.\nSliver spells can't be countered.

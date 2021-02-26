@@ -4,4 +4,4 @@ Types:Creature Elemental Warrior
 PT:2/1
 K:AlternateAdditionalCost:Reveal<1/Elemental>:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flamekin_bladewhirl.jpg
-Oracle:As an additional cost to cast Flamekin Bladewhirl, reveal an Elemental card from your hand or pay {3}.
+Oracle:As an additional cost to cast this spell, reveal an Elemental card from your hand or pay {3}.

@@ -2,7 +2,7 @@ Name:Hostage Taker
 ManaCost:2 U B
 Types:Creature Human Pirate
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile another target artifact or creature until CARDNAME leaves the battlefield. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile another target creature or artifact until CARDNAME leaves the battlefield. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact.Other,Creature.Other | TgtPrompt$ Select another target artifact or creature | ConditionPresent$ Card.Self | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | Triggers$ ComeBack,TriggerCastHT | SVars$ TrigReturn,TrigRemoveSelf | RememberObjects$ Remembered | ImprintCards$ Self | Duration$ Permanent | SubAbility$ DBCleanup | SpellDescription$ You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may cast that card and you may spend mana as though it were mana of any type to cast it.
@@ -14,4 +14,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlay:Artifact.OppCtrl,Creature.OppCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hostage_taker.jpg
-Oracle:When Hostage Taker enters the battlefield, exile another target artifact or creature until Hostage Taker leaves the battlefield. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.
+Oracle:When Hostage Taker enters the battlefield, exile another target creature or artifact until Hostage Taker leaves the battlefield. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.

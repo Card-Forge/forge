@@ -6,4 +6,4 @@ SVar:DBDig:DB$ Dig | DigNum$ X | ChangeNum$ 2 | DestinationZone$ Hand | LibraryP
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | UnlessCost$ XX | UnlessPayer$ TargetedController | References$ X,XX | SpellDescription$ Counter target spell unless its controller pays twice {X}.
 SVar:X:Count$xPaid
 SVar:XX:SVar$X/Twice
-Oracle:Choose one-\n• Look at the top X cards of your library. Put up to two of them into your hand and the rest on the bottom of your library in a random order.\n• Counter target spell unless its controller pays twice {X}.
+Oracle:Choose one —\n• Look at the top X cards of your library. Put up to two of them into your hand and the rest on the bottom of your library in a random order.\n• Counter target spell unless its controller pays twice {X}.

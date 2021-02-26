@@ -9,7 +9,7 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Pump | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | NumAtt$ -X | NumDef$ -X | References$ X | SpellDescription$ Target creature gets -X/-X until end of turn, where X is the number of Zombies you control.
 SVar:X:Count$Valid Zombie.YouCtrl
 A:AB$ Effect | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Ultimate$ True | Stackable$ False | StaticAbilities$ ZombieCast | SpellDescription$ Until end of turn you may cast Zombie cards from your graveyard.
-SVar:ZombieCast:Mode$ Continuous | Affected$ Zombie.YouCtrl | MayPlay$ True | EffectZone$ Command | AffectedZone$ Graveyard | Description$ You may cast Zombie cards from your graveyard this turn.
+SVar:ZombieCast:Mode$ Continuous | Affected$ Zombie.YouCtrl | MayPlay$ True | EffectZone$ Command | AffectedZone$ Graveyard | Description$ You may cast Zombie spells from your graveyard this turn.
 DeckHints:Type$Zombie
 DeckHas:Ability$Graveyard
-Oracle:[+1]: Mill three cards. If at least one Zombie card is milled this way, each opponent loses 2 life and you gain 2 life.\n[-2]: Target creature gets -X/-X until end of turn, where X is the number of Zombies you control.\n[-3]: You may cast Zombie cards from your graveyard this turn.
+Oracle:[+1]: Mill three cards. If at least one Zombie card is milled this way, each opponent loses 2 life and you gain 2 life.\n[−2]: Target creature gets -X/-X until end of turn, where X is the number of Zombies you control.\n[−3]: You may cast Zombie spells from your graveyard this turn.

@@ -5,4 +5,4 @@ A:SP$ Mill | Cost$ 4 UB | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a 
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Creature
-Oracle:Target player mills four cards. You draw a card for each creature card put into that graveyard this way.
+Oracle:Target player mills four cards. You draw a card for each creature card put into their graveyard this way.

@@ -4,9 +4,9 @@ Types:Creature Goblin Mutant
 PT:5/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a number of 1/1 red Goblin creature tokens equal to the number of opponents you have.
 SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ X | TokenScript$ r_1_1_goblin | LegacyImage$ r 1 1 goblin gnt | References$ X
-A:AB$ Effect | Cost$ 3 R T | Name$ Goblin Goliath Effect | ReplacementEffects$ RDoubleDamage | SVars$ DmgTwice,Y | SpellDescription$ If a source you control would deal damage to an opponent this turn, it deals double that damage instead.
-SVar:RDoubleDamage:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Opponent | ReplaceWith$ DmgTwice | Description$ If a source you control would deal damage to an opponent this turn, it deals double that damage instead.
+A:AB$ Effect | Cost$ 3 R T | Name$ Goblin Goliath Effect | ReplacementEffects$ RDoubleDamage | SVars$ DmgTwice,Y | SpellDescription$ If a source you control would deal damage to an opponent this turn, it deals double that damage to that player instead.
+SVar:RDoubleDamage:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Opponent | ReplaceWith$ DmgTwice | Description$ If a source you control would deal damage to an opponent this turn, it deals double that damage to that player instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ Y | References$ Y
 SVar:X:PlayerCountOpponents$Amount
 SVar:Y:ReplaceCount$DamageAmount/Twice
-Oracle:When Goblin Goliath enters the battlefield, create a number of 1/1 red Goblin creature tokens equal to the number of opponents you have.\n{3}{R}, {T}: If a source you control would deal damage to an opponent this turn, it deals double that damage instead.
+Oracle:When Goblin Goliath enters the battlefield, create a number of 1/1 red Goblin creature tokens equal to the number of opponents you have.\n{3}{R}, {T}: If a source you control would deal damage to an opponent this turn, it deals double that damage to that player instead.

@@ -3,7 +3,7 @@ Types:Conspiracy
 Text:(Start the game with this conspiracy face up in the command zone.)
 K:Your deck can't have basic land cards.
 K:Your starting hand size is five.
-A:AB$ Effect | Cost$ ExileFromHand<1/Card> | SpellDescription$ Exile a card from your hand: This turn, you may play basic land cards from outside the game.
+A:AB$ Effect | Cost$ ExileFromHand<1/Card> | SpellDescription$ Exile a card from your hand: This turn, you may play basic lands from outside the game.
 S:Mode$ Continuous | Affected$ Land.Basic+YouCtrl | AddAbility$ AnyMana | Description$ Basic lands you control have "{T}: Add one mana of any color."
 SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
-Oracle:(Start the game with this conspiracy face up in the command zone.)\nYour deck can't have basic land cards and your starting hand size is five.\nExile a card from your hand: This turn, you may play basic land cards from outside the game.\nBasic lands you control have "{T}: Add one mana of any color."
+Oracle:(Start the game with this conspiracy face up in the command zone.)\nYour starting deck can't have basic land cards and your starting hand size is five.\nExile a card from your hand: This turn, you may play basic lands from outside the game.\nBasic lands you control have "{T}: Add one mana of any color."

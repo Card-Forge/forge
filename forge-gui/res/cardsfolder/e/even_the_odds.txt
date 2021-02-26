@@ -1,8 +1,8 @@
 Name:Even the Odds
 ManaCost:2 W
 Types:Instant
-A:SP$ Token | Cost$ 2 W | IsPresent$ Creature.YouCtrl | PresentCompare$ LTX | TokenAmount$ 3 | TokenScript$ w_1_1_soldier | TokenOwner$ You | References$ X | LegacyImage$ w 1 1 soldier fut | SpellDescription$ Cast CARDNAME only if you control fewer creatures than each opponent. Create three 1/1 white Soldier creature tokens.
+A:SP$ Token | Cost$ 2 W | IsPresent$ Creature.YouCtrl | PresentCompare$ LTX | TokenAmount$ 3 | TokenScript$ w_1_1_soldier | TokenOwner$ You | References$ X | LegacyImage$ w 1 1 soldier fut | SpellDescription$ Cast this spell only if you control fewer creatures than each opponent. Create three 1/1 white Soldier creature tokens.
 SVar:X:PlayerCountOpponents$LowestValid Creature.YouCtrl
 # The YouCtrl in the above count is relative to each player checked
 SVar:Picture:http://www.wizards.com/global/images/magic/general/even_the_odds.jpg
-Oracle:Cast Even the Odds only if you control fewer creatures than each opponent.\nCreate three 1/1 white Soldier creature tokens.
+Oracle:Cast this spell only if you control fewer creatures than each opponent.\nCreate three 1/1 white Soldier creature tokens.

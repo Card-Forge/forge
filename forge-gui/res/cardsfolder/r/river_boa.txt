@@ -5,4 +5,4 @@ PT:2/1
 K:Islandwalk
 A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/river_boa.jpg
-Oracle:Islandwalk\n{G}: Regenerate River Boa.
+Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\n{G}: Regenerate River Boa.

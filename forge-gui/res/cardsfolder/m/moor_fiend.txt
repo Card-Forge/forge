@@ -4,4 +4,4 @@ Types:Creature Horror
 PT:3/3
 K:Swampwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2477.jpg
-Oracle:Swampwalk
+Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

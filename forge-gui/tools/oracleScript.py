@@ -1,183 +1,207 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-# This python script is designed to handle the following: individual cards located in /res/cardsfolder/*
-# Insert of Oracle data into data files from mtg-data.txt
-# Future possibilities. Using mtg-data to add SetInfo data and other Outside Game Data (Type, PT, etc)
-# Hopefully the oracleScript can replace both SetInfo Scripts by current SetInfo scripts by expanding their current functionality
+# This python script is designed to handle individual cards located in /res/cardsfolder/*
+# Insert and update Oracle text into data files from scryfall oracle_cards bulk data
+# Also rename script filename if the name is incorrect
 
-# python oracleScript.py <offlineMode> <setAbbreviation>
-# If you run oracleScript without parameters it will run for all sets on the local mtgdata.txt
-
-
-import os, fnmatch, re, sys
-from urllib import urlopen
-
-pathToMtgData = os.path.join(sys.path[0], "mtg-data.txt")
-
-onlineOptions = [ 'false', 'f', 'no', 'n' ]
-offlineSource = True
-setAbbr = None
-
-if len(sys.argv) > 1:
-    offlineSource = (sys.argv[1].lower() not in onlineOptions)
-    print "Using mtgdata.txt: " + str(offlineSource)
-
-if len(sys.argv) > 2:
-    if offlineSource:
-        print "Running for all sets when in Offline mode"
-    else:
-        setAbbr = sys.argv[2]
-        print "Using Set: " + setAbbr
-
-elif not offlineSource:
-    print "Please provide a set abbreviation when in Online Mode. eg: python oracleScript.py False GTC"
+import json
+import fnmatch
+import os
+import re
+import urllib.request
+import unidecode
 
 
-mtgData = None
-if offlineSource:
-    parseFrom = open(pathToMtgData, 'r')
-else:
-    # Load Spoiler view of the set
-    parseFrom = urlopen("http://magiccards.info/query?q=e:%s&v=spoiler&s=cname" % (setAbbr))
+NAME_STR = 'Name:'
+ORACLE_STR = 'Oracle:'
+ALTERATE_STR = 'AlternateMode:'
+ALTERNATE_SEPARATER = ' // '
+tools_folder = os.path.dirname(os.path.realpath(__file__))
 
-mtgData = parseFrom.read()
-parseFrom.close()
-print "Size of parse data: %s" % len(mtgData)
 
-folder = os.path.join(sys.path[0], '..', 'res', 'cardsfolder')
-err = open(os.path.join(sys.path[0], 'oracleScript.log'), 'w')
+def download_oracle_cards():
+    '''Request Scryfall API to download oracle_cards json file'''
+    request = urllib.request.urlopen('https://api.scryfall.com/bulk-data')
+    data = json.load(request)['data']
+    scryfalldburl = [x for x in data if x['type'] == 'oracle_cards'][0]['download_uri']
+    urllib.request.urlretrieve(scryfalldburl, os.path.join(tools_folder, 'oracle_cards.json'))
 
-setStr = 'SetInfo:'
-oracleStr = 'Oracle:'
 
-rarity = dict()
-rarity['L'] = 'Land'
-rarity['C'] = 'Common'
-rarity['U'] = 'Uncommon'
-rarity['R'] = 'Rare'
-rarity['M'] = 'Mythic'
+def load_oracle_cards():
+    '''Load oracle card data from oracle_cards json file and build oracle cards dict'''
+    with open(os.path.join(tools_folder, 'oracle_cards.json'), 'r', encoding='utf8') as oracle_file:
+        oracle_json = json.load(oracle_file)
+    oracle_cards = {}
+    for card in oracle_json:
+        if (card['layout'] == 'token'):
+            continue
+        name = unidecode.unidecode(card['name'])
+        oracle_cards[name] = card
+    return oracle_cards
 
-def writeOutCard(root, fileName, lines, oracle, sets):
-    cardfile = open(os.path.join(root, fileName), 'w')
-    cardfile.write(lines)
 
-    cardfile.write('Oracle:%s\n' % oracle)
+def formalize_name(names):
+    name = '_'.join(names)
+    name = name.lower()
+    name = name.replace('& ', '')
+    name = name.replace(' ', '_')
+    name = name.replace('-', '_')
+    name = name.replace(',', '')
+    name = name.replace('.', '')
+    name = name.replace(':', '')
+    name = name.replace("'", '')
+    name = name.replace('"', '')
+    name = name.replace('?', '')
+    name = name.replace('!', '')
+    name = name.replace('(', '')
+    name = name.replace(')', '')
+    return name
 
-    '''
-    # Disabled until we're ready to remove SetInfoUrl Parameter
-    for i in sets:
-        set = sets[i].lstrip()
-        setInfo = set.split(' ')
-        if len(setInfo) > 2:
-            cardfile.write('SetInfo:%s|%s||%s\n' % (setInfo[0],setInfo[1],setInfo[2].replace('(x','').replace(')','')))
+
+def read_card_script(cardfile):
+    names = []
+    oracle_texts = []
+    lines = []
+    line_num = 0
+    alternate_mode = ''
+    for line in cardfile.readlines():
+        line = line.strip()
+        if line.startswith(NAME_STR):
+            names.append(line[len(NAME_STR):])
+        elif line.startswith(ALTERATE_STR):
+            alternate_mode = line[len(ALTERATE_STR):]
+        elif line.startswith(ORACLE_STR):
+            oracle_texts.append([line_num, line[len(ORACLE_STR):]])
+            lines.append('')
+            line_num += 1
+            continue
+        lines.append(line + '\n')
+        line_num += 1
+    cardfile.close()
+    return names, lines, oracle_texts, alternate_mode
+
+
+def write_card_script(cardfile, lines, oracle_texts):
+    line_num = 0
+    oracle_index = 0
+    for line in lines:
+        if oracle_index < len(oracle_texts) and line_num == oracle_texts[oracle_index][0]:
+            cardfile.write(ORACLE_STR + oracle_texts[oracle_index][1] + '\n')
+            oracle_index += 1
         else:
-            cardfile.write('SetInfo:%s|%s|\n' % (setInfo[0],setInfo[1]))
-    '''
-    
+            cardfile.write(line)
+        line_num += 1
     cardfile.close()
 
 
-def getOracleFromMtgData(name):
-    search = '\n%s\n' % name
-    found = mtgData.find(search)
+def update_oracle(name, lines, oracle_text, new_oracle, is_planeswalker):
+    if is_planeswalker:
+        new_oracle = re.sub(r'([\+−]?[0-9X]+):', r'[\1]:', new_oracle)
+    new_oracle = new_oracle.replace('\n', '\\n')
+    if oracle_text[1] == new_oracle:
+        return False
 
-    if found == -1:
-        err.write(name + '... NOT FOUND\n')
-        return None, None
+    oracle_lines = oracle_text[1].split('\\n')
+    new_lines = new_oracle.split('\\n')
+    nickname = name.split(', ')[0]
+    oracle_text[1] = new_oracle
 
-    endFound = mtgData.find('\n\n', found)
+    if len(oracle_lines) != len(new_lines):
+        return True
 
-    block = mtgData[found+1:endFound]
-    splitBlock = block.split('\n')
-    typeLine = 2
-    if splitBlock[1].find('{') == -1: # Has a Cost not a Land or Ancestral Vision
-        typeLine = 1
-
-    startOracle = typeLine + 1
-    if splitBlock[typeLine].find('Creature') > -1 or splitBlock[typeLine].find('Planeswalker') > -1:
-        # Power/toughness or loyalty adds an additional line to skip
-        startOracle = startOracle + 1
-
-    # \n needs to appear in the Oracle line
-    oracle = '\\n'.join(splitBlock[startOracle:-1])
-
-    sets = splitBlock[-1]
-
-    return oracle, sets
-
-def getOracleFromMagicCardsInfo(name):
-    # Requires set to grab Oracle text from magiccards.info for simplicity meetings
-    # http://magiccards.info/query?q=e%3Agtc&v=spoiler&s=cname
-    search = '">%s</a>' % name
-    found = mtgData.find(search)
-
-    if found == -1:
-        err.write(name + '... NOT FOUND\n')
-        return None, None
-
-    endFound = mtgData.find('</b></p>', found)
-    block = mtgData[found:endFound]
-    startOracle = '<p class="ctext"><b>'
-
-    oracleStart = block.find(startOracle)
-    oracleBlock = block[oracleStart:]
-    oracle = oracleBlock[len(startOracle):].replace('<br><br>', '\\n')
-    return oracle, None
-
-
-def hasOracleLine(cardFile, lines, offlineSource=True):
-    # Start parsing the rest of the data file
-    hasOracle = False
-    
-    for line in cardFile.readlines():
-        line = line.strip()
-        # Skip empty lines
-        if line == '':
+    # Also replace descriptions
+    for org_line, new_line in zip(oracle_lines, new_lines):
+        org_line = org_line.replace(name, 'CARDNAME')
+        org_line = org_line.replace(nickname, 'NICKNAME')
+        if org_line.find(':') != -1:
+            if org_line.find('"') == -1 or org_line.find('"') > org_line.find(':'):
+                org_line = org_line[org_line.find(':') + 1:].lstrip()
+        if len(org_line) == 0:
             continue
+        new_line = new_line.replace(name, 'CARDNAME')
+        new_line = new_line.replace(nickname, 'NICKNAME')
+        if new_line.find(':') != -1:
+            if new_line.find('"') == -1 or new_line.find('"') > new_line.find(':'):
+                new_line = new_line[new_line.find(':') + 1:].lstrip()
+        for i, line in enumerate(lines):
+            if line.startswith('K:'):
+                continue
+            if line.find(org_line) != -1:
+                lines[i] = line.replace(org_line, new_line)
 
-        if line.find(oracleStr) != -1:
-            hasOracle = True
-            break
+    return True
 
-        # Disabled until we're ready to remove SetInfoUrl Parameter
-        #elif line.find(setStr) != -1 and offlineSource:
-        #    pass
+def update_card_script(dirname, filename, oracle_cards, logfile):
+    file = open(os.path.join(dirname, filename), 'r', encoding='utf8')
+    clean_name = filename.replace('.txt', '')
+
+    names, lines, oracle_texts, alternate_mode = read_card_script(file)
+    formal_name = formalize_name(names)
+    if clean_name != formal_name:
+        logfile.write(f'Rename "{clean_name}" => "{formal_name}"\n')
+        print(f'Rename "{clean_name}" => "{formal_name}"')
+        full_org_filename = os.path.join(dirname, filename)
+        full_new_filename = os.path.join(dirname, formal_name + '.txt')
+        filename = formal_name + '.txt'
+        os.system(f'git mv "{full_org_filename}" "{full_new_filename}"')
+
+    oracle_updated = False
+    if alternate_mode == 'Meld':
+        cardname = names[0]
+    else:
+        cardname = ALTERNATE_SEPARATER.join(names)
+    if cardname not in oracle_cards:
+        logfile.write(f'Skipped unknown card {formal_name}\n')
+        print(f'Skipped unknown card {formal_name}')
+        return
+
+    card = oracle_cards[cardname]
+    if len(names) == 1:
+        is_planeswalker = card['type_line'].find('Planeswalker') != -1
+        is_vanguard = card['type_line'].find('Vanguard') != -1
+        new_oracle = card['oracle_text']
+        if is_vanguard:
+            new_oracle = 'Hand {0}, life {1}\n'.format(card['hand_modifier'], card['life_modifier']) + new_oracle
+        oracle_updated = update_oracle(names[0], lines, oracle_texts[0], new_oracle, is_planeswalker)
+    elif len(names) == 2:
+        if alternate_mode == 'Meld':
+            new_oracle = card['oracle_text']
+            oracle_updated = update_oracle(names[0], lines, oracle_texts[0], new_oracle, False)
+            card = oracle_cards[names[1]]
+            new_oracle = card['oracle_text']
+            oracle_updated = oracle_updated | update_oracle(names[1], lines, oracle_texts[1], new_oracle, False)
         else:
-            lines += line + '\n'
+            for i, face in enumerate(card['card_faces']):
+                is_planeswalker = face['type_line'].find('Planeswalker') != -1
+                new_oracle = face['oracle_text']
+                oracle_updated = oracle_updated | update_oracle(names[i], lines, oracle_texts[i], new_oracle, is_planeswalker)
 
-    cardFile.close()
-    return hasOracle, lines
 
-# parse cardsfolder for Card Lines and Rarity/Picture SVars. Filling in any gaps
-for root, dirnames, filenames in os.walk(folder):
-    for fileName in fnmatch.filter(filenames, '*.txt'):
-        if fileName.startswith('.'):
-            continue
-		
-        file = open(os.path.join(root, fileName), 'r')
-        cleanName = fileName.replace('.txt', '')
+    if not oracle_updated:
+        return
 
-        line = file.readline().strip()
-        # Handle name and creation
-        name = line.replace('Name:', '')
+    logfile.write(f'Updated {formal_name}\n')
+    print(f'Updated {formal_name}')
+    file = open(os.path.join(dirname, filename), 'w', encoding='utf8')
+    write_card_script(file, lines, oracle_texts)
+    full_filename = os.path.join(dirname, filename)
+    os.system(f'git add {full_filename}')
 
-        hasOracle, lines = hasOracleLine(file, line + '\n', offlineSource)
 
-        if hasOracle:
-            #print name + " already has Oracle"
-            continue
+def main():
+    # download_oracle_cards()
+    oracle_cards = load_oracle_cards()
 
-        if offlineSource:
-            oracle, sets = getOracleFromMtgData(name)
-        else:
-            oracle, sets = getOracleFromMagicCardsInfo(name)
+    folder = os.path.join(tools_folder, '..', 'res', 'cardsfolder')
+    logfile = open(os.path.join(tools_folder, 'oracleScript.log'), 'w')
 
-        if oracle is None:
-            continue
+    for root, dirnames, filenames in os.walk(folder):
+        for filename in fnmatch.filter(filenames, '*.txt'):
+            if filename.startswith('.'):
+                continue
+            update_card_script(root, filename, oracle_cards, logfile)
 
-        print "%s => %s \n" % (name, oracle)
-        writeOutCard(root, fileName, lines, oracle, sets)
+    logfile.close()
 
-        err.write(name + '... Updated\n')
-
-err.close()
+if __name__ == '__main__':
+    main()

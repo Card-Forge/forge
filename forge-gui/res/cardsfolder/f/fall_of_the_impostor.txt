@@ -8,4 +8,4 @@ SVar:DBChooseExiled:DB$ ChooseCard | Choices$ Creature.greatestPowerControlledBy
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters
-Oracle:I - Put a +1/+1 counter on up to one target creature.\nII - Put a +1/+1 counter on up to one target creature.\nIII - Exile a creature with the greatest power among creatures target opponent controls.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Put a +1/+1 counter on up to one target creature.\nIII — Exile a creature with the greatest power among creatures target opponent controls.

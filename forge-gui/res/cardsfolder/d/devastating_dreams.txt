@@ -5,4 +5,4 @@ A:SP$ Sacrifice | Cost$ R R Discard<X/Random> | Defined$ Player | SacValid$ Land
 SVar:DBDamage:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature | References$ X
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-Oracle:As an additional cost to cast Devastating Dreams, discard X cards at random.\nEach player sacrifices X lands. Devastating Dreams deals X damage to each creature.
+Oracle:As an additional cost to cast this spell, discard X cards at random.\nEach player sacrifices X lands. Devastating Dreams deals X damage to each creature.

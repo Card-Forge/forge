@@ -8,4 +8,4 @@ SVar:TrigDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBDra
 SVar:DBDrawOne:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.spectacle | ConditionCompare$ EQ0 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBDrawThree | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.spectacle
 SVar:DBDrawThree:DB$ Draw | Defined$ You | NumCards$ 3 | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.spectacle
-Oracle:Spectacle {2}{B}{R} (You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn.)\nWhen Rix Maadi Reveler enters the battlefield, discard a card, then draw a card. If this spell's spectacle cost was paid, instead discard your hand, then draw three cards.
+Oracle:Spectacle {2}{B}{R} (You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn.)\nWhen Rix Maadi Reveler enters the battlefield, discard a card, then draw a card. If Rix Maadi Reveler's spectacle cost was paid, instead discard your hand, then draw three cards.

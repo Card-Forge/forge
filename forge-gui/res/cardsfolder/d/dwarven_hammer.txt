@@ -8,4 +8,4 @@ SVar:TrigToken:AB$ Token | Cost$ 2 | LegacyImage$ r 2 1 dwarf berserker khm | To
 SVar:DBAttach:DB$ Attach | Object$ TriggeredCard | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token
-Oracle:When Dwarven Hammer enters the battlefield, you may pay {2}. If you do, create a 2/2 red Dwarf Berserker creature token, then attach CARDNAME to it.\nEquipped creature gets +2/+2 and has menace. (It can't be blacked except by two or more creatures.)\nEquip: {3}
+Oracle:When Dwarven Hammer enters the battlefield, you may pay {2}. If you do, create a 2/1 red Dwarf Berserker creature token, then attach Dwarven Hammer to it.\nEquipped creature gets +3/+0 and has trample.\nEquip {3}

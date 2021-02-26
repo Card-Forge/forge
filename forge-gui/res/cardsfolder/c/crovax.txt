@@ -2,7 +2,7 @@ Name:Crovax
 ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+2/+0
-T:Mode$ DamageDone | ValidSource$ Creature+YouCtrl | ValidTarget$ Permanent,Player | TriggerZones$ Command | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature you control deals damage to a permanent or player, you gain 1 life.
+T:Mode$ DamageDone | ValidSource$ Creature+YouCtrl | ValidTarget$ Permanent,Player | TriggerZones$ Command | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature you control deals damage to a creature or player, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Crovax.full.jpg
-Oracle:Hand +2, life +0\nWhenever a creature you control deals damage to a permanent or player, you gain 1 life.
+Oracle:Hand +2, life +0\nWhenever a creature you control deals damage to a creature or player, you gain 1 life.

@@ -10,4 +10,4 @@ SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | 
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X
 SVar:X:Count$CardCounters.SPITE
 DeckHas:Ability$Counters & Ability$LifeGain
-Oracle:Enchant player\nWhenever enchanted player casts a spell, put a spite counter on Curse of Vengeance. When enchanted player loses the game, you gain X life and draw X cards, where X is the number of spite counters on Curse of Vengeance.
+Oracle:Enchant player\nWhenever enchanted player casts a spell, put a spite counter on Curse of Vengeance.\nWhen enchanted player loses the game, you gain X life and draw X cards, where X is the number of spite counters on Curse of Vengeance.

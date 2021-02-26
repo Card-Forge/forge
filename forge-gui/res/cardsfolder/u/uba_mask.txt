@@ -1,9 +1,9 @@
 Name:Uba Mask
 ManaCost:4
 Types:Artifact
-R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ Player | ReplaceWith$ ExileTop | Description$ If a player would draw a card, that player exiles that card face up instead. Each player may play cards they exiled with CARDNAME this turn.
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ Player | ReplaceWith$ ExileTop | Description$ If a player would draw a card, that player exiles that card face up instead. Each player may play lands and cast spells from among cards they exiled with CARDNAME this turn.
 SVar:ExileTop:DB$ Dig | Defined$ ReplacedPlayer | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | NoReveal$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | EffectOwner$ ReplacedPlayer | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:If a player would draw a card, that player exiles that card face up instead.\nEach player may play cards they exiled with Uba Mask this turn.
+Oracle:If a player would draw a card, that player exiles that card face up instead.\nEach player may play lands and cast spells from among cards they exiled with Uba Mask this turn.

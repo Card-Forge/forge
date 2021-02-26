@@ -10,5 +10,5 @@ SVar:DBToken:DB$ Token | ValidTgts$ Player | TgtPrompt$ Select target player | T
 SVar:X:Count$Kicked.0.1
 SVar:Y:Count$Kicked.3.1
 SVar:Z:TargetedPlayer$CardsInHand
-Oracle:Kicker {2}{U}{U}\nChoose one. If this spell was kicked, choose any number instead.\n• Return up to two target creatures to their owners’ hands.\n• Scry 2, then draw two cards.\n• Target player creates an X/X blue Illusion creature token, where X is the number of cards in their hand.
+Oracle:Kicker {2}{U}{U}\nChoose one. If this spell was kicked, choose any number instead.\n• Return up to two target creatures to their owners' hands.\n• Scry 2, then draw two cards.\n• Target player creates an X/X blue Illusion creature token, where X is the number of cards in their hand.
 

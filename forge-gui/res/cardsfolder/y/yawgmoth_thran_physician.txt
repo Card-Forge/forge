@@ -9,4 +9,4 @@ A:AB$ Proliferate | Cost$ B B Discard<1/Card> | SpellDescription$ Proliferate.
 SVar:AIPreference:DiscardCost$Card
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters
-Oracle:Protection from Humans. \nPay 1 life, Sacrifice another creature: Put a -1/-1 counter on up to one target creature and draw a card. \n{B}{B}, Discard a card: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+Oracle:Protection from Humans\nPay 1 life, Sacrifice another creature: Put a -1/-1 counter on up to one target creature and draw a card.\n{B}{B}, Discard a card: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

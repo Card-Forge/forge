@@ -8,4 +8,4 @@ S:Mode$ Continuous | Affected$ Pirate.YouCtrl+Other | AddPower$ 1 | AddToughness
 SVar:PlayMain1:TRUE
 DeckHints:Type$Pirate
 DeckHas:Ability$Token
-Oracle:When Corsair Captain enters the battlefield, create a treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nOther Pirates you control get +1/+1.
+Oracle:When Corsair Captain enters the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nOther Pirates you control get +1/+1.

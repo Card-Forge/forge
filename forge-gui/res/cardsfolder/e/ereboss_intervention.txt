@@ -8,4 +8,4 @@ SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Targ
 SVar:X:Count$xPaid
 SVar:XX:SVar$X/Twice
 DeckHas:Ability$LifeGain
-Oracle:Choose one -\n• Target creature gets -X/-X until end of turn. You gain X life.\n• Exile up to twice X target cards from graveyards.
+Oracle:Choose one —\n• Target creature gets -X/-X until end of turn. You gain X life.\n• Exile up to twice X target cards from graveyards.

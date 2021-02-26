@@ -5,4 +5,4 @@ A:SP$ Effect | Cost$ U | Name$ Illusion of Choice Effect | StaticAbilities$ STVo
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:STVoter:Mode$ Continuous | EffectZone$ Command | Affected$ You | ControlVote$ True | Description$ You choose how each player votes this turn.
 AI:RemoveDeck:All
-Oracle:You choose how each player votes this turn. Draw a card.
+Oracle:You choose how each player votes this turn.\nDraw a card.

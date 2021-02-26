@@ -6,4 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Menace | Descripti
 A:AB$ Amass | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Num$ 2 | SpellDescription$ Amass 2. (Put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
 DeckHints:Ability$Amass & Type$Zombie
 DeckHas:Ability$Amass & Ability$Counters & Ability$Token
-Oracle:Creatures you control have menace. \n[-2]: Amass 2. (Put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
+Oracle:Creatures you control have menace.\n[−2]: Amass 2. (Put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)

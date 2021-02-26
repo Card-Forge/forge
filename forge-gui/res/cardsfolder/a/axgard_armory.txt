@@ -8,4 +8,4 @@ SVar:DBChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$
 AI:RemoveDeck:Random
 DeckNeeds:Type$Aura|Equipment
 DeckHas:Ability$Sacrifice
-Oracle:Axgard Armory enters the battlefield tapped.\n{T}: Add {W}.\n{1}{R}{R}{W}, {T}: Sacrifice Axgard Armory: Search your library for an Aura card and/or an Equipment card, reveal them, put them into your hand, then shuffle your library.
+Oracle:Axgard Armory enters the battlefield tapped.\n{T}: Add {W}.\n{1}{R}{R}{W}, {T}, Sacrifice Axgard Armory: Search your library for an Aura card and/or an Equipment card, reveal them, put them into your hand, then shuffle your library.

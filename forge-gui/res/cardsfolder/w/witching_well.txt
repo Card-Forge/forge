@@ -1,7 +1,7 @@
 Name:Witching Well
 ManaCost:U
 Types:Artifact
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on the top in any order.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
 SVar:TrigScry:DB$ Scry | ScryNum$ 2
 A:AB$ Draw | Cost$ 3 U Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
-Oracle:When Witching Well enters the battlefield, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on the top in any order.)\n{3}{U}, Sacrifice Witching Well: Draw two cards.
+Oracle:When Witching Well enters the battlefield, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)\n{3}{U}, Sacrifice Witching Well: Draw two cards.

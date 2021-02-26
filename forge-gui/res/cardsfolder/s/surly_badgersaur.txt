@@ -10,4 +10,4 @@ T:Mode$ Discarded | ValidCard$ Card.nonLand+nonCreature+YouCtrl | TriggerZones$ 
 SVar:TrigFight:DB$ Fight | Defined$ Self | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose up to one target creature you don't control | TargetMin$ 0 | TargetMax$ 1
 DeckHints:Ability$Discard
 DeckHas:Ability$Counters
-Oracle:Whenever you discard a creature card, put a +1/+1 counter on Surly Badgersaur.\nWhenever you discard a land card, create a treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nWhenever you discard a noncreature, nonland card, Surly Badgersaur fights up to one target creature you don't control.
+Oracle:Whenever you discard a creature card, put a +1/+1 counter on Surly Badgersaur.\nWhenever you discard a land card, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nWhenever you discard a noncreature, nonland card, Surly Badgersaur fights up to one target creature you don't control.

@@ -9,4 +9,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Permanent.ExiledWithSource | Origin$ Exile | Destination$ Battlefield
 DeckHas:Ability$Graveyard
 SVar:BuffedBy:Land
-Oracle:Landfall — Whenever a land enters the battlefield under your control, exile target permanent card with converted mana cost 3 or less from your graveyard.\nWhen Trove Warden dies, put each permanent card exiled with it onto the battlefield under the control of that card's owner.
+Oracle:Vigilance\nLandfall — Whenever a land enters the battlefield under your control, exile target permanent card with converted mana cost 3 or less from your graveyard.\nWhen Trove Warden dies, put each permanent card exiled with it onto the battlefield under the control of that card's owner.

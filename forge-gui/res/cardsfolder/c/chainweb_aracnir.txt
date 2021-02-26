@@ -10,4 +10,4 @@ K:Escape:3 G G ExileFromGrave<4/Card.Other/other>
 K:etbCounter:P1P1:3:ValidCard$ Card.Self+escaped:CARDNAME escapes with three +1/+1 counters on it.
 DeckHas:Ability$Counters
 SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
-Oracle:Reach\nWhen Chainweb Aracnir enters the battlefield, it deals damage equal to its power to target creature with flying an opponent controls.\nEscape — {3}{G}{G}, Exile four other cards from your graveyard. (You may cast this card from your graveyard for its escape cost).\nChainweb Aracnir escapes with three +1/+1 counters on it.
+Oracle:Reach\nWhen Chainweb Aracnir enters the battlefield, it deals damage equal to its power to target creature with flying an opponent controls.\nEscape—{3}{G}{G}, Exile four other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)\nChainweb Aracnir escapes with three +1/+1 counters on it.

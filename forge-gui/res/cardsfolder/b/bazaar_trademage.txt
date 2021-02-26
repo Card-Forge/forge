@@ -7,4 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:DB$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards, then discard three cards. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 3 | Mode$ TgtChoose
 AI:RemoveDeck:All
-Oracle:Flying \nWhen Bazaar Trademage enters the battlefield, draw two cards, then discard three cards.
+Oracle:Flying\nWhen Bazaar Trademage enters the battlefield, draw two cards, then discard three cards.

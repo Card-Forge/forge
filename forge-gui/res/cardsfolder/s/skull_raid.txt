@@ -7,4 +7,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Number$2/Minus.Y
 SVar:Y:Count$RememberedSize
 K:Foretell:1 B
-Oracle:Target opponent discards two cards. If fewer than two cards were discarded this way, you draw cards equal to the difference.
+Oracle:Target opponent discards two cards. If fewer than two cards were discarded this way, you draw cards equal to the difference.\nForetell {1}{B} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)
