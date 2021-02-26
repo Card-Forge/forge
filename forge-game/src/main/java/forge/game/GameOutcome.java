@@ -239,7 +239,7 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
         if (!anteResult.containsKey(pl)) {
             anteResult.put(pl, new AnteResult());
         }
-        anteResult.get(pl).addWon(cards);
+        anteResult.get(pl).addLost(cards);
     }
 
     public AnteResult getAnteResult(RegisteredPlayer pl) {
