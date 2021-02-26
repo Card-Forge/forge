@@ -81,6 +81,10 @@ public class CardProperty {
                     }
                 }
             }
+        } else if (property.startsWith("BorderColor")) {
+            if (!property.toUpperCase().contains(card.borderColor().toString())) {
+                return false;
+            }
         } else if (property.equals("Permanent")) {
             if (!card.isPermanent()) {
                 return false;

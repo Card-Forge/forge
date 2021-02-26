@@ -6998,4 +6998,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         return updateState;
     }
+
+    public CardEdition.BorderColor borderColor() {
+        CardEdition edition = StaticData.instance().getEditions().get(getSetCode());
+        if (edition == null || isBasicLand()) {
+            return CardEdition.BorderColor.BLACK;
+        }
+        return edition.getBorderColor();
+    }
 }

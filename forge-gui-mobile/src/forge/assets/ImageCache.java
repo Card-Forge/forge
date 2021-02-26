@@ -265,7 +265,8 @@ public class ImageCache {
 
         CardView.CardStateView state = c.getCurrentState();
         CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
-        if (ed != null && ed.isWhiteBorder() && state.getFoilIndex() == 0)
+        // TODO: Treatment for silver here
+        if (ed != null && ed.getBorderColor() == CardEdition.BorderColor.WHITE && state.getFoilIndex() == 0)
             return 1;
         return 0;
     }
