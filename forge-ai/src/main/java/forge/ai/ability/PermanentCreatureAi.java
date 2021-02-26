@@ -9,6 +9,7 @@ import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.combat.Combat;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -86,7 +87,7 @@ public class PermanentCreatureAi extends PermanentAi {
         if (ai.getController().isAI()) {
             advancedFlash = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
         }
-        if (!ai.canCastSorcery() && sa.canCastTiming(ai)) {
+        if (card.hasKeyword(Keyword.FLASH) || (!ai.canCastSorcery() && sa.canCastTiming(ai))) {
             if (advancedFlash) {
                 return doAdvancedFlashLogic(card, ai, sa);
             } else {
