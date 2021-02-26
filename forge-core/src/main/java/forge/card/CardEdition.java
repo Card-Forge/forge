@@ -461,7 +461,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             res.boosterTpl = boosterDesc == null ? null : new SealedProduct.Template(res.code, SealedProduct.Template.Reader.parseSlots(boosterDesc));
 
             res.alias = section.get("alias");
-            res.borderColor = BorderColor.valueOf(section.get("border", "Black").toUpperCase());
+            res.borderColor = BorderColor.valueOf(section.get("border", "Black").toUpperCase(Locale.ENGLISH));
             String type  = section.get("type");
             Type enumType = Type.UNKNOWN;
             if (null != type && !type.isEmpty()) {
