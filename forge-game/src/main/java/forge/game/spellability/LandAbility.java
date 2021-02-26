@@ -49,11 +49,11 @@ public class LandAbility extends Ability {
         Card land = this.getHostCard();
         final Player p = this.getActivatingPlayer();
 
-        if (this.getCardState() != null) {
+        if (this.getCardState() != null && land.getCurrentStateName() != this.getCardStateName()) {
             if (!land.isLKI()) {
                 land = CardUtil.getLKICopy(land);
             }
-            CardStateName stateName = getCardState();
+            CardStateName stateName = getCardStateName();
             if (!land.hasState(stateName)) {
                 land.addAlternateState(stateName, false);
                 land.getState(stateName).copyFrom(getHostCard().getState(stateName), true);
@@ -87,7 +87,7 @@ public class LandAbility extends Ability {
         StringBuilder sb = new StringBuilder("Play land");
 
         if (getHostCard().isModal()) {
-            sb.append(" (").append(getHostCard().getName(ObjectUtils.defaultIfNull(getCardState(), CardStateName.Original))).append(")");
+            sb.append(" (").append(getHostCard().getName(ObjectUtils.firstNonNull(getCardStateName(), CardStateName.Original))).append(")");
         }
 
         StaticAbility sta = getMayPlay();

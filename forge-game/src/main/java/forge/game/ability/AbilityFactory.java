@@ -226,6 +226,7 @@ public final class AbilityFactory {
             msg.append(". Looking for API: ").append(api);
             throw new RuntimeException(msg.toString());
         }
+        spellAbility.setCardState(state);
 
         if (mapParams.containsKey("Forecast")) {
             spellAbility.putParam("ActivationZone", "Hand");

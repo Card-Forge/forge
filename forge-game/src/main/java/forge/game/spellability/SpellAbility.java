@@ -115,8 +115,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean blessing = false;
     private Integer chapter = null;
 
-    private CardStateName stateName = null;
-
     /** The pay costs. */
     private Cost payCosts;
     private SpellAbilityRestriction restrictions = new SpellAbilityRestriction();
@@ -464,21 +462,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public boolean isBoast() {
         return this.hasParam("Boast");
-    }
-
-    public void setOriginalHost(final Card c) {
-        super.setOriginalHost(c);
-        if (subAbility != null) {
-            subAbility.setOriginalHost(c);
-        }
-        for (AbilitySub sa : additionalAbilities.values()) {
-            sa.setOriginalHost(c);
-        }
-        for (List<AbilitySub> list : additionalAbilityLists.values()) {
-            for (AbilitySub sa : list) {
-                sa.setOriginalHost(c);
-            }
-        }
     }
 
     // If this is not null, then ability was made in a factory
@@ -960,15 +943,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         mayPlay = sta;
     }
 
-    public CardStateName getCardState() {
-        return stateName;
-    }
-    public void setCardState(CardStateName stateName0) {
-        this.stateName = stateName0;
-    }
-
     public boolean isAdventure() {
-        return this.stateName == CardStateName.Adventure;
+        return this.getCardStateName() == CardStateName.Adventure;
     }
 
     public SpellAbility copy() {

@@ -31,6 +31,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardState;
 import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
@@ -236,8 +237,8 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      * @param host
      *            the host
      */
-    public StaticAbility(final String params, final Card host) {
-        this(parseParams(params, host), host);
+    public StaticAbility(final String params, final Card host, CardState state) {
+        this(parseParams(params, host), host, state);
     }
 
     /**
@@ -248,13 +249,14 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      * @param host
      *            the host
      */
-    private StaticAbility(final Map<String, String> params, final Card host) {
+    private StaticAbility(final Map<String, String> params, final Card host, CardState state) {
         this.id = nextId();
         this.originalMapParams.putAll(params);
         this.mapParams.putAll(params);
         this.layers = this.generateLayer();
         this.hostCard = host;
         buildCommonAttributes(host);
+        this.setCardState(state);
     }
 
     public final CardCollectionView applyContinuousAbilityBefore(final StaticAbilityLayer layer, final CardCollectionView preList) {

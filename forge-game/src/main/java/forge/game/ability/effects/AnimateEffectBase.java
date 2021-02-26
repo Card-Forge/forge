@@ -152,7 +152,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         final List<SpellAbility> addedAbilities = Lists.newArrayList();
         for (final String s : abilities) {
             SpellAbility sSA = AbilityFactory.getAbility(c, s, sa);
-            sSA.setOriginalHost(source);
             addedAbilities.add(sSA);
         }
 
@@ -160,7 +159,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         final List<Trigger> addedTriggers = Lists.newArrayList();
         for (final String s : triggers) {
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), c, false, sa);
-            parsedTrigger.setOriginalHost(source);
             addedTriggers.add(parsedTrigger);
         }
 
@@ -174,7 +172,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         // itself a static ability)
         final List<StaticAbility> addedStaticAbilities = Lists.newArrayList();
         for (final String s : stAbs) {
-            addedStaticAbilities.add(new StaticAbility(AbilityUtils.getSVar(sa, s), c));
+            addedStaticAbilities.add(new StaticAbility(AbilityUtils.getSVar(sa, s), c, sa.getCardState()));
         }
 
         final GameCommand unanimate = new GameCommand() {

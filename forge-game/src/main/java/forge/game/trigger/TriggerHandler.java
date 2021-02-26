@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.IHasSVars;
@@ -29,6 +30,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CardState;
 import forge.game.card.CardZoneTable;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -151,6 +153,12 @@ public class TriggerHandler {
             ret = type.createTrigger(mapParams, host, intrinsic);
             if (sVarHolder != null) {
                 ret.ensureAbility(sVarHolder);
+
+                if (sVarHolder instanceof CardState) {
+                    ret.setCardState((CardState)sVarHolder);
+                } else if (sVarHolder instanceof CardTraitBase) {
+                    ret.setCardState(((CardTraitBase)sVarHolder).getCardState());
+                }
             }
         } catch (Exception e) {
             String msg = "TriggerHandler:parseTrigger failed to parse";

@@ -175,11 +175,11 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             }
             source.turnFaceDownNoUpdate();
             lkicheck = true;
-        } else if (getCardState() != null) {
+        } else if (getCardState() != null && source.getCurrentStateName() != getCardStateName()) {
             if (!source.isLKI()) {
                 source = CardUtil.getLKICopy(source);
             }
-            CardStateName stateName = getCardState();
+            CardStateName stateName = getCardState().getStateName();
             if (!source.hasState(stateName)) {
                 source.addAlternateState(stateName, false);
                 source.getState(stateName).copyFrom(getHostCard().getState(stateName), true);

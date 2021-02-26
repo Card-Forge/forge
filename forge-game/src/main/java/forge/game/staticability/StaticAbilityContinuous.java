@@ -736,7 +736,6 @@ public final class StaticAbilityContinuous {
                         if (abilty.startsWith("AB") || abilty.startsWith("ST")) { // grant the ability
                             final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard, stAb);
                             sa.setIntrinsic(false);
-                            sa.setOriginalHost(hostCard);
                             addedAbilities.add(sa);
                         }
                     }
@@ -766,9 +765,6 @@ public final class StaticAbilityContinuous {
                                     newSA.setRestrictions(sa.getRestrictions());
                                     newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));
                                 }
-                                if (newSA.getOriginalHost() == null) {
-                                    newSA.setOriginalHost(c);
-                                }
                                 newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
                                 newSA.setGrantorStatic(stAb);
                                 newSA.setIntrinsic(false);
@@ -794,7 +790,6 @@ public final class StaticAbilityContinuous {
                         // turn them into SpellAbility object before adding to card
                         // with that the TargetedCard does not need the Svars added to them anymore
                         // but only do it if the trigger doesn't already have a overriding ability
-                        actualTrigger.setOriginalHost(hostCard);
                         addedTrigger.add(actualTrigger);
                     }
                 }
@@ -807,9 +802,8 @@ public final class StaticAbilityContinuous {
                             s = TextUtil.fastReplace(s, "ConvertedManaCost", costcmc);
                         }
 
-                        StaticAbility stat = new StaticAbility(s, affectedCard);
+                        StaticAbility stat = new StaticAbility(s, affectedCard, stAb.getCardState());
                         stat.setIntrinsic(false);
-                        stat.setOriginalHost(hostCard);
                         addedStaticAbility.add(stat);
                     }
                 }

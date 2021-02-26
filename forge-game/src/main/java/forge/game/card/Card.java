@@ -2227,7 +2227,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             String sAbility = formatSpellAbility(sa);
 
             // add Adventure to AbilityText
-            if (sa.isAdventure() && state.getView().getState().equals(CardStateName.Original)) {
+            if (sa.isAdventure() && state.getStateName().equals(CardStateName.Original)) {
                 CardState advState = getState(CardStateName.Adventure);
                 StringBuilder sbSA = new StringBuilder();
                 sbSA.append(Localizer.getInstance().getMessage("lblAdventure"));
@@ -4388,7 +4388,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final StaticAbility addStaticAbility(final String s) {
         if (!s.trim().isEmpty()) {
-            final StaticAbility stAb = new StaticAbility(s, this);
+            final StaticAbility stAb = new StaticAbility(s, this, currentState);
             stAb.setIntrinsic(true);
             currentState.addStaticAbility(stAb);
             return stAb;
@@ -6326,11 +6326,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void setSplitStateToPlayAbility(final SpellAbility sa) {
+        if (isFaceDown()) {
+            return;
+        }
         if (sa.isBestow()) {
             animateBestow();
         }
-        CardStateName stateName = sa.getCardState();
-        if (hasState(stateName)) {
+        CardStateName stateName = sa.getCardStateName();
+        if (stateName != null && hasState(stateName) && this.getCurrentStateName() != stateName) {
             setState(stateName, true);
             // need to set backSide value according to the SplitType
             if (hasBackSide()) {
@@ -6356,6 +6359,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public List<SpellAbility> getAllPossibleAbilities(final Player player, final boolean removeUnplayable) {
+        CardState oState = getState(CardStateName.Original);
         // this can only be called by the Human
         final List<SpellAbility> abilities = Lists.newArrayList();
         for (SpellAbility sa : getSpellAbilities()) {
@@ -6382,7 +6386,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         if (isInPlay() && isFaceDown() && isManifested()) {
-            CardState oState = getState(CardStateName.Original);
             ManaCost cost = oState.getManaCost();
             if (oState.getType().isCreature()) {
                 abilities.add(CardFactoryUtil.abilityManifestFaceUp(this, cost));
@@ -6409,6 +6412,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         if (getState(CardStateName.Original).getType().isLand()) {
             LandAbility la = new LandAbility(this, player, null);
+            la.setCardState(oState);
             if (la.canPlay()) {
                 abilities.add(la);
             }
@@ -6433,6 +6437,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             // extra for MayPlay
             for (CardPlayOption o : source.mayPlay(player)) {
                 la = new LandAbility(this, player, o.getAbility());
+                la.setCardState(oState);
                 if (la.canPlay()) {
                     abilities.add(la);
                 }
@@ -6449,9 +6454,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         if (isModal() && hasState(CardStateName.Modal)) {
-            if (getState(CardStateName.Modal).getType().isLand()) {
+            CardState modal = getState(CardStateName.Modal);
+            if (modal.getType().isLand()) {
                 LandAbility la = new LandAbility(this, player, null);
-                la.setCardState(CardStateName.Modal);
+                la.setCardState(modal);
 
                 Card source = CardUtil.getLKICopy(this);
                 boolean lkicheck = true;
@@ -6483,7 +6489,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 // extra for MayPlay
                 for (CardPlayOption o : source.mayPlay(player)) {
                     la = new LandAbility(this, player, o.getAbility());
-                    la.setCardState(CardStateName.Modal);
+                    la.setCardState(modal);
                     if (la.canPlay(source)) {
                         abilities.add(la);
                     }
