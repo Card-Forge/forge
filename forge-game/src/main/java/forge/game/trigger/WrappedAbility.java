@@ -6,6 +6,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardState;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.*;
@@ -515,10 +516,11 @@ public class WrappedAbility extends Ability {
         sa.setXManaCostPaid(n);
     }
 
-    public Card getOriginalHost() {
-        return sa.getOriginalHost();
+
+    public CardState getCardState() {
+        return sa.getCardState();
     }
-    public void setOriginalHost(final Card c) {
-        sa.setOriginalHost(c);
+    public void setCardState(CardState state) {
+        sa.setCardState(state);
     }
 }

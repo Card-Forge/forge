@@ -251,7 +251,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(tgtCard, sas);
             } else {
                 // For Illusionary Mask effect
-                tgtSA = CardFactoryUtil.abilityMorphDown(tgtCard);
+                tgtSA = CardFactoryUtil.abilityMorphDown(tgtCard.getCurrentState());
             }
             // in case player canceled from choice dialog
             if (tgtSA == null) {

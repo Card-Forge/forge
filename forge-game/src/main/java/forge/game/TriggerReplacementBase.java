@@ -4,6 +4,7 @@ import java.util.EnumSet;
 import java.util.Set;
 
 import forge.game.card.Card;
+import forge.game.card.CardState;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -27,14 +28,12 @@ public abstract class TriggerReplacementBase extends CardTraitBase implements II
     }
 
     @Override
-    public void setOriginalHost(Card c) {
-        super.setOriginalHost(c);
+    public void setCardState(CardState state) {
+        super.setCardState(state);
         if (overridingAbility != null) {
-            overridingAbility.setOriginalHost(c);
+            overridingAbility.setCardState(state);
         }
     }
-
-
 
     public Set<ZoneType> getActiveZone() {
         return validHostZones;

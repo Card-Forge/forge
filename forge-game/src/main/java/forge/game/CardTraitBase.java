@@ -1,11 +1,13 @@
 package forge.game;
 
+import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardState;
 import forge.game.card.CardUtil;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
@@ -29,8 +31,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
 
     /** The host card. */
     protected Card hostCard;
-
-    private Card grantorCard = null; // card which grants the ability (equipment or owner of static ability that gave this one)
+    protected CardState cardState = null;
 
     /** The map params. */
     protected Map<String, String> originalMapParams = Maps.newHashMap(),
@@ -468,9 +469,8 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     }
 
     protected IHasSVars getSVarFallback() {
-        if (getOriginalHost() != null) {
-            return getOriginalHost();
-        }
+        if (getCardState() != null)
+            return getCardState();
         return getHostCard();
     }
 
@@ -520,11 +520,30 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         sVars.remove(var);
     }
 
-    public Card getOriginalHost() {
-        return grantorCard;
+    public CardState getCardState() {
+        return cardState;
     }
-    public void setOriginalHost(final Card c) {
-        grantorCard = c;
+    public void setCardState(CardState state) {
+        this.cardState = state;
+    }
+    public CardStateName getCardStateName() {
+        if (this.getCardState() == null) {
+            return null;
+        }
+        return getCardState().getView().getState();
+    }
+
+    public Card getOriginalHost() {
+        if (getCardState() != null)
+            return getCardState().getCard();
+        return null;
+    }
+
+    public boolean isCopiedTrait() {
+        if (this.getCardState() == null) {
+            return false;
+        }
+        return !getHostCard().equals(getCardState().getCard());
     }
 
     public Map<String, String> getChangedTextColors() {
@@ -580,6 +599,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         copy.originalMapParams = Maps.newHashMap(originalMapParams);
         copy.mapParams = Maps.newHashMap(originalMapParams);
         copy.setSVars(sVars);
+        copy.setCardState(cardState);
         // dont use setHostCard to not trigger the not copied parts yet
         copy.hostCard = host;
     }

@@ -1614,7 +1614,7 @@ public class AbilityUtils {
 
                     // If the chosen creature has X in its mana cost, that X is considered to be 0.
                     // The value of X in Altered Ego’s last ability will be whatever value was chosen for X while casting Altered Ego.
-                    if (sa.getOriginalHost() != null || !sa.getHostCard().equals(c)) {
+                    if (sa.isCopiedTrait() || !sa.getHostCard().equals(c)) {
                         return CardFactoryUtil.doXMath(0, expr, c);
                     }
 
@@ -2063,7 +2063,6 @@ public class AbilityUtils {
 
         subAbility.setActivatingPlayer(sa.getActivatingPlayer());
         subAbility.setHostCard(sa.getHostCard());
-        subAbility.setOriginalHost(c);
 
         //add the spliced ability to the end of the chain
         sa.appendSubAbility(subAbility);

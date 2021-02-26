@@ -104,6 +104,10 @@ public class CardState extends GameObject implements IHasSVars {
         view.updateName(this);
     }
 
+    public CardStateName getStateName() {
+        return this.getView().getState();
+    }
+
     @Override
     public String toString() {
         return name + " (" + view.getState() + ")";
@@ -303,6 +307,11 @@ public class CardState extends GameObject implements IHasSVars {
         return Iterables.filter(getSpellAbilities(), SpellAbilityPredicates.isIntrinsic());
     }
 
+
+    public final SpellAbility getFirstSpellAbility() {
+        return Iterables.getFirst(getNonManaAbilities(), null);
+    }
+
     public final boolean hasSpellAbility(final SpellAbility sa) {
         return getSpellAbilities().contains(sa);
     }
@@ -431,7 +440,7 @@ public class CardState extends GameObject implements IHasSVars {
 
         if (getTypeWithChanges().isPlaneswalker()) {
             if (loyaltyRep == null) {
-                loyaltyRep = CardFactoryUtil.makeEtbCounter("etbCounter:LOYALTY:" + this.baseLoyalty, card, true);
+                loyaltyRep = CardFactoryUtil.makeEtbCounter("etbCounter:LOYALTY:" + this.baseLoyalty, this, true);
             }
             result.add(loyaltyRep);
         }

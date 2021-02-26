@@ -1396,6 +1396,7 @@ public class AiController {
                         final List<SpellAbility> abilities = Lists.newArrayList();
 
                         LandAbility la = new LandAbility(land, player, null);
+                        la.setCardState(land.getCurrentState());
                         if (la.canPlay()) {
                             abilities.add(la);
                         }
@@ -1403,6 +1404,7 @@ public class AiController {
                         // add mayPlay option
                         for (CardPlayOption o : land.mayPlay(player)) {
                             la = new LandAbility(land, player, o.getAbility());
+                            la.setCardState(land.getCurrentState());
                             if (la.canPlay()) {
                                 abilities.add(la);
                             }

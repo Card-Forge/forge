@@ -17,6 +17,7 @@
  */
 package forge.game.replacement;
 
+import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.IHasSVars;
@@ -25,6 +26,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardState;
 import forge.game.card.CardTraitChanges;
 import forge.game.card.CardUtil;
 import forge.game.keyword.KeywordInterface;
@@ -405,6 +407,11 @@ public class ReplacementHandler {
             ret.setOverridingAbility(AbilityFactory.getAbility(host, mapParams.get("ReplaceWith"), sVarHolder));
         }
 
+        if (sVarHolder instanceof CardState) {
+            ret.setCardState((CardState)sVarHolder);
+        } else if (sVarHolder instanceof CardTraitBase) {
+            ret.setCardState(((CardTraitBase)sVarHolder).getCardState());
+        }
         return ret;
     }
 }

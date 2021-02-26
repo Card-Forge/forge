@@ -5,6 +5,8 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
+import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -1837,7 +1839,7 @@ public class ComputerUtilCard {
 
     public static AiPlayDecision checkNeedsToPlayReqs(final Card card, final SpellAbility sa) {
         Game game = card.getGame();
-        boolean isRightSplit = sa != null && sa.getCardState() != null;
+        boolean isRightSplit = sa != null && sa.getCardState().getStateName() == CardStateName.RightSplit;
         String needsToPlayName = isRightSplit ? "SplitNeedsToPlay" : "NeedsToPlay";
         String needsToPlayVarName = isRightSplit ? "SplitNeedsToPlayVar" : "NeedsToPlayVar";
 

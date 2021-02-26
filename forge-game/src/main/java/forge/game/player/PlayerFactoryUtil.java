@@ -29,7 +29,7 @@ public class PlayerFactoryUtil {
         }
         if (effect != null) {
             final Card card = player.getKeywordCard();
-            StaticAbility st = new StaticAbility(effect, card);
+            StaticAbility st = new StaticAbility(effect, card, card.getCurrentState());
             st.setIntrinsic(false);
             inst.addStaticAbility(st);
         }
