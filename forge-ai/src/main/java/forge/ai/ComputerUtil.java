@@ -26,6 +26,7 @@ import com.google.common.collect.Multimap;
 import forge.ai.ability.ChooseGenericEffectAi;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.TokenAi;
+import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -961,6 +962,7 @@ public class ComputerUtil {
 
     public static boolean castPermanentInMain1(final Player ai, final SpellAbility sa) {
         final Card card = sa.getHostCard();
+        final CardState cardState = card.isFaceDown() ? card.getState(CardStateName.Original) : card.getCurrentState();
 
         if (card.hasSVar("PlayMain1")) {
             if (card.getSVar("PlayMain1").equals("ALWAYS") || sa.getPayCosts().hasNoManaCost()) {
@@ -976,7 +978,7 @@ public class ComputerUtil {
         }
 
         // try not to cast Raid creatures in main 1 if an attack is likely
-        if ("Count$AttackersDeclared".equals(card.getSVar("RaidTest")) && !card.hasKeyword(Keyword.HASTE)) {
+        if ("Count$AttackersDeclared".equals(card.getSVar("RaidTest")) && !cardState.hasKeyword(Keyword.HASTE)) {
             for (Card potentialAtkr: ai.getCreaturesInPlay()) {
                 if (ComputerUtilCard.doesCreatureAttackAI(ai, potentialAtkr)) {
                     return false;
@@ -988,7 +990,7 @@ public class ComputerUtil {
             return true;
         }
 
-        if (card.hasKeyword(Keyword.RIOT) && ChooseGenericEffectAi.preferHasteForRiot(sa, ai)) {
+        if (cardState.hasKeyword(Keyword.RIOT) && ChooseGenericEffectAi.preferHasteForRiot(sa, ai)) {
             // Planning to choose Haste for Riot, so do this in Main 1
             return true;
         }
@@ -1009,12 +1011,12 @@ public class ComputerUtil {
             }
         }
 
-        if (card.isCreature() && !card.hasKeyword(Keyword.DEFENDER)
-                && (card.hasKeyword(Keyword.HASTE) || ComputerUtil.hasACardGivingHaste(ai, true) || sa.isDash())) {
+        if (card.isCreature() && !cardState.hasKeyword(Keyword.DEFENDER)
+                && (cardState.hasKeyword(Keyword.HASTE) || ComputerUtil.hasACardGivingHaste(ai, true) || sa.isDash())) {
             return true;
         }
 
-        if (card.hasKeyword(Keyword.EXALTED) || card.hasKeyword(Keyword.EXTORT)) {
+        if (cardState.hasKeyword(Keyword.EXALTED) || cardState.hasKeyword(Keyword.EXTORT)) {
             return true;
         }
 
@@ -1064,7 +1066,7 @@ public class ComputerUtil {
                 return true;
             }
 
-            if (card.hasKeyword(Keyword.SOULBOND) && buffedcard.isCreature() && !buffedcard.isPaired()) {
+            if (cardState.hasKeyword(Keyword.SOULBOND) && buffedcard.isCreature() && !buffedcard.isPaired()) {
                 return true;
             }
 
