@@ -1533,6 +1533,8 @@ public class CardProperty {
         // Nex predicates refer to past combat and don't need a reference to actual combat
         else if (property.equals("blocked")) {
             return null != combat && combat.isBlocked(card);
+        } else if (property.startsWith("blockedBySourceLKI")) {
+            return null != combat && combat.isBlocking(game.getChangeZoneLKIInfo(source), card);
         } else if (property.startsWith("blockedBySource")) {
             return null != combat && combat.isBlocking(source, card);
         } else if (property.startsWith("blockedThisTurn")) {
