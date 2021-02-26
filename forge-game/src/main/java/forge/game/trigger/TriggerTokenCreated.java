@@ -67,9 +67,8 @@ public class TriggerTokenCreated extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        Player p = (Player) runParams.get(AbilityKey.Player);
         if (hasParam("ValidPlayer")) {
-            if (!matchesValid(p, getParam("ValidPlayer").split(","), getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","), getHostCard())) {
                 return false;
             }
         }
