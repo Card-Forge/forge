@@ -1457,9 +1457,11 @@ public class AiController {
 
         int totalCMCInHand = Aggregates.sum(inHand, CardPredicates.Accessors.fnGetCmc);
         int minCMCInHand = Aggregates.min(inHand, CardPredicates.Accessors.fnGetCmc);
+        if (minCMCInHand == Integer.MAX_VALUE)
+            minCMCInHand = 0;
         int predictedMana = ComputerUtilMana.getAvailableManaEstimate(player, true);
 
-        boolean canCastWithLandDrop = (predictedMana + 1 >= minCMCInHand) && !isTapLand;
+        boolean canCastWithLandDrop = (predictedMana + 1 >= minCMCInHand) && minCMCInHand > 0 && !isTapLand;
         boolean cantCastAnythingNow = predictedMana < minCMCInHand;
 
         boolean hasRelevantAbsOTB = !CardLists.filter(otb, new Predicate<Card>() {
