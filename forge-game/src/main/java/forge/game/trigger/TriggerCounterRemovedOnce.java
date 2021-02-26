@@ -55,7 +55,6 @@ public class TriggerCounterRemovedOnce extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Card removedFrom = (Card) runParams.get(AbilityKey.Card);
         final CounterType removedType = (CounterType) runParams.get(AbilityKey.CounterType);
 
         if (hasParam("ValidCard")) {

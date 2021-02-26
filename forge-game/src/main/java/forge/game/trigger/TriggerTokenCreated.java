@@ -19,7 +19,6 @@ package forge.game.trigger;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 

@@ -29,9 +29,9 @@ public class OriginalMulligan extends AbstractMulligan {
     
     @Override
     public void revealPreMulligan(CardCollection toMulligan) {
-        for(Card card : toMulligan) {
+        //for(Card card : toMulligan) {
             // TODO Reveal the cards. 
-        }
+        //}
     }
 
     public void mulliganDraw() {

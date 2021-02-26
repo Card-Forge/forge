@@ -55,7 +55,6 @@ public class TriggerCounterRemoved extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Card addedTo = (Card) runParams.get(AbilityKey.Card);
         final CounterType addedType = (CounterType) runParams.get(AbilityKey.CounterType);
         final Integer addedNewCounterAmount = (Integer) runParams.get(AbilityKey.NewCounterAmount);
 
