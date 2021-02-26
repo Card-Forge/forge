@@ -308,13 +308,16 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 switch (ed.getBorderColor()) {
                     case WHITE:
                         g2d.setColor(Color.WHITE);
+                        colorIsSet = true;
+                        break;
                     case GOLD:
                         g2d.setColor(Color.ORANGE);
+                        colorIsSet = true;
+                        break;
                     case SILVER:
                         g2d.setColor(Color.GRAY);
+                        colorIsSet = true;
                 }
-                g2d.setColor(Color.WHITE);
-                colorIsSet = true;
             }
             if (colorIsSet) {
                 final int ins = 1;
