@@ -670,18 +670,6 @@ public class CardFactory {
                 state.setBaseLoyalty(String.valueOf(sa.getParam("SetLoyalty")));
             }
 
-
-            // triggers to add to clone
-            if (sa.hasParam("AddTriggers")) {
-                for (final String s : sa.getParam("AddTriggers").split(",")) {
-                    if (origSVars.containsKey(s)) {
-                        final String actualTrigger = origSVars.get(s);
-                        final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, out, true);
-                        state.addTrigger(parsedTrigger);
-                    }
-                }
-            }
-
             // SVars to add to clone
             if (sa.hasParam("AddSVars") || sa.hasParam("GainTextSVars")) {
                 final String str = sa.getParamOrDefault("GainTextSVars", sa.getParam("AddSVars"));
@@ -689,6 +677,17 @@ public class CardFactory {
                     if (origSVars.containsKey(s)) {
                         final String actualsVar = origSVars.get(s);
                         state.setSVar(s, actualsVar);
+                    }
+                }
+            }
+
+            // triggers to add to clone
+            if (sa.hasParam("AddTriggers")) {
+                for (final String s : sa.getParam("AddTriggers").split(",")) {
+                    if (origSVars.containsKey(s)) {
+                        final String actualTrigger = origSVars.get(s);
+                        final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, out, true, state);
+                        state.addTrigger(parsedTrigger);
                     }
                 }
             }
