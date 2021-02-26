@@ -1806,6 +1806,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         final Set<Entry<String, String>> textChanges = Sets.union(
                 changedTextColors.toMap().entrySet(), changedTextTypes.toMap().entrySet());
 
+        List<String> printedKW = new ArrayList<String>();
+
         int i = 0;
         for (KeywordInterface inst : keywords) {
             String keyword = inst.getOriginal();
@@ -1999,7 +2001,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     if (sb.length() != 0) {
                         sb.append("\r\n");
                     }
-                    sb.append(keyword).append(" (").append(inst.getReminderText()).append(")");
+                    sb.append(keyword);
+                    if (!printedKW.contains(keyword)) {
+                        sb.append(" (").append(inst.getReminderText()).append(")");
+                        printedKW.add(keyword);
+                    }
                 } else if (keyword.endsWith(" offering")) {
                     String offeringType = keyword.split(" ")[0];
                     if (sb.length() != 0) {
