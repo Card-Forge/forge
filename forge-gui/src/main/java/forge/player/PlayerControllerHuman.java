@@ -1726,7 +1726,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             // for the purpose of pre-ordering, no need for extra granularity
             Integer idxAdditionalInfo = firstStr.indexOf(" [");
-            StringBuilder saLookupKey = new StringBuilder(idxAdditionalInfo != -1 ? firstStr.substring(0, idxAdditionalInfo - 1) : firstStr);
+            StringBuilder saLookupKey = new StringBuilder(idxAdditionalInfo > 0 ? firstStr.substring(0, idxAdditionalInfo - 1) : firstStr);
 
             char delim = (char) 5;
             for (int i = 1; i < activePlayerSAs.size(); i++) {
@@ -1744,7 +1744,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
                 saLookupKey.append(delim).append(saStr);
                 idxAdditionalInfo = saLookupKey.indexOf(" [");
-                if (idxAdditionalInfo != -1) {
+                if (idxAdditionalInfo > 0) {
                     saLookupKey = new StringBuilder(saLookupKey.substring(0, idxAdditionalInfo - 1));
                 }
             }
