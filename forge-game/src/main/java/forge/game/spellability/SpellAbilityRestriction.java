@@ -32,6 +32,8 @@ import forge.util.Expressions;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Sets;
+
 /**
  * <p>
  * SpellAbilityRestriction class.
@@ -466,6 +468,33 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
 
+        // 702.36e
+        // If the permanent wouldn’t have a morph cost if it were face up, it can’t be turned face up this way.
+        if (sa.isMorphUp() && c.isInZone(ZoneType.Battlefield)) {
+            Card cp = c;
+            if (!c.isLKI()) {
+                cp = CardUtil.getLKICopy(c);
+            }
+            cp.forceTurnFaceUp();
+
+            // check static abilities
+            game.getTracker().freeze();
+            CardCollection preList = new CardCollection(cp);
+            game.getAction().checkStaticAbilities(false, Sets.newHashSet(cp), preList);
+
+            boolean found = cp.hasSpellAbility(sa);
+
+            game.getAction().checkStaticAbilities(false);
+            // clear delayed changes, this check should not have updated the view
+            game.getTracker().clearDelayed();
+            // need to unfreeze tracker
+            game.getTracker().unfreeze();
+
+            if (!found) {
+                return false;
+            }
+        }
+
         if (sa.isBoast()) {
             int limit = activator.hasKeyword("Creatures you control can boast twice during each of your turns rather than once.") ? 2 : 1;
             if (limit <= sa.getActivationsThisTurn()) {
@@ -491,14 +520,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
 
-        if (this.getsVarToCheck() != null) {
-            final int svarValue = AbilityUtils.calculateAmount(sa.getHostCard(), this.getsVarToCheck(), sa);
-            final int operandValue = AbilityUtils.calculateAmount(sa.getHostCard(), this.getsVarOperand(), sa);
-
-            if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue)) {
-                return false;
-            }
-        }
     	return true;
     }
 

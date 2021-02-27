@@ -43,8 +43,6 @@ public class SetStateEffect extends SpellAbilityEffect {
         final Game game = host.getGame();
 
         final boolean remChanged = sa.hasParam("RememberChanged");
-        final boolean morphUp = sa.hasParam("MorphUp");
-        final boolean manifestUp = sa.hasParam("ManifestUp");
         final boolean hiddenAgenda = sa.hasParam("HiddenAgenda");
         final boolean optional = sa.hasParam("Optional");
         final CardCollection transformedCards = new CardCollection();
@@ -136,18 +134,18 @@ public class SetStateEffect extends SpellAbilityEffect {
             }
 
             boolean hasTransformed = false;
-            if (morphUp) {
+            if (sa.isMorphUp()) {
                 hasTransformed = gameCard.turnFaceUp(sa);
-            } else if (manifestUp) {
+            } else if (sa.isManifestUp()) {
                 hasTransformed = gameCard.turnFaceUp(true, true, sa);
             } else {
                 hasTransformed = gameCard.changeCardState(mode, sa.getParam("NewState"), sa);
             }
             if (hasTransformed) {
-                if (morphUp) {
+                if (sa.isMorphUp()) {
                     String sb = p + " has unmorphed " + gameCard.getName();
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
-                } else if (manifestUp) {
+                } else if (sa.isManifestUp()) {
                     String sb = p + " has unmanifested " + gameCard.getName();
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                 } else if (hiddenAgenda) {
