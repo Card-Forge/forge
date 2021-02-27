@@ -152,6 +152,9 @@ public class SpecialCardAi {
 
             Card animated = AnimateAi.becomeAnimated(sa.getHostCard(), sa);
             animated.addType("Creature");
+            if (sa.getHostCard().canReceiveCounters(CounterEnumType.P1P1)) {
+                animated.addPTBoost(2, 2, sa.getHostCard().getTimestamp(), null); // simulate +2/+2 boost
+            }
             boolean isOppEOT = ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
             boolean isValuableAttacker = ph.is(PhaseType.MAIN1, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);
             boolean isValuableBlocker = combat != null && combat.getDefendingPlayers().contains(ai) && ComputerUtilCard.doesSpecifiedCreatureBlock(ai, animated);
