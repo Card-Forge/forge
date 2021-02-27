@@ -1553,9 +1553,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card card) {
-                            if (card.getOwner().isOpponentOf(decider)) {
-                                return true;
-                            }
                             if (card.isToken()) {
                                 return false;
                             }
