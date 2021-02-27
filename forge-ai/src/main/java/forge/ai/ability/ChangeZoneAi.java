@@ -1554,13 +1554,17 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card card) {
-                            if (card.isCreature() && ComputerUtilCard.isUselessCreature(player, card)) {
+                            if (card.getOwner().isOpponentOf(decider)) {
+                                return true;
+                            }
+
+                            if (card.isCreature() && ComputerUtilCard.isUselessCreature(decider, card)) {
                                 return true;
                             } else if (card.isEquipped()) {
                                 return false;
                             } else if (card.isEnchanted()) {
                                 for (Card enc : card.getEnchantedBy()) {
-                                    if (enc.getOwner().isOpponentOf(player)) {
+                                    if (enc.getOwner().isOpponentOf(decider)) {
                                         return true;
                                     }
                                 }
