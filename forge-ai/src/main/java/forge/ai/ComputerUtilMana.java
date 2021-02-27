@@ -15,8 +15,10 @@ import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.ability.*;
 import forge.game.card.*;
+import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
+import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.mana.ManaPool;
@@ -1528,6 +1530,16 @@ public class ComputerUtilMana {
         // 3. Use lands that produce any color many
         // 4. all other sources (creature, costs, drawback, etc.)
         for (Card card : manaSources) {
+            // exclude creature sources that will tap as a part of an attack declaration
+            if (card.isCreature()) {
+                if (card.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai)) {
+                    Combat combat = card.getGame().getCombat();
+                    if (combat.getAttackers().indexOf(card) != -1 && !card.hasKeyword(Keyword.VIGILANCE)) {
+                        continue;
+                    }
+                }
+            }
+
             if (card.isCreature() || card.isEnchanted()) {
                 otherManaSources.add(card);
                 continue; // don't use creatures before other permanents
