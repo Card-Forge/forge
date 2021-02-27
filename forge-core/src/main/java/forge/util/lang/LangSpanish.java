@@ -9,18 +9,20 @@ public class LangSpanish extends Lang {
         return position + "º";
     }
 
-    // TODO: Please update this when you modified lblYou in es-ES.properties
     @Override
     public String getPossesive(final String name) {
-        if ("You".equalsIgnoreCase(name)) {
-            return name + "r"; // to get "your"
+        if ("Tu".equalsIgnoreCase(name)) {
+            return name;
         }
-        return name.endsWith("s") ? name + "'" : name + "'s";
+        return "de " + name;
     }
 
     @Override
     public String getPossessedObject(final String owner, final String object) {
-        return getPossesive(owner) + " " + object;
+        if ("Tu".equalsIgnoreCase(owner)) {
+            return getPossesive(owner) + " " + object;
+        }
+        return object + " " + getPossesive(owner);
     }
 
     @Override
