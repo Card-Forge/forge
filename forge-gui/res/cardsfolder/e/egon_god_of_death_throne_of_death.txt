@@ -20,6 +20,6 @@ ManaCost:B
 Types:Legendary Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, mill a card.
 SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 1
-A:AB$ Draw | Cost$ 2 B T ExileFromGrave<1/Creature> | NumCards$ 1 | SpellDescription$ Draw a card.
+A:AB$ Draw | Cost$ 2 B T ExileFromGrave<1/Creature/creature card> | NumCards$ 1 | SpellDescription$ Draw a card.
 DeckHas:Ability$Mill
 Oracle:At the beginning of your upkeep, mill a card.\n{2}{B}, {T}, Exile a creature card from your graveyard: Draw a card.
