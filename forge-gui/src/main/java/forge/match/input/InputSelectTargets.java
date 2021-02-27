@@ -183,6 +183,12 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             return false;
         }
 
+        // If the cards share a card type
+        if (tgt.isWithSameCardType() && lastTarget != null && !card.sharesCardTypeWith(lastTarget)) {
+            showMessage(sa.getHostCard() + " - Cannot target this card (should share a Card type)");
+            return false;
+        }
+
         if (sa.hasParam("MaxTotalTargetCMC")) {
             int maxTotalCMC = tgt.getMaxTotalCMC(sa.getHostCard(), sa);
             if (maxTotalCMC > 0) {
