@@ -9,4 +9,4 @@ SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPr
 SVar:X:TriggeredCard$CardPower
 DeckNeeds:Ability$Sacrifice
 DeckHas:Ability$Counters
-Oracle:Whenever you sacrifice a permanent, put a +1/+1 counter on Juri, Master of the Revue.\nWhen Juri dies, it deals damage equal its power to any target.
+Oracle:Whenever you sacrifice a permanent, put a +1/+1 counter on Juri, Master of the Revue.\nWhen Juri dies, it deals damage equal to its power to any target.

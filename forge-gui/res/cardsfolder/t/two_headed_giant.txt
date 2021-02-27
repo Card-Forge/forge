@@ -6,4 +6,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBFlip | TriggerDescription$ W
 SVar:DBFlip:DB$ FlipACoin | Amount$ 2 | NoCall$ True | HeadsSubAbility$ DBHeadsPump | TailsSubAbility$ DBTailsPump
 SVar:DBHeadsPump:DB$ Pump | Defined$ Self | KW$ Double Strike | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ2
 SVar:DBTailsPump:DB$ Pump | Defined$ Self | KW$ Menace | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ2
-Oracle:Whenever Two-Headed Giant attacks, flip two coins. If both come up heads, Two-Headed Giant gains double strike until end of turn. If both come up tails, Two-Headed Giant gains menace until end of turn.
+Oracle:Whenever Two-Headed Giant attacks, flip two coins. If both coins come up heads, Two-Headed Giant gains double strike until end of turn. If both coins come up tails, Two-Headed Giant gains menace until end of turn.

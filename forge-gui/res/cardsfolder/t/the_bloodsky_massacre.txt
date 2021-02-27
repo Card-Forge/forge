@@ -11,4 +11,4 @@ SVar:DBMana:DB$ Mana | Produced$ R | Amount$ X | References$ X | PersistentMana$
 SVar:X:Count$Valid Berserker.YouCtrl
 DeckHas:Ability$Token
 DeckHints:Type$Berserker
-Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI - Create a 2/3 red Demon Berserker creature token with menace.\nII - Whenever a Berserker attacks this turn, you draw a card and you lose 1 life.\nIII - Add {R} for each Berserker you control. Until end of turn, you don't lose this mana as steps and phases end.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create a 2/3 red Demon Berserker creature token with menace.\nII — Whenever a Berserker attacks this turn, you draw a card and you lose 1 life.\nIII — Add {R} for each Berserker you control. Until end of turn, you don't lose this mana as steps and phases end.

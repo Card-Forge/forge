@@ -1,8 +1,8 @@
 Name:Dawnglow Infusion
 ManaCost:X GW
 Types:Sorcery
-A:SP$ GainLife | Cost$ X GW | LifeAmount$ X | References$ X | ConditionManaSpent$ G | SubAbility$ WPaid | SpellDescription$ You gain X life if {G} was spent to cast CARDNAME and X life if {W} was spent to cast it. (Do both if {G}{W} was spent.)
+A:SP$ GainLife | Cost$ X GW | LifeAmount$ X | References$ X | ConditionManaSpent$ G | SubAbility$ WPaid | SpellDescription$ You gain X life if {G} was spent to cast this spell and X life if {W} was spent to cast this spell. (Do both if {G}{W} was spent.)
 SVar:WPaid:DB$GainLife | LifeAmount$ X | References$ X | ConditionManaSpent$ W
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dawnglow_infusion.jpg
-Oracle:You gain X life if {G} was spent to cast Dawnglow Infusion and X life if {W} was spent to cast it. (Do both if {G}{W} was spent.)
+Oracle:You gain X life if {G} was spent to cast this spell and X life if {W} was spent to cast this spell. (Do both if {G}{W} was spent.)

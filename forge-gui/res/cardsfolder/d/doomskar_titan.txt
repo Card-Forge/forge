@@ -6,4 +6,4 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | KW$ Haste
 SVar:PlayMain1:TRUE
 K:Foretell:4 R
-Oracle:When Doomskar Titan enters the battlefield, creatures you control get +1/+) and gain haste until end of turn.\nForetell {4}{R} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)
+Oracle:When Doomskar Titan enters the battlefield, creatures you control get +1/+0 and gain haste until end of turn.\nForetell {4}{R} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

@@ -8,4 +8,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ 1
 A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Name$ Emblem - Garruk, Cursed Huntsman | Image$ emblem_garruk_cursed_huntsman | StaticAbilities$ STTrample | Planeswalker$ True | Ultimate$ True | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Creatures you control get +3/+3 and have trample."
 SVar:STTrample:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Trample | AddPower$ 3 | AddToughness$ 3 | Description$ Creatures you control get +3/+3 and have trample.
 DeckHas:Ability$Token
-Oracle:[0]: Create two 2/2 black and green Wolf creature tokens with "When this creature dies, put a loyalty counter on each Garruk you control."\n[-3]: Destroy target creature. Draw a card.\n[-6]: You get an emblem with "Creatures you control get +3/+3 and have trample."
+Oracle:[0]: Create two 2/2 black and green Wolf creature tokens with "When this creature dies, put a loyalty counter on each Garruk you control."\n[−3]: Destroy target creature. Draw a card.\n[−6]: You get an emblem with "Creatures you control get +3/+3 and have trample."

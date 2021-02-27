@@ -1,9 +1,9 @@
 Name:Ravenform
 ManaCost:2 U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | AILogic$ Pongify | SpellDescription$ Exile target artifact or creature. Its controller creates a 1/1 Blue bird creature token with flying.
+A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | AILogic$ Pongify | SpellDescription$ Exile target artifact or creature. Its controller creates a 1/1 blue Bird creature token with flying.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_bird_flying | TokenOwner$ TargetedController
 DeckHas:Ability$Token
 K:Foretell:U
 DeckHas:Ability$Token
-Oracle:Exile target artifact or creature. Its controller creates a 1/1 Blue bird creature token with flying.\nForetell {U} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)
+Oracle:Exile target artifact or creature. Its controller creates a 1/1 blue Bird creature token with flying.\nForetell {U} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

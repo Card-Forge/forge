@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 AlternateMode:Modal
-Oracle:Add {U}.
+Oracle:{T}: Add {U}.
 
 ALTERNATE
 
@@ -11,4 +11,4 @@ Name:Lavaglide Pathway
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-Oracle:Add {R}.
+Oracle:{T}: Add {R}.

@@ -1,10 +1,10 @@
 Name:Harsh Justice
 ManaCost:2 W
 Types:Instant
-A:SP$ Effect | Cost$ 2 W | Name$ Harsh Justice Effect | Triggers$ TrigDamage | SVars$ TrigDealDamage,X | AILogic$ Fog | OpponentTurn$ True | ActivationPhases$ Declare Attackers | SpellDescription$ Cast CARDNAME only during the declare attackers step and only if you've been attacked this step. This turn, whenever an attacking creature deals combat damage to you, it deals that much damage to its controller.
+A:SP$ Effect | Cost$ 2 W | Name$ Harsh Justice Effect | Triggers$ TrigDamage | SVars$ TrigDealDamage,X | AILogic$ Fog | OpponentTurn$ True | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. This turn, whenever an attacking creature deals combat damage to you, it deals that much damage to its controller.
 SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Creature.attacking | ValidTarget$ You | Execute$ TrigDealDamage | CombatDamage$ True | TriggerDescription$ This turn, whenever an attacking creature deals combat damage to you, it deals that much damage to its controller.
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ X | DamageSource$ TriggeredSource | References$ X
 SVar:X:TriggerCount$DamageAmount
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harsh_justice.jpg
-Oracle:Cast Harsh Justice only during the declare attackers step and only if you've been attacked this step.\nThis turn, whenever an attacking creature deals combat damage to you, it deals that much damage to its controller.
+Oracle:Cast this spell only during the declare attackers step and only if you've been attacked this step.\nThis turn, whenever an attacking creature deals combat damage to you, it deals that much damage to its controller.

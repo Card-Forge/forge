@@ -1,7 +1,7 @@
 Name:Equipoise
 ManaCost:2 W
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEquipoise | TriggerDescription$ At the beginning of your upkeep, for each land target player controls in excess of the number you control, choose a land they control, then the chosen permanents phase out. Repeat this process for artifacts and creatures. (While they're phased out, they're treated as though they don't exist. They phase in before that player untaps during their next untap step.)
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEquipoise | TriggerDescription$ At the beginning of your upkeep, for each land target player controls in excess of the number you control, choose a land that player controls, then the chosen permanents phase out. Repeat this process for artifacts and creatures. (While they're phased out, they're treated as though they don't exist. They phase in before that player untaps during their next untap step.)
 SVar:TrigEquipoise:DB$ Pump | ValidTgts$ Player | IsCurse$ True | RememberTargets$ True | SubAbility$ ChooseLand
 SVar:ChooseLand:DB$ ChooseCard | Choices$ Land.TargetedPlayerCtrl | Mandatory$ True | Amount$ LandX | ChoiceTitle$ Choose a land that player controls | SubAbility$ PhasesLand | References$ LandX,OppLand,YourLand,ExcessLand
 SVar:PhasesLand:DB$ Phases | Defined$ ChosenCard | SubAbility$ ChooseArtifact
@@ -24,4 +24,4 @@ SVar:YourCreature:Count$Valid Creature.YouCtrl
 SVar:ExcessCreature:SVar$OppCreature/Minus.YourCreature
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/equipoise.jpg
-Oracle:At the beginning of your upkeep, for each land target player controls in excess of the number you control, choose a land they control, then the chosen permanents phase out. Repeat this process for artifacts and creatures. (While they're phased out, they're treated as though they don't exist. They phase in before that player untaps during their next untap step.)
+Oracle:At the beginning of your upkeep, for each land target player controls in excess of the number you control, choose a land that player controls, then the chosen permanents phase out. Repeat this process for artifacts and creatures. (While they're phased out, they're treated as though they don't exist. They phase in before that player untaps during their next untap step.)

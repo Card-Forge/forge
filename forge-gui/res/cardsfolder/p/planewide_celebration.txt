@@ -7,4 +7,4 @@ SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts
 SVar:DBProliferate:DB$ Proliferate | SpellDescription$ Proliferate.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
 DeckHas:Ability$Proliferate & Ability$Token
-Oracle: Choose four. You may choose the same mode more than once.\n- Create a 2/2 Citizen creature token that's all colors.\n- Return target permanent card from your graveyard to your hand.\n- Proliferate.\n- You gain 4 life.
+Oracle:Choose four. You may choose the same mode more than once.\n• Create a 2/2 Citizen creature token that's all colors.\n• Return target permanent card from your graveyard to your hand.\n• Proliferate.\n• You gain 4 life.

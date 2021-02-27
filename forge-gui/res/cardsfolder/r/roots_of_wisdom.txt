@@ -8,4 +8,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 DeckHints:Type$Elf
 DeckHas:Ability$Mill
-Oracle:Mill three cards, then return a land card or Elf card from your graveyard to your hand. If you can’t, draw a card. (To mill a card, put the top card of your library into your graveyard.)
+Oracle:Mill three cards, then return a land card or Elf card from your graveyard to your hand. If you can't, draw a card. (To mill a card, put the top card of your library into your graveyard.)

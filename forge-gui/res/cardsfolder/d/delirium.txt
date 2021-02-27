@@ -1,9 +1,9 @@
 Name:Delirium
 ManaCost:1 B R
 Types:Instant
-A:SP$ Tap | Cost$ 1 B R | ValidTgts$ Creature.ActivePlayerCtrl | TgtPrompt$ Select target creature current opponent controls | OpponentTurn$ True | SubAbility$ DBDamage | SpellDescription$ Cast CARDNAME only during an opponent's turn. Tap target creature that player controls. That creature deals damage equal to its power to the player. Prevent all combat damage that would be dealt to and dealt by the creature this turn.
+A:SP$ Tap | Cost$ 1 B R | ValidTgts$ Creature.ActivePlayerCtrl | TgtPrompt$ Select target creature current opponent controls | OpponentTurn$ True | SubAbility$ DBDamage | SpellDescription$ Cast this spell only during an opponent's turn. Tap target creature that player controls. That creature deals damage equal to its power to the player. Prevent all combat damage that would be dealt to and dealt by the creature this turn.
 SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ X | DamageSource$ Targeted | SubAbility$ DBPump | References$ X
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Prevent all combat damage that would be dealt to and dealt by CARDNAME.
 SVar:X:Targeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/delirium.jpg
-Oracle:Cast Delirium only during an opponent's turn.\nTap target creature that player controls. That creature deals damage equal to its power to the player. Prevent all combat damage that would be dealt to and dealt by the creature this turn.
+Oracle:Cast this spell only during an opponent's turn.\nTap target creature that player controls. That creature deals damage equal to its power to the player. Prevent all combat damage that would be dealt to and dealt by the creature this turn.

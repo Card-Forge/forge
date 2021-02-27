@@ -8,4 +8,4 @@ SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | Refere
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | SpellDescription$ You gain X life, where X is the greatest number of creatures you control that have a creature type in common.
 SVar:X:Count$MostProminentCreatureType Creature.YouCtrl
 DeckHas:Ability$LifeGain
-Oracle:Oracle:When Skemfar Shadowsage enters the battlefield, choose one —\n• Each opponent loses X life, where X is the greatest number of creatures you control that have a creature type in common.\n• You gain X life, where X is the greatest number of creatures you control that have a creature type in common.
+Oracle:When Skemfar Shadowsage enters the battlefield, choose one —\n• Each opponent loses X life, where X is the greatest number of creatures you control that have a creature type in common.\n• You gain X life, where X is the greatest number of creatures you control that have a creature type in common.

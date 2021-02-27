@@ -4,4 +4,4 @@ Types:Legendary Creature Elemental Elk
 PT:5/5
 K:Companion:Special:UniqueManaSymbols:No card in your starting deck has more than one of the same mana symbol in its mana cost.
 A:AB$ Mana | Cost$ T | Produced$ W U B R G | RestrictValid$ CantPayGenericCosts | SpellDescription$ Add {W}{U}{B}{R}{G}. This mana can't be spent to pay generic mana costs.
-Oracle:Companion — No card in your starting deck has more than one of the same mana symbol in its mana cost. (If this card is your chosen companion, you may cast it once from outside the game.)\n{T}: Add {W}{U}{B}{R}{G}. This mana can't be spent to pay generic mana costs.
+Oracle:Companion — No card in your starting deck has more than one of the same mana symbol in its mana cost. (If this card is your chosen companion, you may put it into your hand from outside the game for {3} any time you could cast a sorcery.)\n{T}: Add {W}{U}{B}{R}{G}. This mana can't be spent to pay generic mana costs.

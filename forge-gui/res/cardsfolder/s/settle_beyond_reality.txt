@@ -6,4 +6,4 @@ SVar:DBExile:DB$ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgt
 SVar:DBFlicker:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control. | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile target creature you control, then return it to the battlefield under its owner's control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Choose one or both -\n- Exile target creature you don't control.\n- Exile target creature you control, then return it to the battlefield under its owner's control.
+Oracle:Choose one or both —\n• Exile target creature you don't control.\n• Exile target creature you control, then return it to the battlefield under its owner's control.

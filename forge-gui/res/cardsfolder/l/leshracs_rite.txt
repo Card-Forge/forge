@@ -3,6 +3,6 @@ ManaCost:B
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Swampwalk | Description$ Enchanted creature has swampwalk.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Swampwalk | Description$ Enchanted creature has swampwalk. (It can't be blocked as long as defending player controls a Swamp.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leshracs_rite.jpg
-Oracle:Enchant creature\nEnchanted creature has swampwalk.
+Oracle:Enchant creature\nEnchanted creature has swampwalk. (It can't be blocked as long as defending player controls a Swamp.)

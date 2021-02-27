@@ -1,9 +1,9 @@
 Name:May Civilization Collapse
 ManaCost:no cost
 Types:Scheme
-T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBChoose | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, target opponent chooses self or others. If that player chooses self, they sacrifice two lands. if the player chooses others, each of your other opponents sacrifice a land.
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBChoose | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, target opponent chooses self or others. If that player chooses self, that player sacrifices two lands. If the player chooses others, each of your other opponents sacrifices a land.
 SVar:DBChoose:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ Self,Others | AILogic$ SelfOthers
 SVar:Self:DB$ Sacrifice | SacValid$ Land | Defined$ ParentTarget | Amount$ 2 | SpellDescription$ Self
 SVar:Others:DB$ Sacrifice | SacValid$ Land | Defined$ OppNonParentTarget | Amount$ 1 | SpellDescription$ Others
 SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/May Civilization Collapse.full.jpg
-Oracle:When you set this scheme in motion, target opponent chooses self or others. If that player chooses self, they sacrifice two lands. if the player chooses others, each of your other opponents sacrifice a land.
+Oracle:When you set this scheme in motion, target opponent chooses self or others. If that player chooses self, that player sacrifices two lands. If the player chooses others, each of your other opponents sacrifices a land.

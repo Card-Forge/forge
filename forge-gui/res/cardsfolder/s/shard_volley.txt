@@ -3,4 +3,4 @@ ManaCost:R
 Types:Instant
 A:SP$ DealDamage | Cost$ R Sac<1/Land> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shard_volley.jpg
-Oracle:As an additional cost to cast Shard Volley, sacrifice a land.\nShard Volley deals 3 damage to any target.
+Oracle:As an additional cost to cast this spell, sacrifice a land.\nShard Volley deals 3 damage to any target.

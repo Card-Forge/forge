@@ -6,4 +6,4 @@ A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
 K:CARDNAME can't be countered.
 K:Hexproof
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrun_the_last_troll.jpg
-Oracle:Thrun, the Last Troll can't be countered.\nHexproof (This creature can't be the target of spells or abilities your opponents control.)\n{1}{G}: Regenerate Thrun.
+Oracle:This spell can't be countered.\nHexproof (This creature can't be the target of spells or abilities your opponents control.)\n{1}{G}: Regenerate Thrun, the Last Troll.

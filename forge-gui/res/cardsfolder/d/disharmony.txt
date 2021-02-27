@@ -7,4 +7,4 @@ SVar:DBGainControl:DB$ GainControl | Defined$ Targeted | LoseControl$ EOT | SubA
 SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Targeted
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disharmony.jpg
-Oracle:Cast Disharmony only during combat before blockers are declared.\nUntap target attacking creature and remove it from combat. Gain control of that creature until end of turn.
+Oracle:Cast this spell only during combat before blockers are declared.\nUntap target attacking creature and remove it from combat. Gain control of that creature until end of turn.

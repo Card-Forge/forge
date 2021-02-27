@@ -12,4 +12,4 @@ SVar:AIPreferenceParams:CreatureEvalThreshold$ 200
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Sacrifice
 DeckHints:Type$Giant
-Oracle:Whenever Surtland Flinger attacks, you may sacrifice another creature. When you do, Surtland Flinger deals damage equal to the sacrificed creature’s power to any target. If the sacrificed creature was a Giant, Surtland Flinger deals twice that much damage instead.
+Oracle:Whenever Surtland Flinger attacks, you may sacrifice another creature. When you do, Surtland Flinger deals damage equal to the sacrificed creature's power to any target. If the sacrificed creature was a Giant, Surtland Flinger deals twice that much damage instead.

@@ -10,4 +10,4 @@ A:AB$ LoseLife | Cost$ T tapXType<10/Elf> | Defined$ Player.Opponent | LifeAmoun
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 10
 DeckHas:Ability$Token & Ability$LifeGain
 DeckHints:Type$Elf
-Oracle:Menace\nWhenever Lathril, Blade of the Elves deals combat damage to a player, create that many 1/1 green Elf Warrior creature tokens.\n{T}, tap ten untapped Elves you control: Each opponent loses 10 life and you gain 10 life.
+Oracle:Menace\nWhenever Lathril, Blade of the Elves deals combat damage to a player, create that many 1/1 green Elf Warrior creature tokens.\n{T}, Tap ten untapped Elves you control: Each opponent loses 10 life and you gain 10 life.

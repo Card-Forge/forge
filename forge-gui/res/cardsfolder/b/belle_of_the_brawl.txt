@@ -6,4 +6,4 @@ K:Menace
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, other Knights you control get +1/+0 until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Knight.YouCtrl+Other | NumAtt$ 1
 DeckHints:Type$Knight
-Oracle:Menace\nWhenever Belle of the Brawl attacks, other Knights you control get +1/+0 until end of turn.
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever Belle of the Brawl attacks, other Knights you control get +1/+0 until end of turn.

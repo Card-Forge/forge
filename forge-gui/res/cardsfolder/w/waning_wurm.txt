@@ -4,4 +4,4 @@ Types:Creature Zombie Wurm
 PT:7/6
 K:Vanishing:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waning_wurm.jpg
-Oracle:Vanishing 2 (This permanent enters the battlefield with two time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)
+Oracle:Vanishing 2 (This creature enters the battlefield with two time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)

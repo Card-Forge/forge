@@ -4,9 +4,9 @@ Types:Artifact Vehicle
 PT:5/3
 K:Trample
 K:Haste
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME enters the battlefield, it becomes an artifact creature until the end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME enters the battlefield, it becomes an artifact creature until end of turn.
 SVar:TrigAnimate:DB$ Animate | Defined$ Self | Types$ Creature,Artifact
 K:Crew:2
 SVar:PlayMain1:ALWAYS
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fleetwheel_cruiser.jpg
-Oracle:Trample, Haste\nWhen Fleetwheel Cruiser enters the battlefield, it becomes an artifact creature until the end of turn.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
+Oracle:Trample, haste\nWhen Fleetwheel Cruiser enters the battlefield, it becomes an artifact creature until end of turn.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

@@ -11,4 +11,4 @@ SVar:X:Count$Compare Y GE1.2.1
 SVar:Y:Count$Valid Card.IsCommander+YouCtrl
 SVar:Z:Remembered$CardPower
 SVar:MaxTargets:Count$Valid Land.YouCtrl
-Oracle:Choose one. If you control a commander as you cast this spell, you may choose both.\n• Until end of turn, any number of target lands you control become 1/1 Elemental creatures with vigilance, indestructible, and haste. They're still lands.\n• Choose target creature you don’t control. Each creature you control deals damage equal to its power to that creature.
+Oracle:Choose one. If you control a commander as you cast this spell, you may choose both.\n• Until end of turn, any number of target lands you control become 1/1 Elemental creatures with vigilance, indestructible, and haste. They're still lands.\n• Choose target creature you don't control. Each creature you control deals damage equal to its power to that creature.

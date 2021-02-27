@@ -7,4 +7,4 @@ SVar:DBMill:DB$ Mill | Defined$ Player | NumCards$ 2
 A:AB$ ChangeZone | Cost$ SubCounter<5/LOYALTY> | Planeswalker$ True | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Select target creature card in a graveyard | ValidTgts$ Creature | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control.
 A:AB$ GainControl | Cost$ SubCounter<11/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | AllValid$ Creature.TargetedPlayerCtrl | NewController$ You | StackDescription$ SpellDescription | SpellDescription$ Gain control of all creatures target opponent controls.
 DeckHas:Ability$Graveyard
-Oracle:[+2]: Draw a card. Each player mills two cards.\n[−5]: Put target creature card from a graveyard onto the battlefield under you control.\n[−11]: Gain control of all creatures target opponent controls.
+Oracle:[+2]: Draw a card. Each player mills two cards.\n[−5]: Put target creature card from a graveyard onto the battlefield under your control.\n[−11]: Gain control of all creatures target opponent controls.

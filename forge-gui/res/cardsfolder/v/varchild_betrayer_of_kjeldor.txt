@@ -2,11 +2,11 @@ Name:Varchild, Betrayer of Kjeldor
 ManaCost:2 R
 Types:Legendary Creature Human Knight
 PT:3/3
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ When CARDNAME deals combat damage to a player, that player creates that many 1/1 red Survivor creature tokens.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player creates that many 1/1 red Survivor creature tokens.
 SVar:TrigToken:DB$ Token | TokenOwner$ TriggeredTarget | TokenAmount$ X | References$ X | TokenScript$ r_1_1_survivor | LegacyImage$ r 1 1 survivor c18
 SVar:X:TriggerCount$DamageAmount
 S:Mode$ Continuous | Affected$ Survivor.OppCtrl | AddHiddenKeyword$ CantBlock Creature | Description$ Survivors your opponents control can't block.
 S:Mode$ CantAttack | ValidCard$ Creature.Survivor+OppCtrl | Target$ You,Planeswalker.YouCtrl | Description$ Survivors your opponents control can't attack you or planeswalkers you control.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ When CARDNAME leaves the battlefield, gain control of all Survivors.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ When NICKNAME leaves the battlefield, gain control of all Survivors.
 SVar:TrigGainControl:DB$ GainControl | AllValid$ Survivor | NewController$ You
-Oracle:When Varchild, Betrayer of Kjeldor deals combat damage to a player, that player creates that many 1/1 red Survivor creature tokens.\nSurvivors your opponents control can't block, and they can't attack you or a planeswalker you control.\nWhen Varchild, Betrayer of Kjeldor leaves the battlefield, gain control of all Survivors.
+Oracle:Whenever Varchild, Betrayer of Kjeldor deals combat damage to a player, that player creates that many 1/1 red Survivor creature tokens.\nSurvivors your opponents control can't block, and they can't attack you or a planeswalker you control.\nWhen Varchild leaves the battlefield, gain control of all Survivors.

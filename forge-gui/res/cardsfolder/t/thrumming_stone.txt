@@ -1,11 +1,11 @@
 Name:Thrumming Stone
 ManaCost:5
 Types:Legendary Artifact
-T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigRem | TriggerDescription$ Spells you cast have ripple 4. (Whenever you cast a spell, you may reveal the top four cards of your library. You may cast any revealed cards with the same name as the spell without paying their mana costs. Put the rest on the bottom of your library.)
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigRem | TriggerDescription$ Spells you cast have ripple 4. (Whenever you cast a spell, you may reveal the top four cards of your library. You may cast spells with the same name as that spell from among the revealed cards without paying their mana costs. Put the rest on the bottom of your library.)
 SVar:TrigRem:DB$ Pump | ImprintCards$ TriggeredCard | SubAbility$ TrigRipple
 SVar:TrigRipple:DB$ Dig | NoMove$ True | DigNum$ 4 | Reveal$ True | RememberRevealed$ True | SubAbility$ DBThrummingRipple
 SVar:DBThrummingRipple:DB$ Play | Valid$ Card.IsRemembered+sharesNameWith Imprinted | ValidZone$ Library | WithoutManaCost$ True | Optional$ True | Amount$ All | SubAbility$ ThrummingMoveToBottom
 SVar:ThrummingMoveToBottom:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | SubAbility$ ThrummingCleanup
 SVar:ThrummingCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrumming_stone.jpg
-Oracle:Spells you cast have ripple 4. (Whenever you cast a spell, you may reveal the top four cards of your library. You may cast any revealed cards with the same name as the spell without paying their mana costs. Put the rest on the bottom of your library.)
+Oracle:Spells you cast have ripple 4. (Whenever you cast a spell, you may reveal the top four cards of your library. You may cast spells with the same name as that spell from among the revealed cards without paying their mana costs. Put the rest on the bottom of your library.)

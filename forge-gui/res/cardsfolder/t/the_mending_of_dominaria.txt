@@ -8,4 +8,4 @@ SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defin
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Land.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBShuffle | SpellDescription$ Return all land cards from your graveyard to the battlefield, then shuffle your graveyard into your library.
 SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True
 DeckHints:Ability$Graveyard
-Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II - Mill two cards, then you may return a creature card from your graveyard to your hand.\nIII - Return all land cards from your graveyard to the battlefield, then shuffle your graveyard into your library.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Mill two cards, then you may return a creature card from your graveyard to your hand.\nIII — Return all land cards from your graveyard to the battlefield, then shuffle your graveyard into your library.

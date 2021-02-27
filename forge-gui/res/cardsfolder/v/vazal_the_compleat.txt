@@ -6,4 +6,4 @@ K:Megalegendary
 K:Vigilance
 K:Trample
 S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Permanent.Other | Description$ CARDNAME has all activated abilities of each other permanent on the battlefield.
-Oracle:Vigilance, Trample\nVazal, the Compleat has all activated abilities of each other permanent on the battlefield.
+Oracle:Megalegendary (Your deck can have only one copy of this card.)\nVigilance, trample\nVazal, the Compleat has the activated abilities of all other permanents on the battlefield.

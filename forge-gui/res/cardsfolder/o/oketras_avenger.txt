@@ -5,4 +5,4 @@ PT:3/1
 K:You may exert CARDNAME as it attacks.
 T:Mode$ Exerted | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When you exert CARDNAME, prevent all combat damage that would be dealt to it this turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Prevent all combat damage that would be dealt to CARDNAME.
-Oracle:You may exert Oketra's Avenger as it attacks. When you do, prevent all combat damage that would be dealt to it this turn. (An exerted creature doesn't untap during its controller's next untap step.)
+Oracle:You may exert Oketra's Avenger as it attacks. When you do, prevent all combat damage that would be dealt to it this turn. (An exerted creature won't untap during your next untap step.)

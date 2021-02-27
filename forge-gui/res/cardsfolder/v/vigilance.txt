@@ -5,4 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Vigilance | Description$ Enchanted creature has vigilance. (Attacking doesn't cause it to tap.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilance.jpg
-Oracle:
+Oracle:Enchant creature\nEnchanted creature has vigilance. (Attacking doesn't cause it to tap.)

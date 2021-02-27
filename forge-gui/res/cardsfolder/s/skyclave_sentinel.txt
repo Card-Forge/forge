@@ -9,4 +9,4 @@ K:etbCounter:P1P1:2:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the b
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_P1P1 | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | Description$ As long as CARDNAME has a +1/+1 counter on it, it can attack as though it didn't have defender.
 SVar:WasKicked:Count$Kicked.1.0
 DeckHas:Ability$Counters
-Oracle:Kicker {4} (You may pay an additional {4} as you cast this spell).\nFlying, defender\nIf Skyclave Sentinel was kicked, it enters the battlefield with two +1/+1 counters on it.\nAs long as Skyclave Sentinel has a +1/+1 counter on it, it can attack as though it didn't have defender.
+Oracle:Kicker {4} (You may pay an additional {4} as you cast this spell.)\nFlying, defender\nIf Skyclave Sentinel was kicked, it enters the battlefield with two +1/+1 counters on it.\nAs long as Skyclave Sentinel has a +1/+1 counter on it, it can attack as though it didn't have defender.

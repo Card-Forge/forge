@@ -1,7 +1,7 @@
 Name:Mirrored Depths
 ManaCost:no cost
 Types:Plane Karsus
-T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Command | Execute$ TrigFlip | TriggerDescription$ Whenever a player casts a spell, that player flips a coin. If they lose the flip, counter that spell.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Command | Execute$ TrigFlip | TriggerDescription$ Whenever a player casts a spell, that player flips a coin. If the player loses the flip, counter that spell.
 SVar:TrigFlip:DB$ FlipACoin | Caller$ TriggeredActivator | LoseSubAbility$ DBCounter
 SVar:DBCounter:DB$ Counter | Defined$ TriggeredSpellAbility
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, target player reveals the top card of their library. If it's a nonland card, you may cast it without paying its mana cost.
@@ -10,4 +10,4 @@ SVar:DBPlay:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ T
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirrored_depths.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always
-Oracle:Whenever a player casts a spell, that player flips a coin. If they lose the flip, counter that spell.\nWhenever you roll {CHAOS}, target player reveals the top card of their library. If it's a nonland card, you may cast it without paying its mana cost.
+Oracle:Whenever a player casts a spell, that player flips a coin. If the player loses the flip, counter that spell.\nWhenever you roll {CHAOS}, target player reveals the top card of their library. If it's a nonland card, you may cast it without paying its mana cost.

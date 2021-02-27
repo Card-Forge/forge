@@ -3,5 +3,5 @@ ManaCost:W
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't block. & CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature can't block and its activated abilities can't be activated.
-Oracle:Enchant creature\nEnchanted creature can't block and its activated abilities can't be activated.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't block. & CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature can't block, and its activated abilities can't be activated.
+Oracle:Enchant creature\nEnchanted creature can't block, and its activated abilities can't be activated.

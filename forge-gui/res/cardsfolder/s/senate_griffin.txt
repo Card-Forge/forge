@@ -4,5 +4,5 @@ Types:Creature Griffin
 PT:3/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBScry | TriggerDescription$ When CARDNAME etners the battlefield, scry 1.
-SVar:DBScry:DB$ Scry | ScryNum$ 1 
-Oracle:Flying.\nWhen Senate Griffin enters the battlefield, scry 1.
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+Oracle:Flying\nWhen Senate Griffin enters the battlefield, scry 1.

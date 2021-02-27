@@ -1,8 +1,8 @@
 Name:Dark Prophecy
 ManaCost:B B B
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | TriggerController$ TriggeredCardController | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control dies, you draw a card and lose 1 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | TriggerController$ TriggeredCardController | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control dies, you draw a card and you lose 1 life.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_prophecy.jpg
-Oracle:Whenever a creature you control dies, you draw a card and lose 1 life.
+Oracle:Whenever a creature you control dies, you draw a card and you lose 1 life.

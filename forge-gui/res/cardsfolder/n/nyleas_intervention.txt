@@ -6,4 +6,4 @@ SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$
 SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature.withFlying | NumDmg$ XX | References$ X,XX | SpellDescription$ CARDNAME deals twice X damage to each creature with flying.
 SVar:X:Count$xPaid
 SVar:XX:SVar$X/Twice
-Oracle:Choose one -\n• Search your library for up to X land cards, reveal them, put them into your hand, then shuffle your library.\n• Nylea's Intervention deals twice X damage to each creature with flying.
+Oracle:Choose one —\n• Search your library for up to X land cards, reveal them, put them into your hand, then shuffle your library.\n• Nylea's Intervention deals twice X damage to each creature with flying.

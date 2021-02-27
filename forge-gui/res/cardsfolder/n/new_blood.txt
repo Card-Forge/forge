@@ -5,4 +5,4 @@ A:SP$ GainControl | Cost$ 2 B B tapXType<1/Vampire> | ValidTgts$ Creature | TgtP
 SVar:DBChangeText:DB$ ChangeText | Defined$ ParentTarget | ChangeTypeWord$ ChooseCreatureType Vampire | Permanent$ True
 DeckHints:Type$Vampire
 SVar:Picture:http://www.wizards.com/global/images/magic/general/new_blood.jpg
-Oracle:As an additional cost to cast New Blood, tap an untapped Vampire you control.\nGain control of target creature. Change the text of that creature by replacing all instances of one creature type with Vampire.
+Oracle:As an additional cost to cast this spell, tap an untapped Vampire you control.\nGain control of target creature. Change the text of that creature by replacing all instances of one creature type with Vampire.

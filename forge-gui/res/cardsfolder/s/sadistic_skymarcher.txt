@@ -7,4 +7,4 @@ K:Flying
 K:Lifelink
 DeckNeeds:Type$Vampire
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sadistic_skymarcher.jpg
-Oracle:As an additional cost to cast Sadistic Skymarcher, reveal a Vampire card from your hand or pay {1}.\nFlying, lifelink
+Oracle:As an additional cost to cast this spell, reveal a Vampire card from your hand or pay {1}.\nFlying, lifelink

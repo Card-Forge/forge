@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Creature Goblin Rigger
 Text:If a Rigger you control would assemble a Contraption, it assembles two Contraptions instead.
 #Ruling 5/1/2007 - Contraption is a new artifact type. There are currently no artifacts with this type. And there's no current game meaning of "assemble."
-S:Mode$ Continuous | Affected$ Creature.Other+Rigger+YouCtrl | AddKeyword$ Haste | AddPower$ 1 | Description$ Other Rigger creatures you control get +1/+0 and have haste.
+S:Mode$ Continuous | Affected$ Creature.Other+Rigger+YouCtrl | AddKeyword$ Haste | AddPower$ 1 | Description$ Other Riggers you control get +1/+0 and have haste.
 PT:3/3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steamflogger_boss.jpg
-Oracle:Other Rigger creatures you control get +1/+0 and have haste.\nIf a Rigger you control would assemble a Contraption, it assembles two Contraptions instead.
+Oracle:Other Riggers you control get +1/+0 and have haste.\nIf a Rigger you control would assemble a Contraption, it assembles two Contraptions instead.

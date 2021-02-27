@@ -3,4 +3,4 @@ ManaCost:PR
 Types:Instant
 A:SP$ DealDamage | Cost$ PR | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | AIPhyrexianPayment$ OnFatalDamage.1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gut_shot.jpg
-Oracle:({P/R} can be paid with either {R} or 2 life.)\nGut Shot deals 1 damage to any target.
+Oracle:({R/P} can be paid with either {R} or 2 life.)\nGut Shot deals 1 damage to any target.

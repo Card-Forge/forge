@@ -2,7 +2,7 @@ Name:Hungry Lynx
 ManaCost:1 G
 Types:Creature Cat
 PT:2/2
-S:Mode$ Continuous | Affected$ Creature.Cat+YouCtrl | AddKeyword$ Protection from Rats | Description$ Cats you control have protection from Rats. (They can't be blocked, targeted or dealt damage by Rats.)
+S:Mode$ Continuous | Affected$ Creature.Cat+YouCtrl | AddKeyword$ Protection from Rats | Description$ Cats you control have protection from Rats. (They can't be blocked, targeted, or dealt damage by Rats.)
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, target opponent creates a 1/1 black Rat creature token with deathtouch.
 SVar:TrigToken:DB$ Token | ValidTgts$ Opponent | TokenAmount$ 1 | TokenScript$ b_1_1_rat_deathtouch | TokenOwner$ Targeted | LegacyImage$ b 1 1 rat deathtouch c17
 T:Mode$ ChangesZone | ValidCard$ Rat | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounters | TriggerDescription$ Whenever a Rat dies, put a +1/+1 counter on each Cat you control.
@@ -10,4 +10,4 @@ SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Cat.YouCtrl | CounterType$ 
 SVar:PlayMain1:TRUE
 DeckHints:Type$Cat
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hungry_lynx.jpg
-Oracle:Cats you control have protection from Rats. (They can't be blocked, targeted or dealt damage by Rats.)\nAt the beginning of your end step, target opponent creates a 1/1 black Rat creature token with deathtouch.\nWhenever a Rat dies, put a +1/+1 counter on each Cat you control.
+Oracle:Cats you control have protection from Rats. (They can't be blocked, targeted, or dealt damage by Rats.)\nAt the beginning of your end step, target opponent creates a 1/1 black Rat creature token with deathtouch.\nWhenever a Rat dies, put a +1/+1 counter on each Cat you control.

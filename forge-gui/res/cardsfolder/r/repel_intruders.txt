@@ -1,8 +1,8 @@
 Name:Repel Intruders
 ManaCost:3 WU
 Types:Instant
-A:SP$ Token | Cost$ 3 WU | LegacyImage$ w 1 1 kithkin soldier shm | TokenAmount$ 2 | TokenScript$ w_1_1_kithkin_soldier | TokenOwner$ You | ConditionManaSpent$ W | SubAbility$ UPaid | SpellDescription$ Create two 1/1 white Kithkin Soldier creatures if {W} was spent to cast CARDNAME. Counter up to one target creature spell if {U} was spent to cast CARDNAME. (Do both if {W}{U} was spent.)
+A:SP$ Token | Cost$ 3 WU | LegacyImage$ w 1 1 kithkin soldier shm | TokenAmount$ 2 | TokenScript$ w_1_1_kithkin_soldier | TokenOwner$ You | ConditionManaSpent$ W | SubAbility$ UPaid | SpellDescription$ Create two 1/1 white Kithkin Soldier creature tokens if {W} was spent to cast this spell. Counter up to one target creature spell if {U} was spent to cast this spell. (Do both if {W}{U} was spent.)
 SVar:UPaid:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target Creature spell | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | ConditionManaSpent$ U
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repel_intruders.jpg
-Oracle:Create two 1/1 white Kithkin Soldier creatures if {W} was spent to cast Repel Intruders. Counter up to one target creature spell if {U} was spent to cast Repel Intruders. (Do both if {W}{U} was spent.)
+Oracle:Create two 1/1 white Kithkin Soldier creature tokens if {W} was spent to cast this spell. Counter up to one target creature spell if {U} was spent to cast this spell. (Do both if {W}{U} was spent.)

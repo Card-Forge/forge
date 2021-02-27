@@ -2,7 +2,7 @@ Name:Desolation Twin
 ManaCost:10
 Types:Creature Eldrazi
 PT:10/10
-T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast CARDNAME, create a 10/10 colorless Eldrazi creature token.
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast this spell, create a 10/10 colorless Eldrazi creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_10_10_eldrazi | TokenOwner$ You | LegacyImage$ c 10 10 eldrazi bfz
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desolation_twin.jpg
-Oracle:When you cast Desolation Twin, create a 10/10 colorless Eldrazi creature token.
+Oracle:When you cast this spell, create a 10/10 colorless Eldrazi creature token.

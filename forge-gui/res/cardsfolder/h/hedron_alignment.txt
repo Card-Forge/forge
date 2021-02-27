@@ -19,4 +19,4 @@ SVar:Z:SVar$C/Plus.D
 A:AB$ Scry | Cost$ 1 U | ScryNum$ 1 | SpellDescription$ Scry 1.
 DeckNeeds:Name$Hedron Alignment
 AI:RemoveDeck:Random
-Oracle:Hexproof\nAt the beginning of your upkeep, you may reveal your hand. If you do, you win the game if you own a card named Hedron Alignment in exile, in your hand, in your graveyard, and on the battlefield.\n{1}{U}:Scry 1.
+Oracle:Hexproof\nAt the beginning of your upkeep, you may reveal your hand. If you do, you win the game if you own a card named Hedron Alignment in exile, in your hand, in your graveyard, and on the battlefield.\n{1}{U}: Scry 1.

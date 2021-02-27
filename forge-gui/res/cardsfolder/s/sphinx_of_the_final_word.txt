@@ -5,6 +5,6 @@ PT:5/5
 K:Flying
 K:Hexproof
 K:CARDNAME can't be countered.
-S:Mode$ Continuous | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | AddHiddenKeyword$ CARDNAME can't be countered. | AffectedZone$ Stack | Description$ Instant and sorcery spells you control can't be countered by spells or abilities.
+S:Mode$ Continuous | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | AddHiddenKeyword$ This spell can't be countered. | AffectedZone$ Stack | Description$Instant and sorcery spells you control can't be countered.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_of_the_final_word.jpg
-Oracle:Sphinx of the Final Word can't be countered.\n Flying, hexproof\n Instant and sorcery spells you control can't be countered by spells or abilities.
+Oracle:This spell can't be countered.\nFlying, hexproof\nInstant and sorcery spells you control can't be countered.

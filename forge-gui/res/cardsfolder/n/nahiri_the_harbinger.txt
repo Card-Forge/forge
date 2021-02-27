@@ -11,4 +11,4 @@ SVar:DBPump:DB$ Animate | Keywords$ Haste | Permanent$ True | AtEOT$ Hand | Defi
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nahiri_the_harbinger.jpg
-Oracle:[+2]: You may discard a card. If you do, draw a card.\n[-2]: Exile target enchantment, tapped artifact, or tapped creature.\n[-8]: Search your library for an artifact or creature card, put it onto the battlefield, then shuffle your library. It gains haste. Return it to your hand at the beginning of the next end step.
+Oracle:[+2]: You may discard a card. If you do, draw a card.\n[−2]: Exile target enchantment, tapped artifact, or tapped creature.\n[−8]: Search your library for an artifact or creature card, put it onto the battlefield, then shuffle your library. It gains haste. Return it to your hand at the beginning of the next end step.

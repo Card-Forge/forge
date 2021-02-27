@@ -6,4 +6,4 @@ K:Islandwalk
 A:AB$ Protection | Cost$ 1 W | ValidTgts$ Merfolk.YouCtrl | TgtPrompt$ Select target Merfolk you control | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target Merfolk you control gains protection from the color of your choice until end of turn.
 DeckHints:Type$Merfolk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sygg_river_guide.jpg
-Oracle:Islandwalk\n{1}{W}: Target Merfolk you control gains protection from the color of your choice until end of turn.
+Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\n{1}{W}: Target Merfolk you control gains protection from the color of your choice until end of turn.

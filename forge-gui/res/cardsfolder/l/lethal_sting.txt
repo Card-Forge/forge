@@ -4,4 +4,4 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 2 B AddCounter<1/M1M1/Creature.YouCtrl/a creature you control> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lethal_sting.jpg
-Oracle:As an additional cost to cast Lethal Sting, put a -1/-1 counter on a creature you control.\nDestroy target creature.
+Oracle:As an additional cost to cast this spell, put a -1/-1 counter on a creature you control.\nDestroy target creature.

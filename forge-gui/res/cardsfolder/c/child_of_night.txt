@@ -4,4 +4,4 @@ Types:Creature Vampire
 PT:2/1
 K:Lifelink
 SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_night.jpg
-Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)
+Oracle:Lifelink

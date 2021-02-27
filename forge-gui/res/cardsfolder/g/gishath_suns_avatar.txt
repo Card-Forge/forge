@@ -10,4 +10,4 @@ SVar:DBDig:DB$ Dig | Defined$ You | DigNum$ X | Reveal$ True | ChangeValid$ Crea
 SVar:X:TriggerCount$DamageAmount
 DeckHints:Type$Dinosaur
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gishath_suns_avatar.jpg
-Oracle:Trample, vigilance, haste\nWhenever Gishath, Sun's Avatar deals combat damage to a player, reveal that many cards from the top of your library. Put any number of Dinosaur creature cards from among them onto the battlefield and the rest on the bottom of your library in a random order.
+Oracle:Vigilance, trample, haste\nWhenever Gishath, Sun's Avatar deals combat damage to a player, reveal that many cards from the top of your library. Put any number of Dinosaur creature cards from among them onto the battlefield and the rest on the bottom of your library in a random order.

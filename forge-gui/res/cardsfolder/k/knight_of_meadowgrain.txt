@@ -5,4 +5,4 @@ PT:2/2
 K:First Strike
 K:Lifelink
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_meadowgrain.jpg
-Oracle:First strike, lifelink
+Oracle:First strike\nLifelink (Damage dealt by this creature also causes you to gain that much life.)

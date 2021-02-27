@@ -7,4 +7,4 @@ SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZoneAll | TriggerController$ TriggeredCardController | TriggerDescription$ When World Shaper dies, put all land cards from your graveyard onto the battlefield tapped.
 SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Land.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
 DeckHints:Ability$Graveyard
-Oracle:Whenever World Shaper attacks, you may mill three cards.\nWhen World Shaper dies, put all land cards from your graveyard onto the battlefield tapped.
+Oracle:Whenever World Shaper attacks, you may mill three cards.\nWhen World Shaper dies, return all land cards from your graveyard to the battlefield tapped.

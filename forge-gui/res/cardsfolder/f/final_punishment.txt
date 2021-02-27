@@ -1,7 +1,7 @@
 Name:Final Punishment
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ LoseLife | Cost$ 3 B B | ValidTgts$ Player | LifeAmount$ X | References$ X | SpellDescription$ Target player loses life equal to the damage already dealt to them this turn.
+A:SP$ LoseLife | Cost$ 3 B B | ValidTgts$ Player | LifeAmount$ X | References$ X | SpellDescription$ Target player loses life equal to the damage already dealt to that player this turn.
 SVar:X:TargetedPlayer$DamageThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/final_punishment.jpg
-Oracle:Target player loses life equal to the damage already dealt to them this turn.
+Oracle:Target player loses life equal to the damage already dealt to that player this turn.

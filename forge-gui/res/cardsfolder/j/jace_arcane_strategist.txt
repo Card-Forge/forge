@@ -8,4 +8,4 @@ AI:RemoveDeck:Random
 DeckHas:Ability$Counters
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card.
 A:AB$ PumpAll | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouCtrl | KW$ HIDDEN Unblockable | SpellDescription$ Creatures you control can't be blocked this turn.
-Oracle:Whenever you draw your second card each turn, put a +1/+1 counter on target creature you control.\n[+1]: Draw a card.\n[-7]: Creatures you control can't be blocked this turn.
+Oracle:Whenever you draw your second card each turn, put a +1/+1 counter on target creature you control.\n[+1]: Draw a card.\n[−7]: Creatures you control can't be blocked this turn.

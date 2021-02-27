@@ -2,8 +2,8 @@ Name:Forethought Amulet
 ManaCost:5
 Types:Artifact
 K:UpkeepCost:3
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Instant,Sorcery | ValidTarget$ You | DamageAmount$ GE3 | ReplaceWith$ Dmg2 | Description$ If an instant or sorcery source would deal 3 or more damage to you, it deals 2 damage instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Instant,Sorcery | ValidTarget$ You | DamageAmount$ GE3 | ReplaceWith$ Dmg2 | Description$ If an instant or sorcery source would deal 3 or more damage to you, it deals 2 damage to you instead.
 SVar:Dmg2:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ 2
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forethought_amulet.jpg
-Oracle:At the beginning of your upkeep, sacrifice Forethought Amulet unless you pay {3}.\nIf an instant or sorcery source would deal 3 or more damage to you, it deals 2 damage instead.
+Oracle:At the beginning of your upkeep, sacrifice Forethought Amulet unless you pay {3}.\nIf an instant or sorcery source would deal 3 or more damage to you, it deals 2 damage to you instead.

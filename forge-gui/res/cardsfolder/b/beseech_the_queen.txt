@@ -5,4 +5,4 @@ A:SP$ ChangeZone | Cost$ 2/B 2/B 2/B | Origin$ Library | Destination$ Hand | Cha
 SVar:X:Count$Valid Land.YouCtrl
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beseech_the_queen.jpg
-Oracle:Search your library for a card with converted mana cost less than or equal to the number of lands you control, reveal it, put it into your hand, then shuffle your library.
+Oracle:({2/B} can be paid with any two mana or with {B}. This card's converted mana cost is 6.)\nSearch your library for a card with converted mana cost less than or equal to the number of lands you control, reveal it, and put it into your hand. Then shuffle your library.

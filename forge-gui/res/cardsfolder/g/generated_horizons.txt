@@ -3,4 +3,4 @@ ManaCost:2 G G
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, you create a Forest land token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_l_forest | TokenOwner$ You
-Oracle:At the beginning of your upkeep, you may create a Forest land token.
+Oracle:At the beginning of your upkeep, create a Forest land token.

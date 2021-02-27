@@ -19,4 +19,4 @@ SVar:X:Count$ValidExile Card.IsRemembered+ExiledWithSource/Times.2
 SVar:MaxTgts:Count$Valid Creature.nonAngel+YouCtrl
 AI:RemoveDeck:Random
 K:Foretell:2 W
-Oracle:Flash\nFlying\nWhen Glorious Protector enters the battlefield, you may exile any number of non-Angel creatures you control until Glorious Protector leaves the battlefield.\nForetell {2}{W} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)
+Oracle:Flash\nFlying\nWhen Glorious Protector enters the battlefield, you may exile any number of non-Angel creatures you control until Glorious Protector leaves the battlefield.\nForetell {2}{W}

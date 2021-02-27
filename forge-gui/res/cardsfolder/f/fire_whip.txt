@@ -7,4 +7,4 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ ABDamage | Descrip
 SVar:ABDamage:AB$ DealDamage | Cost$ T | NumDmg$ 1 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SpellDescription$ This creature deals 1 damage to any target.
 A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_whip.jpg
-Oracle:Enchant creature you control\nEnchanted creature has "{T}: This creature deals 1 damage to any target."\nSacrifice Fire Whip: It deals 1 damage to any target.
+Oracle:Enchant creature you control\nEnchanted creature has "{T}: This creature deals 1 damage to any target."\nSacrifice Fire Whip: Fire Whip deals 1 damage to any target.

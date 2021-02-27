@@ -9,4 +9,4 @@ SVar:DBPrevent:DB$ Pump | Defined$ Self | KW$ Prevent all damage that would be d
 #restriction logic will need to be added to Human declare attackers for this to be OK for the AI to use
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gideon_jura.jpg
-Oracle:[+2]: During target opponent's next turn, creatures that player controls attack Gideon Jura if able.\n[-2]: Destroy target tapped creature.\n[0]: Until end of turn, Gideon Jura becomes a 6/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
+Oracle:[+2]: During target opponent's next turn, creatures that player controls attack Gideon Jura if able.\n[−2]: Destroy target tapped creature.\n[0]: Until end of turn, Gideon Jura becomes a 6/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.

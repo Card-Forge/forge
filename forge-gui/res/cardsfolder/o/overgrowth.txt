@@ -8,4 +8,4 @@ SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ 2 | Defined$ TriggeredCardControl
 #TODO: Mana prediction for lands that produce additional mana (Overgrowth, Mana Flare, etc.)
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overgrowth.jpg
-Oracle:Enchant land (Target a land as you cast this. This card enters the battlefield attached to that land.)\nWhenever enchanted land is tapped for mana, its controller adds an additional {G}{G}.
+Oracle:Enchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional {G}{G}.

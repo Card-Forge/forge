@@ -3,8 +3,8 @@ ManaCost:10
 Types:Artifact Creature Beast
 PT:5/5
 K:Trample
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ Domain — CARDNAME costs {1} less to cast for each basic land type among lands you control.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ Domain — This spell costs {1} less to cast for each basic land type among lands you control.
 SVar:X:Count$Domain
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stratadon.jpg
-Oracle:Domain — Stratadon costs {1} less to cast for each basic land type among lands you control.\nTrample
+Oracle:Domain — This spell costs {1} less to cast for each basic land type among lands you control.\nTrample

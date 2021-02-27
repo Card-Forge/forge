@@ -3,6 +3,6 @@ ManaCost:6 U U
 Types:Legendary Creature Leviathan
 PT:8/8
 K:Kicker:1 U
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigChangeZoneAll | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, return all creatures to their owner's hands except for Merfolk, Krakens, Leviathans, Octopuses, and Serpents.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigChangeZoneAll | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, return all creatures to their owners' hands except for Merfolk, Krakens, Leviathans, Octopuses, and Serpents.
 SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Creature.nonMerfolk+nonKraken+nonLeviathan+nonOctopus+nonSerpent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all creatures to their owner's hands except for Merfolk, Krakens, Leviathans, Octopuses, and Serpents.
-Oracle:Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nWhen Slinn Voda, the Rising Deep enters the battlefield, if it was kicked, return all creatures to their owner's hands except for Merfolk, Krakens, Leviathans, Octopuses, and Serpents.
+Oracle:Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nWhen Slinn Voda, the Rising Deep enters the battlefield, if it was kicked, return all creatures to their owners' hands except for Merfolk, Krakens, Leviathans, Octopuses, and Serpents.

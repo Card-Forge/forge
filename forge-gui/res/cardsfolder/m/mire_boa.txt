@@ -5,4 +5,4 @@ PT:2/1
 K:Swampwalk
 A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mire_boa.jpg
-Oracle:Swampwalk\n{G}: Regenerate Mire Boa.
+Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\n{G}: Regenerate Mire Boa.

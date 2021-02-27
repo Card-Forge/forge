@@ -9,4 +9,4 @@ A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True
 SVar:TrigDraw:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ DBDraw | OptionalDecider$ You | TriggerZones$ Command | TriggerDescription$ Whenever a land enters the battlefield under your control, you may draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nissa_vital_force.jpg
-Oracle:[+1]: Untap target land you control. Until your next turn, it becomes a 5/5 Elemental creature with haste. It's still a land.\n[-3]: Return target permanent card from your graveyard to your hand.\n[-6]: You get an emblem with "Whenever a land enters the battlefield under your control, you may draw a card."
+Oracle:[+1]: Untap target land you control. Until your next turn, it becomes a 5/5 Elemental creature with haste. It's still a land.\n[−3]: Return target permanent card from your graveyard to your hand.\n[−6]: You get an emblem with "Whenever a land enters the battlefield under your control, you may draw a card."

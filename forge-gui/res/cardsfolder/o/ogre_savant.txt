@@ -8,4 +8,4 @@ SVar:ManaNeededToAvoidNegativeEffect:blue
 AI:RemoveDeck:Random
 DeckNeeds:Color$Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_savant.jpg
-Oracle:When Ogre Savant enters the battlefield, if {U} was spent to cast Ogre Savant, return target creature to its owner's hand.
+Oracle:When Ogre Savant enters the battlefield, if {U} was spent to cast it, return target creature to its owner's hand.

@@ -11,4 +11,4 @@ S:Mode$ Continuous | Affected$ Card.Treasure+YouCtrl | AddAbility$ Mana | Descri
 SVar:Mana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color.
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token
-Oracle:Flying, haste\nWhenever Goldspan Dragon attacks or becomes the target of a spell, create a Treasure token.\nTreasures you control have “{T}, Sacrifice this artifact: Add two mana of any one color.”
+Oracle:Flying, haste\nWhenever Goldspan Dragon attacks or becomes the target of a spell, create a Treasure token.\nTreasures you control have "{T}, Sacrifice this artifact: Add two mana of any one color."

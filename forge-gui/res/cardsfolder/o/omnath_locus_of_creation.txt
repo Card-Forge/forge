@@ -14,4 +14,4 @@ SVar:DBMana:DB$ Mana | Produced$ R G W U | ConditionCheckSVar$ LandfallAmount | 
 SVar:DBDamageAll:DB$ DamageAll | ValidPlayers$ Opponent | ValidCards$ Planeswalker.YouDontCtrl | NumDmg$ 4 | ConditionCheckSVar$ LandfallAmount | ConditionSVarCompare$ EQ3
 SVar:LandfallAmount:Number$0
 DeckHas:Ability$LifeGain
-Oracle:When Omnath, Locus of Creation enters the battlefield, draw a card.\nLandfall - Whenever a land enters the battlefield under your control, you gain 4 life if this is the first time this ability has resolved this turn. If it's the second time, add {R}{G}{W}{U}. If it's the third time, Omnath deals 4 damage to each opponent and each planeswalker you don't control.
+Oracle:When Omnath, Locus of Creation enters the battlefield, draw a card.\nLandfall — Whenever a land enters the battlefield under your control, you gain 4 life if this is the first time this ability has resolved this turn. If it's the second time, add {R}{G}{W}{U}. If it's the third time, Omnath deals 4 damage to each opponent and each planeswalker you don't control.

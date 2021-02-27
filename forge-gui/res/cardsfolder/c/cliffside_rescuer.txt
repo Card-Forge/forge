@@ -3,5 +3,5 @@ ManaCost:1 W
 Types:Creature Kor Soldier
 PT:2/2
 K:Vigilance
-A:AB$ Pump | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | KW$ Protection from opponent of ActivatorName | DefinedKW$ ActivatorName | SpellDescription$ Target permanent you control gets protection from each opponent until end of turn.
-Oracle:Vigilance\n{T}, Sacrifice Cliffside Rescuer: Target permanent you control gets protection from each opponent until end of turn.
+A:AB$ Pump | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | KW$ Protection from opponent of ActivatorName | DefinedKW$ ActivatorName | SpellDescription$ Target permanent you control gains protection from each of your opponents until end of turn. (It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything controlled by those players.)
+Oracle:Vigilance\n{T}, Sacrifice Cliffside Rescuer: Target permanent you control gains protection from each of your opponents until end of turn. (It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything controlled by those players.)

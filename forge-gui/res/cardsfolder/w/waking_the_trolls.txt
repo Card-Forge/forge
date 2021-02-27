@@ -10,4 +10,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Land.YouCtrl/Minus.Y
 SVar:Y:Count$Valid Land.RememberedPlayerCtrl
 DeckHas:Ability$Token
-Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI - Destroy target land.\nII - Put target land from a graveyard onto the battlefield under your control.\nIII - Choose target player. If they control fewer lands than you, create a number of 4/4 green Troll Warrior creature tokens with trample equal to the difference.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Destroy target land.\nII — Put target land card from a graveyard onto the battlefield under your control.\nIII — Choose target opponent. If they control fewer lands than you, create a number of 4/4 green Troll Warrior creature tokens with trample equal to the difference.

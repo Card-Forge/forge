@@ -8,4 +8,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$
 SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Permanent.token+YouCtrl | TgtPrompt$ Select target token you control | NumCopies$ 1
 K:Crew:4
 DeckHas:Ability$Token
-Oracle:When Esika’s Chariot enters the battlefield, create two 2/2 green Cat creature tokens.\nWhenever Esika’s Chariot attacks, create a token that’s a copy of target token you control.
+Oracle:When Esika's Chariot enters the battlefield, create two 2/2 green Cat creature tokens.\nWhenever Esika's Chariot attacks, create a token that's a copy of target token you control.\nCrew 4

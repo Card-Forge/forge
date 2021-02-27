@@ -4,4 +4,4 @@ Types:Artifact Creature Beast
 PT:5/1
 A:AB$ Pump | Cost$ PG | Defined$ Self | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/insatiable_souleater.jpg
-Oracle:{P/G}: Insatiable Souleater gains trample until end of turn. ({P/G} can be paid with either {G} or 2 life.)
+Oracle:{G/P}: Insatiable Souleater gains trample until end of turn. ({G/P} can be paid with either {G} or 2 life.)

@@ -3,8 +3,8 @@ ManaCost:W
 Types:Creature Cat
 PT:1/1
 K:Lifelink
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ Whenever CARDNAME enters the battlefield, put a +1/+1 counter on each other creature you control named CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on each other creature you control named CARDNAME.
 SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.namedCharmed Stray+Other | CounterType$ P1P1 | CounterNum$ 1
 DeckHints:Name$CARDNAME
 DeckHas:Ability$Counters
-Oracle:Lifelink\nWhenever Charmed Stray enters the battlefield, put a +1/+1 counter on each other creature you control named Charmed Stray.
+Oracle:Lifelink\nWhen Charmed Stray enters the battlefield, put a +1/+1 counter on each other creature you control named Charmed Stray.

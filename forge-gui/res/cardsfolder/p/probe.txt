@@ -9,4 +9,4 @@ DeckHints:Color$Black
 SVar:NeedsToPlayKickedVar:Z GE1
 SVar:Z:Count$ValidHand Card.OppCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/probe.jpg
-Oracle:Kicker {1}{B} (You may pay an additional {1}{B} as you cast this spell.)\nDraw three cards, then discard two cards.\nIf Probe was kicked, target player discards two cards.
+Oracle:Kicker {1}{B} (You may pay an additional {1}{B} as you cast this spell.)\nDraw three cards, then discard two cards. If this spell was kicked, target player discards two cards.

@@ -5,4 +5,4 @@ PT:1/3
 K:Flash
 K:Forestwalk
 SVar:AltCost:Cost$ ExileFromHand<1/Card.Green+Other> | Description$ You may exile one green card from your hand rather than pay this spell's mana cost.
-Oracle:Flash\nForestwalk\nYou may exile a green card from your hand rather than pay this spell's mana cost.
+Oracle:You may exile a green card from your hand rather than pay this spell's mana cost.\nFlash\nForestwalk (This creature can't be blocked as long as defending player controls a Forest.)

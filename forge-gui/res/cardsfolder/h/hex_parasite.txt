@@ -8,4 +8,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 SVar:Y:Count$RememberedSize
 AI:RemoveDeck:All
-Oracle:{X}{P/B}: Remove up to X counters from target permanent. For each counter removed this way, Hex Parasite gets +1/+0 until end of turn. ({P/B} can be paid with either {B} or 2 life.)
+Oracle:{X}{B/P}: Remove up to X counters from target permanent. For each counter removed this way, Hex Parasite gets +1/+0 until end of turn. ({B/P} can be paid with either {B} or 2 life.)

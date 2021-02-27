@@ -7,4 +7,4 @@ SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | ValidTgts$ Creature | TgtPro
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
 DeckHas:Ability$Counters & Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/retreat_to_kazandu.jpg
-Oracle:Landfall — Whenever a land enters the battlefield under your control, choose one —\n• Put a +1/+1 counter on target creature\n• You gain 2 life.
+Oracle:Landfall — Whenever a land enters the battlefield under your control, choose one —\n• Put a +1/+1 counter on target creature.\n• You gain 2 life.

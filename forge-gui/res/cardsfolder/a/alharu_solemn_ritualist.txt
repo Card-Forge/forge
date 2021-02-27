@@ -8,4 +8,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
 DeckHas:Ability$Counters & Ability$Token
 K:Partner
-Oracle:When Alharu, Solemn Ritualist enters the battlefield, put a +1/+1 counter on each of up to two other target creatures.\nWhenever a creature you control with a +1/+1 counter on it dies, create a 1/1 white Spirit creature token with flying.\nPartner (You can have two commanders if both have partner.)
+Oracle:When Alharu, Solemn Ritualist enters the battlefield, put a +1/+1 counter on each of up to two other target creatures.\nWhenever a nontoken creature you control with a +1/+1 counter on it dies, create a 1/1 white Spirit creature token with flying.\nPartner (You can have two commanders if both have partner.)

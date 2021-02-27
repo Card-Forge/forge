@@ -11,4 +11,4 @@ SVar:AIPreference:SacCost$Creature.Spirit+token,Creature.Spirit+cmcLE2
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 DeckHints:Type$Spirit
-Oracle:As an additional cost to cast Devouring Greed, you may sacrifice any number of Spirits.\nTarget player loses 2 life plus 2 life for each Spirit sacrificed this way. You gain that much life.
+Oracle:As an additional cost to cast this spell, you may sacrifice any number of Spirits.\nTarget player loses 2 life plus 2 life for each Spirit sacrificed this way. You gain that much life.

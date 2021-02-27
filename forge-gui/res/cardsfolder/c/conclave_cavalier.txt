@@ -7,4 +7,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ gw_2_2_elf_knight_vigilance | LegacyImage$ gw 2 2 elf knight vigilance grn
 DeckHas:Ability$Token
 SVar:SacMe:4
-Oracle:Vigilance\nWhen Conclave Cavalier dies, create two green and white 2/2 Elf Knight creature tokens with vigilance.
+Oracle:Vigilance\nWhen Conclave Cavalier dies, create two 2/2 green and white Elf Knight creature tokens with vigilance.

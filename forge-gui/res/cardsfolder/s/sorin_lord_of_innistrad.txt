@@ -9,4 +9,4 @@ A:AB$ Destroy | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ Tru
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sorin_lord_of_innistrad.jpg
-Oracle:[+1]: Create a 1/1 black Vampire creature token with lifelink.\n[-2]: You get an emblem with "Creatures you control get +1/+0."\n[-6]: Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control.
+Oracle:[+1]: Create a 1/1 black Vampire creature token with lifelink.\n[−2]: You get an emblem with "Creatures you control get +1/+0."\n[−6]: Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control.

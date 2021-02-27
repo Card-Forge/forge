@@ -5,4 +5,4 @@ A:SP$ Mana | Cost$ B Sac<1/Creature> | Produced$ B | Amount$ X | References$ X |
 SVar:X:Sacrificed$CardManaCost
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacrifice.jpg
-Oracle:As an additional cost to cast Sacrifice, sacrifice a creature.\nAdd an amount of {B} equal to the sacrificed creature's converted mana cost.
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nAdd an amount of {B} equal to the sacrificed creature's converted mana cost.

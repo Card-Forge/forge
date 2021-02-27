@@ -2,7 +2,7 @@ Name:Reyav, Master Smith
 ManaCost:R W
 Types:Legendary Creature Dwarf Artificer
 PT:2/2
-T:Mode$ Attacks | ValidCard$ Creature.enchanted+YouCtrl,Creature.YouCtrl+equipped | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever an enchanted or equipped creature you control attacks, that creature gains double strike until end of turn.
+T:Mode$ Attacks | ValidCard$ Creature.enchanted+YouCtrl,Creature.YouCtrl+equipped | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control that's enchanted or equipped attacks, that creature gains double strike until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | KW$ Double Strike
 DeckNeeds:Type$Enchantment|Equipment
-Oracle:Whenever an enchanted or equipped creature you control attacks, that creature gains double strike until end of turn.
+Oracle:Whenever a creature you control that's enchanted or equipped attacks, that creature gains double strike until end of turn.

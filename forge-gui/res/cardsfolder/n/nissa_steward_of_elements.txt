@@ -9,4 +9,4 @@ A:AB$ Untap | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True 
 SVar:Animate:DB$ Animate | Defined$ Remembered | Power$ 5 | Toughness$ 5 | Types$ Creature,Elemental | Keywords$ Flying & Haste | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Y:Count$CardCounters.LOYALTY
-Oracle:[+2]: Scry 2.\n[0]: Look at the top card of your library. If it's a land card or a creature card with converted mana cost less than or equal to the number of loyalty counters on Nissa, Steward of Elements, you may put that card onto the battlefield.\n[-6]: Untap up to two target lands you control. They become 5/5 Elemental creatures with flying and haste until end of turn. They're still lands.
+Oracle:[+2]: Scry 2.\n[0]: Look at the top card of your library. If it's a land card or a creature card with converted mana cost less than or equal to the number of loyalty counters on Nissa, Steward of Elements, you may put that card onto the battlefield.\n[−6]: Untap up to two target lands you control. They become 5/5 Elemental creatures with flying and haste until end of turn. They're still lands.

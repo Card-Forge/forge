@@ -6,4 +6,4 @@ A:AB$ Pump | Cost$ 3 B Discard<1/Card> | ValidTgts$ Creature | TgtPrompt$ Select
 A:AB$ Token | Cost$ 3 R | TokenScript$ r_2_1_goblin_haste | LegacyImage$ r 2 1 goblin haste dis | AtEOT$ Exile | SpellDescription$ Create a 2/1 red Goblin creature token with haste. Exile it at the beginning of the next end step.
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_guildmage.jpg
-Oracle:{3}{B}, Discard a card: Target creature gets -2/-2 until end of turn.\n{3}{R}: Create a 2/1 red Goblin creature token with haste. Exile it at the beginning of the next end step.
+Oracle:({B/R} can be paid with either {B} or {R}.)\n{3}{B}, Discard a card: Target creature gets -2/-2 until end of turn.\n{3}{R}: Create a 2/1 red Goblin creature token with haste. Exile it at the beginning of the next end step.

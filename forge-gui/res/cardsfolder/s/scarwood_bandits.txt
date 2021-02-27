@@ -6,4 +6,4 @@ K:Forestwalk
 A:AB$ GainControl | Cost$ 2 G T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | LoseControl$ LeavesPlay | UnlessCost$ 2 | UnlessPayer$ Opponent | SpellDescription$ Unless an opponent pays {2}, gain control of target artifact for as long as CARDNAME remains on the battlefield.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scarwood_bandits.jpg
-Oracle:Forestwalk\n{2}{G}, {T}: Unless an opponent pays {2}, gain control of target artifact for as long as Scarwood Bandits remains on the battlefield.
+Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)\n{2}{G}, {T}: Unless an opponent pays {2}, gain control of target artifact for as long as Scarwood Bandits remains on the battlefield.

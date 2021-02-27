@@ -7,4 +7,4 @@ SVar:DBPump:DB$ PumpAll | ValidCards$ Knight.YouCtrl | NumAtt$ +2 | NumDef$ +1 |
 DeckHints:Type$Knight
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/history_of_benalia.jpg
-Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II - Create a 2/2 white Knight creature token with vigilance.\nIII - Knights you control get +2/+1 until end of turn.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Create a 2/2 white Knight creature token with vigilance.\nIII — Knights you control get +2/+1 until end of turn.

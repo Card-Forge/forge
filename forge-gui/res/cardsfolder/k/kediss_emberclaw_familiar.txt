@@ -8,4 +8,4 @@ SVar:X:TriggerCount$DamageAmount
 K:Partner
 SVar:BuffedBy:Card.IsCommander
 AI:RemoveDeck:NonCommander
-Oracle:Whenever a commander you control deals combat damage to an opponent, it deals that much damage to each other opponent.\nPartner (You can have two commanders if they both have partner.)
+Oracle:Whenever a commander you control deals combat damage to an opponent, it deals that much damage to each other opponent.\nPartner (You can have two commanders if both have partner.)

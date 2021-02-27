@@ -11,4 +11,4 @@ SVar:KWShow:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Hand | Affect
 SVar:ComeBack:Mode$ ChangesZone | Origin$ Hand | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ExileSelf | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ None
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firestorm_phoenix.jpg
-Oracle:If Firestorm Phoenix would die, return Firestorm Phoenix to its owner's hand instead. Until that player's next turn, that player plays with that card revealed in their hand and can't play it.
+Oracle:Flying\nIf Firestorm Phoenix would die, return it to its owner's hand instead. Until that player's next turn, that player plays with that card revealed in their hand and can't play it.

@@ -8,4 +8,4 @@ SVar:DBTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | Tok
 A:AB$ SetLife | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 1 | SpellDescription$ Target player's life total becomes 1.
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vraska_relic_seeker.jpg
-Oracle:[+2]: Create a 2/2 black Pirate creature token with menace.\n[-3]: Destroy target artifact, creature, or enchantment. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\n[-10]: Target player's life total becomes 1.
+Oracle:[+2]: Create a 2/2 black Pirate creature token with menace.\n[−3]: Destroy target artifact, creature, or enchantment. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\n[−10]: Target player's life total becomes 1.

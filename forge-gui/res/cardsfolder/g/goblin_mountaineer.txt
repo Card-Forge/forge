@@ -4,4 +4,4 @@ Types:Creature Goblin Scout
 PT:1/1
 K:Mountainwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83018.jpg
-Oracle:Mountainwalk
+Oracle:Mountainwalk (This creature can't be blocked as long as defending player controls a Mountain.)

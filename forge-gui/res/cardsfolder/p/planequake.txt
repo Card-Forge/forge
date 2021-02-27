@@ -1,6 +1,6 @@
 Name:Planequake
 ManaCost:X R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ X R | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying and each player.
+A:SP$ DamageAll | Cost$ X R | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying and each planeswalker. If X is 10 or more, open the "Uncovered Cavern" plot booster.
 SVar:X:Count$xPaid
-Oracle:Planequake deals X damage to each creature without flying and each player.
+Oracle:Planequake deals X damage to each creature without flying and each planeswalker. If X is 10 or more, open the "Uncovered Cavern" plot booster.

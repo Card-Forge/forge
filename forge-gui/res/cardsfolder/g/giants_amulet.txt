@@ -9,4 +9,4 @@ SVar:TrigToken:AB$ Token | Cost$ 3 U | LegacyImage$ u 4 4 giant wizard khm | Tok
 SVar:DBAttach:DB$ Attach | Object$ TriggeredCard | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token
-Oracle:When Giant's Amulet enters the battlefield, you may pay {3}{U}. If you do, create a 4/4 blue Giant Wizard creature token, then attach CARDNAME to it.\nEquipped creature gets 0/+1 and has "This creature has hexproof as long as it's untapped." (It can't be the target of spells or abilities your opponents control.)\nEquip: {2}
+Oracle:When Giant's Amulet enters the battlefield, you may pay {3}{U}. If you do, create a 4/4 blue Giant Wizard creature token, then attach Giant's Amulet to it.\nEquipped creature gets +0/+1 and has "This creature has hexproof as long as it's untapped." (It can't be the target of spells or abilities your opponents control.)\nEquip {2}

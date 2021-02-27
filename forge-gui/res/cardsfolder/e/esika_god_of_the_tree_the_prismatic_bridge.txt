@@ -8,7 +8,7 @@ S:Mode$ Continuous | Affected$ Creature.Legendary+Other+YouCtrl | AddAbility$ Ma
 SVar:Mana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 AlternateMode:Modal
 DeckHints:Type$Legendary
-Oracle:Vigilance\n{T}:Add one mana of any color.\nOther legendary creatures you control have vigilance and "{T}: Add one mana of any color."
+Oracle:Vigilance\n{T}: Add one mana of any color.\nOther legendary creatures you control have vigilance and "{T}: Add one mana of any color."
 
 ALTERNATE
 

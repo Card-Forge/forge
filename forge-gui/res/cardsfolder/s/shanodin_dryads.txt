@@ -4,4 +4,4 @@ Types:Creature Nymph Dryad
 PT:1/1
 K:Forestwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card11494.jpg
-Oracle:Forestwalk
+Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)

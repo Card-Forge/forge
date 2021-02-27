@@ -4,4 +4,4 @@ Types:Creature Wraith
 PT:1/3
 K:Swampwalk
 A:AB$ Pump | Cost$ B | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-Oracle:Swampwalk\n{B}: Dirtwater Wraith gets +1/+0 until end of turn.
+Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\n{B}: Dirtwater Wraith gets +1/+0 until end of turn.

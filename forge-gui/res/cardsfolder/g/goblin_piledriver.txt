@@ -7,4 +7,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | References$ X
 SVar:X:Count$Valid Goblin.attacking+Other/Times.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_piledriver.jpg
-Oracle:Protection from blue\nWhenever Goblin Piledriver attacks, it gets +2/+0 until end of turn for each other attacking Goblin.
+Oracle:Protection from blue (This creature can't be blocked, targeted, dealt damage, or enchanted by anything blue.)\nWhenever Goblin Piledriver attacks, it gets +2/+0 until end of turn for each other attacking Goblin.

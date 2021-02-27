@@ -10,4 +10,4 @@ SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target cr
 SVar:BuffedBy:Spirit
 DeckHints:Type$Spirit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nebelgast_herald.jpg
-Oracle:Flash, Flying\nWhenever Nebelgast Herald or another Spirit enters the battlefield under your control, tap target creature an opponent controls.
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nWhenever Nebelgast Herald or another Spirit enters the battlefield under your control, tap target creature an opponent controls.

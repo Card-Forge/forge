@@ -6,4 +6,4 @@ A:SP$ MultiplyCounter | Cost$ 1 G | CounterType$ P1P1 | ValidTgts$ Creature | Ta
 SVar:MaxTargets:Count$Valid Creature
 DeckNeeds:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solidarity_of_heroes.jpg
-Oracle:Strive — Solidarity of Heroes costs {1}{G} more to cast for each target beyond the first.\nChoose any number of target creatures. Double the number of +1/+1 counters on each of them.
+Oracle:Strive — This spell costs {1}{G} more to cast for each target beyond the first.\nChoose any number of target creatures. Double the number of +1/+1 counters on each of them.

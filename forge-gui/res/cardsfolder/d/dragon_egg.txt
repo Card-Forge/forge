@@ -8,4 +8,4 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | LegacyImage$ r 2 2
 SVar:SacMe:4
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_egg.jpg
-Oracle:Defender\nWhen Dragon Egg dies, create a 2/2 red Dragon creature token with flying. It has "{R}: This creature gets +1/+0 until end of turn."
+Oracle:Defender\nWhen Dragon Egg dies, create a 2/2 red Dragon creature token with flying and "{R}: This creature gets +1/+0 until end of turn."

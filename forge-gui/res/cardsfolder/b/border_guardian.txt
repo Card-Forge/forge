@@ -9,4 +9,4 @@ SVar:TrigUnblock:DB$ Pump | Defined$ Self | KW$ HIDDEN Unblockable
 T:Mode$ SpellCast | ValidCard$ Card.BorderColorWhite | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDS | TriggerDescription$ Whenever you cast a white-bordered spell, Border Guardian gains double strike until end of turn.
 SVar:TrigDS:DB$ Pump | Defined$ Self | KW$ Double Strike
 DeckHas:Ability$Counters
-Oracle:Whenever you cast a silver-bordered spell, put a +1/+1 counter on Border Guardian.\nWhenever you cast a black-bordered spell, Border Guardian can’t be blocked this turn.\nWhenever you cast a white-bordered spell, Border Guardian gains double strike until end of turn.
+Oracle:Whenever you cast a silver-bordered spell, put a +1/+1 counter on Border Guardian.\nWhenever you cast a black-bordered spell, Border Guardian can't be blocked this turn.\nWhenever you cast a white-bordered spell, Border Guardian gains double strike until end of turn.

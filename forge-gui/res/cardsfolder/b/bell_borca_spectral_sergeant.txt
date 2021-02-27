@@ -15,4 +15,4 @@ SVar:PseudoDraw:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | Destinatio
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ MayPlay | SubAbility$ DBCleanup | ExileOnMoved$ Exile
 SVar:MayPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Note the converted mana cost of each card as it's put into exile.\Bell Borca, Spectral Sergeant's power is equal to the greatest number noted for it this turn.\nAt the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
+Oracle:Note the converted mana cost of each card as it's put into exile.\nBell Borca, Spectral Sergeant's power is equal to the greatest number noted for it this turn.\nAt the beginning of your upkeep, exile the top card of your library. You may play that card this turn.

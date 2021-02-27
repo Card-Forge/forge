@@ -1,8 +1,8 @@
 Name:Imperiosaur
 ManaCost:2 G G
 Types:Creature Dinosaur
-Text:Spend only mana produced by basic lands to cast CARDNAME.
+Text:Spend only mana produced by basic lands to cast this spell.
 PT:5/5
 A:SP$ PermanentCreature | Cost$ Mana<2 G G\Basic>
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130634.jpg
-Oracle:Spend only mana produced by basic lands to cast Imperiosaur.
+Oracle:Spend only mana produced by basic lands to cast this spell.

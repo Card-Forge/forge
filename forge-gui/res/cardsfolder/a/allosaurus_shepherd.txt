@@ -5,4 +5,4 @@ PT:1/1
 K:CARDNAME can't be countered.
 S:Mode$ Continuous | Affected$ Card.Green+YouCtrl | AffectedZone$ Stack | AddHiddenKeyword$ CARDNAME can't be countered. | Description$ Green spells you control can't be countered.
 A:AB$ AnimateAll | Cost$ 4 G G | ValidCards$ Creature.Elf+YouCtrl | Power$ 5 | Toughness$ 5 | Types$ Dinosaur | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, each Elf creature you control has base power and toughness 5/5 and becomes a Dinosaur in addition to its other creature types.
-Oracle:Allosaurus Shepherd can't be countered./nGreen spells you control can't be countered./n{4}{G}{G}: Until end of turn, each Elf creature you control has base power and toughness 5/5 and becomes a Dinosaur in addition to its other creature types.
+Oracle:Allosaurus Shepherd can't be countered.\nGreen spells you control can't be countered.\n{4}{G}{G}: Until end of turn, each Elf creature you control has base power and toughness 5/5 and becomes a Dinosaur in addition to its other creature types.

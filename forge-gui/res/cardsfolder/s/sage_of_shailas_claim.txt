@@ -5,4 +5,4 @@ PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E}{E} (three energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_of_shailas_claim.jpg
-Oracle:When Sage of Shaile's Claim enters the battlefield, you get {E}{E}{E} (three energy counters).
+Oracle:When Sage of Shaila's Claim enters the battlefield, you get {E}{E}{E} (three energy counters).

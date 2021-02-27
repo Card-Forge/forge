@@ -4,4 +4,4 @@ Types:Creature Goblin Berserker
 PT:1/1
 K:Haste
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83218.jpg
-Oracle:Haste
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)

@@ -3,10 +3,10 @@ ManaCost:16
 Types:Artifact Creature Dragon
 PT:9/9
 K:Flying
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ Domain — CARDNAME costs {2} less to cast for each basic land type among lands you control.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ Domain — This spell costs {2} less to cast for each basic land type among lands you control.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Domain — At the beginning of your upkeep, sacrifice CARDNAME unless you pay {10}. This cost is reduced by {2} for each basic land type among lands you control.
 SVar:TrigSac:DB$Sacrifice | Defined$ Self | UnlessCost$ UpkeepX | UnlessPayer$ You | References$ UpkeepX
 SVar:X:Count$Domain/Twice
 SVar:UpkeepX:Number$10/Minus.X
 SVar:Picture:http://www.wizards.com/global/images/magic/general/draco.jpg
-Oracle:Domain — Draco costs {2} less to cast for each basic land type among lands you control.\nFlying\nDomain — At the beginning of your upkeep, sacrifice Draco unless you pay {10}. This cost is reduced by {2} for each basic land type among lands you control.
+Oracle:Domain — This spell costs {2} less to cast for each basic land type among lands you control.\nFlying\nDomain — At the beginning of your upkeep, sacrifice Draco unless you pay {10}. This cost is reduced by {2} for each basic land type among lands you control.

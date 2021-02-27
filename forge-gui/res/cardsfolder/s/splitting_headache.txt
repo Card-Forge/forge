@@ -5,4 +5,4 @@ A:SP$ Charm | Cost$ 3 B | Choices$ SplitDiscard,FocusDiscard | CharmNum$ 1
 SVar:SplitDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
 SVar:FocusDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 1 | Mode$ RevealYouChoose | SpellDescription$ Target player reveals their hand, you choose a card from it, then that player discards that card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/splitting_headache.jpg
-Oracle:Choose one —\n• Target player discards two cards.\n• Target player reveals their hand, you choose a card from it, then that player discards that card.
+Oracle:Choose one —\n• Target player discards two cards.\n• Target player reveals their hand. You choose a card from it. That player discards that card.

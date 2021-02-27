@@ -4,4 +4,4 @@ Types:Creature Drake
 PT:3/2
 K:Flying
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87986.jpg
-Oracle:Flying
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)

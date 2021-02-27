@@ -7,4 +7,4 @@ T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | Co
 SVar:TrigDestroyPlaneswalker:DB$ Destroy | ValidTgts$ Planeswalker | TgtPrompt$ Select target planeswalker | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DestroyArtifact | SpellDescription$ Destroy up to one target planeswalker.
 SVar:DestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | TargetMin$ 0 | TargetMax$ 1 | SpellDescription$ Destroy up to one target artifact.
 SVar:SwordOfSinewAndSteelCE:SVar:MustBeBlocked:AttackingPlayerConservative
-Oracle:Equipped creature gets +2/+2 and has protection from white and from blue.\nWhenever equipped creature deals combat damage to a player, destroy up to one target planeswalker and up to one target artifact.\nEquip {2}
+Oracle:Equipped creature gets +2/+2 and has protection from black and from red.\nWhenever equipped creature deals combat damage to a player, destroy up to one target planeswalker and up to one target artifact.\nEquip {2}

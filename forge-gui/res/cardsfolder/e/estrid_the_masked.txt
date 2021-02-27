@@ -10,4 +10,4 @@ A:AB$ Mill | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True |
 SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Enchantment.nonAura+YouCtrl | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBChangeZone2
 SVar:DBChangeZone2:DB$ ChangeZoneAll | ChangeType$ Enchantment.Aura+YouCtrl | Origin$ Graveyard | Destination$ Battlefield
 K:CARDNAME can be your commander.
-Oracle:[+2]: Untap each enchanted permanent you control.\n[-1]: Create a white Aura enchantment token named Mask attached to another target permanent. The token has enchant permanent and totem armor.\n[-7]: Mill seven cards. Return all non-Aura enchantment cards from your graveyard to the battlefield, then do the same for Aura cards.\nEstrid, the Masked can be your commander.
+Oracle:[+2]: Untap each enchanted permanent you control.\n[−1]: Create a white Aura enchantment token named Mask attached to another target permanent. The token has enchant permanent and totem armor.\n[−7]: Mill seven cards. Return all non-Aura enchantment cards from your graveyard to the battlefield, then do the same for Aura cards.\nEstrid, the Masked can be your commander.

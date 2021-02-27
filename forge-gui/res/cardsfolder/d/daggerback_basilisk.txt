@@ -4,4 +4,4 @@ Types:Creature Basilisk
 PT:2/2
 K:Deathtouch
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daggerback_basilisk.jpg
-Oracle:Deathtouch
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)

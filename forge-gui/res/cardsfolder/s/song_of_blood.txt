@@ -7,4 +7,4 @@ SVar:TrigAttacks:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Execute$ Pump | T
 SVar:Pump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +X | References$ X
 SVar:X:Remembered$Valid Creature
 AI:RemoveDeck:All
-Oracle:Mill four cards.\nWhenever a creature attacks this turn, it gets +1/+0 until end of turn for each creature card put into your graveyard this way.
+Oracle:Mill four cards. Whenever a creature attacks this turn, it gets +1/+0 until end of turn for each creature card put into your graveyard this way.

@@ -5,4 +5,4 @@ A:SP$ ChangeZone | Cost$ X PB | Origin$ Graveyard | Destination$ Battlefield | V
 SVar:DBHaste:DB$ Animate | Defined$ Targeted | Keywords$ Haste | Permanent$ True | AtEOT$ Exile
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-Oracle:({P/B} can be paid with either {B} or 2 life.)\nReturn target creature card with converted mana cost X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
+Oracle:({B/P} can be paid with either {B} or 2 life.)\nReturn target creature card with converted mana cost X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.

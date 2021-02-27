@@ -6,4 +6,4 @@ K:Flash
 K:ETBReplacement:Copy:DBCopy:Optional
 SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stunt_double.jpg
-Oracle:Flash\nYou may have Stunt Double enter the battlefield as a copy of any creature on the the battlefield.
+Oracle:Flash\nYou may have Stunt Double enter the battlefield as a copy of any creature on the battlefield.

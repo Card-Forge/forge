@@ -2,10 +2,10 @@ Name:Oblivion Sower
 ManaCost:6
 Types:Creature Eldrazi
 PT:5/8
-T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When you cast CARDNAME, target opponent exiles the top four cards of their library, then you may put any number of land cards that player owns from exile onto the battlefield under your control.
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When you cast this spell, target opponent exiles the top four cards of their library, then you may put any number of land cards that player owns from exile onto the battlefield under your control.
 SVar:TrigExile:DB$ Dig | DigNum$ 4 | ChangeNum$ All | DestinationZone$ Exile | ValidTgts$ Opponent | SubAbility$ DBPump | TgtPrompt$ Choose target opponent
 SVar:DBPump:DB$ Pump | RememberObjects$ Targeted | SubAbility$ DBSower
 SVar:DBSower:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Hidden$ True | ChangeType$ Land.RememberedPlayerOwn | GainControl$ True | ChangeNum$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ValidExile Land.RememberedPlayerOwn
-Oracle:When you cast Oblivion Sower, target opponent exiles the top four cards of their library, then you may put any number of land cards that player owns from exile onto the battlefield under your control.
+Oracle:When you cast this spell, target opponent exiles the top four cards of their library, then you may put any number of land cards that player owns from exile onto the battlefield under your control.

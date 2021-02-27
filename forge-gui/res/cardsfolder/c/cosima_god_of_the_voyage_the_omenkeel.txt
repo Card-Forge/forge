@@ -30,4 +30,4 @@ SVar:SMayPlayLand:Mode$ Continuous | MayPlay$ True | Affected$ Land.IsRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Crew:1
 DeckHints:Type$Vehicle
-Oracle:Whenever a Vehicle you control deals combat damage to a player, that player exiles that many cards from the top of their library. You may play lands from among those cards for as long as they remain exiled. Crew 1
+Oracle:Whenever a Vehicle you control deals combat damage to a player, that player exiles that many cards from the top of their library. You may play lands from among those cards for as long as they remain exiled.\nCrew 1
