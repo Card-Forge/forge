@@ -5,7 +5,7 @@ K:Living Weapon
 K:Equip:3
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
 T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoseLifeOpp | TriggerDescription$ Whenever equipped creature deals combat damage to a player, that player loses half their life, rounded up.
-SVar:TrigLoseLifeOpp:DB$ LoseLife | Defined$ TriggeredTarget | LifeAmount$ X | References$ X
+SVar:TrigLoseLifeOpp:DB$ LoseLife | Defined$ TriggeredTarget | LifeAmount$ X
 SVar:X:TriggeredTarget$LifeTotal/HalfUp
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scytheclaw.jpg

@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ SpecificCard
 T:Mode$ DamageDealtOnce | ValidSource$ Card.AttachedBy | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, CARDNAME deals that much damage to that creature.
-SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredSourceLKICopy | NumDmg$ X | References$ X
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredSourceLKICopy | NumDmg$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guilty_conscience.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals damage, Guilty Conscience deals that much damage to that creature.

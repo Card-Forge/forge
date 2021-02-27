@@ -2,7 +2,7 @@ Name:Vraska's Stoneglare
 ManaCost:4 B G
 Types:Sorcery
 A:SP$ Destroy | Cost$ 4 B G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature. You gain life equal to its toughness. You may search your library and/or graveyard from a card named Vraska, Regal Gorgon, reveal it, and put it into your hand. If you search your library this way, shuffle it.
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup | References$ X | SubAbility$ DBSearch
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup | SubAbility$ DBSearch
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedVraska; Regal Gorgon | ChangeNum$ 1 | Optional$ True
 SVar:X:TargetedLKI$CardToughness
 DeckNeeds:Name$Vraska, Regal Gorgon

@@ -2,8 +2,8 @@ Name:Lightning Dart
 ManaCost:1 R
 Types:Instant
 A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | IsCurse$ True | RememberObjects$ Targeted | SubAbility$ DBDmg | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 1 damage to target creature. If that creature is white or blue, CARDNAME deals 4 damage to it instead.
-SVar:DBDmg:DB$ DealDamage | Defined$ Remembered | NumDmg$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | SubAbility$ DBDmgWU | StackDescription$ None
-SVar:DBDmgWU:DB$ DealDamage | Defined$ Remembered | NumDmg$ 4 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBDmg:DB$ DealDamage | Defined$ Remembered | NumDmg$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBDmgWU | StackDescription$ None
+SVar:DBDmgWU:DB$ DealDamage | Defined$ Remembered | NumDmg$ 4 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | StackDescription$ None | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Creature.IsRemembered+White,Creature.IsRemembered+Blue
 AI:RemoveDeck:All

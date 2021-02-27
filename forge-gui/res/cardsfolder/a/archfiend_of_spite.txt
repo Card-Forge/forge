@@ -4,7 +4,7 @@ Types:Creature Demon
 PT:6/6
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.OppCtrl | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ DBLoseLife | TriggerDescription$ Whenever a source an opponent controls deals damage to CARDNAME, that source's controller loses that much life unless they sacrifice that many permanents.
-SVar:DBLoseLife:DB$ LoseLife | Defined$ TriggeredSourceController | LifeAmount$ X | References$ X | UnlessCost$ Sac<X/Permanent> | UnlessPayer$ TriggeredSourceController
+SVar:DBLoseLife:DB$ LoseLife | Defined$ TriggeredSourceController | LifeAmount$ X | UnlessCost$ Sac<X/Permanent> | UnlessPayer$ TriggeredSourceController
 SVar:X:TriggerCount$DamageAmount
 K:Madness:3 B B
 Oracle:Flying\nWhenever a source an opponent controls deals damage to Archfiend of Spite, that source's controller loses that much life unless they sacrifice that many permanents.\nMadness {3}{B}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

@@ -5,7 +5,7 @@ PT:4/4
 K:Flying
 K:Cumulative upkeep:Discard<1/Card>:Discard a card.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, draw a card for each age counter on it.
-SVar:TrigDraw:DB$ Draw | NumCards$ XLKI | References$ XLKI
+SVar:TrigDraw:DB$ Draw | NumCards$ XLKI
 SVar:XLKI:TriggeredCard$CardCounters.AGE
 SVar:NeedsToPlayVar:Z GE3
 SVar:Z:Count$InYourHand

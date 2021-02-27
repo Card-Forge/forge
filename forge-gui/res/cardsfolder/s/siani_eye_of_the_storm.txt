@@ -5,7 +5,7 @@ PT:3/2
 K:Flying
 K:Partner
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ Whenever CARDNAME attacks, scry X, where X is the number of attacking creatures with flying.
-SVar:TrigScry:DB$ Scry | ScryNum$ X | References$ X
+SVar:TrigScry:DB$ Scry | ScryNum$ X
 SVar:X:Count$Valid Creature.attacking+withFlying
 SVar:HasAttackEffect:TRUE
 Oracle:Flying\nWhenever Siani, Eye of the Storm attacks, scry X, where X is the number of attacking creatures with flying.\nPartner (You can have two commanders if both have partner.)

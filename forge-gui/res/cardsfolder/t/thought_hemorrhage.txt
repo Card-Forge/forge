@@ -5,8 +5,8 @@ A:SP$ NameCard | Cost$ 2 B R | ValidCards$ Card.nonLand | SubAbility$ DBReveal |
 SVar:DBReveal:DB$ RevealHand | RememberRevealed$ True | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | SubAbility$ ExileYard
 SVar:ExileYard:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | Defined$ Targeted | ChangeType$ Card.NamedCard | SubAbility$ ExileHand | StackDescription$ None
-SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | References$ NumInHand | AlreadyRevealed$ True | StackDescription$ None
-SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ NumInLib | Chooser$ You | Search$ True | Shuffle$ True | References$ NumInLib | SubAbility$ DBCleanup | StackDescription$ None
+SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | AlreadyRevealed$ True | StackDescription$ None
+SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ NumInLib | Chooser$ You | Search$ True | Shuffle$ True | SubAbility$ DBCleanup | StackDescription$ None
 SVar:NumInLib:TargetedPlayer$CardsInLibrary
 SVar:NumInHand:TargetedPlayer$CardsInHand
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True

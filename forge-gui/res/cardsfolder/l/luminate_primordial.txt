@@ -4,7 +4,7 @@ Types:Creature Avatar
 PT:4/7
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ExileOneEach | TriggerDescription$ When CARDNAME enters the battlefield, for each opponent, exile up to one target creature that player controls and that player gains life equal to its power.
-SVar:ExileOneEach:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature each opponent controls. | TargetMin$ 0 | TargetMax$ OneEach | References$ OneEach | TargetsWithDifferentControllers$ True | SubAbility$ LoopTgts
+SVar:ExileOneEach:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature each opponent controls. | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | SubAbility$ LoopTgts
 SVar:LoopTgts:DB$ RepeatEach | RepeatSubAbility$ GiveLifeEach | DefinedCards$ Targeted
 SVar:GiveLifeEach:DB$ GainLife | Defined$ RememberedController | LifeAmount$ TgtPower
 SVar:OneEach:PlayerCountOpponents$Amount

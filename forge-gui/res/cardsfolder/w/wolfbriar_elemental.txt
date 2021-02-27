@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:4/4
 K:Multikicker:G
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 green Wolf creature token for each time it was kicked.
-SVar:TrigToken:DB$ Token | TokenAmount$ X | References$ X | TokenScript$ g_2_2_wolf | TokenOwner$ You | LegacyImage$ g 2 2 wolf wwk
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_2_2_wolf | TokenOwner$ You | LegacyImage$ g 2 2 wolf wwk
 SVar:X:Count$TimesKicked
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wolfbriar_elemental.jpg

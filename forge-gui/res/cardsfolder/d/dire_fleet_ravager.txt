@@ -6,7 +6,7 @@ K:Menace
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, each player loses a third of their life, rounded up.
 SVar:TrigLoseLife:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife
-SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ CntLife | References$ CntLife | Defined$ Player.IsRemembered
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ CntLife | Defined$ Player.IsRemembered
 SVar:CntLife:PlayerCountRemembered$LifeTotal/ThirdUp
 SVar:NeedsToPlayVar:MyLife GT1
 SVar:MyLife:Count$YourLifeTotal

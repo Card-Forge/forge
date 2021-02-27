@@ -1,7 +1,7 @@
 Name:The Circle of Loyalty
 ManaCost:4 W W
 Types:Legendary Artifact
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each Knight you control.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each Knight you control.
 SVar:X:Count$Valid Knight.YouCtrl
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.
 T:Mode$ SpellCast | ValidCard$ Card.Legendary | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a legendary spell, create a 2/2 white Knight creature token with vigilance.

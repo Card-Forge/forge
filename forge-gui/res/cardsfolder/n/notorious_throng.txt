@@ -2,7 +2,7 @@ Name:Notorious Throng
 ManaCost:3 U
 Types:Tribal Sorcery Rogue
 K:Prowl:5 U
-A:SP$ Token | Cost$ 3 U | TokenAmount$ X | References$ X | TokenScript$ b_1_1_faerie_rogue_flying | TokenOwner$ You | LegacyImage$ b 1 1 faerie rogue flying mor | SubAbility$ DBTakeTurn | SpellDescription$ Create X 1/1 black Faerie Rogue creature tokens with flying, where X is the damage dealt to your opponents this turn. If CARDNAME's prowl cost was paid, take an extra turn after this one.
+A:SP$ Token | Cost$ 3 U | TokenAmount$ X | TokenScript$ b_1_1_faerie_rogue_flying | TokenOwner$ You | LegacyImage$ b 1 1 faerie rogue flying mor | SubAbility$ DBTakeTurn | SpellDescription$ Create X 1/1 black Faerie Rogue creature tokens with flying, where X is the damage dealt to your opponents this turn. If CARDNAME's prowl cost was paid, take an extra turn after this one.
 SVar:DBTakeTurn:DB$ AddTurn | NumTurns$ 1 | ConditionDefined$ Self | ConditionPresent$ Card.prowled
 SVar:X:Count$TotalOppDamageThisTurn
 DeckNeeds:Type$Rogue

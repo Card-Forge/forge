@@ -4,8 +4,8 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 G | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigGainLife | TriggerDescription$ When enchanted creature dies, you gain X life and draw X cards, where X is its toughness.
-SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBTrigDraw
-SVar:DBTrigDraw:DB$ Draw | NumCards$ X | References$ X
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBTrigDraw
+SVar:DBTrigDraw:DB$ Draw | NumCards$ X
 SVar:X:TriggeredCard$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fruit_of_the_first_tree.jpg
 Oracle:Enchant creature\nWhen enchanted creature dies, you gain X life and draw X cards, where X is its toughness.

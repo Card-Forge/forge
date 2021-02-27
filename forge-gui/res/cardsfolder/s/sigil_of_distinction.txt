@@ -2,7 +2,7 @@ Name:Sigil of Distinction
 ManaCost:X
 Types:Artifact Equipment
 K:etbCounter:CHARGE:X
-S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddPower$ Y | AddToughness$ Y | References$ Y | Description$ Equipped creature gets +1/+1 for each charge counter on CARDNAME.
+S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddPower$ Y | AddToughness$ Y | Description$ Equipped creature gets +1/+1 for each charge counter on CARDNAME.
 K:Equip:SubCounter<1/CHARGE>
 SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.CHARGE

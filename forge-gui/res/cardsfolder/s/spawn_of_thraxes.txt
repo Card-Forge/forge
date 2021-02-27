@@ -4,7 +4,7 @@ Types:Creature Dragon
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage to any target equal to the number of Mountains you control.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
 SVar:X:Count$Valid Mountain.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spawn_of_thraxes.jpg
 Oracle:Flying\nWhen Spawn of Thraxes enters the battlefield, it deals damage to any target equal to the number of Mountains you control.

@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Elf Druid
 PT:2/2
 A:AB$ Reveal | Cost$ T | RevealValid$ Creature.powerGE5+YouCtrl | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBspeakerMana | SpellDescription$ Reveal any number of creature cards with power 5 or greater from your hand. Add {G} for each card revealed this way.
-SVar:DBspeakerMana:DB$ Mana | Produced$ G | Amount$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBspeakerMana:DB$ Mana | Produced$ G | Amount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 AI:RemoveDeck:All

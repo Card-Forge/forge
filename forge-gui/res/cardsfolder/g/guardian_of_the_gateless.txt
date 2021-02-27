@@ -5,7 +5,7 @@ PT:3/3
 K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | CanBlockAny$ True | Description$ CARDNAME can block any number of creatures.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks, it gets +1/+1 until end of turn for each creature it's blocking.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ X | References$ X
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ X
 SVar:X:Count$Valid Creature.blockedBySource
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_of_the_gateless.jpg
 Oracle:Flying\nGuardian of the Gateless can block any number of creatures.\nWhenever Guardian of the Gateless blocks, it gets +1/+1 until end of turn for each creature it's blocking.

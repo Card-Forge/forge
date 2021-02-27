@@ -8,7 +8,7 @@ A:AB$ GainControl | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigSac | RememberObjects$ Targeted | TriggerDescription$ Sacrifice that creature at the beginning of the next end step if it has converted mana cost 3 or less.
 SVar:TrigSac:DB$ SacrificeAll | Defined$ DelayTriggerRemembered | Controller$ You | ConditionDefined$ DelayTriggerRemembered | ConditionPresent$ Card.cmcLE3
 A:AB$ RepeatEach | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBLoseLife2 | SpellDescription$ Each opponent loses life equal to the number of cards in their graveyard.
-SVar:DBLoseLife2:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBLoseLife2:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
 SVar:X:Count$ValidGraveyard Card.RememberedPlayerCtrl 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angrath_the_flame_chained.jpg

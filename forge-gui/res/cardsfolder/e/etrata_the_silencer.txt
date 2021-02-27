@@ -7,7 +7,7 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Exile target creature that player controls | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ PutCounter
 SVar:PutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ HIT | CounterNum$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBLose
-SVar:DBLose:DB$ LosesGame | Defined$ TriggeredTarget | ConditionCheckSVar$ CheckExile | ConditionSVarCompare$ GE3 | References$ CheckExile | SubAbility$ DBShuffle
+SVar:DBLose:DB$ LosesGame | Defined$ TriggeredTarget | ConditionCheckSVar$ CheckExile | ConditionSVarCompare$ GE3 | SubAbility$ DBShuffle
 SVar:CheckExile:Count$ValidExile Card.DefendingPlayerCtrl+counters_GE1_HIT
 SVar:DBShuffle:DB$ ChangeZone | ConditionPresent$ Card.Self | ConditionCompare$ GE1 | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Library | Shuffle$ True
 Oracle:Etrata, the Silencer can't be blocked.\nWhenever Etrata deals combat damage to a player, exile target creature that player controls and put a hit counter on that card. That player loses the game if they own three or more exiled cards with hit counters on them. Etrata's owner shuffles Etrata into their library.

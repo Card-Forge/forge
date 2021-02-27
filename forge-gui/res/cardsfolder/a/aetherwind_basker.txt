@@ -5,7 +5,7 @@ PT:7/7
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you get {E} (an energy counter) for each creature you control.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigEnergy | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you get {E} (an energy counter) for each creature you control.
-SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ X | References$ X
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ X
 SVar:X:Count$TypeYouCtrl.Creature
 A:AB$ Pump | Cost$ PayEnergy<1> | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:HasAttackEffect:TRUE

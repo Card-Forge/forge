@@ -5,7 +5,7 @@ PT:3/3
 K:Flying
 K:Vanishing:3
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigCopyPermanent | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, if it had no time counters on it, create two tokens that are copies of it.
-SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ TriggeredCard | NumCopies$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X
+SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ TriggeredCard | NumCopies$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
 SVar:X:TriggeredCard$CardCounters.TIME
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chronozoa.jpg
 Oracle:Flying\nVanishing 3 (This creature enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhen Chronozoa dies, if it had no time counters on it, create two tokens that are copies of it.

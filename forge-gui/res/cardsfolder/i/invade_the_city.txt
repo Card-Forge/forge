@@ -1,7 +1,7 @@
 Name:Invade the City
 ManaCost:1 U R
 Types:Sorcery
-A:SP$ Amass | Cost$ 1 U R | Num$ X | References$ X | SpellDescription$ Amass X, where X is the number of instant and sorcery cards in your graveyard. (Put X +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
+A:SP$ Amass | Cost$ 1 U R | Num$ X | SpellDescription$ Amass X, where X is the number of instant and sorcery cards in your graveyard. (Put X +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
 DeckNeeds:Type$Instant|Sorcery
 DeckHints:Ability$Amass & Type$Zombie
 DeckHas:Ability$Amass & Ability$Counters & Ability$Token

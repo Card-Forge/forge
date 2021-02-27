@@ -3,8 +3,8 @@ ManaCost:1 U
 Types:Instant
 K:Ascend
 A:SP$ Pump | Cost$ 1 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | RememberObjects$ Targeted | IsCurse$ True | SubAbility$ DBDefaultAction | StackDescription$ SpellDescription | SpellDescription$ Return target nonland permanent to its owner's hand. If you have the city's blessing, you may put that permanent on top of its owner's library instead.
-SVar:DBDefaultAction:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Hand | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | SubAbility$ DBChoose
-SVar:DBChoose:DB$ GenericChoice | Choices$ DBHandChoice,DBTopLibChoice | Defined$ You | ConditionCheckSVar$ X | SubAbility$ DBCleanup | ConditionSVarCompare$ GE1 | References$ X
+SVar:DBDefaultAction:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Hand | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBChoose
+SVar:DBChoose:DB$ GenericChoice | Choices$ DBHandChoice,DBTopLibChoice | Defined$ You | ConditionCheckSVar$ X | SubAbility$ DBCleanup | ConditionSVarCompare$ GE1
 SVar:DBHandChoice:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Hand
 SVar:DBTopLibChoice:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Top of the library
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -3,8 +3,8 @@ ManaCost:3 B B
 Types:Creature Vampire Knight
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, you draw X cards and you lose X life, where X is the number of Vampires you control.
-SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X | SubAbility$ DBLoseLife
-SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | References$ X
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
 SVar:X:Count$Valid Vampire.YouCtrl
 DeckHints:Type$Vampire
 SVar:Picture:http://www.wizards.com/global/images/magic/general/champion_of_dusk.jpg 

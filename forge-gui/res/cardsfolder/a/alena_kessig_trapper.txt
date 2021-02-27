@@ -4,6 +4,6 @@ Types:Legendary Creature Human Scout
 PT:4/3
 K:First Strike
 K:Partner
-A:AB$ Mana | Cost$ T | Produced$ R | Amount$ X | References$ X | SpellDescription$ Add an amount of {R} equal to the greatest power among creatures you control that entered the battlefield this turn.
+A:AB$ Mana | Cost$ T | Produced$ R | Amount$ X | SpellDescription$ Add an amount of {R} equal to the greatest power among creatures you control that entered the battlefield this turn.
 SVar:X:Count$GreatestPower_Creature.YouCtrl+enteredBattlefieldThisTurn
 Oracle:First strike\n{T}: Add an amount of {R} equal to the greatest power among creatures you control that entered the battlefield this turn.\nPartner (You can have two commanders if both have partner.)

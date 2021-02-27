@@ -1,7 +1,7 @@
 Name:Mind Twist
 ManaCost:X B
 Types:Sorcery
-A:SP$ Discard | Cost$ X B | ValidTgts$ Player | NumCards$ X | References$ X | Mode$ Random | SpellDescription$ Target player discards X cards at random.
+A:SP$ Discard | Cost$ X B | ValidTgts$ Player | NumCards$ X | Mode$ Random | SpellDescription$ Target player discards X cards at random.
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_twist.jpg
 Oracle:Target player discards X cards at random.

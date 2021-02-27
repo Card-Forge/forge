@@ -1,10 +1,10 @@
 Name:Savage Stomp
 ManaCost:2 G
 Types:Sorcery
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ CostReduction | Relative$ True | References$ CostReduction,CheckTgt | EffectZone$ All | Description$ This spell costs {2} less to cast if it targets a Dinosaur you control.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ CostReduction | Relative$ TrueostReduction,CheckTgt | EffectZone$ All | Description$ This spell costs {2} less to cast if it targets a Dinosaur you control.
 SVar:CostReduction:Count$Compare CheckTgt GE1.2.0
 SVar:CheckTgt:Targeted$Valid Creature.Dinosaur+YouCtrl
-A:SP$ PutCounter | Cost$ 2 G | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to put a +1/+1 counter | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBFight | References$ CostReduction,CheckTgt | SpellDescription$ Put a +1/+1 counter on target creature you control. Then that creature fights target creature you don't control.
+A:SP$ PutCounter | Cost$ 2 G | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to put a +1/+1 counter | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBFight | SpellDescription$ Put a +1/+1 counter on target creature you control. Then that creature fights target creature you don't control.
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | AILogic$ Always | TgtPrompt$ Select target creature you don't control
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_stomp.jpg

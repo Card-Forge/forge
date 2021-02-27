@@ -7,7 +7,7 @@ K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose a player.
 A:AB$ DealDamage | Cost$ T | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to itself.
 T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to the chosen player.
-SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | References$ X | Defined$ ChosenPlayer
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | Defined$ ChosenPlayer
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card116724.jpg

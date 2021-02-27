@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Flash
 K:Enchant creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -X | References$ X,Y | Description$ Enchanted creature gets -2/-0. It gets -6/-0 instead as long as its controller has seven or more cards in their graveyard.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -X | Description$ Enchanted creature gets -2/-0. It gets -6/-0 instead as long as its controller has seven or more cards in their graveyard.
 SVar:X:Count$Compare Y GE7.6.2
 SVar:Y:Count$ValidGraveyard Card.EnchantedControllerCtrl
 Oracle:Flash\nEnchant creature\nEnchanted creature gets -2/-0. It gets -6/-0 instead as long as its controller has seven or more cards in their graveyard.

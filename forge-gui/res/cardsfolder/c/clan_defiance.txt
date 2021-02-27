@@ -2,8 +2,8 @@ Name:Clan Defiance
 ManaCost:X R G
 Types:Sorcery
 A:SP$ Charm | Cost$ X R G | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DamageFlyingCreature,DamageNonFlyingCreature,DamagePlayer
-SVar:DamageFlyingCreature:DB$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature with flying.
-SVar:DamageNonFlyingCreature:DB$ DealDamage | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature without flying.
-SVar:DamagePlayer:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target Player or Planeswalker | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target player or planeswalker.
+SVar:DamageFlyingCreature:DB$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature with flying.
+SVar:DamageNonFlyingCreature:DB$ DealDamage | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature without flying.
+SVar:DamagePlayer:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target Player or Planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target player or planeswalker.
 SVar:X:Count$xPaid
 Oracle:Choose one or more —\n• Clan Defiance deals X damage to target creature with flying.\n• Clan Defiance deals X damage to target creature without flying.\n• Clan Defiance deals X damage to target player or planeswalker.

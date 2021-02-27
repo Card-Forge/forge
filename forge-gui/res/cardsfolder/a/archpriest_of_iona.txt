@@ -2,7 +2,7 @@ Name:Archpriest of Iona
 ManaCost:W
 Types:Creature Human Cleric
 PT:*/2
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | References$ X | Description$ CARDNAME's power is equal to the number of creatures in your party.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creatures in your party.
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ4 | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, if you have a full party, target creature gets +1/+1 and gains flying until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ Flying
 SVar:X:Count$Party

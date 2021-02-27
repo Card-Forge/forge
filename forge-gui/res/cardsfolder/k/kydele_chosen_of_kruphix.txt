@@ -2,7 +2,7 @@ Name:Kydele, Chosen of Kruphix
 ManaCost:2 G U
 Types:Legendary Creature Human Wizard
 PT:2/3
-A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | References$ X | SpellDescription$ Add {C} for each card you've drawn this turn.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | SpellDescription$ Add {C} for each card you've drawn this turn.
 SVar:X:Count$YouDrewThisTurn 
 K:Partner
 DeckHas:Ability$Mana.Colorless

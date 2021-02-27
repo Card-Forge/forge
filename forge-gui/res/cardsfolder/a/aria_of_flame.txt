@@ -5,7 +5,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a verse counter on CARDNAME, then it deals damage equal to the number of verse counters on it to target player or planeswalker.
 SVar:TrigGainLife:DB$ GainLife | Defined$ Player.Opponent | LifeAmount$ 10
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ VERSE | CounterNum$ 1 | SubAbility$ DBDealDamage
-SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select any player or planeswalker | NumDmg$ X | References$ X
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select any player or planeswalker | NumDmg$ X
 SVar:X:Count$CardCounters.VERSE
 SVar:BuffedBy:Instant,Sorcery
 Oracle:When Aria of Flame enters the battlefield, each opponent gains 10 life.\nWhenever you cast an instant or sorcery spell, put a verse counter on Aria of Flame, then it deals damage equal to the number of verse counters on it to target player or planeswalker.

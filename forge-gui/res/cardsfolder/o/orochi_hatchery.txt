@@ -2,7 +2,7 @@ Name:Orochi Hatchery
 ManaCost:X X
 Types:Artifact
 K:etbCounter:CHARGE:X
-A:AB$ Token | Cost$ 5 T | TokenAmount$ Y | References$ Y | TokenController$ You | TokenScript$ g_1_1_snake | LegacyImage$ g 1 1 snake chk | SpellDescription$ Create a 1/1 green Snake creature token for each charge counter on CARDNAME.
+A:AB$ Token | Cost$ 5 T | TokenAmount$ Y | TokenController$ You | TokenScript$ g_1_1_snake | LegacyImage$ g 1 1 snake chk | SpellDescription$ Create a 1/1 green Snake creature token for each charge counter on CARDNAME.
 SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.CHARGE
 SVar:NeedsToPlayVar:Z GE4

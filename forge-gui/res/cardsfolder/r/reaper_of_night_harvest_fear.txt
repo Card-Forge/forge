@@ -2,7 +2,7 @@ Name:Reaper of Night
 ManaCost:5 B B
 Types:Creature Specter
 PT:4/5
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | CheckSVar$ X | SVarCompare$ LE2 | References$ X | TriggerDescription$ Whenever CARDNAME attacks, if defending player has two or fewer cards in hand, it gains flying until end of turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | CheckSVar$ X | SVarCompare$ LE2 | TriggerDescription$ Whenever CARDNAME attacks, if defending player has two or fewer cards in hand, it gains flying until end of turn.
 SVar:X:Count$ValidHand Card.DefenderCtrl
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying
 Oracle:Whenever Reaper of Night attacks, if defending player has two or fewer cards in hand, it gains flying until end of turn.

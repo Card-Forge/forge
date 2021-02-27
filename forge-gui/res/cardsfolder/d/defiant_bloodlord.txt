@@ -4,7 +4,7 @@ Types:Creature Vampire
 PT:4/5
 K:Flying
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you gain life, target opponent loses that much life.
-SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ X | References$ X
+SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ X
 SVar:X:TriggerCount$LifeAmount
 DeckHints:Ability$LifeGain
 Oracle:Flying\nWhenever you gain life, target opponent loses that much life.

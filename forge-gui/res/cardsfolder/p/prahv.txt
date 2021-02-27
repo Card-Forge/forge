@@ -6,7 +6,7 @@ SVar:CheckThisTurnCast:Count$ThisTurnCast_Card.YouCtrl
 S:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ You | CheckSVar$ CheckThisTurnAttacked | Description$ If you attacked with creatures this turn, you can't cast spells.
 SVar:CheckThisTurnAttacked:Count$AttackersDeclared
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, you gain life equal to the number of cards in your hand.
-SVar:RolledChaos:DB$ GainLife | LifeAmount$ PrahvX | References$ PrahvX | Defined$ You
+SVar:RolledChaos:DB$ GainLife | LifeAmount$ PrahvX | Defined$ You
 SVar:PrahvX:Count$InYourHand
 SVar:AIRollPlanarDieParams:Mode$ Always | CardsInHandGE$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prahv.jpg

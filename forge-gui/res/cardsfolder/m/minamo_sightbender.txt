@@ -2,7 +2,7 @@ Name:Minamo Sightbender
 ManaCost:1 U
 Types:Creature Human Wizard
 PT:1/2
-A:AB$ Pump | Cost$ X T | KW$ HIDDEN Unblockable | TgtPrompt$ Select target creature with power X or less | ValidTgts$ Creature.powerLEX | References$ X | SpellDescription$ Target creature with power X or less can't be blocked this turn.
+A:AB$ Pump | Cost$ X T | KW$ HIDDEN Unblockable | TgtPrompt$ Select target creature with power X or less | ValidTgts$ Creature.powerLEX | SpellDescription$ Target creature with power X or less can't be blocked this turn.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:{X}, {T}: Target creature with power X or less can't be blocked this turn.

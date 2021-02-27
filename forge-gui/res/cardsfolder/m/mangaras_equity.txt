@@ -5,7 +5,7 @@ K:UpkeepCost:1 W
 K:ETBReplacement:Other:ChooseBlackOrRed
 SVar:ChooseBlackOrRed:DB$ ChooseColor | Defined$ You | Choices$ black,red | AILogic$ MostProminentHumanCreatures | SpellDescription$ As CARDNAME enters the battlefield, choose black or red.
 T:Mode$ DamageDone | ValidSource$ Creature.ChosenColor | ValidTarget$ Creature.White+YouCtrl,You | TriggerZones$ Battlefield | Execute$ MangarasRetribution | TriggerDescription$ Whenever a creature of the chosen color deals damage to you or a white creature you control, CARDNAME deals that much damage to that creature.
-SVar:MangarasRetribution:DB$ DealDamage | Defined$ TriggeredSourceLKICopy | NumDmg$ MangaraX | References$ MangaraX
+SVar:MangarasRetribution:DB$ DealDamage | Defined$ TriggeredSourceLKICopy | NumDmg$ MangaraX
 SVar:MangaraX:TriggerCount$DamageAmount
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mangaras_equity.jpg

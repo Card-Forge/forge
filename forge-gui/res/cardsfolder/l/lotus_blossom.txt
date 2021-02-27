@@ -2,7 +2,7 @@ Name:Lotus Blossom
 ManaCost:2
 Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ During your upkeep, you may put a petal counter on CARDNAME.
-A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ X | References$ X | SpellDescription$ Add X mana of any one color, where X is the number of petal counters on Lotus Blossom.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is the number of petal counters on Lotus Blossom.
 SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ PETAL | CounterNum$ 1
 SVar:X:Count$CardCounters.PETAL
 AI:RemoveDeck:All

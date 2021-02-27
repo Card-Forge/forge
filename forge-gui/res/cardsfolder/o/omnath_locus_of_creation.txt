@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ LandfallReset | Static$ True
 T:Mode$ TurnBegin | ValidPlayer$ Player | Static$ True | TriggerZones$ Battlefield | Execute$ LandfallReset
-SVar:LandfallReset:DB$ StoreSVar | SVar$ LandfallAmount | Type$ Number | Expression$ 0 | References$ LandfallAmount
+SVar:LandfallReset:DB$ StoreSVar | SVar$ LandfallAmount | Type$ Number | Expression$ 0
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLandfallCount | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, you gain 4 life if this is the first time this ability has resolved this turn. If it's the second time, add {R}{G}{W}{U}. If it's the third time, CARDNAME deals 4 damage to each opponent and each planeswalker you don't control.
 SVar:TrigLandfallCount:DB$ StoreSVar | SVar$ LandfallAmount | Type$ CountSVar | SubAbility$ DBGainLife | Expression$ LandfallAmount/Plus.1
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4 | ConditionCheckSVar$ LandfallAmount | ConditionSVarCompare$ EQ1 | SubAbility$ DBMana

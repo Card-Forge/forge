@@ -2,7 +2,7 @@ Name:Bedlam Reveler
 ManaCost:6 R R
 Types:Creature Devil Horror
 PT:3/4
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each instant and sorcery card in your graveyard.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each instant and sorcery card in your graveyard.
 K:Prowess
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard your hand, then draw three cards.
 SVar:TrigDiscard:DB$ Discard | Mode$ Hand | SubAbility$ DBDraw

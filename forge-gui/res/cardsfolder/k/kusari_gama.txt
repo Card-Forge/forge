@@ -7,7 +7,7 @@ SVar:GamaPump:AB$ Pump | Cost$ 2 | Defined$ Self | NumAtt$ +1 | SpellDescription
 T:Mode$ DamageDone | ValidSource$ Card.EquippedBy | ValidTarget$ Creature.blocking | Execute$ KusariPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals damage to a blocking creature, CARDNAME deals that much damage to each other creature defending player controls.
 SVar:KusariPump:DB$ Pump | Defined$ Self | RememberObjects$ TriggeredTarget | SubAbility$ KusariPump2
 SVar:KusariPump2:DB$ Pump | Defined$ Self | RememberObjects$ TriggeredDefendingPlayer | SubAbility$ GamaDamage
-SVar:GamaDamage:DB$ DamageAll | NumDmg$ X | References$ X | ValidCards$ Creature.IsNotRemembered+ControlledBy Player.IsRemembered | SubAbility$ CleanUp
+SVar:GamaDamage:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature.IsNotRemembered+ControlledBy Player.IsRemembered | SubAbility$ CleanUp
 SVar:CleanUp:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggerCount$DamageAmount
 Oracle:Equipped creature has "{2}: This creature gets +1/+0 until end of turn."\nWhenever equipped creature deals damage to a blocking creature, Kusari-Gama deals that much damage to each other creature defending player controls.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

@@ -3,7 +3,7 @@ ManaCost:5 W W
 Types:Creature Cat Soldier
 PT:4/6
 K:Vigilance
-S:Mode$ Continuous | Affected$ Card.Self | CanBlockAmount$ X | References$ X | Description$ CARDNAME can block an additional creature each combat for each Equipment attached to CARDNAME.
+S:Mode$ Continuous | Affected$ Card.Self | CanBlockAmount$ X | Description$ CARDNAME can block an additional creature each combat for each Equipment attached to CARDNAME.
 SVar:X:Count$Valid Equipment.Attached
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kembas_legion.jpg
 SVar:EquipMe:Multiple

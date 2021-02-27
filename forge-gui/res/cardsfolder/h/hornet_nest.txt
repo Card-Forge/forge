@@ -4,7 +4,7 @@ Types:Creature Insect
 PT:0/2
 K:Defender
 T:Mode$ DamageDoneOnce | Execute$ TrigToken | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, create that many 1/1 green Insect creature tokens with flying and deathtouch.
-SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_insect_flying_deathtouch | TokenOwner$ You | LegacyImage$ g 1 1 insect flying deathtouch m15 | References$ X
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_insect_flying_deathtouch | TokenOwner$ You | LegacyImage$ g 1 1 insect flying deathtouch m15
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hornet_nest.jpg

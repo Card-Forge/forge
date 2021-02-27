@@ -4,7 +4,7 @@ Types:Creature Horror
 PT:*/*
 K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in the chosen player's graveyard.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in the chosen player's graveyard.
 SVar:X:Count$InChosenYard
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player.Chosen | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever the chosen player casts a spell, that player mills a card.
 SVar:TrigMill:DB$ Mill | Defined$ TriggeredPlayer | NumCards$ 1

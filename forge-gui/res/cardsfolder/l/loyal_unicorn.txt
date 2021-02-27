@@ -3,8 +3,8 @@ ManaCost:3 W
 Types:Creature Unicorn
 PT:3/4
 K:Vigilance
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE1 | References$ X | TriggerZones$ Battlefield | Execute$ PreventEffect | TriggerDescription$ Lieutenant — At the beginning of combat on your turn, if you control your commander, prevent all combat damage that would be dealt to creatures you control this turn.
-SVar:PreventEffect:DB$ Effect | ReplacementEffects$ RPrevent | References$ RPrevent | ValidTgts$ You | Description$ Prevent all combat damage that would be dealt to creatures you control this turn.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ PreventEffect | TriggerDescription$ Lieutenant — At the beginning of combat on your turn, if you control your commander, prevent all combat damage that would be dealt to creatures you control this turn.
+SVar:PreventEffect:DB$ Effect | ReplacementEffects$ RPrevent | ValidTgts$ You | Description$ Prevent all combat damage that would be dealt to creatures you control this turn.
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ActiveZones$ Command | ValidTarget$ Creature.YouCtrl | Description$ Prevent all combat damage that would be dealt to creatures you control this turn.
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Vigilance | Description$ Other creatures you control gain vigilance until end of turn.
 SVar:X:Count$Valid Card.IsCommander+YouOwn+YouCtrl

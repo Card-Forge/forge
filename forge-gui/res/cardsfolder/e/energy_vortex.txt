@@ -6,8 +6,8 @@ SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogi
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemove | TriggerDescription$ At the beginning of your upkeep, remove all vortex counters from CARDNAME.
 SVar:TrigRemove:DB$ RemoveCounter | CounterType$ VORTEX | CounterNum$ All
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Chosen | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the chosen player's upkeep, CARDNAME deals 3 damage to that player unless they pay {1} for each vortex counter on CARDNAME.
-SVar:TrigDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ 3 | UnlessCost$ Y | UnlessPayer$ ChosenPlayer | References$ Y
-A:AB$ PutCounter | Cost$ X | CounterType$ VORTEX | CounterNum$ X | References$ X | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Put X vortex counters on CARDNAME. Activate this ability only during your upkeep.
+SVar:TrigDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ 3 | UnlessCost$ Y | UnlessPayer$ ChosenPlayer
+A:AB$ PutCounter | Cost$ X | CounterType$ VORTEX | CounterNum$ X | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Put X vortex counters on CARDNAME. Activate this ability only during your upkeep.
 SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.VORTEX
 AI:RemoveDeck:All

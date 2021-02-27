@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Wall
 PT:0/4
 K:Defender
-A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescription$ Add {G} for each Creature with defender you control.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add {G} for each Creature with defender you control.
 SVar:X:Count$Valid Creature.withDefender+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overgrown_battlement.jpg
 Oracle:Defender\n{T}: Add {G} for each creature with defender you control.

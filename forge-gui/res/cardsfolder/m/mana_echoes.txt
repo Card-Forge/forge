@@ -2,7 +2,7 @@ Name:Mana Echoes
 ManaCost:2 R R
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | TriggerController$ You | OptionalDecider$ You | Execute$ DBMana | TriggerDescription$ Whenever a creature enters the battlefield, you may add an amount of {C} equal to the number of creatures you control that share a creature type with it.
-SVar:DBMana:DB$ Mana | Produced$ C | Defined$ You | Amount$ X | References$ X
+SVar:DBMana:DB$ Mana | Produced$ C | Defined$ You | Amount$ X
 SVar:X:Count$Valid Creature.YouCtrl+sharesCreatureTypeWith TriggeredCard
 AI:RemoveDeck:Random
 Oracle:Whenever a creature enters the battlefield, you may add an amount of {C} equal to the number of creatures you control that share a creature type with it.

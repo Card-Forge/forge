@@ -1,7 +1,7 @@
 Name:Heat Ray
 ManaCost:X R
 Types:Instant
-A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature.
+A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature.
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heat_ray.jpg
 Oracle:Heat Ray deals X damage to target creature.

@@ -2,7 +2,7 @@ Name:Lashknife Barrier
 ManaCost:2 W
 Types:Enchantment
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Creature.YouCtrl | ReplaceWith$ DmgMinus1 | Description$ If a source would deal damage to a creature you control, it deals that much damage minus 1 to that creature instead.
-SVar:DmgMinus1:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X | References$ X
+SVar:DmgMinus1:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Minus.1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1

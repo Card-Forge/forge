@@ -1,7 +1,7 @@
 Name:Conflagrate
 ManaCost:X X R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X X R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to distribute damage to | NumDmg$ X | TargetMin$ Min | TargetMax$ MaxTgts | DividedAsYouChoose$ X | References$ X,Min,MaxTgts | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of targets.
+A:SP$ DealDamage | Cost$ X X R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to distribute damage to | NumDmg$ X | TargetMin$ Min | TargetMax$ MaxTgts | DividedAsYouChoose$ X | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of targets.
 SVar:MaxTgts:PlayerCountPlayers$Amount/Plus.NumCreatures
 SVar:NumCreatures:Count$Valid Creature,Planeswalker
 SVar:Min:SVar$X/LimitMax.1

@@ -3,7 +3,7 @@ ManaCost:U U R R
 Types:Creature Drake
 PT:*/4
 K:Flying
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | References$ X,GraveCount,ExileCount | Description$ CARDNAME's power is equal to the total number of instant and sorcery cards you own in exile and in your graveyard.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the total number of instant and sorcery cards you own in exile and in your graveyard.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:GraveCount:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn

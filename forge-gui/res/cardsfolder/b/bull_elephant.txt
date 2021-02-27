@@ -4,7 +4,7 @@ Types:Creature Elephant
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return two Forests you control to their owner's hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Forest.YouCtrl | ChangeNum$ 2 | RememberChanged$ True | SubAbility$ DBSac
-SVar:DBSac:DB$ Sacrifice | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2 | References$ X
+SVar:DBSac:DB$ Sacrifice | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Y GE2

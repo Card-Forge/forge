@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Creature Djinn
 PT:2/3
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ GainControl | Cost$ T | ValidTgts$ Creature.powerLEX | TgtPrompt$ Select target creature with power less than or equal to Old Man's. | LoseControl$ Untap,LeavesPlay,LoseControl,StaticCommandCheck | StaticCommandCheckSVar$ Y | StaticCommandSVarCompare$ GTX | References$ X,Y | SpellDescription$ Gain control of target creature with power less than or equal to Old Man of the Sea's power for as long as Old Man of the Sea remains tapped and that creature's power remains less than or equal to Old Man of the Sea's power.
+A:AB$ GainControl | Cost$ T | ValidTgts$ Creature.powerLEX | TgtPrompt$ Select target creature with power less than or equal to Old Man's. | LoseControl$ Untap,LeavesPlay,LoseControl,StaticCommandCheck | StaticCommandCheckSVar$ Y | StaticCommandSVarCompare$ GTX | SpellDescription$ Gain control of target creature with power less than or equal to Old Man of the Sea's power for as long as Old Man of the Sea remains tapped and that creature's power remains less than or equal to Old Man of the Sea's power.
 SVar:X:Count$CardPower
 # the hostcard of SVar Y is the controlled card
 SVar:Y:Count$CardPower

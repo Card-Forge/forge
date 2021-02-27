@@ -8,12 +8,12 @@ T:Mode$ TurnBegin | ValidPlayer$ Player | Static$ True | Execute$ AttackReset
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Static$ True | Execute$ AttackReset
 SVar:AttackReset:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control deals combat damage to a player, you and that player each gain that much life.
-SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBGain
-SVar:DBGain:DB$ GainLife | Defined$ TriggeredTarget | LifeAmount$ X | References$ X
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBGain
+SVar:DBGain:DB$ GainLife | Defined$ TriggeredTarget | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ RememberPlayer | TriggerZones$ Battlefield | Static$ True
 SVar:RememberPlayer:DB$ Pump | RememberObjects$ TriggeredDefendingPlayer
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ Z | SVarCompare$ GEY | References$ Z,Y | Execute$ TrigLose | TriggerDescription$ At the beginning of your end step, if you have at least 15 life more than your starting life total, each player CARDNAME attacked this turn loses the game.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ Z | SVarCompare$ GEY | Execute$ TrigLose | TriggerDescription$ At the beginning of your end step, if you have at least 15 life more than your starting life total, each player CARDNAME attacked this turn loses the game.
 SVar:TrigLose:DB$ LosesGame | Defined$ Player.IsRemembered
 SVar:Z:Count$YourLifeTotal
 SVar:Y:Count$YourStartingLife/Plus.15

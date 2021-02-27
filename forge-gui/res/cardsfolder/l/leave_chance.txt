@@ -2,7 +2,7 @@ Name:Leave
 ManaCost:1 W
 AlternateMode: Split
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent you own | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | References$ X | SpellDescription$ Return any number of target permanents you own to your hand. 
+A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent you own | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return any number of target permanents you own to your hand. 
 SVar:X:Count$Valid Permanent.YouOwn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leave_chance.jpg
 Oracle:Return any number of target permanents you own to your hand. 
@@ -14,7 +14,7 @@ ManaCost:3 R
 Types:Sorcery
 K:Aftermath
 A:SP$ Discard | Cost$ 3 R | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Discard any number of cards, then draw that many cards.
-SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ Y | References$ Y | SubAbility$ DBCleanup
+SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Remembered$Amount
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nDiscard any number of cards, then draw that many cards.

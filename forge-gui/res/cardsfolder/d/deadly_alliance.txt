@@ -1,7 +1,7 @@
 Name:Deadly Alliance
 ManaCost:4 B
 Types:Instant
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | References$ X | Description$ This spell costs {1} less to cast for each creature in your party.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature in your party.
 SVar:X:Count$Party
 A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
 DeckHas:Ability$Party

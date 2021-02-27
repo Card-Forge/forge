@@ -1,7 +1,7 @@
 Name:Chill Haunting
 ManaCost:1 B
 Types:Instant
-A:SP$ Pump | Cost$ 1 B ExileFromGrave<X/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | References$ X | SpellDescription$ Target creature gets -X/-X until end of turn.
+A:SP$ Pump | Cost$ 1 B ExileFromGrave<X/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -X/-X until end of turn.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:As an additional cost to cast this spell, exile X creature cards from your graveyard.\nTarget creature gets -X/-X until end of turn.

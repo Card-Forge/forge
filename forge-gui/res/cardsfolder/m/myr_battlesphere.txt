@@ -5,7 +5,7 @@ PT:4/7
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create four 1/1 colorless Myr artifact creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenScript$ c_1_1_a_myr | TokenOwner$ You | LegacyImage$ c 1 1 myr som
 T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may tap X untapped Myr you control. If you do, CARDNAME gets +X/+0 until end of turn and deals X damage to the player or planeswalker it's attacking.
-SVar:TrigPump:AB$ Pump | Cost$ tapXType<X/Myr> | Defined$ Self | References$ X | NumAtt$ +X | NumDef$ +0 | SubAbility$ DBDealDamage
+SVar:TrigPump:AB$ Pump | Cost$ tapXType<X/Myr> | Defined$ Self | NumAtt$ +X | NumDef$ +0 | SubAbility$ DBDealDamage
 SVar:DBDealDamage:DB$ DealDamage | Defined$ TriggeredDefender | NumDmg$ X
 SVar:X:Count$xPaid
 DeckHas:Ability$Token

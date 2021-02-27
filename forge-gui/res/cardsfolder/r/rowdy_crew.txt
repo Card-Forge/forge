@@ -6,7 +6,7 @@ K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw three cards, then discard two cards at random. If two cards that share a card type are discarded this way, put two +1/+1 counters on CARDNAME.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 3 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | NumCards$ 2 | Mode$ Random | Defined$ You | RememberDiscarded$ True | SubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | ConditionCheckSVar$ SameType | ConditionSVarCompare$ EQ2 | References$ SameType | SubAbility$ DBCleanup
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | ConditionCheckSVar$ SameType | ConditionSVarCompare$ EQ2 | SubAbility$ DBCleanup
 SVar:SameType:Count$RememberedWithSharedCardType
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rowdy_crew.jpg

@@ -1,8 +1,8 @@
 Name:Laquatus's Creativity
 ManaCost:4 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 4 U | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player | References$ X | RememberDrawn$ True | SubAbility$ DBDiscard | SpellDescription$ Target player draws cards equal to the number of cards in their hand, then discards that many cards.
-SVar:DBDiscard:DB$ Discard | Defined$ Targeted | Mode$ TgtChoose | NumCards$ Y | References$ Y | SubAbility$ DBCleanup
+A:SP$ Draw | Cost$ 4 U | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player | RememberDrawn$ True | SubAbility$ DBDiscard | SpellDescription$ Target player draws cards equal to the number of cards in their hand, then discards that many cards.
+SVar:DBDiscard:DB$ Discard | Defined$ Targeted | Mode$ TgtChoose | NumCards$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TargetedPlayer$CardsInHand
 SVar:Y:Remembered$Amount

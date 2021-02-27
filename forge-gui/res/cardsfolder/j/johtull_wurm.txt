@@ -3,7 +3,7 @@ ManaCost:5 G
 Types:Creature Wurm
 PT:6/6
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets -2/-1 until end of turn for each creature blocking it beyond the first.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ -X | NumDef$ -Y | References$ X,Y
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ -X | NumDef$ -Y
 SVar:X:SVar$Y/Twice
 SVar:Y:TriggerCount$NumBlockers/Minus.1
 Oracle:Whenever Johtull Wurm becomes blocked, it gets -2/-1 until end of turn for each creature blocking it beyond the first.

@@ -4,7 +4,7 @@ Types:Creature Minion
 PT:*/*
 K:Trample
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ PayLife | Description$ As CARDNAME enters the battlefield, pay any amount of life.
-SVar:PayLife:AB$ StoreSVar | Cost$ Mandatory PayLife<X> | References$ X | SVar$ LifePaidOnETB | Type$ Calculate | Expression$ X | SubAbility$ MoveToPlay
+SVar:PayLife:AB$ StoreSVar | Cost$ Mandatory PayLife<X> | SVar$ LifePaidOnETB | Type$ Calculate | Expression$ X | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ All | Destination$ Battlefield
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ LifePaidOnETB | SetToughness$ LifePaidOnETB | Description$ CARDNAME's power and toughness are each equal to the life paid as it entered the battlefield.
 SVar:X:Count$xPaid

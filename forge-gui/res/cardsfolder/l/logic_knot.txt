@@ -2,7 +2,7 @@ Name:Logic Knot
 ManaCost:X U U
 Types:Instant
 K:Delve
-A:SP$ Counter | Cost$ X U U | TargetType$ Spell | ValidTgts$ Card | UnlessCost$ X | UnlessPayer$ TargetedController | References$ X | SpellDescription$ Counter target spell unless its controller pays {X}.
+A:SP$ Counter | Cost$ X U U | TargetType$ Spell | ValidTgts$ Card | UnlessCost$ X | UnlessPayer$ TargetedController | SpellDescription$ Counter target spell unless its controller pays {X}.
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/logic_knot.jpg
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nCounter target spell unless its controller pays {X}.

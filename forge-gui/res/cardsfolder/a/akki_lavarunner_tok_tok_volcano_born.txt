@@ -18,7 +18,7 @@ Types:Legendary Creature Goblin Shaman
 PT:2/2
 K:Protection from red
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.RedSource | ValidTarget$ Player | ReplaceWith$ DmgPlus1 | Description$ If a red source would deal damage to a player, it deals that much damage plus 1 to that player instead.
-SVar:DmgPlus1:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X | References$ X
+SVar:DmgPlus1:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Plus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tok_tok_volcano_born.jpg
 Oracle:Protection from red\nIf a red source would deal damage to a player, it deals that much damage plus 1 to that player instead.

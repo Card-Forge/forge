@@ -4,7 +4,7 @@ Types:Creature Illusion Spirit
 PT:*/*
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentHumanControls | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of permanents of the chosen color your opponents control.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of permanents of the chosen color your opponents control.
 SVar:X:Count$Valid Permanent.OppCtrl+ChosenColor
 SVar:NeedsToPlay:Permanent.OppCtrl+nonColorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chameleon_spirit.jpg

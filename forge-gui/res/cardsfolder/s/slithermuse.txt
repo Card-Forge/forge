@@ -5,7 +5,7 @@ PT:3/3
 K:Evoke:3 U
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigChooseOpp | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference.
 SVar:TrigChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ MostCardsInHand | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ X | References$ X,Y | Defined$ You | IsPresent$ Card.ChosenCtrl | PresentCompare$ GTY | PresentZone$ Hand
+SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ You | IsPresent$ Card.ChosenCtrl | PresentCompare$ GTY | PresentZone$ Hand
 SVar:Y:Count$InYourHand
 SVar:X:Count$InChosenHand/Minus.Y
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slithermuse.jpg

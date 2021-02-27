@@ -4,7 +4,7 @@ Types:Legendary Creature Elf Druid
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Elf.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Elf enters the battlefield under your control, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescription$ Add an amount of {G} equal to CARDNAME's power.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add an amount of {G} equal to CARDNAME's power.
 SVar:X:Count$CardPower
 DeckHints:Type$Elf
 DeckHas:Ability$Counters

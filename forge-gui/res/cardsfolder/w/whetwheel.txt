@@ -2,7 +2,7 @@ Name:Whetwheel
 ManaCost:4
 Types:Artifact
 K:Morph:3
-A:AB$ Mill | Cost$ X X T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player | References$ X | SpellDescription$ Target player mills X cards.
+A:AB$ Mill | Cost$ X X T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player mills X cards.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:{X}{X}, {T}: Target player mills X cards.\nMorph {3} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

@@ -4,9 +4,9 @@ Types:Legendary Creature Hydra
 PT:5/5
 K:Monstrosity:X:X X G
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ When CARDNAME becomes monstrous, it deals X damage divided as you choose among any number of target creatures your opponents control. Each of those creatures deals damage equal to its power to CARDNAME.
-SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | AILogic$ Polukranos | TgtPrompt$ Select target creature your opponents control distribute damage to | NumDmg$ MonstrosityX | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ MonstrosityX | References$ MonstrosityX,MaxTgts | SubAbility$ DBDmg
+SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | AILogic$ Polukranos | TgtPrompt$ Select target creature your opponents control distribute damage to | NumDmg$ MonstrosityX | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ MonstrosityX | SubAbility$ DBDmg
 SVar:DBDmg:DB$ RepeatEach | RepeatSubAbility$ PolukranosFight | UseImprinted$ True | DefinedCards$ Targeted | StackDescription$ None | DamageMap$ True
-SVar:PolukranosFight:DB$ DealDamage | DamageSource$ Imprinted | NumDmg$ Y | References$ Y | Defined$ Self | StackDescription$ None
+SVar:PolukranosFight:DB$ DealDamage | DamageSource$ Imprinted | NumDmg$ Y | Defined$ Self | StackDescription$ None
 SVar:X:Count$xPaid
 SVar:Y:Imprinted$CardPower
 SVar:MonstrosityX:TriggerCount$MonstrosityAmount

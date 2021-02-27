@@ -3,8 +3,8 @@ ManaCost:2 G G
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a wind counter on CARDNAME, then sacrifice CARDNAME unless you pay {G} for each wind counter on it. If you pay, CARDNAME deals damage equal to the number of wind counters on it to each creature and each player.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ WIND | CounterNum$ 1 | SubAbility$ SacSelf
-SVar:SacSelf:DB$ Sacrifice | Defined$ Card.Self | UnlessCost$ X | UnlessXColor$ G | UnlessPayer$ You | UnlessResolveSubs$ WhenPaid | SubAbility$ DBDamageAll | References$ X
-SVar:DBDamageAll:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature | ValidPlayers$ Player | References$ X
+SVar:SacSelf:DB$ Sacrifice | Defined$ Card.Self | UnlessCost$ X | UnlessXColor$ G | UnlessPayer$ You | UnlessResolveSubs$ WhenPaid | SubAbility$ DBDamageAll
+SVar:DBDamageAll:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature | ValidPlayers$ Player
 SVar:X:Count$CardCounters.WIND
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclone.jpg

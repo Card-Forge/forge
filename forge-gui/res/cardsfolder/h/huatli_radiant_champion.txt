@@ -2,8 +2,8 @@ Name:Huatli, Radiant Champion
 ManaCost:2 G W
 Types:Legendary Planeswalker Huatli
 Loyalty:3
-A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Defined$ Self | CounterType$ LOYALTY | CounterNum$ X | References$ X | Planeswalker$ True | StackDescription$ SpellDescription | SpellDescription$ Put a loyalty counter on CARDNAME for each creature you control.
-A:AB$ Pump | Cost$ SubCounter<1/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | References$ X | Planeswalker$ True | SpellDescription$ Target creature gets +X/+X until end of turn, where X is the number of creatures you control.
+A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Defined$ Self | CounterType$ LOYALTY | CounterNum$ X | Planeswalker$ True | StackDescription$ SpellDescription | SpellDescription$ Put a loyalty counter on CARDNAME for each creature you control.
+A:AB$ Pump | Cost$ SubCounter<1/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | Planeswalker$ True | SpellDescription$ Target creature gets +X/+X until end of turn, where X is the number of creatures you control.
 A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Huatli, Radiant Champion | Image$ emblem_huatli_radiant_champion | Triggers$ HuatliCreatureETB | SVars$ HuatliDraw | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever a creature enters the battlefield under your control, you may draw a card."
 SVar:HuatliCreatureETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | OptionalDecider$ You | TriggerZones$ Command | Execute$ HuatliDraw | TriggerDescription$ Whenever a creature enters the battlefield under your control, you may draw a card.
 SVar:HuatliDraw:DB$ Draw | NumCards$ 1

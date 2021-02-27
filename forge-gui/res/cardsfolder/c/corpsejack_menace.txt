@@ -3,7 +3,7 @@ ManaCost:2 B G
 Types:Creature Fungus
 PT:4/4
 R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Creature.YouCtrl | ValidCounterType$ P1P1 | ReplaceWith$ DoubleCounters | Description$ If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on it instead.
-SVar:DoubleCounters:DB$ ReplaceEffect | VarName$ CounterNum | VarValue$ X | References$ X
+SVar:DoubleCounters:DB$ ReplaceEffect | VarName$ CounterNum | VarValue$ X
 SVar:X:ReplaceCount$CounterNum/Twice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpsejack_menace.jpg
 Oracle:If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on it instead.

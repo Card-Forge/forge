@@ -2,7 +2,7 @@ Name:Throne of the God-Pharaoh
 ManaCost:2
 Types:Legendary Artifact
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, each opponent loses life equal to the number of tapped creatures you control.
-SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ Player.Opponent | References$ X
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ Player.Opponent
 SVar:X:Count$Valid Creature.YouCtrl+tapped
 SVar:Picture:http://www.wizards.com/global/images/magic/general/throne_of_the_god_pharaoh.jpg
 Oracle:At the beginning of your end step, each opponent loses life equal to the number of tapped creatures you control.

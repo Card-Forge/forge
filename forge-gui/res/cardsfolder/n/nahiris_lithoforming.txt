@@ -1,11 +1,11 @@
 Name:Nahiri's Lithoforming
 ManaCost:X R R
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ X R R | SacValid$ Land | Amount$ X | References$ X | RememberSacrificed$ True | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Sacrifice X lands. For each land sacrificed this way, draw a card. You may play X additional lands this turn. Lands you control enter the battlefield tapped this turn.
-SVar:DBDraw:DB$ Draw | NumCards$ Y | References$ Y | SubAbility$ DBStoreSVar | StackDescription$ None
+A:SP$ Sacrifice | Cost$ X R R | SacValid$ Land | Amount$ X | RememberSacrificed$ True | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Sacrifice X lands. For each land sacrificed this way, draw a card. You may play X additional lands this turn. Lands you control enter the battlefield tapped this turn.
+SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBStoreSVar | StackDescription$ None
 SVar:DBStoreSVar:DB$ StoreSVar | SVar$ XLands | Type$ CountSVar | Expression$ X | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PlayMoreLand | ReplacementEffects$ LandETB | SVars$ XLands,ETBTapped | SubAbility$ DBCleanup
-SVar:PlayMoreLand:Mode$ Continuous | Affected$ You | AdjustLandPlays$ XLands | References$ XLands | EffectZone$ Command | Description$ You may play X additional lands this turn.
+SVar:PlayMoreLand:Mode$ Continuous | Affected$ You | AdjustLandPlays$ XLands | EffectZone$ Command | Description$ You may play X additional lands this turn.
 SVar:LandETB:Event$ Moved | ValidCard$ Land.YouCtrl | Destination$ Battlefield | ReplaceWith$ ETBTapped | Description$ Lands you control enter the battlefield tapped this turn.
 SVar:ETBTapped:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Tapped$ True | Defined$ ReplacedCard
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -3,7 +3,7 @@ ManaCost:4 U R
 Types:Sorcery
 A:SP$ Draw | Cost$ 4 U R | NumCards$ 3 | SubAbility$ DBDiscard | SpellDescription$ Choose any target. Draw three cards and discard a card. CARDNAME deals damage equal to the converted mana cost of the discard card to that permanent or player.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDamage
-SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Choose any target | NumDmg$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Choose any target | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 AI:RemoveDeck:Random

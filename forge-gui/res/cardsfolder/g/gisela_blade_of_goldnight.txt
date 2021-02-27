@@ -5,7 +5,7 @@ PT:5/5
 K:Flying
 K:First Strike
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card,Emblem | ValidTarget$ Opponent,Permanent.OppCtrl | ReplaceWith$ DmgTwice | Description$ If a source would deal damage to an opponent or a permanent an opponent controls, that source deals double that damage to that player or permanent instead.
-SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X | References$ X
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 S:Mode$ PreventDamage | Target$ You,Permanent.YouCtrl | Amount$ HalfUp | Description$ If a source would deal damage to you or a permanent you control, prevent half that damage, rounded up.
 SVar:PlayMain1:TRUE

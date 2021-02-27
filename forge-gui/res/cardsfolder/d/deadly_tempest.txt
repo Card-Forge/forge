@@ -3,7 +3,7 @@ ManaCost:4 B B
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 4 B B | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBRepeat | SpellDescription$ Destroy all creatures. Each player loses life equal to the number of creatures they controlled that were destroyed this way.
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife | SubAbility$ DBCleanup
-SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | References$ X | Defined$ Player.IsRemembered
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ Player.IsRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$FilterControlledByRemembered_Number$1
 AI:RemoveDeck:All

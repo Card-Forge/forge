@@ -3,10 +3,10 @@ ManaCost:1 G G
 Types:Legendary Creature Elf Scout
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.
-SVar:TrigDraw:DB$ Draw | OptionalDecider$ TriggeredCardController | Defined$ TriggeredCardController | NumCards$ 1 | ConditionCheckSVar$ Z | ConditionSVarCompare$ EQY | References$ Z,Y
+SVar:TrigDraw:DB$ Draw | OptionalDecider$ TriggeredCardController | Defined$ TriggeredCardController | NumCards$ 1 | ConditionCheckSVar$ Z | ConditionSVarCompare$ EQY
 SVar:Z:TriggeredCard$Valid Card.greatestPower
 SVar:Y:Count$Valid Card.greatestPower
-A:AB$ Mana | Cost$ G T | Produced$ Combo Any | Amount$ X | References$ X | SpellDescription$ Add X mana in any combination of colors, where X is the greatest power among creatures you control.
+A:AB$ Mana | Cost$ G T | Produced$ Combo Any | Amount$ X | SpellDescription$ Add X mana in any combination of colors, where X is the greatest power among creatures you control.
 SVar:X:Count$GreatestPower_Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selvala_heart_of_the_wilds.jpg
 Oracle:Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.\n{G}, {T}: Add X mana in any combination of colors, where X is the greatest power among creatures you control.

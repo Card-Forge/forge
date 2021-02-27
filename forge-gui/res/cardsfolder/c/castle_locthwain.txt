@@ -5,6 +5,6 @@ K:ETBReplacement:Other:LandTapped
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Swamp.YouCtrl | ConditionCompare$ EQ0 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control a Swamp.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
 A:AB$ Draw | Cost$ 1 B B T | NumCards$ 1 | SpellDescription$ Draw a card, then you lose life equal to the number of cards in your hand. | SubAbility$ DBLoseLife
-SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | References$ X
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
 SVar:X:Count$InYourHand
 Oracle:Castle Locthwain enters the battlefield tapped unless you control a Swamp.\n{T}: Add {B}.\n{1}{B}{B}, {T}: Draw a card, then you lose life equal to the number of cards in your hand.

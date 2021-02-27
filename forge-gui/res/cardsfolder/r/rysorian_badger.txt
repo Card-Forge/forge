@@ -4,7 +4,7 @@ Types:Creature Badger
 PT:2/2
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may exile up to two target creature cards from defending player's graveyard. If you do, you gain 1 life for each card exiled this way and CARDNAME assigns no combat damage this turn.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.DefenderCtrl | RememberChanged$ True | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | References$ X | SubAbility$ DBPump
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage | SubAbility$ DBCleanup
 SVar:X:Remembered$Amount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

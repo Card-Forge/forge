@@ -2,6 +2,6 @@ Name:Goatnap
 ManaCost:2 R
 Types:Sorcery
 A:SP$ GainControl | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Untap$ True | AddKWs$ Haste | LoseControl$ EOT | SubAbility$ DBPump | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. If that creature is a Goat, it also gets +3/+0 until end of turn.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X
+SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 SVar:X:Targeted$Valid Goat
 Oracle:Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. If that creature is a Goat, it also gets +3/+0 until end of turn.

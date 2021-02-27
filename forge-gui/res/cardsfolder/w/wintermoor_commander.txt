@@ -3,7 +3,7 @@ ManaCost:W B
 Types:Creature Human Knight
 PT:2/*
 K:Deathtouch
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | References$ X | Description$ CARDNAME's toughness is equal to the number of Knights you control.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ CARDNAME's toughness is equal to the number of Knights you control.
 SVar:X:Count$Valid Knight.YouCtrl
 SVar:BuffedBy:Knight
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target Knight you control gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

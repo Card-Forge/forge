@@ -5,7 +5,7 @@ PT:1/1
 K:etbCounter:P1P1:X:no condition:CARDNAME enters the battlefield with a +1/+1 counter on it for each other Kithkin you control.
 SVar:X:Count$LastStateBattlefield Kithkin.YouCtrl+Other
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, create a 1/1 white Kithkin Soldier creature token for each counter on it.
-SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ w_1_1_kithkin_soldier | TokenOwner$ TriggeredCardController | LegacyImage$ w 1 1 kithkin soldier mor | References$ Y
+SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ w_1_1_kithkin_soldier | TokenOwner$ TriggeredCardController | LegacyImage$ w 1 1 kithkin soldier mor
 SVar:Y:TriggeredCard$CardCounters.ALL
 SVar:NeedsToPlay:X GE2
 SVar:BuffedBy:Kithkin

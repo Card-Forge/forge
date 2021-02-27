@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefiel
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Command | IsPresent$ Card.Self | PresentZone$ Command | Execute$ TrigPump1 | Secondary$ True
 SVar:TrigPump1:DB$ Pump | ValidTgts$ Creature.Cat+YouCtrl+Other | TgtPrompt$ Select another target Cat you control | NumAtt$ 3 | NumDef$ 3
 T:Mode$ Attacks | ValidCard$ Creature.Cat+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump2 | TriggerDescription$ Whenever another Cat you control attacks, you may pay {1}{G}{W}. If you do, it gains trample and gets +X/+X until end of turn, where X is its power.
-SVar:TrigPump2:AB$ Pump | Cost$ 1 G W | Defined$ TriggeredAttacker | KW$ Trample | NumAtt$ X | NumDef$ X | References$ X
+SVar:TrigPump2:AB$ Pump | Cost$ 1 G W | Defined$ TriggeredAttacker | KW$ Trample | NumAtt$ X | NumDef$ X
 SVar:X:TriggeredAttacker$CardPower
 SVar:BuffedBy:Cat
 SVar:PlayMain1:TRUE

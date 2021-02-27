@@ -4,7 +4,7 @@ Types:Creature Troll
 PT:3/3
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a number of Food tokens equal to the number of opponents you have. (Food tokens are artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
-SVar:TrigToken:DB$ Token | TokenAmount$ X | References$ X | TokenScript$ c_a_food_sac | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_food_sac | TokenOwner$ You
 SVar:X:PlayerCountOpponents$Amount
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Token & Ability$LifeGain & Ability$Food & Ability$Sacrifice

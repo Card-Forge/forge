@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Insect
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigBranch | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, create a 1/1 green Insect creature token. If you control six or more lands, create a token that's a copy of CARDNAME instead.
-SVar:TrigBranch:DB$ Branch | References$ X | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE6 | TrueSubAbility$ DBCopy | FalseSubAbility$ DBToken
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE6 | TrueSubAbility$ DBCopy | FalseSubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_insect | TokenOwner$ You
 SVar:DBCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1
 SVar:X:Count$Valid Land.YouCtrl

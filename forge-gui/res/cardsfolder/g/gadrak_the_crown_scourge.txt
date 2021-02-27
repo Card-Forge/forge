@@ -6,7 +6,7 @@ K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ LE3 | Description$ CARDNAME can't attack unless you control four or more artifacts.
 SVar:X:Count$Valid Artifact.YouCtrl
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a Treasure token for each nontoken creature that died this turn.
-SVar:TrigToken:DB$ Token | TokenAmount$ Y | References$ Y | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 SVar:Y:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.nonToken
 DeckHas:Ability$Token
 DeckHints:Type$Artifact

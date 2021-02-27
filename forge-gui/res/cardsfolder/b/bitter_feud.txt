@@ -6,7 +6,7 @@ SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player | AILogic$ Curse 
 SVar:ChoosePTwo:DB$ ChoosePlayer | Defined$ You | Choices$ NonChosenPlayer | AILogic$ Curse
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.RememberedPlayerCtrl | ValidTarget$ Permanent.ChosenCtrl,Player.Chosen | ReplaceWith$ DmgTwice | Description$ If a source controlled by one of the chosen players would deal damage to the other chosen player or a permanent that player controls, that source deals double that damage to that player or permanent instead.
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.ChosenCtrl | ValidTarget$ Permanent.RememberedPlayerCtrl,Player.IsRemembered | ReplaceWith$ DmgTwice | Secondary$ True | Description$ If a source controlled by one of the chosen players would deal damage to the other chosen player or a permanent that player controls, that source deals double that damage to that player or permanent instead.
-SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X | References$ X
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

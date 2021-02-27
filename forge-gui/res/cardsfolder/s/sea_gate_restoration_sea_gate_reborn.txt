@@ -1,7 +1,7 @@
 Name:Sea Gate Restoration
 ManaCost:4 U U U
 Types:Sorcery
-A:SP$ Draw | Cost$ 4 U U U | NumCards$ X | References$ X | SubAbility$ DBEffect | SpellDescription$ Draw cards equal to the number of cards in your hand plus one. You have no maximum hand size for the rest of the game.
+A:SP$ Draw | Cost$ 4 U U U | NumCards$ X | SubAbility$ DBEffect | SpellDescription$ Draw cards equal to the number of cards in your hand plus one. You have no maximum hand size for the rest of the game.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STHandSize | Duration$ Permanent | SpellDescription$ You have no maximum hand size for the rest of the game.
 SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size for the rest of the game.
 SVar:X:Count$NumCardsInYourHand/Plus.1

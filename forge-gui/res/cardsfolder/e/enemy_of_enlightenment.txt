@@ -3,7 +3,7 @@ ManaCost:5 B
 Types:Enchantment Creature Demon
 PT:5/5
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ -X | AddToughness$ -X | References$ X | Description$ CARDNAME gets -1/-1 for each card in your opponents' hands.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ -X | AddToughness$ -X | Description$ CARDNAME gets -1/-1 for each card in your opponents' hands.
 SVar:X:PlayerCountOpponents$CardsInHand
 SVar:NeedsToPlayVar:X LE3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of your upkeep, each player discards a card.

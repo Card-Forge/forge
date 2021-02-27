@@ -7,7 +7,7 @@ SVar:TrigActivateManaAbility:DB$ ActivateAbility | Defined$ DefendingPlayer | Ty
 SVar:DBEmptyPool:DB$ DrainMana | Defined$ DefendingPlayer | SubAbility$ DBPump | RememberDrainedMana$ True
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage | SubAbility$ DBDelTrig
 SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Main2 | Execute$ TrigAddMana | TriggerDescription$ At the beginning of your postcombat main phase, you add an amount of {C} equal to the amount of mana the defending player lost this way | SubAbility$ DBCleanup | RememberNumber$ True
-SVar:TrigAddMana:DB$ Mana | Produced$ C | Amount$ X | References$ X
+SVar:TrigAddMana:DB$ Mana | Produced$ C | Amount$ X
 SVar:X:Count$TriggerRememberAmount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All

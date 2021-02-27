@@ -5,7 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 3 B B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each upkeep, put a plague counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ PLAGUE | CounterNum$ 1
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -X | AddToughness$ -X | References$ X | Description$ Enchanted creature gets -1/-1 for each plague counter on CARDNAME.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -X | AddToughness$ -X | Description$ Enchanted creature gets -1/-1 for each plague counter on CARDNAME.
 SVar:X:Count$CardCounters.PLAGUE
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.EnchantedBy | TriggerController$ TriggeredCardController | Execute$ DBRem | TriggerDescription$ When enchanted creature leaves the battlefield, that creature's controller returns CARDNAME from its owner's graveyard to the battlefield.
 SVar:DBRem:DB$ Pump | RememberObjects$ Self | SubAbility$ DBChangeZone

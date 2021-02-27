@@ -9,8 +9,8 @@ SVar:AFLifeLost:Number$0
 A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | LegacyImage$ b 5 5 demon flying c14 | TokenAmount$ 1 | TokenScript$ b_5_5_demon_flying | TokenOwner$ You | SubAbility$ DBLoselife | SpellDescription$ Create a 5/5 black Demon creature token with flying. You lose 2 life.
 SVar:DBLoselife:DB$ LoseLife | LifeAmount$ 2
 A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Ob Nixilis of the Black Oath | Image$ emblem_ob_nixilis_of_the_black_oath | Stackable$ False | Abilities$ ObGainLife | SVars$ DBDraw,X | Duration$ Permanent | SpellDescription$ You get an emblem with "{1}{B}, Sacrifice a creature: You gain X life and draw X cards, where X is the sacrificed creature's power."
-SVar:ObGainLife:AB$ GainLife | Cost$ 1 B Sac<1/Creature> | ActivationZone$ Command | LifeAmount$ X | References$ X | SubAbility$ DBDraw | SpellDescription$ You gain X life and draw X cards, where X is the sacrificed creature's power.
-SVar:DBDraw:DB$ Draw | NumCards$ X | References$ X
+SVar:ObGainLife:AB$ GainLife | Cost$ 1 B Sac<1/Creature> | ActivationZone$ Command | LifeAmount$ X | SubAbility$ DBDraw | SpellDescription$ You gain X life and draw X cards, where X is the sacrificed creature's power.
+SVar:DBDraw:DB$ Draw | NumCards$ X
 SVar:X:Sacrificed$CardPower
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ob_nixilis_of_the_black_oath.jpg

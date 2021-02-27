@@ -8,8 +8,8 @@ SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Trample | ConditionDefined$ Remembere
 SVar:DBSacMe:DB$ Sacrifice | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Forest | ConditionCompare$ EQ0 | SubAbility$ DBRageDamage
 SVar:DBRageDamage:DB$ DealDamage | Defined$ You | NumDmg$ 7 | ConditionDefined$ Remembered | ConditionPresent$ Forest | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.Other | TgtPrompt$ Select target othere creature | NumDmg$ X | References$ X | SubAbility$ DamageThis | SpellDescription$ CARDNAME deals damage equal to its power to target creature. That creature deals damage equal to its power to CARDNAME.
-SVar:DamageThis:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y | References$ Y
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.Other | TgtPrompt$ Select target othere creature | NumDmg$ X | SubAbility$ DamageThis | SpellDescription$ CARDNAME deals damage equal to its power to target creature. That creature deals damage equal to its power to CARDNAME.
+SVar:DamageThis:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
 SVar:X:Count$CardPower
 SVar:Y:Targeted$CardPower
 AI:RemoveDeck:All

@@ -3,7 +3,7 @@ ManaCost:W
 Types:Legendary Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Vampire creature token with lifelink.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | LegacyImage$ w 1 1 vampire lifelink xln | TokenScript$ w_1_1_vampire_lifelink | TokenOwner$ You
-T:Mode$ AttackersDeclared | Execute$ DBTransform | CheckSVar$ NumAttackers | SVarCompare$ GE3 | NoResolvingCheck$ True | TriggerZones$ Battlefield | AttackingPlayer$ You | References$ NumAttackers | TriggerDescription$ When you attack with three or more creatures, transform CARDNAME.
+T:Mode$ AttackersDeclared | Execute$ DBTransform | CheckSVar$ NumAttackers | SVarCompare$ GE3 | NoResolvingCheck$ True | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ When you attack with three or more creatures, transform CARDNAME.
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:NumAttackers:Count$Valid Creature.attacking
 AlternateMode:DoubleFaced

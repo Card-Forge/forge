@@ -4,10 +4,10 @@ Types:Creature Elephant Cleric
 PT:4/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLife | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may have your life total become the total toughness of creatures you control.
 SVar:TrigLife:DB$ PumpAll | ValidCards$ Creature.YouCtrl | RememberAllPumped$ True | SubAbility$ DBSetLife
-SVar:DBSetLife:DB$ SetLife | Defined$ You | LifeAmount$ Y | References$ Y | SubAbility$ DBCleanup
+SVar:DBSetLife:DB$ SetLife | Defined$ You | LifeAmount$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Remembered$CardToughness
-A:AB$ Pump | Cost$ 5 W | NumAtt$ X | NumDef$ X | References$ X | SpellDescription$ CARDNAME gets +X/+X until end of turn, where X is your life total.
+A:AB$ Pump | Cost$ 5 W | NumAtt$ X | NumDef$ X | SpellDescription$ CARDNAME gets +X/+X until end of turn, where X is your life total.
 SVar:X:Count$YourLifeTotal
 AI:RemoveDeck:All
 Oracle:When Loxodon Lifechanter enters the battlefield, you may have your life total become the total toughness of creatures you control.\n{5}{W}: Loxodon Lifechanter gets +X/+X until end of turn, where X is your life total.

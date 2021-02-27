@@ -2,7 +2,7 @@ Name:Enhanced Surveillance
 ManaCost:1 U
 Types:Enchantment
 R:Event$ Surveil | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ AddTwoMore | Description$ You may look at an additional two cards each time you surveil.
-SVar:AddTwoMore:DB$ ReplaceEffect | VarName$ SurveilNum | VarValue$ X | References$ X
+SVar:AddTwoMore:DB$ ReplaceEffect | VarName$ SurveilNum | VarValue$ X
 SVar:X:ReplaceCount$SurveilNum/Plus.2
 A:AB$ ChangeZoneAll | Cost$ Exile<1/CARDNAME> | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SpellDescription$ Shuffle your graveyard into your library.
 DeckNeeds:Ability$Surveil

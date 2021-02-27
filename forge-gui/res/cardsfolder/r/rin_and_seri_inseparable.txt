@@ -6,8 +6,8 @@ T:Mode$ SpellCast | ValidCard$ Dog | ValidActivatingPlayer$ You | Execute$ TrigC
 SVar:TrigCatToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_cat | TokenOwner$ You
 T:Mode$ SpellCast | ValidCard$ Cat | ValidActivatingPlayer$ You | Execute$ TrigDogToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Cat spell, create a 1/1 white Dog creature token.
 SVar:TrigDogToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_dog | TokenOwner$ You
-A:AB$ DealDamage | Cost$ R G W T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals damage to any target equal to the number of Dogs you control. You gain life equal to the number of Cats you control.
-SVar:DBGainLife:DB$ GainLife | LifeAmount$ Y | References$ Y | Defined$ You
+A:AB$ DealDamage | Cost$ R G W T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals damage to any target equal to the number of Dogs you control. You gain life equal to the number of Cats you control.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ Y | Defined$ You
 SVar:X:Count$TypeYouCtrl.Dog
 SVar:Y:Count$TypeYouCtrl.Cat
 DeckHints:Type$Dog|Cat

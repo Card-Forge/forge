@@ -3,8 +3,8 @@ ManaCost:3 U B
 Types:Legendary Creature God
 PT:5/5
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ At the beginning of your upkeep, each opponent loses X life and you scry X, where X is the number of Zombies you control.
-SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | References$ X | SubAbility$ DBScry
-SVar:DBScry:DB$ Scry | ScryNum$ X | References$ X
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ X
 A:AB$ ChangeZone | Cost$ 2 U B | RememberLKI$ True | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | ChangeNum$ 1 | SubAbility$ DBCopy | AILogic$ TheScarabGod | SpellDescription$ Exile target creature card from a graveyard. Create a token that's a copy of it, except it's a 4/4 black Zombie.
 SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 4 | SetToughness$ 4 | SetColor$ Black | SetCreatureTypes$ Zombie | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

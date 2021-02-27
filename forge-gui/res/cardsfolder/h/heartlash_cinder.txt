@@ -4,7 +4,7 @@ Types:Creature Elemental Warrior
 PT:1/1
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Chroma — When CARDNAME enters the battlefield, it gets +X/+0 until end of turn, where X is the number of red mana symbols in the mana costs of permanents you control.
-SVar:TrigPump:DB$ Pump | NumAtt$ X | Defined$ Self | References$ X
+SVar:TrigPump:DB$ Pump | NumAtt$ X | Defined$ Self
 SVar:X:Count$Chroma.Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heartlash_cinder.jpg
 Oracle:Haste\nChroma — When Heartlash Cinder enters the battlefield, it gets +X/+0 until end of turn, where X is the number of red mana symbols in the mana costs of permanents you control.

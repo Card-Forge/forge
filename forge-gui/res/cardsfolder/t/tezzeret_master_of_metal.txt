@@ -3,7 +3,7 @@ ManaCost:4 U B
 Types:Legendary Planeswalker Tezzeret
 Loyalty:5
 A:AB$ DigUntil | Cost$ AddCounter<1/LOYALTY> | Valid$ Card.Artifact | ValidDescription$ artifact | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | FoundDestination$ Hand | Planeswalker$ True | SpellDescription$ Reveal cards from the top of your library until you reveal an artifact card. Put that card into your hand and the rest on the bottom of your library in a random order.
-A:AB$ LoseLife | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ X | References$ X | SpellDescription$ Target opponent loses life equal to the number of artifacts you control.
+A:AB$ LoseLife | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ X | SpellDescription$ Target opponent loses life equal to the number of artifacts you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 A:AB$ GainControl | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | AllValid$ Artifact,Creature | ControlledByTarget$ True | NewController$ You | SpellDescription$ Gain control of all artifacts and creatures target opponent controls.
 DeckNeeds:Type$Artifact

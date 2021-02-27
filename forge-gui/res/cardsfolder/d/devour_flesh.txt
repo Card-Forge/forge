@@ -2,7 +2,7 @@ Name:Devour Flesh
 ManaCost:1 B
 Types:Instant
 A:SP$ Sacrifice | Cost$ 1 B | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | RememberSacrificed$ True | SubAbility$ DBGainLife | SpellDescription$ Target player sacrifices a creature, then gains life equal to that creature's toughness. | StackDescription$ SpellDescription
-SVar:DBGainLife:DB$ GainLife | Defined$ Targeted | LifeAmount$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBGainLife:DB$ GainLife | Defined$ Targeted | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devour_flesh.jpg

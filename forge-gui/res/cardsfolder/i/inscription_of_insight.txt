@@ -2,11 +2,11 @@ Name:Inscription of Insight
 ManaCost:3 U
 Types:Sorcery
 K:Kicker:2 U U
-A:SP$ Charm | Cost$ 3 U | MinCharmNum$ X | CharmNum$ Y | References$ X,Y | Choices$ DBReturn,DBScry,DBToken | AdditionalDescription$ . If this spell was kicked, choose any number instead.
+A:SP$ Charm | Cost$ 3 U | MinCharmNum$ X | CharmNum$ Y | Choices$ DBReturn,DBScry,DBToken | AdditionalDescription$ . If this spell was kicked, choose any number instead.
 SVar:DBReturn:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return up to two target creatures to their owners' hands.
 SVar:DBScry:DB$ Scry | ScryNum$ 2 | SubAbility$ DBDraw | SpellDescription$ Scry 2, then draw two cards.
 SVar:DBDraw:DB$ Draw | NumCards$ 2
-SVar:DBToken:DB$ Token | ValidTgts$ Player | TgtPrompt$ Select target player | TokenAmount$ 1 | TokenScript$ u_x_x_illusion | TokenOwner$ TargetedPlayer | TokenPower$ Z | TokenToughness$ Z | References$ Z | SpellDescription$ Target player creates an X/X blue Illusion creature token, where X is the number of cards in their hand.
+SVar:DBToken:DB$ Token | ValidTgts$ Player | TgtPrompt$ Select target player | TokenAmount$ 1 | TokenScript$ u_x_x_illusion | TokenOwner$ TargetedPlayer | TokenPower$ Z | TokenToughness$ Z | SpellDescription$ Target player creates an X/X blue Illusion creature token, where X is the number of cards in their hand.
 SVar:X:Count$Kicked.0.1
 SVar:Y:Count$Kicked.3.1
 SVar:Z:TargetedPlayer$CardsInHand

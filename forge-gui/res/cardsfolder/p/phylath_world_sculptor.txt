@@ -3,7 +3,7 @@ ManaCost:4 R G
 Types:Legendary Creature Elemental
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 0/1 green Plant creature token for each basic land you control.
-SVar:TrigToken:DB$ Token | TokenAmount$ X | References$ X | TokenScript$ g_0_1_plant | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_0_1_plant | TokenOwner$ You
 SVar:X:Count$Valid Land.Basic+YouCtrl
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, put four +1/+1 counters on target Plant you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Plant.YouCtrl | TgtPrompt$ Select target Plant you control | CounterType$ P1P1 | CounterNum$ 4

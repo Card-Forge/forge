@@ -1,8 +1,8 @@
 Name:Winds of Qal Sisma
 ManaCost:1 G
 Types:Instant
-A:SP$ Effect | Cost$ 1 G | Name$ Winds of Qal Sisma Effect | ReplacementEffects$ RPrevent1 | AILogic$ Fog | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | SubAbility$ DBEffect | SpellDescription$ Prevent all combat damage that would be dealt this turn. Ferocious — If you control a creature with power 4 or greater, instead prevent all combat damage that would be dealt this turn by creatures your opponents control.
-SVar:DBEffect:DB$ Effect | Name$ Winds of Qal Sisma Effect | ReplacementEffects$ RPrevent2 | AILogic$ Fog | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X
+A:SP$ Effect | Cost$ 1 G | Name$ Winds of Qal Sisma Effect | ReplacementEffects$ RPrevent1 | AILogic$ Fog | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBEffect | SpellDescription$ Prevent all combat damage that would be dealt this turn. Ferocious — If you control a creature with power 4 or greater, instead prevent all combat damage that would be dealt this turn by creatures your opponents control.
+SVar:DBEffect:DB$ Effect | Name$ Winds of Qal Sisma Effect | ReplacementEffects$ RPrevent2 | AILogic$ Fog | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 SVar:RPrevent1:Event$ DamageDone | Prevent$ True | IsCombat$ True | ActiveZones$ Command | Description$ Prevent all combat damage that would be dealt this turn.
 SVar:RPrevent2:Event$ DamageDone | Prevent$ True | ValidSource$ Creature.OppCtrl | IsCombat$ True | ActiveZones$ Command | Description$ Prevent all combat damage that would be dealt this turn by creatures your opponents control.
 SVar:X:Count$Valid Creature.YouCtrl+powerGE4

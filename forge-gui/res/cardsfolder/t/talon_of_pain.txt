@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact
 T:Mode$ DamageDone | ValidSource$ Card.Other+YouCtrl | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TalonPutCounter | TriggerDescription$ Whenever a source you control other than CARDNAME deals damage to an opponent, put a charge counter on CARDNAME.
 SVar:TalonPutCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 1
-A:AB$ DealDamage | Cost$ X T SubCounter<X/CHARGE> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to any target.
+A:AB$ DealDamage | Cost$ X T SubCounter<X/CHARGE> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
 SVar:X:Count$xPaid
 # The X cost won't be limited by the number of charge counters, but if enough aren't present, the spell will be cancelled.
 AI:RemoveDeck:All

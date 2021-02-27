@@ -3,7 +3,7 @@ ManaCost:2 R R
 Types:Legendary Planeswalker Chandra
 Loyalty:4
 T:Mode$ CounterRemovedOnce | ValidCard$ Card.Self | CounterType$ LOYALTY | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever one or more loyalty counters are removed from CARDNAME, CARDNAME deals that much damage to target opponent or planeswalker.
-SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ X | References$ X
+SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ X
 SVar:X:TriggerCount$Amount
 A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. You may play it this turn.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup

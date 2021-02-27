@@ -4,7 +4,7 @@ Types:Creature Orc Pirate
 PT:4/3
 K:Encore:5 R
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals damage to the player or planeswalker it's attacking equal to the number of artifacts you control.
-SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredDefender | NumDmg$ X | References$ X
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredDefender | NumDmg$ X
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:HasAttackEffect:TRUE
 DeckNeeds:Type$Artifact

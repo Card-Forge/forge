@@ -3,10 +3,10 @@ ManaCost:3 U B
 Types:Legendary Enchantment Creature God
 PT:4/7
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | References$ X | Description$ As long as your devotion to blue and black is less than seven, CARDNAME isn't a creature.
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to blue and black is less than seven, CARDNAME isn't a creature.
 SVar:X:Count$DevotionDual.Blue.Black
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddAbility$ PhenaxMill | AddSVar$ PhenaxToughness | Description$ Creatures you control have "{T}: Target player mills X cards, where X is this creature's toughness."
-SVar:PhenaxMill:AB$ Mill | Cost$ T | ValidTgts$ Player | NumCards$ PhenaxToughness | References$ PhenaxToughness | SpellDescription$ Target player mills X cards, where X is CARDNAME's toughness.
+SVar:PhenaxMill:AB$ Mill | Cost$ T | ValidTgts$ Player | NumCards$ PhenaxToughness | SpellDescription$ Target player mills X cards, where X is CARDNAME's toughness.
 SVar:PhenaxToughness:Count$CardToughness
 SVar:BuffedBy:Permanent.Black,Permanent.Blue
 Oracle:Indestructible\nAs long as your devotion to blue and black is less than seven, Phenax isn't a creature.\nCreatures you control have "{T}: Target player mills X cards, where X is this creature's toughness."

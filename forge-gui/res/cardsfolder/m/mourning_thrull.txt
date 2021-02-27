@@ -4,7 +4,7 @@ Types:Creature Thrull
 PT:1/1
 K:Flying
 T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
-SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mourning_thrull.jpg

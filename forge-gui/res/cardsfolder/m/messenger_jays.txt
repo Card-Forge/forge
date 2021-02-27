@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigVote:DB$ Vote | Defined$ Player | StoreVoteNum$ True | VoteType$ Feather,Quill | SubAbility$ DBVoteFeather | AiLogic$ FeatherOrQuill
 SVar:DBVoteFeather:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ VoteNumFeather | SubAbility$ DBVoteQuill
 SVar:DBVoteQuill:DB$ Draw | NumCards$ VoteNumQuill | SubAbility$ DBDiscard | RememberDrawn$ True
-SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ X | Mode$ TgtChoose | References$ X | SubAbility$ DBCleanup
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ X | Mode$ TgtChoose | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 DeckHas:Ability$Counters & Ability$Discard

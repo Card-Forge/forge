@@ -5,8 +5,8 @@ PT:7/6
 K:Trample
 K:Vigilance
 K:Haste
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | References$ X | Execute$ DBDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, reveal that many cards from the top of your library. Put any number of Dinosaur creature cards from among them onto the battlefield and the rest on the bottom of your library in a random order.
-SVar:DBDig:DB$ Dig | Defined$ You | DigNum$ X | Reveal$ True | ChangeValid$ Creature.Dinosaur | AnyNumber$ True | DestinationZone$ Battlefield | DestinationZone2$ Library | LibraryPosition2$ -1 | RestRandomOrder$ True | RememberChanged$ True | References$ X | AbilityDescription$ Whenever CARDNAME deals combat damage to a player, reveal that many cards from the top of your library. Put any number of Dinosaur creature cards from among them onto the battlefield and the rest on the bottom of your library in a random order.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ DBDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, reveal that many cards from the top of your library. Put any number of Dinosaur creature cards from among them onto the battlefield and the rest on the bottom of your library in a random order.
+SVar:DBDig:DB$ Dig | Defined$ You | DigNum$ X | Reveal$ True | ChangeValid$ Creature.Dinosaur | AnyNumber$ True | DestinationZone$ Battlefield | DestinationZone2$ Library | LibraryPosition2$ -1 | RestRandomOrder$ True | RememberChanged$ True | AbilityDescription$ Whenever CARDNAME deals combat damage to a player, reveal that many cards from the top of your library. Put any number of Dinosaur creature cards from among them onto the battlefield and the rest on the bottom of your library in a random order.
 SVar:X:TriggerCount$DamageAmount
 DeckHints:Type$Dinosaur
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gishath_suns_avatar.jpg

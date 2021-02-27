@@ -1,7 +1,7 @@
 Name:Disintegrate
 ManaCost:X R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SubAbility$ DB | References$ X | ReplaceDyingDefined$ Targeted.Creature | SpellDescription$ CARDNAME deals X damage to any target. That creature can't be regenerated this turn. If the creature would die this turn, exile it instead.
+A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SubAbility$ DB | ReplaceDyingDefined$ Targeted.Creature | SpellDescription$ CARDNAME deals X damage to any target. That creature can't be regenerated this turn. If the creature would die this turn, exile it instead.
 SVar:DB:DB$ Pump | KW$ HIDDEN CARDNAME can't be regenerated. | Defined$ Targeted.Creature
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disintegrate.jpg

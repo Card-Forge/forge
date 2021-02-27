@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:DBChoice:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ CombustDraw,CombustDamage | AILogic$ CombustibleGearhulk
 SVar:CombustDraw:DB$ Draw | Defined$ You | NumCards$ 3 | SpellDescription$ Controller draws three cards
 SVar:CombustDamage:DB$ Mill | Defined$ You | NumCards$ 3 | RememberMilled$ True | SubAbility$ DamageOpponent | SpellDescription$ Controller mills three cards, then CARDNAME deals damage to you equal to their total converted mana cost.
-SVar:DamageOpponent:DB$ DealDamage | Defined$ ParentTarget | NumDmg$ X | References$ X | SubAbility$ DBCleanup
+SVar:DamageOpponent:DB$ DealDamage | Defined$ ParentTarget | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$SumCMC
 Oracle:First strike\nWhen Combustible Gearhulk enters the battlefield, target opponent may have you draw three cards. If the player doesn't, you mill three cards, then Combustible Gearhulk deals damage to that player equal to the total converted mana cost of those cards.

@@ -4,5 +4,5 @@ Types:Instant
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ XBlue | Relative$ True | EffectZone$ All | Description$ CARDNAME costs {2} less to cast if it targets a blue spell.
 SVar:XBlue:Count$Compare CheckTgt GE1.2.0
 SVar:CheckTgt:Targeted$Valid Card.Blue
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 3 | References$ XBlue,CheckTgt | SpellDescription$ This spell costs {2} less to cast if it targets a blue spell. Counter target spell unless its controller pays {3}.
+A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 3 | SpellDescription$ This spell costs {2} less to cast if it targets a blue spell. Counter target spell unless its controller pays {3}.
 Oracle:This spell costs {2} less to cast if it targets a blue spell.\nCounter target spell unless its controller pays {3}.

@@ -1,6 +1,6 @@
 Name:Sands of Delirium
 ManaCost:3
 Types:Artifact
-A:AB$ Mill | Cost$ X T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player | References$ X | AILogic$ EndOfOppTurn | SpellDescription$ Target player mills X cards.
+A:AB$ Mill | Cost$ X T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player | AILogic$ EndOfOppTurn | SpellDescription$ Target player mills X cards.
 SVar:X:Count$xPaid
 Oracle:{X}, {T}: Target player mills X cards.

@@ -3,7 +3,7 @@ ManaCost:4 G G
 Types:Creature Elemental Avatar
 PT:4/4
 K:Trample
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ Trample
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, each player searches their library for up to two basic land cards, puts them onto the battlefield, then shuffles their library.
 SVar:TrigSearch:DB$ ChangeZone | Optional$ True | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | DefinedPlayer$ Player | ChangeNum$ 2 | Shuffle$ True
 SVar:X:PlayerCountOpponents$Amount

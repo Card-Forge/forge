@@ -4,7 +4,7 @@ Types:Snow Creature Aurochs
 PT:3/3
 K:Trample
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | References$ X
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X
 SVar:X:Count$Valid Creature.Aurochs+attacking+Other
 A:AB$ Pump | Cost$ 2 S | ValidTgts$ Creature | TgtPrompt$ Select target creature to attack | StackDescription$ None | SubAbility$ DBMustBlock | SpellDescription$ Target creature blocks target creature this turn if able.
 SVar:DBMustBlock:DB$ MustBlock | DefinedAttacker$ ParentTarget | ValidTgts$ Creature | TgtPrompt$ Select target creature to block

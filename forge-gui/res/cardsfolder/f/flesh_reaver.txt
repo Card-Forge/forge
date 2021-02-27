@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Creature Horror
 PT:4/4
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature,Opponent | Execute$ TrigFleshReaverDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a creature or opponent, CARDNAME deals that much damage to you.
-SVar:TrigFleshReaverDamage:DB$ DealDamage | NumDmg$ FleshReaverX | Defined$ You | References$ FleshReaverX
+SVar:TrigFleshReaverDamage:DB$ DealDamage | NumDmg$ FleshReaverX | Defined$ You
 SVar:FleshReaverX:TriggerCount$DamageAmount
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flesh_reaver.jpg

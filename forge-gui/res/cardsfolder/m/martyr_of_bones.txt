@@ -2,7 +2,7 @@ Name:Martyr of Bones
 ManaCost:B
 Types:Creature Human Wizard
 PT:1/1
-A:AB$ ChangeZone | Cost$ 1 Reveal<X/Card.Black> Sac<1/CARDNAME> | CostDesc$ {1}, Reveal X black cards from your hand, Sacrifice CARDNAME: | Origin$ Graveyard | TargetsFromSingleZone$ True | Destination$ Exile | TargetMin$ 0 | TargetMax$ Y | ValidTgts$ Card | References$ X,Y | SpellDescription$ Exile up to X target cards from a single graveyard.
+A:AB$ ChangeZone | Cost$ 1 Reveal<X/Card.Black> Sac<1/CARDNAME> | CostDesc$ {1}, Reveal X black cards from your hand, Sacrifice CARDNAME: | Origin$ Graveyard | TargetsFromSingleZone$ True | Destination$ Exile | TargetMin$ 0 | TargetMax$ Y | ValidTgts$ Card | SpellDescription$ Exile up to X target cards from a single graveyard.
 SVar:X:TargetedObjects$Amount
 SVar:Y:Count$ValidHand Card.Black+YouOwn
 AI:RemoveDeck:All

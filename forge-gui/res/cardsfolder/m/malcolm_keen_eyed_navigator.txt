@@ -5,7 +5,7 @@ PT:2/2
 K:Flying
 K:Partner
 T:Mode$ DamageAll | ValidSource$ Pirate.YouCtrl | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more Pirates you control deal damage to your opponents, you create a Treasure token for each opponent dealt damage. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
-SVar:TrigToken:DB$ Token | TokenAmount$ X | References$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 SVar:X:TriggeredPlayersTargets$Amount
 DeckHints:Type$Pirate
 DeckHas:Ability$Token

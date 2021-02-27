@@ -3,6 +3,6 @@ ManaCost:2 B B
 Types:Creature Zombie Assassin
 PT:0/4
 A:AB$ Pump | Cost$ B | Defined$ Self | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
-A:AB$ Destroy | Cost$ B T | ValidTgts$ Creature.powerLTX | References$ X | TgtPrompt$ Select target creature with power less than Unliving Psychopath's | SpellDescription$ Destroy target creature with power less than CARDNAME's power.
+A:AB$ Destroy | Cost$ B T | ValidTgts$ Creature.powerLTX | TgtPrompt$ Select target creature with power less than Unliving Psychopath's | SpellDescription$ Destroy target creature with power less than CARDNAME's power.
 SVar:X:Count$CardPower
 Oracle:{B}: Unliving Psychopath gets +1/-1 until end of turn.\n{B}, {T}: Destroy target creature with power less than Unliving Psychopath's power.

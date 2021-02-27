@@ -4,13 +4,13 @@ Types:Artifact
 S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Instant and sorcery spells you cast cost {1} less to cast.
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCharge | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a charge counter on CARDNAME. Then if there are four or more charge counters on it, you may remove those counters and transform it.
 SVar:TrigCharge:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | SubAbility$ DBStoreSVar
-SVar:DBStoreSVar:DB$ StoreSVar | SVar$ FullyCharged | Type$ Number | Expression$ 1 | ConditionCheckSVar$ ChargeCounter | ConditionSVarCompare$ GE1 | References$ ChargeCounter,FullyCharged | SubAbility$ DBRemoveCtrs
-SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ All | Optional$ True | ConditionCheckSVar$ FullyCharged | ConditionSVarCompare$ GE1 | References$ FullyCharged | SubAbility$ DBTransform
-SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionCheckSVar$ Discharged | ConditionSVarCompare$ EQ1 | References$ Discharged
+SVar:DBStoreSVar:DB$ StoreSVar | SVar$ FullyCharged | Type$ Number | Expression$ 1 | ConditionCheckSVar$ ChargeCounter | ConditionSVarCompare$ GE1 | SubAbility$ DBRemoveCtrs
+SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ All | Optional$ True | ConditionCheckSVar$ FullyCharged | ConditionSVarCompare$ GE1 | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionCheckSVar$ Discharged | ConditionSVarCompare$ EQ1
 SVar:ChargeCounter:Count$Valid Card.Self+counters_GE4_CHARGE
 SVar:Discharged:Count$Valid Card.Self+counters_EQ0_CHARGE
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | Execute$ DBInitSVar | Static$ True
-SVar:DBInitSVar:DB$ StoreSVar | SVar$ FullyCharged | Type$ Number | Expression$ 0 | References$ FullyCharged
+SVar:DBInitSVar:DB$ StoreSVar | SVar$ FullyCharged | Type$ Number | Expression$ 0
 SVar:FullyCharged:Number$0
 AlternateMode:DoubleFaced
 Oracle:Instant and sorcery spells you cast cost {1} less to cast.\nWhenever you cast an instant or sorcery spell, put a charge counter on Primal Amulet. Then if there are four or more charge counters on it, you may remove those counters and transform it.

@@ -3,7 +3,7 @@ ManaCost:2 G/W
 Types:Legendary Planeswalker Huatli
 Loyalty:7
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME assigns combat damage equal to its toughness rather than its power | Description$ Each creature you control assigns combat damage equal to its toughness rather than its power.
-A:AB$ GainLife | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | LifeAmount$ X | References$ X | SpellDescription$ You gain life equal to the greatest toughness among creatures you control.
+A:AB$ GainLife | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | LifeAmount$ X | SpellDescription$ You gain life equal to the greatest toughness among creatures you control.
 SVar:X:Count$GreatestToughness_Creature.YouCtrl
 SVar:NeedsToPlay:Creature.YouCtrl
 AI:RemoveDeck:Random

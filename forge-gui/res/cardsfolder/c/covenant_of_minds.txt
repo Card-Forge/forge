@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ Dig | Cost$ 4 U | DigNum$ 3 | NoMove$ True | Reveal$ True | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | SubAbility$ DBChoice | RememberRevealed$ True | SpellDescription$ Reveal the top three cards of your library. Target opponent may choose to put those cards into your hand. If they don't, put those cards into your graveyard and draw five cards.
 SVar:DBChoice:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ CovenantPutIntoHand,CovenantMillDraw | SubAbility$ DBCleanup
 SVar:CovenantPutIntoHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | SpellDescription$ You may choose to put those cards into that player's hand.
-SVar:CovenantMillDraw:DB$ Mill | Defined$ SourceController | NumCards$ X | References$ X | SubAbility$ DBDraw | SpellDescription$ If you don't, put those cards into that player's graveyard and that player draws five cards.
+SVar:CovenantMillDraw:DB$ Mill | Defined$ SourceController | NumCards$ X | SubAbility$ DBDraw | SpellDescription$ If you don't, put those cards into that player's graveyard and that player draws five cards.
 SVar:DBDraw:DB$ Draw | Defined$ SourceController | NumCards$ 5
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize

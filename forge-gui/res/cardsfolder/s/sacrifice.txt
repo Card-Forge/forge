@@ -1,7 +1,7 @@
 Name:Sacrifice
 ManaCost:B
 Types:Instant
-A:SP$ Mana | Cost$ B Sac<1/Creature> | Produced$ B | Amount$ X | References$ X | SpellDescription$ Add an amount of black mana equal to the sacrificed creature's converted mana cost.
+A:SP$ Mana | Cost$ B Sac<1/Creature> | Produced$ B | Amount$ X | SpellDescription$ Add an amount of black mana equal to the sacrificed creature's converted mana cost.
 SVar:X:Sacrificed$CardManaCost
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacrifice.jpg

@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Koth
 Loyalty:3
 A:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Mountain | TgtPrompt$ Select target Mountain | SubAbility$ DBAnimate | SpellDescription$ Untap target Mountain. It becomes a 4/4 red Elemental creature until end of turn. It's still a land.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental | Colors$ Red
-A:AB$ Mana | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Produced$ R | Amount$ X | References$ X | SpellDescription$ Add {R} for each Mountain you control.
+A:AB$ Mana | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Produced$ R | Amount$ X | SpellDescription$ Add {R} for each Mountain you control.
 A:AB$ Effect | Cost$ SubCounter<5/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Koth of the Hammer | Image$ emblem_koth_of_the_hammer | StaticAbilities$ STDamage | SVars$ ABDealDamage | Stackable$ False | Duration$ Permanent | SpellDescription$ You get an emblem with "Mountains you control have '{T}: This land deals 1 damage to any target."
 SVar:STDamage:Mode$ Continuous | EffectZone$ Command | Affected$ Mountain.YouCtrl | AddAbility$ ABDealDamage | AffectedZone$ Battlefield | Description$ Mountains you control have "{T}: This land deals 1 damage to any target."
 SVar:ABDealDamage:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ Deal 1 damage to any target

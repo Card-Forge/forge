@@ -6,7 +6,7 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughne
 SVar:X:Count$Devotion.Black
 SVar:BuffedBy:Permanent.Black
 A:AB$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target cards in graveyards | RememberChanged$ True | SubAbility$ DBGainLife | StackDescription$ SpellDescription | SpellDescription$ Exile up to two target cards from graveyards. You gain 1 life for each creature card exiled this way.
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y | References$ Y | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Remembered$Valid Creature
 DeckHas:Ability$LifeGain

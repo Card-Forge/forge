@@ -3,6 +3,6 @@ ManaCost:5 G G
 Types:Sorcery
 A:SP$ Dig | Cost$ 5 G G | DigNum$ 7 | ChangeNum$ 1 | ChangeValid$ Creature | Optional$ True | RestRandomOrder$ True | DestinationZone$ Battlefield | ForceRevealToController$ True | SpellDescription$ Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in a random order. When a creature is put onto the battlefield this way, it deals damage equal to its power to target creature an opponent controls.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | ValidCause$ Card.Self | Execute$ DBDealDamage | Secondary$ True | TriggerDescription$ When a creature is put onto the battlefield this way, it deals damage equals to its power to target creature an opponent controls.
-SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ X | References$ X | DamageSource$ TriggeredCard
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ X | DamageSource$ TriggeredCard
 SVar:X:TriggeredCard$CardPower
 Oracle:Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in a random order. When a creature is put onto the battlefield this way, it deals damage equal to its power to target creature an opponent controls.

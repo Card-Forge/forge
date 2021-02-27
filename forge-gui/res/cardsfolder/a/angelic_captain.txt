@@ -4,7 +4,7 @@ Types:Creature Angel Ally
 PT:4/3
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+1 until end of turn for each other attacking Ally.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ X | References$ X
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ X
 SVar:X:Count$Valid Ally.attacking+Other
 DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_captain.jpg

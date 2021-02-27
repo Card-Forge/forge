@@ -2,7 +2,7 @@ Name:Ghoultree
 ManaCost:7 G
 Types:Creature Zombie Treefolk
 PT:10/10
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature card in your graveyard.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature card in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghoultree.jpg
 Oracle:This spell costs {1} less to cast for each creature card in your graveyard.

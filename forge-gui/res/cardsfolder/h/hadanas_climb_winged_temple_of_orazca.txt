@@ -14,7 +14,7 @@ Name:Winged Temple of Orazca
 ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
-A:AB$ Pump | Cost$ 1 G U T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X | NumDef$ X | References$ X | KW$ Flying | SpellDescription$ Target creature you control gains flying and gets +X/+X until end of turn, where X is its power.
+A:AB$ Pump | Cost$ 1 G U T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X | NumDef$ X | KW$ Flying | SpellDescription$ Target creature you control gains flying and gets +X/+X until end of turn, where X is its power.
 SVar:X:Targeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winged_temple_of_orazca.jpg
 Oracle:(Transforms from Hadana's Climb.)\n{T}: Add one mana of any color.\n{1}{G}{U}, {T}: Target creature you control gains flying and gets +X/+X until end of turn, where X is its power.

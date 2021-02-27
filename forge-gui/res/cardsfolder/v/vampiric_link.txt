@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ DamageDealtOnce | ValidSource$ Card.AttachedBy | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, you gain that much life.
-SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_link.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals damage, you gain that much life.

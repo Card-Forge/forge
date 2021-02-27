@@ -5,7 +5,7 @@ A:SP$ GainControl | Cost$ 3 U U B | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Keywords$ Haste | sVars$ SneakAttackEOT | SubAbility$ DelTrig
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigSac | RememberObjects$ Targeted | TriggerDescription$ At the beginning of the next end step, sacrifice it. If you do, you gain life equal to its toughness. | AILogic$ Always | ConditionDefined$ Targeted | ConditionPresent$ Card | ConditionCompare$ GE1
 SVar:TrigSac:DB$ SacrificeAll | Defined$ DelayTriggerRemembered | Controller$ You | RememberSacrificed$ True | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBCleanup | References$ X | ConditionDefined$ Remembered | ConditionPresent$ Card
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardToughness
 SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:AtEOT

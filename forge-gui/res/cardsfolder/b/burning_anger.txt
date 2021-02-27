@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 4 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ TapDmg | AddSVar$ BurningAngerDmg | Description$ Enchanted creature has "{T}: This creature deals damage equal to its power to any target."
-SVar:TapDmg:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ BurningAngerDmg | References$ BurningAngerDmg | SpellDescription$ CARDNAME deals damage equal to its power to any target.
+SVar:TapDmg:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ BurningAngerDmg | SpellDescription$ CARDNAME deals damage equal to its power to any target.
 SVar:BurningAngerDmg:Count$CardPower
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_anger.jpg

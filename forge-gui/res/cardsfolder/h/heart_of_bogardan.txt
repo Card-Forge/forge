@@ -3,8 +3,8 @@ ManaCost:2 R R
 Types:Enchantment
 K:Cumulative upkeep:2
 T:Mode$ PayCumulativeUpkeep | ValidCard$ Card.Self | Paid$ False | Execute$ TrigDmg | TriggerDescription$ When a player doesn't pay CARDNAME's cumulative upkeep, CARDNAME deals X damage to target player or planeswalker and each creature that player or that planeswalker's controller controls, where X is twice the number of age counters on CARDNAME minus 2.
-SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select a player or planeswalker | NumDmg$ Y | References$ X,Y | SubAbility$ DmgAll | DamageMap$ True | SpellDescription$  CARDNAME deals X damage to target player or planeswalker and each creature that player or planeswalker's controller controls.
-SVar:DmgAll:DB$ DamageAll | NumDmg$ Y | References$ X,Y | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve
+SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select a player or planeswalker | NumDmg$ Y,Y | SubAbility$ DmgAll | DamageMap$ True | SpellDescription$  CARDNAME deals X damage to target player or planeswalker and each creature that player or planeswalker's controller controls.
+SVar:DmgAll:DB$ DamageAll | NumDmg$ Y,Y | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:X:TriggeredCard$CardCounters.AGE/Twice
 SVar:Y:SVar$X/Minus.2

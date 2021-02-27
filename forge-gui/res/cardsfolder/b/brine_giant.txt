@@ -2,7 +2,7 @@ Name:Brine Giant
 ManaCost:6 U
 Types:Creature Giant
 PT:5/6
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each enchantment you control.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each enchantment you control.
 SVar:X:Count$Valid Enchantment.YouCtrl
 DeckHints:Type$Enchantment
 Oracle:This spell costs {1} less to cast for each enchantment you control.

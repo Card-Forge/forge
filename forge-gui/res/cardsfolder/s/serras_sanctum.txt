@@ -1,7 +1,7 @@
 Name:Serra's Sanctum
 ManaCost:no cost
 Types:Legendary Land
-A:AB$ Mana | Cost$ T | Produced$ W | Amount$ X | References$ X | SpellDescription$ Add {W} for each Enchantment you control.
+A:AB$ Mana | Cost$ T | Produced$ W | Amount$ X | SpellDescription$ Add {W} for each Enchantment you control.
 SVar:X:Count$Valid Enchantment.YouCtrl
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serras_sanctum.jpg

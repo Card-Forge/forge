@@ -4,13 +4,13 @@ Types:Artifact Creature Construct
 PT:4/4
 K:Kicker:3
 R:Event$ Moved | ValidCard$ Card.Self+kicked | Destination$ Battlefield | ReplaceWith$ DBPutCounter | Description$ If CARDNAME was kicked, it enters the battlefield with a +1/+1 counter on it for each nonbasic land your opponents control.
-SVar:DBPutCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | References$ X | SubAbility$ DBMoveToPlay
+SVar:DBPutCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBMoveToPlay
 SVar:DBMoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 SVar:X:Count$LastStateBattlefield Land.nonBasic+OppCtrl
 SVar:NeedsToPlayKicked:Land.nonBasic+OppCtrl
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | SourceType$ Spell | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell, sacrifice it and create a number of 1/1 colorless Construct artifact creature tokens equal to its power.
 SVar:TrigSac:DB$ Destroy | Defined$ Self | Sacrifice$ True | RememberLKI$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenAmount$ Y | References$ Y | TokenScript$ c_1_1_a_construct | TokenOwner$ You | SubAbility$ DBCleanup
+SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenScript$ c_1_1_a_construct | TokenOwner$ You | SubAbility$ DBCleanup
 SVar:Y:RememberedLKI$CardPower
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token & Ability$Counters

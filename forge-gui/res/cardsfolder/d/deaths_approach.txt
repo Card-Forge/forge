@@ -3,7 +3,7 @@ ManaCost:B
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -X | AddToughness$ -X | References$ X | Description$ Enchanted creature gets -X/-X, where X is the number of creature cards in its controller's graveyard.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -X | AddToughness$ -X | Description$ Enchanted creature gets -X/-X, where X is the number of creature cards in its controller's graveyard.
 SVar:X:Count$TypeInEnchantedYard.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deaths_approach.jpg
 Oracle:Enchant creature\nEnchanted creature gets -X/-X, where X is the number of creature cards in its controller's graveyard.

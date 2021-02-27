@@ -5,6 +5,6 @@ PT:3/3
 K:Flying
 K:Multikicker:U
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFlying | TriggerDescription$ When CARDNAME enters the battlefield, up to X target creatures gain flying until end of turn, where X is the number of times CARDNAME was kicked.
-SVar:TrigFlying:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ X | References$ X | KW$ Flying | TgtPrompt$ Select target creature
+SVar:TrigFlying:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ X | KW$ Flying | TgtPrompt$ Select target creature
 SVar:X:Count$TimesKicked
 Oracle:Multikicker {U} (You may pay an additional {U} any number of times as you cast this spell.)\nFlying\nWhen Voyager Drake enters the battlefield, up to X target creatures gain flying until end of turn, where X is the number of times Voyager Drake was kicked.

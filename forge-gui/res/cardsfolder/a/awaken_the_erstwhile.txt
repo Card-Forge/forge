@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Sorcery
 A:SP$ RepeatEach | Cost$ 3 B B | RepeatPlayers$ Player | RepeatSubAbility$ DBDiscard | SpellDescription$ Each player discards all the cards in their hand, then creates that many 2/2 black Zombie creature tokens.
 SVar:DBDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ b_2_2_zombie | TokenOwner$ Player.IsRemembered | LegacyImage$ b 2 2 zombie rna | References$ X | SubAbility$ DBCleanup 
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ b_2_2_zombie | TokenOwner$ Player.IsRemembered | LegacyImage$ b 2 2 zombie rna | SubAbility$ DBCleanup 
 SVar:X:Remembered$Amount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Discard

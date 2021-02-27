@@ -3,7 +3,7 @@ ManaCost:1 U R
 Types:Creature Drake
 PT:*/4
 K:Flying
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | References$ X | Description$ CARDNAME's power is equal to the number of instant and sorcery cards in your graveyard.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of instant and sorcery cards in your graveyard.
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enigma_drake.jpg
 DeckHints:Type$Instant|Sorcery

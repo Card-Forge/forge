@@ -4,7 +4,7 @@ Types:Artifact Creature Shapeshifter
 PT:2/4
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, you may exile target nontoken creature.
 SVar:TrigExile:DB$ ChangeZone | Unimprint$ True | Imprint$ True | ImprintLast$ True | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.nonToken | TgtPrompt$ Select target nontoken creature
-S:Mode$ Continuous | Affected$ Card.Self | AddType$ ImprintedCreatureType | CheckSVar$ Z | SVarCompare$ EQ1 | SetPower$ X | SetToughness$ Y | References$ X,Y,Z | Description$ As long as a card exiled with Duplicant is a creature card, Duplicant has the power, toughness, and creature types of the last creature card exiled with Duplicant. It's still a Shapeshifter.
+S:Mode$ Continuous | Affected$ Card.Self | AddType$ ImprintedCreatureType | CheckSVar$ Z | SVarCompare$ EQ1 | SetPower$ X | SetToughness$ Y | Description$ As long as a card exiled with Duplicant is a creature card, Duplicant has the power, toughness, and creature types of the last creature card exiled with Duplicant. It's still a Shapeshifter.
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted | Execute$ DBCleanup
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True

@@ -2,7 +2,7 @@ Name:Surestrike Trident
 ManaCost:2
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ First Strike | AddAbility$ SurestrikeTridentDmg | AddSVar$ SurestrikeTridentX | Description$ Equipped creature has first strike and "{T}, Unattach CARDNAME: This creature deals damage equal to its power to target player or planeswalker."
-SVar:SurestrikeTridentDmg:AB$ DealDamage | Cost$ T Unattach<OriginalHost/Surestrike Trident> | NumDmg$ SurestrikeTridentX | References$ SurestrikeTridentX | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | SpellDescription$ CARDNAME deals damage equal to its power to target player or planeswalker.
+SVar:SurestrikeTridentDmg:AB$ DealDamage | Cost$ T Unattach<OriginalHost/Surestrike Trident> | NumDmg$ SurestrikeTridentX | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | SpellDescription$ CARDNAME deals damage equal to its power to target player or planeswalker.
 SVar:SurestrikeTridentX:Count$CardPower
 K:Equip:4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surestrike_trident.jpg

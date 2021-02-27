@@ -4,8 +4,8 @@ Types:World Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ExileAll | TriggerDescription$ When CARDNAME enters the battlefield, exile all cards from all graveyards.
 SVar:ExileAll:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card
 T:Mode$ SpellCast | ValidCard$ Card | Execute$ TrigCounterSameGrave | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell, counter it if a card with the same name is in a graveyard or a nontoken permanent with the same name is on the battlefield.
-SVar:TrigCounterSameGrave:DB$ Counter | Defined$ TriggeredSpellAbility | SubAbility$ DBCounterSamePermanent | ConditionCheckSVar$ SharesNameGrave | ConditionSVarCompare$ GE1 | References$ SharesNameGrave
-SVar:DBCounterSamePermanent:DB$ Counter | Defined$ TriggeredSpellAbility | ConditionCheckSVar$ SharesNameBattlefield | ConditionSVarCompare$ GE1 | References$ SharesNameBattlefield
+SVar:TrigCounterSameGrave:DB$ Counter | Defined$ TriggeredSpellAbility | SubAbility$ DBCounterSamePermanent | ConditionCheckSVar$ SharesNameGrave | ConditionSVarCompare$ GE1
+SVar:DBCounterSamePermanent:DB$ Counter | Defined$ TriggeredSpellAbility | ConditionCheckSVar$ SharesNameBattlefield | ConditionSVarCompare$ GE1
 SVar:SharesNameGrave:TriggeredCard$Valid Card.sharesNameWith Graveyard
 SVar:SharesNameBattlefield:TriggeredCard$Valid Card.sharesNameWith NonToken
 SVar:AICurseEffect:BazaarOfWonders

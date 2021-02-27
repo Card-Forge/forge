@@ -2,7 +2,7 @@ Name:Harvest Mage
 ManaCost:G
 Types:Creature Human Spellshaper
 PT:1/1
-A:AB$ Effect | Cost$ G T Discard<1/Card> | ReplacementEffects$ HarvestReplacement | SVars$ HarvestProduce | References$ HarvestReplacement,HarvestProduce | AILogic$ Never | Stackable$ False | SpellDescription$ Until end of turn, if you tap a land for mana, it produces one mana of a color of your choice instead of any other type and amount.
+A:AB$ Effect | Cost$ G T Discard<1/Card> | ReplacementEffects$ HarvestReplacement | SVars$ HarvestProduce | AILogic$ Never | Stackable$ False | SpellDescription$ Until end of turn, if you tap a land for mana, it produces one mana of a color of your choice instead of any other type and amount.
 SVar:HarvestReplacement:Event$ ProduceMana | ActiveZones$ Command | ValidPlayer$ You | ValidCard$ Land | ValidAbility$ Activated.hasTapCost | ReplaceWith$ HarvestProduce | Description$ If you tap a land for mana, it produces one mana of a color of your choice instead of any other type and amount.
 SVar:HarvestProduce:DB$ ReplaceMana | ReplaceMana$ Any
 AI:RemoveDeck:All

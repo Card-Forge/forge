@@ -1,7 +1,7 @@
 Name:Braingeyser
 ManaCost:X U U
 Types:Sorcery
-A:SP$ Draw | Cost$ X U U | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | References$ X | SpellDescription$ Target player draws X cards.
+A:SP$ Draw | Cost$ X U U | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws X cards.
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/braingeyser.jpg
 Oracle:Target player draws X cards.

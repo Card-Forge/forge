@@ -3,7 +3,7 @@ ManaCost:R
 Types:Creature Satyr Shaman
 PT:2/1
 T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to you.
-SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | Defined$ You | References$ X
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | Defined$ You
 SVar:X:TriggerCount$DamageAmount
 A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ 1 | SubAbility$ DBDmg | SpellDescription$ CARDNAME gets +1/+0 until end of turn and deals 1 damage to you.
 SVar:DBDmg:DB$ DealDamage | NumDmg$ 1 | Defined$ You

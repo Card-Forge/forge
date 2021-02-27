@@ -7,7 +7,7 @@ SVar:DBEffect:DB$ Effect | Triggers$ TAttack | SVars$ TrigDraw,DBLoseLife | Spel
 SVar:TAttack:Mode$ Attacks | ValidCard$ Berserker | Execute$ TrigDraw | TriggerDescription$ Whenever a Berserker attacks this turn, you draw a card and you lose 1 life.
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
-SVar:DBMana:DB$ Mana | Produced$ R | Amount$ X | References$ X | PersistentMana$ True | SpellDescription$ Add {R} for each Berserker you control. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:DBMana:DB$ Mana | Produced$ R | Amount$ X | PersistentMana$ True | SpellDescription$ Add {R} for each Berserker you control. Until end of turn, you don't lose this mana as steps and phases end.
 SVar:X:Count$Valid Berserker.YouCtrl
 DeckHas:Ability$Token
 DeckHints:Type$Berserker

@@ -1,7 +1,7 @@
 Name:Ancient Animus
 ManaCost:1 G
 Types:Instant
-A:SP$ PutCounter | Cost$ 1 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | AILogic$ Fight | SubAbility$ DBFight | SpellDescription$ Put a +1/+1 counter on target creature you control if it's legendary. Then it fights target creature an opponent controls. (Each deals damage equal to its power to the other.)
+A:SP$ PutCounter | Cost$ 1 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | AILogic$ Fight | SubAbility$ DBFight | SpellDescription$ Put a +1/+1 counter on target creature you control if it's legendary. Then it fights target creature an opponent controls. (Each deals damage equal to its power to the other.)
 SVar:X:Targeted$Valid Legendary
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | AILogic$ Always | TgtPrompt$ Choose target creature an opponent controls
 DeckHas:Ability$Counters

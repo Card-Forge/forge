@@ -5,7 +5,7 @@ PT:2/2
 K:Amplify:1:Zombie
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks or blocks, you lose 1 life for each +1/+1 counter on it.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, you lose 1 life for each +1/+1 counter on it.
-SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X | References$ X
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$CardCounters.P1P1
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/embalmed_brawler.jpg

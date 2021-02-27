@@ -2,7 +2,7 @@ Name:Gratuitous Violence
 ManaCost:2 R R R
 Types:Enchantment
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.YouCtrl | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwice | Description$ If a creature you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.
-SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X | References$ X
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gratuitous_violence.jpg

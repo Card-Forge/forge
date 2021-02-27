@@ -2,7 +2,7 @@ Name:Endless Horizons
 ManaCost:3 W
 Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, search your library for any number of Plains cards and exile them. Then shuffle your library.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Plains | ChangeNum$ X | RememberChanged$ True | References$ X
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Plains | ChangeNum$ X | RememberChanged$ True
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigRetrieve | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may put a card you own exiled with CARDNAME into your hand.
 SVar:TrigRetrieve:DB$ ChangeZone | ChangeType$ Card.IsRemembered+YouOwn | ChangeNum$ 1 | Origin$ Exile | Destination$ Hand | Hidden$ True
 SVar:X:Count$TypeInYourLibrary.Plains

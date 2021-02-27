@@ -2,7 +2,7 @@ Name:Veteran Warleader
 ManaCost:1 G W
 Types:Creature Human Soldier Ally
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
 A:AB$ GenericChoice | Cost$ tapXType<1/Ally.Other> | CostDesc$ Tap another untapped Ally you control: | Choices$ ChooseFirstStrike,ChooseVigilance,ChooseTrample | SpellDescription$ CARDNAME gains your choice of first strike, vigilance, or trample until end of turn.
 SVar:ChooseFirstStrike:DB$ Pump | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.

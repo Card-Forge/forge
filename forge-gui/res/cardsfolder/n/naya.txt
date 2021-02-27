@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Plane Alara
 S:Mode$ Continuous | Affected$ You | EffectZone$ Command | AdjustLandPlays$ Unlimited | Description$ You may play any number of lands on each of your turns.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, target red, green, or white creature you control gets +1/+1 until end of turn for each land you control.
-SVar:RolledChaos:DB$ Pump | ValidTgts$ Creature.Red+YouCtrl,Creature.Green+YouCtrl,Creature.White+YouCtrl | TgtPrompt$ Select target red, green, or white creature you control | NumAtt$ Y | NumDef$ Y | References$ Y
+SVar:RolledChaos:DB$ Pump | ValidTgts$ Creature.Red+YouCtrl,Creature.Green+YouCtrl,Creature.White+YouCtrl | TgtPrompt$ Select target red, green, or white creature you control | NumAtt$ Y | NumDef$ Y
 SVar:Y:Count$Valid Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naya.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | HasColorCreatureInPlay$ RGW

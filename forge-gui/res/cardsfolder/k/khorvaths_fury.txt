@@ -4,9 +4,9 @@ Types:Sorcery
 A:SP$ AssignGroup | Cost$ 4 R | Defined$ Player | Choices$ FriendRepeat,FoeRepeat | AILogic$ FriendOrFoe | SpellDescription$ For each player, choose friend or foe. Each friend discards all cards from their hand, then draws that many cards plus one. CARDNAME deals damage to each foe equal to the number of cards in their hand.
 SVar:FriendRepeat:DB$ RepeatEach | RepeatPlayers$ Remembered | ClearRememberedBeforeLoop$ True | RepeatSubAbility$ DBDiscard | StackDescription$ SpellDescription | SpellDescription$ Each friend discards all cards from their hand, then draws that many cards plus one.
 SVar:DBDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | References$ X | SubAbility$ DBCleanup
+SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | SubAbility$ DBCleanup
 SVar:FoeRepeat:DB$ RepeatEach | RepeatPlayers$ Remembered | ClearRememberedBeforeLoop$ True | RepeatSubAbility$ DBDmg | DamageMap$ True | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals damage to each foe equal to the number of cards in their hand.
-SVar:DBDmg:DB$ DealDamage | Defined$ Player.IsRemembered | NumDmg$ Y | References$ Y
+SVar:DBDmg:DB$ DealDamage | Defined$ Player.IsRemembered | NumDmg$ Y
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount.Plus.1
 SVar:Y:Count$ValidHand Card.RememberedPlayerCtrl

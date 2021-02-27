@@ -4,7 +4,7 @@ Types:Legendary Creature Human Soldier
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDmgOpp | TriggerDescription$ When CARDNAME enters the battlefield, target creature an opponent controls deals damage equal to its power to that player.
 SVar:TrigDmgOpp:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target target creature an opponent controls | RememberObjects$ Targeted | SubAbility$ DBDmgOpp | StackDescription$ None | IsCurse$ True | SpellDescription$ Target creature an opponent controls deals damage equal to its power to that player.
-SVar:DBDmgOpp:DB$ DealDamage | DamageSource$ Remembered | Defined$ RememberedController | NumDmg$ X | SubAbility$ DBCleanup | References$ X
+SVar:DBDmgOpp:DB$ DealDamage | DamageSource$ Remembered | Defined$ RememberedController | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dong_zhou_the_tyrant.jpg

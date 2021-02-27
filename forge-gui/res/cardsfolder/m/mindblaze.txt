@@ -3,8 +3,8 @@ ManaCost:5 R
 Types:Sorcery
 A:SP$ NameCard | Cost$ 5 R | ValidCards$ Card.nonLand | ValidDesc$ nonland | SubAbility$ DBChooseNumber | SpellDescription$ Choose a nonland card name and a number greater than 0. Target player reveals their library. If that library contains exactly the chosen number of cards with the chosen name, Mindblaze deals 8 damage to that player. Then that player shuffles their library.
 SVar:DBChooseNumber:DB$ ChooseNumber | Min$ 1 | SubAbility$ DBDig
-SVar:DBDig:DB$ Dig | DigNum$ X | References$ X | ValidTgts$ Player | TgtPrompt$ Select target player | Reveal$ True | NoMove$ True | RememberRevealed$ True | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | SubAbility$ DBDamage
-SVar:DBDamage:DB$ DealDamage | NumDmg$ 8 | Defined$ Targeted | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQZ | References$ Y,Z | SubAbility$ DBShuffle
+SVar:DBDig:DB$ Dig | DigNum$ X | ValidTgts$ Player | TgtPrompt$ Select target player | Reveal$ True | NoMove$ True | RememberRevealed$ True | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | NumDmg$ 8 | Defined$ Targeted | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQZ | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ Shuffle | Defined$ ParentTarget | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TargetedPlayer$CardsInLibrary

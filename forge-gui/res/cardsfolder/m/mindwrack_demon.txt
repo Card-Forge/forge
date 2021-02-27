@@ -7,7 +7,7 @@ K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill four cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Delirium — At the beginning of your upkeep, you lose 4 life unless there are four or more card types among cards in your graveyard.
-SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X | References$ X
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Delirium.0.4
 DeckHints:Ability$Graveyard & Ability$Discard
 DeckHas:Ability$Delirium

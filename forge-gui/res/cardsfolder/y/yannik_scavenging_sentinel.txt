@@ -11,7 +11,7 @@ SVar:DBEffect:DB$ Effect | Triggers$ ComeBack | SVars$ TrigReturn | RememberObje
 SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ This creature is exiled until EFFECTSOURCE leaves the battlefield
 SVar:TrigReturn:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Exile | Destination$ Battlefield
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigPutCounters | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | TriggerDescription$ When you do, distribute X +1/+1 counters among any number of target creatures, where X is the exiled creature's power.
-SVar:TrigPutCounters:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ X | TargetMin$ 1 | TargetMax$ X | DividedAsYouChoose$ X | References$ X | SubAbility$ DBCleanup | SpellDescription$ Distribute X +1/+1 counters among any number of target creatures.
+SVar:TrigPutCounters:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ X | TargetMin$ 1 | TargetMax$ X | DividedAsYouChoose$ X | SubAbility$ DBCleanup | SpellDescription$ Distribute X +1/+1 counters among any number of target creatures.
 SVar:X:RememberedLKI$CardPower
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
 DeckHas:Ability$Counters

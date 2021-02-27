@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Plane Bolas's Meditation Realm
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your end step, put the cards in your hand on the bottom of your library in any order, then draw that many cards.
 SVar:TrigChangeZone:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | RememberChanged$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ Y | References$ Y | SubAbility$ DBCleanup
+SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Remembered$Amount
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, reveal the top three cards of your planar deck. Each of the revealed cards' {CHAOS} abilities triggers. Then put the revealed cards on the bottom of your planar deck in any order.

@@ -5,7 +5,7 @@ PT:3/3
 K:Trample
 T:Mode$ SpellCast | ValidCard$ Card.kicked | ValidActivatingPlayer$ You | Execute$ DBPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, if that spell was kicked, put a +1/+1 counter on CARDNAME, then CARDNAME deals damage equal to the number of +1/+1 counters on it to each opponent.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDealDamage
-SVar:DBDealDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ X | References$ X
+SVar:DBDealDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ X
 SVar:X:Count$CardCounters.P1P1
 DeckHas:Ability$Counters
 SVar:BuffedBy:Card.withKicker,Card.withMultikicker

@@ -15,7 +15,7 @@ Name:Temple of Aclazotz
 ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ B | Amount$ 1 | SpellDescription$ Add {B}.
-A:AB$ GainLife | Cost$ T Sac<1/Creature> | LifeAmount$ X | References$ X | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
+A:AB$ GainLife | Cost$ T Sac<1/Creature> | LifeAmount$ X | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_of_aclazotz.jpg
 Oracle:(Transforms from Arguel's Blood Fast.)\n{T}: Add {B}.\n{T}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.

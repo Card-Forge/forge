@@ -4,7 +4,7 @@ Types:Legendary Creature Human Wizard
 PT:0/2
 A:AB$ Draw | Cost$ T | NumCards$ 1 | SubAbility$ DBDiscard | StackDescription$ SpellDescription | SpellDescription$ Draw a card, then discard a card. If there are five or more cards in your graveyard, exile CARDNAME, then return him to the battefield transformed under his owner's control.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBExile | StackDescription$ None
-SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ConditionCheckSVar$ X | References$ X | ConditionSVarCompare$ GE5 | SubAbility$ DBReturn | StackDescription$ None
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 | SubAbility$ DBReturn | StackDescription$ None
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | ForgetOtherRemembered$ True | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ValidGraveyard Card.YouOwn

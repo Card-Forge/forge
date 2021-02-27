@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Creature Elemental Spirit
 PT:*/*
 S:Mode$ CantPreventDamage | ValidSource$ Card.Self | Description$ Damage that would be dealt by CARDNAME can't be prevented.
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X,Y | Description$ CARDNAME's power and toughness are each equal to half the highest life total among your opponents, rounded up.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to half the highest life total among your opponents, rounded up.
 SVar:Y:PlayerCountOpponents$HighestLifeTotal
 SVar:X:SVar$Y/HalfUp
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malignus.jpg

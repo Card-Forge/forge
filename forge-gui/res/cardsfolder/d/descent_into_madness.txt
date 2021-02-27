@@ -4,7 +4,7 @@ Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a despair counter on CARDNAME, then each player exiles X permanents they control and/or cards from their hand, where X is the number of despair counters on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ DESPAIR | CounterNum$ 1 | SubAbility$ DBExileSelf
 SVar:DBExileSelf:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBExile
-SVar:DBExile:DB$ ChangeZone | DefinedPlayer$ Player.IsRemembered | Chooser$ Player.IsRemembered | ChangeType$ Permanent.RememberedPlayerCtrl,Card.RememberedPlayerCtrl | ChangeNum$ X | Hidden$ True | Origin$ Battlefield,Hand | Destination$ Exile | References$ X | Mandatory$ True
+SVar:DBExile:DB$ ChangeZone | DefinedPlayer$ Player.IsRemembered | Chooser$ Player.IsRemembered | ChangeType$ Permanent.RememberedPlayerCtrl,Card.RememberedPlayerCtrl | ChangeNum$ X | Hidden$ True | Origin$ Battlefield,Hand | Destination$ Exile | Mandatory$ True
 SVar:X:Count$CardCounters.DESPAIR
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

@@ -2,8 +2,8 @@ Name:Invoke the Firemind
 ManaCost:X U U R
 Types:Sorcery
 A:SP$ Charm | Cost$ X U U R | Choices$ DBDraw,DBDmg | CharmNum$ 1
-SVar:DBDraw:DB$ Draw | NumCards$ X | References$ X | SpellDescription$ Draw X cards.
-SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to any target.
+SVar:DBDraw:DB$ Draw | NumCards$ X | SpellDescription$ Draw X cards.
+SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invoke_the_firemind.jpg
 Oracle:Choose one —\n• Draw X cards.\n• Invoke the Firemind deals X damage to any target.

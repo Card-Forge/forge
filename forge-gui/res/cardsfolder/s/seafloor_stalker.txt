@@ -2,7 +2,7 @@ Name:Seafloor Stalker
 ManaCost:2 U
 Types:Creature Merfolk Rogue
 PT:2/3
-A:AB$ Pump | Cost$ 4 U | Defined$ Self | NumAtt$ +1 | KW$ HIDDEN Unblockable | ReduceCost$ X | References$ X | StackDescription$ SpellDescription | SpellDescription$ CARDNAME gets +1/+0 until end of turn and can't be blocked this turn. This ability costs {1} less to activate for each creature in your party.
+A:AB$ Pump | Cost$ 4 U | Defined$ Self | NumAtt$ +1 | KW$ HIDDEN Unblockable | ReduceCost$ X | StackDescription$ SpellDescription | SpellDescription$ CARDNAME gets +1/+0 until end of turn and can't be blocked this turn. This ability costs {1} less to activate for each creature in your party.
 SVar:X:Count$Party
 DeckHas:Ability$Party
 DeckHints:Type$Cleric|Warrior|Wizard

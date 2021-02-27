@@ -6,8 +6,8 @@ SVar:SetupSearch:DB$ Dig | Defined$ You | DigNum$ 5 | ChangeNum$ All | Destinati
 T:Mode$ SpellCast | ValidCard$ Card.sharesNameWith Remembered | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigFind | TriggerDescription$ Whenever you play a card with the same name as one of the exiled cards, you may put one of those cards with that name into its owner's hand. Then if there are no cards exiled with CARDNAME, sacrifice it. If you do, take an extra turn after this one.
 T:Mode$ LandPlayed | ValidCard$ Land.YouCtrl+sharesNameWith Remembered | TriggerZones$ Battlefield | Execute$ TrigFind | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever you play a card with the same name as one of the exiled cards, you may put one of those cards with that name into its owner's hand. Then if there are no cards exiled with CARDNAME, sacrifice it. If you do, take an extra turn after this one.
 SVar:TrigFind:DB$ ChangeZone | ChangeType$ TriggeredCard.sharesNameWith | Hidden$ True | TgtPrompt$ Select a card that shares a name with the played card | Origin$ Exile | Destination$ Hand | ChangeNum$ 1 | ForgetChanged$ True | SubAbility$ SacSelf
-SVar:SacSelf:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ StillLooking | ConditionSVarCompare$ EQ0 | References$ StillLooking | RememberSacrificed$ True | SubAbility$ AllFoundCelebration
-SVar:AllFoundCelebration:DB$ AddTurn | NumTurns$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | References$ X
+SVar:SacSelf:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ StillLooking | ConditionSVarCompare$ EQ0 | RememberSacrificed$ True | SubAbility$ AllFoundCelebration
+SVar:AllFoundCelebration:DB$ AddTurn | NumTurns$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1
 SVar:StillLooking:Remembered$Amount
 SVar:X:Remembered$Amount
 AI:RemoveDeck:Random

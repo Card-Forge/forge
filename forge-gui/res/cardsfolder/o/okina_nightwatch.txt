@@ -2,7 +2,7 @@ Name:Okina Nightwatch
 ManaCost:4 G
 Types:Creature Human Monk
 PT:4/3
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | CheckSVar$ X | SVarCompare$ GTY | References$ X,Y | Description$ As long as you have more cards in hand than each opponent, CARDNAME gets +3/+3.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | CheckSVar$ X | SVarCompare$ GTY | Description$ As long as you have more cards in hand than each opponent, CARDNAME gets +3/+3.
 SVar:X:Count$InYourHand
 SVar:Y:PlayerCountOpponents$HighestCardsInHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/okina_nightwatch.jpg

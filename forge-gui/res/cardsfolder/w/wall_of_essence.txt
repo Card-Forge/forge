@@ -4,7 +4,7 @@ Types:Creature Wall
 PT:0/4
 K:Defender
 T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigGain | TriggerDescription$ Whenever CARDNAME is dealt combat damage, you gain that much life.
-SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_essence.jpg

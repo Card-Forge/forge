@@ -4,6 +4,6 @@ Types:Creature Human Berserker
 PT:0/4
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +X/+0 until end of turn, where X is the greatest power among creatures you control.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | References$ X
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X
 SVar:X:Count$GreatestPower_Creature.YouCtrl
 Oracle:Haste\nWhenever Rubblebelt Rioters attacks, it gets +X/+0 until end of turn, where X is the greatest power among creatures you control.

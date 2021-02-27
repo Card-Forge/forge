@@ -3,7 +3,7 @@ ManaCost:1 W W
 Types:Enchantment Creature Spirit
 PT:0/0
 K:Bestow:2 W W
-S:Mode$ Continuous | Affected$ Card.Self,Card.EnchantedBy | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME and enchanted creature get +1/+1 for each creature you control and +1/+1 for each Aura you control.
+S:Mode$ Continuous | Affected$ Card.Self,Card.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ CARDNAME and enchanted creature get +1/+1 for each creature you control and +1/+1 for each Aura you control.
 SVar:X:Count$Valid Creature.YouCtrl,Aura.YouCtrl
 SVar:BuffedBy:Creature,Aura
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eidolon_of_countless_battles.jpg

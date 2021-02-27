@@ -4,7 +4,7 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBranch | TriggerDescription$ At the beginning of your upkeep, create a 1/1 white Spirit creature token with flying. If you're the monarch, create a 4/4 white Angel creature token with flying instead.
-SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | References$ X | TrueSubAbility$ DBAngel | FalseSubAbility$ DBSpirit
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | TrueSubAbility$ DBAngel | FalseSubAbility$ DBSpirit
 SVar:DBSpirit:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
 SVar:DBAngel:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying | TokenOwner$ You
 SVar:X:Count$Monarch.1.0

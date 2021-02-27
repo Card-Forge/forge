@@ -2,7 +2,7 @@ Name:Soulless One
 ManaCost:3 B
 Types:Creature Zombie Avatar
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X, Y | Description$ CARDNAME's power and toughness are each equal to the number of Zombies on the battlefield plus the number of Zombie cards in all graveyards.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Zombies on the battlefield plus the number of Zombie cards in all graveyards.
 SVar:X:Count$TypeOnBattlefield.Zombie/Plus.Y
 SVar:Y:Count$TypeInAllYards.Zombie
 AI:RemoveDeck:Random

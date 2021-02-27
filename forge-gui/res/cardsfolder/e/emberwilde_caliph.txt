@@ -6,7 +6,7 @@ K:Flying
 K:Trample
 K:CARDNAME attacks each combat if able.
 T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME deals damage, you lose that much life.
-SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X | References$ X
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emberwilde_caliph.jpg

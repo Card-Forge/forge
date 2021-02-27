@@ -4,7 +4,7 @@ Types:Creature Wall
 PT:0/3
 K:Defender
 T:Mode$ DamageDoneOnce | DamageSource$ Any | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME is dealt damage, you gain that much life.
-SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_hope.jpg

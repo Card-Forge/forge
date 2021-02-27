@@ -2,7 +2,7 @@ Name:Lord of Extinction
 ManaCost:3 B G
 Types:Creature Elemental
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in all graveyards.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in all graveyards.
 SVar:X:Count$InAllYards
 SVar:NeedsToPlayVar:X GE4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_extinction.jpg

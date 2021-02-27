@@ -1,7 +1,7 @@
 Name:Hatred
 ManaCost:3 B B
 Types:Instant
-A:SP$ Pump | Cost$ 3 B B PayLife<X> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | References$ X | SpellDescription$ Target creature gets +X/+0 until end of turn.
+A:SP$ Pump | Cost$ 3 B B PayLife<X> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | SpellDescription$ Target creature gets +X/+0 until end of turn.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:As an additional cost to cast this spell, pay X life.\nTarget creature gets +X/+0 until end of turn.

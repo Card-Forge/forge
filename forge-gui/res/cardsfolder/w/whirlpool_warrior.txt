@@ -7,7 +7,7 @@ SVar:WhirlYou:DB$ ChangeZoneAll | Defined$ You | Origin$ Hand | Destination$ Lib
 SVar:DBDraw:DB$Draw | NumCards$ X | Defined$ You | SubAbility$ DBCleanup
 A:AB$ RepeatEach | Cost$ R Sac<1/CARDNAME> | RepeatPlayers$ Player | RepeatSubAbility$ ShuffleHand | SpellDescription$ Each player shuffles the cards from their hand into their library, then draws that many cards.
 SVar:ShuffleHand:DB$ ChangeZoneAll | Defined$ Player.IsRemembered | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | RememberChanged$ True | Shuffle$ True | SubAbility$ WindDraw
-SVar:WindDraw:DB$ Draw | NumCards$ Y | Defined$ Player.IsRemembered | References$ Y | SubAbility$ DBCleanup
+SVar:WindDraw:DB$ Draw | NumCards$ Y | Defined$ Player.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 # Amount Minus 1 because the Player is also being remembered at this point

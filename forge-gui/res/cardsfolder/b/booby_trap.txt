@@ -10,7 +10,7 @@ SVar:TrigReveal:DB$ Reveal | Defined$ Player.Chosen | RevealValid$ Card.IsRememb
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Drawn | ValidCard$ Card.NamedCard+OwnedBy Player.Chosen | TriggerZones$ Battlefield | Execute$ TrapTriggered | TriggerDescription$ When the chosen player draws a card with the chosen name, sacrifice CARDNAME. If you do, CARDNAME deals 10 damage to that player.
 SVar:TrapTriggered:DB$ SacrificeAll | ValidCards$ Card.Self | RememberSacrificed$ True | SubAbility$ Explosion
-SVar:Explosion:DB$ DealDamage | NumDmg$ 10 | Defined$ Player.Chosen | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup | References$ X
+SVar:Explosion:DB$ DealDamage | NumDmg$ 10 | Defined$ Player.Chosen | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:X:Remembered$Amount
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/booby_trap.jpg

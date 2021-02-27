@@ -4,7 +4,7 @@ Types:Creature Human Artificer
 PT:2/3
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may have it deal damage to target creature equal to the number of artifacts you control.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X
 SVar:X:Count$TypeYouCtrl.Artifact
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reclusive_artificer.jpg

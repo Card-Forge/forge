@@ -9,7 +9,7 @@ A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Name$ Niko Aris Effect | Planeswalk
 SVar:DBPump:DB$ Pump | KW$ HIDDEN Unblockable | Defined$ Targeted
 SVar:Trig:Mode$ DamageDealtOnce | ValidSource$ Creature.IsRemembered | Execute$ Eff | TriggerDescription$ Whenever this creature deals damage this turn, return it to its owner's hand.
 SVar:Eff:DB$ ChangeZone | ValidTgts$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Hand
-A:AB$ DealDamage | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.tapped | NumDmg$ Y | References$ Y | TgtPrompt$ Select target tapped creature | SpellDescription$ CARDNAME deals 2 damage to target tapped creature for each card you've drawn this turn.
+A:AB$ DealDamage | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.tapped | NumDmg$ Y | TgtPrompt$ Select target tapped creature | SpellDescription$ CARDNAME deals 2 damage to target tapped creature for each card you've drawn this turn.
 SVar:Y:Count$YouDrewThisTurn/Twice
 A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ shard | TokenOwner$ You | SpellDescription$ Create a Shard token.
 DeckHas:Ability$Token & Ability$Sacrifice

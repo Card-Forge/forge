@@ -1,8 +1,8 @@
 Name:Command the Dreadhorde
 ManaCost:4 B B
 Types:Sorcery
-A:SP$ ChooseCard | Cost$ 4 B B | MinAmount$ 0 | Amount$ NumCreatPW | References$ NumCreatPW | ChoiceZone$ Graveyard | Choices$ Creature,Planeswalker | ChoiceTitle$ Choose any number of target creature and/or planeswalker cards in graveyards | RememberChosen$ True | SubAbility$ DBDamage | SpellDescription$ Choose any number of target creature and/or planeswalker cards in graveyards. CARDNAME deals damage to you equal to the total converted mana cost of those cards. Put them onto the battlefield under your control.
-SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ X | References$ X | SubAbility$ DBChangeZone
+A:SP$ ChooseCard | Cost$ 4 B B | MinAmount$ 0 | Amount$ NumCreatPW | ChoiceZone$ Graveyard | Choices$ Creature,Planeswalker | ChoiceTitle$ Choose any number of target creature and/or planeswalker cards in graveyards | RememberChosen$ True | SubAbility$ DBDamage | SpellDescription$ Choose any number of target creature and/or planeswalker cards in graveyards. CARDNAME deals damage to you equal to the total converted mana cost of those cards. Put them onto the battlefield under your control.
+SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ X | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | GainControl$ True | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NumCreatPW:Count$ValidGraveyard Creature,Planeswalker

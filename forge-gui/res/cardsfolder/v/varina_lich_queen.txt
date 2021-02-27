@@ -3,9 +3,9 @@ ManaCost:1 W U B
 Types:Legendary Creature Zombie Wizard
 PT:4/4
 T:Mode$ AttackersDeclared | ValidAttackers$ Zombie.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoot | TriggerDescription$ Whenever you attack with one or more Zombies, draw that many cards, then discard that many cards. You gain that much life.
-SVar:TrigLoot:DB$ Draw | NumCards$ X | References$ X | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ X | References$ X | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X 
+SVar:TrigLoot:DB$ Draw | NumCards$ X | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X 
 SVar:X:TriggerObjectsAttackers$Valid Zombie.YouCtrl
 A:AB$ Token | Cost$ 2 ExileFromGrave<2/Card> | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | LegacyImage$ b 2 2 zombie c18 | TokenTapped$ True | SpellDescription$ Create a tapped 2/2 black Zombie creature token.
 DeckHas:Ability$Token

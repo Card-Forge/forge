@@ -4,12 +4,12 @@ Types:Creature Horror
 PT:2/2
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ EatMyThoughts | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on it for each card in your hand. If you do, discard your hand.
-SVar:EatMyThoughts:DB$ PutCounter | Defined$ Self | CounterNum$ OldThoughts | CounterType$ P1P1 | References$ OldThoughts | RememberCards$ True | SubAbility$ GorgeOnThoughts
+SVar:EatMyThoughts:DB$ PutCounter | Defined$ Self | CounterNum$ OldThoughts | CounterType$ P1P1 | RememberCards$ True | SubAbility$ GorgeOnThoughts
 SVar:GorgeOnThoughts:DB$ Discard | Mode$ Hand | Defined$ You | ConditionDescription$ If you do, | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:OldThoughts:Count$InYourHand
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ BringBackThoughts | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, draw a card for each +1/+1 counter on it.
-SVar:BringBackThoughts:DB$ Draw | NumCards$ Disgorge | References$ Disgorge | Defined$ TriggeredCardController
+SVar:BringBackThoughts:DB$ Draw | NumCards$ Disgorge | Defined$ TriggeredCardController
 SVar:Disgorge:TriggeredCard$CardCounters.P1P1
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_gorger.jpg

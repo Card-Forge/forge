@@ -5,7 +5,7 @@ PT:3/3
 K:Devoid
 K:Flash
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast this spell, you may pay {C}. If you do, create a 1/1 colorless Eldrazi Scion creature token for each nontoken creature that died under your control this turn. Those tokens have "Sacrifice this creature: Add {C}."
-SVar:TrigToken:AB$ Token | Cost$ C | TokenAmount$ X | References$ X | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | LegacyImage$ c 1 1 eldrazi scion sac ogw
+SVar:TrigToken:AB$ Token | Cost$ C | TokenAmount$ X | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | LegacyImage$ c 1 1 eldrazi scion sac ogw
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.nonToken+YouCtrl
 DeckHints:Ability$Mana.Colorless
 DeckHas:Ability$Token

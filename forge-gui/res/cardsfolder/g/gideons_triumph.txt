@@ -1,7 +1,7 @@
 Name:Gideon's Triumph
 ManaCost:1 W
 Types:Instant
-A:SP$ Sacrifice | Cost$ 1 W | ValidTgts$ Opponent | SacValid$ Creature.attackedThisTurn,Creature.blockedThisTurn | SacMessage$ Creature that attacked or blocked this turn | Amount$ X | References$ X,Y | SpellDescription$ Target opponent sacrifices a creature that attacked or blocked this turn. If you control a Gideon planeswalker, that player sacrifices two of those creatures instead.
+A:SP$ Sacrifice | Cost$ 1 W | ValidTgts$ Opponent | SacValid$ Creature.attackedThisTurn,Creature.blockedThisTurn | SacMessage$ Creature that attacked or blocked this turn | Amount$ X | SpellDescription$ Target opponent sacrifices a creature that attacked or blocked this turn. If you control a Gideon planeswalker, that player sacrifices two of those creatures instead.
 SVar:Y:Count$Valid Planeswalker.Gideon+YouCtrl
 SVar:X:Count$Compare Y GE1.2.1
 Oracle:Target opponent sacrifices a creature that attacked or blocked this turn. If you control a Gideon planeswalker, that player sacrifices two of those creatures instead.

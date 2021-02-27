@@ -6,7 +6,7 @@ K:Flying
 A:AB$ Pump | Cost$ B PayLife<2> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
 AI:RemoveDeck:Random
 T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you lose life, draw that many cards. (Damage causes loss of life.)
-SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:TriggerCount$LifeAmount
 AI:RemoveDeck:Random
 Oracle:Flying\n{B}, Pay 2 life: Target creature gets -1/-1 until end of turn.\nWhenever you lose life, draw that many cards. (Damage causes loss of life.)

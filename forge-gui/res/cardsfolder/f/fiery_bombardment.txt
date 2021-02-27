@@ -1,7 +1,7 @@
 Name:Fiery Bombardment
 ManaCost:1 R
 Types:Enchantment
-A:AB$ DealDamage | Cost$ 2 Sac<1/Creature> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | PrecostDesc$ Chroma — | SpellDescription$ CARDNAME deals damage to any target equal to the number of red mana symbols in the sacrificed creature's mana cost.
+A:AB$ DealDamage | Cost$ 2 Sac<1/Creature> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | PrecostDesc$ Chroma — | SpellDescription$ CARDNAME deals damage to any target equal to the number of red mana symbols in the sacrificed creature's mana cost.
 SVar:X:Sacrificed$ChromaSource.Red
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All

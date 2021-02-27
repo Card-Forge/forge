@@ -4,7 +4,7 @@ Types:Legendary Creature Hydra
 PT:0/0
 K:etbCounter:P1P1:Y:no Condition:CARDNAME enters the battlefield with a number of +1/+1 counters on it equal to the amount of mana spent to cast it.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may exile target creature card with lesser power from your graveyard. If you do, create a token that's a copy of that card and that's tapped and attacking. Exile the token at the end of combat.
-SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl+powerLTZ | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select target creature card with lesser power in your graveyard | RememberChanged$ True | Optional$ True | SubAbility$ DBCopy | References$ Z
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl+powerLTZ | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select target creature card with lesser power in your graveyard | RememberChanged$ True | Optional$ True | SubAbility$ DBCopy
 SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | TokenTapped$ True | TokenAttacking$ True | AtEOT$ ExileCombat | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid

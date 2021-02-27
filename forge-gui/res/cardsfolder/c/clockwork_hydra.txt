@@ -6,7 +6,7 @@ K:etbCounter:P1P1:4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigClockworkRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks or blocks, remove a +1/+1 counter from it. If you do, CARDNAME deals 1 damage to any target.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigClockworkRemoveCounter | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, remove a +1/+1 counter from it. If you do, CARDNAME deals 1 damage to any target.
 SVar:TrigClockworkRemoveCounter:DB$ RemoveCounter | CounterType$ P1P1 | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ DBClockworkDamage
-SVar:DBClockworkDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | References$ ClockworkX | ConditionCheckSVar$ ClockworkX | ConditionSVarCompare$ GE1 | SubAbility$ DBClockworkCleanup
+SVar:DBClockworkDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | ConditionCheckSVar$ ClockworkX | ConditionSVarCompare$ GE1 | SubAbility$ DBClockworkCleanup
 A:AB$ PutCounter | Cost$ T | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 SVar:DBClockworkCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:ClockworkX:Count$RememberedSize

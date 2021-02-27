@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 PT:1/1
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, put a +1/+1 counter on it.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-A:AB$ AddTurn | Cost$ SubCounter<All/P1P1> | Defined$ You | NumTurns$ X | References$ X | SpellDescription$ For each five counters removed this way, take an extra turn after this one.
+A:AB$ AddTurn | Cost$ SubCounter<All/P1P1> | Defined$ You | NumTurns$ X | SpellDescription$ For each five counters removed this way, take an extra turn after this one.
 SVar:X:SVar$CostCountersRemoved/DivideEvenlyDown.5
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_of_hours.jpg

@@ -2,7 +2,7 @@ Name:Benediction of Moons
 ManaCost:W
 Types:Sorcery
 K:Haunt:TrigGainLife
-SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | SpellDescription$ You gain 1 life for each player.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SpellDescription$ You gain 1 life for each player.
 SVar:X:PlayerCountPlayers$Amount
 DeckHas:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benediction_of_moons.jpg

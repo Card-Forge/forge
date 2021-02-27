@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+0/-2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+HasCounters | TriggerZones$ Command | Execute$ TrigDamage | TriggerDescription$ Whenever a creature enters the battlefield under your control with a counter on it, you may have it deal damage equal to its power to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | DamageSource$ TriggeredCard | NumDmg$ Damage | References$ Damage
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | DamageSource$ TriggeredCard | NumDmg$ Damage
 SVar:Damage:TriggeredCard$CardPower
 SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Murderous Redcap Avatar.full.jpg
 Oracle:Hand +0, life -2\nWhenever a creature enters the battlefield under your control with a counter on it, you may have it deal damage equal to its power to any target.

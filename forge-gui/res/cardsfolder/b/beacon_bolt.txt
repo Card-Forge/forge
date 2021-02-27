@@ -2,7 +2,7 @@ Name:Beacon Bolt
 ManaCost:1 U R
 Types:Sorcery
 K:Jump-start
-A:SP$ DealDamage | Cost$ 1 U R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X,Y | SpellDescription$ CARDNAME deals damage to target creature equal to the total number of instant and sorcery cards you own in exile and in your graveyard.
+A:SP$ DealDamage | Cost$ 1 U R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the total number of instant and sorcery cards you own in exile and in your graveyard.
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn/Plus.Y
 SVar:Y:Count$ValidExile Instant.YouOwn,Sorcery.YouOwn
 DeckHints:Type$Instant|Sorcery

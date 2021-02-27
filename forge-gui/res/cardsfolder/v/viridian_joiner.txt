@@ -2,7 +2,7 @@ Name:Viridian Joiner
 ManaCost:2 G
 Types:Creature Elf Druid
 PT:1/2
-A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescription$ Add an amount of {G} equal to CARDNAME's power.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add an amount of {G} equal to CARDNAME's power.
 SVar:X:Count$CardPower
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_joiner.jpg

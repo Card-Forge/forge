@@ -10,8 +10,8 @@ SVar:RememberYou:DB$ Pump | RememberObjects$ You
 SVar:GainlifeOpp:DB$ GainLife | Defined$ Targeted | LifeAmount$ NumLife | SubAbility$ LoseLifeYou
 SVar:LoseLifeYou:DB$ LoseLife | Defined$ You | LifeAmount$ NumLife | SubAbility$ RememberOpp
 SVar:RememberOpp:DB$ Pump | RememberObjects$ Targeted
-SVar:DoubleLifeStake:DB$ StoreSVar | SVar$ NumLife | References$ NumLife | Type$ CountSVar | Expression$ NumLife/Times.2
-SVar:DBRestore:DB$ StoreSVar | SVar$ NumLife | References$ NumLife | Type$ Number | Expression$ 1
+SVar:DoubleLifeStake:DB$ StoreSVar | SVar$ NumLife | Type$ CountSVar | Expression$ NumLife/Times.2
+SVar:DBRestore:DB$ StoreSVar | SVar$ NumLife | Type$ Number | Expression$ 1
 SVar:NumLife:Number$1
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/game_of_chaos.jpg

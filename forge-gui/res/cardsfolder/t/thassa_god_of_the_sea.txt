@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Legendary Enchantment Creature God
 PT:5/5
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT5 | References$ X | Description$ As long as your devotion to blue is less than 5, CARDNAME isn't a creature. (Each {U} in the mana costs of permanents you control counts towards your devotion to blue.)
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT5 | Description$ As long as your devotion to blue is less than 5, CARDNAME isn't a creature. (Each {U} in the mana costs of permanents you control counts towards your devotion to blue.)
 SVar:X:Count$Devotion.Blue
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ At the beginning of your upkeep, scry 1.
 SVar:TrigScry:DB$ Scry | ScryNum$ 1

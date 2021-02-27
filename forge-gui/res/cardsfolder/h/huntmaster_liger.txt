@@ -4,6 +4,6 @@ Types:Creature Cat
 PT:3/4
 K:Mutate:2 W
 T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever this creature mutates, other creatures you control get +X/+X until end of turn, where X is the number of times this creature has mutated.
-SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl | NumAtt$ X | NumDef$ X | References$ X
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl | NumAtt$ X | NumDef$ X
 SVar:X:Count$TimesMutated
 Oracle:Mutate {2}{W} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nWhenever this creature mutates, other creatures you control get +X/+X until end of turn, where X is the number of times this creature has mutated.

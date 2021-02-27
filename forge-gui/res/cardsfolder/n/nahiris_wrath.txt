@@ -1,7 +1,7 @@
 Name:Nahiri's Wrath
 ManaCost:2 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 2 R Discard<X/Card> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | TargetMin$ 0 | TargetMax$ X | NumDmg$ Y | References$ X,Y | SpellDescription$ CARDNAME deals damage equal to the total converted mana cost of the discarded cards to each of up to X target creatures and/or planeswalkers.
+A:SP$ DealDamage | Cost$ 2 R Discard<X/Card> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | TargetMin$ 0 | TargetMax$ X | NumDmg$ Y | SpellDescription$ CARDNAME deals damage equal to the total converted mana cost of the discarded cards to each of up to X target creatures and/or planeswalkers.
 SVar:X:Count$xPaid
 SVar:Y:Discarded$CardManaCost
 AI:RemoveDeck:All

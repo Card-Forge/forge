@@ -1,7 +1,7 @@
 Name:The Great Henge
 ManaCost:7 G G
 Types:Legendary Artifact
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ CARDNAME costs {X} less to cast, where X is the greatest power among creatures you control.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {X} less to cast, where X is the greatest power among creatures you control.
 SVar:X:Count$GreatestPower_Creature.YouCtrl
 A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Add {G}{G}. You gain 2 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2

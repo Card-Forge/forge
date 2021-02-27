@@ -2,7 +2,7 @@ Name:Grasp of Fate
 ManaCost:1 W W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, for each opponent, exile up to one target nonland permanent that player controls until CARDNAME leaves the battlefield. (Those permanents return under their owners' control.)
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TargetMin$ 0 | TargetMax$ OneEach | References$ OneEach | TargetsWithDifferentControllers$ True | TgtPrompt$ Select up to one target nonland permanent each opponent controls | ConditionPresent$ Card.Self | SubAbility$ DBEffect
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | TgtPrompt$ Select up to one target nonland permanent each opponent controls | ConditionPresent$ Card.Self | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Triggers$ ComeBack | RememberObjects$ Targeted | ImprintCards$ Self | SVars$ TrigReturn,ExileSelf | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnMoved$ Exile
 SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ Those permanents are exiled until EFFECTSOURCE leaves the battlefield.
 SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ ExileSelf

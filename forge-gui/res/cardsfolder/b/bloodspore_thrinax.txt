@@ -4,7 +4,7 @@ Types:Creature Lizard
 PT:2/2
 K:Devour:1
 K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.YouCtrl+Other
-SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ X | References$ X | SpellDescription$ Each other creature you control enters the battlefield with an additional X +1/+1 counters on it, where X is the number of +1/+1 counters on CARDNAME.
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Each other creature you control enters the battlefield with an additional X +1/+1 counters on it, where X is the number of +1/+1 counters on CARDNAME.
 SVar:X:Count$CardCounters.P1P1
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodspore_thrinax.jpg

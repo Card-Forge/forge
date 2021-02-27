@@ -1,7 +1,7 @@
 Name:Titan's Presence
 ManaCost:3
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 Reveal<1/Creature.Colorless> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | ConditionCheckSVar$ X | ConditionSVarCompare$ LEY | References$ X,Y | SpellDescription$ Exile target creature if its power is less than or equal to the revealed card's power.
+A:SP$ ChangeZone | Cost$ 3 Reveal<1/Creature.Colorless> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | ConditionCheckSVar$ X | ConditionSVarCompare$ LEY | SpellDescription$ Exile target creature if its power is less than or equal to the revealed card's power.
 SVar:Y:Revealed$CardPower
 SVar:X:Targeted$CardPower
 AI:RemoveDeck:All

@@ -3,8 +3,8 @@ ManaCost:3 W
 Types:Creature Kor Warrior
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Kor Warrior creature token for each creature in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)
-SVar:TrigToken:DB$ Token | TokenAmount$ X | References$ X | TokenScript$ w_1_1_kor_warrior | TokenOwner$ You
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ4 | References$ X | Execute$ TrigPumpAll | TriggerDescription$ At the beginning of combat on your turn, if you have a full party, creatures you control get +1/+0 and gain indestructible until end of turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_kor_warrior | TokenOwner$ You
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ4 | Execute$ TrigPumpAll | TriggerDescription$ At the beginning of combat on your turn, if you have a full party, creatures you control get +1/+0 and gain indestructible until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ Indestructible
 SVar:X:Count$Party
 SVar:PlayMain1:TRUE

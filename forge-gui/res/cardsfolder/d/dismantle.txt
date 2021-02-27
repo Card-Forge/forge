@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Sorcery
 A:SP$ Destroy | Cost$ 2 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DBChoice | SpellDescription$ Destroy target artifact. If that artifact had counters on it, put that many +1/+1 counters or charge counters on an artifact you control.
 SVar:DBChoice:DB$ GenericChoice | Choices$ DBPutP1P1,DBPutCharge | ConditionDefined$ Targeted | ConditionPresent$ Card.HasCounters | ConditionCompare$ GE1 | StackDescription$ put that many +1/+1 counters or charge counters on an artifact you control.
-SVar:DBPutP1P1:DB$ PutCounter | Choices$ Artifact.YouCtrl | CounterType$ P1P1 | CounterNum$ X | References$ X | SpellDescription$ +1/+1
-SVar:DBPutCharge:DB$ PutCounter | Choices$ Artifact.YouCtrl | CounterType$ CHARGE | CounterNum$ X | References$ X | SpellDescription$ Charge
+SVar:DBPutP1P1:DB$ PutCounter | Choices$ Artifact.YouCtrl | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ +1/+1
+SVar:DBPutCharge:DB$ PutCounter | Choices$ Artifact.YouCtrl | CounterType$ CHARGE | CounterNum$ X | SpellDescription$ Charge
 SVar:X:TargetedLKI$CardCounters.ALL
 Oracle:Destroy target artifact. If that artifact had counters on it, put that many +1/+1 counters or charge counters on an artifact you control.

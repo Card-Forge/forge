@@ -4,13 +4,13 @@ Types:Plane Kephalai
 T:Mode$ PlaneswalkedTo | ValidCard$ Plane.Self | Execute$ AcquireScrolls | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, put a scroll counter on CARDNAME, then you gain life equal to the number of scroll counters on it.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ AcquireScrolls | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, put a scroll counter on CARDNAME, then you gain life equal to the number of scroll counters on it.
 SVar:AcquireScrolls:DB$ PutCounter | Defined$ Self | CounterType$ SCROLL | CounterNum$ 1 | SubAbility$ ScrollsOfLife
-SVar:ScrollsOfLife:DB$ GainLife | Defined$ You | LifeAmount$ NumScrolls | References$ NumScrolls
+SVar:ScrollsOfLife:DB$ GainLife | Defined$ You | LifeAmount$ NumScrolls
 SVar:NumScrolls:Count$CardCounters.SCROLL
 T:Mode$ Always | TriggerZones$ Command | CheckSVar$ NumScrolls | SVarCompare$ GE10 | Execute$ RolledWalk | TriggerDescription$ When CARDNAME has ten or more scroll counters on it, planeswalk.
 SVar:RolledWalk:DB$ Planeswalk
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, put a scroll counter on CARDNAME, then draw cards equal to the number of scroll counters on it.
 SVar:RolledChaos:DB$ PutCounter | Defined$ Self | CounterType$ SCROLL | CounterNum$ 1 | SubAbility$ ScrollsOfKnowledge
-SVar:ScrollsOfKnowledge:DB$ Draw | Defined$ You | NumCards$ NumScrolls | References$ NumScrolls
+SVar:ScrollsOfKnowledge:DB$ Draw | Defined$ You | NumCards$ NumScrolls
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aretopolis.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
 Oracle:When you planeswalk to Aretopolis or at the beginning of your upkeep, put a scroll counter on Aretopolis, then you gain life equal to the number of scroll counters on it.\nWhen Aretopolis has ten or more scroll counters on it, planeswalk.\nWhenever you roll {CHAOS}, put a scroll counter on Aretopolis, then draw cards equal to the number of scroll counters on it.

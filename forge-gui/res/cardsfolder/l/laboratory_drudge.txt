@@ -6,9 +6,9 @@ T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | 
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | ValidCard$ Card.wasCastFromGraveyard | Execute$ TrigStore | TriggerZones$ Battlefield | Static$ True
 T:Mode$ AbilityCast | ValidActivatingPlayer$ You | ValidCard$ Card.inZoneGraveyard | Execute$ TrigStore | TriggerZones$ Battlefield | Static$ True
-SVar:TrigStore:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 1 | References$ X
+SVar:TrigStore:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 1
 SVar:X:Number$0
 T:Mode$ TurnBegin | Execute$ TrigReset | Static$ True
-SVar:TrigReset:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 0 | References$ X
+SVar:TrigReset:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 0
 DeckHas:Ability$Graveyard
 Oracle:At the beginning of each end step, draw a card if you've cast a spell from a graveyard or activated an ability of a card in a graveyard this turn.

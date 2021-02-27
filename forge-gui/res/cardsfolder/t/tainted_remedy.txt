@@ -2,7 +2,7 @@ Name:Tainted Remedy
 ManaCost:2 B
 Types:Enchantment
 R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ Opponent | ReplaceWith$ RLoseLife | AiLogic$ LoseLife | Description$ If an opponent would gain life, that player loses that much life instead.
-SVar:RLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ ReplacedPlayer | References$ X
+SVar:RLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ ReplacedPlayer
 SVar:X:ReplaceCount$LifeGained
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random

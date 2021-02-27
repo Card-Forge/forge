@@ -6,7 +6,7 @@ A:AB$ ChangeZone | Cost$ 3 | ValidTgts$ Creature.Other+YouCtrl | Origin$ Battlef
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever another creature enters the battlefield under your control, you may pay {G/W}. If you do, put a +1/+1 counter on it. If it's a Unicorn, put two +1/+1 counters on it instead. 
-SVar:TrigPutCounter:AB$ PutCounter | Cost$ GW | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ X | References$ X,Y
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ GW | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ X
 SVar:X:Count$Compare Y GE1.2.1
 SVar:Y:TriggeredCard$Valid Card.Unicorn
 DeckHas:Ability$Counters

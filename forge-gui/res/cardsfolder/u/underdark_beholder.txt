@@ -4,14 +4,14 @@ Types:Creature Beholder
 PT:6/6
 K:etbCounter:EYESTALK:10
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ Counters | Description$ If damage would be dealt to CARDNAME, instead remove that many eyestalk counters from it. If you can't, sacrifice it.
-SVar:Counters:DB$ RemoveCounter | Defined$ ReplacedTarget | CounterType$ EYESTALK | CounterNum$ X | References$ X | RememberRemoved$ True | SubAbility$ DBSac
-SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionCheckSVar$ Y | ConditionSVarCompare$ LTX | References$ Y | SubAbility$ DBCleanup
+SVar:Counters:DB$ RemoveCounter | Defined$ ReplacedTarget | CounterType$ EYESTALK | CounterNum$ X | RememberRemoved$ True | SubAbility$ DBSac
+SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionCheckSVar$ Y | ConditionSVarCompare$ LTX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:ReplaceCount$DamageAmount
 SVar:Y:Count$RememberedSize
 SVar:Z:Count$CardCounters.EYESTALK
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME attacks, reveal cards from the top of your library until you reveal an instant, sorcery, or enchantment card with converted mana cost less than the number of eyestalk counters on CARDNAME. You may cast it without paying its mana cost. Shuffle your library.
-SVar:TrigDig:DB$ DigUntil | Defined$ You | Amount$ 1 | Valid$ Card.Instant+cmcLEZ,Card.Sorcery+cmcLEZ,Card.Enchantment+cmcLEZ | References$ Z | FoundDestination$ Exile | RevealedDestination$ Exile | ImprintRevealed$ True | RememberFound$ True | SubAbility$ CascadeCast
+SVar:TrigDig:DB$ DigUntil | Defined$ You | Amount$ 1 | Valid$ Card.Instant+cmcLEZ,Card.Sorcery+cmcLEZ,Card.Enchantment+cmcLEZ | FoundDestination$ Exile | RevealedDestination$ Exile | ImprintRevealed$ True | RememberFound$ True | SubAbility$ CascadeCast
 SVar:CascadeCast:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | SubAbility$ CascadeMoveToLib
 SVar:CascadeMoveToLib:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Card.IsImprinted | Origin$ Exile | Destination$ Library | RandomOrder$ True | Shuffle$ True | SubAbility$ DBCleanup
 DeckHas:Ability$Counters

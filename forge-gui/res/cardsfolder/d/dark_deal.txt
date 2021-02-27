@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Sorcery
 A:SP$ RepeatEach | Cost$ 2 B | RepeatPlayers$ Player | RepeatSubAbility$ DBDiscard | SpellDescription$ Each player discards all the cards in their hand, then draws that many cards minus one.
 SVar:DBDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | References$ X | SubAbility$ CleanDrawn
+SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | SubAbility$ CleanDrawn
 SVar:CleanDrawn:DB$ Cleanup | ClearRemembered$ True
 # This calculation isn't considering the remembered player, only the remembered cards?
 SVar:X:Remembered$Amount.Minus.1

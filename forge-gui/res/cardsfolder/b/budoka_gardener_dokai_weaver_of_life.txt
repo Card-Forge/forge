@@ -15,7 +15,7 @@ ManaCost:1 G
 Colors:green
 Types:Legendary Creature Human Monk
 PT:3/3
-A:AB$Token | Cost$ 4 G G T | TokenAmount$ 1 | TokenScript$ g_x_x_elemental | LegacyImage$ g x x elemental chk | TokenPower$ X | TokenToughness$ X | References$ X | TokenOwner$ You | SpellDescription$ Create an X/X green Elemental creature token, where X is the number of lands you control.
+A:AB$Token | Cost$ 4 G G T | TokenAmount$ 1 | TokenScript$ g_x_x_elemental | LegacyImage$ g x x elemental chk | TokenPower$ X | TokenToughness$ X | TokenOwner$ You | SpellDescription$ Create an X/X green Elemental creature token, where X is the number of lands you control.
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dokai_weaver_of_life.jpg
 Oracle:{4}{G}{G}, {T}: Create an X/X green Elemental creature token, where X is the number of lands you control.

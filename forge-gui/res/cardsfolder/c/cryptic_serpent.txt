@@ -2,7 +2,7 @@ Name:Cryptic Serpent
 ManaCost:5 U U
 Types:Creature Serpent
 PT:6/5
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each instant and sorcery card in your graveyard.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each instant and sorcery card in your graveyard.
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 DeckHints:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptic_serpent.jpg

@@ -5,7 +5,7 @@ PT:2/2
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 A:AB$ ChangeZone | Cost$ 2 | Defined$ BottomOfLibrary | Origin$ Library | Destination$ Graveyard | RememberChanged$ True | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ Put the bottom card of your library into your graveyard. If it's a creature card with power less than or equal to CARDNAME's power, put it onto the battlefield.
-SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | Hidden$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature+powerLEY | ConditionCompare$ GE1 | References$ Y | SubAbility$ DBCleanup
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | Hidden$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature+powerLEY | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Count$CardPower
 AI:RemoveDeck:All

@@ -2,7 +2,7 @@ Name:Cackling Witch
 ManaCost:1 B
 Types:Creature Human Spellshaper
 PT:1/1
-A:AB$ Pump | Cost$ X B T Discard<1/Card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | References$ X | SpellDescription$ Target creature gets +X/+0 until end of turn.
+A:AB$ Pump | Cost$ X B T Discard<1/Card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SpellDescription$ Target creature gets +X/+0 until end of turn.
 SVar:X:Count$xPaid
 SVar:AIPreference:DiscardCost$Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cackling_witch.jpg

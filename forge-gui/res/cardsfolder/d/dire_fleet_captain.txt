@@ -3,7 +3,7 @@ ManaCost:B R
 Types:Creature Orc Pirate
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+1 until end of turn for each other attacking Pirate.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ X | References$ X
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ X
 SVar:X:Count$Valid Pirate.attacking+Other
 DeckHints:Type$Pirate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dire_fleet_captain.jpg

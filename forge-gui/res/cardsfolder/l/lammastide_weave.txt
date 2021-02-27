@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Instant
 A:SP$ NameCard | Cost$ 1 G | Defined$ You | SubAbility$ DBMill | SpellDescription$ Choose a card name, then target player mills a card. If a card with the chosen name was milled this way, you gain life equal to its converted mana cost. Draw a card.
 SVar:DBMill:DB$ Mill | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | RememberMilled$ True | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | References$ X,Y | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ1 | SubAbility$ DBDraw
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ1 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost

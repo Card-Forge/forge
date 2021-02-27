@@ -3,13 +3,13 @@ ManaCost:1 B
 Types:Instant
 K:Entwine:B
 A:SP$ Charm | Cost$ 1 B | Choices$ DBSac,DBChooseNumber | CharmNum$ 1
-SVar:DBSac:DB$ Sacrifice | Defined$ You | Amount$ SacX | References$ SacX | SacValid$ Creature | RememberSacrificed$ True | Optional$ True | SubAbility$ DBGainLife | SpellDescription$ Sacrifice any number of creatures, then you gain 3 life for each sacrificed creature.
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ GainLifeX | References$ GainLifeX | SubAbility$ DBCleanup
+SVar:DBSac:DB$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Creature | RememberSacrificed$ True | Optional$ True | SubAbility$ DBGainLife | SpellDescription$ Sacrifice any number of creatures, then you gain 3 life for each sacrificed creature.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ GainLifeX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Creature.YouCtrl
 SVar:GainLifeX:Count$RememberedSize/Thrice
-SVar:DBChooseNumber:DB$ ChooseNumber | Defined$ You | ListTitle$ Pay X life? | Max$ LifeAmountX | AILogic$ DigACard | References$ LifeAmountX | SubAbility$ DBLoseLife | SpellDescription$ Pay X life, then look at the top X cards of your library. Put one of those cards into your hand, and exile the rest.
-SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ Y | References$ Y | SubAbility$ DBDig
+SVar:DBChooseNumber:DB$ ChooseNumber | Defined$ You | ListTitle$ Pay X life? | Max$ LifeAmountX | AILogic$ DigACard | SubAbility$ DBLoseLife | SpellDescription$ Pay X life, then look at the top X cards of your library. Put one of those cards into your hand, and exile the rest.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ Y | SubAbility$ DBDig
 SVar:DBDig:DB$ Dig | DigNum$ AFLifeLost | DestinationZone2$ Exile
 SVar:Y:Count$ChosenNumber
 SVar:LifeAmountX:Count$YourLifeTotal/LimitMin.0

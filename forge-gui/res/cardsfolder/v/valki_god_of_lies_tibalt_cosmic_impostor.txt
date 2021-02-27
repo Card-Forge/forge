@@ -11,7 +11,7 @@ SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Valid
 SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Hand | ChangeType$ Card.IsRemembered | SubAbility$ ExileSelf
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | ClearRemembered$ True
-A:AB$ ChooseCard | Cost$ X | ChoiceZone$ Exile | Choices$ Card.Creature+ExiledWithSource+cmcEQX | References$ X | Amount$ 1 | ChoiceTitle$ Choose a card exiled with Valki with converted mana cost X | SubAbility$ DBClone | AILogic$ Never | StackDescription$ {p:You} chooses a card exiled with NICKNAME with converted mana cost X. NICKNAME becomes a copy of that card. | SpellDescription$ Choose a card exiled with NICKNAME with converted mana cost X. NICKNAME becomes a copy of that card.
+A:AB$ ChooseCard | Cost$ X | ChoiceZone$ Exile | Choices$ Card.Creature+ExiledWithSource+cmcEQX | Amount$ 1 | ChoiceTitle$ Choose a card exiled with Valki with converted mana cost X | SubAbility$ DBClone | AILogic$ Never | StackDescription$ {p:You} chooses a card exiled with NICKNAME with converted mana cost X. NICKNAME becomes a copy of that card. | SpellDescription$ Choose a card exiled with NICKNAME with converted mana cost X. NICKNAME becomes a copy of that card.
 SVar:DBClone:DB$ Clone | Defined$ ChosenCard | SubAbility$ DBClearChosen
 SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True
 SVar:X:Count$xPaid

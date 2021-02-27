@@ -2,7 +2,7 @@ Name:Crypt Rats
 ManaCost:2 B
 Types:Creature Rat
 PT:1/1
-A:AB$ DamageAll | Cost$ X | XColor$ B | NumDmg$ X | ValidCards$ Creature | ValidPlayers$ Player | References$ X | ValidDescription$ each creature and each player. | SpellDescription$ Crypt Rats deals X damage to each creature and each player. Spend only black mana on X.
+A:AB$ DamageAll | Cost$ X | XColor$ B | NumDmg$ X | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ Crypt Rats deals X damage to each creature and each player. Spend only black mana on X.
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_rats.jpg
 Oracle:{X}: Crypt Rats deals X damage to each creature and each player. Spend only black mana on X.

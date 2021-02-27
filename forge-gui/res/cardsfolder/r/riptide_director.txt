@@ -2,7 +2,7 @@ Name:Riptide Director
 ManaCost:2 U U
 Types:Creature Human Wizard
 PT:2/3
-A:AB$ Draw | Cost$ 2 U U T | NumCards$ X | References$ X | SpellDescription$ Draw a card for each Wizard you control.
+A:AB$ Draw | Cost$ 2 U U T | NumCards$ X | SpellDescription$ Draw a card for each Wizard you control.
 SVar:X:Count$TypeYouCtrl.Wizard
 AI:RemoveDeck:Random
 SVar:NonCombatPriority:3

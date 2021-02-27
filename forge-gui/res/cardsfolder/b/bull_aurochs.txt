@@ -4,7 +4,7 @@ Types:Creature Aurochs
 PT:2/1
 K:Trample
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | References$ X
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X
 SVar:X:Count$Valid Aurochs.attacking+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bull_aurochs.jpg
 Oracle:Trample\nWhenever Bull Aurochs attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.

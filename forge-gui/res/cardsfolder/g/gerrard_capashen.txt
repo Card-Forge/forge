@@ -3,7 +3,7 @@ ManaCost:3 W W
 Types:Legendary Creature Human Soldier
 PT:3/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you gain 1 life for each card in target opponent's hand.
-SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defined$ You | References$ X
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defined$ You
 A:AB$ Tap | Cost$ 3 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsPresent$ Card.Self+attacking | SpellDescription$ Tap target creature. Activate this ability only if CARDNAME is attacking.
 SVar:X:TargetedPlayer$CardsInHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gerrard_capashen.jpg

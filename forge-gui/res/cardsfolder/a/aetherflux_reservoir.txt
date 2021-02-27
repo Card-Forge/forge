@@ -2,7 +2,7 @@ Name:Aetherflux Reservoir
 ManaCost:4
 Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, you gain 1 life for each spell you've cast this turn.
-SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$ThisTurnCast_Card.YouCtrl
 A:AB$ DealDamage | Cost$ PayLife<50> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 50 | SpellDescription$ CARDNAME deals 50 damage to any target.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherflux_reservoir.jpg

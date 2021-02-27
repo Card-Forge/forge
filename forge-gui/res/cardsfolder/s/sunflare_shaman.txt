@@ -2,8 +2,8 @@ Name:Sunflare Shaman
 ManaCost:1 R
 Types:Creature Elemental Shaman
 PT:2/1
-A:AB$ DealDamage | Cost$ 1 R T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | DamageMap$ True | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals X damage to any target and X damage to itself, where X is the number of Elemental cards in your graveyard.
-SVar:DBDealDamage:DB$ DealDamage | NumDmg$ X | References$ X | Defined$ Self | SubAbility$ DBDamageResolve
+A:AB$ DealDamage | Cost$ 1 R T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | DamageMap$ True | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals X damage to any target and X damage to itself, where X is the number of Elemental cards in your graveyard.
+SVar:DBDealDamage:DB$ DealDamage | NumDmg$ X | Defined$ Self | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:X:Count$TypeInYourYard.Elemental
 AI:RemoveDeck:Random

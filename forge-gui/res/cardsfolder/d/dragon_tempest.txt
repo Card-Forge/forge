@@ -4,7 +4,7 @@ Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Creature.YouCtrl+withFlying | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature with flying enters the battlefield under your control, it gains haste until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredCard | KW$ Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dragon.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a Dragon enters the battlefield under your control, it deals X damage to any target, where X is the number of Dragons you control.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | NumDmg$ NumDragons | References$ NumDragons | TgtPrompt$ Select any target | DamageSource$ TriggeredCard
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | NumDmg$ NumDragons | TgtPrompt$ Select any target | DamageSource$ TriggeredCard
 SVar:NumDragons:Count$Valid Dragon.YouCtrl
 SVar:BuffedBy:Creature.withFlying
 DeckHints:Type$Dragon & Keyword$Flying

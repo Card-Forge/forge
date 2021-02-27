@@ -1,7 +1,7 @@
 Name:Magmaquake
 ManaCost:X R R
 Types:Instant
-A:SP$ DamageAll | Cost$ X R R | ValidCards$ Creature.withoutFlying,Planeswalker | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying and to each planeswalker.
+A:SP$ DamageAll | Cost$ X R R | ValidCards$ Creature.withoutFlying,Planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying and to each planeswalker.
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magmaquake.jpg
 Oracle:Magmaquake deals X damage to each creature without flying and each planeswalker.

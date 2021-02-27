@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ B
 SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self | NonLegendary$ True | SetLoyalty$ 1
 A:AB$ Scry | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ScryNum$ 2 | SpellDescription$ Scry 2.
 A:AB$ Draw | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumCards$ 1 | Reveal$ True | RememberDrawn$ True | SubAbility$ DBRemoveCounters | SpellDescription$ Draw a card and reveal it. Remove a number of loyalty counters equal to that card's converted mana cost from CARDNAME.
-SVar:DBRemoveCounters:DB$ RemoveCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBRemoveCounters:DB$ RemoveCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 DeckHas:Ability$Token

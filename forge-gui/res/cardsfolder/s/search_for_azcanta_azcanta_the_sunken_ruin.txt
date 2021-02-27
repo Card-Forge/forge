@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Legendary Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, look at the top card of your library. You may put it into your graveyard. Then if you have seven or more cards in your graveyard, you may transform CARDNAME.
 SVar:TrigDig:DB$ Dig | DigNum$ 1 | DestinationZone$ Graveyard | Optional$ True | LibraryPosition2$ 0 | SubAbility$ DBTransform | SpellDescription$ Look at the top card of your library. You may put that card into your graveyard. Then if you have seven or more cards in your graveyard, you may transform CARDNAME.
-SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | Optional$ True | ConditionCheckSVar$ GraveCount | ConditionSVarCompare$ GE7 | References$ GraveCount
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | Optional$ True | ConditionCheckSVar$ GraveCount | ConditionSVarCompare$ GE7
 SVar:GraveCount:Count$ValidGraveyard Card.YouOwn
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/search_for_azcanta.jpg

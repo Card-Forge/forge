@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Goblin Warrior
 PT:1/1
 K:Haste
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | References$ X | Description$ CARDNAME gets +1/+1 as long as you control another red creature.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control another red creature.
 SVar:X:Count$Valid Creature.YouCtrl+Red+Other
 SVar:BuffedBy:Creature.Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mudbrawler_cohort.jpg

@@ -5,7 +5,7 @@ PT:5/5
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDoublePower | TriggerDescription$ When CARDNAME enters the battlefield, double the power of each other creature you control until end of turn. Those creatures gain vigilance until end of turn.
 SVar:TrigDoublePower:DB$ RepeatEach | RepeatCards$ Creature.YouCtrl+Other | RepeatSubAbility$ DBPump | SubAbility$ DBPumpAll
-SVar:DBPump:DB$ Pump | Defined$ Remembered | NumAtt$ X | References$ X
+SVar:DBPump:DB$ Pump | Defined$ Remembered | NumAtt$ X
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl+Other | KW$ Vigilance
 SVar:X:Remembered$CardPower
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard,Exile | ValidCard$ Card.Self | Execute$ TriReturn | OptionalDecider$ You | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.

@@ -2,7 +2,7 @@ Name:Pride of Conquerors
 ManaCost:1 W
 Types:Instant
 K:Ascend
-A:SP$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | NumAtt$ X | NumDef$ X | References$ X | SpellDescription$ Creatures you control get +1/+1 until end of turn. If you have the city's blessing, those creatures get +2/+2 until end of turn instead.
+A:SP$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | NumAtt$ X | NumDef$ X | SpellDescription$ Creatures you control get +1/+1 until end of turn. If you have the city's blessing, those creatures get +2/+2 until end of turn instead.
 SVar:X:Count$Blessing.2.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pride_of_conquerors.jpg
 Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nCreatures you control get +1/+1 until end of turn. If you have the city's blessing, those creatures get +2/+2 until end of turn instead.

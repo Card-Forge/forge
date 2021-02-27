@@ -2,7 +2,7 @@ Name:Pestilence Rats
 ManaCost:2 B
 Types:Creature Rat
 PT:*/3
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | References$ X | Description$ CARDNAME's power is equal to the number of other Rats on the battlefield.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of other Rats on the battlefield.
 SVar:X:Count$Valid Rat.Other
 SVar:BuffedBy:Rat
 AI:RemoveDeck:Random

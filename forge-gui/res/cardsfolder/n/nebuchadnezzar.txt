@@ -3,7 +3,7 @@ ManaCost:3 U B
 Types:Legendary Creature Human Wizard
 PT:3/3
 A:AB$ NameCard | Cost$ X T | Defined$ You | SubAbility$ DBReveal | PlayerTurn$ True | SpellDescription$ Choose a card name. Target opponent reveals X cards at random from their hand. Then that player discards all cards with that name revealed this way. Activate this ability only during your turn.
-SVar:DBReveal:DB$ Reveal | ValidTgts$ Opponent | Random$ True | NumCards$ X | References$ X | RememberRevealed$ True | SubAbility$ DBDiscard
+SVar:DBReveal:DB$ Reveal | ValidTgts$ Opponent | Random$ True | NumCards$ X | RememberRevealed$ True | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | DefinedCards$ ValidHand Card.IsRemembered+NamedCard | Defined$ Targeted | Mode$ Defined | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid

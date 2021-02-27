@@ -4,7 +4,7 @@ Types:Creature Spider
 PT:1/2
 K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage equal to its power to target creature with flying an opponent controls.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl+withFlying | TgtPrompt$ Select target creature with flying an opponent controls | NumDmg$ X | References$ X
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl+withFlying | TgtPrompt$ Select target creature with flying an opponent controls | NumDmg$ X
 SVar:X:Count$CardPower
 K:Escape:3 G G ExileFromGrave<4/Card.Other/other>
 K:etbCounter:P1P1:3:ValidCard$ Card.Self+escaped:CARDNAME escapes with three +1/+1 counters on it.

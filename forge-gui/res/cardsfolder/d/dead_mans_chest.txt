@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature an opponent controls
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigExile | TriggerDescription$ When enchanted creature dies, exile cards equal to its power from the top of its owner's library. You may cast spells from among those cards for as long as they remain exiled, and you may spend mana as though it were mana of any type to cast those spells.
-SVar:TrigExile:DB$ Dig | Defined$ TriggeredCardOwner | DigNum$ X | ChangeNum$ All | References$ X | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:TrigExile:DB$ Dig | Defined$ TriggeredCardOwner | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | Duration$ Permanent | SubAbility$ DBCleanup | SpellDescription$ You may cast nonland cards from among them as long as they remain exiled, and you may spend mana as though it were mana of any type to cast those spells.
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.nonLand+IsRemembered | AffectedZone$ Exile | Description$ You may cast nonland cards from among them as long as they remain exiled, and you may spend mana as though it were mana of any type to cast those spells.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

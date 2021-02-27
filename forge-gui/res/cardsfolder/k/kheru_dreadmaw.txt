@@ -3,7 +3,7 @@ ManaCost:4 B
 Types:Creature Zombie Crocodile
 PT:4/4
 K:Defender
-A:AB$ GainLife | Cost$ 1 G Sac<1/Creature.Other/another creature> | LifeAmount$ X | References$ X | SubAbility$ DBCleanup | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
+A:AB$ GainLife | Cost$ 1 G Sac<1/Creature.Other/another creature> | LifeAmount$ X | SubAbility$ DBCleanup | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All

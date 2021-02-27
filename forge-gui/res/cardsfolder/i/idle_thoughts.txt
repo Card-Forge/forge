@@ -1,7 +1,7 @@
 Name:Idle Thoughts
 ManaCost:3 U
 Types:Enchantment
-A:AB$ Draw | Cost$ 2 | NumCards$ 1 | AICheckSVar$ X | AISVarCompare$ EQ0 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | SpellDescription$ Draw a card if you have no cards in hand.
+A:AB$ Draw | Cost$ 2 | NumCards$ 1 | AICheckSVar$ X | AISVarCompare$ EQ0 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SpellDescription$ Draw a card if you have no cards in hand.
 SVar:X:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/idle_thoughts.jpg
 Oracle:{2}: Draw a card if you have no cards in hand.

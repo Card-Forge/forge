@@ -5,7 +5,7 @@ PT:2/1
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a instant or sorcery spell, you may put a charge counter on CARDNAME.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw X cards, where X is the number of charge counters on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
-SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$CardCounters.CHARGE
 SVar:BuffedBy:Instant,Sorcery
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surrakar_spellblade.jpg

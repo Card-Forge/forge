@@ -2,7 +2,7 @@ Name:Kumena's Speaker
 ManaCost:G
 Types:Creature Merfolk Shaman
 PT:1/1
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ TotalX | SVarCompare$ GE1 | References$ TotalX | Description$ CARDNAME gets +1/+1 as long as you control another Merfolk or an Island.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ TotalX | SVarCompare$ GE1otalX | Description$ CARDNAME gets +1/+1 as long as you control another Merfolk or an Island.
 SVar:X1:Count$Valid Island.YouCtrl
 SVar:X2:Count$Valid Creature.Merfolk+Other+YouCtrl
 SVar:TotalX:SVar$X1/Plus.X2

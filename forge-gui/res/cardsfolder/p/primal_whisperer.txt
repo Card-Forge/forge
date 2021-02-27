@@ -3,7 +3,7 @@ ManaCost:4 G
 Types:Creature Elf Soldier
 PT:2/2
 K:Morph:3 G
-S:Mode$ Continuous | Affected$ Card.Self+faceUp | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +2/+2 for each face-down creature on the battlefield.
+S:Mode$ Continuous | Affected$ Card.Self+faceUp | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +2/+2 for each face-down creature on the battlefield.
 SVar:X:Count$Valid Creature.faceDown/Times.2
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_whisperer.jpg

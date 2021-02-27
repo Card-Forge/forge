@@ -4,7 +4,7 @@ Types:Creature Insect Horror
 PT:4/4
 K:Infect
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 1/1 green Insect creature token with infect for each poison counter your opponents have.
-SVar:TrigToken:DB$Token | TokenAmount$ X | References$ X | TokenScript$ g_1_1_insect_infect | TokenOwner$ You | LegacyImage$ g 1 1 insect infect nph
+SVar:TrigToken:DB$Token | TokenAmount$ X | TokenScript$ g_1_1_insect_infect | TokenOwner$ You | LegacyImage$ g 1 1 insect infect nph
 SVar:X:Count$TotalOppPoisonCounters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_swarmlord.jpg
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nAt the beginning of your upkeep, create a 1/1 green Insect creature token with infect for each poison counter your opponents have.

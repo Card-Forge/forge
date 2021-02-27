@@ -3,7 +3,7 @@ ManaCost:X U U U
 Types:Legendary Creature Human Wizard
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw X cards.
-SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$xPaid
 T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever you cast a blue spell, tap target nonland permanent an opponent controls.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Permanent.OppCtrl+nonLand | TgtPrompt$ Select target nonland permanent an opponent controls

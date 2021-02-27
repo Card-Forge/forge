@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Legendary Enchantment Creature God
 PT:5/6
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT5 | References$ X | Description$ As long as your devotion to white is less than 5, CARDNAME isn't a creature. (Each {W} in the mana costs of permanents you control counts towards your devotion to white.)
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT5 | Description$ As long as your devotion to white is less than 5, CARDNAME isn't a creature. (Each {W} in the mana costs of permanents you control counts towards your devotion to white.)
 SVar:X:Count$Devotion.White
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Vigilance | Description$ Other creatures you control have vigilance.
 A:AB$ Token | Cost$ 2 W W | TokenAmount$ 1 | TokenScript$ w_2_1_e_cleric | TokenOwner$ You | LegacyImage$ w 2 1 e cleric ths | SpellDescription$ Create a 2/1 white Cleric enchantment creature token.

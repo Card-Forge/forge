@@ -3,7 +3,7 @@ ManaCost:W
 Types:Instant
 A:SP$ Pump | Cost$ W | ValidTgts$ Opponent | StackDescription$ None | SubAbility$ DBChangeZone | SpellDescription$ Search your library for a Plains card. If target opponent controls more lands than you, you may search your library for an additional Plains card. Reveal those cards and put them into your hand. Then shuffle your library.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Plains | ChangeNum$ 1 | NoShuffle$ True | SubAbility$ DBOptionalSearch
-SVar:DBOptionalSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Plains | ChangeNum$ 1 | Optional$ True | NoShuffle$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ Y,Z,X | SubAbility$ DBShuffle
+SVar:DBOptionalSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Plains | ChangeNum$ 1 | Optional$ True | NoShuffle$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ Shuffle | Defined$ You
 SVar:Y:Count$Valid Land.YouCtrl
 SVar:Z:Count$Valid Land.TargetedPlayerCtrl

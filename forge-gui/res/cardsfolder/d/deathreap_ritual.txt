@@ -1,7 +1,7 @@
 Name:Deathreap Ritual
 ManaCost:2 B G
 Types:Enchantment
-T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | References$ X | TriggerDescription$ Morbid — At the beginning of each end step, if a creature died this turn, you may draw a card.
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Morbid — At the beginning of each end step, if a creature died this turn, you may draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathreap_ritual.jpg

@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact Creature Gargoyle
 PT:4/4
 K:Defender
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | CheckSVar$ X | SVarCompare$ GE1 | References$ X | Description$ CARDNAME has indestructible as long as it has defender.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has indestructible as long as it has defender.
 SVar:X:Count$Valid Card.Self+withDefender
 A:AB$ Debuff | Cost$ 1 | Keywords$ Defender | Defined$ Self | SubAbility$ DBFlight | SpellDescription$ Until end of turn, CARDNAME loses defender and gains flying.
 SVar:DBFlight:DB$ Pump | Defined$ Self | KW$ Flying

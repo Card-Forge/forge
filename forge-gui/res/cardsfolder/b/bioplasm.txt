@@ -4,7 +4,7 @@ Types:Creature Ooze
 PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile the top card of your library. If it's a creature card, CARDNAME gets +X/+Y until end of turn, where X is the exiled creature card's power and Y is its toughness.
 SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ Y | ConditionCheckSVar$ Z | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup | References$ X,Y,Z
+SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ Y | ConditionCheckSVar$ Z | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
 SVar:Y:Remembered$CardToughness

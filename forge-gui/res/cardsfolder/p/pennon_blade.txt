@@ -2,7 +2,7 @@ Name:Pennon Blade
 ManaCost:3
 Types:Artifact Equipment
 K:Equip:4
-S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | References$ X | Description$ Equipped creature gets +1/+1 for each creature you control.
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each creature you control.
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pennon_blade.jpg

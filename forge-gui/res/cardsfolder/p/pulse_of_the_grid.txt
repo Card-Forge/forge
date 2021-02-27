@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Instant
 A:SP$ Draw | Cost$ 1 U U | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card. Then if an opponent has more cards in hand than you, return CARDNAME to its owner's hand.
 SVar:DBDiscard:DB$Discard | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ TrigReturn
-SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand | ConditionCheckSVar$ X | ConditionSVarCompare$ GTY | References$ X,Y
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand | ConditionCheckSVar$ X | ConditionSVarCompare$ GTY
 SVar:Y:Count$CardsInYourHand
 SVar:X:PlayerCountOpponents$HighestCardsInHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulse_of_the_grid.jpg

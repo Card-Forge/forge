@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever enchanted creature deals damage to you, CARDNAME deals that much damage to that creature's controller.
-SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ X | References$ X
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/backfire.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals damage to you, Backfire deals that much damage to that creature's controller.

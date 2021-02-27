@@ -4,7 +4,7 @@ Types:Artifact Equipment
 K:Equip:1
 T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Alone$ True | Execute$ TrigPump | TriggerDescription$ Whenever equipped creature attacks alone, it gets +1/+1 until end of turn for each other creature you control.
 SVar:TrigPump:DB$ Pump | RememberObjects$ TriggeredAttacker | SubAbility$ TrigPump2
-SVar:TrigPump2:DB$ Pump | Defined$ Remembered | NumAtt$ X | NumDef$ X | References$ X | SubAbility$ DBCleanup
+SVar:TrigPump2:DB$ Pump | Defined$ Remembered | NumAtt$ X | NumDef$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Creature.YouCtrl+IsNotRemembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_valor.jpg

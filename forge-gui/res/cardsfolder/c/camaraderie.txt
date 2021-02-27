@@ -1,8 +1,8 @@
 Name:Camaraderie
 ManaCost:4 G W
 Types:Sorcery
-A:SP$ GainLife | Cost$ 4 G W | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBDraw | SpellDescription$ You gain X life and draw X cards, where X is the number of creatures you control.
-SVar:DBDraw:DB$ Draw | NumCards$ X | References$ X | SubAbility$ DBPumpAll
+A:SP$ GainLife | Cost$ 4 G W | Defined$ You | LifeAmount$ X | SubAbility$ DBDraw | SpellDescription$ You gain X life and draw X cards, where X is the number of creatures you control.
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBPumpAll
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
 SVar:X:Count$TypeYouCtrl.Creature
 SVar:PlayMain1:TRUE

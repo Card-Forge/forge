@@ -4,6 +4,6 @@ Types:Enchantment Aura Curse
 K:Enchant player
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of each end step, enchanted player mills X cards, where X is the number of cards put into their graveyard from anywhere this turn.
-SVar:TrigMill:DB$ Mill | Defined$ Player.EnchantedBy | NumCards$ X | References$ X
+SVar:TrigMill:DB$ Mill | Defined$ Player.EnchantedBy | NumCards$ X
 SVar:X:Count$ThisTurnEntered_Graveyard_Card.EnchantedPlayerOwn
 Oracle:Enchant player\nAt the beginning of each end step, enchanted player mills X cards, where X is the number of cards put into their graveyard from anywhere this turn.

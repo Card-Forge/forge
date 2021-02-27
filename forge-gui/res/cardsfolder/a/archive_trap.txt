@@ -1,7 +1,7 @@
 Name:Archive Trap
 ManaCost:3 U U
 Types:Instant Trap
-SVar:AltCost:Cost$ 0 | CheckSVar$ TrapTrigger | References$ TrapTrigger | Description$ If an opponent searched their library this turn, you may pay {0} rather than pay this spell's mana cost.
+SVar:AltCost:Cost$ 0 | CheckSVar$ TrapTrigger | Description$ If an opponent searched their library this turn, you may pay {0} rather than pay this spell's mana cost.
 A:SP$ Mill | Cost$ 3 U U | NumCards$ 13 | ValidTgts$ Opponent | TgtPrompt$ Choose an opponent | SpellDescription$ Target opponent mills thirteen cards.
 SVar:TrapTrigger:Count$SearchedLibrary.Opponent
 Oracle:If an opponent searched their library this turn, you may pay {0} rather than pay this spell's mana cost.\nTarget opponent mills thirteen cards.

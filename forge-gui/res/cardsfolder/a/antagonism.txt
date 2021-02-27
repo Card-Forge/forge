@@ -2,7 +2,7 @@ Name:Antagonism
 ManaCost:3 R
 Types:Enchantment
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TeaseYou | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's end step, CARDNAME deals 2 damage to that player unless one of their opponents was dealt damage this turn.
-SVar:TeaseYou:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2 | ConditionCheckSVar$ AntagonismX | ConditionSVarCompare$ LE0 | References$ AntagonismX
+SVar:TeaseYou:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2 | ConditionCheckSVar$ AntagonismX | ConditionSVarCompare$ LE0
 SVar:AntagonismX:TriggeredPlayer$DamageToOppsThisTurn
 SVar:Check:PlayerCountOpponents$DamageToOppsThisTurn
 SVar:NeedsToPlayVar:Check GE1

@@ -2,7 +2,7 @@ Name:Desperate Stand
 ManaCost:R W
 Types:Sorcery
 K:Strive:R W
-A:SP$ Pump | Cost$ R W | ValidTgts$ Creature | NumAtt$ +2 | KW$ First Strike & Vigilance | TargetMin$ 0 | TargetMax$ MaxTargets | References$ MaxTargets | SpellDescription$ Any number of target creatures each get +2/+0 and gain first strike and vigilance until end of turn.
+A:SP$ Pump | Cost$ R W | ValidTgts$ Creature | NumAtt$ +2 | KW$ First Strike & Vigilance | TargetMin$ 0 | TargetMax$ MaxTargets | SpellDescription$ Any number of target creatures each get +2/+0 and gain first strike and vigilance until end of turn.
 SVar:MaxTargets:Count$Valid Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desperate_stand.jpg
 Oracle:Strive — This spell costs {R}{W} more to cast for each target beyond the first.\nAny number of target creatures each get +2/+0 and gain first strike and vigilance until end of turn.

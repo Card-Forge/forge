@@ -4,7 +4,7 @@ Types:Creature Jackal Warrior
 PT:2/1
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature with power less than or equal to CARDNAME's power can't block this turn.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.powerLEX | References$ X | IsCurse$ True | KW$ HIDDEN CARDNAME can't block. | TgtPrompt$ Select target creature with power less than or equal to CARDNAME's power.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.powerLEX | IsCurse$ True | KW$ HIDDEN CARDNAME can't block. | TgtPrompt$ Select target creature with power less than or equal to CARDNAME's power.
 K:Eternalize:4 R R
 SVar:X:Count$CardPower
 DeckHas:Ability$Token

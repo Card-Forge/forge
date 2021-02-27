@@ -6,7 +6,7 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$Devotion.Red
 SVar:BuffedBy:Permanent.Red
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Other+nonToken+YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another nontoken creature you control dies, create a 1/1 red Satyr creature token with "This creature can't block." If the creature had power 4 or greater, create two of those tokens instead.
-SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ r_1_1_satyr_noblock | TokenOwner$ You | LegacyImage$ r 1 1 satyr noblock thb | References$ Y,Z
+SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ r_1_1_satyr_noblock | TokenOwner$ You | LegacyImage$ r 1 1 satyr noblock thb
 SVar:Y:Count$Compare Z GE4.2.1
 SVar:Z:TriggeredCard$CardPower
 DeckHas:Ability$Token

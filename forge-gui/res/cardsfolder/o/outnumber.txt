@@ -1,7 +1,7 @@
 Name:Outnumber
 ManaCost:R
 Types:Instant
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the number of creatures you control.
+A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/outnumber.jpg
 Oracle:Outnumber deals damage to target creature equal to the number of creatures you control.

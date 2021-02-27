@@ -4,6 +4,6 @@ Types:Creature Vampire
 PT:3/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, other creatures you control get +1/+0 until end of turn. If that land is a Swamp, those creatures get +2/+0 until end of turn instead.
-SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl | NumAtt$ X | References$ X
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl | NumAtt$ X
 SVar:X:TriggeredCard$Valid Swamp/Plus.1
 Oracle:Flying\nLandfall — Whenever a land enters the battlefield under your control, other creatures you control get +1/+0 until end of turn. If that land is a Swamp, those creatures get +2/+0 until end of turn instead.

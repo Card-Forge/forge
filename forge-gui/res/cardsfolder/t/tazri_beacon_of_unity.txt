@@ -2,7 +2,7 @@ Name:Tazri, Beacon of Unity
 ManaCost:4 W
 Types:Legendary Creature Human Warrior
 PT:4/6
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | References$ X | Description$ This spell costs {1} less to cast for each creature in your party.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature in your party.
 SVar:X:Count$Party
 DeckHas:Ability$Party
 DeckHints:Type$Ally|Cleric|Rogue|Warrior|Wizard

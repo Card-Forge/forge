@@ -2,7 +2,7 @@ Name:Entrancing Lyre
 ManaCost:3
 Types:Artifact
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ Tap | Cost$ X T | ValidTgts$ Creature.powerLEX | References$ X | TgtPrompt$ Select target creature with power X or less | RememberTapped$ True | AlwaysRemember$ True | SpellDescription$ Tap target creature with power X or less. It doesn't untap during its controller's untap step for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
+A:AB$ Tap | Cost$ X T | ValidTgts$ Creature.powerLEX | TgtPrompt$ Select target creature with power X or less | RememberTapped$ True | AlwaysRemember$ True | SpellDescription$ Tap target creature with power X or less. It doesn't untap during its controller's untap step for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
 SVar:X:Count$xPaid
 S:Mode$ Continuous | Affected$ Card.IsRemembered | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step.
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True

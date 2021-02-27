@@ -4,7 +4,7 @@ Types:Creature Dwarf Peasant
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a basic Plains card and reveal it. If an opponent controls more lands than you, put it onto the battlefield tapped. Otherwise put it into your hand. Then shuffle your library.
 SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Land.Plains+Basic | ChangeNum$ 1 | RememberChanged$ True | Reveal$ True | Shuffle$ False | SubAbility$ DBBranch
-SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | References$ X | TrueSubAbility$ ToBattlefieldTapped | FalseSubAbility$ ToHand | SubAbility$ DBCleanup
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | TrueSubAbility$ ToBattlefieldTapped | FalseSubAbility$ ToHand | SubAbility$ DBCleanup
 SVar:X:PlayerCountOpponents$HasPropertywithMoreLandsThanYou
 SVar:ToBattlefieldTapped:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | Tapped$ True | Shuffle$ True
 SVar:ToHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | Shuffle$ True

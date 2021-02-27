@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Token | AddSVar$ ElementalMasteryCount | Description$ Enchanted creature has "{T}: Create X 1/1 red Elemental creature tokens with haste, where X is this creature's power. Exile them at the beginning of the next end step."
-SVar:Token:AB$ Token | Cost$ T | TokenAmount$ ElementalMasteryCount | TokenScript$ r_1_1_elemental_haste | LegacyImage$ r 1 1 elemental haste shm | AtEOT$ Exile | References$ ElementalMasteryCount | SpellDescription$ Create X 1/1 red Elemental creature tokens with haste, where X is this creature's power. Exile them at the beginning of the next end step.
+SVar:Token:AB$ Token | Cost$ T | TokenAmount$ ElementalMasteryCount | TokenScript$ r_1_1_elemental_haste | LegacyImage$ r 1 1 elemental haste shm | AtEOT$ Exile | SpellDescription$ Create X 1/1 red Elemental creature tokens with haste, where X is this creature's power. Exile them at the beginning of the next end step.
 SVar:ElementalMasteryCount:Count$CardPower
 SVar:NonStackingAttachEffect:True
 DeckHas:Ability$Token

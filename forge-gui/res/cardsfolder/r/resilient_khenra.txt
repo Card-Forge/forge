@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Jackal Wizard
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may have target creature get +X/+X until end of turn, where X is CARDNAME's power.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | References$ X
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X
 K:Eternalize:4 G G
 # HOU Release Notes: if power less than 0 as the ability resolves, then X=0
 SVar:X:Count$CardPower

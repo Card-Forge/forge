@@ -5,7 +5,7 @@ PT:2/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may exile target creature card from a graveyard. If you do, you gain 2 life.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | SubAbility$ DBGainLife | RememberChanged$ True
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | References$ X | SubAbility$ DBCleanup
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 DeckHas:Ability$LifeGain

@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Attacks | ValidCard$ Card.EnchantedBy | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, it gets +X/+0 until end of turn, where X is your devotion to red.
-SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +X | References$ X
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +X
 SVar:X:Count$Devotion.Red
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderous_might.jpg

@@ -4,9 +4,9 @@ Types:Sorcery
 A:SP$ PutCounterAll | Cost$ 5 W | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBRepeat | StackDescription$ SpellDescription | SpellDescription$ Tempting offer — Put a +1/+1 counter on each creature you control. Each opponent may put a +1/+1 counter on each creature they control. For each opponent who does, put a +1/+1 counter on each creature you control.
 SVar:DBRepeat:DB$ RepeatEach | RepeatSubAbility$ DBPutCounter | RepeatPlayers$ Player.Opponent | SubAbility$ PutCounterAgain | RepeatOptionalForEachPlayer$ True | RepeatOptionalMessage$ Do you want to put a +1/+1 counter on each creature you control?
 SVar:DBPutCounter:DB$ PutCounterAll | ValidCards$ Creature.RememberedPlayerCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBCount
-SVar:DBCount:DB$ StoreSVar | SVar$ X | Type$ CountSVar | Expression$ X/Plus.1 | References$ X
-SVar:PutCounterAgain:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ X | References$ X | SubAbility$ DBReset | StackDescription$ None
-SVar:DBReset:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 0 | References$ X
+SVar:DBCount:DB$ StoreSVar | SVar$ X | Type$ CountSVar | Expression$ X/Plus.1
+SVar:PutCounterAgain:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBReset | StackDescription$ None
+SVar:DBReset:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 0
 SVar:X:Number$0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tempt_with_glory.jpg
 Oracle:Tempting offer — Put a +1/+1 counter on each creature you control. Each opponent may put a +1/+1 counter on each creature they control. For each opponent who does, put a +1/+1 counter on each creature you control.

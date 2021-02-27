@@ -7,7 +7,7 @@ A:AB$ Animate | Cost$ 2 | Defined$ Enchanted | Power$ 2 | Toughness$ 5 | Types$ 
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigReturnOwner | OptionalDecider$ You | TriggerDescription$ When enchanted Plains is put into a graveyard, you may return CARDNAME from your graveyard to your hand.
 SVar:TrigReturnOwner:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:PseudoLifelink:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ GenjuTrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
-SVar:GenjuTrigGain:DB$ GainLife | Defined$ You | LifeAmount$ GenjuX | References$ GenjuX
+SVar:GenjuTrigGain:DB$ GainLife | Defined$ You | LifeAmount$ GenjuX
 SVar:NonStackingAttachEffect:True
 SVar:AIPaymentPreference:AvoidPayingWithAttachTarget
 SVar:GenjuX:TriggerCount$DamageAmount

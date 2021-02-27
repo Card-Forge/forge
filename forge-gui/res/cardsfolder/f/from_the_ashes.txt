@@ -5,7 +5,7 @@ A:SP$ DestroyAll | Cost$ 3 R | ValidCards$ Land.nonBasic | RememberDestroyed$ Tr
 SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemembered | RepeatSubAbility$ DBSearch | SubAbility$ DBShuffle
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | RememberChanged$ True | DefinedPlayer$ ImprintedController | Chooser$ ImprintedController | NoShuffle$ True | Optional$ True
 SVar:DBShuffle:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ShuffleSearched | SubAbility$ DBCleanup
-SVar:ShuffleSearched:DB$ Shuffle | Defined$ Player.IsRemembered | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X
+SVar:ShuffleSearched:DB$ Shuffle | Defined$ Player.IsRemembered | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 SVar:X:Count$Valid Card.IsRemembered+RememberedPlayerCtrl
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random

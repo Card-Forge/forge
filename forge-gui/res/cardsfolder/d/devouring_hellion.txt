@@ -3,8 +3,8 @@ ManaCost:2 R
 Types:Creature Hellion
 PT:2/2
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DevourCreatsAndWalkers | Description$ As CARDNAME enters the battlefield, you may sacrifice any number of creatures and/or planeswalkers. If you do, it enters with twice that many +1/+1 counters on it.
-SVar:DevourCreatsAndWalkers:DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | References$ DevourSacX | SacValid$ Creature.Other,Planeswalker | SacMessage$ any number of creatures and/or planeswalkers | RememberSacrificed$ True | Optional$ True | SubAbility$ DevourCounters
-SVar:DevourCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Devour2X | ETB$ True | References$ Devour2X,DevourSize | SubAbility$ DevourCleanup
+SVar:DevourCreatsAndWalkers:DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | SacValid$ Creature.Other,Planeswalker | SacMessage$ any number of creatures and/or planeswalkers | RememberSacrificed$ True | Optional$ True | SubAbility$ DevourCounters
+SVar:DevourCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Devour2X | ETB$ True | SubAbility$ DevourCleanup
 SVar:DevourCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DevourETB
 SVar:DevourETB:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 SVar:DevourSacX:Count$Valid Creature.YouCtrl+Other/Plus.DevourSacY
