@@ -59,7 +59,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
      */
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return canPlayAI(aiPlayer, sa);
+        return checkApiLogic(aiPlayer, sa);
     }
 
     @Override
@@ -352,6 +352,8 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
         } else if ("Riot".equals(logic)) {
             SpellAbility counterSA = spells.get(0), hasteSA = spells.get(1);
             return preferHasteForRiot(sa, player) ? hasteSA : counterSA;
+        } else if ("CrawlingBarrens".equals(logic)) {
+            return SpecialCardAi.CrawlingBarrens.considerAnimating(player, sa, spells);
         }
         return spells.get(0);   // return first choice if no logic found
     }

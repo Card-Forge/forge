@@ -21,6 +21,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -140,6 +141,26 @@ public class SpecialCardAi {
             }
 
             return false;
+        }
+    }
+
+    // Crawling Barrens
+    public static class CrawlingBarrens {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            final PhaseHandler ph = ai.getGame().getPhaseHandler();
+            final Combat combat = ai.getGame().getCombat();
+
+            Card animated = AnimateAi.becomeAnimated(sa.getHostCard(), sa);
+            animated.addType("Creature");
+            boolean isOppEOT = ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
+            boolean isValuableAttacker = ph.is(PhaseType.MAIN1, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);
+            boolean isValuableBlocker = combat != null && combat.getDefendingPlayers().contains(ai) && ComputerUtilCard.doesSpecifiedCreatureBlock(ai, animated);
+
+            return isOppEOT || isValuableAttacker || isValuableBlocker;
+        }
+
+        public static SpellAbility considerAnimating(final Player ai, final SpellAbility sa, final List<SpellAbility> options) {
+            return ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) ? options.get(0) : options.get(1);
         }
     }
 

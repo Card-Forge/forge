@@ -112,6 +112,10 @@ public class CountersPutAi extends SpellAbilityAi {
             return source.getCounters(CounterEnumType.LEVEL) < maxLevel;
         }
 
+        if ("CrawlingBarrens".equals(sa.getParam("AILogic"))) {
+            return true;
+        }
+
         return super.checkPhaseRestrictions(ai, sa, ph);
     }
 
@@ -288,6 +292,8 @@ public class CountersPutAi extends SpellAbilityAi {
             }
         } else if (logic.startsWith("MoveCounter")) {
             return doMoveCounterLogic(ai, sa, ph);
+        } else if (logic.equals("CrawlingBarrens")) {
+            return SpecialCardAi.CrawlingBarrens.consider(ai, sa);
         }
 
         if (!sa.metConditions() && sa.getSubAbility() == null) {
