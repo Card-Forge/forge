@@ -605,6 +605,20 @@ public final class CMatchUI
         });
     }
 
+    @Override
+    public void refreshField() {
+        super.refreshField();
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override public final void run() {
+                for (final PlayerView p : getGameView().getPlayers()) {
+                    if ( p.getCards(ZoneType.Battlefield) != null ) {
+                        updateCards(p.getCards(ZoneType.Battlefield));
+                    }
+                }
+                FloatingZone.refreshAll();
+            }
+        });
+    }
 
     @Override
     public List<JMenu> getMenus() {
