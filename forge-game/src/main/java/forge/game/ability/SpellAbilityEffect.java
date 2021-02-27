@@ -308,7 +308,7 @@ public abstract class SpellAbilityEffect {
         }
         if (sa.hasParam("AtEOTCondition")) {
             String var = sa.getParam("AtEOTCondition");
-            trigSA += "| ConditionCheckSVar$ " + var + "| References$ " + var;
+            trigSA += "| ConditionCheckSVar$ " + var;
         }
         final SpellAbility newSa = AbilityFactory.getAbility(trigSA, sa.getHostCard());
         newSa.setIntrinsic(intrinsic);

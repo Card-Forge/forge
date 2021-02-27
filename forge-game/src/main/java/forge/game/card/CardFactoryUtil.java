@@ -2203,10 +2203,6 @@ public class CardFactoryUtil {
         String abStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1]
                 + " | ETB$ True | CounterNum$ " + amount;
 
-        if (!StringUtils.isNumeric(amount) && card.hasSVar(amount)) {
-            abStr += " | References$ " + amount;
-        }
-
         SpellAbility sa = AbilityFactory.getAbility(abStr, card);
         setupETBReplacementAbility(sa);
         if (!intrinsic) {
@@ -2465,9 +2461,8 @@ public class CardFactoryUtil {
                     " | IsPresent$ Card.Self+cameUnderControlSinceLastUpkeep | Secondary$ True | " +
                     "TriggerDescription$ " + inst.getReminderText();
 
-            String ref = "X".equals(cost) ? " | References$ X" : "";
             String effect = "DB$ Sacrifice | SacValid$ Self | "
-                    + "Echo$ " + cost + ref;
+                    + "Echo$ " + cost;
 
             final Trigger trigger = TriggerHandler.parseTrigger(upkeepTrig, card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
@@ -3293,10 +3288,6 @@ public class CardFactoryUtil {
 
             String effect = "DB$ Sacrifice | SacValid$ Self | UnlessPayer$ You | UnlessCost$ " + k[1];
 
-            if (!StringUtils.isNumeric(k[1])) {
-                effect += " | References$ " + k[1];
-            }
-
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(upkeepTrig, card, intrinsic);
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
 
@@ -3910,8 +3901,6 @@ public class CardFactoryUtil {
             final String manacost = k[2];
             final String reduceCost = k.length > 3 ? k[3] : null;
 
-            Set<String> references = Sets.newHashSet();
-
             String desc = "Adapt " + magnitude;
 
             String effect = "AB$ PutCounter | Cost$ " + manacost + " | Adapt$ True | CounterNum$ " + magnitude
@@ -3919,13 +3908,8 @@ public class CardFactoryUtil {
 
             if (reduceCost != null) {
                 effect += "| ReduceCost$ " + reduceCost;
-                references.add(reduceCost);
                 desc += ". This ability costs {1} less to activate for each instant and sorcery card in your graveyard.";
             }
-            if (!references.isEmpty()) {
-                effect += "| References$ " + TextUtil.join(references, ",");
-            }
-
             effect += "| SpellDescription$ " + desc + " (" + inst.getReminderText() + ")";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
@@ -4258,22 +4242,14 @@ public class CardFactoryUtil {
 
             final String reduceCost = k.length > 3 ? k[3] : null;
 
-            Set<String> references = Sets.newHashSet();
             String desc = "Monstrosity " + magnitude;
 
             String effect = "AB$ PutCounter | Cost$ " + manacost + " | ConditionPresent$ "
                     + "Card.Self+IsNotMonstrous | Monstrosity$ True | CounterNum$ " + magnitude
                     + " | CounterType$ P1P1 | StackDescription$ SpellDescription";
-            if ("X".equals(magnitude)) {
-                references.add("X");
-            }
             if (reduceCost != null) {
                 effect += "| ReduceCost$ " + reduceCost;
-                references.add(reduceCost);
                 desc += ". This ability costs {1} less to activate for each creature card in your graveyard.";
-            }
-            if (!references.isEmpty()) {
-                effect += "| References$ " + TextUtil.join(references, ",");
             }
 
             if (card.hasSVar("MonstrosityAILogic")) {
@@ -4833,11 +4809,6 @@ public class CardFactoryUtil {
         }
 
         altCostSA.setDescription(costDescription);
-        if (params.containsKey("References")) {
-            for (String svar : params.get("References").split(",")) {
-                altCostSA.setSVar(svar, card.getSVar(svar));
-            }
-        }
         return altCostSA;
     }
 
