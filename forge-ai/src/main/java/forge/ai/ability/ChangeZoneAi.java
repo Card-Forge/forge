@@ -1549,7 +1549,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 c = ComputerUtilCard.getBestAI(fetchList);
             } else {
                 // exclude tokens, they won't come back, and enchanted stuff, since auras will go away
-                if (!sa.hasParam("Mandatory") && origin.contains(ZoneType.Battlefield)) {
+                if (!sa.hasParam("Mandatory") && origin.contains(ZoneType.Battlefield) && sa.hasParam("ChangeNum")) {
                     fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card card) {
