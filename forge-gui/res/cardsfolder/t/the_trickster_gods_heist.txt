@@ -3,7 +3,7 @@ ManaCost:2 U B
 Types:Enchantment Saga
 K:Saga:3:DBCreature,DBNonCreature,DBDrain
 SVar:DBCreature:DB$ ExchangeControl | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Choose two target creatures | Optional$ True | AILogic$ TrigTwoTargets | StackDescription$ SpellDescription | SpellDescription$ You may exchange control of two target creatures.
-SVar:DBNonCreature:DB$ ExchangeControl | ValidTgts$ Card.nonBasic+nonCreature | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Permanent | TgtPrompt$ Choose two target nonbasic, noncreature permanent | TargetsWithSameCardType$ True | Optional$ True | AILogic$ TrigTwoTargets | StackDescription$ SpellDescription | SpellDescription$ You may exchange control of two target nonbasic, noncreature permanents that share a card type.
+SVar:DBNonCreature:DB$ ExchangeControl | ValidTgts$ Permanent.nonBasic+nonCreature | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Choose two target nonbasic, noncreature permanent | TargetsWithSameCardType$ True | Optional$ True | AILogic$ TrigTwoTargets | StackDescription$ SpellDescription | SpellDescription$ You may exchange control of two target nonbasic, noncreature permanents that share a card type.
 SVar:DBDrain:DB$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 3 life and you gain 3 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 DeckHas:Ability$LifeGain
