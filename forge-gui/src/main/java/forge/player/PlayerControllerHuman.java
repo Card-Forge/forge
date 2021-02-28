@@ -2627,9 +2627,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             Player p = gameCachePlayer.get(pv);
 
-            GameEntityViewMap<Card, CardView> gameCacheExile = GameEntityView.getMap(p.getCardsIn(ZoneType.Hand));
+            CardCollectionView inHand = p.getCardsIn(ZoneType.Hand);
+            GameEntityViewMap<Card, CardView> gameCacheExile = GameEntityView.getMap(inHand);
 
-            List<CardView> views = getGui().many(localizer.getMessage("lblChooseCardsExile"), localizer.getMessage("lblDiscarded"), 0, -1,
+            List<CardView> views = getGui().many(localizer.getMessage("lblChooseCardsExile"), localizer.getMessage("lblDiscarded"), 0, inHand.size(),
                     gameCacheExile.getTrackableKeys(), null);
 
             final CardCollection selection = new CardCollection();
@@ -2665,9 +2666,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             Player p = gameCachePlayer.get(pv);
 
-            GameEntityViewMap<Card, CardView> gameCacheExile = GameEntityView.getMap(p.getCardsIn(ZoneType.Battlefield));
+            CardCollectionView otb = p.getCardsIn(ZoneType.Battlefield);
+            GameEntityViewMap<Card, CardView> gameCacheExile = GameEntityView.getMap(otb);
 
-            List<CardView> views = getGui().many(localizer.getMessage("lblChooseCardsExile"), localizer.getMessage("lblDiscarded"), 0, -1,
+            List<CardView> views = getGui().many(localizer.getMessage("lblChooseCardsExile"), localizer.getMessage("lblDiscarded"), 0, otb.size(),
                     gameCacheExile.getTrackableKeys(), null);
 
             final CardCollection selection = new CardCollection();
@@ -2708,7 +2710,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             CardCollectionView cards = p.getCardsIn(ZoneType.smartValueOf(zone));
             GameEntityViewMap<Card, CardView> gameCacheExile = GameEntityView.getMap(cards);
-            List<CardView> views = getGui().many(localizer.getMessage("lblChooseCardsRemoveFromGame"), localizer.getMessage("lblRemoved"), 0, -1,
+            List<CardView> views = getGui().many(localizer.getMessage("lblChooseCardsRemoveFromGame"), localizer.getMessage("lblRemoved"), 0, cards.size(),
                     gameCacheExile.getTrackableKeys(), null);
 
             final CardCollection selection = new CardCollection();
