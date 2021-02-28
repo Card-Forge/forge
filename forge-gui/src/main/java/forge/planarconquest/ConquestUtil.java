@@ -15,16 +15,15 @@ import forge.deck.Deck;
 import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.deck.generation.*;
-import forge.game.card.CardCollection;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.properties.ForgeConstants;
 import forge.quest.QuestUtil;
 import forge.util.FileUtil;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.gui.SOptionPane;
-import forge.util.Localizer;
 
 import java.util.EnumSet;
 import java.util.List;
