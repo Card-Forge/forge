@@ -287,7 +287,7 @@ public class ListChooser<T> {
         @Override
         public void valueChanged(final ListSelectionEvent e) {
             final int num = ListChooser.this.lstChoices.getSelectedIndices().length;
-            ListChooser.this.optionPane.setButtonEnabled(0, (num >= ListChooser.this.minChoices) && (num <= ListChooser.this.maxChoices || ListChooser.this.maxChoices == -1));
+            ListChooser.this.optionPane.setButtonEnabled(0, (num >= ListChooser.this.minChoices) && (num <= ListChooser.this.maxChoices));
         }
     }
 
