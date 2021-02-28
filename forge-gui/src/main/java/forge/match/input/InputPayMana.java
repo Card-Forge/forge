@@ -21,6 +21,7 @@ import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
+import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.player.HumanPlay;
 import forge.player.PlayerControllerHuman;
@@ -330,7 +331,17 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             @Override
             public void run() {
                 if (HumanPlay.playSpellAbility(getController(), chosen.getActivatingPlayer(), chosen)) {
-                    if (chosen.getManaPart().meetsManaRestrictions(saPaidFor)) {
+                    final List<AbilityManaPart> manaAbilities = chosen.getAllManaParts();
+                    boolean restrictionsMet = true;
+
+                    for (AbilityManaPart sa : manaAbilities) {
+                        if (!sa.meetsManaRestrictions(saPaidFor)) {
+                            restrictionsMet = false;
+                            break;
+                        }
+                    }
+
+                    if (restrictionsMet) {
                         player.getManaPool().payManaFromAbility(saPaidFor, InputPayMana.this.manaCost, chosen);
                     }
                     onManaAbilityPaid();
