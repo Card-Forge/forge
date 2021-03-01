@@ -15,7 +15,7 @@ ALTERNATE
 Name:Tergrid's Lantern
 ManaCost:3 B
 Types:Legendary Artifact
-A:AB$ Pump | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ TrigGenericChoice | SpellDescription$ Target player loses 3 life unless they sacrifice a nonland permanent or discard a card.
+A:AB$ Pump | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ TrigGenericChoice | IsCurse$ True | SpellDescription$ Target player loses 3 life unless they sacrifice a nonland permanent or discard a card. | StackDescription$ {p:Targeted} loses 3 life unless they sacrifice a nonland permanent or discard a card.
 A:AB$ Untap | Cost$ 3 B | SpellDescription$ Untap CARDNAME.
 SVar:TrigGenericChoice:DB$ GenericChoice | Defined$ Targeted | Choices$ PaySac,PayDiscard | FallbackAbility$ LoseLifeFallback | AILogic$ PayUnlessCost
 SVar:PaySac:DB$ LoseLife | LifeAmount$ 3 | Defined$ Targeted | UnlessCost$ Sac<1/Permanent.nonland/nonland permanent> | UnlessPayer$ Targeted | UnlessAI$ LifeLE3 | SpellDescription$ You lose 3 life unless you sacrifice a nonland permanent
