@@ -31,6 +31,8 @@ import forge.util.Aggregates;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
+import static forge.ai.ComputerUtilCard.getBestCreatureAI;
+
 public class AiCostDecision extends CostDecisionMakerBase {
     private final SpellAbility ability;
     private final Card source;
@@ -529,7 +531,11 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        hand = CardLists.getValidCards(hand, type.split(";"), player, source, ability);
+        if (cost.getRevealFrom().equals(ZoneType.Exile)) {
+            hand = CardLists.getValidCards(hand, type.split(";"), player, source, ability);
+            return PaymentDecision.card(getBestCreatureAI(hand));
+        }
+
         Integer c = cost.convertAmount();
         if (c == null) {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
