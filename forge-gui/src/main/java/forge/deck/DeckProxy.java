@@ -647,6 +647,14 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
+    public static List<DeckProxy> getNetArchiveLegacyDecks(final NetDeckArchiveLegacy category) {
+        final List<DeckProxy> decks = new ArrayList<>();
+        if (category != null) {
+            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
+        }
+        return decks;
+    }
+
     public static CardEdition getDefaultLandSet(Deck deck) {
         List<CardEdition> availableEditions = new ArrayList<>();
 
