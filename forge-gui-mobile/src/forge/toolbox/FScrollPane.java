@@ -157,12 +157,13 @@ public abstract class FScrollPane extends FContainer {
     protected void drawOverlay(Graphics g) {
         try {
             boolean isFieldZoneView = toString().contains("VField")||toString().contains("VZoneDisplay");
-            //TODO: Consider other ways to indicate scroll potential that fade in and out based on input
-            //draw triangles indicating scroll potential
+            //if ForgePreferences.FPref.UI_ENABLE_MATCH_SCROLL_INDICATOR is missing this will return NPE and could cause lockup on Startup
             if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_MATCH_SCROLL_INDICATOR))
                 return;
             if (!isFieldZoneView)
                 return;
+            //TODO: Consider other ways to indicate scroll potential that fade in and out based on input
+            //draw triangles indicating scroll potential
             if (scrollLeft > 0) {
                 float x = INDICATOR_MARGIN;
                 float y = getHeight() / 2;
@@ -183,9 +184,7 @@ public abstract class FScrollPane extends FContainer {
                 float y = getHeight() - INDICATOR_MARGIN;
                 g.fillTriangle(INDICATOR_COLOR, x, y, x - INDICATOR_SIZE, y - INDICATOR_SIZE, x + INDICATOR_SIZE, y - INDICATOR_SIZE);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) {}
     }
 
     //allow overriding to adjust what scroll positions are restored after layout
