@@ -3336,7 +3336,7 @@ public class CardFactoryUtil {
                     + " the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.";
 
             final String strDelay = "DB$ DelayedTrigger | Mode$ Phase | Phase$ Cleanup | TriggerDescription$ At the beginning of the next cleanup step, sacrifice CARDNAME.";
-            final String strSac = "DB$ SacrificeAll | Defined$ Self";
+            final String strSac = "DB$ SacrificeAll | ValidCards$ Card.Self";
 
             SpellAbility saDelay = AbilityFactory.getAbility(strDelay, card);
             saDelay.setAdditionalAbility("Execute", (AbilitySub) AbilityFactory.getAbility(strSac, card));
