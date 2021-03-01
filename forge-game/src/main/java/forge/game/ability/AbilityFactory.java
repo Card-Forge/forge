@@ -115,8 +115,8 @@ public final class AbilityFactory {
      * 
      * @param abString
      *            a {@link java.lang.String} object.
-     * @param hostCard
-     *            a {@link forge.game.card.Card} object.
+     * @param state
+     *            a {@link forge.game.card.CardState} object.
      * @return a {@link forge.game.spellability.SpellAbility} object.
      */
     public static final SpellAbility getAbility(final String abString, final CardState state) {
@@ -282,6 +282,14 @@ public final class AbilityFactory {
             }
         }
 
+        if (api == ApiType.RollDice) {
+            for (String param : mapParams.keySet()) {
+                if (param.startsWith("On") || param.equals("Else")) {
+                    spellAbility.setAdditionalAbility(param, getSubAbility(state, mapParams.get(param), sVarHolder));
+                }
+            }
+        }
+
         if (spellAbility instanceof SpellApiBased && hostCard.isPermanent()) {
             String desc = mapParams.containsKey("SpellDescription") ? mapParams.get("SpellDescription")
                     : spellAbility.getHostCard().getName();
@@ -386,7 +394,6 @@ public final class AbilityFactory {
      * 
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param mapParams
      */
     private static final void initializeParams(final SpellAbility sa) {
 
@@ -402,7 +409,6 @@ public final class AbilityFactory {
      * 
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param mapParams
      */
     private static final void makeRestrictions(final SpellAbility sa) {
         // SpellAbilityRestrictions should be added in here
@@ -417,7 +423,6 @@ public final class AbilityFactory {
      * 
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param mapParams
      */
     private static final void makeConditions(final SpellAbility sa) {
         // SpellAbilityRestrictions should be added in here

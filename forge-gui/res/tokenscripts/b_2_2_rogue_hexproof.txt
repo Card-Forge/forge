@@ -1,0 +1,7 @@
+Name:Rogue
+ManaCost:no cost
+Types:Creature Rogue
+Colors:black
+PT:2/2
+K:Hexproof
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)

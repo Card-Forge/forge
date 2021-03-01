@@ -1,0 +1,12 @@
+Name:Hydradoodle
+ManaCost:X X G G
+Types:Creature Hydra Dog
+PT:0/0
+K:ETBReplacement:Other:RollCounters
+SVar:X:Count$xPaid
+SVar:RollCounters:DB$ RollDice | Amt$ X | ResultSVar$ Result | SubAbility$ DBCounters | SpellDescription$ As CARDNAME enters the battlefield, roll X six-sided dice. CARDNAME enters the battlefield with a number of +1/+1 counters on it equal to the total of those results.
+SVar:DBCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Result | ETB$ True
+K:Reach
+K:Trample
+DeckHas:Ability$Counters
+Oracle:As Hydradoodle enters the battlefield, roll X six-sided dice. Hydradoodle enters the battlefield with a number of +1/+1 counters on it equal to the total of those results.\nReach, trample
