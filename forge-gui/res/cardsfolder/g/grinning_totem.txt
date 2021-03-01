@@ -9,10 +9,10 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:ActiveTotem:Number$1
 SVar:STGrinning:Mode$ Continuous | Affected$ Card.IsRemembered+OppOwn | MayPlay$ True | EffectZone$ Command | AffectedZone$ Exile | CheckSVar$ ActiveTotem | Description$ Until the beginning of your next upkeep, you may play that card.
 # Turn off the duration at the beginning of the upkeep statically
-SVar:TrigDuration:Mode$ Phase | Phase$ Upkeep | Player$ You | Static$ True | TriggerZones$ Command | Execute$ DBDuration
+SVar:TrigDuration:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Static$ True | TriggerZones$ Command | Execute$ DBDuration
 SVar:DBDuration:DB$ StoreSVar | SVar$ ActiveTotem | Type$ Number | Expression$ 0
 # Return the card as a normal trigger
-SVar:TrigReturn:Mode$ Phase | Phase$ Upkeep | Player$ You | Static$ True | TriggerZones$ Command | Execute$ DBReturn
+SVar:TrigReturn:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Static$ True | TriggerZones$ Command | Execute$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Graveyard | SubAbility$ RemoveEffect
 SVar:RemoveEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 # Remove Totem Effect when the card is played

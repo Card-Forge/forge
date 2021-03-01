@@ -2,7 +2,7 @@ Name:Phyrexian Processor
 ManaCost:4
 Types:Artifact
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ PayLife | Description$ As CARDNAME enters the battlefield, pay any amount of life.
-SVar:PayLife:AB$ StoreSVar | Cost$ PayLife<X> | References$ X | SVar$ LifePaidOnETB | Type$ CountSVar | Expression$ X | SubAbility$ MoveToPlay
+SVar:PayLife:AB$ StoreSVar | Cost$ PayLife<X> | References$ X | SVar$ LifePaidOnETB | Type$ Calculate | Expression$ X | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ All | Destination$ Battlefield
 A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenScript$ b_x_x_minion | TokenOwner$ You | TokenPower$ LifePaidOnETB | TokenToughness$ LifePaidOnETB | LegacyImage$ b x x minion usg | SpellDescription$ Create an X/X black Minion creature token, where X is the life paid as CARDNAME entered the battlefield.
 SVar:X:Count$xPaid
