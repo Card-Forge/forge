@@ -552,12 +552,9 @@ public class Graphics {
     }
 
     public void fillTriangle(FSkinColor skinColor, float x1, float y1, float x2, float y2, float x3, float y3) {
-        drawTriangle(skinColor.getColor(), x1, y1, x2, y2, x3, y3, true);
+        fillTriangle(skinColor.getColor(), x1, y1, x2, y2, x3, y3);
     }
-    public void drawTriangle(FSkinColor skinColor, float x1, float y1, float x2, float y2, float x3, float y3) {
-        drawTriangle(skinColor.getColor(), x1, y1, x2, y2, x3, y3, false);
-    }
-    public void drawTriangle(Color color, float x1, float y1, float x2, float y2, float x3, float y3, boolean fill) {
+    public void fillTriangle(Color color, float x1, float y1, float x2, float y2, float x3, float y3) {
         batch.end(); //must pause batch while rendering shapes
 
         if (alphaComposite < 1) {
@@ -567,7 +564,7 @@ public class Graphics {
             Gdx.gl.glEnable(GL_BLEND);
         }
 
-        startShape(fill ? ShapeType.Filled : ShapeType.Line);
+        startShape(ShapeType.Filled);
         shapeRenderer.setColor(color);
         shapeRenderer.triangle(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0), adjustX(x3), adjustY(y3, 0));
         endShape();
