@@ -125,6 +125,10 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.Facedown);//  getCurrentState().getState() == CardStateName.FaceDown;
     }
 
+    public boolean isForeTold() {
+        return get(TrackableProperty.Foretold);
+    }
+
     public boolean isFlipCard() {
         return get(TrackableProperty.FlipCard);
     }
@@ -766,6 +770,7 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.SplitCard, isSplitCard);
         set(TrackableProperty.FlipCard, c.isFlipCard());
         set(TrackableProperty.Facedown, c.isFaceDown());
+        set(TrackableProperty.Foretold, c.isForetold());
         set(TrackableProperty.Adventure, c.isAdventureCard());
         set(TrackableProperty.DoubleFaced, c.isDoubleFaced());
         set(TrackableProperty.Modal, c.isModal());

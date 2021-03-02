@@ -25,6 +25,7 @@ public final class ImageKeys {
     public static final String HIDDEN_CARD           = "hidden";
     public static final String MORPH_IMAGE           = "morph";
     public static final String MANIFEST_IMAGE        = "manifest";
+    public static final String FORETELL_IMAGE        = "foretell";
 
     public static final String BACKFACE_POSTFIX  = "$alt";
 

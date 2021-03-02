@@ -503,7 +503,10 @@ public class CardRenderer {
             if (image == ImageCache.defaultImage) {
                 CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);
             } else if (showsleeves) {
-                g.drawImage(sleeves, x, y, w, h);
+                if (!card.isForeTold())
+                    g.drawImage(sleeves, x, y, w, h);
+                else
+                    g.drawImage(image, x, y, w, h);
             } else {
                 if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
                         && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()) && rotate){
