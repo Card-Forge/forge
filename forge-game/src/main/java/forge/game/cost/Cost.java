@@ -515,6 +515,7 @@ public class Cost implements Serializable {
     public final Cost copy() {
         Cost toRet = new Cost();
         toRet.isAbility = this.isAbility;
+        toRet.isMandatory = this.isMandatory;
         for (CostPart cp : this.costParts) {
             toRet.costParts.add(cp.copy());
         }
