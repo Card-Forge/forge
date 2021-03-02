@@ -12,7 +12,8 @@ Type=Reprint
 5 C Swamp
 6 C Forest
 7 C Island
-9 C Mountain
+8 C Mountain
+9 C Plains
 10 C Swamp
 11 C Forest
 12 C Island
