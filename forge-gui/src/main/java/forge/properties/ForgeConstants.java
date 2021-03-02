@@ -54,6 +54,8 @@ public final class ForgeConstants {
     public static final String NET_ARCHIVE_PIONEER_DECKS_LIST_FILE   = LISTS_DIR + "net-decks-archive-pioneer.txt";
     public static final String NET_ARCHIVE_MODERN_DECKS_LIST_FILE    = LISTS_DIR + "net-decks-archive-modern.txt";
     public static final String NET_ARCHIVE_LEGACY_DECKS_LIST_FILE   = LISTS_DIR + "net-decks-archive-legacy.txt";
+    public static final String NET_ARCHIVE_VINTAGE_DECKS_LIST_FILE   = LISTS_DIR + "net-decks-archive-vintage.txt";
+
 
     public static final String CHANGES_FILE            = ASSETS_DIR + "README.txt";
     public static final String CHANGES_FILE_NO_RELEASE = ASSETS_DIR + "CHANGES.txt";
