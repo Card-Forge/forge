@@ -1342,3 +1342,4 @@ copy.jpg https://downloads.cardforge.org/images/tokens/copy.jpg
 hidden.jpg https://downloads.cardforge.org/images/tokens/morph.jpg
 morph.jpg https://downloads.cardforge.org/images/tokens/morph.jpg
 manifest.jpg https://downloads.cardforge.org/images/tokens/manifest.jpg
+foretell.jpg https://downloads.cardforge.org/images/tokens/foretell.jpg

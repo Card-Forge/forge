@@ -5531,6 +5531,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final void setForetold(final boolean foretold) {
         this.foretold = foretold;
+        getState(CardStateName.FaceDown).setImageKey(ImageKeys.getTokenKey(ImageKeys.FORETELL_IMAGE));
     }
 
     public boolean isForetoldByEffect() {

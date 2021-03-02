@@ -364,7 +364,10 @@ public final class CardUtil {
         ret.setType(type);
 
         //show hidden if exiled facedown
-        ret.setImageKey(ImageKeys.getTokenKey(c.isInZone(ZoneType.Exile) ? ImageKeys.HIDDEN_CARD : ImageKeys.MORPH_IMAGE));
+        if (c.isInZone(ZoneType.Exile))
+            ret.setImageKey(ImageKeys.getTokenKey(c.isForetold() ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD));
+        else
+            ret.setImageKey(ImageKeys.getTokenKey(c.isManifested() ? ImageKeys.MANIFEST_IMAGE : ImageKeys.MORPH_IMAGE));
         return ret;
     }
 
