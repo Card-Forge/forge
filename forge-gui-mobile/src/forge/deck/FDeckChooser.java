@@ -581,11 +581,14 @@ public class FDeckChooser extends FScreen {
             }
             cmbDeckTypes.setAlignment(Align.center);
             restoreSavedState();
+
             cmbDeckTypes.setChangedHandler(new FEventHandler() {
                 @Override
+
                 public void handleEvent(final FEvent e) {
                     final DeckType deckType = cmbDeckTypes.getSelectedItem();
-                    if (!refreshingDeckType && (deckType == DeckType.NET_DECK || deckType == DeckType.NET_COMMANDER_DECK)) {
+
+                    if (!refreshingDeckType&&(deckType == DeckType.NET_DECK || deckType == DeckType.NET_COMMANDER_DECK)) {
                         FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                             @Override
                             public void run() {
@@ -614,8 +617,7 @@ public class FDeckChooser extends FScreen {
                         });
                         return;
                     }
-
-                    if ((deckType == DeckType.NET_ARCHIVE_STANDARD_DECK&& !refreshingDeckType)) {
+                    if (!refreshingDeckType&&(deckType == DeckType.NET_ARCHIVE_STANDARD_DECK)) {
                         FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                             @Override
                             public void run() {
@@ -639,10 +641,9 @@ public class FDeckChooser extends FScreen {
                                 });
                             }
                         });
-                        return;
+                       return;
                     }
-
-                    if ((deckType == DeckType.NET_ARCHIVE_PIONEER_DECK&& !refreshingDeckType)) {
+                    if (!refreshingDeckType&&(deckType == DeckType.NET_ARCHIVE_PIONEER_DECK)) {
                         FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                             @Override
                             public void run() {
@@ -668,8 +669,7 @@ public class FDeckChooser extends FScreen {
                         });
                         return;
                     }
-
-                    if ((deckType == DeckType.NET_ARCHIVE_MODERN_DECK&& !refreshingDeckType)) {
+                    if (!refreshingDeckType&&(deckType == DeckType.NET_ARCHIVE_MODERN_DECK)) {
                         FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                             @Override
                             public void run() {
@@ -695,8 +695,7 @@ public class FDeckChooser extends FScreen {
                         });
                         return;
                     }
-
-                    if ((deckType == DeckType.NET_ARCHIVE_LEGACY_DECK&& !refreshingDeckType)) {
+                    if (!refreshingDeckType&&(deckType == DeckType.NET_ARCHIVE_LEGACY_DECK)) {
                         FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                             @Override
                             public void run() {
@@ -722,8 +721,7 @@ public class FDeckChooser extends FScreen {
                         });
                         return;
                     }
-
-                    if ((deckType == DeckType.NET_ARCHIVE_VINTAGE_DECK&& !refreshingDeckType)) {
+                    if (!refreshingDeckType&&(deckType == DeckType.NET_ARCHIVE_VINTAGE_DECK)) {
                         FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                             @Override
                             public void run() {
@@ -747,12 +745,8 @@ public class FDeckChooser extends FScreen {
                                 });
                             }
                         });
-                        return;
+                       return;
                     }
-
-
-
-
                     refreshDecksList(deckType, false, e);
                 }
             });
@@ -947,22 +941,37 @@ public class FDeckChooser extends FScreen {
             config = ItemManagerConfig.STRING_ONLY;
             break;
             case NET_ARCHIVE_STANDARD_DECK:
+                if (NetDeckArchiveStandard != null) {
+                    cmbDeckTypes.setText(NetDeckArchiveStandard.getDeckType());
+                }
                 pool = DeckProxy.getNetArchiveStandardDecks(NetDeckArchiveStandard);
                 config = ItemManagerConfig.NET_ARCHIVE_STANDARD_DECKS;
                 break;
             case NET_ARCHIVE_PIONEER_DECK:
+                if (NetDeckArchivePioneer != null) {
+                    cmbDeckTypes.setText(NetDeckArchivePioneer.getDeckType());
+                }
                 pool = DeckProxy.getNetArchivePioneerDecks(NetDeckArchivePioneer);
                 config = ItemManagerConfig.NET_ARCHIVE_PIONEER_DECKS;
                 break;
             case NET_ARCHIVE_MODERN_DECK:
+                if (NetDeckArchiveModern != null) {
+                    cmbDeckTypes.setText(NetDeckArchiveModern.getDeckType());
+                }
                 pool = DeckProxy.getNetArchiveModernDecks(NetDeckArchiveModern);
                 config = ItemManagerConfig.NET_ARCHIVE_MODERN_DECKS;
                 break;
             case NET_ARCHIVE_LEGACY_DECK:
+                if (NetDeckArchiveLegacy != null) {
+                    cmbDeckTypes.setText(NetDeckArchiveLegacy.getDeckType());
+                }
                 pool = DeckProxy.getNetArchiveLegacyDecks(NetDeckArchiveLegacy);
                 config = ItemManagerConfig.NET_ARCHIVE_LEGACY_DECKS;
                 break;
             case NET_ARCHIVE_VINTAGE_DECK:
+                if (NetDeckArchiveVintage!= null) {
+                    cmbDeckTypes.setText(NetDeckArchiveVintage.getDeckType());
+                }
                 pool = DeckProxy.getNetArchiveVintageDecks(NetDeckArchiveVintage);
                 config = ItemManagerConfig.NET_ARCHIVE_VINTAGE_DECKS;
                 break;
