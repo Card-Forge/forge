@@ -179,6 +179,6 @@ public class CountersPutAllAi extends SpellAbilityAi {
             }
         }
 
-        return mandatory;
+        return mandatory || canPlayAI(aiPlayer, sa);
     }
 }
