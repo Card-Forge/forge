@@ -14,7 +14,9 @@ import forge.FThreads;
 
 import forge.Forge;
 import forge.ImageKeys;
+import forge.model.FModel;
 import forge.properties.ForgeConstants;
+import forge.properties.ForgePreferences;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.tuple.Pair;
@@ -27,6 +29,9 @@ final class ImageLoader extends CacheLoader<String, Texture> {
     Texture n;
     @Override
     public Texture load(String key) {
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
+            return null;
+
         boolean extendedArt = isBorderless(key) && Forge.enableUIMask.equals("Full");
         boolean textureFilter = Forge.isTextureFilteringEnabled();
         File file = ImageKeys.getImageFile(key);

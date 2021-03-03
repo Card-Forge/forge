@@ -12,6 +12,7 @@ import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.assets.ImageCache;
 import forge.game.GameLogEntryType;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
@@ -332,6 +333,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                  3);
         }
         //Graphic Options
+        lstSettings.addItem(new BooleanSetting(FPref.UI_DISABLE_CARD_IMAGES,
+                localizer.getMessage("lblDisableCardImages"),
+                localizer.getMessage("nlDisableCardImages")) {
+                    @Override
+                    public void select() {
+                        super.select();
+                        ImageCache.disposeTexture();
+                    }
+                },
+                4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER,
                 localizer.getMessage("cbImageFetcher"),
                 localizer.getMessage("nlImageFetcher")),

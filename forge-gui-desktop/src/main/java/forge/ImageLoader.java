@@ -3,6 +3,9 @@ package forge;
 import com.google.common.cache.CacheLoader;
 
 import forge.error.BugReporter;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
+
 import javax.imageio.ImageIO;
 
 import java.awt.image.BufferedImage;
@@ -12,6 +15,9 @@ import java.io.IOException;
 final class ImageLoader extends CacheLoader<String, BufferedImage> {
     @Override
     public BufferedImage load(String key) {
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
+            return null;
+
         File file = ImageKeys.getImageFile(key);
         if (file != null) {
             if (!file.exists()) {
