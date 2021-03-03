@@ -327,10 +327,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public Integer announceRequirements(final SpellAbility ability, final String announce) {
         int max = Integer.MAX_VALUE;
         boolean canChooseZero = true;
+        Cost cost = ability.getPayCosts();
 
         if ("X".equals(announce)) {
             canChooseZero = !ability.hasParam("XCantBe0");
-            Cost cost = ability.getPayCosts();
             if (ability.hasParam("XMaxLimit")) {
                 max = Math.min(max, AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("XMaxLimit"), ability));
             }
@@ -355,8 +355,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (min > max) {
             return null;
         }
-        return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announce,
-                CardTranslation.getTranslatedName(ability.getHostCard().getName())) , min, max, min + 9);
+
+        if (cost.isMandatory()) {
+            return chooseNumber(ability, localizer.getMessage("lblChooseAnnounceForCard", announce,
+                    CardTranslation.getTranslatedName(ability.getHostCard().getName())) , min, max);
+        }
+        else {
+            return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announce,
+                    CardTranslation.getTranslatedName(ability.getHostCard().getName())) , min, max, min + 9);
+        }
     }
 
     @Override

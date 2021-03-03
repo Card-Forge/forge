@@ -555,7 +555,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
-        if (player.canPayLife(c) && player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblPayNLifeConfirm", String.valueOf(c)),ability)) {
+        // for costs declared mandatory, this is only reachable with a valid amount
+        if (ability.getPayCosts().isMandatory() || (player.canPayLife(c) && player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblPayNLifeConfirm", String.valueOf(c)),ability))) {
             return PaymentDecision.number(c);
         }
         return null;
