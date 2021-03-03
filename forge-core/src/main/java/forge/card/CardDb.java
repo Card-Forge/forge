@@ -175,19 +175,21 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         for (CardEdition e : editions.getOrderedEditions()) {
             boolean coreOrExpSet = e.getType() == CardEdition.Type.CORE || e.getType() == CardEdition.Type.EXPANSION;
             boolean isCoreExpSet = coreOrExpSet || e.getType() == CardEdition.Type.REPRINT;
+            //todo sets with nonlegal cards should have tags in them so we don't need to specify the code here
+            boolean skip = !loadNonLegalCards && (e.getCode().equals("CMB1") ||e.getCode().equals("UGL")
+                    ||e.getCode().equals("UNH")||e.getCode().equals("UND")||e.getCode().equals("UST"));
             if (logMissingPerEdition && isCoreExpSet) {
                 System.out.print(e.getName() + " (" + e.getAllCardsInSet().size() + " cards)");
             }
             if (coreOrExpSet && e.getDate().after(today) && upcomingSet == null) {
-                upcomingSet = e;
+                if (skip)
+                    upcomingSet = e;
             }
 
             for (CardEdition.CardInSet cis : e.getAllCardsInSet()) {
                 CardRules cr = rulesByName.get(cis.name);
-                if (cr != null && !cr.getType().isBasicLand() && !loadNonLegalCards
-                        && (e.getCode().equals("CMB1") ||e.getCode().equals("UGL")
-                        ||e.getCode().equals("UNH")||e.getCode().equals("UND")||e.getCode().equals("UST")))
-                    continue; //todo sets with nonlegal cards should have tags in them so we don't need to specify the code here
+                if (cr != null && !cr.getType().isBasicLand() && skip)
+                    continue;
 
                 if (cr != null) {
                     addSetCard(e, cis, cr);
