@@ -176,8 +176,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             boolean coreOrExpSet = e.getType() == CardEdition.Type.CORE || e.getType() == CardEdition.Type.EXPANSION;
             boolean isCoreExpSet = coreOrExpSet || e.getType() == CardEdition.Type.REPRINT;
             //todo sets with nonlegal cards should have tags in them so we don't need to specify the code here
-            boolean skip = !loadNonLegalCards && (e.getCode().equals("CMB1") ||e.getCode().equals("UGL")
-                    ||e.getCode().equals("UNH")||e.getCode().equals("UND")||e.getCode().equals("UST"));
+            boolean skip = !loadNonLegalCards && (e.getCode().equals("CMB1") || e.getBorderColor() == CardEdition.BorderColor.SILVER);
             if (logMissingPerEdition && isCoreExpSet) {
                 System.out.print(e.getName() + " (" + e.getAllCardsInSet().size() + " cards)");
             }
