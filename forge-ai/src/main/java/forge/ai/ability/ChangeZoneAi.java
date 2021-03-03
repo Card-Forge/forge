@@ -1548,32 +1548,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (player.isOpponentOf(decider)) {
                 c = ComputerUtilCard.getBestAI(fetchList);
             } else {
-                // exclude tokens, they won't come back, and enchanted stuff, since auras will go away
                 if (!sa.hasParam("Mandatory") && origin.contains(ZoneType.Battlefield) && sa.hasParam("ChangeNum")) {
-                    fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card card) {
-                            if (card.isToken()) {
-                                return false;
-                            }
-
-                            if (card.isCreature() && ComputerUtilCard.isUselessCreature(decider, card)) {
-                                return true;
-                            } else if (card.isEquipped()) {
-                                return false;
-                            } else if (card.isEnchanted()) {
-                                for (Card enc : card.getEnchantedBy()) {
-                                    if (enc.getOwner().isOpponentOf(decider)) {
-                                        return true;
-                                    }
-                                }
-                                return false;
-                            } else if (card.isAura()) {
-                                return false;
-                            }
-                            return true;
-                        }
-                    });
+                    // exclude tokens, they won't come back, and enchanted stuff, since auras will go away
+                    fetchList = prefilterListForBounceAnyNum(sa, fetchList, decider);
                     if (fetchList.isEmpty()) {
                         return null;
                     }
@@ -1645,6 +1622,57 @@ public class ChangeZoneAi extends SpellAbilityAi {
             c = first;
         }
         return c;
+    }
+
+    private static CardCollection prefilterListForBounceAnyNum(SpellAbility sa, CardCollection fetchList, Player decider) {
+        fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card card) {
+                if (card.isToken()) {
+                    return false;
+                }
+
+                if (card.isCreature() && ComputerUtilCard.isUselessCreature(decider, card)) {
+                    return true;
+                } else if (card.isEquipped()) {
+                    return false;
+                } else if (card.isEnchanted()) {
+                    for (Card enc : card.getEnchantedBy()) {
+                        if (enc.getOwner().isOpponentOf(decider)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                } else if (card.hasCounters()) {
+                    if (card.isPlaneswalker()) {
+                        int maxLoyaltyToConsider = 2;
+                        int loyaltyDiff = 2;
+                        int chance = 30;
+                        if (decider.getController().isAI()) {
+                            AiController aic = ((PlayerControllerAi) decider.getController()).getAi();
+                            maxLoyaltyToConsider = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_MAX_LOYALTY);
+                            loyaltyDiff = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_LOYALTY_DIFF);
+                            chance = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_CHANCE);
+                        }
+                        if (MyRandom.percentTrue(chance)) {
+                            int curLoyalty = card.getCounters(CounterEnumType.LOYALTY);
+                            int freshLoyalty = Integer.valueOf(card.getCurrentState().getBaseLoyalty());
+                            if (freshLoyalty - curLoyalty >= loyaltyDiff && curLoyalty <= maxLoyaltyToConsider) {
+                                return true;
+                            }
+                        }
+                    } else if (card.isCreature() && card.getCounters(CounterEnumType.M1M1) > 0) {
+                        return true;
+                    }
+                    return false; // TODO: improve for other counters
+                } else if (card.isAura()) {
+                    return false;
+                }
+                return true;
+            }
+        });
+
+        return fetchList;
     }
 
     /* (non-Javadoc)
