@@ -570,6 +570,10 @@ public class TriggerHandler {
             host.addRemembered(triggeredCard);
         }
 
+        if (regtrig.hasParam("RememberKey")) {
+            host.addRemembered(runParams.get(AbilityKey.fromString(regtrig.getParam("RememberKey"))));
+        }
+
         sa.setStackDescription(sa.toString());
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
             if (!CharmEffect.makeChoices(sa)) {
