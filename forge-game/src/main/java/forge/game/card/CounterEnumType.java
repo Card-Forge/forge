@@ -119,6 +119,8 @@ public enum CounterEnumType {
 
     FUNGUS("FNGUS", 121, 219, 151),
 
+    FUNK("FUNK", 215, 24, 222),
+
     FURY("FURY", 255, 120, 89),
 
     FUSE("FUSE", 255, 122, 85),

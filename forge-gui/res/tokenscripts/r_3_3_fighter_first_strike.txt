@@ -1,0 +1,7 @@
+Name:Fighter
+ManaCost:no cost
+Types:Creature Fighter
+Colors:red
+PT:3/3
+K:First Strike
+Oracle:First strike

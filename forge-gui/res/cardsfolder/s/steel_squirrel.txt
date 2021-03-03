@@ -1,0 +1,9 @@
+Name:Steel Squirrel
+ManaCost:2
+Types:Artifact Creature Squirrel
+PT:1/1
+T:Mode$ RolledDie | Execute$ TrigPump | ValidPlayer$ You | ValidResult$ GE5 | TriggerDescription$ Whenever you roll a 5 or higher on a die, CARDNAME gets +X/+X until end of turn, where X is the result.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ X
+SVar:X:TriggerCount$Result
+A:AB$ RollDice | Cost$ 6 | SpellDescription$ Roll a six-sided die.
+Oracle:{3}{G}: Roll a six-sided die. Ground Pounder gets +X/+X until end of turn, where X is the result.\nWhenever you roll a 5 or higher on a die, Ground Pounder gains trample until end of turn.

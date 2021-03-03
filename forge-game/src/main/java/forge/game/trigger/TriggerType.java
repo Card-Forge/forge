@@ -84,6 +84,7 @@ public enum TriggerType {
     PlaneswalkedTo(TriggerPlaneswalkedTo.class),
     Regenerated(TriggerRegenerated.class),
     Revealed(TriggerRevealed.class),
+    RolledDie(TriggerRolledDie.class),
     Sacrificed(TriggerSacrificed.class),
     Scry(TriggerScry.class),
     SearchedLibrary(TriggerSearchedLibrary.class),

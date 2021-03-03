@@ -42,6 +42,7 @@ Berserker:Berserkers
 Bird:Birds
 Blinkmoth:Blinkmoths
 Boar:Boars
+Brainiac:Brainiacs
 Bringer:Bringers
 Brushwagg:Brushwaggs
 Camarid:Camarids
@@ -89,6 +90,7 @@ Elk:Elks
 Eye:Eyes
 Faerie:Faeries
 Ferret:Ferrets
+Fighter:Fighters
 Fish:Fish
 Flagbearer:Flagbearers
 Fox:Foxes
@@ -209,6 +211,7 @@ Sand:Sands
 Saproling:Saprolings
 Satyr:Satyrs
 Scarecrow:Scarecrows
+Scientist:Scientists
 Scion:Scions
 Scorpion:Scorpions
 Scout:Scouts
@@ -313,6 +316,7 @@ Davriel
 Domri
 Dovin
 Duck
+Dungeon-Master
 Elspeth
 Estrid
 Freyalise
