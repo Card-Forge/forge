@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 
 import forge.ai.SpellAbilityAi;
+import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -12,8 +13,9 @@ public class RollDiceAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
+        Cost cost = sa.getPayCosts();
 
-        if (sa.getPayCosts().hasManaCost() || sa.getPayCosts().hasTapCost()) {
+        if (cost != null && (sa.getPayCosts().hasManaCost() || sa.getPayCosts().hasTapCost())) {
             return ph.getNextTurn() == aiPlayer && ph.is(PhaseType.END_OF_TURN);
         }
 
