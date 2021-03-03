@@ -164,7 +164,7 @@ public final class FModel {
                 FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
         final CardStorageReader tokenReader = new CardStorageReader(ForgeConstants.TOKEN_DATA_DIR, progressBarBridge,
                 FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
-        magicDb = new StaticData(reader, tokenReader, ForgeConstants.EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR, FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_UNKNOWN_CARDS));
+        magicDb = new StaticData(reader, tokenReader, ForgeConstants.EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR, FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_UNKNOWN_CARDS), FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_NONLEGAL_CARDS));
         CardTranslation.preloadTranslation(preferences.getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
 
         //create profile dirs if they don't already exist
