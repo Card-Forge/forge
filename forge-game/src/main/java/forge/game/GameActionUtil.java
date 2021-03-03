@@ -165,7 +165,7 @@ public final class GameActionUtil {
                         final String[] k = keyword.split(":");
                         final Cost escapeCost = new Cost(k[1], true);
 
-                        final SpellAbility newSA = sa.copyWithDefinedCost(escapeCost);
+                        final SpellAbility newSA = sa.copyWithManaCostReplaced(activator, escapeCost);
                         newSA.setActivatingPlayer(activator);
 
                         newSA.putParam("PrecostDesc", "Escape—");
