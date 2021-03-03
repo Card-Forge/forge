@@ -64,8 +64,6 @@ public class PlayerView extends GameEntityView {
     }
 
     public String getLobbyPlayerName() {
-        if (get(TrackableProperty.LobbyPlayerName) == null)
-            return ""; //todo find the root cause why this would return null after succesful start of game and could freeze the UI?
         return get(TrackableProperty.LobbyPlayerName);
     }
     void updateLobbyPlayerName(Player p) {

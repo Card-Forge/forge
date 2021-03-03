@@ -403,7 +403,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final void awaitNextInput() {
-        if (awaitNextInputTimer == null) {
+        if (awaitNextInputTimer == null && currentPlayer != null) { //Prevent NPE currentPlayer
             awaitNextInputTimer = new Timer("awaitNextInputTimer Game:" + this.gameView.getId() + " Player:" + this.currentPlayer.getLobbyPlayerName());
         }
         //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
