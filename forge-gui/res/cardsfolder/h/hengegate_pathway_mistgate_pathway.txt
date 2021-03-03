@@ -1,0 +1,14 @@
+Name:Hengegate Pathway
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+AlternateMode:Modal
+Oracle:{T}: Add {W}.
+
+ALTERNATE
+
+Name:Mistgate Pathway
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+Oracle:{T}: Add {U}.

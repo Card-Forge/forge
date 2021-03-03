@@ -1,0 +1,123 @@
+[metadata]
+Code=ANB
+Date=2020-08-13
+Name=Arena Beginner Set
+Type=Other
+
+[cards]
+U Affectionate Indrik
+U Air Elemental
+R Angelic Guardian
+U Angelic Reward
+U Angel of Vitality
+C Armored Whirl Turtle
+U Bad Deal
+C Baloth Packhunter
+C Bombard
+U Bond of Discipline
+C Burn Bright
+C Charging Badger
+C Charmed Stray
+C Cloudkin Seer
+U Colossal Majesty
+C Compound Fracture
+U Confront the Assault
+C Coral Merfolk
+C Cruel Cut
+R Demon of Loathing
+R Epic Proportions
+U Eternal Thirst
+C Evolving Wilds
+C Fearless Halberdier
+C Fencing Ace
+C Feral Roar
+C Forest
+C Frilled Sea Serpent
+C Generous Stray
+R Gigantosaurus
+C Glint
+U Goblin Gang Leader
+C Goblin Gathering
+R Goblin Trashmaster
+C Goblin Tunneler
+R Goring Ceratops
+C Greenwood Sentinel
+U Hallowed Priest
+C Hurloon Minotaur
+C Ilysian Caryatid
+R Immortal Phoenix
+C Impassioned Orator
+U Inescapable Blaze
+R Inspiring Commander
+C Island
+C Jungle Delver
+C Knight's Pledge
+C Krovikan Scoundrel
+R Leonin Warleader
+C Loxodon Line Breaker
+U Malakir Cullblade
+C Maniacal Rage
+R Mardu Outrider
+C Molten Ravager
+C Moorland Inquisitor
+C Mountain
+U Murder
+C Nest Robber
+R Nightmare
+C Nimble Pilferer
+C Octoprophet
+R Ogre Battledriver
+R Overflowing Insight
+C Pacifism
+C Plains
+U Prized Unicorn
+C Rabid Bite
+C Raging Goblin
+U Raid Bombardment
+C Raise Dead
+R Rampaging Brontodon
+C Reduce to Ashes
+R Riddlemaster Sphinx
+C River's Favor
+C Rumbling Baloth
+C Sanctuary Cat
+C Sanitarium Skeleton
+C Savage Gorger
+C Scathe Zombies
+U Sengir Vampire
+U Sentinel Spider
+U Serra Angel
+C Shock
+C Shrine Keeper
+R Siege Dragon
+C Skeleton Archer
+U Sleep
+R Soulblade Djinn
+R Soulhunter Rakshasa
+C Soulmender
+C Spiritual Guardian
+C Stony Strength
+C Storm Strike
+C Swamp
+C Sworn Guardian
+C Tactical Advantage
+C Tin Street Cadet
+C Titanic Growth
+C Treetop Warden
+C Typhoid Rats
+C Unlikely Aid
+C Unsummon
+C Vampire Opportunist
+U Volcanic Dragon
+C Wall of Runes
+U Warden of Evos Isle
+C Waterkin Shaman
+C Waterknot
+C Wildwood Patrol
+R Windreader Sphinx
+U Windstorm Drake
+C Winged Words
+C Witch's Familiar
+C Woodland Mystic
+R World Shaper
+C Zephyr Gull

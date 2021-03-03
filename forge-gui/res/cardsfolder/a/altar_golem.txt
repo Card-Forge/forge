@@ -4,7 +4,7 @@ Types:Artifact Creature Golem
 PT:*/*
 K:Trample
 K:CARDNAME doesn't untap during your untap step.
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures on the battlefield.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures on the battlefield.
 SVar:X:Count$Valid Creature
 A:AB$ Untap | Cost$ tapXType<5/Creature> | SpellDescription$ Untap CARDNAME.
 SVar:BuffedBy:Creature

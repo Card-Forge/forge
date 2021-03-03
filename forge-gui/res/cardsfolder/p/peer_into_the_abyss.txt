@@ -1,0 +1,8 @@
+Name:Peer into the Abyss
+ManaCost:4 B B B
+Types:Sorcery
+A:SP$ Draw | Cost$ 4 B B B | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ X | References$ X | SubAbility$ DBLoseLife | SpellDescription$ Target player draws cards equal to half the number of cards in their library and loses half their life. Round up each time.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ Y | References$ Y | Defined$ Targeted
+SVar:X:TargetedPlayer$CardsInLibrary/HalfUp
+SVar:Y:TargetedPlayer$LifeTotal/HalfUp
+Oracle:Target player draws cards equal to half the number of cards in their library and loses half their life. Round up each time.

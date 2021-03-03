@@ -1,0 +1,4 @@
+Name:Forest
+ManaCost:no cost
+Types:Land Forest
+Oracle:

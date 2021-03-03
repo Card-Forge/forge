@@ -1,0 +1,10 @@
+Name:Steel-Plume Marshal
+ManaCost:3 W W
+Types:Creature Bird Soldier
+PT:3/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME attacks, other attacking creatures you control with flying get +2/+2 until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.attacking+withFlying+Other+YouCtrl | NumAtt$ 2 | NumDef$ 2
+DeckHints:Keyword$Flying
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Steel-Plume Marshal attacks, other attacking creatures you control with flying get +2/+2 until end of turn.

@@ -345,13 +345,7 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
      * @return
      */
     public int countX() {
-        int iX = 0;
-        for (ManaCostShard shard : shards) {
-            if (shard == ManaCostShard.X) {
-                iX++;
-            }
-        }
-        return iX;
+        return getShardCount(ManaCostShard.X);
     }
 
     /**

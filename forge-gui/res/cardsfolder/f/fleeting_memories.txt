@@ -1,11 +1,10 @@
 Name:Fleeting Memories
 ManaCost:2 U
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You | LegacyImage$ c a clue draw soi
-T:Mode$ Sacrificed | ValidCard$ Clue.YouCtrl | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Clue, target player puts the top three cards of their library into their graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When CARDNAME enters the battlefield, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+T:Mode$ Sacrificed | ValidCard$ Clue.YouCtrl | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Clue, target player mills three cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player
 DeckHints:Ability$Investigate
 DeckHas:Ability$Investigate & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fleeting_memories.jpg
-Oracle:When Fleeting Memories enters the battlefield, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\nWhenever you sacrifice a Clue, target player puts the top three cards of their library into their graveyard.
+Oracle:When Fleeting Memories enters the battlefield, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\nWhenever you sacrifice a Clue, target player mills three cards.

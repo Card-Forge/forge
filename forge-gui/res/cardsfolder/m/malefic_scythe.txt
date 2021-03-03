@@ -1,0 +1,11 @@
+Name:Malefic Scythe
+ManaCost:1 B
+Types:Artifact Equipment
+K:etbCounter:SOUL:1
+DeckHas:Ability$Counters
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddToughness$ X | References$ X | Description$ Equipped creature gets +1/+1 for each soul counter on CARDNAME.
+SVar:X:Count$CardCounters.SOUL
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EquippedBy | Execute$ TrigPutCounter | TriggerDescription$ Whenever equipped creature dies, put a soul counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SOUL | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf
+K:Equip:1
+Oracle:Malefic Scythe enters the battlefield with a soul counter on it.\nEquipped creature gets +1/+1 for each soul counter on Malefic Scythe.\nWhenever equipped creature dies, put a soul counter on Malefic Scythe.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

@@ -1,0 +1,8 @@
+[metadata]
+Code=PNEM
+Date=2000-02-14
+Name=Nemesis Promos
+Type=Reprint
+
+[cards]
+67 R Rathi Assassin

@@ -2,9 +2,9 @@ Name:Zombie Master
 ManaCost:1 B B
 Types:Creature Zombie
 PT:2/3
-S:Mode$ Continuous | Affected$ Creature.Zombie+Other | AddKeyword$ Swampwalk | Description$ Other Zombie creatures have swampwalk.
+S:Mode$ Continuous | Affected$ Creature.Zombie+Other | AddKeyword$ Swampwalk | Description$ Other Zombie creatures have swampwalk. (They can't be blocked as long as defending player controls a Swamp.)
 S:Mode$ Continuous | Affected$ Card.Zombie+Other | AddAbility$ Regenerate | Description$ Other Zombies have "{B}: Regenerate this permanent."
 SVar:Regenerate:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate this permanent
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_master.jpg
-Oracle:Other Zombie creatures have swampwalk.\nOther Zombies have "{B}: Regenerate this permanent."
+Oracle:Other Zombie creatures have swampwalk. (They can't be blocked as long as defending player controls a Swamp.)\nOther Zombies have "{B}: Regenerate this permanent."

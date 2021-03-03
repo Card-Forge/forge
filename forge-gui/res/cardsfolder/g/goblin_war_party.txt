@@ -6,4 +6,4 @@ A:SP$ Charm | Cost$ 3 R | Choices$ DBTokens,DBBuff | Defined$ You | CharmNum$ 1
 SVar:DBTokens:DB$ Token | TokenAmount$ 3 | TokenScript$ r_1_1_goblin | TokenOwner$ You | LegacyImage$ r 1 1 goblin mh1 | SpellDescription$ Create three 1/1 red Goblin creature tokens.
 SVar:DBBuff:DB$ PumpAll | NumAtt$ 1 | NumDef$ 1 | ValidCards$ Creature.YouCtrl | KW$ Haste | SpellDescription$ Creatures you control get +1/+1 and gain haste until end of turn.
 DeckHas:Ability$Token
-Oracle:Choose one —\n• Create three 1/1 red Goblin creature tokens.\n• Creatures you control get +1/+1 and gain haste until end of turn. \nEntwine {2}{R}(Choose both if you pay the entwine cost.)
+Oracle:Choose one —\n• Create three 1/1 red Goblin creature tokens.\n• Creatures you control get +1/+1 and gain haste until end of turn.\nEntwine {2}{R} (Choose both if you pay the entwine cost.)

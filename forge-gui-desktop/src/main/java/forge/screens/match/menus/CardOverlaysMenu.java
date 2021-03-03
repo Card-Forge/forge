@@ -5,6 +5,7 @@ import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
+import forge.util.Localizer;
 
 import javax.swing.*;
 
@@ -23,14 +24,14 @@ public final class CardOverlaysMenu {
     private static boolean showOverlays = prefs.getPrefBoolean(FPref.UI_SHOW_CARD_OVERLAYS);
 
     public JMenu getMenu() {
-        JMenu menu = new JMenu("Card Overlays");
+        JMenu menu = new JMenu(Localizer.getInstance().getMessage("lblCardOverlays"));
         menu.add(getMenuItem_ShowOverlays());
         menu.addSeparator();
-        menu.add(getMenuItem_CardOverlay("Card Name", FPref.UI_OVERLAY_CARD_NAME));
-        menu.add(getMenuItem_CardOverlay("Mana Cost", FPref.UI_OVERLAY_CARD_MANA_COST));
-        menu.add(getMenuItem_CardOverlay("Power/Toughness", FPref.UI_OVERLAY_CARD_POWER));
-        menu.add(getMenuItem_CardOverlay("Card Id", FPref.UI_OVERLAY_CARD_ID));
-        menu.add(getMenuItem_CardOverlay("Ability Icon", FPref.UI_OVERLAY_ABILITY_ICONS));
+        menu.add(getMenuItem_CardOverlay(Localizer.getInstance().getMessage("lblCardName"), FPref.UI_OVERLAY_CARD_NAME));
+        menu.add(getMenuItem_CardOverlay(Localizer.getInstance().getMessage("lblManaCost"), FPref.UI_OVERLAY_CARD_MANA_COST));
+        menu.add(getMenuItem_CardOverlay(Localizer.getInstance().getMessage("lblPowerOrToughness"), FPref.UI_OVERLAY_CARD_POWER));
+        menu.add(getMenuItem_CardOverlay(Localizer.getInstance().getMessage("lblCardID"), FPref.UI_OVERLAY_CARD_ID));
+        menu.add(getMenuItem_CardOverlay(Localizer.getInstance().getMessage("lblAbilityIcon"), FPref.UI_OVERLAY_ABILITY_ICONS));
         return menu;
     }
 
@@ -43,7 +44,7 @@ public final class CardOverlaysMenu {
     }
 
     private JMenuItem getMenuItem_ShowOverlays() {
-        JCheckBoxMenuItem menu = new JCheckBoxMenuItem("Show");
+        JCheckBoxMenuItem menu = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblShow"));
         menu.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_O));
         menu.setState(prefs.getPrefBoolean(FPref.UI_SHOW_CARD_OVERLAYS));
         menu.addActionListener(getShowOverlaysAction());

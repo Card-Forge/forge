@@ -36,6 +36,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.esotericsoftware.minlog.Log;
@@ -257,6 +258,7 @@ public abstract class GuiDownloadService implements Runnable {
         for (Entry<String, String> kv : files.entrySet()) {
             boolean isJPG = true;
             boolean isLogged = false;
+            boolean fullborder = false;
             if (cancel) {//stop prevent sleep
                 GuiBase.getInterface().preventSystemSleep(false);
                 break; }
@@ -266,9 +268,9 @@ public abstract class GuiDownloadService implements Runnable {
             String url = kv.getValue();
 
             String decodedKey = decodeURL(kv.getKey());
-            final File fileDest = new File(decodedKey);
+            File fileDest = new File(decodedKey);
             final String filePath = fileDest.getPath();
-            final String subLastIndex = filePath.contains("pics") ? "\\pics\\" : "\\db\\";
+            final String subLastIndex = filePath.contains("pics") ? "\\pics\\" : filePath.contains("skins") ? "\\"+FileUtil.getParent(filePath)+"\\" : "\\db\\";
 
             System.out.println(count + "/" + totalCount + " - .." + filePath.substring(filePath.lastIndexOf(subLastIndex)+1));
 
@@ -287,10 +289,23 @@ public abstract class GuiDownloadService implements Runnable {
                         conn.setInstanceFollowRedirects(false);
                     }
                     conn.connect();
-                    
+
+                    //if .full file is not found try fullborder
+                    if ((conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) && (url.contains(".full.jpg")))
+                    {
+                        fullborder = true;
+                        conn.disconnect();
+                        url = TextUtil.fastReplace(url, ".full.jpg", ".fullborder.jpg");
+                        imageUrl = new URL(url);
+                        conn = (HttpURLConnection) imageUrl.openConnection(p);
+                        conn.setInstanceFollowRedirects(false);
+                        conn.connect();
+                    }
+
                     // if file is not found and this is a JPG, give PNG a shot...
                     if ((conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) && (url.endsWith(".jpg")))
                     {
+                        fullborder = false;
                         isJPG = false;
                         conn.disconnect();
                         if(url.contains("/images/")){
@@ -298,12 +313,16 @@ public abstract class GuiDownloadService implements Runnable {
                             System.out.println("File not found: .." + url.substring(url.lastIndexOf("/images/")+1));
                         }
                         url = url.substring(0,url.length() - 4) + ".png";
-                        imageUrl = new URL(url);
+                        imageUrl = new URL(TextUtil.fastReplace(url, ".fullborder.", ".full."));
                         conn = (HttpURLConnection) imageUrl.openConnection(p);
                         conn.setInstanceFollowRedirects(false);
                         conn.connect();
                     }
-                    
+
+                    if (fullborder) {
+                        fileDest = new File(TextUtil.fastReplace(decodedKey, ".full.jpg", ".fullborder.jpg"));
+                    }
+
                     switch (conn.getResponseCode()) {
                     case HttpURLConnection.HTTP_OK:
                         fos = new FileOutputStream(fileDest);
@@ -390,8 +409,11 @@ public abstract class GuiDownloadService implements Runnable {
     protected abstract Map<String, String> getNeededFiles();
 
     protected static void addMissingItems(Map<String, String> list, String nameUrlFile, String dir) {
+        addMissingItems(list, nameUrlFile, dir, false);
+    }
+    protected static void addMissingItems(Map<String, String> list, String nameUrlFile, String dir, boolean includeParent) {
         for (Pair<String, String> nameUrlPair : FileUtil.readNameUrlFile(nameUrlFile)) {
-            File f = new File(dir, decodeURL(nameUrlPair.getLeft()));
+            File f = new File(includeParent? dir+FileUtil.getParent(nameUrlPair.getRight()) : dir , decodeURL(nameUrlPair.getLeft()));
             //System.out.println(f.getAbsolutePath());
             if (!f.exists()) {
                 list.put(f.getAbsolutePath(), nameUrlPair.getRight());

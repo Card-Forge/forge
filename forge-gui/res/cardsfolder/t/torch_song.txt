@@ -6,4 +6,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | O
 SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ VERSE | CounterNum$ 1
 SVar:X:Count$CardCounters.VERSE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torch_song.jpg
-Oracle:At the beginning of your upkeep, you may put a verse counter on Torch Song.\n{2}{R}, Sacrifice Torch Song: Torch Song deals X damage to any target, where X is the number of verse counters on Torch Song.
+Oracle:At the beginning of your upkeep, you may put a verse counter on Torch Song.\n{2}{R}, Sacrifice Torch Song: It deals X damage to any target, where X is the number of verse counters on Torch Song.

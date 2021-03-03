@@ -4,12 +4,10 @@ Types:Legendary Creature Vampire
 PT:3/3
 K:Menace
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a bounty counter on target creature an opponent controls. For as long as that creature has a bounty counter on it, it has "When this creature dies, each opponent draws a card and gains 2 life."
-SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | CounterType$ BOUNTY | CounterNum$ 1 | IsCurse$ True | SubAbility$ DBAnimate
-#TODO: Ideally, this has to be implemented with a condition where, if counters are removed from the permanent, the trigger
-#is removed even if the counters of the same type are later added via something else.
-SVar:DBAnimate:DB$ Animate | Defined$ Targeted | sVars$ MathasPayoffDraw,MathasPayoffLife,MathasDeath | Triggers$ MathasDeath | Permanent$ True
-SVar:MathasDeath:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+counters_GE1_BOUNTY | Execute$ MathasPayoffDraw | TriggerDescription$ When this creature dies, each opponent draws a card and gains 2 life.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | CounterType$ BOUNTY | CounterNum$ 1 | IsCurse$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ MathasStatic | SVars$ MathasDeath,MathasPayoffDraw,MathasPayoffLife | ForgetOnMoved$ Battlefield | ForgetCounter$ BOUNTY | Duration$ Permanent
+SVar:MathasStatic:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | AddTrigger$ MathasDeath | Description$ For as long as that creature has a bounty counter on it, it has "When this creature dies, each opponent draws a card and gains 2 life."
+SVar:MathasDeath:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ MathasPayoffDraw | TriggerDescription$ When this creature dies, each opponent draws a card and gains 2 life.
 SVar:MathasPayoffDraw:DB$ Draw | Defined$ Player.Opponent | NumCards$ 1 | SubAbility$ MathasPayoffLife
 SVar:MathasPayoffLife:DB$ GainLife | Defined$ Player.Opponent | LifeAmount$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mathas_fiend_seeker.jpg
 Oracle:Menace\nAt the beginning of your end step, put a bounty counter on target creature an opponent controls. For as long as that creature has a bounty counter on it, it has "When this creature dies, each opponent draws a card and gains 2 life."

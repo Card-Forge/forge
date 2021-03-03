@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Kaldheim #02
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/01/165.-KHM2-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Your opponent has no mana available.
+[state]
+humanlife=20
+ailife=6
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Binding the Old Gods|Set:KHM
+humanbattlefield=Grim Draugr|Set:KHM;Grim Draugr|Set:KHM;Sculptor of Winter|Set:KHM;Sculptor of Winter|Set:KHM;Faceless Haven|Set:KHM;Snow-Covered Forest|Set:KHM;Snow-Covered Forest|Set:KHM;Snow-Covered Swamp|Set:KHM;Snow-Covered Swamp|Set:KHM
+aibattlefield=Fireborn Knight;Phoenix of Ash;Reidane, God of the Worthy|Set:KHM

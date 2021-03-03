@@ -15,12 +15,15 @@ import forge.util.TextUtil;
 public class GameEventPlayerStatsChanged extends GameEvent {
 
     public final Collection<Player> players;
-    public GameEventPlayerStatsChanged(Player affected) {
+    public final boolean updateCards;
+    public GameEventPlayerStatsChanged(Player affected, boolean updateCards) {
         players = Arrays.asList(affected);
+        this.updateCards = updateCards;
     }
 
-    public GameEventPlayerStatsChanged(Collection<Player> affected) {
+    public GameEventPlayerStatsChanged(Collection<Player> affected, boolean updateCards) {
         players = affected;
+        this.updateCards = updateCards;
     }
 
     /* (non-Javadoc)

@@ -3,7 +3,7 @@ ManaCost:6
 Types:Artifact
 S:Mode$ Continuous | Affected$ Permanent | AddType$ Artifact | Description$ All permanents are artifact in addition to their other types.
 S:Mode$ Continuous| Affected$ Card | SetColor$ Colorless | AffectedZone$ Battlefield,Hand,Library,Graveyard,Exile,Stack,Command | Description$ All cards that aren't on the battlefield, spells, and permanents are colorless.
-S:Mode$ Continuous | Affected$ Player | ManaColorConversion$ Additive | WhiteConversion$ All | BlueConversion$ All | BlackConversion$ All | RedConversion$ All | GreenConversion$ All | ColorlessConversion$ All | Description$ Players may spend mana as though it were mana of any color.
+S:Mode$ Continuous | Affected$ Player | ManaColorConversion$ Additive | WhiteConversion$ Color | BlueConversion$ Color | BlackConversion$ Color | RedConversion$ Color | GreenConversion$ Color | ColorlessConversion$ Color | Description$ Players may spend mana as though it were mana of any color.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mycosynth_lattice.jpg

@@ -54,13 +54,9 @@ public class TriggerTransformed extends Trigger {
         return true;
     }
 
-
-    /* (non-Javadoc)
-     * @see forge.card.trigger.Trigger#setTriggeringObjects(forge.card.spellability.SpellAbility)
-     */
     @Override
-    public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Transformer);
+    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Transformer);
     }
 
     @Override

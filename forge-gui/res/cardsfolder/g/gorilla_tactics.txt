@@ -1,0 +1,8 @@
+Name:Gorilla Tactics
+ManaCost:1 G
+Types:Instant
+A:SP$ Token | Cost$ 1 G | TokenScript$ g_2_2_gorilla | SpellDescription$ Create a 2/2 green Gorilla creature token.
+T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ Card.OppCtrl | Execute$ TrigDouble | TriggerDescription$ When a spell or ability an opponent controls causes you to discard Gorilla Tactics, create two 2/2 green Gorilla creature tokens.
+SVar:TrigDouble:DB$ Token | TokenScript$ g_2_2_gorilla | TokenAmount$ 2
+DeckHas:Ability$Token
+Oracle:Create a 2/2 green Gorilla creature token.\nWhen a spell or ability an opponent controls causes you to discard Gorilla Tactics, create two 2/2 green Gorilla creature tokens.

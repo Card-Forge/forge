@@ -23,6 +23,7 @@ import java.util.Set;
 
 import com.google.common.collect.Sets;
 
+import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -32,6 +33,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
+import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -145,7 +147,9 @@ public class TriggerSpellAbilityCast extends Trigger {
                     if (tgt.isValid(getParam("TargetsValid").split(","), getHostCard()
                             .getController(), getHostCard(), null)) {
                         validTgtFound = true;
-                        break;
+                        if (this.hasParam("RememberValidCards")) {
+                            this.getHostCard().addRemembered(tgt);
+                        } else break;
                     }
                 }
 
@@ -166,7 +170,7 @@ public class TriggerSpellAbilityCast extends Trigger {
             final CardCollection candidates = new CardCollection();
             SpellAbility targetedSA = spellAbility;
             while (targetedSA != null) {
-                if (targetedSA.usesTargeting() && targetedSA.getTargets().getNumTargeted() != 0) {
+                if (targetedSA.usesTargeting() && targetedSA.getTargets().size() != 0) {
                     break;
                 }
                 targetedSA = targetedSA.getSubAbility();
@@ -233,7 +237,7 @@ public class TriggerSpellAbilityCast extends Trigger {
         if (hasParam("IsSingleTarget")) {
             Set<GameObject> targets = Sets.newHashSet();
             for (TargetChoices tc : spellAbility.getAllTargetChoices()) {
-                targets.addAll(tc.getTargets());
+                targets.addAll(tc);
                 if (targets.size() > 1) {
                     return false;
                 }
@@ -259,21 +263,37 @@ public class TriggerSpellAbilityCast extends Trigger {
                 return false;
             }
         }
+
+        if (hasParam("SnowSpentForCardsColor")) {
+            boolean found = false;
+            for (Mana m : spellAbility.getPayingMana()) {
+                if (!m.isSnow()) {
+                    continue;
+                }
+                if (cast.determineColor().sharesColorWith(ColorSet.fromMask(m.getColor()))) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                return false;
+            }
+        }
         return true;
     }
 
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        final SpellAbility castSA = (SpellAbility) getFromRunParams(AbilityKey.CastSA);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        final SpellAbility castSA = (SpellAbility) runParams.get(AbilityKey.CastSA);
         final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceFromSpellAbility(castSA);
         sa.setTriggeringObject(AbilityKey.Card, castSA.getHostCard());
-        sa.setTriggeringObject(AbilityKey.SpellAbility, castSA);
+        sa.setTriggeringObject(AbilityKey.SpellAbility, castSA.copy(castSA.getHostCard(), true));
         sa.setTriggeringObject(AbilityKey.StackInstance, si);
         sa.setTriggeringObject(AbilityKey.SpellAbilityTargetingCards, (si != null ? si.getSpellAbility(true) : castSA).getTargets().getTargetCards());
         sa.setTriggeringObjectsFrom(
-            this,
+                runParams,
             AbilityKey.Player,
             AbilityKey.Activator,
             AbilityKey.CurrentStormCount,

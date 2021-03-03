@@ -3,5 +3,5 @@ ManaCost:1 B
 Types:Creature Zombie
 PT:2/1
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, each creature blocking it gets -1/-1 until end of turn.
-SVar:TrigPump:DB$PumpAll | ValidCards$ Creature.blockingSource+DefenderCtrl | NumAtt$ -1 | NumDef$ -1
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.blockingSource+DefenderCtrl | NumAtt$ -1 | NumDef$ -1
 Oracle:Whenever Plague Wight becomes blocked, each creature blocking it gets -1/-1 until end of turn.

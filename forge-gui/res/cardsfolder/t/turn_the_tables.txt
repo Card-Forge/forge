@@ -2,7 +2,6 @@ Name:Turn the Tables
 ManaCost:3 W W
 Types:Instant
 A:SP$ Effect | Cost$ 3 W W | Name$ Turn the Tables Effect | ReplacementEffects$ DamageEvent | SVars$ TurnTheTables | References$ TurnTheTables | RememberObjects$ Targeted | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | IsCurse$ True | AILogic$ Fog | SpellDescription$ All combat damage that would be dealt to you this turn is dealt to target attacking creature instead.
-SVar:DamageEvent:Event$ DamageDone | ValidSource$ Creature | ValidTarget$ You | ReplaceWith$ TurnTheTables | IsCombat$ True | Description$ All combat damage that would be dealt to you this turn is dealt to target attacking creature instead.
+SVar:DamageEvent:Event$ DamageDone | ValidSource$ Creature | ValidTarget$ You | ReplaceWith$ TurnTheTables | IsCombat$ True | DamageTarget$ Remembered | Description$ All combat damage that would be dealt to you this turn is dealt to target attacking creature instead.
 SVar:TurnTheTables:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Remembered | VarType$ Card
-SVar:Picture:http://www.wizards.com/global/images/magic/general/turn_the_tables.jpg
 Oracle:All combat damage that would be dealt to you this turn is dealt to target attacking creature instead.

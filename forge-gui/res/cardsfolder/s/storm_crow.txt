@@ -4,4 +4,4 @@ Types:Creature Bird
 PT:1/2
 K:Flying
 SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card14753.jpg
-Oracle:Flying
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)

@@ -1,0 +1,6 @@
+Name:Fierce Guardianship
+ManaCost:2 U
+Types:Instant
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | MayPlay$ True | MayPlayDontGrantZonePermissions$ True | MayPlayWithoutManaCost$ True | IsPresent$ Card.IsCommander+YouCtrl | Description$ If you control a commander, you may cast this spell without paying its mana cost.
+A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target nonCreature Spell | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
+Oracle:If you control a commander, you may cast this spell without paying its mana cost.\nCounter target noncreature spell.

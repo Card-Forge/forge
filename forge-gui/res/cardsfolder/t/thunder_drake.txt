@@ -8,4 +8,4 @@ SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterN
 SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
 SVar:BuffedBy:Card
 DeckHas:Ability$Counters
-Oracle:Flying\nWhenever you cast you cast your second spell each turn, put a +1/+1 counter on Thunder Drake.
+Oracle:Flying\nWhenever you cast your second spell each turn, put a +1/+1 counter on Thunder Drake.

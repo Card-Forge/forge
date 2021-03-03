@@ -18,4 +18,4 @@ PT:3/4
 K:Double Strike
 K:Bushido:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kenzo_the_hardhearted.jpg
-Oracle:Double strike, bushido 2 (When this blocks or becomes blocked, it gets +2/+2 until end of turn.)
+Oracle:Double strike; bushido 2 (Whenever this creature blocks or becomes blocked, it gets +2/+2 until end of turn.)

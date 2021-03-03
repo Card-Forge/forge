@@ -1,0 +1,16 @@
+[metadata]
+Code=PAL99
+Date=1999-01-01
+Name=Arena League 1999
+Type=Reprint
+
+[cards]
+1 R Forest
+2 R Pouncing Jaguar
+3 R Island
+4 R Skittering Skirge
+5 R Mountain
+6 R Rewind
+7 R Plains
+9 R Swamp
+10 R Island

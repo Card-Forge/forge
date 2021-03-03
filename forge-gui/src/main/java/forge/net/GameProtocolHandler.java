@@ -1,8 +1,10 @@
 package forge.net;
 
 import forge.FThreads;
+import forge.assets.FSkinProp;
 import forge.net.event.GuiGameEvent;
 import forge.net.event.ReplyEvent;
+import forge.util.gui.SOptionPane;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -25,6 +27,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
 
     @Override
     public final void channelRead(final ChannelHandlerContext ctx, final Object msg) {
+        final String[] catchedError = {""};
         System.out.println("Received: " + msg);
         if (msg instanceof ReplyEvent) {
             final ReplyEvent event = (ReplyEvent) msg;
@@ -36,7 +39,9 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
 
             final Method method = protocolMethod.getMethod();
             if (method == null) {
-                throw new IllegalStateException(String.format("Method %s not found", protocolMethod.name()));
+                //throw new IllegalStateException(String.format("Method %s not found", protocolMethod.name()));
+                catchedError[0] += String.format("IllegalStateException: Method %s not found (GameProtocolHandler.java Line 43)\n", protocolMethod.name());
+                System.err.println(String.format("Method %s not found", protocolMethod.name()));
             }
 
             final Object[] args = event.getObjects();
@@ -56,7 +61,9 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                         } catch (final IllegalAccessException | IllegalArgumentException e) {
                             System.err.println(String.format("Unknown protocol method %s with %d args", methodName, args == null ? 0 : args.length));
                         } catch (final InvocationTargetException e) {
-                            throw new RuntimeException(e.getTargetException());
+                            //throw new RuntimeException(e.getTargetException());
+                            catchedError[0] += (String.format("RuntimeException: %s (GameProtocolHandler.java Line 65)\n", e.getTargetException().toString()));
+                            System.err.println(e.getTargetException().toString());
                         }
                     } else {
                         Serializable reply = null;
@@ -70,8 +77,11 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                             }
                         } catch (final IllegalAccessException | IllegalArgumentException e) {
                             System.err.println(String.format("Unknown protocol method %s with %d args, replying with null", methodName, args == null ? 0 : args.length));
-                        } catch (final InvocationTargetException e) {
-                            throw new RuntimeException(e.getTargetException());
+                        } catch (final NullPointerException | InvocationTargetException e) {
+                            //throw new RuntimeException(e.getTargetException());
+                            catchedError[0] += e.toString();
+                            SOptionPane.showMessageDialog(catchedError[0], "Error", FSkinProp.ICO_WARNING);
+                            System.err.println(e.toString());
                         }
                         getRemote(ctx).send(new ReplyEvent(event.getId(), reply));
                     }

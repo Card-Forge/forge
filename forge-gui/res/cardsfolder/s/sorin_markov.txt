@@ -8,4 +8,4 @@ A:AB$ SetLife | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Op
 # NOTE: The AI will not activate the Ultimate, but otherwise it uses the first two abilities rather well and to the point.
 A:AB$ ControlPlayer | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ You control target player during that player's next turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sorin_markov.jpg
-Oracle:[+2]: Sorin Markov deals 2 damage to any target and you gain 2 life.\n[-3]: Target opponent's life total becomes 10.\n[-7]: You control target player during that player's next turn.
+Oracle:[+2]: Sorin Markov deals 2 damage to any target and you gain 2 life.\n[−3]: Target opponent's life total becomes 10.\n[−7]: You control target player during that player's next turn.

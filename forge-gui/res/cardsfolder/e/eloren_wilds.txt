@@ -2,7 +2,7 @@ Name:Eloren Wilds
 ManaCost:no cost
 Types:Plane Shandalar
 T:Mode$ TapsForMana | ValidCard$ Permanent | Execute$ TrigMana | TriggerZones$ Command | Static$ True | TriggerDescription$ Whenever a player taps a permanent for mana, that player adds one mana of any type that permanent produced.
-SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | Valid$ Defined.Triggered | ReflectProperty$ Produced | Defined$ TriggeredPlayer
+SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ TriggeredActivator
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, target player can't cast spells until a player planeswalks.
 SVar:RolledChaos:DB$ Effect | ValidTgts$ Player | IsCurse$ True | Name$ Eloren Wilds Effect | StaticAbilities$ STCantCast | Triggers$ TrigPlaneswalk | SVars$ ExileSelf | RememberObjects$ Targeted | Duration$ Permanent
 SVar:STCantCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Player.IsRemembered | Description$ Target player can't cast spells until a player planeswalks.

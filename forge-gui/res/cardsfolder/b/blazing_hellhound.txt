@@ -1,6 +1,6 @@
 Name:Blazing Hellhound
 ManaCost:2 B R
-Types:Creature Elemental Hound
+Types:Creature Elemental Dog
 PT:4/3
 A:AB$ DealDamage | Cost$ 1 Sac<1/Creature.Other/another creature> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_hellhound.jpg

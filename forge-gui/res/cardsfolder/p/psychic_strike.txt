@@ -1,7 +1,6 @@
 Name:Psychic Strike
 ManaCost:1 U B
 Types:Instant
-A:SP$ Counter | Cost$ 1 U B | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBMill | Destination$ Graveyard | SpellDescription$ Counter target spell. Its controller puts the top two cards of their library into their graveyard.
+A:SP$ Counter | Cost$ 1 U B | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBMill | Destination$ Graveyard | SpellDescription$ Counter target spell. Its controller mills two cards.
 SVar:DBMill:DB$ Mill | NumCards$ 2 | Defined$ TargetedController
-SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_strike.jpg
-Oracle:Counter target spell. Its controller puts the top two cards of their library into their graveyard.
+Oracle:Counter target spell. Its controller mills two cards.

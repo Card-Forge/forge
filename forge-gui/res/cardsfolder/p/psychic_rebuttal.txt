@@ -1,9 +1,8 @@
 Name:Psychic Rebuttal
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TargetValidTargeting$ You | TgtPrompt$ Select target spell that targets you | ValidTgts$ Instant,Sorcery | RememberCountered$ True | SubAbility$ DBCopy | SpellDescription$ Counter target instant or sorcery spell that targets you. Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, you may copy the spell countered this way. You may choose new targets for the copy.
-SVar:DBCopy:DB$ CopySpellAbility | Defined$ Remembered | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | References$ X | SubAbility$ DBCleanup
+A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TargetValidTargeting$ You | TgtPrompt$ Select target spell that targets you | ValidTgts$ Instant,Sorcery | RememberCountered$ True | SubAbility$ DBCopy | SpellDescription$ Counter target instant or sorcery spell that targets you.Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, you may copy the spell countered this way. You may choose new targets for the copy.
+SVar:DBCopy:DB$ CopySpellAbility | Defined$ Remembered | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | References$ X | MayChooseTarget$ True | SubAbility$ DBCleanup
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_rebuttal.jpg
-Oracle:Counter target instant or sorcery spell that targets you. \nSpell mastery — If there are two or more instant and/or sorcery cards in your graveyard, you may copy the spell countered this way. You may choose new targets for the copy.
+Oracle:Counter target instant or sorcery spell that targets you.\nSpell mastery — If there are two or more instant and/or sorcery cards in your graveyard, you may copy the spell countered this way. You may choose new targets for the copy.

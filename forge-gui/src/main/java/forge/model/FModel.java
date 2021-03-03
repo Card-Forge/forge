@@ -28,6 +28,7 @@ import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
 import forge.deck.CardRelationMatrixGenerator;
 import forge.deck.io.DeckPreferences;
+import forge.download.AutoUpdater;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.card.CardUtil;
@@ -36,6 +37,7 @@ import forge.gauntlet.GauntletData;
 import forge.interfaces.IProgressBar;
 import forge.itemmanager.ItemManagerConfig;
 import forge.limited.GauntletMini;
+import forge.limited.ThemedChaosDraft;
 import forge.planarconquest.ConquestController;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestPreferences;
@@ -50,6 +52,7 @@ import forge.quest.data.QuestPreferences;
 import forge.tournament.TournamentData;
 import forge.util.CardTranslation;
 import forge.util.FileUtil;
+import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
@@ -90,11 +93,20 @@ public final class FModel {
 
     private static IStorage<CardBlock> blocks;
     private static IStorage<CardBlock> fantasyBlocks;
+    private static IStorage<ThemedChaosDraft> themedChaosDrafts;
     private static IStorage<ConquestPlane> planes;
     private static IStorage<QuestWorld> worlds;
     private static GameFormat.Collection formats;
 
     public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs) {
+        //init version to log
+        System.out.println("Forge v." + GuiBase.getInterface().getCurrentVersion() + " (" + GuiBase.getInterface() + ")");
+        //Device
+        if (GuiBase.isAndroid()) //todo get device on other mobile platforms
+            System.out.println(GuiBase.getDeviceName() + " (RAM: " + GuiBase.getDeviceRAM() + "MB, Android " + GuiBase.getAndroidRelease() + " API Level " + GuiBase.getAndroidAPILevel() + ")");
+        else
+            System.out.println(System.getProperty("os.name") + " (" + System.getProperty("os.version") + " " + System.getProperty("os.arch") + ")");
+
         ImageKeys.initializeDirs(
                 ForgeConstants.CACHE_CARD_PICS_DIR, ForgeConstants.CACHE_CARD_PICS_SUBDIR,
                 ForgeConstants.CACHE_TOKEN_PICS_DIR, ForgeConstants.CACHE_ICON_PICS_DIR,
@@ -115,9 +127,9 @@ public final class FModel {
             throw new RuntimeException(exn);
         }
 
+        Lang.createInstance(FModel.getPreferences().getPref(FPref.UI_LANGUAGE));
         Localizer.getInstance().initialize(FModel.getPreferences().getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
 
-        //load card database
         final ProgressObserver progressBarBridge = (progressBar == null) ?
                 ProgressObserver.emptyObserver : new ProgressObserver() {
             @Override
@@ -143,11 +155,16 @@ public final class FModel {
             }
         };
 
+        if (new AutoUpdater(true).attemptToUpdate()) {
+            //
+        }
+
+        //load card database
         final CardStorageReader reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, progressBarBridge,
                 FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
         final CardStorageReader tokenReader = new CardStorageReader(ForgeConstants.TOKEN_DATA_DIR, progressBarBridge,
                 FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
-        magicDb = new StaticData(reader, tokenReader, ForgeConstants.EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR);
+        magicDb = new StaticData(reader, tokenReader, ForgeConstants.EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR, FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_UNKNOWN_CARDS));
         CardTranslation.preloadTranslation(preferences.getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
 
         //create profile dirs if they don't already exist
@@ -182,6 +199,7 @@ public final class FModel {
         questPreferences = new QuestPreferences();
         conquestPreferences = new ConquestPreferences();
         fantasyBlocks = new StorageBase<>("Custom blocks", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "fantasyblocks.txt", magicDb.getEditions()));
+        themedChaosDrafts = new StorageBase<>("Themed Chaos Drafts", new ThemedChaosDraft.Reader(ForgeConstants.BLOCK_DATA_DIR + "chaosdraftthemes.txt"));
         planes = new StorageBase<>("Conquest planes", new ConquestPlane.Reader(ForgeConstants.CONQUEST_PLANES_DIR + "planes.txt"));
         Map<String, QuestWorld> standardWorlds = new QuestWorld.Reader(ForgeConstants.QUEST_WORLD_DIR + "worlds.txt").readAll();
         Map<String, QuestWorld> customWorlds = new QuestWorld.Reader(ForgeConstants.USER_QUEST_WORLD_DIR + "customworlds.txt").readAll();
@@ -220,8 +238,6 @@ public final class FModel {
         achievements.put(GameType.Quest, new QuestAchievements());
         achievements.put(GameType.PlanarConquest, new PlanarConquestAchievements());
         achievements.put(GameType.Puzzle, new PuzzleAchievements());
-        
-        
 
         //preload AI profiles
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
@@ -378,6 +394,10 @@ public final class FModel {
 
     public static IStorage<CardBlock> getFantasyBlocks() {
         return fantasyBlocks;
+    }
+
+    public static IStorage<ThemedChaosDraft> getThemedChaosDrafts() {
+        return themedChaosDrafts;
     }
 
     public static TournamentData getTournamentData() { return tournamentData; }

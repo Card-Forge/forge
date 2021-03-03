@@ -1,6 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtilMana;
+import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -8,7 +8,6 @@ import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -76,14 +75,15 @@ public class DigUntilAi extends SpellAbilityAi {
         }
 
         final String num = sa.getParam("Amount");
-        if ((num != null) && num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
+        if ((num != null) && num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            if (!(sa instanceof AbilitySub) || source.getSVar("PayX").equals("")) {
-                int numCards = ComputerUtilMana.determineLeftoverMana(sa, ai);
+            SpellAbility root = sa.getRootAbility();
+            if (root.getXManaCostPaid() == null) {
+                int numCards = ComputerUtilCost.getMaxXValue(sa, ai);
                 if (numCards <= 0) {
                     return false;
                 }
-                source.setSVar("PayX", Integer.toString(numCards));
+                root.setXManaCostPaid(numCards);
             }
         }
 

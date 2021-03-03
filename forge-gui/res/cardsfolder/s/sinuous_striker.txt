@@ -6,4 +6,4 @@ A:AB$ Pump | Cost$ U | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets
 K:Eternalize:3 U U Discard<1/Card>
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sinuous_striker.jpg
-Oracle:{U}: Sinuous Striker gets +1/-1 until end of turn.\nEternalize—{3}{U}{U}, Discard a card ({3}{U}{U}, Discard a card, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie Naga Warrior with no mana cost. Eternalize only as a sorcery.)
+Oracle:{U}: Sinuous Striker gets +1/-1 until end of turn.\nEternalize—{3}{U}{U}, Discard a card. ({3}{U}{U}, Discard a card, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie Naga Warrior with no mana cost. Eternalize only as a sorcery.)

@@ -1,7 +1,7 @@
 Name:Mirrodin Besieged
 ManaCost:2 U
 Types:Enchantment
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ SiegeChoice | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose Mirran or Phyrexian. Mirran - Whenever you cast an artifact spell, create a 1/1 colorless Myr artifact creature token. Phyrexian - At the beginning of your end step, draw a card, then discard a card. Then if there are fifteen or more artifact cards in your graveyard, target opponent loses the game.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ SiegeChoice | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose Mirran or Phyrexian.Mirran - Whenever you cast an artifact spell, create a 1/1 colorless Myr artifact creature token. Phyrexian - At the beginning of your end step, draw a card, then discard a card. Then if there are fifteen or more artifact cards in your graveyard, target opponent loses the game.
 SVar:SiegeChoice:DB$ GenericChoice | Choices$ Mirran,Phyrexian | Defined$ You | SetChosenMode$ True | AILogic$ Mirran | ShowChoice$ ExceptSelf
 SVar:Mirran:DB$ Animate | Defined$ Self | Triggers$ MirranTrigger | Permanent$ True | SpellDescription$ Mirran
 SVar:MirranTrigger:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an artifact spell, create a 1/1 colorless Myr artifact creature token.
@@ -10,7 +10,7 @@ SVar:Phyrexian:DB$ Animate | Defined$ Self | Triggers$ TrigEnd | Permanent$ True
 SVar:TrigEnd:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ Filter | TriggerDescription$ At the beginning of your end step, draw a card, then discard a card. Then if there are fifteen or more artifact cards in your graveyard, target opponent loses the game.
 SVar:Filter:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | SubAbility$ DBLose
-SVar:DBLose:DB$ LosesGame | ValidTgts$ Player | ConditionCheckSVar$ CheckGraveyard | ConditionSVarCompare$ GE15 | References$ CheckGraveyard
+SVar:DBLose:DB$ LosesGame | ValidTgts$ Opponent | ConditionCheckSVar$ CheckGraveyard | ConditionSVarCompare$ GE15 | References$ CheckGraveyard
 SVar:CheckGraveyard:Count$ValidGraveyard Card.Artifact+YouOwn
 DeckHas:Ability$Token
-Oracle:As Mirrodin Besieged enters the battlefield, choose Mirran or Phyrexian. \n• Mirran - Whenever you cast an artifact spell, create a 1/1 colorless Myr artifact creature token.\n• At the beginning of your end step, draw a card, then discard a card. Then if there are fifteen or more artifact cards in your graveyard, target opponent loses the game.
+Oracle:As Mirrodin Besieged enters the battlefield, choose Mirran or Phyrexian.\n• Mirran — Whenever you cast an artifact spell, create a 1/1 colorless Myr artifact creature token.\n• Phyrexian — At the beginning of your end step, draw a card, then discard a card. Then if there are fifteen or more artifact cards in your graveyard, target opponent loses the game.

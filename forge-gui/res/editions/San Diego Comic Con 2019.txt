@@ -1,0 +1,12 @@
+[metadata]
+Code=PS19
+Date=2019-07-18
+Name=San Diego Comic-Con 2019
+Type=Reprint
+
+[cards]
+16 M God-Eternal Oketra
+53 M God-Eternal Kefnet
+92 M God-Eternal Bontu
+163 M God-Eternal Rhonas
+207 M Nicol Bolas, Dragon-God

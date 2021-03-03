@@ -6,7 +6,7 @@ A:AB$ PumpAll | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidCards$ C
 A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 A:AB$ AnimateAll | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouCtrl | Keywords$ Deathtouch | Triggers$ Trig | sVars$ Eff | SpellDescription$ Until end of turn, creatures you control gain deathtouch and "Whenever this creature deals damage to an opponent, that player loses the game."
 SVar:Trig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ Eff | TriggerDescription$ Whenever this creature deals damage to an opponent, that player loses the game.
-SVar:Eff:DB$ LosesGame | Defined$ TriggeredTarget 
+SVar:Eff:DB$ LosesGame | Defined$ TriggeredTarget
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vraska_scheming_gorgon.jpg
-Oracle:[+2]: Creatures you control get +1/+0 until end of turn.\n[-3]: Destroy target creature.\n[-10]: Until end of turn, creatures you control gain deathtouch and "Whenever this creature deals damage to an opponent, that player loses the game."
+Oracle:[+2]: Creatures you control get +1/+0 until end of turn.\n[−3]: Destroy target creature.\n[−10]: Until end of turn, creatures you control gain deathtouch and "Whenever this creature deals damage to an opponent, that player loses the game."

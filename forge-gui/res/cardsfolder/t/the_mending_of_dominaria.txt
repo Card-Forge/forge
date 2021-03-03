@@ -2,10 +2,10 @@ Name:The Mending of Dominaria
 ManaCost:3 G G
 Types:Enchantment Saga
 K:Saga:3:TrigMill,TrigMill,DBChangeZoneAll
-SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | SubAbility$ DBChooseCard | SpellDescription$ Put the top two cards of your library into your graveyard, then you may return a creature card from your graveyard to your hand.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | SubAbility$ DBChooseCard | SpellDescription$ Mill two cards, then you may return a creature card from your graveyard to your hand.
 SVar:DBChooseCard:DB$ ChooseCard | Choices$ Creature.YouOwn | Optional$ Yes | ChoiceZone$ Graveyard | Amount$ 1 | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ ChosenCard
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Land.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBShuffle | SpellDescription$ Return all land cards from your graveyard to the battlefield, then shuffle your graveyard into your library.
 SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True
 DeckHints:Ability$Graveyard
-Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II - Put the top two cards of your library into your graveyard, then you may return a creature card from your graveyard to your hand.\nIII - Return all land cards from your graveyard to the battlefield, then shuffle your graveyard into your library. 
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Mill two cards, then you may return a creature card from your graveyard to your hand.\nIII — Return all land cards from your graveyard to the battlefield, then shuffle your graveyard into your library.

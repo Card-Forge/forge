@@ -26,30 +26,48 @@ import forge.game.keyword.Keyword;
 import forge.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.item.SealedProduct;
 import forge.model.FModel;
 import forge.planarconquest.ConquestCommander;
 import forge.planarconquest.ConquestPlane;
 import forge.planarconquest.ConquestRegion;
+import forge.quest.QuestSpellShop;
 import forge.quest.QuestWorld;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
+import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 public class AdvancedSearch {
     public enum FilterOption {
-        NONE("(none)", null, null, null),
-        CARD_NAME("Name", PaperCard.class, FilterOperator.STRING_OPS, new StringEvaluator<PaperCard>() {
+        NONE("lblNone", null, null, null),
+        CARD_NAME("lblName", PaperCard.class, FilterOperator.STRINGS_OPS, new StringEvaluator<PaperCard>() {
             @Override
             protected String getItemValue(PaperCard input) {
-                return input.getName();
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<String> getItemValues(PaperCard input) {
+                Set<String> names = new HashSet<>();
+                names.add(input.getName());
+                names.add(CardTranslation.getTranslatedName(input.getName()));
+                return names;
             }
         }),
-        CARD_RULES_TEXT("Rules Text", PaperCard.class, FilterOperator.STRING_OPS, new StringEvaluator<PaperCard>() {
+        CARD_RULES_TEXT("lblRulesText", PaperCard.class, FilterOperator.STRINGS_OPS, new StringEvaluator<PaperCard>() {
             @Override
             protected String getItemValue(PaperCard input) {
-                return input.getRules().getOracleText();
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<String> getItemValues(PaperCard input) {
+                Set<String> names = new HashSet<>();
+                names.add(input.getRules().getOracleText());
+                names.add(CardTranslation.getTranslatedOracle(input.getName()));
+                return names;
             }
         }),
-        CARD_KEYWORDS("Keywords", PaperCard.class, FilterOperator.COLLECTION_OPS, new CustomListEvaluator<PaperCard, Keyword>(Keyword.getAllKeywords()) {
+        CARD_KEYWORDS("lblKeywords", PaperCard.class, FilterOperator.COLLECTION_OPS, new CustomListEvaluator<PaperCard, Keyword>(Keyword.getAllKeywords()) {
             @Override
             protected Keyword getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -59,13 +77,13 @@ public class AdvancedSearch {
                 return Keyword.getKeywordSet(input);
             }
         }),
-        CARD_SET("Set", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardEdition>(FModel.getMagicDb().getSortedEditions(), CardEdition.FN_GET_CODE) {
+        CARD_SET("lblSet", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardEdition>(FModel.getMagicDb().getSortedEditions(), CardEdition.FN_GET_CODE) {
             @Override
             protected CardEdition getItemValue(PaperCard input) {
                 return FModel.getMagicDb().getEditions().get(input.getEdition());
             }
         }),
-        CARD_FORMAT("Format", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, GameFormat>((List<GameFormat>)FModel.getFormats().getFilterList()) {
+        CARD_FORMAT("lblFormat", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, GameFormat>((List<GameFormat>)FModel.getFormats().getFilterList()) {
             @Override
             protected GameFormat getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -75,7 +93,7 @@ public class AdvancedSearch {
                 return FModel.getFormats().getAllFormatsOfCard(input);
             }
         }),
-        CARD_PLANE("Plane", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, ConquestPlane>(ImmutableList.copyOf(FModel.getPlanes())) {
+        CARD_PLANE("lblPlane", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, ConquestPlane>(ImmutableList.copyOf(FModel.getPlanes())) {
             @Override
             protected ConquestPlane getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -85,7 +103,7 @@ public class AdvancedSearch {
                 return ConquestPlane.getAllPlanesOfCard(input);
             }
         }),
-        CARD_REGION("Region", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, ConquestRegion>(ConquestRegion.getAllRegions()) {
+        CARD_REGION("lblRegion", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, ConquestRegion>(ConquestRegion.getAllRegions()) {
             @Override
             protected ConquestRegion getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -95,7 +113,7 @@ public class AdvancedSearch {
                 return ConquestRegion.getAllRegionsOfCard(input);
             }
         }),
-        CARD_QUEST_WORLD("Quest World", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, QuestWorld>(ImmutableList.copyOf(FModel.getWorlds())) {
+        CARD_QUEST_WORLD("lblQuestWorld", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, QuestWorld>(ImmutableList.copyOf(FModel.getWorlds())) {
             @Override
             protected QuestWorld getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -105,7 +123,7 @@ public class AdvancedSearch {
                 return QuestWorld.getAllQuestWorldsOfCard(input);
             }
         }),
-        CARD_COLOR("Color", PaperCard.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<PaperCard>() {
+        CARD_COLOR("lblColor", PaperCard.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<PaperCard>() {
             @Override
             protected MagicColor.Color getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -115,7 +133,7 @@ public class AdvancedSearch {
                 return input.getRules().getColor().toEnumSet();
             }
         }),
-        CARD_COLOR_IDENTITY("Color Identity", PaperCard.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<PaperCard>() {
+        CARD_COLOR_IDENTITY("lblColorIdentity", PaperCard.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<PaperCard>() {
             @Override
             protected MagicColor.Color getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -125,13 +143,13 @@ public class AdvancedSearch {
                 return input.getRules().getColorIdentity().toEnumSet();
             }
         }),
-        CARD_COLOR_COUNT("Color Count", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 5) {
+        CARD_COLOR_COUNT("lblColorCount", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 5) {
             @Override
             protected Integer getItemValue(PaperCard input) {
                 return input.getRules().getColor().countColors();
             }
         }),
-        CARD_TYPE("Type", PaperCard.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<PaperCard, String>(CardType.getCombinedSuperAndCoreTypes()) {
+        CARD_TYPE("lblType", PaperCard.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<PaperCard, String>(CardType.getCombinedSuperAndCoreTypes()) {
             @Override
             protected String getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -149,7 +167,7 @@ public class AdvancedSearch {
                 return types;
             }
         }),
-        CARD_SUB_TYPE("Subtype", PaperCard.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<PaperCard, String>(CardType.getSortedSubTypes()) {
+        CARD_SUB_TYPE("lblSubtype", PaperCard.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<PaperCard, String>(CardType.getSortedSubTypes()) {
             @Override
             protected String getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -159,19 +177,19 @@ public class AdvancedSearch {
                 return (Set<String>)input.getRules().getType().getSubtypes();
             }
         }),
-        CARD_CMC("CMC", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 20) {
+        CARD_CMC("lblCMC", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 20) {
             @Override
             protected Integer getItemValue(PaperCard input) {
                 return input.getRules().getManaCost().getCMC();
             }
         }),
-        CARD_GENERIC_COST("Generic Cost", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 20) {
+        CARD_GENERIC_COST("lblGenericCost", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 20) {
             @Override
             protected Integer getItemValue(PaperCard input) {
                 return input.getRules().getManaCost().getGenericCost();
             }
         }),
-        CARD_POWER("Power", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 20) {
+        CARD_POWER("lblPower", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 20) {
             @Override
             protected Integer getItemValue(PaperCard input) {
                 CardRules rules = input.getRules();
@@ -181,7 +199,7 @@ public class AdvancedSearch {
                 return null;
             }
         }),
-        CARD_TOUGHNESS("Toughness", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 20) {
+        CARD_TOUGHNESS("lblToughness", PaperCard.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<PaperCard>(0, 20) {
             @Override
             protected Integer getItemValue(PaperCard input) {
                 CardRules rules = input.getRules();
@@ -191,19 +209,19 @@ public class AdvancedSearch {
                 return null;
             }
         }),
-        CARD_MANA_COST("Mana Cost", PaperCard.class, FilterOperator.STRING_OPS, new StringEvaluator<PaperCard>() {
+        CARD_MANA_COST("lblManaCost", PaperCard.class, FilterOperator.STRING_OPS, new StringEvaluator<PaperCard>() {
             @Override
             protected String getItemValue(PaperCard input) {
                 return input.getRules().getManaCost().toString();
             }
         }),
-        CARD_RARITY("Rarity", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardRarity>(Arrays.asList(CardRarity.FILTER_OPTIONS), CardRarity.FN_GET_LONG_NAME, CardRarity.FN_GET_LONG_NAME) {
+        CARD_RARITY("lblRarity", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardRarity>(Arrays.asList(CardRarity.FILTER_OPTIONS), CardRarity.FN_GET_LONG_NAME, CardRarity.FN_GET_LONG_NAME) {
             @Override
             protected CardRarity getItemValue(PaperCard input) {
                 return input.getRarity();
             }
         }),
-        CARD_FIRST_PRINTING("First Printing", PaperCard.class, FilterOperator.BOOLEAN_OPS, new BooleanEvaluator<PaperCard>() {
+        CARD_FIRST_PRINTING("lblFirstPrinting", PaperCard.class, FilterOperator.BOOLEAN_OPS, new BooleanEvaluator<PaperCard>() {
             @Override
             protected Boolean getItemValue(PaperCard input) {
                 List<PaperCard> cards = FModel.getMagicDb().getCommonCards().getAllCards(input.getName());
@@ -213,25 +231,276 @@ public class AdvancedSearch {
                 return cards.get(0) == input;
             }
         }),
-        DECK_NAME("Name", DeckProxy.class, FilterOperator.STRING_OPS, new StringEvaluator<DeckProxy>() {
+        INVITEM_NAME("lblName", InventoryItem.class, FilterOperator.STRING_OPS, new StringEvaluator<InventoryItem>() {
+            @Override
+            protected String getItemValue(InventoryItem input) {
+                return input.getName();
+            }
+        }),
+        INVITEM_RULES_TEXT("lblRulesText", InventoryItem.class, FilterOperator.STRING_OPS, new StringEvaluator<InventoryItem>() {
+            @Override
+            protected String getItemValue(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return "";
+                }
+                return ((PaperCard)input).getRules().getOracleText();
+            }
+        }),
+        INVITEM_KEYWORDS("lblKeywords", InventoryItem.class, FilterOperator.COLLECTION_OPS, new CustomListEvaluator<InventoryItem, Keyword>(Keyword.getAllKeywords()) {
+            @Override
+            protected Keyword getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<Keyword> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                return Keyword.getKeywordSet((PaperCard)input);
+            }
+        }),
+        INVITEM_SET("lblSet", InventoryItem.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<InventoryItem, CardEdition>(FModel.getMagicDb().getSortedEditions(), CardEdition.FN_GET_CODE) {
+            @Override
+            protected CardEdition getItemValue(InventoryItem input) {
+                if (input instanceof PaperCard) {
+                    return FModel.getMagicDb().getEditions().get(((PaperCard)input).getEdition());
+                } else if (input instanceof SealedProduct) {
+                    return FModel.getMagicDb().getEditions().get(((SealedProduct)input).getEdition());
+                } else {
+                    return CardEdition.UNKNOWN;
+                }
+            }
+        }),
+        INVITEM_FORMAT("lblFormat", InventoryItem.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<InventoryItem, GameFormat>((List<GameFormat>)FModel.getFormats().getFilterList()) {
+            @Override
+            protected GameFormat getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<GameFormat> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                return FModel.getFormats().getAllFormatsOfCard((PaperCard)input);
+            }
+        }),
+        INVITEM_PLANE("lblPlane", InventoryItem.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<InventoryItem, ConquestPlane>(ImmutableList.copyOf(FModel.getPlanes())) {
+            @Override
+            protected ConquestPlane getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<ConquestPlane> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                return ConquestPlane.getAllPlanesOfCard((PaperCard)input);
+            }
+        }),
+        INVITEM_REGION("lblRegion", InventoryItem.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<InventoryItem, ConquestRegion>(ConquestRegion.getAllRegions()) {
+            @Override
+            protected ConquestRegion getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<ConquestRegion> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                return ConquestRegion.getAllRegionsOfCard((PaperCard)input);
+            }
+        }),
+        INVITEM_QUEST_WORLD("lblQuestWorld", InventoryItem.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<InventoryItem, QuestWorld>(ImmutableList.copyOf(FModel.getWorlds())) {
+            @Override
+            protected QuestWorld getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<QuestWorld> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                return QuestWorld.getAllQuestWorldsOfCard(((PaperCard)input));
+            }
+        }),
+        INVITEM_COLOR("lblColor", InventoryItem.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<InventoryItem>() {
+            @Override
+            protected MagicColor.Color getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<MagicColor.Color> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                return ((PaperCard)input).getRules().getColor().toEnumSet();
+            }
+        }),
+        INVITEM_COLOR_IDENTITY("lblColorIdentity", InventoryItem.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<InventoryItem>() {
+            @Override
+            protected MagicColor.Color getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<MagicColor.Color> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                return ((PaperCard)input).getRules().getColorIdentity().toEnumSet();
+            }
+        }),
+        INVITEM_COLOR_COUNT("lblColorCount", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 5) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return 0;
+                }
+                return ((PaperCard)input).getRules().getColor().countColors();
+            }
+        }),
+        INVITEM_TYPE("lblType", InventoryItem.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<InventoryItem, String>(CardType.getCombinedSuperAndCoreTypes()) {
+            @Override
+            protected String getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<String> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                final CardType type = ((PaperCard)input).getRules().getType();
+                final Set<String> types = new HashSet<>();
+                for (Supertype t : type.getSupertypes()) {
+                    types.add(t.name());
+                }
+                for (CoreType t : type.getCoreTypes()) {
+                    types.add(t.name());
+                }
+                return types;
+            }
+        }),
+        INVITEM_SUB_TYPE("lblSubtype", InventoryItem.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<InventoryItem, String>(CardType.getSortedSubTypes()) {
+            @Override
+            protected String getItemValue(InventoryItem input) {
+                throw new RuntimeException("getItemValues should be called instead");
+            }
+            @Override
+            protected Set<String> getItemValues(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return new HashSet<>();
+                }
+                return (Set<String>)((PaperCard)input).getRules().getType().getSubtypes();
+            }
+        }),
+        INVITEM_CMC("lblCMC", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 20) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return 0;
+                }
+                return ((PaperCard)input).getRules().getManaCost().getCMC();
+            }
+        }),
+        INVITEM_GENERIC_COST("lblGenericCost", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 20) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return 0;
+                }
+                return ((PaperCard)input).getRules().getManaCost().getGenericCost();
+            }
+        }),
+        INVITEM_POWER("lblPower", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 20) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return null;
+                }
+                CardRules rules = ((PaperCard)input).getRules();
+                if (rules.getType().isCreature()) {
+                    return rules.getIntPower();
+                }
+                return null;
+            }
+        }),
+        INVITEM_TOUGHNESS("lblToughness", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 20) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return null;
+                }
+                CardRules rules = ((PaperCard)input).getRules();
+                if (rules.getType().isCreature()) {
+                    return rules.getIntToughness();
+                }
+                return null;
+            }
+        }),
+        INVITEM_MANA_COST("lblManaCost", InventoryItem.class, FilterOperator.STRING_OPS, new StringEvaluator<InventoryItem>() {
+            @Override
+            protected String getItemValue(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return "";
+                }
+                return ((PaperCard)input).getRules().getManaCost().toString();
+            }
+        }),
+        INVITEM_FIRST_PRINTING("lblFirstPrinting", InventoryItem.class, FilterOperator.BOOLEAN_OPS, new BooleanEvaluator<InventoryItem>() {
+            @Override
+            protected Boolean getItemValue(InventoryItem input) {
+                List<PaperCard> cards = FModel.getMagicDb().getCommonCards().getAllCards(input.getName());
+                if (cards.size() <= 1) { return true; }
+
+                Collections.sort(cards, FModel.getMagicDb().getEditions().CARD_EDITION_COMPARATOR);
+                return cards.get(0) == input;
+            }
+        }),
+        INVITEM_RARITY("lblRarity", InventoryItem.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<InventoryItem, CardRarity>(Arrays.asList(CardRarity.FILTER_OPTIONS), CardRarity.FN_GET_LONG_NAME, CardRarity.FN_GET_LONG_NAME) {
+            @Override
+            protected CardRarity getItemValue(InventoryItem input) {
+                if (!(input instanceof PaperCard)) {
+                    return CardRarity.Special;
+                }
+                return ((PaperCard)input).getRarity();
+            }
+        }),
+        INVITEM_BUY_PRICE("lblBuyPrice", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 10000000) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                return (Integer) QuestSpellShop.fnPriceGet.apply(new AbstractMap.SimpleEntry<InventoryItem, Integer>(input, 1));
+            }
+        }),
+        INVITEM_SELL_PRICE("lblSellPrice", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 10000000) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                return (Integer) QuestSpellShop.fnPriceSellGet.apply(new AbstractMap.SimpleEntry<InventoryItem, Integer>(input, 1));
+            }
+        }),
+        INVITEM_USED_IN_QUEST_DECKS("lblUsedInQuestDecks", InventoryItem.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<InventoryItem>(0, 100) {
+            @Override
+            protected Integer getItemValue(InventoryItem input) {
+                return (Integer) Integer.parseInt((String) QuestSpellShop.fnDeckGet.apply(new AbstractMap.SimpleEntry<InventoryItem, Integer>(input, 1)));
+            }
+        }),
+        DECK_NAME("lblName", DeckProxy.class, FilterOperator.STRING_OPS, new StringEvaluator<DeckProxy>() {
             @Override
             protected String getItemValue(DeckProxy input) {
                 return input.getName();
             }
         }),
-        DECK_FOLDER("Folder", DeckProxy.class, FilterOperator.STRING_OPS, new StringEvaluator<DeckProxy>() {
+        DECK_FOLDER("lblFolder", DeckProxy.class, FilterOperator.STRING_OPS, new StringEvaluator<DeckProxy>() {
             @Override
             protected String getItemValue(DeckProxy input) {
                 return input.getPath();
             }
         }),
-        DECK_FAVORITE("Favorite", DeckProxy.class, FilterOperator.BOOLEAN_OPS, new BooleanEvaluator<DeckProxy>() {
+        DECK_FAVORITE("ttFavorite", DeckProxy.class, FilterOperator.BOOLEAN_OPS, new BooleanEvaluator<DeckProxy>() {
             @Override
             protected Boolean getItemValue(DeckProxy input) {
                 return input.isFavoriteDeck();
             }
         }),
-        DECK_FORMAT("Format", DeckProxy.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<DeckProxy, GameFormat>((List<GameFormat>)FModel.getFormats().getFilterList()) {
+        DECK_FORMAT("lblFormat", DeckProxy.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<DeckProxy, GameFormat>((List<GameFormat>)FModel.getFormats().getFilterList()) {
             @Override
             protected GameFormat getItemValue(DeckProxy input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -241,7 +510,7 @@ public class AdvancedSearch {
                 return input.getExhaustiveFormats();
             }
         }),
-        DECK_QUEST_WORLD("Quest World", DeckProxy.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<DeckProxy, QuestWorld>(ImmutableList.copyOf(FModel.getWorlds())) {
+        DECK_QUEST_WORLD("lblQuestWorld", DeckProxy.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<DeckProxy, QuestWorld>(ImmutableList.copyOf(FModel.getWorlds())) {
             @Override
             protected QuestWorld getItemValue(DeckProxy input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -251,7 +520,7 @@ public class AdvancedSearch {
                 return QuestWorld.getAllQuestWorldsOfDeck(input.getDeck());
             }
         }),
-        DECK_COLOR("Color", DeckProxy.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<DeckProxy>() {
+        DECK_COLOR("lblColor", DeckProxy.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<DeckProxy>() {
             @Override
             protected MagicColor.Color getItemValue(DeckProxy input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -261,7 +530,7 @@ public class AdvancedSearch {
                 return input.getColor().toEnumSet();
             }
         }),
-        DECK_COLOR_IDENTITY("Color Identity", DeckProxy.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<DeckProxy>() {
+        DECK_COLOR_IDENTITY("lblColorIdentity", DeckProxy.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<DeckProxy>() {
             @Override
             protected MagicColor.Color getItemValue(DeckProxy input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -271,25 +540,25 @@ public class AdvancedSearch {
                 return input.getColorIdentity().toEnumSet();
             }
         }),
-        DECK_COLOR_COUNT("Color Count", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(0, 5) {
+        DECK_COLOR_COUNT("lblColorCount", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(0, 5) {
             @Override
             protected Integer getItemValue(DeckProxy input) {
                 return input.getColor().countColors();
             }
         }),
-        DECK_AVERAGE_CMC("Average CMC", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(0, 20) {
+        DECK_AVERAGE_CMC("lblAverageCMC", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(0, 20) {
             @Override
             protected Integer getItemValue(DeckProxy input) {
                 return input.getAverageCMC();
             }
         }),
-        DECK_MAIN("Main Deck", DeckProxy.class, FilterOperator.DECK_CONTENT_OPS, new DeckContentEvaluator<DeckProxy>() {
+        DECK_MAIN("lblMainDeck", DeckProxy.class, FilterOperator.DECK_CONTENT_OPS, new DeckContentEvaluator<DeckProxy>() {
             @Override
             protected Map<String, Integer> getItemValue(DeckProxy input) {
                 return input.getDeck().getMain().toNameLookup();
             }
         }),
-        DECK_SIDEBOARD("Sideboard", DeckProxy.class, FilterOperator.DECK_CONTENT_OPS, new DeckContentEvaluator<DeckProxy>() {
+        DECK_SIDEBOARD("lblSideboard", DeckProxy.class, FilterOperator.DECK_CONTENT_OPS, new DeckContentEvaluator<DeckProxy>() {
             @Override
             protected Map<String, Integer> getItemValue(DeckProxy input) {
                 CardPool sideboard = input.getDeck().get(DeckSection.Sideboard);
@@ -299,31 +568,31 @@ public class AdvancedSearch {
                 return null;
             }
         }),
-        DECK_MAIN_SIZE("Main Deck Size", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(40, 250) {
+        DECK_MAIN_SIZE("lblMainDeckSize", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(40, 250) {
             @Override
             protected Integer getItemValue(DeckProxy input) {
                 return input.getMainSize();
             }
         }),
-        DECK_SIDE_SIZE("Sideboard Size", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(0, 15) {
+        DECK_SIDE_SIZE("lblSideboardSize", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(0, 15) {
             @Override
             protected Integer getItemValue(DeckProxy input) {
                 return Math.min(input.getSideSize(), 0);
             }
         }),
-        COMMANDER_NAME("Name", ConquestCommander.class, FilterOperator.STRING_OPS, new StringEvaluator<ConquestCommander>() {
+        COMMANDER_NAME("lblName", ConquestCommander.class, FilterOperator.STRING_OPS, new StringEvaluator<ConquestCommander>() {
             @Override
             protected String getItemValue(ConquestCommander input) {
                 return input.getName();
             }
         }),
-        COMMANDER_ORIGIN("Origin", ConquestCommander.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<ConquestCommander, ConquestPlane>(ImmutableList.copyOf(FModel.getPlanes())) {
+        COMMANDER_ORIGIN("lblOrigin", ConquestCommander.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<ConquestCommander, ConquestPlane>(ImmutableList.copyOf(FModel.getPlanes())) {
             @Override
             protected ConquestPlane getItemValue(ConquestCommander input) {
                 return input.getOriginPlane();
             }
         }),
-        COMMANDER_COLOR("Color", ConquestCommander.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<ConquestCommander>() {
+        COMMANDER_COLOR("lblColor", ConquestCommander.class, FilterOperator.COMBINATION_OPS, new ColorEvaluator<ConquestCommander>() {
             @Override
             protected MagicColor.Color getItemValue(ConquestCommander input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -333,25 +602,25 @@ public class AdvancedSearch {
                 return input.getCard().getRules().getColorIdentity().toEnumSet();
             }
         }),
-        COMMANDER_COLOR_COUNT("Color Count", ConquestCommander.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<ConquestCommander>(0, 5) {
+        COMMANDER_COLOR_COUNT("lblColorCount", ConquestCommander.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<ConquestCommander>(0, 5) {
             @Override
             protected Integer getItemValue(ConquestCommander input) {
                 return input.getCard().getRules().getColorIdentity().countColors();
             }
         }),
-        COMMANDER_DECK_AVERAGE_CMC("Deck Average CMC", ConquestCommander.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<ConquestCommander>(0, 20) {
+        COMMANDER_DECK_AVERAGE_CMC("lblDeckAverageCMC", ConquestCommander.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<ConquestCommander>(0, 20) {
             @Override
             protected Integer getItemValue(ConquestCommander input) {
                 return DeckProxy.getAverageCMC(input.getDeck());
             }
         }),
-        COMMANDER_DECK_CONTENTS("Deck Contents", ConquestCommander.class, FilterOperator.DECK_CONTENT_OPS, new DeckContentEvaluator<ConquestCommander>() {
+        COMMANDER_DECK_CONTENTS("lblDeckContents", ConquestCommander.class, FilterOperator.DECK_CONTENT_OPS, new DeckContentEvaluator<ConquestCommander>() {
             @Override
             protected Map<String, Integer> getItemValue(ConquestCommander input) {
                 return input.getDeck().getMain().toNameLookup();
             }
         }),
-        COMMANDER_DECK_SIZE("Deck Size", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(40, 250) {
+        COMMANDER_DECK_SIZE("lblDeckSize", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(40, 250) {
             @Override
             protected Integer getItemValue(DeckProxy input) {
                 return input.getMainSize();
@@ -364,7 +633,7 @@ public class AdvancedSearch {
         private final FilterEvaluator<? extends InventoryItem, ?> evaluator;
 
         FilterOption(String name0, Class<? extends InventoryItem> type0, FilterOperator[] operatorOptions0, FilterEvaluator<? extends InventoryItem, ?> evaluator0) {
-            name = name0;
+            name = Localizer.getInstance().getMessage(name0);
             type = type0;
             operatorOptions = operatorOptions0;
             evaluator = evaluator0;
@@ -378,7 +647,7 @@ public class AdvancedSearch {
 
     public enum FilterOperator {
         //Boolean operators
-        IS_TRUE("is true", "%1$s is true", FilterValueCount.ZERO, new OperatorEvaluator<Boolean>() {
+        IS_TRUE("lblIsTrue", "%1$s is true", FilterValueCount.ZERO, new OperatorEvaluator<Boolean>() {
             @Override
             public boolean apply(Boolean input, List<Boolean> values) {
                 if (input != null) {
@@ -387,7 +656,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        IS_FALSE("is false", "%1$s is false", FilterValueCount.ZERO, new OperatorEvaluator<Boolean>() {
+        IS_FALSE("lblIsFalse", "%1$s is false", FilterValueCount.ZERO, new OperatorEvaluator<Boolean>() {
             @Override
             public boolean apply(Boolean input, List<Boolean> values) {
                 if (input != null) {
@@ -398,7 +667,7 @@ public class AdvancedSearch {
         }),
 
         //Numeric operators
-        EQUALS("=", "%1$s = %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        EQUALS("lblEqual", "%1$s = %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -407,7 +676,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        NOT_EQUALS("<>", "%1$s <> %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        NOT_EQUALS("lblNotEqual", "%1$s <> %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -416,7 +685,7 @@ public class AdvancedSearch {
                 return true;
             }
         }),
-        GREATER_THAN(">", "%1$s > %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        GREATER_THAN("lblGreaterThan", "%1$s > %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -425,7 +694,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        LESS_THAN("<", "%1$s < %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        LESS_THAN("lblLessThan", "%1$s < %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -434,7 +703,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        GT_OR_EQUAL(">=", "%1$s >= %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        GT_OR_EQUAL("lblGreaterThanOrEqual", "%1$s >= %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -443,7 +712,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        LT_OR_EQUAL("<=", "%1$s <= %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
+        LT_OR_EQUAL("lblLessThanOrEqual", "%1$s <= %2$d", FilterValueCount.ONE, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -452,7 +721,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        BETWEEN_INCLUSIVE("<=|<=", "%2$d <= %1$s <= %3$d", FilterValueCount.TWO, new OperatorEvaluator<Integer>() {
+        BETWEEN_INCLUSIVE("lblBetweenInclusive", "%2$d <= %1$s <= %3$d", FilterValueCount.TWO, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -462,7 +731,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        BETWEEN_EXCLUSIVE("<|<", "%2$d < %1$s < %3$d", FilterValueCount.TWO, new OperatorEvaluator<Integer>() {
+        BETWEEN_EXCLUSIVE("lblBetweenExclusive", "%2$d < %1$s < %3$d", FilterValueCount.TWO, new OperatorEvaluator<Integer>() {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
@@ -474,7 +743,7 @@ public class AdvancedSearch {
         }),
 
         //String operators
-        CONTAINS("contains", "%1$s contains '%2$s'", FilterValueCount.ONE, new OperatorEvaluator<String>() {
+        CONTAINS("lblContains", "%1$s contains '%2$s'", FilterValueCount.ONE, new OperatorEvaluator<String>() {
             @Override
             public boolean apply(String input, List<String> values) {
                 if (input != null) {
@@ -482,8 +751,20 @@ public class AdvancedSearch {
                 }
                 return false;
             }
+            @Override
+            public boolean apply(Set<String> inputs, List<String> values) {
+                if (inputs != null && !inputs.isEmpty() && !values.isEmpty()) {
+                    for (String input : inputs) {
+                        if (apply(input, values)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                return false;
+            }
         }),
-        STARTS_WITH("starts with", "%1$s starts with '%2$s'", FilterValueCount.ONE, new OperatorEvaluator<String>() {
+        STARTS_WITH("lblStartsWith", "%1$s starts with '%2$s'", FilterValueCount.ONE, new OperatorEvaluator<String>() {
             @Override
             public boolean apply(String input, List<String> values) {
                 if (input != null) {
@@ -491,8 +772,20 @@ public class AdvancedSearch {
                 }
                 return false;
             }
+            @Override
+            public boolean apply(Set<String> inputs, List<String> values) {
+                if (inputs != null && !inputs.isEmpty() && !values.isEmpty()) {
+                    for (String input : inputs) {
+                        if (apply(input, values)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                return false;
+            }
         }),
-        ENDS_WITH("ends with", "%1$s ends with '%2$s'", FilterValueCount.ONE, new OperatorEvaluator<String>() {
+        ENDS_WITH("lblEndsWith", "%1$s ends with '%2$s'", FilterValueCount.ONE, new OperatorEvaluator<String>() {
             @Override
             public boolean apply(String input, List<String> values) {
                 if (input != null) {
@@ -500,10 +793,22 @@ public class AdvancedSearch {
                 }
                 return false;
             }
+            @Override
+            public boolean apply(Set<String> inputs, List<String> values) {
+                if (inputs != null && !inputs.isEmpty() && !values.isEmpty()) {
+                    for (String input : inputs) {
+                        if (apply(input, values)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                return false;
+            }
         }),
 
         //Custom list operators
-        IS_EXACTLY("is exactly", "%1$s is %2$s", FilterValueCount.MANY, new OperatorEvaluator<Object>() {
+        IS_EXACTLY("lblIsExactly", "%1$s is %2$s", FilterValueCount.MANY, new OperatorEvaluator<Object>() {
             @Override
             public boolean apply(Object input, List<Object> values) {
                 if (input != null && values.size() == 1) {
@@ -524,7 +829,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        IS_ANY("is any of", "%1$s is %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
+        IS_ANY("lblIsAnyOf", "%1$s is %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
             @Override
             public boolean apply(Object input, List<Object> values) {
                 if (input != null) {
@@ -548,7 +853,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        CONTAINS_ANY("contains any of", "%1$s contains %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
+        CONTAINS_ANY("lblContainsAnyOf", "%1$s contains %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
             @Override
             public boolean apply(Object input, List<Object> values) {
                 if (input != null) {
@@ -572,7 +877,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        CONTAINS_ALL("contains all of", "%1$s contains %2$s", FilterValueCount.MANY_AND, new OperatorEvaluator<Object>() {
+        CONTAINS_ALL("lblContainsAllOf", "%1$s contains %2$s", FilterValueCount.MANY_AND, new OperatorEvaluator<Object>() {
             @Override
             public boolean apply(Object input, List<Object> values) {
                 if (input != null && values.size() == 1) {
@@ -593,7 +898,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        CONTAIN_ANY("contain any of", "%1$s contain %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
+        CONTAIN_ANY("lblContainAnyOf", "%1$s contain %2$s", FilterValueCount.MANY_OR, new OperatorEvaluator<Object>() {
             @Override
             public boolean apply(Object input, List<Object> values) {
                 throw new RuntimeException("shouldn't be called with a single input");
@@ -610,7 +915,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        CONTAIN_ALL("contain all of", "%1$s contain %2$s", FilterValueCount.MANY_AND, new OperatorEvaluator<Object>() {
+        CONTAIN_ALL("lblContainAllOf", "%1$s contain %2$s", FilterValueCount.MANY_AND, new OperatorEvaluator<Object>() {
             @Override
             public boolean apply(Object input, List<Object> values) {
                 throw new RuntimeException("shouldn't be called with a single input");
@@ -630,7 +935,7 @@ public class AdvancedSearch {
         }),
 
         //Deck content operators
-        CONTAINS_CARD("contains card", "%1$s contains %2$s", FilterValueCount.ONE, new OperatorEvaluator<Map<PaperCard, Integer>>() {
+        CONTAINS_CARD("lblContainsCard", "%1$s contains %2$s", FilterValueCount.ONE, new OperatorEvaluator<Map<PaperCard, Integer>>() {
             @Override
             public boolean apply(Map<PaperCard, Integer> input, List<Map<PaperCard, Integer>> values) {
                 if (input != null) {
@@ -640,7 +945,7 @@ public class AdvancedSearch {
                 return false;
             }
         }),
-        CONTAINS_X_COPIES_OF_CARD("contains X copies of card", "%1$s contains %3$d %2$s", FilterValueCount.TWO, new OperatorEvaluator<Map<PaperCard, Integer>>() {
+        CONTAINS_X_COPIES_OF_CARD("lblContainsXCopiesCard", "%1$s contains %3$d %2$s", FilterValueCount.TWO, new OperatorEvaluator<Map<PaperCard, Integer>>() {
             @Override
             public boolean apply(Map<PaperCard, Integer> input, List<Map<PaperCard, Integer>> values) {
                 if (input != null) {
@@ -658,6 +963,9 @@ public class AdvancedSearch {
             EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN, GT_OR_EQUAL, LT_OR_EQUAL, BETWEEN_INCLUSIVE, BETWEEN_EXCLUSIVE
         };
         public static final FilterOperator[] STRING_OPS = new FilterOperator[] {
+            CONTAINS, STARTS_WITH, ENDS_WITH
+        };
+        public static final FilterOperator[] STRINGS_OPS = new FilterOperator[] {
             CONTAINS, STARTS_WITH, ENDS_WITH
         };
         public static final FilterOperator[] SINGLE_LIST_OPS = new FilterOperator[] {
@@ -681,7 +989,7 @@ public class AdvancedSearch {
         private final OperatorEvaluator<?> evaluator;
 
         FilterOperator(String caption0, String formatStr0, FilterValueCount valueCount0, OperatorEvaluator<?> evaluator0) {
-            caption = caption0;
+            caption = Localizer.getInstance().getMessage(caption0);
             formatStr = formatStr0;
             valueCount = valueCount0;
             evaluator = evaluator0;
@@ -714,27 +1022,32 @@ public class AdvancedSearch {
         @SuppressWarnings("unchecked")
         public final Filter<T> createFilter(FilterOption option, FilterOperator operator) {
             final List<V> values = getValues(option, operator);
-            if (values == null || values.isEmpty()) { return null; }
+            if (values == null || values.isEmpty()) {
+                return null;
+            }
 
             String caption = getCaption(values, option, operator);
 
-            final OperatorEvaluator<V> evaluator = (OperatorEvaluator<V>)operator.evaluator;
-            Predicate<T> predicate;
-            if (option.operatorOptions == FilterOperator.MULTI_LIST_OPS || option.operatorOptions == FilterOperator.COMBINATION_OPS || option.operatorOptions == FilterOperator.COLLECTION_OPS) {
-                predicate = new Predicate<T>() {
-                    @Override
-                    public boolean apply(T input) {
-                        return evaluator.apply(getItemValues(input), values);
-                    }
-                };
-            }
-            else {
-                predicate = new Predicate<T>() {
-                    @Override
-                    public boolean apply(T input) {
-                        return evaluator.apply(getItemValue(input), values);
-                    }
-                };
+            final OperatorEvaluator<V> evaluator = (OperatorEvaluator<V>) operator.evaluator;
+            Predicate<T> predicate = new Predicate<T>() {
+                @Override
+                public boolean apply(T input) {
+                    return evaluator.apply(getItemValue(input), values);
+                }
+            };
+            ;
+            final FilterOperator[][] manyValueOperators = { FilterOperator.MULTI_LIST_OPS,
+                    FilterOperator.COMBINATION_OPS, FilterOperator.COLLECTION_OPS, FilterOperator.STRINGS_OPS };
+            for (FilterOperator[] oper : manyValueOperators) {
+                if (option.operatorOptions == oper) {
+                    predicate = new Predicate<T>() {
+                        @Override
+                        public boolean apply(T input) {
+                            return evaluator.apply(getItemValues(input), values);
+                        }
+                    };
+                    break;
+                }
             }
             return new Filter<>(option, operator, caption, predicate);
         }
@@ -930,7 +1243,7 @@ public class AdvancedSearch {
 
             Integer amount = -1;
             if (operator == FilterOperator.CONTAINS_X_COPIES_OF_CARD) { //prompt for quantity if needed
-                amount = SGuiChoose.getInteger("How many copies of " + card.getName() + "?", 0, 4);
+                amount = SGuiChoose.getInteger(Localizer.getInstance().getMessage("lblHowManyCopiesOfN", CardTranslation.getTranslatedName(card.getName())), 0, 4);
                 if (amount == null) { return null; }
             }
 
@@ -967,7 +1280,7 @@ public class AdvancedSearch {
                     options.add(opt);
                 }
             }
-            option = SGuiChoose.oneOrNone("Select a filter type", options, defaultOption, null);
+            option = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblSelectAFilterType"), options, defaultOption, null);
             if (option == null) { return editFilter; }
         }
         else {
@@ -979,7 +1292,7 @@ public class AdvancedSearch {
         final FilterOperator operator;
         if (option.operatorOptions.length > 1) {
             final FilterOperator defaultOperator = option == defaultOption ? editFilter.operator : null;
-            operator = SGuiChoose.oneOrNone("Select an operator for " + option.name, option.operatorOptions, defaultOperator, null);
+            operator = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblSelectOperatorFor", option.name), option.operatorOptions, defaultOperator, null);
             if (operator == null) { return editFilter; }
         }
         else {
@@ -1049,7 +1362,7 @@ public class AdvancedSearch {
     }
 
     public static class Model<T extends InventoryItem> {
-        private static final String EMPTY_FILTER_TEXT = "Select Filter...";
+        private static final String EMPTY_FILTER_TEXT = Localizer.getInstance().getMessage("lblSelectingFilter");
 
         private final List<Object> expression = new ArrayList<>();
         private final List<IFilterControl<T>> controls = new ArrayList<>();
@@ -1162,7 +1475,7 @@ public class AdvancedSearch {
                                         //the first time the user selects keywords, preload keywords for all cards
                                         Runnable preloadTask = Keyword.getPreloadTask();
                                         if (preloadTask != null) {
-                                            GuiBase.getInterface().runBackgroundTask("Loading keywords...", preloadTask);
+                                            GuiBase.getInterface().runBackgroundTask(Localizer.getInstance().getMessage("lblLoadingKeywords"), preloadTask);
                                         }
                                     }
                                 }

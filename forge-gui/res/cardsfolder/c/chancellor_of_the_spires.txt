@@ -4,12 +4,11 @@ Types:Creature Sphinx
 PT:5/7
 K:MayEffectFromOpeningHand:RevealCard
 K:Flying
-SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | SubAbility$ DrainOnUpkeep | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent puts the top seven cards of their library into their graveyard.
+SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | SubAbility$ DrainOnUpkeep | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent mills seven cards.
 SVar:DrainOnUpkeep:DB$ Effect | Triggers$ TrigMill | SVars$ Mill,RemoveMe | Name$ Chancellor of the Spires effect
-SVar:TrigMill:Mode$ Phase | Phase$ Upkeep | Execute$ Mill | TriggerDescription$ At the beginning of the first upkeep, each opponent puts the top seven cards of their library into their graveyard.
+SVar:TrigMill:Mode$ Phase | Phase$ Upkeep | Execute$ Mill | TriggerDescription$ At the beginning of the first upkeep, each opponent mills seven cards.
 SVar:Mill:DB$ Mill | NumCards$ 7 | Defined$ Player.Opponent | SubAbility$ RemoveMe
 SVar:RemoveMe:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, you may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost.
 SVar:TrigChangeZone:DB$ Play | TgtZone$ Graveyard | WithoutManaCost$ True | ValidTgts$ Instant.OppOwn,Sorcery.OppOwn | TgtPrompt$ Choose target instant or sorcery card from an opponent's graveyard | Optional$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chancellor_of_the_spires.jpg
-Oracle:You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent puts the top seven cards of their library into their graveyard.\nFlying\nWhen Chancellor of the Spires enters the battlefield, you may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost.
+Oracle:You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent mills seven cards.\nFlying\nWhen Chancellor of the Spires enters the battlefield, you may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost.

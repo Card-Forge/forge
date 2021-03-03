@@ -5,4 +5,4 @@ PT:3/2
 K:Bushido:X
 S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Creatures your opponents control attack each combat if able.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fumiko_the_lowblood.jpg
-Oracle:Fumiko the Lowblood has bushido X, where X is the number of attacking creatures. (When this blocks or becomes blocked, it gets +X/+X until end of turn.)\nCreatures your opponents control attack each combat if able.
+Oracle:Fumiko the Lowblood has bushido X, where X is the number of attacking creatures. (Whenever this creature blocks or becomes blocked, it gets +X/+X until end of turn.)\nCreatures your opponents control attack each combat if able.

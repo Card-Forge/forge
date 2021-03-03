@@ -1,11 +1,11 @@
 Name:Glimmervoid Basin
 ManaCost:no cost
 Types:Plane Mirrodin
-T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | IsSingleTarget$ True | Execute$ TrigCopy | TriggerZones$ Command | TriggerDescription$ Whenever a player casts an instant or sorcery spell with a single target, they copy that spell for each other spell, permanent, card not on the battlefield, and/or player the spell could target. Each copy targets a different one of them.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | IsSingleTarget$ True | Execute$ TrigCopy | TriggerZones$ Command | TriggerDescription$ Whenever a player casts an instant or sorcery spell with a single target, that player copies that spell for each other spell, permanent, card not on the battlefield, and/or player the spell could target. Each copy targets a different one of them.
 SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Controller$ TriggeredActivator | CopyForEachCanTarget$ Spell,Permanent,Card,Player
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, choose target creature. Each player except that creature's controller creates a token that's a copy of that creature.
 SVar:RolledChaos:DB$ RepeatEach | RepeatPlayers$ NonTargetedController | RepeatSubAbility$ DBCopy | ValidTgts$ Creature | TgtPrompt$ Select target creature | ChangeZoneTable$ True
 SVar:DBCopy:DB$ CopyPermanent | Defined$ ParentTarget | Controller$ Remembered
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glimmervoid_basin.jpg
-Oracle:Whenever a player casts an instant or sorcery spell with a single target, they copy that spell for each other spell, permanent, card not on the battlefield, and/or player the spell could target. Each copy targets a different one of them.\nWhenever you roll {CHAOS}, choose target creature. Each player except that creature's controller creates a token that's a copy of that creature.
+Oracle:Whenever a player casts an instant or sorcery spell with a single target, that player copies that spell for each other spell, permanent, card not on the battlefield, and/or player the spell could target. Each copy targets a different one of them.\nWhenever you roll {CHAOS}, choose target creature. Each player except that creature's controller creates a token that's a copy of that creature.

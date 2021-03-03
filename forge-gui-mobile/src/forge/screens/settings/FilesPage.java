@@ -1,5 +1,6 @@
 package forge.screens.settings;
 
+import forge.Forge;
 import forge.download.GuiDownloadAchievementImages;
 import forge.download.GuiDownloadPicturesLQ;
 import forge.download.GuiDownloadPrices;
@@ -7,6 +8,7 @@ import forge.download.GuiDownloadQuestImages;
 import forge.download.GuiDownloadSetPicturesLQ;
 import forge.download.GuiDownloadService;
 
+import forge.download.GuiDownloadSkins;
 import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
@@ -31,7 +33,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
     private final Localizer localizer = Localizer.getInstance();
 
     protected FilesPage() {
-        super(Localizer.getInstance().getMessage("lblFiles"), FSkinImage.OPEN);
+        super(Localizer.getInstance().getMessage("lblFiles"), Forge.hdbuttons ? FSkinImage.HDOPEN : FSkinImage.OPEN);
 
         lstItems.setListItemRenderer(new FilesItemRenderer());
 
@@ -75,7 +77,13 @@ public class FilesPage extends TabPage<SettingsScreen> {
                 return new GuiDownloadPrices();
             }
         }, 0);
-
+        lstItems.addItem(new ContentDownloader(localizer.getMessage("btnDownloadSkins"),
+                localizer.getMessage("lblDownloadSkins")) {
+            @Override
+            protected GuiDownloadService createService() {
+                return new GuiDownloadSkins();
+            }
+        }, 0);
         //storage locations
         final StorageOption cardPicsOption = new StorageOption(localizer.getMessage("lblCardPicsLocation"), ForgeProfileProperties.getCardPicsDir()) {
             @Override

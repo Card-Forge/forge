@@ -81,7 +81,12 @@ public class ControlExchangeAi extends SpellAbilityAi {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield),
+        // for TrigTwoTargets logic, only get the opponents' cards for the first target
+        CardCollectionView unfilteredList = "TrigTwoTargets".equals(sa.getParam("AILogic")) ?
+                aiPlayer.getOpponents().getCardsIn(ZoneType.Battlefield) :
+                aiPlayer.getGame().getCardsIn(ZoneType.Battlefield);
+
+        CardCollection list = CardLists.getValidCards(unfilteredList,
                 tgt.getValidTgts(), aiPlayer, sa.getHostCard(), sa);
 
         // only select the cards that can be targeted
@@ -106,7 +111,51 @@ public class ControlExchangeAi extends SpellAbilityAi {
 
         // add best Target
         sa.getTargets().add(best);
+
+        // second target needed (the AI's own worst)
+        if ("TrigTwoTargets".equals(sa.getParam("AILogic"))) {
+            return doTrigTwoTargetsLogic(aiPlayer, sa, best);
+        }
+
         return true;
     }   
-    
+
+    private boolean doTrigTwoTargetsLogic(Player ai, SpellAbility sa, Card bestFirstTgt) {
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        final int creatureThreshold = 100; // TODO: make this configurable from the AI profile
+        final int nonCreatureThreshold = 2;
+
+        CardCollection list = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield),
+                tgt.getValidTgts(), ai, sa.getHostCard(), sa);
+
+        // only select the cards that can be targeted
+        list = CardLists.getTargetableCards(list, sa);
+
+        if (list.isEmpty()) {
+            return false;
+        }
+
+        Card aiWorst = ComputerUtilCard.getWorstAI(list);
+        if (aiWorst == null) {
+            return false;
+        }
+
+        if (aiWorst != null && aiWorst != bestFirstTgt) {
+            if (bestFirstTgt.isCreature() && aiWorst.isCreature()) {
+                if ((ComputerUtilCard.evaluateCreature(bestFirstTgt) > ComputerUtilCard.evaluateCreature(aiWorst) + creatureThreshold) || sa.isMandatory()) {
+                    sa.getTargets().add(aiWorst);
+                    return true;
+                }
+            } else {
+                // TODO: compare non-creatures by CMC - can be improved, at least shouldn't give control of things like the Power Nine
+                if ((bestFirstTgt.getCMC() > aiWorst.getCMC() + nonCreatureThreshold) || sa.isMandatory()) {
+                    sa.getTargets().add(aiWorst);
+                    return true;
+                }
+            }
+        }
+
+        sa.clearTargets();
+        return false;
+    }
 }

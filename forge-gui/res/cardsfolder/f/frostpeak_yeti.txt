@@ -1,0 +1,6 @@
+Name:Frostpeak Yeti
+ManaCost:3 U
+Types:Snow Creature Yeti
+PT:3/3
+A:AB$ Pump | Cost$ 1 S | Defined$ Self | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
+Oracle:{1}{S}: Frostpeak Yeti can't be blocked this turn. ({S} can be paid with one mana from a snow source.)

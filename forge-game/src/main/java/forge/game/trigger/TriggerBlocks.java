@@ -46,7 +46,7 @@ public class TriggerBlocks extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerBlocks(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerBlocks(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -90,8 +90,8 @@ public class TriggerBlocks extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Blocker, AbilityKey.Attackers);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Blocker, AbilityKey.Attackers);
     }
 
     @Override

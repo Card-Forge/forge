@@ -30,6 +30,9 @@ public final class GamePlayerUtil {
                 FModel.getPreferences().setPref(FPref.PLAYER_NAME, name);
                 FModel.getPreferences().save();
             }
+
+            guiPlayer.setAvatarIndex(avatarIndex);
+            guiPlayer.setSleeveIndex(sleeveIndex);
             return guiPlayer;
         }
         //use separate LobbyPlayerHuman instance for human players beyond first

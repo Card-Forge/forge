@@ -1,0 +1,7 @@
+Name:Sigiled Contender
+ManaCost:3 W
+Types:Creature Human Warrior
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_P1P1 | AddKeyword$ Lifelink | Description$ CARDNAME has lifelink as long as it has a +1/+1 counter on it.
+DeckHints:Ability$Counters
+Oracle:Sigiled Contender has lifelink as long as it has a +1/+1 counter on it. (Damage dealt by this creature also causes you to gain that much life.)

@@ -1,7 +1,6 @@
 Name:Horrifying Revelation
 ManaCost:B
 Types:Sorcery
-A:SP$ Discard | Cost$ B | ValidTgts$ Player | TgtPrompt$ Choose a player | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBMill | SpellDescription$ Target player discards a card, then puts the top card of their library into their graveyard.
-SVar:DBMill:DB$Mill | NumCards$ 1 | Defined$ Targeted
-SVar:Picture:http://www.wizards.com/global/images/magic/general/horrifying_revelation.jpg
-Oracle:Target player discards a card, then puts the top card of their library into their graveyard.
+A:SP$ Discard | Cost$ B | ValidTgts$ Player | TgtPrompt$ Choose a player | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBMill | SpellDescription$ Target player discards a card, then mills a card.
+SVar:DBMill:DB$ Mill | NumCards$ 1 | Defined$ Targeted
+Oracle:Target player discards a card, then mills a card.

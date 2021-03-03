@@ -4,4 +4,4 @@ Types:Creature Wurm
 PT:7/7
 K:Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duskdale_wurm.jpg
-Oracle:Trample
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)

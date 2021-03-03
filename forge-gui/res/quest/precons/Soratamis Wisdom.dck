@@ -1,0 +1,42 @@
+[shop]
+WinsToUnlock=0
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Soratami's Wisdom
+Description=Do you think you're smarter than your opponent? If you're playing the Soratami's Wisdom deck, you probably are! This deck focuses on two things: creatures and spells that get better the more cards you have in your hand, and spells and abilities that fill your hand with cards. Fueled by the massive brainpower of a giant grip of cards, your fleet of fliers and arsenal of combat tricks will let you outsmart anyone who challenges you.
+Deck Type=constructed
+Set=SOK
+Image=soratamis_wisdom.jpg
+
+[Main]
+2 Cage of Hands|CHK
+1 Charge Across the Araba|SOK
+2 Counsel of the Soratami|CHK
+2 Cowed by Wisdom|SOK
+2 Descendant of Kiyomaro|SOK
+2 Descendant of Soramaro|SOK
+1 Eiganjo Free-Riders|SOK
+1 Floodbringer|BOK
+1 Freed from the Real|SOK
+1 Graceful Adept|CHK
+1 Hail of Arrows|SOK
+1 Hankyu|CHK
+11 Island|CHK|1
+1 Kami of the Crescent Moon|SOK
+1 Kiri-Onna|SOK
+1 Kitsune Bonesetter|SOK
+2 Kitsune Loreweaver|SOK
+2 Minamo Scrollkeeper|SOK
+2 Moonbow Illusionist|SOK
+2 Oboro Envoy|SOK
+1 Overwhelming Intellect|SOK
+12 Plains|CHK|1
+2 Plow Through Reito|SOK
+1 Presence of the Wise|SOK
+1 Soramaro, First to Dream|SOK
+2 Soratami Cloudskater|CHK
+1 Soratami Rainshaper|CHK
+1 Terashi's Verdict|BOK
+[Sideboard]

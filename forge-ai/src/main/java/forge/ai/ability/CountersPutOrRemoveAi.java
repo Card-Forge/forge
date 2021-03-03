@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -36,7 +36,7 @@ import java.util.Map;
  * <p>
  * AbilityFactory_PutOrRemoveCountersAi class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -44,7 +44,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.ai.SpellAbilityAi#checkApiLogic(forge.game.player.Player,
      * forge.game.spellability.SpellAbility)
      */
@@ -75,7 +75,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
 
         if (sa.hasParam("CounterType")) {
             // currently only Jhoira's Timebug
-            final CounterType type = CounterType.valueOf(sa.getParam("CounterType"));
+            final CounterType type = CounterType.getType(sa.getParam("CounterType"));
 
             CardCollection countersList = CardLists.filter(list, CardPredicates.hasCounter(type, amount));
 
@@ -100,7 +100,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
 
                 if (!ai.isCardInPlay("Marit Lage") || noLegendary) {
                     CardCollectionView depthsList = CardLists.filter(countersList,
-                            CardPredicates.nameEquals("Dark Depths"), CardPredicates.hasCounter(CounterType.ICE));
+                            CardPredicates.nameEquals("Dark Depths"), CardPredicates.hasCounter(CounterEnumType.ICE));
 
                     if (!depthsList.isEmpty()) {
                         sa.getTargets().add(depthsList.getFirst());
@@ -113,7 +113,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                 CardCollection planeswalkerList = CardLists.filter(
                         CardLists.filterControlledBy(countersList, ai.getOpponents()),
                         CardPredicates.Presets.PLANESWALKERS,
-                        CardPredicates.hasLessCounter(CounterType.LOYALTY, amount));
+                        CardPredicates.hasLessCounter(CounterEnumType.LOYALTY, amount));
 
                 if (!planeswalkerList.isEmpty()) {
                     sa.getTargets().add(ComputerUtilCard.getBestPlaneswalkerAI(planeswalkerList));
@@ -123,7 +123,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                 // do as M1M1 part
                 CardCollection aiList = CardLists.filterControlledBy(countersList, ai);
 
-                CardCollection aiM1M1List = CardLists.filter(aiList, CardPredicates.hasCounter(CounterType.M1M1));
+                CardCollection aiM1M1List = CardLists.filter(aiList, CardPredicates.hasCounter(CounterEnumType.M1M1));
 
                 CardCollection aiPersistList = CardLists.getKeyword(aiM1M1List, Keyword.PERSIST);
                 if (!aiPersistList.isEmpty()) {
@@ -136,7 +136,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                 }
 
                 // do as P1P1 part
-                CardCollection aiP1P1List = CardLists.filter(aiList, CardPredicates.hasCounter(CounterType.P1P1));
+                CardCollection aiP1P1List = CardLists.filter(aiList, CardPredicates.hasCounter(CounterEnumType.P1P1));
                 CardCollection aiUndyingList = CardLists.getKeyword(aiM1M1List, Keyword.UNDYING);
 
                 if (!aiUndyingList.isEmpty()) {
@@ -157,7 +157,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                         if (!ComputerUtil.isNegativeCounter(aType, best)) {
                             sa.getTargets().add(best);
                             return true;
-                        } else if (!ComputerUtil.isUselessCounter(aType)) {
+                        } else if (!ComputerUtil.isUselessCounter(aType, best)) {
                             // whould remove positive counter
                             if (best.getCounters(aType) <= amount) {
                                 sa.getTargets().add(best);
@@ -183,7 +183,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.ai.SpellAbilityAi#chooseCounterType(java.util.List,
      * forge.game.spellability.SpellAbility, java.util.Map)
      */
@@ -199,18 +199,18 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
             Card tgt = (Card) params.get("Target");
 
             // planeswalker has high priority for loyalty counters
-            if (tgt.isPlaneswalker() && options.contains(CounterType.LOYALTY)) {
-                return CounterType.LOYALTY;
+            if (tgt.isPlaneswalker() && options.contains(CounterType.get(CounterEnumType.LOYALTY))) {
+                return CounterType.get(CounterEnumType.LOYALTY);
             }
 
             if (tgt.getController().isOpponentOf(ai)) {
                 // creatures with BaseToughness below or equal zero might be
                 // killed if their counters are removed
                 if (tgt.isCreature() && tgt.getBaseToughness() <= 0) {
-                    if (options.contains(CounterType.P1P1)) {
-                        return CounterType.P1P1;
-                    } else if (options.contains(CounterType.M1M1)) {
-                        return CounterType.M1M1;
+                    if (options.contains(CounterType.get(CounterEnumType.P1P1))) {
+                        return CounterType.get(CounterEnumType.P1P1);
+                    } else if (options.contains(CounterType.get(CounterEnumType.M1M1))) {
+                        return CounterType.get(CounterEnumType.M1M1);
                     }
                 }
 
@@ -222,14 +222,14 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                 }
             } else {
                 // this counters are treat first to be removed
-                if ("Dark Depths".equals(tgt.getName()) && options.contains(CounterType.ICE)) {
+                if ("Dark Depths".equals(tgt.getName()) && options.contains(CounterType.get(CounterEnumType.ICE))) {
                     if (!ai.isCardInPlay("Marit Lage") || noLegendary) {
-                        return CounterType.ICE;
+                        return CounterType.get(CounterEnumType.ICE);
                     }
-                } else if (tgt.hasKeyword(Keyword.UNDYING) && options.contains(CounterType.P1P1)) {
-                    return CounterType.P1P1;
-                } else if (tgt.hasKeyword(Keyword.PERSIST) && options.contains(CounterType.M1M1)) {
-                    return CounterType.M1M1;
+                } else if (tgt.hasKeyword(Keyword.UNDYING) && options.contains(CounterType.get(CounterEnumType.P1P1))) {
+                    return CounterType.get(CounterEnumType.P1P1);
+                } else if (tgt.hasKeyword(Keyword.PERSIST) && options.contains(CounterType.get(CounterEnumType.M1M1))) {
+                    return CounterType.get(CounterEnumType.M1M1);
                 }
 
                 // fallback logic, select positive counter to add more
@@ -246,7 +246,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * forge.ai.SpellAbilityAi#chooseBinary(forge.game.player.PlayerController.
      * BinaryChoiceType, forge.game.spellability.SpellAbility, java.util.Map)
@@ -262,19 +262,19 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
             boolean noLegendary = game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule);
 
             if (tgt.getController().isOpponentOf(ai)) {
-                if (type.equals(CounterType.LOYALTY) && tgt.isPlaneswalker()) {
+                if (type.is(CounterEnumType.LOYALTY) && tgt.isPlaneswalker()) {
                     return false;
                 }
 
                 return ComputerUtil.isNegativeCounter(type, tgt);
             } else {
-                if (type.equals(CounterType.ICE) && "Dark Depths".equals(tgt.getName())) {
+                if (type.is(CounterEnumType.ICE) && "Dark Depths".equals(tgt.getName())) {
                     if (!ai.isCardInPlay("Marit Lage") || noLegendary) {
                         return false;
                     }
-                } else if (type.equals(CounterType.M1M1) && tgt.hasKeyword(Keyword.PERSIST)) {
+                } else if (type.is(CounterEnumType.M1M1) && tgt.hasKeyword(Keyword.PERSIST)) {
                     return false;
-                } else if (type.equals(CounterType.P1P1) && tgt.hasKeyword(Keyword.UNDYING)) {
+                } else if (type.is(CounterEnumType.P1P1) && tgt.hasKeyword(Keyword.UNDYING)) {
                     return false;
                 }
 

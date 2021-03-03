@@ -1,0 +1,7 @@
+Name:Lightning-Core Excavator
+ManaCost:1
+Types:Artifact Creature Golem
+PT:0/3
+A:AB$ DealDamage | Cost$ 5 T Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+DeckHas:Ability$Sacrifice
+Oracle:{5}, {T}, Sacrifice Lightning-Core Excavator: It deals 3 damage to any target.

@@ -5,5 +5,5 @@ PT:6/6
 K:Flying
 K:Vigilance
 K:Trample
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof | IsPresent$ Card.Self+dealtDamageThisTurn | PresentCompare$ EQ0 | Description$ CARDNAME has hexproof if it hasn't dealt damage yet.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof | IsPresent$ Card.Self+dealtDamagetoAny | PresentCompare$ EQ0 | Description$ CARDNAME has hexproof if it hasn't dealt damage yet.
 Oracle:Flying, vigilance, trample\nPalladia-Mors, the Ruiner has hexproof if it hasn't dealt damage yet.

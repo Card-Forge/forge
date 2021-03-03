@@ -1,0 +1,10 @@
+Name:Uktabi Kong
+ManaCost:5 G G G
+Types:Creature Ape
+PT:8/8
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy all artifacts.
+SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Artifact
+A:AB$ Token | Cost$ tapXType<2/Ape> | TokenScript$ g_1_1_ape | TokenOwner$ You | SpellDescription$ Create a 1/1 green Ape creature token.
+DeckHas:Ability$Token
+Oracle:Trample\nWhen Uktabi Kong enters the battlefield, destroy all artifacts.\nTap two untapped Apes you control: Create a 1/1 green Ape creature token.

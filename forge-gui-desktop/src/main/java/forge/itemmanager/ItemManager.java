@@ -64,6 +64,7 @@ import forge.toolbox.LayoutHelper;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.ReflectionUtil;
+import forge.util.Localizer;
 
 /**
  * ItemManager.
@@ -96,7 +97,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     private static final SkinIcon SEARCH_ICON = FSkin.getIcon(FSkinProp.ICO_SEARCH).resize(20, 20);
     private final FLabel btnFilters = new FLabel.ButtonBuilder()
         .icon(SEARCH_ICON).iconScaleAuto(false)
-        .tooltip("Click to configure filters")
+        .tooltip(Localizer.getInstance().getMessage("lblClickToconfigureFilters"))
         .reactOnMouseDown()
         .build();
 
@@ -106,7 +107,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         .build();
 
     private final FLabel lblRatio = new FLabel.Builder()
-        .tooltip("Number of cards shown / Total available cards")
+        .tooltip(Localizer.getInstance().getMessage("lblShownOfTotalCards"))
         .fontAlign(SwingConstants.LEFT)
         .fontSize(12)
         .build();
@@ -122,7 +123,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         .hoverable()
         .selectable(true)
         .icon(VIEW_OPTIONS_ICON).iconScaleAuto(false)
-        .tooltip("Toggle to show/hide options for current view")
+        .tooltip(Localizer.getInstance().getMessage("lblToggleShowOrHideOptionsForCurrentView"))
         .build();
 
     private final List<ItemView<T>> views = new ArrayList<>();
@@ -246,12 +247,12 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         //setup command for btnFilters
         final UiCommand cmdBuildFilterMenu = new UiCommand() {
             @Override public void run() {
-                final JPopupMenu menu = new JPopupMenu("FilterMenu");
+                final JPopupMenu menu = new JPopupMenu(Localizer.getInstance().getMessage("lblFilterMenu"));
                 if (hideFilters) {
-                    GuiUtils.addMenuItem(menu, "Show Filters", null, cmdHideFilters);
+                    GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblShowFilters"), null, cmdHideFilters);
                 } else {
-                    final JMenu addMenu = GuiUtils.createMenu("Add/Edit Filter");
-                    GuiUtils.addMenuItem(addMenu, "Current text search",
+                    final JMenu addMenu = GuiUtils.createMenu(Localizer.getInstance().getMessage("lblAddOrEditFilter"));
+                    GuiUtils.addMenuItem(addMenu, Localizer.getInstance().getMessage("lblCurrentTextSearch"),
                             KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
                             cmdAddCurrentSearch, !mainSearchFilter.isEmpty());
                     if (config != ItemManagerConfig.STRING_ONLY) {
@@ -259,8 +260,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
                     }
                     menu.add(addMenu);
                     GuiUtils.addSeparator(menu);
-                    GuiUtils.addMenuItem(menu, "Reset Filters", null, cmdResetFilters);
-                    GuiUtils.addMenuItem(menu, "Hide Filters", null, cmdHideFilters);
+                    GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblResetFilters"), null, cmdResetFilters);
+                    GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblHideFilters"), null, cmdHideFilters);
                 }
                 menu.show(btnFilters, 0, btnFilters.getHeight());
             }
@@ -450,6 +451,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     @Override
     public void setCaption(final String caption) {
         this.lblCaption.setText(caption);
+        this.lblCaption.setLabelFor(this.listView.getTable());
     }
 
     /**

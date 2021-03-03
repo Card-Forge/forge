@@ -15,8 +15,8 @@ ALTERNATE
 Name:Erayo's Essence
 ManaCost:1 U
 Types:Legendary Enchantment
-T:Mode$ SpellCast | ValidActivatingPlayer$ Player.Opponent | ActivatorThisTurnCast$ EQ1 | NoResolvingCheck$ True | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts a spell for the first time in a turn, counter that spell.
+T:Mode$ SpellCast | ValidActivatingPlayer$ Player.Opponent | ActivatorThisTurnCast$ EQ1 | NoResolvingCheck$ True | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts their first spell each turn, counter that spell.
 SVar:TrigCounter:DB$Counter | Defined$ TriggeredSpellAbility | Destination$ Graveyard
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/erayos_essence.jpg
 # This link may be a temporary solution and could change in the near future.
-Oracle:Whenever an opponent casts a spell for the first time in a turn, counter that spell.
+Oracle:Whenever an opponent casts their first spell each turn, counter that spell.

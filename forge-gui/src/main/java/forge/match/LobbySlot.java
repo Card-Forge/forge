@@ -22,6 +22,10 @@ public final class LobbySlot implements Serializable {
     private boolean isDevMode;
     private Deck deck;
     private ImmutableSet<AIOption> aiOptions;
+    private String AvatarVanguard;
+    private String SchemeDeckName;
+    private String PlanarDeckName;
+    private String DeckName;
 
     public LobbySlot(final LobbySlotType type, final String name, final int avatarIndex, final int sleeveIndex, final int team, final boolean isArchenemy, final boolean isReady, final Set<AIOption> aiOptions) {
         this.type = type;
@@ -79,6 +83,22 @@ public final class LobbySlot implements Serializable {
         } else if (oldDeck != null && data.getSection() != null && data.getCards() != null) {
             oldDeck.putSection(data.getSection(), data.getCards());
         }
+        if (data.getSchemeDeckName() != null) {
+            setSchemeDeckName(data.getSchemeDeckName());
+            changed = true;
+        }
+        if (data.getAvatarVanguard() != null) {
+            setAvatarVanguard(data.getAvatarVanguard());
+            changed = true;
+        }
+        if (data.getPlanarDeckName() != null) {
+            setPlanarDeckName(data.getPlanarDeckName());
+            changed = true;
+        }
+        if (data.getDeckName() != null) {
+            setDeckName(data.getDeckName());
+            changed = true;
+        }
         return changed;
     }
 
@@ -115,6 +135,16 @@ public final class LobbySlot implements Serializable {
     public void setTeam(final int team) {
         this.team = team;
     }
+
+    public String getSchemeDeckName() { return SchemeDeckName; }
+    public String getAvatarVanguard() { return AvatarVanguard; }
+    public String getPlanarDeckName() { return PlanarDeckName; }
+    public String getDeckName() { return DeckName; }
+
+    public void setSchemeDeckName(String schemeDeckName) { this.SchemeDeckName = schemeDeckName; }
+    public void setAvatarVanguard(String avatarVanguard) { this.AvatarVanguard = avatarVanguard; }
+    public void setPlanarDeckName(String planarDeckName) { this.PlanarDeckName = planarDeckName; }
+    public void setDeckName(String DeckName) { this.DeckName = DeckName; }
 
     public boolean isArchenemy() {
         return isArchenemy;

@@ -1,7 +1,7 @@
 Name:Skybreen
 ManaCost:no cost
 Types:Plane Kaldheim
-S:Mode$ Continuous | Affected$ Card.TopLibrary | AffectedZone$ Library | MayLookAt$ Player | Description$ Players play with the top card of their libraries revealed.
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Card.TopLibrary | AffectedZone$ Library | MayLookAt$ Player | Description$ Players play with the top card of their libraries revealed.
 S:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.sharesCardTypeWith EachTopLibrary | Description$ Spells that share a card type with the top card of a library can't be cast.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, target player loses life equal to the number of cards in their hand.
 SVar:RolledChaos:DB$ LoseLife | ValidTgts$ Player | LifeAmount$ Y | References$ Y

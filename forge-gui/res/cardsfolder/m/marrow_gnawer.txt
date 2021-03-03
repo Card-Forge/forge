@@ -2,11 +2,11 @@ Name:Marrow-Gnawer
 ManaCost:3 B B
 Types:Legendary Creature Rat Rogue
 PT:2/3
-S:Mode$ Continuous | Affected$ Creature.Rat | AddKeyword$ Fear | Description$ Rat creatures have fear. (They can't be blocked except by artifact creatures and/or black creatures.)
+S:Mode$ Continuous | Affected$ Creature.Rat | AddKeyword$ Fear | Description$ All Rats have fear.
 A:AB$ Token | Cost$ T Sac<1/Rat> | TokenAmount$ X | References$ X | TokenScript$ b_1_1_rat | TokenOwner$ You | LegacyImage$ b 1 1 rat chk | SpellDescription$ Create X 1/1 black Rat creature tokens, where X is the number of Rats you control.
 SVar:X:Count$TypeYouCtrl.Rat
 SVar:AIPreference:SacCost$Creature.Rat+token,Creature.Rat+cmcLE3
 AI:RemoveDeck:Random
 DeckHints:Type$Rat
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marrow_gnawer.jpg
-Oracle:Rat creatures have fear. (They can't be blocked except by artifact creatures and/or black creatures.)\n{T}, Sacrifice a Rat: Create X 1/1 black Rat creature tokens, where X is the number of Rats you control.
+Oracle:All Rats have fear.\n{T}, Sacrifice a Rat: Create X 1/1 black Rat creature tokens, where X is the number of Rats you control.

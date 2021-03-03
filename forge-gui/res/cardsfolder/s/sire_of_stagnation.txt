@@ -3,8 +3,7 @@ ManaCost:4 U B
 Types:Creature Eldrazi
 PT:5/7
 K:Devoid
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever a land enters the battlefield under an opponent's control, that player exiles the top two cards of their library and you draw two cards.
-SVar:TrigMill:DB$ Mill | Defined$ TriggeredCardController | NumCards$ 2 | Destination$ Exile | SubAbility$ DBDraw
-SVar:DBDraw:DB$Draw | NumCards$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sire_of_stagnation.jpg
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever a land enters the battlefield under an opponent's control, that player exiles the top two cards of their library and you draw two cards.
+SVar:TrigExile:DB$ Dig | Defined$ TriggeredCardController | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 2
 Oracle:Devoid (This card has no color.)\nWhenever a land enters the battlefield under an opponent's control, that player exiles the top two cards of their library and you draw two cards.

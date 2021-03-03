@@ -1,0 +1,16 @@
+[metadata]
+Code=PHEL
+Date=2012-04-28
+Name=Open the Helvault
+Type=Reprint
+
+[cards]
+6 M Avacyn, Angel of Hope
+106 M Griselbrand
+208 M Bruna, Light of Alabaster
+209 M Gisela, Blade of Goldnight
+210 M Sigarda, Host of Herons
+
+[tokens]
+w_4_4_angel_flying
+b_5_5_demon_flying

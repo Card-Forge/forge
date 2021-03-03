@@ -1,0 +1,13 @@
+Name:Goblin Artisans
+ManaCost:R
+Types:Creature Goblin Artificer
+PT:1/1
+T:Mode$ ChangesZone | Static$ True | ValidCard$ Artifact.YouCtrl | Origin$ Any | Destination$ Stack | RememberTriggeringCard
+T:Mode$ BecomesTarget | Static$ True | ValidSource$ Card.Other+namedGoblin Artisans | ValidTarget$ Spell | Execute$ DBForget
+SVar:DBForget:DB$ Cleanup | ForgetDefined$ TriggeredTargetHostCard
+T:Mode$ ChangesZone | Static$ True | ValidCard$ Artifact.YouCtrl+IsRemembered | Origin$ Stack | Destination$ Any | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ForgetDefined$ TriggeredCard
+A:AB$ FlipACoin | Cost$ T | TgtZone$ Stack | TargetType$ Spell | ValidTgts$ Artifact.YouCtrl+IsRemembered | WinSubAbility$ DBDraw | LoseSubAbility$ DBCounter | TgtPrompt$ Select target Artifact spell | SpellDescription$ Flip a coin. If you win the flip, draw a card. If you lose the flip, counter target artifact spell you control that isn't the target of an ability from another creature named Goblin Artisans.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+SVar:DBCounter:DB$ Counter | Defined$ Targeted
+Oracle:{T}: Flip a coin. If you win the flip, draw a card. If you lose the flip, counter target artifact spell you control that isn't the target of an ability from another creature named Goblin Artisans.

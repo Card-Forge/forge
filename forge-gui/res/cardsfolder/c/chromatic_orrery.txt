@@ -1,0 +1,9 @@
+Name:Chromatic Orrery
+ManaCost:7
+Types:Legendary Artifact
+S:Mode$ Continuous | Affected$ You | ManaColorConversion$ Additive | WhiteConversion$ Color | BlueConversion$ Color | BlackConversion$ Color | RedConversion$ Color | GreenConversion$ Color | ColorlessConversion$ Color | Description$ You may spend mana as though it were mana of any color.
+SVar:NonStackingEffect:True
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 5 | SpellDescription$ Add {C}{C}{C}{C}{C}.
+A:AB$ Draw | Cost$ 5 T | NumCards$ X | References$ X | SpellDescription$ Draw a card for each color among permanents you control.
+SVar:X:Count$ColorsCtrl Permanent
+Oracle:You may spend mana as though it were mana of any color.\n{T}: Add {C}{C}{C}{C}{C}.\n{5}, {T}: Draw a card for each color among permanents you control.

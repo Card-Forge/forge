@@ -1,0 +1,12 @@
+Name:Mind Carver
+ManaCost:B
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters the battlefield, attach it to target creature you control.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
+SVar:NeedsToPlay:Creature.YouCtrl+inZoneBattlefield
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ Y | References$ X,Y,Z | Description$ Equipped creature gets +1/+0. It gets +3/+1 instead as long as an opponent has eight or more cards in their graveyard.
+SVar:X:Count$Compare Z GE8.3.1
+SVar:Y:Count$Compare Z GE8.1.0
+SVar:Z:PlayerCountOpponents$HighestCardsInGraveyard
+K:Equip:2 B
+Oracle:When Mind Carver enters the battlefield, attach it to target creature you control.\nEquipped creature gets +1/+0. It gets +3/+1 instead as long as an opponent has eight or more cards in their graveyard.\nEquip {2}{B}

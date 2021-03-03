@@ -1,0 +1,5 @@
+Name:Garruk's Gorehorn
+ManaCost:4 G
+Types:Creature Beast
+PT:7/3
+Oracle:

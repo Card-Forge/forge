@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
@@ -27,7 +28,7 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
 
     public GameEntityPicker(String title, Collection<? extends GameEntityView> choiceList, Collection<CardView> revealList, String revealListCaption, FImage revealListImage, boolean isOptional, final Callback<GameEntityView> callback) {
         super(new PickerTab[] {
-                new PickerTab(choiceList, Localizer.getInstance().getMessage("lblChoices"), FSkinImage.DECKLIST, 1),
+                new PickerTab(choiceList, Localizer.getInstance().getMessage("lblChoices"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, 1),
                 new PickerTab(revealList, revealListCaption, revealListImage, 0)
         }, false);
 

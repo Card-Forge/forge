@@ -30,6 +30,6 @@ public class GameEventManaPool extends GameEvent {
      */
     @Override
     public String toString() {
-        return TextUtil.concatWithSpace(Lang.getPossesive(player.getName()),"mana pool",  mode.toString(), "-", TextUtil.addSuffix(mana.toString()," "));
+        return TextUtil.concatWithSpace(Lang.getInstance().getPossesive(player.getName()),"mana pool",  mode.toString(), "-", TextUtil.addSuffix(mana.toString()," "));
     }
 }

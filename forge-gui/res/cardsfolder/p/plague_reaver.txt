@@ -1,0 +1,12 @@
+Name:Plague Reaver
+ManaCost:2 B
+Types:Creature Beast
+PT:6/5
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ SacAllOthers | TriggerDescription$ At the beginning of your end step, sacrifice each other creature you control.
+SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Creature.Other+YouCtrl
+A:AB$ Pump | Cost$ Discard<2/Card> Sac<1/CARDNAME> | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | RememberTargets$ True | SubAbility$ DBDelayTrig | StackDescription$ Return CARDNAME to the battlefield under {p:Targeted}'s control at the beginning of their next upkeep. | SpellDescription$ Choose target opponent. Return CARDNAME to the battlefield under that player's control at the beginning of their next upkeep.
+SVar:DBDelayTrig:DB$ DelayedTrigger | TriggerZones$ Graveyard | Mode$ Phase | Phase$ Upkeep | DelayedTriggerDefinedPlayer$ Remembered | RememberObjects$ Remembered | Execute$ DBChange | StackDescription$ None | TriggerDescription$ Return CARDNAME to the battlefield under that player’s control at the beginning of their next upkeep.
+SVar:DBChange:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | NewController$ DelayTriggerRemembered
+AI:RemoveDeck:All
+DeckHas:Ability$Discard & Ability$Sacrifice
+Oracle:At the beginning of your end step, sacrifice each other creature you control.\nDiscard two cards, Sacrifice Plague Reaver: Choose target opponent. Return Plague Reaver to the battlefield under that player's control at the beginning of their next upkeep.

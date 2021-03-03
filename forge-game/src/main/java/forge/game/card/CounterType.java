@@ -1,370 +1,136 @@
-/*
- * Forge: Play Magic: the Gathering.
- * Copyright (C) 2011  Forge Team
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 package forge.game.card;
 
+import java.io.Serializable;
+import java.util.Map;
+import java.util.Objects;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
+import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.ImmutableList;
-
-/**
- * The class Counters.
- *
- * @author Clemens Koza
- * @version V0.0 17.02.2010
- */
-public enum CounterType {
-
-    M1M1("-1/-1", "-1/-1", 255, 110, 106),
-    P1P1("+1/+1", "+1/+1", 96, 226, 23),
-
-    LOYALTY("LOYAL", 198, 198, 198),
-
-    AGE("AGE", 255, 137, 57),
-
-    AIM("AIM", 255, 180, 0),
-
-    ARROW("ARROW", 237, 195, 0),
-
-    ARROWHEAD("ARWHD", 230, 191, 167),
-
-    AWAKENING("AWAKE", 0, 231, 79),
-
-    BLAZE("BLAZE", 255, 124, 82),
-
-    BLOOD("BLOOD", 255, 108, 111),
-
-    BOUNTY("BOUNT", 255, 158, 0),
-
-    BRIBERY("BRIBE", 172, 201, 235),
-
-    BRICK("BRICK", 226, 192, 164),
-
-    CAGE("CAGE", 155, 155, 155),
-
-    CARRION("CRRON", 255, 163, 222),
-
-    CHARGE("CHARG", 246, 192, 0),
-
-    COIN("COIN",255,215,0),
-
-    CORPSE("CRPSE", 230, 186, 209),
-
-    CREDIT("CRDIT", 188, 197, 234),
-
-    CRYSTAL("CRYST", 255, 85, 206),
-
-    CUBE("CUBE", 148, 219, 0),
-
-    CURRENCY("CURR", 223, 200, 0),
-
-    DEATH("DEATH", 255, 108, 110),
-
-    DELAY("DELAY", 102, 206, 255),
-
-    DEPLETION("DPLT", 185, 201, 208),
-
-    DESPAIR("DESPR", 238, 186, 187),
-
-    DEVOTION("DEVOT", 255, 111, 255),
-
-    DIVINITY("DVNTY", 0, 233, 255),
-
-    DOOM("DOOM", 255, 104, 118),
-
-    DREAM("DREAM", 190, 189, 255),
-
-    ECHO("ECHO", 225, 180, 255),
-
-    EGG("EGG", 255, 245, 195),
-
-    ELIXIR("ELIXR", 81, 221, 175),
-
-    EON("EON", 23, 194, 255),
-
-    EYEBALL("EYE", 184, 202, 201),
-
-    FADE("FADE", 159, 209, 192),
-
-    FATE("FATE", 255, 164, 226),
-
-    FEATHER("FTHR", 195, 202, 165),
-
-    FILIBUSTER("FLBTR", 255, 179, 119),
-
-    FLAME("FLAME", 255, 143, 43),
-
-    FLOOD("FLOOD", 0, 203, 255),
-
-    FUNGUS("FNGUS", 121, 219, 151),
-
-    FURY("FURY", 255, 120, 89),
-
-    FUSE("FUSE", 255, 122, 85),
-
-    GEM("GEM", 255, 99, 251),
-
-    GLYPH("GLYPH", 184, 202, 199),
-
-    GOLD("GOLD", 248, 191, 0),
-
-    GROWTH("GRWTH", 87, 226, 32),
-
-    HATCHLING("HATCH", 201, 199, 186),
-
-    HEALING("HEAL", 255, 166, 236),
-
-    HIT("HIT", 255, 245, 195),
-
-    HOOFPRINT("HOOF", 233, 189, 170),
-
-    HOUR("HOUR", 198, 197, 210),
-
-    HOURGLASS("HRGLS", 0, 215, 255),
-
-    HUNGER("HUNGR", 255, 91, 149),
-
-    ICE("ICE", 0, 239, 255),
-
-    INFECTION("INFCT", 0, 230, 66),
-
-    INTERVENTION("INTRV", 205, 203, 105),
-
-    ISOLATION("ISOLT", 250, 190, 0),
-
-    JAVELIN("JAVLN", 180, 206, 172),
-
-    KI("KI", 190, 189, 255),
-
-    KNOWLEDGE("KNOWLEDGE", 0, 115, 255),
-
-    LANDMARK("LNMRK", 186, 28, 28),
-
-    LEVEL("LEVEL", 60, 222, 185),
-
-    LORE("LORE", 209, 198, 161),
-
-    LUCK("LUCK", 185, 174, 255),
-
-    M0M1("-0/-1", "-0/-1", 255, 110, 106),
-
-    M0M2("-0/-2", "-0/-2", 255, 110, 106),
-
-    M1M0("-1/-0", "-1/-0", 255, 110, 106),
-
-    M2M1("-2/-1", "-2/-1", 255, 110, 106),
-
-    M2M2("-2/-2", "-2/-2", 255, 110, 106),
-
-    MAGNET("MAGNT", 198, 197, 210),
-
-    MANA("MANA", 0, 237, 152),
-
-    MANIFESTATION("MNFST", 104, 225, 8),
-
-    MANNEQUIN("MANQN", 206, 199, 162),
-
-    MATRIX("MATRX", 183, 174, 255),
-
-    MINE("MINE", 255, 100, 127),
-
-    MINING("MINNG", 184, 201, 207),
-
-    MIRE("MIRE", 153, 209, 199),
-
-    MUSIC("MUSIC", 255, 138, 255),
-
-    MUSTER("MUSTR", 235, 196, 0),
-
-    NET("NET", 0, 221, 251),
-
-    OMEN("OMEN", 255, 178, 120),
-
-    ORE("ORE", 200, 201, 163),
-
-    PAGE("PAGE", 218, 195, 162),
-
-    PAIN("PAIN", 255, 108, 111),
-
-    PARALYZATION("PRLYZ", 220, 201, 0),
-
-    PETAL("PETAL", 255, 162, 216),
-
-    PETRIFICATION("PETRI", 185, 201, 208),
-
-    PIN("PIN", 194, 196, 233),
-
-    PLAGUE("PLGUE", 94, 226, 25),
-
-    PLOT("PLOT", 255, 172, 133),
-
-    PRESSURE("PRESS", 255, 164, 159),
-
-    PHYLACTERY("PHYLA", 117, 219, 153),
-
-    POLYP("POLYP", 236, 185, 198),
-
-    PREY("PREY", 240, 0, 0),
-
-    PUPA("PUPA", 0, 223, 203),
-
-    P0P1("+0/+1", "+0/+1", 96, 226, 23),
-
-    P0P2("+0/+2", "+0/+2", 96, 226, 23),
-
-    P1P0("+1/+0", "+1/+0", 96, 226, 23),
-
-    P1P2("+1/+2", "+1/+2", 96, 226, 23),
-
-    P2P0("+2/+0", "+2/+0", 96, 226, 23),
-
-    P2P2("+2/+2", "+2/+2", 96, 226, 23),
-
-    QUEST("QUEST", 251, 189, 0),
-
-    RUST("RUST", 255, 181, 116),
-
-    SCREAM("SCREM", 0, 220, 255),
-
-    SCROLL("SCRLL", 206, 199, 162),
-
-    SHELL("SHELL", 190, 207, 111),
-
-    SHIELD("SHLD", 202, 198, 186),
-
-    SHRED("SHRED", 255, 165, 152),
-
-    SILVER("SILVER", 192, 192, 192),
-
-    SLEEP("SLEEP", 178, 192, 255),
-
-    SLUMBER("SLMBR", 178, 205, 255),
-
-    SLEIGHT("SLGHT", 185, 174, 255),
-
-    SLIME("SLIME", 101, 220, 163 ),
-
-    SOOT("SOOT", 211, 194, 198),
-
-    SPITE("SPITE", 0, 218, 255),
-
-    SPORE("SPORE", 122, 218, 150),
-
-    STORAGE("STORG", 255, 177, 121),
-
-    STRIFE("STRFE", 255, 89, 223),
-
-    STUDY("STUDY", 226, 192, 165),
-
-    TASK("TASK", 191, 63, 49),
-
-    THEFT("THEFT", 255, 176, 125),
-
-    TIDE("TIDE", 0, 212, 187),
-
-    TIME("TIME", 255, 121, 255),
-
-    TOWER("tower", "TOWER", 0, 239, 255),
-
-    TRAINING("TRAIN", 220, 201, 0),
-
-    TRAP("TRAP", 255, 121, 86),
-
-    TREASURE("TRSUR", 255, 184, 0),
-
-    UNITY("UNITY", 242, 156, 255),
-
-    VELOCITY("VELO", 255, 95, 138),
-
-    VERSE("VERSE", 0, 237, 155),
-
-    VITALITY("VITAL", 255, 94, 142),
-
-    VORTEX("VORTX", 142, 200, 255),
-
-    WAGE("WAGE", 242, 190, 106),
-
-    WINCH("WINCH", 208, 195, 203),
-
-    WIND("WIND", 0, 236, 255),
-
-    WISH("WISH", 255, 85, 206),
-
-    // Player Counters
-
-    ENERGY("ENRGY"),
-
-    EXPERIENCE("EXP"),
-
-    POISON("POISN");
-
-    private String name, counterOnCardDisplayName;
-    private int red, green, blue;
-
-    CounterType() {
-        this.name = this.name().substring(0, 1).toUpperCase() + this.name().substring(1).toLowerCase();
-        if (red == 0 && green == 0 && blue == 0) {
-            red = 255;
-            green = 255;
-            blue = 255;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Ordering;
+
+public class CounterType implements Comparable<CounterType>, Serializable {
+    private static final long serialVersionUID = -7575835723159144478L;
+
+    private CounterEnumType eVal = null;
+    private String sVal = null;
+
+    // Rule 122.1b
+    static ImmutableList<String> keywordCounter = ImmutableList.of(
+            "Flying", "First Strike", "Double Strike", "Deathtouch", "Haste", "Hexproof",
+            "Indestructible", "Lifelink", "Menace", "Reach", "Trample", "Vigilance");
+
+    private static Map<CounterEnumType, CounterType> eMap = Maps.newEnumMap(CounterEnumType.class);
+    private static Map<String, CounterType> sMap = Maps.newHashMap();
+
+    private CounterType(CounterEnumType e, String s) {
+        this.eVal = e;
+        this.sVal = s;
+    }
+
+    public static CounterType get(CounterEnumType e) {
+        if (!eMap.containsKey(e)) {
+            eMap.put(e, new CounterType(e, null));
+        }
+        return eMap.get(e);
+    }
+
+    public static CounterType get(String s) {
+        if (!sMap.containsKey(s)) {
+            sMap.put(s, new CounterType(null, s));
+        }
+        return sMap.get(s);
+    }
+
+    public static CounterType getType(String name) {
+        if ("Any".equalsIgnoreCase(name)) {
+            return null;
+        }
+        try {
+            return get(CounterEnumType.getType(name));
+        } catch (final IllegalArgumentException ex) {
+            return get(name);
         }
     }
 
-    CounterType(final String counterOnCardDisplayName) {
-        this();
-        this.counterOnCardDisplayName = counterOnCardDisplayName;
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(eVal, sVal);
     }
 
-    CounterType(final String counterOnCardDisplayName, final int red, final int green, final int blue) {
-        this(counterOnCardDisplayName);
-        this.red = red;
-        this.green = green;
-        this.blue = blue;
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        CounterType rhs = (CounterType) obj;
+        return new EqualsBuilder()
+                .append(eVal, rhs.eVal)
+                .append(sVal, rhs.sVal)
+                .isEquals();
     }
 
-    CounterType(final String name, final String counterOnCardDisplayName, final int red, final int green, final int blue) {
-        this(counterOnCardDisplayName, red, green, blue);
-        this.name = name;
+    @Override
+    public String toString() {
+        return eVal != null ? eVal.toString() : sVal;
     }
 
     public String getName() {
-        return this.name;
-    }
-
-    public int getRed() {
-        return red;
-    }
-
-    public int getGreen() {
-        return green;
-    }
-
-    public int getBlue() {
-        return blue;
+        return eVal != null ? eVal.getName() : getKeywordDescription();
     }
 
     public String getCounterOnCardDisplayName() {
-        return counterOnCardDisplayName;
+        return eVal != null ? eVal.getCounterOnCardDisplayName() : getKeywordDescription();
     }
 
-    public static CounterType getType(final String name) {
-        final String replacedName = name.replace("/", "").replaceAll("\\+", "p").replaceAll("\\-", "m").toUpperCase();
-        return Enum.valueOf(CounterType.class, replacedName);
+    private String getKeywordDescription() {
+        if (sVal.startsWith("Hexproof:")) {
+            final String[] k = sVal.split(":");
+            return "Hexproof from " + k[2];
+        }
+        return sVal;
     }
 
-    public static final ImmutableList<CounterType> values = ImmutableList.copyOf(values());
+    @Override
+    public int compareTo(CounterType o) {
+        return ComparisonChain.start()
+                .compare(eVal, o.eVal, Ordering.natural().nullsLast())
+                .compare(sVal, o.sVal, Ordering.natural().nullsLast())
+                .result();
+    }
 
+    public boolean is(CounterEnumType eType) {
+        return eVal == eType;
+    }
+
+    public boolean isKeywordCounter() {
+        if (eVal != null) {
+            return false;
+        }
+        if (sVal.startsWith("Hexproof:")) {
+            return true;
+        }
+        return keywordCounter.contains(sVal);
+    }
+
+    public int getRed() {
+        return eVal != null ? eVal.getRed() : 255;
+    }
+
+    public int getGreen() {
+        return eVal != null ? eVal.getGreen() : 255;
+    }
+
+    public int getBlue() {
+        return eVal != null ? eVal.getBlue() : 255;
+    }
 }

@@ -3,11 +3,10 @@ ManaCost:1 W B
 Types:Legendary Enchantment Creature God
 PT:5/4
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | RemoveCreatureTypes$ True | CheckSVar$ X | SVarCompare$ LT7 | References$ X | Description$ As long as your devotion to white and black is less than seven, CARDNAME isn't a creature. 
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | References$ X | Description$ As long as your devotion to white and black is less than seven, CARDNAME isn't a creature.
 SVar:X:Count$DevotionDual.White.Black
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouOwn+Other | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever another creature you own dies, return it to your hand unless target opponent pays 3 life.
 SVar:TrigReturn:DB$ Pump | ValidTgts$ Opponent | IsCurse$ True | SubAbility$ DBReturn
-SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand | UnlessCost$ PayLife<3> | UnlessPayer$ Targeted | UnlessAI$ nonToken
+SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Hand | UnlessCost$ PayLife<3> | UnlessPayer$ Targeted | UnlessAI$ nonToken
 SVar:BuffedBy:Permanent.White,Permanent.Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/athreos_god_of_passage.jpg
 Oracle:Indestructible\nAs long as your devotion to white and black is less than seven, Athreos isn't a creature.\nWhenever another creature you own dies, return it to your hand unless target opponent pays 3 life.

@@ -2,5 +2,5 @@ Name:Wall of Mist
 ManaCost:1 U
 Types:Creature Wall
 K:Defender
-Oracle:Defender (This creature can't attack.)
+Oracle:Defender
 PT:0/5

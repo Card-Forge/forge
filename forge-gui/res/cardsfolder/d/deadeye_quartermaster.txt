@@ -6,4 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.Equipment,Card.Vehicle | ChangeNum$ 1 | ShuffleNonMandatory$ True
 DeckHints:Type$Equipment|Vehicle
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadeye_quartermaster.jpg
-Oracle:When Deadeye Quartermaster enters the battlefield, you may search your library for an Equipment or a Vehicle card, reveal it, and put it into your hand. If you do, shuffle your library.
+Oracle:When Deadeye Quartermaster enters the battlefield, you may search your library for an Equipment or Vehicle card, reveal it, put it into your hand, then shuffle your library.

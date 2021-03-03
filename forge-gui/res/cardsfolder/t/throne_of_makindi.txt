@@ -1,0 +1,8 @@
+Name:Throne of Makindi
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ PutCounter | Cost$ 1 T | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
+A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ Any | Amount$ 2 | RestrictValid$ Spell.Kicked | SpellDescription$ Add two mana of any one color. Spend this mana only to cast kicked spells.
+DeckHas:Ability$Counters
+Oracle:{T}: Add {C}.\n{1}, {T}: Put a charge counter on Throne of Makindi.\n{T}, Remove a charge counter from Throne of Makindi: Add two mana of any one color. Spend this mana only to cast kicked spells.

@@ -4,7 +4,7 @@ Types:Creature Giant Warrior
 PT:3/3
 K:Echo:5 R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target creature with flying.
-SVar:TrigDestroy:DB$Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying.
 SVar:NeedsToPlayVar:Y GE6
 SVar:Y:Count$Valid Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hammerheim_deadeye.jpg

@@ -3,4 +3,4 @@ ManaCost:2 B
 Types:Sorcery
 A:SP$ Discard | Cost$ 2 B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
 A:SP$ Discard | Cost$ 1 B | Defined$ Player | PrecostDesc$ Overload | CostDesc$ {1}{B} | NonBasicSpell$ True | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.") | StackDescription$ Each player discards two cards.
-Oracle:Target player discards two cards.\nOverload {1}{B} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each".)
+Oracle:Target player discards two cards.\nOverload {1}{B} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

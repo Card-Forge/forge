@@ -1,6 +1,8 @@
 package forge.screens.match.winlose;
 
+import forge.Forge;
 import forge.game.GameView;
+import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -14,12 +16,18 @@ import forge.toolbox.FEvent.FEventHandler;
 public class ControlWinLose {
     private final ViewWinLose view;
     protected final GameView lastGame;
+    private int humancount;
 
     /** @param v &emsp; ViewWinLose
      * @param match */
     public ControlWinLose(final ViewWinLose v, GameView game) {
         view = v;
         lastGame = game;
+        humancount = 0;
+        for(PlayerView p: game.getPlayers()){
+            if (!p.isAI())
+                humancount++;
+        }
         addListeners();
     }
 
@@ -46,6 +54,8 @@ public class ControlWinLose {
                 view.getBtnQuit().setEnabled(false);
             }
         });
+        if(humancount == 0)
+            view.getBtnRestart().setEnabled(false);
     }
 
     /** Action performed when "continue" button is pressed in default win/lose UI. */
@@ -67,11 +77,19 @@ public class ControlWinLose {
 
     /** Action performed when "quit" button is pressed in default win/lose UI. */
     public void actionOnQuit() {
+        boolean openHomeScreen = false;
         // Reset other stuff
         saveOptions();
-        try { MatchController.getHostedMatch().endCurrentGame();
+        try {
+            if(MatchController.getHostedMatch().subGameCount > 0) {
+                openHomeScreen = true;
+                MatchController.getHostedMatch().subGameCount--;
+            }
+            MatchController.getHostedMatch().endCurrentGame();
         } catch (NullPointerException e) {}
         view.hide();
+        if (openHomeScreen || humancount == 0)
+            Forge.openHomeScreen(Forge.lastButtonIndex);
     }
 
     /**

@@ -1,0 +1,18 @@
+Name:Largepox
+ManaCost:B B B B
+Types:Sorcery
+A:SP$ Discard | Cost$ B B B B | NumCards$ 1 | Mode$ TgtChoose | Defined$ Player | SubAbility$ DBLoseLife | SpellDescription$ Each player discards a card, then loses 1 life, then sacrifices an artifact, a creature, an enchantment, a land, a planeswalker, and a tribal permanent, then exiles a card from their graveyard, then puts the top card of their library into their graveyard, then removes a counter from a permanent they control, then gets a poison counter.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player | LifeAmount$ 1 | AILifeThreshold$ 1 | SubAbility$ DBSacArtifact
+SVar:DBSacArtifact:DB$ Sacrifice | SacValid$ Artifact | Defined$ Player | SubAbility$ DBSacCreature
+SVar:DBSacCreature:DB$ Sacrifice | SacValid$ Creature | Defined$ Player | SubAbility$ DBSacEnchantment
+SVar:DBSacEnchantment:DB$ Sacrifice | SacValid$ Enchantment | Defined$ Player | SubAbility$ DBSacLand
+SVar:DBSacLand:DB$ Sacrifice | SacValid$ Land | Defined$ Player | SubAbility$ DBSacPlaneswalker
+SVar:DBSacPlaneswalker:DB$ Sacrifice | SacValid$ Planeswalker | Defined$ Player | SubAbility$ DBSacTribal
+SVar:DBSacTribal:DB$ Sacrifice | SacValid$ Tribal | Defined$ Player | SubAbility$ DBGraveyard
+SVar:DBGraveyard:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | DefinedPlayer$ Player | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1 | Hidden$ True | SubAbility$ DBMill
+SVar:DBMill:DB$ Mill | NumCards$ 1 | Defined$ Player | SubAbility$ DBCounter
+SVar:DBCounter:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseCounter | SubAbility$ DBPoison
+SVar:DBChooseCounter:DB$ ChooseCard | Choices$ Permanent.RememberedPlayerCtrl+HasCounters | Defined$ Remembered | Amount$ 1 | Mandatory$ True | SubAbility$ DBOneCounter
+SVar:DBOneCounter:DB$ RemoveCounter | Defined$ ChosenCard | CounterNum$ 1 | CounterType$ Any
+SVar:DBPoison:DB$ Poison | Defined$ Player | Num$ 1
+Oracle:Each player discards a card, then loses 1 life, then sacrifices an artifact, a creature, an enchantment, a land, a planeswalker, and a tribal permanent, then exiles a card from their graveyard, then puts the top card of their library into their graveyard, then removes a counter from a permanent they control, then gets a poison counter.

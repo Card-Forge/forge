@@ -162,6 +162,15 @@ public final class CardPredicates {
         };
     }
 
+    public static Predicate<Card> sharesCardTypeWith(final Card card) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.sharesCardTypeWith(card);
+            }
+        };
+    }
+
     public static Predicate<Card> sharesCreatureTypeWith(final Card card) {
         return new Predicate<Card>() {
             @Override
@@ -299,6 +308,24 @@ public final class CardPredicates {
         };
     }
 
+    public static final Predicate<Card> evenCMC() {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.getCMC() % 2 == 0;
+            }
+        };
+    }
+
+    public static final Predicate<Card> oddCMC() {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.getCMC() % 2 == 1;
+            }
+        };
+    }
+
     public static final Predicate<Card> hasCounters() {
         return new Predicate<Card>() {
             @Override
@@ -311,6 +338,9 @@ public final class CardPredicates {
     public static final Predicate<Card> hasCounter(final CounterType type) {
         return hasCounter(type, 1);
     }
+    public static final Predicate<Card> hasCounter(final CounterEnumType type) {
+        return hasCounter(type, 1);
+    }
 
     public static final Predicate<Card> hasCounter(final CounterType type, final int n) {
         return new Predicate<Card>() {
@@ -319,6 +349,9 @@ public final class CardPredicates {
                 return c.getCounters(type) >= n;
             }
         };
+    }
+    public static final Predicate<Card> hasCounter(final CounterEnumType type, final int n) {
+        return hasCounter(CounterType.get(type), n);
     }
     
     public static final Predicate<Card> hasLessCounter(final CounterType type, final int n) {
@@ -330,6 +363,9 @@ public final class CardPredicates {
             }
         };
     }
+    public static final Predicate<Card> hasLessCounter(final CounterEnumType type, final int n) {
+        return hasLessCounter(CounterType.get(type), n);
+    }
 
     public static Predicate<Card> canReceiveCounters(final CounterType counter) {
         return new Predicate<Card>() {
@@ -338,6 +374,9 @@ public final class CardPredicates {
                 return c.canReceiveCounters(counter);
             }
         };
+    }
+    public static Predicate<Card> canReceiveCounters(final CounterEnumType counter) {
+        return canReceiveCounters(CounterType.get(counter));
     }
 
     public static final Predicate<Card> hasGreaterPowerThan(final int minPower) {
@@ -357,6 +396,9 @@ public final class CardPredicates {
                     arg1.getCounters(type));
             }
         };
+    }
+    public static final Comparator<Card> compareByCounterType(final CounterEnumType type) {
+        return compareByCounterType(CounterType.get(type));
     }
 
     public static final Predicate<Card> hasSVar(final String name) {
@@ -419,6 +461,19 @@ public final class CardPredicates {
             public boolean apply(final Card c)
             {
                 return c.getRules() != null && c.getRules().getAiHints().getRemAIDecks();
+            }
+        };
+    }
+
+    public static final Predicate<Card> castSA(final Predicate<SpellAbility> predSA) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c)
+            {
+                if (c.getCastSA() == null) {
+                    return false;
+                }
+                return predSA.apply(c.getCastSA());
             }
         };
     }

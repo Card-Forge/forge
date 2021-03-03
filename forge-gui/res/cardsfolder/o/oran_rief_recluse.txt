@@ -5,7 +5,7 @@ PT:1/3
 K:Kicker:2 G
 K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, destroy target creature with flying.
-SVar:TrigDestroy:DB$Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying.
 SVar:NeedsToPlayKicked:Creature.withFlying+OppCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oran_rief_recluse.jpg
 Oracle:Kicker {2}{G} (You may pay an additional {2}{G} as you cast this spell.)\nReach (This creature can block creatures with flying.)\nWhen Oran-Rief Recluse enters the battlefield, if it was kicked, destroy target creature with flying.

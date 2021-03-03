@@ -8,4 +8,4 @@ SVar:DBCounter:DB$ PutCounter | ValidTgts$ Creature | Tgtprompt$ Select target c
 SVar:DBProliferate:DB$ Proliferate | SpellDescription$ Proliferate (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters & Ability$Proliferate
-Oracle:When Pollenbright Druid enters the battlefield, choose one - \n• Put a +1/+1 counter on target creature.\n• Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+Oracle:When Pollenbright Druid enters the battlefield, choose one —\n• Put a +1/+1 counter on target creature.\n• Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

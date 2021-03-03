@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Creature Nightmare
 Colors:blue,black
 PT:2/3
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBMill | TriggerDescription$ Whenever this creature attacks or blocks, each opponent exiles the top two cards of their library.
-T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DBMill | Secondary$ True | TriggerDescription$ Whenever this creature attacks or blocks, each opponent exiles the top two cards of their library.
-SVar:DBMill:DB$ Mill | Defined$ Player.Opponent | NumCards$ 2 | Destination$ Exile
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBExile | TriggerDescription$ Whenever this creature attacks or blocks, each opponent exiles the top two cards of their library.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DBExile | Secondary$ True | TriggerDescription$ Whenever this creature attacks or blocks, each opponent exiles the top two cards of their library.
+SVar:DBExile:DB$ Dig | Defined$ Player.Opponent | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile
 Oracle:Whenever this creature attacks or blocks, each opponent exiles the top two cards of their library.

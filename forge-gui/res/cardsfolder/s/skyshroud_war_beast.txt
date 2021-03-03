@@ -5,7 +5,7 @@ PT:*/*
 K:Trample
 K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
-S:Mode$ Continuous | EffectZone$ Battlefield | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of nonbasic lands the chosen player controls.
+S:Mode$ Continuous | EffectZone$ Battlefield | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of nonbasic lands the chosen player controls.
 SVar:X:Count$Valid Land.nonBasic+ChosenCtrl
 AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Z GE1

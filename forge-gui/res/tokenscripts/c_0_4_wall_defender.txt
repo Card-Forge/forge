@@ -1,6 +1,0 @@
-Name:Wall
-ManaCost:no cost
-Types:Creature Wall
-PT:0/4
-K:Defender
-Oracle:Defender

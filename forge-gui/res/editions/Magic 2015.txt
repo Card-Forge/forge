@@ -7,6 +7,7 @@ MciCode=m15
 Type=Core
 BoosterCovers=5
 Booster=10 Common:!fromSheet("M15 Sample Cards"), 3 Uncommon:!fromSheet("M15 Sample Cards"), 1 RareMythic:!fromSheet("M15 Sample Cards"), 1 BasicLand
+ChaosDraftThemes=CORE_SET
 
 [cards]
 1 M Ajani Steadfast
@@ -258,26 +259,26 @@ Booster=10 Common:!fromSheet("M15 Sample Cards"), 3 Uncommon:!fromSheet("M15 Sam
 247 R Sliver Hive
 248 R Urborg, Tomb of Yawgmoth
 249 R Yavimaya Coast
+250 L Plains
 251 L Plains
-251 L Plains
-251 L Plains
-251 L Plains
+252 L Plains
+253 L Plains
+254 L Island
 255 L Island
-255 L Island
-255 L Island
-255 L Island
+256 L Island
+257 L Island
 258 L Swamp
-258 L Swamp
-258 L Swamp
-258 L Swamp
+259 L Swamp
+260 L Swamp
+261 L Swamp
+262 L Mountain
 263 L Mountain
-263 L Mountain
-263 L Mountain
-263 L Mountain
+264 L Mountain
+265 L Mountain
 266 L Forest
-266 L Forest
-266 L Forest
-266 L Forest
+267 L Forest
+268 L Forest
+269 L Forest
 270 R Aegis Angel
 271 C Divine Verdict
 272 C Inspired Charge

@@ -4,6 +4,5 @@ Types:Creature Illusion
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Library | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ When CARDNAME is put into your graveyard from your library, you may put it onto the battlefield.
-SVar:TrigChange:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/narcomoeba.jpg
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCardLKICopy
 Oracle:Flying\nWhen Narcomoeba is put into your graveyard from your library, you may put it onto the battlefield.

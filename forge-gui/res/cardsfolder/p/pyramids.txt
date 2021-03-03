@@ -1,0 +1,10 @@
+Name:Pyramids
+ManaCost:6
+Types:Artifact
+A:AB$ Charm | Cost$ 2 | Choices$ DBDestroy,DBProtect | Defined$ You
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Aura.AttachedTo Land | TgtPrompt$ Select target Aura attached to a land | SpellDescription$ Destroy target Aura attached to a land.
+SVar:DBProtect:DB$ Effect | ValidTgts$ Land | TgtPrompt$ Select target land | ReplacementEffects$ DBRemove | SVars$ ExileEffect,RemoveDamage | ForgetOnMoved$ Battlefield | RememberObjects$ Targeted | SpellDescription$ The next time target land would be destroyed this turn, remove all damage marked on it instead.
+SVar:DBRemove:Event$ Destroy | ValidCard$ Land.IsRemembered | ReplaceWith$ RemoveDamage | Description$ The next time target land would be destroyed this turn, remove all damage marked on it instead.
+SVar:RemoveDamage:DB$ DealDamage | Defined$ ReplacedCard | Remove$ All | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:{2}: Choose one —\n• Destroy target Aura attached to a land.\n• The next time target land would be destroyed this turn, remove all damage marked on it instead.

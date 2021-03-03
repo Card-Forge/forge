@@ -2,6 +2,7 @@ package forge.ai;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import forge.card.CardStateName;
 import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
@@ -77,16 +78,14 @@ public abstract class SpellAbilityAi {
             }
         }
 
-        if (sa.hasParam("AITgtBeforeCostEval")) {
-            // Cost payment requires a valid target to be specified, e.g. Quillmane Baku, so run the API logic first
-            // to set the target, then decide on paying costs (slower, so only use for cards where it matters)
-            return checkApiLogic(ai, sa) && (cost == null || willPayCosts(ai, sa, cost, source));
+        if (!checkApiLogic(ai, sa)) {
+            return false;
         }
-
+        // needs to be after API logic because needs to check possible X Cost?
         if (cost != null && !willPayCosts(ai, sa, cost, source)) {
             return false;
         }
-        return checkApiLogic(ai, sa);
+        return true;
     }
 
     protected boolean checkConditions(final Player ai, final SpellAbility sa, SpellAbilityCondition con) {
@@ -112,7 +111,7 @@ public abstract class SpellAbilityAi {
         if (aiLogic.equals("CheckCondition")) {
             SpellAbility saCopy = sa.copy();
             saCopy.setActivatingPlayer(ai);
-            return saCopy.getConditions().areMet(saCopy);
+            return saCopy.metConditions();
         }
 
         return !("Never".equals(aiLogic));
@@ -167,7 +166,8 @@ public abstract class SpellAbilityAi {
 
         // a mandatory SpellAbility with targeting but without candidates,
         // does not need to go any deeper
-        if (sa.usesTargeting() && mandatory && !sa.getTargetRestrictions().hasCandidates(sa, true)) {
+        if (sa.usesTargeting() && mandatory && !sa.isTargetNumberValid()
+                && !sa.getTargetRestrictions().hasCandidates(sa, true)) {
             return false;
         }
 
@@ -247,6 +247,7 @@ public abstract class SpellAbilityAi {
     protected static boolean isSorcerySpeed(final SpellAbility sa) {
         return (sa.getRootAbility().isSpell() && sa.getHostCard().isSorcery())
             || (sa.getRootAbility().isAbility() && sa.getRestrictions().isSorcerySpeed())
+            || (sa.getRootAbility().isAdventure() && sa.getHostCard().getState(CardStateName.Adventure).getType().isSorcery())
             || (sa.isPwAbility() && !sa.getHostCard().hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed."));
     }
 
@@ -264,7 +265,7 @@ public abstract class SpellAbilityAi {
 
         // TODO probably also consider if winter orb or similar are out
 
-        if (sa.getPayCosts() == null || sa instanceof AbilitySub) {
+        if (sa instanceof AbilitySub) {
             return true; // This is only true for Drawbacks and triggers
         }
         
@@ -304,7 +305,7 @@ public abstract class SpellAbilityAi {
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends GameEntity> T chooseSingleEntity(Player ai, SpellAbility sa, Collection<T> options, boolean isOptional, Player targetedPlayer) {
+    public <T extends GameEntity> T chooseSingleEntity(Player ai, SpellAbility sa, Collection<T> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         boolean hasPlayer = false;
         boolean hasCard = false;
         boolean hasPlaneswalker = false;
@@ -321,11 +322,11 @@ public abstract class SpellAbilityAi {
         }
 
         if (hasPlayer && hasPlaneswalker) {
-            return (T) chooseSinglePlayerOrPlaneswalker(ai, sa, (Collection<GameEntity>) options);
+            return (T) chooseSinglePlayerOrPlaneswalker(ai, sa, (Collection<GameEntity>) options, params);
         } else if (hasCard) {
-            return (T) chooseSingleCard(ai, sa, (Collection<Card>) options, isOptional, targetedPlayer);
+            return (T) chooseSingleCard(ai, sa, (Collection<Card>) options, isOptional, targetedPlayer, params);
         } else if (hasPlayer) {
-            return (T) chooseSinglePlayer(ai, sa, (Collection<Player>) options);
+            return (T) chooseSinglePlayer(ai, sa, (Collection<Player>) options, params);
         }
 
         return null;
@@ -336,17 +337,17 @@ public abstract class SpellAbilityAi {
         return spells.get(0);
     }
 
-    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleCard is used by " + sa.getHostCard().getName() + " for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return Iterables.getFirst(options, null);
     }
     
-    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSinglePlayer is used by " + sa.getHostCard().getName() + " for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return Iterables.getFirst(options, null);
     }
 
-    protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options) {
+    protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSinglePlayerOrPlaneswalker is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return Iterables.getFirst(options, null);
     }

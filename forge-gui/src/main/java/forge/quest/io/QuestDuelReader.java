@@ -35,7 +35,7 @@ public class QuestDuelReader extends StorageReaderFolder<QuestEventDuel> {
         qc.setCardReward(sectionMeta.get("Card Reward"));
         qc.setIconImageKey(ImageKeys.ICON_PREFIX + sectionMeta.get("Icon"));
         if (sectionMeta.contains("Profile")) {
-        	qc.setProfile(sectionMeta.get("Profile"));
+            qc.setProfile(sectionMeta.get("Profile"));
         }
 
         // Deck

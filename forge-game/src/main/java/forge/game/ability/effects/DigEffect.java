@@ -13,6 +13,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterType;
+import forge.game.event.GameEventCombatChanged;
 import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -45,7 +46,7 @@ public class DigEffect extends SpellAbilityEffect {
         }
         else {
             for (final Player p : tgtPlayers) {
-                sb.append(Lang.getPossesive(p.getName())).append(" ");
+                sb.append(Lang.getInstance().getPossesive(p.getName())).append(" ");
             }
         }
         sb.append("library.");
@@ -100,10 +101,11 @@ public class DigEffect extends SpellAbilityEffect {
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
+        final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
 
         CardZoneTable table = new CardZoneTable();
         GameEntityCounterTable counterTable = new GameEntityCounterTable();
+        boolean combatChanged = false;
         for (final Player p : tgtPlayers) {
             if (tgt != null && !p.canBeTargetedBy(sa)) {
                 continue;
@@ -160,10 +162,15 @@ public class DigEffect extends SpellAbilityEffect {
                         host.addRemembered(one);
                     }
                 }
+                if (sa.hasParam("ImprintRevealed") && hasRevealed) {
+                    for (final Card one : top) {
+                        host.addImprintedCard(one);
+                    }
+                }
                 if (sa.hasParam("Choser")) {
                     final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Choser"), sa);
                     if (!choosers.isEmpty()) {
-                        chooser = player.getController().chooseSingleEntityForEffect(choosers, sa, "Choser:");
+                        chooser = player.getController().chooseSingleEntityForEffect(choosers, null, sa, Localizer.getInstance().getMessage("lblChooser") + ":", false, p, null);
                     }
                     if (sa.hasParam("SetChosenPlayer")) {
                         host.setChosenPlayer(chooser);
@@ -218,7 +225,7 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                         for (final byte pair : MagicColor.COLORPAIR) {
                             Card chosen = chooser.getController().chooseSingleEntityForEffect(CardLists.filter(valid, CardPredicates.isExactlyColor(pair)),
-                                    delayedReveal, sa, Localizer.getInstance().getMessage("lblChooseOne"), false, p);
+                                    delayedReveal, sa, Localizer.getInstance().getMessage("lblChooseOne"), false, p, null);
                             if (chosen != null) {
                                 movedCards.add(chosen);
                             }
@@ -232,13 +239,13 @@ public class DigEffect extends SpellAbilityEffect {
                         movedCards = new CardCollection(valid);
                         String prompt;
                         if (destZone2.equals(ZoneType.Library) && libraryPosition2 == 0) {
-                            prompt = Localizer.getInstance().getMessage("lblChooseACardToLeaveTargetLibraryTop", "{player's}");
+                            prompt = Localizer.getInstance().getMessage("lblChooseACardToLeaveTargetLibraryTop", p.getName());
                         }
                         else {
-                            prompt = Localizer.getInstance().getMessage("lblChooseACardLeaveTarget", "{player's}", destZone2.getTranslatedName());
+                            prompt = Localizer.getInstance().getMessage("lblChooseACardLeaveTarget", p.getName(), destZone2.getTranslatedName());
                         }
 
-                        Card chosen = chooser.getController().chooseSingleEntityForEffect(valid, delayedReveal, sa, prompt, false, p);
+                        Card chosen = chooser.getController().chooseSingleEntityForEffect(valid, delayedReveal, sa, prompt, false, p, null);
                         movedCards.remove(chosen);
                         if (sa.hasParam("RandomOrder")) {
                             CardLists.shuffle(movedCards);
@@ -252,9 +259,9 @@ public class DigEffect extends SpellAbilityEffect {
                             prompt = Localizer.getInstance().getMessage("lblChooseCardsPutIntoZone", destZone1.getTranslatedName());
                             if (destZone1.equals(ZoneType.Library)) {
                                 if (libraryPosition == -1) {
-                                    prompt = Localizer.getInstance().getMessage("lblChooseCardPutOnTargetLibarayBottom", "{player's}");
+                                    prompt = Localizer.getInstance().getMessage("lblChooseCardPutOnTargetLibraryBottom", p.getName());
                                 } else if (libraryPosition == 0) {
-                                    prompt = Localizer.getInstance().getMessage("lblChooseCardPutOnTargetLibarayTop", "{player's}");
+                                    prompt = Localizer.getInstance().getMessage("lblChooseCardPutOnTargetLibraryTop", p.getName());
                                 }
                             }
                         }
@@ -271,7 +278,7 @@ public class DigEffect extends SpellAbilityEffect {
                             int max = anyNumber ? valid.size() : Math.min(valid.size(),destZone1ChangeNum);
                             int min = (anyNumber || optional) ? 0 : max;
                             if ( max > 0 ) { // if max is 0 don't make a choice
-                                chosen = chooser.getController().chooseEntitiesForEffect(valid, min, max, delayedReveal, sa, prompt, p);
+                                chosen = chooser.getController().chooseEntitiesForEffect(valid, min, max, delayedReveal, sa, prompt, p, null);
                             }
 
                             chooser.getController().endTempShowCards();
@@ -307,8 +314,16 @@ public class DigEffect extends SpellAbilityEffect {
                                 if (sa.hasParam("Tapped")) {
                                     c.setTapped(true);
                                 }
+                                if (addToCombat(c, c.getController(), sa, "Attacking", "Blocking")) {
+                                    combatChanged = true;
+                                }
                             } else if (destZone1.equals(ZoneType.Exile)) {
+                                if (sa.hasParam("ExileWithCounter")) {
+                                    c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")),
+                                            1, player, true, counterTable);
+                                }
                                 c.setExiledWith(effectHost);
+                                c.setExiledBy(effectHost.getController());
                             }
                         }
                         if (!origin.equals(c.getZone().getZoneType())) {
@@ -377,11 +392,16 @@ public class DigEffect extends SpellAbilityEffect {
                                             1, player, true, counterTable);
                                 }
                                 c.setExiledWith(effectHost);
+                                c.setExiledBy(effectHost.getController());
                             }
                         }
                     }
                 }
             }
+        }
+        if (combatChanged) {
+            game.updateCombatForView();
+            game.fireEvent(new GameEventCombatChanged());
         }
         //table trigger there
         table.triggerChangesZoneAll(game);

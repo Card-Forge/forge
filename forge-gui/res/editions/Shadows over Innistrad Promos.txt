@@ -1,0 +1,17 @@
+[metadata]
+Code=PSOI
+Date=2016-04-09
+Name=Shadows over Innistrad Promos
+Type=Reprint
+
+[cards]
+2 R Angel of Deliverance
+15 R Drogskol Cavalry
+75 R Nephalia Moondrakes
+108 R Elusive Tormentor
+122 R Markov Dreadknight
+157 R Flameblade Angel
+166 U Incorrigible Youths
+175 U Ravenous Bloodseeker
+230 R Soul Swallower
+242 R Anguished Unmaking

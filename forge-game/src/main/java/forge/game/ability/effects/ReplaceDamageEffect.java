@@ -6,12 +6,14 @@ import forge.game.ability.AbilityKey;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.Game;
+import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
+import forge.util.TextUtil;
 
 public class ReplaceDamageEffect extends SpellAbilityEffect {
 
@@ -58,6 +60,12 @@ public class ReplaceDamageEffect extends SpellAbilityEffect {
         }
         params.put(AbilityKey.DamageAmount, dmg);
 
+        // need to log Updated events there, or the log is wrong order
+        String message = sa.getReplacementEffect().toString();
+        if ( !StringUtils.isEmpty(message)) {
+            message = TextUtil.fastReplace(message, "CARDNAME", card.getName());
+            game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
+        }
 
         //try to call replacementHandler with new Params
         ReplacementResult result = game.getReplacementHandler().run(event, params);

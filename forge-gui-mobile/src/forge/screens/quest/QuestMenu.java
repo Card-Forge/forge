@@ -43,7 +43,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     private static final QuestStatsScreen statsScreen = new QuestStatsScreen();
     private static final QuestTournamentsScreen tournamentsScreen = new QuestTournamentsScreen();
 
-    private static final FMenuItem duelsItem = new FMenuItem(Localizer.getInstance().getMessage("lblDuels"), FSkinImage.QUEST_GEAR, new FEventHandler() {
+    private static final FMenuItem duelsItem = new FMenuItem(Localizer.getInstance().getMessage("lblDuels"), FSkinImage.QUEST_BIG_SWORD, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(duelsScreen);
@@ -55,13 +55,13 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
             setCurrentScreen(challengesScreen);
         }
     });
-    private static final FMenuItem tournamentsItem = new FMenuItem(Localizer.getInstance().getMessage("lblTournaments"), FSkinImage.PACK, new FEventHandler() {
+    private static final FMenuItem tournamentsItem = new FMenuItem(Localizer.getInstance().getMessage("lblTournaments"), FSkinImage.QUEST_BIG_SHIELD, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(tournamentsScreen);
         }
     });
-    private static final FMenuItem decksItem = new FMenuItem(Localizer.getInstance().getMessage("lblQuestDecks"), FSkinImage.DECKLIST, new FEventHandler() {
+    private static final FMenuItem decksItem = new FMenuItem(Localizer.getInstance().getMessage("lblQuestDecks"), FSkinImage.QUEST_BIG_BAG, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(decksScreen);
@@ -79,7 +79,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
             setCurrentScreen(bazaarScreen);
         }
     });
-    private static final FMenuItem statsItem = new FMenuItem(Localizer.getInstance().getMessage("lblStatistics"), FSkinImage.MULTI, new FEventHandler() {
+    private static final FMenuItem statsItem = new FMenuItem(Localizer.getInstance().getMessage("lblStatistics"), FSkinImage.MENU_STATS, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(statsScreen);
@@ -119,7 +119,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
             });
         }
     });
-    private static final FMenuItem prefsItem = new FMenuItem(Localizer.getInstance().getMessage("Preferences"), FSkinImage.SETTINGS, new FEventHandler() {
+    private static final FMenuItem prefsItem = new FMenuItem(Localizer.getInstance().getMessage("Preferences"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(prefsScreen);
@@ -160,10 +160,10 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     static {
         //the first time quest mode is launched, add button for it if in Landscape mode
         if (Forge.isLandscapeMode()) {
-            HomeScreen.instance.addButtonForMode(Localizer.getInstance().getMessage("lblQuestMode"), new FEventHandler() {
+            HomeScreen.instance.addButtonForMode("-"+Localizer.getInstance().getMessage("lblQuestMode"), new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    launchQuestMode(LaunchReason.StartQuestMode);
+                    launchQuestMode(LaunchReason.StartQuestMode, HomeScreen.instance.getQuestCommanderMode());
                 }
             });
         }
@@ -182,7 +182,10 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         NewQuest
     }
 
-    public static void launchQuestMode(final LaunchReason reason) {
+    public static void launchQuestMode(final LaunchReason reason, boolean commanderMode) {
+        Forge.lastButtonIndex = 6;
+        HomeScreen.instance.updateQuestCommanderMode(commanderMode);
+        decksScreen.commanderMode = commanderMode;
         //attempt to load current quest
         final File dirQuests = new File(ForgeConstants.QUEST_SAVE_DIR);
         final String questname = FModel.getQuestPreferences().getPref(QPref.CURRENT_QUEST);
@@ -220,6 +223,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
                             LoadGameScreen.QuestMode.setAsBackScreen(true);
                         }
                     }
+                    HomeScreen.instance.updateQuestWorld(FModel.getQuest().getWorld() == null ? "" : FModel.getQuest().getWorld().toString());
                 }
             });
             return;
@@ -243,9 +247,10 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         addItem(decksItem); decksItem.setSelected(currentScreen == decksScreen);
         addItem(spellShopItem); spellShopItem.setSelected(currentScreen == spellShopScreen);
         addItem(bazaarItem); bazaarItem.setSelected(currentScreen == bazaarScreen);
-        addItem(statsItem); statsItem.setSelected(currentScreen == statsScreen);
         addItem(unlockSetsItem);
-        addItem(travelItem);
+        if(!HomeScreen.instance.getQuestCommanderMode())
+            addItem(travelItem);
+        addItem(statsItem); statsItem.setSelected(currentScreen == statsScreen);
         addItem(prefsItem); prefsItem.setSelected(currentScreen == prefsScreen);
     }
 

@@ -4,4 +4,4 @@ Types:Creature Bird Spirit
 PT:5/5
 K:Flying
 A:AB$ ChangeZone | Cost$ 5 B B | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | Tapped$ True | SpellDescription$ Return target creature card from your graveyard to the battlefield tapped.
-Oracle:Flying\n{5}{B}{B}: Return target creature card from your graveyard to the battlefield tapped.
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\n{5}{B}{B}: Return target creature card from your graveyard to the battlefield tapped.

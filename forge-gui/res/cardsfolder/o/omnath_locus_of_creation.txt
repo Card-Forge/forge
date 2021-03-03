@@ -1,0 +1,17 @@
+Name:Omnath, Locus of Creation
+ManaCost:R G W U
+Types:Legendary Creature Elemental
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ LandfallReset | Static$ True
+T:Mode$ TurnBegin | ValidPlayer$ Player | Static$ True | TriggerZones$ Battlefield | Execute$ LandfallReset
+SVar:LandfallReset:DB$ StoreSVar | SVar$ LandfallAmount | Type$ Number | Expression$ 0 | References$ LandfallAmount
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLandfallCount | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, you gain 4 life if this is the first time this ability has resolved this turn. If it's the second time, add {R}{G}{W}{U}. If it's the third time, CARDNAME deals 4 damage to each opponent and each planeswalker you don't control.
+SVar:TrigLandfallCount:DB$ StoreSVar | SVar$ LandfallAmount | Type$ CountSVar | SubAbility$ DBGainLife | Expression$ LandfallAmount/Plus.1
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4 | ConditionCheckSVar$ LandfallAmount | ConditionSVarCompare$ EQ1 | SubAbility$ DBMana
+SVar:DBMana:DB$ Mana | Produced$ R G W U | ConditionCheckSVar$ LandfallAmount | ConditionSVarCompare$ EQ2 | SubAbility$ DBDamageAll
+SVar:DBDamageAll:DB$ DamageAll | ValidPlayers$ Opponent | ValidCards$ Planeswalker.YouDontCtrl | NumDmg$ 4 | ConditionCheckSVar$ LandfallAmount | ConditionSVarCompare$ EQ3
+SVar:LandfallAmount:Number$0
+DeckHas:Ability$LifeGain
+Oracle:When Omnath, Locus of Creation enters the battlefield, draw a card.\nLandfall — Whenever a land enters the battlefield under your control, you gain 4 life if this is the first time this ability has resolved this turn. If it's the second time, add {R}{G}{W}{U}. If it's the third time, Omnath deals 4 damage to each opponent and each planeswalker you don't control.

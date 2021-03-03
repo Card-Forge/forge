@@ -1,0 +1,12 @@
+[metadata]
+Code=PM12
+Date=2012-01-01
+Name=Magic 2012 Promos
+Type=Reprint
+
+[cards]
+82 M Bloodlord of Vaasgoth
+126 R Chandra's Phoenix
+156 U Stormblood Berserker
+171 R Dungrove Elder
+176 R Garruk's Horde

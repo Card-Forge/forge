@@ -46,7 +46,7 @@ public class TriggerCountered extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerCountered(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerCountered(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -96,9 +96,9 @@ public class TriggerCountered extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
         sa.setTriggeringObjectsFrom(
-            this,
+            runParams,
             AbilityKey.Card,
             AbilityKey.Cause,
             AbilityKey.Player,

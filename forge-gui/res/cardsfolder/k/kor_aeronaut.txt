@@ -5,8 +5,7 @@ PT:2/2
 K:Flying
 K:Kicker:1 W
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, target creature gains flying until end of turn.
-SVar:TrigKicker:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying
+SVar:TrigKicker:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying
 SVar:PlayMain1:True
 SVar:NeedsToPlayKicked:Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Kor_Aeronaut.jpg
 Oracle:Kicker {1}{W} (You may pay an additional {1}{W} as you cast this spell.)\nFlying\nWhen Kor Aeronaut enters the battlefield, if it was kicked, target creature gains flying until end of turn.

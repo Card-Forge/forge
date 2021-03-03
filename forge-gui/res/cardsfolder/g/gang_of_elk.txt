@@ -3,7 +3,6 @@ ManaCost:5 G
 Types:Creature Elk Beast
 PT:5/4
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ +X | NumDef$ +X | References$ X
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +X | References$ X
 SVar:X:TriggerCount$NumBlockers/Times.2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gang_of_elk.jpg
 Oracle:Whenever Gang of Elk becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.

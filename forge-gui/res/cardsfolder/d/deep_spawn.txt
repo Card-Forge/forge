@@ -7,5 +7,4 @@ K:UpkeepCost:Mill<2>
 A:AB$ Pump | Cost$ U | Defined$ Self | KW$ Shroud | SubAbility$ DBPump | SpellDescription$ CARDNAME gains shroud until end of turn and doesn't untap during your next untap step. Tap CARDNAME. (A permanent with shroud can't be the target of spells or abilities.)
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | SubAbility$ DBTap
 SVar:DBTap:DB$ Tap | Defined$ Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deep_spawn.jpg
-Oracle:Trample\nAt the beginning of your upkeep, sacrifice Deep Spawn unless you put the top two cards of your library into your graveyard.\n{U}: Deep Spawn gains shroud until end of turn and doesn't untap during your next untap step. Tap Deep Spawn. (A creature with shroud can't be the target of spells or abilities.)
+Oracle:Trample\nAt the beginning of your upkeep, sacrifice Deep Spawn unless you mill two cards.\n{U}: Deep Spawn gains shroud until end of turn and doesn't untap during your next untap step. Tap Deep Spawn. (A creature with shroud can't be the target of spells or abilities.)

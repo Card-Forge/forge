@@ -6,4 +6,4 @@ SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
 SVar:X:Count$Converge
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brilliant_spectrum.jpg
-Oracle:Converge — Draw X cards, where X is the number of colors of mana spent to cast Brilliant Spectrum. Then discard two cards.
+Oracle:Converge — Draw X cards, where X is the number of colors of mana spent to cast this spell. Then discard two cards.

@@ -1,0 +1,21 @@
+[metadata]
+Code=PWP11
+Date=2011-01-01
+Name=Wizards Play Network 2011
+Type=Reprint
+
+[cards]
+64 R Master's Call
+65 R Plague Myr
+66 R Signal Pest
+69 R Fling
+70 R Sylvan Ranger
+71 R Vault Skirge
+72 R Maul Splicer
+73 R Shrine of Burning Rage
+76 R Tormented Soul
+77 R Auramancer
+78 R Circle of Flame
+80 R Curse of the Bloody Tome
+83 R Bloodcrazed Neonate
+84 R Boneyard Wurm

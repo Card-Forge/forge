@@ -42,14 +42,14 @@ public class CountersMoveAi extends SpellAbilityAi {
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final Card host = sa.getHostCard();
         final String type = sa.getParam("CounterType");
-        final CounterType cType = "Any".equals(type) ? null : CounterType.valueOf(type);
+        final CounterType cType = "Any".equals(type) ? null : CounterType.getType(type);
 
         // Don't tap creatures that may be able to block
         if (ComputerUtil.waitForBlocking(sa)) {
             return false;
         }
 
-        if (CounterType.P1P1.equals(cType) && sa.hasParam("Source")) {
+        if (cType != null && cType.is(CounterEnumType.P1P1) && sa.hasParam("Source")) {
             int amount = calcAmount(sa, cType);
             final List<Card> srcCards = AbilityUtils.getDefinedCards(host, sa.getParam("Source"), sa);
             if (ph.getPlayerTurn().isOpponentOf(ai)) {
@@ -92,7 +92,7 @@ public class CountersMoveAi extends SpellAbilityAi {
             // for Simic Fluxmage and other
             return ph.getNextTurn().equals(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN);
 
-        } else if (CounterType.P1P1.equals(cType) && sa.hasParam("Defined")) {
+        } else if (cType != null && cType.is(CounterEnumType.P1P1) && sa.hasParam("Defined")) {
             // something like Cyptoplast Root-kin
             if (ph.getPlayerTurn().isOpponentOf(ai)) {
                 if (ph.inCombat() && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
@@ -115,6 +115,7 @@ public class CountersMoveAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
 
         if (sa.usesTargeting()) {
+            sa.resetTargets();
 
             if (!moveTgtAI(ai, sa) && !mandatory) {
                 return false;
@@ -142,7 +143,7 @@ public class CountersMoveAi extends SpellAbilityAi {
             final Card host = sa.getHostCard();
 
             final String type = sa.getParam("CounterType");
-            final CounterType cType = "Any".equals(type) ? null : CounterType.valueOf(type);
+            final CounterType cType = "Any".equals(type) ? null : CounterType.getType(type);
 
             final List<Card> srcCards = AbilityUtils.getDefinedCards(host, sa.getParam("Source"), sa);
             final List<Card> destCards = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
@@ -189,7 +190,7 @@ public class CountersMoveAi extends SpellAbilityAi {
 
                 // check for some specific AI preferences
                 if ("DontMoveCounterIfLethal".equals(sa.getParam("AILogic"))) {
-                    return cType != CounterType.P1P1 || src.getNetToughness() - src.getTempToughnessBoost() - 1 > 0;
+                    return !cType.is(CounterEnumType.P1P1) || src.getNetToughness() - src.getTempToughnessBoost() - 1 > 0;
                 }
             }
             // no target
@@ -234,7 +235,7 @@ public class CountersMoveAi extends SpellAbilityAi {
         final Card host = sa.getHostCard();
         final Game game = ai.getGame();
         final String type = sa.getParam("CounterType");
-        final CounterType cType = "Any".equals(type) ? null : CounterType.valueOf(type);
+        final CounterType cType = "Any".equals(type) || "All".equals(type) ? null : CounterType.getType(type);
 
         List<Card> tgtCards = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
 
@@ -278,7 +279,7 @@ public class CountersMoveAi extends SpellAbilityAi {
 
                         // do not steal a P1P1 from Undying if it would die
                         // this way
-                        if (CounterType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
+                        if (cType != null && cType.is(CounterEnumType.P1P1) && srcCardCpy.getNetToughness() <= 0) {
                             return srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING) || card.isToken();
                         }
                         return true;
@@ -321,13 +322,13 @@ public class CountersMoveAi extends SpellAbilityAi {
                         }
 
                         // try to remove P1P1 from undying or evolve
-                        if (CounterType.P1P1.equals(cType)) {
+                        if (cType != null && cType.is(CounterEnumType.P1P1)) {
                             if (card.hasKeyword(Keyword.UNDYING) || card.hasKeyword(Keyword.EVOLVE)
                                     || card.hasKeyword(Keyword.ADAPT)) {
                                 return true;
                             }
                         }
-                        if (CounterType.M1M1.equals(cType) && card.hasKeyword(Keyword.PERSIST)) {
+                        if (cType != null && cType.is(CounterEnumType.M1M1) && card.hasKeyword(Keyword.PERSIST)) {
                             return true;
                         }
 
@@ -382,10 +383,10 @@ public class CountersMoveAi extends SpellAbilityAi {
                         }
 
                         if (cType != null) {
-                            if (CounterType.P1P1.equals(cType) && card.hasKeyword(Keyword.UNDYING)) {
+                            if (cType.is(CounterEnumType.P1P1) && card.hasKeyword(Keyword.UNDYING)) {
                                 return false;
                             }
-                            if (CounterType.M1M1.equals(cType) && card.hasKeyword(Keyword.PERSIST)) {
+                            if (cType.is(CounterEnumType.M1M1) && card.hasKeyword(Keyword.PERSIST)) {
                                 return false;
                             }
 
@@ -393,7 +394,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                                 return false;
                             }
                         }
-                        return false;
+                        return true;
                     }
                 });
 
@@ -452,7 +453,7 @@ public class CountersMoveAi extends SpellAbilityAi {
     // or for source -> multiple defined
     @Override
     protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional,
-            Player targetedPlayer) {
+            Player targetedPlayer, Map<String, Object> params) {
         if (sa.hasParam("AiLogic")) {
             String logic = sa.getParam("AiLogic");
 

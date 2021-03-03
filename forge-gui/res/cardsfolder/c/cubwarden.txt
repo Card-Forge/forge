@@ -1,0 +1,11 @@
+Name:Cubwarden
+ManaCost:3 W
+Types:Creature Cat
+PT:3/5
+K:Mutate:2 W W
+K:Lifelink
+T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever this creature mutates, create two 1/1 white Cat creature tokens with lifelink.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_cat_lifelink | TokenOwner$ You
+DeckHas:Ability$Token
+DeckHints:Type$Cat
+Oracle:Mutate {2}{W}{W} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nLifelink\nWhenever this creature mutates, create two 1/1 white Cat creature tokens with lifelink.

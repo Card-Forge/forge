@@ -5,10 +5,8 @@ PT:1/1
 K:etbCounter:P1P1:3
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, you may remove any number of +1/+1 counters from CARDNAME. If you do, create that many 1/1 colorless Tetravite artifact creature tokens. They each have flying and "This creature can't be enchanted."
-SVar:TrigToken:AB$Token | Cost$ SubCounter<X/P1P1> | References$ X | TokenAmount$ ChosenX | LegacyImage$ c 1 1 tetravite flying noenchant atq | TokenScript$ c_1_1_a_tetravite_flying_noenchant | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBClearXChoice
-SVar:DBClearXChoice:DB$ Cleanup | ClearChosenX$ True
-SVar:X:XChoice
+SVar:TrigToken:AB$Token | Cost$ SubCounter<X/P1P1> | References$ X | TokenAmount$ X | LegacyImage$ c 1 1 tetravite flying noenchant atq | TokenScript$ c_1_1_a_tetravite_flying_noenchant | TokenOwner$ You | RememberTokens$ True
+SVar:X:Count$xPaid
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounters | TriggerDescription$ At the beginning of your upkeep, you may exile any number of tokens created with CARDNAME. If you do, put that many +1/+1 counters on CARDNAME.
-SVar:TrigPutCounters:AB$PutCounter | Cost$ Exile<X/Creature.IsRemembered/Tetravite> | References$ X | Defined$ Self | CounterType$ P1P1 | CounterNum$ ChosenX | CostDesc$ Exile any number of tokens put onto the battlefield with CARDNAME. | SubAbility$ DBClearXChoice
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tetravus.jpg
+SVar:TrigPutCounters:AB$PutCounter | Cost$ Exile<X/Creature.IsRemembered/Tetravite> | References$ X | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | CostDesc$ Exile any number of tokens put onto the battlefield with CARDNAME.
 Oracle:Flying\nTetravus enters the battlefield with three +1/+1 counters on it.\nAt the beginning of your upkeep, you may remove any number of +1/+1 counters from Tetravus. If you do, create that many 1/1 colorless Tetravite artifact creature tokens. They each have flying and "This creature can't be enchanted."\nAt the beginning of your upkeep, you may exile any number of tokens created with Tetravus. If you do, put that many +1/+1 counters on Tetravus.

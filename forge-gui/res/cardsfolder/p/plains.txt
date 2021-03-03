@@ -3,4 +3,4 @@ ManaCost:no cost
 Types:Basic Land Plains
 SVar:PicCount:4
 SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73963.jpg\http://gatherer.wizards.com/handlers/image.ashx?multiverseid=8322&type=card\http://gatherer.wizards.com/handlers/image.ashx?multiverseid=159288&type=card\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=4428
-Oracle:{W}
+Oracle:({T}: Add {W}.)

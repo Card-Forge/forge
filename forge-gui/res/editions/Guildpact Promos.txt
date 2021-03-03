@@ -1,0 +1,9 @@
+[metadata]
+Code=PGPT
+Date=2006-02-03
+Name=Guildpact Promos
+Type=Reprint
+
+[cards]
+142 R Djinn Illuminatus
+144 R Gruul Guildmage

@@ -2,9 +2,9 @@ Name:Sporemound
 ManaCost:3 G G
 Types:Creature Fungus
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever a land enters the battlefield under your control, create a 1/1 green Saproling creature token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, create a 1/1 green Saproling creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | TokenImage$ g 1 1 saproling m14
 SVar:BuffedBy:Land
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sporemound.jpg
-Oracle:Whenever a land enters the battlefield under your control, create a 1/1 green Saproling creature token.
+Oracle:Landfall — Whenever a land enters the battlefield under your control, create a 1/1 green Saproling creature token.

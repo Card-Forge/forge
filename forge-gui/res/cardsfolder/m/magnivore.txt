@@ -8,4 +8,4 @@ SVar:X:Count$TypeInAllYards.Sorcery
 SVar:NeedsToPlayVar:X GE2
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magnivore.jpg
-Oracle:Haste\nMagnivore's power and toughness are each equal to the number of sorcery cards in all graveyards.
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nMagnivore's power and toughness are each equal to the number of sorcery cards in all graveyards.

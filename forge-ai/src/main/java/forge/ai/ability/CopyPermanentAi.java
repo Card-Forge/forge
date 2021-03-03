@@ -19,6 +19,7 @@ import forge.game.zone.ZoneType;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public class CopyPermanentAi extends SpellAbilityAi {
     @Override
@@ -131,7 +132,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
             // target loop
             while (sa.canAddMoreTarget()) {
                 if (list.isEmpty()) {
-                    if (!sa.isTargetNumberValid() || (sa.getTargets().getNumTargeted() == 0)) {
+                    if (!sa.isTargetNumberValid() || (sa.getTargets().size() == 0)) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -158,7 +159,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if (!sa.isTargetNumberValid() || (sa.getTargets().getNumTargeted() == 0)) {
+                    if (!sa.isTargetNumberValid() || (sa.getTargets().size() == 0)) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -204,7 +205,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.game.player.Player, forge.card.spellability.SpellAbility, java.util.List, boolean)
      */
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         // Select a card to attach to
         CardCollection betterOptions = getBetterOptions(ai, sa, options, isOptional);
         if (!betterOptions.isEmpty()) {
@@ -223,7 +224,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
     }
 
     @Override
-    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         final List<Card> cards = new PlayerCollection(options).getCreaturesInPlay();
         Card chosen = ComputerUtilCard.getBestCreatureAI(cards);
         return chosen != null ? chosen.getController() : Iterables.getFirst(options, null);

@@ -4,4 +4,4 @@ Types:Sorcery
 A:SP$ Charm | Cost$ 3 W W | Choices$ DBDestroyAllCreatures,DBDestroyAllArtifactsAndEnchantments | CharmNum$ 1
 SVar:DBDestroyAllCreatures:DB$ DestroyAll | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
 SVar:DBDestroyAllArtifactsAndEnchantments:DB$ DestroyAll | ValidCards$ Artifact,Enchantment | SpellDescription$ Destroy all artifacts and enchantments.
-Oracle:Choose one —\n• Destroy all creatures.\n•Destroy all artifacts and enchantments.
+Oracle:Choose one —\n• Destroy all creatures.\n• Destroy all artifacts and enchantments.

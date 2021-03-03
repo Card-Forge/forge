@@ -1,0 +1,13 @@
+[metadata]
+Code=PF20
+Date=2020-01-01
+Name=MagicFest 2020
+Type=Reprint
+
+[cards]
+1 R Path to Exile
+2 R Plains
+3 R Island
+4 R Swamp
+5 R Mountain
+6 R Forest

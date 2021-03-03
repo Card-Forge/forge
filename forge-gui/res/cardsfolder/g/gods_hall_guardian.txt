@@ -1,0 +1,7 @@
+Name:Gods' Hall Guardian
+ManaCost:5 W
+Types:Creature Cat
+PT:3/6
+K:Vigilance
+K:Foretell:3 W
+Oracle:Vigilance\nForetell {3}{W} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

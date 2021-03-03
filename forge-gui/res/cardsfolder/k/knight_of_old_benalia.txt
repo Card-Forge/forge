@@ -4,6 +4,6 @@ Types:Creature Human Knight
 PT:3/3
 K:Suspend:5:W
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, other creatures you control get +1/+1 until end of turn.
-SVar:TrigPumpAll:DB$PumpAll | ValidCards$ Creature.Other+YouCtrl | NumAtt$ +1 | NumDef$ +1
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl | NumAtt$ +1 | NumDef$ +1
 SVar:PlayMain1:TRUE
 Oracle:Suspend 5—{W} (Rather than cast this card from your hand, you may pay {W} and exile it with five time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)\nWhen Knight of Old Benalia enters the battlefield, other creatures you control get +1/+1 until end of turn.

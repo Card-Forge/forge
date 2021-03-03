@@ -1,7 +1,6 @@
 Name:Vessel of Paramnesia
 ManaCost:1 U
 Types:Enchantment
-A:AB$ Mill | Cost$ U Sac<1/CARDNAME> | NumCards$ 3 | ValidTgts$ Player | SubAbility$ DBDraw | TgtPrompt$ Select target player | SpellDescription$ Target player puts the top three cards of their library into their graveyard. Draw a card.
+A:AB$ Mill | Cost$ U Sac<1/CARDNAME> | NumCards$ 3 | ValidTgts$ Player | SubAbility$ DBDraw | TgtPrompt$ Select target player | SpellDescription$ Target player mills three cards. Draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vessel_of_paramnesia.jpg
-Oracle:{U}, Sacrifice Vessel of Paramnesia: Target player puts the top three cards of their library into their graveyard. Draw a card.
+Oracle:{U}, Sacrifice Vessel of Paramnesia: Target player mills three cards. Draw a card.

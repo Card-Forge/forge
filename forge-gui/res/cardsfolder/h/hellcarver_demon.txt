@@ -3,11 +3,10 @@ ManaCost:3 B B B
 Types:Creature Demon
 PT:6/6
 K:Flying
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, sacrifice all other permanents you control and discard your hand. Exile the top six cards of your library. You may cast any number of nonland cards exiled this way without paying their mana costs.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, sacrifice all other permanents you control and discard your hand. Exile the top six cards of your library. You may cast any number of spells from among cards exiled this way without paying their mana costs.
 SVar:TrigSacrifice:DB$ SacrificeAll | ValidCards$ Permanent.YouCtrl+Other | SubAbility$ DBDiscardHand
 SVar:DBDiscardHand:DB$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBExileSix
-SVar:DBExileSix:DB$ Mill | Destination$ Exile | RememberMilled$ True | NumCards$ 6 | SubAbility$ DBPlayThem
+SVar:DBExileSix:DB$ Dig | DestinationZone$ Exile | RememberChanged$ True | DigNum$ 6 | ChangeNum$ All | SubAbility$ DBPlayThem
 SVar:DBPlayThem:DB$ Play | Valid$ Card.IsRemembered+nonLand | ValidZone$ Exile | Controller$ You | WithoutManaCost$ True | Amount$ All | Optional$ True | SubAbility$ DBHellCleanup
 SVar:DBHellCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hellcarver_demon.jpg
-Oracle:Flying\nWhenever Hellcarver Demon deals combat damage to a player, sacrifice all other permanents you control and discard your hand. Exile the top six cards of your library. You may cast any number of nonland cards exiled this way without paying their mana costs.
+Oracle:Flying\nWhenever Hellcarver Demon deals combat damage to a player, sacrifice all other permanents you control and discard your hand. Exile the top six cards of your library. You may cast any number of spells from among cards exiled this way without paying their mana costs.

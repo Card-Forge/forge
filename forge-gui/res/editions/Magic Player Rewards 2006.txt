@@ -1,0 +1,14 @@
+[metadata]
+Code=P06
+Date=2006-01-01
+Name=Magic Player Rewards 2006
+Type=Reprint
+
+[cards]
+1 R Hypnotic Specter
+2 R Hinder
+3 R Pyroclasm
+4 R Giant Growth
+5 R Putrefy
+6 R Zombify
+7 R lightning Helix

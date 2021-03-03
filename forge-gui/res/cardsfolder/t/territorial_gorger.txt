@@ -3,7 +3,6 @@ ManaCost:3 R
 Types:Creature Gremlin
 K:Trample
 PT:2/2
-T:Mode$ CounterAddedOnce | ValidPlayer$ You | TriggerZones$ Battlefield | CounterType$ ENERGY | Execute$ TrigPump | TriggerDescription$ Whenever you get one or more {E} (one energy counter), CARDNAME gets +2/+2 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/territorial_gorger.jpg
-Oracle:Trample\nWhenever you get one or more {E} (one energy counter), Territorial Gorger gets +2/+2 until end of turn.
+T:Mode$ CounterAddedOnce | ValidPlayer$ You | TriggerZones$ Battlefield | CounterType$ ENERGY | Execute$ TrigPump | TriggerDescription$ Whenever you get one or more {E} (energy counters), CARDNAME gets +2/+2 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
+Oracle:Trample\nWhenever you get one or more {E} (energy counters), Territorial Gorger gets +2/+2 until end of turn.

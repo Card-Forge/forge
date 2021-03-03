@@ -3,4 +3,4 @@ ManaCost:X R R
 Types:Legendary Sorcery
 A:SP$ DealDamage | Cost$ X R R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | TargetMin$ 0 | TargetMax$ 3 | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to each of up to three targets.
 SVar:X:Count$xPaid
-Oracle:(You may cast a legendary sorcery only if you control a legendary creature or planeswalker.) Jaya's Immolating Inferno deals X damage to each of up to three targets.
+Oracle:(You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)\nJaya's Immolating Inferno deals X damage to each of up to three targets.

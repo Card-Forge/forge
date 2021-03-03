@@ -5,4 +5,4 @@ A:SP$ DealDamage | Cost$ 1 R Sac<1/Creature> | ValidTgts$ Creature,Player,Planes
 SVar:X:Sacrificed$CardPower
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fling.jpg
-Oracle:As an additional cost to cast Fling, sacrifice a creature.\nFling deals damage equal to the sacrificed creature's power to any target.
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nFling deals damage equal to the sacrificed creature's power to any target.

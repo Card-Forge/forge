@@ -4,4 +4,4 @@ Types:Creature Goblin Pirate
 PT:2/1
 K:Menace
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_trailblazer.jpg
-Oracle:Menace
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)

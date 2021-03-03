@@ -1,0 +1,10 @@
+Name:Kels, Fight Fixer
+ManaCost:2 B B
+Types:Legendary Creature Azra Warlock
+PT:4/3
+K:Menace
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you sacrifice a creature, you may pay {U/B}. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ UB | Defined$ You | NumCards$ 1
+A:AB$ Pump | Cost$ 1 Sac<1/Creature> | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn.
+DeckHas:Ability$Sacrifice
+Oracle:Menace\nWhenever you sacrifice a creature, you may pay {U/B}. If you do, draw a card. ({U/B} can be paid with either {U} or {B}.)\n{1}, Sacrifice a creature: Kels, Fight Fixer gains indestructible until end of turn.

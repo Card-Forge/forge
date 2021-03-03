@@ -12,4 +12,4 @@ SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitesail_freebooter.jpg
-Oracle:Flying\nWhen Kitesail Freebooter enters the battlefield, target opponent reveals their hand. You choose a noncreature, nonland from it. Exile that card until Kitesail Freebooter leaves the battlefield.
+Oracle:Flying\nWhen Kitesail Freebooter enters the battlefield, target opponent reveals their hand. You choose a noncreature, nonland card from it. Exile that card until Kitesail Freebooter leaves the battlefield.

@@ -6,6 +6,8 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | Imprint$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+T:Mode$ ChangesZone | ValidCard$ Card.IsImprinted+ExiledWithSource | Origin$ Exile | Execute$ DBForget | Static$ True
+SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from creatures | CheckSVar$ CheckCreature | SVarCompare$ GE1 | Description$ CARDNAME has protection from each of the exiled card's card types. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Land:Protection from lands | CheckSVar$ CheckLand | SVarCompare$ GE1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from enchantments | CheckSVar$ CheckEnchantment | SVarCompare$ GE1

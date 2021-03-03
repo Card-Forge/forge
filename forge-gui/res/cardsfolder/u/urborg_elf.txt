@@ -6,4 +6,4 @@ A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card26717.jpg
-Oracle:{T}: Add {G}, {U}, or {B}.
+Oracle:{T}: Add {B}, {G}, or {U}.

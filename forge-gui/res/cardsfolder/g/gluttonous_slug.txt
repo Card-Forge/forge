@@ -5,4 +5,4 @@ PT:0/3
 K:Menace
 K:Evolve
 DeckHas:Ability$Counters
-Oracle:Menace\nEvolve (Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature)
+Oracle:Menace\nEvolve (Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)

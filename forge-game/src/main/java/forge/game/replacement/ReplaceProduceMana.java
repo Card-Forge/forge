@@ -1,8 +1,8 @@
 package forge.game.replacement;
 
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
 
@@ -31,10 +31,10 @@ public class ReplaceProduceMana extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        //Check for tapping
-        if (!hasParam("NoTapCheck")) {
+
+        if (hasParam("ValidAbility")) {
             final SpellAbility manaAbility = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
-            if (manaAbility == null || manaAbility.getRootAbility().getPayCosts() == null || !manaAbility.getRootAbility().getPayCosts().hasTapCost()) {
+            if (!matchesValid(manaAbility, getParam("ValidAbility").split(","), getHostCard())) {
                 return false;
             }
         }
@@ -43,20 +43,23 @@ public class ReplaceProduceMana extends ReplacementEffect {
             String full = getParam("ManaAmount");
             String operator = full.substring(0, 2);
             String operand = full.substring(2);
-            int intoperand = 0;
-            try {
-                intoperand = Integer.parseInt(operand);
-            } catch (NumberFormatException e) {
-                intoperand = CardFactoryUtil.xCount(getHostCard(), getHostCard().getSVar(operand));
-            }
+
+            int intoperand = AbilityUtils.calculateAmount(getHostCard(), operand, this);
+
             int manaAmount = StringUtils.countMatches((String) runParams.get(AbilityKey.Mana), " ") + 1;
             if (!Expressions.compare(manaAmount, operator, intoperand)) {
                 return false;
             }
         }
 
+        if (hasParam("ValidPlayer")) {
+            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","), getHostCard())) {
+                return false;
+            }
+        }
+
         if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidCard").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidCard").split(","), getHostCard())) {
                 return false;
             }
         }
@@ -65,4 +68,7 @@ public class ReplaceProduceMana extends ReplacementEffect {
     }
 
 
+    public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
+        sa.setReplacingObject(AbilityKey.Mana, runParams.get(AbilityKey.Mana));
+    }
 }

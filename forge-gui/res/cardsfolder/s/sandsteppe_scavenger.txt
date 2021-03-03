@@ -1,6 +1,6 @@
 Name:Sandsteppe Scavenger
 ManaCost:4 G
-Types:Creature Hound Scout
+Types:Creature Dog Scout
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBolster | TriggerDescription$ When CARDNAME enters the battlefield, bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)
 SVar:TrigBolster:DB$ PutCounter | Bolster$ True | CounterType$ P1P1 | CounterNum$ 2

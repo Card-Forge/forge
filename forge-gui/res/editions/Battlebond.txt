@@ -135,7 +135,7 @@ Booster=10 Common, 3 Uncommon, 1 fromSheet("BBD RareMythic"), 1 BasicLand
 125 C Omenspeaker
 126 U Opportunity
 127 U Oracle's Insight
-128 C Peregrine Drake
+128 U Peregrine Drake
 129 U Phantom Warrior
 130 U Reckless Scholar
 131 R Sower of Temptation
@@ -203,7 +203,7 @@ Booster=10 Common, 3 Uncommon, 1 fromSheet("BBD RareMythic"), 1 BasicLand
 193 C Cowl Prowler
 194 C Daggerback Basilisk
 195 M Doubling Season
-196 U Elvish Visionary
+196 C Elvish Visionary
 197 U Feral Hydra
 198 C Fertile Ground
 199 U Fertilid

@@ -59,6 +59,11 @@ public class ReplaceDiscard extends ReplacementEffect {
                 return false;
             }
         }
+        if (hasParam("Cycling")) {
+            if (getParam("Cycling").equalsIgnoreCase("True") != runParams.containsKey(AbilityKey.Cycling)) {
+                return false;
+            }
+        }
         if (hasParam("DiscardFromEffect")) {
             if (null == runParams.get(AbilityKey.Source)) {
                 return false;

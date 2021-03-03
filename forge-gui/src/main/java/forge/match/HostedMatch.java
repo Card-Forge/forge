@@ -34,6 +34,7 @@ import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.GameView;
 import forge.game.Match;
+import forge.game.event.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
@@ -68,6 +69,7 @@ public class HostedMatch {
     private final MatchUiEventVisitor visitor = new MatchUiEventVisitor();
     private final Map<PlayerControllerHuman, NextGameDecision> nextGameDecisions = Maps.newHashMap();
     private boolean isMatchOver = false;
+    public int subGameCount = 0;
 
     public HostedMatch() {}
 
@@ -126,6 +128,8 @@ public class HostedMatch {
             title = TextUtil.concatNoSpace("Multiplayer Game (", String.valueOf(sortedPlayers.size()), " players)");
         }
         this.match = new Match(gameRules, sortedPlayers, title);
+        this.match.subscribeToEvents(SoundSystem.instance);
+        this.match.subscribeToEvents(visitor);
         startGame();
     }
 
@@ -136,8 +140,7 @@ public class HostedMatch {
 
     public void restartMatch() {
         endCurrentGame();
-        this.match = new Match(match.getRules(), match.getPlayers(), this.title);
-        startGame();
+        startMatch(match.getRules(), null, match.getPlayers(), this.guis);
     }
 
     public void startGame() {
@@ -149,7 +152,7 @@ public class HostedMatch {
         if (game.getRules().getGameType() == GameType.Quest) {
             final QuestController qc = FModel.getQuest();
             // Reset new list when the Match round starts, not when each game starts
-            if (game.getMatch().getPlayedGames().isEmpty()) {
+            if (game.getMatch().getOutcomes().isEmpty()) {
                 qc.getCards().resetNewList();
             }
             game.subscribeToEvents(qc); // this one listens to player's mulligans ATM
@@ -295,6 +298,7 @@ public class HostedMatch {
 
     public void endCurrentGame() {
         if (game == null) { return; }
+        boolean isMatchOver = game.getView().isMatchOver();
 
         game = null;
 
@@ -304,7 +308,10 @@ public class HostedMatch {
                 humanController.getGui().clearAutoYields();
             }
 
-            humanController.getGui().afterGameEnd();
+            if (humanCount > 0) //conceded
+                humanController.getGui().afterGameEnd();
+            else if (!GuiBase.getInterface().isLibgdxPort()||!isMatchOver)
+                humanController.getGui().afterGameEnd();
         }
         humanControllers.clear();
     }
@@ -327,7 +334,7 @@ public class HostedMatch {
         return isMatchOver;
     }
 
-    private final class MatchUiEventVisitor implements IUiEventVisitor<Void> {
+    private final class MatchUiEventVisitor extends IGameEventVisitor.Base<Void> implements IUiEventVisitor<Void> {
         @Override
         public Void visit(final UiEventBlockerAssigned event) {
             for (final PlayerControllerHuman humanController : humanControllers) {
@@ -354,8 +361,89 @@ public class HostedMatch {
             return null;
         }
 
+        @Override
+        public Void visit(final GameEventSubgameStart event) {
+            subGameCount++;
+            event.subgame.subscribeToEvents(SoundSystem.instance);
+            event.subgame.subscribeToEvents(visitor);
+
+            final GameView gameView = event.subgame.getView();
+
+            Runnable switchGameView = new Runnable() {
+                @Override
+                public void run() {
+                    for (final Player p : event.subgame.getPlayers()) {
+                        if (p.getController() instanceof PlayerControllerHuman) {
+                            final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
+                            final IGuiGame gui = guis.get(p.getRegisteredPlayer());
+                            humanController.setGui(gui);
+                            gui.setGameView(null);
+                            gui.setGameView(gameView);
+                            gui.setOriginalGameController(p.getView(), humanController);
+                            gui.openView(new TrackableCollection<>(p.getView()));
+                            gui.setGameView(null);
+                            gui.setGameView(gameView);
+                            event.subgame.subscribeToEvents(new FControlGameEventHandler(humanController));
+                            gui.message(event.message);
+                        }
+                    }
+                }
+            };
+            if (GuiBase.getInterface().isLibgdxPort())
+                GuiBase.getInterface().invokeInEdtNow(switchGameView);
+            else
+                GuiBase.getInterface().invokeInEdtAndWait(switchGameView);
+
+            //ensure opponents set properly
+            for (final Player p : event.subgame.getPlayers()) {
+                p.updateOpponentsForView();
+            }
+
+            return null;
+        }
+
+        @Override
+        public Void visit(final GameEventSubgameEnd event) {
+            final GameView gameView = event.maingame.getView();
+            Runnable switchGameView = new Runnable() {
+                @Override
+                public void run() {
+                    for (final Player p : event.maingame.getPlayers()) {
+                        if (p.getController() instanceof PlayerControllerHuman) {
+                            final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
+                            final IGuiGame gui = guis.get(p.getRegisteredPlayer());
+                            gui.setGameView(null);
+                            gui.setGameView(gameView);
+                            gui.setOriginalGameController(p.getView(), humanController);
+                            gui.openView(new TrackableCollection<>(p.getView()));
+                            gui.setGameView(null);
+                            gui.setGameView(gameView);
+                            gui.updatePhase();
+                            gui.message(event.message);
+                        }
+                    }
+                }
+            };
+            if (GuiBase.getInterface().isLibgdxPort())
+                GuiBase.getInterface().invokeInEdtNow(switchGameView);
+            else
+                GuiBase.getInterface().invokeInEdtAndWait(switchGameView);
+
+            return null;
+        }
+
         @Subscribe
         public void receiveEvent(final UiEvent evt) {
+            try {
+                evt.visit(this);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
+        }
+
+        @Subscribe
+        public void receiveGameEvent(final GameEvent evt) {
             try {
                 evt.visit(this);
             } catch (Exception e) {

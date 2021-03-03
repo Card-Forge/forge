@@ -1,0 +1,11 @@
+Name:Expedition Diviner
+ManaCost:3 U
+Types:Creature Merfolk Wizard
+PT:3/2
+K:Flying
+S:Mode$ Continuous | IsPresent$ Wizard.YouCtrl+Other | Affected$ Card.Self | AddTrigger$ DeathTrig | AddSVar$ TrigDraw | Description$ As long as you control another Wizard, CARDNAME has "When this creature dies, draw a card."
+SVar:DeathTrig:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredCardController | NumCards$ 1
+SVar:BuffedBy:Wizard
+DeckHints:Type$Wizard
+Oracle:Flying\nAs long as you control another Wizard, Expedition Diviner has "When this creature dies, draw a card."

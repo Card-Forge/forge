@@ -3,8 +3,8 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+0/-3
 T:Mode$ NewGame | Execute$ TrigPayLife | TriggerZones$ Command | TriggerDescription$ At the beginning of the game, you may pay any amount of life.
-SVar:TrigPayLife:AB$ StoreSVar | Cost$ PayLife<X> | References$ X | SVar$ LifePaidOnNewGame | Type$ CountSVar | Expression$ ChosenX
-SVar:X:XChoice
+SVar:TrigPayLife:AB$ StoreSVar | Cost$ PayLife<X> | References$ X | SVar$ LifePaidOnNewGame | Type$ CountSVar | Expression$ X
+SVar:X:Count$xPaid
 SVar:LifePaidOnNewGame:Number$0
 S:Mode$ Continuous | EffectZone$ Command | Affected$ You | AddKeyword$ You can't draw cards. | Description$ You can't draw cards.
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDig | TriggerDescription$ At the beginning of your draw step, look at the top X cards of your library, where X is the amount of life paid with CARDNAME. Put one of them into your hand, then shuffle your library.

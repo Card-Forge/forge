@@ -1,5 +1,6 @@
 package forge.screens.match.views;
 
+import forge.Forge;
 import forge.assets.FSkinImage;
 import forge.deck.Deck;
 import forge.deck.FDeckViewer;
@@ -49,6 +50,12 @@ public class VGameMenu extends FDropDownMenu {
         addItem(new FMenuItem(localizer.getMessage("lblDeckList"), FSkinImage.DECKLIST, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                //pause game when spectating AI Match
+                if (!MatchController.instance.hasLocalPlayers()) {
+                    if(!MatchController.instance.isGamePaused())
+                        MatchController.instance.pauseMatch();
+                }
+
                 final Player player = MatchController.getHostedMatch().getGame().getPhaseHandler().getPlayerTurn();
                 if (player != null) {
                     final Deck deck = player.getRegisteredPlayer().getDeck();
@@ -60,7 +67,7 @@ public class VGameMenu extends FDropDownMenu {
                 FOptionPane.showMessageDialog(localizer.getMessage("lblNoPlayerPriorityNoDeckListViewed"));
             }
         }));
-        addItem(new FMenuItem(localizer.getMessage("lblAutoYields"), FSkinImage.WARNING, new FEventHandler() {
+        addItem(new FMenuItem(localizer.getMessage("lblAutoYields"), Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 final boolean autoYieldsDisabled = MatchController.instance.getDisableAutoYields();
@@ -85,10 +92,21 @@ public class VGameMenu extends FDropDownMenu {
                 autoYields.show();
             }
         }));
-        addItem(new FMenuItem(localizer.getMessage("lblSettings"), FSkinImage.SETTINGS, new FEventHandler() {
+        addItem(new FMenuItem(localizer.getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                //pause game when spectating AI Match
+                if (!MatchController.instance.hasLocalPlayers()) {
+                    if(!MatchController.instance.isGamePaused())
+                        MatchController.instance.pauseMatch();
+                }
                 SettingsScreen.show(false);
+            }
+        }));
+        addItem(new FMenuItem(localizer.getMessage("lblShowWinLoseOverlay"), FSkinImage.ENDTURN, new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                MatchController.instance.showWinlose();
             }
         }));
     }

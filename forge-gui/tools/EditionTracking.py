@@ -4,6 +4,7 @@
 import json
 import os,sys,fnmatch,re
 import requests
+import pdb
 
 toolsDir = os.path.abspath(os.path.dirname( __file__ ))
 resDir = os.path.abspath(os.path.join(toolsDir, '..', 'res'))
@@ -13,6 +14,8 @@ allJsonUrl = 'http://mtgjson.com/json/AllCards.json'
 
 def initializeEditions():
 	ignoredTypes = [ "From_the_Vault", "Duel_Decks", "Online", "Premium_Deck_Series" ]
+	editionSections = [ "[cards]", "[precon product]", "[borderless]", "[showcase]", "[extended art]", "[buy a box]", "[promo]" ]
+
 	print("Parsing Editions folder")
 	for root, dirnames, filenames in os.walk(editionsDir):
 		for fileName in fnmatch.filter(filenames, '*.txt'):
@@ -23,10 +26,11 @@ def initializeEditions():
 				metadata = True
 				setcode = setname = settype = None
 				for line in currentEdition.readlines():
+					line = line.strip()
 					if metadata:
-						if line.startswith("[cards]"):
+						if line in editionSections:
 							metadata = False
-							if setcode:
+							if setcode and setcode not in setCodes:
 								setCodes.append(setcode)
 								setCodeToName[setcode] = setname
 								if settype in ignoredTypes:
@@ -42,29 +46,38 @@ def initializeEditions():
 							settype = line.split("=")[1].rstrip()
 
 					else:
-						if line.startswith("[tokens]"):
-							metadata = True
+						if not line:
 							continue
 
-						if line:
-							hasSetNumbers = line.split(" ", 1)[0].isdigit()
+						if line.startswith("["):
+							if line not in editionSections:
+								metadata = True
+							continue
 
-							card = line.split(" ", 2 if hasSetNumbers else 1)[-1].rstrip()
-							if card not in mtgDataCards:
-								#print card
-								mtgDataCards[card] = [setcode]
+						if line.startswith("#"):
+							continue
 
-							else:
-								mtgDataCards[card].append(setcode)
+						hasSetNumbers = line[0].isdigit()
+						card = line.split(" ", 2 if hasSetNumbers else 1)[-1].rstrip().split('|')[0]
 
-	print "Total Cards Found in all editions", len(mtgDataCards)
-	print "These sets will be ignored in some output files", ignoredSet
+						if card.endswith('+'):
+							card = card[:-1]
+
+						if card not in mtgDataCards:
+							#print card
+							mtgDataCards[card] = [setcode]
+
+						else:
+							mtgDataCards[card].append(setcode)
+
+	print("Total Cards Found in all editions", len(mtgDataCards))
+	print("These sets will be ignored in some output files", ignoredSet)
 
 def initializeOracleText():
-	print "Initializing Oracle text"
+	print("Initializing Oracle text")
 	oracleDict = None
 	if not os.path.exists(allJson):
-		print "Need to download Json file..."
+		print("Need to download Json file...")
 		r = requests.get(allJsonUrl)
 		with open(allJson, 'w') as f:
 			f.write(r.text.encode("utf-8"))
@@ -77,16 +90,16 @@ def initializeOracleText():
 
 
 	aes = [k for k in oracleDict.keys() if u'\xc6' in k or u'\xf6' in k]
-	print "Normalizing %s names" % len(aes)
+	print("Normalizing %s names" % len(aes))
 	for ae in aes:
 		data = oracleDict.pop(ae)
 		oracleDict[normalizeOracle(ae)] = data
 
-	print "Found Oracle text for ", len(oracleDict)
+	print("Found Oracle text for ", len(oracleDict))
 	return oracleDict
 
 def normalizeOracle(oracle):
-	return oracle.replace(u'\u2014', '-').replace(u'\u2212', '-').replace(u'\u2018', "'").replace(u'\u201c', '"').replace(u'\u201d', '"').replace(u'\u2022', '-').replace(u'\xc6', 'AE').replace(u'\xf6', 'o')
+	return oracle.replace(u'\u2014', '-').replace(u'\u2212', '-').replace(u'\u2018', "'").replace(u'\u201c', '"').replace(u'\u201d', '"').replace(u'\u2022', '-').replace(u'\xc6', 'AE').replace(u'\xf6', 'o').replace(u'\xb2', '^2').replace(u'\xae', '(R)').replace(u'\u221e', 'INF')
 
 
 def initializeForgeCards():
@@ -115,7 +128,7 @@ def initializeForgeCards():
 def initializeFormats():
 	formats = {}
 	formatLocation = os.path.join(resDir, 'formats', 'Sanctioned')
-	print "Looking for formats in ", formatLocation
+	print("Looking for formats in ", formatLocation)
 	for root, dirnames, filenames in os.walk(formatLocation):
 		for fileName in fnmatch.filter(filenames, '*.txt'):
 			if fileName not in ['Standard.txt', 'Modern.txt']:
@@ -171,7 +184,7 @@ def printOverallEditions(totalDataList, setCodeToName, releaseFile=None):
 			totalMissing += dataKey[1]
 			fullTotal += dataKey[2]
 			if dataKey[2] == 0:
-				print "SetCode unknown", k
+				print("SetCode unknown", k)
 				continue
 			writeToFiles(setCodeToName[k].lstrip() + ": " + str(dataKey[0]) + " (" + str(dataKey[1]) + ") / " + str(dataKey[2]) + " = " + str(round(dataKey[3], 2)) + "%\n", files)
 		totalPercentage = totalImplemented / fullTotal
@@ -186,10 +199,10 @@ def printCardSet(implementedSet, missingSet, fileName, setCoverage=None, printIm
 	impCount = len(implementedSet)
 	misCount = len(missingSet)
 	totalCount = impCount + misCount
-	print fileName, "Counts: ", impCount, misCount, totalCount
+	print(fileName, "Counts: ", impCount, misCount, totalCount)
 
 	if totalCount == 0:
-		print "Something definitely wrong, why is total count 0 for ", fileName
+		print("Something definitely wrong, why is total count 0 for ", fileName)
 		return
 
 	if releaseFile:
@@ -237,7 +250,7 @@ def printDistinctOracle(missingSet, fileName):
 					outfile.write("%s\n%s\n\n" % (s, oracle))
 				except:
 					outfile.write("%s\n\n" % (s))
-					print "Failed to grab oracle for ", s
+					print("Failed to grab oracle for ", s)
 		outfile.write("\n")
 
 
@@ -333,7 +346,7 @@ if __name__ == '__main__':
 					if 'loyalty' in orc:
 						output.write('Loyalty:' + orc.get('loyalty'))
 				except Exception as e:
-					print "some issue?", str(e)
+					print("some issue?", str(e))
 
 				# Blah
 
@@ -343,7 +356,10 @@ if __name__ == '__main__':
 				except:
 					text = ''
 
-				output.write(text + '\n\n')
+				try:
+					output.write(text + '\n\n')
+				except:
+					print(everyMissing)
 			output.write("\n")
 			output.write("Total: " + str(total) + "\n")
 			output.write("Percentage implemented: " + str(round(percentage,2)) + "%\n")
@@ -374,4 +390,4 @@ if __name__ == '__main__':
 
 	releaseOutput.close()
 
-	print ("Done!")
+	print("Done!")

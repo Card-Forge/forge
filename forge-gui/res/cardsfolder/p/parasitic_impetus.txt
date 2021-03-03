@@ -1,0 +1,11 @@
+Name:Parasitic Impetus
+ManaCost:2 B
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Goad$ True | Description$ Enchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)
+T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigLose | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, its controller loses 2 life and you gain 2 life.
+SVar:TrigLose:DB$ LoseLife | Defined$ TriggeredAttackerController | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:Enchant creature\nEnchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, its controller loses 2 life and you gain 2 life.

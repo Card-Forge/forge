@@ -1,0 +1,21 @@
+Name:Reidane, God of the Worthy
+ManaCost:2 W
+Types:Legendary Creature God
+PT:2/3
+K:Flying
+K:Vigilance
+R:Event$ Moved | ValidCard$ Land.Snow+OppCtrl | Destination$ Battlefield | ReplaceWith$ ETBTapped | ActiveZones$ Battlefield | Description$ Snow lands your opponents control enter the battlefield tapped.
+SVar:ETBTapped:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Tapped$ True | Defined$ ReplacedCard
+S:Mode$ RaiseCost | ValidCard$ Card.nonCreature+cmcGE4 | Type$ Spell | Activator$ Opponent | Amount$ 2 | Description$ Noncreature spells your opponents cast with converted mana cost 4 or greater cost {2} more to cast.
+AlternateMode:Modal
+Oracle:Flying, vigilance\nSnow lands your opponents control enter the battlefield tapped.\nNoncreature spells your opponents cast with converted mana cost 4 or greater cost {2} more to cast.
+
+ALTERNATE
+
+Name:Valkmira, Protector's Shield
+ManaCost:3 W
+Types:Legendary Artifact
+S:Mode$ PreventDamage | Target$ You,Permanent.YouCtrl | ValidSource$ Card.OppCtrl | Amount$ 1 | Description$ If a source an opponent controls would deal damage to you or a permanent you control, prevent 1 of that damage.
+T:Mode$ BecomesTarget | ValidSource$ Card.OppCtrl | ValidTarget$ You,Permanent.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever you or another permanent you control becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {1}.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSourceSA | UnlessCost$ 1 | UnlessPayer$ TriggeredSourceSAController
+Oracle:If a source an opponent controls would deal damage to you or a permanent you control, prevent 1 of that damage.\nWhenever you or another permanent you control becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {1}.

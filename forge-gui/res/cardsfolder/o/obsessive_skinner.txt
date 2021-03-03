@@ -3,10 +3,10 @@ ManaCost:1 G
 Types:Creature Human Rogue
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Delirium$ True | Execute$ TrigPut | TriggerZones$ Battlefield | TriggerDescription$ Delirium — At the beginning of each opponent's upkeep, if there are four or more cards types among card in your graveyard, put a +1/+1 counter on target creature.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Delirium$ True | Execute$ TrigPut | TriggerZones$ Battlefield | TriggerDescription$ Delirium — At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, put a +1/+1 counter on target creature.
 SVar:TrigPut:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
 SVar:PlayMain1:TRUE
 DeckHints:Ability$Graveyard & Ability$Discard
 DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obsessive_skinner.jpg
-Oracle:When Obsessive Skinner enters the battlefield, put a +1/+1 counter on target creature.\nDelirium — At the beginning of each opponent's upkeep, if there are four or more cards types among card in your graveyard, put a +1/+1 counter on target creature.
+Oracle:When Obsessive Skinner enters the battlefield, put a +1/+1 counter on target creature.\nDelirium — At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, put a +1/+1 counter on target creature.

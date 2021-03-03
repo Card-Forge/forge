@@ -1,0 +1,9 @@
+Name:Colossification
+ManaCost:5 G G
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 5 G G | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted creature.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 20 | AddToughness$ 20 | Description$ Enchanted creature gets +20/+20.
+Oracle:Enchant creature\nWhen Colossification enters the battlefield, tap enchanted creature.\nEnchanted creature gets +20/+20.

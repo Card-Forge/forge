@@ -7,4 +7,4 @@ A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Cr
 A:AB$ ChangeZoneAll | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | ChangeType$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all creature cards from your graveyard to the battlefield.
 DeckHints:Name$Liliana's Influence
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liliana_death_wielder.jpg
-Oracle:[+2]: Put a -1/-1 counter on up to one target creature.\n[-3]: Destroy target creature with a -1/-1 counter on it.\n[-10]: Return all creature cards from your graveyard to the battlefield.
+Oracle:[+2]: Put a -1/-1 counter on up to one target creature.\n[−3]: Destroy target creature with a -1/-1 counter on it.\n[−10]: Return all creature cards from your graveyard to the battlefield.

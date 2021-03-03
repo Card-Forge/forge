@@ -20,11 +20,11 @@ import forge.util.Localizer;
 
 public class LoadGameMenu extends FPopupMenu {
     public enum LoadGameScreen {
-        BoosterDraft("Booster Draft", FSkinImage.HAND, LoadDraftScreen.class),
-        SealedDeck("Sealed Deck", FSkinImage.PACK, LoadSealedScreen.class),
-        QuestMode("Quest Mode", FSkinImage.QUEST_ZEP, LoadQuestScreen.class),
-        PlanarConquest("Planar Conquest", FSkinImage.MULTIVERSE, LoadConquestScreen.class),
-        Gauntlet("Gauntlet", FSkinImage.ALPHASTRIKE, LoadGauntletScreen.class);
+        BoosterDraft("lblBoosterDraft", FSkinImage.MENU_DRAFT, LoadDraftScreen.class),
+        SealedDeck("lblSealedDeck", FSkinImage.MENU_SEALED, LoadSealedScreen.class),
+        QuestMode("lblQuestMode", FSkinImage.QUEST_ZEP, LoadQuestScreen.class),
+        PlanarConquest("lblPlanarConquest", FSkinImage.MENU_GALAXY, LoadConquestScreen.class),
+        Gauntlet("lblGauntlet", FSkinImage.MENU_GAUNTLET, LoadGauntletScreen.class);
 
         private final FMenuItem item;
         private final Class<? extends FScreen> screenClass;
@@ -32,7 +32,7 @@ public class LoadGameMenu extends FPopupMenu {
 
         LoadGameScreen(final String caption0, final FImage icon0, final Class<? extends FScreen> screenClass0) {
             screenClass = screenClass0;
-            item = new FMenuItem(caption0, icon0, new FEventHandler() {
+            item = new FMenuItem(Localizer.getInstance().getMessage(caption0), icon0, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     open(true); //remove current screen from chain

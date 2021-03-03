@@ -1,0 +1,10 @@
+Name:Barrin, Tolarian Archmage
+ManaCost:1 U U
+Types:Legendary Creature Human Wizard
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return up to one target creature or planeswalker to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.Other,Planeswalker | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Choose target creature or planeswalker
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if a permanent was put into your hand from the battlefield this turn, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:X:Count$ThisTurnEntered_Hand_from_Battlefield_Permanent.YouOwn
+Oracle:When Barrin, Tolarian Archmage enters the battlefield, return up to one other target creature or planeswalker to its owner's hand.\nAt the beginning of your end step, if a permanent was put into your hand from the battlefield this turn, draw a card.

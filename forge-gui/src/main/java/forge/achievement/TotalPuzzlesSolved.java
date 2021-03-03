@@ -2,14 +2,16 @@ package forge.achievement;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.util.Localizer;
 
 public class TotalPuzzlesSolved extends ProgressiveAchievement {
     public TotalPuzzlesSolved(int bronze0, int silver0, int gold0, int mythic0) {
-        super("TotalPuzzlesSolved", "Total Puzzles Solved", null,
-            String.format(bronze0 == 1 ? "Solve a puzzle" : "Solve %d puzzles", bronze0), bronze0,
-            String.format("Solve %d puzzles", silver0), silver0,
-            String.format("Solve %d puzzles", gold0), gold0,
-            String.format("Solve %d puzzles", mythic0), mythic0);
+        super("TotalPuzzlesSolved", Localizer.getInstance().getMessage("lblTotalPuzzlesSolved"), null,
+            Localizer.getInstance().getMessage("lblSolveNPuzzles", String.valueOf(bronze0)), bronze0,
+            Localizer.getInstance().getMessage("lblSolveNPuzzles", String.valueOf(silver0)), silver0,
+            Localizer.getInstance().getMessage("lblSolveNPuzzles", String.valueOf(gold0)), gold0,
+            Localizer.getInstance().getMessage("lblSolveNPuzzles", String.valueOf(mythic0)), mythic0
+        );
     }
 
     @Override
@@ -19,7 +21,7 @@ public class TotalPuzzlesSolved extends ProgressiveAchievement {
 
     @Override
     protected String getNoun() {
-        return "Puzzle";
+        return Localizer.getInstance().getMessage("lblPuzzle");
     }
 }
 

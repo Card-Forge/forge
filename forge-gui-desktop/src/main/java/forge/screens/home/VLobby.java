@@ -183,7 +183,6 @@ public class VLobby implements ILobbyView {
         if (lobby.hasControl()) {
             pnlStart.setOpaque(false);
             pnlStart.add(btnStart, "align center");
-
             // Start button event handling
             btnStart.addActionListener(new ActionListener() {
                 @Override
@@ -525,6 +524,10 @@ public class VLobby implements ILobbyView {
         final FDeckChooser mainChooser = getDeckChooser(playerIndex);
         final DeckType type = mainChooser.getSelectedDeckType();
         final Deck deck = mainChooser.getDeck();
+        // something went wrong, clear selection to prevent error loop
+        if (deck == null) {
+            mainChooser.getLstDecks().setSelectedIndex(0);
+        }
         final Collection<DeckProxy> selectedDecks = mainChooser.getLstDecks().getSelectedItems();
         if (playerIndex < activePlayersNum && lobby.mayEdit(playerIndex)) {
             final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
@@ -917,7 +920,7 @@ public class VLobby implements ILobbyView {
         final List<String> usedNames = getPlayerNames();
         do {
             newName = NameGenerator.getRandomName(gender, type, usedNames);
-            confirmMsg = localizer.getMessage("lblconfirmName").replace("%n","\"" +newName + "\"");
+            confirmMsg = localizer.getMessage("lblconfirmName").replace("%s","\"" +newName + "\"");
         } while (!FOptionPane.showConfirmDialog(confirmMsg, title, localizer.getMessage("lblUseThisName"), localizer.getMessage("lblTryAgain"), true));
 
         return newName;

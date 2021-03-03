@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Enchantment
 T:Mode$ Discarded | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a player discards a card, you may pay {W}. If you do, create a 1/1 white Spirit creature token with flying.
 SVar:TrigToken:AB$Token | Cost$ W | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ w 1 1 spirit flying jud
-DeckHints::Ability$Discard
+DeckHints:Ability$Discard
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_cairn.jpg
 Oracle:Whenever a player discards a card, you may pay {W}. If you do, create a 1/1 white Spirit creature token with flying.

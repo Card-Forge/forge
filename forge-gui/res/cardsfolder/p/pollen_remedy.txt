@@ -2,8 +2,8 @@ Name:Pollen Remedy
 ManaCost:W
 Types:Instant
 K:Kicker:Sac<1/Land>
-A:SP$ PreventDamage | Cost$ W | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to prevent damage to | Amount$ 5 | TargetMin$ 1 | TargetMax$ X | References$ X | DividedAsYouChoose$ X | SpellDescription$ Prevent the next 3 damage that would be dealt this turn to any number of targets, divided as you choose. If CARDNAME was kicked, prevent the next 6 damage this way instead.
+A:SP$ PreventDamage | Cost$ W | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to prevent damage to | Amount$ 5 | TargetMin$ 1 | TargetMax$ X | References$ X | DividedAsYouChoose$ X | SpellDescription$ Prevent the next 3 damage that would be dealt this turn to any number of targets, divided as you choose. If this spell was kicked, prevent the next 6 damage this way instead.
 SVar:X:Count$Kicked.6.3
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pollen_remedy.jpg
-Oracle:Kicker—Sacrifice a land. (You may sacrifice a land in addition to any other costs as you cast this spell.)\nPrevent the next 3 damage that would be dealt this turn to any number of targets, divided as you choose. If Pollen Remedy was kicked, prevent the next 6 damage this way instead.
+Oracle:Kicker—Sacrifice a land. (You may sacrifice a land in addition to any other costs as you cast this spell.)\nPrevent the next 3 damage that would be dealt this turn to any number of targets, divided as you choose. If this spell was kicked, prevent the next 6 damage this way instead.

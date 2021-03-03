@@ -1,0 +1,6 @@
+Name:Minotaur
+ManaCost:no cost
+Types:Creature Minotaur
+Colors:red
+PT:2/3
+Oracle:

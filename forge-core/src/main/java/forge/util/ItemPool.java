@@ -24,6 +24,7 @@ import forge.item.InventoryItem;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map.Entry;
 
 /**
@@ -60,7 +61,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     };
 
     public ItemPool(final Class<T> cls) {
-        this(new LinkedHashMap<>(), cls);
+        this(new ConcurrentHashMap<>(), cls);
     }
 
     @SuppressWarnings("unchecked")
@@ -95,7 +96,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
             items = items0;
         }
         else {
-            items = new HashMap<>(); //prevent items being null
+            items = new ConcurrentHashMap<>();
         }
         myClass = cls;
     }

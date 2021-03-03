@@ -1,6 +1,6 @@
 Name:Snow Hound
 ManaCost:2 W
-Types:Creature Hound
+Types:Creature Dog
 PT:1/1
 A:AB$ ChangeZone | Cost$ 1 T | ValidTgts$ Creature.Blue+YouCtrl,Creature.Green+YouCtrl | TgtPrompt$ Select target blue or green creature you control | Origin$ Battlefield | Destination$ Hand | SubAbility$ Return | SpellDescription$ Return CARDNAME and target green or blue creature you control to their owner's hand.
 SVar:Return:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand

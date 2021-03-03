@@ -3,4 +3,4 @@ ManaCost:G
 Types:Sorcery
 A:SP$ Animate | Cost$ G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Power$ 6 | Toughness$ 4 | Colors$ Green | OverwriteColors$ True | Types$ Wurm | SpellDescription$ Until end of turn, target creature you control becomes a green Wurm with base power and toughness 6/4.
 A:SP$ AnimateAll | Cost$ 4 G G | PrecostDesc$ Overload | CostDesc$ {4}{G}{G} | NonBasicSpell$ True | ValidCards$ Creature.YouCtrl | Power$ 6 | Toughness$ 4 | Colors$ Green | OverwriteColors$ True | Types$ Wurm | SpellDescription$ Until end of turn, target creature you control becomes a green Wurm with base power and toughness 6/4.
-Oracle:Until end of turn, target creature you control becomes a green Wurm with base power and toughness 6/4.\nOverload {4}{G}{G}
+Oracle:Until end of turn, target creature you control becomes a green Wurm with base power and toughness 6/4.\nOverload {4}{G}{G} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

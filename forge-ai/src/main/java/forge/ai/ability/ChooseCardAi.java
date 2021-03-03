@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -20,7 +21,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
@@ -99,11 +100,11 @@ public class ChooseCardAi extends SpellAbilityAi {
             });
             return !choices.isEmpty();
         } else if (aiLogic.equals("Ashiok")) {
-            final int loyalty = host.getCounters(CounterType.LOYALTY) - 1;
+            final int loyalty = host.getCounters(CounterEnumType.LOYALTY) - 1;
             for (int i = loyalty; i >= 0; i--) {
-                host.setSVar("ChosenX", "Number$" + i);
+                sa.setXManaCostPaid(i);
                 choices = ai.getGame().getCardsIn(choiceZone);
-                choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host);
+                choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host, sa);
                 if (!choices.isEmpty()) {
                     return true;
                 }
@@ -129,6 +130,12 @@ public class ChooseCardAi extends SpellAbilityAi {
 
             return (ComputerUtilCard.evaluateCreatureList(aiCreatures) + minGain) < ComputerUtilCard
                     .evaluateCreatureList(oppCreatures);
+        } else if (aiLogic.equals("OwnCard")) {
+            CardCollectionView ownChoices = CardLists.filter(choices, CardPredicates.isController(ai));
+            if (ownChoices.isEmpty()) {
+                ownChoices = CardLists.filter(choices, CardPredicates.isControlledByAnyOf(ai.getAllies()));
+            }
+            return !ownChoices.isEmpty();
         }
         return true;
     }
@@ -140,12 +147,12 @@ public class ChooseCardAi extends SpellAbilityAi {
         }
         return checkApiLogic(ai, sa);
     }
-    
+
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.card.spellability.SpellAbility, java.util.List, boolean)
      */
     @Override
-    public Card chooseSingleCard(final Player ai, final SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+    public Card chooseSingleCard(final Player ai, final SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         final Card host = sa.getHostCard();
         final Player ctrl = host.getController();
         final String logic = sa.getParam("AILogic");
@@ -155,6 +162,12 @@ public class ChooseCardAi extends SpellAbilityAi {
             choice = ComputerUtilCard.getBestAI(options);
         } else if ("WorstCard".equals(logic)) {
             choice = ComputerUtilCard.getWorstAI(options);
+        } else if ("OwnCard".equals(logic)) {
+            CardCollectionView ownChoices = CardLists.filter(options, CardPredicates.isController(ai));
+            if (ownChoices.isEmpty()) {
+                ownChoices = CardLists.filter(options, CardPredicates.isControlledByAnyOf(ai.getAllies()));
+            }
+            choice = ComputerUtilCard.getBestAI(ownChoices);
         } else if (logic.equals("BestBlocker")) {
             if (!CardLists.filter(options, Presets.UNTAPPED).isEmpty()) {
                 options = CardLists.filter(options, Presets.UNTAPPED);
@@ -191,7 +204,7 @@ public class ChooseCardAi extends SpellAbilityAi {
                     if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
                         return false;
                     }
-                    int ref = ComputerUtilAbility.getAbilitySourceName(sa).equals("Forcefield") ? 1 : 0; 
+                    int ref = ComputerUtilAbility.getAbilitySourceName(sa).equals("Forcefield") ? 1 : 0;
                     return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > ref;
                 }
             });
@@ -233,7 +246,7 @@ public class ChooseCardAi extends SpellAbilityAi {
                         return false;
                     }
                     for (SpellAbility sa : c.getAllSpellAbilities()) {
-                        if (sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+                        if (sa.getPayCosts().hasTapCost()) {
                             return false;
                         }
                     }

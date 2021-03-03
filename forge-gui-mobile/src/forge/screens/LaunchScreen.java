@@ -11,8 +11,8 @@ import forge.toolbox.FOptionPane;
 import forge.util.Utils;
 
 public abstract class LaunchScreen extends FScreen {
-    private static final float MAX_START_BUTTON_HEIGHT = 2 * Utils.AVG_FINGER_HEIGHT;
-    private static final float START_BUTTON_RATIO = FSkinImage.BTN_START_UP.getWidth() / FSkinImage.BTN_START_UP.getHeight();
+    private static final float MAX_START_BUTTON_HEIGHT = 1.75f * Utils.AVG_FINGER_HEIGHT;
+    private float START_BUTTON_RATIO = 0.f;
     private static final float PADDING = FOptionPane.PADDING;
 
     protected final StartButton btnStart = add(new StartButton());
@@ -26,6 +26,11 @@ public abstract class LaunchScreen extends FScreen {
 
     @Override
     protected final void doLayout(float startY, float width, float height) {
+        if (Forge.hdstart)
+            START_BUTTON_RATIO = FSkinImage.HDBTN_START_UP.getWidth() / FSkinImage.HDBTN_START_UP.getHeight();
+        else
+            START_BUTTON_RATIO = FSkinImage.BTN_START_UP.getWidth() / FSkinImage.BTN_START_UP.getHeight();
+
         float buttonWidth = width - 2 * PADDING;
         float buttonHeight = buttonWidth / START_BUTTON_RATIO;
         if (buttonHeight > MAX_START_BUTTON_HEIGHT) {
@@ -72,8 +77,12 @@ public abstract class LaunchScreen extends FScreen {
 
         @Override
         public void draw(Graphics g) {
-            g.drawImage(pressed ? FSkinImage.BTN_START_DOWN : FSkinImage.BTN_START_UP,
+            if (Forge.hdstart)
+                g.drawImage(pressed ? FSkinImage.HDBTN_START_DOWN : FSkinImage.HDBTN_START_UP,
                     0, 0, getWidth(), getHeight());
+            else
+                g.drawImage(pressed ? FSkinImage.BTN_START_DOWN : FSkinImage.BTN_START_UP,
+                        0, 0, getWidth(), getHeight());
             //its must be enabled or you can't start any game modes
             if (!Forge.isLoadingaMatch()) {
                 if(!btnStart.isEnabled())

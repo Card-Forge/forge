@@ -3,10 +3,9 @@ ManaCost:3 U
 Types:Creature Faerie Artificer
 PT:2/2
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonToken+OppCtrl | TriggerZones$ Battlefield | Execute$ TrigImprint | TriggerDescription$Whenever a nontoken creature enters the battlefield under an opponent's control, create a token that's a copy of that creature except that it's an artifact in addition to its other types. Then exile all other tokens created with Faerie Artisans.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonToken+OppCtrl | TriggerZones$ Battlefield | Execute$ TrigImprint | TriggerDescription$ Whenever a nontoken creature enters the battlefield under an opponent's control, create a token that's a copy of that creature except it's an artifact in addition to its other types. Then exile all other tokens created with CARDNAME.
 SVar:TrigImprint:DB$ Pump | ImprintCards$ Remembered | SubAbility$ DBCopy
-SVar:DBCopy:DB$ CopyPermanent | Defined$ TriggeredCard | Controller$ You | AddTypes$ Artifact | RememberCopied$ True | SubAbility$ DBChangeZoneAll
+SVar:DBCopy:DB$ CopyPermanent | Defined$ TriggeredCard | Controller$ You | AddTypes$ Artifact | RememberTokens$ True | SubAbility$ DBChangeZoneAll
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Card.IsImprinted
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_artisans.jpg
-Oracle:Flying\nWhenever a nontoken creature enters the battlefield under an opponent's control, create a token that's a copy of that creature except that it's an artifact in addition to its other types. Then exile all other tokens created with Faerie Artisans.
+Oracle:Flying\nWhenever a nontoken creature enters the battlefield under an opponent's control, create a token that's a copy of that creature except it's an artifact in addition to its other types. Then exile all other tokens created with Faerie Artisans.

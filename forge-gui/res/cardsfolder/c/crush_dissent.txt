@@ -1,8 +1,8 @@
 Name:Crush Dissent
 ManaCost:3 U
 Types:Instant
-A:SP$ Counter | Cost$ 3 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 2 | SubAbility$ DBAmass | SpellDescription$ Counter target spell unless its controller pays {2}. Amass 2. (Put two +1/+1 counters on an Army you control. If you don’t control one, create a 0/0 black Zombie Army creature token first.)
+A:SP$ Counter | Cost$ 3 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 2 | SubAbility$ DBAmass | SpellDescription$ Counter target spell unless its controller pays {2}. Amass 2. (Put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
 SVar:DBAmass:DB$ Amass | Num$ 2
 DeckHas:Ability$Amass & Ability$Counters & Ability$Token
 DeckHints:Ability$Amass & Type$Zombie
-Oracle:Counter target spell unless its controller pays {2}.\nAmass 2. (Put two +1/+1 counters on an Army you control. If you don’t control one, create a 0/0 black Zombie Army creature token first.)
+Oracle:Counter target spell unless its controller pays {2}.\nAmass 2. (Put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)

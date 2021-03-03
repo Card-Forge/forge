@@ -8,18 +8,16 @@ import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
 import forge.game.Game;
-import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
-import forge.game.card.token.TokenInfo;
-import forge.game.combat.Combat;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
@@ -28,14 +26,13 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import forge.util.PredicateString.StringOp;
 import forge.util.Localizer;
-import forge.util.CardTranslation;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.mutable.MutableBoolean;
 
-import java.util.Arrays;
 import java.util.List;
 
-public class CopyPermanentEffect extends SpellAbilityEffect {
+public class CopyPermanentEffect extends TokenEffectBase {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
@@ -61,18 +58,11 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Game game = host.getGame();
-        final List<String> pumpKeywords = Lists.newArrayList();
-
-        final long timestamp = game.getNextTimestamp();
 
         if (sa.hasParam("Optional")) {
             if (!activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblCopyPermanentConfirm"))) {
                 return;
             }
-        }
-
-        if (sa.hasParam("PumpKeywords")) {
-            pumpKeywords.addAll(Arrays.asList(sa.getParam("PumpKeywords").split(" & ")));
         }
 
         final int numCopies = sa.hasParam("NumCopies") ? AbilityUtils.calculateAmount(host,
@@ -144,15 +134,29 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), choose, sa).get(0);
             }
 
-            CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
+            // For Mimic Vat with mutated creature, need to choose one imprinted card
+            CardCollectionView choices = sa.hasParam("Defined") ? getDefinedCardsOrTargeted(sa) : game.getCardsIn(ZoneType.Battlefield);
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
             if (!choices.isEmpty()) {
-                String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") +" ";
+                String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard");
 
-                Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, false);
+                if (sa.hasParam("WithDifferentNames")) {
+                    // any Number of choices with different names
+                    while (!choices.isEmpty()) {
+                        Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, true, null);
 
-                if (choosen != null) {
-                    tgtCards.add(choosen);
+                        if (choosen != null) {
+                            tgtCards.add(choosen);
+                            choices = CardLists.filter(choices, Predicates.not(CardPredicates.sharesNameWith(choosen)));
+                        } else if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, Localizer.getInstance().getMessage("lblCancelChooseConfirm"))) {
+                            break;
+                        }
+                    }
+                } else {
+                    Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, false, null);
+                    if (choosen != null) {
+                        tgtCards.add(choosen);
+                    }
                 }
             }
         } else {
@@ -170,107 +174,25 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
             useZoneTable = true;
         }
 
+        MutableBoolean combatChanged = new MutableBoolean(false);
         for (final Card c : tgtCards) {
             // if it only targets player, it already got all needed cards from defined
-            if (!sa.usesTargeting() || sa.getTargetRestrictions().canTgtPlayer() || c.canBeTargetedBy(sa)) {
-                Card proto = getProtoType(sa, c);
-                List <Card> token = TokenInfo.makeToken(proto, controller, true, numCopies);
+            if (sa.usesTargeting() && !sa.getTargetRestrictions().canTgtPlayer() && !c.canBeTargetedBy(sa)) {
+                continue;
+            }
 
-                final List<Card> crds = Lists.newArrayListWithCapacity(token.size());
-
-                for (final Card t : token) {
-                    t.setCopiedPermanent(proto);
-
-                    // Temporarily register triggers of an object created with CopyPermanent
-                    //game.getTriggerHandler().registerActiveTrigger(copy, false);
-                    final Card copyInPlay = game.getAction().moveToPlay(t, sa);
-
-                    if (copyInPlay.getZone() != null) {
-                        triggerList.put(ZoneType.None, copyInPlay.getZone().getZoneType(), copyInPlay);
-                    }
-
-                    // when copying something stolen:
-                    //copyInPlay.setSetCode(c.getSetCode());
-
-                    copyInPlay.setCloneOrigin(host);
-                    if (!pumpKeywords.isEmpty()) {
-                        copyInPlay.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, false, timestamp);
-                    }
-                    crds.add(copyInPlay);
-                    if (sa.hasParam("RememberCopied")) {
-                        host.addRemembered(copyInPlay);
-                    }
-                    if (sa.hasParam("Tapped")) {
-                        copyInPlay.setTapped(true);
-                    }
-                    if (sa.hasParam("CopyAttacking") && game.getPhaseHandler().inCombat()) {
-                        final String attacked = sa.getParam("CopyAttacking");
-                        GameEntity defender;
-                        if ("True".equals(attacked)) {
-                            FCollectionView<GameEntity> defs = game.getCombat().getDefenders();
-                            defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false);
-                        } else {
-                            defender = AbilityUtils.getDefinedPlayers(host, sa.getParam("CopyAttacking"), sa).get(0);
-                            if (sa.hasParam("ChoosePlayerOrPlaneswalker") && defender != null) {
-                                FCollectionView<GameEntity> defs = game.getCombat().getDefendersControlledBy((Player) defender);
-                                defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())) + " {" + Localizer.getInstance().getMessage("lblDefender") + ": " + defender + "}", false);
-                            }
-                        }
-                        game.getCombat().addAttacker(copyInPlay, defender);
-                        game.fireEvent(new GameEventCombatChanged());
-                    }
-
-                    if (sa.hasParam("CopyBlocking") && game.getPhaseHandler().inCombat() && copyInPlay.isCreature()) {
-                        final Combat combat = game.getPhaseHandler().getCombat();
-                        final Card attacker = Iterables.getFirst(AbilityUtils.getDefinedCards(host, sa.getParam("CopyBlocking"), sa), null);
-                        if (attacker != null) {
-                            final boolean wasBlocked = combat.isBlocked(attacker);
-                            combat.addBlocker(attacker, copyInPlay);
-                            combat.orderAttackersForDamageAssignment(copyInPlay);
-
-                            // Add it to damage assignment order
-                            if (!wasBlocked) {
-                                combat.setBlocked(attacker, true);
-                                combat.addBlockerToDamageAssignmentOrder(attacker, copyInPlay);
-                            }
-
-                            game.fireEvent(new GameEventCombatChanged());
-                        }
-                    }
-
-                    if (sa.hasParam("AttachedTo")) {
-                        CardCollectionView list = AbilityUtils.getDefinedCards(host, sa.getParam("AttachedTo"), sa);
-                        if (list.isEmpty()) {
-                            list = copyInPlay.getController().getGame().getCardsIn(ZoneType.Battlefield);
-                            list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), copyInPlay.getController(), copyInPlay);
-                        }
-                        if (!list.isEmpty()) {
-                            Card attachedTo = activator.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", copyInPlay.toString()));
-
-                            copyInPlay.attachToEntity(attachedTo);
-                        } else {
-                            continue;
-                        }
-                    }
-                    // need to be done otherwise the token has no State in Details
-                    copyInPlay.updateStateForView();
-                }
-
-                if (sa.hasParam("AtEOT")) {
-                    registerDelayedTrigger(sa, sa.getParam("AtEOT"), crds);
-                }
-                if (sa.hasParam("ImprintCopied")) {
-                    host.addImprintedCards(crds);
-                }
-            } // end canBeTargetedBy
+            makeTokens(getProtoType(sa, c), controller, sa, numCopies, true, true, triggerList, combatChanged);
         } // end foreach Card
 
         if (!useZoneTable) {
             triggerList.triggerChangesZoneAll(game);
             triggerList.clear();
         }
+        if (combatChanged.isTrue()) {
+            game.updateCombatForView();
+            game.fireEvent(new GameEventCombatChanged());
+        }
     } // end resolve
-
 
     private Card getProtoType(final SpellAbility sa, final Card original) {
         final Card host = sa.getHostCard();
@@ -293,10 +215,8 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         copy.setState(copy.getCurrentStateName(), true, true);
         copy.setToken(true);
 
-        if (sa.hasParam("AtEOTTrig")) {
-            addSelfTrigger(sa, sa.getParam("AtEOTTrig"), copy);
-        }
-
         return copy;
     }
 }
+
+

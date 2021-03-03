@@ -37,7 +37,7 @@ public class CardImage implements FImage {
         if (image == null) { //attempt to retrieve card image if needed
             image = ImageCache.getImage(card);
             if (image == null) {
-                if (Forge.enableUIMask) //render this if mask is still loading
+                if (!Forge.enableUIMask.equals("Off")) //render this if mask is still loading
                     CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), false, x, y, w, h, CardStackPosition.Top);
 
                 return; //can't draw anything if can't be loaded yet
@@ -48,17 +48,17 @@ public class CardImage implements FImage {
             CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), false, x, y, w, h, CardStackPosition.Top);
         }
         else {
-            if (Forge.enableUIMask) {
-                boolean fullborder = image.toString().contains(".fullborder.");
-                if (ImageCache.isExtendedArt(card))
+            if (Forge.enableUIMask.equals("Full")) {
+                if (ImageCache.isBorderlessCardArt(image))
                     g.drawImage(image, x, y, w, h);
                 else {
                     float radius = (h - w)/8;
-                    g.drawfillBorder(3, ImageCache.borderColor(card), x, y, w, h, radius);
-                    g.drawImage(ImageCache.croppedBorderImage(image, fullborder), x+radius/2.2f, y+radius/2, w*0.96f, h*0.96f);
+                    g.drawborderImage(ImageCache.borderColor(image), x, y, w, h);
+                    g.drawImage(ImageCache.croppedBorderImage(image), x+radius/2.2f, y+radius/2, w*0.96f, h*0.96f);
                 }
-            }
-            else
+            } else if (Forge.enableUIMask.equals("Crop")) {
+                g.drawImage(ImageCache.croppedBorderImage(image), x, y, w, h);
+            } else
                 g.drawImage(image, x, y, w, h);
         }
     }

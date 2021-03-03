@@ -1,5 +1,7 @@
 [metadata]
 Name=Five Color Walkers
+[Commander]
+1 Nicol Bolas, Planeswalker|CFX
 [Main]
 1 Ajani Vengeant|ALA
 1 Ancient Ziggurat|CFX
@@ -23,7 +25,6 @@ Name=Five Color Walkers
 1 Magma Spray|ALA
 1 Mountain|ALA|4
 1 Naturalize|ALA
-1 Nicol Bolas, Planeswalker|CFX
 1 Noble Hierarch|CFX
 1 Path to Exile|CFX
 1 Plains|ALA|3

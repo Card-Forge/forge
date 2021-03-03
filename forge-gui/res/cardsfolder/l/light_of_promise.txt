@@ -1,0 +1,12 @@
+Name:Light of Promise
+ManaCost:2 W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ LightOfPromiseTrig | AddSVar$ LightOfPromisePutCounter & LightOfPromiseAmount | Description$ Enchanted creature has "Whenever you gain life, put that many +1/+1 counters on this creature."
+SVar:LightOfPromiseTrig:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ LightOfPromisePutCounter | TriggerDescription$ Whenever you gain life, put that many +1/+1 counters on this creature.
+SVar:LightOfPromisePutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ LightOfPromiseAmount | References$ LightOfPromiseAmount
+SVar:LightOfPromiseAmount:TriggerCount$LifeAmount
+DeckNeeds:Ability$LifeGain
+DeckHas:Ability$Counters
+Oracle:Enchant creature\nEnchanted creature has "Whenever you gain life, put that many +1/+1 counters on this creature."

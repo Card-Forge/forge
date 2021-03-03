@@ -17,7 +17,6 @@ import forge.game.card.CardView;
 import forge.game.event.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.interfaces.IGuiGame;
@@ -199,7 +198,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         final List<CardView> options = Lists.newArrayList();
         for (final Entry<Player, Card> kv : ev.cards.entries()) {
             //use fake card so real cards appear with proper formatting
-            final CardView fakeCard = new CardView(-1, null, "  -- From " + Lang.getPossesive(kv.getKey().getName()) + " deck --");
+            final CardView fakeCard = new CardView(-1, null, "  -- From " + Lang.getInstance().getPossesive(kv.getKey().getName()) + " deck --");
             options.add(fakeCard);
             options.add(kv.getValue().getView());
         }
@@ -239,17 +238,20 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventSpellAbilityCast event) {
-        needStackUpdate = true;      
-        processEvent();
-        
-        final Runnable notifyStackAddition = new Runnable() {
-            @Override
-            public void run() {
-                matchController.notifyStackAddition(event);
-            }
-        };
-        GuiBase.getInterface().invokeInEdtLater(notifyStackAddition);
+        needStackUpdate = true;
+        if(GuiBase.getInterface().isLibgdxPort()) {
+            return processEvent(); //mobile port don't have notify stack addition like the desktop
+        } else {
+            processEvent();
 
+            final Runnable notifyStackAddition = new Runnable() {
+                @Override
+                public void run() {
+                    matchController.notifyStackAddition(event);
+                }
+            };
+            GuiBase.getInterface().invokeInEdtLater(notifyStackAddition);
+        }
         return null;
     }
 
@@ -262,16 +264,34 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventSpellRemovedFromStack event) {
         needStackUpdate = true;
-        processEvent();
-        
-        final Runnable notifyStackAddition = new Runnable() {
-            @Override
-            public void run() {
-                matchController.notifyStackRemoval(event);
+        if(GuiBase.getInterface().isLibgdxPort()) {
+            return processEvent(); //mobile port don't have notify stack addition like the desktop
+        } else {
+            processEvent();
+
+            final Runnable notifyStackAddition = new Runnable() {
+                @Override
+                public void run() {
+                    matchController.notifyStackRemoval(event);
+                }
+            };
+            GuiBase.getInterface().invokeInEdtLater(notifyStackAddition);
+        }
+        return null;
+    }
+
+    @Override
+    public Void visit(final GameEventSubgameEnd event) {
+        if (event.maingame != null) {
+            for (Player p : event.maingame.getPlayers()) {
+                updateZone(p, ZoneType.Battlefield);
+                updateZone(p, ZoneType.Hand);
+                updateZone(p, ZoneType.Graveyard);
+                updateZone(p, ZoneType.Exile);
+                updateZone(p, ZoneType.Command);
             }
-        };
-        GuiBase.getInterface().invokeInEdtLater(notifyStackAddition);     
-        
+            return processEvent();
+        }
         return null;
     }
 
@@ -288,7 +308,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventCardAttachment event) {
         final Game game = event.equipment.getGame();
-        final PlayerZone zEq = (PlayerZone)game.getZoneOf(event.equipment);
+        final Zone zEq = (Zone)game.getZoneOf(event.equipment);
         if (event.oldEntiy instanceof Card) {
             updateZone(game.getZoneOf((Card)event.oldEntiy));
         }
@@ -356,19 +376,33 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
-    public Void visit(final GameEventCardChangeZone event) {
-        if(event.to.getZoneType() == ZoneType.Battlefield)
-            refreshFieldUpdate = true;
-        //pfps the change to the zones have already been performed with add and remove calls
-    // this is only for playing a sound
-    //        updateZone(event.from);
-        //return updateZone(event.to);
-    return processEvent();
+    public Void visit(final GameEventCombatUpdate event) {
+        if (!GuiBase.isNetworkplay())
+            return null; //not needed if single player only...
 
+        final CardCollection cards = new CardCollection();
+        cards.addAll(event.attackers);
+        cards.addAll(event.blockers);
+
+        refreshFieldUpdate = true;
+
+        processCards(cards, cardsRefreshDetails);
+        return processCards(cards, cardsUpdate);
+    }
+
+    @Override
+    public Void visit(final GameEventCardChangeZone event) {
+        if(GuiBase.getInterface().isLibgdxPort()) {
+            updateZone(event.from);
+            return updateZone(event.to);
+        } else {
+            return processEvent();
+        }
     }
 
     @Override
     public Void visit(final GameEventCardStatsChanged event) {
+        refreshFieldUpdate = true;
         processCards(event.cards, cardsRefreshDetails);
         return processCards(event.cards, cardsUpdate);
     }
@@ -377,25 +411,35 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventPlayerStatsChanged event) {
         final CardCollection cards = new CardCollection();
         for (final Player p : event.players) {
-            cards.addAll(p.getAllCards());
+            if (event.updateCards) {
+                cards.addAll(p.getAllCards());
+            }
             processPlayer(p, livesUpdate);
         }
 
         return processCards(cards, cardsRefreshDetails);
     }
 
+    public Void visit(final GameEventLandPlayed event) {
+        processPlayer(event.player, livesUpdate);
+        matchController.handleLandPlayed(event.land);
+        return processCard(event.land, cardsRefreshDetails);
+    }
+
     @Override
     public Void visit(final GameEventTokenStateUpdate event) {
+        refreshFieldUpdate = true;
         processCards(event.cards, cardsRefreshDetails);
         return processCards(event.cards, cardsUpdate);
     }
 
     @Override
     public Void visit(final GameEventShuffle event) {
-        //pfps the change to the library has already been performed by a setCards call
-    // this is only for playing a sound
-    // return updateZone(event.player.getZone(ZoneType.Library));
-    return processEvent();
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            return updateZone(event.player.getZone(ZoneType.Library));
+        } else {
+            return processEvent();
+        }
     }
 
     @Override

@@ -21,11 +21,12 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
-import forge.util.Expressions;
 import forge.util.Localizer;
 
 import java.util.Map;
 import java.util.Set;
+
+import com.google.common.collect.Sets;
 
 /**
  * <p>
@@ -49,7 +50,7 @@ public class TriggerDamageDealtOnce extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerDamageDealtOnce(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerDamageDealtOnce(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -59,7 +60,6 @@ public class TriggerDamageDealtOnce extends Trigger {
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         final Card srcs = (Card) runParams.get(AbilityKey.DamageSource);
-        final Set<GameEntity> tgt = (Set<GameEntity>) runParams.get(AbilityKey.DamageTargets);
 
         if (hasParam("CombatDamage")) {
             if (getParam("CombatDamage").equals("True")) {
@@ -72,33 +72,17 @@ public class TriggerDamageDealtOnce extends Trigger {
                 }
             }
         }
-        
+
         if (hasParam("ValidTarget")) {
-            boolean valid = false;
-            for (GameEntity c : tgt) {
-                if (c.isValid(getParam("ValidTarget").split(","), this.getHostCard().getController(),this.getHostCard(), null)) {
-                    valid = true;
-                }
-            }
-            if (!valid) {
+            final Map<GameEntity, Integer> damageMap = (Map<GameEntity, Integer>) runParams.get(AbilityKey.DamageMap);
+
+            if (getDamageAmount(damageMap) <= 0) {
                 return false;
             }
         }
 
         if (hasParam("ValidSource")) {
-            if (!matchesValid(srcs, getParam("ValidSource").split(","), this.getHostCard())) {
-                return false;
-            }
-        }
-
-        if (hasParam("DamageAmount")) {
-            final String fullParam = getParam("DamageAmount");
-
-            final String operator = fullParam.substring(0, 2);
-            final int operand = Integer.parseInt(fullParam.substring(2));
-            final int actualAmount = (Integer) runParams.get(AbilityKey.DamageAmount);
-
-            if (!Expressions.compare(actualAmount, operator, operand)) {
+            if (!matchesValid(srcs, getParam("ValidSource").split(","), getHostCard())) {
                 return false;
             }
         }
@@ -108,10 +92,13 @@ public class TriggerDamageDealtOnce extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.DamageAmount);
-        sa.setTriggeringObject(AbilityKey.Source, getFromRunParams(AbilityKey.DamageSource));
-        sa.setTriggeringObject(AbilityKey.Targets, getFromRunParams(AbilityKey.DamageTargets));
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        @SuppressWarnings("unchecked")
+        final Map<GameEntity, Integer> damageMap = (Map<GameEntity, Integer>) runParams.get(AbilityKey.DamageMap);
+
+        sa.setTriggeringObject(AbilityKey.Source, runParams.get(AbilityKey.DamageSource));
+        sa.setTriggeringObject(AbilityKey.Targets, getDamageTargets(damageMap));
+        sa.setTriggeringObject(AbilityKey.DamageAmount, getDamageAmount(damageMap));
     }
 
     @Override
@@ -121,5 +108,28 @@ public class TriggerDamageDealtOnce extends Trigger {
         sb.append(Localizer.getInstance().getMessage("lblDamaged")).append(": ").append(sa.getTriggeringObject(AbilityKey.Targets)).append(", ");
         sb.append(Localizer.getInstance().getMessage("lblAmount")).append(": ").append(sa.getTriggeringObject(AbilityKey.DamageAmount));
         return sb.toString();
+    }
+
+    public int getDamageAmount(Map<GameEntity, Integer> damageMap) {
+        int result = 0;
+        for (Map.Entry<GameEntity, Integer> e : damageMap.entrySet()) {
+            if (!hasParam("ValidTarget") || matchesValid(e.getKey(), getParam("ValidTarget").split(","), getHostCard())) {
+                result += e.getValue();
+            }
+        }
+        return result;
+    }
+
+    public Set<GameEntity> getDamageTargets(Map<GameEntity, Integer> damageMap) {
+        if (!hasParam("ValidTarget")) {
+            return Sets.newHashSet(damageMap.keySet());
+        }
+        Set<GameEntity> result = Sets.newHashSet();
+        for (GameEntity e : damageMap.keySet()) {
+            if (matchesValid(e, getParam("ValidTarget").split(","), getHostCard())) {
+                result.add(e);
+            }
+        }
+        return result;
     }
 }

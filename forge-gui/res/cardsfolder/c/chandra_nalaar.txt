@@ -3,10 +3,9 @@ ManaCost:3 R R
 Types:Legendary Planeswalker Chandra
 Loyalty:6
 A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | Planeswalker$ True | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker.
-A:AB$ DealDamage | Cost$ SubCounter<X/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ ChosenX | Planeswalker$ True | References$ X | SpellDescription$ CARDNAME deals X damage to target creature.
+A:AB$ DealDamage | Cost$ SubCounter<X/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | Planeswalker$ True | References$ X | SpellDescription$ CARDNAME deals X damage to target creature.
 A:AB$ DealDamage | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select a player or planeswalker | NumDmg$ 10 | SubAbility$ DmgAll | DamageMap$ True | SpellDescription$ CARDNAME deals 10 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.
 SVar:DmgAll:DB$ DamageAll | NumDmg$ 10 | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
-SVar:X:XChoice
-SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card140176.jpg
-Oracle:[+1]: Chandra Nalaar deals 1 damage to target player or planeswalker.\n[-X]: Chandra Nalaar deals X damage to target creature.\n[-8]: Chandra Nalaar deals 10 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.
+SVar:X:Count$xPaid
+Oracle:[+1]: Chandra Nalaar deals 1 damage to target player or planeswalker.\n[−X]: Chandra Nalaar deals X damage to target creature.\n[−8]: Chandra Nalaar deals 10 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.

@@ -19,10 +19,22 @@ import forge.util.ImageUtil;
 public enum FSkinImage implements FImage {
     //Zones
     HAND        (FSkinProp.IMG_ZONE_HAND, SourceFile.ICONS),
+    HDHAND      (FSkinProp.IMG_HDZONE_HAND, SourceFile.BUTTONS),
+
     LIBRARY     (FSkinProp.IMG_ZONE_LIBRARY, SourceFile.ICONS),
+    HDLIBRARY   (FSkinProp.IMG_HDZONE_LIBRARY, SourceFile.BUTTONS),
+
     EXILE       (FSkinProp.IMG_ZONE_EXILE, SourceFile.ICONS),
+    HDEXILE     (FSkinProp.IMG_HDZONE_EXILE, SourceFile.BUTTONS),
+
     FLASHBACK   (FSkinProp.IMG_ZONE_FLASHBACK, SourceFile.ICONS),
+    HDFLASHBACK (FSkinProp.IMG_HDZONE_FLASHBACK, SourceFile.BUTTONS),
+
     GRAVEYARD   (FSkinProp.IMG_ZONE_GRAVEYARD, SourceFile.ICONS),
+    HDGRAVEYARD (FSkinProp.IMG_HDZONE_GRAVEYARD, SourceFile.BUTTONS),
+
+    HDMANAPOOL   (FSkinProp.IMG_HDZONE_MANAPOOL, SourceFile.BUTTONS),
+
     POISON      (FSkinProp.IMG_ZONE_POISON, SourceFile.ICONS),
 
     //Mana symbols
@@ -114,6 +126,15 @@ public enum FSkinImage implements FImage {
     ARCSON       (FSkinProp.ICO_ARCSON, SourceFile.ICONS),
     ARCSHOVER    (FSkinProp.ICO_ARCSHOVER, SourceFile.ICONS),
 
+    //choice-search-misc
+    HDCHOICE     (FSkinProp.ICO_HDCHOICE, SourceFile.BUTTONS),
+    HDSIDEBOARD  (FSkinProp.ICO_HDSIDEBOARD, SourceFile.BUTTONS),
+    HDPREFERENCE (FSkinProp.ICO_HDPREFERENCE, SourceFile.BUTTONS),
+    HDIMPORT     (FSkinProp.ICO_HDIMPORT, SourceFile.BUTTONS),
+    HDEXPORT     (FSkinProp.ICO_HDEXPORT, SourceFile.BUTTONS),
+    HDYIELD      (FSkinProp.ICO_HDYIELD, SourceFile.BUTTONS),
+    BLANK        (FSkinProp.ICO_BLANK, SourceFile.ICONS),
+
     //Achievement Trophies
     COMMON_TROPHY    (FSkinProp.IMG_COMMON_TROPHY, SourceFile.TROPHIES),
     UNCOMMON_TROPHY  (FSkinProp.IMG_UNCOMMON_TROPHY, SourceFile.TROPHIES),
@@ -156,31 +177,82 @@ public enum FSkinImage implements FImage {
     QUEST_MINUS       (FSkinProp.ICO_QUEST_MINUS, SourceFile.ICONS),
     QUEST_PLUS        (FSkinProp.ICO_QUEST_PLUS, SourceFile.ICONS),
     QUEST_PLUSPLUS    (FSkinProp.ICO_QUEST_PLUSPLUS, SourceFile.ICONS),
+    QUEST_BIG_ELIXIR  (FSkinProp.ICO_QUEST_BIG_ELIXIR, SourceFile.ICONS),
+    QUEST_BIG_BREW    (FSkinProp.ICO_QUEST_BIG_BREW, SourceFile.ICONS),
+    QUEST_BIG_BM      (FSkinProp.ICO_QUEST_BIG_BM, SourceFile.ICONS),
+    QUEST_BIG_STAKES  (FSkinProp.ICO_QUEST_BIG_STAKES, SourceFile.ICONS),
+    QUEST_BIG_HOUSE   (FSkinProp.ICO_QUEST_BIG_HOUSE, SourceFile.ICONS),
+    QUEST_BIG_COIN    (FSkinProp.ICO_QUEST_BIG_COIN, SourceFile.ICONS),
+    QUEST_BIG_BOOK    (FSkinProp.ICO_QUEST_BIG_BOOK, SourceFile.ICONS),
+    QUEST_BIG_MAP     (FSkinProp.ICO_QUEST_BIG_MAP, SourceFile.ICONS),
+    QUEST_BIG_ZEP     (FSkinProp.ICO_QUEST_BIG_ZEP, SourceFile.ICONS),
+    QUEST_BIG_CHARM   (FSkinProp.ICO_QUEST_BIG_CHARM, SourceFile.ICONS),
+    QUEST_BIG_BOOTS   (FSkinProp.ICO_QUEST_BIG_BOOTS, SourceFile.ICONS),
+    QUEST_BIG_SHIELD  (FSkinProp.ICO_QUEST_BIG_SHIELD, SourceFile.ICONS),
+    QUEST_BIG_ARMOR   (FSkinProp.ICO_QUEST_BIG_ARMOR, SourceFile.ICONS),
+    QUEST_BIG_AXE     (FSkinProp.ICO_QUEST_BIG_AXE, SourceFile.ICONS),
+    QUEST_BIG_SWORD   (FSkinProp.ICO_QUEST_BIG_SWORD, SourceFile.ICONS),
+    QUEST_BIG_BAG     (FSkinProp.ICO_QUEST_BIG_BAG, SourceFile.ICONS),
+
+    //menu icon
+    MENU_GALAXY       (FSkinProp.ICO_MENU_GALAXY, SourceFile.ICONS),
+    MENU_STATS        (FSkinProp.ICO_MENU_STATS, SourceFile.ICONS),
+    MENU_PUZZLE       (FSkinProp.ICO_MENU_PUZZLE, SourceFile.ICONS),
+    MENU_GAUNTLET     (FSkinProp.ICO_MENU_GAUNTLET, SourceFile.ICONS),
+    MENU_SEALED       (FSkinProp.ICO_MENU_SEALED, SourceFile.ICONS),
+    MENU_DRAFT        (FSkinProp.ICO_MENU_DRAFT, SourceFile.ICONS),
+    MENU_CONSTRUCTED  (FSkinProp.ICO_MENU_CONSTRUCTED, SourceFile.ICONS),
 
     //Interface icons
     QUESTION        (FSkinProp.ICO_QUESTION, SourceFile.ICONS),
     INFORMATION     (FSkinProp.ICO_INFORMATION, SourceFile.ICONS),
     WARNING         (FSkinProp.ICO_WARNING, SourceFile.ICONS),
     ERROR           (FSkinProp.ICO_ERROR, SourceFile.ICONS),
+
     DELETE          (FSkinProp.ICO_DELETE, SourceFile.ICONS),
+    HDDELETE        (FSkinProp.ICO_HDDELETE, SourceFile.BUTTONS),
+
     DELETE_OVER     (FSkinProp.ICO_DELETE_OVER, SourceFile.ICONS),
+
     EDIT            (FSkinProp.ICO_EDIT, SourceFile.ICONS),
+    HDEDIT            (FSkinProp.ICO_HDEDIT, SourceFile.BUTTONS),
+
     EDIT_OVER       (FSkinProp.ICO_EDIT_OVER, SourceFile.ICONS),
+
     OPEN            (FSkinProp.ICO_OPEN, SourceFile.ICONS),
+    HDOPEN          (FSkinProp.ICO_HDOPEN, SourceFile.BUTTONS),
+
     MINUS           (FSkinProp.ICO_MINUS, SourceFile.ICONS),
+    HDMINUS         (FSkinProp.ICO_HDMINUS, SourceFile.BUTTONS),
+
     NEW             (FSkinProp.ICO_NEW, SourceFile.ICONS),
+
     PLUS            (FSkinProp.ICO_PLUS, SourceFile.ICONS),
+    HDPLUS          (FSkinProp.ICO_HDPLUS, SourceFile.BUTTONS),
+
     PRINT           (FSkinProp.ICO_PRINT, SourceFile.ICONS),
+
     SAVE            (FSkinProp.ICO_SAVE, SourceFile.ICONS),
+    HDSAVE          (FSkinProp.ICO_HDSAVE, SourceFile.BUTTONS),
     SAVEAS          (FSkinProp.ICO_SAVEAS, SourceFile.ICONS),
+    HDSAVEAS        (FSkinProp.ICO_HDSAVEAS, SourceFile.BUTTONS),
+
     CLOSE           (FSkinProp.ICO_CLOSE, SourceFile.ICONS),
     LIST            (FSkinProp.ICO_LIST, SourceFile.ICONS),
     CARD_IMAGE      (FSkinProp.ICO_CARD_IMAGE, SourceFile.ICONS),
+
     FOLDER          (FSkinProp.ICO_FOLDER, SourceFile.ICONS),
+    HDFOLDER        (FSkinProp.ICO_HDFOLDER, SourceFile.BUTTONS),
+
     SEARCH          (FSkinProp.ICO_SEARCH, SourceFile.ICONS),
+    HDSEARCH        (FSkinProp.ICO_HDSEARCH, SourceFile.BUTTONS),
+
     UNKNOWN         (FSkinProp.ICO_UNKNOWN, SourceFile.ICONS),
     LOGO            (FSkinProp.ICO_LOGO, SourceFile.ICONS),
+
     FLIPCARD        (FSkinProp.ICO_FLIPCARD, SourceFile.ICONS),
+    HDFLIPCARD        (FSkinProp.ICO_HDFLIPCARD, SourceFile.BUTTONS),
+
     FAVICON         (FSkinProp.ICO_FAVICON, SourceFile.ICONS),
     LOCK            (FSkinProp.ICO_LOCK, SourceFile.ICONS),
 
@@ -193,14 +265,19 @@ public enum FSkinImage implements FImage {
     CUR_TAB (FSkinProp.IMG_CUR_TAB, SourceFile.ICONS),
 
     //Editor images
-    STAR_OUTINE     (FSkinProp.IMG_STAR_OUTINE, SourceFile.ICONS),
+    STAR_OUTLINE    (FSkinProp.IMG_STAR_OUTLINE, SourceFile.ICONS),
+    HDSTAR_OUTLINE  (FSkinProp.IMG_HDSTAR_OUTLINE, SourceFile.BUTTONS),
     STAR_FILLED     (FSkinProp.IMG_STAR_FILLED, SourceFile.ICONS),
+    HDSTAR_FILLED   (FSkinProp.IMG_HDSTAR_FILLED, SourceFile.BUTTONS),
+
     ARTIFACT        (FSkinProp.IMG_ARTIFACT, SourceFile.MANAICONS),
     CREATURE        (FSkinProp.IMG_CREATURE, SourceFile.MANAICONS),
     ENCHANTMENT     (FSkinProp.IMG_ENCHANTMENT, SourceFile.MANAICONS),
     INSTANT         (FSkinProp.IMG_INSTANT, SourceFile.MANAICONS),
     LAND            (FSkinProp.IMG_LAND, SourceFile.MANAICONS),
+    LANDLOGO        (FSkinProp.IMG_LANDLOGO, SourceFile.MANAICONS),
     MULTI           (FSkinProp.IMG_MULTI, SourceFile.ICONS),
+    HDMULTI         (FSkinProp.IMG_HDMULTI, SourceFile.MANAICONS),
     PLANESWALKER    (FSkinProp.IMG_PLANESWALKER, SourceFile.MANAICONS),
     PACK            (FSkinProp.IMG_PACK, SourceFile.ICONS),
     SORCERY         (FSkinProp.IMG_SORCERY, SourceFile.MANAICONS),
@@ -228,6 +305,28 @@ public enum FSkinImage implements FImage {
     BTN_DISABLED_LEFT   (FSkinProp.IMG_BTN_DISABLED_LEFT, SourceFile.ICONS),
     BTN_DISABLED_CENTER (FSkinProp.IMG_BTN_DISABLED_CENTER, SourceFile.ICONS),
     BTN_DISABLED_RIGHT  (FSkinProp.IMG_BTN_DISABLED_RIGHT, SourceFile.ICONS),
+    //Hdbuttons
+    HDBTN_START_UP        (FSkinProp.IMG_HDBTN_START_UP, SourceFile.BTNSTART),
+    HDBTN_START_OVER      (FSkinProp.IMG_HDBTN_START_OVER, SourceFile.BTNSTART),
+    HDBTN_START_DOWN      (FSkinProp.IMG_HDBTN_START_DOWN, SourceFile.BTNSTART),
+    HDBTN_UP_LEFT         (FSkinProp.IMG_HDBTN_UP_LEFT, SourceFile.BUTTONS),
+    HDBTN_UP_CENTER       (FSkinProp.IMG_HDBTN_UP_CENTER, SourceFile.BUTTONS),
+    HDBTN_UP_RIGHT        (FSkinProp.IMG_HDBTN_UP_RIGHT, SourceFile.BUTTONS),
+    HDBTN_OVER_LEFT       (FSkinProp.IMG_HDBTN_OVER_LEFT, SourceFile.BUTTONS),
+    HDBTN_OVER_CENTER     (FSkinProp.IMG_HDBTN_OVER_CENTER, SourceFile.BUTTONS),
+    HDBTN_OVER_RIGHT      (FSkinProp.IMG_HDBTN_OVER_RIGHT, SourceFile.BUTTONS),
+    HDBTN_DOWN_LEFT       (FSkinProp.IMG_HDBTN_DOWN_LEFT, SourceFile.BUTTONS),
+    HDBTN_DOWN_CENTER     (FSkinProp.IMG_HDBTN_DOWN_CENTER, SourceFile.BUTTONS),
+    HDBTN_DOWN_RIGHT      (FSkinProp.IMG_HDBTN_DOWN_RIGHT, SourceFile.BUTTONS),
+    HDBTN_FOCUS_LEFT       (FSkinProp.IMG_HDBTN_FOCUS_LEFT, SourceFile.BUTTONS),
+    HDBTN_FOCUS_CENTER     (FSkinProp.IMG_HDBTN_FOCUS_CENTER, SourceFile.BUTTONS),
+    HDBTN_FOCUS_RIGHT      (FSkinProp.IMG_HDBTN_FOCUS_RIGHT, SourceFile.BUTTONS),
+    HDBTN_TOGGLE_LEFT       (FSkinProp.IMG_HDBTN_TOGGLE_LEFT, SourceFile.BUTTONS),
+    HDBTN_TOGGLE_CENTER     (FSkinProp.IMG_HDBTN_TOGGLE_CENTER, SourceFile.BUTTONS),
+    HDBTN_TOGGLE_RIGHT      (FSkinProp.IMG_HDBTN_TOGGLE_RIGHT, SourceFile.BUTTONS),
+    HDBTN_DISABLED_LEFT       (FSkinProp.IMG_HDBTN_DISABLED_LEFT, SourceFile.BUTTONS),
+    HDBTN_DISABLED_CENTER     (FSkinProp.IMG_HDBTN_DISABLED_CENTER, SourceFile.BUTTONS),
+    HDBTN_DISABLED_RIGHT      (FSkinProp.IMG_HDBTN_DISABLED_RIGHT, SourceFile.BUTTONS),
 
     //Foils
     FOIL_01     (FSkinProp.FOIL_01, SourceFile.FOILS),
@@ -253,18 +352,22 @@ public enum FSkinImage implements FImage {
     FOIL_19     (FSkinProp.FOIL_19, SourceFile.OLD_FOILS),
     FOIL_20     (FSkinProp.FOIL_20, SourceFile.OLD_FOILS),
 
+    //COMMANDER
+    IMG_ABILITY_COMMANDER       (FSkinProp.IMG_ABILITY_COMMANDER, SourceFile.ABILITIES),
     //ABILITY ICONS
     IMG_ABILITY_DEATHTOUCH     (FSkinProp.IMG_ABILITY_DEATHTOUCH, SourceFile.ABILITIES),
     IMG_ABILITY_DEFENDER       (FSkinProp.IMG_ABILITY_DEFENDER, SourceFile.ABILITIES),
     IMG_ABILITY_DOUBLE_STRIKE  (FSkinProp.IMG_ABILITY_DOUBLE_STRIKE, SourceFile.ABILITIES),
     IMG_ABILITY_FIRST_STRIKE   (FSkinProp.IMG_ABILITY_FIRST_STRIKE, SourceFile.ABILITIES),
     IMG_ABILITY_FEAR           (FSkinProp.IMG_ABILITY_FEAR, SourceFile.ABILITIES),
+    IMG_ABILITY_FLASH          (FSkinProp.IMG_ABILITY_FLASH, SourceFile.ABILITIES),
     IMG_ABILITY_FLYING         (FSkinProp.IMG_ABILITY_FLYING, SourceFile.ABILITIES),
     IMG_ABILITY_HASTE          (FSkinProp.IMG_ABILITY_HASTE, SourceFile.ABILITIES),
     IMG_ABILITY_HEXPROOF       (FSkinProp.IMG_ABILITY_HEXPROOF, SourceFile.ABILITIES),
     IMG_ABILITY_HORSEMANSHIP   (FSkinProp.IMG_ABILITY_HORSEMANSHIP, SourceFile.ABILITIES),
     IMG_ABILITY_INDESTRUCTIBLE (FSkinProp.IMG_ABILITY_INDESTRUCTIBLE, SourceFile.ABILITIES),
     IMG_ABILITY_INTIMIDATE     (FSkinProp.IMG_ABILITY_INTIMIDATE, SourceFile.ABILITIES),
+    IMG_ABILITY_LANDWALK       (FSkinProp.IMG_ABILITY_LANDWALK, SourceFile.ABILITIES),
     IMG_ABILITY_LIFELINK       (FSkinProp.IMG_ABILITY_LIFELINK, SourceFile.ABILITIES),
     IMG_ABILITY_MENACE         (FSkinProp.IMG_ABILITY_MENACE, SourceFile.ABILITIES),
     IMG_ABILITY_REACH          (FSkinProp.IMG_ABILITY_REACH, SourceFile.ABILITIES),
@@ -312,6 +415,8 @@ public enum FSkinImage implements FImage {
         TROPHIES(ForgeConstants.SPRITE_TROPHIES_FILE),
         ABILITIES(ForgeConstants.SPRITE_ABILITY_FILE),
         BORDERS(ForgeConstants.SPRITE_BORDER_FILE),
+        BUTTONS(ForgeConstants.SPRITE_BUTTONS_FILE),
+        BTNSTART(ForgeConstants.SPRITE_START_FILE),
         MANAICONS(ForgeConstants.SPRITE_MANAICONS_FILE),
         PLANAR_CONQUEST(ForgeConstants.SPRITE_PLANAR_CONQUEST_FILE);
 
@@ -361,7 +466,7 @@ public enum FSkinImage implements FImage {
             }
         }
         if (texture != null) {
-            if (sourceFile != SourceFile.ICONS) { //just return region for preferred file if not icons file
+            if (!(sourceFile == SourceFile.ICONS || sourceFile == SourceFile.MANAICONS)) { //just return region for preferred file if not icons file
                 textureRegion = new TextureRegion(texture, x, y, w, h);
                 return;
             }

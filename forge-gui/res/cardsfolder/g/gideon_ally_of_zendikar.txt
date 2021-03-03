@@ -2,10 +2,10 @@ Name:Gideon, Ally of Zendikar
 ManaCost:2 W W
 Types:Legendary Planeswalker Gideon
 Loyalty:4
-A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | Defined$ Self | Power$ 5 | Toughness$ 5 | Keywords$ Indestructible | Types$ Creature,Human,Soldier,Ally | SubAbility$ GideonPrevent | Planeswalker$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 5/5 Human Soldier Ally creature with indestructible that is still a planeswalker. Prevent all damage that would be dealt to him this turn.
+A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | Defined$ Self | Power$ 5 | Toughness$ 5 | Keywords$ Indestructible | Types$ Creature,Human,Soldier,Ally | SubAbility$ GideonPrevent | Planeswalker$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 5/5 Human Soldier Ally creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
 SVar:GideonPrevent:DB$ Pump | Defined$ Self | KW$ Prevent all damage that would be dealt to CARDNAME.
 A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenAmount$ 1 | TokenScript$ w_2_2_knight_ally | TokenOwner$ You | LegacyImage$ w 2 2 knight ally bfz | Planeswalker$ True | SpellDescription$ Create a 2/2 white Knight Ally creature token.
 A:AB$ Effect | Cost$ SubCounter<4/LOYALTY> | Name$ Emblem - Gideon, Ally of Zendikar | StaticAbilities$ STPump | Planeswalker$ True | Ultimate$ True | Duration$ Permanent | AILogic$ NeedCreatures:3 | SpellDescription$ You get an emblem with "Creatures you control get +1/+1."
 SVar:STPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gideon_ally_of_zendikar.jpg
-Oracle:[+1]: Until end of turn, Gideon, Ally of Zendikar becomes a 5/5 Human Soldier Ally creature with indestructible that is still a planeswalker. Prevent all damage that would be dealt to him this turn.\n[0]: Create a 2/2 white Knight Ally creature token.\n[-4]: You get an emblem with "Creatures you control get +1/+1."
+Oracle:[+1]: Until end of turn, Gideon, Ally of Zendikar becomes a 5/5 Human Soldier Ally creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.\n[0]: Create a 2/2 white Knight Ally creature token.\n[−4]: You get an emblem with "Creatures you control get +1/+1."

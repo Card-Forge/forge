@@ -1,9 +1,8 @@
 Name:Rapid Fire
 ManaCost:3 W
 Types:Instant
-Text:Cast CARDNAME only before blockers are declared.
-A:SP$ Pump | Cost$ 3 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | ActivationPhases$ Upkeep->Declare Attackers | SubAbility$ DBPump | SpellDescription$ Target creature gains first strike until end of turn. If it doesn't have rampage, that creature gains rampage 2 until end of turn. (Whenever this creature becomes blocked, it gets +2/+2 until end of turn for each creature blocking it beyond the first.)
-SVar:DBPump:DB$Pump | Defined$ Targeted | KW$ Rampage:2 | ConditionDefined$ Targeted | ConditionPresent$ Creature.withoutRampage
+Text:Cast this spell only before blockers are declared.
+A:SP$ Pump | Cost$ 3 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | ActivationPhases$ Upkeep->Declare Attackers | SubAbility$ DBPump | SpellDescription$ Target creature gains first strike until end of turn. If it doesn't have rampage, that creature gains rampage 2 until end of turn. (Whenever the creature becomes blocked, it gets +2/+2 until end of turn for each creature blocking it beyond the first.)
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Rampage:2 | ConditionDefined$ Targeted | ConditionPresent$ Creature.withoutRampage
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rapid_fire.jpg
-Oracle:Cast Rapid Fire only before blockers are declared.\nTarget creature gains first strike until end of turn. If it doesn't have rampage, that creature gains rampage 2 until end of turn. (Whenever this creature becomes blocked, it gets +2/+2 until end of turn for each creature blocking it beyond the first.)
+Oracle:Cast this spell only before blockers are declared.\nTarget creature gains first strike until end of turn. If it doesn't have rampage, that creature gains rampage 2 until end of turn. (Whenever the creature becomes blocked, it gets +2/+2 until end of turn for each creature blocking it beyond the first.)

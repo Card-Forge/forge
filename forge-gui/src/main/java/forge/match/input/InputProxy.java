@@ -110,7 +110,7 @@ public class InputProxy implements Observer {
     }
 
     private Card getCard(final CardView cardView) {
-        return controller.getGame().getCard(cardView);
+        return controller.getCard(cardView);
     }
 
     public final String getActivateAction(final CardView cardView) {

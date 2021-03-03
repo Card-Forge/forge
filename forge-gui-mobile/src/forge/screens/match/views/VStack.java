@@ -31,6 +31,7 @@ import forge.menu.FDropDown;
 import forge.menu.FMenuItem;
 import forge.menu.FMenuTab;
 import forge.menu.FPopupMenu;
+import forge.player.PlayerZoneUpdates;
 import forge.screens.match.MatchController;
 import forge.screens.match.TargetingOverlay;
 import forge.toolbox.FCardPanel;
@@ -39,6 +40,7 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Localizer;
+import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import forge.util.Utils;
 
@@ -55,6 +57,7 @@ public class VStack extends FDropDown {
     private StackInstanceDisplay activeItem;
     private StackItemView activeStackInstance;
     private Map<PlayerView, Object> playersWithValidTargets;
+    private PlayerZoneUpdates restorablePlayerZones = null;
 
     private int stackSize;
 
@@ -70,6 +73,8 @@ public class VStack extends FDropDown {
     private void revealTargetZones() {
         if (activeStackInstance == null) { return; }
 
+        PlayerView player = MatchController.instance.getCurrentPlayer();
+
         final Set<ZoneType> zones = new HashSet<>();
         playersWithValidTargets = new HashMap<>();
         for (final CardView c : activeStackInstance.getTargetCards()) {
@@ -79,14 +84,24 @@ public class VStack extends FDropDown {
             }
         }
         if (zones.isEmpty() || playersWithValidTargets.isEmpty()) { return; }
-        MatchController.instance.openZones(zones, playersWithValidTargets);
+        restorablePlayerZones = MatchController.instance.openZones(player, zones, playersWithValidTargets);
     }
 
     //restore old zones when active stack instance changes
     private void restoreOldZones() {
-        if (playersWithValidTargets == null) { return; }
-        MatchController.instance.restoreOldZones(playersWithValidTargets);
-        playersWithValidTargets = null;
+        if (restorablePlayerZones == null) { return; }
+        PlayerView player = MatchController.instance.getCurrentPlayer();
+        MatchController.instance.restoreOldZones(player, restorablePlayerZones);
+        restorablePlayerZones = null;
+    }
+
+    public void checkEmptyStack() { //sort the bug in client when desynch happens
+        final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
+        if(stack!=null)
+            if(isVisible() && stack.isEmpty()) { //visible stack but empty already
+                hide();
+                getMenuTab().setText(Localizer.getInstance().getMessage("lblStack") + " (" + 0 + ")");
+            }
     }
 
     @Override
@@ -272,7 +287,7 @@ public class VStack extends FDropDown {
                         protected void buildMenu() {
                             final String key = stackInstance.getKey();
                             final boolean autoYield = gui.shouldAutoYield(key);
-                            addItem(new FCheckBoxMenuItem("Auto-Yield", autoYield,
+                            addItem(new FCheckBoxMenuItem(Localizer.getInstance().getMessage("cbpAutoYieldMode"), autoYield,
                                     new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
@@ -285,7 +300,7 @@ public class VStack extends FDropDown {
                             }));
                             if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer().equals(player)) {
                                 final int triggerID = stackInstance.getSourceTrigger();
-                                addItem(new FCheckBoxMenuItem("Always Yes",
+                                addItem(new FCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysYes"),
                                         gui.shouldAlwaysAcceptTrigger(triggerID),
                                         new FEventHandler() {
                                     @Override
@@ -302,7 +317,7 @@ public class VStack extends FDropDown {
                                         }
                                     }
                                 }));
-                                addItem(new FCheckBoxMenuItem("Always No",
+                                addItem(new FCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysNo"),
                                         gui.shouldAlwaysDeclineTrigger(triggerID),
                                         new FEventHandler() {
                                     @Override
@@ -320,7 +335,7 @@ public class VStack extends FDropDown {
                                     }
                                 }));
                             }
-                            addItem(new FMenuItem("Zoom/Details", new FEventHandler() {
+                            addItem(new FMenuItem(Localizer.getInstance().getMessage("lblZoomOrDetails"), new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
                                     CardZoom.show(stackInstance.getSourceCard());
@@ -349,6 +364,7 @@ public class VStack extends FDropDown {
             float y = 0;
             float w = getWidth();
             float h = preferredHeight;
+            CardView sourceCard = stackInstance.getSourceCard();
 
             boolean needAlpha = (activeStackInstance != stackInstance);
             if (needAlpha) { //use alpha for non-active items on stack
@@ -367,12 +383,44 @@ public class VStack extends FDropDown {
 
             x += PADDING;
             y += PADDING;
-            CardRenderer.drawCardWithOverlays(g, stackInstance.getSourceCard(), x, y, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top);
+            CardRenderer.drawCardWithOverlays(g, sourceCard, x, y, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top, true, false, false);
 
             x += CARD_WIDTH + PADDING;
             w -= x + PADDING - BORDER_THICKNESS;
             h -= y + PADDING - BORDER_THICKNESS;
-            textRenderer.drawText(g, text, FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
+
+            String name = sourceCard.getName();
+            int index = text.indexOf(name);
+            String newtext = "";
+            String cId =  "(" + sourceCard.getId() + ")";
+            String optionalCostString = !stackInstance.getOptionalCostString().equals("") ? " ("+ stackInstance.getOptionalCostString() + ")" : "";
+
+            if (index == -1) {
+                newtext = TextUtil.fastReplace(text.trim(), "  ", " ");
+                newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext,"--","-"),"- -","-");
+                newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, " and .", ".")," .", ".");
+                newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, "- - ", "- "), ". .", ".");
+                newtext = TextUtil.fastReplace(newtext, "CARDNAME", name);
+                textRenderer.drawText(g, name + " " + (name.length() > 1 ? cId : "") + optionalCostString + "\n" + (newtext.length() > 1 ? newtext : ""),
+                        FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
+
+            } else {
+                String trimFirst = TextUtil.fastReplace("\n" + text.substring(0, index) + text.substring(index + name.length()), "- -", "-");
+                String trimSecond = TextUtil.fastReplace(trimFirst, name+" "+cId, name);
+                newtext = TextUtil.fastReplace(trimSecond, " "+cId, name);
+
+                if(newtext.equals("\n"+name))
+                    textRenderer.drawText(g, name + " " + cId + optionalCostString, FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
+                else {
+                    newtext = TextUtil.fastReplace(newtext, "  ", " ");
+                    newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext,name+" -","-"), "\n ", "\n");
+                    newtext = "\n"+ TextUtil.fastReplace(newtext.trim(),"--","-");
+                    newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, " and .", ".")," .", ".");
+                    newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, "- - ", "- "), ". .", ".");
+                    newtext = TextUtil.fastReplace(newtext, "CARDNAME", name);
+                    textRenderer.drawText(g, name+" "+cId + optionalCostString +newtext, FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
+                }
+            }
 
             g.endClip();
 

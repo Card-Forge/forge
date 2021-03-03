@@ -20,14 +20,11 @@ package forge.game.mana;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import forge.GameCommand;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.game.GlobalRuleChange;
-import forge.game.card.Card;
 import forge.game.event.EventValueChangeType;
-import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventManaPool;
 import forge.game.event.GameEventZone;
 import forge.game.phase.PhaseType;
@@ -169,23 +166,27 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         owner.updateManaForView();
     }
 
-    private void removeMana(final Mana mana) {
-        Collection<Mana> cm = floatingMana.get(mana.getColor());
-        if (cm.remove(mana)) {
+    private boolean removeMana(final Mana mana) {
+        if (floatingMana.remove(mana.getColor(), mana)) {
             owner.updateManaForView();
             owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Removed, mana));
+            return true;
         }
+        return false;
     }
 
     public final void payManaFromAbility(final SpellAbility saPaidFor, ManaCostBeingPaid manaCost, final SpellAbility saPayment) {
         // Mana restriction must be checked before this method is called
         final List<SpellAbility> paidAbs = saPaidFor.getPayingManaAbilities();
-        AbilityManaPart abManaPart = saPayment.getManaPartRecursive();
 
         paidAbs.add(saPayment); // assumes some part on the mana produced by the ability will get used
-        for (final Mana mana : abManaPart.getLastManaProduced()) {
-            if (tryPayCostWithMana(saPaidFor, manaCost, mana, false)) {
-                saPaidFor.getPayingMana().add(0, mana);
+
+        // need to get all mana from all ManaAbilities of the SpellAbility
+        for (AbilityManaPart mp : saPayment.getAllManaParts()) {
+            for (final Mana mana : mp.getLastManaProduced()) {
+                if (tryPayCostWithMana(saPaidFor, manaCost, mana, false)) {
+                    saPaidFor.getPayingMana().add(0, mana);
+                }
             }
         }
     }
@@ -219,47 +220,13 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         if (!manaCost.isNeeded(mana, this)) {
             return false;
         }
+        // only pay mana into manaCost when the Mana could be removed from the Mana pool
+        // if the mana wasn't in the mana pool then something is wrong
+        if (!removeMana(mana)) {
+            return false;
+        }
         manaCost.payMana(mana, this);
-        removeMana(mana);
 
-        if (test) {
-            // If just testing, should I be running special mana bonuses?
-            return true;
-        }
-
-        if (mana.addsNoCounterMagic(sa) && sa.getHostCard() != null) {
-            sa.getHostCard().setCanCounter(false);
-        }
-        if (sa.isSpell() && sa.getHostCard() != null) {
-            final Card host = sa.getHostCard();
-            if (mana.addsKeywords(sa) && mana.addsKeywordsType()
-                    && host.getType().hasStringType(mana.getManaAbility().getAddsKeywordsType())) {
-                final long timestamp = host.getGame().getNextTimestamp();
-                final List<String> kws = Arrays.asList(mana.getAddedKeywords().split(" & "));
-                host.addChangedCardKeywords(kws, null, false, false, timestamp);
-                if (mana.addsKeywordsUntil()) {
-                    final GameCommand untilEOT = new GameCommand() {
-                        private static final long serialVersionUID = -8285169579025607693L;
-
-                        @Override
-                        public void run() {
-                            host.removeChangedCardKeywords(timestamp);
-                            host.getGame().fireEvent(new GameEventCardStatsChanged(host));
-                        }
-                    };
-                    String until = mana.getManaAbility().getAddsKeywordsUntil();
-                    if ("UntilEOT".equals(until)) {
-                        host.getGame().getEndOfTurn().addUntil(untilEOT);
-                    }
-                }
-            }
-            if (mana.addsCounters(sa)) {
-                mana.getManaAbility().createETBCounters(host);
-            }
-            if (mana.triggersWhenSpent()) {
-                mana.getManaAbility().addTriggersWhenSpent(sa, host);
-            }
-        }
         return true;
     }
 
@@ -339,17 +306,11 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         p.getGame().fireEvent(new GameEventZone(ZoneType.Battlefield, p, EventValueChangeType.ComplexUpdate, null));
     }
 
-    public byte getPossibleColorUses(byte color) {
-        // Take the current conversion value, AND with restrictions to get mana usage
-        int rowIdx = ManaAtom.getIndexOfFirstManaType(color);
-        int matrixIdx = rowIdx < 0 ? identityMatrix.length - 1 : rowIdx;
-
-        byte colorUse = colorConversionMatrix[matrixIdx];
-        colorUse &= colorRestrictionMatrix[matrixIdx];
-        return colorUse;
-    }
-
     public boolean canPayForShardWithColor(ManaCostShard shard, byte color) {
+        if (shard.isOfKind(ManaAtom.COLORLESS) && color == ManaAtom.GENERIC) {
+            return false; // FIXME: testing Colorless against Generic is a recipe for disaster, but probably there should be a better fix.
+        }
+
         // TODO Debug this for Paying Gonti,
         byte line = getPossibleColorUses(color);
 

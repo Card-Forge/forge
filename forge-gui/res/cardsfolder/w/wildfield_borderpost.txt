@@ -1,9 +1,8 @@
 Name:Wildfield Borderpost
 ManaCost:1 G W
 Types:Artifact
+SVar:AltCost:Cost$ 1 Return<1/Land.Basic> | Description$ You may pay {1} and return a basic land you control to its owner's hand rather than pay this spell's mana cost.
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-SVar:AltCost:Cost$ 1 Return<1/Land.Basic> | Description$ You may pay {1} and return a basic land you control to its owner's hand rather than pay Wildfield Borderpost's mana cost.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wildfield_borderpost.jpg
-Oracle:You may pay {1} and return a basic land you control to its owner's hand rather than pay Wildfield Borderpost's mana cost.\nWildfield Borderpost enters the battlefield tapped.\n{T}: Add {G} or {W}.
+Oracle:You may pay {1} and return a basic land you control to its owner's hand rather than pay this spell's mana cost.\nWildfield Borderpost enters the battlefield tapped.\n{T}: Add {G} or {W}.

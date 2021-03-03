@@ -1,0 +1,8 @@
+Name:Cunning Nightbonder
+ManaCost:U/B U/B
+Types:Creature Human Rogue
+PT:2/2
+K:Flash
+S:Mode$ ReduceCost | ValidCard$ Card.hasKeywordFlash | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Spells with flash you cast cost {1} less to cast and can't be countered.
+S:Mode$ Continuous | Affected$ Card.hasKeywordFlash+YouCtrl | AffectedZone$ Stack | AddHiddenKeyword$ CARDNAME can't be countered. | Secondary$ True | Description$ Spells with flash you cast cost {1} less to cast and can't be countered.
+Oracle:Flash\nSpells with flash you cast cost {1} less to cast and can't be countered.

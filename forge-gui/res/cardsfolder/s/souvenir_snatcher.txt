@@ -1,0 +1,9 @@
+Name:Souvenir Snatcher
+ManaCost:4 U
+Types:Creature Bird
+PT:4/4
+K:Mutate:5 U
+K:Flying
+T:Mode$ Mutates | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ Whenever this creature mutates, gain control of target noncreature artifact.
+SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target artifact
+Oracle:Mutate {5}{U} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nFlying\nWhenever this creature mutates, gain control of target noncreature artifact.

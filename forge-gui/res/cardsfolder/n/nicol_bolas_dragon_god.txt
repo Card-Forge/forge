@@ -8,5 +8,5 @@ SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield,Hand | Destination$ Exile
 AI:RemoveDeck:Random
 A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | Planeswalker$ True | SpellDescription$ Destroy target creature or planeswalker.
 A:AB$ LosesGame | Cost$ SubCounter<8/LOYALTY> | Defined$ Player.Opponent+controlsLegendary.Creature_EQ0+controlsPlaneswalker_LE0 | Planeswalker$ True | Ultimate$ True | SpellDescription$ Each opponent who doesn't control a legendary creature or planeswalker loses the game.
-Oracle:Nicol Bolas, Dragon-God has all loyalty abilities of all other planeswalkers on the battlefield.\n[+1]: You draw a card. Each opponent exiles a card from their hand or a permanent they control. [-3]: Destroy target creature or planeswalker.\n[-8]: Each opponent who doesn't control a legendary creature or planeswalker loses the game.
+Oracle:Nicol Bolas, Dragon-God has all loyalty abilities of all other planeswalkers on the battlefield.\n[+1]: You draw a card. Each opponent exiles a card from their hand or a permanent they control.\n[−3]: Destroy target creature or planeswalker.\n[−8]: Each opponent who doesn't control a legendary creature or planeswalker loses the game.
 

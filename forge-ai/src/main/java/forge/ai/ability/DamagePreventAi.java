@@ -46,7 +46,7 @@ public class DamagePreventAi extends SpellAbilityAi {
             return false;
         }
 
-        if (!ComputerUtilCost.checkRemoveCounterCost(cost, hostCard)) {
+        if (!ComputerUtilCost.checkRemoveCounterCost(cost, hostCard, sa)) {
             return false;
         }
 
@@ -139,15 +139,15 @@ public class DamagePreventAi extends SpellAbilityAi {
                 ComputerUtilCard.sortByEvaluateCreature(combatants);
 
                 for (final Card c : combatants) {
-                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && tcs.getNumTargeted() < tgt.getMaxTargets(hostCard, sa)) {
+                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && tcs.size() < tgt.getMaxTargets(hostCard, sa)) {
                     	tcs.add(c);
                         chance = true;
                     }
                 }
             }
         }
-        if (tgt != null && sa.hasParam("DividedAsYouChoose") && sa.getTargets() != null && !sa.getTargets().getTargets().isEmpty()) {
-            tgt.addDividedAllocation(sa.getTargets().getTargets().get(0), AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa));
+        if (sa.usesTargeting() && sa.isDividedAsYouChoose() && !sa.getTargets().isEmpty()) {
+            sa.addDividedAllocation(sa.getTargets().get(0), AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa));
         }
 
         return chance;
@@ -179,12 +179,11 @@ public class DamagePreventAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private boolean preventDamageMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
         // filter AIs battlefield by what I can target
         final Game game = ai.getGame();
         CardCollectionView targetables = game.getCardsIn(ZoneType.Battlefield);
-        targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, sa.getHostCard(), sa);
+        targetables = CardLists.getTargetableCards(targetables, sa);
         final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);
         Card target = null;
 
@@ -215,8 +214,8 @@ public class DamagePreventAi extends SpellAbilityAi {
             target = ComputerUtilCard.getCheapestPermanentAI(targetables, sa, true);
         }
         sa.getTargets().add(target);
-        if (sa.hasParam("DividedAsYouChoose")) {
-            tgt.addDividedAllocation(target, AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa));
+        if (sa.isDividedAsYouChoose()) {
+            sa.addDividedAllocation(target, AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa));
         }
         return true;
     }

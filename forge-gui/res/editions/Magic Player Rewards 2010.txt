@@ -1,0 +1,16 @@
+[metadata]
+Code=P10
+Date=2010-01-01
+Name=Magic Player Rewards 2010
+Type=Reprint
+
+[cards]
+1 R Lightning Bolt
+2 R Cancel
+3 R Sign in Blood
+4 R Infest
+5 R Volcanic Fallout
+6 R Celestial Purge
+7 R Bituminous Blast
+8 R Burst Lightning
+9 R Harrow

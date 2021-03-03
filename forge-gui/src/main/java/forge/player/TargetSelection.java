@@ -6,23 +6,28 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.player;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameEntityView;
+import forge.game.GameEntityViewMap;
 import forge.game.GameObject;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
@@ -36,6 +41,7 @@ import forge.match.input.InputSelectTargets;
 import forge.util.Aggregates;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +50,7 @@ import java.util.Map;
  * <p>
  * Target_Selection class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: TargetSelection.java 25148 2014-03-12 08:28:52Z swordshine $
  */
@@ -63,18 +69,22 @@ public class TargetSelection {
 
     private boolean bTargetingDone = false;
 
-    public final boolean chooseTargets(Integer numTargets) {
-        final TargetRestrictions tgt = getTgt();
-        final boolean canTarget = tgt != null && tgt.doesTarget();
-        if (!canTarget) {
+    private boolean isMandatory() {
+        // even if its an optionalTrigger, the targeting is still mandatory
+        return ability.isTrigger() || getTgt().getMandatory();
+    }
+
+    public final boolean chooseTargets(Integer numTargets, Collection<Integer> divisionValues, Predicate<GameObject> filter, boolean optional) {
+        if (!ability.usesTargeting()) {
             throw new RuntimeException("TargetSelection.chooseTargets called for ability that does not target - " + ability);
         }
-        
-        // Number of targets is explicitly set only if spell is being redirected (ex. Swerve or Redirect) 
-        final int minTargets = numTargets != null ? numTargets.intValue() : tgt.getMinTargets(ability.getHostCard(), ability);
-        final int maxTargets = numTargets != null ? numTargets.intValue() : tgt.getMaxTargets(ability.getHostCard(), ability);
+        final TargetRestrictions tgt = getTgt();
+
+        // Number of targets is explicitly set only if spell is being redirected (ex. Swerve or Redirect)
+        final int minTargets = numTargets != null ? numTargets.intValue() : ability.getMinTargets();
+        final int maxTargets = numTargets != null ? numTargets.intValue() : ability.getMaxTargets();
         //final int maxTotalCMC = tgt.getMaxTotalCMC(ability.getHostCard(), ability);
-        final int numTargeted = ability.getTargets().getNumTargeted();
+        final int numTargeted = ability.getTargets().size();
         final boolean isSingleZone = ability.getTargetRestrictions().isSingleZone();
 
         final boolean hasEnoughTargets = minTargets == 0 || numTargeted >= minTargets;
@@ -86,7 +96,7 @@ public class TargetSelection {
             return false;
         }
 
-        if (this.bTargetingDone && hasEnoughTargets || hasAllTargets || tgt.isDividedAsYouChoose() && tgt.getStillToDivide() == 0) {
+        if (this.bTargetingDone && hasEnoughTargets || hasAllTargets || ability.isDividedAsYouChoose() && divisionValues == null && ability.getStillToDivide() == 0) {
             return true;
         }
 
@@ -95,28 +105,31 @@ public class TargetSelection {
             // Cancel ability if there aren't any valid Candidates
             return false;
         }
-        if (tgt.getMandatory() && !hasCandidates && hasEnoughTargets) {
+        if (isMandatory() && !hasCandidates && hasEnoughTargets) {
             // Mandatory target selection, that has no candidates but enough targets (Min == 0, but no choices)
             return true;
         }
-        
-        final List<ZoneType> zone = tgt.getZone();
-        final boolean mandatory = tgt.getMandatory() && hasCandidates;
-        
+
+        final List<ZoneType> zones = tgt.getZone();
+        final boolean mandatory = isMandatory() && hasCandidates && !optional;
+
         final boolean choiceResult;
-        final boolean random = tgt.isRandomTarget();
-        if (random) {
+        if (tgt.isRandomTarget() && numTargets == null) {
             final List<GameEntity> candidates = tgt.getAllCandidates(this.ability, true);
             final GameObject choice = Aggregates.random(candidates);
             return ability.getTargets().add(choice);
         }
-        else if (zone.size() == 1 && zone.get(0) == ZoneType.Stack) {
+        else if (zones.size() == 1 && zones.get(0) == ZoneType.Stack) {
             // If Zone is Stack, the choices are handled slightly differently.
             // Handle everything inside function due to interaction with StackInstance
             return this.chooseCardFromStack(mandatory);
         }
         else {
-            final List<Card> validTargets = CardUtil.getValidCardsToTarget(tgt, ability);
+            List<Card> validTargets = CardUtil.getValidCardsToTarget(tgt, ability);
+            if (filter != null) {
+                validTargets = new CardCollection(Iterables.filter(validTargets, filter));
+            }
+
             // single zone
             if (isSingleZone) {
                 final List<Card> removeCandidates = new ArrayList<>();
@@ -143,8 +156,8 @@ public class TargetSelection {
                 //if only one valid target card for triggered ability, auto-target that card
                 //only do this for triggered abilities to prevent auto-targeting when user chooses
                 //to play a spell or activat an ability
-                if (tgt.isDividedAsYouChoose()) {
-                    tgt.addDividedAllocation(validTargets.get(0), tgt.getStillToDivide());
+                if (ability.isDividedAsYouChoose()) {
+                    ability.addDividedAllocation(validTargets.get(0), ability.getStillToDivide());
                 }
                 return ability.getTargets().add(validTargets.get(0));
             }
@@ -152,25 +165,30 @@ public class TargetSelection {
             for (Card card : validTargets) {
                 playersWithValidTargets.put(PlayerView.get(card.getController()), null);
             }
-            if (controller.getGui().openZones(zone, playersWithValidTargets)) {
-                InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory);
+
+            PlayerView playerView = controller.getLocalPlayerView();
+            PlayerZoneUpdates playerZoneUpdates = controller.getGui().openZones(playerView, zones, playersWithValidTargets);
+            if (!zones.contains(ZoneType.Stack)) {
+                InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory, divisionValues, filter);
                 inp.showAndWait();
                 choiceResult = !inp.hasCancelled();
                 bTargetingDone = inp.hasPressedOk();
-                controller.getGui().restoreOldZones(playersWithValidTargets);
+                controller.getGui().restoreOldZones(playerView, playerZoneUpdates);
             }
             else {
                 // for every other case an all-purpose GuiChoose
                 choiceResult = this.chooseCardFromList(validTargets, true, mandatory);
             }
         }
-        // some inputs choose cards one-by-one and need to be called again 
-        return choiceResult && chooseTargets(numTargets);
+        // some inputs choose cards one-by-one and need to be called again
+        return choiceResult && chooseTargets(numTargets, divisionValues, filter, optional);
     }
 
     private final boolean chooseCardFromList(final List<Card> choices, final boolean targeted, final boolean mandatory) {
         // Send in a list of valid cards, and popup a choice box to target
         final Game game = ability.getActivatingPlayer().getGame();
+
+        GameEntityViewMap<Card, CardView> gameCacheChooseCard = GameEntityView.getMap(choices);
 
         final List<CardView> crdsBattle  = Lists.newArrayList();
         final List<CardView> crdsExile   = Lists.newArrayList();
@@ -221,11 +239,11 @@ public class TargetSelection {
         }
 
         final String msgDone = "[FINISH TARGETING]";
-        if (this.getTgt().isMinTargetsChosen(this.ability.getHostCard(), this.ability)) {
+        if (ability.isMinTargetChosen()) {
             // is there a more elegant way of doing this?
             choicesFiltered.add(msgDone);
         }
-        
+
         Object chosen = null;
         if (!choices.isEmpty() && mandatory) {
             chosen = controller.getGui().one(getTgt().getVTSelection(), choicesFiltered);
@@ -242,7 +260,25 @@ public class TargetSelection {
         }
 
         if (chosen instanceof CardView) {
-            ability.getTargets().add(game.getCard((CardView) chosen));
+            if (!gameCacheChooseCard.containsKey(chosen)) {
+                return false;
+            }
+            if (((CardView) chosen).getZone().equals(ZoneType.Stack)) {
+                for (final SpellAbilityStackInstance si : game.getStack()) {
+                    // avoid peeking own SI so target is not changed
+                    if (si.compareToSpellAbility(ability)) {
+                        continue;
+                    }
+                    SpellAbility abilityOnStack = si.getSpellAbility(true);
+                    if (abilityOnStack.getHostCard().getView().equals(chosen)) {
+                        ability.getTargets().add(abilityOnStack);
+                        break;
+                    }
+                }
+            }
+            else {
+                ability.getTargets().add(gameCacheChooseCard.get((CardView) chosen));
+            }
         }
         return true;
     }
@@ -256,24 +292,24 @@ public class TargetSelection {
 
         final Game game = ability.getActivatingPlayer().getGame();
         for (final SpellAbilityStackInstance si : game.getStack()) {
-            SpellAbility abilityOnStack = si.getSpellAbility(true);
-            if (ability.equals(abilityOnStack)) {
-                // By peeking at stack item, target is set to its SI state. So set it back before adding targets
-                ability.resetTargets();
+            // avoid peeking own SI so target is not changed
+            if (si.compareToSpellAbility(ability)) {
+                continue;
             }
-            else if (ability.canTargetSpellAbility(abilityOnStack)) {
+            SpellAbility abilityOnStack = si.getSpellAbility(true);
+            if (ability.canTargetSpellAbility(abilityOnStack)) {
                 stackItemViewCache.put(si.getView(), si);
                 selectOptions.add(si.getView());
             }
         }
 
         while(!bTargetingDone) {
-            if (tgt.isMaxTargetsChosen(this.ability.getHostCard(), this.ability)) {
+            if (ability.isMaxTargetChosen()) {
                 bTargetingDone = true;
                 return true;
             }
 
-            if (!selectOptions.contains("[FINISH TARGETING]") && tgt.isMinTargetsChosen(this.ability.getHostCard(), this.ability)) {
+            if (!selectOptions.contains("[FINISH TARGETING]") && ability.isMinTargetChosen()) {
                 selectOptions.add("[FINISH TARGETING]");
             }
 
@@ -289,7 +325,7 @@ public class TargetSelection {
                 if (madeChoice instanceof StackItemView) {
                     ability.getTargets().add(stackItemViewCache.get(madeChoice).getSpellAbility(true));
                 }
-                else {// 'FINISH TARGETING' chosen 
+                else {// 'FINISH TARGETING' chosen
                     bTargetingDone = true;
                 }
             }

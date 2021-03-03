@@ -2,7 +2,7 @@ Name:Tidal Warrior
 ManaCost:U
 Types:Creature Merfolk Warrior
 PT:1/1
-A:AB$ Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Island | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True | SpellDescription$ Target land becomes an Island until end of turn.
+A:AB$ Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Island | RemoveLandTypes$ True | SpellDescription$ Target land becomes an Island until end of turn.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_warrior.jpg
 Oracle:{T}: Target land becomes an Island until end of turn.

@@ -1,9 +1,8 @@
 Name:Coerced Confession
 ManaCost:4 UB
 Types:Sorcery
-A:SP$ Mill | Cost$ 4 UB | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | RememberMilled$ True | SubAbility$ DBDraw | SpellDescription$ Target player puts the top four cards of their library into their graveyard. You draw a card for each creature card put into a graveyard this way.
+A:SP$ Mill | Cost$ 4 UB | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | RememberMilled$ True | SubAbility$ DBDraw | SpellDescription$ Target player mills four cards. You draw a card for each creature card put into a graveyard this way.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/coerced_confession.jpg
-Oracle:Target player puts the top four cards of their library into their graveyard. You draw a card for each creature card put into that graveyard this way.
+Oracle:Target player mills four cards. You draw a card for each creature card put into their graveyard this way.

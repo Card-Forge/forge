@@ -2,8 +2,9 @@ Name:Strength of the Tajuru
 ManaCost:X G G
 Types:Instant
 K:Multikicker:1
-A:SP$ PutCounter | CounterType$ P1P1 | CounterNum$ X | Cost$ X G G | Announce$ Multikicker,X | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ TargetsNum | TargetMax$ TargetsNum | References$ X,TargetsNum | SpellDescription$ Choose target creature, then choose another target creature for each time CARDNAME was kicked. Put X +1/+1 counters on each of them.
+A:SP$ PutCounter | CounterType$ P1P1 | CounterNum$ X | Cost$ X G G | Announce$ Multikicker,X | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ TargetsNum | TargetMax$ TargetsNum | References$ X,TargetsNum | SpellDescription$ Choose target creature, then choose another target creature for each time this spell was kicked. Put X +1/+1 counters on each of them.
 SVar:X:Count$xPaid
 SVar:TargetsNum:Count$TimesKicked/Plus.1
+DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stength_of_the_tajuru.jpg
-Oracle:Multikicker {1} (You may pay an additional {1} any number of times as you cast this spell.)\nChoose target creature, then choose another target creature for each time Strength of the Tajuru was kicked. Put X +1/+1 counters on each of them.
+Oracle:Multikicker {1} (You may pay an additional {1} any number of times as you cast this spell.)\nChoose target creature, then choose another target creature for each time this spell was kicked. Put X +1/+1 counters on each of them.

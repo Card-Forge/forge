@@ -1,0 +1,136 @@
+[metadata]
+Code=KHC
+Date=2021-02-05
+Name=Kaldheim Commander
+Type=Other
+
+[cards]
+1 M Lathril, Blade of the Elves
+2 M Ranar the Ever-Watchful
+3 R Cosmic Intervention
+4 R Hero of Bretagard
+5 R Stoic Farmer
+6 R Sage of the Beyond
+7 R Spectral Deluge
+8 R Tales of the Ancestors
+9 R Pact of the Serpent
+10 R Ruthless Winnower
+11 R Serpent's Soul-Jar
+12 R Bounty of Skemfar
+13 R Crown of Skemfar
+14 R Wolverine Riders
+15 R Elderfang Venom
+16 R Ethereal Valkyrie
+17 R Angel of Finality
+18 M Angel of Serenity
+19 U Banishing Light
+20 R Cleansing Nova
+21 U Cloudgoat Ranger
+22 R Eerie Interlude
+23 U Evangel of Heliod
+24 U Flickerwisp
+25 R Geist-Honored Monk
+26 U Ghostly Prison
+27 U Goldnight Commander
+28 C Kor Cartographer
+29 R Marshal's Anthem
+30 U Momentary Blink
+31 R Restoration Angel
+32 U Return to Dust
+33 R Storm Herd
+34 M Sun Titan
+35 U Wall of Omens
+36 M Arcane Artisan
+37 R Curse of the Swine
+38 R Day of the Dragons
+39 C Ghostly Flicker
+40 M Inspired Sphinx
+41 C Mist Raven
+42 U Mulldrifter
+43 C Sea Gate Oracle
+44 R Synthetic Destiny
+45 U Whirler Rogue
+46 U Windfall
+47 U Ambition's Cost
+48 C Eyeblight Cullers
+49 U Eyeblight Massacre
+50 U Lys Alana Scarblade
+51 U Miara, Thorn of the Glade
+52 U Pride of the Perfect
+53 U Prowess of the Fair
+54 R Beast Whisperer
+55 R Cultivator of Blades
+56 R Dwynen, Gilt-Leaf Daen
+57 R Elvish Archdruid
+58 C Elvish Mystic
+59 U Elvish Promenade
+60 C Elvish Rejuvenator
+61 R End-Raze Forerunners
+62 C Farhaven Elf
+63 R Harvest Season
+64 R Imperious Perfect
+65 U Jagged-Scar Archers
+66 U Llanowar Tribe
+67 C Lys Alana Huntmaster
+68 R Marwyn, the Nurturer
+69 R Masked Admirers
+70 U Nullmage Shepherd
+71 U Numa, Joraga Chieftain
+72 U Reclamation Sage
+73 R Rhys the Exiled
+74 C Springbloom Druid
+75 U Sylvan Messenger
+76 C Timberwatch Elf
+77 U Voice of Many
+78 R Voice of the Woods
+79 U Wirewood Channeler
+80 C Wood Elves
+81 U Abomination of Llanowar
+82 R Brago, King Eternal
+83 R Casualties of War
+84 U Cloudblazer
+85 U Empyrean Eagle
+86 U Golgari Findbroker
+87 U Migratory Route
+88 U Mistmeadow Witch
+89 U Moldervine Reclamation
+90 U Poison-Tip Archer
+91 U Putrefy
+92 U Shaman of the Pack
+93 U Soulherder
+94 U Thunderclap Wyvern
+95 U Twinblade Assassins
+96 C Arcane Signet
+97 U Azorius Signet
+98 U Burnished Hart
+99 C Commander's Sphere
+100 C Marble Diamond
+101 U Meteor Golem
+102 C Mind Stone
+103 C Sky Diamond
+104 U Sol Ring
+105 U Swiftfoot Boots
+106 U Azorius Chancery
+107 C Azorius Guildgate
+108 C Command Tower
+109 U Cryptic Caves
+110 U Foul Orchard
+111 C Golgari Guildgate
+112 U Golgari Rot Farm
+113 C Jungle Hollow
+114 C Meandering River
+115 U Myriad Landscape
+116 C Opal Palace
+117 C Path of Ancestry
+118 U Sejiri Refuge
+119 C Tranquil Cove
+
+[tokens]
+c_1_1_a_servo
+c_1_1_a_thopter_flying
+g_2_2_boar
+g_7_7_elemental_trample
+w_1_1_bird_flying
+w_1_1_kithkin_soldier
+w_1_1_soldier
+w_1_1_pegasus_flying

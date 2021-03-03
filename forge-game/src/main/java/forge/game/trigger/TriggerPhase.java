@@ -46,7 +46,7 @@ public class TriggerPhase extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerPhase(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerPhase(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -63,8 +63,8 @@ public class TriggerPhase extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
     }
 
     @Override

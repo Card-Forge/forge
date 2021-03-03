@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Creature Serpent
 PT:*/*
 S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Islands you control.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of Islands you control.
 SVar:X:Count$Valid Island.YouCtrl
 SVar:BuffedBy:Island
 SVar:NeedsToPlayVar:X GE3

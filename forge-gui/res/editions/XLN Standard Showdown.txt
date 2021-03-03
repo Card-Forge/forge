@@ -1,0 +1,12 @@
+[metadata]
+Code=PSS2
+Date=2017-09-29
+Name=XLN Standard Showdown
+Type=Reprint
+
+[cards]
+1 R Plains
+2 R Island
+3 R Swamp
+4 R Mountain
+5 R Forest

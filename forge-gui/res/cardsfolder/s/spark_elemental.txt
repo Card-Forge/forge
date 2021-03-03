@@ -9,4 +9,4 @@ SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
 SVar:EndOfTurnLeavePlay:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73579.jpg
-Oracle:Trample, haste\nAt the beginning of the end step, sacrifice Spark Elemental.
+Oracle:Trample, haste (This creature can deal excess combat damage to the player or planeswalker it's attacking. This creature can attack and {T} as soon as it comes under your control.)\nAt the beginning of the end step, sacrifice Spark Elemental.

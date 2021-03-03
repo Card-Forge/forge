@@ -1,0 +1,16 @@
+[metadata]
+Code=PFRF
+Date=2015-01-24
+Name=Fate Reforged Promos
+Type=Reprint
+
+[cards]
+11 R Dragonscale General
+50 R Sage-Eye Avengers
+54 R Supplant Form
+62 R Archfiend of Depravity
+74 U Mardu Shadowspear
+99 R Flamerush Rider
+137 R Sandsteppe Mastodon
+138 R Shamanic Revelation
+142 R Temur War Shaman

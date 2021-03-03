@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature or land
 A:SP$ Attach | Cost$ 2 B B | ValidTgts$ Creature,Land | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerDescription$ When enchanted permanent becomes tapped, destroy it.
-SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCard
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCardLKICopy
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brink_of_disaster.jpg
 Oracle:Enchant creature or land\nWhen enchanted permanent becomes tapped, destroy it.

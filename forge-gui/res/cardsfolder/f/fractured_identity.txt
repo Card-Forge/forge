@@ -5,7 +5,7 @@ A:SP$ ChangeZone | Cost$ 3 W U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Selec
 SVar:DBRememberCtrl:DB$ Pump | RememberObjects$ TargetedController | SubAbility$ DBRepeat
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player.IsNotRemembered | RepeatSubAbility$ DBForget | SubAbility$ DBCleanup
 SVar:DBForget:DB$ Cleanup | ForgetDefinedPlayer$ TargetedController | SubAbility$ DBClone
-SVar:DBClone:DB$ CopyPermanent | Defined$ Remembered | Controller$ Player.IsRemembered
+SVar:DBClone:DB$ CopyPermanent | Defined$ DirectRemembered | Controller$ Player.IsRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fractured_identity.jpg
 Oracle:Exile target nonland permanent. Each player other than its controller creates a token that's a copy of it.

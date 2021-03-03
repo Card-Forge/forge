@@ -19,11 +19,14 @@ package forge.game.replacement;
 
 import forge.game.Game;
 import forge.game.TriggerReplacementBase;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.spellability.SpellAbility;
+import forge.util.CardTranslation;
+import forge.util.Lang;
 import forge.util.TextUtil;
 
 import java.util.List;
@@ -164,9 +167,8 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      */
     public final ReplacementEffect copy(final Card host, final boolean lki) {
         final ReplacementEffect res = (ReplacementEffect) clone();
-        for (String key : getSVars()) {
-            res.setSVar(key, getSVar(key));
-        }
+
+        copyHelper(res, host);
 
         final SpellAbility sa = this.getOverridingAbility();
         if (sa != null) {
@@ -181,8 +183,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             res.setHasRun(false);
             res.setOtherChoices(null);
         }
-
-        res.setHostCard(host);
 
         res.setActiveZone(validHostZones);
         res.setLayer(getLayer());
@@ -213,6 +213,22 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         this.layer = layer0;
     }
 
+    public String getDescription() {
+        if (hasParam("Description") && !this.isSuppressed()) {
+            String desc = AbilityUtils.applyDescriptionTextChangeEffects(getParam("Description"), this);
+            String currentName = getHostCard().getName();
+            desc = CardTranslation.translateSingleDescriptionText(desc, currentName);
+            desc = TextUtil.fastReplace(desc, "CARDNAME", CardTranslation.getTranslatedName(currentName));
+            desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
+            if (desc.contains("EFFECTSOURCE")) {
+                desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().toString());
+            }
+            return desc;
+        } else {
+            return "";
+        }
+    }
+
     /**
      * To string.
      *
@@ -220,15 +236,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      */
     @Override
     public String toString() {
-        if (hasParam("Description") && !this.isSuppressed()) {
-            String desc = AbilityUtils.applyDescriptionTextChangeEffects(getParam("Description"), this);
-            if (desc.contains("CARDNAME")) {
-                desc = TextUtil.fastReplace(desc, "CARDNAME", getHostCard().toString());
-            }
-            return desc;
-        } else {
-            return "";
-        }
+        return getHostCard().toString() + " - " + getDescription();
     }
 
     /** {@inheritDoc} */
@@ -263,5 +271,14 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
     void setMode(ReplacementType mode) {
         this.mode = mode;
+    }
+
+    public SpellAbility ensureAbility() {
+        SpellAbility sa = getOverridingAbility();
+        if (sa == null && hasParam("ReplaceWith")) {
+            sa = AbilityFactory.getAbility(getHostCard(), getParam("ReplaceWith"));
+            setOverridingAbility(sa);
+        }
+        return sa;
     }
 }

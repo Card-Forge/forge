@@ -35,6 +35,9 @@ public class AddPhaseEffect extends SpellAbilityEffect {
                 followingExtra = PhaseType.smartValueOf(followedBy);
             }
             PhaseType followingAfter = extra.equals(PhaseType.COMBAT_BEGIN) ? PhaseType.COMBAT_END : extra;
+            if (sa.hasParam("AdditionalBeginningPhase")) {
+                followingAfter = extra.equals(PhaseType.UNTAP) ? PhaseType.DRAW : extra;
+            }
             phaseHandler.addExtraPhase(followingAfter, followingExtra);
         }
     }

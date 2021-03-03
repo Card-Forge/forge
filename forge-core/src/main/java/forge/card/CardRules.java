@@ -222,7 +222,12 @@ public final class CardRules implements ICardCharacteristics {
 
     public boolean canBeBrawlCommander() {
         CardType type = mainPart.getType();
-        return (type.isLegendary() && type.isCreature()) || type.isPlaneswalker();
+        return type.isLegendary() && (type.isCreature() || type.isPlaneswalker());
+    }
+
+    public boolean canBeTinyLeadersCommander() {
+        CardType type = mainPart.getType();
+        return type.isLegendary() && (type.isCreature() || type.isPlaneswalker());
     }
 
     public String getMeldWith() {
@@ -286,6 +291,7 @@ public final class CardRules implements ICardCharacteristics {
         // fields to build CardAiHints
         private boolean removedFromAIDecks = false;
         private boolean removedFromRandomDecks = false;
+        private boolean removedFromNonCommanderDecks = false;
         private DeckHints hints = null;
         private DeckHints needs = null;
         private DeckHints has = null;
@@ -305,6 +311,7 @@ public final class CardRules implements ICardCharacteristics {
 
             this.removedFromAIDecks = false;
             this.removedFromRandomDecks = false;
+            this.removedFromNonCommanderDecks = false;
             this.needs = null;
             this.hints = null;
             this.has = null;
@@ -319,7 +326,7 @@ public final class CardRules implements ICardCharacteristics {
          * @return the card
          */
         public final CardRules getCard() {
-            CardAiHints cah = new CardAiHints(removedFromAIDecks, removedFromRandomDecks, hints, needs, has);
+            CardAiHints cah = new CardAiHints(removedFromAIDecks, removedFromRandomDecks, removedFromNonCommanderDecks, hints, needs, has);
             faces[0].assignMissingFields();
             if (null != faces[1]) faces[1].assignMissingFields();
             final CardRules result = new CardRules(faces, altMode, cah);
@@ -372,6 +379,7 @@ public final class CardRules implements ICardCharacteristics {
                         if ( "RemoveDeck".equals(variable) ) {
                             this.removedFromAIDecks = "All".equalsIgnoreCase(value);
                             this.removedFromRandomDecks = "Random".equalsIgnoreCase(value);
+                            this.removedFromNonCommanderDecks = "NonCommander".equalsIgnoreCase(value);
                         }
                     } else if ("AlternateMode".equals(key)) {
                         //System.out.println(faces[curFace].getName());
@@ -479,7 +487,7 @@ public final class CardRules implements ICardCharacteristics {
                     if ("T".equals(key)) {
                         this.faces[this.curFace].addTrigger(value);
                     } else if ("Types".equals(key)) {
-                        this.faces[this.curFace].setType(CardType.parse(value));
+                        this.faces[this.curFace].setType(CardType.parse(value, false));
                     } else if ("Text".equals(key) && !"no text".equals(value) && StringUtils.isNotBlank(value)) {
                         this.faces[this.curFace].setNonAbilityText(value);
                     }
@@ -526,12 +534,10 @@ public final class CardRules implements ICardCharacteristics {
             public final ManaCostShard next() {
                 final String unparsed = st.nextToken();
                 // System.out.println(unparsed);
-                try {
-                    int iVal = Integer.parseInt(unparsed);
-                    this.genericCost += iVal;
+                if (StringUtils.isNumeric(unparsed)) {
+                    this.genericCost += Integer.parseInt(unparsed);
                     return null;
                 }
-                catch (NumberFormatException nex) { }
 
                 return ManaCostShard.parseNonGeneric(unparsed);
             }
@@ -548,10 +554,10 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public static CardRules getUnsupportedCardNamed(String name) {
-        CardAiHints cah = new CardAiHints(true, true, null, null, null);
+        CardAiHints cah = new CardAiHints(true, true, true, null, null, null);
         CardFace[] faces = { new CardFace(name), null};
         faces[0].setColor(ColorSet.fromMask(0));
-        faces[0].setType(CardType.parse(""));
+        faces[0].setType(CardType.parse("", false));
         faces[0].setOracleText("This card is not supported by Forge. Whenever you start a game with this card, it will be bugged.");
         faces[0].setNonAbilityText("This card is not supported by Forge.\nWhenever you start a game with this card, it will be bugged.");
         faces[0].assignMissingFields();

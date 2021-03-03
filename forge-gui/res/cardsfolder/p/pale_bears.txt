@@ -4,4 +4,4 @@ Types:Creature Bear
 PT:2/2
 K:Islandwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2580.jpg
-Oracle:Islandwalk
+Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)

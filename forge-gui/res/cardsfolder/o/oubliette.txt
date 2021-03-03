@@ -1,16 +1,12 @@
 Name:Oubliette
 ManaCost:1 B B
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ OublietteImprint | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.
-SVar:OublietteImprint:DB$ Pump | ValidTgts$ Creature | ImprintCards$ Targeted | SubAbility$ DBRememberAura
-SVar:DBRememberAura:DB$ PumpAll | ValidCards$ Aura.AttachedTo Creature.IsImprinted | RememberAllPumped$ True | StackDescription$ None | SubAbility$ RecordCounters
-SVar:RecordCounters:DB$ NoteCounters | Mode$ Store | Defined$ Imprinted | SubAbility$ TrigExile
-SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Card.IsRemembered,Card.IsImprinted
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ RestoreCounters | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return that exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the other exiled cards to the battlefield under their owner's control attached to that permanent.
-SVar:RestoreCounters:DB$ NoteCounters | Mode$ Load | Defined$ Imprinted | SubAbility$ TrigReturn
-SVar:TrigReturn:DB$ ChangeZone | Defined$ Imprinted | Origin$ Exile | Destination$ Battlefield | Tapped$ True | SubAbility$ TrigAuraReturn
-SVar:TrigAuraReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | AttachedTo$ Valid Creature.IsImprinted
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPhaseOut | TriggerDescription$ When CARDNAME enters the battlefield, target creature phases out until CARDNAME leaves the battlefield. Tap that creature as it phases in this way. (Auras and Equipment phase out with it. While permanents are phased out, they're treated as though they don't exist.)
+SVar:TrigPhaseOut:DB$ Phases | ValidTgts$ Creature | TgtPrompt$ Select target creature | WontPhaseInNormal$ True | ConditionPresent$ Card.Self | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | Triggers$ TrigComeBack | RememberObjects$ Targeted | ImprintCards$ Self | SVars$ DBPhaseIn,DBExileSelf | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnPhasedIn$ True
+SVar:TrigComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ DBPhaseIn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ Target creature phases out until CARDNAME leaves the battlefield. Tap that creature as it phases in this way.
+SVar:DBPhaseIn:DB$ Phases | Defined$ Remembered | Tapped$ True | PhaseInOrOut$ True | SubAbility$ DBExileSelf
+SVar:DBExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 AI:RemoveDeck:All
 SVar:Picture:http://resources.wizards.com/magic/cards/med/en-us/card159135.jpg
-Oracle:When Oubliette enters the battlefield, exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.\nWhen Oubliette leaves the battlefield, return that exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the other exiled cards to the battlefield under their owner's control attached to that permanent.
+Oracle:When Oubliette enters the battlefield, target creature phases out until Oubliette leaves the battlefield. Tap that creature as it phases in this way. (Auras and Equipment phase out with it. While permanents are phased out, they're treated as though they don't exist.)

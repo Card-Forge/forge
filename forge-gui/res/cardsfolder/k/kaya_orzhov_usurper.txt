@@ -10,4 +10,4 @@ A:AB$ DealDamage | Cost$ SubCounter<5/LOYALTY> | Planeswalker$ True | Ultimate$ 
 SVar:DBYouGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$ValidExile Card.RememberedPlayerOwn
 DeckHas:Ability$LifeGain
-Oracle:[+1]: Exile up to two target cards from a single graveyard. You gain 2 life if at least one creature card was exiled this way.\n[-1]: Exile target nonland permanent with converted mana cost 1 or less.\n[-5]: Kaya, Orzhov Usurper deals damage to target player equal to the number of cards that player owns in exile and you gain that much life.
+Oracle:[+1]: Exile up to two target cards from a single graveyard. You gain 2 life if at least one creature card was exiled this way.\n[−1]: Exile target nonland permanent with converted mana cost 1 or less.\n[−5]: Kaya, Orzhov Usurper deals damage to target player equal to the number of cards that player owns in exile and you gain that much life.

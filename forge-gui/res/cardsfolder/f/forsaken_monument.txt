@@ -1,0 +1,12 @@
+Name:Forsaken Monument
+ManaCost:5
+Types:Legendary Artifact
+S:Mode$ Continuous | Affected$ Creature.Colorless+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Colorless creatures you control get +2/+2.
+T:Mode$ TapsForMana | ValidCard$ Permanent | Activator$ You | Produced$ C | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever you tap a permanent for {C}, add an additional {C}.
+SVar:TrigMana:DB$ Mana | Produced$ C
+T:Mode$ SpellCast | ValidCard$ Card.Colorless | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a colorless spell, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:PlayMain1:TRUE
+DeckHints:Color$Colorless
+DeckHas:Ability$LifeGain
+Oracle:Colorless creatures you control get +2/+2.\nWhenever you tap a permanent for {C}, add an additional {C}.\nWhenever you cast a colorless spell, you gain 2 life.

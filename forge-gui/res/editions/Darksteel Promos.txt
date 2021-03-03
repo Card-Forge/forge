@@ -1,0 +1,8 @@
+[metadata]
+Code=PDST
+Date=2004-06-04
+Name=Darksteel Promos
+Type=Reprint
+
+[cards]
+139 R Shield of Kaldra

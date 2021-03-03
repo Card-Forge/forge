@@ -1,0 +1,9 @@
+[metadata]
+Code=PSUM
+Date=2008-01-01
+Name=Summer of Magic
+Type=Reprint
+
+[cards]
+1 R Faerie Conclave
+2 R Treetop Village

@@ -1,0 +1,11 @@
+Name:Blitz Leech
+ManaCost:5 B
+Types:Creature Leech
+PT:5/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature an opponent controls gets -2/-2 until end of turn. Remove all counters from that creature.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SubAbility$ DBRemoveCounter
+SVar:DBRemoveCounter:DB$ RemoveCounter | Defined$ Targeted | CounterType$ All | CounterNum$ All | StackDescription$ None
+SVar:NeedsToPlayVar:Z GE1
+SVar:Z:Count$Valid Creature.OppCtrl+inZoneBattlefield
+Oracle:Flash\nWhen Blitz Leech enters the battlefield, target creature an opponent controls gets -2/-2 until end of turn. Remove all counters from that creature.

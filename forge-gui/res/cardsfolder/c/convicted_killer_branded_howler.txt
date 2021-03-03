@@ -18,5 +18,5 @@ PT:4/4
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
 SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/branded_howler.jpg
-Oracle:At the beginning of each upkeep, if a player casts two or more spells last turn, transform Branded Howler.
+Oracle:At the beginning of each upkeep, if a player cast two or more spells last turn, transform Branded Howler.
 

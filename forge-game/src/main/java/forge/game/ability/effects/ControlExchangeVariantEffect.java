@@ -36,9 +36,9 @@ public class ControlExchangeVariantEffect extends SpellAbilityEffect {
         CardCollectionView list2 = AbilityUtils.filterListByType(player2.getCardsIn(zone), type, sa);
         int max = Math.min(list1.size(), list2.size());
         // choose the same number of cards
-        CardCollectionView chosen1 = activator.getController().chooseCardsForEffect(list1, sa, Localizer.getInstance().getMessage("lblChooseCards") + ":" + player1, 0, max, true);
+        CardCollectionView chosen1 = activator.getController().chooseCardsForEffect(list1, sa, Localizer.getInstance().getMessage("lblChooseCards") + ":" + player1, 0, max, true, null);
         int num = chosen1.size();
-        CardCollectionView chosen2 = activator.getController().chooseCardsForEffect(list2, sa, Localizer.getInstance().getMessage("lblChooseCards") + ":" + player2, num, num, true);
+        CardCollectionView chosen2 = activator.getController().chooseCardsForEffect(list2, sa, Localizer.getInstance().getMessage("lblChooseCards") + ":" + player2, num, num, true, null);
         // check all cards can be controlled by the other player
         for (final Card c : chosen1) {
             if (!c.canBeControlledBy(player2)) {

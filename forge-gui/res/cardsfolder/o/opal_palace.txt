@@ -4,7 +4,6 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ 1 T | Produced$ Combo ColorIdentity | AddsCounters$ Card.IsCommander_P1P1_ManaAddsCounterNum | SpellDescription$ Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters the battlefield with a number of additional +1/+1 counters on it equal to the number of times it's been cast from the command zone this game.
 SVar:ManaAddsCounterNum:Count$CommanderCastFromCommandZone
-AI:RemoveDeck:All
-AI:RemoveDeck:Random
+AI:RemoveDeck:NonCommander
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opal_palace.jpg
 Oracle:{T}: Add {C}.\n{1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters the battlefield with a number of additional +1/+1 counters on it equal to the number of times it's been cast from the command zone this game.

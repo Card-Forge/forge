@@ -28,7 +28,6 @@ import com.google.common.collect.Maps;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -43,11 +42,9 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
-import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -328,7 +325,7 @@ public class ComputerUtilCombat {
     public static int resultingPoison(final Player ai, final Combat combat) {
 
         // ai can't get poision counters, so the value can't change
-        if (!ai.canReceiveCounters(CounterType.POISON)) {
+        if (!ai.canReceiveCounters(CounterEnumType.POISON)) {
             return ai.getPoisonCounters();
         }
 
@@ -931,7 +928,7 @@ public class ComputerUtilCombat {
         if (dealsFirstStrikeDamage(attacker, withoutAbilities, null)
                 && (attacker.hasKeyword(Keyword.WITHER) || attacker.hasKeyword(Keyword.INFECT))
                 && !dealsFirstStrikeDamage(blocker, withoutAbilities, null)
-                && !blocker.canReceiveCounters(CounterType.M1M1)) {
+                && !blocker.canReceiveCounters(CounterEnumType.M1M1)) {
             power -= attacker.getNetCombatDamage();
         }
 
@@ -973,62 +970,45 @@ public class ComputerUtilCombat {
         }
         theTriggers.addAll(attacker.getTriggers());
         for (final Trigger trigger : theTriggers) {
-            final Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
             if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
                 continue;
             }
 
-            Map<String, String> abilityParams = null;
-            if (trigger.getOverridingAbility() != null) {
-                abilityParams = trigger.getOverridingAbility().getMapParams();
-            } else if (trigParams.containsKey("Execute")) {
-                final String ability = source.getSVar(trigParams.get("Execute"));
-                abilityParams = AbilityFactory.getMapParams(ability);
-            } else {
+            SpellAbility sa = trigger.ensureAbility();
+            if (sa == null) {
                 continue;
             }
 
-            if (abilityParams.containsKey("AB") && !abilityParams.get("AB").equals("Pump")) {
+            if (!ApiType.Pump.equals(sa.getApi())) {
                 continue;
             }
-            if (abilityParams.containsKey("DB") && !abilityParams.get("DB").equals("Pump")) {
+
+            if (sa.usesTargeting()) {
                 continue;
             }
-            if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
-                continue; // targeted pumping not supported
+
+            if (!sa.hasParam("NumAtt")) {
+                continue;
             }
-            final List<Card> list = AbilityUtils.getDefinedCards(source, abilityParams.get("Defined"), null);
-            if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredBlocker")) {
+
+            String defined = sa.getParam("Defined");
+            final List<Card> list = AbilityUtils.getDefinedCards(source, defined, sa);
+            if ("TriggeredBlocker".equals(defined)) {
                 list.add(blocker);
-            }
-            if (list.isEmpty()) {
-                continue;
             }
             if (!list.contains(blocker)) {
                 continue;
             }
-            if (!abilityParams.containsKey("NumAtt")) {
-                continue;
-            }
 
-            String att = abilityParams.get("NumAtt");
-            if (att.startsWith("+")) {
-                att = att.substring(1);
-            }
-            try {
-                power += Integer.parseInt(att);
-            } catch (final NumberFormatException nfe) {
-                // can't parse the number (X for example)
-                power += 0;
-            }
+            power += AbilityUtils.calculateAmount(source, sa.getParam("NumAtt"), sa, true);
         }
         if (withoutAbilities) {
             return power;
         }
         for (SpellAbility ability : blocker.getAllSpellAbilities()) {
-            if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
+            if (!ability.isActivatedAbility()) {
                 continue;
             }
             if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
@@ -1058,7 +1038,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (ability.hasParam("Adapt") && blocker.getCounters(CounterType.P1P1) > 0) {
+                if (ability.hasParam("Adapt") && blocker.getCounters(CounterEnumType.P1P1) > 0) {
                     continue;
                 }
 
@@ -1108,102 +1088,61 @@ public class ComputerUtilCombat {
         }
         theTriggers.addAll(attacker.getTriggers());
         for (final Trigger trigger : theTriggers) {
-            final Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
             if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
                 continue;
             }
 
-            Map<String, String> abilityParams = null;
-            if (trigger.getOverridingAbility() != null) {
-                abilityParams = trigger.getOverridingAbility().getMapParams();
-            } else if (trigParams.containsKey("Execute")) {
-                final String ability = source.getSVar(trigParams.get("Execute"));
-                abilityParams = AbilityFactory.getMapParams(ability);
-            } else {
+            SpellAbility sa = trigger.ensureAbility();
+            if (sa == null) {
                 continue;
-            }
-
-            String abType = "";
-            if (abilityParams.containsKey("AB")) {
-            	abType = abilityParams.get("AB");
-            } else if (abilityParams.containsKey("DB")) {
-            	abType = abilityParams.get("DB");
             }
 
             // DealDamage triggers
-            if (abType.equals("DealDamage")) {
-                if (!abilityParams.containsKey("Defined") || !abilityParams.get("Defined").equals("TriggeredBlocker")) {
+            if (ApiType.DealDamage.equals(sa.getApi())) {
+                if (!"TriggeredBlocker".equals(sa.getParam("Defined"))) {
                     continue;
                 }
-                int damage = 0;
-                try {
-                    damage = Integer.parseInt(abilityParams.get("NumDmg"));
-                } catch (final NumberFormatException nfe) {
-                    // can't parse the number (X for example)
-                    continue;
-                }
+                int damage = AbilityUtils.calculateAmount(source, sa.getParam("NumDmg"), sa);
                 toughness -= predictDamageTo(blocker, damage, 0, source, false);
-                continue;
-            }
+            } else
 
             // -1/-1 PutCounter triggers
-            if (abType.equals("PutCounter")) {
-                if (!abilityParams.containsKey("Defined") || !abilityParams.get("Defined").equals("TriggeredBlocker")) {
+            if (ApiType.PutCounter.equals(sa.getApi())) {
+                if (!"TriggeredBlocker".equals(sa.getParam("Defined"))) {
                     continue;
                 }
-                if (!abilityParams.containsKey("CounterType") || !abilityParams.get("CounterType").equals("M1M1")) {
+                if (!"M1M1".equals(sa.getParam("CounterType"))) {
                     continue;
                 }
-                int num = 0;
-                try {
-                    num = Integer.parseInt(abilityParams.get("CounterNum"));
-                } catch (final NumberFormatException nfe) {
-                    // can't parse the number (X for example)
-                    continue;
-                }
-                toughness -= num;
-                continue;
-            }
+                toughness -= AbilityUtils.calculateAmount(source, sa.getParam("CounterNum"), sa);
+            } else
 
             // Pump triggers
-            if (!abType.equals("Pump")) {
-                continue;
-            }
-            if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
-                continue; // targeted pumping not supported
-            }
-            final List<Card> list = AbilityUtils.getDefinedCards(source, abilityParams.get("Defined"), null);
-            if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredBlocker")) {
-                list.add(blocker);
-            }
-            if (list.isEmpty()) {
-                continue;
-            }
-            if (!list.contains(blocker)) {
-                continue;
-            }
-            if (!abilityParams.containsKey("NumDef")) {
-                continue;
-            }
+            if (ApiType.Pump.equals(sa.getApi())) {
+                if (sa.usesTargeting()) {
+                    continue; // targeted pumping not supported
+                }
+                final List<Card> list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), null);
+                if ("TriggeredBlocker".equals(sa.getParam("Defined"))) {
+                    list.add(blocker);
+                }
+                if (list.isEmpty() || !list.contains(blocker)) {
+                    continue;
+                }
+                if (!sa.hasParam("NumDef")) {
+                    continue;
+                }
 
-            String def = abilityParams.get("NumDef");
-            if (def.startsWith("+")) {
-                def = def.substring(1);
-            }
-            try {
-                toughness += Integer.parseInt(def);
-            } catch (final NumberFormatException nfe) {
-                // can't parse the number (X for example)
-
+                toughness += AbilityUtils.calculateAmount(source, sa.getParam("NumDef"), sa, true);
             }
         }
         if (withoutAbilities) {
             return toughness;
         }
         for (SpellAbility ability : blocker.getAllSpellAbilities()) {
-            if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
+            if (!ability.isActivatedAbility()) {
                 continue;
             }
 
@@ -1234,7 +1173,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (ability.hasParam("Adapt") && blocker.getCounters(CounterType.P1P1) > 0) {
+                if (ability.hasParam("Adapt") && blocker.getCounters(CounterEnumType.P1P1) > 0) {
                     continue;
                 }
 
@@ -1296,7 +1235,7 @@ public class ComputerUtilCombat {
             if (ComputerUtilCombat.dealsFirstStrikeDamage(blocker, withoutAbilities, combat)
                     && (blocker.hasKeyword(Keyword.WITHER) || blocker.hasKeyword(Keyword.INFECT))
                     && !ComputerUtilCombat.dealsFirstStrikeDamage(attacker, withoutAbilities, combat)
-                    && !attacker.canReceiveCounters(CounterType.M1M1)) {
+                    && !attacker.canReceiveCounters(CounterEnumType.M1M1)) {
                 power -= blocker.getNetCombatDamage();
             }
             theTriggers.addAll(blocker.getTriggers());
@@ -1333,44 +1272,26 @@ public class ComputerUtilCombat {
         }
 
         for (final Trigger trigger : theTriggers) {
-            final Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
             if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, combat)) {
                 continue;
             }
 
-            Map<String, String> abilityParams = null;
-            if (trigger.getOverridingAbility() != null) {
-                abilityParams = trigger.getOverridingAbility().getMapParams();
-            } else if (trigParams.containsKey("Execute")) {
-                final String ability = source.getSVar(trigParams.get("Execute"));
-                abilityParams = AbilityFactory.getMapParams(ability);
-            } else {
+            SpellAbility sa = trigger.ensureAbility();
+            if (sa == null) {
                 continue;
             }
 
-            if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
+            if (sa.usesTargeting()) {
                 continue; // targeted pumping not supported
             }
-            if (abilityParams.containsKey("AB") && !abilityParams.get("AB").equals("Pump")
-                    && !abilityParams.get("AB").equals("PumpAll")) {
-                continue;
-            }
-            if (abilityParams.containsKey("DB") && !abilityParams.get("DB").equals("Pump")
-                    && !abilityParams.get("DB").equals("PumpAll")) {
+
+            if (!ApiType.Pump.equals(sa.getApi()) && !ApiType.PumpAll.equals(sa.getApi())) {
                 continue;
             }
 
-            if (abilityParams.containsKey("Cost")) {
-                SpellAbility sa = null;
-                if (trigger.getOverridingAbility() != null) {
-                    sa = trigger.getOverridingAbility();
-                } else {
-                    final String ability = source.getSVar(trigParams.get("Execute"));
-                    sa = AbilityFactory.getAbility(ability, source);
-                }
-
+            if (sa.hasParam("Cost")) {
                 sa.setActivatingPlayer(source.getController());
                 if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
                     continue;
@@ -1378,15 +1299,15 @@ public class ComputerUtilCombat {
             }
 
             List<Card> list = Lists.newArrayList();
-            if (!abilityParams.containsKey("ValidCards")) {
-                list = AbilityUtils.getDefinedCards(source, abilityParams.get("Defined"), null);
+            if (!sa.hasParam("ValidCards")) {
+                list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), null);
             }
-            if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredAttacker")) {
+            if (sa.hasParam("Defined") && sa.getParam("Defined").equals("TriggeredAttacker")) {
                 list.add(attacker);
             }
-            if (abilityParams.containsKey("ValidCards")) {
-                if (attacker.isValid(abilityParams.get("ValidCards").split(","), source.getController(), source, null)
-                        || attacker.isValid(abilityParams.get("ValidCards").replace("attacking+", "").split(","),
+            if (sa.hasParam("ValidCards")) {
+                if (attacker.isValid(sa.getParam("ValidCards").split(","), source.getController(), source, null)
+                        || attacker.isValid(sa.getParam("ValidCards").replace("attacking+", "").split(","),
                                 source.getController(), source, null)) {
                     list.add(attacker);
                 }
@@ -1397,11 +1318,11 @@ public class ComputerUtilCombat {
             if (!list.contains(attacker)) {
                 continue;
             }
-            if (!abilityParams.containsKey("NumAtt")) {
+            if (!sa.hasParam("NumAtt")) {
                 continue;
             }
 
-            String att = abilityParams.get("NumAtt");
+            String att = sa.getParam("NumAtt");
             if (att.startsWith("+")) {
                 att = att.substring(1);
             }
@@ -1426,7 +1347,7 @@ public class ComputerUtilCombat {
             return power;
         }
         for (SpellAbility ability : attacker.getAllSpellAbilities()) {
-            if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
+            if (!ability.isActivatedAbility()) {
                 continue;
             }
             if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
@@ -1456,7 +1377,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (ability.hasParam("Adapt") && attacker.getCounters(CounterType.P1P1) > 0) {
+                if (ability.hasParam("Adapt") && attacker.getCounters(CounterEnumType.P1P1) > 0) {
                     continue;
                 }
 
@@ -1521,148 +1442,135 @@ public class ComputerUtilCombat {
             final CardCollectionView cardList = game.getCardsIn(ZoneType.Battlefield);
             for (final Card card : cardList) {
                 for (final StaticAbility stAb : card.getStaticAbilities()) {
-                    final Map<String, String> params = stAb.getMapParams();
-                    if (!params.get("Mode").equals("Continuous")) {
+                    if (!"Continuous".equals(stAb.getParam("Mode"))) {
                         continue;
                     }
-                    if (params.containsKey("Affected") && params.get("Affected").contains("attacking")) {
-                        final String valid = TextUtil.fastReplace(params.get("Affected"), "attacking", "Creature");
+                    if (!stAb.hasParam("Affected")) {
+                        continue;
+                    }
+                    if (!stAb.hasParam("AddToughness")) {
+                        continue;
+                    }
+                    String affected = stAb.getParam("Affected");
+                    String addT = stAb.getParam("AddToughness");
+                    if (affected.contains("attacking")) {
+                        final String valid = TextUtil.fastReplace(affected, "attacking", "Creature");
                         if (!attacker.isValid(valid, card.getController(), card, null)) {
                             continue;
                         }
-                        if (params.containsKey("AddToughness")) {
-                            if (params.get("AddToughness").equals("X")) {
-                                toughness += CardFactoryUtil.xCount(card, card.getSVar("X"));
-                            } else if (params.get("AddToughness").equals("Y")) {
-                                toughness += CardFactoryUtil.xCount(card, card.getSVar("Y"));
-                            } else {
-                                toughness += Integer.valueOf(params.get("AddToughness"));
-                            }
-                        }
-                    } else if (params.containsKey("Affected") && params.get("Affected").contains("untapped")) {
-                        final String valid = TextUtil.fastReplace(params.get("Affected"), "untapped", "Creature");
+                        toughness += AbilityUtils.calculateAmount(card, addT, stAb, true);
+                    } else if (affected.contains("untapped")) {
+                        final String valid = TextUtil.fastReplace(affected, "untapped", "Creature");
                         if (!attacker.isValid(valid, card.getController(), card, null)
                                 || attacker.hasKeyword(Keyword.VIGILANCE)) {
                             continue;
                         }
                         // remove the bonus, because it will no longer be granted
-                        if (params.containsKey("AddToughness")) {
-                            toughness -= Integer.valueOf(params.get("AddToughness"));
-                        }
+                        toughness -= AbilityUtils.calculateAmount(card, addT, stAb, true);
                     }
                 }
             }
         }
 
         for (final Trigger trigger : theTriggers) {
-            final Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
             if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, combat)) {
                 continue;
             }
 
-            Map<String, String> abilityParams = null;
-            if (trigger.getOverridingAbility() != null) {
-                abilityParams = trigger.getOverridingAbility().getMapParams();
-            } else if (trigParams.containsKey("Execute")) {
-                final String ability = source.getSVar(trigParams.get("Execute"));
-                abilityParams = AbilityFactory.getMapParams(ability);
-            } else {
+            SpellAbility sa = trigger.ensureAbility();
+            if (sa == null) {
                 continue;
             }
+            sa.setActivatingPlayer(source.getController());
 
-            if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
+            if (sa.usesTargeting()) {
                 continue; // targeted pumping not supported
             }
 
             // DealDamage triggers
-            if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("DealDamage"))
-                    || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("DealDamage"))) {
-                if (!abilityParams.containsKey("Defined") || !abilityParams.get("Defined").equals("TriggeredAttacker")) {
+            if (ApiType.DealDamage.equals(sa.getApi())) {
+                if ("TriggeredAttacker".equals(sa.getParam("Defined"))) {
                     continue;
                 }
-                int damage = 0;
-                try {
-                    damage = Integer.parseInt(abilityParams.get("NumDmg"));
-                } catch (final NumberFormatException nfe) {
-                    // can't parse the number (X for example)
-                    continue;
-                }
+                int damage = AbilityUtils.calculateAmount(source, sa.getParam("NumDmg"), sa);
+
                 toughness -= predictDamageTo(attacker, damage, 0, source, false);
                 continue;
-            }
+            } else if (ApiType.Pump.equals(sa.getApi())) {
 
-            // Pump triggers
-            if (abilityParams.containsKey("AB") && !abilityParams.get("AB").equals("Pump")
-                    && !abilityParams.get("AB").equals("PumpAll")) {
-                continue;
-            }
-            if (abilityParams.containsKey("DB") && !abilityParams.get("DB").equals("Pump")
-                    && !abilityParams.get("DB").equals("PumpAll")) {
-                continue;
-            }
-
-            if (abilityParams.containsKey("Cost")) {
-                SpellAbility sa = null;
-                if (trigger.getOverridingAbility() != null) {
-                    sa = trigger.getOverridingAbility();
-                } else {
-                    final String ability = source.getSVar(trigParams.get("Execute"));
-                    sa = AbilityFactory.getAbility(ability, source);
+                if (sa.hasParam("Cost")) {
+                    if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
+                        continue;
+                    }
                 }
-
-                sa.setActivatingPlayer(source.getController());
-                if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
+                if (!sa.hasParam("NumDef")) {
                     continue;
                 }
-            }
-
-            List<Card> list = Lists.newArrayList();
-            if (!abilityParams.containsKey("ValidCards")) {
-                list = AbilityUtils.getDefinedCards(source, abilityParams.get("Defined"), null);
-            }
-            if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredAttacker")) {
-                list.add(attacker);
-            }
-            if (abilityParams.containsKey("ValidCards")) {
-                if (attacker.isValid(abilityParams.get("ValidCards").split(","), source.getController(), source, null)
-                        || attacker.isValid(abilityParams.get("ValidCards").replace("attacking+", "").split(","),
-                                source.getController(), source, null)) {
+                CardCollection list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
+                if ("TriggeredAttacker".equals(sa.getParam("Defined"))) {
                     list.add(attacker);
                 }
-            }
-            if (list.isEmpty()) {
-                continue;
-            }
-            if (!list.contains(attacker)) {
-                continue;
-            }
-            if (!abilityParams.containsKey("NumDef")) {
-                continue;
-            }
-
-            String def = abilityParams.get("NumDef");
-            if (def.startsWith("+")) {
-                def = def.substring(1);
-            }
-            if (def.matches("[0-9][0-9]?") || def.matches("-" + "[0-9][0-9]?")) {
-                toughness += Integer.parseInt(def);
-            } else {
-                String bonus = source.getSVar(def);
-                if (bonus.contains("TriggerCount$NumBlockers")) {
-                    bonus = TextUtil.fastReplace(bonus, "TriggerCount$NumBlockers", "Number$1");
-                } else if (bonus.contains("TriggeredPlayersDefenders$Amount")) { // for Melee
-                    bonus = TextUtil.fastReplace(bonus, "TriggeredPlayersDefenders$Amount", "Number$1");
+                if (!list.contains(attacker)) {
+                    continue;
                 }
-                toughness += CardFactoryUtil.xCount(source, bonus);
+
+                String def = sa.getParam("NumDef");
+                if (def.startsWith("+")) {
+                    def = def.substring(1);
+                }
+                if (def.matches("[0-9][0-9]?") || def.matches("-" + "[0-9][0-9]?")) {
+                    toughness += Integer.parseInt(def);
+                } else {
+                    String bonus = AbilityUtils.getSVar(sa, def);
+                    if (bonus.contains("TriggerCount$NumBlockers")) {
+                        bonus = TextUtil.fastReplace(bonus, "TriggerCount$NumBlockers", "Number$1");
+                    } else if (bonus.contains("TriggeredPlayersDefenders$Amount")) { // for Melee
+                        bonus = TextUtil.fastReplace(bonus, "TriggeredPlayersDefenders$Amount", "Number$1");
+                    }
+                    toughness += CardFactoryUtil.xCount(source, bonus);
+                }
+            } else if (ApiType.PumpAll.equals(sa.getApi())) {
+
+                if (sa.hasParam("Cost")) {
+                    if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
+                        continue;
+                    }
+                }
+
+                if (!sa.hasParam("ValidCards")) {
+                    continue;
+                }
+                if (!sa.hasParam("NumDef")) {
+                    continue;
+                }
+                if (!attacker.isValid(sa.getParam("ValidCards").replace("attacking+", "").split(","), source.getController(), source, sa)) {
+                    continue;
+                }
+
+                String def = sa.getParam("NumDef");
+                if (def.startsWith("+")) {
+                    def = def.substring(1);
+                }
+                if (def.matches("[0-9][0-9]?") || def.matches("-" + "[0-9][0-9]?")) {
+                    toughness += Integer.parseInt(def);
+                } else {
+                    String bonus = AbilityUtils.getSVar(sa, def);
+                    if (bonus.contains("TriggerCount$NumBlockers")) {
+                        bonus = TextUtil.fastReplace(bonus, "TriggerCount$NumBlockers", "Number$1");
+                    } else if (bonus.contains("TriggeredPlayersDefenders$Amount")) { // for Melee
+                        bonus = TextUtil.fastReplace(bonus, "TriggeredPlayersDefenders$Amount", "Number$1");
+                    }
+                    toughness += CardFactoryUtil.xCount(source, bonus);
+                }
             }
         }
         if (withoutAbilities) {
             return toughness;
         }
         for (SpellAbility ability : attacker.getAllSpellAbilities()) {
-            if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
+            if (!ability.isActivatedAbility()) {
                 continue;
             }
 
@@ -1672,18 +1580,19 @@ public class ComputerUtilCombat {
             if (ability.usesTargeting() && !ability.canTarget(attacker)) {
                 continue;
             }
+            if (ability.getPayCosts().hasTapCost() && !attacker.hasKeyword(Keyword.VIGILANCE)) {
+                continue;
+            }
+            if (!ComputerUtilCost.canPayCost(ability, attacker.getController())) {
+                continue;
+            }
 
             if (ability.getApi() == ApiType.Pump) {
                 if (!ability.hasParam("NumDef")) {
                     continue;
                 }
 
-                if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
-                    int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumDef"), ability);
-                    if (tBonus > 0) {
-                        toughness += tBonus;
-                    }
-                }
+                toughness += AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumDef"), ability, true);
             } else if (ability.getApi() == ApiType.PutCounter) {
                 if (!ability.hasParam("CounterType") || !ability.getParam("CounterType").equals("P1P1")) {
                     continue;
@@ -1693,15 +1602,13 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (ability.hasParam("Adapt") && attacker.getCounters(CounterType.P1P1) > 0) {
+                if (ability.hasParam("Adapt") && attacker.getCounters(CounterEnumType.P1P1) > 0) {
                     continue;
                 }
 
-                if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
-                    int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
-                    if (tBonus > 0) {
-                        toughness += tBonus;
-                    }
+                int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
+                if (tBonus > 0) {
+                    toughness += tBonus;
                 }
             }
         }
@@ -1730,35 +1637,26 @@ public class ComputerUtilCombat {
             theTriggers.addAll(card.getTriggers());
         }
         for (Trigger trigger : theTriggers) {
-            Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
             if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
                 continue;
             }
-            //consider delayed triggers
-            if (trigParams.containsKey("DelayedTrigger")) {
-                String sVarName = trigParams.get("DelayedTrigger");
-                trigger = TriggerHandler.parseTrigger(source.getSVar(sVarName), trigger.getHostCard(), true);
-                trigParams = trigger.getMapParams();
-            }
-            if (!trigParams.containsKey("Execute")) {
+            SpellAbility sa = trigger.ensureAbility();
+            if (sa == null) {
                 continue;
             }
-            String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
-            if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
-                    || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {
-                if (!abilityParams.containsKey("Defined")) {
+            if (ApiType.Destroy.equals(sa.getApi())) {
+                if (!sa.hasParam("Defined")) {
                     continue;
                 }
-                if (abilityParams.get("Defined").equals("TriggeredAttacker")) {
+                if (sa.getParam("Defined").equals("TriggeredAttacker")) {
                     return true;
                 }
-                if (abilityParams.get("Defined").equals("Self") && source.equals(attacker)) {
+                if (sa.getParam("Defined").equals("Self") && source.equals(attacker)) {
                     return true;
                 }
-                if (abilityParams.get("Defined").equals("TriggeredTarget") && source.equals(blocker)) {
+                if (sa.getParam("Defined").equals("TriggeredTarget") && source.equals(blocker)) {
                     return true;
                 }
             }
@@ -1848,10 +1746,10 @@ public class ComputerUtilCombat {
 
         if (((attacker.hasKeyword(Keyword.INDESTRUCTIBLE) || (ComputerUtil.canRegenerate(ai, attacker) && !withoutAbilities))
                 && !(blocker.hasKeyword(Keyword.WITHER) || blocker.hasKeyword(Keyword.INFECT)))
-                || (attacker.hasKeyword(Keyword.PERSIST) && !attacker.canReceiveCounters(CounterType.M1M1) && (attacker
-                        .getCounters(CounterType.M1M1) == 0))
-                || (attacker.hasKeyword(Keyword.UNDYING) && !attacker.canReceiveCounters(CounterType.P1P1) && (attacker
-                        .getCounters(CounterType.P1P1) == 0))) {
+                || (attacker.hasKeyword(Keyword.PERSIST) && !attacker.canReceiveCounters(CounterEnumType.M1M1) && (attacker
+                        .getCounters(CounterEnumType.M1M1) == 0))
+                || (attacker.hasKeyword(Keyword.UNDYING) && !attacker.canReceiveCounters(CounterEnumType.P1P1) && (attacker
+                        .getCounters(CounterEnumType.P1P1) == 0))) {
             return false;
         }
 
@@ -2008,36 +1906,27 @@ public class ComputerUtilCombat {
             theTriggers.addAll(card.getTriggers());
         }
         for (Trigger trigger : theTriggers) {
-            Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
             if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
                 continue;
             }
-            //consider delayed triggers
-            if (trigParams.containsKey("DelayedTrigger")) {
-                String sVarName = trigParams.get("DelayedTrigger");
-                trigger = TriggerHandler.parseTrigger(source.getSVar(sVarName), trigger.getHostCard(), true);
-                trigParams = trigger.getMapParams();
-            }
-            if (!trigParams.containsKey("Execute")) {
+            SpellAbility sa = trigger.ensureAbility();
+            if (sa == null) {
                 continue;
             }
-            String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
             // Destroy triggers
-            if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
-                    || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {
-                if (!abilityParams.containsKey("Defined")) {
+            if (ApiType.Destroy.equals(sa.getApi())) {
+                if (!sa.hasParam("Defined")) {
                     continue;
                 }
-                if (abilityParams.get("Defined").equals("TriggeredBlocker")) {
+                if (sa.getParam("Defined").equals("TriggeredBlocker")) {
                     return true;
                 }
-                if (abilityParams.get("Defined").equals("Self") && source.equals(blocker)) {
+                if (sa.getParam("Defined").equals("Self") && source.equals(blocker)) {
                     return true;
                 }
-                if (abilityParams.get("Defined").equals("TriggeredTarget") && source.equals(attacker)) {
+                if (sa.getParam("Defined").equals("TriggeredTarget") && source.equals(attacker)) {
                     return true;
                 }
             }
@@ -2080,10 +1969,10 @@ public class ComputerUtilCombat {
 
         if (((blocker.hasKeyword(Keyword.INDESTRUCTIBLE) || (ComputerUtil.canRegenerate(ai, blocker) && !withoutAbilities)) && !(attacker
                 .hasKeyword(Keyword.WITHER) || attacker.hasKeyword(Keyword.INFECT)))
-                || (blocker.hasKeyword(Keyword.PERSIST) && !blocker.canReceiveCounters(CounterType.M1M1) && (blocker
-                        .getCounters(CounterType.M1M1) == 0))
-                || (blocker.hasKeyword(Keyword.UNDYING) && !blocker.canReceiveCounters(CounterType.P1P1) && (blocker
-                        .getCounters(CounterType.P1P1) == 0))) {
+                || (blocker.hasKeyword(Keyword.PERSIST) && !blocker.canReceiveCounters(CounterEnumType.M1M1) && (blocker
+                        .getCounters(CounterEnumType.M1M1) == 0))
+                || (blocker.hasKeyword(Keyword.UNDYING) && !blocker.canReceiveCounters(CounterEnumType.P1P1) && (blocker
+                        .getCounters(CounterEnumType.P1P1) == 0))) {
             return false;
         }
 
@@ -2517,7 +2406,7 @@ public class ComputerUtilCombat {
     	final Player controller = combatant.getController();
     	for (Card c : controller.getCardsIn(ZoneType.Battlefield)) {
 	    	for (SpellAbility ability : c.getAllSpellAbilities()) {
-	            if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
+	            if (!ability.isActivatedAbility()) {
 	                continue;
 	            }
 	            if (ability.getApi() != ApiType.Pump) {
@@ -2651,26 +2540,24 @@ public class ComputerUtilCombat {
 
         // Test for some special triggers that can change the creature in combat
         for (Trigger t : attacker.getTriggers()) {
-            if (t.getMode() == TriggerType.Attacks && t.hasParam("Execute")) {
-                if (!attacker.hasSVar(t.getParam("Execute"))) {
+            if (t.getMode() == TriggerType.Attacks) {
+                SpellAbility exec = t.ensureAbility();
+                if (exec == null) {
                     continue;
                 }
-                SpellAbility exec = AbilityFactory.getAbility(attacker, t.getParam("Execute"));
-                if (exec != null) {
-                    if (exec.getApi() == ApiType.Clone && "Self".equals(exec.getParam("CloneTarget"))
-                            && exec.hasParam("ValidTgts") && exec.getParam("ValidTgts").contains("Creature")
-                            && exec.getParam("ValidTgts").contains("attacking")) {
-                        // Tilonalli's Skinshifter and potentially other similar cards that can clone other stuff
-                        // while attacking
-                        if (exec.getParam("ValidTgts").contains("nonLegendary") && attacker.getType().isLegendary()) {
-                            continue;
-                        }
-                        int maxPwr = 0;
-                        for (Card c : attacker.getController().getCreaturesInPlay()) {
-                            if (c.getNetPower() > maxPwr || (c.getNetPower() == maxPwr && ComputerUtilCard.evaluateCreature(c) > ComputerUtilCard.evaluateCreature(attackerAfterTrigs))) {
-                                maxPwr = c.getNetPower();
-                                attackerAfterTrigs = c;
-                            }
+                if (exec.getApi() == ApiType.Clone && "Self".equals(exec.getParam("CloneTarget"))
+                        && exec.hasParam("ValidTgts") && exec.getParam("ValidTgts").contains("Creature")
+                        && exec.getParam("ValidTgts").contains("attacking")) {
+                    // Tilonalli's Skinshifter and potentially other similar cards that can clone other stuff
+                    // while attacking
+                    if (exec.getParam("ValidTgts").contains("nonLegendary") && attacker.getType().isLegendary()) {
+                        continue;
+                    }
+                    int maxPwr = 0;
+                    for (Card c : attacker.getController().getCreaturesInPlay()) {
+                        if (c.getNetPower() > maxPwr || (c.getNetPower() == maxPwr && ComputerUtilCard.evaluateCreature(c) > ComputerUtilCard.evaluateCreature(attackerAfterTrigs))) {
+                            maxPwr = c.getNetPower();
+                            attackerAfterTrigs = c;
                         }
                     }
                 }

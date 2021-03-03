@@ -6,7 +6,6 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.TriggerType;
 
 import org.apache.commons.lang3.StringUtils;
@@ -32,14 +31,13 @@ public class BecomesBlockedEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        boolean isCombatChanged = false;
         final Game game = sa.getActivatingPlayer().getGame();
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        List<Card> blocked = Lists.newArrayList();
         for (final Card c : getTargetCards(sa)) {
-            if ((tgt == null) || c.canBeTargetedBy(sa)) {
+            if ((!sa.usesTargeting()) || c.canBeTargetedBy(sa)) {
                 game.getCombat().setBlocked(c, true);
                 if (!c.getDamageHistory().getCreatureGotBlockedThisCombat()) {
-                    isCombatChanged = true;
+                    blocked.add(c);
                     final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                     runParams.put(AbilityKey.Attacker, c);
                     runParams.put(AbilityKey.Blockers, Lists.<Card>newArrayList());
@@ -51,7 +49,10 @@ public class BecomesBlockedEffect extends SpellAbilityEffect {
             }
         }
 
-        if (isCombatChanged) {
+        if (!blocked.isEmpty()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Attackers, blocked);
+            game.getTriggerHandler().runTrigger(TriggerType.AttackerBlockedOnce, runParams, false);
             game.fireEvent(new GameEventCombatChanged());
         }
     }

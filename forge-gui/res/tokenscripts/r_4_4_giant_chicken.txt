@@ -1,6 +1,6 @@
 Name:Giant Chicken
 ManaCost:no cost
-Types:Creature Giant Chicken
+Types:Creature Giant Bird
 Colors:red
 PT:4/4
 Oracle:

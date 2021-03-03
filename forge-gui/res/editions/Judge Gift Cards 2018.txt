@@ -1,0 +1,15 @@
+[metadata]
+Code=J18
+Date=2018-01-01
+Name=Judge Gift Cards 2018
+Type=Reprint
+
+[cards]
+1 R Merchant Scroll
+2 R Vampiric Tutor
+3 R Nin, the Pain Artist
+4 R Commander's Sphere
+5 R Teferi's Protection
+6 R Lord of Atlantis
+7 R Rhystic Study
+8 R Food Chain

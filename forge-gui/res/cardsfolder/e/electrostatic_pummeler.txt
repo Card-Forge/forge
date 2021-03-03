@@ -4,7 +4,6 @@ Types:Artifact Creature Construct
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E}{E} (three energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3
-A:AB$ Pump | Cost$ PayEnergy<3> | NumAtt$ +X | NumDef$ +X | References$ X | AILogic$ Pummeler | SpellDescription$ CARDNAME gets +X/+X until end of turn, where X is its power.
-SVar:X:Count$CardPower 
-SVar:Picture:http://www.wizards.com/global/images/magic/general/electrostatic_pummeler.jpg
+A:AB$ Pump | Cost$ PayEnergy<3> | Defined$ Self | NumAtt$ +X | NumDef$ +X | References$ X | AILogic$ Pummeler | SpellDescription$ CARDNAME gets +X/+X until end of turn, where X is its power.
+SVar:X:Count$CardPower
 Oracle:When Electrostatic Pummeler enters the battlefield, you get {E}{E}{E} (three energy counters).\nPay {E}{E}{E}: Electrostatic Pummeler gets +X/+X until end of turn, where X is its power.

@@ -69,7 +69,7 @@ public class RevealAi extends RevealAiBase {
                     continue;
 
                 // use hard coded reduce cost
-                spell.getMapParams().put("ReduceCost", "2");
+                spell.putParam("ReduceCost", "2");
 
                 if (AiPlayDecision.WillPlay == ((PlayerControllerAi) ai.getController()).getAi()
                         .canPlayFromEffectAI(spell, false, false)) {

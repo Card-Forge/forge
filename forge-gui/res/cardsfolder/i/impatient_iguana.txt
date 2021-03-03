@@ -1,0 +1,8 @@
+Name:Impatient Iguana
+ManaCost:1 R
+Types:Creature Lizard Wizard
+PT:2/1
+K:MayEffectFromOpeningHand:RevealCard:!PlayFirst
+SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | BecomeStartingPlayer$ True | SpellDescription$ If CARDNAME is in your opening hand and you're not the starting player, you may reveal it. If you do, you become the starting player.
+K:Haste
+Oracle:If Impatient Iguana is in your opening hand and you're not the starting player, you may reveal it. If you do, you become the starting player.\nHaste

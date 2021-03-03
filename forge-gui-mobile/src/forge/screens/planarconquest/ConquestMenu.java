@@ -10,9 +10,11 @@ import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
+import forge.screens.home.HomeScreen;
 import forge.screens.home.LoadGameMenu.LoadGameScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.util.Localizer;
 
 public class ConquestMenu extends FPopupMenu {
     private static final ConquestMenu conquestMenu = new ConquestMenu();
@@ -25,49 +27,49 @@ public class ConquestMenu extends FPopupMenu {
     private static final ConquestStatsScreen statsScreen = new ConquestStatsScreen();
     private static final ConquestPrefsScreen prefsScreen = new ConquestPrefsScreen();
 
-    private static final FMenuItem multiverseItem = new FMenuItem("The Multiverse", FSkinImage.MULTIVERSE, new FEventHandler() {
+    private static final FMenuItem multiverseItem = new FMenuItem(Localizer.getInstance().getMessage("lblTheMultiverse"), FSkinImage.MULTIVERSE, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(multiverseScreen);
         }
     });
-    private static final FMenuItem aetherItem = new FMenuItem("The Aether", FSkinImage.AETHER_SHARD, new FEventHandler() {
+    private static final FMenuItem aetherItem = new FMenuItem(Localizer.getInstance().getMessage("lblTheAether"), FSkinImage.AETHER_SHARD, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(aetherScreen);
         }
     });
-    private static final FMenuItem commandersItem = new FMenuItem("Commanders", FSkinImage.COMMANDER, new FEventHandler() {
+    private static final FMenuItem commandersItem = new FMenuItem(Localizer.getInstance().getMessage("lblCommanders"), FSkinImage.COMMANDER, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(commandersScreen);
         }
     });
-    private static final FMenuItem planeswalkersItem = new FMenuItem("Planeswalkers", FSkinImage.PLANESWALKER, new FEventHandler() {
+    private static final FMenuItem planeswalkersItem = new FMenuItem(Localizer.getInstance().getMessage("lblPlaneswalkers"), FSkinImage.PLANESWALKER, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(planeswalkersScreen);
         }
     });
-    private static final FMenuItem collectionItem = new FMenuItem("Collection", FSkinImage.SPELLBOOK, new FEventHandler() {
+    private static final FMenuItem collectionItem = new FMenuItem(Localizer.getInstance().getMessage("lblCollection"), FSkinImage.SPELLBOOK, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(collectionScreen);
         }
     });
-    private static final FMenuItem statsItem = new FMenuItem("Statistics", FSkinImage.MULTI, new FEventHandler() {
+    private static final FMenuItem statsItem = new FMenuItem(Localizer.getInstance().getMessage("lblStatistics"), FSkinImage.MENU_STATS, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(statsScreen);
         }
     });
-    private static final FMenuItem planeswalkItem = new FMenuItem("Planeswalk", FSkinImage.PW_BADGE_COMMON, new FEventHandler() {
+    private static final FMenuItem planeswalkItem = new FMenuItem(Localizer.getInstance().getMessage("lblPlaneswalk"), FSkinImage.PW_BADGE_COMMON, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(planeswalkScreen);
         }
     });
-    private static final FMenuItem prefsItem = new FMenuItem("Preferences", FSkinImage.SETTINGS, new FEventHandler() {
+    private static final FMenuItem prefsItem = new FMenuItem(Localizer.getInstance().getMessage("Preferences"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(prefsScreen);
@@ -78,6 +80,18 @@ public class ConquestMenu extends FPopupMenu {
         //make it so pressing Back from any screen besides Multiverse screen always goes to Multiverse screen
         //and make it so Multiverse screen always goes back to screen that launched Planar Conquest
         Forge.openScreen(screen0, Forge.getCurrentScreen() != multiverseScreen);
+    }
+
+    static {
+        //the first time planarconquest mode is launched, add button for it if in Landscape mode
+        if (Forge.isLandscapeMode()) {
+            HomeScreen.instance.addButtonForMode("-"+Localizer.getInstance().getMessage("lblPlanarConquest"), new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    launchPlanarConquest(LaunchReason.StartPlanarConquest);
+                }
+            });
+        }
     }
 
     public static ConquestMenu getMenu() {
@@ -94,7 +108,8 @@ public class ConquestMenu extends FPopupMenu {
     }
 
     public static void launchPlanarConquest(final LaunchReason reason) {
-        LoadingOverlay.show("Loading current conquest...", new Runnable() {
+        Forge.lastButtonIndex = 7;
+        LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoadingCurrentConquest"), new Runnable() {
             @Override
             @SuppressWarnings("unchecked")
             public void run() {
@@ -125,8 +140,8 @@ public class ConquestMenu extends FPopupMenu {
         addItem(commandersItem); commandersItem.setSelected(currentScreen == commandersScreen);
         addItem(planeswalkersItem); planeswalkersItem.setSelected(currentScreen == planeswalkersScreen);
         addItem(collectionItem); collectionItem.setSelected(currentScreen == collectionScreen);
-        addItem(statsItem); statsItem.setSelected(currentScreen == statsScreen);
         addItem(planeswalkItem); planeswalkItem.setSelected(currentScreen == planeswalkScreen);
+        addItem(statsItem); statsItem.setSelected(currentScreen == statsScreen);
         addItem(prefsItem); prefsItem.setSelected(currentScreen == prefsScreen);
     }
 }

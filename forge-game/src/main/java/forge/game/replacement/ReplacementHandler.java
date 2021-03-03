@@ -17,14 +17,16 @@
  */
 package forge.game.replacement;
 
-import forge.card.MagicColor;
+import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
+import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardState;
 import forge.game.card.CardTraitChanges;
 import forge.game.card.CardUtil;
 import forge.game.keyword.KeywordInterface;
@@ -36,6 +38,8 @@ import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 import forge.util.TextUtil;
 import forge.util.Visitor;
+import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -68,13 +72,12 @@ public class ReplacementHandler {
         if (ReplacementType.Moved.equals(event) && ZoneType.Battlefield.equals(runParams.get(AbilityKey.Destination))) {
             // if it was caused by an replacement effect, use the already calculated RE list
             // otherwise the RIOT card would cause a StackError
-            SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
-            if (cause != null && cause.isReplacementAbility()) {
-                final ReplacementEffect re = cause.getReplacementEffect();
+            final ReplacementEffect causeRE = (ReplacementEffect) runParams.get(AbilityKey.ReplacementEffect);
+            if (causeRE != null) {
                 // only return for same layer
-                if (ReplacementType.Moved.equals(re.getMode()) && layer.equals(re.getLayer())) {
-                    if (!re.getOtherChoices().isEmpty())
-                        return re.getOtherChoices();
+                if (ReplacementType.Moved.equals(causeRE.getMode()) && layer.equals(causeRE.getLayer())) {
+                    if (!causeRE.getOtherChoices().isEmpty())
+                        return causeRE.getOtherChoices();
                 }
             }
 
@@ -82,6 +85,9 @@ public class ReplacementHandler {
             affectedCard = (Card) runParams.get(AbilityKey.Affected);
             affectedLKI = CardUtil.getLKICopy(affectedCard);
             affectedLKI.setLastKnownZone(affectedCard.getController().getZone(ZoneType.Battlefield));
+
+            // need to apply Counters to check its future state on the battlefield
+            affectedLKI.putEtbCounters(null);
             preList.add(affectedLKI);
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(affectedLKI), preList);
             checkAgain = true;
@@ -235,7 +241,7 @@ public class ReplacementHandler {
             return ReplacementResult.NotReplaced;
         }
 
-        ReplacementEffect chosenRE = decider.getController().chooseSingleReplacementEffect("Choose a replacement effect to apply first.", possibleReplacers);
+        ReplacementEffect chosenRE = decider.getController().chooseSingleReplacementEffect(Localizer.getInstance().getMessage("lblChooseFirstApplyReplacementEffect"), possibleReplacers);
 
         possibleReplacers.remove(chosenRE);
 
@@ -255,12 +261,17 @@ public class ReplacementHandler {
         chosenRE.setHasRun(false);
         hasRun.remove(chosenRE);
         chosenRE.setOtherChoices(null);
-        String message = chosenRE.toString();
-        if ( !StringUtils.isEmpty(message))
-        	if (chosenRE.getHostCard() != null) {
-        		message = TextUtil.fastReplace(message, "CARDNAME", chosenRE.getHostCard().getName());
-        	}
-            game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
+
+        // Updated Replacements need to be logged elsewhere because its otherwise in the wrong order
+        if (res != ReplacementResult.Updated) {
+            String message = chosenRE.getDescription();
+            if ( !StringUtils.isEmpty(message))
+                if (chosenRE.getHostCard() != null) {
+                    message = TextUtil.fastReplace(message, "CARDNAME", chosenRE.getHostCard().getName());
+                }
+                game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
+        }
+
         return res;
     }
 
@@ -284,34 +295,25 @@ public class ReplacementHandler {
             host = game.getCardState(host);
         }
 
-        if (mapParams.containsKey("ReplaceWith")) {
+        if (replacementEffect.getOverridingAbility() == null && mapParams.containsKey("ReplaceWith")) {
             final String effectSVar = mapParams.get("ReplaceWith");
-            final String effectAbString = host.getSVar(effectSVar);
             // TODO: the source of replacement effect should be the source of the original effect
-            effectSA = AbilityFactory.getAbility(effectAbString, host);
+            effectSA = AbilityFactory.getAbility(host, effectSVar, replacementEffect);
+            //replacementEffect.setOverridingAbility(effectSA);
             //effectSA.setTrigger(true);
-
-            SpellAbility tailend = effectSA;
-            do {
-                replacementEffect.setReplacingObjects(runParams, tailend);
-                //set original Params to update them later
-                tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
-                tailend = tailend.getSubAbility();
-            } while(tailend != null);
-
-        }
-        else if (replacementEffect.getOverridingAbility() != null) {
+        } else if (replacementEffect.getOverridingAbility() != null) {
             effectSA = replacementEffect.getOverridingAbility();
-            SpellAbility tailend = effectSA;
-            do {
-                replacementEffect.setReplacingObjects(runParams, tailend);
-                //set original Params to update them later
-                tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
-                tailend = tailend.getSubAbility();
-            } while(tailend != null);
         }
 
         if (effectSA != null) {
+            SpellAbility tailend = effectSA;
+            do {
+                replacementEffect.setReplacingObjects(runParams, tailend);
+                //set original Params to update them later
+                tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
+                tailend = tailend.getSubAbility();
+            } while(tailend != null);
+
             effectSA.setLastStateBattlefield(game.getLastStateBattlefield());
             effectSA.setLastStateGraveyard(game.getLastStateGraveyard());
             if (replacementEffect.isIntrinsic()) {
@@ -331,10 +333,10 @@ public class ReplacementHandler {
             }
 
             Card cardForUi = host.getCardForUi();
-            String effectDesc = TextUtil.fastReplace(replacementEffect.toString(), "CARDNAME", cardForUi.getName());
+            String effectDesc = TextUtil.fastReplace(replacementEffect.getDescription(), "CARDNAME", CardTranslation.getTranslatedName(cardForUi.getName()));
             final String question = replacementEffect instanceof ReplaceDiscard
-                ? TextUtil.concatWithSpace("Apply replacement effect of", cardForUi.toString(), "to", TextUtil.addSuffix(runParams.get(AbilityKey.Card).toString(),"?\r\n"), TextUtil.enclosedParen(effectDesc))
-                : TextUtil.concatWithSpace("Apply replacement effect of", TextUtil.addSuffix(cardForUi.toString(),"?\r\n"), TextUtil.enclosedParen(effectDesc));
+                ? Localizer.getInstance().getMessage("lblApplyCardReplacementEffectToCardConfirm", CardTranslation.getTranslatedName(cardForUi.getName()), runParams.get(AbilityKey.Card).toString(), effectDesc)
+                : Localizer.getInstance().getMessage("lblApplyReplacementEffectOfCardConfirm", CardTranslation.getTranslatedName(cardForUi.getName()), effectDesc);
             boolean confirmed = optDecider.getController().confirmReplacementEffect(replacementEffect, effectSA, question);
             if (!confirmed) {
                 return ReplacementResult.NotReplaced;
@@ -349,25 +351,11 @@ public class ReplacementHandler {
 
         Player player = host.getController();
 
-        if (mapParams.containsKey("ManaReplacement")) {
-            final SpellAbility manaAb = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
-            final Player player1 = (Player) runParams.get(AbilityKey.Player);
-            final String rep = (String) runParams.get(AbilityKey.Mana);
-            // Replaced mana type
-            final Card repHost = host;
-            String repType = repHost.getSVar(mapParams.get("ManaReplacement"));
-            if (repType.contains("Chosen") && repHost.hasChosenColor()) {
-                repType = TextUtil.fastReplace(repType, "Chosen", MagicColor.toShortString(repHost.getChosenColor()));
-            }
-            manaAb.getManaPart().setManaReplaceType(repType);
-            manaAb.getManaPart().produceMana(rep, player1, manaAb);
-        } else {
-            player.getController().playSpellAbilityNoStack(effectSA, true);
-            // if the spellability is a replace effect then its some new logic
-            // if ReplacementResult is set in run params use that instead
-            if (runParams.containsKey(AbilityKey.ReplacementResult)) {
-                return (ReplacementResult) runParams.get(AbilityKey.ReplacementResult);
-            }
+        player.getController().playSpellAbilityNoStack(effectSA, true);
+        // if the spellability is a replace effect then its some new logic
+        // if ReplacementResult is set in run params use that instead
+        if (runParams.containsKey(AbilityKey.ReplacementResult)) {
+            return (ReplacementResult) runParams.get(AbilityKey.ReplacementResult);
         }
 
         return ReplacementResult.Replaced;
@@ -385,7 +373,10 @@ public class ReplacementHandler {
      * @return A finished instance
      */
     public static ReplacementEffect parseReplacement(final String repParse, final Card host, final boolean intrinsic) {
-        return ReplacementHandler.parseReplacement(parseParams(repParse), host, intrinsic);
+        return parseReplacement(repParse, host, intrinsic, host);
+    }
+    public static ReplacementEffect parseReplacement(final String repParse, final Card host, final boolean intrinsic, final IHasSVars sVarHolder) {
+        return ReplacementHandler.parseReplacement(parseParams(repParse), host, intrinsic, sVarHolder);
     }
 
     public static Map<String, String> parseParams(final String repParse) {
@@ -403,7 +394,7 @@ public class ReplacementHandler {
      *            The card that hosts the replacement effect
      * @return The finished instance
      */
-    private static ReplacementEffect parseReplacement(final Map<String, String> mapParams, final Card host, final boolean intrinsic) {
+    private static ReplacementEffect parseReplacement(final Map<String, String> mapParams, final Card host, final boolean intrinsic, final IHasSVars sVarHolder) {
         final ReplacementType rt = ReplacementType.smartValueOf(mapParams.get("Event"));
         ReplacementEffect ret = rt.createReplacement(mapParams, host, intrinsic);
 
@@ -412,6 +403,15 @@ public class ReplacementHandler {
             ret.setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(activeZones)));
         }
 
+        if (mapParams.containsKey("ReplaceWith") && sVarHolder != null) {
+            ret.setOverridingAbility(AbilityFactory.getAbility(host, mapParams.get("ReplaceWith"), sVarHolder));
+        }
+
+        if (sVarHolder instanceof CardState) {
+            ret.setCardState((CardState)sVarHolder);
+        } else if (sVarHolder instanceof CardTraitBase) {
+            ret.setCardState(((CardTraitBase)sVarHolder).getCardState());
+        }
         return ret;
     }
 }

@@ -4,9 +4,9 @@ Types:Artifact Equipment
 K:Equip:2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddSVar$ SwordOfTruthAndJusticeCE | AddKeyword$ Protection from white & Protection from blue | Description$ Equipped creature gets +2/+2 and has protection from white and from blue.
 T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, put a +1/+1 counter on a creature you control, then proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
-SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBProliferate | SpellDescription$ Put a +1/+1 counter on target creature you control and then proliferate.
+SVar:TrigPutCounter:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Select a creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBProliferate | SpellDescription$ Put a +1/+1 counter on target creature you control and then proliferate.
 SVar:DBProliferate:DB$ Proliferate
-DeckHas:Ability$Proliferate
+DeckHas:Ability$Proliferate & Ability$Counters
 DeckNeeds:Ability$Counters
 SVar:SwordOfTruthAndJusticeCE:SVar:MustBeBlocked:AttackingPlayerConservative
 Oracle:Equipped creature gets +2/+2 and has protection from white and from blue.\nWhenever equipped creature deals combat damage to a player, put a +1/+1 counter on a creature you control, then proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)\nEquip {2}

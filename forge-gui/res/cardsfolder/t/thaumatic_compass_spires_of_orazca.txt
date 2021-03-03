@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Land
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thaumatic_compass.jpg
-Oracle:{3}, {T}: Search your library for a basic land card, put it into your hand, then shuffle your library.\nAt the beginning of your end step, if you control seven or more lands, transform Thaumatic Compass.
+Oracle:{3}, {T}: Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.\nAt the beginning of your end step, if you control seven or more lands, transform Thaumatic Compass.
 
 ALTERNATE
 

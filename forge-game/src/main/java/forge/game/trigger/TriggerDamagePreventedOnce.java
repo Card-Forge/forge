@@ -47,7 +47,7 @@ public class TriggerDamagePreventedOnce extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerDamagePreventedOnce(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerDamagePreventedOnce(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -97,9 +97,9 @@ public class TriggerDamagePreventedOnce extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Target, getFromRunParams(AbilityKey.DamageTarget));
-        sa.setTriggeringObjectsFrom(this, AbilityKey.DamageAmount);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObject(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.DamageAmount);
     }
 
     @Override

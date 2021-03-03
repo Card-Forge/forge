@@ -43,6 +43,7 @@ public class SimulationTestCase extends TestCase {
                 @Override
                 public Void apply(ForgePreferences preferences) {
                     preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
+                    preferences.setPref(FPref.UI_LANGUAGE, "en-US");
                     return null;
                 }
             });

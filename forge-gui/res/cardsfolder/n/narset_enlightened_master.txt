@@ -4,11 +4,10 @@ Types:Legendary Creature Human Monk
 PT:3/2
 K:First Strike
 K:Hexproof
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with CARDNAME this turn without paying their mana costs.
-SVar:TrigMill:DB$ Mill | NumCards$ 4 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBMayBePlayed
-SVar:DBMayBePlayed:DB$ Effect | RememberObjects$ RememberedCard | ForgetOnMoved$ Exile | StaticAbilities$ STMayPlay | SubAbility$ DBCleanup
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with CARDNAME this turn without paying their mana costs.
+SVar:TrigExile:DB$ Dig | DigNum$ 4 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | ForgetOnMoved$ Exile | StaticAbilities$ STMayPlay | SubAbility$ DBCleanup
 SVar:STMayPlay:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Exile | Affected$ Card.IsRemembered+nonCreature+nonLand | MayPlay$ True | MayPlayWithoutManaCost$ True | Description$ You may cast noncreature cards exiled with Narset this turn without paying their mana costs.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/narset_enlightened_master.jpg
-Oracle:First strike, hexproof\nWhenever Narset, Enlightened Master attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with Narset this turn without paying their mana costs.
+Oracle:First strike, hexproof\nWhenever Narset, Enlightened Master attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature spells from among those cards without paying their mana costs.

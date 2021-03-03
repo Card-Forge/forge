@@ -1,0 +1,21 @@
+[metadata]
+Name:Possibility Storm - Zendikar Rising #02 (How much damage can you deal?)
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/10/158.-ZNR2-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Special
+Description:Win this turn. Forget about your opponent's life total, this puzzle is about the absolute maximum you could deal! Hint: It's a big number. Lots of zeroes. Assume your opponent has three blue mana available. You have 41 cards remaining in your library.
+[state]
+humanlife=20
+ailife=1
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Regal Leosaur;Woe Strider;Destiny Spinner;Swamp;Agadeem's Awakening
+humanlibrary=No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape;No Escape
+humangraveyard=Ayara, First of Locthwain;Malefic Scythe;Vito, Thorn of the Dusk Rose;Acolyte of Affliction
+humanbattlefield=Ashaya, Soul of the Wild;Nethroi, Apex of Death;Omnath, Locus of Creation;Protean Thaumaturge;Scute Swarm;Raugrin Triome;Raugrin Triome;Raugrin Triome;Zagoth Triome;Zagoth Triome;Zagoth Triome;Zagoth Triome
+aibattlefield=Terror of the Peaks;Sporeweb Weaver;Folio of Fancies
+aiprecast=Sporeweb Weaver:DBToken;Sporeweb Weaver:DBToken;Sporeweb Weaver:DBToken
+aipersistentmana=U U U
+removesummoningsickness=true

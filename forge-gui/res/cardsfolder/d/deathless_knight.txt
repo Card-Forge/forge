@@ -3,8 +3,8 @@ ManaCost:B/G B/G B/G B/G
 Types:Creature Skeleton Knight
 PT:4/2
 K:Haste
-T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Graveyard | CheckSVar$ X | SVarCompare$ EQ1 | NoResolvingCheck$ True | Execute$ TrigReturn | TriggerDescription$ Whenever you gain life for the first time each turn, return CARDNAME from your graveyard to your hand.
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Graveyard | CheckSVar$ X | SVarCompare$ EQ1 | NoResolvingCheck$ True | Execute$ TrigReturn | TriggerDescription$ When you gain life for the first time each turn, return CARDNAME from your graveyard to your hand.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:X:Count$LifeYouGainedTimesThisTurn
 DeckHints:Ability$LifeGain
-Oracle:Haste\nWhenever you gain life for the first time each turn, return Deathless Knight from your graveyard to your hand.
+Oracle:Haste\nWhen you gain life for the first time each turn, return Deathless Knight from your graveyard to your hand.

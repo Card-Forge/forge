@@ -1,0 +1,13 @@
+[metadata]
+Code=PS14
+Date=2014-07-08
+Name=San Diego Comic-Con 2014
+Type=Reprint
+
+[cards]
+1 M Ajani Steadfast
+62 M Jace, the Living Guildpact
+103 M Liliana Vess
+134 M Chandra, Pyromaster
+187 M Nissa, Worldwaker
+210 M Garruk, Apex Predator

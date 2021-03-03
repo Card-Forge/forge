@@ -43,6 +43,7 @@ import javax.swing.event.PopupMenuListener;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 
 import forge.FThreads;
 import forge.GuiBase;
@@ -70,6 +71,7 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
+import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -96,6 +98,7 @@ import forge.match.AbstractGuiGame;
 import forge.menus.IMenuProvider;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
+import forge.player.PlayerZoneUpdates;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -123,13 +126,14 @@ import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PhaseLabel;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
+import forge.util.Localizer;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.util.gui.SOptionPane;
-import forge.util.Localizer;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.FloatingZone;
+import net.miginfocom.layout.LinkHandler;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -267,7 +271,7 @@ public final class CMatchUI
         if (!isInGame()) {
             return;
         }
-        final Deck deck = getGameView().getDeck(getCurrentPlayer().getLobbyPlayerName());
+        final Deck deck = getGameView().getDeck(getCurrentPlayer());
         if (deck != null) {
             FDeckViewer.show(deck);
         }
@@ -459,6 +463,8 @@ public final class CMatchUI
 
     @Override
     public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        List<PlayerZoneUpdate> updatedPlayerZones = Lists.newArrayList();
+
         for (final PlayerZoneUpdate update : zonesToUpdate) {
             final PlayerView player = update.getPlayer();
                 for (final ZoneType zone : update.getZones()) {
@@ -467,7 +473,9 @@ public final class CMatchUI
                             break;
                         case Hand:  // controller hand always shown
                             if (controller != player) {
-                                FloatingZone.show(this,player,zone);
+                                if (FloatingZone.show(this,player,zone)) {
+                                    updatedPlayerZones.add(update);
+                                }
                             }
                             break;
                         case Library:
@@ -475,14 +483,16 @@ public final class CMatchUI
                         case Exile:
                         case Flashback:
                         case Command:
-                            FloatingZone.show(this,player,zone);
+                            if (FloatingZone.show(this,player,zone)) {
+                                updatedPlayerZones.add(update);
+                            }
                             break;
                         default:
                             break;
                     }
                 }
             }
-        return zonesToUpdate; //pfps should return only the newly shown zones
+        return updatedPlayerZones;
     }
 
     @Override
@@ -595,6 +605,20 @@ public final class CMatchUI
         });
     }
 
+    @Override
+    public void refreshField() {
+        super.refreshField();
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override public final void run() {
+                for (final PlayerView p : getGameView().getPlayers()) {
+                    if ( p.getCards(ZoneType.Battlefield) != null ) {
+                        updateCards(p.getCards(ZoneType.Battlefield));
+                    }
+                }
+                FloatingZone.refreshAll();
+            }
+        });
+    }
 
     @Override
     public List<JMenu> getMenus() {
@@ -782,9 +806,11 @@ public final class CMatchUI
         initHandViews();
         SLayoutIO.loadLayout(null);
         view.populate();
-        for (final VHand h : getHandViews()) {
-            h.getLayoutControl().updateHand();
+        final PlayerZoneUpdates zones = new PlayerZoneUpdates();
+        for (final PlayerView p : sortedPlayers) {
+        	zones.add(new PlayerZoneUpdate(p, ZoneType.Hand));
         }
+        updateZones(zones);
     }
 
     @Override
@@ -968,7 +994,7 @@ public final class CMatchUI
     }
 
     @Override
-    public Map<CardView, Integer> assignDamage(final CardView attacker,
+    public Map<CardView, Integer> assignCombatDamage(final CardView attacker,
             final List<CardView> blockers, final int damage,
             final GameEntityView defender, final boolean overrideOrder) {
         if (damage <= 0) {
@@ -985,7 +1011,7 @@ public final class CMatchUI
         FThreads.invokeInEdtAndWait(new Runnable() {
             @Override
             public void run() {
-                final VAssignDamage v = new VAssignDamage(CMatchUI.this, attacker, blockers, damage, defender, overrideOrder);
+                final VAssignCombatDamage v = new VAssignCombatDamage(CMatchUI.this, attacker, blockers, damage, defender, overrideOrder);
                 result.set(v.getDamageMap());
             }});
         return result.get();
@@ -1002,6 +1028,7 @@ public final class CMatchUI
             players = new FCollection<>(new PlayerView[]{players.get(1), players.get(0)});
         }
         initMatch(players, myPlayers);
+        clearSelectables(); //fix uncleared selection
 
         actuateMatchPreferences();
 
@@ -1013,10 +1040,12 @@ public final class CMatchUI
 
     @Override
     public void afterGameEnd() {
+        super.afterGameEnd();
         Singletons.getView().getLpnDocument().remove(targetingOverlay.getPanel());
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override public void run() {
                 Singletons.getView().getNavigationBar().closeTab(screen);
+                LinkHandler.clearWeakReferencesNow();
             }
         });
     }
@@ -1086,27 +1115,43 @@ public final class CMatchUI
     }
 
     @Override
-    public boolean openZones(final Collection<ZoneType> zones, final Map<PlayerView, Object> players) {
-        if (zones.size() == 1) {
-            switch (zones.iterator().next()) {
-            case Battlefield:
-            case Hand:
-                return true; //don't actually need to open anything, but indicate that zone can be opened
-            default:
-                return false;
+    public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables) {
+        final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
+        for (final PlayerView view : playersWithTargetables.keySet()) {
+            for(final ZoneType zone : zones) {
+                if (zone.equals(ZoneType.Battlefield) || zone.equals(ZoneType.Hand)) {
+                    continue;
+                }
+
+                if (zone.equals(ZoneType.Stack)) {
+                    // TODO: Remove this if we have ever have a Stack zone that's displayable for Counters
+                    continue;
+                }
+
+                zonesToUpdate.add(new PlayerZoneUpdate(view, zone));
             }
         }
-        return false;
+
+        tempShowZones(controller, zonesToUpdate);
+        return zonesToUpdate;
     }
 
     @Override
-    public void restoreOldZones(final Map<PlayerView, Object> playersToRestoreZonesFor) {
+    public void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates) {
+        hideZones(playerView, playerZoneUpdates);
     }
 
     @Override
     public boolean isUiSetToSkipPhase(final PlayerView playerTurn, final PhaseType phase) {
+        PlayerView controlledPlayer = playerTurn.getMindSlaveMaster();
+        boolean skippedPhase = true;
+        if (controlledPlayer != null) {
+            final PhaseLabel controlledLabel = getFieldViewFor(controlledPlayer).getPhaseIndicator().getLabelFor(phase);
+            skippedPhase = controlledLabel != null && !controlledLabel.getEnabled();
+        }
+
         final PhaseLabel label = getFieldViewFor(playerTurn).getPhaseIndicator().getLabelFor(phase);
-        return label != null && !label.getEnabled();
+        return skippedPhase && label != null && !label.getEnabled();
     }
 
     /**
@@ -1352,7 +1397,7 @@ public final class CMatchUI
         if (sa.getTargetRestrictions() != null) {
             sb.append(" targeting ");
             TargetChoices targets = si.getTargetChoices();
-            sb.append(targets.getTargetedString());
+            sb.append(targets);
         }
         sb.append(".");        
         String message1 = sb.toString();
@@ -1411,4 +1456,57 @@ public final class CMatchUI
         nextNotifiableStackIndex--;
     }
 
+    @Override
+    public void handleLandPlayed(Card land) {
+        Runnable createPopupThread = new Runnable() {
+            @Override
+            public void run() {
+                createLandPopupPanel(land);
+            }
+        };
+        GuiBase.getInterface().invokeInEdtAndWait(createPopupThread);        
+    }
+
+    private void createLandPopupPanel(Card land) {
+        
+        String landPlayedNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_LAND_PLAYED_NOTIFICATION_POLICY);
+        Player cardController = land.getController();       
+        boolean isAi = cardController.isAI();         
+        if(ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS.equals(landPlayedNotificationPolicy) 
+                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI.equals(landPlayedNotificationPolicy) && (isAi))
+                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.isBasicLand())
+                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.isBasicLand()) && (isAi)) {
+            String title = "Forge";            
+            List<String> options = ImmutableList.of(Localizer.getInstance().getMessage("lblOK"));
+            
+            MigLayout migLayout = new MigLayout("insets 15, left, gap 30, fill");
+            JPanel mainPanel = new JPanel(migLayout);
+            final Dimension parentSize = JOptionPane.getRootFrame().getSize();
+            Dimension maxSize = new Dimension(1400, parentSize.height - 100);
+            mainPanel.setMaximumSize(maxSize);
+            mainPanel.setOpaque(false);   
+            
+            int rotation = getRotation(land.getView());
+
+            FImagePanel imagePanel = new FImagePanel();               
+            BufferedImage bufferedImage = FImageUtil.getImage(land.getCurrentState().getView()); 
+            imagePanel.setImage(bufferedImage, rotation, AutoSizeImageMode.SOURCE);
+            int imageWidth = 433;
+            int imageHeight = 600;
+            Dimension imagePanelDimension = new Dimension(imageWidth,imageHeight);
+            imagePanel.setMinimumSize(imagePanelDimension);
+                    
+            mainPanel.add(imagePanel, "cell 0 0, spany 3");
+            
+            String msg = cardController.toString() + " puts " + land.toString() + " into play into " + ZoneType.Battlefield.toString() + "."; 
+            
+            final FTextArea prompt1 = new FTextArea(msg);
+            prompt1.setFont(FSkin.getFont(21));
+            prompt1.setAutoSize(true);
+            prompt1.setMinimumSize(new Dimension(475,200));
+            mainPanel.add(prompt1, "cell 1 0, aligny top");    
+            
+            FOptionPane.showOptionDialog(null, title, null, mainPanel, options);                      
+        }      
+    }
 }

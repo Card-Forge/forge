@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Creature Serpent
 PT:4/3
 S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
-A:AB$ Animate | Cost$ U Sac<1/Island> | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Island | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True | SpellDescription$ Target land becomes an Island until end of turn.
+A:AB$ Animate | Cost$ U Sac<1/Island> | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Island | RemoveLandTypes$ True | SpellDescription$ Target land becomes an Island until end of turn.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreamwinder.jpg
 Oracle:Dreamwinder can't attack unless defending player controls an Island.\n{U}, Sacrifice an Island: Target land becomes an Island until end of turn.

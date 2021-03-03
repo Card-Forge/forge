@@ -1,0 +1,11 @@
+Name:Draugr Necromancer
+ManaCost:3 B
+Types:Snow Creature Zombie Cleric
+PT:4/4
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidLKI$ Creature.nonToken+OppCtrl | ReplaceWith$ Exile | CheckSelfLKIZone$ True | Description$ If a nontoken creature an opponent controls would die, exile that card with an ice counter on it instead.
+SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ ICE | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Card.OppOwn+counters_GE1_ICE+nonLand | AffectedZone$ Exile | MayPlay$ True | MayPlaySnowIgnoreColor$ True | Description$ You may cast spells from among cards in exile your opponents own with ice counters on them, and you may spend mana from snow sources as though it were mana of any color to cast those spells.
+DeckNeeds:Type$Snow
+DeckHas:Ability$Counters
+Oracle:If a nontoken creature an opponent controls would die, exile that card with an ice counter on it instead.\nYou may cast spells from among cards in exile your opponents own with ice counters on them, and you may spend mana from snow sources as though it were mana of any color to cast those spells.

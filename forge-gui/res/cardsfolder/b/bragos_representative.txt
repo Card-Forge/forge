@@ -2,6 +2,6 @@ Name:Brago's Representative
 ManaCost:2 W
 Types:Creature Human Advisor
 PT:1/4
-S:Mode$ Continuous | Affected$ You | AddKeyword$ You get an additional vote. | Description$ While voting, you get an additional vote. (The votes can be for different choices or for the same choice.)
+S:Mode$ Continuous | Affected$ You | AdditionalVote$ 1 | Description$ While voting, you get an additional vote. (The votes can be for different choices or for the same choice.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bragos_representative.jpg
 Oracle:While voting, you get an additional vote. (The votes can be for different choices or for the same choice.)

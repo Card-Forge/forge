@@ -145,11 +145,17 @@ public class CostPayment extends ManaConversionMatrix {
             }
 
             if (pd == null || !part.payAsDecided(decisionMaker.getPlayer(), pd, ability)) {
+                if (part instanceof CostPartMana) {
+                    ((CostPartMana)part).setCardMatrix(null);
+                }
                 game.costPaymentStack.pop(); // cost is resolved
                 return false;
             }
             this.paidCostParts.add(part);
 
+            if (part instanceof CostPartMana) {
+                ((CostPartMana)part).setCardMatrix(null);
+            }
             game.costPaymentStack.pop(); // cost is resolved
         }
 

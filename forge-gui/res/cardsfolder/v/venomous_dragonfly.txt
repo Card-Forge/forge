@@ -7,6 +7,6 @@ T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Sel
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, destroy that creature at end of combat.
 SVar:DelTrigBlocked:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | RememberObjects$ TriggeredAttacker | TriggerDescription$ Destroy blocked creature at end of combat.
 SVar:DelTrigBlocker:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | RememberObjects$ TriggeredBlocker | TriggerDescription$ Destroy blocking creature at end of combat.
-SVar:TrigDestroy:DB$Destroy | Defined$ DelayTriggerRemembered
+SVar:TrigDestroy:DB$ Destroy | Defined$ DelayTriggerRemembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venomous_dragonfly.jpg
 Oracle:Flying\nWhenever Venomous Dragonfly blocks or becomes blocked by a creature, destroy that creature at end of combat.

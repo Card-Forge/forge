@@ -5,4 +5,4 @@ K:Convoke
 A:SP$ Token | Cost$ X G W W | TokenAmount$ X | References$ X | TokenScript$ w_1_1_soldier_lifelink | LegacyImage$ w 1 1 soldier lifelink grn | SpellDescription$ Create X 1/1 white Soldier creature tokens with lifelink.
 SVar:X:Count$xPaid
 DeckHas:Ability$Token & Ability$LifeGain
-Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of the creature's color.)\nCreate X 1/1 white Soldier creature tokens with lifelink.
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nCreate X 1/1 white Soldier creature tokens with lifelink.

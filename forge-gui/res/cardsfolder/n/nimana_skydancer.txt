@@ -1,0 +1,10 @@
+Name:Nimana Skydancer
+ManaCost:2 B
+Types:Creature Human Rogue
+PT:2/1
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target opponent mills two cards. (They put the top two cards of their library into their graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
+DeckHas:Ability$Mill
+Oracle:Flash\nFlying\nWhen Nimana Skydancer enters the battlefield, target opponent mills two cards. (They put the top two cards of their library into their graveyard.)

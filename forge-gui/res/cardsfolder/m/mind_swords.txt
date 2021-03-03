@@ -1,9 +1,8 @@
 Name:Mind Swords
 ManaCost:1 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 B | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 2 | Hidden$ True | Mandatory$ True | SubAbility$ DBExileOpp | SpellDescription$ Each player exiles two cards from their hand.
-A:SP$ ChangeZone | Cost$ Sac<1/Creature> | IsPresent$ Swamp.YouCtrl | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 2 | Hidden$ True | Mandatory$ True | SubAbility$ DBExileOpp | CostDesc$ If you control a Swamp, you may sacrifice a creature | SpellDescription$ rather than pay CARDNAME's mana cost.
-SVar:DBExileOpp:DB$ ChangeZone | DefinedPlayer$ Opponent | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 2 | Mandatory$ True | Hidden$ True
+SVar:AltCost:Cost$ Sac<1/Creature/creature> | IsPresent$ Swamp.YouCtrl | Description$ If you control a Swamp, you may sacrifice a creature rather than pay this spell's mana cost.
+A:SP$ RepeatEach | Cost$ 1 B | RepeatPlayers$ Player | RepeatSubAbility$ DBExile | StackDescription$ SpellDescription | SpellDescription$ Each player exiles two cards from their hand.
+SVar:DBExile:DB$ ChangeZone | DefinedPlayer$ Player.IsRemembered | Chooser$ Player.IsRemembered | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 2 | Hidden$ True | Mandatory$ True | SpellDescription$ exiles two cards from their hand.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_swords.jpg
-Oracle:If you control a Swamp, you may sacrifice a creature rather than pay Mind Swords's mana cost.\nEach player exiles two cards from their hand.
+Oracle:If you control a Swamp, you may sacrifice a creature rather than pay this spell's mana cost.\nEach player exiles two cards from their hand.

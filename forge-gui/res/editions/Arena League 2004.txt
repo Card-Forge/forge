@@ -1,0 +1,21 @@
+[metadata]
+Code=PAL04
+Date=2004-01-01
+Name=Arena League 2004
+Type=Reprint
+
+[cards]
+1 R Plains
+2 R Island
+3 R Swamp
+4 R Mountain
+5 R Forest
+6 R Darksteel Ingot
+7 R Serum Visions
+8 R Glacial Ray
+9 R Circle of Protection:Art
+10 R Mise
+11 R Booster Tutor
+12 R Goblin Mime
+13 R Granny's Payback
+14 R Ashnod's Coupon

@@ -5,4 +5,4 @@ PT:2/2
 K:Fear
 K:AlternateAdditionalCost:Reveal<1/Goblin>:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squeaking_pie_sneak.jpg
-Oracle:As an additional cost to cast Squeaking Pie Sneak, reveal a Goblin card from your hand or pay {3}.\nFear (This creature can't be blocked except by artifact creatures and/or black creatures.)
+Oracle:As an additional cost to cast this spell, reveal a Goblin card from your hand or pay {3}.\nFear (This creature can't be blocked except by artifact creatures and/or black creatures.)

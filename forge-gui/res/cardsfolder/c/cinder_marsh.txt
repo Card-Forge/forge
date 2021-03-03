@@ -4,6 +4,5 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ T | Produced$ B | SubAbility$ DBStayTapped | SpellDescription$ Add {B}. CARDNAME doesn't untap during your next untap step.
 A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBStayTapped | SpellDescription$ Add {R}. CARDNAME doesn't untap during your next untap step.
-SVar:DBStayTapped:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_marsh.jpg
+SVar:DBStayTapped:DB$ Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
 Oracle:{T}: Add {C}.\n{T}: Add {B} or {R}. Cinder Marsh doesn't untap during your next untap step.

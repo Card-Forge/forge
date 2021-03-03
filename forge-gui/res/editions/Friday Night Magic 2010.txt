@@ -1,0 +1,19 @@
+[metadata]
+Code=F10
+Date=2010-01-01
+Name=Friday Night Magic 2010
+Type=Reprint
+
+[cards]
+1 R Tidehollow Sculler
+2 R Ghostly Prison
+3 R Ancient Ziggurat
+4 R Bloodbraid Elf
+5 R Cloudpost
+6 R Elvish Visionary
+7 R Anathemancer
+8 R Krosan Grip
+9 R Qasali Pridemage
+10 R Rift Bolt
+11 R Gatekeeper of Malakir
+12 R Wild Nacatl

@@ -6,14 +6,17 @@ import com.badlogic.gdx.math.Vector2;
 
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
+import forge.assets.FSkinColor;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.util.PhysicsObject;
 import forge.util.Utils;
 
 public abstract class FScrollPane extends FContainer {
     private static final float FLING_DECEL = 750f;
-    /*private static final FSkinColor INDICATOR_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.7f);
+    private static final FSkinColor INDICATOR_COLOR = FSkinColor.get(FSkinColor.Colors.CLR_TEXT).alphaColor(0.7f);
     private static final float INDICATOR_SIZE = Utils.scale(5);
-    private static final float INDICATOR_MARGIN = Utils.scale(3);*/
+    private static final float INDICATOR_MARGIN = Utils.scale(3);
 
     private float scrollLeft, scrollTop;
     private ScrollBounds scrollBounds;
@@ -152,28 +155,36 @@ public abstract class FScrollPane extends FContainer {
 
     @Override
     protected void drawOverlay(Graphics g) {
-        //TODO: Consider other ways to indicate scroll potential that fade in and out based on input
-        //draw triangles indicating scroll potential
-        /*if (scrollLeft > 0) {
-            float x = INDICATOR_MARGIN;
-            float y = getHeight() / 2;
-            g.fillTriangle(INDICATOR_COLOR, x, y, x + INDICATOR_SIZE, y - INDICATOR_SIZE, x + INDICATOR_SIZE, y + INDICATOR_SIZE);
-        }
-        if (scrollLeft < getMaxScrollLeft()) {
-            float x = getWidth() - INDICATOR_MARGIN;
-            float y = getHeight() / 2;
-            g.fillTriangle(INDICATOR_COLOR, x, y, x - INDICATOR_SIZE, y - INDICATOR_SIZE, x - INDICATOR_SIZE, y + INDICATOR_SIZE);
-        }
-        if (scrollTop > 0) {
-            float x = getWidth() / 2;
-            float y = INDICATOR_MARGIN;
-            g.fillTriangle(INDICATOR_COLOR, x, y, x - INDICATOR_SIZE, y + INDICATOR_SIZE, x + INDICATOR_SIZE, y + INDICATOR_SIZE);
-        }
-        if (scrollTop < getMaxScrollTop()) {
-            float x = getWidth() / 2;
-            float y = getHeight() - INDICATOR_MARGIN;
-            g.fillTriangle(INDICATOR_COLOR, x, y, x - INDICATOR_SIZE, y - INDICATOR_SIZE, x + INDICATOR_SIZE, y - INDICATOR_SIZE);
-        }*/
+        try {
+            boolean isFieldZoneView = toString().contains("VField")||toString().contains("VZoneDisplay");
+            //if ForgePreferences.FPref.UI_ENABLE_MATCH_SCROLL_INDICATOR is missing this will return NPE and could cause lockup on Startup
+            if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_MATCH_SCROLL_INDICATOR))
+                return;
+            if (!isFieldZoneView)
+                return;
+            //TODO: Consider other ways to indicate scroll potential that fade in and out based on input
+            //draw triangles indicating scroll potential
+            if (scrollLeft > 0) {
+                float x = INDICATOR_MARGIN;
+                float y = getHeight() / 2;
+                g.fillTriangle(INDICATOR_COLOR, x, y, x + INDICATOR_SIZE, y - INDICATOR_SIZE, x + INDICATOR_SIZE, y + INDICATOR_SIZE);
+            }
+            if (scrollLeft < getMaxScrollLeft()) {
+                float x = getWidth() - INDICATOR_MARGIN;
+                float y = getHeight() / 2;
+                g.fillTriangle(INDICATOR_COLOR, x, y, x - INDICATOR_SIZE, y - INDICATOR_SIZE, x - INDICATOR_SIZE, y + INDICATOR_SIZE);
+            }
+            if (scrollTop > 0) {
+                float x = getWidth() / 2;
+                float y = INDICATOR_MARGIN;
+                g.fillTriangle(INDICATOR_COLOR, x, y, x - INDICATOR_SIZE, y + INDICATOR_SIZE, x + INDICATOR_SIZE, y + INDICATOR_SIZE);
+            }
+            if (scrollTop < getMaxScrollTop()) {
+                float x = getWidth() / 2;
+                float y = getHeight() - INDICATOR_MARGIN;
+                g.fillTriangle(INDICATOR_COLOR, x, y, x - INDICATOR_SIZE, y - INDICATOR_SIZE, x + INDICATOR_SIZE, y - INDICATOR_SIZE);
+            }
+        } catch (Exception e) {}
     }
 
     //allow overriding to adjust what scroll positions are restored after layout

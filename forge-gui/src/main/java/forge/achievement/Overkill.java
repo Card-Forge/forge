@@ -2,14 +2,17 @@ package forge.achievement;
 
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.util.Localizer;
 
 public class Overkill extends Achievement {
     public Overkill(int bronze0, int silver0, int gold0, int mythic0) {
-        super("Overkill", "Overkill", "Win a game with opponent at", 0,
-            String.format("%d life", bronze0), bronze0,
-            String.format("%d life", silver0), silver0,
-            String.format("%d life", gold0), gold0,
-            String.format("%d life", mythic0), mythic0);
+        super("Overkill", Localizer.getInstance().getMessage("lblOverkill"),
+            Localizer.getInstance().getMessage("lblWinGameWithOppentAt"), 0,
+            Localizer.getInstance().getMessage("lblNLife", String.valueOf(bronze0)), bronze0,
+            Localizer.getInstance().getMessage("lblNLife", String.valueOf(silver0)), silver0,
+            Localizer.getInstance().getMessage("lblNLife", String.valueOf(gold0)), gold0,
+            Localizer.getInstance().getMessage("lblNLife", String.valueOf(mythic0)), mythic0
+        );
     }
 
     @Override
@@ -25,7 +28,7 @@ public class Overkill extends Achievement {
 
     @Override
     protected String getNoun() {
-        return "Life";
+        return Localizer.getInstance().getMessage("lblLife");
     }
     @Override
     protected boolean pluralizeNoun() {

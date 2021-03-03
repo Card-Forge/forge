@@ -6,9 +6,11 @@ import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardUtil;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -16,6 +18,7 @@ import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 
 import java.util.List;
+import java.util.Map;
 
 
 public class RepeatEachAi extends SpellAbilityAi {
@@ -44,21 +47,6 @@ public class RepeatEachAi extends SpellAbilityAi {
             List<Player> opponents = aiPlayer.getOpponents();
             for(Player opp : opponents) {
                 if (CardLists.filter(opp.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
-                    return false;
-                }
-            }
-        } else if ("GainControlOwns".equals(logic)) {
-            List<Card> list = CardLists.filter(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card crd) {
-                    return crd.isCreature() && !crd.getController().equals(crd.getOwner());
-                }
-            });
-            if (list.isEmpty()) {
-                return false;
-            }
-            for (final Card c : list) {
-                if (aiPlayer.equals(c.getController())) {
                     return false;
                 }
             }
@@ -108,8 +96,21 @@ public class RepeatEachAi extends SpellAbilityAi {
                     }
                 }
             }
-            // would not hit oppoent, don't do that
+            // would not hit opponent, don't do that
             return hitOpp;
+        } else if ("EquipAll".equals(logic)) {
+            if (aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN1, aiPlayer)) {
+                final CardCollection unequipped = CardLists.filter(aiPlayer.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
+                    @Override
+                    public boolean apply(Card card) {
+                        return card.isEquipment() && card.getAttachedTo() != sa.getHostCard();
+                    }
+                });
+
+                return !unequipped.isEmpty();
+            }
+
+            return false;
         }
 
         // TODO Add some normal AI variability here
@@ -118,7 +119,7 @@ public class RepeatEachAi extends SpellAbilityAi {
     }
 
     @Override
-    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         return ComputerUtilCard.getBestCreatureAI(options);
     }
 }

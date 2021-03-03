@@ -9,7 +9,7 @@ SVar:X:Count$Valid Creature.tapped+TargetedPlayerCtrl
 A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Tamiyo, the Moon Sage | Image$ emblem_tamiyo_the_moon_sage | StaticAbilities$ UnlimitedHand | Triggers$ TamiyoCardToGrave | SVars$ TamiyoReturn | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."
 SVar:UnlimitedHand:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 SVar:TamiyoCardToGrave:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.nonToken+YouOwn | OptionalDecider$ You | TriggerZones$ Command | Execute$ TamiyoReturn | TriggerDescription$ Whenever a card is put into your graveyard from anywhere, you may return it to your hand.
-SVar:TamiyoReturn:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand
+SVar:TamiyoReturn:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Graveyard | Destination$ Hand
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tamiyo_the_moon_sage.jpg
-Oracle:[+1]: Tap target permanent. It doesn't untap during its controller's next untap step.\n[-2]: Draw a card for each tapped creature target player controls.\n[-8]: You get an emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."
+Oracle:[+1]: Tap target permanent. It doesn't untap during its controller's next untap step.\n[−2]: Draw a card for each tapped creature target player controls.\n[−8]: You get an emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."

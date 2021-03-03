@@ -47,7 +47,7 @@ import java.util.Map.Entry;
 public class GameFormat implements Comparable<GameFormat> {
     private final String name;
     public enum FormatType {Sanctioned, Casual, Historic, Digital, Custom}
-    public enum FormatSubType {Block, Standard, Extended, Pioneer, Modern, Legacy, Vintage, Commander, Planechase, Videogame, MTGO, Custom}
+    public enum FormatSubType {Block, Standard, Extended, Pioneer, Modern, Legacy, Vintage, Commander, Planechase, Videogame, MTGO, Arena, Custom}
 
     // contains allowed sets, when empty allows all sets
     private FormatType formatType;
@@ -200,7 +200,7 @@ public class GameFormat implements Comparable<GameFormat> {
         for (String setCode : allowedSetCodes_ro) {
             CardEdition edition = StaticData.instance().getEditions().get(setCode);
             if (edition != null) {
-                for (CardInSet card : edition.getCards()) {
+                for (CardInSet card : edition.getAllCardsInSet()) {
                     if (!bannedCardNames_ro.contains(card.name)) {
                         PaperCard pc = commonCards.getCard(card.name, setCode);
                         if (pc != null) {

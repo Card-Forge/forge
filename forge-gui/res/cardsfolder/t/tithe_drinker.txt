@@ -5,4 +5,4 @@ PT:2/1
 K:Lifelink
 K:Extort
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tithe_drinker.jpg
-Oracle:Lifelink\nExtort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nExtort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)

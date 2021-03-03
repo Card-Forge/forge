@@ -7,6 +7,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 
 import forge.FThreads;
+import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -32,6 +33,7 @@ import forge.screens.TabPageScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FLabel;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.util.Localizer;
 
 public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionScreen> {
     private final FLabel lblShards = add(new FLabel.Builder().font(ConquestAEtherScreen.LABEL_FONT).parseSymbols().build());
@@ -40,8 +42,8 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
 
     public ConquestCollectionScreen() {
         super("", ConquestMenu.getMenu(), new CollectionTab[] {
-            new CollectionTab("Collection", FSkinImage.SPELLBOOK),
-            new CollectionTab("Exile", FSkinImage.EXILE)
+            new CollectionTab(Localizer.getInstance().getMessage("lblCollection"), FSkinImage.SPELLBOOK),
+            new CollectionTab(Localizer.getInstance().getMessage("lblExile"), FSkinImage.EXILE)
         }, true);
         btnExileRetrieveMultiple.setVisible(false); //hide unless in multi-select mode
         btnExileRetrieveMultiple.setCommand(new FEventHandler() {
@@ -109,7 +111,7 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
 
     private void updateShards() {
         int availableShards = FModel.getConquest().getModel().getAEtherShards();
-        lblShards.setText("Shards: {AE}" + availableShards);
+        lblShards.setText(Localizer.getInstance().getMessage("lblHaveNAEShards", String.valueOf(availableShards) ,"{AE}"));
     }
     
     private void updateInfo() {
@@ -118,9 +120,7 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
         double exileValue = prefs.getPrefInt(CQPref.AETHER_BASE_EXILE_VALUE);
         double retrieveCost = prefs.getPrefInt(CQPref.AETHER_BASE_RETRIEVE_COST);
 
-        lblInfo.setText("Exile unneeded cards at " + Math.round(100 * exileValue / baseValue) +
-                "% value.\nRetrieve exiled cards for " + Math.round(100 * retrieveCost / baseValue) +
-                "% value.");
+        lblInfo.setText(Localizer.getInstance().getMessage("lblExileRetrieveProportion", Math.round(100 * exileValue / baseValue), Math.round(100 * retrieveCost / baseValue)));
     }
 
     private void refreshCards() {
@@ -145,23 +145,23 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
         CQPref baseValuePref;
         Collection<PaperCard> cards;
         if (getSelectedPage() == tabPages[0]) {
-            caption = "Exile";
+            caption = Localizer.getInstance().getMessage("lblExile");
             baseValuePref = CQPref.AETHER_BASE_EXILE_VALUE;
             cards = getCollectionTab().list.getSelectedItems();
         }
         else {
-            caption = "Retrieve";
+            caption = Localizer.getInstance().getMessage("lblRetrieve");
             baseValuePref = CQPref.AETHER_BASE_RETRIEVE_COST;
             cards = getExileTab().list.getSelectedItems();
         }
 
         int count = cards.size();
         if (count == 0) {
-            caption = "Cancel";
+            caption = Localizer.getInstance().getMessage("lblCancel");
         }
         else {
             if (count > 1) {
-                caption += " " + count + " cards";
+                caption += " " + count + " " + Localizer.getInstance().getMessage("lblCards");
             }
             int total = 0;
             for (PaperCard card : cards) {
@@ -237,7 +237,7 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
                         final ConquestData model = FModel.getConquest().getModel();
                         if (model.isInExile(card)) {
                             final int cost = ConquestUtil.getShardValue(card, CQPref.AETHER_BASE_RETRIEVE_COST);
-                            item = new FMenuItem("Retrieve for {AE}" + cost, FSkinImage.PLUS, new FEventHandler() {
+                            item = new FMenuItem(Localizer.getInstance().getMessage("lblRetrieveForNAE", String.valueOf(cost), "{AE}"), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
                                     FThreads.invokeInBackgroundThread(new Runnable() {
@@ -261,7 +261,7 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
                         }
                         else {
                             final int value = ConquestUtil.getShardValue(card, CQPref.AETHER_BASE_EXILE_VALUE);
-                            item = new FMenuItem("Exile for {AE}" + value, FSkinImage.EXILE, new FEventHandler() {
+                            item = new FMenuItem(Localizer.getInstance().getMessage("lblExileForNAE", String.valueOf(value), "{AE}"), FSkinImage.EXILE, new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
                                     FThreads.invokeInBackgroundThread(new Runnable() {
@@ -325,7 +325,7 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
 
         private static class CardOriginFilter extends ComboBoxFilter<PaperCard, ConquestPlane> {
             public CardOriginFilter(ItemManager<? super PaperCard> itemManager0) {
-                super("All Planes", FModel.getPlanes(), itemManager0);
+                super(Localizer.getInstance().getMessage("lblAllPlanes"), FModel.getPlanes(), itemManager0);
             }
 
             @Override

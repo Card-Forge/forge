@@ -1,0 +1,15 @@
+[metadata]
+Code=J16
+Date=2016-01-01
+Name=Judge Gift Cards 2016
+Type=Reprint
+
+[cards]
+1 R Stoneforge Mystic
+2 R Mana Drain
+3 R Azusa, Lost but Seeking
+4 R Command Beacon
+5 R Mystic Confluence
+6 R Imperial Seal
+7 R Defense of the Heart
+8 R Zur the Enchanter

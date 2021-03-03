@@ -4,4 +4,4 @@ Types:Creature Elemental
 PT:3/3
 K:Forestwalk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zendikar_farguide.jpg
-Oracle:Forestwalk
+Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)

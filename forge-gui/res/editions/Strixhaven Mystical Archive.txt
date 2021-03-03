@@ -1,0 +1,14 @@
+[metadata]
+Code=STA
+Date=2021-04-23
+Name=Strixhaven Mystical Archive
+Type=Other
+
+[cards]
+10 R Swords to Plowshares
+19 U Opt
+27 M Demonic Tutor
+73 R Swords to Plowshares
+82 U Opt
+90 M Demonic Tutor
+

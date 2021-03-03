@@ -11,4 +11,4 @@ SVar:EOTTrig:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$
 SVar:SarkhanDiscard:DB$ Discard | Mode$ Hand
 SVar:PlayMain1:ALWAYS
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sarkhan_the_dragonspeaker.jpg
-Oracle:[+1]: Until end of turn, Sarkhan, the Dragonspeaker becomes a legendary 4/4 red Dragon creature with flying, indestructible, and haste. (He doesn't lose loyalty while he's not a planeswalker.)\n[-3]: Sarkhan, the Dragonspeaker deals 4 damage to target creature.\n[-6]: You get an emblem with "At the beginning of your draw step, draw two additional cards" and "At the beginning of your end step, discard your hand."
+Oracle:[+1]: Until end of turn, Sarkhan, the Dragonspeaker becomes a legendary 4/4 red Dragon creature with flying, indestructible, and haste. (He doesn't lose loyalty while he's not a planeswalker.)\n[−3]: Sarkhan, the Dragonspeaker deals 4 damage to target creature.\n[−6]: You get an emblem with "At the beginning of your draw step, draw two additional cards" and "At the beginning of your end step, discard your hand."

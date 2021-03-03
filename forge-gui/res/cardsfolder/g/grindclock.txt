@@ -2,7 +2,7 @@ Name:Grindclock
 ManaCost:2
 Types:Artifact
 A:AB$ PutCounter | Cost$ T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on Grindclock.
-A:AB$ Mill | Cost$ T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | References$ X | SpellDescription$ Target player puts the top X cards of their library into their graveyard, where X is the number of charge counters on Grindclock.
+A:AB$ Mill | Cost$ T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | References$ X | SpellDescription$ Target player mills X cards, where X is the number of charge counters on Grindclock.
 SVar:X:Count$CardCounters.CHARGE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grindclock.jpg
-Oracle:{T}: Put a charge counter on Grindclock.\n{T}: Target player puts the top X cards of their library into their graveyard, where X is the number of charge counters on Grindclock.
+DeckHas:Ability$Counters
+Oracle:{T}: Put a charge counter on Grindclock.\n{T}: Target player mills X cards, where X is the number of charge counters on Grindclock.

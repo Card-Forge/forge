@@ -40,6 +40,11 @@ public class ChooseColorEffect extends SpellAbilityEffect {
             String[] restrictedChoices = sa.getParam("Choices").split(",");
             colorChoices = Arrays.asList(restrictedChoices);
         }
+        if (sa.hasParam("Exclude")) {
+            for (String s : sa.getParam("Exclude").split(",")) {
+                colorChoices.remove(s);
+            }
+        }
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
@@ -61,6 +66,9 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                         } else {
                             prompt = Localizer.getInstance().getMessage("lblChooseSpecifiedRangeColors", Lang.getNumeral(cntMin), Lang.getNumeral(cntMax));
                         }
+                    }
+                    else {
+                        prompt = Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(cntMax));
                     }
                 }
                 chosenColors = p.getController().chooseColors(prompt, sa, cntMin, cntMax, colorChoices);

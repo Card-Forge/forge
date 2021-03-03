@@ -3,8 +3,8 @@ ManaCost:2 G
 Types:Creature Dinosaur
 PT:5/5
 K:Ascend
-S:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays:1 | Description$ You may play an additional land on each of your turns.
+S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack or block. | CheckSVar$ X | SVarCompare$ EQ0 | References$ X | Description$ CARDNAME can't attack or block unless you have the city's blessing.
 SVar:X:Count$Blessing.1.0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wayward_swordtooth.jpg
-Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nYou may play an additional land on each of your turns.\nWayward Sawtooth can't attack or block unless you have the city's blessing.
+Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nYou may play an additional land on each of your turns.\nWayward Swordtooth can't attack or block unless you have the city's blessing.

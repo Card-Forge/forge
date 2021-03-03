@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Enchantment Aura
 K:Enchant creature you control
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ When CARDNAME enters the battlefield, enchanted creature fights up to one target creature you don't control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ When CARDNAME enters the battlefield, enchanted creature fights up to one target creature you don't control. (Each deals damage equal to its power to the other.)
 SVar:TrigFight:DB$ Fight | Defined$ Enchanted | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose up to one target creature you don't control | TargetMin$ 0 | TargetMax$ 1
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddToughness$ 2 | Description$ Enchanted creature gets +0/+2.
-Oracle:Enchant creature you control\nWhen Warbriar Blessing enters the battlefield, enchanted creature fights up to one target creature you don't control.\nEnchanted creature gets +0/+2.
+Oracle:Enchant creature you control\nWhen Warbriar Blessing enters the battlefield, enchanted creature fights up to one target creature you don't control. (Each deals damage equal to its power to the other.)\nEnchanted creature gets +0/+2.

@@ -2,7 +2,7 @@ Name:Magus of the Moon
 ManaCost:2 R
 Types:Creature Human Wizard
 PT:2/2
-S:Mode$ Continuous | Affected$ Land.nonBasic | AddType$ Mountain | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True | Description$ Nonbasic lands are Mountains.
+S:Mode$ Continuous | Affected$ Land.nonBasic | AddType$ Mountain | RemoveLandTypes$ True | Description$ Nonbasic lands are Mountains.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_moon.jpg
 Oracle:Nonbasic lands are Mountains.

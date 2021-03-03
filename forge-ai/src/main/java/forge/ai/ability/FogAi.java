@@ -113,6 +113,6 @@ public class FogAi extends SpellAbilityAi {
             chance = game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE);
         }
 
-        return chance;
+        return chance || mandatory;
     }
 }

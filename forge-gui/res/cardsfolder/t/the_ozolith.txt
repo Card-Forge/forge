@@ -1,0 +1,9 @@
+Name:The Ozolith
+ManaCost:1
+Types:Legendary Artifact
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.YouCtrl+HasCounters | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control leaves the battlefield, if it had counters on it, put those counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ EachFromSource | EachFromSource$ TriggeredCardLKICopy
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | IsPresent$ Card.Self+HasCounters | TriggerZones$ Battlefield | Execute$ TrigMoveCounter | OptionalDecider$ You | TriggerDescription$ At the beginning of combat on your turn, if CARDNAME has counters on it, you may move all counters from CARDNAME onto target creature.
+SVar:TrigMoveCounter:DB$ MoveCounter | Source$ Self | ValidTgts$ Creature | TgtPrompt$ Select target creature to get counters | CounterType$ All | CounterNum$ All
+DeckHas:Ability$Counters
+Oracle:Whenever a creature you control leaves the battlefield, if it had counters on it, put those counters on The Ozolith.\nAt the beginning of combat on your turn, if The Ozolith has counters on it, you may move all counters from The Ozolith onto target creature.

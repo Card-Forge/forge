@@ -1,0 +1,14 @@
+[metadata]
+Code=PM20
+Date=2019-07-02
+Name=Core Set 2020 Promos
+Type=Reprint
+
+[cards]
+69 C Negate
+95 U Disfigure
+131 R Chandra's Regulator
+139 U Flame Sweep
+185 R Nightpack Ambusher
+197 U Thrashing Brontodon
+206 U Corpse Knight

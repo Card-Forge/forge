@@ -1,0 +1,12 @@
+[metadata]
+Code=PI13
+Date=2013-01-01
+Name=IDW Comics 2013
+Type=Reprint
+
+[cards]
+10 R Voidmage Husher
+11 R Ogre Arsonist
+12 R Corrupt
+13 R High Tide
+14 R Gaze of Granite

@@ -3,4 +3,4 @@ ManaCost:no cost
 Types:Artifact Land
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seat_of_the_synod.jpg
-Oracle:{T}: Add {U}.
+Oracle:(Seat of the Synod isn't a spell.)\n{T}: Add {U}.

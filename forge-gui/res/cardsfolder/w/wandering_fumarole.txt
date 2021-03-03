@@ -5,6 +5,5 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 A:AB$ Animate | Cost$ 2 U R | Defined$ Self | Power$ 1 | Toughness$ 4 | Types$ Creature,Elemental | Colors$ Blue,Red | Abilities$ ABPump | SpellDescription$ Until end of turn, CARDNAME becomes a 1/4 blue and red Elemental creature with "{0}: Switch this creature's power and toughness until end of turn." It's still a land.
-SVar:ABPump:AB$ Pump | Cost$ 0 | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch this creature's power and toughness until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wandering_fumarole.jpg
+SVar:ABPump:AB$ Pump | Cost$ 0 | Defined$ Self | AILogic$ SwitchPT | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch this creature's power and toughness until end of turn.
 Oracle:Wandering Fumarole enters the battlefield tapped.\n{T}: Add {U} or {R}.\n{2}{U}{R}: Until end of turn, Wandering Fumarole becomes a 1/4 blue and red Elemental creature with "{0}: Switch this creature's power and toughness until end of turn." It's still a land.

@@ -45,11 +45,18 @@ public class CardZoom extends FOverlay {
     private static ActivateHandler activateHandler;
     private static String currentActivateAction;
     private static Rectangle flipIconBounds;
+    private static Rectangle mutateIconBounds;
     private static boolean showAltState;
+    private static boolean showBackSide = false;
+    private static boolean showMerged = false;
 
     public static void show(Object item) {
+        show(item, false);
+    }
+    public static void show(Object item, boolean showbackside) {
         List<Object> items0 = new ArrayList<>();
         items0.add(item);
+        showBackSide = showbackside; //reverse the displayed zoomed card for the choice list
         show(items0, 0, null);
     }
     public static void show(FCollectionView<?> items0, int currentIndex0, ActivateHandler activateHandler0) {
@@ -111,6 +118,7 @@ public class CardZoom extends FOverlay {
     }
 
     private static void onCardChanged() {
+        mutateIconBounds = null;
         if (activateHandler != null) {
             currentActivateAction = activateHandler.getActivateAction(currentIndex);
         }
@@ -118,6 +126,11 @@ public class CardZoom extends FOverlay {
             flipIconBounds = new Rectangle();
         } else {
             flipIconBounds = null;
+        }
+        if (currentCard != null) {
+            if (currentCard.getMergedCardsCollection() != null )
+                if (currentCard.getMergedCardsCollection().size() > 0)
+                    mutateIconBounds = new Rectangle();
         }
         showAltState = false;
     }
@@ -157,11 +170,26 @@ public class CardZoom extends FOverlay {
 
     @Override
     public boolean tap(float x, float y, int count) {
+        if (mutateIconBounds != null && mutateIconBounds.contains(x, y)) {
+            if(showMerged) {
+                showMerged = false;
+            } else {
+                showMerged = true;
+                show(currentCard.getMergedCardsCollection(), 0, null);
+            }
+            return true;
+        }
         if (flipIconBounds != null && flipIconBounds.contains(x, y)) {
-            showAltState = !showAltState;
+            if (!showBackSide)
+                showAltState = !showAltState;
+            else
+                showBackSide = !showBackSide;
             return true;
         }
         hide();
+        showBackSide = false;
+        showAltState = false;
+        showMerged = false;
         return true;
     }
 
@@ -169,14 +197,20 @@ public class CardZoom extends FOverlay {
     public boolean fling(float velocityX, float velocityY) {
         if (Math.abs(velocityX) > Math.abs(velocityY)) {
             incrementCard(velocityX > 0 ? -1 : 1);
+            showBackSide = false;
+            showAltState = false;
             return true;
         }
         if (velocityY > 0) {
             zoomMode = !zoomMode;
+            showBackSide = false;
+            showAltState = false;
             return true;
         }
         if (currentActivateAction != null && activateHandler != null) {
             hide();
+            showBackSide = false;
+            showAltState = false;
             activateHandler.activate(currentIndex);
             return true;
         }
@@ -219,7 +253,22 @@ public class CardZoom extends FOverlay {
         float w = getWidth();
         float h = getHeight();
         float messageHeight = FDialog.MSG_HEIGHT;
-        float maxCardHeight = h - 2 * messageHeight;
+        float AspectRatioMultiplier;
+        switch (Forge.extrawide) {
+            case "default":
+                AspectRatioMultiplier = 3; //good for tablets with 16:10 or similar
+                break;
+            case "wide":
+                AspectRatioMultiplier = 2.5f;
+                break;
+            case "extrawide":
+                AspectRatioMultiplier = 2; //good for tall phones with 21:9 or similar
+                break;
+            default:
+                AspectRatioMultiplier = 3;
+                break;
+        }
+        float maxCardHeight = h - AspectRatioMultiplier * messageHeight; //maxheight of currently zoomed card
 
         float cardWidth, cardHeight, y;
         
@@ -267,17 +316,27 @@ public class CardZoom extends FOverlay {
         float x = (w - cardWidth) / 2;
         y = (h - cardHeight) / 2;
         if (zoomMode) {
-            CardImageRenderer.drawZoom(g, currentCard, gameView, showAltState, x, y, cardWidth, cardHeight, getWidth(), getHeight(), true);
-        }
-        else {
-            CardImageRenderer.drawDetails(g, currentCard, gameView, showAltState, x, y, cardWidth, cardHeight);
+            CardImageRenderer.drawZoom(g, currentCard, gameView, showBackSide? showBackSide : showAltState, x, y, cardWidth, cardHeight, getWidth(), getHeight(), true);
+        } else {
+            CardImageRenderer.drawDetails(g, currentCard, gameView, showBackSide? showBackSide : showAltState, x, y, cardWidth, cardHeight);
         }
 
-        if (flipIconBounds != null) {
-            float imageWidth = cardWidth / 2;
-            float imageHeight = imageWidth * FSkinImage.FLIPCARD.getHeight() / FSkinImage.FLIPCARD.getWidth();
-            flipIconBounds.set(x + (cardWidth - imageWidth) / 2, y + (cardHeight - imageHeight) / 2, imageWidth, imageHeight);
-            g.drawImage(FSkinImage.FLIPCARD, flipIconBounds.x, flipIconBounds.y, flipIconBounds.width, flipIconBounds.height);
+        if (!showMerged) {
+            if (mutateIconBounds != null) {
+                float oldAlpha = g.getfloatAlphaComposite();
+                try {
+                    g.setAlphaComposite(0.6f);
+                    drawIconBounds(g, mutateIconBounds, Forge.hdbuttons ? FSkinImage.HDLIBRARY : FSkinImage.LIBRARY, x, y, cardWidth, cardHeight);
+                    g.setAlphaComposite(oldAlpha);
+                } catch (Exception e) {
+                    mutateIconBounds = null;
+                    g.setAlphaComposite(oldAlpha);
+                }
+            } else if (flipIconBounds != null) {
+                drawIconBounds(g, flipIconBounds, Forge.hdbuttons ? FSkinImage.HDFLIPCARD : FSkinImage.FLIPCARD, x, y, cardWidth, cardHeight);
+            }
+        } else if (flipIconBounds != null) {
+            drawIconBounds(g, flipIconBounds, Forge.hdbuttons ? FSkinImage.HDFLIPCARD : FSkinImage.FLIPCARD, x, y, cardWidth, cardHeight);
         }
 
         if (currentActivateAction != null) {
@@ -286,6 +345,15 @@ public class CardZoom extends FOverlay {
         }
         g.fillRect(FDialog.MSG_BACK_COLOR, 0, h - messageHeight, w, messageHeight);
         g.drawText(zoomMode ? Localizer.getInstance().getMessage("lblSwipeDownDetailView") : Localizer.getInstance().getMessage("lblSwipeDownPictureView"), FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, h - messageHeight, w, messageHeight, false, Align.center, true);
+
+        interrupt(false);
+    }
+
+    private void drawIconBounds(Graphics g, Rectangle iconBounds, FSkinImage skinImage, float x, float y, float cardWidth, float cardHeight) {
+        float imageWidth = cardWidth / 2;
+        float imageHeight = imageWidth * skinImage.getHeight() / skinImage.getWidth();
+        iconBounds.set(x + (cardWidth - imageWidth) / 2, y + (cardHeight - imageHeight) / 2, imageWidth, imageHeight);
+        g.drawImage(skinImage, iconBounds.x, iconBounds.y, iconBounds.width, iconBounds.height);
     }
 
     @Override
@@ -296,5 +364,16 @@ public class CardZoom extends FOverlay {
         String getActivateAction(int index);
         void setSelectedIndex(int index);
         void activate(int index);
+    }
+
+    public void interrupt(boolean resume) {
+        if (MatchController.instance.hasLocalPlayers())
+            return;
+        if(resume && MatchController.instance.isGamePaused()) {
+            MatchController.instance.resumeMatch();
+            return;
+        }
+        if(!MatchController.instance.isGamePaused())
+            MatchController.instance.pauseMatch();
     }
 }

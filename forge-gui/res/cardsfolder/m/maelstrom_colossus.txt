@@ -1,0 +1,6 @@
+Name:Maelstrom Colossus
+ManaCost:8
+Types:Artifact Creature Golem
+PT:7/7
+K:Cascade
+Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)

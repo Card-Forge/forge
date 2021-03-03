@@ -31,26 +31,27 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.gui.SGuiChoose;
+import forge.util.Localizer;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LoadSealedScreen extends LaunchScreen {
     private final DeckManager lstDecks = add(new DeckManager(GameType.Draft));
     private final FLabel lblTip = add(new FLabel.Builder()
-        .text("Double-tap to edit deck (Long-press to view)")
+        .text(Localizer.getInstance().getMessage("lblDoubleTapToEditDeck"))
         .textColor(FLabel.INLINE_LABEL_COLOR)
         .align(Align.center).font(FSkinFont.get(12)).build());
 
     private final FSkinFont GAME_MODE_FONT= FSkinFont.get(12);
-    private final FLabel lblMode = add(new FLabel.Builder().text("Mode:").font(GAME_MODE_FONT).build());
+    private final FLabel lblMode = add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblMode")).font(GAME_MODE_FONT).build());
     private final FComboBox<String> cbMode = add(new FComboBox<>());
 
     public LoadSealedScreen() {
         super(null, LoadGameMenu.getMenu());
 
         cbMode.setFont(GAME_MODE_FONT);
-        cbMode.addItem("Gauntlet");
-        cbMode.addItem("Single Match");
+        cbMode.addItem(Localizer.getInstance().getMessage("lblGauntlet"));
+        cbMode.addItem(Localizer.getInstance().getMessage("lblSingleMatch"));
 
         lstDecks.setup(ItemManagerConfig.SEALED_DECKS);
         lstDecks.setItemActivateHandler(new FEventHandler() {
@@ -99,11 +100,11 @@ public class LoadSealedScreen extends LaunchScreen {
             public void run() {
                 final DeckProxy humanDeck = lstDecks.getSelectedItem();
                 if (humanDeck == null) {
-                    FOptionPane.showErrorDialog("You must select an existing deck or build a deck from a new sealed pool.", "No Deck");
+                    FOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblYouMustSelectExistingSealedPool"), Localizer.getInstance().getMessage("lblNoDeck"));
                     return;
                 }
 
-                final boolean gauntlet = cbMode.getSelectedItem().equals("Gauntlet");
+                final boolean gauntlet = cbMode.getSelectedItem().equals(Localizer.getInstance().getMessage("lblGauntlet"));
 
                 if (gauntlet) {
                     FThreads.invokeInEdtLater(new Runnable() {
@@ -113,7 +114,7 @@ public class LoadSealedScreen extends LaunchScreen {
                                 return;
                             }
 
-                            LoadingOverlay.show("Loading new game...", new Runnable() {
+                            LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoadingNewGame"), new Runnable() {
                                 @Override
                                 public void run() {
                                     final int matches = FModel.getDecks().getSealed().get(humanDeck.getName()).getAiDecks().size();
@@ -124,7 +125,7 @@ public class LoadSealedScreen extends LaunchScreen {
                     });
                 } else {
 
-                    final Integer aiIndex = SGuiChoose.getInteger("Which opponent would you like to face?",
+                    final Integer aiIndex = SGuiChoose.getInteger(Localizer.getInstance().getMessage("lblWhichOpponentWouldYouLikeToFace"),
                             1, FModel.getDecks().getSealed().get(humanDeck.getName()).getAiDecks().size());
                     if (aiIndex == null) {
                         return; // Cancel was pressed
@@ -143,7 +144,7 @@ public class LoadSealedScreen extends LaunchScreen {
                                 return;
                             }
 
-                            LoadingOverlay.show("Loading new game...", new Runnable() {
+                            LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoadingNewGame"), new Runnable() {
                                 @Override
                                 public void run() {
                                     final List<RegisteredPlayer> starter = new ArrayList<>();
@@ -170,7 +171,7 @@ public class LoadSealedScreen extends LaunchScreen {
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             String errorMessage = GameType.Sealed.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
             if (errorMessage != null) {
-                FOptionPane.showErrorDialog("Your deck " + errorMessage + "\nPlease edit or choose a different deck.", "Invalid Deck");
+                FOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblInvalidDeckDesc").replace("%n", errorMessage), Localizer.getInstance().getMessage("lblInvalidDeck"));
                 return false;
             }
         }

@@ -1,0 +1,14 @@
+Name:Darkbore Pathway
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+AlternateMode:Modal
+Oracle:{T}: Add {B}.
+
+ALTERNATE
+
+Name:Slitherbore Pathway
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+Oracle:{T}: Add {G}.

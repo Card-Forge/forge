@@ -1,0 +1,111 @@
+[metadata]
+Code=UND
+Code2=UND
+Date=2020-02-29
+Name=Unsanctioned
+MciCode=und
+Type=Other
+Border=Silver
+
+[cards]
+1 C Adorable // Kitten
+2 C AWOL
+3 U Emcee
+4 R Flavor Judge
+5 R Frankie Peanuts
+6 C GO TO JAIL
+7 C Humming-
+8 C Knight of the Hokey Pokey
+9 R Look at Me, I'm R&D
+10 R Look at Me, I'm the DCI
+11 C Old Guard
+12 C Ordinary Pony
+13 R Staying Power
+14 U Strutting Turkey
+15 R Syr Cadian, Knight Owl
+16 R Alexander Clamilton
+17 R Avatar of Me
+18 M B.O.B. (Bevy of Beebles)
+19 C Carnivorous Death-Parrot
+20 U Cheatyface
+21 R Chicken à la King
+22 U Common Courtesy
+23 R Johnny, Combo Player
+24 C Magic Word
+25 C Mer Man
+26 R Richard Garfield, Ph.D.
+27 U Rings a Bell
+28 C Time Out
+29 U Topsy Turvy
+30 C Wall of Fortune
+31 R Acornelia, Fashionable Filcher
+32 U Bat-
+33 U Booster Tutor
+34 C Dirty Rat
+35 C Duh
+36 R Enter the Dungeon
+37 C Hoisted Hireling
+38 R Infernal Spawn of Evil
+39 R Infernal Spawn of Infernal Spawn of Evil
+40 R Infernius Spawnington III, Esq.
+41 U Inhumaniac
+42 U Jumbo Imp
+43 C Poultrygeist
+44 U Skull Saucer
+45 C Snickering Squirrel
+46 C Stinging Scorpion
+47 U Abstract Iguanart
+48 R Blast from the Past
+49 R Boomstacker
+50 C Common Iguana
+51 U Goblin Haberdasher
+52 C Goblin S.W.A.T. Team
+53 U Goblin Tutor
+54 M Infinity Elemental
+55 C Painiac
+56 U Six-y Beast
+57 R Stet, Draconic Proofreader
+58 R Strategy, Schmategy
+59 U Super-Duper Death Ray
+60 R Yet Another Aether Vortex
+61 R B-I-N-G-O
+62 C Elvish Impersonators
+63 C Free-Range Chicken
+64 C Growth Spurt
+65 U Half-Squirrel, Half-
+66 C Mother Kangaroo
+67 R Old Fogey
+68 R Pippa, Duchess of Dice
+69 U Slaying Mantis
+70 U Spirit of the Season
+71 R Squirrel Farm
+72 M Surgeon Commander
+73 R Timmy, Power Gamer
+74 C Wild Crocodile
+75 R Who // What // When // Where // Why
+76 U Bronze Calendar
+77 U Entirely Normal Armchair
+78 R Jack-in-the-Mox
+79 U Krark's Other Thumb
+80 C Paper Tiger
+81 R Pointy Finger of Doom
+82 C Rock Lobster
+83 C Scissors Lizard
+84 M Sword of Dungeons & Dragons
+85 R Water Balloon Game
+86 C Underdome
+87 L Plains
+88 L Plains
+89 L Island
+90 L Island
+91 L Swamp
+92 L Swamp
+93 L Mountain
+94 L Mountain
+95 L Forest
+96 L Forest
+
+[tokens]
+u_1_1_beeble
+r_1_1_goblin
+g_1_1_squirrel

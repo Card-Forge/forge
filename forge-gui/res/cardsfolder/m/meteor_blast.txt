@@ -1,7 +1,6 @@
 Name:Meteor Blast
 ManaCost:X R R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R R R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | TargetMin$ 0 | TargetMax$ X | NumDmg$ 4 | References$ X | SpellDescription$ CARDNAME deals 4 damage to each of X targets.
+A:SP$ DealDamage | Cost$ X R R R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select X targets | TargetMin$ X | TargetMax$ X | NumDmg$ 4 | References$ X | SpellDescription$ CARDNAME deals 4 damage to each of X targets.
 SVar:X:Count$xPaid 
-SVar:Picture:http://www.wizards.com/global/images/magic/general/meteor_blast.jpg
-Oracle:Meteor Blast deals 4 damage to X targets.
+Oracle:Meteor Blast deals 4 damage to each of X targets.

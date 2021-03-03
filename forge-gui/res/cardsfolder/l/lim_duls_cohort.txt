@@ -2,9 +2,8 @@ Name:Lim-Dul's Cohort
 ManaCost:1 B B
 Types:Creature Zombie
 PT:2/3
-T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigBlocks | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
-T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigBlocked | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
-SVar:TrigBlocks:DB$Pump | Defined$ TriggeredAttacker | KW$ HIDDEN CARDNAME can't be regenerated.
-SVar:TrigBlocked:DB$Pump | Defined$ TriggeredBlocker | KW$ HIDDEN CARDNAME can't be regenerated.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lim_duls_cohort.jpg
-Oracle:Whenever Lim-Dul's Cohort blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigBlocks | TriggerDescription$ Whenever Lim-Dûl's Cohort blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigBlocked | Secondary$ True | TriggerDescription$ Whenever Lim-Dûl's Cohort blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
+SVar:TrigBlocks:DB$ Pump | Defined$ TriggeredAttacker | KW$ HIDDEN CARDNAME can't be regenerated.
+SVar:TrigBlocked:DB$ Pump | Defined$ TriggeredBlocker | KW$ HIDDEN CARDNAME can't be regenerated.
+Oracle:Whenever Lim-Dûl's Cohort blocks or becomes blocked by a creature, that creature can't be regenerated this turn.

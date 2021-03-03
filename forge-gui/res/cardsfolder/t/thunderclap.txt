@@ -1,7 +1,6 @@
 Name:Thunderclap
 ManaCost:2 R
 Types:Instant
+SVar:AltCost:Cost$ Sac<1/Mountain> | Description$ You may sacrifice a Mountain rather than pay this spell's mana cost.
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature.
-SVar:AltCost:Cost$ Sac<1/Mountain>
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderclap.jpg
-Oracle:You may sacrifice a Mountain rather than pay Thunderclap's mana cost.\nThunderclap deals 3 damage to target creature.
+Oracle:You may sacrifice a Mountain rather than pay this spell's mana cost.\nThunderclap deals 3 damage to target creature.

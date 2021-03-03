@@ -21,12 +21,12 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameType;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -40,6 +40,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -143,6 +144,29 @@ public class SpecialCardAi {
         }
     }
 
+    // Crawling Barrens
+    public static class CrawlingBarrens {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            final PhaseHandler ph = ai.getGame().getPhaseHandler();
+            final Combat combat = ai.getGame().getCombat();
+
+            Card animated = AnimateAi.becomeAnimated(sa.getHostCard(), sa);
+            animated.addType("Creature");
+            if (sa.getHostCard().canReceiveCounters(CounterEnumType.P1P1)) {
+                animated.addCounter(CounterEnumType.P1P1, 2, ai, false, null);
+            }
+            boolean isOppEOT = ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
+            boolean isValuableAttacker = ph.is(PhaseType.MAIN1, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);
+            boolean isValuableBlocker = combat != null && combat.getDefendingPlayers().contains(ai) && ComputerUtilCard.doesSpecifiedCreatureBlock(ai, animated);
+
+            return isOppEOT || isValuableAttacker || isValuableBlocker;
+        }
+
+        public static SpellAbility considerAnimating(final Player ai, final SpellAbility sa, final List<SpellAbility> options) {
+            return ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) ? options.get(0) : options.get(1);
+        }
+    }
+
     // Cursed Scroll
     public static class CursedScroll {
         public static boolean consider(final Player ai, final SpellAbility sa) {
@@ -194,7 +218,7 @@ public class SpecialCardAi {
                 sa.getTargets().add(worstCreat);
             }
 
-            return sa.getTargets().getNumTargeted() > 0;
+            return sa.getTargets().size() > 0;
         }
     }
 
@@ -327,7 +351,7 @@ public class SpecialCardAi {
             boolean canTrample = source.hasKeyword(Keyword.TRAMPLE);
 
             if (!isBlocking && combat.getDefenderByAttacker(source) instanceof Card) {
-                int loyalty = combat.getDefenderByAttacker(source).getCounters(CounterType.LOYALTY);
+                int loyalty = combat.getDefenderByAttacker(source).getCounters(CounterEnumType.LOYALTY);
                 int totalDamageToPW = 0;
                 for (Card atk : (combat.getAttackersOf(combat.getDefenderByAttacker(source)))) {
                     if (combat.isUnblocked(atk)) {
@@ -407,7 +431,7 @@ public class SpecialCardAi {
         }
 
         public static Pair<Integer, Integer> getPumpedPT(Player ai, int power, int toughness) {
-            int energy = ai.getCounters(CounterType.ENERGY);
+            int energy = ai.getCounters(CounterEnumType.ENERGY);
             if (energy > 0) {
                 int numActivations = energy / 3;
                 for (int i = 0; i < numActivations; i++) {
@@ -635,10 +659,7 @@ public class SpecialCardAi {
                         boolean canRetFromGrave = false;
                         String name = c.getName().replace(',', ';');
                         for (Trigger t : c.getTriggers()) {
-                            SpellAbility ab = null;
-                            if (t.hasParam("Execute")) {
-                                ab = AbilityFactory.getAbility(c.getSVar(t.getParam("Execute")), c);
-                            }
+                            SpellAbility ab = t.ensureAbility();
                             if (ab == null) { continue; }
 
                             if (ab.getApi() == ApiType.ChangeZone
@@ -708,7 +729,7 @@ public class SpecialCardAi {
             // if there's another reanimator card currently suspended, don't cast a new one until the previous
             // one resolves, otherwise the reanimation attempt will be ruined (e.g. Living End)
             for (Card ex : ai.getCardsIn(ZoneType.Exile)) {
-                if (ex.hasSVar("IsReanimatorCard") && ex.getCounters(CounterType.TIME) > 0) {
+                if (ex.hasSVar("IsReanimatorCard") && ex.getCounters(CounterEnumType.TIME) > 0) {
                     return false;
                 }
             }
@@ -756,6 +777,37 @@ public class SpecialCardAi {
         }
     }
 
+    // Maze's End
+    public static class MazesEnd {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            PhaseHandler ph = ai.getGame().getPhaseHandler();
+            CardCollection availableGates = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.isType("Gate"));
+
+            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai && !availableGates.isEmpty();
+        }
+
+        public static Card considerCardToGet(final Player ai, final SpellAbility sa)
+        {
+            CardCollection currentGates = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Gate"));
+            CardCollection availableGates = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.isType("Gate"));
+
+            if (availableGates.isEmpty())
+                return null; // shouldn't get here
+
+            for (Card gate : availableGates)
+            {
+                if (CardLists.filter(currentGates, CardPredicates.nameEquals(gate.getName())).isEmpty())
+                {
+                    // Diversify our mana base
+                    return gate;
+                }
+            }
+
+            // Fetch a random gate if we already have all types
+            return Aggregates.random(availableGates);
+        }
+    }
+
     // Mairsil, the Pretender
     public static class MairsilThePretender {
         // Scan the fetch list for a card with at least one activated ability.
@@ -767,7 +819,7 @@ public class SpecialCardAi {
                         Player controller = c.getController();
                         boolean wasCaged = false;
                         for (Card caged : CardLists.filter(controller.getCardsIn(ZoneType.Exile),
-                                CardPredicates.hasCounter(CounterType.CAGE))) {
+                                CardPredicates.hasCounter(CounterEnumType.CAGE))) {
                             if (c.getName().equals(caged.getName())) {
                                 wasCaged = true;
                                 break;
@@ -833,7 +885,7 @@ public class SpecialCardAi {
             }
 
             // Set PayX here to maximum value.
-            int tokenSize = ComputerUtilMana.determineLeftoverMana(sa, ai);
+            int tokenSize = ComputerUtilCost.getMaxXValue(sa, ai);
 
             // Some basic strategy for Momir
             if (tokenSize < 2) {
@@ -844,7 +896,7 @@ public class SpecialCardAi {
                 tokenSize = 11;
             }
 
-            source.setSVar("PayX", Integer.toString(tokenSize));
+            sa.setXManaCostPaid(tokenSize);
 
             return true;
         }
@@ -1073,7 +1125,7 @@ public class SpecialCardAi {
     // Sarkhan the Mad
     public static class SarkhanTheMad {
         public static boolean considerDig(final Player ai, final SpellAbility sa) {
-            return sa.getHostCard().getCounters(CounterType.LOYALTY) == 1;
+            return sa.getHostCard().getCounters(CounterEnumType.LOYALTY) == 1;
         }
 
         public static boolean considerMakeDragon(final Player ai, final SpellAbility sa) {
@@ -1109,7 +1161,7 @@ public class SpecialCardAi {
     // Sorin, Vengeful Bloodlord
     public static class SorinVengefulBloodlord {
         public static boolean consider(final Player ai, final SpellAbility sa) {
-            int loyalty = sa.getHostCard().getCounters(CounterType.LOYALTY);
+            int loyalty = sa.getHostCard().getCounters(CounterEnumType.LOYALTY);
             CardCollection creaturesToGet = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard),
                     Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.lessCMC(loyalty - 1), new Predicate<Card>() {
                         @Override
@@ -1271,7 +1323,7 @@ public class SpecialCardAi {
                 sa.getTargets().add(worstOwnCreat);
             }
 
-            return sa.getTargets().getNumTargeted() > 0;
+            return sa.getTargets().size() > 0;
         }
     }
 
@@ -1292,6 +1344,26 @@ public class SpecialCardAi {
 
             // use in case we're getting low on cards or if we're significantly behind our opponent in cards in hand
             return aiHandSize < HAND_SIZE_THRESHOLD || maxOppHandSize - aiHandSize > HAND_SIZE_THRESHOLD;
+        }
+    }
+
+    // Timmerian Fiends
+    public static class TimmerianFiends {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            final Card targeted = sa.getParentTargetingCard().getTargetCard();
+            if (targeted == null) {
+                return false;
+            }
+
+            if (targeted.isCreature()) {
+                if (ComputerUtil.aiLifeInDanger(ai, true, 0)) {
+                    return true; // do it, hoping to save a valuable potential blocker etc.
+                }
+                return ComputerUtilCard.evaluateCreature(targeted) >= 200; // might need tweaking
+            } else {
+                // TODO: this currently compares purely by CMC. To be somehow improved, especially for stuff like the Power Nine etc.
+                return ComputerUtilCard.evaluatePermanentList(new CardCollection(targeted)) >= 3;
+            }
         }
     }
 
@@ -1345,11 +1417,11 @@ public class SpecialCardAi {
             Card source = sa.getHostCard();
             Game game = source.getGame();
             
-            final int loyalty = source.getCounters(CounterType.LOYALTY);
+            final int loyalty = source.getCounters(CounterEnumType.LOYALTY);
             int x = -1, best = 0;
             Card single = null;
             for (int i = 0; i < loyalty; i++) {
-                sa.setSVar("ChosenX", "Number$" + i);
+                sa.setXManaCostPaid(i);
                 oppType = CardLists.filterControlledBy(game.getCardsIn(origin), ai.getOpponents());
                 oppType = AbilityUtils.filterListByType(oppType, sa.getParam("ChangeType"), sa);
                 computerType = AbilityUtils.filterListByType(ai.getCardsIn(origin), sa.getParam("ChangeType"), sa);
@@ -1366,13 +1438,8 @@ public class SpecialCardAi {
             }
             // check if +1 would be sufficient
             if (single != null) {
-                SpellAbility ugin_burn = null;
-                for (final SpellAbility s : source.getSpellAbilities()) {
-                    if (s.getApi() == ApiType.DealDamage) {
-                        ugin_burn = s;
-                        break;
-                    }
-                }
+                // TODO use better logic to find the right Deal Damage Effect?
+                SpellAbility ugin_burn = Iterables.find(source.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.DealDamage), null);
                 if (ugin_burn != null) {
                     // basic logic copied from DamageDealAi::dealDamageChooseTgtC
                     if (ugin_burn.canTarget(single)) {
@@ -1383,17 +1450,17 @@ public class SpecialCardAi {
                         if (can_kill) {
                             return false;
                         }
-                    }
-                    // simple check to burn player instead of exiling planeswalker
-                    if (single.isPlaneswalker() && single.getCurrentLoyalty() <= 3) {
-                        return false;
+                        // simple check to burn player instead of exiling planeswalker
+                        if (single.isPlaneswalker() && single.getCurrentLoyalty() <= 3) {
+                            return false;
+                        }
                     }
                 }
             }
              if (x == -1) {
                 return false;
             }
-            sa.setSVar("ChosenX", "Number$" + x);
+            sa.setXManaCostPaid(x);
             return true;
         }
     }

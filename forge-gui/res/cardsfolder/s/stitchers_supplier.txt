@@ -2,7 +2,8 @@ Name:Stitcher's Supplier
 ManaCost:B
 Types:Creature Zombie
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield or dies, put the top three cards of your library into your graveyard.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Secondary$ True | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield or dies, put the top three cards of your library into your graveyard.
-SVar:TrigMill:DB$Mill | NumCards$ 3 | Defined$ You
-Oracle:When Stitcher's Supplier enters the battlefield or dies, put the top three cards of your library into your graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield or dies, mill three cards.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Secondary$ True | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield or dies, mill three cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
+DeckHas:Ability$Graveyard
+Oracle:When Stitcher's Supplier enters the battlefield or dies, mill three cards.

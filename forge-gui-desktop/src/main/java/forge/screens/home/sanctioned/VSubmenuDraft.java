@@ -44,6 +44,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
     private final DeckManager lstDecks = new DeckManager(GameType.Draft, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
 
     private final JRadioButton radSingle = new FRadioButton(localizer.getMessage("lblPlayAnOpponent"));
+    private final JRadioButton radMultiple = new FRadioButton(localizer.getMessage("lblPlayMultipleOpponents"));
     private final JRadioButton radAll = new FRadioButton(localizer.getMessage("lblPlayAll7opponents"));
 
     private final JComboBox<String> cbOpponent = new JComboBox<>();
@@ -77,6 +78,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
 
         final JXButtonPanel grpPanel = new JXButtonPanel();
         grpPanel.add(radSingle, "w 200px!, h 30px!");
+        grpPanel.add(radMultiple, "w 200px!, h 30px!");
         grpPanel.add(radAll, "w 200px!, h 30px!");
         radSingle.setSelected(true);
         grpPanel.add(cbOpponent, "w 200px!, h 30px!");
@@ -124,6 +126,9 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
     public boolean isSingleSelected() {
         return radSingle.isSelected();
     }
+    public boolean isGauntlet() {
+        return radAll.isSelected();
+    }
 
     /** @return {@link forge.itemmanager.DeckManager} */
     public DeckManager getLstDecks() {
@@ -132,6 +137,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
 
     public JComboBox<String> getCbOpponent() { return cbOpponent; }
     public JRadioButton getRadSingle() { return radSingle; }
+    public JRadioButton getRadMultiple() { return radMultiple; }
     public JRadioButton getRadAll() { return radAll; }
 
     //========== Overridden from IVDoc

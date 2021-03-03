@@ -6,7 +6,7 @@ K:Indestructible
 K:Annihilator:4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.Self | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.
 SVar:TrigShuffle:DB$ChangeZoneAll | Defined$ TriggeredCardOwner | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | Shuffle$ True
-T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When you cast CARDNAME, destroy target permanent.
-SVar:TrigDestroy:DB$Destroy | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When you cast this spell, destroy target permanent.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ulamog_the_infinite_gyre.jpg
-Oracle:When you cast Ulamog, the Infinite Gyre, destroy target permanent.\nIndestructible\nAnnihilator 4 (Whenever this creature attacks, defending player sacrifices four permanents.)\nWhen Ulamog is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.
+Oracle:When you cast this spell, destroy target permanent.\nIndestructible\nAnnihilator 4 (Whenever this creature attacks, defending player sacrifices four permanents.)\nWhen Ulamog, the Infinite Gyre is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.

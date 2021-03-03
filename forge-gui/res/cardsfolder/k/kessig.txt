@@ -1,7 +1,7 @@
 Name:Kessig
 ManaCost:no cost
 Types:Plane Innistrad
-R:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Creature.nonWerewolf | Description$ Description$ Prevent all combat damage that would be dealt by non-Werewolf creatures.
+R:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Creature.nonWerewolf | Description$ Prevent all combat damage that would be dealt by non-Werewolf creatures.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, each creature you control gets +2/+2, gains trample, and becomes a Werewolf in addition to its other types until end of turn.
 SVar:RolledChaos:DB$ AnimateAll | ValidCards$ Creature.YouCtrl | Types$ Werewolf | SubAbility$ DBPump
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Trample | NumAtt$ 2 | NumDef$ 2

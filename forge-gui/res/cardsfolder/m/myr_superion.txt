@@ -2,8 +2,8 @@ Name:Myr Superion
 ManaCost:2
 Types:Artifact Creature Myr
 PT:5/6
-Text:Spend only mana produced by creatures to cast CARDNAME.
+Text:Spend only mana produced by creatures to cast this spell.
 A:SP$ PermanentCreature | Cost$ Mana<2\Creature>
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_superion.jpg
-Oracle:Spend only mana produced by creatures to cast Myr Superion.
+Oracle:Spend only mana produced by creatures to cast this spell.

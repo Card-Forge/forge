@@ -9,4 +9,4 @@ SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ 
 SVar:TrigSacrifice:DB$Sacrifice | Defined$ Self
 SVar:SacrificeEndCombat:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fog_elemental.jpg
-Oracle:Flying\nWhen Fog Elemental attacks or blocks, sacrifice it at end of combat.
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Fog Elemental attacks or blocks, sacrifice it at end of combat.

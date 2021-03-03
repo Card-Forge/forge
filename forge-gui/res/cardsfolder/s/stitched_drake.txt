@@ -5,4 +5,4 @@ PT:3/4
 K:Flying
 A:SP$ PermanentCreature | Cost$ 1 U U ExileFromGrave<1/Creature>
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stitched_drake.jpg
-Oracle:As an additional cost to cast Stitched Drake, exile a creature card from your graveyard.\nFlying
+Oracle:As an additional cost to cast this spell, exile a creature card from your graveyard.\nFlying

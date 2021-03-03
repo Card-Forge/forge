@@ -52,23 +52,27 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         String valid = "Card";
-        String validDesc = "card";
+        String validDesc = null;
+        String message = null;
+
         if (sa.hasParam("ValidCards")) {
             valid = sa.getParam("ValidCards");
             validDesc = sa.getParam("ValidDesc");
         }
 
-        String message;
-        if (sa.hasParam("SelectPrompt")) {
-            message = sa.getParam("SelectPrompt");
-        } else if (validDesc.equals("card")) {
-            message = Localizer.getInstance().getMessage("lblChooseACardName");
-        } else {
-            message = Localizer.getInstance().getMessage("lblChooseASpecificCard", validDesc);
-        }
-
         boolean randomChoice = sa.hasParam("AtRandom");
         boolean chooseFromDefined = sa.hasParam("ChooseFromDefinedCards");
+
+        if (!randomChoice) {
+            if (sa.hasParam("SelectPrompt")) {
+                message = sa.getParam("SelectPrompt");
+            } else if (null == validDesc) {
+                message = Localizer.getInstance().getMessage("lblChooseACardName");
+            } else {
+                message = Localizer.getInstance().getMessage("lblChooseASpecificCard", validDesc);
+            }
+        }
+
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 String chosen = "";

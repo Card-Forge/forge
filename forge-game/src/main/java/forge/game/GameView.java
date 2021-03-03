@@ -11,8 +11,8 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatView;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.player.Player;
 import forge.game.player.PlayerView;
+import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.MagicStack;
 import forge.trackable.TrackableObject;
@@ -24,12 +24,13 @@ import java.util.List;
 public class GameView extends TrackableObject {
     private static final long serialVersionUID = 8522884512960961528L;
 
-    private CombatView combatView;
     private final transient Game game; //TODO: Remove this when possible before network support added
+    private final transient Match match; //TODO: Remove this when possible before network support added
 
-    public GameView(final Game game0) {
-        super(-1, game0.getTracker()); //ID not needed
-        game = game0;
+    public GameView(final Game game) {
+        super(game.getId(), game.getTracker());
+        match = game.getMatch();
+        this.game = game;
         set(TrackableProperty.Title, game.getMatch().getTitle());
         set(TrackableProperty.WinningTeam, -1);
 
@@ -40,13 +41,24 @@ public class GameView extends TrackableObject {
         set(TrackableProperty.NumGamesInMatch, rules.getGamesPerMatch());
 
         set(TrackableProperty.GameLog, game.getGameLog());
-        set(TrackableProperty.NumPlayedGamesInMatch, game.getMatch().getPlayedGames().size());
+        set(TrackableProperty.NumPlayedGamesInMatch, game.getMatch().getOutcomes().size());
 
-        set(TrackableProperty.Players, PlayerView.getCollection(game.getPlayers()));
+    }
+
+    public Match getMatch() {
+        return match;
+    }
+
+    public Game getGame() {
+        return game;
     }
 
     public FCollectionView<PlayerView> getPlayers() {
         return get(TrackableProperty.Players);
+    }
+
+    public void updatePlayers(final Game game) {
+        set(TrackableProperty.Players, PlayerView.getCollection(game.getPlayers()));
     }
 
     public String getTitle() {
@@ -117,6 +129,14 @@ public class GameView extends TrackableObject {
     public boolean isMatchOver() {
         return get(TrackableProperty.MatchOver);
     }
+    public boolean isMulligan() {
+        if (get(TrackableProperty.Mulligan) == null)
+            return false;
+        return get(TrackableProperty.Mulligan);
+    }
+    public void updateIsMulligan(boolean value) {
+        set(TrackableProperty.Mulligan, value);
+    }
     public String getWinningPlayerName() {
         return get(TrackableProperty.WinningPlayerName);
     }
@@ -140,15 +160,18 @@ public class GameView extends TrackableObject {
     }
 
     public CombatView getCombat() {
-        return combatView;
+        return get(TrackableProperty.CombatView);
+    }
+    public void updateCombatView(CombatView combatView) {
+        set(TrackableProperty.CombatView, combatView);
     }
     void updateCombat(Combat combat) {
         if (combat == null) {
-            combatView = null;
+            set(TrackableProperty.CombatView, null);
             return;
         }
 
-        combatView = new CombatView(combat.getAttackingPlayer().getGame().getTracker());
+        final CombatView combatView = new CombatView(combat.getAttackingPlayer().getGame().getTracker());
         for (final AttackingBand b : combat.getAttackingBands()) {
             if (b == null) continue;
             final GameEntity defender = combat.getDefenderByAttacker(b);
@@ -160,6 +183,7 @@ public class GameView extends TrackableObject {
                     isBlocked ? CardView.getCollection(blockers) : null,
                     CardView.getCollection(blockers));
         }
+        updateCombatView(combatView);
     }
 
     public void serialize() {
@@ -182,31 +206,35 @@ public class GameView extends TrackableObject {
     //TODO: Find better ways to make this information available to all GUIs without using the Game class
 
     public boolean isMatchWonBy(LobbyPlayer questPlayer) {
-        return game.getMatch().isWonBy(questPlayer);
+        return getMatch().isWonBy(questPlayer);
     }
 
     public Iterable<GameOutcome> getOutcomesOfMatch() {
-        return game.getMatch().getOutcomes();
+        return getMatch().getOutcomes();
     }
 
     public boolean isWinner(LobbyPlayer guiPlayer) {
-        return game.getOutcome().isWinner(guiPlayer);
+        return getOutcome().isWinner(guiPlayer);
     }
 
     public int getGamesWonBy(LobbyPlayer questPlayer) {
-        return game.getMatch().getGamesWonBy(questPlayer);
+        return getMatch().getGamesWonBy(questPlayer);
     }
 
-    public Deck getDeck(final String lobbyPlayerName) {
-        for (final Player p : game.getRegisteredPlayers()) {
-            if (p.getLobbyPlayer().getName().equals(lobbyPlayerName)) {
-                return p.getRegisteredPlayer().getDeck();
+    public Deck getDeck(final PlayerView pv) {
+        for (final RegisteredPlayer rp : getMatch().getPlayers()) {
+            if (pv.isLobbyPlayer(rp.getPlayer())) {
+                return rp.getDeck();
             }
         }
         return null;
     }
 
+    public GameOutcome getOutcome() {
+        return getMatch().getOutcomeById(getId());
+    }
+
     public AnteResult getAnteResult(PlayerView player) {
-        return game.getOutcome().anteResult.get(game.getPlayer(player).getRegisteredPlayer());
+        return getOutcome().getAnteResult(player);
     }
 }

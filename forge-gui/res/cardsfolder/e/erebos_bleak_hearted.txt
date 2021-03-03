@@ -3,10 +3,10 @@ ManaCost:3 B
 Types:Legendary Enchantment Creature God
 PT:5/6
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | RemoveCreatureTypes$ True | CheckSVar$ X | SVarCompare$ LT5 | References$ X | Description$ As long as your devotion to black is less than five, CARDNAME is not a creature.
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT5 | References$ X | Description$ As long as your devotion to black is less than five, CARDNAME is not a creature.
 SVar:X:Count$Devotion.Black
 SVar:BuffedBy:Permanent.Black
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ ABDraw | TriggerDescription$ Whenever another creature you control dies, you may pay 2 life. If you do, draw a card.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ ABDraw | TriggerDescription$ Whenever another creature you control dies, you may pay 2 life. If you do, draw a card.
 SVar:ABDraw:AB$ Draw | Cost$ PayLife<2> | NumCards$ 1
 A:AB$ Pump | Cost$ 1 B Sac<1/Creature.Other/another creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -2/-1 until end of turn.
 SVar:AIPreference:SacCost$Creature.Other+cmcLE2

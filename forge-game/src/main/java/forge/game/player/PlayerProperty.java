@@ -1,21 +1,18 @@
 package forge.game.player;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
-
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import forge.util.TextUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerProperty {
 
@@ -37,6 +34,10 @@ public class PlayerProperty {
                 if (player.equals(p) || !player.isOpponentOf(p)) {
                     return false;
                 }
+            }
+        } else if (property.startsWith("PlayerUID_")) {
+            if (player.getId() != Integer.parseInt(property.split("PlayerUID_")[1])) {
+                return false;
             }
         } else if (property.equals("YourTeam")) {
             if (!player.sameTeam(sourceController)) {
@@ -67,8 +68,16 @@ public class PlayerProperty {
             if (player.equals(source.getOwner())) {
                 return false;
             }
+        } else if (property.equals("CardOwner")) {
+            if (!player.equals(source.getOwner())) {
+                return false;
+            }
         } else if (property.equals("isMonarch")) {
-            if (!player.equals(game.getMonarch())) {
+            if (!player.isMonarch()) {
+                return false;
+            }
+        } else if (property.equals("isNotMonarch")) {
+            if (player.isMonarch()) {
                 return false;
             }
         } else if (property.equals("hasBlessing")) {
@@ -203,6 +212,11 @@ public class PlayerProperty {
             if (!player.isEnchantedBy(source)) {
                 return false;
             }
+        } else if (property.equals("EnchantedController")) {
+            Card enchanting = source.getEnchantingCard();
+            if (enchanting != null && !player.equals(enchanting.getController())) {
+                return false;
+            }
         } else if (property.equals("Chosen")) {
             if (source.getChosenPlayer() == null || !source.getChosenPlayer().equals(player)) {
                 return false;
@@ -220,8 +234,7 @@ public class PlayerProperty {
             final String[] type = property.substring(8).split("_");
             final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type[0], sourceController, source);
             String comparator = type[1];
-            String compareTo = comparator.substring(2);
-            int y = StringUtils.isNumeric(compareTo) ? Integer.parseInt(compareTo) : 0;
+            int y = AbilityUtils.calculateAmount(source, comparator.substring(2), null);
             if (!Expressions.compare(list.size(), comparator, y)) {
                 return false;
             }
@@ -229,8 +242,7 @@ public class PlayerProperty {
             final String[] type = property.substring(10).split("_");
             final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.smartValueOf(type[0])), type[1], sourceController, source);
             String comparator = type[2];
-            String compareTo = comparator.substring(2);
-            int y = StringUtils.isNumeric(compareTo) ? Integer.parseInt(compareTo) : 0;
+            int y = AbilityUtils.calculateAmount(source, comparator.substring(2), null);
             if (!Expressions.compare(list.size(), comparator, y)) {
                 return false;
             }
@@ -261,10 +273,11 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.startsWith("hasFewer")) {
+            final String cardType = property.split("sIn")[0].substring(8);
             final Player controller = "Active".equals(property.split("Than")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
             final ZoneType zt = property.substring(8).startsWith("CreaturesInYard") ? ZoneType.Graveyard : ZoneType.Battlefield;
-            final CardCollectionView oppList = CardLists.filter(player.getCardsIn(zt), Presets.CREATURES);
-            final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(zt), Presets.CREATURES);
+            final CardCollectionView oppList = CardLists.filter(player.getCardsIn(zt), CardPredicates.isType(cardType));
+            final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(zt), CardPredicates.isType(cardType));
             if (oppList.size() >= yourList.size()) {
                 return false;
             }

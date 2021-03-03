@@ -2,6 +2,6 @@ Name:Paradise Druid
 ManaCost:1 G
 Types:Creature Elf Druid
 PT:2/1
-S:Mode$ Continuous | Affected$ Card.Self+untapped | AddKeyword$ Hexproof | Description$ CARDNAME has hexproof as long as it's untapped.
+S:Mode$ Continuous | Affected$ Card.Self+untapped | AddKeyword$ Hexproof | Description$ CARDNAME has hexproof as long as it's untapped.(It can't be the target of spells or abilities your opponents control.)
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
-Oracle:Paradise Druid has hexproof as long as it's untapped.\n{T}: Add one mana of any color.
+Oracle:Paradise Druid has hexproof as long as it's untapped.(It can't be the target of spells or abilities your opponents control.)\n{T}: Add one mana of any color.

@@ -8,9 +8,8 @@ T:Mode$ Phase | Static$ True | Phase$ EndCombat | Execute$ DBCleanup
 R:Event$ DamageDone | IsCombat$ True | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ DBRemoveCountersInCombat | PreventionEffect$ True | Description$ If damage would be dealt to CARDNAME, prevent that damage. Remove a +1/+1 counter from CARDNAME.
 R:Event$ DamageDone | IsCombat$ False | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ DBRemoveCounters | PreventionEffect$ True | Secondary$ True | Description$ If damage would be dealt to CARDNAME, prevent that damage. Remove a +1/+1 counter from CARDNAME.
 SVar:DBRemoveCountersInCombat:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ TimesFlagged | ConditionSVarCompare$ EQ0 | SubAbility$ DBFlagRemoveCounters
-SVar:DBFlagRemoveCounters:DB$ StoreSVar | SVar$ TimesFlagged | Type$ CountSVar | Expression$ TimesFlagged/Plus.1
+SVar:DBFlagRemoveCounters:DB$ StoreSVar | SVar$ TimesFlagged | Type$ CountSVar | Expression$ TimesFlagged/Plus.1 | References$ TimesFlagged
 SVar:DBRemoveCounters:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:TimesFlagged:Number$0
 SVar:DBCleanup:DB$ StoreSVar | SVar$ TimesFlagged | Type$ Number | Expression$ 0
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_nomad.jpg
 Oracle:Phantom Nomad enters the battlefield with two +1/+1 counters on it.\nIf damage would be dealt to Phantom Nomad, prevent that damage. Remove a +1/+1 counter from Phantom Nomad.

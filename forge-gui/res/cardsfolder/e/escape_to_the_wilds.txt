@@ -1,11 +1,11 @@
 Name:Escape to the Wilds
 ManaCost:3 R G
 Types:Sorcery
-A:SP$ Mill | Cost$ 3 R G | Destination$ Exile | NumCards$ 5 | RememberMilled$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top five cards of your library. You may play cards exiled this way until the end of your next turn. You may play an additional land this turn.
+A:SP$ Dig | Cost$ 3 R G | DestinationZone$ Exile | DigNum$ 5 | ChangeNum$ All | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top five cards of your library. You may play cards exiled this way until the end of your next turn. You may play an additional land this turn.
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | ForgetOnMoved$ Exile | StaticAbilities$ Play | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBEffect2
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play cards exiled this the end of your next turn.
 SVar:DBEffect2:DB$ Effect | Name$ Escape to the Wilds Exploration Effect | StaticAbilities$ Exploration | AILogic$ Always | SubAbility$ DBCleanup
-SVar:Exploration:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays:1 | EffectZone$ Command | Description$ You may play an additional land this turn.
+SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | EffectZone$ Command | Description$ You may play an additional land this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NeedsToPlayVar:ZZ GE1
 SVar:ZZ:Count$ValidHand Land.YouOwn

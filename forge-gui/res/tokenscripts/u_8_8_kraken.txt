@@ -1,0 +1,6 @@
+Name:Kraken
+ManaCost:no cost
+Types:Creature Kraken
+Colors:blue
+PT:8/8
+Oracle:

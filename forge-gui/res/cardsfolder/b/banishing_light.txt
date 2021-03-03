@@ -10,4 +10,4 @@ SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ 
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/banishing_light.jpg
-Oracle:When Banishing Light enters the battlefield, exile target nonland permanent an opponent controls until Banishing Light leaves the battlefield. (That permanent returns under its owner's control.)
+Oracle:When Banishing Light enters the battlefield, exile target nonland permanent an opponent controls until Banishing Light leaves the battlefield.

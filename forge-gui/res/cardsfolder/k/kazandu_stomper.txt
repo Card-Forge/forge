@@ -1,0 +1,8 @@
+Name:Kazandu Stomper
+ManaCost:5 G
+Types:Creature Beast
+PT:6/5
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return up to two lands you control to their owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | PrimaryPrompt$ Choose up to two lands you control | ChangeNum$ 2 | ChangeType$ Land.YouCtrl | Origin$ Battlefield | Destination$ Hand | Hidden$ True
+Oracle:Trample\nWhen Kazandu Stomper enters the battlefield, return up to two lands you control to their owner's hand.

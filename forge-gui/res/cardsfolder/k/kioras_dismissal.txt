@@ -6,4 +6,4 @@ A:SP$ ChangeZone | Cost$ U | ValidTgts$ Enchantment | TgtPrompt$ Select target e
 SVar:X:Count$Valid Enchantment
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kioras_dismissal.jpg
-Oracle:Strive — Kiora's Dismissal costs {U} more to cast for each target beyond the first.\nReturn any number of target enchantments to their owners' hands.
+Oracle:Strive — This spell costs {U} more to cast for each target beyond the first.\nReturn any number of target enchantments to their owners' hands.

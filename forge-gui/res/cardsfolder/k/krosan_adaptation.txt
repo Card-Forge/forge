@@ -1,0 +1,8 @@
+Name:Krosan Adaptation
+ManaCost:G
+Types:Enchantment Aura
+K:Enchant creature
+K:Storm
+A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ Vigilance | Description$ Enchanted creature gets +1/+0 and has vigilance.
+Oracle:Enchant creature\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies. The copies enter the battlefield as tokens.)\nEnchanted creature gets +1/+0 and has vigilance.

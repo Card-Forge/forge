@@ -2,14 +2,11 @@ Name:Dread Wight
 ManaCost:3 B B
 Types:Creature Zombie
 PT:3/4
-T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ DelTrigBlocked | TriggerDescription$ At end of combat, put a paralyzation counter on each creature blocking or blocked by CARDNAME and tap those creatures. Each of those creatures doesn't untap during its controller's untap step for as long as it has a paralyzation counter on it. Each of those creatures gains "{4}: Remove a paralyzation counter from this creature."
-T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ DelTrigBlocker | Secondary$ True | TriggerDescription$ At end of combat, put a paralyzation counter on each creature blocking or blocked by CARDNAME and tap those creatures. Each of those creatures doesn't untap during its controller's untap step for as long as it has a paralyzation counter on it. Each of those creatures gains "{4}: Remove a paralyzation counter from this creature."
-SVar:DelTrigBlocked:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Opponent | Execute$ TrigCounter | RememberObjects$ TriggeredAttacker | TriggerDescription$ At the end of combat, put a paralyzation counter on creature
-SVar:DelTrigBlocker:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | Execute$ TrigCounter | RememberObjects$ TriggeredBlocker | TriggerDescription$ At the end of combat, put a paralyzation counter on creature
-SVar:TrigCounter:DB$ PutCounter | CounterType$ PARALYZATION | CounterNum$ 1 | Defined$ DelayTriggerRemembered | SubAbility$ DBTap | SpellDescription$ Put paralyzation counter on creature
-SVar:DBTap:DB$ Tap | Defined$ DelayTriggerRemembered | SpellDescription$ Tap creature | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Defined$ DelayTriggerRemembered | staticAbilities$ Static | Abilities$ ABRemoveCounter | Permanent$ True
+T:Mode$ Phase | Phase$ EndCombat | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ At end of combat, put a paralyzation counter on each creature blocking or blocked by CARDNAME and tap those creatures. Each of those creatures doesn't untap during its controller's untap step for as long as it has a paralyzation counter on it. Each of those creatures gains "{4}: Remove a paralyzation counter from this creature."
+SVar:TrigCounter:DB$ PutCounterAll | CounterType$ PARALYZATION | CounterNum$ 1 | ValidCards$ Creature.blockedBySource,Creature.blockingSource | SubAbility$ DBTap
+SVar:DBTap:DB$ TapAll | ValidCards$ Creature.blockedBySource,Creature.blockingSource | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Valid Creature.blockedBySource,Valid Creature.blockingSource | StaticAbilities$ DontUntap | Duration$ Permanent | ConditionPresent$ Creature.blockedBySource,Creature.blockingSource | SubAbility$ DBAnimate | ForgetOnMoved$ Battlefield | ForgetCounter$ PARALYZATION
+SVar:DBAnimate:DB$ AnimateAll | ValidCards$ Creature.blockedBySource,Creature.blockingSource | Abilities$ ABRemoveCounter | Permanent$ True
 SVar:ABRemoveCounter:AB$ RemoveCounter | Defined$ Self | Cost$ 4 | CounterType$ PARALYZATION | CounterNum$ 1 | SpellDescription$ Remove a paralyzation counter from this creature.
-SVar:Static:Mode$ Continuous | Affected$ Card.Self+counters_GE1_PARALYZATION | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | AffectedZone$ Battlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_wight.jpg
+SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Card.IsRemembered | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Each of those creatures doesn't untap during its controller's untap step for as long as it has a paralyzation counter on it.
 Oracle:At end of combat, put a paralyzation counter on each creature blocking or blocked by Dread Wight and tap those creatures. Each of those creatures doesn't untap during its controller's untap step for as long as it has a paralyzation counter on it. Each of those creatures gains "{4}: Remove a paralyzation counter from this creature."

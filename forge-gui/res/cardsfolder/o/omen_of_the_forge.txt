@@ -4,5 +4,5 @@ Types:Enchantment
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 2 damage to any target.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2
-A:AB$ Scry | Cost$ 2 R Sac<1/CARDNAME> | ScryNum$ 2 | SpellDescription$ Scry 2.
+A:AB$ Scry | Cost$ 2 R Sac<1/CARDNAME> | ScryNum$ 2 | AILogic$ BestOpportunity | SpellDescription$ Scry 2.
 Oracle:Flash\nWhen Omen of the Forge enters the battlefield, it deals 2 damage to any target.\n{2}{R}, Sacrifice Omen of the Forge: Scry 2.

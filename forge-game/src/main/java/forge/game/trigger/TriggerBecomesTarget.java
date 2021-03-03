@@ -47,7 +47,7 @@ public class TriggerBecomesTarget extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerBecomesTarget(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerBecomesTarget(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -68,13 +68,19 @@ public class TriggerBecomesTarget extends Trigger {
             }
         }
         if (hasParam("ValidSource")) {
-            if (!matchesValid(((SpellAbility) runParams.get(AbilityKey.SourceSA)).getHostCard(), getParam("ValidSource").split(","), this.getHostCard())) {
+            SpellAbility source = (SpellAbility) runParams.get(AbilityKey.SourceSA);
+            if (source == null) {
                 return false;
+            }
+            String valid[] = getParam("ValidSource").split(",");
+            if (!matchesValid(source, valid, getHostCard())) {
+                if (!matchesValid(source.getHostCard(), valid, getHostCard())) {
+                    return false;
+                }
             }
         }
         if (hasParam("ValidTarget")) {
-            if (!matchesValid(runParams.get(AbilityKey.Target), getParam("ValidTarget").split(","),
-                    this.getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.Target), getParam("ValidTarget").split(","), getHostCard())) {
                 return false;
             }
         }
@@ -89,9 +95,9 @@ public class TriggerBecomesTarget extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Source, ((SpellAbility) getFromRunParams(AbilityKey.SourceSA)).getHostCard());
-        sa.setTriggeringObjectsFrom(this, AbilityKey.SourceSA, AbilityKey.Target);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObject(AbilityKey.Source, ((SpellAbility) runParams.get(AbilityKey.SourceSA)).getHostCard());
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.SourceSA, AbilityKey.Target);
     }
 
     @Override

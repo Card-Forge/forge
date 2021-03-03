@@ -3,8 +3,9 @@ ManaCost:7 W W
 Types:Creature Bringer
 PT:5/5
 K:Trample
-SVar:AltCost:Cost$ W U B R G | Description$ You may pay {W}{U}{B}{R}{G} rather than pay CARDNAME's mana cost.
+SVar:AltCost:Cost$ W U B R G | Description$ You may pay {W}{U}{B}{R}{G} rather than pay this spell's mana cost.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, you may return target artifact card from your graveyard to the battlefield.
-SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.YouCtrl | Cost$ 0
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bringer_of_the_white_dawn.jpg
+SVar:TrigChange:AB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.YouCtrl | Cost$ 0
+DeckHas:Ability$Graveyard
+DeckNeeds:Type$Artifact
 Oracle:You may pay {W}{U}{B}{R}{G} rather than pay this spell's mana cost.\nTrample\nAt the beginning of your upkeep, you may return target artifact card from your graveyard to the battlefield.

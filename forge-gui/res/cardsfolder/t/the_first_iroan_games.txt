@@ -7,4 +7,4 @@ SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Se
 SVar:TrigDraw:DB$ Draw | NumCards$ 2 | ConditionPresent$ Creature.YouCtrl+powerGE4 | SpellDescription$ If you control a creature with power 4 or greater, draw two cards.
 SVar:TrigGold:DB$ Token | TokenAmount$ 1 | TokenScript$ gold | TokenOwner$ You | LegacyImage$ gold thb | SpellDescription$ Create a Gold token.
 DeckHas:Ability$Counters & Ability$Token
-Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Create a 1/1 white Human Soldier token.\nII — Put three +1/+1 counters on target creature you control.\nIII — If you control a creature with power 4 or greater, draw two cards.\nIV — Create a Gold token.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Create a 1/1 white Human Soldier creature token.\nII — Put three +1/+1 counters on target creature you control.\nIII — If you control a creature with power 4 or greater, draw two cards.\nIV — Create a Gold token. (It's an artifact with "Sacrifice this artifact: Add one mana of any color.")

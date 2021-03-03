@@ -3,6 +3,6 @@ ManaCost:B
 Types:Sorcery
 A:SP$ Destroy | Cost$ B Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 SVar:AICostPreference:SacCost$Creature.Token,Creature.cmcLE2
-AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_splinters.jpg
 Oracle:As an additional cost to cast this spell, sacrifice a creature.\nDestroy target creature.

@@ -2,6 +2,5 @@ Name:Fathom Fleet Firebrand
 ManaCost:1 R
 Types:Creature Human Pirate
 PT:2/2
-A:AB$ Pump | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fathom_fleet_firebrand.jpg
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 Oracle:{1}{R}: Fathom Fleet Firebrand gets +1/+0 until end of turn.

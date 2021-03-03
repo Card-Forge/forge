@@ -2,6 +2,5 @@ Name:Leonin Shikari
 ManaCost:1 W
 Types:Creature Cat Soldier
 PT:2/2
-S:Mode$ Continuous | Affected$ You | AddKeyword$ EquipInstantSpeed | Description$ You may activate equip abilities any time you could cast an instant.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_shikari.jpg
+S:Mode$ CastWithFlash | ValidSA$ Activated.Equip | Caster$ You | Description$ You may activate equip abilities any time you could cast an instant.
 Oracle:You may activate equip abilities any time you could cast an instant.

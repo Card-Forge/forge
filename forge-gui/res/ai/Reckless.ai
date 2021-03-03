@@ -100,10 +100,16 @@ PLANAR_DIE_ROLL_HESITATION_CHANCE=0
 MOVE_EQUIPMENT_TO_BETTER_CREATURES=always
 MOVE_EQUIPMENT_CREATURE_EVAL_THRESHOLD=50
 PRIORITIZE_MOVE_EQUIPMENT_IF_USELESS=false
+# If there's a sacrifice cost to reattach an aura/equipment to another target creature, how big of an evaluation difference
+# should there be between the old target and the new one for the AI to decide to proceed with it.
+SAC_TO_REATTACH_TARGET_EVAL_THRESHOLD=300
 
 # Currently disabled
 PREDICT_SPELLS_FOR_MAIN2=true
 RESERVE_MANA_FOR_MAIN2_CHANCE=100
+
+# If enabled, the AI will protect its permanents against curse auras with Hexproof, Shroud, and Protection
+ACTIVELY_PROTECT_VS_CURSE_AURAS=false
 
 # If enabled, the AI will target artifacts and non-aura enchantments with removal aggressively
 ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS=true

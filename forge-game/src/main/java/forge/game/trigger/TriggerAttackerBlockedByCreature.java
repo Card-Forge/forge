@@ -46,7 +46,7 @@ public class TriggerAttackerBlockedByCreature extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerAttackerBlockedByCreature(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerAttackerBlockedByCreature(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -89,8 +89,8 @@ public class TriggerAttackerBlockedByCreature extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Attacker, AbilityKey.Blocker);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Attacker, AbilityKey.Blocker);
     }
 
     @Override

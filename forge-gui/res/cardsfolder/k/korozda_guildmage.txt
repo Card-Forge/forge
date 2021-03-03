@@ -2,9 +2,9 @@ Name:Korozda Guildmage
 ManaCost:B G
 Types:Creature Elf Shaman
 PT:2/2
-A:AB$ Pump | Cost$ 1 B G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | KW$ Intimidate | SpellDescription$ Target creature gets +1/+1 and gains intimidate until end of turn.
+A:AB$ Pump | Cost$ 1 B G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | KW$ Intimidate | SpellDescription$ Target creature gets +1/+1 and gains intimidate until end of turn. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
 A:AB$ Token | Cost$ 2 B G Sac<1/Creature.nonToken/nontoken Creature> | TokenAmount$ X | References$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling ddj | SpellDescription$ Create X 1/1 green Saproling creature tokens, where X is the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/korozda_guildmage.jpg
-Oracle:{1}{B}{G}: Target creature gets +1/+1 and gains intimidate until end of turn.\n{2}{B}{G}, Sacrifice a nontoken creature: Create X 1/1 green Saproling creature tokens, where X is the sacrificed creature's toughness.
+Oracle:{1}{B}{G}: Target creature gets +1/+1 and gains intimidate until end of turn. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)\n{2}{B}{G}, Sacrifice a nontoken creature: Create X 1/1 green Saproling creature tokens, where X is the sacrificed creature's toughness.

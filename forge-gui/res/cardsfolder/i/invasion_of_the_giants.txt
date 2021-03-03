@@ -1,0 +1,14 @@
+Name:Invasion of the Giants
+ManaCost:U R
+Types:Enchantment Saga
+K:Saga:3:DBScry,DBDraw,DBEffect
+SVar:DBScry:DB$ Scry | ScryNum$ 2 | SpellDescription$ Scry 2.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBReveal | SpellDescription$ Draw a card. Then you may reveal a Giant card from your hand. When you do, CARDNAME deals 2 damage to target opponent or planeswalker.
+SVar:DBReveal:DB$ ImmediateTrigger | Execute$ TrigDealDamage | UnlessCost$ Reveal<1/Giant> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ You may reveal a Giant card from your hand. When you do, CARDNAME deals 2 damage to target opponent or planeswalker.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player.Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker. | NumDmg$ 2
+SVar:DBEffect:DB$ Effect | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell | SVars$ RemoveEffect| SpellDescription$ The next Giant spell you cast this turn costs {2} less to cast.
+SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | ValidCard$ Giant | Activator$ You | Amount$ 2
+SVar:TrigCastSpell:Mode$ SpellCast | ValidCard$ Giant | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
+SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
+DeckHints:Type$Giant
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Scry 2.\nII — Draw a card. Then you may reveal a Giant card from your hand. When you do, Invasion of the Giants deals 2 damage to target opponent or planeswalker.\nIII — The next Giant spell you cast this turn costs {2} less to cast.

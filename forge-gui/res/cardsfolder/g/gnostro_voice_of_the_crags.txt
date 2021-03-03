@@ -1,0 +1,11 @@
+Name:Gnostro, Voice of the Crags
+ManaCost:1 U R W
+Types:Legendary Creature Chimera
+PT:3/3
+A:AB$ Charm | Cost$ T | Choices$ DBScry,DBDamage,DBGainLife | CharmNum$ 1
+SVar:DBScry:DB$ Scry | ScryNum$ X | References$ X | SpellDescription$ Scry X.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | SpellDescription$ You gain X life.
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
+DeckHas:Ability$LifeGain
+Oracle:{T}: Choose one. X is the number of spells you've cast this turn.\n• Scry X.\n• Gnostro, Voice of the Crags deals X damage to target creature.\n• You gain X life.

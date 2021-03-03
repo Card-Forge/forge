@@ -11,4 +11,4 @@ AI:RemoveDeck:Random
 DeckNeeds:Type$Dinosaur
 DeckHints:Name$Sun Blessed Mount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/huatli_dinosaur_knight.jpg
-Oracle:[+2]: Put two +1/+1 counters on up to one target Dinosaur you control.\n[-3]: Target Dinosaur you control deals damage equal to its power to target creature you don't control.\n[-7]: Dinosaurs you control get +4/+4 until end of turn.
+Oracle:[+2]: Put two +1/+1 counters on up to one target Dinosaur you control.\n[−3]: Target Dinosaur you control deals damage equal to its power to target creature you don't control.\n[−7]: Dinosaurs you control get +4/+4 until end of turn.

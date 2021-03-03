@@ -1,0 +1,6 @@
+Name:Dog
+ManaCost:no cost
+PT:1/1
+Colors:white
+Types:Creature Dog
+Oracle:

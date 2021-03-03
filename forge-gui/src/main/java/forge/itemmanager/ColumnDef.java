@@ -31,6 +31,7 @@ import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.limited.DraftRankCache;
 import forge.model.FModel;
 import forge.util.Localizer;
+import forge.util.CardTranslation;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map.Entry;
@@ -57,12 +58,16 @@ public enum ColumnDef {
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    if (from.getKey() instanceof PaperCard)
+                        return toSortableName(from.getKey().toString());
                     return toSortableName(from.getKey().getName());
                 }
             },
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
                 @Override
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    if (from.getKey() instanceof PaperCard)
+                        return from.getKey().toString();
                     return from.getKey().getName();
                 }
             }),
@@ -86,13 +91,13 @@ public enum ColumnDef {
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toType(from.getKey());
+                    return CardTranslation.getTranslatedType(from.getKey().getName(),toType(from.getKey()));
                 }
             },
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
                 @Override
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toType(from.getKey());
+                    return CardTranslation.getTranslatedType(from.getKey().getName(),toType(from.getKey()));
                 }
             }),
     /**The mana cost column.*/

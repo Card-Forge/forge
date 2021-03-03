@@ -5,4 +5,4 @@ A:SP$ PumpAll | Cost$ 1 W W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef
 SVar:DBPumpAll:DB$ PumpAll | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | References$ X | ValidCards$ Creature.YouCtrl | KW$ Vigilance
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kytheons_tactics.jpg
-Oracle:Creatures you control get +2/+1 until end of turn.\nSpell mastery — If there are two or more instant and/or sorcery cards in your graveyard, those creatures also gain vigilance until end of turn. (Attacking does not cause them to tap.)
+Oracle:Creatures you control get +2/+1 until end of turn.\nSpell mastery — If there are two or more instant and/or sorcery cards in your graveyard, those creatures also gain vigilance until end of turn. (Attacking doesn't cause them to tap.)

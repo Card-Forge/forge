@@ -1,0 +1,14 @@
+Name:Kangee, Sky Warden
+ManaCost:3 W U
+Types:Legendary Creature Bird Wizard
+PT:3/3
+K:Flying
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAtt | TriggerDescription$ Whenever CARDNAME attacks, attacking creatures with flying get +2/+0 until end of turn.
+SVar:TrigPumpAtt:DB$ PumpAll | ValidCards$ Creature.attacking+withFlying | NumAtt$ 2
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPumpBlo | TriggerDescription$ Whenever NICKNAME blocks, blocking creatures with flying get +0/+2 until end of turn.
+SVar:TrigPumpBlo:DB$ PumpAll | ValidCards$ Creature.blocking+withFlying | NumDef$ 2
+DeckNeeds:Keyword$Flying
+SVar:HasAttackEffect:TRUE
+SVar:HasBlockEffect:TRUE
+Oracle:Flying, vigilance\nWhenever Kangee, Sky Warden attacks, attacking creatures with flying get +2/+0 until end of turn.\nWhenever Kangee blocks, blocking creatures with flying get +0/+2 until end of turn.

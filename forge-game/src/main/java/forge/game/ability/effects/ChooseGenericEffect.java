@@ -8,8 +8,7 @@ import forge.game.card.Card;
 import forge.game.event.GameEventCardModeChosen;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.MyRandom;
-import forge.util.Localizer;
+import forge.util.Aggregates;
 
 import java.util.List;
 
@@ -33,6 +32,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
 
         final List<SpellAbility> abilities = Lists.newArrayList(sa.getAdditionalAbilityList("Choices"));
         final SpellAbility fallback = sa.getAdditionalAbility("FallbackAbility");
+        final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("ChoiceAmount", "1"), sa);
         
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
 
@@ -43,8 +43,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             for (SpellAbility saChoice : abilities) {
                 if (!saChoice.getRestrictions().checkOtherRestrictions(host, saChoice, sa.getActivatingPlayer()) ) {
                     saToRemove.add(saChoice);
-                } else if (saChoice.hasParam("UnlessCost") &&
-                        "Player.IsRemembered".equals(saChoice.getParam("Defined"))) {
+                } else if (saChoice.hasParam("UnlessCost")) {
                     String unlessCost = saChoice.getParam("UnlessCost");
                     // Sac a permanent in presence of Sigarda, Host of Herons
                     // TODO: generalize this by testing if the unless cost can be paid
@@ -61,36 +60,36 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             }
             abilities.removeAll(saToRemove);
         
-            if (sa.usesTargeting() && sa.getTargets().isTargeting(p) && !p.canBeTargetedBy(sa)) {
+            if (sa.usesTargeting() && sa.getTargets().contains(p) && !p.canBeTargetedBy(sa)) {
                 continue;
             }
 
-            SpellAbility chosenSA = null;
+            List<SpellAbility> chosenSAs = Lists.newArrayList();
             if (sa.hasParam("AtRandom")) {
-                int idxChosen = MyRandom.getRandom().nextInt(abilities.size());
-                chosenSA = abilities.get(idxChosen);
+                Aggregates.random(abilities, amount, chosenSAs);
             } else {
-                chosenSA = p.getController().chooseSingleSpellForEffect(abilities, sa, Localizer.getInstance().getMessage("lblChooseOne"),
-                        ImmutableMap.of());
+                chosenSAs = p.getController().chooseSpellAbilitiesForEffect(abilities, sa, "Choose", amount, ImmutableMap.of());
             }
-            
-            if (chosenSA != null) {
-                String chosenValue = chosenSA.getDescription();
-                if (sa.hasParam("ShowChoice")) {
-                    boolean dontNotifySelf = sa.getParam("ShowChoice").equals("ExceptSelf");
-                    p.getGame().getAction().nofityOfValue(sa, p, chosenValue, dontNotifySelf ? sa.getActivatingPlayer() : null);
+
+            if (!chosenSAs.isEmpty()) {
+                for (SpellAbility chosenSA : chosenSAs) {
+                    String chosenValue = chosenSA.getDescription();
+                    if (sa.hasParam("ShowChoice")) {
+                        boolean dontNotifySelf = sa.getParam("ShowChoice").equals("ExceptSelf");
+                        p.getGame().getAction().nofityOfValue(sa, p, chosenValue, dontNotifySelf ? sa.getActivatingPlayer() : null);
+                    }
+                    if (sa.hasParam("SetChosenMode")) {
+                        sa.getHostCard().setChosenMode(chosenValue);
+                    }
+                    p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), chosenValue, sa.hasParam("ShowChoice")));
+                    AbilityUtils.resolve(chosenSA);
                 }
-                if (sa.hasParam("SetChosenMode")) {
-                    sa.getHostCard().setChosenMode(chosenValue);
-                }
-                p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), chosenValue, sa.hasParam("ShowChoice")));
-                AbilityUtils.resolve(chosenSA);
             } else {
                 // no choices are valid, e.g. maybe all Unless costs are unpayable
                 if (fallback != null) {
                     p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), fallback.getDescription(), sa.hasParam("ShowChoice")));
                     AbilityUtils.resolve(fallback);                
-                } else {
+                } else if (!sa.hasParam("AtRandom")) {
                     System.err.println("Warning: all Unless costs were unpayable for " + host.getName() +", but it had no FallbackAbility defined. Doing nothing (this is most likely incorrect behavior).");
                 }
             }

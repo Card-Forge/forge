@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Creature Monkey
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target nonbasic land.
-SVar:TrigDestroy:DB$Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select a nonbasic land.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select a nonbasic land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_baboons.jpg
 Oracle:When Ravenous Baboons enters the battlefield, destroy target nonbasic land.

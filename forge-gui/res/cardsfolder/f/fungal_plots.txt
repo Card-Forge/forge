@@ -2,9 +2,9 @@ Name:Fungal Plots
 ManaCost:1 G
 Types:Enchantment
 A:AB$ Token | Cost$ 1 G ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling dom | SpellDescription$ Create a 1/1 green Saproling creature token.
-A:AB$ GainLife | Cost$ Sac<2/Saproling> | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ Gain 2 life and draw a card.
+A:AB$ GainLife | Cost$ Sac<2/Saproling> | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ You gain 2 life and draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:AIPreference:ExileFromGraveCost$Creature.cmcGE1+inZoneGraveyard
 AI:RemoveDeck:Random
 DeckHas:Ability$Token
-Oracle:{1}{G}, Exile a creature card from your graveyard: Create a 1/1 green Saproling creature token.\nSacrifice two Saprolings: Gain 2 life and draw a card.
+Oracle:{1}{G}, Exile a creature card from your graveyard: Create a 1/1 green Saproling creature token.\nSacrifice two Saprolings: You gain 2 life and draw a card.

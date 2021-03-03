@@ -1,8 +1,8 @@
 Name:Hidden Path
 ManaCost:2 G G G G
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.Green | AddKeyword$ Forestwalk | Description$ Green creatures have forestwalk.
+S:Mode$ Continuous | Affected$ Creature.Green | AddKeyword$ Forestwalk | Description$ Green creatures have forestwalk. (They can't be blocked as long as defending player controls a Forest.)
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_path.jpg
-Oracle:Green creatures have forestwalk.
+Oracle:Green creatures have forestwalk. (They can't be blocked as long as defending player controls a Forest.)

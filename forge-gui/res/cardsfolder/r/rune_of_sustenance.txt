@@ -1,0 +1,12 @@
+Name:Rune of Sustenance
+ManaCost:1 W
+Types:Enchantment Aura Rune
+K:Enchant permanent
+A:SP$ Attach | Cost$ 1 W | ValidTgts$ Permanent | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Lifelink | Description$ As long as enchanted permanent is a creature, it has lifelink.
+S:Mode$ Continuous | Affected$ Equipment.EnchantedBy | AddStaticAbility$ RuneSustenanceST | Description$ As long as enchanted permanent is an Equipment, it has "Equipped creature has lifelink."
+SVar:RuneSustenanceST:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Lifelink | Description$ Equipped creature has lifelink.
+Oracle:Enchant permanent\nWhen Rune of Sustenance enters the battlefield, draw a card.\nAs long as enchanted permanent is a creature, it has lifelink.\nAs long as enchanted permanent is an Equipment, it has "Equipped creature has lifelink."
+

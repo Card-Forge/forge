@@ -13,6 +13,6 @@ ALTERNATE
 Name:Welcome Home
 ManaCost:5 G G
 Types:Sorcery Adventure
-A:SP$ Token | Cost$ 5 G G | TokenAmount$ 3 | TokenScript$ g_2_2_bear | TokenOwner$ You | LegacyImage$ g 2 2 bear eld | SpellDescription$ Create three 2/2 green Bear creature tokens.
+A:SP$ Token | Cost$ 5 G G | TokenAmount$ 3 | TokenScript$ g_2_2_bear | TokenOwner$ You | LegacyImage$ g 2 2 bear eld | SpellDescription$ Create three 2/2 green Bear creature tokens. (Then exile this card. You may cast the creature later from exile.)
 DeckHas:Ability$Token
-Oracle:Create three 2/2 green Bear creature tokens.
+Oracle:Create three 2/2 green Bear creature tokens. (Then exile this card. You may cast the creature later from exile.)

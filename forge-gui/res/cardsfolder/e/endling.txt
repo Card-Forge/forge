@@ -3,10 +3,10 @@ ManaCost:2 B B
 Types:Creature Zombie Shapeshifter
 PT:3/3
 A:AB$ Pump | Cost$ B | KW$ Menace | Defined$ Self | SpellDescription$ CARDNAME gains gains menace until end of turn.
-AI:RemoveDeck:Random
 A:AB$ Pump | Cost$ B | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
 A:AB$ Pump | Cost$ B | Defined$ Self | KW$ Undying | SpellDescription$ CARDNAME gains undying until end of turn.
+A:AB$ Pump | Cost$ 1 | Defined$ Self | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
+A:AB$ Pump | Cost$ 1 | Defined$ Self | NumAtt$ -1 | NumDef$ +1 | SpellDescription$ CARDNAME gets -1/+1 until end of turn.
+AI:RemoveDeck:Random
 AI:RemoveDeck:All
-A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
-A:AB$ Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ +1 | SpellDescription$ CARDNAME gets -1/+1 until end of turn.
 Oracle:{B}: Endling gains menace until end of turn.\n{B}: Endling gains deathtouch until end of turn.\n{B}: Endling gains undying until end of turn. (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)\n{1}: Endling gets +1/-1 or -1/+1 until end of turn.

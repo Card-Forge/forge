@@ -9,8 +9,8 @@ SVar:TrigPayCost:DB$ ImmediateTrigger | Execute$ DBDmg | ConditionDefined$ Remem
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Ultimate$ True | Planeswalker$ True | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Vampire | ChangeNum$ 1 | SpellDescription$ You may put a vampire creature card from your hand onto the battlefield.
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Ultimate$ True | Planeswalker$ True | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Vampire | ChangeNum$ 1 | SpellDescription$ You may put a Vampire creature card from your hand onto the battlefield.
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
 DeckHints:Type$Vampire
-Oracle:[+1]: Target creature you control gains deathtouch and lifelink until end of turn. If it's a Vampire, put a +1/+1 counter on it.\n[+1]: You may sacrifice a Vampire. When you do, Sorin, Imperious Bloodlord deals 3 damage to any target and you gain 3 life.\n[-3]: You may put a vampire creature card from your hand onto the battlefield.
+Oracle:[+1]: Target creature you control gains deathtouch and lifelink until end of turn. If it's a Vampire, put a +1/+1 counter on it.\n[+1]: You may sacrifice a Vampire. When you do, Sorin, Imperious Bloodlord deals 3 damage to any target and you gain 3 life.\n[−3]: You may put a Vampire creature card from your hand onto the battlefield.

@@ -6,10 +6,8 @@ T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Tr
 T:Mode$ SpellCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | Secondary$ True | TriggerDescription$ Whenever you cast or copy an instant or sorcery spell, CARDNAME deals 1 damage to target opponent or planeswalker.
 SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 1
 A:AB$ Scry | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ScryNum$ 1 | SpellDescription$ Scry 1.
-A:AB$ Effect | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | AILogic$ SpellCopy | Name$ CARDNAME Effect | Triggers$ EffTModeSpellCast | SVars$ EffTrigCopy,EffDBCleanup | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
-SVar:EffTModeSpellCast:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | OneOff$ True | Execute$ EffTrigCopy | TriggerZones$ Command | TriggerDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
-SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | SubAbility$ EffDBCleanup
-SVar:EffDBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+A:AB$ DelayedTrigger | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | AILogic$ SpellCopy | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ EffTrigCopy | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 SVar:BuffedBy:Instant,Sorcery
 DeckHints:Type$Instant|Sorcery
-Oracle:Whenever you cast or copy an instant or sorcery spell, Ral, Storm Conduit deals 1 damage to target opponent or planeswalker.\n[+2]: Scry 1.\n[-2]: When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+Oracle:Whenever you cast or copy an instant or sorcery spell, Ral, Storm Conduit deals 1 damage to target opponent or planeswalker.\n[+2]: Scry 1.\n[−2]: When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.

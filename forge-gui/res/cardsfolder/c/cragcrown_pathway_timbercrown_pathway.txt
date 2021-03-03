@@ -1,0 +1,14 @@
+Name:Cragcrown Pathway
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+AlternateMode:Modal
+Oracle:{T}: Add {R}.
+
+ALTERNATE
+
+Name:Timbercrown Pathway
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+Oracle:{T}: Add {G}.

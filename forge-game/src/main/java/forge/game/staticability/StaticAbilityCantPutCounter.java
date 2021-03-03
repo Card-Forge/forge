@@ -11,7 +11,7 @@ public class StaticAbilityCantPutCounter {
         final Card hostCard = staticAbility.getHostCard();
 
         if (staticAbility.hasParam("CounterType")) {
-            CounterType t = CounterType.valueOf(staticAbility.getParam("CounterType"));
+            CounterType t = CounterType.getType(staticAbility.getParam("CounterType"));
             if (t != null && !type.equals(t)) {
                 return false;
             }
@@ -34,7 +34,7 @@ public class StaticAbilityCantPutCounter {
         final Card hostCard = staticAbility.getHostCard();
 
         if (staticAbility.hasParam("CounterType")) {
-            CounterType t = CounterType.valueOf(staticAbility.getParam("CounterType"));
+            CounterType t = CounterType.getType(staticAbility.getParam("CounterType"));
             if (t != null && !type.equals(t)) {
                 return false;
             }

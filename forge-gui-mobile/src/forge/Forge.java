@@ -1,5 +1,6 @@
 package forge;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -36,13 +37,13 @@ import forge.util.Localizer;
 import forge.util.Utils;
 
 import java.io.File;
-import java.io.FileFilter;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.32.001";
+    public static final String CURRENT_VERSION = "1.6.38.001";
 
     private static final ApplicationListener app = new Forge();
     private static Clipboard clipboard;
@@ -56,24 +57,41 @@ public class Forge implements ApplicationListener {
     private static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
     private static int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
-    private static final Stack<FScreen> screens = new Stack<>();
+    private static final Deque<FScreen> Dscreens = new ArrayDeque<>();
     private static boolean textureFiltering = false;
     private static boolean destroyThis = false;
     public static String extrawide = "default";
     public static float heigtModifier = 0.0f;
     private static boolean isloadingaMatch = false;
     public static boolean showFPS = false;
-    public static boolean enableUIMask = false;
+    public static boolean altPlayerLayout = false;
+    public static String enableUIMask = "Crop";
     public static boolean enablePreloadExtendedArt = false;
+    public static boolean isTabletDevice = false;
     public static String locale = "en-US";
+    public static boolean hdbuttons = false;
+    public static boolean hdstart = false;
+    public static boolean isPortraitMode = false;
+    public static boolean gameInProgress = false;
+    public static boolean disposeTextures = false;
+    public static int cacheSize = 400;
+    public static int totalDeviceRAM = 0;
+    public static int androidVersion = 0;
+    public static boolean autoCache = false;
+    public static int lastButtonIndex = 0;
 
-    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value) {
+    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
         if (GuiBase.getInterface() == null) {
             clipboard = clipboard0;
             deviceAdapter = deviceAdapter0;
             GuiBase.setInterface(new GuiMobile(assetDir0));
             GuiBase.enablePropertyConfig(value);
+            isPortraitMode = androidOrientation;
+            totalDeviceRAM = totalRAM;
+            isTabletDevice = isTablet;
+            androidVersion = AndroidAPI;
         }
+        GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
         return app;
     }
 
@@ -84,6 +102,8 @@ public class Forge implements ApplicationListener {
     public void create() {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
+
+        GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
 
         graphics = new Graphics();
         splashScreen = new SplashScreen();
@@ -110,9 +130,22 @@ public class Forge implements ApplicationListener {
 
         textureFiltering = prefs.getPrefBoolean(FPref.UI_LIBGDX_TEXTURE_FILTERING);
         showFPS = prefs.getPrefBoolean(FPref.UI_SHOW_FPS);
-        enableUIMask = prefs.getPrefBoolean(FPref.UI_ENABLE_BORDER_MASKING);
+        altPlayerLayout = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
+        enableUIMask = prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING);
+        if (prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("true")) //override old settings if not updated
+            enableUIMask = "Full";
+        else if (prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("false"))
+            enableUIMask = "Off";
         enablePreloadExtendedArt = prefs.getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
         locale = prefs.getPref(FPref.UI_LANGUAGE);
+        autoCache = prefs.getPrefBoolean(FPref.UI_AUTO_CACHE_SIZE);
+        disposeTextures = prefs.getPrefBoolean(FPref.UI_ENABLE_DISPOSE_TEXTURES);
+
+        if (autoCache) {
+            //increase cacheSize for devices with RAM more than 5GB, default is 400. Some phones have more than 10GB RAM (Mi 10, OnePlus 8, S20, etc..)
+            if (totalDeviceRAM>5000) //devices with more than 10GB RAM will have 1000 Cache size, 700 Cache size for morethan 5GB RAM
+                cacheSize = totalDeviceRAM>10000 ? 1000: 700;
+        }
 
         final Localizer localizer = Localizer.getInstance();
 
@@ -135,8 +168,18 @@ public class Forge implements ApplicationListener {
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup"));
 
                 //add reminder to preload
-                if (enablePreloadExtendedArt)
-                    splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt"));
+                if (enablePreloadExtendedArt) {
+                    if(autoCache)
+                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt")+"\nDetected RAM: " +totalDeviceRAM+"MB. Cache size: "+cacheSize);
+                    else
+                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt"));
+                } else {
+                    if(autoCache)
+                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup")+"\nDetected RAM: " +totalDeviceRAM+"MB. Cache size: "+cacheSize);
+                    else
+                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup"));
+                }
+
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
                     public void run() {
@@ -153,25 +196,22 @@ public class Forge implements ApplicationListener {
     private void preloadExtendedArt() {
         if (!enablePreloadExtendedArt)
             return;
-        List<String> keys = new ArrayList<>();
-        File[] directories = new File(ForgeConstants.CACHE_CARD_PICS_DIR).listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                if (!file.getName().startsWith("MPS_"))
-                    return false;
-                return file.isDirectory();
-            }
-        });
-        for (File folder : directories) {
-            File[] files = new File(folder.toString()).listFiles();
-            for (File file : files) {
-                if (file.isFile()) {
-                    keys.add(folder.getName() + "/" +file.getName().replace(".jpg","").replace(".png",""));
-                }
-            }
+        List<String> borderlessCardlistkeys = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
+        if(borderlessCardlistkeys.isEmpty())
+            return;
+        List<String> filteredkeys = new ArrayList<>();
+        for (String cardname : borderlessCardlistkeys){
+            File image = new File(ForgeConstants.CACHE_CARD_PICS_DIR+ForgeConstants.PATH_SEPARATOR+cardname+".jpg");
+            if (image.exists())
+                filteredkeys.add(cardname);
         }
-        if (!keys.isEmpty())
-            ImageCache.preloadCache((Iterable<String>)keys);
+        if (!filteredkeys.isEmpty())
+            ImageCache.preloadCache(filteredkeys);
+    }
+
+    public static void openHomeScreen(int index) {
+        openScreen(HomeScreen.instance);
+        HomeScreen.instance.openMenu(index);
     }
 
     private void afterDbLoaded() {
@@ -182,7 +222,7 @@ public class Forge implements ApplicationListener {
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
         destroyThis = false; //Allow back()
         Gdx.input.setCatchKey(Keys.MENU, true);
-        openScreen(HomeScreen.instance);
+        openHomeScreen(-1); //default for startup
         splashScreen = null;
 
         boolean isLandscapeMode = isLandscapeMode();
@@ -253,13 +293,13 @@ public class Forge implements ApplicationListener {
     }
 
     public static boolean onHomeScreen() {
-        return screens.size() == 1;
+        return Dscreens.size() == 1;
     }
 
     public static void back() {
         if(destroyThis && isLandscapeMode())
             return;
-        if (screens.size() < 2) {
+        if (Dscreens.size() < 2 || (currentScreen == HomeScreen.instance && Forge.isPortraitMode)) {
             exit(false); //prompt to exit if attempting to go back from home screen
             return;
         }
@@ -267,8 +307,8 @@ public class Forge implements ApplicationListener {
             @Override
             public void run(Boolean result) {
                 if (result) {
-                    screens.pop();
-                    setCurrentScreen(screens.lastElement());
+                    Dscreens.pollFirst();
+                    setCurrentScreen(Dscreens.peekFirst());
                 }
             }
         });
@@ -276,12 +316,12 @@ public class Forge implements ApplicationListener {
 
     //set screen that will be gone to on pressing Back before going to current Back screen
     public static void setBackScreen(final FScreen screen0, boolean replace) {
-        screens.remove(screen0); //remove screen from previous position in navigation history
-        int index = screens.size() - 1;
+        Dscreens.remove(screen0); //remove screen from previous position in navigation history
+        int index = Dscreens.size() - 1;
         if (index > 0) {
-            screens.add(index, screen0);
+            Dscreens.addLast(screen0);
             if (replace) { //remove previous back screen if replacing back screen
-                screens.remove(index - 1);
+                Dscreens.removeFirst();
             }
         }
     }
@@ -343,7 +383,7 @@ public class Forge implements ApplicationListener {
         if (currentScreen == screen0) { return; }
 
         if (currentScreen == null) {
-            screens.push(screen0);
+            Dscreens.addFirst(screen0);
             setCurrentScreen(screen0);
             return;
         }
@@ -352,11 +392,11 @@ public class Forge implements ApplicationListener {
             @Override
             public void run(Boolean result) {
                 if (result) {
-                    if (replaceBackScreen && !screens.isEmpty()) {
-                        screens.pop();
+                    if (replaceBackScreen && !Dscreens.isEmpty()) {
+                        Dscreens.removeFirst();
                     }
-                    if (screens.peek() != screen0) { //prevent screen being its own back screen
-                        screens.push(screen0);
+                    if (Dscreens.peekFirst() != screen0) { //prevent screen being its own back screen
+                        Dscreens.addFirst(screen0);
                     }
                     setCurrentScreen(screen0);
                 }
@@ -369,6 +409,8 @@ public class Forge implements ApplicationListener {
     }
 
     public static boolean isLandscapeMode() {
+        if(GuiBase.isAndroid())
+            return !isPortraitMode;
         return screenWidth > screenHeight;
     }
 
@@ -393,6 +435,11 @@ public class Forge implements ApplicationListener {
     }
 
     private static void setCurrentScreen(FScreen screen0) {
+        String toNewScreen = screen0 != null ? screen0.toString() : "";
+        String previousScreen = currentScreen != null ? currentScreen.toString() : "";
+
+        gameInProgress = toNewScreen.toLowerCase().contains("match") || previousScreen.toLowerCase().contains("match");
+        boolean dispose = toNewScreen.toLowerCase().contains("homescreen") && disposeTextures;
         try {
             endKeyInput(); //end key input before switching screens
             ForgeAnimation.endAll(); //end all active animations before switching screens
@@ -400,10 +447,28 @@ public class Forge implements ApplicationListener {
             currentScreen = screen0;
             currentScreen.setSize(screenWidth, screenHeight);
             currentScreen.onActivate();
+            /*keep Dscreens growing
+            if (Dscreens.size() > 3) {
+                for(int x = Dscreens.size(); x > 3; x--) {
+                    Dscreens.removeLast();
+                }
+            }*/
+            /* for checking only
+            if (!Dscreens.isEmpty()) {
+                int x = 0;
+                for(FScreen fScreen : Dscreens) {
+                    System.out.println("Screen ["+x+"]: "+fScreen.toString());
+                    x++;
+                }
+                System.out.println("---------------");
+            }*/
         }
         catch (Exception ex) {
             graphics.end();
             BugReporter.reportException(ex);
+        } finally {
+            if(dispose)
+                ImageCache.disposeTexture();
         }
     }
 
@@ -497,7 +562,7 @@ public class Forge implements ApplicationListener {
             currentScreen.onClose(null);
             currentScreen = null;
         }
-        screens.clear();
+        Dscreens.clear();
         graphics.dispose();
         SoundSystem.instance.dispose();
         try {
@@ -834,19 +899,19 @@ public class Forge implements ApplicationListener {
         }
 
         @Override
-        public boolean scrolled(int amount) {
+        public boolean scrolled(float amountX, float amountY) {
             updatePotentialListeners(mouseMovedX, mouseMovedY);
 
             if (KeyInputAdapter.isCtrlKeyDown()) { //zoom in or out based on amount
-                return zoom(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amount);
+                return zoom(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amountY);
             }
 
             boolean handled;
             if (KeyInputAdapter.isShiftKeyDown()) {
-                handled = pan(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amount, 0, false);
+                handled = pan(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amountX, 0, false);
             }
             else {
-                handled = pan(mouseMovedX, mouseMovedY, 0, -Utils.AVG_FINGER_HEIGHT * amount, true);
+                handled = pan(mouseMovedX, mouseMovedY, 0, -Utils.AVG_FINGER_HEIGHT * amountY, true);
             }
             if (panStop(mouseMovedX, mouseMovedY)) {
                 handled = true;

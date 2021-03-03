@@ -1,9 +1,11 @@
 package forge.game.ability.effects;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.game.GameEntity;
 import forge.game.GameObject;
+import forge.game.GameObjectPredicates;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -19,7 +21,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.ArrayList;
 import java.util.List;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
  *
  */
@@ -36,14 +38,11 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
 
         final MagicStack stack = activator.getGame().getStack();
         for (final SpellAbility tgtSA : sas) {
-            SpellAbilityStackInstance si = stack.getInstanceFromSpellAbility(tgtSA);
+            SpellAbilityStackInstance si = stack.getInstanceMatchingSpellAbilityID(tgtSA);
             if (si == null) {
                 // If there isn't a Stack Instance, there isn't really a target
                 continue;
             }
-
-            boolean changesOneTarget = sa.hasParam("ChangeSingleTarget"); // The only card known to replace targets with self is Spellskite
-            // There is also Muck Drubb but it replaces ALL occurences of a single target with itself (unlike Spellskite that has to be activated for each).
 
             SpellAbilityStackInstance changingTgtSI = si;
             Player chooser = sa.getActivatingPlayer();
@@ -54,13 +53,13 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
             if (isOptional && !chooser.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantChangeAbilityTargets", tgtSA.getHostCard().toString()))) {
                 continue;
             }
-            if (changesOneTarget) {
+            if (sa.hasParam("ChangeSingleTarget")) {
                 // 1. choose a target of target spell
                 List<Pair<SpellAbilityStackInstance, GameObject>> allTargets = new ArrayList<>();
                 while(changingTgtSI != null) {
-                    SpellAbility changedSa = changingTgtSI.getSpellAbility(true); 
+                    SpellAbility changedSa = changingTgtSI.getSpellAbility(true);
                     if (changedSa.usesTargeting()) {
-                        for(GameObject it : changedSa.getTargets().getTargets())
+                        for(GameObject it : changedSa.getTargets())
                             allTargets.add(ImmutablePair.of(changingTgtSI, it));
                     }
                     changingTgtSI = changingTgtSI.getSubInstance();
@@ -77,6 +76,8 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 GameObject oldTarget = chosenTarget.getValue();
                 TargetChoices oldTargetBlock = replaceIn.getTargetChoices();
                 TargetChoices newTargetBlock = oldTargetBlock.clone();
+                // gets the divied value from old target
+                Integer div = oldTargetBlock.getDividedValue(oldTarget);
                 newTargetBlock.remove(oldTarget);
                 replaceIn.updateTarget(newTargetBlock);
                 // 3. test if updated choices would be correct.
@@ -84,7 +85,10 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
 
                 if (replaceIn.getSpellAbility(true).canTarget(newTarget)) {
                     newTargetBlock.add(newTarget);
-                    replaceIn.updateTarget(newTargetBlock, oldTarget, newTarget);
+                    if (div != null) {
+                        newTargetBlock.addDividedAllocation(newTarget, div);
+                    }
+                    replaceIn.updateTarget(newTargetBlock);
                 }
                 else {
                     replaceIn.updateTarget(oldTargetBlock);
@@ -93,36 +97,38 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
             else {
                 while(changingTgtSI != null) {
                     SpellAbility changingTgtSA = changingTgtSI.getSpellAbility(true);
-                    if (sa.hasParam("RandomTarget")){
-                        if (changingTgtSA.usesTargeting()) {
+                    if (changingTgtSA.usesTargeting()) {
+                        // random target and DefinedMagnet works on single targets
+                        if (sa.hasParam("RandomTarget")){
+                            int div = changingTgtSA.getTotalDividedValue();
                             changingTgtSA.resetTargets();
                             List<GameEntity> candidates = changingTgtSA.getTargetRestrictions().getAllCandidates(changingTgtSA, true);
                             GameEntity choice = Aggregates.random(candidates);
                             changingTgtSA.getTargets().add(choice);
-                            changingTgtSI.updateTarget(changingTgtSA.getTargets(), null, choice);
+                            if (changingTgtSA.isDividedAsYouChoose()) {
+                                changingTgtSA.addDividedAllocation(choice, div);
+                            }
+
+                            changingTgtSI.updateTarget(changingTgtSA.getTargets());
                         }
-                    }
-                    else if (sa.hasParam("DefinedMagnet")){
-                        GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
-                        if (newTarget != null && changingTgtSA.canTarget(newTarget)) {
-                            changingTgtSA.resetTargets();
-                            changingTgtSA.getTargets().add(newTarget);
-                            changingTgtSI.updateTarget(changingTgtSA.getTargets(), null, newTarget);
-                        }
-                    }
-                    else {
-                        // Update targets, with a potential new target
-                        TargetChoices newTarget = sa.getActivatingPlayer().getController().chooseNewTargetsFor(changingTgtSA);
-                        if (null != newTarget) {
-                            if (sa.hasParam("TargetRestriction")) {
-                                if (newTarget.getFirstTargetedCard() != null && newTarget.getFirstTargetedCard().
-                                        isValid(sa.getParam("TargetRestriction").split(","), activator, sa.getHostCard(), sa)) {
-                                    changingTgtSI.updateTarget(newTarget);
-                                } else if (newTarget.getFirstTargetedPlayer() != null && newTarget.getFirstTargetedPlayer().
-                                        isValid(sa.getParam("TargetRestriction").split(","), activator, sa.getHostCard(), sa)) {
-                                    changingTgtSI.updateTarget(newTarget);
+                        else if (sa.hasParam("DefinedMagnet")){
+                            GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
+                            if (newTarget != null && changingTgtSA.canTarget(newTarget)) {
+                                int div = changingTgtSA.getTotalDividedValue();
+                                changingTgtSA.resetTargets();
+                                changingTgtSA.getTargets().add(newTarget);
+                                changingTgtSI.updateTarget(changingTgtSA.getTargets());
+                                if (changingTgtSA.isDividedAsYouChoose()) {
+                                    changingTgtSA.addDividedAllocation(newTarget, div);
                                 }
-                            } else {
+                            }
+                        }
+                        else {
+                            // Update targets, with a potential new target
+                            Predicate<GameObject> filter = sa.hasParam("TargetRestriction") ? GameObjectPredicates.restriction(sa.getParam("TargetRestriction").split(","), activator, sa.getHostCard(), sa) : null;
+                            // TODO Creature.Other might not work yet as it should
+                            TargetChoices newTarget = sa.getActivatingPlayer().getController().chooseNewTargetsFor(changingTgtSA, filter, false);
+                            if (null != newTarget) {
                                 changingTgtSI.updateTarget(newTarget);
                             }
                         }

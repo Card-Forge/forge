@@ -103,7 +103,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Integer announceRequirements(SpellAbility ability, String announce, boolean allowZero) {
+    public Integer announceRequirements(SpellAbility ability, String announce) {
         // For now, these "announcements" are made within the AI classes of the appropriate SA effects
         if (ability.getApi() != null) {
             switch (ability.getApi()) {
@@ -145,12 +145,12 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollectionView chooseCardsForEffect(CardCollectionView sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional) {
-        return brains.chooseCardsForEffect(sourceList, sa, min, max, isOptional);
+    public CardCollectionView chooseCardsForEffect(CardCollectionView sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional, Map<String, Object> params) {
+        return brains.chooseCardsForEffect(sourceList, sa, min, max, isOptional, params);
     }
 
     @Override
-    public <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
+    public <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         if (delayedReveal != null) {
             reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }
@@ -158,13 +158,13 @@ public class PlayerControllerAi extends PlayerController {
         if (null == api) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
-        return SpellApiToAi.Converter.get(api).chooseSingleEntity(player, sa, (FCollection<T>)optionList, isOptional, targetedPlayer);
+        return SpellApiToAi.Converter.get(api).chooseSingleEntity(player, sa, (FCollection<T>)optionList, isOptional, targetedPlayer, params);
     }
 
     @Override
     public <T extends GameEntity> List<T> chooseEntitiesForEffect(
             FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title,
-            Player targetedPlayer) {
+            Player targetedPlayer, Map<String, Object> params) {
         if (delayedReveal != null) {
             reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }
@@ -172,7 +172,7 @@ public class PlayerControllerAi extends PlayerController {
 	List<T> selecteds = new ArrayList<>();
 	T selected;
 	do {
-	    selected = chooseSingleEntityForEffect(remaining, null, sa, title, selecteds.size()>=min, targetedPlayer);
+	    selected = chooseSingleEntityForEffect(remaining, null, sa, title, selecteds.size()>=min, targetedPlayer, params);
 	    if ( selected != null ) {
 		remaining.remove(selected);
 		selecteds.add(selected);
@@ -182,7 +182,23 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public SpellAbility chooseSingleSpellForEffect(java.util.List<SpellAbility> spells, SpellAbility sa, String title,
+    public List<SpellAbility> chooseSpellAbilitiesForEffect(List<SpellAbility> spells, SpellAbility sa, String title,
+            int num, Map<String, Object> params) {
+        List<SpellAbility> remaining = Lists.newArrayList(spells);
+        List<SpellAbility> selecteds = Lists.newArrayList();
+        SpellAbility selected;
+        do {
+            selected = chooseSingleSpellForEffect(remaining, sa, title, params);
+            if ( selected != null ) {
+                remaining.remove(selected);
+                selecteds.add(selected);
+            }
+        } while ( (selected != null ) && (selecteds.size() < num) );
+        return selecteds;
+    }
+
+    @Override
+    public SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title,
             Map<String, Object> params) {
         ApiType api = sa.getApi();
         if (null == api) {
@@ -208,15 +224,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean confirmTrigger(WrappedAbility wrapper, Map<String, String> triggerParams, boolean isMandatory) {
+    public boolean confirmTrigger(WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
         //final Trigger regtrig = wrapper.getTrigger();
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Deathmist Raptor")) {
             return true;
         }
-        if (triggerParams.containsKey("DelayedTrigger") || isMandatory) {
-            //TODO: The only card with an optional delayed trigger is Shirei, Shizo's Caretaker,
-            //      needs to be expanded when a more difficult cards comes up
+        if (wrapper.isMandatory()) {
             return true;
         }
         // Store/replace target choices more properly to get this SA cleared.
@@ -253,7 +267,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Player chooseStartingPlayer(boolean isFirstGame) {
+    public Player chooseStartingPlayer(boolean isFirstgame) {
         return this.player; // AI is brave :)
     }
 
@@ -350,7 +364,7 @@ public class PlayerControllerAi extends PlayerController {
 
         if (destinationZone == ZoneType.Graveyard) {
             // In presence of Volrath's Shapeshifter in deck, try to place the best creature on top of the graveyard
-            if (!CardLists.filter(game.getCardsInGame(), new Predicate<Card>() {
+            if (!CardLists.filter(getGame().getCardsInGame(), new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
                     // need a custom predicate here since Volrath's Shapeshifter may have a different name OTB
@@ -471,7 +485,7 @@ public class PlayerControllerAi extends PlayerController {
     public void playSpellAbilityNoStack(SpellAbility effectSA, boolean canSetupTargets) {
         if (canSetupTargets)
             brains.doTrigger(effectSA, true); // first parameter does not matter, since return value won't be used
-        ComputerUtil.playNoStack(player, effectSA, game);
+        ComputerUtil.playNoStack(player, effectSA, getGame());
     }
 
     @Override
@@ -480,7 +494,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public TargetChoices chooseNewTargetsFor(SpellAbility ability) {
+    public TargetChoices chooseNewTargetsFor(SpellAbility ability, Predicate<GameObject> filter, boolean optional) {
         // AI currently can't do this. But when it can it will need to be based on Ability API
         return null;
     }
@@ -503,18 +517,18 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, List<String> invalidTypes, boolean isOptional) {
-        String chosen = ComputerUtil.chooseSomeType(player, kindOfType, sa.getParam("AILogic"), invalidTypes);
+        String chosen = ComputerUtil.chooseSomeType(player, kindOfType, sa.getParam("AILogic"), validTypes, invalidTypes);
         if (StringUtils.isBlank(chosen) && !validTypes.isEmpty()) {
             chosen = validTypes.iterator().next();
             System.err.println("AI has no idea how to choose " + kindOfType +", defaulting to arbitrary element: chosen");
         }
-        game.getAction().nofityOfValue(sa, player, chosen, player);
+        getGame().getAction().nofityOfValue(sa, player, chosen, player);
         return chosen;
     }
 
     @Override
-    public Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes) {
-        return ComputerUtil.vote(player, options, sa, votes);
+    public Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer) {
+        return ComputerUtil.vote(player, options, sa, votes, forPlayer);
     }
 
     @Override
@@ -598,15 +612,17 @@ public class PlayerControllerAi extends PlayerController {
     }
     
     @Override
-    public void playChosenSpellAbility(SpellAbility sa) {
+    public boolean playChosenSpellAbility(SpellAbility sa) {
         // System.out.println("Playing sa: " + sa);
         if (sa instanceof LandAbility) {
             if (sa.canPlay()) {
                 sa.resolve();
+                getGame().updateLastStateForCard(sa.getHostCard());
             }
         } else {
-            ComputerUtil.handlePlayingSpellAbility(player, sa, game);
+            ComputerUtil.handlePlayingSpellAbility(player, sa, getGame());
         }
+        return true;
     }    
 
     @Override
@@ -644,7 +660,7 @@ public class PlayerControllerAi extends PlayerController {
         // - End of hack for Exile a card from library Cumulative Upkeep -
 
         if (ComputerUtilCost.canPayCost(ability, c.getController())) {
-            ComputerUtil.playNoStack(c.getController(), ability, game);
+            ComputerUtil.playNoStack(c.getController(), ability, getGame());
             return true;
         }
         return false;
@@ -754,6 +770,7 @@ public class PlayerControllerAi extends PlayerController {
                 return defaultVal != null && defaultVal.booleanValue();
             case UntapTimeVault: return false; // TODO Should AI skip his turn for time vault?
             case LeftOrRight: return brains.chooseDirection(sa);
+            case OddsOrEvens: return brains.chooseEvenOdd(sa); // false is Odd, true is Even
             default:
                 return MyRandom.getRandom().nextBoolean();
         }
@@ -784,8 +801,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num, boolean allowRepeat) {
-        List<AbilitySub> result = brains.chooseModeForAbility(sa, min, num, allowRepeat);
+    public List<AbilitySub> chooseModeForAbility(SpellAbility sa, List<AbilitySub> possible, int min, int num, boolean allowRepeat) {
+        List<AbilitySub> result = brains.chooseModeForAbility(sa, possible, min, num, allowRepeat);
         if (result != null) {
             return result;
         }
@@ -816,6 +833,9 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public byte chooseColor(String message, SpellAbility sa, ColorSet colors) {
+        if (colors.countColors() < 2) {
+            return Iterables.getFirst(colors, MagicColor.WHITE);
+        }
         // You may switch on sa.getApi() here and use sa.getParam("AILogic")
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
         if (sa.getApi() == ApiType.Mana) {
@@ -873,8 +893,8 @@ public class PlayerControllerAi extends PlayerController {
     public String chooseProtectionType(String string, SpellAbility sa, List<String> choices) {
         String choice = choices.get(0);
         SpellAbility hostsa = null;     //for Protect sub-ability
-        if (game.stack.size() > 1) {
-            for (SpellAbilityStackInstance si : game.getStack()) {
+        if (getGame().stack.size() > 1) {
+            for (SpellAbilityStackInstance si : getGame().getStack()) {
                 SpellAbility spell = si.getSpellAbility(true);
                 if (sa != spell && sa.getHostCard() != spell.getHostCard()) {
                     String s = ProtectAi.toProtectFrom(spell.getHostCard(), sa);
@@ -885,10 +905,10 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
         }
-        final Combat combat = game.getCombat();
+        final Combat combat = getGame().getCombat();
         if (combat != null) {
-            if (game.stack.size() == 1) {
-                SpellAbility topstack = game.stack.peekAbility();
+            if (getGame().stack.size() == 1) {
+                SpellAbility topstack = getGame().stack.peekAbility();
                 if (topstack.getSubAbility() == sa) {
                     hostsa = topstack;
                 }
@@ -911,7 +931,7 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
         }
-        final PhaseHandler ph = game.getPhaseHandler();
+        final PhaseHandler ph = getGame().getPhaseHandler();
         if (ph.getPlayerTurn() == sa.getActivatingPlayer() && ph.getPhase() == PhaseType.MAIN1 && sa.getTargetCard() != null) {
             AiAttackController aiAtk = new AiAttackController(sa.getActivatingPlayer(), sa.getTargetCard());
             String s = aiAtk.toProtectAttacker(sa);
@@ -926,7 +946,7 @@ public class PlayerControllerAi extends PlayerController {
                 list.addAll(opp.getCreaturesInPlay());
             }
             if (list.isEmpty()) {
-                list = CardLists.filterControlledBy(game.getCardsInGame(), player.getOpponents());
+                list = CardLists.filterControlledBy(getGame().getCardsInGame(), player.getOpponents());
             }
             if (!list.isEmpty()) {
                 choice = ComputerUtilCard.getMostProminentColor(list);
@@ -941,11 +961,9 @@ public class PlayerControllerAi extends PlayerController {
         final Ability emptyAbility = new AbilityStatic(source, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
         emptyAbility.setActivatingPlayer(player);
         emptyAbility.setTriggeringObjects(sa.getTriggeringObjects());
-        for (String sVar : sa.getSVars()) {
-            emptyAbility.setSVar(sVar, sa.getSVar(sVar));
-        }
+        emptyAbility.setSVars(sa.getSVars());
         if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers) && ComputerUtilCost.canPayCost(emptyAbility, player)) {
-            ComputerUtil.playNoStack(player, emptyAbility, game); // AI needs something to resolve to pay that cost
+            ComputerUtil.playNoStack(player, emptyAbility, getGame()); // AI needs something to resolve to pay that cost
             return true;
         }
         return false;
@@ -954,8 +972,30 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
         for (final SpellAbility sa : getAi().orderPlaySa(activePlayerSAs)) {
-            if (prepareSingleSa(sa.getHostCard(),sa,true)) {
-                ComputerUtil.playStack(sa, player, game);
+            if (sa.isTrigger()) {
+                if (prepareSingleSa(sa.getHostCard(), sa, true)) {
+                    ComputerUtil.playStack(sa, player, getGame());
+                }
+            } else {
+                if (sa.isCopied()) {
+                    if (sa.isSpell()) {
+                        player.getGame().getStackZone().add(sa.getHostCard());
+                    }
+
+                    /* FIXME: the new implementation (below) requires implementing setupNewTargets in the AI controller, among other possible changes, otherwise breaks AI
+                    if (sa.isMayChooseNewTargets()) {
+                        sa.setupNewTargets(player);
+                    }
+                    */
+                    if (sa.isMayChooseNewTargets() && !sa.setupTargets()) {
+                        if (sa.isSpell()) {
+                            sa.getHostCard().ceaseToExist();
+                        }
+                        continue;
+                    }
+                }
+                // need finally add the new spell to the stack
+                player.getGame().getStack().add(sa);
             }
         }
     }
@@ -973,7 +1013,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory) {
         if (prepareSingleSa(host, wrapperAbility, isMandatory)) {
-            ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, game);
+            ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, getGame());
         }
     }
 
@@ -985,9 +1025,9 @@ public class PlayerControllerAi extends PlayerController {
             Spell spell = (Spell) tgtSA;
             if (brains.canPlayFromEffectAI(spell, !optional, noManaCost) == AiPlayDecision.WillPlay || !optional) {
                 if (noManaCost) {
-                    return ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, tgtSA, game);
+                    return ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, tgtSA, getGame());
                 } else {
-                    return ComputerUtil.playStack(tgtSA, player, game);
+                    return ComputerUtil.playStack(tgtSA, player, getGame());
                 }
             } else 
                 return false; // didn't play spell
@@ -1122,7 +1162,8 @@ public class PlayerControllerAi extends PlayerController {
                 CardCollectionView cards = CardLists.getValidCards(aiLibrary, "Creature", player, sa.getHostCard());
                 return ComputerUtilCard.getMostProminentCardName(cards);
             } else if (logic.equals("BestCreatureInComputerDeck")) {
-                return ComputerUtilCard.getBestCreatureAI(aiLibrary).getName();
+                Card bestCreature = ComputerUtilCard.getBestCreatureAI(aiLibrary);
+                return bestCreature != null ? bestCreature.getName() : "Plains";
             } else if (logic.equals("RandomInComputerDeck")) {
                 return Aggregates.random(aiLibrary).getName();
             } else if (logic.equals("MostProminentSpellInComputerDeck")) {
@@ -1132,7 +1173,7 @@ public class PlayerControllerAi extends PlayerController {
                 return SpecialCardAi.CursedScroll.chooseCard(player, sa);
             }
         } else {
-            CardCollectionView list = CardLists.filterControlledBy(game.getCardsInGame(), player.getOpponents());
+            CardCollectionView list = CardLists.filterControlledBy(getGame().getCardsInGame(), player.getOpponents());
             list = CardLists.filter(list, Predicates.not(Presets.LANDS));
             if (!list.isEmpty()) {
                 return list.get(0).getName();
@@ -1213,7 +1254,7 @@ public class PlayerControllerAi extends PlayerController {
     public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen,
             List<OptionalCostValue> optionalCostValues) {
         List<OptionalCostValue> chosenOptCosts = Lists.newArrayList();
-        Cost costSoFar = chosen.getPayCosts() != null ? chosen.getPayCosts().copy() : Cost.Zero;
+        Cost costSoFar = chosen.getPayCosts().copy();
 
         for (OptionalCostValue opt : optionalCostValues) {
             // Choose the optional cost if it can be paid (to be improved later, check for playability and other conditions perhaps)
@@ -1252,7 +1293,7 @@ public class PlayerControllerAi extends PlayerController {
         // TODO: improve the logic depending on the keyword and the playability of the cost-modified SA (enough targets present etc.)
         int chosenAmount = 0;
 
-        Cost costSoFar = sa.getPayCosts() != null ? sa.getPayCosts().copy() : Cost.Zero;
+        Cost costSoFar = sa.getPayCosts().copy();
 
         for (int i = 0; i < max; i++) {
             costSoFar.add(cost);
@@ -1268,13 +1309,16 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsForEffectMultiple(Map<String, CardCollection> validMap, SpellAbility sa, String title) {
+    public CardCollection chooseCardsForEffectMultiple(Map<String, CardCollection> validMap, SpellAbility sa, String title, boolean isOptional) {
         CardCollection choices = new CardCollection();
 
         for (String mapKey: validMap.keySet()) {
             CardCollection cc = validMap.get(mapKey);
             cc.removeAll(choices);
-            choices.add(ComputerUtilCard.getBestAI(cc)); // TODO: should the AI limit itself here with the max number of cards in hand?
+            Card chosen = ComputerUtilCard.getBestAI(cc);
+            if (chosen != null) {
+                choices.add(chosen);
+            }
         }
 
         return choices;

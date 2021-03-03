@@ -72,16 +72,19 @@ public class CloneEffect extends SpellAbilityEffect {
             // choices need to be filtered by LastState Battlefield or Graveyard
             // if a Clone enters the field as other cards it could clone,
             // the clone should not be able to clone them
-            if (choiceZone.equals(ZoneType.Battlefield)) {
-                choices.retainAll(sa.getLastStateBattlefield());
-            } else if (choiceZone.equals(ZoneType.Graveyard)) {
-                choices.retainAll(sa.getLastStateGraveyard());
+            // but do that only for Replacement Effects
+            if (sa.getRootAbility().isReplacementAbility()) {
+                if (choiceZone.equals(ZoneType.Battlefield)) {
+                    choices.retainAll(sa.getLastStateBattlefield());
+                } else if (choiceZone.equals(ZoneType.Graveyard)) {
+                    choices.retainAll(sa.getLastStateGraveyard());
+                }
             }
 
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
 
             String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
-            cardToCopy = activator.getController().chooseSingleEntityForEffect(choices, sa, title, false);
+            cardToCopy = activator.getController().chooseSingleEntityForEffect(choices, sa, title, false, null);
         } else if (sa.hasParam("Defined")) {
             List<Card> cloneSources = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
             if (!cloneSources.isEmpty()) {
@@ -104,11 +107,13 @@ public class CloneEffect extends SpellAbilityEffect {
             final List<Card> cloneTargets = AbilityUtils.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
             if (!cloneTargets.isEmpty()) {
                 tgtCard = cloneTargets.get(0);
-                game.getTriggerHandler().clearInstrinsicActiveTriggers(tgtCard, null);
+                game.getTriggerHandler().clearActiveTriggers(tgtCard, null);
+            } else {
+                return;
             }
         } else if (sa.hasParam("Choices") && sa.usesTargeting()) {
             tgtCard = sa.getTargets().getFirstTargetedCard();
-            game.getTriggerHandler().clearInstrinsicActiveTriggers(tgtCard, null);
+            game.getTriggerHandler().clearActiveTriggers(tgtCard, null);
         }
 
         if (sa.hasParam("CloneZone")) {

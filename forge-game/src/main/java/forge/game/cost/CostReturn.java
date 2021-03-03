@@ -53,6 +53,16 @@ public class CostReturn extends CostPartWithList {
     @Override
     public int paymentOrder() { return 10; }
 
+    @Override
+    public Integer getMaxAmountX(SpellAbility ability, Player payer) {
+        final Card source = ability.getHostCard();
+
+        CardCollectionView typeList = payer.getCardsIn(ZoneType.Battlefield);
+        typeList = CardLists.getValidCards(typeList, getType().split(";"), payer, source, ability);
+
+        return typeList.size();
+    }
+
     /*
      * (non-Javadoc)
      * 
@@ -95,16 +105,12 @@ public class CostReturn extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();
-        if (!this.payCostFromSource()) {
-            boolean needsAnnoucement = ability.hasParam("Announce") && this.getType().contains(ability.getParam("Announce"));
-            
-            CardCollectionView typeList = payer.getCardsIn(ZoneType.Battlefield);
-            typeList = CardLists.getValidCards(typeList, this.getType().split(";"), payer, source, ability);
+        if (payCostFromSource()) {
+            return source.isInPlay();
+        }
 
-            final Integer amount = this.convertAmount();
-            return needsAnnoucement || amount == null || typeList.size() >= amount;
-        } else return source.isInPlay();
-
+        final Integer amount = this.convertAmount();
+        return amount == null || getMaxAmountX(ability, payer) >= amount;
     }
 
     /* (non-Javadoc)

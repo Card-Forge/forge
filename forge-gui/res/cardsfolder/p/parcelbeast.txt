@@ -1,0 +1,7 @@
+Name:Parcelbeast
+ManaCost:2 G U
+Types:Creature Elemental Beast
+PT:2/4
+K:Mutate:G U
+A:AB$ Dig | Cost$ 1 T | DigNum$ 1 | ChangeNum$ 1 | ChangeValid$ Land | Optional$ True | DestinationZone$ Battlefield | DestinationZone2$ Hand | StackDescription$ SpellDescription | SpellDescription$ Look at the top card of your library. If it's a land card, you may put it onto the battlefield. If you don't put the card onto the battlefield, put it into your hand.
+Oracle:Mutate {G}{U} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\n{1}, {T}: Look at the top card of your library. If it's a land card, you may put it onto the battlefield. If you don't put the card onto the battlefield, put it into your hand.

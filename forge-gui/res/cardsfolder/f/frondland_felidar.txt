@@ -1,0 +1,9 @@
+Name:Frondland Felidar
+ManaCost:2 G W
+Types:Creature Cat Beast
+PT:3/5
+K:Vigilance
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+withVigilance | AddAbility$ ABTap | Description$ Creatures you control with vigilance have "{1}, {T}: Tap target creature."
+SVar:ABTap:AB$ Tap | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+SVar:PlayMain1:TRUE
+Oracle:Vigilance\nCreatures you control with vigilance have "{1}, {T}: Tap target creature."

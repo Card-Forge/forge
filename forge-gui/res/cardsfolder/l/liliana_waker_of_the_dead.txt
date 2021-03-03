@@ -1,0 +1,17 @@
+Name:Liliana, Waker of the Dead
+ManaCost:2 B B
+Types:Legendary Planeswalker Liliana
+Loyalty:4
+A:AB$ Discard | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBRepeatEach | StackDescription$ SpellDescription | SpellDescription$ Each player discards a card. Each opponent who can't loses 3 life.
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBLoseLife | SubAbility$ DBCleanup
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 3 | References$ Y | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ0
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Remembered$Valid Card.RememberedPlayerCtrl
+A:AB$ Pump | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | References$ X | SpellDescription$ Target creature gets -X/-X until end of turn, where X is the number of cards in your graveyard.
+SVar:X:Count$InYourYard
+A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Liliana, Waker of the Dead | Image$ emblem_liliana_waker_of_the_dead | Triggers$ EffPhase | SVars$ EmblemTrigChangeZone,DBPump | Duration$ Permanent | SpellDescription$ You get an emblem with "At the beginning of combat on your turn, put target creature card from a graveyard onto the battlefield under your control. It gains haste."
+SVar:EffPhase:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ EmblemTrigChangeZone | TriggerDescription$ At the beginning of combat on your turn, put target creature card from a graveyard onto the battlefield under your control. It gains haste.
+SVar:EmblemTrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste | Permanent$ True
+DeckHas:Ability$Discard & Ability$Graveyard
+Oracle:[+1]: Each player discards a card. Each opponent who can't loses 3 life.\n[−3]: Target creature gets -X/-X until end of turn, where X is the number of cards in your graveyard.\n[−7]: You get an emblem with "At the beginning of combat on your turn, put target creature card from a graveyard onto the battlefield under your control. It gains haste."

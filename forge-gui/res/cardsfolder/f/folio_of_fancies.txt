@@ -5,8 +5,8 @@ S:Mode$ Continuous | Affected$ Player | SetMaxHandSize$ Unlimited | Description$
 SVar:NonStackingEffect:True
 A:AB$ Draw | Cost$ X X T | NumCards$ X | References$ X | Defined$ Player | SpellDescription$ Each player draws X cards.
 SVar:X:Count$xPaid
-A:AB$ RepeatEach | Cost$ 2 U T | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBMill | SpellDescription$ Each opponent puts a number of cards equal to the number of cards in their hand from the top of their library into their graveyard.
+A:AB$ RepeatEach | Cost$ 2 U T | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBMill | SpellDescription$ Each opponent mills cards equal to the number of cards in their hand.
 SVar:DBMill:DB$ Mill | Defined$ Remembered | NumCards$ Y | References$ Y
 SVar:Y:Count$ValidHand Card.RememberedPlayerCtrl
 AI:RemoveDeck:All
-Oracle:Players have no maximum hand size.\n{X}{X}, {T}: Each player draws X cards.\n{2}{U}, {T}: Each opponent puts a number of cards equal to the number of cards in their hand from the top of their library into their graveyard.
+Oracle:Players have no maximum hand size.\n{X}{X}, {T}: Each player draws X cards.\n{2}{U}, {T}: Each opponent mills cards equal to the number of cards in their hand.

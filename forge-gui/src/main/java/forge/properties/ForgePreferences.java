@@ -84,6 +84,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_IMAGE_CACHE_MAXIMUM("400"),
         UI_OVERLAY_FOIL_EFFECT ("true"),
         UI_HIDE_REMINDER_TEXT ("false"),
+        UI_SR_OPTIMIZE ("false"), 
         UI_OPEN_PACKS_INDIV ("false"),
         UI_STACK_CREATURES ("false"),
         UI_UPLOAD_DRAFT ("false"),
@@ -110,6 +111,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_TIMED_TARGETING_OVERLAY_UPDATES ("true"),
         UI_ENABLE_SOUNDS ("true"),
         UI_ENABLE_MUSIC ("true"),
+        UI_VOL_SOUNDS ("100"),
+        UI_VOL_MUSIC ("100"),
         UI_ALT_SOUND_SYSTEM ("false"),
         UI_CURRENT_AI_PROFILE ("Default"),
         UI_CLONE_MODE_SOURCE ("false"),
@@ -120,11 +123,13 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_CLOSE_ACTION ("NONE"),
         UI_MANA_LOST_PROMPT ("false"), // Prompt on losing mana when passing priority
         UI_STACK_EFFECT_NOTIFICATION_POLICY ("Never"),
+        UI_LAND_PLAYED_NOTIFICATION_POLICY ("Never"),
         UI_PAUSE_WHILE_MINIMIZED("false"),
         UI_TOKENS_IN_SEPARATE_ROW("false"), // Display tokens in their own battlefield row.
         UI_DISPLAY_CURRENT_COLORS(ForgeConstants.DISP_CURRENT_COLORS_NEVER),
         UI_FILTER_LANDS_BY_COLOR_IDENTITY("true"),
         UI_ALLOW_ESC_TO_END_TURN ("false"),
+        UI_ALT_PLAYERINFOLAYOUT ("false"),
         UI_PRESELECT_PREVIOUS_ABILITY_ORDER ("false"),
         UI_AUTO_YIELD_MODE (ForgeConstants.AUTO_YIELD_PER_ABILITY),
         UI_SHOW_STORM_COUNT_IN_PROMPT ("false"),
@@ -137,8 +142,13 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_DYNAMIC_PLANECHASE_BG("false"),
         UI_DISABLE_IMAGES_EFFECT_CARDS("false"),
         UI_ENABLE_PRELOAD_EXTENDED_ART("false"),
-        UI_ENABLE_BORDER_MASKING("false"),
+        UI_ENABLE_BORDER_MASKING("Crop"),
+        UI_ENABLE_MATCH_SCROLL_INDICATOR("false"),
         UI_SHOW_FPS("false"),
+        UI_NETPLAY_COMPAT("false"),
+        UI_ENABLE_DISPOSE_TEXTURES("false"),
+        UI_LOAD_UNKNOWN_CARDS("true"),
+        UI_AUTO_CACHE_SIZE("false"),
         UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED ("Never"),
         UI_DEFAULT_FONT_SIZE("12"),
     	UI_SELECT_FROM_CARD_DISPLAYS("true"),
@@ -153,6 +163,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         //TODO This should be removed after the update that requires Java 8.
         DISABLE_DISPLAY_JAVA_8_UPDATE_WARNING("false"),
 
+        AUTO_UPDATE("none"),
         USE_SENTRY("false"), // this controls whether automated bug reporting is done or not
 
         MATCH_HOT_SEAT_MODE("false"), //this only applies to mobile game

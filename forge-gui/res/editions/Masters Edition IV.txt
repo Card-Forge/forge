@@ -278,6 +278,11 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 fromSheet("ME4 UrzaLands")
 240 C Yotian Soldier
 105 U Zombie Master
 
+[UrzaLands]
+1 Urza's Tower|ME4
+1 Urza's Mine|ME4
+1 Urza's Power Plant|ME4
+
 [tokens]
 r_1_1_goblin
 c_1_1_a_tetravite_flying_noenchant

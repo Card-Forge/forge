@@ -21,6 +21,7 @@ import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.properties.ForgeConstants;
 import forge.quest.QuestUtil;
 import forge.util.FileUtil;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.gui.SOptionPane;
 
@@ -99,17 +100,17 @@ public class ConquestUtil {
     public static String promptForName() {
         String name;
         while (true) {
-            name = SOptionPane.showInputDialog("Historians will recall your conquest as:", "Conquest Name");
+            name = SOptionPane.showInputDialog(Localizer.getInstance().getMessage("lblHistoriiansWillRecallYourConquestAs"), Localizer.getInstance().getMessage("lblConquestName"));
             if (name == null) { return null; }
     
             name = QuestUtil.cleanString(name);
     
             if (name.isEmpty()) {
-                SOptionPane.showMessageDialog("Please specify a conquest name.");
+                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPleaseSpecifyConquestName"));
                 continue;
             }
             if (FileUtil.doesFileExist(ForgeConstants.CONQUEST_SAVE_DIR + name + ".dat")) {
-                SOptionPane.showMessageDialog("A conquest already exists with that name. Please pick another quest name.");
+                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblConquestNameExistsPleasePickAnotherName"));
                 continue;
             }
             break;
@@ -174,13 +175,27 @@ public class ConquestUtil {
 
     public static Iterable<PaperCard> getStartingPlaneswalkerOptions(final PaperCard startingCommander) {
         final byte colorIdentity = startingCommander.getRules().getColorIdentity().getColor();
-        return Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(), new Predicate<PaperCard>() {
+        final List<String> selected = Lists.newArrayList();
+        return Iterables.filter(FModel.getMagicDb().getCommonCards(), new Predicate<PaperCard>() {
             @Override
             public boolean apply(PaperCard card) {
+                if (FModel.getMagicDb().getEditions().get(card.getEdition()).getType() == CardEdition.Type.REPRINT) {
+                    return false; // exclude promos from the starting planeswalker set
+                }
+                if (selected.contains(card.getName())) {
+                    return false;
+                }
                 CardRules rules = card.getRules();
-                return rules.getType().isPlaneswalker() &&
+                boolean allowed = rules.getType().isPlaneswalker() &&
                         !card.getName().equals(startingCommander.getName()) && //don't allow picking a commander as a starting planeswalker
                         rules.getColorIdentity().hasNoColorsExcept(colorIdentity);
+
+                if (allowed) {
+                    selected.add(card.getName());
+                    return true;
+                }
+
+                return false;
             }
         });
     }

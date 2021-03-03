@@ -17,6 +17,7 @@ public enum DeckType {
     DRAFT_DECK("lblDraftDecks"),
     SEALED_DECK("lblSealedDecks"),
     PRECONSTRUCTED_DECK("lblPreconstructedDecks"),
+    PRECON_COMMANDER_DECK("lblPreconCommanderDecks"),
     QUEST_OPPONENT_DECK("lblQuestOpponentDecks"),
     COLOR_DECK("lblRandomColorDecks"),
     STANDARD_CARDGEN_DECK("lblRandomStandardArchetypeDecks"),
@@ -29,7 +30,12 @@ public enum DeckType {
     THEME_DECK("lblRandomThemeDecks"),
     RANDOM_DECK("lblRandomDecks"),
     NET_DECK("lblNetDecks"),
-    NET_COMMANDER_DECK("lblNetCommanderDecks");
+    NET_COMMANDER_DECK("lblNetCommanderDecks"),
+    NET_ARCHIVE_STANDARD_DECK("lblNetArchiveStandardDecks"),
+    NET_ARCHIVE_PIONEER_DECK("lblNetArchivePioneerDecks"),
+    NET_ARCHIVE_MODERN_DECK("lblNetArchiveModernDecks"),
+    NET_ARCHIVE_LEGACY_DECK("lblNetArchiveLegacyDecks"),
+    NET_ARCHIVE_VINTAGE_DECK("lblNetArchiveVintageDecks");
 
     public static DeckType[] ConstructedOptions;
     public static DeckType[] CommanderOptions;
@@ -50,7 +56,12 @@ public enum DeckType {
                     DeckType.MODERN_COLOR_DECK,
                     DeckType.THEME_DECK,
                     DeckType.RANDOM_DECK,
-                    DeckType.NET_DECK
+                    DeckType.NET_DECK,
+                    DeckType.NET_ARCHIVE_STANDARD_DECK,
+                    DeckType.NET_ARCHIVE_PIONEER_DECK,
+                    DeckType.NET_ARCHIVE_MODERN_DECK,
+                    DeckType.NET_ARCHIVE_LEGACY_DECK,
+                    DeckType.NET_ARCHIVE_VINTAGE_DECK
             };
         } else {
             ConstructedOptions = new DeckType[]{
@@ -62,7 +73,13 @@ public enum DeckType {
                     DeckType.MODERN_COLOR_DECK,
                     DeckType.THEME_DECK,
                     DeckType.RANDOM_DECK,
-                    DeckType.NET_DECK
+                    DeckType.NET_DECK,
+                    DeckType.NET_ARCHIVE_STANDARD_DECK,
+                    DeckType.NET_ARCHIVE_PIONEER_DECK,
+                    DeckType.NET_ARCHIVE_MODERN_DECK,
+                    DeckType.NET_ARCHIVE_LEGACY_DECK,
+                    DeckType.NET_ARCHIVE_VINTAGE_DECK
+
             };
         }
     }
@@ -70,6 +87,7 @@ public enum DeckType {
         if (FModel.isdeckGenMatrixLoaded()) {
             CommanderOptions = new DeckType[]{
                     DeckType.COMMANDER_DECK,
+                    DeckType.PRECON_COMMANDER_DECK,
                     DeckType.RANDOM_COMMANDER_DECK,
                     DeckType.RANDOM_CARDGEN_COMMANDER_DECK,
                     DeckType.RANDOM_DECK,
@@ -78,6 +96,7 @@ public enum DeckType {
         }else{
             CommanderOptions = new DeckType[]{
                     DeckType.COMMANDER_DECK,
+                    DeckType.PRECON_COMMANDER_DECK,
                     DeckType.RANDOM_COMMANDER_DECK,
                     DeckType.RANDOM_DECK,
                     DeckType.NET_COMMANDER_DECK

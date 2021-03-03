@@ -1,11 +1,15 @@
 package forge.deck;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import forge.card.CardSplitType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
@@ -260,6 +264,29 @@ public class DeckProxy implements InventoryItem {
         return highestRarity;
     }
 
+    public PaperCard getHighestCMCCard() {
+        PaperCard key = null;
+        Map<PaperCard, Integer> keyCMC = new HashMap<>(64);
+
+        for (final Entry <PaperCard, Integer> pc : getDeck().getAllCardsInASinglePool()) {
+            if (pc.getKey().getRules().getManaCost() != null) {
+                if (pc.getKey().getRules().getSplitType() != CardSplitType.Split)
+                    keyCMC.put(pc.getKey(),pc.getKey().getRules().getManaCost().getCMC());
+            }
+        }
+
+        if (!keyCMC.isEmpty()) {
+            int max = Collections.max(keyCMC.values());
+            //get any max cmc
+            for (Entry<PaperCard, Integer> entry : keyCMC.entrySet()) {
+                if (entry.getValue()==max) {
+                    return entry.getKey();
+                }
+            }
+        }
+        return key;
+    }
+
     public Set<GameFormat> getFormats() {
         if (formats == null) {
             formats = FModel.getFormats().getAllFormatsOfDeck(getDeck());
@@ -370,6 +397,15 @@ public class DeckProxy implements InventoryItem {
     public static Iterable<DeckProxy> getAllOathbreakerDecks(final Predicate<Deck> filter) {
         final List<DeckProxy> result = new ArrayList<>();
         addDecksRecursivelly("Oathbreaker", GameType.Oathbreaker, result, "", FModel.getDecks().getOathbreaker(), filter);
+        return result;
+    }
+
+    public static Iterable<DeckProxy> getAllCommanderPreconDecks() {
+        return getAllCommanderPreconDecks(null);
+    }
+    public static Iterable<DeckProxy> getAllCommanderPreconDecks(final Predicate<Deck> filter) {
+        final List<DeckProxy> result = new ArrayList<DeckProxy>();
+        addDecksRecursivelly("Commander Precon", GameType.Commander, result, "", FModel.getDecks().getCommanderPrecons(), filter);
         return result;
     }
 
@@ -581,6 +617,45 @@ public class DeckProxy implements InventoryItem {
     }
 
     public static List<DeckProxy> getNetDecks(final NetDeckCategory category) {
+        final List<DeckProxy> decks = new ArrayList<>();
+        if (category != null) {
+            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
+        }
+        return decks;
+    }
+
+    public static List<DeckProxy> getNetArchiveStandardDecks(final NetDeckArchiveStandard category) {
+        final List<DeckProxy> decks = new ArrayList<>();
+        if (category != null) {
+            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
+        }
+        return decks;
+    }
+
+    public static List<DeckProxy> getNetArchiveModernDecks(final NetDeckArchiveModern category) {
+        final List<DeckProxy> decks = new ArrayList<>();
+        if (category != null) {
+            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
+        }
+        return decks;
+    }
+    public static List<DeckProxy> getNetArchivePioneerDecks(final NetDeckArchivePioneer category) {
+        final List<DeckProxy> decks = new ArrayList<>();
+        if (category != null) {
+            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
+        }
+        return decks;
+    }
+
+    public static List<DeckProxy> getNetArchiveLegacyDecks(final NetDeckArchiveLegacy category) {
+        final List<DeckProxy> decks = new ArrayList<>();
+        if (category != null) {
+            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
+        }
+        return decks;
+    }
+
+    public static List<DeckProxy> getNetArchiveVintageDecks(final NetDeckArchiveVintage category) {
         final List<DeckProxy> decks = new ArrayList<>();
         if (category != null) {
             addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);

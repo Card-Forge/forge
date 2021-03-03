@@ -1,0 +1,18 @@
+[metadata]
+Code=G11
+Date=2011-01-01
+Name=Judge Gift Cards 2011
+Type=Reprint
+
+[cards]
+1 R Bitterblossom
+2 R Sword of Fire and Ice
+3 R Vendilion Clique
+4 R Entomb
+5 R Mana Crypt
+6 R Dark Confidant
+7 R Doubling Season
+8 R Goblin Welder
+
+[tokens]
+g_2_2_wolf

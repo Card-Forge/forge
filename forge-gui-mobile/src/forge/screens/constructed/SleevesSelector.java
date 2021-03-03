@@ -14,6 +14,7 @@ import forge.toolbox.FScrollPane;
 import forge.util.Callback;
 import forge.util.MyRandom;
 import forge.util.Utils;
+import forge.util.Localizer;
 
 import java.util.List;
 import java.util.Map;
@@ -63,7 +64,7 @@ public class SleevesSelector  extends FScreen {
     };
 
     private SleevesSelector(final String playerName, final int currentIndex0, final List<Integer> usedSleeves0, final Callback<Integer> callback0) {
-        super("Select Sleeves for " + playerName);
+        super(Localizer.getInstance().getMessage("lblSelectSleevesFroPlayer", playerName));
 
         currentIndex = currentIndex0;
         usedSleeves = usedSleeves0;

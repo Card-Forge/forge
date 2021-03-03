@@ -5,4 +5,4 @@ PT:0/4
 K:Defender
 K:Exalted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardians_of_akrasa.jpg
-Oracle:Defender\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
+Oracle:Defender (This creature can't attack.)\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)

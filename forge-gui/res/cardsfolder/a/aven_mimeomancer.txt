@@ -4,9 +4,8 @@ Types:Creature Bird Wizard
 PT:3/1
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may put a feather counter on target creature. If you do, that creature has base power and toughness 3/1 and has flying for as long as it has a feather counter on it.
-SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ FEATHER | CounterNum$ 1 | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Defined$ Targeted | staticAbilities$ MimeomancerStatic | Permanent$ True
-SVar:MimeomancerStatic:Mode$ Continuous | Affected$ Card.Self+counters_GE1_FEATHER | SetPower$ 3 | SetToughness$ 1 | AddKeyword$ Flying | Description$ CARDNAME is 3/1 and has flying for as long as it has a feather counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ FEATHER | CounterNum$ 1 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ MimeomancerStatic | ForgetOnMoved$ Battlefield | ForgetCounter$ FEATHER | Duration$ Permanent
+SVar:MimeomancerStatic:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | SetPower$ 3 | SetToughness$ 1 | AddKeyword$ Flying | Description$ CARDNAME is 3/1 and has flying for as long as it has a feather counter on it.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_mimeomancer.jpg
 Oracle:Flying\nAt the beginning of your upkeep, you may put a feather counter on target creature. If you do, that creature has base power and toughness 3/1 and has flying for as long as it has a feather counter on it.

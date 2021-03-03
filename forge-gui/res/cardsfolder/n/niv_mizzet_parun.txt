@@ -9,4 +9,4 @@ SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | Tg
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a player casts an instant or sorcery spell, you draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 DeckHints:Type$Instant|Sorcery
-Oracle:Niv-Mizzet, Parun can't be countered.\nFlying\nWhenever you draw a card, Niv-Mizzet, Parun deals 1 damage to any target.\nWhenever a player casts an instant or sorcery spell, you draw a card.
+Oracle:This spell can't be countered.\nFlying\nWhenever you draw a card, Niv-Mizzet, Parun deals 1 damage to any target.\nWhenever a player casts an instant or sorcery spell, you draw a card.

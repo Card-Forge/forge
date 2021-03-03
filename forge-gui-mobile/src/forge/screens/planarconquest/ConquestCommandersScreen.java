@@ -10,6 +10,7 @@ import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.ImageCache;
 import forge.card.CardFaceSymbols;
 import forge.card.CardRenderer;
 import forge.card.ColorSet;
@@ -40,18 +41,19 @@ import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList.CompactModeHandler;
 import forge.util.Callback;
+import forge.util.Localizer;
 
 public class ConquestCommandersScreen extends FScreen {
     private static final float PADDING = FDeckChooser.PADDING;
 
     private final CommanderManager lstCommanders = add(new CommanderManager());
-    private final FButton btnViewDeck = add(new FButton("View Deck"));
-    private final FButton btnEditDeck = add(new FButton("Edit Deck"));
+    private final FButton btnViewDeck = add(new FButton(Localizer.getInstance().getMessage("lblViewDeck")));
+    private final FButton btnEditDeck = add(new FButton(Localizer.getInstance().getMessage("btnEditDeck")));
 
     private boolean preventRefreshOnActivate;
 
     public ConquestCommandersScreen() {
-        super("Select Commander", ConquestMenu.getMenu());
+        super(Localizer.getInstance().getMessage("lblSelectCommander"), ConquestMenu.getMenu());
 
         lstCommanders.setup(ItemManagerConfig.CONQUEST_COMMANDERS);
         lstCommanders.setItemActivateHandler(new FEventHandler() {
@@ -75,6 +77,8 @@ public class ConquestCommandersScreen extends FScreen {
             public void handleEvent(FEvent e) {
                 final ConquestCommander commander = lstCommanders.getSelectedItem();
                 if (commander != null) {
+                    /*preload deck to cache*/
+                    ImageCache.preloadCache(commander.getDeck());
                     preventRefreshOnActivate = true; //refresh not needed since deck changes won't affect commander display
                     Forge.openScreen(new ConquestDeckEditor(commander));
                 }
@@ -105,7 +109,7 @@ public class ConquestCommandersScreen extends FScreen {
         String problem = DeckFormat.PlanarConquest.getDeckConformanceProblem(commander.getDeck());
         if (problem != null) {
             //prevent selecting a commander with an invalid deck
-            FOptionPane.showMessageDialog("Can't select " + commander.getName() + "\nDeck " + problem, "Invalid Deck", FOptionPane.INFORMATION_ICON, new Callback<Integer>() {
+            FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblCantSelectDeckBecause", commander.getName(), problem), Localizer.getInstance().getMessage("lblInvalidDeck"), FOptionPane.INFORMATION_ICON, new Callback<Integer>() {
                 @Override
                 public void run(Integer result) {
                     canCloseCallback.run(false);
@@ -155,7 +159,7 @@ public class ConquestCommandersScreen extends FScreen {
     private static class CommanderManager extends ItemManager<ConquestCommander> {
         private CommanderManager() {
             super(ConquestCommander.class, true);
-            setCaption("Commanders");
+            setCaption(Localizer.getInstance().getMessage("lblCommanders"));
         }
 
         @Override
@@ -285,7 +289,7 @@ public class ConquestCommandersScreen extends FScreen {
 
     private static class CommanderOriginFilter extends ComboBoxFilter<ConquestCommander, ConquestPlane> {
         public CommanderOriginFilter(ItemManager<? super ConquestCommander> itemManager0) {
-            super("All Planes", FModel.getPlanes(), itemManager0);
+            super(Localizer.getInstance().getMessage("lblAllPlanes"), FModel.getPlanes(), itemManager0);
         }
 
         @Override

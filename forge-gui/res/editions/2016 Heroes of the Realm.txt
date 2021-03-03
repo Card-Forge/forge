@@ -1,0 +1,12 @@
+[metadata]
+Code=HTR
+Date=2017-09-20
+Name=2016 Heroes of the Realm
+Code2=HTR
+MciCode=htr
+Type=Other
+
+[cards]
+1 M Chandra, Gremlin Wrangler
+2 M Dungeon Master
+3 M Nira, Hellkite Duelist

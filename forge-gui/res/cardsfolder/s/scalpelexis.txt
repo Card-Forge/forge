@@ -3,12 +3,11 @@ ManaCost:4 U
 Types:Creature Beast
 PT:1/5
 K:Flying
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player exiles the top four cards of their library. If two or more of those cards have the same name, repeat this process.
-SVar:TrigMill:DB$ Repeat | RepeatSubAbility$ DBMillClean | RepeatCheckSVar$ X | References$ X,Y | RepeatSVarCompare$ LTY | SubAbility$ DBCleanup
-SVar:DBMillClean:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBMill
-SVar:DBMill:DB$ Mill | Defined$ TriggeredTarget | NumCards$ 4 | Destination$ Exile | RememberMilled$ True
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player exiles the top four cards of their library. If two or more of those cards have the same name, repeat this process.
+SVar:TrigExile:DB$ Repeat | RepeatSubAbility$ DBExileCleanup | RepeatCheckSVar$ X | References$ X,Y | RepeatSVarCompare$ LTY | SubAbility$ DBCleanup
+SVar:DBExileCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ Dig | Defined$ TriggeredTarget | DigNum$ 4 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$DifferentCardNames_Card.IsRemembered
 SVar:Y:Count$RememberedSize
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scalpelexis.jpg
-Oracle:Flying\nWhenever Scalpelexis deals combat damage to a player, that player exiles the top four cards of their library. If two or more of those cards have the same name, repeat this process.
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever Scalpelexis deals combat damage to a player, that player exiles the top four cards of their library. If two or more of those cards have the same name, repeat this process.

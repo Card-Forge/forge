@@ -23,6 +23,8 @@ import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
+import forge.util.CardTranslation;
+import forge.util.Localizer;
 
 import javax.swing.*;
 
@@ -77,16 +79,17 @@ public class StarRenderer extends ItemCellRenderer {
     }
     
     private void update() {
+        final Localizer localizer = Localizer.getInstance();
         if (card == null) {
             this.setToolTipText(null);
             skinImage = null;
         }
         else if (CardPreferences.getPrefs(card).getStarCount() == 0) {
-            this.setToolTipText("Click to add " + card.getName() + " to your favorites");
-            skinImage = FSkin.getImage(FSkinProp.IMG_STAR_OUTINE);
+            this.setToolTipText(localizer.getMessage("lblClickToAddTargetToFavorites", CardTranslation.getTranslatedName(card.getName())));
+            skinImage = FSkin.getImage(FSkinProp.IMG_STAR_OUTLINE);
         }
         else { //TODO: consider supporting more than 1 star
-            this.setToolTipText("Click to remove " + card.getName() + " from your favorites");
+            this.setToolTipText(localizer.getMessage("lblClickToRemoveTargetToFavorites", CardTranslation.getTranslatedName(card.getName())));
             skinImage = FSkin.getImage(FSkinProp.IMG_STAR_FILLED);
         }
     }

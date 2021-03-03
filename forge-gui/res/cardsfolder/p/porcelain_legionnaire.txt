@@ -4,4 +4,4 @@ Types:Artifact Creature Soldier
 PT:3/1
 K:First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/porcelain_legionnaire.jpg
-Oracle:({P/W} can be paid with either {W} or 2 life.)\nFirst strike
+Oracle:({W/P} can be paid with either {W} or 2 life.)\nFirst strike

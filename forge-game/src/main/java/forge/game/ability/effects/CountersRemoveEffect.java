@@ -20,6 +20,7 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 public class CountersRemoveEffect extends SpellAbilityEffect {
@@ -31,7 +32,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         final String num = sa.getParam("CounterNum");
 
         int amount = 0;
-        if (!num.equals("All") && !num.equals("Remembered")) {
+        if (!num.equals("All") && !num.equals("Any")) {
             amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
         }
 
@@ -48,7 +49,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                 sb.append(amount).append(" ").append(" counter");
             }
         } else {
-            sb.append(amount).append(" ").append(CounterType.valueOf(counterName).getName()).append(" counter");
+            sb.append(amount).append(" ").append(CounterType.getType(counterName).getName()).append(" counter");
         }
         if (amount != 1) {
             sb.append("s");
@@ -80,7 +81,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         final String num = sa.getParam("CounterNum");
 
         int cntToRemove = 0;
-        if (!num.equals("All") && !num.equals("Any") && !num.equals("Remembered")) {
+        if (!num.equals("All") && !num.equals("Any")) {
             cntToRemove = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
         }
 
@@ -109,7 +110,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             // Removing energy
             if (!sa.usesTargeting() || tgtPlayer.canBeTargetedBy(sa)) {
                 if (type.equals("All")) {
-                    for (Map.Entry<CounterType, Integer> e : tgtPlayer.getCounters().entrySet()) {
+                    for (Map.Entry<CounterType, Integer> e : Lists.newArrayList(tgtPlayer.getCounters().entrySet())) {
                         tgtPlayer.subtractCounter(e.getKey(), e.getValue());
                     }
                 } else {
@@ -130,7 +131,10 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             srcCards = game.getCardsIn(ZoneType.Battlefield);
             srcCards = CardLists.getValidCards(srcCards, sa.getParam("ValidSource"), player, card, sa);
             if (num.equals("Any")) {
-                srcCards = player.getController().chooseCardsForEffect(srcCards, sa, Localizer.getInstance().getMessage("lblChooseCardsToTakeTargetCounters", counterType.getName()), 0, srcCards.size(), true);
+                String title = Localizer.getInstance().getMessage("lblChooseCardsToTakeTargetCounters", counterType.getName());
+                Map<String, Object> params = Maps.newHashMap();
+                params.put("CounterType", counterType);
+                srcCards = player.getController().chooseCardsForEffect(srcCards, sa, title, 0, srcCards.size(), true, params);
             }
         } else {
             srcCards = getTargetCards(sa);
@@ -149,15 +153,13 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             if (!sa.usesTargeting() || gameCard.canBeTargetedBy(sa)) {
                 final Zone zone = game.getZoneOf(gameCard);
                 if (type.equals("All")) {
-                    for (Map.Entry<CounterType, Integer> e : gameCard.getCounters().entrySet()) {
+                    for (Map.Entry<CounterType, Integer> e : Lists.newArrayList(gameCard.getCounters().entrySet())) {
                         gameCard.subtractCounter(e.getKey(), e.getValue());
                     }
                     game.updateLastStateForCard(gameCard);
                     continue;
                 } else if (num.equals("All") || num.equals("Any")) {
                     cntToRemove = gameCard.getCounters(counterType);
-                } else if (num.equals("Remembered")) {
-                    cntToRemove = gameCard.getCountersAddedBy(card, counterType);
                 }
 
                 if (type.equals("Any")) {
@@ -169,7 +171,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                         if (sa.hasParam("UpTo") || num.equals("Any")) {
                             Map<String, Object> params = Maps.newHashMap();
                             params.put("Target", gameCard);
-                            params.put("CounterType", type);
+                            params.put("CounterType", counterType);
                             String title = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", type);
                             cntToRemove = pc.chooseNumber(sa, title, 0, cntToRemove, params);
                         }
@@ -179,6 +181,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                         gameCard.subtractCounter(counterType, cntToRemove);
                         if (rememberRemoved) {
                             for (int i = 0; i < cntToRemove; i++) {
+                                // TODO might need to be more specific
                                 card.addRemembered(Pair.of(counterType, i));
                             }
                         }

@@ -18,8 +18,8 @@ import org.w3c.dom.NodeList;
 
 import com.google.common.collect.Maps;
 
-import forge.game.Game;
 import forge.game.GameType;
+import forge.game.Match;
 import forge.game.player.Player;
 import forge.interfaces.IComboBox;
 import forge.model.FModel;
@@ -28,6 +28,7 @@ import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 import forge.util.XmlUtil;
+import forge.util.Localizer;
 
 public abstract class AchievementCollection implements Iterable<Achievement> {
     protected final Map<String, Achievement> achievements = Maps.newLinkedHashMap();
@@ -44,7 +45,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
             return;
         }
 
-        final Game game = controller.getGame();
+        final Match match = controller.getMatch();
         final Player player = controller.getPlayer();
 
         //update all achievements for GUI player after game finished
@@ -53,16 +54,16 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
             ThreadUtil.invokeInGameThread(new Runnable() {
                 @Override
                 public void run() {
-                    doUpdateAllAchievements(game, player);
+                    doUpdateAllAchievements(match, player);
                 }
             });
         } else {
-            doUpdateAllAchievements(game, player);
+            doUpdateAllAchievements(match, player);
         }
     }
 
-    private static void doUpdateAllAchievements(final Game game, final Player player) {
-        FModel.getAchievements(game.getRules().getGameType()).updateAll(player);
+    private static void doUpdateAllAchievements(final Match match, final Player player) {
+        FModel.getAchievements(match.getRules().getGameType()).updateAll(player);
         AltWinAchievements.instance.updateAll(player);
         PlaneswalkerAchievements.instance.updateAll(player);
         ChallengeAchievements.instance.updateAll(player);
@@ -85,7 +86,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
     }
     
     protected AchievementCollection(String name0, String filename0, boolean isLimitedFormat0, String path0) {
-        name = name0;
+        name = Localizer.getInstance().getMessage(name0);
         filename = filename0;
         isLimitedFormat = isLimitedFormat0;
         path = path0;

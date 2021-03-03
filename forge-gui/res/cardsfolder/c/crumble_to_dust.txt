@@ -2,8 +2,12 @@ Name:Crumble to Dust
 ManaCost:3 R
 Types:Sorcery
 K:Devoid
-A:SP$ ChangeZone | Cost$ 3 R | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile target nonbasic land. Search its controller's graveyard, hand, and library for any number of cards with the same name as that land and exile them. Then that player shuffles his or library.
-SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Remembered.sameName | Origin$ Graveyard,Hand,Library | Defined$ TargetedController | Destination$ Exile | Search$ True | Shuffle$ True | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crumble_to_dust.jpg
-Oracle:Exile target nonbasic land. Search its controller's graveyard, hand, and library for any number of cards with the same name as that land and exile them. Then that player shuffles his or library.
+A:SP$ ChangeZone | Cost$ 3 R | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | RememberChanged$ True | SubAbility$ ExileYard | SpellDescription$ Exile target nonbasic land. Search its controller's graveyard, hand, and library for any number of cards with the same name as that land and exile them. Then that player shuffles his or library.
+SVar:ExileYard:DB$ ChangeZone | ChangeType$ Remembered.sameName | Origin$ Graveyard | DefinedPlayer$ TargetedController | Chooser$ You | Destination$ Exile | ChangeNum$ NumInYard | References$ NumInYard | Hidden$ True | SubAbility$ ExileHand | StackDescription$ None
+SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInHand | References$ NumInHand | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None
+SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInLib | References$ NumInLib | Chooser$ You | Shuffle$ True | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:NumInLib:TargetedController$CardsInLibrary
+SVar:NumInHand:TargetedController$CardsInHand
+SVar:NumInYard:TargetedController$CardsInGraveyard
+Oracle:Devoid (This card has no color.)\nExile target nonbasic land. Search its controller's graveyard, hand, and library for any number of cards with the same name as that land and exile them. Then that player shuffles their library.

@@ -18,6 +18,7 @@
 package forge.game.staticability;
 
 import forge.game.card.Card;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -74,7 +75,8 @@ public class StaticAbilityCantTarget {
 
 
         if (st.hasParam("Hexproof") && (activator != null)) {
-            for (String k : activator.getKeywords()) {
+            for (KeywordInterface kw : activator.getKeywords()) {
+                String k = kw.getOriginal();
                 if (k.startsWith("IgnoreHexproof")) {
                     String[] m = k.split(":");
                     if (card.isValid(m[1].split(","), activator, source, spellAbility)) {
@@ -84,7 +86,8 @@ public class StaticAbilityCantTarget {
             }
         }
         if (st.hasParam("Shroud") && (activator != null)) {
-            for (String k : activator.getKeywords()) {
+            for (KeywordInterface kw : activator.getKeywords()) {
+                String k = kw.getOriginal();
                 if (k.startsWith("IgnoreShroud")) {
                     String[] m = k.split(":");
                     if (card.isValid(m[1].split(","), activator, source, spellAbility)) {
@@ -114,7 +117,8 @@ public class StaticAbilityCantTarget {
 
 
         if (st.hasParam("Hexproof") && (activator != null)) {
-            for (String k : activator.getKeywords()) {
+            for (KeywordInterface kw : activator.getKeywords()) {
+                String k = kw.getOriginal();
                 if (k.startsWith("IgnoreHexproof")) {
                     String[] m = k.split(":");
                     if (player.isValid(m[1].split(","), activator, source, spellAbility)) {

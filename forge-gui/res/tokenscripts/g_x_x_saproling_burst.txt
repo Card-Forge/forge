@@ -3,4 +3,6 @@ ManaCost:no cost
 Types:Creature Saproling
 Colors:green
 PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ TokenX | SetToughness$ TokenX | Description$ This creature's power and toughness are each equal to the number of fade counters on Saproling Burst.
+SVar:TokenX:Rememberedt$CardCounters.FADE
 Oracle:This creature's power and toughness are each equal to the number of fade counters on Saproling Burst.

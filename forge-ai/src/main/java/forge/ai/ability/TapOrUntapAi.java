@@ -4,10 +4,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
-
-import java.util.List;
 
 public class TapOrUntapAi extends TapAiBase {
 
@@ -16,19 +13,17 @@ public class TapOrUntapAi extends TapAiBase {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
 
         boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
-        if (tgt == null) {
+        if (!sa.usesTargeting()) {
             // assume we are looking to tap human's stuff
             // TODO - check for things with untap abilities, and don't tap
             // those.
-            final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
 
             boolean bFlag = false;
-            for (final Card c : defined) {
+            for (final Card c : AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa)) {
                 bFlag |= c.isUntapped();
             }
 
@@ -37,7 +32,7 @@ public class TapOrUntapAi extends TapAiBase {
             }
         } else {
             sa.resetTargets();
-            if (!tapPrefTargeting(ai, source, tgt, sa, false)) {
+            if (!tapPrefTargeting(ai, source, sa, false)) {
                 return false;
             }
         }

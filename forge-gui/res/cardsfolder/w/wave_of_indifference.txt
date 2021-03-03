@@ -1,10 +1,7 @@
 Name:Wave of Indifference
 ManaCost:X R
 Types:Sorcery
-A:SP$ Pump | Cost$ X R | KW$ HIDDEN CARDNAME can't block. | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Creature | TgtPrompt$ Select target creature | References$ X,MaxTgts | SpellDescription$ X target creatures can't block this turn.
-# It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
-SVar:X:Targeted$Amount
-SVar:MaxTgts:Count$Valid Creature
+A:SP$ Pump | Cost$ X R | KW$ HIDDEN CARDNAME can't block. | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | References$ X | StackDescription$ X target creatures [{c:Targeted}] can't block this turn. | SpellDescription$ X target creatures can't block this turn.
+SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wave_of_indifference.jpg
 Oracle:X target creatures can't block this turn.

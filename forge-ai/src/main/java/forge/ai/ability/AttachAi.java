@@ -69,11 +69,6 @@ public class AttachAi extends SpellAbilityAi {
             return false;
         }
 
-        if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                && !"Curse".equals(sa.getParam("AILogic"))) {
-            return false;
-        }
-
         // prevent run-away activations - first time will always return true
         if (ComputerUtil.preventRunAwayActivations(sa)) {
         	return false;
@@ -93,20 +88,21 @@ public class AttachAi extends SpellAbilityAi {
         if (ai.getController().isAI()) {
             advancedFlash = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
         }
-        if (source.withFlash(ai) && source.isAura() && advancedFlash && !doAdvancedFlashAuraLogic(ai, sa, sa.getTargetCard())) {
+        if ((source.hasKeyword(Keyword.FLASH) || (!ai.canCastSorcery() && sa.canCastTiming(ai)))
+                && source.isAura() && advancedFlash && !doAdvancedFlashAuraLogic(ai, sa, sa.getTargetCard())) {
             return false;
         }
 
-        if (abCost.getTotalMana().countX() > 0 && source.getSVar("X").equals("Count$xPaid")) {
+        if (abCost.getTotalMana().countX() > 0 && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value. (Endless Scream and Venarian
             // Gold)
-            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
 
             if (xPay == 0) {
                 return false;
             }
 
-            source.setSVar("PayX", Integer.toString(xPay));
+            sa.setXManaCostPaid(xPay);
         }
 
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Chained to the Rocks")) {
@@ -398,7 +394,7 @@ public class AttachAi extends SpellAbilityAi {
                     if (!c.isCreature() && !c.getType().hasSubtype("Vehicle") && !c.isTapped()) {
                         // try to identify if this thing can actually tap
                         for (SpellAbility ab : c.getAllSpellAbilities()) {
-                            if (ab.getPayCosts() != null && ab.getPayCosts().hasTapCost()) {
+                            if (ab.getPayCosts().hasTapCost()) {
                                 return true;
                             }
                         }
@@ -560,7 +556,7 @@ public class AttachAi extends SpellAbilityAi {
                 @Override
                 public boolean apply(final Card c) {
                     for (final SpellAbility sa : c.getSpellAbilities()) {
-                        if (sa.isAbility() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+                        if (sa.isAbility() && sa.getPayCosts().hasTapCost()) {
                             return false;
                         }
                     }
@@ -838,7 +834,7 @@ public class AttachAi extends SpellAbilityAi {
      * @return the card
      */
     private static Card attachAICursePreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
-            final Card attachSource) {
+            final Card attachSource, final Player ai) {
         // AI For choosing a Card to Curse of.
 
         // TODO Figure out some way to combine The "gathering of data" from
@@ -930,6 +926,24 @@ public class AttachAi extends SpellAbilityAi {
             );
         }
 
+        // If this is already attached and there's a sac cost, make sure we attach to something that's
+        // seriously better than whatever the attachment is currently attached to (e.g. Bound by Moonsilver)
+        if (sa.getHostCard().getAttachedTo() != null && sa.getHostCard().getAttachedTo().isCreature()
+                && sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+            final int oldEvalRating = ComputerUtilCard.evaluateCreature(sa.getHostCard().getAttachedTo());
+            final int threshold = ai.isAI() ? ((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.SAC_TO_REATTACH_TARGET_EVAL_THRESHOLD) : Integer.MAX_VALUE;
+            prefList = CardLists.filter(prefList, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    if (!card.isCreature()) {
+                        return false;
+                    }
+
+                    return ComputerUtilCard.evaluateCreature(card) >= oldEvalRating + threshold;
+                }
+            });
+        }
+
         c = ComputerUtilCard.getBestAI(prefList);
 
         if (c == null) {
@@ -959,7 +973,7 @@ public class AttachAi extends SpellAbilityAi {
             targets = AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
         } else {
             AttachAi.attachPreference(sa, tgt, mandatory);
-            targets = sa.getTargets().getTargets();
+            targets = sa.getTargets();
         }
 
         if (!mandatory && card.isEquipment() && !targets.isEmpty()) {
@@ -1072,12 +1086,7 @@ public class AttachAi extends SpellAbilityAi {
                 final Map<String, String> params = t.getMapParams();
                 if ("Card.Self".equals(params.get("ValidCard"))
                         && "Battlefield".equals(params.get("Destination"))) {
-                    SpellAbility trigSa = null;
-                    if (t.hasParam("Execute") && attachSource.hasSVar(t.getParam("Execute"))) {
-                        trigSa = AbilityFactory.getAbility(attachSource.getSVar(params.get("Execute")), attachSource);
-                    } else if (t.getOverridingAbility() != null) {
-                        trigSa = t.getOverridingAbility();
-                    }
+                    SpellAbility trigSa = t.ensureAbility();
                     if (trigSa != null && trigSa.getApi() == ApiType.DealDamage && "Enchanted".equals(trigSa.getParam("Defined"))) {
                         for (Card target : list) {
                             if (!target.getController().isOpponentOf(ai)) {
@@ -1353,7 +1362,7 @@ public class AttachAi extends SpellAbilityAi {
         if (c != null && attachSource.isEquipment()
                 && attachSource.isEquipping()
                 && attachSource.getEquipping().getController() == aiPlayer) {
-            if (c.equals(attachSource.getEquipping())) {
+            if (c.equals(attachSource.getEquipping()) && !mandatory) {
                 // Do not equip if equipping the same card already
                 return null;
             }
@@ -1364,13 +1373,13 @@ public class AttachAi extends SpellAbilityAi {
 
             boolean uselessCreature = ComputerUtilCard.isUselessCreature(aiPlayer, attachSource.getEquipping());
 
-            if (aic.getProperty(AiProps.MOVE_EQUIPMENT_TO_BETTER_CREATURES).equals("never")) {
+            if (aic.getProperty(AiProps.MOVE_EQUIPMENT_TO_BETTER_CREATURES).equals("never") && !mandatory) {
                 // Do not equip other creatures if the AI profile does not allow moving equipment around
                 return null;
             } else if (aic.getProperty(AiProps.MOVE_EQUIPMENT_TO_BETTER_CREATURES).equals("from_useless_only")) {
                 // Do not equip other creatures if the AI profile only allows moving equipment from useless creatures
                 // and the equipped creature is still useful (not non-untapping+tapped and not set to can't attack/block)
-                if (!uselessCreature) {
+                if (!uselessCreature && !mandatory) {
                     return null;
                 }
             }
@@ -1386,13 +1395,13 @@ public class AttachAi extends SpellAbilityAi {
             }
 
             // avoid randomly moving the equipment back and forth between several creatures in one turn
-            if (AiCardMemory.isRememberedCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ATTACHED_THIS_TURN)) {
+            if (AiCardMemory.isRememberedCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ATTACHED_THIS_TURN) && !mandatory) {
                 return null;
             }
 
             // do not equip if the new creature is not significantly better than the previous one (evaluates at least better by evalT)
             int evalT = aic.getIntProperty(AiProps.MOVE_EQUIPMENT_CREATURE_EVAL_THRESHOLD);
-            if (!decideMoveFromUseless && ComputerUtilCard.evaluateCreature(c) - ComputerUtilCard.evaluateCreature(attachSource.getEquipping()) < evalT) {
+            if (!decideMoveFromUseless && ComputerUtilCard.evaluateCreature(c) - ComputerUtilCard.evaluateCreature(attachSource.getEquipping()) < evalT && !mandatory) {
                 return null;
             }
         }
@@ -1455,7 +1464,7 @@ public class AttachAi extends SpellAbilityAi {
         if ("GainControl".equals(logic)) {
             c = attachAIControlPreference(sa, prefList, mandatory, attachSource);
         } else if ("Curse".equals(logic)) {
-            c = attachAICursePreference(sa, prefList, mandatory, attachSource);
+            c = attachAICursePreference(sa, prefList, mandatory, attachSource, ai);
         } else if ("Pump".equals(logic)) {
             c = attachAIPumpPreference(ai, sa, prefList, mandatory, attachSource);
         } else if ("Curiosity".equals(logic)) {
@@ -1555,7 +1564,6 @@ public class AttachAi extends SpellAbilityAi {
         } else if (keyword.equals("Haste")) {
             return card.hasSickness() && ph.isPlayerTurn(sa.getActivatingPlayer()) && !card.isTapped()
                     && card.getNetCombatDamage() + powerBonus > 0
-                    && !card.hasKeyword("CARDNAME can attack as though it had haste.")
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.endsWith("Indestructible")) {
@@ -1704,12 +1712,12 @@ public class AttachAi extends SpellAbilityAi {
     }
 
     @Override
-    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+    protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         return attachToCardAIPreferences(ai, sa, true);
     }
 
     @Override
-    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         return attachToPlayerAIPreferences(ai, sa, true);
     }
 }

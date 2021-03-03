@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Flash of Ferocity - Challenger 2020
+Description=Simic flash deck, featuring 19 rares and 1 mythic rare.
+Deck Type=constructed
+Set=THB
+Image=flash_of_ferocity.jpg
+[Main]
+1 Brazen Borrower|ELD
+4 Brineborn Cutthroat|M20
+2 Castle Vantress|ELD
+1 Fabled Passage|ELD
+8 Forest|M20
+4 Frilled Mystic|RNA
+8 Island|M20
+4 Nightpack Ambusher|M20
+4 Opt|ELD
+4 Quench|RNA
+2 Sinister Sabotage|GRN
+4 Spectral Sailor|M20
+2 Temple of Mystery|M20
+2 Thassa's Intervention|THB
+3 Thornwood Falls|M20
+2 Unsummon|M20
+1 Wavebreak Hippocamp|THB
+4 Wildborn Preserver|ELD
+[Sideboard]
+3 Aether Gust|M20
+2 Disdainful Stroke|GRN
+2 Mystical Dispute|ELD
+2 Negate|M20
+3 Shifting Ceratops|M20
+3 Threnody Singer|THB

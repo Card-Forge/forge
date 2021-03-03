@@ -9,4 +9,4 @@ SVar:DBPump:DB$ Pump | ValidTgts$ Bear.YouCtrl | TgtPrompt$ Choose target creatu
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
 DeckHas:Ability$Counters
 DeckHints:Type$Bear
-Oracle:Whenever another Bear enters the battlefield under your control, choose one —\n• Put two +1/+1 counters on target Bear.\n• Target Bear you control fights target creature you don’t control.
+Oracle:Whenever another Bear enters the battlefield under your control, choose one —\n• Put two +1/+1 counters on target Bear.\n• Target Bear you control fights target creature you don't control.

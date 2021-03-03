@@ -5,4 +5,4 @@ A:AB$ DealDamage | Cost$ 1 R Discard<1/Random> | ValidTgts$ Creature,Player,Plan
 A:AB$ DealDamage | Cost$ 1 R Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyromania.jpg
-Oracle:{1}{R}, Discard a card at random: Pyromania deals 1 damage to any target.\n{1}{R}, Sacrifice Pyromania: Pyromania deals 1 damage to any target.
+Oracle:{1}{R}, Discard a card at random: Pyromania deals 1 damage to any target.\n{1}{R}, Sacrifice Pyromania: It deals 1 damage to any target.

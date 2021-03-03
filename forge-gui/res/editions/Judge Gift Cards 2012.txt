@@ -1,0 +1,18 @@
+[metadata]
+Code=J12
+Date=2012-01-01
+Name=Judge Gift Cards 2012
+Type=Reprint
+
+[cards]
+1 R Xiahou Dun, the One-Eyed
+2 R Flusterstorm
+3 R Noble Hierarch
+4 R Karmic Guide
+5 R Sneak Attack
+6 R Karakas
+7 R Sword of Light and Shadow
+8 R Command Tower
+
+[tokens]
+g_3_3_centaur

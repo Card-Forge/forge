@@ -1,0 +1,9 @@
+[metadata]
+Code=PEVE
+Date=2008-07-25
+Name=Eventide Promos
+Type=Reprint
+
+[cards]
+139 R Figure of Destiny
+157 R Overbeing of Myth

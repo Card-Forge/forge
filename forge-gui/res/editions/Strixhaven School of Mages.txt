@@ -1,0 +1,24 @@
+[metadata]
+Code=STX
+Date=2021-04-23
+Name=Strixhaven: School of Mages
+Code2=STX
+MciCode=stx
+Type=Expansion
+
+[cards]
+199 R Lorehold Command
+214 R Prismari Command
+217 R Quandrix Command
+232 R Silverquill Command
+248 R Witherbloom Command
+
+[extended art]
+345 R Lorehold Command
+348 R Prismari Command
+349 R Quandrix Command
+352 R Silverquill Command
+356 R Witherbloom Command
+
+[tokens]
+rw_3_2_spirit

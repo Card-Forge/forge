@@ -6,4 +6,4 @@ K:Vigilance
 K:Horsemanship
 DeckHints:Name$Liu Bei, Lord of Shu
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhang_fei_fierce_warrior.jpg
-Oracle:Vigilance, horsemanship (This creature can't be blocked except by creatures with horsemanship.)
+Oracle:Vigilance; horsemanship (This creature can't be blocked except by creatures with horsemanship.)

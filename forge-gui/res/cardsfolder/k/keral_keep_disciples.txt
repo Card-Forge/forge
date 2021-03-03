@@ -1,0 +1,8 @@
+Name:Keral Keep Disciples
+ManaCost:2 R R
+Types:Creature Human Monk
+PT:4/3
+T:Mode$ AbilityCast | ValidCard$ Planeswalker.Chandra | ValidActivatingPlayer$ You | ValidSA$ Activated.Loyalty | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you activate a loyalty ability of a Chandra planeswalker, CARDNAME deals 1 damage to each opponent.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+DeckNeeds:Type$Chandra
+Oracle:Whenever you activate a loyalty ability of a Chandra planeswalker, Keral Keep Disciples deals 1 damage to each opponent.

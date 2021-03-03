@@ -9,4 +9,4 @@ SVar:DBEffect:DB$ Effect | Name$ Domri, Anarch of Bolas Effect | StaticAbilities
 SVar:AntiMagic:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Stack | EffectZone$ Command | AddHiddenKeyword$ CARDNAME can't be countered.
 A:AB$ Pump | Planeswalker$ True | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | AILogic$ Fight | SpellDescription$ Target creature you control fights target creature you don't control. | SubAbility$ DBFight
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control
-Oracle:Creatures you control get +1/+0.\n[+1]: Add {R} or {G}. Creature spells you cast this turn can't be countered.\n[-2]: Target creature you control fights target creature you don't control.
+Oracle:Creatures you control get +1/+0.\n[+1]: Add {R} or {G}. Creature spells you cast this turn can't be countered.\n[−2]: Target creature you control fights target creature you don't control.

@@ -2,6 +2,5 @@ Name:Carbonize
 ManaCost:2 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SubAbility$ DB | ReplaceDyingDefined$ Targeted.Creature | SpellDescription$ CARDNAME deals 3 damage to any target. If it's a creature, it can't be regenerated this turn, and if it would die this turn, exile it instead.
-SVar:DB:DB$Pump | KW$ HIDDEN CARDNAME can't be regenerated. | Defined$ Targeted.Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/carbonize.jpg
+SVar:DB:DB$ Pump | KW$ HIDDEN CARDNAME can't be regenerated. | Defined$ Targeted.Creature
 Oracle:Carbonize deals 3 damage to any target. If it's a creature, it can't be regenerated this turn, and if it would die this turn, exile it instead.

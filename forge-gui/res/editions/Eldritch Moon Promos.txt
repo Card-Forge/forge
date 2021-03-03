@@ -1,0 +1,16 @@
+[metadata]
+Code=PEMN
+Date=2016-07-22
+Name=Eldritch Moon Promos
+Type=Reprint
+
+[cards]
+39 R Sanctifier of Souls
+46 R Thalia, Heretic Cathar
+64 R Identity Thief
+72 R Niblis of Frost
+79 U Unsubstantiate
+98 R Noosegraf Mob
+117 R Assembled Alphas
+176 R Ulvenwald Observer
+185 R Heron's Grace Champion

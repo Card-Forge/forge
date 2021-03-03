@@ -4,7 +4,7 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 1
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
 K:CARDNAME enters the battlefield tapped.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rugged_highlands.jpg
+DeckHas:Ability$LifeGain
 Oracle:Rugged Highlands enters the battlefield tapped.\nWhen Rugged Highlands enters the battlefield, you gain 1 life.\n{T}: Add {R} or {G}.

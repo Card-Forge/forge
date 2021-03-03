@@ -100,10 +100,18 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
 
                 break;
             case Commander:
-            case TinyLeaders:
                 allSections.add(DeckSection.Commander);
 
                 commanderFilter = CardRulesPredicates.Presets.CAN_BE_COMMANDER;
+                commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)), PaperCard.class);
+                normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
+
+                wantUnique = true;
+                break;
+            case TinyLeaders:
+                allSections.add(DeckSection.Commander);
+
+                commanderFilter = CardRulesPredicates.Presets.CAN_BE_TINY_LEADERS_COMMANDER;
                 commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)), PaperCard.class);
                 normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
 
@@ -128,6 +136,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
 
                 wantUnique = true;
                 break;
+            default:
         }
 
         catalogManager = new CardManager(getCDetailPicture(), wantUnique, false);
@@ -163,6 +172,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             case TinyLeaders:
                 this.controller = new DeckController<>(FModel.getDecks().getTinyLeaders(), this, newCreator);
                 break;
+            default:
         }
 
         getBtnAddBasicLands().setCommand(new UiCommand() {
@@ -189,6 +199,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 case TinyLeaders:
                 case Brawl:
                     return CardLimit.Singleton;
+                default:
             }
         }
         return CardLimit.None; //if not enforcing deck legality, don't enforce default limit
@@ -275,7 +286,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 break; //no other sections should support toAlternate
             }
         }
-        else {
+        else if (!editor.getCatalogManager().isInfinite()) {
             editor.getCatalogManager().addItems(items);
         }
         editor.getDeckManager().removeItems(items);
@@ -488,6 +499,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                     default:
                         break;
                 }
+            default:
         }
 
         this.sectionMode = sectionMode;
@@ -508,7 +520,6 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.ACEditorBase#show(forge.Command)
      */
-    @SuppressWarnings("serial")
     @Override
     public void update() {
         this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);

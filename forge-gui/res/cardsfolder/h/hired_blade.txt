@@ -3,4 +3,4 @@ ManaCost:2 B
 Types:Creature Human Assassin
 K:Flash
 PT:3/2
-Oracle:Flash
+Oracle:Flash (You may cast this spell any time you could cast an instant.)

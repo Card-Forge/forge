@@ -2,4 +2,4 @@ Name:Confidence from Strength
 ManaCost:2 G
 Types:Sorcery
 A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | NumDef$ +4 | KW$ Trample | SpellDescription$ Target creature gets +4/+4 and gains trample until end of turn.
-Oracle:Target creature gets +4/+4 and gains trample until end of turn. (It can deal excess combat damage to defending player or planeswalker while attacking.)
+Oracle:Target creature gets +4/+4 and gains trample until end of turn. (It can deal excess combat damage to the player or planeswalker it's attacking.)

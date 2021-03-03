@@ -46,7 +46,7 @@ public class TriggerFlippedCoin extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerFlippedCoin(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerFlippedCoin(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -73,8 +73,8 @@ public class TriggerFlippedCoin extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
     }
 
     @Override

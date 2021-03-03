@@ -4,7 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilMana;
+import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
@@ -51,7 +51,6 @@ public class ManifestAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
-        final Card source = sa.getHostCard();
         // Only manifest things on your turn if sorcery speed, or would pump one of my creatures
         if (ph.isPlayerTurn(ai)) {
             if (ph.getPhase().isBefore(PhaseType.MAIN2)
@@ -76,11 +75,11 @@ public class ManifestAi extends SpellAbilityAi {
             }
         }
 
-        if (source.getSVar("X").equals("Count$xPaid")) {
+        if (sa.getSVar("X").equals("Count$xPaid")) {
             // Handle either Manifest X cards, or Manifest 1 card and give it X P1P1s
             // Set PayX here to maximum value.
-            int x = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(x));
+            int x = ComputerUtilCost.getMaxXValue(sa, ai);
+            sa.setXManaCostPaid(x);
             if (x <= 0) {
                 return false;
             }

@@ -1,0 +1,12 @@
+Name:Kalamax, the Stormsire
+ManaCost:1 G U R
+Types:Legendary Creature Elemental Dinosaur
+PT:4/4
+T:Mode$ SpellCast | ValidCard$ Instant | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | NoResolvingCheck$ True | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast your first instant spell each turn, if CARDNAME is tapped, copy that spell. You may choose new targets for the copy.
+SVar:TrigCopy:DB$ CopySpellAbility | ConditionPresent$ Card.Self+tapped | Defined$ TriggeredSpellAbility | AILogic$ Always | MayChooseTarget$ True
+SVar:BuffedBy:Instant
+T:Mode$ SpellCopy | ValidCard$ Instant | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you copy an instant spell, put a +1/+1 counter on CARDNAME.
+DeckHas:Ability$Counters
+DeckHints:Type$Instant
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Whenever you cast your first instant spell each turn, if Kalamax, the Stormsire is tapped, copy that spell. You may choose new targets for the copy.\nWhenever you copy an instant spell, put a +1/+1 counter on Kalamax.

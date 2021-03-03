@@ -81,7 +81,7 @@ public class ManaEffectAi extends SpellAbilityAi {
             return true; // handled elsewhere, does not meet the standard requirements
         }
 
-        return sa.getPayCosts() != null && sa.getPayCosts().hasNoManaCost() && sa.getPayCosts().isReusuableResource()
+        return sa.getPayCosts().hasNoManaCost() && sa.getPayCosts().isReusuableResource()
                 && sa.getSubAbility() == null && ComputerUtil.playImmediately(ai, sa);
         // return super.checkApiLogic(ai, sa);
     }
@@ -118,9 +118,8 @@ public class ManaEffectAi extends SpellAbilityAi {
 
         int numCounters = 0;
         int manaSurplus = 0;
-        if ("XChoice".equals(host.getSVar("X"))
-                && sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class)) {
-            CounterType ctrType = CounterType.KI; // Petalmane Baku
+        if ("Count$xPaid".equals(host.getSVar("X")) && sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class)) {
+            CounterType ctrType = CounterType.get(CounterEnumType.KI); // Petalmane Baku
             for (CostPart part : sa.getPayCosts().getCostParts()) {
                 if (part instanceof CostRemoveCounter) {
                     ctrType = ((CostRemoveCounter)part).counter;
@@ -206,7 +205,7 @@ public class ManaEffectAi extends SpellAbilityAi {
             // Don't remove more counters than would be needed to cast the more expensive thing we want to cast,
             // otherwise the AI grabs too many counters at once.
             int maxCtrs = Aggregates.max(castableSpells, CardPredicates.Accessors.fnGetCmc) - manaSurplus;
-            sa.setSVar("ChosenX", "Number$" + Math.min(numCounters, maxCtrs));
+            sa.setXManaCostPaid(Math.min(numCounters, maxCtrs));
         }
 
         // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.

@@ -1,0 +1,14 @@
+[metadata]
+Code=P08
+Date=2008-01-01
+Name=Magic Player Rewards 2008
+Type=Reprint
+
+[cards]
+1 R Damnation
+2 R Tidings
+3 R Incinerate
+4 R Mana Tithe
+5 R Harmonize
+6 R Ponder
+7 R Corrupt

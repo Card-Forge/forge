@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Zendikar Rising #01
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/09/157.-ZNR1-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Remember that your solution must satisfy all blocking scenarios.
+[state]
+humanlife=15
+ailife=11
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Dire Tactics;Malakir Blood-Priest;Shadowspear;Light of Hope
+humanbattlefield=Angel of Destiny;Scourge of the Skyclaves;Thundering Chariot;Bastion of Remembrance;Plains;Plains;Plains;Swamp;Swamp;Swamp
+aibattlefield=Loch Dragon;Expedition Diviner;Loch Dragon

@@ -6,7 +6,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
@@ -39,7 +38,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         if (!ai.getGame().getStack().isEmpty()) {
             return false;
         }
-        
+
         int x = -1;
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
@@ -47,13 +46,9 @@ public class  DamageAllAi extends SpellAbilityAi {
         	dmg = ComputerUtilMana.getConvergeCount(sa, ai);
         }
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
-            x = ComputerUtilMana.determineLeftoverMana(sa, ai);
-        }
-        if (damage.equals("ChosenX")) {
-            x = source.getCounters(CounterType.LOYALTY);
+            x = ComputerUtilCost.getMaxXValue(sa, ai);
         }
         if (x == -1) {
-            Player bestOpp = determineOppToKill(ai, sa, source, dmg);
             if (determineOppToKill(ai, sa, source, dmg) != null) {
                 // we already know we can kill a player, so go for it
                 return true;
@@ -84,10 +79,7 @@ public class  DamageAllAi extends SpellAbilityAi {
 
             if (best_x > 0) {
                 if (sa.getSVar(damage).equals("Count$xPaid")) {
-                    source.setSVar("PayX", Integer.toString(best_x));
-                }
-                if (damage.equals("ChosenX")) {
-                    source.setSVar("ChosenX", "Number$" + best_x);
+                    sa.setXManaCostPaid(best_x);
                 }
                 return true;
             }
@@ -138,7 +130,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         }
 
         int minGain = 200; // The minimum gain in destroyed creatures
-        if (sa.getPayCosts() != null && sa.getPayCosts().isReusuableResource()) {
+        if (sa.getPayCosts().isReusuableResource()) {
             if (computerList.isEmpty()) {
                 minGain = 10; // nothing to lose
                 // no creatures to lose and player can be damaged
@@ -199,12 +191,13 @@ public class  DamageAllAi extends SpellAbilityAi {
         String validP = "";
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
-
+        int dmg;
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(dmg));
+            dmg = ComputerUtilCost.getMaxXValue(sa, ai);
+            sa.setXManaCostPaid(dmg);
+        } else {
+            dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
         }
 
         if (sa.hasParam("ValidPlayers")) {
@@ -281,12 +274,14 @@ public class  DamageAllAi extends SpellAbilityAi {
         String validP = "";
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
+        int dmg;
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(dmg));
+            dmg = ComputerUtilCost.getMaxXValue(sa, ai);
+            sa.setXManaCostPaid(dmg);
+        } else {
+            dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
         }
 
         if (sa.hasParam("ValidPlayers")) {

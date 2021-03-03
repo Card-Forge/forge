@@ -7,6 +7,46 @@ MciCode=ddp
 Type=Duel_Decks
 
 [cards]
+1 M Avenger of Zendikar
+2 U Affa Guard Hound
+3 C Caravan Escort
+4 U Kabira Vindicator
+5 C Knight of Cliffhaven
+6 C Makindi Griffin
+7 U Oust
+8 C Repel the Darkness
+9 C Sheer Drop
+10 U Beastbreaker of Bala Ged
+11 C Daggerback Basilisk
+12 U Frontier Guide
+13 C Graypelt Hunter
+14 C Grazing Gladehart
+15 C Groundswell
+16 C Harrow
+17 C Joraga Bard
+18 C Khalni Heart Expedition
+19 C Ondu Giant
+20 R Primal Command
+21 U Retreat to Kazandu
+22 R Scute Mob
+23 U Tajuru Archer
+24 C Territorial Baloth
+25 U Turntimber Basilisk
+26 C Wildheart Invoker
+27 R Veteran Warleader
+28 C Explorer's Scope
+29 R Seer's Sundial
+30 C Stonework Puma
+31 C Evolving Wilds
+32 U Graypelt Refuge
+33 R Stirring Wildwood
+34 C Turntimber Grove
+35 L Plains
+36 L Plains
+37 L Plains
+38 L Forest
+39 L Forest
+40 L Forest
 41 M Oblivion Sower
 42 U Artisan of Kozilek
 43 R It That Betrays
@@ -36,57 +76,16 @@ Type=Duel_Decks
 67 U Akoum Refuge
 68 U Eldrazi Temple
 69 U Rocky Tar Pit
+70 L Swamp
 71 L Swamp
-71 L Swamp
-71 L Swamp
+72 L Swamp
+73 L Mountain
 74 L Mountain
-74 L Mountain
-74 L Mountain
-1 M Avenger of Zendikar
-2 U Affa Guard Hound
-3 C Caravan Escort
-4 U Kabira Vindicator
-5 C Knight of Cliffhaven
-6 C Makindi Griffin
-7 U Oust
-8 C Repel the Darkness
-9 C Sheer Drop
-10 U Beastbreaker of Bala Ged
-11 C Daggerback Basilisk
-12 U Frontier Guide
-13 U Graypelt Hunter
-14 C Grazing Gladehart
-15 C Groundswell
-16 C Harrow
-17 C Joraga Bard
-18 C Khalni Heart Expedition
-19 C Ondu Giant
-20 R Primal Command
-21 U Retreat to Kazandu
-22 R Scute Mob
-23 U Tajuru Archer
-24 C Territorial Baloth
-25 U Turntimber Basilisk
-26 C Wildheart Invoker
-27 R Veteran Warleader
-28 C Explorer's Scope
-29 R Seer's Sundial
-30 C Stonework Puma
-31 C Evolving Wilds
-32 U Graypelt Refuge
-33 R Stirring Wildwood
-34 C Turntimber Grove
-35 L Plains
-35 L Plains
-35 L Plains
-38 L Forest
-38 L Forest
-38 L Forest
+75 L Mountain
 
 [tokens]
 c_0_1_eldrazi_spawn_sac
 c_0_1_eldrazi_spawn_sac
 c_0_1_eldrazi_spawn_sac
-c_1_1_spirit
 r_4_4_hellion
 g_0_1_plant

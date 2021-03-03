@@ -7,4 +7,4 @@ SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | CounterType$ FUSE | CounterNu
 SVar:DBRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ FUSE | CounterNum$ 1
 A:AB$ DealDamage | Cost$ SubCounter<5/FUSE> Sac<1/CARDNAME> | ValidTgts$ Player,Planeswalker | TgtPrompt$ Choose target player or planeswalker | NumDmg$ 20 | SpellDescription$ CARDNAME deals 20 damage to target player or planeswalker.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_bomb.jpg
-Oracle:At the beginning of your upkeep, you may flip a coin. If you win the flip, put a fuse counter on Goblin Bomb. If you lose the flip, remove a fuse counter from Goblin Bomb.\nRemove five fuse counters from Goblin Bomb, Sacrifice Goblin Bomb: Goblin Bomb deals 20 damage to target player or planeswalker.
+Oracle:At the beginning of your upkeep, you may flip a coin. If you win the flip, put a fuse counter on Goblin Bomb. If you lose the flip, remove a fuse counter from Goblin Bomb.\nRemove five fuse counters from Goblin Bomb and sacrifice it: It deals 20 damage to target player or planeswalker.

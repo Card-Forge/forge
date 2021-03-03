@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Legendary Enchantment Creature God
 PT:5/6
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | RemoveCreatureTypes$ True | CheckSVar$ X | SVarCompare$ LT5 | References$ X | Description$ As long as your devotion to green is less than five, CARDNAME is not a creature.
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT5 | References$ X | Description$ As long as your devotion to green is less than five, CARDNAME is not a creature.
 SVar:X:Count$Devotion.Green
 SVar:BuffedBy:Permanent.Green
 S:Mode$ ReduceCost | ValidCard$ Creature | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Creature spells you cast cost {1} less to cast.
@@ -11,4 +11,4 @@ A:AB$ Dig | Cost$ 2 G | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$
 SVar:DBDig:DB$ Dig | DigNum$ 1 | DestinationZone$ Library | DestinationZone2$ Graveyard | Optional$ True | LibraryPosition$ 0 | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup | References$ Y
 SVar:Y:Remembered$Amount
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
-Oracle:Indestructible\nAs long as your devotion to green is less than five, Nylea, Sharp-Eyed is not a creature.\nCreature spells you cast cost 1 less to cast.\n{2}{G}: Reveal the top card of your library. If it's a creature card, put it into your hand. Otherwise you may put it into your graveyard.
+Oracle:Indestructible\nAs long as your devotion to green is less than five, Nylea isn't a creature.\nCreature spells you cast cost {1} less to cast.\n{2}{G}: Reveal the top card of your library. If it's a creature card, put it into your hand. Otherwise, you may put it into your graveyard.

@@ -1,0 +1,19 @@
+[metadata]
+Code=F05
+Date=2005-01-01
+Name=Friday Night Magic 2005
+Type=Reprint
+
+[cards]
+1 R Rancor
+2 R Seal of Cleansing
+3 R Flametongue Kavu
+4 R Blastoderm
+5 R Cabal Therapy
+6 R Fact or Fiction
+7 R Juggernaut
+8 R Circle of Protection: Red
+9 R Kird Ape
+10 R Duress
+11 R Counterspell
+12 R Icy Manipulator

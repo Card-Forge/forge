@@ -1,12 +1,7 @@
 Name:Fate Transfer
 ManaCost:1 UB
 Types:Instant
-A:SP$ Pump | Cost$ 1 UB | ValidTgts$ Creature | TgtPrompt$ Select target creature to remove counters | ImprintCards$ Targeted | SubAbility$ DBRemember | SpellDescription$ Move all counters from target creature onto another target creature.
-SVar:DBRemember:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to get counters | RememberObjects$ Targeted | SubAbility$ DBMove
-SVar:DBMove:DB$ RepeatEach | Defined$ Imprinted | RepeatCounters$ True | RepeatSubAbility$ MoveCounters | SubAbility$ DBCleanup
-SVar:MoveCounters:DB$ MoveCounter | Source$ Imprinted | Defined$ Remembered | CounterType$ RepeatSVarCounter | CounterNum$ RepeatCounterAmount
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+A:SP$ MoveCounter | Cost$ 1 UB | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creatures to move counters | CounterType$ All | CounterNum$ All | SpellDescription$ Move all counters from target creature onto another target creature.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fate_transfer.jpg
 Oracle:Move all counters from target creature onto another target creature.

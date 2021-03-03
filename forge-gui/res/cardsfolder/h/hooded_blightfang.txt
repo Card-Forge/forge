@@ -1,0 +1,14 @@
+Name:Hooded Blightfang
+ManaCost:2 B
+Types:Creature Snake
+PT:1/4
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+withDeathtouch | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature you control with deathtouch attacks, each opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+withDeathtouch | ValidTarget$ Planeswalker | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a creature you control with deathtouch deals damage to a planeswalker, destroy that planeswalker.
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy
+SVar:PlayMain1:TRUE
+DeckHas:Ability$LifeGain
+DeckHints:Keyword$Deathtouch
+Oracle:Deathtouch\nWhenever a creature you control with deathtouch attacks, each opponent loses 1 life and you gain 1 life.\nWhenever a creature you control with deathtouch deals damage to a planeswalker, destroy that planeswalker.

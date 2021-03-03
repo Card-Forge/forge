@@ -7,4 +7,4 @@ K:Kicker:3
 K:etbCounter:P1P1:2:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it.
 SVar:WasKicked:Count$Kicked.1.0
 DeckHas:Ability$Counters
-Oracle:Kicker {3} (You may pay an additional {3} as you cast this spell.)\nMenace\nIf Stronghold Confessor was kicked, it enters the battlefield with two +1/+1 counters on it.
+Oracle:Kicker {3} (You may pay an additional {3} as you cast this spell.)\nMenace (This creature can't be blocked except by two or more creatures.)\nIf Stronghold Confessor was kicked, it enters the battlefield with two +1/+1 counters on it.

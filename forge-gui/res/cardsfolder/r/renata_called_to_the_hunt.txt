@@ -8,4 +8,4 @@ SVar:BuffedBy:Permanent.Green
 K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.Other+YouCtrl
 SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Each other creature you control enters the battlefield with an additional +1/+1 counter on it.
 DeckHas:Ability$Counters
-Oracle:Renata's power is equal to your devotion to green. (Each {G} in the mana costs of permanents you control counts towards your devotion to green.)\nEach other creature you control enters the battlefield with an additional +1/+1 counter on it.
+Oracle:Renata's power is equal to your devotion to green. (Each {G} in the mana costs of permanents you control counts toward your devotion to green.)\nEach other creature you control enters the battlefield with an additional +1/+1 counter on it.

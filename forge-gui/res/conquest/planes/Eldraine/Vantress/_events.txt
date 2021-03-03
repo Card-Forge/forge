@@ -1,0 +1,9 @@
+Name:Pursuit of Greatness|Deck:Pursuit of Greatness.dck|Variant:Commander|Avatar:Gadwick, the Wizened|Desc:
+Name:Sleeping Beauty|Deck:Sleeping Beauty.dck|Variant:None|Avatar:Hypnotic Sprite|Desc:
+Name:Emry, Lurker of the Loch|Deck:Emry, Lurker of the Loch.dck|Variant:Commander|Avatar:Emry, Lurker of the Loch|Desc:
+Name:Syr Elenora, the Discerning|Deck:Syr Elenora, the Discerning.dck|Variant:Commander|Avatar:Syr Elenora, the Discerning|Desc:
+Name:Oko, Thief of Crowns|Deck:Oko, Thief of Crowns.dck|Variant:Planeswalker|Avatar:Oko, Thief of Crowns|Desc:
+Name:Cinderella|Deck:Cinderella.dck|Variant:None|Avatar:Faerie Guidemother|Desc:
+Name:The Snow Queen|Deck:The Snow Queen.dck|Variant:None|Avatar:Queen of Ice|Desc:
+Name:Oko, the Trickster|Deck:Oko, the Trickster.dck|Variant:Planeswalker|Avatar:Oko, the Trickster|Desc:
+Name:Random Vantress|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

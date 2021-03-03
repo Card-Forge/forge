@@ -7,4 +7,4 @@ K:Flying
 S:Mode$ Continuous | Affected$ Creature.withFlying+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other creatures you control with flying get +1/+1.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderclap_wyvern.jpg
-Oracle:Flash\nFlying\nOther creatures you control with flying get +1/+1.
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nOther creatures you control with flying get +1/+1.

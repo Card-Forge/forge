@@ -1,0 +1,10 @@
+Name:Glowstone Recluse
+ManaCost:2 G
+Types:Creature Spider
+PT:2/3
+K:Mutate:3 G
+K:Reach
+T:Mode$ Mutates | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever this creature mutates, put two +1/+1 counters on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 2
+DeckHas:Ability$Counters
+Oracle:Mutate {3}{G} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nReach\nWhenever this creature mutates, put two +1/+1 counters on it.

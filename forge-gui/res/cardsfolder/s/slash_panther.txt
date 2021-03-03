@@ -4,4 +4,4 @@ Types:Artifact Creature Cat
 PT:4/2
 K:Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slash_panther.jpg
-Oracle:({P/R} can be paid with either {R} or 2 life.)\nHaste
+Oracle:({R/P} can be paid with either {R} or 2 life.)\nHaste

@@ -6,6 +6,8 @@ import java.util.List;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
+import forge.assets.FImage;
+import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinImage;
@@ -14,6 +16,8 @@ import forge.game.GameType;
 import forge.screens.FScreen;
 import forge.screens.achievements.AchievementsScreen;
 import forge.screens.online.OnlineMenu.OnlineScreen;
+import forge.screens.planarconquest.ConquestMenu;
+import forge.screens.quest.QuestMenu;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
@@ -32,11 +36,32 @@ public class HomeScreen extends FScreen {
 
     public static final HomeScreen instance = new HomeScreen();
 
-    private final FLabel lblLogo = add(new FLabel.Builder().icon(FSkinImage.LOGO).iconInBackground().iconScaleFactor(1).build());
+    private final FLabel lblLogo = add(new FLabel.Builder().icon(
+            new FImage() {
+                final float size = Forge.getScreenWidth() * 0.6f;
+                @Override
+                public float getWidth() {
+                    return size;
+                }
+                @Override
+                public float getHeight() {
+                    return size;
+                }
+                @Override
+                public void draw(Graphics g, float x, float y, float w, float h) {
+                    if (FSkin.hdLogo == null)
+                        FSkinImage.LOGO.draw(g, x, y, w, h);
+                    else
+                        g.drawImage(FSkin.hdLogo, x, y, w, h);
+                }
+            }
+    ).iconInBackground().iconScaleFactor(1).build());
     private final ButtonScroller buttonScroller = add(new ButtonScroller());
     private final List<MenuButton> buttons = new ArrayList<>();
     private int activeButtonIndex, baseButtonCount;
     private FDeckChooser deckManager;
+    private boolean QuestCommander = false;
+    private String QuestWorld = "";
 
     private HomeScreen() {
         super((Header)null);
@@ -47,6 +72,7 @@ public class HomeScreen extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = 0;
+                Forge.lastButtonIndex = activeButtonIndex;
                 NewGameMenu.getPreferredScreen().open();
             }
         });
@@ -54,6 +80,7 @@ public class HomeScreen extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = 1;
+                Forge.lastButtonIndex = activeButtonIndex;
                 LoadGameMenu.getPreferredScreen().open();
             }
         });
@@ -61,6 +88,7 @@ public class HomeScreen extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = 2;
+                Forge.lastButtonIndex = activeButtonIndex;
                 OnlineScreen.Lobby.open();
             }
         });
@@ -68,6 +96,7 @@ public class HomeScreen extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = 3;
+                Forge.lastButtonIndex = activeButtonIndex;
                 if (deckManager == null) {
                     deckManager = new FDeckChooser(GameType.DeckManager, false, null) {
                         @Override
@@ -87,6 +116,7 @@ public class HomeScreen extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = 4;
+                Forge.lastButtonIndex = activeButtonIndex;
                 AchievementsScreen.show();
             }
         });
@@ -94,6 +124,7 @@ public class HomeScreen extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = 5;
+                Forge.lastButtonIndex = activeButtonIndex;
                 SettingsScreen.show(true);
             }
         });
@@ -102,6 +133,35 @@ public class HomeScreen extends FScreen {
 
     private void addButton(String caption, FEventHandler command) {
         buttons.add(buttonScroller.add(new MenuButton(caption, command)));
+    }
+
+    public void updateQuestCommanderMode(boolean isCommander){
+        QuestCommander = isCommander;
+    }
+
+    public void updateQuestWorld(String questWorld){
+        QuestWorld = questWorld;
+    }
+
+    public void openMenu(int index){
+        if (index < 0)
+            return; //menu on startup
+        if (index == 2)
+            OnlineScreen.Lobby.open();
+        else if (index < 6)
+            NewGameMenu.getPreferredScreen().open();
+        else if (index == 6)
+            QuestMenu.launchQuestMode(QuestMenu.LaunchReason.StartQuestMode, HomeScreen.instance.getQuestCommanderMode());
+        else if (index == 7)
+            ConquestMenu.launchPlanarConquest(ConquestMenu.LaunchReason.StartPlanarConquest);
+    }
+
+    public boolean getQuestCommanderMode() {
+        return QuestCommander;
+    }
+
+    public String getQuestWorld() {
+        return QuestWorld;
     }
 
     public void addButtonForMode(String caption, final FEventHandler command) {
@@ -113,6 +173,7 @@ public class HomeScreen extends FScreen {
                     @Override
                     public void handleEvent(FEvent e) {
                         activeButtonIndex = index;
+                        Forge.lastButtonIndex = activeButtonIndex;
                         command.handleEvent(e);
                     }
                 });
@@ -126,6 +187,7 @@ public class HomeScreen extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 activeButtonIndex = index;
+                Forge.lastButtonIndex = activeButtonIndex;
                 command.handleEvent(e);
             }
         });

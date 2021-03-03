@@ -2,11 +2,10 @@ Name:Phyrexian Processor
 ManaCost:4
 Types:Artifact
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ PayLife | Description$ As CARDNAME enters the battlefield, pay any amount of life.
-SVar:PayLife:AB$ StoreSVar | Cost$ PayLife<X> | References$ X | SVar$ LifePaidOnETB | Type$ CountSVar | Expression$ ChosenX | SubAbility$ MoveToPlay
+SVar:PayLife:AB$ StoreSVar | Cost$ PayLife<X> | References$ X | SVar$ LifePaidOnETB | Type$ Calculate | Expression$ X | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ All | Destination$ Battlefield
 A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenScript$ b_x_x_minion | TokenOwner$ You | TokenPower$ LifePaidOnETB | TokenToughness$ LifePaidOnETB | LegacyImage$ b x x minion usg | SpellDescription$ Create an X/X black Minion creature token, where X is the life paid as CARDNAME entered the battlefield.
-SVar:X:XChoice
+SVar:X:Count$xPaid
 SVar:LifePaidOnETB:Number$0
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_processor.jpg
 Oracle:As Phyrexian Processor enters the battlefield, pay any amount of life.\n{4}, {T}: Create an X/X black Minion creature token, where X is the life paid as Phyrexian Processor entered the battlefield.

@@ -9,6 +9,7 @@ import forge.screens.deckeditor.controllers.DeckController;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.toolbox.FOptionPane;
+import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -35,23 +36,23 @@ public class SEditorIO {
 
         // Warn if no name
         if (name == null || name.isEmpty()) {
-            FOptionPane.showMessageDialog("Please name your deck using the 'Title' box.",
-                    "Save Error!", FOptionPane.ERROR_ICON);
+            FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPleaseTitleBoxNameYourDeck"),
+                    Localizer.getInstance().getMessage("lblSaveErrorWarning"), FOptionPane.ERROR_ICON);
             return false;
         }
         // Confirm if overwrite
         else if (controller.fileExists(name)) {
             if (!StringUtils.equals(name, controller.getModelName())) { // prompt only if name was changed
                 performSave = FOptionPane.showConfirmDialog(
-                    "There is already a deck named '" + name + "'. Overwrite?",
-                    "Overwrite Deck?");
+                    Localizer.getInstance().getMessage("lblAlreadyDeckName") + name + Localizer.getInstance().getMessage("lblOverwriteConfirm"),
+                    Localizer.getInstance().getMessage("lblOverwriteDeck"));
             } else {
                 performSave = true;
             }
         }
         // Confirm if a new deck will be created
-        else if (FOptionPane.showConfirmDialog("This will create a new deck named '" +
-                name + "'. Continue?", "Create Deck?")) {
+        else if (FOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblThisWillCreateNewDeckNameIs", name),
+                    Localizer.getInstance().getMessage("lblCreateDeckConfirm"))) {
             performSave = true;
         }
 
@@ -72,7 +73,11 @@ public class SEditorIO {
         return true;
     }
 
-    private final static ImmutableList<String> confirmSaveOptions = ImmutableList.of("Save", "Don't Save", "Cancel");
+    private final static ImmutableList<String> confirmSaveOptions = ImmutableList.of(
+        Localizer.getInstance().getMessage("lblSave"),
+        Localizer.getInstance().getMessage("lblDontSave"),
+        Localizer.getInstance().getMessage("lblCancel")
+    );
     /**
      * Prompts to save changes if necessary.
      * 
@@ -85,7 +90,7 @@ public class SEditorIO {
                 return false;
             }
 
-            final int choice = FOptionPane.showOptionDialog("Save changes to current deck?", "Save Changes?",
+            final int choice = FOptionPane.showOptionDialog(Localizer.getInstance().getMessage("lblSaveChangesCurrentDeck"), Localizer.getInstance().getMessage("lblSaveChangesConfirm"),
                     FOptionPane.QUESTION_ICON, confirmSaveOptions);
 
             if (choice == -1 || choice == 2) { return false; }

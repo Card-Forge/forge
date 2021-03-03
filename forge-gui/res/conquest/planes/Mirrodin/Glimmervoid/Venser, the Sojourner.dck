@@ -1,5 +1,7 @@
 [metadata]
-Name=venser,the sojouner
+Name=Venser, the Sojourner
+[Commander]
+1 Venser, the Sojourner|DDI
 [Main]
 1 Ancient Den|HOP
 1 Augury Owl|PCA
@@ -31,7 +33,6 @@ Name=venser,the sojouner
 1 Sunblast Angel|C14
 1 Trigon of Thought|SOM
 1 Venser's Journal|C16
-1 Venser, the Sojourner|DDI
 1 Volition Reins|SOM
 1 Wing Splicer|MM3
 [Sideboard]

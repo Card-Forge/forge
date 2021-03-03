@@ -4,4 +4,4 @@ Types:Creature Elf Warrior
 PT:2/1
 K:etbCounter:P1P1:2:Revolt$ True:Revolt — CARDNAME enters the battlefield with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greenwheel_liberator.jpg
-Oracle:Revolt — Greenbelt Liberator enters the battlefield with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn.
+Oracle:Revolt — Greenwheel Liberator enters the battlefield with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn.

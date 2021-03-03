@@ -5,7 +5,7 @@
     <artifactId>forge</artifactId>
     <packaging>pom</packaging>
     <name>Forge Parent</name>
-    <version>1.6.33-SNAPSHOT</version>
+    <version>1.6.39-SNAPSHOT</version>
 
     <description>
         Forge lets you play the card game Magic: The Gathering against a computer opponent using all of the rules.
@@ -293,6 +293,12 @@
                             <artifactId>wagon-ftp</artifactId>
                             <version>2.6</version>
                         </dependency>
+                        <dependency>
+                        <groupId>com.sipgate</groupId>
+                        <artifactId>mp3-wav</artifactId>
+                        <version>1.0.3</version>
+                    </dependency>
+
                     </dependencies>
                 </plugin>
 
@@ -368,7 +374,7 @@
                                     <pluginExecutionFilter>
                                         <groupId>org.codehaus.mojo</groupId>
                                         <artifactId>build-helper-maven-plugin</artifactId>
-                                        <versionRange>[1.8,)</versionRange>
+                                        <versionRange>[3.1,)</versionRange>
                                         <goals>
                                             <goal>released-version</goal>
                                             <goal>parse-version</goal>

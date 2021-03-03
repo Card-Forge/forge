@@ -1,0 +1,9 @@
+[metadata]
+Code=PLGS
+Date=2020-05-18
+Name=Love Your LGS
+Type=Reprint
+
+[cards]
+1 R Reliquary Tower
+2 R Hangarback Walker

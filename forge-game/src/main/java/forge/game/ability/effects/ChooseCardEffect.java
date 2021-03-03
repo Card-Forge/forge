@@ -7,7 +7,6 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
@@ -63,7 +62,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         }
 
         final String numericAmount = sa.getParamOrDefault("Amount", "1");
-        final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) : CardFactoryUtil.xCount(host, host.getSVar(numericAmount));
+        final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) : AbilityUtils.calculateAmount(host, numericAmount, sa);
         final int minAmount = sa.hasParam("MinAmount") ? Integer.parseInt(sa.getParam("MinAmount")) : validAmount;
 
         if (validAmount <= 0) {
@@ -84,7 +83,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     final CardCollectionView cl = CardLists.getType(land, type);
                     if (!cl.isEmpty()) {
                         final String prompt = Localizer.getInstance().getMessage("lblChoose") + " " + Lang.nounWithAmount(1, type);
-                        Card c = p.getController().chooseSingleEntityForEffect(cl, sa, prompt, false);
+                        Card c = p.getController().chooseSingleEntityForEffect(cl, sa, prompt, false, null);
                         if (c != null) {
                             chosen.add(c);
                         }
@@ -100,7 +99,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 while (!creature.isEmpty()) {
                     Card c = p.getController().chooseSingleEntityForEffect(creature, sa, 
                             Localizer.getInstance().getMessage("lblSelectCreatureWithTotalPowerLessOrEqualTo", (totP - chosenP - negativeNum))
-                            + "\r\n(" + Localizer.getInstance().getMessage("lblSelected") + ":" + chosenPool + ")\r\n(" + Localizer.getInstance().getMessage("lblTotalPowerNum", chosenP) + ")", chosenP <= totP);
+                            + "\r\n(" + Localizer.getInstance().getMessage("lblSelected") + ":" + chosenPool + ")\r\n(" + Localizer.getInstance().getMessage("lblTotalPowerNum", chosenP) + ")", chosenP <= totP, null);
                     if (c == null) {
                         if (p.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, Localizer.getInstance().getMessage("lblCancelChooseConfirm"))) {
                             break;
@@ -120,7 +119,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     Aggregates.random(choices, validAmount, chosen);
                 } else {
                     String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
-                    chosen.addAll(p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount, !sa.hasParam("Mandatory")));
+                    chosen.addAll(p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount, !sa.hasParam("Mandatory"), null));
                 }
             }
         }
@@ -133,6 +132,11 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         if (sa.hasParam("ForgetChosen")) {
             for (final Card rem : chosen) {
                 host.removeRemembered(rem);
+            }
+        }
+        if (sa.hasParam("ImprintChosen")) {
+            for (final Card imp : chosen) {
+                host.addImprintedCard(imp);
             }
         }
     }

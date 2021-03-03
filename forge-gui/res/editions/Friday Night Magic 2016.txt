@@ -1,0 +1,19 @@
+[metadata]
+Code=F16
+Date=2016-01-01
+Name=Friday Night Magic 2016
+Type=Reprint
+
+[cards]
+1 R Nissa's Pilgrimage
+2 R Clash of Wills
+3 R Smash to Smithereens
+4 R Blighted Fen
+5 R Goblin Warchief
+6 R Sylvan Scrying
+7 R Spatial Contortion
+8 R Crumbling Vestige
+9 R Flaying Tendrils
+10 R Rise from the Tides
+11 R Fiery Temper
+12 R Call the Bloodline

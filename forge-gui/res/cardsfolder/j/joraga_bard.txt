@@ -4,9 +4,8 @@ Types:Creature Elf Rogue Ally
 PT:1/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Ally creatures you control gain vigilance until end of turn.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Ally creatures you control gain vigilance until end of turn.
-SVar:TrigPump:DB$PumpAll | ValidCards$ Ally.YouCtrl | KW$ Vigilance
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Ally.YouCtrl | KW$ Vigilance
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/joraga_bard.jpg
 Oracle:Whenever Joraga Bard or another Ally enters the battlefield under your control, you may have Ally creatures you control gain vigilance until end of turn.

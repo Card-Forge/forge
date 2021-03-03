@@ -1,0 +1,7 @@
+Name:Karfell Kennel-Master
+ManaCost:4 B
+Types:Creature Zombie Berserker
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBPump | TriggerDescription$ When CARDNAME enters the battlefield, up to two target creatures each get +1/+0 and gain indestructible until end of turn.
+SVar:DBPump:DB$ Pump | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +1 | KW$ Indestructible | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures.
+Oracle:When Karfell Kennel-Master enters the battlefield, up to two target creatures each get +1/+0 and gain indestructible until end of turn. (Damage and effects that say "destroy" don't destroy them.)

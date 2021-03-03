@@ -5,7 +5,6 @@ PT:5/5
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
-T:Mode$ TapsForMana | ValidCard$ Land.YouCtrl | CheckDefinedPlayer$ You.isMonarch | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever you tap a land for mana while you're the monarch, add an additional one mana of any color.
+T:Mode$ TapsForMana | ValidCard$ Land | Activator$ You | CheckDefinedPlayer$ You.isMonarch | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever you tap a land for mana while you're the monarch, add an additional one mana of any color.
 SVar:TrigMana:DB$ Mana | Produced$ Combo Any | Amount$ 1 | AILogic$ MostProminentInComputerHand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/regal_behemoth.jpg
 Oracle:Trample\nWhen Regal Behemoth enters the battlefield, you become the monarch.\nWhenever you tap a land for mana while you're the monarch, add an additional one mana of any color.

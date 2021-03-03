@@ -4,8 +4,8 @@ Types:Creature Dragon
 PT:3/3
 K:Flying
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-A:AB$ Pump | Cost$ R | KW$ First Strike | Defined$ Self | SpellDescription$ CARDNAME gains first strike until end of turn. 
-A:AB$ Pump | Cost$ R | KW$ Haste | Defined$ Self | SpellDescription$ CARDNAME gains haste until end of turn. 
+A:AB$ Pump | Cost$ R | KW$ First Strike | Defined$ Self | SpellDescription$ CARDNAME gains first strike until end of turn.
+A:AB$ Pump | Cost$ R | KW$ Haste | Defined$ Self | SpellDescription$ CARDNAME gains haste until end of turn.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyship_stalker.jpg
-Oracle:Flying\n{R}: Skyship Stalker gains +1/+0 until end of turn.\n{R}: Skyship Stalker gains first strike until end of turn.\n{R}: Skyship Stalker gains haste until end of turn.
+Oracle:Flying\n{R}: Skyship Stalker gets +1/+0 until end of turn.\n{R}: Skyship Stalker gains first strike until end of turn.\n{R}: Skyship Stalker gains haste until end of turn.

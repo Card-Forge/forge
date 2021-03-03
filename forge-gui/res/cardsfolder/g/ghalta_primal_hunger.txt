@@ -2,7 +2,7 @@ Name:Ghalta, Primal Hunger
 ManaCost:10 G G
 Types:Legendary Creature Elder Dinosaur
 K:Trample
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ CARDNAME costs {X} less to cast, where X is the total power of creatures you control.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ This spell costs {X} less to cast, where X is the total power of creatures you control.
 SVar:X:Count$SumPower_Creature.YouCtrl
-Oracle:Ghalta, Primal Hunger costs {X} less to cast, where X is the total power of creatures you control.\nTrample
+Oracle:This spell costs {X} less to cast, where X is the total power of creatures you control.\nTrample
 PT:12/12

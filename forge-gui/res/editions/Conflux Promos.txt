@@ -1,0 +1,9 @@
+[metadata]
+Code=PCON
+Date=2009-02-06
+Name=Conflux Promos
+Type=Reprint
+
+[cards]
+117 R Malfegor
+140 R Obelisk of Alara

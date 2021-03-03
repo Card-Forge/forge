@@ -2,7 +2,6 @@ Name:Chill of Foreboding
 ManaCost:2 U
 Types:Sorcery
 K:Flashback:7 U
-A:SP$ Mill | Cost$ 2 U | NumCards$ 5 | Defined$ Player | SpellDescription$ Each player puts the top five cards of their library into their graveyard.
+A:SP$ Mill | Cost$ 2 U | NumCards$ 5 | Defined$ Player | SpellDescription$ Each player mills five cards.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chill_of_foreboding.jpg
-Oracle:Each player puts the top five cards of their library into their graveyard.\nFlashback {7}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+Oracle:Each player mills five cards.\nFlashback {7}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

@@ -3,10 +3,7 @@ package forge.game.ability.effects;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.List;
+import forge.util.Lang;
 
 public class TapEffect extends SpellAbilityEffect {
 
@@ -22,11 +19,8 @@ public class TapEffect extends SpellAbilityEffect {
             card.clearRemembered();
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final List<Card> tgtCards = getTargetCards(sa);
-
-        for (final Card tgtC : tgtCards) {
-            if (tgt != null && !tgtC.canBeTargetedBy(sa)) {
+        for (final Card tgtC : getTargetCards(sa)) {
+            if (sa.usesTargeting() && !tgtC.canBeTargetedBy(sa)) {
                 continue;
             }
             if (tgtC.isInPlay()) {
@@ -47,8 +41,7 @@ public class TapEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
 
         sb.append("Tap ");
-        final List<Card> tgtCards = getTargetCards(sa);
-        sb.append(StringUtils.join(tgtCards, ", "));
+        sb.append(Lang.joinHomogenous(getTargetCards(sa)));
         sb.append(".");
         return sb.toString();
     }

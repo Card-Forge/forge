@@ -1,0 +1,22 @@
+Name:Glorious Protector
+ManaCost:2 W W
+Types:Creature Angel Cleric
+PT:3/4
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, you may exile any number of other non-Angel creatures you control until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | Hidden$ True | ChangeType$ Creature.nonAngel+YouCtrl | ChangeNum$ MaxTgts | SelectPrompt$ Choose any number of non-Angel creatures you control | SubAbility$ DBEffect | References$ MaxTgts
+SVar:DBEffect:DB$ Effect | Triggers$ ComeBack | RememberObjects$ RememberedCard | ImprintCards$ Self | SVars$ TrigReturn,ExileSelf | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnMoved$ Exile
+SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ That creature is exiled until EFFECTSOURCE leaves the battlefield
+SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ ExileSelf
+SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+#Triggers to forget remembered on this
+T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZones$ Battlefield | Static$ True | Execute$ TrigForget
+SVar:TrigForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Static$ True | Execute$ TrigForgetAll
+SVar:TrigForgetAll:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidExile Card.IsRemembered+ExiledWithSource/Times.2
+SVar:MaxTgts:Count$Valid Creature.nonAngel+YouCtrl
+AI:RemoveDeck:Random
+K:Foretell:2 W
+Oracle:Flash\nFlying\nWhen Glorious Protector enters the battlefield, you may exile any number of non-Angel creatures you control until Glorious Protector leaves the battlefield.\nForetell {2}{W}
