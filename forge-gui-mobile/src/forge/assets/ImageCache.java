@@ -38,6 +38,7 @@ import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
+import forge.properties.ForgePreferences;
 import forge.util.ImageUtil;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -230,12 +231,16 @@ public class ImageCache {
         return image;
     }
     public static void preloadCache(Iterable<String> keys) {
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
+            return;
         for (String imageKey : keys){
             if(getImage(imageKey, false) == null)
                 System.err.println("could not load card image:"+imageKey);
         }
     }
     public static void preloadCache(Deck deck) {
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
+            return;
         if(deck == null||!Forge.enablePreloadExtendedArt)
             return;
         for (PaperCard p : deck.getAllCardsInASinglePool().toFlatList()) {
