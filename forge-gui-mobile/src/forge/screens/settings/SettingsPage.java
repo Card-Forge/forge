@@ -256,8 +256,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                             localizer.getMessage("lblLater"), new Callback<Boolean>() {
                                 @Override
                                 public void run(Boolean result) {
-                                    if (result) {
-                                        Forge.restart(true);
+                                if (result) {
+                                    Forge.restart(true);
                                     }
                                 }
                             }
@@ -265,6 +265,28 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
                 },
                3);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_LOAD_NONLEGAL_CARDS,
+                localizer.getMessage("lblEnableNonLegalCards"),
+                localizer.getMessage("nlEnableNonLegalCards")) {
+                    @Override
+                    public void select() {
+                        super.select();
+                        FOptionPane.showConfirmDialog(
+                            localizer.getMessage("lblRestartForgeDescription"),
+                            localizer.getMessage("lblRestartForge"),
+                            localizer.getMessage("lblRestart"),
+                            localizer.getMessage("lblLater"), new Callback<Boolean>() {
+                                @Override
+                                public void run(Boolean result) {
+                                    if (result) {
+                                        Forge.restart(true);
+                                        }
+                                    }
+                                }
+                            );
+                        }
+                    },
+                3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_NETPLAY_COMPAT,
                 localizer.getMessage("lblExperimentalNetworkCompatibility"),
                 localizer.getMessage("nlExperimentalNetworkCompatibility")) {

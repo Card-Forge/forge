@@ -54,11 +54,11 @@ public class StaticData {
 
     private static StaticData lastInstance = null;
 
-    public StaticData(CardStorageReader cardReader, String editionFolder, String blockDataFolder, boolean enableUnknownCards) {
-        this(cardReader, null, editionFolder, blockDataFolder, enableUnknownCards);
+    public StaticData(CardStorageReader cardReader, String editionFolder, String blockDataFolder, boolean enableUnknownCards, boolean loadNonLegalCards) {
+        this(cardReader, null, editionFolder, blockDataFolder, enableUnknownCards, loadNonLegalCards);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, String editionFolder, String blockDataFolder, boolean enableUnknownCards) {
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, String editionFolder, String blockDataFolder, boolean enableUnknownCards, boolean loadNonLegalCards) {
         this.cardReader = cardReader;
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
@@ -84,8 +84,8 @@ public class StaticData {
             variantCards = new CardDb(variantsCards, editions);
 
             //must initialize after establish field values for the sake of card image logic
-            commonCards.initialize(false, false, enableUnknownCards);
-            variantCards.initialize(false, false, enableUnknownCards);
+            commonCards.initialize(false, false, enableUnknownCards, loadNonLegalCards);
+            variantCards.initialize(false, false, enableUnknownCards, loadNonLegalCards);
         }
 
         {
