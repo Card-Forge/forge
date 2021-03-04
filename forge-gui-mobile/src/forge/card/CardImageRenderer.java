@@ -276,8 +276,14 @@ public class CardImageRenderer {
             g.drawImage(image, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize, iconSize);
         }
         else {
-            final String text = !card.isSplitCard() ? card.getText(state, CardTranslation.getTranslationTexts(state.getName(), "")) :
-                card.getText(state, CardTranslation.getTranslationTexts(card.getLeftSplitState().getName(), card.getRightSplitState().getName()));
+            boolean needTranslation = true;
+            if (card.isToken()) {
+                if (card.getCloneOrigin() == null)
+                    needTranslation = false;
+            }
+            final String text = !card.isSplitCard() ?
+                card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null) :
+                card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(card.getLeftSplitState().getName(), card.getRightSplitState().getName()) : null );
             if (StringUtils.isEmpty(text)) { return; }
 
             float padding = TEXT_FONT.getCapHeight() * 0.75f;

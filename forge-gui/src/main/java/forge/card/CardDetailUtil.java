@@ -280,8 +280,15 @@ public class CardDetailUtil {
             area.append("\n");
         }
 
-        String text = !card.isSplitCard() ? card.getText(state, CardTranslation.getTranslationTexts(state.getName(), "")) :
-            card.getText(state, CardTranslation.getTranslationTexts(card.getLeftSplitState().getName(), card.getRightSplitState().getName()));
+        boolean needTranslation = true;
+        if (card.isToken()) {
+            if (card.getCloneOrigin() == null)
+                needTranslation = false;
+        }
+        final String text = !card.isSplitCard() ?
+            card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null) :
+            card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(card.getLeftSplitState().getName(), card.getRightSplitState().getName()) : null );
+
 
         // LEVEL [0-9]+-[0-9]+
         // LEVEL [0-9]+\+
