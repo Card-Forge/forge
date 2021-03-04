@@ -180,6 +180,12 @@ public class CardZoom extends FOverlay {
             return true;
         }
         if (flipIconBounds != null && flipIconBounds.contains(x, y)) {
+            if (currentCard.isFaceDown() && currentCard.getBackup() != null) {
+                if (currentCard.getBackup().hasBackSide()) {
+                    show(currentCard.getBackup());
+                    return true;
+                }
+            }
             if (!showBackSide)
                 showAltState = !showAltState;
             else
