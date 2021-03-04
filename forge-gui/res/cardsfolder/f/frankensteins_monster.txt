@@ -3,10 +3,10 @@ ManaCost:X B B
 Types:Creature Zombie
 PT:0/1
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ ExileCreature | Description$ As CARDNAME enters the battlefield, exile X creature cards from your graveyard. If you can't, put CARDNAME into its owner's graveyard instead of onto the battlefield. For each creature card exiled this way, CARDNAME enters the battlefield with a +2/+0, +1/+1, or +0/+2 counter on it.
-SVar:ExileCreature:DB$ ChooseCard | ETB$ True | Choices$ Creature.YouOwn | ChoiceZone$ Graveyard | Amount$ X | Mandatory$ True | ConditionCheckSVar$ CheckYard | ConditionSVarCompare$ GEX | References$ CheckYard,X | SubAbility$ DBExile
+SVar:ExileCreature:DB$ ChooseCard | ETB$ True | Choices$ Creature.YouOwn | ChoiceZone$ Graveyard | Amount$ X | Mandatory$ True | ConditionCheckSVar$ CheckYard | ConditionSVarCompare$ GEX | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ Movetoyard
-SVar:Movetoyard:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Graveyard | Defined$ Self | ConditionCheckSVar$ CheckExiled | ConditionSVarCompare$ LTX | References$ CheckExiled,X | Imprint$ True | SubAbility$ ChooseCounters
-SVar:ChooseCounters:DB$ Repeat | MaxRepeat$ X | ETB$ True | RepeatSubAbility$ DBChooseCounter | ConditionCheckSVar$ CheckExiled | ConditionSVarCompare$ EQX | References$ CheckExiled,X | SubAbility$ MovetoPlay
+SVar:Movetoyard:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Graveyard | Defined$ Self | ConditionCheckSVar$ CheckExiled | ConditionSVarCompare$ LTX | Imprint$ True | ETB$ True | SubAbility$ ChooseCounters
+SVar:ChooseCounters:DB$ Repeat | MaxRepeat$ X | ETB$ True | RepeatSubAbility$ DBChooseCounter | ConditionCheckSVar$ CheckExiled | ConditionSVarCompare$ EQX | SubAbility$ MovetoPlay
 SVar:DBChooseCounter:DB$ GenericChoice | Choices$ SVarP1P1,SVarP2P0,SVarP0P2
 SVar:SVarP1P1:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | ETB$ True | SpellDescription$ +1/+1
 SVar:SVarP2P0:DB$ PutCounter | CounterType$ P2P0 | CounterNum$ 1 | ETB$ True | SpellDescription$ +2/+0
