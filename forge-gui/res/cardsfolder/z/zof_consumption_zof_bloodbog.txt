@@ -1,6 +1,6 @@
 Name:Zof Consumption
 ManaCost:4 B B
-Types:Instant
+Types:Sorcery
 A:SP$ LoseLife | Cost$ 4 B B | Defined$ Player.Opponent | LifeAmount$ 4 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 4 life and you gain 4 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
 AlternateMode:Modal
