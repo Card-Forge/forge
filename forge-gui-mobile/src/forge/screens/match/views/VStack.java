@@ -405,7 +405,8 @@ public class VStack extends FDropDown {
                         FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
 
             } else {
-                String trimFirst = TextUtil.fastReplace("\n" + text.substring(0, index) + text.substring(index + name.length()), "- -", "-");
+                String modifier = (text.substring(0, index).length() > 0) ? "CARDNAME" : "";
+                String trimFirst = TextUtil.fastReplace("\n" + text.substring(0, index) + modifier + text.substring(index + name.length()), "- -", "-");
                 String trimSecond = TextUtil.fastReplace(trimFirst, name+" "+cId, name);
                 newtext = TextUtil.fastReplace(trimSecond, " "+cId, name);
 
