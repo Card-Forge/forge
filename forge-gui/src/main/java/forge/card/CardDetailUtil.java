@@ -285,7 +285,7 @@ public class CardDetailUtil {
             if (card.getCloneOrigin() == null)
                 needTranslation = false;
         }
-        final String text = !card.isSplitCard() ?
+        String text = !card.isSplitCard() ?
             card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null) :
             card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(card.getLeftSplitState().getName(), card.getRightSplitState().getName()) : null );
 
