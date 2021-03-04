@@ -736,6 +736,7 @@ public final class StaticAbilityContinuous {
                         if (abilty.startsWith("AB") || abilty.startsWith("ST")) { // grant the ability
                             final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard, stAb);
                             sa.setIntrinsic(false);
+                            sa.setGrantorStatic(stAb);
                             addedAbilities.add(sa);
                         }
                     }

@@ -21,6 +21,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.CardStateName;
+import forge.game.CardTraitBase;
 import forge.game.IHasSVars;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
@@ -226,7 +227,14 @@ public final class AbilityFactory {
             msg.append(". Looking for API: ").append(api);
             throw new RuntimeException(msg.toString());
         }
-        spellAbility.setCardState(state);
+
+        if (sVarHolder instanceof CardState) {
+            spellAbility.setCardState((CardState)sVarHolder);
+        } else if (sVarHolder instanceof CardTraitBase) {
+            spellAbility.setCardState(((CardTraitBase)sVarHolder).getCardState());
+        } else {
+            spellAbility.setCardState(state);
+        }
 
         if (mapParams.containsKey("Forecast")) {
             spellAbility.putParam("ActivationZone", "Hand");
