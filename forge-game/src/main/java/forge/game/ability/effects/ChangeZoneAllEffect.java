@@ -223,6 +223,19 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
             if (!movedCard.getZone().equals(originZone)) {
                 triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
+
+                if (c.getMeldedWith() != null) {
+                    Card meld = game.getCardState(c.getMeldedWith(), null);
+                    if (meld != null) {
+                        triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), meld);
+                    }
+                }
+                if (c.hasMergedCard()) {
+                    for (final Card cm : c.getMergedCards()) {
+                        if (cm == c) continue;
+                        triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), cm);
+                    }
+                }
             }
         }
 
