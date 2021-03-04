@@ -68,8 +68,10 @@ public class RollDiceEffect extends SpellAbilityEffect {
                 total += roll;
             }
 
-            String message = Localizer.getInstance().getMessage("lblPlayerRolledResult", player, StringUtils.join(rolls, ", "));
-            player.getGame().getAction().nofityOfValue(sa, player, message, null);
+            if (amount > 0) {
+                String message = Localizer.getInstance().getMessage("lblPlayerRolledResult", player, StringUtils.join(rolls, ", "));
+                player.getGame().getAction().nofityOfValue(sa, player, message, null);
+            }
 
             if (sa.hasParam("ResultSVar")) {
                 host.setSVar(sa.getParam("ResultSVar"), ""+total);

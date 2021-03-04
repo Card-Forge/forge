@@ -728,16 +728,28 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
             if (!movedCard.getZone().equals(originZone)) {
+                Card meld = null;
                 triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
+
+                if (gameCard.getMeldedWith() != null) {
+                    meld = game.getCardState(gameCard.getMeldedWith(), null);
+                    if (meld != null) {
+                        triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), meld);
+                    }
+                }
+                if (gameCard.hasMergedCard()) {
+                    for (final Card c : gameCard.getMergedCards()) {
+                        if (c == gameCard) continue;
+                        triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), c);
+                    }
+                }
+
 
                 if (remember != null) {
                     hostCard.addRemembered(movedCard);
                     // addRememberedFromCardState ?
-                    if (gameCard.getMeldedWith() != null) {
-                        Card meld = game.getCardState(gameCard.getMeldedWith(), null);
-                        if (meld != null) {
-                            hostCard.addRemembered(meld);
-                        }
+                    if (meld != null) {
+                        hostCard.addRemembered(meld);
                     }
                     if (gameCard.hasMergedCard()) {
                         for (final Card c : gameCard.getMergedCards()) {
