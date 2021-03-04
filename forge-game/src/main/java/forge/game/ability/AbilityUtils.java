@@ -547,6 +547,10 @@ public class AbilityUtils {
             return val * multiplier;
         }
 
+        if (calcX[0].equals("OriginalHost")) {
+            return AbilityUtils.xCount(ability.getOriginalHost(), calcX[1], ability) * multiplier;
+        }
+
         if (calcX[0].startsWith("Remembered")) {
             // Add whole Remembered list to handlePaid
             final CardCollection list = new CardCollection();

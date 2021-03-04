@@ -5,11 +5,8 @@ K:Enchant creature
 A:SP$ Attach | Cost$ W | AILogic$ Pump | ValidTgts$ Creature
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put an arrow counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ ARROW | CounterNum$ 1
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ ArcheryDamage | AddSVar$ DBArcheryDamage & ArcheryX & DBArcheryCleanup | Description$ Enchanted creature has "{T}: This creature deals X damage to target attacking or blocking creature, where X is the number of arrow counters on CARDNAME."
-SVar:ArcheryDamage:AB$ Pump | Cost$ T | ImprintCards$ OriginalHost | SubAbility$ DBArcheryDamage | SpellDescription$ CARDNAME deals X damage to target attacking or blocking creature, where X is the number of arrow counters on ORIGINALHOST.
-SVar:DBArcheryDamage:DB$ DealDamage | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ ArcheryX | References$ ArcheryX | SubAbility$ DBArcheryCleanup
-SVar:ArcheryX:Count$TotalCounters_ARROW_Card.IsImprinted+namedArchery Training
-SVar:DBArcheryCleanup:DB$ Pump | ForgetImprinted$ OriginalHost | StackDescription$ None
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ ArcheryDamage | Description$ Enchanted creature has "{T}: This creature deals X damage to target attacking or blocking creature, where X is the number of arrow counters on CARDNAME."
+SVar:ArcheryDamage:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ ArcheryX | SpellDescription$ CARDNAME deals X damage to target attacking or blocking creature, where X is the number of arrow counters on ORIGINALHOST.
+SVar:ArcheryX:OriginalHost$CardCounters.ARROW
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/archery_training.jpg
 Oracle:Enchant creature\nAt the beginning of your upkeep, you may put an arrow counter on Archery Training.\nEnchanted creature has "{T}: This creature deals X damage to target attacking or blocking creature, where X is the number of arrow counters on Archery Training."
