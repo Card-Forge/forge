@@ -50,12 +50,16 @@ public class AssetsDownloader {
                                 "https://releases.cardforge.org/forge/forge-gui-android/" + version + "/" + filename,
                                 Forge.getDeviceAdapter().getDownloadsDir(), null, splashScreen.getProgressBar()).download(filename);
                         if (apkFile != null) {
-                            if (Forge.androidVersion < 29) { //Android 9 and below...
+                            /* FileUriExposedException was added on API 24, Forge now targets API 26 so Android 10 and above runs,
+                            most user thinks Forge crashes but in reality, the method below just can't open the apk when Forge
+                            exits silently to run the downloaded apk. Some devices allow the apk to run but most users are annoyed when
+                            Forge didn't open the apk so I downgrade the check so it will run only on target devices without FileUriExposedException */
+                            if (Forge.androidVersion < 24) {
                                 Forge.getDeviceAdapter().openFile(apkFile);
                                 Forge.exit(true);
                                 return;
                             }
-                            //Android 10 and newer manual apk installation
+                            // API 24 and above needs manual apk installation unless we provide a FileProvider for FileUriExposedException
                             switch (SOptionPane.showOptionDialog("Download Successful. Go to your downloads folder and install " + filename +" to update Forge. Forge will now exit.", "", null, ImmutableList.of("Ok"))) {
                                 default:
                                     Forge.exit(true);
