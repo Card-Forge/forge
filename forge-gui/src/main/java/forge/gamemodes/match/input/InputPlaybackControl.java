@@ -1,9 +1,9 @@
 package forge.gamemodes.match.input;
 
-import forge.control.FControlGamePlayback;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
+import forge.gui.control.FControlGamePlayback;
 
 public class InputPlaybackControl extends InputSyncronizedBase {
     private static final long serialVersionUID = 7979208993306642072L;

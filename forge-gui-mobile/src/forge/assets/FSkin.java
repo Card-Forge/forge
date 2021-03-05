@@ -14,9 +14,9 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import forge.FThreads;
 import forge.assets.FSkinImage.SourceFile;
 import forge.card.CardFaceSymbols;
+import forge.gui.FThreads;
 import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;

@@ -23,8 +23,8 @@ import com.google.common.collect.Iterators;
 import com.google.common.primitives.Ints;
 
 import forge.Singletons;
-import forge.UiCommand;
 import forge.gui.SOverlayUtils;
+import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SLayoutIO;
 import forge.localinstance.assets.FSkinProp;

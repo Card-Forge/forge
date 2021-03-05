@@ -3,6 +3,7 @@ package forge;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.gamemodes.limited.CardRanker;
+import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;

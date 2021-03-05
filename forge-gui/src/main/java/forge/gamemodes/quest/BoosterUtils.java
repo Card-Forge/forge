@@ -21,9 +21,15 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import forge.card.*;
+
+import forge.card.CardEdition;
+import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
+import forge.card.MagicColor;
+import forge.card.PrintSheet;
 import forge.game.GameFormat;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
+import forge.gui.card.*;
 import forge.item.*;
 import forge.item.IPaperCard.Predicates.Presets;
 import forge.model.FModel;

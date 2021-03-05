@@ -2,7 +2,7 @@ package forge.itemmanager.filters;
 
 import com.google.common.base.Predicate;
 
-import forge.UiCommand;
+import forge.gui.UiCommand;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;

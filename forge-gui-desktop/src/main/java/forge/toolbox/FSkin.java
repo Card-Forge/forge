@@ -17,8 +17,8 @@
  */
 package forge.toolbox;
 
-import forge.FThreads;
 import forge.Singletons;
+import forge.gui.FThreads;
 import forge.gui.GuiUtils;
 import forge.gui.framework.ILocalRepaint;
 import forge.localinstance.assets.FSkinProp;

@@ -19,13 +19,14 @@ package forge.screens.deckeditor.controllers;
 
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
-import forge.UiCommand;
+
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestEventDraft;
+import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.InventoryItem;

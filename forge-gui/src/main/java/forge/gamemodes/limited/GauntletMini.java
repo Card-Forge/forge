@@ -20,11 +20,11 @@ package forge.gamemodes.limited;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.GuiBase;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
+import forge.gui.GuiBase;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Aggregates;

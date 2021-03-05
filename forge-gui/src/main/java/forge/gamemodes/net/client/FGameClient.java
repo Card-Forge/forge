@@ -26,7 +26,7 @@ import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.LobbyUpdateEvent;
 import forge.gamemodes.net.event.MessageEvent;
 import forge.gamemodes.net.event.NetEvent;
-import forge.interfaces.IGuiGame;
+import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 
 public class FGameClient implements IToServer {

@@ -285,7 +285,7 @@ public enum VHomeUI implements IVTopLevelUI {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.framework.IVTopLevelUI#onClosing(forge.control.FControl.Screens)
+     * @see forge.gui.framework.IVTopLevelUI#onClosing(forge.gui.control.FControl.Screens)
      */
     @Override
     public boolean onClosing(FScreen screen) {

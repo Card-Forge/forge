@@ -1,9 +1,8 @@
 package forge.screens.online;
 
 import com.google.common.collect.ImmutableList;
-import forge.FThreads;
+
 import forge.Forge;
-import forge.GuiBase;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.net.ChatMessage;
 import forge.gamemodes.net.IOnlineChatInterface;
@@ -12,13 +11,15 @@ import forge.gamemodes.net.NetConnectUtil;
 import forge.gamemodes.net.OfflineLobby;
 import forge.gamemodes.net.client.FGameClient;
 import forge.gamemodes.net.server.FServerManager;
-import forge.interfaces.ILobbyView;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
+import forge.gui.interfaces.ILobbyView;
+import forge.gui.util.SOptionPane;
 import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.properties.ForgeConstants;
 import forge.screens.LoadingOverlay;
 import forge.screens.constructed.LobbyScreen;
 import forge.screens.online.OnlineMenu.OnlineScreen;
-import forge.util.gui.SOptionPane;
 import forge.util.Localizer;
 
 public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {

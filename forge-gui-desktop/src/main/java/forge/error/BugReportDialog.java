@@ -40,6 +40,7 @@ import javax.swing.KeyStroke;
 import forge.model.FModel;
 import net.miginfocom.swing.MigLayout;
 import forge.gui.WrapLayout;
+import forge.gui.error.BugReporter;
 import forge.localinstance.properties.ForgePreferences;
 
 /**

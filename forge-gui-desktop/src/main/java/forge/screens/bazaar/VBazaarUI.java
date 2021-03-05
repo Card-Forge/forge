@@ -1,8 +1,8 @@
 package forge.screens.bazaar;
 
-import forge.GuiBase;
-import forge.UiCommand;
 import forge.gamemodes.quest.bazaar.QuestBazaarManager;
+import forge.gui.GuiBase;
+import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
 import forge.localinstance.assets.FSkinProp;

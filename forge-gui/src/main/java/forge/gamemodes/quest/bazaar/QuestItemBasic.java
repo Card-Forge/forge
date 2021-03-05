@@ -21,9 +21,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
-import forge.GuiBase;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.data.QuestAssets;
+import forge.gui.GuiBase;
 import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.assets.ISkinImage;
 

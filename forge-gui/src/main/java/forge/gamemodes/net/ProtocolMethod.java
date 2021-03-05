@@ -1,7 +1,7 @@
 package forge.gamemodes.net;
 
 import com.google.common.base.Function;
-import forge.GuiBase;
+
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
@@ -11,8 +11,9 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gui.GuiBase;
+import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
-import forge.interfaces.IGuiGame;
 import forge.localinstance.assets.FSkinProp;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;

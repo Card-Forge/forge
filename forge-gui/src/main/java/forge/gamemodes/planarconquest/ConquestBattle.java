@@ -6,9 +6,9 @@ import forge.LobbyPlayer;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.GameView;
-import forge.interfaces.IButton;
-import forge.interfaces.IGuiGame;
-import forge.interfaces.IWinLoseView;
+import forge.gui.interfaces.IButton;
+import forge.gui.interfaces.IGuiGame;
+import forge.gui.interfaces.IWinLoseView;
 import forge.item.PaperCard;
 import forge.util.Localizer;
 

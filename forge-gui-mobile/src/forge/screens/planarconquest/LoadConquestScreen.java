@@ -11,7 +11,6 @@ import java.util.Map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Align;
 
-import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -21,6 +20,8 @@ import forge.gamemodes.planarconquest.ConquestData;
 import forge.gamemodes.planarconquest.ConquestPreferences;
 import forge.gamemodes.planarconquest.ConquestPreferences.CQPref;
 import forge.gamemodes.quest.QuestUtil;
+import forge.gui.FThreads;
+import forge.gui.util.SOptionPane;
 import forge.localinstance.properties.ForgeConstants;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -38,7 +39,6 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
-import forge.util.gui.SOptionPane;
 import forge.util.Localizer;
 
 public class LoadConquestScreen extends LaunchScreen {

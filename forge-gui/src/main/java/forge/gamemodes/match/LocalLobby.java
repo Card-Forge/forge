@@ -2,8 +2,8 @@ package forge.gamemodes.match;
 
 import java.util.Collections;
 
-import forge.GuiBase;
-import forge.interfaces.IGuiGame;
+import forge.gui.GuiBase;
+import forge.gui.interfaces.IGuiGame;
 
 public final class LocalLobby extends GameLobby {
 

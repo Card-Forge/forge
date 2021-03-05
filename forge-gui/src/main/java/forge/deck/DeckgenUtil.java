@@ -24,6 +24,7 @@ import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestEvent;
 import forge.gamemodes.quest.QuestEventChallenge;
 import forge.gamemodes.quest.QuestEventDuel;
+import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.itemmanager.IItemManager;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -31,7 +32,6 @@ import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.MyRandom;
-import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 import org.apache.commons.lang3.tuple.Pair;
 

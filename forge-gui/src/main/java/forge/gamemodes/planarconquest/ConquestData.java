@@ -21,6 +21,7 @@ import com.google.common.base.Function;
 
 import forge.card.CardDb;
 import forge.gamemodes.planarconquest.ConquestPreferences.CQPref;
+import forge.gui.util.SOptionPane;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
@@ -33,7 +34,6 @@ import forge.model.FModel;
 import forge.util.FileUtil;
 import forge.util.XmlReader;
 import forge.util.XmlWriter;
-import forge.util.gui.SOptionPane;
 import forge.util.Localizer;
 import forge.util.CardTranslation;
 

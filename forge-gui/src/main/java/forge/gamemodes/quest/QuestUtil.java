@@ -19,8 +19,6 @@ package forge.gamemodes.quest;
 
 import com.google.common.collect.ImmutableMap;
 
-import forge.FThreads;
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.card.CardDb.SetPreference;
 import forge.card.CardEdition;
@@ -36,8 +34,12 @@ import forge.gamemodes.quest.bazaar.QuestPetController;
 import forge.gamemodes.quest.data.DeckConstructionRules;
 import forge.gamemodes.quest.data.QuestAchievements;
 import forge.gamemodes.quest.data.QuestAssets;
-import forge.interfaces.IButton;
-import forge.interfaces.IGuiGame;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
+import forge.gui.interfaces.IButton;
+import forge.gui.interfaces.IGuiGame;
+import forge.gui.util.SGuiChoose;
+import forge.gui.util.SOptionPane;
 import forge.item.IPaperCard;
 import forge.item.PaperToken;
 import forge.localinstance.assets.FSkinProp;
@@ -45,8 +47,6 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Localizer;
-import forge.util.gui.SGuiChoose;
-import forge.util.gui.SOptionPane;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 

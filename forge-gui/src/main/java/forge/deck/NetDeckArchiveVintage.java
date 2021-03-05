@@ -5,15 +5,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
-import forge.GuiBase;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.DeckStorage;
-import forge.download.GuiDownloadZipService;
 import forge.game.GameType;
+import forge.gui.GuiBase;
+import forge.gui.download.GuiDownloadZipService;
+import forge.gui.util.SGuiChoose;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.WaitCallback;
-import forge.util.gui.SGuiChoose;
 import forge.util.storage.StorageBase;
 
 public class NetDeckArchiveVintage extends StorageBase<Deck> {

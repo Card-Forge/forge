@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
-import forge.interfaces.IGuiGame;
+import forge.gui.interfaces.IGuiGame;
 
 public final class ServerGameLobby extends GameLobby {
 

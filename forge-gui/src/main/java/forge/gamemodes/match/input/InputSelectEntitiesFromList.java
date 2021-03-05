@@ -1,12 +1,12 @@
 package forge.gamemodes.match.input;
 
-import forge.FThreads;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
+import forge.gui.FThreads;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;

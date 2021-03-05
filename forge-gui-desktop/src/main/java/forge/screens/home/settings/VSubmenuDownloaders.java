@@ -2,11 +2,11 @@ package forge.screens.home.settings;
 
 import forge.ImageKeys;
 import forge.StaticData;
-import forge.UiCommand;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardEdition.CardInSet;
 import forge.gui.SOverlayUtils;
+import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;

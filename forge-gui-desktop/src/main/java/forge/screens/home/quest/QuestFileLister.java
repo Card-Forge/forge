@@ -1,8 +1,8 @@
 package forge.screens.home.quest;
 
-import forge.UiCommand;
 import forge.gamemodes.quest.QuestUtil;
 import forge.gamemodes.quest.data.QuestData;
+import forge.gui.UiCommand;
 import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
@@ -312,17 +312,17 @@ public class QuestFileLister extends JPanel {
         return false;
     }
 
-    /** @param c0 &emsp; {@link forge.UiCommand} command executed on row select. */
+    /** @param c0 &emsp; {@link forge.forge.gui.UiCommand} command executed on row select. */
     public void setSelectCommand(UiCommand c0) {
         this.cmdRowSelect = c0;
     }
 
-    /** @param c0 &emsp; {@link forge.UiCommand} command executed on row edit. */
+    /** @param c0 &emsp; {@link forge.forge.gui.UiCommand} command executed on row edit. */
     public void setEditCommand(UiCommand c0) {
         this.cmdRowEdit = c0;
     }
 
-    /** @param c0 &emsp; {@link forge.UiCommand} command executed on delete. */
+    /** @param c0 &emsp; {@link forge.forge.gui.UiCommand} command executed on delete. */
     public void setDeleteCommand(UiCommand c0) {
         this.cmdRowDelete = c0;
     }

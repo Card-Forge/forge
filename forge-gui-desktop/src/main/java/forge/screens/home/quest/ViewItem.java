@@ -1,10 +1,10 @@
 package forge.screens.home.quest;
 
-import forge.GuiBase;
-import forge.UiCommand;
 import forge.gamemodes.quest.QuestUtil;
 import forge.gamemodes.quest.bazaar.IQuestBazaarItem;
 import forge.gamemodes.quest.data.QuestAssets;
+import forge.gui.GuiBase;
+import forge.gui.UiCommand;
 import forge.localinstance.assets.FSkinProp;
 import forge.model.FModel;
 import forge.screens.bazaar.VBazaarUI;

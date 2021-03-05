@@ -2,7 +2,6 @@ package forge.screens.limited;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.FThreads;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.FDeckEditor;
@@ -10,6 +9,7 @@ import forge.deck.io.DeckPreferences;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.quest.QuestEventDraft;
 import forge.gamemodes.quest.QuestTournamentController;
+import forge.gui.FThreads;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.home.LoadGameMenu.LoadGameScreen;

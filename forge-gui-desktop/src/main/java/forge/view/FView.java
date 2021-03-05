@@ -2,9 +2,9 @@ package forge.view;
 
 import com.google.common.collect.Lists;
 import forge.Singletons;
-import forge.UiCommand;
 import forge.gui.ImportDialog;
 import forge.gui.SOverlayUtils;
+import forge.gui.UiCommand;
 import forge.gui.framework.*;
 import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.properties.ForgeConstants;

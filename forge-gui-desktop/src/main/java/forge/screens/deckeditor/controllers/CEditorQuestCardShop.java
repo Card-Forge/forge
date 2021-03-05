@@ -17,12 +17,12 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import forge.UiCommand;
 import forge.deck.DeckBase;
 import forge.game.GameType;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestSpellShop;
 import forge.gamemodes.quest.QuestUtil;
+import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.*;

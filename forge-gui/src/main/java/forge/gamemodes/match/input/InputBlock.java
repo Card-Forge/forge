@@ -17,8 +17,6 @@
  */
 package forge.gamemodes.match.input;
 
-import forge.FThreads;
-import forge.events.UiEventBlockerAssigned;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
@@ -29,6 +27,8 @@ import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventCombatUpdate;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.FThreads;
+import forge.gui.events.UiEventBlockerAssigned;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.ThreadUtil;

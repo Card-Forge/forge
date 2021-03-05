@@ -12,8 +12,9 @@ import forge.gamemodes.quest.bazaar.QuestItemType;
 import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gamemodes.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
-import forge.interfaces.IButton;
-import forge.interfaces.IWinLoseView;
+import forge.gui.interfaces.IButton;
+import forge.gui.interfaces.IWinLoseView;
+import forge.gui.util.SGuiChoose;
 import forge.item.*;
 import forge.item.IPaperCard.Predicates;
 import forge.item.generation.BoosterSlots;
@@ -26,7 +27,7 @@ import forge.player.GamePlayerUtil;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
-import forge.util.gui.SGuiChoose;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 

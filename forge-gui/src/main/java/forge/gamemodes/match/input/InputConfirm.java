@@ -21,10 +21,10 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 
-import forge.GuiBase;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.spellability.SpellAbility;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;

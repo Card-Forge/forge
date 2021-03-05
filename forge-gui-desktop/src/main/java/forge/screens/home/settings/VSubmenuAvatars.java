@@ -1,6 +1,6 @@
 package forge.screens.home.settings;
 
-import forge.UiCommand;
+import forge.gui.UiCommand;
 import forge.gui.WrapLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;

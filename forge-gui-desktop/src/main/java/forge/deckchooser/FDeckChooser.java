@@ -19,14 +19,14 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
 
-import forge.FThreads;
-import forge.UiCommand;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestEvent;
 import forge.gamemodes.quest.QuestEventChallenge;
 import forge.gamemodes.quest.QuestUtil;
+import forge.gui.FThreads;
+import forge.gui.UiCommand;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerContainer;

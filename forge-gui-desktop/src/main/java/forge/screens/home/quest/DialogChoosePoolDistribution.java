@@ -1,9 +1,9 @@
 package forge.screens.home.quest;
 
-import forge.UiCommand;
 import forge.card.MagicColor;
 import forge.gamemodes.quest.StartingPoolPreferences.PoolType;
 import forge.gui.SOverlayUtils;
+import forge.gui.UiCommand;
 import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.*;
 import forge.util.Localizer;

@@ -7,7 +7,6 @@ import java.util.Set;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
-import forge.GuiBase;
 import forge.GuiDesktop;
 import forge.StaticData;
 import forge.ai.AIOption;
@@ -25,6 +24,7 @@ import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiBase;
 import forge.item.IPaperCard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;

@@ -17,10 +17,10 @@
  */
 package forge.view.arcane;
 
-import forge.FThreads;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.gui.FThreads;
 import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;

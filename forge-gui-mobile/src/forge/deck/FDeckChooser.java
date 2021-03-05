@@ -1,12 +1,9 @@
 package forge.deck;
 
-import forge.FThreads;
 import forge.Forge;
-import forge.GuiBase;
 import forge.assets.ImageCache;
 import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
-import forge.error.BugReporter;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.gauntlet.GauntletData;
@@ -16,7 +13,10 @@ import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestEvent;
 import forge.gamemodes.quest.QuestEventChallenge;
 import forge.gamemodes.quest.QuestUtil;
-import forge.interfaces.IGuiGame;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
+import forge.gui.error.BugReporter;
+import forge.gui.interfaces.IGuiGame;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;

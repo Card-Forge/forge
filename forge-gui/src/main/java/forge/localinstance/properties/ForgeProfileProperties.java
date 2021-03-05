@@ -27,7 +27,7 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import forge.GuiBase;
+import forge.gui.GuiBase;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 

@@ -20,10 +20,10 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
-import forge.interfaces.ILobbyView;
+import forge.gui.interfaces.ILobbyView;
+import forge.gui.util.SOptionPane;
 import forge.toolbox.FButton;
 import forge.toolbox.FSkin;
-import forge.util.gui.SOptionPane;
 import forge.util.Localizer;
 
 public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnlineLobby, IVTopLevelUI {

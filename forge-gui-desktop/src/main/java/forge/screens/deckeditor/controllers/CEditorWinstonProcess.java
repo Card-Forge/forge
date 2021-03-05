@@ -18,7 +18,6 @@
 package forge.screens.deckeditor.controllers;
 
 import forge.Singletons;
-import forge.UiCommand;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -28,6 +27,7 @@ import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.IBoosterDraft;
 import forge.gamemodes.limited.WinstonDraft;
+import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;

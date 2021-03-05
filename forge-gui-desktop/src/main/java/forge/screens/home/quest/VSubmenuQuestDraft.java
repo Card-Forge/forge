@@ -1,6 +1,5 @@
 package forge.screens.home.quest;
 
-import forge.GuiBase;
 import forge.Singletons;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
@@ -8,6 +7,7 @@ import forge.gamemodes.quest.IQuestTournamentView;
 import forge.gamemodes.quest.QuestEventDraft;
 import forge.gamemodes.quest.QuestDraftUtils.Mode;
 import forge.gamemodes.quest.data.QuestEventDraftContainer;
+import forge.gui.GuiBase;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;

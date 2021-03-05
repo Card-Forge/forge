@@ -3,13 +3,15 @@ package forge.assets;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.google.common.collect.ImmutableList;
-import forge.FThreads;
+
 import forge.Forge;
-import forge.download.GuiDownloadZipService;
+import forge.gui.FThreads;
+import forge.gui.download.GuiDownloadZipService;
+import forge.gui.util.SOptionPane;
 import forge.localinstance.properties.ForgeConstants;
 import forge.screens.SplashScreen;
 import forge.util.FileUtil;
-import forge.util.gui.SOptionPane;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;

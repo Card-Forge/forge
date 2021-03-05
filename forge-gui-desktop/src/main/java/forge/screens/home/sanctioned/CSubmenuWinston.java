@@ -8,9 +8,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
-import forge.GuiBase;
 import forge.Singletons;
-import forge.UiCommand;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckProxy;
@@ -19,8 +17,10 @@ import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.limited.WinstonDraft;
 import forge.gamemodes.match.HostedMatch;
+import forge.gui.GuiBase;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
+import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
@@ -54,7 +54,7 @@ public enum CSubmenuWinston implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void initialize() {
@@ -78,7 +78,7 @@ public enum CSubmenuWinston implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void update() {

@@ -4,7 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import forge.GuiBase;
+
 import forge.GuiDesktop;
 import forge.LobbyPlayer;
 import forge.StaticData;
@@ -21,6 +21,7 @@ import forge.gamemodes.tournament.system.AbstractTournament;
 import forge.gamemodes.tournament.system.TournamentPairing;
 import forge.gamemodes.tournament.system.TournamentPlayer;
 import forge.gamemodes.tournament.system.TournamentSwiss;
+import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;

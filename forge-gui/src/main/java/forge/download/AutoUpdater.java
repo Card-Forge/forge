@@ -1,14 +1,17 @@
 package forge.download;
 
 import com.google.common.collect.ImmutableList;
-import forge.GuiBase;
+
+import forge.gui.GuiBase;
+import forge.gui.download.GuiDownloadZipService;
+import forge.gui.util.SOptionPane;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.WaitCallback;
-import forge.util.gui.SOptionPane;
+
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;

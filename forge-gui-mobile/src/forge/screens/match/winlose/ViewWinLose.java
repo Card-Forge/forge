@@ -2,7 +2,7 @@ package forge.screens.match.winlose;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Align;
-import forge.FThreads;
+
 import forge.Forge;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -10,7 +10,10 @@ import forge.assets.FSkinFont;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.game.GameView;
-import forge.interfaces.IWinLoseView;
+import forge.gui.FThreads;
+import forge.gui.interfaces.IWinLoseView;
+import forge.gui.util.SGuiChoose;
+import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.localinstance.assets.FSkinProp;
 import forge.menu.FMagnifyView;
@@ -25,8 +28,7 @@ import forge.toolbox.FOverlay;
 import forge.toolbox.FTextArea;
 import forge.util.Localizer;
 import forge.util.Utils;
-import forge.util.gui.SGuiChoose;
-import forge.util.gui.SOptionPane;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;

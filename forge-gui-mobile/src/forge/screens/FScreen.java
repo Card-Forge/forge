@@ -8,10 +8,10 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
-import forge.GuiBase;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
+import forge.gui.GuiBase;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.menu.FPopupMenu;

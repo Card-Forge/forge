@@ -32,9 +32,9 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.JButton;
 
-import forge.FThreads;
 import forge.game.GameView;
 import forge.game.card.CardView;
+import forge.gui.FThreads;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.localinstance.properties.ForgePreferences;

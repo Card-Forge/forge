@@ -17,7 +17,7 @@
  */
 package forge.screens.match.views;
 
-import forge.UiCommand;
+import forge.gui.UiCommand;
 import forge.gui.framework.*;
 import forge.localinstance.assets.FSkinProp;
 import forge.screens.match.controllers.CDock;

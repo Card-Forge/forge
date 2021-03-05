@@ -1,6 +1,5 @@
 package forge.gamemodes.net;
 
-import forge.GuiBase;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.channel.ChannelHandlerContext;
@@ -9,6 +8,8 @@ import net.jpountz.lz4.LZ4BlockOutputStream;
 
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+
+import forge.gui.GuiBase;
 
 public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> {
     private static final byte[] LENGTH_PLACEHOLDER = new byte[4];

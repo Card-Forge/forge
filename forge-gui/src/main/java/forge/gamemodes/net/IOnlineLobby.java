@@ -2,7 +2,7 @@ package forge.gamemodes.net;
 
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.net.client.FGameClient;
-import forge.interfaces.ILobbyView;
+import forge.gui.interfaces.ILobbyView;
 
 public interface IOnlineLobby {
     ILobbyView setLobby(GameLobby lobby);

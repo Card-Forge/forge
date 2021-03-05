@@ -1,6 +1,6 @@
 package forge.gamemodes.planarconquest;
 
-import forge.interfaces.IButton;
+import forge.gui.interfaces.IButton;
 
 public interface IVConquestStats {
     IButton getLblAEtherShards();

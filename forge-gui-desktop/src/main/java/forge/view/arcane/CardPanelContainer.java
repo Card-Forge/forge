@@ -29,8 +29,8 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
-import forge.FThreads;
 import forge.game.card.CardView;
+import forge.gui.FThreads;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin.SkinnedPanel;

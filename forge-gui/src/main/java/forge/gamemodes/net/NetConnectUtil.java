@@ -2,7 +2,6 @@ package forge.gamemodes.net;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.GuiBase;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.net.client.ClientGameLobby;
@@ -13,9 +12,11 @@ import forge.gamemodes.net.event.NetEvent;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.net.server.ServerGameLobby;
-import forge.interfaces.IGuiGame;
+import forge.gui.GuiBase;
+import forge.gui.interfaces.IGuiGame;
+import forge.gui.interfaces.ILobbyView;
+import forge.gui.util.SOptionPane;
 import forge.interfaces.ILobbyListener;
-import forge.interfaces.ILobbyView;
 import forge.interfaces.IPlayerChangeListener;
 import forge.interfaces.IUpdateable;
 import forge.localinstance.properties.ForgeConstants;
@@ -23,7 +24,6 @@ import forge.localinstance.properties.ForgeProfileProperties;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
-import forge.util.gui.SOptionPane;
 import forge.util.Localizer;
 
 public class NetConnectUtil {

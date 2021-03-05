@@ -1,10 +1,8 @@
 package forge.screens.limited;
 
 import com.badlogic.gdx.utils.Align;
-import forge.FThreads;
 
 import forge.Forge;
-import forge.GuiBase;
 import forge.assets.FSkinFont;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -16,6 +14,9 @@ import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
+import forge.gui.util.SGuiChoose;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;
@@ -30,7 +31,6 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.gui.SGuiChoose;
 import forge.util.Localizer;
 import java.util.ArrayList;
 import java.util.List;

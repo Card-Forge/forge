@@ -5,7 +5,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.Singletons;
-import forge.UiCommand;
 import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
@@ -17,6 +16,7 @@ import forge.deck.generation.DeckGenerator3Color;
 import forge.deck.generation.DeckGenerator5Color;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.deck.generation.DeckGeneratorMonoColor;
+import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;

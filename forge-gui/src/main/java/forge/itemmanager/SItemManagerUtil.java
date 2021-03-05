@@ -1,11 +1,12 @@
 package forge.itemmanager;
 
 import com.google.common.base.Predicate;
-import forge.GuiBase;
+
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.deck.DeckProxy;
-import forge.interfaces.IComboBox;
+import forge.gui.GuiBase;
+import forge.gui.interfaces.IComboBox;
 import forge.item.InventoryItem;
 import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.assets.IHasSkinProp;

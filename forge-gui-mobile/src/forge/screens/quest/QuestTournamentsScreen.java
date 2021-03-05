@@ -3,9 +3,7 @@ package forge.screens.quest;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
-import forge.FThreads;
 import forge.Forge;
-import forge.GuiBase;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -23,6 +21,8 @@ import forge.gamemodes.quest.QuestEventDraft;
 import forge.gamemodes.quest.QuestTournamentController;
 import forge.gamemodes.quest.QuestDraftUtils.Mode;
 import forge.gamemodes.quest.data.QuestEventDraftContainer;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;

@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
-import forge.UiCommand;
 import forge.deck.Deck;
 import forge.deck.DeckType;
 import forge.deckchooser.FDeckChooser;
@@ -17,6 +16,7 @@ import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.gauntlet.GauntletData;
 import forge.gamemodes.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
+import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;

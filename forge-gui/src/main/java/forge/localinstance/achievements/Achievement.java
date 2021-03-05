@@ -6,9 +6,9 @@ import java.util.Locale;
 
 import org.w3c.dom.Element;
 
-import forge.GuiBase;
 import forge.game.Game;
 import forge.game.player.Player;
+import forge.gui.GuiBase;
 import forge.item.IPaperCard;
 import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.assets.ISkinImage;

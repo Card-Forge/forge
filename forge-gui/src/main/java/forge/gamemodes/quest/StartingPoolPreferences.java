@@ -50,7 +50,7 @@ public final class StartingPoolPreferences {
      * Creates a new StartingPoolPreferences instance.
      * @param poolType The type of card pool to generate.
      * @param preferredColors A list of preferred colors to use when generating the card pool.
-     *                        See {@link forge.card.MagicColor} for allowed values.
+     *                        See {@link forge.gui.card.MagicColor} for allowed values.
      * @param includeArtifacts If true, artifacts will be included in the pool regardless of selected colors. This
      *                         mimics the old quest pool generation.
      * @param completeSet If true, four of each card in the starting pool will be generated.
@@ -73,7 +73,7 @@ public final class StartingPoolPreferences {
     }
 
     /**
-     * @return A list of colors to use when generating the card pool. See {@link forge.card.MagicColor} for allowed values.
+     * @return A list of colors to use when generating the card pool. See {@link forge.gui.card.MagicColor} for allowed values.
      */
     public List<Byte> getPreferredColors() {
         return preferredColors;

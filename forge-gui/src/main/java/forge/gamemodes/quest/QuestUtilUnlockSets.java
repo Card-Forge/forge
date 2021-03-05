@@ -31,16 +31,16 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.GuiBase;
 import forge.card.CardEdition;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.gamemodes.quest.io.ReadPriceList;
+import forge.gui.GuiBase;
+import forge.gui.util.SGuiChoose;
+import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
-import forge.util.gui.SGuiChoose;
-import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 
 /** 

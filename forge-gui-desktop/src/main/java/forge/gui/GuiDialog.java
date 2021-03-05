@@ -9,7 +9,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
 
-import forge.FThreads;
 import forge.game.card.CardView;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FOptionPane;

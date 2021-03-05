@@ -7,7 +7,7 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.JPanel;
 
-import forge.UiCommand;
+import forge.gui.UiCommand;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.toolbox.FLabel;

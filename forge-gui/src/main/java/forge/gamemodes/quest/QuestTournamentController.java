@@ -6,7 +6,6 @@ import java.util.List;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
-import forge.GuiBase;
 import forge.deck.DeckGroup;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
@@ -17,7 +16,10 @@ import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gamemodes.tournament.system.TournamentBracket;
 import forge.gamemodes.tournament.system.TournamentPairing;
 import forge.gamemodes.tournament.system.TournamentPlayer;
-import forge.interfaces.IGuiGame;
+import forge.gui.GuiBase;
+import forge.gui.interfaces.IGuiGame;
+import forge.gui.util.SGuiChoose;
+import forge.gui.util.SOptionPane;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.localinstance.assets.FSkinProp;
@@ -25,8 +27,6 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.TextUtil;
 import forge.util.ThreadUtil;
-import forge.util.gui.SGuiChoose;
-import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 import forge.util.Localizer;
 

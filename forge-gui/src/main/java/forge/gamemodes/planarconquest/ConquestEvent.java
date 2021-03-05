@@ -8,7 +8,7 @@ import forge.LobbyPlayer;
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
 import forge.game.GameType;
-import forge.interfaces.IGuiGame;
+import forge.gui.interfaces.IGuiGame;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;

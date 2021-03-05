@@ -3,11 +3,11 @@ package forge.screens.home.quest;
 import javax.swing.SwingUtilities;
 
 import forge.Singletons;
-import forge.UiCommand;
 import forge.deck.DeckProxy;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestUtil;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
+import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
@@ -52,7 +52,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void initialize() {
@@ -71,7 +71,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void update() {

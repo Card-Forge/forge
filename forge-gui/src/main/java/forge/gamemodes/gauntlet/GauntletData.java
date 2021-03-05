@@ -2,11 +2,11 @@ package forge.gamemodes.gauntlet;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-import forge.GuiBase;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 
 import java.io.File;

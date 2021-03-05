@@ -16,7 +16,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Ints;
 
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.ai.AIOption;
 import forge.deck.CardPool;
@@ -29,8 +28,10 @@ import forge.game.IHasGameType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
+import forge.gui.GuiBase;
+import forge.gui.interfaces.IGuiGame;
+import forge.gui.util.SOptionPane;
 import forge.interfaces.IGameController;
-import forge.interfaces.IGuiGame;
 import forge.interfaces.IUpdateable;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -38,7 +39,6 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Localizer;
 import forge.util.NameGenerator;
-import forge.util.gui.SOptionPane;
 
 public abstract class GameLobby implements IHasGameType {
     private final static int MAX_PLAYERS = 8;

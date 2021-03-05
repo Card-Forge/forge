@@ -19,11 +19,12 @@ package forge.screens.deckeditor.controllers;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import forge.UiCommand;
+
 import forge.deck.*;
 import forge.game.GameType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiUtils;
+import forge.gui.UiCommand;
 import forge.gui.framework.*;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;

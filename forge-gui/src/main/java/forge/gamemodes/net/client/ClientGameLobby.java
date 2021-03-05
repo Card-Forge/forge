@@ -1,7 +1,7 @@
 package forge.gamemodes.net.client;
 
 import forge.gamemodes.match.GameLobby;
-import forge.interfaces.IGuiGame;
+import forge.gui.interfaces.IGuiGame;
 
 public final class ClientGameLobby extends GameLobby {
     private int localPlayer = -1;

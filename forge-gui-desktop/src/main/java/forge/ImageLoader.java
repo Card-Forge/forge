@@ -2,7 +2,7 @@ package forge;
 
 import com.google.common.cache.CacheLoader;
 
-import forge.error.BugReporter;
+import forge.gui.error.BugReporter;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 

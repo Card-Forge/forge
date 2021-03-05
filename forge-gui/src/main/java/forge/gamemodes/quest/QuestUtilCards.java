@@ -23,6 +23,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.ICardDatabase;
@@ -36,6 +37,7 @@ import forge.gamemodes.quest.data.QuestAssets;
 import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gamemodes.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
+import forge.gui.card.*;
 import forge.item.*;
 import forge.item.SealedProduct.Template;
 import forge.item.generation.BoosterSlots;

@@ -2,10 +2,11 @@ package forge.screens.quest;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
-import forge.FThreads;
+
 import forge.assets.FSkinFont;
 import forge.gamemodes.quest.QuestEventDuel;
-import forge.interfaces.IButton;
+import forge.gui.FThreads;
+import forge.gui.interfaces.IButton;
 import forge.model.FModel;
 import forge.screens.LoadingOverlay;
 import forge.screens.home.HomeScreen;

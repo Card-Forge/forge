@@ -1,6 +1,5 @@
 package forge.gamemodes.net.server;
 
-import forge.GuiBase;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.CompatibleObjectDecoder;
@@ -11,8 +10,9 @@ import forge.gamemodes.net.event.LogoutEvent;
 import forge.gamemodes.net.event.MessageEvent;
 import forge.gamemodes.net.event.NetEvent;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
+import forge.gui.GuiBase;
+import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
-import forge.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;

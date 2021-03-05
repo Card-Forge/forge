@@ -18,11 +18,11 @@
 package forge.screens.match.views;
 
 import forge.CachedCardImage;
-import forge.card.CardDetailUtil;
-import forge.card.CardDetailUtil.DetailColors;
 import forge.game.GameView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.spellability.StackItemView;
+import forge.gui.card.CardDetailUtil;
+import forge.gui.card.CardDetailUtil.DetailColors;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;

@@ -21,7 +21,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
-import forge.UiCommand;
+
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
@@ -33,6 +33,7 @@ import forge.game.GameType;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.data.DeckConstructionRules;
 import forge.gui.GuiUtils;
+import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.InventoryItem;

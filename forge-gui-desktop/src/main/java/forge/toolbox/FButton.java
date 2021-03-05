@@ -35,9 +35,9 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 
-import forge.UiCommand;
+import forge.gui.UiCommand;
 import forge.gui.framework.ILocalRepaint;
-import forge.interfaces.IButton;
+import forge.gui.interfaces.IButton;
 import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinImage;

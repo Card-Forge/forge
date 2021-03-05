@@ -26,8 +26,8 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
 
-import forge.FThreads;
 import forge.Forge;
+import forge.gui.FThreads;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.LineReader;

@@ -17,7 +17,7 @@
  */
 package forge.localinstance.properties;
 
-import forge.GuiBase;
+import forge.gui.GuiBase;
 import forge.util.FileUtil;
 
 import java.io.File;

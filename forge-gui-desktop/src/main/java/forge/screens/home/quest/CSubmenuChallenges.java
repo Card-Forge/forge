@@ -16,12 +16,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import forge.Singletons;
-import forge.UiCommand;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestEventChallenge;
 import forge.gamemodes.quest.QuestUtil;
 import forge.gamemodes.quest.bazaar.QuestItemType;
 import forge.gamemodes.quest.bazaar.QuestPetController;
+import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.model.FModel;
 import forge.toolbox.FLabel;
@@ -43,7 +43,7 @@ public enum CSubmenuChallenges implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#initialize()
+     * @see forge.gui.control.home.IControlSubmenu#initialize()
      */
     @SuppressWarnings("serial")
     @Override
@@ -136,7 +136,7 @@ public enum CSubmenuChallenges implements ICDoc {
     };
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void update() {

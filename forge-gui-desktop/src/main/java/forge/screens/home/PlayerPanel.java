@@ -23,13 +23,14 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
 
 import forge.Singletons;
-import forge.UiCommand;
 import forge.ai.AIOption;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
+import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
+import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.properties.ForgePreferences;
@@ -51,7 +52,6 @@ import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FTextField;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
-import forge.util.gui.SOptionPane;
 import forge.util.Localizer;
 
 @SuppressWarnings("serial")

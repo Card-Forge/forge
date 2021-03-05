@@ -22,7 +22,8 @@ import com.thoughtworks.xstream.security.NullPermission;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.error.BugReporter;
+import forge.gui.error.BugReporter;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.thoughtworks.xstream.XStream;

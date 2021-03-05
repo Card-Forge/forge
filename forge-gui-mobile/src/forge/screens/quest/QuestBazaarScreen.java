@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
-import forge.GuiBase;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -18,6 +17,7 @@ import forge.gamemodes.quest.bazaar.IQuestBazaarItem;
 import forge.gamemodes.quest.bazaar.QuestBazaarManager;
 import forge.gamemodes.quest.bazaar.QuestStallDefinition;
 import forge.gamemodes.quest.data.QuestAssets;
+import forge.gui.GuiBase;
 import forge.model.FModel;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FContainer;

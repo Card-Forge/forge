@@ -6,6 +6,8 @@ import forge.control.FControl.CloseAction;
 import forge.download.AutoUpdater;
 import forge.game.GameLogEntryType;
 import forge.gamemodes.net.server.FServerManager;
+import forge.gui.GuiBase;
+import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.localinstance.properties.ForgeConstants;
@@ -55,7 +57,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @SuppressWarnings("serial")
     @Override
@@ -260,7 +262,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void update() {

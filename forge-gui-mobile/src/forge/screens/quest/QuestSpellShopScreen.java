@@ -1,13 +1,14 @@
 package forge.screens.quest;
 
 import com.badlogic.gdx.utils.Align;
-import forge.FThreads;
+
 import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.gamemodes.quest.QuestSpellShop;
 import forge.gamemodes.quest.QuestUtil;
+import forge.gui.FThreads;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;

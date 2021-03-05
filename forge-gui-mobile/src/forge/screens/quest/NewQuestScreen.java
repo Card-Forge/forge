@@ -2,9 +2,7 @@ package forge.screens.quest;
 
 import com.badlogic.gdx.utils.Align;
 
-import forge.FThreads;
 import forge.Forge;
-import forge.UiCommand;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.MagicColor;
@@ -22,6 +20,9 @@ import forge.gamemodes.quest.StartingPoolPreferences.PoolType;
 import forge.gamemodes.quest.data.DeckConstructionRules;
 import forge.gamemodes.quest.data.GameFormatQuest;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
+import forge.gui.FThreads;
+import forge.gui.UiCommand;
+import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.item.PreconDeck;
 import forge.itemmanager.filters.HistoricFormatSelect;
@@ -46,7 +47,6 @@ import forge.toolbox.FScrollPane;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
-import forge.util.gui.SOptionPane;
 import forge.util.Localizer;
 
 import java.util.ArrayList;

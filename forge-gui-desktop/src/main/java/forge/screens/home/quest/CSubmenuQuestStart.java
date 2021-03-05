@@ -1,6 +1,5 @@
 package forge.screens.home.quest;
 
-import forge.UiCommand;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
@@ -9,6 +8,7 @@ import forge.gamemodes.quest.data.DeckConstructionRules;
 import forge.gamemodes.quest.data.GameFormatQuest;
 import forge.gamemodes.quest.data.QuestData;
 import forge.gamemodes.quest.data.QuestPreferences;
+import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -44,7 +44,7 @@ public enum CSubmenuQuestStart implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void initialize() {
@@ -143,7 +143,7 @@ public enum CSubmenuQuestStart implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void update() {

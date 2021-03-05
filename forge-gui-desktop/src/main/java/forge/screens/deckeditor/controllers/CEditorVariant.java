@@ -20,10 +20,11 @@ package forge.screens.deckeditor.controllers;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
-import forge.UiCommand;
+
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;

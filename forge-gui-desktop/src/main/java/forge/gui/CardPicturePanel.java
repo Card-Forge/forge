@@ -17,7 +17,6 @@
  */
 package forge.gui;
 
-import forge.GuiBase;
 import forge.ImageCache;
 import forge.ImageKeys;
 import forge.game.card.CardView.CardStateView;

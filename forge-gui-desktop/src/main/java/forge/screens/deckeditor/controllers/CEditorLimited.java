@@ -18,13 +18,14 @@
 package forge.screens.deckeditor.controllers;
 
 import com.google.common.base.Supplier;
-import forge.UiCommand;
+
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;

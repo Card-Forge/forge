@@ -1,10 +1,10 @@
 package forge.gamemodes.net;
 
-import forge.FThreads;
 import forge.gamemodes.net.event.GuiGameEvent;
 import forge.gamemodes.net.event.ReplyEvent;
+import forge.gui.FThreads;
+import forge.gui.util.SOptionPane;
 import forge.localinstance.assets.FSkinProp;
-import forge.util.gui.SOptionPane;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 

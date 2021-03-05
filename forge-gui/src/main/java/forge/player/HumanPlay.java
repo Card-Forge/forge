@@ -2,7 +2,7 @@ package forge.player;
 
 
 import com.google.common.collect.Iterables;
-import forge.FThreads;
+
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameActionUtil;
@@ -25,9 +25,10 @@ import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.InputPayMana;
 import forge.gamemodes.match.input.InputPayManaOfCostPayment;
 import forge.gamemodes.match.input.InputSelectCardsFromList;
+import forge.gui.FThreads;
+import forge.gui.util.SGuiChoose;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-import forge.util.gui.SGuiChoose;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 

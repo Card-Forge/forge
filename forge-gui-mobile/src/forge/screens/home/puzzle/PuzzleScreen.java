@@ -1,6 +1,5 @@
 package forge.screens.home.puzzle;
 
-import forge.GuiBase;
 import forge.assets.FSkinFont;
 import forge.deck.Deck;
 import forge.game.GameRules;
@@ -9,6 +8,7 @@ import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.puzzle.Puzzle;
 import forge.gamemodes.puzzle.PuzzleIO;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
 import forge.screens.LaunchScreen;

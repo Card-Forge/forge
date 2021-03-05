@@ -2,8 +2,8 @@ package forge.gamemodes.match.input;
 
 import java.util.concurrent.CountDownLatch;
 
-import forge.FThreads;
-import forge.error.BugReporter;
+import forge.gui.FThreads;
+import forge.gui.error.BugReporter;
 import forge.player.PlayerControllerHuman;
 
 public abstract class InputSyncronizedBase extends InputBase implements InputSynchronized {

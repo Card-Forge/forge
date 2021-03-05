@@ -1,8 +1,8 @@
 package forge;
 
-import forge.error.BugReporter;
-
 import org.testng.annotations.Test;
+
+import forge.gui.error.BugReporter;
 
 import javax.swing.*;
 

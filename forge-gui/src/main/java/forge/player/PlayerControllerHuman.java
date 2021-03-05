@@ -23,19 +23,20 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
-import forge.FThreads;
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.ai.GameState;
-import forge.card.*;
+import forge.card.CardDb;
+import forge.card.CardStateName;
+import forge.card.CardType;
+import forge.card.ColorSet;
+import forge.card.ICardFace;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.control.FControlGamePlayback;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.events.UiEventNextGameDecision;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
@@ -63,9 +64,15 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.input.*;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
+import forge.gui.card.*;
+import forge.gui.control.FControlGamePlayback;
+import forge.gui.events.UiEventNextGameDecision;
+import forge.gui.interfaces.IGuiGame;
+import forge.gui.util.SOptionPane;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
-import forge.interfaces.IGuiGame;
 import forge.interfaces.IMacroSystem;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
@@ -82,7 +89,6 @@ import forge.util.MessageUtil;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-import forge.util.gui.SOptionPane;
 import io.sentry.Sentry;
 
 /**
@@ -618,7 +624,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * (non-Javadoc)
      *
      * @see
-     * forge.game.player.PlayerController#confirmAction(forge.card.spellability.
+     * forge.game.player.PlayerController#confirmAction(forge.gui.card.spellability.
      * SpellAbility, java.lang.String, java.lang.String)
      */
     @Override
@@ -1067,8 +1073,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * (non-Javadoc)
      *
      * @see
-     * forge.game.player.PlayerController#chooseTargets(forge.card.spellability.
-     * SpellAbility, forge.card.spellability.SpellAbilityStackInstance)
+     * forge.game.player.PlayerController#chooseTargets(forge.gui.card.spellability.
+     * SpellAbility, forge.gui.card.spellability.SpellAbilityStackInstance)
      */
     @Override
     public TargetChoices chooseNewTargetsFor(final SpellAbility ability, Predicate<GameObject> filter, boolean optional) {
@@ -1093,7 +1099,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      *
      * @see
      * forge.game.player.PlayerController#chooseCardsToDiscardUnlessType(int,
-     * java.lang.String, forge.card.spellability.SpellAbility)
+     * java.lang.String, forge.gui.card.spellability.SpellAbility)
      */
     @Override
     public CardCollectionView chooseCardsToDiscardUnlessType(final int num, final CardCollectionView hand,
@@ -1265,8 +1271,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * (non-Javadoc)
      *
      * @see
-     * forge.game.player.PlayerController#confirmReplacementEffect(forge.card.
-     * replacement.ReplacementEffect, forge.card.spellability.SpellAbility,
+     * forge.game.player.PlayerController#confirmReplacementEffect(forge.gui.card.
+     * replacement.ReplacementEffect, forge.gui.card.spellability.SpellAbility,
      * java.lang.String)
      */
     @Override
@@ -1571,7 +1577,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     /*
      * (non-Javadoc)
      *
-     * @see forge.game.player.PlayerController#chooseModeForAbility(forge.card.
+     * @see forge.game.player.PlayerController#chooseModeForAbility(forge.gui.card.
      * spellability.SpellAbility, java.util.List, int, int)
      */
     @Override

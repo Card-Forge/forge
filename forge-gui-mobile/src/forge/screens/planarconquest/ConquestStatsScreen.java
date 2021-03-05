@@ -8,7 +8,7 @@ import forge.assets.FSkinImage;
 import forge.gamemodes.planarconquest.ConquestData;
 import forge.gamemodes.planarconquest.ConquestPlane;
 import forge.gamemodes.planarconquest.IVConquestStats;
-import forge.interfaces.IButton;
+import forge.gui.interfaces.IButton;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FComboBox;

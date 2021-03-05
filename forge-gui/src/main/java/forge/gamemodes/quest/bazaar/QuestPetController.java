@@ -23,10 +23,10 @@ import java.util.List;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
-import forge.GuiBase;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.data.QuestAssets;
 import forge.gamemodes.quest.data.QuestPreferences;
+import forge.gui.GuiBase;
 import forge.item.PaperToken;
 import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.assets.ISkinImage;

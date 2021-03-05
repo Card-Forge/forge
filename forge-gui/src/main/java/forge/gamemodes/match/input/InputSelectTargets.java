@@ -4,7 +4,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
-import forge.FThreads;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.ApiType;
@@ -14,6 +13,7 @@ import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.gui.FThreads;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;

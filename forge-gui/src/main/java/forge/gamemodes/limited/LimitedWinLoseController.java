@@ -1,8 +1,8 @@
 package forge.gamemodes.limited;
 
 import forge.game.GameView;
-import forge.interfaces.IButton;
-import forge.interfaces.IWinLoseView;
+import forge.gui.interfaces.IButton;
+import forge.gui.interfaces.IWinLoseView;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Localizer;

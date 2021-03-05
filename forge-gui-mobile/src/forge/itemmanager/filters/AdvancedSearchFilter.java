@@ -7,7 +7,7 @@ import com.google.common.collect.Iterables;
 import forge.Forge;
 import forge.assets.FSkinImage;
 import forge.assets.TextRenderer;
-import forge.interfaces.IButton;
+import forge.gui.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.itemmanager.AdvancedSearch;
 import forge.itemmanager.ItemManager;

@@ -12,7 +12,7 @@ import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Align;
-import forge.FThreads;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -23,6 +23,8 @@ import forge.gamemodes.quest.data.DeckConstructionRules;
 import forge.gamemodes.quest.data.QuestData;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.gamemodes.quest.io.QuestDataIO;
+import forge.gui.FThreads;
+import forge.gui.util.SOptionPane;
 import forge.localinstance.properties.ForgeConstants;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -39,7 +41,6 @@ import forge.toolbox.FTextArea;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
-import forge.util.gui.SOptionPane;
 import forge.util.Localizer;
 
 public class LoadQuestScreen extends LaunchScreen {

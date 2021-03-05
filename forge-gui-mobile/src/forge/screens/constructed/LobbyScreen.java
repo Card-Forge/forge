@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.GuiBase;
 import forge.assets.ImageCache;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -21,7 +20,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.Iterables;
 
-import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
 import forge.ai.AIOption;
@@ -33,7 +31,9 @@ import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gamemodes.net.server.FServerManager;
-import forge.interfaces.ILobbyView;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
+import forge.gui.interfaces.ILobbyView;
 import forge.interfaces.IPlayerChangeListener;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;

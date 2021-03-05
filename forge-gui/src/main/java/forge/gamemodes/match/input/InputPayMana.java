@@ -2,14 +2,14 @@ package forge.gamemodes.match.input;
 
 import java.util.*;
 
-import forge.GuiBase;
 import forge.game.spellability.SpellAbilityView;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
 
-import forge.FThreads;
 import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
 import forge.card.ColorSet;

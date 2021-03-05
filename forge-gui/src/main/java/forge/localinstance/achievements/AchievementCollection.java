@@ -1,6 +1,5 @@
 package forge.localinstance.achievements;
 
-import forge.GuiBase;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Iterator;
@@ -21,7 +20,8 @@ import com.google.common.collect.Maps;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.player.Player;
-import forge.interfaces.IComboBox;
+import forge.gui.GuiBase;
+import forge.gui.interfaces.IComboBox;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;

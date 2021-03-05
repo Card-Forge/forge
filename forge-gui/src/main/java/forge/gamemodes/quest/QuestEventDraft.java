@@ -17,7 +17,6 @@
  */
 package forge.gamemodes.quest;
 
-import forge.GuiBase;
 import forge.card.CardEdition;
 import forge.card.CardEdition.CardInSet;
 import forge.card.CardRarity;
@@ -31,6 +30,7 @@ import forge.gamemodes.quest.io.ReadPriceList;
 import forge.gamemodes.tournament.system.TournamentBracket;
 import forge.gamemodes.tournament.system.TournamentPairing;
 import forge.gamemodes.tournament.system.TournamentPlayer;
+import forge.gui.GuiBase;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.model.CardBlock;

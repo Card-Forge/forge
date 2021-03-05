@@ -1,6 +1,5 @@
 package forge.gamemodes.net;
 
-import forge.GuiBase;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.channel.ChannelHandlerContext;
@@ -10,6 +9,8 @@ import net.jpountz.lz4.LZ4BlockInputStream;
 
 import java.io.ObjectInputStream;
 import java.io.StreamCorruptedException;
+
+import forge.gui.GuiBase;
 
 public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder {
     private final ClassResolver classResolver;

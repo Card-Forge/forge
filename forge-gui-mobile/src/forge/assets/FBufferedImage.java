@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Matrix4;
 
-import forge.FThreads;
 import forge.Graphics;
+import forge.gui.FThreads;
 
 //Special graphics object for rendering to a texture
 public abstract class FBufferedImage extends FImageComplex {

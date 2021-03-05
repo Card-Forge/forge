@@ -1,9 +1,16 @@
 package forge.screens.home.settings;
 
-import forge.UiCommand;
 import forge.download.*;
-import forge.error.BugReporter;
 import forge.gui.ImportDialog;
+import forge.gui.UiCommand;
+import forge.gui.download.GuiDownloadAchievementImages;
+import forge.gui.download.GuiDownloadPicturesHQ;
+import forge.gui.download.GuiDownloadPicturesLQ;
+import forge.gui.download.GuiDownloadPrices;
+import forge.gui.download.GuiDownloadQuestImages;
+import forge.gui.download.GuiDownloadSetPicturesLQ;
+import forge.gui.download.GuiDownloadSkins;
+import forge.gui.error.BugReporter;
 import forge.gui.framework.ICDoc;
 
 import javax.swing.*;
@@ -91,7 +98,7 @@ public enum CSubmenuDownloaders implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void initialize() {
@@ -112,7 +119,7 @@ public enum CSubmenuDownloaders implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void update() {

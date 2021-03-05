@@ -8,7 +8,7 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
-import forge.interfaces.ITextField;
+import forge.gui.interfaces.ITextField;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.toolbox.FEvent.FEventHandler;

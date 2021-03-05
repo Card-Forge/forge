@@ -1,11 +1,12 @@
 package forge.screens.limited;
 
-import forge.FThreads;
 import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.deck.FDeckEditor.EditorType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.LimitedPoolType;
+import forge.gui.FThreads;
+import forge.gui.util.SGuiChoose;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.home.NewGameMenu;
@@ -14,7 +15,6 @@ import forge.toolbox.FTextArea;
 import forge.util.Localizer;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
-import forge.util.gui.SGuiChoose;
 
 public class NewDraftScreen extends LaunchScreen {
     private static final float PADDING = Utils.scale(10);

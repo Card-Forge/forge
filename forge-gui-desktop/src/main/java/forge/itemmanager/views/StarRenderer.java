@@ -17,7 +17,7 @@
  */
 package forge.itemmanager.views;
 
-import forge.card.CardPreferences;
+import forge.gui.card.CardPreferences;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.localinstance.assets.FSkinProp;

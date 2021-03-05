@@ -10,6 +10,7 @@ import forge.gamemodes.net.IRemote;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.LoginEvent;
+import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.player.LobbyPlayerHuman;
@@ -20,7 +21,6 @@ import forge.trackable.TrackableTypes;
 import forge.trackable.Tracker;
 import io.netty.channel.ChannelHandlerContext;
 import forge.game.player.PlayerView;
-import forge.interfaces.IGuiGame;
 import forge.model.FModel;
 import forge.trackable.TrackableCollection;
 

@@ -6,7 +6,6 @@ import java.util.Map.Entry;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 
-import forge.FThreads;
 import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
@@ -18,6 +17,7 @@ import forge.gamemodes.planarconquest.ConquestPlane;
 import forge.gamemodes.planarconquest.ConquestPreferences;
 import forge.gamemodes.planarconquest.ConquestUtil;
 import forge.gamemodes.planarconquest.ConquestPreferences.CQPref;
+import forge.gui.FThreads;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManager;
