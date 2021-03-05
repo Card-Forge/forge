@@ -1430,7 +1430,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         if (!library.isEmpty()) {
-            Card c = library.get(0);
+            Card c;
+
+            if (hasKeyword("You draw cards from the bottom of your library instead of the top of your library.")) {
+                c = library.get(library.size() - 1);
+            } else {
+                c = library.get(0);
+            }
 
             List<Player> pList = Lists.newArrayList();
 
