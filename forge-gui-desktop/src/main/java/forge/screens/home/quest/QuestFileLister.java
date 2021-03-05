@@ -1,11 +1,11 @@
 package forge.screens.home.quest;
 
 import forge.UiCommand;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gamemodes.quest.data.QuestData;
 import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.quest.QuestUtil;
-import forge.quest.data.QuestData;
 import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinnedButton;
 import forge.toolbox.FSkin.SkinnedPanel;
@@ -62,7 +62,7 @@ public class QuestFileLister extends JPanel {
         icoEditOver = FSkin.getIcon(FSkinProp.ICO_EDIT_OVER);
     }
 
-    /** @param qd0 &emsp; {@link forge.quest.data.QuestData}[] */
+    /** @param qd0 &emsp; {@link forge.gamemodes.quest.data.QuestData}[] */
     public void setQuests(List<QuestData> qd0) {
         this.removeAll();
         List<RowPanel> tempRows = new ArrayList<>();

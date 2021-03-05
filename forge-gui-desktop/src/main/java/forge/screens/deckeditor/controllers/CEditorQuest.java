@@ -30,6 +30,8 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.data.DeckConstructionRules;
 import forge.gui.GuiUtils;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
@@ -41,8 +43,6 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.views.ItemTableColumn;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.quest.QuestController;
-import forge.quest.data.DeckConstructionRules;
 import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
@@ -102,7 +102,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
      * <br><br>
      * Card catalog and decks are drawn from a QuestController object.
      *
-     * @param questData0 &emsp; {@link forge.quest.QuestController}
+     * @param questData0 &emsp; {@link forge.gamemodes.quest.QuestController}
      */
     @SuppressWarnings("serial")
     public CEditorQuest(final QuestController questData0, final CDetailPicture cDetailPicture0) {

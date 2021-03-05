@@ -19,7 +19,7 @@ package forge.screens.match.winlose;
 
 import forge.FThreads;
 import forge.game.GameView;
-import forge.gauntlet.GauntletWinLoseController;
+import forge.gamemodes.gauntlet.GauntletWinLoseController;
 import forge.localinstance.assets.FSkinProp;
 import forge.util.Localizer;
 import forge.util.gui.SOptionPane;

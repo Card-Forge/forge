@@ -22,7 +22,7 @@ import java.awt.Dimension;
 import javax.swing.SwingConstants;
 
 import forge.game.GameView;
-import forge.limited.LimitedWinLoseController;
+import forge.gamemodes.limited.LimitedWinLoseController;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinColor;

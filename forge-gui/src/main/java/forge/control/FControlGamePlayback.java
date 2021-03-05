@@ -19,7 +19,7 @@ import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.event.IGameEventVisitor;
-import forge.match.input.InputPlaybackControl;
+import forge.gamemodes.match.input.InputPlaybackControl;
 import forge.player.PlayerControllerHuman;
 
 public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {

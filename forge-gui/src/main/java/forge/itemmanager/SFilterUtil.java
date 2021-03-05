@@ -6,13 +6,13 @@ import forge.StaticData;
 import forge.card.*;
 import forge.deck.DeckProxy;
 import forge.game.GameFormat;
+import forge.gamemodes.quest.data.StarRating;
 import forge.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.quest.data.StarRating;
 import forge.util.BinaryUtil;
 import forge.util.PredicateString.StringOp;
 

@@ -1,13 +1,13 @@
 package forge.screens.home.quest;
 
 import forge.UiCommand;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.data.QuestData;
+import forge.gamemodes.quest.data.QuestPreferences.QPref;
+import forge.gamemodes.quest.io.QuestDataIO;
 import forge.gui.framework.ICDoc;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.quest.QuestController;
-import forge.quest.data.QuestData;
-import forge.quest.data.QuestPreferences.QPref;
-import forge.quest.io.QuestDataIO;
 import forge.screens.bazaar.CBazaarUI;
 
 import java.io.File;

@@ -37,7 +37,7 @@ import forge.game.spellability.StackItemView;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.match.input.InputSelectTargets;
+import forge.gamemodes.match.input.InputSelectTargets;
 import forge.util.Aggregates;
 
 import java.util.ArrayList;

@@ -17,7 +17,7 @@
 package forge.screens.match;
 
 import forge.game.GameView;
-import forge.quest.QuestWinLoseController;
+import forge.gamemodes.quest.QuestWinLoseController;
 import forge.screens.home.quest.CSubmenuChallenges;
 import forge.screens.home.quest.CSubmenuDuels;
 

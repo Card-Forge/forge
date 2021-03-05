@@ -9,10 +9,10 @@ import java.util.List;
 import com.google.common.base.Function;
 
 import forge.download.GuiDownloadService;
+import forge.gamemodes.match.HostedMatch;
 import forge.item.PaperCard;
 import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.assets.ISkinImage;
-import forge.match.HostedMatch;
 import forge.sound.IAudioClip;
 import forge.sound.IAudioMusic;
 import forge.util.Callback;

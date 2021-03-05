@@ -2,7 +2,7 @@ package forge.screens.home.gauntlet;
 
 import forge.deckchooser.FDeckChooser;
 import forge.game.GameType;
-import forge.gauntlet.GauntletIO;
+import forge.gamemodes.gauntlet.GauntletIO;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;

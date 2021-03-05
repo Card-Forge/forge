@@ -18,10 +18,10 @@ package forge.screens.match.winlose;
 
 import forge.game.GameView;
 import forge.game.player.PlayerView;
-import forge.match.NextGameDecision;
+import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestDraftUtils;
 import forge.model.FModel;
-import forge.quest.QuestController;
-import forge.quest.QuestDraftUtils;
 import forge.screens.match.MatchController;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;

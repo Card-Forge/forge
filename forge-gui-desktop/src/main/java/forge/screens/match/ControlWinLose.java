@@ -7,10 +7,10 @@ import javax.swing.JButton;
 
 import forge.Singletons;
 import forge.game.GameView;
+import forge.gamemodes.match.NextGameDecision;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
 import forge.interfaces.IGameController;
-import forge.match.NextGameDecision;
 
 /** 
  * Default controller for a ViewWinLose object. This class can

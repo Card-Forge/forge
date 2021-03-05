@@ -1,12 +1,12 @@
 package forge.screens.home.quest;
 
 import forge.UiCommand;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestEventDuel;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gamemodes.quest.bazaar.QuestPetController;
 import forge.gui.framework.ICDoc;
 import forge.model.FModel;
-import forge.quest.QuestController;
-import forge.quest.QuestEventDuel;
-import forge.quest.QuestUtil;
-import forge.quest.bazaar.QuestPetController;
 import forge.toolbox.JXButtonPanel;
 import forge.util.Localizer;
 

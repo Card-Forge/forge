@@ -7,7 +7,7 @@ import forge.deck.DeckGroup;
 import forge.deck.FDeckEditor;
 import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
-import forge.limited.SealedCardPoolGenerator;
+import forge.gamemodes.limited.SealedCardPoolGenerator;
 import forge.screens.LaunchScreen;
 import forge.screens.home.NewGameMenu;
 import forge.toolbox.FLabel;

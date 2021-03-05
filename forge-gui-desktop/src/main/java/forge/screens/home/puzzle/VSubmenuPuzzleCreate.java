@@ -1,12 +1,12 @@
 package forge.screens.home.puzzle;
 
+import forge.gamemodes.match.GameLobby;
+import forge.gamemodes.match.LocalLobby;
+import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.interfaces.IPlayerChangeListener;
-import forge.match.GameLobby;
-import forge.match.LocalLobby;
-import forge.net.event.UpdateLobbyPlayerEvent;
 import forge.screens.home.*;
 import forge.toolbox.FLabel;
 import forge.util.Localizer;

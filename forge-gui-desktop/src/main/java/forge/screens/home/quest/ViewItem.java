@@ -2,11 +2,11 @@ package forge.screens.home.quest;
 
 import forge.GuiBase;
 import forge.UiCommand;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gamemodes.quest.bazaar.IQuestBazaarItem;
+import forge.gamemodes.quest.data.QuestAssets;
 import forge.localinstance.assets.FSkinProp;
 import forge.model.FModel;
-import forge.quest.QuestUtil;
-import forge.quest.bazaar.IQuestBazaarItem;
-import forge.quest.data.QuestAssets;
 import forge.screens.bazaar.VBazaarUI;
 import forge.toolbox.FHtmlViewer;
 import forge.toolbox.FLabel;
@@ -58,13 +58,13 @@ public class ViewItem extends FPanel {
 
     /**
      * @param i0
-     *            &emsp; {@link forge.quest.bazaar.IQuestBazaarItem}
+     *            &emsp; {@link forge.gamemodes.quest.bazaar.IQuestBazaarItem}
      */
     public void setItem(final IQuestBazaarItem i0) {
         this.item = i0;
     }
 
-    /** @return {@link forge.quest.bazaar.IQuestBazaarItem} */
+    /** @return {@link forge.gamemodes.quest.bazaar.IQuestBazaarItem} */
     public IQuestBazaarItem getItem() {
         return this.item;
     }

@@ -2,8 +2,8 @@ package forge.screens.home.quest;
 
 import forge.UiCommand;
 import forge.deck.DeckGroup;
+import forge.gamemodes.quest.QuestTournamentController;
 import forge.gui.framework.ICDoc;
-import forge.quest.QuestTournamentController;
 
 import java.awt.event.*;
 

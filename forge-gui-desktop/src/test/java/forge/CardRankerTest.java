@@ -2,8 +2,8 @@ package forge;
 
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.gamemodes.limited.CardRanker;
 import forge.item.PaperCard;
-import forge.limited.CardRanker;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import org.junit.Assert;

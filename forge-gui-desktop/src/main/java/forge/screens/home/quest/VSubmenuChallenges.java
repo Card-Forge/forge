@@ -1,10 +1,10 @@
 package forge.screens.home.quest;
 
+import forge.gamemodes.quest.IVQuestStats;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.localinstance.assets.FSkinProp;
-import forge.quest.IVQuestStats;
 import forge.screens.home.*;
 import forge.toolbox.*;
 import forge.util.Localizer;

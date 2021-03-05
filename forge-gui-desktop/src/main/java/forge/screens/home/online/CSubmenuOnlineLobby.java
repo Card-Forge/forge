@@ -9,14 +9,14 @@ import javax.swing.SwingUtilities;
 
 import forge.FThreads;
 import forge.error.BugReporter;
+import forge.gamemodes.net.ChatMessage;
+import forge.gamemodes.net.NetConnectUtil;
 import forge.gui.FNetOverlay;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
-import forge.net.ChatMessage;
-import forge.net.NetConnectUtil;
 import forge.screens.home.CHomeUI;
 import forge.screens.home.CLobby;
 import forge.screens.home.VLobby;

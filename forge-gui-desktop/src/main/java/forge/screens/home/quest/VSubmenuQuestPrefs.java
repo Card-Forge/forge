@@ -1,11 +1,11 @@
 package forge.screens.home.quest;
+import forge.gamemodes.quest.data.QuestPreferences;
+import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.localinstance.assets.FSkinProp;
 import forge.model.FModel;
-import forge.quest.data.QuestPreferences;
-import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
@@ -396,7 +396,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         private boolean isFocus = false;
         private String previousText = "";
         /**
-         * @param qp0 &emsp; {@link forge.quest.data.QuestPreferences.QPref}
+         * @param qp0 &emsp; {@link forge.gamemodes.quest.data.QuestPreferences.QPref}
          *                  preferences ident enum
          * @param e0 &emsp; {@link forge.screens.home.quest.VSubmenuQuestPrefs.QuestPreferencesErrType}
          *                  where error should display to
@@ -447,7 +447,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
                 }
             });
         }
-        /** @return {@link forge.quest.data.QuestPreferences.QPref} */
+        /** @return {@link forge.gamemodes.quest.data.QuestPreferences.QPref} */
         public QPref getQPref() {
             return this.qpref;
         }

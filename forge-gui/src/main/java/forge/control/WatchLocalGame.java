@@ -10,10 +10,10 @@ import forge.game.Game;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
+import forge.gamemodes.match.input.Input;
+import forge.gamemodes.match.input.InputPlaybackControl;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGuiGame;
-import forge.match.input.Input;
-import forge.match.input.InputPlaybackControl;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 

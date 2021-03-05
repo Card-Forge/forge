@@ -5,7 +5,7 @@ import java.util.List;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
-import forge.match.NextGameDecision;
+import forge.gamemodes.match.NextGameDecision;
 import forge.util.ITriggerEvent;
 
 public interface IGameController {

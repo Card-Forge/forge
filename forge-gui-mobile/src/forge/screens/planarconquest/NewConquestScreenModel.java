@@ -1,7 +1,7 @@
 package forge.screens.planarconquest;
 
+import forge.gamemodes.planarconquest.ConquestPlane;
 import forge.item.PaperCard;
-import forge.planarconquest.ConquestPlane;
 
 public class NewConquestScreenModel {
     public ConquestPlane startingPlane;

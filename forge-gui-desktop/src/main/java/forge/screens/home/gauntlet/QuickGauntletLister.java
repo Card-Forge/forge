@@ -14,10 +14,10 @@ import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.UiCommand;
-import forge.gauntlet.GauntletData;
-import forge.gauntlet.GauntletIO;
+import forge.gamemodes.gauntlet.GauntletData;
+import forge.gamemodes.gauntlet.GauntletIO;
+import forge.gamemodes.quest.QuestUtil;
 import forge.localinstance.assets.FSkinProp;
-import forge.quest.QuestUtil;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FOptionPane;

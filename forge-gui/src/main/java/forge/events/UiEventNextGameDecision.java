@@ -1,6 +1,6 @@
 package forge.events;
 
-import forge.match.NextGameDecision;
+import forge.gamemodes.match.NextGameDecision;
 import forge.player.PlayerControllerHuman;
 
 public final class UiEventNextGameDecision extends UiEvent {

@@ -17,13 +17,13 @@ import javax.swing.border.EmptyBorder;
 
 import forge.Singletons;
 import forge.UiCommand;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestEventChallenge;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gamemodes.quest.bazaar.QuestItemType;
+import forge.gamemodes.quest.bazaar.QuestPetController;
 import forge.gui.framework.ICDoc;
 import forge.model.FModel;
-import forge.quest.QuestController;
-import forge.quest.QuestEventChallenge;
-import forge.quest.QuestUtil;
-import forge.quest.bazaar.QuestItemType;
-import forge.quest.bazaar.QuestPetController;
 import forge.toolbox.FLabel;
 import forge.toolbox.JXButtonPanel;
 import forge.util.Localizer;

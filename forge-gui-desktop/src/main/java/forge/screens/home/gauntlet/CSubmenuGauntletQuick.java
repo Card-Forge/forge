@@ -9,8 +9,8 @@ import javax.swing.SwingUtilities;
 
 import forge.deck.DeckType;
 import forge.game.player.RegisteredPlayer;
-import forge.gauntlet.GauntletData;
-import forge.gauntlet.GauntletUtil;
+import forge.gamemodes.gauntlet.GauntletData;
+import forge.gamemodes.gauntlet.GauntletUtil;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.player.GamePlayerUtil;

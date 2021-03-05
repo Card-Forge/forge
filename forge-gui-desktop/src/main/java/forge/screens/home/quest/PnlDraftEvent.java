@@ -1,7 +1,7 @@
 package forge.screens.home.quest;
 
-import forge.quest.QuestEventDraft;
-import forge.quest.QuestUtil;
+import forge.gamemodes.quest.QuestEventDraft;
+import forge.gamemodes.quest.QuestUtil;
 import forge.toolbox.FRadioButton;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
