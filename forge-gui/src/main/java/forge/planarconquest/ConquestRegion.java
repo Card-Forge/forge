@@ -55,7 +55,7 @@ public class ConquestRegion {
             PaperCard pc = cardPool.getCard(artCardName);
 
             if (pc == null) {
-                pc = FModel.getMagicDb().getCommonCards().getCard(artCardName);
+                pc = FModel.getMagicDb().getCommonCards().getUniqueByName(artCardName);
                 if (!pc.getName().equals(artCardName) && Card.fromPaperCard(pc, null).hasAlternateState()) {
                     art = GuiBase.getInterface().getCardArt(pc, true);
                 } else {
