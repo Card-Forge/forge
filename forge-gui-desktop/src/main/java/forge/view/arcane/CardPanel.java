@@ -571,6 +571,14 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                     CardFaceSymbols.drawAbilitySymbol("intimidate", g, abiX, abiY, abiScale, abiScale);
                     abiY += abiSpace;
                 }
+                if (card.getCurrentState().hasShadow()) {
+                    CardFaceSymbols.drawAbilitySymbol("shadow", g, abiX, abiY, abiScale, abiScale);
+                    abiY += abiSpace;
+                }
+                if (card.getCurrentState().hasHorsemanship()) {
+                    CardFaceSymbols.drawAbilitySymbol("horsemanship", g, abiX, abiY, abiScale, abiScale);
+                    abiY += abiSpace;
+                }
                 if (card.getCurrentState().hasHexproof()) {
                     if (!card.getCurrentState().getHexproofKey().isEmpty()){
                         String[] splitK = card.getCurrentState().getHexproofKey().split(":");
