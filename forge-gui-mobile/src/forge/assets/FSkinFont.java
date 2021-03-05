@@ -18,9 +18,7 @@ import com.badlogic.gdx.utils.Array;
 
 import forge.FThreads;
 import forge.Forge;
-//import forge.model.FModel;
 import forge.properties.ForgeConstants;
-//import forge.properties.ForgePreferences.FPref;
 import forge.util.FileUtil;
 import forge.util.LineReader;
 import forge.util.TextBounds;
@@ -380,11 +378,10 @@ public class FSkinFont {
             return;
         }
 
-        //String locale = FModel.getPreferences().getPref(FPref.UI_LANGUAGE);
         String fontName = "f" + fontSize;
-        /*if (locale.equals("zh-CN") || locale.equals("ja-JP")) {
-            fontName += locale;
-        }*/
+        if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP")) {
+            fontName += Forge.locale;
+        }
         FileHandle fontFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + fontName + ".fnt");
         if (fontFile != null && fontFile.exists()) {
             final BitmapFontData data = new BitmapFontData(fontFile, false);
@@ -395,17 +392,15 @@ public class FSkinFont {
                 }
             });
         } else {
-            generateFont(FSkin.getSkinFile(TTF_FILE), fontName, fontSize);
-            /*
-            if (locale.equals("zh-CN") || locale.equals("ja-JP")) {
-                String ttfName = FModel.getPreferences().getPref(FPref.UI_CJK_FONT);
+            if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP")) {
+                String ttfName = Forge.CJK_Font;
                 FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + ttfName + ".ttf");
                 if (ttfFile != null && ttfFile.exists()) {
                     generateFont(ttfFile, fontName, fontSize);
                 }
             } else {
                 generateFont(FSkin.getSkinFile(TTF_FILE), fontName, fontSize);
-            }*/
+            }
         }
     }
 
