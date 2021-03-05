@@ -79,6 +79,7 @@ public class Forge implements ApplicationListener {
     public static int androidVersion = 0;
     public static boolean autoCache = false;
     public static int lastButtonIndex = 0;
+    public static String CJK_Font = "";
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
         if (GuiBase.getInterface() == null) {
@@ -140,6 +141,7 @@ public class Forge implements ApplicationListener {
         locale = prefs.getPref(FPref.UI_LANGUAGE);
         autoCache = prefs.getPrefBoolean(FPref.UI_AUTO_CACHE_SIZE);
         disposeTextures = prefs.getPrefBoolean(FPref.UI_ENABLE_DISPOSE_TEXTURES);
+        CJK_Font = prefs.getPref(FPref.UI_CJK_FONT);
 
         if (autoCache) {
             //increase cacheSize for devices with RAM more than 5GB, default is 400. Some phones have more than 10GB RAM (Mi 10, OnePlus 8, S20, etc..)
