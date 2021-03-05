@@ -60,7 +60,28 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 FLanguage.getAllLanguages()) {
             @Override
             public void valueChanged(String newValue) {
+                // if the new locale needs to use CJK font, disallow change if UI_CJK_FONT is not set yet
+                ForgePreferences prefs = FModel.getPreferences();
+                if (prefs.getPref(FPref.UI_CJK_FONT).equals("") &&
+                        (newValue.equals("zh-CN") || newValue.equals("ja-JP"))) {
+                    String message = "Please download CJK font (from \"Files\"), and set it before change language.";
+                    if (newValue.equals("ja-JP")) {
+                        message += "\nJapanese please use \"ipaexg\".";
+                    }
+                    FOptionPane.showMessageDialog(message, "Please set CJK Font");
+                    return;
+                }
+
                 FLanguage.changeLanguage(newValue);
+
+                FOptionPane.showConfirmDialog(localizer.getMessage("lblRestartForgeDescription"), localizer.getMessage("lblRestartForge"), localizer.getMessage("lblRestart"), localizer.getMessage("lblLater"), new Callback<Boolean>() {
+                    @Override
+                    public void run(Boolean result) {
+                        if (result) {
+                            Forge.restart(true);
+                        }
+                    }
+                });
             }
         }, 0);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_SKIN, localizer.getMessage("lblTheme"),
@@ -69,6 +90,26 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             @Override
             public void valueChanged(String newValue) {
                 FSkin.changeSkin(newValue);
+            }
+        }, 0);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_CJK_FONT, localizer.getMessage("lblCJKFont"),
+                localizer.getMessage("nlCJKFont"),
+                FSkinFont.getAllCJKFonts()) {
+            @Override
+            public void valueChanged(String newValue) {
+                ForgePreferences prefs = FModel.getPreferences();
+                if (newValue.equals("None")) {
+                    // If locale needs to use CJK fonts, disallow change to None
+                    String locale = prefs.getPref(FPref.UI_LANGUAGE);
+                    if (locale.equals("zh-CN") || locale.equals("ja-JP")) {
+                        return;
+                    }
+                    newValue = "";
+                }
+                if (newValue.equals(prefs.getPref(FPref.UI_CJK_FONT))) {
+                    return;
+                }
+                super.valueChanged(newValue);
             }
         }, 0);
         lstSettings.addItem(new BooleanSetting(FPref.UI_LANDSCAPE_MODE,
@@ -592,10 +633,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 lstOptions.setListItemRenderer(new FList.DefaultListItemRenderer<String>() {
                     @Override
                     public boolean tap(Integer index, String value, float x, float y, int count) {
+                        Forge.back();
                         if (!value.equals(currentValue)) {
                             valueChanged(value);
                         }
-                        Forge.back();
                         return true;
                     }
 

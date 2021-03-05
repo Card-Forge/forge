@@ -107,6 +107,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ANTE_MATCH_RARITY ("false"),
         UI_MANABURN("false"),
         UI_SKIN ("Default"),
+        UI_CJK_FONT (""),
         UI_PREFERRED_AVATARS_ONLY ("false"),
         UI_TARGETING_OVERLAY ("0"),
         UI_TIMED_TARGETING_OVERLAY_UPDATES ("true"),

@@ -18,7 +18,9 @@ import com.badlogic.gdx.utils.Array;
 
 import forge.FThreads;
 import forge.Forge;
+import forge.model.FModel;
 import forge.properties.ForgeConstants;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.FileUtil;
 import forge.util.LineReader;
 import forge.util.TextBounds;
@@ -28,8 +30,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -376,7 +380,11 @@ public class FSkinFont {
             return;
         }
 
+        String locale = FModel.getPreferences().getPref(FPref.UI_LANGUAGE);
         String fontName = "f" + fontSize;
+        if (locale.equals("zh-CN") || locale.equals("ja-JP")) {
+            fontName += locale;
+        }
         FileHandle fontFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + fontName + ".fnt");
         if (fontFile != null && fontFile.exists()) {
             final BitmapFontData data = new BitmapFontData(fontFile, false);
@@ -387,7 +395,15 @@ public class FSkinFont {
                 }
             });
         } else {
-            generateFont(FSkin.getSkinFile(TTF_FILE), fontName, fontSize);
+            if (locale.equals("zh-CN") || locale.equals("ja-JP")) {
+                String ttfName = FModel.getPreferences().getPref(FPref.UI_CJK_FONT);
+                FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + ttfName + ".ttf");
+                if (ttfFile != null && ttfFile.exists()) {
+                    generateFont(ttfFile, fontName, fontSize);
+                }
+            } else {
+                generateFont(FSkin.getSkinFile(TTF_FILE), fontName, fontSize);
+            }
         }
     }
 
@@ -447,5 +463,19 @@ public class FSkinFont {
                 packer.dispose();
             }
         });
+    }
+
+    public static Iterable<String> getAllCJKFonts() {
+        final List<String> allCJKFonts = new ArrayList<>();
+
+        allCJKFonts.add("None");
+        final FileHandle dir = Gdx.files.absolute(ForgeConstants.FONTS_DIR);
+        for (FileHandle fontFile : dir.list()) {
+            String fontName = fontFile.name();
+            if (!fontName.endsWith(".ttf")) { continue; }
+            allCJKFonts.add(fontName.replace(".ttf", ""));
+        }
+
+        return allCJKFonts;
     }
 }
