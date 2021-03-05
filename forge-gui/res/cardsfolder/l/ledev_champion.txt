@@ -1,6 +1,6 @@
 Name:Ledev Champion
 ManaCost:1 G W
-Types:Creature Human Knight
+Types:Creature Elf Knight
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may tap any number of untapped creatures you control. CARDNAME gets +1/+1 until end of turn for each creature tapped this way.
 SVar:TrigChoose:DB$ ChooseCard | Defined$ You | MinAmount$ 0 | Amount$ X | References$ X | Choices$ Creature.untapped+YouCtrl | ChoiceTitle$ Choose any number of untapped creatures you control | ChoiceZone$ Battlefield | RememberChosen$ True | SubAbility$ TrigTap
