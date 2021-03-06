@@ -2101,7 +2101,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         //               since the last time state-based actions were checked, he or she loses the game.
         if (triedToDrawFromEmptyLibrary) {
             triedToDrawFromEmptyLibrary = false; // one-shot check
-            return loseConditionMet(GameLossReason.Milled, null);
+            // Mine, Mine, Mine! prevents decking
+            if (!hasKeyword("You don't lose the game for drawing from an empty library.")) {
+                return loseConditionMet(GameLossReason.Milled, null);
+            }
         }
 
         // Rule 704.5c - If a player has ten or more poison counters, he or she loses the game.
