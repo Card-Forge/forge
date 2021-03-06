@@ -28,7 +28,9 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.function.Supplier;
 
@@ -44,6 +46,14 @@ public class AudioClip implements IAudioClip {
     private String filename;
     private List<ClipWrapper> clips;
     private boolean failed;
+    private static Map<String, byte[]> audioClips = new HashMap<>(30);
+
+    public static byte[] getAudioClips(File file) throws IOException {
+        if (!audioClips.containsKey(file.toString()) ) {
+            audioClips.put(file.toString(), Converter.convertFrom(Files.asByteSource(file).openStream()).toByteArray());
+        }
+        return audioClips.get(file.toString());
+    }
 
     public static boolean fileExists(String fileName) {
         File fSound = new File(ForgeConstants.SOUND_DIR, fileName);
@@ -182,7 +192,7 @@ public class AudioClip implements IAudioClip {
                 throw new IllegalArgumentException("Sound file " + fSound.toString() + " does not exist, cannot make a clip of it");
             }
             try {
-                ByteArrayInputStream bis = new ByteArrayInputStream(Converter.convertFrom(Files.asByteSource(fSound).openStream()).toByteArray());
+                ByteArrayInputStream bis = new ByteArrayInputStream(getAudioClips(fSound));
                 AudioInputStream stream = AudioSystem.getAudioInputStream(bis);
                 AudioFormat format = stream.getFormat();
                 DataLine.Info info = new DataLine.Info(Clip.class, stream.getFormat(), ((int) stream.getFrameLength() * format.getFrameSize()));

@@ -1,8 +1,5 @@
 package forge.sound;
 
-import com.google.common.io.Files;
-import com.sipgate.mp3wav.Converter;
-
 import javax.sound.sampled.*;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -73,7 +70,7 @@ public class AltSoundSystem extends Thread {
 
         AudioInputStream audioInputStream = null;
         try {
-            ByteArrayInputStream bis = new ByteArrayInputStream(Converter.convertFrom(Files.asByteSource(soundFile).openStream()).toByteArray());
+            ByteArrayInputStream bis = new ByteArrayInputStream(AudioClip.getAudioClips(soundFile));
             audioInputStream = AudioSystem.getAudioInputStream(bis);
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
