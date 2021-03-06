@@ -6,7 +6,7 @@ K:Indestructible
 S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | References$ X | Description$ As long as your devotion to white and blue is less than seven, CARDNAME isn't a creature.
 SVar:X:Count$DevotionDual.White.Blue
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | CheckSVar$ Y | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:Y:Count$LastTurnEntered_Battlefield_Creature.YouCtrl+Other
 SVar:BuffedBy:Permanent.White,Permanent.Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ephara_god_of_the_polis.jpg
