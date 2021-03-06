@@ -1,12 +1,16 @@
 package forge.assets;
 
+import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
+
+import forge.Forge;
 import forge.Graphics;
 import forge.card.CardFaceSymbols;
 import forge.model.FModel;
@@ -79,6 +83,7 @@ public class TextRenderer {
     private boolean wrap, needClip;
     private List<Piece> pieces = new ArrayList<>();
     private List<Float> lineWidths = new ArrayList<>();
+    private BreakIterator boundary = BreakIterator.getLineInstance(new Locale(Forge.locale));
 
     public TextRenderer() {
         this(false);
@@ -105,6 +110,7 @@ public class TextRenderer {
             needClip = true;
         }
 
+        boundary.setText(fullText);
         ForgePreferences prefs = FModel.getPreferences();
         boolean hideReminderText = prefs != null && prefs.getPrefBoolean(FPref.UI_HIDE_REMINDER_TEXT);
 
@@ -113,9 +119,10 @@ public class TextRenderer {
         float y = 0;
         float pieceWidth = 0;
         float lineHeight = font.getLineHeight();
+        int nextSpaceIdx = boundary.first();
         int lastSpaceIdx = -1;
         int lineNum = 0;
-        String text = "";
+        StringBuilder text = new StringBuilder();
         int inSymbolCount = 0;
         int consecutiveSymbols = 0;
         int inKeywordCount = 0;
@@ -125,6 +132,10 @@ public class TextRenderer {
 
         for (int i = 0; i < fullText.length(); i++) {
             atReminderTextEnd = false;
+            if (i == nextSpaceIdx) {
+                lastSpaceIdx = text.length();
+                nextSpaceIdx = boundary.next();
+            }
             ch = fullText.charAt(i);
             switch (ch) {
             case '\r':
@@ -132,13 +143,13 @@ public class TextRenderer {
             case '\n':
                 if (inSymbolCount > 0) {
                     inSymbolCount = 0;
-                    text = "{" + text; //if not a symbol, render as text
+                    text.insert(0, '{'); //if not a symbol, render as text
                 }
                 lineWidths.add(x + pieceWidth);
-                if (!text.isEmpty()) {
-                    addPiece(new TextPiece(text, colorOverride, inReminderTextCount > 0), lineNum, x, y, pieceWidth, lineHeight);
+                if (text.length() > 0) {
+                    addPiece(new TextPiece(text.toString(), colorOverride, inReminderTextCount > 0), lineNum, x, y, pieceWidth, lineHeight);
                     pieceWidth = 0;
-                    text = "";
+                    text.setLength(0);
                     consecutiveSymbols = 0;
                 }
                 lastSpaceIdx = -1;
@@ -156,11 +167,11 @@ public class TextRenderer {
                 }
                 continue; //skip new line character
             case '{':
-                if (inSymbolCount == 0 && !text.isEmpty()) { //add current text if just entering symbol
-                    addPiece(new TextPiece(text, colorOverride,inReminderTextCount > 0), lineNum, x, y, pieceWidth, lineHeight);
+                if (inSymbolCount == 0 && text.length() > 0) { //add current text if just entering symbol
+                    addPiece(new TextPiece(text.toString(), colorOverride,inReminderTextCount > 0), lineNum, x, y, pieceWidth, lineHeight);
                     x += pieceWidth;
                     pieceWidth = 0;
-                    text = "";
+                    text.setLength(0);
                     lastSpaceIdx = -1;
                     consecutiveSymbols = 0;
                 }
@@ -169,8 +180,8 @@ public class TextRenderer {
             case '}':
                 if (inSymbolCount > 0) {
                     inSymbolCount--;
-                    if (!text.isEmpty()) {
-                        FSkinImage symbol = symbolLookup.get(text);
+                    if (text.length() > 0) {
+                        FSkinImage symbol = symbolLookup.get(text.toString());
                         if (symbol != null) {
                             pieceWidth = lineHeight * CardFaceSymbols.FONT_SIZE_FACTOR;
                             if (x + pieceWidth > width) {
@@ -215,13 +226,13 @@ public class TextRenderer {
                             addPiece(new SymbolPiece(symbol, inReminderTextCount > 0), lineNum, x, y - font.getAscent() + (lineHeight - pieceWidth) / 2, pieceWidth, pieceWidth);
                             x += pieceWidth;
                             pieceWidth = 0;
-                            text = "";
+                            text.setLength(0);
                             lastSpaceIdx = -1;
                             consecutiveSymbols++;
                             continue; //skip '}' character
                         }
                     }
-                    text = "{" + text; //if not a symbol, render as text
+                    text.insert(0, '{'); //if not a symbol, render as text
                     if (lastSpaceIdx >= 0) {
                         lastSpaceIdx++;
                     }
@@ -230,16 +241,16 @@ public class TextRenderer {
             case '<':
                 if (inSymbolCount > 0) {
                     inSymbolCount = 0;
-                    text = "{" + text; //if not a symbol, render as text
+                    text.insert(0, '{'); //if not a symbol, render as text
                     if (lastSpaceIdx >= 0) {
                         lastSpaceIdx++;
                     }
                 }
-                if (inKeywordCount == 0 && !text.isEmpty()) { //add current text if starting a keyword
-                    addPiece(new TextPiece(text, colorOverride,false), lineNum, x, y, pieceWidth, lineHeight);
+                if (inKeywordCount == 0 && text.length() > 0) { //add current text if starting a keyword
+                    addPiece(new TextPiece(text.toString(), colorOverride,false), lineNum, x, y, pieceWidth, lineHeight);
                     x += pieceWidth;
                     pieceWidth = 0;
-                    text = "";
+                    text.setLength(0);
                     lastSpaceIdx = -1;
                     consecutiveSymbols = 0;
                 }
@@ -248,28 +259,28 @@ public class TextRenderer {
             case '>':
                 if (inSymbolCount > 0) {
                     inSymbolCount = 0;
-                    text = "{" + text; //if not a symbol, render as text
+                    text.insert(0, '{'); //if not a symbol, render as text
                     if (lastSpaceIdx >= 0) {
                         lastSpaceIdx++;
                     }
                 }
                 if (inKeywordCount > 0) {
                     inKeywordCount--;
-                    if (inKeywordCount == 0 && !text.isEmpty()) {
+                    if (inKeywordCount == 0 && text.length() > 0) {
                         String keyword, value;
-                        text = text.substring(1); //trim leading '<'
-                        if (text.startsWith("/")) {
+                        text.deleteCharAt(0); //trim leading '<'
+                        if (text.charAt(0) == '/') {
                             keyword = text.substring(1);
                             value = null;
                         }
                         else {
-                            int idx = text.indexOf(' ');
+                            int idx = text.indexOf(" ");
                             if (idx != -1) {
                                 keyword = text.substring(0, idx);
                                 value = text.substring(idx + 1);
                             }
                             else {
-                                keyword = text;
+                                keyword = text.toString();
                                 value = null;
                             }
                         }
@@ -283,7 +294,7 @@ public class TextRenderer {
                             break;
                         }
                         if (validKeyword) {
-                            text = "";
+                            text.setLength(0);
                             lastSpaceIdx = -1;
                             continue; //skip '>' character
                         }
@@ -291,19 +302,20 @@ public class TextRenderer {
                 }
                 break;
             case '(':
+            case '（':
                 if (inSymbolCount > 0) {
                     inSymbolCount = 0;
-                    text = "{" + text; //if not a symbol, render as text
+                    text.insert(0, '{'); //if not a symbol, render as text
                     if (lastSpaceIdx >= 0) {
                         lastSpaceIdx++;
                     }
                 }
                 if (parseReminderText) {
-                    if (inReminderTextCount == 0 && !text.isEmpty()) { //add current text if just entering reminder text
-                        addPiece(new TextPiece(text, colorOverride,false), lineNum, x, y, pieceWidth, lineHeight);
+                    if (inReminderTextCount == 0 && text.length() > 0) { //add current text if just entering reminder text
+                        addPiece(new TextPiece(text.toString(), colorOverride,false), lineNum, x, y, pieceWidth, lineHeight);
                         x += pieceWidth;
                         pieceWidth = 0;
-                        text = "";
+                        text.setLength(0);
                         lastSpaceIdx = -1;
                         consecutiveSymbols = 0;
                     }
@@ -311,9 +323,10 @@ public class TextRenderer {
                 }
                 break;
             case ')':
+            case '）':
                 if (inSymbolCount > 0) {
                     inSymbolCount = 0;
-                    text = "{" + text; //if not a symbol, render as text
+                    text.insert(0, '{'); //if not a symbol, render as text
                     if (lastSpaceIdx >= 0) {
                         lastSpaceIdx++;
                     }
@@ -326,19 +339,19 @@ public class TextRenderer {
                 }
                 break;
             case ' ':
-                if (inKeywordCount == 0) {
-                    if (inSymbolCount > 0) {
-                        inSymbolCount = 0;
-                        text = "{" + text; //if not a symbol, render as text
+                if (inKeywordCount == 0 && inSymbolCount > 0) {
+                    inSymbolCount = 0;
+                    text.insert(0, '{'); //if not a symbol, render as text
+                    if (lastSpaceIdx >= 0) {
+                        lastSpaceIdx++;
                     }
-                    lastSpaceIdx = text.length();
                 }
                 break;
             }
             if (hideReminderText && (inReminderTextCount > 0 || atReminderTextEnd)) {
                 continue;
             }
-            text += ch;
+            text.append(ch);
             if (inSymbolCount == 0 && inKeywordCount == 0) {
                 pieceWidth = font.getBounds(text).width;
                 if (x + pieceWidth > width) { //wrap or shrink if needed
@@ -357,7 +370,11 @@ public class TextRenderer {
                             }
                         }
                         else {
-                            String currentLineText = text.substring(0, lastSpaceIdx);
+                            int endIdx = lastSpaceIdx;
+                            if (lastSpaceIdx > 0 && text.charAt(lastSpaceIdx - 1) == ' ') {
+                                endIdx = lastSpaceIdx - 1;
+                            }
+                            String currentLineText = text.substring(0, endIdx);
                             if (!currentLineText.isEmpty()) {
                                 pieceWidth = font.getBounds(currentLineText).width;
                                 addPiece(new TextPiece(currentLineText, colorOverride,inReminderTextCount > 0 || atReminderTextEnd), lineNum, x, y, pieceWidth, lineHeight);
@@ -367,11 +384,11 @@ public class TextRenderer {
                                 pieceWidth = 0;
                             }
                             lineWidths.add(x + pieceWidth);
-                            text = text.substring(lastSpaceIdx + 1);
+                            text.delete(0, lastSpaceIdx);
                             x = 0;
                         }
                         lastSpaceIdx = -1;
-                        pieceWidth = text.isEmpty() ? 0 : font.getBounds(text).width;
+                        pieceWidth = text.length() == 0 ? 0 : font.getBounds(text).width;
                         y += lineHeight;
                         totalHeight += lineHeight;
                         lineNum++;
@@ -451,11 +468,11 @@ public class TextRenderer {
                         needClip = true;
                     }
                 }
-                if (atReminderTextEnd && !text.isEmpty()) { //ensure final piece of reminder text added right away
-                    addPiece(new TextPiece(text, colorOverride, true), lineNum, x, y, pieceWidth, lineHeight);
+                if (atReminderTextEnd && text.length() > 0) { //ensure final piece of reminder text added right away
+                    addPiece(new TextPiece(text.toString(), colorOverride, true), lineNum, x, y, pieceWidth, lineHeight);
                     x += pieceWidth;
                     pieceWidth = 0;
-                    text = "";
+                    text.setLength(0);
                     lastSpaceIdx = -1;
                     consecutiveSymbols = 0;
                 }
@@ -463,8 +480,8 @@ public class TextRenderer {
         }
 
         lineWidths.add(x + pieceWidth);
-        if (!text.isEmpty()) {
-            addPiece(new TextPiece(text, colorOverride, inReminderTextCount > 0), lineNum, x, y, pieceWidth, lineHeight);
+        if (text.length() > 0) {
+            addPiece(new TextPiece(text.toString(), colorOverride, inReminderTextCount > 0), lineNum, x, y, pieceWidth, lineHeight);
             consecutiveSymbols = 0;
         }
     }
