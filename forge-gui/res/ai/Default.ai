@@ -100,17 +100,23 @@ PLANAR_DIE_ROLL_HESITATION_CHANCE=10
 MOVE_EQUIPMENT_TO_BETTER_CREATURES=from_useless_only
 MOVE_EQUIPMENT_CREATURE_EVAL_THRESHOLD=60
 PRIORITIZE_MOVE_EQUIPMENT_IF_USELESS=true
+# If there's a sacrifice cost to reattach an aura/equipment to another target creature, how big of an evaluation difference
+# should there be between the old target and the new one for the AI to decide to proceed with it.
+SAC_TO_REATTACH_TARGET_EVAL_THRESHOLD=400
 
 # Currently disabled
 PREDICT_SPELLS_FOR_MAIN2=true
 RESERVE_MANA_FOR_MAIN2_CHANCE=100
+
+# If enabled, the AI will protect its permanents against curse auras with Hexproof, Shroud, and Protection
+ACTIVELY_PROTECT_VS_CURSE_AURAS=true
 
 # If enabled, the AI will target artifacts and non-aura enchantments with removal aggressively
 ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS=true
 
 # If enabled, the AI will prioritize removing creatures that it can't block at all (e.g. Flying in absence of flying
 # blockers). This is a master toggle. If disabled, the following three options do nothing.
-ACTIVELY_DESTROY_IMMEDIATELY_UNBLOCKABLE=false
+ACTIVELY_DESTROY_IMMEDIATELY_UNBLOCKABLE=true
 # How many unblockable creatures can there be when the AI should still consider prioritizing something (when there are
 # too many, probably it's just worth going for the biggest threat overall instead)
 DESTROY_IMMEDIATELY_UNBLOCKABLE_THRESHOLD=2
@@ -123,7 +129,7 @@ DESTROY_IMMEDIATELY_UNBLOCKABLE_LIFE_IN_DNGR=5
 # The chance that the AI will try to chain two damage spells or a damage spell and a debuffing pump spell to try to
 # kill a bigger creature or a planeswalker. If set to 0, will be disabled. When enabled, will automatically become 100
 # if the AI is in danger of dying.
-CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS=50
+CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS=90
 
 # The chance that the AI will try to hold on to a direct damage spell with X in its cost (e.g. Blaze, Fireball, etc.)
 # so that it doesn't cast it too early in the game against an early game target. Note that when in danger or when the
@@ -154,8 +160,8 @@ CHANCE_TO_COPY_OWN_SPELL_WHILE_ON_STACK=30
 ALWAYS_COPY_SPELL_IF_CMC_DIFF=2
 
 # Storm spell logic
-PRIORITY_REDUCTION_FOR_STORM_SPELLS=0
-MIN_COUNT_FOR_STORM_SPELLS=0
+PRIORITY_REDUCTION_FOR_STORM_SPELLS=9
+MIN_COUNT_FOR_STORM_SPELLS=1
 
 # Logic for Strip Mine, Wasteland, Ghost Quarter and other similar sac-destroy lands marked with
 # AILogic$ LandForLand or GhostQuarter.

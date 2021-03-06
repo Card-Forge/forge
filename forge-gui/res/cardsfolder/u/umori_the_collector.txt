@@ -1,0 +1,9 @@
+Name:Umori, the Collector
+ManaCost:2 B/G B/G
+Types:Legendary Creature Ooze
+PT:4/5
+K:Companion:Special:SharesCardType:Each nonland card in your starting deck shares a card type.
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Card | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a card type.
+S:Mode$ ReduceCost | ValidCard$ Card.ChosenType | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Spells you cast of the chosen type cost {1} less to cast.
+Oracle:Companion — Each nonland card in your starting deck shares a card type. (If this card is your chosen companion, you may put it into your hand from outside the game for {3} any time you could cast a sorcery.)\nAs Umori, the Collector enters the battlefield, choose a card type.\nSpells you cast of the chosen type cost {1} less to cast.

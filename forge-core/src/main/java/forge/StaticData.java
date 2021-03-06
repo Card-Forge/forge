@@ -54,11 +54,11 @@ public class StaticData {
 
     private static StaticData lastInstance = null;
 
-    public StaticData(CardStorageReader cardReader, String editionFolder, String blockDataFolder) {
-        this(cardReader, null, editionFolder, blockDataFolder);
+    public StaticData(CardStorageReader cardReader, String editionFolder, String blockDataFolder, boolean enableUnknownCards, boolean loadNonLegalCards) {
+        this(cardReader, null, editionFolder, blockDataFolder, enableUnknownCards, loadNonLegalCards);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, String editionFolder, String blockDataFolder) {
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, String editionFolder, String blockDataFolder, boolean enableUnknownCards, boolean loadNonLegalCards) {
         this.cardReader = cardReader;
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
@@ -84,8 +84,8 @@ public class StaticData {
             variantCards = new CardDb(variantsCards, editions);
 
             //must initialize after establish field values for the sake of card image logic
-            commonCards.initialize(false, false);
-            variantCards.initialize(false, false);
+            commonCards.initialize(false, false, enableUnknownCards, loadNonLegalCards);
+            variantCards.initialize(false, false, enableUnknownCards, loadNonLegalCards);
         }
 
         {
@@ -149,17 +149,12 @@ public class StaticData {
         }
     }
 
+    // TODO Remove these in favor of them being associated to the Edition
     /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */
     public IStorage<FatPack.Template> getFatPacks() {
         if (fatPacks == null)
             fatPacks = new StorageBase<>("Fat packs", new FatPack.Template.Reader(blockDataFolder + "fatpacks.txt"));
         return fatPacks;
-    }
-
-    public IStorage<BoosterBox.Template> getBoosterBoxes() {
-        if (boosterBoxes == null)
-            boosterBoxes = new StorageBase<>("Booster boxes", new BoosterBox.Template.Reader(blockDataFolder + "boosterboxes.txt"));
-        return boosterBoxes;
     }
 
     /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */
@@ -184,7 +179,7 @@ public class StaticData {
 
     public IStorage<PrintSheet> getPrintSheets() {
         if (printSheets == null)
-            printSheets = new StorageBase<>("Special print runs", new PrintSheet.Reader(new File(blockDataFolder, "printsheets.txt")));
+            printSheets = PrintSheet.initializePrintSheets(new File(blockDataFolder, "printsheets.txt"), getEditions());
         return printSheets;
     }
 
@@ -215,7 +210,7 @@ public class StaticData {
     public Predicate<PaperCard> getStandardPredicate() { return standardPredicate; }
     
     public Predicate<PaperCard> getPioneerPredicate() { return pioneerPredicate; }
-    
+
     public Predicate<PaperCard> getModernPredicate() { return modernPredicate; }
 
     public Predicate<PaperCard> getCommanderPredicate() { return commanderPredicate; }

@@ -4,4 +4,4 @@ Types:Artifact Creature Wall
 PT:0/4
 K:Defender
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48910.jpg
-Oracle:Defender
+Oracle:Defender (This creature can't attack.)

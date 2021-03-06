@@ -10,4 +10,4 @@ A:AB$ ChangeZone | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ 
 SVar:ExileOppCreatures:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Creature.OppCtrl
 SVar:NonGideonAttackers:Count$Valid Creature.nonGideon+YouCtrl+attacking
 DeckHas:Ability$Counters
-Oracle:Whenever you attack with two or more non-Gideon creatures, put a +1/+1 counter on each of those creatures.\n[+2]: Until end of turn, CARDNAME becomes a 5/5 white Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn. (He can't attack if he was cast this turn.)\n[-9]: Exile Gideon, the Oathsworn and each creature your opponents control.
+Oracle:Whenever you attack with two or more non-Gideon creatures, put a +1/+1 counter on each of those creatures.\n[+2]: Until end of turn, Gideon, the Oathsworn becomes a 5/5 white Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn. (He can't attack if he was cast this turn.)\n[−9]: Exile Gideon, the Oathsworn and each creature your opponents control.

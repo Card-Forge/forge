@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -21,6 +21,7 @@ import com.google.common.collect.Lists;
 
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -31,7 +32,7 @@ import java.util.List;
 /**
  * The Class CostRemoveCounter.
  */
-public class CostRemoveCounter extends CostPartWithList {
+public class CostRemoveCounter extends CostPart {
     // SubCounter<Num/Counter/{Type/TypeDescription/Zone}>
 
     // Here are the cards that have RemoveCounter<Type>
@@ -46,11 +47,10 @@ public class CostRemoveCounter extends CostPartWithList {
     private static final long serialVersionUID = 1L;
     public final CounterType counter;
     public final ZoneType zone;
-    private int cntRemoved;
 
     /**
      * Instantiates a new cost remove counter.
-     * 
+     *
      * @param amount
      *            the amount
      * @param counter
@@ -72,17 +72,38 @@ public class CostRemoveCounter extends CostPartWithList {
     public int paymentOrder() { return 8; }
 
     @Override
-    public boolean isUndoable() { return true; }
+    public Integer getMaxAmountX(final SpellAbility ability, final Player payer) {
+        final CounterType cntrs = this.counter;
+        final Card source = ability.getHostCard();
+        final String type = this.getType();
+        if (this.payCostFromSource()) {
+            return source.getCounters(cntrs);
+        } else {
+            List<Card> typeList;
+            if (type.equals("OriginalHost")) {
+                typeList = Lists.newArrayList(ability.getOriginalHost());
+            } else {
+                typeList = CardLists.getValidCards(payer.getCardsIn(this.zone), type.split(";"), payer, source, ability);
+            }
+
+            // Single Target
+            int maxcount = 0;
+            for (Card c : typeList) {
+                maxcount = Math.max(maxcount, c.getCounters(cntrs));
+            }
+            return maxcount;
+        }
+    }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.card.cost.CostPart#toString()
      */
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
-        if (this.counter == CounterType.LOYALTY) {
+        if (this.counter.is(CounterEnumType.LOYALTY)) {
             sb.append("-").append(this.getAmount());
         } else {
             sb.append("Remove ");
@@ -107,20 +128,7 @@ public class CostRemoveCounter extends CostPartWithList {
 
     /*
      * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#refund(forge.Card)
-     */
-    @Override
-    public final void refund(final Card source) {
-        int refund = this.getCardList().size() == 1 ? this.cntRemoved : 1; // is wrong for Ooze Flux and Novijen Sages
-        for (final Card c : this.getCardList()) {
-            c.addCounter(this.counter, refund, source.getController(), false, false, null);
-        }
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
+     *
      * @see
      * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
      * forge.Card, forge.Player, forge.card.cost.Cost)
@@ -131,7 +139,13 @@ public class CostRemoveCounter extends CostPartWithList {
         final Card source = ability.getHostCard();
         final String type = this.getType();
 
-        final Integer amount = this.convertAmount();
+        final Integer amount;
+        if (getAmount().equals("All")) {
+            amount = source.getCounters(cntrs);
+        }
+        else {
+            amount = this.convertAmount();
+        }
         if (this.payCostFromSource()) {
             return (amount == null) || ((source.getCounters(cntrs) - amount) >= 0);
         }
@@ -143,21 +157,10 @@ public class CostRemoveCounter extends CostPartWithList {
                 typeList = CardLists.getValidCards(payer.getCardsIn(this.zone), type.split(";"), payer, source, ability);
             }
             if (amount != null) {
-                // TODO find better way than TypeDescription
-                if (this.getTypeDescription().equals("among creatures you control")) {
-                    // remove X counters from among creatures you control
-                    int totalCounters = 0;
-                    for (Card c : typeList) {
-                        totalCounters += c.getCounters(cntrs);
-                    }
-                    return totalCounters >= amount;
-                    
-                } else {
-                    // (default logic) remove X counters from a single permanent
-                    for (Card c : typeList) {
-                        if (c.getCounters(cntrs) - amount >= 0) {
-                            return true;
-                        }
+                // (default logic) remove X counters from a single permanent
+                for (Card c : typeList) {
+                    if (c.getCounters(cntrs) - amount >= 0) {
+                        return true;
                     }
                 }
                 return false;
@@ -170,30 +173,19 @@ public class CostRemoveCounter extends CostPartWithList {
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
         Card source = ability.getHostCard();
-        cntRemoved = decision.c;
-        for (final Card card : decision.cards) {
-            executePayment(ability, card);
+
+        int removed = 0;
+        final int toRemove = decision.c;
+
+        // for this cost, the list should be only one
+        for (Card c : decision.cards) {
+            removed += toRemove;
+            c.subtractCounter(counter, toRemove);
+            c.getGame().updateLastStateForCard(c);
         }
-        source.setSVar("CostCountersRemoved", Integer.toString(cntRemoved));
+
+        source.setSVar("CostCountersRemoved", Integer.toString(removed));
         return true;
-    }
-
-    @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard){
-        targetCard.subtractCounter(this.counter, cntRemoved);
-        return targetCard;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#getHashForList()
-     */
-    @Override
-    public String getHashForLKIList() {
-        return "CounterRemove";
-    }
-    @Override
-    public String getHashForCardList() {
-    	return "CounterRemoveCards";
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

@@ -2,9 +2,8 @@ Name:Contamination
 ManaCost:2 B
 Types:Enchantment
 K:UpkeepCost:Sac<1/Creature>
-R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Land | ManaReplacement$ ProduceB | Description$ If a land is tapped for mana, it produces {B} instead of any other type and amount.
-SVar:ProduceB:Any->B
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Land | ValidAbility$ Activated.hasTapCost | ReplaceWith$ ProduceB | Description$ If a land is tapped for mana, it produces {B} instead of any other type and amount.
+SVar:ProduceB:DB$ ReplaceMana | ReplaceMana$ B
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/contamination.jpg
 Oracle:At the beginning of your upkeep, sacrifice Contamination unless you sacrifice a creature.\nIf a land is tapped for mana, it produces {B} instead of any other type and amount.

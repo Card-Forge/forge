@@ -1,7 +1,6 @@
 Name:Crash
 ManaCost:2 R
 Types:Instant
+SVar:AltCost:Cost$ Sac<1/Mountain> | Description$ You may sacrifice a Mountain rather than pay this spell's mana cost.
 A:SP$ Destroy | Cost$ 2 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
-SVar:AltCost:Cost$ Sac<1/Mountain>
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crash.jpg
 Oracle:You may sacrifice a Mountain rather than pay this spell's mana cost.\nDestroy target artifact.

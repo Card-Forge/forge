@@ -1,0 +1,11 @@
+Name:Frogkin Kidnapper
+ManaCost:1 B
+Types:Creature Frog Rogue
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand. Choose a nonland card from it. Ransom that card. (Exile it. Its owner may pay {3} at any time to return it to their hand.)
+SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | TgtPrompt$ Select target opponent | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True | RememberChanged$ True | SubAbility$ TrigRansom
+SVar:TrigRansom:DB$ Effect | EffectOwner$ ParentTarget | Duration$ Permanent | Abilities$ PayUp | SVars$ ExileEffect | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup
+SVar:PayUp:ST$ ChangeZone | Cost$ 3 | Defined$ Remembered | Origin$ Exile | Destination$ Hand | ActivationZone$ Command | AILogic$ Always | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When Frogkin Kidnapper enters the battlefield, target opponent reveals their hand. Choose a nonland card from it. Ransom that card. (Exile it. Its owner may pay {3} at any time to return it to their hand.)

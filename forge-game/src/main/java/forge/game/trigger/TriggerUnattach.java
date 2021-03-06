@@ -46,7 +46,7 @@ public class TriggerUnattach extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerUnattach(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerUnattach(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -76,8 +76,8 @@ public class TriggerUnattach extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Object, AbilityKey.Attach);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Object, AbilityKey.Attach);
     }
 
     @Override

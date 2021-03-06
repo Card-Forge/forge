@@ -22,9 +22,7 @@ import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
 import forge.game.player.Player;
-import forge.game.staticability.StaticAbility;
-import forge.game.zone.ZoneType;
-import forge.util.collect.FCollectionView;
+import forge.game.staticability.StaticAbilityCantBeCast;
 
 /**
  * <p>
@@ -34,9 +32,7 @@ import forge.util.collect.FCollectionView;
  * @author Forge
  * @version $Id$
  */
-public abstract class AbilityActivated extends SpellAbility implements java.io.Serializable, Cloneable {
-    /** Constant <code>serialVersionUID=1L</code>. */
-    private static final long serialVersionUID = 1L;
+public abstract class AbilityActivated extends SpellAbility implements Cloneable {
 
     /**
      * <p>
@@ -66,10 +62,10 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
      */
     public AbilityActivated(final Card sourceCard, final Cost abCost, final TargetRestrictions tgt) {
         super(sourceCard, abCost);
-        if ((tgt != null) && tgt.doesTarget()) {
-            this.setTargetRestrictions(tgt);
-        }
+        this.setTargetRestrictions(tgt);
     }
+
+    public boolean isActivatedAbility() { return true; }
 
     /** {@inheritDoc} */
     @Override
@@ -86,16 +82,6 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
 
         final Card c = this.getHostCard();
 
-        // CantBeActivated static abilities
-        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            final FCollectionView<StaticAbility> staticAbilities = ca.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
-                if (stAb.applyAbility("CantBeActivated", c, this)) {
-                    return false;
-                }
-            }
-        }
-
         if (c.hasKeyword("CARDNAME's activated abilities can't be activated.") || this.isSuppressed()) {
             return false;
         }
@@ -106,7 +92,13 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
 
         return CostPayment.canPayAdditionalCosts(this.getPayCosts(), this);
     }
-    
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean checkRestrictions(Card host, Player activator) {
+        return !StaticAbilityCantBeCast.cantBeActivatedAbility(this, host, activator);
+    }
+
     /** {@inheritDoc} */
     @Override
     public boolean isPossible() {

@@ -177,10 +177,10 @@ public class SimulationController {
             saOrSubSa = saOrSubSa.getSubAbility();
         }
 
-        if (saOrSubSa == null || saOrSubSa.getTargets() == null || saOrSubSa.getTargets().getTargets().size() != 1) {
+        if (saOrSubSa == null || saOrSubSa.getTargets() == null || saOrSubSa.getTargets().size() != 1) {
             return null;
         }
-        GameObject target = saOrSubSa.getTargets().getTargets().get(0);
+        GameObject target = saOrSubSa.getTargets().get(0);
         GameObject originalTarget = target;
         if (!(target instanceof Card)) {  return null; }
         Card hostCard = sa.getHostCard();

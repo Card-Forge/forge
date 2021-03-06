@@ -22,6 +22,6 @@ public class GameEventPlayerLivesChanged extends GameEvent {
     
     @Override
     public String toString() {
-        return TextUtil.concatWithSpace(Lang.getPossesive(player.getName()),"lives changed:",  String.valueOf(oldLives),"->", String.valueOf(newLives));
+        return TextUtil.concatWithSpace(Lang.getInstance().getPossesive(player.getName()),"lives changed:",  String.valueOf(oldLives),"->", String.valueOf(newLives));
     }
 }

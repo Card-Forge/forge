@@ -8,4 +8,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | References$ X | TokenScript$ b_x_x_horror | TokenOwner$ You | LegacyImage$ b x x horror c14 | TokenPower$ X | TokenToughness$ X
 SVar:X:TriggeredCard$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flesh_carver.jpg
-Oracle:Intimidate\n{1}{B}, Sacrifice another creature: Put two +1/+1 counters on Flesh Carver.\nWhen Flesh Carver dies, create an X/X black Horror creature token, where X is Flesh Carver's power.
+Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\n{1}{B}, Sacrifice another creature: Put two +1/+1 counters on Flesh Carver.\nWhen Flesh Carver dies, create an X/X black Horror creature token, where X is Flesh Carver's power.

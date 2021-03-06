@@ -1,0 +1,8 @@
+Name:Sanctum of Fruitful Harvest
+ManaCost:2 G
+Types:Legendary Enchantment Shrine
+T:Mode$ Phase | Phase$ Main1 | PreCombatMain$ True | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of your precombat main phase, add X mana of any one color, where X is the number of Shrines you control.
+SVar:TrigMana:DB$ Mana | Produced$ Any | Amount$ X | References$ X
+SVar:X:Count$TypeYouCtrl.Shrine
+DeckHints:Type$Shrine
+Oracle:At the beginning of your precombat main phase, add X mana of any one color, where X is the number of Shrines you control.

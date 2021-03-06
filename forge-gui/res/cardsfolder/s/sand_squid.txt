@@ -10,4 +10,4 @@ T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Cle
 SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sand_squid.jpg
-Oracle:Islandwalk\nYou may choose not to untap Sand Squid during your untap step.\n{T}: Tap target creature. That creature doesn't untap during its controller's untap step for as long as Sand Squid remains tapped.
+Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nYou may choose not to untap Sand Squid during your untap step.\n{T}: Tap target creature. That creature doesn't untap during its controller's untap step for as long as Sand Squid remains tapped.

@@ -7,6 +7,8 @@ MciCode=mh1
 Type=Other
 BoosterCovers=5
 Booster=10 Common:!fromSheet("MH1 Secret Cards"), 3 Uncommon:!fromSheet("MH1 Secret Cards"), 1 RareMythic:!fromSheet("MH1 Secret Cards"), 1 fromSheet("MH1 Lands")
+BoosterBox=24
+ChaosDraftThemes=MASTERS_SET;GRAVEYARD_MATTERS
 
 
 [cards]

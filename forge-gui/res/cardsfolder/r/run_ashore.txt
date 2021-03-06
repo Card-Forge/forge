@@ -1,0 +1,7 @@
+Name:Run Ashore
+ManaCost:4 U U
+Types:Instant
+A:SP$ Charm | Cost$ 4 U U | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBSubmerge,DBUnsummon
+SVar:DBSubmerge:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent for its owner to put on the top or bottom of their library | AlternativeDecider$ TargetedController | Origin$ Battlefield| Destination$ Library | LibraryPosition$ 0 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | AlternativeDestinationMessage$ Would you like to put the card on the top of your library (and not on the bottom)? | SpellDescription$ The owner of target nonland permanent puts it on the top or bottom of their library.
+SVar:DBUnsummon:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent to return to owner's hand | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand.
+Oracle:Choose one or both —\n• The owner of target nonland permanent puts it on the top or bottom of their library.\n• Return target nonland permanent to its owner's hand.

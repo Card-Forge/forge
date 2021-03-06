@@ -46,7 +46,7 @@ public class TriggerTurnFaceUp extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerTurnFaceUp(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerTurnFaceUp(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -64,8 +64,8 @@ public class TriggerTurnFaceUp extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Cause);
     }
 
     @Override

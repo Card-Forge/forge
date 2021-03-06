@@ -31,11 +31,10 @@ public class CardAvatarImage implements FImage {
 
     @Override
     public void draw(Graphics g, float x, float y, float w, float h) {
-        if (image == null) { //attempt to retrieve card art if needed
-            image = CardRenderer.getCardArt(imageKey, false, false, false);
-            if (image == null) {
-                return; //can't draw anything if can't be loaded yet
-            }
+        //force to get the avatar since the the cardartcache & loadingcache is always cleared on screen change or the battle bar will display black
+        image = CardRenderer.getCardArt(imageKey, false, false, false);
+        if (image == null) {
+            return; //can't draw anything if can't be loaded yet
         }
 
         //draw scaled image into clipped region so it fills box while maintain aspect ratio

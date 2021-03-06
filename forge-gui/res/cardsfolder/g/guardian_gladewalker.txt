@@ -1,0 +1,9 @@
+Name:Guardian Gladewalker
+ManaCost:1 G
+Types:Creature Shapeshifter
+PT:1/1
+K:Changeling
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Changeling (This card is every creature type.)\nWhen Guardian Gladewalker enters the battlefield, put a +1/+1 counter on target creature.

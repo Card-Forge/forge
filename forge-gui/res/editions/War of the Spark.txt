@@ -8,6 +8,7 @@ Type=Expansion
 BoosterCovers=3
 Booster=10 Common:!fromSheet("WAR Secret Cards"), 3 Uncommon:!fromSheet("WAR Secret Cards"), 1 RareMythic:!fromSheet("WAR Secret Cards"), 1 BasicLand
 BoosterMustContain=Planeswalker
+ChaosDraftThemes=RAVNICA
 
 [cards]
 1 R Karn, the Great Creator
@@ -285,13 +286,49 @@ BoosterMustContain=Planeswalker
 273 R Jace's Ruse
 274 C Simic Guildgate
 275 M Tezzeret, Master of the Bridge
+1★ R Karn, the Great Creator
+2★ R Ugin, the Ineffable
+13★ M Gideon Blackblade
+32★ U Teyo, the Shieldmage
+37★ U The Wanderer
+54★ R Jace, Wielder of Mysteries
+56★ U Kasmina, Enigmatic Mentor
+61★ U Narset, Parter of Veils
+83★ U Davriel, Rogue Shadowmage
+97★ M Liliana, Dreadhorde General
+100★ U Ob Nixilis, the Hate-Twisted
+119★ R Chandra, Fire Artisan
+135★ U Jaya, Venerated Firemage
+143★ R Sarkhan the Masterless
+146★ U Tibalt, Rakish Instigator
+150★ U Arlinn, Voice of the Pack
+164★ U Jiang Yanggu, Wildcrafter
+169★ R Nissa, Who Shakes the World
+180★ R Vivien, Champion of the Wilds
+184★ R Ajani, the Greathearted
+191★ R Domri, Anarch of Bolas
+207★ M Nicol Bolas, Dragon-God
+211★ R Ral, Storm Conduit
+217★ R Sorin, Vengeful Bloodlord
+220★ R Tamiyo, Collector of Tales
+221★ R Teferi, Time Raveler
+227★ U Angrath, Captain of Chaos
+228★ U Ashiok, Dream Render
+229★ U Dovin, Hand of Control
+230★ U Huatli, the Sun's Heart
+231★ U Kaya, Bane of the Dead
+232★ U Kiora, Behemoth Beckoner
+233★ U Nahiri, Storm of Stone
+234★ U Saheeli, Sublime Artificer
+235★ U Samut, Tyrant Smasher
+236★ U Vraska, Swarm's Eminence
 
 [tokens]
 wubrg_2_2_citizen
 b_0_0_zombie_army
 b_0_0_zombie_army
 b_0_0_zombie_army
-b_1_1_assassin_deathtouch
+b_1_1_assassin_deathtouch_pwdestroy
 b_2_2_zombie
 b_4_4_zombie_warrior_vigilance
 c_1_1_a_servo

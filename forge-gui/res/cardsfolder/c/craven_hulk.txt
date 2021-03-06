@@ -1,0 +1,6 @@
+Name:Craven Hulk
+ManaCost:3 R
+Types:Creature Giant Coward
+PT:4/4
+K:CARDNAME can't block alone.
+Oracle:Craven Hulk can't block alone.

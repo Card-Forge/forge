@@ -4,4 +4,4 @@ Types:Enchantment
 A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_fire.jpg
-Oracle:Sacrifice Seal of Fire: Seal of Fire deals 2 damage to any target.
+Oracle:Sacrifice Seal of Fire: It deals 2 damage to any target.

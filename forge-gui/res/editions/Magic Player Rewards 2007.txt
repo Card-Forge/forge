@@ -1,0 +1,14 @@
+[metadata]
+Code=P07
+Date=2007-01-01
+Name=Magic Player Rewards 2007
+Type=Reprint
+
+[cards]
+1 R Wrath of God
+2 R Condemn
+3 R Mortify
+4 R Psionic Blast
+5 R Cruel Edict
+6 R Disenchant
+7 R Recollect

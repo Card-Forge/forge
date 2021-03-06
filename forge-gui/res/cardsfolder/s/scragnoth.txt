@@ -5,4 +5,4 @@ PT:3/4
 K:Protection from blue
 K:CARDNAME can't be countered.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scragnoth.jpg
-Oracle:Scragnoth can't be countered.\nProtection from blue
+Oracle:This spell can't be countered.\nProtection from blue

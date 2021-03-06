@@ -4,6 +4,6 @@ Types:Legendary Creature Avatar
 PT:6/6
 K:Trample
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is dies, destroy all nonland permanents. They can't be regenerated.
-SVar:TrigDestroyAll:DB$DestroyAll | ValidCards$ Permanent.nonLand | NoRegen$ True
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.nonLand | NoRegen$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_alara.jpg
 Oracle:Trample\nWhen Child of Alara dies, destroy all nonland permanents. They can't be regenerated.

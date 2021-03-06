@@ -1,0 +1,9 @@
+[metadata]
+Code=PTSP
+Date=2006-10-06
+Name=Time Spiral Promos
+Type=Reprint
+
+[cards]
+178 R Sudden Shock
+259 R Lotus Bloom

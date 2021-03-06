@@ -6,5 +6,6 @@ SVar:DBDiscard:DB$Discard | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBUntap
 SVar:DBUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 3
 AI:RemoveDeck:Random
 SVar:FreeSpellAI:True
+DeckHas:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frantic_search.jpg
 Oracle:Draw two cards, then discard two cards. Untap up to three lands.

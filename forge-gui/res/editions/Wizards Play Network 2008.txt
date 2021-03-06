@@ -1,0 +1,9 @@
+[metadata]
+Code=PWPN
+Date=2008-10-01
+Name=Wizards Play Network 2008
+Type=Reprint
+
+[cards]
+21 R Sprouting Thrinax
+22 R Woolly Thoctar

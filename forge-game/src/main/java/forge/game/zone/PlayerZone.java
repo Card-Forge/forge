@@ -26,7 +26,6 @@ import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
-import forge.util.TextUtil;
 
 /**
  * <p>
@@ -61,7 +60,8 @@ public class PlayerZone extends Zone {
             }
 
             boolean graveyardCastable = c.hasKeyword(Keyword.FLASHBACK) ||
-                    c.hasKeyword(Keyword.RETRACE) || c.hasKeyword(Keyword.JUMP_START);
+                    c.hasKeyword(Keyword.RETRACE) || c.hasKeyword(Keyword.JUMP_START) || c.hasKeyword(Keyword.ESCAPE);
+            boolean exileCastable = (c.isAdventureCard() || c.isForetold()) && c.isInZone(ZoneType.Exile);
             for (final SpellAbility sa : c.getSpellAbilities()) {
                 final ZoneType restrictZone = sa.getRestrictions().getZone();
 
@@ -74,8 +74,15 @@ public class PlayerZone extends Zone {
                     return true;
                 }
 
+                //todo add brokkos??
                 if (sa.isSpell()
                         && (graveyardCastable && PlayerZone.this.is(ZoneType.Graveyard))
+                        && restrictZone.equals(ZoneType.Hand)) {
+                    return true;
+                }
+
+                if (sa.isSpell()
+                        && (exileCastable && PlayerZone.this.is(ZoneType.Exile))
                         && restrictZone.equals(ZoneType.Hand)) {
                     return true;
                 }
@@ -102,7 +109,7 @@ public class PlayerZone extends Zone {
 
     @Override
     public final String toString() {
-        return TextUtil.concatWithSpace(Lang.getPossesive(player.toString()), zoneType.toString());
+        return Lang.getInstance().getPossessedObject(player.toString(), zoneType.toString());
     }
 
     public CardCollectionView getCardsPlayerCanActivate(Player who) {

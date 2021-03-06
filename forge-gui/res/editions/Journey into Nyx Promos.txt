@@ -1,0 +1,16 @@
+[metadata]
+Code=PJOU
+Date=2014-04-26
+Name=Journey into Nyx Promos
+Type=Reprint
+
+[cards]
+6 R Dawnbringer Charioteers
+37 R Dictate of Kruphix
+51 R Scourge of Fleets
+66 R Doomwake Giant
+84 U Squelching Leeches
+93 R Dictate of the Twin Gods
+112 R Spawn of Thraxes
+122 R Eidolon of Blossoms
+126 R Heroes' Bane

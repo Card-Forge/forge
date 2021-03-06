@@ -7,6 +7,8 @@ import com.badlogic.gdx.backends.lwjgl.LwjglClipboard;
 import forge.Forge;
 import forge.assets.AssetsDownloader;
 import forge.interfaces.IDeviceAdapter;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.util.FileUtil;
 import forge.util.OperatingSystem;
 import forge.util.RestartUtil;
@@ -92,8 +94,10 @@ public class Main {
         config.title = "Forge";
         config.useHDPI = desktopMode; // enable HiDPI on Mac OS
 
-        new LwjglApplication(Forge.getApp(new LwjglClipboard(), new DesktopAdapter(switchOrientationFile),
-                desktopMode ? desktopModeAssetsDir : assetsDir, true), config);
+        ForgePreferences prefs = FModel.getPreferences();
+        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
+        new LwjglApplication(Forge.getApp(new LwjglClipboard(), new DesktopAdapter(switchOrientationFile),//todo get totalRAM && isTabletDevice
+                desktopMode ? desktopModeAssetsDir : assetsDir, propertyConfig, false, 0, false, 0, "", ""), config);
     }
 
     private static class DesktopAdapter implements IDeviceAdapter {

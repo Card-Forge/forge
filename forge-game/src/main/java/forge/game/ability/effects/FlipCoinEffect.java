@@ -117,7 +117,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             } else {
                 if (victory) {
                     if (sa.getParam("RememberWinner") != null) {
-                        host.addRemembered(host);
+                        host.addRemembered(flipper);
                     }
 
                     if (sa.hasAdditionalAbility("WinSubAbility")) {
@@ -126,7 +126,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                     // runParams.put("Won","True");
                 } else {
                     if (sa.getParam("RememberLoser") != null) {
-                        host.addRemembered(host);
+                        host.addRemembered(flipper);
                     }
 
                     if (sa.hasAdditionalAbility("LoseSubAbility")) {
@@ -224,12 +224,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
     }
 
     public static int getFilpMultiplier(final Player flipper) {
-        int i = 0;
-        for (String kw : flipper.getKeywords()) {
-            if (kw.startsWith("If you would flip a coin")) {
-                i++;
-            }
-        }
-        return 1 << i;
+        String str = "If you would flip a coin, instead flip two coins and ignore one.";
+        return 1 + flipper.getKeywords().getAmount(str);
     }
 }

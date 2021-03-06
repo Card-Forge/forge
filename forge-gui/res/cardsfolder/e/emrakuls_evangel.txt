@@ -2,11 +2,10 @@ Name:Emrakul's Evangel
 ManaCost:2 G
 Types:Creature Human Horror
 PT:3/2
-A:AB$ Token | Cost$ T Sac<X/Creature.Other+nonEldrazi/other non-Eldrazi creatures> Sac<1/CARDNAME> | Announce$ X | TokenAmount$ Y | TokenScript$ c_3_2_eldrazi_horror | TokenOwner$ You | LegacyImage$ c 3 2 eldrazi horror emn | References$ Y | SpellDescription$ Create a 3/2 colorless Eldrazi Horror creature token for each creature sacrificed this way. | CostDesc$ {T}, Sacrifice CARDNAME and any number of other non-Eldrazi creatures:
+A:AB$ Token | Cost$ T Sac<X/Creature.Other+nonEldrazi/other non-Eldrazi creatures> Sac<1/CARDNAME> | TokenAmount$ Y | TokenScript$ c_3_2_eldrazi_horror | TokenOwner$ You | LegacyImage$ c 3 2 eldrazi horror emn | References$ Y | SpellDescription$ Create a 3/2 colorless Eldrazi Horror creature token for each creature sacrificed this way. | CostDesc$ {T}, Sacrifice CARDNAME and any number of other non-Eldrazi creatures:
 SVar:Y:Sacrificed$Valid Creature
-SVar:X:XChoice
+SVar:X:Count$xPaid
 DeckHints:Ability$Token & Type$Eldrazi|Horror
-DeckHas:Ability$Token
+DeckHas:Ability$Token & Ability$Sacrifice
 SVar:AIPreference:SacCost$Creature.token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/emrakuls_evangel.jpg
 Oracle:{T}, Sacrifice Emrakul's Evangel and any number of other non-Eldrazi creatures: Create a 3/2 colorless Eldrazi Horror creature token for each creature sacrificed this way.

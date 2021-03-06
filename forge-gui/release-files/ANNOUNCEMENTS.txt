@@ -1,9 +1,10 @@
 #Add one announcement per line
-Theros Beyond Death Prerelease!
-"Prerelease" limited mode for latest sets 
-Bunches of bug fixes,
-Continued work on Translations
-[b]Forge now requires Java 8 (or newer). You will not be able to start the game if you are not yet running Java 8.[/b]
-For some reason Oracle hates Forge and version 1.8.0_211 does bad things with Forge for unknown reasons. Downgrade to 202 for a beter time. 
-https://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html
-We have a Discord server for hanging out with Forge devs and other Forge fans. Feel free to [url=https://discord.gg/3v9JCVr]jump on in and say hi[/url]!
+Get in the discord if you aren't yet.
+The game is now translated into Japanese (not all the messages are translated yet).
+Mutate is now fully implemented.
+The game now supports an assortment of silver-bordered cards from Unhinged, Unglued, Unstable, and other similar sets.
+There are new Net Deck categories - the Standard, Modern, and Pioneer archives.
+Draft cubes have been updated to account for the newly supported cards, MTGO Vintage December 2020 cube was added.
+New Possibility Storm puzzles were added to the Puzzle Mode (IKO/M21/ZNR/KHM), including puzzles that utilize Mutate.
+Planar Conquest now has a new plane accessible - Eldraine.
+Forge now supports promos which are available on Scryfall.

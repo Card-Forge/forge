@@ -18,7 +18,10 @@ import forge.util.CardTranslation;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Maps;
+
 import java.util.List;
+import java.util.Map;
 
 public class ChangeCombatantsEffect extends SpellAbilityEffect {
 
@@ -45,8 +48,12 @@ public class ChangeCombatantsEffect extends SpellAbilityEffect {
                 final Combat combat = game.getCombat();
                 final GameEntity originalDefender = combat.getDefenderByAttacker(c);
                 final FCollectionView<GameEntity> defs = combat.getDefenders();
-                final GameEntity defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(defs, sa,
-                        Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false);
+
+                String title = Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName()));
+                Map<String, Object> params = Maps.newHashMap();
+                params.put("Attacker", c);
+
+                final GameEntity defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(defs, sa, title, false, params);
                 if (originalDefender != null && !originalDefender.equals(defender)) {
                     AttackingBand ab = combat.getBandOfAttacker(c);
                     if (ab != null) {

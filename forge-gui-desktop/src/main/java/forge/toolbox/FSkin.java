@@ -61,6 +61,9 @@ import forge.util.Localizer;
  */
 public class FSkin {
 
+    public static final int SYMBOL_WIDTH = 13;
+    public static final int SYMBOL_HEIGHT = 13;
+
     /**
      * Retrieves a color from this skin's color map.
      *
@@ -77,7 +80,7 @@ public class FSkin {
      *
      * @param clr0 {@link java.awt.Color}
      * @param step int
-     * @return {@link java.awt.Color}
+     * @return {@link java.awt.CFaceolor}
      */
     public static Color stepColor(final Color clr0, final int step) {
         int r = clr0.getRed();
@@ -1006,7 +1009,7 @@ public class FSkin {
 
     private static void addEncodingSymbol(final String key, final FSkinProp skinProp) {
         final String path = ForgeConstants.CACHE_SYMBOLS_DIR + "/" + key.replace("/", "") + ".png";
-        getImage(skinProp).save(path, 13, 13);
+        getImage(skinProp).save(path, SYMBOL_WIDTH, SYMBOL_HEIGHT);
     }
 
     public static String encodeSymbols(String str, final boolean formatReminderText) {
@@ -1019,11 +1022,14 @@ public class FSkin {
                     "" : " <i>\\($1\\)</i>";
             str = str.replaceAll(pattern, replacement);
         }
-
+        // Just return the string unencoded if we're optimizing for screen readers.
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SR_OPTIMIZE)) {
+            return str;
+        }
         //format mana symbols to display as icons
         pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement
         try {
-            replacement = "<img src=\"" + new File(ForgeConstants.CACHE_SYMBOLS_DIR + "/$1$2$3.png").toURI().toURL().toString() + "\">";
+            replacement = "<img src=\"" + new File(ForgeConstants.CACHE_SYMBOLS_DIR + "/$1$2$3.png").toURI().toURL().toString() + "\" width=" + SYMBOL_WIDTH + " height=" + SYMBOL_HEIGHT + ">";
             str = str.replaceAll(pattern, replacement);
         } catch (final MalformedURLException e) {
             e.printStackTrace();
@@ -1083,6 +1089,7 @@ public class FSkin {
 
             if (allSkins == null) { //initialize
                 allSkins = new ArrayList<>();
+                allSkins.add("Default");//init default
                 final List<String> skinDirectoryNames = getSkinDirectoryNames();
                 for (String skinDirectoryName : skinDirectoryNames) {
                     allSkins.add(WordUtil.capitalize(skinDirectoryName.replace('_', ' ')));
@@ -1095,7 +1102,7 @@ public class FSkin {
 
         // Non-default (preferred) skin name and dir.
         preferredName = skinName.toLowerCase().replace(' ', '_');
-        preferredDir = ForgeConstants.SKINS_DIR + preferredName + "/";
+        preferredDir = preferredName.equals("default") ? ForgeConstants.DEFAULT_SKINS_DIR : ForgeConstants.CACHE_SKINS_DIR + preferredName + "/";
 
         if (onInit) {
             final File f = new File(preferredDir + ForgeConstants.SPLASH_BG_FILE);
@@ -1159,7 +1166,7 @@ public class FSkin {
         }
 
         final Localizer localizer = Localizer.getInstance();
-        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("splash.loading.processingimagesprites") + ": ", 8);
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("splash.loading.processingimagesprites") + ": ", 12);
 
         // Grab and test various sprite files.
         final String defaultDir = ForgeConstants.DEFAULT_SKINS_DIR;
@@ -1365,7 +1372,7 @@ public class FSkin {
     public static List<String> getSkinDirectoryNames() {
         final List<String> mySkins = new ArrayList<>();
 
-        final File dir = new File(ForgeConstants.SKINS_DIR);
+        final File dir = new File(ForgeConstants.CACHE_SKINS_DIR);
         final String[] children = dir.list();
         if (children == null) {
             System.err.println("FSkin > can't find skins directory!");
@@ -2208,7 +2215,7 @@ public class FSkin {
         }
         private static class SkinScrollBarUI extends BasicScrollBarUI implements ILocalRepaint {
             @SuppressWarnings("serial")
-            private static JButton hiddenButton = new JButton() {
+            private static class HiddenButton extends JButton {
                 @Override
                 public Dimension getPreferredSize() {
                     return new Dimension(0, 0);
@@ -2223,24 +2230,40 @@ public class FSkin {
 
             private final boolean vertical;
             private boolean hovered;
+            private MouseAdapter hoverListener;
+
+            private static class SkinScrollBarListener extends MouseAdapter {
+                private SkinScrollBarUI barUI;
+
+                private SkinScrollBarListener(SkinScrollBarUI barUI) {
+                    this.barUI = barUI;
+                }
+
+                @Override
+                public void mouseEntered(final MouseEvent e) {
+                    barUI.hovered = true;
+                    barUI.repaintSelf();
+                }
+
+                @Override
+                public void mouseExited(final MouseEvent e) {
+                    barUI.hovered = false;
+                    barUI.repaintSelf();
+                }
+            }
 
             private SkinScrollBarUI(final JScrollBar scrollbar, final boolean vertical0) {
                 vertical = vertical0;
-                scrollbar.setOpaque(false);
-                scrollbar.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseEntered(final MouseEvent e) {
-                        hovered = true;
-                        repaintSelf();
-                    }
 
-                    @Override
-                    public void mouseExited(final MouseEvent e) {
-                        hovered = false;
-                        repaintSelf();
-                    }
-                });
+                hoverListener = new SkinScrollBarListener(this);
+                scrollbar.setOpaque(false);
+                scrollbar.addMouseListener(hoverListener);
                 scrollbar.setUI(this);
+            }
+
+            protected void uninstallListeners() {
+                super.uninstallListeners();
+                scrollbar.removeMouseListener(hoverListener);
             }
 
             @Override
@@ -2251,12 +2274,12 @@ public class FSkin {
 
             @Override
             protected JButton createIncreaseButton(final int orientation) {
-                return hiddenButton; //hide increase button
+                return new HiddenButton(); //hide increase button
             }
 
             @Override
             protected JButton createDecreaseButton(final int orientation) {
-                return hiddenButton; //hide decrease button
+                return new HiddenButton(); //hide decrease button
             }
 
             @Override

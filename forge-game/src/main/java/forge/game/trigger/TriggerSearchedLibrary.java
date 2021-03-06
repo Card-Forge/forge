@@ -48,7 +48,7 @@ public class TriggerSearchedLibrary extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerSearchedLibrary(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerSearchedLibrary(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -76,8 +76,8 @@ public class TriggerSearchedLibrary extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Player);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
     }
 
     @Override

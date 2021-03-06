@@ -1,0 +1,15 @@
+Name:Tevesh Szat, Doom of Fools
+ManaCost:4 B
+Types:Legendary Planeswalker Szat
+Loyalty:4
+Text:CARDNAME can be your commander.
+K:Partner
+A:AB$ Token | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | TokenScript$ b_0_1_thrull | TokenAmount$ 2 | SpellDescription$ Create two 0/1 black Thrull creature tokens.
+A:AB$ Sacrifice | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | SacValid$ Creature,Planeswalker | SacMessage$ creature or planeswalker | Optional$ True | RememberSacrificed$ True | SubAbility$ DBDraw | SpellDescription$ You may sacrifice another creature or planeswalker. If you do, draw two cards, then draw another card if the sacrificed permanent was a commander.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBDraw2
+SVar:DBDraw2:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.IsCommander | ConditionCompare$ GE1
+A:AB$ GainControl | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | AllValid$ Card.IsCommander | NewController$ You | SubAbility$ DBChangeZone | SpellDescription$ Gain control of all commanders. Put all commanders from the commander zone onto the battlefield under your control.
+SVar:DBChangeZone:DB$ ChangeZoneAll | ValidCards$ Card.IsCommander | Origin$ Command | Destination$ Battlefield | GainControl$ True
+DeckHas:Ability$Token & Ability$Sacrifice
+SVar:AIPreference:SacCost$Creature.token+powerLE2+toughnessLE2
+Oracle:[+2]: Create two 0/1 black Thrull creature tokens.\n[+1]: You may sacrifice another creature or planeswalker. If you do, draw two cards, then draw another card if the sacrificed permanent was a commander.\n[−10]: Gain control of all commanders. Put all commanders from the command zone onto the battlefield under your control.\nTevesh Szat, Doom of Fools can be your commander.\nPartner

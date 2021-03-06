@@ -1,6 +1,7 @@
 package forge.assets;
 
 import java.io.File;
+import java.util.List;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -8,29 +9,38 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
+import com.google.common.cache.CacheLoader;
 import forge.FThreads;
-import org.cache2k.integration.CacheLoader;
 
 import forge.Forge;
 import forge.ImageKeys;
+import forge.model.FModel;
+import forge.properties.ForgeConstants;
+import forge.properties.ForgePreferences;
+import forge.util.FileUtil;
+import forge.util.TextUtil;
+import org.apache.commons.lang3.tuple.Pair;
+
+import static forge.assets.ImageCache.croppedBorderImage;
 
 final class ImageLoader extends CacheLoader<String, Texture> {
+    private static List<String> borderlessCardlistKey = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
+
     Texture n;
     @Override
     public Texture load(String key) {
-        boolean extendedArt = false;
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
+            return null;
+
+        boolean extendedArt = isBorderless(key) && Forge.enableUIMask.equals("Full");
         boolean textureFilter = Forge.isTextureFilteringEnabled();
-        if (key.length() > 4){
-            if ((key.substring(0,4).contains("MPS_"))) //MPS_ sets
-                extendedArt = true;
-            else if ((key.substring(0,3).contains("UST"))) //Unstable Set
-                extendedArt = true;
-        }
         File file = ImageKeys.getImageFile(key);
         if (file != null) {
             FileHandle fh = new FileHandle(file);
             try {
                 Texture t = new Texture(fh, textureFilter);
+                //update
+                ImageCache.updateBorders(t.toString(), extendedArt ? Pair.of(Color.valueOf("#171717").toString(), false): isCloserToWhite(getpixelColor(t)));
                 if (textureFilter)
                     t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
                 if (extendedArt)
@@ -105,5 +115,49 @@ final class ImageLoader extends CacheLoader<String, Texture> {
                 }
             }
         }
+    }
+
+    public boolean isBorderless(String imagekey) {
+        if(borderlessCardlistKey.isEmpty())
+            return false;
+        if (imagekey.length() > 7) {
+            if ((!imagekey.substring(0, 7).contains("MPS_KLD"))&&(imagekey.substring(0, 4).contains("MPS_"))) //MPS_ sets except MPD_KLD
+                return true;
+        }
+        return borderlessCardlistKey.contains(TextUtil.fastReplace(imagekey,".full",".fullborder"));
+    }
+
+    public static boolean isBorderless(Texture t) {
+        if(borderlessCardlistKey.isEmpty())
+            return false;
+        //generated texture/pixmap?
+        if (t.toString().contains("com.badlogic.gdx.graphics.Texture@"))
+            return true;
+        for (String key : borderlessCardlistKey) {
+            if (t.toString().contains(key))
+                return true;
+        }
+        return false;
+    }
+
+    public static String getpixelColor(Texture i) {
+        if (!i.getTextureData().isPrepared()) {
+            i.getTextureData().prepare(); //prepare texture
+        }
+        //get pixmap from texture data
+        Pixmap pixmap = i.getTextureData().consumePixmap();
+        //get pixel color from x,y texture coordinate based on the image fullborder or not
+        Color color = new Color(pixmap.getPixel(croppedBorderImage(i).getRegionX()+1, croppedBorderImage(i).getRegionY()+1));
+        pixmap.dispose();
+        return color.toString();
+    }
+    public static Pair<String, Boolean> isCloserToWhite(String c){
+        if (c == null || c == "")
+            return Pair.of(Color.valueOf("#171717").toString(), false);
+        int c_r = Integer.parseInt(c.substring(0,2),16);
+        int c_g = Integer.parseInt(c.substring(2,4),16);
+        int c_b = Integer.parseInt(c.substring(4,6),16);
+        int brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+        return  Pair.of(c,brightness > 155);
     }
 }

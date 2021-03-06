@@ -6,27 +6,30 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.game.spellability;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+
+
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
-import forge.game.ability.AbilityFactory;
+import forge.card.mana.ManaCostShard;
+import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CounterType;
+import forge.game.card.CardUtil;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
@@ -39,14 +42,12 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * <p>
  * Abstract AbilityMana class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -57,6 +58,7 @@ public class AbilityManaPart implements java.io.Serializable {
     private final String origProduced;
     private String lastExpressChoice = "";
     private final String manaRestrictions;
+    private String extraManaRestrictions = "";
     private final String cannotCounterSpell;
     private final String addsKeywords;
     private final String addsKeywordsType;
@@ -64,7 +66,6 @@ public class AbilityManaPart implements java.io.Serializable {
     private final String addsCounters;
     private final String triggersWhenSpent;
     private final boolean persistentMana;
-    private String manaReplaceType;
 
     private transient List<Mana> lastManaProduced = Lists.newArrayList();
 
@@ -78,7 +79,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * Constructor for AbilityMana.
      * </p>
-     * 
+     *
      * @param sourceCard
      *            a {@link forge.game.card.Card} object.
      */
@@ -94,7 +95,6 @@ public class AbilityManaPart implements java.io.Serializable {
         this.addsCounters = params.get("AddsCounters");
         this.triggersWhenSpent = params.get("TriggersWhenSpent");
         this.persistentMana = (null != params.get("PersistentMana")) && "True".equalsIgnoreCase(params.get("PersistentMana"));
-        this.manaReplaceType = params.containsKey("ManaReplaceType") ? params.get("ManaReplaceType") : "";
     }
 
     /**
@@ -111,7 +111,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * produceMana.
      * </p>
-     * 
+     *
      * @param produced
      *            a {@link java.lang.String} object.
      * @param player
@@ -121,14 +121,26 @@ public class AbilityManaPart implements java.io.Serializable {
     public final void produceMana(final String produced, final Player player, SpellAbility sa) {
         final Card source = this.getSourceCard();
         final ManaPool manaPool = player.getManaPool();
-        String afterReplace = applyManaReplacement(sa, produced);
+        String afterReplace = produced;
+
+        SpellAbility root = sa == null ? null : sa.getRootAbility();
+
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(source);
-        repParams.put(AbilityKey.Mana, produced);
+        repParams.put(AbilityKey.Mana, afterReplace);
         repParams.put(AbilityKey.Player, player);
-        repParams.put(AbilityKey.AbilityMana, sa);
-        if (player.getGame().getReplacementHandler().run(ReplacementType.ProduceMana, repParams) != ReplacementResult.NotReplaced) {
+        repParams.put(AbilityKey.AbilityMana, root);
+        repParams.put(AbilityKey.Activator, root == null ? null : root.getActivatingPlayer());
+
+        switch (player.getGame().getReplacementHandler().run(ReplacementType.ProduceMana, repParams)) {
+        case NotReplaced:
+            break;
+        case Updated:
+            afterReplace = (String) repParams.get(AbilityKey.Mana);
+            break;
+        default:
             return;
         }
+
         //clear lastProduced
         this.lastManaProduced.clear();
 
@@ -154,14 +166,14 @@ public class AbilityManaPart implements java.io.Serializable {
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
         runParams.put(AbilityKey.Player, player);
-        runParams.put(AbilityKey.AbilityMana, sa);
         runParams.put(AbilityKey.Produced, afterReplace);
+        runParams.put(AbilityKey.AbilityMana, root);
+        runParams.put(AbilityKey.Activator, root == null ? null : root.getActivatingPlayer());
+
         player.getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
-        if (source.isLand()) {
-        	player.setTappedLandForManaThisTurn(true);
+        if (source.isLand() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost() ) {
+            player.setTappedLandForManaThisTurn(true);
         }
-        // Clear Mana replacement
-        this.manaReplaceType = "";
     } // end produceMana(String)
 
     /**
@@ -169,7 +181,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * cannotCounterPaidWith.
      * </p>
      * @param saBeingPaid
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public boolean cannotCounterPaidWith(SpellAbility saBeingPaid) {
@@ -186,7 +198,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * addKeywords.
      * </p>
      * @param saBeingPaid
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public boolean addKeywords(SpellAbility saBeingPaid) {
@@ -205,7 +217,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * getKeywords.
      * </p>
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public String getKeywords() {
@@ -217,7 +229,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * addsCounters.
      * </p>
      * @param saBeingPaid
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public boolean addsCounters(SpellAbility saBeingPaid) {
@@ -227,28 +239,11 @@ public class AbilityManaPart implements java.io.Serializable {
     /**
      * createETBCounters
      */
-    public void createETBCounters(Card c) {
+    public void createETBCounters(Card c, Player controller) {
         String[] parse = this.addsCounters.split("_");
         // Convert random SVars if there are other cards with this effect
         if (c.isValid(parse[0], c.getController(), c, null)) {
-            String abStr = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ " + parse[1]
-                    + " | ETB$ True | CounterNum$ " + parse[2];
-
-            SpellAbility sa = AbilityFactory.getAbility(abStr, c);
-            if (!StringUtils.isNumeric(parse[2])) {
-                sa.setSVar(parse[2], sourceCard.getSVar(parse[2]));
-            }
-            CardFactoryUtil.setupETBReplacementAbility(sa);
-
-            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
-                    + " | Secondary$ True | Description$ CARDNAME"
-                    + " enters the battlefield with " + CounterType.valueOf(parse[1]).getName() + " counters.";
-
-            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, c, false);
-            re.setLayer(ReplacementLayer.Other);
-            re.setOverridingAbility(sa);
-
-            c.addReplacementEffect(re);
+            GameActionUtil.createETBCountersEffect(sourceCard, c, controller, parse[1], parse[2]);
         }
     }
 
@@ -269,34 +264,42 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * getManaRestrictions.
      * </p>
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public String getManaRestrictions() {
-        return this.manaRestrictions;
+        return manaRestrictions;
+    }
+
+    public void setExtraManaRestriction(String str) {
+        this.extraManaRestrictions = str;
+    }
+
+    public boolean meetsManaRestrictions(final SpellAbility sa) {
+        return meetsManaRestrictions(sa, this.manaRestrictions) && meetsManaRestrictions(sa, this.extraManaRestrictions);
     }
 
     /**
      * <p>
      * meetsManaRestrictions.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public boolean meetsManaRestrictions(final SpellAbility sa) {
+    public boolean meetsManaRestrictions(final SpellAbility sa, String restrictions) {
         // No restrictions
-        if (this.manaRestrictions.isEmpty()) {
+        if (restrictions.isEmpty()) {
             return true;
         }
 
         // Loop over restrictions
-        for (String restriction : this.manaRestrictions.split(",")) {
+        for (String restriction : restrictions.split(",")) {
             if (restriction.equals("nonSpell")) {
                 return !sa.isSpell();
             }
-            
+
             if (restriction.equals("CumulativeUpkeep")) {
                 if (sa.isCumulativeupkeep()) {
                     return true;
@@ -306,7 +309,7 @@ public class AbilityManaPart implements java.io.Serializable {
             }
 
             if (restriction.startsWith("CostContainsX")) {
-                if (sa.isXCost()) {
+                if (sa.costHasManaX()) {
                     return true;
                 }
                 continue;
@@ -321,6 +324,10 @@ public class AbilityManaPart implements java.io.Serializable {
             }
 
             if (sa.isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
+                return true;
+            }
+
+            if (restriction.equals("CantPayGenericCosts")) {
                 return true;
             }
 
@@ -347,9 +354,57 @@ public class AbilityManaPart implements java.io.Serializable {
 
     /**
      * <p>
+     * meetsManaShardRestrictions.
+     * </p>
+     *
+     * @param shard
+     *            a {@link forge.card.mana.ManaCostShard} object.
+     * @param color
+     *               the color of mana being paid
+     * @return a boolean.
+     */
+    public boolean meetsManaShardRestrictions(final ManaCostShard shard, final byte color) {
+        if (this.manaRestrictions.isEmpty()) {
+            return true;
+        }
+        for (String restriction : this.manaRestrictions.split(",")) {
+            if (restriction.equals("CantPayGenericCosts")) {
+                if (shard.isGeneric()) {
+                    if (shard.isOr2Generic() && shard.isColor(color)) {
+                        continue;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    continue;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * <p>
+     * meetsSpellAndShardRestrictions.
+     * </p>
+     *
+     * @param sa
+     *            a {@link forge.game.spellability.SpellAbility} object.
+     * @param shard
+     *            a {@link forge.card.mana.ManaCostShard} object.
+     * @param color
+     *               the color of mana being paid
+     * @return a boolean.
+     */
+    public boolean meetsSpellAndShardRestrictions(final SpellAbility sa, final ManaCostShard shard, final byte color) {
+        return this.meetsManaRestrictions(sa) && this.meetsManaShardRestrictions(shard, color);
+    }
+
+    /**
+     * <p>
      * mana.
      * </p>
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public final String mana() {
@@ -430,15 +485,11 @@ public class AbilityManaPart implements java.io.Serializable {
         return this.getOrigProduced().contains("Special");
     }
 
-    public final boolean canProduce(final String s) {
-        return canProduce(s, null);
-    }
-
     /**
      * <p>
      * canProduce.
      * </p>
-     * 
+     *
      * @param s
      *            a {@link java.lang.String} object.
      * @return a boolean.
@@ -458,22 +509,7 @@ public class AbilityManaPart implements java.io.Serializable {
         if (isComboMana()) {
             return getComboColors().contains(s);
         }
-        if (sa != null) {
-            return applyManaReplacement(sa, origProduced).contains(s);
-        }
         return origProduced.contains(s);
-    }
-
-    /**
-     * <p>
-     * isBasic.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isBasic() {
-        return this.getOrigProduced().length() == 1 || this.getOrigProduced().contains("Any")
-                || this.getOrigProduced().contains("Chosen");
     }
 
     /** {@inheritDoc} */
@@ -521,14 +557,8 @@ public class AbilityManaPart implements java.io.Serializable {
         if (commanders.isEmpty()) {
             return "";
         }
-
-        byte ci = 0;
-        for (final Card c : commanders) {
-            ci |= c.getRules().getColorIdentity().getColor();
-        }
-
         StringBuilder sb = new StringBuilder();
-        ColorSet identity = ColorSet.fromMask(ci);
+        ColorSet identity = getSourceCard().getController().getCommanderColorID();
         if (identity.hasWhite()) { sb.append("W "); }
         if (identity.hasBlue())  { sb.append("U "); }
         if (identity.hasBlack()) { sb.append("B "); }
@@ -541,7 +571,7 @@ public class AbilityManaPart implements java.io.Serializable {
     public Card getSourceCard() {
         return sourceCard;
     }
-    
+
     public void setSourceCard(final Card host) {
         sourceCard = host;
     }
@@ -557,81 +587,59 @@ public class AbilityManaPart implements java.io.Serializable {
         return this.persistentMana;
     }
 
-    /**
-     * @return the manaReplaceType
-     */
-    public String getManaReplaceType() {
-        return manaReplaceType;
-    }
+    boolean abilityProducesManaColor(final SpellAbility am, final byte neededColor) {
+        if (0 != (neededColor & ManaAtom.GENERIC)) {
+            return true;
+        }
 
-    /**
-     * setManaReplaceType.
-     */
-    public void setManaReplaceType(final String type) {
-        this.manaReplaceType = type;
-    }
-    /**
-     * <p>
-     * applyManaReplacement.
-     * </p>
-     * @return a String
-     */
-    public static String applyManaReplacement(final SpellAbility sa, final String original) {
-        final Map<String, String> repMap = Maps.newHashMap();
-        final Player act = sa != null ? sa.getActivatingPlayer() : null;
-        final String manaReplace = sa != null ? sa.getManaPart().getManaReplaceType(): "";
-        if (manaReplace.isEmpty()) {
-            if (act != null && act.getLandsPlayedThisTurn() > 0 && sa.hasParam("ReplaceIfLandPlayed")) {
-                return sa.getParam("ReplaceIfLandPlayed");
-            }
-            return original;
+        if (isAnyMana()) {
+            return true;
         }
-        if (manaReplace.startsWith("Any")) {
-            // Replace any type and amount
-            String replaced = manaReplace.split("->")[1];
-            if (replaced.equals("Any")) {
-                byte rs = MagicColor.GREEN;
-                if (act != null) {
-                    rs = act.getController().chooseColor("Choose a color", sa, ColorSet.ALL_COLORS);
+
+        // check for produce mana replacement effects - they mess this up, so just use the mana ability
+        final Card source = am.getHostCard();
+        final Player activator = am.getActivatingPlayer();
+        final Game g = source.getGame();
+        final Map<AbilityKey, Object> repParams = AbilityKey.newMap();
+        repParams.put(AbilityKey.Mana, getOrigProduced());
+        repParams.put(AbilityKey.Affected, source);
+        repParams.put(AbilityKey.Player, activator);
+        repParams.put(AbilityKey.AbilityMana, am.getRootAbility());
+
+        for (final Player p : g.getPlayers()) {
+            for (final Card crd : p.getAllCards()) {
+                for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
+                    if (replacementEffect.requirementsCheck(g)
+                            && replacementEffect.getMode() == ReplacementType.ProduceMana
+                            && replacementEffect.canReplace(repParams)
+                            && replacementEffect.zonesCheck(g.getZoneOf(crd))) {
+                        return true;
+                    }
                 }
-                replaced = MagicColor.toShortString(rs);
-            }
-            return replaced;
-        }
-        final Pattern splitter = Pattern.compile("->");
-        // Replace any type
-        for (String part : manaReplace.split(" & ")) {
-            final String[] v = splitter.split(part, 2);
-            // TODO Colorless mana replacement is probably different now?
-            if (v[0].equals("Colorless")) {
-                repMap.put("[0-9][0-9]?", v.length > 1 ? v[1].trim() : "");
-            } else {
-                repMap.put(v[0], v.length > 1 ? v[1].trim() : "");
             }
         }
-        // Handle different replacement simultaneously
-        Pattern pattern = Pattern.compile(StringUtils.join(repMap.keySet().iterator(), "|"));
-        Matcher m = pattern.matcher(original);
-        StringBuffer sb = new StringBuffer();
-        while(m.find()) {
-            if (m.group().matches("[0-9][0-9]?")) {
-                final String rep = StringUtils.repeat(repMap.get("[0-9][0-9]?") + " ",
-                        Integer.parseInt(m.group())).trim();
-                m.appendReplacement(sb, rep);
-            } else {
-                m.appendReplacement(sb, repMap.get(m.group()));
+
+        if (am.getApi() == ApiType.ManaReflected) {
+            final Iterable<String> reflectableColors = CardUtil.getReflectableManaColors(am);
+            for (final String color : reflectableColors) {
+                if (0 != (neededColor & ManaAtom.fromName(color))) {
+                    return true;
+                }
             }
         }
-        m.appendTail(sb);
-        String replaced = sb.toString();
-        while (replaced.contains("Any")) {
-            byte rs = MagicColor.GREEN;
-            if (act != null) {
-                rs = act.getController().chooseColor("Choose a color", sa, ColorSet.ALL_COLORS);
+        else {
+            // treat special mana if it always can be paid
+            if (isSpecialMana()) {
+                return true;
             }
-            replaced = replaced.replaceFirst("Any", MagicColor.toShortString(rs));
+            String colorsProduced = isComboMana() ? getComboColors() : mana();
+            for (final String color : colorsProduced.split(" ")) {
+                if (0 != (neededColor & ManaAtom.fromName(color))) {
+                    return true;
+                }
+            }
         }
-        return replaced;
+        return false;
     }
 
 } // end class AbilityMana

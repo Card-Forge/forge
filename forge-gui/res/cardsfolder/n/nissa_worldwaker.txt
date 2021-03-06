@@ -9,4 +9,4 @@ SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Power$ 4 | Toughness$ 4 | Typ
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:XFetch:Count$ValidLibrary Land.Basic+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nissa_worldwaker.jpg
-Oracle:[+1]: Target land you control becomes a 4/4 Elemental creature with trample. It's still a land.\n[+1]: Untap up to four target Forests.\n[-7]: Search your library for any number of basic land cards, put them onto the battlefield, then shuffle your library. Those lands become 4/4 Elemental creatures with trample. They're still lands.
+Oracle:[+1]: Target land you control becomes a 4/4 Elemental creature with trample. It's still a land.\n[+1]: Untap up to four target Forests.\n[−7]: Search your library for any number of basic land cards, put them onto the battlefield, then shuffle your library. Those lands become 4/4 Elemental creatures with trample. They're still lands.

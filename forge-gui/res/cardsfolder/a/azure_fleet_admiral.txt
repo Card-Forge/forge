@@ -1,0 +1,8 @@
+Name:Azure Fleet Admiral
+ManaCost:3 U
+Types:Creature Human Pirate
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | ValidBlocker$ Creature.ControlledBy Player.IsMonarch | Description$ CARDNAME can't be blocked by creatures the monarch controls.
+Oracle:When Azure Fleet Admiral enters the battlefield, you become the monarch.\nAzure Fleet Admiral can't be blocked by creatures the monarch controls.

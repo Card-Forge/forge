@@ -1,0 +1,16 @@
+Name:Soul Echo
+ManaCost:X W W
+Types:Enchantment
+K:etbCounter:ECHO:X
+SVar:X:Count$xPaid
+S:Mode$ Continuous | Affected$ You | AddKeyword$ You don't lose the game for having 0 or less life. | Description$ You don't lose the game for having 0 or less life.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME if there are no echo counters on it. Otherwise, target opponent may choose that for each 1 damage that would be dealt to you until your next upkeep, you remove an echo counter from CARDNAME instead.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self | ConditionPresent$ Card.Self+counters_EQ0_ECHO | SubAbility$ TrigChoose
+SVar:TrigChoose:DB$ GenericChoice | AILogic$ SoulEcho | ConditionPresent$ Card.Self+counters_GT0_ECHO | ValidTgts$ Opponent | Choices$ RemoveCounters,DealDamage
+SVar:DealDamage:DB$ Pump | Defined$ You | SpellDescription$ Damage will be applied to this player's life as usual.
+SVar:RemoveCounters:DB$ Effect | ReplacementEffects$ Damage | SVars$ Damage,Counters,Y | ExileOnMoved$ Exile | Duration$ UntilYourNextUpkeep | SpellDescription$ For each 1 damage that would be dealt to this player until their next upkeep, they remove an echo counter from CARDNAME instead.
+SVar:Damage:Event$ DamageDone | ValidTarget$ You | ReplaceWith$ Counters | Description$ For each 1 damage that would be dealt to you until your next upkeep, you remove an echo counter from Soul Echo instead.
+SVar:Counters:DB$ RemoveCounter | Defined$ EffectSource | CounterType$ ECHO | CounterNum$ Y | References$ Y
+SVar:Y:ReplaceCount$DamageAmount
+DeckHas:Ability$Counters
+Oracle:Soul Echo enters the battlefield with X echo counters on it.\nYou don't lose the game for having 0 or less life.\nAt the beginning of your upkeep, sacrifice Soul Echo if there are no echo counters on it. Otherwise, target opponent may choose that for each 1 damage that would be dealt to you until your next upkeep, you remove an echo counter from Soul Echo instead.

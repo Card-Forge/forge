@@ -3,7 +3,7 @@ ManaCost:1 B G
 Types:Creature Troll
 PT:4/4
 K:Trample
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At the beginning of your upkeep, exile a creature card from your graveyard. If you do, put a +1/+1 counter on CARDNAME. Otherwise sacrifice it.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At the beginning of your upkeep, exile a creature card from your graveyard. If you do, put a +1/+1 counter on CARDNAME. Otherwise, sacrifice it.
 SVar:TrigExile:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouOwn | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | ConditionCompare$ GE1 | SubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
@@ -14,4 +14,4 @@ SVar:Z:Count$ValidGraveyard Creature.YouCtrl
 AI:RemoveDeck:Random
 DeckNeeds:Ability$Graveyard
 DeckHas:Ability$Counters
-Oracle:Trample\nAt the beginning of your upkeep, exile a creature card from your graveyard. If you do, put a +1/+1 counter on Charnel Troll. Otherwise sacrifice it.\n{B}{G}, Discard a creature card: Put a +1/+1 counter on Charnel Troll.
+Oracle:Trample\nAt the beginning of your upkeep, exile a creature card from your graveyard. If you do, put a +1/+1 counter on Charnel Troll. Otherwise, sacrifice it.\n{B}{G}, Discard a creature card: Put a +1/+1 counter on Charnel Troll.

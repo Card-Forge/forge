@@ -4,4 +4,4 @@ Types:Sorcery
 A:SP$ Draw | Cost$ 3 U Sac<1/Creature> | NumCards$ 3 | SpellDescription$ Draw three cards.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vivisection.jpg
-Oracle:As an additional cost to cast Vivisection, sacrifice a creature.\nDraw three cards.
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nDraw three cards.

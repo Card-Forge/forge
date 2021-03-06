@@ -1,15 +1,11 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Sets;
-
 import forge.game.Game;
-import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -44,7 +40,8 @@ public class ManifestEffect extends SpellAbilityEffect {
                     }
 
                     String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseCardToManifest") + " ";
-                    tgtCards = new CardCollection(activator.getController().chooseEntitiesForEffect(choices, amount, amount, null, sa, title, p));
+
+                    tgtCards = new CardCollection(activator.getController().chooseCardsForEffect(choices, sa, title, amount, amount, false, null));
                 } else if ("TopOfLibrary".equals(defined)) {
                     tgtCards = p.getTopXCardsFromLibrary(amount);
                 } else {
@@ -56,20 +53,8 @@ public class ManifestEffect extends SpellAbilityEffect {
                 }
 
                 for(Card c : tgtCards) {
-                    //check if lki would be a land entering the battlefield
-                    if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLandBattlefield)) {
-                        Card lki = CardUtil.getLKICopy(c);
-                        lki.turnFaceDownNoUpdate();
-                        lki.setManifested(true);
-                        lki.setLastKnownZone(p.getZone(ZoneType.Battlefield));
-                        CardCollection preList = new CardCollection(lki);
-                        game.getAction().checkStaticAbilities(false, Sets.newHashSet(lki), preList);
-                        if (lki.isLand()) {
-                            continue;
-                        }
-                    }
                     Card rem = c.manifest(p, sa);
-                    if (sa.hasParam("RememberManifested") && rem != null) {
+                    if (sa.hasParam("RememberManifested") && rem != null && rem.isManifested()) {
                         source.addRemembered(rem);
                     }
                 }

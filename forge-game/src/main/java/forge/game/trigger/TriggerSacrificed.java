@@ -49,7 +49,7 @@ public class TriggerSacrificed extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerSacrificed(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerSacrificed(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -75,15 +75,6 @@ public class TriggerSacrificed extends Trigger {
         if (hasParam("ValidSourceController")) {
             if (sourceSA == null || !sourceSA.getActivatingPlayer().isValid(getParam("ValidSourceController"),
                     this.getHostCard().getController(), this.getHostCard(), null)) {
-                return false;
-            }
-        }
-        
-        if (hasParam("CauseParam")) {
-            // For now only for Heart-Piecer Manticore, extend it if it appears on different effects too
-            if (sourceSA == null || !sourceSA.hasParam("SacrificeParam")
-                    || !sourceSA.getParam("SacrificeParam").equals(getParam("CauseParam"))
-                    || !sourceSA.getHostCard().equals(this.getHostCard())) {
                 return false;
             }
         }
@@ -129,8 +120,8 @@ public class TriggerSacrificed extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
     }
 
     @Override

@@ -1,62 +1,77 @@
 package forge.game.phase;
 
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
+import forge.util.Localizer;
+
+import java.util.*;
 
 
 public enum PhaseType {
-    UNTAP("Untap"),
-    UPKEEP("Upkeep"),
-    DRAW("Draw"),
-    MAIN1("Main, precombat", "Main1"),
-    COMBAT_BEGIN("Begin Combat", "BeginCombat"),
-    COMBAT_DECLARE_ATTACKERS("Declare Attackers"),
-    COMBAT_DECLARE_BLOCKERS("Declare Blockers"),
-    COMBAT_FIRST_STRIKE_DAMAGE("First Strike Damage"),
-    COMBAT_DAMAGE("Combat Damage"),
-    COMBAT_END("End Combat", "EndCombat"),
-    MAIN2("Main, postcombat", "Main2"),
-    END_OF_TURN("End of Turn"),
-    CLEANUP("Cleanup");
+    UNTAP("lblUntapStep", "Untap"),
+    UPKEEP("lblUpkeepStep", "Upkeep"),
+    DRAW("lblDrawStep", "Draw"),
+    MAIN1("lblMainPhase1", "Main1"),
+    COMBAT_BEGIN("lblCombatBeginStep", "BeginCombat"),
+    COMBAT_DECLARE_ATTACKERS("lblCombatDeclareAttackersStep", "Declare Attackers"),
+    COMBAT_DECLARE_BLOCKERS("lblCombatDeclareBlockersStep", "Declare Blockers"),
+    COMBAT_FIRST_STRIKE_DAMAGE("lblCombatFirstStrikeDamageStep", "First Strike Damage"),
+    COMBAT_DAMAGE("lblCombatDamageStep", "Combat Damage"),
+    COMBAT_END("lblCombatEndStep", "EndCombat"),
+    MAIN2("lblMainPhase2", "Main2"),
+    END_OF_TURN("lblEndStep", "End of Turn"),
+    CLEANUP("lblCleanupStep", "Cleanup");
 
-    public static final List<PhaseType> ALL_PHASES = Collections.unmodifiableList(
-            Arrays.asList(
-                    UNTAP, UPKEEP, DRAW, 
-                    MAIN1,
-                    COMBAT_BEGIN, COMBAT_DECLARE_ATTACKERS, COMBAT_DECLARE_BLOCKERS, COMBAT_FIRST_STRIKE_DAMAGE, COMBAT_DAMAGE, COMBAT_END,
-                    MAIN2, 
-                    END_OF_TURN, CLEANUP
-                    )
+    public static final List<List<PhaseType>> PHASE_GROUPS = Arrays.asList(
+                    Arrays.asList(UNTAP, UPKEEP, DRAW),
+                    Arrays.asList(MAIN1),
+                    Arrays.asList(COMBAT_BEGIN, COMBAT_DECLARE_ATTACKERS, COMBAT_DECLARE_BLOCKERS, COMBAT_FIRST_STRIKE_DAMAGE, COMBAT_DAMAGE, COMBAT_END),
+                    Arrays.asList(MAIN2),
+                    Arrays.asList(END_OF_TURN)
             );
+
+    public static List<PhaseType> AllPhases() {
+        return AllPhases(false);
+    }
+
+    public static List<PhaseType> AllPhases(boolean isTopsy) {
+        List<PhaseType> result = new ArrayList<PhaseType>();
+        List<List<PhaseType>> phase_groups = PHASE_GROUPS;
+        if (isTopsy) {
+            phase_groups = Lists.reverse(phase_groups);
+        }
+        for (final List<PhaseType> group : phase_groups) {
+            result.addAll(group);
+        }
+        result.add(CLEANUP); // Some cards get confused if cleanup isn't last, it works better this way.
+
+        return result;
+    }
 
     public final String nameForUi;
     public final String nameForScripts;
     
-    PhaseType(String name) {
-        this(name, name);
-    }
     PhaseType(String name, String name_for_scripts) {
-        nameForUi = name;
+        nameForUi = Localizer.getInstance().getMessage(name);
         nameForScripts = name_for_scripts;
     }
 
 
     public final boolean phaseforUpdateField() {
-        boolean result =
-                ((ALL_PHASES.indexOf(this) >= ALL_PHASES.indexOf(UNTAP)
-                && ALL_PHASES.indexOf(this) < ALL_PHASES.indexOf(COMBAT_FIRST_STRIKE_DAMAGE))
-                || (ALL_PHASES.indexOf(this) >= ALL_PHASES.indexOf(MAIN2)
-                && ALL_PHASES.indexOf(this) < ALL_PHASES.indexOf(CLEANUP)));
-        return result;
+        return ((AllPhases().indexOf(this) >= AllPhases().indexOf(UNTAP)
+                && AllPhases().indexOf(this) < AllPhases().indexOf(COMBAT_FIRST_STRIKE_DAMAGE))
+                || (AllPhases().indexOf(this) >= AllPhases().indexOf(MAIN2)
+                && AllPhases().indexOf(this) < AllPhases().indexOf(CLEANUP)));
+    }
+
+    public final boolean isCombatPhase() {
+        return ((AllPhases().indexOf(this) >=  AllPhases().indexOf(COMBAT_BEGIN))
+                && (AllPhases().indexOf(this) <=  AllPhases().indexOf(COMBAT_END)));
     }
 
     public final boolean isAfter(final PhaseType phase) {
-        return ALL_PHASES.indexOf(this) > ALL_PHASES.indexOf(phase);
+        return AllPhases().indexOf(this) > AllPhases().indexOf(phase);
     }
 
     public final boolean isMain() {
@@ -64,7 +79,11 @@ public enum PhaseType {
     }
 
     public final boolean isBefore(final PhaseType phase) {
-        return ALL_PHASES.indexOf(this) < ALL_PHASES.indexOf(phase);
+        return isBefore(phase, false);
+    }
+
+    public final boolean isBefore(final PhaseType phase, boolean isTopsy) {
+        return AllPhases(isTopsy).indexOf(this) < AllPhases(isTopsy).indexOf(phase);
     }
 
     public static PhaseType smartValueOf(final String value) {
@@ -96,7 +115,6 @@ public enum PhaseType {
                 PhaseType from = PhaseType.smartValueOf(s.substring(0, idxArrow));
                 String sTo = s.substring(idxArrow + 2);
                 PhaseType to = StringUtils.isBlank(sTo) ? PhaseType.CLEANUP : PhaseType.smartValueOf(sTo);
-
                 result.addAll(EnumSet.range(from, to));
             }
             else {
@@ -106,15 +124,22 @@ public enum PhaseType {
         return result;
     }
 
+    public static boolean isLast(PhaseType current, boolean isTopsy) {
+        if (current == null) {
+            return true;
+        }
+        return AllPhases(isTopsy).indexOf(current) == AllPhases(isTopsy).size() - 1;
+    }
+
     /**
      * Get the next PhaseType in turn order. 
      * @return
      */
-    public static PhaseType getNext(PhaseType current) {
-        int iNext = ALL_PHASES.indexOf(current) + 1;
-        if (iNext >= ALL_PHASES.size()) {
+    public static PhaseType getNext(PhaseType current, boolean isTopsy) {
+        int iNext = AllPhases(isTopsy).indexOf(current) + 1;
+        if (iNext >= AllPhases(isTopsy).size()) {
             iNext = 0;
         }
-        return ALL_PHASES.get(iNext);
+        return AllPhases(isTopsy).get(iNext);
     }
 }

@@ -1,0 +1,19 @@
+[metadata]
+Code=F15
+Date=2015-01-01
+Name=Friday Night Magic 2015
+Type=Reprint
+
+[cards]
+1 R Frenzied Goblin
+2 R Disdainful Stroke
+3 R Hordeling Outburst
+4 R Suspension Field
+5 R Abzan Beastmaster
+6 R Frost Walker
+7 R Path to Exile
+8 R Serum Visions
+9 R Orator of Ojutai
+10 R Ultimate Price
+11 R Roast
+12 R Anticipate

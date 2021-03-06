@@ -122,7 +122,7 @@ public class DamageAllEffect extends DamageBaseEffect {
 
         if (!usedDamageMap) {
             preventMap.triggerPreventDamage(false);
-            damageMap.triggerDamageDoneOnce(false, sa);
+            damageMap.triggerDamageDoneOnce(false, game, sa);
 
             preventMap.clear();
             damageMap.clear();

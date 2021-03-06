@@ -1,0 +1,9 @@
+Name:Kinsbaile Courier
+ManaCost:2 W
+Types:Creature Kithkin Soldier
+PT:2/1
+K:Encore:2 W
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters & Ability$Token
+Oracle:When Kinsbaile Courier enters the battlefield, put a +1/+1 counter on target creature.\nEncore {2}{W} ({2}{W}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

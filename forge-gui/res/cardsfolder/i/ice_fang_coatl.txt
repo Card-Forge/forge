@@ -5,9 +5,9 @@ PT:1/1
 K:Flash
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Deathtouch | CheckSVar$ X | SVarCompare$ GE3 | Description$ CARDNAME has deathtouch as long as you control at least three other snow permanents.
-SVar:X:Count$Valid Permanent.Snow+Other
+SVar:X:Count$Valid Permanent.Snow+Other+YouCtrl
 SVar:BuffedBy:Permanent.Snow
 DeckHints:Type$Snow
 Oracle:Flash\nFlying\nWhen Ice-Fang Coatl enters the battlefield, draw a card.\nIce-Fang Coatl has deathtouch as long as you control at least three other snow permanents.

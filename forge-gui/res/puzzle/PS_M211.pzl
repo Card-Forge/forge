@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2021 #01: Two Minutes for Instigating
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2020/08/156.-M211-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Assume your opponent has no mana available to them.
+[state]
+humanlife=15
+ailife=19
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Starlit Mantle;Destiny Spinner;Wolfwillow Haven;Repudiate // Replicate;Capture Sphere
+humanbattlefield=Canopy Stalker;Protean Thaumaturge;Paradise Druid;Forest;Forest;Forest;Island;Island;Island
+aibattlefield=Basri Ket|Counters:LOYALTY=6;Brash Taunter|Counters:P1P1=1;Chandra's Incinerator

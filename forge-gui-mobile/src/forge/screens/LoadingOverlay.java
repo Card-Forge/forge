@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Align;
 import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
+import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
@@ -101,7 +102,10 @@ public class LoadingOverlay extends FOverlay {
         g.fillRect(BACK_COLOR, x, y, panelWidth, panelHeight);
         g.drawRect(Utils.scale(2), FORE_COLOR, x, y, panelWidth, panelHeight);
         y += padding;
-        g.drawImage(FSkinImage.LOGO, (getWidth() - logoSize) / 2f, y, logoSize, logoSize);
+        if (FSkin.hdLogo == null)
+            g.drawImage(FSkinImage.LOGO, (getWidth() - logoSize) / 2f, y, logoSize, logoSize);
+        else
+            g.drawImage(FSkin.hdLogo, (getWidth() - logoSize) / 2f, y, logoSize, logoSize);
         y += logoSize + padding;
         g.drawText(caption, FONT, FORE_COLOR, x, y, panelWidth, getHeight(), false, Align.center, false);
     }

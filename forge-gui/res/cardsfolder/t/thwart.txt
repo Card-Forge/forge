@@ -1,8 +1,7 @@
 Name:Thwart
 ManaCost:2 U U
 Types:Instant
+SVar:AltCost:Cost$ Return<3/Island> | Description$ You may return three Islands you control to their owner's hand rather than pay this spell's mana cost.
 A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
-SVar:AltCost:Cost$ Return<3/Island>
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thwart.jpg
-Oracle:You may return three Islands you control to their owner's hand rather than pay Thwart's mana cost.\nCounter target spell.
+Oracle:You may return three Islands you control to their owner's hand rather than pay this spell's mana cost.\nCounter target spell.

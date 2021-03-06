@@ -1,0 +1,9 @@
+Name:Blisterspit Gremlin
+ManaCost:R
+Types:Creature Gremlin
+PT:1/1
+A:AB$ DealDamage | Cost$ 1 T | NumDmg$ 1 | Defined$ Player.Opponent | SpellDescription$ CARDNAME deals 1 damage to each opponent.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, untap CARDNAME.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+SVar:BuffedBy:Card.nonLand+nonCreature
+Oracle:{1}, {T}: Blisterspit Gremlin deals 1 damage to each opponent.\nWhenever you cast a noncreature spell, untap Blisterspit Gremlin.

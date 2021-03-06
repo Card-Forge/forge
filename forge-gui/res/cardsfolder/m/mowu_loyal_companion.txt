@@ -1,6 +1,6 @@
 Name:Mowu, Loyal Companion
 ManaCost:3 G
-Types:Legendary Creature Hound
+Types:Legendary Creature Dog
 PT:3/3
 K:Trample
 K:Vigilance
@@ -9,4 +9,4 @@ SVar:AddOneMoreCounters:DB$ ReplaceEffect | VarName$ CounterNum | VarValue$ X | 
 SVar:X:ReplaceCount$CounterNum/Plus.1
 AI:RemoveDeck:Random
 DeckNeeds:Ability$Counters
-Oracle:Trample, vigilance\nIf one or more +1/+1 counters would be put on Mowu, Loyal Companion, that many plus one +1/+1 counters are put on it instead.
+Oracle:Vigilance, trample\nIf one or more +1/+1 counters would be put on Mowu, Loyal Companion, that many plus one +1/+1 counters are put on it instead.

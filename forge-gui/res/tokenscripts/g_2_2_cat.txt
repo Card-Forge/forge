@@ -1,0 +1,6 @@
+Name:Cat
+Colors:green
+ManaCost:no cost
+PT:2/2
+Types:Creature Cat
+Oracle:

@@ -7,6 +7,7 @@ MciCode=10e
 Type=Core
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
+ChaosDraftThemes=CORE_SET
 
 [cards]
 249 R Abundance

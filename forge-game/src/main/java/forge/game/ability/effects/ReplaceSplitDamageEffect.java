@@ -53,7 +53,7 @@ public class ReplaceSplitDamageEffect extends SpellAbilityEffect {
             if (card.getType().hasStringType("Effect") && prevent <= 0) {
                 game.getAction().exile(card, null);
             } else if (!StringUtils.isNumeric(varValue)) {
-                card.setSVar(varValue, "Number$" + prevent);
+                sa.setSVar(varValue, "Number$" + prevent);
             }
             
             Card sourceLKI = (Card) sa.getReplacingObject(AbilityKey.Source);

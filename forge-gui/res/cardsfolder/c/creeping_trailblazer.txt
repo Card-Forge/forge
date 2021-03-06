@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:2/2
 S:Mode$ Continuous | Affected$ Elemental.YouCtrl+Other | AddPower$ 1 | Description$ Other Elementals you control get +1/+0.
 SVar:PlayMain1:TRUE
-A:AB$ Pump | Cost$ 2 R G | NumAtt$ +X | NumDef$ +X | References$ X | SpellDescription$ CARDNAME gets +1/+1 until end of turn for each Elemental you control.
+A:AB$ Pump | Cost$ 2 R G | Defined$ Self | NumAtt$ +X | NumDef$ +X | References$ X | SpellDescription$ CARDNAME gets +1/+1 until end of turn for each Elemental you control.
 SVar:X:Count$Valid Elemental.YouCtrl
 SVar:BuffedBy:Card.Elemental
 DeckHints:Type$Elemental

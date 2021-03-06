@@ -17,14 +17,13 @@
  */
 package forge.game.spellability;
 
-import forge.card.MagicColor;
+import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.phase.PhaseHandler;
@@ -119,6 +118,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
                 this.optionalCostPaid = true;
             }
 
+            if (value.equals("Foretold")) {
+                this.foretold = true;
+            }
+
             if (params.containsKey("ConditionOptionalPaid")) {
                 this.optionalBoolean = Boolean.parseBoolean(params.get("ConditionOptionalPaid"));
             }
@@ -197,6 +200,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             this.setManaSpent(params.get("ConditionManaSpent"));
         }
 
+        if (params.containsKey("ConditionManaNotSpent")) {
+            this.setManaNotSpent(params.get("ConditionManaNotSpent"));
+        }
+
         if (params.containsKey("ConditionCheckSVar")) {
             this.setSvarToCheck(params.get("ConditionCheckSVar"));
         }
@@ -247,6 +254,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.kicked2 && !sa.isOptionalCostPaid(OptionalCost.Kicker2)) return false;
         if (this.altCostPaid && !sa.isOptionalCostPaid(OptionalCost.AltCost)) return false;
         if (this.surgeCostPaid && !sa.isSurged()) return false;
+        if (this.foretold && !sa.isForetold()) return false;
 
         if (this.optionalCostPaid && this.optionalBoolean && !sa.isOptionalCostPaid(OptionalCost.Generic)) return false;
         if (this.optionalCostPaid && !this.optionalBoolean && sa.isOptionalCostPaid(OptionalCost.Generic)) return false;
@@ -267,7 +275,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (this.isAllTargetsLegal()) {
             for (Card c : sa.getTargets().getTargetCards()) {
-                if (!CardFactoryUtil.isTargetStillValid(sa, c)) {
+                if (!sa.canTarget(c)) {
                     return false;
                 }
             }
@@ -343,15 +351,8 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
             list = CardLists.getValidCards(list, this.getIsPresent().split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
-            int right;
             final String rightString = this.getPresentCompare().substring(2);
-            try { // If this is an Integer, just parse it
-                right = Integer.parseInt(rightString);
-            } catch (final NumberFormatException e) { // Otherwise, grab it from
-                                                      // the
-                // SVar
-                right = CardFactoryUtil.xCount(host, host.getSVar(rightString));
-            }
+            int right = AbilityUtils.calculateAmount(host, rightString, sa);
 
             final int left = list.size();
 
@@ -401,7 +402,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
             boolean result = false;
     
-            for (final GameObject o : matchTgt.getFirstTargetedSpell().getTargets().getTargets()) {
+            for (final GameObject o : matchTgt.getFirstTargetedSpell().getTargets()) {
                 if (o.isValid(this.getTargetValidTargeting().split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
                     result = true;
                     break;
@@ -422,7 +423,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
             Set<GameObject> targets = new HashSet<>();
             for (TargetChoices tc : sa.getAllTargetChoices()) {
-                targets.addAll(tc.getTargets());
+                targets.addAll(tc);
                 if (targets.size() > 1) {
                     return false;
                 }
@@ -432,10 +433,20 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
         }
 
-        if (StringUtils.isNotEmpty(this.getManaSpent())) {
-            byte manaSpent = MagicColor.fromName(getManaSpent()); // they always check for single color
-            if( 0 == (manaSpent & sa.getHostCard().getColorsPaid())) // no match of colors
+        if (StringUtils.isNotEmpty(getManaSpent())) {
+            SpellAbility castSa = sa.getHostCard().getCastSA();
+            if (castSa == null) {
                 return false;
+            }
+            if (!castSa.getPayingColors().hasAllColors(ColorSet.fromNames(getManaSpent().split(" ")).getColor())) {
+                return false;
+            }
+        }
+        if (StringUtils.isNotEmpty(getManaNotSpent())) {
+            SpellAbility castSa = sa.getHostCard().getCastSA();
+            if (castSa != null && castSa.getPayingColors().hasAllColors(ColorSet.fromNames(getManaNotSpent().split(" ")).getColor())) {
+                return false;
+            }
         }
 
         if (this.getsVarToCheck() != null) {

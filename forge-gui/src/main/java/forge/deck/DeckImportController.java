@@ -13,6 +13,7 @@ import forge.interfaces.IComboBox;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.gui.SOptionPane;
+import forge.util.Localizer;
 
 public class DeckImportController {
     private final boolean replacingDeck;
@@ -62,11 +63,12 @@ public class DeckImportController {
     }
 
     public Deck accept() {
+        final Localizer localizer = Localizer.getInstance();
         if (tokens.isEmpty()) { return null; }
 
         if (replacingDeck) {
-            final String warning = "This will replace the contents of your current deck with these cards.\n\nProceed?";
-            if (!SOptionPane.showConfirmDialog(warning, "Replace Current Deck", "Replace", "Cancel")) {
+            final String warning = localizer.getMessage("lblReplaceCurrentDeckConfirm");
+            if (!SOptionPane.showConfirmDialog(warning, localizer.getMessage("lblReplaceCurrentDeck"), localizer.getMessage("lblReplace"), localizer.getMessage("lblCancel"))) {
                 return null;
             }
         }

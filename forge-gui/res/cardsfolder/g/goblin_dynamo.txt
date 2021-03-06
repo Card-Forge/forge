@@ -7,4 +7,4 @@ A:AB$ DealDamage | Cost$ X R T Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Plan
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_dynamo.jpg
-Oracle:{T}: Goblin Dynamo deals 1 damage to any target.\n{X}{R}, {T}, Sacrifice Goblin Dynamo: Goblin Dynamo deals X damage to any target.
+Oracle:{T}: Goblin Dynamo deals 1 damage to any target.\n{X}{R}, {T}, Sacrifice Goblin Dynamo: It deals X damage to any target.

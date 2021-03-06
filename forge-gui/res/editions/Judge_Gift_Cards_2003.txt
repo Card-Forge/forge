@@ -1,0 +1,10 @@
+[metadata]
+Code=G03
+Date=2003-01-01
+Name=Judge Gift Cards 2003
+Type=Reprint
+
+[cards]
+1 R Intuition
+2 R Argothian Enchantress
+3 R Living Death

@@ -8,7 +8,7 @@ import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -217,7 +217,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Card sorin = addCard("Sorin, Solemn Visitor", p);
-        sorin.addCounter(CounterType.LOYALTY, 5, p, false, null);
+        sorin.addCounter(CounterEnumType.LOYALTY, 5, p, false, null);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
@@ -261,7 +261,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         String bearCardName = "Runeclaw Bear";
         addCard(bearCardName, p);
         Card gideon = addCard("Gideon, Ally of Zendikar", p);
-        gideon.addCounter(CounterType.LOYALTY, 4, p, false, null);
+        gideon.addCounter(CounterEnumType.LOYALTY, 4, p, false, null);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
@@ -304,14 +304,18 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card manifestedCreature = findCardWithName(simGame, "");
         assertNotNull(manifestedCreature);
 
-        SpellAbility unmanifestSA = findSAWithPrefix(manifestedCreature, "Unmanifest");
+        SpellAbility unmanifestSA = findSAWithPrefix(manifestedCreature.getAllPossibleAbilities(p, false), "Unmanifest");
         assertNotNull(unmanifestSA);
         assertEquals(2, manifestedCreature.getNetPower());
         assertFalse(manifestedCreature.hasKeyword("Flying"));
 
         GameSimulator sim2 = createSimulator(simGame, simGame.getPlayers().get(1));
-        sim2.simulateSpellAbility(unmanifestSA);
         Game simGame2 = sim2.getSimulatedGameState();
+        manifestedCreature = findCardWithName(simGame2, "");
+        unmanifestSA = findSAWithPrefix(manifestedCreature.getAllPossibleAbilities(simGame2.getPlayers().get(1), false), "Unmanifest");
+
+        sim2.simulateSpellAbility(unmanifestSA);
+
         Card ornithopter = findCardWithName(simGame2, "Ornithopter");
         assertEquals(0, ornithopter.getNetPower());
         assertTrue(ornithopter.hasKeyword("Flying"));
@@ -380,7 +384,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Card sarkhan = addCard(sarkhanCardName, p);
-        sarkhan.addCounter(CounterType.LOYALTY, 4, p, false, null);
+        sarkhan.addCounter(CounterEnumType.LOYALTY, 4, p, false, null);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
@@ -414,7 +418,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         addCard(ornithoperCardName, p);
         addCard(bearCardName, p);
         Card ajani = addCard(ajaniCardName, p);
-        ajani.addCounter(CounterType.LOYALTY, 4, p, false, null);
+        ajani.addCounter(CounterEnumType.LOYALTY, 4, p, false, null);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
@@ -429,7 +433,7 @@ public class GameSimulatorTest extends SimulationTestCase {
             Game simGame = sim.getSimulatedGameState();
             Card thopterSim = findCardWithName(simGame, ornithoperCardName);
             Card bearSim = findCardWithName(simGame, bearCardName);
-            assertEquals(3, thopterSim.getCounters(CounterType.P1P1) + bearSim.getCounters(CounterType.P1P1));
+            assertEquals(3, thopterSim.getCounters(CounterEnumType.P1P1) + bearSim.getCounters(CounterEnumType.P1P1));
         }
     }
 
@@ -445,7 +449,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         SpellAbility boltSA = boltCard.getFirstSpellAbility();
 
         Card ajani = addCard(ajaniCardName, p);
-        ajani.addCounter(CounterType.LOYALTY, 8, p, false, null);
+        ajani.addCounter(CounterEnumType.LOYALTY, 8, p, false, null);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
@@ -465,7 +469,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         // only triggered once
         assertTrue(simSelfless.hasCounters());
-        assertEquals(2, simSelfless.getCounters(CounterType.P1P1));
+        assertEquals(2, simSelfless.getCounters(CounterEnumType.P1P1));
         assertEquals(2, simSelfless.getToughnessBonusFromCounters());
         assertEquals(2, simSelfless.getPowerBonusFromCounters());
     }
@@ -494,7 +498,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         addCard("Swamp", p);
         addCard("Swamp", p);
         Card depths = addCard("Dark Depths", p);
-        depths.addCounter(CounterType.ICE, 10, p, false, null);
+        depths.addCounter(CounterEnumType.ICE, 10, p, false, null);
         Card thespian = addCard("Thespian's Stage", p);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
@@ -693,7 +697,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         // only triggered once
         assertTrue(simPridemate.hasCounters());
-        assertEquals(1, simPridemate.getCounters(CounterType.P1P1));
+        assertEquals(1, simPridemate.getCounters(CounterEnumType.P1P1));
         assertEquals(1, simPridemate.getToughnessBonusFromCounters());
         assertEquals(1, simPridemate.getPowerBonusFromCounters());
 
@@ -749,7 +753,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         // only triggered once
         assertTrue(simPridemate.hasCounters());
-        assertEquals(1, simPridemate.getCounters(CounterType.P1P1));
+        assertEquals(1, simPridemate.getCounters(CounterEnumType.P1P1));
         assertEquals(1, simPridemate.getToughnessBonusFromCounters());
         assertEquals(1, simPridemate.getPowerBonusFromCounters());
 
@@ -804,7 +808,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertNotNull(simBrood);
         assertEquals(0, simBrood.getDamage());
 
-        // destoryed because of to much redirected damage
+        // destroyed because of to much redirected damage
         assertNull(simPalisade);
         assertNotNull(simPridemate);
 
@@ -813,7 +817,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         // only triggered once
         assertTrue(simPridemate.hasCounters());
-        assertEquals(1, simPridemate.getCounters(CounterType.P1P1));
+        assertEquals(1, simPridemate.getCounters(CounterEnumType.P1P1));
         assertEquals(1, simPridemate.getToughnessBonusFromCounters());
         assertEquals(1, simPridemate.getPowerBonusFromCounters());
 
@@ -873,7 +877,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         // lifegain
         assertNotNull(simPridemate);
         assertTrue(simPridemate.hasCounters());
-        assertEquals(1, simPridemate.getCounters(CounterType.P1P1));
+        assertEquals(1, simPridemate.getCounters(CounterEnumType.P1P1));
         assertEquals(1, simPridemate.getToughnessBonusFromCounters());
         assertEquals(1, simPridemate.getPowerBonusFromCounters());
 
@@ -901,21 +905,21 @@ public class GameSimulatorTest extends SimulationTestCase {
         // no Lifegain because of Everlasting Torment
         assertNotNull(simPridemate2);
         assertFalse(simPridemate2.hasCounters());
-        assertEquals(0, simPridemate2.getCounters(CounterType.P1P1));
+        assertEquals(0, simPridemate2.getCounters(CounterEnumType.P1P1));
         assertEquals(0, simPridemate2.getToughnessBonusFromCounters());
         assertEquals(0, simPridemate2.getPowerBonusFromCounters());
 
         assertNotNull(simBear2);
         assertEquals(0, simBear2.getDamage());
         assertTrue(simBear2.hasCounters());
-        assertEquals(1, simBear2.getCounters(CounterType.M1M1));
+        assertEquals(1, simBear2.getCounters(CounterEnumType.M1M1));
         assertEquals(-1, simBear2.getToughnessBonusFromCounters());
         assertEquals(-1, simBear2.getPowerBonusFromCounters());
 
         assertNotNull(simGiant2);
         assertEquals(0, simGiant2.getDamage());
         assertTrue(simGiant2.hasCounters());
-        assertEquals(2, simGiant2.getCounters(CounterType.M1M1));
+        assertEquals(2, simGiant2.getCounters(CounterEnumType.M1M1));
         assertEquals(-2, simGiant2.getToughnessBonusFromCounters());
         assertEquals(-2, simGiant2.getPowerBonusFromCounters());
 
@@ -937,21 +941,21 @@ public class GameSimulatorTest extends SimulationTestCase {
         // no Lifegain because of Everlasting Torment
         assertNotNull(simPridemate3);
         assertFalse(simPridemate3.hasCounters());
-        assertEquals(0, simPridemate3.getCounters(CounterType.P1P1));
+        assertEquals(0, simPridemate3.getCounters(CounterEnumType.P1P1));
         assertEquals(0, simPridemate3.getToughnessBonusFromCounters());
         assertEquals(0, simPridemate3.getPowerBonusFromCounters());
 
         assertNotNull(simBear3);
         assertEquals(0, simBear3.getDamage());
         assertFalse(simBear3.hasCounters());
-        assertEquals(0, simBear3.getCounters(CounterType.M1M1));
+        assertEquals(0, simBear3.getCounters(CounterEnumType.M1M1));
         assertEquals(0, simBear3.getToughnessBonusFromCounters());
         assertEquals(0, simBear3.getPowerBonusFromCounters());
 
         assertNotNull(simGiant3);
         assertEquals(0, simGiant3.getDamage());
         assertFalse(simGiant3.hasCounters());
-        assertEquals(0, simGiant3.getCounters(CounterType.M1M1));
+        assertEquals(0, simGiant3.getCounters(CounterEnumType.M1M1));
         assertEquals(0, simGiant3.getToughnessBonusFromCounters());
         assertEquals(0, simGiant3.getPowerBonusFromCounters());
 
@@ -1005,19 +1009,19 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
-        assertEquals(0, p.getCounters(CounterType.ENERGY));
+        assertEquals(0, p.getCounters(CounterEnumType.ENERGY));
 
         SpellAbility playTurtle = turtleCard.getSpellAbilities().get(0);
         GameSimulator sim = createSimulator(game, p);
         sim.simulateSpellAbility(playTurtle);
         Game simGame = sim.getSimulatedGameState();
         Player simP = simGame.getPlayers().get(1);
-        assertEquals(2, simP.getCounters(CounterType.ENERGY));
+        assertEquals(2, simP.getCounters(CounterEnumType.ENERGY));
 
         GameCopier copier = new GameCopier(simGame);
         Game copy = copier.makeCopy();
         Player copyP = copy.getPlayers().get(1);
-        assertEquals(2, copyP.getCounters(CounterType.ENERGY));
+        assertEquals(2, copyP.getCounters(CounterEnumType.ENERGY));
     }
 
     public void testFloatingMana() {
@@ -1118,7 +1122,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         // only triggered once
         assertTrue(simPridemate.hasCounters());
-        assertEquals(1, simPridemate.getCounters(CounterType.P1P1));
+        assertEquals(1, simPridemate.getCounters(CounterEnumType.P1P1));
         assertEquals(1, simPridemate.getToughnessBonusFromCounters());
         assertEquals(1, simPridemate.getPowerBonusFromCounters());
 
@@ -1182,7 +1186,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         // only triggered once
         assertTrue(simPridemate.hasCounters());
-        assertEquals(1, simPridemate.getCounters(CounterType.P1P1));
+        assertEquals(1, simPridemate.getCounters(CounterEnumType.P1P1));
         assertEquals(1, simPridemate.getToughnessBonusFromCounters());
         assertEquals(1, simPridemate.getPowerBonusFromCounters());
 
@@ -1251,7 +1255,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         // only triggered twice
         assertTrue(simPridemate.hasCounters());
-        assertEquals(2, simPridemate.getCounters(CounterType.P1P1));
+        assertEquals(2, simPridemate.getCounters(CounterEnumType.P1P1));
         assertEquals(2, simPridemate.getToughnessBonusFromCounters());
         assertEquals(2, simPridemate.getPowerBonusFromCounters());
 
@@ -1530,7 +1534,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card simGoblin = findCardWithName(simGame, goblinName);
 
         assertNotNull(simGoblin);
-        int effects = simGoblin.getCounters(CounterType.P1P1) + simGoblin.getKeywordMagnitude(Keyword.HASTE);
+        int effects = simGoblin.getCounters(CounterEnumType.P1P1) + simGoblin.getKeywordMagnitude(Keyword.HASTE);
         assertEquals(2, effects);
     }
 
@@ -1657,7 +1661,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Game simGame = sim.getSimulatedGameState();
 
         // One cards drawn
-        assertEquals(1, simGame.getPlayers().get(0).getZone(ZoneType.Hand).size());
+        assertEquals(0, simGame.getPlayers().get(0).getZone(ZoneType.Hand).size());
     }
 
     public void testTeysaKarlovGitrogMonsterTeysaDies() {
@@ -1847,12 +1851,12 @@ public class GameSimulatorTest extends SimulationTestCase {
         sim.simulateSpellAbility(gideonSA);
         sim.simulateSpellAbility(sparkDoubleSA);
 
-        Card simSpark = (Card)sim.getGameCopier().find(sparkDouble);
+        Card simSpark = sim.getSimulatedGameState().findById(sparkDouble.getId());
 
         assertNotNull(simSpark);
         assertTrue(simSpark.isInZone(ZoneType.Battlefield));
-        assertEquals(1, simSpark.getCounters(CounterType.P1P1));
-        assertEquals(5, simSpark.getCounters(CounterType.LOYALTY));
+        assertEquals(1, simSpark.getCounters(CounterEnumType.P1P1));
+        assertEquals(5, simSpark.getCounters(CounterEnumType.LOYALTY));
     }
 
     public void testVituGhaziAndCytoshape() {
@@ -1884,7 +1888,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         assertNotNull(awakened);
         assertEquals("Vitu-Ghazi", awakened.getName());
-        assertEquals(9, awakened.getCounters(CounterType.P1P1));
+        assertEquals(9, awakened.getCounters(CounterEnumType.P1P1));
         assertTrue(awakened.hasKeyword(Keyword.HASTE));
         assertTrue(awakened.getType().hasSubtype("Goblin"));
     }
@@ -1932,7 +1936,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card epoOTB = findCardWithName(sim.getSimulatedGameState(), "Epochrasite");
 
         assertNotNull(epoOTB);
-        assertEquals(3, epoOTB.getCounters(CounterType.P1P1));
+        assertEquals(3, epoOTB.getCounters(CounterEnumType.P1P1));
     }
 
     @SuppressWarnings("unused")
@@ -2121,6 +2125,44 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         assertEquals(1, simWC.getPowerBonusFromCounters());
         assertEquals(3, simGame.getPlayers().get(0).getCreaturesInPlay().size());
+    }
 
+    public void testEverAfterWithWaywardServant() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        String everAfter = "Ever After";
+        String waywardServant = "Wayward Servant";
+        String goblin = "Raging Goblin";
+
+        for (int i = 0; i < 8; i++)
+            addCard("Swamp", p);
+
+        Card cardEverAfter = addCardToZone(everAfter, p, ZoneType.Hand);
+        Card cardWaywardServant = addCardToZone(waywardServant, p, ZoneType.Graveyard);
+        Card cardRagingGoblin = addCardToZone(goblin, p, ZoneType.Graveyard);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility playSa = cardEverAfter.getSpellAbilities().get(0);
+        playSa.setActivatingPlayer(p);
+        playSa.getTargets().add(cardWaywardServant);
+        playSa.getTargets().add(cardRagingGoblin);
+
+        GameSimulator sim = createSimulator(game, p);
+        int origScore = sim.getScoreForOrigGame().value;
+        int score = sim.simulateSpellAbility(playSa).value;
+        assertTrue(String.format("score=%d vs. origScore=%d", score, origScore), score > origScore);
+
+        Game simGame = sim.getSimulatedGameState();
+
+        Card simGoblin = findCardWithName(simGame, goblin);
+
+        simGame.getAction().checkStateEffects(true);
+        simGame.getPhaseHandler().devAdvanceToPhase(PhaseType.MAIN2);
+
+        assertEquals(21, simGame.getPlayers().get(0).getLife());
+        assertEquals(true, simGoblin.isRed() && simGoblin.isBlack());
+        assertEquals(true, simGoblin.getType().hasSubtype("Zombie"));
     }
 }

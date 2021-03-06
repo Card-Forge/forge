@@ -62,7 +62,7 @@ public class ConquestRewardDialog extends FScrollPane {
             columnCount = 1;
         }
         else if (cardCount < 5) {
-            if (Forge.extrawide.equals("default"))
+            if (Forge.extrawide.equals("default") && !Forge.isTabletDevice)
                 columnCount = 2;
             else {
                 if (cardCount == 4)
@@ -72,7 +72,7 @@ public class ConquestRewardDialog extends FScrollPane {
             }
         }
         else {
-            if (Forge.extrawide.equals("extrawide"))
+            if (Forge.extrawide.equals("extrawide") || Forge.isTabletDevice)
                 columnCount = 5;
             else if (Forge.extrawide.equals("wide"))
                 columnCount = 4;
@@ -101,17 +101,22 @@ public class ConquestRewardDialog extends FScrollPane {
 
         float startX = x;
         int cardCount = cardRevealers.size();
-        cardRevealers.get(0).setBounds(x, y, cardWidth, cardHeight);
-        for (int i = 1; i < cardCount; i++) {
-            if (i % columnCount == 0) {
-                x = startX;
-                y += cardHeight + PADDING;
+        try {
+            cardRevealers.get(0).setBounds(x, y, cardWidth, cardHeight);
+            for (int i = 1; i < cardCount; i++) {
+                if (i % columnCount == 0) {
+                    x = startX;
+                    y += cardHeight + PADDING;
+                }
+                else {
+                    x += cardWidth + PADDING;
+                }
+                cardRevealers.get(i).setBounds(x, y, cardWidth, cardHeight);
             }
-            else {
-                x += cardWidth + PADDING;
-            }
-            cardRevealers.get(i).setBounds(x, y, cardWidth, cardHeight);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
+
         return new ScrollBounds(visibleWidth, y + cardHeight + PADDING);
     }
 
@@ -244,10 +249,7 @@ public class ConquestRewardDialog extends FScrollPane {
                 //ensure current card in view
                 if (getScrollHeight() > getHeight() && index < cardCount) {
                     CardRevealer currentCard = cardRevealers.get(index);
-                    if (!Forge.extrawide.equals("default"))
-                        scrollIntoView(currentCard, currentCard.getHeight() / (columnCount * PADDING) / 2);
-                    else
-                        scrollIntoView(currentCard, currentCard.getHeight() / 2 + PADDING); //show half of the card below
+                    scrollIntoView(currentCard, currentCard.getHeight() / (columnCount * PADDING) / 2);
                 }
             }
 

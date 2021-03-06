@@ -76,7 +76,7 @@ Foil=NotSupported
 66 C Yavimaya Wurm
 67 U Diabolic Vision
 68 U Segmented Wurm
-69 C Clockwork Avian
+69 R Clockwork Avian
 70 R Clockwork Beast
 71 U Dwarven Ruins
 72 U Ebon Stronghold

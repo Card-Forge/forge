@@ -1,0 +1,12 @@
+[metadata]
+Code=G08
+Date=2008-01-01
+Name=Judge Gift Cards 2008
+Type=Reprint
+
+[cards]
+1 R Orim's Chant
+2 R Mind's Desire
+3 R Demonic Tutor
+4 R Goblin Piledriver
+5 R Living Wish

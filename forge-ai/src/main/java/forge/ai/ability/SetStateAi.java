@@ -86,13 +86,13 @@ public class SetStateAi extends SpellAbilityAi {
                 for (final Card c : list) {
                     if (shouldTransformCard(c, ai, ph) || "Always".equals(logic)) {
                         sa.getTargets().add(c);
-                        if (sa.getTargets().getNumTargeted() == tgt.getMaxTargets(source, sa)) {
+                        if (sa.getTargets().size() == tgt.getMaxTargets(source, sa)) {
                             break;
                         }
                     }
                 }
 
-                return sa.getTargets().getNumTargeted() >= tgt.getMinTargets(source, sa);
+                return sa.getTargets().size() >= tgt.getMinTargets(source, sa);
             }
         } else if ("TurnFace".equals(mode)) {
             if (!sa.usesTargeting()) {
@@ -115,13 +115,13 @@ public class SetStateAi extends SpellAbilityAi {
                 for (final Card c : list) {
                     if (shouldTurnFace(c, ai, ph) || "Always".equals(logic)) {
                         sa.getTargets().add(c);
-                        if (sa.getTargets().getNumTargeted() == tgt.getMaxTargets(source, sa)) {
+                        if (sa.getTargets().size() == tgt.getMaxTargets(source, sa)) {
                             break;
                         }
                     }
                 }
 
-                return sa.getTargets().getNumTargeted() >= tgt.getMinTargets(source, sa);
+                return sa.getTargets().size() >= tgt.getMinTargets(source, sa);
             }
         }
         return true;
@@ -174,7 +174,7 @@ public class SetStateAi extends SpellAbilityAi {
         if (!card.isFaceDown()) {
             transformed.turnFaceDown(true);
         } else {
-            transformed.turnFaceUp(false, false);
+            transformed.forceTurnFaceUp();
         }
         transformed.updateStateForView();
         return compareCards(card, transformed, ai, ph);
@@ -248,7 +248,7 @@ public class SetStateAi extends SpellAbilityAi {
                 final Card othercard = aiPlayer.getCardsIn(ZoneType.Battlefield, other.getName()).getFirst();
 
                 // for legendary KI counter creatures
-                if (othercard.getCounters(CounterType.KI) >= source.getCounters(CounterType.KI)) {
+                if (othercard.getCounters(CounterEnumType.KI) >= source.getCounters(CounterEnumType.KI)) {
                     // if the other legendary is useless try to replace it
                     return ComputerUtilCard.isUselessCreature(aiPlayer, othercard);
                 }

@@ -8,5 +8,5 @@ A:AB$ Effect | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True
 SVar:EffT:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ EffTrigTutor | TriggerDescription$ At the beginning of your end step, search your library for a permanent card, put it onto the battlefield, then shuffle your library.
 SVar:EffTrigTutor:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.Permanent | ChangeNum$ 1
 DeckHas:Ability$Token
-Oracle:[+1]: Create a 1/1 colorless Thopter artifact creature token with flying.\n[0]: Draw a card. If you control three or more artifacts, draw two cards instead.\n[-9]: You get an emblem with "At the beginning of your end step, search your library for a permanent card, put it onto the battlefield, then shuffle your library."
+Oracle:[+1]: Create a 1/1 colorless Thopter artifact creature token with flying.\n[0]: Draw a card. If you control three or more artifacts, draw two cards instead.\n[−9]: You get an emblem with "At the beginning of your end step, search your library for a permanent card, put it onto the battlefield, then shuffle your library."
 Loyalty:5

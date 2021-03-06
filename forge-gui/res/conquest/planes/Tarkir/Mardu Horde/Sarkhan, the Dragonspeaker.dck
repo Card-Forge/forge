@@ -1,5 +1,7 @@
 [metadata]
 Name=Sarkhan, the Dragonspeaker
+[Commander]
+1 Sarkhan, the Dragonspeaker|KTK
 [Main]
 1 Act of Treason|KTK
 1 Bathe in Dragonfire|FRF
@@ -21,7 +23,6 @@ Name=Sarkhan, the Dragonspeaker
 1 Pyrotechnics|FRF
 1 Sarkhan's Rage|DTK
 1 Sarkhan's Triumph|DTK
-1 Sarkhan, the Dragonspeaker|KTK
 1 Shatter|KTK
 1 Shockmaw Dragon|FRF
 1 Stormwing Dragon|DTK

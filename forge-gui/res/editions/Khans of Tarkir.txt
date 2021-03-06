@@ -7,6 +7,7 @@ MciCode=ktk
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand KTK
+ChaosDraftThemes=GRAVEYARD_MATTERS
 
 [cards]
 1 U Abzan Battle Priest
@@ -258,26 +259,26 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand KTK
 247 C Wind-Scarred Crag
 248 R Windswept Heath
 249 R Wooded Foothills
-269 L Forest
-269 L Forest
-269 L Forest
-269 L Forest
-257 L Island
-257 L Island
-257 L Island
-257 L Island
-263 L Mountain
-263 L Mountain
-263 L Mountain
-263 L Mountain
 250 L Plains
-250 L Plains
-250 L Plains
-250 L Plains
+251 L Plains
+252 L Plains
+253 L Plains
+254 L Island
+255 L Island
+256 L Island
+257 L Island
 258 L Swamp
-258 L Swamp
-258 L Swamp
-258 L Swamp
+259 L Swamp
+260 L Swamp
+261 L Swamp
+262 L Mountain
+263 L Mountain
+264 L Mountain
+265 L Mountain
+266 L Forest
+267 L Forest
+268 L Forest
+269 L Forest
 
 [tokens]
 w_3_4_bird_flying

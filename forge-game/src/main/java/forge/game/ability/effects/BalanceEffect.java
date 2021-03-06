@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -8,11 +9,13 @@ import forge.game.card.CardLists;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -50,12 +53,24 @@ public class BalanceEffect extends SpellAbilityEffect {
                 continue;
             }
             if (zone.equals(ZoneType.Hand)) {
+                boolean firstDiscard = p.getNumDiscardedThisTurn() == 0;
+                final CardCollection discardedByPlayer = new CardCollection();
                 for (Card card : p.getController().chooseCardsToDiscardFrom(p, sa, validCards.get(i), numToBalance, numToBalance)) {
                     if ( null == card ) continue;
-                    p.discard(card, sa, table);
+                    if (p.discard(card, sa, table) != null) {
+                        discardedByPlayer.add(card);
+                    }
+                }
+
+                if (!discardedByPlayer.isEmpty()) {
+                    final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                    runParams.put(AbilityKey.Player, p);
+                    runParams.put(AbilityKey.Cards, discardedByPlayer);
+                    runParams.put(AbilityKey.Cause, sa);
+                    runParams.put(AbilityKey.FirstTime, firstDiscard);
+                    game.getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
                 }
             } else { // Battlefield
-                // TODO: "can'e be sacrificed"
                 for(Card card : p.getController().choosePermanentsToSacrifice(sa, numToBalance, numToBalance,  validCards.get(i), valid)) {
                     if ( null == card ) continue; 
                     game.getAction().sacrifice(card, sa, table);

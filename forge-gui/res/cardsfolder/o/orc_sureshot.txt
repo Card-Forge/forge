@@ -3,7 +3,6 @@ ManaCost:3 B
 Types:Creature Orc Archer
 PT:4/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature enters the battlefield under your control, target creature an opponent controls gets -1/-1 until end of turn.
-SVar:TrigPump:DB$Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 SVar:BuffedBy:Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/orc_sureshot.jpg
 Oracle:Whenever another creature enters the battlefield under your control, target creature an opponent controls gets -1/-1 until end of turn.

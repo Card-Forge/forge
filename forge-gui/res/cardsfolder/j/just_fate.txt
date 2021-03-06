@@ -1,6 +1,6 @@
 Name:Just Fate
 ManaCost:2 W
 Types:Instant
-A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | OpponentTurn$ True | ActivationPhases$ Declare Attackers | SpellDescription$ Cast CARDNAME only during the declare attackers step and only if you've been attacked this step. Destroy target attacking creature.
+A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | OpponentTurn$ True | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. Destroy target attacking creature.
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6519.jpg
-Oracle:Cast Just Fate only during the declare attackers step and only if you've been attacked this step.\nDestroy target attacking creature.
+Oracle:Cast this spell only during the declare attackers step and only if you've been attacked this step.\nDestroy target attacking creature.

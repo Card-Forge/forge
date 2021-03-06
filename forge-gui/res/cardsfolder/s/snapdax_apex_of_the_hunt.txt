@@ -1,0 +1,11 @@
+Name:Snapdax, Apex of the Hunt
+ManaCost:1 R W B
+Types:Legendary Creature Dinosaur Cat Nightmare
+PT:3/5
+K:Mutate:2 BR W W
+K:Double Strike
+T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever this creature mutates, it deals 4 damage to target creature or planeswalker an opponent controls and you gain 4 life.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls | NumDmg$ 4 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
+DeckHas:Ability$LifeGain
+Oracle:Mutate {2}{B/R}{W}{W} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nDouble strike\nWhenever this creature mutates, it deals 4 damage to target creature or planeswalker an opponent controls and you gain 4 life.

@@ -1,10 +1,9 @@
 Name:Surprise Deployment
 ManaCost:3 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 W | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Creature.nonWhite | ChangeNum$ 1 | RememberChanged$ True | TgtPrompt$ Select target creature | ActivationPhases$ BeginCombat->EndCombat | AILogic$ SurpriseBlock | SubAbility$ DelTrig | SpellDescription$ Cast CARDNAME only during combat. You may put a nonwhite creature card from your hand onto the battlefield. At the beginning of the next end step, return that creature to your hand. (Return it only if it's on the battlefield.)
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigBounce | RememberObjects$ Remembered | TriggerDescription$ At the beginning of the next end step, return that creature to your hand. | AILogic$ Always | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-SVar:TrigBounce:DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Hand
+A:SP$ ChangeZone | Cost$ 3 W | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Creature.nonWhite | ChangeNum$ 1 | RememberChanged$ True | TgtPrompt$ Select target creature | ActivationPhases$ BeginCombat->EndCombat | AILogic$ SurpriseBlock | SubAbility$ DelTrig | SpellDescription$ Cast this spell only during combat. You may put a nonwhite creature card from your hand onto the battlefield. At the beginning of the next end step, return that creature to your hand. (Return it only if it's on the battlefield.)
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigBounce | RememberObjects$ RememberedLKI | TriggerDescription$ At the beginning of the next end step, return that creature to your hand. | AILogic$ Always | SubAbility$ DBCleanup
+SVar:TrigBounce:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/surprise_deployment.jpg
-Oracle:Cast Surprise Deployment only during combat.\nYou may put a nonwhite creature card from your hand onto the battlefield. At the beginning of the next end step, return that creature to your hand. (Return it only if it's on the battlefield.)
+Oracle:Cast this spell only during combat.\nYou may put a nonwhite creature card from your hand onto the battlefield. At the beginning of the next end step, return that creature to your hand. (Return it only if it's on the battlefield.)

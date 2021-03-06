@@ -1,0 +1,6 @@
+Name:Human Wizard
+ManaCost:no cost
+Types:Creature Human Wizard
+Colors:red
+PT:2/1
+Oracle:

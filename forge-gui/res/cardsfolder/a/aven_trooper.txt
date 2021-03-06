@@ -3,6 +3,6 @@ ManaCost:3 W
 Types:Creature Bird Soldier
 PT:1/1
 K:Flying
-A:AB$ Pump | Cost$ 2 W Discard<1/Card> | NumAtt$ 1 | NumDef$ 2 | SpellDescription$ CARDNAME gets +1/+2 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_trooper.jpg
+A:AB$ Pump | Cost$ 2 W Discard<1/Card> | Defined$ Self | NumAtt$ 1 | NumDef$ 2 | SpellDescription$ CARDNAME gets +1/+2 until end of turn.
+DeckHas:Ability$Discard
 Oracle:Flying\n{2}{W}, Discard a card: Aven Trooper gets +1/+2 until end of turn.

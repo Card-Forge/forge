@@ -3,10 +3,9 @@ ManaCost:3
 Types:Artifact Creature Scarecrow
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, return it to the battlefield transformed under your control.
-SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Defined$ TriggeredCard | Destination$ Battlefield | Transformed$ True | GainControl$ True 
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Defined$ TriggeredNewCardLKICopy | Destination$ Battlefield | Transformed$ True | GainControl$ True 
 AlternateMode:DoubleFaced
 DeckHints:Type$Human
-SVar:Picture:http://www.wizards.com/global/images/magic/general/harvest_hand.jpg
 Oracle:When Harvest Hand dies, return it to the battlefield transformed under your control.
 
 ALTERNATE
@@ -17,6 +16,5 @@ Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
 S:Mode$ Continuous | Affected$ Card.EquippedBy+Human | AddKeyword$ Menace | Description$ As long as equipped creature is a Human, it has menace. (It can't be blocked except by two or more creatures.)
 K:Equip:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scrounged_scythe.jpg
 Oracle:Equipped creature gets +1/+1.\nAs long as equipped creature is a Human, it has menace. (It can't be blocked except by two or more creatures.)\nEquip {2}
 

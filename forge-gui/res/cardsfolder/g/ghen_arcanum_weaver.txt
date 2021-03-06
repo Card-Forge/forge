@@ -1,0 +1,8 @@
+Name:Ghen, Arcanum Weaver
+ManaCost:R W B
+Types:Legendary Creature Human Wizard
+PT:2/3
+A:AB$ ChangeZone | Cost$ R W B Sac<1/Enchantment/enchantment> T | TgtPrompt$ Choose target enchantment card in your graveyard | ValidTgts$ Enchantment.YouOwn | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return target enchantment card from your graveyard to the battlefield.
+DeckNeeds:Type$Enchantment
+DeckHas:Ability$Graveyard
+Oracle:{R}{W}{B}, {T}, Sacrifice an enchantment: Return target enchantment card from your graveyard to the battlefield.

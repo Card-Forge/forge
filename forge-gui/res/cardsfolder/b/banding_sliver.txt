@@ -1,0 +1,7 @@
+Name:Banding Sliver
+ManaCost:3 W W
+Types:Creature Sliver
+PT:3/3
+S:Mode$ Continuous | Affected$ Permanent.Sliver | AddKeyword$ Banding | Description$ All Slivers have banding. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
+SVar:PlayMain1:TRUE
+Oracle:All Slivers have banding. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)

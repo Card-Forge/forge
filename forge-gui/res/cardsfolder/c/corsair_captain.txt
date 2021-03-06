@@ -1,0 +1,11 @@
+Name:Corsair Captain
+ManaCost:2 U
+Types:Creature Human Pirate
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a treasure token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+S:Mode$ Continuous | Affected$ Pirate.YouCtrl+Other | AddPower$ 1 | AddToughness$ 1 | Description$ Other Pirates you control get +1/+1.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Pirate
+DeckHas:Ability$Token
+Oracle:When Corsair Captain enters the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nOther Pirates you control get +1/+1.

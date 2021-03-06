@@ -7,7 +7,6 @@ import forge.game.staticability.StaticAbility;
 public class PlayerFactoryUtil {
 
     public static void addStaticAbility(final KeywordInterface inst, final Player player) {
-        final Card card = player.getKeywordCard();
         String keyword = inst.getOriginal();
         String effect = null;
         if (keyword.startsWith("Hexproof")) {
@@ -29,7 +28,8 @@ public class PlayerFactoryUtil {
                     + "| EffectZone$ Command | Description$ Shroud (" + inst.getReminderText() + ")";
         }
         if (effect != null) {
-            StaticAbility st = new StaticAbility(effect, card);
+            final Card card = player.getKeywordCard();
+            StaticAbility st = new StaticAbility(effect, card, card.getCurrentState());
             st.setIntrinsic(false);
             inst.addStaticAbility(st);
         }

@@ -1,5 +1,7 @@
 [metadata]
 Name=Tezzeret, Agent of Bolas
+[Commander]
+1 Tezzeret, Agent of Bolas|MBS
 [Main]
 1 Acquire|5DN
 1 Beacon of Unrest|C16
@@ -30,7 +32,6 @@ Name=Tezzeret, Agent of Bolas
 1 Soul Foundry|MRD
 1 Spellskite|MM2
 4 Swamp|NPH|1
-1 Tezzeret, Agent of Bolas|MBS
 1 Unwinding Clock|NPH
 1 Vault of Whispers|HOP
 1 Vedalken Orrery|CNS

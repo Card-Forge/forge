@@ -5,4 +5,4 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$
 K:Equip:1:Creature.Knight+YouCtrl:Knight
 K:Equip:3
 DeckHints:Type$Knight
-Oracle:Equipped creature gets +2/+2.\nEquip Knight {1} ({1}: Attach to target Knight creature you control. Equip only as a sorcery.)\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
+Oracle:Equipped creature gets +2/+2.\nEquip Knight {1}\nEquip {3}

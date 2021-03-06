@@ -2,11 +2,10 @@ Name:Manic Scribe
 ManaCost:1 U
 Types:Creature Human Wizard
 PT:0/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill1 | TriggerDescription$ When CARDNAME enters the battlefield, each opponent puts the top three cards of their library into their graveyard.
-SVar:TrigMill1:DB$ Mill | Defined$ Player.Opponent | NumCards$ 3 
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Delirium$ True | Execute$ TrigMill2 | TriggerZones$ Battlefield | TriggerDescription$ Delirium — At the beginning of each opponent's upkeep, if you have four or more card types among cards in your graveyard, that player puts the top three cards of their library into their graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill1 | TriggerDescription$ When CARDNAME enters the battlefield, each opponent mills three cards.
+SVar:TrigMill1:DB$ Mill | Defined$ Player.Opponent | NumCards$ 3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Delirium$ True | Execute$ TrigMill2 | TriggerZones$ Battlefield | TriggerDescription$ Delirium — At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, that player mills three cards.
 SVar:TrigMill2:DB$ Mill | Defined$ TriggeredPlayer | NumCards$ 3
 DeckHints:Ability$Graveyard & Ability$Discard
 DeckHas:Ability$Delirium
-SVar:Picture:http://www.wizards.com/global/images/magic/general/manic_scribe.jpg
-Oracle:When Manic Scribe enters the battlefield, each opponent puts the top three cards of their library into their graveyard.\nDelirium — At the beginning of each opponent's upkeep, if you have four or more card types among cards in your graveyard, that player puts the top three cards of their library into their graveyard.
+Oracle:When Manic Scribe enters the battlefield, each opponent mills three cards.\nDelirium — At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, that player mills three cards.

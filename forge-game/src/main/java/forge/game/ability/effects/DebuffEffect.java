@@ -70,7 +70,7 @@ public class DebuffEffect extends SpellAbilityEffect {
         for (final Card tgtC : getTargetCards(sa)) {
             final List<String> addedKW = Lists.newArrayList();
             final List<String> removedKW = Lists.newArrayList();
-            if (tgtC.isInPlay() && tgtC.canBeTargetedBy(sa)) {
+            if (tgtC.isInPlay() && (!sa.usesTargeting() || tgtC.canBeTargetedBy(sa))) {
                 if (sa.hasParam("AllSuffixKeywords")) {
                     String suffix = sa.getParam("AllSuffixKeywords");
                     for (final KeywordInterface kw : tgtC.getKeywords()) {

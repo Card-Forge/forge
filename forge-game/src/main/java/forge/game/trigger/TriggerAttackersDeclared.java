@@ -42,7 +42,7 @@ public class TriggerAttackersDeclared extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerAttackersDeclared(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerAttackersDeclared(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -88,8 +88,8 @@ public class TriggerAttackersDeclared extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Attackers, AbilityKey.AttackingPlayer);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Attackers, AbilityKey.AttackingPlayer, AbilityKey.AttackedTarget);
     }
 
     @Override

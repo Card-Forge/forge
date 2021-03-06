@@ -8,4 +8,4 @@ SVar:TrigReturn:DB$ChangeZone | Defined$ Self | Origin$ Battlefield | Destinatio
 SVar:PlayMain1:TRUE
 SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_sandstalker.jpg
-Oracle:Haste (This creature can attack the turn it comes under your control.)\nAt the beginning of the end step, return Viashino Sandstalker to its owner's hand. (Return it only if it's on the battlefield.)
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nAt the beginning of the end step, return Viashino Sandstalker to its owner's hand. (Return it only if it's on the battlefield.)

@@ -1,0 +1,6 @@
+Name:Salamander Warrior
+ManaCost:no cost
+Types:Creature Salamander Warrior
+Colors:blue
+PT:4/3
+Oracle:

@@ -4,7 +4,6 @@ Types:Artifact
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
 S:Mode$ Continuous | Affected$ Creature.ChosenColor+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control of the chosen color get +1/+1.
-T:Mode$ TapsForMana | ValidCard$ Land | Produced$ ChosenColor | NoTapCheck$ True | Player$ You | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a land's ability adds one or more mana of the chosen color, add one additional mana of that color.
-SVar:TrigMana:DB$ Mana | Produced$ Chosen | Amount$ 1 | Defined$ TriggeredPlayer
-SVar:Picture:http://www.wizards.com/global/images/magic/general/caged_sun.jpg
-Oracle:As Caged Sun enters the battlefield, choose a color.\nCreatures you control of the chosen color get +1/+1.\nWhenever a land's ability adds one or more mana of the chosen color, add one additional mana of that color.
+T:Mode$ TapsForMana | ValidCard$ Land | Produced$ ChosenColor | NoTapCheck$ True | Player$ You | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a land's ability causes you to add one or more mana of the chosen color, add one additional mana of that color.
+SVar:TrigMana:DB$ Mana | Produced$ Chosen | Amount$ 1 | Defined$ You
+Oracle:As Caged Sun enters the battlefield, choose a color.\nCreatures you control of the chosen color get +1/+1.\nWhenever a land's ability causes you to add one or more mana of the chosen color, add one additional mana of that color.

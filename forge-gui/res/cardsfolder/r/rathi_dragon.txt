@@ -8,4 +8,4 @@ SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Sac<2/Mountain> |
 SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$Valid Mountain.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rathi_dragon.jpg
-Oracle:Flying\nWhen Rathi Dragon enters the battlefield, sacrifice it unless you sacrifice two Mountains.
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Rathi Dragon enters the battlefield, sacrifice it unless you sacrifice two Mountains.

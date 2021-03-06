@@ -5,6 +5,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.view.FDialog;
+import forge.util.Localizer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +20,7 @@ public class SleeveSelector extends FDialog {
     private final Map<Integer, FSkin.SkinImage> sleeveMap = FSkin.getSleeves();
 
     public SleeveSelector(final String playerName, final int currentIndex, final Collection<Integer> usedIndices) {
-        this.setTitle("Select Sleeve for " + playerName);
+        this.setTitle(Localizer.getInstance().getMessage("lblSelectSleevesFroPlayer", playerName));
 
         final JPanel pnlSleevePics = new JPanel(new WrapLayout());
 

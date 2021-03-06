@@ -1,0 +1,10 @@
+[metadata]
+Code=PWP12
+Date=2012-01-01
+Name=Wizards Play Network 2012
+Type=Reprint
+
+[cards]
+79 R Gather the Townsfolk
+81 R Curse of Thirst
+82 R Nearheath Stalker

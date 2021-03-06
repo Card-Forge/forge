@@ -48,10 +48,22 @@ public enum FSkinProp {
 
     //zone images
     IMG_ZONE_HAND        (new int[] {280, 40, 40, 40}, PropType.IMAGE),
+    IMG_HDZONE_HAND      (new int[] {2, 136, 128, 128}, PropType.BUTTONS),
+
     IMG_ZONE_LIBRARY     (new int[] {280, 0, 40, 40}, PropType.IMAGE),
+    IMG_HDZONE_LIBRARY   (new int[] {132, 136, 128, 128}, PropType.BUTTONS),
+
     IMG_ZONE_EXILE       (new int[] {320, 40, 40, 40}, PropType.IMAGE),
+    IMG_HDZONE_EXILE     (new int[] {262, 136, 128, 128}, PropType.BUTTONS),
+
     IMG_ZONE_FLASHBACK   (new int[] {280, 80, 40, 40}, PropType.IMAGE),
+    IMG_HDZONE_FLASHBACK (new int[] {262, 6, 128, 128}, PropType.BUTTONS),
+
     IMG_ZONE_GRAVEYARD   (new int[] {320, 0, 40, 40}, PropType.IMAGE),
+    IMG_HDZONE_GRAVEYARD (new int[] {132, 6, 128, 128}, PropType.BUTTONS),
+
+    IMG_HDZONE_MANAPOOL  (new int[] {2, 6, 128, 128}, PropType.BUTTONS),
+
     IMG_ZONE_POISON      (new int[] {320, 80, 40, 40}, PropType.IMAGE),
 
     //mana images
@@ -170,6 +182,16 @@ public enum FSkinProp {
     ICO_ARCSON       (new int[] {320, 800, 80, 80}, PropType.ICON),
     ICO_ARCSHOVER    (new int[] {400, 800, 80, 80}, PropType.ICON),
 
+    //choice-search-misc
+    ICO_HDCHOICE     (new int[] {2, 1792, 128, 128}, PropType.BUTTONS),
+    ICO_HDSIDEBOARD  (new int[] {132, 1792, 128, 128}, PropType.BUTTONS),
+    ICO_HDPREFERENCE (new int[] {262, 1792, 128, 128}, PropType.BUTTONS),
+    ICO_HDIMPORT     (new int[] {2, 1922, 128, 128}, PropType.BUTTONS),
+    ICO_HDEXPORT     (new int[] {132, 1922, 128, 128}, PropType.BUTTONS),
+    ICO_HDYIELD      (new int[] {262, 1922, 128, 128}, PropType.BUTTONS),
+    ICO_BLANK        (new int[] {2, 2, 2, 2}, PropType.ICON), //safe coords, lower than 2 will cause crash on desktop
+    IMG_LANDLOGO     (new int[] {84, 822, 80, 80}, PropType.MANAICONS),
+
     //quest icons
     ICO_QUEST_ZEP         (new int[] {0, 480, 80, 80}, PropType.ICON),
     ICO_QUEST_GEAR        (new int[] {80, 480, 80, 80}, PropType.ICON),
@@ -192,31 +214,82 @@ public enum FSkinProp {
     ICO_QUEST_MINUS       (new int[] {560, 640, 80, 80}, PropType.ICON),
     ICO_QUEST_PLUS        (new int[] {480, 640, 80, 80}, PropType.ICON),
     ICO_QUEST_PLUSPLUS    (new int[] {480, 720, 80, 80}, PropType.ICON),
+    ICO_QUEST_BIG_ELIXIR  (new int[] {0, 880, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_BREW    (new int[] {160, 880, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_BM      (new int[] {320, 880, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_STAKES  (new int[] {480, 880, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_HOUSE   (new int[] {0, 1040, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_COIN    (new int[] {160, 1040, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_BOOK    (new int[] {320, 1040, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_MAP     (new int[] {480, 1040, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_ZEP     (new int[] {0, 1200, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_CHARM   (new int[] {160, 1200, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_BOOTS   (new int[] {320, 1200, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_SHIELD  (new int[] {480, 1200, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_ARMOR   (new int[] {0, 1360, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_AXE     (new int[] {160, 1360, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_SWORD   (new int[] {320, 1360, 160, 160}, PropType.ICON),
+    ICO_QUEST_BIG_BAG     (new int[] {480, 1360, 160, 160}, PropType.ICON),
+
+    //menu icon
+    ICO_MENU_GALAXY       (new int[] {0, 1520, 80, 80}, PropType.ICON),
+    ICO_MENU_STATS        (new int[] {80, 1520, 80, 80}, PropType.ICON),
+    ICO_MENU_PUZZLE       (new int[] {160, 1520, 80, 80}, PropType.ICON),
+    ICO_MENU_GAUNTLET     (new int[] {240, 1520, 80, 80}, PropType.ICON),
+    ICO_MENU_SEALED       (new int[] {320, 1520, 80, 80}, PropType.ICON),
+    ICO_MENU_DRAFT        (new int[] {400, 1520, 80, 80}, PropType.ICON),
+    ICO_MENU_CONSTRUCTED  (new int[] {480, 1520, 80, 80}, PropType.ICON),
 
     //interface icons
     ICO_QUESTION        (new int[] {560, 800, 32, 32}, PropType.ICON),
     ICO_INFORMATION     (new int[] {592, 800, 32, 32}, PropType.ICON),
     ICO_WARNING         (new int[] {560, 832, 32, 32}, PropType.ICON),
     ICO_ERROR           (new int[] {592, 832, 32, 32}, PropType.ICON),
+
     ICO_DELETE          (new int[] {640, 480, 20, 20}, PropType.ICON),
+    ICO_HDDELETE        (new int[] {392, 134, 64, 64}, PropType.BUTTONS),
+
     ICO_DELETE_OVER     (new int[] {660, 480, 20, 20}, PropType.ICON),
+
     ICO_EDIT            (new int[] {640, 500, 20, 20}, PropType.ICON),
+    ICO_HDEDIT          (new int[] {392, 200, 64, 64}, PropType.BUTTONS),
+
     ICO_EDIT_OVER       (new int[] {660, 500, 20, 20}, PropType.ICON),
+
     ICO_OPEN            (new int[] {660, 520, 20, 20}, PropType.ICON),
+    ICO_HDOPEN          (new int[] {392, 68, 64, 64}, PropType.BUTTONS),
+
     ICO_MINUS           (new int[] {660, 620, 20, 20}, PropType.ICON),
+    ICO_HDMINUS         (new int[] {391, 1506, 64, 64}, PropType.BUTTONS),
+
     ICO_NEW             (new int[] {660, 540, 20, 20}, PropType.ICON),
+
     ICO_PLUS            (new int[] {660, 600, 20, 20}, PropType.ICON),
+    ICO_HDPLUS          (new int[] {391, 1572, 64, 64}, PropType.BUTTONS),
+
     ICO_PRINT           (new int[] {660, 640, 20, 20}, PropType.ICON),
+
     ICO_SAVE            (new int[] {660, 560, 20, 20}, PropType.ICON),
+    ICO_HDSAVE          (new int[] {391, 1704, 64, 64}, PropType.BUTTONS),
     ICO_SAVEAS          (new int[] {660, 580, 20, 20}, PropType.ICON),
+    ICO_HDSAVEAS          (new int[] {391, 1638, 64, 64}, PropType.BUTTONS),
+
     ICO_CLOSE           (new int[] {640, 640, 20, 20}, PropType.ICON),
     ICO_LIST            (new int[] {640, 660, 20, 20}, PropType.ICON),
     ICO_CARD_IMAGE      (new int[] {660, 660, 20, 20}, PropType.ICON),
+
     ICO_FOLDER          (new int[] {640, 680, 20, 20}, PropType.ICON),
+    ICO_HDFOLDER        (new int[] {392, 2, 64, 64}, PropType.BUTTONS),
+
     ICO_SEARCH          (new int[] {660, 680, 20, 20}, PropType.ICON),
+    ICO_HDSEARCH        (new int[] {391, 1374, 64, 64}, PropType.BUTTONS),
+
     ICO_UNKNOWN         (new int[] {0, 720, 80, 80}, PropType.ICON),
     ICO_LOGO            (new int[] {480, 0, 200, 200}, PropType.ICON),
+
     ICO_FLIPCARD        (new int[] {400, 0, 80, 120}, PropType.ICON),
+    ICO_HDFLIPCARD      (new int[] {2, 1268, 387, 500}, PropType.BUTTONS),
+
     ICO_FAVICON         (new int[] {0, 640, 80, 80}, PropType.ICON),
     ICO_LOCK            (new int[] {620, 800, 48, 48}, PropType.ICON),
 
@@ -229,14 +302,18 @@ public enum FSkinProp {
     IMG_CUR_TAB (new int[] {644, 764, 32, 32}, PropType.IMAGE),
 
     //editor images
-    IMG_STAR_OUTINE     (new int[] {640, 460, 20, 20}, PropType.IMAGE),
+    IMG_STAR_OUTLINE    (new int[] {640, 460, 20, 20}, PropType.IMAGE),
+    IMG_HDSTAR_OUTLINE  (new int[] {391, 1308, 64, 64}, PropType.BUTTONS),
     IMG_STAR_FILLED     (new int[] {660, 460, 20, 20}, PropType.IMAGE),
+    IMG_HDSTAR_FILLED   (new int[] {391, 1440, 64, 64}, PropType.BUTTONS),
+
     IMG_ARTIFACT        (new int[] {412, 658, 80, 80}, PropType.MANAICONS),
     IMG_CREATURE        (new int[] {2, 740, 80, 80}, PropType.MANAICONS),
     IMG_ENCHANTMENT     (new int[] {84, 740, 80, 80}, PropType.MANAICONS),
     IMG_INSTANT         (new int[] {166, 740, 80, 80}, PropType.MANAICONS),
     IMG_LAND            (new int[] {248, 740, 80, 80}, PropType.MANAICONS),
     IMG_MULTI           (new int[] {80, 720, 40, 40}, PropType.IMAGE),
+    IMG_HDMULTI         (new int[] {2, 822, 80, 80}, PropType.MANAICONS),
     IMG_PLANESWALKER    (new int[] {330, 740, 80, 80}, PropType.MANAICONS),
     IMG_PACK            (new int[] {80, 760, 40, 40}, PropType.IMAGE),
     IMG_SORCERY         (new int[] {412, 740, 80, 80}, PropType.MANAICONS),
@@ -284,6 +361,28 @@ public enum FSkinProp {
     IMG_BTN_DISABLED_LEFT   (new int[] {80, 200, 40, 40}, PropType.ICON),
     IMG_BTN_DISABLED_CENTER (new int[] {120, 200, 1, 40}, PropType.ICON),
     IMG_BTN_DISABLED_RIGHT  (new int[] {160, 200, 40, 40}, PropType.ICON),
+    //hd buttons
+    IMG_HDBTN_START_UP        (new int[] {2, 2, 588, 312}, PropType.BTNSTART),
+    IMG_HDBTN_START_OVER      (new int[] {1183, 2, 588, 312}, PropType.BTNSTART),
+    IMG_HDBTN_START_DOWN      (new int[] {593, 2, 588, 312}, PropType.BTNSTART),
+    IMG_HDBTN_UP_LEFT         (new int[] {2, 266, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_UP_CENTER       (new int[] {162, 266, 1, 165}, PropType.BUTTONS),
+    IMG_HDBTN_UP_RIGHT        (new int[] {322, 266, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_OVER_LEFT       (new int[] {2, 433, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_OVER_CENTER     (new int[] {162, 433, 1, 165}, PropType.BUTTONS),
+    IMG_HDBTN_OVER_RIGHT      (new int[] {322, 433, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_DOWN_LEFT       (new int[] {2, 600, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_DOWN_CENTER     (new int[] {162, 600, 1, 165}, PropType.BUTTONS),
+    IMG_HDBTN_DOWN_RIGHT      (new int[] {322, 600, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_FOCUS_LEFT      (new int[] {2, 767, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_FOCUS_CENTER    (new int[] {162, 767, 1, 165}, PropType.BUTTONS),
+    IMG_HDBTN_FOCUS_RIGHT     (new int[] {322, 767, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_TOGGLE_LEFT     (new int[] {2, 934, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_TOGGLE_CENTER   (new int[] {162, 934, 1, 165}, PropType.BUTTONS),
+    IMG_HDBTN_TOGGLE_RIGHT    (new int[] {322, 934, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_DISABLED_LEFT   (new int[] {2, 1101, 160, 165}, PropType.BUTTONS),
+    IMG_HDBTN_DISABLED_CENTER (new int[] {162, 1101, 1, 165}, PropType.BUTTONS),
+    IMG_HDBTN_DISABLED_RIGHT  (new int[] {322, 1101, 160, 165}, PropType.BUTTONS),
 
     IMG_FAV1    (new int[] {0, 0, 100, 100}, PropType.FAVICON),
     IMG_FAV2    (new int[] {100, 0, 100, 100}, PropType.FAVICON),
@@ -293,18 +392,22 @@ public enum FSkinProp {
     IMG_FAVNONE (new int[] {500, 0, 100, 100}, PropType.FAVICON),
  
     IMG_QUEST_DRAFT_DECK (new int[] {0, 0, 680, 475}, PropType.IMAGE),
-
+    //COMMANDER
+    IMG_ABILITY_COMMANDER      (new int[] {330, 576, 80, 80}, PropType.ABILITY),
+    //Ability Icons
     IMG_ABILITY_DEATHTOUCH     (new int[] {2, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_DEFENDER       (new int[] {84, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_DOUBLE_STRIKE  (new int[] {166, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FIRST_STRIKE   (new int[] {248, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FEAR           (new int[] {84, 412, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_FLASH          (new int[] {166, 576, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FLYING         (new int[] {330, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_HASTE          (new int[] {412, 494, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_HEXPROOF       (new int[] {412, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_HORSEMANSHIP   (new int[] {2, 576, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_INDESTRUCTIBLE (new int[] {2, 84, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_INTIMIDATE     (new int[] {166, 412, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_LANDWALK       (new int[] {248, 576, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_LIFELINK       (new int[] {84, 84, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_MENACE         (new int[] {166, 84, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_REACH          (new int[] {248, 330, 80, 80}, PropType.ABILITY),
@@ -378,6 +481,8 @@ public enum FSkinProp {
         TROPHY,
         ABILITY,
         BORDERS,
+        BUTTONS,
+        BTNSTART,
         MANAICONS,
         PLANAR_CONQUEST,
         FAVICON

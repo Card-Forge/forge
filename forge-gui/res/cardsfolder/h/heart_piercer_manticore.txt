@@ -2,13 +2,11 @@ Name:Heart-Piercer Manticore
 ManaCost:2 R R
 Types:Creature Manticore
 PT:4/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice another creature. When you do, CARDNAME deals damage equal to that creature's power to target creature or player.
-SVar:TrigSacrifice:DB$ Sacrifice | Optional$ True | SacrificeParam$ HeartPiercer | SacValid$ Creature.Other | SacMessage$ another Creature | Amount$ 1 | AILogic$ ConsiderSac
-T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Creature.Other | CauseParam$ HeartPiercer | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ CARDNAME deals damage equal to that creature's power to any target.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ DBTrigger | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice another creature. When you do, CARDNAME deals damage equal to that creature's power to target creature or player.
+SVar:DBTrigger:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other/another creature> | Execute$ TrigDamage | AILogic$ SacForDamage | RememberObjects$ Sacrificed | TriggerDescription$ When you do, CARDNAME deals damage equal to that creature's power to any target.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ XPower | References$ XPower
 K:Embalm:5 R
-SVar:XPower:TriggeredCard$CardPower
+SVar:XPower:TriggerRemembered$CardPower
 SVar:AIPreferenceParams:CreatureEvalThreshold$ 200
-SVar:DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_piercer_manticore.jpg
-Oracle:When Heart-Piercer Manticore enters the battlefield, you may sacrifice another creature. When you do, Heart-Piercer Manticore deals damage equal to that creature's power to any target.\nEmbalm {5} {R} ({5} {R}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Manticore with no mana cost. Embalm only as a sorcery.)
+DeckHas:Ability$Token & Ability$Sacrifice
+Oracle:When Heart-Piercer Manticore enters the battlefield, you may sacrifice another creature. When you do, Heart-Piercer Manticore deals damage equal to that creature's power to any target.\nEmbalm {5}{R} ({5}{R}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Manticore with no mana cost. Embalm only as a sorcery.)

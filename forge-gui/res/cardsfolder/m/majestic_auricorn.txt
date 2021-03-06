@@ -1,0 +1,10 @@
+Name:Majestic Auricorn
+ManaCost:4 W
+Types:Creature Unicorn
+PT:4/4
+K:Mutate:3 W
+K:Vigilance
+T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever this creature mutates, you gain 4 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4 | Defined$ You
+DeckHas:Ability$LifeGain
+Oracle:Mutate {3}{W} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nVigilance\nWhenever this creature mutates, you gain 4 life.

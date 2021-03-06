@@ -3,4 +3,4 @@ ManaCost:R
 Types:Instant
 A:SP$ DealDamage | Cost$ R Discard<1/Random> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sonic_seizure.jpg
-Oracle:As an additional cost to cast Sonic Seizure, discard a card at random.\nSonic Seizure deals 3 damage to any target.
+Oracle:As an additional cost to cast this spell, discard a card at random.\nSonic Seizure deals 3 damage to any target.

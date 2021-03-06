@@ -5,7 +5,7 @@ K:CARDNAME enters the battlefield tapped.
 K:Hexproof
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice two lands.
 SVar:TrigSac:DB$ Sacrifice | Amount$ 2 | Defined$ You | SacValid$ Land | AILogic$ ExceptSelf
-A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 3 | SpellDescription$ Add three mana of any color.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 3 | SpellDescription$ Add three mana of any one color.
 SVar:NeedsToPlayVar:X GT2
 SVar:X:Count$Valid Land.Basic+YouCtrl
-Oracle:Hexproof\nLotus Field enters the battlefield tapped.\nWhen Lotus Field enters the battlefield, sacrifice two lands.\n{T}: Add three mana of any color.
+Oracle:Hexproof\nLotus Field enters the battlefield tapped.\nWhen Lotus Field enters the battlefield, sacrifice two lands.\n{T}: Add three mana of any one color.

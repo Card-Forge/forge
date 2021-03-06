@@ -13,10 +13,11 @@ import forge.planarconquest.ConquestCommander;
 import forge.planarconquest.ConquestData;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.util.Localizer;
 
 public class ConquestDeckEditor extends FDeckEditor {
     public ConquestDeckEditor(final ConquestCommander commander) {
-        super(EditorType.PlanarConquest, new DeckProxy(commander.getDeck(), "Conquest Commander",
+        super(EditorType.PlanarConquest, new DeckProxy(commander.getDeck(), Localizer.getInstance().getMessage("lblConquestCommander"),
                 GameType.PlanarConquest, FModel.getConquest().getDecks()), true);
 
         setSaveHandler(new FEventHandler() {

@@ -7,4 +7,4 @@ SVar:X:Count$Devotion.Blue
 SVar:BuffedBy:Permanent.Blue
 S:Mode$ Continuous | Affected$ Creature.YouCtrl,Enchantment.YouCtrl | AddStaticAbility$ RaiseCost | Description$ Creatures and enchantments you control have "Spells your opponents cast that target this permanent cost {1} more to cast."
 SVar:RaiseCost:Mode$ RaiseCost | ValidTarget$ Card.Self | Activator$ Opponent | Type$ Spell | Amount$ 1 | Description$ Spells your opponents cast that target CARDNAME cost {1} more to cast.
-Oracle:Callaphe's power is equal to your to devotion to blue. (Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)\nCreatures and enchantments you control have "Spells your opponents cast that target this permanent cost {1} more to cast."
+Oracle:Callaphe's power is equal to your devotion to blue. (Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)\nCreatures and enchantments you control have "Spells your opponents cast that target this permanent cost {1} more to cast."

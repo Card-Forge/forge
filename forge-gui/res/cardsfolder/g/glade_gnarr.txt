@@ -3,8 +3,7 @@ ManaCost:5 G
 Types:Creature Beast
 PT:4/4
 T:Mode$ SpellCast | ValidCard$ Card.Blue | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a player casts a blue spell, CARDNAME gets +2/+2 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 SVar:BuffedBy:Card.Blue
 DeckHints:Color$Blue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glade_gnarr.jpg
 Oracle:Whenever a player casts a blue spell, Glade Gnarr gets +2/+2 until end of turn.

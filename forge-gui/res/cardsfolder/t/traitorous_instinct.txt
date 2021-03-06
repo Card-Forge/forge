@@ -2,6 +2,5 @@ Name:Traitorous Instinct
 ManaCost:3 R
 Types:Sorcery
 A:SP$ GainControl | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Untap$ True | LoseControl$ EOT | SubAbility$ DBPump | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. Until end of turn, it gets +2/+0 and gains haste.
-SVar:DBPump:DB$Pump | Defined$ Targeted | NumAtt$ +2 | KW$ Haste
-SVar:Picture:http://www.wizards.com/global/images/magic/general/traitorous_instinct.jpg
+SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +2 | KW$ Haste
 Oracle:Gain control of target creature until end of turn. Untap that creature. Until end of turn, it gets +2/+0 and gains haste.

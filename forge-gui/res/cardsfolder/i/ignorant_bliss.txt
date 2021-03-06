@@ -2,10 +2,9 @@ Name:Ignorant Bliss
 ManaCost:1 R
 Types:Instant
 A:SP$ ChangeZoneAll | Cost$ 1 R | ChangeType$ Card.YouCtrl | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DelayedReturn | SpellDescription$ Exile all cards from your hand face down. At the beginning of the next end step, return those cards to your hand, then draw a card.
-SVar:DelayedReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ ReturnAll | RememberObjects$ Remembered | TriggerDescription$ Return exiled cards to your hand, then draw a card. | SubAbility$ DBCleanup
-SVar:ReturnAll:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ DelayTriggerRemembered | SubAbility$ YouDraw
+SVar:DelayedReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ ReturnAll | RememberObjects$ RememberedLKI | TriggerDescription$ Return exiled cards to your hand, then draw a card. | SubAbility$ DBCleanup
+SVar:ReturnAll:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ DelayTriggerRememberedLKI | SubAbility$ YouDraw
 SVar:YouDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ignorant_bliss.jpg
 Oracle:Exile all cards from your hand face down. At the beginning of the next end step, return those cards to your hand, then draw a card.

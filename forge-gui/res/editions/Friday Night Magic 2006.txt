@@ -1,0 +1,19 @@
+[metadata]
+Code=F06
+Date=2006-01-01
+Name=Friday Night Magic 2006
+Type=Reprint
+
+[cards]
+1 R Elves of Deep Shadow
+2 R Armadillo Cloak
+3 R Terminate
+4 R Lobotomy
+5 R Goblin Warchief
+6 R Wild Mongrel
+7 R Chainer's Edict
+8 R Circular Logic
+9 R Astral Slide
+10 R Arrogant Wurm
+11 R Life // Death
+12 R Fire // Ice

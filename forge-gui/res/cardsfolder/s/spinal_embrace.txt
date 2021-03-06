@@ -1,8 +1,8 @@
 Name:Spinal Embrace
 ManaCost:3 U U B
 Types:Instant
-A:SP$ GainControl | Cost$ 3 U U B | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | ActivationPhases$ BeginCombat->EndCombat | Untap$ True | AddKWs$ Haste | SubAbility$ DBAnimate | SpellDescription$ Cast CARDNAME only during combat. Untap target creature you don't control and gain control of it. It gains haste until end of turn. At the beginning of the next end step, sacrifice it. If you do, you gain life equal to its toughness.
-SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Keywords$ Haste | sVars$ SneakAttackEOT | SubAbility$ DelTrig 
+A:SP$ GainControl | Cost$ 3 U U B | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | ActivationPhases$ BeginCombat->EndCombat | Untap$ True | AddKWs$ Haste | SubAbility$ DBAnimate | SpellDescription$ Cast this spell only during combat. Untap target creature you don't control and gain control of it. It gains haste until end of turn. At the beginning of the next end step, sacrifice it. If you do, you gain life equal to its toughness.
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Keywords$ Haste | sVars$ SneakAttackEOT | SubAbility$ DelTrig
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigSac | RememberObjects$ Targeted | TriggerDescription$ At the beginning of the next end step, sacrifice it. If you do, you gain life equal to its toughness. | AILogic$ Always | ConditionDefined$ Targeted | ConditionPresent$ Card | ConditionCompare$ GE1
 SVar:TrigSac:DB$ SacrificeAll | Defined$ DelayTriggerRemembered | Controller$ You | RememberSacrificed$ True | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBCleanup | References$ X | ConditionDefined$ Remembered | ConditionPresent$ Card
@@ -10,4 +10,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardToughness
 SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:AtEOT
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spinal_embrace.jpg
-Oracle:Cast Spinal Embrace only during combat.\nUntap target creature you don't control and gain control of it. It gains haste until end of turn. At the beginning of the next end step, sacrifice it. If you do, you gain life equal to its toughness.
+Oracle:Cast this spell only during combat.\nUntap target creature you don't control and gain control of it. It gains haste until end of turn. At the beginning of the next end step, sacrifice it. If you do, you gain life equal to its toughness.

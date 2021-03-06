@@ -21,7 +21,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.util.Expressions;
 import forge.util.Localizer;
 
@@ -49,7 +48,7 @@ public class TriggerDamageDone extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerDamageDone(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerDamageDone(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -57,31 +56,21 @@ public class TriggerDamageDone extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Card src = (Card) runParams.get(AbilityKey.DamageSource);
-        final Object tgt = runParams.get(AbilityKey.DamageTarget);
-
         if (hasParam("ValidSource")) {
-            if (!src.isValid(getParam("ValidSource").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
+            if (!matchesValid(runParams.get(AbilityKey.DamageSource), getParam("ValidSource").split(","), getHostCard())) {
                 return false;
             }
         }
 
         if (hasParam("ValidTarget")) {
-            if (!matchesValid(tgt, getParam("ValidTarget").split(","), this.getHostCard())) {
+            if (!matchesValid(runParams.get(AbilityKey.DamageTarget), getParam("ValidTarget").split(","), getHostCard())) {
                 return false;
             }
         }
 
         if (hasParam("CombatDamage")) {
-            if (getParam("CombatDamage").equals("True")) {
-                if (!((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
-                    return false;
-                }
-            } else if (getParam("CombatDamage").equals("False")) {
-                if (((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
-                    return false;
-                }
+            if (getParam("CombatDamage").equalsIgnoreCase("True") != (Boolean) runParams.get(AbilityKey.IsCombatDamage)) {
+                return false;
             }
         }
 
@@ -95,26 +84,6 @@ public class TriggerDamageDone extends Trigger {
             if (!Expressions.compare(actualAmount, operator, operand)) {
                 return false;
             }
-
-            System.out.print("DamageDone Amount Operator: ");
-            System.out.println(operator);
-            System.out.print("DamageDone Amount Operand: ");
-            System.out.println(operand);
-        }
-
-        if (hasParam("OncePerEffect")) {
-            // A "once per effect" trigger will only trigger once regardless of how many things the effect caused
-            // to change zones.
-
-            // The SpellAbilityStackInstance keeps track of which host cards with "OncePerEffect"
-            // triggers already fired as a result of that effect.
-            // TODO This isn't quite ideal, since it really should be keeping track of the SpellAbility of the host
-            // card, rather than keeping track of the host card itself - but it's good enough for now - since there
-            // are no cards with multiple different OncePerEffect triggers.
-            SpellAbilityStackInstance si = (SpellAbilityStackInstance) runParams.get(AbilityKey.SpellAbilityStackInstance);
-
-            // si == null means the stack is empty
-            return si == null || !si.hasOncePerEffectTrigger(this);
         }
 
         return true;
@@ -122,11 +91,11 @@ public class TriggerDamageDone extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Source, CardUtil.getLKICopy((Card)getFromRunParams(AbilityKey.DamageSource)));
-        sa.setTriggeringObject(AbilityKey.Target, getFromRunParams(AbilityKey.DamageTarget));
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObject(AbilityKey.Source, CardUtil.getLKICopy((Card)runParams.get(AbilityKey.DamageSource)));
+        sa.setTriggeringObject(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
         sa.setTriggeringObjectsFrom(
-            this,
+            runParams,
             AbilityKey.DamageAmount,
             // This parameter is here because LKI information related to combat doesn't work properly
             AbilityKey.DefendingPlayer

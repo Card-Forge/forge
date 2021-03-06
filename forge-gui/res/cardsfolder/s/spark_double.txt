@@ -1,11 +1,18 @@
 Name:Spark Double
 ManaCost:3 U
-Types:Creature Shapeshifter
+Types:Creature Illusion
 PT:0/0
 K:ETBReplacement:Copy:DBCopy:Optional
-SVar:DBCopy:DB$ Clone | Choices$ Creature.Other+YouCtrl,Planeswalker.Other+YouCtrl | NonLegendary$ True | PumpKeywords$ etbCounter:P1P1:1:ValidCard$ Creature.Self:CARDNAME enters with an additional +1/+1 counter on it if it’s a creature & etbCounter:LOYALTY:1:ValidCard$ Planeswalker.Self:CARDNAME enters with an additional loyalty counter on it if it’s a planeswalker | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of a creature or planeswalker you control, except it enters with an additional +1/+1 counter on it if it’s a creature, it enters with an additional loyalty counter on it if it’s a planeswalker, and it isn’t legendary if that permanent is legendary.
+SVar:DBCopy:DB$ Clone | Choices$ Creature.Other+YouCtrl,Planeswalker.Other+YouCtrl | NonLegendary$ True | SubAbility$ DBConditionEffect | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of a creature or planeswalker you control, except it enters with an additional +1/+1 counter on it if it's a creature, it enters with an additional loyalty counter on it if it's a planeswalker, and it isn't legendary if that permanent is legendary.
+SVar:DBConditionEffect:DB$ Effect | RememberObjects$ Self | Name$ Spark Double Effect | ReplacementEffects$ ETBCreat,ETBPlans | SVars$ DBPutP1P1,DBPutLOYALTY,ToBattlefield,DBExile | References$ ETBCreat,ETBPlans,DBPutP1P1,DBPutLOYALTY,ToBattlefield,DBExile
+SVar:ETBCreat:Event$ Moved | ValidCard$ Creature.IsRemembered | Destination$ Battlefield | ReplaceWith$ DBPutP1P1 | Description$ It enters with an additional +1/+1 counter on it if it's a creature.
+SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ 1 | SubAbility$ ToBattlefield
+SVar:ETBPlans:Event$ Moved | ValidCard$ Planeswalker.IsRemembered | Destination$ Battlefield | ReplaceWith$ DBPutLOYALTY | Description$ It enters with an additional loyalty counter on it if it's a planeswalker.
+SVar:DBPutLOYALTY:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ LOYALTY | ETB$ True | CounterNum$ 1 | SubAbility$ ToBattlefield
+SVar:ToBattlefield:DB$ InternalEtbReplacement | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 DeckHas:Ability$Counters
 SVar:NeedsToPlayVar:Z GE1
 SVar:Z:Count$Valid Creature.YouCtrl/Plus.Z1
 SVar:Z1:Count$Valid Planeswalker.YouCtrl
-Oracle:You may have Spark Double enter the battlefield as a copy of a creature or planeswalker you control, except it enters with an additional +1/+1 counter on it if it’s a creature, it enters with an additional loyalty counter on it if it’s a planeswalker, and it isn’t legendary if that permanent is legendary.
+Oracle:You may have Spark Double enter the battlefield as a copy of a creature or planeswalker you control, except it enters with an additional +1/+1 counter on it if it's a creature, it enters with an additional loyalty counter on it if it's a planeswalker, and it isn't legendary if that permanent is legendary.

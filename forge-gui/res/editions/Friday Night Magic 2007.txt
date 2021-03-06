@@ -1,0 +1,19 @@
+[metadata]
+Code=F07
+Date=2007-01-01
+Name=Friday Night Magic 2007
+Type=Reprint
+
+[cards]
+1 R Firebolt
+2 R Deep Analysis
+3 R Gerrard's Verdict
+4 R Basking Rootwalla
+5 R Wonder
+6 R Goblin Legionnaire
+7 R Engineered Plague
+8 R Goblin Ringleader
+9 R Wing Shards
+10 R Cabal Coffers
+11 R Roar of the Wurm
+12 R Force Spike

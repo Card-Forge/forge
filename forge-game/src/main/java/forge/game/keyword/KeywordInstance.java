@@ -109,9 +109,9 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
             Sentry.getContext().addExtra("Keyword", this.original);
 
             CardFactoryUtil.addTriggerAbility(this, host, intrinsic);
-            CardFactoryUtil.addReplacementEffect(this, host, intrinsic);
-            CardFactoryUtil.addSpellAbility(this, host, intrinsic);
-            CardFactoryUtil.addStaticAbility(this, host, intrinsic);
+            CardFactoryUtil.addReplacementEffect(this, host.getCurrentState(), intrinsic);
+            CardFactoryUtil.addSpellAbility(this, host.getCurrentState(), intrinsic);
+            CardFactoryUtil.addStaticAbility(this, host.getCurrentState(), intrinsic);
         } catch (Exception e) {
             String msg = "KeywordInstance:createTraits: failed Traits for Keyword";
             Sentry.getContext().recordBreadcrumb(

@@ -1,9 +1,7 @@
 Name:Hatred
 ManaCost:3 B B
 Types:Instant
-A:SP$ Pump | Cost$ 3 B B PayLife<X> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ ChosenX | References$ X | SpellDescription$ Target creature gets +X/+0 until end of turn.
-SVar:X:XChoice
-#ChosenX SVar created by Cost payment
+A:SP$ Pump | Cost$ 3 B B PayLife<X> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | References$ X | SpellDescription$ Target creature gets +X/+0 until end of turn.
+SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hatred.jpg
-Oracle:As an additional cost to cast Hatred, pay X life.\nTarget creature gets +X/+0 until end of turn.
+Oracle:As an additional cost to cast this spell, pay X life.\nTarget creature gets +X/+0 until end of turn.

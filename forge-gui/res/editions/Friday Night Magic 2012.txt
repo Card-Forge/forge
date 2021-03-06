@@ -1,0 +1,23 @@
+[metadata]
+Code=F12
+Date=2012-01-01
+Name=Friday Night Magic 2012
+Type=Reprint
+
+[cards]
+1 R Glistener Elf
+2 R Despise
+3 R Tectonic Edge
+4 R Dismember
+5 R Ancient Grudge
+6 R Acidic Slime
+7 R Forbidden Alchemy
+8 R Avacyn's Pilgrim
+9 R Lingering Souls
+10 R Evolving Wilds
+11 R Pillar of Flame
+12 R Gitaxian Probe
+
+[tokens]
+w_1_1_human
+g_2_2_wolf

@@ -4,7 +4,7 @@ Types:Creature Human Assassin
 PT:2/1
 K:First Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target nonartifact, nonblack creature.
-SVar:TrigDestroy:DB$Destroy | ValidTgts$ Creature.nonArtifact+nonBlack | NoRegen$ True | TgtPrompt$ Select target nonartifact, nonblack creature.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonArtifact+nonBlack | NoRegen$ True | TgtPrompt$ Select target nonartifact, nonblack creature.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nekrataal.jpg
 Oracle:First strike\nWhen Nekrataal enters the battlefield, destroy target nonartifact, nonblack creature. That creature can't be regenerated.

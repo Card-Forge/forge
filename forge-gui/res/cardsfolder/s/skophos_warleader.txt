@@ -3,4 +3,4 @@ ManaCost:4 R
 Types:Creature Minotaur Warrior
 PT:4/5
 A:AB$ Pump | Cost$ R Sac<1/Creature.Other;Enchantment.Other/another creature or enchantment> | Defined$ Self | NumAtt$ 1 | KW$ Menace | SpellDescription$ CARDNAME gets +1/+0 and gains menace until end of turn.
-Oracle:{R}, Sacrifice another creature or enchantment: Skophos Warleader gets +1/+0 and gains menace until end of turn. (It can't be blocked except by two or more creatures.)
+Oracle:{R}, Sacrifice another creature or an enchantment: Skophos Warleader gets +1/+0 and gains menace until end of turn. (It can't be blocked except by two or more creatures.)

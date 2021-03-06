@@ -1,0 +1,9 @@
+[metadata]
+Code=PULG
+Date=1999-02-15
+Name=Urza's Legacy Promos
+Type=Reprint
+
+[cards]
+122 R Beast of Burden
+123 R Beast of Burden

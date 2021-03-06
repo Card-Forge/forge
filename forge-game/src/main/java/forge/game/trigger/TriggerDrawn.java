@@ -21,6 +21,8 @@ import forge.game.Game;
 import forge.game.GameStage;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.phase.PhaseType;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
@@ -66,8 +68,22 @@ public class TriggerDrawn extends Trigger {
             }
         }
 
+        if (hasParam("ValidPlayer")) {
+            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","),
+                    this.getHostCard())) {
+                return false;
+            }
+        }
+
         if (hasParam("Number")) {
             if (number != Integer.parseInt(getParam("Number"))) {
+                return false;
+            }
+        }
+
+        if (hasParam("NotFirstCardInDrawStep")) {
+            final Player p = ((Player)runParams.get(AbilityKey.Player));
+            if (p.numDrawnThisDrawStep() == 1 && game.getPhaseHandler().is(PhaseType.DRAW, p)) {
                 return false;
             }
         }
@@ -82,8 +98,8 @@ public class TriggerDrawn extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.Player);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Player);
     }
 
     @Override

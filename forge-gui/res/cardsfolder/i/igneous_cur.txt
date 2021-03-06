@@ -1,0 +1,6 @@
+Name:Igneous Cur
+ManaCost:1 R
+Types:Creature Elemental Dog
+PT:1/2
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+Oracle:{1}{R}: Igneous Cur gets +2/+0 until end of turn.

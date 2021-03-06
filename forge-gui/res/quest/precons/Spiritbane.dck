@@ -1,0 +1,31 @@
+[shop]
+WinsToUnlock=0
+Credits=3000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Spiritbane
+Description=The yamabushi are mountain shamans skilled in the destructive magic needed to combat the spirit world, and the "Spiritbane" deck proves it. With nearly a third of its creatures and spells capable of dealing direct damage, this deck should have no trouble dispatching your opponents and their creatures.
+Deck Type=constructed
+Set=CHK
+Image=spiritbane.jpg
+
+[Main]
+4 Akki Avalanchers|CHK
+2 Akki Coalflinger|CHK
+3 Akki Rockspeaker|CHK
+3 Battle-Mad Ronin|CHK
+2 Blind with Anger|CHK
+2 Brothers Yamazaki|CHK|1
+2 Crushing Pain|CHK
+3 Frostwielder|CHK
+2 Hanabi Blast|CHK
+2 Kumano's Pupils|CHK
+1 Kumano, Master Yamabushi|CHK
+1 Kusari-Gama|CHK
+24 Mountain|CHK|1
+2 No-Dachi|CHK
+3 Ronin Houndmaster|CHK
+1 Sideswipe|CHK
+3 Yamabushi's Flame|CHK
+[Sideboard]

@@ -1,5 +1,7 @@
 [metadata]
 Name=Koth of the Hammer
+[Commander]
+1 Koth of the Hammer|DDI
 [Main]
 1 Assault Strobe|SOM
 1 Beacon of Destruction|10E
@@ -10,7 +12,6 @@ Name=Koth of the Hammer
 1 Geosurge|NPH
 1 Hellkite Igniter|C16
 1 Hero of Oxid Ridge|MBS
-1 Koth of the Hammer|DDI
 1 Koth's Courier|MBS
 1 Mass Hysteria|MRD
 1 Molten Psyche|SOM

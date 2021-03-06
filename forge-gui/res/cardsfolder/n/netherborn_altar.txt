@@ -1,0 +1,10 @@
+Name:Netherborn Altar
+ManaCost:1 B
+Types:Artifact
+A:AB$ ChangeZone | Cost$ T AddCounter<1/SOUL> | ChangeType$ Card.IsCommander+YouOwn | SelectPrompt$ Select a commander | ChangeNum$ 1 | Mandatory$ True | Origin$ Command | Destination$ Hand | Hidden$ True | SubAbility$ DBLoseLife | StackDescription$ SpellDescription | SpellDescription$ Put your commander into your hand from the command zone. Then you lose 3 life for each soul counter on CARDNAME.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X | References$ X
+SVar:X:Count$CardCounters.SOUL/Times.3
+DeckHas:Ability$Counters
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:{T}, Put a soul counter on Netherborn Altar: Put your commander into your hand from the command zone. Then you lose 3 life for each soul counter on Netherborn Altar.

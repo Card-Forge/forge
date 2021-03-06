@@ -1,5 +1,7 @@
 [metadata]
 Name=Elspeth Soldiers
+[Commander]
+1 Elspeth, Knight-Errant|ALA
 [Main]
 1 Akrasan Squire|ALA
 1 Angelic Benediction|ALA
@@ -8,7 +10,6 @@ Name=Elspeth Soldiers
 1 Aven Squire|CFX
 1 Cradle of Vitality|ALA
 1 Dispeller's Capsule|ALA
-1 Elspeth, Knight-Errant|ALA
 1 Excommunicate|ALA
 1 Gleam of Resistance|CFX
 1 Guardians of Akrasa|ALA

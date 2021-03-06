@@ -1,0 +1,11 @@
+Name:Felidar Retreat
+ManaCost:3 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigCharm | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBPutCounterAll | CharmNum$ 1
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_cat_beast | TokenOwner$ You | SpellDescription$ Create a 2/2 white Cat Beast creature token.
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPumpAll | SpellDescription$ Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Vigilance
+DeckHas:Ability$Token & Ability$Counters
+SVar:BuffedBy:Land
+Oracle:Landfall — Whenever a land enters the battlefield under your control, choose one —\n• Create a 2/2 white Cat Beast creature token.\n• Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.

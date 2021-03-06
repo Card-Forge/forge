@@ -5,9 +5,9 @@ Loyalty:2
 A:AB$ Pump | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | NumAtt$ -2 | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 1 | UntilYourNextTurn$ True | SubAbility$ DBDebuff | SpellDescription$ Until your next turn, up to one target creature gets -2/-0 and loses flying.
 SVar:DBDebuff:DB$ Debuff | Defined$ Targeted | Keywords$ Flying | UntilYourNextTurn$ True
 A:AB$ Token | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ u_4_4_elemental_bird_flying | TokenOwner$ You | LegacyImage$ u 4 4 elemental bird flying m20 | SpellDescription$ Create a 4/4 blue Elemental Bird creature token with flying.
-A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | AIlogic$ Always | Stackable$ False | Name$ Emblem - Mu Yanling, Sky Dancer | Image$ emblem_mu_yanling_sky_dancer | Duration$ Permanent | StaticAbilities$ STDraw | SVars$ AnimateIsland | SpellDescription$ You get an emblem with "Islands you control have '{T}: Draw a card'."
+A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | AIlogic$ Always | Stackable$ False | Name$ Emblem - Mu Yanling, Sky Dancer | Image$ emblem_mu_yanling_sky_dancer | Duration$ Permanent | StaticAbilities$ STDraw | SVars$ AnimateIsland | SpellDescription$ You get an emblem with "Islands you control have '{T}: Draw a card.'"
 SVar:STDraw:Mode$ Continuous | EffectZone$ Command | Affected$ Island.YouCtrl | AddAbility$ AnimateIsland | Description$ Islands you control have "{T}: Draw a card".
 SVar:AnimateIsland:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Token
-Oracle:[+2]: Until your next turn, up to one target creature gets -2/-0 and loses flying.\n[-3]: Create a 4/4 blue Elemental Bird creature token with flying.\n[-8]: You get an emblem with "Islands you control have '{T}: Draw a card'."
+Oracle:[+2]: Until your next turn, up to one target creature gets -2/-0 and loses flying.\n[−3]: Create a 4/4 blue Elemental Bird creature token with flying.\n[−8]: You get an emblem with "Islands you control have '{T}: Draw a card.'"

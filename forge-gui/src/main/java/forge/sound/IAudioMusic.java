@@ -6,4 +6,5 @@ public interface IAudioMusic {
     void resume();
     void stop();
     void dispose();
+    void setVolume(float value);
 }

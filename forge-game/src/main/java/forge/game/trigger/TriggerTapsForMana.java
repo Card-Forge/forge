@@ -20,11 +20,12 @@ package forge.game.trigger;
 import forge.card.MagicColor;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
 import java.util.Map;
+
+import static forge.util.TextUtil.toManaString;
 
 /**
  * <p>
@@ -48,7 +49,7 @@ public class TriggerTapsForMana extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerTapsForMana(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerTapsForMana(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -60,31 +61,25 @@ public class TriggerTapsForMana extends Trigger {
         //Check for tapping
         if (!hasParam("NoTapCheck")) {
             final SpellAbility manaAbility = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
-            if (manaAbility == null || manaAbility.getRootAbility().getPayCosts() == null || !manaAbility.getRootAbility().getPayCosts().hasTapCost()) {
+            if (manaAbility == null || !manaAbility.getRootAbility().getPayCosts().hasTapCost()) {
                 return false;
             }
         }
 
         if (hasParam("ValidCard")) {
-            final Card tapper = (Card) runParams.get(AbilityKey.Card);
-            if (!tapper.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
+            if (!matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","), getHostCard())) {
                 return false;
             }
         }
 
         if (hasParam("Player")) {
-            final Player player = (Player) runParams.get(AbilityKey.Player);
-            if (!player.isValid(getParam("Player").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
+            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("Player").split(","), getHostCard())) {
                 return false;
             }
         }
 
         if (hasParam("Activator")) {
-            final SpellAbility sa = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
-            if (sa == null) return false;
-            final Player activator = sa.getActivatingPlayer();
-            if (!activator.isValid(getParam("Activator").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
+            if (!matchesValid(runParams.get(AbilityKey.Activator), getParam("Activator").split(","), getHostCard())) {
                 return false;
             }
         }
@@ -99,6 +94,8 @@ public class TriggerTapsForMana extends Trigger {
                 if (!this.getHostCard().hasChosenColor() || !produced.contains(MagicColor.toShortString(this.getHostCard().getChosenColor()))) {
                     return false;
                 }
+            } else if (!produced.contains(MagicColor.toShortString(this.getParam("Produced")))) {
+                    return false;
             }
         }
 
@@ -108,15 +105,15 @@ public class TriggerTapsForMana extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.Player, AbilityKey.Produced);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Player, AbilityKey.Produced, AbilityKey.Activator);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
         sb.append(Localizer.getInstance().getMessage("lblTappedForMana")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
-        sb.append(Localizer.getInstance().getMessage("lblProduced")).append(": ").append(sa.getTriggeringObject(AbilityKey.Produced));
+        sb.append(Localizer.getInstance().getMessage("lblProduced")).append(": ").append(toManaString(sa.getTriggeringObject(AbilityKey.Produced).toString()));
         return sb.toString();
     }
 

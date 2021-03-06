@@ -17,8 +17,18 @@
  */
 package forge.quest;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
+
 import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -32,15 +42,17 @@ import forge.properties.ForgeConstants;
 import forge.quest.bazaar.QuestBazaarManager;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.bazaar.QuestPetStorage;
-import forge.quest.data.*;
+import forge.quest.data.DeckConstructionRules;
+import forge.quest.data.GameFormatQuest;
+import forge.quest.data.QuestAchievements;
+import forge.quest.data.QuestAssets;
+import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.data.QuestPreferences.QPref;
+import forge.quest.data.StarRating;
 import forge.quest.io.QuestChallengeReader;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
-
-import java.io.File;
-import java.util.*;
 
 /**
  * TODO: Write javadoc for this type.
@@ -456,16 +468,23 @@ public class QuestController {
                 return;
             }else if (world.isCustom()) {
                 path = world.getDuelsDir() == null ? ForgeConstants.DEFAULT_DUELS_DIR : ForgeConstants.USER_QUEST_WORLD_DIR + world.getDuelsDir();
+                this.duelManager = new QuestEventDuelManager(new File(path));
             } else {
                 path = world.getDuelsDir() == null ? ForgeConstants.DEFAULT_DUELS_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getDuelsDir();
+                if(QuestWorld.MAINWORLDNAME.equals(world.getName())) {
+                    this.duelManager = new MainWorldEventDuelManager(new File(path));                    
+                } else {
+                    this.duelManager = new QuestEventDuelManager(new File(path));                                
+                }
             }
-
+        } else {
+            this.duelManager = new QuestEventDuelManager(new File(path));            
         }
 
-        this.duelManager = new QuestEventDuelManager(new File(path));
     }
 
     public HashSet<StarRating> GetRating() {
+        if (model == null) return null;
         return model.Ratings;
     }
 

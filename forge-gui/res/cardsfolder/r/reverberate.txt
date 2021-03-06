@@ -1,6 +1,5 @@
 Name:Reverberate
 ManaCost:R R
 Types:Instant
-A:SP$ CopySpellAbility | Cost$ R R | ValidTgts$ Instant,Sorcery | TargetType$ Spell | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reverberate.jpg
+A:SP$ CopySpellAbility | Cost$ R R | ValidTgts$ Instant,Sorcery | TargetType$ Spell | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.
 Oracle:Copy target instant or sorcery spell. You may choose new targets for the copy.

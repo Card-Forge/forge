@@ -8,14 +8,9 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 import forge.util.Localizer;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.List;
-
 
 public class UntapEffect extends SpellAbilityEffect {
 
@@ -33,8 +28,7 @@ public class UntapEffect extends SpellAbilityEffect {
             sb.append("up to ").append(sa.getParam("Amount")).append(" ");
             sb.append(sa.getParam("UntapType")).append("s");
         } else {
-            List<Card> tgtCards = getTargetCards(sa);
-            sb.append(StringUtils.join(tgtCards, ", "));
+            sb.append(Lang.joinHomogenous(getTargetCards(sa)));
         }
         sb.append(".");
         return sb.toString();
@@ -42,19 +36,21 @@ public class UntapEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
         if (sa.hasParam("UntapUpTo")) {
             untapChoose(sa, false);
         } else if (sa.hasParam("UntapExactly")) {
             untapChoose(sa, true);
         } else {
-
-            final List<Card> tgtCards = getTargetCards(sa);
-
-            for (final Card tgtC : tgtCards) {
-                if (tgtC.isInPlay() && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
+            for (final Card tgtC : getTargetCards(sa)) {
+                if (sa.usesTargeting() && !tgtC.canBeTargetedBy(sa)) {
+                    continue;
+                }
+                if (tgtC.isInPlay()) {
                     tgtC.untap();
+                }
+                if (sa.hasParam("ETB")) {
+                    // do not fire triggers
+                    tgtC.setTapped(false);
                 }
             }
         }
@@ -74,14 +70,12 @@ public class UntapEffect extends SpellAbilityEffect {
         final int num = Integer.parseInt(sa.getParam("Amount"));
         final String valid = sa.getParam("UntapType");
 
-        final List<Player> definedPlayers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
-
-        for (final Player p : definedPlayers) {
+        for (final Player p : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa)) {
             CardCollectionView list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield),
                     valid, sa.getActivatingPlayer(), sa.getHostCard());
             list = CardLists.filter(list, Presets.TAPPED);
 
-            final CardCollectionView selected = p.getController().chooseCardsForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectCardToUntap"), mandatory ? num : 0, num, !mandatory);
+            final CardCollectionView selected = p.getController().chooseCardsForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectCardToUntap"), mandatory ? num : 0, num, !mandatory, null);
             if (selected != null) {
                 for (final Card c : selected) { 
                     c.untap();

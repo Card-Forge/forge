@@ -3,7 +3,6 @@ ManaCost:4 B B
 Types:Creature Zombie Mutant
 PT:5/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigShrink | TriggerDescription$ Whenever CARDNAME attacks, up to five target creatures each get -1/-1 until end of turn.
-SVar:TrigShrink:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 5 | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
+SVar:TrigShrink:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 5 | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nefashu.jpg
 Oracle:Whenever Nefashu attacks, up to five target creatures each get -1/-1 until end of turn.

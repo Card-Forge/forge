@@ -1,0 +1,15 @@
+[metadata]
+Code=J15
+Date=2015-01-01
+Name=Judge Gift Cards 2015
+Type=Reprint
+
+[cards]
+1 R Temporal Manipulation
+2 R Shardless Agent
+3 R Rishadan Port
+4 R Ravages of War
+5 R Damnation
+6 R Dualcaster Mage
+7 M Feldon of the Third Path
+8 R Wasteland

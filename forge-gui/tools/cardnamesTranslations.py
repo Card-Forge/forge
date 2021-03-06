@@ -5,59 +5,98 @@ import os
 import re
 import urllib.request
 
-database = 'scryfall-all-cards.json'
-scryfalldburl = 'https://archive.scryfall.com/json/' + database
 # 'scryfall lang code':'ISO 639 lang code'
 languages = {'es': 'es-ES', 'de': 'de-DE',
              'it': 'it-IT', 'zhs': 'zh-CN'}
 langfiles = {'es': None, 'de': None, 'it': None, 'zhs': None}
 
-urllib.request.urlretrieve(scryfalldburl, database)
+# Request Scryfall API to download all_cards json file
+request = urllib.request.urlopen('https://api.scryfall.com/bulk-data')
+data = json.load(request)['data']
+scryfalldburl = [x for x in data if x['type'] == 'all_cards'][0]['download_uri']
+urllib.request.urlretrieve(scryfalldburl, 'cards.json')
 
 # Sort file and remove duplicates
 
 
-def cleanfile(filename):
+def cleanfile(filename, extension1, extension2):
     names_seen = set()
-    outfile = open(filename + ".tmp2", "w", encoding='utf8')
-    with open(filename + ".tmp", "r", encoding='utf8') as r:
+    outfile = open(filename + extension2, "w", encoding='utf8')
+    with open(filename + extension1, "r", encoding='utf8') as r:
         for line in sorted(r):
             name = line.split('|')[0]
             if name not in names_seen:
                 outfile.write(line)
                 names_seen.add(name)
     outfile.close()
-    os.remove(filename + ".tmp")
+    os.remove(filename + extension1)
 
 # Manual patch of file translations
 
 
 def patchtranslations(filename):
-    ffinal = open(filename + '.txt', 'w', encoding='utf8')
+    ffinal = open(filename + '.tmp3', 'w', encoding='utf8')
+
     try:
-        fpatch = open(filename + '-patch.txt', 'r', encoding='utf8')
+        open(filename + '-patch.txt', 'r', encoding='utf8').close()
     except FileNotFoundError:
         open(filename + '-patch.txt', 'w', encoding='utf8').close()
-        fpatch = open(filename + '-patch.txt', 'r', encoding='utf8')
 
-    patchline = fpatch.readline()
+    # First patch all lines in original final that exists in patched file
+    with open(filename + '.tmp2', 'r', encoding='utf8') as origfile:
+        # For each line in original file
+        for oline in origfile:
+            oname = oline.split('|')[0]
 
-    with open(filename + '.tmp2', 'r', encoding='utf8') as temp:
-        for templine in temp:
-            tempname = templine.split('|')[0]
-            patchname = patchline.split('|')[0]
-            if patchname == tempname:
-                ffinal.write(patchline)
-                patchline = fpatch.readline()
+            patchedline = ""
+
+            # Check if that card is patched
+            with open(filename + '-patch.txt', 'r', encoding='utf8') as patchfile:
+                # For each line in patch file
+                for pline in patchfile:
+                    pname = pline.split('|')[0]
+
+                    # If that card is patched
+                    if oname == pname:
+                        patchedline = pline
+                        break
+            
+            if patchedline != "":
+                ffinal.write(patchedline)
             else:
-                ffinal.write(templine)
+                ffinal.write(oline)
 
-    ffinal.close()
-    fpatch.close()
+    origfile.close()
+    patchfile.close()
+
+    # Then add all patch new lines that doesn't exist in original final
+    with open(filename + '-patch.txt', 'r', encoding='utf8') as patchfile:
+        # For each line in patch file
+        for pline in patchfile:
+            pname = pline.split('|')[0]
+
+            # Check if that patched card exists in original file
+
+            with open(filename + '.tmp2', 'r', encoding='utf8') as origfile:
+                found = False
+
+                for oline in origfile:
+                    oname = oline.split('|')[0]
+
+                    # Patch line found in original file
+                    if pname == oname:
+                        found = True
+                        break
+
+                if found == False:
+                    ffinal.write(pline)
+
     os.remove(filename + '.tmp2')
+    origfile.close()
+    patchfile.close()
+    ffinal.close()
 
-
-with open(database, mode='r', encoding='utf8') as json_file:
+with open('cards.json', mode='r', encoding='utf8') as json_file:
     # todo:all cards json size >= 800MB,using json iteration library,avoid load all content in to memory.
     data = json.load(json_file)
 
@@ -88,6 +127,9 @@ with open(database, mode='r', encoding='utf8') as json_file:
 
                 try:
                     toracle = card['printed_text']
+                    #make zh-CN reminder text work
+                    toracle = toracle.replace('（','(')
+                    toracle = toracle.replace('）',')')
                 except:
                     pass
 
@@ -138,11 +180,17 @@ with open(database, mode='r', encoding='utf8') as json_file:
 
                 try:
                     toracle0 = cardfaces[0]['printed_text']
+                    #make zh-CN reminder text work
+                    toracle0 = toracle0.replace('（','(')
+                    toracle0 = toracle0.replace('）',')')
                 except:
                     pass
 
                 try:
                     toracle1 = cardfaces[1]['printed_text']
+                    #make zh-CN reminder text work
+                    toracle1 = toracle1.replace('（','(')
+                    toracle1 = toracle1.replace('）',')')
                 except:
                     pass
 
@@ -171,8 +219,16 @@ with open(database, mode='r', encoding='utf8') as json_file:
 
 # Sort file and remove duplicates
 for lang in languages.keys():
-    cleanfile("cardnames-{0}".format(languages[lang]))
+    cleanfile("cardnames-{0}".format(languages[lang]), ".tmp", ".tmp2")
 
 # Patch language files
 for lang in languages.keys():
     patchtranslations("cardnames-{0}".format(languages[lang]))
+
+# Sort file and remove duplicates
+for lang in languages.keys():
+    cleanfile("cardnames-{0}".format(languages[lang]), ".tmp3", ".txt")
+
+# Call the Japanese translation script
+import JapaneseTranslations
+JapaneseTranslations.main()

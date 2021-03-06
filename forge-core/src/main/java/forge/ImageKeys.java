@@ -6,6 +6,8 @@ import forge.util.ImageUtil;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
+
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +25,7 @@ public final class ImageKeys {
     public static final String HIDDEN_CARD           = "hidden";
     public static final String MORPH_IMAGE           = "morph";
     public static final String MANIFEST_IMAGE        = "manifest";
+    public static final String FORETELL_IMAGE        = "foretell";
 
     public static final String BACKFACE_POSTFIX  = "$alt";
 
@@ -113,7 +116,17 @@ public final class ImageKeys {
         }
         //try fullborder...
         if (filename.contains(".full")) {
-            file = findFile(dir, TextUtil.fastReplace(filename, ".full", ".fullborder"));
+            String fullborderFile = TextUtil.fastReplace(filename, ".full", ".fullborder");
+            file = findFile(dir, fullborderFile);
+            if (file != null) { return file; }
+            // if there's a 1st art variant try without it for .fullborder images
+            file = findFile(dir, TextUtil.fastReplace(fullborderFile, "1.fullborder", ".fullborder"));
+            if (file != null) { return file; }
+            // if there's an art variant try without it for .full images
+            file = findFile(dir, filename.replaceAll("[0-9].full",".full"));
+            if (file != null) { return file; }
+            // if there's a 1st art variant try with it for .full images
+            file = findFile(dir, filename.replaceAll("[0-9]*.full", "1.full"));
             if (file != null) { return file; }
         }
         //if an image, like phenomenon or planes is missing .full in their filenames but you have an existing images that have .full/.fullborder
@@ -138,6 +151,9 @@ public final class ImageKeys {
                 // try with upper case set
                 file = findFile(dir, setlessFilename + "_" + setCode.toUpperCase());
                 if (file != null) { return file; }
+                // try with lower case set
+                file = findFile(dir, setlessFilename + "_" + setCode.toLowerCase());
+                if (file != null) { return file; }
                 // try without set name
                 file = findFile(dir, setlessFilename);
                 if (file != null) { return file; }
@@ -152,8 +168,12 @@ public final class ImageKeys {
             file = findFile(dir, setlessFilename);
             if (file != null) { return file; }
 
-            // try lowering the art index to the minimum for regular cards
             if (setlessFilename.contains(".full")) {
+            	//try fullborder
+                String fullborderFile = TextUtil.fastReplace(setlessFilename, ".full", ".fullborder");
+                file = findFile(dir, fullborderFile);
+                if (file != null) { return file; }
+                // try lowering the art index to the minimum for regular cards
                 file = findFile(dir, setlessFilename.replaceAll("[0-9]*[.]full", "1.full"));
                 if (file != null) { return file; }
             }

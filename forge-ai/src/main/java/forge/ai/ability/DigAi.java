@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import java.util.Map;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -13,7 +15,6 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
@@ -29,6 +30,10 @@ public class DigAi extends SpellAbilityAi {
         Player opp = ai.getWeakestOpponent();
         final Card host = sa.getHostCard();
         Player libraryOwner = ai;
+
+        if (!willPayCosts(ai, sa, sa.getPayCosts(), host)) {
+            return false;
+        }
 
         if (sa.usesTargeting()) {
             sa.resetTargets();
@@ -69,9 +74,10 @@ public class DigAi extends SpellAbilityAi {
 
         final String num = sa.getParam("DigNum");
         final boolean payXLogic = sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("PayX");
-        if (num != null && (num.equals("X") && host.getSVar(num).equals("Count$xPaid")) || payXLogic) {
+        if (num != null && (num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) || payXLogic) {
             // By default, set PayX here to maximum value.
-            if (!(sa instanceof AbilitySub) || host.getSVar("PayX").equals("")) {
+            SpellAbility root = sa.getRootAbility();
+            if (root.getXManaCostPaid() == null) {
                 int manaToSave = 0;
 
                 // Special logic that asks the AI to conserve a certain amount of mana when paying X
@@ -79,11 +85,11 @@ public class DigAi extends SpellAbilityAi {
                     manaToSave = Integer.parseInt(TextUtil.split(sa.getParam("AILogic"), '.')[1]);
                 }
 
-                int numCards = ComputerUtilMana.determineLeftoverMana(sa, ai) - manaToSave;
+                int numCards = ComputerUtilCost.getMaxXValue(sa, ai) - manaToSave;
                 if (numCards <= 0) {
                     return false;
                 }
-                host.setSVar("PayX", Integer.toString(numCards));
+                root.setXManaCostPaid(numCards);
             }
         }
 
@@ -108,6 +114,7 @@ public class DigAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        final SpellAbility root = sa.getRootAbility();
         final Player opp = ai.getWeakestOpponent();
         if (sa.usesTargeting()) {
             sa.resetTargets();
@@ -121,18 +128,18 @@ public class DigAi extends SpellAbilityAi {
         // Triggers that ask to pay {X} (e.g. Depala, Pilot Exemplar).
         if (sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("PayXButSaveMana")) {
             int manaToSave = Integer.parseInt(TextUtil.split(sa.getParam("AILogic"), '.')[1]);
-            int numCards = ComputerUtilMana.determineLeftoverMana(sa, ai) - manaToSave;
+            int numCards = ComputerUtilCost.getMaxXValue(sa, ai) - manaToSave;
             if (numCards <= 0) {
                 return mandatory;
             }
-            sa.getHostCard().setSVar("PayX", Integer.toString(numCards));
+            root.setXManaCostPaid(numCards);
         }
 
         return true;
     }
     
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> valid, boolean isOptional, Player relatedPlayer) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> valid, boolean isOptional, Player relatedPlayer, Map<String, Object> params) {
         if ("DigForCreature".equals(sa.getParam("AILogic"))) {
             Card bestChoice = ComputerUtilCard.getBestCreatureAI(valid);
             if (bestChoice == null) {
@@ -163,7 +170,7 @@ public class DigAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayer(forge.game.player.Player, forge.card.spellability.SpellAbility, java.util.List)
      */
     @Override
-    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         // an opponent choose a card from
         return Iterables.getFirst(options, null);
     }

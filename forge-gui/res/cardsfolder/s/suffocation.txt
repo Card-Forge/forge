@@ -1,7 +1,7 @@
 Name:Suffocation
 ManaCost:1 U
 Types:Instant
-Text:Cast CARDNAME only if you were dealt damage this turn by a red instant or sorcery spell.
+Text:Cast this spell only if you were dealt damage this turn by a red instant or sorcery spell.
 T:Mode$ DamageDone | ValidSource$ Sorcery.Red,Instant.Red | ValidTarget$ You | Execute$ TrigClear | Static$ True
 SVar:TrigClear:DB$ Cleanup | ClearRemembered$ True | SubAbility$ TrigRemember
 SVar:TrigRemember:DB$ Pump | RememberObjects$ TriggeredSourceController
@@ -13,4 +13,4 @@ SVar:DrawSlowtrip:DB$Draw | NumCards$ 1 | Defined$ You
 SVar:X:Count$RememberedSize
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suffocation.jpg
-Oracle:Cast Suffocation only if you were dealt damage this turn by a red instant or sorcery spell.\nSuffocation deals 4 damage to the controller of the last red instant or sorcery spell that dealt damage to you this turn.\nDraw a card at the beginning of the next turn's upkeep.
+Oracle:Cast this spell only if you were dealt damage this turn by a red instant or sorcery spell.\nSuffocation deals 4 damage to the controller of the last red instant or sorcery spell that dealt damage to you this turn.\nDraw a card at the beginning of the next turn's upkeep.

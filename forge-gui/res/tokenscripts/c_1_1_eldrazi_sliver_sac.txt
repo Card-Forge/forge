@@ -1,0 +1,6 @@
+Name:Eldrazi Sliver
+ManaCost:no cost
+PT:1/1
+Types:Creature Eldrazi Sliver
+A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDescription$ Add {C}.
+Oracle:Sacrifice this creature: Add {C}.

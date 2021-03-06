@@ -18,11 +18,9 @@
 package forge.game.spellability;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
 
@@ -49,7 +47,6 @@ public class TargetRestrictions {
     // Target Choices (which is specific for the StackInstance)
 
     // What this Object is restricted to targeting
-    private boolean tgtValid = false;
     private String[] originalValidTgts,
         validTgts;
     private String uiPrompt = "";
@@ -62,9 +59,11 @@ public class TargetRestrictions {
     private boolean uniqueTargets = false;
     private boolean singleZone = false;
     private boolean differentControllers = false;
+    private boolean differentCMC = false;
     private boolean sameController = false;
     private boolean withoutSameCreatureType = false;
     private boolean withSameCreatureType = false;
+    private boolean withSameCardType = false;
     private boolean singleTarget = false;
     private boolean randomTarget = false;
 
@@ -75,11 +74,9 @@ public class TargetRestrictions {
     // What's the max total CMC of targets?
     private String maxTotalCMC;
 
-    // For "Divided" cards. Is this better in TargetChoices?
-    private boolean dividedAsYouChoose = false;
-    private HashMap<Object, Integer> dividedMap = new HashMap<>();
-    private int stillToDivide = 0;
-    
+    // What's the max total power of targets?
+    private String maxTotalPower;
+
     // Not sure what's up with Mandatory? Why wouldn't targeting be mandatory?
     private boolean bMandatory = false;
 
@@ -92,22 +89,23 @@ public class TargetRestrictions {
      *            a {@link forge.game.spellability.TargetRestrictions} object.
      */
     public TargetRestrictions(final TargetRestrictions target) {
-        this.tgtValid = true;
         this.uiPrompt = target.getVTSelection();
         this.originalValidTgts = target.getValidTgts();
         this.validTgts = this.originalValidTgts.clone();
         this.minTargets = target.getMinTargets();
         this.maxTargets = target.getMaxTargets();
         this.maxTotalCMC = target.getMaxTotalCMC();
+        this.maxTotalPower = target.getMaxTotalPower();
         this.tgtZone = target.getZone();
         this.saValidTargeting = target.getSAValidTargeting();
-        this.dividedAsYouChoose = target.isDividedAsYouChoose();
         this.uniqueTargets = target.isUniqueTargets();
         this.singleZone = target.isSingleZone();
         this.differentControllers = target.isDifferentControllers();
+        this.differentCMC = target.isDifferentCMC();
         this.sameController = target.isSameController();
         this.withoutSameCreatureType = target.isWithoutSameCreatureType();
         this.withSameCreatureType = target.isWithSameCreatureType();
+        this.withSameCardType = target.isWithSameCardType();
         this.singleTarget = target.isSingleTarget();
         this.randomTarget = target.isRandomTarget();
     }
@@ -127,7 +125,6 @@ public class TargetRestrictions {
      *            a {@link java.lang.String} object.
      */
     public TargetRestrictions(final String prompt, final String[] valid, final String min, final String max) {
-        this.tgtValid = true;
         this.uiPrompt = prompt;
         this.originalValidTgts = valid;
         this.validTgts = this.originalValidTgts.clone();
@@ -172,13 +169,14 @@ public class TargetRestrictions {
 
     /**
      * <p>
-     * doesTarget.
+     * setMaxTotalPower.
      * </p>
-     * 
-     * @return a boolean.
+     *
+     * @param power
+     *              a String.
      */
-    public final boolean doesTarget() {
-        return this.tgtValid;
+    public final void setMaxTotalPower(final String power) {
+        this.maxTotalPower = power;
     }
 
     /**
@@ -208,7 +206,7 @@ public class TargetRestrictions {
      *
      * @return the min targets
      */
-    private final String getMinTargets() {
+    public final String getMinTargets() {
         return this.minTargets;
     }
 
@@ -217,7 +215,7 @@ public class TargetRestrictions {
      *
      * @return the max targets
      */
-    private final String getMaxTargets() {
+    public final String getMaxTargets() {
         return this.maxTargets;
     }
 
@@ -232,6 +230,19 @@ public class TargetRestrictions {
 
     public final int getMaxTotalCMC(final Card c, final SpellAbility sa) {
         return AbilityUtils.calculateAmount(c, this.maxTotalCMC, sa);
+    }
+
+    /**
+     * Gets the max targets.
+     *
+     * @return the max targets
+     */
+    private final String getMaxTotalPower() {
+        return this.maxTotalPower;
+    }
+
+    public final int getMaxTotalPower(final Card c, final SpellAbility sa) {
+        return AbilityUtils.calculateAmount(c, this.maxTotalPower, sa);
     }
 
     /**
@@ -276,8 +287,7 @@ public class TargetRestrictions {
      * @return a boolean.
      */
     public final boolean isMaxTargetsChosen(final Card c, final SpellAbility sa) {
-        TargetChoices choice = sa.getTargets();
-        return this.getMaxTargets(c, sa) == choice.getNumTargeted();
+        return this.getMaxTargets(c, sa) == sa.getTargets().size();
     }
 
     /**
@@ -292,11 +302,11 @@ public class TargetRestrictions {
      * @return a boolean.
      */
     public final boolean isMinTargetsChosen(final Card c, final SpellAbility sa) {
-        if (this.getMinTargets(c, sa) == 0) {
+        int min = getMinTargets(c, sa);
+        if (min == 0) {
             return true;
         }
-        TargetChoices choice = sa.getTargets();
-        return this.getMinTargets(c, sa) <= choice.getNumTargeted();
+        return min <= sa.getTargets().size();
     }
 
     /**
@@ -488,7 +498,7 @@ public class TargetRestrictions {
                 if (isTargeted && !sa.canTarget(c)) {
                     continue;
                 }
-                if (sa.getTargets().isTargeting(c)) {
+                if (sa.getTargets().contains(c)) {
                     continue;
                 }
                 return true;
@@ -557,21 +567,12 @@ public class TargetRestrictions {
         }
 
         final Card srcCard = sa.getHostCard(); // should there be OrginalHost at any moment?
-        if (this.tgtZone.contains(ZoneType.Stack)) {
-            for (final Card c : game.getStackZone().getCards()) {
-                if (c.isValid(this.validTgts, srcCard.getController(), srcCard, sa)
-                        && (!isTargeted || sa.canTarget(c)) 
-                        && !sa.getTargets().isTargeting(c)) {
-                    candidates.add(c);
-                }
-            }
-        } else {
-            for (final Card c : game.getCardsIn(this.tgtZone)) {
-                if (c.isValid(this.validTgts, srcCard.getController(), srcCard, sa)
-                        && (!isTargeted || sa.canTarget(c)) 
-                        && !sa.getTargets().isTargeting(c)) {
-                    candidates.add(c);
-                }
+
+        for (final Card c : game.getCardsIn(this.tgtZone)) {
+            if (c.isValid(this.validTgts, srcCard.getController(), srcCard, sa)
+                    && (!isTargeted || sa.canTarget(c))
+                    && !sa.getTargets().contains(c)) {
+                candidates.add(c);
             }
         }
 
@@ -645,6 +646,20 @@ public class TargetRestrictions {
     }
 
     /**
+     * @return the withSameCardType
+     */
+    public boolean isWithSameCardType() {
+        return withSameCardType;
+    }
+
+    /**
+     * @param b the withSameCardType to set
+     */
+    public void setWithSameCardType(boolean b) {
+        this.withSameCardType = b;
+    }
+
+    /**
      * <p>
      * copy.
      * </p>
@@ -675,6 +690,19 @@ public class TargetRestrictions {
         this.randomTarget = random;
     }
 
+    /**
+     * @return the differentCMC
+     */
+    public boolean isDifferentCMC() {
+        return differentCMC;
+    }
+
+    /**
+     * @param different the differentCMC to set
+     */
+    public void setDifferentCMC(boolean different) {
+        this.differentCMC = different;
+    }
     /**
      * @return the differentControllers
      */
@@ -721,82 +749,9 @@ public class TargetRestrictions {
         this.singleTarget = singleTarget;
     }
 
-    /**
-     * @return a boolean dividedAsYouChoose
-     */
-    public boolean isDividedAsYouChoose() {
-        return this.dividedAsYouChoose;
-    }
-
-    /**
-     * @param divided the boolean to set
-     */
-    public void setDividedAsYouChoose(boolean divided) {
-        this.dividedAsYouChoose = divided;
-    }
-
-    /**
-     * Get the amount remaining to distribute.
-     * @return int stillToDivide
-     */
-    public int getStillToDivide() {
-        return this.stillToDivide;
-    }
-
-    /**
-     * @param remaining set the amount still to be divided
-     */
-    public void setStillToDivide(final int remaining) {
-        this.stillToDivide = remaining;
-    }
-
-    public void calculateStillToDivide(String toDistribute, Card source, SpellAbility sa) {
-        // Recalculate this value just in case it's variable
-        if (!this.dividedAsYouChoose) {
-            return;
-        }
-
-        if (StringUtils.isNumeric(toDistribute)) {
-            this.setStillToDivide(Integer.parseInt(toDistribute));
-        } else if ( source == null ) { 
-            return; // such calls come from AbilityFactory.readTarget - at this moment we don't yet know X or any other variables
-        } else if (source.getSVar(toDistribute).equals("xPaid")) {
-            this.setStillToDivide(source.getXManaCostPaid());
-        } else {
-            this.setStillToDivide(AbilityUtils.calculateAmount(source, toDistribute, sa));
-        }
-    }
-
-    /**
-     * Store divided amount relative to a specific card/player.
-     * @param tgt the targeted object
-     * @param portionAllocated the divided portion allocated
-     */
-    public final void addDividedAllocation(final Object tgt, final Integer portionAllocated) {
-        this.dividedMap.remove(tgt);
-        this.dividedMap.put(tgt, portionAllocated);
-    }
-
-    /**
-     * Get the divided amount relative to a specific card/player.
-     * @param tgt the targeted object
-     * @return an int.
-     */
-    public int getDividedValue(Object tgt) {
-        return this.dividedMap.get(tgt);
-    }
-
-    public HashMap<Object, Integer> getDividedMap() {
-        return this.dividedMap;
-    }
-
     public final void applyTargetTextChanges(final SpellAbility sa) {
         for (int i = 0; i < validTgts.length; i++) {
             validTgts[i] = AbilityUtils.applyAbilityTextChangeEffects(originalValidTgts[i], sa);
         }
-    }
-
-    public final void changeValidTargets(final String[] validTgts) {
-        this.originalValidTgts = validTgts;
     }
 }

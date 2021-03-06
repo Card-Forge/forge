@@ -6,4 +6,4 @@ K:Trample
 K:Haste
 K:Shroud
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_solifuge.jpg
-Oracle:Trample, haste\nShroud (This creature can't be the target of spells or abilities.)
+Oracle:({R/G} can be paid with either {R} or {G}.)\nTrample; haste; shroud (This creature can't be the target of spells or abilities.)

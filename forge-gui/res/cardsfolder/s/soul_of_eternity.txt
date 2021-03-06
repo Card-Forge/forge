@@ -1,0 +1,10 @@
+Name:Soul of Eternity
+ManaCost:5 W W
+Types:Creature Avatar
+PT:*/*
+K:Encore:7 W W
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to your life total.
+SVar:X:Count$YourLifeTotal
+DeckHas:Ability$Token
+DeckHints:Ability$LifeGain
+Oracle:Soul of Eternity's power and toughness are each equal to your life total.\nEncore {7}{W}{W} ({7}{W}{W}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

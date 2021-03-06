@@ -1,0 +1,29 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Garruk, Savage Herald
+Description=Be Garruk. Play big creatures. Then play bigger creatures. Great deck for everyone who likes… you guessed it – big creatures.
+Deck Type=constructed
+Set=M21
+Image=garruk_savage_herald.jpg
+[Main]
+3 Almighty Brushwagg|IKO
+3 Drowsing Tyrannodon|M21
+25 Forest|M21
+1 Garruk's Harbinger|M21
+2 Garruk's Uprising|M21
+2 Garruk's Warsteed|M21
+1 Garruk, Savage Herald+|M21
+2 Ilysian Caryatid|THB
+3 Nessian Hornbeetle|THB
+2 Ornery Dilophosaur|M21
+3 Predatory Wurm|M21
+3 Pridemalkin|M21
+1 Primal Might|M21
+2 Ram Through|IKO
+3 Titanic Growth|M20
+4 Wildwood Patrol|M21
+[Sideboard]

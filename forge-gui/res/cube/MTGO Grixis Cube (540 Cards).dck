@@ -1,0 +1,543 @@
+[metadata]
+Name=MTGO Grxsis Cube (540 cards)
+[main]
+Abbot of Keral Keep|ORI
+Abrade|HOU
+Academy Ruins|MMA
+Agent of Treachery|M20
+All Is Dust|UMA
+Aminatou's Augury|C18
+Ancestral Vision|IMA
+Ancient Tomb|UMA
+Anger of the Gods|IMA
+Angrath's Rampage|WAR
+Animate Dead|EMA
+Arc Trail|SOM
+Arcane Artisan|BBD
+Arguel's Blood Fast|XLN
+Aria of Flame|MH1
+Ash Zealot|RTR
+Augur of Bolas|MM3
+Avalanche Riders|TSB
+Badlands|VMA
+Baleful Strix|EMA
+Baral, Chief of Compliance|AER
+Basalt Monolith|C15
+Batterskull|NPH
+Bedevil|RNA
+Bedlam Reveler|EMN
+Bitterblossom|UMA
+Blackcleave Cliffs|SOM
+Blast Zone|WAR
+Blightsteel Colossus|MBS
+Blink of an Eye|DOM
+Blinkmoth Nexus|MM2
+Blood Artist|EMA
+Blood Crypt|RTR
+Bloodghast|IMA
+Bloodsoaked Champion|KTK
+Bloodstained Mire|KTK
+Bolas's Citadel|WAR
+Bomat Courier|KLD
+Braids, Cabal Minion|EMA
+Brain Freeze|VMA
+Brain Maggot|JOU
+Brainstorm|A25
+Buried Alive|UMA
+Burning of Xinye|VMA
+Burst Lightning|MM2
+Cabal Ritual|VMA
+Candelabra of Tawnos|AQ
+Canyon Slough|AKH
+Careful Study|ODY
+Carrion Feeder|MH1
+Cascade Bluffs|A25
+Cast Down|DOM
+Cathartic Reunion|KLD
+Chain Lightning|EMA
+Chainer's Edict|UMA
+Chains of Mephistopheles|LG
+Champion of Wits|HOU
+Chandra, Acolyte of Flame|M20
+Chandra, Awakened Inferno|M20
+Chandra, Fire of Kaladesh|ORI
+Chandra, Flamecaller|OGW
+Chandra, Torch of Defiance|KLD
+Charcoal Diamond|C14
+Chart a Course|XLN
+Chromatic Lantern|GRN
+Chrome Mox|EMA
+City of Traitors|TPR
+Coalition Relic|A25
+Coercive Portal|VMA
+Coldsteel Heart|CSP
+Collective Brutality|EMN
+Commence the Endgame|WAR
+Commit // Memory|AKH
+Compulsive Research|MM3
+Consecrated Sphinx|IMA
+Corpse Dance|TPR
+Counterspell|A25
+Countersquall|UMA
+Creeping Tar Pit|UMA
+Crucible of Worlds|M19
+Cruel Ultimatum|MM3
+Crumbling Necropolis|MM3
+Cryptbreaker|EMN
+Cryptic Command|IMA
+Crystal Vein|C14
+Cut // Ribbons|AKH
+Dack Fayden|EMA
+Dack's Duplicate|VMA
+Damnation|MM3
+Daretti, Ingenious Iconoclast|CN2
+Daretti, Scrap Savant|C14
+Dark Confidant|MM2
+Dark Petition|ORI
+Dark Ritual|A25
+Darkslick Shores|SOM
+Darksteel Citadel|MM2
+Darksteel Ingot|M14
+Davriel, Rogue Shadowmage|WAR
+Daze|EMA
+Defense Grid|9ED
+Defile|MH1
+Delver of Secrets|ISD
+Demonic Tutor|UMA
+Desperate Ritual|UMA
+Devastating Summons|ROE
+Dig Through Time|UMA
+Dimir Signet|MM3
+Dire Fleet Daredevil|RIX
+Disallow|AER
+Discovery // Dispersal|GRN
+Dismember|MM2
+Doom Whisperer|GRN
+Dragonlord Silumgar|DTK
+Dragonskull Summit|XLN
+Drawn from Dreams|M20
+Dread Wanderer|AKH
+Dreadbore|RTR
+Dreadhorde Arcanist|WAR
+Dreadship Reef|COM
+Dream Halls|TPR
+Dreamstealer|HOU
+Drill Bit|RNA
+Drowned Catacomb|XLN
+Duplicant|EMA
+Duress|M19
+Earthshaker Khenra|HOU
+Echo of Eons|MH1
+Eidolon of the Great Revel|A25
+Eldrazi Obligator|OGW
+Eldrazi Temple|MM2
+Electrodominance|RNA
+Electrolyze|IMA
+Empty the Warrens|MMA
+Emrakul, the Aeons Torn|UMA
+Emrakul, the Promised End|EMN
+Enclave Cryptologist|ROE
+Endbringer|OGW
+Entomb|UMA
+Epochrasite|C14
+Erebos, God of the Dead|THS
+Everflowing Chalice|MM2
+Exhume|USG
+Expansion // Explosion|GRN
+Experimental Frenzy|GRN
+Fact or Fiction|EMA
+Faithless Looting|UMA
+Falkenrath Aristocrat|MM3
+Falkenrath Gorger|SOI
+Fatal Push|AER
+Fellwar Stone|C15
+Fetid Pools|AKH
+Fiery Confluence|C15
+Fiery Islet|MH1
+Figure of Destiny|MMA
+Filigree Familiar|KLD
+Finale of Eternity|WAR
+Finale of Promise|WAR
+Finale of Revelation|WAR
+Fire // Ice|UMA
+Fire Diamond|C14
+Fireblast|VMA
+Firebolt|EMA
+Firemind Vessel|WAR
+Flame Slash|ROE
+Flusterstorm|VMA
+Forbid|TPR
+Force of Negation|MH1
+Force of Will|EMA
+Force Spike|DDJ
+Forked Bolt|ROE
+Frantic Search|UMA
+Frost Titan|M12
+Fulminator Mage|UMA
+Future Sight|EMA
+Gatekeeper of Malakir|ZEN
+Geralf's Messenger|DKA
+Gifted Aetherborn|AER
+Gilded Lotus|DOM
+Gitaxian Probe|NPH
+Glen Elendra Archmage|UMA
+Glint-Nest Crane|KLD
+Glorybringer|AKH
+Go for the Throat|MBS
+Goblin Bombardment|DDN
+Goblin Bushwhacker|ZEN
+Goblin Chainwhirler|DOM
+Goblin Cratermaker|GRN
+Goblin Dark-Dwellers|OGW
+Goblin Electromancer|GRN
+Goblin Engineer|MH1
+Goblin Guide|MM3
+Goblin Rabblemaster|M15
+Goblin Ruinblaster|ZEN
+Goblin Welder|C14
+God-Eternal Kefnet|WAR
+Gonti, Lord of Luxury|KLD
+Goryo's Vengeance|UMA
+Grand Architect|SOM
+Grave Titan|M12
+Gravecrawler|DKA
+Graven Cairns|IMA
+Gray Merchant of Asphodel|THS
+Great Furnace|C14
+Greater Gargadon|MMA
+Grim Lavamancer|M12
+Grim Monolith|UL
+Griselbrand|MM3
+Guardian Idol|IMA
+Gutterbones|RNA
+Hangarback Walker|ORI
+Harbinger of the Tides|ORI
+Hazoret the Fervent|AKH
+Heart of Kiran|AER
+Hedron Archive|BFZ
+Hellrider|MM3
+Hero's Downfall|THS
+High Tide|VMA
+Hordeling Outburst|A25
+Hostage Taker|XLN
+Hour of Devastation|HOU
+Hydroblast|EMA
+Hymn to Tourach|EMA
+Hypnotic Specter|M10
+Ichor Wellspring|C14
+Ilharg, the Raze-Boar|WAR
+Imperial Seal|P3
+Impulse|VIS
+Inferno Titan|M12
+Inkwell Leviathan|EMA
+Innocent Blood|EMA
+Inquisition of Kozilek|MM3
+Intuition|TPR
+Ionize|GRN
+Izzet Charm|MM3
+Izzet Signet|MM3
+Jace Beleren|M11
+Jace, Architect of Thought|RTR
+Jace, the Mind Sculptor|VMA
+Jace, Vryn's Prodigy|ORI
+Judith, the Scourge Diva|RNA
+Kalitas, Traitor of Ghet|OGW
+Kari Zev, Skyship Raider|AER
+Karn Liberated|UMA
+Karn, Scion of Urza|DOM
+Keranos, God of Storms|JOU
+Kess, Dissident Mage|MH1
+Kitesail Freebooter|XLN
+Knight of the Ebon Legion|M20
+Kolaghan's Command|DTK
+Koth of the Hammer|SOM
+Kozilek, Butcher of Truth|UMA
+Kozilek's Return|OGW
+Kuldotha Forgemaster|SOM
+Languish|ORI
+Lashwrithe|C14
+Lavaclaw Reaches|UMA
+Legion Warboss|GRN
+Light Up the Stage|RNA
+Lightning Bolt|A25
+Lightning Greaves|MRD
+Lightning Mauler|AVR
+Liliana of the Veil|UMA
+Liliana, Death's Majesty|AKH
+Liliana, Dreadhorde General|WAR
+Liliana, Heretical Healer|ORI
+Liliana, the Last Hope|EMN
+Liliana's Triumph|WAR
+Lion's Eye Diamond|VMA
+Lodestone Golem|MM2
+Looter il-Kor|TSP
+Lotus Bloom|MMA
+Lotus Petal|TPR
+Magma Jet|MM3
+Magus of the Wheel|A25
+Magus of the Will|C16
+Makeshift Mannequin|LRW
+Mana Flare|4E
+Mana Leak|IMA
+Manamorphose|MMA
+Manic Vandal|M12
+Manifold Key|M20
+Man-o'-War|A25
+Massacre Wurm|MBS
+Master of Etherium|ALA
+Master of Waves|THS
+Matter Reshaper|OGW
+Memory Jar|VMA
+Memory Lapse|EMA
+Mesmeric Fiend|A25
+Metalworker|UD
+Meteor Golem|M20
+Midnight Reaper|GRN
+Mind Stone|IMA
+Mind's Desire|VMA
+Mindslaver|SOM
+Miscalculation|ULG
+Mishra's Factory|A25
+Mission Briefing|GRN
+Mizzium Mortars|MM3
+Mizzix's Mastery|C15
+Mogg War Marshal|EMA
+Molten Rain|MM3
+Molten Slagheap|C13
+Moment of Craving|RIX
+Monastery Swiftspear|IMA
+Mox Diamond|TPR
+Mox Opal|MM2
+Mu Yanling, Sky Dancer|M20
+Mulldrifter|MM2
+Mutavault|M14
+Myr Battlesphere|SOM
+Myriad Landscape|A25
+Mystic Confluence|C15
+Mystic Forge|M20
+Mystical Tutor|EMA
+Narset, Parter of Veils|WAR
+Necromancy|VIS
+Negate|RIX
+Never // Return|AKH
+Nicol Bolas, Dragon-God|WAR
+Nicol Bolas, Planeswalker|M13
+Nicol Bolas, the Ravager|M19
+Night's Whisper|EMA
+Nightveil Specter|GTC
+Niv-Mizzet, Parun|GRN
+Notion Thief|DGM
+Noxious Gearhulk|KLD
+Nykthos, Shrine to Nyx|THS
+Oona's Prowler|LRW
+Ophiomancer|C13
+Opt|DOM
+Overmaster|TO
+Pack Rat|RTR
+Painful Truths|BFZ
+Palladium Myr|IMA
+Peat Bog|MM
+Pentad Prism|HOP
+Phantasmal Image|MM3
+Phyrexian Arena|C15
+Phyrexian Metamorph|NPH
+Phyrexian Obliterator|A25
+Phyrexian Revoker|M15
+Pia and Kiran Nalaar|ORI
+Pia Nalaar|KLD
+Pilgrim's Eye|EMA
+Pillage|A25
+Pithing Needle|RTR
+Plaguecrafter|GRN
+Polluted Delta|KTK
+Ponder|M12
+Precursor Golem|MM2
+Preordain|M11
+Priest of Forgotten Gods|RNA
+Prismatic Lens|UMA
+Prismatic Vista|MH1
+Prophetic Bolt|VMA
+Pteramander|RNA
+Putrid Imp|VMA
+Pyretic Ritual|M11
+Pyroblast|EMA
+Pyroclasm|A25
+Quicken|M14
+Rain of Filth|US
+Rakdos Cackler|RTR
+Rakdos Signet|MM3
+Rakdos's Return|RTR
+Ral Zarek|DGM
+Ral, Storm Conduit|WAR
+Ral's Outburst|WAR
+Ramunap Ruins|HOU
+Ravenous Chupacabra|A25
+Reality Smasher|OGW
+Reanimate|UMA
+Reckless Bushwhacker|OGW
+Recurring Nightmare|TPR
+Rekindling Phoenix|RIX
+Release the Gremlins|AER
+Relentless Dead|SOI
+Relic of Progenitus|EMA
+Remand|MM2
+Repeal|IMA
+Riftwing Cloudskate|MMA
+Rishadan Port|A25
+Risk Factor|GRN
+Rite of Flame|CS
+Rix Maadi Reveler|RNA
+Ruinous Path|BFZ
+Runaway Steam-Kin|GRN
+Saheeli, Sublime Artificer|WAR
+Sandstone Needle|MM
+Saprazzan Skerry|MM
+Sarkhan the Masterless|WAR
+Scalding Tarn|MM3
+Scavenger Grounds|HOU
+Scheming Symmetry|M20
+Scrapheap Scrounger|KLD
+Scroll Rack|CM1
+Search for Azcanta|XLN
+Seasoned Pyromancer|MH1
+Seat of the Synod|HOP
+Seething Song|DDG
+Sensei's Divining Top|EMA
+Sentinel Tower|BBD
+Serum Visions|MM3
+Shallow Grave|MI
+Shelldock Isle|LRW
+Sheoldred, Whispering One|IMA
+Shivan Reef|ORI
+Show and Tell|USG
+Shrine of Burning Rage|NPH
+Siege-Gang Commander|DOM
+Silumgar's Command|DTK
+Simian Spirit Guide|A25
+Sire of Insanity|DGM
+Skullclamp|VMA
+Sky Diamond|C14
+Slavering Nulls|WWK
+Sling-Gang Lieutenant|MH1
+Smokestack|VMA
+Smoldering Marsh|BFZ
+Smuggler's Copter|KLD
+Snapcaster Mage|UMA
+Sneak Attack|EMA
+Solemn Simulacrum|M12
+Sorcerous Spyglass|XLN
+Spell Pierce|MM3
+Spellseeker|BBD
+Spellskite|MM2
+Spire of Industry|AER
+Spirebluff Canal|KLD
+Staff of Nin|M13
+Star Compass|IMA
+Steam Vents|GRN
+Steel Hellkite|SOM
+Stoke the Flames|M15
+Stormblood Berserker|M12
+Stratus Dancer|DTK
+Strip Mine|VMA
+Stromkirk Noble|ISD
+Sulfur Falls|DOM
+Sulfuric Vortex|EMA
+Sulfurous Springs|10E
+Sundering Titan|A25
+Sunken Hollow|BFZ
+Sunken Ruins|SHM
+Supreme Will|HOU
+Sweltering Suns|AKH
+Sword of Fire and Ice|MMA
+Sword of Sinew and Steel|MH1
+Sygg, River Cutthroat|SHM
+Talisman of Creativity|MH1
+Talisman of Dominance|MR
+Talisman of Indulgence|MR
+Talrand, Sky Summoner|M13
+Tamiyo, the Moon Sage|AVR
+Tangle Wire|NMS
+Tectonic Edge|C14
+Teferi, Mage of Zhalfir|IMA
+Tempest Djinn|DOM
+Temple of Deceit|THS
+Temple of Epiphany|M20
+Temple of Malice|BNG
+Tendrils of Agony|VMA
+Terminate|MM3
+Tezzeret the Seeker|MM2
+Tezzeret, Agent of Bolas|MBS
+Thassa, God of the Sea|THS
+The Antiquities War|DOM
+The Elderspell|WAR
+The Eldest Reborn|DOM
+The Scarab God|HOU
+Theater of Horrors|RNA
+Thief of Sanity|GRN
+Thing in the Ice|SOI
+Thirst for Knowledge|MMA
+Thought Erasure|GRN
+Thought Vessel|C15
+Thought-Knot Seer|OGW
+Thoughtseize|IMA
+Thousand-Year Storm|GRN
+Thran Dynamo|IMA
+Through the Breach|UMA
+Thundermaw Hellkite|IMA
+Tidespout Tyrant|DIS
+Time Spiral|US
+Time Warp|TPR
+Timetwister|VMA
+To the Slaughter|SOI
+Tolarian Academy|VMA
+Torrential Gearhulk|KLD
+Toxic Deluge|EMA
+Trash for Treasure|MR
+Treachery|UDS
+Treasure Cruise|UMA
+Treasure Map|XLN
+Trinket Mage|SOM
+True-Name Nemesis|C13
+Turnabout|VMA
+Tyrant's Scorn|WAR
+Ugin, the Ineffable|WAR
+Ugin, the Spirit Dragon|FRF
+Ulamog, the Ceaseless Hunger|BFZ
+Ultimate Price|DTK
+Umezawa's Jitte|BOK
+Underground River|10E
+Underground Sea|VMA
+Undermine|DDH
+Upheaval|VMA
+Urborg, Tomb of Yawgmoth|UMA
+Urza, Lord High Artificer|MH1
+Vampire Hexmage|CNS
+Vampire Nighthawk|MM3
+Vampiric Tutor|EMA
+Vault of Whispers|HOP
+Vedalken Shackles|MMA
+Vendilion Clique|A25
+Venser, Shaper Savant|MM3
+Viashino Pyromancer|M19
+Vilis, Broker of Blood|M20
+Volcanic Island|VMA
+Volrath's Stronghold|TPR
+Vraska's Contempt|XLN
+Walking Ballista|AER
+Wandering Fumarole|OGW
+Wasteland|EMA
+Watery Grave|GRN
+Wayfarer's Bauble|MM2
+Wheel of Fortune|VMA
+Whirler Rogue|ORI
+Wildfire|MM2
+Winter Orb|EMA
+Worn Powerstone|EMA
+Wretched Confluence|C15
+Wurmcoil Engine|SOM
+Yawgmoth, Thran Physician|MH1
+Yawgmoth's Will|VMA
+Young Pyromancer|UMA
+Zealous Conscripts|MM3
+Zulaport Cutthroat|A25
+Zurgo Bellstriker|DTK

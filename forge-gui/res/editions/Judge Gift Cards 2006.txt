@@ -1,0 +1,11 @@
+[metadata]
+Code=G06
+Date=2006-01-01
+Name=Judge Gift Cards 2006
+Type=Reprint
+
+[cards]
+1 R Exalted Angel
+2 R Grim Lavamancer
+3 R Meddling Mage
+4 R Pernicious Deed

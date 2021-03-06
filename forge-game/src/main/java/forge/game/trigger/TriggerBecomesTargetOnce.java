@@ -23,7 +23,6 @@ import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,7 +48,7 @@ public class TriggerBecomesTargetOnce extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerBecomesTargetOnce(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerBecomesTargetOnce(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -64,9 +63,8 @@ public class TriggerBecomesTargetOnce extends Trigger {
             }
         }
         if (hasParam("ValidTarget")) {
-            List<GameObject> targets = (List<GameObject>) runParams.get(AbilityKey.Targets);
             boolean valid = false;
-            for (GameObject b : targets) {
+            for (GameObject b : (Iterable<GameObject>) runParams.get(AbilityKey.Targets)) {
                 if (matchesValid(b, getParam("ValidTarget").split(","), this.getHostCard())) {
                     valid = true;
                     break;
@@ -81,9 +79,9 @@ public class TriggerBecomesTargetOnce extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.SourceSA, AbilityKey.Targets);
-        sa.setTriggeringObject(AbilityKey.Source, ((SpellAbility) getFromRunParams(AbilityKey.SourceSA)).getHostCard());
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.SourceSA, AbilityKey.Targets);
+        sa.setTriggeringObject(AbilityKey.Source, ((SpellAbility) runParams.get(AbilityKey.SourceSA)).getHostCard());
     }
 
     @Override

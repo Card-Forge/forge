@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Sliver
 PT:3/3
 T:Mode$ DamageDone | ValidSource$ Sliver | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a Sliver deals combat damage to a creature, destroy that creature. It can't be regenerated.
-SVar:TrigDestroy:DB$Destroy | Defined$ TriggeredTarget | NoRegen$ True
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy | NoRegen$ True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/toxin_sliver.jpg
 Oracle:Whenever a Sliver deals combat damage to a creature, destroy that creature. It can't be regenerated.

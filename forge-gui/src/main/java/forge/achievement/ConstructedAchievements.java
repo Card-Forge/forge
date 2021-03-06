@@ -5,7 +5,7 @@ import forge.properties.ForgeConstants;
 
 public class ConstructedAchievements extends AchievementCollection {
     public ConstructedAchievements() {
-        super("Constructed", ForgeConstants.ACHIEVEMENTS_DIR + "constructed.xml", false);
+        super("lblConstructed", ForgeConstants.ACHIEVEMENTS_DIR + "constructed.xml", false);
     }
 
     //add achievements that should appear at the bottom below core achievements for each game mode

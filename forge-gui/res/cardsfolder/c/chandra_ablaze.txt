@@ -11,4 +11,4 @@ A:AB$ Play | Cost$ SubCounter<7/LOYALTY> | Valid$ Instant.Red+YouCtrl,Sorcery.Re
 SVar:ChandraX:Count$ValidGraveyard Instant.Red+YouOwn,Sorcery.Red+YouOwn
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chandra_ablaze.jpg
-Oracle:[+1]: Discard a card. If a red card is discarded this way, Chandra Ablaze deals 4 damage to any target.\n[-2]: Each player discards their hand, then draws three cards.\n[-7]: Cast any number of red instant and/or sorcery cards from your graveyard without paying their mana costs.
+Oracle:[+1]: Discard a card. If a red card is discarded this way, Chandra Ablaze deals 4 damage to any target.\n[−2]: Each player discards their hand, then draws three cards.\n[−7]: Cast any number of red instant and/or sorcery cards from your graveyard without paying their mana costs.

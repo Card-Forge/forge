@@ -1,0 +1,454 @@
+[metadata]
+Code=IKO
+Date=2020-04-24
+Name=Ikoria: Lair of Behemoths
+Code2=IKO
+MciCode=iko
+Type=Expansion
+BoosterCovers=3
+Booster=10 Common:fromSheet("IKO cards"):!fromSheet("IKO Lands"), 3 Uncommon:fromSheet("IKO cards"), 1 RareMythic:fromSheet("IKO cards"), 1 fromSheet("IKO Lands")
+Prerelease=6 Boosters, 1 RareMythic+
+
+[cards]
+1 C Adaptive Shimmerer
+2 C Farfinder
+3 C Mysterious Egg
+4 C Blade Banish
+5 C Checkpoint Officer
+6 C Coordinated Charge
+7 R Cubwarden
+8 C Daysquad Marshal
+9 C Divine Arrow
+10 C Drannith Healer
+11 R Drannith Magistrate
+12 U Fight as One
+13 U Flourishing Fox
+14 C Garrison Cat
+15 C Helica Glider
+16 U Huntmaster Liger
+17 C Imposing Vantasaur
+18 U Keensight Mentor
+19 R Lavabrink Venturer
+20 C Light of Hope
+21 M Luminous Broodmoth
+22 U Majestic Auricorn
+23 C Maned Serval
+24 R Mythos of Snapdax
+25 C Pacifism
+26 C Patagia Tiger
+27 C Perimeter Sergeant
+28 U Sanctuary Lockdown
+29 C Savai Sabertooth
+30 C Snare Tactician
+31 C Solid Footing
+32 U Splendor Mare
+33 C Spontaneous Flight
+34 U Stormwild Capridor
+35 U Swallow Whole
+36 U Valiant Rescuer
+37 C Vulpikeet
+38 U Will of the All-Hunter
+39 C Aegis Turtle
+40 C Anticipate
+41 U Archipelagore
+42 U Avian Oddity
+43 U Boon of the Wish-Giver
+44 C Capture Sphere
+45 C Convolute
+46 C Crystacean
+47 C Dreamtail Heron
+48 U Escape Protocol
+49 C Essence Scatter
+50 C Facet Reader
+51 C Frost Lynx
+52 C Frostveil Ambush
+53 C Glimmerbell
+54 C Gust of Wind
+55 C Hampering Snare
+56 C Keep Safe
+57 U Mystic Subdual
+58 R Mythos of Illuna
+59 U Neutralize
+60 C Of One Mind
+61 U Ominous Seas
+62 C Phase Dolphin
+63 U Pollywog Symbiote
+64 U Pouncing Shoreshark
+65 U Reconnaissance Mission
+66 R Sea-Dasher Octopus
+67 R Shark Typhoon
+68 C Startling Development
+69 C Thieving Otter
+70 R Voracious Greatshark
+71 C Wingfold Pteron
+72 U Wingspan Mentor
+73 U Bastion of Remembrance
+74 C Blitz Leech
+75 C Blood Curdle
+76 C Boot Nipper
+77 C Bushmeat Poacher
+78 U Call of the Death-Dweller
+79 C Cavern Whisperer
+80 U Chittering Harvester
+81 C Corpse Churn
+82 C Dark Bargain
+83 C Dead Weight
+84 R Dirge Bat
+85 C Durable Coilbug
+86 U Duskfang Mentor
+87 U Easy Prey
+88 R Extinction Event
+89 C Gloom Pangolin
+90 U Grimdancer
+91 U Heartless Act
+92 R Hunted Nightmare
+93 U Insatiable Hemophage
+94 C Lurking Deadeye
+95 C Memory Leak
+96 C Mutual Destruction
+97 R Mythos of Nethroi
+98 C Nightsquad Commando
+99 C Serrated Scorpion
+100 C Suffocating Fumes
+101 U Unbreakable Bond
+102 C Unexpected Fangs
+103 C Unlikely Aid
+104 U Void Beckoner
+105 C Whisper Squad
+106 U Zagoth Mamba
+107 C Blazing Volley
+108 C Blisterspit Gremlin
+109 U Blitz of the Thunder-Raptor
+110 C Cathartic Reunion
+111 U Clash of Titans
+112 C Cloudpiercer
+113 C Drannith Stinger
+114 R Everquill Phoenix
+115 C Ferocious Tigorilla
+116 C Fire Prophecy
+117 U Flame Spill
+118 U Footfall Crater
+119 C Forbidden Friendship
+120 C Frenzied Raptor
+121 U Frillscare Mentor
+122 C Go for Blood
+123 C Heightened Reflexes
+124 C Lava Serpent
+125 M Lukka, Coppercoat Outcast
+126 U Momentum Rumbler
+127 R Mythos of Vadrok
+128 U Porcuparrot
+129 C Prickly Marmoset
+130 C Pyroceratops
+131 C Raking Claws
+132 U Reptilian Reflection
+133 U Rooting Moloch
+134 C Rumbling Rockslide
+135 U Sanctuary Smasher
+136 C Shredded Sails
+137 C Spelleater Wolverine
+138 C Tentative Connection
+139 R Unpredictable Cyclone
+140 U Weaponize the Monsters
+141 R Yidaro, Wandering Monster
+142 C Adventurous Impulse
+143 C Almighty Brushwagg
+144 U Auspicious Starrix
+145 U Barrier Breach
+146 C Bristling Boar
+147 U Charge of the Forever-Beast
+148 R Colossification
+149 C Essence Symbiote
+150 C Excavation Mole
+151 U Exuberant Wolfbear
+152 C Fertilid
+153 C Flycatcher Giraffid
+154 C Fully Grown
+155 R Gemrazer
+156 U Glowstone Recluse
+157 C Greater Sandwurm
+158 C Honey Mammoth
+159 U Hornbash Mentor
+160 C Humble Naturalist
+161 U Ivy Elemental
+162 R Kogla, the Titan Ape
+163 U Lead the Stampede
+164 U Migration Path
+165 C Migratory Greathorn
+166 U Monstrous Step
+167 C Mosscoat Goriak
+168 R Mythos of Brokkos
+169 C Plummet
+170 C Ram Through
+171 C Sudden Spinnerets
+172 C Survivors' Bond
+173 C Thwart the Enemy
+174 U Titanoth Rex
+175 M Vivien, Monsters' Advocate
+176 C Wilt
+177 U Back for More
+178 U Boneyard Lurker
+179 M Brokkos, Apex of Forever
+180 U Channeled Force
+181 M Chevill, Bane of Monsters
+182 R Death's Oasis
+183 U Dire Tactics
+184 R Eerie Ultimatum
+185 R Emergent Ultimatum
+186 R Frondland Felidar
+187 M General Kudro of Drannith
+188 U General's Enforcer
+189 R Genesis Ultimatum
+190 M Illuna, Apex of Wishes
+191 R Inspired Ultimatum
+192 M Kinnan, Bonder Prodigy
+193 R Labyrinth Raptor
+194 U Lore Drakkis
+195 M Narset of the Ancient Way
+196 U Necropanther
+197 M Nethroi, Apex of Death
+198 R Offspring's Revenge
+199 U Parcelbeast
+200 U Primal Empathy
+201 R Quartzwood Crasher
+202 U Regal Leosaur
+203 M Rielle, the Everwise
+204 R Ruinous Ultimatum
+205 U Savai Thundermane
+206 U Skull Prophet
+207 R Skycat Sovereign
+208 R Slitherwisp
+209 M Snapdax, Apex of the Hunt
+210 R Song of Creation
+211 U Sprite Dragon
+212 R Titans' Nest
+213 U Trumpeting Gnarr
+214 M Vadrok, Apex of Thunder
+215 R Whirlwind of Thought
+216 M Winota, Joiner of Forces
+217 U Zenith Flare
+218 U Alert Heedbonder
+219 U Cunning Nightbonder
+220 M Fiend Artisan
+221 R Gyruda, Doom of Depths
+222 R Jegantha, the Wellspring
+223 U Jubilant Skybonder
+224 R Kaheera, the Orphanguard
+225 R Keruga, the Macrosage
+226 R Lurrus of the Dream-Den
+227 R Lutri, the Spellchaser
+228 R Obosh, the Preypiercer
+229 U Proud Wildbonder
+230 U Sonorous Howlbonder
+231 R Umori, the Collector
+232 R Yorion, Sky Nomad
+233 R Zirda, the Dawnwaker
+234 R Crystalline Giant
+235 U Indatha Crystal
+236 U Ketria Crystal
+237 R The Ozolith
+238 U Raugrin Crystal
+239 U Savai Crystal
+240 C Sleeper Dart
+241 C Springjaw Trap
+242 U Zagoth Crystal
+243 C Bloodfell Caves
+244 C Blossoming Sands
+245 R Bonders' Enclave
+246 C Dismal Backwater
+247 C Evolving Wilds
+248 R Indatha Triome
+249 C Jungle Hollow
+250 R Ketria Triome
+251 R Raugrin Triome
+252 C Rugged Highlands
+253 R Savai Triome
+254 C Scoured Barrens
+255 C Swiftwater Cliffs
+256 C Thornwood Falls
+257 C Tranquil Cove
+258 C Wind-Scarred Crag
+259 R Zagoth Triome
+260 L Plains
+261 L Plains
+262 L Plains
+263 L Island
+264 L Island
+265 L Island
+266 L Swamp
+267 L Swamp
+268 L Swamp
+269 L Mountain
+270 L Mountain
+271 L Mountain
+272 L Forest
+273 L Forest
+274 L Forest
+
+[buy a box]
+275 M Zilortha, Strength Incarnate
+
+[borderless]
+276 M Lukka, Coppercoat Outcast
+277 M Vivien, Monsters' Advocate
+278 M Narset of the Ancient Way
+
+[showcase]
+279 R Cubwarden
+280 U Huntmaster Liger
+281 U Majestic Auricorn
+282 C Vulpikeet
+283 U Archipelagore
+284 C Dreamtail Heron
+285 U Pouncing Shoreshark
+286 R Sea-Dasher Octopus
+287 C Cavern Whisperer
+288 U Chittering Harvester
+289 R Dirge Bat
+290 U Insatiable Hemophage
+291 C Cloudpiercer
+292 R Everquill Phoenix
+293 U Porcuparrot
+294 U Auspicious Starrix
+295 R Gemrazer
+296 U Glowstone Recluse
+297 C Migratory Greathorn
+298 U Boneyard Lurker
+299 M Brokkos, Apex of Forever
+300 M Illuna, Apex of Wishes
+301 U Lore Drakkis
+302 U Necropanther
+303 M Nethroi, Apex of Death
+304 U Parcelbeast
+305 U Regal Leosaur
+306 M Snapdax, Apex of the Hunt
+307 U Trumpeting Gnarr
+308 M Vadrok, Apex of Thunder
+309 R Indatha Triome
+310 R Ketria Triome
+311 R Raugrin Triome
+312 R Savai Triome
+313 R Zagoth Triome
+
+[extended art]
+314 R Drannith Magistrate
+315 R Lavabrink Venturer
+316 M Luminous Broodmoth
+317 R Mythos of Snapdax
+318 R Mythos of Illuna
+319 R Shark Typhoon
+320 R Voracious Greatshark
+321 R Extinction Event
+322 R Hunted Nightmare
+323 R Mythos of Nethroi
+324 R Mythos of Vadrok
+325 R Unpredictable Cyclone
+326 R Yidaro, Wandering Monster
+327 R Colossification
+328 R Kogla, the Titan Ape
+329 R Mythos of Brokkos
+330 M Chevill, Bane of Monsters
+331 R Death's Oasis
+332 R Eerie Ultimatum
+333 R Emergent Ultimatum
+334 R Frondland Felidar
+335 M General Kudro of Drannith
+336 R Genesis Ultimatum
+337 R Inspired Ultimatum
+338 M Kinnan, Bonder Prodigy
+339 R Labyrinth Raptor
+340 R Offspring's Revenge
+341 R Quartzwood Crasher
+342 M Rielle, the Everwise
+343 R Ruinous Ultimatum
+344 R Skycat Sovereign
+345 R Slitherwisp
+346 R Song of Creation
+347 R Titans' Nest
+348 R Whirlwind of Thought
+349 M Winota, Joiner of Forces
+350 M Fiend Artisan
+351 R Gyruda, Doom of Depths
+352 R Jegantha, the Wellspring
+353 R Kaheera, the Orphanguard
+354 R Keruga, the Macrosage
+355 R Lurrus of the Dream-Den
+356 R Lutri, the Spellchaser
+357 R Obosh, the Preypiercer
+358 R Umori, the Collector
+359 R Yorion, Sky Nomad
+360 R Zirda, the Dawnwaker
+361 R Crystalline Giant
+362 R The Ozolith
+363 R Bonders' Enclave
+
+[promo]
+364 R Colossification
+365 U Flourishing Fox
+366 U Heartless Act
+367 C Forbidden Friendship
+368 U Migration Path
+369 U Sprite Dragon
+370 U Huntmaster Liger
+371 M Luminous Broodmoth
+372 U Pollywog Symbiote
+373 U Void Beckoner
+374 R Everquill Phoenix
+375 R Yidaro, Wandering Monster
+376 R Gemrazer
+377 U Titanoth Rex
+378 M Brokkos, Apex of Forever
+379 M Illuna, Apex of Wishes
+380 M Nethroi, Apex of Death
+381 M Snapdax, Apex of the Hunt
+382 U Sprite Dragon
+383 M Vadrok, Apex of Thunder
+384 R Gyruda, Doom of Depths
+385 C Mysterious Egg
+386 R Dirge Bat
+387 R Crystalline Giant
+
+[Lands]
+10 Bloodfell Caves|IKO
+10 Blossoming Sands|IKO
+10 Dismal Backwater|IKO
+10 Jungle Hollow|IKO
+10 Rugged Highlands|IKO
+10 Scoured Barrens|IKO
+10 Swiftwater Cliffs|IKO
+10 Thornwood Falls|IKO
+10 Tranquil Cove|IKO
+10 Wind-Scarred Crag|IKO
+7 Plains|IKO|1
+7 Plains|IKO|2
+7 Plains|IKO|3
+7 Plains|IKO|4
+7 Island|IKO|1
+7 Island|IKO|2
+7 Island|IKO|3
+7 Island|IKO|4
+7 Swamp|IKO|1
+7 Swamp|IKO|2
+7 Swamp|IKO|3
+7 Swamp|IKO|4
+7 Mountain|IKO|1
+7 Mountain|IKO|2
+7 Mountain|IKO|3
+7 Mountain|IKO|4
+7 Forest|IKO|1
+7 Forest|IKO|2
+7 Forest|IKO|3
+7 Forest|IKO|4
+
+[tokens]
+feather
+g_3_3_beast
+g_x_x_dinosaur_beast_trample
+r_1_1_dinosaur_haste
+u_8_8_kraken
+u_x_x_shark_flying
+w_1_1_cat_bird_flying
+w_1_1_cat_lifelink
+w_1_1_human_soldier
+w_1_1_human_soldier
+w_1_1_human_soldier

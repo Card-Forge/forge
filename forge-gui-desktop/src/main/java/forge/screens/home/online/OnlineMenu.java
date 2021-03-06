@@ -1,6 +1,7 @@
 package forge.screens.home.online;
 
 import forge.gui.FNetOverlay;
+import forge.util.Localizer;
 import javax.swing.*;
 
 import java.awt.event.ActionEvent;
@@ -13,7 +14,7 @@ import java.awt.event.KeyEvent;
 public final class OnlineMenu {
 
     public static JMenu getMenu() {
-        JMenu menu = new JMenu("Online");
+        JMenu menu = new JMenu(Localizer.getInstance().getMessage("lblOnline"));
         menu.setMnemonic(KeyEvent.VK_O);
         menu.add(getMenuItem_ConnectToServer());
         menu.add(new JSeparator());
@@ -24,7 +25,7 @@ public final class OnlineMenu {
     public static final JCheckBoxMenuItem chatItem;
 
     static {
-        chatItem = new JCheckBoxMenuItem("Show Chat Panel");
+        chatItem = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblShowChatPanel"));
         chatItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -39,7 +40,7 @@ public final class OnlineMenu {
     }
 
     private static JMenuItem getMenuItem_ConnectToServer() {
-        JMenuItem menuItem = new JMenuItem("Connect to Server");
+        JMenuItem menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblConnectToServer"));
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

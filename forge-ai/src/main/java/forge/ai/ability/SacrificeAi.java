@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -103,10 +104,9 @@ public class SacrificeAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
+            if (num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                final int xPay = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), amount);
-                source.setSVar("PayX", Integer.toString(xPay));
+                sa.setXManaCostPaid(Math.min(ComputerUtilCost.getMaxXValue(sa, ai), amount));
             }
 
             final int half = (amount / 2) + (amount % 2); // Half of amount
@@ -135,7 +135,7 @@ public class SacrificeAi extends SpellAbilityAi {
             final String num = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";
             int amount = AbilityUtils.calculateAmount(source, num, sa);
 
-            if (num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
+            if (num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
                 amount = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), amount);
             }

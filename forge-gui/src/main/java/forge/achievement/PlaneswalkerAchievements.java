@@ -8,6 +8,8 @@ import forge.game.player.Player;
 import forge.item.IPaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
+import forge.util.Localizer;
+import forge.util.CardTranslation;
 
 public class PlaneswalkerAchievements extends AchievementCollection {
     public static final PlaneswalkerAchievements instance = new PlaneswalkerAchievements();
@@ -17,7 +19,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
     }
 
     private PlaneswalkerAchievements() {
-        super("Planeswalker Ultimates", ForgeConstants.ACHIEVEMENTS_DIR + "planeswalkers.xml", false, ForgeConstants.PLANESWALKER_ACHIEVEMENT_LIST_FILE);
+        super("lblPlaneswalkerUltimates", ForgeConstants.ACHIEVEMENTS_DIR + "planeswalkers.xml", false, ForgeConstants.PLANESWALKER_ACHIEVEMENT_LIST_FILE);
     }
 
     @Override
@@ -49,7 +51,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
 
     private class PlaneswalkerUltimate extends ProgressiveAchievement {
         private PlaneswalkerUltimate(String cardName0, String displayName0, String flavorText0) {
-            super(cardName0, displayName0, "Win a game after activating " + cardName0 + "'s ultimate", flavorText0);
+            super(cardName0, displayName0, Localizer.getInstance().getMessage("lblWinGameAfterActivatingCardUltimate", CardTranslation.getTranslatedName(cardName0)), flavorText0);
         }
 
         @Override
@@ -64,7 +66,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
 
         @Override
         protected String getNoun() {
-            return "Win";
+            return Localizer.getInstance().getMessage("lblWin");
         }
     }
 }

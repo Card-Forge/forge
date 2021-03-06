@@ -1,0 +1,14 @@
+Name:Orvar, the All-Form
+ManaCost:3 U
+Types:Legendary Creature Shapeshifter
+PT:3/3
+K:Changeling
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TargetsValid$ Permanent.YouCtrl+Other | RememberValidCards$ True | Execute$ TrigCopyTarget | TriggerDescription$ Whenever you cast an instant or sorcery spell, if it targets one or more other permanents you control, create a token that's a copy of one of those permanents.
+SVar:TrigCopyTarget:DB$ CopyPermanent | Choices$ Permanent.IsRemembered | NumCopies$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ Card.OppCtrl | Execute$ TrigTokenCopy | TriggerDescription$ When a spell or ability an opponent controls causes you to discard this card, create a token that's a copy of target permanent.
+SVar:TrigTokenCopy:DB$ CopyPermanent | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | NumCopies$ 1
+DeckHints:Type$Instant|Sorcery
+DeckHas:Ability$Token
+SVar:DiscardMeByOpp:1
+Oracle:Changeling\nWhenever you cast an instant or sorcery spell, if it targets one or more other permanents you control, create a token that's a copy of one of those permanents.\nWhen a spell or ability an opponent controls causes you to discard this card, create a token that's a copy of target permanent.

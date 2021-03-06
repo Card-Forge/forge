@@ -1,0 +1,8 @@
+Name:Murasa Rootgrazer
+ManaCost:G W
+Types:Creature Beast
+PT:2/3
+K:Vigilance
+A:AB$ ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Optional$ You | AILogic$ AtOppEOT | SpellDescription$ You may put a basic land card from your hand onto the battlefield.
+A:AB$ ChangeZone | Cost$ T | ValidTgts$ Land.Basic+YouCtrl | TgtPrompt$ Select target basic land you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target basic land you control to its owner's hand.
+Oracle:Vigilance\n{T}: You may put a basic land card from your hand onto the battlefield.\n{T}: Return target basic land you control to its owner's hand.

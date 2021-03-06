@@ -1,7 +1,7 @@
 Name:Time Stop
 ManaCost:4 U U
 Types:Instant
-A:SP$EndTurn | Cost$ 4 U U | SpellDescription$ End the turn. (Exile all spells and abilities on the stack, including this card. The player whose turn it is discards down to their maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)
+A:SP$EndTurn | Cost$ 4 U U | SpellDescription$ End the turn. (Exile all spells and abilities from the stack, including this card. The player whose turn it is discards down to their maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_stop.jpg
-Oracle:End the turn. (Exile all spells and abilities on the stack, including this card. The player whose turn it is discards down to their maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)
+Oracle:End the turn. (Exile all spells and abilities from the stack, including this card. The player whose turn it is discards down to their maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)

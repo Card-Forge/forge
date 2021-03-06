@@ -1,5 +1,7 @@
 [metadata]
 Name=Nissa Revane
+[Commander]
+1 Nissa Revane|ZEN
 [Main]
 1 Arbor Elf|M13
 1 Beastcaller Savant|BFZ
@@ -16,7 +18,6 @@ Name=Nissa Revane
 1 Joraga Warcaller|C14
 1 Khalni Hydra|ROE
 1 Mul Daya Channelers|ROE
-1 Nissa Revane|ZEN
 1 Nissa's Chosen|ZEN
 1 Nissa's Expedition|M15
 1 Nissa's Judgment|OGW

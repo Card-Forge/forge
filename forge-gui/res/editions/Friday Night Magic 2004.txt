@@ -1,0 +1,19 @@
+[metadata]
+Code=F04
+Date=2004-01-01
+Name=Friday Night Magic 2004
+Type=Reprint
+
+[cards]
+1 R Willbender
+2 R Slice and Dice
+3 R Silver Knight
+4 R Krosan Warchief
+5 R Lightning Rift
+6 R Carrion Feeder
+7 R Treetop Village
+8 R Accumulated Knowledge
+9 R Avalanche Riders
+10 R Reanimate
+11 R Mother of Runes
+12 R Brainstorm

@@ -45,6 +45,7 @@ public enum AbilityKey {
     CumulativeUpkeepPaid("CumulativeUpkeepPaid"),
     CurrentCastSpells("CurrentCastSpells"),
     CurrentStormCount("CurrentStormCount"),
+    Cycling("Cycling"),
     DamageAmount("DamageAmount"),
     DamageMap("DamageMap"),
     DamageSource("DamageSource"),
@@ -62,8 +63,10 @@ public enum AbilityKey {
     Explorer("Explorer"),
     Event("Event"),
     Fighter("Fighter"),
+    Fighters("Fighters"),
     FirstTime("FirstTime"),
     Fizzle("Fizzle"),
+    FoundSearchingLibrary("FoundSearchingLibrary"),
     IsCombat("IsCombat"), // TODO confirm that this and IsCombatDamage can be merged
     IsCombatDamage("IsCombatDamage"),
     IndividualCostPaymentInstance("IndividualCostPaymentInstance"),
@@ -71,7 +74,9 @@ public enum AbilityKey {
     LifeAmount("LifeAmount"), //TODO confirm that this and LifeGained can be merged
     LifeGained("LifeGained"),
     Mana("Mana"),
+    MergedCards("MergedCards"),
     MonstrosityAmount("MonstrosityAmount"),
+    NewCard("NewCard"),
     NewCounterAmount("NewCounterAmount"),
     NoPreventDamage("NoPreventDamage"),
     Num("Num"), // TODO confirm that this and NumThisTurn can be merged
@@ -93,6 +98,7 @@ public enum AbilityKey {
     Prevention("Prevention"),
     Produced("Produced"),
     Regeneration("Regeneration"),
+    ReplacementEffect("ReplacementEffect"),
     ReplacementResult("ReplacementResult"),
     Result("Result"),
     Scheme("Scheme"),

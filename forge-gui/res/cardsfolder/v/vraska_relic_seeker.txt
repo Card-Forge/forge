@@ -3,9 +3,9 @@ ManaCost:4 B G
 Types:Legendary Planeswalker Vraska
 Loyalty:6
 A:AB$ Token | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ b_2_2_pirate_menace | TokenOwner$ You | LegacyImage$ b 2 2 pirate menace xln | SpellDescription$ Create a 2/2 black Pirate creature token with menace.
-A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact,Creature,Enchantment | TgtPrompt$ Select target artifact, creature, or enchantment | AILogic$ MinLoyalty.4 | SubAbility$ DBTreasure | SpellDescription$ Destroy target artifact, creature, or enchantment. Create a colorless treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
+A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact,Creature,Enchantment | TgtPrompt$ Select target artifact, creature, or enchantment | AILogic$ MinLoyalty.4 | SubAbility$ DBTreasure | SpellDescription$ Destroy target artifact, creature, or enchantment. Create a Treasure token.
 SVar:DBTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | LegacyImage$ c a treasure sac xln
 A:AB$ SetLife | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 1 | SpellDescription$ Target player's life total becomes 1.
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vraska_relic_seeker.jpg
-Oracle:[+2]: Create a 2/2 black Pirate creature token with menace.\n[-3]: Destroy target artifact, creature, or enchantment. Create a colorless treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."\n[-10]: Target player's life total becomes 1.
+Oracle:[+2]: Create a 2/2 black Pirate creature token with menace.\n[−3]: Destroy target artifact, creature, or enchantment. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\n[−10]: Target player's life total becomes 1.

@@ -17,10 +17,14 @@
  */
 package forge.game.staticability;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.GameCommand;
+import forge.card.ColorSet;
+import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
@@ -31,10 +35,10 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
-import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
@@ -111,19 +115,18 @@ public final class StaticAbilityContinuous {
         String setT = "";
         int setToughness = Integer.MAX_VALUE;
 
-        String[] addKeywords = null;
+        List<String> addKeywords = null;
         List<String> addHiddenKeywords = Lists.newArrayList();
-        String[] removeKeywords = null;
+        List<String> removeKeywords = null;
         String[] addAbilities = null;
         String[] addReplacements = null;
         String[] addSVars = null;
-        String[] addTypes = null;
-        String[] removeTypes = null;
+        List<String> addTypes = null;
+        List<String> removeTypes = null;
         String addColors = null;
         String[] addTriggers = null;
         String[] addStatics = null;
         boolean removeAllAbilities = false;
-        boolean removeIntrinsicAbilities = false;
         boolean removeNonMana = false;
         boolean removeSuperTypes = false;
         boolean removeCardTypes = false;
@@ -135,8 +138,9 @@ public final class StaticAbilityContinuous {
 
         boolean overwriteColors = false;
 
+        Set<Keyword> cantHaveKeyword = null;
+
         List<Player> mayLookAt = null;
-        List<Player> withFlash = null;
 
         boolean controllerMayPlay = false, mayPlayWithoutManaCost = false, mayPlayWithFlash = false;
         String mayPlayAltManaCost = null;
@@ -187,50 +191,142 @@ public final class StaticAbilityContinuous {
         }
 
         if (layer == StaticAbilityLayer.ABILITIES && params.containsKey("AddKeyword")) {
-            addKeywords = params.get("AddKeyword").split(" & ");
-            final Iterable<String> chosencolors = hostCard.getChosenColors();
-            for (final String color : chosencolors) {
-                for (int w = 0; w < addKeywords.length; w++) {
-                    addKeywords[w] = addKeywords[w].replaceAll("ChosenColor", StringUtils.capitalize(color));
-                }
-            }
-            final String chosenType = hostCard.getChosenType();
-            for (int w = 0; w < addKeywords.length; w++) {
-                addKeywords[w] = addKeywords[w].replaceAll("ChosenType", chosenType);
-            }
-            final String chosenName = hostCard.getNamedCard().replace(",", ";");
+            addKeywords = Lists.newArrayList(Arrays.asList(params.get("AddKeyword").split(" & ")));
+            final List<String> newKeywords = Lists.newArrayList();
+
+            // update keywords with Chosen parts
             final String hostCardUID = Integer.toString(hostCard.getId()); // Protection with "doesn't remove" effect
-            final String hostCardPower = Integer.toString(hostCard.getNetPower());
-            for (int w = 0; w < addKeywords.length; w++) {
-                if (addKeywords[w].startsWith("Protection:")) {
-                    String k = addKeywords[w];
-                    k = k.replaceAll("ChosenName", "Card.named" + chosenName);
-                    k = k.replace("HostCardUID", hostCardUID);
-                    addKeywords[w] = k;
-                } else if (addKeywords[w].startsWith("CantBeBlockedBy")) {
-                    String k = addKeywords[w];
-                    k = k.replaceAll("HostCardPower", hostCardPower);
-                    addKeywords[w] = k;
+
+            final ColorSet colorsYouCtrl = CardUtil.getColorsYouCtrl(controller);
+
+            Iterables.removeIf(addKeywords, new Predicate<String>() {
+                @Override
+                public boolean apply(String input) {
+                    if (!hostCard.hasChosenColor() && input.contains("ChosenColor")) {
+                        return true;
+                    }
+                    if (!hostCard.hasChosenType() && input.contains("ChosenType")) {
+                        return true;
+                    }
+                    if (!hostCard.hasChosenNumber() && input.contains("ChosenNumber")) {
+                        return true;
+                    }
+                    if (!hostCard.hasChosenPlayer() && input.contains("ChosenPlayer")) {
+                        return true;
+                    }
+                    if (!hostCard.hasChosenName() && input.contains("ChosenName")) {
+                        return true;
+                    }
+                    if (!hostCard.hasChosenEvenOdd() && (input.contains("ChosenEvenOdd") || input.contains("chosenEvenOdd"))) {
+                        return true;
+                    }
+
+                    if (input.contains("AllColors") || input.contains("allColors")) {
+                        for (byte color : MagicColor.WUBRG) {
+                            final String colorWord = MagicColor.toLongString(color);
+                            String y = input.replaceAll("AllColors", StringUtils.capitalize(colorWord));
+                            y = y.replaceAll("allColors", colorWord);
+                            newKeywords.add(y);
+                        }
+                        return true;
+                    }
+                    if (input.contains("CommanderColorID")) {
+                        if (!hostCard.getController().getCommanders().isEmpty()) {
+                            if (input.contains("NotCommanderColorID")) {
+                                for (Byte color : hostCard.getController().getNotCommanderColorID()) {
+                                    newKeywords.add(input.replace("NotCommanderColorID", MagicColor.toLongString(color)));
+                                }
+                                return true;
+                            } else for (Byte color : hostCard.getController().getCommanderColorID()) {
+                                newKeywords.add(input.replace("CommanderColorID", MagicColor.toLongString(color)));
+                            }
+                            return true;
+                        }
+                        return true;
+                    }
+                    // two variants for Red vs. red in keyword
+                    if (input.contains("ColorsYouCtrl") || input.contains("colorsYouCtrl")) {
+                        for (byte color : colorsYouCtrl) {
+                            final String colorWord = MagicColor.toLongString(color);
+                            String y = input.replaceAll("ColorsYouCtrl", StringUtils.capitalize(colorWord));
+                            y = y.replaceAll("colorsYouCtrl", colorWord);
+                            newKeywords.add(y);
+                        }
+                        return true;
+                    }
+                    if (input.contains("EachCMCAmongDefined")) {
+                        String keywordDefined = params.get("KeywordDefined");
+                        CardCollectionView definedCards = game.getCardsIn(ZoneType.Battlefield);
+                        definedCards = CardLists.getValidCards(definedCards, keywordDefined, hostCard.getController(),
+                                hostCard, null);
+                        for (Card c : definedCards) {
+                            final int cmc = c.getCMC();
+                            String y = (input.replace(" from EachCMCAmongDefined", ":Card.cmcEQ"
+                                    + (cmc) + ":Protection from converted mana cost " + (cmc)));
+                            if (!newKeywords.contains(y)) {
+                                newKeywords.add(y);
+                            }
+                        }
+                        return true;
+                    }
+
+                    return false;
                 }
-            }
+
+            });
+
+            addKeywords.addAll(newKeywords);
+
+            addKeywords = Lists.transform(addKeywords, new Function<String, String>() {
+
+                @Override
+                public String apply(String input) {
+                    if (hostCard.hasChosenColor()) {
+                        input = input.replaceAll("ChosenColor", StringUtils.capitalize(hostCard.getChosenColor()));
+                        input = input.replaceAll("chosenColor", hostCard.getChosenColor().toLowerCase());
+                    }
+                    if (hostCard.hasChosenType()) {
+                        input = input.replaceAll("ChosenType", hostCard.getChosenType());
+                    }
+                    if (hostCard.hasChosenNumber()) {
+                        input = input.replaceAll("ChosenNumber", String.valueOf(hostCard.getChosenNumber()));
+                    }
+                    if (hostCard.hasChosenPlayer()) {
+                        Player cp = hostCard.getChosenPlayer();
+                        input = input.replaceAll("ChosenPlayerUID", String.valueOf(cp.getId()));
+                        input = input.replaceAll("ChosenPlayerName", cp.getName());
+                    }
+                    if (hostCard.hasChosenName()) {
+                        final String chosenName = hostCard.getChosenName().replace(",", ";");
+                        input = input.replaceAll("ChosenName", "Card.named" + chosenName);
+                    }
+                    if (hostCard.hasChosenEvenOdd()) {
+                        input = input.replaceAll("ChosenEvenOdd", hostCard.getChosenEvenOdd().toString());
+                        input = input.replaceAll("chosenEvenOdd", hostCard.getChosenEvenOdd().toString().toLowerCase());
+                    }
+                    input = input.replace("HostCardUID", hostCardUID);
+                    return input;
+                }
+
+            });
+
             if (params.containsKey("SharedKeywordsZone")) {
                 List<ZoneType> zones = ZoneType.listValueOf(params.get("SharedKeywordsZone"));
                 String[] restrictions = params.containsKey("SharedRestrictions") ? params.get("SharedRestrictions").split(",") : new String[] {"Card"};
-                List<String> kw = CardFactoryUtil.sharedKeywords(Arrays.asList(addKeywords), restrictions, zones, hostCard);
-                addKeywords = kw.toArray(new String[kw.size()]);
+                addKeywords = CardFactoryUtil.sharedKeywords(addKeywords, restrictions, zones, hostCard);
             }
         }
 
-        if ((layer == StaticAbilityLayer.RULES || layer == StaticAbilityLayer.ABILITIES) && params.containsKey("AddHiddenKeyword")) {
-            // can't have or gain, need to be applyed in ABILITIES1
-            for (String k : params.get("AddHiddenKeyword").split(" & ")) {
-                if ( (k.contains("can't have or gain")) == (layer == StaticAbilityLayer.ABILITIES))
-                    addHiddenKeywords.add(k);
-            }
+        if (layer == StaticAbilityLayer.ABILITIES && params.containsKey("CantHaveKeyword")) {
+            cantHaveKeyword = Keyword.setValueOf(params.get("CantHaveKeyword"));
+        }
+
+        if ((layer == StaticAbilityLayer.RULES) && params.containsKey("AddHiddenKeyword")) {
+            addHiddenKeywords.addAll(Arrays.asList(params.get("AddHiddenKeyword").split(" & ")));
         }
 
         if (layer == StaticAbilityLayer.ABILITIES && params.containsKey("RemoveKeyword")) {
-            removeKeywords = params.get("RemoveKeyword").split(" & ");
+            removeKeywords = Arrays.asList(params.get("RemoveKeyword").split(" & "));
         }
 
         if (layer == StaticAbilityLayer.ABILITIES && params.containsKey("RemoveAllAbilities")) {
@@ -239,16 +335,11 @@ public final class StaticAbilityContinuous {
                 removeNonMana = true;
             }
         }
-        // do this in type layer too in case of blood moon
-        if ((layer == StaticAbilityLayer.TYPE)
-                && params.containsKey("RemoveIntrinsicAbilities")) {
-            removeIntrinsicAbilities = true;
-        }
 
         if (layer == StaticAbilityLayer.ABILITIES && params.containsKey("AddAbility")) {
             final String[] sVars = params.get("AddAbility").split(" & ");
             for (int i = 0; i < sVars.length; i++) {
-                sVars[i] = hostCard.getSVar(sVars[i]);
+                sVars[i] = AbilityUtils.getSVar(stAb, sVars[i]);
             }
             addAbilities = sVars;
         }
@@ -256,7 +347,7 @@ public final class StaticAbilityContinuous {
         if (layer == StaticAbilityLayer.ABILITIES && params.containsKey("AddReplacementEffects")) {
             final String[] sVars = params.get("AddReplacementEffects").split(" & ");
             for (int i = 0; i < sVars.length; i++) {
-                sVars[i] = hostCard.getSVar(sVars[i]);
+                sVars[i] = AbilityUtils.getSVar(stAb, sVars[i]);
             }
             addReplacements = sVars;
         }
@@ -266,24 +357,61 @@ public final class StaticAbilityContinuous {
         }
 
         if (layer == StaticAbilityLayer.TYPE && params.containsKey("AddType")) {
-            addTypes = params.get("AddType").split(" & ");
-            if (addTypes[0].equals("ChosenType")) {
-                final String chosenType = hostCard.getChosenType();
-                addTypes[0] = chosenType;
-            } else if (addTypes[0].equals("ImprintedCreatureType")) {
-                if (hostCard.hasImprintedCard()) {
-                    final Set<String> imprinted = hostCard.getImprintedCards().getFirst().getType().getCreatureTypes();
-                    addTypes = imprinted.toArray(new String[imprinted.size()]);
+
+            addTypes = Lists.newArrayList(Arrays.asList(params.get("AddType").split(" & ")));
+            List<String> newTypes = Lists.newArrayList();
+
+            Iterables.removeIf(addTypes, new Predicate<String>() {
+                @Override
+                public boolean apply(String input) {
+                    if (input.equals("ChosenType") && !hostCard.hasChosenType()) {
+                        return true;
+                    }
+                    if (input.equals("ChosenType2") && !hostCard.hasChosenType2()) {
+                        return true;
+                    }
+                    if (input.equals("ImprintedCreatureType")) {
+                        if (hostCard.hasImprintedCard()) {
+                            newTypes.addAll(hostCard.getImprintedCards().getLast().getType().getCreatureTypes());
+                        }
+                        return true;
+                    }
+                    if (input.equals("AllBasicLandType")) {
+                        newTypes.addAll(CardType.getBasicTypes());
+                        return true;
+                    }
+                    return false;
                 }
-            }
+            });
+            addTypes.addAll(newTypes);
+
+            addTypes = Lists.transform(addTypes, new Function<String, String>() {
+                @Override
+                public String apply(String input) {
+                    if (hostCard.hasChosenType2()) {
+                        input = input.replaceAll("ChosenType2", hostCard.getChosenType2());
+                    }
+                    if (hostCard.hasChosenType()) {
+                        input = input.replaceAll("ChosenType", hostCard.getChosenType());
+                    }
+                    return input;
+                }
+
+            });
         }
 
         if (layer == StaticAbilityLayer.TYPE && params.containsKey("RemoveType")) {
-            removeTypes = params.get("RemoveType").split(" & ");
-            if (removeTypes[0].equals("ChosenType")) {
-                final String chosenType = hostCard.getChosenType();
-                removeTypes[0] = chosenType;
-            }
+            removeTypes = Lists.newArrayList(Arrays.asList(params.get("RemoveType").split(" & ")));
+
+            Iterables.removeIf(removeTypes, new Predicate<String>() {
+                @Override
+                public boolean apply(String input) {
+                    if (input.equals("ChosenType") && !hostCard.hasChosenType()) {
+                        return true;
+                    }
+                    return false;
+                }
+            });
         }
 
         if (layer == StaticAbilityLayer.TYPE) {
@@ -342,7 +470,7 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("AddTrigger")) {
                 final String[] sVars = params.get("AddTrigger").split(" & ");
                 for (int i = 0; i < sVars.length; i++) {
-                    sVars[i] = hostCard.getSVar(sVars[i]);
+                    sVars[i] = AbilityUtils.getSVar(stAb, sVars[i]);
                 }
                 addTriggers = sVars;
             }
@@ -350,7 +478,7 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("AddStaticAbility")) {
                 final String[] sVars = params.get("AddStaticAbility").split(" & ");
                 for (int i = 0; i < sVars.length; i++) {
-                    sVars[i] = hostCard.getSVar(sVars[i]);
+                    sVars[i] = AbilityUtils.getSVar(stAb, sVars[i]);
                 }
                 addStatics = sVars;
             }
@@ -382,9 +510,6 @@ public final class StaticAbilityContinuous {
                     mayPlayGrantZonePermissions = false;
                 }
             }
-            if (params.containsKey("WithFlash")) {
-                withFlash = AbilityUtils.getDefinedPlayers(hostCard, params.get("WithFlash"), null);
-            }
 
             if (params.containsKey("IgnoreEffectCost")) {
                 String cost = params.get("IgnoreEffectCost");
@@ -397,7 +522,7 @@ public final class StaticAbilityContinuous {
 
             // add keywords
             if (addKeywords != null) {
-                p.addChangedKeywords(addKeywords, removeKeywords == null ? new String[0] : removeKeywords, se.getTimestamp());
+                p.addChangedKeywords(addKeywords, removeKeywords, se.getTimestamp());
             }
 
             // add static abilities
@@ -417,6 +542,34 @@ public final class StaticAbilityContinuous {
                         int max = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
                         p.setMaxHandSize(max);
                     }
+                }
+
+                if (params.containsKey("AdjustLandPlays")) {
+                    String mhs = params.get("AdjustLandPlays");
+                    if (mhs.equals("Unlimited")) {
+                        p.addMaxLandPlaysInfinite(se.getTimestamp());
+                    } else {
+                        int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
+                        p.addMaxLandPlays(se.getTimestamp(), add);
+                    }
+                }
+                if (params.containsKey("ControlOpponentsSearchingLibrary")) {
+                    Player cntl = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, params.get("ControlOpponentsSearchingLibrary"), null), null);
+                    p.addControlledWhileSearching(se.getTimestamp(), cntl);
+                }
+
+                if (params.containsKey("ControlVote")) {
+                    p.addControlVote(se.getTimestamp());
+                }
+                if (params.containsKey("AdditionalVote")) {
+                    String mhs = params.get("AdditionalVote");
+                    int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
+                    p.addAdditionalVote(se.getTimestamp(), add);
+                }
+                if (params.containsKey("AdditionalOptionalVote")) {
+                    String mhs = params.get("AdditionalOptionalVote");
+                    int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
+                    p.addAdditionalOptionalVote(se.getTimestamp(), add);
                 }
 
                 if (params.containsKey("RaiseMaxHandSize")) {
@@ -497,26 +650,50 @@ public final class StaticAbilityContinuous {
             // add keywords
             // TODO regular keywords currently don't try to use keyword multiplier
             // (Although nothing uses it at this time)
-            if ((addKeywords != null) || (removeKeywords != null) || removeAllAbilities || removeIntrinsicAbilities) {
-                String[] newKeywords = null;
+            if ((addKeywords != null) || (removeKeywords != null) || removeAllAbilities || removeLandTypes) {
+                List<String> newKeywords = null;
                 if (addKeywords != null) {
-                    newKeywords = Arrays.copyOf(addKeywords, addKeywords.length);
-                    for (int j = 0; j < newKeywords.length; ++j) {
-                        if (newKeywords[j].contains("CardManaCost")) {
-                            if (affectedCard.getManaCost().isNoCost()) {
-                                newKeywords[j] = ""; // prevent a crash (varolz the scar-striped + dryad arbor)
-                            } else {
-                                newKeywords[j] = newKeywords[j].replace("CardManaCost", affectedCard.getManaCost().getShortString());
+                    newKeywords = Lists.newArrayList(addKeywords);
+                    final List<String> extraKeywords = Lists.newArrayList();
+
+                    Iterables.removeIf(newKeywords, new Predicate<String>() {
+                        @Override
+                        public boolean apply(String input) {
+                            if (input.contains("CardManaCost")) {
+                                if (affectedCard.getManaCost().isNoCost()) {
+                                    return true;
+                                }
                             }
-                        } else if (newKeywords[j].contains("ConvertedManaCost")) {
-                            final String costcmc = Integer.toString(affectedCard.getCMC());
-                            newKeywords[j] = newKeywords[j].replace("ConvertedManaCost", costcmc);
+                            // replace one Keyword with list of keywords
+                            if (input.startsWith("Protection") && input.contains("CardColors")) {
+                                for (Byte color : affectedCard.determineColor()) {
+                                    extraKeywords.add(input.replace("CardColors", MagicColor.toLongString(color)));
+                                }
+                                return true;
+                            }
+
+                            return false;
                         }
-                    }
+                    });
+                    newKeywords.addAll(extraKeywords);
+
+                    newKeywords = Lists.transform(newKeywords, new Function<String, String>() {
+
+                        @Override
+                        public String apply(String input) {
+                            if (input.contains("CardManaCost")) {
+                                input = input.replace("CardManaCost", affectedCard.getManaCost().getShortString());
+                            } else if (input.contains("ConvertedManaCost")) {
+                                final String costcmc = Integer.toString(affectedCard.getCMC());
+                                input = input.replace("ConvertedManaCost", costcmc);
+                            }
+                            return input;
+                        }
+                    });
                 }
 
                 affectedCard.addChangedCardKeywords(newKeywords, removeKeywords,
-                        removeAllAbilities, removeIntrinsicAbilities,
+                        removeAllAbilities, removeLandTypes,
                         hostCard.getTimestamp());
             }
 
@@ -530,7 +707,7 @@ public final class StaticAbilityContinuous {
             // add SVars
             if (addSVars != null) {
                 for (final String sVar : addSVars) {
-                    String actualSVar = hostCard.getSVar(sVar);
+                    String actualSVar = AbilityUtils.getSVar(stAb, sVar);
                     String name = sVar;
                     if (actualSVar.startsWith("SVar:")) {
                         actualSVar = actualSVar.split("SVar:")[1];
@@ -557,9 +734,9 @@ public final class StaticAbilityContinuous {
                             abilty = TextUtil.fastReplace(abilty, "ConvertedManaCost", costcmc);
                         }
                         if (abilty.startsWith("AB") || abilty.startsWith("ST")) { // grant the ability
-                            final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard);
+                            final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard, stAb);
                             sa.setIntrinsic(false);
-                            sa.setOriginalHost(hostCard);
+                            sa.setGrantorStatic(stAb);
                             addedAbilities.add(sa);
                         }
                     }
@@ -580,7 +757,7 @@ public final class StaticAbilityContinuous {
 
                     for (Card c : cardsIGainedAbilitiesFrom) {
                         for (SpellAbility sa : c.getSpellAbilities()) {
-                            if (sa instanceof AbilityActivated) {
+                            if (sa.isActivatedAbility()) {
                                 if (loyaltyAB && !sa.isPwAbility()) {
                                     continue;
                                 }
@@ -588,9 +765,6 @@ public final class StaticAbilityContinuous {
                                 if (params.containsKey("GainsAbilitiesLimitPerTurn")) {
                                     newSA.setRestrictions(sa.getRestrictions());
                                     newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));
-                                }
-                                if (newSA.getOriginalHost() == null) {
-                                    newSA.setOriginalHost(c);
                                 }
                                 newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
                                 newSA.setGrantorStatic(stAb);
@@ -604,8 +778,7 @@ public final class StaticAbilityContinuous {
                 // add Replacement effects
                 if (addReplacements != null) {
                     for (String rep : addReplacements) {
-                        final ReplacementEffect actualRep = ReplacementHandler.parseReplacement(rep, affectedCard, false);
-                        actualRep.setIntrinsic(false);
+                        final ReplacementEffect actualRep = ReplacementHandler.parseReplacement(rep, affectedCard, false, stAb);
                         addedReplacementEffects.add(actualRep);
                     }
                 }
@@ -613,21 +786,11 @@ public final class StaticAbilityContinuous {
                 // add triggers
                 if (addTriggers != null) {
                     for (final String trigger : addTriggers) {
-                        final Trigger actualTrigger = TriggerHandler.parseTrigger(trigger, affectedCard, false);
+                        final Trigger actualTrigger = TriggerHandler.parseTrigger(trigger, affectedCard, false, stAb);
                         // if the trigger has Execute param, which most trigger gained by Static Abilties should have
                         // turn them into SpellAbility object before adding to card
                         // with that the TargetedCard does not need the Svars added to them anymore
                         // but only do it if the trigger doesn't already have a overriding ability
-                        if (actualTrigger.hasParam("Execute") && actualTrigger.getOverridingAbility() == null) {
-                            SpellAbility sa = AbilityFactory.getAbility(hostCard, actualTrigger.getParam("Execute"));
-                            // set hostcard there so when the card is added to trigger, it doesn't make a copy of it
-                            sa.setHostCard(affectedCard);
-                            // set OriginalHost to get the owner of this static ability
-                            sa.setOriginalHost(hostCard);
-                            // set overriding ability to the trigger
-                            actualTrigger.setOverridingAbility(sa);
-                        }
-                        actualTrigger.setIntrinsic(false);
                         addedTrigger.add(actualTrigger);
                     }
                 }
@@ -640,7 +803,7 @@ public final class StaticAbilityContinuous {
                             s = TextUtil.fastReplace(s, "ConvertedManaCost", costcmc);
                         }
 
-                        StaticAbility stat = new StaticAbility(s, affectedCard);
+                        StaticAbility stat = new StaticAbility(s, affectedCard, stAb.getCardState());
                         stat.setIntrinsic(false);
                         addedStaticAbility.add(stat);
                     }
@@ -650,10 +813,14 @@ public final class StaticAbilityContinuous {
                     || removeAllAbilities) {
                     affectedCard.addChangedCardTraits(addedAbilities, null, addedTrigger, addedReplacementEffects, addedStaticAbility, removeAllAbilities, removeNonMana, false, hostCard.getTimestamp());
                 }
+
+                if (cantHaveKeyword != null) {
+                    affectedCard.addCantHaveKeyword(hostCard.getTimestamp(), cantHaveKeyword);
+                }
             }
 
-            if (layer == StaticAbilityLayer.TYPE && removeIntrinsicAbilities) {
-                affectedCard.addChangedCardTraits(null, null, null, null, null, false, false, removeIntrinsicAbilities, hostCard.getTimestamp());
+            if (layer == StaticAbilityLayer.TYPE && removeLandTypes) {
+                affectedCard.addChangedCardTraits(null, null, null, null, null, false, false, removeLandTypes, hostCard.getTimestamp());
             }
 
             // add Types
@@ -682,12 +849,7 @@ public final class StaticAbilityContinuous {
             }
 
             if (mayLookAt != null) {
-                for (Player p : mayLookAt) {
-                    affectedCard.setMayLookAt(p, true);
-                }
-            }
-            if (withFlash != null) {
-                affectedCard.addWithFlash(se.getTimestamp(), withFlash);
+                affectedCard.addMayLookAt(se.getTimestamp(), mayLookAt);
             }
 
             if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {

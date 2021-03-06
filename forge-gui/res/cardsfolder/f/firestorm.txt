@@ -8,4 +8,4 @@ SVar:MaxPlayers:PlayerCountPlayers$Amount
 SVar:MaxCreaturesAndPlaneswalkers:Count$Valid Creature,Planeswalker
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firestorm.jpg
-Oracle:As an additional cost to cast Firestorm, discard X cards.\nFirestorm deals X damage to each of X targets.
+Oracle:As an additional cost to cast this spell, discard X cards.\nFirestorm deals X damage to each of X targets.

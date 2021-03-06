@@ -27,6 +27,7 @@ import forge.util.storage.StorageReaderFile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,6 +44,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
     public static final String PIONEERWORLDNAME = "Random Pioneer";
     public static final String MODERNWORLDNAME = "Random Modern";
     public static final String RANDOMCOMMANDERWORLDNAME = "Random Commander";
+    public static final String MAINWORLDNAME = "Main world";
 
     private boolean isCustom;
 
@@ -101,7 +103,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
         return format;
     }
 
-    public List<PaperCard> getAllCards() {
+    public Collection<PaperCard> getAllCards() {
         GameFormat format0 = format;
         if (format0 == null) {
             format0 = FModel.getQuest().getMainFormat();

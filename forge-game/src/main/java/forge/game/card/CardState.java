@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -26,6 +26,7 @@ import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
 import forge.game.ForgeScript;
 import forge.game.GameObject;
+import forge.game.IHasSVars;
 import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
@@ -46,13 +47,15 @@ import java.util.Map;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
 
-public class CardState extends GameObject {
+public class CardState extends GameObject implements IHasSVars {
     private String name = "";
-    private CardType type = new CardType();
+    private CardType type = new CardType(false);
     private ManaCost manaCost = ManaCost.NO_COST;
     private byte color = MagicColor.COLORLESS;
     private int basePower = 0;
     private int baseToughness = 0;
+    private String basePowerString = null;
+    private String baseToughnessString = null;
     private String baseLoyalty = "";
     private KeywordCollection intrinsicKeywords = new KeywordCollection();
 
@@ -65,7 +68,7 @@ public class CardState extends GameObject {
     private Map<String, String> sVars = Maps.newTreeMap();
 
     private KeywordCollection cachedKeywords = new KeywordCollection();
-    
+
     private CardRarity rarity = CardRarity.Unknown;
     private String setCode = CardEdition.UNKNOWN.getCode();
 
@@ -101,6 +104,10 @@ public class CardState extends GameObject {
         view.updateName(this);
     }
 
+    public CardStateName getStateName() {
+        return this.getView().getState();
+    }
+
     @Override
     public String toString() {
         return name + " (" + view.getState() + ")";
@@ -111,6 +118,11 @@ public class CardState extends GameObject {
     }
     public final void addType(String type0) {
         if (type.add(type0)) {
+            view.updateType(this);
+        }
+    }
+    public final void addType(Iterable<String> type0) {
+        if (type.addAll(type0)) {
             view.updateType(this);
         }
     }
@@ -130,7 +142,7 @@ public class CardState extends GameObject {
             view.updateType(this);
         }
     }
-    
+
     public final void setCreatureTypes(Collection<String> ctypes) {
         if (type.setCreatureTypes(ctypes)) {
             view.updateType(this);
@@ -174,6 +186,24 @@ public class CardState extends GameObject {
         if (baseToughness == baseToughness0) { return; }
         baseToughness = baseToughness0;
         view.updateToughness(this);
+    }
+
+    // values that are printed on card
+    public final String getBasePowerString() {
+        return (null == basePowerString) ? "" + getBasePower() : basePowerString;
+    }
+
+    public final String getBaseToughnessString() {
+        return (null == baseToughnessString) ? "" + getBaseToughness() : baseToughnessString;
+    }
+
+    // values that are printed on card
+    public final void setBasePowerString(final String s) {
+        basePowerString = s;
+    }
+
+    public final void setBaseToughnessString(final String s) {
+        baseToughnessString = s;
     }
 
     public String getBaseLoyalty() {
@@ -275,6 +305,11 @@ public class CardState extends GameObject {
 
     public final Iterable<SpellAbility> getIntrinsicSpellAbilities() {
         return Iterables.filter(getSpellAbilities(), SpellAbilityPredicates.isIntrinsic());
+    }
+
+
+    public final SpellAbility getFirstSpellAbility() {
+        return Iterables.getFirst(getNonManaAbilities(), null);
     }
 
     public final boolean hasSpellAbility(final SpellAbility sa) {
@@ -405,7 +440,7 @@ public class CardState extends GameObject {
 
         if (getTypeWithChanges().isPlaneswalker()) {
             if (loyaltyRep == null) {
-                loyaltyRep = CardFactoryUtil.makeEtbCounter("etbCounter:LOYALTY:" + this.baseLoyalty, card, true);
+                loyaltyRep = CardFactoryUtil.makeEtbCounter("etbCounter:LOYALTY:" + this.baseLoyalty, this, true);
             }
             result.add(loyaltyRep);
         }
@@ -537,6 +572,42 @@ public class CardState extends GameObject {
         }
     }
 
+    public final void addAbilitiesFrom(final CardState source, final boolean lki) {
+        for (SpellAbility sa : source.manaAbilities) {
+            if (sa.isIntrinsic()) {
+                manaAbilities.add(sa.copy(card, lki));
+            }
+        }
+
+        for (SpellAbility sa : source.nonManaAbilities) {
+            if (sa.isIntrinsic()) {
+                nonManaAbilities.add(sa.copy(card, lki));
+            }
+        }
+
+        for (KeywordInterface k : source.intrinsicKeywords) {
+            intrinsicKeywords.insert(k.copy(card, lki));
+        }
+
+        for (Trigger tr : source.triggers) {
+            if (tr.isIntrinsic()) {
+                triggers.add(tr.copy(card, lki));
+            }
+        }
+
+        for (ReplacementEffect re : source.replacementEffects) {
+            if (re.isIntrinsic()) {
+                replacementEffects.add(re.copy(card, lki));
+            }
+        }
+
+        for (StaticAbility sa : source.staticAbilities) {
+            if (sa.isIntrinsic()) {
+                staticAbilities.add(sa.copy(card, lki));
+            }
+        }
+    }
+
     public CardState copy(final Card host, CardStateName name, final boolean lki) {
         CardState result = new CardState(host, name);
         result.copyFrom(this, lki);
@@ -554,11 +625,11 @@ public class CardState extends GameObject {
     public String getSetCode() {
         return setCode;
     }
-    
+
     public CardTypeView getTypeWithChanges() {
         return getType().getTypeWithChanges(card.getChangedCardTypes());
     }
-    
+
     public void setSetCode(String setCode0) {
         setCode = setCode0;
         view.updateSetCode(this);

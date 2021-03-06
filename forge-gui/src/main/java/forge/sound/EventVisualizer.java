@@ -22,6 +22,7 @@ import forge.game.event.GameEventCardSacrificed;
 import forge.game.event.GameEventCardTapped;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.event.GameEventGameOutcome;
+import forge.game.event.GameEventGameStarted;
 import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventManaBurn;
 import forge.game.event.GameEventPlayerLivesChanged;
@@ -32,8 +33,10 @@ import forge.game.event.GameEventTokenCreated;
 import forge.game.event.GameEventTurnEnded;
 import forge.game.event.GameEventZone;
 import forge.game.event.IGameEventVisitor;
+import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 import forge.util.maps.MapOfLists;
 
 /**
@@ -45,6 +48,11 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     final LobbyPlayer player;
     public EventVisualizer(final LobbyPlayer lobbyPlayer) {
         this.player = lobbyPlayer;
+    }
+
+    @Override
+    public SoundEffectType visit(GameEventGameStarted event) {
+        return SoundEffectType.StartDuel;
     }
 
     @Override
@@ -172,10 +180,10 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     @Override
     public SoundEffectType visit(final GameEventLandPlayed event) {
         SoundEffectType resultSound = null;
-        return resultSound;        
+        return resultSound;
     }
 
-    
+
     @Override
     public SoundEffectType visit(GameEventZone event) {
         Card card = event.card;
@@ -201,13 +209,16 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
             // I want to get all real colors this land can produce - no interest in colorless or devoid
             StringBuilder fullManaColors = new StringBuilder();
             for (final SpellAbility sa : land.getManaAbilities()) {
-                String currManaColor = sa.getManaPartRecursive().getOrigProduced();
-                if(!"C".equals(currManaColor)) {
-                    fullManaColors.append(currManaColor);
+                for (AbilityManaPart mp : sa.getAllManaParts()) {
+                    String currManaColor = mp.getOrigProduced();
+                    if(!"C".equals(currManaColor)) {
+                        fullManaColors.append(currManaColor);
+                    }
                 }
+
             }
             // No interest if "colors together" or "alternative colors" - only interested in colors themselves
-            fullManaColors = new StringBuilder(fullManaColors.toString().replaceAll("\\s", ""));
+            fullManaColors = new StringBuilder(TextUtil.fastReplace(fullManaColors.toString()," ", ""));
 
             int fullManaColorsLength = fullManaColors.length();
 

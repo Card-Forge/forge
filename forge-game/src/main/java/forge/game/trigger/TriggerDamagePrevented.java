@@ -48,7 +48,7 @@ public class TriggerDamagePrevented extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerDamagePrevented(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerDamagePrevented(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -106,10 +106,10 @@ public class TriggerDamagePrevented extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Source, CardUtil.getLKICopy((Card)getFromRunParams(AbilityKey.DamageSource)));
-        sa.setTriggeringObject(AbilityKey.Target, getFromRunParams(AbilityKey.DamageTarget));
-        sa.setTriggeringObjectsFrom(this, AbilityKey.DamageAmount);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObject(AbilityKey.Source, CardUtil.getLKICopy((Card)runParams.get(AbilityKey.DamageSource)));
+        sa.setTriggeringObject(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.DamageAmount);
     }
 
     @Override

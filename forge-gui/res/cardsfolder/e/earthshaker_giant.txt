@@ -4,7 +4,6 @@ Types:Creature Giant Druid
 PT:6/6
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, other creatures you control get +3/+3 and gain trample until end of turn.
-SVar:TrigPumpAll:DB$PumpAll | ValidCards$ Creature.Other+YouCtrl | NumAtt$ +3 | NumDef$ +3 | KW$ Trample
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl | NumAtt$ +3 | NumDef$ +3 | KW$ Trample
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/earthshaker_giant.jpg
 Oracle:Trample\nWhen Earthshaker Giant enters the battlefield, other creatures you control get +3/+3 and gain trample until end of turn.

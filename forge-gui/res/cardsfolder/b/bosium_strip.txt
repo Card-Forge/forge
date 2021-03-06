@@ -1,11 +1,11 @@
 Name:Bosium Strip
 ManaCost:3
 Types:Artifact
-A:AB$ Effect | Cost$ 3 T | ReplacementEffects$ REBosiumStrip | StaticAbilities$ STBosiumStrip | SVars$ MoveExile | SpellDescription$ Until end of turn, if the top card of your graveyard is an instant or sorcery card, you may cast that card. If a card cast this way would be put into a graveyard this turn, exile it instead.
-SVar:STBosiumStrip:Mode$ Continuous | Affected$ Card.TopGraveyard+Instant+YouCtrl,Card.TopGraveyard+Sorcery+YouCtrl | MayPlay$ True | EffectZone$ Command | AffectedZone$ Graveyard | Description$ Until end of turn, if the top card of your graveyard is an instant or sorcery card, you may cast that card. If a card cast this way would be put into a graveyard this turn, exile it instead.
-SVar:REBosiumStrip:Event$ Moved | ValidCard$ Card.CastSa Spell.MayPlaySource | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile
+A:AB$ Effect | Cost$ 3 T | ReplacementEffects$ REBosiumStrip | StaticAbilities$ STBosiumStrip | SVars$ MoveExile | SpellDescription$ Until end of turn, you may cast instant and sorcery spells from the top of your graveyard. If a spell cast this way would be put into a graveyard this turn, exile it instead.
+SVar:STBosiumStrip:Mode$ Continuous | Affected$ Card.TopGraveyard+Instant+YouCtrl,Card.TopGraveyard+Sorcery+YouCtrl | MayPlay$ True | EffectZone$ Command | AffectedZone$ Graveyard | Description$ Until end of turn, you may cast instant and sorcery spells from the top of your graveyard. If a spell cast this way would be put into a graveyard this turn, exile it instead.
+SVar:REBosiumStrip:Event$ Moved | ValidLKI$ Card.CastSa Spell.MayPlaySource | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile
 SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile
 SVar:NeedsOrderedGraveyard:TRUE
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bosium_strip.jpg
-Oracle:{3}, {T}: Until end of turn, if the top card of your graveyard is an instant or sorcery card, you may cast that card. If a card cast this way would be put into a graveyard this turn, exile it instead.
+Oracle:{3}, {T}: Until end of turn, you may cast instant and sorcery spells from the top of your graveyard. If a spell cast this way would be put into a graveyard this turn, exile it instead.

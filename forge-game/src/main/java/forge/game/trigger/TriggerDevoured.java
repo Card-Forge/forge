@@ -46,7 +46,7 @@ public class TriggerDevoured extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerDevoured(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerDevoured(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -64,8 +64,8 @@ public class TriggerDevoured extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Devoured);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Devoured);
     }
 
     @Override

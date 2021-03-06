@@ -1,0 +1,568 @@
+[metadata]
+Name=MTGACube
+[Avatar]
+
+[Main]
+1 Act of Treason|M12
+1 Adanto Vanguard|XLN
+1 Agonizing Remorse|THB
+1 Akroma's Memorial|HA3
+1 Alirios, Enraptured|THB
+1 All That Glitters|ELD
+1 Alseid of Life's Bounty|THB|1
+1 Anax, Hardened in the Forge|THB|1
+1 Ancestral Blade|M20
+1 Ancient Ziggurat|HA3
+1 Angrath's Rampage|WAR
+1 Angrath, Captain of Chaos|SLD
+1 Aphemia, the Cacophony|THB|1
+1 Arboreal Grazer|WAR
+1 Arch of Orazca|MB1
+1 Archon of Sun's Grace|THB|1
+1 Ardenvale Tactician|ELD|1
+1 Arguel's Blood Fast|V17
+1 Arrester's Zeal|MB1
+1 Aryel, Knight of Windgrace|DOM
+1 Ashiok, Dream Render|SLD
+1 Ashiok, Nightmare Muse|THB|1
+1 Atris, Oracle of Half-Truths|THB|1
+1 Aurelia, Exemplar of Justice|GRN
+1 Awakening of Vitu-Ghazi|WAR
+1 Ayara, First of Locthwain|ELD|1
+1 Baffling End|RIX
+1 Bag of Holding|M20
+1 Banefire|M19
+1 Banishing Light|THB
+1 Barren Moor|HA2
+1 Bastion of Remembrance|IKO
+1 Beanstalk Giant|ELD|1
+1 Beast Whisperer|C20
+1 Benalish Marshal|GNT
+1 Benthic Biomancer|RNA
+1 Biogenic Ooze|RNA
+1 Blackblade Reforged|SS2
+1 Blast Zone|WAR
+1 Blink of an Eye|DOM
+1 Blitz of the Thunder-Raptor|IKO
+1 Blood Crypt|RNA
+1 Blood for Bones|M20
+1 Bloodfell Caves|IKO
+1 Blossoming Sands|IKO
+1 Body Double|HA3
+1 Bolas's Citadel|WAR
+1 Bond of Insight|WAR
+1 Bonders' Enclave|IKO|1
+1 Bonecrusher Giant|ELD|1
+1 Boon of the Wish-Giver|IKO
+1 Brain Maggot|HA2
+1 Brazen Borrower|ELD|1
+1 Breeding Pool|DIS
+1 Brineborn Cutthroat|M20
+1 Callous Dismissal|WAR
+1 Captain Lannery Storm|XLN
+1 Captain Sisay|SLD
+1 Captivating Crew|C20
+1 Carnage Tyrant|XLN
+1 Cast Down|DOM
+1 Castle Ardenvale|ELD|1
+1 Castle Embereth|ELD|1
+1 Castle Garenbrig|ELD|1
+1 Castle Locthwain|ELD|1
+1 Castle Vantress|ELD|1
+1 Cathartic Reunion|IKO
+1 Cauldron Familiar|ELD
+1 Cavalier of Night|M20
+1 Cavalier of Thorns|M20
+1 Cavalry Drillmaster|M19
+1 Chainer's Edict|HA3
+1 Chainweb Aracnir|THB
+1 Chandra, Acolyte of Flame|M20
+1 Chandra, Awakened Inferno|M20
+1 Charging Monstrosaur|MB1
+1 Charming Prince|ELD|1
+1 Chart a Course|MB1
+1 Chemister's Insight|C20
+1 Chevill, Bane of Monsters|IKO|1
+1 Chromatic Lantern|MB1
+1 Claim the Firstborn|ELD
+1 Clifftop Retreat|DOM
+1 Clockwork Servant|ELD
+1 Cloudkin Seer|MB1
+1 Colossal Majesty|C19
+1 Commence the Endgame|WAR
+1 Conclave Tribunal|GRN
+1 Connive // Concoct|GRN
+1 Corpse Knight|M20
+1 Crackling Drake|C20
+1 Crash Through|MB1
+1 Crucible of Worlds|M19
+1 Cruel Celebrant|WAR
+1 Cryptbreaker|HA1
+1 Cryptic Caves|M20
+1 Crystalline Giant|IKO|1
+1 Curious Obsession|RIX
+1 Cyclops Electromancer|WAR
+1 Dark-Dweller Oracle|M19
+1 Dauntless Bodyguard|DOM
+1 Dawn of Hope|GRN
+1 Daxos, Blessed by the Sun|THB|1
+1 Dead Weight|IKO
+1 Demon of Loathing|THB
+1 Demonlord Belzenlok|DOM
+1 Deputy of Detention|RNA
+1 Despark|C20
+1 Destiny Spinner|THB
+1 Devil's Play|HA3
+1 Didn't Say Please|ELD
+1 Dire Fleet Daredevil|RIX
+1 Diregraf Ghoul|M19
+1 Disdainful Stroke|GRN
+1 Disfigure|M20
+1 Dismal Backwater|IKO
+1 Dive Down|XLN
+1 Divine Visitation|GRN
+1 Domri's Ambush|WAR
+1 Domri, Anarch of Bolas|SLD
+1 Dragonmaster Outcast|HA2
+1 Dragonskull Summit|XLN
+1 Drakuseth, Maw of Flames|M20
+1 Dread Presence|M20
+1 Dreadhorde Invasion|WAR
+1 Dream Eater|GRN
+1 Dreamstalker Manticore|THB
+1 Drowned Catacomb|XLN
+1 Dryad Greenseeker|M19
+1 Dryad of the Ilysian Grove|THB|1
+1 Dungeon Geists|M20
+1 Duress|MB1
+1 Dusk Legion Zealot|MB1
+1 Eat to Extinction|THB|1
+1 Electrostatic Field|GRN
+1 Elite Guardmage|WAR
+1 Elspeth Conquers Death|THB
+1 Elspeth's Nightmare|THB
+1 Elspeth, Sun's Nemesis|THB|1
+1 Elvish Reclaimer|M20
+1 Elvish Rejuvenator|M19
+1 Embercleave|ELD|1
+1 Embereth Shieldbreaker|ELD|1
+1 Embodiment of Agonies|M20
+1 Empyrean Eagle|M20
+1 Emry, Lurker of the Loch|ELD|1
+1 Enchanted Carriage|ELD
+1 Enchantress's Presence|HA3
+1 End-Raze Forerunners|RNA
+1 Entrancing Lyre|THB
+1 Entrancing Melody|XLN
+1 Epic Downfall|ELD
+1 Erebos's Intervention|THB|1
+1 Escape to the Wilds|ELD|1
+1 Essence Capture|RNA
+1 Essence Scatter|IKO
+1 Ethereal Absolution|RNA
+1 Evolving Wilds|IKO
+1 Exclusion Mage|M19
+1 Experimental Frenzy|GRN
+1 Fabled Passage|ELD|1
+1 Fae of Wishes|ELD|1
+1 Faerie Guidemother|ELD|1
+1 Fanatical Firebrand|RIX
+1 Fauna Shaman|HA1
+1 Favorable Winds|GNT
+1 Fblthp, the Lost|WAR
+1 Feather, the Redeemed|WAR
+1 Field of Ruin|THB
+1 Field of the Dead|M20
+1 Fiend Artisan|IKO|1
+1 Fight as One|IKO
+1 Fight with Fire|DOM
+1 Finale of Devastation|WAR
+1 Finale of Eternity|WAR
+1 Finale of Glory|WAR
+1 Fire Prophecy|IKO
+1 Firemind Vessel|WAR
+1 Fires of Invention|ELD|1
+1 Flame Sweep|M20
+1 Flood of Tears|M20
+1 Folio of Fancies|ELD|1
+1 Forbidden Friendship|IKO|1
+1 Foreboding Fruit|ELD
+1 Forgotten Cave|C20
+1 Foulmire Knight|ELD|1
+1 Frilled Mystic|RNA
+1 Furious Rise|THB
+1 Gallia of the Endless Dance|THB|1
+1 Gemrazer|IKO|1
+1 Ghalta, Primal Hunger|GN2
+1 Ghitu Lavarunner|MB1
+1 Giant Growth|MB1
+1 Giant Killer|ELD|1
+1 Gideon Blackblade|SLD
+1 Gilded Goose|ELD|1
+1 Gilded Lotus|DOM
+1 Gingerbrute|ELD
+1 Glacial Fortress|XLN
+1 Glint-Horn Buccaneer|M20
+1 Goblin Banneret|GRN
+1 Goblin Chainwhirler|DOM
+1 God-Eternal Bontu|WAR
+1 Godless Shrine|RNA
+1 Gods Willing|MB1
+1 Golden Demise|RIX
+1 Golden Egg|ELD
+1 Golos, Tireless Pilgrim|M20
+1 Goreclaw, Terror of Qal Sisma|M19
+1 Gravebreaker Lamia|THB|1
+1 Gray Merchant of Asphodel|THB|1
+1 Grim Initiate|WAR
+1 Grow from the Ashes|DOM
+1 Growth Spiral|RNA
+1 Gruul Spellbreaker|RNA
+1 Guild Globe|WAR
+1 Gutterbones|RNA
+1 Hallowed Fountain|DIS
+1 Hanged Executioner|M20
+1 Harmonious Archon|ELD|1
+1 Heartfire|WAR
+1 Heartless Act|IKO|1
+1 Heliod, Sun-Crowned|THB|1
+1 Helm of the Host|DOM
+1 Heroic Reinforcements|M19
+1 Hinterland Harbor|DOM
+1 History of Benalia|DOM
+1 Hunted Nightmare|IKO|1
+1 Hydroid Krasis|RNA
+1 Hypnotic Specter|HA1
+1 Hypnotic Sprite|ELD|1
+1 Icy Manipulator|MB1
+1 Idyllic Tutor|THB|1
+1 Ilysian Caryatid|THB
+1 Imperial Aerosaur|XLN
+1 Imperious Perfect|HA1
+1 In Bolas's Clutches|DOM
+1 Incubation Druid|RNA
+1 Indatha Triome|IKO|1
+1 Infuriate|THB
+1 Integrity // Intervention|GRN
+1 Ionize|GRN
+1 Isolated Chapel|DOM
+1 Izoni, Thousand-Eyed|GK1
+1 Jace, Wielder of Mysteries|SLD
+1 Jadelight Ranger|RIX
+1 Jaya's Immolating Inferno|DOM
+1 Jhoira, Weatherlight Captain|DOM
+1 Josu Vess, Lich Knight|DOM
+1 Judith, the Scourge Diva|RNA
+1 Juggernaut|MB1
+1 Karn's Temporal Sundering|DOM
+1 Karn, Scion of Urza|MPS_RNA
+1 Kenrith's Transformation|ELD|1
+1 Ketria Triome|IKO|1
+1 Kiln Fiend|HA1
+1 Kinjalli's Sunwing|XLN
+1 Kinnan, Bonder Prodigy|IKO|1
+1 Kiora, Behemoth Beckoner|SLD
+1 Kitesail Freebooter|XLN
+1 Klothys, God of Destiny|THB|1
+1 Knight of Autumn|GRN
+1 Knight of Grace|DOM
+1 Knight of Malice|DOM
+1 Knight of the Ebon Legion|M20
+1 Knight of the Reliquary|HA2
+1 Kogla, the Titan Ape|IKO|1
+1 Krosan Tusker|HA3
+1 Kroxa, Titan of Death's Hunger|THB|1
+1 Labyrinth of Skophos|THB|1
+1 Lampad of Death's Vigil|THB
+1 Lava Coil|GRN
+1 Law-Rune Enforcer|WAR
+1 Lazav, the Multifarious|GRN
+1 Legion Warboss|GRN
+1 Legion's Landing|XLN
+1 Light Up the Stage|RNA
+1 Lightning Strike|GN2
+1 Liliana's Contract|M19
+1 Liliana, Dreadhorde General|SLD
+1 Llanowar Elves|MB1
+1 Lonely Sandbar|C20
+1 Lotus Field|M20
+1 Lovestruck Beast|ELD|1
+1 Loyal Pegasus|M20
+1 Luminous Broodmoth|IKO|1
+1 Lyra Dawnbringer|DOM
+1 Mace of the Valiant|ELD
+1 Maelstrom Pulse|HA2
+1 Manifold Key|M20
+1 Mantle of the Wolf|THB|1
+1 March of the Multitudes|GRN
+1 Massacre Girl|WAR
+1 Mastermind's Acquisition|RIX
+1 Mayhem Devil|WAR
+1 Memory Leak|IKO
+1 Mentor of the Meek|M19
+1 Merfolk Secretkeeper|ELD|1
+1 Merfolk Trickster|DOM
+1 Midnight Clock|ELD|1
+1 Midnight Reaper|GRN
+1 Migration Path|IKO|1
+1 Mind Stone|HA1
+1 Ministrant of Obligation|RNA
+1 Mirari's Wake|HA3
+1 Mire's Grasp|THB
+1 Mist-Cloaked Herald|M19
+1 Momentary Blink|HA3
+1 Mortify|MB1
+1 Mox Amber|DOM
+1 Murderous Rider|ELD|1
+1 Murmuring Mystic|C20
+1 Mutiny|MB1
+1 Mythos of Illuna|IKO|1
+1 Mythos of Nethroi|IKO|1
+1 Nadir Kraken|THB|1
+1 Negate|MB1
+1 Nessian Hornbeetle|THB
+1 Nessian Wanderer|THB
+1 Neutralize|IKO
+1 Nightmare Shepherd|THB|1
+1 Nightpack Ambusher|M20
+1 Nightveil Sprite|GRN
+1 Niv-Mizzet Reborn|WAR
+1 Niv-Mizzet, Parun|GRN
+1 Nylea, Keen-Eyed|THB|1
+1 Nyx Lotus|THB|1
+1 Nyxbloom Ancient|THB|1
+1 Of One Mind|IKO
+1 Omen of the Hunt|THB
+1 Omen of the Sun|THB
+1 Once Upon a Time|ELD|1
+1 Opt|ELD
+1 Order of Midnight|ELD|1
+1 Orzhov Enforcer|RNA
+1 Overcome|M20
+1 Overgrown Tomb|GRN
+1 Ox of Agonas|THB|1
+1 Pacifism|IKO
+1 Paradise Druid|WAR
+1 Patient Rebuilding|M19
+1 Pelt Collector|GRN
+1 Pharika's Spawn|THB
+1 Phoenix of Ash|THB|1
+1 Phyrexian Arena|HA1
+1 Plaguecrafter|MB1
+1 Planar Cleansing|M20
+1 Planewide Celebration|WAR
+1 Platinum Angel|HA2
+1 Polukranos, Unchained|THB|1
+1 Portal of Sanctuary|M20
+1 Prey Upon|MB1
+1 Pride of Conquerors|RIX
+1 Priest of Forgotten Gods|RNA
+1 Prime Speaker Vannifar|RNA
+1 Prison Realm|WAR
+1 Psychic Corrosion|M19
+1 Pteramander|RNA
+1 Purphoros's Intervention|THB|1
+1 Quench|RNA
+1 Questing Beast|ELD|1
+1 Raise the Alarm|M20
+1 Rakdos, the Showstopper|RNA
+1 Ram Through|IKO
+1 Rampaging Ferocidon|XLN
+1 Ranger of Eos|HA2
+1 Rankle, Master of Pranks|ELD|1
+1 Raugrin Triome|IKO|1
+1 Realm-Cloaked Giant|ELD|1
+1 Reassembling Skeleton|MB1
+1 Reclamation Sage|C20
+1 Reconnaissance Mission|IKO
+1 Redcap Melee|ELD
+1 Rekindling Phoenix|RIX
+1 Relentless Pursuit|THB
+1 Remorseful Cleric|M19
+1 Resplendent Angel|M19
+1 Return of the Wildspeaker|ELD|1
+1 Reverent Hoplite|THB
+1 Revoke Existence|THB
+1 Rhys the Redeemed|MB1
+1 Rielle, the Everwise|IKO|1
+1 Rigging Runner|XLN
+1 Rimrock Knight|ELD|1
+1 Risk Factor|GRN
+1 Ritual of Soot|GRN
+1 Roar of the Wurm|HA3
+1 Robber of the Rich|ELD|1
+1 Rootbound Crag|XLN
+1 Rotting Regisaur|M20
+1 Rowdy Crew|XLN
+1 Rugged Highlands|IKO
+1 Ruin Raider|XLN
+1 Runaway Steam-Kin|GRN
+1 Rupture Spire|M19
+1 Sacred Foundry|GRN
+1 Saheeli, Sublime Artificer|SLD
+1 Saproling Migration|MB1
+1 Sarkhan the Masterless|SLD
+1 Sarkhan's Unsealing|M19
+1 Savage Stomp|XLN
+1 Savai Triome|IKO|1
+1 Scholar of the Ages|M20
+1 Scorch Spitter|M20
+1 Scorching Dragonfire|ELD
+1 Seal Away|DOM
+1 Search for Azcanta|XLN
+1 Season of Growth|M20
+1 Sea-Dasher Octopus|IKO|1
+1 Secluded Steppe|C20
+1 Sephara, Sky's Blade|M20
+1 Seraph of the Scales|RNA
+1 Setessan Champion|THB|1
+1 Settle the Wreckage|XLN
+1 Shadowspear|THB|1
+1 Shalai, Voice of Plenty|DOM
+1 Shark Typhoon|IKO|1
+1 Shatter the Sky|THB|1
+1 Shepherd of the Flock|ELD|1
+1 Shivan Fire|DOM
+1 Shock|6ED
+1 Siege-Gang Commander|10E
+1 Sigil of the Empty Throne|HA2
+1 Sigiled Sword of Valeron|M19
+1 Silent Departure|HA3
+1 Sinister Sabotage|GRN
+1 Siren Stormtamer|XLN
+1 Skarrgan Hellkite|RNA
+1 Skewer the Critics|RNA
+1 Skittering Surveyor|DOM
+1 Sky Terror|XLN
+1 Skycat Sovereign|IKO|1
+1 Skymarcher Aspirant|MB1
+1 Slaughter-Priest of Mogis|THB
+1 Slaying Fire|ELD|1
+1 Song of Freyalise|DOM
+1 Spark Double|WAR
+1 Spark Harvest|WAR
+1 Sparring Construct|DOM
+1 Spawn of Mayhem|RNA
+1 Spectral Sailor|M20
+1 Spell Pierce|SLD
+1 Sphinx of Foresight|RNA
+1 Splendor Mare|IKO
+1 Sprite Dragon|IKO|1
+1 Sprouting Renewal|GRN
+1 Squee, the Immortal|DOM
+1 Staggering Insight|THB
+1 Starfield Mystic|M20
+1 Startling Development|IKO
+1 Steam Vents|GRN
+1 Steel Overseer|M20
+1 Stitcher's Supplier|M19
+1 Stomping Ground|RNA
+1 Stonecoil Serpent|ELD|1
+1 Storm Fleet Aerialist|XLN
+1 Storm's Wrath|THB|1
+1 Sudden Spinnerets|IKO
+1 Sulfur Falls|DOM
+1 Sunpetal Grove|XLN
+1 Sword-Point Diplomacy|XLN
+1 Tajic, Legion's Edge|GRN
+1 Take Vengeance|GN2
+1 Talrand, Sky Summoner|C20
+1 Taranika, Akroan Veteran|THB|1
+1 Taste of Death|ELD
+1 Tectonic Giant|THB|1
+1 Teferi, Hero of Dominaria|MPS_GRN
+1 Temple Garden|RAV
+1 Temple of Abandon|THB|1
+1 Temple of Deceit|THB|1
+1 Temple of Enlightenment|THB|1
+1 Temple of Epiphany|JOU
+1 Temple of Malady|JOU
+1 Temple of Malice|THB|1
+1 Temple of Mystery|THS
+1 Temple of Plenty|THB|1
+1 Temple of Silence|M20
+1 Temple of Triumph|THS
+1 Tendershoot Dryad|RIX
+1 Teshar, Ancestor's Apostle|DOM
+1 Tetsuko Umezawa, Fugitive|DOM
+1 Tezzeret, Artifice Master|M19
+1 Thalia, Guardian of Thraben|HA2
+1 Thassa's Intervention|THB|1
+1 Thassa's Oracle|THB|1
+1 Thassa, Deep-Dwelling|THB|1
+1 The Akroan War|THB
+1 The Birth of Meletis|THB
+1 The Circle of Loyalty|ELD|1
+1 The Eldest Reborn|MB1
+1 The First Iroan Games|THB
+1 The Gitrog Monster|MB1
+1 The Great Henge|ELD|1
+1 The Immortal Sun|RIX
+1 The Mending of Dominaria|DOM
+1 Thief of Sanity|GRN
+1 Thirst for Meaning|THB|1
+1 Thought Erasure|MB1
+1 Thrashing Brontodon|RIX
+1 Threnody Singer|THB
+1 Tibalt, Rakish Instigator|SLD
+1 Time Wipe|WAR
+1 Tithe Taker|RNA
+1 Torbran, Thane of Red Fell|ELD|1
+1 Tranquil Cove|IKO
+1 Tranquil Thicket|HA2
+1 Trapped in the Tower|ELD
+1 Traxos, Scourge of Kroog|DOM
+1 Treasure Map|XLN
+1 Trostani Discordant|GRN
+1 Tymaret Calls the Dead|THB
+1 Tymaret, Chosen from Death|THB|1
+1 Ugin, the Ineffable|WAR|1
+1 Ulamog, the Ceaseless Hunger|HA3
+1 Unbreakable Formation|RNA
+1 Unburial Rites|HA3
+1 Underworld Rage-Hound|THB
+1 Untamed Kavu|DOM
+1 Uro, Titan of Nature's Wrath|THB|1
+1 Urza's Ruinous Blast|DOM
+1 Venerable Knight|ELD
+1 Venerated Loxodon|GRN
+1 Viashino Pyromancer|M19
+1 Vivien's Arkbow|WAR
+1 Vivien, Arkbow Ranger|M20
+1 Vivien, Monsters' Advocate|IKO|1
+1 Voracious Greatshark|IKO|1
+1 Voracious Hydra|M20
+1 Vraska's Contempt|XLN
+1 Vraska, Golgari Queen|SLD
+1 Warbriar Blessing|THB
+1 Warkite Marauder|RIX
+1 Watery Grave|GRN
+1 Wavebreak Hippocamp|THB|1
+1 Wayward Swordtooth|RIX
+1 Weaponize the Monsters|IKO
+1 Weaselback Redcap|ELD
+1 Weatherlight|DOM
+1 Whisper, Blood Liturgist|DOM
+1 Wildborn Preserver|ELD|1
+1 Wilderness Reclamation|C20
+1 Wilt|IKO
+1 Winged Words|M20
+1 Winota, Joiner of Forces|IKO|1
+1 Witch's Oven|ELD
+1 Witching Well|ELD
+1 Woe Strider|THB|1
+1 Wolfwillow Haven|THB|1
+1 Woodland Cemetery|DOM
+1 Woodland Champion|M20
+1 Yawgmoth's Vile Offering|DOM
+1 Zagoth Triome|IKO|1
+1 Zetalpa, Primal Dawn|RIX
+1 Zilortha, Strength Incarnate|IKO
+[Sideboard]
+
+[Planes]
+
+[Schemes]
+
+[Conspiracy]
+

@@ -1,0 +1,9 @@
+Name:Drannith Healer
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:2/2
+T:Mode$ Cycled | ValidCard$ Card.Other+YouOwn | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cycle another card, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+K:Cycling:1
+DeckHas:Ability$LifeGain
+Oracle:Whenever you cycle another card, you gain 1 life.\nCycling {1} ({1}, Discard this card: Draw a card.)

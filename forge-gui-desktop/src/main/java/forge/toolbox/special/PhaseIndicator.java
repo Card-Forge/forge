@@ -1,6 +1,7 @@
 package forge.toolbox.special;
 
 import forge.game.phase.PhaseType;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -35,43 +36,44 @@ public class PhaseIndicator extends JPanel {
     
     /** Adds phase indicator labels to phase area JPanel container. */
     private void populatePhase() {
+        final Localizer localizer = Localizer.getInstance();
         // Constraints string, set once
         final String constraints = "w 94%!, h 7.2%, gaptop 1%, gapleft 3%";
 
-        lblUpkeep.setToolTipText("<html>Phase: Upkeep<br>Click to toggle.</html>");
+        lblUpkeep.setToolTipText(localizer.getMessage("htmlPhaseUpkeepTooltip"));
         this.add(lblUpkeep, constraints);
 
-        lblDraw.setToolTipText("<html>Phase: Draw<br>Click to toggle.</html>");
+        lblDraw.setToolTipText(localizer.getMessage("htmlPhaseDrawTooltip"));
         this.add(lblDraw, constraints);
 
-        lblMain1.setToolTipText("<html>Phase: Main 1<br>Click to toggle.</html>");
+        lblMain1.setToolTipText(localizer.getMessage("htmlPhaseMain1Tooltip"));
         this.add(lblMain1, constraints);
 
-        lblBeginCombat.setToolTipText("<html>Phase: Begin Combat<br>Click to toggle.</html>");
+        lblBeginCombat.setToolTipText(localizer.getMessage("htmlPhaseBeginCombatTooltip"));
         this.add(lblBeginCombat, constraints);
 
-        lblDeclareAttackers.setToolTipText("<html>Phase: Declare Attackers<br>Click to toggle.</html>");
+        lblDeclareAttackers.setToolTipText(localizer.getMessage("htmlPhaseDeclareAttackersTooltip"));
         this.add(lblDeclareAttackers, constraints);
 
-        lblDeclareBlockers.setToolTipText("<html>Phase: Declare Blockers<br>Click to toggle.</html>");
+        lblDeclareBlockers.setToolTipText(localizer.getMessage("htmlPhaseDeclareBlockersTooltip"));
         this.add(lblDeclareBlockers, constraints);
 
-        lblFirstStrike.setToolTipText("<html>Phase: First Strike Damage<br>Click to toggle.</html>");
+        lblFirstStrike.setToolTipText(localizer.getMessage("htmlPhaseFirstStrikeDamageTooltip"));
         this.add(lblFirstStrike, constraints);
 
-        lblCombatDamage.setToolTipText("<html>Phase: Combat Damage<br>Click to toggle.</html>");
+        lblCombatDamage.setToolTipText(localizer.getMessage("htmlPhaseCombatDamageTooltip"));
         this.add(lblCombatDamage, constraints);
 
-        lblEndCombat.setToolTipText("<html>Phase: End Combat<br>Click to toggle.</html>");
+        lblEndCombat.setToolTipText(localizer.getMessage("htmlPhaseEndCombatTooltip"));
         this.add(lblEndCombat, constraints);
 
-        lblMain2.setToolTipText("<html>Phase: Main 2<br>Click to toggle.</html>");
+        lblMain2.setToolTipText(localizer.getMessage("htmlPhaseMain2Tooltip"));
         this.add(lblMain2, constraints);
 
-        lblEndTurn.setToolTipText("<html>Phase: End Turn<br>Click to toggle.</html>");
+        lblEndTurn.setToolTipText(localizer.getMessage("htmlPhaseEndTurnTooltip"));
         this.add(lblEndTurn, constraints);
 
-        lblCleanup.setToolTipText("<html>Phase: Cleanup<br>Click to toggle.</html>");
+        lblCleanup.setToolTipText(localizer.getMessage("htmlPhaseCleanupTooltip"));
         this.add(lblCleanup, constraints);
     }
     

@@ -4,4 +4,4 @@ Types:Sorcery
 K:CARDNAME can't be countered.
 A:SP$ DestroyAll | Cost$ 1 W W U | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/supreme_verdict.jpg
-Oracle:Supreme Verdict can't be countered.\nDestroy all creatures.
+Oracle:This spell can't be countered.\nDestroy all creatures.

@@ -5,4 +5,4 @@ PT:3/2
 K:Swampwalk
 K:Forestwalk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalker_hag.jpg
-Oracle:Swampwalk, forestwalk
+Oracle:Swampwalk, forestwalk (This creature can't be blocked as long as defending player controls a Swamp or a Forest.)

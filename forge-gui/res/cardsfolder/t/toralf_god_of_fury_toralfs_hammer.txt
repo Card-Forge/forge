@@ -1,0 +1,22 @@
+Name:Toralf, God of Fury
+ManaCost:2 R R
+Types:Legendary Creature God
+PT:5/4
+K:Trample
+AlternateMode:Modal
+T:Mode$ ExcessDamage | ValidTarget$ Creature.OppCtrl,Planeswalker.OppCtrl | CombatDamage$ False | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature or planeswalker an opponent controls is dealt excess noncombat damage, NICKNAME deals damage equal to the excess to any target other than that permanent.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.NotTriggeredTarget,Player,Planeswalker.NotTriggeredTarget | TgtPrompt$ Select any target | NumDmg$ X | References$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:Trample\nWhenever a creature or planeswalker an opponent controls is dealt excess noncombat damage, Toralf deals damage equal to the excess to any target other than that permanent.
+
+ALTERNATE
+
+Name:Toralf's Hammer
+ManaCost:1 R
+Types:Legendary Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ HammerDamage | Description$ Equipped creature has "{1}{R}, {T}, Unattach CARDNAME: It deals 3 damage to any target. Return CARDNAME to it owner’s hand."
+SVar:HammerDamage:AB$ DealDamage | Cost$ 1 R T Unattach<OriginalHost/Toralf's Hammer> | NumDmg$ 3 | DamageSource$ OriginalHost | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SubAbility$ HammerCatch | SpellDescription$ ORIGINALHOST deals 1 damage to any target. Return ORIGINALHOST to its owner's hand.
+SVar:HammerCatch:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ OriginalHost
+S:Mode$ Continuous | Affected$ Card.EquippedBy+Legendary | AddPower$ 3 | Description$ Equipped creature gets +3/+0 as long as it's legendary.
+K:Equip:1 R
+Oracle:Equipped creature has "{1}{R}, {T}, Unattach Toralf's Hammer: It deals 3 damage to any target. Return Toralf's Hammer to its owner's hand."\nEquipped creature gets +3/+0 as long as it's legendary.\nEquip {1}{R}

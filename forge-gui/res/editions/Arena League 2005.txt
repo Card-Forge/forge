@@ -1,0 +1,15 @@
+[metadata]
+Code=PAL05
+Date=2005-01-01
+Name=Arena League 2005
+Type=Reprint
+
+[cards]
+1 R Plains
+2 R Island
+3 R Swamp
+4 R Mountain
+5 R Forest
+6 R Genju of the Spires
+7 R Okina Nightwatch
+8 R Skyknight Legionnaire

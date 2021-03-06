@@ -4,7 +4,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.33-SNAPSHOT</version>
+        <version>1.6.39-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui</artifactId>
@@ -54,7 +54,7 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
-            <version>4.1.43.Final</version>
+            <version>4.1.48.Final</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -78,9 +78,9 @@
             <version>1.7.22</version>
         </dependency>
         <dependency>
-            <groupId>org.mapdb</groupId>
-            <artifactId>elsa</artifactId>
-            <version>3.0.0-M7</version>
+            <groupId>org.lz4</groupId>
+            <artifactId>lz4-java</artifactId>
+            <version>1.7.1</version>
         </dependency>
     </dependencies>
 

@@ -1,7 +1,7 @@
 Name:Know Evil
 ManaCost:no cost
 Types:Scheme
-T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigEffect1 | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, until your next turn, up to one target opponent can't attack with creatures, up to one target opponent can't cast creature spells, and up to one target opponent can't cast noncreature spells. You can't target any player more than once.
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigEffect1 | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, until your next turn, up to one target opponent can't attack with creatures, up to one target opponent can't cast creature spells, and up to one target opponent can't cast noncreature spells. You can't choose any player as a target more than once.
 SVar:TrigEffect1:DB$ Effect | Name$ Know Evil Effect - No Attack | IsCurse$ True | StaticAbilities$ CantAttack | SVars$ HasTarget | ValidTgts$ Opponent | RememberObjects$ ThisTargetedPlayer | TargetUnique$ True | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target opponent who can't attack with creatures | Duration$ UntilYourNextTurn | SubAbility$ TrigEffect2 | SpellDescription$ Up to one target opponent can't cast noncreature spells until your next turn.
 SVar:CantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.RememberedPlayerCtrl | CheckSVar$ HasTarget | SVarCompare$ EQ1 | References$ HasTarget | Description$ Target opponent can't attack with creatures until your next turn.
 SVar:HasTarget:Count$RememberedSize
@@ -11,4 +11,4 @@ SVar:TrigEffect3:DB$ Effect | Name$ Know Evil Effect - No Spells | IsCurse$ True
 SVar:CantBeCastNonCreats:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.nonCreature | Caster$ Player.IsRemembered | Description$ Target player can't cast noncreature spells until your next turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:https://downloads.cardforge.org/images/cards/E01/Know Evil.full.jpg
-Oracle:When you set this scheme in motion, until your next turn, up to one target opponent can't attack with creatures, up to one target opponent can't cast creature spells, and up to one target opponent can't cast noncreature spells. You can't target any player more than once.
+Oracle:When you set this scheme in motion, until your next turn, up to one target opponent can't attack with creatures, up to one target opponent can't cast creature spells, and up to one target opponent can't cast noncreature spells. You can't choose any player as a target more than once.

@@ -2,8 +2,8 @@ Name:Estrid's Invocation
 ManaCost:2 U
 Types:Enchantment
 K:ETBReplacement:Copy:DBCopy:Optional
-SVar:DBCopy:DB$ Clone | Choices$ Enchantment.Other+YouCtrl | AILogic$ AtLeast1 | AddTriggers$ InvocationExileUpkeep | AddSVars$ InvocationDBReturn,InvocationTrigExile,InvocationExileUpkeep | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any enchantment you control, except it gains "At the beginning of your upkeep, you may exile this enchantment. If you do, return it to the battlefield under its owner's control."
+SVar:DBCopy:DB$ Clone | Choices$ Enchantment.Other+YouCtrl | AILogic$ AtLeast1 | AddTriggers$ InvocationExileUpkeep | AddSVars$ InvocationDBReturn,InvocationTrigExile,InvocationExileUpkeep | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of an enchantment you control, except it has "At the beginning of your upkeep, you may exile this enchantment. If you do, return it to the battlefield under its owner's control."
 SVar:InvocationExileUpkeep:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ InvocationTrigExile | OptionalDecider$ You | IsPresent$ Card.Self | TriggerDescription$ At the beginning of your upkeep you may exile this enchantment. If you do, return it to the battlefield under it's owner's control.
 SVar:InvocationTrigExile:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | SubAbility$ InvocationDBReturn
 SVar:InvocationDBReturn:DB$ ChangeZone | Defined$ CorrectedSelf | Origin$ All | Destination$ Battlefield | GainControl$ True
-Oracle:You may have Estrid's Invocation enter the battlefield as a copy of any enchantment you control, except it gains "At the beginning of your upkeep, you may exile this enchantment. If you do, return it to the battlefield under its owner's control."
+Oracle:You may have Estrid's Invocation enter the battlefield as a copy of an enchantment you control, except it has "At the beginning of your upkeep, you may exile this enchantment. If you do, return it to the battlefield under its owner's control."

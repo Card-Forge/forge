@@ -2,7 +2,6 @@ Name:Returned Centaur
 ManaCost:3 B
 Types:Creature Zombie Centaur
 PT:2/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player puts the top four cards of their library into their graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player mills four cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player
-SVar:Picture:http://www.wizards.com/global/images/magic/general/returned_centaur.jpg
-Oracle:When Returned Centaur enters the battlefield, target player puts the top four cards of their library into their graveyard.
+Oracle:When Returned Centaur enters the battlefield, target player mills four cards.

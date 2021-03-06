@@ -1,0 +1,16 @@
+[metadata]
+Code=POGW
+Date=2016-01-23
+Name=Oath of the Gatewatch Promos
+Type=Reprint
+
+[cards]
+3 R Endbringer
+20 U Immolating Glare
+29 R Munda's Vanguard
+43 R Deepfathom Skulker
+68 R Dread Defiler
+110 R Goblin Dark-Dwellers
+119 R Tyrant of Valakut
+132 R Gladehart Cavalry
+155 R Jori En, Ruin Diver

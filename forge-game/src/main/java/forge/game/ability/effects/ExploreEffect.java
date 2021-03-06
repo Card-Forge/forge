@@ -7,11 +7,12 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CounterType;
+import forge.game.card.CardZoneTable;
+import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
-import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
@@ -19,8 +20,6 @@ import forge.util.Localizer;
 import java.util.List;
 
 public class ExploreEffect extends SpellAbilityEffect {
-
-    
 
     /* (non-Javadoc)
      * @see forge.game.ability.SpellAbilityEffect#getStackDescription(forge.game.spellability.SpellAbility)
@@ -44,30 +43,35 @@ public class ExploreEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        // check if only the activating player counts
-        final Player pl = sa.getActivatingPlayer();
-        final PlayerController pc = pl.getController();
-        final Game game = pl.getGame();
+        final Game game = sa.getHostCard().getGame();
 
         GameEntityCounterTable table = new GameEntityCounterTable();
+        final CardZoneTable triggerList = new CardZoneTable();
         for (final Card c : getTargetCards(sa)) {
             // revealed land card
             boolean revealedLand = false;
+            final Player pl = c.getController();
             CardCollection top = pl.getTopXCardsFromLibrary(1);
             if (!top.isEmpty()) {
+                Card movedCard = null;
                 game.getAction().reveal(top, pl, false, Localizer.getInstance().getMessage("lblRevealedForExplore") + " - ");
                 final Card r = top.getFirst();
+                final Zone originZone = game.getZoneOf(r);
                 if (r.isLand()) {
-                    game.getAction().moveTo(ZoneType.Hand, r, sa);
+                    movedCard = game.getAction().moveTo(ZoneType.Hand, r, sa);
                     revealedLand = true;
                 } else {
                     // TODO find better way to choose optional send away
-                    final Card choosen = pc.chooseSingleCardForZoneChange(
+                    final Card choosen = pl.getController().chooseSingleCardForZoneChange(
                             ZoneType.Graveyard, Lists.newArrayList(ZoneType.Library), sa, top, null,
                             Localizer.getInstance().getMessage("lblPutThisCardToYourGraveyard"), true, pl);
                     if (choosen != null) {
-                        game.getAction().moveTo(ZoneType.Graveyard, choosen, sa);
+                        movedCard = game.getAction().moveTo(ZoneType.Graveyard, choosen, sa);
                     }
+                }
+
+                if (originZone != null && movedCard != null) {
+                    triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
                 }
             }
             if (!revealedLand) {
@@ -78,7 +82,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                 // if the card is not more in the game anymore
                 // this might still return true but its no problem
                 if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithTimestamp(c)) {
-                    c.addCounter(CounterType.P1P1, 1, pl, true, table);
+                    c.addCounter(CounterEnumType.P1P1, 1, pl, true, table);
                 }
             }
 
@@ -86,6 +90,7 @@ public class ExploreEffect extends SpellAbilityEffect {
             game.getTriggerHandler().runTrigger(TriggerType.Explores, AbilityKey.mapFromCard(c), false);
         }
         table.triggerCountersPutAll(game);
+        triggerList.triggerChangesZoneAll(game);
     }
 
 }

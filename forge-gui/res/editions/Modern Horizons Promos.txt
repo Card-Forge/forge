@@ -1,0 +1,8 @@
+[metadata]
+Code=PMH1
+Date=2019-06-14
+Name=Modern Horizons Promos
+Type=Reprint
+
+[cards]
+1 R Astral Drift

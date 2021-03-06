@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Creature Dwarf Warrior
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | Revolt$ True | TriggerDescription$ Revolt — When CARDNAME enters the battlefield, if a permanent you controlled left the battlefield this turn, destroy target tapped creature an opponent controls.
-SVar:TrigDestroy:DB$Destroy | ValidTgts$ Creature.tapped+OppCtrl | TgtPrompt$ Select target tapped creature an opponent controls
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.tapped+OppCtrl | TgtPrompt$ Select target tapped creature an opponent controls
 SVar:Picture:http://www.wizards.com/global/images/magic/general/countless_gears_renegade.jpg
 Oracle:Revolt — When Deadeye Harpooner enters the battlefield, if a permanent you controlled left the battlefield this turn, destroy target tapped creature an opponent controls.

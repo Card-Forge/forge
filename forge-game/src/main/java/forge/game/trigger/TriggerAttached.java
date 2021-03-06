@@ -46,7 +46,7 @@ public class TriggerAttached extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerAttached(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerAttached(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -76,9 +76,9 @@ public class TriggerAttached extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Source, getFromRunParams(AbilityKey.AttachSource));
-        sa.setTriggeringObject(AbilityKey.Target, getFromRunParams(AbilityKey.AttachTarget));
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObject(AbilityKey.Source, runParams.get(AbilityKey.AttachSource));
+        sa.setTriggeringObject(AbilityKey.Target, runParams.get(AbilityKey.AttachTarget));
     }
 
     @Override

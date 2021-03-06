@@ -41,6 +41,10 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             }
         } else if ("GideonBlackblade".equals(aiLogic)) {
             return SpecialCardAi.GideonBlackblade.consider(ai, sa);
+        } else if ("SoulEcho".equals(aiLogic)) {
+            return doTriggerAINoCost(ai, sa, true);
+        } else if ("Always".equals(aiLogic)) {
+            return true;
         }
         return false;
     }
@@ -55,12 +59,12 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
      */
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return canPlayAI(aiPlayer, sa);
+        return checkApiLogic(aiPlayer, sa);
     }
 
     @Override
     protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        if ("CombustibleGearhulk".equals(sa.getParam("AILogic"))) {
+        if ("CombustibleGearhulk".equals(sa.getParam("AILogic")) || "SoulEcho".equals(sa.getParam("AILogic"))) {
             for (final Player p : aiPlayer.getOpponents()) {
                 if (p.canBeTargetedBy(sa)) {
                     sa.resetTargets();
@@ -180,25 +184,25 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             Card imprinted = host.getImprintedCards().getFirst();
             int dmg = imprinted.getCMC();
             Player owner = imprinted.getOwner();
-            
+
             //useless cards in hand
             if (imprinted.getName().equals("Bridge from Below") ||
                     imprinted.getName().equals("Haakon, Stromgald Scourge")) {
                 return allow;
             }
-                        
+
             //bad cards when are thrown from the library to the graveyard, but Yixlid can prevent that
             if (!player.getGame().isCardInPlay("Yixlid Jailer") && (
                     imprinted.getName().equals("Gaea's Blessing") ||
                     imprinted.getName().equals("Narcomoeba"))) {
                 return allow;
             }
-            
+
             // milling against Tamiyo is pointless
             if (owner.isCardInCommand("Emblem - Tamiyo, the Moon Sage")) {
                 return allow;
             }
-            
+
             // milling a land against Gitrog result in card draw
             if (imprinted.isLand() && owner.isCardInPlay("The Gitrog Monster")) {
                 // try to mill owner
@@ -207,19 +211,19 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
                 }
                 return allow;
             }
-            
+
             // milling a creature against Sidisi result in more creatures
             if (imprinted.isCreature() && owner.isCardInPlay("Sidisi, Brood Tyrant")) {
                 return allow;
             }
 
-            //if Iona does prevent from casting, allow it to draw 
+            //if Iona does prevent from casting, allow it to draw
             for (final Card io : player.getCardsIn(ZoneType.Battlefield, "Iona, Shield of Emeria")) {
                 if (CardUtil.getColors(imprinted).hasAnyColor(MagicColor.fromName(io.getChosenColor()))) {
                     return allow;
                 }
             }
-            
+
             if (dmg == 0) {
                 // If CMC = 0, mill it!
                 return deny;
@@ -244,7 +248,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             SpellAbility counterSA = spells.get(0), tokenSA = spells.get(1);
 
             // check for something which might prevent the counters to be placed on host
-            if (!host.canReceiveCounters(CounterType.P1P1)) {
+            if (!host.canReceiveCounters(CounterEnumType.P1P1)) {
                 return tokenSA;
             }
 
@@ -256,7 +260,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             // need a copy for one with extra +1/+1 counter boost,
             // without causing triggers to run
             final Card copy = CardUtil.getLKICopy(host);
-            copy.setCounters(CounterType.P1P1, copy.getCounters(CounterType.P1P1) + n);
+            copy.setCounters(CounterEnumType.P1P1, copy.getCounters(CounterEnumType.P1P1) + n);
             copy.setZone(host.getZone());
 
             // if host would put into the battlefield attacking
@@ -281,10 +285,10 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             // TODO check for trigger to turn token ETB into +1/+1 counter for host
             // TODO check for trigger to turn token ETB into damage or life loss for opponent
             // in this cases Token might be prefered even if they would not survive
-            final Card tokenCard = TokenAi.spawnToken(player, tokenSA, true);
+            final Card tokenCard = TokenAi.spawnToken(player, tokenSA);
 
-            // Token would not survive 
-            if (tokenCard.getNetToughness() < 1) {
+            // Token would not survive
+            if (!tokenCard.isCreature() || tokenCard.getNetToughness() < 1) {
                 return counterSA;
             }
 
@@ -328,6 +332,10 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
 
             int bestGuessDamage = totalCMC * 3 / revealedCards.size();
             return life <= bestGuessDamage ? spells.get(0) : spells.get(1);
+        }  else if ("SoulEcho".equals(logic)) {
+            Player target = sa.getTargetingPlayer();
+            int life = target.getLife();
+            return life < 10 ? spells.get(0) : Aggregates.random(spells);
         } else if ("Pump".equals(logic) || "BestOption".equals(logic)) {
             List<SpellAbility> filtered = Lists.newArrayList();
             // filter first for the spells which can be done
@@ -336,7 +344,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
                     filtered.add(sp);
                 }
             }
-            
+
             // TODO find better way to check
             if (!filtered.isEmpty()) {
                 return filtered.get(0);
@@ -344,6 +352,8 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
         } else if ("Riot".equals(logic)) {
             SpellAbility counterSA = spells.get(0), hasteSA = spells.get(1);
             return preferHasteForRiot(sa, player) ? hasteSA : counterSA;
+        } else if ("CrawlingBarrens".equals(logic)) {
+            return SpecialCardAi.CrawlingBarrens.considerAnimating(player, sa, spells);
         }
         return spells.get(0);   // return first choice if no logic found
     }
@@ -362,7 +372,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
         game.getAction().checkStaticAbilities(false);
 
         // can't gain counters, use Haste
-        if (!copy.canReceiveCounters(CounterType.P1P1)) {
+        if (!copy.canReceiveCounters(CounterEnumType.P1P1)) {
             return true;
         }
 

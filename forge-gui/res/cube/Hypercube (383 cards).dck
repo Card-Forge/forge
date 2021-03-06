@@ -2,12 +2,12 @@
 Name=Hypercube (383 cards)
 [main]
 1 Abbot of Keral Keep|ORI
-1 Abrade|HOU
+1 Abrade|AKR
 1 Abrupt Decay|MM3
 1 Acidic Slime|M13
 1 Adanto Vanguard|XLN
-1 Adventurous Impulse|DOM
-1 Ahn-Crop Crasher|AKH
+1 Adventurous Impulse|IKO
+1 Ahn-Crop Crasher|AKR
 1 Ancient Tomb|UMA
 1 Angel of Invention|KLD
 1 Arbor Elf|A25
@@ -22,13 +22,13 @@ Name=Hypercube (383 cards)
 1 Avacyn's Pilgrim|MM3
 1 Azorius Signet|MM3
 1 Badlands|VMA
-1 Baleful Strix|EMA
+1 Baleful Strix|2XM
 1 Bayou|VMA
 1 Benalish Marshal|DOM
 1 Birds of Paradise|CN2
 1 Bitterblossom|UMA
 1 Blackcleave Cliffs|SOM
-1 Blade Splicer|MM3
+1 Blade Splicer|2XM
 1 Blood Artist|EMA
 1 Blood Crypt|RNA
 1 Bloodbraid Elf|EMA
@@ -41,13 +41,13 @@ Name=Hypercube (383 cards)
 1 Brimaz, King of Oreskos|BNG
 1 Burst Lightning|MM2
 1 Canopy Vista|EXP
-1 Canyon Slough|AKH
+1 Canyon Slough|AKR
 1 Carnage Tyrant|XLN
 1 Carrion Feeder|MH1
-1 Cascade Bluffs|A25
-1 Cast Out|AKH
+1 Cascade Bluffs|2XM
+1 Cast Out|AKR
 1 Celestial Colonnade|UMA
-1 Censor|AKH
+1 Censor|AKR
 1 Chain Lightning|MPS_AKH
 1 Champion of the Parish|ISD
 1 Chandra, Flamecaller|OGW
@@ -59,10 +59,10 @@ Name=Hypercube (383 cards)
 1 Coercive Portal|VMA
 1 Collective Brutality|EMN
 1 Commence the Endgame|WAR
-1 Commit // Memory|AKH
+1 Commit // Memory|AKR
 1 Condescend|IMA
 1 Consecrated Sphinx|IMA
-1 Council's Judgment|CNS
+1 Council's Judgment|2XM
 1 Counterspell|A25
 1 Courser of Kruphix|A25
 1 Craterhoof Behemoth|MM3
@@ -71,7 +71,7 @@ Name=Hypercube (383 cards)
 1 Cruel Celebrant|WAR
 1 Cryptic Command|IMA
 1 Damnation|MPS_AKH
-1 Dark Confidant|MM2
+1 Dark Confidant|2XM
 1 Dauntless Bodyguard|DOM
 1 Daze|MPS_AKH
 1 Deathrite Shaman|EMA
@@ -86,14 +86,14 @@ Name=Hypercube (383 cards)
 1 Doom Blade|IMA
 1 Doomed Traveler|IMA
 1 Dragonskull Summit|XLN
-1 Dread Wanderer|AKH
+1 Dread Wanderer|AKR
 1 Dreadbore|RTR
 1 Dreadhorde Arcanist|WAR
 1 Dreadhorde Butcher|WAR
 1 Dromoka's Command|DTK
 1 Dusk Legion Zealot|A25
 1 Duskwatch Recruiter|SOI
-1 Earthshaker Khenra|HOU
+1 Earthshaker Khenra|AKR
 1 Electrolyze|IMA
 1 Elesh Norn, Grand Cenobite|IMA
 1 Elspeth, Knight-Errant|MMA
@@ -104,14 +104,14 @@ Name=Hypercube (383 cards)
 1 Eternal Witness|UMA
 1 Evolution Sage|WAR
 1 Fact or Fiction|MH1
-1 Falkenrath Aristocrat|MM3
+1 Falkenrath Aristocrat|2XM
 1 Falkenrath Gorger|SOI
 1 Farseek|M13
-1 Fatal Push|AER
+1 Fatal Push|2XM
 1 Fblthp, the Lost|WAR
 1 Fertile Ground|LRW
-1 Fetid Heath|A25
-1 Fetid Pools|AKH
+1 Fetid Heath|2XM
+1 Fetid Pools|AKR
 1 Fiery Confluence|C15
 1 Fiery Islet|MH1
 1 Figure of Destiny|MMA
@@ -119,8 +119,8 @@ Name=Hypercube (383 cards)
 1 Fire // Ice|UMA
 1 Fireblast|VMA
 1 Flesh Carver|C14
-1 Flickerwisp|MM3
-1 Flooded Grove|A25
+1 Flickerwisp|2XM
+1 Flooded Grove|2XM
 1 Flooded Strand|EXP
 1 Force of Despair|MH1
 1 Force of Negation|MH1
@@ -128,7 +128,7 @@ Name=Hypercube (383 cards)
 1 Force of Virtue|MH1
 1 Force Spike|7ED
 1 Forked Bolt|ROE
-1 Forsake the Worldly|AKH
+1 Forsake the Worldly|AKR
 1 Fountain of Renewal|M19
 1 Gaea's Cradle|USG
 1 Garruk Wildspeaker|M11
@@ -140,10 +140,10 @@ Name=Hypercube (383 cards)
 1 Glen Elendra Archmage|UMA
 1 Glimmer of Genius|KLD
 1 Glint-Sleeve Siphoner|AER
-1 Glorybringer|AKH
+1 Glorybringer|AKR
 1 Go for the Throat|MBS
 1 Goblin Chainwhirler|DOM
-1 Goblin Guide|MM3
+1 Goblin Guide|2XM
 1 Goblin Rabblemaster|M15
 1 God-Eternal Kefnet|WAR
 1 Godless Shrine|RNA
@@ -152,7 +152,7 @@ Name=Hypercube (383 cards)
 1 Greater Gargadon|MMA
 1 Green Sun's Zenith|EMA
 1 Grim Initiate|WAR
-1 Grim Lavamancer|M12
+1 Grim Lavamancer|2XM
 1 Gruul Spellbreaker|RNA
 1 Gutterbones|RNA
 1 Hallowed Fountain|RNA
@@ -172,8 +172,8 @@ Name=Hypercube (383 cards)
 1 Inferno Titan|M12
 1 Inquisition of Kozilek|MM3
 1 Inspiring Vantage|KLD
-1 Irrigated Farmland|AKH
-1 Izzet Charm|MM3
+1 Irrigated Farmland|AKR
+1 Izzet Charm|2XM
 1 Jace, the Mind Sculptor|VMA
 1 Jace, Vryn's Prodigy|ORI
 1 Jadelight Ranger|RIX
@@ -183,7 +183,7 @@ Name=Hypercube (383 cards)
 1 Karn, Scion of Urza|DOM
 1 Kessig Wolf Run|ISD
 1 Kitchen Finks|UMA
-1 Kitesail Freebooter|XLN
+1 Kitesail Freebooter|M21
 1 Knight of Autumn|GRN
 1 Kolaghan's Command|DTK
 1 Kytheon, Hero of Akros|ORI
@@ -201,7 +201,7 @@ Name=Hypercube (383 cards)
 1 Llanowar Elves|DOM
 1 Llanowar Tribe|MH1
 1 Looter il-Kor|TSP
-1 Lotus Cobra|IMA
+1 Lotus Cobra|ZNR
 1 Magma Jet|MM3
 1 Mana Confluence|EXP
 1 Mana Leak|IMA
@@ -209,7 +209,7 @@ Name=Hypercube (383 cards)
 1 Mardu Woe-Reaper|FRF
 1 Marsh Flats|MM3
 1 Massacre Girl|WAR
-1 Massacre Wurm|MBS
+1 Massacre Wurm|M21
 1 Memory Lapse|EMA
 1 Mesmerizing Benthid|RNA
 1 Midnight Reaper|GRN
@@ -221,24 +221,24 @@ Name=Hypercube (383 cards)
 1 Monastery Swiftspear|IMA
 1 Mother of Runes|EMA
 1 Mulldrifter|MM2
-1 Myr Battlesphere|SOM
+1 Myr Battlesphere|2XM
 1 Mystic Confluence|C15
 1 Natural Order|EMA
 1 Nature's Lore|5ED
 1 Nicol Bolas, Dragon-God|WAR
-1 Nicol Bolas, God-Pharaoh|HOU
-1 Noble Hierarch|UMA
+1 Nicol Bolas, God-Pharaoh|AKR
+1 Noble Hierarch|2XM
 1 Oath of Nissa|OGW
 1 Ophiomancer|C13
 1 Opposition|MPS_AKH
-1 Opt|DOM
+1 Opt|M21
 1 Oracle of Mul Daya|ZEN
 1 Orzhov Signet|MM3
 1 Overgrown Tomb|GRN
 1 Pack Rat|RTR
-1 Path to Exile|MM3
+1 Path to Exile|2XM
 1 Pelt Collector|GRN
-1 Phyrexian Revoker|M15
+1 Phyrexian Revoker|2XM
 1 Pia and Kiran Nalaar|ORI
 1 Pia Nalaar|KLD
 1 Plague Engineer|MH1
@@ -253,7 +253,7 @@ Name=Hypercube (383 cards)
 1 Prismatic Vista|MH1
 1 Pteramander|RNA
 1 Rakdos Signet|MM3
-1 Ramunap Excavator|HOU
+1 Ramunap Excavator|AKR
 1 Rancor|A25
 1 Ransack the Lab|MH1
 1 Ravenous Chupacabra|A25
@@ -271,7 +271,7 @@ Name=Hypercube (383 cards)
 1 Sakura-Tribe Elder|CNS
 1 Savannah|VMA
 1 Scalding Tarn|MM3
-1 Scattered Groves|AKH
+1 Scattered Groves|AKR
 1 Scrapheap Scrounger|KLD
 1 Scrubland|VMA
 1 Search for Azcanta|XLN
@@ -283,7 +283,7 @@ Name=Hypercube (383 cards)
 1 Shambling Vent|BFZ
 1 Shardless Agent|EMA
 1 Shelldock Isle|LRW
-1 Sheltered Thicket|AKH
+1 Sheltered Thicket|AKR
 1 Shrine of Burning Rage|NPH
 1 Siege-Gang Commander|DOM
 1 Silent Clearing|MH1
@@ -292,14 +292,14 @@ Name=Hypercube (383 cards)
 1 Smoldering Marsh|EXP
 1 Smuggler's Copter|KLD
 1 Snapcaster Mage|UMA
-1 Solemn Simulacrum|MPS_KLD
-1 Sorcerous Spyglass|XLN
+1 Solemn Simulacrum|M21
+1 Sorcerous Spyglass|ELD
 1 Sorin, Solemn Visitor|KTK
-1 Soul-Scar Mage|AKH
+1 Soul-Scar Mage|AKR
 1 Spear of Heliod|THS
 1 Spell Pierce|XLN
 1 Spell Queller|EMN
-1 Spellskite|MM2
+1 Spellskite|2XM
 1 Spirebluff Canal|KLD
 1 Sram's Expertise|AER
 1 Steam Vents|GRN
@@ -313,11 +313,11 @@ Name=Hypercube (383 cards)
 1 Sulfuric Vortex|EMA
 1 Sunbaked Canyon|MH1
 1 Sunken Hollow|EXP
-1 Sunken Ruins|EXP
+1 Sunken Ruins|2XM
 1 Supreme Verdict|IMA
-1 Supreme Will|HOU
+1 Supreme Will|AKR
 1 Surrak, the Hunt Caller|DTK
-1 Sword of Fire and Ice|MPS_KLD
+1 Sword of Fire and Ice|2XM
 1 Swords to Plowshares|A25
 1 Sylvan Library|EMA
 1 Taiga|VMA
@@ -330,30 +330,30 @@ Name=Hypercube (383 cards)
 1 Thalia, Heretic Cathar|EMN
 1 The Eldest Reborn|DOM
 1 The Flame of Keld|DOM
-1 The Scarab God|HOU
+1 The Scarab God|AKR
 1 Thing in the Ice|SOI
-1 Thoughtseize|IMA
-1 Thragtusk|MM3
-1 Thrashing Brontodon|RIX
+1 Thoughtseize|AKR
+1 Thragtusk|2XM
+1 Thrashing Brontodon|M21
 1 Thundermaw Hellkite|IMA
 1 Timely Reinforcements|M12
 1 Tireless Tracker|SOI
 1 Tithe Taker|RNA
-1 Toxic Deluge|EMA
+1 Toxic Deluge|2XM
 1 Treasure Cruise|UMA
 1 Tropical Island|VMA
 1 Tundra|VMA
-1 Twilight Mire|A25
+1 Twilight Mire|2XM
 1 Ugin, the Spirit Dragon|FRF
 1 Ultimate Price|DTK
 1 Umezawa's Jitte|BOK
 1 Unbreakable Formation|RNA
 1 Underground Sea|VMA
 1 Unexpectedly Absent|EMA
-1 Unsubstantiate|EMN
+1 Unsubstantiate|M21
 1 Vendilion Clique|A25
 1 Venerated Loxodon|GRN
-1 Vengevine|UMA
+1 Vengevine|2XM
 1 Venser, Shaper Savant|MM3
 1 Verdant Catacombs|MM3
 1 Verdurous Gearhulk|MPS_KLD
@@ -362,7 +362,7 @@ Name=Hypercube (383 cards)
 1 Volcanic Island|VMA
 1 Vraska's Contempt|XLN
 1 Vraska, Relic Seeker|XLN
-1 Walking Ballista|AER
+1 Walking Ballista|2XM
 1 Wall of Omens|EMA
 1 Wasteland|EMA
 1 Watcher for Tomorrow|MH1
@@ -377,9 +377,9 @@ Name=Hypercube (383 cards)
 1 Wizard's Lightning|DOM
 1 Wooded Foothills|EXP
 1 Woodland Cemetery|DOM
-1 Wrath of God|MPS_AKH
+1 Wrath of God|AKR
 1 Wretched Confluence|CMA
-1 Wurmcoil Engine|MPS_KLD
+1 Wurmcoil Engine|2XM
 1 Yawgmoth, Thran Physician|MH1
 1 Young Pyromancer|UMA
 1 Zulaport Cutthroat|A25

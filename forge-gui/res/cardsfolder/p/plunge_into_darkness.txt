@@ -16,4 +16,4 @@ SVar:LifeAmountX:Count$YourLifeTotal/LimitMin.0
 SVar:AFLifeLost:Number$0
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plunge_into_darkness.jpg
-Oracle:Choose one —\n• Sacrifice any number of creatures, then you gain 3 life for each sacrificed creature.\n• Pay X life, then look at the top X cards of your library. Put one of those cards into your hand and exile the rest.\nEntwine {B} (Choose both if you pay the entwine cost.)
+Oracle:Choose one —\n• Sacrifice any number of creatures. You gain 3 life for each sacrificed creature.\n• Pay X life, then look at the top X cards of your library. Put one of those cards into your hand and exile the rest.\nEntwine {B} (Choose both if you pay the entwine cost.)

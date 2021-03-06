@@ -86,7 +86,7 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
 
                 for (int i = 1; i < piles; i++) {
                     int size = pool.size();
-                    CardCollectionView pile = p.getController().chooseCardsForEffect(pool, sa, Localizer.getInstance().getMessage("lblChooseCardsInTargetPile", String.valueOf(i)), 0, size, false);
+                    CardCollectionView pile = p.getController().chooseCardsForEffect(pool, sa, Localizer.getInstance().getMessage("lblChooseCardsInTargetPile", String.valueOf(i)), 0, size, false, null);
                     pileList.add(pile);
                     pool.removeAll(pile);
                 }

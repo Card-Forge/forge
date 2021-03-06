@@ -40,7 +40,7 @@ public class TriggerBlockersDeclared extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerBlockersDeclared(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerBlockersDeclared(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -53,8 +53,8 @@ public class TriggerBlockersDeclared extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Blockers, AbilityKey.Attackers);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Blockers, AbilityKey.Attackers);
     }
 
     @Override

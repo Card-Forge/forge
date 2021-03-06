@@ -3,7 +3,8 @@ ManaCost:3 W
 Types:Creature Elephant
 PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control a Forest.
-A:AB$ Pump | Cost$ G | KW$ Trample | SpellDescription$ CARDNAME gets trample until end of turn.
+A:AB$ Pump | Cost$ G | Defined$ Self | KW$ Trample | SpellDescription$ CARDNAME gets trample until end of turn.
 SVar:X:Count$Valid Forest.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/prized_elephant.jpg
-Oracle:Prized Elephant gets +1/+1 as long as you control a Forest.\n{G}: Prized Elephant gains trample until end of turn. (It can deal excess combat damage to defending player or planeswalker while attacking.)
+DeckNeeds:Color$Green
+SVar:BuffedBy:Forest
+Oracle:Prized Elephant gets +1/+1 as long as you control a Forest.\n{G}: Prized Elephant gains trample until end of turn. (It can deal excess combat damage to the player or planeswalker it's attacking.)

@@ -73,7 +73,7 @@ public enum DeckFormat {
         private final Set<String> bannedCards = ImmutableSet.of(
                 "Ancestral Recall", "Balance", "Black Lotus", "Black Vise", "Channel", "Chaos Orb", "Contract From Below", "Counterbalance", "Darkpact", "Demonic Attorney", "Demonic Tutor", "Earthcraft", "Edric, Spymaster of Trest", "Falling Star",
                 "Fastbond", "Flash", "Goblin Recruiter", "Grindstone", "Hermit Druid", "Imperial Seal", "Jeweled Bird", "Karakas", "Library of Alexandria", "Mana Crypt", "Mana Drain", "Mana Vault", "Metalworker", "Mind Twist", "Mishra's Workshop",
-                "Mox Emerald", "Mox Jet", "Mox Pearl", "Mox Ruby", "Mox Sapphire", "Necropotence", "Shahrazad", "Skullclamp", "Sol Ring", "Strip Mine", "Survival of the Fittest", "Sword of Body and Mind", "Time Vault", "Time Walk", "Timetwister",
+                "Mox Emerald", "Mox Jet", "Mox Pearl", "Mox Ruby", "Mox Sapphire", "Najeela, the Blade Blossom", "Necropotence", "Shahrazad", "Skullclamp", "Sol Ring", "Strip Mine", "Survival of the Fittest", "Sword of Body and Mind", "Time Vault", "Time Walk", "Timetwister",
                 "Timmerian Fiends", "Tolarian Academy", "Umezawa's Jitte", "Vampiric Tutor", "Wheel of Fortune", "Yawgmoth's Will");
 
         @Override
@@ -375,9 +375,10 @@ public enum DeckFormat {
 
     public static Integer canHaveSpecificNumberInDeck(final IPaperCard card) {
         // Ideally, this would be parsed during card parsing and set this value
-        if (Iterables.contains(card.getRules().getMainPart().getKeywords(),
-                "A deck can have up to seven cards named CARDNAME.")) {
+        if (card.getRules().hasKeyword("A deck can have up to seven cards named CARDNAME.")) {
             return 7;
+        } else if (card.getRules().hasKeyword("Megalegendary")) {
+            return 1;
         }
 
         return null;
@@ -462,6 +463,9 @@ public enum DeckFormat {
         }
         if (this.equals(DeckFormat.Brawl)) {
             return rules.canBeBrawlCommander();
+        }
+        if (this.equals(DeckFormat.TinyLeaders)) {
+            return rules.canBeTinyLeadersCommander();
         }
         return rules.canBeCommander();
     }

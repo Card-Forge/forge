@@ -4,10 +4,11 @@ Types:Artifact
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, you may exile target land you control.
 SVar:TrigExile:DB$ ChangeZone | Imprint$ True | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select a target land you control | AILogic$ ExtraplanarLens
 T:Mode$ TapsForMana | ValidCard$ Land.sharesNameWith Imprinted | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a land with the same name as the exiled card is tapped for mana, its controller adds one mana of any type that land produced.
-SVar:TrigMana:DB$ ManaReflected | Valid$ Defined.Triggered | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ TriggeredPlayer
+SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ TriggeredCardController
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+T:Mode$ ChangesZone | ValidCard$ Card.IsImprinted+ExiledWithSource | Origin$ Exile | Execute$ DBForget | Static$ True
+SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
 SVar:NeedsToPlay:Land.Basic+YouCtrl
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/extraplanar_lens.jpg
 Oracle:Imprint — When Extraplanar Lens enters the battlefield, you may exile target land you control.\nWhenever a land with the same name as the exiled card is tapped for mana, its controller adds one mana of any type that land produced.

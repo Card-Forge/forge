@@ -4,5 +4,5 @@ Types:Creature Spirit Pirate
 PT:1/1
 K:Flash
 K:Flying
-A:AB$ Draw | Cost$ 3 U | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card.
+A:AB$ Draw | Cost$ 3 U | NumCards$ 1 | Defined$ You | AILogic$ AlwaysAtOppEOT | SpellDescription$ Draw a card.
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\n{3}{U}: Draw a card.

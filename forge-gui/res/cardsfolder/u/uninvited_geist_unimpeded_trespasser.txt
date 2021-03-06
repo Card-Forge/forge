@@ -18,5 +18,5 @@ Types:Creature Spirit
 PT:3/3
 K:Unblockable
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unimpeded_trespasser.jpg
-Oracle:Unimpeded Tresspasser can't be blocked.
+Oracle:Unimpeded Trespasser can't be blocked.
 

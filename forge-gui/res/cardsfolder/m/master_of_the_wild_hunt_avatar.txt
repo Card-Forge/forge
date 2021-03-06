@@ -2,10 +2,10 @@ Name:Master of the Wild Hunt Avatar
 ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+1/+3
-A:AB$ GenericChoice | Cost$ 2 G | Choices$ Wolf,Antelope,Cat,Rhino | ActivationZone$ Command | AtRandom$ True | StackDescription$ SpellDescription | SpellDescription$ Put a green creature token onto the battlefield that's a 2/2 Wolf, a 2/3 Antelope with forestwalk, a 3/2 Cat with shroud, or a 4/4 Rhino with trample, chosen at random.
+A:AB$ GenericChoice | Cost$ 2 G | Choices$ Wolf,Antelope,Cat,Rhino | ActivationZone$ Command | AtRandom$ True | StackDescription$ SpellDescription | SpellDescription$ Create a green creature token that's a 2/2 Wolf, a 2/3 Antelope with forestwalk, a 3/2 Cat with shroud, or a 4/4 Rhino with trample, chosen at random.
 SVar:Wolf:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You | SpellDescription$ Wolf
 SVar:Antelope:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_3_antelope_forestwalk | TokenOwner$ You | SpellDescription$ Antelope
 SVar:Cat:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_2_cat_shroud | TokenOwner$ You | SpellDscription$ Cat
 SVar:Rhino:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_rhino_trample | TokenOwner$ You | SpellDescription$ Rhino
 SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Master of the Wild Hunt Avatar.full.jpg
-Oracle:Hand +1, life +3\n{2}{G}: Put a green creature token onto the battlefield that's a 2/2 Wolf, a 2/3 Antelope with forestwalk, a 3/2 Cat with shroud, or a 4/4 Rhino with trample, chosen at random.
+Oracle:Hand +1, life +3\n{2}{G}: Create a green creature token that's a 2/2 Wolf, a 2/3 Antelope with forestwalk, a 3/2 Cat with shroud, or a 4/4 Rhino with trample, chosen at random.

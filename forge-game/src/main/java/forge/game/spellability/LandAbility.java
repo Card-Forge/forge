@@ -17,40 +17,79 @@
  */
 package forge.game.spellability;
 
+import org.apache.commons.lang3.ObjectUtils;
+
+import forge.card.CardStateName;
+import forge.card.mana.ManaCost;
 import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
+import forge.game.zone.ZoneType;
 
 public class LandAbility extends Ability {
 
     public LandAbility(Card sourceCard, Player p, StaticAbility mayPlay) {
-        super(sourceCard, (Cost)null);
+        super(sourceCard, new Cost(ManaCost.NO_COST, false));
         setActivatingPlayer(p);
         setMayPlay(mayPlay);
     }
     public LandAbility(Card sourceCard) {
         this(sourceCard, sourceCard.getController(), null);
     }
+
+    public boolean canPlay(Card newHost) {
+        final Player p = getActivatingPlayer();
+        return p.canPlayLand(newHost, false, this);
+    }
+
     @Override
     public boolean canPlay() {
-        final Card land = this.getHostCard();
+        Card land = this.getHostCard();
         final Player p = this.getActivatingPlayer();
+
+        if (this.getCardState() != null && land.getCurrentStateName() != this.getCardStateName()) {
+            if (!land.isLKI()) {
+                land = CardUtil.getLKICopy(land);
+            }
+            CardStateName stateName = getCardStateName();
+            if (!land.hasState(stateName)) {
+                land.addAlternateState(stateName, false);
+                land.getState(stateName).copyFrom(getHostCard().getState(stateName), true);
+            }
+
+            land.setState(stateName, false);
+
+            // need to reset CMC
+            land.setLKICMC(-1);
+            land.setLKICMC(land.getCMC());
+        }
 
         return p.canPlayLand(land, false, this);
     }
     @Override
     public void resolve() {
-        getActivatingPlayer().playLandNoCheck(getHostCard());
+        getHostCard().setSplitStateToPlayAbility(this);
+        final Card result = getActivatingPlayer().playLandNoCheck(getHostCard());
 
         // increase mayplay used
         if (getMayPlay() != null) {
             getMayPlay().incMayPlayTurn();
         }
+        // if land isn't in battlefield try to reset the card state
+        if (result != null && !result.isInZone(ZoneType.Battlefield)) {
+            result.setState(CardStateName.Original, true);
+        }
     }
     @Override
     public String toUnsuppressedString() {
         StringBuilder sb = new StringBuilder("Play land");
+
+        if (getHostCard().isModal()) {
+            sb.append(" (").append(getHostCard().getName(ObjectUtils.firstNonNull(getCardStateName(), CardStateName.Original))).append(")");
+        }
+
         StaticAbility sta = getMayPlay();
         if (sta != null) {
             Card source = sta.getHostCard();
@@ -69,5 +108,5 @@ public class LandAbility extends Ability {
         }
         return sb.toString();
     }
-    
+
 }

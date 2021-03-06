@@ -3,6 +3,6 @@ ManaCost:3 R R
 Types:Creature Dragon
 PT:5/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Landfall Whenever a land enters the battlefield under your control, create a 0/2 red Dragon creature token with defender and "When this creature dies, create a 2/2 red Dragon creature token with flying and '{R}: This creature gets +1/+0 until end of turn.'"
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | LegacyImage$ r 0 2 dragon egg defender hatches dragon c18 | TokenScript$ r_0_2_dragon_egg_defender_hatches_dragon
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, create a 0/2 red Dragon creature token with defender and "When this creature dies, create a 2/2 red Dragon creature token with flying and '{R}: This creature gets +1/+0 until end of turn.'"
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ r_0_2_dragon_egg_defender_hatches_dragon
 Oracle:Flying\nLandfall — Whenever a land enters the battlefield under your control, create a 0/2 red Dragon Egg creature token with defender and "When this creature dies, create a 2/2 red Dragon creature token with flying and '{R}: This creature gets +1/+0 until end of turn.'"

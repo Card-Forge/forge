@@ -6,4 +6,4 @@ PT:2/1
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ GFGToken | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, you may pay {2}{B}. If you do, create a 2/2 black Zombie enchantment creature token.
 SVar:GFGToken:AB$ Token | Cost$ 2 B | TokenAmount$ 1 | TokenScript$ b_2_2_e_zombie | TokenOwner$ You | LegacyImage$ b 2 2 e zombie bng
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forlorn_pseudamma.txt
-Oracle:Intimidate\nInspired — Whenever Forlorn Pseudamma becomes untapped, you may pay {2}{B}. If you do, create a 2/2 black Zombie enchantment creature token.
+Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nInspired — Whenever Forlorn Pseudamma becomes untapped, you may pay {2}{B}. If you do, create a 2/2 black Zombie enchantment creature token.

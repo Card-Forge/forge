@@ -1,0 +1,19 @@
+Name:Shatterskull Smashing
+ManaCost:X R R
+Types:Sorcery
+A:SP$ DealDamage | Cost$ X R R | NumDmg$ Y | References$ X,Y,Z | ValidTgts$ Creature,Planeswalker | TargetMin$ 0 | TargetMax$ 2 | DividedAsYouChoose$ Y | TgtPrompt$ Select up to two target creatures and/or planeswalkers | SpellDescription$ CARDNAME deals X damage divided as you choose among up to two target creatures and/or planeswalkers. If X is 6 or more, CARDNAME deals twice X damage divided as you choose among them instead.
+SVar:X:Count$xPaid
+SVar:Y:Count$Compare X LT6.X.Z
+SVar:Z:Count$xPaid/Twice
+AlternateMode:Modal
+Oracle:Shatterskull Smashing deals X damage divided as you choose among up to two target creatures and/or planeswalkers. If X is 6 or more, Shatterskull Smashing deals twice X damage divided as you choose among them instead.
+
+ALTERNATE
+
+Name:Shatterskull, the Hammer Pass
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:DBTap
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ PayLife<3> | UnlessPayer$ You | UnlessAI$ Shockland | StackDescription$ enters the battlefield tapped. | SpellDescription$ As CARDNAME enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+Oracle:As Shatterskull, the Hammer Pass enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.\n{T}: Add {R}.

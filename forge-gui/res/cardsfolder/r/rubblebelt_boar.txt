@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Creature Boar
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +2/+0 until end of turn.
-SVar:TrigPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2
 SVar:PlayMain1:TRUE
 Oracle:When Rubblebelt Boar enters the battlefield, target creature gets +2/+0 until end of turn.

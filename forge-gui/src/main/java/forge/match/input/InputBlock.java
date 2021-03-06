@@ -26,6 +26,7 @@ import forge.game.card.CardView;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.event.GameEventCombatChanged;
+import forge.game.event.GameEventCombatUpdate;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.player.PlayerControllerHuman;
@@ -85,9 +86,12 @@ public class InputBlock extends InputSyncronizedBase {
         }
         else {
             String attackerName = currentAttacker.isFaceDown() ? localizer.getMessage("lblMorph") : currentAttacker.getName() + " (" + currentAttacker.getId() + ")";
-            String message = localizer.getMessage("lblSelectBlocker") + attackerName + localizer.getMessage("lblOrSelectBlockTarget");
+            String message = localizer.getMessage("lblSelectBlocker") + attackerName + " " + localizer.getMessage("lblOrSelectBlockTarget");
             showMessage(message);
         }
+
+        if (combat != null)
+            getController().getGame().fireEvent(new GameEventCombatUpdate(combat.getAttackers(), combat.getAllBlockers()));
 
         getController().getGui().showCombat();
     }
@@ -118,7 +122,7 @@ public class InputBlock extends InputSyncronizedBase {
         boolean isCorrectAction = false;
         if (triggerEvent != null && triggerEvent.getButton() == 3 && card.getController() == defender) {
             combat.removeFromCombat(card);
-            card.getGame().fireEvent(new UiEventBlockerAssigned(CardView.get(card), null));
+            card.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(CardView.get(card), null));
             isCorrectAction = true;
         }
         else {
@@ -133,14 +137,14 @@ public class InputBlock extends InputSyncronizedBase {
                     if (combat.isBlocking(card, currentAttacker)) {
                         //if creature already blocking current attacker, remove blocker from combat
                         combat.removeBlockAssignment(currentAttacker, card);
-                        card.getGame().fireEvent(new UiEventBlockerAssigned(CardView.get(card), null));
+                        card.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(CardView.get(card), null));
                         isCorrectAction = true;
                     }
                     else {
                         isCorrectAction = CombatUtil.canBlock(currentAttacker, card, combat);
                         if (isCorrectAction) {
                             combat.addBlocker(currentAttacker, card);
-                            card.getGame().fireEvent(new UiEventBlockerAssigned(
+                            card.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(
                                     CardView.get(card),
                                     CardView.get(currentAttacker)));
                         }

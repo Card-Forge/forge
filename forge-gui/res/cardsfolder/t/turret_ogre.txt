@@ -5,4 +5,4 @@ PT:4/3
 K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Creature.Other+YouCtrl+powerGE4 | PresentCompare$ GE1 | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, if you control another creature with power 4 or greater, CARDNAME deals 2 damage to each opponent.
 SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2
-Oracle:Reach\nWhen Turret Ogre enters the battlefield, if you control another creature with power 4 or greater, Turret Ogre deals 2 damage to each opponent.
+Oracle:Reach (This creature can block creatures with flying.)\nWhen Turret Ogre enters the battlefield, if you control another creature with power 4 or greater, Turret Ogre deals 2 damage to each opponent.

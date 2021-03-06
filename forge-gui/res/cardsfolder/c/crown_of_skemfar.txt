@@ -1,0 +1,11 @@
+Name:Crown of Skemfar
+ManaCost:2 G G
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 G G | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | AddKeyword$ Reach | Description$ Enchanted creature gets +1/+1 for each Elf you control and has reach.
+SVar:X:Count$TypeYouCtrl.Elf
+SVar:BuffedBy:Elf
+A:AB$ ChangeZone | Cost$ 2 G | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+DeckHints:Type$Elf
+Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each Elf you control and has reach.\n{2}{G}: Return Crown of Skemfar from your graveyard to your hand.

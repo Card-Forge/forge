@@ -1,0 +1,17 @@
+Name:Necromentia
+ManaCost:1 B B
+Types:Sorcery
+A:SP$ NameCard | Cost$ 1 B B | Defined$ You | ValidCards$ Card.nonBasic | ValidDesc$ card other than a basic land | SubAbility$ ExileYard | StackDescription$ SpellDescription | SpellDescription$ Choose a card name other than a basic land card name. Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. That player shuffles their library, then creates a 2/2 black Zombie creature token for each card exiled from their hand this way.
+
+SVar:ExileYard:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player.Opponent | TgtPrompt$ Select target opponent | ChangeType$ Card.NamedCard | Chooser$ You | ChangeNum$ NumInYard | References$ NumInYard | Hidden$ True | SubAbility$ ExileHand | StackDescription$ None
+SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ NumInHand | References$ NumInHand | Chooser$ You | RememberChanged$ True | SubAbility$ ExileLib | StackDescription$ None
+SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ NumInLib | References$ NumInLib | Chooser$ You | Search$ True | Shuffle$ True | SubAbility$ DBToken | StackDescription$ None
+SVar:DBToken:DB$ Token | TokenAmount$ X | References$ X | TokenScript$ b_2_2_zombie | TokenOwner$ Targeted | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+
+SVar:NumInLib:TargetedPlayer$CardsInLibrary
+SVar:NumInHand:TargetedPlayer$CardsInHand
+SVar:NumInYard:TargetedPlayer$CardsInGraveyard
+SVar:X:Remembered$Amount
+
+Oracle:Choose a card name other than a basic land card name. Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. That player shuffles their library, then creates a 2/2 black Zombie creature token for each card exiled from their hand this way.

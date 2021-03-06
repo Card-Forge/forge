@@ -2,7 +2,7 @@ Name:Kiyomaro, First to Stand
 ManaCost:3 W W
 Types:Legendary Creature Spirit
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance | CheckSVar$ X | SVarCompare$ GE4 | Description$ As long as you have four or more cards in hand, CARDNAME has vigilance.
 T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | CheckSVar$ X | SVarCompare$ GE7 | TriggerZones$ Battlefield | Execute$ TrigGain | TriggerDescription$ Whenever CARDNAME deals damage, if you have seven or more cards in hand, you gain 7 life.
 SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ 7

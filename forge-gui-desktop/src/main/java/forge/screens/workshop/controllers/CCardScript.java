@@ -29,7 +29,7 @@ import forge.screens.workshop.views.VCardDesigner;
 import forge.screens.workshop.views.VCardScript;
 import forge.screens.workshop.views.VWorkshopCatalog;
 import forge.toolbox.FOptionPane;
-import forge.util.TextUtil;
+import forge.util.Localizer;
 
 /**
  * Controls the "card script" panel in the workshop UI.
@@ -120,7 +120,11 @@ public enum CCardScript implements ICDoc {
         return (currentScriptInfo != null && isTextDirty);
     }
 
-    private static final ImmutableList<String> switchAwayOptions = ImmutableList.of("Save", "Don't Save", "Cancel");
+    private static final ImmutableList<String> switchAwayOptions = ImmutableList.of(
+        Localizer.getInstance().getMessage("lblSave"),
+        Localizer.getInstance().getMessage("lblDontSave"),
+        Localizer.getInstance().getMessage("lblCancel")
+    );
     public boolean canSwitchAway(final boolean isCardChanging) {
         if (switchInProgress) { return false; }
         if (!hasChanges()) { return true; }
@@ -128,8 +132,8 @@ public enum CCardScript implements ICDoc {
         switchInProgress = true;
         Singletons.getControl().ensureScreenActive(FScreen.WORKSHOP_SCREEN); //ensure Workshop is active before showing dialog
         final int choice = FOptionPane.showOptionDialog(
-                TextUtil.concatNoSpace("Save changes to ", currentCard.toString(), "?"),
-                "Save Changes?",
+                Localizer.getInstance().getMessage("lblSaveChangesToDestConfirm", currentCard.toString()),
+                Localizer.getInstance().getMessage("lblSaveChangesConfirm"),
                 FOptionPane.QUESTION_ICON,
                 switchAwayOptions);
         switchInProgress = false;

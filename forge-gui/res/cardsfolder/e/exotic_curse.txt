@@ -3,8 +3,7 @@ ManaCost:2 B
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -X | AddToughness$ -X | Description$ Domain — Enchanted creature gets -1/-1 for each basic land type among lands you control.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -X | AddToughness$ -X | References$ X | Description$ Domain — Enchanted creature gets -1/-1 for each basic land type among lands you control.
 SVar:X:Count$Domain
 SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
-SVar:Picture:http://www.wizards.com/global/images/magic/general/exotic_curse.jpg
 Oracle:Enchant creature\nDomain — Enchanted creature gets -1/-1 for each basic land type among lands you control.

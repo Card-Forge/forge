@@ -8,4 +8,4 @@ SVar:X:Count$Valid Creature.YouCtrl
 SVar:Y:Count$Valid Creature.OppCtrl
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_lyre.jpg
-Oracle:Sacrifice Goblin Lyre: Flip a coin. If you win the flip, Goblin Lyre deals damage to target opponent equal to the number of creatures you control. If you lose the flip, Goblin Lyre deals damage to you equal to the number of creatures that opponent controls.
+Oracle:Sacrifice Goblin Lyre: Flip a coin. If you win the flip, Goblin Lyre deals damage to target opponent or planeswalker equal to the number of creatures you control. If you lose the flip, Goblin Lyre deals damage to you equal to the number of creatures that opponent or that planeswalker's controller controls.

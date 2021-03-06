@@ -2,8 +2,7 @@ Name:Mardu Hordechief
 ManaCost:2 W
 Types:Creature Human Warrior
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigToken | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked with a creature this turn, create a 1/1 white Warrior creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_warrior | TokenOwner$ You | LegacyImage$ w 1 1 warrior ktk
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigToken | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked this turn, create a 1/1 white Warrior creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_warrior | TokenOwner$ You
 SVar:RaidTest:Count$AttackersDeclared
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mardu_hordechief.jpg
-Oracle:Raid — When Mardu Hordechief enters the battlefield, if you attacked with a creature this turn, create a 1/1 white Warrior creature token.
+Oracle:Raid — When Mardu Hordechief enters the battlefield, if you attacked this turn, create a 1/1 white Warrior creature token.

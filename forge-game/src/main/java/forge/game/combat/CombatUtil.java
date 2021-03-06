@@ -176,7 +176,7 @@ public class CombatUtil {
         if (!forNextTurn && (
                    !attacker.isCreature()
                 || attacker.isTapped() || attacker.isPhasedOut()
-                || (attacker.hasSickness() && !attacker.hasKeyword("CARDNAME can attack as though it had haste."))
+                || isAttackerSick(attacker, defender)
                 || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
             return false;
         }
@@ -236,6 +236,22 @@ public class CombatUtil {
 
         return true;
     } // canAttack(Card, GameEntity)
+
+    public static boolean isAttackerSick(final Card attacker, final GameEntity defender) {
+        final Game game = attacker.getGame();
+        if (!attacker.isSick()) {
+            return false;
+        }
+
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("CanAttackIfHaste", attacker, defender)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
     /**
      * <p>
@@ -423,8 +439,10 @@ public class CombatUtil {
             return false;
         }
 
+        boolean cantBlockAlone = blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone.");
+
         final List<Card> list = blocker.getController().getCreaturesInPlay();
-        return list.size() >= 2 || !blocker.hasKeyword("CARDNAME can't attack or block alone.");
+        return list.size() >= 2 || !cantBlockAlone;
     }
 
     public static boolean canBlockMoreCreatures(final Card blocker, final CardCollectionView blockedBy) {
@@ -716,7 +734,8 @@ public class CombatUtil {
 
         // Creatures that aren't allowed to block unless certain restrictions are met.
         for (final Card blocker : blockers) {
-            if (blockers.size() < 2 && blocker.hasKeyword("CARDNAME can't attack or block alone.")) {
+            boolean cantBlockAlone = blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone.");
+            if (blockers.size() < 2 && cantBlockAlone) {
                 return TextUtil.concatWithSpace(blocker.toString(),"can't block alone.");
             } else if (blockers.size() < 3 && blocker.hasKeyword("CARDNAME can't block unless at least two other creatures block.")) {
                 return TextUtil.concatWithSpace(blocker.toString(),"can't block unless at least two other creatures block.");

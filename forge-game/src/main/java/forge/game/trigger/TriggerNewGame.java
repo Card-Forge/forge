@@ -45,7 +45,7 @@ public class TriggerNewGame extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerNewGame(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerNewGame(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -58,7 +58,7 @@ public class TriggerNewGame extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
     }
 
     @Override

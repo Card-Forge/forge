@@ -1,0 +1,6 @@
+Name:Lantern of Undersight
+ManaCost:1
+Types:Artifact
+S:Mode$ Continuous | Affected$ You | AddKeyword$ You draw cards from the bottom of your library instead of the top of your library. | Description$ You draw cards from the bottom of your library instead of the top of your library.
+AI:RemoveDeck:Random
+Oracle:You draw cards from the bottom of your library instead of the top of your library.

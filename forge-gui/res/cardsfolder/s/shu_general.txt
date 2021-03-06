@@ -5,4 +5,4 @@ PT:2/2
 K:Vigilance
 K:Horsemanship
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shu_general.jpg
-Oracle:Vigilance, horsemanship (This creature can't be blocked except by creatures with horsemanship.)
+Oracle:Vigilance; horsemanship (This creature can't be blocked except by creatures with horsemanship.)

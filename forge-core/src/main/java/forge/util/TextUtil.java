@@ -5,6 +5,8 @@ import forge.item.PaperCard;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.ImmutableSortedMap;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -16,6 +18,22 @@ import java.util.Map.Entry;
  *
  */
 public class TextUtil {
+
+    static ImmutableSortedMap<Integer,String> romanMap = ImmutableSortedMap.<Integer,String>naturalOrder()
+    .put(1000, "M").put(900, "CM")
+    .put(500, "D").put(400, "CD")
+    .put(100, "C").put(90, "XC")
+    .put(50, "L").put(40, "XL")
+    .put(10, "X").put(9, "IX")
+    .put(5, "V").put(4, "IV").put(1, "I").build();
+    
+    public final static String toRoman(int number) {
+        if (number <= 0) {
+            return "";
+        }
+        int l = romanMap.floorKey(number);
+        return romanMap.get(l) + toRoman(number-l);
+    }
 
     /**
      * Safely converts an object to a String.
@@ -281,5 +299,11 @@ public class TextUtil {
         } while( idx2 > 0 );
         sb.append( str, idx1, str.length() );
         return sb.toString();
+    }
+    //Convert to Mana String
+    public static String toManaString(String ManaProduced){
+        if (ManaProduced == "mana"|| ManaProduced.contains("Combo")|| ManaProduced.contains("Any"))
+            return "mana";//fix manamorphose stack description and probably others..
+        return "{"+TextUtil.fastReplace(ManaProduced," ","}{")+"}";
     }
 }

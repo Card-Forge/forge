@@ -9,4 +9,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:DBDraw2:DB$ Draw | NumCards$ 2
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | SourceType$ Spell | TriggerZones$ Battlefield | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME becomes the target of a spell, shuffle CARDNAME into its owner's library.
 SVar:TrigShuffle:DB$ ChangeZone | Origin$ Battlefield | Destination$ Library | Shuffle$ True | Defined$ Self
-Oracle:When Fblthp, the Lost enters the battlefield, draw a card. If it enters from your library or was cast from your library, draw two cards instead.\nWhen Fblthp becomes the target of a spell, shuffle Fblthp into its owner's library.
+Oracle:When Fblthp, the Lost enters the battlefield, draw a card. If it entered from your library or was cast from your library, draw two cards instead.\nWhen Fblthp becomes the target of a spell, shuffle Fblthp into its owner's library.

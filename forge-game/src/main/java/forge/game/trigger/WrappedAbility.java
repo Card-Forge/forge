@@ -2,22 +2,22 @@ package forge.game.trigger;
 
 import forge.card.mana.ManaCost;
 import forge.game.Game;
-import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardState;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Maps;
 
 // Wrapper ability that checks the requirements again just before
 // resolving, for intervening if clauses.
@@ -27,15 +27,34 @@ import com.google.common.collect.Lists;
 // use of any of the methods)
 public class WrappedAbility extends Ability {
 
+    static Set<ApiType> noTimestampCheck = ImmutableSet.of(
+            ApiType.PutCounter,
+            ApiType.MoveCounter,
+            ApiType.MultiplyCounter,
+            ApiType.MoveCounter,
+            ApiType.RemoveCounter,
+            ApiType.AddOrRemoveCounter,
+            ApiType.MoveCounter,
+            ApiType.Draw,
+            ApiType.GainLife,
+            ApiType.LoseLife,
+            ApiType.ChangeZone,
+            ApiType.Destroy,
+            ApiType.Token,
+            ApiType.SetState,
+            ApiType.Play
+            );
+
     private final SpellAbility sa;
     private final Player decider;
 
     boolean mandatory = false;
 
     public WrappedAbility(final Trigger regtrig0, final SpellAbility sa0, final Player decider0) {
-        super(regtrig0.getHostCard(), ManaCost.ZERO, sa0.getView());
+        super(sa0.getHostCard(), ManaCost.ZERO, sa0.getView());
         setTrigger(regtrig0);
         sa = sa0;
+        sa.setTrigger(regtrig0);
         decider = decider0;
         sa.setDescription(this.getStackDescription());
     }
@@ -51,18 +70,6 @@ public class WrappedAbility extends Ability {
 
     public Player getDecider() {
         return decider;
-    }
-
-    public final void setMandatory(final boolean mand) {
-        this.mandatory = mand;
-    }
-
-    /**
-     * @return the mandatory
-     */
-    @Override
-    public boolean isMandatory() {
-        return mandatory;
     }
 
     @Override
@@ -214,7 +221,7 @@ public class WrappedAbility extends Ability {
     @Override
     public String toUnsuppressedString() {
         String desc = this.getStackDescription(); /* use augmented stack description as string for wrapped things */
-        String card = getTrigger().getHostCard().toString();
+        String card = getHostCard().toString();
         if ( !desc.contains(card) && desc.contains(" this ")) { /* a hack for Evolve and similar that don't have CARDNAME */
                 return card + ": " + desc;
         } else return desc;
@@ -224,23 +231,19 @@ public class WrappedAbility extends Ability {
     public String getStackDescription() {
         final Trigger regtrig = getTrigger();
         final StringBuilder sb = new StringBuilder(regtrig.replaceAbilityText(regtrig.toString(true), this));
-        if (usesTargeting()) {
+        List<TargetChoices> allTargets = sa.getAllTargetChoices();
+        if (!allTargets.isEmpty()) {
             sb.append(" (Targeting ");
-            for (final GameObject o : this.getTargets().getTargets()) {
-                sb.append(o.toString());
-                sb.append(", ");
-            }
-            if (sb.toString().endsWith(", ")) {
-                sb.setLength(sb.length() - 2);
-            } else {
-                sb.append("ERROR");
-            }
+            sb.append(allTargets);
             sb.append(")");
         }
 
-        sb.append(" [");
-        sb.append(regtrig.getImportantStackObjects(this));
-        sb.append("]");
+        String important = regtrig.getImportantStackObjects(this);
+        if (!important.isEmpty()) {
+            sb.append(" [");
+            sb.append(important);
+            sb.append("]");
+        }
 
         return sb.toString();
     }
@@ -304,16 +307,6 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public boolean isXCost() {
-        return sa.isXCost();
-    }
-
-    @Override
-    public String getSvarWithFallback(String name) {
-        return sa.getSvarWithFallback(name);
-    }
-
-    @Override
     public String getSVar(String name) {
         return sa.getSVar(name);
     }
@@ -324,7 +317,7 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public Set<String> getSVars() {
+    public Map<String, String> getSVars() {
         return sa.getSVars();
     }
 
@@ -446,9 +439,8 @@ public class WrappedAbility extends Ability {
     public void resolve() {
         final Game game = sa.getActivatingPlayer().getGame();
         final Trigger regtrig = getTrigger();
-        Map<String, String> triggerParams = regtrig.getMapParams();
 
-        if (!(regtrig instanceof TriggerAlways) && !triggerParams.containsKey("NoResolvingCheck")) {
+        if (!(TriggerType.Always.equals(regtrig.getMode())) && !regtrig.hasParam("NoResolvingCheck")) {
             // Most State triggers don't have "Intervening If"
             if (!regtrig.requirementsCheck(game)) {
                 return;
@@ -460,40 +452,25 @@ public class WrappedAbility extends Ability {
             }
         }
 
-        if (triggerParams.containsKey("ResolvingCheck")) {
+        if (regtrig.hasParam("ResolvingCheck")) {
             // rare cases: Hidden Predators (state trigger, but have "Intervening If" to check IsPresent2) etc.
-            Map<String, String> recheck = new HashMap<>();
-            String key = triggerParams.get("ResolvingCheck");
-            String value = regtrig.getParam(key);
-            recheck.put(key, value);
+            Map<String, String> recheck = Maps.newHashMap();
+            String key = regtrig.getParam("ResolvingCheck");
+            recheck.put(key, regtrig.getParam(key));
             if (!meetsCommonRequirements(recheck)) {
                 return;
             }
         }
 
-        TriggerHandler th = game.getTriggerHandler();
-
-        if (decider != null && !decider.getController().confirmTrigger(this, triggerParams, this.isMandatory())) {
+        if (decider != null && !decider.getController().confirmTrigger(this)) {
             return;
         }
 
-        // set Trigger
-        sa.setTrigger(regtrig);
-
-        if (!triggerParams.containsKey("NoTimestampCheck")) {
+        if (!regtrig.hasParam("NoTimestampCheck")) {
             timestampCheck();
         }
 
         getActivatingPlayer().getController().playSpellAbilityNoStack(sa, false);
-
-        // Add eventual delayed trigger.
-        if (triggerParams.containsKey("DelayedTrigger")) {
-            final String sVarName = triggerParams.get("DelayedTrigger");
-            final Trigger deltrig = TriggerHandler.parseTrigger(regtrig.getHostCard().getSVar(sVarName),
-                    regtrig.getHostCard(), true);
-            deltrig.setStoredTriggeredObjects(this.getTriggeringObjects());
-            th.registerDelayedTrigger(deltrig);
-        }
     }
 
     /**
@@ -502,35 +479,10 @@ public class WrappedAbility extends Ability {
     protected void timestampCheck() {
         final Game game = sa.getActivatingPlayer().getGame();
 
-        if (ApiType.PutCounter.equals(sa.getApi())
-                || ApiType.MoveCounter.equals(sa.getApi())
-                || ApiType.MultiplyCounter.equals(sa.getApi())
-                || ApiType.MoveCounter.equals(sa.getApi())
-                || ApiType.RemoveCounter.equals(sa.getApi())
-                || ApiType.AddOrRemoveCounter.equals(sa.getApi())
-                || ApiType.MoveCounter.equals(sa.getApi())
-                || ApiType.Draw.equals(sa.getApi())
-                || ApiType.GainLife.equals(sa.getApi())
-                || ApiType.LoseLife.equals(sa.getApi())
-
-                // Token has no Defined it should not be timestamp problems
-                || ApiType.Token.equals(sa.getApi())
-                ) {
+        if (noTimestampCheck.contains(sa.getApi())) {
             return;
         }
 
-        // Check timestamps of triggered objects
-        final List<Object> original = Lists.newArrayList(sa.getTriggerRemembered());
-        for (Object o : original) {
-            if (o instanceof Card) {
-                Card card = (Card) o;
-                Card current = game.getCardState(card);
-                if (current.getTimestamp() != card.getTimestamp()) {
-                    // TODO: figure out if NoTimestampCheck should be the default for ChangesZone triggers
-                    sa.getTriggerRemembered().remove(o);
-                }
-            }
-        }
         final Map<AbilityKey, Object> triggerMap = AbilityKey.newMap(sa.getTriggeringObjects());
         for (Entry<AbilityKey, Object> ev : triggerMap.entrySet()) {
             if (ev.getValue() instanceof Card) {
@@ -555,5 +507,20 @@ public class WrappedAbility extends Ability {
 
     public void setAlternativeCost(AlternativeCost ac) {
         sa.setAlternativeCost(ac);
+    }
+
+    public Integer getXManaCostPaid() {
+        return sa.getXManaCostPaid();
+    }
+    public void setXManaCostPaid(final Integer n) {
+        sa.setXManaCostPaid(n);
+    }
+
+
+    public CardState getCardState() {
+        return sa.getCardState();
+    }
+    public void setCardState(CardState state) {
+        sa.setCardState(state);
     }
 }

@@ -280,7 +280,15 @@ public class CardDetailUtil {
             area.append("\n");
         }
 
-        String text = card.getText(state, CardTranslation.getTranslationTexts(state.getName(), ""));
+        boolean needTranslation = true;
+        if (card.isToken()) {
+            if (card.getCloneOrigin() == null)
+                needTranslation = false;
+        }
+        String text = !card.isSplitCard() ?
+            card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null) :
+            card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(card.getLeftSplitState().getName(), card.getRightSplitState().getName()) : null );
+
 
         // LEVEL [0-9]+-[0-9]+
         // LEVEL [0-9]+\+
@@ -393,6 +401,9 @@ public class CardDetailUtil {
             }
             area.append("(chosen type: ");
             area.append(card.getChosenType());
+            if (!card.getChosenType2().isEmpty()) {
+                area.append(", ").append(card.getChosenType2());
+            }
             area.append(")");
         }
 
@@ -414,6 +425,14 @@ public class CardDetailUtil {
             area.append("(chosen cards: ");
             area.append(Lang.joinHomogenous(card.getChosenCards()));
             area.append(")");
+        }
+
+        // chosen number
+        if (!card.getChosenNumber().isEmpty()) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("(chosen number: ").append(card.getChosenNumber()).append(")");
         }
 
         // chosen player
@@ -442,6 +461,9 @@ public class CardDetailUtil {
                 area.append("Hidden");
             } else {
                 area.append(card.getNamedCard());
+                if (!card.getNamedCard2().isEmpty()) {
+                    area.append(", ").append(card.getNamedCard2());
+                }
             }
             area.append(")");
         }
@@ -557,6 +579,14 @@ public class CardDetailUtil {
                 }
                 area.append("Current Storm Count: ").append(gameView.getStormCount());
             }
+        }
+
+        //show owner if being controlled by a different player
+        if (card.getOwner() != card.getController()) {
+            if (area.length() != 0) {
+                area.append("\n\n");
+            }
+            area.append("Owner: ").append(card.getOwner().toString());
         }
         return area.toString();
     }

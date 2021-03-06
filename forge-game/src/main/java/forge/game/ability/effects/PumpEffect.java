@@ -1,5 +1,8 @@
 package forge.game.ability.effects;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import forge.GameCommand;
 import forge.card.CardType;
 import forge.game.Game;
@@ -7,10 +10,12 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -253,8 +258,6 @@ public class PumpEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(final SpellAbility sa) {
-
-        final List<Card> untargetedCards = Lists.newArrayList();
         final Game game = sa.getActivatingPlayer().getGame();
         final Card host = sa.getHostCard();
         final long timestamp = game.getNextTimestamp();
@@ -280,6 +283,7 @@ public class PumpEffect extends SpellAbilityEffect {
         List<Player> tgtPlayers = getTargetPlayers(sa);
         tgts.addAll(tgtCards);
         tgts.addAll(tgtPlayers);
+        final CardCollection untargetedCards = CardUtil.getRadiance(sa);
 
         if (sa.hasParam("DefinedKW")) {
             String defined = sa.getParam("DefinedKW");
@@ -290,6 +294,10 @@ public class PumpEffect extends SpellAbilityEffect {
                 replaced = "CardUID_" + host.getId();
             } else if (defined.equals("ActivatorName")) {
                 replaced = sa.getActivatingPlayer().getName();
+            } else if (defined.endsWith("Player")) {
+                PlayerCollection players = AbilityUtils.getDefinedPlayers(host, defined, sa);
+                if (players.isEmpty()) return;
+                replaced = "PlayerUID_" + players.get(0).getId();
             }
             for (int i = 0; i < keywords.size(); i++) {
                 keywords.set(i, TextUtil.fastReplace(keywords.get(i), defined, replaced));
@@ -297,10 +305,11 @@ public class PumpEffect extends SpellAbilityEffect {
         }
         if (sa.hasParam("DefinedLandwalk")) {
             final String landtype = sa.getParam("DefinedLandwalk");
-            final Card c = AbilityUtils.getDefinedCards(host, landtype, sa).get(0);
-            for (String type : c.getType()) {
-                if (CardType.isALandType(type)) {
-                    keywords.add(type + "walk");
+            for (final Card c : AbilityUtils.getDefinedCards(host, landtype, sa)) {
+                for (String type : c.getType()) {
+                    if (CardType.isALandType(type)) {
+                        keywords.add(type + "walk");
+                    }
                 }
             }
         }
@@ -374,11 +383,6 @@ public class PumpEffect extends SpellAbilityEffect {
             }
         }
 
-        if (sa.hasParam("Radiance")) {
-            untargetedCards.addAll(CardUtil.getRadiance(host, tgtCards.get(0), sa.getParam("ValidTgts")
-                    .split(",")));
-        }
-
         final ZoneType pumpZone = sa.hasParam("PumpZone") ? ZoneType.smartValueOf(sa.getParam("PumpZone"))
                 : ZoneType.Battlefield;
 
@@ -387,7 +391,7 @@ public class PumpEffect extends SpellAbilityEffect {
             final Card tgtC = tgtCards.get(j);
 
             // only pump things in PumpZone
-            if (!game.getCardsIn(pumpZone).contains(tgtC)) {
+            if (!tgtC.isInZone(pumpZone)) {
                 continue;
             }
 
@@ -396,7 +400,38 @@ public class PumpEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            applyPump(sa, tgtC, a, d, keywords, timestamp);
+            // substitute specific tgtC mana cost for keyword placeholder CardManaCost
+            List<String> affectedKeywords = Lists.newArrayList(keywords);
+
+            if (!affectedKeywords.isEmpty()) {
+                Iterables.removeIf(affectedKeywords, new Predicate<String>() {
+                    @Override
+                    public boolean apply(String input) {
+                        if (input.contains("CardManaCost")) {
+                            if (tgtC.getManaCost().isNoCost()) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                });
+
+                affectedKeywords = Lists.transform(affectedKeywords, new Function<String, String>() {
+
+                    @Override
+                    public String apply(String input) {
+                        if (input.contains("CardManaCost")) {
+                            input = input.replace("CardManaCost", tgtC.getManaCost().getShortString());
+                        } else if (input.contains("ConvertedManaCost")) {
+                            final String costcmc = Integer.toString(tgtC.getCMC());
+                            input = input.replace("ConvertedManaCost", costcmc);
+                        }
+                        return input;
+                    }
+                });
+            }
+
+            applyPump(sa, tgtC, a, d, affectedKeywords, timestamp);
         }
 
         if (sa.hasParam("AtEOT") && !tgtCards.isEmpty()) {

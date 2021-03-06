@@ -1,0 +1,27 @@
+[metadata]
+Code=PMPS
+Date=2005-01-01
+Name=Magic Premiere Shop 2005
+Type=Reprint
+
+[cards]
+287 C Plains
+288 C Plains
+289 C Plains
+290 C Plains
+291 C Island
+292 C Island
+293 C Island
+294 C Island
+295 C Swamp
+296 C Swamp
+297 C Swamp
+298 C Swamp
+299 C Mountain
+300 C Mountain
+301 C Mountain
+302 C Mountain
+303 C Forest
+304 C Forest
+305 C Forest
+306 C Forest

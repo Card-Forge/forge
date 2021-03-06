@@ -9,7 +9,9 @@ import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
@@ -23,7 +25,6 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.game.ability.AbilityKey;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -75,9 +76,12 @@ public abstract class GameState {
     private final Map<Card, List<String>> cardToChosenClrs = new HashMap<>();
     private final Map<Card, CardCollection> cardToChosenCards = new HashMap<>();
     private final Map<Card, String> cardToChosenType = new HashMap<>();
+    private final Map<Card, String> cardToChosenType2 = new HashMap<>();
     private final Map<Card, List<String>> cardToRememberedId = new HashMap<>();
     private final Map<Card, List<String>> cardToImprintedId = new HashMap<>();
+    private final Map<Card, List<String>> cardToMergedCards = new HashMap<>();
     private final Map<Card, String> cardToNamedCard = new HashMap<>();
+    private final Map<Card, String> cardToNamedCard2 = new HashMap<>();
     private final Map<Card, String> cardToExiledWithId = new HashMap<>();
     private final Map<Card, Card> cardAttackMap = new HashMap<>();
 
@@ -258,7 +262,13 @@ public abstract class GameState {
             if (c.getPaperCard() == null) {
                 return;
             }
-            newText.append(c.getPaperCard().getName());
+
+            if (!c.getMergedCards().isEmpty()) {
+                // we have to go by the current top card name here
+                newText.append(c.getTopMergedCard().getPaperCard().getName());
+            } else {
+                newText.append(c.getPaperCard().getName());
+            }
         }
         if (c.isCommander()) {
             newText.append("|IsCommander");
@@ -300,6 +310,8 @@ public abstract class GameState {
                 newText.append("|Flipped");
             } else if (c.getCurrentStateName().equals(CardStateName.Meld)) {
                 newText.append("|Meld");
+            } else if (c.getCurrentStateName().equals(CardStateName.Modal)) {
+                newText.append("|Modal");
             }
             if (c.isAttachedToEntity()) {
                 newText.append("|AttachedTo:").append(c.getEntityAttachedTo().getId());
@@ -321,8 +333,14 @@ public abstract class GameState {
             if (!c.getChosenType().isEmpty()) {
                 newText.append("|ChosenType:").append(c.getChosenType());
             }
+            if (!c.getChosenType2().isEmpty()) {
+                newText.append("|ChosenType2:").append(c.getChosenType2());
+            }
             if (!c.getNamedCard().isEmpty()) {
                 newText.append("|NamedCard:").append(c.getNamedCard());
+            }
+            if (!c.getNamedCard2().isEmpty()) {
+                newText.append("|NamedCard2:").append(c.getNamedCard2());
             }
 
             List<String> chosenCardIds = Lists.newArrayList();
@@ -354,6 +372,17 @@ public abstract class GameState {
             }
             if (!imprintedCardIds.isEmpty()) {
                 newText.append("|Imprinting:").append(TextUtil.join(imprintedCardIds, ","));
+            }
+
+            if (!c.getMergedCards().isEmpty()) {
+                List<String> mergedCardNames = new ArrayList<>();
+                for (Card merged : c.getMergedCards()) {
+                    if (c.getTopMergedCard() == merged) {
+                        continue;
+                    }
+                    mergedCardNames.add(merged.getPaperCard().getName().replace(",", "^"));
+                }
+                newText.append("|MergedCards:").append(TextUtil.join(mergedCardNames, ","));
             }
         }
 
@@ -591,10 +620,13 @@ public abstract class GameState {
         cardToEnchantPlayerId.clear();
         cardToRememberedId.clear();
         cardToExiledWithId.clear();
+        cardToImprintedId.clear();
         markedDamage.clear();
         cardToChosenClrs.clear();
         cardToChosenCards.clear();
         cardToChosenType.clear();
+        cardToChosenType2.clear();
+        cardToMergedCards.clear();
         cardToScript.clear();
         cardAttackMap.clear();
 
@@ -627,6 +659,7 @@ public abstract class GameState {
         handleCardAttachments();
         handleChosenEntities();
         handleRememberedEntities();
+        handleMergedCards();
         handleScriptExecution(game);
         handlePrecastSpells(game);
         handleMarkedDamage();
@@ -781,6 +814,7 @@ public abstract class GameState {
 
             Card exiledWith = idToCard.get(Integer.parseInt(id));
             c.setExiledWith(exiledWith);
+            c.setExiledBy(exiledWith.getController());
         }
     }
 
@@ -813,6 +847,12 @@ public abstract class GameState {
                 default:
                     sa.getTargets().add(idToCard.get(tgtID));
                     break;
+            }
+        }
+
+        if (sa.hasParam("RememberTargets")) {
+            for (final GameObject o : sa.getTargets()) {
+                sa.getHostCard().addRemembered(o);
             }
         }
     }
@@ -974,14 +1014,27 @@ public abstract class GameState {
             spellDef = spellDef.substring(0, spellDef.indexOf("->")).trim();
         }
 
-        PaperCard pc = StaticData.instance().getCommonCards().getCard(spellDef);
+        Card c = null;
 
-        if (pc == null) {
-            System.err.println("ERROR: Could not find a card with name " + spellDef + " to precast!");
-            return;
+        if (StringUtils.isNumeric(spellDef)) {
+            // Precast from a specific host
+            c = idToCard.get(Integer.parseInt(spellDef));
+            if (c == null) {
+                System.err.println("ERROR: Could not find a card with ID " + spellDef + " to precast!");
+                return;
+            }
+        } else {
+            // Precast from a card by name
+            PaperCard pc = StaticData.instance().getCommonCards().getCard(spellDef);
+
+            if (pc == null) {
+                System.err.println("ERROR: Could not find a card with name " + spellDef + " to precast!");
+                return;
+            }
+
+            c = Card.fromPaperCard(pc, activator);
         }
 
-        Card c = Card.fromPaperCard(pc, activator);
         SpellAbility sa = null;
 
         if (!scriptID.isEmpty()) {
@@ -1029,10 +1082,22 @@ public abstract class GameState {
             c.setChosenType(entry.getValue());
         }
 
+        // Chosen type 2
+        for (Entry<Card, String> entry : cardToChosenType2.entrySet()) {
+            Card c = entry.getKey();
+            c.setChosenType2(entry.getValue());
+        }
+
         // Named card
         for (Entry<Card, String> entry : cardToNamedCard.entrySet()) {
             Card c = entry.getKey();
             c.setNamedCard(entry.getValue());
+        }
+
+        // Named card 2
+        for (Entry<Card,String> entry : cardToNamedCard2.entrySet()) {
+            Card c = entry.getKey();
+            c.setNamedCard2(entry.getValue());
         }
 
         // Chosen cards
@@ -1069,12 +1134,61 @@ public abstract class GameState {
         }
     }
 
+    private void handleMergedCards() {
+        for(Entry<Card, List<String>> entry : cardToMergedCards.entrySet()) {
+            Card mergedTo = entry.getKey();
+            for(String mergedCardName : entry.getValue()) {
+                Card c;
+                PaperCard pc = StaticData.instance().getCommonCards().getCard(mergedCardName. replace("^", ","));
+                if (pc == null) {
+                    System.err.println("ERROR: Tried to create a non-existent card named " + mergedCardName + " (as a merged card) when loading game state!");
+                    continue;
+                }
+
+                c = Card.fromPaperCard(pc, mergedTo.getOwner());
+                emulateMergeViaMutate(mergedTo, c);
+            }
+        }
+    }
+
+    private void emulateMergeViaMutate(Card top, Card bottom) {
+        if (top == null || bottom == null) {
+            System.err.println("ERROR: Tried to call emulateMergeViaMutate with a null card!");
+            return;
+        }
+
+        Game game = top.getGame();
+
+        bottom.setMergedToCard(top);
+        if (!top.hasMergedCard()) {
+            top.addMergedCard(top);
+        }
+        top.addMergedCard(bottom);
+
+        if (top.getMutatedTimestamp() != -1) {
+            top.removeCloneState(top.getMutatedTimestamp());
+        }
+
+        final Long ts = game.getNextTimestamp();
+        top.setMutatedTimestamp(ts);
+        if (top.getCurrentStateName() != CardStateName.FaceDown) {
+            final CardCloneStates mutatedStates = CardFactory.getMutatedCloneStates(top, null/*FIXME*/);
+            top.addCloneState(mutatedStates, ts);
+        }
+        bottom.setTapped(top.isTapped());
+        bottom.setFlipped(top.isFlipped());
+        top.setTimesMutated(top.getTimesMutated() + 1);
+        top.updateTokenView();
+
+        // TODO: Merged commanders aren't supported yet
+    }
+
     private void applyCountersToGameEntity(GameEntity entity, String counterString) {
-        entity.setCounters(Maps.newEnumMap(CounterType.class));
+        entity.setCounters(Maps.newHashMap());
         String[] allCounterStrings = counterString.split(",");
         for (final String counterPair : allCounterStrings) {
             String[] pair = counterPair.split("=", 2);
-            entity.addCounter(CounterType.valueOf(pair[0]), Integer.parseInt(pair[1]), null, false, false, null);
+            entity.addCounter(CounterType.getType(pair[0]), Integer.parseInt(pair[1]), null, false, false, null);
         }
     }
 
@@ -1116,7 +1230,7 @@ public abstract class GameState {
                     Map<CounterType, Integer> counters = c.getCounters();
                     // Note: Not clearCounters() since we want to keep the counters
                     // var as-is.
-                    c.setCounters(Maps.newEnumMap(CounterType.class));
+                    c.setCounters(Maps.newHashMap());
                     if (c.isAura()) {
                         // dummy "enchanting" to indicate that the card will be force-attached elsewhere
                         // (will be overridden later, so the actual value shouldn't matter)
@@ -1139,6 +1253,9 @@ public abstract class GameState {
             } else {
                 zone.setCards(kv.getValue());
             }
+        }
+        for (Card cmd : p.getCommanders()) {
+            p.getZone(ZoneType.Command).add(Player.createCommanderEffect(p.getGame(), cmd));
         }
     }
 
@@ -1210,7 +1327,10 @@ public abstract class GameState {
                     c.setState(CardStateName.Flipped, true);
                 } else if (info.startsWith("Meld")) {
                     c.setState(CardStateName.Meld, true);
-                } else if (info.startsWith("OnAdventure")) {
+                } else if (info.startsWith("Modal")) {
+                    c.setState(CardStateName.Modal, true);
+                } 
+                else if (info.startsWith("OnAdventure")) {
                     String abAdventure = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ExileOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.nonCopiedSpell";
                     AbilitySub saAdventure = (AbilitySub)AbilityFactory.getAbility(abAdventure, c);
                     StringBuilder sbPlay = new StringBuilder();
@@ -1220,11 +1340,10 @@ public abstract class GameState {
                     saAdventure.setActivatingPlayer(c.getOwner());
                     saAdventure.resolve();
                     c.setExiledWith(c); // This seems to be the way it's set up internally. Potentially not needed here?
+                    c.setExiledBy(c.getController());
                 } else if (info.startsWith("IsCommander")) {
-                    // TODO: This doesn't seem to properly restore the ability to play the commander. Why?
                     c.setCommander(true);
                     player.setCommanders(Lists.newArrayList(c));
-                    player.getZone(ZoneType.Command).add(Player.createCommanderEffect(player.getGame(), c));
                 } else if (info.startsWith("Id:")) {
                     int id = Integer.parseInt(info.substring(3));
                     idToCard.put(id, c);
@@ -1253,6 +1372,8 @@ public abstract class GameState {
                     cardToChosenClrs.put(c, Arrays.asList(info.substring(info.indexOf(':') + 1).split(",")));
                 } else if (info.startsWith("ChosenType:")) {
                     cardToChosenType.put(c, info.substring(info.indexOf(':') + 1));
+                } else if (info.startsWith("ChosenType2:")) {
+                    cardToChosenType2.put(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("ChosenCards:")) {
                     CardCollection chosen = new CardCollection();
                     String[] idlist = info.substring(info.indexOf(':') + 1).split(",");
@@ -1260,8 +1381,13 @@ public abstract class GameState {
                         chosen.add(idToCard.get(Integer.parseInt(id)));
                     }
                     cardToChosenCards.put(c, chosen);
+                } else if (info.startsWith("MergedCards:")) {
+                    List<String> cardNames = Arrays.asList(info.substring(info.indexOf(':') + 1).split(","));
+                    cardToMergedCards.put(c, cardNames);
                 } else if (info.startsWith("NamedCard:")) {
                     cardToNamedCard.put(c, info.substring(info.indexOf(':') + 1));
+                } else if (info.startsWith("NamedCard2:")) {
+                    cardToNamedCard2.put(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("ExecuteScript:")) {
                     cardToScript.put(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("RememberedCards:")) {

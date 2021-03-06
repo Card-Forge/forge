@@ -1,5 +1,7 @@
 [metadata]
 Name=Sarkhan Vol
+[Commander]
+1 Sarkhan Vol|ALA
 [Main]
 1 Ancient Ziggurat|CFX
 1 Apocalypse Hydra|CFX
@@ -25,7 +27,6 @@ Name=Sarkhan Vol
 1 Naturalize|ALA
 1 Predator Dragon|ALA
 1 Rupture Spire|CFX
-1 Sarkhan Vol|ALA
 1 Toxic Iguanar|CFX
 1 Volcanic Submersion|ALA
 1 Voracious Dragon|CFX

@@ -31,6 +31,7 @@ public interface IStorage<T> extends Iterable<T>, IHasName {
     boolean contains(String name);
     int size();
     void add(T item);
+    void add(String name, T item);
     void delete(String deckName);
     IStorage<IStorage<T>> getFolders();
     IStorage<T> tryGetFolder(String path);

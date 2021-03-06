@@ -11,14 +11,16 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.Set;
+import java.util.Map;
+
+import com.google.common.collect.Lists;
 
 public class CountersRemoveAllEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
+        final CounterType cType = CounterType.getType(sa.getParam("CounterType"));
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
         final String zone = sa.hasParam("ValidZone") ? sa.getParam("ValidZone") : "Battlefield";
         String amountString = Integer.toString(amount);
@@ -60,20 +62,19 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
         int numberRemoved = 0;
         for (final Card tgtCard : cards) {
             if (sa.hasParam("AllCounterTypes")) {
-            	Set<CounterType> types = tgtCard.getCounters().keySet();
-            	for(CounterType ct : types) {
-            		numberRemoved += tgtCard.getCounters(ct);
-            		tgtCard.subtractCounter(ct, tgtCard.getCounters(ct));
-            	}
+                for(Map.Entry<CounterType, Integer> e : Lists.newArrayList(tgtCard.getCounters().entrySet())) {
+                    numberRemoved += e.getValue();
+                    tgtCard.subtractCounter(e.getKey(), e.getValue());
+                }
                 //tgtCard.getCounters().clear();
                 continue;
             }
             if (sa.hasParam("AllCounters")) {
-                counterAmount = tgtCard.getCounters(CounterType.valueOf(type));
+                counterAmount = tgtCard.getCounters(CounterType.getType(type));
             }
 
             if (counterAmount > 0) {
-                tgtCard.subtractCounter(CounterType.valueOf(type), counterAmount);
+                tgtCard.subtractCounter(CounterType.getType(type), counterAmount);
                 game.updateLastStateForCard(tgtCard);
             }
         }

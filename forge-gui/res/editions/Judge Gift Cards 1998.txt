@@ -1,0 +1,10 @@
+[metadata]
+Code=JGP
+Date=1998-01-01
+Name=Judge Gift Cards 1998
+Type=Reprint
+
+[cards]
+1 R Lightning Bolt
+2 R Stroke of Genius
+3 R Gaea's Cradle

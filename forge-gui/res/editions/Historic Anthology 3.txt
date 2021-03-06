@@ -1,0 +1,34 @@
+[metadata]
+Code=HA3
+Date=2020-05-21
+Name=Historic Anthology 3
+Type=Other
+
+[cards]
+1 U Honden of Cleansing Fire
+2 C Momentary Blink
+3 R Tempered Steel
+4 U Timely Reinforcements
+5 R Body Double
+6 U Honden of Seeing Winds
+7 C Silent Departure
+8 R Swan Song
+9 U Chainer's Edict
+10 C Gempalm Polluter
+11 U Honden of Night's Reach
+12 M Phyrexian Obliterator
+13 U Unburial Rites
+14 R Devil's Play
+15 U Gempalm Incinerator
+16 U Honden of Infinite Rage
+17 R Tectonic Reformation
+18 R Enchantress's Presence
+19 U Honden of Life's Web
+20 C Krosan Tusker
+21 U Roar of the Wurm
+22 R Mirari's Wake
+23 M Akroma's Memorial
+24 R Ratchet Bomb
+25 M Ulamog, the Ceaseless Hunger
+26 U Ancient Ziggurat
+27 M Maze's End

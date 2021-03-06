@@ -1,10 +1,9 @@
 Name:Dream Leash
 ManaCost:3 U U
 Types:Enchantment Aura
-Text:You can't choose an untapped permanent as CARDNAME's target as you cast CARDNAME.
+Text:You can't choose an untapped creature as this spell's target as you cast it.
 K:Enchant permanent
 K:SpellCantTarget:Permanent.untapped
 A:SP$ Attach | Cost$ 3 U U | ValidTgts$ Permanent | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted permanent.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_leash.jpg
-Oracle:Enchant permanent\nYou can't choose an untapped permanent as Dream Leash's target as you cast Dream Leash.\nYou control enchanted permanent.
+Oracle:Enchant permanent\nYou can't choose an untapped permanent as this spell's target as you cast it.\nYou control enchanted permanent.

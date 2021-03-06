@@ -4,4 +4,4 @@ Types:Creature Vedalken Soldier
 PT:2/3
 K:Prowess
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_blademaster.jpg
-Oracle:Prowess
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)

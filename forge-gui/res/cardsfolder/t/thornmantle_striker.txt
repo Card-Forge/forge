@@ -1,0 +1,11 @@
+Name:Thornmantle Striker
+ManaCost:4 B
+Types:Creature Elf Rogue
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBRemoveCounter,DBPump
+SVar:DBRemoveCounter:DB$ RemoveCounter | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | CounterType$ Any | CounterNum$ X | References$ X | SpellDescription$ Remove X counters from target permanent, where X is the number of Elves you control.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True | NumAtt$ -X | NumDef$ -X | References$ X | SpellDescription$ Target creature an opponent controls gets -X/-X until end of turn, where X is the number of Elves you control.
+SVar:X:Count$Valid Elf.YouCtrl
+DeckNeeds:Type$Elf
+Oracle:When Thornmantle Striker enters the battlefield, choose one —\n• Remove X counters from target permanent, where X is the number of Elves you control.\n• Target creature an opponent controls gets -X/-X until end of turn, where X is the number of Elves you control.

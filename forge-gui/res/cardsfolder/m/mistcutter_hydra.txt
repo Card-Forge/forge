@@ -8,4 +8,4 @@ K:Protection from blue
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistcutter_hydra.jpg
-Oracle:Mistcutter Hydra can't be countered.\nHaste, protection from blue\nMistcutter Hydra enters the battlefield with X +1/+1 counters on it.
+Oracle:This spell can't be countered.\nHaste, protection from blue\nMistcutter Hydra enters the battlefield with X +1/+1 counters on it.

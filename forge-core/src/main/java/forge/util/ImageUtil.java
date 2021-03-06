@@ -81,7 +81,7 @@ public class ImageUtil {
 
     public static boolean hasBackFacePicture(PaperCard cp) {
         CardSplitType cst = cp.getRules().getSplitType();
-        return cst == CardSplitType.Transform || cst == CardSplitType.Flip || cst == CardSplitType.Meld;
+        return cst == CardSplitType.Transform || cst == CardSplitType.Flip || cst == CardSplitType.Meld || cst == CardSplitType.Modal;
     }
 
     public static String getNameToUse(PaperCard cp, boolean backFace) {

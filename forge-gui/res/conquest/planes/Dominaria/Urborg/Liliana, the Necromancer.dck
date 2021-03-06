@@ -1,5 +1,7 @@
 [metadata]
 Name=Liliana, the Necromancer
+[Commander]
+1 Liliana, the Necromancer|M19
 [Main]
 1 Abnormal Endurance|M19
 1 Arisen Gorgon|M19
@@ -14,7 +16,6 @@ Name=Liliana, the Necromancer
 1 Josu Vess, Lich Knight|DOM
 1 Liliana's Contract|M19
 1 Liliana's Spoils|M19
-1 Liliana, the Necromancer|M19
 1 Mortuary Mire|C18
 1 Open the Graves|M19
 1 Phyrexian Delver|C18

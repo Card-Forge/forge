@@ -46,7 +46,7 @@ public class TriggerDiscarded extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerDiscarded(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerDiscarded(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -89,8 +89,8 @@ public class TriggerDiscarded extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Card, AbilityKey.Cause);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Cause);
     }
 
     @Override

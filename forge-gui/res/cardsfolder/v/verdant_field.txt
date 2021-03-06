@@ -4,6 +4,5 @@ Types:Enchantment Aura
 K:Enchant land
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ Pump | Description$ Enchanted land has "{T}: Target creature gets +1/+1 until end of turn."
-SVar:Pump:AB$Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/verdant_field.jpg
+SVar:Pump:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1
 Oracle:Enchant land\nEnchanted land has "{T}: Target creature gets +1/+1 until end of turn."

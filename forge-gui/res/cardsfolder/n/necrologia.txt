@@ -1,9 +1,7 @@
 Name:Necrologia
 ManaCost:3 B B
 Types:Instant
-Text:Cast CARDNAME only during your end step.\r\n
-A:SP$ Draw | Cost$ 3 B B PayLife<X> | NumCards$ ChosenX | Defined$ You | ActivationPhases$ End of Turn | PlayerTurn$ True | References$ X | SpellDescription$ Draw X cards.
-SVar:X:XChoice
-#ChosenX SVar created by Cost payment
-SVar:Picture:http://www.wizards.com/global/images/magic/general/necrologia.jpg
-Oracle:Cast Necrologia only during your end step.\nAs an additional cost to cast Necrologia, pay X life.\nDraw X cards.
+Text:Cast this spell only during your end step.\r\n
+A:SP$ Draw | Cost$ 3 B B PayLife<X> | NumCards$ X | Defined$ You | ActivationPhases$ End of Turn | PlayerTurn$ True | References$ X | SpellDescription$ Draw X cards.
+SVar:X:Count$xPaid
+Oracle:Cast this spell only during your end step.\nAs an additional cost to cast this spell, pay X life.\nDraw X cards.

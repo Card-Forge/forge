@@ -1,0 +1,8 @@
+Name:MTGACube
+DeckFile:MTGACube
+IgnoreRarity:True
+LandSetCode:THB
+Singleton:True
+
+Booster: 5 Common, 5 Uncommon, 5 Rare, 1 Mythic                 
+NumPacks:3

@@ -55,6 +55,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     private final JPanel pnlContent = new JPanel(new MigLayout("insets 0, gap 0, wrap, ay center"));
     private final FScrollPane scrContent = new FScrollPane(pnlContent, false);
 
+    private final FLabel btnCheckForUpdates           = _makeButton(localizer.getMessage("btnCheckForUpdates"));
     private final FLabel btnDownloadSetPics           = _makeButton(localizer.getMessage("btnDownloadSetPics"));
     private final FLabel btnDownloadPics              = _makeButton(localizer.getMessage("btnDownloadPics"));
     private final FLabel btnDownloadPicsHQ            = _makeButton(localizer.getMessage("btnDownloadPicsHQ"));
@@ -65,6 +66,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     private final FLabel btnImportPictures            = _makeButton(localizer.getMessage("btnImportPictures"));
     private final FLabel btnHowToPlay                 = _makeButton(localizer.getMessage("btnHowToPlay"));
     private final FLabel btnDownloadPrices            = _makeButton(localizer.getMessage("btnDownloadPrices"));
+    private final FLabel btnDownloadSkins             = _makeButton(localizer.getMessage("btnDownloadSkins"));
     private final FLabel btnLicensing                 = _makeButton(localizer.getMessage("btnLicensing"));
 
     /**
@@ -79,6 +81,9 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         pnlContent.setOpaque(false);
 
         if (javaRecentEnough()) {
+
+            pnlContent.add(btnCheckForUpdates, constraintsBTN);
+            pnlContent.add(_makeLabel(localizer.getMessage("lblCheckForUpdates")), constraintsLBL);
 
             pnlContent.add(btnDownloadPics, constraintsBTN);
             pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPics")), constraintsLBL);
@@ -97,6 +102,9 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
             pnlContent.add(btnDownloadPrices, constraintsBTN);
             pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPrices")), constraintsLBL);
+
+            pnlContent.add(btnDownloadSkins, constraintsBTN);
+            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadSkins")), constraintsLBL);
 
         } else {
 
@@ -162,6 +170,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         return EMenuGroup.SETTINGS;
     }
 
+    public void setCheckForUpdatesCommand(UiCommand command)           { btnCheckForUpdates.setCommand(command);     }
     public void setDownloadPicsCommand(UiCommand command)              { btnDownloadPics.setCommand(command);        }
     public void setDownloadPicsHQCommand(UiCommand command)            { btnDownloadPicsHQ.setCommand(command);      }
     public void setDownloadSetPicsCommand(UiCommand command)           { btnDownloadSetPics.setCommand(command);     }
@@ -173,6 +182,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     public void setHowToPlayCommand(UiCommand command)                 { btnHowToPlay.setCommand(command);           }
     public void setDownloadPricesCommand(UiCommand command)            { btnDownloadPrices.setCommand(command);      }
     public void setLicensingCommand(UiCommand command)                 { btnLicensing.setCommand(command);           }
+    public void setDownloadSkinsCommand(UiCommand command)             { btnDownloadSkins.setCommand(command);           }
 
     public void focusTopButton() {
         btnDownloadPics.requestFocusInWindow();
@@ -242,7 +252,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
             ArrayList<String> cis = new ArrayList<>();
 
             HashMap<String, Integer> cardCount = new HashMap<>();
-            for (CardInSet c : e.getCards()) {
+            for (CardInSet c : e.getAllCardsInSet()) {
                 if (cardCount.containsKey(c.name)) {
                     cardCount.put(c.name, cardCount.get(c.name) + 1);
                 } else {

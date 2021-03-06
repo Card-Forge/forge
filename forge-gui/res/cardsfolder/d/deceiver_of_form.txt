@@ -13,4 +13,4 @@ SVar:FakeScry:DB$ Dig | DigNum$ 1 | AnyNumber$ True | DestinationZone$ Library |
 AI:RemoveDeck:All
 DeckNeeds:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deceiver_of_form.jpg
-Oracle:At the beginning of combat on your turn, reveal the top card of your library. If a creature card is revealed this way, you may have creatures you control other than Deceiver of Form become copies of that card until end of turn. You may put that card on the bottom of your library.
+Oracle:({C} represents colorless mana.)\nAt the beginning of combat on your turn, reveal the top card of your library. If a creature card is revealed this way, you may have creatures you control other than Deceiver of Form become copies of that card until end of turn. You may put that card on the bottom of your library.

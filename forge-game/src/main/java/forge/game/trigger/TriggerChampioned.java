@@ -47,7 +47,7 @@ public class TriggerChampioned extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerChampioned(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerChampioned(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -75,8 +75,8 @@ public class TriggerChampioned extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Championed, AbilityKey.Card);
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Championed, AbilityKey.Card);
     }
 
     @Override

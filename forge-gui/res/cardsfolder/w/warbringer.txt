@@ -6,4 +6,4 @@ S:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Spell.Dash | Activator$ You |
 K:Dash:2 R
 DeckHints:Keyword$Dash
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warbringer.jpg
-Oracle:Dash costs you pay cost {2} less. (as long as this creature is on the battlefield)\nDash {2}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)
+Oracle:Dash costs you pay cost {2} less (as long as this creature is on the battlefield).\nDash {2}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)

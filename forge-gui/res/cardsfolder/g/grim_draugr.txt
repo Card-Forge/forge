@@ -1,0 +1,6 @@
+Name:Grim Draugr
+ManaCost:2 B
+Types:Snow Creature Zombie Berserker
+PT:3/2
+A:AB$ Pump | Cost$ 1 S | Defined$ Self | NumAtt$ +1 | KW$ Menace | SpellDescription$ CARDNAME gets +1/+0 and gains menace until end of turn.
+Oracle:{1}{S}: Grim Draugr gets +1/+0 and gains menace until end of turn. (It can't be blocked except by two or more creatures. {S} can be paid with one mana from a snow source.)

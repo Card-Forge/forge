@@ -1,0 +1,12 @@
+Name:Colossal Plow
+ManaCost:2
+Types:Artifact Vehicle
+PT:6/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ Whenever CARDNAME attacks, add {W}{W}{W} and you gain 3 life. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:TrigMana:DB$ Mana | Produced$ W W W | PersistentMana$ True | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
+K:Crew:6
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$LifeGain
+DeckHints:Color$White
+Oracle:Whenever Colossal Plow attacks, add {W}{W}{W} and you gain 3 life. Until end of turn, you don't lose this mana as steps and phases end.\nCrew 6 (Tap any number of creatures you control with total power 6 or more: This Vehicle becomes an artifact creature until end of turn.)

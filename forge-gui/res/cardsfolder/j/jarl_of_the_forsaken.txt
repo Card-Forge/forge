@@ -1,0 +1,9 @@
+Name:Jarl of the Forsaken
+ManaCost:3 B
+Types:Creature Zombie Cleric
+PT:3/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME enters the battlefield, destroy target creature or planeswalker an opponent controls that was dealt damage this turn.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl+wasDealtDamageThisTurn,Planeswalker.OppCtrl+wasDealtDamageThisTurn | TgtPrompt$ Select target creature or planeswalker an opponent controls that was dealt damage this turn.
+K:Foretell:1 B
+Oracle:Flash\nWhen Jarl of the Forsaken enters the battlefield, destroy target creature or planeswalker an opponent controls that was dealt damage this turn.\nForetell {1}{B} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

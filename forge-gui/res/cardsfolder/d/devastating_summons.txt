@@ -1,9 +1,7 @@
 Name:Devastating Summons
 ManaCost:R
 Types:Sorcery
-A:SP$ Token | Cost$ R Sac<X/Land> | TokenAmount$ 2 | TokenScript$ r_x_x_elemental | LegacyImage$ r x x elemental roe | TokenOwner$ You | TokenPower$ ChosenX | TokenToughness$ ChosenX | References$ X | SpellDescription$ Create two X/X red Elemental creature tokens.
-SVar:X:XChoice
-#ChosenX SVar created by Cost payment
+A:SP$ Token | Cost$ R Sac<X/Land> | TokenAmount$ 2 | TokenScript$ r_x_x_elemental | LegacyImage$ r x x elemental roe | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | References$ X | SpellDescription$ Create two X/X red Elemental creature tokens.
+SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/devastating_summons.jpg
-Oracle:As an additional cost to cast Devastating Summons, sacrifice X lands.\nCreate two X/X red Elemental creature tokens.
+Oracle:As an additional cost to cast this spell, sacrifice X lands.\nCreate two X/X red Elemental creature tokens.

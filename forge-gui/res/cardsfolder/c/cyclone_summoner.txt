@@ -1,0 +1,8 @@
+Name:Cyclone Summoner
+ManaCost:5 U U
+Types:Creature Giant Wizard
+PT:7/7
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.wasCastFromHand+Self | Execute$ TrigChangeZoneAll | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, return all permanents to their owners' hands except for Giants, Wizards, and lands.
+SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Permanent.nonLand+nonGiant+nonWizard | Origin$ Battlefield | Destination$ Hand
+DeckHints:Type$Giant|Wizard
+Oracle:When Cyclone Summoner enters the battlefield, if you cast it from your hand, return all permanents to their owners' hands except for Giants, Wizards, and lands.

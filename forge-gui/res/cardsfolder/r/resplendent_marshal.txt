@@ -1,0 +1,12 @@
+Name:Resplendent Marshal
+ManaCost:1 W W
+Types:Creature Angel Warrior
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield or dies, you may exile another creature card from your graveyard. When you do, put a +1/+1 counter on each creature you control other than CARDNAME that shares a creature type with the exiled card.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or dies, you may exile another creature card from your graveyard. When you do, put a +1/+1 counter on each creature you control other than CARDNAME that shares a creature type with the exiled card.
+SVar:TrigExile:DB$ ChangeZone | ChangeType$ Creature.Other+YouOwn | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | Hidden$ True | Chooser$ You | Optional$ True | SubAbility$ DBPutCounters
+SVar:DBPutCounters:DB$ PutCounterAll | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ GE1 | ValidCards$ Creature.Other+YouCtrl+sharesCreatureTypeWith Remembered | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Graveyard & Ability$Counters
+Oracle:Flying\nWhen Resplendent Marshal enters the battlefield or dies, you may exile another creature card from your graveyard. When you do, put a +1/+1 counter on each creature you control other than Resplendent Marshal that shares a creature type with the exiled card.

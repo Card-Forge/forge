@@ -7,4 +7,4 @@ A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | TokenAmount$ 3 | TokenScript$ w_1_1_
 A:AB$ DestroyAll | Cost$ SubCounter<5/LOYALTY> | ValidCards$ Permanent.nonLand+nonToken+Other | Planeswalker$ True | Ultimate$ True | SpellDescription$ Destroy all other permanents except for lands and tokens.
 SVar:XLife:Count$TypeYouCtrl.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elspeth_tirel.jpg
-Oracle:[+2]: You gain 1 life for each creature you control.\n[-2]: Create three 1/1 white Soldier creature tokens.\n[-5]: Destroy all other permanents except for lands and tokens.
+Oracle:[+2]: You gain 1 life for each creature you control.\n[−2]: Create three 1/1 white Soldier creature tokens.\n[−5]: Destroy all other permanents except for lands and tokens.

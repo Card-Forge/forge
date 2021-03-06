@@ -1,0 +1,9 @@
+Name:Hullbreacher
+ManaCost:2 U
+Types:Creature Merfolk Pirate
+PT:3/2
+K:Flash
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ Opponent | ReplaceWith$ RepTreasure | NotFirstCardInDrawStep$ True | Description$ If an opponent would draw a card except the first one they draw in each of their draw steps, instead you create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:RepTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
+DeckHas:Ability$Token
+Oracle:Flash\nIf an opponent would draw a card except the first one they draw in each of their draw steps, instead you create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

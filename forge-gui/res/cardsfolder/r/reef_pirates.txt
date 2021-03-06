@@ -2,7 +2,6 @@ Name:Reef Pirates
 ManaCost:1 U U
 Types:Creature Zombie Pirate
 PT:2/2
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, that player puts the top card of their library into their graveyard.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, that player mills a card.
 SVar:TrigMill:DB$ Mill | NumCards$ 1 | Defined$ TriggeredTarget
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reef_pirates.jpg
-Oracle:Whenever Reef Pirates deals damage to an opponent, that player puts the top card of their library into their graveyard.
+Oracle:Whenever Reef Pirates deals damage to an opponent, that player mills a card.

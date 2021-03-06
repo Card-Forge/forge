@@ -1,0 +1,12 @@
+[metadata]
+Code=PISD
+Date=2011-01-01
+Name=Innistrad Promos
+Type=Reprint
+
+[cards]
+13 R Elite Inquisitor
+64 R Ludevic's Test Subject
+97 U Diregraf Ghoul
+140 R Devil's Play
+193 R Mayor of Avabruck

@@ -3,11 +3,10 @@ ManaCost:5 R R
 Types:Creature Dragon
 PT:4/4
 K:Flying
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, exile that many cards from the top of your library. Until end of turn, you may cast nonland cards from among those exiled cards.
-SVar:TrigExile:DB$ Mill | Defined$ You | NumCards$ X | References$ X | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, exile that many cards from the top of your library. Until end of turn, you may cast spells from among those exiled cards.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ X | References$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | RememberObjects$ RememberedCard | SubAbility$ DBCleanup
 SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.nonLand+IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ Until end of turn, you may cast nonland cards from among those exiled cards.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:TriggerCount$DamageAmount 
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_pillager.jpg
-Oracle:Flying\nWhenever Dream Pillager deals combat damage to a player, exile that many cards from the top of your library. Until end of turn, you may cast nonland cards from among those exiled cards.
+SVar:X:TriggerCount$DamageAmount
+Oracle:Flying\nWhenever Dream Pillager deals combat damage to a player, exile that many cards from the top of your library. Until end of turn, you may cast spells from among those exiled cards.

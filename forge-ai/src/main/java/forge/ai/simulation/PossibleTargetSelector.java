@@ -167,22 +167,21 @@ public class PossibleTargetSelector {
     private void selectTargetsByIndexImpl(int index) {
         targetingSa.resetTargets();
 
-        while (targetingSa.getTargets().getNumTargeted() < maxTargets && index < validTargets.size()) {
+        while (targetingSa.getTargets().size() < maxTargets && index < validTargets.size()) {
             targetingSa.getTargets().add(validTargets.get(index++));
         }
 
         // Divide up counters, since AI is expected to do this. For now,
         // divided evenly with left-overs going to the first target.
-        if (targetingSa.hasParam("DividedAsYouChoose")) {
+        if (targetingSa.isDividedAsYouChoose()) {
             final int targetCount = targetingSa.getTargets().getTargetCards().size();
             if (targetCount > 0) {
                 final String amountStr = targetingSa.getParam("CounterNum");
                 final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, targetingSa);
                 final int amountPerCard = amount / targetCount;
                 int amountLeftOver = amount - (amountPerCard * targetCount);
-                final TargetRestrictions tgtRes = targetingSa.getTargetRestrictions();
-                for (GameObject target : targetingSa.getTargets().getTargets()) {
-                    tgtRes.addDividedAllocation(target, amountPerCard + amountLeftOver);
+                for (GameObject target : targetingSa.getTargets()) {
+                    targetingSa.addDividedAllocation(target, amountPerCard + amountLeftOver);
                     amountLeftOver = 0;
                 }
             }
@@ -190,7 +189,7 @@ public class PossibleTargetSelector {
     }
 
     public Targets getLastSelectedTargets() {
-        return new Targets(targetingSaIndex, validTargets.size(), targetIndex - 1, targetingSa.getTargets().getTargetedString());
+        return new Targets(targetingSaIndex, validTargets.size(), targetIndex - 1, targetingSa.getTargets().toString());
     }
 
     public boolean selectTargetsByIndex(int targetIndex) {

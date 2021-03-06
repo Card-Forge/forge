@@ -1,12 +1,21 @@
 package forge.screens.settings;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import forge.Forge;
 import forge.download.GuiDownloadAchievementImages;
 import forge.download.GuiDownloadPicturesLQ;
 import forge.download.GuiDownloadPrices;
 import forge.download.GuiDownloadQuestImages;
 import forge.download.GuiDownloadSetPicturesLQ;
 import forge.download.GuiDownloadService;
-
+import forge.download.GuiDownloadSkins;
+import forge.download.GuiDownloadZipService;
+import forge.properties.ForgeConstants;
+import forge.util.FileUtil;
 import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
@@ -24,6 +33,7 @@ import forge.toolbox.FFileChooser.ChoiceType;
 import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
+import forge.toolbox.GuiChoose;
 import forge.util.Callback;
 
 public class FilesPage extends TabPage<SettingsScreen> {
@@ -31,7 +41,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
     private final Localizer localizer = Localizer.getInstance();
 
     protected FilesPage() {
-        super(Localizer.getInstance().getMessage("lblFiles"), FSkinImage.OPEN);
+        super(Localizer.getInstance().getMessage("lblFiles"), Forge.hdbuttons ? FSkinImage.HDOPEN : FSkinImage.OPEN);
 
         lstItems.setListItemRenderer(new FilesItemRenderer());
 
@@ -75,7 +85,34 @@ public class FilesPage extends TabPage<SettingsScreen> {
                 return new GuiDownloadPrices();
             }
         }, 0);
-
+        lstItems.addItem(new ContentDownloader(localizer.getMessage("btnDownloadSkins"),
+                localizer.getMessage("lblDownloadSkins")) {
+            @Override
+            protected GuiDownloadService createService() {
+                return new GuiDownloadSkins();
+            }
+        }, 0);
+        lstItems.addItem(new OptionContentDownloader(localizer.getMessage("btnDownloadCJKFonts"),
+                localizer.getMessage("lblDownloadCJKFonts"),
+                localizer.getMessage("lblDownloadCJKFontPrompt")) {
+            @Override
+            protected Map<String, String> getCategories() {
+                // read CJK font list
+                Map<String, String> categories = new TreeMap<>();
+                List<String> lines = FileUtil.readFile(ForgeConstants.CJK_FONTS_LIST_FILE);
+                List<String> options = new ArrayList<>();
+                for (String line : lines) {
+                    int idx = line.indexOf('|');
+                    if (idx != -1) {
+                        String name = line.substring(0, idx).trim();
+                        String url = line.substring(idx + 1).trim();
+                        categories.put(name, url);
+                        options.add(name);
+                    }
+                }
+                return categories;
+            }
+        }, 0);
         //storage locations
         final StorageOption cardPicsOption = new StorageOption(localizer.getMessage("lblCardPicsLocation"), ForgeProfileProperties.getCardPicsDir()) {
             @Override
@@ -167,6 +204,29 @@ public class FilesPage extends TabPage<SettingsScreen> {
             new GuiDownloader(createService()).show();
         }
         protected abstract GuiDownloadService createService();
+    }
+
+    private abstract class OptionContentDownloader extends FilesItem {
+        private final String prompt;
+
+        OptionContentDownloader(String label0, String description0, String propmt0) {
+            super(label0, description0);
+            prompt = propmt0;
+        }
+
+        @Override
+        public void select() {
+            final Map<String, String> categories = getCategories();
+            GuiChoose.one(prompt, categories.keySet(), new Callback<String>() {
+                @Override
+                public void run(String result) {
+                    final String url = categories.get(result);
+                    final String name = url.substring(url.lastIndexOf("/") + 1);
+                    new GuiDownloader(new GuiDownloadZipService(name, name, url, ForgeConstants.FONTS_DIR, null, null)).show();
+                }
+            });
+        }
+        protected abstract Map<String, String> getCategories();
     }
 
     private abstract class StorageOption extends FilesItem {

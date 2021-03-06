@@ -94,7 +94,8 @@ public class VPrompt implements IVDoc<CPrompt> {
 
         tarMessage.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tarMessage.setMargin(new Insets(3, 3, 3, 3));
-
+        tarMessage.getAccessibleContext().setAccessibleName("Prompt");
+        tarMessage.setFocusable(true); // Allow tab to navigate to the prompt.
         messageScroller.getViewport().getView().addMouseListener(new MouseAdapter() {
         	@Override 
         	public void mouseEntered(final MouseEvent e) {

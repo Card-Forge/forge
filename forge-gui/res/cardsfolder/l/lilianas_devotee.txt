@@ -1,0 +1,12 @@
+Name:Liliana's Devotee
+ManaCost:2 B
+Types:Creature Human Warlock
+PT:2/3
+S:Mode$ Continuous | Affected$ Zombie.YouCtrl | AddPower$ 1 | Description$ Zombies you control get +1/+0.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Zombie
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if a creature died this turn, you may pay {1}{B}. If you do, create a 2/2 black Zombie creature token.
+SVar:TrigToken:AB$ Token | Cost$ 1 B | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+DeckHas:Ability$Token
+Oracle:Zombies you control get +1/+0.\nAt the beginning of your end step, if a creature died this turn, you may pay {1}{B}. If you do, create a 2/2 black Zombie creature token.

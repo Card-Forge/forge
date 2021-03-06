@@ -1,6 +1,9 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.ai.*;
 import forge.card.CardStateName;
 import forge.card.CardTypeView;
@@ -14,12 +17,15 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class PlayAi extends SpellAbilityAi {
 
@@ -49,6 +55,21 @@ public class PlayAi extends SpellAbilityAi {
             }
         } else if (!sa.hasParam("Valid")) {
             cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+            if (cards.isEmpty()) {
+                return false;
+            }
+        }
+
+        if (sa.hasParam("ValidSA")) {
+            final String valid[] = {sa.getParam("ValidSA")};
+            final Iterator<Card> itr = cards.iterator();
+            while (itr.hasNext()) {
+                final Card c = itr.next();
+                final List<SpellAbility> validSA = Lists.newArrayList(Iterables.filter(AbilityUtils.getBasicSpellsFromPlayEffect(c, ai), SpellAbilityPredicates.isValid(valid, ai , c, sa)));
+                if (validSA.size() == 0) {
+                    itr.remove();
+                }
+            }
             if (cards.isEmpty()) {
                 return false;
             }
@@ -84,11 +105,11 @@ public class PlayAi extends SpellAbilityAi {
             return ComputerUtil.targetPlayableSpellCard(ai, cards, sa, sa.hasParam("WithoutManaCost"));                
         } else if (logic.startsWith("NeedsChosenCard")) {
             int minCMC = 0;
-            if (sa.getPayCosts() != null && sa.getPayCosts().getCostMana() != null) {
-                minCMC = sa.getPayCosts().getCostMana().getMana().getCMC();
+            if (sa.getPayCosts().getCostMana() != null) {
+                minCMC = sa.getPayCosts().getTotalMana().getCMC();
             }
             validOpts = CardLists.filter(validOpts, CardPredicates.greaterCMC(minCMC));
-            return chooseSingleCard(ai, sa, validOpts, sa.hasParam("Optional"), null) != null;
+            return chooseSingleCard(ai, sa, validOpts, sa.hasParam("Optional"), null, null) != null;
         }
 
         if (source != null && source.hasKeyword(Keyword.HIDEAWAY) && source.hasRemembered()) {
@@ -142,8 +163,7 @@ public class PlayAi extends SpellAbilityAi {
      */
     @Override
     public Card chooseSingleCard(final Player ai, final SpellAbility sa, Iterable<Card> options,
-            final boolean isOptional,
-            Player targetedPlayer) {
+            final boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         List<Card> tgtCards = CardLists.filter(options, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -156,9 +176,7 @@ public class PlayAi extends SpellAbilityAi {
                     if (sa.hasParam("WithoutManaCost")) {
                         // Try to avoid casting instants and sorceries with X in their cost, since X will be assumed to be 0.
                         if (!(spell instanceof SpellPermanent)) {
-                            if (spell.getPayCosts() != null
-                                    && spell.getPayCosts().getCostMana() != null
-                                    && spell.getPayCosts().getCostMana().getMana().countX() > 0) {
+                            if (spell.getPayCosts().getTotalMana().countX() > 0) {
                                 continue;
                             }
                         }

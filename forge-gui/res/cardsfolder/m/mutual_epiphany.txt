@@ -1,7 +1,7 @@
 Name:Mutual Epiphany
 ManaCost:no cost
 Types:Phenomenon
-T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | TriggerZones$ Command | Execute$ Epiphany | TriggerDescription$ When you encounter CARDNAME, each player draws four cards. (Then planeswalk away from this phenomenon)
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ Epiphany | TriggerDescription$ When you encounter CARDNAME, each player draws four cards. (Then planeswalk away from this phenomenon)
 SVar:Epiphany:DB$ Draw | Defined$ Player | NumCards$ 4 | SubAbility$ PWAway | SpellDescription$ Each player draws four cards.
 SVar:PWAway:DB$ Planeswalk | Cost$ 0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mutual_epiphany.jpg

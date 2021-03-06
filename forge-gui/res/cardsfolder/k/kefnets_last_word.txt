@@ -7,4 +7,4 @@ SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefiel
 SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ You | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kefnets_last_word.jpg
-Oracle:Gain control of target artifact, creature or enchantment. Lands you control don't untap during your next untap step.
+Oracle:Gain control of target artifact, creature, or enchantment. Lands you control don't untap during your next untap step.

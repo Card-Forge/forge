@@ -1,0 +1,19 @@
+Name:Vivien, Monsters' Advocate
+ManaCost:3 G G
+Types:Legendary Planeswalker Vivien
+Loyalty:3
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Creature.TopLibrary+YouCtrl | MayPlay$ True | AffectedZone$ Library | Description$ You may cast creature spells from the top of your library.
+SVar:NonStackingEffect:True
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You | LegacyImage$ g 3 3 beast iko | RememberTokens$ True | SubAbility$ DBGenericChoice | SpellDescription$ Create a 3/3 green Beast creature token. Put your choice of a vigilance counter, a reach counter, or a trample counter on it.
+SVar:DBGenericChoice:DB$ GenericChoice | Defined$ You | Choices$ Vigilance,Reach,Trample | AILogic$ Always
+SVar:Reach:DB$ PutCounter | Choices$ Card.IsRemembered | ChoiceTitle$ Choose a token to put a reach counter on | CounterType$ Reach | CounterNum$ 1 | SubAbility$ DBCleanup | SpellDescription$ Reach
+SVar:Trample:DB$ PutCounter | Choices$ Card.IsRemembered | ChoiceTitle$ Choose a token to put a trample counter on | CounterType$ Trample | CounterNum$ 1 | SubAbility$ DBCleanup | SpellDescription$ Trample
+SVar:Vigilance:DB$ PutCounter | Choices$ Card.IsRemembered | ChoiceTitle$ Choose a token to put a vigilance counter on | CounterType$ Vigilance | CounterNum$ 1 | SubAbility$ DBCleanup | SpellDescription$ Vigilance
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Effect | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Ultimate$ True | Triggers$ TrigSearch | SVars$ DBSearch,X | AILogic$ WillCastCreature | SpellDescription$ When you cast your next creature spell this turn, search your library for a creature card with lesser converted mana cost, put it onto the battlefield, then shuffle your library.
+SVar:TrigSearch:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | OneOff$ True | TriggerZones$ Command | Execute$ DBSearch | TriggerDescription$ When you cast your next creature spell this turn, search your library for a creature card with lesser converted mana cost, put it onto the battlefield, then shuffle your library.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcLTX | References$ X | ChangeNum$ 1
+SVar:X:TriggerCount$CastSACMC
+DeckHas:Ability$Token & Ability$Counters
+Oracle:You may look at the top card of your library any time.\nYou may cast creature spells from the top of your library.\n[+1]: Create a 3/3 green Beast creature token. Put your choice of a vigilance counter, a reach counter, or a trample counter on it.\n[−2]: When you cast your next creature spell this turn, search your library for a creature card with lesser converted mana cost, put it onto the battlefield, then shuffle your library.

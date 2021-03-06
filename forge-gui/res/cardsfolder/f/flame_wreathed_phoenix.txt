@@ -6,9 +6,8 @@ K:Flying
 K:Tribute:2
 SVar:TrigNotTribute:DB$ Animate | Permanent$ True | Triggers$ FlamePhoenixChangeZone | Keywords$ Haste | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, it gains haste and "When this creature dies, return it to its owner's hand."
 SVar:FlamePhoenixChangeZone:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, return it to its owner's hand.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredCard
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredNewCardLKICopy
 SVar:TributeAILogic:CanBlockThisTurn
 SVar:PlayMain1:ALWAYS
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_wreathed_phoenix.jpg
 Oracle:Flying\nTribute 2 (As this creature enters the battlefield, an opponent of your choice may put two +1/+1 counters on it.)\nWhen Flame-Wreathed Phoenix enters the battlefield, if tribute wasn't paid, it gains haste and "When this creature dies, return it to its owner's hand."

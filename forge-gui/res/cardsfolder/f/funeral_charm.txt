@@ -6,4 +6,4 @@ SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Choose a player | Nu
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ -1 | SpellDescription$ Target creature gets +2/-1 until end of turn.
 SVar:DBPump2:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Swampwalk | SpellDescription$ Target creature gains swampwalk until end of turn.
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108895.jpg
-Oracle:Choose one —\n• Target player discards a card.\n• Target creature gets +2/-1 until end of turn.\n• Target creature gains swampwalk until end of turn.
+Oracle:Choose one —\n• Target player discards a card.\n• Target creature gets +2/-1 until end of turn.\n• Target creature gains swampwalk until end of turn. (It can't be blocked as long as defending player controls a Swamp.)

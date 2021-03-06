@@ -6,71 +6,68 @@ MciCode=dd1
 Type=Duel_Decks
 
 [cards]
-33 U Akki Coalflinger
-2 R Allosaurus Rider
 1 R Ambush Commander
-54 U Boggart Shenanigans
-34 R Clickslither
-C Elemental
-C Elf Warrior
+2 R Allosaurus Rider
 3 C Elvish Eulogist
 4 U Elvish Harbinger
-20 U Elvish Promenade
 5 C Elvish Warrior
+6 U Gempalm Strider
+7 U Heedless One
+8 U Imperious Perfect
+9 C Llanowar Elves
+10 C Lys Alana Huntmaster
+11 C Stonewood Invoker
+12 U Sylvan Messenger
+13 C Timberwatch Elf
+14 R Voice of the Woods
+15 C Wellwisher
+16 C Wirewood Herald
+17 U Wirewood Symbiote
+18 C Wood Elves
+19 U Wren's Run Vanquisher
+20 U Elvish Promenade
+21 C Giant Growth
+22 U Harmonize
+23 C Wildsize
+24 C Moonglove Extract
+25 R Slate of Ancestry
+26 U Wirewood Lodge
+27 C Tranquil Thicket
+28 L Forest
+28 L Forest
+28 L Forest
+28 L Forest
+32 R Siege-Gang Commander
+33 U Akki Coalflinger
+34 R Clickslither
 35 C Emberwilde Augur
 36 U Flamewave Invoker
-28 L Forest
-28 L Forest
-28 L Forest
-28 L Forest
-57 C Forgotten Cave
 37 U Gempalm Incinerator
-6 U Gempalm Strider
-21 C Giant Growth
-C Goblin
-58 U Goblin Burrows
 38 C Goblin Cohort
 39 U Goblin Matron
 40 U Goblin Ringleader
 41 C Goblin Sledder
 42 U Goblin Warchief
-22 U Harmonize
-7 U Heedless One
 43 R Ib Halfheart, Goblin Tactician
-8 U Imperious Perfect
-9 C Llanowar Elves
-10 C Lys Alana Huntmaster
 44 U Mogg Fanatic
 45 C Mogg War Marshal
-24 C Moonglove Extract
-62 L Mountain
-62 L Mountain
-62 L Mountain
-62 L Mountain
 46 C Mudbutton Torchrunner
 47 C Raging Goblin
 48 U Reckless One
-32 R Siege-Gang Commander
 49 U Skirk Drill Sergeant
 50 R Skirk Fire Marshal
 51 C Skirk Prospector
 52 C Skirk Shaman
-25 R Slate of Ancestry
-55 C Spitting Earth
-11 C Stonewood Invoker
-12 U Sylvan Messenger
 53 U Tar Pitcher
+54 U Boggart Shenanigans
+55 C Spitting Earth
 56 C Tarfire
-13 C Timberwatch Elf
-27 C Tranquil Thicket
-14 R Voice of the Woods
-15 C Wellwisher
-23 C Wildsize
-16 C Wirewood Herald
-26 U Wirewood Lodge
-17 U Wirewood Symbiote
-18 C Wood Elves
-19 U Wren's Run Vanquisher
+57 C Forgotten Cave
+58 U Goblin Burrows
+62 L Mountain
+62 L Mountain
+62 L Mountain
+62 L Mountain
 
 [tokens]
 r_1_1_goblin

@@ -1,0 +1,7 @@
+Name:Demon Berserker
+ManaCost:no cost
+Types:Creature Demon Berserker
+Colors:red
+PT:2/3
+K:Menace
+Oracle:Menace

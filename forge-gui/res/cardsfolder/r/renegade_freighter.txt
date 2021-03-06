@@ -6,4 +6,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1 | KW$ Trample
 K:Crew:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/renegade_freighter.jpg
-Oracle:Whenever Renegade Freighter attacks, it gets +1/+1 and gains trample until end of turn.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: The Vehicle becomes an artifact creature until end of turn.)
+Oracle:Whenever Renegade Freighter attacks, it gets +1/+1 and gains trample until end of turn.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

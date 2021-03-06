@@ -23,6 +23,13 @@ public enum CSubmenuDownloaders implements ICDoc {
             VSubmenuDownloaders.SINGLETON_INSTANCE.showLicensing();
         }
     };
+    private final UiCommand cmdCheckForUpdates = new UiCommand() {
+        @Override
+        public void run() {
+            new AutoUpdater(false).attemptToUpdate();
+        }
+    };
+
     private final UiCommand cmdPicDownload = new UiCommand() {
         @Override public void run() {
             new GuiDownloader(new GuiDownloadPicturesLQ()).show();
@@ -51,6 +58,11 @@ public enum CSubmenuDownloaders implements ICDoc {
     private final UiCommand cmdDownloadPrices = new UiCommand() {
         @Override public void run() {
             new GuiDownloader(new GuiDownloadPrices()).show();
+        }
+    };
+    private final UiCommand cmdDownloadSkins = new UiCommand() {
+        @Override public void run() {
+            new GuiDownloader(new GuiDownloadSkins()).show();
         }
     };
     private final UiCommand cmdHowToPlay = new UiCommand() {
@@ -84,6 +96,7 @@ public enum CSubmenuDownloaders implements ICDoc {
     @Override
     public void initialize() {
         final VSubmenuDownloaders view = VSubmenuDownloaders.SINGLETON_INSTANCE;
+        view.setCheckForUpdatesCommand(cmdCheckForUpdates);
         view.setDownloadPicsCommand(cmdPicDownload);
         view.setDownloadPicsHQCommand(cmdPicDownloadHQ);
         view.setDownloadSetPicsCommand(cmdSetDownload);
@@ -94,6 +107,7 @@ public enum CSubmenuDownloaders implements ICDoc {
         view.setImportPicturesCommand(cmdImportPictures);
         view.setHowToPlayCommand(cmdHowToPlay);
         view.setDownloadPricesCommand(cmdDownloadPrices);
+        view.setDownloadSkinsCommand(cmdDownloadSkins);
         view.setLicensingCommand(cmdLicensing);
     }
 

@@ -1,7 +1,7 @@
 Name:Shower of Coals
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 3 R R | NumDmg$ X | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | References$ X | SpellDescription$ CARDNAME deals 2 damage to each of up to three targets. Threshold — CARDNAME deals 4 damage to each of those targets instead if seven or more cards are in your graveyard.
+A:SP$ DealDamage | Cost$ 3 R R | NumDmg$ X | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | References$ X | SpellDescription$ CARDNAME deals 2 damage to each of up to three targets. Threshold — CARDNAME deals 4 damage to each of those permanents and/or players instead if seven or more cards are in your graveyard.
 SVar:X:Count$Threshold.4.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shower_of_coals.jpg
-Oracle:Shower of Coals deals 2 damage to each of up to three targets.\nThreshold — Shower of Coals deals 4 damage to each of those targets instead if seven or more cards are in your graveyard.
+Oracle:Shower of Coals deals 2 damage to each of up to three targets.\nThreshold — Shower of Coals deals 4 damage to each of those permanents and/or players instead if seven or more cards are in your graveyard.

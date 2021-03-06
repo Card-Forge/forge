@@ -21,7 +21,7 @@ import com.google.common.base.Strings;
 
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CounterType;
+import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -46,6 +46,10 @@ public class CostPayEnergy extends CostPart {
 
     @Override
     public int paymentOrder() { return 7; }
+
+    public Integer getMaxAmountX(final SpellAbility ability, final Player payer) {
+        return payer.getCounters(CounterEnumType.ENERGY);
+    }
 
     /*
      * (non-Javadoc)
@@ -82,14 +86,10 @@ public class CostPayEnergy extends CostPart {
     public final boolean canPay(final SpellAbility ability, final Player payer) {
         Integer amount = this.convertAmount();
         if (amount == null) { // try to calculate when it's defined.
-            String sAmount = getAmount();
-            String sVar = ability.getSVar(sAmount);
-            if (!sVar.startsWith("XChoice")) {
                 amount = AbilityUtils.calculateAmount(ability.getHostCard(), getAmount(), ability);
-            }
         }
 
-        return payer.getCounters(CounterType.ENERGY) >= amount;
+        return payer.getCounters(CounterEnumType.ENERGY) >= amount;
     }
 
     @Override

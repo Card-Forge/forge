@@ -2,9 +2,9 @@ Name:Silumgar's Scorn
 ManaCost:U U
 Types:Instant
 K:Presence:Dragon
-A:SP$ Counter | Cost$ U U | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell | UnlessCost$ 1 | ConditionCheckSVar$ TotalPresence | ConditionSVarCompare$ EQ0 | References$ TotalPresence | StackDescription$ SpellDescription | SubAbility$ DBCounter | SpellDescription$ Counter target spell unless its controller pays {1}. If you revealed a Dragon card or controlled a Dragon as you cast CARDNAME, counter that spell instead.
+A:SP$ Counter | Cost$ U U | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell | UnlessCost$ 1 | ConditionCheckSVar$ TotalPresence | ConditionSVarCompare$ EQ0 | References$ TotalPresence | StackDescription$ SpellDescription | SubAbility$ DBCounter | SpellDescription$ Counter target spell unless its controller pays {1}. If you revealed a Dragon card or controlled a Dragon as you cast this spell, counter that spell instead.
 SVar:DBCounter:DB$ Counter | Defined$ Targeted | References$ TotalPresence | ConditionCheckSVar$ TotalPresence | ConditionSVarCompare$ GE1 | StackDescription$ None
 SVar:TotalPresence:Count$Presence_Dragon.1.0
 DeckHints:Type$Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silumgars_scorn.jpg
-Oracle:As an additional cost to cast Silumgar's Scorn, you may reveal a Dragon card from your hand.\nCounter target spell unless its controller pays {1}. If you revealed a Dragon card or controlled a Dragon as you cast Silumgar's Scorn, counter that spell instead.
+Oracle:As an additional cost to cast this spell, you may reveal a Dragon card from your hand.\nCounter target spell unless its controller pays {1}. If you revealed a Dragon card or controlled a Dragon as you cast this spell, counter that spell instead.

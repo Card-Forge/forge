@@ -3,6 +3,5 @@ ManaCost:2 G G
 Types:Creature Bear
 PT:3/3
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets +2/+2 until end of turn.
-SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/razorclaw_bear.jpg
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 Oracle:Whenever Razorclaw Bear becomes blocked, it gets +2/+2 until end of turn.

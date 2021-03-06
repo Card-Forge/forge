@@ -1,22 +1,22 @@
 package forge.game.keyword;
 
-import java.io.Serializable;
-
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 
 import forge.game.card.Card;
 
-public class KeywordCollection implements Iterable<String>, Serializable {
-    private static final long serialVersionUID = -2882986558147844702L;
-    
+public class KeywordCollection implements Iterable<KeywordInterface> {
+
     private boolean hidden = false;
 
     private transient KeywordCollectionView view;
-    private final Multimap<Keyword, KeywordInterface> map = MultimapBuilder.enumKeys(Keyword.class)
+    // don't use enumKeys it causes a slow down
+    private final Multimap<Keyword, KeywordInterface> map = MultimapBuilder.hashKeys()
             .arrayListValues().build();
 
     public KeywordCollection() {
@@ -64,7 +64,7 @@ public class KeywordCollection implements Iterable<String>, Serializable {
             return true;
         }
         return false;
-        
+
     }
 
     public void addAll(Iterable<String> keywords) {
@@ -82,10 +82,10 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         }
         return result;
     }
-    
+
     public boolean remove(String keyword) {
         Iterator<KeywordInterface> it = map.values().iterator();
-        
+
         boolean result = false;
         while (it.hasNext()) {
             KeywordInterface k = it.next();
@@ -94,12 +94,16 @@ public class KeywordCollection implements Iterable<String>, Serializable {
                 result = true;
             }
         }
-        
+
         return result;
     }
 
     public boolean remove(KeywordInterface keyword) {
         return map.remove(keyword.getKeyword(), keyword);
+    }
+
+    public boolean removeAll(Keyword kenum) {
+        return !map.removeAll(kenum).isEmpty();
     }
 
     public boolean removeAll(Iterable<String> keywords) {
@@ -144,7 +148,7 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         }
         return amount;
     }
-    
+
     public Collection<KeywordInterface> getValues() {
         return map.values();
     }
@@ -153,34 +157,18 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         return map.get(keyword);
     }
 
+    public List<String> asStringList() {
+        List<String> result = Lists.newArrayList();
+        for (KeywordInterface kw : getValues()) {
+            result.add(kw.getOriginal());
+        }
+        return result;
+    }
+
     public void setHostCard(final Card host) {
         for (KeywordInterface k : map.values()) {
             k.setHostCard(host);
         }
-    }
-
-    @Override
-    public Iterator<String> iterator() {
-        return new Iterator<String>() {
-            private final Iterator<KeywordInterface> iterator = map.values().iterator();
-            
-
-            @Override
-            public boolean hasNext() {
-                return iterator.hasNext();
-            }
-
-            @Override
-            public String next() {
-                KeywordInterface entry = iterator.next();
-                return entry.getOriginal();
-            }
-
-            @Override
-            public void remove() {
-                //Don't support this
-            }
-        };
     }
 
     /* (non-Javadoc)
@@ -201,8 +189,7 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         return view;
     }
 
-    public class KeywordCollectionView implements Iterable<String>, Serializable {
-        private static final long serialVersionUID = 7536969077044188264L;
+    public class KeywordCollectionView implements Iterable<KeywordInterface> {
 
         protected KeywordCollectionView() {
         }
@@ -226,9 +213,18 @@ public class KeywordCollection implements Iterable<String>, Serializable {
             return KeywordCollection.this.contains(keyword);
         }
 
+        public List<String> asStringList() {
+            return KeywordCollection.this.asStringList();
+        }
+
         @Override
-        public Iterator<String> iterator() {
+        public Iterator<KeywordInterface> iterator() {
             return KeywordCollection.this.iterator();
         }
+    }
+
+    @Override
+    public Iterator<KeywordInterface> iterator() {
+        return this.map.values().iterator();
     }
 }

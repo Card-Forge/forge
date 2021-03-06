@@ -18,14 +18,13 @@
 package forge.game.cost;
 
 import forge.game.ability.effects.FlipCoinEffect;
-import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
 /**
  * This is for the "FlipCoin" Cost
  */
-public class CostFlipCoin extends CostPartWithList {
+public class CostFlipCoin extends CostPart {
 
     /**
      * Serializables need a version ID.
@@ -40,18 +39,6 @@ public class CostFlipCoin extends CostPartWithList {
      */
     public CostFlipCoin(final String amount) {
         this.setAmount(amount);
-    }
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#getHashForList()
-     */
-    @Override
-    public String getHashForLKIList() {
-        return "Flipped";
-    }
-    @Override
-    public String getHashForCardList() {
-    	return "FlippedCards";
     }
 
     /*
@@ -71,15 +58,13 @@ public class CostFlipCoin extends CostPartWithList {
         return Cost.convertAmountTypeToWords(this.convertAmount(), this.getAmount(), "Coin");
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
-     */
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard) {
-        final Player activator = ability.getActivatingPlayer();
-        int i = FlipCoinEffect.getFilpMultiplier(activator);
-        FlipCoinEffect.flipCoinCall(activator, ability, i);
-        return targetCard;
+    public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa) {
+        int m = FlipCoinEffect.getFilpMultiplier(payer);
+        for (int i = 0; i < pd.c; i++) {
+            FlipCoinEffect.flipCoinCall(payer, sa, m);
+        }
+        return true;
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

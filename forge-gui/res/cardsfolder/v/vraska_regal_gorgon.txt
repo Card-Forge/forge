@@ -8,4 +8,4 @@ A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Cr
 A:AB$ PutCounterAll | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ X | Reference$ X | SpellDescription$ For each creature card in your graveyard, put a +1/+1 counter on each creature you control.
 SVar:X:Count$ValidGraveyard Creature.YouCtrl
 DeckHas:Ability$Counters
-Oracle:[+2]: Put a +1/+1 counter on up to one target creature. That creature gains menace until end of turn.\n[-3]: Destroy target creature.\n[-10]: For each creature card in your graveyard, put a +1/+1 counter on each creature you control.
+Oracle:[+2]: Put a +1/+1 counter on up to one target creature. That creature gains menace until end of turn.\n[−3]: Destroy target creature.\n[−10]: For each creature card in your graveyard, put a +1/+1 counter on each creature you control.

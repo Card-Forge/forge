@@ -1,7 +1,7 @@
 Name:Savage Beating
 ManaCost:3 R R
 Types:Instant
-Text:Cast CARDNAME only during your turn and only during combat.
+Text:Cast this spell only during your turn and only during combat.
 K:Entwine:1 R
 A:SP$ Charm | Cost$ 3 R R | Choices$ DBPump,DBUntapAll | CharmNum$ 1 | PlayerTurn$ True | ActivationPhases$ BeginCombat->EndCombat
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Double Strike | SpellDescription$ Creatures you control gain double strike until end of turn.
@@ -9,4 +9,4 @@ SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddC
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ BeginCombat | AfterPhase$ EndCombat
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_beating.jpg
-Oracle:Cast Savage Beating only during your turn and only during combat.\nChoose one —\n• Creatures you control gain double strike until end of turn.\n• Untap all creatures you control. After this phase, there is an additional combat phase.\nEntwine {1}{R} (Choose both if you pay the entwine cost.)
+Oracle:Cast this spell only during your turn and only during combat.\nChoose one —\n• Creatures you control gain double strike until end of turn.\n• Untap all creatures you control. After this phase, there is an additional combat phase.\nEntwine {1}{R} (Choose both if you pay the entwine cost.)

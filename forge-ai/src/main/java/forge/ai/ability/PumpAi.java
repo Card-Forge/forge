@@ -9,10 +9,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.combat.Combat;
 import forge.game.cost.Cost;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostRemoveCounter;
 import forge.game.cost.CostTapType;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
@@ -23,7 +20,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
@@ -71,11 +67,17 @@ public class PumpAi extends PumpAiBase {
                 return false;
             }
         } else if ("Aristocrat".equals(aiLogic)) {
-            return doAristocratLogic(sa, ai);
+            return SpecialAiLogic.doAristocratLogic(ai, sa);
         } else if (aiLogic.startsWith("AristocratCounters")) {
-            return doAristocratWithCountersLogic(sa, ai);
+            return SpecialAiLogic.doAristocratWithCountersLogic(ai, sa);
         } else if ("RiskFactor".equals(aiLogic)) {
             if (ai.getCardsIn(ZoneType.Hand).size() + 3 >= ai.getMaxHandSize()) {
+                return false;
+            }
+        } else if (aiLogic.equals("SwitchPT")) {
+            // Some more AI would be even better, but this is a good start to prevent spamming
+            if (sa.isAbility() && sa.getActivationsThisTurn() > 0 && !sa.usesTargeting()) {
+                // Will prevent flipping back and forth
                 return false;
             }
         }
@@ -96,6 +98,11 @@ public class PumpAi extends PumpAiBase {
         } else if (logic.equals("Aristocrat")) {
             final boolean isThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(sa.getHostCard());
             if (!ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && !isThreatened) {
+                return false;
+            }
+        } else if (logic.equals("SwitchPT")) {
+            // Some more AI would be even better, but this is a good start to prevent spamming
+            if (ph.getPhase().isAfter(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE) || !ph.inCombat()) {
                 return false;
             }
         }
@@ -127,6 +134,7 @@ public class PumpAi extends PumpAiBase {
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
         final Card source = sa.getHostCard();
+        final SpellAbility root = sa.getRootAbility();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
                 : Lists.newArrayList();
@@ -150,7 +158,7 @@ public class PumpAi extends PumpAiBase {
             }
 
             final String counterType = moveSA.getParam("CounterType");
-            final CounterType cType = "Any".equals(counterType) ? null : CounterType.valueOf(counterType);
+            final CounterType cType = "Any".equals(counterType) ? null : CounterType.getType(counterType);
 
             final PhaseHandler ph = game.getPhaseHandler();
             if (ph.inCombat() && ph.getPlayerTurn().isOpponentOf(ai)) {
@@ -185,7 +193,7 @@ public class PumpAi extends PumpAiBase {
                             // cant use substract on Copy
                             srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
-                            if (CounterType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
+                            if (cType.is(CounterEnumType.P1P1) && srcCardCpy.getNetToughness() <= 0) {
                                 return srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING)
                                         || card.isToken();
                             }
@@ -235,7 +243,7 @@ public class PumpAi extends PumpAiBase {
                                 // cant use substract on Copy
                                 srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
-                                if (CounterType.P1P1.equals(cType) && srcCardCpy.getNetToughness() <= 0) {
+                                if (cType.is(CounterEnumType.P1P1) && srcCardCpy.getNetToughness() <= 0) {
                                     return srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING)
                                             || card.isToken();
                                 }
@@ -290,19 +298,19 @@ public class PumpAi extends PumpAiBase {
             }
         }
 
-        if (source.getSVar("X").equals("Count$xPaid")) {
-            source.setSVar("PayX", "");
+        if (sa.getSVar("X").equals("Count$xPaid")) {
+            root.setXManaCostPaid(null);
         }
 
         int defense;
-        if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (numDefense.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
+            int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
             if (sourceName.equals("Necropolis Fiend")) {
             	xPay = Math.min(xPay, sa.getActivatingPlayer().getCardsIn(ZoneType.Graveyard).size());
                 sa.setSVar("X", Integer.toString(xPay));
             }
-            source.setSVar("PayX", Integer.toString(xPay));
+            sa.setXManaCostPaid(xPay);
             defense = xPay;
             if (numDefense.equals("-X")) {
                 defense = -xPay;
@@ -315,16 +323,14 @@ public class PumpAi extends PumpAiBase {
         }
 
         int attack;
-        if (numAttack.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (numAttack.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final String toPay = source.getSVar("PayX");
-
-            if (toPay.equals("")) {
-                final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-                source.setSVar("PayX", Integer.toString(xPay));
+            if (root.getXManaCostPaid() == null) {
+                final int xPay = ComputerUtilCost.getMaxXValue(root, ai);
+                root.setXManaCostPaid(xPay);
                 attack = xPay;
             } else {
-                attack = Integer.parseInt(toPay);
+                attack = root.getXManaCostPaid();
             }
         } else {
             attack = AbilityUtils.calculateAmount(sa.getHostCard(), numAttack, sa);
@@ -355,7 +361,7 @@ public class PumpAi extends PumpAiBase {
         }
 
         //Untargeted
-        if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
+        if (!sa.usesTargeting()) {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
 
             if (cards.isEmpty()) {
@@ -388,7 +394,7 @@ public class PumpAi extends PumpAiBase {
                         }
 
                         return true;
-                    } else if (grantsUsefulExtraBlockOpts(ai, card)) {
+                    } else if (grantsUsefulExtraBlockOpts(ai, sa, card, keywords)) {
                         return true;
                     }
                 }
@@ -398,21 +404,6 @@ public class PumpAi extends PumpAiBase {
         //Targeted
         if (!pumpTgtAI(ai, sa, defense, attack, false, false)) {
             return false;
-        }
-
-        if ("DebuffForXCounters".equals(sa.getParam("AILogic")) && sa.getTargetCard() != null) {
-            // e.g. Skullmane Baku
-            CounterType ctrType = CounterType.KI;
-            for (CostPart part : sa.getPayCosts().getCostParts()) {
-                if (part instanceof CostRemoveCounter) {
-                    ctrType = ((CostRemoveCounter)part).counter;
-                    break;
-                }
-            }
-
-            // Do not pay more counters than necessary to kill the targeted creature
-            int chosenX = Math.min(source.getCounters(ctrType), sa.getTargetCard().getNetToughness());
-            sa.setSVar("ChosenX", String.valueOf(chosenX));
         }
 
         return true;
@@ -515,7 +506,7 @@ public class PumpAi extends PumpAiBase {
         if (game.getStack().isEmpty()) {
             // If the cost is tapping, don't activate before declare
             // attack/block
-            if (sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+            if (sa.getPayCosts().hasTapCost()) {
                 if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                         && game.getPhaseHandler().isPlayerTurn(ai)) {
                     list.remove(sa.getHostCard());
@@ -575,12 +566,12 @@ public class PumpAi extends PumpAiBase {
             }
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.canAddMoreTarget()) {
             Card t = null;
             // boolean goodt = false;
 
             if (list.isEmpty()) {
-                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa) || sa.getTargets().getNumTargeted() == 0) {
+                if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
                     if (mandatory || ComputerUtil.activateForCost(sa, ai)) {
                         return pumpMandatoryTarget(ai, sa);
                     }
@@ -636,7 +627,7 @@ public class PumpAi extends PumpAiBase {
             forced = CardLists.filterControlledBy(list, ai.getOpponents());
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
             if (pref.isEmpty()) {
                 break;
             }
@@ -653,7 +644,7 @@ public class PumpAi extends PumpAiBase {
             sa.getTargets().add(c);
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) {
+        while (sa.getTargets().size() < tgt.getMinTargets(source, sa)) {
             if (forced.isEmpty()) {
                 break;
             }
@@ -670,7 +661,7 @@ public class PumpAi extends PumpAiBase {
             sa.getTargets().add(c);
         }
 
-        if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) {
+        if (sa.getTargets().size() < tgt.getMinTargets(source, sa)) {
             sa.resetTargets();
             return false;
         }
@@ -680,37 +671,43 @@ public class PumpAi extends PumpAiBase {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Card source = sa.getHostCard();
+        final SpellAbility root = sa.getRootAbility();
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
         final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
 
+        if (sa.getSVar("X").equals("Count$xPaid")) {
+            sa.setXManaCostPaid(null);
+        }
+
         int defense;
-        if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (numDefense.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-            source.setSVar("PayX", Integer.toString(xPay));
-            defense = xPay;
+            if (root.getXManaCostPaid() == null) {
+                final int xPay = ComputerUtilCost.getMaxXValue(root, ai);
+                root.setXManaCostPaid(xPay);
+                defense = xPay;
+            } else {
+                defense = root.getXManaCostPaid();
+            }
         } else {
             defense = AbilityUtils.calculateAmount(sa.getHostCard(), numDefense, sa);
         }
 
         int attack;
-        if (numAttack.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (numAttack.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final String toPay = source.getSVar("PayX");
-
-            if (toPay.equals("")) {
-                final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
-                source.setSVar("PayX", Integer.toString(xPay));
+            if (root.getXManaCostPaid() == null) {
+                final int xPay = ComputerUtilCost.getMaxXValue(root, ai);
+                root.setXManaCostPaid(xPay);
                 attack = xPay;
             } else {
-                attack = Integer.parseInt(toPay);
+                attack = root.getXManaCostPaid();
             }
         } else {
             attack = AbilityUtils.calculateAmount(sa.getHostCard(), numAttack, sa);
         }
 
-        if (sa.getTargetRestrictions() == null) {
+        if (!sa.usesTargeting()) {
             if (mandatory) {
                 return true;
             }
@@ -723,14 +720,14 @@ public class PumpAi extends PumpAiBase {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-
+        final SpellAbility root = sa.getRootAbility();
         final Card source = sa.getHostCard();
 
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
         final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
 
         if (numDefense.equals("-X") && sa.getSVar("X").equals("Count$ChosenNumber")) {
-            int energy = ai.getCounters(CounterType.ENERGY);
+            int energy = ai.getCounters(CounterEnumType.ENERGY);
             for (SpellAbility s : source.getSpellAbilities()) {
                 if ("PayEnergy".equals(s.getParam("AILogic"))) {
                     energy += AbilityUtils.calculateAmount(source, s.getParam("CounterNum"), sa);
@@ -751,28 +748,35 @@ public class PumpAi extends PumpAiBase {
             return false;
         }
 
-        int defense;
-        if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
-            defense = Integer.parseInt(source.getSVar("PayX"));
-        } else {
-            defense = AbilityUtils.calculateAmount(sa.getHostCard(), numDefense, sa);
-        }
-
         int attack;
-        if (numAttack.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
-            if (source.getSVar("PayX").equals("")) {
+        if (numAttack.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
+            if (root.getXManaCostPaid() == null) {
                 // X is not set yet
-                final int xPay = ComputerUtilMana.determineLeftoverMana(sa.getRootAbility(), ai);
-                source.setSVar("PayX", Integer.toString(xPay));
+                final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+                root.setXManaCostPaid(xPay);
                 attack = xPay;
             } else {
-                attack = Integer.parseInt(source.getSVar("PayX"));
+                attack = root.getXManaCostPaid();
             }
         } else {
             attack = AbilityUtils.calculateAmount(sa.getHostCard(), numAttack, sa);
         }
 
-        if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
+        int defense;
+        if (numDefense.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
+            if (root.getXManaCostPaid() == null) {
+                // X is not set yet
+                final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+                root.setXManaCostPaid(xPay);
+                defense = xPay;
+            } else {
+                defense = root.getXManaCostPaid();
+            }
+        } else {
+            defense = AbilityUtils.calculateAmount(sa.getHostCard(), numDefense, sa);
+        }
+
+        if (!sa.usesTargeting()) {
             if (source.isCreature()) {
                 if (!source.hasKeyword(Keyword.INDESTRUCTIBLE) && source.getNetToughness() + defense <= source.getDamage()) {
                     return false;
@@ -793,257 +797,5 @@ public class PumpAi extends PumpAiBase {
         //the spell in the first place if it would curse its own creature
         //and the pump isn't mandatory
         return true;
-    }
-
-    public static boolean doAristocratLogic(final SpellAbility sa, final Player ai) {
-        // A logic for cards that say "Sacrifice a creature: CARDNAME gets +X/+X until EOT"
-        final Game game = ai.getGame();
-        final Combat combat = game.getCombat();
-        final Card source = sa.getHostCard();
-        final int numOtherCreats = Math.max(0, ai.getCreaturesInPlay().size() - 1);
-        final int powerBonus = sa.hasParam("NumAtt") ? AbilityUtils.calculateAmount(source, sa.getParam("NumAtt"), sa) : 0;
-        final int toughnessBonus = sa.hasParam("NumDef") ? AbilityUtils.calculateAmount(source, sa.getParam("NumDef"), sa) : 0;
-        final boolean indestructible = sa.hasParam("KW") && sa.getParam("KW").contains("Indestructible");
-        final int selfEval = ComputerUtilCard.evaluateCreature(source);
-        final boolean isThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(source);
-
-        if (numOtherCreats == 0) {
-            return false;
-        }
-
-        // Try to save the card from death by pumping it if it's threatened with a damage spell
-        if (isThreatened && (toughnessBonus > 0 || indestructible)) {
-            SpellAbility saTop = game.getStack().peekAbility();
-
-            if (saTop.getApi() == ApiType.DealDamage || saTop.getApi() == ApiType.DamageAll) {
-                int dmg = AbilityUtils.calculateAmount(saTop.getHostCard(), saTop.getParam("NumDmg"), saTop) + source.getDamage();
-                final int numCreatsToSac = indestructible ? 1 : Math.max(1, (int)Math.ceil((dmg - source.getNetToughness() + 1) / toughnessBonus));
-
-                if (numCreatsToSac > 1) { // probably not worth sacrificing too much
-                    return false;
-                }
-
-                if (indestructible || (source.getNetToughness() <= dmg && source.getNetToughness() + toughnessBonus * numCreatsToSac > dmg)) {
-                    final CardCollection sacFodder = CardLists.filter(ai.getCreaturesInPlay(),
-                            new Predicate<Card>() {
-                                @Override
-                                public boolean apply(Card card) {
-                                    return ComputerUtilCard.isUselessCreature(ai, card)
-                                            || card.hasSVar("SacMe")
-                                            || ComputerUtilCard.evaluateCreature(card) < selfEval; // Maybe around 150 is OK?
-                                }
-                            }
-                    );
-                    return sacFodder.size() >= numCreatsToSac;
-                }
-            }
-
-            return false;
-        }
-
-        if (combat == null) {
-            return false;
-        }
-
-        if (combat.isAttacking(source)) {
-            if (combat.getBlockers(source).isEmpty()) {
-                // Unblocked. Check if able to deal lethal, then sac'ing everything is fair game if
-                // the opponent is tapped out or if we're willing to risk it (will currently risk it
-                // in case it sacs less than half its creatures to deal lethal damage)
-
-                // TODO: also teach the AI to account for Trample, but that's trickier (needs to account fully
-                // for potential damage prevention, various effects like reducing damage to 0, etc.)
-
-                final Player defPlayer = combat.getDefendingPlayerRelatedTo(source);
-                final boolean defTappedOut = ComputerUtilMana.getAvailableManaEstimate(defPlayer) == 0;
-
-                final boolean isInfect = source.hasKeyword(Keyword.INFECT); // Flesh-Eater Imp
-                int lethalDmg = isInfect ? 10 - defPlayer.getPoisonCounters() : defPlayer.getLife();
-
-                if (isInfect && !combat.getDefenderByAttacker(source).canReceiveCounters(CounterType.POISON)) {
-                    lethalDmg = Integer.MAX_VALUE; // won't be able to deal poison damage to kill the opponent
-                }
-
-                final int numCreatsToSac = indestructible ? 1 : (lethalDmg - source.getNetCombatDamage()) / (powerBonus != 0 ? powerBonus : 1);
-
-                if (defTappedOut || numCreatsToSac < numOtherCreats / 2) {
-                    return source.getNetCombatDamage() < lethalDmg
-                            && source.getNetCombatDamage() + numOtherCreats * powerBonus >= lethalDmg;
-                } else {
-                    return false;
-                }
-            } else {
-                // We have already attacked. Thus, see if we have a creature to sac that is worse to lose
-                // than the card we attacked with.
-                final CardCollection sacTgts = CardLists.filter(ai.getCreaturesInPlay(),
-                        new Predicate<Card>() {
-                            @Override
-                            public boolean apply(Card card) {
-                                return ComputerUtilCard.isUselessCreature(ai, card)
-                                        || ComputerUtilCard.evaluateCreature(card) < selfEval;
-                            }
-                        }
-                );
-
-                if (sacTgts.isEmpty()) {
-                    return false;
-                }
-
-                final int minDefT = Aggregates.min(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetToughness);
-                final int DefP = indestructible ? 0 : Aggregates.sum(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetPower);
-
-                // Make sure we don't over-sacrifice, only sac until we can survive and kill a creature
-                return source.getNetToughness() - source.getDamage() <= DefP || source.getNetCombatDamage() < minDefT;
-            }
-        } else {
-            // We can't deal lethal, check if there's any sac fodder than can be used for other circumstances
-            final CardCollection sacFodder = CardLists.filter(ai.getCreaturesInPlay(),
-                    new Predicate<Card>() {
-                        @Override
-                        public boolean apply(Card card) {
-                            return ComputerUtilCard.isUselessCreature(ai, card)
-                                    || card.hasSVar("SacMe")
-                                    || ComputerUtilCard.evaluateCreature(card) < selfEval; // Maybe around 150 is OK?
-                        }
-                    }
-            );
-
-            return !sacFodder.isEmpty();
-        }
-    }
-
-    public static boolean doAristocratWithCountersLogic(final SpellAbility sa, final Player ai) {
-        // A logic for cards that say "Sacrifice a creature: put X +1/+1 counters on CARDNAME" (e.g. Falkenrath Aristocrat)
-        final Card source = sa.getHostCard();
-        final String logic = sa.getParam("AILogic"); // should not even get here unless there's an Aristocrats logic applied
-        final boolean isDeclareBlockers = ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS);
-
-        final int numOtherCreats = Math.max(0, ai.getCreaturesInPlay().size() - 1);
-        if (numOtherCreats == 0) {
-            // Cut short if there's nothing to sac at all
-            return false;
-        }
-
-        // Check if the standard Aristocrats logic applies first (if in the right conditions for it)
-        final boolean isThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(source);
-        if (isDeclareBlockers || isThreatened) {
-            if (doAristocratLogic(sa, ai)) {
-                return true;
-            }
-        }
-
-        // Check if anything is to be gained from the PutCounter subability
-        SpellAbility countersSa = null;
-        if (sa.getSubAbility() == null || sa.getSubAbility().getApi() != ApiType.PutCounter) {
-            if (sa.getApi() == ApiType.PutCounter) {
-                // called directly from CountersPutAi
-                countersSa = sa;
-            }
-        } else {
-            countersSa = sa.getSubAbility();
-        }
-
-        if (countersSa == null) {
-            // Shouldn't get here if there is no PutCounter subability (wrong AI logic specified?)
-            System.err.println("Warning: AILogic AristocratCounters was specified on " + source + ", but there was no PutCounter SA in chain!");
-            return false;
-        }
-
-        final Game game = ai.getGame();
-        final Combat combat = game.getCombat();
-        final int selfEval = ComputerUtilCard.evaluateCreature(source);
-
-        String typeToGainCtr = "";
-        if (logic.contains(".")) {
-            typeToGainCtr = logic.substring(logic.indexOf(".") + 1);
-        }
-        CardCollection relevantCreats = typeToGainCtr.isEmpty() ? ai.getCreaturesInPlay()
-                : CardLists.filter(ai.getCreaturesInPlay(), CardPredicates.isType(typeToGainCtr));
-        relevantCreats.remove(source);
-        if (relevantCreats.isEmpty()) {
-            // No relevant creatures to sac
-            return false;
-        }
-
-        int numCtrs = AbilityUtils.calculateAmount(source, countersSa.getParam("CounterNum"), countersSa);
-
-        if (combat != null && combat.isAttacking(source) && isDeclareBlockers) {
-            if (combat.getBlockers(source).isEmpty()) {
-                // Unblocked. Check if we can deal lethal after receiving counters.
-                final Player defPlayer = combat.getDefendingPlayerRelatedTo(source);
-                final boolean defTappedOut = ComputerUtilMana.getAvailableManaEstimate(defPlayer) == 0;
-
-                final boolean isInfect = source.hasKeyword(Keyword.INFECT);
-                int lethalDmg = isInfect ? 10 - defPlayer.getPoisonCounters() : defPlayer.getLife();
-
-                if (isInfect && !combat.getDefenderByAttacker(source).canReceiveCounters(CounterType.POISON)) {
-                    lethalDmg = Integer.MAX_VALUE; // won't be able to deal poison damage to kill the opponent
-                }
-
-                // Check if there's anything that will die anyway that can be eaten to gain a perma-bonus
-                final CardCollection forcedSacTgts = CardLists.filter(relevantCreats,
-                        new Predicate<Card>() {
-                            @Override
-                            public boolean apply(Card card) {
-                                return ComputerUtil.predictThreatenedObjects(ai, null, true).contains(card)
-                                        || (combat.isAttacking(card) && combat.isBlocked(card) && ComputerUtilCombat.combatantWouldBeDestroyed(ai, card, combat));
-                            }
-                        }
-                );
-                if (!forcedSacTgts.isEmpty()) {
-                    return true;
-                }
-
-                final int numCreatsToSac = Math.max(0, (lethalDmg - source.getNetCombatDamage()) / numCtrs);
-
-                if (defTappedOut || numCreatsToSac < relevantCreats.size() / 2) {
-                    return source.getNetCombatDamage() < lethalDmg
-                            && source.getNetCombatDamage() + relevantCreats.size() * numCtrs >= lethalDmg;
-                } else {
-                    return false;
-                }
-            } else {
-                // We have already attacked. Thus, see if we have a creature to sac that is worse to lose
-                // than the card we attacked with. Since we're getting a permanent bonus, consider sacrificing
-                // things that are also threatened to be destroyed anyway.
-                final CardCollection sacTgts = CardLists.filter(relevantCreats,
-                        new Predicate<Card>() {
-                            @Override
-                            public boolean apply(Card card) {
-                                return ComputerUtilCard.isUselessCreature(ai, card)
-                                        || ComputerUtilCard.evaluateCreature(card) < selfEval
-                                        || ComputerUtil.predictThreatenedObjects(ai, null, true).contains(card);
-                            }
-                        }
-                );
-
-                if (sacTgts.isEmpty()) {
-                    return false;
-                }
-
-                final boolean sourceCantDie = ComputerUtilCombat.attackerCantBeDestroyedInCombat(ai, source);
-                final int minDefT = Aggregates.min(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetToughness);
-                final int DefP = sourceCantDie ? 0 : Aggregates.sum(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetPower);
-
-                // Make sure we don't over-sacrifice, only sac until we can survive and kill a creature
-                return source.getNetToughness() - source.getDamage() <= DefP || source.getNetCombatDamage() < minDefT;
-            }
-        } else {
-            // We can't deal lethal, check if there's any sac fodder than can be used for other circumstances
-            final boolean isBlocking = combat != null && combat.isBlocking(source);
-            final CardCollection sacFodder = CardLists.filter(relevantCreats,
-                    new Predicate<Card>() {
-                        @Override
-                        public boolean apply(Card card) {
-                            return ComputerUtilCard.isUselessCreature(ai, card)
-                                    || card.hasSVar("SacMe")
-                                    || (isBlocking && ComputerUtilCard.evaluateCreature(card) < selfEval)
-                                    || ComputerUtil.predictThreatenedObjects(ai, null, true).contains(card);
-                        }
-                    }
-            );
-
-            return !sacFodder.isEmpty();
-        }
     }
 }

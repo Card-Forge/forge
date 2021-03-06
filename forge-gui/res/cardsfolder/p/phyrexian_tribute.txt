@@ -5,4 +5,4 @@ A:SP$ Destroy | Cost$ 2 B Sac<2/Creature> | ValidTgts$ Artifact | TgtPrompt$ Sel
 SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE1
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_tribute.jpg
-Oracle:As an additional cost to cast Phyrexian Tribute, sacrifice two creatures.\nDestroy target artifact.
+Oracle:As an additional cost to cast this spell, sacrifice two creatures.\nDestroy target artifact.

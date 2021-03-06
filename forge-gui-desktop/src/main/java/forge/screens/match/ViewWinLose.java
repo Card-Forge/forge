@@ -48,7 +48,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
 
     private final SkinnedLabel lblTitle = new SkinnedLabel("WinLoseFrame > lblTitle needs updating.");
     private final SkinnedLabel lblStats = new SkinnedLabel("WinLoseFrame > lblStats needs updating.");
-    private final JPanel pnlOutcomes = new JPanel(new MigLayout("wrap, align center"));
+    private final JPanel pnlOutcomes = new JPanel(new MigLayout("wrap, ax center, ay center"));
 
     /** String constraint parameters for title blocks and cardviewer blocks. */
     private static final SkinColor FORE_COLOR = FSkin.getColor(Colors.CLR_TEXT);
@@ -146,9 +146,9 @@ public class ViewWinLose implements IWinLoseView<FButton> {
 
         // Add all components accordingly.
         overlay.setLayout(new MigLayout("insets 0, w 100%!, h 100%!"));
-        pnlLeft.setLayout(new MigLayout("insets 0, wrap, align center"));
+        pnlLeft.setLayout(new MigLayout("insets 0, wrap, ax center, ay center"));
         pnlRight.setLayout(new MigLayout("insets 0, wrap"));
-        pnlCustom.setLayout(new MigLayout("insets 0, wrap, align center"));
+        pnlCustom.setLayout(new MigLayout("insets 0, wrap, ax center, ay center"));
 
         final boolean customIsPopulated = control.populateCustomPanel();
         if (customIsPopulated) {

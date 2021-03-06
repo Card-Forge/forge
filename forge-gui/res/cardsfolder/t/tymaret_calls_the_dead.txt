@@ -2,13 +2,14 @@ Name:Tymaret Calls the Dead
 ManaCost:2 B
 Types:Enchantment Saga
 K:Saga:3:DBMill,DBMill,DBGainLife
-SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 3 | SubAbility$ DBChooseCard | SpellDescription$ Put the top three cards of your library into your graveyard. Then you may exile a creature or enchantment card from your graveyard. If you do, create a 2/2 black Zombie creature token.
+SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 3 | SubAbility$ DBChooseCard | SpellDescription$ Mill three cards. Then you may exile a creature or enchantment card from your graveyard. If you do, create a 2/2 black Zombie creature token.
 SVar:DBChooseCard:DB$ ChooseCard | Choices$ Creature.YouCtrl,Enchantment.YouCtrl | Optional$ Yes | ChoiceTitle$ Choose a creature or enchantment to exile | ChoiceZone$ Graveyard | Amount$ 1 | AILogic$ WorstCard | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ ChosenCard | RememberChanged$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | LegacyImage$ b 2 2 zombie thb | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | References$ X | SubAbility$ DBScry | SpellDescription$ You gain X life and scry X, where X is the number of Zombies you control.
 SVar:DBScry:DB$ Scry | ScryNum$ X | References$ X
 SVar:X:Count$Valid Zombie.YouCtrl
+DeckHints:Type$Zombie
 DeckHas:Ability$Token & Ability$Graveyard & Ability$LifeGain
-Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI,II — Put the top three cards of your library into your graveyard. Then you may exile a creature or enchantment card from your graveyard. If you do, create a 2/2 black Zombie creature token.\nIII — You gain X life and scry X, where X is the number of Zombies you control.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Mill three cards. Then you may exile a creature or enchantment card from your graveyard. If you do, create a 2/2 black Zombie creature token.\nIII — You gain X life and scry X, where X is the number of Zombies you control.

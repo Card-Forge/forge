@@ -45,12 +45,17 @@ public class ConquestRegion {
         return name;
     }
 
+    public void clearArt() {
+        art = null;
+    }
+
     public ISkinImage getArt() {
+        clearArt(); //force clear this so it will be redrawn since loadingcache invalidates the cache every screen change
         if (art == null) {
             PaperCard pc = cardPool.getCard(artCardName);
 
             if (pc == null) {
-                pc = FModel.getMagicDb().getCommonCards().getCard(artCardName);
+                pc = FModel.getMagicDb().getCommonCards().getUniqueByName(artCardName);
                 if (!pc.getName().equals(artCardName) && Card.fromPaperCard(pc, null).hasAlternateState()) {
                     art = GuiBase.getInterface().getCardArt(pc, true);
                 } else {

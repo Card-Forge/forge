@@ -5,4 +5,4 @@ A:SP$ Effect | Cost$ 3 PR | Name$ Ruthless Invasion Effect | StaticAbilities$ KW
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.nonArtifact | AddHiddenKeyword$ CARDNAME can't block. | Description$ Nonartifact creatures can't block this turn.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruthless_invasion.jpg
-Oracle:({P/R} can be paid with either {R} or 2 life.)\nNonartifact creatures can't block this turn.
+Oracle:({R/P} can be paid with either {R} or 2 life.)\nNonartifact creatures can't block this turn.

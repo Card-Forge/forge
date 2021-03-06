@@ -6,10 +6,9 @@ A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | DigNum$ 1 | Reveal$ True | ChangeNum$ 
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ Y | Defined$ Opponent | SubAbility$ DBCleanup | References$ Y
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Remembered$CardManaCost
-A:AB$ DealDamage | Cost$ SubCounter<X/LOYALTY> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ ChosenX | Planeswalker$ True | SubAbility$ DBGainLife | References$ X,ChosenX | SpellDescription$ CARDNAME deals X damage to target creature or planeswalker and you gain X life.
-SVar:DBGainLife:DB$GainLife | LifeAmount$ ChosenX | Defined$ You | References$ ChosenX
-SVar:X:XChoice
+A:AB$ DealDamage | Cost$ SubCounter<X/LOYALTY> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | Planeswalker$ True | SubAbility$ DBGainLife | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or planeswalker and you gain X life.
+SVar:DBGainLife:DB$GainLife | LifeAmount$ X | Defined$ You | References$ X
+SVar:X:Count$xPaid
 A:AB$ Token | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | TokenAmount$ Z | References$ Z | TokenScript$ b_1_1_vampire_knight_lifelink | TokenOwner$ You | LegacyImage$ b 1 1 vampire knight lifelink soi | Ultimate$ True | SpellDescription$ Create a number of 1/1 black Vampire Knight creature tokens with lifelink equal to the highest life total among all players.
-SVar:Z:PlayerCountPlayers$HighestLifeTotal 
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sorin_grim_nemesis.jpg
-Oracle:[+1]: Reveal the top card of your library and put that card into your hand. Each opponent loses life equal to its converted mana cost.\n[-X]: Sorin, Grim Nemesis deals X damage to target creature or planeswalker and you gain X life.\n[-9]: Create a number of 1/1 black Vampire Knight creature tokens with lifelink equal to the highest life total among all players.
+SVar:Z:PlayerCountPlayers$HighestLifeTotal
+Oracle:[+1]: Reveal the top card of your library and put that card into your hand. Each opponent loses life equal to its converted mana cost.\n[−X]: Sorin, Grim Nemesis deals X damage to target creature or planeswalker and you gain X life.\n[−9]: Create a number of 1/1 black Vampire Knight creature tokens with lifelink equal to the highest life total among all players.

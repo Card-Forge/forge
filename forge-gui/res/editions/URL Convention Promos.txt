@@ -1,0 +1,16 @@
+[metadata]
+Code=PURL
+Date=2009-02-08
+Name=URL Convention Promos
+Type=Reprint
+
+[cards]
+1 R Steward of Valeron
+2 R Kor Skyfisher
+3 R Bloodthrone Vampire
+4 R Merfolk Mesmerist
+5 R Chandra's Fury
+7 R Stealer of Secrets
+8 C Aeronaut Tinkerer
+9 R Relentless Rats
+34 U Shepherd of the Lost

@@ -4,9 +4,9 @@ Types:Creature Angel
 PT:3/3
 K:Flying
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ YouLifeGained | SVarCompare$ GE5 | Execute$ TrigToken | TriggerDescription$ At the beginning of each end step, if you gained 5 or more life this turn, create a 4/4 white Angel creature token with flying and vigilance.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying_vigilance | TokenOwner$ You | LegacyImage$ w 4 4 angel flying vigilance m19
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying_vigilance | TokenOwner$ You
 SVar:YouLifeGained:Count$LifeYouGainedThisTurn
-A:AB$ Pump | Cost$ 3 W W W | ValidCard$ Card.Self | NumAtt$ 2 | NumDef$ 2 | KW$ Lifelink | SpellDescription$ Until end of turn, CARDNAME gets +2/+2 and gains lifelink.
+A:AB$ Pump | Cost$ 3 W W W | Defined$ Self | NumAtt$ 2 | NumDef$ 2 | KW$ Lifelink | SpellDescription$ Until end of turn, CARDNAME gets +2/+2 and gains lifelink.
 DeckHints:Ability$LifeGain
 DeckHas:Ability$Token
 Oracle:Flying\nAt the beginning of each end step, if you gained 5 or more life this turn, create a 4/4 white Angel creature token with flying and vigilance.\n{3}{W}{W}{W}: Until end of turn, Resplendent Angel gets +2/+2 and gains lifelink.

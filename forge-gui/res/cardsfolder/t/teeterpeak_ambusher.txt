@@ -1,0 +1,6 @@
+Name:Teeterpeak Ambusher
+ManaCost:1 R
+Types:Creature Goblin Warrior
+PT:1/3
+A:AB$ Pump | Cost$ 2 R | Defined$ Self | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+Oracle:{2}{R}: Teeterpeak Ambusher gets +2/+0 until end of turn.

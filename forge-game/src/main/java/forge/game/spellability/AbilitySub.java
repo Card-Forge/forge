@@ -20,10 +20,6 @@ package forge.game.spellability;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.ability.effects.ChangeZoneAllEffect;
-import forge.game.ability.effects.ChangeZoneEffect;
-import forge.game.ability.effects.ManaEffect;
-import forge.game.ability.effects.ManaReflectedEffect;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 
@@ -92,11 +88,11 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
 
         effect = api.getSpellEffect();
 
-        if (effect instanceof ManaEffect || effect instanceof ManaReflectedEffect) {
+        if (api.equals(ApiType.Mana) || api.equals(ApiType.ManaReflected)) {
             this.setManaPart(new AbilityManaPart(ca, mapParams));
         }
 
-        if (effect instanceof ChangeZoneEffect || effect instanceof ChangeZoneAllEffect) {
+        if (api.equals(ApiType.ChangeZone) || api.equals(ApiType.ChangeZoneAll)) {
             AbilityFactory.adjustChangeZoneTarget(mapParams, this);
         }
     }

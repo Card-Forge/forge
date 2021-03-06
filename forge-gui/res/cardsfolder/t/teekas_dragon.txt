@@ -6,4 +6,4 @@ K:Flying
 K:Trample
 K:Rampage:4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teekas_dragon.jpg
-Oracle:Flying, trample, rampage 4 (Whenever this creature becomes blocked, it gets +4/+4 until end of turn for each creature blocking it beyond the first.)
+Oracle:Flying; trample; rampage 4 (Whenever this creature becomes blocked, it gets +4/+4 until end of turn for each creature blocking it beyond the first.)

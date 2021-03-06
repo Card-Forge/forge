@@ -1,7 +1,7 @@
 Name:Scars of the Veteran
 ManaCost:4 W
 Types:Instant
-SVar:AltCost:Cost$ ExileFromHand<1/Card.White> | Description$ You may exile a white card from your hand rather than pay CARDNAME's mana cost.
+SVar:AltCost:Cost$ ExileFromHand<1/Card.White+Other> | Description$ You may exile a white card from your hand rather than pay this spell's mana cost.
 A:SP$ PreventDamage | Cost$ 4 W | ValidTgts$ Creature,Player,Planeswalker | Amount$ 7 | PreventionSubAbility$ ScarEffect | ShieldEffectTarget$ Targeted | TgtPrompt$ Select any target | SpellDescription$ Prevent the next 7 damage that would be dealt to any target this turn. If it's a creature, put a +0/+1 counter on it for each 1 damage prevented this way at the beginning of the next end step.
 SVar:ScarEffect:DB$ Effect | RememberObjects$ ShieldEffectTarget | Triggers$ DelTrig,OutOfSight,NoCreatTgt | SVars$ DelayedScars,ExileEffect | SpellDescription$ If it's a creature, put a +0/+1 counter on it for each 1 damage prevented this way at the beginning of the next end step.
 SVar:DelTrig:Mode$ Phase | Phase$ End of Turn | Execute$ DelayedScars | TriggerDescription$ If it's a creature, put a +0/+1 counter on it for each 1 damage prevented this way at the beginning of the next end step.
@@ -9,5 +9,4 @@ SVar:DelayedScars:DB$ PutCounter | Defined$ Remembered | CounterType$ P0P1 | Cou
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Permanent.IsRemembered | Execute$ ExileEffect | Static$ True
 SVar:NoCreatTgt:Mode$ Always | IsPresent$ Permanent.IsRemembered | PresentCompare$ EQ0 | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scars_of_the_veteran.jpg
-Oracle:You may exile a white card from your hand rather than pay Scars of the Veteran's mana cost.\nPrevent the next 7 damage that would be dealt to any target this turn. If it's a creature, put a +0/+1 counter on it for each 1 damage prevented this way at the beginning of the next end step.
+Oracle:You may exile a white card from your hand rather than pay this spell's mana cost.\nPrevent the next 7 damage that would be dealt to any target this turn. If it's a creature, put a +0/+1 counter on it for each 1 damage prevented this way at the beginning of the next end step.

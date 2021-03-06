@@ -6,80 +6,77 @@ MciCode=pvc
 Type=Duel_Decks
 
 [cards]
-63 U Allied Strategies
-58 C Armadillo Cloak
-5 U Bone Shredder
-2 C Carrion Feeder
-45 U Charging Troll
-54 R Coalition Relic
-59 U Darigaaz's Charm
-47 R Darigaaz, the Igniter
-18 C Dark Ritual
-64 U Elfhame Palace
-50 U Evasive Action
-56 C Exotic Curse
-52 C Fertile Ground
-70 L Forest
-70 L Forest
-46 R Gerrard Capashen
-53 C Gerrard's Command
-57 C Harrow
-26 C Hideous End
-C Hornet
-28 U Hornet Cannon
-68 L Island
-19 U Lightning Greaves
-31 R Living Death
-C Minion
-69 L Mountain
-55 C Narrow Escape
-38 C Nomadic Elf
-11 U Order of Yawgmoth
-27 R Phyrexian Arena
-3 C Phyrexian Battleflies
-8 C Phyrexian Broodlings
-16 R Phyrexian Colossus
-10 C Phyrexian Debaser
-12 U Phyrexian Defiler
-4 C Phyrexian Denouncer
-15 U Phyrexian Gargantua
-6 C Phyrexian Ghoul
-14 U Phyrexian Hulk
 1 M Phyrexian Negator
+2 C Carrion Feeder
+3 C Phyrexian Battleflies
+4 C Phyrexian Denouncer
+5 U Bone Shredder
+6 C Phyrexian Ghoul
+7 U Priest of Gix
+8 C Phyrexian Broodlings
+9 U Sanguine Guard
+10 C Phyrexian Debaser
+11 U Order of Yawgmoth
+12 U Phyrexian Defiler
 13 R Phyrexian Plaguelord
-29 R Phyrexian Processor
+14 U Phyrexian Hulk
+15 U Phyrexian Gargantua
+16 R Phyrexian Colossus
+17 U Voltaic Key
+18 C Dark Ritual
+19 U Lightning Greaves
 20 U Phyrexian Totem
 21 U Phyrexian Vault
-67 L Plains
-62 U Power Armor
-7 U Priest of Gix
 22 U Puppet Strings
-39 C Quirion Elves
-60 U Rith's Charm
-48 R Rith, the Awakener
-9 U Sanguine Guard
-C Saproling
-65 U Shivan Oasis
-25 U Slay
-40 U Sunscape Battlemage
-32 L Swamp
-32 L Swamp
-32 L Swamp
-32 L Swamp
-30 C Tendrils of Corruption
-66 C Terramorphic Expanse
-37 C Thornscape Apprentice
-42 U Thornscape Battlemage
-41 U Thunderscape Battlemage
-61 U Treva's Charm
-49 R Treva, the Renewer
-51 C Tribal Flames
-36 M Urza's Rage
-43 U Verduran Emissary
-17 U Voltaic Key
 23 U Whispersilk Cloak
 24 U Worn Powerstone
+25 U Slay
+26 C Hideous End
+27 R Phyrexian Arena
+28 U Hornet Cannon
+29 R Phyrexian Processor
+30 C Tendrils of Corruption
+31 R Living Death
+32 L Swamp
+33 L Swamp
+34 L Swamp
+35 L Swamp
+36 M Urza's Rage
+37 C Thornscape Apprentice
+38 C Nomadic Elf
+39 C Quirion Elves
+40 U Sunscape Battlemage
+41 U Thunderscape Battlemage
+42 U Thornscape Battlemage
+43 U Verduran Emissary
 44 C Yavimaya Elder
+45 U Charging Troll
+46 R Gerrard Capashen
+47 R Darigaaz, the Igniter
+48 R Rith, the Awakener
+49 R Treva, the Renewer
+50 U Evasive Action
+51 C Tribal Flames
+52 C Fertile Ground
+53 C Gerrard's Command
+54 R Coalition Relic
+55 C Narrow Escape
+56 C Exotic Curse
+57 C Harrow
+58 C Armadillo Cloak
+59 U Darigaaz's Charm
+60 U Rith's Charm
+61 U Treva's Charm
+62 U Power Armor
+63 U Allied Strategies
+64 U Elfhame Palace
+65 U Shivan Oasis
+66 C Terramorphic Expanse
+67 L Plains
+68 L Island
+69 L Mountain
+70 L Forest
+71 L Forest
 
 [tokens]
 hornet

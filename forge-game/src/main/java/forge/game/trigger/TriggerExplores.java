@@ -45,7 +45,7 @@ public class TriggerExplores extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerExplores(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerExplores(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -62,8 +62,8 @@ public class TriggerExplores extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject(AbilityKey.Explorer, getFromRunParams(AbilityKey.Card));
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObject(AbilityKey.Explorer, runParams.get(AbilityKey.Card));
     }
 
     @Override

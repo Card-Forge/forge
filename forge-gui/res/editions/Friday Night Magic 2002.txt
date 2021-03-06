@@ -1,0 +1,19 @@
+[metadata]
+Code=F02
+Date=2002-01-01
+Name=Friday Night Magic 2002
+Type=Reprint
+
+[cards]
+1 R Soltari Priest
+2 R Albino Troll
+3 R Dissipate
+4 R Black Knight
+5 R Wall of Blossoms
+6 R Fireslinger
+7 R Drain Life
+8 R Aura of Silence
+9 R Forbid
+10 R Spike Feeder
+11 R Mogg Fanatic
+12 R White Knight

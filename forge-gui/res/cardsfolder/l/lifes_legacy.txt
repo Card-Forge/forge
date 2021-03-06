@@ -5,4 +5,4 @@ A:SP$ Draw | Cost$ 1 G Sac<1/Creature> | NumCards$ XPower | References$ XPower |
 SVar:XPower:Sacrificed$CardPower
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lifes_legacy.jpg
-Oracle:As an additional cost to cast Life's Legacy, sacrifice a creature.\nDraw cards equal to the sacrificed creature's power.
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nDraw cards equal to the sacrificed creature's power.

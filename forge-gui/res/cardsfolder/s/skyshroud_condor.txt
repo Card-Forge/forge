@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Bird
 PT:2/2
 K:Flying
-S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | SVarCompare$ LE0 | Description$ Cast CARDNAME only if you've cast another spell this turn.
+S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | SVarCompare$ LE0 | Description$ Flying
 SVar:X:Count$ThisTurnCast_Card.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_condor.jpg
-Oracle:Flying\nCast Skyshroud Condor only if you've cast another spell this turn.
+Oracle:Cast this spell only if you've cast another spell this turn.\nFlying

@@ -71,7 +71,7 @@ public class TriggerClashed extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public void setTriggeringObjects(final SpellAbility sa) {
+    public void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
         // No triggered-variables for you :(
     }
 

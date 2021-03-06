@@ -1,10 +1,7 @@
 Name:Aether Tide
 ManaCost:X U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X U Discard<X/Creature> | TargetMin$ 0 | TargetMax$ MaxTgts | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | TgtPrompt$ Select target creature | References$ X,MaxTgts | SpellDescription$ Return X target creatures to their owners' hands.
-# It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
-SVar:X:Targeted$Amount
-SVar:MaxTgts:Count$Valid Creature
+A:SP$ ChangeZone | Cost$ X U Discard<X/Creature/creature(s)> | CostDesc$ As an additional cost to cast this spell, discard X creature cards. | TargetMin$ X | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | References$ X | SpellDescription$ Return X target creatures to their owners' hands.
+SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_tide.jpg
 Oracle:As an additional cost to cast this spell, discard X creature cards.\nReturn X target creatures to their owners' hands.

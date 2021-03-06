@@ -1,5 +1,9 @@
 package forge.game.ability.effects;
 
+import java.util.Map;
+
+import com.google.common.collect.Maps;
+
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
@@ -64,8 +68,9 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
         }
 
         CardZoneTable table = new CardZoneTable();
+        Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (Card sac : list) {
-            final Card lKICopy = CardUtil.getLKICopy(sac);
+            final Card lKICopy = CardUtil.getLKICopy(sac, cachedMap);
             if (game.getAction().sacrifice(sac, sa, table) != null && remSacrificed) {
                 card.addRemembered(lKICopy);
             }

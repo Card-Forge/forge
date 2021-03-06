@@ -11,4 +11,4 @@ A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | ValidTgts$ Opponent | EffectOwner$ 
 SVar:TrigAttackYou:Mode$ Attacks | ValidCard$ Creature | Attacked$ You | TriggerZones$ Command | Execute$ DBPump | TriggerDescription$ Whenever a creature attacks you, it gets +5/+5 and gains trample until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ 5 | NumDef$ 5 | KW$ Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/garruk_apex_predator.jpg
-Oracle:[+1]: Destroy another target planeswalker.\n[+1]: Create a 3/3 black Beast creature token with deathtouch.\n[-3]: Destroy target creature. You gain life equal to its toughness.\n[-8]: Target opponent gets an emblem with "Whenever a creature attacks you, it gets +5/+5 and gains trample until end of turn."
+Oracle:[+1]: Destroy another target planeswalker.\n[+1]: Create a 3/3 black Beast creature token with deathtouch.\n[−3]: Destroy target creature. You gain life equal to its toughness.\n[−8]: Target opponent gets an emblem with "Whenever a creature attacks you, it gets +5/+5 and gains trample until end of turn."

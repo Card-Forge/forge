@@ -3,6 +3,10 @@ ManaCost:W
 Types:Instant
 A:SP$ ChooseCard | Cost$ W | Choices$ Creature.YouCtrl,Planeswalker.YouCtrl | SubAbility$ DBEffect | SpellDescription$ Choose a creature or planeswalker you control. All damage that would be dealt this turn to you and permanents you control is dealt to the chosen permanent instead (if it's still on the battlefield).
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ DamageEvent | SVars$ GideonSac | References$ DamageEvent,GideonSac | ExileOnMoved$ True | RememberObjects$ ChosenCard
-SVar:DamageEvent:Event$ DamageDone | ActiveZones$ Command | ValidTarget$ You,Permanent.YouCtrl | ReplaceWith$ GideonSac | Description$ All damage that would be dealt this turn to you and permanents you control is dealt to the chosen permanent instead (if it's still on the battlefield).
+SVar:DamageEvent:Event$ DamageDone | ActiveZones$ Command | ValidTarget$ You,Permanent.YouCtrl | ReplaceWith$ GideonSac | DamageTarget$ Remembered | Description$ All damage that would be dealt this turn to you and permanents you control is dealt to the chosen permanent instead (if it's still on the battlefield).
 SVar:GideonSac:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Remembered | VarType$ Card
+SVar:NeedsToPlayVar:Z GE1
+SVar:Z:SVar$Z1/Plus.Z2
+SVar:Z1:Count$Valid Creature.YouCtrl
+SVar:Z2:Count$Valid Planeswalker.YouCtrl
 Oracle:Choose a creature or planeswalker you control. All damage that would be dealt this turn to you and permanents you control is dealt to the chosen permanent instead (if it's still on the battlefield).

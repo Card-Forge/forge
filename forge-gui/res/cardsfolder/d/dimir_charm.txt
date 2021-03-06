@@ -7,4 +7,4 @@ SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select ta
 SVar:DBDig:DB$ Dig | DigNum$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | DestinationZone2$ Graveyard | SpellDescription$ Look at the top three cards of target player's library, then put one back and the rest into that player's graveyard.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_charm.jpg
-Oracle:Choose one —\n• Counter target sorcery spell.\n• Destroy target creature with power 2 or less.\n• Look at the top three cards of target player's library, then put one back and the rest into that player's graveyard.
+Oracle:Choose one —\n• Counter target sorcery spell.\n• Destroy target creature with power 2 or less.\n• Look at the top three cards of target player's library. Put one back and the rest into that player's graveyard.

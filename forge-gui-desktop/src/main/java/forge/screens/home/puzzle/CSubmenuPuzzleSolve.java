@@ -13,8 +13,10 @@ import forge.match.HostedMatch;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
 import forge.player.GamePlayerUtil;
+import forge.properties.ForgeConstants;
 import forge.puzzle.Puzzle;
 import forge.puzzle.PuzzleIO;
+import forge.util.Localizer;
 import forge.util.gui.SOptionPane;
 
 import javax.swing.*;
@@ -52,7 +54,7 @@ public enum CSubmenuPuzzleSolve implements ICDoc, IMenuProvider {
     };
 
     private void updateData() {
-        final ArrayList<Puzzle> puzzles = PuzzleIO.loadPuzzles();
+        final ArrayList<Puzzle> puzzles = PuzzleIO.loadPuzzles(ForgeConstants.PUZZLE_DIR);
         Collections.sort(puzzles);
 
         for(Puzzle p : puzzles) {
@@ -75,7 +77,7 @@ public enum CSubmenuPuzzleSolve implements ICDoc, IMenuProvider {
     private boolean startPuzzleSolve() {
         final Puzzle selected = (Puzzle)view.getList().getSelectedValue();
         if (selected == null) {
-            SOptionPane.showMessageDialog("Please select a puzzle from the list first!", "No puzzle selected", FSkinProp.ICO_ERROR);
+            SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPleaseFirstSelectAPuzzleFromList"), Localizer.getInstance().getMessage("lblNoSelectedPuzzle"), FSkinProp.ICO_ERROR);
             return false;
         }
 

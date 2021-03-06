@@ -1,0 +1,11 @@
+Name:Captain Vargus Wrath
+ManaCost:U R
+Types:Legendary Creature Orc Pirate
+PT:1/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, Pirates you control get +1/+1 until end of turn for each time you've cast a commander from the command zone this game.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Pirate.YouCtrl | NumAtt$ X | NumDef$ X | References$ X
+SVar:X:Count$TotalCommanderCastFromCommandZone
+SVar:HasAttackEffect:TRUE
+AI:RemoveDeck:NonCommander
+DeckNeeds:Type$Pirate
+Oracle:Whenever Captain Vargus Wrath attacks, Pirates you control get +1/+1 until end of turn for each time you've cast a commander from the command zone this game.

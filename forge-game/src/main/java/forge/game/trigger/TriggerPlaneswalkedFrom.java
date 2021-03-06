@@ -49,12 +49,9 @@ public class TriggerPlaneswalkedFrom extends Trigger {
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.trigger.Trigger#setTriggeringObjects(forge.card.spellability.SpellAbility)
-     */
     @Override
-    public void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObjectsFrom(this, AbilityKey.Cards);
+    public void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Cards);
     }
 
     @Override

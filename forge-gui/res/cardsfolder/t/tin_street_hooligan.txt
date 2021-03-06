@@ -2,10 +2,10 @@ Name:Tin Street Hooligan
 ManaCost:1 R
 Types:Creature Goblin Rogue
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | ManaSpent$ G | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, if {G} was spent to cast CARDNAME, destroy target artifact.
-SVar:TrigDestroy:DB$Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | ManaSpent$ G | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, if {G} was spent to cast it, destroy target artifact.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
 SVar:ManaNeededToAvoidNegativeEffect:green
 AI:RemoveDeck:Random
 DeckNeeds:Color$Green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tin_street_hooligan.jpg
-Oracle:When Tin Street Hooligan enters the battlefield, if {G} was spent to cast Tin Street Hooligan, destroy target artifact.
+Oracle:When Tin Street Hooligan enters the battlefield, if {G} was spent to cast it, destroy target artifact.

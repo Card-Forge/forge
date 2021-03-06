@@ -4,4 +4,4 @@ Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, put a 4/6 colorless Golem creature token onto the battlefield.
 SVar:DarkEffect:DB$ Token | TokenAmount$ 1 | TokenScript$ c_4_6_a_golem | TokenOwner$ You | LegacyImage$ c 4 6 a golem arc
 SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/The Iron Guardian Stirs.full.jpg
-Oracle:When you set this scheme in motion, put a 4/6 colorless Golem artifact creature token onto the battlefield.
+Oracle:When you set this scheme in motion, create a 4/6 colorless Golem artifact creature token.

@@ -74,7 +74,7 @@ public class CostDamage extends CostPart {
         payer.addDamage(decision.c, source, damageMap, preventMap, table, sa);
 
         preventMap.triggerPreventDamage(false);
-        damageMap.triggerDamageDoneOnce(false, sa);
+        damageMap.triggerDamageDoneOnce(false, source.getGame(), sa);
         table.triggerCountersPutAll(payer.getGame());
 
         preventMap.clear();

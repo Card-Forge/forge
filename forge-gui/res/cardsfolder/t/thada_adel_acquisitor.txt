@@ -11,4 +11,4 @@ SVar:TriggerCastDoM:Mode$ SpellCast | ValidCard$ Card.IsRemembered | TriggerZone
 SVar:TrigRemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thada_adel_acquisitor.jpg
-Oracle:Islandwalk\nWhenever Thada Adel, Acquisitor deals combat damage to a player, search that player's library for an artifact card and exile it. Then that player shuffles their library. Until end of turn, you may play that card.
+Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nWhenever Thada Adel, Acquisitor deals combat damage to a player, search that player's library for an artifact card and exile it. Then that player shuffles their library. Until end of turn, you may play that card.

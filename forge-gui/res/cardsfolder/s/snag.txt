@@ -1,8 +1,7 @@
 Name:Snag
 ManaCost:3 G
 Types:Instant
-SVar:AltCost:Cost$ Discard<1/Forest>
+SVar:AltCost:Cost$ Discard<1/Forest> | Description$ You may discard a Forest card rather than pay this spell's mana cost.
 A:SP$ Effect | Cost$ 3 G | Name$ Snag Effect | ReplacementEffects$ RPrevent | AILogic$ Fog | SpellDescription$ Prevent all combat damage that would be dealt by unblocked creatures this turn.
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ActiveZones$ Command | ValidSource$ Creature.unblocked | Description$ Prevent all combat damage that would be dealt by unblocked creatures this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/snag.jpg
-Oracle:You may discard a Forest card rather than pay Snag's mana cost.\nPrevent all combat damage that would be dealt by unblocked creatures this turn.
+Oracle:You may discard a Forest card rather than pay this spell's mana cost.\nPrevent all combat damage that would be dealt by unblocked creatures this turn.

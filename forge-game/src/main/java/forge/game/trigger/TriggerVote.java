@@ -64,11 +64,11 @@ public class TriggerVote extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa) {
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
         @SuppressWarnings("unchecked")
         FCollection<Player> voters = getVoters(
             this.getHostCard().getController(),
-            (ListMultimap<Object, Player>) getFromRunParams(AbilityKey.AllVotes),
+            (ListMultimap<Object, Player>) runParams.get(AbilityKey.AllVotes),
             true,
             true
         );

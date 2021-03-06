@@ -4,12 +4,10 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
-T:Mode$ ChangesZone | ValidCard$ Creature.EnchantedBy | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | Execute$ TrigReturnOwner | TriggerDescription$ When enchanted creature dies, you may return CARDNAME from your graveyard to the battlefield attached to a creature that shares a creature type with that creature.
-SVar:TrigReturnOwner:DB$ Pump | RememberObjects$ TriggeredCard | SubAbility$ DBReturnChoose
-SVar:DBReturnChoose:DB$ ChooseCard | Choices$ Creature.sharesCreatureTypeWith Remembered+CanBeEnchantedBy | ChoiceTitle$ Choose a creature shares a creature type with the former enchanted creature | SubAbility$ DBReturn
+T:Mode$ ChangesZone | ValidCard$ Creature.EnchantedBy | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | Execute$ DBReturnChoose | TriggerDescription$ When enchanted creature dies, you may return CARDNAME from your graveyard to the battlefield attached to a creature that shares a creature type with that creature.
+SVar:DBReturnChoose:DB$ ChooseCard | Choices$ Creature.CanBeEnchantedBy+sharesCreatureTypeWith TriggeredCardLKICopy | ChoiceTitle$ Choose a creature shares a creature type with the former enchanted creature | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ ChosenCard | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reins_of_the_vinesteed.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nWhen enchanted creature dies, you may return Reins of the Vinesteed from your graveyard to the battlefield attached to a creature that shares a creature type with that creature.

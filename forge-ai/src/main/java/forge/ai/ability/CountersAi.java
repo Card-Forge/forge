@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -22,11 +22,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import forge.ai.ComputerUtilCard;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.util.Aggregates;
 
@@ -35,7 +31,7 @@ import forge.util.Aggregates;
  * <p>
  * AbilityFactory_Counters class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -46,7 +42,7 @@ public abstract class CountersAi {
      * <p>
      * chooseCursedTarget.
      * </p>
-     * 
+     *
      * @param list
      *            a {@link forge.CardList} object.
      * @param type
@@ -77,7 +73,7 @@ public abstract class CountersAi {
      * <p>
      * chooseBoonTarget.
      * </p>
-     * 
+     *
      * @param list
      *            a {@link forge.CardList} object.
      * @param type
@@ -97,10 +93,12 @@ public abstract class CountersAi {
             final CardCollection boon = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return c.getCounters(CounterType.DIVINITY) == 0;
+                    return c.getCounters(CounterEnumType.DIVINITY) == 0;
                 }
             });
             choice = ComputerUtilCard.getMostExpensivePermanentAI(boon, null, false);
+        } else if (CounterType.get(type).isKeywordCounter()) {
+            choice = ComputerUtilCard.getBestCreatureAI(CardLists.getNotKeyword(list, type));
         } else {
             // The AI really should put counters on cards that can use it.
             // Charge counters on things with Charge abilities, etc. Expand

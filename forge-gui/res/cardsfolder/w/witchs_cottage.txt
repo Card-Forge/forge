@@ -6,4 +6,5 @@ SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Swamp.Yo
 SVar:MoveToPlay:DB$ ChangeZone | Defined$ Self | Origin$ All | Destination$ Battlefield
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+untapped | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield untapped, you may put target creature card from your graveyard on top of your library.
 SVar:TrigChange:DB$ ChangeZone | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | Origin$ Graveyard | Destination$ Library
+DeckNeeds:Color$Black
 Oracle:({T}: Add {B}.)\nWitch's Cottage enters the battlefield tapped unless you control three or more other Swamps.\nWhen Witch's Cottage enters the battlefield untapped, you may put target creature card from your graveyard on top of your library.

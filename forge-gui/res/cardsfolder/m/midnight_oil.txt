@@ -2,12 +2,12 @@ Name:Midnight Oil
 ManaCost:2 B B
 Types:Enchantment
 K:etbCounter:HOUR:7
-T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your draw step, draw an additional card, then remove two hour counters from CARDNAME.
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your draw step, draw an additional card and remove two hour counters from CARDNAME.
 SVar:TrigDraw:DB$Draw | NumCards$ 1 | SubAbility$ DBRemoveCounter
-SVar:DBRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ HOUR | CounterNum$ 2 
+SVar:DBRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ HOUR | CounterNum$ 2
 S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ X | References$ X | Description$ Your maximum hand size is equal to the number of hour counters on Midnight Oil.
 T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever you discard a card, you lose 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
-SVar:X:Count$CardCounters.HOUR 
+SVar:X:Count$CardCounters.HOUR
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midnight_oil.jpg
-Oracle:Midnight Oil enters the battlefield with seven hour counters on it.\nAt the beginning of your draw step, draw an additional card, then remove two hour counters from Midnight Oil.\nYour maximum hand size is equal to the number of hour counters on Midnight Oil.\nWhenever you discard a card, you lose 1 life.
+Oracle:Midnight Oil enters the battlefield with seven hour counters on it.\nAt the beginning of your draw step, draw an additional card and remove two hour counters from Midnight Oil.\nYour maximum hand size is equal to the number of hour counters on Midnight Oil.\nWhenever you discard a card, you lose 1 life.

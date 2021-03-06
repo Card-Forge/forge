@@ -1,8 +1,7 @@
 Name:Admiral's Order
 ManaCost:1 U U
 Types:Instant
+SVar:AltCost:Cost$ U | CheckSVar$ X | References$ X | Description$ Raid — If you attacked this turn, you may pay {U} rather than pay this spell's mana cost.
 A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
-A:SP$ Counter | Cost$ U | CheckSVar$ X | References$ X | SVarCompare$ GE1 | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Raid — If you attacked with a creature this turn, you may pay {U} rather than pay this spell's mana cost. Counter target spell.
 SVar:X:Count$AttackersDeclared
-SVar:Picture:http://www.wizards.com/global/images/magic/general/admirals_order.jpg
-Oracle:Raid — If you attacked with a creature this turn, you may pay {U} rather than pay this spell's mana cost.\nCounter target spell.
+Oracle:Raid — If you attacked this turn, you may pay {U} rather than pay this spell's mana cost.\nCounter target spell.

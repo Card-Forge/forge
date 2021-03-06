@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
-A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.sharesCreatureTypeWith Enchanted | KW$ Flying | SpellDescription$ Enchanted creature and other creatures that share a creature type with it gain flying until end of turn.
+A:AB$ Pump | Cost$ Sac<1/CARDNAME> | Defined$ AttachedBy Sacrificed | KW$ Flying | SubAbility$ DBPumpAll | SpellDescription$ Enchanted creature and other creatures that share a creature type with it gain flying until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.NotDefinedAttachedBy Sacrificed+sharesCreatureTypeWith AttachedBy Sacrificed | KW$ Flying
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crown_of_ascension.jpg
 Oracle:Enchant creature\nEnchanted creature has flying.\nSacrifice Crown of Ascension: Enchanted creature and other creatures that share a creature type with it gain flying until end of turn.

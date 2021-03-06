@@ -5,4 +5,4 @@ PT:7/6
 K:Trample
 K:Hexproof
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plated_crusher.jpg
-Oracle:Trample\nHexproof
+Oracle:Trample\nHexproof (This creature can't be the target of spells or abilities your opponents control.)

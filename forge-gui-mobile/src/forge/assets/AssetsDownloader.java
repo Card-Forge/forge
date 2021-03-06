@@ -44,14 +44,26 @@ public class AssetsDownloader {
                     if (!Forge.getDeviceAdapter().isConnectedToWifi()) {
                         message += " If so, you may want to connect to wifi first. The download is around 6.5MB.";
                     }
-                    if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later")) {
+                    if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later", true, true)) {
                         String filename = "forge-android-" + version + "-signed-aligned.apk";
                         String apkFile = new GuiDownloadZipService("", "update",
                                 "https://releases.cardforge.org/forge/forge-gui-android/" + version + "/" + filename,
                                 Forge.getDeviceAdapter().getDownloadsDir(), null, splashScreen.getProgressBar()).download(filename);
                         if (apkFile != null) {
-                            Forge.getDeviceAdapter().openFile(apkFile);
-                            Forge.exit(true);
+                            /* FileUriExposedException was added on API 24, Forge now targets API 26 so Android 10 and above runs,
+                            most user thinks Forge crashes but in reality, the method below just can't open the apk when Forge
+                            exits silently to run the downloaded apk. Some devices allow the apk to run but most users are annoyed when
+                            Forge didn't open the apk so I downgrade the check so it will run only on target devices without FileUriExposedException */
+                            if (Forge.androidVersion < 24) {
+                                Forge.getDeviceAdapter().openFile(apkFile);
+                                Forge.exit(true);
+                                return;
+                            }
+                            // API 24 and above needs manual apk installation unless we provide a FileProvider for FileUriExposedException
+                            switch (SOptionPane.showOptionDialog("Download Successful. Go to your downloads folder and install " + filename +" to update Forge. Forge will now exit.", "", null, ImmutableList.of("Ok"))) {
+                                default:
+                                    Forge.exit(true);
+                            }
                             return;
                         }
                         SOptionPane.showMessageDialog("Could not download update. " +
@@ -147,5 +159,11 @@ public class AssetsDownloader {
         //save version string to file once assets finish downloading
         //so they don't need to be re-downloaded until you upgrade again
         FileUtil.writeFile(versionFile, Forge.CURRENT_VERSION);
+
+        //add restart after assets update
+        switch (SOptionPane.showOptionDialog("Resource update finished...", "", null, ImmutableList.of("Restart"))) {
+            default:
+                Forge.restart(true);
+        }
     }
 }

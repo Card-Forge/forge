@@ -8,6 +8,7 @@ Type=Expansion
 BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare
 FoilAlwaysInCommonSlot=False
+ChaosDraftThemes=MIRRODIN
 
 [cards]
 141 C AEther Spellbomb

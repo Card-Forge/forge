@@ -1,0 +1,12 @@
+[metadata]
+Code=G07
+Date=2007-01-01
+Name=Judge Gift Cards 2007
+Type=Reprint
+
+[cards]
+1 R Ravenous Baloth
+2 R Cunning Wish
+3 R Yawgmoth's Will
+4 R Vindicate
+5 R Decree of Justice

@@ -1,0 +1,9 @@
+Name:Jasconian Isle
+ManaCost:no cost
+Types:Land Creature Island Fish
+PT:3/4
+K:CARDNAME enters the battlefield tapped.
+K:CARDNAME doesn't untap during your untap step.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may pay {U}{U}. If you do, untap CARDNAME.
+SVar:TrigUntap:AB$Untap | Cost$ U U | Defined$ Self
+Oracle:(Jasconian Isle isn't a spell, it's affected by summoning sickness, it's blue, and it has "{T}: Add {U}.")\nJasconian Isle enters the battlefield tapped.\nJasconian Isle doesn't untap during your untap step.\nAt the beginning of your upkeep, you may pay {U}{U}. If you do, untap Jasconian Isle.

@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -8,20 +9,25 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -30,115 +36,164 @@ import forge.util.Localizer;
 import forge.util.CardTranslation;
 
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 public class CountersPutEffect extends SpellAbilityEffect {
     @Override
-    protected String getStackDescription(SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
-        final Card card = sa.getHostCard();
-        final boolean dividedAsYouChoose = sa.hasParam("DividedAsYouChoose");
+    protected String getStackDescription(SpellAbility spellAbility) {
+        final StringBuilder stringBuilder = new StringBuilder();
+        final Card card = spellAbility.getHostCard();
 
-
-        final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("CounterNum", "1"), sa);
-        if (sa.hasParam("Bolster")) {
-            sb.append("Bolster ").append(amount);
-            return sb.toString();
+        final int amount = AbilityUtils.calculateAmount(card, spellAbility.getParamOrDefault("CounterNum", "1"), spellAbility);
+        //skip the StringBuilder if no targets are chosen ("up to" scenario)
+        if (spellAbility.usesTargeting()) {
+            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
+            if (targetCards.size() == 0) {
+                return stringBuilder.toString();
+            }
         }
-        if (dividedAsYouChoose) {
-            sb.append("Distribute ");
+        if (spellAbility.hasParam("Bolster")) {
+            stringBuilder.append("Bolster ").append(amount);
+            return stringBuilder.toString();
+        }
+        if (spellAbility.isDividedAsYouChoose()) {
+            stringBuilder.append("Distribute ");
         } else {
-            sb.append("Put ");
+            stringBuilder.append("Put ");
         }
-        if (sa.hasParam("UpTo")) {
-            sb.append("up to ");
+        if (spellAbility.hasParam("UpTo")) {
+            stringBuilder.append("up to ");
         }
 
-        sb.append(amount).append(" ");
+        stringBuilder.append(amount).append(" ");
 
-        String type = sa.getParam("CounterType");
+        String type = spellAbility.getParam("CounterType");
         if (type.equals("ExistingCounter")) {
-            sb.append("of an existing counter");
+            stringBuilder.append("of an existing counter");
+        } else if (type.equals("EachFromSource")) {
+            stringBuilder.append("each counter");
         } else {
-
-            sb.append( CounterType.valueOf(type).getName()).append(" counter");
+            stringBuilder.append(CounterType.getType(type).getName()).append(" counter");
         }
+
         if (amount != 1) {
-            sb.append("s");
+            stringBuilder.append("s");
         }
-        if (dividedAsYouChoose) {
-            sb.append(" among ");
+
+        if (spellAbility.isDividedAsYouChoose()) {
+            stringBuilder.append(" among ");
         } else {
-            sb.append(" on ");
+            stringBuilder.append(" on ");
         }
-        final List<Card> tgtCards = getTargetCards(sa);
 
-        final Iterator<Card> it = tgtCards.iterator();
-        while (it.hasNext()) {
-            final Card tgtC = it.next();
-            if (tgtC.isFaceDown()) {
-                sb.append("Morph");
-            } else {
-                sb.append(tgtC);
+        // if use targeting we show all targets and corresponding counters
+        if(spellAbility.usesTargeting()) {
+            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
+            for(int i = 0; i < targetCards.size(); i++) {
+                Card targetCard = targetCards.get(i);
+                stringBuilder.append(targetCard);
+                Integer v = spellAbility.getDividedValue(targetCard);
+                if (v != null) // fix null counter stack description
+                    stringBuilder.append(" (").append(v).append(" counter)");
+
+                if(i == targetCards.size() - 2) {
+                    stringBuilder.append(" and ");
+                }
+                else if(i + 1 < targetCards.size()) {
+                    stringBuilder.append(", ");
+                }
             }
+        } else {
+            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
+            final Iterator<Card> it = targetCards.iterator();
+            while (it.hasNext()) {
+                final Card targetCard = it.next();
+                if (targetCard.isFaceDown()) {
+                    stringBuilder.append("Morph");
+                } else {
+                    stringBuilder.append(targetCard);
+                }
 
-            if (it.hasNext()) {
-                sb.append(", ");
+                if (it.hasNext()) {
+                    stringBuilder.append(", ");
+                }
             }
         }
-        sb.append(".");
-
-        return sb.toString();
+        stringBuilder.append(".");
+        return stringBuilder.toString();
     }
 
-    @Override
-    public void resolve(SpellAbility sa) {
+    protected void resolvePerType(SpellAbility sa, final Player placer, CounterType counterType, int counterAmount, GameEntityCounterTable table) {
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
         final Player activator = sa.getActivatingPlayer();
         final PlayerController pc = activator.getController();
-
-        String strTyp = sa.getParam("CounterType");
-        CounterType counterType = null;
-        boolean existingCounter = strTyp.equals("ExistingCounter");
-        boolean eachExistingCounter = sa.hasParam("EachExistingCounter");
-        String amount = sa.getParamOrDefault("CounterNum", "1");
-
-        if (!existingCounter) {
-            try {
-                counterType = AbilityUtils.getCounterType(strTyp, sa);
-            } catch (Exception e) {
-                System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
-                return;
-            }
-        }
-
-        Player placer = activator;
-        if (sa.hasParam("Placer")) {
-            final String pstr = sa.getParam("Placer");
-            placer = AbilityUtils.getDefinedPlayers(sa.getHostCard(), pstr, sa).get(0);
-        }
-
         final boolean etbcounter = sa.hasParam("ETB");
-        final boolean remember = sa.hasParam("RememberCounters");
         final boolean rememberCards = sa.hasParam("RememberCards");
-        int counterAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa);
         final int max = sa.hasParam("MaxFromEffect") ? Integer.parseInt(sa.getParam("MaxFromEffect")) : -1;
 
-        CardCollection tgtCards = new CardCollection();
+        boolean existingCounter = sa.hasParam("CounterType") && sa.getParam("CounterType").equals("ExistingCounter");
+        boolean eachExistingCounter = sa.hasParam("EachExistingCounter");
+
         List<GameObject> tgtObjects = Lists.newArrayList();
+        int divrem = 0;
         if (sa.hasParam("Bolster")) {
             CardCollection creatsYouCtrl = CardLists.filter(activator.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             CardCollection leastToughness = new CardCollection(Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetDefense));
-            tgtCards.addAll(pc.chooseCardsForEffect(leastToughness, sa, Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"), 1, 1, false));
-            tgtObjects.addAll(tgtCards);
+
+            Map<String, Object> params = Maps.newHashMap();
+            params.put("CounterType", counterType);
+
+            Iterables.addAll(tgtObjects, activator.getController().chooseCardsForEffect(leastToughness, sa, Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"), 1, 1, false, params));
+        } else if (sa.hasParam("Choices")) {
+            ZoneType choiceZone = ZoneType.Battlefield;
+            if (sa.hasParam("ChoiceZone")) {
+                choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+            }
+            Player chooser = activator;
+            if (sa.hasParam("Chooser")) {
+                List<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa);
+                if (choosers.isEmpty()) {
+                    return;
+                }
+                chooser = choosers.get(0);
+            }
+
+            CardCollection choices = new CardCollection(game.getCardsIn(choiceZone));
+
+            int n = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("ChoiceAmount",
+                    "1"), sa);
+            int m = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("MinChoiceAmount",
+                    sa.getParamOrDefault("ChoiceAmount", "1")), sa);
+
+            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, card, sa);
+
+            String title = Localizer.getInstance().getMessage("lblChooseaCard") + " ";
+            if (sa.hasParam("ChoiceTitle")) {
+                title = sa.getParam("ChoiceTitle");
+                // TODO might use better message
+                if (counterType != null) {
+                    title += " (" + counterType.getName() + ")";
+                }
+            }
+
+            Map<String, Object> params = Maps.newHashMap();
+            params.put("CounterType", counterType);
+            Iterables.addAll(tgtObjects, chooser.getController().chooseCardsForEffect(choices, sa, title, m, n,
+                    sa.hasParam("ChoiceOptional"), params));
         } else {
             tgtObjects.addAll(getDefinedOrTargeted(sa, "Defined"));
         }
 
-        GameEntityCounterTable table = new GameEntityCounterTable();
+        if (sa.hasParam("Optional") && !pc.confirmAction
+                (sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCounter"))) {
+            return;
+        }
 
+        int counterRemain = counterAmount;
         for (final GameObject obj : tgtObjects) {
             // check if the object is still in game or if it was moved
             Card gameCard = null;
@@ -156,7 +211,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             if (existingCounter) {
                 final List<CounterType> choices = Lists.newArrayList();
                 if (obj instanceof GameEntity) {
-                    GameEntity entity = (GameEntity)obj;
+                    GameEntity entity = (GameEntity) obj;
                     // get types of counters
                     for (CounterType ct : entity.getCounters().keySet()) {
                         if (entity.canReceiveCounters(ct)) {
@@ -166,7 +221,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 }
 
                 if (eachExistingCounter) {
-                    for(CounterType ct : choices) {
+                    for (CounterType ct : choices) {
                         if (obj instanceof Player) {
                             ((Player) obj).addCounter(ct, counterAmount, placer, true, table);
                         }
@@ -191,8 +246,20 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 }
             }
 
+            if (sa.hasParam("EachFromSource")) {
+                for (Card c : AbilityUtils.getDefinedCards(card, sa.getParam("EachFromSource"), sa)) {
+                    for (Entry<CounterType, Integer> cti : c.getCounters().entrySet()) {
+                        if (gameCard != null && gameCard.canReceiveCounters(cti.getKey())) {
+                            gameCard.addCounter(cti.getKey(), cti.getValue(), placer, true, table);
+                        }
+                    }
+                }
+                continue;
+            }
+
             if (obj instanceof Card) {
-                counterAmount = sa.usesTargeting() && sa.hasParam("DividedAsYouChoose") ? sa.getTargetRestrictions().getDividedValue(gameCard) : counterAmount;
+                boolean counterAdded = false;
+                counterAmount = sa.usesTargeting() && sa.isDividedAsYouChoose() ? sa.getDividedValue(gameCard) : counterAmount;
                 if (!sa.usesTargeting() || gameCard.canBeTargetedBy(sa)) {
                     if (max != -1) {
                         counterAmount = Math.max(Math.min(max - gameCard.getCounters(counterType), counterAmount), 0);
@@ -203,10 +270,22 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         params.put("CounterType", counterType);
                         counterAmount = pc.chooseNumber(sa, Localizer.getInstance().getMessage("lblHowManyCounters"), 0, counterAmount, params);
                     }
+                    if (sa.isDividedAsYouChoose() && !sa.usesTargeting()) {
+                        Map<String, Object> params = Maps.newHashMap();
+                        params.put("Target", obj);
+                        params.put("CounterType", counterType);
+                        divrem++;
+                        if ((divrem == tgtObjects.size()) || (counterRemain == 1)) { counterAmount = counterRemain; }
+                        else {
+                            counterAmount = pc.chooseNumber(sa, Localizer.getInstance().getMessage
+                                    ("lblHowManyCountersThis", CardTranslation.getTranslatedName(gameCard.getName())),
+                                    1, counterRemain, params);
+                        }
+                    }
 
                     // Adapt need extra logic
                     if (sa.hasParam("Adapt")) {
-                        if (!(gameCard.getCounters(CounterType.P1P1) == 0
+                        if (!(gameCard.getCounters(CounterEnumType.P1P1) == 0
                                 || gameCard.hasKeyword("CARDNAME adapts as though it had no +1/+1 counters"))) {
                             continue;
                         }
@@ -237,8 +316,13 @@ public class CountersPutEffect extends SpellAbilityEffect {
                             continue;
                         }
 
+                        Map<String, Object> params = Maps.newHashMap();
+                        params.put("CounterType", counterType);
+                        params.put("Amount", counterAmount);
+                        params.put("Target", gameCard);
+
                         String message = Localizer.getInstance().getMessage("lblDoYouWantPutTargetP1P1CountersOnCard", String.valueOf(counterAmount), CardTranslation.getTranslatedName(gameCard.getName()));
-                        Player chooser = pc.chooseSingleEntityForEffect(activator.getOpponents(), sa, Localizer.getInstance().getMessage("lblChooseAnOpponent"));
+                        Player chooser = pc.chooseSingleEntityForEffect(activator.getOpponents(), sa, Localizer.getInstance().getMessage("lblChooseAnOpponent"), params);
 
                         if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message)) {
                             gameCard.setTributed(true);
@@ -246,19 +330,19 @@ public class CountersPutEffect extends SpellAbilityEffect {
                             continue;
                         }
                     }
-                    if (rememberCards) {
-                        card.addRemembered(gameCard);
-                    }
                     final Zone zone = gameCard.getGame().getZoneOf(gameCard);
                     if (zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
                         if (etbcounter) {
                             gameCard.addEtbCounter(counterType, counterAmount, placer);
                         } else {
-                            gameCard.addCounter(counterType, counterAmount, placer, true, table);
-                        }
-                        if (remember) {
-                            final int value = gameCard.getTotalCountersToAdd();
-                            gameCard.addCountersAddedBy(card, counterType, value);
+                            int addedAmount = gameCard.addCounter(counterType, counterAmount, placer, true, table);
+                            if (addedAmount > 0) {
+                                counterAdded = true;
+                            }
+
+                            if (sa.hasParam("RemovePhase")) {
+                                addRemovePhaseTrigger(card, sa, sa.getParam("RemovePhase"), gameCard, counterType, addedAmount);
+                            }
                         }
 
                         if (sa.hasParam("Evolve")) {
@@ -285,10 +369,18 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         if (etbcounter) {
                             gameCard.addEtbCounter(counterType, counterAmount, placer);
                         } else {
-                            gameCard.addCounter(counterType, counterAmount, placer, false, table);
+                            if (gameCard.addCounter(counterType, counterAmount, placer, false, table) > 0) {
+                                counterAdded = true;
+                            }
                         }
                     }
+                    if (rememberCards && counterAdded) {
+                        card.addRemembered(gameCard);
+                    }
                     game.updateLastStateForCard(gameCard);
+                    if (sa.isDividedAsYouChoose() && !sa.usesTargeting()) {
+                        counterRemain = counterRemain - counterAmount;
+                    }
                 }
             } else if (obj instanceof Player) {
                 // Add Counters to players!
@@ -296,7 +388,85 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 pl.addCounter(counterType, counterAmount, placer, true, table);
             }
         }
+    }
+
+    @Override
+    public void resolve(SpellAbility sa) {
+        final Card card = sa.getHostCard();
+        final Game game = card.getGame();
+        final Player activator = sa.getActivatingPlayer();
+
+        CounterType counterType = null;
+        String amount = sa.getParamOrDefault("CounterNum", "1");
+        boolean rememberAmount = sa.hasParam("RememberAmount");
+
+        if (!sa.hasParam("EachExistingCounter") && !sa.hasParam("EachFromSource") && !sa.hasParam("SharedKeywords")) {
+            try {
+                counterType = AbilityUtils.getCounterType(sa.getParam("CounterType"), sa);
+            } catch (Exception e) {
+                System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
+                return;
+            }
+        }
+
+        Player placer = activator;
+        if (sa.hasParam("Placer")) {
+            final String pstr = sa.getParam("Placer");
+            placer = AbilityUtils.getDefinedPlayers(sa.getHostCard(), pstr, sa).get(0);
+        }
+
+        int counterAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa);
+
+        GameEntityCounterTable table = new GameEntityCounterTable();
+
+        if (sa.hasParam("SharedKeywords")) {
+            List<String> keywords = Arrays.asList(sa.getParam("SharedKeywords").split(" & "));
+            List<ZoneType> zones =  ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
+            String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",") : new String[]{"Card"};
+            keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, sa.getHostCard());
+            for (String k : keywords) {
+                resolvePerType(sa, placer, CounterType.getType(k), counterAmount, table);
+            }
+        } else {
+            resolvePerType(sa, placer, counterType, counterAmount, table);
+        }
+
+        int totalAdded = 0;
+        for (Integer i : table.values()) {
+            totalAdded += i;
+        }
+
+        if (totalAdded > 0 && rememberAmount) {
+            // TODO use SpellAbility Remember later
+            card.addRemembered(Integer.valueOf(totalAdded));
+        }
+
         table.triggerCountersPutAll(game);
     }
 
+    protected void addRemovePhaseTrigger(final Card host, final SpellAbility sa, String phase, Card tgt, CounterType ct, int added) {
+        boolean intrinsic = sa.isIntrinsic();
+
+        StringBuilder delTrig = new StringBuilder("Mode$ Phase | Phase$ ");
+        delTrig.append(phase);
+        delTrig.append(" | TriggerDescription$ For each ").append(ct.getName()).append(" counter you put on a creature this way, remove a ").append(ct.getName()).append(" counter from that creature at the beginning of the next");
+        if ("Cleanup".equals(phase)) {
+            delTrig.append("cleanup step");
+        } else if ("End of Turn".equals(phase)) {
+            delTrig.append("next end step");
+        }
+
+        String trigSA = new StringBuilder("DB$ RemoveCounter | Defined$ DelayTriggerRemembered | CounterNum$ 1 | CounterType$ ").append(ct).toString();
+
+        // these trigger are one per counter
+        for (int i = 0; i < added; i++) {
+            final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), sa.getHostCard(), intrinsic);
+            trig.addRemembered(tgt);
+
+            final SpellAbility newSa = AbilityFactory.getAbility(trigSA, sa.getHostCard());
+            newSa.setIntrinsic(intrinsic);
+            trig.setOverridingAbility(newSa);
+            sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
+        }
+    }
 }

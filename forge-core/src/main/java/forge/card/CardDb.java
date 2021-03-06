@@ -50,8 +50,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private final Map<String, String> alternateName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, Integer> artIds = new HashMap<>();
 
-    private final List<PaperCard> allCards = new ArrayList<>();
-    private final List<PaperCard> roAllCards = Collections.unmodifiableList(allCards);
+    private final Collection<PaperCard> roAllCards = Collections.unmodifiableCollection(allCardsByName.values());
     private final CardEdition.Collection editions;
 
     public enum SetPreference {
@@ -153,9 +152,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     public void loadCard(String cardName, CardRules cr) {
         rulesByName.put(cardName, cr);
+        // This seems very unperformant. Does this get called often?
+        System.out.println("Inside loading card");
 
         for (CardEdition e : editions) {
-            for (CardInSet cis : e.getCards()) {
+            for (CardInSet cis : e.getAllCardsInSet()) {
                 if (cis.name.equalsIgnoreCase(cardName)) {
                     addSetCard(e, cis, cr);
                 }
@@ -165,7 +166,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         reIndex();
     }
 
-    public void initialize(boolean logMissingPerEdition, boolean logMissingSummary) {
+    public void initialize(boolean logMissingPerEdition, boolean logMissingSummary, boolean enableUnknownCards, boolean loadNonLegalCards) {
         Set<String> allMissingCards = new LinkedHashSet<>();
         List<String> missingCards = new ArrayList<>();
         CardEdition upcomingSet = null;
@@ -174,15 +175,21 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         for (CardEdition e : editions.getOrderedEditions()) {
             boolean coreOrExpSet = e.getType() == CardEdition.Type.CORE || e.getType() == CardEdition.Type.EXPANSION;
             boolean isCoreExpSet = coreOrExpSet || e.getType() == CardEdition.Type.REPRINT;
+            //todo sets with nonlegal cards should have tags in them so we don't need to specify the code here
+            boolean skip = !loadNonLegalCards && (e.getCode().equals("CMB1") || e.getBorderColor() == CardEdition.BorderColor.SILVER);
             if (logMissingPerEdition && isCoreExpSet) {
-                System.out.print(e.getName() + " (" + e.getCards().length + " cards)");
+                System.out.print(e.getName() + " (" + e.getAllCardsInSet().size() + " cards)");
             }
-            if (coreOrExpSet && e.getDate().after(today)) {
-                upcomingSet = e;
+            if (coreOrExpSet && e.getDate().after(today) && upcomingSet == null) {
+                if (skip)
+                    upcomingSet = e;
             }
 
-            for (CardEdition.CardInSet cis : e.getCards()) {
+            for (CardEdition.CardInSet cis : e.getAllCardsInSet()) {
                 CardRules cr = rulesByName.get(cis.name);
+                if (cr != null && !cr.getType().isBasicLand() && skip)
+                    continue;
+
                 if (cr != null) {
                     addSetCard(e, cis, cr);
                 }
@@ -195,7 +202,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     System.out.println(" ... 100% ");
                 }
                 else {
-                    int missing = (e.getCards().length - missingCards.size()) * 10000 / e.getCards().length;
+                    int missing = (e.getAllCardsInSet().size() - missingCards.size()) * 10000 / e.getAllCardsInSet().size();
                     System.out.printf(" ... %.2f%% (%s missing: %s)%n", missing * 0.01f, Lang.nounWithAmount(missingCards.size(), "card"), StringUtils.join(missingCards, " | "));
                 }
             }
@@ -218,7 +225,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if (!contains(cr.getName())) {
                 if (upcomingSet != null) {
                     addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown, 1));
-                } else {
+                } else if(enableUnknownCards) {
                     System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
                     addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 1));
                 }
@@ -245,10 +252,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     private void reIndex() {
         uniqueCardsByName.clear();
-        allCards.clear();
         for (Entry<String, Collection<PaperCard>> kv : allCardsByName.asMap().entrySet()) {
             uniqueCardsByName.put(kv.getKey(), getFirstWithImage(kv.getValue()));
-            allCards.addAll(kv.getValue());
         }
     }
 
@@ -312,17 +317,21 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return tryGetCard(request);
     }
 
-    public int getCardCollectorNumber(String cardName, String reqEdition) {
+    public String getCardCollectorNumber(String cardName, String reqEdition, int artIndex) {
         cardName = getName(cardName);
         CardEdition edition = editions.get(reqEdition);
         if (edition == null)
-            return -1;
-        for (CardInSet card : edition.getCards()) {
+            return null;
+        int numMatches = 0;
+        for (CardInSet card : edition.getAllCardsInSet()) {
             if (card.name.equalsIgnoreCase(cardName)) {
-                return card.collectorNumber;
+                numMatches += 1;
+                if (numMatches == artIndex) {
+                    return card.collectorNumber;
+                }
             }
         }
-        return -1;
+        return null;
     }
 
     private PaperCard tryGetCard(CardRequest request) {
@@ -531,7 +540,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     @Override
-    public List<PaperCard> getAllCards() {
+    public Collection<PaperCard> getAllCards() {
         return roAllCards;
     }
 
@@ -558,7 +567,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public List<PaperCard> getAllCardsFromEdition(CardEdition edition) {
         List<PaperCard> cards = Lists.newArrayList();
 
-        for(CardInSet cis : edition.getCards()) {
+        for(CardInSet cis : edition.getAllCardsInSet()) {
             PaperCard card = this.getCard(cis.name, edition.getCode());
             if (card == null) {
                 // Just in case the card is listed in the edition file but Forge doesn't support it
@@ -650,7 +659,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         // May iterate over editions and find out if there is any card named 'cardName' but not implemented with Forge script.
         if (StringUtils.isBlank(request.edition)) {
             for (CardEdition edition : editions) {
-                for (CardInSet cardInSet : edition.getCards()) {
+                for (CardInSet cardInSet : edition.getAllCardsInSet()) {
                     if (cardInSet.name.equals(request.cardName)) {
                         cardEdition = edition;
                         cardRarity = cardInSet.rarity;
@@ -664,7 +673,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         } else {
             cardEdition = editions.get(request.edition);
             if (cardEdition != null) {
-                for (CardInSet cardInSet : cardEdition.getCards()) {
+                for (CardInSet cardInSet : cardEdition.getAllCardsInSet()) {
                     if (cardInSet.name.equals(request.cardName)) {
                         cardRarity = cardInSet.rarity;
                         break;
@@ -705,9 +714,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             // 1. generate all paper cards from edition data we have (either explicit, or found in res/editions, or add to unknown edition)
             List<PaperCard> paperCards = new ArrayList<>();
             if (null == whenItWasPrinted || whenItWasPrinted.isEmpty()) {
+                // TODO Not performant Each time we "putCard" we loop through ALL CARDS IN ALL editions
                 for (CardEdition e : editions.getOrderedEditions()) {
                     int artIdx = 1;
-                    for (CardInSet cis : e.getCards()) {
+                    for (CardInSet cis : e.getAllCardsInSet()) {
                         if (!cis.name.equals(cardName)) {
                             continue;
                         }

@@ -13,7 +13,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | Execute$ DBInitSV
 SVar:DBInitSVar:DB$ StoreSVar | SVar$ FullyCharged | Type$ Number | Expression$ 0 | References$ FullyCharged
 SVar:FullyCharged:Number$0
 AlternateMode:DoubleFaced
-SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_amulet.jpg
 Oracle:Instant and sorcery spells you cast cost {1} less to cast.\nWhenever you cast an instant or sorcery spell, put a charge counter on Primal Amulet. Then if there are four or more charge counters on it, you may remove those counters and transform it.
 
 ALTERNATE
@@ -23,6 +22,5 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ Any | TriggersWhenSpent$ TrigCopy | SpellDescription$ Add one mana of any color. When that mana is spent to cast an instant or sorcery spell, copy that spell and you may choose new targets for the copy.
 SVar:TrigCopy:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | OneOff$ True | Execute$ TrigCopyMain | TriggerDescription$ When that mana is spent to cast an instant or sorcery spell, copy that spell and you may choose new targets for the copy.
-SVar:TrigCopyMain:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility
-SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_wellspring.jpg
+SVar:TrigCopyMain:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 Oracle:(Transforms from Primal Amulet.)\n{T}: Add one mana of any color. When that mana is spent to cast an instant or sorcery spell, copy that spell and you may choose new targets for the copy.

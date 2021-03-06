@@ -8,4 +8,4 @@ SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$
 DeckHints:Type$Ally
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/retreat_to_emeria.jpg
-Oracle:Landfall — Whenever a land enters the battlefield under your control, choose one — \n• Create a 1/1 white Kor Ally creature token.\n• Creatures you control get +1/+1 until end of turn.
+Oracle:Landfall — Whenever a land enters the battlefield under your control, choose one —\n• Create a 1/1 white Kor Ally creature token.\n• Creatures you control get +1/+1 until end of turn.

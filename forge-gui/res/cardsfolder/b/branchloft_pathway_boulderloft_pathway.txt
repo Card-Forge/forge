@@ -1,0 +1,14 @@
+Name:Branchloft Pathway
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+AlternateMode:Modal
+Oracle:{T}: Add {G}.
+
+ALTERNATE
+
+Name:Boulderloft Pathway
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+Oracle:{T}: Add {W}.

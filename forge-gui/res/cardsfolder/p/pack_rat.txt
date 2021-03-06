@@ -2,7 +2,7 @@ Name:Pack Rat
 ManaCost:1 B
 Types:Creature Rat
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Rats you control.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of Rats you control.
 A:AB$ CopyPermanent | Cost$ 2 B Discard<1/Card> | Defined$ Self | NumCopies$ 1 | SpellDescription$ Create a token that's a copy of CARDNAME.
 SVar:X:Count$Valid Rat.YouCtrl
 SVar:BuffedBy:Rat

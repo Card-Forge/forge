@@ -1,5 +1,7 @@
 [metadata]
 Name=Ral Zarek
+[Commander]
+1 Ral Zarek|DGM
 [Main]
 1 Blistercoil Weird|RTR
 1 Electrolyze|GPT
@@ -32,7 +34,6 @@ Name=Ral Zarek
 1 Nivmagus Elemental|RTR
 1 Petrahydrox|GPT
 1 Pillar of the Paruns|DIS
-1 Ral Zarek|DGM
 1 Steam Vents|RTR
 1 Stitch in Time|GPT
 1 Teleportal|RTR

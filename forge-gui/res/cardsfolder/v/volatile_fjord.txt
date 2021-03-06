@@ -1,0 +1,5 @@
+Name:Volatile Fjord
+ManaCost:no cost
+Types:Snow Land Island Mountain
+K:CARDNAME enters the battlefield tapped.
+Oracle:({T}: Add {U} or {R}.)\nVolatile Fjord enters the battlefield tapped.

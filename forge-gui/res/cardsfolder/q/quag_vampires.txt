@@ -8,4 +8,4 @@ K:etbCounter:P1P1:XKicked:no condition:CARDNAME enters the battlefield with a +1
 SVar:XKicked:Count$TimesKicked
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quag_vampires.jpg
-Oracle:Multikicker {1}{B} (You may pay an additional {1}{B} any number of times as you cast this spell.)\nSwampwalk\nQuag Vampires enters the battlefield with a +1/+1 counter on it for each time it was kicked.
+Oracle:Multikicker {1}{B} (You may pay an additional {1}{B} any number of times as you cast this spell.)\nSwampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\nQuag Vampires enters the battlefield with a +1/+1 counter on it for each time it was kicked.

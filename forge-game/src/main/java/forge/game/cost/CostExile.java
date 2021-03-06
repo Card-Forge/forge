@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -59,50 +59,61 @@ public class CostExile extends CostPartWithList {
         this.sameZone = sameZone;
     }
 
+
+    @Override
+    public Integer getMaxAmountX(SpellAbility ability, Player payer) {
+        final Card source = ability.getHostCard();
+        final Game game = source.getGame();
+
+        CardCollectionView typeList;
+        if (this.sameZone) {
+            typeList = game.getCardsIn(this.from);
+        }
+        else {
+            typeList = payer.getCardsIn(this.from);
+        }
+
+        typeList = CardLists.getValidCards(typeList, getType().split(";"), payer, source, ability);
+
+        return typeList.size();
+    }
+
     @Override
     public int paymentOrder() { return 15; }
 
     @Override
     public final String toString() {
-        final StringBuilder sb = new StringBuilder();
         final Integer i = this.convertAmount();
-        sb.append("Exile ");
-
         String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
 
         if (this.payCostFromSource()) {
-            sb.append(this.getType());
             if (!this.from.equals(ZoneType.Battlefield)) {
-                sb.append(" from your ").append(this.from);
+                return String.format("Exile %s from your %s", this.getType(), this.from.name());
             }
-            return sb.toString();
+            return String.format("Exile %s", this.getType());
         } else if (this.getType().equals("All")) {
-            sb.append(" all cards from your ").append(this.from);
-            return sb.toString();
+            return String.format("Exile all cards from your %s", this.from.name());
         }
 
         if (this.from.equals(ZoneType.Battlefield)) {
-            sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
             if (!this.payCostFromSource()) {
-                sb.append(" you control");
+                return String.format("Exile %s you control", Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
             }
-            return sb.toString();
+            return String.format("Exile %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
         }
 
         if (!desc.equals("Card") && !desc.endsWith("card")) {
-            desc += " card";
+            if (this.sameZone) {
+                return String.format("Exile card %s from the same %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.name());
+            }
+            return String.format("Exile card %s from your %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.name());
         }
-        sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
 
         if (this.sameZone) {
-            sb.append(" from the same ");
-        } else {
-            sb.append(" from your ");
+            return String.format("Exile %s from the same %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.name());
         }
 
-        sb.append(this.from);
-
-        return sb.toString();
+        return String.format("Exile %s from your %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.name());
     }
 
     @Override
@@ -166,7 +177,7 @@ public class CostExile extends CostPartWithList {
     }
     @Override
     public String getHashForCardList() {
-    	return HashCardListKey;
+        return HashCardListKey;
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

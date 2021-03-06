@@ -1,15 +1,15 @@
 Name:Rally the Horde
 ManaCost:5 R
 Types:Sorcery
-A:SP$ Repeat | Cost$ 5 R | RepeatSubAbility$ DBExileThree | RepeatCheckSVar$ X | RepeatSVarCompare$ EQ0 | References$ X | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ Exile the top card of your library. Exile the top card of your library. Exile the top card of your library. If the last card exiled isn't a land, repeat this process. Create a 1/1 red Warrior creature token for each nonland card exiled this way.
-SVar:DBExileThree:DB$ Cleanup | ClearImprinted$ True | SubAbility$ DBMill1
-SVar:DBMill1:DB$ Mill | RememberMilled$ True | Destination$ Exile | NumCards$ 1 | SubAbility$ DBMill2
-SVar:DBMill2:DB$ Mill | RememberMilled$ True | Destination$ Exile | NumCards$ 1 | SubAbility$ DBMill3
-SVar:DBMill3:DB$ Mill | RememberMilled$ True | Destination$ Exile | NumCards$ 1 | Imprint$ True
+A:SP$ Repeat | Cost$ 5 R | RepeatSubAbility$ DBExileThree | RepeatCheckSVar$ X | RepeatSVarCompare$ EQ0 | References$ X | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ Exile the top card of your library. Exile the top card of your library. Exile the top card of your library. If the last card exiled isn't a land card, repeat this process. Create a 1/1 red Warrior creature token for each nonland card exiled this way.
+SVar:DBExileThree:DB$ Cleanup | ClearImprinted$ True | SubAbility$ DBExile1
+SVar:DBExile1:DB$ Dig | RememberChanged$ True | DestinationZone$ Exile | DigNum$ 1 | ChangeNum$ All | SubAbility$ DBExile2
+SVar:DBExile2:DB$ Dig | RememberChanged$ True | DestinationZone$ Exile | DigNum$ 1 | ChangeNum$ All | SubAbility$ DBExile3
+SVar:DBExile3:DB$ Dig | RememberChanged$ True | DestinationZone$ Exile | DigNum$ 1 | ChangeNum$ All | Imprint$ True
 SVar:X:Count$ValidExile Land.IsImprinted
-SVar:DBToken:DB$ Token | TokenAmount$ Y | References$ Y | TokenScript$ r_1_1_warrior | TokenOwner$ You | LegacyImage$ r 1 1 warrior sok | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBToken:DB$ Token | TokenAmount$ Y | References$ Y | TokenScript$ r_1_1_warrior | TokenOwner$ You | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:Y:Count$ValidExile Card.IsRemembered+nonLand
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rally_the_horde.jpg
-Oracle:Exile the top card of your library. Exile the top card of your library. Exile the top card of your library. If the last card exiled isn't a land, repeat this process. Create a 1/1 red Warrior creature token for each nonland card exiled this way.
+DeckHas:Ability$Token
+Oracle:Exile the top card of your library. Exile the top card of your library. Exile the top card of your library. If the last card exiled isn't a land card, repeat this process. Create a 1/1 red Warrior creature token for each nonland card exiled this way.

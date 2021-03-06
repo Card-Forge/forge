@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Creature Griffin
 PT:2/4
 K:Flying
-T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ When you draw your second card each turn, CARDNAME gets +2/+0 until end of turn.
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you draw your second card each turn, CARDNAME gets +2/+0 until end of turn.
 SVar:TrigPump:DB$ Pump | NumAtt$ +2 | NumDef$ +0 | Defined$ Self
 SVar:PlayMain1:TRUE
-Oracle:Flying\nWhen you draw your second card each turn, Steelgaze Griffin gets +2/+0 until end of turn.
+Oracle:Flying\nWhenever you draw your second card each turn, Steelgaze Griffin gets +2/+0 until end of turn.

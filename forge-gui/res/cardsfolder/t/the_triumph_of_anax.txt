@@ -1,7 +1,7 @@
 Name:The Triumph of Anax
 ManaCost:2 R
 Types:Enchantment Saga
-K:Saga:3:DBPump,DBPump,DBPump,DBPick
+K:Saga:4:DBPump,DBPump,DBPump,DBPick
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | References$ X | KW$ Trample | SpellDescription$ Until end of turn, target creature gains trample and gets +X/+0, where X is the number of lore counters on CARDNAME.
 SVar:X:Count$CardCounters.LORE
 SVar:PlayMain1:TRUE

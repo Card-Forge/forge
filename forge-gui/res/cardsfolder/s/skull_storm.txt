@@ -2,7 +2,7 @@ Name:Skull Storm
 ManaCost:7 B B
 Types:Sorcery
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When you cast this spell, copy it for each time you've cast your commander from the command zone this game.
-SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ X | References$ X
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ X | References$ X | MayChooseTarget$ True
 SVar:X:Count$TotalCommanderCastFromCommandZone
 A:SP$ Sacrifice | Cost$ 7 B B | Defined$ Player.Opponent | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBRepeatEach
 SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBLoseLife | SubAbility$ DBCleanup
@@ -10,4 +10,4 @@ SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ Y | Re
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:PlayerCountRemembered$LifeTotal/HalfUp
 SVar:Z:RememberedLKI$Valid Card.RememberedPlayerCtrl
-Oracle:When you cast this spell, copy it for each time you've cast your commander from the command zone this game. You may choose new targets for the copies.\nEach opponent sacrifices a creature. Each opponent who can't loses half their life, rounded up.
+Oracle:When you cast this spell, copy it for each time you've cast your commander from the command zone this game.\nEach opponent sacrifices a creature. Each opponent who can't loses half their life, rounded up.

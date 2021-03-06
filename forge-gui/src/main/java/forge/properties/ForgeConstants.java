@@ -47,6 +47,16 @@ public final class ForgeConstants {
     public static final String IMAGE_LIST_ACHIEVEMENTS_FILE          = LISTS_DIR + "achievement-images.txt";
     public static final String NET_DECKS_LIST_FILE                   = LISTS_DIR + "net-decks.txt";
     public static final String NET_DECKS_COMMANDER_LIST_FILE         = LISTS_DIR + "net-decks-commander.txt";
+    public static final String NET_DECKS_BRAWL_LIST_FILE             = LISTS_DIR + "net-decks-brawl.txt";
+    public static final String BORDERLESS_CARD_LIST_FILE             = LISTS_DIR + "borderlessCardList.txt";
+    public static final String SKINS_LIST_FILE                       = LISTS_DIR + "skinsList.txt";
+    public static final String CJK_FONTS_LIST_FILE                   = LISTS_DIR + "font-list.txt";
+    public static final String NET_ARCHIVE_STANDARD_DECKS_LIST_FILE  = LISTS_DIR + "net-decks-archive-standard.txt";
+    public static final String NET_ARCHIVE_PIONEER_DECKS_LIST_FILE   = LISTS_DIR + "net-decks-archive-pioneer.txt";
+    public static final String NET_ARCHIVE_MODERN_DECKS_LIST_FILE    = LISTS_DIR + "net-decks-archive-modern.txt";
+    public static final String NET_ARCHIVE_LEGACY_DECKS_LIST_FILE   = LISTS_DIR + "net-decks-archive-legacy.txt";
+    public static final String NET_ARCHIVE_VINTAGE_DECKS_LIST_FILE   = LISTS_DIR + "net-decks-archive-vintage.txt";
+
 
     public static final String CHANGES_FILE            = ASSETS_DIR + "README.txt";
     public static final String CHANGES_FILE_NO_RELEASE = ASSETS_DIR + "CHANGES.txt";
@@ -69,6 +79,7 @@ public final class ForgeConstants {
     public static final String LANG_DIR            = RES_DIR + "languages" + PATH_SEPARATOR;
     public static final String EFFECTS_DIR         = RES_DIR + "effects" + PATH_SEPARATOR;
     public static final String PUZZLE_DIR          = RES_DIR + "puzzle" + PATH_SEPARATOR;
+    public static final String TUTORIAL_DIR        = RES_DIR + "tutorial" + PATH_SEPARATOR;
     public static final String DECK_GEN_DIR        = RES_DIR + "deckgendecks" + PATH_SEPARATOR;
 
 
@@ -85,9 +96,9 @@ public final class ForgeConstants {
     private static final String CONQUEST_DIR       = RES_DIR + "conquest" + PATH_SEPARATOR;
     public static final String CONQUEST_PLANES_DIR = CONQUEST_DIR + "planes" + PATH_SEPARATOR;
 
-    public static final String SKINS_DIR              = RES_DIR + "skins" + PATH_SEPARATOR;
+    public static final String BASE_SKINS_DIR         = RES_DIR + "skins" + PATH_SEPARATOR;
     public static final String COMMON_FONTS_DIR       = RES_DIR + "fonts" + PATH_SEPARATOR;
-    public static final String DEFAULT_SKINS_DIR      = SKINS_DIR + "default" + PATH_SEPARATOR;
+    public static final String DEFAULT_SKINS_DIR      = BASE_SKINS_DIR + "default" + PATH_SEPARATOR;
     //don't associate these skin files with a directory since skin directory will be determined later
     public static final String SPRITE_ICONS_FILE      = "sprite_icons.png";
     public static final String SPRITE_FOILS_FILE      = "sprite_foils.png";
@@ -95,10 +106,13 @@ public final class ForgeConstants {
     public static final String SPRITE_TROPHIES_FILE   = "sprite_trophies.png";
     public static final String SPRITE_ABILITY_FILE    = "sprite_ability.png";
     public static final String SPRITE_BORDER_FILE     = "sprite_border.png";
+    public static final String SPRITE_BUTTONS_FILE    = "sprite_buttons.png";
+    public static final String SPRITE_DECKBOX_FILE    = "sprite_deckbox.png";
+    public static final String SPRITE_START_FILE      = "sprite_start.png";
     public static final String SPRITE_MANAICONS_FILE  = "sprite_manaicons.png";
     public static final String SPRITE_AVATARS_FILE    = "sprite_avatars.png";
     public static final String SPRITE_SLEEVES_FILE    = "sprite_sleeves.png";
-    public static final String SPRITE_SLEEVES2_FILE    = "sprite_sleeves2.png";
+    public static final String SPRITE_SLEEVES2_FILE   = "sprite_sleeves2.png";
     public static final String SPRITE_FAVICONS_FILE   = "sprite_favicons.png";
     public static final String SPRITE_PLANAR_CONQUEST_FILE = "sprite_planar_conquest.png";
     public static final String FONT_FILE              = "font1.ttf";
@@ -223,8 +237,10 @@ public final class ForgeConstants {
     public static final String DECK_SCHEME_DIR      = DECK_BASE_DIR + "scheme" + PATH_SEPARATOR;
     public static final String DECK_PLANE_DIR       = DECK_BASE_DIR + "planar" + PATH_SEPARATOR;
     public static final String DECK_COMMANDER_DIR   = DECK_BASE_DIR + "commander" + PATH_SEPARATOR;
+    public static final String COMMANDER_PRECON_DIR = QUEST_DIR + "commanderprecons" + PATH_SEPARATOR;
     public static final String DECK_OATHBREAKER_DIR = DECK_BASE_DIR + "oathbreaker" + PATH_SEPARATOR;
     public static final String DECK_NET_DIR         = DECK_BASE_DIR + "net" + PATH_SEPARATOR;
+    public static final String DECK_NET_ARCHIVE_DIR = DECK_BASE_DIR + "archive" + PATH_SEPARATOR;
     public static final String QUEST_SAVE_DIR       = USER_QUEST_DIR + "saves" + PATH_SEPARATOR;
     public static final String CONQUEST_SAVE_DIR    = USER_CONQUEST_DIR + "saves" + PATH_SEPARATOR;
     public static final String DECK_TINY_LEADERS_DIR= DECK_BASE_DIR + "tiny_leaders" + PATH_SEPARATOR;
@@ -235,6 +251,7 @@ public final class ForgeConstants {
     public static final String QUEST_PREFS_FILE     = USER_PREFS_DIR + "quest.preferences";
     public static final String CONQUEST_PREFS_FILE  = USER_PREFS_DIR + "conquest.preferences";
     public static final String ITEM_VIEW_PREFS_FILE = USER_PREFS_DIR + "item_view.preferences";
+    public static final String CLOSE_CONN_COMMAND   = "<<_EM_ESOLC_<<";
 
     // data that has defaults in the program dir but overrides/additions in the user dir
     private static final String _DEFAULTS_DIR = RES_DIR + "defaults" + PATH_SEPARATOR;
@@ -250,6 +267,7 @@ public final class ForgeConstants {
     private static final String PICS_DIR                     = CACHE_DIR + "pics" + PATH_SEPARATOR;
     public static final String DB_DIR                        = CACHE_DIR + "db" + PATH_SEPARATOR;
     public static final String FONTS_DIR                     = CACHE_DIR + "fonts" + PATH_SEPARATOR;
+    public static final String CACHE_SKINS_DIR               = CACHE_DIR + "skins" + PATH_SEPARATOR;
     public static final String CACHE_TOKEN_PICS_DIR          = PICS_DIR + "tokens" + PATH_SEPARATOR;
     public static final String CACHE_ICON_PICS_DIR           = PICS_DIR + "icons" + PATH_SEPARATOR;
     public static final String CACHE_SYMBOLS_DIR             = PICS_DIR + "symbols" + PATH_SEPARATOR;
@@ -315,6 +333,13 @@ public final class ForgeConstants {
     public static final String STACK_EFFECT_NOTIFICATION_NEVER = "Never";
     public static final String STACK_EFFECT_NOTIFICATION_ALWAYS = "Always";
     public static final String STACK_EFFECT_NOTIFICATION_AI_AND_TRIGGERED = "AI cast/activated, or triggered by any player";
+
+    // Constants for LAnd played notification policy
+    public static final String LAND_PLAYED_NOTIFICATION_NEVER = "Never";
+    public static final String LAND_PLAYED_NOTIFICATION_ALWAYS = "Always";
+    public static final String LAND_PLAYED_NOTIFICATION_ALWAYS_FOR_NONBASIC_LANDS = "Always, but only for nonbasic lands";
+    public static final String LAND_PLAYED_NOTIFICATION_AI = "Lands entering a battlefield because of an action of a AI player";
+    public static final String LAND_PLAYED_NOTIFICATION_AI_FOR_NONBASIC_LANDS = "Nonbasic lands entering a battlefield because of an action of a AI player";
     
     // Set boolean constant for landscape mode for gdx port
     public static final boolean isGdxPortLandscape = FileUtil.doesFileExist(ASSETS_DIR + "switch_orientation.ini");

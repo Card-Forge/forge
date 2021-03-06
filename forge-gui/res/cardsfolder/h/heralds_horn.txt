@@ -3,10 +3,10 @@ ManaCost:3
 Types:Artifact
 K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentInComputerDeck
-S:Mode$ ReduceCost | ValidCard$ Creature.ChosenType | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Creature spells of the chosen type you cast cost {1} less to cast.
+S:Mode$ ReduceCost | ValidCard$ Creature.ChosenType | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Creature spells you cast of the chosen type cost {1} less to cast.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPeek | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand.
 SVar:TrigPeek:DB$ PeekAndReveal | PeekAmount$ 1 | RevealValid$ Creature.ChosenType | RevealOptional$ True | RememberRevealed$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Creature.ChosenType | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heralds_horn.jpg
-Oracle:As Herald's Horn enters the battlefield, choose a creature type.\nCreature spells of the chosen type you cast cost {1} less to cast.\nAt the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand.
+Oracle:As Herald's Horn enters the battlefield, choose a creature type.\nCreature spells you cast of the chosen type cost {1} less to cast.\nAt the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand.

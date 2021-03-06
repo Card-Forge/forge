@@ -1,0 +1,7 @@
+Name:Sarah's Wings
+ManaCost:W
+Types:Tribal Instant Angel
+A:SP$ Pump | Cost$ W | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | KW$ Flying | SubAbility$ NoDamage | SpellDescription$ Target creature or player gains flying until end of turn.
+SVar:NoDamage:DB$ Effect | ReplacementEffects$ RPrevent | EffectOwner$ TargetedPlayer | ConditionPlayerDefined$ Targeted | ConditionPlayerContains$ Targeted | SpellDescription$ (Players with flying can't be dealt damage by creatures without flying.)
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You | ValidSource$ Creature.withoutFlying | Description$ Prevent all damage that would be dealt to you this turn by creatures without flying.
+Oracle:Target creature or player gains flying until end of turn. (Players with flying can't be dealt damage by creatures without flying.)

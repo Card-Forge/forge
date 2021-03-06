@@ -1,0 +1,8 @@
+Name:Painiac
+ManaCost:2 R
+Types:Creature Brainiac
+PT:0/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRoll | TriggerDescription$ At the beginning of your upkeep, roll a six-sided die. CARDNAME gets +X/+0 until end of turn, where X is the result.
+SVar:TrigRoll:DB$ RollDice | ResultSVar$ X | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ X
+Oracle:At the beginning of your upkeep, roll a six-sided die. Painiac gets +X/+0 until end of turn, where X is the result.

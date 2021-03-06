@@ -3,8 +3,7 @@ ManaCost:X U U
 Types:Sorcery
 A:SP$ Charm | Cost$ X U U | Choices$ DBDraw,DBMill
 SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ X | References$ X | SpellDescription$ Each player draws X cards.
-SVar:DBMill:DB$ Mill | Defined$ Player | NumCards$ X | References$ X | SpellDescription$ Each player puts the top X cards of their library into their graveyard.
+SVar:DBMill:DB$ Mill | Defined$ Player | NumCards$ X | References$ X | SpellDescription$ Each player mills X cards.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fascination.jpg
-Oracle:Choose one —\n• Each player draws X cards.\n• Each player puts the top X cards of their library into their graveyard.
+Oracle:Choose one —\n• Each player draws X cards.\n• Each player mills X cards.

@@ -6,6 +6,7 @@ S:Mode$ Continuous | Affected$ Card.Self+counters_GE3_P1P1 | AddKeyword$ Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+powerGTX+Other | References$ X | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature you control enters the battlefield or dies, if that creature's power is greater than CARDNAME's, put a +1/+1 counter on CARDNAME.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+powerGTX+Other | References$ X | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature you control enters the battlefield or dies, if that creature's power is greater than CARDNAME's, put a +1/+1 counter on CARDNAME.
 SVar:X:Count$CardPower
-SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:Y:TriggeredCard$CardPower
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ LTY | References$ X,Y
 DeckHas:Ability$Counters
 Oracle:Whenever another creature you control enters the battlefield or dies, if that creature's power is greater than Pelt Collector's, put a +1/+1 counter on Pelt Collector.\nAs long as Pelt Collector has three or more +1/+1 counters on it, it has trample.

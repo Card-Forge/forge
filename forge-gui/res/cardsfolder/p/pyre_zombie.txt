@@ -9,4 +9,4 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 1 B B | Defined$ Self | Origin$ Graveyard 
 SVar:SacMe:2
 SVar:DiscardMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyre_zombie.jpg
-Oracle:At the beginning of your upkeep, if Pyre Zombie is in your graveyard, you may pay {1}{B}{B}. If you do, return Pyre Zombie to your hand.\n{1}{R}{R}, Sacrifice Pyre Zombie: Pyre Zombie deals 2 damage to any target.
+Oracle:At the beginning of your upkeep, if Pyre Zombie is in your graveyard, you may pay {1}{B}{B}. If you do, return Pyre Zombie to your hand.\n{1}{R}{R}, Sacrifice Pyre Zombie: It deals 2 damage to any target.

@@ -54,6 +54,7 @@ public class InputLondonMulligan extends InputSyncronizedBase {
     public final void showMessage() {
         final Localizer localizer = Localizer.getInstance();
         final Game game = player.getGame();
+        game.getView().updateIsMulligan(true);
         int cardsLeft = toReturn - selected.size();
 
         StringBuilder sb = new StringBuilder();
@@ -79,6 +80,7 @@ public class InputLondonMulligan extends InputSyncronizedBase {
 
     private void done() {
         resetCardHighlights();
+        getController().getGame().getView().updateIsMulligan(false);
         stop();
     }
 

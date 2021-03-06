@@ -6,4 +6,4 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target land card from your graveyard to the battlefield.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land card from your graveyard
 SVar:X:Count$TypeInYourYard.Creature
-Oracle:Undergrowth—This spell costs {1} less to cast for each creature card in your graveyard.\nWhen Molderhulk enters the battlefield, return target land card from your graveyard to the battlefield.
+Oracle:Undergrowth — This spell costs {1} less to cast for each creature card in your graveyard.\nWhen Molderhulk enters the battlefield, return target land card from your graveyard to the battlefield.

@@ -8,4 +8,4 @@ SVar:SetessanFight:AB$ Fight | Cost$ T | Defined$ Self | ValidTgts$ Creature.Oth
 SVar:MaxTargets:Count$Valid Creature
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/setessan_tactics.jpg
-Oracle:Strive — Setessan Tactics costs {G} more to cast for each target beyond the first.\nUntil end of turn, any number of target creatures each get +1/+1 and gain "{T}: This creature fights another target creature."
+Oracle:Strive — This spell costs {G} more to cast for each target beyond the first.\nUntil end of turn, any number of target creatures each get +1/+1 and gain "{T}: This creature fights another target creature."

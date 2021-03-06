@@ -1,0 +1,8 @@
+Name:Lurking Deadeye
+ManaCost:3 B
+Types:Creature Human Assassin
+PT:4/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target creature that was dealt damage this turn.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select target creature that was dealt damage this turn
+Oracle:Flash\nWhen Lurking Deadeye enters the battlefield, destroy target creature that was dealt damage this turn.

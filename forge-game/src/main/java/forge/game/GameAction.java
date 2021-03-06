@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -33,15 +33,14 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.mulligan.MulliganService;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityLayer;
-import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
@@ -57,7 +56,7 @@ import java.util.*;
 
 /**
  * Methods for common actions performed during a game.
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -74,14 +73,24 @@ public class GameAction {
         // Reset Activations per Turn
         for (final Card card : game.getCardsInGame()) {
             card.resetActivationsPerTurn();
+            // need to reset this in exile
+            card.resetForetoldThisTurn();
         }
     }
 
     public Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause) {
         return changeZone(zoneFrom, zoneTo, c, position, cause, null);
     }
-    
+
     private Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause, Map<AbilityKey, Object> params) {
+        // 111.11. A copy of a permanent spell becomes a token as it resolves.
+        // The token has the characteristics of the spell that became that token.
+        // The token is not “created” for the purposes of any replacement effects or triggered abilities that refer to creating a token.
+        if (c.isCopiedSpell() && zoneTo.is(ZoneType.Battlefield) && c.isPermanent() && cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
+            c.setCopiedSpell(false);
+            c.setToken(true);
+        }
+
         if (c.isCopiedSpell() || (c.isImmutable() && zoneTo.is(ZoneType.Exile))) {
             // Remove Effect from command immediately, this is essential when some replacement
             // effects happen during the resolving of a spellability ("the next time ..." effect)
@@ -98,13 +107,12 @@ public class GameAction {
             return c;
         }
 
-        boolean toBattlefield = zoneTo.is(ZoneType.Battlefield);
+        boolean toBattlefield = zoneTo.is(ZoneType.Battlefield) || zoneTo.is(ZoneType.Merged);
         boolean fromBattlefield = zoneFrom != null && zoneFrom.is(ZoneType.Battlefield);
-        boolean toHand = zoneTo.is(ZoneType.Hand);
         boolean wasFacedown = c.isFaceDown();
 
         //Rule 110.5g: A token that has left the battlefield can't move to another zone
-        if (c.isToken() && zoneFrom != null && !fromBattlefield && !zoneFrom.is(ZoneType.Command)) {
+        if (c.isToken() && zoneFrom != null && !fromBattlefield && !zoneFrom.is(ZoneType.Stack)) {
             return c;
         }
 
@@ -124,12 +132,25 @@ public class GameAction {
 
         Card copied = null;
         Card lastKnownInfo = null;
+        Card commanderEffect = null; // The effect card of commander replacement effect
+
+        // get the LKI from above like ChangeZoneEffect
+        if (params != null && params.containsKey(AbilityKey.CardLKI)) {
+            lastKnownInfo = (Card) params.get(AbilityKey.CardLKI);
+        } else if (toBattlefield && cause != null && cause.isReplacementAbility()) {
+            // if to Battlefield and it is caused by an replacement effect,
+            // try to get previous LKI if able
+            ReplacementEffect re = cause.getReplacementEffect();
+            if (ReplacementType.Moved.equals(re.getMode())) {
+                lastKnownInfo = (Card) cause.getReplacingObject(AbilityKey.CardLKI);
+            }
+        }
 
         if (c.isSplitCard()) {
             boolean resetToOriginal = false;
 
             if (c.isManifested()) {
-                if (zoneFrom.is(ZoneType.Battlefield)) {
+                if (fromBattlefield) {
                     // Make sure the card returns from the battlefield as the original card with two halves
                     resetToOriginal = true;
                 }
@@ -152,24 +173,26 @@ public class GameAction {
             c.removeSVar("EndOfTurnLeavePlay");
         }
 
-        // Clean up temporary variables such as Sunburst value or announced PayX value
-        if (!(zoneTo.is(ZoneType.Stack) || zoneTo.is(ZoneType.Battlefield))) {
-            c.clearTemporaryVars();
-        }
-
         if (fromBattlefield && !toBattlefield) {
             c.getController().setRevolt(true);
         }
 
         // Don't copy Tokens, copy only cards leaving the battlefield
         // and returning to hand (to recreate their spell ability information)
-        if (suppress || (!fromBattlefield && !toHand)) {
-            lastKnownInfo = c;
+        if (suppress || toBattlefield) {
             copied = c;
+
+            if (lastKnownInfo == null) {
+                lastKnownInfo = CardUtil.getLKICopy(c);
+            }
+
+            if (!lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.")) {
+                copied.clearCounters();
+            }
         } else {
             // if from Battlefield to Graveyard and Card does exist in LastStateBattlefield
             // use that instead
-            if (fromBattlefield && zoneTo.is(ZoneType.Graveyard)) {
+            if (fromBattlefield) {
                 CardCollectionView lastBattlefield = game.getLastStateBattlefield();
                 int idx = lastBattlefield.indexOf(c);
                 if (idx != -1) {
@@ -181,106 +204,64 @@ public class GameAction {
                 lastKnownInfo = CardUtil.getLKICopy(c);
             }
 
-            // Cards returned from exile face-down must be reset to their original state, otherwise
-            // all sort of funky shenanigans may happen later (e.g. their ETB replacement effects are set
-            // up on the wrong card state etc.).
-            if (wasFacedown && (fromBattlefield || (toHand && zoneFrom.is(ZoneType.Exile)))) {
-                c.turnFaceUp(false, false);
-            }
-
-            if (!c.isToken()) {
-                if (c.isCloned() || c.hasTextChangeState()) {
-                    c.removeCloneStates();
-                    c.removeTextChangeStates();
-                    c.updateStateForView();
-                }
-
+            if (!c.isRealToken()) {
                 copied = CardFactory.copyCard(c, false);
 
-                if (fromBattlefield && copied.getCurrentStateName() != CardStateName.Original) {
+                if (zoneTo.is(ZoneType.Stack)) {
+                    // when moving to stack, copy changed card infomation
+                    copied.setChangedCardColors(c.getChangedCardColors());
+                    copied.setChangedCardKeywords(c.getChangedCardKeywords());
+                    copied.setChangedCardTypes(c.getChangedCardTypesMap());
+                    copied.setChangedCardNames(c.getChangedCardNames());
+                    copied.setChangedCardTraits(c.getChangedCardTraits());
+
+                    copied.copyChangedTextFrom(c);
+
+                } else {
                     // when a card leaves the battlefield, ensure it's in its original state
                     // (we need to do this on the object before copying it, or it won't work correctly e.g.
                     // on Transformed objects)
                     copied.setState(CardStateName.Original, false);
+                    copied.setBackSide(false);
                 }
 
                 copied.setUnearthed(c.isUnearthed());
                 copied.setTapped(false);
 
-                for (final Trigger trigger : copied.getTriggers()) {
-                    trigger.setHostCard(copied);
+                // need to copy counters when card enters another zone than hand or library
+                if (lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.") &&
+                        !(zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library))) {
+                    copied.setCounters(Maps.newHashMap(lastKnownInfo.getCounters()));
                 }
-                for (final ReplacementEffect repl : copied.getReplacementEffects()) {
-                    repl.setHostCard(copied);
-                }
-                for (final StaticAbility sa : copied.getStaticAbilities()) {
-                    sa.setHostCard(copied);
-                }
-                if (c.getName().equals("Skullbriar, the Walking Grave")) {
-                    copied.setCounters(c.getCounters());
-                }
-
-                // ensure that any leftover keyword/type changes are cleared in the state view
-                copied.updateStateForView();
             } else { //Token
                 copied = c;
             }
         }
 
-        // special rule for Worms of the Earth
-        if (toBattlefield && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLandBattlefield)) {
-            // something that is already a Land cant enter the battlefield
-            Card noLandLKI = c;
-            if (!c.isLand()) {
-                // check if something would be a land
-                noLandLKI = CardUtil.getLKICopy(c);
-                // this check needs to check if this card would be on the battlefield
-                noLandLKI.setLastKnownZone(zoneTo);
-
-                CardCollection preList = new CardCollection(noLandLKI);
-                checkStaticAbilities(false, Sets.newHashSet(noLandLKI), preList);
-
-                // fake etb counters thing, then if something changed,
-                // need to apply checkStaticAbilities again
-                if(!noLandLKI.isLand()) {
-                    if (noLandLKI.putEtbCounters(null)) {
-                        // counters are added need to check again
-                        checkStaticAbilities(false, Sets.newHashSet(noLandLKI), preList);
-                    }
-                }
-            }
-            if(noLandLKI.isLand()) {
-                // if it isn't on the Stack, it stays in that Zone
-                if (!c.isInZone(ZoneType.Stack)) {
-                    return c;
-                }
-                // if something would only be a land when entering the battlefield and not before
-                // put it into the graveyard instead
-                zoneTo = c.getOwner().getZone(ZoneType.Graveyard);
-
-                // reset facedown
-                copied.setState(CardStateName.Original, false);
-                copied.setManifested(false);
-                copied.updateStateForView();
-
-                // not to battlefield anymore!
-                toBattlefield = false;
-
-                if (c.isCloned() || c.hasTextChangeState()) {
-                    c.removeCloneStates();
-                    c.removeTextChangeStates();
-                    c.updateStateForView();
-                }
-
-                if (copied.getCurrentStateName() != CardStateName.Original) {
-                    copied.setState(CardStateName.Original, false);
-                }
-
-                copied.updateStateForView();
-            }
-        }
+        // ensure that any leftover keyword/type changes are cleared in the state view
+        copied.updateStateForView();
 
         if (!suppress) {
+            // Temporary disable commander replacement effect
+            // 903.9a
+            if (fromBattlefield && !toBattlefield && c.isCommander() && c.hasMergedCard()) {
+                // Find the commander replacement effect "card"
+                CardCollectionView comCards = c.getOwner().getCardsIn(ZoneType.Command);
+                for (final Card effCard : comCards) {
+                    for (final ReplacementEffect re : effCard.getReplacementEffects()) {
+                        if (re.hasSVar("CommanderMoveReplacement") && effCard.getEffectSource().getName().equals(c.getRealCommander().getName())) {
+                            commanderEffect = effCard;
+                            break;
+                        }
+                    }
+                    if (commanderEffect != null) break;
+                }
+                // Disable the commander replacement effect
+                for (final ReplacementEffect re : commanderEffect.getReplacementEffects()) {
+                    re.setSuppressed(true);
+                }
+            }
+
             if (zoneFrom == null) {
                 copied.getOwner().addInboundToken(copied);
             }
@@ -298,20 +279,67 @@ public class GameAction {
             ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.Moved, repParams);
             if (repres != ReplacementResult.NotReplaced) {
                 // reset failed manifested Cards back to original
-                if (c.isManifested()) {
-                    c.turnFaceUp(false, false);
+                if (c.isManifested() && !c.isInZone(ZoneType.Battlefield)) {
+                    c.forceTurnFaceUp();
                 }
 
-                if (game.getStack().isResolving(c) && !zoneTo.is(ZoneType.Graveyard) && repres == ReplacementResult.Prevented) {
-                    copied.getOwner().removeInboundToken(copied);
-                    return moveToGraveyard(c, cause, params);
-                }
                 copied.getOwner().removeInboundToken(copied);
+
+                if (repres == ReplacementResult.Prevented) {
+                    if (game.getStack().isResolving(c) && !zoneTo.is(ZoneType.Graveyard)) {
+                        return moveToGraveyard(c, cause, params);
+                    }
+
+                    copied.clearDevoured();
+                    copied.clearDelved();
+                    copied.clearConvoked();
+                    copied.clearExploited();
+                }
+
+                // was replaced with another Zone Change
+                if (toBattlefield && !c.isInZone(ZoneType.Battlefield)) {
+                    if (c.removeChangedState()) {
+                        c.updateStateForView();
+                    }
+                }
                 return c;
             }
         }
 
         copied.getOwner().removeInboundToken(copied);
+
+        // Handle merged permanent here so all replacement effects are already applied.
+        CardCollection mergedCards = null;
+        if (fromBattlefield && !toBattlefield && c.hasMergedCard()) {
+            CardCollection cards = new CardCollection(c.getMergedCards());
+            // replace top card with copied card for correct name for human to choose.
+            cards.set(cards.indexOf(c), copied);
+            // 721.3b
+            if (cause != null && zoneTo.getZoneType() == ZoneType.Exile) {
+                cards = (CardCollection) cause.getHostCard().getController().getController().orderMoveToZoneList(cards, zoneTo.getZoneType());
+            } else {
+                cards = (CardCollection) c.getOwner().getController().orderMoveToZoneList(cards, zoneTo.getZoneType());
+            }
+            cards.set(cards.indexOf(copied), c);
+            if (zoneTo.is(ZoneType.Library)) {
+                java.util.Collections.reverse(cards);
+            }
+            mergedCards = cards;
+            if (cause != null) {
+                // Replace sa targeting cards
+                final SpellAbility saTargeting = cause.getSATargetingCard();
+                if (saTargeting != null) {
+                    saTargeting.getTargets().replaceTargetCard(c, cards);
+                }
+                // Replace host rememberd cards
+                // But not replace RememberLKI, since it wants to refer to the last known info.
+                Card hostCard = cause.getHostCard();
+                if (!cause.hasParam("RememberLKI") && hostCard.isRemembered(c)) {
+                    hostCard.removeRemembered(c);
+                    hostCard.addRemembered(cards);
+                }
+            }
+        }
 
         if (suppress) {
             game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
@@ -328,9 +356,15 @@ public class GameAction {
                     && zoneFrom == zoneTo && position.equals(zoneFrom.size()) && position != 0) {
                 position--;
             }
+            if (mergedCards != null) {
+                for (final Card card : mergedCards) {
+                    c.getOwner().getZone(ZoneType.Merged).remove(card);
+                }
+            }
             zoneFrom.remove(c);
             if (!zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Stack)) {
                 c.setExiledWith(null);
+                c.setExiledBy(null);
             }
 
             // cleanup Encoding
@@ -363,14 +397,54 @@ public class GameAction {
             }
         }
 
-        // "enter the battlefield as a copy" - apply code here
-        // but how to query for input here and continue later while the callers assume synchronous result?
-        zoneTo.add(copied, position, c); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
-        c.setZone(zoneTo);
+        if (mergedCards != null) {
+            // Move components of merged permanet here
+            // Also handle 721.3e and 903.9a
+            boolean wasToken = c.isToken();
+            if (commanderEffect != null) {
+                for (final ReplacementEffect re : commanderEffect.getReplacementEffects()) {
+                    re.setSuppressed(false);
+                }
+            }
+            // Change zone of original card so components isToken() and isCommander() return correct value
+            // when running replacement effects here
+            c.setZone(zoneTo);
+            for (final Card card : mergedCards) {
+                if (card.isRealCommander()) {
+                    card.setMoveToCommandZone(true);
+                }
+                // 721.3e & 903.9a
+                if (wasToken && !card.isRealToken() || card.isRealCommander()) {
+                    Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(card);
+                    repParams.put(AbilityKey.CardLKI, card);
+                    repParams.put(AbilityKey.Cause, cause);
+                    repParams.put(AbilityKey.Origin, zoneFrom != null ? zoneFrom.getZoneType() : null);
+                    repParams.put(AbilityKey.Destination, zoneTo.getZoneType());
+
+                    if (params != null) {
+                        repParams.putAll(params);
+                    }
+
+                    ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.Moved, repParams);
+                    if (repres != ReplacementResult.NotReplaced) continue;
+                }
+                if (card == c) {
+                    zoneTo.add(copied, position, lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
+                } else {
+                    zoneTo.add(card, position);
+                }
+                card.setZone(zoneTo);
+            }
+        } else {
+            // "enter the battlefield as a copy" - apply code here
+            // but how to query for input here and continue later while the callers assume synchronous result?
+            zoneTo.add(copied, position, lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
+            c.setZone(zoneTo);
+        }
 
         // do ETB counters after zone add
         if (!suppress) {
-            if (toBattlefield ) {
+            if (toBattlefield) {
                 copied.putEtbCounters(table);
                 // enable replacement effects again
                 for (final ReplacementEffect re : copied.getReplacementEffects()) {
@@ -384,38 +458,41 @@ public class GameAction {
         copied.updateStateForView();
 
         if (fromBattlefield) {
-            c.setDamage(0); //clear damage after a card leaves the battlefield
-            c.setHasBeenDealtDeathtouchDamage(false);
-            if (c.isTapped()) {
-                c.setTapped(false); //untap card after it leaves the battlefield if needed
+            copied.setDamage(0); //clear damage after a card leaves the battlefield
+            copied.setHasBeenDealtDeathtouchDamage(false);
+            if (copied.isTapped()) {
+                copied.setTapped(false); //untap card after it leaves the battlefield if needed
                 game.fireEvent(new GameEventCardTapped(c, false));
             }
-            c.setMustAttackEntity(null);
+            copied.setMustAttackEntity(null);
         }
 
         // Need to apply any static effects to produce correct triggers
         checkStaticAbilities();
-        game.getTriggerHandler().clearInstrinsicActiveTriggers(c, zoneFrom);
-        game.getTriggerHandler().registerActiveTrigger(lastKnownInfo, false);
+        game.getTriggerHandler().clearActiveTriggers(copied, null);
+        game.getTriggerHandler().registerActiveLTBTrigger(lastKnownInfo);
+        game.getTriggerHandler().registerActiveTrigger(copied, false);
 
         table.triggerCountersPutAll(game);
 
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
 
-        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(lastKnownInfo);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(copied);
+        runParams.put(AbilityKey.CardLKI, lastKnownInfo);
         runParams.put(AbilityKey.Cause, cause);
         runParams.put(AbilityKey.Origin, zoneFrom != null ? zoneFrom.getZoneType().name() : null);
         runParams.put(AbilityKey.Destination, zoneTo.getZoneType().name());
         runParams.put(AbilityKey.SpellAbilityStackInstance, game.stack.peek());
         runParams.put(AbilityKey.IndividualCostPaymentInstance, game.costPaymentStack.peek());
+        runParams.put(AbilityKey.MergedCards, mergedCards);
 
         if (params != null) {
             runParams.putAll(params);
         }
 
         game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, true);
-        if (zoneFrom != null && zoneFrom.is(ZoneType.Battlefield) && !zoneFrom.getPlayer().equals(zoneTo.getPlayer())) {
+        if (fromBattlefield && !zoneFrom.getPlayer().equals(zoneTo.getPlayer())) {
             final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromCard(lastKnownInfo);
             runParams2.put(AbilityKey.OriginalController, zoneFrom.getPlayer());
             if(params != null) {
@@ -433,35 +510,28 @@ public class GameAction {
             return copied;
         }
 
-        // remove all counters from the card if destination is not the battlefield
-        // UNLESS we're dealing with Skullbriar, the Walking Grave
-        if (!c.isToken() && (zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library) ||
-                (!toBattlefield && !c.getName().equals("Skullbriar, the Walking Grave")))) {
-            copied.clearCounters();
-        }
-
-        if (!c.isToken() && !toBattlefield) {
+        if (!c.isRealToken() && !toBattlefield) {
             copied.clearDevoured();
             copied.clearDelved();
             copied.clearConvoked();
             copied.clearExploited();
         }
 
-        // rule 504.6: reveal a face-down card leaving the stack 
+        // rule 504.6: reveal a face-down card leaving the stack
         if (zoneFrom != null && zoneTo != null && zoneFrom.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Battlefield) && wasFacedown) {
             Card revealLKI = CardUtil.getLKICopy(c);
-            revealLKI.turnFaceUp(true, false);
+            revealLKI.forceTurnFaceUp();
             reveal(new CardCollection(revealLKI), revealLKI.getOwner(), true, "Face-down card moves from the stack: ");
         }
 
         if (fromBattlefield) {
-            if (!c.isToken()) {
+            if (!c.isRealToken()) {
                 copied.setState(CardStateName.Original, true);
             }
             // Soulbond unpairing
             if (c.isPaired()) {
                 c.getPairedWith().setPairedWith(null);
-                if (!c.isToken()) {
+                if (!c.isRealToken()) {
                     c.setPairedWith(null);
                 }
             }
@@ -481,7 +551,7 @@ public class GameAction {
             // Reveal if face-down
             if (wasFacedown) {
                 Card revealLKI = CardUtil.getLKICopy(c);
-                revealLKI.turnFaceUp(true, false);
+                revealLKI.forceTurnFaceUp();
 
                 reveal(new CardCollection(revealLKI), revealLKI.getOwner(), true, "Face-down card leaves the battlefield: ");
 
@@ -491,7 +561,7 @@ public class GameAction {
             // Remove all changed keywords
             copied.removeAllChangedText(game.getNextTimestamp());
         } else if (toBattlefield) {
-            // reset timestamp in changezone effects so they have same timestamp if ETB simutaneously 
+            // reset timestamp in changezone effects so they have same timestamp if ETB simutaneously
             copied.setTimestamp(game.getNextTimestamp());
             for (Player p : game.getPlayers()) {
                 copied.getDamageHistory().setNotAttackedSinceLastUpkeepOf(p);
@@ -516,7 +586,7 @@ public class GameAction {
 
         // Cards not on the battlefield / stack should not have controller
         if (!zoneTo.is(ZoneType.Battlefield) && !zoneTo.is(ZoneType.Stack)) {
-            c.clearControllers();
+            copied.clearControllers();
         }
 
         return copied;
@@ -540,7 +610,7 @@ public class GameAction {
         return moveTo(zoneTo, c, position, cause, null);
     }
 
-    private Card moveTo(final Zone zoneTo, Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
+    public final Card moveTo(final Zone zoneTo, Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
         // FThreads.assertExecutedByEdt(false); // This code must never be executed from EDT,
         // use FThreads.invokeInNewThread to run code in a pooled thread
         return moveTo(zoneTo, c, null, cause, params);
@@ -554,13 +624,35 @@ public class GameAction {
 
         // Card lastKnownInfo = c;
 
+        // Handle the case that one component of a merged permanent got take to the subgame
+        if (zoneTo.is(ZoneType.Subgame) && (c.hasMergedCard() || c.isMerged())) {
+            c.moveMergedToSubgame(cause);
+        }
+
         c = changeZone(zoneFrom, zoneTo, c, position, cause, params);
+
+        // Move card in maingame if take card from subgame
+        // 720.4a
+        if (zoneFrom != null && zoneFrom.is(ZoneType.Sideboard) && game.getMaingame() != null) {
+            Card maingameCard = c.getOwner().getMappingMaingameCard(c);
+            if (maingameCard != null) {
+                if (maingameCard.getZone().is(ZoneType.Stack)) {
+                    game.getMaingame().getStack().remove(maingameCard);
+                }
+                game.getMaingame().getAction().moveTo(ZoneType.Subgame, maingameCard, null);
+            }
+        }
 
         if (zoneFrom == null) {
             c.setCastFrom(null);
             c.setCastSA(null);
         } else if (zoneTo.is(ZoneType.Stack)) {
             c.setCastFrom(zoneFrom.getZoneType());
+            if (cause != null && cause.isSpell() && c.equals(cause.getHostCard()) && !c.isCopiedSpell()) {
+                c.setCastSA(cause);
+            } else {
+                c.setCastSA(null);
+            }
         } else if (!(zoneTo.is(ZoneType.Battlefield) && zoneFrom.is(ZoneType.Stack))) {
             c.setCastFrom(null);
             c.setCastSA(null);
@@ -573,20 +665,39 @@ public class GameAction {
             AttachEffect.attachAuraOnIndirectEnterBattlefield(c);
         }
 
+        if (c.isRealCommander()) {
+            c.setMoveToCommandZone(true);
+        }
+
         return c;
     }
 
     public final void controllerChangeZoneCorrection(final Card c) {
         System.out.println("Correcting zone for " + c.toString());
         final Zone oldBattlefield = game.getZoneOf(c);
-        if (oldBattlefield == null || oldBattlefield.getZoneType() == ZoneType.Stack) {
+
+        if (oldBattlefield == null || oldBattlefield.is(ZoneType.Stack)) {
             return;
         }
+
         final Player original = oldBattlefield.getPlayer();
-        final PlayerZone newBattlefield = c.getController().getZone(oldBattlefield.getZoneType());
+        final Player controller = c.getController();
+        if (original == null || controller == null || original.equals(controller)) {
+            return;
+        }
+        final PlayerZone newBattlefield = controller.getZone(oldBattlefield.getZoneType());
 
         if (newBattlefield == null || oldBattlefield.equals(newBattlefield)) {
             return;
+        }
+
+        // 702.94e A paired creature becomes unpaired if any of the following occur:
+        // another player gains control of it or the creature it’s paired with
+        if (c.isPaired()) {
+            Card partner = c.getPairedWith();
+            c.setPairedWith(null);
+            partner.setPairedWith(null);
+            partner.updateStateForView();
         }
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
@@ -618,8 +729,15 @@ public class GameAction {
     }
 
     public final Card moveToStack(final Card c, SpellAbility cause) {
-        final Zone stack = game.getStackZone();
-        return moveTo(stack, c, cause);
+        return moveToStack(c, cause, null);
+    }
+
+    public final Card moveToStack(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
+        Card result = moveTo(game.getStackZone(), c, cause, params);
+        if (cause != null && cause.isSpell() && result.equals(cause.getHostCard())) {
+            result.setSplitStateToPlayAbility(cause);
+        }
+        return result;
     }
 
     public final Card moveToGraveyard(final Card c, SpellAbility cause) {
@@ -634,7 +752,7 @@ public class GameAction {
     public final Card moveToHand(final Card c, SpellAbility cause) {
         return moveToHand(c, cause, null);
     }
-    
+
     public final Card moveToHand(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
         final PlayerZone hand = c.getOwner().getZone(ZoneType.Hand);
         return moveTo(hand, c, cause, params);
@@ -648,7 +766,7 @@ public class GameAction {
     public final Card moveToPlay(final Card c, final Player p, SpellAbility cause) {
         return moveToPlay(c, p, cause, null);
     }
-    
+
     public final Card moveToPlay(final Card c, final Player p, SpellAbility cause, Map<AbilityKey, Object> params) {
         // move to a specific player's Battlefield
         final PlayerZone play = p.getZone(ZoneType.Battlefield);
@@ -658,7 +776,7 @@ public class GameAction {
     public final Card moveToBottomOfLibrary(final Card c, SpellAbility cause) {
         return moveToBottomOfLibrary(c, cause, null);
     }
-    
+
     public final Card moveToBottomOfLibrary(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
         return moveToLibrary(c, -1, cause, params);
     }
@@ -666,7 +784,7 @@ public class GameAction {
     public final Card moveToLibrary(final Card c, SpellAbility cause) {
         return moveToLibrary(c, cause, null);
     }
-    
+
     public final Card moveToLibrary(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
         return moveToLibrary(c, 0, cause, params);
     }
@@ -674,7 +792,7 @@ public class GameAction {
     public final Card moveToLibrary(Card c, int libPosition, SpellAbility cause) {
         return moveToLibrary(c, libPosition, cause, null);
     }
-    
+
     public final Card moveToLibrary(Card c, int libPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
         final PlayerZone library = c.getOwner().getZone(ZoneType.Library);
         if (libPosition == -1 || libPosition > library.size()) {
@@ -684,11 +802,15 @@ public class GameAction {
     }
 
     public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition, SpellAbility cause) {
+        return moveToVariantDeck(c, zone, deckPosition, cause, null);
+    }
+
+    public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
         final PlayerZone deck = c.getOwner().getZone(zone);
         if (deckPosition == -1 || deckPosition > deck.size()) {
             deckPosition = deck.size();
         }
-        return changeZone(game.getZoneOf(c), deck, c, deckPosition, cause);
+        return changeZone(game.getZoneOf(c), deck, c, deckPosition, cause, params);
     }
 
     public final Card exile(final Card c, SpellAbility cause) {
@@ -723,16 +845,20 @@ public class GameAction {
     }
 
     public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause) {
+        return moveTo(name, c, libPosition, cause, null);
+    }
+
+    public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
         // Call specific functions to set PlayerZone, then move onto moveTo
         switch(name) {
-            case Hand:          return moveToHand(c, cause);
-            case Library:       return moveToLibrary(c, libPosition, cause);
-            case Battlefield:   return moveToPlay(c, cause);
-            case Graveyard:     return moveToGraveyard(c, cause);
-            case Exile:         return exile(c, cause);
-            case Stack:         return moveToStack(c, cause);
-            case PlanarDeck:    return moveToVariantDeck(c, ZoneType.PlanarDeck, libPosition, cause);
-            case SchemeDeck:    return moveToVariantDeck(c, ZoneType.SchemeDeck, libPosition, cause);
+            case Hand:          return moveToHand(c, cause, params);
+            case Library:       return moveToLibrary(c, libPosition, cause, params);
+            case Battlefield:   return moveToPlay(c, c.getController(), cause, params);
+            case Graveyard:     return moveToGraveyard(c, cause, params);
+            case Exile:         return exile(c, cause, params);
+            case Stack:         return moveToStack(c, cause, params);
+            case PlanarDeck:    return moveToVariantDeck(c, ZoneType.PlanarDeck, libPosition, cause, params);
+            case SchemeDeck:    return moveToVariantDeck(c, ZoneType.SchemeDeck, libPosition, cause, params);
             default: // sideboard will also get there
                 return moveTo(c.getOwner().getZone(name), c, cause);
         }
@@ -793,7 +919,7 @@ public class GameAction {
             }
         });
 
-        
+
         final Comparator<StaticAbility> comp = new Comparator<StaticAbility>() {
             @Override
             public int compare(final StaticAbility a, final StaticAbility b) {
@@ -825,6 +951,7 @@ public class GameAction {
                         for (final StaticAbility st2 : c.getStaticAbilities()) {
                             if (!staticAbilities.contains(st2)) {
                                 toAdd.add(st2);
+                                st2.applyContinuousAbilityBefore(layer, preList);
                             }
                         }
                     }
@@ -941,6 +1068,7 @@ public class GameAction {
         // do this multiple times, sometimes creatures/permanents will survive when they shouldn't
         boolean orderedDesCreats = false;
         boolean orderedNoRegCreats = false;
+        CardCollection cardsToUpdateLKI = new CardCollection();
         for (int q = 0; q < 9; q++) {
             checkStaticAbilities(false, affectedCards, CardCollection.EMPTY);
             boolean checkAgain = false;
@@ -949,6 +1077,9 @@ public class GameAction {
 
             for (final Player p : game.getPlayers()) {
                 for (final ZoneType zt : ZoneType.values()) {
+                    if (zt == ZoneType.Command)
+                        p.checkKeywordCard();
+
                     if (zt == ZoneType.Battlefield) {
                         continue;
                     }
@@ -972,7 +1103,7 @@ public class GameAction {
                         checkAgain = true;
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
                         for (final Integer dmg : c.getReceivedDamageFromThisTurn().values()) {
-                            if (c.getNetToughness() <= dmg.intValue()) {
+                            if (c.getLethal() <= dmg.intValue() || c.hasBeenDealtDeathtouchDamage()) {
                                 if (desCreats == null) {
                                     desCreats = new CardCollection();
                                 }
@@ -984,7 +1115,7 @@ public class GameAction {
                     }
                     // Rule 704.5g - Destroy due to lethal damage
                     // Rule 704.5h - Destroy due to deathtouch
-                    else if (c.getNetToughness() <= c.getDamage() || c.hasBeenDealtDeathtouchDamage()) {
+                    else if (c.getDamage() > 0 && (c.getLethal() <= c.getDamage() || c.hasBeenDealtDeathtouchDamage())) {
                         if (desCreats == null) {
                             desCreats = new CardCollection();
                         }
@@ -1004,9 +1135,31 @@ public class GameAction {
 
                 checkAgain |= stateBasedAction704_5r(c); // annihilate +1/+1 counters with -1/-1 ones
 
-                if (c.getCounters(CounterType.DREAM) > 7 && c.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
-                    c.subtractCounter(CounterType.DREAM,  c.getCounters(CounterType.DREAM) - 7);
+                final CounterType dreamType = CounterType.get(CounterEnumType.DREAM);
+
+                if (c.getCounters(dreamType) > 7 && c.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
+                    c.subtractCounter(dreamType,  c.getCounters(dreamType) - 7);
                     checkAgain = true;
+                }
+
+                if (c.hasKeyword("The number of loyalty counters on CARDNAME is equal to the number of Beebles you control.")) {
+                    int beeble = CardLists.getValidCardCount(game.getCardsIn(ZoneType.Battlefield), "Beeble.YouCtrl", c.getController(), c);
+                    int loyal = c.getCounters(CounterEnumType.LOYALTY);
+                    if (loyal < beeble) {
+                        GameEntityCounterTable counterTable = new GameEntityCounterTable();
+                        c.addCounter(CounterEnumType.LOYALTY, beeble - loyal, c.getController(), false, counterTable);
+                        counterTable.triggerCountersPutAll(game);
+                    } else if (loyal > beeble) {
+                        c.subtractCounter(CounterEnumType.LOYALTY, loyal - beeble);
+                    }
+                    // Only check again if counters actually changed
+                    if (c.getCounters(CounterEnumType.LOYALTY) != loyal) {
+                        checkAgain = true;
+                    }
+                }
+
+                if (checkAgain) {
+                    cardsToUpdateLKI.add(c);
                 }
             }
 
@@ -1046,6 +1199,18 @@ public class GameAction {
                     checkAgain = true;
                 }
 
+                if ((game.getRules().hasAppliedVariant(GameType.Commander)
+                        || game.getRules().hasAppliedVariant(GameType.Planeswalker)) && !checkAgain) {
+                    Iterable<Card> cards = p.getCardsIn(ZoneType.Graveyard).threadSafeIterable();
+                    for (final Card c : cards) {
+                        checkAgain |= stateBasedAction903_9a(c);
+                    }
+                    cards = p.getCardsIn(ZoneType.Exile).threadSafeIterable();
+                    for (final Card c : cards) {
+                        checkAgain |= stateBasedAction903_9a(c);
+                    }
+                }
+
                 if (handlePlaneswalkerRule(p, table)) {
                     checkAgain = true;
                 }
@@ -1073,7 +1238,7 @@ public class GameAction {
         if (!game.isGameOver()) {
             checkGameOverCondition();
         }
-        
+
         if (game.getAge() != GameStage.Play) {
             return;
         }
@@ -1083,6 +1248,10 @@ public class GameAction {
         // trigger reset above will activate the copy's Always trigger, which needs to be triggered at
         // this point.
         checkStaticAbilities(false, affectedCards, CardCollection.EMPTY);
+
+        for (final Card c : cardsToUpdateLKI) {
+            game.updateLastStateForCard(c);
+        }
 
         if (!refreeze) {
             game.getStack().unfreezeStack();
@@ -1097,7 +1266,7 @@ public class GameAction {
         if (!c.canBeSacrificed()) {
             return false;
         }
-        if (c.getCounters(CounterType.LORE) < c.getFinalChapterNr()) {
+        if (c.getCounters(CounterEnumType.LORE) < c.getFinalChapterNr()) {
             return false;
         }
         if (!game.getStack().hasSimultaneousStackEntries() &&
@@ -1136,18 +1305,31 @@ public class GameAction {
         return checkAgain;
     }
 
+    private boolean stateBasedAction903_9a(Card c) {
+        if (c.isRealCommander() && c.canMoveToCommandZone()) {
+            c.setMoveToCommandZone(false);
+            if (c.getOwner().getController().confirmAction(c.getSpellPermanent(), PlayerActionConfirmMode.ChangeZoneToAltDestination, c.getName() + ": If a commander is in a graveyard or in exile and that card was put into that zone since the last time state-based actions were checked, its owner may put it into the command zone.")) {
+                moveTo(c.getOwner().getZone(ZoneType.Command), c, null);
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean stateBasedAction704_5r(Card c) {
         boolean checkAgain = false;
-        int plusOneCounters = c.getCounters(CounterType.P1P1);
-        int minusOneCounters = c.getCounters(CounterType.M1M1);
+        final CounterType p1p1 = CounterType.get(CounterEnumType.P1P1);
+        final CounterType m1m1 = CounterType.get(CounterEnumType.M1M1);
+        int plusOneCounters = c.getCounters(p1p1);
+        int minusOneCounters = c.getCounters(m1m1);
         if (plusOneCounters > 0 && minusOneCounters > 0) {
             int remove = Math.min(plusOneCounters, minusOneCounters);
             // If a permanent has both a +1/+1 counter and a -1/-1 counter on it,
             // N +1/+1 and N -1/-1 counters are removed from it, where N is the
             // smaller of the number of +1/+1 and -1/-1 counters on it.
             // This should fire remove counters trigger
-            c.subtractCounter(CounterType.P1P1, remove);
-            c.subtractCounter(CounterType.M1M1, remove);
+            c.subtractCounter(p1p1, remove);
+            c.subtractCounter(m1m1, remove);
             checkAgain = true;
         }
         return checkAgain;
@@ -1156,9 +1338,9 @@ public class GameAction {
     // If a token is in a zone other than the battlefield, it ceases to exist.
     private boolean stateBasedAction704_5d(Card c) {
         boolean checkAgain = false;
-        if (c.isToken()) {
+        if (c.isRealToken()) {
             final Zone zoneFrom = game.getZoneOf(c);
-            if (!zoneFrom.is(ZoneType.Battlefield) && !zoneFrom.is(ZoneType.Command)) {
+            if (!zoneFrom.is(ZoneType.Battlefield)) {
                 zoneFrom.remove(c);
                 checkAgain = true;
             }
@@ -1268,7 +1450,7 @@ public class GameAction {
         //final Multimap<String, Card> uniqueWalkers = ArrayListMultimap.create(); // Not used as of Ixalan
 
         for (Card c : list) {
-            if (c.getCounters(CounterType.LOYALTY) <= 0) {
+            if (c.getCounters(CounterEnumType.LOYALTY) <= 0) {
                 sacrificeDestroy(c, null, table);
                 // Play the Destroy sound
                 game.fireEvent(new GameEventCardDestroyed());
@@ -1328,7 +1510,8 @@ public class GameAction {
 
             recheck = true;
 
-            Card toKeep = p.getController().chooseSingleEntityForEffect(new CardCollection(cc), new AbilitySub(ApiType.InternalLegendaryRule, null, null, null), "You have multiple legendary permanents named \""+name+"\" in play.\n\nChoose the one to stay on battlefield (the rest will be moved to graveyard)");
+            Card toKeep = p.getController().chooseSingleEntityForEffect(new CardCollection(cc), new SpellAbility.EmptySa(ApiType.InternalLegendaryRule, null, p),
+                    "You have multiple legendary permanents named \""+name+"\" in play.\n\nChoose the one to stay on battlefield (the rest will be moved to graveyard)", null);
             for (Card c: cc) {
                 if (c != toKeep) {
                     sacrificeDestroy(c, null, table);
@@ -1440,12 +1623,18 @@ public class GameAction {
         revealTo(card, Collections.singleton(to));
     }
     public void revealTo(final CardCollectionView cards, final Player to) {
-        revealTo(cards, Collections.singleton(to));
+        revealTo(cards, to, null);
+    }
+    public void revealTo(final CardCollectionView cards, final Player to, String messagePrefix) {
+        revealTo(cards, Collections.singleton(to), messagePrefix);
     }
     public void revealTo(final Card card, final Iterable<Player> to) {
         revealTo(new CardCollection(card), to);
     }
     public void revealTo(final CardCollectionView cards, final Iterable<Player> to) {
+        revealTo(cards, to, null);
+    }
+    public void revealTo(final CardCollectionView cards, final Iterable<Player> to, String messagePrefix) {
         if (cards.isEmpty()) {
             return;
         }
@@ -1453,7 +1642,7 @@ public class GameAction {
         final ZoneType zone = cards.getFirst().getZone().getZoneType();
         final Player owner = cards.getFirst().getOwner();
         for (final Player p : to) {
-            p.getController().reveal(cards, zone, owner);
+            p.getController().reveal(cards, zone, owner, messagePrefix);
         }
     }
 
@@ -1585,7 +1774,7 @@ public class GameAction {
                 first.initPlane();
             }
 
-            runOpeningHandActions(first);
+            first =  runOpeningHandActions(first);
             checkStateEffects(true); // why?
 
             // Run Trigger beginning of the game
@@ -1596,6 +1785,7 @@ public class GameAction {
             game.getPhaseHandler().startFirstTurn(first, startGameHook);
             //after game ends, ensure Auto-Pass canceled for all players so it doesn't apply to next game
             for (Player p : game.getRegisteredPlayers()) {
+                p.setNumCardsInHandStartedThisTurnWith(p.getCardsIn(ZoneType.Hand).size());
                 p.getController().autoPassCancel();
             }
 
@@ -1689,8 +1879,10 @@ public class GameAction {
         } while (takesAction != first);
     }
 
-    private void runOpeningHandActions(final Player first) {
+    // Returns the new player to go first
+    private Player runOpeningHandActions(final Player first) {
         Player takesAction = first;
+        Player newFirst = first;
         do {
             List<SpellAbility> usableFromOpeningHand = Lists.newArrayList();
 
@@ -1724,10 +1916,14 @@ public class GameAction {
                 }
 
                 takesAction.getController().playSpellAbilityNoStack(sa, true);
+                if (sa.hasParam("BecomeStartingPlayer")) {
+                    newFirst = takesAction;
+                }
             }
             takesAction = game.getNextPlayerAfter(takesAction);
         } while (takesAction != first);
         // state effects are checked only when someone gets priority
+        return newFirst;
     }
 
     // Invokes given runnable in Game thread pool - used to start game and perform actions from UI (when game-0 waits for input)
@@ -1740,7 +1936,7 @@ public class GameAction {
         }
     }
 
-    public void becomeMonarch(final Player p) {
+    public void becomeMonarch(final Player p, final String set) {
         final Player previous = game.getMonarch();
         if (p == null || p.equals(previous))
             return;
@@ -1748,7 +1944,7 @@ public class GameAction {
         if (previous != null)
             previous.removeMonarchEffect();
 
-        p.createMonarchEffect();
+        p.createMonarchEffect(set);
         game.setMonarch(p);
 
         // Run triggers
@@ -1768,25 +1964,50 @@ public class GameAction {
     // 701.17c If multiple players scry at once, each of those players looks at the top cards of their library
     // at the same time. Those players decide in APNAP order (see rule 101.4) where to put those
     // cards, then those cards move at the same time.
-    public void scry(List<Player> players, int numScry, SpellAbility cause) {
-        if (numScry == 0) {
+    public void scry(final List<Player> players, int numScry, SpellAbility cause) {
+        if (numScry <= 0) {
             return;
         }
-        // reveal the top N library cards to the player (only)
-        // no real need to separate out the look if
-        // there is only one player scrying
-        if (players.size() > 1) {
-            for (final Player p : players) {
-                final CardCollection topN = new CardCollection(p.getCardsIn(ZoneType.Library, numScry));
-                revealTo(topN, p);
+
+        // in case something alters the scry amount
+        Map<Player, Integer> actualPlayers = Maps.newLinkedHashMap();
+
+        for (final Player p : players) {
+            int playerScry = numScry;
+            final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(p);
+            repParams.put(AbilityKey.Source, cause);
+            repParams.put(AbilityKey.Num, playerScry);
+
+            switch (game.getReplacementHandler().run(ReplacementType.Scry, repParams)) {
+                case NotReplaced:
+                    break;
+                case Updated: {
+                    playerScry = (int) repParams.get(AbilityKey.Num);
+                    break;
+                }
+                default:
+                    continue;
+            }
+            if (playerScry > 0) {
+                actualPlayers.put(p, playerScry);
+
+                // reveal the top N library cards to the player (only)
+                // no real need to separate out the look if
+                // there is only one player scrying
+                if (players.size() > 1) {
+                    final CardCollection topN = new CardCollection(p.getCardsIn(ZoneType.Library, playerScry));
+                    revealTo(topN, p);
+                }
             }
         }
+
         // make the decisions
-        List<ImmutablePair<CardCollection, CardCollection>> decisions = Lists.newArrayList();
-        for (final Player p : players) {
-            final CardCollection topN = new CardCollection(p.getCardsIn(ZoneType.Library, numScry));
+        Map<Player, ImmutablePair<CardCollection, CardCollection>> decisions = Maps.newLinkedHashMap();
+        for (final Map.Entry<Player, Integer> e : actualPlayers.entrySet()) {
+            final Player p = e.getKey();
+            final CardCollection topN = new CardCollection(p.getCardsIn(ZoneType.Library, e.getValue()));
             ImmutablePair<CardCollection, CardCollection> decision = p.getController().arrangeForScry(topN);
-            decisions.add(decision);
+            decisions.put(p, decision);
             int numToTop = decision.getLeft() == null ? 0 : decision.getLeft().size();
             int numToBottom = decision.getRight() == null ? 0 : decision.getRight().size();
 
@@ -1795,11 +2016,11 @@ public class GameAction {
         }
         // do the moves after all the decisions (maybe not necesssary, but let's
         // do it the official way)
-        for (int i = 0; i < players.size(); i++) {
+        for (Map.Entry<Player, ImmutablePair<CardCollection, CardCollection>> e : decisions.entrySet()) {
             // no good iterate simultaneously in Java
-            final Player p = players.get(i);
-            final CardCollection toTop = decisions.get(i).getLeft();
-            final CardCollection toBottom = decisions.get(i).getRight();
+            final Player p = e.getKey();
+            final CardCollection toTop = e.getValue().getLeft();
+            final CardCollection toBottom = e.getValue().getRight();
             if (toTop != null) {
                 Collections.reverse(toTop); // reverse to get the correct order
                 for (Card c : toTop) {

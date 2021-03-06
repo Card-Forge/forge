@@ -6,4 +6,4 @@ K:Flying
 K:Trample
 A:SP$ PermanentCreature | Cost$ 2 B B Sac<1/Creature>
 SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE4
-Oracle:As an additional cost to cast this spell, sacrifice a creature\n Flying, trample
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nFlying, trample

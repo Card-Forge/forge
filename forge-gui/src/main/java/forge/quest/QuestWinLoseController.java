@@ -58,8 +58,13 @@ public class QuestWinLoseController {
 
         // After the first game, reset the card shop pool to be able to buy back anted cards
         if (lastGame.getNumPlayedGamesInMatch() == 0) {
-            qc.getCards().clearShopList();
-            qc.getCards().getShopList();
+            try {
+                qc.getCards().clearShopList();
+                qc.getCards().getShopList();
+            } catch (Exception e) {
+                //investigate this..
+                System.err.println(e.getMessage());
+            }
         }
 
         final LobbyPlayer questLobbyPlayer = GamePlayerUtil.getQuestPlayer();

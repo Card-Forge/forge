@@ -1,0 +1,9 @@
+Name:Aesi, Tyrant of Gyre Strait
+ManaCost:4 G U
+Types:Legendary Creature Serpent
+PT:5/5
+S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever a land enters the battlefield under your control, you may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:BuffedBy:Land
+Oracle:You may play an additional land on each of your turns.\nWhenever a land enters the battlefield under your control, you may draw a card.

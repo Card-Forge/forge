@@ -2,13 +2,12 @@ Name:Vision Charm
 ManaCost:U
 Types:Instant
 A:SP$ Charm | Cost$ U | Choices$ MillOpp,ChangeType,PhaseArtifact | CharmNum$ 1
-SVar:MillOpp:DB$ Mill | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top four cards of their library into their graveyard.
+SVar:MillOpp:DB$ Mill | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills four cards.
 SVar:ChangeType:DB$ ChooseType | Defined$ You | Type$ Land | SubAbility$ RemFirstLand | SpellDescription$ Choose a land type and a basic land type. Each land of the first chosen type becomes the second chosen type until end of turn.
 SVar:RemFirstLand:DB$ PumpAll | ValidCards$ Land.ChosenType | RememberAllPumped$ True | SubAbility$ ChooseType2
 SVar:ChooseType2:DB$ ChooseType | Defined$ You | Type$ Basic Land | AILogic$ MostNeededType | SubAbility$ AnimateFirst
-SVar:AnimateFirst:DB$ AnimateAll | ValidCards$ Land.IsRemembered | Types$ ChosenType | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True | SubAbility$ DBCleanup
+SVar:AnimateFirst:DB$ AnimateAll | ValidCards$ Land.IsRemembered | Types$ ChosenType | RemoveLandTypes$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PhaseArtifact:DB$ Phases | ValidTgts$ Artifact | TgtPrompt$ Choose a artifact | SpellDescription$ Target artifact phases out.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vision_charm.jpg
-Oracle:Choose one —\n• Target player puts the top four cards of their library into their graveyard.\n• Choose a land type and a basic land type. Each land of the first chosen type becomes the second chosen type until end of turn.\n• Target artifact phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during their next untap step.)
+Oracle:Choose one —\n• Target player mills four cards.\n• Choose a land type and a basic land type. Each land of the first chosen type becomes the second chosen type until end of turn.\n• Target artifact phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during their next untap step.)

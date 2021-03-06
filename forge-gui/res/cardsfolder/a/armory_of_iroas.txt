@@ -5,4 +5,4 @@ K:Equip:2
 T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigPutCounter | TriggerDescription$ Whenever equipped creature attacks, put a +1/+1 counter on it.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Equipped | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armory_of_iroas.jpg
-Oracle:Whenever equipped creature attacks, put a +1/+1 counter on it.\nEquip {2}
+Oracle:Whenever equipped creature attacks, put a +1/+1 counter on it.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

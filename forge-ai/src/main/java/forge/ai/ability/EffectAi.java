@@ -1,19 +1,14 @@
 package forge.ai.ability;
 
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-
 import forge.ai.*;
-import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
+import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.Cost;
-import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -22,6 +17,8 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.List;
 
 public class EffectAi extends SpellAbilityAi {
     @Override
@@ -104,94 +101,15 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 randomReturn = true;
             } else if (logic.equals("ChainVeil")) {
-                if (!phase.isPlayerTurn(ai) || !phase.getPhase().equals(PhaseType.MAIN2) 
-                		|| CardLists.getType(ai.getCardsIn(ZoneType.Battlefield), "Planeswalker").isEmpty()) {
+                if (!phase.isPlayerTurn(ai) || !phase.getPhase().equals(PhaseType.MAIN2)
+                        || CardLists.getType(ai.getCardsIn(ZoneType.Battlefield), "Planeswalker").isEmpty()) {
                     return false;
                 }
                 randomReturn = true;
-            } else if (logic.equals("SpellCopy")) {
-            	// fetch Instant or Sorcery and AI has reason to play this turn
-            	// does not try to get itself
-                final ManaCost costSa = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : ManaCost.NO_COST;
-            	final int count = CardLists.count(ai.getCardsIn(ZoneType.Hand), new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        if (!(c.isInstant() || c.isSorcery()) || c.equals(sa.getHostCard())) {
-                            return false;
-                        }
-                        for (SpellAbility ab : c.getSpellAbilities()) {
-                            if (ComputerUtilAbility.getAbilitySourceName(sa).equals(ComputerUtilAbility.getAbilitySourceName(ab))
-                                    || ab.hasParam("AINoRecursiveCheck")) {
-                                // prevent infinitely recursing mana ritual and other abilities with reentry
-                                continue;
-                            } else if ("SpellCopy".equals(ab.getParam("AILogic")) && ab.getApi() == ApiType.Effect) {
-                                // don't copy another copy spell, too complex for the AI
-                                continue;
-                            }
-                            if (!ab.canPlay()) {
-                                continue;
-                            }
-                            AiPlayDecision decision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(ab);
-                            // see if we can pay both for this spell and for the Effect spell we're considering
-                            if (decision == AiPlayDecision.WillPlay || decision == AiPlayDecision.WaitForMain2) {
-                                ManaCost costAb = ab.getPayCosts() != null ? ab.getPayCosts().getTotalMana() : ManaCost.NO_COST;
-                                ManaCost total = ManaCost.combine(costSa, costAb);
-                                SpellAbility combinedAb = ab.copyWithDefinedCost(new Cost(total, false));
-                                // can we pay both costs?
-                                if (ComputerUtilMana.canPayManaCost(combinedAb, ai, 0)) {
-                                    return true;
-                                }
-                            }
-                        }
-
-                        return false;
-                    }
-                });
-
-                if(count == 0) {
-                	return false;
-                }
-
-                randomReturn = true;            	
-            } else if (logic.equals("NarsetRebound")) {
-            	// should be done in Main2, but it might broke for other cards
-            	//if (phase.getPhase().isBefore(PhaseType.MAIN2)) {
-                //    return false;
-                //}
-
-                // fetch Instant or Sorcery without Rebound and AI has reason to play this turn
-            	// only need count, not the list
-            	final int count = CardLists.count(ai.getCardsIn(ZoneType.Hand), new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        if (!(c.isInstant() || c.isSorcery()) || c.hasKeyword(Keyword.REBOUND)) {
-                            return false;
-                        }
-                        for (SpellAbility ab : c.getSpellAbilities()) {
-                            if (ComputerUtilAbility.getAbilitySourceName(sa).equals(ComputerUtilAbility.getAbilitySourceName(ab))
-                                    || ab.hasParam("AINoRecursiveCheck")) {
-                                // prevent infinitely recursing mana ritual and other abilities with reentry
-                                continue;
-                            }
-                            if (!ab.canPlay()) {
-                                continue;
-                            }
-                            AiPlayDecision decision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(ab);
-                            if (decision == AiPlayDecision.WillPlay || decision == AiPlayDecision.WaitForMain2) {
-                                if (ComputerUtilMana.canPayManaCost(ab, ai, 0)) {
-                                    return true;
-                                }
-                            }
-                        }
-                        return false;
-                    }
-                });
-
-                if(count == 0) {
-                	return false;
-                }
-
-                randomReturn = true;
+            } else if (logic.equals("WillCastCreature") && ai.isAI()) {
+                AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+                SpellAbility saCreature = aic.predictSpellToCastInMain2(ApiType.PermanentCreature);
+                randomReturn = saCreature != null && ComputerUtilMana.canPayManaCost(saCreature, ai, 0);
             } else if (logic.equals("Always")) {
                 randomReturn = true;
             } else if (logic.equals("Main1")) {
@@ -307,6 +225,16 @@ public class EffectAi extends SpellAbilityAi {
                 if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false)) {
                     return false;
                 }
+            } else if (logic.equals("Bribe")) {
+                Card host = sa.getHostCard();
+                Combat combat = game.getCombat();
+                if (combat != null && combat.isAttacking(host, ai) && !combat.isBlocked(host)
+                        && game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                        && !AiCardMemory.isRememberedCard(ai, host, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
+                    AiCardMemory.rememberCard(ai, host, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN); // ideally needs once per combat or something
+                    return true;
+                }
+                return false;
             }
         } else { //no AILogic
             return false;

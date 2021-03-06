@@ -5,7 +5,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | Tri
 T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+untapped | PresentCompare$ EQ1 | ValidPlayer$ You | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if CARDNAME is untapped, destroy CARDNAME and it deals damage to you equal to the number of pin counters on it.
 A:AB$ DealDamage | Cost$ X X T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of pin counters on it to any target. X is the number of pin counters on CARDNAME.
 SVar:TrigPutCounter:DB$PutCounter | CounterType$ PIN | CounterNum$ 1 | Defined$ Self
-SVar:TrigDestroy:DB$Destroy | Defined$ Self | SubAbility$ DBDealDamageYou
+SVar:TrigDestroy:DB$ Destroy | Defined$ Self | SubAbility$ DBDealDamageYou
 SVar:DBDealDamageYou:DB$DealDamage | Defined$ You | NumDmg$ X | References$ X
 SVar:X:Count$CardCounters.PIN
 AI:RemoveDeck:All

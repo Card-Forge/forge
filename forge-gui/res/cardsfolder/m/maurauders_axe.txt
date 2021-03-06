@@ -1,7 +1,0 @@
-Name:Marauder's Axe
-ManaCost:2
-Types:Artifact Equipment
-K:Equip:2
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Description$ Equipped creature gets +2/+0.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/marauders_axe.jpg
-Oracle:Equipped creature gets +2/+0.\nEquip {2}

@@ -2,5 +2,5 @@ Name:Ashiok's Skulker
 ManaCost:4 U
 Types:Creature Nightmare
 PT:3/5
-A:AB$ Pump | Cost$ 3 U | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
+A:AB$ Pump | Cost$ 3 U | Defined$ Self | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
 Oracle:{3}{U}: Ashiok's Skulker can't be blocked this turn.

@@ -9,8 +9,6 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import forge.GuiBase;
-import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -20,8 +18,10 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.assets.FSkinProp;
 import forge.game.GameView;
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEventSpellAbilityCast;
@@ -31,9 +31,11 @@ import forge.interfaces.IGameController;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.IMayViewCards;
 import forge.model.FModel;
+import forge.player.PlayerControllerHuman;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.trackable.TrackableTypes;
+import forge.util.Localizer;
 
 public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private PlayerView currentPlayer = null;
@@ -41,6 +43,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private final Map<PlayerView, IGameController> gameControllers = Maps.newHashMap();
     private final Map<PlayerView, IGameController> originalGameControllers = Maps.newHashMap();
     private boolean gamePause = false;
+    private boolean ignoreConcedeChain = false;
 
     public final boolean hasLocalPlayers() {
         return !gameControllers.isEmpty();
@@ -182,8 +185,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return true; //if not in game, card can be shown
         }
         if(GuiBase.getInterface().isLibgdxPort()){
+            if(gameView != null && gameView.isGameOver()) {
+                return true;
+            }
             if(spectator!=null) { //workaround fix!! this is needed on above code or it will
-                gameControllers.remove(spectator); //bug the UI! remove spectator here since its must not be here...
+                for (Map.Entry<PlayerView, IGameController> e : gameControllers.entrySet()) {
+                    if (e.getValue().equals(spectator)) {
+                        gameControllers.remove(e.getKey());
+                        break;
+                    }
+                }
                 return true;
             }
             try{
@@ -217,7 +228,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             case Flipped:
             case Transformed:
             case Meld:
+            case Modal:
                 return true;
+            case Adventure:
+                if (cv.isFaceDown()) {
+                    return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());
+                }
+                return false;
             default:
                 return false;
         }
@@ -266,6 +283,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
     public boolean isGamePaused() { return gamePause; }
     public void setgamePause(boolean pause) { gamePause = pause; }
+    public void pauseMatch() {
+        IGameController controller = spectator;
+        if(controller != null && !isGamePaused())
+            controller.selectButtonOk();
+    }
+    public void resumeMatch() {
+        IGameController controller = spectator;
+        if(controller != null && isGamePaused())
+            controller.selectButtonOk();
+    }
 
     /** Concede game, bring up WinLose UI. */
     public boolean concede() {
@@ -273,23 +300,42 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return true;
         }
         if (hasLocalPlayers()) {
-            if (showConfirmDialog(Localizer.getInstance().getMessage("lblConcedeCurrentGame"), Localizer.getInstance().getMessage("lblConcedeTitle"), Localizer.getInstance().getMessage("lblConcede"), Localizer.getInstance().getMessage("lblCancel"))) {
-                for (final IGameController c : getOriginalGameControllers()) {
-                    // Concede each player on this Gui (except mind-controlled players)
-                    c.concede();
+            boolean concedeNeeded = false;
+            // check if anyone still needs to confirm
+            for (final IGameController c : getOriginalGameControllers()) {
+                if (c instanceof PlayerControllerHuman) {
+                    if (((PlayerControllerHuman) c).getPlayer().getOutcome() == null) {
+                        concedeNeeded = true;
+                    }
                 }
-            } else {
-                return false;
+            }
+            if (concedeNeeded) {
+                if (showConfirmDialog(Localizer.getInstance().getMessage("lblConcedeCurrentGame"), Localizer.getInstance().getMessage("lblConcedeTitle"), Localizer.getInstance().getMessage("lblConcede"), Localizer.getInstance().getMessage("lblCancel"))) {
+                    for (final IGameController c : getOriginalGameControllers()) {
+                        // Concede each player on this Gui (except mind-controlled players)
+                        c.concede();
+                    }
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return !ignoreConcedeChain;
             }
             if (gameView.isGameOver()) {
                 // Don't immediately close, wait for win/lose screen
                 return false;
-            } else {
-                for (PlayerView player : getLocalPlayers()){
-                    if (!player.isAI()){
+            }
+            else {
+                // since the nextGameDecision might come from somewhere else it will try and concede too
+                ignoreConcedeChain = true;
+                for (PlayerView player : getLocalPlayers()) {
+                    if (!player.isAI()) {
                         getGameController(player).nextGameDecision(NextGameDecision.QUIT);
                     }
                 }
+                ignoreConcedeChain = false;
                 return false;
             }
         }
@@ -352,11 +398,17 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return autoPassUntilEndOfTurn.contains(player);
     }
 
-    private final Timer awaitNextInputTimer = new Timer();
+    private Timer awaitNextInputTimer;
     private TimerTask awaitNextInputTask;
 
     @Override
     public final void awaitNextInput() {
+        if (awaitNextInputTimer == null) {
+            String name = "?";
+            if (this.currentPlayer != null)
+                name = this.currentPlayer.getLobbyPlayerName();
+            awaitNextInputTimer = new Timer("awaitNextInputTimer Game:" + this.gameView.getId() + " Player:" + name);
+        }
         //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
         awaitNextInputTask = new TimerTask() {
             @Override
@@ -384,6 +436,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final void cancelAwaitNextInput() {
+        if (awaitNextInputTimer == null) {
+            return;
+        }
         synchronized (awaitNextInputTimer) { //ensure task doesn't reset awaitNextInputTask during this block
             if (awaitNextInputTask != null) {
                 try {
@@ -569,7 +624,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         for (int i = min; i <= cutoff; i++) {
             choices.add(Integer.valueOf(i));
         }
-        choices.add("...");
+        choices.add(Localizer.getInstance().getMessage("lblOtherInteger"));
 
         final Object choice = oneOrNone(message, choices.build());
         if (choice instanceof Integer || choice == null) {
@@ -581,12 +636,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         String prompt = "";
         if (min != Integer.MIN_VALUE) {
             if (max != Integer.MAX_VALUE) {
-                prompt = localizer.getMessage("lblEnterNumberBetweenMinAndMax").replace("%min", String.valueOf(min)).replace("%max", String.valueOf(max));
+                prompt = localizer.getMessage("lblEnterNumberBetweenMinAndMax", String.valueOf(min), String.valueOf(max));
             } else {
-                prompt = localizer.getMessage("lblEnterNumberGreaterThanOrEqualsToMin").replace("%min", String.valueOf(min));
+                prompt = localizer.getMessage("lblEnterNumberGreaterThanOrEqualsToMin", String.valueOf(min));
             }
         } else if (max != Integer.MAX_VALUE) {
-            prompt = localizer.getMessage("lblEnterNumberLessThanOrEqualsToMax").replace("%max", String.valueOf(max));
+            prompt = localizer.getMessage("lblEnterNumberLessThanOrEqualsToMax", String.valueOf(max));
         }
 
         while (true) {
@@ -615,6 +670,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public <T> List<T> many(final String title, final String topCaption, final int min, final int max, final List<T> sourceChoices, final CardView c) {
+        if (max == 1) {
+            return getChoices(title, min, max, sourceChoices);
+        }
         final int m2 = min >= 0 ? sourceChoices.size() - min : -1;
         final int m1 = max >= 0 ? sourceChoices.size() - max : -1;
         return order(title, topCaption, m1, m2, sourceChoices, null, c, false);
@@ -705,5 +763,17 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public void notifyStackRemoval(GameEventSpellRemovedFromStack event) {
     }
     
+    @Override
+    public void handleLandPlayed(Card land) {
+    }  
+
+
+    @Override
+    public void afterGameEnd() {
+        if (awaitNextInputTimer != null) {
+            awaitNextInputTimer.cancel();
+            awaitNextInputTimer = null;
+        }
+    }
     // End of Choice code
 }

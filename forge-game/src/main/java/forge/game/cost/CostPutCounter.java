@@ -21,6 +21,7 @@ import forge.game.GameEntityCounterTable;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -78,7 +79,7 @@ public class CostPutCounter extends CostPartWithList {
 
     @Override
     public boolean isReusable() {
-        return counter != CounterType.M1M1;
+        return !counter.is(CounterEnumType.M1M1);
     }
 
     /*
@@ -89,7 +90,7 @@ public class CostPutCounter extends CostPartWithList {
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
-        if (this.counter == CounterType.LOYALTY) {
+        if (this.counter.is(CounterEnumType.LOYALTY)) {
             if (this.getAmount().equals("0")) {
                 sb.append("0");
             }
@@ -164,7 +165,7 @@ public class CostPutCounter extends CostPartWithList {
         if (this.payCostFromSource()) {
             executePayment(ability, ability.getHostCard());
         } else {
-            executePayment(ability, decision.cards);
+            executePayment(ai, ability, decision.cards);
         }
         triggerCounterPutAll(ability);
         return true;
@@ -176,7 +177,7 @@ public class CostPutCounter extends CostPartWithList {
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard){
         final Integer i = this.convertAmount();
-        targetCard.addCounter(this.getCounter(), i, ability.getActivatingPlayer(), false, counterTable);
+        targetCard.addCounter(this.getCounter(), i, ability.getActivatingPlayer(), ability.getRootAbility().isTrigger(), counterTable);
         return targetCard;
     }
 

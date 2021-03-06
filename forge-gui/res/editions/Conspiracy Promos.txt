@@ -1,0 +1,8 @@
+[metadata]
+Code=PCNS
+Date=2014-06-06
+Name=Conspiracy Promos
+Type=Reprint
+
+[cards]
+48 R Magister of Worth

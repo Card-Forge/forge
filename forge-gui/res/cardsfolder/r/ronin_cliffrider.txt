@@ -7,4 +7,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ 
 SVar:TrigDamage:DB$DamageAll | ValidCards$ Creature.DefenderCtrl | NumDmg$ 1| ValidDescription$ each creature defending player controls.
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ronin_cliffrider.jpg
-Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\nWhenever Ronin Cliffrider attacks, you may have it deal 1 damage to each creature defending player controls.
+Oracle:Bushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)\nWhenever Ronin Cliffrider attacks, you may have it deal 1 damage to each creature defending player controls.

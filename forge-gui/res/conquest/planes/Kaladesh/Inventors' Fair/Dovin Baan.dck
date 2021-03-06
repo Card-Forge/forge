@@ -1,5 +1,7 @@
 [metadata]
 Name=Dovin Baan
+[Commander]
+1 Dovin Baan|KLD
 [Main]
 1 Aerial Modification|AER
 1 Aerial Responder|KLD
@@ -13,7 +15,6 @@ Name=Dovin Baan
 1 Consulate Skygate|KLD
 1 Consulate Surveillance|KLD
 1 Consulate Turret|AER
-1 Dovin Baan|KLD
 1 Foundry of the Consuls|ORI
 1 Fumigate|KLD
 1 Inspiring Statuary|AER

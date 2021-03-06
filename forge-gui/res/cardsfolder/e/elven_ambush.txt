@@ -1,0 +1,9 @@
+Name:Elven Ambush
+ManaCost:3 G
+Types:Instant
+A:SP$ Token | Cost$ 3 G | TokenAmount$ X | References$ X | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | SpellDescription$ Create a 1/1 green Elf Warrior creature token for each Elf you control.
+SVar:X:Count$Valid Elf.YouCtrl
+DeckHas:Ability$Token
+DeckNeeds:Type$Elf
+AI:RemoveDeck:Random
+Oracle:Create a 1/1 green Elf Warrior creature token for each Elf you control.

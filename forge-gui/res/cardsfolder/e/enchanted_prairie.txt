@@ -1,0 +1,7 @@
+Name:Enchanted Prairie
+ManaCost:no cost
+Types:Enchantment Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+Oracle:Enchanted Prairie enters the battlefield tapped.\n{T}: Add {W} or {U}.

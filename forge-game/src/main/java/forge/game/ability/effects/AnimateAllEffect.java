@@ -3,25 +3,21 @@ package forge.game.ability.effects;
 import forge.GameCommand;
 import forge.card.CardType;
 import forge.game.Game;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
-import forge.game.player.Player;
-import forge.game.replacement.ReplacementEffect;
-import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.collect.ImmutableList;
 
 public class AnimateAllEffect extends AnimateEffectBase {
 
@@ -51,12 +47,12 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
         final boolean permanent = sa.hasParam("Permanent");
 
-        final CardType types = new CardType();
+        final CardType types = new CardType(true);
         if (sa.hasParam("Types")) {
             types.addAll(Arrays.asList(sa.getParam("Types").split(",")));
         }
 
-        final CardType removeTypes = new CardType();
+        final CardType removeTypes = new CardType(true);
         if (sa.hasParam("RemoveTypes")) {
             removeTypes.addAll(Arrays.asList(sa.getParam("RemoveTypes").split(",")));
         }
@@ -131,63 +127,24 @@ public class AnimateAllEffect extends AnimateEffectBase {
         }
 
         CardCollectionView list;
-        List<Player> tgtPlayers = getTargetPlayers(sa);
         
         if (!sa.usesTargeting() && !sa.hasParam("Defined")) {
             list = game.getCardsIn(ZoneType.Battlefield);
-        }
-        else {
-            list = tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield);
+        } else {
+            list = getTargetPlayers(sa).getCardsIn(ZoneType.Battlefield);
         }
 
         list = CardLists.getValidCards(list, valid.split(","), host.getController(), host, sa);
 
-        boolean removeAll = sa.hasParam("RemoveAllAbilities");
-        boolean removeIntrinsic = sa.hasParam("RemoveIntrinsicAbilities");
-
         for (final Card c : list) {
             doAnimate(c, sa, power, toughness, types, removeTypes, finalDesc,
-                    keywords, removeKeywords, hiddenKeywords, timestamp);
-
-            // give abilities
-            final List<SpellAbility> addedAbilities = new ArrayList<>();
-            if (abilities.size() > 0) {
-                for (final String s : abilities) {
-                    final String actualAbility = host.getSVar(s);
-                    final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, c);
-                    addedAbilities.add(grantedAbility);
-                }
-            }
-
-            // give replacement effects
-            final List<ReplacementEffect> addedReplacements = new ArrayList<>();
-            if (replacements.size() > 0) {
-                for (final String s : replacements) {
-                    final String actualReplacement = host.getSVar(s);
-                    final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, c, false);
-                    addedReplacements.add(parsedReplacement);
-                }
-            }
-            // Grant triggers
-            final List<Trigger> addedTriggers = new ArrayList<>();
-            if (triggers.size() > 0) {
-                for (final String s : triggers) {
-                    final String actualTrigger = host.getSVar(s);
-                    final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, false);
-                    addedTriggers.add(parsedTrigger);
-                }
-            }
-
-            if (!addedAbilities.isEmpty() || !addedTriggers.isEmpty() || !addedReplacements.isEmpty()) {
-                c.addChangedCardTraits(addedAbilities, null, addedTriggers, addedReplacements, null, removeAll, false, removeIntrinsic, timestamp);
-            }
+                    keywords, removeKeywords, hiddenKeywords,
+                    abilities, triggers, replacements, ImmutableList.of(),
+                    timestamp);
 
             // give sVars
-            if (sVars.size() > 0) {
-                for (final String s : sVars) {
-                    final String actualsVar = host.getSVar(s);
-                    c.setSVar(s, actualsVar);
-                }
+            for (final String s : sVars) {
+                c.setSVar(s, AbilityUtils.getSVar(sa, s));
             }
             game.fireEvent(new GameEventCardStatsChanged(c));
 

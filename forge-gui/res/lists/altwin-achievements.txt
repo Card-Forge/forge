@@ -1,3 +1,4 @@
+Angel of Destiny|Outlive Long and Prosper|Life eternal thanks to one weird trick!
 Approach of the Second Sun|The God-Pharaoh's Return|I'm back! Did you miss me?
 Azor's Elocutors|The Filibuster|Talk might be cheap, but it can buy you victory!
 Barren Glory|The Clean Slate|When you have nothing, you can lose nothing... so you can win everything!
@@ -29,5 +30,6 @@ Revel in Riches|The Dead Man's Chest|Yo-ho-ho, and a bottle of rum!
 Simic Ascendancy|The Ascension|As you can see, we are going through a period of unprecedented growth.
 Test of Endurance|The Test|So... did I pass?
 Thassa's Oracle|The Prophecy of Victory|I see... nothing. We must've won.
+The Cheese Stands Alone|The Cheese|It's cheesy, but hey, it works!
 Triskaidekaphobia|The Fear of 13|It's just a silly ancient superstition... right?
-Vraska, Golgari Queen|The Flurry of Assassins|How good is your dodging?
+Emblem - Vraska, Golgari Queen|The Flurry of Assassins|How good is your dodging?

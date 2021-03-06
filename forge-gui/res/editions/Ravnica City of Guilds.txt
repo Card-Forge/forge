@@ -8,6 +8,7 @@ Type=Expansion
 BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare
 FoilAlwaysInCommonSlot=False
+ChaosDraftThemes=RAVNICA
 
 [cards]
 190 R Agrus Kos, Wojek Veteran

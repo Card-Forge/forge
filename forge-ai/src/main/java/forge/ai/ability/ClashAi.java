@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
 
+import java.util.Map;
+
 import com.google.common.collect.Iterables;
 import forge.ai.ComputerUtilCard;
 
@@ -56,7 +58,7 @@ public class ClashAi extends SpellAbilityAi {
      * forge.game.spellability.SpellAbility, java.lang.Iterable)
      */
     @Override
-    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         for (Player p : options) {
             if (p.getCardsIn(ZoneType.Library).size() == 0)
                 return p;
@@ -82,7 +84,7 @@ public class ClashAi extends SpellAbilityAi {
 
         PlayerCollection players = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
         // use chooseSinglePlayer function to the select player
-        Player chosen = chooseSinglePlayer(ai, sa, players);
+        Player chosen = chooseSinglePlayer(ai, sa, players, null);
         if (chosen != null) {
             sa.resetTargets();
             sa.getTargets().add(chosen);
@@ -104,7 +106,7 @@ public class ClashAi extends SpellAbilityAi {
             }
         }
 
-        return sa.getTargets().getNumTargeted() > 0;
+        return sa.getTargets().size() > 0;
     }
 
 }

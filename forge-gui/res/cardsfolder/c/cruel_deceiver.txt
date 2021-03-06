@@ -7,7 +7,7 @@ A:AB$ Dig | Cost$ 2 | DigNum$ 1 | ActivationLimit$ 1 | Reveal$ True | Destinatio
 SVar:TrigAnimate:DB$ Animate | Defined$ Self | Triggers$ TrigDamage | sVars$ TrigDestroy | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME deals damage to a creature, destroy that creature.
-SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTarget
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cruel_deceiver.jpg
 Oracle:{1}: Look at the top card of your library.\n{2}: Reveal the top card of your library. If it's a land card, Cruel Deceiver gains "Whenever Cruel Deceiver deals damage to a creature, destroy that creature" until end of turn. Activate this ability only once each turn.

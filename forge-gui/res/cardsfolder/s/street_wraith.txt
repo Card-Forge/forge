@@ -5,4 +5,4 @@ PT:3/4
 K:Swampwalk
 K:Cycling:PayLife<2>
 SVar:Picture:http://www.wizards.com/global/images/magic/general/street_wraith.jpg
-Oracle:Swampwalk\nCycling—Pay 2 life. (Pay 2 life, Discard this card: Draw a card.)
+Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\nCycling—Pay 2 life. (Pay 2 life, Discard this card: Draw a card.)

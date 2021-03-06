@@ -38,7 +38,8 @@ public class PhasesEffect extends SpellAbilityEffect {
         CardCollectionView tgtCards;
         final Game game = sa.getActivatingPlayer().getGame();
         final Card source = sa.getHostCard();
-        final boolean phaseInOrOut = sa.hasParam("PhaseInOrOutAll");
+        final boolean phaseInOrOut = sa.hasParam("PhaseInOrOut");
+        final boolean wontPhaseInNormal = sa.hasParam("WontPhaseInNormal");
 
         if (sa.hasParam("AllValid")) {
             if (phaseInOrOut) {
@@ -52,14 +53,28 @@ public class PhasesEffect extends SpellAbilityEffect {
         } else {
             tgtCards = getTargetCards(sa);
         }
-        if (phaseInOrOut) { // Time and Tide
+        if (phaseInOrOut) { // Time and Tide and Oubliette
             for (final Card tgtC : tgtCards) {
-                tgtC.phase();
+                tgtC.phase(false);
+                if (!tgtC.isPhasedOut()) {
+                    // won't trigger tap or untap triggers when phase in
+                    if (sa.hasParam("Tapped")) {
+                        tgtC.setTapped(true);
+                    } else if (sa.hasParam("Untapped")) {
+                        tgtC.setTapped(false);
+                    }
+                    tgtC.setWontPhaseInNormal(false);
+                } else {
+                    tgtC.setWontPhaseInNormal(wontPhaseInNormal);
+                }
             }
         } else { // just phase out
             for (final Card tgtC : tgtCards) {
                 if (!tgtC.isPhasedOut()) {
-                    tgtC.phase();
+                    tgtC.phase(false);
+                    if ( tgtC.isPhasedOut()) {
+                        tgtC.setWontPhaseInNormal(wontPhaseInNormal);
+                    }
                 }
             }
         }

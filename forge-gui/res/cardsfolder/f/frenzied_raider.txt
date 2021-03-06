@@ -1,0 +1,7 @@
+Name:Frenzied Raider
+ManaCost:1 R
+Types:Creature Demon Berserker
+PT:2/2
+T:Mode$ AbilityCast | ValidActivatingPlayer$ You | ValidSA$ Activated.Boast | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you activate a boast ability, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Whenever you activate a boast ability, put a +1/+1 counter on Frenzied Raider.

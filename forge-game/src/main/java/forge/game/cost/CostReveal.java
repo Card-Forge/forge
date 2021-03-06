@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -60,11 +60,25 @@ public class CostReveal extends CostPartWithList {
     }
 
     @Override
+    public Integer getMaxAmountX(SpellAbility ability, Player payer) {
+        final Card source = ability.getHostCard();
+        CardCollectionView handList = payer.getCardsIn(revealFrom);
+        if (ability.isSpell()) {
+            CardCollection modifiedHand = new CardCollection(handList);
+            modifiedHand.remove(source); // can't pay for itself
+            handList = modifiedHand;
+        }
+        handList = CardLists.getValidCards(handList, getType().split(";"), payer, source, ability);
+
+        return handList.size();
+    }
+
+
+    @Override
     public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();
 
         CardCollectionView handList = payer.getCardsIn(revealFrom);
-        final String type = this.getType();
         final Integer amount = this.convertAmount();
 
         if (this.payCostFromSource()) {
@@ -88,14 +102,7 @@ public class CostReveal extends CostPartWithList {
                 return false;
             }
         } else {
-            if (ability.isSpell()) {
-                CardCollection modifiedHand = new CardCollection(handList);
-                modifiedHand.remove(source); // can't pay for itself
-                handList = modifiedHand;
-            }
-            handList = CardLists.getValidCards(handList, type.split(";"), payer, source, ability);
-            // not enough cards in hand to pay
-            return (amount == null) || (amount <= handList.size());
+            return (amount == null) || (amount <= getMaxAmountX(ability, payer));
             //System.out.println("revealcost - " + amount + type + handList);
         }
 
@@ -152,7 +159,7 @@ public class CostReveal extends CostPartWithList {
     protected CardCollectionView doListPayment(SpellAbility ability, CardCollectionView targetCards) {
         ability.getActivatingPlayer().getGame().getAction().reveal(targetCards, ability.getActivatingPlayer());
         return targetCards;
-    }    
+    }
 
     @Override
     public String getHashForLKIList() {

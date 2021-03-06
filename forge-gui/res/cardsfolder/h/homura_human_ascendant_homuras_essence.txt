@@ -4,10 +4,9 @@ Types:Legendary Creature Human Monk
 PT:4/4
 K:CARDNAME can't block.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, return it to the battlefield flipped.
-SVar:TrigReturn:DB$ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | RememberChanged$ True | SubAbility$ TrigFlip
-SVar:TrigFlip:DB$SetState | Defined$ Remembered | Mode$ Flip | SubAbility$ DBCleanup
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | RememberChanged$ True | SubAbility$ TrigFlip
+SVar:TrigFlip:DB$ SetState | Defined$ Remembered | Mode$ Flip | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/homura_human_ascendant.jpg
 AlternateMode:Flip
 Oracle:Homura, Human Ascendant can't block.\nWhen Homura dies, return it to the battlefield flipped.
 
@@ -18,7 +17,5 @@ ManaCost:4 R R
 Colors:red
 Types:Legendary Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | AddAbility$ ABPump | Description$ Creatures you control get +2/+2 and have flying and "{R}: This creature gets +1/+0 until end of turn."
-SVar:ABPump:AB$Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ This creature gets +1/+0 until end of turn.
-SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/homuras_essence.jpg
-# This link may be a temporary solution and could change in the near future.
+SVar:ABPump:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ This creature gets +1/+0 until end of turn.
 Oracle:Creatures you control get +2/+2 and have flying and "{R}: This creature gets +1/+0 until end of turn."

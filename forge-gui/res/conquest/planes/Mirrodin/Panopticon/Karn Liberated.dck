@@ -1,5 +1,7 @@
 [metadata]
 Name=Karn Liberated
+[Commander]
+1 Karn Liberated|MM2
 [Main]
 1 Argentum Armor|C14
 1 Batterskull|NPH
@@ -20,7 +22,6 @@ Name=Karn Liberated
 1 Golem's Heart|SOM
 1 Ichor Wellspring|C16
 1 Inkmoth Nexus|MBS
-1 Karn Liberated|MM2
 1 Mirrodin's Core|CNS
 1 Mox Opal|MM2
 1 Mycosynth Golem|5DN

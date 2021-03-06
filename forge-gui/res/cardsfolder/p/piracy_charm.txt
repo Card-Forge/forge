@@ -6,4 +6,4 @@ SVar:DBPump1:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature 
 SVar:DBPump2:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ -1 | SpellDescription$ Target creature gets +2/-1 until end of turn.
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Choose a player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/piracy_charm.jpg
-Oracle:Choose one —\n• Target creature gains islandwalk until end of turn.\n• Target creature gets +2/-1 until end of turn.\n• Target player discards a card.
+Oracle:Choose one —\n• Target creature gains islandwalk until end of turn. (It can't be blocked as long as defending player controls an Island.)\n• Target creature gets +2/-1 until end of turn.\n• Target player discards a card.

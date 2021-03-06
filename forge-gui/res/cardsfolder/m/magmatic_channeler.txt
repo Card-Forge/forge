@@ -1,0 +1,15 @@
+Name:Magmatic Channeler
+ManaCost:1 R
+Types:Creature Human Wizard
+PT:1/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE4 | Description$ As long as there are four or more instant and/or sorcery cards in your graveyard, CARDNAME gets +3/+1.
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+A:AB$ Dig | Cost$ T Discard<1/Card> | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBChoose | StackDescription$ SpellDescription | SpellDescription$ Exile the top two cards of your library, then choose one of them. You may play that card this turn.
+SVar:DBChoose:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Card.IsRemembered | ChoiceZone$ Exile | ChoiceTitle$ Choose one of the exiled cards | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | RememberObjects$ ChosenCard | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the chosen card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:BuffedBy:Instant,Sorcery
+DeckHints:Type$Instant|Sorcery
+AI:RemoveDeck:All
+Oracle:As long as there are four or more instant and/or sorcery cards in your graveyard, Magmatic Channeler gets +3/+1.\n{T}, Discard a card: Exile the top two cards of your library, then choose one of them. You may play that card this turn.

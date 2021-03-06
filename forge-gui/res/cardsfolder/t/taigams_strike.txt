@@ -2,6 +2,5 @@ Name:Taigam's Strike
 ManaCost:3 U
 Types:Sorcery
 K:Rebound
-A:SP$Pump | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | KW$ HIDDEN Unblockable | SpellDescription$ Target creature gets +2/+0 until end of turn and can't be blocked this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/taigams_strike.jpg
+A:SP$ Pump | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | KW$ HIDDEN Unblockable | SpellDescription$ Target creature gets +2/+0 until end of turn and can't be blocked this turn.
 Oracle:Target creature gets +2/+0 until end of turn and can't be blocked this turn.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

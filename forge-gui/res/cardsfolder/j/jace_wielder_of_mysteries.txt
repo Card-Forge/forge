@@ -4,10 +4,10 @@ Types:Legendary Planeswalker Jace
 Loyalty:4
 R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | IsPresent$ Card.YouOwn | PresentZone$ Library | PresentCompare$ EQ0 | ReplaceWith$ Win | Description$ If you would draw a card while your library has no cards in it, you win the game instead.
 SVar:Win:DB$ WinsGame | Defined$ You
-A:AB$ Mill | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBDraw | SpellDescription$ Target player puts the top two cards of their library into their graveyard. Draw a card.
+A:AB$ Mill | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBDraw | SpellDescription$ Target player mills two cards. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 A:AB$ Draw | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumCards$ 7 | SubAbility$ WinGame | SpellDescription$ Draw seven cards. Then if your library has no cards in it, you win the game.
 SVar:WinGame:DB$ WinsGame | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X
 SVar:X:Count$InYourLibrary
 AI:RemoveDeck:Random
-Oracle:If you would draw a card while your library has no cards in it, you win the game instead.\n[+1]: Target player puts the top two cards of their library into their graveyard. Draw a card.\n[-8]: Draw seven cards. Then if your library has no cards in it, you win the game.
+Oracle:If you would draw a card while your library has no cards in it, you win the game instead.\n[+1]: Target player mills two cards. Draw a card.\n[−8]: Draw seven cards. Then if your library has no cards in it, you win the game.

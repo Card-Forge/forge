@@ -1,10 +1,10 @@
 Name:Crashing Tide
 ManaCost:2 U
 Types:Sorcery
-S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AddKeyword$ Flash | IsPresent$ Merfolk.YouCtrl | Description$ CARDNAME has flash as long as you control a Merfolk.
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AddKeyword$ Flash | IsPresent$ Merfolk.YouCtrl | Description$ This spell has flash as long as you control a Merfolk.
 A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target creature to its owner's hand. Draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 DeckHints:Type$Merfolk
 SVar:BuffedBy:Merfolk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crashing_tide.jpg
-Oracle:Crashing Tide has flash as long as you control a Merfolk.\nReturn target creature to its owner's hand.\nDraw a card.
+Oracle:This spell has flash as long as you control a Merfolk.\nReturn target creature to its owner's hand.\nDraw a card.

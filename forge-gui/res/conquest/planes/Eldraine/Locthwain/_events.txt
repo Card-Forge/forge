@@ -1,0 +1,9 @@
+Name:Quest for the Grail|Deck:Quest for the Grail.dck|Variant:Commander|Avatar:Ayara, First of Locthwain|Desc:
+Name:Snow White|Deck:Snow White.dck|Variant:None|Avatar:Chittering Witch|Desc:
+Name:Rankle, Master of Pranks|Deck:Rankle, Master of Pranks.dck|Variant:Commander|Avatar:Rankle, Master of Pranks|Desc:
+Name:Sorin, Vampire Lord|Deck:Sorin, Vampire Lord.dck|Variant:Planeswalker|Avatar:Sorin, Vampire Lord|Desc:
+Name:Syr Konrad, the Grim|Deck:Syr Konrad, the Grim.dck|Variant:Commander|Avatar:Syr Konrad, the Grim|Desc:
+Name:Sorin, Imperious Bloodlord|Deck:Sorin, Imperious Bloodlord.dck|Variant:Planeswalker|Avatar:Sorin, Imperious Bloodlord|Desc:
+Name:Lyzolda, the Blood Witch|Deck:Lyzolda, the Blood Witch.dck|Variant:Vanguard|Avatar:Lyzolda, the Blood Witch Avatar|Desc:
+Name:Alela, Artful Provocateur|Deck:Alela, Artful Provocateur.dck|Variant:Commander|Avatar:Alela, Artful Provocateur|Desc:
+Name:Random Locthwain|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

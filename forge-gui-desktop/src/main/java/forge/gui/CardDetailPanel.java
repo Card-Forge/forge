@@ -47,7 +47,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
-
+import forge.util.Localizer;
 /**
  * The class CardDetailPanel. Shows the details of a card.
  *
@@ -77,10 +77,10 @@ public class CardDetailPanel extends SkinnedPanel {
         setLayout(null);
         setOpaque(false);
 
-        nameCostLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip("Card Name and Cost").build();
-        typeLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip("Card Type").build();
-        idLabel = new FLabel.Builder().fontAlign(SwingConstants.LEFT).tooltip("Card ID").build();
-        powerToughnessLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip("Card P/T or Loyalty").build();
+        nameCostLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip(Localizer.getInstance().getMessage("lblCardNameAndCost")).build();
+        typeLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip(Localizer.getInstance().getMessage("lblCardType")).build();
+        idLabel = new FLabel.Builder().fontAlign(SwingConstants.LEFT).tooltip(Localizer.getInstance().getMessage("lblCardID")).build();
+        powerToughnessLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).tooltip(Localizer.getInstance().getMessage("lblCardPTOrLoyalty")).build();
         setInfoLabel = new JLabel();
         setInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -96,6 +96,8 @@ public class CardDetailPanel extends SkinnedPanel {
         cdArea.setFont(new Font("Dialog", 0, fontSizeR12));
         cdArea.setBorder(new EmptyBorder(2, 6, 2, 6));
         cdArea.setOpaque(false);
+        cdArea.setFocusable(true);
+        cdArea.getAccessibleContext().setAccessibleName("Card textbox");
         scrArea = new FScrollPane(cdArea, false);
 
         add(nameCostLabel);
@@ -202,7 +204,7 @@ public class CardDetailPanel extends SkinnedPanel {
         } else {
             final String manaCost;
             if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && card.getZone() != ZoneType.Stack) { //only display current state's mana cost when on stack
-                manaCost = card.getCurrentState().getManaCost() + " // " + card.getAlternateState().getManaCost();
+                manaCost = card.getLeftSplitState().getManaCost() + " // " + card.getAlternateState().getManaCost();
             } else {
                 manaCost = state.getManaCost().toString();
             }
@@ -254,7 +256,7 @@ public class CardDetailPanel extends SkinnedPanel {
         idLabel.setText(mayView ? CardDetailUtil.formatCardId(state) : "");
 
         // fill the card text
-        cdArea.setText(FSkin.encodeSymbols(CardDetailUtil.composeCardText(state, gameView, mayView), true));
+        cdArea.setText(FSkin.encodeSymbols(CardDetailUtil.composeCardText( state, gameView, mayView), true));
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {

@@ -2,8 +2,8 @@ Name:Towering-Wave Mystic
 ManaCost:1 U
 Types:Creature Merfolk Wizard
 PT:2/1
-T:Mode$ DamageDone | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME deals damage, target player puts that many cards from the top of their library into their graveyard.
+T:Mode$ DamageDone | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME deals damage, target player mills that many cards.
 SVar:TrigMill:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 DeckHas:Ability$Graveyard
-Oracle:Whenever Towering-Wave Mystic deals damage, target player puts that many cards from the top of their library into their graveyard.
+Oracle:Whenever Towering-Wave Mystic deals damage, target player mills that many cards.

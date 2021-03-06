@@ -7,6 +7,7 @@ MciCode=m14
 Type=Core
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+ChaosDraftThemes=CORE_SET
 
 [cards]
 1 M Ajani, Caller of the Pride
@@ -238,26 +239,26 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 227 U Encroaching Wastes
 228 R Mutavault
 229 U Shimmering Grotto
+230 L Plains
 231 L Plains
-231 L Plains
-231 L Plains
-231 L Plains
+232 L Plains
+233 L Plains
 234 L Island
-234 L Island
-234 L Island
-234 L Island
+235 L Island
+236 L Island
+237 L Island
+238 L Swamp
+239 L Swamp
+240 L Swamp
 241 L Swamp
-241 L Swamp
-241 L Swamp
-241 L Swamp
+242 L Mountain
+243 L Mountain
 244 L Mountain
-244 L Mountain
-244 L Mountain
-244 L Mountain
+245 L Mountain
 246 L Forest
-246 L Forest
-246 L Forest
-246 L Forest
+247 L Forest
+248 L Forest
+249 L Forest
 
 [tokens]
 c_1_1_sliver

@@ -1,0 +1,17 @@
+[metadata]
+Code=PBFZ
+Date=2015-10-03
+Name=Battle for Zendikar Promos
+Type=Reprint
+
+[cards]
+2 R Blight Herder
+31 R Hero of Goma Fada
+50 U Stasis Snare
+57 R Drowner of Hope
+107 R Defiant Bloodlord
+123 R Ruinous Path
+127 R Barrage Tyrant
+151 R Radiant Flames
+181 R Oran-Rief Hydra
+188 U Scythe Leopard

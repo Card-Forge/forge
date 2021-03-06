@@ -1,0 +1,6 @@
+Name:Dwarf Berserker
+ManaCost:no cost
+Types:Creature Dwarf Berserker
+Colors:red
+PT:2/1
+Oracle:

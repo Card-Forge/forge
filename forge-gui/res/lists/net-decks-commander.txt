@@ -11,3 +11,5 @@ Daily Deck List | https://downloads.cardforge.org/decks/dailydecks-commander.zip
 Command Tower | https://downloads.cardforge.org/decks/commandtower.zip
 Going Rogue | https://downloads.cardforge.org/decks/goingrogue-commander.zip
 Current Commander Metagame | https://downloads.cardforge.org/decks/currentcommandermetagame.zip
+Current Commander 1v1 Metagame | https://downloads.cardforge.org/decks/currentcommander1v1metagame.zip
+Commander On a Budget | https://downloads.cardforge.org/decks/commanderonabudget.zip

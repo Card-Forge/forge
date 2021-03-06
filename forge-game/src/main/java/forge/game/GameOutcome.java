@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -22,6 +22,7 @@ import forge.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerOutcome;
 import forge.game.player.PlayerStatistics;
+import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.item.PaperCard;
 
@@ -33,7 +34,7 @@ import java.util.Map.Entry;
  * <p>
  * GameInfo class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: GameOutcome.java 17608 2012-10-20 22:27:27Z Max mtg $
  */
@@ -45,18 +46,10 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
     public static class AnteResult implements Serializable {
         private static final long serialVersionUID = 5087554550408543192L;
 
-        public final List<PaperCard> lostCards;
-        public final List<PaperCard> wonCards;
-        
-        private AnteResult(List<PaperCard> cards, boolean won) {
-            // Need empty lists for other results for addition of change ownership cards
-            if (won) {
-                this.wonCards = cards;
-                this.lostCards = new ArrayList<>();
-            } else {
-                this.lostCards = cards;
-                this.wonCards = new ArrayList<>();
-            }
+        public final List<PaperCard> lostCards = Lists.newArrayList();
+        public final List<PaperCard> wonCards = Lists.newArrayList();
+
+        public AnteResult() {
         }
 
         public void addWon(List<PaperCard> cards) {
@@ -66,38 +59,36 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
         public void addLost(List<PaperCard> cards) {
             this.lostCards.addAll(cards);
         }
-
-        public static AnteResult won(List<PaperCard> cards) { return new AnteResult(cards, true); }
-        public static AnteResult lost(List<PaperCard> cards) { return new AnteResult(cards, false); }
     }
 
     private int lastTurnNumber = 0;
     private int lifeDelta = 0;
     private int winningTeam = -1;
 
-    private final HashMap<RegisteredPlayer, PlayerStatistics> playerRating  = new HashMap<>();
+    private final HashMap<RegisteredPlayer, PlayerStatistics> playerRating = new HashMap<>();
     private final HashMap<RegisteredPlayer, String> playerNames = new HashMap<>();
 
-    public final Map<RegisteredPlayer, AnteResult> anteResult = new HashMap<>();
+    private final Map<RegisteredPlayer, AnteResult> anteResult = new HashMap<>();
     private GameEndReason winCondition;
 
     public GameOutcome(GameEndReason reason, final Iterable<Player> players) {
         winCondition = reason;
-        calculateLifeDelta(players);
-
-        int winnersHealth = 0;
-        int opponentsHealth = 0;
 
         for (final Player p : players) {
             this.playerRating.put(p.getRegisteredPlayer(), p.getStats());
             this.playerNames.put(p.getRegisteredPlayer(), p.getName());
 
-            if (p.getOutcome().hasWon() && winCondition == GameEndReason.AllOpposingTeamsLost) {
+            if (winCondition == GameEndReason.AllOpposingTeamsLost && p.getOutcome().hasWon()) {
                 // Only mark the WinningTeam when "Team mode" is on.
                 winningTeam = p.getTeam();
             }
         }
+        
+        // Unable to calculate lifeDelta between a winning and losing player whe a draw is in place
+        if (winCondition == GameEndReason.Draw) return;
 
+        int winnersHealth = 0;
+        int opponentsHealth = 0;
         for (final Player p : players) {
             if (p.getTeam() == winningTeam) {
                 winnersHealth += p.getLife();
@@ -106,22 +97,22 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
             }
         }
 
+        calculateLifeDelta(players);
         lifeDelta = Math.max(0, winnersHealth - opponentsHealth);
     }
 
     private void calculateLifeDelta(Iterable<Player> players) {
         int opponentsHealth = 0;
         int winnersHealth = 0;
-        
+
         for (Player p : players) {
             if (p.getOutcome().hasWon()) {
                 winnersHealth += p.getLife();
-            }
-            else {
+            } else {
                 opponentsHealth += p.getLife();
             }
         }
-        
+
         lifeDelta = Math.max(0, winnersHealth - opponentsHealth);
     }
 
@@ -150,7 +141,7 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
 
     /**
      * Gets the winner.
-     * 
+     *
      * @return the winner
      */
     public LobbyPlayer getWinningLobbyPlayer() {
@@ -169,7 +160,7 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
      * distinguish between human player names (a problem for hotseat games).
      */
     public RegisteredPlayer getWinningPlayer() {
-        for(Entry<RegisteredPlayer, PlayerStatistics> pair : playerRating.entrySet()) {
+        for (Entry<RegisteredPlayer, PlayerStatistics> pair : playerRating.entrySet()) {
             if (pair.getValue().getOutcome().hasWon()) {
                 return pair.getKey();
             }
@@ -196,7 +187,7 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
 
     /**
      * Gets the win spell effect.
-     * 
+     *
      * @return the win spell effect
      */
     public String getWinSpellEffect() {
@@ -227,7 +218,7 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
 
     public List<String> getOutcomeStrings() {
         List<String> outcomes = Lists.newArrayList();
-        for(RegisteredPlayer player : playerNames.keySet()) {
+        for (RegisteredPlayer player : playerNames.keySet()) {
             outcomes.add(getOutcomeString(player));
         }
         return outcomes;
@@ -235,5 +226,32 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
 
     public String getOutcomeString(RegisteredPlayer player) {
         return playerNames.get(player) + " " + playerRating.get(player).getOutcome();
+    }
+
+    public void addAnteWon(RegisteredPlayer pl, List<PaperCard> cards) {
+        if (!anteResult.containsKey(pl)) {
+            anteResult.put(pl, new AnteResult());
+        }
+        anteResult.get(pl).addWon(cards);
+    }
+
+    public void addAnteLost(RegisteredPlayer pl, List<PaperCard> cards) {
+        if (!anteResult.containsKey(pl)) {
+            anteResult.put(pl, new AnteResult());
+        }
+        anteResult.get(pl).addLost(cards);
+    }
+
+    public AnteResult getAnteResult(RegisteredPlayer pl) {
+        return anteResult.get(pl);
+    }
+
+    public AnteResult getAnteResult(PlayerView pv) {
+        for (Map.Entry<RegisteredPlayer, AnteResult> e : this.anteResult.entrySet()) {
+            if (pv.isLobbyPlayer(e.getKey().getPlayer())) {
+                return e.getValue();
+            }
+        }
+        return null;
     }
 }

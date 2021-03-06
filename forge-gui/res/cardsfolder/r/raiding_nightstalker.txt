@@ -4,4 +4,4 @@ Types:Creature Nightstalker
 PT:2/2
 K:Swampwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6558.jpg
-Oracle:Swampwalk
+Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

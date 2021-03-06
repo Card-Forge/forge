@@ -1,11 +1,11 @@
 Name:Power Without Equal
 ManaCost:no cost
 Types:Scheme
-T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBDraw | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, draw three cards. You have no maximum hand size until your next turn. If you control six or more lands, you may cast up to three nonland cards from your hand without paying their mana costs.
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBDraw | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, draw three cards. You have no maximum hand size until your next turn. If you control six or more lands, you may cast up to three spells from your hand without paying their mana costs.
 SVar:DBDraw:DB$ Draw | NumCards$ 3 | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Name$ Enter the Infinite Effect | StaticAbilities$ STHandSize | Duration$ UntilYourNextTurn | SubAbility$ DBPlay
 SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 SVar:DBPlay:DB$ Play | Valid$ Card.YouCtrl+nonLand | ValidZone$ Hand | Controller$ You | WithoutManaCost$ True | Amount$ 3 | Optional$ True | ConditionCheckSVar$ X | References$ X | ConditionSVarCompare$ GE6
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/Power Without Equal.full.jpg
-Oracle:When you set this scheme in motion, draw three cards. You have no maximum hand size until your next turn. If you control six or more lands, you may cast up to three nonland cards from your hand without paying their mana costs.
+Oracle:When you set this scheme in motion, draw three cards. You have no maximum hand size until your next turn. If you control six or more lands, you may cast up to three spells from your hand without paying their mana costs.

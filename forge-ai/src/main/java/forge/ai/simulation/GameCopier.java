@@ -6,7 +6,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.LobbyPlayer;
 import forge.ai.LobbyPlayerAi;
-import forge.card.CardStateName;
 import forge.game.*;
 import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
@@ -76,7 +75,7 @@ public class GameCopier {
                 newPlayer.addSpellCastThisTurn();
             for (int j = 0; j < origPlayer.getLandsPlayedThisTurn(); j++)
                 newPlayer.addLandPlayedThisTurn();
-            newPlayer.setCounters(Maps.newEnumMap(origPlayer.getCounters()));
+            newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
             newPlayer.setLifeLostLastTurn(origPlayer.getLifeLostLastTurn());
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
             newPlayer.setPreventNextDamage(origPlayer.getPreventNextDamage());
@@ -125,8 +124,6 @@ public class GameCopier {
                 }
             }
         }
-        origGame.validateSpabCache();
-        newGame.validateSpabCache();
 
         // Undo effects first before calculating them below, to avoid them applying twice.
         for (StaticEffect effect : origGame.getStaticEffects().getEffects()) {
@@ -167,7 +164,7 @@ public class GameCopier {
             if (newSa != null) {
                 newSa.setActivatingPlayer(map.map(origSa.getActivatingPlayer()));
                 if (origSa.usesTargeting()) {
-                    for (GameObject o : origSa.getTargets().getTargets()) {
+                    for (GameObject o : origSa.getTargets()) {
                         newSa.getTargets().add(map.map(o));
                     }
                 }
@@ -291,16 +288,9 @@ public class GameCopier {
                 newCard.setTapped(true);
             }
             if (c.isFaceDown()) {
-                boolean isCreature = newCard.isCreature();
-                boolean hasManaCost = !newCard.getManaCost().isNoCost();
                 newCard.turnFaceDown(true);
                 if (c.isManifested()) {
                     newCard.setManifested(true);
-                    // TODO: Should be able to copy other abilities...
-                    if (isCreature &&  hasManaCost) {
-                        newCard.getState(CardStateName.Original).addSpellAbility(
-                                CardFactoryUtil.abilityManifestFaceUp(newCard, newCard.getManaCost()));
-                    }
                 }
             }
             if (c.isMonstrous()) {
@@ -330,7 +320,7 @@ public class GameCopier {
 
             Map<CounterType, Integer> counters = c.getCounters();
             if (!counters.isEmpty()) {
-                newCard.setCounters(Maps.newEnumMap(counters));
+                newCard.setCounters(Maps.newHashMap(counters));
             }
             if (c.getChosenPlayer() != null) {
                 newCard.setChosenPlayer(playerMap.get(c.getChosenPlayer()));
@@ -338,13 +328,18 @@ public class GameCopier {
             if (!c.getChosenType().isEmpty()) {
                 newCard.setChosenType(c.getChosenType());
             }
+            if (!c.getChosenType2().isEmpty()) {
+                newCard.setChosenType2(c.getChosenType2());
+            }
             if (c.getChosenColors() != null) {
                 newCard.setChosenColors(Lists.newArrayList(c.getChosenColors()));
             }
             if (!c.getNamedCard().isEmpty()) {
                 newCard.setNamedCard(c.getNamedCard());
             }
-
+            if (!c.getNamedCard2().isEmpty()) {
+                newCard.setNamedCard2(c.getNamedCard());
+            }
             newCard.setSVars(c.getSVars());
         }
 
