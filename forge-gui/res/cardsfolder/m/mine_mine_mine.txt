@@ -1,0 +1,11 @@
+Name:Mine, Mine, Mine!
+ManaCost:4 G G
+Types:Enchantment
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, each player puts their library into their hand.
+SVar:TrigChangeZone:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Library | Destination$ Hand
+S:Mode$ Continuous | Affected$ Player | SetMaxHandSize$ Unlimited | Description$ Players don't lose the game for drawing from an empty library.
+S:Mode$ Continuous | Affected$ Player | Secondary$ True | AddKeyword$ You don't lose the game for drawing from an empty library. | Description$ Players don't lose the game for drawing from an empty library.
+S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player | NumLimitEachTurn$ 1 | Description$ Each player can't cast more than one spell each turn.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Execute$ TrigShuffleBack | TriggerDescription$ When CARDNAME leaves the battlefield, each player shuffles their hand and graveyard into their library.
+SVar:TrigShuffleBack:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | Random$ True
+Oracle:When Mine, Mine, Mine! enters the battlefield, each player puts their library into their hand.\nPlayers have no maximum hand size and don't lose the game for drawing from an empty library.\nEach player can't cast more than one spell each turn.\nWhen Mine, Mine, Mine! leaves the battlefield, each player shuffles their hand and graveyard into their library.
