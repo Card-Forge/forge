@@ -199,9 +199,28 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
 
             if (remember != null) {
-                game.getCardState(source).addRemembered(movedCard);
+                final Card newSource = game.getCardState(source);
+                newSource.addRemembered(movedCard);
                 if (!source.isRemembered(movedCard)) {
                     source.addRemembered(movedCard);
+                }
+                if (c.getMeldedWith() != null) {
+                    Card meld = game.getCardState(c.getMeldedWith(), null);
+                    if (meld != null) {
+                        newSource.addRemembered(meld);
+                        if (!source.isRemembered(meld)) {
+                            source.addRemembered(meld);
+                        }
+                    }
+                }
+                if (c.hasMergedCard()) {
+                    for (final Card card : c.getMergedCards()) {
+                        if (card == c) continue;
+                        newSource.addRemembered(card);
+                        if (!source.isRemembered(card)) {
+                            source.addRemembered(card);
+                        }
+                    }
                 }
             }
             if (remLKI && movedCard != null) {
