@@ -386,7 +386,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 Special
 374 S Consuming Aberration
 375 S Dovin's Veto
 376 S Epic Experiment
-377 S Feather the Redeemed
+377 S Feather, the Redeemed
 378 S Grenzo, Dungeon Warden
 379 S Knight of the Reliquary
 380 S Lavinia, Azorius Renegade
