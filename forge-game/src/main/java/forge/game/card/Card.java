@@ -1846,7 +1846,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         s.append(" on it.");
                     }
                     sbLong.append(s).append("\r\n");
-                } else if (keyword.startsWith("Protection:")) {
+                } else if (keyword.startsWith("Protection:") || keyword.startsWith("DeckLimit")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[2]).append("\r\n");
                 } else if (keyword.startsWith("Creatures can't attack unless their controller pays")) {
@@ -1966,8 +1966,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Foretell") // for the ones without cost
                         || keyword.equals("Hideaway") || keyword.equals("Ascend")
                         || keyword.equals("Totem armor") || keyword.equals("Battle cry")
-                        || keyword.equals("Devoid") || keyword.equals("Riot")
-                        || keyword.equals("Megalegendary")){
+                        || keyword.equals("Devoid") || keyword.equals("Riot")){
                     sbLong.append(keyword).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Partner:")) {
                     final String[] k = keyword.split(":");
@@ -2483,6 +2482,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sbBefore.append(" You may choose new targets for the copies.");
                     }
                     sbBefore.append(")\r\n");
+                } else if (keyword.startsWith("DeckLimit")) {
+                    final String[] k = keyword.split(":");
+                    sbBefore.append(k[2]).append("\r\n");
                 }
             } catch (Exception e) {
                 String msg = "Card:abilityTextInstantSorcery: crash in Keyword parsing";

@@ -245,4 +245,4 @@ Type=Reprint
 238 S Zodiac Snake
 239 S Zodiac Tiger
 240 S Zuran Orb
-
+26584 S Gleemox
