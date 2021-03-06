@@ -91,6 +91,10 @@ public class FilesPage extends TabPage<SettingsScreen> {
             protected GuiDownloadService createService() {
                 return new GuiDownloadSkins();
             }
+            @Override
+            protected void finishCallback() {
+                SettingsScreen.getSettingsScreen().getSettingsPage().refreshSkinsList();
+            }
         }, 0);
         lstItems.addItem(new OptionContentDownloader(localizer.getMessage("btnDownloadCJKFonts"),
                 localizer.getMessage("lblDownloadCJKFonts"),
@@ -111,6 +115,10 @@ public class FilesPage extends TabPage<SettingsScreen> {
                     }
                 }
                 return categories;
+            }
+            @Override
+            protected void finishCallback() {
+                SettingsScreen.getSettingsScreen().getSettingsPage().refreshCJKFontsList();
             }
         }, 0);
         //storage locations
@@ -201,9 +209,19 @@ public class FilesPage extends TabPage<SettingsScreen> {
 
         @Override
         public void select() {
-            new GuiDownloader(createService()).show();
+            new GuiDownloader(createService(), new Callback<Boolean>() {
+                @Override
+                public void run(Boolean finished) {
+                    if (finished) {
+                        finishCallback();
+                    }
+                }
+            }).show();
         }
         protected abstract GuiDownloadService createService();
+
+        protected void finishCallback() {
+        }
     }
 
     private abstract class OptionContentDownloader extends FilesItem {
@@ -222,11 +240,21 @@ public class FilesPage extends TabPage<SettingsScreen> {
                 public void run(String result) {
                     final String url = categories.get(result);
                     final String name = url.substring(url.lastIndexOf("/") + 1);
-                    new GuiDownloader(new GuiDownloadZipService(name, name, url, ForgeConstants.FONTS_DIR, null, null)).show();
+                    new GuiDownloader(new GuiDownloadZipService(name, name, url, ForgeConstants.FONTS_DIR, null, null), new Callback<Boolean>() {
+                        @Override
+                        public void run(Boolean finished) {
+                            if (finished) {
+                                finishCallback();
+                            }
+                        }
+                    }).show();
                 }
             });
         }
         protected abstract Map<String, String> getCategories();
+
+        protected void finishCallback() {
+        }
     }
 
     private abstract class StorageOption extends FilesItem {

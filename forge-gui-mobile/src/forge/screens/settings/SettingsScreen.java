@@ -19,6 +19,7 @@ public class SettingsScreen extends TabPageScreen<SettingsScreen> {
 
     private static boolean fromHomeScreen;
     private static SettingsScreen settingsScreen; //keep settings screen around so scroll positions maintained
+    private final SettingsPage settingsPage;
 
     public static void show(boolean fromHomeScreen0) {
         if (settingsScreen == null) {
@@ -40,6 +41,14 @@ public class SettingsScreen extends TabPageScreen<SettingsScreen> {
         return insets;
     }
 
+    public SettingsPage getSettingsPage() {
+        return settingsPage;
+    }
+
+    public static SettingsScreen getSettingsScreen() {
+        return settingsScreen;
+    }
+
     @SuppressWarnings("unchecked")
     private SettingsScreen() {
         super(new TabHeader<SettingsScreen>(new TabPage[] {
@@ -51,6 +60,7 @@ public class SettingsScreen extends TabPageScreen<SettingsScreen> {
                 return !fromHomeScreen; //don't show back button if launched from home screen
             }
         });
+        settingsPage = (SettingsPage) tabPages[0];
     }
 
     public FScreen getLandscapeBackdropScreen() {
