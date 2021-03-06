@@ -19,6 +19,8 @@ package forge.deck;
 
 import forge.item.InventoryItem;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public abstract class DeckBase implements Serializable, Comparable<DeckBase>, InventoryItem {
     private static final long serialVersionUID = -7538150536939660052L;
@@ -145,9 +147,9 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
     public final String getBestFileName() {
         //string operator hard to guarantee filename legal,only replace some not allowed as file names characters
         final String result = name.replaceAll("[\\/:*?\"<>|]","");
-        if (result == "") {
-            //"getBestFileName" sha1 value
-            return "bc2b4ac6bf8dd84112c79e4c733b0b5bd8f057b3";
+        if (result.isEmpty()) {
+            final String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm"));
+            return createTime;
         }
         return result;
     }
