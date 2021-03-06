@@ -27,6 +27,7 @@ import forge.game.CardTraitBase;
 import forge.game.ForgeScript;
 import forge.game.GameObject;
 import forge.game.IHasSVars;
+import forge.game.ability.ApiType;
 import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
@@ -580,7 +581,7 @@ public class CardState extends GameObject implements IHasSVars {
         }
 
         for (SpellAbility sa : source.nonManaAbilities) {
-            if (sa.isIntrinsic()) {
+            if (sa.isIntrinsic() && sa.getApi() != ApiType.PermanentCreature && sa.getApi() != ApiType.PermanentNoncreature) {
                 nonManaAbilities.add(sa.copy(card, lki));
             }
         }
