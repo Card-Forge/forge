@@ -24,7 +24,6 @@ import forge.util.LineReader;
 import forge.util.TextBounds;
 import forge.util.Utils;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -87,8 +86,13 @@ public class FSkinFont {
 
     //delete all cached font files
     public static void deleteCachedFiles() {
-        FileUtil.deleteDirectory(new File(ForgeConstants.FONTS_DIR));
-        FileUtil.ensureDirectoryExists(ForgeConstants.FONTS_DIR);
+        final FileHandle dir = Gdx.files.absolute(ForgeConstants.FONTS_DIR);
+        for (FileHandle fontFile : dir.list()) {
+            String name = fontFile.name();
+            if (name.endsWith(".fnt") || name.endsWith(".png")) {
+                fontFile.delete();
+            }
+        }
     }
 
     public static void updateAll() {

@@ -446,6 +446,15 @@ public class FSkin {
     }
 
     public static Iterable<String> getAllSkins() {
+        if (allSkins != null) {
+            allSkins.clear();
+            allSkins.add("Default"); //init default
+            final Array<String> skinDirectoryNames = getSkinDirectoryNames();
+            for (final String skinDirectoryName : skinDirectoryNames) {
+                allSkins.add(WordUtil.capitalize(skinDirectoryName.replace('_', ' ')));
+            }
+            allSkins.sort();
+        }
         return allSkins;
     }
 

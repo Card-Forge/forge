@@ -37,6 +37,8 @@ import java.util.List;
 
 public class SettingsPage extends TabPage<SettingsScreen> {
     private final FGroupList<Setting> lstSettings = add(new FGroupList<>());
+    private final CustomSelectSetting settingSkins;
+    private final CustomSelectSetting settingCJKFonts;
 
     public SettingsPage() {
         super(Localizer.getInstance().getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS);
@@ -84,15 +86,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 });
             }
         }, 0);
-        lstSettings.addItem(new CustomSelectSetting(FPref.UI_SKIN, localizer.getMessage("lblTheme"),
+        settingSkins = new CustomSelectSetting(FPref.UI_SKIN, localizer.getMessage("lblTheme"),
                 localizer.getMessage("nlTheme"),
                 FSkin.getAllSkins()) {
             @Override
             public void valueChanged(String newValue) {
                 FSkin.changeSkin(newValue);
             }
-        }, 0);
-        lstSettings.addItem(new CustomSelectSetting(FPref.UI_CJK_FONT, localizer.getMessage("lblCJKFont"),
+        };
+        lstSettings.addItem(settingSkins, 0);
+        settingCJKFonts = new CustomSelectSetting(FPref.UI_CJK_FONT, localizer.getMessage("lblCJKFont"),
                 localizer.getMessage("nlCJKFont"),
                 FSkinFont.getAllCJKFonts()) {
             @Override
@@ -111,7 +114,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 }
                 super.valueChanged(newValue);
             }
-        }, 0);
+        };
+        lstSettings.addItem(settingCJKFonts, 0);
         lstSettings.addItem(new BooleanSetting(FPref.UI_LANDSCAPE_MODE,
                 localizer.getMessage("lblLandscapeMode"),
                 localizer.getMessage("nlLandscapeMode")) {
@@ -549,6 +553,14 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 7);*/
     }
 
+    public void refreshSkinsList() {
+        settingSkins.updateOptions(FSkin.getAllSkins());
+    }
+
+    public void refreshCJKFontsList() {
+        settingCJKFonts.updateOptions(FSkinFont.getAllCJKFonts());
+    }
+
     @Override
     protected void doLayout(float width, float height) {
         lstSettings.setBounds(0, 0, width, height);
@@ -616,6 +628,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         public void valueChanged(String newValue) {
             FModel.getPreferences().setPref(pref, newValue);
             FModel.getPreferences().save();
+        }
+
+        public void updateOptions(Iterable<String> options0) {
+            options.clear();
+            if (options0 != null) {
+                for (String option : options0) {
+                    options.add(option);
+                }
+            }
         }
 
         @Override
