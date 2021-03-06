@@ -437,22 +437,31 @@ public class TextRenderer {
                                 }
                             }
                         }
-                        Piece lastPiece = pieces.get(lastPieceIdx);
-                        lineWidths.add(lastPiece.x + lastPiece.w);
-                        x = 0;
-                        for (int j = lastPieceIdx + 1; j < pieces.size(); j++) {
-                            Piece piece = pieces.get(j);
-                            piece.x = x;
-                            piece.y += lineHeight;
-                            piece.lineNum++;
-                            x += piece.w;
-                        }
-                        y += lineHeight;
-                        totalHeight += lineHeight;
-                        lineNum++;
-                        if (totalHeight > height) {
-                            //try next font size down if out of space
+                        if (lastPieceIdx >= 0) {
+                            Piece lastPiece = pieces.get(lastPieceIdx);
+                            lineWidths.add(lastPiece.x + lastPiece.w);
+                            x = 0;
+                            for (int j = lastPieceIdx + 1; j < pieces.size(); j++) {
+                                Piece piece = pieces.get(j);
+                                piece.x = x;
+                                piece.y += lineHeight;
+                                piece.lineNum++;
+                                x += piece.w;
+                            }
+                            y += lineHeight;
+                            totalHeight += lineHeight;
+                            lineNum++;
+                            if (totalHeight > height) {
+                                //try next font size down if out of space
+                                if (font.canShrink()) {
+                                    updatePieces(font.shrink());
+                                    return;
+                                }
+                                needClip = true;
+                            }
+                        } else {
                             if (font.canShrink()) {
+                                //try next font size down if out of space
                                 updatePieces(font.shrink());
                                 return;
                             }
