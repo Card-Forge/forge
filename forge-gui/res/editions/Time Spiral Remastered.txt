@@ -298,7 +298,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 Special
 288 U Urza's Factory
 289 M Vesuva
 
-[timeshifted cards]
+[showcase]
 290 S Ajani's Pridemate
 291 S Banishing Light
 292 S Containment Priest
