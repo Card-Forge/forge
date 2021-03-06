@@ -1,1 +1,2 @@
-ipaexg | https://downloads.cardforge.org/fonts/ipaexg.zip
+SourceHanSansCN | https://downloads.cardforge.org/fonts/SourceHanSansCN-Normal.zip
+SourceHanSansJP | https://downloads.cardforge.org/fonts/SourceHanSansJP-Normal.zip
