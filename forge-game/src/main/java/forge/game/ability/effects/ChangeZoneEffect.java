@@ -1312,6 +1312,19 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             if (originZone != null) {
                 triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
+
+                if (c.getMeldedWith() != null) {
+                    Card meld = game.getCardState(c.getMeldedWith(), null);
+                    if (meld != null) {
+                        triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), meld);
+                    }
+                }
+                if (c.hasMergedCard()) {
+                    for (final Card card : c.getMergedCards()) {
+                        if (card == c) continue;
+                        triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), card);
+                    }
+                }
             }
 
             if (champion) {
