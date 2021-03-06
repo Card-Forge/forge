@@ -2,7 +2,6 @@
 Name=Time Spiral Remastered
 Code=TSR
 Date=2021-03-19
-MciCode=tsr
 Type=Reprint
 BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 Special
