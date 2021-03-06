@@ -67,8 +67,11 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 if (prefs.getPref(FPref.UI_CJK_FONT).equals("") &&
                         (newValue.equals("zh-CN") || newValue.equals("ja-JP"))) {
                     String message = "Please download CJK font (from \"Files\"), and set it before change language.";
+                    if (newValue.equals("zh-CN")) {
+                        message += "\nChinese please use \"SourceHanSansCN\".";
+                    }
                     if (newValue.equals("ja-JP")) {
-                        message += "\nJapanese please use \"ipaexg\".";
+                        message += "\nJapanese please use \"SourceHanSansJP\".";
                     }
                     FOptionPane.showMessageDialog(message, "Please set CJK Font");
                     return;
