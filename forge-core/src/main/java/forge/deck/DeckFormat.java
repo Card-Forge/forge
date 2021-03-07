@@ -375,13 +375,7 @@ public enum DeckFormat {
 
     public static Integer canHaveSpecificNumberInDeck(final IPaperCard card) {
         // Ideally, this would be parsed during card parsing and set this value
-        if (card.getRules().hasKeyword("A deck can have up to seven cards named CARDNAME.")) {
-            return 7;
-        } else if (card.getRules().hasKeyword("Megalegendary")) {
-            return 1;
-        }
-
-        return null;
+        return card.getRules().getKeywordMagnitude("DeckLimit");
     }
 
     public static String getPlaneSectionConformanceProblem(final CardPool planes) {

@@ -1,0 +1,6 @@
+Name:Gleemox
+ManaCost:0
+Types:Artifact
+K:DeckLimit:0:This card is banned.
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:{T}: Add one mana of any color.\nThis card is banned.
