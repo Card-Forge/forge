@@ -3,7 +3,7 @@ ManaCost:G
 Types:Enchantment
 T:Mode$ Phase | Phase$ Main1,Main2 | ValidPlayer$ You | CheckSVar$ CarpetX | SVarCompare$ EQ0 | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of each of your main phases, if you haven't added mana with this ability this turn, you may add X mana of any one color, where X is the number of Islands target opponent controls.
 SVar:TrigMana:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent. You may add X mana, where X is the number of Islands target opponent controls | IsCurse$ True | RememberObjects$ Targeted | SubAbility$ DBMana
-SVar:DBMana:DB$ Mana | Amount$ NumManaMax | References$ NumManaMax | Produced$ Any | SubAbility$ CheckPlus
+SVar:DBMana:DB$ Mana | Amount$ NumManaMax | Produced$ Any | SubAbility$ CheckPlus
 SVar:CheckPlus:DB$ StoreSVar | SVar$ CarpetX | Type$ Number | Expression$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True

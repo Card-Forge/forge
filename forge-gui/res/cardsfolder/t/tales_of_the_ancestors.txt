@@ -1,8 +1,8 @@
 Name:Tales of the Ancestors
 ManaCost:3 U
 Types:Sorcery
-A:SP$ RepeatEach | RepeatPlayers$ Player.HasCardsInHand_Card_LTX | References$ X | RepeatSubAbility$ DBDraw | SpellDescription$ Each player with fewer cards in hand than the player with the most cards in hand draws cards equal to the difference.
-SVar:DBDraw:DB$ Draw | Defined$ Player.IsRemembered | NumCards$ Z | References$ X,Y,Z
+A:SP$ RepeatEach | RepeatPlayers$ Player.HasCardsInHand_Card_LTX | RepeatSubAbility$ DBDraw | SpellDescription$ Each player with fewer cards in hand than the player with the most cards in hand draws cards equal to the difference.
+SVar:DBDraw:DB$ Draw | Defined$ Player.IsRemembered | NumCards$ Z
 SVar:X:PlayerCountPlayers$HighestCardsInHand
 SVar:Y:Count$InRememberedHand
 SVar:Z:SVar$X/Minus.Y

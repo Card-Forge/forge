@@ -4,7 +4,7 @@ Types:Creature Eldrazi Drone
 PT:4/3
 K:Devoid
 K:CARDNAME can't block.
-A:AB$ Regenerate | Cost$ 1 B | CheckSVar$ X | SVarCompare$ GE1 | References$ X | SpellDescription$ Regenerate CARDNAME. Activate this ability only if you control another colorless creature.
+A:AB$ Regenerate | Cost$ 1 B | CheckSVar$ X | SVarCompare$ GE1 | SpellDescription$ Regenerate CARDNAME. Activate this ability only if you control another colorless creature.
 SVar:X:Count$Valid Creature.Colorless+YouCtrl+Other
 DeckHints:Color$Colorless & Keyword$Devoid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skitterskin.jpg

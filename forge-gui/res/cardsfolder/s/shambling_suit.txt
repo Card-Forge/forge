@@ -2,6 +2,6 @@ Name:Shambling Suit
 ManaCost:3
 Types:Artifact Creature Construct
 PT:*/3
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | References$ X | Description$ CARDNAME's power is equal to the number of artifacts and/or enchantments you control.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of artifacts and/or enchantments you control.
 SVar:X:Count$Valid Artifact.YouCtrl,Enchantment.YouCtrl
 Oracle:Shambling Suit's power is equal to the number of artifacts and/or enchantments you control.

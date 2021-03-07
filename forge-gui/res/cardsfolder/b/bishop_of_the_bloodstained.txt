@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Creature Vampire Cleric
 PT:3/3
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, target opponent loses 1 life for each Vampire you control.
-SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ X | References$ X
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ X
 SVar:X:Count$Valid Creature.Vampire+YouCtrl+inZoneBattlefield
 DeckHints:Type$Vampire
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bishop_of_the_bloodstained.jpg

@@ -12,6 +12,6 @@ Name:Ribbons
 ManaCost:X B B
 Types:Sorcery
 K:Aftermath
-A:SP$ LoseLife | Cost$ X B B | Defined$ Player.Opponent | LifeAmount$ X | References$ X | SpellDescription$ Each opponent loses X life.
+A:SP$ LoseLife | Cost$ X B B | Defined$ Player.Opponent | LifeAmount$ X | SpellDescription$ Each opponent loses X life.
 SVar:X:Count$xPaid
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nEach opponent loses X life.

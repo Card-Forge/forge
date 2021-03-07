@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Creature Minotaur Shaman
 PT:4/2
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage to each opponent equal to your devotion to red. (Each {R} in the mana costs of permanents you control counts towards your devotion to red.)
-SVar:TrigDamageAll:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ X | References$ X
+SVar:TrigDamageAll:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ X
 SVar:X:Count$Devotion.Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fanatic_of_mogis.jpg
 Oracle:When Fanatic of Mogis enters the battlefield, it deals damage to each opponent equal to your devotion to red. (Each {R} in the mana costs of permanents you control counts toward your devotion to red.)

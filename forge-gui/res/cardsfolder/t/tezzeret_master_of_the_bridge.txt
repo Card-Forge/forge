@@ -3,8 +3,8 @@ ManaCost:4 U B
 Types:Legendary Planeswalker Tezzeret
 Loyalty:5
 S:Mode$ Continuous | Affected$ Card.Creature+YouCtrl,Card.Planeswalker+YouCtrl | AffectedZone$ Stack | AddKeyword$ Affinity:Artifact | Description$ Creature and planeswalker spells you cast have affinity for artifacts. (They cost {1} less to cast for each artifact you control.)
-A:AB$ DealDamage | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Defined$ Player.Opponent | NumDmg$ X | References$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to each opponent, where X is the number of artifacts you control. You gain X life.
-SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | References$ X
+A:AB$ DealDamage | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Defined$ Player.Opponent | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to each opponent, where X is the number of artifacts you control. You gain X life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target artifact card from your graveyard to your hand.
 A:AB$ Dig | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ You | DigNum$ 10 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile the top ten cards of your library. Put all artifact cards from among them onto the battlefield.
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Artifact.IsRemembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup

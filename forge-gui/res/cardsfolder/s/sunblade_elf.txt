@@ -2,7 +2,7 @@ Name:Sunblade Elf
 ManaCost:G
 Types:Creature Elf Warrior
 PT:1/1
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | References$ X | Description$ CARDNAME gets +1/+1 as long as you control a Plains.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control a Plains.
 SVar:X:Count$Valid Plains.YouCtrl
 A:AB$ PumpAll | Cost$ 4 W | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
 SVar:BuffedBy:Plains

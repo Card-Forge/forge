@@ -5,7 +5,7 @@ A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one man
 A:AB$ PutCounter | Cost$ T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
 T:Mode$ Phase | PreCombatMain$ True | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemove | TriggerDescription$ At the beginning of your precombat main phase, remove all charge counters from CARDNAME. Add one mana of any color for each charge counter removed this way.
 SVar:TrigRemove:DB$ RemoveCounter | CounterType$ CHARGE | CounterNum$ All | RememberRemoved$ True | SubAbility$ TrigGetMana
-SVar:TrigGetMana:DB$ Mana | Produced$ Combo Any | Amount$ NumRemoved | References$ NumRemoved | AILogic$ MostProminentInComputerHand | SubAbility$ DBCleanup
+SVar:TrigGetMana:DB$ Mana | Produced$ Combo Any | Amount$ NumRemoved | AILogic$ MostProminentInComputerHand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NumRemoved:Count$RememberedSize
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coalition_relic.jpg

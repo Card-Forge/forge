@@ -3,7 +3,7 @@ ManaCost:1 B R
 Types:Creature Ogre Warrior
 PT:3/2
 K:Unleash
-A:AB$ DealDamage | Cost$ 2 B R Sac<1/CARDNAME> | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to its power to target player or planeswalker.
+A:AB$ DealDamage | Cost$ 2 B R Sac<1/CARDNAME> | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to its power to target player or planeswalker.
 SVar:X:Sacrificed$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellhole_flailer.jpg
 Oracle:Unleash (You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)\n{2}{B}{R}, Sacrifice Hellhole Flailer: Hellhole Flailer deals damage equal to its power to target player or planeswalker.

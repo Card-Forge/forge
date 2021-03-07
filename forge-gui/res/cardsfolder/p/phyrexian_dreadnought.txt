@@ -5,8 +5,8 @@ PT:12/12
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ChooseCreatures | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you sacrifice any number of creatures with total power 12 or greater.
 SVar:ChooseCreatures:DB$ ChooseCard | Defined$ You | Amount$ X | MinAmount$ 0 | Choices$ Creature.YouCtrl | ChoiceTitle$ Sacrifice any number of creatures with total power 12 or greater. | ChoiceZone$ Battlefield | RememberChosen$ True | SubAbility$ SacrificeSelf
-SVar:SacrificeSelf:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ TotalPower | ConditionSVarCompare$ LT12 | SubAbility$ SacrificeCreatures | References$ TotalPower
-SVar:SacrificeCreatures:DB$ SacrificeAll | Defined$ Remembered | ConditionCheckSVar$ TotalPower | ConditionSVarCompare$ GE12 | SubAbility$ DBCleanup | References$ TotalPower
+SVar:SacrificeSelf:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ TotalPower | ConditionSVarCompare$ LT12 | SubAbility$ SacrificeCreatures
+SVar:SacrificeCreatures:DB$ SacrificeAll | Defined$ Remembered | ConditionCheckSVar$ TotalPower | ConditionSVarCompare$ GE12 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:TotalPower:Remembered$CardPower
 SVar:X:Count$Valid Creature.YouCtrl

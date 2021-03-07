@@ -1,9 +1,9 @@
 Name:Devout Invocation
 ManaCost:6 W
 Types:Sorcery
-A:SP$ ChooseCard | Cost$ 6 W | Defined$ You | MinAmount$ 0 | Amount$ X | References$ X | Choices$ Creature.untapped+YouCtrl | ChoiceTitle$ Choose any number of untapped creatures you control | ChoiceZone$ Battlefield | RememberChosen$ True | SubAbility$ TrigTap | SpellDescription$ Tap any number of untapped creatures you control. Create a 4/4 white Angel creature token with flying for each creature tapped this way. | StackDescription$ SpellDescription
+A:SP$ ChooseCard | Cost$ 6 W | Defined$ You | MinAmount$ 0 | Amount$ X | Choices$ Creature.untapped+YouCtrl | ChoiceTitle$ Choose any number of untapped creatures you control | ChoiceZone$ Battlefield | RememberChosen$ True | SubAbility$ TrigTap | SpellDescription$ Tap any number of untapped creatures you control. Create a 4/4 white Angel creature token with flying for each creature tapped this way. | StackDescription$ SpellDescription
 SVar:TrigTap:DB$ Tap | Defined$ Remembered | SubAbility$ DBToken | StackDescription$ None
-SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenScript$ w_4_4_angel_flying | TokenOwner$ You | LegacyImage$ w 4 4 angel flying m14 | References$ Y | SubAbility$ DBCleanup
+SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenScript$ w_4_4_angel_flying | TokenOwner$ You | LegacyImage$ w 4 4 angel flying m14 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Y:Remembered$Amount

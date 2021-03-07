@@ -2,8 +2,8 @@ Name:Leafkin Avenger
 ManaCost:2 R G
 Types:Creature Elemental Druid
 PT:4/3
-A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescription$ Add {G} for each Creature you control with power 4 or greater.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add {G} for each Creature you control with power 4 or greater.
 SVar:X:Count$Valid Creature.YouCtrl+powerGE4
-A:AB$ DealDamage | Cost$ 7 R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ Y | References$ Y | SpellDescription$ CARDNAME deals damage equal to its power to target player or planeswalker.
+A:AB$ DealDamage | Cost$ 7 R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ Y | SpellDescription$ CARDNAME deals damage equal to its power to target player or planeswalker.
 SVar:Y:Count$CardPower
 Oracle:{T}: Add {G} for each creature with power 4 or greater you control.\n{7}{R}: Leafkin Avenger deals damage equal to its power to target player or planeswalker.

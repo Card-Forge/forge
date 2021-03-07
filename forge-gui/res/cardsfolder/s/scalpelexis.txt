@@ -4,7 +4,7 @@ Types:Creature Beast
 PT:1/5
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player exiles the top four cards of their library. If two or more of those cards have the same name, repeat this process.
-SVar:TrigExile:DB$ Repeat | RepeatSubAbility$ DBExileCleanup | RepeatCheckSVar$ X | References$ X,Y | RepeatSVarCompare$ LTY | SubAbility$ DBCleanup
+SVar:TrigExile:DB$ Repeat | RepeatSubAbility$ DBExileCleanup | RepeatCheckSVar$ X | RepeatSVarCompare$ LTY | SubAbility$ DBCleanup
 SVar:DBExileCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBExile
 SVar:DBExile:DB$ Dig | Defined$ TriggeredTarget | DigNum$ 4 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

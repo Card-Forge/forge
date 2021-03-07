@@ -5,9 +5,9 @@ PT:3/3
 K:Partner:Regna, the Redeemer:Regna
 # TODO: AILogic$ DoSacrifice is a placeholder which signals AiCostDecision that the API knows how to properly determine
 # the number of creatures to sacrifice. Currently DrawAi doesn't handle it too optimally and this can be improved.
-A:AB$ Draw | Cost$ B Sac<X/Creature/creatures> | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | References$ X | SubAbility$ DBGainLife | AILogic$ DoSacrifice | SpellDescription$ Target player draws X cards and gains X life. Put X +1/+1 counters on CARDNAME.
-SVar:DBGainLife:DB$ GainLife | Defined$ Targeted | LifeAmount$ X | SubAbility$ DBPutCounter | References$ X
-SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | References$ X
+A:AB$ Draw | Cost$ B Sac<X/Creature/creatures> | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBGainLife | AILogic$ DoSacrifice | SpellDescription$ Target player draws X cards and gains X life. Put X +1/+1 counters on CARDNAME.
+SVar:DBGainLife:DB$ GainLife | Defined$ Targeted | LifeAmount$ X | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
 SVar:X:Count$xPaid
 DeckHints:Name$Regna, the Redeemer
 Oracle:Partner with Regna, the Redeemer (When this creature enters the battlefield, target player may put Regna into their hand from their library, then shuffle.)\n{B}, Sacrifice X creatures: Target player draws X cards and gains X life. Put X +1/+1 counters on Krav, the Unredeemed.

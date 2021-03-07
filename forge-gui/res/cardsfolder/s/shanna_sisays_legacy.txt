@@ -3,7 +3,7 @@ ManaCost:G W
 Types:Legendary Creature Human Warrior
 PT:0/0
 S:Mode$ CantTarget | ValidCard$ Card.Self | ValidSource$ Card | ValidSA$ Activated,Triggered | Activator$ Player.Opponent | Description$ CARDNAME can't be the target of abilities your opponents control.
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +1/+1 for each creature you control.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each creature you control.
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shanna_sisays_legacy.jpg

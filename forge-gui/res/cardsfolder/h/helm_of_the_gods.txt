@@ -2,7 +2,7 @@ Name:Helm of the Gods
 ManaCost:1
 Types:Artifact Equipment
 K:Equip:1
-S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | References$ X | Description$ Equipped creature gets +1/+1 for each enchantment you control.
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each enchantment you control.
 SVar:X:Count$Valid Enchantment.YouCtrl
 SVar:BuffedBy:Enchantment
 AI:RemoveDeck:Random

@@ -2,7 +2,7 @@ Name:Anticognition
 ManaCost:1 U
 Types:Instant
 A:SP$ Pump | Cost$ 1 U | IsCurse$ True | TargetType$ Spell | TgtZone$ Stack | TgtPrompt$ Select target creature or planeswalker spell | ValidTgts$ Creature,Planeswalker | SubAbility$ DBBranch | StackDescription$ SpellDescription | SpellDescription$ Counter target creature or planeswalker spell unless its controller pays {2}. If an opponent has eight or more cards in their graveyard, instead counter that spell, then scry 2.
-SVar:DBBranch:DB$ Branch | References$ X | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE8 | TrueSubAbility$ CounterScry | FalseSubAbility$ CounterUnless | StackDescription$ None
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE8 | TrueSubAbility$ CounterScry | FalseSubAbility$ CounterUnless | StackDescription$ None
 SVar:CounterUnless:DB$ Counter | Defined$ Targeted | UnlessCost$ 2
 SVar:CounterScry:DB$ Counter | Defined$ Targeted | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 2

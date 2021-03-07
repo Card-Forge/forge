@@ -1,7 +1,7 @@
 Name:Serene Sunset
 ManaCost:X G
 Types:Instant
-A:SP$ Pump | Cost$ X G | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | TargetMin$ X | TargetMax$ X | KW$ Prevent all combat damage that would be dealt by CARDNAME. | IsCurse$ True | References$ X | StackDescription$ Prevent all combat damage {c:Targeted} would deal this turn. | SpellDescription$ Prevent all combat damage X target creatures would deal this turn.
+A:SP$ Pump | Cost$ X G | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | TargetMin$ X | TargetMax$ X | KW$ Prevent all combat damage that would be dealt by CARDNAME. | IsCurse$ True | StackDescription$ Prevent all combat damage {c:Targeted} would deal this turn. | SpellDescription$ Prevent all combat damage X target creatures would deal this turn.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:Prevent all combat damage X target creatures would deal this turn.

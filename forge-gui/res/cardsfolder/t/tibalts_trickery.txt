@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Instant
 A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBRandom | Destination$ Graveyard | RememberCountered$ True | StackDescription$ SpellDescription | SpellDescription$ Counter target spell. Choose 1, 2, or 3 at random. Its controller mills that many cards, then exiles cards from the top of their library until they exile a nonland card with a different name than that spell. They may cast that card without paying its mana cost. Then they put the exiled cards on the bottom of their library in a random order.
 SVar:DBRandom:DB$ ChooseNumber | Min$ 1 | Max$ 3 | Defined$ You | Random$ True | SubAbility$ DBMill | StackDescription$ None
-SVar:DBMill:DB$ Mill | NumCards$ X | References$ X | Defined$ TargetedController | SubAbility$ DBDig | StackDescription$ None
+SVar:DBMill:DB$ Mill | NumCards$ X | Defined$ TargetedController | SubAbility$ DBDig | StackDescription$ None
 SVar:DBDig:DB$ DigUntil | Defined$ TargetedController | Valid$ Card.nonLand+doesNotShareNameWith Remembered | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | ForgetOtherRemembered$ True | ImprintRevealed$ True | SubAbility$ DBPlay | StackDescription$ None
 SVar:DBPlay:DB$ Play | Controller$ TargetedController | OptionalDecider$ TargetedController | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | SubAbility$ DBChangeZone | StackDescription$ None
 SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Card.IsImprinted | Origin$ Exile | Destination$ Library | RandomOrder$ True | LibraryPosition$ -1 | SubAbility$ DBCleanup

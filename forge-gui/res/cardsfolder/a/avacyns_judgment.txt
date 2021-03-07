@@ -2,7 +2,7 @@ Name:Avacyn's Judgment
 ManaCost:1 R
 Types:Sorcery
 K:Madness:X R
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to distribute damage to | NumDmg$ Y | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ Y | References$ X,Y,MaxTgts | SpellDescription$ CARDNAME deals 2 damage divided as you choose among any number of targets. If CARDNAME's madness cost was paid, it deals X damage instead.
+A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to distribute damage to | NumDmg$ Y | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ Y | SpellDescription$ CARDNAME deals 2 damage divided as you choose among any number of targets. If CARDNAME's madness cost was paid, it deals X damage instead.
 SVar:MaxTgts:PlayerCountPlayers$Amount/Plus.NumCreatures
 SVar:NumCreatures:Count$Valid Creature,Planeswalker
 SVar:Y:Count$Madness.X.2

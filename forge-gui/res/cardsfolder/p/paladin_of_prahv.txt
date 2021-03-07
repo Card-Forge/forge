@@ -3,7 +3,7 @@ ManaCost:4 W W
 Types:Creature Human Knight
 PT:3/4
 T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
-SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 A:AB$ Effect | Cost$ 1 W Reveal<1/CARDNAME> | Name$ Paladin of Prahv Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature | Triggers$ TrigDamage | SVars$ TrigGain,X | RememberObjects$ Targeted | Forecast$ True | SpellDescription$ Whenever target creature deals damage this turn, you gain that much life. (Activate this ability only during your upkeep and only once each turn.)
 SVar:TrigDamage:Mode$ DamageDealtOnce | ValidSource$ Creature.IsRemembered | Execute$ TrigGain | TriggerDescription$ Whenever the targeted creature deals damage, you gain that much life.

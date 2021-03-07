@@ -2,8 +2,8 @@ Name:Fascination
 ManaCost:X U U
 Types:Sorcery
 A:SP$ Charm | Cost$ X U U | Choices$ DBDraw,DBMill
-SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ X | References$ X | SpellDescription$ Each player draws X cards.
-SVar:DBMill:DB$ Mill | Defined$ Player | NumCards$ X | References$ X | SpellDescription$ Each player mills X cards.
+SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ X | SpellDescription$ Each player draws X cards.
+SVar:DBMill:DB$ Mill | Defined$ Player | NumCards$ X | SpellDescription$ Each player mills X cards.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:Choose one —\n• Each player draws X cards.\n• Each player mills X cards.

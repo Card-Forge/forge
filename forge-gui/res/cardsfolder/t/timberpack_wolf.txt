@@ -2,7 +2,7 @@ Name:Timberpack Wolf
 ManaCost:1 G
 Types:Creature Wolf
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +1/+1 for each other creature you control named CARDNAME.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each other creature you control named CARDNAME.
 SVar:X:Count$Valid Creature.namedTimberpack Wolf+YouCtrl/Minus.1
 SVar:BuffedBy:Creature.namedTimberpack Wolf
 DeckHints:Name$Timberpack Wolf

@@ -15,7 +15,7 @@ ManaCost:no cost
 Colors:white
 Types:Creature Human Cleric
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a 1/1 white and black Human Cleric creature token.
 SVar:TrigToken:DB$Token | TokenScript$ wb_1_1_human_cleric | LegacyImage$ wb 1 1 human cleric soi | TokenOwner$ You | TokenAmount$ 1 

@@ -5,7 +5,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigSacrifice | Secondary$ True | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, sacrifice all Dragons you control. Then return the exiled cards to the battlefield under your control.
 SVar:TrigExile:DB$ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | ChangeType$ Creature.YouCtrl | SubAbility$ DBToken
 SVar:TrigSacrifice:DB$SacrificeAll | ValidCards$ Dragon.YouCtrl | SubAbility$ DBReturn
-SVar:DBToken:DB$Token | TokenAmount$ X | TokenScript$ r_5_5_dragon_flying | TokenOwner$ You | LegacyImage$ r 5 5 dragon flying scg | References$ X
+SVar:DBToken:DB$Token | TokenAmount$ X | TokenScript$ r_5_5_dragon_flying | TokenOwner$ You | LegacyImage$ r 5 5 dragon flying scg
 SVar:DBReturn:DB$ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_the_dragons.jpg

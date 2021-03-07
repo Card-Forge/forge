@@ -1,7 +1,7 @@
 Name:Burden of Greed
 ManaCost:3 B
 Types:Instant
-A:SP$ LoseLife | Cost$ 3 B | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | References$ X | SpellDescription$ Target player loses 1 life for each tapped artifact they control.
+A:SP$ LoseLife | Cost$ 3 B | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | SpellDescription$ Target player loses 1 life for each tapped artifact they control.
 SVar:X:TargetedPlayer$Valid Artifact.tapped+YouCtrl
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burden_of_greed.jpg

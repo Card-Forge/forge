@@ -5,7 +5,7 @@ PT:1/1
 K:Flying
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on it for each creature in your party.
-SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterNum$ X | CounterType$ P1P1 | References$ X
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterNum$ X | CounterType$ P1P1
 SVar:X:Count$Party
 DeckHas:Ability$Party & Ability$Counters
 SVar:BuffedBy:Cleric,Rogue,Wizard

@@ -2,7 +2,7 @@ Name:Increasing Confusion
 ManaCost:X U
 Types:Sorcery
 K:Flashback:X U
-A:SP$ Mill | Cost$ X U | NumCards$ Z | ValidTgts$ Player | TgtPrompt$ Choose a player | References$ X,Y,Z | SpellDescription$ Target player mills X cards. If this spell was cast from a graveyard, that player puts twice as many cards into their graveyard instead.
+A:SP$ Mill | Cost$ X U | NumCards$ Z | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills X cards. If this spell was cast from a graveyard, that player puts twice as many cards into their graveyard instead.
 SVar:Z:SVar$X/Times.Y
 SVar:X:Count$xPaid
 SVar:Y:wasCastFromGraveyard.2.1

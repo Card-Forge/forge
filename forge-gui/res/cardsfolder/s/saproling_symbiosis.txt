@@ -2,7 +2,7 @@ Name:Saproling Symbiosis
 ManaCost:3 G
 Types:Sorcery
 K:MayFlashCost:2
-A:SP$ Token | Cost$ 3 G | TokenAmount$ X | References$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling inv | SpellDescription$ Create a 1/1 green Saproling creature token for each creature you control.
+A:SP$ Token | Cost$ 3 G | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling inv | SpellDescription$ Create a 1/1 green Saproling creature token for each creature you control.
 SVar:X:Count$Valid Creature.YouCtrl
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saproling_symbiosis.jpg

@@ -2,7 +2,7 @@ Name:Embercleave
 ManaCost:4 R R
 Types:Legendary Artifact Equipment
 K:Flash
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each attacking creature you control.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each attacking creature you control.
 SVar:X:Count$Valid Creature.attacking+YouCtrl
 SVar:BuffedBy:Creature.attacking
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters the battlefield, attach it to target creature you control.

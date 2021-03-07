@@ -3,7 +3,7 @@ ManaCost:2 R R
 Types:Enchantment
 K:Cumulative upkeep:1
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ MagmaticDamage | TriggerDescription$ At the beginning of your end step, CARDNAME deals X damage divided as you choose among any number of target creatures, where X is the number of age counters on it.
-SVar:MagmaticDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ CoreStrength | TargetMin$ Min | TargetMax$ CoreStrength | References$ Min,CoreStrength | DividedAsYouChoose$ CoreStrength
+SVar:MagmaticDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ CoreStrength | TargetMin$ Min | TargetMax$ CoreStrength | DividedAsYouChoose$ CoreStrength
 SVar:CoreStrength:Count$CardCounters.AGE
 SVar:Min:SVar$CoreStrength/LimitMax.1
 AI:RemoveDeck:Random

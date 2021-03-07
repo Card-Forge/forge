@@ -2,7 +2,7 @@ Name:Noetic Scales
 ManaCost:4
 Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ At the beginning of each player's upkeep, return to its owner's hand each creature that player controls with power greater than the number of cards in their hand.
-SVar:TrigBounce:DB$ ChangeZoneAll | ChangeType$ Creature.ActivePlayerCtrl+powerGTX | Origin$ Battlefield | Destination$ Hand | References$ X
+SVar:TrigBounce:DB$ ChangeZoneAll | ChangeType$ Creature.ActivePlayerCtrl+powerGTX | Origin$ Battlefield | Destination$ Hand
 SVar:X:Count$ValidHand Card.ActivePlayerCtrl
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True

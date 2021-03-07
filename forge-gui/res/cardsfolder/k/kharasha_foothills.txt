@@ -9,9 +9,9 @@ SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ Tr
 SVar:TrigExile:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Exile
 
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, you may sacrifice any number of creatures. If you do, CARDNAME deals that much damage to target creature.
-SVar:RolledChaos:DB$ Sacrifice | Defined$ You | Amount$ SacX | References$ SacX | SacValid$ Creature | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDmg
+SVar:RolledChaos:DB$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Creature | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDmg
 SVar:SacX:Count$Valid Creature.YouCtrl
-SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ DmgX | References$ DmgX | SubAbility$ DBCleanup
+SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ DmgX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:DmgX:Remembered$Amount
 Oracle:Whenever a creature you control attacks a player, for each other opponent, you may create a token that's a copy of that creature, tapped and attacking that opponent. Exile those tokens at the beginning of the next end step.\nWhenever you roll {CHAOS}, you may sacrifice any number of creatures. If you do, Kharasha Foothills deals that much damage to target creature.

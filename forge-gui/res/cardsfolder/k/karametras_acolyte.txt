@@ -2,7 +2,7 @@ Name:Karametra's Acolyte
 ManaCost:3 G
 Types:Creature Human Druid
 PT:1/4
-A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescription$ Add an amount of {G} equal to your devotion to green. (Each {G} in the mana costs of permanents you control counts towards your devotion to green.)
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add an amount of {G} equal to your devotion to green. (Each {G} in the mana costs of permanents you control counts towards your devotion to green.)
 SVar:X:Count$Devotion.Green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karametras_acolyte.jpg
 Oracle:{T}: Add an amount of {G} equal to your devotion to green. (Each {G} in the mana costs of permanents you control counts toward your devotion to green.)

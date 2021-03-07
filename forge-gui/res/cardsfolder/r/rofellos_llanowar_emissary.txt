@@ -2,7 +2,7 @@ Name:Rofellos, Llanowar Emissary
 ManaCost:G G
 Types:Legendary Creature Elf Druid
 PT:2/1
-A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescription$ Add {G} for each Forest you control.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add {G} for each Forest you control.
 SVar:X:Count$Valid Forest.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rofellos_llanowar_emissary.jpg
 Oracle:{T}: Add {G} for each Forest you control.

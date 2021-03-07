@@ -2,7 +2,7 @@ Name:Worldknit
 ManaCost:no cost
 Types:Conspiracy
 T:Mode$ NewGame | TriggerZones$ Command | Execute$ TrigWorldknit | Static$ True | TriggerDescription$ As long as every card in your card pool started the game in your library or in the command zone, lands you control have "{T}: Add one mana of any color."
-SVar:TrigWorldknit:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 1 | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ0 | References$ Y
+SVar:TrigWorldknit:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 1 | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ0
 S:Mode$ Continuous | Affected$ Land.YouCtrl | EffectZone$ Command | CheckSVar$ X | AddAbility$ AnyMana | Description$ Lands you control have "{T}: Add one mana of any one color."
 SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any one color.
 SVar:X:Number$0

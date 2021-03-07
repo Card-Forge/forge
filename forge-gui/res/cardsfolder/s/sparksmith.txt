@@ -2,8 +2,8 @@ Name:Sparksmith
 ManaCost:1 R
 Types:Creature Goblin
 PT:1/1
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals X damage to target creature and X damage to you, where X is the number of Goblins on the battlefield.
-SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ X | References$ X
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals X damage to target creature and X damage to you, where X is the number of Goblins on the battlefield.
+SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ X
 SVar:X:Count$TypeOnBattlefield.Goblin
 AI:RemoveDeck:Random
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39476.jpg

@@ -4,9 +4,9 @@ Types:Instant
 K:Entwine:1 W
 A:SP$ Charm | Cost$ 4 W | Choices$ DBPumpAll,DBAnimateAll | CharmNum$ 1
 SVar:DBPumpAll:DB$ PumpAll | NumAtt$ 2 | NumDef$ 2 | ValidCards$ Creature.YouCtrl | SpellDescription$ Creatures you control get +2/+2 until end of turn.
-SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Creature.YouCtrl | Triggers$ TrigPrideDamage | sVars$ GainLife,GainLifeX | References$ GainLife,GainLifeX | SpellDescription$ Until end of turn, creatures you control gain "Whenever this creature deals damage, you gain that much life."
+SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Creature.YouCtrl | Triggers$ TrigPrideDamage | sVars$ GainLife,GainLifeX | SpellDescription$ Until end of turn, creatures you control gain "Whenever this creature deals damage, you gain that much life."
 SVar:TrigPrideDamage:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ GainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
-SVar:GainLife:DB$ GainLife | LifeAmount$ GainLifeX | References$ GainLifeX
+SVar:GainLife:DB$ GainLife | LifeAmount$ GainLifeX
 SVar:GainLifeX:TriggerCount$DamageAmount
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stir_the_pride.jpg

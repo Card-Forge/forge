@@ -5,7 +5,7 @@ PT:2/4
 K:Transmute:1 B B
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEachOpp | TriggerDescription$ When CARDNAME enters the battlefield, each opponent loses 1 life for each creature they control.
 SVar:TrigEachOpp:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TrigLoseLife
-SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X | References$ X | SubAbility$ DBCleanup
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Creature.RememberedPlayerCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/netherborn_phalanx.jpg

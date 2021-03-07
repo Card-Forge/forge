@@ -5,7 +5,7 @@ PT:*/*
 K:ETBReplacement:Other:TrigTurnFaceDown
 SVar:TrigTurnFaceDown:DB$ RepeatEach | RepeatCards$ Creature.nonToken+Other+faceUp | Zone$ Battlefield | RepeatSubAbility$ DBState | SpellDescription$ As CARDNAME enters the battlefield, turn all other nontoken creatures face down. (They're 2/2 creatures.)
 SVar:DBState:DB$ SetState | Defined$ Remembered | Mode$ TurnFace | SpellDescription$ turn all other nontoken creatures face down. (They're 2/2 creatures.)
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of face-down creatures on the battlefield.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of face-down creatures on the battlefield.
 SVar:X:Count$Valid Creature.faceDown
 SVar:NeedsToPlay:Creature.OppCtrl+nonToken
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ixidron.jpg

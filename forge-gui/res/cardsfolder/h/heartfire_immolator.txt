@@ -3,6 +3,6 @@ ManaCost:1 R
 Types:Creature Human Wizard
 PT:2/2
 K:Prowess
-A:AB$ DealDamage | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to its power to target creature or planeswalker.
+A:AB$ DealDamage | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to its power to target creature or planeswalker.
 SVar:X:Count$CardPower
 Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\n{R}, Sacrifice Heartfire Immolator: It deals damage equal to its power to target creature or planeswalker.

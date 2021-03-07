@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ DamageDoneOnce | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever enchanted creature is dealt damage, it deals that much damage to its controller.
-SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredTargetController | NumDmg$ X | References$ X | DamageSource$ TriggeredTarget
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredTargetController | NumDmg$ X | DamageSource$ TriggeredTarget
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiteful_shadows.jpg
 Oracle:Enchant creature\nWhenever enchanted creature is dealt damage, it deals that much damage to its controller.

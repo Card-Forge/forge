@@ -4,7 +4,7 @@ Types:Creature Viashino Wizard
 PT:3/3
 K:Trample
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | IsPresent$ Planeswalker.Ral+YouCtrl | TriggerDescription$ Whenever CARDNAME attacks, if you control a Ral planeswalker, CARDNAME gets +1/+0 for each card in your hand until end of turn.
-SVar:TrigPump:DB$ Pump | NumAtt$ X | References$ X
+SVar:TrigPump:DB$ Pump | NumAtt$ X
 SVar:X:Count$InYourHand
 SVar:BuffedBy:Ral
 DeckNeeds:Type$Ral

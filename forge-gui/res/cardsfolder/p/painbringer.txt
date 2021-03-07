@@ -2,7 +2,7 @@ Name:Painbringer
 ManaCost:2 B B
 Types:Creature Human Minion
 PT:1/1
-A:AB$ Pump | Cost$ T ExileFromGrave<X/Card.YouCtrl> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | References$ X | CostDesc$ {T}, Exile any number of cards from your graveyard: | SpellDescription$ Target creature gets -X/-X until end of turn, where X is the number of cards exiled this way.
+A:AB$ Pump | Cost$ T ExileFromGrave<X/Card.YouCtrl> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | CostDesc$ {T}, Exile any number of cards from your graveyard: | SpellDescription$ Target creature gets -X/-X until end of turn, where X is the number of cards exiled this way.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:{T}, Exile any number of cards from your graveyard: Target creature gets -X/-X until end of turn, where X is the number of cards exiled this way.

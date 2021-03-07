@@ -2,7 +2,7 @@ Name:Entrapment Maneuver
 ManaCost:3 W
 Types:Instant
 A:SP$ Sacrifice | Cost$ 3 W | ValidTgts$ Player | SacValid$ Creature.attacking | SacMessage$ attacking creature | RememberSacrificed$ True | SubAbility$ DBToken | SpellDescription$ Target player sacrifices an attacking creature. You create X 1/1 white Soldier creature tokens, where X is that creature's toughness.
-SVar:DBToken:DB$ Token | TokenAmount$ X | References$ X | TokenScript$ w_1_1_soldier | TokenOwner$ You | LegacyImage$ w 1 1 soldier c16 | SubAbility$ DBCleanup
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwner$ You | LegacyImage$ w 1 1 soldier c16 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardToughness
 DeckHas:Ability$Token

@@ -2,8 +2,8 @@ Name:Which of You Burns Brightest?
 ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DarkEffect | TriggerZones$ Command | OptionalDecider$ You | TriggerDescription$ When you set this scheme in motion, you may pay {X}. If you do, this scheme deals X damage to target opponent or planeswalker and each creature that player or that planeswalker's controller controls.
-SVar:DarkEffect:AB$ DealDamage | Cost$ X | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select an opponent or planeswalker | NumDmg$ X | References$ X | SubAbility$ DmgAll | DamageMap$ True
-SVar:DmgAll:DB$ DamageAll | NumDmg$ X | References$ X | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve
+SVar:DarkEffect:AB$ DealDamage | Cost$ X | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select an opponent or planeswalker | NumDmg$ X | SubAbility$ DmgAll | DamageMap$ True
+SVar:DmgAll:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:X:Count$xPaid
 SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/Which of You Burns Brightest.full.jpg

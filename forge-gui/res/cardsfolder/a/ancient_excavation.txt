@@ -1,8 +1,8 @@
 Name:Ancient Excavation
 ManaCost:2 U B
 Types:Instant
-A:SP$ Draw | Cost$ 2 U B | NumCards$ X | SubAbility$ DBDiscard | References$ X | RememberDrawn$ True | SpellDescription$ Draw cards equal to the number of cards in your hand, then discard a card for each card drawn this way.
-SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ Y | References$ Y | SubAbility$ DBCleanup
+A:SP$ Draw | Cost$ 2 U B | NumCards$ X | SubAbility$ DBDiscard | RememberDrawn$ True | SpellDescription$ Draw cards equal to the number of cards in your hand, then discard a card for each card drawn this way.
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$InYourHand
 SVar:Y:Remembered$Amount

@@ -2,7 +2,7 @@ Name:Imp's Mischief
 ManaCost:1 B
 Types:Instant
 A:SP$ ChangeTargets | Cost$ 1 B | TargetType$ Spell | ValidTgts$ Card | TargetsSingleTarget$ True | RememberTargetedCard$ True | SubAbility$ DBLoseLife | SpellDescription$ Change the target of target spell with a single target. You lose life equal to that spell's converted mana cost.
-SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 AI:RemoveDeck:All

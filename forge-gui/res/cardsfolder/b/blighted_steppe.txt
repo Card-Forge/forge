@@ -2,7 +2,7 @@ Name:Blighted Steppe
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ GainLife | Cost$ 3 W T Sac<1/CARDNAME> | Defined$ You | LifeAmount$ X | References$ X | SpellDescription$ You Gain 2 life for each creature you control.
+A:AB$ GainLife | Cost$ 3 W T Sac<1/CARDNAME> | Defined$ You | LifeAmount$ X | SpellDescription$ You Gain 2 life for each creature you control.
 SVar:X:Count$TypeYouCtrl.Creature/Times.2
 DeckHas:Ability$Mana.Colorless
 DeckNeeds:Color$White

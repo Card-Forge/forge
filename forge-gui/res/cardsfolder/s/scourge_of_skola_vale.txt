@@ -4,7 +4,7 @@ Types:Creature Hydra
 PT:0/0
 K:etbCounter:P1P1:2
 K:Trample
-A:AB$ PutCounter | Cost$ T Sac<1/Creature.Other/another creature> | CounterType$ P1P1 | CounterNum$ X | References$ X | SpellDescription$ Put a number of +1/+1 counters on CARDNAME equal to the sacrificed creature's toughness.
+A:AB$ PutCounter | Cost$ T Sac<1/Creature.Other/another creature> | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Put a number of +1/+1 counters on CARDNAME equal to the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_of_skola_vale.jpg

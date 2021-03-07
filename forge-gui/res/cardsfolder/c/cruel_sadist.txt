@@ -3,7 +3,7 @@ ManaCost:B
 Types:Creature Human Assassin
 PT:1/1
 A:AB$ PutCounter | Cost$ B T PayLife<1> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
-A:AB$ DealDamage | Cost$ 2 B T SubCounter<X/P1P1> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature.
+A:AB$ DealDamage | Cost$ 2 B T SubCounter<X/P1P1> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:{B}, {T}, Pay 1 life: Put a +1/+1 counter on Cruel Sadist.\n{2}{B}, {T}, Remove X +1/+1 counters from Cruel Sadist: It deals X damage to target creature.

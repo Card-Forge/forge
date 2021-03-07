@@ -4,7 +4,7 @@ Types:Creature Sphinx
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw cards equal to the number of opponents you have.
-SVar:TrigDraw:DB$ Draw | NumCards$ X | References$ X
+SVar:TrigDraw:DB$ Draw | NumCards$ X
 A:AB$ Token | Cost$ 3 U | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | LegacyImage$ c 1 1 a thopter flying gnt | SpellDescription$ Create a 1/1 colorless Thopter artifact creature token with flying.
 SVar:X:PlayerCountOpponents$Amount
 Oracle:Flying\nWhen Inspired Sphinx enters the battlefield, draw cards equal to the number of opponents you have.\n{3}{U}: Create a 1/1 colorless Thopter artifact creature token with flying.

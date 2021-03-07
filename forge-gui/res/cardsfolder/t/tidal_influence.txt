@@ -2,7 +2,7 @@ Name:Tidal Influence
 ManaCost:2 U
 Types:Enchantment
 K:etbCounter:TIDE:1
-S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | References$ X | Description$ Cast CARDNAME only if no permanents named Tidal Influence are on the battlefield.
+S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | Description$ Cast CARDNAME only if no permanents named Tidal Influence are on the battlefield.
 SVar:X:Count$Valid Permanent.namedTidal Influence
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBPutCounter | TriggerDescription$ At the beginning of your upkeep, put a tide counter on CARDNAME.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ TIDE | CounterNum$ 1

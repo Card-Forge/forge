@@ -2,7 +2,7 @@ Name:Engineered Explosives
 ManaCost:X
 Types:Artifact
 K:Sunburst
-A:AB$ DestroyAll | Cost$ 2 Sac<1/CARDNAME> | ValidCards$ Permanent.nonLand+cmcEQY | References$ Y | SpellDescription$ Destroy each nonland permanent with converted mana cost equal to the number of charge counters on CARDNAME.
+A:AB$ DestroyAll | Cost$ 2 Sac<1/CARDNAME> | ValidCards$ Permanent.nonLand+cmcEQY | SpellDescription$ Destroy each nonland permanent with converted mana cost equal to the number of charge counters on CARDNAME.
 SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.CHARGE
 SVar:NonStackingEffect:True

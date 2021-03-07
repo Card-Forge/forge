@@ -2,8 +2,8 @@ Name:Stormwing Entity
 ManaCost:3 U U
 Types:Creature Elemental
 PT:3/3
-S:Mode$ ReduceCost | ValidCard$ Card.Self | EffectZone$ All | Type$ Spell | Amount$ 2 | CheckSVar$ X | SVarCompare$ GE1 | References$ X | Description$ CARDNAME costs {2}{U} less to cast if you've cast an instant or sorcery spell this turn.
-S:Mode$ ReduceCost | ValidCard$ Card.Self | EffectZone$ All | Type$ Spell | Amount$ 1 | Color$ U | CheckSVar$ X | SVarCompare$ GE1 | References$ X | Secondary$ True | Description$ CARDNAME costs {2}{U} less to cast if you've cast an instant or sorcery spell this turn.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | EffectZone$ All | Type$ Spell | Amount$ 2 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME costs {2}{U} less to cast if you've cast an instant or sorcery spell this turn.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | EffectZone$ All | Type$ Spell | Amount$ 1 | Color$ U | CheckSVar$ X | SVarCompare$ GE1 | Secondary$ True | Description$ CARDNAME costs {2}{U} less to cast if you've cast an instant or sorcery spell this turn.
 SVar:X:Count$ThisTurnCast_Instant.YouOwn,Sorcery.YouOwn
 DeckHints:Type$Instant|Sorcery
 K:Flying

@@ -2,9 +2,9 @@ Name:Song of Blood
 ManaCost:1 R
 Types:Sorcery
 A:SP$ Mill | Cost$ 1 R | NumCards$ 4 | Defined$ You | RememberMilled$ True | SubAbility$ DBEffect | SpellDescription$ Mill four cards. Whenever a creature attacks this turn, it gets +1/+0 until end of turn for each creature card put into your graveyard this way.
-SVar:DBEffect:DB$ Effect | Name$ Song of Blood Effect | Triggers$ TrigAttacks | SVars$ Pump,X | References$ X | RememberObjects$ Remembered
+SVar:DBEffect:DB$ Effect | Name$ Song of Blood Effect | Triggers$ TrigAttacks | SVars$ Pump,X | RememberObjects$ Remembered
 SVar:TrigAttacks:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Execute$ Pump | TriggerDescription$ Whenever a creature attacks this turn, it gets +1/+0 until end of turn for each creature card put into your graveyard this way.
-SVar:Pump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +X | References$ X
+SVar:Pump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +X
 SVar:X:Remembered$Valid Creature
 AI:RemoveDeck:All
 Oracle:Mill four cards. Whenever a creature attacks this turn, it gets +1/+0 until end of turn for each creature card put into your graveyard this way.

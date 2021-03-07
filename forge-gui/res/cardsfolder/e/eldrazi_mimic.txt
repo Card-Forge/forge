@@ -3,7 +3,7 @@ ManaCost:2
 Types:Creature Eldrazi
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+Colorless+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigAnimate | TriggerDescription$ Whenever another colorless creature enters the battlefield under your control, you may change CARDNAME's base power and toughness to that creature's power and toughness until end of turn.
-SVar:TrigAnimate:DB$ Animate | Power$ X | Toughness$ Y | References$ X,Y
+SVar:TrigAnimate:DB$ Animate | Power$ X | Toughness$ Y
 SVar:X:TriggeredCard$CardPower
 SVar:Y:TriggeredCard$CardToughness
 SVar:BuffedBy:Creature.Colorless

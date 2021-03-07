@@ -2,7 +2,7 @@ Name:Kyren Toy
 ManaCost:3
 Types:Artifact
 A:AB$ PutCounter | Cost$ 1 T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
-A:AB$ Mana | Cost$ T SubCounter<X/CHARGE> | Produced$ C | Amount$ Y | References$ X,Y | AILogic$ ManaRitualBattery.1 | SpellDescription$ Add an amount of {C} equal to X plus one.
+A:AB$ Mana | Cost$ T SubCounter<X/CHARGE> | Produced$ C | Amount$ Y,Y | AILogic$ ManaRitualBattery.1 | SpellDescription$ Add an amount of {C} equal to X plus one.
 SVar:Y:SVar$X/Plus.1
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random

@@ -1,7 +1,7 @@
 Name:Fresh Meat
 ManaCost:3 G
 Types:Instant
-A:SP$ Token | Cost$ 3 G | TokenAmount$ X | TokenOwner$ You | TokenScript$ g_3_3_beast | LegacyImage$ g 3 3 beast nph | References$ X | SpellDescription$ Create a 3/3 green Beast creature token for each creature put into your graveyard from the battlefield this turn.
+A:SP$ Token | Cost$ 3 G | TokenAmount$ X | TokenOwner$ You | TokenScript$ g_3_3_beast | LegacyImage$ g 3 3 beast nph | SpellDescription$ Create a 3/3 green Beast creature token for each creature put into your graveyard from the battlefield this turn.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fresh_meat.jpg

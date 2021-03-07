@@ -252,12 +252,6 @@ public final class AbilityFactory {
         // *********************************************
         // set universal properties of the SpellAbility
 
-        if (mapParams.containsKey("References")) {
-            for (String svar : mapParams.get("References").split(",")) {
-                spellAbility.setSVar(svar, sVarHolder.getSVar(svar));
-            }
-        }
-
         if ((api == ApiType.DelayedTrigger || api == ApiType.ImmediateTrigger) && mapParams.containsKey("Execute")) {
             spellAbility.setSVar(mapParams.get("Execute"), sVarHolder.getSVar(mapParams.get("Execute")));
         }

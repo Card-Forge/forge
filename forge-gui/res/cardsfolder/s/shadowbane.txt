@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ ChooseSource | Cost$ 1 W | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Prevent all damage to you or a creature you control from any one source. If that source is black, gain 1 life for each 1 damage prevented in this way.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RepDmg | SVars$ GainLifeYou,RepDmg,X,Y | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem | ConditionCompare$ GE1
 SVar:RepDmg:Event$ DamageDone | ValidTarget$ You,Creature.YouCtrl | ValidSource$ Card.ChosenCard,Emblem.ChosenCard | ReplaceWith$ GainLifeYou | PreventionEffect$ True | Description$ Prevent all damage to you or a creature you control from any one source. If that source is black, gain 1 life for each 1 damage prevented in this way.
-SVar:GainLifeYou:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X,Y | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1
+SVar:GainLifeYou:DB$ GainLife | Defined$ You | LifeAmount$ X | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:X:ReplaceCount$DamageAmount
 SVar:Y:ReplacedSource$Valid Card.BlackSource

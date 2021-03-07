@@ -1,8 +1,8 @@
 Name:Street Spasm
 ManaCost:X R
 Types:Instant
-A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature.withoutFlying+YouDontCtrl | TgtPrompt$ Select target creature without flying you don't control. | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature without flying you don't control.
-A:SP$ DamageAll | Cost$ X X R R | ValidCards$ Creature.withoutFlying+YouDontCtrl | ValidDescription$ each creature without flying you don't control. | NumDmg$ X | References$ X | PrecostDesc$ Overload | CostDesc$ {X}{X}{R}{R} | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
+A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature.withoutFlying+YouDontCtrl | TgtPrompt$ Select target creature without flying you don't control. | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature without flying you don't control.
+A:SP$ DamageAll | Cost$ X X R R | ValidCards$ Creature.withoutFlying+YouDontCtrl | ValidDescription$ each creature without flying you don't control. | NumDmg$ X | PrecostDesc$ Overload | CostDesc$ {X}{X}{R}{R} | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/street_spasm.jpg
 Oracle:Street Spasm deals X damage to target creature without flying you don't control.\nOverload {X}{X}{R}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

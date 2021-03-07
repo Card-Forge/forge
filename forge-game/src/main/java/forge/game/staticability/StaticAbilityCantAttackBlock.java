@@ -149,17 +149,11 @@ public class StaticAbilityCantAttackBlock {
             return null;
         }
         String costString = stAb.getParam("Cost");
-        if ("X".equals(costString)) {
-            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X")));
-        } else if ("Y".equals(costString)) {
-            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y")));
-        } else if (stAb.hasParam("References")) {
-            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar(stAb.getParam("References"))));
+        if (stAb.hasSVar(costString)) {
+            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, stAb.getSVar(costString)));
         }
 
-        final Cost cost = new Cost(costString, true);
-
-        return cost;
+        return new Cost(costString, true);
     }
 
     /**
@@ -184,17 +178,11 @@ public class StaticAbilityCantAttackBlock {
             return null;
         }
         String costString = stAb.getParam("Cost");
-        if ("X".equals(costString)) {
-            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X")));
-        } else if ("Y".equals(costString)) {
-            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y")));
-        } else if (stAb.hasParam("References")) {
-            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, hostCard.getSVar(stAb.getParam("References"))));
+        if (stAb.hasSVar(costString)) {
+            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, stAb.getSVar(costString)));
         }
 
-        final Cost cost = new Cost(costString, true);
-
-        return cost;
+        return new Cost(costString, true);
     }
 
     public static boolean applyCanAttackHasteAbility(final StaticAbility stAb, final Card card, final GameEntity target) {

@@ -6,7 +6,7 @@ K:CantBeBlockedByAmount GT1
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME is dealt damage, put that many +1/+1 counters on CARDNAME.
-SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Y | References$ Y
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Y
 SVar:Y:TriggerCount$DamageAmount
 DeckHas:Ability$Counter
 Oracle:Hungering Hydra enters the battlefield with X +1/+1 counters on it.\nHungering Hydra can't be blocked by more than one creature.\nWhenever Hungering Hydra is dealt damage, put that many +1/+1 counters on it. (It must survive the damage to get the counters.)

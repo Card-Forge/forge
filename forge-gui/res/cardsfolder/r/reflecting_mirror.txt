@@ -1,7 +1,7 @@
 Name:Reflecting Mirror
 ManaCost:4
 Types:Artifact
-A:AB$ ChangeTargets | Cost$ X T | References$ X | TargetType$ Spell | ValidTgts$ Card | TargetValidTargeting$ You | TargetsSingleTarget$ True | TargetRestriction$ Player | SpellDescription$ Change the target of target spell with a single target if that target is you. The new target must be a player. X is twice the converted mana cost of that spell.
+A:AB$ ChangeTargets | Cost$ X T | TargetType$ Spell | ValidTgts$ Card | TargetValidTargeting$ You | TargetsSingleTarget$ True | TargetRestriction$ Player | SpellDescription$ Change the target of target spell with a single target if that target is you. The new target must be a player. X is twice the converted mana cost of that spell.
 AI:RemoveDeck:All
 SVar:X:Targeted$CardManaCost/Twice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reflecting_mirror.jpg

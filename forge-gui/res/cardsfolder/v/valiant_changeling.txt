@@ -2,7 +2,7 @@ Name:Valiant Changeling
 ManaCost:5 W W
 Types:Creature Shapeshifter
 PT:3/3
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature type among creatures you control. This effect can't reduce the amount of mana this spell costs by more than {5}.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature type among creatures you control. This effect can't reduce the amount of mana this spell costs by more than {5}.
 SVar:X:Count$CreatureType Creature.YouCtrl/LimitMax.5
 K:Changeling
 K:Double Strike

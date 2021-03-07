@@ -4,7 +4,7 @@ Types:Creature Dragon
 PT:4/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, CARDNAME deals 1 damage to any target. If that land was a mountain, CARDNAME deals 2 damage instead.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | TgtPrompt$ Select any target | NumDmg$ X | References$ X
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | TgtPrompt$ Select any target | NumDmg$ X
 SVar:X:TriggeredCard$Valid Mountain/Plus.1
 SVar:BuffedBy:Land
 Oracle:Flying\nLandfall — Whenever a land enters the battlefield under your control, Akoum Hellkite deals 1 damage to any target. If that land is a Mountain, Akoum Hellkite deals 2 damage instead.

@@ -13,6 +13,6 @@ Name:Dust
 ManaCost:3 W
 Types:Sorcery
 K:Aftermath
-A:SP$ ChangeZone | Cost$ 3 W | ValidTgts$ Creature.counters_GE1_M1M1 | TgtPrompt$ Select target creature that has a -1/-1 counter on it | TargetMin$ 0 | TargetMax$ MaxTargets | Origin$ Battlefield | Destination$ Exile | References$ MaxTargets | SpellDescription$ Exile any number of target creatures that have -1/-1 counters on them.
+A:SP$ ChangeZone | Cost$ 3 W | ValidTgts$ Creature.counters_GE1_M1M1 | TgtPrompt$ Select target creature that has a -1/-1 counter on it | TargetMin$ 0 | TargetMax$ MaxTargets | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile any number of target creatures that have -1/-1 counters on them.
 SVar:MaxTargets:Count$Valid Creature.counters_GE_M1M1
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nExile any number of target creatures that have -1/-1 counters on them.

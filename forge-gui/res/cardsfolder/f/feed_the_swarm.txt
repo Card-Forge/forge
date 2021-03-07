@@ -2,6 +2,6 @@ Name:Feed the Swarm
 ManaCost:1 B
 Types:Sorcery
 A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.OppCtrl,Enchantment.OppCtrl | TgtPrompt$ Select target creature or enchantment an opponent controls | SubAbility$ DBLoseLife | SpellDescription$ Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's converted mana cost.
-SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X | References$ X
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardManaCost
 Oracle:Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's converted mana cost.

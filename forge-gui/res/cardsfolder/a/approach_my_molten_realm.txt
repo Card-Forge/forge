@@ -4,7 +4,7 @@ Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ MoltenEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, until your next turn, if a source would deal damage, it deals double that damage instead.
 SVar:MoltenEffect:DB$ Effect | Name$ Molten Realm Effect | ReplacementEffects$ MoltenRealm | SVars$ DmgTwice,MoltenX | Duration$ UntilYourNextTurn
 SVar:MoltenRealm:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card,Emblem | ReplaceWith$ DmgTwice | Description$ Until your next turn, if a source would deal damage, it deals double that damage instead.
-SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ MoltenX | References$ MoltenX
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ MoltenX
 SVar:MoltenX:ReplaceCount$DamageAmount/Twice
 SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/Approach My Molten Realm.full.jpg
 Oracle:When you set this scheme in motion, until your next turn, if a source would deal damage, it deals double that damage instead.

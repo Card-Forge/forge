@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Ajani
 Loyalty:4
 A:AB$ PutCounter | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | CounterNum$ 2 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Planeswalker$ True | SpellDescription$ Put two +1/+1 counters on up to one target creature.
 A:AB$ DigUntil | Cost$ AddCounter<1/LOYALTY> | Valid$ Card.Creature | ValidDescription$ creature | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | FoundDestination$ Hand | Planeswalker$ True | SpellDescription$ Reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest on the bottom of your library in a random order.
-A:AB$ PutCounter | Cost$ SubCounter<11/LOYALTY> | Planeswalker$ True | Ultimate$ True | CounterNum$ X | References$ X | CounterType$ P1P1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Put X +1/+1 counters on target creature, where X is your life total. That creature gains trample until end of turn.
+A:AB$ PutCounter | Cost$ SubCounter<11/LOYALTY> | Planeswalker$ True | Ultimate$ True | CounterNum$ X | CounterType$ P1P1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Put X +1/+1 counters on target creature, where X is your life total. That creature gains trample until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample
 SVar:X:Count$YourLifeTotal
 DeckHints:Name$Ajani's Aid

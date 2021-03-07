@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 K:Hideaway
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-A:AB$ Play | Cost$ U T | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ LE20 | ForgetRemembered$ True | References$ X | AILogic$ CheckCondition | SpellDescription$ You may play the exiled card without paying its mana cost if a library has twenty or fewer cards in it.
+A:AB$ Play | Cost$ U T | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ LE20 | ForgetRemembered$ True | AILogic$ CheckCondition | SpellDescription$ You may play the exiled card without paying its mana cost if a library has twenty or fewer cards in it.
 SVar:X:PlayerCountPlayers$LowestValidLibrary Card.YouOwn
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shelldock_isle.jpg

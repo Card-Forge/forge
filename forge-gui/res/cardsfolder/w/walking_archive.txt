@@ -6,7 +6,7 @@ K:etbCounter:P1P1:1
 K:Defender
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's upkeep, that player draws a card for each +1/+1 counter on CARDNAME.
 A:AB$ PutCounter | Cost$ 2 W U | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
-SVar:TrigDraw:DB$ Draw | NumCards$ X | Defined$ TriggeredPlayer | References$ X
+SVar:TrigDraw:DB$ Draw | NumCards$ X | Defined$ TriggeredPlayer
 SVar:X:Count$CardCounters.P1P1
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/walking_archive.jpg

@@ -6,10 +6,10 @@ K:etbCounter:P1P1:X
 A:AB$ PreventDamage | Cost$ R | Defined$ Self | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to CARDNAME this turn.
 A:AB$ PutCounter | Cost$ R R R | ActivationPhases$ Upkeep | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME. Activate this ability only during your upkeep.
 T:Mode$ DamageDone | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ RemoveCtrsTrig | Static$ True
-SVar:RemoveCtrsTrig:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ NumDmgTrig | References$ NumDmgTrig
+SVar:RemoveCtrsTrig:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ NumDmgTrig
 R:Event$ DamageDone | ValidTarget$ Card.Self | ActiveZones$ Battlefield | ReplaceWith$ ReplaceDamage | PreventionEffect$ True | Description$ For each 1 damage that would be dealt to CARDNAME, if it has a +1/+1 counter on it, remove a +1/+1 counter from it and prevent that 1 damage.
-SVar:RemoveCtrsRepl:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ NumDmg | References$ NumDmg
-SVar:ReplaceDamage:DB$ ReplaceEffect | DamageTarget$ Self | VarName$ DamageAmount | VarValue$ Z | References$ Y,Z,NumDmg | ConditionCheckSVar$ Z | ConditionSVarCompare$ GE1 | SubAbility$ RemoveCtrsRepl
+SVar:RemoveCtrsRepl:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ NumDmg
+SVar:ReplaceDamage:DB$ ReplaceEffect | DamageTarget$ Self | VarName$ DamageAmount | VarValue$ Z | ConditionCheckSVar$ Z | ConditionSVarCompare$ GE1 | SubAbility$ RemoveCtrsRepl
 SVar:NumDmg:ReplaceCount$DamageAmount
 SVar:NumDmgTrig:TriggerCount$DamageAmount
 SVar:X:Count$xPaid

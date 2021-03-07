@@ -3,10 +3,10 @@ ManaCost:R R R
 Types:Creature Elemental
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless an opponent was dealt damage this turn.
-SVar:TrigSac:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ WarElementalX | ConditionSVarCompare$ EQ0 | References$ WarElementalX
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ WarElementalX | ConditionSVarCompare$ EQ0
 SVar:WarElementalX:Count$TotalOppDamageThisTurn
 T:Mode$ DamageDoneOnce | ValidSource$ Card | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent is dealt damage, put that many +1/+1 counters on CARDNAME.
-SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ WarElementalY | References$ WarElementalY
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ WarElementalY
 SVar:WarElementalY:TriggerCount$DamageAmount
 SVar:NeedsToPlayVar:WarElementalX GE1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_elemental.jpg

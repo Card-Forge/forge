@@ -4,6 +4,6 @@ Types:Creature Human Knight
 PT:4/3
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has flying.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, you may pay {2}{R}. If you do, creatures you control get +X/+0 until end of turn, where X is the number of opponents you have.
-SVar:TrigPumpAll:AB$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | NumAtt$ +X | References$ X
+SVar:TrigPumpAll:AB$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | NumAtt$ +X
 SVar:X:PlayerCountOpponents$Amount
 Oracle:As long as it's your turn, Embereth Skyblazer has flying.\nWhenever Embereth Skyblazer attacks, you may pay {2}{R}. If you do, creatures you control get +X/+0 until end of turn, where X is the number of opponents you have.

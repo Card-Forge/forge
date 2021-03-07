@@ -2,7 +2,7 @@ Name:Emry, Lurker of the Loch
 ManaCost:2 U
 Types:Legendary Creature Merfolk Wizard
 PT:1/2
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each artifact you control.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each artifact you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 DeckNeeds:Type$Artifact
 DeckHas:Ability$Graveyard

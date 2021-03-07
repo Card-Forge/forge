@@ -2,6 +2,6 @@ Name:Fists of Flame
 ManaCost:1 R
 Types:Instant
 A:SP$ Draw | Cost$ 1 R | NumCards$ 1 | SubAbility$ DBPump | SpellDescription$ Draw a card. Until end of turn, target creature gains trample and gets +1/+0 for each card you've drawn this turn.
-SVar:DBPump:DB$ Pump | ValidTgts$ Creature | KW$ Trample | NumAtt$ +X | References$ X
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | KW$ Trample | NumAtt$ +X
 SVar:X:Count$YouDrewThisTurn
 Oracle:Draw a card. Until end of turn, target creature gains trample and gets +1/+0 for each card you've drawn this turn.

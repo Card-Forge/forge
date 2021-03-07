@@ -2,7 +2,7 @@ Name:Dwarven Priest
 ManaCost:3 W
 Types:Creature Dwarf Cleric
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life for each creature you control.
-SVar:TrigGainLife:DB$ GainLife | Defined$ You | References$ X | LifeAmount$ X
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Creature.YouCtrl
 Oracle:When Dwarven Priest enters the battlefield, you gain 1 life for each creature you control.
 PT:2/4

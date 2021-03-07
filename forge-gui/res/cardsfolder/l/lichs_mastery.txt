@@ -4,10 +4,10 @@ Types:Legendary Enchantment
 K:Hexproof
 S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't lose the game. | Description$ You can't lose the game.
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield |Execute$ TrigDraw | TriggerDescription$ Whenever you gain life, draw that many cards.
-SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:TriggerCount$LifeAmount
 T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever you lose life, for each 1 life you lost, exile a permanent you control or a card from your hand or graveyard.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield,Hand,Graveyard | Destination$ Exile | ChangeType$ Card.YouCtrl | ChangeNum$ X | References$ X | Mandatory$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield,Hand,Graveyard | Destination$ Exile | ChangeType$ Card.YouCtrl | ChangeNum$ X | Mandatory$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigLose | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, you lose the game.
 SVar:TrigLose:DB$ LosesGame | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lichs_mastery.jpg

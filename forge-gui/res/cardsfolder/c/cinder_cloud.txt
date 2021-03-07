@@ -2,7 +2,7 @@ Name:Cinder Cloud
 ManaCost:3 R R
 Types:Instant
 A:SP$ Destroy | Cost$ 3 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberLKI$ True | SubAbility$ DBDamage | SpellDescription$ Destroy target creature. If a white creature dies this way, Cinder Cloud deals damage to that creature's controller equal to the creature's power.
-SVar:DBDamage:DB$ DealDamage | Defined$ RememberedController | NumDmg$ Z | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1 | References$ Y,Z
+SVar:DBDamage:DB$ DealDamage | Defined$ RememberedController | NumDmg$ Z | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1
 SVar:Y:RememberedLKI$Valid Creature.White
 SVar:Z:RememberedLKI$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_cloud.jpg

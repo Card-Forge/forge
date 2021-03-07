@@ -2,7 +2,7 @@ Name:Widespread Brutality
 ManaCost:1 B R R
 Types:Sorcery
 A:SP$ Amass | Cost$ 1 B R R | Num$ 2 | RememberAmass$ True | SubAbility$ IgnitionDamage | SpellDescription$ Amass 2, then the Army you amassed deals damage equal to its power to each non-Army creature. (To amass 2, put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
-SVar:IgnitionDamage:DB$ DamageAll | ValidCards$ Creature.nonArmy | ValidDescription$ each non-Army creature. | NumDmg$ X | References$ X | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | DamageSource$ Remembered | SubAbility$ DBCleanup
+SVar:IgnitionDamage:DB$ DamageAll | ValidCards$ Creature.nonArmy | ValidDescription$ each non-Army creature. | NumDmg$ X | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | DamageSource$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
 DeckHints:Ability$Amass & Type$Zombie

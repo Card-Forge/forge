@@ -1,7 +1,7 @@
 Name:Altar of Dementia
 ManaCost:2
 Types:Artifact
-A:AB$ Mill | Cost$ Sac<1/Creature> | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | References$ X | SpellDescription$ Target player puts a number of cards equal to the sacrificed creature's power from the top of their library into their graveyard.
+A:AB$ Mill | Cost$ Sac<1/Creature> | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts a number of cards equal to the sacrificed creature's power from the top of their library into their graveyard.
 SVar:X:Sacrificed$CardPower
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All

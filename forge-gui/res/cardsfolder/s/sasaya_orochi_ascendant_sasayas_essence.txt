@@ -2,7 +2,7 @@ Name:Sasaya, Orochi Ascendant
 ManaCost:1 G G
 Types:Legendary Creature Snake Monk
 PT:2/3
-A:AB$ SetState | Cost$ Reveal<1/Hand> | Defined$ Self | Mode$ Flip | ConditionCheckSVar$ CheckHandLand | ConditionSVarCompare$ GE7 | AILogic$ CheckCondition | References$ CheckHandLand | SpellDescription$ If you have seven or more land cards in your hand, flip CARDNAME.
+A:AB$ SetState | Cost$ Reveal<1/Hand> | Defined$ Self | Mode$ Flip | ConditionCheckSVar$ CheckHandLand | ConditionSVarCompare$ GE7 | AILogic$ CheckCondition | SpellDescription$ If you have seven or more land cards in your hand, flip CARDNAME.
 SVar:CheckHandLand:Count$ValidHand Land.YouCtrl
 AlternateMode:Flip
 Oracle:Reveal your hand: If you have seven or more land cards in your hand, flip Sasaya, Orochi Ascendant.

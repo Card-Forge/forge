@@ -3,8 +3,8 @@ ManaCost:5 W W
 Types:Creature Angel
 PT:4/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSetLife | CheckSVar$ X | SVarCompare$ LTY | References$ X,Y | TriggerDescription$ When CARDNAME enters the battlefield, if your life total is lower than your starting life total, it becomes equal to your starting life total.
-SVar:TrigSetLife:DB$ SetLife | Defined$ You | LifeAmount$ Y | References$ Y
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSetLife | CheckSVar$ X | SVarCompare$ LTY | TriggerDescription$ When CARDNAME enters the battlefield, if your life total is lower than your starting life total, it becomes equal to your starting life total.
+SVar:TrigSetLife:DB$ SetLife | Defined$ You | LifeAmount$ Y
 SVar:X:Count$YourLifeTotal
 SVar:Y:Count$YourStartingLife
 SVar:NeedsToPlayVar:X LTY

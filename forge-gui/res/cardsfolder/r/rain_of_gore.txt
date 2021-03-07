@@ -2,7 +2,7 @@ Name:Rain of Gore
 ManaCost:B R
 Types:Enchantment
 R:Event$ GainLife | ActiveZones$ Battlefield | ValidSource$ Card | SourceController$ True | AiLogic$ LoseLife | ReplaceWith$ RLoseLife | Description$ If a spell or ability would cause its controller to gain life, that player loses that much life instead.
-SVar:RLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ ReplacedPlayer | References$ X
+SVar:RLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ ReplacedPlayer
 SVar:X:ReplaceCount$LifeGained
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random

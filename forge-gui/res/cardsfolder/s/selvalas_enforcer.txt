@@ -4,7 +4,7 @@ Types:Creature Elf Warrior
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigDig | TriggerDescription$ Parley — When CARDNAME enters the battlefield, each player reveals the top card of their library. For each nonland card revealed this way, put a +1/+1 counter on CARDNAME. Then each player draws a card.
 SVar:TrigDig:DB$ Dig | DigNum$ 1 | Defined$ Player | Reveal$ True | NoMove$ True | RememberRevealed$ True | SubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterNum$ X | References$ X | CounterType$ P1P1 | SubAbility$ DBDraw
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterNum$ X | CounterType$ P1P1 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.nonLand

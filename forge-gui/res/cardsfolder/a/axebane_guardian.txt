@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Human Druid
 PT:0/3
 K:Defender
-A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ X | References$ X | SpellDescription$ Add X mana in any combination of colors, where X is the number of creatures with defender you control.
+A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ X | SpellDescription$ Add X mana in any combination of colors, where X is the number of creatures with defender you control.
 SVar:X:Count$Valid Creature.withDefender+YouCtrl
 AI:RemoveDeck:Random
 DeckHints:Keyword$Defender

@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 PT:1/2
 K:Menace
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards that many cards.
-SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ X | References$ X | Mode$ TgtChoose
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ X | Mode$ TgtChoose
 SVar:X:TriggerCount$DamageAmount
 K:Eternalize:4 B B
 DeckHas:Ability$Token

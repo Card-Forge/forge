@@ -14,7 +14,7 @@ Types:Sorcery
 A:SP$ Pump | Cost$ 2 W B | ValidTgts$ Player | IsCurse$ True | RememberTargets$ True | SubAbility$ DBChooseCard | SpellDescription$ Target player sacrifices a creature with the greatest power among creatures they control. You gain life equal to its power.
 SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.greatestPowerControlledByRemembered | Mandatory$ True | SubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | Defined$ Player.IsRemembered | SacValid$ Card.ChosenCard | RememberSacrificed$ True | SubAbility$ DBGainLife | SacMessage$ the creature with the highest power 
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower
 SVar:SplitNeedsToPlay:Creature.OppCtrl

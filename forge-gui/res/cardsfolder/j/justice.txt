@@ -3,7 +3,7 @@ ManaCost:2 W W
 Types:Enchantment
 K:UpkeepCost:W W
 T:Mode$ DamageDealtOnce | ValidSource$ Card.Red | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a red creature or spell deals damage, CARDNAME deals that much damage to that creature's or spell's controller.
-SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ X | References$ X
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ X
 SVar:X:TriggerCount$DamageAmount
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/justice.jpg

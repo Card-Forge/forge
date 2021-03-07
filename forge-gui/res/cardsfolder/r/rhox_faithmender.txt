@@ -4,7 +4,7 @@ Types:Creature Rhino Monk
 PT:1/5
 K:Lifelink
 R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GainDouble | AiLogic$ DoubleLife | Description$ If you would gain life, you gain twice that much life instead.
-SVar:GainDouble:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X | References$ X
+SVar:GainDouble:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X
 SVar:X:ReplaceCount$LifeGained/Twice
 SVar:PlayMain1:True
 DeckHints:Ability$LifeGain

@@ -2,8 +2,8 @@ Name:Durkwood Tracker
 ManaCost:4 G
 Types:Creature Giant
 PT:4/3
-A:AB$ DealDamage | Cost$ 1 G T | IsPresent$ Card.Self | PresentZone$ Battlefield | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumDmg$ X | SubAbility$ DBDamage | References$ X | SpellDescription$ If CARDNAME is on the battlefield, it deals damage equal to its power to target attacking creature. That creature deals damage equal to its power to CARDNAME.
-SVar:DBDamage:DB$ DealDamage | Defined$ Self | NumDmg$ Y | References$ Y
+A:AB$ DealDamage | Cost$ 1 G T | IsPresent$ Card.Self | PresentZone$ Battlefield | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumDmg$ X | SubAbility$ DBDamage | SpellDescription$ If CARDNAME is on the battlefield, it deals damage equal to its power to target attacking creature. That creature deals damage equal to its power to CARDNAME.
+SVar:DBDamage:DB$ DealDamage | Defined$ Self | NumDmg$ Y
 SVar:X:Count$CardPower
 SVar:Y:Targeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/durkwood_tracker.jpg

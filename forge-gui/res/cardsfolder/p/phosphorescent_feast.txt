@@ -2,7 +2,7 @@ Name:Phosphorescent Feast
 ManaCost:2 G G G
 Types:Sorcery
 A:SP$ Reveal | Cost$ 2 G G G | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBGainLife | SpellDescription$ Chroma — Reveal any number of cards in your hand. You gain 2 life for each green mana symbol in those cards' mana costs.
-SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$ChromaSource.Green/Twice
 AI:RemoveDeck:All

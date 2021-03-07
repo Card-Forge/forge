@@ -2,7 +2,7 @@ Name:Shield of the Avatar
 ManaCost:1
 Types:Artifact Equipment
 K:Equip:2
-S:Mode$ PreventDamage | Target$ Creature.EquippedBy | Amount$ X | References$ X | Description$ If a source would deal damage to equipped creature, prevent X of that damage, where X is the number of creatures you control.
+S:Mode$ PreventDamage | Target$ Creature.EquippedBy | Amount$ X | Description$ If a source would deal damage to equipped creature, prevent X of that damage, where X is the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_of_the_avatar.jpg

@@ -1,7 +1,7 @@
 Name:Grim Flowering
 ManaCost:5 G
 Types:Sorcery
-A:SP$ Draw | Cost$ 5 G | NumCards$ X | References$ X | SpellDescription$ Draw a card for each creature card in your graveyard.
+A:SP$ Draw | Cost$ 5 G | NumCards$ X | SpellDescription$ Draw a card for each creature card in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_flowering.jpg
 Oracle:Draw a card for each creature card in your graveyard.

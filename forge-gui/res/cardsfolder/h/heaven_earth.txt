@@ -2,7 +2,7 @@ Name:Heaven
 ManaCost:X G
 AlternateMode: Split
 Types:Instant
-A:SP$ DamageAll | Cost$ X G | ValidCards$ Creature.withFlying | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to each creature with flying.
+A:SP$ DamageAll | Cost$ X G | ValidCards$ Creature.withFlying | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature with flying.
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heaven_earth.jpg
@@ -14,6 +14,6 @@ Name:Earth
 ManaCost:X R R
 Types:Sorcery
 K:Aftermath
-A:SP$ DamageAll | Cost$ X R R | ValidCards$ Creature.withoutFlying | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying.
+A:SP$ DamageAll | Cost$ X R R | ValidCards$ Creature.withoutFlying | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying.
 SVar:X:Count$xPaid
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nEarth deals X damage to each creature without flying.

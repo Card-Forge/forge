@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Goblin Pirate
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBTreasureTokens | TriggerDescription$ When CARDNAME enters the battlefield, create X Treasure tokens, where X is the number of artifacts and enchantments your opponents control.
-SVar:DBTreasureTokens:DB$ Token | TokenAmount$ X | References$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You | LegacyImage$ c a treasure sac c19
+SVar:DBTreasureTokens:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You | LegacyImage$ c a treasure sac c19
 SVar:X:Count$Valid Artifact.OppCtrl,Enchantment.OppCtrl
 SVar:PlayMain1:TRUE
 Oracle:When Dockside Extortionist enters the battlefield, create X Treasure tokens, where X is the number of artifacts and enchantments your opponents control. (Treasure tokens are artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")

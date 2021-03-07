@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Artifact Equipment
 K:etbCounter:SOUL:1
 DeckHas:Ability$Counters
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddToughness$ X | References$ X | Description$ Equipped creature gets +1/+1 for each soul counter on CARDNAME.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each soul counter on CARDNAME.
 SVar:X:Count$CardCounters.SOUL
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EquippedBy | Execute$ TrigPutCounter | TriggerDescription$ Whenever equipped creature dies, put a soul counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SOUL | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf

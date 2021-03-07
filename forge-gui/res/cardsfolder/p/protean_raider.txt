@@ -2,7 +2,7 @@ Name:Protean Raider
 ManaCost:1 U R
 Types:Creature Shapeshifter Pirate
 PT:2/2
-R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | Layer$ Copy | Optional$ True | ReplaceWith$ DBCopy | CheckSVar$ RaidTest | References$ RaidTest | Description$ Raid — If you attacked this turn, you may have CARDNAME enter the battlefield as a copy of any creature on the battlefield.
+R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | Layer$ Copy | Optional$ True | ReplaceWith$ DBCopy | CheckSVar$ RaidTest | Description$ Raid — If you attacked this turn, you may have CARDNAME enter the battlefield as a copy of any creature on the battlefield.
 SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | SubAbility$ DBChangeZone | SpellDescription$ Raid — If you attacked this turn, you may have CARDNAME enter the battlefield as a copy of any creature on the battlefield.
 SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 SVar:RaidTest:Count$AttackersDeclared

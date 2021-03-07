@@ -1,8 +1,8 @@
 Name:Price of Fame
 ManaCost:3 B
 Types:Instant
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ CostReduction | Relative$ True | EffectZone$ All | References$ CostReduction,CheckTgt | Description$ CARDNAME costs {2} less to cast if it targets a legendary creature.
-A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Creature | SubAbility$ DBSurveil | TgtPrompt$ Select target creature | References$ CostReduction,CheckTgt | SpellDescription$ Destroy target creature.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ CostReduction | Relative$ True | EffectZone$ All | Description$ CARDNAME costs {2} less to cast if it targets a legendary creature.
+A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Creature | SubAbility$ DBSurveil | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 SVar:CostReduction:Count$Compare CheckTgt GE1.2.0
 SVar:CheckTgt:Targeted$Valid Creature.Legendary
 SVar:DBSurveil:DB$ Surveil | Amount$ 2

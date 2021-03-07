@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Legendary Creature Human Knight
 PT:3/3
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player creates that many 1/1 red Survivor creature tokens.
-SVar:TrigToken:DB$ Token | TokenOwner$ TriggeredTarget | TokenAmount$ X | References$ X | TokenScript$ r_1_1_survivor | LegacyImage$ r 1 1 survivor c18
+SVar:TrigToken:DB$ Token | TokenOwner$ TriggeredTarget | TokenAmount$ X | TokenScript$ r_1_1_survivor | LegacyImage$ r 1 1 survivor c18
 SVar:X:TriggerCount$DamageAmount
 S:Mode$ Continuous | Affected$ Survivor.OppCtrl | AddHiddenKeyword$ CantBlock Creature | Description$ Survivors your opponents control can't block.
 S:Mode$ CantAttack | ValidCard$ Creature.Survivor+OppCtrl | Target$ You,Planeswalker.YouCtrl | Description$ Survivors your opponents control can't attack you or planeswalkers you control.

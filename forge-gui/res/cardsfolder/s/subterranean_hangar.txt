@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ PutCounter | Cost$ T | Defined$ Self | CounterType$ STORAGE | CounterNum$ 1 | SpellDescription$ Put a storage counter on CARDNAME.
-A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ B | Amount$ X | CostDesc$ {T}, Remove any number of storage counters from CARDNAME: | References$ X | AILogic$ ManaRitualBattery | AINoRecursiveCheck$ True | SpellDescription$ Add {B} for each storage counter removed this way.
+A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ B | Amount$ X | CostDesc$ {T}, Remove any number of storage counters from CARDNAME: | AILogic$ ManaRitualBattery | AINoRecursiveCheck$ True | SpellDescription$ Add {B} for each storage counter removed this way.
 SVar:X:Count$xPaid
 Oracle:Subterranean Hangar enters the battlefield tapped.\n{T}: Put a storage counter on Subterranean Hangar.\n{T}, Remove any number of storage counters from Subterranean Hangar: Add {B} for each storage counter removed this way.

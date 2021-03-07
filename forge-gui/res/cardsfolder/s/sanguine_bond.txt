@@ -2,7 +2,7 @@ Name:Sanguine Bond
 ManaCost:3 B B
 Types:Enchantment
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you gain life, target opponent loses that much life.
-SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ X | References$ X
+SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ X
 SVar:X:TriggerCount$LifeAmount
 AI:RemoveDeck:Random
 Oracle:Whenever you gain life, target opponent loses that much life.

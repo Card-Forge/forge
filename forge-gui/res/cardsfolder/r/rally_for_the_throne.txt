@@ -2,7 +2,7 @@ Name:Rally for the Throne
 ManaCost:2 W
 Types:Instant
 A:SP$ Token | Cost$ 2 W | TokenAmount$ 2 | TokenScript$ w_1_1_human | TokenOwner$ You | LegacyImage$ w 1 1 human eld | AIManaPref$ W | SubAbility$ DBGainLife | SpellDescription$ Create two 1/1 white Human creature tokens. Adamant — If at least three white mana was spent to cast this spell, you gain 1 life for each creature you control.
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y | ConditionCheckSVar$ X | References$ X,Y
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y | ConditionCheckSVar$ X
 SVar:X:Count$Adamant.White.1.0
 SVar:Y:Count$Valid Creature.YouCtrl
 DeckHas:Ability$Token & Ability$LifeGain

@@ -4,7 +4,7 @@ Types:Legendary Creature Elf Druid
 PT:2/2
 K:Trample
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create that many 1/1 green Saproling creature tokens.
-SVar:TrigToken:DB$ Token | TokenAmount$ X | References$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling c16
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling c16
 SVar:X:TriggerCount$DamageAmount
 K:Partner
 DeckHas:Ability$Token

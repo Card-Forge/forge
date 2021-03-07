@@ -6,7 +6,7 @@ K:Defender
 A:AB$ Fight | Cost$ 2 | Defined$ Self | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | SubAbility$ DBDiesEffect | SpellDescription$ CARDNAME fights another target creature you control. When CARDNAME dies this turn, return it to the battlefield transformed under your control.
 
 #TODO: This should be a Delayed Trigger, but AF DelayedTrigger doesn't work at the moment due to timestamp check issues.
-SVar:DBDiesEffect:DB$ Effect | Name$ Golden Guardian Effect | Triggers$ TrigChangesZone | SVars$ TrigChangeZone,EndEffect | References$ TrigChangesZone,TrigChangeZone,EndEffect | RememberObjects$ Self | ExileOnMoved$ Exile
+SVar:DBDiesEffect:DB$ Effect | Name$ Golden Guardian Effect | Triggers$ TrigChangesZone | SVars$ TrigChangeZone,EndEffect | RememberObjects$ Self | ExileOnMoved$ Exile
 SVar:TrigChangesZone:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.IsRemembered | Execute$ TrigChangeZone | TriggerDescription$ When EFFECTSOURCE dies this turn, return it to the battlefield transformed under your control.
 SVar:TrigChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ EndEffect
 SVar:EndEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

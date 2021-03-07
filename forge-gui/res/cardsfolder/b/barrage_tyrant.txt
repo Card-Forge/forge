@@ -3,7 +3,7 @@ ManaCost:4 R
 Types:Creature Eldrazi
 PT:5/3
 K:Devoid
-A:AB$ DealDamage | Cost$ 2 R Sac<1/Creature.Colorless+Other/another colorless creature> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to any target.
+A:AB$ DealDamage | Cost$ 2 R Sac<1/Creature.Colorless+Other/another colorless creature> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to any target.
 SVar:X:Sacrificed$CardPower
 AI:RemoveDeck:All
 DeckHints:Color$Colorless & Keyword$Devoid

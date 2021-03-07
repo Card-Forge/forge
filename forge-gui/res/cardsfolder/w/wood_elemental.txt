@@ -3,8 +3,8 @@ ManaCost:3 G
 Types:Creature Elemental
 PT:*/*
 K:ETBReplacement:Other:TrigSac
-SVar:TrigSac:DB$ Sacrifice | Amount$ SacX | References$ SacX | SacValid$ Forest.untapped | Defined$ You | RememberSacrificed$ True | Optional$ True | SpellDescription$ As CARDNAME enters the battlefield, sacrifice any number of untapped Forests.
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of Forests sacrificed as it entered the battlefield.
+SVar:TrigSac:DB$ Sacrifice | Amount$ SacX | SacValid$ Forest.untapped | Defined$ You | RememberSacrificed$ True | Optional$ True | SpellDescription$ As CARDNAME enters the battlefield, sacrifice any number of untapped Forests.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Forests sacrificed as it entered the battlefield.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Forest.YouCtrl+untapped

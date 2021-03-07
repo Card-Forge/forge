@@ -4,7 +4,7 @@ Types:Creature Angel
 PT:2/2
 K:Flying
 R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GainLife | AiLogic$ DoubleLife | Description$ If you would gain life, you gain that much life plus 1 instead.
-SVar:GainLife:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X | References$ X
+SVar:GainLife:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X
 SVar:X:ReplaceCount$LifeGained/Plus.1
 SVar:PlayMain1:True
 DeckHints:Ability$LifeGain

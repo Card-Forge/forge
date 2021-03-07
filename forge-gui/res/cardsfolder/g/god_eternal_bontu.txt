@@ -4,8 +4,8 @@ Types:Legendary Creature Zombie God
 PT:5/6
 K:Menace
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice any number of other permanents, then draw that many cards.
-SVar:TrigSac:DB$ Sacrifice | Defined$ You | Amount$ SacX | References$ SacX | SacValid$ Permanent.Other | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ DrawX | References$ DrawX | SubAbility$ DBCleanup
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Permanent.Other | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ DrawX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Permanent.YouCtrl+Other
 SVar:DrawX:Remembered$Amount

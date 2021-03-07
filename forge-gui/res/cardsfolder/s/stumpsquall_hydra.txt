@@ -3,7 +3,7 @@ ManaCost:X G G G
 Types:Creature Hydra
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, distribute X +1/+1 counters among it and any number of commanders.
-SVar:TrigPutCounter:DB$ PutCounter | Choices$ Card.Self,Card.IsCommander | ChoiceTitle$ Choose this card and/or any number of commanders to distribute counters to | ChoiceAmount$ X | MinChoiceAmount$ 1 | CounterType$ P1P1 | CounterNum$ X | DividedAsYouChoose$ X | References$ X
+SVar:TrigPutCounter:DB$ PutCounter | Choices$ Card.Self,Card.IsCommander | ChoiceTitle$ Choose this card and/or any number of commanders to distribute counters to | ChoiceAmount$ X | MinChoiceAmount$ 1 | CounterType$ P1P1 | CounterNum$ X | DividedAsYouChoose$ X
 SVar:X:Count$xPaid
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters

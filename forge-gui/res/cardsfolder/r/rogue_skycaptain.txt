@@ -5,7 +5,7 @@ PT:3/4
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a wage counter on CARDNAME. You may pay {2} for each wage counter on it. If you don't, remove all wage counters from CARDNAME and an opponent gains control of it.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ WAGE | CounterNum$ 1 | SubAbility$ DBRemoveCounter
-SVar:DBRemoveCounter:DB$ RemoveCounter | CounterNum$ All | CounterType$ WAGE | Defined$ Self | UnlessCost$ X | UnlessPayer$ You | UnlessResolveSubs$ WhenNotPaid | References$ X | SubAbility$ DBChooseOpp
+SVar:DBRemoveCounter:DB$ RemoveCounter | CounterNum$ All | CounterType$ WAGE | Defined$ Self | UnlessCost$ X | UnlessPayer$ You | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBChooseOpp
 SVar:DBChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to give control to: | AILogic$ Curse | SubAbility$ DBDonate
 SVar:DBDonate:DB$ GainControl | Defined$ Self | NewController$ Player.Chosen | SubAbility$ DBReset
 SVar:DBReset:DB$ Cleanup | ClearChosenPlayer$ True

@@ -3,12 +3,12 @@ ManaCost:3 R
 Types:Creature Human Shaman
 PT:*/4
 K:Trample
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | References$ X | Description$ CARDNAME's power is equal to the number of instant and sorcery cards in your graveyard.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of instant and sorcery cards in your graveyard.
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 DeckHints:Type$Instant|Sorcery
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard up to two cards, then draw that many cards.
 SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ Y | References$ Y | SubAbility$ DBCleanup
+SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Remembered$Amount
 DeckHas:Ability$Discard

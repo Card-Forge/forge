@@ -2,7 +2,7 @@ Name:Boneyard Mycodrax
 ManaCost:2 B
 Types:Creature Fungus
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of other creature cards in your graveyard.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of other creature cards in your graveyard.
 SVar:X:Count$ValidGraveyard Creature.Other+YouOwn
 K:Scavenge:4 B
 Oracle:Boneyard Mycodrax's power and toughness are each equal to the number of other creature cards in your graveyard.\nScavenge {4}{B} ({4}{B}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)

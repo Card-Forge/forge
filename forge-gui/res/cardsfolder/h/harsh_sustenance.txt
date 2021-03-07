@@ -1,8 +1,8 @@
 Name:Harsh Sustenance
 ManaCost:1 W B
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 W B | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to any target and you gain X life, where X is the number of creatures you control.
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
+A:SP$ DealDamage | Cost$ 1 W B | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to any target and you gain X life, where X is the number of creatures you control.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harsh_sustenance.jpg
 Oracle:Harsh Sustenance deals X damage to any target and you gain X life, where X is the number of creatures you control.

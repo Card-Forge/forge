@@ -6,6 +6,6 @@ K:Flying
 S:Mode$ Continuous | Affected$ Player.Opponent | AddKeyword$ You can't gain life. | Description$ Your opponents can't gain life.
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ RepeatOpps | TriggerDescription$ At the beginning of each end step, each opponent loses life equal to the life they lost this turn. (Damage causes loss of life.)
 SVar:RepeatOpps:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TrigLoseLife
-SVar:TrigLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X | References$ X
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X
 SVar:X:PlayerCountRemembered$LifeLostThisTurn
 Oracle:Flying\nYour opponents can't gain life.\nAt the beginning of each end step, each opponent loses life equal to the life that player lost this turn. (Damage causes loss of life.)

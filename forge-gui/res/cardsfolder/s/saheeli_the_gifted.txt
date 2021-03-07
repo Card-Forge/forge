@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Saheeli
 Loyalty:4
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ c_1_1_a_servo | TokenOwner$ You | LegacyImage$ c 1 1 servo c18 | SpellDescription$ Create a 1/1 colorless Servo artifact creature token.
 A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | StaticAbilities$ HBReduceCost | Triggers$ TrigCastSpell | SVars$ RemoveEffect,X | SpellDescription$ The next spell you cast this turn costs {1} less to cast for each artifact you control as you cast it.
-SVar:HBReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | ValidCard$ Card | Activator$ You | Amount$ X | References$ X | Description$ The next spell you cast this turn costs {1} less to cast for each artifact you control as you cast it.
+SVar:HBReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | ValidCard$ Card | Activator$ You | Amount$ X | Description$ The next spell you cast this turn costs {1} less to cast for each artifact you control as you cast it.
 SVar:TrigCastSpell:Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
 SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
 SVar:X:Count$Valid Artifact.YouCtrl

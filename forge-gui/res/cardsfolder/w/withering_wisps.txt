@@ -3,7 +3,7 @@ ManaCost:1 B B
 Types:Enchantment
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Creature | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, if no creatures are on the battlefield, sacrifice CARDNAME.
 SVar:TrigSac:DB$Sacrifice | Defined$ Self
-A:AB$ DamageAll | Cost$ B | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | ActivationLimit$ X | References$ X | AILogic$ DmgAllCreaturesAndPlayers | SpellDescription$ CARDNAME deals 1 damage to each creature and each player. Activate this ability no more times each turn than the number of snow Swamps you control.
+A:AB$ DamageAll | Cost$ B | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | ActivationLimit$ X | AILogic$ DmgAllCreaturesAndPlayers | SpellDescription$ CARDNAME deals 1 damage to each creature and each player. Activate this ability no more times each turn than the number of snow Swamps you control.
 SVar:X:Count$Valid Swamp.Snow+YouCtrl
 SVar:NeedsToPlay:Creature
 AI:RemoveDeck:Random

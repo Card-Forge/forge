@@ -4,7 +4,7 @@ Types:Enchantment
 K:etbCounter:ISOLATION:X
 SVar:X:Count$xPaid
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, for each isolation counter on it, exile up to one target nonland permanent an opponent controls until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TargetMin$ 0 | TargetMax$ Y | References$ Y | TgtPrompt$ Select target nonland permanent an opponent controls | ConditionPresent$ Card.Self | SubAbility$ DBEffect
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TargetMin$ 0 | TargetMax$ Y | TgtPrompt$ Select target nonland permanent an opponent controls | ConditionPresent$ Card.Self | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Triggers$ ComeBack | RememberObjects$ Targeted | ImprintCards$ Self | SVars$ TrigReturn,ExileSelf | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnMoved$ Exile
 SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ That permanent is exiled until EFFECTSOURCE leaves the battlefield.
 SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ ExileSelf

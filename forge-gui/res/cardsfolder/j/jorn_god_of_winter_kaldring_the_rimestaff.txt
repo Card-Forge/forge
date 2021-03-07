@@ -17,7 +17,7 @@ ManaCost:1 U B
 Types:Legendary Snow Artifact
 A:AB$ Effect | Cost$ T | TgtZone$ Graveyard | ValidTgts$ Permanent.Snow+YouCtrl | TgtPrompt$ Choose target snow permanent card in your graveyard | StaticAbilities$ STPlay | RememberObjects$ Targeted | ForgetOnMoved$ Graveyard | SubAbility$ DBEffect | SpellDescription$ You may play target snow permanent card from your graveyard this turn. If you do, it enters the battlefield tapped.
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may play target snow permanent card from your graveyard this turn.
-SVar:DBEffect:DB$ Effect | RememberObjects$ ParentTarget | ForgetOnMoved$ Stack | ReplacementEffects$ ETBCreat | SVars$ DBTap,ToBattlefield,DBExile | References$ ETBCreat,DBTap,ToBattlefield,DBExile
+SVar:DBEffect:DB$ Effect | RememberObjects$ ParentTarget | ForgetOnMoved$ Stack | ReplacementEffects$ ETBCreat | SVars$ DBTap,ToBattlefield,DBExile
 SVar:ETBCreat:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplaceWith$ DBTap | Description$ If you do, it enters the battlefield tapped.
 SVar:DBTap:DB$ Tap | Defined$ ReplacedCard | ETB$ True | SubAbility$ ToBattlefield
 SVar:ToBattlefield:DB$ InternalEtbReplacement | SubAbility$ DBExile

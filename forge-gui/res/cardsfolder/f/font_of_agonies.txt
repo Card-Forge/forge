@@ -2,7 +2,7 @@ Name:Font of Agonies
 ManaCost:B
 Types:Enchantment
 T:Mode$ PayLife | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you pay life, put that many blood counters on CARDNAME.
-SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ BLOOD | CounterNum$ X | References$ X
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ BLOOD | CounterNum$ X
 SVar:X:TriggerCount$LifeAmount
 A:AB$ Destroy | Cost$ 1 B SubCounter<4/BLOOD> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 Oracle:Whenever you pay life, put that many blood counters on Font of Agonies.\n{1}{B}, Remove four blood counters from Font of Agonies: Destroy target creature.

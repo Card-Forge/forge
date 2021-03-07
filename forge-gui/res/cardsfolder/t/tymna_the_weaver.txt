@@ -4,7 +4,7 @@ Types:Legendary Creature Human Cleric
 PT:2/2
 K:Lifelink
 T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your postcombat main phase, you may pay X life, where X is the number of opponents that were dealt combat damage this turn. If you do, draw X cards.
-SVar:TrigDraw:AB$ Draw | Cost$ PayLife<X> | NumCards$ X | References$ X
+SVar:TrigDraw:AB$ Draw | Cost$ PayLife<X> | NumCards$ X
 SVar:X:PlayerCountRegisteredOpponents$HasPropertywasDealtCombatDamageThisTurn
 K:Partner
 SVar:PlayMain1:TRUE

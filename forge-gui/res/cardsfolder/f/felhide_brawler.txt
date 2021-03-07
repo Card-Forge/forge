@@ -2,7 +2,7 @@ Name:Felhide Brawler
 ManaCost:1 B
 Types:Creature Minotaur
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | CheckSVar$ X | SVarCompare$ EQ0 | References$ X | Description$ CARDNAME can't block unless you control another Minotaur.
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME can't block unless you control another Minotaur.
 SVar:X:Count$Valid Minotaur.Other+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/felhide_brawler.jpg
 Oracle:Felhide Brawler can't block unless you control another Minotaur.

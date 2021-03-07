@@ -3,15 +3,15 @@ ManaCost:B B B B
 Types:Enchantment
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ MoveToPlay | Description$ As CARDNAME enters the battlefield, you lose life equal to your life total.
 SVar:MoveToPlay:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ All | Destination$ Battlefield | SubAbility$ TrigLoseLife
-SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ LifeTotal | References$ LifeTotal
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ LifeTotal
 SVar:LifeTotal:Count$YourLifeTotal
 S:Mode$ Continuous | Affected$ You | AddKeyword$ You don't lose the game for having 0 or less life. | Description$ You don't lose the game for having 0 or less life.
 R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | AiLogic$ LichDraw | ReplaceWith$ Draw | Description$ If you would gain life, draw that many cards instead.
-SVar:Draw:DB$ Draw | Defined$ You | NumCards$ X | References$ X
+SVar:Draw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:ReplaceCount$LifeGained
 T:Mode$ DamageDoneOnce | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigLoseOrSac | TriggerDescription$ Whenever you're dealt damage, sacrifice that many nontoken permanents. If you can't, you lose the game.
 SVar:TrigLoseOrSac:DB$ LosesGame | Defined$ You | ConditionCheckSVar$ PermanentsToSac | ConditionSVarCompare$ GTY | SubAbility$ DBSacrificePerm
-SVar:DBSacrificePerm:DB$Sacrifice | Amount$ PermanentsToSac | SacValid$ Permanent.nontoken | References$ PermanentsToSac | ConditionCheckSVar$ PermanentsToSac | ConditionSVarCompare$ LEY
+SVar:DBSacrificePerm:DB$Sacrifice | Amount$ PermanentsToSac | SacValid$ Permanent.nontoken | ConditionCheckSVar$ PermanentsToSac | ConditionSVarCompare$ LEY
 SVar:PermanentsToSac:TriggerCount$DamageAmount
 SVar:Y:Count$Valid Permanent.nontoken+YouCtrl
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLose | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you lose the game.

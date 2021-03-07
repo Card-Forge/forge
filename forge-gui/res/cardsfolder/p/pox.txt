@@ -2,10 +2,10 @@ Name:Pox
 ManaCost:B B B
 Types:Sorcery
 A:SP$ RepeatEach | Cost$ B B B | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife | AILifeThreshold$ 1 | SpellDescription$ Each player loses a third of their life, then discards a third of the cards in their hand, then sacrifices a third of the creatures they control, then sacrifices a third of the lands they control. Round up each time.
-SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ A | References$ A | Defined$ Player.IsRemembered | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$ Discard | NumCards$ C | References$ C | Defined$ Player.IsRemembered | Mode$ TgtChoose | SubAbility$ DBCreature
-SVar:DBCreature:DB$ Sacrifice | SacValid$ Creature | Amount$ E | References$ E | Defined$ Player.IsRemembered | SubAbility$ DBLand
-SVar:DBLand:DB$ Sacrifice | SacValid$ Land | Amount$ G | References$ G | Defined$ Player.IsRemembered
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ A | Defined$ Player.IsRemembered | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | NumCards$ C | Defined$ Player.IsRemembered | Mode$ TgtChoose | SubAbility$ DBCreature
+SVar:DBCreature:DB$ Sacrifice | SacValid$ Creature | Amount$ E | Defined$ Player.IsRemembered | SubAbility$ DBLand
+SVar:DBLand:DB$ Sacrifice | SacValid$ Land | Amount$ G | Defined$ Player.IsRemembered
 SVar:A:PlayerCountRemembered$LifeTotal/ThirdUp
 SVar:C:PlayerCountRemembered$CardsInHand/ThirdUp
 SVar:E:PlayerCountRemembered$Valid Creature.RememberedPlayerCtrl/ThirdUp

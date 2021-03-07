@@ -2,7 +2,7 @@ Name:Ore-Scale Guardian
 ManaCost:5 R R
 Types:Creature Dragon
 PT:4/4
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each land card in your graveyard.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each land card in your graveyard.
 SVar:X:Count$TypeInYourYard.Land
 K:Flying
 K:Haste

@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery,Wizard | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever you cast an instant, sorcery, or Wizard spell, put a charge counter on CARDNAME.
 SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
-A:AB$ DealDamage | Cost$ 2 T SubCounter<All/CHARGE> | NumDmg$ X | References$ X | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ It deals that much damage to target creature.
+A:AB$ DealDamage | Cost$ 2 T SubCounter<All/CHARGE> | NumDmg$ X | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ It deals that much damage to target creature.
 SVar:X:SVar$CostCountersRemoved
 SVar:BuffedBy:Instant,Sorcery,Wizard
 DeckNeeds:Type$Instant|Sorcery|Wizard

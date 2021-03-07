@@ -6,7 +6,7 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SubAbility$ ChooseCT | AILogic
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeck
 K:etbCounter:CHARGE:X
 SVar:X:Count$xPaid
-A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenScript$ riptide_replicator | TokenTypes$ ChosenType | TokenOwner$ You | TokenColors$ ChosenColor | TokenPower$ Y | TokenToughness$ Y | References$ Y | SpellDescription$ Create an X/X creature token of the chosen color and type, where X is the number of charge counters on CARDNAME.
+A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenScript$ riptide_replicator | TokenTypes$ ChosenType | TokenOwner$ You | TokenColors$ ChosenColor | TokenPower$ Y | TokenToughness$ Y | SpellDescription$ Create an X/X creature token of the chosen color and type, where X is the number of charge counters on CARDNAME.
 SVar:Y:Count$CardCounters.CHARGE
 SVar:NeedsToPlayVar:Z GE6
 SVar:Z:Count$Valid Card.canProduceMana+YouCtrl+inZoneBattlefield+untapped

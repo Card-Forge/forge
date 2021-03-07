@@ -4,7 +4,7 @@ Types:Creature Human Shaman
 PT:2/2
 K:Riot
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature you control gets +X/+0 until end of turn, where X is CARDNAME's power.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | NumAtt$ X | References$ X
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | NumAtt$ X
 SVar:X:Count$CardPower
 DeckHas:Ability$Counters
 Oracle:Riot (This creature enters the battlefield with your choice of a +1/+1 counter or haste.)\nWhenever Gruul Beastmaster attacks, another target creature you control gets +X/+0 until end of turn, where X is Gruul Beastmaster's power.

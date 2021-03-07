@@ -2,7 +2,7 @@ Name:Nim Lasher
 ManaCost:2 B
 Types:Creature Zombie
 PT:1/1
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | References$ X | Description$ CARDNAME gets +1/+0 for each artifact you control.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each artifact you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:BuffedBy:Artifact
 AI:RemoveDeck:Random

@@ -4,7 +4,7 @@ Types:Creature Human Barbarian
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you discard a card at random.
 SVar:TrigDiscard:DB$ Discard | NumCards$ 1 | Mode$ Random | Optional$ True | RememberDiscarded$ True | SubAbility$ DBSacrifice
-SVar:DBSacrifice:DB$ Sacrifice | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | SubAbility$ DBCleanup
+SVar:DBSacrifice:DB$ Sacrifice | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Y GE2

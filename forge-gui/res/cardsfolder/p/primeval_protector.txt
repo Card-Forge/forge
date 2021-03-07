@@ -2,7 +2,7 @@ Name:Primeval Protector
 ManaCost:10 G
 Types:Creature Avatar
 PT:10/10
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature your opponents control.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature your opponents control.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on each other creature you control.
 SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+Other | CounterType$ P1P1 | CounterNum$ 1
 SVar:X:Count$Valid Creature.OppCtrl

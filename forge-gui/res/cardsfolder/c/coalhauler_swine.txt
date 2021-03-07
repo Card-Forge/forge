@@ -3,7 +3,7 @@ ManaCost:4 R R
 Types:Creature Boar Beast
 PT:4/4
 T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to each player.
-SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | Defined$ Player | References$ X
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | Defined$ Player
 SVar:X:TriggerCount$DamageAmount
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coalhauler_swine.jpg

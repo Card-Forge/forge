@@ -2,9 +2,9 @@ Name:Call the Coppercoats
 ManaCost:2 W
 Types:Instant
 K:Strive:1 W
-A:SP$ RepeatEach | Cost$ 2 W | ValidTgts$ Opponent | TargetMin$ 0 | TargetMax$ MaxTargets | TgtPrompt$ Choose any number of target opponents | References$ MaxTargets | RepeatPlayers$ Targeted | RepeatSubAbility$ DBToken | SpellDescription$ Choose any number of target opponents. Create X 1/1 white Human Soldier creature tokens, where X is the number of creatures those opponents control.
+A:SP$ RepeatEach | Cost$ 2 W | ValidTgts$ Opponent | TargetMin$ 0 | TargetMax$ MaxTargets | TgtPrompt$ Choose any number of target opponents | RepeatPlayers$ Targeted | RepeatSubAbility$ DBToken | SpellDescription$ Choose any number of target opponents. Create X 1/1 white Human Soldier creature tokens, where X is the number of creatures those opponents control.
 SVar:MaxTargets:PlayerCountOpponents$Amount
-SVar:DBToken:DB$ Token | TokenAmount$ X | References$ X | TokenScript$ w_1_1_human_soldier | TokenOwner$ You
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_human_soldier | TokenOwner$ You
 SVar:X:Count$Valid Creature.RememberedPlayerCtrl
 DeckHas:Ability$Token
 AI:RemoveDeck:All

@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Creature Human Soldier
 PT:1/1
 S:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Activated.Equip | Activator$ You | Amount$ 1 | Description$ Equip costs you pay cost {1} less.
-S:Mode$ Continuous | Affected$ Creature.Soldier+YouCtrl,Creature.Knight+YouCtrl | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ EQ1 | References$ X | Description$ As long as CARDNAME is equipped, each creature you control that's a Soldier or a Knight gets +1/+1.
+S:Mode$ Continuous | Affected$ Creature.Soldier+YouCtrl,Creature.Knight+YouCtrl | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ As long as CARDNAME is equipped, each creature you control that's a Soldier or a Knight gets +1/+1.
 SVar:X:Count$Valid Card.Self+equipped
 SVar:EquipMe:Once
 AI:RemoveDeck:Random

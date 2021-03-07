@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Creature Cat Scout
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library for up to X Plains cards, where X is the number of players who control more lands than you. Reveal those cards, put them into your hand, then shuffle your library.
-SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Plains | ChangeNum$ X | Shuffle$ True | References$ X
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Plains | ChangeNum$ X | Shuffle$ True
 SVar:X:PlayerCountPropertywithAtLeast1MoreLandsThanYou$Amount
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oreskos_explorer.jpg

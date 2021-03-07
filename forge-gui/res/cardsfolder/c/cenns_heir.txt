@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Creature Kithkin Soldier
 PT:1/1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+1 until end of turn for each other attacking Kithkin.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ X | References$ X
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ X
 SVar:X:Count$Valid Kithkin.attacking+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cenns_heir.jpg
 Oracle:Whenever Cenn's Heir attacks, it gets +1/+1 until end of turn for each other attacking Kithkin.

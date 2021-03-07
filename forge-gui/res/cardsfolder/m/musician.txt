@@ -7,7 +7,7 @@ A:AB$ PutCounter | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:PayThePiper:DB$ Animate | Defined$ Targeted | Permanent$ True | Keywords$ At the beginning of your upkeep, destroy this creature unless you pay {1} for each music counter on it | Triggers$ TrigMusicianPay | sVars$ MusiciansSpite,MusicX | ConditionDefined$ Targeted | ConditionPresent$ Card.withoutAt the beginning of your upkeep, destroy this creature unless you pay {1} for each music counter on it | ConditionCompare$ GE1
 #The keyword added does nothing itself other than create a keyword string to check against in the conditional
 SVar:TrigMusicianPay:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ MusiciansSpite | Secondary$ True | TriggerDescription$ At the beginning of your upkeep, destroy this creature unless you pay 1 for each music counter on it.
-SVar:MusiciansSpite:DB$ Destroy | Defined$ Self | UnlessCost$ MusicX | UnlessPayer$ You | References$ MusicX
+SVar:MusiciansSpite:DB$ Destroy | Defined$ Self | UnlessCost$ MusicX | UnlessPayer$ You
 SVar:MusicX:Count$CardCounters.MUSIC
 SVar:NeedsToPlayVar:Z GE5
 SVar:Z:Count$Valid Land.YouCtrl+inZoneBattlefield

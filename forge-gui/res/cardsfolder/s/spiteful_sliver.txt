@@ -4,6 +4,6 @@ Types:Creature Sliver
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddTrigger$ SpitefulSliverTrigger | AddSVar$ SpitefulSliverDamage & SpitefulSliverX | Description$ Sliver creatures you control have "Whenever this creature is dealt damage, it deals that much damage to target player or planeswalker."
 SVar:SpitefulSliverTrigger:Mode$ DamageDoneOnce | Execute$ SpitefulSliverDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature is dealt damage, it deals that much damage to target player or planeswalker.
-SVar:SpitefulSliverDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ SpitefulSliverX | References$ SpitefulSliverX
+SVar:SpitefulSliverDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ SpitefulSliverX
 SVar:SpitefulSliverX:TriggerCount$DamageAmount
 Oracle:Sliver creatures you control have "Whenever this creature is dealt damage, it deals that much damage to target player or planeswalker."

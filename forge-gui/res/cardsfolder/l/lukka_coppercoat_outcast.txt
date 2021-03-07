@@ -7,10 +7,10 @@ SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | RepeatSubAbility$ DBAnimate 
 SVar:DBAnimate:DB$ Animate | Defined$ Imprinted | staticAbilities$ STMayPlay | Permanent$ True
 SVar:STMayPlay:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Exile | EffectZone$ Exile | MayPlay$ True | IsPresent$ Planeswalker.Lukka+YouCtrl | Description$ You may cast this card from exile as long as you control a Lukka planeswalker.
 A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDigUntil | RememberChanged$ True | StackDescription$ SpellDescription | SpellDescription$ Exile target creature you control, then reveal cards from the top of your library until you reveal a creature card with higher converted mana cost. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
-SVar:DBDigUntil:DB$ DigUntil | Valid$ Creature.cmcGEX | References$ X | ValidDescription$ creature card with higher converted mana cost | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RestRandomOrder$ True | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBDigUntil:DB$ DigUntil | Valid$ Creature.cmcGEX | ValidDescription$ creature card with higher converted mana cost | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RestRandomOrder$ True | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ RepeatEach | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | RepeatCards$ Creature.YouCtrl | RepeatSubAbility$ DBDamage | DamageMap$ True | SpellDescription$ Each creature you control deals damage equal to its power to each opponent.
-SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | DamageSource$ Remembered | NumDmg$ Y | References$ Y
+SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | DamageSource$ Remembered | NumDmg$ Y
 SVar:X:Remembered$CardManaCost/Plus.1
 SVar:Y:Remembered$CardPower
 SVar:NonStackingEffect:True

@@ -3,7 +3,7 @@ ManaCost:W
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a verse counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ VERSE | CounterNum$ 1
-A:AB$ PreventDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to prevent damage to | Amount$ X | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | References$ X,MaxTgts,NumCreatures | SpellDescription$ Prevent the next X damage that would be dealt this turn to any number of targets, divided as you choose, where X is the number of verse counters on CARDNAME.
+A:AB$ PreventDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to prevent damage to | Amount$ X | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | SpellDescription$ Prevent the next X damage that would be dealt this turn to any number of targets, divided as you choose, where X is the number of verse counters on CARDNAME.
 SVar:X:Count$CardCounters.VERSE
 SVar:MaxTgts:PlayerCountPlayers$Amount/Plus.NumCreatures
 SVar:NumCreatures:Count$Valid Creature,Planeswalker

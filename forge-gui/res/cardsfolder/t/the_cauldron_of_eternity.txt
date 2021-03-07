@@ -1,7 +1,7 @@
 Name:The Cauldron of Eternity
 ManaCost:10 B B
 Types:Legendary Artifact
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ CARDNAME costs {2} less for each creature card in your graveyard.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {2} less for each creature card in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature/Twice
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever a creature you control dies, put it on the bottom of its owner's library.
 SVar:TrigChange:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1

@@ -5,7 +5,7 @@ PT:1/2
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you draw your second card each turn, create a 2/2 green Cat creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ g_2_2_cat | SpellDescription$ Create a 2/2 green Cat creature token.
 DeckHas:Ability$Token
-A:AB$ AnimateAll | Cost$ 4 G G | ValidCards$ Creature.YouCtrl | Power$ X | Toughness$ X | References$ X | SpellDescription$ Until end of turn, creatures you control have base power and toughness X/X, where X is the number of cards in your hand.
+A:AB$ AnimateAll | Cost$ 4 G G | ValidCards$ Creature.YouCtrl | Power$ X | Toughness$ X | SpellDescription$ Until end of turn, creatures you control have base power and toughness X/X, where X is the number of cards in your hand.
 SVar:X:Count$InYourHand
 AI:RemoveDeck:All
 Oracle:Whenever you draw your second card each turn, create a 2/2 green Cat creature token.\n{4}{G}{G}: Until end of turn, creatures you control have base power and toughness X/X, where X is the number of cards in your hand.

@@ -5,7 +5,7 @@ PT:3/4
 A:AB$ Mill | Cost$ 2 U T | Defined$ Player | NumCards$ 3 | RememberMilled$ True | SubAbility$ DBChoose | SpellDescription$ Each player mills three cards. Exile up to two creature cards put into graveyards this way. Create an X/X blue Zombie creature token, where X is the total power of the cards exiled this way.
 SVar:DBChoose:DB$ ChooseCard | Defined$ You | Choices$ Creature.IsRemembered | ChoiceZone$ Graveyard | MinAmount$ 0 | Amount$ 2 | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ ChosenCard | ForgetOtherRemembered$ True | RememberLKI$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_x_x_zombie | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_x_x_zombie | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
 DeckHas:Ability$Token

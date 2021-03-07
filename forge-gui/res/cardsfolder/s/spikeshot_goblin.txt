@@ -2,7 +2,7 @@ Name:Spikeshot Goblin
 ManaCost:2 R
 Types:Creature Goblin Shaman
 PT:1/2
-A:AB$ DealDamage | Cost$ R T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to its power to any target.
+A:AB$ DealDamage | Cost$ R T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to its power to any target.
 SVar:X:Count$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spikeshot_goblin.jpg
 Oracle:{R}, {T}: Spikeshot Goblin deals damage equal to its power to any target.

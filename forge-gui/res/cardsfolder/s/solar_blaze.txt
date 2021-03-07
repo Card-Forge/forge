@@ -1,7 +1,7 @@
 Name:Solar Blaze
 ManaCost:2 R W
 Types:Sorcery
-A:SP$ EachDamage | Cost$ 2 R W | ValidCards$ Creature | NumDmg$ X | References$ X | DamageDesc$ damage equal to its power | DefinedCards$ Self | SpellDescription$ Each creature deals damage to itself equal to its power.
+A:SP$ EachDamage | Cost$ 2 R W | ValidCards$ Creature | NumDmg$ X | DamageDesc$ damage equal to its power | DefinedCards$ Self | SpellDescription$ Each creature deals damage to itself equal to its power.
 SVar:X:Count$CardPower
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

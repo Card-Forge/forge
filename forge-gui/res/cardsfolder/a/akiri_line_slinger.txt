@@ -4,7 +4,7 @@ Types:Legendary Creature Kor Soldier Ally
 PT:0/3
 K:First Strike
 K:Vigilance
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | References$ X | Description$ CARDNAME gets +1/+0 for each artifact you control.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each artifact you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 K:Partner
 SVar:BuffedBy:Artifact

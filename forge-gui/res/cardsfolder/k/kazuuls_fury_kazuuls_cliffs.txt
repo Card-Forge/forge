@@ -1,7 +1,7 @@
 Name:Kazuul's Fury
 ManaCost:2 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 R Sac<1/Creature> | NumDmg$ X | References$ X | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to any target.
+A:SP$ DealDamage | Cost$ 2 R Sac<1/Creature> | NumDmg$ X | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to any target.
 SVar:X:Sacrificed$CardPower
 DeckHas:Ability$Sacrifice
 AlternateMode:Modal

@@ -3,8 +3,8 @@ ManaCost:1 G W
 Types:Legendary Creature Elf Scout
 PT:2/4
 A:AB$ Dig | Cost$ T | PrecostDesc$ Parley — | DigNum$ 1 | Defined$ Player | Reveal$ True | NoMove$ True | RememberRevealed$ True | SubAbility$ DBMana | SpellDescription$ Each player reveals the top card of their library. For each nonland card revealed this way, add {G} and you gain 1 life. Then each players draws a card.
-SVar:DBMana:DB$ Mana | Produced$ G | Amount$ X | References$ X | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | References$ X | SubAbility$ DBDraw
+SVar:DBMana:DB$ Mana | Produced$ G | Amount$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.nonLand

@@ -5,7 +5,7 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:ChangeControl:DB$ GainControl | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ PutCounter | SpellDescription$ Target opponent gains control of CARDNAME.
 SVar:PutCounter:DB$ PutCounter | Cost$ 3 | CounterType$ CHARGE | CounterNum$ 1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals damage to you equal to the number of charge counters on it.
-SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ X | References$ X
+SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ X
 SVar:X:Count$CardCounters.CHARGE
 A:AB$ PutCounter | Cost$ 3 | CounterType$ CHARGE | CounterNum$ 1 | AILogic$ Never | SpellDescription$ Put a charge counter on CARDNAME.
 A:AB$ RemoveCounter | Cost$ 3 | CounterType$ CHARGE | CounterNum$ 1 | AILogic$ EndOfOpponentsTurn | SpellDescription$ Remove a charge counter from CARDNAME.

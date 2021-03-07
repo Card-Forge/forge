@@ -3,7 +3,7 @@ ManaCost:5 W W
 Types:Creature Giant
 PT:5/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, put target creature into its owner's library just beneath the top X cards of that library, where X is the number of Plains you control.
-SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ X | References$ X | SpellDescription$ Put target nonland permanent into its owner's library just beneath the top X cards of that library.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ X | SpellDescription$ Put target nonland permanent into its owner's library just beneath the top X cards of that library.
 SVar:X:Count$Valid Plains.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quarry_colossus.jpg
 Oracle:When Quarry Colossus enters the battlefield, put target creature into its owner's library just beneath the top X cards of that library, where X is the number of Plains you control.

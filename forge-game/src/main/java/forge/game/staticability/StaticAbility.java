@@ -197,16 +197,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return layers;
     }
 
-    private void buildCommonAttributes(Card host) {
-        if (hasParam("References")) {
-            for (String svar : getParam("References").split(",")) {
-                if (host.hasSVar(svar)) {
-                    this.setSVar(svar, host.getSVar(svar));
-                }
-            }
-        }
-    }
-
     /**
      * <p>
      * toString.
@@ -255,7 +245,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         this.mapParams.putAll(params);
         this.layers = this.generateLayer();
         this.hostCard = host;
-        buildCommonAttributes(host);
         this.setCardState(state);
     }
 
@@ -764,8 +753,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             copyHelper(clone, host);
 
             clone.layers = this.generateLayer();
-
-            clone.buildCommonAttributes(host);
         } catch (final CloneNotSupportedException e) {
             System.err.println(e);
         }

@@ -2,7 +2,7 @@ Name:Tangle Wire
 ManaCost:3
 Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigChooseToTap | TriggerDescription$ At the beginning of each player's upkeep, that player taps an untapped artifact, creature, or land they control for each fade counter on CARDNAME.
-SVar:TrigChooseToTap:DB$ ChooseCard | Defined$ TriggeredPlayer | Choices$ Artifact.untapped+ActivePlayerCtrl,Creature.untapped+ActivePlayerCtrl,Land.untapped+ActivePlayerCtrl | Amount$ X | References$ X | Mandatory$ True | AILogic$ TangleWire | SubAbility$ DBTap
+SVar:TrigChooseToTap:DB$ ChooseCard | Defined$ TriggeredPlayer | Choices$ Artifact.untapped+ActivePlayerCtrl,Creature.untapped+ActivePlayerCtrl,Land.untapped+ActivePlayerCtrl | Amount$ X | Mandatory$ True | AILogic$ TangleWire | SubAbility$ DBTap
 SVar:DBTap:DB$ Tap | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:X:Count$CardCounters.FADE

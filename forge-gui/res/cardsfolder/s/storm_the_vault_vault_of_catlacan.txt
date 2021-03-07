@@ -14,7 +14,7 @@ ALTERNATE
 Name:Vault of Catlacan
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
-A:AB$ Mana | Cost$ T | Produced$ U | Amount$ X | References$ X | SpellDescription$ Add {U} for each artifact you control.
+A:AB$ Mana | Cost$ T | Produced$ U | Amount$ X | SpellDescription$ Add {U} for each artifact you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vault_of_catlacan.jpg
 Oracle:(Transforms from Storm the Vault.)\n{T}: Add one mana of any color.\n{T}: Add {U} for each artifact you control.

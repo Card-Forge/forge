@@ -3,7 +3,7 @@ ManaCost:2 U U
 Types:Legendary Creature Leviathan Crab
 PT:0/17
 S:Mode$ RaiseCost | ValidTarget$ Card.Self | Activator$ Opponent | Type$ Spell | Amount$ 2 | Description$ Spells your opponents cast that target CARDNAME cost {2} more to cast.
-A:AB$ Pump | Cost$ 3 | NumAtt$ +X | NumDef$ -X | References$ X | SpellDescription$ CARDNAME gets +X/-X until end of turn, where X is the number of Islands you control.
+A:AB$ Pump | Cost$ 3 | NumAtt$ +X | NumDef$ -X | SpellDescription$ CARDNAME gets +X/-X until end of turn, where X is the number of Islands you control.
 SVar:X:Count$Valid Island.YouCtrl
 DeckHints:Type$Island
 Oracle:Spells your opponents cast that target Charix, the Raging Isle cost {2} more to cast.\n{3}: Charix gets +X/-X until end of turn, where X is the number of Islands you control.

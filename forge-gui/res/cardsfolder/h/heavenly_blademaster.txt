@@ -9,7 +9,7 @@ SVar:DBAttach:DB$ RepeatEach | RepeatSubAbility$ DBRepeatAttach | RepeatCards$ A
 SVar:DBRepeatAttach:DB$ Attach | Object$ Remembered | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
-S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ X | AddToughness$ X | References$ X | Description$ Other creatures you control get +1/+1 for each Aura and Equipment attached to CARDNAME.
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ X | AddToughness$ X | Description$ Other creatures you control get +1/+1 for each Aura and Equipment attached to CARDNAME.
 SVar:X:Count$Valid Equipment.Attached,Aura.Attached
 SVar:EnchantMe:Multiple
 Oracle:Flying, double strike\nWhen Heavenly Blademaster enters the battlefield, you may attach any number of Auras and Equipment you control to it.\nOther creatures you control get +1/+1 for each Aura and Equipment attached to Heavenly Blademaster.

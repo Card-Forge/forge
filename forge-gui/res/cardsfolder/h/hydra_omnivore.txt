@@ -3,7 +3,7 @@ ManaCost:4 G G
 Types:Creature Hydra
 PT:8/8
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigDmg | TriggerDescription$ Whenever CARDNAME deals combat damage to an opponent, it deals that much damage to each other opponent.
-SVar:TrigDmg:DB$ DamageAll | ValidPlayers$ OppNonTriggeredTarget | NumDmg$ X | References$ X
+SVar:TrigDmg:DB$ DamageAll | ValidPlayers$ OppNonTriggeredTarget | NumDmg$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hydra_omnivore.jpg
 Oracle:Whenever Hydra Omnivore deals combat damage to an opponent, it deals that much damage to each other opponent.

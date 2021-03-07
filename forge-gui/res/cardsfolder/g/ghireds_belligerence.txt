@@ -1,7 +1,7 @@
 Name:Ghired's Belligerence
 ManaCost:X R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R R | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ X | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | References$ X,MaxTgts | RememberDamaged$ True | SubAbility$ DBEffect | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures. Whenever a creature dealt damage this way dies this turn, populate. (Create a token that's a copy of a creature token you control.)
+A:SP$ DealDamage | Cost$ X R R | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ X | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | RememberDamaged$ True | SubAbility$ DBEffect | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures. Whenever a creature dealt damage this way dies this turn, populate. (Create a token that's a copy of a creature token you control.)
 SVar:X:Count$xPaid
 SVar:MaxTgts:Count$Valid Creature
 SVar:DBEffect:DB$ Effect | Triggers$ TrigDies | SVars$ DBPopulate,DBForget | RememberObjects$ RememberedCard | SubAbility$ DBCleanup

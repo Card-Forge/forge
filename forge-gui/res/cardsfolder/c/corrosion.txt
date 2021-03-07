@@ -5,7 +5,7 @@ K:Cumulative upkeep:1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCorrode | TriggerDescription$ At the beginning of your upkeep, put a rust counter on each artifact target opponent controls. Then destroy each artifact with converted mana cost less than or equal to the number of rust counters on it. Artifacts destroyed this way can't be regenerated.
 SVar:TrigCorrode:DB$ PutCounterAll | ValidCards$ Artifact | CounterType$ RUST | CounterNum$ 1 | ValidTgts$ Opponent | SubAbility$ DBDestroyAllRusted
 SVar:DBDestroyAllRusted:DB$ RepeatEach | RepeatCards$ Artifact | RepeatSubAbility$ DBDestroyRusted
-SVar:DBDestroyRusted:DB$ Destroy | References$ RememberedCMC,X | Defined$ Remembered | ConditionCheckSVar$ RememberedCMC | ConditionSVarCompare$ GEX | NoRegen$ True
+SVar:DBDestroyRusted:DB$ Destroy | Defined$ Remembered | ConditionCheckSVar$ RememberedCMC | ConditionSVarCompare$ GEX | NoRegen$ True
 SVar:RememberedCMC:Remembered$CardCounters.RUST
 SVar:X:Remembered$CardManaCost
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigWipeCounters | TriggerDescription$ When CARDNAME leaves the battlefield, remove all rust counters from all permanents.

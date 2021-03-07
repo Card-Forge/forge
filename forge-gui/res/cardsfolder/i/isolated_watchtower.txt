@@ -2,7 +2,7 @@ Name:Isolated Watchtower
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Scry | Cost$ 2 T | ScryNum$ 1 | SubAbility$ DBReveal | CheckSVar$ X | SVarCompare$ GEY | References$ X,Y | SpellDescription$ Scry 1, then you may reveal the top card of your library. If a basic land card is revealed this way, put it onto the battlefield tapped. Activate this ability only if an opponent controls at least two more lands than you.
+A:AB$ Scry | Cost$ 2 T | ScryNum$ 1 | SubAbility$ DBReveal | CheckSVar$ X | SVarCompare$ GEY | SpellDescription$ Scry 1, then you may reveal the top card of your library. If a basic land card is revealed this way, put it onto the battlefield tapped. Activate this ability only if an opponent controls at least two more lands than you.
 SVar:DBReveal:DB$ Dig | Optional$ True | DigNum$ 1 | Reveal$ True | ChangeValid$ Land.Basic | DestinationZone$ Battlefield | Tapped$ True | DestinationZone2$ Library | LibraryPosition2$ 0
 SVar:X:PlayerCountOpponents$HighestValid Land.YouCtrl
 SVar:Y:Count$Valid Land.YouCtrl/Plus.2

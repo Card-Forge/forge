@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Instant
 A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | SubAbility$ DBDraw | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand. Ferocious — If you control a creature with power 4 or greater, you may draw a card. If you do, discard a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | OptionalDecider$ You | RememberDrawn$ True | ConditionPresent$ Creature.YouCtrl+powerGE4 | ConditionCompare$ GE1 | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | SubAbility$ DBCleanup
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/force_away.jpg

@@ -7,7 +7,7 @@ SVar:DBDamageC:DB$ DamageAll | ValidCards$ Creature | NumDmg$ 2 | SpellDescripti
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land.
 SVar:DBDiscard:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBIncendiaryDiscard | SubAbility$ DBIncendiaryDraw | SpellDescription$ Each player discards all the cards in their hand, then draws that many cards.
 SVar:DBIncendiaryDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBIncendiaryDraw
-SVar:DBIncendiaryDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | References$ X | SubAbility$ CleanIncendiary
+SVar:DBIncendiaryDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | SubAbility$ CleanIncendiary
 SVar:CleanIncendiary:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount/Minus.1
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card141830.jpg

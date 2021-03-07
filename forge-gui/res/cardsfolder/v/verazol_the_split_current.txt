@@ -7,7 +7,7 @@ SVar:X:Count$xPaid
 SVar:Y:Count$CastTotalManaSpent
 T:Mode$ SpellCast | ValidSA$ Spell.Kicked | ValidActivatingPlayer$ You | Execute$ DBRemoveCounters | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a kicked spell, you may remove two +1/+1 counters from CARDNAME.
 SVar:DBRemoveCounters:DB$ RemoveCounter | CounterType$ P1P1 | CounterNum$ 2 | RememberRemoved$ True | SubAbility$ DBCopy
-SVar:DBCopy:DB$ CopySpellAbility | ConditionCheckSVar$ Z | ConditionSVarCompare$ GE1 | References$ Z | SubAbility$ DBCleanup | Defined$ TriggeredSpellAbility | AILogic$ Always | MayChooseTarget$ True | SpellDescription$ If you do, copy that spell. You may choose new targets for that copy. (A copy of a permanent spell becomes a token.)
+SVar:DBCopy:DB$ CopySpellAbility | ConditionCheckSVar$ Z | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup | Defined$ TriggeredSpellAbility | AILogic$ Always | MayChooseTarget$ True | SpellDescription$ If you do, copy that spell. You may choose new targets for that copy. (A copy of a permanent spell becomes a token.)
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Z:Count$RememberedSize
 DeckHas:Ability$Counters

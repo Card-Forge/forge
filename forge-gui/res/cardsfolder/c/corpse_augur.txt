@@ -3,8 +3,8 @@ ManaCost:3 B
 Types:Creature Zombie Wizard
 PT:4/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you draw X cards and you lose X life, where X is the number of creature cards in target player's graveyard.
-SVar:TrigDraw:DB$ Draw | Defined$ TriggeredCardController | ValidTgts$ Player | TgtPrompt$ Choose target player | NumCards$ X | SubAbility$ DBLoseLife | References$ X
-SVar:DBLoseLife:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ X | References$ X
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredCardController | ValidTgts$ Player | TgtPrompt$ Choose target player | NumCards$ X | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ X
 SVar:X:TargetedPlayer$ValidGraveyard Creature.YouOwn
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_augur.jpg

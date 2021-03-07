@@ -2,7 +2,7 @@ Name:Priest of Forgotten Gods
 ManaCost:1 B
 Types:Creature Human Cleric
 PT:1/2
-A:AB$ LoseLife | Cost$ T Sac<2/Creature.Other/other creature> | ValidTgts$ Player | TgtPrompt$ Select target player | TargetMin$ 0 | TargetMax$ MaxTgts | References$ MaxTgts | LifeAmount$ 2 | SubAbility$ DBSac | SpellDescription$ Any number of target players each lose 2 life and sacrifice a creature. You add {B}{B} and draw a card.
+A:AB$ LoseLife | Cost$ T Sac<2/Creature.Other/other creature> | ValidTgts$ Player | TgtPrompt$ Select target player | TargetMin$ 0 | TargetMax$ MaxTgts | LifeAmount$ 2 | SubAbility$ DBSac | SpellDescription$ Any number of target players each lose 2 life and sacrifice a creature. You add {B}{B} and draw a card.
 SVar:MaxTgts:PlayerCountPlayers$Amount
 SVar:DBSac:DB$ Sacrifice | SacValid$ Creature | Defined$ Targeted | Amount$ 1 | SubAbility$ DBMana
 SVar:DBMana:DB$ Mana | Produced$ B | Amount$ 2 | AILogic$ Always | SubAbility$ DBDraw

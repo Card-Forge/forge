@@ -2,7 +2,7 @@ Name:Runesword
 ManaCost:6
 Types:Artifact
 A:AB$ Pump | Cost$ 3 T | NumAtt$ +2 | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ RuneswordEffect | SpellDescription$ Target attacking creature gets +2/+0 until end of turn. When that creature leaves the battlefield this turn, sacrifice CARDNAME. If the creature deals damage to a creature this turn, the creature dealt damage can't be regenerated this turn. If a creature dealt damage by the targeted creature would die this turn, exile that creature instead.
-SVar:RuneswordEffect:DB$ Effect | Name$ Runesword Effect | Triggers$ TrigSacRunesword,TrigNoregen | ReplacementEffects$ RuneswordRep | SVars$ RuneswordSac,PumpNogen,ExileEffect,RuneswordExile | References$ TrigSacRunesword,TrigNoregen,RuneswordSac,PumpNogen,ExileEffect,RuneswordExile | RememberObjects$ Targeted | ImprintCards$ Self
+SVar:RuneswordEffect:DB$ Effect | Name$ Runesword Effect | Triggers$ TrigSacRunesword,TrigNoregen | ReplacementEffects$ RuneswordRep | SVars$ RuneswordSac,PumpNogen,ExileEffect,RuneswordExile | RememberObjects$ Targeted | ImprintCards$ Self
 SVar:TrigSacRunesword:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ RuneswordSac | TriggerDescription$ When the targeted creature leaves the battlefield this turn, sacrifice Runesword.
 SVar:RuneswordSac:DB$ SacrificeAll | Defined$ Imprinted | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

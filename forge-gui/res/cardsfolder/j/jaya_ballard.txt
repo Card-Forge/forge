@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Jaya
 Loyalty:5
 A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Produced$ R | Amount$ 3 | RestrictValid$ Instant,Sorcery | AILogic$ ManaRitual | SpellDescription$ Add {R}{R}{R}. Spend this mana only to cast instant or sorcery spells.
 A:AB$ Discard | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 3 | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Discard up to three cards, then draw that many cards.
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Jaya Ballard | Image$ emblem_jaya_ballard | StaticAbilities$ STJaya | ReplacementEffects$ JayaReplace | SVars$ JayaMoveExile | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "You may cast instant and sorcery spells from your graveyard. If a spell cast this way would be put into your graveyard, exile it instead."

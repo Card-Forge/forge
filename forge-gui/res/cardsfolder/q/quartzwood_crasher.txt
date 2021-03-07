@@ -4,7 +4,7 @@ Types:Creature Dinosaur Beast
 PT:6/6
 K:Trample
 T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl+withTrample | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ DBToken | TriggerDescription$ Whenever one or more creatures you control with trample deal combat damage to a player, create an X/X green Dinosaur Beast creature token with trample, where X is the amount of damage those creatures dealt to that player.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ g_x_x_dinosaur_beast_trample | TokenPower$ X | TokenToughness$ X | References$ X | TokenOwner$ You | LegacyImage$ g x x dinosaur beast trample iko
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ g_x_x_dinosaur_beast_trample | TokenPower$ X | TokenToughness$ X | TokenOwner$ You | LegacyImage$ g x x dinosaur beast trample iko
 SVar:X:TriggerCount$DamageAmount
 DeckHas:Ability$Token
 Oracle:Trample\nWhenever one or more creatures you control with trample deal combat damage to a player, create an X/X green Dinosaur Beast creature token with trample, where X is the amount of damage those creatures dealt to that player.

@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Orc Pirate
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose 2 life unless you control another Pirate.
-SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
 SVar:X:Count$Valid Pirate.Other+YouCtrl
 SVar:NeedsToPlay:Pirate.Other+YouCtrl
 DeckHints:Type$Pirate

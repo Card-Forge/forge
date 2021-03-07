@@ -4,7 +4,7 @@ Types:Enchantment Aura Curse
 K:Enchant player
 A:SP$ Attach | Cost$ 4 B | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of enchanted player's upkeep, CARDNAME deals damage to that player equal to the number of Curses attached to them.
-SVar:TrigDamage:DB$ DealDamage | Defined$ EnchantedPlayer | NumDmg$ X | References$ X
+SVar:TrigDamage:DB$ DealDamage | Defined$ EnchantedPlayer | NumDmg$ X
 SVar:X:Count$Valid Curse.AttachedTo Player.EnchantedBy
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_thirst.jpg
 Oracle:Enchant player\nAt the beginning of enchanted player's upkeep, Curse of Thirst deals damage to that player equal to the number of Curses attached to them.

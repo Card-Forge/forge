@@ -2,9 +2,9 @@ Name:Guild Summit
 ManaCost:2 U
 Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ GuestList | TriggerDescription$ When CARDNAME enters the battlefield, you may tap any number of untapped Gates you control. Draw a card for each Gate tapped this way.
-SVar:GuestList:DB$ ChooseCard | Defined$ You | MinAmount$ 0 | Amount$ X | References$ X | Choices$ Gate.untapped+YouCtrl | ChoiceTitle$ Choose any number of untapped Gates you control | ChoiceZone$ Battlefield | RememberChosen$ True | SubAbility$ TrigTap
+SVar:GuestList:DB$ ChooseCard | Defined$ You | MinAmount$ 0 | Amount$ X | Choices$ Gate.untapped+YouCtrl | ChoiceTitle$ Choose any number of untapped Gates you control | ChoiceZone$ Battlefield | RememberChosen$ True | SubAbility$ TrigTap
 SVar:TrigTap:DB$ Tap | Defined$ Remembered | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Y | SubAbility$ DBCleanup | References$ Y
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Gate.untapped+YouCtrl
 SVar:Y:Remembered$Amount

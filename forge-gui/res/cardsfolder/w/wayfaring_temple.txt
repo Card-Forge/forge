@@ -2,7 +2,7 @@ Name:Wayfaring Temple
 ManaCost:1 G W
 Types:Creature Elemental
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ DBCopy | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, populate. (Create a token that's a copy of a creature token you control.)
 SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True

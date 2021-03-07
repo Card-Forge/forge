@@ -2,7 +2,7 @@ Name:Rumbling Aftershocks
 ManaCost:4 R
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl+kicked | TriggerZones$ Battlefield | Execute$ DamageSomeone | OptionalDecider$ You | TriggerDescription$ Whenever you cast a kicked spell, you may have CARDNAME deal damage to any target equal to the number of times that spell was kicked.
-SVar:DamageSomeone:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | References$ X | NumDmg$ X | TgtPrompt$ Select any target
+SVar:DamageSomeone:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | NumDmg$ X | TgtPrompt$ Select any target
 SVar:X:TriggeredSpellAbility$Count$TimesKicked
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rumbling_aftershocks.jpg

@@ -6,8 +6,8 @@ K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBEffect | TriggerDescription$ When CARDNAME enters the battlefield, prevent all damage that would be dealt to you this turn.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPrevent
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You | Description$ Prevent all damage that would be dealt to you this turn.
-T:Mode$ DamagePreventedOnce | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigPut | References$ X | TriggerDescription$ Whenever damage that would be dealt to you is prevented, put that many +1/+1 counters on CARDNAME.
-SVar:TrigPut:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | References$ X
+T:Mode$ DamagePreventedOnce | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigPut | TriggerDescription$ Whenever damage that would be dealt to you is prevented, put that many +1/+1 counters on CARDNAME.
+SVar:TrigPut:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selfless_squire.jpg
 Oracle:Flash\nWhen Selfless Squire enters the battlefield, prevent all damage that would be dealt to you this turn.\nWhenever damage that would be dealt to you is prevented, put that many +1/+1 counters on Selfless Squire.

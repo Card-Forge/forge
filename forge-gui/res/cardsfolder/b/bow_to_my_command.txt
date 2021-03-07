@@ -13,9 +13,9 @@ SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.C
 # to also get rid of the complex script part below and the AILogic$ BowToMyCommand hack in AiController#chooseCardsForEffect
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | TriggerZones$ Command | Execute$ RepeatOpp | TriggerDescription$ At the beginning of your opponents' end step, they may tap any number of untapped creatures they control with total power 8 or greater. If they do, abandon this scheme.
 SVar:RepeatOpp:DB$ RepeatEach | RepeatSubAbility$ ChooseCardsToTap | RepeatPlayers$ Opponent
-SVar:ChooseCardsToTap:DB$ ChooseCard | Defined$ Opponent | MinAmount$ 0 | Amount$ NumCreatures | References$ NumCreatures | Choices$ Creature.untapped+RememberedPlayerCtrl | ChoiceTitle$ Choose any number of untapped creatures you control | ChoiceZone$ Battlefield | RememberChosen$ True | AILogic$ BowToMyCommand | SubAbility$ TapChosenCards
-SVar:TapChosenCards:DB$ Tap | Defined$ Remembered | SubAbility$ AbandonSelf | ConditionCheckSVar$ TappedCreaturePower | ConditionSVarCompare$ GE8 | References$ TappedCreaturePower
-SVar:AbandonSelf:DB$ Abandon | SubAbility$ DBCleanup | ConditionCheckSVar$ TappedCreaturePower | ConditionSVarCompare$ GE8 | References$ TappedCreaturePower
+SVar:ChooseCardsToTap:DB$ ChooseCard | Defined$ Opponent | MinAmount$ 0 | Amount$ NumCreatures | Choices$ Creature.untapped+RememberedPlayerCtrl | ChoiceTitle$ Choose any number of untapped creatures you control | ChoiceZone$ Battlefield | RememberChosen$ True | AILogic$ BowToMyCommand | SubAbility$ TapChosenCards
+SVar:TapChosenCards:DB$ Tap | Defined$ Remembered | SubAbility$ AbandonSelf | ConditionCheckSVar$ TappedCreaturePower | ConditionSVarCompare$ GE8
+SVar:AbandonSelf:DB$ Abandon | SubAbility$ DBCleanup | ConditionCheckSVar$ TappedCreaturePower | ConditionSVarCompare$ GE8
 T:Mode$ Abandoned | ValidCard$ Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:NumCreatures:Count$Valid Creature.RememberedPlayerCtrl

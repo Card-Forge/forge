@@ -9,7 +9,7 @@ SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBPro
 SVar:DBProd:DB$ GenericChoice | Defined$ Remembered | Choices$ DBMillAndDamage,DoNothing | ConditionDefined$ Imprinted | ConditionPresent$ Card | ConditionCompare$ EQ1 | AILogic$ SinProdder
 SVar:DoNothing:DB$ Cleanup | SpellDescription$ Allow
 SVar:DBMillAndDamage:DB$ Mill | Defined$ You | NumCards$ 1 | SubAbility$ DBDamage | SpellDescription$ Deny
-SVar:DBDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ X | SubAbility$ DBCleanup
 SVar:X:Imprinted$CardManaCost
 SVar:DBPutIntoHand:DB$ Dig | DigNum$ 1 | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Hand | SubAbility$ DBCleanup | ConditionDefined$ Imprinted | ConditionPresent$ Card | ConditionCompare$ EQ1
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True | ClearImprinted$ True

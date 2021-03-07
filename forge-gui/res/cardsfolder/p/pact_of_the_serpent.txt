@@ -2,8 +2,8 @@ Name:Pact of the Serpent
 ManaCost:1 B B
 Types:Sorcery
 A:SP$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Choose a creature type. Target player draws X cards and loses X life, where X is the number of creatures they control of the chosen type.
-SVar:DBDraw:DB$ Draw | Defined$ Targeted | ValidTgts$ Player | TgtPrompt$ Choose target player | NumCards$ X | References$ X | SubAbility$ DBLoseLife | StackDescription$ None
-SVar:DBLoseLife:DB$ LoseLife | Defined$ Targeted | LifeAmount$ X | References$ X | StackDescription$ None
+SVar:DBDraw:DB$ Draw | Defined$ Targeted | ValidTgts$ Player | TgtPrompt$ Choose target player | NumCards$ X | SubAbility$ DBLoseLife | StackDescription$ None
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Targeted | LifeAmount$ X | StackDescription$ None
 SVar:X:TargetedPlayer$Valid Creature.YouCtrl+ChosenType
 AI:RemoveDeck:All
 Oracle:Choose a creature type. Target player draws X cards and loses X life, where X is the number of creatures they control of the chosen type.

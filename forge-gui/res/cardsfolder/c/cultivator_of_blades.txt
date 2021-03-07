@@ -4,7 +4,7 @@ Types:Creature Elf Artificer
 PT:1/1
 K:Fabricate:2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may have other attacking creatures get +X/+X until end of turn, where X is CARDNAME's power.
-SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking+Other | NumAtt$ X | NumDef$ X | References$ X
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking+Other | NumAtt$ X | NumDef$ X
 SVar:X:Count$CardPower
 DeckHas:Ability$Counters & Ability$Token
 Oracle:Fabricate 2 (When this creature enters the battlefield, put two +1/+1 counters on it or create two 1/1 colorless Servo artifact creature tokens.)\nWhenever Cultivator of Blades attacks, you may have other attacking creatures get +X/+X until end of turn, where X is Cultivator of Blades's power.

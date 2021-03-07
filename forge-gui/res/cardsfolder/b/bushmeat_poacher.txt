@@ -2,7 +2,7 @@ Name:Bushmeat Poacher
 ManaCost:3 B
 Types:Creature Human Soldier
 PT:2/4
-A:AB$ GainLife | Cost$ 1 T Sac<1/Creature.Other/another creature> | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBDraw | SpellDescription$ You gain life equal to the sacrificed creature's toughness. Draw a card.
+A:AB$ GainLife | Cost$ 1 T Sac<1/Creature.Other/another creature> | Defined$ You | LifeAmount$ X | SubAbility$ DBDraw | SpellDescription$ You gain life equal to the sacrificed creature's toughness. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:X:Sacrificed$CardToughness
 SVar:AIPreference:SacCost$Creature.Token,Creature.cmcLE3

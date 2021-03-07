@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Creature Elephant
 Colors:green
 PT:*/*
-S:Mode$ Continuous | SetPower$ ResurgenceX | SetToughness$ ResurgenceX | EffectZone$ Battlefield | CharacteristicDefining$ True | Description$ CARDNAME's power and toughness are each equal to the number of creature cards in its controller's graveyard. | References$ ResurgenceX
+S:Mode$ Continuous | SetPower$ ResurgenceX | SetToughness$ ResurgenceX | EffectZone$ Battlefield | CharacteristicDefining$ True | Description$ CARDNAME's power and toughness are each equal to the number of creature cards in its controller's graveyard.
 SVar:ResurgenceX:Count$TypeInYourYard.Creature
 Oracle:This creature's power and toughness are each equal to the number of creature cards in its controller's graveyard.

@@ -2,7 +2,7 @@ Name:Lena, Selfless Champion
 ManaCost:4 W W
 Types:Legendary Creature Human Knight
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Soldier creature token for each nontoken creature you control.
-SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ X | References$ X | TokenScript$ w_1_1_soldier | LegacyImage$ w 1 1 soldier m19
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ X | TokenScript$ w_1_1_soldier | LegacyImage$ w 1 1 soldier m19
 SVar:X:Count$Valid Creature.nonToken+YouCtrl
 A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl+powerLTY | KW$ Indestructible | SpellDescription$ Creatures you control with power less than CARDNAME's power gain indestructible until end of turn.
 SVar:Y:Count$CardPower

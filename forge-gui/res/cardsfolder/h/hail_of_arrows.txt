@@ -1,7 +1,7 @@
 Name:Hail of Arrows
 ManaCost:X W
 Types:Instant
-A:SP$ DealDamage | Cost$ X W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature to distribute damage to | NumDmg$ X | TargetMin$ Min | TargetMax$ MaxTgts | DividedAsYouChoose$ X | References$ X,Min,MaxTgts | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target attacking creatures.
+A:SP$ DealDamage | Cost$ X W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature to distribute damage to | NumDmg$ X | TargetMin$ Min | TargetMax$ MaxTgts | DividedAsYouChoose$ X | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target attacking creatures.
 SVar:MaxTgts:Count$Valid Creature.attacking
 SVar:Min:SVar$X/LimitMax.1
 SVar:X:Count$xPaid

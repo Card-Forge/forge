@@ -3,8 +3,8 @@ ManaCost:3 R
 Types:Legendary Creature Demon Spirit
 PT:0/0
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ TrigSac | Description$ As CARDNAME enters the battlefield, sacrifice any number of permanents. Shimatsu enters the battlefield with that many +1/+1 counters on it.
-SVar:TrigSac:DB$ Sacrifice | Amount$ SacX | References$ SacX | SacValid$ Permanent | Defined$ You | RememberSacrificed$ True | Optional$ True | SubAbility$ DBPutcounter
-SVar:DBPutcounter:DB$ PutCounter | ETB$ True | CounterType$ P1P1 | Defined$ Self | CounterNum$ X | References$ X | SubAbility$ MoveToPlay
+SVar:TrigSac:DB$ Sacrifice | Amount$ SacX | SacValid$ Permanent | Defined$ You | RememberSacrificed$ True | Optional$ True | SubAbility$ DBPutcounter
+SVar:DBPutcounter:DB$ PutCounter | ETB$ True | CounterType$ P1P1 | Defined$ Self | CounterNum$ X | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Permanent.YouCtrl

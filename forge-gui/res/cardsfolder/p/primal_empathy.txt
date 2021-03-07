@@ -2,7 +2,7 @@ Name:Primal Empathy
 ManaCost:1 G U
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBranch | TriggerDescription$ At the beginning of your upkeep, draw a card if you control a creature with the greatest power among creatures on the battlefield. Otherwise, put a +1/+1 counter on a creature you control.
-SVar:TrigBranch:DB$ Branch | References$ Y,Z | ConditionPresent$ Creature.YouCtrl | ConditionCompare$ GE1 | BranchConditionSVar$ Y | BranchConditionSVarCompare$ GEZ | TrueSubAbility$ Draw | FalseSubAbility$ PutCounter
+SVar:TrigBranch:DB$ Branch | ConditionPresent$ Creature.YouCtrl | ConditionCompare$ GE1 | BranchConditionSVar$ Y | BranchConditionSVarCompare$ GEZ | TrueSubAbility$ Draw | FalseSubAbility$ PutCounter
 SVar:Draw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:PutCounter:DB$ PutCounter | Choices$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 SVar:Y:Count$GreatestPower_Creature.YouCtrl

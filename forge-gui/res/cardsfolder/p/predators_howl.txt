@@ -1,7 +1,7 @@
 Name:Predator's Howl
 ManaCost:3 G
 Types:Instant
-A:SP$ Token | Cost$ 3 G | TokenAmount$ X | TokenScript$ g_2_2_wolf | TokenOwner$ You | LegacyImage$ g 2 2 wolf cns | References$ X | SpellDescription$ Create a 2/2 green Wolf creature token. Morbid — Create three 2/2 green Wolf creature tokens instead if a creature died this turn.
+A:SP$ Token | Cost$ 3 G | TokenAmount$ X | TokenScript$ g_2_2_wolf | TokenOwner$ You | LegacyImage$ g 2 2 wolf cns | SpellDescription$ Create a 2/2 green Wolf creature token. Morbid — Create three 2/2 green Wolf creature tokens instead if a creature died this turn.
 SVar:X:Count$Morbid.3.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predators_howl.jpg
 Oracle:Create a 2/2 green Wolf creature token.\nMorbid — Create three 2/2 green Wolf creature tokens instead if a creature died this turn.

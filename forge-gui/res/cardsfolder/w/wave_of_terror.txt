@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Enchantment
 K:Cumulative upkeep:1
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ At the beginning of your draw step, destroy each creature with converted mana cost equal to the number of age counters on CARDNAME. They can't be regenerated.
-SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Creature.cmcEQX | NoRegen$ True | References$ X
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Creature.cmcEQX | NoRegen$ True
 SVar:X:Count$CardCounters.AGE
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wave_of_terror.jpg

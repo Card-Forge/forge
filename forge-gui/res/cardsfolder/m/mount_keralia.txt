@@ -4,7 +4,7 @@ Types:Plane Regatha
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ BuildPressure | TriggerDescription$ At the beginning of your end step, put a pressure counter on CARDNAME.
 SVar:BuildPressure:DB$ PutCounter | Defined$ Self | CounterType$ PRESSURE | CounterNum$ 1
 T:Mode$ PlaneswalkedFrom | ValidCard$ Plane.Self | Execute$ Eruption | TriggerDescription$ When you planeswalk away from CARDNAME, it deals damage equal to the number of pressure counters on it to each creature and each planeswalker.
-SVar:Eruption:DB$ DamageAll | ValidCards$ Creature,Planeswalker | ValidDescription$ each creature and each planeswalker. | NumDmg$ KeraliaX | References$ KeraliaX
+SVar:Eruption:DB$ DamageAll | ValidCards$ Creature,Planeswalker | ValidDescription$ each creature and each planeswalker. | NumDmg$ KeraliaX
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, prevent all damage that planes named CARDNAME would deal this game to permanents you control.
 SVar:RolledChaos:DB$ Effect | Name$ Mount Keralia Effect | ReplacementEffects$ RPrevent | EffectOwner$ You | Duration$ Permanent | SpellDescription$ Prevent all damage that planes named CARDNAME would deal this game to permanents you control.
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Permanent.YouCtrl | ValidSource$ Plane.namedMount Keralia | Description$ Prevent all damage that planes named Mount Keralia would deal this game to permanents you control.

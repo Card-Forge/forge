@@ -7,8 +7,8 @@ SVar:DBChooseCard:DB$ ChooseCard | Choices$ Creature.YouCtrl,Enchantment.YouCtrl
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ ChosenCard | RememberChanged$ True | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
-SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | References$ X | SubAbility$ DBScry | SpellDescription$ You gain X life and scry X, where X is the number of Zombies you control.
-SVar:DBScry:DB$ Scry | ScryNum$ X | References$ X
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBScry | SpellDescription$ You gain X life and scry X, where X is the number of Zombies you control.
+SVar:DBScry:DB$ Scry | ScryNum$ X
 SVar:X:Count$Valid Zombie.YouCtrl
 DeckHints:Type$Zombie
 DeckHas:Ability$Token & Ability$Graveyard & Ability$LifeGain

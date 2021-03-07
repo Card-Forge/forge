@@ -1,7 +1,7 @@
 Name:Drag to the Underworld
 ManaCost:2 B B
 Types:Instant
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ CARDNAME costs {X} less to cast, where X is your devotion to black.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {X} less to cast, where X is your devotion to black.
 SVar:X:Count$Devotion.Black
 SVar:BuffedBy:Permanent.Black
 A:SP$ Destroy | Cost$ 2 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.

@@ -5,8 +5,8 @@ K:Cumulative upkeep:1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, put a growth counter on CARDNAME.
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Opponent | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's draw step, that player draws an additional card for each growth counter on CARDNAME, then CARDNAME deals damage to the player equal to the number of cards they drew this way.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ GROWTH | CounterNum$ 1
-SVar:TrigDraw:DB$ Draw | Defined$ TriggeredPlayer | NumCards$ X | References$ X | SubAbility$ DBDamage
-SVar:DBDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X | References$ X
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredPlayer | NumCards$ X | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X
 SVar:X:Count$CardCounters.GROWTH
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malignant_growth.jpg

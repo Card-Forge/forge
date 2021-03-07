@@ -2,7 +2,7 @@ Name:Nemesis of Mortals
 ManaCost:4 G G
 Types:Creature Snake
 PT:5/5
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature card in your graveyard.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature card in your graveyard.
 K:Monstrosity:5:7 G G:X
 SVar:X:Count$ValidGraveyard Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nemesis_of_mortals.jpg

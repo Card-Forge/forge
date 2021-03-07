@@ -4,7 +4,7 @@ Types:Plane Ravnica
 T:Mode$ PlaneswalkedFrom | ValidCard$ Plane.Self | Execute$ OrzhovaDeal | TriggerDescription$ When you planeswalk away from CARDNAME, each player returns all creature cards from their graveyard to the battlefield.
 SVar:OrzhovaDeal:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, for each opponent, exile up to one target creature card from that player's graveyard.
-SVar:RolledChaos:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature each opponent controls. | TargetMin$ 0 | TargetMax$ OneEach | References$ OneEach | TargetsWithDifferentControllers$ True
+SVar:RolledChaos:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature each opponent controls. | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True
 SVar:OneEach:PlayerCountOpponents$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhova.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always

@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When a creature you control dies, sacrifice CARDNAME. If you do, create four 1/1 colorless Spirit creature tokens.
 SVar:TrigSac:DB$ SacrificeAll | ValidCards$ Card.Self | RememberSacrificed$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenAmount$ 4 | TokenScript$ c_1_1_spirit | TokenOwner$ You | LegacyImage$ c 1 1 spirit sok | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup | References$ X
+SVar:DBToken:DB$ Token | TokenAmount$ 4 | TokenScript$ c_1_1_spirit | TokenOwner$ You | LegacyImage$ c 1 1 spirit sok | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/promise_of_bunrei.jpg

@@ -2,7 +2,7 @@ Name:Wirewood Channeler
 ManaCost:3 G
 Types:Creature Elf Druid
 PT:2/2
-A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | References$ X | SpellDescription$ Add X mana of any one color, where X is the number of Elves on the battlefield.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is the number of Elves on the battlefield.
 SVar:X:Count$Valid Elf
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

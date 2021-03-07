@@ -2,7 +2,7 @@ Name:Angelic Exaltation
 ManaCost:3 W
 Types:Enchantment
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of creatures you control.
-SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +X | NumDef$ +X | References$ X
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +X | NumDef$ +X
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:PlayMain1:TRUE
 Oracle:Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of creatures you control.

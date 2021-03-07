@@ -4,7 +4,7 @@ Types:Enchantment Aura Curse
 K:Enchant player
 A:SP$ Attach | Cost$ 3 R R | ValidTgts$ Player | AILogic$ Curse
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Player.EnchantedBy | ReplaceWith$ DmgTwice | Description$ If a source would deal damage to enchanted player, it deals double that damage to that player instead.
-SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X | References$ X
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_bloodletting.jpg
 Oracle:Enchant player\nIf a source would deal damage to enchanted player, it deals double that damage to that player instead.

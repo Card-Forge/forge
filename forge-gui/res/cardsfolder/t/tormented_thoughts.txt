@@ -1,7 +1,7 @@
 Name:Tormented Thoughts
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 2 B Sac<1/Creature> | ValidTgts$ Player | NumCards$ X | References$ X | Mode$ TgtChoose | SpellDescription$ Target player discards a number of cards equal to the sacrificed creature's power.
+A:SP$ Discard | Cost$ 2 B Sac<1/Creature> | ValidTgts$ Player | NumCards$ X | Mode$ TgtChoose | SpellDescription$ Target player discards a number of cards equal to the sacrificed creature's power.
 SVar:X:Sacrificed$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tormented_thoughts.jpg
 Oracle:As an additional cost to cast this spell, sacrifice a creature.\nTarget player discards a number of cards equal to the sacrificed creature's power.

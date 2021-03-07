@@ -4,9 +4,9 @@ Types:Legendary Creature Human Cleric
 PT:2/5
 A:AB$ ChooseCard | Cost$ T X | ValidTgts$ Creature.White+YouCtrl | TgtPrompt$ Select target white creature you control | Mandatory$ True | Defined$ You | RememberChosen$ True | SubAbility$ DBSetVarBefore | SpellDescription$ The next X damage that would be dealt this turn to target white creature you control is dealt to CARDNAME instead. | StackDescription$ SpellDescription
 SVar:DBSetVarBefore:DB$ StoreSVar | SVar$ Y | Type$ CountSVar | Expression$ X | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | ReplacementEffects$ HazduhrDamage | Triggers$ OutOfSight | SVars$ HazduhrDamage,HazduhrDmg,ExileEffect,OutOfSight,Y | References$ HazduhrDamage,OutOfSight,HazduhrDmg,ExileEffect,Y | RememberObjects$ Targeted | ImprintCards$ Self | SubAbility$ DBCleanup
-SVar:HazduhrDamage:Event$ DamageDone | ValidTarget$ Card.IsRemembered | ReplaceWith$ HazduhrDmg | DamageTarget$ Imprinted | References$ Y | Description$ The next X damage that would be dealt this turn to target white creature you control is dealt to EFFECTSOURCE instead.
-SVar:HazduhrDmg:DB$ ReplaceSplitDamage | DamageTarget$ Imprinted | VarName$ Y | References$ Y
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ HazduhrDamage | Triggers$ OutOfSight | SVars$ HazduhrDamage,HazduhrDmg,ExileEffect,OutOfSight,Y | RememberObjects$ Targeted | ImprintCards$ Self | SubAbility$ DBCleanup
+SVar:HazduhrDamage:Event$ DamageDone | ValidTarget$ Card.IsRemembered | ReplaceWith$ HazduhrDmg | DamageTarget$ Imprinted | Description$ The next X damage that would be dealt this turn to target white creature you control is dealt to EFFECTSOURCE instead.
+SVar:HazduhrDmg:DB$ ReplaceSplitDamage | DamageTarget$ Imprinted | VarName$ Y
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted,Card.IsRemembered | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True

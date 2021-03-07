@@ -2,7 +2,7 @@ Name:Hydroblast
 ManaCost:U
 Types:Instant
 A:SP$ Charm | Cost$ U | Choices$ DBCounter,DBDestroy | CharmNum$ 1
-SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | AITgts$ Card.Red | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | SpellDescription$ Counter target spell if it's red.
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | AITgts$ Card.Red | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SpellDescription$ Counter target spell if it's red.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent | AITgts$ Card.Red | TgtPrompt$ Select target permanent | ConditionDefined$ Targeted | ConditionPresent$ Card.Red | ConditionCompare$ GE1 | SpellDescription$ Destroy target permanent if it's red.
 SVar:X:Targeted$Valid Card.Red
 AI:RemoveDeck:Random

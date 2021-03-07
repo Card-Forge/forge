@@ -2,7 +2,7 @@ Name:Rupture
 ManaCost:2 R
 Types:Sorcery
 A:SP$ Sacrifice | Cost$ 2 R | Amount$ 1 | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ RuptureDmg | SpellDescription$ Sacrifice a creature. CARDNAME deals damage equal to that creature's power to each creature without flying and each player.
-SVar:RuptureDmg:DB$ DamageAll | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | NumDmg$ X | References$ X | SubAbility$ DBCleanup
+SVar:RuptureDmg:DB$ DamageAll | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower
 AI:RemoveDeck:All

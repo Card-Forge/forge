@@ -4,8 +4,8 @@ Types:Enchantment
 K:etbCounter:OMEN:7
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCtr | TriggerDescription$ At the beginning of your upkeep, remove an omen counter from CARDNAME. If there are no omen counters on CARDNAME, the player with the highest life total wins the game. If two or more players are tied for highest life total, the game is a draw.
 SVar:TrigRemoveCtr:DB$ RemoveCounter | Defined$ Self | CounterType$ OMEN | CounterNum$ 1 | SubAbility$ WinnerDecided
-SVar:WinnerDecided:DB$ WinsGame | Defined$ Player.LifeEquals_X | References$ X,NumHighestLife | ConditionPresent$ Card.Self+counters_EQ0_OMEN | ConditionCheckSVar$ NumHighestLife | ConditionSVarCompare$ LT2 | SubAbility$ GameIsADraw
-SVar:GameIsADraw:DB$ GameDrawn | ConditionPresent$ Card.Self+counters_EQ0_OMEN | References$ NumHighestLife | ConditionCheckSVar$ NumHighestLife | ConditionSVarCompare$ GE2
+SVar:WinnerDecided:DB$ WinsGame | Defined$ Player.LifeEquals_X | ConditionPresent$ Card.Self+counters_EQ0_OMEN | ConditionCheckSVar$ NumHighestLife | ConditionSVarCompare$ LT2 | SubAbility$ GameIsADraw
+SVar:GameIsADraw:DB$ GameDrawn | ConditionPresent$ Card.Self+counters_EQ0_OMEN | ConditionCheckSVar$ NumHighestLife | ConditionSVarCompare$ GE2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_convergence.jpg
 SVar:X:PlayerCountPlayers$HighestLifeTotal
 SVar:NumHighestLife:PlayerCountPlayers$TiedForHighestLife

@@ -7,7 +7,7 @@ K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
 K:etbCounter:SLEIGHT:1
 R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature.EnchantedBy | ValidSource$ Card.ChosenColor | Description$ Prevent all damage that would be dealt to enchanted creature by sources of the chosen color.
-A:AB$ PutCounter | Cost$ X | Defined$ Self | CounterType$ SLEIGHT | CounterNum$ 1 | SubAbility$ ChooseColor | References$ X | SpellDescription$ Put a sleight counter on CARDNAME and choose a color. X is the number of sleight counters on CARDNAME.
+A:AB$ PutCounter | Cost$ X | Defined$ Self | CounterType$ SLEIGHT | CounterNum$ 1 | SubAbility$ ChooseColor | SpellDescription$ Put a sleight counter on CARDNAME and choose a color. X is the number of sleight counters on CARDNAME.
 SVar:X:Count$CardCounters.SLEIGHT
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chromatic_armor.jpg

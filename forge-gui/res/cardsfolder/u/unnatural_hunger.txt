@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 B B | ValidTgts$ Creature | AITgts$ Card.powerGE3 | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, CARDNAME deals damage equal to that creature's power to that player unless they sacrifice another creature.
-SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X | References$ X | UnlessCost$ Sac<1/Creature.NotEnchantedBy> | UnlessPayer$ EnchantedController
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X | UnlessCost$ Sac<1/Creature.NotEnchantedBy> | UnlessPayer$ EnchantedController
 SVar:X:Enchanted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unnatural_hunger.jpg
 Oracle:Enchant creature\nAt the beginning of the upkeep of enchanted creature's controller, Unnatural Hunger deals damage equal to that creature's power to that player unless they sacrifice another creature.

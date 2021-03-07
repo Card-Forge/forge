@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Legendary Creature Vampire Cleric
 PT:1/3
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you gain life, target opponent loses that much life.
-SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ X | References$ X
+SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ X
 SVar:X:TriggerCount$LifeAmount
 A:AB$ PumpAll | Cost$ 3 B B | ValidCards$ Creature.YouCtrl | KW$ Lifelink | SpellDescription$ Creatures you control gain lifelink until end of turn.
 DeckHas:Ability$LifeGain

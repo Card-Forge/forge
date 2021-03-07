@@ -1,7 +1,7 @@
 Name:Landbind Ritual
 ManaCost:3 W W
 Types:Sorcery
-A:SP$ GainLife | Cost$ 3 W W | LifeAmount$ X | References$ X | SpellDescription$ You gain 2 life for each Plains you control.
+A:SP$ GainLife | Cost$ 3 W W | LifeAmount$ X | SpellDescription$ You gain 2 life for each Plains you control.
 SVar:X:Count$TypeYouCtrl.Plains/Times.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/landbind_ritual.jpg
 Oracle:You gain 2 life for each Plains you control.

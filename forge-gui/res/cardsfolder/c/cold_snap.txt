@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Enchantment
 K:Cumulative upkeep:2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals damage to that player equal to the number of snow lands they control.
-SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X | References$ X
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X
 SVar:X:Count$Valid Land.Snow+ActivePlayerCtrl
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cold_snap.jpg

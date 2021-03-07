@@ -8,9 +8,9 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigJoinForces | TriggerDescri
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigJoinForces | Secondary$ True | TriggerDescription$ Join forces — Whenever CARDNAME attacks or blocks, each player starting with you may pay any amount of mana. CARDNAME gets +X/+0 until end of turn, where X is the total amount of mana paid this way.
 SVar:TrigJoinForces:DB$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBPay | SubAbility$ DBPump
 SVar:DBPay:DB$ ChooseNumber | Defined$ Player.IsRemembered | ChooseAnyNumber$ True | ListTitle$ Pay Any Mana |SubAbility$ DBStore
-SVar:DBStore:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ CountSVar | Expression$ JoinForcesAmount/Plus.X | UnlessCost$ X | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True | UnlessAI$ OnlyOwn | References$ X,JoinForcesAmount
-SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ JoinForcesAmount | SubAbility$ DBReset | References$ JoinForcesAmount
-SVar:DBReset:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ Number | Expression$ 0 | References$ JoinForcesAmount
+SVar:DBStore:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ CountSVar | Expression$ JoinForcesAmount/Plus.X | UnlessCost$ X | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True | UnlessAI$ OnlyOwn
+SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ JoinForcesAmount | SubAbility$ DBReset
+SVar:DBReset:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ Number | Expression$ 0
 SVar:X:Count$ChosenNumber
 SVar:JoinForcesAmount:Number$0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_charged_dragon.jpg

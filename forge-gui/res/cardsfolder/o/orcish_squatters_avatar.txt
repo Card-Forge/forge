@@ -4,7 +4,7 @@ Types:Vanguard
 HandLifeModifier:-1/-1
 T:Mode$ Phase | PreCombatMain$ True | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigGetMana | TriggerDescription$ At the beginning of your precombat main phase, add {C} for each land target opponent controls.
 SVar:TrigGetMana:DB$ Pump | ValidTgts$ Player | RememberObjects$ Targeted | SubAbility$ DBMana
-SVar:DBMana:DB$ Mana | Produced$ C | Amount$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBMana:DB$ Mana | Produced$ C | Amount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Land.RememberedPlayerCtrl
 SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Orcish Squatters Avatar.full.jpg

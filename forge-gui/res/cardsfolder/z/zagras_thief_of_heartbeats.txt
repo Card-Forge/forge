@@ -5,7 +5,7 @@ PT:4/4
 K:Flying
 K:Deathtouch
 K:Haste
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | References$ X | Description$ This spell costs {1} less to cast for each creature in your party.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature in your party.
 SVar:X:Count$Party
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Deathtouch | Description$ Other creatures you control have deathtouch.
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Planeswalker | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a creature you control deals combat damage to a planeswalker, destroy that planeswalker.

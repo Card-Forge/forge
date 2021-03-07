@@ -2,6 +2,6 @@ Name:Grisly Spectacle
 ManaCost:2 B B
 Types:Instant
 A:SP$ Destroy | Cost$ 2 B B | ValidTgts$ Creature.nonArtifact | TgtPrompt$ Select target nonartifact creature | SubAbility$ DBMill | SpellDescription$ Destroy target nonartifact creature. Its controller mills cards equal to that creature's power.
-SVar:DBMill:DB$ Mill | NumCards$ X | Defined$ TargetedController | References$ X
+SVar:DBMill:DB$ Mill | NumCards$ X | Defined$ TargetedController
 SVar:X:TargetedLKI$CardPower
 Oracle:Destroy target nonartifact creature. Its controller mills cards equal to that creature's power.

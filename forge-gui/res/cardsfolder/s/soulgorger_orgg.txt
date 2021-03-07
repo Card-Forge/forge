@@ -4,7 +4,7 @@ Types:Creature Nightmare Orgg
 PT:6/6
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose all but 1 life.
-SVar:TrigLoseLife:DB$ StoreSVar | References$ LifeAllButOne | SVar$ LifePaidOnETB | Type$ Calculate | Expression$ LifeAllButOne | SubAbility$ DBLoseLife
+SVar:TrigLoseLife:DB$ StoreSVar | SVar$ LifePaidOnETB | Type$ Calculate | Expression$ LifeAllButOne | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ LifePaidOnETB
 SVar:LifePaidOnETB:Number$0
 SVar:LifeAllButOne:Count$YourLifeTotal/Minus.1

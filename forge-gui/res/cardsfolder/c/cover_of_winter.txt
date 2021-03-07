@@ -2,7 +2,7 @@ Name:Cover of Winter
 ManaCost:2 W
 Types:Snow Enchantment
 K:Cumulative upkeep:S
-S:Mode$ PreventDamage | Target$ You,Creature.YouCtrl | Source$ Creature | CombatDamage$ True | Amount$ X | References$ X | Description$ If a creature would deal combat damage to you and/or one or more creatures you control, prevent X of that damage, where X is the number of age counters on CARDNAME.
+S:Mode$ PreventDamage | Target$ You,Creature.YouCtrl | Source$ Creature | CombatDamage$ True | Amount$ X | Description$ If a creature would deal combat damage to you and/or one or more creatures you control, prevent X of that damage, where X is the number of age counters on CARDNAME.
 A:AB$ PutCounter | Cost$ S | CounterType$ AGE | CounterNum$ 1 | SpellDescription$ Put a age counter on CARDNAME.
 SVar:X:Count$CardCounters.AGE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cover_of_winter.jpg

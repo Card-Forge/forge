@@ -2,7 +2,7 @@ Name:Alrund, God of the Cosmos
 ManaCost:3 U U
 Types:Legendary Creature God
 PT:1/1
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ Z | AddToughness$ Z | References$ X,Y,Z | Description$ NICKNAME gets +1/+1 for each card in your hand and each foretold card you own in exile.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ Z | AddToughness$ Z | Description$ NICKNAME gets +1/+1 for each card in your hand and each foretold card you own in exile.
 SVar:X:Count$InYourHand
 SVar:Y:Count$ValidExile Card.foretold+YouOwn
 SVar:Z:SVar$X/Plus.Y

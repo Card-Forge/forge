@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Human Soldier
 PT:1/2
 K:Cumulative upkeep:1
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of age counters on it to target attacking or blocking creature.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of age counters on it to target attacking or blocking creature.
 SVar:X:Count$CardCounters.AGE
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_javelineer.jpg

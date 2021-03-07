@@ -8,8 +8,8 @@ SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player | AILogic$ Curse 
 SVar:ChoosePTwo:DB$ ChoosePlayer | Defined$ You | Choices$ NonChosenPlayer | AILogic$ Curse
 T:Mode$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Player.Chosen | Execute$ TrigLoseLifeRemembered | TriggerDescription$ Whenever damage is dealt to one of the chosen players, the other chosen player also loses that much life.
 T:Mode$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Player.IsRemembered | Execute$ TrigLoseLifeChosen | Secondary$ True | TriggerDescription$ Whenever damage is dealt to one of the chosen players, the other chosen player also loses that much life.
-SVar:TrigLoseLifeRemembered:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X | References$ X
-SVar:TrigLoseLifeChosen:DB$ LoseLife | Defined$ Player.Chosen | LifeAmount$ X | References$ X
+SVar:TrigLoseLifeRemembered:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X
+SVar:TrigLoseLifeChosen:DB$ LoseLife | Defined$ Player.Chosen | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

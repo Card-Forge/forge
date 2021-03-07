@@ -3,7 +3,7 @@ ManaCost:4 G
 Types:Creature Human Rogue
 PT:3/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a 2/2 green Wolf creature token that's tapped and attacking for each creature card in your graveyard.
-SVar:TrigToken:DB$ Token | LegacyImage$ g 2 2 wolf isd | TokenAmount$ X | TokenScript$ g_2_2_wolf | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True | References$ X
+SVar:TrigToken:DB$ Token | LegacyImage$ g 2 2 wolf isd | TokenAmount$ X | TokenScript$ g_2_2_wolf | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
 SVar:X:Count$TypeInYourYard.Creature
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kessig_cagebreakers.jpg

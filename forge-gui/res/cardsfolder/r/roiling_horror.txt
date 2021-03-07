@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Creature Horror
 Text:X can't be 0.
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | References$ Y,Z | Description$ CARDNAME's power and toughness are each equal to your life total minus the life total of an opponent with the most life.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ CARDNAME's power and toughness are each equal to your life total minus the life total of an opponent with the most life.
 K:Suspend:X:XCantBe0 X B B B
 T:Mode$ CounterRemoved | ValidCard$ Card.Self | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigLoseLife | TriggerDescription$ Whenever a time counter is removed from CARDNAME while it's exiled, target player loses 1 life and you gain 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Player | TgtPrompt$ Choose a player | LifeAmount$ 1 | SubAbility$ DBGainLife

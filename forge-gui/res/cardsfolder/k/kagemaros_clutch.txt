@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 B | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -X | AddToughness$ -X | References$ X | Description$ Enchanted creature gets -X/-X, where X is the number of cards in your hand.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -X | AddToughness$ -X | Description$ Enchanted creature gets -X/-X, where X is the number of cards in your hand.
 SVar:X:Count$InYourHand
 AI:RemoveDeck:All
 Oracle:Enchant creature\nEnchanted creature gets -X/-X, where X is the number of cards in your hand.

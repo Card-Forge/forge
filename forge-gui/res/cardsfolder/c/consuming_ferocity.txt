@@ -6,7 +6,7 @@ A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature.nonWall | TgtPrompt$ Select targe
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | Description$ Enchanted creature gets +1/+0.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+0 counter on enchanted creature. If that creature has three or more +1/+0 counters on it, it deals damage equal to its power to its controller, then destroy that creature and it can't be regenerated.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Enchanted | CounterType$ P1P0 | CounterNum$ 1 | SubAbility$ DBDmg
-SVar:DBDmg:DB$ DealDamage | Defined$ TriggeredPlayer | DamageSource$ Enchanted | NumDmg$ X | References$ X | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE3 | SubAbility$ DBDes
+SVar:DBDmg:DB$ DealDamage | Defined$ TriggeredPlayer | DamageSource$ Enchanted | NumDmg$ X | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE3 | SubAbility$ DBDes
 SVar:DBDes:DB$ Destroy | Defined$ Enchanted | NoRegen$ True | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE3
 SVar:Y:Count$TotalCounters_P1P0_Creature.EnchantedBy
 SVar:X:Enchanted$CardPower

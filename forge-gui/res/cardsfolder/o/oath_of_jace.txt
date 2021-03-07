@@ -5,7 +5,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 3 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ At the beginning of your upkeep, scry X, where X is the number of planeswalkers you control.
-SVar:TrigScry:DB$ Scry | ScryNum$ X | References$ X
+SVar:TrigScry:DB$ Scry | ScryNum$ X
 SVar:X:Count$Valid Planeswalker.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oath_of_jace.jpg
 Oracle:When Oath of Jace enters the battlefield, draw three cards, then discard two cards.\nAt the beginning of your upkeep, scry X, where X is the number of planeswalkers you control.

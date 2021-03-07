@@ -2,9 +2,9 @@ Name:Invasive Surgery
 ManaCost:U
 Types:Instant
 A:SP$ Counter | Cost$ U | TargetType$ Spell | ValidTgts$ Sorcery | RememberCountered$ True | SubAbility$ ExileYard | SpellDescription$ Counter target sorcery spell. Delirium — If there are four or more card types amongst cards in your graveyard, search the graveyard, hand, and library of that spell's controller for cards with the same name as that spell, exile those cards, then that player shuffles their library.
-SVar:ExileYard:DB$ ChangeZone | Condition$ Delirium | Origin$ Graveyard | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInYard | References$ NumInYard | Chooser$ You | Hidden$ True | SubAbility$ ExileHand | StackDescription$ None
-SVar:ExileHand:DB$ ChangeZone | Condition$ Delirium | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInHand | References$ NumInHand | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None
-SVar:ExileLib:DB$ ChangeZone | Condition$ Delirium | Origin$ Library | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInLib | References$ NumInLib | Chooser$ You | Shuffle$ True | StackDescription$ None | SubAbility$ DBCleanup
+SVar:ExileYard:DB$ ChangeZone | Condition$ Delirium | Origin$ Graveyard | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInYard | Chooser$ You | Hidden$ True | SubAbility$ ExileHand | StackDescription$ None
+SVar:ExileHand:DB$ ChangeZone | Condition$ Delirium | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None
+SVar:ExileLib:DB$ ChangeZone | Condition$ Delirium | Origin$ Library | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInLib | Chooser$ You | Shuffle$ True | StackDescription$ None | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NumInLib:TargetedController$CardsInLibrary
 SVar:NumInHand:TargetedController$CardsInHand

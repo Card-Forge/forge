@@ -1,7 +1,7 @@
 Name:Mob Justice
 ManaCost:1 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target player or planeswalker equal to the number of creatures you control.
+A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target player or planeswalker equal to the number of creatures you control.
 SVar:X:Count$TypeYouCtrl.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mob_justice.jpg
 Oracle:Mob Justice deals damage to target player or planeswalker equal to the number of creatures you control.

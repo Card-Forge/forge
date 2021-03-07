@@ -2,7 +2,7 @@ Name:Molderhulk
 ManaCost:7 B G
 Types:Creature Fungus Zombie
 PT:6/6
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | References$ X | EffectZone$ All | Description$ Undergrowth - This spell costs {1} less to cast for each creature card in your graveyard.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Undergrowth - This spell costs {1} less to cast for each creature card in your graveyard.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target land card from your graveyard to the battlefield.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land card from your graveyard
 SVar:X:Count$TypeInYourYard.Creature

@@ -2,7 +2,7 @@ Name:Neurok Spy
 ManaCost:2 U
 Types:Creature Human Rogue
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ Unblockable | CheckSVar$ X | SVarCompare$ GE1 | References$ X | Description$ CARDNAME can't be blocked as long as defending player controls an artifact.
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ Unblockable | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME can't be blocked as long as defending player controls an artifact.
 SVar:X:Count$Valid Artifact.DefenderCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_spy.jpg
 Oracle:Neurok Spy can't be blocked as long as defending player controls an artifact.

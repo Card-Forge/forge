@@ -4,9 +4,9 @@ Types:Creature Beast
 PT:3/3
 K:Devour:3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDmg | TriggerDescription$ When CARDNAME enters the battlefield, it deals X damage divided as you choose among up to X target creatures, where X is its power. Each of those creatures deals damage equal to its power to CARDNAME.
-SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ FirePower | TargetMin$ 0 | TargetMax$ FirePower | References$ FirePower | DividedAsYouChoose$ FirePower | SubAbility$ DBDmg | RememberTargets$ True | StackDescription$ None
+SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ FirePower | TargetMin$ 0 | TargetMax$ FirePower | DividedAsYouChoose$ FirePower | SubAbility$ DBDmg | RememberTargets$ True | StackDescription$ None
 SVar:DBDmg:DB$ RepeatEach | RepeatSubAbility$ GigantotheriumFight | UseImprinted$ True | DefinedCards$ Targeted | StackDescription$ None | DamageMap$ True
-SVar:GigantotheriumFight:DB$ DealDamage | DamageSource$ Imprinted | NumDmg$ Y | References$ Y | Defined$ Self | StackDescription$ None
+SVar:GigantotheriumFight:DB$ DealDamage | DamageSource$ Imprinted | NumDmg$ Y | Defined$ Self | StackDescription$ None
 SVar:FirePower:Count$CardPower
 SVar:Y:Imprinted$CardPower
 DeckHas:Ability$Counters

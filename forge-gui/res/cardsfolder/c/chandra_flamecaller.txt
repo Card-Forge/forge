@@ -4,10 +4,10 @@ Types:Legendary Planeswalker Chandra
 Loyalty:4
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 2 | TokenScript$ r_3_1_elemental_haste | LegacyImage$ r 3 1 elemental haste ogw | AtEOT$ Exile | SpellDescription$ Create two 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.
 A:AB$ Discard | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Defined$ You | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Discard all the cards in your hand, then draw that many cards plus one.
-SVar:DBDraw:DB$ Draw | NumCards$ Y | Defined$ You | SubAbility$ DBCleanup | References$ Y
+SVar:DBDraw:DB$ Draw | NumCards$ Y | Defined$ You | SubAbility$ DBCleanup
 SVar:Y:Remembered$Amount.Plus.1
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
-A:AB$ DamageAll | Cost$ SubCounter<X/LOYALTY> | NumDmg$ X | References$ X | ValidCards$ Creature | Planeswalker$ True | Ultimate$ True | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals X damage to each creature.
+A:AB$ DamageAll | Cost$ SubCounter<X/LOYALTY> | NumDmg$ X | ValidCards$ Creature | Planeswalker$ True | Ultimate$ True | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals X damage to each creature.
 SVar:X:Count$xPaid
 DeckHas:Ability$Token
 SVar:PlayMain1:ALWAYS

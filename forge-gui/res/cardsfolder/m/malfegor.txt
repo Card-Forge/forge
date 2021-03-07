@@ -5,7 +5,7 @@ PT:6/6
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard your hand. Each opponent sacrifices a creature for each card discarded this way.
 SVar:TrigDiscard:DB$ Discard | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBSacrifice
-SVar:DBSacrifice:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature | SacMessage$ Creature | Amount$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBSacrifice:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature | SacMessage$ Creature | Amount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malfegor.jpg

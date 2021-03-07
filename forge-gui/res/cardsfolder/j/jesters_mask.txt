@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact
 K:CARDNAME enters the battlefield tapped.
 A:AB$ ChangeZoneAll | Cost$ 1 T Sac<1/CARDNAME> | ValidTgts$ Opponent | Origin$ Hand | Destination$ Library | ChangeType$ Card | RememberChanged$ True | IsCurse$ True | SubAbility$ DBMask | SpellDescription$ Target opponent puts the cards from their hand on top of their library. Search that player's library for that many cards. That player puts those cards into their hand, then shuffles their library.
-SVar:DBMask:DB$ ChangeZone | DefinedPlayer$ Targeted | Origin$ Library | Destination$ Hand | ChangeNum$ X | ChangeType$ Card | Chooser$ You | SubAbility$ DBCleanup | References$ X
+SVar:DBMask:DB$ ChangeZone | DefinedPlayer$ Targeted | Origin$ Library | Destination$ Hand | ChangeNum$ X | ChangeType$ Card | Chooser$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 AI:RemoveDeck:All

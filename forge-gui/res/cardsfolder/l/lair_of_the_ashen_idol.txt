@@ -3,11 +3,11 @@ ManaCost:no cost
 Types:Plane Azgol
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ SacToIdol | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature. If you can't, planeswalk.
 SVar:SacToIdol:DB$ Sacrifice | Defined$ You | SacValid$ Creature | SubAbility$ IdolWalk | RememberSacrificed$ True
-SVar:IdolWalk:DB$ Planeswalk | ConditionCheckSVar$ IdolX | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup | References$ IdolX
+SVar:IdolWalk:DB$ Planeswalk | ConditionCheckSVar$ IdolX | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:IdolX:Remembered$Amount
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, any number of target players each create a 2/2 black Zombie creature token.
-SVar:RolledChaos:DB$ Token | ValidTgts$ Player | TgtPrompt$ Select target player to receive zombie token | TargetMin$ 0 | TargetMax$ MaxTgt | References$ MaxTgt | TokenScript$ b_2_2_zombie | TokenOwner$ Targeted | TokenAmount$ 1 | LegacyImage$ b 2 2 zombie pc2
+SVar:RolledChaos:DB$ Token | ValidTgts$ Player | TgtPrompt$ Select target player to receive zombie token | TargetMin$ 0 | TargetMax$ MaxTgt | TokenScript$ b_2_2_zombie | TokenOwner$ Targeted | TokenAmount$ 1 | LegacyImage$ b 2 2 zombie pc2
 SVar:MaxTgt:PlayerCountPlayers$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lair_of_the_ashen_idol.jpg
 Oracle:At the beginning of your upkeep, sacrifice a creature. If you can't, planeswalk.\nWhenever you roll {CHAOS}, any number of target players each create a 2/2 black Zombie creature token.

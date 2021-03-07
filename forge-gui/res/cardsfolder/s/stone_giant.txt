@@ -2,7 +2,7 @@ Name:Stone Giant
 ManaCost:2 R R
 Types:Creature Giant
 PT:3/4
-A:AB$ Pump | Cost$ T | ValidTgts$ Creature.YouCtrl+toughnessLTX | References$ X | TgtPrompt$ Select target creature you control with toughness less than Stone Giant's. | KW$ Flying | AtEOT$ Destroy | SpellDescription$ Target creature you control with toughness less than CARDNAME's power gains flying until end of turn. Destroy that creature at the beginning of the next end step.
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.YouCtrl+toughnessLTX | TgtPrompt$ Select target creature you control with toughness less than Stone Giant's. | KW$ Flying | AtEOT$ Destroy | SpellDescription$ Target creature you control with toughness less than CARDNAME's power gains flying until end of turn. Destroy that creature at the beginning of the next end step.
 SVar:X:Count$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_giant.jpg
 Oracle:{T}: Target creature you control with toughness less than Stone Giant's power gains flying until end of turn. Destroy that creature at the beginning of the next end step.

@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Zombie Wizard
 PT:4/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, ABILITY
-SVar:TrigCharm:DB$ Charm | MinCharmNum$ 1 | CharmNum$ MaxUniqueOpponents | Choices$ SacCreature,DiscardCards,LoseLife | References$ MaxUniqueOpponents | AdditionalDescription$ or more. Each mode must target a different player.
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 1 | CharmNum$ MaxUniqueOpponents | Choices$ SacCreature,DiscardCards,LoseLife | AdditionalDescription$ or more. Each mode must target a different player.
 SVar:SacCreature:DB$ Sacrifice | ValidTgts$ Opponent | TargetUnique$ True | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target opponent sacrifices a creature.
 SVar:DiscardCards:DB$ Discard | ValidTgts$ Opponent | TargetUnique$ True | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target opponent discards two cards.
 SVar:LoseLife:DB$ LoseLife | ValidTgts$ Opponent | TargetUnique$ True | LifeAmount$ 5 | SpellDescription$ Target opponent loses 5 life.

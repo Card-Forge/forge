@@ -5,7 +5,7 @@ Loyalty:4
 A:AB$ ChangeZone | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouOwn | TargetMin$ 0 | TargetMax$ 1 | SpellDescription$ Return up to one target creature card from your graveyard to your hand.
 A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBLoseLife | SpellDescription$ Destroy target creature. Its controller loses 2 life.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 2
-A:AB$ LoseLife | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Opponent | LifeAmount$ X | References$ X | SpellDescription$ Target opponent loses 2 life for each creature card in their graveyard.
+A:AB$ LoseLife | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Opponent | LifeAmount$ X | SpellDescription$ Target opponent loses 2 life for each creature card in their graveyard.
 SVar:X:TargetedPlayer$ValidGraveyard Creature.YouOwn/Times.2
 DeckHints:Ability$Graveyard
 Oracle:[+1]: Return up to one target creature card from your graveyard to your hand.\n[−3]: Destroy target creature. Its controller loses 2 life.\n[−7]: Target opponent loses 2 life for each creature card in their graveyard.

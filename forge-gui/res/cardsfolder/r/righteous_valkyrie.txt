@@ -4,9 +4,9 @@ Types:Creature Angel Cleric
 PT:2/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Cleric.Other+YouCtrl,Angel.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another Angel or Cleric enters the battlefield under your control, you gain life equal to that creature's toughness.
-SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggeredCard$CardToughness
-S:Mode$ Continuous | CheckSVar$ Z | SVarCompare$ GEY | References$ Z,Y | Affected$ Creature.YouCtrl | AddPower$ 2 | AddToughness$ 2 | SpellDescription$ As long as you have at least 7 life more than your starting life total, creatures you control get +2/+2.
+S:Mode$ Continuous | CheckSVar$ Z | SVarCompare$ GEY | Affected$ Creature.YouCtrl | AddPower$ 2 | AddToughness$ 2 | SpellDescription$ As long as you have at least 7 life more than your starting life total, creatures you control get +2/+2.
 SVar:Z:Count$YourLifeTotal
 SVar:Y:Count$YourStartingLife/Plus.7
 DeckHas:Ability$LifeGain

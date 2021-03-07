@@ -5,7 +5,7 @@ Loyalty:5
 A:AB$ Destroy | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Planeswalker.Other | TgtPrompt$ Select another target planeswalker | Planeswalker$ True | SpellDescription$ Destroy another target planeswalker.
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ b_3_3_beast_deathtouch | TokenOwner$ You | LegacyImage$ b 3 3 beast deathtouch m15 | SpellDescription$ Create a 3/3 black Beast creature token with deathtouch.
 A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature. You gain life equal to its toughness.
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TargetedLKI$CardToughness
 A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | ValidTgts$ Opponent | EffectOwner$ Targeted | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Garruk, Apex Predator | Image$ emblem_garruk_apex_predator | Triggers$ TrigAttackYou | SVars$ DBPump | Duration$ Permanent | AILogic$ Always | SpellDescription$ Target opponent gets an emblem with "Whenever a creature attacks you, it gets +5/+5 and gains trample until end of turn."
 SVar:TrigAttackYou:Mode$ Attacks | ValidCard$ Creature | Attacked$ You | TriggerZones$ Command | Execute$ DBPump | TriggerDescription$ Whenever a creature attacks you, it gets +5/+5 and gains trample until end of turn.

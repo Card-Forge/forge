@@ -4,6 +4,6 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw three cards.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 3
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, you lose 2 life for each card in your hand.
-SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ X | References$ X
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ X
 SVar:X:Count$InYourHand/Times.2
 Oracle:When Demonic Lore enters the battlefield, draw three cards.\nAt the beginning of your end step, you lose 2 life for each card in your hand.

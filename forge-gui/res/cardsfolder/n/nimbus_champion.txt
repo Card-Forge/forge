@@ -4,7 +4,7 @@ Types:Creature Avatar Warrior
 PT:4/4
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ Whenever CARDNAME attacks, you may return target creature to its owner's hand if that creature's power is less than or equal to the number of Warriors your team controls.
-SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | IsCurse$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | References$ X,Y
+SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | IsCurse$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1
 SVar:Y:Count$Valid Warrior.YourTeamCtrl
 SVar:X:Targeted$Valid Creature.powerLEY
 SVar:HasAttackEffect:TRUE

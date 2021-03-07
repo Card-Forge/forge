@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Creature Zombie Knight
 PT:2/2
 K:Protection from white
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +1/+1 for each Plains your opponents control.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each Plains your opponents control.
 SVar:X:Count$Valid Plains.OppCtrl
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marauding_knight.jpg

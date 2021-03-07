@@ -4,7 +4,7 @@ Types:Creature Human Shaman
 PT:1/1
 K:Ascend
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, you may pay {X}{R}. If you do, create X 1/1 red Elemental creature tokens that are tapped and attacking. At the beginning of the next end step, exile those tokens unless you have the city's blessing.
-SVar:TrigToken:AB$ Token | Cost$ X R | TokenAmount$ X | TokenScript$ r_1_1_elemental | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True | LegacyImage$ r 1 1 elemental rix | References$ X | AtEOT$ Exile | AtEOTCondition$ Y | AtEOTDesc$ At the beginning of the next end step, exile those tokens unless you have the city's blessing.
+SVar:TrigToken:AB$ Token | Cost$ X R | TokenAmount$ X | TokenScript$ r_1_1_elemental | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True | LegacyImage$ r 1 1 elemental rix | AtEOT$ Exile | AtEOTCondition$ Y | AtEOTDesc$ At the beginning of the next end step, exile those tokens unless you have the city's blessing.
 SVar:X:Count$xPaid
 SVar:Y:Count$Blessing.0.1
 DeckHas:Ability$Token

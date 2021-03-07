@@ -6,12 +6,12 @@ A:SP$ RepeatEach | Cost$ 6 G G G | RepeatPlayers$ Player | RepeatSubAbility$ DBS
 SVar:DBStoreAmount:DB$ StoreSVar | SVar$ AuroraY | Type$ Count | Expression$ Valid Card.RememberedPlayerOwn | SubAbility$ DBStoreAmount2
 SVar:DBStoreAmount2:DB$ StoreSVar | SVar$ AuroraZ | Type$ Count | Expression$ ValidHand Card.RememberedPlayerOwn | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Card.RememberedPlayerOwn | Origin$ Hand,Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ Remembered | NumCards$ AuroraX | References$ AuroraX
+SVar:DBDraw:DB$ Draw | Defined$ Remembered | NumCards$ AuroraX
 SVar:AuroraX:SVar$AuroraY/Plus.AuroraZ
 SVar:AuroraY:Number$0
 SVar:AuroraZ:Number$0
 SVar:RepeatLands:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBAurora | SubAbility$ DBCleanup
-SVar:DBAurora:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | DefinedPlayer$ Remembered | Chooser$ Remembered | ChangeType$ Land | ChangeNum$ HandSize | References$ HandSize
+SVar:DBAurora:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | DefinedPlayer$ Remembered | Chooser$ Remembered | ChangeType$ Land | ChangeNum$ HandSize
 SVar:HandSize:Count$ValidHand Land.RememberedPlayerCtrl
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ ExileAurora
 SVar:ExileAurora:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | Defined$ Self

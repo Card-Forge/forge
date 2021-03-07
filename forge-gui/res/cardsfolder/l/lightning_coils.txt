@@ -5,7 +5,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+counters_GE5_CHARGE | Execute$ DBRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if CARDNAME has five or more charge counters on it, remove all of them from it and create that many 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.
 SVar:DBRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ All | RememberRemoved$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ r_3_1_elemental_haste | LegacyImage$ r 3 1 elemental haste mrd | AtEOT$ Exile | References$ X | SubAbility$ DBCleanup
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ r_3_1_elemental_haste | LegacyImage$ r 3 1 elemental haste mrd | AtEOT$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
 DeckHas:Ability$Token

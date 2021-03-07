@@ -3,7 +3,7 @@ ManaCost:5 B
 Types:Creature Nightmare Horse
 PT:*/*
 K:Flying
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of Swamps you control.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Swamps you control.
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:BuffedBy:Swamp
 SVar:NeedsToPlayVar:X GE4

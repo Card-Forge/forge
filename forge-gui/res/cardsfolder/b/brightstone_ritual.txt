@@ -1,7 +1,7 @@
 Name:Brightstone Ritual
 ManaCost:R
 Types:Instant
-A:SP$ Mana | Cost$ R | Produced$ R | Amount$ X | References$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R} for each Goblin on the battlefield.
+A:SP$ Mana | Cost$ R | Produced$ R | Amount$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R} for each Goblin on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Goblin
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brightstone_ritual.jpg
