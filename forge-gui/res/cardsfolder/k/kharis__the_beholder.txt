@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield and at the beginning of your upkeep, create a 1/1 white Human creature token and make a charisma check. If the result plus the number of creatures you control is greater than 11, put a +1/+1 counter on each creature you control. If the result is a natural 20, for each nonlegendary creature you control, create a token that's a copy of that creature.
 SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ w_1_1_human | TokenOwner$ You | SubAbility$ DBRoll
 SVar:DBRoll:DB$ RollDice | Sides$ 20 | ResultSVar$ Result | SubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$ PutCounterAll | ConditionCheckSVar$ X | ConditionSVarCompare$ GE11 | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBCopy
+SVar:DBPutCounter:DB$ PutCounterAll | ConditionCheckSVar$ X | ConditionSVarCompare$ GT11 | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBCopy
 SVar:DBCopy:DB$ CopyPermanent | ConditionCheckSVar$ Result | ConditionSVarCompare$ EQ20 | Defined$ Valid Creature.nonLegendary+YouCtrl
 SVar:X:Count$Valid Creature.YouCtrl/Plus.Result
 Oracle:Flying\nWhen Kharis & The Beholder enters the battlefield and at the beginning of your upkeep, create a 1/1 white Human creature token and make a charisma check. (Roll a d20.)\n• If the result plus the number of creatures you control is greater than 11, put a +1/+1 counter on each creature you control.\n• If the result is a natural 20, for each nonlegendary creature you control, create a token that's a copy of that creature.
