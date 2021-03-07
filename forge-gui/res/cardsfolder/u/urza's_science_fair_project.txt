@@ -2,7 +2,7 @@ Name:Urza's Science Fair Project
 ManaCost:6
 Types:Artifact Creature Construct
 PT:4/4
-A:AB$ RollDice | Cost$ 2 | On1$ M2 | On2$ Fog | On3$ Vig | On4$ FS | On5$ Fly | On6$ P2 | SpellDescription$ Roll a six-sided die. CARDNAME gets the indicated result: 1-It gets -2/-2 until end of turn. 2-Prevent all combat damage it would deal this turn. 3-It gains vigilance until end of turn. 4-It gains first strike until end of turn. 5-It gains flying until end of turn. 6-It gets +2/+2 until end of turn.
+A:AB$ RollDice | Cost$ 2 | On1$ M2 | On2$ Fog | On3$ Vig | On4$ FS | On5$ Fly | On6$ P2 | AILogic$ CombatEarly | SpellDescription$ Roll a six-sided die. CARDNAME gets the indicated result: 1-It gets -2/-2 until end of turn. 2-Prevent all combat damage it would deal this turn. 3-It gains vigilance until end of turn. 4-It gains first strike until end of turn. 5-It gains flying until end of turn. 6-It gets +2/+2 until end of turn.
 SVar:M2:DB$ Pump | Defined$ Self | NumAtt$ -2 | NumDef$ -2
 SVar:Fog:DB$ Pump | Defined$ Self | KW$ Prevent all combat damage that would be dealt by CARDNAME.
 SVar:Vig:DB$ Pump | Defined$ Self | KW$ Vigilance

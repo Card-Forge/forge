@@ -375,7 +375,9 @@ public class AiController {
             @Override
             public boolean apply(final Card c) {
                 CardCollectionView battlefield = player.getCardsIn(ZoneType.Battlefield);
-                canPlaySpellBasic(c, null);
+                if (canPlaySpellBasic(c, null) != AiPlayDecision.WillPlay) {
+                    return false;
+                }
                 String name = c.getName();
                 if (c.getType().isLegendary() && !name.equals("Flagstones of Trokair")) {
                     if (Iterables.any(battlefield, CardPredicates.nameEquals(name))) {

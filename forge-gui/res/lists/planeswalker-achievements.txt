@@ -42,6 +42,7 @@ Domri, City Smasher|Domri's Overrun|You may feel a slight sensation of burning r
 Dovin Baan|Dovin's Static|Have you tried to turn it off and on again?
 Dovin, Architect of Law|Dovin's Freeze|With one gear out of place, the whole machine grinds to halt.
 Dovin, Grand Arbiter|Dovin's Modern Recall|The best solutions for the worst problems.
+Dungeon Master|Dungeons and Dragons|A fighter, a wizard, a rogue, and a cleric walk into a dungeon...
 Elspeth Tirel|Elspeth's Solitude|Tokens are my only friends...
 Elspeth, Knight-Errant|Elspeth's Endurance|Bant will prevail!
 Elspeth, Sun's Champion|Elspeth's Crusade|With Heliod on my side, I'm invincible!

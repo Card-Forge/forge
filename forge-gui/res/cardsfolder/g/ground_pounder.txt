@@ -2,7 +2,7 @@ Name:Ground Pounder
 ManaCost:1 G
 Types:Creature Goblin Warrior
 PT:2/2
-A:AB$ RollDice | Cost$ 3 G | ResultSVar$ X | SubAbility$ DBPump | SpellDescription$ Roll a six-sided die.
+A:AB$ RollDice | Cost$ 3 G | ResultSVar$ X | SubAbility$ DBPump | AILogic$ Combat | SpellDescription$ Roll a six-sided die.
 SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ X | SpellDescription$ CARDNAME gets +X/+X until end of turn, where X is the result.
 T:Mode$ RolledDie | Execute$ TrigTrample | ValidPlayer$ You | ValidResult$ GE5 | TriggerDescription$ Whenever you roll a 5 or higher on a die, CARDNAME gains trample until end of turn.
 SVar:TrigTrample:DB$ Pump | Defined$ Self | KW$ Trample
