@@ -76,7 +76,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                     String chosenValue = chosenSA.getDescription();
                     if (sa.hasParam("ShowChoice")) {
                         boolean dontNotifySelf = sa.getParam("ShowChoice").equals("ExceptSelf");
-                        p.getGame().getAction().nofityOfValue(sa, p, chosenValue, dontNotifySelf ? sa.getActivatingPlayer() : null);
+                        p.getGame().getAction().nofityOfValue(sa, p, chosenValue, dontNotifySelf ? p : null);
                     }
                     if (sa.hasParam("SetChosenMode")) {
                         sa.getHostCard().setChosenMode(chosenValue);
