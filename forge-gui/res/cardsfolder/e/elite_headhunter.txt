@@ -3,6 +3,6 @@ ManaCost:B/R B/R B/R B/R
 Types:Creature Human Knight
 PT:2/3
 K:Menace
-A:AB$ DealDamage | Cost$ BR BR BR Sac<1/Creature.Other,Artifact/another creature or an artifact> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or planeswalker.
+A:AB$ DealDamage | Cost$ BR BR BR Sac<1/Creature.Other;Artifact/another creature or an artifact> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or planeswalker.
 SVar:AIPreference:SacCost$Creature.token,Artifact.token,Creature.cmcLE1,Artifact.cmcEQ1
 Oracle:Menace (This creature can't be blocked except by two or more creatures.)\n{B/R}{B/R}{B/R}, Sacrifice another creature or an artifact: Elite Headhunter deals 2 damage to target creature or planeswalker.
