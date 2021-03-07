@@ -19,6 +19,7 @@ package forge.toolbox;
 
 import com.esotericsoftware.minlog.Log;
 import forge.assets.FSkinProp;
+import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.toolbox.FSkin.SkinImage;
@@ -39,6 +40,7 @@ import java.util.StringTokenizer;
 public class CardFaceSymbols {
     /** Constant <code>manaImages</code>. */
     private static final Map<String, SkinImage> MANA_IMAGES = new HashMap<>();
+    private static final Map<String, SkinImage> DECK_COLORSET = new HashMap<>();
 
     private static final int manaImageSize = 13;
 
@@ -48,6 +50,13 @@ public class CardFaceSymbols {
      * </p>
      */
     public static void loadImages() {
+        DECK_COLORSET.put("C", FSkin.getImage(FSkinProp.IMG_MANA_COLORLESS));
+        DECK_COLORSET.put("R", FSkin.getImage(FSkinProp.IMG_MANA_R));
+        DECK_COLORSET.put("G", FSkin.getImage(FSkinProp.IMG_MANA_G));
+        DECK_COLORSET.put("B", FSkin.getImage(FSkinProp.IMG_MANA_B));
+        DECK_COLORSET.put("U", FSkin.getImage(FSkinProp.IMG_MANA_U));
+        DECK_COLORSET.put("W", FSkin.getImage(FSkinProp.IMG_MANA_W));
+
         for (int i = 0; i <= 20; i++) {
             MANA_IMAGES.put(String.valueOf(i), FSkin.getImage(FSkinProp.valueOf("IMG_MANA_" + i), manaImageSize, manaImageSize));
         }
@@ -222,6 +231,16 @@ public class CardFaceSymbols {
         }
     }
 
+    public static void drawColorSet(Graphics g, ColorSet colorSet, int x, int y, int imageSize, boolean vertical) {
+        for (final ManaCostShard s : colorSet.getOrderedShards()) {
+            if (DECK_COLORSET.get(s.getImageKey())!=null)
+                FSkin.drawImage(g, DECK_COLORSET.get(s.getImageKey()), x, y, imageSize, imageSize);
+            if (!vertical)
+                x += imageSize;
+            else
+                y += imageSize;
+        }
+    }
     /**
      *
      * draw.

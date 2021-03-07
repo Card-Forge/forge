@@ -197,7 +197,7 @@ public class ImageCache {
         return original;
     }
 
-    private static BufferedImage scaleImage(String key, final int width, final int height, boolean useDefaultImage) {
+    public static BufferedImage scaleImage(String key, final int width, final int height, boolean useDefaultImage) {
         if (StringUtils.isEmpty(key) || (3 > width && -1 != width) || (3 > height && -1 != height)) {
             // picture too small or key not defined; return a blank
             return null;
@@ -251,7 +251,29 @@ public class ImageCache {
         _CACHE.put(resizedKey, result);
         return result;
     }
-
+    /**
+     * Crops the Card Image to get the Card Art of "regular Card frame".
+     * @param bufferedImage the image that will be crop
+     */
+    public static BufferedImage getCroppedArt(BufferedImage bufferedImage, float x, float y, float w, float h) {
+        //todo add support for other card frames ie split card, etc.
+        x = w * 0.1f;
+        y = h * 0.11f;
+        w -= 2 * x;
+        h *= 0.43f;
+        float ratioRatio = w / h / 1.302f;
+        if (ratioRatio > 1) { //if too wide, shrink width
+            float dw = w * (ratioRatio - 1);
+            w -= dw;
+            x += dw / 2;
+        }
+        else { //if too tall, shrink height
+            float dh = h * (1 - ratioRatio);
+            h -= dh;
+            y += dh / 2;
+        }
+        return bufferedImage.getSubimage(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+    }
     /**
      * Returns the Image corresponding to the key.
      */
