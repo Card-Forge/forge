@@ -670,6 +670,11 @@ public class CardFactory {
                 state.setBaseLoyalty(String.valueOf(sa.getParam("SetLoyalty")));
             }
 
+            // Planning a Vizier of Many Faces rework; always might come in handy
+            if (sa.hasParam("RemoveCost")) {
+                state.setManaCost(ManaCost.NO_COST);
+            }
+
             // SVars to add to clone
             if (sa.hasParam("AddSVars") || sa.hasParam("GainTextSVars")) {
                 final String str = sa.getParamOrDefault("GainTextSVars", sa.getParam("AddSVars"));
