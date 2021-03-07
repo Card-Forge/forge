@@ -2,8 +2,8 @@ Name:Ornate Kanzashi
 ManaCost:5
 Types:Artifact
 A:AB$ Dig | Cost$ 2 T | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Target opponent exiles the top card of their library. You may play that card this turn.
-SVar:DBEffect:DB$ Effect | Duration$ EndOfTurn | RememberObjects$ Remembered | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play a card this turn.
+SVar:DBEffect:DB$ Effect | Duration$ EndOfTurn | RememberObjects$ Remembered | StaticAbilities$ STMayPlay | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered | Caster$ You | Origin$ Exile | Description$ You may play a card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 Oracle:{2}, {T}: Target opponent exiles the top card of their library. You may play that card this turn.

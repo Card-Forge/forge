@@ -5,8 +5,8 @@ A:AB$ PutCounter | Cost$ X T | RememberCostMana$ True | CounterType$ CHARGE | Co
 SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.CHARGE
 SVar:DBExile:DB$ ChangeZone | Optional$ True | RememberChanged$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Card.nonLand | ChangeNum$ 1 | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | Duration$ Permanent | ForgetOnMoved$ Exile
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STMayPlay | RememberObjects$ RememberedCard | Duration$ Permanent | ForgetOnMoved$ Exile
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered | Caster$ You | Origin$ Exile | Description$ Until end of turn, you may play that card.
 T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered+ExiledWithSource | Origin$ Exile | Destination$ Any | Execute$ ForgetCard | Static$ True
 SVar:ForgetCard:DB$ Cleanup | ForgetDefined$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup

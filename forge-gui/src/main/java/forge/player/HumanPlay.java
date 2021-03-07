@@ -53,7 +53,7 @@ public class HumanPlay {
 
         Card source = sa.getHostCard();
 
-        if (sa instanceof LandAbility) {
+        if (sa.isLandAbility()) {
             sa.setActivatingPlayer(p);
             if (sa.canPlay()) {
                 sa.resolve();

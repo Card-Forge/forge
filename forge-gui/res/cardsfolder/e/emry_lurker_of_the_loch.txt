@@ -8,6 +8,6 @@ DeckNeeds:Type$Artifact
 DeckHas:Ability$Graveyard
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill four cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You
-A:AB$ Effect | Cost$ T | TgtZone$ Graveyard | ValidTgts$ Artifact.YouOwn | TgtPrompt$ Select target artifact card in your graveyard | SpellDescription$ Choose target artifact card in your graveyard. You may cast that card this turn. | RememberObjects$ Targeted | StaticAbilities$ STPlay | ExileOnMoved$ Graveyard
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Graveyard | Description$ You may cast that card this turn.
+A:AB$ Effect | Cost$ T | TgtZone$ Graveyard | ValidTgts$ Artifact.YouOwn | TgtPrompt$ Select target artifact card in your graveyard | SpellDescription$ Choose target artifact card in your graveyard. You may cast that card this turn. | RememberObjects$ Targeted | StaticAbilities$ STMayPlay | ForgetOnMoved$ Graveyard
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered+nonLand | Caster$ You | Origin$ Graveyard | Description$ You may cast that card this turn.
 Oracle:This spell costs {1} less to cast for each artifact you control.\nWhen Emry, Lurker of the Loch enters the battlefield, mill four cards.\n{T}: Choose target artifact card in your graveyard. You may cast that card this turn. (You still pay its costs. Timing rules still apply.)

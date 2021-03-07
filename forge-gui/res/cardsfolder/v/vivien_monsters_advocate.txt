@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Legendary Planeswalker Vivien
 Loyalty:3
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
-S:Mode$ Continuous | Affected$ Creature.TopLibrary+YouCtrl | MayPlay$ True | AffectedZone$ Library | Description$ You may cast creature spells from the top of your library.
+S:Mode$ AlternativeZone | ValidCard$ Creature.TopLibrary+YouCtrl+nonLand | Caster$ You | Origin$ Library | Description$ You may cast creature spells from the top of your library.
 SVar:NonStackingEffect:True
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You | LegacyImage$ g 3 3 beast iko | RememberTokens$ True | SubAbility$ DBGenericChoice | SpellDescription$ Create a 3/3 green Beast creature token. Put your choice of a vigilance counter, a reach counter, or a trample counter on it.
 SVar:DBGenericChoice:DB$ GenericChoice | Defined$ You | Choices$ Vigilance,Reach,Trample | AILogic$ Always

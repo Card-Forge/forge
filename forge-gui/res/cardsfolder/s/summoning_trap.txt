@@ -8,6 +8,6 @@ T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
 SVar:TrigReset:DB$ StoreSVar | SVar$ SetTrap | Type$ Number | Expression$ 0
 SVar:SetTrap:Number$0
 #Set up main abilities
-SVar:AltCost:Cost$ 0 | CheckSVar$ SetTrap | SVarCompare$ GE1 | Description$ If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ 0 | CheckSVar$ SetTrap | SVarCompare$ GE1 | Description$ If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay this spell's mana cost.
 A:SP$ Dig | Cost$ 4 G G | DigNum$ 7 | ChangeNum$ 1 | ChangeValid$ Creature | DestinationZone$ Battlefield | SpellDescription$ Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in any order.
 Oracle:If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay this spell's mana cost.\nLook at the top seven cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in any order.

@@ -6,7 +6,7 @@ SVar:DBDig:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone
 SVar:DBDealDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STMayPlay | Duration$ UntilTheEndOfYourNextTurn | RememberObjects$ ValidExile Card.ExiledWithSource | ForgetOnMoved$ Exile
-SVar:STMayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Exile | MayPlay$ True | Description$ You may play the exiled cards until the end of your next turn.
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered | Caster$ You | Origin$ Exile | Description$ You may play the exiled cards until the end of your next turn.
 SVar:MaxTgt:SVar$MaxPl/Plus.MaxPerm
 SVar:MaxPl:PlayerCountPlayers$Amount
 SVar:MaxPerm:Count$Valid Creature,Planeswalker

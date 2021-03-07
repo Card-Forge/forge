@@ -1,7 +1,7 @@
 Name:Commandeer
 ManaCost:5 U U
 Types:Instant
-SVar:AltCost:Cost$ ExileFromHand<2/Card.Blue+Other> | Description$ You may exile two blue cards from your hand rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ ExileFromHand<2/Card.Blue+Other> | Description$ You may exile two blue cards from your hand rather than pay this spell's mana cost.
 A:SP$ ControlSpell | Cost$ 5 U U | ValidTgts$ Card.nonCreature | TargetType$ Spell | Mode$ Gain | SubAbility$ DBChooseTargets | SpellDescription$ Gain control of target noncreature spell. You may choose new targets for it. (If that spell is an artifact, enchantment, or planeswalker, the permanent enters the battlefield under your control.)
 SVar:DBChooseTargets:DB$ ChangeTargets | Defined$ Targeted | Optional$ True
 AI:RemoveDeck:All

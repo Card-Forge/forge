@@ -3,9 +3,9 @@ ManaCost:3 R
 Types:Sorcery
 A:SP$ Dig | Cost$ 3 R | Defined$ You | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top three cards of your library. Until the end of your next turn, you may play those cards. If this spell was cast from a graveyard, you may play cards this way without paying their mana costs.
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn | ConditionDefined$ Self | ConditionPresent$ Card.wasCastFromGraveyard | ConditionCompare$ EQ0 | SubAbility$ DBEffect2
-SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
+SVar:Play:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered | Caster$ You | Origin$ Exile | Description$ You may play remembered card.
 SVar:DBEffect2:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play2 | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn | ConditionDefined$ Self | ConditionPresent$ Card.wasCastFromGraveyard | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
-SVar:Play2:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card without paying their mana costs.
+SVar:Play2:Mode$ AlternativeCost | ValidCard$ Card.IsRemembered | Caster$ You | Origin$ Exile | Cost$ 0 | Description$ You may play remembered card without paying their mana costs.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Flashback:7 R
 Oracle:Exile the top three cards of your library. Until the end of your next turn, you may play those cards. If this spell was cast from a graveyard, you may play cards this way without paying their mana costs.\nFlashback {7}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

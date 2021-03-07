@@ -25,8 +25,8 @@ PT:3/3
 T:Mode$ DamageDone | ValidSource$ Vehicle.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Vehicle you control deals combat damage to a player, that player exiles that many cards from the top of their library. You may play lands from among those cards for as long as they remain exiled.
 SVar:TrigExile:DB$ Dig | Defined$ TriggeredTarget | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBMayPlayLand
 SVar:X:TriggerCount$DamageAmount
-SVar:DBMayPlayLand:DB$ Effect | StaticAbilities$ SMayPlayLand | RememberObjects$ Remembered | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:SMayPlayLand:Mode$ Continuous | MayPlay$ True | Affected$ Land.IsRemembered | AffectedZone$ Exile | Secondary$ True | EffectZone$ Command | MayLookAt$ You | Duration$ Permanent | Description$ You may play lands from among those cards for as long as they remain exiled.
+SVar:DBMayPlayLand:DB$ Effect | StaticAbilities$ SMayPlayLand | RememberObjects$ RememberedCard | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Land.IsRemembered | Caster$ You | Origin$ Exile | Description$ You may play lands from among those cards for as long as they remain exiled.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Crew:1
 DeckHints:Type$Vehicle

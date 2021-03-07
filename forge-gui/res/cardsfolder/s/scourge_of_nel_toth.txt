@@ -3,6 +3,5 @@ ManaCost:5 B B
 Types:Creature Zombie Dragon
 PT:6/6
 K:Flying
-SVar:AltCost:Cost$ B B Sac<2/Creature> | ActivationZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard by paying {B}{B} and sacrificing two creatures rather than paying its mana cost.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_of_nel_toth.jpg
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ Graveyard | Cost$ B B Sac<2/Creature> | Origin$ Graveyard | Description$ You may cast CARDNAME from your graveyard by paying {B}{B} and sacrificing two creatures rather than paying its mana cost.
 Oracle:Flying\nYou may cast Scourge of Nel Toth from your graveyard by paying {B}{B} and sacrificing two creatures rather than paying its mana cost.

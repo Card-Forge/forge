@@ -4,8 +4,8 @@ Types:Creature Human Wizard
 PT:4/5
 A:AB$ Shuffle | Cost$ U T Sac<1/CARDNAME> | SubAbility$ DBExile | SpellDescription$ Shuffle your library, then exile the top X cards, where X is one plus the number of spells cast this turn. Until end of turn, you may play lands and cast spells from among cards exiled this way without paying their mana costs.
 SVar:DBExile:DB$ Dig | Defined$ You | DestinationZone$ Exile | DigNum$ X | ChangeNum$ All | RememberChanged$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
-SVar:Play:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STMayPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:STMayPlay:Mode$ AlternativeCost | ValidCard$ Card.IsRemembered | Caster$ You | Origin$ Exile | Cost$ 0 | Description$ You may play lands and cast spells from among cards exiled this way without paying their mana costs.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ThisTurnCast_Card/Plus.1
 Oracle:{U}, {T}, Sacrifice Magus of the Mind: Shuffle your library, then exile the top X cards, where X is one plus the number of spells cast this turn. Until end of turn, you may play lands and cast spells from among cards exiled this way without paying their mana costs.

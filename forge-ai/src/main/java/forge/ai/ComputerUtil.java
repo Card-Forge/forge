@@ -1952,10 +1952,10 @@ public class ComputerUtil {
                     ComputerUtilCombat.combatantWouldBeDestroyed(ai, source, game.getCombat())) {
                 return true;
             }
-        } else if (zone.getZoneType() == ZoneType.Exile && sa.getMayPlay() != null) {
+        } else if (zone.getZoneType() == ZoneType.Exile) {
             // play cards in exile that can only be played that turn
             if (game.getPhaseHandler().getPhase() == PhaseType.MAIN2) {
-                if (source.mayPlay(sa.getMayPlay()) != null) {
+                if (!sa.getMayPlayList().isEmpty()) {
                     return true;
                 }
             }

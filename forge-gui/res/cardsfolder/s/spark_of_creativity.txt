@@ -5,8 +5,8 @@ A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | Reveal$ True | SubAbility$ DBChoice
 SVar:DBChoice:DB$ GenericChoice | Defined$ You | Choices$ SparkDamage,SparkPlay | SubAbility$ DBCleanup | AILogic$ CreativitySpark
 SVar:SparkDamage:DB$ DealDamage | Defined$ ParentTarget | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature.
-SVar:SparkPlay:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | ExileOnMoved$ Exile | SpellDescription$ You may play exiled card until end of turn.
-SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
+SVar:SparkPlay:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STMayPlay | ForgetOnMoved$ Exile | SpellDescription$ You may play exiled card until end of turn.
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered | Caster$ You | Origin$ Exile | Description$ You may play that card until end of turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedCardManaCost
 AI:RemoveDeck:All

@@ -7,7 +7,7 @@ K:CARDNAME can't block.
 K:etbCounter:P1P1:2:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it.
 SVar:WasKicked:Count$Kicked.1.0
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Graveyard | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | PlayerTurn$ True | Execute$ TrigEffect | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, if CARDNAME is in your graveyard and it's your turn, you may cast it from your graveyard this turn.
-SVar:TrigEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Self | ForgetOnMoved$ Exile
-SVar:MayPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may cast EFFECTSOURCE from your graveyard this turn.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ STMayPlay | RememberObjects$ Self | ForgetOnMoved$ Graveyard
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered+nonLand | Caster$ You | Origin$ Graveyard | Description$ You may cast EFFECTSOURCE from your graveyard this turn.
 DeckHas:Ability$Counters
 Oracle:Kicker {2}{B}\nSkyclave Shade can't block.\nIf Skyclave Shade was kicked, it enters the battlefield with two +1/+1 counters on it.\nLandfall — Whenever a land enters the battlefield under your control, if Skyclave Shade is in your graveyard and it's your turn, you may cast it from your graveyard this turn.

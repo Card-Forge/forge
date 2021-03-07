@@ -1,7 +1,7 @@
 Name:Firewild Borderpost
 ManaCost:1 R G
 Types:Artifact
-SVar:AltCost:Cost$ 1 Return<1/Land.Basic> | Description$ You may pay {1} and return a basic land you control to its owner's hand rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ 1 Return<1/Land.Basic> | Description$ You may pay {1} and return a basic land you control to its owner's hand rather than pay this spell's mana cost.
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.

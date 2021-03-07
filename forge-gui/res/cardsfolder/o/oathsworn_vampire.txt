@@ -3,9 +3,8 @@ ManaCost:1 B
 Types:Creature Vampire Knight
 PT:2/2
 K:CARDNAME enters the battlefield tapped.
-S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Graveyard | MayPlay$ True | CheckSVar$ X | SVarCompare$ GE1 | Description$ You may cast CARDNAME from your graveyard if you gained life this turn.
+S:Mode$ AlternativeZone | ValidCard$ Card.Self | EffectZone$ Graveyard | Origin$ Graveyard | CheckSVar$ X | SVarCompare$ GE1 | Description$ You may cast CARDNAME from your graveyard if you gained life this turn.
 SVar:X:Count$LifeYouGainedThisTurn
 SVar:SacMe:3
 SVar:DiscardMe:3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oathsworn_vampire.jpg
 Oracle:Oathsworn Vampire enters the battlefield tapped.\nYou may cast Oathsworn Vampire from your graveyard if you gained life this turn.

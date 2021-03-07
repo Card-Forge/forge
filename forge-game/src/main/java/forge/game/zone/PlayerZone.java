@@ -43,7 +43,7 @@ public class PlayerZone extends Zone {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return !c.mayPlay(who).isEmpty() || c.mayPlayerLook(who);
+                return !c.getAllPossibleAbilities(who, true).isEmpty() || c.mayPlayerLook(who);
             }
         };
     }
@@ -55,7 +55,7 @@ public class PlayerZone extends Zone {
                 return true;
             }
 
-            if (c.isLand() && (!c.mayPlay(c.getController()).isEmpty())) {
+            if (!c.getAllPossibleAbilities(c.getController(), true).isEmpty()) {
                 return true;
             }
 
@@ -64,11 +64,6 @@ public class PlayerZone extends Zone {
             boolean exileCastable = (c.isAdventureCard() || c.isForetold()) && c.isInZone(ZoneType.Exile);
             for (final SpellAbility sa : c.getSpellAbilities()) {
                 final ZoneType restrictZone = sa.getRestrictions().getZone();
-
-                // for mayPlay the restrictZone is null for reasons
-                if (sa.isSpell() && c.mayPlay(sa.getMayPlay()) != null) {
-                    return true;
-                }
 
                 if (PlayerZone.this.is(restrictZone)) {
                     return true;

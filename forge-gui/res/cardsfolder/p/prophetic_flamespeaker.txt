@@ -6,7 +6,7 @@ K:Double Strike
 K:Trample
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, exile the top card of your library. You may play it this turn.
 SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
-SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ Until end of turn, you may play that card.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STMayPlay | RememberObjects$ RememberedCard | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered | Caster$ You | Origin$ Exile | Description$ Until end of turn, you may play that card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Double strike, trample\nWhenever Prophetic Flamespeaker deals combat damage to a player, exile the top card of your library. You may play it this turn.

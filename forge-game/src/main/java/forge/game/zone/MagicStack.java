@@ -407,8 +407,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             System.out.println(sp.getHostCard().getName() + " - activatingPlayer not set before adding to stack.");
         }
 
-        if (sp.isSpell() && sp.getMayPlay() != null) {
-            sp.getMayPlay().incMayPlayTurn();
+        if (sp.isSpell()) {
+            sp.incMayPlayedThisTurn();
         }
         final SpellAbilityStackInstance si = new SpellAbilityStackInstance(sp);
 

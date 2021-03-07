@@ -4,14 +4,11 @@ Types:Creature Human Pirate
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile another target creature or artifact until CARDNAME leaves the battlefield. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact.Other,Creature.Other | TgtPrompt$ Select another target artifact or creature | ConditionPresent$ Card.Self | RememberChanged$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | Triggers$ ComeBack,TriggerCastHT | SVars$ TrigReturn,TrigRemoveSelf | RememberObjects$ Remembered | ImprintCards$ Self | Duration$ Permanent | SubAbility$ DBCleanup | SpellDescription$ You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may cast that card and you may spend mana as though it were mana of any type to cast it.
-SVar:TriggerCastHT:Mode$ SpellCast | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Execute$ TrigRemoveSelf | Static$ True
-SVar:TrigRemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STMayPlay | Triggers$ ComeBack | SVars$ TrigReturn | RememberObjects$ RememberedCard | ImprintCards$ Self | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup | SpellDescription$ You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered+nonLand | Caster$ You | Origin$ Exile | MayPlayIgnoreType$ True | Description$ You may cast that card and you may spend mana as though it were mana of any type to cast it.
 SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ That artifact or creature is exiled until EFFECTSOURCE leaves the battlefield
-SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ TrigRemoveSelf
+SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlay:Artifact.OppCtrl,Creature.OppCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hostage_taker.jpg
 Oracle:When Hostage Taker enters the battlefield, exile another target creature or artifact until Hostage Taker leaves the battlefield. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.

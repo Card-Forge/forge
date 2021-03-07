@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -22,19 +22,22 @@ import org.apache.commons.lang3.ObjectUtils;
 import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
 import forge.game.player.Player;
+import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantBeCast;
 import forge.game.zone.ZoneType;
+import forge.util.Expressions;
 
 /**
  * <p>
  * Abstract Spell class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -114,7 +117,24 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     /** {@inheritDoc} */
     @Override
     public boolean checkRestrictions(Card host, Player activator) {
-        return !StaticAbilityCantBeCast.cantBeCastAbility(this, host, activator);
+        if (StaticAbilityCantBeCast.cantBeCastAbility(this, host, activator)) {
+            return false;
+        }
+
+        // check if the selected may play effects are still valid when trying to cast the spell in case of cmc matters like Lurrus
+        for (StaticAbility stAb : getMayPlayList()) {
+            // Special Check if CMC is still valid
+            if (stAb.hasParam("CMC")) {
+                int y = host.getCMC();
+                int x = AbilityUtils.calculateAmount(stAb.getHostCard(), stAb.getParam("CMC"), stAb);
+
+                if (!Expressions.compare(y, stAb.getParam("CMC"), x)) {
+                    return false;
+                }
+            }
+        }
+
+        return super.checkRestrictions(host, activator);
     }
 
     /** {@inheritDoc} */
@@ -148,6 +168,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         this.castFaceDown = faceDown;
     }
 
+    @Override
     public Card getAlternateHost(Card source) {
         boolean lkicheck = false;
 

@@ -11,7 +11,6 @@ public enum OptionalCost {
     Kicker2("Kicker"),
     Retrace("Retrace"),
     Jumpstart("Jump-start"),
-    AltCost(""),
     Flash("Flash"), // used for Pay Extra for Flash
     Generic("Generic"); // used by "Dragon Presence" and pseudo-kicker cards
 

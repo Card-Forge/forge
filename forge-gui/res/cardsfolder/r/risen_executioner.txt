@@ -4,8 +4,7 @@ Types:Creature Zombie Warrior
 PT:4/3
 K:CARDNAME can't block.
 S:Mode$ Continuous | Affected$ Creature.Zombie+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Zombie creatures you control get +1/+1.
-SVar:AltCost:Cost$ X 2 B B | ActivationZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard if you pay {1} more to cast it for each other creature card in your graveyard.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ X 2 B B | ActivationZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard if you pay {1} more to cast it for each other creature card in your graveyard.
 SVar:X:Count$ValidGraveyard Creature.Other+YouOwn
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/risen_executioner.jpg
 Oracle:Risen Executioner can't block.\nOther Zombie creatures you control get +1/+1.\nYou may cast Risen Executioner from your graveyard if you pay {1} more to cast it for each other creature card in your graveyard.

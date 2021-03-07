@@ -1,7 +1,7 @@
 Name:Scars of the Veteran
 ManaCost:4 W
 Types:Instant
-SVar:AltCost:Cost$ ExileFromHand<1/Card.White+Other> | Description$ You may exile a white card from your hand rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ ExileFromHand<1/Card.White+Other> | Description$ You may exile a white card from your hand rather than pay this spell's mana cost.
 A:SP$ PreventDamage | Cost$ 4 W | ValidTgts$ Creature,Player,Planeswalker | Amount$ 7 | PreventionSubAbility$ ScarEffect | ShieldEffectTarget$ Targeted | TgtPrompt$ Select any target | SpellDescription$ Prevent the next 7 damage that would be dealt to any target this turn. If it's a creature, put a +0/+1 counter on it for each 1 damage prevented this way at the beginning of the next end step.
 SVar:ScarEffect:DB$ Effect | RememberObjects$ ShieldEffectTarget | Triggers$ DelTrig,OutOfSight,NoCreatTgt | SVars$ DelayedScars,ExileEffect | SpellDescription$ If it's a creature, put a +0/+1 counter on it for each 1 damage prevented this way at the beginning of the next end step.
 SVar:DelTrig:Mode$ Phase | Phase$ End of Turn | Execute$ DelayedScars | TriggerDescription$ If it's a creature, put a +0/+1 counter on it for each 1 damage prevented this way at the beginning of the next end step.

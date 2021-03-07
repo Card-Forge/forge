@@ -1,7 +1,7 @@
 Name:Outbreak
 ManaCost:3 B
 Types:Sorcery
-SVar:AltCost:Cost$ Discard<1/Swamp/Swamp card> | Description$ You may discard a Swamp card rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ Discard<1/Swamp/Swamp card> | Description$ You may discard a Swamp card rather than pay this spell's mana cost.
 A:SP$ ChooseType | Cost$ 3 B | Defined$ You | Type$ Creature | SubAbility$ DBPumpAll | SpellDescription$ Choose a creature type. All creatures of that type get -1/-1 until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.ChosenType | IsCurse$ True | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ All creatures of that type get -1/-1 until end of turn.
 AI:RemoveDeck:All

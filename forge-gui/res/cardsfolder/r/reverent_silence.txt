@@ -1,6 +1,6 @@
 Name:Reverent Silence
 ManaCost:3 G
 Types:Sorcery
-SVar:AltCost:Cost$ GainLife<6/Player.Other/*> | IsPresent$ Forest.YouCtrl | Description$ If you control a Forest, rather than pay this spell's mana cost, you may have each other player gain 6 life.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ GainLife<6/Player.Other/*> | IsPresent$ Forest.YouCtrl | Description$ If you control a Forest, rather than pay this spell's mana cost, you may have each other player gain 6 life.
 A:SP$ DestroyAll | Cost$ 3 G | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
 Oracle:If you control a Forest, rather than pay this spell's mana cost, you may have each other player gain 6 life.\nDestroy all enchantments.

@@ -5,8 +5,8 @@ A:SP$ Pump | Cost$ 1 R | ValidTgts$ Giant.YouCtrl | TgtPrompt$ Select target Gia
 SVar:DBCombatDamageEffect:DB$ Effect | ImprintCards$ Targeted | Triggers$ DealCombatDamagePlayer | SVars$ TrigExile,DBEffect,X,STPlay,DBCleanup | SubAbility$ DBCleanup
 SVar:DealCombatDamagePlayer:Mode$ DamageDone | ValidSource$ Card.IsImprinted | ValidTarget$ Player | Execute$ TrigExile | CombatDamage$ True | TriggerDescription$ Whenever this Giant deals combat damage to a player this turn, exile that many cards from the top of your library. Until the end of your next turn, you may play those cards.
 SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | RememberObjects$ RememberedCard | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
-SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play those cards.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STMayPlay | ForgetOnMoved$ Exile | RememberObjects$ RememberedCard | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered | Caster$ You | Origin$ Exile | Description$ Until the end of your next turn, you may play those cards.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:TriggerCount$DamageAmount
 DeckNeeds:Type$Giant

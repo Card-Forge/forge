@@ -11,10 +11,10 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -321,50 +321,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
 
     protected void addReplaceGraveyardEffect(Card c, SpellAbility sa, String zone) {
-        final Card hostCard = sa.getHostCard();
-        final Game game = hostCard.getGame();
-        final Player controller = sa.getActivatingPlayer();
-        final String name = hostCard.getName() + "'s Effect";
-        final String image = hostCard.getImageKey();
-        final Card eff = createEffect(sa, controller, name, image);
-
-        eff.addRemembered(c);
-
-        String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered " +
-        "| Origin$ Stack | Destination$ Graveyard " +
-        "| Description$ If that card would be put into your graveyard this turn, exile it instead.";
-        String effect = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ " + zone;
-
-        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
-        re.setLayer(ReplacementLayer.Other);
-
-        re.setOverridingAbility(AbilityFactory.getAbility(effect, eff));
-        eff.addReplacementEffect(re);
-
-        addExileOnMovedTrigger(eff, "Stack");
-
-        // Copy text changes
-        if (sa.isIntrinsic()) {
-            eff.copyChangedTextFrom(hostCard);
-        }
-
-        final GameCommand endEffect = new GameCommand() {
-            private static final long serialVersionUID = -5861759814760561373L;
-
-            @Override
-            public void run() {
-                game.getAction().exile(eff, null);
-            }
-        };
-
-        game.getEndOfTurn().addUntil(endEffect);
-
-        eff.updateStateForView();
-
-        // TODO: Add targeting to the effect so it knows who it's dealing with
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, sa);
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        GameActionUtil.createReplaceGraveyardEffect(c, sa.getActivatingPlayer(), sa, zone);
     }
 
 

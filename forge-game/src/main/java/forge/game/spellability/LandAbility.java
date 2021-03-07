@@ -23,20 +23,15 @@ import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
-import forge.game.cost.Cost;
 import forge.game.player.Player;
-import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 
-public class LandAbility extends Ability {
+public class LandAbility extends AbilityStatic {
 
-    public LandAbility(Card sourceCard, Player p, StaticAbility mayPlay) {
-        super(sourceCard, new Cost(ManaCost.NO_COST, false));
-        setActivatingPlayer(p);
-        setMayPlay(mayPlay);
-    }
     public LandAbility(Card sourceCard) {
-        this(sourceCard, sourceCard.getController(), null);
+        super(sourceCard, ManaCost.NO_COST);
+
+        getRestrictions().setZone(ZoneType.Hand);
     }
 
     public boolean canPlay(Card newHost) {
@@ -45,9 +40,20 @@ public class LandAbility extends Ability {
     }
 
     @Override
+    public boolean isLandAbility() { return true; }
+
+    @Override
+    public boolean isSecondary() {
+        return true;
+    }
+
+    @Override
     public boolean canPlay() {
         Card land = this.getHostCard();
         final Player p = this.getActivatingPlayer();
+        if (p == null) {
+            return false;
+        }
 
         if (this.getCardState() != null && land.getCurrentStateName() != this.getCardStateName()) {
             if (!land.isLKI()) {
@@ -74,9 +80,8 @@ public class LandAbility extends Ability {
         final Card result = getActivatingPlayer().playLandNoCheck(getHostCard());
 
         // increase mayplay used
-        if (getMayPlay() != null) {
-            getMayPlay().incMayPlayTurn();
-        }
+        this.incMayPlayedThisTurn();
+
         // if land isn't in battlefield try to reset the card state
         if (result != null && !result.isInZone(ZoneType.Battlefield)) {
             result.setState(CardStateName.Original, true);
@@ -90,23 +95,44 @@ public class LandAbility extends Ability {
             sb.append(" (").append(getHostCard().getName(ObjectUtils.firstNonNull(getCardStateName(), CardStateName.Original))).append(")");
         }
 
-        StaticAbility sta = getMayPlay();
-        if (sta != null) {
-            Card source = sta.getHostCard();
-            if (!source.equals(getHostCard())) {
-                sb.append(" by ");
-                if ((source.isEmblem() || source.getType().hasSubtype("Effect"))
-                        && source.getEffectSource() != null) {
-                    sb.append(source.getEffectSource());
-                } else {
-                    sb.append(source);
-                }
-                if (sta.hasParam("MayPlayText")) {
-                    sb.append(" (").append(sta.getParam("MayPlayText")).append(")");
-                }
-            }
-        }
         return sb.toString();
     }
 
+    @Override
+    public Card getAlternateHost(Card source) {
+        boolean lkicheck = false;
+
+        // need to be done before so it works with Vivien and Zoetic Cavern
+        if (source.isFaceDown() && source.isInZone(ZoneType.Exile)) {
+            if (!source.isLKI()) {
+                source = CardUtil.getLKICopy(source);
+            }
+
+            source.forceTurnFaceUp();
+            lkicheck = true;
+        }
+
+        if (getCardState() != null && source.getCurrentStateName() != getCardStateName()) {
+            if (!source.isLKI()) {
+                source = CardUtil.getLKICopy(source);
+            }
+            CardStateName stateName = getCardState().getStateName();
+            if (!source.hasState(stateName)) {
+                source.addAlternateState(stateName, false);
+                source.getState(stateName).copyFrom(getHostCard().getState(stateName), true);
+            }
+
+            source.setState(stateName, false);
+            if (getHostCard().hasBackSide()) {
+                source.setBackSide(getHostCard().getRules().getSplitType().getChangedStateName().equals(stateName));
+            }
+
+            // need to reset CMC
+            source.setLKICMC(-1);
+            source.setLKICMC(source.getCMC());
+            lkicheck = true;
+        }
+
+        return lkicheck ? source : null;
+    }
 }

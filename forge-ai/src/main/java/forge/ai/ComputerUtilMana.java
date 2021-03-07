@@ -31,7 +31,6 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -604,13 +603,10 @@ public class ComputerUtilMana {
         int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
 
         boolean ignoreColor = false, ignoreType = false;
-        StaticAbility mayPlay = sa.getMayPlay();
-        if (mayPlay != null) {
-            if (mayPlay.hasParam("MayPlayIgnoreColor")) {
-                ignoreColor = true;
-            } else if (mayPlay.hasParam("MayPlayIgnoreType")) {
-                ignoreType = true;
-            }
+        if (sa.isIgnoreManaCostType()) {
+            ignoreType = true;
+        } else if (sa.isIgnoreManaCostColor()) {
+            ignoreColor = true;
         }
 
         List<SpellAbility> paymentList = Lists.newArrayList();

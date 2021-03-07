@@ -3,9 +3,7 @@ ManaCost:4 R
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At the beginning of your upkeep, exile the top card of each opponent's library. Until end of turn, you may cast spells from among those exiled cards, and you may spend mana as though it were mana of any color to cast those spells.
 SVar:TrigExile:DB$ Dig | Defined$ Player.Opponent | DigNum$ 1 | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of each opponent's library. Until end of turn, you may cast nonland cards from among those exiled cards, and you may spend mana as though it were mana of any color to cast those spells.
-SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | Triggers$ TriggerCastDoM | SVars$ TrigRemoveSelf | RememberObjects$ Remembered | SubAbility$ DBCleanup
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it.
-SVar:TriggerCastDoM:Mode$ SpellCast | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Execute$ TrigRemoveSelf | Static$ True
-SVar:TrigRemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STMayPlay | RememberObjects$ RememberedCard | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered+nonLand | Caster$ You | Origin$ Exile | MayPlayIgnoreColor$ True | Description$ Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:At the beginning of your upkeep, exile the top card of each opponent's library. Until end of turn, you may cast spells from among those exiled cards, and you may spend mana as though it were mana of any color to cast those spells.

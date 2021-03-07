@@ -1,7 +1,7 @@
 Name:Misdirection
 ManaCost:3 U U
 Types:Instant
-SVar:AltCost:Cost$ ExileFromHand<1/Card.Blue+Other> | Description$ You may exile a blue card from your hand rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ ExileFromHand<1/Card.Blue+Other> | Description$ You may exile a blue card from your hand rather than pay this spell's mana cost.
 A:SP$ ChangeTargets | Cost$ 3 U U | TargetType$ Spell | ValidTgts$ Card | TargetsSingleTarget$ True | SpellDescription$ Change the target of target spell with a single target.
 AI:RemoveDeck:All
 Oracle:You may exile a blue card from your hand rather than pay this spell's mana cost.\nChange the target of target spell with a single target.

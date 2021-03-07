@@ -1,7 +1,7 @@
 Name:Nemesis Trap
 ManaCost:4 B B
 Types:Instant Trap
-SVar:AltCost:Cost$ B B | IsPresent$ Creature.White+attacking | Description$ If a white creature is attacking, you may pay {B}{B} rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ B B | IsPresent$ Creature.White+attacking | Description$ If a white creature is attacking, you may pay {B}{B} rather than pay this spell's mana cost.
 A:SP$ ChangeZone | Cost$ 4 B B | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ NemesisToken | SpellDescription$ Exile target attacking creature. Create a token that's a copy of that creature. Exile it at the beginning of the next end step.
 SVar:NemesisToken:DB$ CopyPermanent | Defined$ DirectRemembered | AtEOT$ Exile
 Oracle:If a white creature is attacking, you may pay {B}{B} rather than pay this spell's mana cost.\nExile target attacking creature. Create a token that's a copy of that creature. Exile it at the beginning of the next end step.

@@ -26,7 +26,6 @@ import forge.game.GameActionUtil;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardPlayOption;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
 import forge.game.keyword.KeywordInterface;
@@ -68,7 +67,6 @@ public class HumanPlaySpellAbility {
         final ManaPool manapool = human.getManaPool();
 
         final Card c = ability.getHostCard();
-        final CardPlayOption option = c.mayPlay(ability.getMayPlay());
 
         boolean manaTypeConversion = false;
         boolean manaColorConversion = false;
@@ -92,12 +90,9 @@ public class HumanPlaySpellAbility {
         ability = GameActionUtil.addExtraKeywordCost(ability);
 
         if (ability.isSpell() && !ability.isCopied()) { // These hidden keywords should only apply on the Stack
-            final Card host = ability.getHostCard();
-            if (host.hasKeyword("May spend mana as though it were mana of any type to cast CARDNAME")
-                    || (option != null && option.isIgnoreManaCostType())) {
+            if (ability.isIgnoreManaCostType()) {
                 manaTypeConversion = true;
-            } else if (host.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")
-                    || (option != null && option.isIgnoreManaCostColor())) {
+            } else if (ability.isIgnoreManaCostColor()) {
                 manaColorConversion = true;
             }
         }
@@ -120,7 +115,7 @@ public class HumanPlaySpellAbility {
             human.incNumManaConversion();
         }
 
-        if (option != null && option.isIgnoreSnowSourceManaCostColor()) {
+        if (ability.isIgnoreSnowSourceManaCostColor()) {
             payment.setSnowForColor(true);
         }
 

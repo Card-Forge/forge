@@ -78,7 +78,7 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
 
         Plan plan = picker.getPlan();
         assertEquals(2, plan.getDecisions().size());
-        assertEquals("Play land Mountain", plan.getDecisions().get(0).saRef.toString());
+        assertEquals("Play land", plan.getDecisions().get(0).saRef.toString());
         assertEquals("Shock deals 2 damage to any target.", plan.getDecisions().get(1).saRef.toString());
         assertTrue(plan.getDecisions().get(1).targets.toString().contains("Runeclaw Bear"));
     }
@@ -265,7 +265,7 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         assertEquals(abbot.getSpellAbilities().get(0), sa);
         Plan plan = picker.getPlan();
         assertEquals(3, plan.getDecisions().size());
-        assertEquals("Play land Mountain", plan.getDecisions().get(1).saRef.toString());
+        assertEquals("Play land", plan.getDecisions().get(1).saRef.toString());
         assertEquals("Lightning Bolt deals 3 damage to any target.", plan.getDecisions().get(2).saRef.toString());
     }
 

@@ -396,7 +396,11 @@ public class CardFactory {
         // SpellPermanent only for Original State
         if (c.getCurrentStateName() == CardStateName.Original || c.getCurrentStateName() == CardStateName.Modal) {
             // this is the "default" spell for permanents like creatures and artifacts
-            if (c.isPermanent() && !c.isAura() && !c.isLand()) {
+            if (c.isLand()) {
+                SpellAbility sa = new LandAbility(c);
+                sa.setCardState(c.getCurrentState());
+                c.addSpellAbility(sa);
+            } else if (c.isPermanent() && !c.isAura()) {
                 SpellAbility sa = new SpellPermanent(c);
 
                 // Currently only for Modal, might react different when state is always set

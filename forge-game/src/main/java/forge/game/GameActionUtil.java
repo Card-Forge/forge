@@ -21,14 +21,14 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-import forge.card.MagicColor;
+import forge.GameCommand;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
-import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -38,8 +38,8 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.*;
+import forge.game.staticability.StaticAbilityAlternativeCost;
 import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
@@ -86,7 +86,7 @@ public final class GameActionUtil {
         if (sa.isSpell() && !source.isInZone(ZoneType.Battlefield)) {
             boolean lkicheck = false;
 
-            Card newHost = ((Spell)sa).getAlternateHost(source);
+            Card newHost = sa.getAlternateHost(source);
             if (newHost != null) {
                 source = newHost;
                 lkicheck = true;
@@ -100,61 +100,8 @@ public final class GameActionUtil {
                 game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
             }
 
-            for (CardPlayOption o : source.mayPlay(activator)) {
-                // do not appear if it can be cast with SorcerySpeed
-                if (o.getAbility().hasParam("MayPlayNotSorcerySpeed") && activator.couldCastSorcery(sa)) {
-                    continue;
-                }
-                // non basic are only allowed if PayManaCost is yes
-                if (!sa.isBasicSpell() && o.getPayManaCost() == PayManaCost.NO) {
-                    continue;
-                }
-                final Card host = o.getHost();
-
-                SpellAbility newSA = null;
-
-                boolean changedManaCost = false;
-                if (o.getPayManaCost() == PayManaCost.NO) {
-                    newSA = sa.copyWithNoManaCost(activator);
-                    newSA.setBasicSpell(false);
-                    changedManaCost = true;
-                } else if (o.getAltManaCost() != null) {
-                    newSA = sa.copyWithManaCostReplaced(activator, o.getAltManaCost());
-                    newSA.setBasicSpell(false);
-                    changedManaCost = true;
-                } else {
-                    newSA = sa.copy(activator);
-                }
-                final SpellAbilityRestriction sar = newSA.getRestrictions();
-                if (o.isWithFlash()) {
-                    sar.setInstantSpeed(true);
-                }
-                sar.setZone(null);
-                newSA.setMayPlay(o.getAbility());
-
-                if (changedManaCost) {
-                    if ("0".equals(sa.getParam("ActivationLimit")) && sa.getHostCard().getManaCost().isNoCost()) {
-                        sar.setLimitToCheck(null);
-                    }
-                }
-
-                final StringBuilder sb = new StringBuilder(sa.getDescription());
-                if (!source.equals(host)) {
-                    sb.append(" by ");
-                    if ((host.isEmblem() || host.getType().hasSubtype("Effect"))
-                            && host.getEffectSource() != null) {
-                        sb.append(host.getEffectSource());
-                    } else {
-                        sb.append(host);
-                    }
-                }
-                if (o.getAbility().hasParam("MayPlayText")) {
-                    sb.append(" (").append(o.getAbility().getParam("MayPlayText")).append(")");
-                }
-                sb.append(o.toString(false));
-                newSA.setDescription(sb.toString());
-                alternatives.add(newSA);
-            }
+            // Add Alternate Cost
+            alternatives.addAll(StaticAbilityAlternativeCost.getAlternativeCostAndZones(sa, source, activator));
 
             // need to be done there before static abilities does reset the card
             if (sa.isBasicSpell()) {
@@ -242,6 +189,18 @@ public final class GameActionUtil {
                 // need to unfreeze tracker
                 game.getTracker().unfreeze();
             }
+        }
+
+        if (sa.isLandAbility() && !source.isInZone(ZoneType.Battlefield)) {
+
+            Card newHost = sa.getAlternateHost(source);
+            if (newHost != null) {
+                source = newHost;
+            }
+            // check if LKI stuff needs to be run for checks
+
+            // Add Alternate Cost
+            alternatives.addAll(StaticAbilityAlternativeCost.getAlternativeCostAndZones(sa, source, activator));
         }
 
         if (sa.isManaAbility() && sa.isActivatedAbility() && activator.hasKeyword("Piracy") && source.isLand() && source.isInPlay() && !activator.equals(source.getController()) && sa.getPayCosts().hasTapCost()) {
@@ -501,15 +460,9 @@ public final class GameActionUtil {
 
     public static Card createETBCountersEffect(Card sourceCard, Card c, Player controller, String counter, String amount) {
         final Game game = sourceCard.getGame();
-        final Card eff = new Card(game.nextCardId(), game);
-        eff.setTimestamp(game.getNextTimestamp());
-        eff.setName(sourceCard.getName() + "'s Effect");
-        eff.addType("Effect");
-        eff.setOwner(controller);
 
-        eff.setImageKey(sourceCard.getImageKey());
-        eff.setColor(MagicColor.COLORLESS);
-        eff.setImmutable(true);
+        final Card eff = SpellAbilityEffect.createEffect(sourceCard, controller, sourceCard.getName() + "'s Effect", sourceCard.getImageKey());
+
         // try to get the SpellAbility from the mana ability
         //eff.setEffectSource((SpellAbility)null);
 
@@ -536,26 +489,59 @@ public final class GameActionUtil {
 
         eff.addReplacementEffect(re);
 
-        // Forgot Trigger
-        String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Any | TriggerZones$ Command | Static$ True";
-        String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
-        String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
-                + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
-
-        SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, eff);
-        AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, eff);
-        saForget.setSubAbility(saExile);
-
-        final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, eff, true);
-        parsedTrigger.setOverridingAbility(saForget);
-        eff.addTrigger(parsedTrigger);
-        eff.updateStateForView();
+        SpellAbilityEffect.addForgetOnMovedTrigger(eff, "Stack");
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         game.getAction().moveTo(ZoneType.Command, eff, null);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-        
+
+        return eff;
+    }
+
+    public static Card createReplaceGraveyardEffect(Card c, Player controller, CardTraitBase ctb, String zone) {
+        Card sourceCard = ctb.getHostCard();
+        final Game game = sourceCard.getGame();
+
+        final Card eff = SpellAbilityEffect.createEffect(sourceCard, controller, sourceCard.getName() + "'s Effect", sourceCard.getImageKey());
+
+        eff.addRemembered(c);
+
+        String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered " +
+        "| Origin$ Stack | Destination$ Graveyard " +
+        "| Description$ If that card would be put into your graveyard this turn, exile it instead.";
+        String effect = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ " + zone;
+
+        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
+        re.setLayer(ReplacementLayer.Other);
+
+        re.setOverridingAbility(AbilityFactory.getAbility(effect, eff));
+        eff.addReplacementEffect(re);
+
+
+        SpellAbilityEffect.addForgetOnMovedTrigger(eff, "Stack");
+
+        // Copy text changes
+        if (ctb.isIntrinsic()) {
+            eff.copyChangedTextFrom(sourceCard);
+        }
+
+        final GameCommand endEffect = new GameCommand() {
+            private static final long serialVersionUID = -5861759814760561373L;
+
+            @Override
+            public void run() {
+                game.getAction().exile(eff, null);
+            }
+        };
+
+        game.getEndOfTurn().addUntil(endEffect);
+
+        // TODO: Add targeting to the effect so it knows who it's dealing with
+        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        game.getAction().moveTo(ZoneType.Command, eff, null);
+        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+
         return eff;
     }
 

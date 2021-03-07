@@ -142,7 +142,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
      *
      * @return a boolean.
      */
-    public final boolean isSecondary() {
+    public boolean isSecondary() {
         return getParamOrDefault("Secondary", "False").equals("True");
     }
 

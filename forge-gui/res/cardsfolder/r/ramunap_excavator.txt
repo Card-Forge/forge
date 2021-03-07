@@ -2,7 +2,6 @@ Name:Ramunap Excavator
 ManaCost:2 G
 Types:Creature Naga Cleric
 PT:2/3
-S:Mode$ Continuous | Affected$ Land.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands from your graveyard.
+S:Mode$ AlternativeZone | ValidCard$ Land.YouOwn | Caster$ You | Origin$ Graveyard | Description$ You may play lands from your graveyard.
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ramunap_excavator.jpg
 Oracle:You may play lands from your graveyard.

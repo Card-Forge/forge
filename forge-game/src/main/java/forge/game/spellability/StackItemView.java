@@ -59,7 +59,6 @@ public class StackItemView extends TrackableObject implements IHasCardView {
         boolean retraced = false;
         boolean jumpstart = false;
         boolean additional = false;
-        boolean alternate = false;
         boolean generic = false;
 
         for (OptionalCost cost : si.getSpellAbility(false).getOptionalCosts()) {
@@ -77,23 +76,21 @@ public class StackItemView extends TrackableObject implements IHasCardView {
                 additional = true;
             if (cost == OptionalCost.Generic)
                 generic = true;
-            if (cost == OptionalCost.AltCost)
-                alternate = true;
         }
-        if (!alternate) {
-            if (kicked && !generic)
-                OptionalCostString += "Kicked";
-            if (entwined)
-                OptionalCostString += OptionalCostString.equals("") ? "Entwined" : ", Entwined";
-            if (buyback)
-                OptionalCostString += OptionalCostString.equals("") ? "Buyback" : ", Buyback";
-            if (retraced)
-                OptionalCostString += OptionalCostString.equals("") ? "Retraced" : ", Retraced";
-            if (jumpstart)
-                OptionalCostString += OptionalCostString.equals("") ? "Jumpstart" : ", Jumpstart";
-            if (additional || generic)
-                OptionalCostString += OptionalCostString.equals("") ? "Additional" : ", Additional";
-        }
+
+        if (kicked && !generic)
+            OptionalCostString += "Kicked";
+        if (entwined)
+            OptionalCostString += OptionalCostString.equals("") ? "Entwined" : ", Entwined";
+        if (buyback)
+            OptionalCostString += OptionalCostString.equals("") ? "Buyback" : ", Buyback";
+        if (retraced)
+            OptionalCostString += OptionalCostString.equals("") ? "Retraced" : ", Retraced";
+        if (jumpstart)
+            OptionalCostString += OptionalCostString.equals("") ? "Jumpstart" : ", Jumpstart";
+        if (additional || generic)
+            OptionalCostString += OptionalCostString.equals("") ? "Additional" : ", Additional";
+
         set(TrackableProperty.OptionalCosts, OptionalCostString);
     }
 

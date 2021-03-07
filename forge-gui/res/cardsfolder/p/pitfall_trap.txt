@@ -1,6 +1,6 @@
 Name:Pitfall Trap
 ManaCost:2 W
 Types:Instant Trap
-SVar:AltCost:Cost$ W | IsPresent$ Creature.attacking | PresentCompare$ EQ1 | Description$ If exactly one creature is attacking, you may pay {W} rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ W | IsPresent$ Creature.attacking | PresentCompare$ EQ1 | Description$ If exactly one creature is attacking, you may pay {W} rather than pay this spell's mana cost.
 A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.attacking+withoutFlying | TgtPrompt$ Select target attacking creature without flying | SpellDescription$ Destroy target attacking creature without flying.
 Oracle:If exactly one creature is attacking, you may pay {W} rather than pay this spell's mana cost.\nDestroy target attacking creature without flying.

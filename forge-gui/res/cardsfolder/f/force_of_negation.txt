@@ -1,6 +1,6 @@
 Name:Force of Negation
 ManaCost:1 U U
 Types:Instant
-SVar:AltCost:Cost$ ExileFromHand<1/Card.Blue+Other> | OpponentTurn$ True | Description$ If it's not your turn, you may exile a blue card from your hand rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ ExileFromHand<1/Card.Blue+Other> | OpponentTurn$ True | Description$ If it's not your turn, you may exile a blue card from your hand rather than pay this spell's mana cost.
 A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | Destination$ Exile | SpellDescription$ Counter target noncreature spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyayrd.
 Oracle:If it's not your turn, you may exile a blue card from your hand rather than pay this spell's mana cost.\nCounter target noncreature spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.

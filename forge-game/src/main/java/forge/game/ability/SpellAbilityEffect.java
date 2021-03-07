@@ -349,7 +349,7 @@ public abstract class SpellAbilityEffect {
         return saForget;
     }
 
-    protected static void addForgetOnMovedTrigger(final Card card, final String zone) {
+    public static void addForgetOnMovedTrigger(final Card card, final String zone) {
         String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | ExcludedDestinations$ Stack | Destination$ Any | TriggerZones$ Command | Static$ True";
 
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
@@ -437,11 +437,8 @@ public abstract class SpellAbilityEffect {
         re.setOverridingAbility(AbilityFactory.getAbility(effect, eff));
         eff.addReplacementEffect(re);
     }
-
-    // create a basic template for Effect to be used somewhere else
-    protected static Card createEffect(final SpellAbility sa, final Player controller, final String name,
+    public static Card createEffect(final Card hostCard, final Player controller, final String name,
             final String image) {
-        final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
         eff.setTimestamp(game.getNextTimestamp());
@@ -465,8 +462,13 @@ public abstract class SpellAbilityEffect {
             eff.setColor(hostCard.determineColor().getColor());
         }
         eff.setImmutable(true);
+        return eff;
+    }
+    // create a basic template for Effect to be used somewhere else
+    public static Card createEffect(final SpellAbility sa, final Player controller, final String name,
+            final String image) {
+        Card eff = createEffect(sa.getHostCard(), controller, name, image);
         eff.setEffectSource(sa);
-
         return eff;
     }
 

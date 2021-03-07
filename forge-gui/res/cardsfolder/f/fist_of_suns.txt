@@ -1,8 +1,7 @@
 Name:Fist of Suns
 ManaCost:3
 Types:Artifact
-S:Mode$ Continuous | Affected$ Card.YouCtrl | AddKeyword$ Alternative Cost:W U B R G | AffectedZone$ Hand,Graveyard,Exile,Library,Command | Description$ You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast.
+S:Mode$ AlternativeCost | Caster$ You | Cost$ W U B R G | Description$ You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fist_of_suns.jpg
 Oracle:You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast.

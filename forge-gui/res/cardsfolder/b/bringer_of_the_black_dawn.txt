@@ -3,7 +3,7 @@ ManaCost:7 B B
 Types:Creature Bringer
 PT:5/5
 K:Trample
-SVar:AltCost:Cost$ W U B R G | Description$ You may pay {W}{U}{B}{R}{G} rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | Caster$ You | Cost$ W U B R G | EffectZone$ All | Description$ You may pay {W}{U}{B}{R}{G} rather than pay this spell's mana cost.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, you may pay 2 life. If you do, search your library for a card, then shuffle your library and put that card on top of it.
 SVar:TrigChange:AB$ ChangeZone | Cost$ PayLife<2> | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card | ChangeNum$ 1
 AI:RemoveDeck:All

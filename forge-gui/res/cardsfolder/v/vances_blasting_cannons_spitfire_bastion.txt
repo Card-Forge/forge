@@ -3,8 +3,8 @@ ManaCost:3 R
 Types:Legendary Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library. If it's a nonland card, you may cast that card this turn.
 SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | ConditionDefined$ RememberedCard | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
-SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may cast the remembered nonland card.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | ConditionDefined$ RememberedCard | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | StaticAbilities$ STMayPlay | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered | Caster$ You | Origin$ Exile | Description$ You may cast the remembered nonland card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTransform | CheckSVar$ YouCastThisTurn | SVarCompare$ EQ3 | NoResolvingCheck$ True | OptionalDecider$ You | TriggerDescription$ Whenever you cast your third spell in a turn, you may transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform | AILogic$ Always

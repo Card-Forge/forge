@@ -6,12 +6,12 @@ SVar:DBChooseLand:DB$ ChooseCard | Defined$ You | Choices$ Land.IsRemembered | M
 SVar:DBChangeZone:DB$ ChangeZone | Optional$ True | Defined$ ChosenCard | Origin$ Exile | Destination$ Battlefield | ChangeNum$ 1 | ForgetChanged$ True | SubAbility$ DBCleanupChosen
 SVar:DBCleanupChosen:DB$ Cleanup | ClearChosenCard$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$Effect | RememberObjects$ RememberedCard | StaticAbilities$ PlayCr,PlayPl,PlayAr,PlayEn,PlayIn,PlaySo,PlayTr | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
-SVar:PlayCr:Mode$ Continuous | Affected$ Creature.YouCtrl+IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | MayPlayText$ Creature | EffectZone$ Command | AffectedZone$ Exile
-SVar:PlayPl:Mode$ Continuous | Affected$ Planeswalker.YouCtrl+IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | MayPlayText$ Planeswalker | EffectZone$ Command | AffectedZone$ Exile
-SVar:PlayAr:Mode$ Continuous | Affected$ Artifact.YouCtrl+IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | MayPlayText$ Artifact | EffectZone$ Command | AffectedZone$ Exile
-SVar:PlayEn:Mode$ Continuous | Affected$ Enchantment.YouCtrl+IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | MayPlayText$ Enchantment | EffectZone$ Command | AffectedZone$ Exile
-SVar:PlayIn:Mode$ Continuous | Affected$ Instant.YouCtrl+IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | MayPlayText$ Instant | EffectZone$ Command | AffectedZone$ Exile
-SVar:PlaySo:Mode$ Continuous | Affected$ Sorcery.YouCtrl+IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | MayPlayText$ Sorcery | EffectZone$ Command | AffectedZone$ Exile
-SVar:PlayTr:Mode$ Continuous | Affected$ Tribal.YouCtrl+IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | MayPlayText$ Tribal | EffectZone$ Command | AffectedZone$ Exile
+SVar:PlayCr:Mode$ AlternativeCost | ValidCard$ Creature.IsRemembered+YouOwn+nonLand | Caster$ You | Origin$ Exile | Cost$ 0 | MayPlayTurnLimit$ 1 | MayPlayText$ Creature
+SVar:PlayPl:Mode$ AlternativeCost | ValidCard$ Planeswalker.IsRemembered+YouOwn+nonLand | Caster$ You | Origin$ Exile | Cost$ 0 | MayPlayTurnLimit$ 1 | MayPlayText$ Planeswalker
+SVar:PlayAr:Mode$ AlternativeCost | ValidCard$ Artifact.IsRemembered+YouOwn+nonLand | Caster$ You | Origin$ Exile | Cost$ 0 | MayPlayTurnLimit$ 1 | MayPlayText$ Artifact
+SVar:PlayEn:Mode$ AlternativeCost | ValidCard$ Enchantment.IsRemembered+YouOwn+nonLand | Caster$ You | Origin$ Exile | Cost$ 0 | MayPlayTurnLimit$ 1 | MayPlayText$ Enchantment
+SVar:PlayIn:Mode$ AlternativeCost | ValidCard$ Instant.IsRemembered+YouOwn+nonLand | Caster$ You | Origin$ Exile | Cost$ 0 | MayPlayTurnLimit$ 1 | MayPlayText$ Instant
+SVar:PlaySo:Mode$ AlternativeCost | ValidCard$ Sorcery.IsRemembered+YouOwn+nonLand | Caster$ You | Origin$ Exile | Cost$ 0 | MayPlayTurnLimit$ 1 | MayPlayText$ Sorcery
+SVar:PlayTr:Mode$ AlternativeCost | ValidCard$ Tribal.IsRemembered+YouOwn+nonLand | Caster$ You | Origin$ Exile | Cost$ 0 | MayPlayTurnLimit$ 1 | MayPlayText$ Tribal
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Exile the top eight cards of your library. You may put a land card from among them onto the battlefield. Until end of turn, for each nonland card type, you may cast a spell of that type from among the exiled cards without paying its mana cost.

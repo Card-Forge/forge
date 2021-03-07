@@ -23,7 +23,6 @@ import java.util.List;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
-import forge.game.spellability.LandAbility;
 import forge.game.spellability.SpellAbility;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -166,7 +165,7 @@ public class InputPassPriority extends InputSyncronizedBase {
         if (sa.isSpell()) {
             return Localizer.getInstance().getMessage("lblCastSpell");
         }
-        if (sa instanceof LandAbility) {
+        if (sa.isLandAbility()) {
             return Localizer.getInstance().getMessage("lblPlayLand");
         }
         return Localizer.getInstance().getMessage("lblActivateAbility");

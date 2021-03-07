@@ -8,7 +8,6 @@ import forge.game.card.CardState;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbility;
 import forge.util.Expressions;
 
 public class ForgeScript {
@@ -163,12 +162,6 @@ public class ForgeScript {
             return sa.isForetelling();
         } else if (property.equals("Foretold")) {
             return sa.isForetold();
-        } else if (property.equals("MayPlaySource")) {
-            StaticAbility m = sa.getMayPlay();
-            if (m == null) {
-                return false;
-            }
-            return source.equals(m.getHostCard());
         } else if (property.startsWith("IsTargeting")) {
             String[] k = property.split(" ", 2);
             boolean found = false;

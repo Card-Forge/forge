@@ -6,5 +6,5 @@ K:Changeling
 K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type.
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
-S:Mode$ Continuous | Affected$ Creature.ChosenType+TopLibrary+YouCtrl+nonLand | AffectedZone$ Library | MayPlay$ True | Description$ You may cast creature spells of the chosen type from the top of your library.
+S:Mode$ AlternativeZone | ValidCard$ Creature.ChosenType+TopLibrary+YouCtrl+nonLand | Caster$ You | Origin$ Library | Description$ You may cast creature spells of the chosen type from the top of your library.
 Oracle:Changeling (This card is every creature type.)\nAs Realmwalker enters the battlefield, choose a creature type.\nYou may look at the top card of your library any time.\nYou may cast creature spells of the chosen type from the top of your library.

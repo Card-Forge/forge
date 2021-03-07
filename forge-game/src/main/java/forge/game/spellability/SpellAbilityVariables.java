@@ -401,7 +401,6 @@ public class SpellAbilityVariables implements Cloneable {
     protected boolean kicked = false;
     protected boolean kicked1 = false; // http://magiccards.info/query?q=o%3A%22kicker%22+not+o%3A%22multikicker%22+o%3A%22and%2For+{%22
     protected boolean kicked2 = false; // Some spells have 2 kickers with different effects
-    protected boolean altCostPaid = false;
     protected boolean optionalCostPaid = false; // Undergrowth other Pseudo-kickers
     protected boolean optionalBoolean = true; // Just in case you need to check if something wasn't kicked, etc
     protected boolean surgeCostPaid = false;

@@ -4,6 +4,6 @@ Types:Creature Zombie Horror
 PT:5/6
 K:Flying
 A:SP$ PermanentCreature | Cost$ 1 U U ExileFromGrave<3/Creature>
-SVar:AltCost:Cost$ 1 U U ExileFromGrave<3/Creature.Other> | ActivationZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ 1 U U ExileFromGrave<3/Creature.Other> | ActivationZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skaab_ruinator.jpg
 Oracle:As an additional cost to cast this spell, exile three creature cards from your graveyard.\nFlying\nYou may cast Skaab Ruinator from your graveyard.

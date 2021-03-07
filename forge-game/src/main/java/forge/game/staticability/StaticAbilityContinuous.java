@@ -100,7 +100,6 @@ public final class StaticAbilityContinuous {
         final StaticEffect se = game.getStaticEffects().getStaticEffect(stAb);
         se.setAffectedCards(affectedCards);
         se.setAffectedPlayers(affectedPlayers);
-        se.setParams(params);
         se.setTimestamp(hostCard.getTimestamp());
 
         String changeColorWordsTo = null;
@@ -141,11 +140,6 @@ public final class StaticAbilityContinuous {
         Set<Keyword> cantHaveKeyword = null;
 
         List<Player> mayLookAt = null;
-
-        boolean controllerMayPlay = false, mayPlayWithoutManaCost = false, mayPlayWithFlash = false;
-        String mayPlayAltManaCost = null;
-        boolean mayPlayGrantZonePermissions = true;
-        Integer mayPlayLimit = null;
 
         //Global rules changes
         if (layer == StaticAbilityLayer.RULES && params.containsKey("GlobalRule")) {
@@ -493,23 +487,6 @@ public final class StaticAbilityContinuous {
                 }
                 mayLookAt = AbilityUtils.getDefinedPlayers(hostCard, look, null);
             }
-            if (params.containsKey("MayPlay")) {
-                controllerMayPlay = true;
-                if (params.containsKey("MayPlayWithoutManaCost")) {
-                    mayPlayWithoutManaCost = true;
-                } else if (params.containsKey("MayPlayAltManaCost")) {
-                    mayPlayAltManaCost = params.get("MayPlayAltManaCost");
-                }
-                if (params.containsKey("MayPlayWithFlash")) {
-                	mayPlayWithFlash = true;
-                }
-                if (params.containsKey("MayPlayLimit")) {
-                    mayPlayLimit = Integer.parseInt(params.get("MayPlayLimit"));
-                }
-                if (params.containsKey("MayPlayDontGrantZonePermissions")) {
-                    mayPlayGrantZonePermissions = false;
-                }
-            }
 
             if (params.containsKey("IgnoreEffectCost")) {
                 String cost = params.get("IgnoreEffectCost");
@@ -850,20 +827,6 @@ public final class StaticAbilityContinuous {
 
             if (mayLookAt != null) {
                 affectedCard.addMayLookAt(se.getTimestamp(), mayLookAt);
-            }
-
-            if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {
-                String mayPlayAltCost = mayPlayAltManaCost;
-
-                if (mayPlayAltCost != null && mayPlayAltCost.contains("ConvertedManaCost")) {
-                    final String costcmc = Integer.toString(affectedCard.getCMC());
-                    mayPlayAltCost = mayPlayAltCost.replace("ConvertedManaCost", costcmc);
-                }
-
-                Player mayPlayController = params.containsKey("MayPlayCardOwner") ? affectedCard.getOwner() : controller;
-                affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost,
-                        mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null,
-                        mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
             }
         }
 

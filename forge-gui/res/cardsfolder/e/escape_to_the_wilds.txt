@@ -2,8 +2,8 @@ Name:Escape to the Wilds
 ManaCost:3 R G
 Types:Sorcery
 A:SP$ Dig | Cost$ 3 R G | DestinationZone$ Exile | DigNum$ 5 | ChangeNum$ All | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top five cards of your library. You may play cards exiled this way until the end of your next turn. You may play an additional land this turn.
-SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | ForgetOnMoved$ Exile | StaticAbilities$ Play | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBEffect2
-SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play cards exiled this the end of your next turn.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | ForgetOnMoved$ Exile | StaticAbilities$ STMayPlay | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBEffect2
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered | Caster$ You | Origin$ Exile | Description$ Until the end of your next turn, you may play those cards.
 SVar:DBEffect2:DB$ Effect | Name$ Escape to the Wilds Exploration Effect | StaticAbilities$ Exploration | AILogic$ Always | SubAbility$ DBCleanup
 SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | EffectZone$ Command | Description$ You may play an additional land this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

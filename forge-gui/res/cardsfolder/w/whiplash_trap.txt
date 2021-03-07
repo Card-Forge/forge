@@ -1,7 +1,7 @@
 Name:Whiplash Trap
 ManaCost:3 U U
 Types:Instant Trap
-SVar:AltCost:Cost$ U | CheckSVar$ CreaturesEntered | SVarCompare$ GE2 | Description$ If an opponent had two or more creatures enter the battlefield under their control this turn, you may pay {U} rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ U | CheckSVar$ CreaturesEntered | SVarCompare$ GE2 | Description$ If an opponent had two or more creatures enter the battlefield under their control this turn, you may pay {U} rather than pay this spell's mana cost.
 A:SP$ ChangeZone | Cost$ 3 U U | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Choose two target creatures | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Return two target creatures to their owners' hands.
 SVar:CreaturesEntered:Count$ThisTurnEntered_Battlefield_Creature.YouDontCtrl
 Oracle:If an opponent had two or more creatures enter the battlefield under their control this turn, you may pay {U} rather than pay this spell's mana cost.\nReturn two target creatures to their owners' hands.

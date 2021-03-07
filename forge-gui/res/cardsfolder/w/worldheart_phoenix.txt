@@ -3,8 +3,5 @@ ManaCost:3 R
 Types:Creature Phoenix
 PT:2/2
 K:Flying
-SVar:AltCost:Cost$ W U B R G | ActivationZone$ Graveyard | Description$ You may cast CARDNAME from graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost. If you do, it enters the battlefield with two +1/+1 counters on it.
-K:etbCounter:P1P1:2:CheckSVar$AltCostPaid:no desc
-SVar:AltCostPaid:Count$AltCost.1.0
-SVar:Picture:http://www.wizards.com/global/images/magic/general/worldheart_phoenix.jpg
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | Caster$ You | Cost$ W U B R G | EffectZone$ Graveyard | Origin$ Graveyard | WithCountersType$ P1P1 | WithCountersAmount$ 2 | Description$ You may cast CARDNAME from graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost. If you do, it enters the battlefield with two +1/+1 counters on it.
 Oracle:Flying\nYou may cast Worldheart Phoenix from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost. If you do, it enters the battlefield with two +1/+1 counters on it.

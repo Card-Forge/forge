@@ -5,8 +5,8 @@ PT:2/2
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, look at the top three cards of that player's library, exile one of them face down, then put the rest into their graveyard. For as long as that card remains exiled, you may look at it, and you may spend mana as though it were mana of any type to cast it.
 SVar:TrigDig:DB$ Dig | DigNum$ 3 | Defined$ TriggeredTarget | DestinationZone$ Exile | ExileFaceDown$ True | SkipReorder$ True | DestinationZone2$ Graveyard | RememberChanged$ True | ChangeValid$ Card | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay1,STPlay2 | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:STPlay1:Mode$ Continuous | MayLookAt$ You | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at it, and you may spend mana as though it were mana of any type to cast it.
-SVar:STPlay2:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Secondary$ True | Description$ You may look at it, and you may spend mana as though it were mana of any type to cast it.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STMayLook,STMayPlay | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STMayLook:Mode$ Continuous | MayLookAt$ You | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at it, and you may spend mana as though it were mana of any type to cast it.
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered+nonLand | Caster$ You | Origin$ Exile | MayPlayIgnoreType$ True | Description$ You may look at it, and you may spend mana as though it were mana of any type to cast it.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Flying\nWhenever Thief of Sanity deals combat damage to a player, look at the top three cards of that player's library, exile one of them face down, then put the rest into their graveyard. You may look at and cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.

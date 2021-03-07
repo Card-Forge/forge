@@ -3,9 +3,9 @@ ManaCost:7 W W
 Types:Creature Bringer
 PT:5/5
 K:Trample
-SVar:AltCost:Cost$ W U B R G | Description$ You may pay {W}{U}{B}{R}{G} rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | Caster$ You | Cost$ W U B R G | EffectZone$ All | Description$ You may pay {W}{U}{B}{R}{G} rather than pay this spell's mana cost.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, you may return target artifact card from your graveyard to the battlefield.
-SVar:TrigChange:AB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.YouCtrl | Cost$ 0
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.YouCtrl
 DeckHas:Ability$Graveyard
 DeckNeeds:Type$Artifact
 Oracle:You may pay {W}{U}{B}{R}{G} rather than pay this spell's mana cost.\nTrample\nAt the beginning of your upkeep, you may return target artifact card from your graveyard to the battlefield.

@@ -1,7 +1,7 @@
 Name:Reverent Mantra
 ManaCost:3 W
 Types:Instant
-SVar:AltCost:Cost$ ExileFromHand<1/Card.White+Other> | Description$ You may exile a white card from your hand rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ ExileFromHand<1/Card.White+Other> | Description$ You may exile a white card from your hand rather than pay this spell's mana cost.
 A:SP$ ChooseColor | Cost$ 3 W | Defined$ You | SubAbility$ DBProtection | AILogic$ MostProminentHumanControls | StackDescription$ SpellDescription | SpellDescription$ Choose a color. All creatures gain protection from the chosen color until end of turn.
 SVar:DBProtection:DB$ ProtectionAll | ValidCards$ Creature | Gains$ ChosenColor
 AI:RemoveDeck:All

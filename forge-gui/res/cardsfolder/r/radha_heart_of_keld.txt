@@ -4,7 +4,7 @@ Types:Legendary Creature Elf Warrior
 PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has first strike.
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ Player | Description$ Play with the top card of your library revealed.
-S:Mode$ Continuous | Affected$ Land.TopLibrary+YouCtrl | AffectedZone$ Library | MayPlay$ True | Description$ You may play the top card of your library if it's a land card.
+S:Mode$ AlternativeZone | ValidCard$ Land.TopLibrary+YouOwn | Caster$ You | Origin$ Library | Description$ You may play the top card of your library if it's a land card.
 A:AB$ Pump | Cost$ 4 R G | Defined$ Self | NumAtt$ +X | NumDef$ +X | SpellDescription$ CARDNAME gets +X/+X until end of turn, where X is the number of lands you control.
 SVar:X:Count$TypeYouCtrl.Land
 SVar:BuffedBy:Land

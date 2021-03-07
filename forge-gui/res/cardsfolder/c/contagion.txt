@@ -1,7 +1,7 @@
 Name:Contagion
 ManaCost:3 B B
 Types:Instant
-SVar:AltCost:Cost$ PayLife<1> ExileFromHand<1/Card.Black+Other/black card> | Description$ You may pay 1 life and exile a black card from your hand rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ PayLife<1> ExileFromHand<1/Card.Black+Other/black card> | Description$ You may pay 1 life and exile a black card from your hand rather than pay this spell's mana cost.
 A:SP$ PutCounter | Cost$ 3 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ M2M1 | CounterNum$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | IsCurse$ True | SpellDescription$ Distribute two -2/-1 counters among one or two target creatures.
 AI:RemoveDeck:All
 Oracle:You may pay 1 life and exile a black card from your hand rather than pay this spell's mana cost.\nDistribute two -2/-1 counters among one or two target creatures.

@@ -3,8 +3,8 @@ ManaCost:4 U B R
 Types:Legendary Planeswalker Bolas
 Loyalty:7
 A:AB$ DigUntil | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Valid$ Card.nonLand | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | IsCurse$ True | SubAbility$ DBEffect | StackDescription$ {p:Targeted} exiles cards from the top of their library until they exile a nonland card. Until end of turn, {p:You} may cast that card without paying its mana cost. | SpellDescription$ Target opponent exiles cards from the top of their library until they exile a nonland card. Until end of turn, you may cast that card without paying its mana cost.
-SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:MayPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until end of turn, you may cast this card without paying its mana cost.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ RememberedCard | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STMayPlay:Mode$ AlternativeCost | ValidCard$ Card.IsRemembered | Caster$ You | Origin$ Exile | Cost$ 0 | Description$ Until end of turn, you may cast this card without paying its mana cost.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ ChangeZone | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DefinedPlayer$ Player.Opponent | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 2 | Hidden$ True | Mandatory$ True | SpellDescription$ Each opponent exiles two cards from their hand.
 A:AB$ DealDamage | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | NumDmg$ 7 | ValidTgts$ Opponent,Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target opponent, creature an opponent controls, or planeswalker an opponent controls | SpellDescription$ CARDNAME deals deals 7 damage to target opponent, creature an opponent controls, or planeswalker an opponent controls.

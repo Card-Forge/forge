@@ -156,7 +156,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private SpellAbilityView view;
 
-    private StaticAbility mayPlay = null;
+    private List<StaticAbility> mayPlayList = Lists.newArrayList();
 
     private CardCollection lastStateBattlefield = null;
     private CardCollection lastStateGraveyard = null;
@@ -443,6 +443,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isSpell() { return false; }
     public boolean isAbility() { return true; }
     public boolean isActivatedAbility() { return false; }
+    public boolean isLandAbility() { return false; }
 
     public boolean isMorphUp() {
         return this.hasParam("MorphUp");
@@ -936,13 +937,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         chapter = val;
     }
 
-    public StaticAbility getMayPlay() {
-        return mayPlay;
-    }
-    public void setMayPlay(final StaticAbility sta) {
-        mayPlay = sta;
-    }
-
     public boolean isAdventure() {
         return this.getCardStateName() == CardStateName.Adventure;
     }
@@ -997,6 +991,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 // the targets need to be cloned, otherwise they might be cleared
                 clone.targetChosen = getTargets().clone();
             }
+
+            clone.mayPlayList = Lists.newArrayList(mayPlayList);
 
             // clear maps for copy, the values will be added later
             clone.additionalAbilities = Maps.newHashMap();
@@ -2280,5 +2276,61 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             c.ceaseToExist();
         }
         rollbackEffects.clear();
+    }
+
+    public List<StaticAbility> getMayPlayList() {
+        return mayPlayList;
+    }
+
+    public void addMayPlay(StaticAbility stAb) {
+        mayPlayList.add(stAb);
+    }
+
+    public void incMayPlayedThisTurn() {
+        for (StaticAbility stAb : mayPlayList) {
+            stAb.incMayPlayTurn();
+
+            // Static May Play Abilities that uses
+            // If a spell cast this way would be put into your graveyard, exile it instead.
+            if (stAb.hasParam("ReplaceGraveyard")) {
+                GameActionUtil.createReplaceGraveyardEffect(getHostCard(), getActivatingPlayer(), stAb, stAb.getParam("ReplaceGraveyard"));
+            }
+        }
+    }
+
+    public boolean isIgnoreManaCostType() {
+        if (getHostCard().hasKeyword("May spend mana as though it were mana of any type to cast CARDNAME")) {
+            return true;
+        }
+        for (StaticAbility stAb : mayPlayList) {
+            if (stAb.hasParam("MayPlayIgnoreType")) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean isIgnoreManaCostColor() {
+        if (getHostCard().hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")) {
+            return true;
+        }
+        for (StaticAbility stAb : mayPlayList) {
+            if (stAb.hasParam("MayPlayIgnoreColor")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isIgnoreSnowSourceManaCostColor() {
+        for (StaticAbility stAb : mayPlayList) {
+            if (stAb.hasParam("MayPlaySnowIgnoreColor")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Card getAlternateHost(Card source) {
+        return null;
     }
 }

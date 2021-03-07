@@ -63,7 +63,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     private Set<StaticAbilityLayer> layers;
     private CardCollectionView ignoreEffectCards = new CardCollection();
     private final List<Player> ignoreEffectPlayers = Lists.newArrayList();
-    private int mayPlayTurn = 0;
 
     @Override
     public final int getId() {
@@ -618,6 +617,12 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             }
         }
 
+        if (hasParam("MayPlayTurnLimit")) {
+            if (this.getMayPlayTurn() >= AbilityUtils.calculateAmount(hostCard, getParam("MayPlayTurnLimit"), this)) {
+                return false;
+            }
+        }
+
         if (hasParam("CheckSVar")) {
             final int sVar = AbilityUtils.calculateAmount(this.hostCard, getParam("CheckSVar"), this);
             String comparator = "GE1";
@@ -725,15 +730,11 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
 
     public int getMayPlayTurn() {
-        return mayPlayTurn;
+        return getHostCard().getMayPlayThisTurn(this);
     }
 
     public void incMayPlayTurn() {
-        this.mayPlayTurn++;
-    }
-
-    public void resetMayPlayTurn() {
-        this.mayPlayTurn = 0;
+        getHostCard().incMayPlayThisTurn(this);
     }
 
     @Override

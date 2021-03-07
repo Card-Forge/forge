@@ -53,7 +53,6 @@ import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
@@ -1861,15 +1860,17 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canPlayLand(final Card land) {
-        return canPlayLand(land, false);
+        return canPlayLand(land, false, land.getFirstSpellAbility());
     }
     public final boolean canPlayLand(final Card land, final boolean ignoreZoneAndTiming) {
-        return canPlayLand(land, ignoreZoneAndTiming, null);
+        return canPlayLand(land, ignoreZoneAndTiming, land.getFirstSpellAbility());
     }
     public final boolean canPlayLand(final Card land, final boolean ignoreZoneAndTiming, SpellAbility landSa) {
         if (!ignoreZoneAndTiming && !canCastSorcery()) {
             return false;
         }
+
+        landSa.setActivatingPlayer(this);
 
         // CantBeCast static abilities
         if (StaticAbilityCantBeCast.cantPlayLandAbility(landSa, land, this)) {
@@ -1877,13 +1878,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         if (land != null && !ignoreZoneAndTiming) {
-            final boolean mayPlay = landSa == null ? !land.mayPlay(this).isEmpty() : landSa.getMayPlay() != null;
-            if (land.getOwner() != this && !mayPlay) {
+            if (land.isInPlay()) {
                 return false;
             }
 
-            final Zone zone = game.getZoneOf(land);
-            if (zone != null && (zone.is(ZoneType.Battlefield) || (!zone.is(ZoneType.Hand) && !mayPlay))) {
+            if (!landSa.getRestrictions().checkActivatorRestrictions(land, landSa)) {
+                return false;
+            }
+            if (!landSa.getRestrictions().checkZoneRestrictions(land, landSa)) {
                 return false;
             }
         }

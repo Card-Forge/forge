@@ -2,8 +2,8 @@ Name:Runeforge Champion
 ManaCost:2 W
 Types:Creature Dwarf Warrior
 PT:2/3
-S:Mode$ Continuous | Affected$ Card.Rune+YouCtrl | AddKeyword$ Alternative Cost:1 | AffectedZone$ Hand,Graveyard,Exile,Library,Command | Description$ You may pay {1} rather than pay the mana cost for Rune spells you cast.
+S:Mode$ AlternativeCost | ValidCard$ Card.Rune+YouCtrl | Caster$ You | Cost$ 1 | Description$ You may pay {1} rather than pay the mana cost for Rune spells you cast.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library and/or graveyard for a Rune card, reveal it, and put it into your hand. If you search your library this way, shuffle it.
-SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Rune | ChangeNum$ 1 | ShuffleNonMandatory$ True
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Hand | ChangeType$ Rune | ChangeNum$ 1 | ShuffleNonMandatory$ True
 DeckNeeds:Type$Rune
 Oracle:When Runeforge Champion enters the battlefield, you may search your library and/or graveyard for a Rune card, reveal it, and put it into your hand. If you search your library this way, shuffle it.\nYou may pay {1} rather than pay the mana cost for Rune spells you cast.

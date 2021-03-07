@@ -6,6 +6,6 @@ SVar:TrackValidDestroy:DB$ Pump | RememberObjects$ TriggeredCard
 T:Mode$ TurnBegin | Execute$ TrigReset | Static$ True
 SVar:TrigReset:DB$ Cleanup | ClearRemembered$ True
 SVar:SetTrap:Remembered$Amount
-SVar:AltCost:Cost$ G | CheckSVar$ SetTrap | Description$ If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay {G} rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ G | CheckSVar$ SetTrap | Description$ If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay {G} rather than pay this spell's mana cost.
 A:SP$ Token | Cost$ 4 G G | TokenAmount$ 4 | TokenScript$ g_1_1_snake | TokenOwner$ You | StackDescription$ {p:You} creates four 1/1 green Snake creature tokens. | SpellDescription$ Create four 1/1 green Snake creature tokens.
 Oracle:If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay {G} rather than pay this spell's mana cost.\nCreate four 1/1 green Snake creature tokens.

@@ -1000,7 +1000,7 @@ public class AiController {
                 }
                 // move snap-casted spells to front
                 if (source.isInZone(ZoneType.Graveyard)) {
-                    if (sa.getMayPlay() != null && source.mayPlay(sa.getMayPlay()) != null) {
+                    if (!sa.getMayPlayList().isEmpty()) {
                         p += 50;
                     }
                 }
@@ -1395,22 +1395,8 @@ public class AiController {
                 if (ComputerUtil.getDamageFromETB(player, land) < player.getLife() || !player.canLoseLife() 
                         || player.cantLoseForZeroOrLessLife() ) {
                     if (!game.getPhaseHandler().is(PhaseType.MAIN1) || !isSafeToHoldLandDropForMain2(land)) {
-                        final List<SpellAbility> abilities = Lists.newArrayList();
+                        final List<SpellAbility> abilities = GameActionUtil.getAlternativeCosts(land.getFirstSpellAbility(), player);
 
-                        LandAbility la = new LandAbility(land, player, null);
-                        la.setCardState(land.getCurrentState());
-                        if (la.canPlay()) {
-                            abilities.add(la);
-                        }
-
-                        // add mayPlay option
-                        for (CardPlayOption o : land.mayPlay(player)) {
-                            la = new LandAbility(land, player, o.getAbility());
-                            la.setCardState(land.getCurrentState());
-                            if (la.canPlay()) {
-                                abilities.add(la);
-                            }
-                        }
                         if (!abilities.isEmpty()) {
                             return abilities;
                         }

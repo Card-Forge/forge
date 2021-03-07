@@ -24,12 +24,12 @@ import forge.game.card.*;
 import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCastWithFlash;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
-import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Sets;
@@ -187,26 +187,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      */
     public final boolean checkZoneRestrictions(final Card c, final SpellAbility sa) {
 
-        final Player activator = sa.getActivatingPlayer();
         final Zone cardZone = c.getLastKnownZone();
-        Card cp = c;
 
-        // for Bestow need to check the animated State
-        if (sa.isSpell() && sa.isBestow()) {
-            // already bestowed or in battlefield, no need to check for spell
+        if (sa.isSpell() || sa.isLandAbility()) {
             if (c.isInZone(ZoneType.Battlefield)) {
                 return false;
-            }
-
-            // if card is lki and bestowed, then do nothing there, it got already animated
-            if (!(c.isLKI() && c.isBestowed())) {
-                if (!c.isLKI()) {
-                    cp = CardUtil.getLKICopy(c);
-                }
-
-                if (!cp.isBestowed()) {
-                    cp.animateBestow(!cp.isLKI());
-                }
             }
         }
 
@@ -218,60 +203,15 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return true;
             }
             // Not a Spell, or on Battlefield, return false
-            if (!sa.isSpell() || (cardZone != null && ZoneType.Battlefield.equals(cardZone.getZoneType()))
+            if ((!sa.isSpell() && !sa.isLandAbility()) || (cardZone != null && cardZone.is(ZoneType.Battlefield))
                     || (this.getZone() != null && !this.getZone().equals(ZoneType.Hand))) {
                 return false;
             }
             if (cardZone != null && cardZone.is(ZoneType.Stack)) {
                 return false;
             }
-            if (sa.isSpell()) {
-                final CardPlayOption o = c.mayPlay(sa.getMayPlay());
-                if (o == null) {
-                    return this.getZone() == null || (cardZone != null && cardZone.is(this.getZone()));
-                } else if (o.getPlayer() == activator) {
-                    Map<String,String> params = sa.getMayPlay().getMapParams();
-
-                    // NOTE: this assumes that it's always possible to cast cards from hand and you don't
-                    // need special permissions for that. If WotC ever prints a card that forbids casting
-                    // cards from hand, this may become relevant.
-                    if (!o.grantsZonePermissions() && cardZone != null && !cardZone.is(ZoneType.Hand)) {
-                        final List<CardPlayOption> opts = c.mayPlay(activator);
-                        boolean hasOtherGrantor = false;
-                        for (CardPlayOption opt : opts) {
-                            if (opt.grantsZonePermissions()) {
-                                hasOtherGrantor = true;
-                                break;
-                            }
-                        }
-                        if (cardZone.is(ZoneType.Graveyard) && sa.isAftermath()) {
-                            // Special exclusion for Aftermath, useful for e.g. As Foretold
-                            return true;
-                        }
-                        if (!hasOtherGrantor) {
-                            return false;
-                        }
-                    }
-
-                    if (params.containsKey("Affected")) {
-                        if (!cp.isValid(params.get("Affected").split(","), activator, o.getHost(), null)) {
-                            return false;
-                        }
-                    }
-
-                    if (params.containsKey("ValidSA")) {
-                        if (!sa.isValid(params.get("ValidSA").split(","), activator, o.getHost(), null)) {
-                            return false;
-                        }
-                    }
-
-                    // TODO: this is an exception for Aftermath. Needs to be somehow generalized.
-                    if (this.getZone() != ZoneType.Graveyard && sa.isAftermath() && sa.getCardState() != null) {
-                        return false;
-                    }
-
-                    return true;
-                }
+            if (sa.isSpell() || sa.isLandAbility()) {
+                return this.getZone() == null || (cardZone != null && cardZone.is(this.getZone()));
             }
             return false;
         }
@@ -322,16 +262,8 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
     public final boolean checkActivatorRestrictions(final Card c, final SpellAbility sa) {
         Player activator = sa.getActivatingPlayer();
 
-        if (sa.isSpell()) {
-            // Spells should always default to "controller" but use mayPlay check.
-            final CardPlayOption o = c.mayPlay(sa.getMayPlay());
-            if (o != null && o.getPlayer() == activator) {
-                return true;
-            }
-        }
-
         String validPlayer = this.getActivator();
-        return activator.isValid(validPlayer, c.getController(), c, sa);
+        return validPlayer == null || activator.isValid(validPlayer, c.getController(), c, sa);
     }
 
     public final boolean checkOtherRestrictions(final Card c, final SpellAbility sa, final Player activator) {
@@ -517,6 +449,20 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
             if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue)) {
                 return false;
+            }
+        }
+
+        for (StaticAbility stAb : sa.getMayPlayList()) {
+            if (stAb.hasParam("ValidCard")) {
+                if (!c.isValid(stAb.getParam("ValidCard").split(","), activator, stAb.getHostCard(), null)) {
+                    return false;
+                }
+            }
+
+            if (stAb.hasParam("ValidSA")) {
+                if (!sa.isValid(stAb.getParam("ValidSA").split(","), activator, stAb.getHostCard(), null)) {
+                    return false;
+                }
             }
         }
 

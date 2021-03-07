@@ -1,6 +1,6 @@
 Name:Orim's Cure
 ManaCost:1 W
 Types:Instant
-SVar:AltCost:Cost$ tapXType<1/Creature/creature> | IsPresent$ Plains.YouCtrl | Description$ If you control a Plains, you may tap an untapped creature you control rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ tapXType<1/Creature/creature> | IsPresent$ Plains.YouCtrl | Description$ If you control a Plains, you may tap an untapped creature you control rather than pay this spell's mana cost.
 A:SP$ PreventDamage | Cost$ 1 W | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | Amount$ 4 | SpellDescription$ Prevent the next 4 damage that would be dealt to any target this turn.
 Oracle:If you control a Plains, you may tap an untapped creature you control rather than pay this spell's mana cost.\nPrevent the next 4 damage that would be dealt to any target this turn.

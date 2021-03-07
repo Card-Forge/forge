@@ -6,7 +6,7 @@ K:Flash
 S:Mode$ Continuous | Affected$ Opponent | ControlOpponentsSearchingLibrary$ You | Description$ You control your opponents while they're searching their libraries.
 R:Event$ Moved | ValidCard$ Card.OppOwn | FoundSearchingLibrary$ True | Origin$ Library | ReplaceWith$ RepExile | ActiveZones$ Battlefield | Description$ While an opponent is searching their library, they exile each card they find. You may play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any color to cast them.
 SVar:RepExile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Duration$ Permanent | StaticAbilities$ MayPlay | RememberObjects$ ReplacedCard | ForgetOnMoved$ Exile
-SVar:MayPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlayIgnoreColor$ True | Description$ You may play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any color to cast them.
+SVar:DBEffect:DB$ Effect | Duration$ Permanent | StaticAbilities$ STMayPlay | RememberObjects$ ReplacedCard | ForgetOnMoved$ Exile
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered+nonLand | Caster$ You | Origin$ Exile | MayPlayIgnoreColor$ True | Description$ You may play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any color to cast them.
 AI:RemoveDeck:Random
 Oracle:Flash\nYou control your opponents while they're searching their libraries.\nWhile an opponent is searching their library, they exile each card they find. You may play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any color to cast them.

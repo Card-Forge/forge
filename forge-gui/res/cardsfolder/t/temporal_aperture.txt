@@ -3,11 +3,11 @@ ManaCost:2
 Types:Artifact
 A:AB$ Shuffle | Cost$ 5 T | SubAbility$ DBReveal | SpellDescription$ Shuffle your library, then reveal the top card. Until end of turn, for as long as that card remains on top of your library, play with the top card of your library revealed and you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.)
 SVar:DBReveal:DB$ Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | RememberChanged$ True | SubAbility$ DBAperture
-SVar:DBAperture:DB$ Effect | Name$ Temporal Aperture Effect | StaticAbilities$ STPlay | RememberObjects$ RememberedCard | Triggers$ StillTopCheck | SVars$ ExileEffect | SpellDescription$ Until end of turn, for as long as that card remains on top of your library, play with the top card of your library revealed and you may play that card without paying its mana cost. | SubAbility$ DBCleanup
+SVar:DBAperture:DB$ Effect | Name$ Temporal Aperture Effect | StaticAbilities$ STMayPlay,STMayLook | RememberObjects$ RememberedCard | Triggers$ StillTopCheck | SVars$ ExileEffect | SpellDescription$ Until end of turn, for as long as that card remains on top of your library, play with the top card of your library revealed and you may play that card without paying its mana cost. | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.TopLibrary+YouCtrl+IsRemembered | AffectedZone$ Library | MayPlay$ True | MayPlayWithoutManaCost$ True | MayLookAt$ Player
-SVar:StillTopCheck:Mode$ Always | TriggerZones$ Command | IsPresent$ Card.TopLibrary+YouCtrl+IsNotRemembered | PresentZone$ Library | Execute$ ExileEffect | Static$ True
+SVar:STMayPlay:Mode$ AlternativeCost | ValidCard$ Card.TopLibrary+YouOwn+IsRemembered | Caster$ You | Origin$ Exile | Cost$ 0 | Description$ Until end of turn, you may cast noncreature spells from among those cards without paying their mana costs.
+SVar:STMayLook:Mode$ Continuous | EffectZone$ Command | Affected$ Card.TopLibrary+YouOwn+IsRemembered | AffectedZone$ Library | MayLookAt$ Player
+SVar:StillTopCheck:Mode$ Always | TriggerZones$ Command | IsPresent$ Card.TopLibrary+YouOwn+IsNotRemembered | PresentZone$ Library | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_aperture.jpg
 Oracle:{5}, {T}: Shuffle your library, then reveal the top card. Until end of turn, for as long as that card remains on top of your library, play with the top card of your library revealed and you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.)

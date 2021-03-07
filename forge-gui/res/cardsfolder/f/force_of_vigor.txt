@@ -1,6 +1,6 @@
 Name:Force of Vigor
 ManaCost:2 G G
 Types:Instant
-SVar:AltCost:Cost$ ExileFromHand<1/Card.Green+Other> | OpponentTurn$ True | Description$ If it's not your turn, you may exile a green card from your hand rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ ExileFromHand<1/Card.Green+Other> | OpponentTurn$ True | Description$ If it's not your turn, you may exile a green card from your hand rather than pay this spell's mana cost.
 A:SP$ Destroy | Cost$ 2 G G | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy up to two target artifacts and/or enchantments.
 Oracle:If it's not your turn, you may exile a green card from your hand rather than pay this spell's mana cost.\nDestroy up to two target artifacts and/or enchantments.

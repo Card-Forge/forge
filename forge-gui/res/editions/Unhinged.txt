@@ -2,7 +2,7 @@
 Code=UNH
 Date=2004-11-20
 Name=Unhinged
-MciCode=uh
+MciCode=unh
 Type=Other
 Type=Expansion
 Border=Silver

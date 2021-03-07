@@ -2,7 +2,7 @@ Name:Sephara, Sky's Blade
 ManaCost:4 W W W
 Types:Legendary Creature Angel
 PT:7/7
-SVar:AltCost:Cost$ W tapXType<4/Creature.withFlying> | Description$ You may pay {W} and tap four untapped creatures you control with flying rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ W tapXType<4/Creature.withFlying> | Description$ You may pay {W} and tap four untapped creatures you control with flying rather than pay this spell's mana cost.
 SVar:AIPaymentPreference:DontPayTapCostWithManaSources
 K:Flying
 K:Lifelink

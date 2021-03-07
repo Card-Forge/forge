@@ -1,7 +1,7 @@
 Name:Ramosian Rally
 ManaCost:3 W
 Types:Instant
-SVar:AltCost:Cost$ tapXType<1/Creature/creature> | IsPresent$ Plains.YouCtrl | Description$ If you control a Plains, you may tap an untapped creature you control rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ tapXType<1/Creature/creature> | IsPresent$ Plains.YouCtrl | Description$ If you control a Plains, you may tap an untapped creature you control rather than pay this spell's mana cost.
 A:SP$ PumpAll | Cost$ 3 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
 AI:RemoveDeck:All
 Oracle:If you control a Plains, you may tap an untapped creature you control rather than pay this spell's mana cost.\nCreatures you control get +1/+1 until end of turn.

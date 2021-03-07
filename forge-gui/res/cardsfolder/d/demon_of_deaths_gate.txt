@@ -4,5 +4,5 @@ Types:Creature Demon
 PT:9/9
 K:Trample
 K:Flying
-SVar:AltCost:Cost$ PayLife<6> Sac<3/Creature.Black> | Description$ You may pay 6 life and sacrifice three black creatures rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ PayLife<6> Sac<3/Creature.Black> | Description$ You may pay 6 life and sacrifice three black creatures rather than pay this spell's mana cost.
 Oracle:You may pay 6 life and sacrifice three black creatures rather than pay this spell's mana cost.\nFlying, trample

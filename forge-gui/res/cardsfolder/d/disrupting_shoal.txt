@@ -1,7 +1,7 @@
 Name:Disrupting Shoal
 ManaCost:X U U
 Types:Instant Arcane
-SVar:AltCost:Cost$ ExileFromHand<1/Card.Blue+Other/blue card> | Description$ You may exile a blue card with converted mana cost X from your hand rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ ExileFromHand<1/Card.Blue+Other/blue card> | Description$ You may exile a blue card with converted mana cost X from your hand rather than pay this spell's mana cost.
 A:SP$ Pump | Cost$ X U U | IsCurse$ True | TargetType$ Spell | TgtZone$ Stack | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBCounter
 SVar:DBCounter:DB$ Counter | Defined$ Targeted | ConditionCheckSVar$ T | ConditionSVarCompare$ EQZ | SpellDescription$ Counter target spell if its converted mana cost is X.
 SVar:X:Count$xPaid

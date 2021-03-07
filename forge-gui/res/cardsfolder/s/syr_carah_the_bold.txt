@@ -4,9 +4,9 @@ Types:Legendary Creature Human Knight
 PT:3/3
 T:Mode$ DamageDone | ValidSource$ Spell.Instant+YouCtrl,Spell.Sorcery+YouCtrl,Card.Self | ValidTarget$ Player | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or an instant or sorcery spell you control deals damage to a player, exile the top card of your library. You may play that card this turn.
 SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Duration$ EndOfTurn | RememberObjects$ Remembered | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ExileOnMoved$ Exile
+SVar:DBEffect:DB$ Effect | Duration$ EndOfTurn | StaticAbilities$ STMayPlay | RememberObjects$ RememberedCard | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered | Caster$ You | Origin$ Exile | Description$ You may play the exiled card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card.
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:NonCombatPriority:1
 DeckHints:Type$Instant|Sorcery

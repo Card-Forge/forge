@@ -6,8 +6,8 @@ K:Menace
 K:Partner
 T:Mode$ DamageAll | ValidSource$ Pirate.YouCtrl | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigExileTop | TriggerDescription$ Whenever one or more Pirates you control deal damage to your opponents, exile the top card of each of those opponents' libraries. You may play those cards this turn, and you may spend mana as though it were mana of any color to cast those spells.
 SVar:TrigExileTop:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ TriggeredTargets | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ EffPlay | EffectOwner$ You | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:EffPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play those cards this turn, and you may spend mana as though it were mana of any color to cast those spells.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STMayPlay | EffectOwner$ You | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered | Caster$ You | Origin$ Exile | MayPlayIgnoreColor$ True | Description$ You may play those cards this turn, and you may spend mana as though it were mana of any color to cast those spells.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Type$Pirate
 Oracle:Menace\nWhenever one or more Pirates you control deal damage to your opponents, exile the top card of each of those opponents' libraries. You may play those cards this turn, and you may spend mana as though it were mana of any color to cast those spells.\nPartner (You can have two commanders if both have partner.)

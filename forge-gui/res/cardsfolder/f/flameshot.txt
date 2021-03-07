@@ -1,7 +1,7 @@
 Name:Flameshot
 ManaCost:3 R
 Types:Sorcery
-SVar:AltCost:Cost$ Discard<1/Mountain> | Description$ You may discard a Mountain card rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ Discard<1/Mountain> | Description$ You may discard a Mountain card rather than pay this spell's mana cost.
 A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among one, two, or three target creatures.
 AI:RemoveDeck:All
 Oracle:You may discard a Mountain card rather than pay this spell's mana cost.\nFlameshot deals 3 damage divided as you choose among one, two, or three target creatures.

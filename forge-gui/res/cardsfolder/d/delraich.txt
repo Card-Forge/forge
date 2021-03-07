@@ -3,5 +3,5 @@ ManaCost:6 B
 Types:Creature Horror
 PT:6/6
 K:Trample
-SVar:AltCost:Cost$ Sac<3/Creature.Black> | Description$ Trample
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ Sac<3/Creature.Black> | Description$ Trample
 Oracle:You may sacrifice three black creatures rather than pay this spell's mana cost.\nTrample

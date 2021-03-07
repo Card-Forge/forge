@@ -1142,9 +1142,6 @@ public class CardFactoryUtil {
         if (sq[0].startsWith("Escaped")) {
             return doXMath(Integer.parseInt(sq[c.getCastSA() != null && c.getCastSA().isEscape() ? 1 : 2]), m, c);
         }
-        if (sq[0].startsWith("AltCost")) {
-            return doXMath(Integer.parseInt(sq[c.isOptionalCostPaid(OptionalCost.AltCost) ? 1 : 2]), m, c);
-        }
 
         // Count$wasCastFrom<Zone>.<true>.<false>
         if (sq[0].startsWith("wasCastFrom")) {
@@ -2130,15 +2127,6 @@ public class CardFactoryUtil {
 
         for (KeywordInterface inst : card.getKeywords()) {
             inst.createTraits(card, true);
-        }
-
-        // AltCost
-        String altCost = card.getSVar("AltCost");
-        if (StringUtils.isNotBlank(altCost)) {
-            final SpellAbility sa1 = card.getFirstSpellAbility();
-            if (sa1 != null && sa1.isSpell()) {
-                card.addSpellAbility(makeAltCostAbility(card, altCost, sa1));
-            }
         }
     }
 
@@ -3322,6 +3310,7 @@ public class CardFactoryUtil {
             inst.addTrigger(parsedUpkeepTrig);
             inst.addTrigger(parsedSacTrigger);
         } else if (keyword.equals("MayFlashSac")) {
+            //TODO broken for now, need to be put into the other effect
             String strTrig = "Mode$ SpellCast | ValidCard$ Card.Self | ValidSA$ Spell.MayPlaySource | Static$ True | Secondary$ True "
                     + " | TriggerDescription$ If you cast it any time a sorcery couldn't have been cast, "
                     + " the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.";
@@ -3877,25 +3866,7 @@ public class CardFactoryUtil {
     public static void addSpellAbility(final KeywordInterface inst, final CardState card, final boolean intrinsic) {
         String keyword = inst.getOriginal();
         Card host = card.getCard();
-        if (keyword.startsWith("Alternative Cost") && !host.isLand()) {
-            final String[] kw = keyword.split(":");
-            String costStr = kw[1];
-            for (SpellAbility sa: host.getBasicSpells()) {
-                final SpellAbility newSA = sa.copy();
-                newSA.setBasicSpell(false);
-                if (costStr.equals("ConvertedManaCost")) {
-                    costStr = Integer.toString(host.getCMC());
-                }
-                final Cost cost = new Cost(costStr, false).add(sa.getPayCosts().copyWithNoMana());
-                newSA.putParam("Secondary", "True");
-                newSA.setPayCosts(cost);
-                newSA.setDescription(sa.getDescription() + " (by paying " + cost.toSimpleString() + " instead of its mana cost)");
-                newSA.setIntrinsic(intrinsic);
-
-                inst.addSpellAbility(newSA);
-
-            }
-        } else if (keyword.startsWith("Adapt")) {
+        if (keyword.startsWith("Adapt")) {
             final String[] k = keyword.split(":");
             final String magnitude = k[1];
             final String manacost = k[2];
@@ -4778,38 +4749,6 @@ public class CardFactoryUtil {
             }
             inst.addStaticAbility(st);
         }
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param card
-     * @param altCost
-     * @param sa
-     * @return
-     */
-    private static SpellAbility makeAltCostAbility(final Card card, final String altCost, final SpellAbility sa) {
-        final Map<String, String> params = AbilityFactory.getMapParams(altCost);
-
-        final SpellAbility altCostSA = sa.copy();
-        final Cost abCost = new Cost(params.get("Cost"), altCostSA.isAbility());
-        altCostSA.setPayCosts(abCost);
-        altCostSA.setBasicSpell(false);
-        altCostSA.addOptionalCost(OptionalCost.AltCost);
-
-        final SpellAbilityRestriction restriction = new SpellAbilityRestriction();
-        restriction.setRestrictions(params);
-        if (!params.containsKey("ActivationZone")) {
-            restriction.setZone(ZoneType.Hand);
-        }
-        altCostSA.setRestrictions(restriction);
-
-        String costDescription = TextUtil.fastReplace(params.get("Description"),"CARDNAME", card.getName());
-        if (costDescription == null || costDescription.isEmpty()) {
-            costDescription = TextUtil.concatWithSpace("You may", abCost.toStringAlt(), "rather than pay", TextUtil.addSuffix(card.getName(), "'s mana cost."));
-        }
-
-        altCostSA.setDescription(costDescription);
-        return altCostSA;
     }
 
     private static final Map<String,String> emptyMap = Maps.newTreeMap();

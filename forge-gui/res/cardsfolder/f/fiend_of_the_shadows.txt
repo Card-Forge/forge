@@ -4,15 +4,12 @@ Types:Creature Vampire Wizard
 PT:3/3
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player exiles a card from their hand. You may play that card for as long as it remains exiled.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | DefinedPlayer$ TriggeredTarget | Chooser$ TriggeredTarget | Mandatory$ True | ChangeNum$ 1 | RememberChanged$ True
-S:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile
-T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
-SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | DefinedPlayer$ TriggeredTarget | Chooser$ TriggeredTarget | Mandatory$ True | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STMayPlay | RememberObjects$ RememberedCard | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered | Caster$ You | Origin$ Exile | Description$ You may play that card for as long as it remains exiled
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Regenerate | Cost$ Sac<1/Human> | SpellDescription$ Regenerate CARDNAME.
 AI:RemoveDeck:Random
 SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE1
 SVar:DeckNeeds:Type$Human
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fiend_of_the_shadows.jpg
 Oracle:Flying\nWhenever Fiend of the Shadows deals combat damage to a player, that player exiles a card from their hand. You may play that card for as long as it remains exiled.\nSacrifice a Human: Regenerate Fiend of the Shadows.

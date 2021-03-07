@@ -25,10 +25,8 @@ import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
 
 import java.util.List;
-import java.util.Map;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 /**
  * <p>
@@ -46,8 +44,6 @@ public class StaticEffect {
     private List<Player> affectedPlayers = Lists.newArrayList();
     private long timestamp = -1;
 
-    private Map<String, String> mapParams = Maps.newTreeMap();
-
     StaticEffect(final Card source) {
         this.source = source;
     }
@@ -63,7 +59,6 @@ public class StaticEffect {
         copy.affectedCards = map.mapCollection(this.affectedCards);
         copy.affectedPlayers  = map.mapList(this.affectedPlayers);
         copy.timestamp = this.timestamp;
-        copy.mapParams = this.mapParams;
         return copy;
     }
 
@@ -139,31 +134,12 @@ public class StaticEffect {
         this.affectedPlayers = list;
     }
 
-    /**
-     * setParams. TODO Write javadoc for this method.
-     *
-     * @param params
-     *            a HashMap
-     */
-    public final void setParams(final Map<String, String> params) {
-        this.mapParams = params;
-    }
-
-    /**
-     * Gets the params.
-     *
-     * @return the params
-     */
-    public final Map<String, String> getParams() {
-        return this.mapParams;
-    }
-
     public boolean hasParam(final String key) {
-        return this.mapParams.containsKey(key);
+        return this.ability.hasParam(key);
     }
 
     public String getParam(final String key) {
-        return this.mapParams.get(key);
+        return this.ability.getParam(key);
     }
 
     /**
@@ -175,26 +151,10 @@ public class StaticEffect {
         final CardCollectionView affectedCards = getAffectedCards();
         final List<Player> affectedPlayers = getAffectedPlayers();
 
-        String changeColorWordsTo = null;
-
-        boolean setPT = false;
         String[] addHiddenKeywords = null;
-        boolean removeMayPlay = false;
-
-        if (hasParam("ChangeColorWordsTo")) {
-            changeColorWordsTo = getParam("ChangeColorWordsTo");
-        }
-
-        if (hasParam("SetPower") || hasParam("SetToughness")) {
-            setPT = true;
-        }
 
         if (hasParam("AddHiddenKeyword")) {
             addHiddenKeywords = getParam("AddHiddenKeyword").split(" & ");
-        }
-
-        if (hasParam("MayPlay")) {
-            removeMayPlay = true;
         }
 
         if (hasParam("IgnoreEffectCost")) {
@@ -224,12 +184,12 @@ public class StaticEffect {
             }
 
             // Revert changed color words
-            if (changeColorWordsTo != null) {
+            if (hasParam("ChangeColorWordsTo")) {
                 affectedCard.removeChangedTextColorWord(getTimestamp());
             }
 
             // remove set P/T
-            if (setPT) {
+            if (hasParam("SetPower") || hasParam("SetToughness")) {
                 affectedCard.removeNewPT(getTimestamp());
             }
 
@@ -276,9 +236,6 @@ public class StaticEffect {
             // remove may look at
             if (hasParam("MayLookAt")) {
                 affectedCard.removeMayLookAt(getTimestamp());
-            }
-            if (removeMayPlay) {
-                affectedCard.removeMayPlay(ability);
             }
 
             if (hasParam("GainTextOf")) {

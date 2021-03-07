@@ -3,8 +3,8 @@ ManaCost:2 R W
 Types:Enchantment Saga
 K:Saga:3:TrigExile,TrigEffect,TrigEffect
 SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 4 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top four cards of your library. Until the end of your next turn, you may play those cards.
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ MayPlay | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
-SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Exile | MayPlay$ True | Description$ Until the end of your next turn, you may play those cards.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | ForgetOnMoved$ Exile | StaticAbilities$ STMayPlay | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
+SVar:STMayPlay:Mode$ AlternativeZone | ValidCard$ Card.IsRemembered | Caster$ You | Origin$ Exile | Description$ Until the end of your next turn, you may play those cards.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:TrigEffect:DB$ Effect | Triggers$ CastSpell | SpellDescription$ Whenever you cast a spell this turn, put a +1/+1 counter on target creature you control.
 SVar:CastSpell:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ DBPutCounter | TriggerDescription$ Whenever you cast a spell this turn, put a +1/+1 counter on target creature you control.

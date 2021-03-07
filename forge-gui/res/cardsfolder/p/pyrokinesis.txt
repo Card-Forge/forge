@@ -1,6 +1,6 @@
 Name:Pyrokinesis
 ManaCost:4 R R
 Types:Instant
-SVar:AltCost:Cost$ ExileFromHand<1/Card.Red+Other> | Description$ You may exile a red card from your hand rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidCard$ Card.Self | EffectZone$ All | Cost$ ExileFromHand<1/Card.Red+Other> | Description$ You may exile a red card from your hand rather than pay this spell's mana cost.
 A:SP$ DealDamage | Cost$ 4 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ 4 | TargetMin$ 1 | TargetMax$ 4 | DividedAsYouChoose$ 4 | SpellDescription$ CARDNAME deals 4 damage divided as you choose among any number of target creatures.
 Oracle:You may exile a red card from your hand rather than pay this spell's mana cost.\nPyrokinesis deals 4 damage divided as you choose among any number of target creatures.

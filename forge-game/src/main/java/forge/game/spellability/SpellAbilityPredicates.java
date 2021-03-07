@@ -70,4 +70,13 @@ public final class SpellAbilityPredicates extends CardTraitPredicates {
             }
         };
     }
+
+    public static Predicate<SpellAbility> isActivator(final Player player) {
+        return new Predicate<SpellAbility>() {
+            @Override
+            public boolean apply(final SpellAbility sa) {
+                return player.equals(sa.getActivatingPlayer());
+            }
+        };
+    }
 }

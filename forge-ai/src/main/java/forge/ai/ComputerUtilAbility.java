@@ -1,6 +1,8 @@
 package forge.ai;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.card.CardStateName;
 import forge.game.Game;
@@ -12,6 +14,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
+import forge.game.spellability.LandAbility;
 import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -53,7 +56,8 @@ public class ComputerUtilAbility {
             if (!(crd.isLand() || (crd.isFaceDown() && crd.getState(CardStateName.Original).getType().isLand()))) {
                 continue;
             }
-            if (!crd.mayPlay(player).isEmpty()) {
+
+            if (Iterables.any(crd.getAllPossibleAbilities(player, true), Predicates.instanceOf(LandAbility.class))) {
                 landList.add(crd);
             }
         }
@@ -116,7 +120,7 @@ public class ComputerUtilAbility {
             newAbilities.add(sa);
             newAbilities.addAll(otherAltSa);
         }
-    
+
         final List<SpellAbility> result = Lists.newArrayList();
         for (SpellAbility sa : newAbilities) {
             sa.setActivatingPlayer(player);

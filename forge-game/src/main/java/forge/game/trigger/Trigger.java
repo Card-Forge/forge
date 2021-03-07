@@ -30,7 +30,6 @@ import forge.game.card.CardState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -353,11 +352,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
 
         String condition = getParam("Condition");
-        if ("AltCost".equals(condition)) {
-            final Card moved = (Card) runParams.get(AbilityKey.Card);
-            if( null != moved && !moved.isOptionalCostPaid(OptionalCost.AltCost))
-                return false;
-        } else if ("AttackedPlayerWithMostLife".equals(condition)) {
+        if ("AttackedPlayerWithMostLife".equals(condition)) {
             GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
             if (attacked == null) {
                 // Check "Defender" too because once triggering objects are set on TriggerAttacks, the value of Attacked

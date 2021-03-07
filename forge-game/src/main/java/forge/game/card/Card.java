@@ -111,8 +111,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private GameEntity mustAttackEntity = null;
     private GameEntity mustAttackEntityThisTurn = null;
 
-    private final Map<StaticAbility, CardPlayOption> mayPlay = Maps.newHashMap();
-
     // changes by AF animate and continuous static effects - timestamp is the key of maps
     private final Map<Long, CardChangedType> changedCardTypes = Maps.newTreeMap();
     private final NavigableMap<Long, String> changedCardNames = Maps.newTreeMap();
@@ -292,6 +290,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private final Table<SpellAbility, StaticAbility, List<String>> chosenModesTurnStatic = HashBasedTable.create();
     private final Table<SpellAbility, StaticAbility, List<String>> chosenModesGameStatic = HashBasedTable.create();
+
+    private final Map<StaticAbility, Integer> mayPlayThisTurn = Maps.newHashMap();
+
 
     // Enumeration for CMC request types
     public enum SplitCMCMode {
@@ -1136,7 +1137,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     newTop = c;
                 }
             }
-            
+
             if (newTop != null) {
                 removeMutatedStates();
                 newTop.mergedCards = mergedCards;
@@ -1902,8 +1903,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     final String[] upkeepCostParams = keyword.split(":");
                     sbLong.append(upkeepCostParams.length > 2 ? "— " + upkeepCostParams[2] : ManaCostParser.parse(upkeepCostParams[1]));
                     sbLong.append("\r\n");
-                } else if (keyword.startsWith("Alternative Cost")) {
-                    sbLong.append("Has alternative cost.");
                 } else if (keyword.startsWith("AlternateAdditionalCost")) {
                     final String costString1 = keyword.split(":")[1];
                     final String costString2 = keyword.split(":")[2];
@@ -2106,11 +2105,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         final CardTypeView type = state.getType();
 
         final StringBuilder sb = new StringBuilder();
-        if (!mayPlay.isEmpty()) {
-            sb.append("May be played by: ");
-            sb.append(Lang.joinHomogenous(mayPlay.values()));
-            sb.append("\r\n");
-        }
 
         if (type.isInstant() || type.isSorcery()) {
             sb.append(abilityTextInstantSorcery(state));
@@ -3097,35 +3091,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         result.addAll(mayLookFaceDownExile);
         result.addAll(mayLookTemp);
         getView().setPlayerMayLook(result);
-    }
-
-    public final CardPlayOption mayPlay(final StaticAbility sta) {
-        if (sta == null) {
-            return null;
-        }
-        return mayPlay.get(sta);
-    }
-
-    public final List<CardPlayOption> mayPlay(final Player player) {
-        List<CardPlayOption> result = Lists.newArrayList();
-        for (CardPlayOption o : mayPlay.values()) {
-            if (o.getPlayer().equals(player)) {
-                result.add(o);
-            }
-        }
-        return result;
-    }
-    public final void setMayPlay(final Player player, final boolean withoutManaCost, final Cost altManaCost, final boolean withFlash, final boolean grantZonePermissions, final StaticAbility sta) {
-        this.mayPlay.put(sta, new CardPlayOption(player, sta, withoutManaCost, altManaCost, withFlash, grantZonePermissions));
-    }
-    public final void removeMayPlay(final StaticAbility sta) {
-        this.mayPlay.remove(sta);
-    }
-
-    public void resetMayPlayTurn() {
-        for (StaticAbility sta : getStaticAbilities()) {
-            sta.resetMayPlayTurn();
-        }
     }
 
     public final CardCollectionView getEquippedBy() {
@@ -6142,7 +6107,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         getDamageHistory().setCreatureGotBlockedThisTurn(false);
         clearBlockedByThisTurn();
         clearBlockedThisTurn();
-        resetMayPlayTurn();
+        clearMayPlayThisTurn();
         resetExtertedThisTurn();
         resetChosenModeTurn();
     }
@@ -6387,7 +6352,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             for (SpellAbility sa : getState(CardStateName.Modal).getSpellAbilities()) {
                 //add alternative costs as additional spell abilities
                 // only add Spells there
-                if (sa.isSpell()) {
+                if (sa.isSpell() || sa.isLandAbility()) {
                     abilities.add(sa);
                     abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
                 }
@@ -6414,106 +6379,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         }
         abilities.removeAll(toRemove);
-
-        // Land Abilities below, move them to CardFactory after MayPlayRefactor
-        if (getLastKnownZone().is(ZoneType.Battlefield)) {
-            return abilities;
-        }
-        if (getState(CardStateName.Original).getType().isLand()) {
-            LandAbility la = new LandAbility(this, player, null);
-            la.setCardState(oState);
-            if (la.canPlay()) {
-                abilities.add(la);
-            }
-
-            Card source = this;
-            boolean lkicheck = false;
-
-            // if Card is Facedown, need to check if MayPlay still applies
-            if (isFaceDown()) {
-                lkicheck = true;
-                source = CardUtil.getLKICopy(source);
-                source.forceTurnFaceUp();
-            }
-
-            if (lkicheck) {
-                // double freeze tracker, so it doesn't update view
-                game.getTracker().freeze();
-                CardCollection preList = new CardCollection(source);
-                game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
-            }
-
-            // extra for MayPlay
-            for (CardPlayOption o : source.mayPlay(player)) {
-                la = new LandAbility(this, player, o.getAbility());
-                la.setCardState(oState);
-                if (la.canPlay()) {
-                    abilities.add(la);
-                }
-            }
-
-            // reset static abilities
-            if (lkicheck) {
-                game.getAction().checkStaticAbilities(false);
-                // clear delayed changes, this check should not have updated the view
-                game.getTracker().clearDelayed();
-                // need to unfreeze tracker
-                game.getTracker().unfreeze();
-            }
-        }
-
-        if (isModal() && hasState(CardStateName.Modal)) {
-            CardState modal = getState(CardStateName.Modal);
-            if (modal.getType().isLand()) {
-                LandAbility la = new LandAbility(this, player, null);
-                la.setCardState(modal);
-
-                Card source = CardUtil.getLKICopy(this);
-                boolean lkicheck = true;
-
-                // if Card is Facedown, need to check if MayPlay still applies
-                if (isFaceDown()) {
-                    source.forceTurnFaceUp();
-                }
-
-                // the modal state is not copied with lki, need to copy it extra
-                if (!source.hasState(CardStateName.Modal)) {
-                    source.addAlternateState(CardStateName.Modal, false);
-                    source.getState(CardStateName.Modal).copyFrom(this.getState(CardStateName.Modal), true);
-                }
-
-                source.setSplitStateToPlayAbility(la);
-
-                if (la.canPlay(source)) {
-                    abilities.add(la);
-                }
-
-                if (lkicheck) {
-                    // double freeze tracker, so it doesn't update view
-                    game.getTracker().freeze();
-                    CardCollection preList = new CardCollection(source);
-                    game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
-                }
-
-                // extra for MayPlay
-                for (CardPlayOption o : source.mayPlay(player)) {
-                    la = new LandAbility(this, player, o.getAbility());
-                    la.setCardState(modal);
-                    if (la.canPlay(source)) {
-                        abilities.add(la);
-                    }
-                }
-
-                // reset static abilities
-                if (lkicheck) {
-                    game.getAction().checkStaticAbilities(false);
-                    // clear delayed changes, this check should not have updated the view
-                    game.getTracker().clearDelayed();
-                    // need to unfreeze tracker
-                    game.getTracker().unfreeze();
-                }
-            }
-        }
 
         return abilities;
     }
@@ -7020,5 +6885,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return CardEdition.BorderColor.BLACK;
         }
         return edition.getBorderColor();
+    }
+
+    public int getMayPlayThisTurn(StaticAbility stAb) {
+        return mayPlayThisTurn.containsKey(stAb) ? mayPlayThisTurn.get(stAb) : 0;
+    }
+
+    public void incMayPlayThisTurn(StaticAbility stAb) {
+        int old = getMayPlayThisTurn(stAb);
+        mayPlayThisTurn.put(stAb, old + 1);
+    }
+
+    public void clearMayPlayThisTurn() {
+        mayPlayThisTurn.clear();
     }
 }
