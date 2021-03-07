@@ -1550,7 +1550,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             } else {
                 if (!sa.hasParam("Mandatory") && origin.contains(ZoneType.Battlefield) && sa.hasParam("ChangeNum")) {
                     // exclude tokens, they won't come back, and enchanted stuff, since auras will go away
-                    fetchList = prefilterListForBounceAnyNum(fetchList, decider);
+                    fetchList = prefilterOwnListForBounceAnyNum(fetchList, decider);
                     if (fetchList.isEmpty()) {
                         return null;
                     }
@@ -1624,7 +1624,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return c;
     }
 
-    private static CardCollection prefilterListForBounceAnyNum(CardCollection fetchList, Player decider) {
+    private static CardCollection prefilterOwnListForBounceAnyNum(CardCollection fetchList, Player decider) {
         fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card card) {
