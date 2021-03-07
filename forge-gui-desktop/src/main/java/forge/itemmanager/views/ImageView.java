@@ -1,24 +1,5 @@
 package forge.itemmanager.views;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseWheelEvent;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JViewport;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingUtilities;
-
 import forge.ImageCache;
 import forge.assets.FSkinProp;
 import forge.card.ColorSet;
@@ -29,12 +10,7 @@ import forge.gui.framework.ILocalRepaint;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
-import forge.itemmanager.ColumnDef;
-import forge.itemmanager.GroupDef;
-import forge.itemmanager.ItemManager;
-import forge.itemmanager.ItemManagerConfig;
-import forge.itemmanager.ItemManagerModel;
-import forge.itemmanager.SItemManagerUtil;
+import forge.itemmanager.*;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.screens.deckeditor.CDeckEditorUI;
@@ -48,7 +24,15 @@ import forge.util.ImageUtil;
 import forge.util.Localizer;
 import forge.view.arcane.CardPanel;
 
-import static forge.ImageCache.getCroppedArt;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int PADDING = 5;
