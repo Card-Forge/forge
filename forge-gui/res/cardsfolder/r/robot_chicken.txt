@@ -6,4 +6,5 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ Trig
 SVar:TrigToken:DB$Token | TokenScript$ c_0_1_a_egg
 T:Mode$ ChangesZone | ValidCard$ Egg.YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDestroy | TriggerDescription$ Whenever an Egg you control is put into a graveyard from the battlefield, destroy target artifact or creature.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact,Creature
+DeckHas:Ability$Token
 Oracle:Whenever you cast a spell, put a 0/1 colorless Egg artifact creature token onto the battlefield.\nWhenever an Egg you control is put into a graveyard from the battlefield, destroy target artifact or creature.
