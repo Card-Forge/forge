@@ -5,7 +5,7 @@ PT:0/0
 K:ETBReplacement:Other:RollCounters
 SVar:RollCounters:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBCounters | SpellDescription$ As CARDNAME enters the battlefield, roll a six-sided die. CARDNAME enters the battlefield with a number of +1/+1 counters on it equal to the total of those results.
 SVar:DBCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Result | ETB$ True
-T:Mode$ RolledDie | Execute$ TrigRemove | ValidPlayer$ You | TriggerDescription$ Whenever you roll a die, remove all +1/+1 counters from CARDNAME, then put a number of +1/+1 counters on it equal to the result.
+T:Mode$ RolledDie | Execute$ TrigRemove | ValidPlayer$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you roll a die, remove all +1/+1 counters from CARDNAME, then put a number of +1/+1 counters on it equal to the result.
 SVar:TrigRemove:DB$ RemoveCounterAll | ValidCards$ Card.Self | CounterType$ P1P1 | AllCounters$ True | SubAbility$ TrigCounters
 SVar:X:TriggerCount$Result
 SVar:TrigCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
