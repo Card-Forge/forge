@@ -384,6 +384,11 @@ public enum FSkinProp {
     IMG_HDBTN_DISABLED_CENTER (new int[] {162, 1101, 1, 165}, PropType.BUTTONS),
     IMG_HDBTN_DISABLED_RIGHT  (new int[] {322, 1101, 160, 165}, PropType.BUTTONS),
 
+    //FOR DECKBOX
+    IMG_DECK_GOLD_BG          (new int[] {2, 2, 488, 680}, PropType.DECKBOX),
+    IMG_DECK_CARD_ART         (new int[] {492, 2, 488, 680}, PropType.DECKBOX),
+    IMG_DECK_GENERIC          (new int[] {982, 2, 488, 680}, PropType.DECKBOX),
+
     IMG_FAV1    (new int[] {0, 0, 100, 100}, PropType.FAVICON),
     IMG_FAV2    (new int[] {100, 0, 100, 100}, PropType.FAVICON),
     IMG_FAV3    (new int[] {200, 0, 100, 100}, PropType.FAVICON),
@@ -485,6 +490,7 @@ public enum FSkinProp {
         BTNSTART,
         MANAICONS,
         PLANAR_CONQUEST,
+        DECKBOX,
         FAVICON
     }
 }
