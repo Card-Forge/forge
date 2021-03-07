@@ -1,0 +1,14 @@
+[metadata]
+Code=PCEL
+Date=1996-08-14
+Name=Celebration Cards
+Type=Other
+
+[cards]
+1 M 1996 World Champion
+2 R Shichifukujin Dragon
+3 R Proposal
+4 R Splendid Genesis
+5 R Fraternal Exaltation
+6 M Robot Chicken
+7 M Phoenix Heart

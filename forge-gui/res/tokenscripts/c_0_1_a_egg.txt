@@ -1,0 +1,5 @@
+Name:Egg
+ManaCost:no cost
+PT:0/1
+Types:Artifact Creature Egg
+Oracle:
