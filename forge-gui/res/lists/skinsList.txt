@@ -122,7 +122,6 @@ https://downloads.cardforge.org/skins/magic/bg_match.jpg
 https://downloads.cardforge.org/skins/magic/bg_splash.png
 https://downloads.cardforge.org/skins/magic/bg_splash_hd.png
 https://downloads.cardforge.org/skins/magic/bg_texture.jpg
-https://downloads.cardforge.org/skins/magic/filenames.txt
 https://downloads.cardforge.org/skins/magic/font1.ttf
 https://downloads.cardforge.org/skins/magic/hd_logo.png
 https://downloads.cardforge.org/skins/magic/sprite_avatars.png
