@@ -164,7 +164,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             if (result) {
                 numSuccesses++;
             }
-            flipper.getGame().getAction().nofityOfValue(sa, flipper, result ? Localizer.getInstance().getMessage("lblHeads") : Localizer.getInstance().getMessage("lblTails"), null);
+            flipper.getGame().getAction().notifyOfValue(sa, flipper, result ? Localizer.getInstance().getMessage("lblHeads") : Localizer.getInstance().getMessage("lblTails"), null);
         } while (sa.hasParam("FlipUntilYouLose") && result != false);
         
         if (sa.hasParam("FlipUntilYouLose") && sa.hasAdditionalAbility("LoseSubAbility")) {
@@ -207,7 +207,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                 numSuccesses++;
             }
 
-            caller.getGame().getAction().nofityOfValue(sa, caller, wonFlip ? Localizer.getInstance().getMessage("lblWin") : Localizer.getInstance().getMessage("lblLose"), null);
+            caller.getGame().getAction().notifyOfValue(sa, caller, wonFlip ? Localizer.getInstance().getMessage("lblWin") : Localizer.getInstance().getMessage("lblLose"), null);
 
             // Run triggers
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();

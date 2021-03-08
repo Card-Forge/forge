@@ -56,7 +56,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                 int chosen;
                 if (random) {
                     chosen = MyRandom.getRandom().nextInt(max - min) + min;
-                    p.getGame().getAction().nofityOfValue(sa, p, Integer.toString(chosen), null);
+                    p.getGame().getAction().notifyOfValue(sa, p, Integer.toString(chosen), null);
                 } else {
                     String title = sa.hasParam("ListTitle") ? sa.getParam("ListTitle") : Localizer.getInstance().getMessage("lblChooseNumber");
                     if (anyNumber) {
@@ -73,7 +73,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                     card.setChosenNumber(chosen);
                 }
                 if (sa.hasParam("Notify")) {
-                    p.getGame().getAction().nofityOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
+                    p.getGame().getAction().notifyOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
                 }
             }
         }
@@ -103,7 +103,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                     lowestNum.add(player);
                 }
             }
-            card.getGame().getAction().nofityOfValue(sa, card, sb.toString(), null);
+            card.getGame().getAction().notifyOfValue(sa, card, sb.toString(), null);
             if (sa.hasParam("ChooseNumberSubAbility")) {
                 AbilitySub sub = sa.getAdditionalAbility("ChooseNumberSubAbility");
                 

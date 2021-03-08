@@ -70,7 +70,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
 
             if (amount > 0) {
                 String message = Localizer.getInstance().getMessage("lblPlayerRolledResult", player, StringUtils.join(rolls, ", "));
-                player.getGame().getAction().nofityOfValue(sa, player, message, null);
+                player.getGame().getAction().notifyOfValue(sa, player, message, null);
             }
 
             if (sa.hasParam("ResultSVar")) {

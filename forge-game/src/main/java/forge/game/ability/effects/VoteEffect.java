@@ -90,7 +90,7 @@ public class VoteEffect extends SpellAbilityEffect {
                 Object result = realVoter.getController().vote(sa, host + Localizer.getInstance().getMessage("lblVote") + ":", voteType, votes, p);
 
                 votes.put(result, p);
-                host.getGame().getAction().nofityOfValue(sa, p, result + "\r\n" + Localizer.getInstance().getMessage("lblCurrentVote") + ":" + votes, p);
+                host.getGame().getAction().notifyOfValue(sa, p, result + "\r\n" + Localizer.getInstance().getMessage("lblCurrentVote") + ":" + votes, p);
             }
         }
 
