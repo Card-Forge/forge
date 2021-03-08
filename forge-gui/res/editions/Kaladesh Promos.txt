@@ -8,5 +8,5 @@ Type=Reprint
 62 R Saheeli's Artistry
 80 U Essence Extraction
 130 R Skyship Stalker
-151 Cultivator of Blades
+151 R Cultivator of Blades
 200 U Chief of the Foundry
