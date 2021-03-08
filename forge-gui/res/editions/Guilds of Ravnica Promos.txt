@@ -11,4 +11,4 @@ Type=Reprint
 156 U Boros Challenger
 168 R Emmara, Soul of the Accord
 171 R Firemind's Research
-206 Thought Erasure
+206 U Thought Erasure
