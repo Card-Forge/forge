@@ -1,0 +1,25 @@
+Name:Face to Face
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Opponent | SubAbility$ ResetWin | IsCurse$ True | StackDescription$ You and target opponent play a best two-out-of-three Rock, Paper, Scissors match.
+SVar:ResetWin:DB$ StoreSVar | SVar$ Wins | Type$ Number | Expression$ 0 | SubAbility$ ResetLoss
+SVar:ResetLoss:DB$ StoreSVar | SVar$ Losses | Type$ Number | Expression$ 0 | SubAbility$ RepeatPlay
+SVar:Total:SVar$Wins/LimitMin.Losses
+SVar:RepeatPlay:DB$ Repeat | RepeatSubAbility$ Play | RepeatCheckSVar$ Total | RepeatSVarCompare$ LT2 | SubAbility$ DamageTarget | StackDescription$ If you win,
+SVar:Play:DB$ GenericChoice | Choices$ YouRock,YouPape,YouScis | Defined$ You | AILogic$ Random | SubAbility$ OppChoice
+SVar:YouRock:DB$ StoreSVar | SVar$ YouChose | Type$ Number | Expression$ 0 | SpellDescription$ Rock
+SVar:YouPape:DB$ StoreSVar | SVar$ YouChose | Type$ Number | Expression$ 1 | SpellDescription$ Paper
+SVar:YouScis:DB$ StoreSVar | SVar$ YouChose | Type$ Number | Expression$ 2 | SpellDescription$ Scissors
+SVar:OppChoice:DB$ GenericChoice | Choices$ OppRock,OppPape,OppScis | Defined$ TargetedPlayer | AILogic$ Random | ShowChoice$ ExceptSelf | SubAbility$ ScoreWin
+SVar:OppRock:DB$ StoreSVar | SVar$ OppChose | Type$ Number | Expression$ 2 | SpellDescription$ Rock
+SVar:OppPape:DB$ StoreSVar | SVar$ OppChose | Type$ Number | Expression$ 1 | SpellDescription$ Paper
+SVar:OppScis:DB$ StoreSVar | SVar$ OppChose | Type$ Number | Expression$ 0 | SpellDescription$ Scissors
+SVar:Sum:SVar$YouChose/Plus.OppChose
+SVar:GameMod:SVar$Sum/Mod.3
+SVar:ScoreWin:DB$ StoreSVar | SVar$ Wins | Type$ CountSVar | Expression$ Wins/Plus.1 | ConditionCheckSVar$ GameMod | ConditionSVarCompare$ EQ0 | SubAbility$ ScoreLoss
+SVar:ScoreLoss:DB$ StoreSVar | SVar$ Losses | Type$ CountSVar | Expression$ Losses/Plus.1 | ConditionCheckSVar$ GameMod | ConditionSVarCompare$ EQ1 | SubAbility$ NotifyRock
+SVar:NotifyRock:DB$ GenericChoice | Choices$ YouRock | AtRandom$ True | Defined$ You | ShowChoice$ ExceptSelf | ConditionCheckSVar$ YouChose | ConditionSVarCompare$ EQ0 | SubAbility$ NotifyPape
+SVar:NotifyPape:DB$ GenericChoice | Choices$ YouPape | AtRandom$ True | Defined$ You | ShowChoice$ ExceptSelf | ConditionCheckSVar$ YouChose | ConditionSVarCompare$ EQ1 | SubAbility$ NotifyScis
+SVar:NotifyScis:DB$ GenericChoice | Choices$ YouScis | AtRandom$ True | Defined$ You | ShowChoice$ ExceptSelf | ConditionCheckSVar$ YouChose | ConditionSVarCompare$ EQ2
+SVar:DamageTarget:DB$ DealDamage | Defined$ TargetedPlayer | NumDmg$ 5 | ConditionCheckSVar$ Wins | ConditionSVarCompare$ EQ2
+Oracle:You and target opponent play a best two-out-of-three Rock, Paper, Scissors match. If you win, Face to Face deals 5 damage to that player.
