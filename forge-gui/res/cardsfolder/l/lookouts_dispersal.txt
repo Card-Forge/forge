@@ -1,7 +1,7 @@
 Name:Lookout's Dispersal
 ManaCost:2 U
 Types:Instant
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | CheckSVar$ Piracy | SVarCompare$ GE1iracy | Description$ This spell costs {1} less to cast if you control a Pirate.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | CheckSVar$ Piracy | SVarCompare$ GE1 | Description$ This spell costs {1} less to cast if you control a Pirate.
 SVar:Piracy:Count$Valid Pirate.YouCtrl
 A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 4 | SpellDescription$ Counter target spell unless its controller pays {4}.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lookouts_dispersal.jpg

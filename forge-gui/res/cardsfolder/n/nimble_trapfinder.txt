@@ -2,7 +2,7 @@ Name:Nimble Trapfinder
 ManaCost:1 U
 Types:Creature Human Rogue
 PT:2/1
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ Unblockable | CheckSVar$ JoinedParty | SVarCompare$ GE1oinedParty | Description$ CARDNAME can't be blocked if you had another Cleric, Rogue, Warrior, or Wizard enter the battlefield under your control this turn.
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ Unblockable | CheckSVar$ JoinedParty | SVarCompare$ GE1 | Description$ CARDNAME can't be blocked if you had another Cleric, Rogue, Warrior, or Wizard enter the battlefield under your control this turn.
 SVar:JoinedParty:Count$ThisTurnEntered_Battlefield_Cleric.YouCtrl+Other,Rogue.YouCtrl+Other,Warrior.YouCtrl+Other,Wizard.YouCtrl+Other
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ4 | Execute$ TrigAnimateAll | TriggerDescription$ At the beginning of combat on your turn, if you have a full party, creatures you control gain "Whenever this creature deals combat damage to a player, draw a card" until end of turn.
 SVar:TrigAnimateAll:DB$ AnimateAll | ValidCards$ Creature.YouCtrl | Triggers$ TrigCDPlayer | sVars$ TrigDraw

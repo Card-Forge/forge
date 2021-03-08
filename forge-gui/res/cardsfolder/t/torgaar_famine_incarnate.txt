@@ -2,8 +2,8 @@ Name:Torgaar, Famine Incarnate
 ManaCost:6 B B
 Types:Legendary Creature Avatar
 PT:7/6
-A:SP$ PermanentCreature | Cost$ 6 B B Sac<X/Creature>,Y | AILogic$ SacToReduceCost
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Y | EffectZone$ All,Y | Relative$ True | Description$ As an additional cost to cast this spell, you may sacrifice any number of creatures. This spell costs {2} less to cast for each creature sacrificed this way.
+A:SP$ PermanentCreature | Cost$ 6 B B Sac<X/Creature> | AILogic$ SacToReduceCost
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Y | EffectZone$ All | Relative$ True | Description$ As an additional cost to cast this spell, you may sacrifice any number of creatures. This spell costs {2} less to cast for each creature sacrificed this way.
 SVar:X:Count$xPaid
 SVar:Y:SVar$X/Times.2
 SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE2
