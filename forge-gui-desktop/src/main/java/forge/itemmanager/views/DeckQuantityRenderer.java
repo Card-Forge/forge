@@ -17,8 +17,8 @@
  */
 package forge.itemmanager.views;
 
-import forge.assets.FSkinProp;
 import forge.item.InventoryItem;
+import forge.localinstance.assets.FSkinProp;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;

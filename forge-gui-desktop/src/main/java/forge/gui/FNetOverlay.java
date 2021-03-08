@@ -15,13 +15,13 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
 import forge.gui.framework.SDisplayUtil;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.net.ChatMessage;
 import forge.net.IOnlineChatInterface;
 import forge.net.IRemote;
 import forge.net.event.MessageEvent;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.home.online.OnlineMenu;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;

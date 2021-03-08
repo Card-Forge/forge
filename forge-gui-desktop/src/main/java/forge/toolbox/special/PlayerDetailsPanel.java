@@ -1,9 +1,10 @@
 package forge.toolbox.special;
 
 import com.google.common.base.Function;
-import forge.assets.FSkinProp;
+
 import forge.card.mana.ManaAtom;
 import forge.game.player.PlayerView;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FSkin;

@@ -6,8 +6,8 @@ import forge.GuiBase;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
+import forge.localinstance.properties.ForgeConstants;
 import forge.match.HostedMatch;
-import forge.properties.ForgeConstants;
 
 import java.io.File;
 import java.text.DateFormat;

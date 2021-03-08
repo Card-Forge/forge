@@ -3,9 +3,9 @@ package forge.net;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 
 public class ChatMessage {
     private static final ForgePreferences prefs = FModel.getPreferences();

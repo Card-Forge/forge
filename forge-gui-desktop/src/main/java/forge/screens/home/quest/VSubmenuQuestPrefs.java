@@ -1,8 +1,8 @@
 package forge.screens.home.quest;
-import forge.assets.FSkinProp;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.localinstance.assets.FSkinProp;
 import forge.model.FModel;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;

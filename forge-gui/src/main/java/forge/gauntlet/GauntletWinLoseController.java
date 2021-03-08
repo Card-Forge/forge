@@ -5,12 +5,12 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import forge.LobbyPlayer;
-import forge.assets.FSkinProp;
 import forge.deck.Deck;
 import forge.game.GameView;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IButton;
 import forge.interfaces.IWinLoseView;
+import forge.localinstance.assets.FSkinProp;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Localizer;

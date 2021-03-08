@@ -22,8 +22,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 import forge.GuiBase;
-import forge.assets.FSkinProp;
-import forge.assets.ISkinImage;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.assets.ISkinImage;
 import forge.quest.QuestController;
 import forge.quest.data.QuestAssets;
 

@@ -1,8 +1,7 @@
 package forge;
 
 import com.google.common.base.Function;
-import forge.assets.FSkinProp;
-import forge.assets.ISkinImage;
+
 import forge.download.GuiDownloadService;
 import forge.download.GuiDownloader;
 import forge.error.BugReportDialog;
@@ -14,6 +13,8 @@ import forge.gui.framework.FScreen;
 import forge.interfaces.IGuiBase;
 import forge.interfaces.IGuiGame;
 import forge.item.PaperCard;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.assets.ISkinImage;
 import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;

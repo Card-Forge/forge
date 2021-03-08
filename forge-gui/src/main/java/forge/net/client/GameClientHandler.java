@@ -5,6 +5,7 @@ import forge.LobbyPlayer;
 import forge.game.*;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.ILobbyListener;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.match.LobbySlot;
 import forge.player.LobbyPlayerHuman;
 import forge.player.PlayerZoneUpdate;
@@ -21,7 +22,6 @@ import forge.net.IRemote;
 import forge.net.ProtocolMethod;
 import forge.net.ReplyPool;
 import forge.net.event.LoginEvent;
-import forge.properties.ForgePreferences.FPref;
 import forge.trackable.TrackableCollection;
 
 import java.util.*;

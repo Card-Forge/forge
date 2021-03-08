@@ -1,5 +1,15 @@
 package forge.assets;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -18,21 +28,11 @@ import com.badlogic.gdx.utils.Array;
 
 import forge.FThreads;
 import forge.Forge;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.LineReader;
 import forge.util.TextBounds;
 import forge.util.Utils;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class FSkinFont {
     private static final int MIN_FONT_SIZE = 8;

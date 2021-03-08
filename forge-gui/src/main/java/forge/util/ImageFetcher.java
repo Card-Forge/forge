@@ -15,9 +15,9 @@ import forge.StaticData;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences;
 
 public abstract class ImageFetcher {
     private static final ExecutorService threadPool = Executors.newCachedThreadPool();

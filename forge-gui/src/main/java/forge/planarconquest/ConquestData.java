@@ -18,17 +18,18 @@
 package forge.planarconquest;
 
 import com.google.common.base.Function;
-import forge.achievement.PlaneswalkerAchievements;
-import forge.assets.ISkinImage;
+
 import forge.card.CardDb;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManagerConfig;
+import forge.localinstance.achievements.PlaneswalkerAchievements;
+import forge.localinstance.assets.ISkinImage;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.planarconquest.ConquestPreferences.CQPref;
-import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.XmlReader;
 import forge.util.XmlWriter;

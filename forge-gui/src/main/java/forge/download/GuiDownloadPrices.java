@@ -21,7 +21,7 @@ import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
 
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 
 public class GuiDownloadPrices extends GuiDownloadService {
     @Override

@@ -12,8 +12,8 @@ import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
 import forge.item.InventoryItem;
 import forge.itemmanager.filters.AdvancedSearchFilter;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.util.Utils;
 

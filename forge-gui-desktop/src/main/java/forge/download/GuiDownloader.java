@@ -26,8 +26,8 @@ import javax.swing.event.ChangeListener;
 
 import net.miginfocom.swing.MigLayout;
 import forge.UiCommand;
-import forge.assets.FSkinProp;
 import forge.gui.SOverlayUtils;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;

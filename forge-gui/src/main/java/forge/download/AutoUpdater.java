@@ -2,8 +2,8 @@ package forge.download;
 
 import com.google.common.collect.ImmutableList;
 import forge.GuiBase;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.Localizer;

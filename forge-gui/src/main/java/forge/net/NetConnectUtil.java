@@ -1,7 +1,7 @@
 package forge.net;
 
 import forge.match.LobbySlotType;
-import forge.properties.ForgeConstants;
+
 import org.apache.commons.lang3.StringUtils;
 
 import forge.GuiBase;
@@ -10,6 +10,9 @@ import forge.interfaces.ILobbyListener;
 import forge.interfaces.ILobbyView;
 import forge.interfaces.IPlayerChangeListener;
 import forge.interfaces.IUpdateable;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeProfileProperties;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.match.GameLobby.GameLobbyData;
 import forge.model.FModel;
 import forge.net.client.ClientGameLobby;
@@ -21,8 +24,6 @@ import forge.net.event.UpdateLobbyPlayerEvent;
 import forge.net.server.FServerManager;
 import forge.net.server.ServerGameLobby;
 import forge.player.GamePlayerUtil;
-import forge.properties.ForgeProfileProperties;
-import forge.properties.ForgePreferences.FPref;
 import forge.util.gui.SOptionPane;
 import forge.util.Localizer;
 

@@ -12,7 +12,7 @@ import java.util.Map;
 
 import forge.game.GameFormat;
 import forge.item.PaperCard;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 
 /**
  * Created by maustin on 11/05/2017.

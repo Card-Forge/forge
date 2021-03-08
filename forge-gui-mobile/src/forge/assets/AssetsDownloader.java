@@ -6,7 +6,7 @@ import com.google.common.collect.ImmutableList;
 import forge.FThreads;
 import forge.Forge;
 import forge.download.GuiDownloadZipService;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.screens.SplashScreen;
 import forge.util.FileUtil;
 import forge.util.gui.SOptionPane;

@@ -19,8 +19,8 @@ package forge.download;
 
 import forge.StaticData;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
 import forge.ImageKeys;
 

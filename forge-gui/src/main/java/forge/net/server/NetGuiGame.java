@@ -2,7 +2,6 @@ package forge.net.server;
 
 import com.google.common.base.Function;
 import forge.LobbyPlayer;
-import forge.assets.FSkinProp;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
@@ -14,6 +13,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+import forge.localinstance.assets.FSkinProp;
 import forge.match.AbstractGuiGame;
 import forge.net.GameProtocolSender;
 import forge.net.ProtocolMethod;

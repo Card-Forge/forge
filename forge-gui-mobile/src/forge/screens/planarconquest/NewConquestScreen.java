@@ -3,11 +3,11 @@ package forge.screens.planarconquest;
 import com.google.common.collect.Iterables;
 
 import forge.FThreads;
-import forge.achievement.PlaneswalkerAchievements;
 import forge.assets.FImage;
 import forge.card.CardImage;
 import forge.card.CardListPreview;
 import forge.item.PaperCard;
+import forge.localinstance.achievements.PlaneswalkerAchievements;
 import forge.model.FModel;
 import forge.planarconquest.ConquestController;
 import forge.planarconquest.ConquestData;

@@ -48,7 +48,7 @@ import forge.error.BugReporter;
 import forge.interfaces.IButton;
 import forge.interfaces.IProgressBar;
 import forge.interfaces.ITextField;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
 

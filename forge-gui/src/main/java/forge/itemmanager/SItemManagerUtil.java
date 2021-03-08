@@ -2,13 +2,13 @@ package forge.itemmanager;
 
 import com.google.common.base.Predicate;
 import forge.GuiBase;
-import forge.assets.FSkinProp;
-import forge.assets.IHasSkinProp;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.deck.DeckProxy;
 import forge.interfaces.IComboBox;
 import forge.item.InventoryItem;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.assets.IHasSkinProp;
 import forge.util.ComparableOp;
 import forge.util.Localizer;
 

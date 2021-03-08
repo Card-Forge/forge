@@ -34,8 +34,8 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import forge.deck.CardPool;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
 import forge.util.IgnoringXStream;
 
 public class GauntletIO {

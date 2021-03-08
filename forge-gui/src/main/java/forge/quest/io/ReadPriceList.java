@@ -18,7 +18,7 @@
 package forge.quest.io;
 
 import forge.card.MagicColor;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
 

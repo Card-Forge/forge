@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.graphics.Color;
 
+import forge.localinstance.assets.FSkinProp;
 import forge.screens.match.TargetingOverlay;
 
 public class FSkinColor {

@@ -1,6 +1,6 @@
 package forge.screens.deckeditor.menus;
 
-import forge.assets.FSkinProp;
+import forge.localinstance.assets.FSkinProp;
 import forge.menus.MenuUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VCurrentDeck;

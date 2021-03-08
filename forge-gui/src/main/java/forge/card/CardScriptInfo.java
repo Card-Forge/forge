@@ -22,7 +22,7 @@ import java.io.PrintWriter;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 
 public final class CardScriptInfo {

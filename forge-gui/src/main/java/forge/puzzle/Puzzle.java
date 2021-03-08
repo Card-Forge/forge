@@ -13,8 +13,8 @@ import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
 
 import java.io.File;
 import java.io.IOException;

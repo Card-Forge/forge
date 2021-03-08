@@ -27,9 +27,9 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityView;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
-import forge.properties.ForgePreferences;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 

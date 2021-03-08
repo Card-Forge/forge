@@ -20,11 +20,11 @@ import forge.game.player.PlayerView;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.interfaces.IGuiGame;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
-import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
 import forge.util.maps.MapOfLists;
 

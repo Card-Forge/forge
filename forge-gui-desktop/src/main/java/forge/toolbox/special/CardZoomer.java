@@ -19,12 +19,12 @@
 package forge.toolbox.special;
 
 import forge.StaticData;
-import forge.assets.FSkinProp;
 import forge.game.card.Card;
 import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
 import forge.gui.SOverlayUtils;
 import forge.item.PaperCard;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;

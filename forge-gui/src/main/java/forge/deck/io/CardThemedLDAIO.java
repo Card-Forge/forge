@@ -1,7 +1,8 @@
 package forge.deck.io;
 
 import forge.game.GameFormat;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.*;

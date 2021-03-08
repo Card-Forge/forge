@@ -1,8 +1,8 @@
 package forge.screens.home;
 
 import forge.gui.framework.ILocalRepaint;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedLabel;

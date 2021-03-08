@@ -18,8 +18,8 @@
 package forge.quest.data;
 
 import forge.game.GameFormat;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
 import forge.quest.QuestMode;
 import forge.quest.io.QuestDataIO;
 

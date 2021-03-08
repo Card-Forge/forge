@@ -1,7 +1,7 @@
 package forge.menus;
 
 import forge.Singletons;
-import forge.assets.FSkinProp;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FSkin;
 import forge.toolbox.imaging.FImageUtil;
 

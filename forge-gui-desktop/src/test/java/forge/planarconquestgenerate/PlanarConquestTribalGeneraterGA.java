@@ -15,9 +15,9 @@ import forge.game.GameRules;
 import forge.game.GameType;
 import forge.item.PaperCard;
 import forge.limited.CardRanker;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -2,8 +2,8 @@ package forge.screens.home.quest;
 
 import forge.UiCommand;
 import forge.gui.framework.ICDoc;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
 import forge.quest.QuestController;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;

@@ -7,15 +7,15 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.GuiBase;
-import forge.assets.FSkinProp;
 import forge.deck.DeckGroup;
 import forge.game.GameType;
 import forge.interfaces.IGuiGame;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.limited.BoosterDraft;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestDraftUtils.Mode;
 import forge.quest.QuestEventDraft.QuestDraftFormat;
 import forge.quest.data.QuestAchievements;

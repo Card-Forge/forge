@@ -17,8 +17,8 @@
  */
 package forge.quest.data;
 
-import forge.properties.ForgeConstants;
-import forge.properties.PreferencesStore;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.PreferencesStore;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 

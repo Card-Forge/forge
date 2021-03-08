@@ -18,11 +18,11 @@
 package forge.view.arcane;
 
 import forge.FThreads;
-import forge.assets.FSkinProp;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
-import forge.properties.ForgePreferences.FPref;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPane;

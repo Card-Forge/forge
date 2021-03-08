@@ -20,7 +20,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
 import forge.UiCommand;
-import forge.assets.FSkinProp;
 import forge.deck.DeckBase;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
@@ -42,6 +41,7 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.views.ItemCellRenderer;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemTableColumn;
+import forge.localinstance.assets.FSkinProp;
 import forge.model.FModel;
 import forge.quest.QuestWorld;
 import forge.screens.deckeditor.CDeckEditorUI;

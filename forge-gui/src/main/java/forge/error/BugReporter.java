@@ -26,8 +26,8 @@ import java.io.StringWriter;
 
 import forge.FThreads;
 import forge.GuiBase;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
 import forge.util.gui.SOptionPane;
 import forge.util.Localizer;
 import io.sentry.Sentry;

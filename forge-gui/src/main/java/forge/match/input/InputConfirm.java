@@ -25,9 +25,9 @@ import forge.GuiBase;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.spellability.SpellAbility;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
-import forge.properties.ForgePreferences;
 import forge.util.Localizer;
 
  /**

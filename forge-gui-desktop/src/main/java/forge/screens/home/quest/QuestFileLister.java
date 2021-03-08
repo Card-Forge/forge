@@ -1,9 +1,9 @@
 package forge.screens.home.quest;
 
 import forge.UiCommand;
-import forge.assets.FSkinProp;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
 import forge.quest.QuestUtil;
 import forge.quest.data.QuestData;
 import forge.toolbox.*;

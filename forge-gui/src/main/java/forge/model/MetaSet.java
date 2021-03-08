@@ -27,7 +27,7 @@ import forge.item.generation.IUnOpenedProduct;
 import forge.item.generation.UnOpenedProduct;
 import forge.limited.CustomLimited;
 import forge.limited.SealedCardPoolGenerator;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 
 import java.io.File;

@@ -14,14 +14,14 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 
 import forge.Singletons;
-import forge.assets.FSkinProp;
 import forge.gui.GuiChoose;
 import forge.gui.MouseUtil;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.SLayoutIO;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedMenuItem;
 import forge.view.FFrame;

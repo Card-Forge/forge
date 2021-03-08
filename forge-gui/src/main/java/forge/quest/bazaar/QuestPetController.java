@@ -24,11 +24,11 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 import forge.GuiBase;
-import forge.assets.FSkinProp;
-import forge.assets.ISkinImage;
 import forge.item.PaperToken;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.assets.ISkinImage;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
 import forge.quest.QuestController;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestPreferences;

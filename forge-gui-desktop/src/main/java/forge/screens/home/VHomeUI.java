@@ -18,10 +18,10 @@
 package forge.screens.home;
 
 import forge.Singletons;
-import forge.assets.FSkinProp;
 import forge.gui.framework.*;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.home.gauntlet.VSubmenuGauntletBuild;
 import forge.screens.home.gauntlet.VSubmenuGauntletContests;
 import forge.screens.home.gauntlet.VSubmenuGauntletLoad;

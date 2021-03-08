@@ -16,7 +16,7 @@ import forge.deck.Deck;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.framework.ICDoc;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.toolbox.FOptionPane;
 
 /**

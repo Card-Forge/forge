@@ -17,9 +17,10 @@
 package forge.screens.match;
 
 import com.google.common.collect.ImmutableList;
-import forge.assets.FSkinProp;
+
 import forge.game.GameView;
 import forge.game.player.PlayerView;
+import forge.localinstance.assets.FSkinProp;
 import forge.match.NextGameDecision;
 import forge.model.FModel;
 import forge.quest.QuestController;

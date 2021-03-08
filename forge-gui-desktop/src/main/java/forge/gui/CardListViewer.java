@@ -34,8 +34,8 @@ import javax.swing.event.ListSelectionListener;
 
 import forge.game.card.CardView;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;

@@ -1,7 +1,7 @@
 package forge.screens.home.quest;
 
 import forge.ImageCache;
-import forge.assets.FSkinProp;
+import forge.localinstance.assets.FSkinProp;
 import forge.quest.QuestEvent;
 import forge.quest.QuestUtil;
 import forge.toolbox.FRadioButton;

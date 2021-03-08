@@ -19,7 +19,7 @@
 package forge.screens.home.settings;
 
 import forge.gui.framework.ICDoc;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 
 /**

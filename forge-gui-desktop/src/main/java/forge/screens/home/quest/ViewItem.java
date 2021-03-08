@@ -2,7 +2,7 @@ package forge.screens.home.quest;
 
 import forge.GuiBase;
 import forge.UiCommand;
-import forge.assets.FSkinProp;
+import forge.localinstance.assets.FSkinProp;
 import forge.model.FModel;
 import forge.quest.QuestUtil;
 import forge.quest.bazaar.IQuestBazaarItem;

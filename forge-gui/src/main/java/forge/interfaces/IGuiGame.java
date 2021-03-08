@@ -7,7 +7,6 @@ import java.util.Map;
 import com.google.common.base.Function;
 
 import forge.LobbyPlayer;
-import forge.assets.FSkinProp;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
@@ -22,6 +21,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+import forge.localinstance.assets.FSkinProp;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;

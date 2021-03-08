@@ -17,9 +17,9 @@
  */
 package forge.view;
 
-import forge.assets.FSkinProp;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.toolbox.FProgressBar;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;

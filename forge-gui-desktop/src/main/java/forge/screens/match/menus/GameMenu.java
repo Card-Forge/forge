@@ -9,11 +9,11 @@ import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 
-import forge.assets.FSkinProp;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menus.MenuUtil;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.VAutoYields;
 import forge.screens.match.controllers.CDock.ArcState;

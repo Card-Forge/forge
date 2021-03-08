@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
-import forge.assets.FSkinProp;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FPanel;

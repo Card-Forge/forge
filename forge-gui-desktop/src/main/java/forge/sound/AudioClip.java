@@ -22,7 +22,8 @@ import javax.sound.sampled.*;
 
 import com.google.common.io.Files;
 import com.sipgate.mp3wav.Converter;
-import forge.properties.ForgeConstants;
+
+import forge.localinstance.properties.ForgeConstants;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

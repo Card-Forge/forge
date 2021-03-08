@@ -5,7 +5,7 @@ import java.util.List;
 import com.google.common.collect.ImmutableList;
 
 import forge.GuiBase;
-import forge.assets.FSkinProp;
+import forge.localinstance.assets.FSkinProp;
 import forge.util.Localizer;
 
 public class SOptionPane {

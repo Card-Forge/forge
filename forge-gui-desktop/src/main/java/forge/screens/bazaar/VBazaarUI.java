@@ -2,9 +2,9 @@ package forge.screens.bazaar;
 
 import forge.GuiBase;
 import forge.UiCommand;
-import forge.assets.FSkinProp;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
+import forge.localinstance.assets.FSkinProp;
 import forge.model.FModel;
 import forge.quest.bazaar.QuestBazaarManager;
 import forge.screens.home.quest.ViewStall;

@@ -15,7 +15,7 @@ import forge.GuiDesktop;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.DeckHints;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 
 /**

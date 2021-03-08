@@ -9,10 +9,10 @@ import com.google.common.eventbus.Subscribe;
 import forge.GuiBase;
 import forge.events.UiEvent;
 import forge.game.event.GameEvent;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences.FPref;
 
 /**
  * Manages playback of all sounds for the client.

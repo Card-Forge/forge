@@ -38,9 +38,9 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
 import net.miginfocom.swing.MigLayout;
 import forge.gui.WrapLayout;
+import forge.localinstance.properties.ForgePreferences;
 
 /**
  * The class BugReportDialog. Enables showing and saving error messages that

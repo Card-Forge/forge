@@ -1,12 +1,12 @@
 package forge.screens.home.gauntlet;
 
-import forge.assets.FSkinProp;
 import forge.deckchooser.FDeckChooser;
 import forge.game.GameType;
 import forge.gauntlet.GauntletIO;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.localinstance.assets.FSkinProp;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;

@@ -17,10 +17,10 @@
  */
 package forge.itemmanager.views;
 
-import forge.assets.FSkinProp;
 import forge.card.CardPreferences;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.util.CardTranslation;

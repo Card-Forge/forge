@@ -5,7 +5,7 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.item.PaperToken;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 
 import java.io.File;

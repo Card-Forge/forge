@@ -7,8 +7,9 @@ import forge.gamesimulationtests.util.GameWrapper;
 import forge.gamesimulationtests.util.player.PlayerSpecification;
 import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
 import forge.gamesimulationtests.util.playeractions.testactions.AssertAction;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
+
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.testng.PowerMockTestCase;

@@ -8,10 +8,10 @@ import java.util.List;
 
 import com.google.common.base.Function;
 
-import forge.assets.FSkinProp;
-import forge.assets.ISkinImage;
 import forge.download.GuiDownloadService;
 import forge.item.PaperCard;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.assets.ISkinImage;
 import forge.match.HostedMatch;
 import forge.sound.IAudioClip;
 import forge.sound.IAudioMusic;

@@ -18,8 +18,8 @@
 package forge.screens.match.views;
 
 import forge.UiCommand;
-import forge.assets.FSkinProp;
 import forge.gui.framework.*;
+import forge.localinstance.assets.FSkinProp;
 import forge.screens.match.controllers.CDock;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;

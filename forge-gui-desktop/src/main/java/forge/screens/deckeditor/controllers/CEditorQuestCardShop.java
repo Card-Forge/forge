@@ -18,7 +18,6 @@
 package forge.screens.deckeditor.controllers;
 
 import forge.UiCommand;
-import forge.assets.FSkinProp;
 import forge.deck.DeckBase;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
@@ -28,6 +27,7 @@ import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.SpellShopManager;
 import forge.itemmanager.views.ItemTableColumn;
+import forge.localinstance.assets.FSkinProp;
 import forge.model.FModel;
 import forge.quest.QuestController;
 import forge.quest.QuestSpellShop;

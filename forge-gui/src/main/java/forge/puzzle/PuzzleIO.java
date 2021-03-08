@@ -1,7 +1,8 @@
 package forge.puzzle;
 
 import com.google.common.collect.Lists;
-import forge.properties.ForgeConstants;
+
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 

@@ -17,7 +17,7 @@
  */
 package forge.quest.bazaar;
 
-import forge.assets.ISkinImage;
+import forge.localinstance.assets.ISkinImage;
 import forge.quest.QuestController;
 import forge.quest.data.QuestAssets;
 

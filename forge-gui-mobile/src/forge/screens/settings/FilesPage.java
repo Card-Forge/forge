@@ -16,6 +16,7 @@ import forge.download.GuiDownloadSkins;
 import forge.download.GuiDownloadZipService;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
+import forge.localinstance.properties.ForgeProfileProperties;
 import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +27,6 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
-import forge.properties.ForgeProfileProperties;
 import forge.screens.TabPageScreen.TabPage;
 import forge.toolbox.FFileChooser;
 import forge.toolbox.FFileChooser.ChoiceType;

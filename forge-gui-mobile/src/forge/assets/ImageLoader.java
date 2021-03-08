@@ -14,9 +14,9 @@ import forge.FThreads;
 
 import forge.Forge;
 import forge.ImageKeys;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.tuple.Pair;

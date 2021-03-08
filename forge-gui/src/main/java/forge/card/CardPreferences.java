@@ -1,8 +1,8 @@
 package forge.card;
 
 import forge.item.IPaperCard;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
 import forge.util.XmlUtil;
 
 import java.io.File;

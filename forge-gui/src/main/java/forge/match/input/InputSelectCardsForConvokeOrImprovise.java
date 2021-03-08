@@ -10,7 +10,6 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -20,6 +19,7 @@ import forge.game.card.CardUtil;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.localinstance.properties.ForgePreferences;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 

@@ -19,7 +19,6 @@ import com.google.common.collect.Sets;
 
 import forge.FThreads;
 import forge.GuiBase;
-import forge.assets.FSkinProp;
 import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -30,10 +29,11 @@ import forge.game.player.PlayerView;
 import forge.interfaces.IGameController;
 import forge.interfaces.IGuiGame;
 import forge.interfaces.IMayViewCards;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences;
 import forge.trackable.TrackableTypes;
 import forge.util.Localizer;
 

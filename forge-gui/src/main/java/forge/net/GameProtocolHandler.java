@@ -1,7 +1,7 @@
 package forge.net;
 
 import forge.FThreads;
-import forge.assets.FSkinProp;
+import forge.localinstance.assets.FSkinProp;
 import forge.net.event.GuiGameEvent;
 import forge.net.event.ReplyEvent;
 import forge.util.gui.SOptionPane;

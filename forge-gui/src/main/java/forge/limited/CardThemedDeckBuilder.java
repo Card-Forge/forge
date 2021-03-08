@@ -18,8 +18,8 @@ import forge.deck.generation.IDeckGenPool;
 import forge.game.GameFormat;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
 import forge.util.MyRandom;
 
 import java.util.*;

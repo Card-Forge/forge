@@ -14,9 +14,9 @@ import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.UiCommand;
-import forge.assets.FSkinProp;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
+import forge.localinstance.assets.FSkinProp;
 import forge.quest.QuestUtil;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;

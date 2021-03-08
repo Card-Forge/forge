@@ -17,10 +17,10 @@
  */
 package forge.planarconquest;
 
-import forge.properties.ForgeConstants;
-import forge.properties.PreferencesStore;
-
 import java.io.Serializable;
+
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.PreferencesStore;
 
 @SuppressWarnings("serial")
 public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQPref> implements Serializable {

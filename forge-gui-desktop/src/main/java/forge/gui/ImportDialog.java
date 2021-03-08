@@ -59,10 +59,10 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.collect.ImmutableList;
 
 import forge.UiCommand;
-import forge.assets.FSkinProp;
 import forge.error.BugReporter;
 import forge.gui.ImportSourceAnalyzer.OpType;
-import forge.properties.ForgeConstants;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgeConstants;
 import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBoxWrapper;

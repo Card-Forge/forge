@@ -23,7 +23,7 @@ import java.util.List;
 import forge.card.ColorSet;
 import forge.deck.Deck;
 import forge.item.PaperCard;
-import forge.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences;
 
 /**
  * <p>

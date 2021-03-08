@@ -1,9 +1,9 @@
 package forge.download;
 
-import forge.properties.ForgeConstants;
-
 import java.util.Map;
 import java.util.TreeMap;
+
+import forge.localinstance.properties.ForgeConstants;
 
 public class GuiDownloadSkins extends GuiDownloadService {
     @Override

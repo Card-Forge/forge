@@ -1,11 +1,11 @@
 package forge.screens.planarconquest;
 
 import forge.Forge;
-import forge.achievement.PlaneswalkerAchievements;
 import forge.assets.FImage;
 import forge.card.CardListPreview;
 import forge.deck.FDeckChooser;
 import forge.item.PaperCard;
+import forge.localinstance.achievements.PlaneswalkerAchievements;
 import forge.model.FModel;
 import forge.planarconquest.ConquestData;
 import forge.screens.FScreen;

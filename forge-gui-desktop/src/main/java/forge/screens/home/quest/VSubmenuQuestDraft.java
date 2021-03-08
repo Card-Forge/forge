@@ -2,7 +2,6 @@ package forge.screens.home.quest;
 
 import forge.GuiBase;
 import forge.Singletons;
-import forge.assets.FSkinProp;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -10,6 +9,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.itemmanager.DeckManager;
 import forge.limited.BoosterDraft;
+import forge.localinstance.assets.FSkinProp;
 import forge.model.FModel;
 import forge.quest.IQuestTournamentView;
 import forge.quest.QuestEventDraft;

@@ -10,7 +10,7 @@ import forge.deck.io.DeckSerializer;
 import forge.deck.io.DeckStorage;
 import forge.download.GuiDownloadZipService;
 import forge.game.GameType;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.WaitCallback;
 import forge.util.gui.SGuiChoose;

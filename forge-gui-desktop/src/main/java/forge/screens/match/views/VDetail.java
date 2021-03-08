@@ -17,13 +17,13 @@
  */
 package forge.screens.match.views;
 
-import forge.assets.FSkinProp;
 import forge.game.GameView;
 import forge.gui.CardDetailPanel;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.localinstance.assets.FSkinProp;
 import forge.screens.match.controllers.CDetail;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;

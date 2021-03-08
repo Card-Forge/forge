@@ -1,6 +1,6 @@
 package forge.limited;
 
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 
 import java.util.HashMap;

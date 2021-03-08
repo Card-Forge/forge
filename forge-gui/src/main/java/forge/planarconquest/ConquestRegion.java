@@ -9,12 +9,12 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
 import forge.GuiBase;
-import forge.assets.ISkinImage;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.deck.generation.DeckGenPool;
 import forge.game.card.Card;
 import forge.item.PaperCard;
+import forge.localinstance.assets.ISkinImage;
 import forge.model.FModel;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionReader;

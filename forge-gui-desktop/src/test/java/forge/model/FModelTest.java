@@ -1,7 +1,7 @@
 package forge.model;
 
 import forge.error.ExceptionHandler;
-import forge.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences;
 import forge.util.BuildInfo;
 
 import org.testng.Assert;

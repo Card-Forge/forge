@@ -5,7 +5,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.item.PaperCard;
-import forge.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences;
 
 import java.util.List;
 

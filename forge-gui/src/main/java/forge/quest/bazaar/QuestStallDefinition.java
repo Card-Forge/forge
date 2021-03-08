@@ -23,7 +23,7 @@ import java.util.List;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
-import forge.assets.FSkinProp;
+import forge.localinstance.assets.FSkinProp;
 
 /**
  * <p>

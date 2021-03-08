@@ -7,9 +7,9 @@ import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
-import forge.properties.ForgePreferences;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 

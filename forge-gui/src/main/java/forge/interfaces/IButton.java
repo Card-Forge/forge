@@ -1,7 +1,7 @@
 package forge.interfaces;
 
 import forge.UiCommand;
-import forge.assets.FSkinProp;
+import forge.localinstance.assets.FSkinProp;
 
 public interface IButton extends ITextComponent {
     boolean isSelected();

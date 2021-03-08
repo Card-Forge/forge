@@ -1,9 +1,9 @@
 package forge.screens.home.sanctioned;
 
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menus.MenuUtil;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.util.Localizer;
 
 import javax.swing.*;

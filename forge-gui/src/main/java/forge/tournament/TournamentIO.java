@@ -11,8 +11,8 @@ import com.thoughtworks.xstream.security.NullPermission;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import forge.deck.CardPool;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
 import forge.util.IgnoringXStream;
 import org.apache.commons.lang3.StringUtils;
 

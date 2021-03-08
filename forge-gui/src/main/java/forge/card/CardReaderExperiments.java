@@ -1,7 +1,7 @@
 package forge.card;
 
 import forge.CardStorageReader;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 
 import java.io.*;

@@ -4,7 +4,7 @@ import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.item.PaperCard;
 import forge.limited.CardRanker;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import org.junit.Assert;
 import org.testng.annotations.BeforeTest;

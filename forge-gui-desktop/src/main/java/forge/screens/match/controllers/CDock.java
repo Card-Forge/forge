@@ -24,12 +24,12 @@ import com.google.common.primitives.Ints;
 
 import forge.Singletons;
 import forge.UiCommand;
-import forge.assets.FSkinProp;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SLayoutIO;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VDock;
 import forge.toolbox.FSkin;
