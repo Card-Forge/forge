@@ -1,7 +1,7 @@
 Name:Cosmic Intervention
 ManaCost:3 W
 Types:Instant
-A:SP$ Effect | ReplacementEffects$ ReplaceGrave | SVars$ Exile,DBDelayTrigger,TrigReturn | SpellDescription$ If a permanent you control would be put into a graveyard from the battlefield this turn, exile it instead. Return it to the battlefield under its owner's control at the beginning of the next end step.
+A:SP$ Effect | ReplacementEffects$ ReplaceGrave | SpellDescription$ If a permanent you control would be put into a graveyard from the battlefield this turn, exile it instead. Return it to the battlefield under its owner's control at the beginning of the next end step.
 SVar:ReplaceGrave:Event$ Moved | ValidCard$ Permanent.YouCtrl | Origin$ Battlefield | Destination$ Graveyard | ReplaceWith$ Exile | ActiveZone$ Command | Description$ If a permanent you control would be put into a graveyard from the battlefield this turn, exile it instead. Return it to the battlefield under its owner's control at the beginning of the next end step.
 SVar:Exile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ All | Destination$ Exile | SubAbility$ DBDelayTrigger
 SVar:DBDelayTrigger:DB$ DelayedTrigger | RememberObjects$ ReplacedCard | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return it to the battlefield under its owner’s control at the beginning of the next end step.

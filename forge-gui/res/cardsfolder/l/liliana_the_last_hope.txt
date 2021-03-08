@@ -7,7 +7,7 @@ A:AB$ Mill | Cost$ SubCounter<2/LOYALTY> | NumCards$ 2 | AILogic$ LilianaMill | 
 SVar:DBChooseCard:DB$ ChooseCard | Choices$ Creature.YouOwn | Optional$ Yes | ChoiceZone$ Graveyard | Amount$ 1 | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Name$ Emblem - Liliana, the Last Hope | Image$ emblem_liliana_the_last_hope | Triggers$ TrigToken | SVars$ DBToken,X | Planeswalker$ True | Ultimate$ True | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "At the beginning of your end step, create X 2/2 black Zombie creature tokens, where X is two plus the number of Zombies you control."
+A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Name$ Emblem - Liliana, the Last Hope | Image$ emblem_liliana_the_last_hope | Triggers$ TrigToken | Planeswalker$ True | Ultimate$ True | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "At the beginning of your end step, create X 2/2 black Zombie creature tokens, where X is two plus the number of Zombies you control."
 SVar:TrigToken:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ DBToken | TriggerDescription$ At the beginning of your end step, create X 2/2 black Zombie creature tokens, where X is two plus the number of Zombies you control.
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ b_2_2_zombie | TokenOwner$ You
 SVar:X:Count$Valid Card.Zombie+YouCtrl/Plus.2

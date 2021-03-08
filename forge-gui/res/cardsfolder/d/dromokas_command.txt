@@ -3,7 +3,7 @@ ManaCost:G W
 Types:Instant
 A:SP$ Charm | Cost$ G W | Choices$ DBPrevent,DBSacrifice,DBPutCounter,DBPump | CharmNum$ 2
 # The target lists a second zone to a Card is returned instead of a SA
-SVar:DBPrevent:DB$ Effect | ValidTgts$ Instant,Sorcery | AILogic$ Prevent | TgtZone$ Stack,Battlefield | TgtPrompt$ Select target instant or sorcery spell to prevent damage from | StaticAbilities$ PreventDmg | Triggers$ TargetMoved | SVars$ ExileEffect | RememberObjects$ Targeted | SpellDescription$ Prevent all damage target instant or sorcery spell would deal this turn.
+SVar:DBPrevent:DB$ Effect | ValidTgts$ Instant,Sorcery | AILogic$ Prevent | TgtZone$ Stack,Battlefield | TgtPrompt$ Select target instant or sorcery spell to prevent damage from | StaticAbilities$ PreventDmg | Triggers$ TargetMoved | RememberObjects$ Targeted | SpellDescription$ Prevent all damage target instant or sorcery spell would deal this turn.
 SVar:PreventDmg:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Stack | Affected$ Card.IsRemembered | AddKeyword$ Prevent all damage that would be dealt by CARDNAME. | Description$ Prevent all damage target instant or sorcery spell would deal this turn.
 SVar:TargetMoved:Mode$ ChangesZone | Origin$ Stack | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ExileEffect | TriggerZones$ Command | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

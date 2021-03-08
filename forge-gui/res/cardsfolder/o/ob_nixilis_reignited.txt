@@ -5,7 +5,7 @@ Loyalty:5
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | NumCards$ 1 | SubAbility$ DBLoseLife1 | Planeswalker$ True | SpellDescription$ You draw a card and you lose 1 life.
 SVar:DBLoseLife1:DB$ LoseLife | LifeAmount$ 1
 A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Choose target creature | Planeswalker$ True | SpellDescription$ Destroy target creature.
-A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | ValidTgts$ Opponent | EffectOwner$ Targeted | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Ob Nixilis Reignited | Image$ emblem_ob_nixilis_reignited | Triggers$ TrigDraw | SVars$ DBLoseLife | Duration$ Permanent | AILogic$ Always | SpellDescription$ Target opponent gets an emblem with "Whenever a player draws a card, you lose 2 life."
+A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | ValidTgts$ Opponent | EffectOwner$ Targeted | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Ob Nixilis Reignited | Image$ emblem_ob_nixilis_reignited | Triggers$ TrigDraw | Duration$ Permanent | AILogic$ Always | SpellDescription$ Target opponent gets an emblem with "Whenever a player draws a card, you lose 2 life."
 SVar:TrigDraw:Mode$ Drawn | ValidCard$ Card | TriggerZones$ Command | Execute$ DBLoseLife | TriggerDescription$ Whenever a player draws a card, you lose 2 life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ob_nixilis_reignited.jpg

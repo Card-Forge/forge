@@ -1,7 +1,7 @@
 Name:Glyph of Life
 ManaCost:W
 Types:Instant
-A:SP$ Effect | Cost$ W | Name$ Glyph of Life Effect | ValidTgts$ Creature.Wall | TgtPrompt$ Select target Wall creature | Triggers$ TrigDamage | SVars$ TrigGainLife,X | RememberObjects$ Targeted | SpellDescription$ Choose target Wall creature. Whenever that creature is dealt damage by an attacking creature this turn, you gain that much life.
+A:SP$ Effect | Cost$ W | Name$ Glyph of Life Effect | ValidTgts$ Creature.Wall | TgtPrompt$ Select target Wall creature | Triggers$ TrigDamage | RememberObjects$ Targeted | SpellDescription$ Choose target Wall creature. Whenever that creature is dealt damage by an attacking creature this turn, you gain that much life.
 SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Creature.attacking | ValidTarget$ Creature.IsRemembered | Execute$ TrigGainLife | TriggerDescription$ Whenever an attacking creature deals damage to this creature, you gain that much life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X | Defined$ You
 SVar:X:TriggerCount$DamageAmount

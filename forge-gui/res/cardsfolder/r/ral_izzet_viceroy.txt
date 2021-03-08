@@ -7,7 +7,7 @@ DeckHas:Ability$Graveyard
 A:AB$ DealDamage | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the total number of instant and sorcery cards you own in exile and in your graveyard.
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn/Plus.Y
 SVar:Y:Count$ValidExile Instant.YouOwn,Sorcery.YouOwn
-A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Ral | Image$ emblem_ral | Triggers$ TrigSpellCast | SVars$ EffSpellCast,EffDraw | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast an instant or sorcery spell, this emblem deals 4 damage to any target and you draw two cards."
+A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Ral | Image$ emblem_ral | Triggers$ TrigSpellCast | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast an instant or sorcery spell, this emblem deals 4 damage to any target and you draw two cards."
 SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast an instant or sorcery spell, this emblem deals 4 damage to any target and you draw two cards.
 SVar:EffSpellCast:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4 | SubAbility$ EffDraw
 SVar:EffDraw:DB$ Draw | Defined$ You | NumCards$ 2

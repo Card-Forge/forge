@@ -6,7 +6,7 @@ K:MayEffectFromOpeningHand:RevealCard
 K:Flying
 K:Lifelink
 SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | SubAbility$ DrainOnUpkeep | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent loses 3 life, then you gain life equal to the life lost this way.
-SVar:DrainOnUpkeep:DB$ Effect | Triggers$ TrigDrain | SVars$ DrainLife,GainLife,RemoveMe,AFLifeLost | Name$ Chancellor of the Dross effect
+SVar:DrainOnUpkeep:DB$ Effect | Triggers$ TrigDrain | Name$ Chancellor of the Dross effect
 SVar:TrigDrain:Mode$ Phase | Phase$ Upkeep | Execute$ DrainLife | TriggerDescription$ At the beginning of the first upkeep, each opponent loses 3 life, then you gain life equal to the life lost this way.
 SVar:DrainLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 3 | SubAbility$ GainLife
 SVar:GainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | SubAbility$ RemoveMe

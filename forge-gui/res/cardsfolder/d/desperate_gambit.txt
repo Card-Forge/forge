@@ -4,12 +4,12 @@ Types:Instant
 A:SP$ ChooseSource | Cost$ R | Choices$ Card.YouCtrl | RememberChosen$ True | SubAbility$ CoinFlip | SpellDescription$ Choose a source you control and flip a coin. If you win the flip, the next time that source would deal damage this turn, it deals double that damage instead. If you lose the flip, the next time it would deal damage this turn, prevent that damage.
 SVar:CoinFlip:DB$ FlipACoin | WinSubAbility$ CreateWinEffect | LoseSubAbility$ CreateLossEffect | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
 # Winning Effect
-SVar:CreateWinEffect:DB$ Effect | Name$ Desperate Gambit Win Effect | ReplacementEffects$ EventWinDamageDone | SVars$ DmgTwice,WinX,ExileEffect | RememberObjects$ Remembered
+SVar:CreateWinEffect:DB$ Effect | Name$ Desperate Gambit Win Effect | ReplacementEffects$ EventWinDamageDone | RememberObjects$ Remembered
 SVar:EventWinDamageDone:Event$ DamageDone | ValidSource$ Card.IsRemembered | ReplaceWith$ DmgTwice | Description$ The next time source would deal damage this turn, it deals double that damage instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ WinX | SubAbility$ ExileEffect
 SVar:WinX:ReplaceCount$DamageAmount/Twice
 # Losing Effect
-SVar:CreateLossEffect:DB$ Effect | Name$ Desperate Gambit Loss Effect | ReplacementEffects$ EventLossDamageDone | SVars$ ExileEffect | RememberObjects$ Remembered
+SVar:CreateLossEffect:DB$ Effect | Name$ Desperate Gambit Loss Effect | ReplacementEffects$ EventLossDamageDone | RememberObjects$ Remembered
 SVar:EventLossDamageDone:Event$ DamageDone | ValidSource$ Card.IsRemembered | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time it would deal damage this turn, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 AI:RemoveDeck:All

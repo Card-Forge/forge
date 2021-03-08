@@ -8,7 +8,7 @@ SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2 | ConditionD
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Produced$ R | Amount$ 2 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R}{R}.
 A:AB$ DealDamage | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
-A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Chandra, Torch of Defiance | Image$ emblem_chandra_torch_of_defiance | Triggers$ TrigSpellCast | SVars$ EffSpellCast | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast a spell, this emblem deals 5 damage to any target."
+A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Chandra, Torch of Defiance | Image$ emblem_chandra_torch_of_defiance | Triggers$ TrigSpellCast | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast a spell, this emblem deals 5 damage to any target."
 SVar:TrigSpellCast:Mode$ SpellCast | ValidActivatingPlayer$ You | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast a spell, this emblem deals 5 damage to any target.
 SVar:EffSpellCast:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | NumDmg$ 5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chandra_torch_of_defiance.jpg

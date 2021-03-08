@@ -2,7 +2,7 @@ Name:General's Regalia
 ManaCost:3
 Types:Artifact
 A:AB$ ChooseSource | Cost$ 3 | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature you control instead.
-SVar:DBEffect:DB$ Effect | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to redirect damage to | ReplacementEffects$ GeneralDamage | Triggers$ OutOfSight | SVars$ GeneralDmg,ExileEffect | RememberObjects$ Targeted | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to redirect damage to | ReplacementEffects$ GeneralDamage | Triggers$ OutOfSight | RememberObjects$ Targeted | SubAbility$ DBCleanup
 SVar:GeneralDamage:Event$ DamageDone | ValidSource$ Card.ChosenCard,Emblem.ChosenCard | ValidTarget$ You | DamageTarget$ Remembered | ReplaceWith$ GeneralDmg | Description$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature you control instead.
 SVar:GeneralDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Remembered | VarType$ Card | SubAbility$ ExileEffect
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Defined$ Imprinted | Execute$ ExileEffect | Static$ True

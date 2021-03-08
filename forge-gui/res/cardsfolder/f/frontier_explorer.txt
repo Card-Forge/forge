@@ -2,7 +2,7 @@ Name:Frontier Explorer
 ManaCost:W
 Types:Creature Cat Scout
 PT:2/1
-A:AB$ Effect | Cost$ 3 T | Name$ Play a Plains | Abilities$ PlayLand | EffectOwner$ You | SVars$ ExileEffect | SpellDescription$ Until end of turn, you may play one basic Plains card from outside the game.
+A:AB$ Effect | Cost$ 3 T | Name$ Play a Plains | Abilities$ PlayLand | EffectOwner$ You | SpellDescription$ Until end of turn, you may play one basic Plains card from outside the game.
 SVar:PlayLand:ST$ Play | Cost$ 0 | ActivationZone$ Command | SorcerySpeed$ True | ValidZone$ Sideboard | Valid$ Land.Plains+Basic | SubAbility$ ExileEffect | SpellDescription$ Play a basic Plains card from outside the game.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 Oracle:{3}, {T}: Until end of turn, you may play one basic Plains card from outside the game.

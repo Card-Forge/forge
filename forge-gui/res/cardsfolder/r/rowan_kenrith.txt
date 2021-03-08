@@ -4,13 +4,13 @@ Types:Legendary Planeswalker Rowan
 Loyalty:4
 Text:CARDNAME can be your commander.
 K:Partner:Will Kenrith:Will
-A:AB$ Effect | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Name$ Rowan Kenrith Taunt Effect | ValidTgts$ Player | TgtPrompt$ Select target player | StaticAbilities$ MustAttack | RememberObjects$ Targeted | IsCurse$ True | Triggers$ RemoveEffect | SVars$ ExileEffect | Duration$ Permanent | SubAbility$ DBCleanup | SpellDescription$ During target player's next turn, each creature that player controls attacks if able.
+A:AB$ Effect | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Name$ Rowan Kenrith Taunt Effect | ValidTgts$ Player | TgtPrompt$ Select target player | StaticAbilities$ MustAttack | RememberObjects$ Targeted | IsCurse$ True | Triggers$ RemoveEffect | Duration$ Permanent | SubAbility$ DBCleanup | SpellDescription$ During target player's next turn, each creature that player controls attacks if able.
 SVar:MustAttack:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.RememberedPlayerCtrl | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Creatures target opponent controls attack this turn if able.
 SVar:RemoveEffect:Mode$ Phase | Phase$ Cleanup | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ DamageAll | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3 | ValidCards$ Creature.tapped | Planeswalker$ True | ValidDescription$ each tapped creature target player controls. | SpellDescription$ CARDNAME deals 3 damage to each tapped creature target player controls
-A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Player | EffectOwner$ Targeted | Name$ Emblem - Rowan Kenrith | Image$ emblem_rowan_kenrith | Triggers$ CopyAbility | SVars$ TrigCopy | Duration$ Permanent | AILogic$ Always | SpellDescription$ Target player gets an emblem with "Whenever you activate an ability that isn't a mana ability, copy it. You may choose new targets for the copy."
+A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Player | EffectOwner$ Targeted | Name$ Emblem - Rowan Kenrith | Image$ emblem_rowan_kenrith | Triggers$ CopyAbility | Duration$ Permanent | AILogic$ Always | SpellDescription$ Target player gets an emblem with "Whenever you activate an ability that isn't a mana ability, copy it. You may choose new targets for the copy."
 SVar:CopyAbility:Mode$ AbilityCast | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigCopy | TriggerDescription$ Whenever you activate an ability that isn't a mana ability, copy it. You may choose new targets for the copy.
 SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 DeckHints:Name$Will Kenrith

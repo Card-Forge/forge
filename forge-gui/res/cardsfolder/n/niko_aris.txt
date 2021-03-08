@@ -5,7 +5,7 @@ Loyalty:3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create X Shard tokens. (They're enchantments with "{2}, Sacrifice this enchantment: Scry 1, then draw a card.")
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ shard | TokenOwner$ You
 SVar:X:Count$xPaid
-A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Name$ Niko Aris Effect | Planeswalker$ True | Triggers$ Trig | SVars$ Eff | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | RememberObjects$ Targeted | SubAbility$ DBPump | SpellDescription$ Up to one target creature you control can't be blocked this turn. Whenever that creature deals damage this turn, return it to its owner's hand.
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Name$ Niko Aris Effect | Planeswalker$ True | Triggers$ Trig | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | RememberObjects$ Targeted | SubAbility$ DBPump | SpellDescription$ Up to one target creature you control can't be blocked this turn. Whenever that creature deals damage this turn, return it to its owner's hand.
 SVar:DBPump:DB$ Pump | KW$ HIDDEN Unblockable | Defined$ Targeted
 SVar:Trig:Mode$ DamageDealtOnce | ValidSource$ Creature.IsRemembered | Execute$ Eff | TriggerDescription$ Whenever this creature deals damage this turn, return it to its owner's hand.
 SVar:Eff:DB$ ChangeZone | ValidTgts$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Hand

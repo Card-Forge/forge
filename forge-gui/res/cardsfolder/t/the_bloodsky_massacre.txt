@@ -3,7 +3,7 @@ ManaCost:1 B R
 Types:Enchantment Saga
 K:Saga:3:DBToken,DBEffect,DBMana
 SVar:DBToken:DB$ Token | TokenScript$ r_2_3_demon_berserker_menace | SpellDescription$ Create a 2/3 red Demon Berserker creature token with menace.
-SVar:DBEffect:DB$ Effect | Triggers$ TAttack | SVars$ TrigDraw,DBLoseLife | SpellDescription$ Whenever a Berserker attacks this turn, you draw a card and you lose 1 life.
+SVar:DBEffect:DB$ Effect | Triggers$ TAttack | SpellDescription$ Whenever a Berserker attacks this turn, you draw a card and you lose 1 life.
 SVar:TAttack:Mode$ Attacks | ValidCard$ Berserker | Execute$ TrigDraw | TriggerDescription$ Whenever a Berserker attacks this turn, you draw a card and you lose 1 life.
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1

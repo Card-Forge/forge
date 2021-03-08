@@ -7,7 +7,7 @@ SVar:DBRaiseDead:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You
 T:Mode$ SpellCast | ValidCard$ Planeswalker.Bolas | TriggerZones$ Graveyard | Execute$ DBExileSelf | TriggerDescription$ When you cast a Bolas planeswalker spell, exile Dark Intimations from your graveyard. That planeswalker enters the battlefield with an additional loyalty counter on it.
 SVar:DBExileSelf:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ Self | SubAbility$ DBExtraLoyaltyEffect
-SVar:DBExtraLoyaltyEffect:DB$ Effect | ReplacementEffects$ DBBoostLoyalty | RememberObjects$ TriggeredCard | SVars$ AddExtraCounter,MoveToBattlefield | ExileOnMoved$ Stack
+SVar:DBExtraLoyaltyEffect:DB$ Effect | ReplacementEffects$ DBBoostLoyalty | RememberObjects$ TriggeredCard | ExileOnMoved$ Stack
 SVar:DBBoostLoyalty:Event$ Moved | ActiveZones$ Command | Destination$ Battlefield | ValidCard$ Card.IsRemembered | ReplaceWith$ AddExtraCounter | Description$ That planeswalker enters the battlefield with an additional loyalty counter on it.
 SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ LOYALTY | CounterNum$ 1 | SubAbility$ MoveToBattlefield
 SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard

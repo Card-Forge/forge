@@ -3,7 +3,7 @@ ManaCost:3 W W
 Types:Enchantment Saga
 K:Saga:3:DBExile,DBEffect,DBReturn
 SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.OppCtrl+cmcGE3 | TgtPrompt$ Select target permanent an opponent controls with converted mana cost 3 or greater | SpellDescription$ Exile target permanent an opponent controls with converted mana cost 3 or greater.
-SVar:DBEffect:DB$ Effect | Duration$ UntilYourNextTurn | StaticAbilities$ RaiseCost | SVars$ RaiseCost | SpellDescription$ Noncreature spells your opponents cast cost {2} more to cast until your next turn.
+SVar:DBEffect:DB$ Effect | Duration$ UntilYourNextTurn | StaticAbilities$ RaiseCost | SpellDescription$ Noncreature spells your opponents cast cost {2} more to cast until your next turn.
 SVar:RaiseCost:Mode$ RaiseCost | ValidCard$ Card.nonCreature | Activator$ Opponent | Type$ Spell | Amount$ 2 | EffectZone$ Command | Description$ Noncreature spells your opponents cast cost {2} more to cast until your next turn.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn,Planeswalker.YouOwn | TgtPrompt$ Select target creature or planeswalker | RememberChanged$ True | SubAbility$ AddCounter | SpellDescription$ Return target creature or planeswalker card from your graveyard to the battlefield. Put a +1/+1 counter or a loyalty counter on it.
 SVar:AddCounter:DB$ GenericChoice | Defined$ You | Choices$ P1P1,Loyalty

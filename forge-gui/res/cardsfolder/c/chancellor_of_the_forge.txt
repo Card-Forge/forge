@@ -7,7 +7,7 @@ SVar:EffMassToken:DB$ Token | TokenAmount$ X | TokenOwner$ You | TokenScript$ r_
 SVar:X:Count$Valid Creature.YouCtrl
 K:MayEffectFromOpeningHand:RevealCard
 SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | SubAbility$ TokenOnUpkeep | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, create a 1/1 red Goblin creature token with haste.
-SVar:TokenOnUpkeep:DB$ Effect | Triggers$ TrigToken | SVars$ EffToken,RemoveMe | Name$ Chancellor of the Forge effect | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, create a 1/1 red Goblin creature token with haste.
+SVar:TokenOnUpkeep:DB$ Effect | Triggers$ TrigToken | Name$ Chancellor of the Forge effect | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, create a 1/1 red Goblin creature token with haste.
 SVar:TrigToken:Mode$ Phase | Phase$ Upkeep | Execute$ EffToken | TriggerDescription$ At the beginning of the first upkeep, create a 1/1 red Goblin creature token with haste.
 SVar:EffToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ r_1_1_goblin_haste | LegacyImage$ r 1 1 goblin haste nph | SubAbility$ RemoveMe
 SVar:RemoveMe:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
