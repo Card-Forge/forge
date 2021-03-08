@@ -231,8 +231,7 @@ public class FDeckChooser extends FScreen {
 
     @Override
     public void onActivate() {
-        //somehow a loaded deck state from startup don't refresh accordingly for imageview so refresh it on first activation
-        if(firstactivation) {
+        if(isAi() && firstactivation) {
             needRefreshOnActivate = true;
             firstactivation = false;
         }
