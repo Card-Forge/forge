@@ -6,12 +6,12 @@ Type=Reprint
 
 [cards]
 22 R Legion's Landing
-74 Search for Azcanta
+74 R Search for Azcanta
 90 R Arguel's Blood Fast
-173 Vance's Blasting Cannons
-191 Growing Rites of Itlimoc
-234 Conqueror's Galleon
-235 Dowsing Dagger
-243 Primal Amulet
-249 Thaumatic Compass
-250 Treasure Map
+173 R Vance's Blasting Cannons
+191 R Growing Rites of Itlimoc
+234 R Conqueror's Galleon
+235 R Dowsing Dagger
+243 R Primal Amulet
+249 R Thaumatic Compass
+250 R Treasure Map
