@@ -116,7 +116,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                     notification.append("(" + Localizer.getInstance().getMessage("lblEmptyPile") + ")");
                 }
 
-                p.getGame().getAction().nofityOfValue(sa, chooser, notification.toString(), chooser);
+                p.getGame().getAction().notifyOfValue(sa, chooser, notification.toString(), chooser);
 
                 // take action on the chosen pile
                 if (sa.hasParam("ChosenPile")) {

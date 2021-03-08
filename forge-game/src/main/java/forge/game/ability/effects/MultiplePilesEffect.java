@@ -92,7 +92,7 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
                 }
 
                 pileList.add(pool);
-                p.getGame().getAction().nofityOfValue(sa, p, pileList.toString(), p);
+                p.getGame().getAction().notifyOfValue(sa, p, pileList.toString(), p);
                 record.put(p, pileList);
             }
         }

@@ -1678,8 +1678,7 @@ public class GameAction {
     }
 
     /** Delivers a message to all players. (use reveal to show Cards) */
-    // TODO: Refactor for spelling
-    public void nofityOfValue(SpellAbility saSource, GameObject relatedTarget, String value, Player playerExcept) {
+    public void notifyOfValue(SpellAbility saSource, GameObject relatedTarget, String value, Player playerExcept) {
         for (Player p : game.getPlayers()) {
             if (playerExcept == p) continue;
             p.getController().notifyOfValue(saSource, relatedTarget, value);

@@ -62,7 +62,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
                         extra.setCantSetSchemesInMotion(true);
                     }
                     if (sa.hasParam("ShowMessage")) {
-                        p.getGame().getAction().nofityOfValue(sa, p, Localizer.getInstance().getMessage("lblPlayerTakesExtraTurn", p.toString()), null);
+                        p.getGame().getAction().notifyOfValue(sa, p, Localizer.getInstance().getMessage("lblPlayerTakesExtraTurn", p.toString()), null);
                     }
                 }
             }

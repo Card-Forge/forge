@@ -117,7 +117,7 @@ public class ClashEffect extends SpellAbilityEffect {
             reveal.append("\r\n\r\n");
             reveal.append(player).append(pCMC > oCMC ? " " + Localizer.getInstance().getMessage("lblWinsClash") + "." : " " + Localizer.getInstance().getMessage("lblLosesClash") + ".");
             
-            player.getGame().getAction().nofityOfValue(sa, source, reveal.toString(), null);
+            player.getGame().getAction().notifyOfValue(sa, source, reveal.toString(), null);
             clashMoveToTopOrBottom(player, pCard, sa);
             clashMoveToTopOrBottom(opponent, oCard, sa);
             return pCMC > oCMC;

@@ -96,7 +96,7 @@ public class ManaEffect extends SpellAbilityEffect {
                     return;
                 }
 
-                game.getAction().nofityOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), choiceString), p);
+                game.getAction().notifyOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), choiceString), p);
                 abMana.setExpressChoice(choiceString.toString());
             }
             else if (abMana.isAnyMana()) {
@@ -118,7 +118,7 @@ public class ManaEffect extends SpellAbilityEffect {
                 }
                 choice = MagicColor.toShortString(val);
 
-                game.getAction().nofityOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), choice), p);
+                game.getAction().notifyOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), choice), p);
                 abMana.setExpressChoice(choice);
             }
             else if (abMana.isSpecialMana()) {

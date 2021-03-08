@@ -60,7 +60,7 @@ public class BidLifeEffect extends SpellAbilityEffect {
                 if (result) { // a different choose number
                     bid += p.getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblBidLife") + ":", 1, 9);
                     winner = p;
-                    host.getGame().getAction().nofityOfValue(sa, p,  Localizer.getInstance().getMessage("lblTopBidWithValueLife", String.valueOf(bid)), p);
+                    host.getGame().getAction().notifyOfValue(sa, p,  Localizer.getInstance().getMessage("lblTopBidWithValueLife", String.valueOf(bid)), p);
                 }
             }
         }
