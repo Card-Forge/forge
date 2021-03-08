@@ -1,7 +1,6 @@
 Name:Null Brooch
 ManaCost:4
 Types:Artifact
-A:AB$ Counter | Cost$ 2 T Discard<0/Hand> | TargetType$ Spell | TgtPrompt$ Select target nonCreature spell | ValidTgts$ Card.nonCreature | AILogic$ NullBrooch | SpellDescription$ Counter target noncreature spell.
+A:AB$ Counter | Cost$ 2 T Discard<0/Hand> | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | AILogic$ NullBrooch | SpellDescription$ Counter target noncreature spell.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/null_brooch.jpg
 Oracle:{2}, {T}, Discard your hand: Counter target noncreature spell.

@@ -2,7 +2,6 @@ Name:Stronghold Machinist
 ManaCost:2 U
 Types:Creature Human Spellshaper
 PT:1/1
-A:AB$ Counter | Cost$ U U T Discard<1/Card> | TargetType$ Spell | TgtPrompt$ Select target nonCreature spell | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
+A:AB$ Counter | Cost$ U U T Discard<1/Card> | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_machinist.jpg
 Oracle:{U}{U}, {T}, Discard a card: Counter target noncreature spell.

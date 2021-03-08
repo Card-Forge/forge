@@ -29,7 +29,7 @@ public class ActivateAbilityEffect extends SpellAbilityEffect {
         sb.append(" activates ");
         sb.append(Lang.nounWithAmount(1, sa.hasParam("ManaAbility") ? "mana ability" : "ability"));
         sb.append(" of each ").append(sa.getParamOrDefault("Type", "Card"));
-        sb.append(" he or she controls.");
+        sb.append(" they control.");
 
         return sb.toString();
     }

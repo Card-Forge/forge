@@ -1,6 +1,5 @@
 Name:Spell Pierce
 ManaCost:U
 Types:Instant
-A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target nonCreature spell | ValidTgts$ Card.nonCreature | UnlessCost$ 2 | SpellDescription$ Counter target noncreature spell unless its controller pays {2}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_pierce.jpg
+A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | UnlessCost$ 2 | SpellDescription$ Counter target noncreature spell unless its controller pays {2}.
 Oracle:Counter target noncreature spell unless its controller pays {2}.
