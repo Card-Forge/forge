@@ -31,3 +31,4 @@ Type=Reprint
 174 R Genesis Hydra
 193 R Outland Colossus
 221 R Oran-Rief, the Vastwood
+235 R Stonecoil Serpent
