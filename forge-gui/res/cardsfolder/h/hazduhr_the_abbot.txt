@@ -2,8 +2,8 @@ Name:Hazduhr the Abbot
 ManaCost:3 W W
 Types:Legendary Creature Human Cleric
 PT:2/5
-A:AB$ ChooseCard | Cost$ T X | ValidTgts$ Creature.White+YouCtrl | TgtPrompt$ Select target white creature you control | Mandatory$ True | Defined$ You | RememberChosen$ True | SubAbility$ DBSetVarBefore | SpellDescription$ The next X damage that would be dealt this turn to target white creature you control is dealt to CARDNAME instead. | StackDescription$ SpellDescription
-SVar:DBSetVarBefore:DB$ StoreSVar | SVar$ Y | Type$ CountSVar | Expression$ X | SubAbility$ DBEffect
+A:AB$ ChooseCard | Cost$ X T | ValidTgts$ Creature.White+YouCtrl | TgtPrompt$ Select target white creature you control | Mandatory$ True | Defined$ You | RememberChosen$ True | SubAbility$ DBSetVarBefore | SpellDescription$ The next X damage that would be dealt this turn to target white creature you control is dealt to CARDNAME instead. | StackDescription$ SpellDescription
+SVar:DBSetVarBefore:DB$ StoreSVar | SVar$ Y | Type$ Calculate | Expression$ X | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ HazduhrDamage | Triggers$ OutOfSight | SVars$ HazduhrDamage,HazduhrDmg,ExileEffect,OutOfSight,Y | RememberObjects$ Targeted | ImprintCards$ Self | SubAbility$ DBCleanup
 SVar:HazduhrDamage:Event$ DamageDone | ValidTarget$ Card.IsRemembered | ReplaceWith$ HazduhrDmg | DamageTarget$ Imprinted | Description$ The next X damage that would be dealt this turn to target white creature you control is dealt to EFFECTSOURCE instead.
 SVar:HazduhrDmg:DB$ ReplaceSplitDamage | DamageTarget$ Imprinted | VarName$ Y
@@ -14,5 +14,4 @@ SVar:X:Count$xPaid
 #X Will get overwritten by Announce
 SVar:Y:Number$0
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hazduhr_the_abbot.jpg
 Oracle:{X}, {T}: The next X damage that would be dealt this turn to target white creature you control is dealt to Hazduhr the Abbot instead.
