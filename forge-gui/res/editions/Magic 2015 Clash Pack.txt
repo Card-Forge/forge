@@ -1,0 +1,13 @@
+[metadata]
+Code=CP1
+Date=2014-07-18
+Name=Magic 2015 Clash Pack
+Type=Reprint
+
+[cards]
+1 R Prognostic Sphinx
+2 R Fated Intervention
+3 R Font of Fertility
+4 R Hydra Broodmaster
+5 R Prophet of Kruphix
+6 R Temple of Mystery
