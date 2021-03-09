@@ -1,0 +1,13 @@
+[metadata]
+Code=CP2
+Date=2015-01-23
+Name=Fate Reforged Clash Pack
+Type=Reprint
+
+[cards]
+1 R Necropolis Fiend
+2 R Hero's Downfall
+3 R Sultai Ascendancy
+4 R Reaper of the Wilds
+5 R Whip of Erebos
+6 R Courser of Kruphix
