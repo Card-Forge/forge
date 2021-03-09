@@ -1,0 +1,13 @@
+[metadata]
+Code=CP3
+Date=2015-07-17
+Name=Magic Origins Clash Pack
+Type=Reprint
+
+[cards]
+1 R Honored Hierarch
+2 U Seeker of the Way
+3 U Valorous Stance
+4 R Dromoka, the Eternal
+5 R Siege Rhino
+6 U Sandsteppe Citadel
