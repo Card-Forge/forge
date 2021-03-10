@@ -2,7 +2,6 @@
 Code=CMB1
 Date=2019-11-07
 Name=Mystery Booster Playtest Cards
-Border=Silver
 Code2=CMB1
 MciCode=cmb1
 Type=Funny
