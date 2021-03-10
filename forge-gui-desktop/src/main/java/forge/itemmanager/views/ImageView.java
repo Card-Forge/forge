@@ -4,6 +4,7 @@ import forge.ImageCache;
 import forge.assets.FSkinProp;
 import forge.card.ColorSet;
 import forge.deck.DeckProxy;
+import forge.deck.io.DeckPreferences;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.gui.framework.ILocalRepaint;
@@ -223,6 +224,26 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 ItemInfo item = getItemAtPoint(e.getPoint());
                 if (item != null && item.selected) {
                     itemManager.activateSelectedItems();
+                }
+            }
+
+            @Override
+            public void onRightDoubleClick(MouseEvent e) {
+                if (lockInput) { return; }
+
+                ItemInfo item = getItemAtPoint(e.getPoint());
+                if (item != null && item.selected) {
+                    if (item.item instanceof DeckProxy) {
+                        DeckProxy dp = (DeckProxy) item.item;
+                        if (!dp.isGeneratedDeck()) {
+                            if (DeckPreferences.getPrefs(dp).getStarCount() > 0)
+                                DeckPreferences.getPrefs(dp).setStarCount(0);
+                            else
+                                DeckPreferences.getPrefs(dp).setStarCount(1);
+
+                            updateLayout(false);
+                        }
+                    }
                 }
             }
 
@@ -1177,6 +1198,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         if (deckColor != null) {
                             CardFaceSymbols.drawColorSet(g, deckColor, bounds.x + bounds.width - (scale*2) + cornerSize, bounds.y + bounds.height/2 - (scale*2), scale, true);
                         }
+                        //favorite
+                        FSkin.drawImage(g, DeckPreferences.getPrefs(dp).getStarCount() > 0 ? FSkin.getImage(FSkinProp.IMG_STAR_FILLED) : FSkin.getImage(FSkinProp.IMG_STAR_OUTLINE),
+                                bounds.x, bounds.y + bounds.height/2 - (scaleArt*2), scaleArt/2, scaleArt/2);
                     }
                 }
                 g.setColor(Color.white);
