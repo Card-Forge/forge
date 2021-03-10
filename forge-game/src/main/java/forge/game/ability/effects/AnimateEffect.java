@@ -12,7 +12,6 @@ import com.google.common.collect.Lists;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 
 public class AnimateEffect extends AnimateEffectBase {
@@ -23,7 +22,6 @@ public class AnimateEffect extends AnimateEffectBase {
     @Override
     public void resolve(final SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final Map<String, String> svars = source.getSVars();
 
         String animateRemembered = null;
 
@@ -85,8 +83,8 @@ public class AnimateEffect extends AnimateEffectBase {
         // allow SVar substitution for keywords
         for (int i = 0; i < keywords.size(); i++) {
             final String k = keywords.get(i);
-            if (svars.containsKey(k)) {
-                keywords.add(svars.get(k));
+            if (source.hasSVar(k)) {
+                keywords.add(source.getSVar(k));
                 keywords.remove(k);
             }
         }
@@ -178,7 +176,6 @@ public class AnimateEffect extends AnimateEffectBase {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Map<String, String> svars = host.getSVars();
 
         Integer power = null;
         if (sa.hasParam("Power")) {
@@ -200,8 +197,8 @@ public class AnimateEffect extends AnimateEffectBase {
         }
         // allow SVar substitution for keywords
         for (int i = 0; i < keywords.size(); i++) {
-            final String k = keywords.get(i);
-            if (svars.containsKey(k)) {
+            final String k = keywords.get(i);   
+            if (sa.hasSVar(k)) {
                 keywords.add("\"" + k + "\"");
                 keywords.remove(k);
             }

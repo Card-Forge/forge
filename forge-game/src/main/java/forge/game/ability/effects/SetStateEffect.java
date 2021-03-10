@@ -120,7 +120,7 @@ public class SetStateEffect extends SpellAbilityEffect {
                 // If want to Transform, and host is trying to transform self, skip if not in alignment
                 boolean skip = gameCard.getTransformedTimestamp() != Long.parseLong(sa.getSVar("StoredTransform"));
                 // Clear SVar from SA so it doesn't get reused accidentally
-                sa.getSVars().remove("StoredTransform");
+                sa.removeSVar("StoredTransform");
                 if (skip) {
                     continue;
                 }

@@ -358,7 +358,6 @@ public class AnimateAi extends SpellAbilityAi {
         // duplicating AnimateEffect.resolve
         final Card source = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
-        final Map<String, String> svars = source.getSVars();
         final long timestamp = game.getNextTimestamp();
         card.setSickness(hasOriginalCardSickness);
 
@@ -411,8 +410,8 @@ public class AnimateAi extends SpellAbilityAi {
         // allow SVar substitution for keywords
         for (int i = 0; i < keywords.size(); i++) {
             final String k = keywords.get(i);
-            if (svars.containsKey(k)) {
-                keywords.add(svars.get(k));
+            if (source.hasSVar(k)) {
+                keywords.add(source.getSVar(k));
                 keywords.remove(k);
             }
         }

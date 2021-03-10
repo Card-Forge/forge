@@ -177,7 +177,7 @@ public class EffectEffect extends SpellAbilityEffect {
                 for (final String s : effectReplacementEffects) {
                     final String actualReplacement = AbilityUtils.getSVar(sa, s);
 
-                    final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, eff, true, sa);
+                    final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, eff, true, eff.getCurrentState());
                     parsedReplacement.setActiveZone(EnumSet.of(ZoneType.Command));
                     parsedReplacement.setIntrinsic(true);
                     eff.addReplacementEffect(parsedReplacement);

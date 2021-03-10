@@ -506,7 +506,9 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
 
     @Override
     public Map<String, String> getSVars() {
-        return sVars;
+        Map<String, String> res = new HashMap<>(getSVarFallback().getSVars());
+        res.putAll(sVars);
+        return res;
     }
 
     @Override

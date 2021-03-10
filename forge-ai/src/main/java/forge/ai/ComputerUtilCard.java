@@ -1142,8 +1142,8 @@ public class ComputerUtilCard {
                 }
                 // if this thing has AILogic set to "Curse", it's probably meant as some form of disruption
                 if (!priority) {
-                    for (final String sVar : c.getSVars().keySet()) {
-                        if (c.getSVars().get(sVar).contains("AILogic$ Curse")) {
+                    for (final String value : c.getSVars().values()) {
+                        if (value.contains("AILogic$ Curse")) {
                             // this is a curse ability, so prioritize its removal
                             priority = true;
                             break;
