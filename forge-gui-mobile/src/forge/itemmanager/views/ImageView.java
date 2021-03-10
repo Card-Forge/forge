@@ -873,6 +873,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                             DeckPreferences.getPrefs(dp).setStarCount(0);
                         else
                             DeckPreferences.getPrefs(dp).setStarCount(1);
+
+                        updateLayout(false);
                     }
                 }
             }
