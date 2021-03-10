@@ -73,5 +73,4 @@ public class StoreSVarEffect extends SpellAbilityEffect {
             root = root.getSubAbility();
         }
     }
-
 }
