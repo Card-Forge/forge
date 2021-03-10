@@ -2,7 +2,7 @@
 Code=HA3
 Date=2020-05-21
 Name=Historic Anthology 3
-Type=Other
+Type=Online
 
 [cards]
 1 U Honden of Cleansing Fire

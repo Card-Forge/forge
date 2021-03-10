@@ -3,7 +3,7 @@ Code=TD0
 Date=2009-08-25
 Name=Commander Theme Decks
 MciCode=td0
-Type=Other
+Type=Online
 
 [cards]
 1 C Auramancer
