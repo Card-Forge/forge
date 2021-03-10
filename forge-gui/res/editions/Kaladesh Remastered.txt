@@ -4,7 +4,7 @@ Date=2020-11-12
 Name=Kaladesh Remastered
 BoosterCovers=1
 Booster=10 Common, 3 Uncommon, 1 RareMythic:fromSheet("KLR cards")
-Type=Expansion
+Type=Online
 
 [cards]
 1 U Aerial Responder

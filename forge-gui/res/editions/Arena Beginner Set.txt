@@ -2,7 +2,7 @@
 Code=ANB
 Date=2020-08-13
 Name=Arena Beginner Set
-Type=Other
+Type=Online
 
 [cards]
 U Affectionate Indrik

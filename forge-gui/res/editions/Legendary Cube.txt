@@ -4,7 +4,7 @@ Date=2015-11-18
 Name=Legendary Cube
 Code2=PZ1
 MciCode=pz1
-Type=Other
+Type=Online
 
 [cards]
 1 R Bastion Protector

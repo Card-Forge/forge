@@ -2,7 +2,7 @@
 Code=HA1
 Date=2019-11-21
 Name=Historic Anthology 1
-Type=Other
+Type=Online
 
 [cards]
 1 R Serra Ascendant

@@ -2,7 +2,7 @@
 Code=ANA
 Date=2018-07-12
 Name=Arena New Player Experience
-Type=Other
+Type=Online
 
 [cards]
 C Altar's Reap
