@@ -179,7 +179,8 @@ public class ConquestUtil {
         return Iterables.filter(FModel.getMagicDb().getCommonCards(), new Predicate<PaperCard>() {
             @Override
             public boolean apply(PaperCard card) {
-                if (FModel.getMagicDb().getEditions().get(card.getEdition()).getType() == CardEdition.Type.REPRINT) {
+                if (FModel.getMagicDb().getEditions().get(card.getEdition()).getType() == CardEdition.Type.PROMOS
+                    || FModel.getMagicDb().getEditions().get(card.getEdition()).getType() == CardEdition.Type.REPRINT) {
                     return false; // exclude promos from the starting planeswalker set
                 }
                 if (selected.contains(card.getName())) {
