@@ -1009,15 +1009,15 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 float scale = 0.75f;
 
                 if (dpImg != null) {//generated decks have missing info...
-                    if (Forge.enableUIMask.equals("Full")){
+                    if (Forge.enableUIMask.equals("Off")){
+                        if (selected)
+                            g.fillRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
+                        g.drawImage(dpImg, x, y, w, h);
+                    } else {
                         //commander bg
                         g.drawImage(FSkin.getDeckbox().get(0), FSkin.getDeckbox().get(0), x, y, w, h, Color.GREEN, selected);
                         TextureRegion tr = ImageCache.croppedBorderImage(dpImg);
                         g.drawImage(tr, x+(w-w*scale)/2, y+(h-h*scale)/1.5f, w*scale, h*scale);
-                    } else {
-                        if (selected)
-                            g.fillRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
-                        g.drawImage(dpImg, x, y, w, h);
                     }
                     //fake labelname shadow
                     g.drawText(item.getName(), GROUP_HEADER_FONT, Color.BLACK, (x + PADDING)-1f, (y + PADDING*2)+1f, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);

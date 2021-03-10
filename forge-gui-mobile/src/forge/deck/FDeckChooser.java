@@ -68,7 +68,6 @@ public class FDeckChooser extends FScreen {
     private NetDeckArchiveLegacy NetDeckArchiveLegacy;
     private NetDeckArchiveVintage NetDeckArchiveVintage;
     private boolean refreshingDeckType;
-    private boolean firstactivation = true;
 
     private final DeckManager lstDecks;
     private final FButton btnNewDeck = new FButton(Localizer.getInstance().getMessage("lblNewDeck"));
@@ -231,12 +230,10 @@ public class FDeckChooser extends FScreen {
 
     @Override
     public void onActivate() {
-        String aiSelected = "";
-        if(isAi() && firstactivation) {
-            needRefreshOnActivate = true;
-            firstactivation = false;
-            aiSelected = lstDecks.getSelectedItem().getDeck().toString();
-        }
+        //todo how to get the lobby player net deck category when activating the deck manager in homescreen?
+        String selectedDeck = "";
+        if (lstDecks.getSelectedItem() != null)
+            selectedDeck = lstDecks.getSelectedItem().getDeck().toString();
         if (needRefreshOnActivate) {
             needRefreshOnActivate = false;
             refreshDecksList(selectedDeckType, true, null);
@@ -291,10 +288,8 @@ public class FDeckChooser extends FScreen {
                 }
                 break;
             default:
-                if (isAi())
-                    lstDecks.setSelectedString(aiSelected);
-                else
-                    lstDecks.setSelectedString(DeckPreferences.getCurrentDeck());
+                if (!lstDecks.setSelectedString(DeckPreferences.getCurrentDeck()))
+                    lstDecks.setSelectedString(selectedDeck);
                 break;
             }
         }
