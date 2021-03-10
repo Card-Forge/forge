@@ -79,11 +79,6 @@ public enum EDocID {
     REPORT_COMBAT (),
     REPORT_LOG (),
 
-    // Player panel, deprecated, to be removed in a few months
-    // from now (2015-04-10) to allow users' match layouts to update
-    @Deprecated
-    REPORT_PLAYERS (),
-
     DEV_MODE (),
     BUTTON_DOCK (),
 
@@ -105,36 +100,13 @@ public enum EDocID {
     HAND_4 (),
     HAND_5 (),
     HAND_6 (),
-    HAND_7 (),
-
-    // Command zones, deprecated, to be removed in a few months
-    // from now (2015-04-10) to allow users' match layouts to update
-    @Deprecated
-    COMMAND_0 (),
-    @Deprecated
-    COMMAND_1 (),
-    @Deprecated
-    COMMAND_2 (),
-    @Deprecated
-    COMMAND_3 (),
-    @Deprecated
-    COMMAND_4 (),
-    @Deprecated
-    COMMAND_5 (),
-    @Deprecated
-    COMMAND_6 (),
-    @Deprecated
-    COMMAND_7 ();
+    HAND_7 ();
 
     public final static EDocID[] Fields = new EDocID[] {FIELD_0, FIELD_1, FIELD_2, FIELD_3, FIELD_4, FIELD_5, FIELD_6, FIELD_7};
     public final static EDocID[] Hands = new EDocID[] {HAND_0, HAND_1, HAND_2, HAND_3, HAND_4, HAND_5, HAND_6, HAND_7};
     static {
         for (int i = 0; i < 8; i++) EDocID.Fields[i].setDoc(new VEmptyDoc(EDocID.Fields[i]));
         for (int i = 0; i < 8; i++) EDocID.Hands[i].setDoc(new VEmptyDoc(EDocID.Hands[i]));
-
-        for (final EDocID deprecated : new EDocID[] {REPORT_PLAYERS, COMMAND_0, COMMAND_1, COMMAND_2, COMMAND_3, COMMAND_4, COMMAND_5, COMMAND_6, COMMAND_7}) {
-            deprecated.setDoc(new VEmptyDoc(deprecated));
-        }
     }
     public final static EDocID[] VarDocs = ObjectArrays.concat(Fields, Hands, EDocID.class);
 
