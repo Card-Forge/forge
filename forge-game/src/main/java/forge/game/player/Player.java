@@ -2577,14 +2577,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         for (final Card card : game.getCardsIn(ZoneType.Stack)) {
             if (!card.equals(source)) {
                 onlyThis = false;
-                //System.out.println("StackCard: " + card + " vs SourceCard: " + source);
             }
         }
 
         PhaseHandler now = game.getPhaseHandler();
-        //System.out.println("now.isPlayerTurn(player) - " + now.isPlayerTurn(player));
-        //System.out.println("now.getPhase().isMain() - " + now.getPhase().isMain());
-        //System.out.println("onlyThis - " + onlyThis);
         return onlyThis && now.isPlayerTurn(this) && now.getPhase().isMain();
     }
 
@@ -3144,11 +3140,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         DetachedCardEffect eff = new DetachedCardEffect(companion, name);
 
         String addToHandAbility = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouOwn+EffectSource | AffectedZone$ Command | AddAbility$ MoveToHand";
-        String moveToHand = "ST$ ChangeZone | Cost$ 3 | Defined$ Self | Origin$ Command | Destination$ Hand | ActivationZone$ Command | SpellDescription$ Companion - Put CARDNAME in to your hand";
+        String moveToHand = "ST$ ChangeZone | Cost$ 3 | Defined$ Self | Origin$ Command | Destination$ Hand | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Companion - Put CARDNAME in to your hand";
         eff.setSVar("MoveToHand", moveToHand);
         eff.addStaticAbility(addToHandAbility);
 
-        // TODO Probably remove this effect when the moved to hand
         return eff;
     }
 
