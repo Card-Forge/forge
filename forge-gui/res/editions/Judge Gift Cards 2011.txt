@@ -2,7 +2,7 @@
 Code=G11
 Date=2011-01-01
 Name=Judge Gift Cards 2011
-Type=Reprint
+Type=Promos
 
 [cards]
 1 R Bitterblossom

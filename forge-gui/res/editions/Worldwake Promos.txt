@@ -2,7 +2,7 @@
 Code=PWWK
 Date=2010-04-05
 Name=Worldwake Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 28 R Hada Freeblade

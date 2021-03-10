@@ -2,7 +2,7 @@
 Code=PMOR
 Date=2008-02-01
 Name=Morningtide Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 60 R Earwig Squad

@@ -2,7 +2,7 @@
 Code=PDGM
 Date=2013-04-27
 Name=Dragon's Maze Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 84 R Melek, Izzet Paragon

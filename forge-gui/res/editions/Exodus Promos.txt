@@ -2,7 +2,7 @@
 Code=PEXO
 Date=1998-06-15
 Name=Exodus Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 89 R Monstrous Hound

@@ -2,7 +2,7 @@
 Code=PM20
 Date=2019-07-02
 Name=Core Set 2020 Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 69 C Negate

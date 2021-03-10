@@ -4,7 +4,7 @@ Code2=UND
 Date=2020-02-29
 Name=Unsanctioned
 MciCode=und
-Type=Other
+Type=Funny
 Border=Silver
 
 [cards]

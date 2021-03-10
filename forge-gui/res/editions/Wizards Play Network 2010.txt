@@ -2,7 +2,7 @@
 Code=PWP10
 Date=2010-01-01
 Name=Wizards Play Network 2010
-Type=Reprint
+Type=Promos
 
 [cards]
 36 R Kor Firewalker

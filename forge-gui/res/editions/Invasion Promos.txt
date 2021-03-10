@@ -2,7 +2,7 @@
 Code=PINV
 Date=2000-10-02
 Name=Invasion Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 262 R Raging Kavu

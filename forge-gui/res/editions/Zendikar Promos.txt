@@ -2,7 +2,7 @@
 Code=PZEN
 Date=2009-10-02
 Name=Zendikar Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 9 R Day of Judgment

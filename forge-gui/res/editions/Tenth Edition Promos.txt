@@ -2,7 +2,7 @@
 Code=P10E
 Date=2007-07-13
 Name=Tenth Edition Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 35 R Reya Dawnbringer

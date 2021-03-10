@@ -2,7 +2,7 @@
 Code=PSS2
 Date=2017-09-29
 Name=XLN Standard Showdown
-Type=Reprint
+Type=Promos
 
 [cards]
 1 R Plains

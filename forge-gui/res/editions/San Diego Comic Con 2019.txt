@@ -2,7 +2,7 @@
 Code=PS19
 Date=2019-07-18
 Name=San Diego Comic-Con 2019
-Type=Reprint
+Type=Promos
 
 [cards]
 16 M God-Eternal Oketra

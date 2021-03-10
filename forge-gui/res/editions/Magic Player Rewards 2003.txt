@@ -2,7 +2,7 @@
 Code=P03
 Date=2003-01-01
 Name=Magic Player Rewards 2003
-Type=Reprint
+Type=Promos
 
 [cards]
 1 R Voidmage Prodigy

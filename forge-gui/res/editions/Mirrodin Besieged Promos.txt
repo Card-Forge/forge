@@ -2,7 +2,7 @@
 Code=PMBS
 Date=2011-02-03
 Name=Mirrodin Besieged Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 8 M Hero of Bladehold

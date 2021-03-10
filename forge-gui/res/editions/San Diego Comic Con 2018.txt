@@ -2,7 +2,7 @@
 Code=PS18
 Date=2018-07-19
 Name=San Diego Comic-Con 2018
-Type=Reprint
+Type=Promos
 
 [cards]
 14 M Gideon of the Trials

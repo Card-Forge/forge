@@ -2,7 +2,7 @@
 Code=PAKH
 Date=2017-04-28
 Name=Amonkhet Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 35 U Trueheart Duelist

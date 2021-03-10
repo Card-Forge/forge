@@ -2,7 +2,7 @@
 Code=PALA
 Date=2008-01-01
 Name=Shards of Alara Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 154 M Ajani Vengeant

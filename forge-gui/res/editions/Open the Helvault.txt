@@ -2,7 +2,7 @@
 Code=PHEL
 Date=2012-04-28
 Name=Open the Helvault
-Type=Reprint
+Type=Promos
 
 [cards]
 6 M Avacyn, Angel of Hope

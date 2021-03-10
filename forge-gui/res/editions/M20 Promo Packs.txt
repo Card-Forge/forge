@@ -2,7 +2,7 @@
 Code=PPP1
 Date=2019-07-12
 Name=M20 Promo Packs
-Type=Reprint
+Type=Promos
 
 [cards]
 1 R Plains

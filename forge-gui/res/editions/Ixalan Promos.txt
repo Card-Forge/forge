@@ -2,7 +2,7 @@
 Code=PXLN
 Date=2017-09-29
 Name=Ixalan Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 5 R Bishop of Rebirth
