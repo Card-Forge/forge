@@ -230,13 +230,10 @@ public class FDeckChooser extends FScreen {
 
     @Override
     public void onActivate() {
+        //todo how to get the lobby player net deck category when activating the deck manager in homescreen?
         String selectedDeck = "";
-        if(lstDecks.getConfig().getViewIndex() == 1) {
-            //todo: investigate why sometimes it doesn't update the display on deck imageview even though the decks are there?
-            needRefreshOnActivate = true;
-            if (lstDecks.getSelectedItem() != null)
-                selectedDeck = lstDecks.getSelectedItem().getDeck().toString();
-        }
+        if (lstDecks.getSelectedItem() != null)
+            selectedDeck = lstDecks.getSelectedItem().getDeck().toString();
         if (needRefreshOnActivate) {
             needRefreshOnActivate = false;
             refreshDecksList(selectedDeckType, true, null);
@@ -286,7 +283,6 @@ public class FDeckChooser extends FScreen {
                     lstDecks.setSelectedString(DeckPreferences.getSealedDeck());
                     break;
                 default:
-                    //FIXME: set the deckmanager netdeck category when activating the deckmanager in homescreen
                     lstDecks.setSelectedString(DeckPreferences.getCurrentDeck());
                     break;
                 }
