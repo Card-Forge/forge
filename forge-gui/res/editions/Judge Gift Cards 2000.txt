@@ -2,7 +2,7 @@
 Code=G00
 Date=2000-01-01
 Name=Judge Gift Cards 2000
-Type=Reprint
+Type=Promos
 
 [cards]
 1 R Counterspell

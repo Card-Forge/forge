@@ -2,7 +2,7 @@
 Code=PLRW
 Date=2008-01-01
 Name=Lorwyn Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 139 R Shriekmaw

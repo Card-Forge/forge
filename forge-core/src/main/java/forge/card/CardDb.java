@@ -171,12 +171,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         List<String> missingCards = new ArrayList<>();
         CardEdition upcomingSet = null;
         Date today = new Date();
+        boolean skip = false;
 
         for (CardEdition e : editions.getOrderedEditions()) {
             boolean coreOrExpSet = e.getType() == CardEdition.Type.CORE || e.getType() == CardEdition.Type.EXPANSION;
             boolean isCoreExpSet = coreOrExpSet || e.getType() == CardEdition.Type.REPRINT;
             //todo sets with nonlegal cards should have tags in them so we don't need to specify the code here
-            boolean skip = !loadNonLegalCards && (e.getCode().equals("CMB1") || e.getBorderColor() == CardEdition.BorderColor.SILVER);
+            skip = !loadNonLegalCards && (e.getType() == CardEdition.Type.FUNNY || e.getBorderColor() == CardEdition.BorderColor.SILVER);
             if (logMissingPerEdition && isCoreExpSet) {
                 System.out.print(e.getName() + " (" + e.getAllCardsInSet().size() + " cards)");
             }
@@ -225,7 +226,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if (!contains(cr.getName())) {
                 if (upcomingSet != null) {
                     addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown, 1));
-                } else if(enableUnknownCards) {
+                } else if(enableUnknownCards && !skip) {
                     System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
                     addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 1));
                 }

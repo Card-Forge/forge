@@ -2,7 +2,7 @@
 Code=PJAS
 Date=2006-01-01
 Name=Junior APAC Series
-Type=Reprint
+Type=Promos
 
 [cards]
 6 R Sakura-Tribe Elder

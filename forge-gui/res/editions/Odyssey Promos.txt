@@ -2,7 +2,7 @@
 Code=PODY
 Date=2001-10-01
 Name=Odyssey Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 276 R Stone-Tongue Basilisk

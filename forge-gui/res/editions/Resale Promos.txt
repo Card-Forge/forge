@@ -2,7 +2,7 @@
 Code=PRES
 Date=2007-01-01
 Name=Resale Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 1 R Jaya Ballard, Task Mage

@@ -2,7 +2,7 @@
 Code=PRED
 Date=1996-10-01
 Name=Redemption Program
-Type=Reprint
+Type=Promos
 
 [cards]
 1 R Nalathni Dragon

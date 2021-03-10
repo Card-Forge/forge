@@ -2,7 +2,7 @@
 Code=PEMN
 Date=2016-07-22
 Name=Eldritch Moon Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 39 R Sanctifier of Souls

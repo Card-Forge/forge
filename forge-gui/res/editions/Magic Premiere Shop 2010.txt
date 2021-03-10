@@ -2,7 +2,7 @@
 Code=PMPS10
 Date=2010-01-01
 Name=Magic Premiere Shop 2010
-Type=Reprint
+Type=Promos
 
 [cards]
 1 R Plains

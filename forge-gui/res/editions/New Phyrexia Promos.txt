@@ -2,7 +2,7 @@
 Code=PNPH
 Date=2011-05-12
 Name=New Phyrexia Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 42 R Phyrexian Metamorph

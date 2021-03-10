@@ -2,7 +2,7 @@
 Name=Online Promos
 Code=PRM
 Date=2002-06-24
-Type=Reprint
+Type=Promos
 
 [cards]
 1 S Abbot of Keral Keep

@@ -2,7 +2,7 @@
 Code=PNAT
 Date=2018-01-25
 Name=Nationals Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 2018 R Flooded Strand

@@ -2,7 +2,7 @@
 Code=PTKDF
 Date=2015-04-03
 Name=Tarkir Dragonfury
-Type=Reprint
+Type=Promos
 
 [cards]
 135 C Dragon Fodder

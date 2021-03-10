@@ -2,7 +2,7 @@
 Code=PISD
 Date=2011-01-01
 Name=Innistrad Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 13 R Elite Inquisitor

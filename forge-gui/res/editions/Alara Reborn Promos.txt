@@ -2,7 +2,7 @@
 Code=PARB
 Date=2009-04-30
 Name=Alara Reborn Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 53 M Dragon Broodmother

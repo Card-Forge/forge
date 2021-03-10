@@ -2,7 +2,7 @@
 Code=PDKA
 Date=2012-01-28
 Name=Dark Ascension Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 64 R Gravecrawler

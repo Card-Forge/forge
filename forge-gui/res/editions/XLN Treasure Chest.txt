@@ -2,7 +2,7 @@
 Code=PXTC
 Date=2017-11-24
 Name=XLN Treasure Chest
-Type=Reprint
+Type=Promos
 
 [cards]
 22 R Legion's Landing

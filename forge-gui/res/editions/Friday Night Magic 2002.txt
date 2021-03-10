@@ -2,7 +2,7 @@
 Code=F02
 Date=2002-01-01
 Name=Friday Night Magic 2002
-Type=Reprint
+Type=Promos
 
 [cards]
 1 R Soltari Priest

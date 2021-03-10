@@ -2,7 +2,7 @@
 Code=PUST
 Date=2017-11-13
 Name=Unstable Promos
-Type=Reprint
+Type=Funny
 Border=Silver
 
 [cards]

@@ -2,7 +2,7 @@
 Code=PLGN
 Date=2003-02-03
 Name=Legions Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 126 R Feral Throwback

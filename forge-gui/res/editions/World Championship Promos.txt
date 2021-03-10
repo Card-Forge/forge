@@ -2,7 +2,7 @@
 Code=PWOR
 Date=1999-08-04
 Name=World Championship Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 1 R Balduvian Horde

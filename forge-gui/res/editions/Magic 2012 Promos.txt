@@ -2,7 +2,7 @@
 Code=PM12
 Date=2012-01-01
 Name=Magic 2012 Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 82 M Bloodlord of Vaasgoth

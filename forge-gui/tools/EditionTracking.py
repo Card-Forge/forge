@@ -13,7 +13,7 @@ allJson = os.path.join(toolsDir, 'AllCards.json')
 allJsonUrl = 'http://mtgjson.com/json/AllCards.json'
 
 def initializeEditions():
-	ignoredTypes = [ "From_the_Vault", "Duel_Decks", "Online", "Premium_Deck_Series" ]
+	ignoredTypes = [ "From_the_Vault", "Duel_Decks", "Online", "Premium_Deck_Series" , "Funny" , "Promos"]
 	ignoredBorders = [ "Silver" ]
 	editionSections = [ "[cards]", "[precon product]", "[borderless]", "[showcase]", "[extended art]", "[buy a box]", "[promo]" ]
 

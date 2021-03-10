@@ -65,6 +65,8 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         FROM_THE_VAULT,
 
         OTHER,
+        PROMOS,
+        FUNNY,
         THIRDPARTY; // custom sets
 
         public String getBoosterBoxDefault() {

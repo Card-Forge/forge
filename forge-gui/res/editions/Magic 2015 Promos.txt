@@ -2,7 +2,7 @@
 Code=PM15
 Date=2014-07-17
 Name=Magic 2015 Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 28 R Resolute Archangel

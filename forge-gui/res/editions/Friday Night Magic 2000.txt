@@ -2,7 +2,7 @@
 Code=FNM
 Date=2000-01-01
 Name=Friday Night Magic 2000 
-Type=Reprint
+Type=Promos
 
 [cards]
 1 R River Boa

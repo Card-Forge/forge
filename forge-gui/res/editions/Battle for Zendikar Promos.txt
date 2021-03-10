@@ -2,7 +2,7 @@
 Code=PBFZ
 Date=2015-10-03
 Name=Battle for Zendikar Promos
-Type=Reprint
+Type=Promos
 
 [cards]
 2 R Blight Herder
