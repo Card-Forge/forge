@@ -232,13 +232,22 @@ public class FDeckChooser extends FScreen {
     @Override
     public void onActivate() {
         String selectedDeck = "";
-        if (lstDecks.getSelectedItem() != null)
+        int index = 0;
+        if (lstDecks.getSelectedItem() != null) {
             selectedDeck = lstDecks.getSelectedItem().getDeck().toString();
-        if (lstDecks.getConfig().getViewIndex() == 1 && selectedDeckType.name().startsWith("NET_")) {
-            if (firstActivation) {
-                firstActivation = false;
-                lstDecks.refresh();
+            index = lstDecks.getSelectedIndex();
+        }
+        if (lstDecks.getConfig().getViewIndex() == 1 && firstActivation) {
+            firstActivation = false;
+            lstDecks.refresh();
+            if (selectedDeckType.name().startsWith("NET_")) {
+                //we can't use the index here since net decks are updated and may add decks and can be inserted anywhere
                 lstDecks.setSelectedString(selectedDeck);
+            } else {
+                //we use index here as a workaround, if the provided decks are updated somehow at least it will refresh the display
+                if (lstDecks.getSelectedIndex() < 0) {
+                    lstDecks.setSelectedIndex(index);
+                }
             }
         } else if (needRefreshOnActivate) {
             needRefreshOnActivate = false;
