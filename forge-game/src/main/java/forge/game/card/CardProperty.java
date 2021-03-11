@@ -17,6 +17,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
@@ -1622,6 +1623,9 @@ public class CardProperty {
             if (band == null || !band.getAttackers().contains(card)) {
                 return false;
             }
+        } else if (property.equals("couldAttackButNotAttacking")) {
+            if (!game.getPhaseHandler().isPlayerTurn(controller)) return false;
+            return CombatUtil.couldAttackButNotAttacking(combat, card);
         } else if (property.startsWith("kicked")) {
             if (property.equals("kicked")) {
                 if (card.getKickerMagnitude() == 0) {

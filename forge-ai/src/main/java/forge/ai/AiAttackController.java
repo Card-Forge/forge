@@ -682,6 +682,8 @@ public class AiAttackController {
         final boolean bAssault = this.doAssault(ai);
         // TODO: detect Lightmine Field by presence of a card with a specific trigger
         final boolean lightmineField = ComputerUtilCard.isPresentOnBattlefield(ai.getGame(), "Lightmine Field");
+        // TODO: detect Season of the Witch by presence of a card with a specific trigger
+        final boolean seasonOfTheWitch = ComputerUtilCard.isPresentOnBattlefield(ai.getGame(), "Season of the Witch");
 
         // Determine who will be attacked
         GameEntity defender = this.chooseDefender(combat, bAssault);
@@ -714,6 +716,9 @@ public class AiAttackController {
                 mustAttack = true;
             } else if (attacker.hasSVar("EndOfTurnLeavePlay")
                     && isEffectiveAttacker(ai, attacker, combat)) {
+                mustAttack = true;
+            } else if (seasonOfTheWitch) {
+                // TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
                 mustAttack = true;
             } else {
                 for (KeywordInterface inst : attacker.getKeywords()) {
