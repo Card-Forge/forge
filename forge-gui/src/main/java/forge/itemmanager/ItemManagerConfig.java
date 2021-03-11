@@ -110,6 +110,8 @@ public enum ItemManagerConfig {
             null, null, 3, 0),
     NET_ARCHIVE_VINTAGE_DECKS(SColumnUtil.getDecksDefaultColumns(false, false), false, false, false,
             null, null, 3, 0),
+    NET_ARCHIVE_BLOCK_DECKS(SColumnUtil.getDecksDefaultColumns(false, false), false, false, false,
+            null, null, 3, 0),
     SIDEBOARD(SColumnUtil.getDeckEditorDefaultColumns(), false, false, true,
             GroupDef.DEFAULT, ColumnDef.CMC, 3, 0);
 
