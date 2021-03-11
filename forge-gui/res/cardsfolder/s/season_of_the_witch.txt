@@ -1,0 +1,13 @@
+Name:Season of the Witch
+ManaCost:B B B
+Types:Enchantment
+K:UpkeepCost:PayLife<2>
+T:Mode$ Phase | Mode$ Phase | Phase$ Declare Attackers | Execute$ TrigMarkCouldAttack | Static$ True
+SVar:TrigMarkCouldAttack:DB$ PumpAll | ValidCards$ Creature.couldAttackButNotAttacking | RememberAllPumped$ True
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ At the beginning of the end step, destroy all untapped creatures that didn't attack this turn, except for creatures that couldn't attack.
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Creature.untapped+IsRemembered
+T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigCleanup | Static$ True
+SVar:TrigCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:At the beginning of your upkeep, sacrifice Season of the Witch unless you pay 2 life.\nAt the beginning of the end step, destroy all untapped creatures that didn't attack this turn, except for creatures that couldn't attack.

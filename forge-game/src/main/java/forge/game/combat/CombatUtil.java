@@ -45,6 +45,7 @@ import forge.util.collect.FCollectionView;
 import forge.util.maps.MapToAmount;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -80,6 +81,38 @@ public class CombatUtil {
             return false;
         }
         return myViolations <= bestAttack.getRight().intValue();
+    }
+
+    /**
+     * Check if attacker could attack without violating any constraints.
+     */
+    public static boolean couldAttackButNotAttacking(Combat combat, final Card attacker) {
+        // If the player didn't declare attackers, combat here will be null
+        if (combat == null) {
+            combat = new Combat(attacker.getController());
+        } else if (combat.isAttacking(attacker)) {
+            return false;
+        }
+
+        final AttackConstraints constraints = combat.getAttackConstraints();
+        final Pair<Map<Card, GameEntity>, Integer> bestAttack = constraints.getLegalAttackers();
+        final Map<Card, GameEntity> attackers = new HashMap<>(combat.getAttackersAndDefenders());
+        final Game game = attacker.getGame();
+
+        return Iterables.any(getAllPossibleDefenders(attacker.getController()), new Predicate<GameEntity>() {
+            @Override
+            public boolean apply(final GameEntity defender) {
+                if (!canAttack(attacker, defender) || getAttackCost(game, attacker, defender) != null) {
+                    return false;
+                }
+                attackers.put(attacker, defender);
+                final int myViolations = constraints.countViolations(attackers);
+                if (myViolations == -1) {
+                    return false;
+                }
+                return myViolations <= bestAttack.getRight().intValue();
+            }
+        });
     }
 
     /**
