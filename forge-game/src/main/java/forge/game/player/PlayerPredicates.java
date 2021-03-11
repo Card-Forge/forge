@@ -18,7 +18,7 @@ public final class PlayerPredicates {
         return new Predicate<Player>() {
             @Override
             public boolean apply(final Player p) {
-                return p.canBeTargetedBy(source);
+                return source.canTarget(p);
             }
         };
     }
