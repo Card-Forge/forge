@@ -68,6 +68,7 @@ public class FDeckChooser extends FScreen {
     private NetDeckArchiveLegacy NetDeckArchiveLegacy;
     private NetDeckArchiveVintage NetDeckArchiveVintage;
     private boolean refreshingDeckType;
+    private boolean firstActivation = true;
 
     private final DeckManager lstDecks;
     private final FButton btnNewDeck = new FButton(Localizer.getInstance().getMessage("lblNewDeck"));
@@ -230,67 +231,72 @@ public class FDeckChooser extends FScreen {
 
     @Override
     public void onActivate() {
-        //todo how to get the lobby player net deck category when activating the deck manager in homescreen?
         String selectedDeck = "";
         if (lstDecks.getSelectedItem() != null)
             selectedDeck = lstDecks.getSelectedItem().getDeck().toString();
-        if (needRefreshOnActivate) {
+        if (lstDecks.getConfig().getViewIndex() == 1 && selectedDeckType.name().startsWith("NET_")) {
+            if (firstActivation) {
+                firstActivation = false;
+                lstDecks.refresh();
+                lstDecks.setSelectedString(selectedDeck);
+            }
+        } else if (needRefreshOnActivate) {
             needRefreshOnActivate = false;
             refreshDecksList(selectedDeckType, true, null);
             switch (lstDecks.getGameType()) {
-            case Commander:
-                lstDecks.setSelectedString(DeckPreferences.getCommanderDeck());
-                break;
-            case Oathbreaker:
-                lstDecks.setSelectedString(DeckPreferences.getOathbreakerDeck());
-                break;
-            case TinyLeaders:
-                lstDecks.setSelectedString(DeckPreferences.getTinyLeadersDeck());
-                break;
-            case Brawl:
-                lstDecks.setSelectedString(DeckPreferences.getBrawlDeck());
-                break;
-            case Archenemy:
-                lstDecks.setSelectedString(DeckPreferences.getSchemeDeck());
-                break;
-            case Planechase:
-                lstDecks.setSelectedString(DeckPreferences.getPlanarDeck());
-                break;
-            case DeckManager:
-                switch (selectedDeckType) {
-                case COMMANDER_DECK:
+                case Commander:
                     lstDecks.setSelectedString(DeckPreferences.getCommanderDeck());
                     break;
-                case OATHBREAKER_DECK:
+                case Oathbreaker:
                     lstDecks.setSelectedString(DeckPreferences.getOathbreakerDeck());
                     break;
-                case TINY_LEADERS_DECK:
+                case TinyLeaders:
                     lstDecks.setSelectedString(DeckPreferences.getTinyLeadersDeck());
                     break;
-                case BRAWL_DECK:
+                case Brawl:
                     lstDecks.setSelectedString(DeckPreferences.getBrawlDeck());
                     break;
-                case SCHEME_DECK:
+                case Archenemy:
                     lstDecks.setSelectedString(DeckPreferences.getSchemeDeck());
                     break;
-                case PLANAR_DECK:
+                case Planechase:
                     lstDecks.setSelectedString(DeckPreferences.getPlanarDeck());
                     break;
-                case DRAFT_DECK:
-                    lstDecks.setSelectedString(DeckPreferences.getDraftDeck());
-                    break;
-                case SEALED_DECK:
-                    lstDecks.setSelectedString(DeckPreferences.getSealedDeck());
+                case DeckManager:
+                    switch (selectedDeckType) {
+                        case COMMANDER_DECK:
+                            lstDecks.setSelectedString(DeckPreferences.getCommanderDeck());
+                            break;
+                        case OATHBREAKER_DECK:
+                            lstDecks.setSelectedString(DeckPreferences.getOathbreakerDeck());
+                            break;
+                        case TINY_LEADERS_DECK:
+                            lstDecks.setSelectedString(DeckPreferences.getTinyLeadersDeck());
+                            break;
+                        case BRAWL_DECK:
+                            lstDecks.setSelectedString(DeckPreferences.getBrawlDeck());
+                            break;
+                        case SCHEME_DECK:
+                            lstDecks.setSelectedString(DeckPreferences.getSchemeDeck());
+                            break;
+                        case PLANAR_DECK:
+                            lstDecks.setSelectedString(DeckPreferences.getPlanarDeck());
+                            break;
+                        case DRAFT_DECK:
+                            lstDecks.setSelectedString(DeckPreferences.getDraftDeck());
+                            break;
+                        case SEALED_DECK:
+                            lstDecks.setSelectedString(DeckPreferences.getSealedDeck());
+                            break;
+                        default:
+                            lstDecks.setSelectedString(DeckPreferences.getCurrentDeck());
+                            break;
+                    }
                     break;
                 default:
-                    lstDecks.setSelectedString(DeckPreferences.getCurrentDeck());
+                    if (!lstDecks.setSelectedString(DeckPreferences.getCurrentDeck()))
+                        lstDecks.setSelectedString(selectedDeck);
                     break;
-                }
-                break;
-            default:
-                if (!lstDecks.setSelectedString(DeckPreferences.getCurrentDeck()))
-                    lstDecks.setSelectedString(selectedDeck);
-                break;
             }
         }
     }
