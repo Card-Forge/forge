@@ -169,6 +169,10 @@ public class PlayerProperty {
             if (player.getAssignedDamage() == 0) {
                 return false;
             }
+        }  else if (property.equals("Defending")) {
+            if (!player.getGame().getCombat().getAttackersAndDefenders().values().contains(player)) {
+                return false;
+            }
         } else if (property.equals("wasDealtCombatDamageThisTurn")) {
             if (player.getAssignedCombatDamage() == 0) {
                 return false;
