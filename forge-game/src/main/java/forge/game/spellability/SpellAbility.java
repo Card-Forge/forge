@@ -2231,6 +2231,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean canCastTiming(Card host, Player activator) {
+        // for companion
+        if (this instanceof AbilityStatic && getRestrictions().isSorcerySpeed() && !activator.canCastSorcery()) {
+            return false;
+        }
+
         // no spell or no activated ability, no check there
         if (!isSpell() && !isActivatedAbility()) {
             return true;
