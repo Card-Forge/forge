@@ -122,6 +122,9 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     chosen.addAll(p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount, !sa.hasParam("Mandatory"), null));
                 }
             }
+            if (sa.hasParam("Reveal")) {
+                game.getAction().reveal(chosen, p, true, Localizer.getInstance().getMessage("lblChosenCards") + " ");
+            }
         }
         host.setChosenCards(chosen);
         if (sa.hasParam("RememberChosen")) {

@@ -289,6 +289,8 @@ public class ChooseCardAi extends SpellAbilityAi {
                 // Choose the best (hopefully the fattest, whatever) creature so that hopefully it won't die too easily
                 choice = ComputerUtilCard.getBestAI(creatures);
             }
+        } else if (logic.equals("NextTurnAttacker")) {
+            choice = ComputerUtilCard.getBestCreatureToAttackNextTurnAI(ai, options);
         } else {
             choice = ComputerUtilCard.getBestAI(options);
         }
