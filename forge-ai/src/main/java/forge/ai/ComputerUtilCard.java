@@ -309,6 +309,17 @@ public class ComputerUtilCard {
         return biggest;
     }
 
+    // For ability of Oracle en-Vec, return the first card that are going to attack next turn
+    public static Card getBestCreatureToAttackNextTurnAI(final Player aiPlayer, final Iterable<Card> list) {
+        AiController aic = ((PlayerControllerAi)aiPlayer.getController()).getAi();
+        for(final Card card : list) {
+            if (aic.getPredictedCombatNextTurn().isAttacking(card)) {
+                return card;
+            }
+        }
+        return null;
+    }
+
     /**
      * <p>
      * getWorstAI.

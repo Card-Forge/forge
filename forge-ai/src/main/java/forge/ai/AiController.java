@@ -79,6 +79,7 @@ public class AiController {
     private final Game game;
     private final AiCardMemory memory;
     private Combat predictedCombat;
+    private Combat predictedCombatNextTurn;
     private boolean cheatShuffle;
     private boolean useSimulation;
     private SpellAbilityPicker simPicker;
@@ -121,6 +122,15 @@ public class AiController {
             aiAtk.declareAttackers(predictedCombat);
         }
         return predictedCombat;
+    }
+
+    public Combat getPredictedCombatNextTurn() {
+        if (predictedCombatNextTurn == null) {
+            AiAttackController aiAtk = new AiAttackController(player, true);
+            predictedCombatNextTurn = new Combat(player);
+            aiAtk.declareAttackers(predictedCombatNextTurn);
+        }
+        return predictedCombatNextTurn;
     }
 
     public AiController(final Player computerPlayer, final Game game0) {
@@ -1364,6 +1374,8 @@ public class AiController {
         // Reset cached predicted combat, as it may be stale. It will be
         // re-created if needed and used for any AI logic that needs it.
         predictedCombat = null;
+        // Also reset predicted combat for next turn here
+        predictedCombatNextTurn = null;
 
         // Reset priority mana reservation that's meant to work for one spell only
         AiCardMemory.clearMemorySet(player, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);

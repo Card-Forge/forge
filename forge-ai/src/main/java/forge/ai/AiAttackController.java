@@ -69,6 +69,7 @@ public class AiAttackController {
     private Player defendingOpponent;
     
     private int aiAggression = 0; // added by Masher, how aggressive the ai is attack will be depending on circumstances
+    private final boolean nextTurn;
 
 
     /**
@@ -78,18 +79,24 @@ public class AiAttackController {
      *
      */
     public AiAttackController(final Player ai) {
+        this(ai, false);
+    } // constructor
+
+    public AiAttackController(final Player ai, boolean nextTurn) {
         this.ai = ai;
-        this.defendingOpponent = choosePreferredDefenderPlayer();       
+        this.defendingOpponent = choosePreferredDefenderPlayer();
         this.oppList = getOpponentCreatures(this.defendingOpponent);
         this.myList = ai.getCreaturesInPlay();
         this.attackers = new ArrayList<>();
         for (Card c : myList) {
-            if (CombatUtil.canAttack(c, this.defendingOpponent)) {
+            if (nextTurn && CombatUtil.canAttackNextTurn(c, this.defendingOpponent) ||
+                    CombatUtil.canAttack(c, this.defendingOpponent)) {
                 attackers.add(c);
             }
         }
         this.blockers = getPossibleBlockers(oppList, this.attackers);
-    } // constructor
+        this.nextTurn = nextTurn;
+    } // overloaded constructor to evaluate attackers that should attack next turn
 
     public AiAttackController(final Player ai, Card attacker) {
         this.ai = ai;
@@ -101,6 +108,7 @@ public class AiAttackController {
             attackers.add(attacker);
         }
         this.blockers = getPossibleBlockers(oppList, this.attackers);
+        this.nextTurn = false;
     } // overloaded constructor to evaluate single specified attacker
     
     public static List<Card> getOpponentCreatures(final Player defender) {
@@ -130,6 +138,14 @@ public class AiAttackController {
     
     public void removeBlocker(Card blocker) {
     	this.oppList.remove(blocker);
+    }
+
+    private boolean canAttackWrapper(final Card attacker, final GameEntity defender) {
+        if (nextTurn) {
+            return CombatUtil.canAttackNextTurn(attacker, defender);
+        } else {
+            return CombatUtil.canAttack(attacker, defender);
+        }
     }
 
     /** Choose opponent for AI to attack here. Expand as necessary. */
@@ -704,41 +720,45 @@ public class AiAttackController {
 
         // Attackers that don't really have a choice
         int numForcedAttackers = 0;
-        for (final Card attacker : this.attackers) {
-            if (!CombatUtil.canAttack(attacker, defender)) {
-                attackersLeft.remove(attacker);
-                continue;
-            }
-            boolean mustAttack = false;
-            if (attacker.isGoaded()) {
-                mustAttack = true;
-            } else if (attacker.getSVar("MustAttack").equals("True")) {
-                mustAttack = true;
-            } else if (attacker.hasSVar("EndOfTurnLeavePlay")
-                    && isEffectiveAttacker(ai, attacker, combat)) {
-                mustAttack = true;
-            } else if (seasonOfTheWitch) {
-                // TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
-                mustAttack = true;
-            } else {
-                for (KeywordInterface inst : attacker.getKeywords()) {
-                    String s = inst.getOriginal();
-                    if (s.equals("CARDNAME attacks each turn if able.")
-                            || s.startsWith("CARDNAME attacks specific player each combat if able")
-                            || s.equals("CARDNAME attacks each combat if able.")) {
-                        mustAttack = true;
-                        break;
+        // nextTurn is now only used by effect from Oracle en-Vec, which can skip check must attack,
+        // because creatures not chosen can't attack.
+        if (!nextTurn) {
+            for (final Card attacker : this.attackers) {
+                if (!CombatUtil.canAttack(attacker, defender)) {
+                    attackersLeft.remove(attacker);
+                    continue;
+                }
+                boolean mustAttack = false;
+                if (attacker.isGoaded()) {
+                    mustAttack = true;
+                } else if (attacker.getSVar("MustAttack").equals("True")) {
+                    mustAttack = true;
+                } else if (attacker.hasSVar("EndOfTurnLeavePlay")
+                        && isEffectiveAttacker(ai, attacker, combat)) {
+                    mustAttack = true;
+                } else if (seasonOfTheWitch) {
+                    // TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
+                    mustAttack = true;
+                } else {
+                    for (KeywordInterface inst : attacker.getKeywords()) {
+                        String s = inst.getOriginal();
+                        if (s.equals("CARDNAME attacks each turn if able.")
+                                || s.startsWith("CARDNAME attacks specific player each combat if able")
+                                || s.equals("CARDNAME attacks each combat if able.")) {
+                            mustAttack = true;
+                            break;
+                        }
                     }
                 }
+                if (mustAttack || attacker.getController().getMustAttackEntity() != null || attacker.getController().getMustAttackEntityThisTurn() != null) {
+                    combat.addAttacker(attacker, defender);
+                    attackersLeft.remove(attacker);
+                    numForcedAttackers++;
+                }
             }
-            if (mustAttack || attacker.getController().getMustAttackEntity() != null || attacker.getController().getMustAttackEntityThisTurn() != null) {
-                combat.addAttacker(attacker, defender);
-                attackersLeft.remove(attacker);
-                numForcedAttackers++;
+            if (attackersLeft.isEmpty()) {
+                return;
             }
-        }
-        if (attackersLeft.isEmpty()) {
-            return;
         }
 
         // Lightmine Field: make sure the AI doesn't wipe out its own creatures
@@ -760,7 +780,7 @@ public class AiAttackController {
                 if (attackMax != -1 && combat.getAttackers().size() >= attackMax)
                     return;
 
-                if (CombatUtil.canAttack(attacker, defender) && this.isEffectiveAttacker(ai, attacker, combat)) {
+                if (canAttackWrapper(attacker, defender) && this.isEffectiveAttacker(ai, attacker, combat)) {
                     combat.addAttacker(attacker, defender);
                 }
             }
@@ -801,7 +821,7 @@ public class AiAttackController {
                     System.out.println("Exalted");
                 this.aiAggression = 6;
                 for (Card attacker : this.attackers) {
-                    if (CombatUtil.canAttack(attacker, defender) && this.shouldAttack(ai, attacker, this.blockers, combat)) {
+                    if (canAttackWrapper(attacker, defender) && this.shouldAttack(ai, attacker, this.blockers, combat)) {
                         combat.addAttacker(attacker, defender);
                         return;
                     }
@@ -817,7 +837,7 @@ public class AiAttackController {
                 // reached max, breakup
                 if (attackMax != -1 && combat.getAttackers().size() >= attackMax)
                     break;
-                if (CombatUtil.canAttack(attacker, defender) && this.shouldAttack(ai, attacker, this.blockers, combat)) {
+                if (canAttackWrapper(attacker, defender) && this.shouldAttack(ai, attacker, this.blockers, combat)) {
                     combat.addAttacker(attacker, defender);
                 }
             }
@@ -1058,7 +1078,7 @@ public class AiAttackController {
                 continue;
             }
 
-            if (this.shouldAttack(ai, attacker, this.blockers, combat) && CombatUtil.canAttack(attacker, defender)) {
+            if (this.shouldAttack(ai, attacker, this.blockers, combat) && canAttackWrapper(attacker, defender)) {
                 combat.addAttacker(attacker, defender);
                 // check if attackers are enough to finish the attacked planeswalker
                 if (defender instanceof Card) {
