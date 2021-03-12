@@ -1,5 +1,7 @@
+2014-05-07 0 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-05-07-0-legacy-daily.zip
 2014-05-07 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-05-07-legacy-daily.zip
 2014-06-03 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-06-03-legacy-daily.zip
+2014-06-09 0 Legacy Daily (14 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-06-09-0-legacy-daily.zip
 2014-06-09 Legacy Daily (14 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-06-09-legacy-daily.zip
 2014-06-10 Legacy Daily (14 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-06-10-legacy-daily.zip
 2014-06-17 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-06-17-legacy-daily.zip
@@ -137,8 +139,10 @@
 2014-10-31 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-10-31-legacy-daily.zip
 2014-11-01 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-01-legacy-daily.zip
 2014-11-03 Legacy Daily (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-03-legacy-daily.zip
+2014-11-04 0 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-04-0-legacy-daily.zip
 2014-11-04 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-04-legacy-daily.zip
 2014-11-05 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-05-legacy-daily.zip
+2014-11-06 0 Legacy Daily (16 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-06-0-legacy-daily.zip
 2014-11-06 1 Legacy Daily (16 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-06-1-legacy-daily.zip
 2014-11-06 2 Legacy Daily (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-06-2-legacy-daily.zip
 2014-11-06 Legacy Daily (16 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-06-legacy-daily.zip
@@ -146,11 +150,14 @@
 2014-11-08 Legacy Daily (16 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-08-legacy-daily.zip
 2014-11-09 Legacy Daily (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-09-legacy-daily.zip
 2014-11-11 Legacy Daily (16 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-11-legacy-daily.zip
+2014-11-12 0 Legacy Daily (14 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-12-0-legacy-daily.zip
 2014-11-12 Legacy Daily (21 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-12-legacy-daily.zip
 2014-11-13 Legacy Daily (14 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-13-legacy-daily.zip
+2014-11-14 0 Legacy Daily (18 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-14-0-legacy-daily.zip
 2014-11-14 Legacy Daily (14 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-14-legacy-daily.zip
 2014-11-15 Legacy Daily (15 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-15-legacy-daily.zip
 2014-11-16 Legacy Daily (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-11-16-legacy-daily.zip
+2014-12-11 0 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-12-11-0-legacy-daily.zip
 2014-12-11 1 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-12-11-1-legacy-daily.zip
 2014-12-11 2 Legacy Daily (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-12-11-2-legacy-daily.zip
 2014-12-11 8 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-12-11-8-legacy-daily.zip
@@ -165,6 +172,7 @@
 2014-12-19 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-12-19-legacy-daily.zip
 2014-12-20 Legacy Daily (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-12-20-legacy-daily.zip
 2014-12-21 Legacy Daily (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-12-21-legacy-daily.zip
+2014-12-22 0 Legacy Daily (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-12-22-0-legacy-daily.zip
 2014-12-22 Legacy Daily (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-12-22-legacy-daily.zip
 2014-12-23 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-12-23-legacy-daily.zip
 2014-12-24 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2014-12-24-legacy-daily.zip
@@ -178,6 +186,7 @@
 2015-01-01 Legacy Daily (7 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-01-01-legacy-daily.zip
 2015-01-02 Legacy Daily (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-01-02-legacy-daily.zip
 2015-01-03 Legacy Daily (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-01-03-legacy-daily.zip
+2015-01-05 0 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-01-05-0-legacy-daily.zip
 2015-01-05 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-01-05-legacy-daily.zip
 2015-01-06 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-01-06-legacy-daily.zip
 2015-01-07 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-01-07-legacy-daily.zip
@@ -190,6 +199,7 @@
 2015-01-14 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-01-14-legacy-daily.zip
 2015-01-15 5 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-01-15-5-legacy-daily.zip
 2015-01-15 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-01-15-legacy-daily.zip
+2015-01-16 0 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-01-16-0-legacy-daily.zip
 2015-01-16 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-01-16-legacy-daily.zip
 2015-01-17 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-01-17-legacy-daily.zip
 2015-01-18 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-01-18-legacy-daily.zip
@@ -206,6 +216,7 @@
 2015-01-29 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-01-29-legacy-daily.zip
 2015-01-30 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-01-30-legacy-daily.zip
 2015-01-31 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-01-31-legacy-daily.zip
+2015-02-01 0 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-01-0-legacy-daily.zip
 2015-02-01 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-01-legacy-daily.zip
 2015-02-02 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-02-legacy-daily.zip
 2015-02-03 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-03-legacy-daily.zip
@@ -215,7 +226,9 @@
 2015-02-07 Legacy Daily (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-07-legacy-daily.zip
 2015-02-08 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-08-legacy-daily.zip
 2015-02-09 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-09-legacy-daily.zip
+2015-02-10 0 Legacy Daily (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-10-0-legacy-daily.zip
 2015-02-10 Legacy Daily (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-10-legacy-daily.zip
+2015-02-11 0 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-11-0-legacy-daily.zip
 2015-02-11 1 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-11-1-legacy-daily.zip
 2015-02-11 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-11-legacy-daily.zip
 2015-02-13 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-13-legacy-daily.zip
@@ -223,11 +236,14 @@
 2015-02-15 Legacy Daily (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-15-legacy-daily.zip
 2015-02-16 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-16-legacy-daily.zip
 2015-02-17 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-17-legacy-daily.zip
+2015-02-18 0 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-18-0-legacy-daily.zip
 2015-02-18 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-18-legacy-daily.zip
 2015-02-19 Legacy Daily (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-19-legacy-daily.zip
+2015-02-20 0 Legacy Daily (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-20-0-legacy-daily.zip
 2015-02-20 Legacy Daily (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-20-legacy-daily.zip
 2015-02-21 Legacy Daily (7 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-21-legacy-daily.zip
 2015-02-22 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-22-legacy-daily.zip
+2015-02-23 0 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-23-0-legacy-daily.zip
 2015-02-23 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-23-legacy-daily.zip
 2015-02-24 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-24-legacy-daily.zip
 2015-02-25 Legacy Daily (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-02-25-legacy-daily.zip
@@ -239,10 +255,12 @@
 2015-03-03 Legacy Daily (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-03-03-legacy-daily.zip
 2015-03-04 Legacy Daily (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-03-04-legacy-daily.zip
 2015-03-05 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-03-05-legacy-daily.zip
+2015-03-06 0 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-03-06-0-legacy-daily.zip
 2015-03-06 1 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-03-06-1-legacy-daily.zip
 2015-03-06 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-03-06-legacy-daily.zip
 2015-03-07 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-03-07-legacy-daily.zip
 2015-03-08 Legacy Daily (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-03-08-legacy-daily.zip
+2015-03-09 0 Legacy Daily (14 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-03-09-0-legacy-daily.zip
 2015-03-09 Legacy Daily (14 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-03-09-legacy-daily.zip
 2015-03-10 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-03-10-legacy-daily.zip
 2015-03-11 Legacy Daily (14 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-03-11-legacy-daily.zip
@@ -267,14 +285,17 @@
 2015-03-30 Legacy Daily (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-03-30-legacy-daily.zip
 2015-03-31 Legacy Daily (15 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-03-31-legacy-daily.zip
 2015-04-01 Legacy Daily (20 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-01-legacy-daily.zip
+2015-04-06 0 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-06-0-legacy-daily.zip
 2015-04-06 1 Legacy Daily (15 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-06-1-legacy-daily.zip
 2015-04-06 2 Legacy Daily (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-06-2-legacy-daily.zip
 2015-04-06 3 Legacy Daily (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-06-3-legacy-daily.zip
 2015-04-06 4 Legacy Daily (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-06-4-legacy-daily.zip
 2015-04-06 Legacy Daily (14 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-06-legacy-daily.zip
+2015-04-07 0 Legacy Daily (17 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-07-0-legacy-daily.zip
 2015-04-07 1 Legacy Daily (17 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-07-1-legacy-daily.zip
 2015-04-07 2 Legacy Daily (17 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-07-2-legacy-daily.zip
 2015-04-07 Legacy Daily (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-07-legacy-daily.zip
+2015-04-15 0 Legacy Daily (15 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-15-0-legacy-daily.zip
 2015-04-15 1 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-15-1-legacy-daily.zip
 2015-04-15 2 Legacy Daily (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-15-2-legacy-daily.zip
 2015-04-15 3 Legacy Daily (14 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-15-3-legacy-daily.zip
@@ -288,6 +309,7 @@
 2015-04-17 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-17-legacy-daily.zip
 2015-04-18 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-18-legacy-daily.zip
 2015-04-19 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-19-legacy-daily.zip
+2015-04-20 0 Legacy Daily (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-20-0-legacy-daily.zip
 2015-04-20 1 Legacy Daily (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-20-1-legacy-daily.zip
 2015-04-20 Legacy Daily (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-20-legacy-daily.zip
 2015-04-21 Legacy Daily (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-21-legacy-daily.zip
@@ -298,12 +320,14 @@
 2015-04-26 Legacy Daily (14 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-26-legacy-daily.zip
 2015-04-27 Legacy Daily (14 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-27-legacy-daily.zip
 2015-04-28 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-28-legacy-daily.zip
+2015-04-29 0 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-29-0-legacy-daily.zip
 2015-04-29 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-29-legacy-daily.zip
 2015-04-30 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-04-30-legacy-daily.zip
 2015-05-01 Legacy Daily (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-05-01-legacy-daily.zip
 2015-05-02 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-05-02-legacy-daily.zip
 2015-05-03 Legacy Daily (7 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-05-03-legacy-daily.zip
 2015-05-04 Legacy Daily (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-05-04-legacy-daily.zip
+2015-05-05 0 Legacy Daily (12 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-05-05-0-legacy-daily.zip
 2015-05-05 Legacy Daily (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-05-05-legacy-daily.zip
 2015-05-06 Legacy Daily (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-05-06-legacy-daily.zip
 2015-05-07 Legacy Daily (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-05-07-legacy-daily.zip
@@ -348,8 +372,10 @@
 2015-06-15 Legacy Daily (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-06-15-legacy-daily.zip
 2015-06-16 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-06-16-legacy-daily.zip
 2015-06-23 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-06-23-legacy-daily.zip
+2015-06-26 0 Legacy Daily (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-06-26-0-legacy-daily.zip
 2015-06-26 1 Legacy Daily (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-06-26-1-legacy-daily.zip
 2015-06-26 Legacy Daily (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-06-26-legacy-daily.zip
+2015-06-29 0 Legacy Daily (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-06-29-0-legacy-daily.zip
 2015-06-29 1 Legacy Daily (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-06-29-1-legacy-daily.zip
 2015-06-29 Legacy Daily (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-06-29-legacy-daily.zip
 2015-06-30 Legacy Daily (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-06-30-legacy-daily.zip
@@ -393,9 +419,11 @@
 2015-08-07 Legacy Daily (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-07-legacy-daily.zip
 2015-08-08 Legacy Daily (7 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-08-legacy-daily.zip
 2015-08-09 Legacy Daily (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-09-legacy-daily.zip
+2015-08-10 0 Legacy Daily (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-10-0-legacy-daily.zip
 2015-08-10 Legacy Daily (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-10-legacy-daily.zip
 2015-08-11 Legacy Daily (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-11-legacy-daily.zip
 2015-08-12 Legacy Daily (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-12-legacy-daily.zip
+2015-08-14 0 Legacy Event (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-14-0-legacy-event.zip
 2015-08-14 Legacy Event (2 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-14-legacy-event.zip
 2015-08-15 Legacy Daily (2 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-15-legacy-daily.zip
 2015-08-16 Legacy Daily (2 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-16-legacy-daily.zip
@@ -404,8 +432,10 @@
 2015-08-19 Legacy Daily (2 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-19-legacy-daily.zip
 2015-08-20 Legacy Daily (2 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-20-legacy-daily.zip
 2015-08-21 Legacy Daily (2 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-21-legacy-daily.zip
+2015-08-24 0 Legacy Daily (1 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-24-0-legacy-daily.zip
 2015-08-24 1 Legacy Daily (2 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-24-1-legacy-daily.zip
 2015-08-24 Legacy Daily (2 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-24-legacy-daily.zip
+2015-08-25 0 Legacy Daily (1 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-25-0-legacy-daily.zip
 2015-08-25 1 Legacy Daily (1 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-25-1-legacy-daily.zip
 2015-08-25 Legacy Daily (1 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-25-legacy-daily.zip
 2015-08-26 Legacy Daily (2 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-08-26-legacy-daily.zip
@@ -451,6 +481,7 @@
 2015-10-05 Legacy Daily (2 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-10-05-legacy-daily.zip
 2015-10-06 Legacy Daily (1 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-10-06-legacy-daily.zip
 2015-10-07 Legacy Daily (1 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-10-07-legacy-daily.zip
+2015-10-14 0 Legacy Daily (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-10-14-0-legacy-daily.zip
 2015-10-14 1 Legacy Daily (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-10-14-1-legacy-daily.zip
 2015-10-14 2 Legacy Daily (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-10-14-2-legacy-daily.zip
 2015-10-14 3 Legacy Daily (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-10-14-3-legacy-daily.zip
@@ -458,6 +489,7 @@
 2015-10-14 5 Legacy Daily (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-10-14-5-legacy-daily.zip
 2015-10-14 Legacy Daily (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-10-14-legacy-daily.zip
 2015-10-15 Legacy Daily (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-10-15-legacy-daily.zip
+2015-10-19 0 Legacy Daily (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-10-19-0-legacy-daily.zip
 2015-10-19 1 Legacy Daily (7 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-10-19-1-legacy-daily.zip
 2015-10-19 Legacy Daily (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-10-19-legacy-daily.zip
 2015-10-20 Legacy Daily (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2015-10-20-legacy-daily.zip
@@ -586,6 +618,7 @@
 2016-02-24 Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-02-24-legacy-constructed-league.zip
 2016-02-25 Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-02-25-legacy-constructed-league.zip
 2016-02-26 Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-02-26-legacy-constructed-league.zip
+2016-02-29 0 Legacy Constructed League (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-02-29-0-legacy-constructed-league.zip
 2016-02-29 1 Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-02-29-1-legacy-constructed-league.zip
 2016-02-29 Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-02-29-legacy-constructed-league.zip
 2016-03-01 Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-03-01-legacy-constructed-league.zip
@@ -603,6 +636,7 @@
 2016-03-13 Legacy Constructed League (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-03-13-legacy-constructed-league.zip
 2016-03-13 Legacy Premier (16 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-03-13-legacy-premier.zip
 2016-03-14 Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-03-14-legacy-constructed-league.zip
+2016-03-16 0 Legacy Constructed League (7 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-03-16-0-legacy-constructed-league.zip
 2016-03-16 Legacy Constructed League (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-03-16-legacy-constructed-league.zip
 2016-03-17 Legacy Constructed League (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-03-17-legacy-constructed-league.zip
 2016-03-18 Legacy Constructed League (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-03-18-legacy-constructed-league.zip
@@ -741,6 +775,7 @@
 2016-07-29 Competitive Legacy Constructed League (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-07-29-competitive-legacy-constructed-league.zip
 2016-07-30 Competitive Legacy Constructed League (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-07-30-competitive-legacy-constructed-league.zip
 2016-07-31 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-07-31-competitive-legacy-constructed-league.zip
+2016-08-01 0 Competitive Legacy Constructed League (2 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-08-01-0-competitive-legacy-constructed-league.zip
 2016-08-01 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-08-01-competitive-legacy-constructed-league.zip
 2016-08-02 Competitive Legacy Constructed League (3 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-08-02-competitive-legacy-constructed-league.zip
 2016-08-03 Competitive Legacy Constructed League (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-08-03-competitive-legacy-constructed-league.zip
@@ -766,6 +801,7 @@
 2016-08-22 Competitive Legacy Constructed League (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-08-22-competitive-legacy-constructed-league.zip
 2016-08-24 Competitive Legacy Constructed League (3 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-08-24-competitive-legacy-constructed-league.zip
 2016-08-26 Competitive Legacy Constructed League (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-08-26-competitive-legacy-constructed-league.zip
+2016-08-29 0 Competitive Legacy Constructed League (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-08-29-0-competitive-legacy-constructed-league.zip
 2016-08-29 1 Competitive Legacy Constructed League (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-08-29-1-competitive-legacy-constructed-league.zip
 2016-08-29 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-08-29-competitive-legacy-constructed-league.zip
 2016-08-30 Competitive Legacy Constructed League (3 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-08-30-competitive-legacy-constructed-league.zip
@@ -828,8 +864,10 @@
 2016-10-24 Competitive Legacy Constructed League (1 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-10-24-competitive-legacy-constructed-league.zip
 2016-10-25 Competitive Legacy Constructed League (7 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-10-25-competitive-legacy-constructed-league.zip
 2016-10-26 Competitive Legacy Constructed League (7 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-10-26-competitive-legacy-constructed-league.zip
+2016-10-28 0 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-10-28-0-competitive-legacy-constructed-league.zip
 2016-10-28 Competitive Legacy Constructed League (1 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-10-28-competitive-legacy-constructed-league.zip
 2016-10-30 Competitive Legacy Constructed League (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-10-30-competitive-legacy-constructed-league.zip
+2016-10-31 0 Competitive Legacy Constructed League (7 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-10-31-0-competitive-legacy-constructed-league.zip
 2016-10-31 Competitive Legacy Constructed League (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-10-31-competitive-legacy-constructed-league.zip
 2016-11-01 Competitive Legacy Constructed League (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-11-01-competitive-legacy-constructed-league.zip
 2016-11-02 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-11-02-competitive-legacy-constructed-league.zip
@@ -846,11 +884,13 @@
 2016-11-13 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-11-13-competitive-legacy-constructed-league.zip
 2016-11-13 Legacy Premier (16 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-11-13-legacy-premier.zip
 2016-11-14 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-11-14-competitive-legacy-constructed-league.zip
+2016-11-17 0 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-11-17-0-competitive-legacy-constructed-league.zip
 2016-11-17 1 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-11-17-1-competitive-legacy-constructed-league.zip
 2016-11-17 2 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-11-17-2-competitive-legacy-constructed-league.zip
 2016-11-17 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-11-17-competitive-legacy-constructed-league.zip
 2016-11-18 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-11-18-competitive-legacy-constructed-league.zip
 2016-11-19 Competitive Legacy Constructed League (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-11-19-competitive-legacy-constructed-league.zip
+2016-11-21 0 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-11-21-0-competitive-legacy-constructed-league.zip
 2016-11-21 Competitive Legacy Constructed League (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-11-21-competitive-legacy-constructed-league.zip
 2016-11-22 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-11-22-competitive-legacy-constructed-league.zip
 2016-11-23 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2016-11-23-competitive-legacy-constructed-league.zip
@@ -950,18 +990,21 @@
 2017-02-23 Competitive Legacy Constructed League (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-02-23-competitive-legacy-constructed-league.zip
 2017-02-24 Competitive Legacy Constructed League (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-02-24-competitive-legacy-constructed-league.zip
 2017-02-25 Competitive Legacy Constructed League (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-02-25-competitive-legacy-constructed-league.zip
+2017-02-27 0 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-02-27-0-competitive-legacy-constructed-league.zip
 2017-02-27 Competitive Legacy Constructed League (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-02-27-competitive-legacy-constructed-league.zip
 2017-02-28 Competitive Legacy Constructed League (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-02-28-competitive-legacy-constructed-league.zip
 2017-03-01 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-03-01-competitive-legacy-constructed-league.zip
 2017-03-02 Competitive Legacy Constructed League (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-03-02-competitive-legacy-constructed-league.zip
 2017-03-03 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-03-03-competitive-legacy-constructed-league.zip
 2017-03-05 Competitive Legacy Constructed League (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-03-05-competitive-legacy-constructed-league.zip
+2017-03-06 0 Competitive Legacy Constructed League (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-03-06-0-competitive-legacy-constructed-league.zip
 2017-03-06 Competitive Legacy Constructed League (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-03-06-competitive-legacy-constructed-league.zip
 2017-03-07 Competitive Legacy Constructed League (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-03-07-competitive-legacy-constructed-league.zip
 2017-03-08 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-03-08-competitive-legacy-constructed-league.zip
 2017-03-09 Competitive Legacy Constructed League (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-03-09-competitive-legacy-constructed-league.zip
 2017-03-10 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-03-10-competitive-legacy-constructed-league.zip
 2017-03-11 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-03-11-competitive-legacy-constructed-league.zip
+2017-03-13 0 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-03-13-0-competitive-legacy-constructed-league.zip
 2017-03-13 Competitive Legacy Constructed League (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-03-13-competitive-legacy-constructed-league.zip
 2017-03-13 Legacy Premier (16 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-03-13-legacy-premier.zip
 2017-03-14 Competitive Legacy Constructed League (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-03-14-competitive-legacy-constructed-league.zip
@@ -982,6 +1025,7 @@
 2017-03-30 Competitive Legacy Constructed League (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-03-30-competitive-legacy-constructed-league.zip
 2017-03-31 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-03-31-competitive-legacy-constructed-league.zip
 2017-04-01 Competitive Legacy Constructed League (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-04-01-competitive-legacy-constructed-league.zip
+2017-04-03 0 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-04-03-0-competitive-legacy-constructed-league.zip
 2017-04-03 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-04-03-competitive-legacy-constructed-league.zip
 2017-04-04 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-04-04-competitive-legacy-constructed-league.zip
 2017-04-05 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-04-05-competitive-legacy-constructed-league.zip
@@ -998,6 +1042,7 @@
 2017-04-15 Competitive Legacy Constructed League (7 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-04-15-competitive-legacy-constructed-league.zip
 2017-04-17 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-04-17-competitive-legacy-constructed-league.zip
 2017-04-18 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-04-18-competitive-legacy-constructed-league.zip
+2017-04-20 0 Competitive Legacy Constructed League (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-04-20-0-competitive-legacy-constructed-league.zip
 2017-04-20 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-04-20-competitive-legacy-constructed-league.zip
 2017-04-21 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-04-21-competitive-legacy-constructed-league.zip
 2017-04-22 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-04-22-competitive-legacy-constructed-league.zip
@@ -1007,8 +1052,10 @@
 2017-04-26 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-04-26-competitive-legacy-constructed-league.zip
 2017-04-27 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-04-27-competitive-legacy-constructed-league.zip
 2017-04-28 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-04-28-competitive-legacy-constructed-league.zip
+2017-05-01 0 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-05-01-0-competitive-legacy-constructed-league.zip
 2017-05-01 1 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-05-01-1-competitive-legacy-constructed-league.zip
 2017-05-01 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-05-01-competitive-legacy-constructed-league.zip
+2017-05-02 0 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-05-02-0-competitive-legacy-constructed-league.zip
 2017-05-02 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-05-02-competitive-legacy-constructed-league.zip
 2017-05-03 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-05-03-competitive-legacy-constructed-league.zip
 2017-05-04 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-05-04-competitive-legacy-constructed-league.zip
@@ -1016,6 +1063,7 @@
 2017-05-06 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-05-06-competitive-legacy-constructed-league.zip
 2017-05-07 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-05-07-competitive-legacy-constructed-league.zip
 2017-05-08 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-05-08-competitive-legacy-constructed-league.zip
+2017-05-09 0 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-05-09-0-competitive-legacy-constructed-league.zip
 2017-05-09 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-05-09-competitive-legacy-constructed-league.zip
 2017-05-10 Competitive Legacy Constructed League (2 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-05-10-competitive-legacy-constructed-league.zip
 2017-05-11 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-05-11-competitive-legacy-constructed-league.zip
@@ -1066,6 +1114,7 @@
 2017-06-19 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-06-19-legacy-challenge.zip
 2017-06-20 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-06-20-competitive-legacy-constructed-league.zip
 2017-06-21 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-06-21-competitive-legacy-constructed-league.zip
+2017-06-22 0 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-06-22-0-competitive-legacy-constructed-league.zip
 2017-06-22 Competitive Legacy Constructed League (2 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-06-22-competitive-legacy-constructed-league.zip
 2017-06-23 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-06-23-competitive-legacy-constructed-league.zip
 2017-06-24 Competitive Legacy Constructed League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-06-24-competitive-legacy-constructed-league.zip
@@ -1138,6 +1187,7 @@
 2017-08-21 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-08-21-legacy-challenge.zip
 2017-08-22 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-08-22-competitive-legacy-constructed-league.zip
 2017-08-23 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-08-23-competitive-legacy-constructed-league.zip
+2017-08-25 0 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-08-25-0-competitive-legacy-constructed-league.zip
 2017-08-25 Competitive Legacy Constructed League (3 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-08-25-competitive-legacy-constructed-league.zip
 2017-08-26 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-08-26-competitive-legacy-constructed-league.zip
 2017-08-27 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-08-27-competitive-legacy-constructed-league.zip
@@ -1153,6 +1203,7 @@
 2017-09-04 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-09-04-legacy-challenge.zip
 2017-09-05 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-09-05-competitive-legacy-constructed-league.zip
 2017-09-06 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-09-06-competitive-legacy-constructed-league.zip
+2017-09-08 0 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-09-08-0-competitive-legacy-constructed-league.zip
 2017-09-08 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-09-08-competitive-legacy-constructed-league.zip
 2017-09-09 Competitive Legacy Constructed League (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-09-09-competitive-legacy-constructed-league.zip
 2017-09-10 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2017-09-10-competitive-legacy-constructed-league.zip
@@ -1292,6 +1343,7 @@
 2018-01-04 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-01-04-competitive-legacy-constructed-league.zip
 2018-01-05 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-01-05-competitive-legacy-constructed-league.zip
 2018-01-06 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-01-06-competitive-legacy-constructed-league.zip
+2018-01-08 0 Competitive Legacy Constructed League (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-01-08-0-competitive-legacy-constructed-league.zip
 2018-01-08 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-01-08-competitive-legacy-constructed-league.zip
 2018-01-08 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-01-08-legacy-challenge.zip
 2018-01-09 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-01-09-competitive-legacy-constructed-league.zip
@@ -1302,6 +1354,7 @@
 2018-01-14 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-01-14-competitive-legacy-constructed-league.zip
 2018-01-15 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-01-15-competitive-legacy-constructed-league.zip
 2018-01-15 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-01-15-legacy-challenge.zip
+2018-01-16 0 Competitive Legacy Constructed League (3 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-01-16-0-competitive-legacy-constructed-league.zip
 2018-01-16 Competitive Legacy Constructed League (3 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-01-16-competitive-legacy-constructed-league.zip
 2018-01-17 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-01-17-competitive-legacy-constructed-league.zip
 2018-01-18 Competitive Legacy Constructed League (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-01-18-competitive-legacy-constructed-league.zip
@@ -1350,6 +1403,7 @@
 2018-04-14 Competitive Legacy Constructed League (29 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-04-14-competitive-legacy-constructed-league.zip
 2018-04-18 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-04-18-legacy-challenge.zip
 2018-04-21 Competitive Legacy Constructed League (21 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-04-21-competitive-legacy-constructed-league.zip
+2018-04-23 0 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-04-23-0-legacy-challenge.zip
 2018-04-23 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-04-23-legacy-challenge.zip
 2018-04-28 Competitive Legacy Constructed League (27 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-04-28-competitive-legacy-constructed-league.zip
 2018-04-30 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2018-04-30-legacy-challenge.zip
@@ -1629,6 +1683,7 @@
 2020-04-14 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-04-14-legacy-challenge.zip
 2020-04-15 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-04-15-legacy-challenge.zip
 2020-04-16 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-04-16-legacy-challenge.zip
+2020-04-17 0 Legacy Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-04-17-0-legacy-preliminary.zip
 2020-04-17 1 Legacy Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-04-17-1-legacy-preliminary.zip
 2020-04-17 2 Legacy Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-04-17-2-legacy-preliminary.zip
 2020-04-17 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-04-17-legacy-challenge.zip
@@ -1649,6 +1704,7 @@
 2020-05-02 Legacy Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-05-02-legacy-preliminary.zip
 2020-05-03 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-05-03-legacy-challenge.zip
 2020-05-04 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-05-04-legacy-challenge.zip
+2020-05-05 0 Legacy Event (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-05-05-0-legacy-event.zip
 2020-05-05 Legacy Event (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-05-05-legacy-event.zip
 2020-05-06 Legacy Preliminary (15 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-05-06-legacy-preliminary.zip
 2020-05-07 Legacy Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-05-07-legacy-preliminary.zip
@@ -1709,6 +1765,8 @@
 2020-08-09 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-08-09-legacy-challenge.zip
 2020-08-10 Legacy Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-08-10-legacy-showcase-challenge.zip
 2020-08-11 Legacy Showcase Last Chance (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-08-11-legacy-showcase-last-chance.zip
+2020-08-12 0 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-08-12-0-legacy-challenge.zip
+2020-08-12 0 Legacy Champs (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-08-12-0-legacy-champs.zip
 2020-08-12 1 Legacy Champs (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-08-12-1-legacy-champs.zip
 2020-08-12 2 Legacy Champs (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-08-12-2-legacy-champs.zip
 2020-08-12 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-08-12-legacy-challenge.zip
@@ -1760,6 +1818,7 @@
 2020-10-16 Legacy Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-10-16-legacy-preliminary.zip
 2020-10-17 Legacy League (51 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-10-17-legacy-league.zip
 2020-10-17 Legacy Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-10-17-legacy-preliminary.zip
+2020-10-18 0 Legacy Premier (16 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-10-18-0-legacy-premier.zip
 2020-10-18 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-10-18-legacy-challenge.zip
 2020-10-18 Legacy Premier (16 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-10-18-legacy-premier.zip
 2020-10-19 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2020-10-19-legacy-challenge.zip
@@ -1865,3 +1924,10 @@
 2021-02-14 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-02-14-legacy-challenge.zip
 2021-02-14 Legacy Champ Qual (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-02-14-legacy-champ-qual.zip
 2021-02-15 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-02-15-legacy-challenge.zip
+2021-03-05 Legacy Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-03-05-legacy-preliminary.zip
+2021-03-06 Legacy League (76 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-03-06-legacy-league.zip
+2021-03-06 Legacy Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-03-06-legacy-preliminary.zip
+2021-03-07 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-03-07-legacy-challenge.zip
+2021-03-08 Legacy Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-03-08-legacy-showcase-challenge.zip
+2021-03-09 Legacy Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-03-09-legacy-preliminary.zip
+2021-03-10 Legacy Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-03-10-legacy-preliminary.zip

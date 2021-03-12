@@ -233,7 +233,7 @@
 2015-02-05 Standard Daily (39 decks) | https://downloads.cardforge.org/decks/archive/standard/2015-02-05-standard-daily.zip
 2015-02-06 Standard Daily (35 decks) | https://downloads.cardforge.org/decks/archive/standard/2015-02-06-standard-daily.zip
 2015-02-07 Standard Daily (30 decks) | https://downloads.cardforge.org/decks/archive/standard/2015-02-07-standard-daily.zip
-2015-02-08 0 Standard Daily (35 decks) | https://downloads.cardforge.org/decks/archive/standard/2015-02-08-0-standard-daily.zip
+2015-02-08 0 Standard Daily (31 decks) | https://downloads.cardforge.org/decks/archive/standard/2015-02-08-0-standard-daily.zip
 2015-02-08 0 Standard Ptq (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2015-02-08-0-standard-ptq.zip
 2015-02-08 Standard Daily (35 decks) | https://downloads.cardforge.org/decks/archive/standard/2015-02-08-standard-daily.zip
 2015-02-08 Standard Ptq (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2015-02-08-standard-ptq.zip
@@ -2364,3 +2364,7 @@
 2021-02-14 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-02-14-standard-challenge.zip
 2021-02-15 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-02-15-standard-challenge.zip
 2021-02-15 Standard League (16 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-02-15-standard-league.zip
+2021-03-05 Standard Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-05-standard-preliminary.zip
+2021-03-07 Standard Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-07-standard-showcase-challenge.zip
+2021-03-08 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-08-standard-challenge.zip
+2021-03-08 Standard League (14 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-08-standard-league.zip
