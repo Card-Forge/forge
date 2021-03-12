@@ -27,3 +27,6 @@ Type=Promos
 2029 U Mystical Dispute
 2030 R Fae of Wishes
 2031 M Elspeth, Sun's Nemesis
+2032 M Basri Ket
+2033 U Seasoned Hallowblade
+2034 R Vito, Thorn of the Dusk Rose
