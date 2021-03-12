@@ -35,7 +35,7 @@ import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
-import forge.util.collect.FCollectionView;
+import forge.util.collect.FCollection;
 
 /**
  * <p>
@@ -561,14 +561,16 @@ public abstract class SpellAbilityEffect {
 
         if (sa.hasParam(attackingParam) && combat.getAttackingPlayer().equals(controller)) {
             String attacking = sa.getParam(attackingParam);
+
             GameEntity defender = null;
-            FCollectionView<GameEntity> defs = null;
+            FCollection<GameEntity> defs = null;
             if ("True".equalsIgnoreCase(attacking)) {
-                defs = combat.getDefenders();
+                defs = (FCollection<GameEntity>) combat.getDefenders();
             } else if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
-                Player defendingPlayer = Iterables.getFirst(AbilityUtils.getDefinedPlayers(host, attacking, sa), null);
-                if (defendingPlayer != null) {
-                    defs = game.getCombat().getDefendersControlledBy(defendingPlayer);
+                PlayerCollection defendingPlayers = AbilityUtils.getDefinedPlayers(host, attacking, sa);
+                defs = new FCollection<>();
+                for (Player p : defendingPlayers) {
+                    defs.addAll(game.getCombat().getDefendersControlledBy(p));
                 }
             } else {
                 defs = AbilityUtils.getDefinedEntities(host, attacking, sa);
@@ -577,7 +579,14 @@ public abstract class SpellAbilityEffect {
             if (defs != null) {
                 Map<String, Object> params = Maps.newHashMap();
                 params.put("Attacker", c);
-                defender = controller.getController().chooseSingleEntityForEffect(defs, sa,
+                Player chooser;
+                if (sa.hasParam("Chooser")) {
+                    chooser = Iterables.getFirst(AbilityUtils.getDefinedPlayers(host, sa.getParam("Chooser"), sa), null);
+                }
+                else {
+                    chooser = controller;
+                }
+                defender = chooser.getController().chooseSingleEntityForEffect(defs, sa,
                         Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false, params);
             }
 
