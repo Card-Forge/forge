@@ -267,14 +267,14 @@ public class ComputerUtil {
             newSA.setHostCard(game.getAction().moveToStack(source, sa));
 
             if (newSA.getApi() == ApiType.Charm && !newSA.isWrapper()) {
-                if (!CharmEffect.makeChoices(sa)) {
+                if (!CharmEffect.makeChoices(newSA)) {
                     return false;
                 }
             }
         }
 
         final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA);
-        pay.payComputerCosts(new AiCostDecision(ai, sa));
+        pay.payComputerCosts(new AiCostDecision(ai, newSA));
 
         game.getStack().add(newSA);
         return true;
