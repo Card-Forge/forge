@@ -43,4 +43,5 @@ Type=Reprint
 41 R Heliod's Pilgrim
 42 R Crop Rotation
 43 R Tangled Florahedron
+44 R Counterspell
 
