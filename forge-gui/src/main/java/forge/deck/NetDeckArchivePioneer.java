@@ -3,10 +3,7 @@ package forge.deck;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 import forge.GuiBase;
 import forge.deck.io.DeckSerializer;
@@ -73,7 +70,10 @@ public class NetDeckArchivePioneer extends StorageBase<Deck> {
             return category;
         }
 
-        final NetDeckArchivePioneer c = SGuiChoose.oneOrNone("Select a Net Deck Archive Pioneer category", categories.values());
+        List<NetDeckArchivePioneer> category = new ArrayList<>(categories.values());
+        Collections.reverse(category);
+
+        final NetDeckArchivePioneer c = SGuiChoose.oneOrNone("Select a Net Deck Archive Pioneer category", category);
         if (c == null) { return null; }
 
         if (c.map.isEmpty()) { //only download decks once per session

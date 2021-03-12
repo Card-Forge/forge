@@ -2493,3 +2493,16 @@
 2021-02-09 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2021-02-09-modern-preliminary.zip
 2021-02-10 Modern Preliminary (3 decks) | https://downloads.cardforge.org/decks/archive/modern/2021-02-10-modern-preliminary.zip
 2021-02-11 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2021-02-11-modern-preliminary.zip
+2021-02-12 Modern League (49 decks) | https://downloads.cardforge.org/decks/archive/modern/2021-02-12-modern-league.zip
+2021-02-12 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2021-02-12-modern-preliminary.zip
+2021-02-13 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2021-02-13-modern-preliminary.zip
+2021-02-14 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2021-02-14-modern-challenge.zip
+2021-02-15 Modern Champ Qual (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2021-02-15-modern-champ-qual.zip
+2021-03-05 Modern League (67 decks) | https://downloads.cardforge.org/decks/archive/modern/2021-03-05-modern-league.zip
+2021-03-05 Modern Preliminary (18 decks) | https://downloads.cardforge.org/decks/archive/modern/2021-03-05-modern-preliminary.zip
+2021-03-06 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2021-03-06-modern-preliminary.zip
+2021-03-07 Modern Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2021-03-07-modern-showcase-challenge.zip
+2021-03-08 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2021-03-08-modern-challenge.zip
+2021-03-09 Modern League (75 decks) | https://downloads.cardforge.org/decks/archive/modern/2021-03-09-modern-league.zip
+2021-03-09 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2021-03-09-modern-preliminary.zip
+2021-03-10 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2021-03-10-modern-preliminary.zip
