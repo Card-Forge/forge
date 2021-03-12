@@ -2,7 +2,7 @@ Name:Psychic Theft
 ManaCost:1 U
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Player | Origin$ Hand | Destination$ Exile | ChangeType$ Instant,Sorcery | IsCurse$ True | Chooser$ You | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ TheftEffect | SpellDescription$ Target player reveals their hand. You choose an instant or sorcery card from it and exile that card. You may cast that card for as long as it remains exiled. At the beginning of the next end step, if you haven't cast the card, return it to its owner's hand. | StackDescription$ SpellDescription
-SVar:TheftEffect:DB$ Effect | StaticAbilities$ STThieving | Duration$ Permanent | RememberObjects$ Remembered | Triggers$ TrigReturn,TrigCast | SVars$ ActivePsychic,RemoveEffect,DBReturn | SubAbility$ DBResetSVar
+SVar:TheftEffect:DB$ Effect | StaticAbilities$ STThieving | Duration$ Permanent | RememberObjects$ Remembered | Triggers$ TrigReturn,TrigCast | SubAbility$ DBResetSVar
 # Even though the Effect is "Permanent", it's not really permanent
 SVar:DBResetSVar:DB$ StoreSVar | SVar$ ActivePsychic | Type$ Number | Expression$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

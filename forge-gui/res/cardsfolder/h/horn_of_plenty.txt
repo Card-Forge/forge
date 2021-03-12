@@ -2,7 +2,7 @@ Name:Horn of Plenty
 ManaCost:6
 Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ DelayedTrigEff | TriggerDescription$ Whenever a player casts a spell, they may pay {1}. If the player does, they draw a card at the beginning of the next end step.
-SVar:DelayedTrigEff:DB$ Effect | Triggers$ EOTTrig | SVars$ TrigDraw,RemoveEff | RememberObjects$ TriggeredActivator | UnlessCost$ 1 | UnlessPayer$ TriggeredActivator | UnlessSwitched$ True
+SVar:DelayedTrigEff:DB$ Effect | Triggers$ EOTTrig | RememberObjects$ TriggeredActivator | UnlessCost$ 1 | UnlessPayer$ TriggeredActivator | UnlessSwitched$ True
 SVar:EOTTrig:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ Draw a card at the beginning of the next end step.
 SVar:TrigDraw:DB$ Draw | Defined$ Player.IsRemembered | NumCards$ 1 | SubAbility$ RemoveEff
 SVar:RemoveEff:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination
 SVar:TrigForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReset | Static$ True
 SVar:TrigReset:DB$ Cleanup | ClearRemembered$ True
-A:AB$ Effect | Cost$ 2 | RememberObjects$ FirstRemembered | Triggers$ TrigLeavePlay | ReplacementEffects$ DrawReplace | SVars$ ExileEffect,RepMangarasTome | ImprintCards$ Self | SpellDescription$ The next time you would draw a card this turn, instead put the top card of the exiled pile into its owner's hand.
+A:AB$ Effect | Cost$ 2 | RememberObjects$ FirstRemembered | Triggers$ TrigLeavePlay | ReplacementEffects$ DrawReplace | ImprintCards$ Self | SpellDescription$ The next time you would draw a card this turn, instead put the top card of the exiled pile into its owner's hand.
 SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ RepMangarasTome | Description$ The next time you would draw a card this turn, instead put the top card of the exiled pile into its owner's hand.
 SVar:TrigLeavePlay:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ ExileEffect | Static$ True
 SVar:RepMangarasTome:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand | SubAbility$ ExileEffect

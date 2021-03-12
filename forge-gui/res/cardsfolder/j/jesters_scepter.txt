@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile the top five cards of target player's library face down. You may look at those cards for as long as they remain exiled.
 SVar:TrigExile:DB$ Dig | ValidTgts$ Player | DigNum$ 5 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DBMayLookAt
-SVar:DBMayLookAt:DB$ Effect | StaticAbilities$ SMayLookAt | Triggers$ TForget | SVars$ DBForget | RememberObjects$ Remembered | Duration$ Permanent
+SVar:DBMayLookAt:DB$ Effect | StaticAbilities$ SMayLookAt | Triggers$ TForget | RememberObjects$ Remembered | Duration$ Permanent
 SVar:SMayLookAt:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | EffectZone$ Command | MayLookAt$ You | Duration$ Permanent
 SVar:TForget:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBCleanup | Static$ True

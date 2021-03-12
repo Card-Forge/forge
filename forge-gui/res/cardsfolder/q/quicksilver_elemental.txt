@@ -3,7 +3,7 @@ ManaCost:3 U U
 Types:Creature Elemental
 PT:3/4
 K:ManaConvert:Blue:All
-A:AB$ Effect | Cost$ U | ValidTgts$ Creature | TgtZone$ Battlefield | TgtPrompt$ Select target creature card | StaticAbilities$ STSteal | SVars$ STSteal | RememberObjects$ Targeted | SpellDescription$ CARDNAME gains all activated abilities of target creature until end of turn.
+A:AB$ Effect | Cost$ U | ValidTgts$ Creature | TgtZone$ Battlefield | TgtPrompt$ Select target creature card | StaticAbilities$ STSteal | RememberObjects$ Targeted | SpellDescription$ CARDNAME gains all activated abilities of target creature until end of turn.
 SVar:STSteal:Mode$ Continuous | Affected$ EffectSource | EffectZone$ Command | GainsAbilitiesOf$ Creature.IsRemembered | GainsAbilitiesOfZones$ Library,Hand,Stack,Battlefield,Graveyard,Exile,Command | Description$ Quicksilver Elemental gains all activated abilities of that card until end of turn.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksilver_elemental.jpg

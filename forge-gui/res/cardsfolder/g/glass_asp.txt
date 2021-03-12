@@ -3,7 +3,7 @@ ManaCost:1 G G
 Types:Creature Snake
 PT:2/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ NafsEffect | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player loses 2 life at the beginning of their next draw step unless they pay {2} before that step.
-SVar:NafsEffect:DB$ Effect | Name$ Glass Asp Effect | EffectOwner$ TriggeredTarget | Duration$ Permanent | Triggers$ DrawTrig | Abilities$ PayUp | SVars$ Bleed,ExileEffect
+SVar:NafsEffect:DB$ Effect | Name$ Glass Asp Effect | EffectOwner$ TriggeredTarget | Duration$ Permanent | Triggers$ DrawTrig | Abilities$ PayUp
 SVar:DrawTrig:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Command | Execute$ Bleed | TriggerDescription$ You lose 2 life at the beginning of your next draw step unless you pay {2} before that step.
 SVar:Bleed:DB$ LoseLife | Defined$ You | LifeAmount$ 2 | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

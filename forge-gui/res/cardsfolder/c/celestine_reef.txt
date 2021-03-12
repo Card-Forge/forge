@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Plane Luvion
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.withoutFlying+withoutIslandwalk | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Creatures without flying or islandwalk can't attack.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, until a player planeswalks, you can't lose the game and your opponents can't win the game.
-SVar:RolledChaos:DB$ Effect | Name$ Celestine Reef Effect | StaticAbilities$ STCantlose,STCantWin | Triggers$ TrigPlaneswalk | SVars$ DBCleanup | Duration$ Permanent
+SVar:RolledChaos:DB$ Effect | Name$ Celestine Reef Effect | StaticAbilities$ STCantlose,STCantWin | Triggers$ TrigPlaneswalk | Duration$ Permanent
 SVar:STCantlose:Mode$ Continuous | EffectZone$ Command | Affected$ You | AddKeyword$ You can't lose the game. | Description$ Until a player planeswalks, you can't lose the game and your opponents can't win the game.
 SVar:STCantWin:Mode$ Continuous | EffectZone$ Command | Affected$ Player.Opponent | AddKeyword$ You can't win the game.
 SVar:TrigPlaneswalk:Mode$ PlaneswalkedFrom | Execute$ DBCleanup | Static$ True

@@ -3,7 +3,7 @@ ManaCost:5 W W
 Types:Sorcery
 K:MayEffectFromOpeningHand:RevealCard
 SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | SubAbility$ SetLifeOnUpkeep | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, your life total becomes 26.
-SVar:SetLifeOnUpkeep:DB$ Effect | Triggers$ TrigSetLife | SVars$ EffSetLife,RemoveMe | Name$ Providence effect | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, your life total becomes 26.
+SVar:SetLifeOnUpkeep:DB$ Effect | Triggers$ TrigSetLife | Name$ Providence effect | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, your life total becomes 26.
 SVar:TrigSetLife:Mode$ Phase | Phase$ Upkeep | Execute$ EffSetLife | TriggerDescription$ At the beginning of the first upkeep, your life total becomes 26.
 SVar:EffSetLife:DB$ SetLife | LifeAmount$ 26 | Defined$ You | SubAbility$ RemoveMe
 SVar:RemoveMe:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile 

@@ -457,6 +457,7 @@ public abstract class SpellAbilityEffect {
             }
         }
         eff.setOwner(controller);
+        eff.setSVars(sa.getSVars());
 
         eff.setImageKey(image);
         if (eff.getType().hasType(CardType.CoreType.Emblem)) {

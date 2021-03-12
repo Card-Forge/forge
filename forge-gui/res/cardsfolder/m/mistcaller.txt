@@ -1,7 +1,7 @@
 Name:Mistcaller
 ManaCost:U
 Types:Creature Merfolk Wizard
-A:AB$ Effect | Cost$ Sac<1/CARDNAME> | ReplacementEffects$ EffRMoved | SVars$ EffDBChangeZone | SpellDescription$ Until end of turn, if a nontoken creature would enter the battlefield and it wasn't cast, exile it instead.
+A:AB$ Effect | Cost$ Sac<1/CARDNAME> | ReplacementEffects$ EffRMoved | SpellDescription$ Until end of turn, if a nontoken creature would enter the battlefield and it wasn't cast, exile it instead.
 SVar:EffRMoved:Event$ Moved | ActiveZones$ Command | Destination$ Battlefield | ValidCard$ Creature.nonToken+wasNotCast | ReplaceWith$ EffDBChangeZone | Description$ If a nontoken creature would enter the battlefield and it wasn't cast, exile it instead.
 SVar:EffDBChangeZone:DB$ ChangeZone | Defined$ ReplacedCard | Hidden$ True | Origin$ All | Destination$ Exile
 Oracle:Sacrifice Mistcaller: Until end of turn, if a nontoken creature would enter the battlefield and it wasn't cast, exile it instead.

@@ -4,7 +4,7 @@ Types:Creature Sphinx
 PT:4/4
 K:MayEffectFromOpeningHand:RevealCard
 SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | SubAbility$ ScryOnUpkeep | SpellDescription$ You may reveal this card from your opening hand. If you do, scry 3 at the beginning of your first upkeep.
-SVar:ScryOnUpkeep:DB$ Effect | Triggers$ TrigOpenScry | SVars$ DBScry,RemoveMe | Duration$ Permanent | Name$ Sphinx of Foresight effect | SpellDescription$ You may reveal this card from your opening hand. If you do, scry 3 at the beginning of your first upkeep.
+SVar:ScryOnUpkeep:DB$ Effect | Triggers$ TrigOpenScry | Duration$ Permanent | Name$ Sphinx of Foresight effect | SpellDescription$ You may reveal this card from your opening hand. If you do, scry 3 at the beginning of your first upkeep.
 SVar:TrigOpenScry:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ DBScry | TriggerDescription$ If you do, scry 3 at the beginning of your first upkeep.
 SVar:DBScry:DB$ Scry | ScryNum$ 3 | SubAbility$ RemoveMe
 SVar:RemoveMe:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

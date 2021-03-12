@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Enchantment
 A:AB$ DealDamage | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 1 damage to target creature. Create a 1/1 green Splinter creature token. It has flying and "Cumulative upkeep {G}." When it leaves the battlefield, it deals 1 damage to you and each creature you control. (At the beginning of its controller's upkeep, that player puts an age counter on it, then sacrifices it unless they pay its upkeep cost for each age counter on it.)
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_splinter_flying_cum | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | Triggers$ LeavesBattlefield | SVars$ TrigDamageAll,DBForget,ExileSelf | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | Triggers$ LeavesBattlefield | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:LeavesBattlefield:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Execute$ TrigDamageAll | TriggerDescription$ When it leaves the battlefield, it deals 1 damage to you and each creature you control.
 SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature.YouCtrl | ValidPlayers$ You | NumDmg$ 1 | SubAbility$ DBForget
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard | SubAbility$ ExileSelf

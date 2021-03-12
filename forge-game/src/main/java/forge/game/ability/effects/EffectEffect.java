@@ -48,7 +48,6 @@ public class EffectEffect extends SpellAbilityEffect {
 
         String[] effectAbilities = null;
         String[] effectTriggers = null;
-        String[] effectSVars = null;
         String[] effectKeywords = null;
         String[] effectStaticAbilities = null;
         String[] effectReplacementEffects = null;
@@ -72,10 +71,6 @@ public class EffectEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ReplacementEffects")) {
             effectReplacementEffects = sa.getParam("ReplacementEffects").split(",");
-        }
-
-        if (sa.hasParam("SVars")) {
-            effectSVars = sa.getParam("SVars").split(",");
         }
 
         if (sa.hasParam("Keywords")) {
@@ -146,14 +141,7 @@ public class EffectEffect extends SpellAbilityEffect {
             eff.setSetCode(sa.getHostCard().getSetCode());
             eff.setRarity(sa.getHostCard().getRarity());
 
-            // Grant SVars first in order to give references to granted abilities
-            if (effectSVars != null) {
-                for (final String s : effectSVars) {
-                    eff.setSVar(s, AbilityUtils.getSVar(sa, s));
-                }
-            }
-
-            // Abilities, triggers and SVars work the same as they do for Token
+            // Abilities and triggers work the same as they do for Token
             // Grant abilities
             if (effectAbilities != null) {
                 for (final String s : effectAbilities) {
@@ -177,9 +165,10 @@ public class EffectEffect extends SpellAbilityEffect {
             if (effectStaticAbilities != null) {
                 for (final String s : effectStaticAbilities) {
                     final StaticAbility addedStaticAbility = eff.addStaticAbility(AbilityUtils.getSVar(sa, s));
-                    if (addedStaticAbility != null) //prevent npe casting adventure card spell
+                    if (addedStaticAbility != null) { //prevent npe casting adventure card spell
                         addedStaticAbility.putParam("EffectZone", "Command");
                         addedStaticAbility.setIntrinsic(true);
+                    }
                 }
             }
 
@@ -188,7 +177,7 @@ public class EffectEffect extends SpellAbilityEffect {
                 for (final String s : effectReplacementEffects) {
                     final String actualReplacement = AbilityUtils.getSVar(sa, s);
 
-                    final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, eff, true, sa);
+                    final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, eff, true, eff.getCurrentState());
                     parsedReplacement.setActiveZone(EnumSet.of(ZoneType.Command));
                     parsedReplacement.setIntrinsic(true);
                     eff.addReplacementEffect(parsedReplacement);

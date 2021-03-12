@@ -4,7 +4,7 @@ Types:Creature Goblin
 PT:2/2
 K:Islandwalk
 T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ AnimateDB | TriggerDescription$ At the beginning of each combat, unless you pay {R}, whenever CARDNAME blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.
-SVar:AnimateDB:DB$ Effect | Triggers$ AttackerBlocked,Blocks | SVars$ PumpAttacker,PumpBlocker | UnlessCost$ R | UnlessPayer$ You | Duration$ UntilEndOfCombat
+SVar:AnimateDB:DB$ Effect | Triggers$ AttackerBlocked,Blocks | UnlessCost$ R | UnlessPayer$ You | Duration$ UntilEndOfCombat
 SVar:AttackerBlocked:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.EffectSource | Execute$ PumpAttacker | TriggerDescription$ Whenever EFFECTSOURCE blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.
 SVar:Blocks:Mode$ AttackerBlockedByCreature | ValidCard$ Card.EffectSource | ValidBlocker$ Creature | Execute$ PumpBlocker | TriggerDescription$ Whenever EFFECTSOURCE blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.
 SVar:PumpAttacker:DB$ Pump | Defined$ TriggeredAttacker | KW$ First Strike

@@ -1,7 +1,7 @@
 Name:Flame Fusillade
 ManaCost:3 R
 Types:Sorcery
-A:SP$ Effect | Cost$ 3 R | Name$ Flame Fusillade Effect | StaticAbilities$ STDamage | SVars$ ABDamage | SpellDescription$ Until end of turn, permanents you control gain "{T}: This permanent deals 1 damage to any target."
+A:SP$ Effect | Cost$ 3 R | Name$ Flame Fusillade Effect | StaticAbilities$ STDamage | SpellDescription$ Until end of turn, permanents you control gain "{T}: This permanent deals 1 damage to any target."
 SVar:STDamage:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Permanent.YouCtrl | AddAbility$ ABDamage | Description$ Until end of turn, permanents you control gain "{T}: This permanent deals 1 damage to any target."
 SVar:ABDamage:AB$ DealDamage | Cost$ T | NumDmg$ 1 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SpellDescription$ CARDNAME deals 1 damage to any target
 AI:RemoveDeck:All

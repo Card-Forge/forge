@@ -2,7 +2,7 @@ Name:Combine Guildmage
 ManaCost:G U
 Types:Creature Merfolk Wizard
 PT:2/2
-A:AB$ Effect | Cost$ 1 G T | ReplacementEffects$ ExtraETBCounter | SVars$ AddExtraCounter,MoveToBattlefield | SpellDescription$ This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it.
+A:AB$ Effect | Cost$ 1 G T | ReplacementEffects$ ExtraETBCounter | SpellDescription$ This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it.
 SVar:ExtraETBCounter:Event$ Moved | ActiveZones$ Command | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Other | ReplaceWith$ AddExtraCounter | Description$ This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it.
 SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ MoveToBattlefield
 SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard

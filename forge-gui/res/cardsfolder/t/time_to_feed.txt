@@ -1,7 +1,7 @@
 Name:Time to Feed
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Effect | Cost$ 2 G | ValidTgts$ Creature.OppCtrl | AILogic$ Fight | TgtPrompt$ Select target creature an oppoenent controls | RememberObjects$ Targeted | Triggers$ TrigDies | SVars$ TrigGainLife | SubAbility$ DBFight | SpellDescription$ Choose target creature an opponent controls. When that creature dies this turn, you gain 3 life. Target creature you control fights that creature.
+A:SP$ Effect | Cost$ 2 G | ValidTgts$ Creature.OppCtrl | AILogic$ Fight | TgtPrompt$ Select target creature an oppoenent controls | RememberObjects$ Targeted | Triggers$ TrigDies | SubAbility$ DBFight | SpellDescription$ Choose target creature an opponent controls. When that creature dies this turn, you gain 3 life. Target creature you control fights that creature.
 SVar:TrigDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.IsRemembered | OneOff$ True | Execute$ TrigGainLife | TriggerDescription$ When that creature dies this turn, you gain 3 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control to fight the first target

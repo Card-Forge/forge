@@ -6,7 +6,7 @@ K:Flying
 K:MayEffectFromOpeningHand:RevealCard
 SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | SubAbility$ CounterFirstSpellEffect | SpellDescription$ You may reveal this card from your opening hand. If you do, when each opponent casts their first spell of the game, counter that spell unless that player pays {1}.
 SVar:CounterFirstSpellEffect:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Triggers$ TrigCounter | SVars$ TrigCounterSpell,RemoveEffect,SpellsNeedExtraManaEffect | EffectOwner$ Player.IsRemembered | Duration$ Permanent
+SVar:DBEffect:DB$ Effect | Triggers$ TrigCounter | EffectOwner$ Player.IsRemembered | Duration$ Permanent
 SVar:TrigCounter:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigCounterSpell | OneOff$ True | TriggerZones$ Command | TriggerDescription$ Whenever an opponent casts a spell for the first time, counter that spell unless that player pays {1}.
 SVar:TrigCounterSpell:DB$ Counter | Defined$ TriggeredSpellAbility | UnlessCost$ 1 | UnlessPayer$ You | SubAbility$ RemoveEffect
 SVar:RemoveEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

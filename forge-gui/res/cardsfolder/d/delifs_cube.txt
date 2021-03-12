@@ -1,7 +1,7 @@
 Name:Delif's Cube
 ManaCost:1
 Types:Artifact
-A:AB$ Effect | Cost$ 2 T | Name$ Delif's Cube Effect | ValidTgts$ Creature.YouCtrl | Triggers$ TrigAttackerUnblocked,TrigLeave | SVars$ DBPump,PutCounter,ExileEffect | RememberObjects$ Targeted | ImprintCards$ Self | SpellDescription$ This turn, when target creature you control attacks and isn't blocked, it assigns no combat damage this turn and you put a cube counter on CARDNAME.
+A:AB$ Effect | Cost$ 2 T | Name$ Delif's Cube Effect | ValidTgts$ Creature.YouCtrl | Triggers$ TrigAttackerUnblocked,TrigLeave | RememberObjects$ Targeted | ImprintCards$ Self | SpellDescription$ This turn, when target creature you control attacks and isn't blocked, it assigns no combat damage this turn and you put a cube counter on CARDNAME.
 SVar:TrigAttackerUnblocked:Mode$ AttackerUnblocked | ValidCard$ Card.IsRemembered | Execute$ DBPump | TriggerDescription$ This turn, when targeted creature attacks and isn't blocked, it assigns no combat damage this turn and you put a cube counter on Delif's Cube.
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ HIDDEN CARDNAME assigns no combat damage | SubAbility$ PutCounter
 SVar:PutCounter:DB$ PutCounter | Defined$ Imprinted | CounterType$ CUBE | CounterNum$ 1 | SubAbility$ ExileEffect

@@ -2,10 +2,10 @@ Name:Savage Summoning
 ManaCost:G
 Types:Instant
 K:CARDNAME can't be countered.
-A:SP$ Effect | Cost$ G | StaticAbilities$ STFlash | Triggers$ SpellCastTrig | SVars$ SavageSummon,ExileSelf,ETBCounters,ETBAddExtraCounter,MoveToBattlefield,STCantBeCountered | SpellDescription$ The next creature spell you cast this turn can be cast as though it had flash. That spell can't be countered. That creature enters the battlefield with an additional +1/+1 counter on it.
+A:SP$ Effect | Cost$ G | StaticAbilities$ STFlash | Triggers$ SpellCastTrig | SpellDescription$ The next creature spell you cast this turn can be cast as though it had flash. That spell can't be countered. That creature enters the battlefield with an additional +1/+1 counter on it.
 SVar:STFlash:Mode$ CastWithFlash | ValidCard$ Card.Creature | ValidSA$ Spell | EffectZone$ Command | Caster$ You
 SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ SavageSummon | Static$ True | TriggerDescription$ The next creature spell you cast this turn can be cast as though it had flash. That spell can't be countered. That creature enters the battlefield with an additional +1/+1 counter on it.
-SVar:SavageSummon:DB$ Effect | StaticAbilities$ STCantBeCountered | ReplacementEffects$ ETBCounters | SVars$ ExileSelf,ETBAddExtraCounter,MoveToBattlefield | RememberObjects$ TriggeredCard | SubAbility$ ExileSelf
+SVar:SavageSummon:DB$ Effect | StaticAbilities$ STCantBeCountered | ReplacementEffects$ ETBCounters | RememberObjects$ TriggeredCard | SubAbility$ ExileSelf
 SVar:STCantBeCountered:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | AddHiddenKeyword$ CARDNAME can't be countered. | AffectedZone$ Stack | Description$ That spell can't be countered.
 SVar:ETBCounters:Event$ Moved | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.IsRemembered | ReplaceWith$ ETBAddExtraCounter | Description$ That creature enters the battlefield with an additional +1/+1 counters on it.
 SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ MoveToBattlefield

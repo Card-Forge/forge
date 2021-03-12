@@ -8,7 +8,7 @@ SVar:DoubleCounters:DB$ ReplaceEffect | VarName$ CounterNum | VarValue$ Z
 SVar:Y:ReplaceCount$TokenNum/Twice
 SVar:Z:ReplaceCount$CounterNum/Twice
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, until end of turn, whenever you tap a land for mana, add one mana of any type that land produced.
-SVar:RolledChaos:DB$ Effect | AILogic$ Always | Triggers$ TrigTapForMana | SVars$ TrigMana
+SVar:RolledChaos:DB$ Effect | AILogic$ Always | Triggers$ TrigTapForMana
 SVar:TrigTapForMana:Mode$ TapsForMana | TriggerZones$ Command | ValidCard$ Land | Activator$ You | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever you tap a land for mana, add one mana of any type that land produced.
 SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ You
 SVar:AIRollPlanarDieParams:Mode$ Always | MinTurn$ 1 | RollInMain1$ True

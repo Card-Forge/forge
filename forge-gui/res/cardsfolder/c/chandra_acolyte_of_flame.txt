@@ -8,7 +8,7 @@ SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | Permanent$ True | SubAb
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Effect | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | AILogic$ CastFromGraveThisTurn | ValidTgts$ Instant.YouCtrl+cmcLE3,Sorcery.YouCtrl+cmcLE3 | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card with mana cost 3 or less | RememberObjects$ Targeted | StaticAbilities$ Play | ExileOnMoved$ Graveyard | SubAbility$ DBEffect | SpellDescription$ You may cast target instant or sorcery card with mana cost 3 or less from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may play remembered card.
-SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Stack | ReplacementEffects$ ReplaceGraveyard | SVars$ MoveExile
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Stack | ReplacementEffects$ ReplaceGraveyard
 SVar:ReplaceGraveyard:Event$ Moved | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile | Description$ If that card would be put into your graveyard this turn, exile it instead.
 SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile
 DeckHas:Ability$Token

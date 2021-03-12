@@ -4,7 +4,7 @@ Types:Enchantment Saga
 K:Saga:4:DBScry,DBNameCard,DBEffect,DBLook
 SVar:DBScry:DB$ Scry | ScryNum$ 2 | SpellDescription$ Scry 2.
 SVar:DBNameCard:DB$ NameCard | SpellDescription$ Choose a card name.
-SVar:DBEffect:DB$ Effect | Name$ Medomai's Prophecy Effect | Triggers$ NamedCardCast | SVars$ NamedCardCast,TrigDraw,ExileEffect | SpellDescription$ When you cast a spell with the chosen name for the first time this turn, draw two cards.
+SVar:DBEffect:DB$ Effect | Name$ Medomai's Prophecy Effect | Triggers$ NamedCardCast | SpellDescription$ When you cast a spell with the chosen name for the first time this turn, draw two cards.
 SVar:DBLook:DB$ Dig | Defined$ Player | DigNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | SpellDescription$ Look at the top card of each player's library.
 SVar:NamedCardCast:Mode$ SpellCast | ValidCard$ Card.NamedCard | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ When you cast a spell with the chosen name for the first time this turn, draw two cards.
 SVar:TrigDraw:DB$ Draw | NumCards$ 2 | SubAbility$ ExileEffect

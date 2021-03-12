@@ -15,7 +15,6 @@ import forge.game.zone.ZoneType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import com.google.common.collect.ImmutableList;
 
@@ -29,7 +28,6 @@ public class AnimateAllEffect extends AnimateEffectBase {
     @Override
     public void resolve(final SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Map<String, String> svars = host.getSVars();
 
         // AF specific sa
         Integer power = null;
@@ -80,8 +78,8 @@ public class AnimateAllEffect extends AnimateEffectBase {
         // allow SVar substitution for keywords
         for (int i = 0; i < keywords.size(); i++) {
             final String k = keywords.get(i);
-            if (svars.containsKey(k)) {
-                keywords.add(svars.get(k));
+            if (host.hasSVar(k)) {
+                keywords.add(host.getSVar(k));
                 keywords.remove(k);
             }
         }

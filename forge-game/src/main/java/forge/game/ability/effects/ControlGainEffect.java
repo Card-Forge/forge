@@ -232,7 +232,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             @Override
             public void run() { 
                 doLoseControl(c, hostCard, bTapOnLose, tStamp);
-                c.getSVars().remove("SacMe");
+                c.removeSVar("SacMe");
             }
         };
 
