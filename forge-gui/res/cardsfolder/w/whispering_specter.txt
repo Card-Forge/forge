@@ -5,10 +5,8 @@ PT:1/1
 K:Flying
 K:Infect
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may sacrifice it. If you do, that player discards a card for each poison counter they have.
-SVar:TrigSacrifice:DB$ SacrificeAll | ValidCards$ Card.Self | RememberSacrificed$ True | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ X | Mode$ TgtChoose | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:TrigSacrifice:DB$ SacrificeAll | Defined$ Self | RememberSacrificed$ True | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ X | Mode$ TgtChoose | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggeredTarget$PoisonCounters
-SVar:Y:Remembered$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/whispering_specter.jpg
 Oracle:Flying\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhenever Whispering Specter deals combat damage to a player, you may sacrifice it. If you do, that player discards a card for each poison counter they have.

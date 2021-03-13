@@ -4,9 +4,7 @@ Types:Creature Thalakos Wizard
 PT:1/1
 K:Shadow
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigSacrifice | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may sacrifice it. If you do, gain control of target creature. (This effect lasts indefinitely.)
-SVar:TrigSacrifice:DB$ SacrificeAll | ValidCards$ Card.Self | RememberSacrificed$ True | SubAbility$ DBGainControl
-SVar:DBGainControl:DB$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:TrigSacrifice:DB$ SacrificeAll | Defined$ Self | RememberSacrificed$ True | SubAbility$ DBGainControl
+SVar:DBGainControl:DB$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_deceiver.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Thalakos Deceiver attacks and isn't blocked, you may sacrifice it. If you do, gain control of target creature. (This effect lasts indefinitely.)

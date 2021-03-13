@@ -112,7 +112,7 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
         CardCollection topCards  = player.getTopXCardsFromLibrary(numCards);
         int maxCards = topCards.size();
 
-        CardCollectionView orderedCards = activator.getController().orderMoveToZoneList(topCards, ZoneType.Library);
+        CardCollectionView orderedCards = activator.getController().orderMoveToZoneList(topCards, ZoneType.Library, sa);
         for (int i = maxCards - 1; i >= 0; i--) {
             Card next = orderedCards.get(i);
             player.getGame().getAction().moveToLibrary(next, 0, sa);

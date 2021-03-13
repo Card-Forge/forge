@@ -31,6 +31,14 @@ public class PlayerCollection extends FCollection<Player> {
         }
         return result;
     }
+
+    public final CardCollection getCardsIn(Iterable<ZoneType> zones) {
+        CardCollection result = new CardCollection();
+        for (Player p : this) {
+            result.addAll(p.getCardsIn(zones));
+        }
+        return result;
+    }
     
     public final CardCollection getCreaturesInPlay() {
         CardCollection result = new CardCollection();

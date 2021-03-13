@@ -353,9 +353,9 @@ public class DigEffect extends SpellAbilityEffect {
                             CardLists.shuffle(afterOrder);
                         } else if (!skipReorder && rest.size() > 1) {
                             if (destZone2 == ZoneType.Graveyard) {
-                                afterOrder = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, rest, destZone2);
+                                afterOrder = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, rest, destZone2, sa);
                             } else {
-                                afterOrder = (CardCollection) chooser.getController().orderMoveToZoneList(rest, destZone2);
+                                afterOrder = (CardCollection) chooser.getController().orderMoveToZoneList(rest, destZone2, sa);
                             }
                         }
                         if (libraryPosition2 != -1) {

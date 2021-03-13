@@ -238,7 +238,7 @@ public abstract class SpellAbilityEffect {
     }
 
 
-    protected static void registerDelayedTrigger(final SpellAbility sa, String location, final List<Card> crds) {
+    protected static void registerDelayedTrigger(final SpellAbility sa, String location, final Iterable<Card> crds) {
         boolean intrinsic = sa.isIntrinsic();
         boolean your = location.startsWith("Your");
         boolean combat = location.endsWith("Combat");
@@ -298,9 +298,9 @@ public abstract class SpellAbilityEffect {
         if (location.equals("Hand")) {
             trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand";
         } else if (location.equals("SacrificeCtrl")) {
-            trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered";
+            trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI";
         } else if (location.equals("Sacrifice")) {
-            trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered | Controller$ You";
+            trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI | Controller$ You";
         } else if (location.equals("Exile")) {
             trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Exile";
         } else if (location.equals("Destroy")) {

@@ -4,9 +4,6 @@ Types:Creature Human Wizard
 PT:1/2
 K:Haste
 A:AB$ SetState | Cost$ T | ValidTgts$ Creature.YouCtrl+faceDown | Mode$ TurnFace | SubAbility$ DBDelTrig | SpellDescription$ Turn target face-down creature you control face up. At the beginning of the next end step, sacrifice it.
-SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigSac | RememberObjects$ Targeted | TriggerDescription$ At the beginning of the next end step, sacrifice it. | SubAbility$ DBCleanup
-SVar:TrigSac:DB$ SacrificeAll | Defined$ DelayTriggerRemembered
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBPump:DB$ Pump | Defined$ Targeted | AtEOT$ Sacrifice
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_alarmist.jpg
 Oracle:Haste\n{T}: Turn target face-down creature you control face up. At the beginning of the next end step, sacrifice it.

@@ -163,9 +163,6 @@ public abstract class PlayerController {
     public abstract ImmutablePair<CardCollection, CardCollection> arrangeForSurveil(CardCollection topN);
 
     public abstract boolean willPutCardOnTop(Card c);
-    public final CardCollectionView orderMoveToZoneList(CardCollectionView cards, ZoneType destinationZone) {
-        return orderMoveToZoneList(cards, destinationZone, null);
-    }
     public abstract CardCollectionView orderMoveToZoneList(CardCollectionView cards, ZoneType destinationZone, SpellAbility source);
 
     /** p = target player, validCards - possible discards, min cards to discard */

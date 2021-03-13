@@ -7,7 +7,5 @@ S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X |
 SVar:X:Count$Devotion.Red
 SVar:BuffedBy:Permanent.Red
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddKeyword$ Haste | Description$ Other creatures you control have haste.
-A:AB$ ChangeZone | Cost$ 2 R | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Red,Creature.Artifact | ChangeNum$ 1 | Optional$ You | RememberChanged$ True | SubAbility$ DBPump | StackDescription$ SpellDescription | SpellDescription$ You may put a red creature card or an artifact creature card from your hand onto the battlefield. Sacrifice it at the beginning of the next end step.
-SVar:DBPump:DB$ Pump | Defined$ Remembered | AtEOT$ Sacrifice | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ ChangeZone | Cost$ 2 R | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Red,Creature.Artifact | ChangeNum$ 1 | Optional$ You | AtEOT$ Sacrifice | StackDescription$ SpellDescription | SpellDescription$ You may put a red creature card or an artifact creature card from your hand onto the battlefield. Sacrifice it at the beginning of the next end step.
 Oracle:Indestructible\nAs long as your devotion to red is less than five, Purphoros isn't a creature.\nOther creatures you control have haste.\n{2}{R}: You may put a red creature card or an artifact creature card from your hand onto the battlefield. Sacrifice it at the beginning of the next end step.

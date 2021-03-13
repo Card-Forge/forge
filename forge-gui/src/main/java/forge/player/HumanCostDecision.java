@@ -86,7 +86,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         if (discardType.equals("Hand")) {
             if (hand.size() > 1 && ability.getActivatingPlayer() != null) {
-                hand = ability.getActivatingPlayer().getController().orderMoveToZoneList(hand, ZoneType.Graveyard);
+                hand = ability.getActivatingPlayer().getController().orderMoveToZoneList(hand, ZoneType.Graveyard, ability);
             }
             return PaymentDecision.card(hand);
         }
@@ -105,7 +105,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
             CardCollectionView randomSubset = Aggregates.random(hand, c, new CardCollection());
             if (randomSubset.size() > 1 && ability.getActivatingPlayer() != null) {
-                randomSubset = ability.getActivatingPlayer().getController().orderMoveToZoneList(randomSubset, ZoneType.Graveyard);
+                randomSubset = ability.getActivatingPlayer().getController().orderMoveToZoneList(randomSubset, ZoneType.Graveyard, ability);
             }
             return PaymentDecision.card(randomSubset);
         }

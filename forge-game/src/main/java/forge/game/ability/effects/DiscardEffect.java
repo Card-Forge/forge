@@ -145,7 +145,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         CardCollectionView toDiscard = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
 
                         if (toDiscard.size() > 1) {
-                            toDiscard = GameActionUtil.orderCardsByTheirOwners(game, toDiscard, ZoneType.Graveyard);
+                            toDiscard = GameActionUtil.orderCardsByTheirOwners(game, toDiscard, ZoneType.Graveyard, sa);
                         }
 
                         for (final Card c : toDiscard) {
@@ -164,7 +164,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     CardCollectionView toDiscard = p.getCardsIn(ZoneType.Hand);
 
                     if (toDiscard.size() > 1) {
-                        toDiscard = GameActionUtil.orderCardsByTheirOwners(game, toDiscard, ZoneType.Graveyard);
+                        toDiscard = GameActionUtil.orderCardsByTheirOwners(game, toDiscard, ZoneType.Graveyard, sa);
                     }
 
                     for(Card c : Lists.newArrayList(toDiscard)) { // without copying will get concurrent modification exception
@@ -181,7 +181,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     }
                     CardCollectionView dPHand = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), "Card.IsNotRemembered", p, source);
                     if (dPHand.size() > 1) {
-                        dPHand = GameActionUtil.orderCardsByTheirOwners(game, dPHand, ZoneType.Graveyard);
+                        dPHand = GameActionUtil.orderCardsByTheirOwners(game, dPHand, ZoneType.Graveyard, sa);
                     }
 
                     for (final Card c : dPHand) {
@@ -221,7 +221,7 @@ public class DiscardEffect extends SpellAbilityEffect {
 
                         CardCollectionView toDiscardView = toDiscard;
                         if (toDiscard.size() > 1) {
-                            toDiscardView = GameActionUtil.orderCardsByTheirOwners(game, toDiscard, ZoneType.Graveyard);
+                            toDiscardView = GameActionUtil.orderCardsByTheirOwners(game, toDiscard, ZoneType.Graveyard, sa);
                         }
 
                         for (Card c : toDiscardView) {
@@ -242,7 +242,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         CardCollectionView toDiscard = p.getController().chooseCardsToDiscardUnlessType(Math.min(numCards, numCardsInHand), hand, sa.getParam("UnlessType"), sa);
 
                         if (toDiscard.size() > 1) {
-                            toDiscard = GameActionUtil.orderCardsByTheirOwners(game, toDiscard, ZoneType.Graveyard);
+                            toDiscard = GameActionUtil.orderCardsByTheirOwners(game, toDiscard, ZoneType.Graveyard, sa);
                         }
 
                         for (Card c : toDiscard) {
@@ -275,7 +275,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     CardCollectionView dPChHand = CardLists.getValidCards(dPHand, valid.split(","), source.getController(), source, sa);
                     dPChHand = CardLists.filter(dPChHand, Presets.NON_TOKEN);
                     if (dPChHand.size() > 1) {
-                        dPChHand = GameActionUtil.orderCardsByTheirOwners(game, dPChHand, ZoneType.Graveyard);
+                        dPChHand = GameActionUtil.orderCardsByTheirOwners(game, dPChHand, ZoneType.Graveyard, sa);
                     }
 
                     // Reveal cards that will be discarded?
@@ -322,7 +322,7 @@ public class DiscardEffect extends SpellAbilityEffect {
 
                     if (toBeDiscarded != null) {
                         if (toBeDiscarded.size() > 1) {
-                            toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard);
+                            toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
                         }
 
                         if (mode.startsWith("Reveal") ) {

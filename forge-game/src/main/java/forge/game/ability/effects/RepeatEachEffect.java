@@ -89,7 +89,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
 
         if (loopOverCards) {
             if (sa.hasParam("ChooseOrder") && repeatCards.size() >= 2) {
-                repeatCards = player.getController().orderMoveToZoneList(repeatCards, ZoneType.Stack);
+                repeatCards = player.getController().orderMoveToZoneList(repeatCards, ZoneType.Stack, sa);
             }
 
             for (Card card : repeatCards) {

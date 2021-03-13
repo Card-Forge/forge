@@ -162,7 +162,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 if (foundDest != null) {
                     // Allow ordering of found cards
                     if ((foundDest.isKnown()) && found.size() >= 2 && !foundDest.equals(ZoneType.Exile)) {
-                        found = (CardCollection)p.getController().orderMoveToZoneList(found, foundDest);
+                        found = (CardCollection)p.getController().orderMoveToZoneList(found, foundDest, sa);
                     }
 
                     final Iterator<Card> itr = found.iterator();
@@ -213,11 +213,11 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 if (sa.hasParam("NoneFoundDestination") && found.size() < untilAmount) {
                  // Allow ordering the revealed cards
                     if ((noneFoundDest.isKnown()) && revealed.size() >= 2) {
-                        revealed = (CardCollection)p.getController().orderMoveToZoneList(revealed, noneFoundDest);
+                        revealed = (CardCollection)p.getController().orderMoveToZoneList(revealed, noneFoundDest, sa);
                     }
                     if (noneFoundDest == ZoneType.Library && !shuffle
                             && !sa.hasParam("RevealRandomOrder") && revealed.size() >= 2) {
-                        revealed = (CardCollection)p.getController().orderMoveToZoneList(revealed, noneFoundDest);
+                        revealed = (CardCollection)p.getController().orderMoveToZoneList(revealed, noneFoundDest, sa);
                     }
 
                     final Iterator<Card> itr = revealed.iterator();
@@ -232,11 +232,11 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 } else {
                  // Allow ordering the rest of the revealed cards
                     if ((revealedDest.isKnown()) && revealed.size() >= 2) {
-                        revealed = (CardCollection)p.getController().orderMoveToZoneList(revealed, revealedDest);
+                        revealed = (CardCollection)p.getController().orderMoveToZoneList(revealed, revealedDest, sa);
                     }
                     if (revealedDest == ZoneType.Library && !shuffle
                             && !sa.hasParam("RevealRandomOrder") && revealed.size() >= 2) {
-                        revealed = (CardCollection)p.getController().orderMoveToZoneList(revealed, revealedDest);
+                        revealed = (CardCollection)p.getController().orderMoveToZoneList(revealed, revealedDest, sa);
                     }
 
                     final Iterator<Card> itr = revealed.iterator();

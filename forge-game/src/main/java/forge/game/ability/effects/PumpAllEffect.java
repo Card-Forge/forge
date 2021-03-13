@@ -5,10 +5,10 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.event.GameEventCardStatsChanged;
-import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
@@ -16,11 +16,12 @@ import forge.util.TextUtil;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 public class PumpAllEffect extends SpellAbilityEffect {
     private static void applyPumpAll(final SpellAbility sa,
-            final List<Card> list, final int a, final int d,
+            final Iterable<Card> list, final int a, final int d,
             final List<String> keywords, final List<ZoneType> affectedZones) {
         
         final Game game = sa.getActivatingPlayer().getGame();
@@ -109,6 +110,10 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
             game.fireEvent(new GameEventCardStatsChanged(tgtC));
         }
+
+        if (sa.hasParam("AtEOT") && !Iterables.isEmpty(list)) {
+            registerDelayedTrigger(sa, sa.getParam("AtEOT"), list);
+        }
     }
 
     @Override
@@ -127,7 +132,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(final SpellAbility sa) {
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
+        final PlayerCollection tgtPlayers = getTargetPlayers(sa);
         final List<ZoneType> affectedZones = Lists.newArrayList();
         final Game game = sa.getActivatingPlayer().getGame();
 
@@ -137,17 +142,11 @@ public class PumpAllEffect extends SpellAbilityEffect {
             affectedZones.add(ZoneType.Battlefield);
         }
 
-        CardCollection list = new CardCollection();
+        CardCollectionView list;
         if (!sa.usesTargeting() && !sa.hasParam("Defined")) {
-            for (final ZoneType zone : affectedZones) {
-                list.addAll(game.getCardsIn(zone));
-            }
+            list = game.getCardsIn(affectedZones);
         } else {
-            for (final ZoneType zone : affectedZones) {
-                for (final Player p : tgtPlayers) {
-                    list.addAll(p.getCardsIn(zone));
-                }
-            }
+            list = tgtPlayers.getCardsIn(affectedZones);
         }
 
         String valid = "";
@@ -155,7 +154,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
             valid = sa.getParam("ValidCards");
         }
 
-        list = (CardCollection)AbilityUtils.filterListByType(list, valid, sa);
+        list = AbilityUtils.filterListByType(list, valid, sa);
 
         List<String> keywords = Lists.newArrayList();
         if (sa.hasParam("KW")) {
@@ -174,6 +173,6 @@ public class PumpAllEffect extends SpellAbilityEffect {
         applyPumpAll(sa, list, a, d, keywords, affectedZones);
 
         replaceDying(sa);
-    } // pumpAllResolve()
+    }
 
 }
