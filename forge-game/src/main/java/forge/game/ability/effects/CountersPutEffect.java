@@ -162,14 +162,17 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 chooser = choosers.get(0);
             }
 
-            CardCollection choices = new CardCollection(game.getCardsIn(choiceZone));
-
             int n = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("ChoiceAmount",
                     "1"), sa);
             int m = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("MinChoiceAmount",
                     sa.getParamOrDefault("ChoiceAmount", "1")), sa);
 
-            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, card, sa);
+            // no choices allowed
+            if (n <= 0) {
+                return;
+            }
+
+            CardCollection choices = CardLists.getValidCards(game.getCardsIn(choiceZone), sa.getParam("Choices"), activator, card, sa);
 
             String title = Localizer.getInstance().getMessage("lblChooseaCard") + " ";
             if (sa.hasParam("ChoiceTitle")) {
