@@ -1,0 +1,9 @@
+Name:Kalamax, the Stormsire|Deck:Kalamax, the Stormsire.dck|Variant:Commander|Avatar:Kalamax, the Stormsire|Desc:
+Name:Rielle, the Everwise|Deck:Rielle, the Everwise.dck|Variant:Commander|Avatar:Rielle, the Everwise|Desc:
+Name:Lukka, Coppercoat Outcast|Deck:Lukka, Coppercoat Outcast.dck|Variant:Planeswalker|Avatar:Lukka, Coppercoat Outcast|Desc:
+Name:Illuna, Apex of Wishes|Deck:Illuna, Apex of Wishes.dck|Variant:Commander|Avatar:Illuna, Apex of Wishes|Desc:
+Name:Xyris, the Writhing Storm|Deck:Xyris, the Writhing Storm.dck|Variant:Commander|Avatar:Xyris, the Writhing Storm|Desc:
+Name:Vivien, Monsters' Advocate|Deck:Vivien, Monsters Advocate.dck|Variant:Planeswalker|Avatar:Vivien, Monsters' Advocate|Desc:
+Name:Mutants of Ketria|Deck:Mutants of Ketria.dck|Variant:None|Avatar:Archipelagore|Desc:
+Name:Hermit Druid|Deck:Hermit Druid.dck|Variant:Vanguard|Avatar:Hermit Druid|Desc:
+Name:Random Ketria|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

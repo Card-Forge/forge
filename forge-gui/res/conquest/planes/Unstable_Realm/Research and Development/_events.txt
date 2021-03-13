@@ -1,0 +1,6 @@
+Name:Slivdrazi Monstrosity|Deck:Slivdrazi Monstrosity.dck|Variant:Vanguard|Avatar:Slivdrazi Monstrosity|Desc:
+Name:Border Guardian|Deck:Border Guardian.dck|Variant:None|Avatar:Border Guardian|Desc:
+Name:Shahrazad|Deck:Shahrazad.dck|Variant:None|Avatar:Shahrazad|Desc:
+Name:Vazal, the Compleat|Deck:Vazal, the Compleat.dck|Variant:Commander|Avatar:Vazal, the Compleat|Desc:
+Name:The R&D Experiment|Deck:The RnD Experiment.dck|Variant:None|Avatar:Puresteel Angel|Desc:
+Name:Unstable Planar Gate|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
