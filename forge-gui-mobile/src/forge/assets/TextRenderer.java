@@ -302,7 +302,6 @@ public class TextRenderer {
                 }
                 break;
             case '(':
-            case '（':
                 if (inSymbolCount > 0) {
                     inSymbolCount = 0;
                     text.insert(0, '{'); //if not a symbol, render as text
@@ -323,7 +322,6 @@ public class TextRenderer {
                 }
                 break;
             case ')':
-            case '）':
                 if (inSymbolCount > 0) {
                     inSymbolCount = 0;
                     text.insert(0, '{'); //if not a symbol, render as text
