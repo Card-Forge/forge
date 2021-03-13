@@ -1,10 +1,5 @@
 #Add one announcement per line
 Get in the discord if you aren't yet.
-The game is now translated into Japanese (not all the messages are translated yet).
-Mutate is now fully implemented.
-The game now supports an assortment of silver-bordered cards from Unhinged, Unglued, Unstable, and other similar sets.
-There are new Net Deck categories - the Standard, Modern, Pioneer, Legacy, and Vintage archives.
-Draft cubes have been updated to account for the newly supported cards, MTGO Vintage December 2020 cube was added.
-New Possibility Storm puzzles were added to the Puzzle Mode (IKO/M21/ZNR/KHM), including puzzles that utilize Mutate.
-Planar Conquest now has a new plane accessible - Eldraine.
-Forge now supports promos which are available on Scryfall.
+Planar Conquest now has a new plane accessible - Ikoria.
+In Planar Conquest, it's now possible to collect C19 cards on Eldraine and ZNE/ZNC cards on Zendikar.
+In Planar Conquest, the Eldraine plane now holds a little secret that's rather unhinged. It may be difficult to find though.
