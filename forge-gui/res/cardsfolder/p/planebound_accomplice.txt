@@ -2,8 +2,6 @@ Name:Planebound Accomplice
 ManaCost:2 R
 Types:Creature Human Wizard
 PT:1/3
-A:AB$ ChangeZone | Cost$ R | Origin$ Hand | Destination$ Battlefield | ChangeType$ Planeswalker.YouOwn | RememberChanged$ True | Optional$ True | SubAbility$ DBPump | AILogic$ BeforeCombat | SpellDescription$ You may put a planeswalker card from your hand onto the battlefield. Sacrifice it at the beginning of the next end step.
-SVar:DBPump:DB$ Pump | Defined$ Remembered | AtEOT$ Sacrifice | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ ChangeZone | Cost$ R | Origin$ Hand | Destination$ Battlefield | ChangeType$ Planeswalker.YouOwn | Optional$ True | AtEOT$ Sacrifice | AILogic$ BeforeCombat | SpellDescription$ You may put a planeswalker card from your hand onto the battlefield. Sacrifice it at the beginning of the next end step.
 AI:RemoveDeck:Random
 Oracle:{R}: You may put a planeswalker card from your hand onto the battlefield. Sacrifice it at the beginning of the next end step.

@@ -625,7 +625,7 @@ public final class GameActionUtil {
         return sb.toString();
     }
 
-    public static CardCollectionView orderCardsByTheirOwners(Game game, CardCollectionView list, ZoneType dest) {
+    public static CardCollectionView orderCardsByTheirOwners(Game game, CardCollectionView list, ZoneType dest, SpellAbility sa) {
         CardCollection completeList = new CardCollection();
         for (Player p : game.getPlayers()) {
             CardCollection subList = new CardCollection();
@@ -636,7 +636,7 @@ public final class GameActionUtil {
             }
             CardCollectionView subListView = subList;
             if (subList.size() > 1) {
-                subListView = p.getController().orderMoveToZoneList(subList, dest);
+                subListView = p.getController().orderMoveToZoneList(subList, dest, sa);
             }
             completeList.addAll(subListView);
         }

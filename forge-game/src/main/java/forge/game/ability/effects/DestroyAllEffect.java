@@ -86,7 +86,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         list = CardLists.filter(list, CardPredicates.Presets.CAN_BE_DESTROYED);
 
         if (list.size() > 1) {
-            list = GameActionUtil.orderCardsByTheirOwners(game, list, ZoneType.Graveyard);
+            list = GameActionUtil.orderCardsByTheirOwners(game, list, ZoneType.Graveyard, sa);
         }
 
         CardZoneTable table = new CardZoneTable();

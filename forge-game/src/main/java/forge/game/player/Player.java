@@ -1780,7 +1780,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         CardCollectionView milledView = milled;
 
         if (destination == ZoneType.Graveyard && milled.size() > 1) {
-            milledView = GameActionUtil.orderCardsByTheirOwners(game, milled, ZoneType.Graveyard);
+            milledView = GameActionUtil.orderCardsByTheirOwners(game, milled, ZoneType.Graveyard, sa);
         }
 
         for (Card m : milledView) {

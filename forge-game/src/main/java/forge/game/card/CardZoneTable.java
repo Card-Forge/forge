@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Table;
 
 import forge.game.Game;
@@ -93,5 +94,9 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
             allCards = CardLists.getValidCards(allCards, valid.split(","), host.getController(), host, sa);
         }
         return allCards;
+    }
+
+    public Iterable<Card> allCards() {
+        return Iterables.concat(values());
     }
 }

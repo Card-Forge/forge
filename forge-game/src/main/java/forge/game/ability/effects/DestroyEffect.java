@@ -76,7 +76,7 @@ public class DestroyEffect extends SpellAbilityEffect {
         CardCollection untargetedCards = CardUtil.getRadiance(sa);
 
         if (tgtCards.size() > 1) {
-            tgtCards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, tgtCards, ZoneType.Graveyard);
+            tgtCards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, tgtCards, ZoneType.Graveyard, sa);
         }
 
         CardZoneTable table = new CardZoneTable();
@@ -95,7 +95,7 @@ public class DestroyEffect extends SpellAbilityEffect {
         }
 
         if (untargetedCards.size() > 1) {
-            untargetedCards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, untargetedCards, ZoneType.Graveyard);
+            untargetedCards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, untargetedCards, ZoneType.Graveyard, sa);
         }
 
         for (final Card unTgtC : untargetedCards) {

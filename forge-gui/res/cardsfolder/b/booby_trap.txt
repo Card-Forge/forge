@@ -9,9 +9,7 @@ SVar:RevealedDraw:DB$ Draw | Defined$ Player.Chosen | NumCards$ 1 | SubAbility$ 
 SVar:TrigReveal:DB$ Reveal | Defined$ Player.Chosen | RevealValid$ Card.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Drawn | ValidCard$ Card.NamedCard+OwnedBy Player.Chosen | TriggerZones$ Battlefield | Execute$ TrapTriggered | TriggerDescription$ When the chosen player draws a card with the chosen name, sacrifice CARDNAME. If you do, CARDNAME deals 10 damage to that player.
-SVar:TrapTriggered:DB$ SacrificeAll | ValidCards$ Card.Self | RememberSacrificed$ True | SubAbility$ Explosion
-SVar:Explosion:DB$ DealDamage | NumDmg$ 10 | Defined$ Player.Chosen | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
-SVar:X:Remembered$Amount
+SVar:TrapTriggered:DB$ SacrificeAll | Defined$ Self | RememberSacrificed$ True | SubAbility$ Explosion
+SVar:Explosion:DB$ DealDamage | NumDmg$ 10 | Defined$ Player.Chosen | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/booby_trap.jpg
 Oracle:As Booby Trap enters the battlefield, choose an opponent and a card name other than a basic land card name.\nThe chosen player reveals each card they draw.\nWhen the chosen player draws a card with the chosen name, sacrifice Booby Trap. If you do, Booby Trap deals 10 damage to that player.

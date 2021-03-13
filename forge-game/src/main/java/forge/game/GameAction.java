@@ -316,9 +316,9 @@ public class GameAction {
             cards.set(cards.indexOf(c), copied);
             // 721.3b
             if (cause != null && zoneTo.getZoneType() == ZoneType.Exile) {
-                cards = (CardCollection) cause.getHostCard().getController().getController().orderMoveToZoneList(cards, zoneTo.getZoneType());
+                cards = (CardCollection) cause.getHostCard().getController().getController().orderMoveToZoneList(cards, zoneTo.getZoneType(), cause);
             } else {
-                cards = (CardCollection) c.getOwner().getController().orderMoveToZoneList(cards, zoneTo.getZoneType());
+                cards = (CardCollection) c.getOwner().getController().orderMoveToZoneList(cards, zoneTo.getZoneType(), cause);
             }
             cards.set(cards.indexOf(copied), c);
             if (zoneTo.is(ZoneType.Library)) {
@@ -1169,7 +1169,7 @@ public class GameAction {
 
             if (noRegCreats != null) {
                 if (noRegCreats.size() > 1 && !orderedNoRegCreats) {
-                    noRegCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, noRegCreats, ZoneType.Graveyard);
+                    noRegCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, noRegCreats, ZoneType.Graveyard, null);
                     orderedNoRegCreats = true;
                 }
                 for (Card c : noRegCreats) {
@@ -1180,7 +1180,7 @@ public class GameAction {
                 if (desCreats.size() > 1 && !orderedDesCreats) {
                     desCreats = CardLists.filter(desCreats, CardPredicates.Presets.CAN_BE_DESTROYED);
                     if (!desCreats.isEmpty()) {
-                        desCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, desCreats, ZoneType.Graveyard);
+                        desCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, desCreats, ZoneType.Graveyard, null);
                     }
                     orderedDesCreats = true;
                 }

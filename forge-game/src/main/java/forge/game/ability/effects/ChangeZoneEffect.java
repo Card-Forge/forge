@@ -797,6 +797,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         triggerList.triggerChangesZoneAll(game);
         counterTable.triggerCountersPutAll(game);
 
+        if (sa.hasParam("AtEOT") && !triggerList.isEmpty()) {
+            registerDelayedTrigger(sa, sa.getParam("AtEOT"), triggerList.allCards());
+        }
+
         // for things like Gaea's Blessing
         if (destination.equals(ZoneType.Library) && sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle"))) {
             PlayerCollection pl = new PlayerCollection();
@@ -1372,6 +1376,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined && shuffleMandatory)
                 || (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle")))) {
             player.shuffle(sa);
+        }
+
+        if (sa.hasParam("AtEOT") && !movedCards.isEmpty()) {
+            registerDelayedTrigger(sa, sa.getParam("AtEOT"), movedCards);
         }
 
         if (combatChanged) {

@@ -88,7 +88,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         }
         else if (type.equals("Hand")) {
             if (hand.size() > 1 && ability.getActivatingPlayer() != null) {
-                hand = ability.getActivatingPlayer().getController().orderMoveToZoneList(hand, ZoneType.Graveyard);
+                hand = ability.getActivatingPlayer().getController().orderMoveToZoneList(hand, ZoneType.Graveyard, ability);
             }
             return PaymentDecision.card(hand);
         }
@@ -104,7 +104,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         if (type.equals("Random")) {
             CardCollectionView randomSubset = CardLists.getRandomSubList(new CardCollection(hand), c);
             if (randomSubset.size() > 1 && ability.getActivatingPlayer() != null) {
-                randomSubset = ability.getActivatingPlayer().getController().orderMoveToZoneList(randomSubset, ZoneType.Graveyard);
+                randomSubset = ability.getActivatingPlayer().getController().orderMoveToZoneList(randomSubset, ZoneType.Graveyard, ability);
             }
             return PaymentDecision.card(randomSubset);
         }

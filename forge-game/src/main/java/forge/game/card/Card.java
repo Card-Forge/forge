@@ -1136,7 +1136,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     newTop = c;
                 }
             }
-            
+
             if (newTop != null) {
                 removeMutatedStates();
                 newTop.mergedCards = mergedCards;
@@ -6265,24 +6265,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return true;
         }
 
-        if (isCreature() && source.getActivatingPlayer().hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
-            Cost srcCost = source.getPayCosts();
-            if (srcCost != null) {
-                if (srcCost.hasSpecificCostType(CostSacrifice.class)) {
-                    return false;
-                }
+        if ((source.isSpell() || source.isActivatedAbility()) && source.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+            if (isCreature() && source.getActivatingPlayer().hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
+                return false;
+            }
+
+            if (isPermanent() && !isLand() && source.getActivatingPlayer().hasKeyword("You can't sacrifice nonland permanents to cast spells or activate abilities.")) {
+                return false;
             }
         }
-
-        if (isPermanent() && !isLand() && source.getActivatingPlayer().hasKeyword("You can't sacrifice nonland permanents to cast spells or activate abilities.")) {
-            Cost srcCost = source.getPayCosts();
-            if (srcCost != null) {
-                if (srcCost.hasSpecificCostType(CostSacrifice.class)) {
-                    return false;
-                }
-            }
-        }
-
         return getController().canSacrificeBy(source);
     }
 
