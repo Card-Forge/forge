@@ -1,0 +1,6 @@
+Name:Broken Beasts|Deck:Broken Beasts.dck|Variant:None|Avatar:Cyclopean Titan|Desc:
+Name:Crazy Dungeon Master|Deck:Crazy Dungeon Master.dck|Variant:Planeswalker|Avatar:Dungeon Master|Desc:
+Name:Beast in Show|Deck:Beast in Show.dck|Variant:None|Avatar:Beast in Show|Desc:
+Name:Johnny, Combo Player|Deck:Johnny, Combo Player.dck|Variant:Commander|Avatar:Johnny, Combo Player|Desc:
+Name:Timmy, Power Gamer|Deck:Timmy, Power Gamer.dck|Variant:Commander|Avatar:Timmy, Power Gamer|Desc:
+Name:Unhinged Traveler|Deck:Random|Variant:None|Avatar:Unhinged Traveler|Desc:

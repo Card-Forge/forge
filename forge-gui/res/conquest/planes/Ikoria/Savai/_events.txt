@@ -1,0 +1,9 @@
+Name:Obosh, the Preypiercer|Deck:Obosh, the Preypiercer.dck|Variant:Commander|Avatar:Obosh, the Preypiercer|Desc:
+Name:Snapdax, Apex of the Hunt|Deck:Snapdax, Apex of the Hunt.dck|Variant:Commander|Avatar:Snapdax, Apex of the Hunt|Desc:
+Name:Chandra, Flame's Catalyst|Deck:Chandra, Flame's Catalyst.dck|Variant:Planeswalker|Avatar:Chandra, Flame's Catalyst|Desc:
+Name:Jirina Kudro|Deck:Jirina Kudro.dck|Variant:Commander|Avatar:Jirina Kudro|Desc:
+Name:Dauntless Escort|Deck:Dauntless Escort.dck|Variant:Vanguard|Avatar:Dauntless Escort|Desc:
+Name:Kelsien, the Plague|Deck:Kelsien, the Plague.dck|Variant:Commander|Avatar:Kelsien, the Plague|Desc:
+Name:Liliana, Death Mage|Deck:Liliana, Death Mage.dck|Variant:Planeswalker|Avatar:Liliana, Death Mage|Desc:
+Name:Silvar, Devourer of the Free|Deck:Silvar, Devourer of the Free.dck|Variant:Commander|Avatar:Silvar, Devourer of the Free|Desc:
+Name:Random Savai|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

@@ -1,0 +1,9 @@
+Name:Rashmi, Eternities Crafter|Deck:Rashmi, Eternities Crafter.dck|Variant:Commander|Avatar:Rashmi, Eternities Crafter|Desc:
+Name:Otrimi, the Ever-Playful|Deck:Otrimi, the Ever-Playful.dck|Variant:Commander|Avatar:Otrimi, the Ever-Playful|Desc:
+Name:Zaxara, the Exemplary|Deck:Zaxara, the Exemplary.dck|Variant:Commander|Avatar:Zaxara, the Exemplary|Desc:
+Name:Liliana, Waker of the Dead|Deck:Liliana, Waker of the Dead.dck|Variant:Planeswalker|Avatar:Liliana, Waker of the Dead|Desc:
+Name:Gyruda, Doom of Depths|Deck:Gyruda, Doom of Depths.dck|Variant:Commander|Avatar:Gyruda, Doom of Depths|Desc:
+Name:Ukkima, Stalking Shadow|Deck:Ukkima, Stalking Shadow.dck|Variant:Commander|Avatar:Ukkima, Stalking Shadow|Desc:
+Name:Crovax|Deck:Crovax.dck|Variant:Vanguard|Avatar:Crovax|Desc:
+Name:Cazur, Ruthless Stalker|Deck:Cazur, Ruthless Stalker.dck|Variant:Commander|Avatar:Cazur, Ruthless Stalker|Desc:
+Name:Random Zagoth|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

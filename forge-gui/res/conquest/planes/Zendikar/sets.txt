@@ -5,3 +5,5 @@ BFZ
 OGW
 C16
 ZNR
+ZNC
+ZNE
