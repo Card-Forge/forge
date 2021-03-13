@@ -71,7 +71,9 @@ public class CostDiscard extends CostPartWithList {
         String type = this.getType();
         CardCollectionView handList = payer.canDiscardBy(ability) ? payer.getCardsIn(ZoneType.Hand) : CardCollection.EMPTY;
 
-        handList = CardLists.getValidCards(handList, type.split(";"), payer, source, ability);
+        if (!type.equals("Random")) {
+            handList = CardLists.getValidCards(handList, type.split(";"), payer, source, ability);
+        }
         return handList.size();
     }
 
