@@ -4,19 +4,19 @@ import os
 import urllib.request
 
 sets = [
-    '4ED', 'CHR', 'ICE', 'ALL', 'MIR', 'VIS', '5ED', 'POR', 'WTH', 'TMP',
-    'STH', 'EXO', 'P02', 'USG', 'ULG', '6ED', 'PTK', 'UDS', 'MMQ', 'NEM',
-    'PCY', 'INV', 'PLS', '7ED', 'APC', 'ODY', 'TOR', 'JUD', 'ONS', 'LGN',
-    'SCG', '8ED', 'MRD', 'DST', '5DN', 'CHK', 'BOK', 'SOK', '9ED', 'RAV',
-    'GPT', 'DIS', 'CSP', 'TSP', 'PLC', 'FUT', '10E', 'LRW', 'MOR', 'SHM',
-    'EVE', 'ALA', 'CFX', 'ARB', 'M10', 'HOP', 'ZEN', 'WWK', 'ROE', 'M11',
-    'SOM', 'MBS', 'NPH', 'CMD', 'M12', 'ISD', 'DKA', 'AVR', 'PC2', 'M13',
-    'RTR', 'GTC', 'DGM', 'M14', 'THS', 'C13', 'BNG', 'JOU', 'CNS', 'M15',
-    'KTK', 'C14', 'FRF', 'DTK', 'ORI', 'BFZ', 'C15', 'OGW', 'SOI', 'EMA',
-    'EMN', 'CN2', 'KLD', 'C16', 'AER', 'AKH', 'HOU', 'C17', 'XLN', 'IMA',
-    'RIX', 'A25', 'DOM', 'BBD', 'M19', 'C18', 'GRN', 'UMA', 'RNA', 'WAR',
-    'MH1', 'M20', 'C19', 'ELD', 'THB', 'IKO', 'C20', 'M21', 'JMP', '2XM',
-    'ZNR', 'ZNC', 'CMR', 'KHM', 'KHC',
+    '2ED', 'ARN', 'ATQ', 'LEG', 'DRK', 'FEM', 'ICE', 'HML', 'ALL', 'MIR',
+    'VIS', 'POR', 'WTH', 'TMP', 'STH', 'EXO', 'P02', 'UGL', 'USG', 'ULG',
+    'PTK', 'UDS', 'MMQ', 'NEM', 'PCY', 'INV', 'PLS', 'APC', 'ODY', 'TOR',
+    'JUD', 'ONS', 'LGN', 'SCG', '8ED', 'MRD', 'DST', '5DN', 'CHK', 'UNH',
+    'BOK', 'SOK', 'RAV', 'GPT', 'DIS', 'CSP', 'TSP', 'PLC', 'FUT', 'LRW',
+    'MOR', 'SHM', 'EVE', 'ALA', 'CFX', 'ARB', 'M10', 'HOP', 'ZEN', 'WWK',
+    'ROE', 'ARC', 'M11', 'SOM', 'MBS', 'NPH', 'CMD', 'M12', 'ISD', 'DKA',
+    'AVR', 'PC2', 'M13', 'RTR', 'GTC', 'DGM', 'M14', 'THS', 'C13', 'BNG',
+    'JOU', 'CNS', 'M15', 'KTK', 'C14', 'FRF', 'DTK', 'ORI', 'BFZ', 'C15',
+    'OGW', 'SOI', 'EMN', 'CN2', 'KLD', 'C16', 'AER', 'AKH', 'ANN', 'HOU',
+    'C17', 'XLN', 'RIX', 'DOM', 'BBD', 'M19', 'C18', 'GRN', 'RNA', 'WAR',
+    'MH1', 'M20', 'C19', 'ELD', 'THB', 'IKO', 'C20', 'M21', 'JMP', 'ZNR',
+    'ZNC', 'CMR', 'KHM', 'KHC',
 ]
 
 costmap = [
@@ -43,7 +43,9 @@ costmap = [
     ('(１４)', '{14}'),
     ('(１５)', '{15}'),
     ('(１６)', '{16}'),
+    ('(１００)', '{100}'),
     ('(Ｘ)', '{X}'),
+    ('(∞)', '{∞}'),
     ('(白/青)', '{W/U}'),
     ('(白/黒)', '{W/B}'),
     ('(青/黒)', '{U/B}'),
@@ -59,6 +61,7 @@ costmap = [
     ('(２/黒)', '{2/B}'),
     ('(２/赤)', '{2/R}'),
     ('(２/緑)', '{2/G}'),
+    ('(Φ)', '{P}'),
     ('(白/Φ)', '{W/P}'),
     ('(青/Φ)', '{U/P}'),
     ('(黒/Φ)', '{B/P}'),
@@ -68,6 +71,7 @@ costmap = [
     ('(Ｔ)', '{T}'),
     ('(Ｑ)', '{Q}'),
     ('(Ｅ)', '{E}'),
+    ('[chaos]', '{CHAOS}')
 ]
 
 
@@ -80,6 +84,24 @@ def remove_engtype(text):
             text = text[:left_index] + text[right_index + 1:]
         else:
             break
+    return text
+
+
+def replace_reminder_text_parentheses(text):
+    start = 0
+    while True:
+        index = text.find('（', start)
+        if index == -1:
+            break
+        # skip enchant and protection
+        if text.find('エンチャント（', start) == index - 6 or text.find('プロテクション（', start) == index - 7:
+            start = index + 1
+            continue
+        if index == 0 or text[index - 1] == '\n':
+            text = text.replace('（', '(', 1)
+        else:
+            text = text.replace('（', ' (', 1)
+        text = text.replace('）', ')', 1)
     return text
 
 
@@ -98,6 +120,7 @@ def writecard(cardfile, cardname, jap_name, jap_type, jap_text):
     jap_type = remove_engtype(jap_type)
     jap_text = replace_cost(jap_text)
     jap_text = remove_engtype(jap_text)
+    jap_text = replace_reminder_text_parentheses(jap_text)
     jap_text = jap_text.replace('\n', '\\n')
     cardfile.write(cardname + '|' + jap_name + '|' + jap_type + '|' + jap_text + '\n')
 
