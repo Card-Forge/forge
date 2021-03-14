@@ -422,23 +422,18 @@ Prerelease=6 Boosters, 1 RareMythic+
 7 Plains|IKO|1
 7 Plains|IKO|2
 7 Plains|IKO|3
-7 Plains|IKO|4
 7 Island|IKO|1
 7 Island|IKO|2
 7 Island|IKO|3
-7 Island|IKO|4
 7 Swamp|IKO|1
 7 Swamp|IKO|2
 7 Swamp|IKO|3
-7 Swamp|IKO|4
 7 Mountain|IKO|1
 7 Mountain|IKO|2
 7 Mountain|IKO|3
-7 Mountain|IKO|4
 7 Forest|IKO|1
 7 Forest|IKO|2
 7 Forest|IKO|3
-7 Forest|IKO|4
 
 [tokens]
 feather
