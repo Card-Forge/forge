@@ -48,6 +48,7 @@ import forge.util.MyRandom;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
@@ -220,10 +221,13 @@ public final class QuestUtilCards {
      * @return the card printed
      */
     public PaperCard addRandomRare() {
+        final boolean usePromos = questPreferences.getPrefInt(QPref.EXCLUDE_PROMOS_FROM_POOL) == 0;
+        final Collection<PaperCard> pool = usePromos ? FModel.getMagicDb().getCommonCards().getAllCards()
+                : FModel.getMagicDb().getCommonCards().getAllNonPromoCards();
 
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
 
-        final PaperCard card = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), myFilter));
+        final PaperCard card = Aggregates.random(Iterables.filter(pool, myFilter));
         addSingleCard(card, 1);
         return card;
     }
@@ -235,8 +239,12 @@ public final class QuestUtilCards {
      * @return the list of cards added
      */
     public List<PaperCard> addRandomCommon(final int n) {
+        final boolean usePromos = questPreferences.getPrefInt(QPref.EXCLUDE_PROMOS_FROM_POOL) == 0;
+        final Collection<PaperCard> pool = usePromos ? FModel.getMagicDb().getCommonCards().getAllCards()
+                : FModel.getMagicDb().getCommonCards().getAllNonPromoCards();
+
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.COMMON_PREDICATE);
-        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), myFilter), n);
+        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(pool, myFilter), n);
         addAllCards(newCards);
         return newCards;
     }
@@ -248,8 +256,12 @@ public final class QuestUtilCards {
      * @return the list of cards added
      */
     public List<PaperCard> addRandomUncommon(final int n) {
+        final boolean usePromos = questPreferences.getPrefInt(QPref.EXCLUDE_PROMOS_FROM_POOL) == 0;
+        final Collection<PaperCard> pool = usePromos ? FModel.getMagicDb().getCommonCards().getAllCards()
+                : FModel.getMagicDb().getCommonCards().getAllNonPromoCards();
+
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.UNCOMMON_PREDICATE);
-        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), myFilter), n);
+        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(pool, myFilter), n);
         addAllCards(newCards);
         return newCards;
     }
@@ -262,9 +274,13 @@ public final class QuestUtilCards {
      * @return the list
      */
     public List<PaperCard> addRandomRare(final int n) {
+        final boolean usePromos = questPreferences.getPrefInt(QPref.EXCLUDE_PROMOS_FROM_POOL) == 0;
+        final Collection<PaperCard> pool = usePromos ? FModel.getMagicDb().getCommonCards().getAllCards()
+                : FModel.getMagicDb().getCommonCards().getAllNonPromoCards();
+
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
 
-        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), myFilter), n);
+        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(pool, myFilter), n);
         addAllCards(newCards);
         return newCards;
     }
@@ -277,9 +293,13 @@ public final class QuestUtilCards {
      * @return the list
      */
     public List<PaperCard> addRandomRareNotMythic(final int n) {
+        final boolean usePromos = questPreferences.getPrefInt(QPref.EXCLUDE_PROMOS_FROM_POOL) == 0;
+        final Collection<PaperCard> pool = usePromos ? FModel.getMagicDb().getCommonCards().getAllCards()
+                : FModel.getMagicDb().getCommonCards().getAllNonPromoCards();
+
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.ONLY_RARE_PREDICATE);
 
-        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), myFilter), n);
+        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(pool, myFilter), n);
         addAllCards(newCards);
         return newCards;
     }
@@ -292,9 +312,13 @@ public final class QuestUtilCards {
      * @return the list
      */
     public List<PaperCard> addRandomMythicRare(final int n) {
+        final boolean usePromos = questPreferences.getPrefInt(QPref.EXCLUDE_PROMOS_FROM_POOL) == 0;
+        final Collection<PaperCard> pool = usePromos ? FModel.getMagicDb().getCommonCards().getAllCards()
+                : FModel.getMagicDb().getCommonCards().getAllNonPromoCards();
+
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.MYTHIC_PREDICATE);
 
-        final Iterable<PaperCard> cardPool = Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), myFilter);
+        final Iterable<PaperCard> cardPool = Iterables.filter(pool, myFilter);
 
         if (!cardPool.iterator().hasNext()) {
             return null;

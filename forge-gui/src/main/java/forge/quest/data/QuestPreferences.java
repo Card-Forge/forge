@@ -177,7 +177,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         WILD_OPPONENTS_MULTIPLIER("2.0"),
         WILD_OPPONENTS_NUMBER("0"),
 
-        //The number of cards to keep before selling
+        // The number of cards to keep before selling
         PLAYSET_SIZE("4"),
         PLAYSET_ANY_NUMBER_SIZE("500"),
         PLAYSET_BASIC_LAND_SIZE("50"),
@@ -187,7 +187,10 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         SIMULATE_AI_VS_AI_RESULTS("0"),
         DRAFT_ROTATION("0"),
         FOIL_FILTER_DEFAULT("0"),
-        RATING_FILTER_DEFAULT("1");
+        RATING_FILTER_DEFAULT("1"),
+
+        // Exclude promos from staring quest pool and the pool for random rewards
+        EXCLUDE_PROMOS_FROM_POOL("1");
 
         private final String strDefaultVal;
 
@@ -295,6 +298,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
             case FOIL_FILTER_DEFAULT:
             case RATING_FILTER_DEFAULT:
             case ITEM_LEVEL_RESTRICTION:
+            case EXCLUDE_PROMOS_FROM_POOL:
                 if (val != 0 && val != 1) {
                     return "Only values 0 or 1 are acceptable; 1 for enabled, 0 for disabled.";
                 }
