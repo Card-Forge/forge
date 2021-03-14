@@ -36,8 +36,9 @@ import forge.game.cost.Cost;
 import forge.game.event.*;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
-import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
+import forge.game.replacement.ReplacementResult;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.LandAbility;
 import forge.game.staticability.StaticAbility;
@@ -837,55 +838,28 @@ public class PhaseHandler implements java.io.Serializable {
     private Player getNextActivePlayer() {
         ExtraTurn extraTurn = !extraTurns.isEmpty() ? extraTurns.pop() : null;
         Player nextPlayer = extraTurn != null ? extraTurn.getPlayer() : game.getNextPlayerAfter(playerTurn);
+        // The bottom of the extra turn stack is the normal turn
+        boolean isExtraTurn = !extraTurns.isEmpty();
 
-        // update ExtraTurn Count for all players
-        for (final Player p : game.getPlayers()) {
-            p.setExtraTurnCount(getExtraTurnForPlayer(p));
-        }
+        // update ExtraTurn Count
+        nextPlayer.setExtraTurnCount(getExtraTurnForPlayer(nextPlayer));
 
-        if (extraTurn != null) {
-            // The bottom of the extra turn stack is the normal turn
-            nextPlayer.setExtraTurn(!extraTurns.isEmpty());
-            if (nextPlayer.hasKeyword("If you would begin an extra turn, skip that turn instead.")) {
-                return getNextActivePlayer();
-            }
-            for (Trigger deltrig : extraTurn.getDelayedTriggers()) {
-                game.getTriggerHandler().registerThisTurnDelayedTrigger(deltrig);
-            }
-        }
-        else {
-            nextPlayer.setExtraTurn(false);
-        }
-
-        if (nextPlayer.hasKeyword("Skip your next turn.")) {
-            nextPlayer.removeKeyword("Skip your next turn.", false);
+        // Replacement effects
+        final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(nextPlayer);
+        repRunParams.put(AbilityKey.ExtraTurn, isExtraTurn);
+        ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.BeginTurn, repRunParams);
+        if (repres != ReplacementResult.NotReplaced) {
             if (extraTurn == null) {
                 setPlayerTurn(nextPlayer);
             }
             return getNextActivePlayer();
         }
 
-        // TODO: This shouldn't filter by Time Vault, just in case Time Vault doesn't have it's normal ability.
-        CardCollection vaults = CardLists.filter(nextPlayer.getCardsIn(ZoneType.Battlefield, "Time Vault"), Presets.TAPPED);
-        if (!vaults.isEmpty()) {
-            Card crd = vaults.getFirst();
-            SpellAbility fakeSA = new SpellAbility.EmptySa(crd, nextPlayer);
-            boolean untapTimeVault = nextPlayer.getController().chooseBinary(fakeSA, "Skip a turn to untap a Time Vault?", BinaryChoiceType.UntapTimeVault, false);
-            if (untapTimeVault) {
-                if (vaults.size() > 1) {
-                    Card c = nextPlayer.getController().chooseSingleEntityForEffect(vaults, fakeSA, "Which Time Vault do you want to Untap?", null);
-                    if (c != null)
-                        crd = c;
-                }
-                crd.untap();
-                if (extraTurn == null) {
-                    setPlayerTurn(nextPlayer);
-                }
-                return getNextActivePlayer();
-            }
-        }
-
+        nextPlayer.setExtraTurn(isExtraTurn);
         if (extraTurn != null) {
+            for (Trigger deltrig : extraTurn.getDelayedTriggers()) {
+                game.getTriggerHandler().registerThisTurnDelayedTrigger(deltrig);
+            }
             if (extraTurn.isSkipUntap()) {
                 nextPlayer.addKeyword("Skip the untap step of this turn.");
             }

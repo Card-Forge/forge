@@ -61,6 +61,7 @@ public enum AbilityKey {
     EffectOnly("EffectOnly"),
     Exploited("Exploited"),
     Explorer("Explorer"),
+    ExtraTurn("ExtraTurn"),
     Event("Event"),
     Fighter("Fighter"),
     Fighters("Fighters"),

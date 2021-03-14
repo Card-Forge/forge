@@ -1,9 +1,19 @@
 package forge.game.ability.effects;
 
+import forge.game.Game;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementHandler;
+import forge.game.replacement.ReplacementLayer;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
+import forge.util.Lang;
 
 import java.util.List;
 
@@ -25,12 +35,33 @@ public class SkipTurnEffect extends SpellAbilityEffect {
     
     @Override
     public void resolve(SpellAbility sa) {
+        final Card hostCard = sa.getHostCard();
+        final Game game = hostCard.getGame();
+        final String name = hostCard.getName() + "'s Effect";
+        final String image = hostCard.getImageKey();
         final int numTurns = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumTurns"), sa);
+        String repeffstr = "Event$ BeginTurn | ActiveZones$ Command | ValidPlayer$ You " +
+        "| Description$ Skip your next " + (numTurns > 1 ? Lang.getNumeral(numTurns) + " turns." : "turn.");
+        String effect = "DB$ StoreSVar | SVar$ NumTurns | Type$ CountSVar | Expression$ NumTurns/Minus.1";
+        String exile = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile " +
+        "| ConditionCheckSVar$ NumTurns | ConditionSVarCompare$ EQ0";
+
         List<Player> tgtPlayers = getTargetPlayers(sa);
         for (final Player player : tgtPlayers) {
-            for(int i = 0; i < numTurns; i++) {
-                player.addKeyword("Skip your next turn.");
-            }
+            final Card eff = createEffect(sa, player, name, image);
+            eff.setSVar("NumTurns", "Number$" + numTurns);
+            SpellAbility calcTurn = AbilityFactory.getAbility(effect, eff);
+            calcTurn.setSubAbility((AbilitySub) AbilityFactory.getAbility(exile, eff));
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
+            re.setLayer(ReplacementLayer.Other);
+            re.setOverridingAbility(calcTurn);
+            eff.addReplacementEffect(re);
+            eff.updateStateForView();
+
+            game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+            game.getAction().moveTo(ZoneType.Command, eff, sa);
+            game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         }
     }
 }

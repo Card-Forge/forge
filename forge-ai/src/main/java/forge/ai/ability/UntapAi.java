@@ -71,6 +71,8 @@ public class UntapAi extends SpellAbilityAi {
         if (!sa.usesTargeting()) {
             if (mandatory) {
                 return true;
+            } else if ("Never".equals(sa.getParam("AILogic"))) {
+                return false;
             }
 
             // TODO: use Defined to determine, if this is an unfavorable result
