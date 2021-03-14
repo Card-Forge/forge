@@ -7,6 +7,7 @@ import java.util.Map;
 import com.google.common.base.Function;
 
 import forge.LobbyPlayer;
+import forge.ai.GameState;
 import forge.assets.FSkinProp;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
@@ -42,7 +43,7 @@ public interface IGuiGame {
     void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1);
     void flashIncorrectAction();
     void alertUser();
-    void updatePhase();
+    void updatePhase(boolean saveState);
     void updateTurn(PlayerView player);
     void updatePlayerControl();
     void enableOverlay();
@@ -61,6 +62,7 @@ public interface IGuiGame {
     void updateCards(Iterable<CardView> cards);
     void refreshCardDetails(Iterable<CardView> cards);
     void refreshField();
+    GameState getGamestate();
     void updateManaPool(Iterable<PlayerView> manaPoolUpdate);
     void updateLives(Iterable<PlayerView> livesUpdate);
     void setPanelSelection(CardView hostCard);

@@ -2,6 +2,7 @@ package forge.net.server;
 
 import com.google.common.base.Function;
 import forge.LobbyPlayer;
+import forge.ai.GameState;
 import forge.assets.FSkinProp;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
@@ -93,7 +94,7 @@ public class NetGuiGame extends AbstractGuiGame {
     public void alertUser() { send(ProtocolMethod.alertUser); }
 
     @Override
-    public void updatePhase() {
+    public void updatePhase(boolean saveState) {
         updateGameView();
         send(ProtocolMethod.updatePhase);
     }
@@ -187,6 +188,11 @@ public class NetGuiGame extends AbstractGuiGame {
     public void refreshField() {
         updateGameView();
         send(ProtocolMethod.refreshField);
+    }
+
+    @Override
+    public GameState getGamestate() {
+        return null;
     }
 
     @Override

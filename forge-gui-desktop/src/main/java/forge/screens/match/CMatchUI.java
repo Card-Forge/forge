@@ -51,6 +51,7 @@ import forge.ImageCache;
 import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.StaticData;
+import forge.ai.GameState;
 import forge.assets.FSkinProp;
 import forge.card.CardStateName;
 import forge.control.KeyboardShortcuts;
@@ -621,6 +622,11 @@ public final class CMatchUI
     }
 
     @Override
+    public GameState getGamestate() {
+        return null;
+    }
+
+    @Override
     public List<JMenu> getMenus() {
         return menus.getMenus();
     }
@@ -771,7 +777,7 @@ public final class CMatchUI
     }
 
     @Override
-    public void updatePhase() {
+    public void updatePhase(boolean saveState) {
         final PlayerView p = getGameView().getPlayerTurn();
         final PhaseType ph = getGameView().getPhase();
         // this should never happen, but I've seen it periodically... so, need to get to the bottom of it

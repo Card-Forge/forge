@@ -34,6 +34,17 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblRollbackPhase"), new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                ThreadUtil.invokeInGameThread(new Runnable() { //must invoke all these in game thread since they may require synchronous user input
+                    @Override
+                    public void run() {
+                        MatchController.instance.getGameController().cheat().rollbackPhase();
+                    }
+                });
+            }
+        }));
         addItem(new FMenuItem(Localizer.getInstance().getMessage("lblCastSpellOrPlayLand"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {

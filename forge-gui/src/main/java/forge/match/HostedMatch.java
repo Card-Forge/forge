@@ -418,7 +418,7 @@ public class HostedMatch {
                             gui.openView(new TrackableCollection<>(p.getView()));
                             gui.setGameView(null);
                             gui.setGameView(gameView);
-                            gui.updatePhase();
+                            gui.updatePhase(true);
                             gui.message(event.message);
                         }
                     }
