@@ -349,6 +349,12 @@ public class ReplacementHandler {
             }
         }
 
+        if (mapParams.containsKey("Skip")) {
+            if (mapParams.get("Skip").equals("True")) {
+                return ReplacementResult.Skipped; // Event is skipped.
+            }
+        }
+
         Player player = host.getController();
 
         player.getController().playSpellAbilityNoStack(effectSA, true);
