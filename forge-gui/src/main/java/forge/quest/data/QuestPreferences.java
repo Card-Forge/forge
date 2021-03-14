@@ -189,7 +189,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         FOIL_FILTER_DEFAULT("0"),
         RATING_FILTER_DEFAULT("1"),
 
-        // Exclude promos from staring quest pool and the pool for random rewards
+        // Exclude promos from the random reward pool
         EXCLUDE_PROMOS_FROM_POOL("1");
 
         private final String strDefaultVal;
