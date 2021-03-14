@@ -314,13 +314,10 @@ public class UntapAi extends SpellAbilityAi {
     }
 
     private static Card detectPriorityUntapTargets(final List<Card> untapList) {
-        // untap Time Vault or another broken card? - Yes please!
-        String[] priorityList = {"Time Vault", "Mana Vault", "Icy Manipulator", "Steel Overseer", "Grindclock", "Prototype Portal"};
-        for (String name : priorityList) {
-            for (Card c : untapList) {
-                if (c.getName().equals(name)) {
-                    return c;
-                }
+        // See if there are cards that are *especially* worth untapping, like Time Vault
+        for (Card c : untapList) {
+            if ("True".equals(c.getSVar("UntapMe"))) {
+                return c;
             }
         }
 

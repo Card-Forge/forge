@@ -5,4 +5,5 @@ A:AB$ PutCounter | Cost$ T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescript
 A:AB$ Mill | Cost$ T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills X cards, where X is the number of charge counters on Grindclock.
 SVar:X:Count$CardCounters.CHARGE
 DeckHas:Ability$Counters
+SVar:UntapMe:True
 Oracle:{T}: Put a charge counter on Grindclock.\n{T}: Target player mills X cards, where X is the number of charge counters on Grindclock.
