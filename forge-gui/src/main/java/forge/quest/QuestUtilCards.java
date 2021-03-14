@@ -23,7 +23,10 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import forge.card.*;
+import forge.card.CardEdition;
+import forge.card.CardRarity;
+import forge.card.ICardDatabase;
+import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
@@ -44,7 +47,9 @@ import forge.util.ItemPool;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map.Entry;
 
 /**
@@ -218,7 +223,7 @@ public final class QuestUtilCards {
 
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
 
-        final PaperCard card = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), myFilter));
+        final PaperCard card = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), myFilter));
         addSingleCard(card, 1);
         return card;
     }
@@ -231,7 +236,7 @@ public final class QuestUtilCards {
      */
     public List<PaperCard> addRandomCommon(final int n) {
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.COMMON_PREDICATE);
-        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), myFilter), n);
+        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), myFilter), n);
         addAllCards(newCards);
         return newCards;
     }
@@ -244,7 +249,7 @@ public final class QuestUtilCards {
      */
     public List<PaperCard> addRandomUncommon(final int n) {
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.UNCOMMON_PREDICATE);
-        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), myFilter), n);
+        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), myFilter), n);
         addAllCards(newCards);
         return newCards;
     }
@@ -259,7 +264,7 @@ public final class QuestUtilCards {
     public List<PaperCard> addRandomRare(final int n) {
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
 
-        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), myFilter), n);
+        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), myFilter), n);
         addAllCards(newCards);
         return newCards;
     }
@@ -274,7 +279,7 @@ public final class QuestUtilCards {
     public List<PaperCard> addRandomRareNotMythic(final int n) {
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.ONLY_RARE_PREDICATE);
 
-        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), myFilter), n);
+        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), myFilter), n);
         addAllCards(newCards);
         return newCards;
     }
@@ -289,7 +294,7 @@ public final class QuestUtilCards {
     public List<PaperCard> addRandomMythicRare(final int n) {
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.MYTHIC_PREDICATE);
 
-        final Iterable<PaperCard> cardPool = Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), myFilter);
+        final Iterable<PaperCard> cardPool = Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), myFilter);
 
         if (!cardPool.iterator().hasNext()) {
             return null;
