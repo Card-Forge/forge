@@ -519,6 +519,10 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.EncodedCards);
     }
 
+    public FCollectionView<CardView> getUntilLeavesBattlefield() {
+        return get(TrackableProperty.UntilLeavesBattlefield);
+    }
+
     public GameEntityView getEntityAttachedTo() {
         return get(TrackableProperty.EntityAttachedTo);
     }

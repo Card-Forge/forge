@@ -37,6 +37,11 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
+        //if host is not on the battlefield don't apply
+        if (sa.hasParam("UntilHostLeavesPlay") && !sa.getHostCard().isInPlay()) {
+            return;
+        }
+
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<ZoneType> origin = ZoneType.listValueOf(sa.getParam("Origin"));
 
@@ -260,6 +265,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         triggerList.triggerChangesZoneAll(game);
 
+        if (sa.hasParam("UntilHostLeavesPlay")) {
+            source.addLeavesPlayCommand(untilHostLeavesPlayCommand(triggerList, source));
+        }
+
         // if Shuffle parameter exists, and any amount of cards were owned by
         // that player, then shuffle that library
         if (sa.hasParam("Shuffle")) {
@@ -270,5 +279,4 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
         }
     }
-
 }

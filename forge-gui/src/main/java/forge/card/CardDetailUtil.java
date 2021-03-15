@@ -544,6 +544,13 @@ public class CardDetailUtil {
             area.append("Encoded: ").append(card.getEncodedCards());
         }
 
+        if (card.getUntilLeavesBattlefield() != null) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("Until leaves the Battlefield: ").append(card.getUntilLeavesBattlefield());
+        }
+
         // must block
         if (card.getMustBlockCards() != null) {
             if (area.length() != 0) {
