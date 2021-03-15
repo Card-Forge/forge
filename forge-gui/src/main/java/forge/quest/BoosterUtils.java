@@ -115,7 +115,7 @@ public final class BoosterUtils {
             filter = formatStartingPool.getFilterPrinted();
         }
 
-        final List<PaperCard> cardPool = Lists.newArrayList(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), filter));
+        final List<PaperCard> cardPool = Lists.newArrayList(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), filter));
 
         if (userPrefs != null && userPrefs.grantCompleteSet()) {
             for (PaperCard card : cardPool) {
@@ -478,7 +478,7 @@ public final class BoosterUtils {
 
             PrintSheet ps = new PrintSheet("Quest rewards");
             Predicate<PaperCard> predicate = preds.size() == 1 ? preds.get(0) : Predicates.and(preds);
-            ps.addAll(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), predicate));
+            ps.addAll(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), predicate));
             rewards.addAll(ps.random(qty, true));
         } else if (temp.length == 2 && temp[0].equalsIgnoreCase("duplicate") && temp[1].equalsIgnoreCase("card")) {
             // Type 2: a duplicate card of the players choice
