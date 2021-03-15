@@ -640,7 +640,7 @@ public class CardState extends GameObject implements IHasSVars {
      * @see forge.game.GameObject#hasProperty(java.lang.String, forge.game.player.Player, forge.game.card.Card, forge.game.spellability.SpellAbility)
      */
     @Override
-    public boolean hasProperty(String property, Player sourceController, Card source, SpellAbility spellAbility) {
+    public boolean hasProperty(String property, Player sourceController, Card source, CardTraitBase spellAbility) {
         return ForgeScript.cardStateHasProperty(this, property, sourceController, source, spellAbility);
     }
 

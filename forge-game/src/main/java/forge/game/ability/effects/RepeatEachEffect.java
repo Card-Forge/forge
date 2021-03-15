@@ -54,7 +54,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 zone.add(ZoneType.Battlefield);
             }
             repeatCards = CardLists.getValidCards(game.getCardsIn(zone),
-                    sa.getParam("RepeatCards"), source.getController(), source);
+                    sa.getParam("RepeatCards"), source.getController(), source, sa);
         }
         else if (sa.hasParam(("RepeatSpellAbilities"))) {
             repeatSas = Lists.newArrayList();
@@ -70,7 +70,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             repeatCards = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
             if (sa.hasParam("AdditionalRestriction")) { // lki cards might not be in game
                 repeatCards = CardLists.getValidCards(repeatCards,
-                        sa.getParam("AdditionalRestriction"), source.getController(), source);
+                        sa.getParam("AdditionalRestriction"), source.getController(), source, sa);
             }
         }
         boolean loopOverCards = repeatCards != null && !repeatCards.isEmpty();

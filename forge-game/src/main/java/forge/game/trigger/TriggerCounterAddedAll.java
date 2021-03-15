@@ -50,6 +50,6 @@ public class TriggerCounterAddedAll extends Trigger {
         CounterType counterType = CounterType.getType(getParam("CounterType"));
         String valid = getParam("Valid");
 
-        return table.filterTable(counterType, valid, getHostCard(), null);
+        return table.filterTable(counterType, valid, getHostCard(), this);
     }
 }

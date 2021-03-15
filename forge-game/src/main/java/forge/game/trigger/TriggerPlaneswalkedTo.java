@@ -32,20 +32,12 @@ public class TriggerPlaneswalkedTo extends Trigger {
     /* (non-Javadoc)
      * @see forge.card.trigger.Trigger#performTest(java.util.Map)
      */
-    @SuppressWarnings("unchecked")
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidCard")) {
-            for(Card moved : (Iterable<Card>) runParams.get(AbilityKey.Cards))
-            {
-                if (moved.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
-                        this.getHostCard(), null)) {
-                    return true;
-                }
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Cards))) {
             return false;
         }
-        
+
         return true;
     }
 

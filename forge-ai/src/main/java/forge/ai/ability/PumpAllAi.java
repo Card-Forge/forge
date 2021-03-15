@@ -69,8 +69,8 @@ public class PumpAllAi extends PumpAiBase {
         }
 
         final Player opp = ai.getWeakestOpponent();
-        CardCollection comp = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
-        CardCollection human = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
+        CardCollection comp = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
+        CardCollection human = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null && sa.canTarget(opp) && sa.hasParam("IsCurse")) {
@@ -144,7 +144,7 @@ public class PumpAllAi extends PumpAiBase {
             return (ComputerUtilCard.evaluateCreatureList(comp) + 200) < ComputerUtilCard.evaluateCreatureList(human);
         } // end Curse
 
-        return !CardLists.getValidCards(getPumpCreatures(ai, sa, defense, power, keywords, false), valid, source.getController(), source).isEmpty();
+        return !CardLists.getValidCards(getPumpCreatures(ai, sa, defense, power, keywords, false), valid, source.getController(), source, sa).isEmpty();
     } // pumpAllCanPlayAI()
 
     @Override

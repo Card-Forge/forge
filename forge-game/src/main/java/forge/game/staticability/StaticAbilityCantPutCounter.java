@@ -6,46 +6,38 @@ import forge.game.player.Player;
 
 public class StaticAbilityCantPutCounter {
 
-    public static boolean applyCantPutCounter(final StaticAbility staticAbility, final Card card,
-            final CounterType type) {
-        final Card hostCard = staticAbility.getHostCard();
+    public static boolean applyCantPutCounter(final StaticAbility stAb, final Card card, final CounterType type) {
 
-        if (staticAbility.hasParam("CounterType")) {
-            CounterType t = CounterType.getType(staticAbility.getParam("CounterType"));
+        if (stAb.hasParam("CounterType")) {
+            CounterType t = CounterType.getType(stAb.getParam("CounterType"));
             if (t != null && !type.equals(t)) {
                 return false;
             }
         }
 
         // for the other part
-        if (staticAbility.hasParam("ValidCard")) {
-            if (!card.isValid(staticAbility.getParam("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
-                return false;
-            }
-        } else if (staticAbility.hasParam("ValidPlayer")) {
+        if (!stAb.matchesValidParam("ValidCard", card)) {
+            return false;
+        } else if (stAb.hasParam("ValidPlayer")) {
             // for the other part
             return false;
         }
         return true;
     }
 
-    public static boolean applyCantPutCounter(final StaticAbility staticAbility, final Player player,
-            final CounterType type) {
-        final Card hostCard = staticAbility.getHostCard();
+    public static boolean applyCantPutCounter(final StaticAbility stAb, final Player player, final CounterType type) {
 
-        if (staticAbility.hasParam("CounterType")) {
-            CounterType t = CounterType.getType(staticAbility.getParam("CounterType"));
+        if (stAb.hasParam("CounterType")) {
+            CounterType t = CounterType.getType(stAb.getParam("CounterType"));
             if (t != null && !type.equals(t)) {
                 return false;
             }
         }
 
         // for the other part
-        if (staticAbility.hasParam("ValidPlayer")) {
-            if (!player.isValid(staticAbility.getParam("ValidPlayer").split(","), hostCard.getController(), hostCard, null)) {
-                return false;
-            }
-        } else if (staticAbility.hasParam("ValidCard")) {
+        if (!stAb.matchesValidParam("ValidPlayer", player)) {
+            return false;
+        } else if (stAb.hasParam("ValidCard")) {
             // for the other part
             return false;
         }

@@ -55,11 +55,8 @@ public class TriggerFight extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Card fighter = (Card) runParams.get(AbilityKey.Fighter);
-
-        if (hasParam("ValidCard")) {
-            return fighter.isValid(getParam("ValidCard").split(","),
-                    getHostCard().getController(), getHostCard(), null);
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Fighter))) {
+            return false;
         }
         return true;
     }

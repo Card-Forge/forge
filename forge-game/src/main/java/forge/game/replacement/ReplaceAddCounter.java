@@ -40,32 +40,18 @@ public class ReplaceAddCounter extends ReplacementEffect {
             }
         }
 
-        if (hasParam("ValidCard")) {
-            Object o = runParams.get(AbilityKey.Affected);
-            if (!(o instanceof Card)) {
-                return false;
-            }
-            if (!matchesValid(o, getParam("ValidCard").split(","), getHostCard())) {
-                return false;
-            }
-        } else if (hasParam("ValidPlayer")) {
-            Object o = runParams.get(AbilityKey.Affected);
-            if (!(o instanceof Player)) {
-                return false;
-            }
-            if (!matchesValid(o, getParam("ValidPlayer").split(","), getHostCard())) {
-                return false;
-            }
-        } else if (hasParam("ValidObject")) {
-            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidObject").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Affected))) {
+            return false;
+        }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
+            return false;
+        }
+        if (!matchesValidParam("ValidObject", runParams.get(AbilityKey.Affected))) {
+            return false;
         }
 
-        if (hasParam("ValidSource")) {
-            if (!matchesValid(runParams.get(AbilityKey.Source), getParam("ValidSource").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.Source))) {
+            return false;
         }
 
         if (hasParam("ValidCounterType")) {

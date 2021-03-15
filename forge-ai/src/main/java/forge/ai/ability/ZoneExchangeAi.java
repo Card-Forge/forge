@@ -31,7 +31,7 @@ public class ZoneExchangeAi extends SpellAbilityAi {
         final ZoneType zone2 = sa.hasParam("Zone2") ? ZoneType.smartValueOf(sa.getParam("Zone2")) : ZoneType.Hand;
         CardCollection list = new CardCollection(ai.getCardsIn(zone2));
         if (type != null) {
-            list = CardLists.getValidCards(list, type, ai, source);
+            list = CardLists.getValidCards(list, type, ai, source, sa);
         }
         object2 = ComputerUtilCard.getBestAI(list);
         if (object1 == null || object2 == null || !object1.isInZone(zone1) || !object1.getOwner().equals(ai)) {

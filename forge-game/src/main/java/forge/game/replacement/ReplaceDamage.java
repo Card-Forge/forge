@@ -58,40 +58,24 @@ public class ReplaceDamage extends ReplacementEffect {
             // If no actual damage is dealt, there is nothing to replace
             return false;
         }
-        if (hasParam("ValidSource")) {
-            String validSource = getParam("ValidSource");
-            validSource = AbilityUtils.applyAbilityTextChangeEffects(validSource, this);	
-            if (!matchesValid(runParams.get(AbilityKey.DamageSource), validSource.split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) {
+            return false;
         }
-        if (hasParam("ValidTarget")) {
-            String validTarget = getParam("ValidTarget");
-            validTarget = AbilityUtils.applyAbilityTextChangeEffects(validTarget, this);
-            if (!matchesValid(runParams.get(AbilityKey.Affected), validTarget.split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidTarget", runParams.get(AbilityKey.Affected))) {
+            return false;
         }
-        if (hasParam("ValidCause")) {
-            if (!runParams.containsKey(AbilityKey.Cause)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+            return false;
+        }
+        if (hasParam("CauseIsSource")) {
             SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
-            String validCause = getParam("ValidCause");
-            validCause = AbilityUtils.applyAbilityTextChangeEffects(validCause, this);
-            if (!matchesValid(cause, validCause.split(","), getHostCard())) {
+            if (!cause.getHostCard().equals(runParams.get(AbilityKey.DamageSource))) {
                 return false;
-            }
-            if (hasParam("CauseIsSource")) {
-                if (!cause.getHostCard().equals(runParams.get(AbilityKey.DamageSource))) {
-                    return false;
-                }
             }
         }
         if (hasParam("RelativeToSource")) {
             Card source = (Card) runParams.get(AbilityKey.DamageSource);
             String validRelative = getParam("RelativeToSource");
-            validRelative = AbilityUtils.applyAbilityTextChangeEffects(validRelative, this);
             if (!matchesValid(runParams.get(AbilityKey.DamageTarget), validRelative.split(","), source)) {
                 return false;
             }
@@ -107,14 +91,8 @@ public class ReplaceDamage extends ReplacementEffect {
             }
         }
         if (hasParam("IsCombat")) {
-            if (getParam("IsCombat").equals("True")) {
-                if (!((Boolean) runParams.get(AbilityKey.IsCombat))) {
-                    return false;
-                }
-            } else {
-                if ((Boolean) runParams.get(AbilityKey.IsCombat)) {
-                    return false;
-                }
+            if (getParam("IsCombat").equals("True") != ((Boolean) runParams.get(AbilityKey.IsCombat))) {
+                return false;
             }
         }
         if (hasParam("IsEquipping") && !getHostCard().isEquipping()) {

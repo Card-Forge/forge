@@ -179,7 +179,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     if (!p.canDiscardBy(sa)) {
                         continue;
                     }
-                    CardCollectionView dPHand = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), "Card.IsNotRemembered", p, source);
+                    CardCollectionView dPHand = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), "Card.IsNotRemembered", p, source, sa);
                     if (dPHand.size() > 1) {
                         dPHand = GameActionUtil.orderCardsByTheirOwners(game, dPHand, ZoneType.Graveyard, sa);
                     }
@@ -207,7 +207,7 @@ public class DiscardEffect extends SpellAbilityEffect {
 
                     if (runDiscard) {
                         final String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
-                        List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), valid, source.getController(), source);
+                        List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), valid, source.getController(), source, sa);
                         list = CardLists.filter(list, Presets.NON_TOKEN);
                         CardCollection toDiscard = new CardCollection();
                         for (int i = 0; i < numCards; i++) {

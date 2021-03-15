@@ -66,7 +66,7 @@ public class ChooseCardAi extends SpellAbilityAi {
         }
         CardCollectionView choices = ai.getGame().getCardsIn(choiceZone);
         if (sa.hasParam("Choices")) {
-            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host);
+            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host, sa);
         }
         if (sa.hasParam("TargetControls")) {
             choices = CardLists.filterControlledBy(choices, ai.getOpponents());
@@ -79,7 +79,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             final String filter = aiLogic.equals("Clone") ? "Permanent.YouDontCtrl,Permanent.nonLegendary"
                     : "Permanent.YouDontCtrl+notnamedVesuva,Permanent.nonLegendary+notnamedVesuva";
 
-            choices = CardLists.getValidCards(choices, filter, host.getController(), host);
+            choices = CardLists.getValidCards(choices, filter, host.getController(), host, sa);
             return !choices.isEmpty();
         } else if (aiLogic.equals("Never")) {
             return false;
@@ -112,7 +112,7 @@ public class ChooseCardAi extends SpellAbilityAi {
 
             return !choices.isEmpty();
         } else if (aiLogic.equals("RandomNonLand")) {
-            return !CardLists.getValidCards(choices, "Card.nonLand", host.getController(), host).isEmpty();
+            return !CardLists.getValidCards(choices, "Card.nonLand", host.getController(), host, sa).isEmpty();
         } else if (aiLogic.equals("Duneblast")) {
             CardCollection aiCreatures = ai.getCreaturesInPlay();
             CardCollection oppCreatures = ai.getWeakestOpponent().getCreaturesInPlay();
@@ -186,7 +186,7 @@ public class ChooseCardAi extends SpellAbilityAi {
                 choice = null;
             }
         } else if ("RandomNonLand".equals(logic)) {
-            options = CardLists.getValidCards(options, "Card.nonLand", host.getController(), host);
+            options = CardLists.getValidCards(options, "Card.nonLand", host.getController(), host, sa);
             choice = Aggregates.random(options);
         } else if (logic.equals("Untap")) {
             final String filter = "Permanent.YouCtrl,Permanent.tapped";

@@ -17,7 +17,6 @@
  */
 package forge.game.trigger;
 
-import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
@@ -54,21 +53,12 @@ public class TriggerUnattach extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final GameEntity object = (GameEntity) runParams.get(AbilityKey.Object);
-        final Card attach = (Card) runParams.get(AbilityKey.Attach);
 
-        if (hasParam("ValidObject")) {
-            if (!object.isValid(getParam("ValidObject").split(","), getHostCard().getController(),
-                    getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidObject", runParams.get(AbilityKey.Object))) {
+            return false;
         }
-
-        if (hasParam("ValidAttachment")) {
-            if (!attach.isValid(getParam("ValidAttachment").split(","), getHostCard()
-                    .getController(), getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidAttachment", runParams.get(AbilityKey.Attach))) {
+            return false;
         }
 
         return true;

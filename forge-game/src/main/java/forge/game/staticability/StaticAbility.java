@@ -554,14 +554,14 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         }
 
         if (hasParam("PlayerTurn")) {
-            List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, getParam("PlayerTurn"), null);
+            List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, getParam("PlayerTurn"), this);
             if (!players.contains(ph.getPlayerTurn())) {
                 return false;
             }
         }
 
         if (hasParam("UnlessDefinedPlayer")) {
-            List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, getParam("UnlessDefinedPlayer"), null);
+            List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, getParam("UnlessDefinedPlayer"), this);
             if (!players.isEmpty()) {
                 return false;
             }
@@ -572,7 +572,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
                 return false;
             }
             final Card topCard = controller.getCardsIn(ZoneType.Library).get(0);
-            if (!topCard.isValid(getParam("TopCardOfLibraryIs").split(","), controller, this.hostCard, null)) {
+            if (!topCard.isValid(getParam("TopCardOfLibraryIs").split(","), controller, this.hostCard, this)) {
                 return false;
             }
         }
@@ -583,7 +583,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             CardCollectionView list = game.getCardsIn(zone);
             final String present = getParam("IsPresent");
 
-            list = CardLists.getValidCards(list, present.split(","), controller, hostCard, null);
+            list = CardLists.getValidCards(list, present.split(","), controller, hostCard, this);
 
             int right = 1;
             final String rightString = compare.substring(2);

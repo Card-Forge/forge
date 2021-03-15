@@ -47,27 +47,16 @@ public class ReplaceDraw extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        final Game game = this.getHostCard().getGame();
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidPlayer").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
+            return false;
         }
-
-        if (hasParam("ValidCause")) {
-            if (!runParams.containsKey(AbilityKey.Cause)) {
-                return false;
-            }
-            SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
-            if (cause == null) {
-                return false;
-            }
-            if (!matchesValid(cause, getParam("ValidCause").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+            return false;
         }
 
         if (hasParam("NotFirstCardInDrawStep")) {
+            final Game game = getHostCard().getGame();
+
             final Player p = (Player)runParams.get(AbilityKey.Affected);
             if (p.numDrawnThisDrawStep() == 0 && game.getPhaseHandler().is(PhaseType.DRAW, p)) {
                 return false;

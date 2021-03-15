@@ -55,23 +55,14 @@ public class TriggerDamagePreventedOnce extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Object tgt = runParams.get(AbilityKey.DamageTarget);
 
-        if (hasParam("ValidTarget")) {
-            if (!matchesValid(tgt, getParam("ValidTarget").split(","), this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
+            return false;
         }
 
         if (hasParam("CombatDamage")) {
-            if (getParam("CombatDamage").equals("True")) {
-                if (!((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
-                    return false;
-                }
-            } else if (getParam("CombatDamage").equals("False")) {
-                if (((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
-                    return false;
-                }
+            if (getParam("CombatDamage").equals("True") != ((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
+                return false;
             }
         }
 

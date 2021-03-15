@@ -55,7 +55,7 @@ public class AttackingBand {
             
             // Check if a bands with other keyword exists in band, and each creature in the band fits the valid quality
             if (!CardLists.getKeyword(band, keyword).isEmpty() &&
-                    CardLists.getValidCards(band, valid, source.getController(), source).size() == band.size()) {
+                    CardLists.getValidCards(band, valid, source.getController(), source, null).size() == band.size()) {
                 return true;
             }
         }

@@ -25,7 +25,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
@@ -790,9 +789,9 @@ public class ComputerUtilCombat {
                 return false; // The trigger should have triggered already
             }
             if (trigParams.containsKey("ValidCard")) {
-                if (!CardTraitBase.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)
-                        && !(combat.isAttacking(source) && CardTraitBase.matchesValid(source,
-                        trigParams.get("ValidCard").split(","), source)
+                if (!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","))
+                        && !(combat.isAttacking(source) && trigger.matchesValid(source,
+                        trigParams.get("ValidCard").split(","))
                             && !trigParams.containsKey("Alone"))) {
                     return false;
                 }
@@ -800,7 +799,7 @@ public class ComputerUtilCombat {
             if (trigParams.containsKey("Attacked")) {
             	if (combat.isAttacking(attacker)) {
 	            	GameEntity attacked = combat.getDefenderByAttacker(attacker);
-	                if (!CardTraitBase.matchesValid(attacked, trigParams.get("Attacked").split(","), source)) {
+	                if (!trigger.matchesValid(attacked, trigParams.get("Attacked").split(","))) {
 	                    return false;
 	                }
             	} else {
@@ -820,7 +819,7 @@ public class ComputerUtilCombat {
         if ((defender == null) && mode == TriggerType.AttackerUnblocked) {
             willTrigger = true;
             if (trigParams.containsKey("ValidCard")) {
-                if (!CardTraitBase.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)) {
+                if (!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","))) {
                     return false;
                 }
             }
@@ -842,7 +841,7 @@ public class ComputerUtilCombat {
                         return false;
                     }
                 }
-                if (!CardTraitBase.matchesValid(attacker, validBlocked.split(","), source)) {
+                if (!trigger.matchesValid(attacker, validBlocked.split(","))) {
                     return false;
                 }
             }
@@ -856,35 +855,35 @@ public class ComputerUtilCombat {
                         return false;
                     }
                 }
-                if (!CardTraitBase.matchesValid(defender, validBlocker.split(","), source)) {
+                if (!trigger.matchesValid(defender, validBlocker.split(","))) {
                     return false;
                 }
             }
         } else if (mode == TriggerType.AttackerBlocked || mode == TriggerType.AttackerBlockedByCreature) {
             willTrigger = true;
             if (trigParams.containsKey("ValidBlocker")) {
-                if (!CardTraitBase.matchesValid(defender, trigParams.get("ValidBlocker").split(","), source)) {
+                if (!trigger.matchesValid(defender, trigParams.get("ValidBlocker").split(","))) {
                     return false;
                 }
             }
             if (trigParams.containsKey("ValidCard")) {
-                if (!CardTraitBase.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)) {
+                if (!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","))) {
                     return false;
                 }
             }
         } else if (mode == TriggerType.DamageDone) {
             willTrigger = true;
             if (trigParams.containsKey("ValidSource")) {
-                if (!(CardTraitBase.matchesValid(defender, trigParams.get("ValidSource").split(","), source)
+                if (!(trigger.matchesValid(defender, trigParams.get("ValidSource").split(","))
                         && defender.getNetCombatDamage() > 0
                         && (!trigParams.containsKey("ValidTarget")
-                                || CardTraitBase.matchesValid(attacker, trigParams.get("ValidTarget").split(","), source)))) {
+                                || trigger.matchesValid(attacker, trigParams.get("ValidTarget").split(","))))) {
                     return false;
                 }
-                if (!(CardTraitBase.matchesValid(attacker, trigParams.get("ValidSource").split(","), source)
+                if (!(trigger.matchesValid(attacker, trigParams.get("ValidSource").split(","))
                         && attacker.getNetCombatDamage() > 0
                         && (!trigParams.containsKey("ValidTarget")
-                        || CardTraitBase.matchesValid(defender, trigParams.get("ValidTarget").split(","), source)))) {
+                        || trigger.matchesValid(defender, trigParams.get("ValidTarget").split(","))))) {
                     return false;
                 }
             }

@@ -87,7 +87,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
         }
         if (!valid.equals("")) {
             CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
-            list = CardLists.getValidCards(list, valid, sa.getActivatingPlayer(), host);
+            list = CardLists.getValidCards(list, valid, sa.getActivatingPlayer(), host, sa);
 
             for (final Card tgtC : list) {
                 if (tgtC.isInPlay()) {

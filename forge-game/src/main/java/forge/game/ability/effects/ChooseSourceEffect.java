@@ -10,7 +10,6 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 
@@ -36,7 +35,6 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         CardCollection stackSources = new CardCollection();
@@ -85,11 +83,11 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("Choices")) {
-            permanentSources = CardLists.getValidCards(permanentSources, sa.getParam("Choices"), host.getController(), host);
+            permanentSources = CardLists.getValidCards(permanentSources, sa.getParam("Choices"), host.getController(), host, sa);
 
-            stackSources = CardLists.getValidCards(stackSources, sa.getParam("Choices"), host.getController(), host);
-            referencedSources = CardLists.getValidCards(referencedSources, sa.getParam("Choices"), host.getController(), host);
-            commandZoneSources = CardLists.getValidCards(commandZoneSources, sa.getParam("Choices"), host.getController(), host);
+            stackSources = CardLists.getValidCards(stackSources, sa.getParam("Choices"), host.getController(), host, sa);
+            referencedSources = CardLists.getValidCards(referencedSources, sa.getParam("Choices"), host.getController(), host, sa);
+            commandZoneSources = CardLists.getValidCards(commandZoneSources, sa.getParam("Choices"), host.getController(), host, sa);
         }
         if (sa.hasParam("TargetControls")) {
             permanentSources = CardLists.filterControlledBy(permanentSources, tgtPlayers.get(0));
@@ -133,7 +131,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
 
         for (final Player p : tgtPlayers) {
             final CardCollection chosen = new CardCollection();
-            if (tgt == null || p.canBeTargetedBy(sa)) {
+            if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < validAmount; i++) {
                     final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseSource") + " ";
                     Card o = null;

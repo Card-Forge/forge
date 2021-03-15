@@ -99,7 +99,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                     }
                 } else if (chooseFromDefined) {
                     CardCollection choices = AbilityUtils.getDefinedCards(host, sa.getParam("ChooseFromDefinedCards"), sa);
-                    choices = CardLists.getValidCards(choices, valid, host.getController(), host);
+                    choices = CardLists.getValidCards(choices, valid, host.getController(), host, sa);
                     List<ICardFace> faces = Lists.newArrayList();
                     // get Card
                     for (final Card c : choices) {

@@ -1,12 +1,12 @@
 package forge.game.player;
 
+import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.TextUtil;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class PlayerProperty {
 
-    public static boolean playerHasProperty(Player player, String property, Player sourceController, Card source, SpellAbility spellAbility) {
+    public static boolean playerHasProperty(Player player, String property, Player sourceController, Card source, CardTraitBase spellAbility) {
 
         Game game = player.getGame();
         if (property.equals("You")) {
@@ -236,7 +236,7 @@ public class PlayerProperty {
             }
         } else if (property.startsWith("controls")) {
             final String[] type = property.substring(8).split("_");
-            final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type[0], sourceController, source);
+            final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type[0], sourceController, source, spellAbility);
             String comparator = type[1];
             int y = AbilityUtils.calculateAmount(source, comparator.substring(2), null);
             if (!Expressions.compare(list.size(), comparator, y)) {
@@ -244,7 +244,7 @@ public class PlayerProperty {
             }
         } else if (property.startsWith("HasCardsIn")) { // HasCardsIn[zonetype]_[cardtype]_[comparator]
             final String[] type = property.substring(10).split("_");
-            final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.smartValueOf(type[0])), type[1], sourceController, source);
+            final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.smartValueOf(type[0])), type[1], sourceController, source, spellAbility);
             String comparator = type[2];
             int y = AbilityUtils.calculateAmount(source, comparator.substring(2), null);
             if (!Expressions.compare(list.size(), comparator, y)) {

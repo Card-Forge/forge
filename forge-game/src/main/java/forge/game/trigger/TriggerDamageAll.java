@@ -29,13 +29,13 @@ public class TriggerDamageAll extends Trigger {
             }
         }
         final CardDamageMap table = (CardDamageMap) runParams.get(AbilityKey.DamageMap);
-        return !table.filteredMap(getParam("ValidSource"), getParam("ValidTarget"), getHostCard(), null).isEmpty();
+        return !table.filteredMap(getParam("ValidSource"), getParam("ValidTarget"), getHostCard(), this).isEmpty();
     }
 
     @Override
     public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
         CardDamageMap table = (CardDamageMap) runParams.get(AbilityKey.DamageMap);
-        table = table.filteredMap(getParam("ValidSource"), getParam("ValidTarget"), getHostCard(), null);
+        table = table.filteredMap(getParam("ValidSource"), getParam("ValidTarget"), getHostCard(), this);
 
         sa.setTriggeringObject(AbilityKey.DamageAmount, table.totalAmount());
         sa.setTriggeringObject(AbilityKey.Sources, table.rowKeySet());

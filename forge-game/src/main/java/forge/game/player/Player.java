@@ -2242,7 +2242,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     @Override
-    public final boolean isValid(final String restriction, final Player sourceController, final Card source, SpellAbility spellAbility) {
+    public final boolean isValid(final String restriction, final Player sourceController, final Card source, CardTraitBase spellAbility) {
 
         final String[] incR = restriction.split("\\.", 2);
 
@@ -2283,7 +2283,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     @Override
-    public final boolean hasProperty(final String property, final Player sourceController, final Card source, SpellAbility spellAbility) {
+    public final boolean hasProperty(final String property, final Player sourceController, final Card source, CardTraitBase spellAbility) {
         return PlayerProperty.playerHasProperty(this, property, sourceController, source, spellAbility);
     }
 

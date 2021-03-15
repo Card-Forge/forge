@@ -2265,7 +2265,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         continue;
                     }
                     final Card host = stAb.getHostCard();
-                    if (isValid(stAb.getParam("ValidAttacker").split(","), host.getController(), host, null)) {
+                    if (isValid(stAb.getParam("ValidAttacker").split(","), host.getController(), host, stAb)) {
                         String currentName = (host.getName());
                         String desc1 = TextUtil.fastReplace(stAb.toString(), "CARDNAME", currentName);
                         String desc = TextUtil.fastReplace(desc1,"NICKNAME", currentName.split(",")[0]);
@@ -4678,7 +4678,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // Takes one argument like Permanent.Blue+withFlying
     @Override
-    public final boolean isValid(final String restriction, final Player sourceController, final Card source, SpellAbility spellAbility) {
+    public final boolean isValid(final String restriction, final Player sourceController, final Card source, CardTraitBase spellAbility) {
         if (isImmutable() && source != null && !source.isRemembered(this) &&
                 !(restriction.startsWith("Emblem") || restriction.startsWith("Effect"))) { // special case exclusion
             return false;
@@ -4718,7 +4718,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // Takes arguments like Blue or withFlying
     @Override
-    public boolean hasProperty(final String property, final Player sourceController, final Card source, SpellAbility spellAbility) {
+    public boolean hasProperty(final String property, final Player sourceController, final Card source, CardTraitBase spellAbility) {
         return CardProperty.cardHasProperty(this, property, sourceController, source, spellAbility);
     }
 

@@ -16,21 +16,11 @@ public class TriggerDiscardedAll extends Trigger {
 
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
         }
-
-        if (hasParam("ValidCause")) {
-            if (runParams.get(AbilityKey.Cause) == null) {
-                return false;
-            }
-            if (!matchesValid(runParams.get(AbilityKey.Cause), getParam("ValidCause").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+            return false;
         }
 
         if (hasParam("FirstTime")) {

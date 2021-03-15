@@ -2056,8 +2056,8 @@ public class ComputerUtil {
         final CardCollection candidates = new CardCollection();
         final CardCollectionView handList = ai.getCardsIn(ZoneType.Hand);
 
-        final CardCollection lands = CardLists.getValidCards(handList, "Card.Land", ai, null);
-        final CardCollection nonLands = CardLists.getValidCards(handList, "Card.nonLand", ai, null);
+        final CardCollection lands = CardLists.getValidCards(handList, "Card.Land", ai, null, null);
+        final CardCollection nonLands = CardLists.getValidCards(handList, "Card.nonLand", ai, null, null);
         CardLists.sortByCmcDesc(nonLands);
 
         if (lands.size() >= 3 && lands.size() <= 4) {
@@ -2996,7 +2996,7 @@ public class ComputerUtil {
                     }
                 });
             } else {
-                list = CardLists.getValidCards(srcList, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
+                list = CardLists.getValidCards(srcList, sa.getParam("AITgts"), sa.getActivatingPlayer(), source, sa);
             }
 
             if (!list.isEmpty() || sa.hasParam("AITgtsStrict") || alwaysStrict) {

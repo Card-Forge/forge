@@ -1906,7 +1906,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     // Takes one argument like Permanent.Blue+withFlying
     @Override
-    public final boolean isValid(final String restriction, final Player sourceController, final Card source, SpellAbility spellAbility) {
+    public final boolean isValid(final String restriction, final Player sourceController, final Card source, CardTraitBase spellAbility) {
         // Inclusive restrictions are Card types
         final String[] incR = restriction.split("\\.", 2);
         SpellAbility root = getRootAbility();
@@ -1949,7 +1949,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     // Takes arguments like Blue or withFlying
     @Override
-    public boolean hasProperty(final String property, final Player sourceController, final Card source, SpellAbility spellAbility) {
+    public boolean hasProperty(final String property, final Player sourceController, final Card source, CardTraitBase spellAbility) {
         return ForgeScript.spellAbilityHasProperty(this, property, sourceController, source, spellAbility);
     }
 

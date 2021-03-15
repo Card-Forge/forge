@@ -53,7 +53,7 @@ public class RevealEffect extends SpellAbilityEffect {
                     CardCollection valid = new CardCollection(cardsInHand);
 
                     if (sa.hasParam("RevealValid")) {
-                        valid = CardLists.getValidCards(valid, sa.getParam("RevealValid"), p, host);
+                        valid = CardLists.getValidCards(valid, sa.getParam("RevealValid"), p, host, sa);
                     }
                     
                     if (valid.isEmpty())

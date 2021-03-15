@@ -21,7 +21,6 @@ import com.google.common.base.Predicate;
 
 import forge.game.card.Card;
 import forge.game.player.Player;
-import forge.game.spellability.SpellAbility;
 
 
 /**
@@ -33,7 +32,7 @@ import forge.game.spellability.SpellAbility;
  */
 public final class GameObjectPredicates {
 
-    public static final Predicate<GameObject> restriction(final String[] restrictions, final Player sourceController, final Card source, final SpellAbility spellAbility) {
+    public static final Predicate<GameObject> restriction(final String[] restrictions, final Player sourceController, final Card source, final CardTraitBase spellAbility) {
         return new Predicate<GameObject>() {
             @Override
             public boolean apply(final GameObject c) {

@@ -136,7 +136,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
 
             // For Mimic Vat with mutated creature, need to choose one imprinted card
             CardCollectionView choices = sa.hasParam("Defined") ? getDefinedCardsOrTargeted(sa) : game.getCardsIn(ZoneType.Battlefield);
-            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
+            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host, sa);
             if (!choices.isEmpty()) {
                 String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard");
 

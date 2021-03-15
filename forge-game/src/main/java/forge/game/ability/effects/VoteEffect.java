@@ -59,7 +59,7 @@ public class VoteEffect extends SpellAbilityEffect {
             voteType.addAll(Arrays.asList(sa.getParam("VoteType").split(",")));
         } else if (sa.hasParam("VoteCard")) {
             ZoneType zone = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Battlefield;
-            voteType.addAll(CardLists.getValidCards(game.getCardsIn(zone), sa.getParam("VoteCard"), host.getController(), host));
+            voteType.addAll(CardLists.getValidCards(game.getCardsIn(zone), sa.getParam("VoteCard"), host.getController(), host, sa));
         }
         if (voteType.isEmpty()) {
             return;

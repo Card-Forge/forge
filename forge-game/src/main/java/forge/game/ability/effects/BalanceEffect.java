@@ -41,7 +41,7 @@ public class BalanceEffect extends SpellAbilityEffect {
         
         for(int i = 0; i < players.size(); i++) {
             // Find the minimum of each Valid per player
-            validCards.add(CardLists.getValidCards(players.get(i).getCardsIn(zone), valid, activator, source));
+            validCards.add(CardLists.getValidCards(players.get(i).getCardsIn(zone), valid, activator, source, sa));
             min = Math.min(min, validCards.get(i).size());
         }
         

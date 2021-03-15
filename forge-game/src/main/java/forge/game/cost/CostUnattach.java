@@ -79,7 +79,7 @@ public class CostUnattach extends CostPartWithList {
             Card originalEquipment = ability.getOriginalHost();
             return originalEquipment.isEquipping();
         } else {
-            return CardLists.getValidCards(source.getEquippedBy(), type, payer, source).size() > 0;
+            return CardLists.getValidCards(source.getEquippedBy(), type, payer, source, ability).size() > 0;
         }
 
     }
@@ -95,7 +95,7 @@ public class CostUnattach extends CostPartWithList {
                 return originalEquipment;
             }
         } else {
-            List<Card> attachees = CardLists.getValidCards(source.getEquippedBy(), this.getType(), activator, source);
+            List<Card> attachees = CardLists.getValidCards(source.getEquippedBy(), this.getType(), activator, source, ability);
             if (attachees.size() > 0) {
                 // Just pick the first one, although maybe give a dialog
                 return attachees.get(0);

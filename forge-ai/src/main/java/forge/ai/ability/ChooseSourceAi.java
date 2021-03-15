@@ -105,7 +105,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
                 }
                 CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
                 if (sa.hasParam("Choices")) {
-                    choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host);
+                    choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host, sa);
                 }
                 final Combat combat = game.getCombat();
                 choices = CardLists.filter(choices, new Predicate<Card>() {

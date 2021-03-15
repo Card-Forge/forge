@@ -141,7 +141,7 @@ public class ManifestAi extends SpellAbilityAi {
             }
             CardCollection choices = new CardCollection(game.getCardsIn(choiceZone));
             if (sa.hasParam("Choices")) {
-                choices = CardLists.getValidCards(choices, sa.getParam("Choices"), ai, host);
+                choices = CardLists.getValidCards(choices, sa.getParam("Choices"), ai, host, sa);
             }
             if (choices.isEmpty()) {
                 return false;

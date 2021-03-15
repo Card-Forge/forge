@@ -30,16 +30,17 @@ public class ReplaceMoved extends ReplacementEffect {
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
 
-        if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidCard").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Affected))) {
+            return false;
         }
-
-        if (hasParam("ValidLKI")) {
-            if (!matchesValid(runParams.get(AbilityKey.CardLKI), getParam("ValidLKI").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidLKI", runParams.get(AbilityKey.CardLKI))) {
+            return false;
+        }
+        if (!matchesValidParam("ValidStackSa", runParams.get(AbilityKey.StackSa))) {
+            return false;
+        }
+        if (!matchesValidParam("Cause", runParams.get(AbilityKey.Cause))) {
+            return false;
         }
 
         if (hasParam("Origin")) {
@@ -70,24 +71,6 @@ public class ReplaceMoved extends ReplacementEffect {
             }
             Boolean val = (Boolean) runParams.get(AbilityKey.Fizzle);
             if ("True".equals(getParam("Fizzle")) != val) {
-                return false;
-            }
-        }
-        
-        if (hasParam("ValidStackSa")) {
-            if (!matchesValid(runParams.get(AbilityKey.StackSa), getParam("ValidStackSa").split(","), getHostCard())) {
-                return false;
-            }
-        }
-
-        if (hasParam("Cause")) {
-            if (!matchesValid(runParams.get(AbilityKey.Cause), getParam("Cause").split(","), getHostCard())) {
-                return false;
-            }
-        }
-
-        if (hasParam("NotCause")) {
-            if (matchesValid(runParams.get(AbilityKey.Cause), getParam("NotCause").split(","), getHostCard())) {
                 return false;
             }
         }
