@@ -1002,7 +1002,7 @@ public class CardProperty {
             }
             return false;
         } else if (property.equals("EnteredSinceYourLastTurn")) {
-            if (card.getTurnInZone() > controller.getLastTurnNr()) {
+            if (card.getTurnInZone() <= controller.getLastTurnNr()) {
                 return false;
             }
         } else if (property.equals("ThisTurnEntered")) {
