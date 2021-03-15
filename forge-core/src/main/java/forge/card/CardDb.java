@@ -396,6 +396,16 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public PaperCard getCardFromEdition(final String cardName, final Date printedBefore, final SetPreference fromSet, int artIndex) {
         final CardRequest cr = CardRequest.fromString(cardName);
         List<PaperCard> cards = getAllCards(cr.cardName);
+        if (printedBefore != null){
+            cards = Lists.newArrayList(Iterables.filter(cards, new Predicate<PaperCard>() {
+                @Override public boolean apply(PaperCard c) {
+                    CardEdition ed = editions.get(c.getEdition());
+                    return ed.getDate().before(printedBefore); }
+            }));
+        }
+
+        if (cards.size() == 0)  // Don't bother continuing! No cards has been found!
+            return null;
         boolean cardsListReadOnly = true;
 
         if (StringUtils.isNotBlank(cr.edition)) {

@@ -252,7 +252,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     private void convertByXitaxMethod() {
-        Date dateWithAllCards = StaticData.instance().getEditions().getEarliestDateWithAllCards(getAllCardsInASinglePool());
+        //Date dateWithAllCards = StaticData.instance().getEditions().getEarliestDateWithAllCards(getAllCardsInASinglePool());
 
         for(Entry<DeckSection, CardPool> p : parts.entrySet()) {
             if( p.getKey() == DeckSection.Planes || p.getKey() == DeckSection.Schemes || p.getKey() == DeckSection.Avatar)
@@ -264,12 +264,18 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 PaperCard card = cp.getKey();
                 int count = cp.getValue();
 
-                PaperCard replacementCard = StaticData.instance().getCardByEditionDate(card, dateWithAllCards);
+                PaperCard replacementCard = StaticData.instance().getCardFromLatestorEarliest(card);
 
                 if (replacementCard.getArtIndex() == card.getArtIndex()) {
-                    newPool.add(card, count);
+                    if (card.hasImage())
+                        newPool.add(card, count);
+                    else
+                        newPool.add(replacementCard, count);
                 } else {
-                    newPool.add(card.getName(), card.getEdition(), count); // this is to randomize art
+                    if (card.hasImage())
+                        newPool.add(card.getName(), card.getEdition(), count); // this is to randomize art
+                    else
+                        newPool.add(replacementCard, count);
                 }
             }
 
