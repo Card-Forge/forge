@@ -247,6 +247,36 @@ public class StaticData {
         return card;
     }
 
+    public PaperCard getCardFromLatestorEarliest(PaperCard card) {
+
+        PaperCard c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.Latest, card.getArtIndex());
+
+        if (null != c && c.hasImage()) {
+            return c;
+        }
+
+        c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.Latest, -1);
+
+        if (null != c && c.hasImage()) {
+            return c;
+        }
+
+        c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.LatestCoreExp, -1);
+
+        if (null != c) {
+            return c;
+        }
+
+        c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.EarliestCoreExp, -1);
+
+        if (null != c) {
+            return c;
+        }
+
+        // I give up!
+        return card;
+    }
+
     public boolean getFilteredHandsEnabled(){
         return filteredHandsEnabled;
     }
