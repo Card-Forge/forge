@@ -58,8 +58,6 @@ import forge.trackable.Tracker;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-import forge.util.maps.HashMapOfLists;
-import forge.util.maps.MapOfLists;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.tuple.Pair;
@@ -144,7 +142,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Map<String, String> originalSVars = Maps.newHashMap();
 
     private final Set<Object> rememberedObjects = Sets.newLinkedHashSet();
-    private final MapOfLists<GameEntity, Object> rememberMap = new HashMapOfLists<>(CollectionSuppliers.arrayLists());
     private Map<Player, String> flipResult;
 
     private Map<Card, Integer> receivedDamageFromThisTurn = Maps.newHashMap();
@@ -938,13 +935,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void clearConvoked() {
         convokedCards = null;
-    }
-
-    public MapOfLists<GameEntity, Object> getRememberMap() {
-        return rememberMap;
-    }
-    public final void addRememberMap(final GameEntity e, final List<Object> o) {
-        rememberMap.addAll(e, o);
     }
 
     public final Iterable<Object> getRemembered() {

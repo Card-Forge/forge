@@ -415,7 +415,6 @@ public final class CardScriptParser {
             "canProduceSameManaTypeWith", "SecondSpellCastThisTurn",
             "ThisTurnCast", "withFlashback", "tapped", "untapped", "faceDown",
             "faceUp", "hasLevelUp", "DrawnThisTurn", "notDrawnThisTurn",
-            "enteredBattlefieldThisTurn", "notEnteredBattlefieldThisTurn",
             "firstTurnControlled", "notFirstTurnControlled",
             "startedTheTurnUntapped", "attackedOrBlockedSinceYourLastUpkeep",
             "blockedOrBeenBlockedSinceYourLastUpkeep",
