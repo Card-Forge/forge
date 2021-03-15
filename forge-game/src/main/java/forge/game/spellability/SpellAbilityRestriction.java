@@ -340,7 +340,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         // legendary sorcery
         if (c.isSorcery() && c.getType().isLegendary() && CardLists.getValidCardCount(
                 activator.getCardsIn(ZoneType.Battlefield),
-                "Creature.Legendary,Planeswalker.Legendary", c.getController(), c) <= 0) {
+                "Creature.Legendary,Planeswalker.Legendary", c.getController(), c, sa) <= 0) {
             return false;
         }
 

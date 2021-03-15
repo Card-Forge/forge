@@ -30,11 +30,8 @@ public class ReplaceSurveil extends ReplacementEffect {
         if (((int) runParams.get(AbilityKey.SurveilNum)) <= 0) {
             return false;
         }
-
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidPlayer").split(","), this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
+            return false;
         }
 
         return true;

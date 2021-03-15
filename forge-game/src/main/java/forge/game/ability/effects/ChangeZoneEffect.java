@@ -583,7 +583,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("AttachedTo")) {
                         CardCollection list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("AttachedTo"), sa);
                         if (list.isEmpty()) {
-                            list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachedTo"), gameCard.getController(), gameCard);
+                            list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachedTo"), gameCard.getController(), gameCard, sa);
                         }
                         if (!list.isEmpty()) {
                             Map<String, Object> params = Maps.newHashMap();
@@ -1104,7 +1104,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 if (totalcmc != null) {
                     if (totcmc >= 0) {
-                        fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + totcmc, source.getController(), source);
+                        fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + totcmc, source.getController(), source, sa);
                     }
                 }
 
@@ -1213,7 +1213,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.hasParam("AttachedTo")) {
                     CardCollection list = AbilityUtils.getDefinedCards(source, sa.getParam("AttachedTo"), sa);
                     if (list.isEmpty()) {
-                        list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachedTo"), c.getController(), c);
+                        list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachedTo"), c.getController(), c, sa);
                     }
                     if (!list.isEmpty()) {
                         Card attachedTo = null;

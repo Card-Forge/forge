@@ -124,11 +124,11 @@ public class CloneAi extends SpellAbilityAi {
     private boolean cloneTgtAI(final SpellAbility sa) {
         // Specific logic for cards
         if ("CloneAttacker".equals(sa.getParam("AILogic"))) {
-            CardCollection valid = CardLists.getValidCards(sa.getHostCard().getController().getCardsIn(ZoneType.Battlefield), sa.getParam("ValidTgts"), sa.getHostCard().getController(), sa.getHostCard());
+            CardCollection valid = CardLists.getValidCards(sa.getHostCard().getController().getCardsIn(ZoneType.Battlefield), sa.getParam("ValidTgts"), sa.getHostCard().getController(), sa.getHostCard(), sa);
             sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(valid));
             return true;
         } else if ("CloneBestCreature".equals(sa.getParam("AILogic"))) {
-            CardCollection valid = CardLists.getValidCards(sa.getHostCard().getController().getGame().getCardsIn(ZoneType.Battlefield), sa.getParam("ValidTgts"), sa.getHostCard().getController(), sa.getHostCard());
+            CardCollection valid = CardLists.getValidCards(sa.getHostCard().getController().getGame().getCardsIn(ZoneType.Battlefield), sa.getParam("ValidTgts"), sa.getHostCard().getController(), sa.getHostCard(), sa);
             sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(valid));
             return true;
         }

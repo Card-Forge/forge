@@ -833,7 +833,7 @@ public class CombatUtil {
                     if (keyword.startsWith("MustBeBlockedBy ")) {
                         final String valid = keyword.substring("MustBeBlockedBy ".length());
                         if (blocker.isValid(valid, null, null, null) &&
-                                CardLists.getValidCardCount(combat.getBlockers(attacker), valid, null, null) == 0) {
+                                CardLists.getValidCardCount(combat.getBlockers(attacker), valid, null, null, null) == 0) {
                             attackersWithLure.add(attacker);
                             break;
                         }
@@ -954,7 +954,7 @@ public class CombatUtil {
             if (keyword.startsWith("MustBeBlockedBy ")) {
                 final String valid = keyword.substring("MustBeBlockedBy ".length());
                 if (blocker.isValid(valid, null, null, null) &&
-                        CardLists.getValidCardCount(combat.getBlockers(attacker), valid, null, null) == 0) {
+                        CardLists.getValidCardCount(combat.getBlockers(attacker), valid, null, null, null) == 0) {
                     mustBeBlockedBy = true;
                     break;
                 }

@@ -30,10 +30,8 @@ public class ReplaceScry extends ReplacementEffect {
             return false;
         }
 
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidPlayer").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
+            return false;
         }
 
         return true;

@@ -173,7 +173,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
         } else if (sa.hasParam("Choices")) {
             // only check for options, does not select there
             CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
-            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
+            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host, sa);
             Collection<Card> betterChoices = getBetterOptions(aiPlayer, sa, choices, !mandatory);
             if (betterChoices.isEmpty()) {
                 return mandatory;

@@ -17,13 +17,11 @@
  */
 package forge.game.trigger;
 
-import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -48,41 +46,18 @@ public class TriggerAttackersDeclared extends Trigger {
 
     /** {@inheritDoc}
      * @param runParams*/
-	@SuppressWarnings("unchecked")
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (hasParam("AttackingPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.AttackingPlayer),
-                    getParam("AttackingPlayer").split(","), this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("AttackingPlayer", runParams.get(AbilityKey.AttackingPlayer))) {
+            return false;
         }
-        if (hasParam("AttackedTarget")) {
-            boolean valid = false;
-            List<GameEntity> list = (List<GameEntity>) runParams.get(AbilityKey.AttackedTarget);
-            for (GameEntity b : list) {
-                if (matchesValid(b, getParam("AttackedTarget").split(","), this.getHostCard())) {
-                    valid = true;
-                    break;
-                }
-            }
-            if (!valid) {
-                return false;
-            }
+        if (!matchesValidParam("AttackedTarget", runParams.get(AbilityKey.AttackedTarget))) {
+            return false;
         }
-        if (hasParam("ValidAttackers")) {
-            boolean valid = false;
+        if (!matchesValidParam("ValidAttackers", runParams.get(AbilityKey.Attackers))) {
+            return false;
+        }
 
-            final Iterable<Card> srcs = (Iterable<Card>) runParams.get(AbilityKey.Attackers);
-            for (Card c : srcs) {
-                if (c.isValid(getParam("ValidAttackers").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
-                    valid = true;
-                }
-            }
-            if (!valid) {
-                return false;
-            }
-        }
         return true;
     }
 

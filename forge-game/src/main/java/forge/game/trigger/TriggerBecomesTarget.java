@@ -73,17 +73,16 @@ public class TriggerBecomesTarget extends Trigger {
                 return false;
             }
             String valid[] = getParam("ValidSource").split(",");
-            if (!matchesValid(source, valid, getHostCard())) {
-                if (!matchesValid(source.getHostCard(), valid, getHostCard())) {
+            if (!matchesValid(source, valid)) {
+                if (!matchesValid(source.getHostCard(), valid)) {
                     return false;
                 }
             }
         }
-        if (hasParam("ValidTarget")) {
-            if (!matchesValid(runParams.get(AbilityKey.Target), getParam("ValidTarget").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidTarget", runParams.get(AbilityKey.Target))) {
+            return false;
         }
+
         if (hasParam("FirstTime")) {
             if (!runParams.containsKey(AbilityKey.FirstTime)) {
                 return false;

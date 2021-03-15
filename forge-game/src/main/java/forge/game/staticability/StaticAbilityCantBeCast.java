@@ -98,15 +98,12 @@ public class StaticAbilityCantBeCast {
      * @return true, if successful
      */
     public static boolean applyCantBeCastAbility(final StaticAbility stAb, final SpellAbility spell, final Card card, final Player activator) {
-        final Card hostCard = stAb.getHostCard();
 
-        if (stAb.hasParam("ValidCard")
-                && !card.isValid(stAb.getParam("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
+        if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
 
-        if (stAb.hasParam("Caster") && (activator != null)
-                && !activator.isValid(stAb.getParam("Caster"), hostCard.getController(), hostCard, null)) {
+        if (!stAb.matchesValidParam("Caster", activator)) {
             return false;
         }
 
@@ -156,15 +153,12 @@ public class StaticAbilityCantBeCast {
      * @return true, if successful
      */
     public static boolean applyCantBeActivatedAbility(final StaticAbility stAb, final SpellAbility spellAbility, final Card card, final Player activator) {
-        final Card hostCard = stAb.getHostCard();
 
-        if (stAb.hasParam("ValidCard")
-                && !card.isValid(stAb.getParam("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
+        if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
 
-        if (stAb.hasParam("ValidSA")
-                && !spellAbility.isValid(stAb.getParam("ValidSA").split(","), hostCard.getController(), hostCard, null)) {
+        if (!stAb.matchesValidParam("ValidSA", spellAbility)) {
             return false;
         }
 
@@ -173,8 +167,7 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
-        if (stAb.hasParam("Activator") && (activator != null)
-                && !activator.isValid(stAb.getParam("Activator"), hostCard.getController(), hostCard, spellAbility)) {
+        if (!stAb.matchesValidParam("Activator", activator)) {
             return false;
         }
 
@@ -215,10 +208,7 @@ public class StaticAbilityCantBeCast {
      * @return true, if successful
      */
     public static boolean applyCantPlayLandAbility(final StaticAbility stAb, final Card card, final Player player) {
-        final Card hostCard = stAb.getHostCard();
-
-        if (stAb.hasParam("ValidCard")
-                && (card == null || !card.isValid(stAb.getParam("ValidCard").split(","), hostCard.getController(), hostCard, null))) {
+        if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
 
@@ -230,8 +220,7 @@ public class StaticAbilityCantBeCast {
             }
         }
 
-        if (stAb.hasParam("Player") && (player != null)
-                && !player.isValid(stAb.getParam("Player"), hostCard.getController(), hostCard, null)) {
+        if (!stAb.matchesValidParam("Player", player)) {
             return false;
         }
 

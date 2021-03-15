@@ -182,7 +182,7 @@ public class Untap extends Phase {
             Map<String, Integer> remaining = Maps.newHashMap(restrictUntap);
             for (Entry<String, Integer> entry : remaining.entrySet()) {
                 if (entry.getValue() == 0) {
-                    cardList.removeAll(CardLists.getValidCards(cardList, entry.getKey(), player, null));
+                    cardList.removeAll(CardLists.getValidCards(cardList, entry.getKey(), player, null, null));
                     restrictUntap.remove(entry.getKey());
                 }
             }

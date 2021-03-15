@@ -55,11 +55,8 @@ public class TriggerAttackerBlocked extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Attacker), getParam("ValidCard").split(","),
-                    getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Attacker))) {
+            return false;
         }
 
         if (hasParam("MinBlockers")) {
@@ -73,7 +70,7 @@ public class TriggerAttackerBlocked extends Trigger {
             int count = CardLists.getValidCardCount(
                     (Iterable<Card>) runParams.get(AbilityKey.Blockers),
                     getParam("ValidBlocker"),
-                    getHostCard().getController(), getHostCard()
+                    getHostCard().getController(), getHostCard(), this
             );
 
             if ( count == 0 ) {

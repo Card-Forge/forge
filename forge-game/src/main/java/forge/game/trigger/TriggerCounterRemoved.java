@@ -59,11 +59,8 @@ public class TriggerCounterRemoved extends Trigger {
         final CounterType addedType = (CounterType) runParams.get(AbilityKey.CounterType);
         final Integer addedNewCounterAmount = (Integer) runParams.get(AbilityKey.NewCounterAmount);
 
-        if (hasParam("ValidCard")) {
-            if (!addedTo.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
         }
 
         if (hasParam("CounterType")) {

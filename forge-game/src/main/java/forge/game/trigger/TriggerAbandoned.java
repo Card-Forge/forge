@@ -52,11 +52,9 @@ public class TriggerAbandoned extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Scheme), getParam("ValidCard").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Scheme))) {
+            return false;
         }
 
         return true;

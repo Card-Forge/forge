@@ -421,17 +421,13 @@ public class CostAdjustment {
         final Card card = sa.getHostCard();
         final Game game = hostCard.getGame();
 
-        if (st.hasParam("ValidCard")
-                && !card.isValid(st.getParam("ValidCard").split(","), controller, hostCard, sa)) {
+        if (st.hasParam("ValidCard") && !st.matchesValid(card, st.getParam("ValidCard").split(","))) {
             return false;
         }
-        if (st.hasParam("ValidSpell")) {
-            if (!sa.isValid(st.getParam("ValidSpell").split(","), controller, hostCard, sa)) {
-                return false;
-            }
+        if (st.hasParam("ValidSpell") && !st.matchesValid(sa, st.getParam("ValidSpell").split(","))) {
+            return false;
         }
-        if (st.hasParam("Activator") && ((activator == null)
-                || !activator.isValid(st.getParam("Activator"), controller, hostCard, sa))) {
+        if (st.hasParam("Activator") && !st.matchesValid(activator, st.getParam("Activator").split(","))) {
             return false;
         }
         if (st.hasParam("NonActivatorTurn") && ((activator == null)
@@ -458,7 +454,7 @@ public class CostAdjustment {
 
                     if (st.hasParam("ValidSpell")) {
                         list = CardLists.filterAsList(list, CardPredicates.castSA(
-                            SpellAbilityPredicates.isValid(st.getParam("ValidSpell").split(","), controller, hostCard, sa))
+                            SpellAbilityPredicates.isValid(st.getParam("ValidSpell").split(","), controller, hostCard, st))
                         );
                     }
 

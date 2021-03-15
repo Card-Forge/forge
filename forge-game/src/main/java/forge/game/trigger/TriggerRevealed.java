@@ -15,10 +15,8 @@ public class TriggerRevealed extends Trigger {
 
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
         }
         return true;
     }

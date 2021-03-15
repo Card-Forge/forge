@@ -107,7 +107,7 @@ public class TriggerChangesZone extends Trigger {
                 moved = (Card) runParams.get(AbilityKey.CardLKI);
             }
 
-            if (!matchesValid(moved, getParam("ValidCard").split(","), getHostCard())) {
+            if (!matchesValid(moved, getParam("ValidCard").split(","))) {
                 return false;
             }
         }
@@ -120,8 +120,8 @@ public class TriggerChangesZone extends Trigger {
             if (cause == null) {
                 return false;
             }
-            if (!matchesValid(cause, getParam("ValidCause").split(","), getHostCard())) {
-                if (!matchesValid(cause.getHostCard(), getParam("ValidCause").split(","), getHostCard())) {
+            if (!matchesValid(cause, getParam("ValidCause").split(","))) {
+                if (!matchesValid(cause.getHostCard(), getParam("ValidCause").split(","))) {
                     return false;
                 }
             }

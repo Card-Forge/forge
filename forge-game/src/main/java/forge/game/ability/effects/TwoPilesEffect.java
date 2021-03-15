@@ -83,7 +83,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                 } else {
                     pool0 = p.getCardsIn(zone);
                 }
-                CardCollection pool = CardLists.getValidCards(pool0, valid, card.getController(), card);
+                CardCollection pool = CardLists.getValidCards(pool0, valid, card.getController(), card, sa);
                 int size = pool.size();
                 if (size == 0) {
                     return;

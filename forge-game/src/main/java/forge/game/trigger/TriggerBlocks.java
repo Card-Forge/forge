@@ -54,35 +54,13 @@ public class TriggerBlocks extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidCard")) {
-            String validBlocker = getParam("ValidCard");
-            if (!matchesValid(runParams.get(AbilityKey.Blocker), validBlocker.split(","), this.getHostCard())) {
-                return false;
-            }
+
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Blocker))) {
+            return false;
         }
 
-        if (hasParam("ValidBlocked")) {
-            final String[] validBlockedSplit = getParam("ValidBlocked").split(",");
-            final Object a = runParams.get(AbilityKey.Attackers);
-            if (!(a instanceof Iterable<?>)) {
-            	return false;
-            }
-
-            final Iterable<?> attackers = (Iterable<?>) a;
-            boolean foundMatch = false;
-            for (final Object o : attackers) {
-            	if (!(o instanceof Card)) {
-            		continue;
-            	}
-            	if (matchesValid(o, validBlockedSplit, this.getHostCard())) {
-            		foundMatch = true;
-            		break;
-            	}
-            }
-
-            if (!foundMatch) {
-                return false;
-            }
+        if (!matchesValidParam("ValidBlocked", runParams.get(AbilityKey.Attackers))) {
+            return false;
         }
 
         return true;

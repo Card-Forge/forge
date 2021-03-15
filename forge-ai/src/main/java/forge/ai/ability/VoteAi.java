@@ -24,7 +24,7 @@ public class VoteAi extends SpellAbilityAi {
             return true;
         } else if ("Judgment".equals(logic)) {
             return !CardLists.getValidCards(host.getGame().getCardsIn(ZoneType.Battlefield),
-                    sa.getParam("VoteCard"), host.getController(), host).isEmpty();
+                    sa.getParam("VoteCard"), host.getController(), host, sa).isEmpty();
         } else if ("Torture".equals(logic)) {
             return aiPlayer.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.MAIN1);
         }

@@ -59,7 +59,6 @@ public class TriggerDamageDealtOnce extends Trigger {
     @SuppressWarnings("unchecked")
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Card srcs = (Card) runParams.get(AbilityKey.DamageSource);
 
         if (hasParam("CombatDamage")) {
             if (getParam("CombatDamage").equals("True")) {
@@ -81,10 +80,8 @@ public class TriggerDamageDealtOnce extends Trigger {
             }
         }
 
-        if (hasParam("ValidSource")) {
-            if (!matchesValid(srcs, getParam("ValidSource").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) {
+            return false;
         }
 
         return true;
@@ -113,7 +110,7 @@ public class TriggerDamageDealtOnce extends Trigger {
     public int getDamageAmount(Map<GameEntity, Integer> damageMap) {
         int result = 0;
         for (Map.Entry<GameEntity, Integer> e : damageMap.entrySet()) {
-            if (!hasParam("ValidTarget") || matchesValid(e.getKey(), getParam("ValidTarget").split(","), getHostCard())) {
+            if (matchesValidParam("ValidTarget", e.getKey())) {
                 result += e.getValue();
             }
         }
@@ -126,7 +123,7 @@ public class TriggerDamageDealtOnce extends Trigger {
         }
         Set<GameEntity> result = Sets.newHashSet();
         for (GameEntity e : damageMap.keySet()) {
-            if (matchesValid(e, getParam("ValidTarget").split(","), getHostCard())) {
+            if (matchesValidParam("ValidTarget", e)) {
                 result.add(e);
             }
         }

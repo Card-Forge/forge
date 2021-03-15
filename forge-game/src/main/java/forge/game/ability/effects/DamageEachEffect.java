@@ -66,7 +66,7 @@ public class DamageEachEffect extends DamageBaseEffect {
 
         FCollectionView<Card> sources = game.getCardsIn(ZoneType.Battlefield);
         if (sa.hasParam("ValidCards")) {
-            sources = CardLists.getValidCards(sources, sa.getParam("ValidCards"), card.getController(), card);
+            sources = CardLists.getValidCards(sources, sa.getParam("ValidCards"), card.getController(), card, sa);
         }
 
         final List<GameObject> tgts = getTargets(sa, "DefinedPlayers");

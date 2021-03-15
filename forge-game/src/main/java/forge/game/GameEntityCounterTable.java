@@ -10,7 +10,6 @@ import com.google.common.collect.Table;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
-import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 
 public class GameEntityCounterTable extends ForwardingTable<GameEntity, CounterType, Integer> {
@@ -63,7 +62,7 @@ public class GameEntityCounterTable extends ForwardingTable<GameEntity, CounterT
         return result;
     }
 
-    public Map<GameEntity, Integer> filterTable(CounterType type, String valid, Card host, SpellAbility sa) {
+    public Map<GameEntity, Integer> filterTable(CounterType type, String valid, Card host, CardTraitBase sa) {
         Map<GameEntity, Integer> result = Maps.newHashMap();
 
         for (Map.Entry<GameEntity, Integer> e : column(type).entrySet()) {

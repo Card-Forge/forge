@@ -54,13 +54,8 @@ public class TriggerUntaps extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Card untapper = (Card) runParams.get(AbilityKey.Card);
-
-        if (hasParam("ValidCard")) {
-            if (!untapper.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
         }
 
         return true;

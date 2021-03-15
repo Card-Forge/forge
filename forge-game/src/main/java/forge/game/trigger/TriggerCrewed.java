@@ -2,7 +2,6 @@ package forge.game.trigger;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
@@ -16,24 +15,11 @@ public class TriggerCrewed extends Trigger {
 
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidVehicle")) {
-            if (!matchesValid(runParams.get(AbilityKey.Vehicle), getParam("ValidVehicle").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidVehicle", runParams.get(AbilityKey.Vehicle))) {
+            return false;
         }
-        if (hasParam("ValidCrew")) {
-            if (runParams.get(AbilityKey.Crew) == null) {
-                return false;
-            }
-
-            boolean passes = false;
-            for (Object member : (CardCollection) runParams.get(AbilityKey.Crew)) {
-                passes |= matchesValid(member, getParam("ValidCrew").split(","),
-                        this.getHostCard());
-            }
-            if (!passes)
-                return passes;
+        if (!matchesValidParam("ValidCrew", runParams.get(AbilityKey.Crew))) {
+            return false;
         }
         return true;
     }

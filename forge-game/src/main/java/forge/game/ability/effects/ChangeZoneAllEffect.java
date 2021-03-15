@@ -79,7 +79,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         }
 
         if (origin.contains(ZoneType.Library) && sa.hasParam("Search") && sa.getActivatingPlayer().canSearchLibraryWith(sa, null)) {
-            CardCollection libCards = CardLists.getValidCards(cards, "Card.inZoneLibrary", sa.getActivatingPlayer(), source);
+            CardCollection libCards = CardLists.getValidCards(cards, "Card.inZoneLibrary", sa.getActivatingPlayer(), source, sa);
             CardCollection libCardsYouOwn = CardLists.filterControlledBy(libCards, sa.getActivatingPlayer());
             if (!libCardsYouOwn.isEmpty()) { // Only searching one's own library would fire Archive Trap's altcost
                 sa.getActivatingPlayer().incLibrarySearched();
@@ -93,7 +93,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
         }
         if (origin.contains(ZoneType.Hand) && sa.hasParam("Search")) {
-            CardCollection handCards = CardLists.filterControlledBy(CardLists.getValidCards(cards, "Card.inZoneHand", sa.getActivatingPlayer(), source),
+            CardCollection handCards = CardLists.filterControlledBy(CardLists.getValidCards(cards, "Card.inZoneHand", sa.getActivatingPlayer(), source, sa),
                 sa.getActivatingPlayer().getOpponents());
             if (!handCards.isEmpty()) {
                 sa.getActivatingPlayer().getController().reveal(handCards, ZoneType.Hand, handCards.get(0).getOwner());

@@ -26,6 +26,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.game.CardTraitBase;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -212,32 +213,20 @@ public class CardLists {
         return CardLists.filterAsList(cardList, CardPredicates.isControlledByAnyOf(player));
     }
 
-    public static CardCollection getValidCards(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source, SpellAbility spellAbility) {
+    public static CardCollection getValidCards(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source, CardTraitBase spellAbility) {
         return CardLists.filter(cardList, CardPredicates.restriction(restrictions, sourceController, source, spellAbility));
     }
 
-    public static List<Card> getValidCardsAsList(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source) {
-        return CardLists.filterAsList(cardList, CardPredicates.restriction(restrictions, sourceController, source, null));
-    }
-
-    public static int getValidCardCount(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source) {
-        return CardLists.count(cardList, CardPredicates.restriction(restrictions, sourceController, source, null));
-    }
-
-    public static CardCollection getValidCards(Iterable<Card> cardList, String restriction, Player sourceController, Card source) {
-        return CardLists.filter(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source, null));
-    }
-
-    public static CardCollection getValidCards(Iterable<Card> cardList, String restriction, Player sourceController, Card source, SpellAbility sa) {
+    public static CardCollection getValidCards(Iterable<Card> cardList, String restriction, Player sourceController, Card source, CardTraitBase sa) {
         return CardLists.filter(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source, sa));
     }
 
-    public static List<Card> getValidCardsAsList(Iterable<Card> cardList, String restriction, Player sourceController, Card source) {
-        return CardLists.filterAsList(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source, null));
+    public static List<Card> getValidCardsAsList(Iterable<Card> cardList, String restriction, Player sourceController, Card source, CardTraitBase sa) {
+        return CardLists.filterAsList(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source, sa));
     }
 
-    public static int getValidCardCount(Iterable<Card> cardList, String restriction, Player sourceController, Card source) {
-        return CardLists.count(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source, null));
+    public static int getValidCardCount(Iterable<Card> cardList, String restriction, Player sourceController, Card source, CardTraitBase sa) {
+        return CardLists.count(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source, sa));
     }
 
     public static CardCollection getTargetableCards(Iterable<Card> cardList, SpellAbility source) {

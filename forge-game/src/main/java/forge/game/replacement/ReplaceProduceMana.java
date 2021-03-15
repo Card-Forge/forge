@@ -32,11 +32,14 @@ public class ReplaceProduceMana extends ReplacementEffect {
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
 
-        if (hasParam("ValidAbility")) {
-            final SpellAbility manaAbility = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
-            if (!matchesValid(manaAbility, getParam("ValidAbility").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Affected))) {
+            return false;
+        }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
+        }
+        if (!matchesValidParam("ValidAbility", runParams.get(AbilityKey.AbilityMana))) {
+            return false;
         }
 
         if (hasParam("ManaAmount")) {
@@ -48,18 +51,6 @@ public class ReplaceProduceMana extends ReplacementEffect {
 
             int manaAmount = StringUtils.countMatches((String) runParams.get(AbilityKey.Mana), " ") + 1;
             if (!Expressions.compare(manaAmount, operator, intoperand)) {
-                return false;
-            }
-        }
-
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","), getHostCard())) {
-                return false;
-            }
-        }
-
-        if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidCard").split(","), getHostCard())) {
                 return false;
             }
         }

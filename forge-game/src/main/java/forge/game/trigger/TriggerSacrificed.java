@@ -20,7 +20,6 @@ package forge.game.trigger;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.cost.IndividualCostPaymentInstance;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.CostPaymentStack;
 import forge.util.Localizer;
@@ -57,24 +56,20 @@ public class TriggerSacrificed extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Card sac = (Card) runParams.get(AbilityKey.Card);
-        final Player player = (Player) runParams.get(AbilityKey.Player);
-        final SpellAbility sourceSA = (SpellAbility) runParams.get(AbilityKey.Cause);
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(player, getParam("ValidPlayer").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
         }
-        if (hasParam("ValidCard")) {
-            if (!sac.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
         }
+        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+            return false;
+        }
+
         if (hasParam("ValidSourceController")) {
-            if (sourceSA == null || !sourceSA.getActivatingPlayer().isValid(getParam("ValidSourceController"),
-                    this.getHostCard().getController(), this.getHostCard(), null)) {
+            final SpellAbility sourceSA = (SpellAbility) runParams.get(AbilityKey.Cause);
+
+            if (sourceSA == null || !matchesValid(sourceSA.getActivatingPlayer(), getParam("ValidSourceController").split(","))) {
                 return false;
             }
         }

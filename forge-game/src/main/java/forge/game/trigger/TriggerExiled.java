@@ -70,26 +70,22 @@ public class TriggerExiled extends Trigger {
             }
         }
 
-        if (hasParam("ValidCard")) {
-            Card moved = (Card) runParams.get(AbilityKey.Card);
-
-            if (!moved.isValid(getParam("ValidCard").split(","), getHostCard().getController(),
-                    getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
         }
 
         if (hasParam("ValidCause")) {
-            if (!runParams.containsKey(AbilityKey.Cause) ) {
+            if (!runParams.containsKey(AbilityKey.Cause)) {
                 return false;
             }
             SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
             if (cause == null) {
                 return false;
             }
-            if (!cause.getHostCard().isValid(getParam("ValidCause").split(","), getHostCard().getController(),
-                    getHostCard(), null)) {
-                return false;
+            if (!matchesValid(cause, getParam("ValidCause").split(","))) {
+                if (!matchesValid(cause.getHostCard(), getParam("ValidCause").split(","))) {
+                    return false;
+                }
             }
         }
 

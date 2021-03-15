@@ -159,13 +159,30 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
      *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
-    public static boolean matchesValid(final Object o, final String[] valids, final Card srcCard) {
+    public boolean matchesValid(final Object o, final String[] valids, final Card srcCard) {
         if (o instanceof GameObject) {
             final GameObject c = (GameObject) o;
-            return c.isValid(valids, srcCard.getController(), srcCard, null);
+            return c.isValid(valids, srcCard.getController(), srcCard, this);
+        } else if (o instanceof Iterable<?>) {
+            for (Object o2 : (Iterable<?>)o) {
+                if (matchesValid(o2, valids, srcCard)) {
+                    return true;
+                }
+            }
         }
 
         return false;
+    }
+
+    public boolean matchesValid(final Object o, final String[] valids) {
+        return matchesValid(o, valids, getHostCard());
+    }
+
+    public boolean matchesValidParam(String param, final Object o) {
+        if (hasParam(param) && !matchesValid(o, getParam(param).split(","))) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -312,7 +329,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
                     list.addAll(p.getCardsIn(presentZone));
                 }
             }
-            list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), null);
+            list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), this);
 
 
             final String rightString = presentCompare.substring(2);
@@ -349,7 +366,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
                 }
             }
 
-            list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), null);
+            list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), this);
 
             final String rightString = presentCompare.substring(2);
             int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
@@ -361,32 +378,29 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         }
 
         if (params.containsKey("CheckDefinedPlayer")) {
-            SpellAbility mockAbility = this.getHostCard().getFirstSpellAbility();
-            mockAbility.setActivatingPlayer(hostController);
             final String sIsPresent = params.get("CheckDefinedPlayer");
-            int playersize = AbilityUtils.getDefinedPlayers(game.getCardState(this.getHostCard()), sIsPresent,
-                    mockAbility).size();
+            int playersize = AbilityUtils.getDefinedPlayers(getHostCard(), sIsPresent, this).size();
             String comparator = "GE1";
             if (params.containsKey("DefinedPlayerCompare")) {
                 comparator = params.get("DefinedPlayerCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityUtils.calculateAmount(game.getCardState(this.getHostCard()), svarOperand, this);
+            final int operandValue = AbilityUtils.calculateAmount(getHostCard(), svarOperand, this);
             if (!Expressions.compare(playersize, svarOperator, operandValue)) {
                 return false;
             }
         }
 
         if (params.containsKey("CheckSVar")) {
-            final int sVar = AbilityUtils.calculateAmount(game.getCardState(this.getHostCard()), params.get("CheckSVar"), this);
+            final int sVar = AbilityUtils.calculateAmount(getHostCard(), params.get("CheckSVar"), this);
             String comparator = "GE1";
             if (params.containsKey("SVarCompare")) {
                 comparator = params.get("SVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityUtils.calculateAmount(game.getCardState(this.getHostCard()), svarOperand, this);
+            final int operandValue = AbilityUtils.calculateAmount(getHostCard(), svarOperand, this);
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }

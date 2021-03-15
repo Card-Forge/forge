@@ -64,7 +64,7 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
             filter = "Card";
         }
 
-        list = CardLists.getValidCards(list, filter, p, source);
+        list = CardLists.getValidCards(list, filter, p, source, sa);
         if (list.isEmpty())  {
             // Nothing to exchange the object?
             return;

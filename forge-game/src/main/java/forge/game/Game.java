@@ -1042,15 +1042,15 @@ public class Game {
         }
     }
 
-    public int getCounterAddedThisTurn(CounterType cType, String validPlayer, String validCard, Card source, Player sourceController, SpellAbility spellAbility) {
+    public int getCounterAddedThisTurn(CounterType cType, String validPlayer, String validCard, Card source, Player sourceController, CardTraitBase ctb) {
         int result = 0;
         if (!countersAddedThisTurn.containsRow(cType)) {
             return result;
         }
         for (Map.Entry<Player, List<Pair<Card, Integer>>> e : countersAddedThisTurn.row(cType).entrySet()) {
-           if (e.getKey().isValid(validPlayer.split(","), sourceController, source, spellAbility)) {
+           if (e.getKey().isValid(validPlayer.split(","), sourceController, source, ctb)) {
                for (Pair<Card, Integer> p : e.getValue()) {
-                   if (p.getKey().isValid(validCard.split(","), sourceController, source, spellAbility)) {
+                   if (p.getKey().isValid(validCard.split(","), sourceController, source, ctb)) {
                        result += p.getValue();
                    }
                }

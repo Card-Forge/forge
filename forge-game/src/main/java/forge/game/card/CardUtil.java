@@ -119,7 +119,7 @@ public final class CardUtil {
         else {
             res.addAll(game.getStackZone().getCardsAddedThisTurn(from));
         }
-        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src);
+        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src, null);
         return res;
     }
 
@@ -143,16 +143,16 @@ public final class CardUtil {
         else {
             res.addAll(game.getStackZone().getCardsAddedLastTurn(from));
         }
-        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src);
+        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src, null);
         return res;
     }
 
     public static List<Card> getThisTurnCast(final String valid, final Card src) {
-        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, src.getController(), src);
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, src.getController(), src, null);
     }
 
     public static List<Card> getLastTurnCast(final String valid, final Card src) {
-        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, src.getController(), src);
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, src.getController(), src, null);
 
     }
 
@@ -410,7 +410,7 @@ public final class CardUtil {
                     sa.setActivatingPlayer(sa.getHostCard().getController());
                 }
                 final Game game = sa.getActivatingPlayer().getGame();
-                cards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card);
+                cards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card, sa);
             }
 
             // remove anything cards that is already in parents

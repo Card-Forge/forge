@@ -51,7 +51,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         }
         
         CardCollectionView cards = game.getCardsIn(zone);
-        cards = CardLists.getValidCards(cards, valid, host.getController(), sa.getHostCard());
+        cards = CardLists.getValidCards(cards, valid, host.getController(), sa.getHostCard(), sa);
 
         if (sa.usesTargeting()) {
             final Player pl = sa.getTargets().getFirstTargetedPlayer();

@@ -80,7 +80,7 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
                 } else {
                     pool = new CardCollection(p.getCardsIn(zone));
                 }
-                pool = CardLists.getValidCards(pool, valid, source.getController(), source);
+                pool = CardLists.getValidCards(pool, valid, source.getController(), source, sa);
 
                 List<CardCollectionView> pileList = Lists.newArrayList();
 

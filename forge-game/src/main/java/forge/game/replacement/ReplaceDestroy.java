@@ -44,37 +44,30 @@ public class ReplaceDestroy extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidPlayer").split(","), getHostCard())) {
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
+            return false;
+        }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
+        }
+
+        // extra check for Regeneration
+        if (hasParam("Regeneration")) {
+            Card card = (Card) runParams.get(AbilityKey.Card);
+            if (!runParams.containsKey(AbilityKey.Regeneration) || !(Boolean)runParams.get(AbilityKey.Regeneration)) {
                 return false;
+            }
+            if (!card.canBeShielded()) {
+                return false;
+            }
+            if (card.isCreature()) {
+                if (card.getNetToughness() <= 0)
+                    return false;
             }
         }
-        if (hasParam("ValidCard")) {
-            Card card = (Card)runParams.get(AbilityKey.Card);
-            if (!matchesValid(card, getParam("ValidCard").split(","), getHostCard())) {
-                return false;
-            }
-            // extra check for Regeneration
-            if (hasParam("Regeneration")) {
-                if (!runParams.containsKey(AbilityKey.Regeneration)) {
-                    return false;
-                }
-                if (!(Boolean)runParams.get(AbilityKey.Regeneration)) {
-                    return false;
-                }
-                if (!card.canBeShielded()) {
-                    return false;
-                }
-                if (card.isCreature()) {
-                    if (card.getNetToughness() <= 0)
-                        return false;
-                }
-            }
-        }
-        if (hasParam("ValidSource")) {
-            if (!matchesValid(runParams.get(AbilityKey.Source), getParam("ValidSource").split(","), getHostCard())) {
-                return false;
-            }
+
+        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.Source))) {
+            return false;
         }
 
         return true;

@@ -135,7 +135,7 @@ public class DigEffect extends SpellAbilityEffect {
                 }
                 else if (sa.hasParam("RevealValid")) {
                     final String revealValid = sa.getParam("RevealValid");
-                    final CardCollection toReveal = CardLists.getValidCards(top, revealValid, host.getController(), host);
+                    final CardCollection toReveal = CardLists.getValidCards(top, revealValid, host.getController(), host, sa);
                     if (!toReveal.isEmpty()) {
                         game.getAction().reveal(toReveal, host.getController());
                         if (sa.hasParam("RememberRevealed")) {

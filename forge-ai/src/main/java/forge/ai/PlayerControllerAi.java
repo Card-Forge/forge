@@ -1159,7 +1159,7 @@ public class PlayerControllerAi extends PlayerController {
             } else if (logic.equals("MostProminentInHumanDeck")) {
                 return ComputerUtilCard.getMostProminentCardName(oppLibrary);
             } else if (logic.equals("MostProminentCreatureInComputerDeck")) {
-                CardCollectionView cards = CardLists.getValidCards(aiLibrary, "Creature", player, sa.getHostCard());
+                CardCollectionView cards = CardLists.getValidCards(aiLibrary, "Creature", player, sa.getHostCard(), sa);
                 return ComputerUtilCard.getMostProminentCardName(cards);
             } else if (logic.equals("BestCreatureInComputerDeck")) {
                 Card bestCreature = ComputerUtilCard.getBestCreatureAI(aiLibrary);
@@ -1167,7 +1167,7 @@ public class PlayerControllerAi extends PlayerController {
             } else if (logic.equals("RandomInComputerDeck")) {
                 return Aggregates.random(aiLibrary).getName();
             } else if (logic.equals("MostProminentSpellInComputerDeck")) {
-                CardCollectionView cards = CardLists.getValidCards(aiLibrary, "Card.Instant,Card.Sorcery", player, sa.getHostCard());
+                CardCollectionView cards = CardLists.getValidCards(aiLibrary, "Card.Instant,Card.Sorcery", player, sa.getHostCard(), sa);
                 return ComputerUtilCard.getMostProminentCardName(cards);
             } else if (logic.equals("CursedScroll")) {
                 return SpecialCardAi.CursedScroll.chooseCard(player, sa);

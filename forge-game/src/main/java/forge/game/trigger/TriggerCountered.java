@@ -54,30 +54,16 @@ public class TriggerCountered extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
+        }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
+        }
+        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+            return false;
         }
 
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
-        }
-
-        if (hasParam("ValidCause")) {
-            if (runParams.get(AbilityKey.Cause) == null) {
-                return false;
-            }
-            if (!matchesValid(runParams.get(AbilityKey.Cause), getParam("ValidCause").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
-        }
-        
         if (hasParam("ValidType")) {
             // TODO: if necessary, expand the syntax to account for multiple valid types (e.g. Spell,Ability)
             SpellAbility ctrdSA = (SpellAbility) runParams.get(AbilityKey.CounteredSA);

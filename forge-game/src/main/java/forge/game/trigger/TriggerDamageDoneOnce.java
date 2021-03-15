@@ -5,7 +5,6 @@ import java.util.Set;
 
 import com.google.common.collect.Sets;
 
-import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
@@ -21,7 +20,6 @@ public class TriggerDamageDoneOnce extends Trigger {
     @SuppressWarnings("unchecked")
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-        final GameEntity tgt = (GameEntity) runParams.get(AbilityKey.DamageTarget);
 
         if (hasParam("CombatDamage")) {
             if (getParam("CombatDamage").equals("True")) {
@@ -43,13 +41,9 @@ public class TriggerDamageDoneOnce extends Trigger {
             }
         }
 
-        if (hasParam("ValidTarget")) {
-            if (!matchesValid(tgt, getParam("ValidTarget").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
+            return false;
         }
-
-
 
         return true;
     }
@@ -77,7 +71,7 @@ public class TriggerDamageDoneOnce extends Trigger {
     public int getDamageAmount(Map<Card, Integer> damageMap) {
         int result = 0;
         for (Map.Entry<Card, Integer> e : damageMap.entrySet()) {
-            if (!hasParam("ValidSource") || matchesValid(e.getKey(), getParam("ValidSource").split(","), getHostCard())) {
+            if (matchesValidParam("ValidSource", e.getKey())) {
                 result += e.getValue();
             }
         }
@@ -90,7 +84,7 @@ public class TriggerDamageDoneOnce extends Trigger {
         }
         Set<Card> result = Sets.newHashSet();
         for (Card c : damageMap.keySet()) {
-            if (matchesValid(c, getParam("ValidSource").split(","), getHostCard())) {
+            if (matchesValid(c, getParam("ValidSource").split(","))) {
                 result.add(c);
             }
         }

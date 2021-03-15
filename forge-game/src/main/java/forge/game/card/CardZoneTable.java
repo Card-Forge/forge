@@ -10,9 +10,9 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Table;
 
+import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
-import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
@@ -61,7 +61,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
         }
     }
 
-    public CardCollection filterCards(Iterable<ZoneType> origin, ZoneType destination, String valid, Card host, SpellAbility sa) {
+    public CardCollection filterCards(Iterable<ZoneType> origin, ZoneType destination, String valid, Card host, CardTraitBase sa) {
         CardCollection allCards = new CardCollection();
         if (destination != null) {
             if (!containsColumn(destination)) {

@@ -821,13 +821,13 @@ public class CardFactoryUtil {
 
         if (l[0].startsWith("MostProminentCreatureType")) {
             String restriction = l[0].split(" ")[1];
-            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, cc, c);
+            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, cc, c, null);
             return doXMath(getMostProminentCreatureTypeSize(list), m, c);
         }
 
         if (l[0].startsWith("SecondMostProminentColor")) {
             String restriction = l[0].split(" ")[1];
-            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, cc, c);
+            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, cc, c, null);
             int[] colorSize = SortColorsFromList(list);
             return doXMath(colorSize[colorSize.length - 2], m, c);
         }
@@ -986,7 +986,7 @@ public class CardFactoryUtil {
         if (sq[0].contains("YourDamageSourcesThisTurn")) {
             Iterable<Card> allSrc = cc.getAssignedDamageSources();
             String restriction = sq[0].split(" ")[1];
-            CardCollection filtered = CardLists.getValidCards(allSrc, restriction, cc, c);
+            CardCollection filtered = CardLists.getValidCards(allSrc, restriction, cc, c, null);
             return doXMath(filtered.size(), m, c);
         }
 
@@ -1831,7 +1831,7 @@ public class CardFactoryUtil {
 
             final String[] splitString = string.split("/", 2);
             String valid = splitString[0].substring(6);
-            final List<Card> list = CardLists.getValidCardsAsList(paidList, valid, source.getController(), source);
+            final List<Card> list = CardLists.getValidCardsAsList(paidList, valid, source.getController(), source, null);
             return doXMath(list.size(), splitString.length > 1 ? splitString[1] : null, source);
         }
 

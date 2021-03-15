@@ -22,7 +22,6 @@ import java.util.Map;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
 import forge.util.Localizer;
@@ -58,44 +57,18 @@ public class TriggerCounterAdded extends Trigger {
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         final CounterType addedType = (CounterType) runParams.get(AbilityKey.CounterType);
 
-        if (hasParam("ValidCard")) {
-            if (!runParams.containsKey(AbilityKey.Card))
-                return false;
-
-            final Card addedTo = (Card) runParams.get(AbilityKey.Card);
-            if (!addedTo.isValid(getParam("ValidCard").split(","), getHostCard().getController(),
-                    getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
         }
 
-        if (hasParam("ValidPlayer")) {
-            if (!runParams.containsKey(AbilityKey.Player))
-                return false;
-
-            final Player addedTo = (Player) runParams.get(AbilityKey.Player);
-            if (!addedTo.isValid(getParam("ValidPlayer").split(","), getHostCard().getController(),
-                    getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
         }
-        
-        if (hasParam("ValidSource")) {
-            if (!runParams.containsKey(AbilityKey.Source))
-                return false;
 
-            final Card source = (Card) runParams.get(AbilityKey.Source);
-
-            if (source == null) {
-                return false;
-            }
-
-            if (!source.isValid(getParam("ValidSource").split(","), getHostCard().getController(),
-                    getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.Source))) {
+            return false;
         }
-        
+
         if (hasParam("CounterType")) {
             final String type = getParam("CounterType");
             if (!type.equals(addedType.toString())) {

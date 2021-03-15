@@ -52,7 +52,7 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
         final Game game = sa.getActivatingPlayer().getGame();
 
         CardCollectionView cards = game.getCardsIn(zone);
-        cards = CardLists.getValidCards(cards, valid, sa.getHostCard().getController(), sa.getHostCard());
+        cards = CardLists.getValidCards(cards, valid, sa.getHostCard().getController(), sa.getHostCard(), sa);
 
         if (sa.usesTargeting()) {
             final Player pl = sa.getTargets().getFirstTargetedPlayer();

@@ -54,20 +54,11 @@ public class TriggerAttached extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Card src = (Card) runParams.get(AbilityKey.AttachSource);
-        final Object tgt = runParams.get(AbilityKey.AttachTarget);
-
-        if (hasParam("ValidSource")) {
-            if (!src.isValid(getParam("ValidSource").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.AttachSource))) {
+            return false;
         }
-
-        if (hasParam("ValidTarget")) {
-            if (!matchesValid(tgt, getParam("ValidTarget").split(","), this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidTarget", runParams.get(AbilityKey.AttachTarget))) {
+            return false;
         }
         
         return true;

@@ -46,10 +46,8 @@ public class ReplaceUntap extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidCard").split(","), this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Affected))) {
+            return false;
         }
         if (hasParam("UntapStep")) {
             final Object o = runParams.get(AbilityKey.Affected);
