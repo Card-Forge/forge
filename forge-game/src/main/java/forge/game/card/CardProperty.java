@@ -1000,9 +1000,18 @@ public class CardProperty {
                 }
             }
             return false;
+        } else if (property.equals("EnteredSinceYourLastTurn")) {
+            if (card.getTurnInZone() > controller.getLastTurnNr()) {
+                return false;
+            }
         } else if (property.equals("ThisTurnEntered")) {
             // only check if it entered the Zone this turn
             if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
+                return false;
+            }
+        } else if (property.equals("NotThisTurnEntered")) {
+            // only check if it entered the Zone this turn
+            if (card.getTurnInZone() == game.getPhaseHandler().getTurn()) {
                 return false;
             }
         } else if (property.startsWith("ThisTurnEnteredFrom")) {
@@ -1096,14 +1105,6 @@ public class CardProperty {
             }
         } else if (property.startsWith("notDrawnThisTurn")) {
             if (card.getDrawnThisTurn()) {
-                return false;
-            }
-        } else if (property.startsWith("enteredBattlefieldThisTurn")) {
-            if (!(card.getTurnInZone() == game.getPhaseHandler().getTurn())) {
-                return false;
-            }
-        } else if (property.startsWith("notEnteredBattlefieldThisTurn")) {
-            if (card.getTurnInZone() == game.getPhaseHandler().getTurn()) {
                 return false;
             }
         } else if (property.startsWith("firstTurnControlled")) {
@@ -1706,19 +1707,6 @@ public class CardProperty {
             if (card.isRenowned()) {
                 return false;
             }
-        } else if (property.startsWith("RememberMap")) {
-            System.out.println(source.getRememberMap());
-            for (SpellAbility sa : source.getSpellAbilities()) {
-                if (sa.getActivatingPlayer() == null) continue;
-                for (Player p : AbilityUtils.getDefinedPlayers(source, property.split("RememberMap_")[1], sa)) {
-                    if (source.getRememberMap() != null && source.getRememberMap().get(p) != null) {
-                        if (source.getRememberMap().get(p).contains(card)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
         } else if (property.equals("IsRemembered")) {
             if (!source.isRemembered(card)) {
                 return false;

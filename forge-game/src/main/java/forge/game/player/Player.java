@@ -114,6 +114,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numTokenCreatedThisTurn = 0;
     private int numForetoldThisTurn = 0;
     private int numCardsInHandStartedThisTurnWith = 0;
+
+    private int lastTurnNr = 0;
+
     private final Map<String, FCollection<String>> notes = Maps.newHashMap();
 
     private boolean revolt = false;
@@ -2539,6 +2542,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return keywords.getAmount(k);
     }
 
+    public final int getLastTurnNr() {
+        return this.lastTurnNr;
+    }
+
     public void onCleanupPhase() {
         for (Card c : getCardsIn(ZoneType.Hand)) {
             c.setDrawnThisTurn(false);
@@ -2562,6 +2569,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetAttackersDeclaredThisTurn();
         resetAttackedOpponentsThisTurn();
         setRevolt(false);
+
+        // set last turn nr
+        if (game.getPhaseHandler().isPlayerTurn(this)) {
+            this.lastTurnNr = game.getPhaseHandler().getTurn();
+        }
     }
 
     public boolean canCastSorcery() {
@@ -2572,16 +2584,15 @@ public class Player extends GameEntity implements Comparable<Player> {
     //NOTE: for conditions the stack must only have the sa being checked
     public boolean couldCastSorcery(final SpellAbility sa) {
         final Card source = sa.getRootAbility().getHostCard();
-        boolean onlyThis = true;
 
         for (final Card card : game.getCardsIn(ZoneType.Stack)) {
             if (!card.equals(source)) {
-                onlyThis = false;
+                return false;
             }
         }
 
         PhaseHandler now = game.getPhaseHandler();
-        return onlyThis && now.isPlayerTurn(this) && now.getPhase().isMain();
+        return now.isPlayerTurn(this) && now.getPhase().isMain();
     }
 
     public final PlayerController getController() {

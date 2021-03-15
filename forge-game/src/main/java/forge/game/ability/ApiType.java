@@ -155,7 +155,6 @@ public enum ApiType {
     Shuffle (ShuffleEffect.class),
     SkipTurn (SkipTurnEffect.class),
     StoreSVar (StoreSVarEffect.class),
-    StoreMap (StoreMapEffect.class),
     Subgame (SubgameEffect.class),
     Surveil (SurveilEffect.class),
     SwitchBlock (SwitchBlockEffect.class),

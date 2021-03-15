@@ -3,7 +3,7 @@ ManaCost:3 W W
 Types:Legendary Creature Human Soldier
 PT:4/4
 K:Flash
-T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | CombatDamage$ True | IsPresent$ Card.Self+enteredBattlefieldThisTurn | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature deals combat damage to you, if CARDNAME entered the battlefield this turn, exile that creature until CARDNAME leaves the battlefield.
+T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | CombatDamage$ True | IsPresent$ Card.Self+ThisTurnEntered | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature deals combat damage to you, if CARDNAME entered the battlefield this turn, exile that creature until CARDNAME leaves the battlefield.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ TriggeredSourceLKICopy | ConditionPresent$ Card.Self | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Triggers$ ComeBack | RememberObjects$ TriggeredCard | ImprintCards$ Self | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnMoved$ Exile
 SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ You | Static$ True | TriggerDescription$ That creature is exiled until EFFECTSOURCE leaves the battlefield

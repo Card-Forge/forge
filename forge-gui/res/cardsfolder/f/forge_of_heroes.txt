@@ -2,7 +2,7 @@ Name:Forge of Heroes
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Pump | Cost$ T | ValidTgts$ Card.IsCommander+enteredBattlefieldThisTurn | TgtPrompt$ Select target commander that entered the battlefield this turn | SubAbility$ DBPutCounter | StackDescription$ Select target commander that entered the battlefield this turn. | SpellDescription$ Choose target commander that entered the battlefield this turn. Put a +1/+1 counter on it if it's a creature and a loyalty counter on it if it's a planeswalker.
+A:AB$ Pump | Cost$ T | ValidTgts$ Card.IsCommander+ThisTurnEntered | TgtPrompt$ Select target commander that entered the battlefield this turn | SubAbility$ DBPutCounter | StackDescription$ Select target commander that entered the battlefield this turn. | SpellDescription$ Choose target commander that entered the battlefield this turn. Put a +1/+1 counter on it if it's a creature and a loyalty counter on it if it's a planeswalker.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ ParentTarget | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ ParentTarget | ConditionPresent$ Creature | ConditionCompare$ GE1 | SubAbility$ DBPutCounterCommander
 SVar:DBPutCounterCommander:DB$ PutCounter | Defined$ ParentTarget | CounterType$ LOYALTY | CounterNum$ 1 | ConditionDefined$ ParentTarget | ConditionPresent$ Planeswalker | ConditionCompare$ GE1
 Oracle:{T}: Add {C}.\n{T}: Choose target commander that entered the battlefield this turn. Put a +1/+1 counter on it if it's a creature and a loyalty counter on it if it's a planeswalker.
