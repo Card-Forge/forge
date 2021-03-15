@@ -2,12 +2,7 @@ Name:Thopter Arrest
 ManaCost:2 W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target artifact or creature an opponent controls until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact.OppCtrl,Creature.OppCtrl | TgtPrompt$ Select target artifact or creature an opponent controls | ConditionPresent$ Card.Self | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Triggers$ ComeBack | RememberObjects$ Targeted | ImprintCards$ Self | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnMoved$ Exile
-SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ That permanent is exiled until EFFECTSOURCE leaves the battlefield
-SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ ExileSelf
-SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact.OppCtrl,Creature.OppCtrl | TgtPrompt$ Select target artifact or creature an opponent controls | UntilHostLeavesPlay$ True
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thopter_arrest.jpg
 Oracle:When Thopter Arrest enters the battlefield, exile target artifact or creature an opponent controls until Thopter Arrest leaves the battlefield.

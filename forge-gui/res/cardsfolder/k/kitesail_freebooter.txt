@@ -4,12 +4,6 @@ Types:Creature Human Pirate
 PT:1/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand. You choose a noncreature, nonland card from it. Exile that card until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | TgtPrompt$ Select target opponent | ChangeType$ Card.nonCreature+nonLand | ChangeNum$ 1 | IsCurse$ True | ConditionPresent$ Card.Self | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Triggers$ ComeBack | RememberObjects$ Remembered | ImprintCards$ Self | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ That permanent is exiled until EFFECTSOURCE leaves the battlefield
-SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Hand | ChangeType$ Card.IsRemembered | SubAbility$ ExileSelf
-SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | TgtPrompt$ Select target opponent | ChangeType$ Card.nonCreature+nonLand | ChangeNum$ 1 | IsCurse$ True | UntilHostLeavesPlay$ True
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kitesail_freebooter.jpg
 Oracle:Flying\nWhen Kitesail Freebooter enters the battlefield, target opponent reveals their hand. You choose a noncreature, nonland card from it. Exile that card until Kitesail Freebooter leaves the battlefield.

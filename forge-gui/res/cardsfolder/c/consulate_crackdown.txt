@@ -2,15 +2,9 @@ Name:Consulate Crackdown
 ManaCost:3 W W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile all artifacts your opponents control until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ChangeType$ Artifact.OppCtrl | ConditionPresent$ Card.Self | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Triggers$ ComeBack | RememberObjects$ Remembered | ImprintCards$ Self | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ Those artifacts are exiled until EFFECTSOURCE leaves the battlefield
-SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ ExileSelf
-SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Artifact.OppCtrl | UntilHostLeavesPlay$ True
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$Valid Artifact.OppCtrl
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/consulate_crackdown.jpg
 Oracle:When Consulate Crackdown enters the battlefield, exile all artifacts your opponents control until Consulate Crackdown leaves the battlefield.

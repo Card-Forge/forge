@@ -362,10 +362,6 @@ public class GameAction {
                 }
             }
             zoneFrom.remove(c);
-            if (!zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Stack)) {
-                c.setExiledWith(null);
-                c.setExiledBy(null);
-            }
 
             // cleanup Encoding
             if (c.hasEncodedCard()) {
@@ -378,6 +374,16 @@ public class GameAction {
                 if (e != null) {
                     e.removeEncodedCard(c);
                 }
+            }
+
+            if (!zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Stack)) {
+                Card with = c.getExiledWith();
+                if (with != null) {
+                    with.removeUntilLeavesBattlefield(c);
+                }
+
+                c.setExiledWith(null);
+                c.setExiledBy(null);
             }
         }
 

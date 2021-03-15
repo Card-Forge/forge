@@ -409,6 +409,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
+        //if host is not on the battlefield don't apply
+        if (sa.hasParam("UntilHostLeavesPlay") && !sa.getHostCard().isInPlay()) {
+            return;
+        }
+
         if (isHidden(sa) && !sa.hasParam("Ninjutsu")) {
             changeHiddenOriginResolve(sa);
         } else {
@@ -711,7 +716,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         movedCard.addCounter(cType, cAmount, player, true, counterTable);
                     }
 
-                    if (sa.hasParam("ExileFaceDown")) {
+                    if (sa.hasParam("ExileFaceDown") || sa.hasParam("FaceDown")) {
                         movedCard.turnFaceDown(true);
                     }
                     if (sa.hasParam("Foretold")) {
@@ -743,7 +748,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), c);
                     }
                 }
-
 
                 if (remember != null) {
                     hostCard.addRemembered(movedCard);
@@ -797,8 +801,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         triggerList.triggerChangesZoneAll(game);
         counterTable.triggerCountersPutAll(game);
 
+
         if (sa.hasParam("AtEOT") && !triggerList.isEmpty()) {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), triggerList.allCards());
+        }
+        if (sa.hasParam("UntilHostLeavesPlay")) {
+            hostCard.addLeavesPlayCommand(untilHostLeavesPlayCommand(triggerList, hostCard));
         }
 
         // for things like Gaea's Blessing
@@ -1387,6 +1395,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             game.fireEvent(new GameEventCombatChanged());
         }
         triggerList.triggerChangesZoneAll(game);
+
+        if (sa.hasParam("UntilHostLeavesPlay")) {
+            source.addLeavesPlayCommand(untilHostLeavesPlayCommand(triggerList, source));
+        }
 
         // remove Controlled While Searching
         if (controlTimestamp != null) {
