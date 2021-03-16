@@ -41,7 +41,7 @@ public class ReplaceToken extends ReplacementEffect {
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
             return false;
         }
-        if (!matchesValidParam("ValidToken", runParams.get(AbilityKey.Affected))) {
+        if (!matchesValidParam("ValidToken", runParams.get(AbilityKey.Token))) {
             return false;
         }
 
