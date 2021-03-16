@@ -3,7 +3,7 @@ Code=DS0
 Date=2010-07-14
 Name=Drake Stone
 Code2=DS0
-Type=Expansion
+Type=Funny
 MciCode=ds0
 
 [cards]
