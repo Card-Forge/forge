@@ -1,9 +1,9 @@
 package forge.screens.home.quest;
 
 import forge.ImageCache;
-import forge.assets.FSkinProp;
-import forge.quest.QuestEvent;
-import forge.quest.QuestUtil;
+import forge.gamemodes.quest.QuestEvent;
+import forge.gamemodes.quest.QuestUtil;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FRadioButton;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
@@ -100,7 +100,7 @@ class PnlEvent extends JPanel {
         this.add(tarDesc, "w 100% - " + (wImg + 15) + "px!, gap " + (wImg + 15) + "px 0 5px 0");
    }
 
-    /** @return {@link forge.quest.QuestEvent} */
+    /** @return {@link forge.gamemodes.quest.QuestEvent} */
     public QuestEvent getEvent() {
         return event;
     }

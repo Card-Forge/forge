@@ -2,7 +2,7 @@ package forge.deck.io;
 
 import forge.deck.DeckProxy;
 import forge.deck.DeckType;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.XmlUtil;
 
 import java.io.File;

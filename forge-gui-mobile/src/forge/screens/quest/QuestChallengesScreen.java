@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
 import forge.assets.FSkinFont;
-import forge.interfaces.IButton;
+import forge.gui.interfaces.IButton;
 import forge.model.FModel;
 import forge.toolbox.FLabel;
 import forge.util.Localizer;

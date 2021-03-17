@@ -8,11 +8,11 @@ import java.util.List;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 
-import forge.interfaces.ICheckBox;
-import forge.interfaces.IComboBox;
+import forge.gui.interfaces.ICheckBox;
+import forge.gui.interfaces.IComboBox;
+import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import forge.util.gui.SOptionPane;
 import forge.util.Localizer;
 
 public class DeckImportController {

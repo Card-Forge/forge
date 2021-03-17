@@ -1,12 +1,12 @@
 package forge.screens.home.quest;
 
-import forge.UiCommand;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestEventDuel;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gamemodes.quest.bazaar.QuestPetController;
+import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.model.FModel;
-import forge.quest.QuestController;
-import forge.quest.QuestEventDuel;
-import forge.quest.QuestUtil;
-import forge.quest.bazaar.QuestPetController;
 import forge.toolbox.JXButtonPanel;
 import forge.util.Localizer;
 
@@ -28,7 +28,7 @@ public enum CSubmenuDuels implements ICDoc {
 	}
 
 	/* (non-Javadoc)
-	 * @see forge.control.home.IControlSubmenu#initialize()
+	 * @see forge.gui.control.home.IControlSubmenu#initialize()
 	 */
 	@SuppressWarnings("serial")
 	@Override
@@ -160,7 +160,7 @@ public enum CSubmenuDuels implements ICDoc {
 	};
 
 	/* (non-Javadoc)
-	 * @see forge.control.home.IControlSubmenu#update()
+	 * @see forge.gui.control.home.IControlSubmenu#update()
 	 */
 	@Override
 	public void update() {

@@ -20,14 +20,14 @@ package forge.model;
 
 import com.google.common.base.Predicate;
 
+import forge.gamemodes.limited.CustomLimited;
+import forge.gamemodes.limited.SealedCardPoolGenerator;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.item.generation.IUnOpenedProduct;
 import forge.item.generation.UnOpenedProduct;
-import forge.limited.CustomLimited;
-import forge.limited.SealedCardPoolGenerator;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 
 import java.io.File;

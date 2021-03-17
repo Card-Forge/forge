@@ -19,8 +19,8 @@ import forge.gamesimulationtests.util.player.PlayerSpecificationBuilder;
 import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
 import forge.gamesimulationtests.util.playeractions.PlayerActions;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 
 import java.util.*;
 

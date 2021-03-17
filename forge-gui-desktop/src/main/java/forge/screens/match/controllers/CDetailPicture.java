@@ -3,7 +3,7 @@ package forge.screens.match.controllers;
 import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
-import forge.interfaces.IMayViewCards;
+import forge.gui.interfaces.IMayViewCards;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 

@@ -1,12 +1,12 @@
 package forge.itemmanager;
 
 import forge.game.GameFormat;
+import forge.gamemodes.quest.QuestWorld;
+import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gui.GuiUtils;
 import forge.item.PaperCard;
 import forge.itemmanager.filters.*;
 import forge.model.FModel;
-import forge.quest.QuestWorld;
-import forge.quest.data.QuestPreferences;
 import forge.screens.home.quest.DialogChooseFormats;
 import forge.screens.home.quest.DialogChooseSets;
 import forge.screens.match.controllers.CDetailPicture;

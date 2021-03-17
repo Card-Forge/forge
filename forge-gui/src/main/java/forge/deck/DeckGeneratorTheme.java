@@ -19,7 +19,7 @@ package forge.deck;
 
 import forge.deck.generation.DeckGeneratorBase;
 import forge.deck.generation.IDeckGenPool;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
 

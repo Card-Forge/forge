@@ -1,10 +1,10 @@
 package forge.screens.home.quest;
 
-import forge.UiCommand;
-import forge.assets.FSkinProp;
 import forge.card.MagicColor;
+import forge.gamemodes.quest.StartingPoolPreferences.PoolType;
 import forge.gui.SOverlayUtils;
-import forge.quest.StartingPoolPreferences.PoolType;
+import forge.gui.UiCommand;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.*;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;

@@ -1,7 +1,7 @@
 package forge.gui.framework;
 
-import forge.assets.FSkinProp;
 import forge.gui.MouseUtil;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinCursor;
 import forge.toolbox.FSkin.SkinnedLayeredPane;

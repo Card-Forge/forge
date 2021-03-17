@@ -3,10 +3,10 @@ package forge.screens.match.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.FThreads;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
+import forge.gui.FThreads;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.toolbox.FContainer;
 

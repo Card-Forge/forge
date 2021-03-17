@@ -11,12 +11,12 @@ import javax.swing.filechooser.FileFilter;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import forge.UiCommand;
 import forge.deck.Deck;
-import forge.gauntlet.GauntletData;
-import forge.gauntlet.GauntletIO;
+import forge.gamemodes.gauntlet.GauntletData;
+import forge.gamemodes.gauntlet.GauntletIO;
+import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.toolbox.FOptionPane;
 
 /**

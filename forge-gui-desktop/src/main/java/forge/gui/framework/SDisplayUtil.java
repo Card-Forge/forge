@@ -17,7 +17,7 @@ import java.util.TimerTask;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import forge.FThreads;
+import forge.gui.FThreads;
 import forge.view.FFrame;
 
 /**

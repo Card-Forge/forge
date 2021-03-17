@@ -40,7 +40,6 @@ import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
-import forge.FThreads;
 import forge.toolbox.FList;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FOptionPane;

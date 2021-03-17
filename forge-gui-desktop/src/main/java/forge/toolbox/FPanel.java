@@ -32,7 +32,7 @@ import java.util.List;
 
 import javax.swing.SwingConstants;
 
-import forge.UiCommand;
+import forge.gui.UiCommand;
 import forge.gui.framework.ILocalRepaint;
 import forge.toolbox.FSkin.FPanelBase;
 import forge.toolbox.FSkin.SkinColor;
@@ -115,12 +115,12 @@ public class FPanel extends FPanelBase implements ILocalRepaint {
         this.cornerDiameter = (int0 <= 0 ? 0 : int0);
     }
 
-    /** @param cmd0 &emsp; {@link forge.UiCommand} on click */
+    /** @param cmd0 &emsp; {@link forge.forge.gui.UiCommand} on click */
     public void setCommand(final UiCommand cmd0) {
         this.cmdClick = cmd0;
     }
 
-    /** @return {@link forge.UiCommand} */
+    /** @return {@link forge.forge.gui.UiCommand} */
     public UiCommand getCommand() {
         return this.cmdClick;
     }

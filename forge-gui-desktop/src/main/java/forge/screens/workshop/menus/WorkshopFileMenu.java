@@ -1,6 +1,6 @@
 package forge.screens.workshop.menus;
 
-import forge.assets.FSkinProp;
+import forge.localinstance.assets.FSkinProp;
 import forge.menus.MenuUtil;
 import forge.screens.workshop.controllers.CCardScript;
 import forge.toolbox.FSkin.SkinnedMenuItem;

@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 
 import forge.Graphics;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 
 import java.util.ArrayList;
 import java.util.Collections;

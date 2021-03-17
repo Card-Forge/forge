@@ -42,15 +42,15 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.UiCommand;
-import forge.assets.FSkinProp;
 import forge.gui.GuiUtils;
+import forge.gui.UiCommand;
 import forge.item.InventoryItem;
 import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.views.ImageView;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemTableColumn;
 import forge.itemmanager.views.ItemView;
+import forge.localinstance.assets.FSkinProp;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.ContextMenuBuilder;
 import forge.toolbox.FComboBox;

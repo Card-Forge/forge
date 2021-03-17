@@ -12,9 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
-import forge.UiCommand;
-import forge.gauntlet.GauntletData;
-import forge.gauntlet.GauntletIO;
+import forge.gamemodes.gauntlet.GauntletData;
+import forge.gamemodes.gauntlet.GauntletIO;
+import forge.gui.UiCommand;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
@@ -182,7 +182,7 @@ public class ContestGauntletLister extends JPanel {
         return true;
     }
 
-    /** @param c0 &emsp; {@link forge.UiCommand} command executed on row select. */
+    /** @param c0 &emsp; {@link forge.forge.gui.UiCommand} command executed on row select. */
     public void setSelectCommand(final UiCommand c0) {
         this.cmdRowSelect = c0;
     }

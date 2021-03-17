@@ -1,7 +1,7 @@
 package forge.screens.home.puzzle;
 
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
 import forge.util.Localizer;
 
 import javax.swing.*;

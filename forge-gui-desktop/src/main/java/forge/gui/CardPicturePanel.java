@@ -17,14 +17,13 @@
  */
 package forge.gui;
 
-import forge.GuiBase;
 import forge.ImageCache;
 import forge.ImageKeys;
 import forge.game.card.CardView.CardStateView;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;

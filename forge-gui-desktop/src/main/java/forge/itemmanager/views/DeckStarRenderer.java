@@ -17,10 +17,10 @@
  */
 package forge.itemmanager.views;
 
-import forge.assets.FSkinProp;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.item.InventoryItem;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.util.Localizer;

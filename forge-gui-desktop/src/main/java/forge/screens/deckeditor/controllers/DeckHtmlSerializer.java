@@ -2,7 +2,7 @@ package forge.screens.deckeditor.controllers;
 
 import forge.deck.Deck;
 import forge.item.PaperCard;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.ImageUtil;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;

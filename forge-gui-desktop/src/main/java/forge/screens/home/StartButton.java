@@ -1,6 +1,6 @@
 package forge.screens.home;
 
-import forge.assets.FSkinProp;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedButton;
 

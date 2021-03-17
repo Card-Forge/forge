@@ -18,7 +18,6 @@
 package forge.view.arcane;
 
 import forge.CachedCardImage;
-import forge.FThreads;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.mana.ManaCost;
@@ -29,11 +28,12 @@ import forge.game.keyword.Keyword;
 import forge.game.card.CounterType;
 import forge.game.zone.ZoneType;
 import forge.gui.CardContainer;
+import forge.gui.FThreads;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants.CounterDisplayType;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgeConstants.CounterDisplayType;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FSkin.SkinnedPanel;

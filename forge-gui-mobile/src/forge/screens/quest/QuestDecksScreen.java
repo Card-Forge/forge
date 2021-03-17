@@ -1,7 +1,7 @@
 package forge.screens.quest;
 
 import com.badlogic.gdx.utils.Align;
-import forge.FThreads;
+
 import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
@@ -10,12 +10,13 @@ import forge.deck.DeckgenUtil;
 import forge.deck.FDeckChooser;
 import forge.deck.FDeckViewer;
 import forge.game.GameType;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gamemodes.quest.data.QuestPreferences.QPref;
+import forge.gui.FThreads;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
-import forge.quest.QuestController;
-import forge.quest.QuestUtil;
-import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.FScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;

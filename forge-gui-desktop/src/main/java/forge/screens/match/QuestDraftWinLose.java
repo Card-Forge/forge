@@ -17,13 +17,14 @@
 package forge.screens.match;
 
 import com.google.common.collect.ImmutableList;
-import forge.assets.FSkinProp;
+
 import forge.game.GameView;
 import forge.game.player.PlayerView;
-import forge.match.NextGameDecision;
+import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestDraftUtils;
+import forge.localinstance.assets.FSkinProp;
 import forge.model.FModel;
-import forge.quest.QuestController;
-import forge.quest.QuestDraftUtils;
 import forge.screens.home.quest.CSubmenuQuestDraft;
 import forge.screens.home.quest.VSubmenuQuestDraft;
 import forge.toolbox.FOptionPane;

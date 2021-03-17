@@ -6,9 +6,9 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 
-import forge.UiCommand;
 import forge.gui.GuiUtils;
-import forge.interfaces.IButton;
+import forge.gui.UiCommand;
+import forge.gui.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.itemmanager.AdvancedSearch;
 import forge.itemmanager.ItemManager;

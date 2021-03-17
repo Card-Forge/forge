@@ -14,7 +14,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import forge.gui.MouseUtil;
-import forge.interfaces.ITextField;
+import forge.gui.interfaces.ITextField;
 import forge.toolbox.FSkin.SkinnedPasswordField;
 
 /** 

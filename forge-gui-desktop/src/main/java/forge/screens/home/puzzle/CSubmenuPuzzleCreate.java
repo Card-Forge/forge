@@ -1,20 +1,21 @@
 package forge.screens.home.puzzle;
 
 import com.google.common.collect.Maps;
-import forge.GuiBase;
+
 import forge.deck.Deck;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
+import forge.gamemodes.match.HostedMatch;
+import forge.gamemodes.puzzle.Puzzle;
+import forge.gui.GuiBase;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
-import forge.match.HostedMatch;
+import forge.gui.util.SGuiChoose;
+import forge.gui.util.SOptionPane;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
 import forge.player.GamePlayerUtil;
-import forge.puzzle.Puzzle;
-import forge.util.gui.SGuiChoose;
-import forge.util.gui.SOptionPane;
 import forge.util.Localizer;
 
 import javax.swing.*;

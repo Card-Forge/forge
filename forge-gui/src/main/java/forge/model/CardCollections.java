@@ -23,7 +23,7 @@ import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.io.DeckGroupSerializer;
 import forge.deck.io.DeckStorage;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
 

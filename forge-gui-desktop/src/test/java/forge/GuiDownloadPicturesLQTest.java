@@ -2,8 +2,8 @@ package forge;
 
 import org.testng.annotations.Test;
 
-import forge.download.GuiDownloadPicturesLQ;
 import forge.download.GuiDownloader;
+import forge.gui.download.GuiDownloadPicturesLQ;
 
 /**
  * Created by IntelliJ IDEA. User: dhudson

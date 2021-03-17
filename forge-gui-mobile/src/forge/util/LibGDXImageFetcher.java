@@ -2,7 +2,7 @@ package forge.util;
 
 import com.badlogic.gdx.files.FileHandle;
 import forge.Forge;
-import forge.GuiBase;
+import forge.gui.GuiBase;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

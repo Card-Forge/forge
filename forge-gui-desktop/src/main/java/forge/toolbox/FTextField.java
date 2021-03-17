@@ -17,7 +17,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
 import forge.gui.MouseUtil;
-import forge.interfaces.ITextField;
+import forge.gui.interfaces.ITextField;
 import forge.toolbox.FSkin.SkinnedTextField;
 
 /**

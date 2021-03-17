@@ -6,7 +6,7 @@ import javax.swing.JMenu;
 
 import com.google.common.collect.Lists;
 
-import forge.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences;
 import forge.screens.match.CMatchUI;
 
 /**

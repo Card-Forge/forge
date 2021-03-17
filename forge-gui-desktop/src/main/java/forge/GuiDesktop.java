@@ -1,20 +1,22 @@
 package forge;
 
 import com.google.common.base.Function;
-import forge.assets.FSkinProp;
-import forge.assets.ISkinImage;
-import forge.download.GuiDownloadService;
+
 import forge.download.GuiDownloader;
 import forge.error.BugReportDialog;
+import forge.gamemodes.match.HostedMatch;
 import forge.gui.BoxedProductCardListViewer;
 import forge.gui.CardListChooser;
 import forge.gui.CardListViewer;
+import forge.gui.FThreads;
 import forge.gui.GuiChoose;
+import forge.gui.download.GuiDownloadService;
 import forge.gui.framework.FScreen;
-import forge.interfaces.IGuiBase;
-import forge.interfaces.IGuiGame;
+import forge.gui.interfaces.IGuiBase;
+import forge.gui.interfaces.IGuiGame;
 import forge.item.PaperCard;
-import forge.match.HostedMatch;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.assets.ISkinImage;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorQuestCardShop;

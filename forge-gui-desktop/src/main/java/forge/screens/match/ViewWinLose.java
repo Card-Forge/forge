@@ -17,16 +17,16 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.UiCommand;
-import forge.assets.FSkinProp;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.game.GameView;
 import forge.gui.SOverlayUtils;
-import forge.interfaces.IWinLoseView;
+import forge.gui.UiCommand;
+import forge.gui.interfaces.IWinLoseView;
 import forge.item.PaperCard;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;

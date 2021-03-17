@@ -1,23 +1,23 @@
 package forge.screens.home.puzzle;
 
-import forge.GuiBase;
-import forge.UiCommand;
-import forge.assets.FSkinProp;
 import forge.deck.Deck;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
+import forge.gamemodes.match.HostedMatch;
+import forge.gamemodes.puzzle.Puzzle;
+import forge.gamemodes.puzzle.PuzzleIO;
+import forge.gui.GuiBase;
 import forge.gui.SOverlayUtils;
+import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
-import forge.match.HostedMatch;
+import forge.gui.util.SOptionPane;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgeConstants;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
 import forge.player.GamePlayerUtil;
-import forge.properties.ForgeConstants;
-import forge.puzzle.Puzzle;
-import forge.puzzle.PuzzleIO;
 import forge.util.Localizer;
-import forge.util.gui.SOptionPane;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

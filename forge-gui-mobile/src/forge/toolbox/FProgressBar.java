@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 import forge.Graphics;
 import forge.assets.FSkinFont;
-import forge.interfaces.IProgressBar;
+import forge.gui.interfaces.IProgressBar;
 import forge.util.Utils;
 import org.apache.commons.lang3.tuple.Pair;
 

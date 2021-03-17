@@ -27,10 +27,10 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import forge.Singletons;
-import forge.UiCommand;
 import forge.deck.DeckBase;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
+import forge.gui.UiCommand;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;

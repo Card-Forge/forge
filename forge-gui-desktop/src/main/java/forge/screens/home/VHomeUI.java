@@ -18,10 +18,10 @@
 package forge.screens.home;
 
 import forge.Singletons;
-import forge.assets.FSkinProp;
 import forge.gui.framework.*;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.home.gauntlet.VSubmenuGauntletBuild;
 import forge.screens.home.gauntlet.VSubmenuGauntletContests;
 import forge.screens.home.gauntlet.VSubmenuGauntletLoad;
@@ -285,7 +285,7 @@ public enum VHomeUI implements IVTopLevelUI {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.framework.IVTopLevelUI#onClosing(forge.control.FControl.Screens)
+     * @see forge.gui.framework.IVTopLevelUI#onClosing(forge.gui.control.FControl.Screens)
      */
     @Override
     public boolean onClosing(FScreen screen) {

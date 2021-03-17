@@ -24,11 +24,11 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
-import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.gui.FThreads;
 import forge.item.InventoryItem;
 import forge.itemmanager.filters.AdvancedSearchFilter;
 import forge.itemmanager.filters.ItemFilter;

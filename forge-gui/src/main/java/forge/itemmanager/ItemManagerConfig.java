@@ -1,9 +1,9 @@
 package forge.itemmanager;
 
 import forge.itemmanager.ItemColumnConfig.SortState;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences.FPref;
 import forge.util.XmlUtil;
 
 import java.io.File;

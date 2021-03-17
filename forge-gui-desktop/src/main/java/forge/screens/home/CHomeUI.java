@@ -7,11 +7,11 @@ import javax.swing.JMenu;
 import forge.Singletons;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.toolbox.FAbsolutePositioner;
 

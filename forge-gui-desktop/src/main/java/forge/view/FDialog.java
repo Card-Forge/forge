@@ -37,7 +37,7 @@ import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
-import forge.assets.FSkinProp;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;

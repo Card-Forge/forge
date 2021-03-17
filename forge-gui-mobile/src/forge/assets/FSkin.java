@@ -14,13 +14,14 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import forge.FThreads;
 import forge.assets.FSkinImage.SourceFile;
 import forge.card.CardFaceSymbols;
+import forge.gui.FThreads;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.LoadingOverlay;
 import forge.screens.SplashScreen;
 import forge.toolbox.FProgressBar;

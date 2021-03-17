@@ -21,7 +21,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
-import forge.UiCommand;
+
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
@@ -30,7 +30,10 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.data.DeckConstructionRules;
 import forge.gui.GuiUtils;
+import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.InventoryItem;
@@ -39,10 +42,8 @@ import forge.itemmanager.CardManager;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.views.ItemTableColumn;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
-import forge.quest.QuestController;
-import forge.quest.data.DeckConstructionRules;
 import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
@@ -102,7 +103,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
      * <br><br>
      * Card catalog and decks are drawn from a QuestController object.
      *
-     * @param questData0 &emsp; {@link forge.quest.QuestController}
+     * @param questData0 &emsp; {@link forge.gamemodes.quest.QuestController}
      */
     @SuppressWarnings("serial")
     public CEditorQuest(final QuestController questData0, final CDetailPicture cDetailPicture0) {

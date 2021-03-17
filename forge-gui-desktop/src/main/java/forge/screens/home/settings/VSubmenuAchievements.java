@@ -13,14 +13,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
-import forge.achievement.Achievement;
-import forge.achievement.AchievementCollection;
-import forge.assets.FSkinProp;
 import forge.game.card.CardView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.item.IPaperCard;
+import forge.localinstance.achievements.Achievement;
+import forge.localinstance.achievements.AchievementCollection;
+import forge.localinstance.assets.FSkinProp;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;

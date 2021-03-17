@@ -1,8 +1,9 @@
 package forge.toolbox;
 
-import forge.interfaces.IProgressBar;
-
 import javax.swing.*;
+
+import forge.gui.interfaces.IProgressBar;
+
 import java.util.Date;
 
 /**

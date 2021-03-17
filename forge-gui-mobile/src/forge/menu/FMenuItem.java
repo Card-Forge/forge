@@ -5,14 +5,14 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
 import forge.Graphics;
-import forge.UiCommand;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
 import forge.assets.FSkinColor.Colors;
-import forge.assets.FSkinProp;
-import forge.interfaces.IButton;
+import forge.gui.UiCommand;
+import forge.gui.interfaces.IButton;
+import forge.localinstance.assets.FSkinProp;
 import forge.screens.FScreen.Header;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;

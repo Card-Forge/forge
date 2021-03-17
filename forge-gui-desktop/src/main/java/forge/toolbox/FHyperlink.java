@@ -9,7 +9,7 @@ import java.net.URISyntaxException;
 
 import javax.swing.SwingWorker;
 
-import forge.UiCommand;
+import forge.gui.UiCommand;
 
 
 @SuppressWarnings("serial")

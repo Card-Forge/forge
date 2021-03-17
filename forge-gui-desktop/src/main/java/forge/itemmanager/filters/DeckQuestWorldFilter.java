@@ -5,9 +5,9 @@ import java.util.Set;
 
 import forge.deck.DeckProxy;
 import forge.game.GameFormat;
+import forge.gamemodes.quest.QuestWorld;
 import forge.itemmanager.ItemManager;
 import forge.model.FModel;
-import forge.quest.QuestWorld;
 
 
 public class DeckQuestWorldFilter extends DeckFormatFilter {

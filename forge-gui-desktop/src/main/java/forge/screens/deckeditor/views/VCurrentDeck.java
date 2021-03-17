@@ -5,7 +5,6 @@ import javax.swing.SwingConstants;
 
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-import forge.assets.FSkinProp;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -13,6 +12,7 @@ import forge.gui.framework.IVDoc;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerContainer;
+import forge.localinstance.assets.FSkinProp;
 import forge.screens.deckeditor.controllers.CCurrentDeck;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;

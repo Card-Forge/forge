@@ -1,8 +1,8 @@
 package forge;
 
 import forge.deck.CardPool;
-import forge.limited.BoosterDraft;
-import forge.limited.LimitedPoolType;
+import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.limited.LimitedPoolType;
 
 import org.testng.annotations.Test;
 

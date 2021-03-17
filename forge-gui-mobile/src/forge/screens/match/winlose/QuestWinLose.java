@@ -17,7 +17,7 @@
 package forge.screens.match.winlose;
 
 import forge.game.GameView;
-import forge.quest.QuestWinLoseController;
+import forge.gamemodes.quest.QuestWinLoseController;
 import forge.screens.home.HomeScreen;
 
 /**

@@ -4,10 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import forge.game.GameFormat;
+import forge.gamemodes.quest.QuestWorld;
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
 import forge.model.FModel;
-import forge.quest.QuestWorld;
 
 
 public class CardQuestWorldFilter extends CardFormatFilter {

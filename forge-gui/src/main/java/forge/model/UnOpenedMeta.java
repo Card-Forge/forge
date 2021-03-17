@@ -18,11 +18,11 @@
 
 package forge.model;
 
+import forge.gui.util.SGuiChoose;
 import forge.item.PaperCard;
 import forge.item.generation.IUnOpenedProduct;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
-import forge.util.gui.SGuiChoose;
 
 import java.util.ArrayList;
 import java.util.List;

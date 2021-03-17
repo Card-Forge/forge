@@ -2,14 +2,14 @@ package forge.view;
 
 import com.google.common.collect.Lists;
 import forge.Singletons;
-import forge.UiCommand;
-import forge.assets.FSkinProp;
 import forge.gui.ImportDialog;
 import forge.gui.SOverlayUtils;
+import forge.gui.UiCommand;
 import forge.gui.framework.*;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences;
 import forge.screens.bazaar.VBazaarUI;
 import forge.screens.deckeditor.VDeckEditorUI;
 import forge.screens.home.VHomeUI;

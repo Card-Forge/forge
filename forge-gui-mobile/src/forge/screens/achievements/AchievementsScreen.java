@@ -6,8 +6,6 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
-import forge.achievement.Achievement;
-import forge.achievement.AchievementCollection;
 import forge.assets.FBufferedImage;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
@@ -16,6 +14,8 @@ import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.card.CardZoom;
 import forge.item.IPaperCard;
+import forge.localinstance.achievements.Achievement;
+import forge.localinstance.achievements.AchievementCollection;
 import forge.menu.FDropDown;
 import forge.screens.FScreen;
 import forge.toolbox.FComboBox;

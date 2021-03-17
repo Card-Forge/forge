@@ -19,7 +19,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
 
-import forge.FThreads;
 import forge.card.ICardFace;
 import forge.game.card.Card;
 import forge.game.card.CardView;

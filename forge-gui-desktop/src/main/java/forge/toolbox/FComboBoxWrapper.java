@@ -13,7 +13,7 @@ import javax.swing.ListCellRenderer;
 
 import com.google.common.collect.ObjectArrays;
 
-import forge.interfaces.IComboBox;
+import forge.gui.interfaces.IComboBox;
 import forge.toolbox.FComboBox.TextAlignment;
 import forge.toolbox.FSkin.SkinFont;
 

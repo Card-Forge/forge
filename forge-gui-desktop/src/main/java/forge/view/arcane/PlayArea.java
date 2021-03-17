@@ -27,13 +27,13 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import forge.FThreads;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.gui.FThreads;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.MouseTriggerEvent;

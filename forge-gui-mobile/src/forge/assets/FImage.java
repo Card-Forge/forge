@@ -1,6 +1,7 @@
 package forge.assets;
 
 import forge.Graphics;
+import forge.localinstance.assets.ISkinImage;
 
 public interface FImage extends ISkinImage {
     float getWidth();

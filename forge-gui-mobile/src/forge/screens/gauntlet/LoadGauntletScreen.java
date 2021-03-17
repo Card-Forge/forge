@@ -8,7 +8,6 @@ import java.util.Comparator;
 import java.util.List;
 import com.badlogic.gdx.utils.Align;
 
-import forge.FThreads;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -17,11 +16,13 @@ import forge.deck.Deck;
 import forge.deck.FDeckChooser;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
-import forge.gauntlet.GauntletData;
-import forge.gauntlet.GauntletIO;
+import forge.gamemodes.gauntlet.GauntletData;
+import forge.gamemodes.gauntlet.GauntletIO;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gui.FThreads;
+import forge.gui.util.SOptionPane;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
-import forge.quest.QuestUtil;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.home.LoadGameMenu;
@@ -35,7 +36,6 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
-import forge.util.gui.SOptionPane;
 import forge.util.Localizer;
 
 public class LoadGauntletScreen extends LaunchScreen {

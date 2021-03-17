@@ -6,6 +6,7 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.gui.error.BugReporter;
 import forge.screens.FScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;

@@ -5,14 +5,16 @@ import forge.ai.AiProfileUtil;
 import forge.control.FControl.CloseAction;
 import forge.download.AutoUpdater;
 import forge.game.GameLogEntryType;
+import forge.gamemodes.net.server.FServerManager;
+import forge.gui.GuiBase;
+import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.net.server.FServerManager;
 import forge.player.GamePlayerUtil;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorTokenViewer;
 import forge.sound.SoundSystem;
@@ -55,7 +57,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @SuppressWarnings("serial")
     @Override
@@ -260,7 +262,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void update() {

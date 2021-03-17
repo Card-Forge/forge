@@ -1,24 +1,24 @@
 package forge.screens.home.sanctioned;
 
-import forge.GuiBase;
 import forge.Singletons;
-import forge.UiCommand;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckProxy;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
+import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.limited.LimitedPoolType;
+import forge.gamemodes.match.HostedMatch;
+import forge.gui.GuiBase;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
+import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
-import forge.limited.BoosterDraft;
-import forge.limited.LimitedPoolType;
-import forge.match.HostedMatch;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorDraftingProcess;
 import forge.screens.deckeditor.views.VProbabilities;
@@ -63,7 +63,7 @@ public enum CSubmenuDraft implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void initialize() {
@@ -92,7 +92,7 @@ public enum CSubmenuDraft implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void update() {

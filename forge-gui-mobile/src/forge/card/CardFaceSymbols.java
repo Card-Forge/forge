@@ -21,7 +21,8 @@ import forge.Graphics;
 import forge.assets.FSkinImage;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.error.BugReporter;
+import forge.gui.error.BugReporter;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;

@@ -17,16 +17,16 @@
  */
 package forge.toolbox;
 
-import forge.FThreads;
 import forge.Singletons;
-import forge.assets.FSkinProp;
-import forge.assets.ISkinImage;
+import forge.gui.FThreads;
 import forge.gui.GuiUtils;
 import forge.gui.framework.ILocalRepaint;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.assets.ISkinImage;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.util.OperatingSystem;
 import forge.util.WordUtil;
 import forge.view.FView;

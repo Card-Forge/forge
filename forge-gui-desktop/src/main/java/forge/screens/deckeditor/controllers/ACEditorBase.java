@@ -19,21 +19,22 @@ package forge.screens.deckeditor.controllers;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import forge.UiCommand;
-import forge.assets.FSkinProp;
+
 import forge.deck.*;
 import forge.game.GameType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiUtils;
+import forge.gui.UiCommand;
 import forge.gui.framework.*;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SItemManagerUtil;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menus.IMenuProvider;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.menus.CDeckEditorUIMenus;
 import forge.screens.deckeditor.views.VCardCatalog;
