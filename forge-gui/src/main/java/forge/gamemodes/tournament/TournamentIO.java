@@ -55,6 +55,7 @@ public class TournamentIO {
         });
         xStream.registerConverter(new DeckSectionToXml());
         xStream.autodetectAnnotations(true);
+        xStream.aliasPackage("forge.tournament", TournamentIO.class.getPackage().getName());
         return xStream;
     }
 

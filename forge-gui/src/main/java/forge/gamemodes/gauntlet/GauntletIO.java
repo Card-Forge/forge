@@ -75,7 +75,7 @@ public class GauntletIO {
         xStream.autodetectAnnotations(true);
 
         // Alias for renamed
-        xStream.alias("forge.gauntlet.GauntletData", GauntletData.class);
+        xStream.aliasPackage("forge.gauntlet", GauntletIO.class.getPackage().getName());
         return xStream;
     }
 
