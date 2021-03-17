@@ -33,7 +33,7 @@ public class PanelTest extends JFrame {
      */
     @Test(timeOut = 1000, enabled = false)
     public void phaseTest1() {
-        final PanelTest p = new PanelTest();
+        PanelTest p = new PanelTest();
         p.setSize(300, 300);
         p.setVisible(true);
     }
