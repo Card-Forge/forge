@@ -17,10 +17,10 @@
  */
 package forge.gamemodes.quest;
 
+import java.util.Map;
+
 import forge.deck.Deck;
 import forge.util.storage.StorageBase;
-
-import java.util.Map;
 
 /**
  * TODO: Write javadoc for this type.

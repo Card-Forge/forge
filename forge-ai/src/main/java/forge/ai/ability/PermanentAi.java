@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import forge.game.card.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicates;
@@ -13,6 +12,11 @@ import forge.card.CardType.Supertype;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaCostBeingPaid;

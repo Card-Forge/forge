@@ -17,11 +17,16 @@
  */
 package forge.util.storage;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import forge.util.IItemReader;
 
-import java.util.*;
+import forge.util.IItemReader;
 
 /**
  * <p>

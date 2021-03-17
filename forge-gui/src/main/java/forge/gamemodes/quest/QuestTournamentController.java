@@ -25,10 +25,10 @@ import forge.item.PaperCard;
 import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.ThreadUtil;
 import forge.util.storage.IStorage;
-import forge.util.Localizer;
 
 public class QuestTournamentController {
     private final IQuestTournamentView view;

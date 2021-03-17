@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
 import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
@@ -30,13 +31,13 @@ import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
+import forge.util.Localizer;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
-import forge.util.Localizer;
 
 public class LoadGauntletScreen extends LaunchScreen {
     private static final float ITEM_HEIGHT = Utils.AVG_FINGER_HEIGHT;

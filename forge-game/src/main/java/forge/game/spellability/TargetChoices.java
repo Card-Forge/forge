@@ -17,6 +17,10 @@
  */
 package forge.game.spellability;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Predicates;
 import com.google.common.collect.ForwardingList;
 import com.google.common.collect.Iterables;
@@ -30,10 +34,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.util.collect.FCollection;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /**
  * <p>

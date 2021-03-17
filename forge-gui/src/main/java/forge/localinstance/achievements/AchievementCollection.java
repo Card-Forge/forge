@@ -26,9 +26,9 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.util.FileUtil;
+import forge.util.Localizer;
 import forge.util.ThreadUtil;
 import forge.util.XmlUtil;
-import forge.util.Localizer;
 
 public abstract class AchievementCollection implements Iterable<Achievement> {
     protected final Map<String, Achievement> achievements = Maps.newLinkedHashMap();

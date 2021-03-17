@@ -1,14 +1,15 @@
 package forge.ai.ability;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.collect.Lists;
+
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 public class ChooseCompanionAi extends SpellAbilityAi {
 

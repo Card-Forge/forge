@@ -1,12 +1,12 @@
 package forge.game.card;
 
 
-import forge.game.GameEntity;
-import forge.game.player.Player;
-
 import java.util.List;
 
 import com.google.common.collect.Lists;
+
+import forge.game.GameEntity;
+import forge.game.player.Player;
 
 /** 
  * TODO: Write javadoc for this type.

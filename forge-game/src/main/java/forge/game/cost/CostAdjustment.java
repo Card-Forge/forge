@@ -1,5 +1,13 @@
 package forge.game.cost;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Lists;
+
 import forge.card.CardStateName;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
@@ -7,7 +15,14 @@ import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
+import forge.game.card.CardZoneTable;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaCostBeingPaid;
@@ -18,13 +33,6 @@ import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import com.google.common.collect.Lists;
-import org.apache.commons.lang3.StringUtils;
 
 public class CostAdjustment {
 

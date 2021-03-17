@@ -1,5 +1,11 @@
 package forge.gamemodes.quest.io;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 import forge.ImageKeys;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.DeckStorage;
@@ -9,12 +15,6 @@ import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
 import forge.util.storage.StorageReaderFolder;
-
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 public class QuestChallengeReader extends StorageReaderFolder<QuestEventChallenge> {
     public QuestChallengeReader(File deckDir0) {

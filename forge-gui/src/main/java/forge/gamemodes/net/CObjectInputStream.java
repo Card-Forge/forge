@@ -1,13 +1,13 @@
 package forge.gamemodes.net;
 
-import io.netty.handler.codec.serialization.ClassResolver;
-
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectStreamClass;
 import java.io.StreamCorruptedException;
+
+import io.netty.handler.codec.serialization.ClassResolver;
 
 public class CObjectInputStream extends ObjectInputStream {
     private final ClassResolver classResolver;

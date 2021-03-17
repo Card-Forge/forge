@@ -17,6 +17,9 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import java.util.HashSet;
+import java.util.Map.Entry;
+
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -31,15 +34,18 @@ import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
-import forge.screens.deckeditor.views.*;
+import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VBrawlDecks;
+import forge.screens.deckeditor.views.VCommanderDecks;
+import forge.screens.deckeditor.views.VCurrentDeck;
+import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.deckeditor.views.VOathbreakerDecks;
+import forge.screens.deckeditor.views.VTinyLeadersDecks;
 import forge.screens.home.sanctioned.CSubmenuDraft;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.util.ItemPool;
 import forge.util.Localizer;
-
-import java.util.HashSet;
-import java.util.Map.Entry;
 
 /**
  * Updates the deck editor UI as necessary draft selection mode.

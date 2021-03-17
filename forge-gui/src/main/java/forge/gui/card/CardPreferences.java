@@ -1,10 +1,5 @@
 package forge.gui.card;
 
-import forge.item.IPaperCard;
-import forge.localinstance.properties.ForgeConstants;
-import forge.model.FModel;
-import forge.util.XmlUtil;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -16,6 +11,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import forge.item.IPaperCard;
+import forge.localinstance.properties.ForgeConstants;
+import forge.model.FModel;
+import forge.util.XmlUtil;
 
 /** 
  * Preferences associated with individual cards

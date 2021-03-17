@@ -1,9 +1,22 @@
 package forge.deck;
 
+import java.io.File;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.ArrayUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.deck.io.CardThemedMatrixIO;
@@ -14,10 +27,6 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
-import org.apache.commons.lang3.ArrayUtils;
-
-import java.io.File;
-import java.util.*;
 
 /**
  * Created by maustin on 09/05/2017.

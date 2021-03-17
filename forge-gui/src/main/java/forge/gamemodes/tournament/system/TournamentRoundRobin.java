@@ -1,10 +1,11 @@
 package forge.gamemodes.tournament.system;
 
-import com.google.common.collect.Lists;
-import forge.player.GamePlayerUtil;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.common.collect.Lists;
+
+import forge.player.GamePlayerUtil;
 
 @SuppressWarnings("serial")
 public class TournamentRoundRobin extends AbstractTournament {

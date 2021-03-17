@@ -1,6 +1,9 @@
 package forge.screens.home.settings;
 
-import forge.download.*;
+import javax.swing.SwingUtilities;
+
+import forge.download.AutoUpdater;
+import forge.download.GuiDownloader;
 import forge.gui.ImportDialog;
 import forge.gui.UiCommand;
 import forge.gui.download.GuiDownloadAchievementImages;
@@ -12,8 +15,6 @@ import forge.gui.download.GuiDownloadSetPicturesLQ;
 import forge.gui.download.GuiDownloadSkins;
 import forge.gui.error.BugReporter;
 import forge.gui.framework.ICDoc;
-
-import javax.swing.*;
 
 /**
  * Controls the utilities submenu in the home UI.

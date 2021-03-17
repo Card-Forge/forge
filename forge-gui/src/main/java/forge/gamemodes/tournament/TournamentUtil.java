@@ -1,16 +1,16 @@
 package forge.gamemodes.tournament;
 
-import forge.deck.Deck;
-import forge.deck.DeckType;
-import forge.deck.DeckgenUtil;
-import forge.model.FModel;
-import forge.util.MyRandom;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import forge.deck.Deck;
+import forge.deck.DeckType;
+import forge.deck.DeckgenUtil;
+import forge.model.FModel;
+import forge.util.MyRandom;
 
 public class TournamentUtil {
     public static TournamentData createQuickTournament(final Deck userDeck, final int numOpponents, final List<DeckType> allowedDeckTypes) {

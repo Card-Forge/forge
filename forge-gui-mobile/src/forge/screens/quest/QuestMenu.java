@@ -28,8 +28,8 @@ import forge.screens.home.LoadGameMenu.LoadGameScreen;
 import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.ThreadUtil;
 import forge.util.Localizer;
+import forge.util.ThreadUtil;
 
 public class QuestMenu extends FPopupMenu implements IVQuestStats {
 

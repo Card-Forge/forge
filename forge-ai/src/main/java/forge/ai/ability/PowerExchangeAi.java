@@ -1,5 +1,8 @@
 package forge.ai.ability;
 
+import java.util.Collections;
+import java.util.List;
+
 import com.google.common.base.Predicate;
 
 import forge.ai.ComputerUtilCard;
@@ -13,9 +16,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
-
-import java.util.Collections;
-import java.util.List;
 
 public class PowerExchangeAi extends SpellAbilityAi {
 

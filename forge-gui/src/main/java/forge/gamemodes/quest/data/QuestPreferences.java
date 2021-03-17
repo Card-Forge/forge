@@ -17,12 +17,12 @@
  */
 package forge.gamemodes.quest.data;
 
+import java.io.Serializable;
+
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.PreferencesStore;
 import forge.util.Localizer;
 import forge.util.TextUtil;
-
-import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> implements Serializable {

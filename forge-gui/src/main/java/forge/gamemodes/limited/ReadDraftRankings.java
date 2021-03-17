@@ -1,11 +1,11 @@
 package forge.gamemodes.limited;
 
-import forge.localinstance.properties.ForgeConstants;
-import forge.util.FileUtil;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import forge.localinstance.properties.ForgeConstants;
+import forge.util.FileUtil;
 
 /**
  * ReadDraftRankings class.

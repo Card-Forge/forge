@@ -16,6 +16,9 @@
  */
 package forge.screens.match;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import com.google.common.collect.ImmutableList;
 
 import forge.game.GameView;
@@ -29,9 +32,6 @@ import forge.screens.home.quest.CSubmenuQuestDraft;
 import forge.screens.home.quest.VSubmenuQuestDraft;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * <p>

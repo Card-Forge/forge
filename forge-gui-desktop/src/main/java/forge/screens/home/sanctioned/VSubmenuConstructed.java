@@ -2,7 +2,6 @@ package forge.screens.home.sanctioned;
 
 import javax.swing.JPanel;
 
-import net.miginfocom.swing.MigLayout;
 import forge.deckchooser.FDeckChooser;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LocalLobby;
@@ -16,6 +15,7 @@ import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
 import forge.screens.home.VLobby;
 import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Assembles Swing components of constructed submenu singleton.

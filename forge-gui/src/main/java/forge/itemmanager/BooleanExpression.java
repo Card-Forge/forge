@@ -1,13 +1,16 @@
 package forge.itemmanager;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.util.PredicateString.StringOp;
-
-import java.util.*;
 
 public class BooleanExpression {
     private Stack<Operator> operators = new Stack<>();

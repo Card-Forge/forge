@@ -17,6 +17,14 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import com.google.common.base.Supplier;
 
 import forge.card.CardEdition;
@@ -34,17 +42,18 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
 import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.SEditorIO;
-import forge.screens.deckeditor.views.*;
+import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VBrawlDecks;
+import forge.screens.deckeditor.views.VCommanderDecks;
+import forge.screens.deckeditor.views.VCurrentDeck;
+import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.deckeditor.views.VOathbreakerDecks;
+import forge.screens.deckeditor.views.VTinyLeadersDecks;
 import forge.screens.home.sanctioned.CSubmenuDraft;
 import forge.screens.home.sanctioned.CSubmenuSealed;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.storage.IStorage;
-
-import java.util.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Map.Entry;
 
 /**
  * Child controller for limited deck editor UI.

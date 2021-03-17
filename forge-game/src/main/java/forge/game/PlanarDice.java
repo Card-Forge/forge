@@ -1,12 +1,12 @@
 package forge.game;
 
-import forge.game.ability.AbilityKey;
-import forge.game.player.Player;
-import forge.game.trigger.TriggerType;
-
 import java.util.Map;
 
 import com.google.common.collect.ImmutableList;
+
+import forge.game.ability.AbilityKey;
+import forge.game.player.Player;
+import forge.game.trigger.TriggerType;
 
 /** 
  * Represents the planar dice for Planechase games.

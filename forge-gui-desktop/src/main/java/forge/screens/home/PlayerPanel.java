@@ -14,9 +14,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JPopupMenu;
 
-import forge.screens.home.sanctioned.SleeveSelector;
-import net.miginfocom.swing.MigLayout;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -39,6 +36,7 @@ import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorVariant;
 import forge.screens.home.sanctioned.AvatarSelector;
+import forge.screens.home.sanctioned.SleeveSelector;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FComboBoxWrapper;
@@ -50,9 +48,10 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FTextField;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
-import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class PlayerPanel extends FPanel {

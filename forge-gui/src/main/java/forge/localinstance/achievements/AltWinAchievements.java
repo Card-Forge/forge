@@ -7,8 +7,8 @@ import forge.game.player.Player;
 import forge.item.IPaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.util.Localizer;
 import forge.util.CardTranslation;
+import forge.util.Localizer;
 
 public class AltWinAchievements extends AchievementCollection {
     public static final AltWinAchievements instance = new AltWinAchievements();

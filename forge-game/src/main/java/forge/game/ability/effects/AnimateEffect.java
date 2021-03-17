@@ -1,5 +1,10 @@
 package forge.game.ability.effects;
 
+import java.util.Arrays;
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -7,11 +12,6 @@ import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.spellability.SpellAbility;
-
-import com.google.common.collect.Lists;
-
-import java.util.Arrays;
-import java.util.List;
 
 
 public class AnimateEffect extends AnimateEffectBase {

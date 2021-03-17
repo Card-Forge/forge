@@ -17,9 +17,22 @@
  */
 package forge.gamemodes.limited;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Stack;
+import java.util.TreeMap;
+
+import org.apache.commons.lang3.ArrayUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
+
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
@@ -37,13 +50,9 @@ import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.util.FileUtil;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
-import forge.util.Localizer;
-import org.apache.commons.lang3.ArrayUtils;
-
-import java.io.File;
-import java.util.*;
 
 /**
  * Booster Draft Format.

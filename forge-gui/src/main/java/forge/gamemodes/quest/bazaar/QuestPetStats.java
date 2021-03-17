@@ -1,15 +1,16 @@
 package forge.gamemodes.quest.bazaar;
 
+import java.io.File;
+import java.util.List;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.item.PaperToken;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
-
-import java.io.File;
-import java.util.List;
 
 /** 
  * TODO: Write javadoc for this type.

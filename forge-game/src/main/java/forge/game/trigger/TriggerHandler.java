@@ -17,14 +17,25 @@
  */
 package forge.game.trigger;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Multimaps;
+
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -42,14 +53,6 @@ import forge.util.FileSection;
 import forge.util.Visitor;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
-
-import java.util.*;
-
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Multimaps;
 
 public class TriggerHandler {
     private final List<TriggerType> suppressedModes = Collections.synchronizedList(new ArrayList<>());

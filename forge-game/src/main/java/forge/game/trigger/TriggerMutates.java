@@ -1,9 +1,10 @@
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
-import java.util.*;
 
 public class TriggerMutates extends Trigger {
     public TriggerMutates(final Map<String, String> params, final Card host, final boolean intrinsic) {

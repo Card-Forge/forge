@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+
 import forge.GameCommand;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.phase.PhaseHandler;
@@ -7,8 +9,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
 import forge.util.TextUtil;
-
-import java.util.List;
 
 public class DeclareCombatantsEffect extends SpellAbilityEffect {
 

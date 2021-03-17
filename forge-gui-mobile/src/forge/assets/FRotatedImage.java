@@ -1,6 +1,7 @@
 package forge.assets;
 
 import com.badlogic.gdx.graphics.Texture;
+
 import forge.Graphics;
 
 public class FRotatedImage extends FImageComplex {

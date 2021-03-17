@@ -1,5 +1,10 @@
 package forge.game.ability.effects;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -11,13 +16,8 @@ import forge.game.player.PlayerController;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
-import forge.util.MyRandom;
 import forge.util.Localizer;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import forge.util.MyRandom;
 
 public class FlipCoinEffect extends SpellAbilityEffect {
 

@@ -19,12 +19,11 @@ package forge.game.ability.effects;
 
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
-import forge.game.card.token.TokenInfo;
-
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardZoneTable;
+import forge.game.card.token.TokenInfo;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventTokenCreated;
 import forge.game.player.Player;

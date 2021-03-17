@@ -1,5 +1,12 @@
 package forge.gui.card;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Sets;
 
 import forge.card.CardRarity;
@@ -22,12 +29,6 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.CardTranslation;
 import forge.util.Lang;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class CardDetailUtil {
 

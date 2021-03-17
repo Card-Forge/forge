@@ -1,7 +1,12 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -9,12 +14,8 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.util.MyRandom;
 import forge.util.Localizer;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import forge.util.MyRandom;
 
 public class ChooseNumberEffect extends SpellAbilityEffect {
 

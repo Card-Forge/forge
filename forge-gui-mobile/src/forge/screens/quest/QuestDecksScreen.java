@@ -20,11 +20,11 @@ import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
-import forge.toolbox.FLabel;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FLabel;
 import forge.toolbox.FTextField;
-import forge.util.ThreadUtil;
 import forge.util.Localizer;
+import forge.util.ThreadUtil;
 
 public class QuestDecksScreen extends FScreen {
     private static final float PADDING = FDeckChooser.PADDING;

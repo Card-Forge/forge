@@ -1,10 +1,11 @@
 package forge.gui;
 
-import forge.view.FView;
-
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import forge.view.FView;
 
 public final class MouseUtil {
     private static Cursor cursor;

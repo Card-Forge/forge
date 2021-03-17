@@ -32,9 +32,6 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
-import forge.util.TextUtil;
-import net.miginfocom.swing.MigLayout;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -48,9 +45,11 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
+import forge.util.Localizer;
+import forge.util.TextUtil;
 import forge.view.FDialog;
 import forge.view.arcane.CardPanel;
-import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Assembles Swing components of assign damage dialog.

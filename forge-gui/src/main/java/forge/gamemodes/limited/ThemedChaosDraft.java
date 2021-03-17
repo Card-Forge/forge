@@ -1,5 +1,9 @@
 package forge.gamemodes.limited;
 
+import java.util.List;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
@@ -8,9 +12,6 @@ import forge.game.GameFormat;
 import forge.model.FModel;
 import forge.util.TextUtil;
 import forge.util.storage.StorageReaderFile;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.List;
 
 /**
  * Themed chaos draft allows limiting the pool of available random boosters for a draft to a certain theme.

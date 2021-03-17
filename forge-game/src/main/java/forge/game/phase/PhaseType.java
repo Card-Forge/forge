@@ -1,11 +1,16 @@
 package forge.game.phase;
 
-import com.google.common.collect.Lists;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
+
 import org.apache.commons.lang3.StringUtils;
 
-import forge.util.Localizer;
+import com.google.common.collect.Lists;
 
-import java.util.*;
+import forge.util.Localizer;
 
 
 public enum PhaseType {

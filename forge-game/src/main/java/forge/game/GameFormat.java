@@ -17,6 +17,24 @@
  */
 package forge.game;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -35,13 +53,6 @@ import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderRecursiveFolderWithUserFolder;
-
-import java.io.File;
-import java.io.FilenameFilter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Map.Entry;
 
 
 public class GameFormat implements Comparable<GameFormat> {

@@ -25,7 +25,6 @@ import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 
-import net.miginfocom.swing.MigLayout;
 import forge.gui.MultiLineLabelUI;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -36,6 +35,7 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 /** 
  * Assembles Swing components of players report.

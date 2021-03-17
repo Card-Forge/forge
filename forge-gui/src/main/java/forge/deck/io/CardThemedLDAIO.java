@@ -1,13 +1,18 @@
 package forge.deck.io;
 
-import forge.game.GameFormat;
-import forge.localinstance.properties.ForgeConstants;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.io.*;
-import java.util.List;
-import java.util.Map;
+import forge.game.GameFormat;
+import forge.localinstance.properties.ForgeConstants;
 
 /**
  * Created by maustin on 11/05/2017.

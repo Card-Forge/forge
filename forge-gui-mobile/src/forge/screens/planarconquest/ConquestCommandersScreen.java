@@ -35,11 +35,11 @@ import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
+import forge.toolbox.FList.CompactModeHandler;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
-import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FList.CompactModeHandler;
 import forge.util.Callback;
 import forge.util.Localizer;
 

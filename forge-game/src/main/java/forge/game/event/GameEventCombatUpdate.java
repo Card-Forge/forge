@@ -1,8 +1,8 @@
 package forge.game.event;
 
-import forge.game.card.Card;
-
 import java.util.List;
+
+import forge.game.card.Card;
 
 public class GameEventCombatUpdate extends GameEvent {
 

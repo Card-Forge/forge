@@ -15,8 +15,8 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
 import forge.card.CardRenderer;
-import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.card.CardZoom;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
@@ -41,8 +41,8 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Localizer;
 import forge.util.TextUtil;
-import forge.util.collect.FCollectionView;
 import forge.util.Utils;
+import forge.util.collect.FCollectionView;
 
 public class VStack extends FDropDown {
     public static final float CARD_WIDTH = Utils.AVG_FINGER_WIDTH;

@@ -17,6 +17,18 @@
  */
 package forge.game.spellability;
 
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -26,7 +38,13 @@ import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
-import forge.game.*;
+import forge.game.CardTraitBase;
+import forge.game.ForgeScript;
+import forge.game.Game;
+import forge.game.GameActionUtil;
+import forge.game.GameEntity;
+import forge.game.GameObject;
+import forge.game.IIdentifiable;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -58,10 +76,6 @@ import forge.util.CardTranslation;
 import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.TextUtil;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.*;
 
 //only SpellAbility can go on the stack
 //override any methods as needed

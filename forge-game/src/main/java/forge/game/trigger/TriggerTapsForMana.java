@@ -17,15 +17,15 @@
  */
 package forge.game.trigger;
 
+import static forge.util.TextUtil.toManaString;
+
+import java.util.Map;
+
 import forge.card.MagicColor;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.Map;
-
-import static forge.util.TextUtil.toManaString;
 
 /**
  * <p>

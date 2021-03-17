@@ -1,15 +1,18 @@
 package forge.screens.home;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import forge.gui.framework.ILocalRepaint;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedLabel;
-
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /** 
  * Custom JLabel for title of menu item groups.

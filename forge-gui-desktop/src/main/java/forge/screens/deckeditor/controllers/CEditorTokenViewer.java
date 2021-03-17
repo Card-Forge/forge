@@ -1,6 +1,9 @@
 package forge.screens.deckeditor.controllers;
 
 
+import java.util.List;
+import java.util.Map;
+
 import forge.deck.DeckBase;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
@@ -8,13 +11,14 @@ import forge.gui.framework.FScreen;
 import forge.item.PaperToken;
 import forge.itemmanager.TokenManager;
 import forge.model.FModel;
-import forge.screens.deckeditor.views.*;
+import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VCardCatalog;
+import forge.screens.deckeditor.views.VCurrentDeck;
+import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.deckeditor.views.VProbabilities;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.Localizer;
-
-import java.util.List;
-import java.util.Map;
 
 public class CEditorTokenViewer extends ACEditorBase<PaperToken, DeckBase> {
 

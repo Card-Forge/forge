@@ -1,9 +1,9 @@
     package forge.game.replacement;
 
-    import forge.game.ability.AbilityKey;
-    import forge.game.card.Card;
-
     import java.util.Map;
+
+import forge.game.ability.AbilityKey;
+import forge.game.card.Card;
 
 /** 
  * TODO: Write javadoc for this type.

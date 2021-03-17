@@ -17,8 +17,14 @@
  */
 package forge.player;
 
+import java.util.Collections;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
+
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -33,13 +39,8 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
-import forge.game.spellability.*;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Collections;
-import java.util.Map;
 
 /**
  * <p>

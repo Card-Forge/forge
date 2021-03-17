@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicates;
+
 import forge.ai.SpellAbilityAi;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;

@@ -17,6 +17,8 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import java.util.Map.Entry;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
@@ -39,8 +41,6 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.util.storage.IStorage;
-
-import java.util.Map.Entry;
 
 /**
  * Child controller for constructed deck editor UI.

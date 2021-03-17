@@ -17,6 +17,8 @@
  */
 package forge.screens.match.views;
 
+import javax.swing.JLabel;
+
 import forge.game.GameView;
 import forge.gui.CardDetailPanel;
 import forge.gui.framework.DragCell;
@@ -29,8 +31,6 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
 
 /** 
  * Assembles Swing components of card detail area.

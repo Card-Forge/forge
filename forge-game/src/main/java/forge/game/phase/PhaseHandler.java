@@ -17,12 +17,28 @@
  */
 package forge.game.phase;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
+
+import org.apache.commons.lang3.time.StopWatch;
+
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+
 import forge.card.mana.ManaCost;
-import forge.game.*;
+import forge.game.Game;
+import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
+import forge.game.GameStage;
+import forge.game.GameType;
+import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.SkipPhaseEffect;
 import forge.game.card.Card;
@@ -34,14 +50,25 @@ import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
-import forge.game.event.*;
+import forge.game.event.GameEventAttackersDeclared;
+import forge.game.event.GameEventBlockersDeclared;
+import forge.game.event.GameEventCardStatsChanged;
+import forge.game.event.GameEventCombatChanged;
+import forge.game.event.GameEventCombatEnded;
+import forge.game.event.GameEventGameRestarted;
+import forge.game.event.GameEventPlayerPriority;
+import forge.game.event.GameEventPlayerStatsChanged;
+import forge.game.event.GameEventTokenStateUpdate;
+import forge.game.event.GameEventTurnBegan;
+import forge.game.event.GameEventTurnEnded;
+import forge.game.event.GameEventTurnPhase;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
-import forge.game.spellability.SpellAbility;
 import forge.game.spellability.LandAbility;
+import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -51,9 +78,6 @@ import forge.util.CollectionSuppliers;
 import forge.util.TextUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
-import org.apache.commons.lang3.time.StopWatch;
-
-import java.util.*;
 
 
 /**

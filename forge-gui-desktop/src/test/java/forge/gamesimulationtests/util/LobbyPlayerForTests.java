@@ -1,16 +1,16 @@
 package forge.gamesimulationtests.util;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.LobbyPlayer;
 import forge.game.Game;
 import forge.game.player.IGameEntitiesFactory;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.gamesimulationtests.util.playeractions.PlayerActions;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Default harmless implementation for tests.

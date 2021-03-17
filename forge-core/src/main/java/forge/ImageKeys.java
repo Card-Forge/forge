@@ -1,16 +1,15 @@
 package forge;
 
-import forge.item.*;
-import forge.util.FileUtil;
-import forge.util.ImageUtil;
-import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
-
-
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+
+import forge.item.PaperCard;
+import forge.util.FileUtil;
+import forge.util.ImageUtil;
+import forge.util.TextUtil;
 
 public final class ImageKeys {
     public static final String CARD_PREFIX           = "c:";

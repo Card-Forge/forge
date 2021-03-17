@@ -17,6 +17,12 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
 
@@ -43,12 +49,6 @@ import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * Child controller for quest deck editor UI.

@@ -8,8 +8,8 @@ import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.assets.ISkinImage;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.util.Localizer;
 import forge.util.CardTranslation;
+import forge.util.Localizer;
 
 public class PlaneswalkerAchievements extends AchievementCollection {
     public static final PlaneswalkerAchievements instance = new PlaneswalkerAchievements();

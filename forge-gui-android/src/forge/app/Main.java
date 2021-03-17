@@ -1,5 +1,13 @@
 package forge.app;
 
+import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.concurrent.Callable;
+
+import com.badlogic.gdx.Version;
+import com.badlogic.gdx.backends.android.AndroidApplication;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
@@ -39,19 +47,12 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import com.badlogic.gdx.Version;
-import com.badlogic.gdx.backends.android.AndroidApplication;
 import forge.Forge;
 import forge.interfaces.IDeviceAdapter;
-import forge.model.FModel;
 import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
-
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.concurrent.Callable;
 
 public class Main extends AndroidApplication {
     AndroidAdapter Gadapter;

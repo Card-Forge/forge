@@ -1,14 +1,14 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.Localizer;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LifeSetEffect extends SpellAbilityEffect {
 

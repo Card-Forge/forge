@@ -1,9 +1,19 @@
 package forge.gamemodes.limited;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.CardRules;
@@ -20,14 +30,11 @@ import forge.deck.generation.DeckGenPool;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.deck.generation.IDeckGenPool;
 import forge.game.GameFormat;
-import forge.gui.card.*;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.MyRandom;
-
-import java.util.*;
 
 /**
  * Limited format deck.

@@ -1,11 +1,12 @@
 package forge.screens.home.quest;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import forge.deck.DeckGroup;
 import forge.gamemodes.quest.QuestTournamentController;
 import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
-
-import java.awt.event.*;
 
 /**
  * Controls the quest draft submenu in the home UI.

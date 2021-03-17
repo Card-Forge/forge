@@ -1,18 +1,21 @@
 package forge.screens.home.sanctioned;
 
-import forge.gui.WrapLayout;
-import forge.toolbox.FLabel;
-import forge.toolbox.FScrollPane;
-import forge.toolbox.FSkin;
-import forge.view.FDialog;
-import forge.util.Localizer;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+
+import forge.gui.WrapLayout;
+import forge.toolbox.FLabel;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
+import forge.util.Localizer;
+import forge.view.FDialog;
 
 @SuppressWarnings("serial")
 public class SleeveSelector extends FDialog {

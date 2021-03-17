@@ -1,5 +1,18 @@
 package forge.deck;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.badlogic.gdx.utils.Align;
+import com.google.common.collect.ImmutableList;
+
 import forge.Forge;
 import forge.assets.ImageCache;
 import forge.deck.FDeckEditor.EditorType;
@@ -32,27 +45,14 @@ import forge.toolbox.FButton;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
-import forge.toolbox.GuiChoose;
-import forge.toolbox.ListChooser;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
+import forge.toolbox.GuiChoose;
+import forge.toolbox.ListChooser;
 import forge.util.Callback;
 import forge.util.Localizer;
 import forge.util.Utils;
 import forge.util.storage.IStorage;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.badlogic.gdx.utils.Align;
-import com.google.common.collect.ImmutableList;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class FDeckChooser extends FScreen {
     public static final float PADDING = Utils.scale(5);

@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import forge.screens.home.*;
-import net.miginfocom.swing.MigLayout;
 import forge.deckchooser.DecksComboBoxEvent;
 import forge.deckchooser.FDeckChooser;
 import forge.deckchooser.IDecksComboBoxListener;
@@ -22,9 +20,15 @@ import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
 import forge.gui.interfaces.ILobbyView;
 import forge.gui.util.SOptionPane;
+import forge.screens.home.EMenuGroup;
+import forge.screens.home.IVSubmenu;
+import forge.screens.home.StopButton;
+import forge.screens.home.VHomeUI;
+import forge.screens.home.VLobby;
 import forge.toolbox.FButton;
 import forge.toolbox.FSkin;
 import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnlineLobby, IVTopLevelUI {
     SINGLETON_INSTANCE;

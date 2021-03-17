@@ -1,6 +1,5 @@
 package forge.screens.match.menus;
 
-import com.google.common.primitives.Ints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -8,6 +7,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
+
+import com.google.common.primitives.Ints;
 
 import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.properties.ForgePreferences;

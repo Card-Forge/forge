@@ -1,7 +1,12 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
-import forge.ai.*;
+
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCombat;
+import forge.ai.ComputerUtilCost;
+import forge.ai.ComputerUtilMana;
+import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;

@@ -17,13 +17,20 @@
  */
 package forge.screens.match.views;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.badlogic.gdx.utils.Align;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
-import forge.assets.FSkinColor.Colors;
 import forge.card.CardZoom;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
@@ -40,18 +47,11 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
+import forge.util.CardTranslation;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.Utils;
 import forge.util.WaitCallback;
-import forge.util.Localizer;
-import forge.util.CardTranslation;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.badlogic.gdx.utils.Align;
 
 public class VAssignCombatDamage extends FDialog {
     private static final float CARD_GAP_X = Utils.scale(10);

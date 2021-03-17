@@ -1,11 +1,12 @@
 package forge.gamemodes.tournament.system;
 
-import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
-import forge.LobbyPlayer;
-import forge.game.GameOutcome;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+
+import forge.LobbyPlayer;
+import forge.game.GameOutcome;
 
 public class TournamentPairing {
     private int round;

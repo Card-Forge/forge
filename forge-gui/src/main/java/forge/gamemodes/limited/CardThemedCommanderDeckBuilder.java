@@ -1,16 +1,17 @@
 package forge.gamemodes.limited;
 
+import java.util.List;
+
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.deck.DeckFormat;
 import forge.deck.generation.DeckGenPool;
 import forge.item.PaperCard;
 import forge.model.FModel;
-
-import java.util.List;
 
 /**
  * Created by maustin on 28/02/2018.

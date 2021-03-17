@@ -1,13 +1,13 @@
 package forge.gamemodes.limited;
 
+import java.util.List;
+
 import forge.card.ColorSet;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
-
-import java.util.List;
 
 public class LimitedPlayerAI extends LimitedPlayer {
     protected DeckColors deckCols;

@@ -1,15 +1,15 @@
 package forge.gamemodes.puzzle;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.collect.Lists;
 
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileSection;
 import forge.util.FileUtil;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class PuzzleIO {
 

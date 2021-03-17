@@ -1,21 +1,26 @@
 package forge.game.ability.effects;
 
+import java.util.Collections;
+import java.util.List;
+
 import com.google.common.collect.Lists;
+
 import forge.GameCommand;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardDamageMap;
+import forge.game.card.CardLists;
+import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
-
-import java.util.Collections;
-import java.util.List;
 
 public class RepeatEachEffect extends SpellAbilityEffect {
 

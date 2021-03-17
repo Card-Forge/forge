@@ -1,8 +1,20 @@
 package forge.gamemodes.net.client;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.EnumMap;
+import java.util.Iterator;
+import java.util.List;
+
 import com.google.common.collect.Lists;
+
 import forge.LobbyPlayer;
-import forge.game.*;
+import forge.game.Game;
+import forge.game.GameRules;
+import forge.game.GameType;
+import forge.game.GameView;
+import forge.game.Match;
+import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.net.GameProtocolHandler;
@@ -13,18 +25,15 @@ import forge.gamemodes.net.event.LoginEvent;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.player.LobbyPlayerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
+import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableTypes;
 import forge.trackable.Tracker;
 import io.netty.channel.ChannelHandlerContext;
-import forge.game.player.PlayerView;
-import forge.model.FModel;
-import forge.trackable.TrackableCollection;
-
-import java.util.*;
 
 final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     private final FGameClient client;

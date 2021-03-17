@@ -17,6 +17,16 @@
  */
 package forge.itemmanager;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
@@ -54,16 +64,6 @@ import forge.toolbox.FList.CompactModeHandler;
 import forge.util.ItemPool;
 import forge.util.LayoutHelper;
 import forge.util.Localizer;
-
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 
 public abstract class ItemManager<T extends InventoryItem> extends FContainer implements IItemManager<T>, ActivateHandler {

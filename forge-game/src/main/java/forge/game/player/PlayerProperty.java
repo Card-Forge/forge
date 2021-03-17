@@ -1,5 +1,8 @@
 package forge.game.player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -10,9 +13,6 @@ import forge.game.card.CardPredicates;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.TextUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PlayerProperty {
 

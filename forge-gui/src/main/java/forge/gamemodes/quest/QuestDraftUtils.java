@@ -1,5 +1,9 @@
 package forge.gamemodes.quest;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.google.common.collect.Lists;
 
 import forge.deck.Deck;
@@ -23,10 +27,6 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.MyRandom;
 import forge.util.storage.IStorage;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class QuestDraftUtils {
     public static boolean TOURNAMENT_TOGGLE = false;

@@ -13,14 +13,14 @@ import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import forge.card.CardStateName;
-import forge.game.card.CardFaceView;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
 
+import forge.card.CardStateName;
 import forge.card.ICardFace;
 import forge.game.card.Card;
+import forge.game.card.CardFaceView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.item.InventoryItem;
@@ -28,8 +28,8 @@ import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FOptionPane;
-import forge.view.arcane.ListCardArea;
 import forge.util.Localizer;
+import forge.view.arcane.ListCardArea;
 
 public class GuiChoose {
 

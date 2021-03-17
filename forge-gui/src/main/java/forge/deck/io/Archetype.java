@@ -1,9 +1,9 @@
 package forge.deck.io;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import java.io.Serializable;
 import java.util.List;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 public class Archetype implements Serializable {
 

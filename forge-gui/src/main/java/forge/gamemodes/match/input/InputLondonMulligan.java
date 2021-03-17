@@ -18,6 +18,7 @@
 package forge.gamemodes.match.input;
 
 import java.util.List;
+
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;

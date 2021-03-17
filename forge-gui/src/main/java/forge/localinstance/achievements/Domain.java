@@ -1,14 +1,14 @@
 package forge.localinstance.achievements;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 import forge.util.Localizer;
 
 public class Domain extends ProgressiveAchievement {

@@ -1,14 +1,18 @@
 package forge.gamemodes.quest;
 
-import forge.deck.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import forge.deck.CardPool;
+import forge.deck.CommanderDeckGenerator;
+import forge.deck.Deck;
+import forge.deck.DeckFormat;
+import forge.deck.DeckProxy;
 import forge.gamemodes.quest.data.QuestPreferences;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.MyRandom;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Manages the creation of random Commander duels for a Commander variant quest. Random generation is handled via

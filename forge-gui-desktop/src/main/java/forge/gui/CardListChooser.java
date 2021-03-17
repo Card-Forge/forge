@@ -18,6 +18,19 @@
 
 package forge.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowListener;
+import java.util.Collections;
+import java.util.List;
+
+import javax.swing.AbstractListModel;
+import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import forge.game.card.CardView;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -26,17 +39,9 @@ import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
-import forge.view.FDialog;
-import forge.util.Localizer;
 import forge.util.CardTranslation;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import java.awt.event.*;
-import java.util.Collections;
-import java.util.List;
+import forge.util.Localizer;
+import forge.view.FDialog;
 
 /**
  * A simple class that shows a list of cards in a dialog with preview in its

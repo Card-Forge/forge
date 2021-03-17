@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -12,8 +14,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
-
-import java.util.List;
 
 public class TwoPilesEffect extends SpellAbilityEffect {
 

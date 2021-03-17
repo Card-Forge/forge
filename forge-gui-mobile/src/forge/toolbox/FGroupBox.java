@@ -1,10 +1,11 @@
 package forge.toolbox;
 
 import com.badlogic.gdx.utils.Align;
+
 import forge.Graphics;
 import forge.assets.FSkinColor;
-import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.assets.FSkinFont;
 import forge.util.Utils;
 
 public abstract class FGroupBox extends FContainer {

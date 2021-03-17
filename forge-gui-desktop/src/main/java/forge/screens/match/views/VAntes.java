@@ -24,7 +24,6 @@ import java.util.TreeSet;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import net.miginfocom.swing.MigLayout;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
@@ -37,6 +36,7 @@ import forge.gui.framework.IVDoc;
 import forge.screens.match.controllers.CAntes;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Assembles Swing components of card ante area.

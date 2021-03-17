@@ -13,6 +13,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+
 import forge.game.card.CardView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -24,8 +28,12 @@ import forge.localinstance.assets.FSkinProp;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
-import forge.toolbox.*;
+import forge.toolbox.FComboBox;
 import forge.toolbox.FComboBox.TextAlignment;
+import forge.toolbox.FLabel;
+import forge.toolbox.FMouseAdapter;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinFont;
@@ -33,8 +41,6 @@ import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.special.CardZoomer;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
 
 /**
  * Assembles Swing components of achievements submenu singleton.

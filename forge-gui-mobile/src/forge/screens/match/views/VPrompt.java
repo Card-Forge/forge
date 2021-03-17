@@ -3,10 +3,11 @@ package forge.screens.match.views;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.utils.Align;
+
 import forge.Graphics;
 import forge.assets.FSkinColor;
-import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
 import forge.card.CardZoom;
 import forge.game.card.CardView;

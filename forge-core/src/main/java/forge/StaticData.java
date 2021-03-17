@@ -1,11 +1,20 @@
 package forge;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import com.google.common.base.Predicate;
+
 import forge.card.CardDb;
+import forge.card.CardDb.CardRequest;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.PrintSheet;
-import forge.card.CardDb.CardRequest;
 import forge.item.BoosterBox;
 import forge.item.FatPack;
 import forge.item.PaperCard;
@@ -13,9 +22,6 @@ import forge.item.SealedProduct;
 import forge.token.TokenDb;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
-
-import java.io.File;
-import java.util.*;
 
 
 /**

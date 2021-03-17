@@ -1,11 +1,11 @@
 package forge.gamemodes.limited;
 
+import java.util.List;
+
 import forge.deck.DeckFormat;
 import forge.deck.io.Archetype;
 import forge.game.GameFormat;
 import forge.item.PaperCard;
-
-import java.util.List;
 
 public class ArchetypeDeckBuilder extends CardThemedDeckBuilder{
 

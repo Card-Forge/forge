@@ -1,5 +1,13 @@
 package forge.game.ability.effects;
 
+import java.util.Map;
+
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
@@ -14,14 +22,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
-
-import java.util.Map;
-
-import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 public class CountersRemoveEffect extends SpellAbilityEffect {
     @Override

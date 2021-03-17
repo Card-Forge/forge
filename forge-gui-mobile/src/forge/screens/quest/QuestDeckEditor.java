@@ -2,6 +2,7 @@ package forge.screens.quest;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import forge.deck.DeckProxy;
 import forge.deck.FDeckEditor;
 import forge.gamemodes.quest.QuestSpellShop;

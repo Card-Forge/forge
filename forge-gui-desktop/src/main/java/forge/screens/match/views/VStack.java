@@ -17,6 +17,23 @@
  */
 package forge.screens.match.views;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
+
 import forge.CachedCardImage;
 import forge.game.GameView;
 import forge.game.card.CardView.CardStateView;
@@ -33,18 +50,9 @@ import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextArea;
+import forge.util.Localizer;
 import forge.util.collect.FCollectionView;
-import forge.util.Localizer;    
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 
 /**
  * Assembles Swing components of stack report.

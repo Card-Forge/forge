@@ -1,12 +1,12 @@
 package forge.game.zone;
 
-import forge.util.Localizer;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import com.google.common.base.Function;
+
+import forge.util.Localizer;
 
 /**
  * The Enum Zone.

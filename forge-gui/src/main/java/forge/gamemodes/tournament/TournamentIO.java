@@ -1,5 +1,18 @@
 package forge.gamemodes.tournament;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Map;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
@@ -9,17 +22,12 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.security.NoTypePermission;
 import com.thoughtworks.xstream.security.NullPermission;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
+
 import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.util.IgnoringXStream;
-import org.apache.commons.lang3.StringUtils;
-
-import java.io.*;
-import java.util.Map;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 
 public class TournamentIO {
     /** Prompt in text field for new (unsaved) built gauntlets. */

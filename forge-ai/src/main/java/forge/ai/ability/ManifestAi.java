@@ -1,7 +1,11 @@
 package forge.ai.ability;
 
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
@@ -23,9 +27,6 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by friarsol on 1/23/15.

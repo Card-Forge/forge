@@ -24,14 +24,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import net.miginfocom.swing.MigLayout;
 import forge.game.GameView;
 import forge.gamemodes.gauntlet.GauntletWinLoseController;
 import forge.localinstance.assets.FSkinProp;
-import forge.util.Localizer;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
+import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament

@@ -17,6 +17,8 @@
  */
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.Game;
 import forge.game.GameStage;
 import forge.game.ability.AbilityKey;
@@ -25,8 +27,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 /**
  * <p>

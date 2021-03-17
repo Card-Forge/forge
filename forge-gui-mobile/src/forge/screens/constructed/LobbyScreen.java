@@ -1,19 +1,9 @@
 package forge.screens.constructed;
 
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import forge.assets.ImageCache;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckSection;
-import forge.deck.DeckType;
-import forge.deck.FDeckChooser;
-import forge.util.Localizer;
-
-import forge.util.MyRandom;
-import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
@@ -25,6 +15,12 @@ import forge.Graphics;
 import forge.ai.AIOption;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.ImageCache;
+import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckSection;
+import forge.deck.DeckType;
+import forge.deck.FDeckChooser;
 import forge.game.GameType;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LobbySlot;
@@ -46,11 +42,14 @@ import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
-import forge.toolbox.FList;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.util.Localizer;
+import forge.util.MyRandom;
+import forge.util.TextUtil;
 import forge.util.Utils;
 
 public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {

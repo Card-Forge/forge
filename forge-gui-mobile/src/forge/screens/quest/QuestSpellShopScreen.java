@@ -1,5 +1,11 @@
 package forge.screens.quest;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
@@ -21,18 +27,16 @@ import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.model.FModel;
 import forge.screens.TabPageScreen;
-import forge.toolbox.*;
+import forge.toolbox.FDisplayObject;
+import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FLabel;
+import forge.toolbox.FTextArea;
+import forge.toolbox.GuiChoose;
 import forge.util.Callback;
 import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.util.Utils;
-
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
     private final SpellShopPage spellShopPage;

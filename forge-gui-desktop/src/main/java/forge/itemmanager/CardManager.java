@@ -1,21 +1,36 @@
 package forge.itemmanager;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
+
+import javax.swing.JMenu;
+
 import forge.game.GameFormat;
 import forge.gamemodes.quest.QuestWorld;
 import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gui.GuiUtils;
 import forge.item.PaperCard;
-import forge.itemmanager.filters.*;
+import forge.itemmanager.filters.AdvancedSearchFilter;
+import forge.itemmanager.filters.CardCMCFilter;
+import forge.itemmanager.filters.CardCMCRangeFilter;
+import forge.itemmanager.filters.CardColorFilter;
+import forge.itemmanager.filters.CardFoilFilter;
+import forge.itemmanager.filters.CardFormatFilter;
+import forge.itemmanager.filters.CardPowerFilter;
+import forge.itemmanager.filters.CardQuestWorldFilter;
+import forge.itemmanager.filters.CardRatingFilter;
+import forge.itemmanager.filters.CardSearchFilter;
+import forge.itemmanager.filters.CardSetFilter;
+import forge.itemmanager.filters.CardToughnessFilter;
+import forge.itemmanager.filters.CardTypeFilter;
+import forge.itemmanager.filters.FormatFilter;
+import forge.itemmanager.filters.ItemFilter;
 import forge.model.FModel;
 import forge.screens.home.quest.DialogChooseFormats;
 import forge.screens.home.quest.DialogChooseSets;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.Localizer;
-
-import javax.swing.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
 
 /** 
  * ItemManager for cards

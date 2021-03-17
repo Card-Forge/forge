@@ -1,6 +1,10 @@
 package forge.game.combat;
 
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.google.common.primitives.Ints;
+
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
@@ -13,9 +17,6 @@ import forge.util.collect.FCollectionView;
 import forge.util.maps.LinkedHashMapToAmount;
 import forge.util.maps.MapToAmount;
 import forge.util.maps.MapToAmountUtil;
-
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class GlobalAttackRestrictions {
 

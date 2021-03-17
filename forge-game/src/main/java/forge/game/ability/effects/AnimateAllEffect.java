@@ -1,5 +1,11 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.google.common.collect.ImmutableList;
+
 import forge.GameCommand;
 import forge.card.CardType;
 import forge.game.Game;
@@ -11,12 +17,6 @@ import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import com.google.common.collect.ImmutableList;
 
 public class AnimateAllEffect extends AnimateEffectBase {
 

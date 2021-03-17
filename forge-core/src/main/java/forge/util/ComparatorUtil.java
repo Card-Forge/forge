@@ -1,6 +1,7 @@
 package forge.util;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Comparator;
 
 /**
  * @author Gili Tzabari

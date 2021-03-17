@@ -1,13 +1,13 @@
 package forge.screens.match.winlose;
 
+import java.util.List;
+
 import forge.game.GameView;
 import forge.gamemodes.gauntlet.GauntletWinLoseController;
 import forge.gui.FThreads;
 import forge.gui.util.SOptionPane;
 import forge.localinstance.assets.FSkinProp;
 import forge.util.Localizer;
-
-import java.util.List;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament

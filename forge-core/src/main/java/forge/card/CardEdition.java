@@ -17,28 +17,50 @@
  */
 package forge.card;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.*;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
+
 import forge.StaticData;
 import forge.card.CardDb.SetPreference;
 import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
-import forge.util.*;
+import forge.util.Aggregates;
+import forge.util.FileSection;
+import forge.util.FileUtil;
+import forge.util.IItemReader;
+import forge.util.MyRandom;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderBase;
 import forge.util.storage.StorageReaderFolder;
-import org.apache.commons.lang3.StringUtils;
-
-import java.io.File;
-import java.io.FilenameFilter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 /**

@@ -1,5 +1,7 @@
 package forge.screens.deckeditor.views;
 
+import javax.swing.JPanel;
+
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
@@ -12,8 +14,6 @@ import forge.screens.deckeditor.controllers.CBrawlDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
 
 /** 
  * Assembles Swing components of all deck viewer in deck editor.

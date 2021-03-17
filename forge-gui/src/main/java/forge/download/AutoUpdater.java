@@ -1,5 +1,22 @@
 package forge.download;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
+import java.net.Socket;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.swing.SwingUtilities;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.ImmutableList;
 
 import forge.gui.GuiBase;
@@ -11,17 +28,6 @@ import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.WaitCallback;
-
-import org.apache.commons.lang3.StringUtils;
-
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.net.*;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class AutoUpdater {
     private final String SNAPSHOT_VERSION_INDEX = "https://snapshots.cardforge.org/";

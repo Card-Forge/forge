@@ -16,24 +16,23 @@ import java.util.TreeMap;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import com.thoughtworks.xstream.converters.ConversionException;
-import com.thoughtworks.xstream.security.NoTypePermission;
-import com.thoughtworks.xstream.security.NullPermission;
-import com.thoughtworks.xstream.security.PrimitiveTypePermission;
-import forge.deck.Deck;
-import forge.deck.DeckSection;
-import forge.gui.error.BugReporter;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.security.NoTypePermission;
+import com.thoughtworks.xstream.security.NullPermission;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
 import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckSection;
+import forge.gui.error.BugReporter;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;

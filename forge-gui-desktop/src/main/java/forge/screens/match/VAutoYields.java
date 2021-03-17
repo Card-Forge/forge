@@ -15,8 +15,8 @@ import forge.toolbox.FCheckBox;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
-import forge.view.FDialog;
 import forge.util.Localizer;
+import forge.view.FDialog;
 
 @SuppressWarnings("serial")
 public class VAutoYields extends FDialog {

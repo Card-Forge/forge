@@ -1,11 +1,11 @@
 package forge.game.zone;
 
+import java.util.Iterator;
+import java.util.Stack;
+
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPayment;
 import forge.game.cost.IndividualCostPaymentInstance;
-
-import java.util.Iterator;
-import java.util.Stack;
 
 /*
  * simple stack wrapper class for tracking cost payments (mainly for triggers to use)

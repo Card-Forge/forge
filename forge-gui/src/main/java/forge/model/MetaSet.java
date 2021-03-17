@@ -18,6 +18,9 @@
 
 package forge.model;
 
+import java.io.File;
+import java.util.List;
+
 import com.google.common.base.Predicate;
 
 import forge.gamemodes.limited.CustomLimited;
@@ -29,9 +32,6 @@ import forge.item.generation.IUnOpenedProduct;
 import forge.item.generation.UnOpenedProduct;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
-
-import java.io.File;
-import java.util.List;
 
 /** 
  * The class MetaSet. This class is used to define 'special'

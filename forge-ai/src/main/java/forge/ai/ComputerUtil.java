@@ -17,12 +17,22 @@
  */
 package forge.ai;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+
 import forge.ai.ability.ChooseGenericEffectAi;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.TokenAi;
@@ -30,16 +40,33 @@ import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.game.*;
+import forge.game.CardTraitPredicates;
+import forge.game.Game;
+import forge.game.GameActionUtil;
+import forge.game.GameObject;
+import forge.game.GameType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CardState;
+import forge.game.card.CardUtil;
+import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.*;
+import forge.game.cost.Cost;
+import forge.game.cost.CostDiscard;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostPayment;
+import forge.game.cost.CostPutCounter;
+import forge.game.cost.CostSacrifice;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -61,9 +88,6 @@ import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.*;
 
 
 /**

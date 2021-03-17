@@ -20,13 +20,16 @@ package forge.screens.deckeditor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.util.*;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import forge.deck.*;
+import forge.deck.Deck;
+import forge.deck.DeckBase;
+import forge.deck.DeckImportController;
+import forge.deck.DeckRecognizer;
 import forge.deck.DeckRecognizer.TokenType;
 import forge.item.InventoryItem;
 import forge.screens.deckeditor.controllers.ACEditorBase;
@@ -38,8 +41,8 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextArea;
-import forge.view.FDialog;
 import forge.util.Localizer;
+import forge.view.FDialog;
 
 /**
  *

@@ -17,6 +17,17 @@
  */
 package forge.game.spellability;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+
+import forge.game.GameObject;
 import forge.game.IIdentifiable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
@@ -29,17 +40,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-
-import forge.game.GameObject;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 /**
  * <p>

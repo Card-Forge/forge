@@ -1,5 +1,17 @@
 package forge.screens.home.quest;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import forge.ImageCache;
 import forge.gamemodes.quest.QuestEvent;
 import forge.gamemodes.quest.QuestUtil;
@@ -10,13 +22,6 @@ import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FTextArea;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  * Panels for displaying duels and challenges.<br>

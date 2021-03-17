@@ -17,6 +17,8 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import java.util.Map.Entry;
+
 import forge.Singletons;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
@@ -44,8 +46,6 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
-
-import java.util.Map.Entry;
 
 /**
  * Updates the deck editor UI as necessary draft selection mode.

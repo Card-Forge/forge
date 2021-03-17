@@ -1,14 +1,29 @@
 package forge.ai.ability;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import forge.ai.*;
+
+import forge.ai.AiPlayDecision;
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilCard;
+import forge.ai.SpecialCardAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CardUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -16,10 +31,6 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 public class CopyPermanentAi extends SpellAbilityAi {
     @Override

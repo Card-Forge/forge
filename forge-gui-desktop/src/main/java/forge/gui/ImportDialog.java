@@ -50,9 +50,6 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import forge.util.TextUtil;
-import net.miginfocom.swing.MigLayout;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -73,6 +70,8 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextField;
 import forge.toolbox.SmartScroller;
+import forge.util.TextUtil;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * This class implements an overlay-based dialog that imports data from a user-selected directory

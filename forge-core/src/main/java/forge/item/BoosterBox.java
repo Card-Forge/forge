@@ -18,13 +18,15 @@
 
 package forge.item;
 
+import java.util.ArrayList;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Function;
+
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.ArrayList;
 
 public class BoosterBox extends BoxedProduct {
     public static final Function<CardEdition, BoosterBox> FN_FROM_SET = new Function<CardEdition, BoosterBox>() {

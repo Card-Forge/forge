@@ -30,8 +30,8 @@ import forge.game.CardTraitBase;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.collect.FCollectionView;
 import forge.util.MyRandom;
+import forge.util.collect.FCollectionView;
 
 /**
  * <p>

@@ -16,8 +16,8 @@ import forge.toolbox.FNumericTextField;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
-import forge.util.Utils;
 import forge.util.Localizer;
+import forge.util.Utils;
 
 public class ConquestPrefsScreen extends FScreen {
     private static final float PADDING = Utils.scale(5);

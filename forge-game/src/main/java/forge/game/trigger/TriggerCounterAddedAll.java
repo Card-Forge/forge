@@ -7,7 +7,8 @@ import com.google.common.collect.Lists;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CounterType;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 

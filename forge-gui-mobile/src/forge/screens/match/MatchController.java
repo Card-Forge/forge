@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.assets.FSkinImage;
-import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
@@ -20,6 +18,7 @@ import forge.Graphics;
 import forge.LobbyPlayer;
 import forge.assets.FImage;
 import forge.assets.FSkin;
+import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.assets.ImageCache;
 import forge.card.CardAvatarImage;
@@ -58,10 +57,11 @@ import forge.toolbox.FButton;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
-import forge.util.collect.FCollectionView;
 import forge.util.ITriggerEvent;
+import forge.util.Localizer;
 import forge.util.MessageUtil;
 import forge.util.WaitCallback;
+import forge.util.collect.FCollectionView;
 
 public class MatchController extends AbstractGuiGame {
     private MatchController() { }

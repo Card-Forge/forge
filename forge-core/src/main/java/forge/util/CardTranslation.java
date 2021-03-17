@@ -1,12 +1,16 @@
 package forge.util;
 
-import com.google.common.base.Charsets;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.*;
+import com.google.common.base.Charsets;
 
 public class CardTranslation {
 

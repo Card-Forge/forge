@@ -1,5 +1,12 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Maps;
+
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameActionUtil;
@@ -7,7 +14,14 @@ import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
+import forge.game.card.CardZoneTable;
+import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
@@ -16,12 +30,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Localizer;
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Maps;
-
-import java.util.List;
-import java.util.Map;
 
 public class SacrificeEffect extends SpellAbilityEffect {
 

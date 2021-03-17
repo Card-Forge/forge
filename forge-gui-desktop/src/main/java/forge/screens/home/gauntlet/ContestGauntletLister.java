@@ -11,13 +11,13 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import net.miginfocom.swing.MigLayout;
 import forge.gamemodes.gauntlet.GauntletData;
 import forge.gamemodes.gauntlet.GauntletIO;
 import forge.gui.UiCommand;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Creates file list/table for quick deleting, editing, and basic info.

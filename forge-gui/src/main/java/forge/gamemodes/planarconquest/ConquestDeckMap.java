@@ -17,10 +17,10 @@
  */
 package forge.gamemodes.planarconquest;
 
+import java.util.Map;
+
 import forge.deck.Deck;
 import forge.util.storage.StorageBase;
-
-import java.util.Map;
 
 public class ConquestDeckMap extends StorageBase<Deck> {
     public ConquestDeckMap(Map<String, Deck> in) {

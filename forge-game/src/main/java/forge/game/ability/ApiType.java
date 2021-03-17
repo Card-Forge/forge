@@ -1,11 +1,11 @@
 package forge.game.ability;
 
 
-import forge.game.ability.effects.*;
-import forge.util.ReflectionUtil;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import forge.game.ability.effects.*;
+import forge.util.ReflectionUtil;
 
 /** 
  * TODO: Write javadoc for this type.

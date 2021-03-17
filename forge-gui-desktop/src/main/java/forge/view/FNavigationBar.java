@@ -36,8 +36,8 @@ import forge.toolbox.FDigitalClock;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedLabel;
-import forge.util.ReflectionUtil;
 import forge.util.Localizer;
+import forge.util.ReflectionUtil;
 
 
 @SuppressWarnings("serial")

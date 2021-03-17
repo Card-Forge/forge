@@ -24,7 +24,6 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
-import forge.util.TextUtil;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import com.google.common.collect.ImmutableList;
@@ -41,6 +40,7 @@ import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
+import forge.util.TextUtil;
 import forge.util.storage.IStorage;
 
 /** 

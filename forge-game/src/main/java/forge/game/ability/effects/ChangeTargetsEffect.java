@@ -1,5 +1,11 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -14,12 +20,6 @@ import forge.game.spellability.TargetChoices;
 import forge.game.zone.MagicStack;
 import forge.util.Aggregates;
 import forge.util.Localizer;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * TODO: Write javadoc for this type.

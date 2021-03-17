@@ -2,6 +2,7 @@ package forge.gamemodes.planarconquest;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import forge.model.FModel;
 import forge.util.XmlReader;
 import forge.util.XmlWriter;

@@ -1,20 +1,30 @@
 package forge.screens.home.quest;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JPanel;
+
 import forge.card.MagicColor;
 import forge.gamemodes.quest.StartingPoolPreferences.PoolType;
 import forge.gui.SOverlayUtils;
 import forge.gui.UiCommand;
 import forge.localinstance.assets.FSkinProp;
-import forge.toolbox.*;
+import forge.toolbox.FButton;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FLabel;
+import forge.toolbox.FOverlay;
+import forge.toolbox.FPanel;
+import forge.toolbox.FRadioButton;
+import forge.toolbox.FSkin;
+import forge.toolbox.FTextField;
+import forge.toolbox.FTextPane;
+import forge.toolbox.JXButtonPanel;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 public class DialogChoosePoolDistribution {

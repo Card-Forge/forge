@@ -1,19 +1,19 @@
 package forge.gamemodes.limited;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 
 import forge.card.ColorSet;
 import forge.card.DeckHints;
 import forge.card.MagicColor;
-import forge.gui.card.*;
 import forge.item.PaperCard;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 public class CardRanker {
 

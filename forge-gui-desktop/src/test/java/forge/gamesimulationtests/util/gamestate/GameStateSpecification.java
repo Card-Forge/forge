@@ -1,11 +1,11 @@
 package forge.gamesimulationtests.util.gamestate;
 
-import forge.gamesimulationtests.util.card.CardSpecification;
-import forge.gamesimulationtests.util.player.PlayerSpecification;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
+import forge.gamesimulationtests.util.card.CardSpecification;
+import forge.gamesimulationtests.util.player.PlayerSpecification;
 
 public class GameStateSpecification {
 	private final List<CardSpecification> cards;

@@ -44,7 +44,6 @@ import forge.toolbox.FList;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
-
 import forge.util.Localizer;
 
 /**

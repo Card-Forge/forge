@@ -18,6 +18,10 @@
 
 package forge.screens.home.settings;
 
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -27,9 +31,8 @@ import forge.screens.home.VHomeUI;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextArea;
-import net.miginfocom.swing.MigLayout;
 import forge.util.Localizer;
-import javax.swing.*;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Displays contents of README.txt (release) or CHANGES.txt (snapshot) file.

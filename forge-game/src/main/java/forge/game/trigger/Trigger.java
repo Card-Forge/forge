@@ -17,6 +17,17 @@
  */
 package forge.game.trigger;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.IHasSVars;
@@ -33,12 +44,6 @@ import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.*;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-
 import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.TextUtil;

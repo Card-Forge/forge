@@ -24,7 +24,6 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.util.Collections;
 import java.util.List;
-import forge.util.Localizer;
 
 import javax.swing.AbstractListModel;
 import javax.swing.Icon;
@@ -39,6 +38,7 @@ import forge.model.FModel;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
+import forge.util.Localizer;
 import forge.view.FDialog;
 
 /**

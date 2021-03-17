@@ -15,8 +15,8 @@ import forge.deck.CardPool;
 import forge.gamemodes.planarconquest.ConquestData;
 import forge.gamemodes.planarconquest.ConquestPlane;
 import forge.gamemodes.planarconquest.ConquestPreferences;
-import forge.gamemodes.planarconquest.ConquestUtil;
 import forge.gamemodes.planarconquest.ConquestPreferences.CQPref;
+import forge.gamemodes.planarconquest.ConquestUtil;
 import forge.gui.FThreads;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
@@ -31,8 +31,8 @@ import forge.menu.FMenuItem;
 import forge.model.FModel;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FEvent;
-import forge.toolbox.FLabel;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FLabel;
 import forge.util.Localizer;
 
 public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionScreen> {

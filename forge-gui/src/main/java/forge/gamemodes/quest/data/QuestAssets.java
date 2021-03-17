@@ -18,7 +18,6 @@
 package forge.gamemodes.quest.data;
 
 import java.lang.reflect.InvocationTargetException;
-
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;

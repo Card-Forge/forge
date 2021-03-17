@@ -1,5 +1,8 @@
 package forge.planarconquestgenerate;
 
+import java.io.File;
+import java.util.List;
+
 import com.google.common.base.Function;
 
 import forge.GuiDesktop;
@@ -15,9 +18,6 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-
-import java.io.File;
-import java.util.List;
 
 public class PlanarConquestGeneraterGAModern extends PlanarConquestGeneraterGA {
 

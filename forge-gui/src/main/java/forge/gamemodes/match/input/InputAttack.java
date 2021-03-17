@@ -17,12 +17,19 @@
  */
 package forge.gamemodes.match.input;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import com.google.common.collect.Sets;
 
 import forge.game.GameEntity;
 import forge.game.GameEntityView;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CardView;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -34,12 +41,8 @@ import forge.game.zone.ZoneType;
 import forge.gui.events.UiEventAttackerDeclared;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
-import forge.util.collect.FCollectionView;
 import forge.util.Localizer;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import forge.util.collect.FCollectionView;
 
 /**
  * <p>

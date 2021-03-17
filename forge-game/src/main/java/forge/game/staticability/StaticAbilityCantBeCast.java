@@ -17,6 +17,8 @@
  */
 package forge.game.staticability;
 
+import java.util.List;
+
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -25,8 +27,6 @@ import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.List;
 
 /**
  * The Class StaticAbility_CantBeCast.

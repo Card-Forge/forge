@@ -17,6 +17,9 @@
  */
 package forge.screens.match;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
+
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -25,9 +28,6 @@ import forge.game.player.PlayerView;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
-
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
 
 public class TargetingOverlay {
     private static final float BORDER_THICKNESS = Utils.scale(1);

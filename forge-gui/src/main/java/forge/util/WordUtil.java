@@ -1,9 +1,9 @@
 package forge.util;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class WordUtil {
     public static String capitalize(String str) {

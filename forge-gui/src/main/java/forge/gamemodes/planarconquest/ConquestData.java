@@ -17,6 +17,16 @@
  */
 package forge.gamemodes.planarconquest;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.google.common.base.Function;
 
 import forge.card.CardDb;
@@ -31,15 +41,11 @@ import forge.localinstance.achievements.PlaneswalkerAchievements;
 import forge.localinstance.assets.ISkinImage;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
+import forge.util.CardTranslation;
 import forge.util.FileUtil;
+import forge.util.Localizer;
 import forge.util.XmlReader;
 import forge.util.XmlWriter;
-import forge.util.Localizer;
-import forge.util.CardTranslation;
-
-import java.io.File;
-import java.util.*;
-import java.util.Map.Entry;
 
 public final class ConquestData {
     private static final String XML_FILE = "data.xml";

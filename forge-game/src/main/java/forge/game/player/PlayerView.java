@@ -1,11 +1,12 @@
 package forge.game.player;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
-
-import forge.card.CardType;
-import forge.card.mana.ManaAtom;
-import forge.game.card.CounterType;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -16,21 +17,24 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.LobbyPlayer;
+import forge.card.CardType;
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
 import forge.game.GameEntityView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
-import forge.util.collect.FCollection;
-import forge.util.collect.FCollectionView;
+import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
-import forge.util.CardTranslation;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 
 public class PlayerView extends GameEntityView {
     private static final long serialVersionUID = 7005892740909549086L;

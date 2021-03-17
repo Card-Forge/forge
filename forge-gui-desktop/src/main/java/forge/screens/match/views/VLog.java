@@ -22,8 +22,6 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import net.miginfocom.swing.MigLayout;
-
 import com.google.common.collect.Lists;
 
 import forge.game.GameLogEntry;
@@ -40,6 +38,7 @@ import forge.screens.match.controllers.CLog;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinFont;
 import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Assembles Swing components of game log report.

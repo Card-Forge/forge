@@ -1,5 +1,11 @@
 package forge.screens.constructed;
 
+import java.util.List;
+import java.util.Map;
+
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Align;
+
 import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkin;
@@ -15,12 +21,6 @@ import forge.util.Callback;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.Utils;
-
-import java.util.List;
-import java.util.Map;
-
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Align;
 
 public class AvatarSelector extends FScreen {
     public static int getRandomAvatar(List<Integer> usedAvatars) {

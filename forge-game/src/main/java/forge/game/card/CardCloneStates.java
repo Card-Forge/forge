@@ -1,11 +1,12 @@
 package forge.game.card;
 
+import java.util.Map;
+
 import com.google.common.collect.ForwardingMap;
 import com.google.common.collect.Maps;
+
 import forge.card.CardStateName;
 import forge.game.CardTraitBase;
-
-import java.util.Map;
 
 public class CardCloneStates extends ForwardingMap<CardStateName, CardState> {
 

@@ -17,6 +17,13 @@
  */
 package forge.gamemodes.quest;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeSet;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import com.google.common.collect.ImmutableMap;
 
 import forge.LobbyPlayer;
@@ -47,13 +54,6 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Localizer;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
 
 /**
  * <p>

@@ -1,9 +1,14 @@
 package forge.planarconquestgenerate;
 
+import java.io.File;
+import java.util.List;
+
 import com.google.common.base.Function;
 
 import forge.GuiDesktop;
-import forge.deck.*;
+import forge.deck.Deck;
+import forge.deck.DeckFormat;
+import forge.deck.DeckgenUtil;
 import forge.deck.io.DeckStorage;
 import forge.game.GameFormat;
 import forge.game.GameRules;
@@ -13,9 +18,6 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-
-import java.io.File;
-import java.util.List;
 
 public class PlanarConquestGeneraterGAStandard extends PlanarConquestGeneraterGA {
 

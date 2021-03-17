@@ -30,17 +30,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.swing.*;
+import javax.swing.JMenu;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
-import com.google.common.collect.Lists;
-import net.miginfocom.swing.MigLayout;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
@@ -63,8 +66,9 @@ import forge.toolbox.FTextField;
 import forge.toolbox.LayoutHelper;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
-import forge.util.ReflectionUtil;
 import forge.util.Localizer;
+import forge.util.ReflectionUtil;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * ItemManager.

@@ -1,11 +1,53 @@
 package forge.view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Lists;
+
 import forge.Singletons;
 import forge.gui.ImportDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.UiCommand;
-import forge.gui.framework.*;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
+import forge.gui.framework.SLayoutConstants;
+import forge.gui.framework.SLayoutIO;
 import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
@@ -15,27 +57,20 @@ import forge.screens.deckeditor.VDeckEditorUI;
 import forge.screens.home.VHomeUI;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
-import forge.toolbox.*;
+import forge.toolbox.CardFaceSymbols;
+import forge.toolbox.FAbsolutePositioner;
+import forge.toolbox.FButton;
+import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.FOverlay;
+import forge.toolbox.FPanel;
+import forge.toolbox.FProgressBar;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLayeredPane;
 import forge.util.BuildInfo;
 import forge.util.RuntimeVersion;
 import net.miginfocom.swing.MigLayout;
-import org.apache.commons.lang3.StringUtils;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.net.URI;
-import java.util.*;
-import java.util.List;
 
 public enum FView {
 	SINGLETON_INSTANCE;

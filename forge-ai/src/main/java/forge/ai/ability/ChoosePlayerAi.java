@@ -1,15 +1,16 @@
 package forge.ai.ability;
 
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.List;
-import java.util.Map;
 
 public class ChoosePlayerAi extends SpellAbilityAi {
     @Override

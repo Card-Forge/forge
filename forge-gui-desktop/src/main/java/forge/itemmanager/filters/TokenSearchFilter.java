@@ -1,5 +1,10 @@
 package forge.itemmanager.filters;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+import javax.swing.JPanel;
+
 import com.google.common.base.Predicate;
 
 import forge.gui.UiCommand;
@@ -11,10 +16,6 @@ import forge.toolbox.FComboBoxWrapper;
 import forge.toolbox.FLabel;
 import forge.toolbox.FTextField;
 import forge.toolbox.LayoutHelper;
-
-import javax.swing.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 
 public class TokenSearchFilter extends TextSearchFilter<PaperToken> {

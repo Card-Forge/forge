@@ -17,9 +17,13 @@
  */
 package forge.game.ability;
 
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import forge.card.CardStateName;
 import forge.game.CardTraitBase;
 import forge.game.IHasSVars;
@@ -27,14 +31,15 @@ import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.cost.Cost;
-import forge.game.spellability.*;
+import forge.game.spellability.AbilitySub;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityCondition;
+import forge.game.spellability.SpellAbilityRestriction;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * <p>

@@ -1,5 +1,17 @@
 package forge.screens.home.sanctioned;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.SwingUtilities;
+
+import com.google.common.collect.Lists;
+
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -25,14 +37,6 @@ import forge.screens.deckeditor.views.VProbabilities;
 import forge.screens.deckeditor.views.VStatistics;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Collections;
-import com.google.common.collect.Lists;
 
 /**
  * Controls the draft submenu in the home UI.
