@@ -17,6 +17,18 @@
  */
 package forge.screens.match.views;
 
+import java.awt.Font;
+import java.awt.Insets;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+
 import forge.game.card.CardView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -26,17 +38,13 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.match.controllers.CPrompt;
-import forge.toolbox.*;
+import forge.toolbox.FButton;
+import forge.toolbox.FHtmlViewer;
+import forge.toolbox.FLabel;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  * Assembles Swing components of message report.

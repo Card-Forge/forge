@@ -17,14 +17,14 @@
  */
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.CostPaymentStack;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 /**
  * <p>

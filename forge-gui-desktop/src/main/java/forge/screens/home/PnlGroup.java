@@ -1,13 +1,14 @@
 package forge.screens.home;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+import javax.swing.JLabel;
+
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedPanel;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.*;
 
 /** 
  * Custom JPanel for containing LblMenuItem components.

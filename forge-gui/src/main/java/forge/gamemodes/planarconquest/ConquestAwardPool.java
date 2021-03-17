@@ -2,6 +2,7 @@ package forge.gamemodes.planarconquest;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import forge.item.PaperCard;
 
 public class ConquestAwardPool {

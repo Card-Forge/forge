@@ -1,12 +1,13 @@
 package forge.token;
 
-import com.google.common.base.Predicate;
-import forge.card.CardDb;
-import forge.item.PaperToken;
-
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+
+import com.google.common.base.Predicate;
+
+import forge.card.CardDb;
+import forge.item.PaperToken;
 
 public interface ITokenDatabase extends Iterable<PaperToken> {
     PaperToken getToken(String tokenName);

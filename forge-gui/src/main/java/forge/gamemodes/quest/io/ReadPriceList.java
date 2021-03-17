@@ -17,14 +17,14 @@
  */
 package forge.gamemodes.quest.io;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import forge.card.MagicColor;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * <p>

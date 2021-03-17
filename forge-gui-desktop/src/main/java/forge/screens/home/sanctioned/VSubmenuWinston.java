@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import net.miginfocom.swing.MigLayout;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -26,6 +25,7 @@ import forge.screens.home.VHomeUI.PnlDisplay;
 import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FSkin;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Assembles Swing components of draft submenu singleton.

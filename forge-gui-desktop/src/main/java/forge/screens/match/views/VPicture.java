@@ -17,6 +17,8 @@
  */
 package forge.screens.match.views;
 
+import javax.swing.JLabel;
+
 import forge.gui.CardPicturePanel;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -28,8 +30,6 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
 
 /** 
  * Assembles Swing components of card picture area.

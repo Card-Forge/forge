@@ -1,9 +1,26 @@
 package forge.app;
 
+import java.awt.Desktop;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import javax.imageio.ImageIO;
+
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglClipboard;
+
 import forge.Forge;
 import forge.assets.AssetsDownloader;
 import forge.interfaces.IDeviceAdapter;
@@ -13,12 +30,6 @@ import forge.util.FileUtil;
 import forge.util.OperatingSystem;
 import forge.util.RestartUtil;
 import forge.util.Utils;
-import org.apache.commons.cli.*;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
 
 public class Main {
     public static void main(String[] args) {

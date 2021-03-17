@@ -1,11 +1,11 @@
 package forge.gamemodes.net.server;
 
-import io.netty.channel.ChannelHandlerContext;
 import forge.gamemodes.net.GameProtocolHandler;
 import forge.gamemodes.net.IRemote;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.ReplyPool;
 import forge.interfaces.IGameController;
+import io.netty.channel.ChannelHandlerContext;
 
 final class GameServerHandler extends GameProtocolHandler<IGameController> {
 

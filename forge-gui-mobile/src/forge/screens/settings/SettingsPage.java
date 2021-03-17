@@ -1,6 +1,11 @@
 package forge.screens.settings;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.badlogic.gdx.utils.Align;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.MulliganDefs;
@@ -30,10 +35,6 @@ import forge.toolbox.FOptionPane;
 import forge.util.Callback;
 import forge.util.Localizer;
 import forge.util.Utils;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class SettingsPage extends TabPage<SettingsScreen> {
     private final FGroupList<Setting> lstSettings = add(new FGroupList<>());

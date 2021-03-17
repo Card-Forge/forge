@@ -1,5 +1,11 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import forge.game.Game;
 import forge.game.GameAction;
 import forge.game.GameStage;
@@ -15,12 +21,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class RestartGameEffect extends SpellAbilityEffect {
     @Override

@@ -1,5 +1,9 @@
 package forge.screens.match.winlose;
 
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Align;
 
@@ -28,10 +32,6 @@ import forge.toolbox.FOverlay;
 import forge.toolbox.FTextArea;
 import forge.util.Localizer;
 import forge.util.Utils;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.List;
 
 public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     private static final float INSETS_FACTOR = 0.025f;

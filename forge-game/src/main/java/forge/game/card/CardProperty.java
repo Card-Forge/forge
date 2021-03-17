@@ -1,5 +1,10 @@
 package forge.game.card;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -29,10 +34,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Collections;
-import java.util.List;
 
 public class CardProperty {
 

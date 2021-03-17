@@ -1,5 +1,11 @@
 package forge.screens.quest;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
@@ -15,8 +21,8 @@ import forge.gamemodes.quest.QuestMode;
 import forge.gamemodes.quest.QuestUtil;
 import forge.gamemodes.quest.QuestWorld;
 import forge.gamemodes.quest.StartingPoolPreferences;
-import forge.gamemodes.quest.StartingPoolType;
 import forge.gamemodes.quest.StartingPoolPreferences.PoolType;
+import forge.gamemodes.quest.StartingPoolType;
 import forge.gamemodes.quest.data.DeckConstructionRules;
 import forge.gamemodes.quest.data.GameFormatQuest;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
@@ -45,15 +51,9 @@ import forge.toolbox.FRadioButton;
 import forge.toolbox.FRadioButton.RadioButtonGroup;
 import forge.toolbox.FScrollPane;
 import forge.util.FileUtil;
+import forge.util.Localizer;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
-import forge.util.Localizer;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
 
 public class NewQuestScreen extends FScreen {
 

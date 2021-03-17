@@ -1,11 +1,11 @@
 package forge.game.replacement;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-
-import java.util.Map;
 
 public class ReplaceBeginPhase extends ReplacementEffect {
 

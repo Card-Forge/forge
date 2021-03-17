@@ -17,8 +17,25 @@
  */
 package forge.game;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import com.google.common.base.Predicate;
-import com.google.common.collect.*;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ComparisonChain;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
+
 import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardStateName;
@@ -27,8 +44,23 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.AttachEffect;
-import forge.game.card.*;
-import forge.game.event.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactory;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
+import forge.game.card.CardZoneTable;
+import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
+import forge.game.event.GameEventCardChangeZone;
+import forge.game.event.GameEventCardDestroyed;
+import forge.game.event.GameEventCardStatsChanged;
+import forge.game.event.GameEventCardTapped;
+import forge.game.event.GameEventFlipCoin;
+import forge.game.event.GameEventGameStarted;
+import forge.game.event.GameEventScry;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mulligan.MulliganService;
 import forge.game.player.GameLossReason;
@@ -47,12 +79,13 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.util.*;
+import forge.util.Aggregates;
+import forge.util.Expressions;
+import forge.util.MyRandom;
+import forge.util.ThreadUtil;
+import forge.util.Visitor;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
-import java.util.*;
 
 /**
  * Methods for common actions performed during a game.

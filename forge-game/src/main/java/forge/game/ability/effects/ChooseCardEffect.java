@@ -1,5 +1,9 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -18,10 +22,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.Localizer;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.List;
 
 public class ChooseCardEffect extends SpellAbilityEffect {
     @Override

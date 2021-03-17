@@ -1,20 +1,29 @@
 package forge.itemmanager;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
 
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.CardType;
-import forge.card.MagicColor;
 import forge.card.CardType.CoreType;
 import forge.card.CardType.Supertype;
+import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
@@ -35,8 +44,8 @@ import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.FModel;
-import forge.util.Localizer;
 import forge.util.CardTranslation;
+import forge.util.Localizer;
 
 public class AdvancedSearch {
     public enum FilterOption {

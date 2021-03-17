@@ -17,6 +17,16 @@
  */
 package forge.game.replacement;
 
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
@@ -35,18 +45,11 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.CardTranslation;
 import forge.util.FileSection;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.Visitor;
-import forge.util.Localizer;
-import forge.util.CardTranslation;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-
-import java.util.*;
 
 public class ReplacementHandler {
     private final Game game;

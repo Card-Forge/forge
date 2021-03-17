@@ -1,7 +1,14 @@
 package forge.game.combat;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
@@ -15,11 +22,6 @@ import forge.util.collect.FCollectionView;
 import forge.util.maps.LinkedHashMapToAmount;
 import forge.util.maps.MapToAmount;
 import forge.util.maps.MapToAmountUtil;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class AttackRequirement {
 

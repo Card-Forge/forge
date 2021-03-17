@@ -12,9 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import forge.util.Localizer;
-import net.miginfocom.swing.MigLayout;
-
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.GameLogEntry;
@@ -38,6 +35,8 @@ import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTextArea;
+import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 public class ViewWinLose implements IWinLoseView<FButton> {
     private final ControlWinLose control;

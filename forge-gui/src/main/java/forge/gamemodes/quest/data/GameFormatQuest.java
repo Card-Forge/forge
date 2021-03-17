@@ -17,14 +17,14 @@
  */
 package forge.gamemodes.quest.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.common.base.Predicate;
 
 import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.model.FModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**

@@ -1,5 +1,10 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.mutable.MutableBoolean;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -22,15 +27,10 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.Localizer;
+import forge.util.PredicateString.StringOp;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-import forge.util.PredicateString.StringOp;
-import forge.util.Localizer;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.mutable.MutableBoolean;
-
-import java.util.List;
 
 public class CopyPermanentEffect extends TokenEffectBase {
 

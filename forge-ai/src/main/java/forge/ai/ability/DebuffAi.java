@@ -1,5 +1,9 @@
 package forge.ai.ability;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -20,10 +24,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class DebuffAi extends SpellAbilityAi {
     // *************************************************************************

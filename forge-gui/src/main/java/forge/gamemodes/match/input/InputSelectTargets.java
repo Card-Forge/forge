@@ -1,5 +1,12 @@
 package forge.gamemodes.match.input;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -23,13 +30,6 @@ import forge.player.PlayerZoneUpdates;
 import forge.util.Aggregates;
 import forge.util.ITriggerEvent;
 import forge.util.TextUtil;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public final class InputSelectTargets extends InputSyncronizedBase {
     private final List<Card> choices;

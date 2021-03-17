@@ -17,10 +17,10 @@
  */
 package forge.gamemodes.limited;
 
+import java.util.Map.Entry;
+
 import forge.deck.Deck;
 import forge.item.PaperCard;
-
-import java.util.Map.Entry;
 
 /**
  * <p>

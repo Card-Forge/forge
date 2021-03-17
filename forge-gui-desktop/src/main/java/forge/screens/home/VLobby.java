@@ -1,11 +1,36 @@
 package forge.screens.home;
 
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Vector;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ai.AIOption;
-import forge.deck.*;
+import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckProxy;
+import forge.deck.DeckSection;
+import forge.deck.DeckType;
+import forge.deck.DeckgenUtil;
+import forge.deck.RandomDeckGenerator;
 import forge.deckchooser.FDeckChooser;
 import forge.game.GameType;
 import forge.game.card.CardView;
@@ -23,24 +48,21 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.toolbox.*;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FLabel;
+import forge.toolbox.FList;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.FPanel;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FScrollPanel;
+import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
+import forge.toolbox.FTextField;
 import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.NameGenerator;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.*;
-import java.util.List;
 
 /**
  * Lobby view. View of a number of players at the deck selection stage.

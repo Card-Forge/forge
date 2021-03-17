@@ -18,6 +18,7 @@
 package forge.game.trigger;
 
 import java.util.Map;
+
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;

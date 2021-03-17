@@ -1,10 +1,10 @@
 package forge.game.replacement;
 
-import forge.game.card.Card;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
+
+import forge.game.card.Card;
 
 /**
  * TODO: Write javadoc for this type.

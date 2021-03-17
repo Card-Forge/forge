@@ -1,6 +1,21 @@
 package forge.screens.home.settings;
 
-import forge.*;
+import java.awt.Desktop;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JCheckBox;
+import javax.swing.SwingUtilities;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import forge.MulliganDefs;
+import forge.Singletons;
+import forge.StaticData;
 import forge.ai.AiProfileUtil;
 import forge.control.FControl.CloseAction;
 import forge.download.AutoUpdater;
@@ -23,16 +38,6 @@ import forge.toolbox.FComboBoxPanel;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Controls the preferences submenu in the home UI.

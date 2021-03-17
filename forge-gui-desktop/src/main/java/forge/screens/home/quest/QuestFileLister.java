@@ -1,24 +1,34 @@
 package forge.screens.home.quest;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+
 import forge.gamemodes.quest.QuestUtil;
 import forge.gamemodes.quest.data.QuestData;
 import forge.gui.UiCommand;
 import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.toolbox.*;
+import forge.toolbox.FLabel;
+import forge.toolbox.FMouseAdapter;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedButton;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.io.File;
-import java.util.*;
-import java.util.List;
 
 /**
  * Creates file list/table for quick deleting, editing, and basic info.

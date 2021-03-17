@@ -1,14 +1,28 @@
 package forge.ai.ability;
 
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import forge.ai.*;
+
+import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCost;
+import forge.ai.SpecialCardAi;
+import forge.ai.SpellAbilityAi;
+import forge.ai.SpellApiToAi;
 import forge.card.MagicColor;
 import forge.game.Game;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CardUtil;
+import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
@@ -20,9 +34,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.collect.FCollection;
-
-import java.util.List;
-import java.util.Map;
 
 
 public class ChooseGenericEffectAi extends SpellAbilityAi {

@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import forge.game.ability.AbilityKey;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -16,6 +15,7 @@ import com.google.common.collect.Maps;
 
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;

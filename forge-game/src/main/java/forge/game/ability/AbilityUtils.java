@@ -1,5 +1,15 @@
 package forge.game.ability;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -19,7 +29,14 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
+import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -29,7 +46,13 @@ import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
-import forge.game.spellability.*;
+import forge.game.spellability.AbilitySub;
+import forge.game.spellability.Spell;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityRestriction;
+import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.SpellPermanent;
+import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -40,15 +63,6 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
-
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class AbilityUtils {

@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
-import net.miginfocom.swing.MigLayout;
 import forge.gamemodes.gauntlet.GauntletData;
 import forge.gamemodes.gauntlet.GauntletIO;
 import forge.gamemodes.quest.QuestUtil;
@@ -25,6 +24,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.FSkin.SkinnedButton;
 import forge.toolbox.FSkin.SkinnedPanel;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Creates file list/table for quick deleting, editing, and basic info.

@@ -28,8 +28,8 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextArea;
-import forge.util.Utils;
 import forge.util.Localizer;
+import forge.util.Utils;
 
 public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
     private static final Localizer localizer = Localizer.getInstance();

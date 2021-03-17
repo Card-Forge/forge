@@ -1,6 +1,7 @@
 package forge.itemmanager.filters;
 
 import java.util.List;
+
 import com.google.common.base.Predicate;
 
 import forge.game.GameFormat;

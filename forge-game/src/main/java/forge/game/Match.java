@@ -1,6 +1,22 @@
 package forge.game;
 
-import com.google.common.collect.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multiset;
 import com.google.common.eventbus.EventBus;
 
 import forge.LobbyPlayer;
@@ -20,12 +36,9 @@ import forge.game.trigger.Trigger;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
-import forge.util.Localizer;
-
-import java.util.*;
-import java.util.Map.Entry;
 
 public class Match {
     private final List<RegisteredPlayer> players;

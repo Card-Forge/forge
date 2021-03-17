@@ -1,5 +1,7 @@
 package forge.screens.quest;
 
+import java.util.List;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
@@ -14,8 +16,6 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Localizer;
-
-import java.util.List;
 
 public class QuestDuelsScreen extends QuestLaunchScreen {
 

@@ -17,6 +17,8 @@
  */
 package forge.game.staticability;
 
+import com.google.common.collect.Iterables;
+
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -26,8 +28,6 @@ import forge.game.cost.Cost;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-
-import com.google.common.collect.Iterables;
 
 /**
  * The Class StaticAbility_CantBeCast.

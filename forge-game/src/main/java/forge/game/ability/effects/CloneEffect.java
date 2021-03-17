@@ -1,21 +1,24 @@
 package forge.game.ability.effects;
 
-import forge.GameCommand;
-import forge.game.Game;
-import forge.game.ability.AbilityUtils;
-import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.*;
-import forge.game.event.GameEventCardStatsChanged;
-import forge.game.player.Player;
-import forge.game.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
-import forge.util.Localizer;
-import forge.util.CardTranslation;
-
 import java.util.Arrays;
 import java.util.List;
 
 import com.google.common.collect.Lists;
+
+import forge.GameCommand;
+import forge.game.Game;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.SpellAbilityEffect;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardFactory;
+import forge.game.card.CardLists;
+import forge.game.event.GameEventCardStatsChanged;
+import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
+import forge.util.CardTranslation;
+import forge.util.Localizer;
 
 public class CloneEffect extends SpellAbilityEffect {
     // TODO update this method

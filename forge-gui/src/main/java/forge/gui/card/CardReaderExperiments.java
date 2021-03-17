@@ -1,16 +1,20 @@
 package forge.gui.card;
 
-import forge.CardStorageReader;
-import forge.card.CardRules;
-import forge.localinstance.properties.ForgeConstants;
-import forge.util.FileUtil;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import forge.CardStorageReader;
+import forge.card.CardRules;
+import forge.localinstance.properties.ForgeConstants;
+import forge.util.FileUtil;
 
 public class CardReaderExperiments {
 

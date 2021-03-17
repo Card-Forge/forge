@@ -18,6 +18,7 @@
 package forge.game.cost;
 
 import com.google.common.base.Predicate;
+
 import forge.game.GameLogEntryType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;

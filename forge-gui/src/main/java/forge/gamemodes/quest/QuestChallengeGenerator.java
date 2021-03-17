@@ -1,14 +1,20 @@
 package forge.gamemodes.quest;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Predicate;
+
 import forge.deck.DeckgenUtil;
 import forge.game.GameFormat;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.MyRandom;
 import forge.util.storage.IStorage;
-
-import java.util.*;
 
 public class QuestChallengeGenerator {
 

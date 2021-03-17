@@ -1,15 +1,15 @@
 package forge.toolbox;
 
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
-import forge.assets.FSkinColor.Colors;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
 import forge.screens.match.views.VPrompt;

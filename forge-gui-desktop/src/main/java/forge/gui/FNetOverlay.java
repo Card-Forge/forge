@@ -9,8 +9,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ScrollPaneConstants;
 
-import net.miginfocom.swing.MigLayout;
-
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
@@ -30,9 +28,10 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FTextArea;
 import forge.toolbox.FTextField;
 import forge.toolbox.SmartScroller;
+import forge.util.Localizer;
 import forge.view.FDialog;
 import forge.view.FFrame;
-import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 
 public enum FNetOverlay implements IOnlineChatInterface {

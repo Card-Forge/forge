@@ -7,14 +7,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.badlogic.gdx.graphics.Color;
-
-import forge.screens.match.winlose.ViewWinLose;
-import forge.util.Localizer;
-
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.google.common.collect.Maps;
 
@@ -56,6 +52,7 @@ import forge.screens.match.views.VPlayerPanel.InfoTab;
 import forge.screens.match.views.VPlayers;
 import forge.screens.match.views.VPrompt;
 import forge.screens.match.views.VStack;
+import forge.screens.match.winlose.ViewWinLose;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FCardPanel;
@@ -63,6 +60,7 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
+import forge.util.Localizer;
 
 public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);

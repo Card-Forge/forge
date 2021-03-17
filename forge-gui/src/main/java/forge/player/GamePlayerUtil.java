@@ -2,7 +2,6 @@ package forge.player;
 
 import java.util.Set;
 
-import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.LobbyPlayer;
@@ -15,6 +14,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.GuiDisplayUtil;
 import forge.util.MyRandom;
+import forge.util.TextUtil;
 
 public final class GamePlayerUtil {
     private GamePlayerUtil() { }

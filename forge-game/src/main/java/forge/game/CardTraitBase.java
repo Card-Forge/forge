@@ -1,5 +1,14 @@
 package forge.game;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Maps;
+
 import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -15,13 +24,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
-
-import java.util.*;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Maps;
 
 /**
  * Base class for Triggers,ReplacementEffects and StaticAbilities.

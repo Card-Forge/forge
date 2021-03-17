@@ -1,11 +1,12 @@
 package forge.gui.framework;
 
-import forge.toolbox.FSkin;
-import forge.toolbox.FSkin.SkinnedLabel;
+import java.awt.Dimension;
+import java.awt.Graphics;
 
 import javax.swing.border.EmptyBorder;
 
-import java.awt.*;
+import forge.toolbox.FSkin;
+import forge.toolbox.FSkin.SkinnedLabel;
 
 /**
  * The tab label object in drag layout.

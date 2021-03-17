@@ -1,9 +1,18 @@
 package forge.card;
 
+import static forge.card.CardRenderer.CROP_MULTIPLIER;
+import static forge.card.CardRenderer.isModernFrame;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FBufferedImage;
@@ -18,8 +27,8 @@ import forge.assets.TextRenderer;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.mana.ManaCost;
 import forge.game.GameView;
-import forge.game.card.CardView.CardStateView;
 import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
 import forge.game.zone.ZoneType;
 import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
@@ -30,13 +39,6 @@ import forge.screens.FScreen;
 import forge.screens.match.MatchController;
 import forge.util.CardTranslation;
 import forge.util.Utils;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static forge.card.CardRenderer.CROP_MULTIPLIER;
-import static forge.card.CardRenderer.isModernFrame;
 
 public class CardImageRenderer {
     private static final float BASE_IMAGE_WIDTH = 360;

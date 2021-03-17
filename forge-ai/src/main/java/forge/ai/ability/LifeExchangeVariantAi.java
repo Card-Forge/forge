@@ -1,6 +1,11 @@
 package forge.ai.ability;
 
-import forge.ai.*;
+import forge.ai.AiProps;
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilCombat;
+import forge.ai.PlayerControllerAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.keyword.Keyword;

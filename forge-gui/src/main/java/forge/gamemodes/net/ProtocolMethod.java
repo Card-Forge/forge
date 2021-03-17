@@ -1,5 +1,10 @@
 package forge.gamemodes.net;
 
+import java.lang.reflect.Method;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Function;
 
 import forge.deck.CardPool;
@@ -19,11 +24,6 @@ import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
 import forge.util.ReflectionUtil;
-
-import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /**
  * The methods that can be sent through this protocol.

@@ -1,10 +1,10 @@
 package forge.game.trigger;
 
-import forge.game.ability.AbilityKey;
-import forge.util.TextUtil;
-
 import java.util.List;
 import java.util.Map;
+
+import forge.game.ability.AbilityKey;
+import forge.util.TextUtil;
 
 /** 
  * TriggerWaiting is just a small object to keep track of things that occurred that need to be run.

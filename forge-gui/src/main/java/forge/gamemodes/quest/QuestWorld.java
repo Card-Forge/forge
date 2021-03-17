@@ -17,20 +17,21 @@
  */
 package forge.gamemodes.quest;
 
-import com.google.common.base.Function;
-import forge.deck.Deck;
-import forge.game.GameFormat;
-import forge.gamemodes.quest.data.GameFormatQuest;
-import forge.item.PaperCard;
-import forge.model.FModel;
-import forge.util.storage.StorageReaderFile;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.google.common.base.Function;
+
+import forge.deck.Deck;
+import forge.game.GameFormat;
+import forge.gamemodes.quest.data.GameFormatQuest;
+import forge.item.PaperCard;
+import forge.model.FModel;
+import forge.util.storage.StorageReaderFile;
 
 /** 
  * This function holds the "world info" for the current quest.

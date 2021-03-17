@@ -9,12 +9,11 @@ import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.gui.FThreads;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;

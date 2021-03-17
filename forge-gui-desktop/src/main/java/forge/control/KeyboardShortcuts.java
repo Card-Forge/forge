@@ -14,7 +14,6 @@ import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import forge.toolbox.special.CardZoomer;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
@@ -26,6 +25,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.home.settings.VSubmenuPreferences.KeyboardShortcutField;
 import forge.screens.match.CMatchUI;
+import forge.toolbox.special.CardZoomer;
 import forge.util.Localizer;
 
 /** 

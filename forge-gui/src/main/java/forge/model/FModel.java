@@ -17,10 +17,19 @@
  */
 package forge.model;
 
+import java.io.File;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
-import forge.*;
+
+import forge.CardStorageReader;
 import forge.CardStorageReader.ProgressObserver;
+import forge.ImageKeys;
+import forge.MulliganDefs;
+import forge.StaticData;
 import forge.ai.AiProfileUtil;
 import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
@@ -47,7 +56,13 @@ import forge.gui.GuiBase;
 import forge.gui.card.CardPreferences;
 import forge.gui.interfaces.IProgressBar;
 import forge.itemmanager.ItemManagerConfig;
-import forge.localinstance.achievements.*;
+import forge.localinstance.achievements.AchievementCollection;
+import forge.localinstance.achievements.ConstructedAchievements;
+import forge.localinstance.achievements.DraftAchievements;
+import forge.localinstance.achievements.PlanarConquestAchievements;
+import forge.localinstance.achievements.PuzzleAchievements;
+import forge.localinstance.achievements.QuestAchievements;
+import forge.localinstance.achievements.SealedAchievements;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -58,11 +73,6 @@ import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
-
-import java.io.File;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * The default Model implementation for Forge.

@@ -17,6 +17,19 @@
  */
 package forge.screens.home.quest;
 
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestUtil;
 import forge.gamemodes.quest.bazaar.IQuestBazaarItem;
@@ -29,16 +42,6 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextPane;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>

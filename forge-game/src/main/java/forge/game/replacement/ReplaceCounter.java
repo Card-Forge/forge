@@ -17,11 +17,11 @@
  */
 package forge.game.replacement;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
-
-import java.util.Map;
 
 /** 
  * TODO: Write javadoc for this type.

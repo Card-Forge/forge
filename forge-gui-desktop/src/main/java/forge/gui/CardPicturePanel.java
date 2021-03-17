@@ -17,6 +17,13 @@
  */
 package forge.gui;
 
+import java.awt.BorderLayout;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
+
+import javax.swing.JPanel;
+
 import forge.ImageCache;
 import forge.ImageKeys;
 import forge.game.card.CardView.CardStateView;
@@ -29,12 +36,6 @@ import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
 import forge.util.ImageFetcher;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.WritableRaster;
 
 /**
  * Displays image associated with a card or inventory item.

@@ -5,11 +5,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.badlogic.gdx.utils.Align;
+
 import forge.Graphics;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
-import forge.assets.FSkinColor.Colors;
 import forge.item.InventoryItem;
 import forge.itemmanager.filters.AdvancedSearchFilter;
 import forge.localinstance.properties.ForgePreferences.FPref;

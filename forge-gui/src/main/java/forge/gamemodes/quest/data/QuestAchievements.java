@@ -1,15 +1,15 @@
 package forge.gamemodes.quest.data;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import forge.gamemodes.quest.QuestEventDraft;
 import forge.gamemodes.quest.QuestEventDraft.QuestDraftFormat;
 import forge.gamemodes.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.model.FModel;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * TODO: Write javadoc for this type.

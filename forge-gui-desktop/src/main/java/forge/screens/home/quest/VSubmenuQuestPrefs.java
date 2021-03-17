@@ -1,4 +1,16 @@
 package forge.screens.home.quest;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+
 import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.gui.framework.DragCell;
@@ -17,13 +29,6 @@ import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedTextField;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 /**
  * Assembles Swing components of quest preferences submenu singleton.
  *

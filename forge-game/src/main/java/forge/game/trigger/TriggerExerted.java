@@ -1,12 +1,12 @@
 package forge.game.trigger;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class TriggerExerted extends Trigger {
     /**

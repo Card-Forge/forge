@@ -17,6 +17,17 @@
  */
 package forge.gamemodes.quest;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import forge.card.CardEdition;
 import forge.card.CardEdition.CardInSet;
 import forge.card.CardRarity;
@@ -40,9 +51,6 @@ import forge.util.MyRandom;
 import forge.util.NameGenerator;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
-
-import java.text.SimpleDateFormat;
-import java.util.*;
 
 /**
  * <p>

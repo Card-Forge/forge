@@ -1,16 +1,16 @@
 package forge.game.event;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.maps.MapOfLists;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /** 
  * TODO: Write javadoc for this type.

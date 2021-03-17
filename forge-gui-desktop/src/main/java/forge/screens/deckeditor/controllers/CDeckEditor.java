@@ -1,12 +1,14 @@
 package forge.screens.deckeditor.controllers;
 
-import forge.deck.*;
+import java.util.EnumSet;
+
+import forge.deck.CardPool;
+import forge.deck.DeckBase;
+import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
 import forge.screens.match.controllers.CDetailPicture;
-
-import java.util.*;
 
 public abstract class CDeckEditor<TModel extends DeckBase> extends ACEditorBase<PaperCard, TModel> {
     protected CDeckEditor(FScreen screen0, CDetailPicture cDetailPicture0, GameType gameType0) {

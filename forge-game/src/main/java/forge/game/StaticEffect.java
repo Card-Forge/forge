@@ -17,18 +17,17 @@
  */
 package forge.game;
 
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-
-import forge.game.player.Player;
-import forge.game.staticability.StaticAbility;
-
 import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.player.Player;
+import forge.game.staticability.StaticAbility;
 
 /**
  * <p>

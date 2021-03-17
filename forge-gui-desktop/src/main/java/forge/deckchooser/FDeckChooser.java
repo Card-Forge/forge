@@ -8,17 +8,28 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.google.common.base.Predicate;
-import forge.deck.*;
-import forge.game.GameFormat;
-import forge.item.PaperCard;
-import forge.util.Localizer;
-import net.miginfocom.swing.MigLayout;
-
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 
+import forge.deck.ArchetypeDeckGenerator;
+import forge.deck.ColorDeckGenerator;
+import forge.deck.CommanderDeckGenerator;
+import forge.deck.Deck;
+import forge.deck.DeckFormat;
+import forge.deck.DeckProxy;
+import forge.deck.DeckType;
+import forge.deck.DeckgenUtil;
+import forge.deck.NetDeckArchiveBlock;
+import forge.deck.NetDeckArchiveLegacy;
+import forge.deck.NetDeckArchiveModern;
+import forge.deck.NetDeckArchivePioneer;
+import forge.deck.NetDeckArchiveStandard;
+import forge.deck.NetDeckArchiveVintage;
+import forge.deck.NetDeckCategory;
+import forge.deck.RandomDeckGenerator;
+import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.quest.QuestController;
@@ -27,6 +38,7 @@ import forge.gamemodes.quest.QuestEventChallenge;
 import forge.gamemodes.quest.QuestUtil;
 import forge.gui.FThreads;
 import forge.gui.UiCommand;
+import forge.item.PaperCard;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerContainer;
@@ -36,6 +48,8 @@ import forge.model.FModel;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
+import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class FDeckChooser extends JPanel implements IDecksComboBoxListener {

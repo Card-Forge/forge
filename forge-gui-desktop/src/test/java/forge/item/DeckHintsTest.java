@@ -1,14 +1,14 @@
 package forge.item;
 
 import java.io.File;
-import java.util.*;
-
-
-import com.google.common.collect.Iterables;
-import junit.framework.Assert;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import com.google.common.collect.Iterables;
 
 import forge.GuiDesktop;
 import forge.card.CardRarity;
@@ -17,6 +17,7 @@ import forge.card.DeckHints;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
+import junit.framework.Assert;
 
 /**
  * Tests for DeckHints.

@@ -1,13 +1,13 @@
 package forge.deck.generate;
 
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import forge.card.CardDb;
 import forge.deck.CardPool;
 import forge.deck.DeckFormat;
 import forge.deck.generation.DeckGenerator3Color;
 import forge.model.FModel;
-
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 /**
  * Created by IntelliJ IDEA. User: dhudson

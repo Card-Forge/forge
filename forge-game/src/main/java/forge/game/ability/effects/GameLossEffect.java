@@ -1,12 +1,12 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-
-import java.util.List;
 
 public class GameLossEffect extends SpellAbilityEffect {
 

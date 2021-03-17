@@ -1,8 +1,9 @@
 package forge.gamesimulationtests.util.card;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.game.zone.ZoneType;
 import forge.gamesimulationtests.util.player.PlayerSpecification;
-import org.apache.commons.lang3.StringUtils;
 
 public class CardSpecificationBuilder {
 	private final String name;

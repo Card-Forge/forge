@@ -1,10 +1,10 @@
 package forge.gamesimulationtests.util.playeractions;
 
-import forge.gamesimulationtests.util.card.CardSpecification;
-import forge.gamesimulationtests.util.player.PlayerSpecification;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import forge.gamesimulationtests.util.card.CardSpecification;
+import forge.gamesimulationtests.util.player.PlayerSpecification;
 
 public class DeclareAttackersAction extends BasePlayerAction {
 	private final Map<CardSpecification, PlayerSpecification> playerAttackAssignments;

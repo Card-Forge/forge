@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
+
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;

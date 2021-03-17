@@ -17,11 +17,23 @@
  */
 package forge.ai;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+
 import forge.card.CardStateName;
 import forge.game.GameEntity;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
@@ -31,8 +43,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
-
-import java.util.*;
 
 
 /**

@@ -18,13 +18,6 @@
 
 package forge.sound;
 
-import javax.sound.sampled.*;
-
-import com.google.common.io.Files;
-import com.sipgate.mp3wav.Converter;
-
-import forge.localinstance.properties.ForgeConstants;
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -34,6 +27,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.function.Supplier;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+import com.google.common.io.Files;
+import com.sipgate.mp3wav.Converter;
+
+import forge.localinstance.properties.ForgeConstants;
 
 
 /**

@@ -1,10 +1,13 @@
 package forge.game.mana;
 
-import junit.framework.TestCase;
+import static forge.card.MagicColor.COLORLESS;
+import static forge.card.MagicColor.GREEN;
+import static forge.card.MagicColor.RED;
+import static forge.card.MagicColor.WHITE;
 
-import static forge.card.MagicColor.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
+import junit.framework.TestCase;
 
 public class ManaCostBeingPaidTest extends TestCase {
     public void testPayManaViaConvoke() {

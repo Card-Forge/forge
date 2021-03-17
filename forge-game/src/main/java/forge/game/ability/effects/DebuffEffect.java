@@ -1,13 +1,5 @@
 package forge.game.ability.effects;
 
-import forge.GameCommand;
-import forge.card.MagicColor;
-import forge.game.Game;
-import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.keyword.KeywordInterface;
-import forge.game.spellability.SpellAbility;
-
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -15,6 +7,14 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
+
+import forge.GameCommand;
+import forge.card.MagicColor;
+import forge.game.Game;
+import forge.game.ability.SpellAbilityEffect;
+import forge.game.card.Card;
+import forge.game.keyword.KeywordInterface;
+import forge.game.spellability.SpellAbility;
 
 public class DebuffEffect extends SpellAbilityEffect {
 

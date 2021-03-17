@@ -18,6 +18,10 @@
 
 package forge.toolbox;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -39,10 +43,6 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.Localizer;
 import forge.util.Utils;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * A simple class that shows a list of choices in a dialog. Two properties

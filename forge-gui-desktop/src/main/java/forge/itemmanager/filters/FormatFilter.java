@@ -1,14 +1,14 @@
 package forge.itemmanager.filters;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.model.FModel;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 
 public abstract class FormatFilter<T extends InventoryItem> extends ListLabelFilter<T> {

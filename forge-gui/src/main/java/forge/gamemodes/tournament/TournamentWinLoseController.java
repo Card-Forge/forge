@@ -1,7 +1,10 @@
 package forge.gamemodes.tournament;
 
 
+import java.util.List;
+
 import com.google.common.collect.Lists;
+
 import forge.LobbyPlayer;
 import forge.deck.Deck;
 import forge.game.GameView;
@@ -12,8 +15,6 @@ import forge.localinstance.assets.FSkinProp;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Localizer;
-
-import java.util.List;
 
 abstract public class TournamentWinLoseController {
     private final Localizer localizer = Localizer.getInstance();

@@ -17,12 +17,12 @@
  */
 package forge.game.cost;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Class CostDraw.

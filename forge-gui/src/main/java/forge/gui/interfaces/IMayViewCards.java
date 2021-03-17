@@ -1,5 +1,6 @@
 package forge.gui.interfaces;
 
+import forge.game.card.Card;
 import forge.game.card.CardView;
 
 /**

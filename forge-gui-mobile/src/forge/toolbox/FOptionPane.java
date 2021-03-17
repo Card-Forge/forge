@@ -2,13 +2,11 @@ package forge.toolbox;
 
 import java.util.List;
 
-import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Input.Keys;
-
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
 
 import forge.Forge;
@@ -25,6 +23,7 @@ import forge.localinstance.assets.FSkinProp;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
+import forge.util.Localizer;
 import forge.util.Utils;
 import forge.util.WaitCallback;
 

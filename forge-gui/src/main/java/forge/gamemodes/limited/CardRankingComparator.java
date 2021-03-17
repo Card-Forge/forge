@@ -1,9 +1,10 @@
 package forge.gamemodes.limited;
 
-import forge.item.PaperCard;
+import java.util.Comparator;
+
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.Comparator;
+import forge.item.PaperCard;
 
 /**
  * Sorts cards by rank.

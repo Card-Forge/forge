@@ -17,6 +17,8 @@
  */
 package forge.gamemodes.match.input;
 
+import java.util.List;
+
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
@@ -31,10 +33,8 @@ import forge.gui.FThreads;
 import forge.gui.events.UiEventBlockerAssigned;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
-import forge.util.ThreadUtil;
 import forge.util.Localizer;
-
-import java.util.List;
+import forge.util.ThreadUtil;
 
 /**
  * <p>

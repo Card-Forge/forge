@@ -1,5 +1,12 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Maps;
+
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
@@ -12,16 +19,9 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
-import forge.util.collect.FCollectionView;
-import forge.util.Localizer;
 import forge.util.CardTranslation;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Maps;
-
-import java.util.List;
-import java.util.Map;
+import forge.util.Localizer;
+import forge.util.collect.FCollectionView;
 
 public class ChangeCombatantsEffect extends SpellAbilityEffect {
 

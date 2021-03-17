@@ -1,8 +1,8 @@
 package forge.gui;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.FontMetrics;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -36,8 +36,8 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FPanel;
 import forge.toolbox.FScrollPane;
-import forge.view.FDialog;
 import forge.util.Localizer;
+import forge.view.FDialog;
 
 // An input box for handling the order of choices.
 // Left box has the original choices

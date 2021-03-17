@@ -2,23 +2,23 @@ package forge.deck;
 
 import java.util.List;
 
-import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.assets.FImage;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
-import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManager.ContextMenuBuilder;
+import forge.itemmanager.ItemManagerConfig;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FDialog;
 import forge.toolbox.FEvent;
-import forge.toolbox.GuiChoose;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.GuiChoose;
 import forge.util.Callback;
+import forge.util.Localizer;
 
 public class FSideboardDialog extends FDialog {
     private final SideboardTabs tabs;

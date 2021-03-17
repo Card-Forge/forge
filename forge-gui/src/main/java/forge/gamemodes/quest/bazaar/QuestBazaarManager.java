@@ -32,9 +32,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import com.thoughtworks.xstream.security.NoTypePermission;
-import com.thoughtworks.xstream.security.NullPermission;
-import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -43,6 +40,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.security.NoTypePermission;
+import com.thoughtworks.xstream.security.NullPermission;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.data.QuestAssets;

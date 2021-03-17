@@ -1,14 +1,15 @@
 package forge.deck;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import forge.card.CardEdition;
 import forge.deck.io.Archetype;
 import forge.game.GameFormat;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by maustin on 09/05/2017.

@@ -1,16 +1,16 @@
 package forge;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import com.google.common.cache.CacheLoader;
 
 import forge.gui.error.BugReporter;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-
-import javax.imageio.ImageIO;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 final class ImageLoader extends CacheLoader<String, BufferedImage> {
     @Override

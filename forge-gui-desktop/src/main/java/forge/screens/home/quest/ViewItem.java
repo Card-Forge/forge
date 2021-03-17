@@ -1,5 +1,9 @@
 package forge.screens.home.quest;
 
+import java.awt.Font;
+
+import javax.swing.SwingUtilities;
+
 import forge.gamemodes.quest.QuestUtil;
 import forge.gamemodes.quest.bazaar.IQuestBazaarItem;
 import forge.gamemodes.quest.data.QuestAssets;
@@ -14,10 +18,6 @@ import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.*;
 
 /** An update-able panel instance representing a single item. */
 @SuppressWarnings("serial")

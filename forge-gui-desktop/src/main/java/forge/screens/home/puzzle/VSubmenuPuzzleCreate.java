@@ -1,5 +1,10 @@
 package forge.screens.home.puzzle;
 
+import java.awt.Font;
+
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LocalLobby;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
@@ -7,13 +12,14 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.interfaces.IPlayerChangeListener;
-import forge.screens.home.*;
+import forge.screens.home.EMenuGroup;
+import forge.screens.home.IVSubmenu;
+import forge.screens.home.StartButton;
+import forge.screens.home.VHomeUI;
+import forge.screens.home.VLobby;
 import forge.toolbox.FLabel;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import java.awt.*;
 
 public enum VSubmenuPuzzleCreate implements IVSubmenu<CSubmenuPuzzleCreate> {
     SINGLETON_INSTANCE;

@@ -17,6 +17,15 @@
  */
 package forge.view.arcane;
 
+import java.awt.event.MouseEvent;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.ScrollPaneConstants;
+import javax.swing.WindowConstants;
+
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -29,13 +38,6 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
-
-import javax.swing.*;
-import java.awt.event.MouseEvent;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
 
 public class FloatingZone extends FloatingCardArea {
     private static final long serialVersionUID = 1927906492186378596L;

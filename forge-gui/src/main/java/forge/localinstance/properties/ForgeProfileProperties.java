@@ -23,13 +23,13 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
 
-import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.gui.GuiBase;
 import forge.util.FileSection;
 import forge.util.FileUtil;
+import forge.util.TextUtil;
 
 /**
  * Determines the user data and cache dirs, first looking at the specified file for overrides

@@ -2,8 +2,8 @@ package forge.gamemodes.net;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
+import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.client.ClientGameLobby;
 import forge.gamemodes.net.client.FGameClient;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
@@ -20,8 +20,8 @@ import forge.interfaces.ILobbyListener;
 import forge.interfaces.IPlayerChangeListener;
 import forge.interfaces.IUpdateable;
 import forge.localinstance.properties.ForgeConstants;
-import forge.localinstance.properties.ForgeProfileProperties;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.properties.ForgeProfileProperties;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Localizer;

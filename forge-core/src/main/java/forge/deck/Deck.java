@@ -17,6 +17,16 @@
  */
 package forge.deck;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.EnumMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
+
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
@@ -24,9 +34,6 @@ import forge.StaticData;
 import forge.card.CardDb;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
-
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * <p>

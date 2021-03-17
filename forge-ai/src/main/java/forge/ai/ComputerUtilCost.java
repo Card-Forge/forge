@@ -1,16 +1,41 @@
 package forge.ai;
 
+import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+
 import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CardUtil;
+import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
 import forge.game.combat.Combat;
-import forge.game.cost.*;
+import forge.game.cost.Cost;
+import forge.game.cost.CostDamage;
+import forge.game.cost.CostDiscard;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostPayLife;
+import forge.game.cost.CostPayment;
+import forge.game.cost.CostPutCounter;
+import forge.game.cost.CostRemoveAnyCounter;
+import forge.game.cost.CostRemoveCounter;
+import forge.game.cost.CostSacrifice;
+import forge.game.cost.CostTapType;
+import forge.game.cost.PaymentDecision;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
@@ -19,12 +44,6 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.List;
-import java.util.Set;
 
 
 public class ComputerUtilCost {

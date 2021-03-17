@@ -17,9 +17,16 @@
  */
 package forge.game.staticability;
 
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import forge.card.MagicColor;
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -44,12 +51,6 @@ import forge.util.CardTranslation;
 import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.TextUtil;
-
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
 
 /**
  * The Class StaticAbility.

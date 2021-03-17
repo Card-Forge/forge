@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import java.util.Arrays;
 import java.util.List;
 
-import forge.game.card.*;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import com.google.common.collect.Iterables;
@@ -16,6 +15,11 @@ import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardUtil;
+import forge.game.card.CardZoneTable;
+import forge.game.card.CounterType;
 import forge.game.card.token.TokenInfo;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;

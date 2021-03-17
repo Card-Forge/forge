@@ -1,5 +1,13 @@
 package forge.screens.home.gauntlet;
 
+import java.awt.Color;
+
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+
 import forge.deckchooser.FDeckChooser;
 import forge.game.GameType;
 import forge.gamemodes.gauntlet.GauntletIO;
@@ -10,13 +18,13 @@ import forge.localinstance.assets.FSkinProp;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
-import forge.toolbox.*;
+import forge.toolbox.FLabel;
+import forge.toolbox.FList;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
+import forge.toolbox.FTextField;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.*;
 
 /** 
  * Assembles Swing components of "build gauntlet" submenu singleton.

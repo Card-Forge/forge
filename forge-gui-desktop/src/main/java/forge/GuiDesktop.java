@@ -1,5 +1,24 @@
 package forge;
 
+import java.awt.Desktop;
+import java.awt.Graphics2D;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Collection;
+import java.util.List;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.SwingUtilities;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Function;
 
 import forge.download.GuiDownloader;
@@ -21,24 +40,20 @@ import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorQuestCardShop;
 import forge.screens.match.CMatchUI;
-import forge.sound.*;
+import forge.sound.AltSoundSystem;
+import forge.sound.AudioClip;
+import forge.sound.AudioMusic;
+import forge.sound.IAudioClip;
+import forge.sound.IAudioMusic;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
-import forge.util.*;
-import org.apache.commons.lang3.StringUtils;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Collection;
-import java.util.List;
+import forge.util.BuildInfo;
+import forge.util.Callback;
+import forge.util.FileUtil;
+import forge.util.ImageFetcher;
+import forge.util.OperatingSystem;
+import forge.util.SwingImageFetcher;
 
 public class GuiDesktop implements IGuiBase {
     private ImageFetcher imageFetcher = new SwingImageFetcher();

@@ -4,13 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import forge.util.Callback;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.NameGenerator;
-import forge.util.TextUtil;
-import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -39,12 +34,18 @@ import forge.model.FModel;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
 import forge.toolbox.FToggleSwitch;
-import forge.toolbox.FEvent.FEventHandler;
+import forge.util.Callback;
+import forge.util.Lang;
+import forge.util.Localizer;
+import forge.util.NameGenerator;
+import forge.util.TextUtil;
+import forge.util.Utils;
 
 public class PlayerPanel extends FContainer {
     private static final ForgePreferences prefs = FModel.getPreferences();

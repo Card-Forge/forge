@@ -41,10 +41,12 @@ import java.util.concurrent.Future;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import forge.util.BuildInfo;
 import org.apache.commons.lang3.time.StopWatch;
+
 import com.google.common.io.Files;
+
 import forge.card.CardRules;
+import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.ThreadUtil;

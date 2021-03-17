@@ -17,8 +17,6 @@
  */
 package forge.util;
 
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -30,6 +28,9 @@ import java.util.TreeMap;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
 
 /**
  * TODO: Write javadoc for this type.

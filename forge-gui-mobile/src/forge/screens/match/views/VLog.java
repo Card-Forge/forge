@@ -6,9 +6,9 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
-import forge.assets.FSkinColor.Colors;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.localinstance.properties.ForgePreferences.FPref;

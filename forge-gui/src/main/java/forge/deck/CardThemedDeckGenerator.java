@@ -1,12 +1,12 @@
 package forge.deck;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.item.PaperCard;
 import forge.model.FModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by maustin on 09/05/2017.

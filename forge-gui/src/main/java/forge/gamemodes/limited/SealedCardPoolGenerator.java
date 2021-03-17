@@ -17,7 +17,18 @@
  */
 package forge.gamemodes.limited;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Stack;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.collect.Lists;
+
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.MagicColor;
@@ -38,19 +49,10 @@ import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.model.UnOpenedMeta;
 import forge.util.FileUtil;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
-import forge.util.Localizer;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Stack;
 
 /**
  * <p>

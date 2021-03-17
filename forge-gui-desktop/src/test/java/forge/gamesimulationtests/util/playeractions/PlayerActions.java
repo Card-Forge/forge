@@ -1,14 +1,15 @@
 package forge.gamesimulationtests.util.playeractions;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
 import forge.gamesimulationtests.util.playeractions.testactions.TestAction;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 
 public class PlayerActions {
 	private final List<BasePlayerAction> playerActions;

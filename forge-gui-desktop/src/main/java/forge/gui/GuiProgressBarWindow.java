@@ -17,11 +17,13 @@
  */
 package forge.gui;
 
-import forge.view.FDialog;
+import java.awt.Dimension;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+
+import forge.view.FDialog;
 
 /**
  * <p>

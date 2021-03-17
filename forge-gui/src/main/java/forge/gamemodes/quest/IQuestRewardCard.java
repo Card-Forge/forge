@@ -1,9 +1,9 @@
 package forge.gamemodes.quest;
 
+import java.util.List;
+
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
-
-import java.util.List;
 
 /** 
  * Various card rewards that may be awarded during the Quest.

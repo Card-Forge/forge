@@ -6,10 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import forge.util.TextUtil;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import forge.model.FModel;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -20,8 +18,10 @@ import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
+import forge.util.TextUtil;
 
 
 public final class InputSelectCardsForConvokeOrImprovise extends InputSelectManyBase<Card> {

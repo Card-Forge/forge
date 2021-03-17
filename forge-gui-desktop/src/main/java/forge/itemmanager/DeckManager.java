@@ -4,7 +4,9 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JMenu;
@@ -12,13 +14,10 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import forge.deck.Deck;
-import forge.screens.deckeditor.controllers.CEditorConstructed;
-import forge.screens.home.quest.DialogChooseFormats;
-import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
+import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
@@ -47,12 +46,15 @@ import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.controllers.ACEditorBase;
+import forge.screens.deckeditor.controllers.CEditorConstructed;
 import forge.screens.deckeditor.controllers.CEditorLimited;
 import forge.screens.deckeditor.controllers.CEditorQuest;
+import forge.screens.home.quest.DialogChooseFormats;
 import forge.screens.home.quest.DialogChooseSets;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+import forge.util.Localizer;
 
 /**
  * ItemManager for decks

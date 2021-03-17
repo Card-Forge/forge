@@ -19,12 +19,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.LayerUI;
 
-import net.miginfocom.swing.MigLayout;
 import forge.gui.MouseUtil;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinnedTextArea;
+import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class GameLogPanel extends JPanel {

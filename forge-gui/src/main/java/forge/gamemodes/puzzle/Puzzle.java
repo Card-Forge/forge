@@ -1,6 +1,12 @@
 package forge.gamemodes.puzzle;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.collect.Sets;
+
 import forge.ai.GameState;
 import forge.game.Game;
 import forge.game.GameType;
@@ -15,11 +21,6 @@ import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzle> {
     String name;

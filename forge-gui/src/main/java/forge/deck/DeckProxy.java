@@ -6,10 +6,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
-import forge.card.CardSplitType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
@@ -21,6 +20,7 @@ import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.card.CardSplitType;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;

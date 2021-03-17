@@ -24,7 +24,6 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import net.miginfocom.swing.MigLayout;
 import forge.gui.SOverlayUtils;
 import forge.gui.UiCommand;
 import forge.gui.download.GuiDownloadService;
@@ -39,6 +38,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FTextField;
 import forge.toolbox.JXButtonPanel;
 import forge.util.Callback;
+import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class GuiDownloader extends DefaultBoundedRangeModel {

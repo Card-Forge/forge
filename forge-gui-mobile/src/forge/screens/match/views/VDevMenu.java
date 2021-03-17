@@ -6,8 +6,8 @@ import forge.menu.FMenuItem;
 import forge.screens.match.MatchController;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.ThreadUtil;
 import forge.util.Localizer;
+import forge.util.ThreadUtil;
 
 public class VDevMenu extends FDropDownMenu {
     @Override

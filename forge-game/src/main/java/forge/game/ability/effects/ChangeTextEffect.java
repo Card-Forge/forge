@@ -13,8 +13,8 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.spellability.SpellAbility;
-import forge.util.TextUtil;
 import forge.util.Localizer;
+import forge.util.TextUtil;
 
 public class ChangeTextEffect extends SpellAbilityEffect {
 

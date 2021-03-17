@@ -1,8 +1,8 @@
 package forge.view.arcane.util;
 
-import forge.view.arcane.CardPanel;
-
 import java.awt.event.MouseEvent;
+
+import forge.view.arcane.CardPanel;
 
 public abstract class CardPanelMouseAdapter implements CardPanelMouseListener {
     @Override

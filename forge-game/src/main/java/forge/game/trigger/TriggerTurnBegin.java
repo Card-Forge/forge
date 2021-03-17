@@ -1,11 +1,11 @@
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 // Turn Begin isn't a "real" trigger, but is useful for Advanced Scripting Techniques
 public class TriggerTurnBegin extends Trigger {

@@ -1,7 +1,14 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
-import forge.ai.*;
+
+import forge.ai.AiController;
+import forge.ai.AiProps;
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCombat;
+import forge.ai.ComputerUtilCost;
+import forge.ai.PlayerControllerAi;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.ApiType;

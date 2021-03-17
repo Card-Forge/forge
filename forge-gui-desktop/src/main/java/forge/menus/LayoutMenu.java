@@ -24,9 +24,9 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedMenuItem;
+import forge.util.Localizer;
 import forge.view.FFrame;
 import forge.view.FView;
-import forge.util.Localizer;
 
 /**
  * Returns a JMenu containing options associated with game screen layout.

@@ -1,6 +1,9 @@
 package forge.game;
 
+import java.util.List;
+
 import com.google.common.collect.Iterables;
+
 import forge.LobbyPlayer;
 import forge.deck.Deck;
 import forge.game.GameOutcome.AnteResult;
@@ -18,8 +21,6 @@ import forge.game.zone.MagicStack;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.util.collect.FCollectionView;
-
-import java.util.List;
 
 public class GameView extends TrackableObject {
     private static final long serialVersionUID = 8522884512960961528L;

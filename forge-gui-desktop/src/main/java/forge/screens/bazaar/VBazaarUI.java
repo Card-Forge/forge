@@ -1,5 +1,10 @@
 package forge.screens.bazaar;
 
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
+
 import forge.gamemodes.quest.bazaar.QuestBazaarManager;
 import forge.gui.GuiBase;
 import forge.gui.UiCommand;
@@ -14,9 +19,6 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.view.FView;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.border.Border;
 
 
 /** Lays out containers and borders for resizeable layout and

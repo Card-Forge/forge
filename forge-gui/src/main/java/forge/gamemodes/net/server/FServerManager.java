@@ -1,5 +1,30 @@
 package forge.gamemodes.net.server;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.DatagramSocket;
+import java.net.Inet4Address;
+import java.net.Inet6Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.URL;
+import java.net.UnknownHostException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.Map;
+
+import org.fourthline.cling.UpnpService;
+import org.fourthline.cling.UpnpServiceImpl;
+import org.fourthline.cling.support.igd.PortMappingListener;
+import org.fourthline.cling.support.model.PortMapping;
+
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
+
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.CompatibleObjectDecoder;
@@ -28,24 +53,6 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Map;
-
-import org.fourthline.cling.UpnpService;
-import org.fourthline.cling.UpnpServiceImpl;
-import org.fourthline.cling.support.igd.PortMappingListener;
-import org.fourthline.cling.support.model.PortMapping;
-
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 
 public final class FServerManager {
     private static FServerManager instance = null;

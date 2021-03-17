@@ -7,8 +7,8 @@ import forge.card.CardImage;
 import forge.card.CardListPreview;
 import forge.gamemodes.planarconquest.ConquestController;
 import forge.gamemodes.planarconquest.ConquestData;
-import forge.gamemodes.planarconquest.ConquestUtil;
 import forge.gamemodes.planarconquest.ConquestPreferences.CQPref;
+import forge.gamemodes.planarconquest.ConquestUtil;
 import forge.gui.FThreads;
 import forge.item.PaperCard;
 import forge.localinstance.achievements.PlaneswalkerAchievements;
@@ -19,8 +19,8 @@ import forge.screens.home.NewGameMenu;
 import forge.screens.planarconquest.ConquestMenu.LaunchReason;
 import forge.toolbox.FChoiceList;
 import forge.toolbox.FOptionPane;
-import forge.util.ThreadUtil;
 import forge.util.Localizer;
+import forge.util.ThreadUtil;
 
 public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenModel> {
     private static final float PADDING = FOptionPane.PADDING;

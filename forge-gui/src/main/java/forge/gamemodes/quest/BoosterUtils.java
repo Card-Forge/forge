@@ -17,6 +17,15 @@
  */
 package forge.gamemodes.quest;
 
+import static forge.gamemodes.quest.QuestUtilCards.isLegalInQuestFormat;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -29,18 +38,16 @@ import forge.card.MagicColor;
 import forge.card.PrintSheet;
 import forge.game.GameFormat;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
-import forge.gui.card.*;
-import forge.item.*;
+import forge.item.BoosterPack;
+import forge.item.IPaperCard;
 import forge.item.IPaperCard.Predicates.Presets;
+import forge.item.InventoryItem;
+import forge.item.PaperCard;
+import forge.item.TournamentPack;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.PredicateString.StringOp;
-import org.apache.commons.lang3.StringUtils;
-
-import static forge.gamemodes.quest.QuestUtilCards.isLegalInQuestFormat;
-
-import java.util.*;
 
 /**
  * <p>

@@ -17,15 +17,34 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import java.awt.Toolkit;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.Map.Entry;
+
+import javax.swing.JMenu;
+import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.deck.*;
+import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckBase;
+import forge.deck.DeckFormat;
+import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
-import forge.gui.framework.*;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.FScreen;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
+import forge.gui.framework.SRearrangingUtil;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
@@ -48,13 +67,6 @@ import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.view.FView;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.util.List;
-import java.util.Map.Entry;
 
 /**
  * Maintains a generically typed architecture for various editing

@@ -28,8 +28,8 @@ import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
 import forge.toolbox.FOverlay;
 import forge.util.Localizer;
-import forge.util.collect.FCollectionView;
 import forge.util.Utils;
+import forge.util.collect.FCollectionView;
 
 public class CardZoom extends FOverlay {
     private static final float REQ_AMOUNT = Utils.AVG_FINGER_WIDTH;

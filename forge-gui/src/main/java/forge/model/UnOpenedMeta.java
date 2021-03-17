@@ -18,14 +18,14 @@
 
 package forge.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.gui.util.SGuiChoose;
 import forge.item.PaperCard;
 import forge.item.generation.IUnOpenedProduct;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /** 
  * This type extends UnOpenedProduct to support booster choice or random boosters

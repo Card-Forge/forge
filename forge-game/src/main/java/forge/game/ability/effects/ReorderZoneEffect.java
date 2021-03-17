@@ -1,5 +1,8 @@
 package forge.game.ability.effects;
 
+import java.util.Collections;
+import java.util.List;
+
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.CardCollection;
 import forge.game.player.Player;
@@ -8,9 +11,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.MyRandom;
-
-import java.util.Collections;
-import java.util.List;
 
 public class ReorderZoneEffect extends SpellAbilityEffect {
     @Override

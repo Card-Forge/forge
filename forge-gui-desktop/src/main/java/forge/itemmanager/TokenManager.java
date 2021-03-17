@@ -1,11 +1,11 @@
 package forge.itemmanager;
 
+import javax.swing.JMenu;
+
 import forge.item.PaperToken;
 import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.filters.TokenSearchFilter;
 import forge.screens.match.controllers.CDetailPicture;
-
-import javax.swing.*;
 
 public class TokenManager extends ItemManager<PaperToken> {
     public TokenManager(final CDetailPicture cDetailPicture, final boolean wantUnique0) {

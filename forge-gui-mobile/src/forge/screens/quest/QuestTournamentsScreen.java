@@ -1,5 +1,7 @@
 package forge.screens.quest;
 
+import java.util.Arrays;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
@@ -17,9 +19,9 @@ import forge.deck.FDeckEditor.EditorType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.quest.IQuestTournamentView;
 import forge.gamemodes.quest.QuestDraftUtils;
+import forge.gamemodes.quest.QuestDraftUtils.Mode;
 import forge.gamemodes.quest.QuestEventDraft;
 import forge.gamemodes.quest.QuestTournamentController;
-import forge.gamemodes.quest.QuestDraftUtils.Mode;
 import forge.gamemodes.quest.data.QuestEventDraftContainer;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -33,12 +35,11 @@ import forge.screens.limited.DraftingProcessScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
-import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
-import forge.util.Utils;
+import forge.toolbox.FTextField;
 import forge.util.Localizer;
-import java.util.Arrays;
+import forge.util.Utils;
 
 public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestTournamentView {
     //Select Tournament panel

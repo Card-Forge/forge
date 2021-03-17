@@ -17,6 +17,24 @@
  */
 package forge.view;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+
 import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -24,12 +42,6 @@ import forge.toolbox.FProgressBar;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.FSkin.SkinnedLabel;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
 
 /**
  * Shows the splash frame as the application starts.

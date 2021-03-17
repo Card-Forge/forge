@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import net.miginfocom.swing.MigLayout;
 import forge.deck.DeckBase;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -24,6 +23,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Assembles Swing components of deck editor analysis tab.

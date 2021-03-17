@@ -1,11 +1,18 @@
 package forge;
 
+import java.io.File;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
+
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Clipboard;
+
 import forge.animation.ForgeAnimation;
 import forge.assets.AssetsDownloader;
 import forge.assets.FSkin;
@@ -37,12 +44,6 @@ import forge.util.CardTranslation;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.Utils;
-
-import java.io.File;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
 
 public class Forge implements ApplicationListener {
     public static final String CURRENT_VERSION = "1.6.39.001";

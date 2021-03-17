@@ -1,20 +1,20 @@
 package forge.screens.deckeditor;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.ImmutableList;
+
 import forge.Singletons;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.gui.framework.FScreen;
+import forge.model.FModel;
 import forge.screens.deckeditor.controllers.CAllDecks;
 import forge.screens.deckeditor.controllers.DeckController;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.ImmutableList;
-import forge.model.FModel;
 
 /** 
  * Handles editor preferences saving and loading.

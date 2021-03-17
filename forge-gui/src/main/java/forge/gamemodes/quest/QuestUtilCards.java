@@ -17,6 +17,14 @@
  */
 package forge.gamemodes.quest;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -37,9 +45,16 @@ import forge.gamemodes.quest.data.QuestAssets;
 import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gamemodes.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
-import forge.gui.card.*;
-import forge.item.*;
+import forge.item.BoosterBox;
+import forge.item.BoosterPack;
+import forge.item.FatPack;
+import forge.item.IPaperCard;
+import forge.item.InventoryItem;
+import forge.item.PaperCard;
+import forge.item.PreconDeck;
+import forge.item.SealedProduct;
 import forge.item.SealedProduct.Template;
+import forge.item.TournamentPack;
 import forge.item.generation.BoosterSlots;
 import forge.item.generation.UnOpenedProduct;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -47,13 +62,6 @@ import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map.Entry;
 
 /**
  * This is a helper class to execute operations on QuestData. It has been

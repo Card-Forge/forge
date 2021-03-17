@@ -18,7 +18,12 @@
 package forge.card;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
 import com.google.common.collect.UnmodifiableIterator;
 

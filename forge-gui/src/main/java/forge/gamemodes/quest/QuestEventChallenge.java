@@ -17,11 +17,12 @@
  */
 package forge.gamemodes.quest;
 
-import com.google.common.base.Function;
-import forge.deck.Deck;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.common.base.Function;
+
+import forge.deck.Deck;
 
 /**
  * <p>

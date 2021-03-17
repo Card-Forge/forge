@@ -17,7 +17,16 @@
  */
 package forge.game.card;
 
-import com.google.common.collect.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
+
 import forge.ImageKeys;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -30,16 +39,14 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.player.Player;
-import forge.game.spellability.*;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public final class CardUtil {
     // disable instantiation

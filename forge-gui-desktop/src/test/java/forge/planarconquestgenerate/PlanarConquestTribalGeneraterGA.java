@@ -1,5 +1,9 @@
 package forge.planarconquestgenerate;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -8,7 +12,9 @@ import com.google.common.collect.Lists;
 import forge.GuiDesktop;
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
-import forge.deck.*;
+import forge.deck.CardArchetypeLDAGenerator;
+import forge.deck.Deck;
+import forge.deck.DeckFormat;
 import forge.deck.io.DeckStorage;
 import forge.game.GameFormat;
 import forge.game.GameRules;
@@ -19,10 +25,6 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PlanarConquestTribalGeneraterGA extends PlanarConquestGeneraterGA {
 

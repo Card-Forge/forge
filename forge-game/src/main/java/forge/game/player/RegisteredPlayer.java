@@ -1,5 +1,12 @@
 package forge.game.player;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
+import com.google.common.collect.Lists;
+
 import forge.LobbyPlayer;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -7,13 +14,6 @@ import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-
-import com.google.common.collect.Lists;
 
 public class RegisteredPlayer {
     private final Deck originalDeck; // never return or modify this instance (it's a reference to game resources)

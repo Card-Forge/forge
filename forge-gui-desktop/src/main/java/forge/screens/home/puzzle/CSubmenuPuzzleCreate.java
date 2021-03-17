@@ -1,5 +1,15 @@
 package forge.screens.home.puzzle;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.JMenu;
+import javax.swing.SwingUtilities;
+
 import com.google.common.collect.Maps;
 
 import forge.deck.Deck;
@@ -17,14 +27,6 @@ import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
 import forge.player.GamePlayerUtil;
 import forge.util.Localizer;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 public enum CSubmenuPuzzleCreate implements ICDoc, IMenuProvider {
     SINGLETON_INSTANCE;

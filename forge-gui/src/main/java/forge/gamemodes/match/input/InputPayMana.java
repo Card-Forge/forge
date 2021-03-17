@@ -1,11 +1,12 @@
 package forge.gamemodes.match.input;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
-import forge.game.spellability.SpellAbilityView;
-import forge.gui.FThreads;
-import forge.gui.GuiBase;
-import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
@@ -23,11 +24,15 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityView;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.player.HumanPlay;
 import forge.player.PlayerControllerHuman;
 import forge.util.Evaluator;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
+import forge.util.TextUtil;
 
 public abstract class InputPayMana extends InputSyncronizedBase {
     private static final long serialVersionUID = 718128600948280315L;

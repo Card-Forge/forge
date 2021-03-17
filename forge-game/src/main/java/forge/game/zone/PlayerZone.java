@@ -19,6 +19,7 @@ package forge.game.zone;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;

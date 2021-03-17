@@ -17,13 +17,14 @@
  */
 package forge.game.spellability;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 import com.google.common.collect.Sets;
+
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
-
-import java.util.EnumSet;
-import java.util.Set;
 
 /**
  * <p>

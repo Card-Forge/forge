@@ -1,5 +1,12 @@
 package forge.game.ability.effects;
 
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.GameCommand;
 import forge.ImageKeys;
 import forge.game.Game;
@@ -21,13 +28,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 

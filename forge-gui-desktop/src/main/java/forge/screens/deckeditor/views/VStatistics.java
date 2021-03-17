@@ -4,7 +4,6 @@ import java.awt.Font;
 
 import javax.swing.JPanel;
 
-import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -16,6 +15,7 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Assembles Swing components of deck editor analysis tab.

@@ -18,6 +18,7 @@
 package forge.util;
 
 import com.google.common.base.Predicate;
+
 import forge.item.PaperCard;
 
 /**

@@ -1,9 +1,21 @@
 package forge.screens.home.quest;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
-import forge.gamemodes.quest.*;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestMode;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gamemodes.quest.QuestWorld;
+import forge.gamemodes.quest.StartingPoolPreferences;
+import forge.gamemodes.quest.StartingPoolType;
 import forge.gamemodes.quest.data.DeckConstructionRules;
 import forge.gamemodes.quest.data.GameFormatQuest;
 import forge.gamemodes.quest.data.QuestData;
@@ -15,8 +27,6 @@ import forge.model.FModel;
 import forge.screens.home.CHomeUI;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
-
-import java.util.*;
 
 /**
  * Controls the quest data submenu in the home UI.

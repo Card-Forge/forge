@@ -17,15 +17,15 @@
  */
 package forge.game.cost;
 
+import java.io.Serializable;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.game.CardTraitBase;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.io.Serializable;
 
 /**
  * The Class CostPart.

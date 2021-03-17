@@ -23,16 +23,18 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import com.google.common.collect.ImmutableList;
-
 import com.google.common.collect.Iterables;
+
 import forge.ImageCache;
 import forge.StaticData;
 import forge.card.CardEdition;
@@ -53,12 +55,10 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
-import forge.toolbox.FTextField;
 import forge.toolbox.FSkin.SkinnedPanel;
-import forge.view.arcane.CardPanel;
+import forge.toolbox.FTextField;
 import forge.util.Localizer;
-import java.awt.event.MouseEvent;
-import java.util.Map;
+import forge.view.arcane.CardPanel;
 
 
 @SuppressWarnings("serial")

@@ -1,5 +1,12 @@
 package forge.gamemodes.tournament;
 
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import forge.deck.Deck;
@@ -8,13 +15,6 @@ import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
-
-import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class TournamentData {
     @XStreamOmitField

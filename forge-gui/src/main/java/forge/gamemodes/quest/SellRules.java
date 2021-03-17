@@ -17,10 +17,10 @@
  */
 package forge.gamemodes.quest;
 
+import java.util.List;
+
 import forge.gamemodes.quest.data.QuestAchievements;
 import forge.util.FileSection;
-
-import java.util.List;
 
 /** 
  * TODO: Write javadoc for this type.

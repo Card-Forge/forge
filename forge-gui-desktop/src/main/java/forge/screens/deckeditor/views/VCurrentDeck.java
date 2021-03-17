@@ -3,8 +3,6 @@ package forge.screens.deckeditor.views;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import forge.util.Localizer;
-import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -17,6 +15,8 @@ import forge.screens.deckeditor.controllers.CCurrentDeck;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextField;
+import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Assembles Swing components of current deck being edited in deck editor.

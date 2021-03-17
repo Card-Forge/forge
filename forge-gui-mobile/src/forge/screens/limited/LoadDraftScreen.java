@@ -1,15 +1,11 @@
 package forge.screens.limited;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
-import forge.screens.LaunchScreen;
-import forge.screens.LoadingOverlay;
-import forge.screens.home.LoadGameMenu;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
 import forge.assets.FSkinFont;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -30,11 +26,15 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
+import forge.screens.LaunchScreen;
+import forge.screens.LoadingOverlay;
+import forge.screens.home.LoadGameMenu;
 import forge.toolbox.FComboBox;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LoadDraftScreen extends LaunchScreen {
     private final DeckManager lstDecks = add(new DeckManager(GameType.Draft));

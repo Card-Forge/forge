@@ -17,6 +17,11 @@
  */
 package forge.gamemodes.quest;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import forge.deck.CardArchetypeLDAGenerator;
 import forge.deck.io.Archetype;
 import forge.game.GameFormat;
@@ -28,10 +33,6 @@ import forge.util.CollectionSuppliers;
 import forge.util.MyRandom;
 import forge.util.maps.EnumMapOfLists;
 import forge.util.maps.MapOfLists;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * QuestEventManager.

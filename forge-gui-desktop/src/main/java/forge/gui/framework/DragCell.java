@@ -13,8 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import net.miginfocom.swing.MigLayout;
-
 import com.google.common.collect.Lists;
 
 import forge.localinstance.assets.FSkinProp;
@@ -25,6 +23,7 @@ import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.view.FView;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Top-level container in drag layout.  A cell holds

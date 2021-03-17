@@ -1,5 +1,11 @@
 package forge.gamemodes.planarconquest;
 
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -10,18 +16,22 @@ import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.CardType;
+import forge.card.CardType.CoreType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.card.CardType.CoreType;
 import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
-import forge.deck.generation.*;
+import forge.deck.generation.DeckGenerator2Color;
+import forge.deck.generation.DeckGenerator3Color;
+import forge.deck.generation.DeckGenerator5Color;
+import forge.deck.generation.DeckGeneratorBase;
+import forge.deck.generation.DeckGeneratorMonoColor;
+import forge.deck.generation.IDeckGenPool;
 import forge.gamemodes.planarconquest.ConquestPreferences.CQPref;
 import forge.gamemodes.quest.QuestUtil;
-import forge.gui.card.*;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.localinstance.assets.FSkinProp;
@@ -31,12 +41,6 @@ import forge.model.FModel;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.MyRandom;
-
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 public class ConquestUtil {
     private ConquestUtil() {}

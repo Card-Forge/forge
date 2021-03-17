@@ -1,16 +1,17 @@
 package forge.gamemodes.limited;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.google.common.collect.Iterables;
+
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Deck builder for Sealed Deck Format.

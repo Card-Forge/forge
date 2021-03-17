@@ -17,15 +17,46 @@
  */
 package forge.gamemodes.quest.io;
 
-import com.thoughtworks.xstream.security.NoTypePermission;
-import com.thoughtworks.xstream.security.NullPermission;
-import com.thoughtworks.xstream.security.PrimitiveTypePermission;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StringReader;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.apache.commons.lang3.StringUtils;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.security.NoTypePermission;
+import com.thoughtworks.xstream.security.NullPermission;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
+
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -35,29 +66,29 @@ import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestEventDraft;
 import forge.gamemodes.quest.QuestMode;
 import forge.gamemodes.quest.bazaar.QuestItemType;
-import forge.gamemodes.quest.data.*;
+import forge.gamemodes.quest.data.DeckConstructionRules;
+import forge.gamemodes.quest.data.GameFormatQuest;
+import forge.gamemodes.quest.data.QuestAchievements;
+import forge.gamemodes.quest.data.QuestAssets;
+import forge.gamemodes.quest.data.QuestData;
+import forge.gamemodes.quest.data.QuestEventDraftContainer;
+import forge.gamemodes.quest.data.QuestItemCondition;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
-import forge.item.*;
+import forge.gamemodes.quest.data.StarRating;
+import forge.item.BoosterBox;
+import forge.item.BoosterPack;
+import forge.item.FatPack;
+import forge.item.InventoryItem;
+import forge.item.PaperCard;
+import forge.item.PreconDeck;
+import forge.item.SealedProduct;
+import forge.item.TournamentPack;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.util.FileUtil;
 import forge.util.IgnoringXStream;
 import forge.util.ItemPool;
 import forge.util.XmlUtil;
-import org.apache.commons.lang3.StringUtils;
-import org.w3c.dom.*;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.*;
-import java.lang.reflect.Field;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 
 /**
  * <p>

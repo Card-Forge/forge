@@ -24,8 +24,8 @@ import forge.gui.framework.IVDoc;
 import forge.screens.match.controllers.CCombat;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextArea;
-import net.miginfocom.swing.MigLayout;
 import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 /** 
  * Assembles Swing components of combat report.

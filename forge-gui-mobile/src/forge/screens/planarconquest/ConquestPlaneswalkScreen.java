@@ -14,9 +14,9 @@ import forge.gamemodes.planarconquest.ConquestPreferences.CQPref;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FEvent;
-import forge.toolbox.FList;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+import forge.toolbox.FList;
 
 public class ConquestPlaneswalkScreen extends FScreen {
     private static final float PADDING = FList.PADDING;

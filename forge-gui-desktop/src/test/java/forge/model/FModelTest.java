@@ -1,16 +1,16 @@
 package forge.model;
 
-import forge.error.ExceptionHandler;
-import forge.localinstance.properties.ForgePreferences;
-import forge.util.BuildInfo;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import forge.error.ExceptionHandler;
+import forge.localinstance.properties.ForgePreferences;
+import forge.util.BuildInfo;
 
 /**
  * Tests FModel.

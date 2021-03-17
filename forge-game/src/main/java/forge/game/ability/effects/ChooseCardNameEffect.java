@@ -1,5 +1,11 @@
 package forge.game.ability.effects;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -23,12 +29,6 @@ import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.ComparableOp;
 import forge.util.Localizer;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 public class ChooseCardNameEffect extends SpellAbilityEffect {
 

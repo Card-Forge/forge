@@ -17,6 +17,12 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import forge.deck.DeckBase;
 import forge.game.GameType;
 import forge.gamemodes.quest.QuestController;
@@ -25,25 +31,23 @@ import forge.gamemodes.quest.QuestUtil;
 import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
-import forge.item.*;
+import forge.item.InventoryItem;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.SpellShopManager;
 import forge.itemmanager.views.ItemTableColumn;
 import forge.localinstance.assets.FSkinProp;
 import forge.model.FModel;
-import forge.screens.deckeditor.views.*;
+import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VCardCatalog;
+import forge.screens.deckeditor.views.VCurrentDeck;
+import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.deckeditor.views.VProbabilities;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.util.ItemPool;
-
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * Child controller for quest card shop UI.

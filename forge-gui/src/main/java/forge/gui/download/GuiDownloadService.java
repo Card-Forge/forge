@@ -36,7 +36,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import forge.util.TextUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.esotericsoftware.minlog.Log;
@@ -51,6 +50,7 @@ import forge.gui.interfaces.ITextField;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
+import forge.util.TextUtil;
 
 @SuppressWarnings("serial")
 public abstract class GuiDownloadService implements Runnable {

@@ -1,5 +1,12 @@
 package forge.planarconquestgenerate;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -9,7 +16,11 @@ import forge.GuiDesktop;
 import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
-import forge.deck.*;
+import forge.deck.CardArchetypeLDAGenerator;
+import forge.deck.Deck;
+import forge.deck.DeckFormat;
+import forge.deck.DeckGroup;
+import forge.deck.DeckgenUtil;
 import forge.deck.io.DeckStorage;
 import forge.game.GameFormat;
 import forge.game.GameRules;
@@ -31,12 +42,6 @@ import forge.util.AbstractGeneticAlgorithm;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.view.SimulateMatch;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class PlanarConquestGeneraterGA extends AbstractGeneticAlgorithm<Deck> {
 

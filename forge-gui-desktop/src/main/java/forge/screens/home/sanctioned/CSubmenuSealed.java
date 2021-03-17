@@ -5,7 +5,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.SwingUtilities;
 
 import forge.Singletons;
 import forge.deck.Deck;

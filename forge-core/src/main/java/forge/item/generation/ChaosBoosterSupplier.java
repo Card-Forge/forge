@@ -1,11 +1,11 @@
 package forge.item.generation;
 
+import java.util.List;
+
 import forge.card.CardEdition;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.util.BagRandomizer;
-
-import java.util.List;
 
 public class ChaosBoosterSupplier implements IUnOpenedProduct {
     private BagRandomizer<CardEdition> randomizer;
