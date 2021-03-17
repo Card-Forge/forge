@@ -40,7 +40,7 @@ import forge.model.FModel;
  * @author Forge
  * @version $Id$
  */
-public final class QuestData {
+public class QuestData {
     /** Holds the latest version of the Quest Data. */
     public static final int CURRENT_VERSION_NUMBER = 13;
 
