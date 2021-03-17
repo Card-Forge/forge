@@ -1,0 +1,13 @@
+Name:Fasting
+ManaCost:W
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutHunger | TriggerDescription$ At the beginning of your upkeep, put a hunger counter on CARDNAME. Then destroy CARDNAME if it has five or more hunger counters on it.
+SVar:TrigPutHunger:DB$ PutCounter | Defined$ Self | CounterType$ HUNGER | CounterNum$ 1 | SubAbility$ DBDestroyHunger
+SVar:DBDestroyHunger:DB$ Destroy | Defined$ Self | ConditionDefined$ Self | ConditionPresent$ Card.counters_GE5_HUNGER
+R:Event$ BeginPhase | ActiveZones$ Battlefield | ValidPlayer$ You | Phase$ Draw | Layer$ Other | Optional$ True | ReplaceWith$ DBGainLife | Description$ If you would begin your draw step, you may skip that step instead. If you do, you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ DBDestroySelf | TriggerDescription$ When you draw a card, destroy CARDNAME.
+SVar:DBDestroySelf:DB$ Destroy | Defined$ Self
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:At the beginning of your upkeep, put a hunger counter on Fasting. Then destroy Fasting if it has five or more hunger counters on it.\nIf you would begin your draw step, you may skip that step instead. If you do, you gain 2 life.\nWhen you draw a card, destroy Fasting.

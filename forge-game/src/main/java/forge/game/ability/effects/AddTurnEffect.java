@@ -57,6 +57,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("SkipUntap")) {
                         extra.setSkipUntap(true);
+                        extra.setSkipUntapSA(sa);
                     }
                     if (sa.hasParam("NoSchemes")) {
                         extra.setCantSetSchemesInMotion(true);

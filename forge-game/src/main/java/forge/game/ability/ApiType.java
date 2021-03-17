@@ -153,6 +153,7 @@ public enum ApiType {
     SetLife (LifeSetEffect.class),
     SetState (SetStateEffect.class),
     Shuffle (ShuffleEffect.class),
+    SkipPhase (SkipPhaseEffect.class),
     SkipTurn (SkipTurnEffect.class),
     StoreSVar (StoreSVarEffect.class),
     Subgame (SubgameEffect.class),

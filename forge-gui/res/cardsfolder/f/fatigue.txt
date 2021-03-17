@@ -1,7 +1,6 @@
 Name:Fatigue
 ManaCost:1 U
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 U | ValidTgts$ Player | TgtPrompt$ Select target player | KW$ Skip your next draw step. | Permanent$ True | SpellDescription$ Target player skips their next draw step.
+A:SP$ SkipPhase | Cost$ 1 U | ValidTgts$ Player | TgtPrompt$ Select target player | Step$ Draw | SpellDescription$ Target player skips their next draw step.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fatigue.jpg
 Oracle:Target player skips their next draw step.

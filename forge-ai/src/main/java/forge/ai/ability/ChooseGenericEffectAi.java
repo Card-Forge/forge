@@ -159,10 +159,10 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
                 }
             }
             // FatespinnerSkipDraw,FatespinnerSkipMain,FatespinnerSkipCombat
-            if (player.hasKeyword("Skip your draw step.")) {
+            if (game.getReplacementHandler().wouldPhaseBeSkipped(player, "Draw")) {
                 return skipDraw;
             }
-            if (player.hasKeyword("Skip your next combat phase.")) {
+            if (game.getReplacementHandler().wouldPhaseBeSkipped(player, "BeginCombat")) {
                 return skipCombat;
             }
 

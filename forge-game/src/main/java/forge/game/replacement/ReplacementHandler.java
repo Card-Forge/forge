@@ -420,4 +420,17 @@ public class ReplacementHandler {
         }
         return ret;
     }
+
+    /**
+     * Helper function to check if a phase would be skipped for AI.
+     */
+    public boolean wouldPhaseBeSkipped(final Player player, final String phase) {
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
+        repParams.put(AbilityKey.Phase, phase);
+        List<ReplacementEffect> list = getReplacementList(ReplacementType.BeginPhase, repParams, ReplacementLayer.Control);
+        if (!list.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
 }
