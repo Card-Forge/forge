@@ -73,6 +73,9 @@ public class GauntletIO {
         });
         xStream.registerConverter(new DeckSectionToXml());
         xStream.autodetectAnnotations(true);
+
+        // Alias for renamed
+        xStream.alias("forge.gauntlet.GauntletData", GauntletData.class);
         return xStream;
     }
 

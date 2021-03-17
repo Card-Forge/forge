@@ -137,6 +137,11 @@ public class QuestDataIO {
         xStream.autodetectAnnotations(true);
         xStream.alias("CardPool", ItemPool.class);
         xStream.alias("DeckSection", CardPool.class);
+
+        // alias for renamed quest data
+        xStream.alias("forge.quest.data.QuestData", QuestData.class);
+        xStream.alias("forge.quest.data.item.QuestItemType", QuestItemType.class);
+        xStream.alias("forge.quest.data.QuestItemCondition", QuestItemCondition.class);
         return xStream;
     }
 

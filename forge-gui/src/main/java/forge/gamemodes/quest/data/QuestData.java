@@ -108,11 +108,6 @@ public class QuestData {
         this.worldId = startingWorld;
         this.deckConstructionRules = dcr;
     }
-    
-    public QuestData(String name0, int diff, QuestMode mode0, GameFormat userFormat, boolean allowSetUnlocks,
-            String startingWorld, DeckConstructionRules dcr) {
-        super(name0, diff, mode0, userFormat, allowSetUnlocks, startingWorld, dcr);
-    }
 
     /**
      * Gets the mode.
