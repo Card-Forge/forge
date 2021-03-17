@@ -152,6 +152,7 @@ public enum SpellApiToAi {
             .put(ApiType.SetLife, LifeSetAi.class)
             .put(ApiType.SetState, SetStateAi.class)
             .put(ApiType.Shuffle, ShuffleAi.class)
+            .put(ApiType.SkipPhase, SkipPhaseAi.class)
             .put(ApiType.SkipTurn, SkipTurnAi.class)
             .put(ApiType.StoreSVar, StoreSVarAi.class)
             .put(ApiType.Subgame, AlwaysPlayAi.class)

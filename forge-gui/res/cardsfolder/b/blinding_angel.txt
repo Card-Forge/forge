@@ -3,6 +3,6 @@ ManaCost:3 W W
 Types:Creature Angel
 PT:2/4
 K:Flying
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player skips their next combat phase.
-SVar:TrigPump:DB$ Pump | Defined$ TriggeredTarget | KW$ Skip your next combat phase. | Permanent$ True
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSkipCombat | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player skips their next combat phase.
+SVar:TrigSkipCombat:DB$ SkipPhase | Defined$ TriggeredTarget | Phase$ Combat
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever Blinding Angel deals combat damage to a player, that player skips their next combat phase.

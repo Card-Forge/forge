@@ -24,6 +24,7 @@ import com.google.common.collect.Multimap;
 import forge.card.mana.ManaCost;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
+import forge.game.ability.effects.SkipPhaseEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
@@ -166,6 +167,21 @@ public class PhaseHandler implements java.io.Serializable {
                 turnEnded = PhaseType.isLast(phase, isTopsy);
                 setPhase(PhaseType.getNext(phase, isTopsy));
             }
+
+            // Replacement effects
+            final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(playerTurn);
+            repRunParams.put(AbilityKey.Phase, phase.nameForScripts);
+            ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.BeginPhase, repRunParams);
+            if (repres != ReplacementResult.NotReplaced) {
+                // Currently there is no effect to skip entire beginning phase
+                // If in the future that kind of effect is added, need to handle it too.
+                // Handle skipping of entire combat phase
+                if (phase == PhaseType.COMBAT_BEGIN) {
+                    setPhase(PhaseType.COMBAT_END);
+                }
+                advanceToNextPhase();
+                return;
+            }
         }
 
         game.getStack().clearUndoStack(); //can't undo action from previous phase
@@ -197,30 +213,19 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     private boolean isSkippingPhase(final PhaseType phase) {
-        // TODO: Refactor this method to replacement effect
         switch (phase) {
-            case UNTAP:
-                if (playerTurn.hasKeyword("Skip your next untap step.")) {
-                    playerTurn.removeKeyword("Skip your next untap step.", false); // Skipping your "next" untap step is cumulative.
-                    return true;
-                }
-                return playerTurn.hasKeyword("Skip the untap step of this turn.") || playerTurn.hasKeyword("Skip your untap step.");
-
-            case UPKEEP:
-                return playerTurn.hasKeyword("Skip your upkeep step.");
-
             case DRAW:
-                return playerTurn.isSkippingDraw() || turn == 1 && game.getPlayers().size() == 2;
-
-            case MAIN1:
-            case MAIN2:
-                return playerTurn.isSkippingMain();
+                return turn == 1 && game.getPlayers().size() == 2;
 
             case COMBAT_BEGIN:
             case COMBAT_DECLARE_ATTACKERS:
                 return playerTurn.isSkippingCombat();
 
             case COMBAT_DECLARE_BLOCKERS:
+                if (combat != null && combat.getAttackers().isEmpty()) {
+                    endCombat();
+                }
+                // Fall through
             case COMBAT_FIRST_STRIKE_DAMAGE:
             case COMBAT_DAMAGE:
                 return !inCombat();
@@ -237,9 +242,6 @@ public class PhaseHandler implements java.io.Serializable {
         if (isSkippingPhase(phase)) {
             skipped = true;
             givePriorityToPlayer = false;
-            if (phase == PhaseType.COMBAT_DECLARE_ATTACKERS) {
-                playerTurn.removeKeyword("Skip your next combat phase.");
-            }
         }
         else  {
             // Perform turn-based actions
@@ -288,11 +290,6 @@ public class PhaseHandler implements java.io.Serializable {
                         game.getStack().freezeStack();
                         declareAttackersTurnBasedAction();
                         game.getStack().unfreezeStack();
-
-                        if (combat != null && combat.getAttackers().isEmpty()
-                                && !game.getTriggerHandler().hasDelayedTriggers()) {
-                            endCombat();
-                        }
 
                         if (combat != null) {
                             for (Card c : combat.getAttackers()) {
@@ -408,7 +405,6 @@ public class PhaseHandler implements java.io.Serializable {
                         player.clearAssignedDamage();
                     }
 
-                    playerTurn.removeKeyword("Skip all combat phases of this turn.");
                     nUpkeepsThisTurn = 0;
                     nMain1sThisTurn = 0;
                     game.getStack().resetMaxDistinctSources();
@@ -861,7 +857,7 @@ public class PhaseHandler implements java.io.Serializable {
                 game.getTriggerHandler().registerThisTurnDelayedTrigger(deltrig);
             }
             if (extraTurn.isSkipUntap()) {
-                nextPlayer.addKeyword("Skip the untap step of this turn.");
+                SkipPhaseEffect.createSkipPhaseEffect(extraTurn.getSkipUntapSA(), nextPlayer, null, null, "Untap");
             }
             if (extraTurn.isCantSetSchemesInMotion()) {
                 nextPlayer.addKeyword("Schemes can't be set in motion this turn.");

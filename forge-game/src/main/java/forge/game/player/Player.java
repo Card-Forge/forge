@@ -2698,26 +2698,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (hasLost()) {
             return true;
         }
-
-        if (hasKeyword("Skip your next combat phase.")) {
-            return true;
-        }
-        if (hasKeyword("Skip your combat phase.")) {
-            return true;
-        }
-        if (hasKeyword("Skip all combat phases of your next turn.")) {
-            replaceAllKeywordInstances("Skip all combat phases of your next turn.",
-                    "Skip all combat phases of this turn.");
-            return true;
-        }
-        if (hasKeyword("Skip all combat phases of this turn.")) {
-            return true;
-        }
         return false;
-    }
-
-    public boolean isSkippingMain() {
-        return hasKeyword("Skip your main phase.");
     }
 
     public int getStartingHandSize() {
@@ -2827,17 +2808,6 @@ public class Player extends GameEntity implements Comparable<Player> {
                 c.getDamageHistory().setCreatureGotBlockedThisCombat(false);
             }
         }
-    }
-
-    public boolean isSkippingDraw() {
-        if (hasKeyword("Skip your next draw step.")) {
-            removeKeyword("Skip your next draw step.");
-            return true;
-        }
-        if (hasKeyword("Skip your draw step.")) {
-            return true;
-        }
-        return false;
     }
 
     public CardCollectionView getInboundTokens() {
@@ -3393,7 +3363,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         setLibrarySearched(0);
         setNumManaConversion(0);
 
-        removeKeyword("Skip the untap step of this turn.");
         removeKeyword("Schemes can't be set in motion this turn.");
     }
 

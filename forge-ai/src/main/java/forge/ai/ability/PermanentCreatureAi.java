@@ -59,7 +59,7 @@ public class PermanentCreatureAi extends PermanentAi {
         if (sa.isDash()) {
             //only checks that the dashed creature will attack
             if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-                if (ai.hasKeyword("Skip your next combat phase."))
+                if (game.getReplacementHandler().wouldPhaseBeSkipped(ai, "BeginCombat"))
                     return false;
                 if (ComputerUtilCost.canPayCost(sa.getHostCard().getSpellPermanent(), ai)) {
                     //do not dash if creature can be played normally
@@ -77,7 +77,7 @@ public class PermanentCreatureAi extends PermanentAi {
         // after attacking
         if (card.hasSVar("EndOfTurnLeavePlay")
                 && (!ph.isPlayerTurn(ai) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                || ai.hasKeyword("Skip your next combat phase."))) {
+                || game.getReplacementHandler().wouldPhaseBeSkipped(ai, "BeginCombat"))) {
             // AiPlayDecision.AnotherTime
             return false;
         }

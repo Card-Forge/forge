@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 
 /**
@@ -38,6 +39,7 @@ public class ExtraTurn {
     private Player player = null;
     private List<Trigger> delTrig = Collections.synchronizedList(new ArrayList<>());
     private boolean skipUntap = false;
+    private SpellAbility skipUntapSA;
     private boolean cantSetSchemesInMotion = false;
     /**
      * TODO: Write javadoc for Constructor.
@@ -87,6 +89,20 @@ public class ExtraTurn {
      */
     public void setSkipUntap(boolean skipUntap) {
         this.skipUntap = skipUntap;
+    }
+
+    /**
+     * @return the skipUntapSA;
+     */
+    public SpellAbility getSkipUntapSA() {
+        return skipUntapSA;
+    }
+
+    /**
+     * @param skipUntapSA the skipUntapSA to set
+     */
+    public void setSkipUntapSA(SpellAbility skipUntapSA) {
+        this.skipUntapSA = skipUntapSA;
     }
 
     /**

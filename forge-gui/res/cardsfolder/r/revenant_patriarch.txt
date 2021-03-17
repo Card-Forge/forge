@@ -2,8 +2,8 @@ Name:Revenant Patriarch
 ManaCost:4 B
 Types:Creature Spirit
 PT:4/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ RevenantPump | TriggerDescription$ When CARDNAME enters the battlefield, if {W} was spent to cast it, target player skips their next combat phase.
-SVar:RevenantPump:DB$ Pump | ValidTgts$ Player | KW$ Skip your next combat phase. | Permanent$ True | TgtPrompt$ Select target Player | IsCurse$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ RevenantSkipCombat | TriggerDescription$ When CARDNAME enters the battlefield, if {W} was spent to cast it, target player skips their next combat phase.
+SVar:RevenantSkipCombat:DB$ SkipPhase | ValidTgts$ Player | ConditionManaSpent$ W | Phase$ Combat | TgtPrompt$ Select target Player | IsCurse$ True
 K:CARDNAME can't block.
 SVar:ManaNeededToAvoidNegativeEffect:white
 AI:RemoveDeck:Random

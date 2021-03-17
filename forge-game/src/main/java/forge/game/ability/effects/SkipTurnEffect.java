@@ -54,7 +54,9 @@ public class SkipTurnEffect extends SpellAbilityEffect {
             calcTurn.setSubAbility((AbilitySub) AbilityFactory.getAbility(exile, eff));
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
-            re.setLayer(ReplacementLayer.Other);
+            // Set to layer to Control so it will be applied before "would begin your turn" replacement effects
+            // (Any layer before Other is OK, since default layer is Other.)
+            re.setLayer(ReplacementLayer.Control);
             re.setOverridingAbility(calcTurn);
             eff.addReplacementEffect(re);
             eff.updateStateForView();

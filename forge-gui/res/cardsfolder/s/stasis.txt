@@ -1,9 +1,8 @@
 Name:Stasis
 ManaCost:1 U
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Player | AddKeyword$ Skip your untap step. | Description$ Players skip their untap steps.
+R:Event$ BeginPhase | ActiveZones$ Battlefield | Phase$ Untap | Skip$ True | Description$ Players skip their untap steps.
 K:UpkeepCost:U
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stasis.jpg
 Oracle:Players skip their untap steps.\nAt the beginning of your upkeep, sacrifice Stasis unless you pay {U}.
