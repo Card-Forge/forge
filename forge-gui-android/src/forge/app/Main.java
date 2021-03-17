@@ -44,7 +44,7 @@ import com.badlogic.gdx.backends.android.AndroidApplication;
 import forge.Forge;
 import forge.interfaces.IDeviceAdapter;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 

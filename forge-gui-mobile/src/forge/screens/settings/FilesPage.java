@@ -5,24 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import forge.Forge;
-import forge.download.GuiDownloadAchievementImages;
-import forge.download.GuiDownloadPicturesLQ;
-import forge.download.GuiDownloadPrices;
-import forge.download.GuiDownloadQuestImages;
-import forge.download.GuiDownloadSetPicturesLQ;
-import forge.download.GuiDownloadService;
-import forge.download.GuiDownloadSkins;
-import forge.download.GuiDownloadZipService;
-import forge.properties.ForgeConstants;
-import forge.util.FileUtil;
-import forge.localinstance.properties.ForgeProfileProperties;
-import forge.util.Localizer;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -34,6 +21,9 @@ import forge.gui.download.GuiDownloadQuestImages;
 import forge.gui.download.GuiDownloadService;
 import forge.gui.download.GuiDownloadSetPicturesLQ;
 import forge.gui.download.GuiDownloadSkins;
+import forge.gui.download.GuiDownloadZipService;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeProfileProperties;
 import forge.screens.TabPageScreen.TabPage;
 import forge.toolbox.FFileChooser;
 import forge.toolbox.FFileChooser.ChoiceType;
@@ -42,6 +32,8 @@ import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
 import forge.util.Callback;
+import forge.util.FileUtil;
+import forge.util.Localizer;
 
 public class FilesPage extends TabPage<SettingsScreen> {
     private final FGroupList<FilesItem> lstItems = add(new FGroupList<>());
