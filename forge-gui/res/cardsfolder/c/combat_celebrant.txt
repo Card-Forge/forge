@@ -5,5 +5,5 @@ PT:4/1
 S:Mode$ Continuous | Affected$ Creature.Self+notExertedThisTurn | AddKeyword$ You may exert CARDNAME as it attacks. | Description$ If CARDNAME hasn't been exerted this turn, you may exert it as it attacks.
 T:Mode$ Exerted | ValidCard$ Card.Self | Execute$ TrigUntapAll | TriggerDescription$ When you exert CARDNAME, untap all other creatures you control and after this phase, there is an additional combat phase.
 SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl+Other | SubAbility$ DBAddCombat
-SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ BeginCombat | AfterPhase$ EndCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat
 Oracle:If Combat Celebrant hasn't been exerted this turn, you may exert it as it attacks. When you do, untap all other creatures you control and after this phase, there is an additional combat phase. (An exerted creature won't untap during your next untap step.)

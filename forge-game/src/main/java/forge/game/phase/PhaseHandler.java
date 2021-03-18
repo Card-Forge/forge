@@ -17,8 +17,6 @@
  */
 package forge.game.phase;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -96,12 +94,12 @@ public class PhaseHandler implements java.io.Serializable {
     private int turn = 0;
 
     private final transient Stack<ExtraTurn> extraTurns = new Stack<>();
-    private final transient Map<PhaseType, Deque<PhaseType>> DextraPhases = Maps.newEnumMap(PhaseType.class);
+    private final transient Map<PhaseType, Stack<ExtraPhase>> extraPhases = Maps.newEnumMap(PhaseType.class);
 
     private int nUpkeepsThisTurn = 0;
     private int nUpkeepsThisGame = 0;
     private int nCombatsThisTurn = 0;
-    private int nMain1sThisTurn = 0;
+    private int nMain2sThisTurn = 0;
     private boolean bPreventCombatDamageThisTurn  = false;
     private int planarDiceRolledthisTurn = 0;
 
@@ -178,12 +176,14 @@ public class PhaseHandler implements java.io.Serializable {
         else {
             // If the phase that's ending has a stack of additional phases
             // Take the LIFO one and move to that instead of the normal one
-            if (DextraPhases.containsKey(phase)) {
-                PhaseType nextPhase = DextraPhases.get(phase).removeFirst();
+            ExtraPhase extraPhase = null;
+            if (extraPhases.containsKey(phase)) {
+                extraPhase = extraPhases.get(phase).pop();
+                PhaseType nextPhase = extraPhase.getPhase();
                 // If no more additional phases are available, remove it from the map
                 // and let the next add, reput the key
-                if (DextraPhases.get(phase).isEmpty()) {
-                    DextraPhases.remove(phase);
+                if (extraPhases.get(phase).isEmpty()) {
+                    extraPhases.remove(phase);
                 }
                 setPhase(nextPhase);
             }
@@ -206,6 +206,12 @@ public class PhaseHandler implements java.io.Serializable {
                 advanceToNextPhase();
                 return;
             }
+
+            if (extraPhase != null) {
+                for (Trigger deltrig : extraPhase.getDelayedTriggers()) {
+                    game.getTriggerHandler().registerThisTurnDelayedTrigger(deltrig);
+                }
+            }
         }
 
         game.getStack().clearUndoStack(); //can't undo action from previous phase
@@ -214,6 +220,7 @@ public class PhaseHandler implements java.io.Serializable {
 
         if (turnEnded) {
             turn++;
+            extraPhases.clear();
             game.updateTurnForView();
             game.fireEvent(new GameEventTurnBegan(playerTurn, turn));
 
@@ -288,7 +295,7 @@ public class PhaseHandler implements java.io.Serializable {
                     break;
 
                 case MAIN1:
-                    if (isPreCombatMain()) {
+                    {
                         if (playerTurn.isArchenemy()) {
                             playerTurn.setSchemeInMotion();
                         }
@@ -430,7 +437,7 @@ public class PhaseHandler implements java.io.Serializable {
                     }
 
                     nUpkeepsThisTurn = 0;
-                    nMain1sThisTurn = 0;
+                    nMain2sThisTurn = 0;
                     game.getStack().resetMaxDistinctSources();
 
                     // Rule 514.3
@@ -500,10 +507,6 @@ public class PhaseHandler implements java.io.Serializable {
                 game.getUpkeep().registerUntilEndCommand(playerTurn);
                 break;
 
-            case MAIN1:
-                nMain1sThisTurn++;
-                break;
-
             case COMBAT_END:
                 GameEventCombatEnded eventEndCombat = null;
                 if (combat != null) {
@@ -519,6 +522,10 @@ public class PhaseHandler implements java.io.Serializable {
                 if (eventEndCombat != null) {
                     game.fireEvent(eventEndCombat);
                 }
+                break;
+
+            case MAIN2:
+                nMain2sThisTurn++;
                 break;
 
             case CLEANUP:
@@ -928,13 +935,36 @@ public class PhaseHandler implements java.io.Serializable {
         return result;
     }
 
-    public final void addExtraPhase(final PhaseType afterPhase, final PhaseType extraPhase) {
+    /**
+     * Add an extra phase between afterPhase and nextPhase
+     * @param afterPhase The phase to add extra phase after
+     * @param extraPhaseList The list of extra phase(s) to be added
+     * @param nextPhase The original next phase following afterPhase, after extra phase the flow will return to this phase
+     * @return returns the added ExtraPhase object
+     */
+    public final ExtraPhase addExtraPhase(final PhaseType afterPhase, final List<PhaseType> extraPhaseList, PhaseType nextPhase) {
         // 500.8. Some effects can add phases to a turn. They do this by adding the phases directly after the specified phase.
         // If multiple extra phases are created after the same phase, the most recently created phase will occur first.
-        if (!DextraPhases.containsKey(afterPhase)) {
-            DextraPhases.put(afterPhase, new ArrayDeque<>());
+        for (int i = 0; i < extraPhaseList.size(); i++) {
+            PhaseType extra = extraPhaseList.get(i);
+            if (!extraPhases.containsKey(extra)) {
+                extraPhases.put(extra, new Stack<>());
+            }
+            if (i < extraPhaseList.size() - 1 ) {
+                extraPhases.get(extra).push(new ExtraPhase(extraPhaseList.get(i + 1)));
+            } else {
+                if (extraPhases.containsKey(afterPhase) && !extraPhases.get(afterPhase).isEmpty()) {
+                    // Extra phase(s) was inserted already, link to the first step of inserted extra phase(s)
+                    extraPhases.get(extra).push(extraPhases.get(afterPhase).pop());
+                } else {
+                    extraPhases.get(extra).push(new ExtraPhase(nextPhase));
+                }
+            }
         }
-        DextraPhases.get(afterPhase).addFirst(extraPhase);
+        if (!extraPhases.containsKey(afterPhase)) {
+            extraPhases.put(afterPhase, new Stack<>());
+        }
+        return extraPhases.get(afterPhase).push(new ExtraPhase(extraPhaseList.get(0)));
     }
 
     public final boolean isFirstCombat() {
@@ -951,7 +981,11 @@ public class PhaseHandler implements java.io.Serializable {
 
     public final boolean isPreCombatMain() {
         // 505.1a. Only the first main phase of the turn is a precombat main phase.
-        return is(PhaseType.MAIN1) && (nMain1sThisTurn == 0);
+        return is(PhaseType.MAIN1);
+    }
+
+    public final boolean beforeFirstPostCombatMainEnd() {
+        return (nMain2sThisTurn == 0);
     }
 
     private final static boolean DEBUG_PHASES = false;
@@ -1174,7 +1208,7 @@ public class PhaseHandler implements java.io.Serializable {
 
     public final void endTurnByEffect() {
         endCombat();
-        DextraPhases.clear();
+        extraPhases.clear();
         setPhase(PhaseType.CLEANUP);
         onPhaseBegin();
     }

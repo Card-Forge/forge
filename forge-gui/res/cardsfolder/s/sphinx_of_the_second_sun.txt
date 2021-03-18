@@ -4,6 +4,6 @@ Types:Creature Sphinx
 PT:6/6
 K:Flying
 T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAddPhase | TriggerDescription$ At the beginning of your postcombat main phase, there is an additional beginning phase after this phase. (The beginning phase includes the untap, upkeep, and draw steps.)
-SVar:TrigAddPhase:DB$ AddPhase | ExtraPhase$ Untap | AdditionalBeginningPhase$ True | FollowedBy$ End of Turn
+SVar:TrigAddPhase:DB$ AddPhase | ExtraPhase$ Beginning
 SVar:PlayMain1:TRUE
 Oracle:Flying\nAt the beginning of your postcombat main phase, there is an additional beginning phase after this phase. (The beginning phase includes the untap, upkeep, and draw steps.)

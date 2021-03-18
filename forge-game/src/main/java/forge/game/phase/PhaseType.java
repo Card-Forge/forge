@@ -1,14 +1,13 @@
 package forge.game.phase;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Lists;
 
 import forge.util.Localizer;
 
@@ -33,25 +32,28 @@ public enum PhaseType {
                     Arrays.asList(MAIN1),
                     Arrays.asList(COMBAT_BEGIN, COMBAT_DECLARE_ATTACKERS, COMBAT_DECLARE_BLOCKERS, COMBAT_FIRST_STRIKE_DAMAGE, COMBAT_DAMAGE, COMBAT_END),
                     Arrays.asList(MAIN2),
-                    Arrays.asList(END_OF_TURN)
+                    Arrays.asList(END_OF_TURN),
+                    Arrays.asList(CLEANUP)
             );
 
-    public static List<PhaseType> AllPhases() {
-        return AllPhases(false);
-    }
+    private static final Map<PhaseType, Integer> PHASE_INDEX = initializePhaseIndex();
 
-    public static List<PhaseType> AllPhases(boolean isTopsy) {
-        List<PhaseType> result = new ArrayList<PhaseType>();
-        List<List<PhaseType>> phase_groups = PHASE_GROUPS;
-        if (isTopsy) {
-            phase_groups = Lists.reverse(phase_groups);
-        }
-        for (final List<PhaseType> group : phase_groups) {
-            result.addAll(group);
-        }
-        result.add(CLEANUP); // Some cards get confused if cleanup isn't last, it works better this way.
-
-        return result;
+    private static final Map<PhaseType, Integer> initializePhaseIndex() {
+        Map<PhaseType, Integer> phaseIndex = Maps.newEnumMap(PhaseType.class);
+        phaseIndex.put(UNTAP, 0);
+        phaseIndex.put(UPKEEP, 0);
+        phaseIndex.put(DRAW, 0);
+        phaseIndex.put(MAIN1, 1);
+        phaseIndex.put(COMBAT_BEGIN, 2);
+        phaseIndex.put(COMBAT_DECLARE_ATTACKERS, 2);
+        phaseIndex.put(COMBAT_DECLARE_BLOCKERS, 2);
+        phaseIndex.put(COMBAT_FIRST_STRIKE_DAMAGE, 2);
+        phaseIndex.put(COMBAT_DAMAGE, 2);
+        phaseIndex.put(COMBAT_END, 2);
+        phaseIndex.put(MAIN2, 3);
+        phaseIndex.put(END_OF_TURN, 4);
+        phaseIndex.put(CLEANUP, 5);
+        return phaseIndex;
     }
 
     public final String nameForUi;
@@ -62,21 +64,8 @@ public enum PhaseType {
         nameForScripts = name_for_scripts;
     }
 
-
-    public final boolean phaseforUpdateField() {
-        return ((AllPhases().indexOf(this) >= AllPhases().indexOf(UNTAP)
-                && AllPhases().indexOf(this) < AllPhases().indexOf(COMBAT_FIRST_STRIKE_DAMAGE))
-                || (AllPhases().indexOf(this) >= AllPhases().indexOf(MAIN2)
-                && AllPhases().indexOf(this) < AllPhases().indexOf(CLEANUP)));
-    }
-
-    public final boolean isCombatPhase() {
-        return ((AllPhases().indexOf(this) >=  AllPhases().indexOf(COMBAT_BEGIN))
-                && (AllPhases().indexOf(this) <=  AllPhases().indexOf(COMBAT_END)));
-    }
-
     public final boolean isAfter(final PhaseType phase) {
-        return AllPhases().indexOf(this) > AllPhases().indexOf(phase);
+        return isBefore(phase, true);
     }
 
     public final boolean isMain() {
@@ -88,7 +77,13 @@ public enum PhaseType {
     }
 
     public final boolean isBefore(final PhaseType phase, boolean isTopsy) {
-        return AllPhases(isTopsy).indexOf(this) < AllPhases(isTopsy).indexOf(phase);
+        int thisPhaseIndex = PHASE_INDEX.get(this);
+        int cmpPhaseIndex = PHASE_INDEX.get(phase);
+        if (thisPhaseIndex == cmpPhaseIndex) {
+            final List<PhaseType> phaseGroup = PHASE_GROUPS.get(thisPhaseIndex);
+            return isTopsy ? phaseGroup.indexOf(this) > phaseGroup.indexOf(phase) : phaseGroup.indexOf(this) < phaseGroup.indexOf(phase);
+        }
+        return isTopsy ? thisPhaseIndex > cmpPhaseIndex : thisPhaseIndex < cmpPhaseIndex;
     }
 
     public static PhaseType smartValueOf(final String value) {
@@ -133,7 +128,9 @@ public enum PhaseType {
         if (current == null) {
             return true;
         }
-        return AllPhases(isTopsy).indexOf(current) == AllPhases(isTopsy).size() - 1;
+        // Some cards get confused if cleanup isn't last (comment from who initially implemented Topsy Turvy)
+        // So the last phase will always be CLEANUP even if isTopsy == true
+        return current == CLEANUP;
     }
 
     /**
@@ -141,10 +138,24 @@ public enum PhaseType {
      * @return
      */
     public static PhaseType getNext(PhaseType current, boolean isTopsy) {
-        int iNext = AllPhases(isTopsy).indexOf(current) + 1;
-        if (iNext >= AllPhases(isTopsy).size()) {
-            iNext = 0;
+        if (current == null) return PHASE_GROUPS.get(0).get(0);
+        int phaseIndex = PHASE_INDEX.get(current);
+        final List<PhaseType> phaseGroup = PHASE_GROUPS.get(phaseIndex);
+        int nextStepIndex = phaseGroup.indexOf(current) + 1;
+        if (nextStepIndex >= phaseGroup.size()) {
+            nextStepIndex = 0;
+            if (!isTopsy) {
+                phaseIndex += 1;
+                if (phaseIndex >= PHASE_GROUPS.size()) {
+                    phaseIndex = 0;
+                }
+            } else {
+                phaseIndex -= 1;
+                if (phaseIndex < 0) {
+                    phaseIndex = PHASE_GROUPS.size() - 1;
+                }
+            }
         }
-        return AllPhases(isTopsy).get(iNext);
+        return PHASE_GROUPS.get(phaseIndex).get(nextStepIndex);
     }
 }
