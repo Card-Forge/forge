@@ -22,7 +22,12 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import forge.ai.ComputerUtilCard;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
 import forge.game.keyword.Keyword;
 import forge.util.Aggregates;
 

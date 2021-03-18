@@ -12,7 +12,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SRearrangingUtil;
 import forge.gui.framework.VEmptyDoc;
-import forge.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences;
 import forge.screens.match.views.VDev;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;

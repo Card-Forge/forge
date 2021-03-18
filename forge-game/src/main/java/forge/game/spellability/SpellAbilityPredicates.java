@@ -2,6 +2,7 @@ package forge.game.spellability;
 
 import com.google.common.base.Predicate;
 
+import forge.game.CardTraitBase;
 import forge.game.CardTraitPredicates;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -62,7 +63,7 @@ public final class SpellAbilityPredicates extends CardTraitPredicates {
         };
     }
 
-    public static final Predicate<SpellAbility> isValid(String[] restrictions, Player sourceController, Card source, SpellAbility spellAbility) {
+    public static final Predicate<SpellAbility> isValid(String[] restrictions, Player sourceController, Card source, CardTraitBase spellAbility) {
         return new Predicate<SpellAbility>() {
             @Override
             public boolean apply(final SpellAbility sa) {

@@ -33,7 +33,7 @@ public class ManifestEffect extends SpellAbilityEffect {
                     }
                     CardCollection choices = new CardCollection(game.getCardsIn(choiceZone));
                     if (sa.hasParam("Choices")) {
-                        choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, source);
+                        choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, source, sa);
                     }
                     if (choices.isEmpty()) {
                         continue;

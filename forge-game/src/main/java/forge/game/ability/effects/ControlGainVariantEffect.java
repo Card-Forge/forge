@@ -44,7 +44,7 @@ public class ControlGainVariantEffect extends SpellAbilityEffect {
         }
 
         CardCollection tgtCards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield),
-                sa.getParam("AllValid"), source.getController(), source);
+                sa.getParam("AllValid"), source.getController(), source, sa);
 
         if ("NextPlayerInChosenDirection".equals(controller) && (source.getChosenDirection() != null) ) {// Aminatou, the Fateshifter
             for (final Player p : players) {

@@ -50,7 +50,7 @@ public class TwoPilesAi extends SpellAbilityAi {
         else {
             pool = p.getCardsIn(zone);
         }
-        pool = CardLists.getValidCards(pool, valid, card.getController(), card);
+        pool = CardLists.getValidCards(pool, valid, card.getController(), card, sa);
         int size = pool.size();
         return size > 2;
     }

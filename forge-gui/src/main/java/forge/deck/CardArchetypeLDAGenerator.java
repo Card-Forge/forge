@@ -1,12 +1,18 @@
 package forge.deck;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import forge.StaticData;
 import forge.deck.io.Archetype;
 import forge.deck.io.CardThemedLDAIO;
 import forge.model.FModel;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.*;
 
 /**
  * Created by maustin on 09/05/2017.

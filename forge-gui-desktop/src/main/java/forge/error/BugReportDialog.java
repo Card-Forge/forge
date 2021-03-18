@@ -37,10 +37,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
-import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import net.miginfocom.swing.MigLayout;
 import forge.gui.WrapLayout;
+import forge.gui.error.BugReporter;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * The class BugReportDialog. Enables showing and saving error messages that

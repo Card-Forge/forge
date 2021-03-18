@@ -1,12 +1,13 @@
 package forge.itemmanager.views;
 
+import java.awt.Component;
+import java.awt.Graphics;
+
+import javax.swing.JTable;
+
 import forge.card.ColorSet;
 import forge.card.mana.ManaCostShard;
 import forge.toolbox.CardFaceSymbols;
-
-import javax.swing.*;
-
-import java.awt.*;
 
 public class ColorSetRenderer extends ItemCellRenderer {
     private static final long serialVersionUID = 1770527102334163549L;

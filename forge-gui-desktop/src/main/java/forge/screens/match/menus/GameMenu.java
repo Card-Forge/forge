@@ -1,6 +1,5 @@
 package forge.screens.match.menus;
 
-import com.google.common.primitives.Ints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -9,11 +8,13 @@ import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 
-import forge.assets.FSkinProp;
+import com.google.common.primitives.Ints;
+
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menus.MenuUtil;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.VAutoYields;
 import forge.screens.match.controllers.CDock.ArcState;

@@ -1,11 +1,23 @@
 package forge.screens.home.quest;
-import forge.assets.FSkinProp;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+
+import forge.gamemodes.quest.data.QuestPreferences;
+import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.localinstance.assets.FSkinProp;
 import forge.model.FModel;
-import forge.quest.data.QuestPreferences;
-import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
@@ -17,13 +29,6 @@ import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedTextField;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 /**
  * Assembles Swing components of quest preferences submenu singleton.
  *
@@ -221,6 +226,8 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlRewards.add(new PrefInput(QPref.REWARDS_TURN1, QuestPreferencesErrType.REWARDS), fieldConstraints);
         pnlRewards.add(new FLabel.Builder().text(localizer.getMessage("lblMaxLifeDiffBonus")).fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlRewards.add(new PrefInput(QPref.REWARDS_HEALTH_DIFF_MAX, QuestPreferencesErrType.REWARDS), fieldConstraints);
+        pnlRewards.add(new FLabel.Builder().text(localizer.getMessage("lblExcludePromosFromRewardPool")).fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
+        pnlRewards.add(new PrefInput(QPref.EXCLUDE_PROMOS_FROM_POOL, QuestPreferencesErrType.REWARDS), fieldConstraints);
     }
     private void populateDifficulty() {
         pnlDifficulty.setOpaque(false);
@@ -394,7 +401,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         private boolean isFocus = false;
         private String previousText = "";
         /**
-         * @param qp0 &emsp; {@link forge.quest.data.QuestPreferences.QPref}
+         * @param qp0 &emsp; {@link forge.gamemodes.quest.data.QuestPreferences.QPref}
          *                  preferences ident enum
          * @param e0 &emsp; {@link forge.screens.home.quest.VSubmenuQuestPrefs.QuestPreferencesErrType}
          *                  where error should display to
@@ -445,7 +452,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
                 }
             });
         }
-        /** @return {@link forge.quest.data.QuestPreferences.QPref} */
+        /** @return {@link forge.gamemodes.quest.data.QuestPreferences.QPref} */
         public QPref getQPref() {
             return this.qpref;
         }

@@ -1,7 +1,8 @@
 package forge.view;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Image;
+
+import javax.swing.JMenuBar;
 
 public interface ITitleBarOwner {
     boolean isMinimized();

@@ -3,9 +3,9 @@ package forge.screens.planarconquest;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.gamemodes.planarconquest.ConquestPreferences;
+import forge.gamemodes.planarconquest.ConquestPreferences.CQPref;
 import forge.model.FModel;
-import forge.planarconquest.ConquestPreferences;
-import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.screens.FScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
@@ -16,8 +16,8 @@ import forge.toolbox.FNumericTextField;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
-import forge.util.Utils;
 import forge.util.Localizer;
+import forge.util.Utils;
 
 public class ConquestPrefsScreen extends FScreen {
     private static final float PADDING = Utils.scale(5);

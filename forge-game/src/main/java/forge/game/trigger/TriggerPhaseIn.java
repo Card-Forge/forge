@@ -1,11 +1,11 @@
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 public class TriggerPhaseIn extends Trigger {
 
@@ -17,11 +17,8 @@ public class TriggerPhaseIn extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Card phaser = (Card) runParams.get(AbilityKey.Card);
-
-        if (hasParam("ValidCard")) {
-            return phaser.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null);
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
         }
 
         return true;

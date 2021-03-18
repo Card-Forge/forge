@@ -17,11 +17,11 @@ import javax.swing.text.StyleConstants;
 
 import com.google.common.collect.ImmutableList;
 
-import forge.assets.FSkinProp;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FSkin.SkinImage;
+import forge.util.Localizer;
 import forge.view.FDialog;
 import forge.view.FView;
-import forge.util.Localizer;
 
 /**
  * Class to replace JOptionPane using skinned dialogs

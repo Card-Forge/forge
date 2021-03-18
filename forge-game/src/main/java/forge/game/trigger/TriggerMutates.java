@@ -1,9 +1,10 @@
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
-import java.util.*;
 
 public class TriggerMutates extends Trigger {
     public TriggerMutates(final Map<String, String> params, final Card host, final boolean intrinsic) {
@@ -12,9 +13,8 @@ public class TriggerMutates extends Trigger {
 
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidCard")) {
-            return matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","),
-                    this.getHostCard());
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
         }
 
         return true;

@@ -17,9 +17,11 @@
  */
 package forge.view.arcane;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+
+import javax.swing.JPanel;
 
 /**
  * <p>

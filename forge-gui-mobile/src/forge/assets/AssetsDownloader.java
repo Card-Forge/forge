@@ -1,21 +1,23 @@
 package forge.assets;
 
-import com.badlogic.gdx.Application.ApplicationType;
-import com.badlogic.gdx.Gdx;
-import com.google.common.collect.ImmutableList;
-import forge.FThreads;
-import forge.Forge;
-import forge.download.GuiDownloadZipService;
-import forge.properties.ForgeConstants;
-import forge.screens.SplashScreen;
-import forge.util.FileUtil;
-import forge.util.gui.SOptionPane;
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Gdx;
+import com.google.common.collect.ImmutableList;
+
+import forge.Forge;
+import forge.gui.FThreads;
+import forge.gui.download.GuiDownloadZipService;
+import forge.gui.util.SOptionPane;
+import forge.localinstance.properties.ForgeConstants;
+import forge.screens.SplashScreen;
+import forge.util.FileUtil;
 
 public class AssetsDownloader {
     public static final boolean SHARE_DESKTOP_ASSETS = true; //change to false to test downloading separate assets for desktop version

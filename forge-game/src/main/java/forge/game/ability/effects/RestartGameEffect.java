@@ -1,5 +1,9 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import forge.game.Game;
 import forge.game.GameAction;
 import forge.game.GameStage;
@@ -8,7 +12,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
-import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
@@ -16,19 +19,12 @@ import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class RestartGameEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
         FCollectionView<Player> players = game.getPlayers();
-        Map<Player, List<Card>> playerLibraries = new HashMap<>();
 
         // Don't grab Ante Zones
         List<ZoneType> restartZones = new ArrayList<>(Arrays.asList(ZoneType.Battlefield,
@@ -38,11 +34,33 @@ public class RestartGameEffect extends SpellAbilityEffect {
         restartZones.remove(leaveZone);
         String leaveRestriction = sa.hasParam("RestrictFromValid") ? sa.getParam("RestrictFromValid") : "Card";
 
-        for (Player p : players) {
+        //Card.resetUniqueNumber();
+        // need this code here, otherwise observables fail
+        forge.game.trigger.Trigger.resetIDs();
+        TriggerHandler trigHandler = game.getTriggerHandler();
+        trigHandler.clearDelayedTrigger();
+        trigHandler.suppressMode(TriggerType.ChangesZone);
+        // Avoid Psychic Surgery trigger in new game
+        trigHandler.suppressMode(TriggerType.Shuffled);
+
+        game.getStack().reset();
+        game.clearCounterAddedThisTurn();
+        game.resetPlayersAttackedOnNextTurn();
+        game.resetPlayersAttackedOnNextTurn();
+        GameAction action = game.getAction();
+        
+        for (Player p: players) {
+            p.setStartingLife(p.getStartingLife());
+            p.clearCounters();
+            p.resetSpellCastThisGame();
+            p.onCleanupPhase();
+            p.setLandsPlayedLastTurn(0);
+            p.resetCommanderStats();
+
             CardCollection newLibrary = new CardCollection(p.getCardsIn(restartZones, false));
             List<Card> filteredCards = null;
             if (leaveZone != null) {
-                filteredCards = CardLists.getValidCards(p.getCardsIn(leaveZone), leaveRestriction.split(","), p, sa.getHostCard(), null);
+                filteredCards = CardLists.getValidCards(p.getCardsIn(leaveZone), leaveRestriction, p, sa.getHostCard(), sa);
                 newLibrary.addAll(filteredCards);
             }
 
@@ -54,42 +72,13 @@ public class RestartGameEffect extends SpellAbilityEffect {
                 }
             }
             p.getZone(ZoneType.Command).removeAllCards(true);
-
-            playerLibraries.put(p, newLibrary);
-        }
-        
-        //Card.resetUniqueNumber();
-        // need this code here, otherwise observables fail
-        forge.game.trigger.Trigger.resetIDs();
-        TriggerHandler trigHandler = game.getTriggerHandler();
-        trigHandler.clearDelayedTrigger();
-        trigHandler.suppressMode(TriggerType.ChangesZone);
-        // Avoid Psychic Surgery trigger in new game
-        trigHandler.suppressMode(TriggerType.Shuffled);
-
-        game.getStack().reset();
-        GameAction action = game.getAction();
-    
-        List<Player> gamePlayers = game.getRegisteredPlayers();
-        for (int i = 0; i < gamePlayers.size(); i++) {
-            final Player player = gamePlayers.get(i);
-            if (player.hasLost()) { continue; }
-
-            RegisteredPlayer psc = game.getMatch().getPlayers().get(i);
-
-            player.setStartingLife(psc.getStartingLife());
-            player.setPoisonCounters(0, sa.getHostCard());
-            player.resetSpellCastThisGame();
-            player.onCleanupPhase();
-            player.setLandsPlayedLastTurn(0);
-
-            List<Card> newLibrary = playerLibraries.get(player);
+            
             for (Card c : newLibrary) {
                 action.moveToLibrary(c, 0, sa);
             }
-            player.initVariantsZones(psc);
+            p.initVariantsZones(p.getRegisteredPlayer());
 
-            player.shuffle(null);
+            p.shuffle(null);
         }
 
         trigHandler.clearSuppression(TriggerType.Shuffled);

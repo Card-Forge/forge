@@ -17,11 +17,19 @@
  */
 package forge.ai;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.ExploreAi;
 import forge.ai.simulation.SpellAbilityPicker;
@@ -30,16 +38,38 @@ import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.game.*;
+import forge.game.CardTraitBase;
+import forge.game.CardTraitPredicates;
+import forge.game.Direction;
+import forge.game.Game;
+import forge.game.GameActionUtil;
+import forge.game.GameEntity;
+import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellApiBased;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardLists;
+import forge.game.card.CardPlayOption;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Accessors;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CardUtil;
+import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.*;
+import forge.game.cost.Cost;
+import forge.game.cost.CostAdjustment;
+import forge.game.cost.CostDiscard;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostPayEnergy;
+import forge.game.cost.CostPayLife;
+import forge.game.cost.CostPutCounter;
+import forge.game.cost.CostRemoveCounter;
+import forge.game.cost.CostSacrifice;
 import forge.game.keyword.Keyword;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
@@ -48,7 +78,15 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
-import forge.game.spellability.*;
+import forge.game.spellability.AbilitySub;
+import forge.game.spellability.LandAbility;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.OptionalCostValue;
+import forge.game.spellability.Spell;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityCondition;
+import forge.game.spellability.SpellAbilityPredicates;
+import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -56,15 +94,12 @@ import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.ComparatorUtil;
 import forge.util.Expressions;
 import forge.util.MyRandom;
-import forge.util.ComparatorUtil;
 import forge.util.collect.FCollectionView;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
-
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * <p>

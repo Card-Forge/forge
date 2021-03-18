@@ -18,20 +18,20 @@
 
 package forge.model;
 
+import java.io.File;
+import java.util.List;
+
 import com.google.common.base.Predicate;
 
+import forge.gamemodes.limited.CustomLimited;
+import forge.gamemodes.limited.SealedCardPoolGenerator;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.item.generation.IUnOpenedProduct;
 import forge.item.generation.UnOpenedProduct;
-import forge.limited.CustomLimited;
-import forge.limited.SealedCardPoolGenerator;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
-
-import java.io.File;
-import java.util.List;
 
 /** 
  * The class MetaSet. This class is used to define 'special'

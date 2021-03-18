@@ -4,8 +4,8 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
 import forge.assets.FSkinColor;
-import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.assets.FSkinFont;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 

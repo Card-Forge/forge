@@ -9,8 +9,8 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
-import forge.util.collect.FCollection;
 import forge.util.Localizer;
+import forge.util.collect.FCollection;
 
 public class ChooseDirectionEffect extends SpellAbilityEffect {
     @Override

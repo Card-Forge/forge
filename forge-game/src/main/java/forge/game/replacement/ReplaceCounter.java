@@ -17,11 +17,11 @@
  */
 package forge.game.replacement;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
-
-import java.util.Map;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -44,18 +44,15 @@ public class ReplaceCounter extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        final SpellAbility spellAbility = (SpellAbility) runParams.get(AbilityKey.TgtSA);
-        if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidCard").split(","), this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Affected))) {
+            return false;
         }
-        if (hasParam("ValidCause")) {
-            if (!matchesValid(runParams.get(AbilityKey.Cause), getParam("ValidCause").split(","), this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+            return false;
         }
+
         if (hasParam("ValidType")) {
+            final SpellAbility spellAbility = (SpellAbility) runParams.get(AbilityKey.TgtSA);
             String type = getParam("ValidType");
             if (type.equals("Spell") && !spellAbility.isSpell()) {
                 return false;

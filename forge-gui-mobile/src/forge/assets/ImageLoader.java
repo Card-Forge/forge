@@ -1,7 +1,11 @@
 package forge.assets;
 
+import static forge.assets.ImageCache.croppedBorderImage;
+
 import java.io.File;
 import java.util.List;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -10,18 +14,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.google.common.cache.CacheLoader;
-import forge.FThreads;
 
 import forge.Forge;
 import forge.ImageKeys;
+import forge.gui.FThreads;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
-import org.apache.commons.lang3.tuple.Pair;
-
-import static forge.assets.ImageCache.croppedBorderImage;
 
 final class ImageLoader extends CacheLoader<String, Texture> {
     private static List<String> borderlessCardlistKey = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);

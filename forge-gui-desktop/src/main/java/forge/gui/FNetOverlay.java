@@ -9,19 +9,17 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ScrollPaneConstants;
 
-import net.miginfocom.swing.MigLayout;
-
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
+import forge.gamemodes.net.ChatMessage;
+import forge.gamemodes.net.IOnlineChatInterface;
+import forge.gamemodes.net.IRemote;
+import forge.gamemodes.net.event.MessageEvent;
 import forge.gui.framework.SDisplayUtil;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.net.ChatMessage;
-import forge.net.IOnlineChatInterface;
-import forge.net.IRemote;
-import forge.net.event.MessageEvent;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.home.online.OnlineMenu;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
@@ -30,9 +28,10 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FTextArea;
 import forge.toolbox.FTextField;
 import forge.toolbox.SmartScroller;
+import forge.util.Localizer;
 import forge.view.FDialog;
 import forge.view.FFrame;
-import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 
 public enum FNetOverlay implements IOnlineChatInterface {

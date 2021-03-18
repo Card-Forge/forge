@@ -1,18 +1,20 @@
 package forge.item.generation;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+
 import forge.StaticData;
 import forge.card.PrintSheet;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.util.ItemPool;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 
 public class UnOpenedProduct implements IUnOpenedProduct {

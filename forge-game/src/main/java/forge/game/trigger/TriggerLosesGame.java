@@ -1,11 +1,11 @@
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -32,9 +32,8 @@ public class TriggerLosesGame extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidPlayer")) {
-            return matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","),
-                    this.getHostCard());
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
         }
 
         return true;

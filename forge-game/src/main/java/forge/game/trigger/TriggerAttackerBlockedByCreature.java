@@ -54,32 +54,32 @@ public class TriggerAttackerBlockedByCreature extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-    	final Object a = runParams.get(AbilityKey.Attacker),
-    			b = runParams.get(AbilityKey.Blocker);
-    	if (!(a instanceof Card && b instanceof Card)) {
-    		return false;
-    	}
+        final Object a = runParams.get(AbilityKey.Attacker),
+                b = runParams.get(AbilityKey.Blocker);
+        if (!(a instanceof Card && b instanceof Card)) {
+            return false;
+        }
 
-    	final Card attacker = (Card) a,
-    			blocker = (Card) b;
+        final Card attacker = (Card) a,
+                blocker = (Card) b;
         if (hasParam("ValidCard")) {
-        	final String validCard = getParam("ValidCard");
-        	if (validCard.equals("LessPowerThanBlocker")) {
-        		if (attacker.getNetPower() >= blocker.getNetPower()) {
-        			return false;
-        		}
-        	} else if (!matchesValid(attacker, validCard.split(","), this.getHostCard())) {
+            final String validCard = getParam("ValidCard");
+            if (validCard.equals("LessPowerThanBlocker")) {
+                if (attacker.getNetPower() >= blocker.getNetPower()) {
+                    return false;
+                }
+            } else if (!matchesValid(attacker, validCard.split(","))) {
                 return false;
             }
         }
 
         if (hasParam("ValidBlocker")) {
-        	final String validBlocker = getParam("ValidBlocker");
-        	if (validBlocker.equals("LessPowerThanAttacker")) {
+            final String validBlocker = getParam("ValidBlocker");
+            if (validBlocker.equals("LessPowerThanAttacker")) {
                 if (blocker.getNetPower() >= attacker.getNetPower()) {
                     return false;
                 }
-            } else if (!matchesValid(blocker, validBlocker.split(","), this.getHostCard())) {
+            } else if (!matchesValid(blocker, validBlocker.split(","))) {
                 return false;
             }
         }

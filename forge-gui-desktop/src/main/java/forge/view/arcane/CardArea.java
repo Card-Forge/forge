@@ -17,19 +17,25 @@
  */
 package forge.view.arcane;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+import java.util.List;
+
+import javax.swing.JLayeredPane;
+import javax.swing.RootPaneContainer;
+import javax.swing.SwingUtilities;
+
+import com.google.common.collect.Lists;
+
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FScrollPane;
 import forge.view.arcane.util.Animation;
 import forge.view.arcane.util.CardPanelMouseListener;
-
-import javax.swing.*;
-
-import com.google.common.collect.Lists;
-
-import java.awt.*;
-import java.awt.event.MouseEvent;
-
-import java.util.List;
 
 /**
  * <p>

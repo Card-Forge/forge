@@ -17,19 +17,20 @@
  */
 package forge.itemmanager.views;
 
-import forge.assets.FSkinProp;
-import forge.card.CardPreferences;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JTable;
+
+import forge.gui.card.CardPreferences;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.MouseEvent;
 
 /**
  * Displays favorite icons

@@ -1,15 +1,16 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.util.Localizer;
-import org.apache.commons.lang3.StringUtils;
 import forge.util.CardTranslation;
-
-import java.util.List;
+import forge.util.Localizer;
 
 public class TapOrUntapEffect extends SpellAbilityEffect {
 

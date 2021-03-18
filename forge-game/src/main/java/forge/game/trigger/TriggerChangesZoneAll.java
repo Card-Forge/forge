@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import forge.game.ability.AbilityKey;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
@@ -53,6 +55,6 @@ public class TriggerChangesZoneAll extends Trigger {
 
         final String valid = this.getParamOrDefault("ValidCards", null);
 
-        return table.filterCards(origin, destination, valid, getHostCard(), null);
+        return table.filterCards(origin, destination, valid, getHostCard(), this);
     }
 }

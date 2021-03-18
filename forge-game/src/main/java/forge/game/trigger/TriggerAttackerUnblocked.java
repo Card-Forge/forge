@@ -17,12 +17,12 @@
  */
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 /**
  * <p>
@@ -54,18 +54,14 @@ public class TriggerAttackerUnblocked extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Attacker), getParam("ValidCard").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Attacker))) {
+            return false;
         }
-        if (hasParam("ValidDefender")) {
-            if (!matchesValid(runParams.get(AbilityKey.Defender), getParam("ValidDefender").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidDefender", runParams.get(AbilityKey.Defender))) {
+            return false;
         }
+
         return true;
     }
 

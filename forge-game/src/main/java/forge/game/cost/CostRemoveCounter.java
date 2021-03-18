@@ -17,6 +17,8 @@
  */
 package forge.game.cost;
 
+import java.util.List;
+
 import com.google.common.collect.Lists;
 
 import forge.game.card.Card;
@@ -26,8 +28,6 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.List;
 
 /**
  * The Class CostRemoveCounter.

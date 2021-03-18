@@ -1,10 +1,10 @@
 package forge.game.ability.effects;
 
-import forge.game.card.Card;
-import forge.game.spellability.SpellAbility;
-
 import java.util.Iterator;
 import java.util.List;
+
+import forge.game.card.Card;
+import forge.game.spellability.SpellAbility;
 
 public class RegenerateEffect extends RegenerateBaseEffect {
 

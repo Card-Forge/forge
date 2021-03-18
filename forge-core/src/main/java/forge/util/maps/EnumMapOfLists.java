@@ -1,11 +1,11 @@
 package forge.util.maps;
 
-import com.google.common.base.Supplier;
-
 import java.util.Collection;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.base.Supplier;
 
 public class EnumMapOfLists<K extends Enum<K>, V> extends EnumMap<K, Collection<V>> implements MapOfLists<K, V> {
     private final Supplier<? extends Collection<V>> factory;

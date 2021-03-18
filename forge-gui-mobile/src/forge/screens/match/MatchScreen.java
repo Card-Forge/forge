@@ -7,21 +7,16 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.badlogic.gdx.graphics.Color;
-
-import forge.screens.match.winlose.ViewWinLose;
-import forge.util.Localizer;
-
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.google.common.collect.Maps;
 
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
-import forge.GuiBase;
 import forge.animation.AbilityEffect;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -33,7 +28,10 @@ import forge.game.combat.CombatView;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiBase;
 import forge.interfaces.IGameController;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FDropDown;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuBar;
@@ -41,8 +39,6 @@ import forge.menu.FMenuItem;
 import forge.menu.FMenuTab;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
@@ -56,6 +52,7 @@ import forge.screens.match.views.VPlayerPanel.InfoTab;
 import forge.screens.match.views.VPlayers;
 import forge.screens.match.views.VPrompt;
 import forge.screens.match.views.VStack;
+import forge.screens.match.winlose.ViewWinLose;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FCardPanel;
@@ -63,6 +60,7 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
+import forge.util.Localizer;
 
 public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);

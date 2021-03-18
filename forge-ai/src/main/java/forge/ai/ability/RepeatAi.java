@@ -1,7 +1,10 @@
 package forge.ai.ability;
 
 
-import forge.ai.*;
+import forge.ai.AiController;
+import forge.ai.ComputerUtilCost;
+import forge.ai.PlayerControllerAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;

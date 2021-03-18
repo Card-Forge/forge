@@ -19,7 +19,7 @@
 package forge.screens.home.settings;
 
 import forge.gui.framework.ICDoc;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 
 /**
@@ -41,7 +41,7 @@ public enum CSubmenuReleaseNotes implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void initialize() {
@@ -50,7 +50,7 @@ public enum CSubmenuReleaseNotes implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void update() {

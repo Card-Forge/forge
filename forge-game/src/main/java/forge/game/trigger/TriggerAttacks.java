@@ -17,15 +17,15 @@
  */
 package forge.game.trigger;
 
+import java.util.List;
+import java.util.Map;
+
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -57,19 +57,13 @@ public class TriggerAttacks extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Attacker), getParam("ValidCard").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Attacker))) {
+            return false;
         }
 
-        if (hasParam("Attacked")) {
-            GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
-            if (!attacked.isValid(getParam("Attacked").split(",")
-                    , this.getHostCard().getController(), this.getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("Attacked", runParams.get(AbilityKey.Attacked))) {
+            return false;
         }
 
         if (hasParam("Alone")) {

@@ -1,9 +1,8 @@
 Name:Dragon Appeasement
 ManaCost:3 B R G
 Types:Enchantment
-S:Mode$ Continuous | Affected$ You | AddKeyword$ Skip your draw step. | Description$ Skip your draw step.
+R:Event$ BeginPhase | ActiveZones$ Battlefield | ValidPlayer$ You | Phase$ Draw | Skip$ True | Description$ Skip your draw step.
 T:Mode$ Sacrificed | ValidCard$ Creature.YouCtrl | Execute$ TrigDrawCard | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a creature, you may draw a card.
 SVar:TrigDrawCard:DB$Draw | Defined$ You | NumCards$ 1
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_appeasement.jpg
 Oracle:Skip your draw step.\nWhenever you sacrifice a creature, you may draw a card.

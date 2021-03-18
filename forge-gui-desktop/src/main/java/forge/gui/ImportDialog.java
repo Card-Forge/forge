@@ -50,19 +50,15 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import forge.util.TextUtil;
-import net.miginfocom.swing.MigLayout;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.ImmutableList;
 
-import forge.UiCommand;
-import forge.assets.FSkinProp;
-import forge.error.BugReporter;
 import forge.gui.ImportSourceAnalyzer.OpType;
-import forge.properties.ForgeConstants;
+import forge.gui.error.BugReporter;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgeConstants;
 import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBoxWrapper;
@@ -74,6 +70,8 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextField;
 import forge.toolbox.SmartScroller;
+import forge.util.TextUtil;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * This class implements an overlay-based dialog that imports data from a user-selected directory

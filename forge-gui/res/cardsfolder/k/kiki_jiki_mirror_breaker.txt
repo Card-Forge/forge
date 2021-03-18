@@ -4,5 +4,5 @@ Types:Legendary Creature Goblin Shaman
 PT:2/2
 K:Haste
 A:AB$ CopyPermanent | Cost$ T | ValidTgts$ Creature.nonLegendary+YouCtrl | TgtPrompt$ Select target nonlegendary creature you control | AddKeywords$ Haste | AtEOT$ Sacrifice | AILogic$ BeforeCombat | SpellDescription$ Create a token that's a copy of target nonlegendary creature you control, except it has haste. Sacrifice it at the beginning of the next end step.
-SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50321.jpg
+SVar:UntapMe:True
 Oracle:Haste\n{T}: Create a token that's a copy of target nonlegendary creature you control, except it has haste. Sacrifice it at the beginning of the next end step.

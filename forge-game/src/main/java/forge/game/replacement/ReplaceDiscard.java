@@ -17,11 +17,11 @@
  */
 package forge.game.replacement;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
-
-import java.util.Map;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -44,21 +44,17 @@ public class ReplaceDiscard extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidPlayer").split(","), this.getHostCard())) {
-                return false;
-            }
+
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
+            return false;
         }
-        if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","), this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
         }
-        if (hasParam("ValidSource")) {
-            if (!matchesValid(runParams.get(AbilityKey.Source), getParam("ValidSource").split(","), this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.Source))) {
+            return false;
         }
+
         if (hasParam("Cycling")) {
             if (getParam("Cycling").equalsIgnoreCase("True") != runParams.containsKey(AbilityKey.Cycling)) {
                 return false;

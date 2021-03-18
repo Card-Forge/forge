@@ -1,17 +1,30 @@
 package forge.screens.home.quest;
 
-import forge.assets.FSkinProp;
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+
+import forge.gamemodes.quest.IVQuestStats;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.quest.IVQuestStats;
-import forge.screens.home.*;
-import forge.toolbox.*;
+import forge.localinstance.assets.FSkinProp;
+import forge.screens.home.EMenuGroup;
+import forge.screens.home.IVSubmenu;
+import forge.screens.home.LblHeader;
+import forge.screens.home.StartButton;
+import forge.screens.home.VHomeUI;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FComboBoxWrapper;
+import forge.toolbox.FLabel;
+import forge.toolbox.FScrollPanel;
+import forge.toolbox.FSkin;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * Assembles Swing components of quest challenges submenu singleton.

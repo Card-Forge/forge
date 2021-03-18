@@ -17,12 +17,12 @@
  */
 package forge.game.replacement;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
-
-import java.util.Map;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -45,10 +45,8 @@ public class ReplaceDrawCards extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidPlayer").split(","), this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
+            return false;
         }
         if (hasParam("Number")) {
             final int n = (Integer)runParams.get(AbilityKey.Number);

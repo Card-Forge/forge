@@ -1,8 +1,17 @@
 package forge.ai.ability;
 
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import forge.ai.*;
+
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCost;
+import forge.ai.ComputerUtilMana;
+import forge.ai.SpellAbilityAi;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -22,9 +31,6 @@ import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-
-import java.util.List;
-import java.util.Map;
 
 public class UntapAi extends SpellAbilityAi {
     @Override
@@ -71,6 +77,8 @@ public class UntapAi extends SpellAbilityAi {
         if (!sa.usesTargeting()) {
             if (mandatory) {
                 return true;
+            } else if ("Never".equals(sa.getParam("AILogic"))) {
+                return false;
             }
 
             // TODO: use Defined to determine, if this is an unfavorable result
@@ -314,13 +322,10 @@ public class UntapAi extends SpellAbilityAi {
     }
 
     private static Card detectPriorityUntapTargets(final List<Card> untapList) {
-        // untap Time Vault or another broken card? - Yes please!
-        String[] priorityList = {"Time Vault", "Mana Vault", "Icy Manipulator", "Steel Overseer", "Grindclock", "Prototype Portal"};
-        for (String name : priorityList) {
-            for (Card c : untapList) {
-                if (c.getName().equals(name)) {
-                    return c;
-                }
+        // See if there are cards that are *especially* worth untapping, like Time Vault
+        for (Card c : untapList) {
+            if ("True".equals(c.getSVar("UntapMe"))) {
+                return c;
             }
         }
 

@@ -1,9 +1,11 @@
 package forge.toolbox;
 
-import forge.interfaces.IProgressBar;
-
-import javax.swing.*;
 import java.util.Date;
+
+import javax.swing.JProgressBar;
+import javax.swing.SwingUtilities;
+
+import forge.gui.interfaces.IProgressBar;
 
 /**
  * A simple progress bar component using the Forge skin.

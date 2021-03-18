@@ -7,7 +7,7 @@ import java.util.List;
 import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
-import forge.interfaces.IComboBox;
+import forge.gui.interfaces.IComboBox;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.toolbox.FEvent.FEventHandler;

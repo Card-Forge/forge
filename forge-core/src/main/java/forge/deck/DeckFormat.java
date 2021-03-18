@@ -17,10 +17,20 @@
  */
 package forge.deck;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import org.apache.commons.lang3.Range;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+
 import forge.StaticData;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -33,14 +43,6 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.TextUtil;
-import org.apache.commons.lang3.Range;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
 
 /**
  * GameType is an enum to determine the type of current game. :)

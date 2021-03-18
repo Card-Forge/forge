@@ -1,17 +1,18 @@
 package forge.screens.deckeditor.menus;
 
-import forge.assets.FSkinProp;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+
+import javax.swing.JMenu;
+import javax.swing.JSeparator;
+
+import forge.localinstance.assets.FSkinProp;
 import forge.menus.MenuUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.toolbox.FSkin.SkinnedMenuItem;
 import forge.util.Localizer;
-
-import javax.swing.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 /**
  * Returns a JMenu containing options associated with current game.

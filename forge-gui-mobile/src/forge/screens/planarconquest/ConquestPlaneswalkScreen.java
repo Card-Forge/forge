@@ -7,16 +7,16 @@ import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
+import forge.gamemodes.planarconquest.ConquestData;
+import forge.gamemodes.planarconquest.ConquestPlane;
+import forge.gamemodes.planarconquest.ConquestPreferences;
+import forge.gamemodes.planarconquest.ConquestPreferences.CQPref;
 import forge.model.FModel;
-import forge.planarconquest.ConquestData;
-import forge.planarconquest.ConquestPlane;
-import forge.planarconquest.ConquestPreferences;
-import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.screens.FScreen;
 import forge.toolbox.FEvent;
-import forge.toolbox.FList;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+import forge.toolbox.FList;
 
 public class ConquestPlaneswalkScreen extends FScreen {
     private static final float PADDING = FList.PADDING;

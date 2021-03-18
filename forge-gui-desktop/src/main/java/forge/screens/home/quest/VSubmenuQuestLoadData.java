@@ -1,9 +1,12 @@
 package forge.screens.home.quest;
 
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
@@ -12,8 +15,6 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
 
 /**
  * Assembles Swing components of quest data submenu singleton.

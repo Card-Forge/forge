@@ -1,13 +1,13 @@
 package forge.screens.planarconquest;
 
 import com.badlogic.gdx.math.Vector2;
-import forge.Forge;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
-import forge.planarconquest.ConquestEvent.ChaosWheelOutcome;
+import forge.gamemodes.planarconquest.ConquestEvent.ChaosWheelOutcome;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FOverlay;
 import forge.util.Aggregates;

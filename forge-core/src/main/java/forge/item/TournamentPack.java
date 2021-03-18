@@ -17,14 +17,14 @@
  */
 package forge.item;
 
+import java.util.List;
+
 import com.google.common.base.Function;
 
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.item.generation.BoosterGenerator;
-
-import java.util.List;
 
 public class TournamentPack extends SealedProduct {
 

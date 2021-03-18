@@ -17,26 +17,37 @@
  */
 package forge.itemmanager;
 
-import com.google.common.base.Function;
-import forge.card.*;
-import forge.card.mana.ManaCost;
-import forge.deck.DeckProxy;
-import forge.deck.io.DeckPreferences;
-import forge.game.GameFormat;
-import forge.item.IPaperCard;
-import forge.item.InventoryItem;
-import forge.item.InventoryItemFromSet;
-import forge.item.PaperCard;
-import forge.itemmanager.ItemColumnConfig.SortState;
-import forge.limited.DraftRankCache;
-import forge.model.FModel;
-import forge.util.Localizer;
-import forge.util.CardTranslation;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.base.Function;
+
+import forge.card.CardAiHints;
+import forge.card.CardEdition;
+import forge.card.CardRarity;
+import forge.card.CardRules;
+import forge.card.CardSplitType;
+import forge.card.CardType;
+import forge.card.ColorSet;
+import forge.card.ICardFace;
+import forge.card.MagicColor;
+import forge.card.mana.ManaCost;
+import forge.deck.DeckProxy;
+import forge.deck.io.DeckPreferences;
+import forge.game.GameFormat;
+import forge.gamemodes.limited.DraftRankCache;
+import forge.gui.card.CardPreferences;
+import forge.item.IPaperCard;
+import forge.item.InventoryItem;
+import forge.item.InventoryItemFromSet;
+import forge.item.PaperCard;
+import forge.itemmanager.ItemColumnConfig.SortState;
+import forge.model.FModel;
+import forge.util.CardTranslation;
+import forge.util.Localizer;
 
 public enum ColumnDef {
    /**The column containing the inventory item name.*/

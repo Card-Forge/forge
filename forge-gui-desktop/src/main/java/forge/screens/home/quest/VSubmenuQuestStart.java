@@ -1,33 +1,40 @@
 package forge.screens.home.quest;
 
-import forge.deck.Deck;
-import forge.deck.DeckGroup;
-import forge.game.GameFormat;
-import forge.gui.framework.DragCell;
-import forge.gui.framework.DragTab;
-import forge.gui.framework.EDocID;
-import forge.item.PreconDeck;
-import forge.model.CardCollections;
-import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.quest.QuestController;
-import forge.quest.QuestWorld;
-import forge.quest.StartingPoolType;
-import forge.screens.home.EMenuGroup;
-import forge.screens.home.IVSubmenu;
-import forge.screens.home.VHomeUI;
-import forge.toolbox.*;
-import forge.util.Localizer;
-import forge.util.WordUtil;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.plaf.basic.BasicComboBoxRenderer;
-import java.awt.*;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
+
+import forge.deck.Deck;
+import forge.deck.DeckGroup;
+import forge.game.GameFormat;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestWorld;
+import forge.gamemodes.quest.StartingPoolType;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.DragTab;
+import forge.gui.framework.EDocID;
+import forge.item.PreconDeck;
+import forge.localinstance.properties.ForgeConstants;
+import forge.model.CardCollections;
+import forge.model.FModel;
+import forge.screens.home.EMenuGroup;
+import forge.screens.home.IVSubmenu;
+import forge.screens.home.VHomeUI;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FComboBoxWrapper;
+import forge.toolbox.FLabel;
+import forge.toolbox.FRadioButton;
+import forge.toolbox.FSkin;
+import forge.toolbox.JXButtonPanel;
+import forge.util.Localizer;
+import forge.util.WordUtil;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Assembles Swing components of quest data submenu singleton.

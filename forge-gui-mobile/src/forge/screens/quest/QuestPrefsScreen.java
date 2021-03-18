@@ -3,9 +3,9 @@ package forge.screens.quest;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.gamemodes.quest.data.QuestPreferences;
+import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.model.FModel;
-import forge.quest.data.QuestPreferences;
-import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.FScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
@@ -16,8 +16,8 @@ import forge.toolbox.FNumericTextField;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
-import forge.util.Utils;
 import forge.util.Localizer;
+import forge.util.Utils;
 
 public class QuestPrefsScreen extends FScreen {
     private static final float PADDING = Utils.scale(5);
@@ -70,6 +70,7 @@ public class QuestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption(localizer.getMessage("lblWinbyTurn10"), QPref.REWARDS_TURN10, PrefsGroup.REWARDS));
         scroller.add(new PrefsOption(localizer.getMessage("lblWinbyTurn5"), QPref.REWARDS_TURN5, PrefsGroup.REWARDS));
         scroller.add(new PrefsOption(localizer.getMessage("lblFirstTurnWin"), QPref.REWARDS_TURN1, PrefsGroup.REWARDS));
+        scroller.add(new PrefsOption(localizer.getMessage("lblExcludePromosFromRewardPool"), QPref.EXCLUDE_PROMOS_FROM_POOL, PrefsGroup.REWARDS));
 
         //Booster Pack Ratios
         scroller.add(new PrefsHeader(localizer.getMessage("lblBoosterPackRatios"), FSkinImage.QUEST_BOOK, PrefsGroup.BOOSTER));

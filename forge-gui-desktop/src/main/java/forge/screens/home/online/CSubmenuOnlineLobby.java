@@ -7,21 +7,21 @@ import java.util.List;
 import javax.swing.JMenu;
 import javax.swing.SwingUtilities;
 
-import forge.FThreads;
-import forge.error.BugReporter;
+import forge.gamemodes.net.ChatMessage;
+import forge.gamemodes.net.NetConnectUtil;
 import forge.gui.FNetOverlay;
+import forge.gui.FThreads;
 import forge.gui.SOverlayUtils;
+import forge.gui.error.BugReporter;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
+import forge.gui.util.SOptionPane;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
-import forge.net.ChatMessage;
-import forge.net.NetConnectUtil;
 import forge.screens.home.CHomeUI;
 import forge.screens.home.CLobby;
 import forge.screens.home.VLobby;
 import forge.screens.home.sanctioned.ConstructedGameMenu;
-import forge.util.gui.SOptionPane;
 import forge.util.Localizer;
 
 public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {

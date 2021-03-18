@@ -17,6 +17,10 @@
  */
 package forge.game.replacement;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 import forge.game.Game;
 import forge.game.TriggerReplacementBase;
 import forge.game.ability.AbilityFactory;
@@ -28,10 +32,6 @@ import forge.game.spellability.SpellAbility;
 import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.TextUtil;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 /**
  * TODO: Write javadoc for this type.

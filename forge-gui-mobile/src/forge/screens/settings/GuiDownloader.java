@@ -20,9 +20,9 @@ package forge.screens.settings;
 import java.net.Proxy;
 
 import forge.Forge;
-import forge.UiCommand;
-import forge.download.GuiDownloadService;
-import forge.download.GuiDownloadZipService;
+import forge.gui.UiCommand;
+import forge.gui.download.GuiDownloadService;
+import forge.gui.download.GuiDownloadZipService;
 import forge.toolbox.FDialog;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;

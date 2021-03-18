@@ -1,29 +1,42 @@
 package forge.deck;
 
-import forge.FThreads;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.badlogic.gdx.utils.Align;
+import com.google.common.collect.ImmutableList;
+
 import forge.Forge;
-import forge.GuiBase;
 import forge.assets.ImageCache;
 import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
-import forge.error.BugReporter;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
-import forge.gauntlet.GauntletData;
-import forge.gauntlet.GauntletUtil;
-import forge.interfaces.IGuiGame;
+import forge.gamemodes.gauntlet.GauntletData;
+import forge.gamemodes.gauntlet.GauntletUtil;
+import forge.gamemodes.match.HostedMatch;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestEvent;
+import forge.gamemodes.quest.QuestEventChallenge;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
+import forge.gui.error.BugReporter;
+import forge.gui.interfaces.IGuiGame;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;
-import forge.match.HostedMatch;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
-import forge.quest.QuestController;
-import forge.quest.QuestEvent;
-import forge.quest.QuestEventChallenge;
-import forge.quest.QuestUtil;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.home.NewGameMenu.NewGameScreen;
@@ -32,27 +45,14 @@ import forge.toolbox.FButton;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
-import forge.toolbox.GuiChoose;
-import forge.toolbox.ListChooser;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
+import forge.toolbox.GuiChoose;
+import forge.toolbox.ListChooser;
 import forge.util.Callback;
 import forge.util.Localizer;
 import forge.util.Utils;
 import forge.util.storage.IStorage;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.badlogic.gdx.utils.Align;
-import com.google.common.collect.ImmutableList;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class FDeckChooser extends FScreen {
     public static final float PADDING = Utils.scale(5);

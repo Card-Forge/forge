@@ -1,12 +1,12 @@
 package forge.game.ability;
 
+import java.util.Map;
+
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.TargetRestrictions;
-
-import java.util.Map;
 
 public class AbilityApiBased extends AbilityActivated {
     private final SpellAbilityEffect effect;

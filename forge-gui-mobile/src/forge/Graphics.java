@@ -1,5 +1,8 @@
 package forge;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -14,15 +17,13 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
+
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.toolbox.FDisplayObject;
-import forge.util.Utils;
 import forge.util.TextBounds;
-
-import java.util.ArrayDeque;
-import java.util.Deque;
+import forge.util.Utils;
 
 public class Graphics {
     private static final int GL_BLEND = GL20.GL_BLEND;

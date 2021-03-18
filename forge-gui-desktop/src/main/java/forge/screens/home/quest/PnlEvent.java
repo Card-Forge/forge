@@ -1,22 +1,27 @@
 package forge.screens.home.quest;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import forge.ImageCache;
-import forge.assets.FSkinProp;
-import forge.quest.QuestEvent;
-import forge.quest.QuestUtil;
+import forge.gamemodes.quest.QuestEvent;
+import forge.gamemodes.quest.QuestUtil;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FRadioButton;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FTextArea;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  * Panels for displaying duels and challenges.<br>
@@ -100,7 +105,7 @@ class PnlEvent extends JPanel {
         this.add(tarDesc, "w 100% - " + (wImg + 15) + "px!, gap " + (wImg + 15) + "px 0 5px 0");
    }
 
-    /** @return {@link forge.quest.QuestEvent} */
+    /** @return {@link forge.gamemodes.quest.QuestEvent} */
     public QuestEvent getEvent() {
         return event;
     }

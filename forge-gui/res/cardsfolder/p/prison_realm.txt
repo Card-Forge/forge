@@ -1,18 +1,8 @@
 Name:Prison Realm
 ManaCost:2 W
 Types: Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$When CARDNAME enters the battlefield, exile target creature or planeswalker an opponent controls until CARDNAME leaves the battlefield. | SpellDescription$ When CARDNAME enters the battlefield, exile target creature or planeswalker an opponent controls until CARDNAME leaves the battlefield,\nWhen CARDNAME enters the battlefield, scry 1.
-
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature an opponent controls | ConditionPresent$ Card.Self | SubAbility$ DBEffect
-
-SVar:DBEffect:DB$ Effect | Triggers$ ComeBack | RememberObjects$ Targeted | ImprintCards$ Self | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnMoved$ Exile
-
-SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ That creature is exiled until EFFECTSOURCE leaves the battlefield
-
-SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ ExileSelf
-
-SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
-
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature or planeswalker an opponent controls until CARDNAME leaves the battlefield. | SpellDescription$ When CARDNAME enters the battlefield, exile target creature or planeswalker an opponent controls until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature an opponent controls | UntilHostLeavesPlay$ True
 SVar:PlayMain1:TRUE
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 1.
 SVar:TrigScry:DB$ Scry | ScryNum$ 1

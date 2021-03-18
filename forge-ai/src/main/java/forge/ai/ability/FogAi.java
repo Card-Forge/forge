@@ -1,7 +1,13 @@
 package forge.ai.ability;
 
 
-import forge.ai.*;
+import java.util.List;
+
+import forge.ai.AiCardMemory;
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCombat;
+import forge.ai.PlayerControllerAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
@@ -11,8 +17,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
-
-import java.util.List;
 
 public class FogAi extends SpellAbilityAi {
 

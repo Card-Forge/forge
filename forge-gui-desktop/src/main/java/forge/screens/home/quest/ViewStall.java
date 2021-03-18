@@ -17,28 +17,31 @@
  */
 package forge.screens.home.quest;
 
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gamemodes.quest.bazaar.IQuestBazaarItem;
+import forge.gamemodes.quest.bazaar.QuestStallDefinition;
+import forge.gamemodes.quest.data.QuestAssets;
 import forge.model.FModel;
-import forge.quest.QuestController;
-import forge.quest.QuestUtil;
-import forge.quest.bazaar.IQuestBazaarItem;
-import forge.quest.bazaar.QuestStallDefinition;
-import forge.quest.data.QuestAssets;
 import forge.screens.bazaar.VBazaarUI;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextPane;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>
@@ -128,7 +131,7 @@ public class ViewStall extends JPanel {
 
     /**
      * @param q0
-     *            &emsp; {@link forge.quest.bazaar.QuestStallDefinition}
+     *            &emsp; {@link forge.gamemodes.quest.bazaar.QuestStallDefinition}
      */
     public void setStall(final QuestStallDefinition q0) {
         this.stall = q0;

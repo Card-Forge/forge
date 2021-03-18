@@ -20,8 +20,6 @@ package forge.game.spellability;
 import java.util.Arrays;
 import java.util.List;
 
-import forge.util.TextUtil;
-
 import com.google.common.collect.Lists;
 
 import forge.card.CardType;
@@ -31,6 +29,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 
 /**
  * <p>

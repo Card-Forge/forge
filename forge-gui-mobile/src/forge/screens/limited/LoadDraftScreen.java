@@ -1,18 +1,11 @@
 package forge.screens.limited;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.utils.Align;
 
-import forge.FThreads;
 import forge.Forge;
-import forge.GuiBase;
-import forge.properties.ForgePreferences.FPref;
-import forge.screens.LaunchScreen;
-import forge.screens.LoadingOverlay;
-import forge.screens.home.LoadGameMenu;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
 import forge.assets.FSkinFont;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -23,17 +16,25 @@ import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
+import forge.gamemodes.match.HostedMatch;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
+import forge.gui.util.SGuiChoose;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;
-import forge.match.HostedMatch;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
+import forge.screens.LaunchScreen;
+import forge.screens.LoadingOverlay;
+import forge.screens.home.LoadGameMenu;
 import forge.toolbox.FComboBox;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
-import forge.util.gui.SGuiChoose;
-import java.util.ArrayList;
-import java.util.List;
 
 public class LoadDraftScreen extends LaunchScreen {
     private final DeckManager lstDecks = add(new DeckManager(GameType.Draft));

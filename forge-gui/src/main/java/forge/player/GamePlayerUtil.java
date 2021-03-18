@@ -2,19 +2,19 @@ package forge.player;
 
 import java.util.Set;
 
-import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.ai.AIOption;
 import forge.ai.AiProfileUtil;
 import forge.ai.LobbyPlayerAi;
+import forge.gui.GuiBase;
+import forge.gui.util.SOptionPane;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.util.GuiDisplayUtil;
 import forge.util.MyRandom;
-import forge.util.gui.SOptionPane;
+import forge.util.TextUtil;
 
 public final class GamePlayerUtil {
     private GamePlayerUtil() { }

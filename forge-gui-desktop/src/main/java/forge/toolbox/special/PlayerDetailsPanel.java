@@ -1,9 +1,23 @@
 package forge.toolbox.special;
 
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Function;
-import forge.assets.FSkinProp;
+
 import forge.card.mana.ManaAtom;
 import forge.game.player.PlayerView;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FSkin;
@@ -12,14 +26,6 @@ import forge.toolbox.FSkin.SkinnedPanel;
 import forge.trackable.TrackableProperty;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PlayerDetailsPanel extends JPanel {
     private static final long serialVersionUID = -6531759554646891983L;

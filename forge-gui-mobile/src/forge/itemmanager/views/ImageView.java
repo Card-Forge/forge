@@ -1,6 +1,18 @@
 package forge.itemmanager.views;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
+
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Align;
+
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
@@ -8,9 +20,9 @@ import forge.assets.FImage;
 import forge.assets.FImageComplex;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
-import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
 import forge.card.CardFaceSymbols;
 import forge.card.CardRenderer;
@@ -23,6 +35,7 @@ import forge.deck.CommanderDeckGenerator;
 import forge.deck.DeckProxy;
 import forge.deck.FDeckViewer;
 import forge.deck.io.DeckPreferences;
+import forge.gamemodes.planarconquest.ConquestCommander;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
@@ -33,30 +46,17 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
 import forge.itemmanager.SItemManagerUtil;
 import forge.itemmanager.filters.ItemFilter;
-import forge.planarconquest.ConquestCommander;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
-import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
+import forge.toolbox.FTextField;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.Utils;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Align;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float PADDING = Utils.scale(5);

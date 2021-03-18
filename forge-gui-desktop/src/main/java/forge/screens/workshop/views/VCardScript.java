@@ -9,7 +9,6 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -17,6 +16,7 @@ import forge.gui.framework.IVDoc;
 import forge.screens.workshop.controllers.CCardScript;
 import forge.toolbox.FTextPane;
 import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 /** 
  * Assembles Swing components of workshop card script tab.

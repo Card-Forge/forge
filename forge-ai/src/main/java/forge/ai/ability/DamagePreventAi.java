@@ -1,6 +1,13 @@
 package forge.ai.ability;
 
-import forge.ai.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCombat;
+import forge.ai.ComputerUtilCost;
+import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
@@ -18,9 +25,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DamagePreventAi extends SpellAbilityAi {
 

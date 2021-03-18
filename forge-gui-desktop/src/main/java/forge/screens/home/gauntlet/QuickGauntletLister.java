@@ -12,12 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
-import net.miginfocom.swing.MigLayout;
-import forge.UiCommand;
-import forge.assets.FSkinProp;
-import forge.gauntlet.GauntletData;
-import forge.gauntlet.GauntletIO;
-import forge.quest.QuestUtil;
+import forge.gamemodes.gauntlet.GauntletData;
+import forge.gamemodes.gauntlet.GauntletIO;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gui.UiCommand;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FOptionPane;
@@ -25,6 +24,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.FSkin.SkinnedButton;
 import forge.toolbox.FSkin.SkinnedPanel;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Creates file list/table for quick deleting, editing, and basic info.
@@ -281,17 +281,17 @@ public class QuickGauntletLister extends JPanel {
         return true;
     }
 
-    /** @param c0 &emsp; {@link forge.UiCommand} command executed on row select. */
+    /** @param c0 &emsp; {@link forge.forge.gui.UiCommand} command executed on row select. */
     public void setCmdSelect(final UiCommand c0) {
         this.cmdRowSelect = c0;
     }
 
-    /** @param c0 &emsp; {@link forge.UiCommand} command executed on row delete. */
+    /** @param c0 &emsp; {@link forge.forge.gui.UiCommand} command executed on row delete. */
     public void setCmdDelete(final UiCommand c0) {
         this.cmdRowDelete = c0;
     }
 
-    /** @param c0 &emsp; {@link forge.UiCommand} command executed on row activate. */
+    /** @param c0 &emsp; {@link forge.forge.gui.UiCommand} command executed on row activate. */
     public void setCmdActivate(final UiCommand c0) {
         this.cmdRowActivate = c0;
     }

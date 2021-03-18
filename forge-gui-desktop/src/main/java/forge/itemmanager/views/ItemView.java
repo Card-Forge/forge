@@ -33,10 +33,6 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import forge.toolbox.*;
-import forge.util.Localizer;
-import net.miginfocom.swing.MigLayout;
-
 import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -45,8 +41,16 @@ import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FLabel;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FScrollPanel;
+import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
+import forge.toolbox.ToolTipListener;
+import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 public abstract class ItemView<T extends InventoryItem> {
     private static final SkinColor BORDER_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT);

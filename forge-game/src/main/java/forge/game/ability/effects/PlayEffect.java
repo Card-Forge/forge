@@ -34,9 +34,9 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
-import forge.util.CardTranslation;
 
 public class PlayEffect extends SpellAbilityEffect {
     @Override

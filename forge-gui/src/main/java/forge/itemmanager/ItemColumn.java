@@ -17,13 +17,13 @@
  */
 package forge.itemmanager;
 
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.google.common.base.Function;
 
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemColumnConfig.SortState;
-
-import java.util.Map;
-import java.util.Map.Entry;
 
 
 public class ItemColumn {

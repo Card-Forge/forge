@@ -1,7 +1,11 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+
 import forge.GameCommand;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -16,11 +20,8 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
-import forge.util.TextUtil;
 import forge.util.Localizer;
-
-import java.util.ArrayList;
-import java.util.List;
+import forge.util.TextUtil;
 
 public class ProtectAllEffect extends SpellAbilityEffect {
 
@@ -87,7 +88,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
         }
         if (!valid.equals("")) {
             CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
-            list = CardLists.getValidCards(list, valid, sa.getActivatingPlayer(), host);
+            list = CardLists.getValidCards(list, valid, sa.getActivatingPlayer(), host, sa);
 
             for (final Card tgtC : list) {
                 if (tgtC.isInPlay()) {

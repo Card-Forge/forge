@@ -35,9 +35,8 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
-import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
-import forge.assets.FSkinProp;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
@@ -47,6 +46,7 @@ import forge.toolbox.FSkin.LineSkinBorder;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedDialog;
 import forge.util.OperatingSystem;
+import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDispatcher {

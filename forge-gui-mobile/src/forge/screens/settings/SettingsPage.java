@@ -1,9 +1,13 @@
 package forge.screens.settings;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.badlogic.gdx.utils.Align;
+
 import forge.Forge;
 import forge.Graphics;
-import forge.GuiBase;
 import forge.MulliganDefs;
 import forge.StaticData;
 import forge.ai.AiProfileUtil;
@@ -14,10 +18,11 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
 import forge.game.GameLogEntryType;
+import forge.gui.GuiBase;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
 import forge.screens.TabPageScreen.TabPage;
@@ -30,10 +35,6 @@ import forge.toolbox.FOptionPane;
 import forge.util.Callback;
 import forge.util.Localizer;
 import forge.util.Utils;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class SettingsPage extends TabPage<SettingsScreen> {
     private final FGroupList<Setting> lstSettings = add(new FGroupList<>());

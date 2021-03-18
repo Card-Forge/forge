@@ -30,8 +30,6 @@ import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.card.CardDetailUtil;
-import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.game.GameView;
@@ -39,6 +37,8 @@ import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.zone.ZoneType;
+import forge.gui.card.CardDetailUtil;
+import forge.gui.card.CardDetailUtil.DetailColors;
 import forge.item.IPaperCard;
 import forge.item.InventoryItemFromSet;
 import forge.model.FModel;

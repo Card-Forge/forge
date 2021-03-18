@@ -18,9 +18,12 @@
 package forge.deck;
 
 import java.text.NumberFormat;
+import java.util.Map;
 import java.util.Map.Entry;
 
+import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.Iterables;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.StaticData;
@@ -48,9 +51,6 @@ import forge.toolbox.FTextArea;
 import forge.util.Callback;
 import forge.util.Localizer;
 import forge.util.Utils;
-
-import com.badlogic.gdx.utils.Align;
-import java.util.Map;
 
 
 public class AddBasicLandsDialog extends FDialog {

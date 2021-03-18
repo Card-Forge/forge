@@ -17,6 +17,8 @@
  */
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.Game;
 import forge.game.GameStage;
 import forge.game.ability.AbilityKey;
@@ -25,8 +27,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 /**
  * <p>
@@ -59,20 +59,13 @@ public class TriggerDrawn extends Trigger {
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         final Game game = getHostCard().getGame();
-        final Card draw = ((Card) runParams.get(AbilityKey.Card));
         final int number = ((Integer) runParams.get(AbilityKey.Number));
 
-        if (hasParam("ValidCard")) {
-            if (!draw.isValid(getParam("ValidCard").split(","), getHostCard().getController(), getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
         }
-
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
         }
 
         if (hasParam("Number")) {

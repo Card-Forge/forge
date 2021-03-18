@@ -18,6 +18,7 @@
 package forge.game.trigger;
 
 import java.util.Map;
+
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
@@ -70,19 +71,18 @@ public class TriggerSpellAbilityCopy extends Trigger {
             }
         }
 
-        if (hasParam("ValidCard")) {
-            if (!matchesValid(cast, getParam("ValidCard").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", cast)) {
+            return false;
         }
-        if (hasParam("ValidSA")) {
-            if (!matchesValid(spellAbility, getParam("ValidSA").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidSA", spellAbility)) {
+            return false;
         }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
+        }
+
         if (hasParam("ValidActivatingPlayer")) {
-            if (si == null || !matchesValid(si.getSpellAbility(true).getActivatingPlayer(), getParam("ValidActivatingPlayer")
-                    .split(","), getHostCard())) {
+            if (si == null || !matchesValid(si.getSpellAbility(true).getActivatingPlayer(), getParam("ValidActivatingPlayer").split(","))) {
                 return false;
             }
         }

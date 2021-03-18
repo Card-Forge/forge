@@ -17,14 +17,14 @@
  */
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 /**
  * <p>
@@ -56,16 +56,11 @@ public class TriggerDamageDone extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidSource")) {
-            if (!matchesValid(runParams.get(AbilityKey.DamageSource), getParam("ValidSource").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) {
+            return false;
         }
-
-        if (hasParam("ValidTarget")) {
-            if (!matchesValid(runParams.get(AbilityKey.DamageTarget), getParam("ValidTarget").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
+            return false;
         }
 
         if (hasParam("CombatDamage")) {

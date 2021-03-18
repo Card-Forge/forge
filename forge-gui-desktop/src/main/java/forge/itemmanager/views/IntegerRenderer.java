@@ -17,8 +17,9 @@
  */
 package forge.itemmanager.views;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
+
+import javax.swing.JTable;
 
 /**
  * A quick converter to avoid -1 and Integer.MAX_VALUE being displayed for unapplicable values.

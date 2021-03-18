@@ -1,11 +1,11 @@
 package forge.game.ability;
 
 
-import forge.game.ability.effects.*;
-import forge.util.ReflectionUtil;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import forge.game.ability.effects.*;
+import forge.util.ReflectionUtil;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -153,9 +153,9 @@ public enum ApiType {
     SetLife (LifeSetEffect.class),
     SetState (SetStateEffect.class),
     Shuffle (ShuffleEffect.class),
+    SkipPhase (SkipPhaseEffect.class),
     SkipTurn (SkipTurnEffect.class),
     StoreSVar (StoreSVarEffect.class),
-    StoreMap (StoreMapEffect.class),
     Subgame (SubgameEffect.class),
     Surveil (SurveilEffect.class),
     SwitchBlock (SwitchBlockEffect.class),

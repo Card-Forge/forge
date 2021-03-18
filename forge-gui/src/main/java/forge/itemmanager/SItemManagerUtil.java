@@ -1,22 +1,23 @@
 package forge.itemmanager;
 
-import com.google.common.base.Predicate;
-import forge.GuiBase;
-import forge.assets.FSkinProp;
-import forge.assets.IHasSkinProp;
-import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
-import forge.deck.DeckProxy;
-import forge.interfaces.IComboBox;
-import forge.item.InventoryItem;
-import forge.util.ComparableOp;
-import forge.util.Localizer;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
+
+import com.google.common.base.Predicate;
+
+import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
+import forge.deck.DeckProxy;
+import forge.gui.GuiBase;
+import forge.gui.interfaces.IComboBox;
+import forge.item.InventoryItem;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.assets.IHasSkinProp;
+import forge.util.ComparableOp;
+import forge.util.Localizer;
 
 /**
  * Static methods for working with top-level editor methods,

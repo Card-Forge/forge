@@ -1,33 +1,17 @@
-/*
- * Forge: Play Magic: the Gathering.
- * Copyright (C) 2011  Forge Team
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package forge.toolbox;
 
-import com.esotericsoftware.minlog.Log;
-import forge.assets.FSkinProp;
-import forge.card.ColorSet;
-import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostShard;
-import forge.toolbox.FSkin.SkinImage;
-
-import java.awt.*;
+import java.awt.Graphics;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
+
+import com.esotericsoftware.minlog.Log;
+
+import forge.card.ColorSet;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
+import forge.localinstance.assets.FSkinProp;
+import forge.toolbox.FSkin.SkinImage;
 
 /**
  * <p>

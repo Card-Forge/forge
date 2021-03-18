@@ -1,5 +1,7 @@
 package forge.screens.deckeditor.views;
 
+import javax.swing.JPanel;
+
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -10,8 +12,6 @@ import forge.itemmanager.ItemManagerContainer;
 import forge.screens.deckeditor.controllers.CCardCatalog;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
 
 /**
  * Assembles Swing components of card catalog in deck editor.

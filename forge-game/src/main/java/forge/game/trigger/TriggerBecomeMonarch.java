@@ -16,20 +16,14 @@ public class TriggerBecomeMonarch extends Trigger {
 
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-        final Card host = this.getHostCard();
+        final Card host = getHostCard();
         final Game game = host.getGame();
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","),
-                    host)) {
-                return false;
-            }
-        }
 
-        if (hasParam("BeginTurn")) {
-            if (!matchesValid(game.getMonarchBeginTurn(), getParam("BeginTurn").split(","),
-                    host)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
+        }
+        if (!matchesValidParam("BeginTurn", game.getMonarchBeginTurn())) {
+            return false;
         }
         return true;
     }

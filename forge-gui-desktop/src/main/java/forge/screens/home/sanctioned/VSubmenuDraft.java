@@ -2,11 +2,13 @@ package forge.screens.home.sanctioned;
 
 import java.awt.Font;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.SwingConstants;
 
-import forge.toolbox.*;
-import forge.util.Localizer;
-import net.miginfocom.swing.MigLayout;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -20,6 +22,12 @@ import forge.screens.home.LblHeader;
 import forge.screens.home.StartButton;
 import forge.screens.home.VHomeUI;
 import forge.screens.home.VHomeUI.PnlDisplay;
+import forge.toolbox.FLabel;
+import forge.toolbox.FRadioButton;
+import forge.toolbox.FSkin;
+import forge.toolbox.JXButtonPanel;
+import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 /** 
  * Assembles Swing components of draft submenu singleton.

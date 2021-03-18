@@ -1,26 +1,33 @@
 package forge.itemmanager.filters;
 
+import java.awt.BasicStroke;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
 import com.google.common.base.Predicate;
 
 import forge.gui.framework.ILocalRepaint;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.toolbox.FSkin;
-import forge.toolbox.FTextField;
-import forge.toolbox.LayoutHelper;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedCheckBox;
 import forge.toolbox.FSkin.SkinnedPanel;
+import forge.toolbox.FTextField;
+import forge.toolbox.LayoutHelper;
 import forge.util.Localizer;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 
 public abstract class ItemFilter<T extends InventoryItem> {

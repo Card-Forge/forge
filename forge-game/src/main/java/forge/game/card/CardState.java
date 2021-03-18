@@ -17,10 +17,20 @@
  */
 package forge.game.card;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-import forge.card.*;
+
+import forge.card.CardEdition;
+import forge.card.CardRarity;
+import forge.card.CardStateName;
+import forge.card.CardType;
+import forge.card.CardTypeView;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
@@ -40,11 +50,6 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
 
@@ -640,7 +645,7 @@ public class CardState extends GameObject implements IHasSVars {
      * @see forge.game.GameObject#hasProperty(java.lang.String, forge.game.player.Player, forge.game.card.Card, forge.game.spellability.SpellAbility)
      */
     @Override
-    public boolean hasProperty(String property, Player sourceController, Card source, SpellAbility spellAbility) {
+    public boolean hasProperty(String property, Player sourceController, Card source, CardTraitBase spellAbility) {
         return ForgeScript.cardStateHasProperty(this, property, sourceController, source, spellAbility);
     }
 

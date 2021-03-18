@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import java.util.List;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -18,8 +20,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
-
-import java.util.List;
 
 public class TapAllAi extends SpellAbilityAi {
     @Override
@@ -48,7 +48,7 @@ public class TapAllAi extends SpellAbilityAi {
             validTappables = opp.getCardsIn(ZoneType.Battlefield);
         }
 
-        validTappables = CardLists.getValidCards(validTappables, valid, source.getController(), source);
+        validTappables = CardLists.getValidCards(validTappables, valid, source.getController(), source, sa);
         validTappables = CardLists.filter(validTappables, Presets.UNTAPPED);
 
         if (sa.hasParam("AILogic")) {
@@ -98,10 +98,10 @@ public class TapAllAi extends SpellAbilityAi {
         return true;
     }
 
-    private CardCollectionView getTapAllTargets(final String valid, final Card source) {
+    private CardCollectionView getTapAllTargets(final String valid, final Card source, SpellAbility sa) {
         final Game game = source.getGame();
         CardCollectionView tmpList = game.getCardsIn(ZoneType.Battlefield);
-        tmpList = CardLists.getValidCards(tmpList, valid, source.getController(), source);
+        tmpList = CardLists.getValidCards(tmpList, valid, source.getController(), source, sa);
         tmpList = CardLists.filter(tmpList, Presets.UNTAPPED);
         return tmpList;
     }
@@ -115,7 +115,7 @@ public class TapAllAi extends SpellAbilityAi {
             valid = sa.getParam("ValidCards");
         }
 
-        CardCollectionView validTappables = getTapAllTargets(valid, source);
+        CardCollectionView validTappables = getTapAllTargets(valid, source, sa);
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 

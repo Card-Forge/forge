@@ -20,12 +20,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
 import forge.Singletons;
+import forge.gamemodes.match.HostedMatch;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.framework.SResizingUtil;
-import forge.match.HostedMatch;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.sound.SoundSystem;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.Colors;

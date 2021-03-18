@@ -1,5 +1,7 @@
 package forge.gamesimulationtests.comprehensiverules;
 
+import org.testng.annotations.Test;
+
 import forge.game.phase.PhaseType;
 import forge.gamesimulationtests.BaseGameSimulationTest;
 import forge.gamesimulationtests.util.GameWrapper;
@@ -7,11 +9,15 @@ import forge.gamesimulationtests.util.card.CardSpecificationBuilder;
 import forge.gamesimulationtests.util.gamestate.GameStateSpecificationBuilder;
 import forge.gamesimulationtests.util.player.PlayerSpecification;
 import forge.gamesimulationtests.util.player.PlayerSpecificationBuilder;
-import forge.gamesimulationtests.util.playeractions.*;
+import forge.gamesimulationtests.util.playeractions.ActionPreCondition;
+import forge.gamesimulationtests.util.playeractions.ActivateAbilityAction;
+import forge.gamesimulationtests.util.playeractions.CastSpellFromHandAction;
+import forge.gamesimulationtests.util.playeractions.DeclareAttackersAction;
+import forge.gamesimulationtests.util.playeractions.DeclareBlockersAction;
+import forge.gamesimulationtests.util.playeractions.PlayerActions;
 import forge.gamesimulationtests.util.playeractions.testactions.CardAssertAction;
 import forge.gamesimulationtests.util.playeractions.testactions.EndTestAction;
 import forge.gamesimulationtests.util.playeractions.testactions.PlayerAssertAction;
-import org.testng.annotations.Test;
 
 public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 	@Test

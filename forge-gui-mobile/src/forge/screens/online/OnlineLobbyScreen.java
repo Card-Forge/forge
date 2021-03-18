@@ -1,24 +1,25 @@
 package forge.screens.online;
 
 import com.google.common.collect.ImmutableList;
-import forge.FThreads;
+
 import forge.Forge;
-import forge.GuiBase;
-import forge.assets.FSkinProp;
-import forge.interfaces.ILobbyView;
-import forge.match.GameLobby;
-import forge.net.ChatMessage;
-import forge.net.IOnlineChatInterface;
-import forge.net.IOnlineLobby;
-import forge.net.NetConnectUtil;
-import forge.net.OfflineLobby;
-import forge.net.client.FGameClient;
-import forge.net.server.FServerManager;
-import forge.properties.ForgeConstants;
+import forge.gamemodes.match.GameLobby;
+import forge.gamemodes.net.ChatMessage;
+import forge.gamemodes.net.IOnlineChatInterface;
+import forge.gamemodes.net.IOnlineLobby;
+import forge.gamemodes.net.NetConnectUtil;
+import forge.gamemodes.net.OfflineLobby;
+import forge.gamemodes.net.client.FGameClient;
+import forge.gamemodes.net.server.FServerManager;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
+import forge.gui.interfaces.ILobbyView;
+import forge.gui.util.SOptionPane;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgeConstants;
 import forge.screens.LoadingOverlay;
 import forge.screens.constructed.LobbyScreen;
 import forge.screens.online.OnlineMenu.OnlineScreen;
-import forge.util.gui.SOptionPane;
 import forge.util.Localizer;
 
 public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {

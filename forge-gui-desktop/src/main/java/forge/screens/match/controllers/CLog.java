@@ -3,7 +3,7 @@ package forge.screens.match.controllers;
 import java.util.Observable;
 import java.util.Observer;
 
-import forge.FThreads;
+import forge.gui.FThreads;
 import forge.gui.framework.ICDoc;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VLog;

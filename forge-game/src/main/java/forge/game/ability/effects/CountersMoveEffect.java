@@ -1,5 +1,11 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
@@ -13,14 +19,8 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Localizer;
 import forge.util.CardTranslation;
-
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 
 public class CountersMoveEffect extends SpellAbilityEffect {

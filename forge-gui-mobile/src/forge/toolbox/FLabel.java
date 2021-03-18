@@ -4,14 +4,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
-import forge.UiCommand;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
-import forge.assets.FSkinProp;
-import forge.assets.TextRenderer;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
-import forge.interfaces.IButton;
+import forge.assets.TextRenderer;
+import forge.gui.UiCommand;
+import forge.gui.interfaces.IButton;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.TextBounds;

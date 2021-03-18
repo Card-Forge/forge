@@ -17,13 +17,13 @@
  */
 package forge.game.spellability;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
-
-import java.util.Map;
 
 /**
  * <p>

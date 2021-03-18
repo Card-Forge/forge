@@ -1,22 +1,31 @@
 package forge.itemmanager;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+
 import forge.StaticData;
-import forge.card.*;
+import forge.card.CardEdition;
+import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
+import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.deck.DeckProxy;
 import forge.game.GameFormat;
-import forge.interfaces.IButton;
+import forge.gamemodes.quest.data.StarRating;
+import forge.gui.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.quest.data.StarRating;
 import forge.util.BinaryUtil;
 import forge.util.PredicateString.StringOp;
-
-import java.util.*;
 
 /** 
  * Static factory; holds blocks of form elements and predicates

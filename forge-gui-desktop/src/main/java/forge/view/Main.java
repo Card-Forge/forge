@@ -17,11 +17,11 @@
  */
 package forge.view;
 
-import forge.GuiBase;
 import forge.GuiDesktop;
 import forge.Singletons;
-import forge.card.CardReaderExperiments;
 import forge.error.ExceptionHandler;
+import forge.gui.GuiBase;
+import forge.gui.card.CardReaderExperiments;
 import forge.util.BuildInfo;
 import io.sentry.Sentry;
 import io.sentry.SentryClient;

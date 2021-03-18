@@ -17,16 +17,17 @@
  */
 package forge.itemmanager.views;
 
-import forge.assets.FSkinProp;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+
+import javax.swing.SwingConstants;
+
 import forge.item.InventoryItem;
+import forge.localinstance.assets.FSkinProp;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.MouseEvent;
 
 /**
  * Displays deck quantity with +/- buttons

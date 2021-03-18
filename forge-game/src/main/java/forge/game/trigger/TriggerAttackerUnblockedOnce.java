@@ -17,14 +17,12 @@
  */
 package forge.game.trigger;
 
-import forge.game.GameEntity;
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -54,32 +52,13 @@ public class TriggerAttackerUnblockedOnce extends Trigger {
 
     /** {@inheritDoc}
      * @param runParams*/
-    @SuppressWarnings("unchecked")
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidDefenders")) {
-            boolean valid = false;
-
-            final List<GameEntity> srcs = (List<GameEntity>) runParams.get(AbilityKey.Defenders);
-            for (GameEntity c : srcs) {
-                if (c.isValid(getParam("ValidDefenders").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
-                    valid = true;
-                }
-            }
-            if (!valid) {
-                return false;
-            }
-            /*
-            if (hasParam("ValidAttackers")) {
-                // should be updated if a creature of a specific type attackes a defender
-            }
-            */
+        if (!matchesValidParam("ValidDefenders", runParams.get(AbilityKey.Defenders))) {
+            return false;
         }
-        if (hasParam("ValidAttackingPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.AttackingPlayer),
-                    getParam("ValidAttackingPlayer").split(","), this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidAttackingPlayer", runParams.get(AbilityKey.AttackingPlayer))) {
+            return false;
         }
         return true;
     }

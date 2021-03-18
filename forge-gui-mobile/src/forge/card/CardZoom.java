@@ -17,19 +17,19 @@ import forge.deck.CommanderDeckGenerator;
 import forge.deck.DeckProxy;
 import forge.game.GameView;
 import forge.game.card.CardView;
+import forge.gamemodes.planarconquest.ConquestCommander;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.planarconquest.ConquestCommander;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
 import forge.toolbox.FOverlay;
 import forge.util.Localizer;
-import forge.util.collect.FCollectionView;
 import forge.util.Utils;
+import forge.util.collect.FCollectionView;
 
 public class CardZoom extends FOverlay {
     private static final float REQ_AMOUNT = Utils.AVG_FINGER_WIDTH;

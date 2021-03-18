@@ -3,10 +3,6 @@ package forge.sound;
 import java.util.Collection;
 
 import forge.LobbyPlayer;
-import forge.events.IUiEventVisitor;
-import forge.events.UiEventAttackerDeclared;
-import forge.events.UiEventBlockerAssigned;
-import forge.events.UiEventNextGameDecision;
 import forge.game.card.Card;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEvent;
@@ -36,6 +32,10 @@ import forge.game.event.IGameEventVisitor;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.gui.events.IUiEventVisitor;
+import forge.gui.events.UiEventAttackerDeclared;
+import forge.gui.events.UiEventBlockerAssigned;
+import forge.gui.events.UiEventNextGameDecision;
 import forge.util.TextUtil;
 import forge.util.maps.MapOfLists;
 

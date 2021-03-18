@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -46,7 +46,7 @@ import forge.util.Localizer;
  * <p>
  * Trigger_SpellAbilityCast class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -56,7 +56,7 @@ public class TriggerSpellAbilityCast extends Trigger {
      * <p>
      * Constructor for Trigger_SpellAbilityCast.
      * </p>
-     * 
+     *
      * @param params
      *            a {@link java.util.HashMap} object.
      * @param host
@@ -99,16 +99,19 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
         }
 
+
+        if (!matchesValidParam("ValidControllingPlayer", cast.getController())) {
+            return false;
+        }
+
         if (hasParam("ValidControllingPlayer")) {
-            if (!matchesValid(cast.getController(), getParam("ValidControllingPlayer").split(","),
-                    getHostCard())) {
+            if (!matchesValid(cast.getController(), getParam("ValidControllingPlayer").split(","))) {
                 return false;
             }
         }
 
         if (hasParam("ValidActivatingPlayer")) {
-            if (si == null || !matchesValid(si.getSpellAbility(true).getActivatingPlayer(), getParam("ValidActivatingPlayer")
-                    .split(","), getHostCard())) {
+            if (si == null || !matchesValid(si.getSpellAbility(true).getActivatingPlayer(), getParam("ValidActivatingPlayer").split(","))) {
                 return false;
             }
             if (hasParam("ActivatorThisTurnCast")) {
@@ -123,16 +126,11 @@ public class TriggerSpellAbilityCast extends Trigger {
                 }
             }
         }
-
-        if (hasParam("ValidCard")) {
-            if (!matchesValid(cast, getParam("ValidCard").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", cast)) {
+            return false;
         }
-        if (hasParam("ValidSA")) {
-            if (!matchesValid(spellAbility, getParam("ValidSA").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidSA", spellAbility)) {
+            return false;
         }
 
         if (hasParam("TargetsValid")) {
@@ -140,12 +138,12 @@ public class TriggerSpellAbilityCast extends Trigger {
             if (si != null) {
                 sa = si.getSpellAbility(true);
             }
-           
+
             boolean validTgtFound = false;
             while (sa != null && !validTgtFound) {
                 for (final Card tgt : sa.getTargets().getTargetCards()) {
-                    if (tgt.isValid(getParam("TargetsValid").split(","), getHostCard()
-                            .getController(), getHostCard(), null)) {
+
+                    if (matchesValid(tgt, getParam("TargetsValid").split(","))) {
                         validTgtFound = true;
                         if (this.hasParam("RememberValidCards")) {
                             this.getHostCard().addRemembered(tgt);
@@ -154,7 +152,7 @@ public class TriggerSpellAbilityCast extends Trigger {
                 }
 
                 for (final Player p : sa.getTargets().getTargetPlayers()) {
-                    if (matchesValid(p, getParam("TargetsValid").split(","), getHostCard())) {
+                    if (matchesValid(p, getParam("TargetsValid").split(","))) {
                         validTgtFound = true;
                         break;
                     }
@@ -186,7 +184,7 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
             candidates.removeAll(targetedSA.getTargets().getTargetCards());
             String valid = getParam("CanTargetOtherCondition");
-            if (CardLists.getValidCards(candidates, valid, spellAbility.getActivatingPlayer(), spellAbility.getHostCard()).isEmpty()) {
+            if (CardLists.getValidCards(candidates, valid, spellAbility.getActivatingPlayer(), spellAbility.getHostCard(), spellAbility).isEmpty()) {
                 return false;
             }
         }

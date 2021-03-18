@@ -19,18 +19,17 @@ package forge.view.arcane;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import forge.game.card.CardView;
 import forge.screens.match.CMatchUI;
-import forge.view.arcane.util.CardPanelMouseAdapter;
-
 import forge.toolbox.FButton;
 import forge.util.Localizer;
+import forge.view.arcane.util.CardPanelMouseAdapter;
 
 // Show a list of cards in a new window, containing the moveable cards
 // Allow moves of the moveable cards to top, to bottom, or anywhere

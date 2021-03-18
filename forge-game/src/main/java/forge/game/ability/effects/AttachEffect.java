@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+
 import forge.GameCommand;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -15,12 +17,10 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.util.collect.FCollection;
+import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
-import forge.util.CardTranslation;
-
-import java.util.List;
+import forge.util.collect.FCollection;
 
 public class AttachEffect extends SpellAbilityEffect {
     @Override
@@ -199,7 +199,7 @@ public class AttachEffect extends SpellAbilityEffect {
             final FCollection<Player> players = new FCollection<>();
 
             for (Player player : game.getPlayers()) {
-                if (player.isValid(tgt.getValidTgts(), aura.getActivatingPlayer(), source, null)) {
+                if (player.isValid(tgt.getValidTgts(), aura.getActivatingPlayer(), source, aura)) {
                     players.add(player);
                 }
             }

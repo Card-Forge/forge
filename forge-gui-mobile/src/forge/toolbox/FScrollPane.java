@@ -7,8 +7,8 @@ import com.badlogic.gdx.math.Vector2;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkinColor;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
 import forge.util.PhysicsObject;
 import forge.util.Utils;
 

@@ -1,7 +1,15 @@
 package forge.ai.ability;
 
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.collect.Lists;
-import forge.ai.*;
+
+import forge.ai.AiController;
+import forge.ai.AiPlayDecision;
+import forge.ai.ComputerUtilAbility;
+import forge.ai.PlayerControllerAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
@@ -11,9 +19,6 @@ import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
-
-import java.util.List;
-import java.util.Map;
 
 public class CharmAi extends SpellAbilityAi {
     @Override

@@ -1,11 +1,12 @@
 package forge.screens.home.puzzle;
 
-import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.util.Localizer;
-
-import javax.swing.*;
 import java.awt.event.KeyEvent;
+
+import javax.swing.JMenu;
+
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
+import forge.util.Localizer;
 
 public class PuzzleGameMenu {
     private PuzzleGameMenu() { }

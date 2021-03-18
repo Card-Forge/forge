@@ -1,7 +1,7 @@
 package forge.card;
 
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Align;
 
 import forge.item.PaperCard;
 import forge.toolbox.FChoiceList;

@@ -1,7 +1,11 @@
 package forge.ai;
 
+import java.util.Iterator;
+import java.util.List;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
+
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameActionUtil;
@@ -16,9 +20,6 @@ import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
-
-import java.util.Iterator;
-import java.util.List;
 
 public class ComputerUtilAbility {
     public static CardCollection getAvailableLandsToPlay(final Game game, final Player player) {

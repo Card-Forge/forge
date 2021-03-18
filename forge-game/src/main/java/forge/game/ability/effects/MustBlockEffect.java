@@ -1,5 +1,11 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -10,12 +16,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
-
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 public class MustBlockEffect extends SpellAbilityEffect {
 
@@ -41,7 +41,7 @@ public class MustBlockEffect extends SpellAbilityEffect {
             }
 
             CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
-            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
+            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host, sa);
             if (!choices.isEmpty()) {
                 String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") +" ";
                 Map<String, Object> params = Maps.newHashMap();

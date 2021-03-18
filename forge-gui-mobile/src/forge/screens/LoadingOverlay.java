@@ -3,7 +3,6 @@ package forge.screens;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 
-import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkin;
@@ -11,6 +10,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.gui.FThreads;
 import forge.toolbox.FOverlay;
 import forge.util.ThreadUtil;
 import forge.util.Utils;

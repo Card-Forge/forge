@@ -17,11 +17,12 @@
  */
 package forge.view.arcane.util;
 
-import javax.swing.*;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineBreakMeasurer;
 import java.awt.font.TextAttribute;
@@ -30,6 +31,10 @@ import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
 import java.text.BreakIterator;
 import java.util.Locale;
+
+import javax.swing.JLabel;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * <p>

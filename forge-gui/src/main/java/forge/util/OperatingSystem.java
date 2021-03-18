@@ -1,6 +1,6 @@
 package forge.util;
 
-import forge.FThreads;
+import forge.gui.FThreads;
 
 public class OperatingSystem {
     private static String os = System.getProperty("os.name").toLowerCase();

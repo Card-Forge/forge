@@ -21,10 +21,11 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 
-import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
 import forge.deck.DeckRecognizer.TokenType;
+import forge.gui.FThreads;
+import forge.gui.util.SOptionPane;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FDialog;
@@ -34,7 +35,6 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextArea;
 import forge.util.Callback;
 import forge.util.Localizer;
-import forge.util.gui.SOptionPane;
 
 
 public class FDeckImportDialog extends FDialog {

@@ -17,18 +17,19 @@
  */
 package forge.itemmanager.views;
 
-import forge.assets.FSkinProp;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JTable;
+
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.item.InventoryItem;
+import forge.localinstance.assets.FSkinProp;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.util.Localizer;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.MouseEvent;
 
 /**
  * Displays favorite icons

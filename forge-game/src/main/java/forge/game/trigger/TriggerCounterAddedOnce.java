@@ -22,7 +22,6 @@ import java.util.Map;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
@@ -64,42 +63,14 @@ public class TriggerCounterAddedOnce extends Trigger {
             }
         }
 
-        if (hasParam("ValidCard")) {
-            if (!runParams.containsKey(AbilityKey.Card))
-                return false;
-
-            final Card addedTo = (Card) runParams.get(AbilityKey.Card);
-            if (!addedTo.isValid(getParam("ValidCard").split(","), getHostCard().getController(),
-                    getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
         }
-
-        if (hasParam("ValidPlayer")) {
-            if (!runParams.containsKey(AbilityKey.Player))
-                return false;
-
-            final Player addedTo = (Player) runParams.get(AbilityKey.Player);
-            if (!addedTo.isValid(getParam("ValidPlayer").split(","), getHostCard().getController(),
-                    getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
         }
-
-        if (hasParam("ValidSource")) {
-            if (!runParams.containsKey(AbilityKey.Source))
-                return false;
-
-            final Player source = (Player) runParams.get(AbilityKey.Source);
-
-            if (source == null) {
-                return false;
-            }
-
-            if (!source.isValid(getParam("ValidSource").split(","), getHostCard().getController(),
-                    getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.Source))) {
+            return false;
         }
 
         return true;

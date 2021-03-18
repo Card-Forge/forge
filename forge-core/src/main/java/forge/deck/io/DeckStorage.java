@@ -17,17 +17,17 @@
  */
 package forge.deck.io;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.List;
+import java.util.Map;
+
 import forge.deck.Deck;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.IItemReader;
 import forge.util.IItemSerializer;
 import forge.util.storage.StorageReaderFolder;
-
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.List;
-import java.util.Map;
 
 /**
  * This class knows how to make a file out of a deck object and vice versa.

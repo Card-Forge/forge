@@ -1,13 +1,14 @@
 package forge.itemmanager.filters;
 
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.toolbox.FLabel;
 import forge.toolbox.FTextField;
 import forge.toolbox.LayoutHelper;
 import forge.util.TextUtil;
-
-import javax.swing.*;
 
 /** 
  * TODO: Write javadoc for this type.

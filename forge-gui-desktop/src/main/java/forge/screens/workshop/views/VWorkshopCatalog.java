@@ -1,6 +1,11 @@
 package forge.screens.workshop.views;
 
+import javax.swing.JPanel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import com.google.common.collect.Iterables;
+
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -15,10 +20,6 @@ import forge.screens.workshop.controllers.CWorkshopCatalog;
 import forge.util.ItemPool;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 /**
  * Assembles Swing components of card catalog in workshop.

@@ -1,9 +1,11 @@
 package forge.gui.framework;
 
+import java.io.File;
+
 import forge.Singletons;
-import forge.assets.FSkinProp;
-import forge.properties.FileLocation;
-import forge.properties.ForgeConstants;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.FileLocation;
+import forge.localinstance.properties.ForgeConstants;
 import forge.screens.bazaar.CBazaarUI;
 import forge.screens.bazaar.VBazaarUI;
 import forge.screens.deckeditor.CDeckEditorUI;
@@ -17,10 +19,8 @@ import forge.screens.workshop.VWorkshopUI;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
-import forge.view.FView;
 import forge.util.Localizer;
-
-import java.io.File;
+import forge.view.FView;
 
 /**
  * Definitions for Forge screens

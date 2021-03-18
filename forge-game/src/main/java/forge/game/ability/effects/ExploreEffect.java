@@ -1,6 +1,9 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+
 import com.google.common.collect.Lists;
+
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
@@ -16,8 +19,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
-
-import java.util.List;
 
 public class ExploreEffect extends SpellAbilityEffect {
 

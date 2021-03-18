@@ -1,5 +1,14 @@
 package forge.deck;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
@@ -7,15 +16,22 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
+
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
-import forge.assets.*;
+import forge.assets.FImage;
+import forge.assets.FSkin;
+import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
+import forge.assets.FTextureRegionImage;
 import forge.card.CardDb;
 import forge.card.CardEdition;
-import forge.card.CardPreferences;
 import forge.card.CardRulesPredicates;
 import forge.deck.io.DeckPreferences;
+import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.planarconquest.ConquestUtil;
+import forge.gui.card.CardPreferences;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ColumnDef;
@@ -23,25 +39,27 @@ import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManager.ContextMenuBuilder;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;
-import forge.limited.BoosterDraft;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
-import forge.planarconquest.ConquestUtil;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
-import forge.toolbox.*;
+import forge.toolbox.FContainer;
+import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
-import forge.util.*;
+import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.GuiChoose;
+import forge.util.Callback;
+import forge.util.ItemPool;
+import forge.util.Lang;
+import forge.util.Localizer;
+import forge.util.Utils;
 import forge.util.storage.IStorage;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.*;
-import java.util.Map.Entry;
 
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public static FSkinImage MAIN_DECK_ICON = Forge.hdbuttons ? FSkinImage.HDLIBRARY :FSkinImage.DECKLIST;

@@ -1,8 +1,15 @@
 package forge.game.card.token;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardType;
@@ -19,12 +26,6 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.item.PaperToken;
-
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.List;
-import java.util.Map;
 
 public class TokenInfo {
     final String name;

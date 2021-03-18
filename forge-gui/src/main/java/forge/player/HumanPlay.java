@@ -1,8 +1,13 @@
 package forge.player;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Iterables;
-import forge.FThreads;
+
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameActionUtil;
@@ -11,28 +16,59 @@ import forge.game.GameEntityViewMap;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.cost.*;
+import forge.game.card.CardView;
+import forge.game.card.CardZoneTable;
+import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
+import forge.game.cost.Cost;
+import forge.game.cost.CostAddMana;
+import forge.game.cost.CostAdjustment;
+import forge.game.cost.CostDamage;
+import forge.game.cost.CostDiscard;
+import forge.game.cost.CostDraw;
+import forge.game.cost.CostExile;
+import forge.game.cost.CostFlipCoin;
+import forge.game.cost.CostGainControl;
+import forge.game.cost.CostGainLife;
+import forge.game.cost.CostMill;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostPartMana;
+import forge.game.cost.CostPartWithList;
+import forge.game.cost.CostPayEnergy;
+import forge.game.cost.CostPayLife;
+import forge.game.cost.CostPutCardToLib;
+import forge.game.cost.CostPutCounter;
+import forge.game.cost.CostRemoveAnyCounter;
+import forge.game.cost.CostRemoveCounter;
+import forge.game.cost.CostReturn;
+import forge.game.cost.CostReveal;
+import forge.game.cost.CostSacrifice;
+import forge.game.cost.CostTapType;
+import forge.game.cost.PaymentDecision;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerView;
-import forge.game.spellability.*;
+import forge.game.spellability.LandAbility;
+import forge.game.spellability.OptionalCostValue;
+import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.match.input.InputPayMana;
-import forge.match.input.InputPayManaOfCostPayment;
-import forge.match.input.InputSelectCardsFromList;
+import forge.gamemodes.match.input.InputPayMana;
+import forge.gamemodes.match.input.InputPayManaOfCostPayment;
+import forge.gamemodes.match.input.InputSelectCardsFromList;
+import forge.gui.FThreads;
+import forge.gui.util.SGuiChoose;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-import forge.util.gui.SGuiChoose;
-import forge.util.Localizer;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class HumanPlay {
@@ -484,12 +520,12 @@ public class HumanPlay {
             }
             else if (part instanceof CostGainControl) {
                 int amount = Integer.parseInt(part.getAmount());
-                CardCollectionView list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
+                CardCollectionView list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield), part.getType(), p, source, sourceAbility);
                 boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblGainControl") + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostReturn) {
-                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
+                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source, sourceAbility);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
                 boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblReturnToHand") + orString);
                 if (!hasPaid) { return false; }
@@ -502,7 +538,7 @@ public class HumanPlay {
 
                     ((CostDiscard)part).payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Hand)), sourceAbility);
                 } else {
-                    CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
+                    CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source, sourceAbility);
                     int amount = getAmountFromPartX(part, source, sourceAbility);
                     boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lbldiscard") + orString);
                     if (!hasPaid) { return false; }
@@ -510,13 +546,13 @@ public class HumanPlay {
             }
             else if (part instanceof CostReveal) {
                 CostReveal costReveal = (CostReveal) part;
-                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(costReveal.getRevealFrom()), part.getType(), p, source);
+                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(costReveal.getRevealFrom()), part.getType(), p, source, sourceAbility);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
                 boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblReveal") + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostTapType) {
-                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
+                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source, sourceAbility);
                 list = CardLists.filter(list, Presets.UNTAPPED);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
                 boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblTap") + orString);

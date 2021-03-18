@@ -17,13 +17,13 @@
  */
 package forge.screens.match;
 
-import java.awt.Point;
-import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.GeneralPath;
@@ -43,8 +43,8 @@ import forge.game.card.CardView;
 import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VStack.StackInstanceTextArea;

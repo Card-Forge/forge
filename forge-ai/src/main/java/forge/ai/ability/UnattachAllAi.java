@@ -1,5 +1,8 @@
 package forge.ai.ability;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -11,9 +14,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class UnattachAllAi extends SpellAbilityAi {
 

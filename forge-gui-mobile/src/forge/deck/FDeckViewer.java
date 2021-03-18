@@ -1,5 +1,7 @@
 package forge.deck;
 
+import java.util.Map.Entry;
+
 import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkin;
@@ -18,8 +20,6 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
-
-import java.util.Map.Entry;
 
 public class FDeckViewer extends FScreen {
     private static FDeckViewer deckViewer;

@@ -12,21 +12,23 @@ import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Align;
-import forge.FThreads;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gamemodes.quest.data.DeckConstructionRules;
+import forge.gamemodes.quest.data.QuestData;
+import forge.gamemodes.quest.data.QuestPreferences.QPref;
+import forge.gamemodes.quest.io.QuestDataIO;
+import forge.gui.FThreads;
+import forge.gui.util.SOptionPane;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.quest.QuestController;
-import forge.quest.QuestUtil;
-import forge.quest.data.DeckConstructionRules;
-import forge.quest.data.QuestData;
-import forge.quest.data.QuestPreferences.QPref;
-import forge.quest.io.QuestDataIO;
 import forge.screens.LaunchScreen;
 import forge.screens.home.LoadGameMenu;
 import forge.screens.home.NewGameMenu.NewGameScreen;
@@ -34,13 +36,12 @@ import forge.screens.quest.QuestMenu.LaunchReason;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
 import forge.toolbox.FTextArea;
-import forge.toolbox.FEvent.FEventHandler;
+import forge.util.Localizer;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
-import forge.util.gui.SOptionPane;
-import forge.util.Localizer;
 
 public class LoadQuestScreen extends LaunchScreen {
     private static final float ITEM_HEIGHT = Utils.AVG_FINGER_HEIGHT;

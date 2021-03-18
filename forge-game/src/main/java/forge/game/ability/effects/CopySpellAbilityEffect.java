@@ -1,5 +1,9 @@
 package forge.game.ability.effects;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -17,12 +21,8 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.util.Localizer;
 import forge.util.CardTranslation;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import forge.util.Localizer;
 
 
 public class CopySpellAbilityEffect extends SpellAbilityEffect {

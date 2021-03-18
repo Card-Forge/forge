@@ -1,16 +1,20 @@
 package forge.screens.home.puzzle;
 
-import forge.GuiBase;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import forge.assets.FSkinFont;
 import forge.deck.Deck;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
-import forge.match.HostedMatch;
+import forge.gamemodes.match.HostedMatch;
+import forge.gamemodes.puzzle.Puzzle;
+import forge.gamemodes.puzzle.PuzzleIO;
+import forge.gui.GuiBase;
+import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
-import forge.properties.ForgeConstants;
-import forge.puzzle.Puzzle;
-import forge.puzzle.PuzzleIO;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.home.NewGameMenu;
@@ -21,10 +25,6 @@ import forge.toolbox.GuiChoose;
 import forge.util.Callback;
 import forge.util.Localizer;
 import forge.util.Utils;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class PuzzleScreen extends LaunchScreen {
 

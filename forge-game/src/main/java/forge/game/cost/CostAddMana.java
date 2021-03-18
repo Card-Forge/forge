@@ -20,9 +20,9 @@ package forge.game.cost;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.card.mana.ManaAtom;
 import org.apache.commons.lang3.StringUtils;
 
+import forge.card.mana.ManaAtom;
 import forge.game.card.Card;
 import forge.game.mana.Mana;
 import forge.game.player.Player;

@@ -17,13 +17,22 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
-import forge.UiCommand;
+
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestEventDraft;
+import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.InventoryItem;
@@ -32,22 +41,14 @@ import forge.itemmanager.CardManager;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.views.ItemTableColumn;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
-import forge.quest.QuestController;
-import forge.quest.QuestEventDraft;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * Child controller for quest deck editor UI.
@@ -89,7 +90,7 @@ public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
      * <br><br>
      * Card catalog and decks are drawn from a QuestController object.
      *
-     * @param questData0 &emsp; {@link forge.quest.QuestController}
+     * @param questData0 &emsp; {@link forge.gamemodes.quest.QuestController}
      */
     @SuppressWarnings("serial")
     public CEditorQuestLimited(final QuestController questData0, final CDetailPicture cDetailPicture0) {

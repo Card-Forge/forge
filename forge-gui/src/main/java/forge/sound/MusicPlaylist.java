@@ -3,7 +3,7 @@ package forge.sound;
 import java.io.File;
 import java.io.FilenameFilter;
 
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.MyRandom;
 
 public enum MusicPlaylist {

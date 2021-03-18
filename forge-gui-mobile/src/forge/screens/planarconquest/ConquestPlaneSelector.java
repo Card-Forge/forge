@@ -17,16 +17,16 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.card.CardRenderer;
+import forge.gamemodes.planarconquest.ConquestPlane;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import forge.planarconquest.ConquestPlane;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTimer;
 import forge.toolbox.GuiDialog;
+import forge.util.Localizer;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
-import forge.util.Localizer;
 
 public class ConquestPlaneSelector extends FDisplayObject {
     private static final FSkinFont PLANE_NAME_FONT = FSkinFont.get(30);

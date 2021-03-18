@@ -1,26 +1,43 @@
 package forge.view;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
+import org.apache.commons.lang3.time.StopWatch;
+
 import forge.LobbyPlayer;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.io.DeckSerializer;
-import forge.game.*;
+import forge.game.Game;
+import forge.game.GameEndReason;
+import forge.game.GameLogEntry;
+import forge.game.GameLogEntryType;
+import forge.game.GameRules;
+import forge.game.GameType;
+import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
+import forge.gamemodes.tournament.system.AbstractTournament;
+import forge.gamemodes.tournament.system.TournamentBracket;
+import forge.gamemodes.tournament.system.TournamentPairing;
+import forge.gamemodes.tournament.system.TournamentPlayer;
+import forge.gamemodes.tournament.system.TournamentRoundRobin;
+import forge.gamemodes.tournament.system.TournamentSwiss;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
-import forge.properties.ForgeConstants;
-import forge.tournament.system.*;
 import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.WordUtil;
 import forge.util.storage.IStorage;
-import org.apache.commons.lang3.time.StopWatch;
-
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class SimulateMatch {
     public static void simulate(String[] args) {

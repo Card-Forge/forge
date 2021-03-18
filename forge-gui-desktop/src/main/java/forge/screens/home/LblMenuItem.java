@@ -1,14 +1,16 @@
 package forge.screens.home;
 
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.ILocalRepaint;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedLabel;
-
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /** 
  * Custom JLabel for an item in the menu. Handles listening

@@ -1,10 +1,21 @@
 package forge.deck;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-
 import com.google.common.collect.Lists;
+
 import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardRules;
@@ -12,30 +23,32 @@ import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.deck.generation.*;
+import forge.deck.generation.DeckGenerator2Color;
+import forge.deck.generation.DeckGenerator3Color;
+import forge.deck.generation.DeckGenerator5Color;
+import forge.deck.generation.DeckGeneratorBase;
+import forge.deck.generation.DeckGeneratorMonoColor;
+import forge.deck.generation.IDeckGenPool;
 import forge.deck.io.Archetype;
 import forge.game.GameFormat;
 import forge.game.GameType;
+import forge.gamemodes.limited.ArchetypeDeckBuilder;
+import forge.gamemodes.limited.CardThemedCommanderDeckBuilder;
+import forge.gamemodes.limited.CardThemedConquestDeckBuilder;
+import forge.gamemodes.limited.CardThemedDeckBuilder;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestEvent;
+import forge.gamemodes.quest.QuestEventChallenge;
+import forge.gamemodes.quest.QuestEventDuel;
+import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.itemmanager.IItemManager;
-import forge.limited.ArchetypeDeckBuilder;
-import forge.limited.CardThemedCommanderDeckBuilder;
-import forge.limited.CardThemedConquestDeckBuilder;
-import forge.limited.CardThemedDeckBuilder;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
-import forge.quest.QuestController;
-import forge.quest.QuestEvent;
-import forge.quest.QuestEventChallenge;
-import forge.quest.QuestEventDuel;
 import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.MyRandom;
-import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.*;
 
 /** 
  * Utility collection for various types of decks.

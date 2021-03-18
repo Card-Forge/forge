@@ -17,16 +17,17 @@
  */
 package forge.deck;
 
-import forge.card.CardDb;
-import forge.card.CardDb.SetPreference;
-import forge.card.ICardDatabase;
-import forge.item.PaperCard;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
+
+import forge.card.CardDb;
+import forge.card.CardDb.SetPreference;
+import forge.card.ICardDatabase;
+import forge.item.PaperCard;
 
 /**
  * <p>

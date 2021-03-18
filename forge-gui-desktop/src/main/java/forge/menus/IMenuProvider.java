@@ -1,7 +1,8 @@
 package forge.menus;
 
-import javax.swing.*;
 import java.util.List;
+
+import javax.swing.JMenu;
 
 /** 
  * By implementing this interface a class can add menus to the menu bar

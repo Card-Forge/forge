@@ -1,5 +1,10 @@
 package forge.game.card;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -7,6 +12,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.game.CardTraitBase;
 import forge.game.Direction;
 import forge.game.EvenOdd;
 import forge.game.Game;
@@ -28,14 +34,10 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Collections;
-import java.util.List;
 
 public class CardProperty {
 
-    public static boolean cardHasProperty(Card card, String property, Player sourceController, Card source, SpellAbility spellAbility) {
+    public static boolean cardHasProperty(Card card, String property, Player sourceController, Card source, CardTraitBase spellAbility) {
         final Game game = card.getGame();
         final Combat combat = game.getCombat();
         // lki can't be null but it does return this
@@ -407,8 +409,8 @@ public class CardProperty {
             if (!card.equals(source.getEffectSource())) {
                 return false;
             }
-        } else if (property.equals("CanBeSacrificedBy")) {
-            if (!card.canBeSacrificedBy(spellAbility)) {
+        } else if (property.equals("CanBeSacrificedBy") && spellAbility instanceof SpellAbility) {
+            if (!card.canBeSacrificedBy((SpellAbility)spellAbility)) {
                 return false;
             }
         } else if (property.startsWith("AttachedBy")) {
@@ -886,13 +888,13 @@ public class CardProperty {
             } else {
                 final String restriction = property.split("sharesNameWith ")[1];
                 if (restriction.equals("YourGraveyard")) {
-                    return !CardLists.filter(sourceController.getCardsIn(ZoneType.Graveyard), CardPredicates.sharesNameWith(card)).isEmpty();
+                    return Iterables.any(sourceController.getCardsIn(ZoneType.Graveyard), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals(ZoneType.Graveyard.toString())) {
-                    return !CardLists.filter(game.getCardsIn(ZoneType.Graveyard), CardPredicates.sharesNameWith(card)).isEmpty();
+                    return Iterables.any(game.getCardsIn(ZoneType.Graveyard), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals(ZoneType.Battlefield.toString())) {
-                    return !CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.sharesNameWith(card)).isEmpty();
+                    return Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("ThisTurnCast")) {
-                    return !CardLists.filter(CardUtil.getThisTurnCast("Card", source), CardPredicates.sharesNameWith(card)).isEmpty();
+                    return Iterables.any(CardUtil.getThisTurnCast("Card", source), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("MovedToGrave")) {
                     for (final SpellAbility sa : source.getCurrentState().getNonManaAbilities()) {
                         final SpellAbility root = sa.getRootAbility();
@@ -915,10 +917,10 @@ public class CardProperty {
                     return !CardLists.filter(game.getCardsIn(ZoneType.Battlefield),
                             Presets.NON_TOKEN, CardPredicates.sharesNameWith(card)).isEmpty();
                 } else if (restriction.equals("TriggeredCard")) {
-                    if (spellAbility == null) {
+                    if (!(spellAbility instanceof SpellAbility)) {
                         System.out.println("Looking at TriggeredCard but no SA?");
                     } else {
-                        Card triggeredCard = ((Card) spellAbility.getTriggeringObject(AbilityKey.Card));
+                        Card triggeredCard = ((Card)((SpellAbility)spellAbility).getTriggeringObject(AbilityKey.Card));
                         if (triggeredCard != null && card.sharesNameWith(triggeredCard)) {
                             return true;
                         }
@@ -939,9 +941,9 @@ public class CardProperty {
                 final String restriction = property.split("doesNotShareNameWith ")[1];
                 if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted")) {
                     CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                    return CardLists.filter(list, CardPredicates.sharesNameWith(card)).isEmpty();
+                    return !Iterables.any(list, CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("YourGraveyard")) {
-                    return CardLists.filter(sourceController.getCardsIn(ZoneType.Graveyard), CardPredicates.sharesNameWith(card)).isEmpty();
+                    return !Iterables.any(sourceController.getCardsIn(ZoneType.Graveyard), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("OtherYourBattlefield")) {
                     // Obviously it's going to share a name with itself, so consider that in the
                     CardCollection list = CardLists.filter(sourceController.getCardsIn(ZoneType.Battlefield), CardPredicates.sharesNameWith(card));
@@ -1000,9 +1002,18 @@ public class CardProperty {
                 }
             }
             return false;
+        } else if (property.equals("EnteredSinceYourLastTurn")) {
+            if (card.getTurnInZone() <= sourceController.getLastTurnNr()) {
+                return false;
+            }
         } else if (property.equals("ThisTurnEntered")) {
             // only check if it entered the Zone this turn
             if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
+                return false;
+            }
+        } else if (property.equals("NotThisTurnEntered")) {
+            // only check if it entered the Zone this turn
+            if (card.getTurnInZone() == game.getPhaseHandler().getTurn()) {
                 return false;
             }
         } else if (property.startsWith("ThisTurnEnteredFrom")) {
@@ -1096,14 +1107,6 @@ public class CardProperty {
             }
         } else if (property.startsWith("notDrawnThisTurn")) {
             if (card.getDrawnThisTurn()) {
-                return false;
-            }
-        } else if (property.startsWith("enteredBattlefieldThisTurn")) {
-            if (!(card.getTurnInZone() == game.getPhaseHandler().getTurn())) {
-                return false;
-            }
-        } else if (property.startsWith("notEnteredBattlefieldThisTurn")) {
-            if (card.getTurnInZone() == game.getPhaseHandler().getTurn()) {
                 return false;
             }
         } else if (property.startsWith("firstTurnControlled")) {
@@ -1706,19 +1709,6 @@ public class CardProperty {
             if (card.isRenowned()) {
                 return false;
             }
-        } else if (property.startsWith("RememberMap")) {
-            System.out.println(source.getRememberMap());
-            for (SpellAbility sa : source.getSpellAbilities()) {
-                if (sa.getActivatingPlayer() == null) continue;
-                for (Player p : AbilityUtils.getDefinedPlayers(source, property.split("RememberMap_")[1], sa)) {
-                    if (source.getRememberMap() != null && source.getRememberMap().get(p) != null) {
-                        if (source.getRememberMap().get(p).contains(card)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
         } else if (property.equals("IsRemembered")) {
             if (!source.isRemembered(card)) {
                 return false;
@@ -1819,8 +1809,11 @@ public class CardProperty {
             return false;
         } else if (property.startsWith("NotTriggered")) {
             final String key = property.substring("NotTriggered".length());
-            Object obj = spellAbility.getTriggeringObject(AbilityKey.fromString(key));
-            if (card.equals(obj)) {
+            if (spellAbility instanceof SpellAbility) {
+                if (card.equals(((SpellAbility)spellAbility).getTriggeringObject(AbilityKey.fromString(key)))) {
+                    return false;
+                }
+            } else {
                 return false;
             }
         } else if (property.startsWith("NotDefined")) {
@@ -1829,6 +1822,9 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("CanPayManaCost")) {
+            if (!(spellAbility instanceof SpellAbility)) {
+                return false;
+            }
             final class CheckCanPayManaCost {
                 private List<Mana> manaPaid;
                 private List<ManaCostShard> manaCost;
@@ -1869,7 +1865,7 @@ public class CardProperty {
                     return false;
                 }
                 boolean check() {
-                    manaPaid = Lists.newArrayList(spellAbility.getPayingMana());
+                    manaPaid = Lists.newArrayList(((SpellAbility)spellAbility).getPayingMana());
                     manaCost = Lists.newArrayList(card.getManaCost());
                     Collections.sort(manaCost);
                     //It seems the above codes didn't add generic mana cost ?

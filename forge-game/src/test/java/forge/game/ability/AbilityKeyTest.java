@@ -1,9 +1,10 @@
 package forge.game.ability;
 
-import com.google.common.collect.Maps;
-import junit.framework.TestCase;
-
 import java.util.Map;
+
+import com.google.common.collect.Maps;
+
+import junit.framework.TestCase;
 
 public class AbilityKeyTest extends TestCase {
     public void testFromStringWorksForAllKeys() {

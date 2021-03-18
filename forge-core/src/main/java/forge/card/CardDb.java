@@ -17,6 +17,23 @@
  */
 package forge.card;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
@@ -28,13 +45,11 @@ import forge.card.CardEdition.CardInSet;
 import forge.card.CardEdition.Type;
 import forge.deck.generation.IDeckGenPool;
 import forge.item.PaperCard;
-import forge.util.*;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.*;
-import java.util.Map.Entry;
+import forge.util.Aggregates;
+import forge.util.CollectionSuppliers;
+import forge.util.Lang;
+import forge.util.MyRandom;
+import forge.util.TextUtil;
 
 public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static String foilSuffix = "+";
@@ -402,6 +417,16 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public PaperCard getCardFromEdition(final String cardName, final Date printedBefore, final SetPreference fromSet, int artIndex) {
         final CardRequest cr = CardRequest.fromString(cardName);
         List<PaperCard> cards = getAllCards(cr.cardName);
+        if (printedBefore != null){
+            cards = Lists.newArrayList(Iterables.filter(cards, new Predicate<PaperCard>() {
+                @Override public boolean apply(PaperCard c) {
+                    CardEdition ed = editions.get(c.getEdition());
+                    return ed.getDate().before(printedBefore); }
+            }));
+        }
+
+        if (cards.size() == 0)  // Don't bother continuing! No cards has been found!
+            return null;
         boolean cardsListReadOnly = true;
 
         if (StringUtils.isNotBlank(cr.edition)) {
@@ -545,6 +570,15 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     @Override
     public Collection<PaperCard> getAllCards() {
         return roAllCards;
+    }
+
+    public Collection<PaperCard> getAllNonPromoCards() {
+        return Lists.newArrayList(Iterables.filter(this.roAllCards, new Predicate<PaperCard>() {
+            @Override
+            public boolean apply(final PaperCard paperCard) {
+                return editions.getEditionByCodeOrThrow(paperCard.getEdition()).getType() != Type.PROMOS;
+            }
+        }));
     }
 
     public String getName(final String cardName) {

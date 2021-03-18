@@ -1,20 +1,21 @@
 package forge.screens.quest;
 
+import java.util.List;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
-import forge.FThreads;
+
 import forge.assets.FSkinFont;
-import forge.interfaces.IButton;
+import forge.gamemodes.quest.QuestEventDuel;
+import forge.gui.FThreads;
+import forge.gui.interfaces.IButton;
 import forge.model.FModel;
-import forge.quest.QuestEventDuel;
 import forge.screens.LoadingOverlay;
 import forge.screens.home.HomeScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Localizer;
-
-import java.util.List;
 
 public class QuestDuelsScreen extends QuestLaunchScreen {
 

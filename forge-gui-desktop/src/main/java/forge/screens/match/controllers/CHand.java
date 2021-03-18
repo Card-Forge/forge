@@ -29,10 +29,10 @@ import javax.swing.SwingUtilities;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
-import forge.FThreads;
 import forge.Singletons;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
+import forge.gui.FThreads;
 import forge.gui.framework.ICDoc;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VField;

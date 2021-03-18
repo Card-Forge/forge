@@ -1,24 +1,34 @@
 package forge.screens.home.quest;
 
-import forge.UiCommand;
-import forge.assets.FSkinProp;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+
+import forge.gamemodes.quest.QuestUtil;
+import forge.gamemodes.quest.data.QuestData;
+import forge.gui.UiCommand;
+import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.quest.QuestUtil;
-import forge.quest.data.QuestData;
-import forge.toolbox.*;
+import forge.toolbox.FLabel;
+import forge.toolbox.FMouseAdapter;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedButton;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.io.File;
-import java.util.*;
-import java.util.List;
 
 /**
  * Creates file list/table for quick deleting, editing, and basic info.
@@ -62,7 +72,7 @@ public class QuestFileLister extends JPanel {
         icoEditOver = FSkin.getIcon(FSkinProp.ICO_EDIT_OVER);
     }
 
-    /** @param qd0 &emsp; {@link forge.quest.data.QuestData}[] */
+    /** @param qd0 &emsp; {@link forge.gamemodes.quest.data.QuestData}[] */
     public void setQuests(List<QuestData> qd0) {
         this.removeAll();
         List<RowPanel> tempRows = new ArrayList<>();
@@ -312,17 +322,17 @@ public class QuestFileLister extends JPanel {
         return false;
     }
 
-    /** @param c0 &emsp; {@link forge.UiCommand} command executed on row select. */
+    /** @param c0 &emsp; {@link forge.forge.gui.UiCommand} command executed on row select. */
     public void setSelectCommand(UiCommand c0) {
         this.cmdRowSelect = c0;
     }
 
-    /** @param c0 &emsp; {@link forge.UiCommand} command executed on row edit. */
+    /** @param c0 &emsp; {@link forge.forge.gui.UiCommand} command executed on row edit. */
     public void setEditCommand(UiCommand c0) {
         this.cmdRowEdit = c0;
     }
 
-    /** @param c0 &emsp; {@link forge.UiCommand} command executed on delete. */
+    /** @param c0 &emsp; {@link forge.forge.gui.UiCommand} command executed on delete. */
     public void setDeleteCommand(UiCommand c0) {
         this.cmdRowDelete = c0;
     }

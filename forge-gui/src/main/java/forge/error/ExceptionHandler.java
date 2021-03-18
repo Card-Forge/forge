@@ -29,7 +29,8 @@ import java.lang.Thread.UncaughtExceptionHandler;
 import com.esotericsoftware.minlog.Log;
 
 import forge.FTrace;
-import forge.properties.ForgeConstants;
+import forge.gui.error.BugReporter;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.MultiplexOutputStream;
 
 /**

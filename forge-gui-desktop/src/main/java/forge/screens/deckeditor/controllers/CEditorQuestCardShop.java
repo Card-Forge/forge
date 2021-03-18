@@ -17,33 +17,37 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import forge.UiCommand;
-import forge.assets.FSkinProp;
-import forge.deck.DeckBase;
-import forge.game.GameType;
-import forge.gui.framework.DragCell;
-import forge.gui.framework.FScreen;
-import forge.item.*;
-import forge.itemmanager.ColumnDef;
-import forge.itemmanager.ItemManagerConfig;
-import forge.itemmanager.SpellShopManager;
-import forge.itemmanager.views.ItemTableColumn;
-import forge.model.FModel;
-import forge.quest.QuestController;
-import forge.quest.QuestSpellShop;
-import forge.quest.QuestUtil;
-import forge.screens.deckeditor.views.*;
-import forge.screens.home.quest.CSubmenuQuestDecks;
-import forge.screens.match.controllers.CDetailPicture;
-import forge.toolbox.FLabel;
-import forge.toolbox.FSkin;
-import forge.util.ItemPool;
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import forge.deck.DeckBase;
+import forge.game.GameType;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestSpellShop;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gui.UiCommand;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.FScreen;
+import forge.item.InventoryItem;
+import forge.itemmanager.ColumnDef;
+import forge.itemmanager.ItemManagerConfig;
+import forge.itemmanager.SpellShopManager;
+import forge.itemmanager.views.ItemTableColumn;
+import forge.localinstance.assets.FSkinProp;
+import forge.model.FModel;
+import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VCardCatalog;
+import forge.screens.deckeditor.views.VCurrentDeck;
+import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.deckeditor.views.VProbabilities;
+import forge.screens.home.quest.CSubmenuQuestDecks;
+import forge.screens.match.controllers.CDetailPicture;
+import forge.toolbox.FLabel;
+import forge.toolbox.FSkin;
+import forge.util.ItemPool;
 
 /**
  * Child controller for quest card shop UI.
@@ -95,7 +99,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      * Child controller for quest card shop UI.
      * 
      * @param qd
-     *            a {@link forge.quest.data.QuestData} object.
+     *            a {@link forge.gamemodes.quest.data.QuestData} object.
      */
     public CEditorQuestCardShop(final QuestController qd, final CDetailPicture cDetailPicture0) {
         super(FScreen.QUEST_CARD_SHOP, cDetailPicture0, GameType.Quest);

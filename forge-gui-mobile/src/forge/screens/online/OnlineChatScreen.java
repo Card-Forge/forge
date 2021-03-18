@@ -5,24 +5,24 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
-import forge.assets.FSkinColor.Colors;
+import forge.gamemodes.net.ChatMessage;
+import forge.gamemodes.net.IOnlineChatInterface;
+import forge.gamemodes.net.IRemote;
+import forge.gamemodes.net.event.MessageEvent;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.net.ChatMessage;
-import forge.net.IOnlineChatInterface;
-import forge.net.IRemote;
-import forge.net.event.MessageEvent;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
-import forge.util.Utils;
 import forge.util.Localizer;
+import forge.util.Utils;
 
 public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
     private static final float PADDING = Utils.scale(5);

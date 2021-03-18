@@ -1,15 +1,17 @@
 package forge.util.maps;
 
-import com.google.common.collect.Lists;
-import forge.util.collect.FCollection;
-import forge.util.collect.FCollectionView;
-import org.apache.commons.lang3.tuple.Pair;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
+
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.google.common.collect.Lists;
+
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 
 
 public final class MapToAmountUtil {

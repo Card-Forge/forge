@@ -1,9 +1,9 @@
 package forge.animation;
 
 import forge.Graphics;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences;
 import forge.sound.AudioClip;
 
 public enum AbilityEffect {

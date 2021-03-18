@@ -1,10 +1,10 @@
 package forge.itemmanager;
 
+import javax.swing.JMenu;
+
 import forge.item.InventoryItem;
 import forge.itemmanager.filters.ItemFilter;
 import forge.screens.match.controllers.CDetailPicture;
-
-import javax.swing.*;
 
 /**
  * TODO: Write javadoc for this type.

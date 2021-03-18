@@ -1,22 +1,22 @@
 package forge.screens.online;
 
+import static forge.screens.online.OnlineLobbyScreen.getGameLobby;
+
 import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
+import forge.gamemodes.net.server.FServerManager;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
-import forge.net.server.FServerManager;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
 import forge.util.Localizer;
-
-import static forge.screens.online.OnlineLobbyScreen.getGameLobby;
 
 public class OnlineMenu extends FPopupMenu {
     public enum OnlineScreen {

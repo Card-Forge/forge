@@ -3,8 +3,8 @@ ManaCost:4 W W
 Types:Legendary Creature Dragon Spirit
 PT:5/5
 K:Flying
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPump | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, target player skips their next untap step. Tap up to five target permanents that player controls.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Player | IsCurse$ True | KW$ Skip your next untap step. | Permanent$ True | IsCurse$ True | SubAbility$ TrigTap
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSkipPhase | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, target player skips their next untap step. Tap up to five target permanents that player controls.
+SVar:TrigSkipPhase:DB$ SkipPhase | ValidTgts$ Player | Step$ Untap | IsCurse$ True | SubAbility$ TrigTap
 SVar:TrigTap:DB$ Tap | TargetMin$ 0 | TargetMax$ 5 | TargetsWithDefinedController$ ParentTarget | ValidTgts$ Permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yosei_the_morning_star.jpg
 Oracle:Flying\nWhen Yosei, the Morning Star dies, target player skips their next untap step. Tap up to five target permanents that player controls.

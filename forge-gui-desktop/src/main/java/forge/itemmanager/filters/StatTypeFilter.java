@@ -1,8 +1,13 @@
 package forge.itemmanager.filters;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.JPanel;
+
 import com.google.common.base.Predicates;
 
-import forge.UiCommand;
+import forge.gui.UiCommand;
 import forge.item.InventoryItem;
 import forge.item.ItemPredicate;
 import forge.item.PaperCard;
@@ -13,11 +18,6 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.util.ItemPool;
 import forge.util.Localizer;
-
-import javax.swing.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButtonsFilter<T> {
     protected final Map<StatTypes, FLabel> buttonMap;

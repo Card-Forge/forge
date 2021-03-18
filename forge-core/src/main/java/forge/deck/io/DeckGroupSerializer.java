@@ -17,18 +17,18 @@
  */
 package forge.deck.io;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.ImmutableList;
 
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.util.IItemSerializer;
 import forge.util.storage.StorageReaderFolder;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.List;
 
 /**
  * TODO: Write javadoc for this type.

@@ -17,20 +17,25 @@
  */
 package forge.gui;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import forge.card.CardEdition;
-import forge.item.IPaperCard;
-import forge.item.PaperCard;
-import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.util.FileUtil;
-import forge.util.ImageUtil;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.io.File;
-import java.util.*;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
+import forge.card.CardEdition;
+import forge.item.IPaperCard;
+import forge.item.PaperCard;
+import forge.localinstance.properties.ForgeConstants;
+import forge.model.FModel;
+import forge.util.FileUtil;
+import forge.util.ImageUtil;
 
 public class ImportSourceAnalyzer {
 

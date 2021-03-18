@@ -17,11 +17,11 @@
  */
 package forge.game.staticability;
 
+import java.util.Map;
+
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
-
-import java.util.Map;
 
 /**
  * The Class StaticAbility_PreventDamage.
@@ -49,13 +49,11 @@ public class StaticAbilityPreventDamage {
         final Card hostCard = stAb.getHostCard();
         int restDamage = damage;
 
-        if (params.containsKey("Source")
-                && !source.isValid(params.get("Source").split(","), hostCard.getController(), hostCard, null)) {
+        if (params.containsKey("Source") && !stAb.matchesValid(source, params.get("Source").split(","))) {
             return restDamage;
         }
 
-        if (params.containsKey("Target")
-                && !target.isValid(params.get("Target").split(","), hostCard.getController(), hostCard, null)) {
+        if (params.containsKey("Target") && !stAb.matchesValid(target, params.get("Target").split(","))) {
             return restDamage;
         }
 

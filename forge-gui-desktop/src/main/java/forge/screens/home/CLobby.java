@@ -12,9 +12,9 @@ import com.google.common.collect.Iterables;
 import forge.deck.DeckProxy;
 import forge.deck.DeckType;
 import forge.deckchooser.FDeckChooser;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FList;
 
 public class CLobby {

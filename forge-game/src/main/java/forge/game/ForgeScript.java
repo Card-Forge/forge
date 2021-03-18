@@ -14,7 +14,7 @@ import forge.util.Expressions;
 public class ForgeScript {
 
     public static boolean cardStateHasProperty(CardState cardState, String property, Player sourceController,
-            Card source, SpellAbility spellAbility) {
+            Card source, CardTraitBase spellAbility) {
 
         final boolean isColorlessSource = cardState.getCard().hasKeyword("Colorless Damage Source", cardState);
         final ColorSet colors = cardState.getCard().determineColor(cardState);
@@ -125,7 +125,7 @@ public class ForgeScript {
 
 
     public static boolean spellAbilityHasProperty(SpellAbility sa, String property, Player sourceController,
-            Card source, SpellAbility spellAbility) {
+            Card source, CardTraitBase spellAbility) {
         if (property.equals("ManaAbility")) {
             return sa.isManaAbility();
         } else if (property.equals("nonManaAbility")) {

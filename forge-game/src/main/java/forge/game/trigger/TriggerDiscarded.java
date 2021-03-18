@@ -17,12 +17,12 @@
  */
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 /**
  * <p>
@@ -54,29 +54,16 @@ public class TriggerDiscarded extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
+        }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
+        }
+        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+            return false;
         }
 
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("ValidPlayer").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
-        }
-
-        if (hasParam("ValidCause")) {
-            if (runParams.get(AbilityKey.Cause) == null) {
-                return false;
-            }
-            if (!matchesValid(runParams.get(AbilityKey.Cause), getParam("ValidCause").split(","),
-                    this.getHostCard())) {
-                return false;
-            }
-        }
         if (hasParam("IsMadness")) {
             Boolean madness = (Boolean) runParams.get(AbilityKey.IsMadness);
             if (getParam("IsMadness").equals("True") ^ madness) {

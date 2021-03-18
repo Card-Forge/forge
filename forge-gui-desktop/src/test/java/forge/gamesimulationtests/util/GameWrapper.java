@@ -1,7 +1,19 @@
 package forge.gamesimulationtests.util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import forge.deck.Deck;
-import forge.game.*;
+import forge.game.Game;
+import forge.game.GameLog;
+import forge.game.GameLogEntry;
+import forge.game.GameLogEntryType;
+import forge.game.GameRules;
+import forge.game.GameStage;
+import forge.game.GameType;
+import forge.game.Match;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.event.GameEventGameFinished;
@@ -19,10 +31,8 @@ import forge.gamesimulationtests.util.player.PlayerSpecificationBuilder;
 import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
 import forge.gamesimulationtests.util.playeractions.PlayerActions;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
-
-import java.util.*;
 
 public class GameWrapper {
 	private final List<PlayerSpecification> players;

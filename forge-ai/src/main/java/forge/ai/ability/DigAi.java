@@ -5,7 +5,12 @@ import java.util.Map;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.ai.*;
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCost;
+import forge.ai.SpecialCardAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;

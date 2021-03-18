@@ -17,16 +17,13 @@
  */
 package forge.game.trigger;
 
-import forge.game.ability.AbilityKey;
-import forge.game.card.Card;
-import forge.game.card.CardPredicates;
-import forge.game.spellability.SpellAbility;
-import forge.util.Localizer;
-
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Iterables;
+import forge.game.ability.AbilityKey;
+import forge.game.card.Card;
+import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
 public class TriggerFightOnce extends Trigger {
 
@@ -50,15 +47,8 @@ public class TriggerFightOnce extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        @SuppressWarnings("unchecked")
-        final List<Card> fighters = (List<Card>) runParams.get(AbilityKey.Fighters);
-
-        if (hasParam("ValidCard")) {
-            if (!Iterables.any(fighters,
-                    CardPredicates.restriction(getParam("ValidCard").split(","),
-                        getHostCard().getController(), getHostCard(), null))) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Fighters))) {
+            return false;
         }
 
         return true;
