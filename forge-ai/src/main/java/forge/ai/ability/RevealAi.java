@@ -65,7 +65,7 @@ public class RevealAi extends RevealAiBase {
             for (SpellAbility s : c.getBasicSpells()) {
                 Spell spell = (Spell) s.copy(ai);
                 // timing restrictions still apply
-                if (!s.getRestrictions().checkTimingRestrictions(c, s))
+                if (!spell.getRestrictions().checkTimingRestrictions(c, spell))
                     continue;
 
                 // use hard coded reduce cost
