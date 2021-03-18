@@ -831,10 +831,6 @@ public class PhaseHandler implements java.io.Serializable {
         // reset mustAttackEntity
         playerTurn.setMustAttackEntity(null);
 
-        for (Player p : game.getPlayers()) {
-            p.clearNextTurn();
-        }
-
         game.getTriggerHandler().clearThisTurnDelayedTrigger();
         game.getTriggerHandler().resetTurnTriggerState();
 
