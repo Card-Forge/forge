@@ -8,7 +8,6 @@ import com.google.common.base.Function;
 
 import forge.LobbyPlayer;
 import forge.ai.GameState;
-import forge.assets.FSkinProp;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;

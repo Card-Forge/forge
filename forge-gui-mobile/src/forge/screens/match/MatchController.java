@@ -6,11 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.FThreads;
 import forge.ai.GameState;
-import forge.assets.FSkinImage;
 import forge.item.IPaperCard;
-import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
