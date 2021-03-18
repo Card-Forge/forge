@@ -2603,6 +2603,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         for (Card c : getCardsIn(ZoneType.Hand)) {
             c.setDrawnThisTurn(false);
         }
+        for (final PlayerZone pz : zones.values()) {
+            pz.resetCardsAddedThisTurn();
+        }
         resetPreventNextDamage();
         resetPreventNextDamageWithEffect();
         resetNumDrawnThisTurn();
@@ -2622,6 +2625,19 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetAttackersDeclaredThisTurn();
         resetAttackedOpponentsThisTurn();
         setRevolt(false);
+        resetProwl();
+        setSpellsCastLastTurn(getSpellsCastThisTurn());
+        resetSpellsCastThisTurn();
+        setLifeLostLastTurn(getLifeLostThisTurn());
+        setLifeLostThisTurn(0);
+        setLifeGainedThisTurn(0);
+        lifeGainedTimesThisTurn = 0;
+        lifeGainedByTeamThisTurn = 0;
+        setLifeStartedThisTurnWith(getLife());
+        setLibrarySearched(0);
+        setNumManaConversion(0);
+
+        removeKeyword("Schemes can't be set in motion this turn.");
 
         // set last turn nr
         if (game.getPhaseHandler().isPlayerTurn(this)) {
@@ -2929,6 +2945,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         commanderCast.put(commander, getCommanderCast(commander) + 1);
         getView().updateCommanderCast(this, commander);
         getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+    }
+
+    public void resetCommanderStats() {
+        commanderCast.clear();
+        commanderDamage.clear();
     }
 
     public void updateMergedCommanderInfo(Card target, Card commander) {
@@ -3398,25 +3419,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final int countExaltedBonus() {
         return CardLists.getAmountOfKeyword(this.getCardsIn(ZoneType.Battlefield), Keyword.EXALTED);
-    }
-
-    public final void clearNextTurn() {
-        for (final PlayerZone pz : zones.values()) {
-            pz.resetCardsAddedThisTurn();
-        }
-        resetProwl();
-        setSpellsCastLastTurn(getSpellsCastThisTurn());
-        resetSpellsCastThisTurn();
-        setLifeLostLastTurn(getLifeLostThisTurn());
-        setLifeLostThisTurn(0);
-        lifeGainedThisTurn = 0;
-        lifeGainedTimesThisTurn = 0;
-        lifeGainedByTeamThisTurn = 0;
-        setLifeStartedThisTurnWith(getLife());
-        setLibrarySearched(0);
-        setNumManaConversion(0);
-
-        removeKeyword("Schemes can't be set in motion this turn.");
     }
 
     public final boolean isCursed() {
