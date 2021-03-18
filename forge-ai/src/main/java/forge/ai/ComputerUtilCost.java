@@ -137,7 +137,7 @@ public class ComputerUtilCost {
      *            the source
      * @return true, if successful
      */
-    public static boolean checkDiscardCost(final Player ai, final Cost cost, final Card source) {
+    public static boolean checkDiscardCost(final Player ai, final Cost cost, final Card source, SpellAbility sa) {
         if (cost == null) {
             return true;
         }
@@ -152,7 +152,7 @@ public class ComputerUtilCost {
                 if (type.equals("CARDNAME") && source.getAbilityText().contains("Bloodrush")) {
                     continue;
                 }
-                final CardCollection typeList = CardLists.getValidCards(hand, type.split(","), source.getController(), source, null);
+                final CardCollection typeList = CardLists.getValidCards(hand, type.split(","), source.getController(), source, sa);
                 if (typeList.size() > ai.getMaxHandSize()) {
                     continue;
                 }
@@ -270,7 +270,7 @@ public class ComputerUtilCost {
                 }
 
                 final CardCollection sacList = new CardCollection();
-                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, null);
+                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sourceAbility);
 
                 int count = 0;
                 while (count < amount) {
@@ -320,7 +320,7 @@ public class ComputerUtilCost {
                 }
 
                 final CardCollection sacList = new CardCollection();
-                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, null);
+                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sourceAbility);
 
                 int count = 0;
                 while (count < amount) {
@@ -641,7 +641,7 @@ public class ComputerUtilCost {
         return checkLifeCost(payer, cost, source, 4, sa)
             && checkDamageCost(payer, cost, source, 4)
             && (isMine || checkSacrificeCost(payer, cost, source, sa))
-            && (isMine || checkDiscardCost(payer, cost, source))
+            && (isMine || checkDiscardCost(payer, cost, source, sa))
             && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
             && (!source.getName().equals("Perplex") || payer.getCardsIn(ZoneType.Hand).size() < 2)
             && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)
@@ -722,7 +722,7 @@ public class ComputerUtilCost {
                         continue;
                     }
 
-                    final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), source.getController(), source, null);
+                    final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), source.getController(), source, sa);
 
                     int count = 0;
                     while (count < val) {

@@ -52,7 +52,7 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         }
 
-        return ComputerUtilCost.checkDiscardCost(ai, cost, sa.getHostCard());
+        return ComputerUtilCost.checkDiscardCost(ai, cost, sa.getHostCard(), sa);
     }
 
     @Override

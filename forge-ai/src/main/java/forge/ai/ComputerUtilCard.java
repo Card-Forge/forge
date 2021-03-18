@@ -1913,7 +1913,7 @@ public class ComputerUtilCard {
 
             CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
 
-            list = CardLists.getValidCards(list, needsToPlay.split(","), card.getController(), card, null);
+            list = CardLists.getValidCards(list, needsToPlay.split(","), card.getController(), card, sa);
             if (list.isEmpty()) {
                 return AiPlayDecision.MissingNeededCards;
             }

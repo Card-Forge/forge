@@ -6,7 +6,6 @@ import java.util.List;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -37,20 +36,7 @@ public class DamagePreventAi extends SpellAbilityAi {
 
         final Cost cost = sa.getPayCosts();
 
-        // temporarily disabled until better AI
-        if (!ComputerUtilCost.checkLifeCost(ai, cost, hostCard, 4, sa)) {
-            return false;
-        }
-
-        if (!ComputerUtilCost.checkDiscardCost(ai, cost, hostCard)) {
-            return false;
-        }
-
-        if (!ComputerUtilCost.checkSacrificeCost(ai, cost, hostCard, sa)) {
-            return false;
-        }
-
-        if (!ComputerUtilCost.checkRemoveCounterCost(cost, hostCard, sa)) {
+        if (!willPayCosts(ai, sa, cost, hostCard)) {
             return false;
         }
 

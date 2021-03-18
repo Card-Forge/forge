@@ -43,14 +43,14 @@ public class LifeGainAi extends SpellAbilityAi {
 
         if (!lifeCritical) {
             // return super.willPayCosts(ai, sa, cost, source);
-            if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa,false)) {
+            if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa, false)) {
                 return false;
             }
             if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 4, sa)) {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkDiscardCost(ai, cost, source)) {
+            if (!ComputerUtilCost.checkDiscardCost(ai, cost, source, sa)) {
                 return false;
             }
 

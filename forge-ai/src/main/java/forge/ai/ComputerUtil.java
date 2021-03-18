@@ -539,7 +539,7 @@ public class ComputerUtil {
 
     public static CardCollection chooseSacrificeType(final Player ai, final String type, final SpellAbility ability, final Card target, final int amount) {
         final Card source = ability.getHostCard();
-        CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, null);
+        CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, ability);
 
         typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability));
 
@@ -570,8 +570,8 @@ public class ComputerUtil {
     }
 
     public static CardCollection chooseExileFrom(final Player ai, final ZoneType zone, final String type, final Card activate,
-            final Card target, final int amount) {
-        CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(zone), type.split(";"), activate.getController(), activate, null);
+            final Card target, final int amount, SpellAbility sa) {
+        CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(zone), type.split(";"), activate.getController(), activate, sa);
 
         if ((target != null) && target.getController() == ai) {
             typeList.remove(target); // don't exile the card we're pumping
@@ -591,8 +591,8 @@ public class ComputerUtil {
     }
 
     public static CardCollection choosePutToLibraryFrom(final Player ai, final ZoneType zone, final String type, final Card activate,
-            final Card target, final int amount) {
-        CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(zone), type.split(";"), activate.getController(), activate, null);
+            final Card target, final int amount, SpellAbility sa) {
+        CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(zone), type.split(";"), activate.getController(), activate, sa);
 
         if ((target != null) && target.getController() == ai) {
             typeList.remove(target); // don't move the card we're pumping
@@ -615,14 +615,11 @@ public class ComputerUtil {
         return list;
     }
 
-    public static CardCollection chooseTapType(final Player ai, final String type, final Card activate, final boolean tap, final int amount) {
-        return chooseTapType(ai, type, activate, tap, amount, CardCollection.EMPTY);
-    }
-    public static CardCollection chooseTapType(final Player ai, final String type, final Card activate, final boolean tap, final int amount, final CardCollectionView exclude) {
+    public static CardCollection chooseTapType(final Player ai, final String type, final Card activate, final boolean tap, final int amount, final CardCollectionView exclude, SpellAbility sa) {
         CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
         all.removeAll(exclude);
         CardCollection typeList =
-                CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, null);
+                CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, sa);
 
         // is this needed?
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
@@ -695,9 +692,9 @@ public class ComputerUtil {
         return tapList;
     }
 
-    public static CardCollection chooseUntapType(final Player ai, final String type, final Card activate, final boolean untap, final int amount) {
+    public static CardCollection chooseUntapType(final Player ai, final String type, final Card activate, final boolean untap, final int amount, SpellAbility sa) {
         CardCollection typeList =
-                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, null);
+                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, sa);
 
         // is this needed?
         typeList = CardLists.filter(typeList, Presets.TAPPED);
@@ -720,9 +717,9 @@ public class ComputerUtil {
         return untapList;
     }
 
-    public static CardCollection chooseReturnType(final Player ai, final String type, final Card activate, final Card target, final int amount) {
+    public static CardCollection chooseReturnType(final Player ai, final String type, final Card activate, final Card target, final int amount, SpellAbility sa) {
         final CardCollection typeList =
-                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, null);
+                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, sa);
         if ((target != null) && target.getController() == ai) {
             // don't bounce the card we're pumping
             typeList.remove(target);
@@ -970,7 +967,7 @@ public class ComputerUtil {
                         }
                         final TargetRestrictions tgt = sa.getTargetRestrictions();
                         if (tgt != null) {
-                            if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getHostCard(), null).contains(card)) {
+                            if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getHostCard(), sa).contains(card)) {
                                 prevented += AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
                             }
 
@@ -1586,9 +1583,8 @@ public class ComputerUtil {
         if (threatApi == null) {
             return threatened;
         }
-        final TargetRestrictions tgt = topStack.getTargetRestrictions();
 
-        if (tgt == null) {
+        if (!topStack.usesTargeting()) {
             if (topStack.hasParam("Defined")) {
                 objects = AbilityUtils.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
             } else if (topStack.hasParam("ValidCards")) {
@@ -1685,7 +1681,7 @@ public class ComputerUtil {
 
                     if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) {
                         boolean canSave = ComputerUtilCombat.predictDamageTo(c, dmg - toughness, source, false) < ComputerUtilCombat.getDamageToKill(c);
-                        if ((tgt == null && !grantIndestructible && !canSave)
+                        if ((!topStack.usesTargeting() && !grantIndestructible && !canSave)
                                 || (!grantIndestructible && !grantShroud && !canSave)) {
                             continue;
                         }
@@ -1745,7 +1741,7 @@ public class ComputerUtil {
                         final boolean cantSave = c.getNetToughness() + toughness <= dmg
                                 || (!c.hasKeyword(Keyword.INDESTRUCTIBLE) && c.getShieldCount() == 0 && !grantIndestructible
                                         && (dmg >= toughness + ComputerUtilCombat.getDamageToKill(c)));
-                        if (cantSave && (tgt == null || !grantShroud)) {
+                        if (cantSave && (!topStack.usesTargeting() || !grantShroud)) {
                             continue;
                         }
                     }
@@ -1758,7 +1754,7 @@ public class ComputerUtil {
                     }
 
                     if (saviourApi == ApiType.Protection) {
-                        if (tgt == null || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                        if (!topStack.usesTargeting() || (ProtectAi.toProtectFrom(source, saviour) == null)) {
                             continue;
                         }
                     }
@@ -1795,13 +1791,13 @@ public class ComputerUtil {
                     if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
                             || saviorWithSubsApi == ApiType.Pump
                             || saviorWithSubsApi == ApiType.PumpAll) {
-                        if ((tgt == null && !grantIndestructible)
+                        if ((!topStack.usesTargeting() && !grantIndestructible)
                                 || (!grantShroud && !grantIndestructible)) {
                             continue;
                         }
                     }
                     if (saviourApi == ApiType.Protection) {
-                        if (tgt == null || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                        if (!topStack.usesTargeting() || (ProtectAi.toProtectFrom(source, saviour) == null)) {
                             continue;
                         }
                     }
@@ -1830,11 +1826,11 @@ public class ComputerUtil {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     // give Shroud to targeted creatures
-                    if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) && (tgt == null || !grantShroud)) {
+                    if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) && (!topStack.usesTargeting() || !grantShroud)) {
                         continue;
                     }
                     if (saviourApi == ApiType.Protection) {
-                        if (tgt == null || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                        if (!topStack.usesTargeting() || (ProtectAi.toProtectFrom(source, saviour) == null)) {
                             continue;
                         }
                     }
@@ -1858,11 +1854,11 @@ public class ComputerUtil {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     // give Shroud to targeted creatures
-                    if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll && tgt == null) && !grantShroud) {
+                    if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll && !topStack.usesTargeting()) && !grantShroud) {
                         continue;
                     }
                     if (saviourApi == ApiType.Protection) {
-                        if (tgt == null || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                        if (!topStack.usesTargeting() || (ProtectAi.toProtectFrom(source, saviour) == null)) {
                             continue;
                         }
                     }
@@ -1879,11 +1875,11 @@ public class ComputerUtil {
                     if (o instanceof Card) {
                         final Card c = (Card) o;
                         // give Shroud to targeted creatures
-                        if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll && tgt == null) && !grantShroud) {
+                        if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll && !topStack.usesTargeting()) && !grantShroud) {
                             continue;
                         }
                         if (saviourApi == ApiType.Protection) {
-                            if (tgt == null || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                            if (!topStack.usesTargeting() || (ProtectAi.toProtectFrom(source, saviour) == null)) {
                                 continue;
                             }
                         }

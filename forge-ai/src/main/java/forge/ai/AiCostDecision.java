@@ -214,7 +214,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
         else {
-            CardCollectionView chosen = ComputerUtil.chooseExileFrom(player, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c);
+            CardCollectionView chosen = ComputerUtil.chooseExileFrom(player, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c, ability);
             return null == chosen ? null : PaymentDecision.card(chosen);
         }
     }
@@ -421,7 +421,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             chosen = chosen.subList(0, c);
         }
         else {
-            chosen = ComputerUtil.choosePutToLibraryFrom(player, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c);
+            chosen = ComputerUtil.choosePutToLibraryFrom(player, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c, ability);
         }
         return chosen.isEmpty() ? null : PaymentDecision.card(chosen);
     }
@@ -493,7 +493,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             type = TextUtil.fastReplace(type, "+withTotalPowerGE", "");
             totap = ComputerUtil.chooseTapTypeAccumulatePower(player, type, ability, !cost.canTapSource, Integer.parseInt(totalP), exclude);
         } else {
-            totap = ComputerUtil.chooseTapType(player, type, source, !cost.canTapSource, c, exclude);
+            totap = ComputerUtil.chooseTapType(player, type, source, !cost.canTapSource, c, exclude, ability);
         }
 
         if (totap == null) {
@@ -536,7 +536,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
-        CardCollectionView res = ComputerUtil.chooseReturnType(player, cost.getType(), source, ability.getTargetCard(), c);
+        CardCollectionView res = ComputerUtil.chooseReturnType(player, cost.getType(), source, ability.getTargetCard(), c, ability);
         return res.isEmpty() ? null : PaymentDecision.card(res);
     }
 
@@ -854,7 +854,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
-        CardCollectionView list = ComputerUtil.chooseUntapType(player, cost.getType(), source, cost.canUntapSource, c);
+        CardCollectionView list = ComputerUtil.chooseUntapType(player, cost.getType(), source, cost.canUntapSource, c, ability);
 
         if (list == null) {
             System.out.println("Couldn't find a valid card to untap for: " + source.getName());

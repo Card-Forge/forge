@@ -10,7 +10,6 @@ import com.google.common.collect.Lists;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -47,20 +46,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
 
         if (abCost != null) {
-            // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source, sa)) {
+            if (!willPayCosts(ai, sa, abCost, source)) {
                 return false;
             }
         }

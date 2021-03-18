@@ -1606,7 +1606,7 @@ public class AbilityUtils {
         final String s2 = AbilityUtils.applyAbilityTextChangeEffects(s, ctb);
         final String[] l = s2.split("/");
         final String expr = CardFactoryUtil.extractOperators(s2);
-        final Player player = ctb instanceof SpellAbility ? ((SpellAbility)ctb).getActivatingPlayer() : ctb.getHostCard().getController();
+        final Player player = ctb == null ? null : ctb instanceof SpellAbility ? ((SpellAbility)ctb).getActivatingPlayer() : ctb.getHostCard().getController();
 
         final String[] sq;
         sq = l[0].split("\\.");

@@ -48,10 +48,9 @@ public class TapAi extends TapAiBase {
 
         final Card source = sa.getHostCard();
         final Cost abCost = sa.getPayCosts();
-        if (abCost != null) {
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
-                return false;
-            }
+
+        if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
+            return false;
         }
 
         if (!sa.usesTargeting()) {

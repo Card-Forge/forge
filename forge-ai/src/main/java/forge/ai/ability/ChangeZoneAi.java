@@ -288,7 +288,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
                 for (final CostPart part : abCost.getCostParts()) {
                     if (part instanceof CostDiscard) {
                         CostDiscard cd = (CostDiscard) part;
