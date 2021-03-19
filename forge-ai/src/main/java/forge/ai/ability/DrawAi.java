@@ -19,10 +19,12 @@
 package forge.ai.ability;
 
 import forge.ai.AiCostDecision;
+import forge.ai.AiProps;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
+import forge.ai.PlayerControllerAi;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -263,8 +265,8 @@ public class DrawAi extends SpellAbilityAi {
                     if (sa.getPayCosts().hasSpecificCostType(CostPayLife.class)) {
                         // [Necrologia, Pay X Life : Draw X Cards]
                         // Don't draw more than what's "safe" and don't risk a near death experience
-                        // Maybe would be better to check for "serious danger" and take more risk?
-                        while ((ComputerUtil.aiLifeInDanger(ai, false, numCards) && (numCards > 0))) {
+                        boolean aggroAI = (((PlayerControllerAi) ai.getController()).getAi()).getBooleanProperty(AiProps.PLAY_AGGRO);
+                        while ((ComputerUtil.aiLifeInDanger(ai, aggroAI, numCards) && (numCards > 0))) {
                             numCards--;
                         }
                     }
