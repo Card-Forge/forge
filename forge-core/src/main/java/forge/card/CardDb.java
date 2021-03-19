@@ -576,7 +576,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return Lists.newArrayList(Iterables.filter(this.roAllCards, new Predicate<PaperCard>() {
             @Override
             public boolean apply(final PaperCard paperCard) {
-                return editions.getEditionByCodeOrThrow(paperCard.getEdition()).getType() != Type.PROMOS;
+                CardEdition edition = null;
+                try {
+                    edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
+                } catch (Exception ex) {
+                    return false;
+                }
+                return edition != null && edition.getType() != Type.PROMOS;
             }
         }));
     }
