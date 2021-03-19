@@ -239,6 +239,14 @@ public abstract class SpellAbilityEffect {
                 : AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
 
+    protected final static List<Card> getCardsfromTargets(final SpellAbility sa) {
+        List<Card> cards = getTargetCards(sa);
+        List<SpellAbility> spells = getTargetSpells(sa);
+        for (SpellAbility s : spells) {
+            cards.add(s.getHostCard());
+        }
+        return cards;
+    }
 
     protected static void registerDelayedTrigger(final SpellAbility sa, String location, final Iterable<Card> crds) {
         boolean intrinsic = sa.isIntrinsic();
