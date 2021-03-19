@@ -378,7 +378,7 @@ public class MatchScreen extends FScreen {
                     devMenu.setEnabled(false);
 
                 //rollbackphase enable -- todo limit by gametype?
-                devMenu.getChildAt(2).setEnabled(game.getPlayers().size() == 2 && game.getStack().size() == 0 && !GuiBase.isNetworkplay());
+                devMenu.getChildAt(2).setEnabled(game.getPlayers().size() == 2 && game.getStack().size() == 0 && !GuiBase.isNetworkplay() && game.getPhase().isMain() && !game.getPlayerTurn().isAI());
             }
         }
 

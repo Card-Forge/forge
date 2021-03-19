@@ -230,7 +230,7 @@ public class MatchController extends AbstractGuiGame {
         if(GuiBase.isNetworkplay())
             checkStack();
 
-        if (saveState) {
+        if (saveState && ph.isMain()) {
             phaseGameState = new GameState() {
                 @Override //todo get specific card edition for this function?
                 public IPaperCard getPaperCard(final String cardName) {
