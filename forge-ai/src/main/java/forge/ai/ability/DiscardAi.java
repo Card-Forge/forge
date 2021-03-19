@@ -32,26 +32,11 @@ public class DiscardAi extends SpellAbilityAi {
         final Cost abCost = sa.getPayCosts();
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
 
-        if (abCost != null) {
-            // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source, sa)) {
-                return false;
-            }
-
+        // temporarily disabled until better AI
+        if (!willPayCosts(ai, sa, abCost, source)) {
+            return false;
         }
-        
+
         if ("Chandra, Flamecaller".equals(sourceName)) {
             final int hand = ai.getCardsIn(ZoneType.Hand).size();
             return MyRandom.getRandom().nextFloat() < (1.0 / (1 + hand));

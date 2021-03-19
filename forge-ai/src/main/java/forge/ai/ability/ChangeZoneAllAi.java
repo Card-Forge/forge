@@ -51,7 +51,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
                 boolean aiLogicAllowsDiscard = sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("DiscardAll");
 
                 if (!aiLogicAllowsDiscard) {

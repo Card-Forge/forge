@@ -318,8 +318,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getAction().moveTo(ZoneType.Command, activeScheme, null);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
-        game.getTriggerHandler().registerActiveTrigger(activeScheme, false);
-
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Scheme, activeScheme);

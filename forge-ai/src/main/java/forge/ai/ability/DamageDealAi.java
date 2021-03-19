@@ -245,7 +245,7 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        if ("DiscardLands".equals(sa.getParam("AILogic")) && !ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
+        if ("DiscardLands".equals(sa.getParam("AILogic")) && !ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
             return false;
         }
 

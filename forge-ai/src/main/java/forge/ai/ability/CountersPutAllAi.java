@@ -52,7 +52,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
                 return false;
             }
 

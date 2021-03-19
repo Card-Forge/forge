@@ -117,8 +117,10 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
+                if (!hostCard.isFaceDown()) {
+                    hostCard.setOriginalStateAsFaceDown();
+                }
                 hostCard.getGame().getAction().moveToPlay(hostCard, this);
-                //c.setPreFaceDownState(CardStateName.Original);
             }
 
             @Override

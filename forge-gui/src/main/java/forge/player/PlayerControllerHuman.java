@@ -1856,7 +1856,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (next.isCopied()) {
                     if (next.isSpell()) {
                         // copied spell always add to stack
-                        player.getGame().getStackZone().add(next.getHostCard());
+                        if (!next.getHostCard().isInZone(ZoneType.Stack)) {
+                            next.setHostCard(player.getGame().getAction().moveToStack(next.getHostCard(), next));
+                        } else {
+                            player.getGame().getStackZone().add(next.getHostCard());
+                        }
                     }
                     // TODO check if static abilities needs to be run for things affecting the copy?
                     if (next.isMayChooseNewTargets()) {
