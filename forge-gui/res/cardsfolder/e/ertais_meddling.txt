@@ -1,0 +1,19 @@
+Name:Ertai's Meddling
+ManaCost:X U
+Types:Instant
+Text:X can't be 0.\r\n
+A:SP$ ChangeZone | Cost$ XCantBe0 X U | TgtZone$ Stack | TargetType$ Spell | ValidTgts$ Card | Origin$ Stack | Destination$ Exile | Imprint$ True | RememberSpell$ True | SubAbility$ DBPutCounter | SpellDescription$ Target spell's controller exiles it with X delay counters on it.
+SVar:X:Count$xPaid
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Imprinted | CounterType$ DELAY | CounterNum$ X | SubAbility$ DBDelayEffect
+SVar:DBDelayEffect:DB$ Effect | EffectOwner$ TargetedController | RememberObjects$ Remembered | ImprintCards$ Imprinted | Triggers$ TrigDelay,TrigExile | Duration$ Permanent | SubAbility$ DBForget
+SVar:DBForget:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+# Add a fake trigger to display spell ability text ingame
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigLoseDelay | TriggerDescription$ At the beginning of each of that player's upkeeps, if that card is exiled, remove a delay counter from it. If the card has no delay counters on it, the player puts it onto the stack as a copy of the original spell.
+SVar:TrigDelay:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigLoseDelay | TriggerDescription$ At the beginning of each of that player's upkeeps, if that card is exiled, remove a delay counter from it. If the card has no delay counters on it, the player puts it onto the stack as a copy of the original spell.
+SVar:TrigLoseDelay:DB$ RemoveCounter | Defined$ Imprinted | CounterType$ DELAY | CounterNum$ 1 | SubAbility$ DBPutOntoStack
+SVar:DBPutOntoStack:DB$ CopySpellAbility | Defined$ Remembered | Controller$ You | UseOriginalHost$ True | ConditionDefined$ Imprinted | ConditionPresent$ Card.counters_EQ0_DELAY
+SVar:TrigExile:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted | TriggerZones$ Command | Execute$ TrigExileSelf
+SVar:TrigExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
+Oracle:X can't be 0.\nTarget spell's controller exiles it with X delay counters on it.\nAt the beginning of each of that player's upkeeps, if that card is exiled, remove a delay counter from it. If the card has no delay counters on it, the player puts it onto the stack as a copy of the original spell.
