@@ -2,6 +2,7 @@ package forge;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -32,12 +33,15 @@ import forge.util.storage.StorageBase;
 public class StaticData {
     private final CardStorageReader cardReader;
     private final CardStorageReader tokenReader;
+    private final CardStorageReader customCardReader;
 
     private final String blockDataFolder;
     private final CardDb commonCards;
     private final CardDb variantCards;
+    private final CardDb customCards;
     private final TokenDb allTokens;
     private final CardEdition.Collection editions;
+    private final CardEdition.Collection customEditions;
 
     private Predicate<PaperCard> standardPredicate;
     private Predicate<PaperCard> brawlPredicate;
@@ -60,20 +64,23 @@ public class StaticData {
 
     private static StaticData lastInstance = null;
 
-    public StaticData(CardStorageReader cardReader, String editionFolder, String blockDataFolder, boolean enableUnknownCards, boolean loadNonLegalCards) {
-        this(cardReader, null, editionFolder, blockDataFolder, enableUnknownCards, loadNonLegalCards);
+    public StaticData(CardStorageReader cardReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, boolean enableUnknownCards, boolean loadNonLegalCards) {
+        this(cardReader, null, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, enableUnknownCards, loadNonLegalCards);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, String editionFolder, String blockDataFolder, boolean enableUnknownCards, boolean loadNonLegalCards) {
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, boolean enableUnknownCards, boolean loadNonLegalCards) {
         this.cardReader = cardReader;
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
         this.blockDataFolder = blockDataFolder;
+        this.customCardReader = customCardReader;
+        this.customEditions = new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder)));
         lastInstance = this;
 
         {
             final Map<String, CardRules> regularCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
             final Map<String, CardRules> variantsCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+            final Map<String, CardRules> customizedCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
             for (CardRules card : cardReader.loadCards()) {
                 if (null == card) continue;
@@ -85,13 +92,24 @@ public class StaticData {
                     regularCards.put(cardName, card);
                 }
             }
+            if (customCardReader != null) {
+                for (CardRules card : customCardReader.loadCards()) {
+                    if (null == card) continue;
+
+                    final String cardName = card.getName();
+                    customizedCards.put(cardName, card);
+                }
+            }
+
 
             commonCards = new CardDb(regularCards, editions);
             variantCards = new CardDb(variantsCards, editions);
+            customCards = new CardDb(customizedCards, customEditions);
 
             //must initialize after establish field values for the sake of card image logic
             commonCards.initialize(false, false, enableUnknownCards, loadNonLegalCards);
             variantCards.initialize(false, false, enableUnknownCards, loadNonLegalCards);
+            customCards.initialize(false, false, enableUnknownCards, loadNonLegalCards);
         }
 
         {
@@ -103,6 +121,14 @@ public class StaticData {
                 tokens.put(card.getNormalizedName(), card);
             }
             allTokens = new TokenDb(tokens, editions);
+        }
+
+        {
+            if (customCards.getAllCards().size() > 0) {
+                Collection<PaperCard> paperCards = customCards.getAllCards();
+                for(PaperCard p: paperCards)
+                    commonCards.addCard(p);
+            }
         }
     }
 
@@ -129,6 +155,7 @@ public class StaticData {
 
     public PaperCard getOrLoadCommonCard(String cardName, String setCode, int artIndex, boolean foil) {
         PaperCard card = commonCards.getCard(cardName, setCode, artIndex);
+        boolean isCustom = false;
         if (card == null) {
             attemptToLoadCard(cardName, setCode);
             card = commonCards.getCard(cardName, setCode, artIndex);
@@ -137,8 +164,20 @@ public class StaticData {
             card = commonCards.getCard(cardName, setCode, -1);
         }
         if (card == null) {
+            card = customCards.getCard(cardName, setCode, artIndex);
+            if (card != null)
+                isCustom = true;
+        }
+        if (card == null) {
+            card = customCards.getCard(cardName, setCode, -1);
+            if (card != null)
+                isCustom = true;
+        }
+        if (card == null) {
             return null;
         }
+        if (isCustom)
+            return foil ? customCards.getFoiled(card) : card;
         return foil ? commonCards.getFoiled(card) : card;
     }
 
@@ -146,12 +185,16 @@ public class StaticData {
         CardDb.CardRequest r = CardRequest.fromString(encodedCardName);
         String cardName = r.cardName;
         CardRules rules = cardReader.attemptToLoadCard(cardName, setCode);
+        CardRules customRules = customCardReader.attemptToLoadCard(cardName, setCode);
         if (rules != null) {
             if (rules.isVariant()) {
                 variantCards.loadCard(cardName, rules);
             } else {
                 commonCards.loadCard(cardName, rules);
             }
+        }
+        if (customRules != null) {
+            customCards.loadCard(cardName, customRules);
         }
     }
 
