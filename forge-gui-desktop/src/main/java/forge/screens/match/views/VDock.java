@@ -31,7 +31,7 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.framework.IVDoc;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.screens.match.controllers.CDock;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;

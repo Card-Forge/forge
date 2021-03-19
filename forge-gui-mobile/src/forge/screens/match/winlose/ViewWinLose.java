@@ -19,7 +19,7 @@ import forge.gui.interfaces.IWinLoseView;
 import forge.gui.util.SGuiChoose;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.menu.FMagnifyView;
 import forge.model.FModel;
 import forge.toolbox.FButton;

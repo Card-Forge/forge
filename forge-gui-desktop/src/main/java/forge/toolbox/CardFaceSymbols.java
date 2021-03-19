@@ -10,7 +10,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FSkin.SkinImage;
 
 /**

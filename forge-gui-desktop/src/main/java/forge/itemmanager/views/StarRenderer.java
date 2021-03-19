@@ -26,7 +26,7 @@ import javax.swing.JTable;
 import forge.gui.card.CardPreferences;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.util.CardTranslation;

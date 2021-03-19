@@ -10,9 +10,9 @@ import forge.game.Game;
 import forge.game.player.Player;
 import forge.gui.GuiBase;
 import forge.item.IPaperCard;
-import forge.localinstance.assets.FSkinProp;
-import forge.localinstance.assets.ISkinImage;
 import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.skin.FSkinProp;
+import forge.localinstance.skin.ISkinImage;
 import forge.util.Lang;
 import forge.util.XmlUtil;
 

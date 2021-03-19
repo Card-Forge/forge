@@ -36,7 +36,7 @@ import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.SpellShopManager;
 import forge.itemmanager.views.ItemTableColumn;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCardCatalog;

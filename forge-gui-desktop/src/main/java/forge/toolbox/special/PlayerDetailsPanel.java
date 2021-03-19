@@ -17,7 +17,7 @@ import com.google.common.base.Function;
 
 import forge.card.mana.ManaAtom;
 import forge.game.player.PlayerView;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FSkin;

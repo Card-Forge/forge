@@ -12,7 +12,7 @@ import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
 import forge.gui.UiCommand;
 import forge.gui.interfaces.IButton;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.screens.FScreen.Header;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;

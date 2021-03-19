@@ -26,7 +26,7 @@ import javax.swing.SwingConstants;
 
 import forge.game.GameView;
 import forge.gamemodes.gauntlet.GauntletWinLoseController;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;

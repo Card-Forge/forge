@@ -8,7 +8,7 @@ import java.awt.event.FocusListener;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedButton;
 

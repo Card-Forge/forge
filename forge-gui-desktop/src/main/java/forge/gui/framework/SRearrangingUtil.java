@@ -12,7 +12,7 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import forge.gui.MouseUtil;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinCursor;
 import forge.toolbox.FSkin.SkinnedLayeredPane;

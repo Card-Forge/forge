@@ -10,9 +10,9 @@ import javax.swing.JPopupMenu;
 
 import com.google.common.primitives.Ints;
 
-import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;

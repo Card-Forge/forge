@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JMenu;
 import javax.swing.JSeparator;
 
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.menus.MenuUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VCurrentDeck;

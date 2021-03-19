@@ -10,7 +10,7 @@ import forge.game.GameView;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.interfaces.IButton;
 import forge.gui.interfaces.IWinLoseView;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Localizer;

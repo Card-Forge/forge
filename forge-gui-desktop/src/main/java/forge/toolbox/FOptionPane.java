@@ -17,7 +17,7 @@ import javax.swing.text.StyleConstants;
 
 import com.google.common.collect.ImmutableList;
 
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FSkin.SkinImage;
 import forge.util.Localizer;
 import forge.view.FDialog;

@@ -14,7 +14,7 @@ import forge.deck.generation.DeckGenPool;
 import forge.game.card.Card;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
-import forge.localinstance.assets.ISkinImage;
+import forge.localinstance.skin.ISkinImage;
 import forge.model.FModel;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionReader;

@@ -28,9 +28,9 @@ import forge.gamemodes.quest.data.QuestAssets;
 import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gui.GuiBase;
 import forge.item.PaperToken;
-import forge.localinstance.assets.FSkinProp;
-import forge.localinstance.assets.ISkinImage;
 import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.skin.FSkinProp;
+import forge.localinstance.skin.ISkinImage;
 import forge.model.FModel;
 
 /**

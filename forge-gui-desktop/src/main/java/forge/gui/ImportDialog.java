@@ -57,8 +57,8 @@ import com.google.common.collect.ImmutableList;
 
 import forge.gui.ImportSourceAnalyzer.OpType;
 import forge.gui.error.BugReporter;
-import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBoxWrapper;

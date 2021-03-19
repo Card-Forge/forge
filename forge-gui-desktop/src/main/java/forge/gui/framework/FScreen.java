@@ -3,9 +3,9 @@ package forge.gui.framework;
 import java.io.File;
 
 import forge.Singletons;
-import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.properties.FileLocation;
 import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.skin.FSkinProp;
 import forge.screens.bazaar.CBazaarUI;
 import forge.screens.bazaar.VBazaarUI;
 import forge.screens.deckeditor.CDeckEditorUI;

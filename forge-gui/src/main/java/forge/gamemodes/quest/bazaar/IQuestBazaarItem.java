@@ -19,7 +19,7 @@ package forge.gamemodes.quest.bazaar;
 
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.data.QuestAssets;
-import forge.localinstance.assets.ISkinImage;
+import forge.localinstance.skin.ISkinImage;
 
 /**
  * This interface defines a thing that can be sold at the Bazaar.

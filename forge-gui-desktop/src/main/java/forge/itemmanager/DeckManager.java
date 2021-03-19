@@ -41,7 +41,7 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.views.ItemCellRenderer;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemTableColumn;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.SEditorIO;

@@ -10,7 +10,7 @@ import forge.gui.framework.IVDoc;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerContainer;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.screens.deckeditor.controllers.CCurrentDeck;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;

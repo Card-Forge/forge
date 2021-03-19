@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 import forge.Singletons;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FPanel;

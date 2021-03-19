@@ -9,7 +9,7 @@ import forge.gamemodes.quest.bazaar.IQuestBazaarItem;
 import forge.gamemodes.quest.data.QuestAssets;
 import forge.gui.GuiBase;
 import forge.gui.UiCommand;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.bazaar.VBazaarUI;
 import forge.toolbox.FHtmlViewer;

@@ -15,7 +15,7 @@ import javax.swing.event.ChangeListener;
 import forge.ImageCache;
 import forge.gamemodes.quest.QuestEvent;
 import forge.gamemodes.quest.QuestUtil;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FRadioButton;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;

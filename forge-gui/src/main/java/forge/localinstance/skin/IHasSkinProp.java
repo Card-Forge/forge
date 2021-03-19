@@ -1,4 +1,4 @@
-package forge.localinstance.assets;
+package forge.localinstance.skin;
 
 public interface IHasSkinProp {
     FSkinProp getSkinProp();

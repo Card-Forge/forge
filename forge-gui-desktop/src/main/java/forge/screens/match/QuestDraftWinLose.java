@@ -26,7 +26,7 @@ import forge.game.player.PlayerView;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestDraftUtils;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.home.quest.CSubmenuQuestDraft;
 import forge.screens.home.quest.VSubmenuQuestDraft;

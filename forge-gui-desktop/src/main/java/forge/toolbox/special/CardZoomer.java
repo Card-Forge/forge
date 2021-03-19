@@ -37,7 +37,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
 import forge.gui.SOverlayUtils;
 import forge.item.PaperCard;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.localinstance.assets;
+package forge.localinstance.skin;
 
 /**
  * Assembles settings from selected or default theme as appropriate. Saves in a

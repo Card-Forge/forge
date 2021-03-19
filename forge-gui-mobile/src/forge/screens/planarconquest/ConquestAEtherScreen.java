@@ -32,7 +32,7 @@ import forge.gamemodes.planarconquest.ConquestPreferences.CQPref;
 import forge.gamemodes.planarconquest.ConquestUtil;
 import forge.gamemodes.planarconquest.ConquestUtil.AEtherFilter;
 import forge.item.PaperCard;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FCardPanel;

@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.menus.MenuUtil;
 import forge.screens.workshop.controllers.CCardScript;
 import forge.toolbox.FSkin.SkinnedMenuItem;

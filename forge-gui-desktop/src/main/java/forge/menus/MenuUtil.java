@@ -7,7 +7,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import forge.Singletons;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FSkin;
 import forge.toolbox.imaging.FImageUtil;
 

@@ -19,7 +19,7 @@ import javax.swing.SwingUtilities;
 import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.gui.SOverlayUtils;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
