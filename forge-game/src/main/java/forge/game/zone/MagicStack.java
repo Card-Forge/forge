@@ -440,6 +440,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             game.getPhaseHandler().setPriority(sp.getActivatingPlayer());
         }
 
+        game.getAction().checkStaticAbilities();
+        game.getTriggerHandler().resetActiveTriggers();
+
         if (sp.isSpell() && !sp.isCopied()) {
             thisTurnCast.add(CardUtil.getLKICopy(sp.getHostCard()));
             sp.getActivatingPlayer().addSpellCastThisTurn();
