@@ -236,6 +236,10 @@ public class StaticData {
         return commonCards;
     }
 
+    public CardDb getCustomCards() {
+        return customCards;
+    }
+
     public CardDb getVariantCards() {
         return variantCards;
     }
