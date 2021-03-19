@@ -360,10 +360,14 @@ public final class CardUtil {
     }
 
     public static CardState getFaceDownCharacteristic(Card c) {
+        return getFaceDownCharacteristic(c, CardStateName.FaceDown);
+    }
+
+    public static CardState getFaceDownCharacteristic(Card c, CardStateName state) {
         final CardType type = new CardType(false);
         type.add("Creature");
 
-        final CardState ret = new CardState(c, CardStateName.FaceDown);
+        final CardState ret = new CardState(c, state);
         ret.setBasePower(2);
         ret.setBaseToughness(2);
 
@@ -371,10 +375,14 @@ public final class CardUtil {
         ret.setType(type);
 
         //show hidden if exiled facedown
-        if (c.isInZone(ZoneType.Exile))
-            ret.setImageKey(ImageKeys.getTokenKey(c.isForetold() ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD));
-        else
-            ret.setImageKey(ImageKeys.getTokenKey(c.isManifested() ? ImageKeys.MANIFEST_IMAGE : ImageKeys.MORPH_IMAGE));
+        if (state == CardStateName.FaceDown) {
+            if (c.isInZone(ZoneType.Exile))
+                ret.setImageKey(ImageKeys.getTokenKey(c.isForetold() ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD));
+            else
+                ret.setImageKey(ImageKeys.getTokenKey(c.isManifested() ? ImageKeys.MANIFEST_IMAGE : ImageKeys.MORPH_IMAGE));
+        } else {
+            ret.setImageKey(c.getImageKey());
+        }
         return ret;
     }
 

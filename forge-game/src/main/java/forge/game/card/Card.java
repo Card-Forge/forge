@@ -466,6 +466,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return states.get(state);
     }
 
+    public void setOriginalStateAsFaceDown() {
+        // For Ertai's Meddling a morph spell
+        currentState = CardUtil.getFaceDownCharacteristic(this, CardStateName.Original);
+        states.put(CardStateName.Original, currentState);
+    }
+
     public boolean setState(final CardStateName state, boolean updateView) {
         return setState(state, updateView, false);
     }

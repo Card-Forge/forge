@@ -1010,7 +1010,11 @@ public class PlayerControllerAi extends PlayerController {
             } else {
                 if (sa.isCopied()) {
                     if (sa.isSpell()) {
-                        player.getGame().getStackZone().add(sa.getHostCard());
+                        if (!sa.getHostCard().isInZone(ZoneType.Stack)) {
+                            sa.setHostCard(player.getGame().getAction().moveToStack(sa.getHostCard(), sa));
+                        } else {
+                            player.getGame().getStackZone().add(sa.getHostCard());
+                        }
                     }
 
                     /* FIXME: the new implementation (below) requires implementing setupNewTargets in the AI controller, among other possible changes, otherwise breaks AI

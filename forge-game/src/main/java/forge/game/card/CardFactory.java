@@ -181,7 +181,8 @@ public class CardFactory {
      */
     public final static SpellAbility copySpellAbilityAndPossiblyHost(final SpellAbility sourceSA, final SpellAbility targetSA, final Player controller) {
         //it is only necessary to copy the host card if the SpellAbility is a spell, not an ability
-        final Card c = targetSA.isSpell() ? copySpellHost(sourceSA, targetSA, controller) : targetSA.getHostCard();
+        final Card c = targetSA.isSpell() && !sourceSA.hasParam("UseOriginalHost") ?
+            copySpellHost(sourceSA, targetSA, controller) : targetSA.getHostCard();
 
         final SpellAbility copySA;
         if (targetSA.isTrigger() && targetSA.isWrapper()) {
