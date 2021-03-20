@@ -97,8 +97,11 @@ public class CostSacrifice extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability, final Player activator) {
         final Card source = ability.getHostCard();
 
-        // You can always sac all
-        if (!payCostFromSource()) {
+        if (getType().equals("OriginalHost")) {
+            Card originalEquipment = ability.getOriginalHost();
+            return originalEquipment.isEquipping();
+        }
+        else if (!payCostFromSource()) { // You can always sac all
             if ("All".equalsIgnoreCase(getAmount())) {
                 CardCollectionView typeList = activator.getCardsIn(ZoneType.Battlefield);
                 typeList = CardLists.getValidCards(typeList, getType().split(";"), activator, source, ability);
