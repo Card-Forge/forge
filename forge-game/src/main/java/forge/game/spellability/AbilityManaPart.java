@@ -276,6 +276,10 @@ public class AbilityManaPart implements java.io.Serializable {
         this.extraManaRestrictions = str;
     }
 
+    public String getExtraManaRestriction() {
+        return extraManaRestrictions;
+    }
+
     public boolean meetsManaRestrictions(final SpellAbility sa) {
         return meetsManaRestrictions(sa, this.manaRestrictions) && meetsManaRestrictions(sa, this.extraManaRestrictions);
     }

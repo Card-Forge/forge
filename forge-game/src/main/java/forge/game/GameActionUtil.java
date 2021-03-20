@@ -259,7 +259,7 @@ public final class GameActionUtil {
         if (sa.isManaAbility() && sa.isActivatedAbility() && activator.hasKeyword("Piracy") && source.isLand() && source.isInPlay() && !activator.equals(source.getController()) && sa.getPayCosts().hasTapCost()) {
             SpellAbility newSA = sa.copy(activator);
             // to bypass Activator restriction, set Activator to Player
-            sa.getRestrictions().setActivator("Player");
+            newSA.getRestrictions().setActivator("Player");
 
             // extra Mana restriction to only Spells
             for (AbilityManaPart mp : newSA.getAllManaParts()) {
