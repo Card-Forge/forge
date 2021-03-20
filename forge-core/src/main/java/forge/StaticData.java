@@ -185,7 +185,10 @@ public class StaticData {
         CardDb.CardRequest r = CardRequest.fromString(encodedCardName);
         String cardName = r.cardName;
         CardRules rules = cardReader.attemptToLoadCard(cardName, setCode);
-        CardRules customRules = customCardReader.attemptToLoadCard(cardName, setCode);
+        CardRules customRules = null;
+        if (customCardReader != null) {
+            customRules = customCardReader.attemptToLoadCard(cardName, setCode);
+        }
         if (rules != null) {
             if (rules.isVariant()) {
                 variantCards.loadCard(cardName, rules);
