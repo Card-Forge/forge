@@ -24,7 +24,7 @@ import forge.gui.framework.EDocID;
 import forge.item.IPaperCard;
 import forge.localinstance.achievements.Achievement;
 import forge.localinstance.achievements.AchievementCollection;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;

@@ -32,7 +32,7 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.itemmanager.DeckManager;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorQuestDraftingProcess;

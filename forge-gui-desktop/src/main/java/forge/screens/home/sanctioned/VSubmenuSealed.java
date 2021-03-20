@@ -22,7 +22,7 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerContainer;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;

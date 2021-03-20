@@ -36,7 +36,7 @@ import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
 import forge.Singletons;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;

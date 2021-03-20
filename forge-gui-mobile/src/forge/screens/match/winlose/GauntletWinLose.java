@@ -6,7 +6,7 @@ import forge.game.GameView;
 import forge.gamemodes.gauntlet.GauntletWinLoseController;
 import forge.gui.FThreads;
 import forge.gui.util.SOptionPane;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.util.Localizer;
 
 /**

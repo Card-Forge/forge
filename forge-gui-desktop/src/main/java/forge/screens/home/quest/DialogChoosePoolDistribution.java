@@ -12,7 +12,7 @@ import forge.card.MagicColor;
 import forge.gamemodes.quest.StartingPoolPreferences.PoolType;
 import forge.gui.SOverlayUtils;
 import forge.gui.UiCommand;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FLabel;

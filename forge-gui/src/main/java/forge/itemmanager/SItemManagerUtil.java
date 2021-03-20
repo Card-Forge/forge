@@ -14,8 +14,8 @@ import forge.deck.DeckProxy;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IComboBox;
 import forge.item.InventoryItem;
-import forge.localinstance.assets.FSkinProp;
-import forge.localinstance.assets.IHasSkinProp;
+import forge.localinstance.skin.FSkinProp;
+import forge.localinstance.skin.IHasSkinProp;
 import forge.util.ComparableOp;
 import forge.util.Localizer;
 

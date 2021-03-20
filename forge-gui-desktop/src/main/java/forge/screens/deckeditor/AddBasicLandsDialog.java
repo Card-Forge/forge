@@ -46,7 +46,7 @@ import forge.deck.DeckProxy;
 import forge.deck.DeckgenUtil;
 import forge.gui.UiCommand;
 import forge.item.PaperCard;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FComboBoxPanel;

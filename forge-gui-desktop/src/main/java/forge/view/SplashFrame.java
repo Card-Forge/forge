@@ -35,9 +35,9 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FProgressBar;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;

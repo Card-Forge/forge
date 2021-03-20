@@ -38,7 +38,7 @@ import javax.swing.BorderFactory;
 import forge.gui.UiCommand;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.interfaces.IButton;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FSkin.SkinnedButton;

@@ -24,8 +24,8 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.data.QuestAssets;
 import forge.gui.GuiBase;
-import forge.localinstance.assets.FSkinProp;
-import forge.localinstance.assets.ISkinImage;
+import forge.localinstance.skin.FSkinProp;
+import forge.localinstance.skin.ISkinImage;
 
 /**
  * <p>

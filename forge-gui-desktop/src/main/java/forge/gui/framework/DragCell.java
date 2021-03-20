@@ -15,9 +15,9 @@ import javax.swing.SwingConstants;
 
 import com.google.common.collect.Lists;
 
-import forge.localinstance.assets.FSkinProp;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;

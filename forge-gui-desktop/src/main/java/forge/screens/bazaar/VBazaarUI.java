@@ -10,7 +10,7 @@ import forge.gui.GuiBase;
 import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.home.quest.ViewStall;
 import forge.toolbox.FLabel;

@@ -16,7 +16,7 @@ import forge.gamemodes.gauntlet.GauntletData;
 import forge.gamemodes.gauntlet.GauntletIO;
 import forge.gamemodes.quest.QuestUtil;
 import forge.gui.UiCommand;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FOptionPane;

@@ -75,7 +75,7 @@ import forge.itemmanager.ItemColumnConfig;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FSkin;

@@ -23,7 +23,7 @@ import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.interfaces.IGameController;
 import forge.item.PaperCard;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;

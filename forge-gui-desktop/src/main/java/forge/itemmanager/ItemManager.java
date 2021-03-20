@@ -53,7 +53,7 @@ import forge.itemmanager.views.ImageView;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemTableColumn;
 import forge.itemmanager.views.ItemView;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.ContextMenuBuilder;
 import forge.toolbox.FComboBox;

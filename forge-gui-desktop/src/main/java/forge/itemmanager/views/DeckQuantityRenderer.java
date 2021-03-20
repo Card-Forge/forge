@@ -24,7 +24,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.SwingConstants;
 
 import forge.item.InventoryItem;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;

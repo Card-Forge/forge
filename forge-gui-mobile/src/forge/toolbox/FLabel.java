@@ -11,7 +11,7 @@ import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
 import forge.gui.UiCommand;
 import forge.gui.interfaces.IButton;
-import forge.localinstance.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.TextBounds;
