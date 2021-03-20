@@ -50,7 +50,6 @@ import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.StaticData;
 import forge.ai.GameState;
-import forge.assets.FSkinProp;
 import forge.card.CardStateName;
 import forge.control.KeyboardShortcuts;
 import forge.deck.CardPool;
