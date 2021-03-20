@@ -3,10 +3,8 @@ ManaCost:5 W
 Types:Creature Human Cleric Wizard
 PT:2/3
 A:AB$ Pump | Cost$ tapXType<2/Cleric> | ValidTgts$ Creature | KW$ Prevent all damage that would be dealt by CARDNAME. | IsCurse$ True | TgtPrompt$ Select target creature | SpellDescription$ Prevent all damage target creature would deal this turn.
-A:AB$ Effect | Cost$ tapXType<2/Wizard> | ValidTgts$ Card.inZoneStack | TgtZone$ Stack,Battlefield | IsCurse$ True | TgtPrompt$ Select target spell | RememberObjects$ Targeted | StaticAbilities$ STNoDmg | SubAbility$ DBCleanup | SpellDescription$ Prevent all damage target spell would deal this turn.
+A:AB$ Effect | Cost$ tapXType<2/Wizard> | ValidTgts$ Card.inZoneStack | TgtZone$ Stack | IsCurse$ True | TgtPrompt$ Select target spell | RememberObjects$ TargetedSource | StaticAbilities$ STNoDmg | SubAbility$ DBCleanup | SpellDescription$ Prevent all damage target spell would deal this turn.
 SVar:STNoDmg:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield,Stack | Affected$ Card.IsRemembered | AddKeyword$ Prevent all damage that would be dealt by CARDNAME. | Description$ Prevent all damage target spell would deal this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-#Another Zone should be included currently, therefore the target would be a card, not a spell/ability
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shieldmage_elder.jpg
 Oracle:Tap two untapped Clerics you control: Prevent all damage target creature would deal this turn.\nTap two untapped Wizards you control: Prevent all damage target spell would deal this turn.

@@ -169,6 +169,14 @@ public class AbilityUtils {
                 Iterables.addAll(cards, saTargeting.getTargets().getTargetCards());
             }
         }
+        else if (defined.equals("TargetedSource") && sa instanceof SpellAbility) {
+            final SpellAbility saTargeting = ((SpellAbility)sa).getSATargetingSA();
+            if (saTargeting != null) {
+                for (SpellAbility s : saTargeting.getTargets().getTargetSpells()) {
+                    cards.add(s.getHostCard());
+                }
+            }
+        }
         else if (defined.equals("ThisTargetedCard") && sa instanceof SpellAbility) { // do not add parent targeted
             if (((SpellAbility)sa).getTargets() != null) {
                 Iterables.addAll(cards, ((SpellAbility)sa).getTargets().getTargetCards());
@@ -179,7 +187,6 @@ public class AbilityUtils {
             if (parent != null) {
                 Iterables.addAll(cards, parent.getTargets().getTargetCards());
             }
-
         }
         else if (defined.startsWith("Triggered") && sa instanceof SpellAbility) {
             final SpellAbility root = ((SpellAbility)sa).getRootAbility();
