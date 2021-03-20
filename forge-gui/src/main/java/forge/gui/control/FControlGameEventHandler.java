@@ -73,6 +73,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     private boolean processEventsQueued, needPhaseUpdate, needCombatUpdate, needStackUpdate, needPlayerControlUpdate, refreshFieldUpdate;
     private boolean gameOver, gameFinished;
+    private boolean needSaveState = false;
     private PlayerView turnUpdate;
 
     public FControlGameEventHandler(final PlayerControllerHuman humanController0) {
@@ -115,7 +116,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             }
             if (needPhaseUpdate) {
                 needPhaseUpdate = false;
-                matchController.updatePhase();
+                if (needSaveState) {
+                    needSaveState = false;
+                    matchController.updatePhase(true);
+                } else {
+                    matchController.updatePhase(false);
+                }
             }
             if (needCombatUpdate) {
                 needCombatUpdate = false;
@@ -207,6 +213,10 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventTurnPhase ev) {
         needPhaseUpdate = true;
+        if (ev.phaseDesc == "dev")
+            needSaveState = false;
+        else
+            needSaveState = true;
         return processEvent();
     }
 

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import forge.ai.GameState;
+import forge.item.IPaperCard;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
@@ -71,6 +73,11 @@ public class MatchController extends AbstractGuiGame {
 
     private static HostedMatch hostedMatch;
     private static MatchScreen view;
+    private static GameState phaseGameState;
+
+    private GameState getPhaseGameState() {
+        return phaseGameState;
+    }
 
     private final Map<PlayerView, InfoTab> zonesToRestore = Maps.newHashMap();
 
@@ -120,6 +127,11 @@ public class MatchController extends AbstractGuiGame {
         if(!GuiBase.isNetworkplay())
             return;
         refreshCardDetails(null);
+    }
+
+    @Override
+    public GameState getGamestate() {
+        return getPhaseGameState();
     }
 
     public boolean hotSeatMode() {
@@ -199,7 +211,7 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public void updatePhase() {
+    public void updatePhase(boolean saveState) {
         final PlayerView p = getGameView().getPlayerTurn();
         final PhaseType ph = getGameView().getPhase();
 
@@ -217,6 +229,20 @@ public class MatchController extends AbstractGuiGame {
         }
         if(GuiBase.isNetworkplay())
             checkStack();
+
+        if (saveState && ph.isMain()) {
+            phaseGameState = new GameState() {
+                @Override //todo get specific card edition for this function?
+                public IPaperCard getPaperCard(final String cardName) {
+                    return FModel.getMagicDb().getCommonCards().getCard(cardName);
+                }
+            };
+            try {
+                phaseGameState.initFromGame(getGameView().getGame());
+            } catch (Exception e) {
+                System.out.println(phaseGameState);
+            }
+        }
     }
 
 

@@ -2197,6 +2197,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             });
         }
 
+        @Override
+        public void rollbackPhase() {
+            final Player pPriority = getGame().getPhaseHandler().getPriorityPlayer();
+            if (pPriority == null) {
+                getGui().message(localizer.getMessage("lblNoPlayerPriorityGameStateCannotBeSetup"));
+                return;
+            }
+            if (getGui().getGamestate() != null)
+                getGui().getGamestate().applyToGame(getGame());
+        }
+
         private GameState createGameStateObject() {
             return new GameState() {
                 @Override
