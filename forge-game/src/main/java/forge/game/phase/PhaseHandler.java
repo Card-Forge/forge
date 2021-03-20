@@ -167,7 +167,7 @@ public class PhaseHandler implements java.io.Serializable {
 
     private void advanceToNextPhase() {
         PhaseType oldPhase = phase;
-        boolean isTopsy = playerTurn.hasKeyword("The phases of your turn are reversed.");
+        boolean isTopsy = playerTurn.getAmountOfKeyword("The phases of your turn are reversed.") % 2 == 1;
         boolean turnEnded = false;
 
         if (bRepeatCleanup) { // for when Cleanup needs to repeat itself
@@ -1154,7 +1154,8 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final boolean devAdvanceToPhase(PhaseType targetPhase) {
-        while (phase.isBefore(targetPhase, playerTurn.hasKeyword("The phases of your turn are reversed."))) {
+        boolean isTopsy = playerTurn.getAmountOfKeyword("The phases of your turn are reversed.") % 2 == 1;
+        while (phase.isBefore(targetPhase, isTopsy)) {
             if (checkStateBasedEffects()) {
                 return false;
             }

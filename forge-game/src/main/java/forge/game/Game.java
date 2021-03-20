@@ -435,7 +435,7 @@ public class Game {
      * The Direction in which the turn order of this Game currently proceeds.
      */
     public final Direction getTurnOrder() {
-        if (phaseHandler.getPlayerTurn() != null && phaseHandler.getPlayerTurn().hasKeyword("The turn order is reversed.")) {
+        if (phaseHandler.getPlayerTurn() != null && phaseHandler.getPlayerTurn().getAmountOfKeyword("The turn order is reversed.") % 2 == 1) {
             return turnOrder.getOtherDirection();
         }
     	return turnOrder;

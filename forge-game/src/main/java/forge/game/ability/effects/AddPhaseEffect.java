@@ -20,7 +20,7 @@ public class AddPhaseEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        boolean isTopsy = sa.getActivatingPlayer().hasKeyword("The phases of your turn are reversed.");
+        boolean isTopsy = sa.getActivatingPlayer().getAmountOfKeyword("The phases of your turn are reversed.") % 2 == 1;
         PhaseHandler phaseHandler = sa.getActivatingPlayer().getGame().getPhaseHandler();
         PhaseType currentPhase = phaseHandler.getPhase();
 
