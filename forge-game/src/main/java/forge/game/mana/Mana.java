@@ -61,7 +61,7 @@ public class Mana {
             return false;
         }
 
-        return mp == mp2 || mp.getManaRestrictions().equals(mp2.getManaRestrictions());
+        return mp == mp2 || (mp.getManaRestrictions().equals(mp2.getManaRestrictions()) && mp.getExtraManaRestriction().equals(mp2.getExtraManaRestriction()));
     }
 
     private byte color;
@@ -84,7 +84,7 @@ public class Mana {
     }
 
     public final boolean isRestricted() {
-        return this.manaAbility != null && !manaAbility.getManaRestrictions().isEmpty();
+        return this.manaAbility != null && (!manaAbility.getManaRestrictions().isEmpty() || !manaAbility.getExtraManaRestriction().isEmpty());
     }
 
 
