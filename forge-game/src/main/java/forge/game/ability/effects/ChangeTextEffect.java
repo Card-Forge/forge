@@ -97,7 +97,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
             changedTypeWordNew = null;
         }
 
-        final List<Card> tgts = getTargetCards(sa);
+        final List<Card> tgts = getCardsfromTargets(sa);
         for (final Card c : tgts) {
             if (changedColorWordOriginal != null && changedColorWordNew != null) {
                 c.addChangedTextColorWord(changedColorWordOriginal, changedColorWordNew, timestamp);
@@ -156,7 +156,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         sb.append("Change the text of ");
 
-        final List<Card> tgts = getTargetCards(sa);
+        final List<Card> tgts = getCardsfromTargets(sa);
         for (final Card c : tgts) {
             sb.append(c).append(" ");
         }

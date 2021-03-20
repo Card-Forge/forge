@@ -132,7 +132,7 @@ public class AnimateEffect extends AnimateEffectBase {
             sVars.addAll(Arrays.asList(sa.getParam("sVars").split(",")));
         }
 
-        List<Card> tgts = getTargetCards(sa);
+        List<Card> tgts = getCardsfromTargets(sa);
 
         for (final Card c : tgts) {
             doAnimate(c, sa, power, toughness, types, removeTypes, finalDesc,
@@ -210,7 +210,7 @@ public class AnimateEffect extends AnimateEffectBase {
 
         final StringBuilder sb = new StringBuilder();
 
-        final List<Card> tgts = getTargetCards(sa);
+        final List<Card> tgts = getCardsfromTargets(sa);
 
         for (final Card c : tgts) {
             sb.append(c).append(" ");
