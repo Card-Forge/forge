@@ -253,7 +253,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         reIndex();
     }
 
-    private void addCard(PaperCard paperCard) {
+    public void addCard(PaperCard paperCard) {
         allCardsByName.put(paperCard.getName(), paperCard);
 
         if (paperCard.getRules().getSplitType() == CardSplitType.None) { return; }

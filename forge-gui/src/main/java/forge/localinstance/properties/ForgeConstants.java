@@ -232,6 +232,9 @@ public final class ForgeConstants {
     public static final String USER_PUZZLE_DIR      = USER_DIR + "puzzle" + PATH_SEPARATOR;
     public static final String LOG_FILE             = USER_DIR + "forge.log";
     public static final String ACHIEVEMENTS_DIR     = USER_DIR + "achievements" + PATH_SEPARATOR;
+    public static final String USER_CUSTOM_DIR      = USER_DIR + "custom" + PATH_SEPARATOR;
+    public static final String USER_CUSTOM_EDITIONS_DIR = USER_CUSTOM_DIR + "editions" + PATH_SEPARATOR;
+    public static final String USER_CUSTOM_CARDS_DIR = USER_CUSTOM_DIR + "cards" + PATH_SEPARATOR;
     public static final String DECK_DRAFT_DIR       = DECK_BASE_DIR + "draft" + PATH_SEPARATOR;
     public static final String DECK_WINSTON_DIR     = DECK_BASE_DIR + "winston" + PATH_SEPARATOR;
     public static final String DECK_SEALED_DIR      = DECK_BASE_DIR + "sealed" + PATH_SEPARATOR;
