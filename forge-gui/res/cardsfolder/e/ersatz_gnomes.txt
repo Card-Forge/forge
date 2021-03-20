@@ -2,8 +2,7 @@ Name:Ersatz Gnomes
 ManaCost:3
 Types:Artifact Creature Gnome
 PT:1/1
-A:AB$ Animate | Cost$ T | Colors$ Colorless | OverwriteColors$ True | ValidTgts$ Card.inZoneStack | TgtZone$ Stack,Battlefield | TgtPrompt$ Select target spell to make colorless | Permanent$ True | SpellDescription$ Target spell becomes colorless.
-#For the above part to work, another zone MUST be included because of interaction with regular targeting on the stack that stops the ability from working correctly. Use the inZone targeting restriction to limit it to stack. TODO: Probably need to fix this properly.
+A:AB$ Animate | Cost$ T | Colors$ Colorless | OverwriteColors$ True | ValidTgts$ Card | TgtZone$ Stack | TgtPrompt$ Select target spell to make colorless | Permanent$ True | SpellDescription$ Target spell becomes colorless.
 A:AB$ Animate | Cost$ T | Colors$ Colorless | OverwriteColors$ True | ValidTgts$ Permanent | TgtPrompt$ Select target permanent to make colorless | SpellDescription$ Target permanent becomes colorless until end of turn.
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
