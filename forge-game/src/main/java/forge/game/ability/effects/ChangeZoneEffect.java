@@ -1473,7 +1473,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             } else if (srcSA.getParam("Destination").equals("BottomOfLibrary")) {
                 movedCard = game.getAction().moveToBottomOfLibrary(tgtHost, srcSA, params);
             } else if (srcSA.getParam("Destination").equals("Library")) {
-                movedCard = game.getAction().moveToBottomOfLibrary(tgtHost, srcSA, params);
+                final int libraryPos = srcSA.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(tgtHost, srcSA.getParam("LibraryPosition"), srcSA) : 0;
+                movedCard = game.getAction().moveToLibrary(tgtHost, libraryPos, srcSA, params);
                 if (srcSA.hasParam("Shuffle") && "True".equals(srcSA.getParam("Shuffle"))) {
                     tgtHost.getOwner().shuffle(srcSA);
                 }
