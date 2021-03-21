@@ -1051,6 +1051,16 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             }
         }
 
+        if (type.equals("OriginalHost")) {
+            Card host = ability.getOriginalHost();
+            if (host.getController() == ability.getActivatingPlayer() && host.isInPlay()) {
+                return player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(host.getName())), ability) ? PaymentDecision.card(host) : null;
+            }
+            else {
+                return null;
+            }
+        }
+
         if (amount.equals("All")) {
             return PaymentDecision.card(list);
         }

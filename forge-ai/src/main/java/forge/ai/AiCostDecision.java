@@ -510,6 +510,9 @@ public class AiCostDecision extends CostDecisionMakerBase {
         if (cost.payCostFromSource()) {
             return PaymentDecision.card(source);
         }
+        if (cost.getType().equals("OriginalHost")) {
+            return PaymentDecision.card(ability.getHostCard());
+        }
         if (cost.getAmount().equals("All")) {
             // Does the AI want to use Sacrifice All?
             return null;
