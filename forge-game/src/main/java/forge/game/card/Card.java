@@ -6382,7 +6382,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void setSplitStateToPlayAbility(final SpellAbility sa) {
-        if (isFaceDown()) {
+        if (isInPlay()) {
             return;
         }
         if (sa.isBestow()) {
