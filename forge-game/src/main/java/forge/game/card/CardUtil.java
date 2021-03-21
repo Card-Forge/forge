@@ -254,6 +254,8 @@ public final class CardUtil {
         newCopy.setColor(in.determineColor().getColor());
         newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
         newCopy.setReceivedDamageFromPlayerThisTurn(in.getReceivedDamageFromPlayerThisTurn());
+        newCopy.setDealtDamageToThisTurn(in.getDealtDamageToThisTurn());
+        newCopy.setDealtDamageToPlayerThisTurn(in.getDealtDamageToPlayerThisTurn());
         newCopy.getDamageHistory().setCreatureGotBlockedThisTurn(in.getDamageHistory().getCreatureGotBlockedThisTurn());
 
         newCopy.setAttachedCards(getLKICopyList(in.getAttachedCards(), cachedMap));
