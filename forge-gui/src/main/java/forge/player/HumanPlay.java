@@ -126,10 +126,6 @@ public class HumanPlay {
 
         sa = AbilityUtils.addSpliceEffects(sa);
 
-        if (sa.isBestow()) {
-            source.animateBestow();
-        }
-
         // System.out.println("Playing:" + sa.getDescription() + " of " + sa.getHostCard() +  " new = " + newAbility);
         final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
         if (!req.playAbility(true, false, false)) {

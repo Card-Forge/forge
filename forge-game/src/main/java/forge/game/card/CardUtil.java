@@ -285,6 +285,8 @@ public final class CardUtil {
 
         newCopy.copyChangedTextFrom(in);
 
+        newCopy.setBestowTimestamp(in.getBestowTimestamp());
+
         newCopy.setForetold(in.isForetold());
         newCopy.setForetoldThisTurn(in.isForetoldThisTurn());
         newCopy.setForetoldByEffect(in.isForetoldByEffect());

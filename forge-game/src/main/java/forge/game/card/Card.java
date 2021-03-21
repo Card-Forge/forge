@@ -5647,6 +5647,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return bestowTimestamp != -1;
     }
 
+    public final long getBestowTimestamp() {
+        return bestowTimestamp;
+    }
+
+    public final void setBestowTimestamp(final long t) {
+        bestowTimestamp = t;
+    }
+
     public final long getTimestamp() {
         return timestamp;
     }

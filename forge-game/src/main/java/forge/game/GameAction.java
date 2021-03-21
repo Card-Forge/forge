@@ -250,6 +250,12 @@ public class GameAction {
 
                     copied.copyChangedTextFrom(c);
 
+                    // copy exiled properties when adding to stack
+                    copied.setExiledWith(c.getExiledWith());
+                    copied.setExiledBy(c.getExiledBy());
+
+                    // copy bestow timestamp
+                    copied.setBestowTimestamp(c.getBestowTimestamp());
                 } else {
                     // when a card leaves the battlefield, ensure it's in its original state
                     // (we need to do this on the object before copying it, or it won't work correctly e.g.
