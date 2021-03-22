@@ -241,8 +241,8 @@ public abstract class SpellAbilityEffect {
 
     protected final static List<Card> getCardsfromTargets(final SpellAbility sa) {
         List<Card> cards = getTargetCards(sa);
-        List<SpellAbility> spells = getTargetSpells(sa);
-        for (SpellAbility s : spells) {
+        // some card effects can also target a spell
+        for (SpellAbility s : sa.getTargets().getTargetSpells()) {
             cards.add(s.getHostCard());
         }
         return cards;
