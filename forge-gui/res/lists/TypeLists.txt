@@ -94,6 +94,7 @@ Fighter:Fighters
 Fish:Fish
 Flagbearer:Flagbearers
 Fox:Foxes
+Fractal:Fractals
 Frog:Frogs
 Fungus:Fungi
 Gamer:Gamers

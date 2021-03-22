@@ -1,0 +1,6 @@
+Name:Fractal
+Colors:green,blue
+ManaCost:no cost
+Types:Creature Fractal
+PT:0/0
+Oracle:
