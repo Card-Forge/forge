@@ -54,10 +54,9 @@ public class AttachEffect extends SpellAbilityEffect {
 
         if (targets.isEmpty()) {
             return;
-        } else {
-            attachTo = targets.get(0);
         }
-        
+
+        attachTo = targets.get(0);
         String attachToName = null;
         if (attachTo instanceof Card) {
             attachToName = CardTranslation.getTranslatedName(((Card)attachTo).getName());

@@ -694,12 +694,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     }
                     break;
             }
-            if (sa != null) {
-                tempShowCard(show);
-                boolean result = InputConfirm.confirm(this, ((Card) sa.getHostCard().getFirstRemembered()).getView(), message);
-                endTempShowCards();
-                return result;
-            }
+            tempShowCard(show);
+            boolean result = InputConfirm.confirm(this, ((Card) sa.getHostCard().getFirstRemembered()).getView(), message);
+            endTempShowCards();
+            return result;
         }
 
         // The general case: display the source of the SA in the prompt on mouse over

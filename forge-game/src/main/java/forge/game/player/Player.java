@@ -198,7 +198,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final Map<ZoneType, PlayerZone> zones = Maps.newEnumMap(ZoneType.class);
     private final Map<Long, Integer> adjustLandPlays = Maps.newHashMap();
     private final Set<Long> adjustLandPlaysInfinite = Sets.newHashSet();
-    private Map<Card, Card> maingameCardsMap = Maps.newHashMap();;
+    private Map<Card, Card> maingameCardsMap = Maps.newHashMap();
 
     private CardCollection currentPlanes = new CardCollection();
     private Set<String> prowl = Sets.newHashSet();
@@ -3448,10 +3448,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             return true;
         }
 
-        if (this.hasKeyword("CantSearchLibrary")) {
+        if (hasKeyword("CantSearchLibrary")) {
             return false;
-        } else return targetPlayer == null || !targetPlayer.equals(sa.getActivatingPlayer())
-                || !hasKeyword("Spells and abilities you control can't cause you to search your library.");
+        }
+        return targetPlayer == null || !targetPlayer.equals(sa.getActivatingPlayer())
+ || !hasKeyword("Spells and abilities you control can't cause you to search your library.");
 
     }
 

@@ -725,17 +725,15 @@ public class HumanPlay {
             if (ability.getSacrificedAsOffering() == null) {
                 System.out.println("Sacrifice input for Offering cancelled");
                 return false;
-            } else {
-                offering = ability.getSacrificedAsOffering();
             }
+            offering = ability.getSacrificedAsOffering();
         }
         if (ability.isEmerge()) {
             if (ability.getSacrificedAsEmerge() == null) {
                 System.out.println("Sacrifice input for Emerge cancelled");
                 return false;
-            } else {
-                emerge = ability.getSacrificedAsEmerge();
             }
+            emerge = ability.getSacrificedAsEmerge();
         }
         if (!toPay.isPaid()) {
             // Input is somehow clearing out the offering card?

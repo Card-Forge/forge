@@ -318,17 +318,15 @@ public class TargetSelection {
                 // Not enough targets, cancel targeting
                 return false;
             }
-            else {
-                Object madeChoice = mandatory ? controller.getGui().one(message, selectOptions) : controller.getGui().oneOrNone(message, selectOptions);
-                if (madeChoice == null) {
-                    return false;
-                }
-                if (madeChoice instanceof StackItemView) {
-                    ability.getTargets().add(stackItemViewCache.get(madeChoice).getSpellAbility(true));
-                }
-                else {// 'FINISH TARGETING' chosen
-                    bTargetingDone = true;
-                }
+            Object madeChoice = mandatory ? controller.getGui().one(message, selectOptions) : controller.getGui().oneOrNone(message, selectOptions);
+            if (madeChoice == null) {
+                return false;
+            }
+            if (madeChoice instanceof StackItemView) {
+                ability.getTargets().add(stackItemViewCache.get(madeChoice).getSpellAbility(true));
+            }
+            else {// 'FINISH TARGETING' chosen
+                bTargetingDone = true;
             }
         }
         return true;

@@ -283,13 +283,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // AbilityStatic should do nothing below
             return;
         }
-        else {
-            for (OptionalCost s : sp.getOptionalCosts()) {
-                source.addOptionalCostPaid(s);
-            }
-            // The ability is added to stack HERE
-            si = push(sp);
+
+        for (OptionalCost s : sp.getOptionalCosts()) {
+            source.addOptionalCostPaid(s);
         }
+        // The ability is added to stack HERE
+        si = push(sp);
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();

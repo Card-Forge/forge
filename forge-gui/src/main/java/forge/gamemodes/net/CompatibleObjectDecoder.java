@@ -28,21 +28,20 @@ public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder {
         ByteBuf frame = (ByteBuf)super.decode(ctx, in);
         if (frame == null) {
             return null;
-        } else {
-            ObjectInputStream ois = GuiBase.hasPropertyConfig() ?
-                    new ObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true))):
+        }
+        ObjectInputStream ois = GuiBase.hasPropertyConfig() ?
+                new ObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true))):
                     new CObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)),this.classResolver);
 
-            Object var5 = null;
-            try {
-                var5 = ois.readObject();
-            } catch (StreamCorruptedException e) {
-                System.err.println(String.format("Version Mismatch: %s", e.getMessage()));
-            } finally {
-                ois.close();
-            }
-
-            return var5;
+        Object var5 = null;
+        try {
+            var5 = ois.readObject();
+        } catch (StreamCorruptedException e) {
+            System.err.println(String.format("Version Mismatch: %s", e.getMessage()));
+        } finally {
+            ois.close();
         }
+
+        return var5;
     }
 }

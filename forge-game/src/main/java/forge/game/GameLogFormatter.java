@@ -203,7 +203,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventTurnBegan event) {
-        String message = Localizer.getInstance().getMessage("lblLogTurnNOwnerByPlayer", String.valueOf(event.turnNumber), event.turnOwner.toString());;
+        String message = Localizer.getInstance().getMessage("lblLogTurnNOwnerByPlayer", String.valueOf(event.turnNumber), event.turnOwner.toString());
         return new GameLogEntry(GameLogEntryType.TURN, message);
     }
 

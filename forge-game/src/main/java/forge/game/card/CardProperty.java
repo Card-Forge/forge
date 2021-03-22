@@ -1508,14 +1508,14 @@ public class CardProperty {
             String what = property.substring("blocking".length());
 
             if (StringUtils.isEmpty(what)) return combat.isBlocking(card);
-            if (what.startsWith("Source")) return combat.isBlocking(card, source) ;
+            if (what.startsWith("Source")) return combat.isBlocking(card, source);
             if (what.startsWith("CreatureYouCtrl")) {
                 for (final Card c : CardLists.filter(sourceController.getCardsIn(ZoneType.Battlefield), Presets.CREATURES))
                     if (combat.isBlocking(card, c))
                         return true;
                 return false;
             } else {
-                for(Card c : AbilityUtils.getDefinedCards(source, what, spellAbility)) {
+                for (Card c : AbilityUtils.getDefinedCards(source, what, spellAbility)) {
                     if (combat.isBlocking(card, c)) {
                         return true;
                     }

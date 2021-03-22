@@ -2929,9 +2929,8 @@ public class ComputerUtil {
         }
         if (targetSpellCard == null) {
             return false;
-        } else {
-            sa.getTargets().add(targetSpellCard);
         }
+        sa.getTargets().add(targetSpellCard);
         return true;
     }
 

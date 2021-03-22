@@ -1214,10 +1214,9 @@ public class ComputerUtilCard {
         final float valueNow = Math.max(valueTempo, threat);
         if (valueNow < 0.2) {   //hard floor to reduce ridiculous odds for instants over time
             return false;
-        } else {
-            final float chance = MyRandom.getRandom().nextFloat();
-            return chance < valueNow;
         }
+        final float chance = MyRandom.getRandom().nextFloat();
+        return chance < valueNow;
     }
 
     /**

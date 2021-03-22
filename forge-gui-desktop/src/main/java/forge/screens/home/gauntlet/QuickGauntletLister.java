@@ -126,9 +126,7 @@ public class QuickGauntletLister extends JPanel {
         if (previousSelect == null) {
             return null;
         }
-        else {
-            return GauntletIO.getGauntletFile(previousSelect.getGauntletData());
-        }
+        return GauntletIO.getGauntletFile(previousSelect.getGauntletData());
     }
 
     private class DeleteButton extends SkinnedButton {

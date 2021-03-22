@@ -30,40 +30,38 @@ public class AmassAi extends SpellAbilityAi {
 
         if (!aiArmies.isEmpty()) {
             return CardLists.count(aiArmies, CardPredicates.canReceiveCounters(CounterEnumType.P1P1)) > 0;
-        } else {
-            final String tokenScript = "b_0_0_zombie_army";
-            final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
+        }
+        final String tokenScript = "b_0_0_zombie_army";
+        final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
 
-            Card token = TokenInfo.getProtoType(tokenScript, sa, false);
+        Card token = TokenInfo.getProtoType(tokenScript, sa, false);
 
-            if (token == null) {
-                return false;
-            }
-
-            token.setController(ai, 0);
-            token.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
-
-            boolean result = true;
-
-            // need to check what the cards would be on the battlefield
-            // do not attach yet, that would cause Events
-            CardCollection preList = new CardCollection(token);
-            game.getAction().checkStaticAbilities(false, Sets.newHashSet(token), preList);
-
-            if (token.canReceiveCounters(CounterEnumType.P1P1)) {
-                token.setCounters(CounterEnumType.P1P1, amount);
-            }
-
-            if (token.isCreature() && token.getNetToughness() < 1) {
-                result = false;
-            }
-
-            //reset static abilities
-            game.getAction().checkStaticAbilities(false);
-
-            return result;
+        if (token == null) {
+            return false;
         }
 
+        token.setController(ai, 0);
+        token.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
+
+        boolean result = true;
+
+        // need to check what the cards would be on the battlefield
+        // do not attach yet, that would cause Events
+        CardCollection preList = new CardCollection(token);
+        game.getAction().checkStaticAbilities(false, Sets.newHashSet(token), preList);
+
+        if (token.canReceiveCounters(CounterEnumType.P1P1)) {
+            token.setCounters(CounterEnumType.P1P1, amount);
+        }
+
+        if (token.isCreature() && token.getNetToughness() < 1) {
+            result = false;
+        }
+
+        //reset static abilities
+        game.getAction().checkStaticAbilities(false);
+
+        return result;
     }
 
     @Override

@@ -3565,7 +3565,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // values that are printed on card
     public final void setBasePowerString(final String s) {
-        currentState.setBasePowerString(s);;
+        currentState.setBasePowerString(s);
     }
 
     public final void setBaseToughnessString(final String s) {

@@ -108,9 +108,7 @@ public class PlayerControllerAi extends PlayerController {
         if (abilities.size() == 0) {
             return null;
         }
-        else {
-            return abilities.get(0);
-        }
+        return abilities.get(0);
     }
 
     public AiController getAi() {
