@@ -1,9 +1,9 @@
 Name:Liliana's Contract
 ManaCost:3 B B
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ DBWin | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if you control four or more Demons with different names, you win the game.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ DBWin | TriggerZones$ Battlefield | CheckSVar$ Contractors | SVarCompare$ GE4 | TriggerDescription$ At the beginning of your upkeep, if you control four or more Demons with different names, you win the game.
 SVar:DBWin:DB$ WinsGame | Defined$ You | ConditionCheckSVar$ Contractors | ConditionSVarCompare$ GE4
-SVar:Contractors:Count$DifferentCardNames_Demon.YouCtrl+inZoneBattlefield
+SVar:Contractors:Count$DifferentCardNames_Demon.YouCtrl+inRealZoneBattlefield
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, you draw four cards and you lose 4 life.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 4 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 4
