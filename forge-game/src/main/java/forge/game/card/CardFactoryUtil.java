@@ -786,8 +786,10 @@ public class CardFactoryUtil {
             final String[] rest = restriction.split(",");
             CardCollection list = CardLists.getValidCards(cc.getGame().getCardsInGame(), rest, cc, c, null);
             for (final Card card : list) {
-                if (!crdname.contains(card.getName())) {
-                    crdname.add(card.getName());
+                String name = card.getName();
+                // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
+                if (!crdname.contains(name) && !name.isEmpty()) {
+                    crdname.add(name);
                 }
             }
             return doXMath(crdname.size(), m, c);
