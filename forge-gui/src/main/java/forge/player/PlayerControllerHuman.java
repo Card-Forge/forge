@@ -492,7 +492,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // Otherwise, use the order dialog to be able to grab multiple cards in
         // one shot
 
-        if (max == 1) {
+        if (min == 1 && max == 1) {
             final Card singleChosen = chooseSingleEntityForEffect(sourceList, sa, title, isOptional, params);
             return singleChosen == null ? CardCollection.EMPTY : new CardCollection(singleChosen);
         }

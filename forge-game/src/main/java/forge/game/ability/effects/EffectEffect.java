@@ -140,6 +140,10 @@ public class EffectEffect extends SpellAbilityEffect {
             final Card eff = createEffect(sa, controller, name, image);
             eff.setSetCode(sa.getHostCard().getSetCode());
             eff.setRarity(sa.getHostCard().getRarity());
+            // For Raging River effect to add attacker "left" or "right" pile later
+            if (sa.hasParam("Mutable")) {
+                eff.setImmutable(false);
+            }
 
             // Abilities and triggers work the same as they do for Token
             // Grant abilities

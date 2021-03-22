@@ -24,6 +24,7 @@ public class AnimateEffect extends AnimateEffectBase {
         final Card source = sa.getHostCard();
 
         String animateRemembered = null;
+        String animateImprinted = null;
 
         //if host is not on the battlefield don't apply
         if ((sa.hasParam("UntilHostLeavesPlay") || sa.hasParam("UntilLoseControlOfHost"))
@@ -34,6 +35,10 @@ public class AnimateEffect extends AnimateEffectBase {
         // Remember Objects
         if (sa.hasParam("RememberObjects")) {
             animateRemembered = sa.getParam("RememberObjects");
+        }
+        // Imprint Cards
+        if (sa.hasParam("ImprintCards")) {
+            animateImprinted = sa.getParam("ImprintCards");
         }
 
         // AF specific sa
@@ -160,6 +165,18 @@ public class AnimateEffect extends AnimateEffectBase {
                 for (final Object o : AbilityUtils.getDefinedObjects(source, animateRemembered, sa)) {
                     c.addRemembered(o);
                 }
+            }
+
+            // give Imprinted
+            if (animateImprinted != null) {
+                for (final Card imprintedCard : AbilityUtils.getDefinedCards(source, animateImprinted, sa)) {
+                    c.addImprintedCard(imprintedCard);
+                }
+            }
+
+            // Restore immutable to effect
+            if (sa.hasParam("Immutable")) {
+                c.setImmutable(true);
             }
 
             game.fireEvent(new GameEventCardStatsChanged(c));
