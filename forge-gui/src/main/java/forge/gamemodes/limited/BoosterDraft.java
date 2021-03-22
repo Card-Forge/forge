@@ -152,7 +152,11 @@ public class BoosterDraft implements IBoosterDraft {
                 } else {
                     // Only one set is chosen. If that set lets you draft 2 cards to start adjust draft settings now
                     String setCode = sets.get(0);
-                    doublePickDuringDraft = FModel.getMagicDb().getEditions().get(setCode).getDoublePickDuringDraft();
+                    CardEdition edition = FModel.getMagicDb().getEditions().get(setCode);
+                    // If this is metaset, edtion will be null
+                    if (edition != null) {
+                        doublePickDuringDraft = edition.getDoublePickDuringDraft();
+                    }
 
                     final IUnOpenedProduct product1 = block.getBooster(setCode);
 
