@@ -239,9 +239,7 @@ public class MatchController extends AbstractGuiGame {
             };
             try {
                 phaseGameState.initFromGame(getGameView().getGame());
-            } catch (Exception e) {
-                System.out.println(phaseGameState);
-            }
+            } catch (Exception e) {}
         }
     }
 

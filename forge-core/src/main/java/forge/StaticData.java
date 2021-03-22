@@ -54,6 +54,8 @@ public class StaticData {
 
     private MulliganDefs.MulliganRule mulliganRule = MulliganDefs.getDefaultRule();
 
+    private String prefferedArt;
+
     // Loaded lazily:
     private IStorage<SealedProduct.Template> boosters;
     private IStorage<SealedProduct.Template> specialBoosters;
@@ -64,17 +66,18 @@ public class StaticData {
 
     private static StaticData lastInstance = null;
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, boolean enableUnknownCards, boolean loadNonLegalCards) {
-        this(cardReader, null, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, enableUnknownCards, loadNonLegalCards);
+    public StaticData(CardStorageReader cardReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String prefferedArt, boolean enableUnknownCards, boolean loadNonLegalCards) {
+        this(cardReader, null, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, prefferedArt, enableUnknownCards, loadNonLegalCards);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, boolean enableUnknownCards, boolean loadNonLegalCards) {
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String prefferedArt, boolean enableUnknownCards, boolean loadNonLegalCards) {
         this.cardReader = cardReader;
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
         this.blockDataFolder = blockDataFolder;
         this.customCardReader = customCardReader;
         this.customEditions = new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder)));
+        this.prefferedArt = prefferedArt;
         lastInstance = this;
 
         {
@@ -275,6 +278,8 @@ public class StaticData {
 
     public Predicate<PaperCard> getBrawlPredicate() { return brawlPredicate; }
 
+    public String getPrefferedArtOption() { return prefferedArt; }
+
     public void setFilteredHandsEnabled(boolean filteredHandsEnabled){
         this.filteredHandsEnabled = filteredHandsEnabled;
     }
@@ -324,6 +329,30 @@ public class StaticData {
         }
 
         c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.EarliestCoreExp, -1);
+
+        if (null != c) {
+            return c;
+        }
+
+        // I give up!
+        return card;
+    }
+
+    public PaperCard getCardFromEarliestCoreExp(PaperCard card) {
+
+        PaperCard c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.EarliestCoreExp, card.getArtIndex());
+
+        if (null != c && c.hasImage()) {
+            return c;
+        }
+
+        c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.EarliestCoreExp, -1);
+
+        if (null != c && c.hasImage()) {
+            return c;
+        }
+
+        c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.Earliest, -1);
 
         if (null != c) {
             return c;

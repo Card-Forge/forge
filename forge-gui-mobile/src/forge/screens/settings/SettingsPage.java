@@ -396,6 +396,29 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("cbImageFetcher"),
                 localizer.getMessage("nlImageFetcher")),
                 4);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_PREFERRED_ART,
+                localizer.getMessage("lblPreferredArt"),
+                localizer.getMessage("nlPreferredArt"),
+                new String[]{"Latest", "Earliest", "Default"}) {
+                    @Override
+                    public void valueChanged(String newValue) {
+                        super.valueChanged(newValue);
+                        FOptionPane.showConfirmDialog (
+                                localizer.getMessage("lblRestartForgeDescription"),
+                                localizer.getMessage("lblRestartForge"),
+                                localizer.getMessage("lblRestart"),
+                                localizer.getMessage("lblLater"), new Callback<Boolean>() {
+                                    @Override
+                                    public void run(Boolean result) {
+                                        if (result) {
+                                            Forge.restart(true);
+                                        }
+                                    }
+                                }
+                        );
+                    }
+                },
+                4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_FOIL_EFFECT,
                 localizer.getMessage("cbDisplayFoil"),
                 localizer.getMessage("nlDisplayFoil")),

@@ -19,6 +19,7 @@ package forge.deck;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.List;
@@ -259,7 +260,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     private void convertByXitaxMethod() {
-        //Date dateWithAllCards = StaticData.instance().getEditions().getEarliestDateWithAllCards(getAllCardsInASinglePool());
+        Date dateWithAllCards = StaticData.instance().getEditions().getEarliestDateWithAllCards(getAllCardsInASinglePool());
+        String artOption = StaticData.instance().getPrefferedArtOption();
 
         for(Entry<DeckSection, CardPool> p : parts.entrySet()) {
             if( p.getKey() == DeckSection.Planes || p.getKey() == DeckSection.Schemes || p.getKey() == DeckSection.Avatar)
@@ -271,7 +273,17 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 PaperCard card = cp.getKey();
                 int count = cp.getValue();
 
-                PaperCard replacementCard = StaticData.instance().getCardFromLatestorEarliest(card);
+                PaperCard replacementCard;
+                switch (artOption) {
+                    case "Latest":
+                        replacementCard = StaticData.instance().getCardFromLatestorEarliest(card);
+                        break;
+                    case "Earliest":
+                        replacementCard = StaticData.instance().getCardFromEarliestCoreExp(card);
+                        break;
+                    default:
+                        replacementCard = StaticData.instance().getCardByEditionDate(card, dateWithAllCards);
+                }
 
                 if (replacementCard.getArtIndex() == card.getArtIndex()) {
                     if (card.hasImage())

@@ -31,6 +31,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
+import forge.StaticData;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -414,8 +415,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     @Override
-    public PaperCard getCardFromEdition(final String cardName, final Date printedBefore, final SetPreference fromSet, int artIndex) {
+    public PaperCard getCardFromEdition(final String cardName, final Date printedBefore, final SetPreference fromSets, int artIndex) {
         final CardRequest cr = CardRequest.fromString(cardName);
+        SetPreference fromSet = fromSets;
         List<PaperCard> cards = getAllCards(cr.cardName);
         if (printedBefore != null){
             cards = Lists.newArrayList(Iterables.filter(cards, new Predicate<PaperCard>() {
@@ -428,6 +430,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (cards.size() == 0)  // Don't bother continuing! No cards has been found!
             return null;
         boolean cardsListReadOnly = true;
+
+        //overrides
+        if (StaticData.instance().getPrefferedArtOption().equals("Earliest"))
+            fromSet = SetPreference.EarliestCoreExp;
 
         if (StringUtils.isNotBlank(cr.edition)) {
             cards = Lists.newArrayList(Iterables.filter(cards, new Predicate<PaperCard>() {
