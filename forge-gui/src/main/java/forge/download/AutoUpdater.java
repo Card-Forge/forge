@@ -90,9 +90,8 @@ public class AutoUpdater {
             int option = SOptionPane.showOptionDialog(message, localizer.getMessage("lblManualCheck"), null, options, 0);
             if (option < 1) {
                 return false;
-            } else {
-                updateChannel = options.get(option);
             }
+            updateChannel = options.get(option);
         }
 
         if (buildVersion.contains("SNAPSHOT")) {

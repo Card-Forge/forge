@@ -162,10 +162,9 @@ public class ComputerUtilCost {
                     Card pref = ComputerUtil.getCardPreference(ai, source, "DiscardCost", typeList);
                     if (pref == null) {
                         return false;
-                    } else {
-                        typeList.remove(pref);
-                        hand.remove(pref);
                     }
+                    typeList.remove(pref);
+                    hand.remove(pref);
                 }
             }
         }

@@ -558,7 +558,7 @@ public class AbilityUtils {
             else if (hType.startsWith("Property") && ability instanceof SpellAbility) {
                 String defined = hType.split("Property")[1];
                 for (Player p : game.getPlayersInTurnOrder()) {
-                    if (p.hasProperty(defined, ((SpellAbility) ability).getActivatingPlayer(), ability.getHostCard(), (SpellAbility) ability)) {
+                    if (p.hasProperty(defined, ((SpellAbility) ability).getActivatingPlayer(), ability.getHostCard(), ability)) {
                         players.add(p);
                     }
                 }
@@ -1105,7 +1105,7 @@ public class AbilityUtils {
                 }
                 // For merged permanent
                 if (c instanceof CardCollection) {
-                    o = ((CardCollection) c).get(0).getController().getOpponents();;
+                    o = ((CardCollection) c).get(0).getController().getOpponents();
                 }
             }
             else if (defParsed.endsWith("Owner")) {
@@ -1828,13 +1828,11 @@ public class AbilityUtils {
                 }
             }
 
-            if (ctb instanceof CardTraitBase) {
-                if (l[0].startsWith("CountersAddedThisTurn")) {
-                    final String[] parts = l[0].split(" ");
-                    CounterType cType = CounterType.getType(parts[1]);
+            if (l[0].startsWith("CountersAddedThisTurn")) {
+                final String[] parts = l[0].split(" ");
+                CounterType cType = CounterType.getType(parts[1]);
 
-                    return CardFactoryUtil.doXMath(game.getCounterAddedThisTurn(cType, parts[2], parts[3], c, player, ctb), expr, c);
-                }
+                return CardFactoryUtil.doXMath(game.getCounterAddedThisTurn(cType, parts[2], parts[3], c, player, ctb), expr, c);
             }
         }
         return CardFactoryUtil.xCount(c, s2);

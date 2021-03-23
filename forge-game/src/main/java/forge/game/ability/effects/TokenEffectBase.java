@@ -160,10 +160,9 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
 
             tok.attachToEntity(ge);
             return true;
-        } else {
-            // not a GameEntity, cant be attach
-            return false;
         }
+        // not a GameEntity, cant be attach
+        return false;
     }
 
     protected void addPumpUntil(SpellAbility sa, final Card c, long timestamp) {

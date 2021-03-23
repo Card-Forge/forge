@@ -327,17 +327,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 // Don't immediately close, wait for win/lose screen
                 return false;
             }
-            else {
-                // since the nextGameDecision might come from somewhere else it will try and concede too
-                ignoreConcedeChain = true;
-                for (PlayerView player : getLocalPlayers()) {
-                    if (!player.isAI()) {
-                        getGameController(player).nextGameDecision(NextGameDecision.QUIT);
-                    }
+            // since the nextGameDecision might come from somewhere else it will try and concede too
+            ignoreConcedeChain = true;
+            for (PlayerView player : getLocalPlayers()) {
+                if (!player.isAI()) {
+                    getGameController(player).nextGameDecision(NextGameDecision.QUIT);
                 }
-                ignoreConcedeChain = false;
-                return false;
             }
+            ignoreConcedeChain = false;
+            return false;
         }
         else if (spectator == null) {
             return true; //if no local players or spectator, just quit

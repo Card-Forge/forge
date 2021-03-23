@@ -261,7 +261,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             }
 
             for (final Card dest : tgtCards) {
-                if (null != source && null != dest) {
+                if (null != dest) {
                     // rule 121.5: If the first and second objects are the same object, nothing
                     // happens
                     if (source.equals(dest)) {

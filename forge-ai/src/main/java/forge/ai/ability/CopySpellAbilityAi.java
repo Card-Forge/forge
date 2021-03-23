@@ -68,7 +68,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
                 }
             }
 
-            if (top.isWrapper() || !(top instanceof SpellAbility || top.isActivatedAbility())) {
+            if (top.isWrapper() || top.isActivatedAbility()) {
                 // Shouldn't even try with triggered or wrapped abilities at this time, will crash
                 return false;
             } else if (top.getApi() == ApiType.CopySpellAbility) {

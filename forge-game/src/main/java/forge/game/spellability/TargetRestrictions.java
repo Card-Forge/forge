@@ -489,19 +489,18 @@ public class TargetRestrictions {
         if (this.tgtZone.contains(ZoneType.Stack)) {
             // Stack Zone targets are considered later
             return true;
-        } else {
-            for (final Card c : game.getCardsIn(this.tgtZone)) {
-                if (!c.isValid(this.validTgts, sa.getActivatingPlayer(), srcCard, sa)) {
-                    continue;
-                }
-                if (isTargeted && !sa.canTarget(c)) {
-                    continue;
-                }
-                if (sa.getTargets().contains(c)) {
-                    continue;
-                }
-                return true;
+        }
+        for (final Card c : game.getCardsIn(this.tgtZone)) {
+            if (!c.isValid(this.validTgts, sa.getActivatingPlayer(), srcCard, sa)) {
+                continue;
             }
+            if (isTargeted && !sa.canTarget(c)) {
+                continue;
+            }
+            if (sa.getTargets().contains(c)) {
+                continue;
+            }
+            return true;
         }
 
         return false;

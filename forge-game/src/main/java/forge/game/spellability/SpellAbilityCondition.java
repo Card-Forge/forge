@@ -290,12 +290,11 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             Card first = Iterables.getFirst(tgts, null);
             if (first == null) {
                 return false;
-            } else {
-                byte firstColor = CardUtil.getColors(first).getColor();
-                for (Card c : tgts) {
-                    if (CardUtil.getColors(c).getColor() != firstColor) {
-                        return false;
-                    }
+            }
+            byte firstColor = CardUtil.getColors(first).getColor();
+            for (Card c : tgts) {
+                if (CardUtil.getColors(c).getColor() != firstColor) {
+                    return false;
                 }
             }
         }

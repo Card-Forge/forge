@@ -1452,12 +1452,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 if (sa.getTargets().size() == 0 || sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                     sa.resetTargets();
                     return false;
-                } else {
-                    if (!ComputerUtil.shouldCastLessThanMax(ai, source)) {
-                        return false;
-                    }
-                    break;
+                } 
+                if (!ComputerUtil.shouldCastLessThanMax(ai, source)) {
+                    return false;
                 }
+                break;
             }
 
             list.remove(choice);
@@ -1958,9 +1957,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (choice != null) {
             sa.getTargets().add(choice);
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     private static CardCollection getSafeTargetsIfUnlessCostPaid(Player ai, SpellAbility sa, Iterable<Card> potentialTgts) {

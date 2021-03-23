@@ -642,9 +642,9 @@ public class BoosterGenerator {
 
             if (toAdd == null) {
                 continue;
-            } else {
-                itOp.remove();
             }
+
+            itOp.remove();
 
             if (invert) {
                 toAdd = Predicates.not(toAdd);
@@ -658,8 +658,6 @@ public class BoosterGenerator {
         }
 
         return Predicates.and(conditions);
-
     }
-
 
 }

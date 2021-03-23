@@ -1120,9 +1120,8 @@ public class AiController {
                 CardCollection discards = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(cmc));
                 if (discards.isEmpty()) {
                     return null;
-                } else {
-                    return new CardCollection(ComputerUtilCard.getWorstAI(discards));
                 }
+                return new CardCollection(ComputerUtilCard.getWorstAI(discards));
             }
 
             if (sa.hasParam("AnyNumber")) {

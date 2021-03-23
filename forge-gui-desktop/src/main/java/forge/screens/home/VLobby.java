@@ -715,15 +715,14 @@ public class VLobby implements ILobbyView {
 
             if (sel == null) {
                 return;
-            } else {
-                if (sel.contains("Use deck's default avatar") && deck != null && deck.has(DeckSection.Avatar)) {
-                    vanguardAvatar = deck.get(DeckSection.Avatar).get(0);
-                } else { //Only other string is "Random"
-                    if (playerPanels.get(playerIndex).isAi()) { //AI
-                        vanguardAvatar = Aggregates.random(getNonRandomAiAvatars());
-                    } else { //Human
-                        vanguardAvatar = Aggregates.random(getNonRandomHumanAvatars());
-                    }
+            }
+            if (sel.contains("Use deck's default avatar") && deck != null && deck.has(DeckSection.Avatar)) {
+                vanguardAvatar = deck.get(DeckSection.Avatar).get(0);
+            } else { //Only other string is "Random"
+                if (playerPanels.get(playerIndex).isAi()) { //AI
+                    vanguardAvatar = Aggregates.random(getNonRandomAiAvatars());
+                } else { //Human
+                    vanguardAvatar = Aggregates.random(getNonRandomHumanAvatars());
                 }
             }
         }

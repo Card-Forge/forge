@@ -1357,24 +1357,23 @@ public final class CMatchUI
     private List<GameEntityView> getTargets(SpellAbilityStackInstance si, List<GameEntityView> result){
         if(si == null) {
             return result;
-        } else {
-            FCollectionView<CardView> targetCards = CardView.getCollection(si.getTargetChoices().getTargetCards());
-            for(CardView currCardView: targetCards) {
-                result.add(currCardView);
-            }
-            
-            for(SpellAbility currSA : si.getTargetChoices().getTargetSpells()) {
-                CardView currCardView = currSA.getCardView();
-                result.add(currCardView);
-            }
-            
-            FCollectionView<PlayerView> targetPlayers = PlayerView.getCollection(si.getTargetChoices().getTargetPlayers());
-            for(PlayerView currPlayerView : targetPlayers) {
-                result.add(currPlayerView);
-            }
-            
-            return getTargets(si.getSubInstance(),result);
         }
+        FCollectionView<CardView> targetCards = CardView.getCollection(si.getTargetChoices().getTargetCards());
+        for(CardView currCardView: targetCards) {
+            result.add(currCardView);
+        }
+
+        for(SpellAbility currSA : si.getTargetChoices().getTargetSpells()) {
+            CardView currCardView = currSA.getCardView();
+            result.add(currCardView);
+        }
+
+        FCollectionView<PlayerView> targetPlayers = PlayerView.getCollection(si.getTargetChoices().getTargetPlayers());
+        for(PlayerView currPlayerView : targetPlayers) {
+            result.add(currPlayerView);
+        }
+
+        return getTargets(si.getSubInstance(),result);
     }
     
     private void addBigImageToStackModalPanel(JPanel mainPanel, SpellAbilityStackInstance si) {

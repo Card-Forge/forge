@@ -89,22 +89,20 @@ public class CostReveal extends CostPartWithList {
         } else if (this.getType().equals("SameColor")) {
             if (amount == null) {
                 return false;
-            } else {
-                for (final Card card : handList) {
-                    if (CardLists.filter(handList, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            return c.sharesColorWith(card);
-                        }
-                    }).size() >= amount) {
-                        return true;
-                    }
-                }
-                return false;
             }
+            for (final Card card : handList) {
+                if (CardLists.filter(handList, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        return c.sharesColorWith(card);
+                    }
+                }).size() >= amount) {
+                    return true;
+                }
+            }
+            return false;
         } else {
             return (amount == null) || (amount <= getMaxAmountX(ability, payer));
-            //System.out.println("revealcost - " + amount + type + handList);
         }
 
     }
