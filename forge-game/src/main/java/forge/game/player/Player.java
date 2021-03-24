@@ -625,7 +625,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (energyPayment <= 0)
             return true;
 
-
         return canPayEnergy(energyPayment) && loseEnergy(energyPayment) > -1;
     }
 
