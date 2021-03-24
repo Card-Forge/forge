@@ -125,17 +125,17 @@ public class ManaEffect extends SpellAbilityEffect {
 
                 String type = abMana.getOrigProduced().split("Special ")[1];
 
-                if (type.equals("EnchantedManaCost")) {
-                    Card enchanted = card.getEnchantingCard();
-                    if (enchanted == null ) 
+                if (type.equals("DefinedManaCost")) {
+                    Card defined = AbilityUtils.getDefinedCards(card, sa.getParam("ManaCostOf"), sa).get(0);
+                    if (defined == null)
                         continue;
 
                     StringBuilder sb = new StringBuilder();
-                    int generic = enchanted.getManaCost().getGenericCost();
-                    if( generic > 0 )
+                    int generic = defined.getManaCost().getGenericCost();
+                    if(generic > 0)
                         sb.append(generic);
 
-                    for (ManaCostShard s : enchanted.getManaCost()) {
+                    for (ManaCostShard s : defined.getManaCost()) {
                         ColorSet cs = ColorSet.fromMask(s.getColorMask());
                         if(cs.isColorless())
                             continue;
