@@ -293,12 +293,6 @@
                             <artifactId>wagon-ftp</artifactId>
                             <version>2.6</version>
                         </dependency>
-                        <dependency>
-                        <groupId>com.sipgate</groupId>
-                        <artifactId>mp3-wav</artifactId>
-                        <version>1.0.3</version>
-                    </dependency>
-
                     </dependencies>
                 </plugin>
 
