@@ -7077,6 +7077,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return edition.getBorderColor();
     }
 
+    public final CardCollectionView getUntilLeavesBattlefield() {
+        return CardCollection.getView(untilLeavesBattlefield);
+    }
+
     public final void addUntilLeavesBattlefield(final Card c) {
         untilLeavesBattlefield = view.addCard(untilLeavesBattlefield, c, TrackableProperty.UntilLeavesBattlefield);
     }
