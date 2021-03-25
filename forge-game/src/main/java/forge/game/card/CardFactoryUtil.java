@@ -72,6 +72,7 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityCantBeCast;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
@@ -4518,6 +4519,10 @@ public class CardFactoryUtil {
                 @Override
                 public boolean canPlay() {
                     if (!(this.getRestrictions().canPlay(this.getHostCard(), this))) {
+                        return false;
+                    }
+
+                    if (StaticAbilityCantBeCast.cantBeCastAbility(this, this.getHostCard(), this.getActivatingPlayer())) {
                         return false;
                     }
 
