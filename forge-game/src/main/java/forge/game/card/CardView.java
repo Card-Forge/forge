@@ -43,7 +43,6 @@ import forge.util.collect.FCollectionView;
 
 public class CardView extends GameEntityView {
     private static final long serialVersionUID = -3624090829028979255L;
-    private Card cardbackup;
 
     public static CardView get(Card c) {
         return c == null ? null : c.getView();
@@ -54,7 +53,10 @@ public class CardView extends GameEntityView {
         return s == null ? null : s.getView();
     }
 
-    public CardView getBackup() { return cardbackup == null ? null : getCardForUi(cardbackup.getPaperCard()); }
+    public CardView getBackup() {
+        return get(TrackableProperty.CardBackupView);
+    }
+
     public static CardView getCardForUi(IPaperCard pc) {
         return Card.getCardForUi(pc).getView();
     }
@@ -778,8 +780,8 @@ public class CardView extends GameEntityView {
         updateZoneText(c);
         updateDamage(c);
 
-        if (cardbackup == null && !c.isFaceDown() && c.hasBackSide()) {
-            cardbackup = c.getCardForUi();
+        if (getBackup() == null && !c.isFaceDown() && c.hasBackSide()) {
+            set(TrackableProperty.CardBackupView, c.getCardForUi().getView());
         }
 
         boolean isSplitCard = c.isSplitCard();
