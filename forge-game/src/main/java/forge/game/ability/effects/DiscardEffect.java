@@ -349,6 +349,9 @@ public class DiscardEffect extends SpellAbilityEffect {
                 runParams.put(AbilityKey.Cause, sa);
                 runParams.put(AbilityKey.FirstTime, firstDiscard);
                 game.getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
+                if (sa.hasParam("RememberDiscardingPlayers")) {
+                    source.addRemembered(p);
+                }
             }
         }
 
