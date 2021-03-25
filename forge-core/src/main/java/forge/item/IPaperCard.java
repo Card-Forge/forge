@@ -1,5 +1,6 @@
 package forge.item;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,7 +19,7 @@ import forge.util.PredicateString;
 
 //import forge.Card;
 
-public interface IPaperCard extends InventoryItem {
+public interface IPaperCard extends InventoryItem, Serializable {
 
     /**
      * Number of filters based on CardPrinted values.
