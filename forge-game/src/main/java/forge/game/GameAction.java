@@ -251,6 +251,7 @@ public class GameAction {
                     copied.copyChangedTextFrom(c);
 
                     // copy exiled properties when adding to stack
+                    // will be cleanup later in MagicStack
                     copied.setExiledWith(c.getExiledWith());
                     copied.setExiledBy(c.getExiledBy());
 
@@ -416,13 +417,7 @@ public class GameAction {
             }
 
             if (!zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Stack)) {
-                Card with = c.getExiledWith();
-                if (with != null) {
-                    with.removeUntilLeavesBattlefield(c);
-                }
-
-                c.setExiledWith(null);
-                c.setExiledBy(null);
+                c.cleanupExiledWith();
             }
         }
 

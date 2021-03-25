@@ -1681,6 +1681,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         exiledWith = e;
     }
 
+    public final void cleanupExiledWith() {
+        if (exiledWith == null) {
+            return;
+        }
+
+        exiledWith.removeUntilLeavesBattlefield(this);
+
+        exiledWith = null;
+        exiledBy = null;
+    }
+
     public final Player getExiledBy() { return exiledBy; }
     public final void setExiledBy(final Player ep) {
         exiledBy = ep;

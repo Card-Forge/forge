@@ -150,6 +150,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
                 source.setCastSA(cause);
             }
+            source.cleanupExiledWith();
         }
 
         // Always add the ability here and always unfreeze the stack
