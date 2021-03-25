@@ -19,6 +19,7 @@ import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.combat.Combat;
@@ -634,10 +635,19 @@ public abstract class SpellAbilityEffect {
             @Override
             public void run() {
                 CardZoneTable untilTable = new CardZoneTable();
+                CardCollectionView untilCards = hostCard.getUntilLeavesBattlefield();
+                // if the list is empty, then the table doesn't need to be checked anymore
+                if (untilCards.isEmpty()) {
+                    return;
+                }
                 for (Table.Cell<ZoneType, ZoneType, CardCollection> cell : triggerList.cellSet()) {
                     for (Card c : cell.getValue()) {
+                        // check if card is still in the until host leaves play list
+                        if (!untilCards.contains(c)) {
+                            continue;
+                        }
                         // better check if card didn't changed zones again?
-                        Card newCard = c.getZone().getCards().get(c);
+                        Card newCard = game.getCardState(c, null);
                         if (newCard == null || !newCard.equalsWithTimestamp(c)) {
                             continue;
                         }
