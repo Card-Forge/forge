@@ -21,6 +21,7 @@ import forge.game.combat.CombatView;
 import forge.game.keyword.KeywordCollection.KeywordCollectionView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
+import forge.item.IPaperCard;
 
 public class TrackableTypes {
     public static abstract class TrackableType<T> {
@@ -231,6 +232,30 @@ public class TrackableTypes {
             ts.write(value == null ? -1 : value.getId()); //just write ID for lookup via index when deserializing
         }
     };
+
+    public static final TrackableType<IPaperCard> IPaperCardType = new TrackableType<IPaperCard>() {
+        @Override
+        protected IPaperCard getDefaultValue() {
+            return null;
+        }
+
+        @Override
+        protected IPaperCard deserialize(TrackableDeserializer td, IPaperCard oldValue) {
+            //TODO deserialize this
+            return oldValue;
+        }
+
+        @Override
+        protected void serialize(TrackableSerializer ts, IPaperCard value) {
+            if (value == null) {
+                ts.write(-1);
+            }
+            else {
+                //TODO serialize this
+            }
+        }
+    };
+
     public static final TrackableCollectionType<CardView> CardViewCollectionType = new TrackableCollectionType<CardView>(CardViewType) {
         @Override
         protected TrackableCollection<CardView> getDefaultValue() {

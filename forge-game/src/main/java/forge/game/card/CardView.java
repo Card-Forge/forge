@@ -54,7 +54,9 @@ public class CardView extends GameEntityView {
     }
 
     public CardView getBackup() {
-        return get(TrackableProperty.CardBackupView);
+        if (get(TrackableProperty.PaperCardBackup) == null)
+            return null;
+        return getCardForUi(get(TrackableProperty.PaperCardBackup));
     }
 
     public static CardView getCardForUi(IPaperCard pc) {
@@ -781,7 +783,7 @@ public class CardView extends GameEntityView {
         updateDamage(c);
 
         if (getBackup() == null && !c.isFaceDown() && c.hasBackSide()) {
-            set(TrackableProperty.CardBackupView, c.getCardForUi().getView());
+            set(TrackableProperty.PaperCardBackup, c.getPaperCard());
         }
 
         boolean isSplitCard = c.isSplitCard();

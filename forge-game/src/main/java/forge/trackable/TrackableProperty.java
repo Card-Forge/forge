@@ -37,7 +37,7 @@ public enum TrackableProperty {
     SplitCard(TrackableTypes.BooleanType),
     MergedCards(TrackableTypes.StringType),
     MergedCardsCollection(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
-    CardBackupView(TrackableTypes.CardViewType),
+    PaperCardBackup(TrackableTypes.IPaperCardType),
 
     Attacking(TrackableTypes.BooleanType),
     Blocking(TrackableTypes.BooleanType),
