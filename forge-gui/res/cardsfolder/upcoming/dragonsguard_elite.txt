@@ -2,7 +2,7 @@ Name:Dragonsguard Elite
 ManaCost:1 G
 Types:Creature Human Druid
 PT:2/2
-T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | NoResolvingCheck$ True | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, put a +1/+1 counter on CARDNAME.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, put a +1/+1 counter on CARDNAME.
 T:Mode$ SpellCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
 A:AB$ MultiplyCounter | Cost$ 4 G G | Defined$ Self | CounterType$ P1P1 | SpellDescription$ Double the number of +1/+1 counters on CARDNAME.
