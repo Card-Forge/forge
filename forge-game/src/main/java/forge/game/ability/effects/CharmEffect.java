@@ -13,7 +13,9 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
+import forge.util.CardTranslation;
 import forge.util.Lang;
+import forge.util.Localizer;
 import forge.util.collect.FCollection;
 
 public class CharmEffect extends SpellAbilityEffect {
@@ -65,6 +67,7 @@ public class CharmEffect extends SpellAbilityEffect {
         }
         final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParamOrDefault("MinCharmNum", "1"), sa) : num;
 
+        boolean optional = sa.hasParam("Optional");
         boolean repeat = sa.hasParam("CanRepeatModes");
         boolean random = sa.hasParam("Random");
         boolean limit = sa.hasParam("ActivationLimit");
@@ -107,7 +110,11 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         if (additionalDesc) {
-            sb.append(" ").append(sa.getParam("AdditionalDescription").trim());
+            if (optional) {
+                sb.append(". ").append(sa.getParam("AdditionalDescription").trim());
+            } else {
+                sb.append(" ").append(sa.getParam("AdditionalDescription").trim());
+            }
         }
 
         if (!list.isEmpty()) {
@@ -155,6 +162,11 @@ public class CharmEffect extends SpellAbilityEffect {
 
         // if the amount of choices is smaller than min then they can't be chosen
         if (min > choices.size()) {
+            return false;
+        }
+
+        boolean isOptional = sa.hasParam("Optional");
+        if (isOptional && !activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeCharm", CardTranslation.getTranslatedName(source.getName())))) {
             return false;
         }
 
