@@ -13,7 +13,7 @@ SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creat
 SVar:DBSac:DB$ SacrificeAll | ValidCards$ Card.IsRemembered | SubAbility$ DBCleanup | StackDescription$ Each opponent sacrifices a creature with the greatest power among creatures they control.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosen$ True
 A:AB$ Repeat | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | RepeatSubAbility$ TrigDiscard | MaxRepeat$ 7 | StackDescription$ SpellDescription | SpellDescription$ Each opponent may discard a card. If they don't, they lose 3 life. Repeat this process six more times.
-SVar:TrigDiscard:DB$ Discard | Defined$ Player.Opponent | Mode$ TgtChoose | Optional$ True | RememberDiscardingPlayers$ True | SubAbility$ DBLoseLife
+SVar:TrigDiscard:DB$ Discard | Defined$ Player.Opponent | Mode$ TgtChoose | Optional$ True | RememberDiscardingPlayers$ True | AILogic$ UnlessAtLife.6 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Opponent.IsNotRemembered | LifeAmount$ 3 | SubAbility$ DBCleanup
 DeckHints:Type$Instant|Sorcery
 DeckHas:Ability$Graveyard & Ability$LifeGain
