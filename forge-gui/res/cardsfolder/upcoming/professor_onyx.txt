@@ -1,0 +1,20 @@
+Name:Professor Onyx
+ManaCost:4 B B
+Types:Legendary Planeswalker Liliana
+Loyalty:5
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | NoResolvingCheck$ True | Execute$ TrigDrain | TriggerZones$ Battlefield | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, each opponent loses 2 life and you gain 2 life.
+T:Mode$ SpellCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | Secondary$ True | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, each opponent loses 2 life and you gain 2 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+A:AB$ LoseLife | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | LifeAmount$ 1 | SubAbility$ DBDig | SpellDescription$ You lose 1 life. Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
+SVar:DBDig:DB$ Dig | DigNum$ 3 | ChangeNum$ 1 | DestinationZone2$ Graveyard | StackDescription$ {p:You} looks at the top three cards of their library. {p:You} puts one of them into their hand and the rest into their graveyard.
+A:AB$ RepeatEach | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChooseCard | SubAbility$ DBSac | SpellDescription$ Each opponent sacrifices a creature with the greatest power among creatures that player controls.
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.greatestPowerControlledByRemembered | ChoiceTitle$ Choose a creature you control with the greatest power | Mandatory$ True | RememberChosen$ True
+SVar:DBSac:DB$ SacrificeAll | ValidCards$ Card.IsRemembered | SubAbility$ DBCleanup | StackDescription$ Each opponent sacrifices a creature with the greatest power among creatures they control.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosen$ True
+A:AB$ Repeat | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | RepeatSubAbility$ TrigDiscard | MaxRepeat$ 7 | StackDescription$ SpellDescription | SpellDescription$ Each opponent may discard a card. If they don't, they lose 3 life. Repeat this process six more times.
+SVar:TrigDiscard:DB$ Discard | Defined$ Player.Opponent | Mode$ TgtChoose | Optional$ True | RememberDiscardingPlayers$ True | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Opponent.IsNotRemembered | LifeAmount$ 3 | SubAbility$ DBCleanup
+DeckHints:Type$Instant|Sorcery
+DeckHas:Ability$Graveyard & Ability$LifeGain
+Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, each opponent loses 2 life and you gain 2 life.\n[+1]: You lose 1 life. Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.\n[−3]: Each opponent sacrifices a creature with the greatest power among creatures that player controls.\n[−8]: Each opponent may discard a card. If they don't, they lose 3 life. Repeat this process six more times.
