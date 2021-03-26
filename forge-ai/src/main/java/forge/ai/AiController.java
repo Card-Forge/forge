@@ -1102,8 +1102,6 @@ public class AiController {
     }
 
     public CardCollection getCardsToDiscard(int min, final int max, final CardCollection validCards, final SpellAbility sa) {
-        String logic = sa.getParamOrDefault("AILogic", "");
-
         if (validCards.size() < min) {
             return null;
         }
@@ -1112,6 +1110,7 @@ public class AiController {
         final CardCollection discardList = new CardCollection();
         int count = 0;
         if (sa != null) {
+            String logic = sa.getParamOrDefault("AILogic", "");
             sourceCard = sa.getHostCard();
             if ("Always".equals(logic) && !validCards.isEmpty()) {
                 min = 1;
