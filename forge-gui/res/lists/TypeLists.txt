@@ -282,6 +282,7 @@ Zubera:Zuberas
 [SpellTypes]
 Adventure
 Arcane
+Lesson
 Trap
 [EnchantmentTypes]
 Aura
