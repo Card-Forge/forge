@@ -1,0 +1,25 @@
+Name:Torrent Sculptor
+ManaCost:2 U U
+Types:Creature Merfolk Wizard
+PT:2/2
+K:Ward:2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, exile an instant or sorcery card from your graveyard. Put a number of +1/+1 counters on Torrent Sculptor equal to half that card's mana value, rounded up.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Instant.YouCtrl,Sorcery.YouCtrl | ChangeNum$ 1 | RememberChanged$ True | Hidden$ True | Mandatory$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost/HalfUp
+AlternateMode:Modal
+Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nWhen Torrent Sculptor enters the battlefield, exile an instant or sorcery card from your graveyard. Put a number of +1/+1 counters on Torrent Sculptor equal to half that card's mana value, rounded up.
+
+ALTERNATE
+
+Name:Flamethrower Sonata
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Discard | Cost$ 1 R | Mode$ TgtChoose | SubAbility$ DBDraw | RememberDiscarded$ True | SpellDescription$ Discard a card, then draw a card. When you discard an instant or sorcery card this way, CARDNAME deals damage equal to that card's mana value to target creature or planeswalker you don't control.
+SVar:DBDraw:DB$ Draw | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery | Execute$ TrigDealDamage | RememberObjects$ RememberedCard | SubAbility$ DBCleanup | TriggerDescription$ When you discard an instant or sorcery card this way, CARDNAME deals damage equal to that card's mana value to target creature or planeswalker you don't control.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | TgtPrompt$ Select target creature or planeswalker you don't control | NumDmg$ X
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
+Oracle:Discard a card, then draw a card. When you discard an instant or sorcery card this way, Flamethrower Sonata deals damage equal to that card's mana value to target creature or planeswalker you don't control.

@@ -3331,7 +3331,7 @@ public class CardFactoryUtil {
 
             // sacrifice trigger
             final StringBuilder sacTrig = new StringBuilder("Mode$ CounterRemoved | TriggerZones$ Battlefield" +
-            " | ValidCard$ Card.Self | NewCounterAmount$ 0 | CounterType$ TIME");
+                    " | ValidCard$ Card.Self | NewCounterAmount$ 0 | CounterType$ TIME");
             if (keyword.contains(":")) {
                 sacTrig.append("| Secondary$ True");
             }
@@ -3343,6 +3343,19 @@ public class CardFactoryUtil {
 
             inst.addTrigger(parsedUpkeepTrig);
             inst.addTrigger(parsedSacTrigger);
+        } else if (keyword.startsWith("Ward")) {
+            final String[] k = keyword.split(":");
+            final String cost = k[1];
+
+            String strTrig = "Mode$ BecomesTarget | ValidSource$ Card.OppCtrl | ValidTarget$ Card.Self "
+                    + " | Secondary$ True | TriggerDescription$ " + inst.getReminderText();
+            String effect = "DB$ Counter | Defined$ TriggeredSourceSA | UnlessCost$ " + cost
+                    + " | UnlessPayer$ TriggeredSourceSAController";
+
+            final Trigger trigger = TriggerHandler.parseTrigger(strTrig, card, intrinsic);
+            trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+
+            inst.addTrigger(trigger);
         } else if (keyword.equals("MayFlashSac")) {
             String strTrig = "Mode$ SpellCast | ValidCard$ Card.Self | ValidSA$ Spell.MayPlaySource | Static$ True | Secondary$ True "
                     + " | TriggerDescription$ If you cast it any time a sorcery couldn't have been cast, "
