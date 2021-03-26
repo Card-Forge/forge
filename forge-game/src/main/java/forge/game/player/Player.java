@@ -421,6 +421,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final Player getWeakestOpponent() {
         return getOpponents().min(PlayerPredicates.compareByLife());
     }
+    public final Player getStrongestOpponent() {
+        return getOpponents().max(PlayerPredicates.compareByLife());
+    }
 
     public boolean isOpponentOf(Player other) {
         return other != this && other != null && (other.teamNumber < 0 || other.teamNumber != teamNumber);

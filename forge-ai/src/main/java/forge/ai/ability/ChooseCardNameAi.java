@@ -7,6 +7,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
+import forge.ai.AiAttackController;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpecialCardAi;
@@ -44,7 +45,7 @@ public class ChooseCardNameAi extends SpellAbilityAi {
             if (tgt != null) {
                 sa.resetTargets();
                 if (tgt.canOnlyTgtOpponent()) {
-                    sa.getTargets().add(ai.getWeakestOpponent());
+                    sa.getTargets().add(AiAttackController.choosePreferredDefenderPlayer(ai));
                 } else {
                     sa.getTargets().add(ai);
                 }

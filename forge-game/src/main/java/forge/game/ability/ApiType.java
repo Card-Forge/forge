@@ -30,6 +30,7 @@ public enum ApiType {
     Block (BlockEffect.class),
     Bond (BondEffect.class),
     Branch (BranchEffect.class),
+    Camouflage (CamouflageEffect.class),
     ChangeCombatants (ChangeCombatantsEffect.class),
     ChangeTargets (ChangeTargetsEffect.class),
     ChangeText (ChangeTextEffect.class),

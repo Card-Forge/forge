@@ -15,6 +15,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import forge.ai.AiAttackController;
 import forge.ai.AiBlockController;
 import forge.ai.AiCardMemory;
 import forge.ai.AiController;
@@ -263,7 +264,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         ZoneType origin = null;
-        final Player opponent = ai.getWeakestOpponent();
+        final Player opponent = AiAttackController.choosePreferredDefenderPlayer(ai);
         boolean activateForCost = ComputerUtil.activateForCost(sa, ai);
 
         if (sa.hasParam("Origin")) {
@@ -471,7 +472,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // if putting cards from hand to library and parent is drawing cards
         // make sure this will actually do something:
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Player opp = aiPlayer.getWeakestOpponent();
+        final Player opp = AiAttackController.choosePreferredDefenderPlayer(aiPlayer);
         if (tgt != null && tgt.canTgtPlayer()) {
             boolean isCurse = sa.isCurse();
             if (isCurse && sa.canTarget(opp)) {
@@ -530,7 +531,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         Iterable<Player> pDefined;
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if ((tgt != null) && tgt.canTgtPlayer()) {
-            final Player opp = ai.getWeakestOpponent();
+            final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
             if (sa.isCurse()) {
                 if (sa.canTarget(opp)) {
                     sa.getTargets().add(opp);
@@ -892,7 +893,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             // TODO need to set XManaCostPaid for targets, maybe doesn't need PayX anymore?
             sa.setXManaCostPaid(xPay);
-            // TODO since change of PayX. the shouldCastLessThanMax logic might be faulty
         }
         CardCollection list = CardLists.getTargetableCards(game.getCardsIn(origin), sa);
 
@@ -913,9 +913,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (sa.isSpell()) {
             list.remove(source); // spells can't target their own source, because it's actually in the stack zone
         }
-        //System.out.println("isPreferredTarget " + list);
         if (sa.hasParam("AttachedTo")) {
-            //System.out.println("isPreferredTarget att " + list);
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
@@ -927,7 +925,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return false;
                 }
             });
-            //System.out.println("isPreferredTarget ok " + list);
         }
 
         if (list.size() < sa.getMinTargets()) {
@@ -1482,9 +1479,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         if ("DeathgorgeScavenger".equals(logic)) {
             return SpecialCardAi.DeathgorgeScavenger.consider(ai, sa);
-        } else if ("ExtraplanarLens".equals(logic)) {
+        }
+        if ("ExtraplanarLens".equals(logic)) {
             return SpecialCardAi.ExtraplanarLens.consider(ai, sa);
-        } else if ("ExileCombatThreat".equals(logic)) {
+        }
+        if ("ExileCombatThreat".equals(logic)) {
             return doExileCombatThreatLogic(ai, sa);
         }
 
@@ -1984,11 +1983,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     toPay = AbilityUtils.calculateAmount(source, unlessCost, sa);
                 }
 
-                if (toPay == 0) {
-                    canBeSaved.add(potentialTgt);
-                }
-
-                if (toPay <= usableManaSources) {
+                if (toPay == 0 || toPay <= usableManaSources) {
                     canBeSaved.add(potentialTgt);
                 }
 

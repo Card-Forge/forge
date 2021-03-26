@@ -550,7 +550,7 @@ public class ComputerUtilCard {
      */
     public static CardCollectionView getLikelyBlockers(final Player ai, final CardCollectionView blockers) {
         AiBlockController aiBlk = new AiBlockController(ai);
-        final Player opp = ai.getWeakestOpponent();
+        final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         Combat combat = new Combat(opp);
         //Use actual attackers if available, else consider all possible attackers
         Combat currentCombat = ai.getGame().getCombat();

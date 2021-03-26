@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
+import forge.ai.AiAttackController;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
@@ -109,7 +110,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
      * @return a boolean.
      */
     protected boolean tapPrefTargeting(final Player ai, final Card source, final SpellAbility sa, final boolean mandatory) {
-        final Player opp = ai.getWeakestOpponent();
+        final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         final Game game = ai.getGame();
         CardCollection tapList = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
         tapList = CardLists.getTargetableCards(tapList, sa);

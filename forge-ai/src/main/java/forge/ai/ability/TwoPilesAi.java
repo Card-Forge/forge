@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import java.util.List;
 
+import forge.ai.AiAttackController;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -28,7 +29,7 @@ public class TwoPilesAi extends SpellAbilityAi {
             valid = sa.getParam("ValidCards");
         }
 
-        final Player opp = ai.getWeakestOpponent();
+        final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {

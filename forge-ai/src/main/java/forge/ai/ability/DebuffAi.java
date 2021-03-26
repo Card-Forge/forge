@@ -8,6 +8,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.ai.AiAttackController;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -26,9 +27,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 public class DebuffAi extends SpellAbilityAi {
-    // *************************************************************************
-    // ***************************** Debuff ************************************
-    // *************************************************************************
 
     @Override
     protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
@@ -140,7 +138,6 @@ public class DebuffAi extends SpellAbilityAi {
 
         while (sa.getTargets().size() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
             Card t = null;
-            // boolean goodt = false;
 
             if (list.isEmpty()) {
                 if ((sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().size() == 0)) {
@@ -176,19 +173,18 @@ public class DebuffAi extends SpellAbilityAi {
      * @return a CardCollection.
      */
     private CardCollection getCurseCreatures(final Player ai, final SpellAbility sa, final List<String> kws) {
-        final Player opp = ai.getWeakestOpponent();
+        final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         CardCollection list = CardLists.getTargetableCards(opp.getCreaturesInPlay(), sa);
         if (!list.isEmpty()) {
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return c.hasAnyKeyword(kws); // don't add duplicate negative
-                                                 // keywords
+                    return c.hasAnyKeyword(kws); // don't add duplicate negative keywords
                 }
             });
         }
         return list;
-    } // getCurseCreatures()
+    }
 
     /**
      * <p>
@@ -216,7 +212,7 @@ public class DebuffAi extends SpellAbilityAi {
             list.remove(c);
         }
 
-        final CardCollection pref = CardLists.filterControlledBy(list, ai.getWeakestOpponent());
+        final CardCollection pref = CardLists.filterControlledBy(list, ai.getOpponents());
         final CardCollection forced = CardLists.filterControlledBy(list, ai);
         final Card source = sa.getHostCard();
 
@@ -242,8 +238,7 @@ public class DebuffAi extends SpellAbilityAi {
                 break;
             }
 
-            // TODO - if forced targeting, just pick something without the given
-            // keyword
+            // TODO - if forced targeting, just pick something without the given keyword
             Card c;
             if (CardLists.getNotType(forced, "Creature").size() == 0) {
                 c = ComputerUtilCard.getWorstCreatureAI(forced);

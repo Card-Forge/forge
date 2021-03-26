@@ -21,6 +21,7 @@ public enum ReplacementType {
     CreateToken(ReplaceToken.class),
     DamageDone(ReplaceDamage.class),
     DealtDamage(ReplaceDealtDamage.class),
+    DeclareBlocker(ReplaceDeclareBlocker.class),
     Destroy(ReplaceDestroy.class),
     Discard(ReplaceDiscard.class),
     Draw(ReplaceDraw.class),

@@ -9,6 +9,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.ai.AiAttackController;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
@@ -114,7 +115,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             return !CardLists.getValidCards(choices, "Card.nonLand", host.getController(), host, sa).isEmpty();
         } else if (aiLogic.equals("Duneblast")) {
             CardCollection aiCreatures = ai.getCreaturesInPlay();
-            CardCollection oppCreatures = ai.getWeakestOpponent().getCreaturesInPlay();
+            CardCollection oppCreatures = AiAttackController.choosePreferredDefenderPlayer(ai).getCreaturesInPlay();
             aiCreatures = CardLists.getNotKeyword(aiCreatures, Keyword.INDESTRUCTIBLE);
             oppCreatures = CardLists.getNotKeyword(oppCreatures, Keyword.INDESTRUCTIBLE);
 

@@ -653,7 +653,14 @@ public class PhaseHandler implements java.io.Serializable {
             }
             if (combat.isPlayerAttacked(p)) {
                 if (CombatUtil.canBlock(p, combat)) {
-                    whoDeclaresBlockers.getController().declareBlockers(p, combat);
+                    // Replacement effects (for Camouflage)
+                    final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(p);
+                    repRunParams.put(AbilityKey.Player, whoDeclaresBlockers);
+                    ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.DeclareBlocker, repRunParams);
+                    if (repres == ReplacementResult.NotReplaced) {
+                        // If not replaced, run normal declare blockers
+                        whoDeclaresBlockers.getController().declareBlockers(p, combat);
+                    }
                 }
             }
             else { continue; }
