@@ -3345,11 +3345,13 @@ public class CardFactoryUtil {
             inst.addTrigger(parsedSacTrigger);
         } else if (keyword.startsWith("Ward")) {
             final String[] k = keyword.split(":");
-            final String cost = k[1];
+            final Cost cost = new Cost(k[1], false);
+            String costDesc = cost.toSimpleString();
 
             String strTrig = "Mode$ BecomesTarget | ValidSource$ Card.OppCtrl | ValidTarget$ Card.Self "
-                    + " | Secondary$ True | TriggerDescription$ " + inst.getReminderText();
-            String effect = "DB$ Counter | Defined$ TriggeredSourceSA | UnlessCost$ " + cost
+                    + " | Secondary$ True | TriggerDescription$ Ward " + costDesc + " ("
+                    + inst.getReminderText() + ")";
+            String effect = "DB$ Counter | Defined$ TriggeredSourceSA | UnlessCost$ " + k[1]
                     + " | UnlessPayer$ TriggeredSourceSAController";
 
             final Trigger trigger = TriggerHandler.parseTrigger(strTrig, card, intrinsic);
