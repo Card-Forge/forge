@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import forge.ai.AiAttackController;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -16,7 +17,7 @@ public class ChooseEvenOddAi extends SpellAbilityAi {
         TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();
-            Player opp = aiPlayer.getWeakestOpponent();
+            Player opp = AiAttackController.choosePreferredDefenderPlayer(aiPlayer);
             if (sa.canTarget(opp)) {
                 sa.getTargets().add(opp);
             } else {

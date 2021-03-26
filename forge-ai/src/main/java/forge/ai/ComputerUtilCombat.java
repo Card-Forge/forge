@@ -97,34 +97,39 @@ public class ComputerUtilCombat {
      * canAttackNextTurn.
      * </p>
      *
-     * @param atacker
+     * @param attacker
      *            a {@link forge.game.card.Card} object.
      * @param defender
      *            the defending {@link GameEntity}.
      * @return a boolean.
      */
-    public static boolean canAttackNextTurn(final Card atacker, final GameEntity defender) {
-        if (!atacker.isCreature()) {
+    public static boolean canAttackNextTurn(final Card attacker, final GameEntity defender) {
+        if (!attacker.isCreature()) {
             return false;
         }
-        if (!CombatUtil.canAttackNextTurn(atacker, defender)) {
+        if (!CombatUtil.canAttackNextTurn(attacker, defender)) {
             return false;
         }
 
-        for (final KeywordInterface inst : atacker.getKeywords()) {
+        for (final KeywordInterface inst : attacker.getKeywords()) {
             final String keyword = inst.getOriginal();
             if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
                 final String defined = keyword.split(":")[1];
-                final Player player = AbilityUtils.getDefinedPlayers(atacker, defined, null).get(0);
+                final Player player = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);
                 if (!defender.equals(player)) {
                     return false;
                 }
             }
         }
 
+        // TODO this should be a factor but needs some alignment with AttachAi
+        //boolean leavesPlay = !ComputerUtilCard.hasActiveUndyingOrPersist(attacker)
+        //        && ((attacker.hasKeyword(Keyword.VANISHING) && attacker.getCounters(CounterEnumType.TIME) == 1)
+        //        || (attacker.hasKeyword(Keyword.FADING) && attacker.getCounters(CounterEnumType.FADE) == 0)
+        //        || attacker.hasSVar("EndOfTurnLeavePlay"));
         // The creature won't untap next turn
-        return !atacker.isTapped() || Untap.canUntap(atacker);
-    } // canAttackNextTurn(Card, GameEntity)
+        return !attacker.isTapped() || Untap.canUntap(attacker);
+    }
 
     /**
      * <p>

@@ -22,7 +22,6 @@ public class ActivateAbilityAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
         final Player opp = ai.getWeakestOpponent();
-        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         List<Card> list = CardLists.getType(opp.getCardsIn(ZoneType.Battlefield), sa.getParamOrDefault("Type", "Card"));
         if (list.isEmpty()) {
@@ -40,6 +39,7 @@ public class ActivateAbilityAi extends SpellAbilityAi {
             sa.getTargets().add(opp);
         }
 
+        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
         return randomReturn;
     }
 
@@ -56,7 +56,8 @@ public class ActivateAbilityAi extends SpellAbilityAi {
             } else {
                 final List<Player> defined = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
-                return defined.contains(opp);
+                // if at least two players are returned we can affect another opponent
+                return defined.size() > 1 || defined.contains(opp);
             }
 
         } else {

@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import java.util.List;
 
+import forge.ai.AiAttackController;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
@@ -31,10 +32,8 @@ public class DigUntilAi extends SpellAbilityAi {
             chance = 1;
         }
 
-        final boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
-
         Player libraryOwner = ai;
-        Player opp = ai.getWeakestOpponent();
+        Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
 
         if ("DontMillSelf".equals(logic)) {
             // A card that digs for specific things and puts everything revealed before it into graveyard
@@ -92,12 +91,12 @@ public class DigUntilAi extends SpellAbilityAi {
             return false;
         }
 
+        final boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
         return randomReturn;
     }
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (sa.isCurse()) {

@@ -29,11 +29,10 @@ public class GameLossAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-
         // Phage the Untouchable
         // (Final Fortune would need to attach it's delayed trigger to a
         // specific turn, which can't be done yet)
-        Player opp = ai.getWeakestOpponent();
+        Player opp = ai.getGame().getCombat().getDefenderPlayerByAttacker(sa.getHostCard());
 
         if (!mandatory && opp.cantLose()) {
             return false;

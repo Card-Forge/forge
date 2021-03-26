@@ -188,7 +188,6 @@ public class ComputerUtil {
         final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-
         // Play higher costing spells first?
         final Cost cost = sa.getPayCosts();
 
@@ -213,7 +212,8 @@ public class ComputerUtil {
         if (unless != null && !unless.endsWith(">")) {
             final int amount = AbilityUtils.calculateAmount(source, unless, sa);
 
-            final int usableManaSources = ComputerUtilMana.getAvailableManaSources(ComputerUtil.getOpponentFor(ai), true).size();
+            // this is enough as long as the AI is only smart enough to target top of stack
+            final int usableManaSources = ComputerUtilMana.getAvailableManaSources(ComputerUtilAbility.getTopSpellAbilityOnStack(ai.getGame(), sa).getActivatingPlayer(), true).size();
 
             // If the Unless isn't enough, this should be less likely to be used
             if (amount > usableManaSources) {
@@ -1068,9 +1068,6 @@ public class ComputerUtil {
                     return true;
                 }
             }
-            if (card.isEquipment() && buffedcard.isCreature() && CombatUtil.canAttack(buffedcard, ComputerUtil.getOpponentFor(ai))) {
-                return true;
-            }
             if (card.isCreature()) {
                 if (buffedcard.hasKeyword(Keyword.SOULBOND) && !buffedcard.isPaired()) {
                     return true;
@@ -1093,8 +1090,8 @@ public class ComputerUtil {
 
         } // BuffedBy
 
-        // get all cards the human controls with AntiBuffedBy
-        final CardCollectionView antibuffed = ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Battlefield);
+        // there's a good chance AI will attack weak target
+        final CardCollectionView antibuffed = ai.getWeakestOpponent().getCardsIn(ZoneType.Battlefield);
         for (Card buffedcard : antibuffed) {
             if (buffedcard.hasSVar("AntiBuffedBy")) {
                 final String buffedby = buffedcard.getSVar("AntiBuffedBy");
@@ -1142,27 +1139,16 @@ public class ComputerUtil {
      * @return true if it's OK to cast this Card for less than the max targets
      */
     public static boolean shouldCastLessThanMax(final Player ai, final Card source) {
-        boolean ret = true;
-        if (source.getManaCost().countX() > 0) {
-            // If TargetMax is MaxTgts (i.e., an "X" cost), this is fine because AI is limited by mana available.
-            return ret;
-        } else {
-            // Otherwise, if life is possibly in danger, then this is fine.
-            Combat combat = new Combat(ComputerUtil.getOpponentFor(ai));
-            CardCollectionView attackers = ComputerUtil.getOpponentFor(ai).getCreaturesInPlay();
-            for (Card att : attackers) {
-                if (ComputerUtilCombat.canAttackNextTurn(att, ai)) {
-                    combat.addAttacker(att, ComputerUtil.getOpponentFor(att.getController()));
-                }
-            }
-            AiBlockController aiBlock = new AiBlockController(ai);
-            aiBlock.assignBlockersForCombat(combat);
-            if (!ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                // Otherwise, return false. Do not play now.
-                ret = false;
-            }
+        if (source.getXManaCostPaid() > 0) {
+            // If TargetMax is MaxTgts (i.e., an "X" cost), this is fine because AI is limited by payment resources available.
+            return true;
         }
-        return ret;
+        if (aiLifeInDanger(ai, false, 0)) {
+            // Otherwise, if life is possibly in danger, then this is fine.
+            return true;
+        }
+        // do not play now.
+        return false;
     }
 
     /**
@@ -1266,8 +1252,8 @@ public class ComputerUtil {
             }
         }
 
-        // get all cards the human controls with AntiBuffedBy
-        final CardCollectionView antibuffed = ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Battlefield);
+        // there's a good chance AI will attack weak target
+        final CardCollectionView antibuffed = ai.getWeakestOpponent().getCardsIn(ZoneType.Battlefield);
         for (Card buffedcard : antibuffed) {
             if (buffedcard.hasSVar("AntiBuffedBy")) {
                 final String buffedby = buffedcard.getSVar("AntiBuffedBy");
@@ -1463,7 +1449,7 @@ public class ComputerUtil {
         return false;
     }
 
-    public static int possibleNonCombatDamage(Player ai) {
+    public static int possibleNonCombatDamage(Player ai, Player enemy) {
         int damage = 0;
         final CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
         all.addAll(ai.getCardsActivableInExternalZones(true));
@@ -1483,7 +1469,6 @@ public class ComputerUtil {
                 if (tgt == null) {
                     continue;
                 }
-                final Player enemy = ComputerUtil.getOpponentFor(ai);
                 if (!sa.canTarget(enemy)) {
                     continue;
                 }
@@ -2346,7 +2331,7 @@ public class ComputerUtil {
                     }
                 }
                 else if (logic.equals("ChosenLandwalk")) {
-                    for (Card c : ComputerUtil.getOpponentFor(ai).getLandsInPlay()) {
+                    for (Card c : AiAttackController.choosePreferredDefenderPlayer(ai).getLandsInPlay()) {
                         for (String t : c.getType()) {
                             if (!invalidTypes.contains(t) && CardType.isABasicLandType(t)) {
                                 chosen = t;
@@ -2364,7 +2349,7 @@ public class ComputerUtil {
         else if (kindOfType.equals("Land")) {
             if (logic != null) {
                 if (logic.equals("ChosenLandwalk")) {
-                    for (Card c : ComputerUtil.getOpponentFor(ai).getLandsInPlay()) {
+                    for (Card c : AiAttackController.choosePreferredDefenderPlayer(ai).getLandsInPlay()) {
                         for (String t : c.getType().getLandTypes()) {
                             if (!invalidTypes.contains(t)) {
                                 chosen = t;
@@ -2399,23 +2384,26 @@ public class ComputerUtil {
         case "Torture":
             return "Torture";
         case "GraceOrCondemnation":
-            return ai.getCreaturesInPlay().size() > ComputerUtil.getOpponentFor(ai).getCreaturesInPlay().size() ? "Grace"
-                    : "Condemnation";
+            List<ZoneType> graceZones = new ArrayList<ZoneType>();
+            graceZones.add(ZoneType.Battlefield);
+            graceZones.add(ZoneType.Graveyard);
+            CardCollection graceCreatures = CardLists.getType(sa.getHostCard().getGame().getCardsIn(graceZones), "Creature");
+            int humanGrace = CardLists.filterControlledBy(graceCreatures, ai.getOpponents()).size();
+            int aiGrace = CardLists.filterControlledBy(graceCreatures, ai).size();
+            return aiGrace > humanGrace ? "Grace" : "Condemnation";
         case "CarnageOrHomage":
-            CardCollection cardsInPlay = CardLists
-                    .getNotType(sa.getHostCard().getGame().getCardsIn(ZoneType.Battlefield), "Land");
+            CardCollection cardsInPlay = CardLists.getNotType(sa.getHostCard().getGame().getCardsIn(ZoneType.Battlefield), "Land");
             CardCollection humanlist = CardLists.filterControlledBy(cardsInPlay, ai.getOpponents());
-            CardCollection computerlist = CardLists.filterControlledBy(cardsInPlay, ai);
-            return (ComputerUtilCard.evaluatePermanentList(computerlist) + 3) < ComputerUtilCard
-                    .evaluatePermanentList(humanlist) ? "Carnage" : "Homage";
+            CardCollection computerlist = ai.getCreaturesInPlay();
+            return (ComputerUtilCard.evaluatePermanentList(computerlist) + 3) < ComputerUtilCard.evaluatePermanentList(humanlist) ? "Carnage" : "Homage";
         case "Judgment":
             if (votes.isEmpty()) {
                 CardCollection list = new CardCollection();
                 for (Object o : options) {
                     if (o instanceof Card) {
                         list.add((Card) o);
-                        }
                     }
+                }
                 return ComputerUtilCard.getBestAI(list);
             } else {
                 return Iterables.getFirst(votes.keySet(), null);
@@ -2934,23 +2922,6 @@ public class ComputerUtil {
         return true;
     }
 
-
-    @Deprecated
-    public static final Player getOpponentFor(final Player player) {
-        // This method is deprecated and currently functions as a synonym for player.getWeakestOpponent
-        // until it can be replaced everywhere in the code.
-
-        // Consider replacing calls to this method either with a multiplayer-friendly determination of
-        // opponent that contextually makes the most sense, or with a direct call to player.getWeakestOpponent
-        // where that is applicable and makes sense from the point of view of multiplayer AI logic.
-        Player opponent = player.getWeakestOpponent();
-        if (opponent != null) {
-            return opponent;
-        }
-
-        throw new IllegalStateException("No opponents left ingame for " + player);
-    }
-
     public static int countUsefulCreatures(Player p) {
         CardCollection creats = p.getCreaturesInPlay();
         int count = 0;
@@ -3033,31 +3004,32 @@ public class ComputerUtil {
     // call this to determine if it's safe to use a life payment spell
     // or trigger "emergency" strategies such as holding mana for Spike Weaver of Counterspell.
     public static boolean aiLifeInDanger(Player ai, boolean serious, int payment) {
-        Player opponent = ComputerUtil.getOpponentFor(ai);
-        // test whether the human can kill the ai next turn
-        Combat combat = new Combat(opponent);
-        boolean containsAttacker = false;
-        for (Card att : opponent.getCreaturesInPlay()) {
-            if (ComputerUtilCombat.canAttackNextTurn(att, ai)) {
-                combat.addAttacker(att, ai);
-                containsAttacker = true;
+        for (Player opponent: ai.getOpponents()) {
+            // test whether the human can kill the ai next turn
+            Combat combat = new Combat(opponent);
+            boolean containsAttacker = false;
+            for (Card att : opponent.getCreaturesInPlay()) {
+                if (ComputerUtilCombat.canAttackNextTurn(att, ai)) {
+                    combat.addAttacker(att, ai);
+                    containsAttacker = true;
+                }
             }
-        }
-        if (!containsAttacker) {
-            return false;
-        }
-        AiBlockController block = new AiBlockController(ai);
-        block.assignBlockersForCombat(combat);
+            if (!containsAttacker) {
+                return false;
+            }
+            AiBlockController block = new AiBlockController(ai);
+            block.assignBlockersForCombat(combat);
 
-        // TODO predict other, noncombat sources of damage and add them to the "payment" variable.
-        // examples : Black Vise, The Rack, known direct damage spells in enemy hand, etc
-        // If added, might need a parameter to define whether we want to check all threats or combat threats.
+            // TODO predict other, noncombat sources of damage and add them to the "payment" variable.
+            // examples : Black Vise, The Rack, known direct damage spells in enemy hand, etc
+            // If added, might need a parameter to define whether we want to check all threats or combat threats.
 
-        if ((serious) && (ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment))) {
-            return true;
-        }
-        if ((!serious) && (ComputerUtilCombat.lifeInDanger(ai, combat, payment))) {
-            return true;
+            if ((serious) && (ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment))) {
+                return true;
+            }
+            if ((!serious) && (ComputerUtilCombat.lifeInDanger(ai, combat, payment))) {
+                return true;
+            }
         }
         return false;
 

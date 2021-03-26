@@ -5,6 +5,7 @@ import java.util.Map;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
+import forge.ai.AiAttackController;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
@@ -32,7 +33,7 @@ public class DigAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
-        Player opp = ai.getWeakestOpponent();
+        Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         final Card host = sa.getHostCard();
         Player libraryOwner = ai;
 
@@ -120,7 +121,7 @@ public class DigAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
-        final Player opp = ai.getWeakestOpponent();
+        final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (mandatory && sa.canTarget(opp)) {

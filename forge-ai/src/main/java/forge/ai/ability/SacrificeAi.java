@@ -20,9 +20,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 public class SacrificeAi extends SpellAbilityAi {
-    // **************************************************************
-    // *************************** Sacrifice ***********************
-    // **************************************************************
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
@@ -48,8 +45,7 @@ public class SacrificeAi extends SpellAbilityAi {
         }
 
         // Improve AI for triggers. If source is a creature with:
-        // When ETB, sacrifice a creature. Check to see if the AI has something
-        // to sacrifice
+        // When ETB, sacrifice a creature. Check to see if the AI has something to sacrifice
 
         // Eventually, we can call the trigger of ETB abilities with not
         // mandatory as part of the checks to cast something
@@ -58,12 +54,11 @@ public class SacrificeAi extends SpellAbilityAi {
     }
 
     private boolean sacrificeTgtAI(final Player ai, final SpellAbility sa) {
-
         final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final boolean destroy = sa.hasParam("Destroy");
 
-        Player opp = ai.getWeakestOpponent();
+        Player opp = ai.getStrongestOpponent();
 
         if (tgt != null) {
             sa.resetTargets();
@@ -109,8 +104,7 @@ public class SacrificeAi extends SpellAbilityAi {
                 sa.setXManaCostPaid(Math.min(ComputerUtilCost.getMaxXValue(sa, ai), amount));
             }
 
-            final int half = (amount / 2) + (amount % 2); // Half of amount
-                                                          // rounded up
+            final int half = (amount / 2) + (amount % 2); // Half of amount rounded up
 
             // If the Human has at least half rounded up of the amount to be
             // sacrificed, cast the spell
@@ -130,8 +124,7 @@ public class SacrificeAi extends SpellAbilityAi {
             // If Sacrifice hits both players:
             // Only cast it if Human has the full amount of valid
             // Only cast it if AI doesn't have the full amount of Valid
-            // TODO: Cast if the type is favorable: my "worst" valid is
-            // worse than his "worst" valid
+            // TODO: Cast if the type is favorable: my "worst" valid is worse than his "worst" valid
             final String num = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";
             int amount = AbilityUtils.calculateAmount(source, num, sa);
 

@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import forge.ai.AiAttackController;
 import forge.ai.AiProps;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
@@ -154,7 +155,7 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
     final boolean mandatory) {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        Player opp = ai.getWeakestOpponent();
+        Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         if (tgt != null) {
             sa.resetTargets();
             if (sa.canTarget(opp) && (mandatory || ai.getLife() < opp.getLife())) {

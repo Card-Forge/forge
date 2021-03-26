@@ -48,12 +48,6 @@ public class PumpAllAi extends PumpAiBase {
             }
         }
 
-        final int power = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa);
-        final int defense = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa);
-        final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<>();
-
-        final PhaseType phase = game.getPhaseHandler().getPhase();
-
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
         }
@@ -63,16 +57,10 @@ public class PumpAllAi extends PumpAiBase {
                 return false;
             }
         }
-
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
-
-        final Player opp = ai.getWeakestOpponent();
-        CardCollection comp = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
-        CardCollection human = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
-
+        
         final TargetRestrictions tgt = sa.getTargetRestrictions();
+        final Player opp = ai.getStrongestOpponent();
+
         if (tgt != null && sa.canTarget(opp) && sa.hasParam("IsCurse")) {
             sa.resetTargets();
             sa.getTargets().add(opp);
@@ -84,6 +72,18 @@ public class PumpAllAi extends PumpAiBase {
             sa.getTargets().add(ai);
             return true;
         }
+
+        final int power = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa);
+        final int defense = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa);
+        final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<>();
+        final PhaseType phase = game.getPhaseHandler().getPhase();
+
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
+        }
+
+        CardCollection comp = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
+        CardCollection human = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
 
         if (!game.getStack().isEmpty() && !sa.isCurse()) {
             return pumpAgainstRemoval(ai, sa, comp);
@@ -139,8 +139,7 @@ public class PumpAllAi extends PumpAiBase {
             	return true;
             }
 
-            // evaluate both lists and pass only if human creatures are more
-            // valuable
+            // evaluate both lists and pass only if human creatures are more valuable
             return (ComputerUtilCard.evaluateCreatureList(comp) + 200) < ComputerUtilCard.evaluateCreatureList(human);
         } // end Curse
 
