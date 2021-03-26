@@ -1,0 +1,8 @@
+Name:Pest
+ManaCost:no cost
+Types:Creature Pest
+Colors:black,green
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGrave | TriggerDescription$ When this creature dies, you gain 1 life.
+SVar:TrigGrave:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ 1
+Oracle:When this creature dies, you gain 1 life.
