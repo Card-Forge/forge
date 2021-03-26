@@ -1,0 +1,28 @@
+Name:Plargg, Dean of Chaos
+ManaCost:1 R
+Types:Legendary Creature Orc Shaman
+PT:2/2
+A:AB$ Draw | Cost$ T Discard<1/Card> | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card.
+A:AB$ DigUntil | Cost$ 4 R T | Defined$ You | Amount$ 1 | Valid$ Card.nonLand+nonLegendary+cmcLE3 | FoundDestination$ Library | RevealRandomOrder$ True | RevealedDestination$ Library | ImprintRevealed$ True | RememberFound$ True | SubAbility$ CascadeCast | StackDescription$ SpellDescription | SpellDescription$ Reveal cards from the top of your library until you reveal a nonlegenday, nonland card with mana value 3 or less. You may cast that card without paying its mana cost. Put all revealed cards not cast this on the bottom of your library in a random order.
+SVar:CascadeCast:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | SubAbility$ CascadeMoveToLib
+SVar:CascadeMoveToLib:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Card.IsImprinted | Origin$ Library | Destination$ Library | RandomOrder$ True | LibraryPosition$ -1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+AlternateMode:Modal
+Oracle:{T}, Discard a card: Draw a card.\n{4}{R}, {T}: Reveal cards from the top of your library until you reveal a nonlegenday, nonland card with mana value 3 or less. You may cast that card without paying its mana cost. Put all revealed cards not cast this on the bottom of your library in a random order.
+
+ALTERNATE
+
+Name:Augusta, Dean of Order
+ManaCost:2 W
+Types:Legendary Creature Human Cleric
+PT:1/3
+S:Mode$ Continuous | Affected$ Creature.tapped+YouCtrl+Other | AddPower$ 1 | Description$ Other tapped creatures you control get +1/+0.
+S:Mode$ Continuous | Affected$ Creature.untapped+YouCtrl+Other | AddToughness$ 1 | Description$ Other untapped creatures you control get +0/+1.
+T:Mode$ AttackersDeclared | Execute$ DBUnTapAll | CheckSVar$ OverwhelmInstinct | SVarCompare$ GE1 | NoResolvingCheck$ True | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack, untap each creature you control, then tap any number of creatures you control.
+SVar:OverwhelmInstinct:Count$Valid Creature.attacking
+SVar:DBUnTapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChooseCard | Defined$ You | MinAmount$ 0 | Amount$ X | Choices$ Creature.untapped+YouCtrl | ChoiceTitle$ Choose any number of untapped creatures you control | ChoiceZone$ Battlefield | RememberChosen$ True | SubAbility$ DBTap | SpellDescription$ Tap any number of creatures you control.
+SVar:DBTap:DB$ Tap | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Creature.untapped+YouCtrl
+Oracle:Other tapped creatures you control get +1/+0.\nOther untapped creatures you control get +0/+1.\nWhenever you attack, untap each creature you control, then tap any number of creatures you control.
