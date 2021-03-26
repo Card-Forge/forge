@@ -1,8 +1,8 @@
 package forge.screens.quest;
 
-import forge.FThreads;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gui.FThreads;
 import forge.model.FModel;
-import forge.quest.QuestUtil;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
 import forge.toolbox.FOptionPane;

@@ -17,27 +17,31 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import forge.StaticData;
-import forge.deck.*;
-import forge.item.PaperCard;
-import forge.util.ItemPool;
-import forge.util.Localizer;
+import java.util.Date;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Supplier;
 
+import forge.StaticData;
+import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckBase;
+import forge.deck.DeckProxy;
+import forge.deck.DeckSection;
+import forge.item.PaperCard;
 import forge.screens.deckeditor.menus.DeckFileMenu;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.home.gauntlet.VSubmenuGauntletBuild;
 import forge.screens.home.gauntlet.VSubmenuGauntletContests;
 import forge.screens.home.gauntlet.VSubmenuGauntletQuick;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
+import forge.util.ItemPool;
+import forge.util.Localizer;
 import forge.util.storage.IStorage;
-
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
 
 public class DeckController<T extends DeckBase> {
     private T model;

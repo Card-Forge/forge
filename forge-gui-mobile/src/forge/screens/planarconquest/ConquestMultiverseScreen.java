@@ -2,18 +2,6 @@ package forge.screens.planarconquest;
 
 import java.util.List;
 
-import forge.planarconquest.ConquestAwardPool;
-import forge.planarconquest.ConquestBattle;
-import forge.planarconquest.ConquestChaosBattle;
-import forge.planarconquest.ConquestData;
-import forge.planarconquest.ConquestEvent;
-import forge.planarconquest.ConquestLocation;
-import forge.planarconquest.ConquestPlane;
-import forge.planarconquest.ConquestPlaneData;
-import forge.planarconquest.ConquestRegion;
-import forge.planarconquest.ConquestReward;
-import forge.planarconquest.ConquestUtil;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.Color;
@@ -21,7 +9,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
-import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
@@ -31,31 +18,43 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.card.CardAvatarImage;
-import forge.card.CardDetailUtil;
 import forge.card.CardFaceSymbols;
 import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.ColorSet;
-import forge.card.CardDetailUtil.DetailColors;
+import forge.gamemodes.planarconquest.ConquestAwardPool;
+import forge.gamemodes.planarconquest.ConquestBattle;
+import forge.gamemodes.planarconquest.ConquestChaosBattle;
+import forge.gamemodes.planarconquest.ConquestData;
+import forge.gamemodes.planarconquest.ConquestEvent;
+import forge.gamemodes.planarconquest.ConquestEvent.ChaosWheelOutcome;
+import forge.gamemodes.planarconquest.ConquestEvent.ConquestEventRecord;
+import forge.gamemodes.planarconquest.ConquestLocation;
+import forge.gamemodes.planarconquest.ConquestPlane;
+import forge.gamemodes.planarconquest.ConquestPlaneData;
+import forge.gamemodes.planarconquest.ConquestPreferences.CQPref;
+import forge.gamemodes.planarconquest.ConquestRegion;
+import forge.gamemodes.planarconquest.ConquestReward;
+import forge.gamemodes.planarconquest.ConquestUtil;
+import forge.gui.FThreads;
+import forge.gui.card.CardDetailUtil;
+import forge.gui.card.CardDetailUtil.DetailColors;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import forge.planarconquest.ConquestEvent.ChaosWheelOutcome;
-import forge.planarconquest.ConquestEvent.ConquestEventRecord;
-import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
-import forge.toolbox.FList;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
-import forge.util.Utils;
 import forge.util.Localizer;
+import forge.util.Utils;
 import forge.util.collect.FCollectionView;
 
 public class ConquestMultiverseScreen extends FScreen {

@@ -1,5 +1,13 @@
 package forge.game.trigger;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Maps;
+
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
@@ -9,15 +17,14 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardState;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
-import forge.game.spellability.*;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Maps;
+import forge.game.spellability.Ability;
+import forge.game.spellability.AbilitySub;
+import forge.game.spellability.AlternativeCost;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityRestriction;
+import forge.game.spellability.SpellAbilityView;
+import forge.game.spellability.TargetChoices;
+import forge.game.spellability.TargetRestrictions;
 
 // Wrapper ability that checks the requirements again just before
 // resolving, for intervening if clauses.

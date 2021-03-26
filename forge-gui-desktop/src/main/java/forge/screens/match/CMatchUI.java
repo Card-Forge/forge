@@ -45,13 +45,11 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
-import forge.FThreads;
-import forge.GuiBase;
 import forge.ImageCache;
 import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.StaticData;
-import forge.assets.FSkinProp;
+import forge.ai.GameState;
 import forge.card.CardStateName;
 import forge.control.KeyboardShortcuts;
 import forge.deck.CardPool;
@@ -79,7 +77,10 @@ import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.AbstractGuiGame;
 import forge.gui.FNetOverlay;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.gui.GuiUtils;
@@ -92,16 +93,17 @@ import forge.gui.framework.IVDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.framework.SLayoutIO;
 import forge.gui.framework.VEmptyDoc;
+import forge.gui.util.SOptionPane;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
-import forge.match.AbstractGuiGame;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.menus.IMenuProvider;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.controllers.CAntes;
 import forge.screens.match.controllers.CCombat;
 import forge.screens.match.controllers.CDetailPicture;
@@ -129,7 +131,6 @@ import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-import forge.util.gui.SOptionPane;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.FloatingZone;
@@ -621,6 +622,11 @@ public final class CMatchUI
     }
 
     @Override
+    public GameState getGamestate() {
+        return null;
+    }
+
+    @Override
     public List<JMenu> getMenus() {
         return menus.getMenus();
     }
@@ -771,7 +777,7 @@ public final class CMatchUI
     }
 
     @Override
-    public void updatePhase() {
+    public void updatePhase(boolean saveState) {
         final PlayerView p = getGameView().getPlayerTurn();
         final PhaseType ph = getGameView().getPhase();
         // this should never happen, but I've seen it periodically... so, need to get to the bottom of it
@@ -1351,24 +1357,23 @@ public final class CMatchUI
     private List<GameEntityView> getTargets(SpellAbilityStackInstance si, List<GameEntityView> result){
         if(si == null) {
             return result;
-        } else {
-            FCollectionView<CardView> targetCards = CardView.getCollection(si.getTargetChoices().getTargetCards());
-            for(CardView currCardView: targetCards) {
-                result.add(currCardView);
-            }
-            
-            for(SpellAbility currSA : si.getTargetChoices().getTargetSpells()) {
-                CardView currCardView = currSA.getCardView();
-                result.add(currCardView);
-            }
-            
-            FCollectionView<PlayerView> targetPlayers = PlayerView.getCollection(si.getTargetChoices().getTargetPlayers());
-            for(PlayerView currPlayerView : targetPlayers) {
-                result.add(currPlayerView);
-            }
-            
-            return getTargets(si.getSubInstance(),result);
         }
+        FCollectionView<CardView> targetCards = CardView.getCollection(si.getTargetChoices().getTargetCards());
+        for(CardView currCardView: targetCards) {
+            result.add(currCardView);
+        }
+
+        for(SpellAbility currSA : si.getTargetChoices().getTargetSpells()) {
+            CardView currCardView = currSA.getCardView();
+            result.add(currCardView);
+        }
+
+        FCollectionView<PlayerView> targetPlayers = PlayerView.getCollection(si.getTargetChoices().getTargetPlayers());
+        for(PlayerView currPlayerView : targetPlayers) {
+            result.add(currPlayerView);
+        }
+
+        return getTargets(si.getSubInstance(),result);
     }
     
     private void addBigImageToStackModalPanel(JPanel mainPanel, SpellAbilityStackInstance si) {

@@ -2,11 +2,11 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
-import forge.game.ability.AbilityKey;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.Game;
 import forge.game.GameLogEntryType;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;

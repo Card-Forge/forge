@@ -13,7 +13,7 @@ public enum CSubmenuAchievements implements ICDoc {
     SINGLETON_INSTANCE;
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void initialize() {
@@ -24,7 +24,7 @@ public enum CSubmenuAchievements implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void update() {

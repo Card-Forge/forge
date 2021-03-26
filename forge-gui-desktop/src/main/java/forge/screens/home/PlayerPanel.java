@@ -14,30 +14,29 @@ import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JPopupMenu;
 
-import forge.screens.home.sanctioned.SleeveSelector;
-import net.miginfocom.swing.MigLayout;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
 
 import forge.Singletons;
-import forge.UiCommand;
 import forge.ai.AIOption;
-import forge.assets.FSkinProp;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.gamemodes.match.LobbySlot;
+import forge.gamemodes.match.LobbySlotType;
+import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
+import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
-import forge.match.LobbySlot;
-import forge.match.LobbySlotType;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorVariant;
 import forge.screens.home.sanctioned.AvatarSelector;
+import forge.screens.home.sanctioned.SleeveSelector;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FComboBoxWrapper;
@@ -49,10 +48,10 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FTextField;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
-import forge.util.gui.SOptionPane;
-import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class PlayerPanel extends FPanel {

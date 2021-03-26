@@ -1,18 +1,25 @@
 package forge.screens.home.quest;
 
-import forge.UiCommand;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
+
+import javax.swing.JRadioButton;
+import javax.swing.SwingUtilities;
+
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestEventDuel;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gamemodes.quest.bazaar.QuestPetController;
+import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.model.FModel;
-import forge.quest.QuestController;
-import forge.quest.QuestEventDuel;
-import forge.quest.QuestUtil;
-import forge.quest.bazaar.QuestPetController;
 import forge.toolbox.JXButtonPanel;
 import forge.util.Localizer;
-
-import javax.swing.*;
-import java.awt.event.*;
-import java.util.List;
 
 /**
  * Controls the quest duels submenu in the home UI.
@@ -28,7 +35,7 @@ public enum CSubmenuDuels implements ICDoc {
 	}
 
 	/* (non-Javadoc)
-	 * @see forge.control.home.IControlSubmenu#initialize()
+	 * @see forge.gui.control.home.IControlSubmenu#initialize()
 	 */
 	@SuppressWarnings("serial")
 	@Override
@@ -160,7 +167,7 @@ public enum CSubmenuDuels implements ICDoc {
 	};
 
 	/* (non-Javadoc)
-	 * @see forge.control.home.IControlSubmenu#update()
+	 * @see forge.gui.control.home.IControlSubmenu#update()
 	 */
 	@Override
 	public void update() {

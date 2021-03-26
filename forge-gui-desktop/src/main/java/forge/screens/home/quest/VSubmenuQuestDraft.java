@@ -1,25 +1,48 @@
 package forge.screens.home.quest;
 
-import forge.GuiBase;
+import java.awt.BasicStroke;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.geom.Rectangle2D;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
 import forge.Singletons;
-import forge.assets.FSkinProp;
 import forge.game.GameType;
+import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.quest.IQuestTournamentView;
+import forge.gamemodes.quest.QuestDraftUtils.Mode;
+import forge.gamemodes.quest.QuestEventDraft;
+import forge.gamemodes.quest.data.QuestEventDraftContainer;
+import forge.gui.GuiBase;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.itemmanager.DeckManager;
-import forge.limited.BoosterDraft;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
-import forge.quest.IQuestTournamentView;
-import forge.quest.QuestEventDraft;
-import forge.quest.QuestDraftUtils.Mode;
-import forge.quest.data.QuestEventDraftContainer;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorQuestDraftingProcess;
 import forge.screens.deckeditor.controllers.CEditorQuestLimited;
 import forge.screens.deckeditor.views.VCurrentDeck;
-import forge.screens.home.*;
+import forge.screens.home.EMenuGroup;
+import forge.screens.home.IVSubmenu;
+import forge.screens.home.LblHeader;
+import forge.screens.home.StartButton;
+import forge.screens.home.VHomeUI;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPanel;
@@ -28,16 +51,8 @@ import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.JXButtonPanel;
-import net.miginfocom.swing.MigLayout;
 import forge.util.Localizer;
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.geom.Rectangle2D;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Assembles Swing components of quest draft submenu singleton.

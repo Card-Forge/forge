@@ -1,10 +1,14 @@
 package forge.util;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-
-import java.util.*;
-import java.util.Map.Entry;
 
 /** 
  * TODO: Write javadoc for this type.

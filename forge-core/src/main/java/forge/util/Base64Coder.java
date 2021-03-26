@@ -31,12 +31,13 @@
 
 package forge.util;
 
+import java.nio.charset.StandardCharsets;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
-import java.nio.charset.StandardCharsets;
 
 /**
  * A Base64 encoder/decoder.

@@ -8,34 +8,48 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.google.common.base.Predicate;
-import forge.deck.*;
-import forge.game.GameFormat;
-import forge.item.PaperCard;
-import forge.util.Localizer;
-import net.miginfocom.swing.MigLayout;
-
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 
-import forge.FThreads;
-import forge.UiCommand;
+import forge.deck.ArchetypeDeckGenerator;
+import forge.deck.ColorDeckGenerator;
+import forge.deck.CommanderDeckGenerator;
+import forge.deck.Deck;
+import forge.deck.DeckFormat;
+import forge.deck.DeckProxy;
+import forge.deck.DeckType;
+import forge.deck.DeckgenUtil;
+import forge.deck.NetDeckArchiveBlock;
+import forge.deck.NetDeckArchiveLegacy;
+import forge.deck.NetDeckArchiveModern;
+import forge.deck.NetDeckArchivePioneer;
+import forge.deck.NetDeckArchiveStandard;
+import forge.deck.NetDeckArchiveVintage;
+import forge.deck.NetDeckCategory;
+import forge.deck.RandomDeckGenerator;
+import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestEvent;
+import forge.gamemodes.quest.QuestEventChallenge;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gui.FThreads;
+import forge.gui.UiCommand;
+import forge.item.PaperCard;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerContainer;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
-import forge.quest.QuestController;
-import forge.quest.QuestEvent;
-import forge.quest.QuestEventChallenge;
-import forge.quest.QuestUtil;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
+import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
@@ -752,22 +766,28 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 if (deckType.startsWith(NetDeckCategory.PREFIX)) {
                     netDeckCategory = NetDeckCategory.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckCategory.PREFIX.length()));
                     return DeckType.NET_DECK;
-                } else if (deckType.startsWith(NetDeckArchiveStandard.PREFIX)) {
+                }
+                if (deckType.startsWith(NetDeckArchiveStandard.PREFIX)) {
                     NetDeckArchiveStandard = NetDeckArchiveStandard.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchiveStandard.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_STANDARD_DECK;
-                } else if (deckType.startsWith(NetDeckArchivePioneer.PREFIX)) {
+                }
+                if (deckType.startsWith(NetDeckArchivePioneer.PREFIX)) {
                     NetDeckArchivePioneer = NetDeckArchivePioneer.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchivePioneer.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_PIONEER_DECK;
-                } else if (deckType.startsWith(NetDeckArchiveModern.PREFIX)) {
+                }
+                if (deckType.startsWith(NetDeckArchiveModern.PREFIX)) {
                     NetDeckArchiveModern = NetDeckArchiveModern.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchiveModern.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_MODERN_DECK;
-                } else if (deckType.startsWith(NetDeckArchiveLegacy.PREFIX)) {
+                }
+                if (deckType.startsWith(NetDeckArchiveLegacy.PREFIX)) {
                     NetDeckArchiveLegacy = NetDeckArchiveLegacy.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchiveLegacy.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_LEGACY_DECK;
-                } else if (deckType.startsWith(NetDeckArchiveVintage.PREFIX)) {
+                }
+                if (deckType.startsWith(NetDeckArchiveVintage.PREFIX)) {
                     NetDeckArchiveVintage = NetDeckArchiveVintage.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchiveVintage.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_VINTAGE_DECK;
-                } else if (deckType.startsWith(NetDeckArchiveBlock.PREFIX)) {
+                }
+                if (deckType.startsWith(NetDeckArchiveBlock.PREFIX)) {
                     NetDeckArchiveBlock = NetDeckArchiveBlock.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchiveBlock.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_BLOCK_DECK;
                 }

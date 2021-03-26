@@ -27,8 +27,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-import net.miginfocom.swing.MigLayout;
-import forge.assets.FSkinProp;
 import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -36,6 +34,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.localinstance.skin.FSkinProp;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CField;
 import forge.toolbox.FLabel;
@@ -45,8 +44,9 @@ import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PlayerDetailsPanel;
-import forge.view.arcane.PlayArea;
 import forge.util.Localizer;
+import forge.view.arcane.PlayArea;
+import net.miginfocom.swing.MigLayout;
 
 /** 
  * Assembles Swing components of a player field instance.

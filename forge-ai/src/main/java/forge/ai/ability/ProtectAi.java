@@ -5,7 +5,12 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
-import forge.ai.*;
+import forge.ai.AiAttackController;
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCombat;
+import forge.ai.ComputerUtilCost;
+import forge.ai.SpellAbilityAi;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameObject;

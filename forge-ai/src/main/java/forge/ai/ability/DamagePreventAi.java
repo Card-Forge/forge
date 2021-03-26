@@ -1,6 +1,12 @@
 package forge.ai.ability;
 
-import forge.ai.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCombat;
+import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
@@ -19,9 +25,6 @@ import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DamagePreventAi extends SpellAbilityAi {
 
     @Override
@@ -33,20 +36,7 @@ public class DamagePreventAi extends SpellAbilityAi {
 
         final Cost cost = sa.getPayCosts();
 
-        // temporarily disabled until better AI
-        if (!ComputerUtilCost.checkLifeCost(ai, cost, hostCard, 4, sa)) {
-            return false;
-        }
-
-        if (!ComputerUtilCost.checkDiscardCost(ai, cost, hostCard)) {
-            return false;
-        }
-
-        if (!ComputerUtilCost.checkSacrificeCost(ai, cost, hostCard, sa)) {
-            return false;
-        }
-
-        if (!ComputerUtilCost.checkRemoveCounterCost(cost, hostCard, sa)) {
+        if (!willPayCosts(ai, sa, cost, hostCard)) {
             return false;
         }
 

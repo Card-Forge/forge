@@ -18,6 +18,7 @@
 package forge;
 
 import forge.control.FControl;
+import forge.gui.FThreads;
 import forge.model.FModel;
 import forge.view.FView;
 

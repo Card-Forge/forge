@@ -17,13 +17,13 @@
  */
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 /**
  * <p>
@@ -58,11 +58,8 @@ public class TriggerCounterRemovedOnce extends Trigger {
         final Card removedFrom = (Card) runParams.get(AbilityKey.Card);
         final CounterType removedType = (CounterType) runParams.get(AbilityKey.CounterType);
 
-        if (hasParam("ValidCard")) {
-            if (!removedFrom.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
         }
 
         if (hasParam("CounterType")) {

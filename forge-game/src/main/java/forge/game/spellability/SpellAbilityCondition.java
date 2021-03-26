@@ -17,6 +17,16 @@
  */
 package forge.game.spellability;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Iterables;
+
 import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -31,12 +41,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Iterables;
-
-import java.util.*;
 
 /**
  * <p>
@@ -286,12 +290,11 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             Card first = Iterables.getFirst(tgts, null);
             if (first == null) {
                 return false;
-            } else {
-                byte firstColor = CardUtil.getColors(first).getColor();
-                for (Card c : tgts) {
-                    if (CardUtil.getColors(c).getColor() != firstColor) {
-                        return false;
-                    }
+            }
+            byte firstColor = CardUtil.getColors(first).getColor();
+            for (Card c : tgts) {
+                if (CardUtil.getColors(c).getColor() != firstColor) {
+                    return false;
                 }
             }
         }

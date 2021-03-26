@@ -1,18 +1,19 @@
 package forge.toolbox;
 
-import forge.Forge;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Align;
+
+import forge.Forge;
 import forge.Graphics;
-import forge.UiCommand;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
-import forge.assets.FSkinProp;
-import forge.interfaces.IButton;
+import forge.gui.UiCommand;
+import forge.gui.interfaces.IButton;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.TextBounds;

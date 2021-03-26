@@ -1,19 +1,43 @@
 package forge.ai.ability;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import forge.ai.*;
+
+import forge.ai.AiCardMemory;
+import forge.ai.AiProps;
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCombat;
+import forge.ai.ComputerUtilCost;
+import forge.ai.PlayerControllerAi;
+import forge.ai.SpecialAiLogic;
+import forge.ai.SpecialCardAi;
+import forge.ai.SpellAbilityAi;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.*;
+import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostPutCounter;
+import forge.game.cost.CostRemoveCounter;
+import forge.game.cost.CostSacrifice;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -26,10 +50,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 public class CountersPutAi extends SpellAbilityAi {
 

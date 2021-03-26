@@ -11,5 +11,5 @@ Name:Resurgence
 ManaCost:3 R W
 Types:Sorcery
 A:SP$ PumpAll | Cost$ 3 R W | ValidCards$ Creature.YouCtrl | KW$ First Strike & Vigilance | SubAbility$ DBAddCombat | SpellDescription$ Creatures you control gain first strike and vigilance until end of turn. After this main phase, there is an additional combat phase followed by an additional main phase.
-SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ BeginCombat | FollowedBy$ ThisPhase | ConditionPhases$ Main1,Main2
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | FollowedBy$ Main2 | ConditionPhases$ Main1,Main2
 Oracle:Creatures you control gain first strike and vigilance until end of turn. After this main phase, there is an additional combat phase followed by an additional main phase.

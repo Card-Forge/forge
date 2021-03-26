@@ -1,10 +1,19 @@
 package forge.player;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
-
-import forge.game.ability.AbilityUtils;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Range;
@@ -23,25 +32,41 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
-import forge.FThreads;
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.StaticData;
-import forge.achievement.AchievementCollection;
 import forge.ai.GameState;
-import forge.assets.FSkinProp;
-import forge.card.*;
+import forge.card.CardDb;
+import forge.card.CardStateName;
+import forge.card.CardType;
+import forge.card.ColorSet;
+import forge.card.ICardFace;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.control.FControlGamePlayback;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.events.UiEventNextGameDecision;
-import forge.game.*;
+import forge.game.Game;
+import forge.game.GameEntity;
+import forge.game.GameEntityView;
+import forge.game.GameEntityViewMap;
+import forge.game.GameLogEntryType;
+import forge.game.GameObject;
+import forge.game.GameType;
+import forge.game.PlanarDice;
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardFaceView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
+import forge.game.card.CardView;
+import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -53,27 +78,56 @@ import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
-import forge.game.player.*;
+import forge.game.player.DelayedReveal;
+import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerController;
+import forge.game.player.PlayerView;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.spellability.*;
+import forge.game.spellability.AbilityManaPart;
+import forge.game.spellability.AbilitySub;
+import forge.game.spellability.OptionalCostValue;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.SpellAbilityView;
+import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.MagicStack;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.input.Input;
+import forge.gamemodes.match.input.InputAttack;
+import forge.gamemodes.match.input.InputBlock;
+import forge.gamemodes.match.input.InputConfirm;
+import forge.gamemodes.match.input.InputConfirmMulligan;
+import forge.gamemodes.match.input.InputLondonMulligan;
+import forge.gamemodes.match.input.InputPassPriority;
+import forge.gamemodes.match.input.InputPayMana;
+import forge.gamemodes.match.input.InputProxy;
+import forge.gamemodes.match.input.InputQueue;
+import forge.gamemodes.match.input.InputSelectCardsForConvokeOrImprovise;
+import forge.gamemodes.match.input.InputSelectCardsFromList;
+import forge.gamemodes.match.input.InputSelectEntitiesFromList;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
+import forge.gui.control.FControlGamePlayback;
+import forge.gui.events.UiEventNextGameDecision;
+import forge.gui.interfaces.IGuiGame;
+import forge.gui.util.SOptionPane;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
-import forge.interfaces.IGuiGame;
 import forge.interfaces.IMacroSystem;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
-import forge.match.NextGameDecision;
-import forge.match.input.*;
+import forge.localinstance.achievements.AchievementCollection;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences.FPref;
 import forge.util.CardTranslation;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
@@ -82,7 +136,6 @@ import forge.util.MessageUtil;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-import forge.util.gui.SOptionPane;
 import io.sentry.Sentry;
 
 /**
@@ -439,7 +492,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // Otherwise, use the order dialog to be able to grab multiple cards in
         // one shot
 
-        if (max == 1) {
+        if (min == 1 && max == 1) {
             final Card singleChosen = chooseSingleEntityForEffect(sourceList, sa, title, isOptional, params);
             return singleChosen == null ? CardCollection.EMPTY : new CardCollection(singleChosen);
         }
@@ -618,7 +671,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * (non-Javadoc)
      *
      * @see
-     * forge.game.player.PlayerController#confirmAction(forge.card.spellability.
+     * forge.game.player.PlayerController#confirmAction(forge.gui.card.spellability.
      * SpellAbility, java.lang.String, java.lang.String)
      */
     @Override
@@ -641,12 +694,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     }
                     break;
             }
-            if (sa != null) {
-                tempShowCard(show);
-                boolean result = InputConfirm.confirm(this, ((Card) sa.getHostCard().getFirstRemembered()).getView(), message);
-                endTempShowCards();
-                return result;
-            }
+            tempShowCard(show);
+            boolean result = InputConfirm.confirm(this, ((Card) sa.getHostCard().getFirstRemembered()).getView(), message);
+            endTempShowCards();
+            return result;
         }
 
         // The general case: display the source of the SA in the prompt on mouse over
@@ -1067,8 +1118,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * (non-Javadoc)
      *
      * @see
-     * forge.game.player.PlayerController#chooseTargets(forge.card.spellability.
-     * SpellAbility, forge.card.spellability.SpellAbilityStackInstance)
+     * forge.game.player.PlayerController#chooseTargets(forge.gui.card.spellability.
+     * SpellAbility, forge.gui.card.spellability.SpellAbilityStackInstance)
      */
     @Override
     public TargetChoices chooseNewTargetsFor(final SpellAbility ability, Predicate<GameObject> filter, boolean optional) {
@@ -1093,7 +1144,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      *
      * @see
      * forge.game.player.PlayerController#chooseCardsToDiscardUnlessType(int,
-     * java.lang.String, forge.card.spellability.SpellAbility)
+     * java.lang.String, forge.gui.card.spellability.SpellAbility)
      */
     @Override
     public CardCollectionView chooseCardsToDiscardUnlessType(final int num, final CardCollectionView hand,
@@ -1265,8 +1316,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * (non-Javadoc)
      *
      * @see
-     * forge.game.player.PlayerController#confirmReplacementEffect(forge.card.
-     * replacement.ReplacementEffect, forge.card.spellability.SpellAbility,
+     * forge.game.player.PlayerController#confirmReplacementEffect(forge.gui.card.
+     * replacement.ReplacementEffect, forge.gui.card.spellability.SpellAbility,
      * java.lang.String)
      */
     @Override
@@ -1571,7 +1622,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     /*
      * (non-Javadoc)
      *
-     * @see forge.game.player.PlayerController#chooseModeForAbility(forge.card.
+     * @see forge.game.player.PlayerController#chooseModeForAbility(forge.gui.card.
      * spellability.SpellAbility, java.util.List, int, int)
      */
     @Override
@@ -1803,7 +1854,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (next.isCopied()) {
                     if (next.isSpell()) {
                         // copied spell always add to stack
-                        player.getGame().getStackZone().add(next.getHostCard());
+                        if (!next.getHostCard().isInZone(ZoneType.Stack)) {
+                            next.setHostCard(player.getGame().getAction().moveToStack(next.getHostCard(), next));
+                        } else {
+                            player.getGame().getStackZone().add(next.getHostCard());
+                        }
                     }
                     // TODO check if static abilities needs to be run for things affecting the copy?
                     if (next.isMayChooseNewTargets()) {
@@ -2138,6 +2193,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     abMana.produceMana(null);
                 }
             });
+        }
+
+        @Override
+        public void rollbackPhase() {
+            final Player pPriority = getGame().getPhaseHandler().getPriorityPlayer();
+            if (pPriority == null) {
+                getGui().message(localizer.getMessage("lblNoPlayerPriorityGameStateCannotBeSetup"));
+                return;
+            }
+            if (getGui().getGamestate() != null)
+                getGui().getGamestate().applyToGame(getGame());
         }
 
         private GameState createGameStateObject() {
@@ -2512,9 +2578,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             final CardDb carddb = FModel.getMagicDb().getCommonCards();
             final List<ICardFace> faces = Lists.newArrayList(carddb.getAllFaces());
+            final CardDb customDb = FModel.getMagicDb().getCustomCards();
+            final List<ICardFace> customFaces = Lists.newArrayList(customDb.getAllFaces());
             List<CardFaceView> choices = new ArrayList<>();
             CardFaceView cardFaceView;
             for (ICardFace cardFace : faces) {
+                cardFaceView = new CardFaceView(CardTranslation.getTranslatedName(cardFace.getName()), cardFace.getName());
+                choices.add(cardFaceView);
+            }
+            for (ICardFace cardFace : customFaces) {
                 cardFaceView = new CardFaceView(CardTranslation.getTranslatedName(cardFace.getName()), cardFace.getName());
                 choices.add(cardFaceView);
             }
@@ -2526,10 +2598,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 return;
             }
 
-            final PaperCard c = carddb.getUniqueByName(f.getOracleName());
+            PaperCard c = carddb.getUniqueByName(f.getOracleName());
+            if (c == null)
+                c = customDb.getUniqueByName(f.getOracleName());
             final Card forgeCard = Card.fromPaperCard(c, p);
             forgeCard.setTimestamp(getGame().getNextTimestamp());
 
+            PaperCard finalC = c;
             getGame().getAction().invoke(new Runnable() {
                 @Override
                 public void run() {
@@ -2561,7 +2636,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                 return;
                             }
                         } else {
-                            if (c.getRules().getType().isLand()) {
+                            if (finalC.getRules().getType().isLand()) {
                                 // this is needed to ensure land abilities fire
                                 getGame().getAction().moveToHand(forgeCard, null);
                                 getGame().getAction().moveToPlay(forgeCard, null);

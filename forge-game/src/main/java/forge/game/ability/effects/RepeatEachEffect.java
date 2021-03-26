@@ -1,21 +1,26 @@
 package forge.game.ability.effects;
 
+import java.util.Collections;
+import java.util.List;
+
 import com.google.common.collect.Lists;
+
 import forge.GameCommand;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardDamageMap;
+import forge.game.card.CardLists;
+import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
-
-import java.util.Collections;
-import java.util.List;
 
 public class RepeatEachEffect extends SpellAbilityEffect {
 
@@ -54,7 +59,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 zone.add(ZoneType.Battlefield);
             }
             repeatCards = CardLists.getValidCards(game.getCardsIn(zone),
-                    sa.getParam("RepeatCards"), source.getController(), source);
+                    sa.getParam("RepeatCards"), source.getController(), source, sa);
         }
         else if (sa.hasParam(("RepeatSpellAbilities"))) {
             repeatSas = Lists.newArrayList();
@@ -70,7 +75,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             repeatCards = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
             if (sa.hasParam("AdditionalRestriction")) { // lki cards might not be in game
                 repeatCards = CardLists.getValidCards(repeatCards,
-                        sa.getParam("AdditionalRestriction"), source.getController(), source);
+                        sa.getParam("AdditionalRestriction"), source.getController(), source, sa);
             }
         }
         boolean loopOverCards = repeatCards != null && !repeatCards.isEmpty();

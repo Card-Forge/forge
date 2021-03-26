@@ -28,16 +28,16 @@ import com.google.common.collect.Lists;
 import forge.Singletons;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ILocalRepaint;
+import forge.localinstance.properties.ForgePreferences;
 import forge.menus.ForgeMenu;
 import forge.menus.LayoutMenu;
-import forge.properties.ForgePreferences;
 import forge.toolbox.FButton;
 import forge.toolbox.FDigitalClock;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedLabel;
-import forge.util.ReflectionUtil;
 import forge.util.Localizer;
+import forge.util.ReflectionUtil;
 
 
 @SuppressWarnings("serial")

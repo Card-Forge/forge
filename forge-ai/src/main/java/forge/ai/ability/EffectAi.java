@@ -1,12 +1,28 @@
 package forge.ai.ability;
 
+import java.util.List;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import forge.ai.*;
+
+import forge.ai.AiCardMemory;
+import forge.ai.AiController;
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCombat;
+import forge.ai.ComputerUtilMana;
+import forge.ai.PlayerControllerAi;
+import forge.ai.SpecialCardAi;
+import forge.ai.SpellAbilityAi;
+import forge.ai.SpellApiToAi;
 import forge.game.Game;
 import forge.game.ability.ApiType;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
@@ -17,8 +33,6 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
-
-import java.util.List;
 
 public class EffectAi extends SpellAbilityAi {
     @Override

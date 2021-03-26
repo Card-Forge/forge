@@ -3,9 +3,9 @@ package forge.gamesimulationtests.util;
 import forge.CardStorageReader;
 import forge.StaticData;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences.FPref;
 
 public class CardDatabaseHelper {
     private static StaticData staticData;
@@ -29,7 +29,8 @@ public class CardDatabaseHelper {
 
     private static void initialize() {
         final CardStorageReader reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, null, FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
-        staticData = new StaticData(reader, ForgeConstants.EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR, FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_UNKNOWN_CARDS), FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_NONLEGAL_CARDS));
+        final CardStorageReader customReader = new CardStorageReader(ForgeConstants.USER_CUSTOM_CARDS_DIR, null, FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
+        staticData = new StaticData(reader, customReader, ForgeConstants.EDITIONS_DIR, ForgeConstants.USER_CUSTOM_EDITIONS_DIR ,ForgeConstants.BLOCK_DATA_DIR, FModel.getPreferences().getPref(FPref.UI_PREFERRED_ART), FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_UNKNOWN_CARDS), FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_NONLEGAL_CARDS));
     }
 
     private static boolean hasBeenInitialized() {

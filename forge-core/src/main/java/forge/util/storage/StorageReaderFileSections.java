@@ -17,17 +17,17 @@
  */
 package forge.util.storage;
 
-import com.google.common.base.Function;
-
-import forge.util.FileUtil;
-
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.base.Function;
+
+import forge.util.FileUtil;
 
 /**
  * This class treats every line of a given file as a source for a named object.

@@ -20,8 +20,6 @@ package forge.game.spellability;
 import java.util.Arrays;
 import java.util.List;
 
-import forge.util.TextUtil;
-
 import com.google.common.collect.Lists;
 
 import forge.card.CardType;
@@ -31,6 +29,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 
 /**
  * <p>
@@ -490,19 +489,18 @@ public class TargetRestrictions {
         if (this.tgtZone.contains(ZoneType.Stack)) {
             // Stack Zone targets are considered later
             return true;
-        } else {
-            for (final Card c : game.getCardsIn(this.tgtZone)) {
-                if (!c.isValid(this.validTgts, sa.getActivatingPlayer(), srcCard, sa)) {
-                    continue;
-                }
-                if (isTargeted && !sa.canTarget(c)) {
-                    continue;
-                }
-                if (sa.getTargets().contains(c)) {
-                    continue;
-                }
-                return true;
+        }
+        for (final Card c : game.getCardsIn(this.tgtZone)) {
+            if (!c.isValid(this.validTgts, sa.getActivatingPlayer(), srcCard, sa)) {
+                continue;
             }
+            if (isTargeted && !sa.canTarget(c)) {
+                continue;
+            }
+            if (sa.getTargets().contains(c)) {
+                continue;
+            }
+            return true;
         }
 
         return false;

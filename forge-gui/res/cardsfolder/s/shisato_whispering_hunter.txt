@@ -4,8 +4,8 @@ Types:Legendary Creature Snake Warrior
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a Snake.
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Snake
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player skips their next untap step.
-SVar:TrigPump:DB$ Pump | Defined$ TriggeredTarget | KW$ Skip your next untap step. | Permanent$ True
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSkipPhase | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player skips their next untap step.
+SVar:TrigSkipPhase:DB$ SkipPhase | Defined$ TriggeredTarget | Step$ Untap
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$Valid Creature.Snake+YouCtrl+cmcLE2
 DeckNeeds:Type$Snake

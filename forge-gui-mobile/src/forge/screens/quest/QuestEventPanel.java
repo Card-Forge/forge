@@ -2,6 +2,7 @@ package forge.screens.quest;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
+
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
@@ -9,7 +10,7 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
-import forge.quest.IQuestEvent;
+import forge.gamemodes.quest.IQuestEvent;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;

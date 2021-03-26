@@ -11,14 +11,14 @@ import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 
 import forge.Singletons;
-import forge.UiCommand;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.DeckStorage;
+import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.item.InventoryItem;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.DeckImport;
 import forge.screens.deckeditor.SEditorIO;

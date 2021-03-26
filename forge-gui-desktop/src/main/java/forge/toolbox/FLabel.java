@@ -1,6 +1,16 @@
 package forge.toolbox;
 
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Composite;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -18,10 +28,10 @@ import javax.swing.Timer;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
-import forge.UiCommand;
-import forge.assets.FSkinProp;
+import forge.gui.UiCommand;
 import forge.gui.framework.ILocalRepaint;
-import forge.interfaces.IButton;
+import forge.gui.interfaces.IButton;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
@@ -125,7 +135,7 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
          * @return {@link forge.toolbox.FLabel.Builder} */
         public Builder useSkinColors(final boolean b0) { bldUseSkinColors = b0; return this; }
 
-        /**@param c0 &emsp; {@link forge.UiCommand} to execute if clicked
+        /**@param c0 &emsp; {@link forge.forge.gui.UiCommand} to execute if clicked
          * @return {@link forge.toolbox.FLabel.Builder} */
         public Builder cmdClick(final UiCommand c0) { this.bldCmd = c0; return this; }
 
@@ -458,12 +468,12 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
         return this.resizeTimer;
     }
 
-    /** @return {@link forge.UiCommand} */
+    /** @return {@link forge.forge.gui.UiCommand} */
     public Runnable getCommand() {
         return this.cmdClick;
     }
 
-    /** @return {@link forge.UiCommand} */
+    /** @return {@link forge.forge.gui.UiCommand} */
     public Runnable getRightClickCommand() {
         return this.cmdRightClick;
     }
@@ -500,12 +510,12 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
         }
     }
 
-    /** @param c0 &emsp; {@link forge.UiCommand} on click */
+    /** @param c0 &emsp; {@link forge.forge.gui.UiCommand} on click */
     public void setCommand(final Runnable c0) {
         this.cmdClick = c0;
     }
 
-    /** @param c0 &emsp; {@link forge.UiCommand} on right-click */
+    /** @param c0 &emsp; {@link forge.forge.gui.UiCommand} on right-click */
     public void setRightClickCommand(final Runnable c0) {
         this.cmdRightClick = c0;
     }

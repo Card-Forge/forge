@@ -1,8 +1,8 @@
 package forge.screens.constructed;
 
+import forge.gamemodes.match.LocalLobby;
+import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.interfaces.IPlayerChangeListener;
-import forge.match.LocalLobby;
-import forge.net.event.UpdateLobbyPlayerEvent;
 import forge.screens.home.NewGameMenu;
 
 public class ConstructedScreen extends LobbyScreen {

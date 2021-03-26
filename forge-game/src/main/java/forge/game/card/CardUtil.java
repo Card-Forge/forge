@@ -17,7 +17,16 @@
  */
 package forge.game.card;
 
-import com.google.common.collect.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
+
 import forge.ImageKeys;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -30,16 +39,14 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.player.Player;
-import forge.game.spellability.*;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public final class CardUtil {
     // disable instantiation
@@ -119,7 +126,7 @@ public final class CardUtil {
         else {
             res.addAll(game.getStackZone().getCardsAddedThisTurn(from));
         }
-        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src);
+        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src, null);
         return res;
     }
 
@@ -143,16 +150,16 @@ public final class CardUtil {
         else {
             res.addAll(game.getStackZone().getCardsAddedLastTurn(from));
         }
-        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src);
+        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src, null);
         return res;
     }
 
     public static List<Card> getThisTurnCast(final String valid, final Card src) {
-        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, src.getController(), src);
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, src.getController(), src, null);
     }
 
     public static List<Card> getLastTurnCast(final String valid, final Card src) {
-        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, src.getController(), src);
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, src.getController(), src, null);
 
     }
 
@@ -247,6 +254,8 @@ public final class CardUtil {
         newCopy.setColor(in.determineColor().getColor());
         newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
         newCopy.setReceivedDamageFromPlayerThisTurn(in.getReceivedDamageFromPlayerThisTurn());
+        newCopy.setDealtDamageToThisTurn(in.getDealtDamageToThisTurn());
+        newCopy.setDealtDamageToPlayerThisTurn(in.getDealtDamageToPlayerThisTurn());
         newCopy.getDamageHistory().setCreatureGotBlockedThisTurn(in.getDamageHistory().getCreatureGotBlockedThisTurn());
 
         newCopy.setAttachedCards(getLKICopyList(in.getAttachedCards(), cachedMap));
@@ -277,6 +286,8 @@ public final class CardUtil {
         newCopy.setChangedCardTraits(in.getChangedCardTraits());
 
         newCopy.copyChangedTextFrom(in);
+
+        newCopy.setBestowTimestamp(in.getBestowTimestamp());
 
         newCopy.setForetold(in.isForetold());
         newCopy.setForetoldThisTurn(in.isForetoldThisTurn());
@@ -353,10 +364,14 @@ public final class CardUtil {
     }
 
     public static CardState getFaceDownCharacteristic(Card c) {
+        return getFaceDownCharacteristic(c, CardStateName.FaceDown);
+    }
+
+    public static CardState getFaceDownCharacteristic(Card c, CardStateName state) {
         final CardType type = new CardType(false);
         type.add("Creature");
 
-        final CardState ret = new CardState(c, CardStateName.FaceDown);
+        final CardState ret = new CardState(c, state);
         ret.setBasePower(2);
         ret.setBaseToughness(2);
 
@@ -364,10 +379,14 @@ public final class CardUtil {
         ret.setType(type);
 
         //show hidden if exiled facedown
-        if (c.isInZone(ZoneType.Exile))
-            ret.setImageKey(ImageKeys.getTokenKey(c.isForetold() ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD));
-        else
-            ret.setImageKey(ImageKeys.getTokenKey(c.isManifested() ? ImageKeys.MANIFEST_IMAGE : ImageKeys.MORPH_IMAGE));
+        if (state == CardStateName.FaceDown) {
+            if (c.isInZone(ZoneType.Exile))
+                ret.setImageKey(ImageKeys.getTokenKey(c.isForetold() ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD));
+            else
+                ret.setImageKey(ImageKeys.getTokenKey(c.isManifested() ? ImageKeys.MANIFEST_IMAGE : ImageKeys.MORPH_IMAGE));
+        } else {
+            ret.setImageKey(c.getImageKey());
+        }
         return ret;
     }
 
@@ -410,7 +429,7 @@ public final class CardUtil {
                     sa.setActivatingPlayer(sa.getHostCard().getController());
                 }
                 final Game game = sa.getActivatingPlayer().getGame();
-                cards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card);
+                cards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card, sa);
             }
 
             // remove anything cards that is already in parents

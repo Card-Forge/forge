@@ -17,6 +17,11 @@
  */
 package forge.item;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Function;
 
 import forge.ImageKeys;
@@ -27,11 +32,6 @@ import forge.deck.io.DeckStorage;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.storage.StorageReaderFolder;
-
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.List;
-import java.util.Map;
 
 
 public class PreconDeck implements InventoryItemFromSet {

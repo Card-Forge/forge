@@ -9,14 +9,14 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import forge.Singletons;
-import forge.UiCommand;
+import forge.gui.UiCommand;
 import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
-import forge.view.FDialog;
 import forge.util.Localizer;
+import forge.view.FDialog;
 
 @SuppressWarnings("serial")
 public class VAutoYields extends FDialog {

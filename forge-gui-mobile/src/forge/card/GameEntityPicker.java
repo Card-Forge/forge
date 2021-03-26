@@ -17,9 +17,9 @@ import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FChoiceList;
 import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.Localizer;
 

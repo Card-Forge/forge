@@ -1,9 +1,9 @@
 package forge.util.storage;
 
-import com.google.common.base.Function;
-
 import java.io.File;
 import java.util.HashMap;
+
+import com.google.common.base.Function;
 
 public class StorageNestedFolders<T> extends StorageBase<IStorage<T>> {
     private final File thisFolder;

@@ -1,15 +1,16 @@
 package forge.screens.home;
 
-import forge.assets.FSkinProp;
-import forge.toolbox.FSkin;
-import forge.toolbox.FSkin.SkinnedButton;
-
-import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+
+import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
+
+import forge.localinstance.skin.FSkinProp;
+import forge.toolbox.FSkin;
+import forge.toolbox.FSkin.SkinnedButton;
 
 @SuppressWarnings("serial")
 public class StopButton extends SkinnedButton {

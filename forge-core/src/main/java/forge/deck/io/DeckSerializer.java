@@ -1,5 +1,13 @@
 package forge.deck.io;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -7,13 +15,6 @@ import forge.util.FileSection;
 import forge.util.FileSectionManual;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class DeckSerializer {
 

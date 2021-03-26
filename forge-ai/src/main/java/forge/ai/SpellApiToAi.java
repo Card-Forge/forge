@@ -1,12 +1,13 @@
 package forge.ai;
 
+import java.util.Map;
+
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+
 import forge.ai.ability.*;
 import forge.game.ability.ApiType;
 import forge.util.ReflectionUtil;
-
-import java.util.Map;
 
 public enum SpellApiToAi {
     Converter;
@@ -152,6 +153,7 @@ public enum SpellApiToAi {
             .put(ApiType.SetLife, LifeSetAi.class)
             .put(ApiType.SetState, SetStateAi.class)
             .put(ApiType.Shuffle, ShuffleAi.class)
+            .put(ApiType.SkipPhase, SkipPhaseAi.class)
             .put(ApiType.SkipTurn, SkipTurnAi.class)
             .put(ApiType.StoreSVar, StoreSVarAi.class)
             .put(ApiType.Subgame, AlwaysPlayAi.class)

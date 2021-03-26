@@ -1,12 +1,16 @@
 package forge.screens.home.online;
 
-import forge.gui.FNetOverlay;
-import forge.util.Localizer;
-import javax.swing.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
+
+import forge.gui.FNetOverlay;
+import forge.util.Localizer;
 
 /**
  * Returns a JMenu containing options for online play.

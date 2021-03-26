@@ -4,10 +4,10 @@ import javax.swing.SwingUtilities;
 
 import com.google.common.primitives.Ints;
 
+import forge.gamemodes.quest.data.QuestPreferences;
+import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.gui.framework.ICDoc;
 import forge.model.FModel;
-import forge.quest.data.QuestPreferences;
-import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.home.quest.VSubmenuQuestPrefs.PrefInput;
 import forge.util.Localizer;
 
@@ -25,14 +25,14 @@ public enum CSubmenuQuestPrefs implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void initialize() {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void update() {

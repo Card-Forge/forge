@@ -17,16 +17,17 @@
  */
 package forge.game.cost;
 
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * <p>

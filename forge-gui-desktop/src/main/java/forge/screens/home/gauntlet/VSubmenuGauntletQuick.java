@@ -1,5 +1,12 @@
 package forge.screens.home.gauntlet;
 
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JSlider;
+import javax.swing.SwingConstants;
+
 import forge.deck.DeckType;
 import forge.deckchooser.FDeckChooser;
 import forge.game.GameType;
@@ -18,10 +25,6 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedSlider;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.*;
 
 /** 
  * Assembles Swing components of "quick gauntlet" submenu singleton.

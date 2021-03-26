@@ -7,7 +7,7 @@ import java.util.List;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Graphics;
-import forge.error.BugReporter;
+import forge.gui.error.BugReporter;
 
 public abstract class FContainer extends FDisplayObject {
     private final List<FDisplayObject> children = new ArrayList<>();

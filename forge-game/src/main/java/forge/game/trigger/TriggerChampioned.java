@@ -17,12 +17,12 @@
  */
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 /**
  * <p>
@@ -55,21 +55,15 @@ public class TriggerChampioned extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Card championed = (Card) runParams.get(AbilityKey.Championed);
-        final Card source = (Card) runParams.get(AbilityKey.Card);
 
-        if (hasParam("ValidCard")) {
-            if (!championed.isValid(getParam("ValidCard").split(","),
-                    this.getHostCard().getController(), this.getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Championed))) {
+            return false;
         }
-        if (hasParam("ValidSource")) {
-            if (!source.isValid(getParam("ValidSource").split(","),
-                    this.getHostCard().getController(), this.getHostCard(), null)) {
-                return false;
-            }
+
+        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.Card))) {
+            return false;
         }
+
         return true;
     }
 

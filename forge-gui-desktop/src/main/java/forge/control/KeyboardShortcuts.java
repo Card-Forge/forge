@@ -14,18 +14,18 @@ import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import forge.toolbox.special.CardZoomer;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
 import forge.game.spellability.StackItemView;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.home.settings.VSubmenuPreferences.KeyboardShortcutField;
 import forge.screens.match.CMatchUI;
+import forge.toolbox.special.CardZoomer;
 import forge.util.Localizer;
 
 /** 

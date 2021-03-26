@@ -1,11 +1,35 @@
 package forge.ai.ability;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import forge.ai.*;
+
+import forge.ai.AiBlockController;
+import forge.ai.AiCardMemory;
+import forge.ai.AiController;
+import forge.ai.AiProps;
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCombat;
+import forge.ai.ComputerUtilCost;
+import forge.ai.ComputerUtilMana;
+import forge.ai.PlayerControllerAi;
+import forge.ai.SpecialAiLogic;
+import forge.ai.SpecialCardAi;
+import forge.ai.SpellAbilityAi;
+import forge.ai.SpellApiToAi;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -13,8 +37,14 @@ import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CardUtil;
+import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
@@ -29,9 +59,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.*;
 
 public class ChangeZoneAi extends SpellAbilityAi {
     /*
@@ -261,7 +288,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
                 for (final CostPart part : abCost.getCostParts()) {
                     if (part instanceof CostDiscard) {
                         CostDiscard cd = (CostDiscard) part;
@@ -357,7 +384,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             if (type != null && p == ai) {
                 // AI only "knows" about his information
-                list = CardLists.getValidCards(list, type, source.getController(), source);
+                list = CardLists.getValidCards(list, type, source.getController(), source, sa);
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
@@ -370,7 +397,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
             // TODO: prevent ai seaching its own library when Ob Nixilis, Unshackled is in play
             if (origin != null && origin.isKnown()) {
-                list = CardLists.getValidCards(list, type, source.getController(), source);
+                list = CardLists.getValidCards(list, type, source.getController(), source, sa);
             }
 
             if (!activateForCost && list.isEmpty()) {
@@ -1107,7 +1134,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // Only care about combatants during combat
         if (game.getPhaseHandler().inCombat() && origin.contains(ZoneType.Battlefield)) {
-            CardCollection newList = CardLists.getValidCards(list, "Card.attacking,Card.blocking", null, null);
+            CardCollection newList = CardLists.getValidCards(list, "Card.attacking,Card.blocking", null, null, null);
             if (!newList.isEmpty() || !sa.isTrigger()) {
                 list = newList;
             }
@@ -1425,12 +1452,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 if (sa.getTargets().size() == 0 || sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                     sa.resetTargets();
                     return false;
-                } else {
-                    if (!ComputerUtil.shouldCastLessThanMax(ai, source)) {
-                        return false;
-                    }
-                    break;
+                } 
+                if (!ComputerUtil.shouldCastLessThanMax(ai, source)) {
+                    return false;
                 }
+                break;
             }
 
             list.remove(choice);
@@ -1705,7 +1731,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         Card source = sa.getHostCard();
         String definedSac = StringUtils.split(source.getSVar("AIPreference"), "$")[1];
 
-        CardCollection listToSac = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.restriction(definedSac.split(","), ai, source, sa));
+        CardCollection listToSac = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), definedSac, ai, source, sa);
         listToSac.sort(Collections.reverseOrder(CardLists.CmcComparatorInv));
 
         CardCollection listToRet = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
@@ -1742,7 +1768,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         String definedGoal = sa.getParam("ChangeType");
         boolean anyCMC = !definedGoal.contains(".cmc");
 
-        CardCollection listToSac = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.restriction(definedSac.split(","), ai, source, sa));
+        CardCollection listToSac = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), definedSac, ai, source, sa);
         listToSac.sort(!sacWorst ? CardLists.CmcComparatorInv : Collections.reverseOrder(CardLists.CmcComparatorInv));
 
         for (Card sacCandidate : listToSac) {
@@ -1756,12 +1782,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 curGoal = definedGoal.replace("X", String.format("%d", goalCMC));
             }
 
-            CardCollection listGoal = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.restriction(curGoal.split(","), ai, source, sa));
+            CardCollection listGoal = CardLists.getValidCards(ai.getCardsIn(ZoneType.Library), curGoal, ai, source, sa);
 
             if (!anyCMC) {
-                listGoal = CardLists.getValidCards(listGoal, curGoal, source.getController(), source);
+                listGoal = CardLists.getValidCards(listGoal, curGoal, source.getController(), source, sa);
             } else {
-                listGoal = CardLists.getValidCards(listGoal, curGoal + (curGoal.contains(".") ? "+" : ".") + "cmcGE" + goalCMC, source.getController(), source);
+                listGoal = CardLists.getValidCards(listGoal, curGoal + (curGoal.contains(".") ? "+" : ".") + "cmcGE" + goalCMC, source.getController(), source, sa);
             }
 
             listGoal = CardLists.filter(listGoal, new Predicate<Card>() {
@@ -1931,9 +1957,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (choice != null) {
             sa.getTargets().add(choice);
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     private static CardCollection getSafeTargetsIfUnlessCostPaid(Player ai, SpellAbility sa, Iterable<Card> potentialTgts) {

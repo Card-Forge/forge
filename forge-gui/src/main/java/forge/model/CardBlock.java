@@ -17,6 +17,13 @@
  */
 package forge.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
@@ -27,13 +34,6 @@ import forge.item.generation.IUnOpenedProduct;
 import forge.item.generation.UnOpenedProduct;
 import forge.util.TextUtil;
 import forge.util.storage.StorageReaderFile;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 // import forge.deck.Deck;
 

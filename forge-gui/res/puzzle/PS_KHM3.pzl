@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Kaldheim #03
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/02/166.-KHM3-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your opponent has no mana available. Assume graveyards and exile zones for both players start empty. The opponent has Subira, Tulzidi Caravanner, Frenzied Raider, and Duskwielder in hand.
+[state]
+humanlife=20
+ailife=4
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Claim the Firstborn;Valki, God of Lies;Vanquish the Weak
+humanbattlefield=Birgi, God of Storytelling;Fearless Pup;Mountain;Mountain;Mountain;Mountain;Swamp;Swamp;Swamp
+aihand=Subira, Tulzidi Caravanner;Frenzied Raider;Duskwielder
+aibattlefield=Swamp|Tapped;Swamp|Tapped;Mountain|Tapped;Mountain|Tapped;Eradicator Valkyrie;Calamity Bearer;Arni Brokenbrow;Skemfar Avenger

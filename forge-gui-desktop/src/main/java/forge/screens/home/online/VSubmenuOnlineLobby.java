@@ -5,26 +5,30 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import forge.screens.home.*;
-import net.miginfocom.swing.MigLayout;
 import forge.deckchooser.DecksComboBoxEvent;
 import forge.deckchooser.FDeckChooser;
 import forge.deckchooser.IDecksComboBoxListener;
+import forge.gamemodes.match.GameLobby;
+import forge.gamemodes.net.IOnlineLobby;
+import forge.gamemodes.net.client.FGameClient;
+import forge.gamemodes.net.server.FServerManager;
 import forge.gui.FNetOverlay;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
-import forge.interfaces.ILobbyView;
-import forge.match.GameLobby;
-import forge.net.IOnlineLobby;
-import forge.net.client.FGameClient;
-import forge.net.server.FServerManager;
+import forge.gui.interfaces.ILobbyView;
+import forge.gui.util.SOptionPane;
+import forge.screens.home.EMenuGroup;
+import forge.screens.home.IVSubmenu;
+import forge.screens.home.StopButton;
+import forge.screens.home.VHomeUI;
+import forge.screens.home.VLobby;
 import forge.toolbox.FButton;
 import forge.toolbox.FSkin;
-import forge.util.gui.SOptionPane;
 import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnlineLobby, IVTopLevelUI {
     SINGLETON_INSTANCE;

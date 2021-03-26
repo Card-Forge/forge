@@ -17,25 +17,10 @@
  */
 package forge;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
-import com.google.common.cache.LoadingCache;
-import com.mortennobel.imagescaling.ResampleOp;
-import forge.assets.FSkinProp;
-import forge.game.card.CardView;
-import forge.game.player.PlayerView;
-import forge.item.InventoryItem;
-import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
-import forge.toolbox.FSkin;
-import forge.toolbox.FSkin.SkinIcon;
-import forge.util.ImageUtil;
-import org.apache.commons.lang3.StringUtils;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -43,6 +28,28 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+
+import javax.imageio.ImageIO;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
+import com.google.common.cache.LoadingCache;
+import com.mortennobel.imagescaling.ResampleOp;
+
+import forge.game.card.CardView;
+import forge.game.player.PlayerView;
+import forge.gui.FThreads;
+import forge.item.InventoryItem;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
+import forge.model.FModel;
+import forge.toolbox.FSkin;
+import forge.toolbox.FSkin.SkinIcon;
+import forge.util.ImageUtil;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means

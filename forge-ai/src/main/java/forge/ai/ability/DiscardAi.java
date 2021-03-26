@@ -1,6 +1,13 @@
 package forge.ai.ability;
 
-import forge.ai.*;
+import java.util.List;
+
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilCost;
+import forge.ai.ComputerUtilMana;
+import forge.ai.SpecialCardAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -15,8 +22,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-import java.util.List;
-
 public class DiscardAi extends SpellAbilityAi {
 
     @Override
@@ -27,26 +32,11 @@ public class DiscardAi extends SpellAbilityAi {
         final Cost abCost = sa.getPayCosts();
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
 
-        if (abCost != null) {
-            // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source, sa)) {
-                return false;
-            }
-
+        // temporarily disabled until better AI
+        if (!willPayCosts(ai, sa, abCost, source)) {
+            return false;
         }
-        
+
         if ("Chandra, Flamecaller".equals(sourceName)) {
             final int hand = ai.getCardsIn(ZoneType.Hand).size();
             return MyRandom.getRandom().nextFloat() < (1.0 / (1 + hand));

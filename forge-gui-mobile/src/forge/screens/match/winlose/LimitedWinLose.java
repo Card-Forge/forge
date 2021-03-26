@@ -18,7 +18,7 @@ package forge.screens.match.winlose;
  */
 
 import forge.game.GameView;
-import forge.limited.LimitedWinLoseController;
+import forge.gamemodes.limited.LimitedWinLoseController;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament

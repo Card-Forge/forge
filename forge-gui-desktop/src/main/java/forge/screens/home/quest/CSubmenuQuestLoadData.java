@@ -1,21 +1,21 @@
 package forge.screens.home.quest;
 
-import forge.UiCommand;
-import forge.gui.framework.ICDoc;
-import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.quest.QuestController;
-import forge.quest.data.QuestData;
-import forge.quest.data.QuestPreferences.QPref;
-import forge.quest.io.QuestDataIO;
-import forge.screens.bazaar.CBazaarUI;
-
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.data.QuestData;
+import forge.gamemodes.quest.data.QuestPreferences.QPref;
+import forge.gamemodes.quest.io.QuestDataIO;
+import forge.gui.UiCommand;
+import forge.gui.framework.ICDoc;
+import forge.localinstance.properties.ForgeConstants;
+import forge.model.FModel;
+import forge.screens.bazaar.CBazaarUI;
 
 /**
  * Controls the quest data submenu in the home UI.
@@ -45,14 +45,14 @@ public enum CSubmenuQuestLoadData implements ICDoc {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void initialize() {
     }
 
     /* (non-Javadoc)
-     * @see forge.control.home.IControlSubmenu#update()
+     * @see forge.gui.control.home.IControlSubmenu#update()
      */
     @Override
     public void update() {

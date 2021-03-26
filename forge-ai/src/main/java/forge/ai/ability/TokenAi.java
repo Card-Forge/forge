@@ -4,7 +4,16 @@ import java.util.Map;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import forge.ai.*;
+
+import forge.ai.AiController;
+import forge.ai.AiProps;
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCost;
+import forge.ai.ComputerUtilMana;
+import forge.ai.PlayerControllerAi;
+import forge.ai.SpellAbilityAi;
+import forge.ai.SpellApiToAi;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
@@ -27,7 +36,6 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-
 import forge.util.MyRandom;
 
 /**

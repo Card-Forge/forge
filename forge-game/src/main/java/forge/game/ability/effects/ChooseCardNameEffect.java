@@ -1,5 +1,11 @@
 package forge.game.ability.effects;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -23,12 +29,6 @@ import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.ComparableOp;
 import forge.util.Localizer;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 public class ChooseCardNameEffect extends SpellAbilityEffect {
 
@@ -99,7 +99,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                     }
                 } else if (chooseFromDefined) {
                     CardCollection choices = AbilityUtils.getDefinedCards(host, sa.getParam("ChooseFromDefinedCards"), sa);
-                    choices = CardLists.getValidCards(choices, valid, host.getController(), host);
+                    choices = CardLists.getValidCards(choices, valid, host.getController(), host, sa);
                     List<ICardFace> faces = Lists.newArrayList();
                     // get Card
                     for (final Card c : choices) {

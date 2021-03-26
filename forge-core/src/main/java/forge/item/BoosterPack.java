@@ -18,6 +18,8 @@
 
 package forge.item;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 
@@ -26,8 +28,6 @@ import forge.StaticData;
 import forge.card.CardEdition;
 import forge.item.generation.BoosterSlots;
 import forge.util.MyRandom;
-
-import org.apache.commons.lang3.tuple.Pair;
 
 public class BoosterPack extends SealedProduct {
     private final int artIndex;

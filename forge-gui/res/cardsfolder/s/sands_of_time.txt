@@ -1,11 +1,10 @@
 Name:Sands of Time
 ManaCost:4
 Types:Artifact
-S:Mode$ Continuous | Affected$ Player | AddKeyword$ Skip your untap step. | Description$ Each player skips their untap step.
+R:Event$ BeginPhase | ActiveZones$ Battlefield | Phase$ Untap | Skip$ True | Description$ Each player skips their untap step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSands | TriggerDescription$ At the beginning of each player's upkeep, that player simultaneously untaps each tapped artifact, creature, and land they control and taps each untapped artifact, creature, and land they control.
 SVar:TrigSands:DB$ UntapAll | Defined$ TriggeredPlayer | ValidCards$ Artifact.tapped,Creature.tapped,Land.tapped | RememberUntapped$ True | SubAbility$ DBTap
 SVar:DBTap:DB$ TapAll | Defined$ TriggeredPlayer | ValidCards$ Artifact.untapped+IsNotRemembered,Creature.untapped+IsNotRemembered,Land.untapped+IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sands_of_time.jpg
 Oracle:Each player skips their untap step.\nAt the beginning of each player's upkeep, that player simultaneously untaps each tapped artifact, creature, and land they control and taps each untapped artifact, creature, and land they control.

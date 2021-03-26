@@ -1,11 +1,11 @@
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -32,20 +32,12 @@ public class TriggerPlaneswalkedTo extends Trigger {
     /* (non-Javadoc)
      * @see forge.card.trigger.Trigger#performTest(java.util.Map)
      */
-    @SuppressWarnings("unchecked")
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidCard")) {
-            for(Card moved : (Iterable<Card>) runParams.get(AbilityKey.Cards))
-            {
-                if (moved.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
-                        this.getHostCard(), null)) {
-                    return true;
-                }
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Cards))) {
             return false;
         }
-        
+
         return true;
     }
 

@@ -17,9 +17,16 @@
  */
 package forge.game.staticability;
 
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import forge.card.MagicColor;
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -44,12 +51,6 @@ import forge.util.CardTranslation;
 import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.TextUtil;
-
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
 
 /**
  * The Class StaticAbility.
@@ -554,14 +555,14 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         }
 
         if (hasParam("PlayerTurn")) {
-            List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, getParam("PlayerTurn"), null);
+            List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, getParam("PlayerTurn"), this);
             if (!players.contains(ph.getPlayerTurn())) {
                 return false;
             }
         }
 
         if (hasParam("UnlessDefinedPlayer")) {
-            List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, getParam("UnlessDefinedPlayer"), null);
+            List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, getParam("UnlessDefinedPlayer"), this);
             if (!players.isEmpty()) {
                 return false;
             }
@@ -572,7 +573,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
                 return false;
             }
             final Card topCard = controller.getCardsIn(ZoneType.Library).get(0);
-            if (!topCard.isValid(getParam("TopCardOfLibraryIs").split(","), controller, this.hostCard, null)) {
+            if (!topCard.isValid(getParam("TopCardOfLibraryIs").split(","), controller, this.hostCard, this)) {
                 return false;
             }
         }
@@ -583,7 +584,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             CardCollectionView list = game.getCardsIn(zone);
             final String present = getParam("IsPresent");
 
-            list = CardLists.getValidCards(list, present.split(","), controller, hostCard, null);
+            list = CardLists.getValidCards(list, present.split(","), controller, hostCard, this);
 
             int right = 1;
             final String rightString = compare.substring(2);

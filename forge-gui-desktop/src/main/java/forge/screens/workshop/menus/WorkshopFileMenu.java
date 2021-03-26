@@ -1,15 +1,16 @@
 package forge.screens.workshop.menus;
 
-import forge.assets.FSkinProp;
-import forge.menus.MenuUtil;
-import forge.screens.workshop.controllers.CCardScript;
-import forge.toolbox.FSkin.SkinnedMenuItem;
-
-import javax.swing.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+
+import forge.localinstance.skin.FSkinProp;
+import forge.menus.MenuUtil;
+import forge.screens.workshop.controllers.CCardScript;
+import forge.toolbox.FSkin.SkinnedMenuItem;
 
 /**
  * Returns a JMenu containing options associated with current game.

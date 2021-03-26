@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import java.util.Map;
+
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
@@ -7,8 +9,6 @@ import forge.game.card.Card;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
-
-import java.util.Map;
 
 public class RegenerationEffect extends SpellAbilityEffect {
 

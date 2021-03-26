@@ -31,7 +31,7 @@ public class StaticAbilityCantTarget {
     /**
      * Apply can't target ability.
      *
-     * @param st
+     * @param stAb
      *            the static ability
      * @param card
      *            the card
@@ -39,19 +39,18 @@ public class StaticAbilityCantTarget {
      *            the spell/ability
      * @return true, if successful
      */
-    public static boolean applyCantTargetAbility(final StaticAbility st, final Card card,
+    public static boolean applyCantTargetAbility(final StaticAbility stAb, final Card card,
             final SpellAbility spellAbility) {
-        final Card hostCard = st.getHostCard();
         final Card source = spellAbility.getHostCard();
         final Player activator = spellAbility.getActivatingPlayer();
 
-        if (st.hasParam("ValidPlayer")) {
+        if (stAb.hasParam("ValidPlayer")) {
             return false;
         }
 
-        if (st.hasParam("AffectedZone")) {
+        if (stAb.hasParam("AffectedZone")) {
             boolean inZone = false;
-            for (final ZoneType zt : ZoneType.listValueOf(st.getParam("AffectedZone"))) {
+            for (final ZoneType zt : ZoneType.listValueOf(stAb.getParam("AffectedZone"))) {
                 if (card.isInZone(zt)) {
                     inZone = true;
                     break;
@@ -68,94 +67,86 @@ public class StaticAbilityCantTarget {
         }
 
 
-        if (st.hasParam("ValidCard")
-                && !card.isValid(st.getParam("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
+        if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
 
 
-        if (st.hasParam("Hexproof") && (activator != null)) {
+        if (stAb.hasParam("Hexproof") && (activator != null)) {
             for (KeywordInterface kw : activator.getKeywords()) {
                 String k = kw.getOriginal();
                 if (k.startsWith("IgnoreHexproof")) {
                     String[] m = k.split(":");
-                    if (card.isValid(m[1].split(","), activator, source, spellAbility)) {
+                    if (card.isValid(m[1].split(","), activator, source, null)) {
                         return false;
                     }
                 }
             }
         }
-        if (st.hasParam("Shroud") && (activator != null)) {
+        if (stAb.hasParam("Shroud") && (activator != null)) {
             for (KeywordInterface kw : activator.getKeywords()) {
                 String k = kw.getOriginal();
                 if (k.startsWith("IgnoreShroud")) {
                     String[] m = k.split(":");
-                    if (card.isValid(m[1].split(","), activator, source, spellAbility)) {
+                    if (card.isValid(m[1].split(","), activator, source, null)) {
                         return false;
                     }
                 }
             }
         }
 
-        return common(st, spellAbility);
+        return common(stAb, spellAbility);
     }
 
-    public static boolean applyCantTargetAbility(final StaticAbility st, final Player player,
+    public static boolean applyCantTargetAbility(final StaticAbility stAb, final Player player,
             final SpellAbility spellAbility) {
-        final Card hostCard = st.getHostCard();
         final Card source = spellAbility.getHostCard();
         final Player activator = spellAbility.getActivatingPlayer();
 
-        if (st.hasParam("ValidCard") || st.hasParam("AffectedZone")) {
+        if (stAb.hasParam("ValidCard") || stAb.hasParam("AffectedZone")) {
             return false;
         }
 
-        if (st.hasParam("ValidPlayer")
-                && !player.isValid(st.getParam("ValidPlayer").split(","), hostCard.getController(), hostCard, null)) {
+        if (!stAb.matchesValidParam("ValidPlayer", player)) {
             return false;
         }
 
-
-        if (st.hasParam("Hexproof") && (activator != null)) {
+        if (stAb.hasParam("Hexproof") && (activator != null)) {
             for (KeywordInterface kw : activator.getKeywords()) {
                 String k = kw.getOriginal();
                 if (k.startsWith("IgnoreHexproof")) {
                     String[] m = k.split(":");
-                    if (player.isValid(m[1].split(","), activator, source, spellAbility)) {
+                    if (player.isValid(m[1].split(","), activator, source, null)) {
                         return false;
                     }
                 }
             }
         }
 
-        return common(st, spellAbility);
+        return common(stAb, spellAbility);
     }
 
-    protected static boolean common(final StaticAbility st, final SpellAbility spellAbility) {
-        final Card hostCard = st.getHostCard();
+    protected static boolean common(final StaticAbility stAb, final SpellAbility spellAbility) {
         final Card source = spellAbility.getHostCard();
         final Player activator = spellAbility.getActivatingPlayer();
 
-        if (st.hasParam("ValidSA")
-                && !spellAbility.isValid(st.getParam("ValidSA").split(","), hostCard.getController(), hostCard, spellAbility)) {
+        if (!stAb.matchesValidParam("ValidSA", spellAbility)) {
             return false;
         }
 
-        if (st.hasParam("ValidSource")
-                && !source.isValid(st.getParam("ValidSource").split(","), hostCard.getController(), hostCard, null)) {
+        if (!stAb.matchesValidParam("ValidSource", source)) {
             return false;
         }
 
-        if (st.hasParam("Activator") && (activator != null)
-                && !activator.isValid(st.getParam("Activator"), hostCard.getController(), hostCard, spellAbility)) {
+        if (!stAb.matchesValidParam("Activator", activator)) {
             return false;
         }
 
         if (spellAbility.hasParam("ValidTgts") &&
-                (st.hasParam("SourceCanOnlyTarget")
-                && (!spellAbility.getParam("ValidTgts").contains(st.getParam("SourceCanOnlyTarget"))
+                (stAb.hasParam("SourceCanOnlyTarget")
+                && (!spellAbility.getParam("ValidTgts").contains(stAb.getParam("SourceCanOnlyTarget"))
                     || spellAbility.getParam("ValidTgts").contains(","))
-                    || spellAbility.getParam("ValidTgts").contains("non" + st.getParam("SourceCanOnlyTarget")
+                    || spellAbility.getParam("ValidTgts").contains("non" + stAb.getParam("SourceCanOnlyTarget")
                     )
                 )
            ){

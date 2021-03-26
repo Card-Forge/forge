@@ -11,8 +11,8 @@ import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
 import forge.gui.framework.ICDoc;
 import forge.screens.match.views.VCombat;
-import forge.util.collect.FCollection;
 import forge.util.Lang;
+import forge.util.collect.FCollection;
 
 /**
  * Controls the combat panel in the match UI.

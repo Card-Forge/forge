@@ -1,5 +1,14 @@
 package forge.itemmanager.filters;
 
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
@@ -9,14 +18,6 @@ import forge.itemmanager.SFilterUtil;
 import forge.toolbox.FTextField;
 import forge.toolbox.LayoutHelper;
 import forge.util.Localizer;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 
 public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {

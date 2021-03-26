@@ -22,7 +22,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.ComboPopup;
 
-import forge.interfaces.IComboBox;
+import forge.gui.interfaces.IComboBox;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinnedComboBox;
 

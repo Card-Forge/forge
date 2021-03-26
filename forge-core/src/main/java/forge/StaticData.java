@@ -1,11 +1,21 @@
 package forge;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import com.google.common.base.Predicate;
+
 import forge.card.CardDb;
+import forge.card.CardDb.CardRequest;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.PrintSheet;
-import forge.card.CardDb.CardRequest;
 import forge.item.BoosterBox;
 import forge.item.FatPack;
 import forge.item.PaperCard;
@@ -13,9 +23,6 @@ import forge.item.SealedProduct;
 import forge.token.TokenDb;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
-
-import java.io.File;
-import java.util.*;
 
 
 /**
@@ -26,12 +33,15 @@ import java.util.*;
 public class StaticData {
     private final CardStorageReader cardReader;
     private final CardStorageReader tokenReader;
+    private final CardStorageReader customCardReader;
 
     private final String blockDataFolder;
     private final CardDb commonCards;
     private final CardDb variantCards;
+    private final CardDb customCards;
     private final TokenDb allTokens;
     private final CardEdition.Collection editions;
+    private final CardEdition.Collection customEditions;
 
     private Predicate<PaperCard> standardPredicate;
     private Predicate<PaperCard> brawlPredicate;
@@ -44,6 +54,8 @@ public class StaticData {
 
     private MulliganDefs.MulliganRule mulliganRule = MulliganDefs.getDefaultRule();
 
+    private String prefferedArt;
+
     // Loaded lazily:
     private IStorage<SealedProduct.Template> boosters;
     private IStorage<SealedProduct.Template> specialBoosters;
@@ -54,20 +66,24 @@ public class StaticData {
 
     private static StaticData lastInstance = null;
 
-    public StaticData(CardStorageReader cardReader, String editionFolder, String blockDataFolder, boolean enableUnknownCards, boolean loadNonLegalCards) {
-        this(cardReader, null, editionFolder, blockDataFolder, enableUnknownCards, loadNonLegalCards);
+    public StaticData(CardStorageReader cardReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String prefferedArt, boolean enableUnknownCards, boolean loadNonLegalCards) {
+        this(cardReader, null, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, prefferedArt, enableUnknownCards, loadNonLegalCards);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, String editionFolder, String blockDataFolder, boolean enableUnknownCards, boolean loadNonLegalCards) {
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String prefferedArt, boolean enableUnknownCards, boolean loadNonLegalCards) {
         this.cardReader = cardReader;
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
         this.blockDataFolder = blockDataFolder;
+        this.customCardReader = customCardReader;
+        this.customEditions = new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder)));
+        this.prefferedArt = prefferedArt;
         lastInstance = this;
 
         {
             final Map<String, CardRules> regularCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
             final Map<String, CardRules> variantsCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+            final Map<String, CardRules> customizedCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
             for (CardRules card : cardReader.loadCards()) {
                 if (null == card) continue;
@@ -79,13 +95,24 @@ public class StaticData {
                     regularCards.put(cardName, card);
                 }
             }
+            if (customCardReader != null) {
+                for (CardRules card : customCardReader.loadCards()) {
+                    if (null == card) continue;
+
+                    final String cardName = card.getName();
+                    customizedCards.put(cardName, card);
+                }
+            }
+
 
             commonCards = new CardDb(regularCards, editions);
             variantCards = new CardDb(variantsCards, editions);
+            customCards = new CardDb(customizedCards, customEditions);
 
             //must initialize after establish field values for the sake of card image logic
             commonCards.initialize(false, false, enableUnknownCards, loadNonLegalCards);
             variantCards.initialize(false, false, enableUnknownCards, loadNonLegalCards);
+            customCards.initialize(false, false, enableUnknownCards, loadNonLegalCards);
         }
 
         {
@@ -97,6 +124,14 @@ public class StaticData {
                 tokens.put(card.getNormalizedName(), card);
             }
             allTokens = new TokenDb(tokens, editions);
+        }
+
+        {
+            if (customCards.getAllCards().size() > 0) {
+                Collection<PaperCard> paperCards = customCards.getAllCards();
+                for(PaperCard p: paperCards)
+                    commonCards.addCard(p);
+            }
         }
     }
 
@@ -123,6 +158,7 @@ public class StaticData {
 
     public PaperCard getOrLoadCommonCard(String cardName, String setCode, int artIndex, boolean foil) {
         PaperCard card = commonCards.getCard(cardName, setCode, artIndex);
+        boolean isCustom = false;
         if (card == null) {
             attemptToLoadCard(cardName, setCode);
             card = commonCards.getCard(cardName, setCode, artIndex);
@@ -131,8 +167,20 @@ public class StaticData {
             card = commonCards.getCard(cardName, setCode, -1);
         }
         if (card == null) {
+            card = customCards.getCard(cardName, setCode, artIndex);
+            if (card != null)
+                isCustom = true;
+        }
+        if (card == null) {
+            card = customCards.getCard(cardName, setCode, -1);
+            if (card != null)
+                isCustom = true;
+        }
+        if (card == null) {
             return null;
         }
+        if (isCustom)
+            return foil ? customCards.getFoiled(card) : card;
         return foil ? commonCards.getFoiled(card) : card;
     }
 
@@ -140,12 +188,19 @@ public class StaticData {
         CardDb.CardRequest r = CardRequest.fromString(encodedCardName);
         String cardName = r.cardName;
         CardRules rules = cardReader.attemptToLoadCard(cardName, setCode);
+        CardRules customRules = null;
+        if (customCardReader != null) {
+            customRules = customCardReader.attemptToLoadCard(cardName, setCode);
+        }
         if (rules != null) {
             if (rules.isVariant()) {
                 variantCards.loadCard(cardName, rules);
             } else {
                 commonCards.loadCard(cardName, rules);
             }
+        }
+        if (customRules != null) {
+            customCards.loadCard(cardName, customRules);
         }
     }
 
@@ -187,6 +242,10 @@ public class StaticData {
         return commonCards;
     }
 
+    public CardDb getCustomCards() {
+        return customCards;
+    }
+
     public CardDb getVariantCards() {
         return variantCards;
     }
@@ -218,6 +277,8 @@ public class StaticData {
     public Predicate<PaperCard> getOathbreakerPredicate() { return oathbreakerPredicate; }
 
     public Predicate<PaperCard> getBrawlPredicate() { return brawlPredicate; }
+
+    public String getPrefferedArtOption() { return prefferedArt; }
 
     public void setFilteredHandsEnabled(boolean filteredHandsEnabled){
         this.filteredHandsEnabled = filteredHandsEnabled;
@@ -268,6 +329,30 @@ public class StaticData {
         }
 
         c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.EarliestCoreExp, -1);
+
+        if (null != c) {
+            return c;
+        }
+
+        // I give up!
+        return card;
+    }
+
+    public PaperCard getCardFromEarliestCoreExp(PaperCard card) {
+
+        PaperCard c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.EarliestCoreExp, card.getArtIndex());
+
+        if (null != c && c.hasImage()) {
+            return c;
+        }
+
+        c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.EarliestCoreExp, -1);
+
+        if (null != c && c.hasImage()) {
+            return c;
+        }
+
+        c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.Earliest, -1);
 
         if (null != c) {
             return c;

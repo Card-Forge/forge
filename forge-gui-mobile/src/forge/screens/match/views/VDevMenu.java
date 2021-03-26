@@ -6,8 +6,8 @@ import forge.menu.FMenuItem;
 import forge.screens.match.MatchController;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.ThreadUtil;
 import forge.util.Localizer;
+import forge.util.ThreadUtil;
 
 public class VDevMenu extends FDropDownMenu {
     @Override
@@ -30,6 +30,17 @@ public class VDevMenu extends FDropDownMenu {
                     @Override
                     public void run() {
                         MatchController.instance.getGameController().cheat().tutorForCard();
+                    }
+                });
+            }
+        }));
+        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblRollbackPhase"), new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                ThreadUtil.invokeInGameThread(new Runnable() { //must invoke all these in game thread since they may require synchronous user input
+                    @Override
+                    public void run() {
+                        MatchController.instance.getGameController().cheat().rollbackPhase();
                     }
                 });
             }

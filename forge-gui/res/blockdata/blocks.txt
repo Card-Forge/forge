@@ -94,4 +94,4 @@ Zendikar Rising, 3/6/ZNR, ZNR
 Commander Legends, 3/6/CMR, CMR
 Kaladesh Remastered, 3/6/KLR, KLR
 Kaldheim, 3/6/KHM, KHM
-Time Spiral Remastered, 3/6/TSR, TSR
+Time Spiral Remastered, 3/6/KHM, TSR

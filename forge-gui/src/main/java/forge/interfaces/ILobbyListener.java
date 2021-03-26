@@ -1,7 +1,7 @@
 package forge.interfaces;
 
-import forge.match.GameLobby.GameLobbyData;
-import forge.net.client.ClientGameLobby;
+import forge.gamemodes.match.GameLobby.GameLobbyData;
+import forge.gamemodes.net.client.ClientGameLobby;
 
 public interface ILobbyListener {
     void message(String source, String message);

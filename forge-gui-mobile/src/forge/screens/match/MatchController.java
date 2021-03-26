@@ -6,9 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.FThreads;
-import forge.assets.FSkinImage;
-import forge.util.Localizer;
+import forge.ai.GameState;
+import forge.item.IPaperCard;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
@@ -18,11 +17,10 @@ import com.google.common.collect.Maps;
 
 import forge.Forge;
 import forge.Graphics;
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.assets.FImage;
 import forge.assets.FSkin;
-import forge.assets.FSkinProp;
+import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.assets.ImageCache;
 import forge.card.CardAvatarImage;
@@ -37,14 +35,19 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.AbstractGuiGame;
+import forge.gamemodes.match.HostedMatch;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
+import forge.gui.util.SGuiChoose;
+import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
-import forge.match.AbstractGuiGame;
-import forge.match.HostedMatch;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.views.VAssignCombatDamage;
 import forge.screens.match.views.VPhaseIndicator;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
@@ -56,12 +59,11 @@ import forge.toolbox.FButton;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
-import forge.util.collect.FCollectionView;
 import forge.util.ITriggerEvent;
+import forge.util.Localizer;
 import forge.util.MessageUtil;
 import forge.util.WaitCallback;
-import forge.util.gui.SGuiChoose;
-import forge.util.gui.SOptionPane;
+import forge.util.collect.FCollectionView;
 
 public class MatchController extends AbstractGuiGame {
     private MatchController() { }
@@ -71,6 +73,11 @@ public class MatchController extends AbstractGuiGame {
 
     private static HostedMatch hostedMatch;
     private static MatchScreen view;
+    private static GameState phaseGameState;
+
+    private GameState getPhaseGameState() {
+        return phaseGameState;
+    }
 
     private final Map<PlayerView, InfoTab> zonesToRestore = Maps.newHashMap();
 
@@ -120,6 +127,11 @@ public class MatchController extends AbstractGuiGame {
         if(!GuiBase.isNetworkplay())
             return;
         refreshCardDetails(null);
+    }
+
+    @Override
+    public GameState getGamestate() {
+        return getPhaseGameState();
     }
 
     public boolean hotSeatMode() {
@@ -199,7 +211,7 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public void updatePhase() {
+    public void updatePhase(boolean saveState) {
         final PlayerView p = getGameView().getPlayerTurn();
         final PhaseType ph = getGameView().getPhase();
 
@@ -217,6 +229,18 @@ public class MatchController extends AbstractGuiGame {
         }
         if(GuiBase.isNetworkplay())
             checkStack();
+
+        if (saveState && ph.isMain()) {
+            phaseGameState = new GameState() {
+                @Override //todo get specific card edition for this function?
+                public IPaperCard getPaperCard(final String cardName) {
+                    return FModel.getMagicDb().getCommonCards().getCard(cardName);
+                }
+            };
+            try {
+                phaseGameState.initFromGame(getGameView().getGame());
+            } catch (Exception e) {}
+        }
     }
 
 

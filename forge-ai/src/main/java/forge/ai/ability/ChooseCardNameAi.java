@@ -7,7 +7,10 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
-import forge.ai.*;
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCard;
+import forge.ai.SpecialCardAi;
+import forge.ai.SpellAbilityAi;
 import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardSplitType;

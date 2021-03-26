@@ -17,6 +17,18 @@
  */
 package forge.game.spellability;
 
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -26,7 +38,13 @@ import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
-import forge.game.*;
+import forge.game.CardTraitBase;
+import forge.game.ForgeScript;
+import forge.game.Game;
+import forge.game.GameActionUtil;
+import forge.game.GameEntity;
+import forge.game.GameObject;
+import forge.game.IIdentifiable;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -58,10 +76,6 @@ import forge.util.CardTranslation;
 import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.TextUtil;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.*;
 
 //only SpellAbility can go on the stack
 //override any methods as needed
@@ -969,6 +983,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             // always set this to false, it is only set in CopyEffect
             clone.mayChooseNewTargets = false;
+
+            // Copied spell is not cast face down
+            if (clone instanceof Spell) {
+                Spell spell = (Spell) clone;
+                spell.setCastFaceDown(false);
+            }
 
             clone.triggeringObjects = AbilityKey.newMap(this.triggeringObjects);
 
@@ -1906,7 +1926,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     // Takes one argument like Permanent.Blue+withFlying
     @Override
-    public final boolean isValid(final String restriction, final Player sourceController, final Card source, SpellAbility spellAbility) {
+    public final boolean isValid(final String restriction, final Player sourceController, final Card source, CardTraitBase spellAbility) {
         // Inclusive restrictions are Card types
         final String[] incR = restriction.split("\\.", 2);
         SpellAbility root = getRootAbility();
@@ -1949,7 +1969,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     // Takes arguments like Blue or withFlying
     @Override
-    public boolean hasProperty(final String property, final Player sourceController, final Card source, SpellAbility spellAbility) {
+    public boolean hasProperty(final String property, final Player sourceController, final Card source, CardTraitBase spellAbility) {
         return ForgeScript.spellAbilityHasProperty(this, property, sourceController, source, spellAbility);
     }
 

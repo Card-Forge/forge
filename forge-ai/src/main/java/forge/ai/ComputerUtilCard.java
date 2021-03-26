@@ -1,5 +1,20 @@
 package forge.ai;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -18,7 +33,16 @@ import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactory;
+import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
+import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
@@ -40,12 +64,6 @@ import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.MyRandom;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.*;
-import java.util.Map.Entry;
 
 public class ComputerUtilCard {
     public static Card getMostExpensivePermanentAI(final CardCollectionView list, final SpellAbility spell, final boolean targeted) {
@@ -1196,10 +1214,9 @@ public class ComputerUtilCard {
         final float valueNow = Math.max(valueTempo, threat);
         if (valueNow < 0.2) {   //hard floor to reduce ridiculous odds for instants over time
             return false;
-        } else {
-            final float chance = MyRandom.getRandom().nextFloat();
-            return chance < valueNow;
         }
+        final float chance = MyRandom.getRandom().nextFloat();
+        return chance < valueNow;
     }
 
     /**
@@ -1895,7 +1912,7 @@ public class ComputerUtilCard {
 
             CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
 
-            list = CardLists.getValidCards(list, needsToPlay.split(","), card.getController(), card, null);
+            list = CardLists.getValidCards(list, needsToPlay.split(","), card.getController(), card, sa);
             if (list.isEmpty()) {
                 return AiPlayDecision.MissingNeededCards;
             }

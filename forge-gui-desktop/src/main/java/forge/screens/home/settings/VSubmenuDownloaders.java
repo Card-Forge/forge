@@ -1,32 +1,9 @@
 package forge.screens.home.settings;
 
-import forge.ImageKeys;
-import forge.StaticData;
-import forge.UiCommand;
-import forge.assets.FSkinProp;
-import forge.card.CardDb;
-import forge.card.CardEdition;
-import forge.card.CardEdition.CardInSet;
-import forge.gui.SOverlayUtils;
-import forge.gui.framework.DragCell;
-import forge.gui.framework.DragTab;
-import forge.gui.framework.EDocID;
-import forge.item.PaperCard;
-import forge.item.PaperToken;
-import forge.properties.ForgeConstants;
-import forge.screens.home.EMenuGroup;
-import forge.screens.home.IVSubmenu;
-import forge.screens.home.VHomeUI;
-import forge.token.TokenDb;
-import forge.toolbox.*;
-import forge.util.FileUtil;
-import forge.util.ImageUtil;
-import forge.util.Localizer;
-import forge.util.RuntimeVersion;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,6 +11,43 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
+
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
+import forge.ImageKeys;
+import forge.StaticData;
+import forge.card.CardDb;
+import forge.card.CardEdition;
+import forge.card.CardEdition.CardInSet;
+import forge.gui.SOverlayUtils;
+import forge.gui.UiCommand;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.DragTab;
+import forge.gui.framework.EDocID;
+import forge.item.PaperCard;
+import forge.item.PaperToken;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.skin.FSkinProp;
+import forge.screens.home.EMenuGroup;
+import forge.screens.home.IVSubmenu;
+import forge.screens.home.VHomeUI;
+import forge.token.TokenDb;
+import forge.toolbox.FButton;
+import forge.toolbox.FLabel;
+import forge.toolbox.FOverlay;
+import forge.toolbox.FPanel;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
+import forge.toolbox.FTextArea;
+import forge.util.FileUtil;
+import forge.util.ImageUtil;
+import forge.util.Localizer;
+import forge.util.RuntimeVersion;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Assembles Swing components of utilities submenu singleton.

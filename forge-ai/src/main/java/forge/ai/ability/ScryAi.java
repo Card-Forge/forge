@@ -1,11 +1,16 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicates;
+
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.ApiType;
-import forge.game.card.*;
+import forge.game.card.Card;
 import forge.game.card.Card.SplitCMCMode;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CounterEnumType;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;

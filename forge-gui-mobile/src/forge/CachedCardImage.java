@@ -1,8 +1,10 @@
 package forge;
 
 import com.badlogic.gdx.graphics.Texture;
+
 import forge.assets.ImageCache;
 import forge.game.card.CardView;
+import forge.gui.GuiBase;
 import forge.item.InventoryItem;
 import forge.screens.match.MatchController;
 import forge.util.ImageFetcher;

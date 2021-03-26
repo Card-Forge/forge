@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -14,8 +16,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
-
-import java.util.List;
 
 public class SkipTurnEffect extends SpellAbilityEffect {
 
@@ -54,7 +54,9 @@ public class SkipTurnEffect extends SpellAbilityEffect {
             calcTurn.setSubAbility((AbilitySub) AbilityFactory.getAbility(exile, eff));
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
-            re.setLayer(ReplacementLayer.Other);
+            // Set to layer to Control so it will be applied before "would begin your turn" replacement effects
+            // (Any layer before Other is OK, since default layer is Other.)
+            re.setLayer(ReplacementLayer.Control);
             re.setOverridingAbility(calcTurn);
             eff.addReplacementEffect(re);
             eff.updateStateForView();

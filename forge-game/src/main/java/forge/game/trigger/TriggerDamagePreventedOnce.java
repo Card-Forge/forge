@@ -17,13 +17,13 @@
  */
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 /**
  * <p>
@@ -55,23 +55,14 @@ public class TriggerDamagePreventedOnce extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Object tgt = runParams.get(AbilityKey.DamageTarget);
 
-        if (hasParam("ValidTarget")) {
-            if (!matchesValid(tgt, getParam("ValidTarget").split(","), this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
+            return false;
         }
 
         if (hasParam("CombatDamage")) {
-            if (getParam("CombatDamage").equals("True")) {
-                if (!((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
-                    return false;
-                }
-            } else if (getParam("CombatDamage").equals("False")) {
-                if (((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
-                    return false;
-                }
+            if (getParam("CombatDamage").equals("True") != ((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
+                return false;
             }
         }
 

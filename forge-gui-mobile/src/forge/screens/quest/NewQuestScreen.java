@@ -1,10 +1,14 @@
 package forge.screens.quest;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import com.badlogic.gdx.utils.Align;
 
-import forge.FThreads;
 import forge.Forge;
-import forge.UiCommand;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.MagicColor;
@@ -12,22 +16,25 @@ import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestMode;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gamemodes.quest.QuestWorld;
+import forge.gamemodes.quest.StartingPoolPreferences;
+import forge.gamemodes.quest.StartingPoolPreferences.PoolType;
+import forge.gamemodes.quest.StartingPoolType;
+import forge.gamemodes.quest.data.DeckConstructionRules;
+import forge.gamemodes.quest.data.GameFormatQuest;
+import forge.gamemodes.quest.data.QuestPreferences.QPref;
+import forge.gui.FThreads;
+import forge.gui.UiCommand;
+import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.item.PreconDeck;
 import forge.itemmanager.filters.HistoricFormatSelect;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.CardCollections;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.quest.QuestController;
-import forge.quest.QuestMode;
-import forge.quest.QuestUtil;
-import forge.quest.QuestWorld;
-import forge.quest.StartingPoolPreferences;
-import forge.quest.StartingPoolPreferences.PoolType;
-import forge.quest.StartingPoolType;
-import forge.quest.data.DeckConstructionRules;
-import forge.quest.data.GameFormatQuest;
-import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.home.NewGameMenu;
@@ -44,16 +51,9 @@ import forge.toolbox.FRadioButton;
 import forge.toolbox.FRadioButton.RadioButtonGroup;
 import forge.toolbox.FScrollPane;
 import forge.util.FileUtil;
+import forge.util.Localizer;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
-import forge.util.gui.SOptionPane;
-import forge.util.Localizer;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
 
 public class NewQuestScreen extends FScreen {
 

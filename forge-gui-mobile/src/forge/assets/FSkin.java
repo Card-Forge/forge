@@ -3,27 +3,27 @@ package forge.assets;
 import java.util.HashMap;
 import java.util.Map;
 
-import forge.util.WordUtil;
-import com.badlogic.gdx.utils.Array;
-import forge.Forge;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 
-import forge.FThreads;
+import forge.Forge;
 import forge.assets.FSkinImage.SourceFile;
 import forge.card.CardFaceSymbols;
+import forge.gui.FThreads;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.LoadingOverlay;
 import forge.screens.SplashScreen;
 import forge.toolbox.FProgressBar;
+import forge.util.WordUtil;
 
 public class FSkin {
     private static final Map<FSkinProp, FSkinImage> images = new HashMap<>(512);

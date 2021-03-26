@@ -17,11 +17,11 @@
  */
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
-
-import java.util.Map;
 
 /**
  * <p>
@@ -59,13 +59,10 @@ public class TriggerPayEcho extends Trigger {
                 return false;
             }
         }
-        final Card card = (Card) runParams.get(AbilityKey.Card);
-        if (hasParam("ValidCard")) {
-            if (!card.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
         }
+
         return true;
     }
 

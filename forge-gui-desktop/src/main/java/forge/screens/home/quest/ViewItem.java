@@ -1,12 +1,16 @@
 package forge.screens.home.quest;
 
-import forge.GuiBase;
-import forge.UiCommand;
-import forge.assets.FSkinProp;
+import java.awt.Font;
+
+import javax.swing.SwingUtilities;
+
+import forge.gamemodes.quest.QuestUtil;
+import forge.gamemodes.quest.bazaar.IQuestBazaarItem;
+import forge.gamemodes.quest.data.QuestAssets;
+import forge.gui.GuiBase;
+import forge.gui.UiCommand;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
-import forge.quest.QuestUtil;
-import forge.quest.bazaar.IQuestBazaarItem;
-import forge.quest.data.QuestAssets;
 import forge.screens.bazaar.VBazaarUI;
 import forge.toolbox.FHtmlViewer;
 import forge.toolbox.FLabel;
@@ -14,10 +18,6 @@ import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.*;
 
 /** An update-able panel instance representing a single item. */
 @SuppressWarnings("serial")
@@ -58,13 +58,13 @@ public class ViewItem extends FPanel {
 
     /**
      * @param i0
-     *            &emsp; {@link forge.quest.bazaar.IQuestBazaarItem}
+     *            &emsp; {@link forge.gamemodes.quest.bazaar.IQuestBazaarItem}
      */
     public void setItem(final IQuestBazaarItem i0) {
         this.item = i0;
     }
 
-    /** @return {@link forge.quest.bazaar.IQuestBazaarItem} */
+    /** @return {@link forge.gamemodes.quest.bazaar.IQuestBazaarItem} */
     public IQuestBazaarItem getItem() {
         return this.item;
     }

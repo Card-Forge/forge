@@ -1,12 +1,11 @@
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -35,14 +34,7 @@ public class TriggerPlaneswalkedFrom extends Trigger {
      */
     @Override
     public boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidCard")) {
-            final CardCollection moved = (CardCollection) runParams.get(AbilityKey.Cards);
-            for(Card c : moved) {
-                if (c.isValid(getParam("ValidCard").split(","), this
-                        .getHostCard().getController(), this.getHostCard(), null)) {
-                    return true;
-                }
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Cards))) {
             return false;
         }
 

@@ -17,8 +17,8 @@
  */
 package forge.util;
 
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 
 public final class GuiDisplayUtil {
 

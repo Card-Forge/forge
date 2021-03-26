@@ -1,18 +1,20 @@
 package forge;
 
-import forge.card.CardRarity;
-import forge.card.CardRules;
-import forge.item.PaperCard;
-import forge.limited.CardRanker;
-import forge.properties.ForgeConstants;
-import forge.util.FileUtil;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import forge.card.CardRarity;
+import forge.card.CardRules;
+import forge.gamemodes.limited.CardRanker;
+import forge.gui.GuiBase;
+import forge.item.PaperCard;
+import forge.localinstance.properties.ForgeConstants;
+import forge.util.FileUtil;
 
 @Test(timeOut = 1000, enabled = true)
 public class CardRankerTest {

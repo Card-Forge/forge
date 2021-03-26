@@ -2,8 +2,7 @@ Name:Dromoka's Command
 ManaCost:G W
 Types:Instant
 A:SP$ Charm | Cost$ G W | Choices$ DBPrevent,DBSacrifice,DBPutCounter,DBPump | CharmNum$ 2
-# The target lists a second zone to a Card is returned instead of a SA
-SVar:DBPrevent:DB$ Effect | ValidTgts$ Instant,Sorcery | AILogic$ Prevent | TgtZone$ Stack,Battlefield | TgtPrompt$ Select target instant or sorcery spell to prevent damage from | StaticAbilities$ PreventDmg | Triggers$ TargetMoved | RememberObjects$ Targeted | SpellDescription$ Prevent all damage target instant or sorcery spell would deal this turn.
+SVar:DBPrevent:DB$ Effect | ValidTgts$ Instant,Sorcery | AILogic$ Prevent | TgtZone$ Stack | TgtPrompt$ Select target instant or sorcery spell to prevent damage from | StaticAbilities$ PreventDmg | Triggers$ TargetMoved | RememberObjects$ TargetedSource | SpellDescription$ Prevent all damage target instant or sorcery spell would deal this turn.
 SVar:PreventDmg:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Stack | Affected$ Card.IsRemembered | AddKeyword$ Prevent all damage that would be dealt by CARDNAME. | Description$ Prevent all damage target instant or sorcery spell would deal this turn.
 SVar:TargetMoved:Mode$ ChangesZone | Origin$ Stack | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ExileEffect | TriggerZones$ Command | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
@@ -11,5 +10,4 @@ SVar:DBSacrifice:DB$ Sacrifice | ValidTgts$ Player | TgtPrompt$ Select target pl
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature to put a +1/+1 counter on | AILogic$ Good | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ Fight | TgtPrompt$ Choose target creature you control to fight | StackDescription$ None | SubAbility$ DBFight | SpellDescription$ Target creature you control fights target creature you don't control.
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control to fight
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dromokas_command.jpg
 Oracle:Choose two —\n• Prevent all damage target instant or sorcery spell would deal this turn.\n• Target player sacrifices an enchantment.\n• Put a +1/+1 counter on target creature.\n• Target creature you control fights target creature you don't control.

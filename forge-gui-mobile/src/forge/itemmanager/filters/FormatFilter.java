@@ -1,5 +1,13 @@
 package forge.itemmanager.filters;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import com.badlogic.gdx.utils.Align;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -15,21 +23,13 @@ import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.Utils;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import com.badlogic.gdx.utils.Align;
 
 
 public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T> {

@@ -1,5 +1,11 @@
 package forge.game.ability.effects;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.Maps;
+
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.ability.SpellAbilityEffect;
@@ -9,12 +15,6 @@ import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.collect.Maps;
 
 public class DestroyEffect extends SpellAbilityEffect {
     @Override

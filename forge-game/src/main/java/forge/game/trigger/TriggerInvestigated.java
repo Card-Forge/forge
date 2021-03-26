@@ -17,13 +17,12 @@
  */
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 /**
  * <p>
@@ -68,13 +67,10 @@ public class TriggerInvestigated extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        Player p = (Player) runParams.get(AbilityKey.Player);
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(p, getParam("ValidPlayer").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
         }
-        
+
         if (hasParam("OnlyFirst")) {
             if ((int) runParams.get(AbilityKey.Num) != 1) {
                 return false;

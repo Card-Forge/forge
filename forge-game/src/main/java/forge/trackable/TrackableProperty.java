@@ -37,6 +37,7 @@ public enum TrackableProperty {
     SplitCard(TrackableTypes.BooleanType),
     MergedCards(TrackableTypes.StringType),
     MergedCardsCollection(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    PaperCardBackup(TrackableTypes.IPaperCardType),
 
     Attacking(TrackableTypes.BooleanType),
     Blocking(TrackableTypes.BooleanType),
@@ -65,6 +66,7 @@ public enum TrackableProperty {
     PlayerMayLook(TrackableTypes.PlayerViewCollectionType, FreezeMode.IgnoresFreeze),
     EntityAttachedTo(TrackableTypes.GameEntityViewType),
     EncodedCards(TrackableTypes.CardViewCollectionType),
+    UntilLeavesBattlefield(TrackableTypes.CardViewCollectionType),
     GainControlTargets(TrackableTypes.CardViewCollectionType),
     CloneOrigin(TrackableTypes.CardViewType),
 

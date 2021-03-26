@@ -1,12 +1,12 @@
 package forge.game.trigger;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class TriggerExerted extends Trigger {
     /**
@@ -24,10 +24,8 @@ public class TriggerExerted extends Trigger {
 
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-        final Card exerter = (Card) runParams.get(AbilityKey.Card);
-        if (hasParam("ValidCard")) {
-            return exerter.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null);
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
         }
         return true;
     }

@@ -10,7 +10,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import forge.Forge;
 import forge.Graphics;
-import forge.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.skin.FSkinProp;
 import forge.util.ImageUtil;
 
 /** Properties of various components that make up the skin.

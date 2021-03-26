@@ -1,5 +1,9 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameActionUtil;
@@ -21,13 +25,11 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.util.CardTranslation;
 import forge.util.Lang;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-import forge.util.Localizer;
-import forge.util.CardTranslation;
-
-import java.util.*;
 
 public class DigEffect extends SpellAbilityEffect {
 
@@ -135,7 +137,7 @@ public class DigEffect extends SpellAbilityEffect {
                 }
                 else if (sa.hasParam("RevealValid")) {
                     final String revealValid = sa.getParam("RevealValid");
-                    final CardCollection toReveal = CardLists.getValidCards(top, revealValid, host.getController(), host);
+                    final CardCollection toReveal = CardLists.getValidCards(top, revealValid, host.getController(), host, sa);
                     if (!toReveal.isEmpty()) {
                         game.getAction().reveal(toReveal, host.getController());
                         if (sa.hasParam("RememberRevealed")) {

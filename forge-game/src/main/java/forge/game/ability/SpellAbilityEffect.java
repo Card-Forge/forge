@@ -4,22 +4,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import forge.card.MagicColor;
-import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Table;
 
 import forge.GameCommand;
 import forge.card.CardType;
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardZoneTable;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -35,6 +37,7 @@ import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
+import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 
 /**
@@ -237,6 +240,14 @@ public abstract class SpellAbilityEffect {
                 : AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
 
+    protected final static List<Card> getCardsfromTargets(final SpellAbility sa) {
+        List<Card> cards = getTargetCards(sa);
+        // some card effects can also target a spell
+        for (SpellAbility s : sa.getTargets().getTargetSpells()) {
+            cards.add(s.getHostCard());
+        }
+        return cards;
+    }
 
     protected static void registerDelayedTrigger(final SpellAbility sa, String location, final Iterable<Card> crds) {
         boolean intrinsic = sa.isIntrinsic();
@@ -612,5 +623,42 @@ public abstract class SpellAbilityEffect {
             }
         }
         return combatChanged;
+    }
+
+    protected static GameCommand untilHostLeavesPlayCommand(final CardZoneTable triggerList, final Card hostCard) {
+        final Game game = hostCard.getGame();
+        hostCard.addUntilLeavesBattlefield(triggerList.allCards());
+        return new GameCommand() {
+
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void run() {
+                CardZoneTable untilTable = new CardZoneTable();
+                CardCollectionView untilCards = hostCard.getUntilLeavesBattlefield();
+                // if the list is empty, then the table doesn't need to be checked anymore
+                if (untilCards.isEmpty()) {
+                    return;
+                }
+                for (Table.Cell<ZoneType, ZoneType, CardCollection> cell : triggerList.cellSet()) {
+                    for (Card c : cell.getValue()) {
+                        // check if card is still in the until host leaves play list
+                        if (!untilCards.contains(c)) {
+                            continue;
+                        }
+                        // better check if card didn't changed zones again?
+                        Card newCard = game.getCardState(c, null);
+                        if (newCard == null || !newCard.equalsWithTimestamp(c)) {
+                            continue;
+                        }
+                        // no cause there?
+                        Card movedCard = game.getAction().moveTo(cell.getRowKey(), newCard, null);
+                        untilTable.put(cell.getColumnKey(), cell.getRowKey(), movedCard);
+                    }
+                }
+                untilTable.triggerChangesZoneAll(game);
+            }
+
+        };
     }
 }

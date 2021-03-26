@@ -1,12 +1,13 @@
 package forge.gamesimulationtests.util.playeractions.testactions;
 
+import org.testng.Assert;
+
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.gamesimulationtests.util.IntegerConstraint;
 import forge.gamesimulationtests.util.player.PlayerSpecification;
 import forge.gamesimulationtests.util.player.PlayerSpecificationBuilder;
 import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
-import org.testng.Assert;
 
 public class PlayerAssertAction extends AssertAction {
 	private final PlayerSpecification playerRequirements;

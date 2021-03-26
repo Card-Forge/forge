@@ -1,10 +1,23 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
-import forge.ai.*;
+
+import forge.ai.AiController;
+import forge.ai.AiProps;
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCost;
+import forge.ai.PlayerControllerAi;
+import forge.ai.SpecialAiLogic;
+import forge.ai.SpecialCardAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostSacrifice;

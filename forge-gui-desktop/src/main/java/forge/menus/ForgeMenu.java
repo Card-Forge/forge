@@ -16,8 +16,8 @@ import javax.swing.event.PopupMenuListener;
 import forge.Singletons;
 import forge.gui.GuiUtils;
 import forge.screens.home.online.OnlineMenu;
-import forge.util.ReflectionUtil;
 import forge.util.Localizer;
+import forge.util.ReflectionUtil;
 
 
 public final class ForgeMenu {

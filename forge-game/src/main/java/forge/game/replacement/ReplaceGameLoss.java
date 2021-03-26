@@ -1,9 +1,9 @@
     package forge.game.replacement;
 
-    import forge.game.ability.AbilityKey;
-    import forge.game.card.Card;
-
     import java.util.Map;
+
+import forge.game.ability.AbilityKey;
+import forge.game.card.Card;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -26,10 +26,8 @@ public class ReplaceGameLoss extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidPlayer").split(","), this.getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
+            return false;
         }
 
         return true;

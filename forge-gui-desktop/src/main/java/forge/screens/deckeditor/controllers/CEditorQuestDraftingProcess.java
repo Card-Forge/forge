@@ -17,26 +17,32 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import java.util.Map.Entry;
+
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.limited.IBoosterDraft;
+import forge.gamemodes.quest.QuestEventDraft;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
-import forge.limited.BoosterDraft;
-import forge.limited.IBoosterDraft;
-import forge.quest.QuestEventDraft;
-import forge.screens.deckeditor.views.*;
+import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VBrawlDecks;
+import forge.screens.deckeditor.views.VCommanderDecks;
+import forge.screens.deckeditor.views.VCurrentDeck;
+import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.deckeditor.views.VOathbreakerDecks;
+import forge.screens.deckeditor.views.VTinyLeadersDecks;
 import forge.screens.home.quest.CSubmenuQuestDraft;
 import forge.screens.home.quest.VSubmenuQuestDraft;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
 import forge.util.Localizer;
-
-import java.util.Map.Entry;
 
 /**
  * Updates the deck editor UI as necessary draft selection mode.

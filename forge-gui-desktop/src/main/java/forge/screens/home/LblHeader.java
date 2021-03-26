@@ -1,12 +1,13 @@
 package forge.screens.home;
 
-import forge.toolbox.FSkin;
-import forge.toolbox.FSkin.SkinColor;
-import forge.toolbox.FSkin.SkinnedLabel;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.border.EmptyBorder;
 
-import java.awt.*;
+import forge.toolbox.FSkin;
+import forge.toolbox.FSkin.SkinColor;
+import forge.toolbox.FSkin.SkinnedLabel;
 
 /** 
  * Standardized header label for top of menu display panel.

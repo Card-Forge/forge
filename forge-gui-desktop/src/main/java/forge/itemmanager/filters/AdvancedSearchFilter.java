@@ -6,13 +6,24 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 
-import forge.UiCommand;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+
+import org.apache.commons.lang3.ArrayUtils;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
+
 import forge.gui.GuiUtils;
-import forge.interfaces.IButton;
+import forge.gui.UiCommand;
+import forge.gui.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.itemmanager.AdvancedSearch;
-import forge.itemmanager.ItemManager;
 import forge.itemmanager.AdvancedSearch.IFilterControl;
+import forge.itemmanager.ItemManager;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FOptionPane;
@@ -22,14 +33,6 @@ import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTextField;
 import forge.toolbox.LayoutHelper;
 import forge.util.Localizer;
-
-import javax.swing.*;
-
-import org.apache.commons.lang3.ArrayUtils;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 
 
 public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T> {

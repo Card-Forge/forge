@@ -1,17 +1,28 @@
 package forge.screens.home.quest;
 
-import forge.assets.FSkinProp;
-import forge.game.GameFormat;
-import forge.gui.SOverlayUtils;
-import forge.model.FModel;
-import forge.toolbox.*;
-import forge.util.Localizer;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import forge.game.GameFormat;
+import forge.gui.SOverlayUtils;
+import forge.localinstance.skin.FSkinProp;
+import forge.model.FModel;
+import forge.toolbox.FButton;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FCheckBoxList;
+import forge.toolbox.FLabel;
+import forge.toolbox.FOverlay;
+import forge.toolbox.FPanel;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
+import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 public class DialogChooseFormats {
 

@@ -17,13 +17,12 @@
  */
 package forge.game.trigger;
 
-import forge.game.GameObject;
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 /**
  * <p>
@@ -54,25 +53,14 @@ public class TriggerBecomesTargetOnce extends Trigger {
 
     /** {@inheritDoc}
      * @param runParams*/
-    @SuppressWarnings("unchecked")
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidSource")) {
-            if (!matchesValid(((SpellAbility) runParams.get(AbilityKey.SourceSA)).getHostCard(), getParam("ValidSource").split(","), this.getHostCard())) {
-                return false;
-            }
+
+        if (!matchesValidParam("ValidSource", ((SpellAbility) runParams.get(AbilityKey.SourceSA)).getHostCard())) {
+            return false;
         }
-        if (hasParam("ValidTarget")) {
-            boolean valid = false;
-            for (GameObject b : (Iterable<GameObject>) runParams.get(AbilityKey.Targets)) {
-                if (matchesValid(b, getParam("ValidTarget").split(","), this.getHostCard())) {
-                    valid = true;
-                    break;
-                }
-            }
-            if (!valid) {
-                return false;
-            }
+        if (!matchesValidParam("ValidTarget", runParams.get(AbilityKey.Targets))) {
+            return false;
         }
         return true;
     }

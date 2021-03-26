@@ -1,5 +1,8 @@
 package forge.ai.ability;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -13,9 +16,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.WrappedAbility;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class StoreSVarAi extends SpellAbilityAi {
 

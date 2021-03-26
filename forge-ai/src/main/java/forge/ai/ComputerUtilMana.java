@@ -1,8 +1,26 @@
 package forge.ai;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.*;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+
 import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -13,11 +31,23 @@ import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitPredicates;
 import forge.game.Game;
 import forge.game.GameActionUtil;
-import forge.game.ability.*;
-import forge.game.card.*;
+import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
+import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.*;
+import forge.game.cost.Cost;
+import forge.game.cost.CostAdjustment;
+import forge.game.cost.CostPartMana;
+import forge.game.cost.CostPayEnergy;
+import forge.game.cost.CostPayment;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
@@ -37,10 +67,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.*;
 
 public class ComputerUtilMana {
     private final static boolean DEBUG_MANA_PAYMENT = false;

@@ -4,8 +4,8 @@ import javax.swing.SwingUtilities;
 
 import com.google.common.collect.Iterables;
 
+import forge.gamemodes.quest.bazaar.QuestBazaarManager;
 import forge.gui.framework.ICDoc;
-import forge.quest.bazaar.QuestBazaarManager;
 import forge.toolbox.FLabel;
 
 public enum CBazaarUI implements ICDoc {

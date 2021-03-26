@@ -17,6 +17,17 @@
  */
 package forge.game;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
@@ -27,11 +38,19 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Table;
 import com.google.common.eventbus.EventBus;
+
 import forge.card.CardRarity;
 import forge.card.CardStateName;
 import forge.card.CardType.Supertype;
 import forge.game.ability.AbilityKey;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
+import forge.game.card.CardView;
+import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.event.Event;
 import forge.game.event.GameEventGameOutcome;
@@ -39,7 +58,11 @@ import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.phase.Untap;
-import forge.game.player.*;
+import forge.game.player.IGameEntitiesFactory;
+import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerView;
+import forge.game.player.RegisteredPlayer;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -53,10 +76,6 @@ import forge.trackable.Tracker;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.Visitor;
-
-import java.util.*;
-
-import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
@@ -416,7 +435,7 @@ public class Game {
      * The Direction in which the turn order of this Game currently proceeds.
      */
     public final Direction getTurnOrder() {
-        if (phaseHandler.getPlayerTurn() != null && phaseHandler.getPlayerTurn().hasKeyword("The turn order is reversed.")) {
+        if (phaseHandler.getPlayerTurn() != null && phaseHandler.getPlayerTurn().getAmountOfKeyword("The turn order is reversed.") % 2 == 1) {
             return turnOrder.getOtherDirection();
         }
     	return turnOrder;
@@ -1042,15 +1061,15 @@ public class Game {
         }
     }
 
-    public int getCounterAddedThisTurn(CounterType cType, String validPlayer, String validCard, Card source, Player sourceController, SpellAbility spellAbility) {
+    public int getCounterAddedThisTurn(CounterType cType, String validPlayer, String validCard, Card source, Player sourceController, CardTraitBase ctb) {
         int result = 0;
         if (!countersAddedThisTurn.containsRow(cType)) {
             return result;
         }
         for (Map.Entry<Player, List<Pair<Card, Integer>>> e : countersAddedThisTurn.row(cType).entrySet()) {
-           if (e.getKey().isValid(validPlayer.split(","), sourceController, source, spellAbility)) {
+           if (e.getKey().isValid(validPlayer.split(","), sourceController, source, ctb)) {
                for (Pair<Card, Integer> p : e.getValue()) {
-                   if (p.getKey().isValid(validCard.split(","), sourceController, source, spellAbility)) {
+                   if (p.getKey().isValid(validCard.split(","), sourceController, source, ctb)) {
                        result += p.getValue();
                    }
                }

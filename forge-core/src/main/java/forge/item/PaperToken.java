@@ -1,15 +1,16 @@
 package forge.item;
 
+import java.util.ArrayList;
+import java.util.Locale;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.ImageKeys;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.ColorSet;
 import forge.util.MyRandom;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.Locale;
 
 public class PaperToken implements InventoryItemFromSet, IPaperCard {
     private String name;

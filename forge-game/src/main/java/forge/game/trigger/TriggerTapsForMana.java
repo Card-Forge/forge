@@ -17,15 +17,15 @@
  */
 package forge.game.trigger;
 
+import static forge.util.TextUtil.toManaString;
+
+import java.util.Map;
+
 import forge.card.MagicColor;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.Map;
-
-import static forge.util.TextUtil.toManaString;
 
 /**
  * <p>
@@ -66,22 +66,14 @@ public class TriggerTapsForMana extends Trigger {
             }
         }
 
-        if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get(AbilityKey.Card), getParam("ValidCard").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
         }
-
-        if (hasParam("Player")) {
-            if (!matchesValid(runParams.get(AbilityKey.Player), getParam("Player").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("Player", runParams.get(AbilityKey.Player))) {
+            return false;
         }
-
-        if (hasParam("Activator")) {
-            if (!matchesValid(runParams.get(AbilityKey.Activator), getParam("Activator").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("Activator", runParams.get(AbilityKey.Activator))) {
+            return false;
         }
 
         if (hasParam("Produced")) {

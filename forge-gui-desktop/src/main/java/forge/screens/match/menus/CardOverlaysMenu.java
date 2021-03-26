@@ -1,18 +1,21 @@
 package forge.screens.match.menus;
 
-import forge.menus.MenuUtil;
-import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
-import forge.screens.match.CMatchUI;
-import forge.util.Localizer;
-
-import javax.swing.*;
-
-import java.awt.*;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.SwingUtilities;
+
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.menus.MenuUtil;
+import forge.model.FModel;
+import forge.screens.match.CMatchUI;
+import forge.util.Localizer;
 
 public final class CardOverlaysMenu {
     private final CMatchUI matchUI;

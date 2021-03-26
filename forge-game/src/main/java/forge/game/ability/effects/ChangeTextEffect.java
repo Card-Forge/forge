@@ -13,8 +13,8 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.spellability.SpellAbility;
-import forge.util.TextUtil;
 import forge.util.Localizer;
+import forge.util.TextUtil;
 
 public class ChangeTextEffect extends SpellAbilityEffect {
 
@@ -97,7 +97,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
             changedTypeWordNew = null;
         }
 
-        final List<Card> tgts = getTargetCards(sa);
+        final List<Card> tgts = getCardsfromTargets(sa);
         for (final Card c : tgts) {
             if (changedColorWordOriginal != null && changedColorWordNew != null) {
                 c.addChangedTextColorWord(changedColorWordOriginal, changedColorWordNew, timestamp);
@@ -156,7 +156,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         sb.append("Change the text of ");
 
-        final List<Card> tgts = getTargetCards(sa);
+        final List<Card> tgts = getCardsfromTargets(sa);
         for (final Card c : tgts) {
             sb.append(c).append(" ");
         }

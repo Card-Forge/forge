@@ -1,5 +1,10 @@
 package forge.game.ability.effects;
 
+import java.util.Arrays;
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -7,11 +12,6 @@ import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.spellability.SpellAbility;
-
-import com.google.common.collect.Lists;
-
-import java.util.Arrays;
-import java.util.List;
 
 
 public class AnimateEffect extends AnimateEffectBase {
@@ -24,6 +24,7 @@ public class AnimateEffect extends AnimateEffectBase {
         final Card source = sa.getHostCard();
 
         String animateRemembered = null;
+        String animateImprinted = null;
 
         //if host is not on the battlefield don't apply
         if ((sa.hasParam("UntilHostLeavesPlay") || sa.hasParam("UntilLoseControlOfHost"))
@@ -34,6 +35,10 @@ public class AnimateEffect extends AnimateEffectBase {
         // Remember Objects
         if (sa.hasParam("RememberObjects")) {
             animateRemembered = sa.getParam("RememberObjects");
+        }
+        // Imprint Cards
+        if (sa.hasParam("ImprintCards")) {
+            animateImprinted = sa.getParam("ImprintCards");
         }
 
         // AF specific sa
@@ -132,7 +137,7 @@ public class AnimateEffect extends AnimateEffectBase {
             sVars.addAll(Arrays.asList(sa.getParam("sVars").split(",")));
         }
 
-        List<Card> tgts = getTargetCards(sa);
+        List<Card> tgts = getCardsfromTargets(sa);
 
         for (final Card c : tgts) {
             doAnimate(c, sa, power, toughness, types, removeTypes, finalDesc,
@@ -160,6 +165,18 @@ public class AnimateEffect extends AnimateEffectBase {
                 for (final Object o : AbilityUtils.getDefinedObjects(source, animateRemembered, sa)) {
                     c.addRemembered(o);
                 }
+            }
+
+            // give Imprinted
+            if (animateImprinted != null) {
+                for (final Card imprintedCard : AbilityUtils.getDefinedCards(source, animateImprinted, sa)) {
+                    c.addImprintedCard(imprintedCard);
+                }
+            }
+
+            // Restore immutable to effect
+            if (sa.hasParam("Immutable")) {
+                c.setImmutable(true);
             }
 
             game.fireEvent(new GameEventCardStatsChanged(c));
@@ -210,7 +227,7 @@ public class AnimateEffect extends AnimateEffectBase {
 
         final StringBuilder sb = new StringBuilder();
 
-        final List<Card> tgts = getTargetCards(sa);
+        final List<Card> tgts = getCardsfromTargets(sa);
 
         for (final Card c : tgts) {
             sb.append(c).append(" ");

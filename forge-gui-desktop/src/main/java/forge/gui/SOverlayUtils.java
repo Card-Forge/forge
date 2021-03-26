@@ -9,14 +9,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
-import forge.assets.FSkinProp;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedButton;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * All overlay interaction is handled here.

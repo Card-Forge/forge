@@ -1,5 +1,9 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
@@ -12,10 +16,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -41,7 +41,7 @@ public class BalanceEffect extends SpellAbilityEffect {
         
         for(int i = 0; i < players.size(); i++) {
             // Find the minimum of each Valid per player
-            validCards.add(CardLists.getValidCards(players.get(i).getCardsIn(zone), valid, activator, source));
+            validCards.add(CardLists.getValidCards(players.get(i).getCardsIn(zone), valid, activator, source, sa));
             min = Math.min(min, validCards.get(i).size());
         }
         

@@ -8,8 +8,8 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
 import forge.assets.FSkinColor;
-import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.assets.FSkinFont;
 import forge.game.phase.PhaseType;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;

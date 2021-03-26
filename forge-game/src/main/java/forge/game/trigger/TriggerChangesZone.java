@@ -17,23 +17,27 @@
  */
 package forge.game.trigger;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-import forge.game.ability.AbilityKey;
-import forge.game.ability.AbilityUtils;
-import forge.game.card.*;
-import forge.game.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
-import forge.util.Expressions;
-
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
-import forge.util.Localizer;
 import org.apache.commons.lang3.ArrayUtils;
 
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+
+import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
+import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
+import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
+import forge.util.Expressions;
+import forge.util.Localizer;
 
 /**
  * <p>
@@ -107,7 +111,7 @@ public class TriggerChangesZone extends Trigger {
                 moved = (Card) runParams.get(AbilityKey.CardLKI);
             }
 
-            if (!matchesValid(moved, getParam("ValidCard").split(","), getHostCard())) {
+            if (!matchesValid(moved, getParam("ValidCard").split(","))) {
                 return false;
             }
         }
@@ -120,8 +124,8 @@ public class TriggerChangesZone extends Trigger {
             if (cause == null) {
                 return false;
             }
-            if (!matchesValid(cause, getParam("ValidCause").split(","), getHostCard())) {
-                if (!matchesValid(cause.getHostCard(), getParam("ValidCause").split(","), getHostCard())) {
+            if (!matchesValid(cause, getParam("ValidCause").split(","))) {
+                if (!matchesValid(cause.getHostCard(), getParam("ValidCause").split(","))) {
                     return false;
                 }
             }

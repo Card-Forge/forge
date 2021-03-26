@@ -13,6 +13,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 
+import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObjectPredicates;
@@ -114,7 +115,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
         return result;
     }
 
-    public CardDamageMap filteredMap(String validSource, String validTarget, Card host, SpellAbility sa) {
+    public CardDamageMap filteredMap(String validSource, String validTarget, Card host, CardTraitBase sa) {
         CardDamageMap result = new CardDamageMap();
         Set<Card> filteredSource = null;
         Set<GameEntity> filteredTarget = null;

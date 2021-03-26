@@ -22,7 +22,7 @@ public abstract class GameObject {
      * @param spellAbility
      * @return true, if is valid
      */
-    public boolean isValid(final String[] restrictions, final Player sourceController, final Card source, SpellAbility spellAbility) {
+    public boolean isValid(final String[] restrictions, final Player sourceController, final Card source, CardTraitBase spellAbility) {
         for (final String restriction : restrictions) {
             if (this.isValid(restriction, sourceController, source, spellAbility)) {
                 return true;
@@ -43,7 +43,7 @@ public abstract class GameObject {
      * @param spellAbility
      * @return true, if is valid
      */
-    public boolean isValid(final String restriction, final Player sourceController, final Card source, SpellAbility spellAbility) {
+    public boolean isValid(final String restriction, final Player sourceController, final Card source, CardTraitBase spellAbility) {
         return false;
     }
 
@@ -59,7 +59,7 @@ public abstract class GameObject {
      * @param spellAbility
      * @return true, if successful
      */
-    public boolean hasProperty(final String property, final Player sourceController, final Card source, SpellAbility spellAbility) {
+    public boolean hasProperty(final String property, final Player sourceController, final Card source, CardTraitBase spellAbility) {
         return false;
     }
 }

@@ -1,5 +1,11 @@
 package forge.game.ability.effects;
 
+import static forge.util.TextUtil.toManaString;
+
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -17,12 +23,6 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.List;
-
-import static forge.util.TextUtil.toManaString;
 
 public class ManaEffect extends SpellAbilityEffect {
 

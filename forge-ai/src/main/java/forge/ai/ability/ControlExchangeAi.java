@@ -140,7 +140,7 @@ public class ControlExchangeAi extends SpellAbilityAi {
             return false;
         }
 
-        if (aiWorst != null && aiWorst != bestFirstTgt) {
+        if (aiWorst != bestFirstTgt) {
             if (bestFirstTgt.isCreature() && aiWorst.isCreature()) {
                 if ((ComputerUtilCard.evaluateCreature(bestFirstTgt) > ComputerUtilCard.evaluateCreature(aiWorst) + creatureThreshold) || sa.isMandatory()) {
                     sa.getTargets().add(aiWorst);

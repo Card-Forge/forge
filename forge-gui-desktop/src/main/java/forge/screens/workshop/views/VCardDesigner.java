@@ -1,18 +1,19 @@
 package forge.screens.workshop.views;
 
-import forge.assets.FSkinProp;
+import java.awt.Dimension;
+
+import javax.swing.JPanel;
+import javax.swing.SpringLayout;
+
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.localinstance.skin.FSkinProp;
 import forge.screens.workshop.controllers.CCardDesigner;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.util.Localizer;
-
-import javax.swing.*;
-
-import java.awt.*;
 
 /** 
  * Assembles Swing components of workshop card designer tab.

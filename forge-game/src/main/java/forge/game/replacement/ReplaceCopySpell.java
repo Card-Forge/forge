@@ -20,15 +20,11 @@ public class ReplaceCopySpell extends ReplacementEffect {
         if (((int) runParams.get(AbilityKey.Amount)) <= 0) {
             return false;
         }
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidPlayer").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
+            return false;
         }
-        if (hasParam("ValidSpell")) {
-            if (!matchesValid(runParams.get(AbilityKey.SpellAbility), getParam("ValidSpell").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidSpell", runParams.get(AbilityKey.SpellAbility))) {
+            return false;
         }
         return true;
     }

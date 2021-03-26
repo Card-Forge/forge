@@ -17,20 +17,23 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import java.util.Map.Entry;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
-import forge.UiCommand;
+
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VDeckgen;
@@ -38,8 +41,6 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.util.storage.IStorage;
-
-import java.util.Map.Entry;
 
 /**
  * Child controller for constructed deck editor UI.

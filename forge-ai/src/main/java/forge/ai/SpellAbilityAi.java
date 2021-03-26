@@ -1,7 +1,12 @@
 package forge.ai;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.card.CardStateName;
 import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
@@ -20,10 +25,6 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
 import forge.util.MyRandom;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Base class for API-specific AI logic
@@ -126,7 +127,7 @@ public abstract class SpellAbilityAi {
         if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 4, sa)) {
             return false;
         }
-        if (!ComputerUtilCost.checkDiscardCost(ai, cost, source)) {
+        if (!ComputerUtilCost.checkDiscardCost(ai, cost, source, sa)) {
             return false;
         }
         if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa)) {

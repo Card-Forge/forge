@@ -10,7 +10,6 @@ import com.google.common.collect.Lists;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -47,20 +46,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
 
         if (abCost != null) {
-            // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source, sa)) {
+            if (!willPayCosts(ai, sa, abCost, source)) {
                 return false;
             }
         }
@@ -105,7 +91,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
                 }
                 CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
                 if (sa.hasParam("Choices")) {
-                    choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host);
+                    choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host, sa);
                 }
                 final Combat combat = game.getCombat();
                 choices = CardLists.filter(choices, new Predicate<Card>() {
@@ -155,27 +141,26 @@ public class ChooseSourceAi extends SpellAbilityAi {
             Card bestCreature = ComputerUtilCard.getBestCreatureAI(permanentSources);
             if (bestCreature != null) {
                 return bestCreature;
-            } else {
-                // No optimal creature was found above, so try to broaden the choice.
-                if (!Iterables.isEmpty(options)) {
-                    List<Card> oppCreatures = CardLists.filter(options, Predicates.and(CardPredicates.Presets.CREATURES,
-                            Predicates.not(CardPredicates.isOwner(aiChoser))));
-                    List<Card> aiNonCreatures = CardLists.filter(options, Predicates.and(Predicates.not(CardPredicates.Presets.CREATURES),
-                            CardPredicates.Presets.PERMANENTS, CardPredicates.isOwner(aiChoser)));
+            }
+            // No optimal creature was found above, so try to broaden the choice.
+            if (!Iterables.isEmpty(options)) {
+                List<Card> oppCreatures = CardLists.filter(options, Predicates.and(CardPredicates.Presets.CREATURES,
+                        Predicates.not(CardPredicates.isOwner(aiChoser))));
+                List<Card> aiNonCreatures = CardLists.filter(options, Predicates.and(Predicates.not(CardPredicates.Presets.CREATURES),
+                        CardPredicates.Presets.PERMANENTS, CardPredicates.isOwner(aiChoser)));
 
-                    if (!oppCreatures.isEmpty()) {
-                        return ComputerUtilCard.getBestCreatureAI(oppCreatures);
-                    } else if (!aiNonCreatures.isEmpty()) {
-                        return Aggregates.random(aiNonCreatures);
-                    } else {
-                        return Aggregates.random(options);
-                    }
-                } else if (!game.getStack().isEmpty()) {
-                    // No permanent for the AI to choose. Should normally not happen unless using dev mode or something,
-                    // but when it does happen, choose the top card on stack if possible (generally it'll be the SA
-                    // source) in order to choose at least something, or the game will hang.
-                    return game.getStack().peekAbility().getHostCard();
+                if (!oppCreatures.isEmpty()) {
+                    return ComputerUtilCard.getBestCreatureAI(oppCreatures);
+                } else if (!aiNonCreatures.isEmpty()) {
+                    return Aggregates.random(aiNonCreatures);
+                } else {
+                    return Aggregates.random(options);
                 }
+            } else if (!game.getStack().isEmpty()) {
+                // No permanent for the AI to choose. Should normally not happen unless using dev mode or something,
+                // but when it does happen, choose the top card on stack if possible (generally it'll be the SA
+                // source) in order to choose at least something, or the game will hang.
+                return game.getStack().peekAbility().getHostCard();
             }
 
             // Should never get here

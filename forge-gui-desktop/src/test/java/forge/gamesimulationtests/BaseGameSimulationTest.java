@@ -1,14 +1,7 @@
 package forge.gamesimulationtests;
 
-import forge.ImageCache;
-import forge.Singletons;
-import forge.gamesimulationtests.util.CardDatabaseHelper;
-import forge.gamesimulationtests.util.GameWrapper;
-import forge.gamesimulationtests.util.player.PlayerSpecification;
-import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
-import forge.gamesimulationtests.util.playeractions.testactions.AssertAction;
-import forge.model.FModel;
-import forge.properties.ForgePreferences;
+import javax.imageio.ImageIO;
+
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.testng.PowerMockTestCase;
@@ -16,7 +9,15 @@ import org.testng.Assert;
 import org.testng.IObjectFactory;
 import org.testng.annotations.ObjectFactory;
 
-import javax.imageio.ImageIO;
+import forge.ImageCache;
+import forge.Singletons;
+import forge.gamesimulationtests.util.CardDatabaseHelper;
+import forge.gamesimulationtests.util.GameWrapper;
+import forge.gamesimulationtests.util.player.PlayerSpecification;
+import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
+import forge.gamesimulationtests.util.playeractions.testactions.AssertAction;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 
 @PrepareForTest(value = { FModel.class, Singletons.class, ImageCache.class, ImageIO.class })
 public class BaseGameSimulationTest extends PowerMockTestCase {

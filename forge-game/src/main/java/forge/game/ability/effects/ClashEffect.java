@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import java.util.Map;
+
 import forge.game.GameAction;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityKey;
@@ -13,8 +15,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 public class ClashEffect extends SpellAbilityEffect {
 

@@ -1,8 +1,8 @@
 package forge;
 
-import com.google.common.collect.Lists;
-
 import java.util.List;
+
+import com.google.common.collect.Lists;
 
 /*
  * A class that contains definitions of available Mulligan rule variants and helper methods to access them

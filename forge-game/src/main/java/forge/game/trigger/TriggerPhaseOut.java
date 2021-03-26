@@ -1,11 +1,11 @@
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
-
-import java.util.Map;
 
 public class TriggerPhaseOut extends Trigger {
 
@@ -17,19 +17,9 @@ public class TriggerPhaseOut extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Card phaser = (Card) runParams.get(AbilityKey.Card);
 
-        if (hasParam("ValidCard")) {
-            if (getParam("ValidCard").equals("Card.Self")) {
-                // Since Phased out cards aren't visible in .isValid, use a special check here.
-                // NOTE: All Phase Out Triggers should use ValidCard$ Card.Self
-                if (phaser != this.getHostCard()) {
-                    return false;
-                }
-            } else if (!phaser.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+            return false;
         }
 
         return true;

@@ -1,21 +1,23 @@
 package forge.assets;
 
-import com.badlogic.gdx.Application.ApplicationType;
-import com.badlogic.gdx.Gdx;
-import com.google.common.collect.ImmutableList;
-import forge.FThreads;
-import forge.Forge;
-import forge.download.GuiDownloadZipService;
-import forge.properties.ForgeConstants;
-import forge.screens.SplashScreen;
-import forge.util.FileUtil;
-import forge.util.gui.SOptionPane;
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Gdx;
+import com.google.common.collect.ImmutableList;
+
+import forge.Forge;
+import forge.gui.FThreads;
+import forge.gui.download.GuiDownloadZipService;
+import forge.gui.util.SOptionPane;
+import forge.localinstance.properties.ForgeConstants;
+import forge.screens.SplashScreen;
+import forge.util.FileUtil;
 
 public class AssetsDownloader {
     public static final boolean SHARE_DESKTOP_ASSETS = true; //change to false to test downloading separate assets for desktop version
@@ -141,11 +143,14 @@ public class AssetsDownloader {
             return;
         }
 
+        //android 11 SAF causes some issues, so skip deleting the res folder. res folder should be original and custom cards shouldn't be loaded from res folder
+        boolean allowDeletion = Forge.androidVersion < 30;
         new GuiDownloadZipService("", "resource files",
                 "https://releases.cardforge.org/forge/forge-gui-android/" + Forge.CURRENT_VERSION + "/" + "assets.zip",
-                ForgeConstants.ASSETS_DIR, ForgeConstants.RES_DIR, splashScreen.getProgressBar()).downloadAndUnzip();
+                ForgeConstants.ASSETS_DIR, allowDeletion ? ForgeConstants.RES_DIR : null, splashScreen.getProgressBar()).downloadAndUnzip();
 
-        FSkinFont.deleteCachedFiles(); //delete cached font files in case any skin's .ttf file changed
+        if (allowDeletion)
+            FSkinFont.deleteCachedFiles(); //delete cached font files in case any skin's .ttf file changed
 
         //reload light version of skin after assets updated
         FThreads.invokeInEdtAndWait(new Runnable() {
@@ -161,7 +166,8 @@ public class AssetsDownloader {
         FileUtil.writeFile(versionFile, Forge.CURRENT_VERSION);
 
         //add restart after assets update
-        switch (SOptionPane.showOptionDialog("Resource update finished...", "", null, ImmutableList.of("Restart"))) {
+        String msg  = allowDeletion ? "Resource update finished..." : "Forge misses some files for deletion.\nIf you encounter issues, try deleting the Forge/res folder and/or deleting Forge/cache/fonts folder and try to download and update the assets.";
+        switch (SOptionPane.showOptionDialog(msg, "", null, ImmutableList.of("Restart"))) {
             default:
                 Forge.restart(true);
         }

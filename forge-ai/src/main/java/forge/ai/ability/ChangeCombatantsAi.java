@@ -1,14 +1,14 @@
 package forge.ai.ability;
 
+import java.util.Collection;
+import java.util.Map;
+
 import forge.ai.SpellAbilityAi;
 import forge.game.GameEntity;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
-
-import java.util.Collection;
-import java.util.Map;
 
 public class ChangeCombatantsAi extends SpellAbilityAi {
     /* (non-Javadoc)

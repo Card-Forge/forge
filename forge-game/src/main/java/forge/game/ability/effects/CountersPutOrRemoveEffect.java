@@ -1,5 +1,11 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
@@ -14,12 +20,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
-import java.util.List;
-import java.util.Map;
 
 /** 
  * API for adding to or subtracting from existing counters on a target.

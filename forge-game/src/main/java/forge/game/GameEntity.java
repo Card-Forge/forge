@@ -17,6 +17,12 @@
  */
 package forge.game;
 
+import java.util.Map;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -36,12 +42,6 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
-
-import java.util.Map;
-
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 
 public abstract class GameEntity extends GameObject implements IIdentifiable {

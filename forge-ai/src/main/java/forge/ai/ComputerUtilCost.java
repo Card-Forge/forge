@@ -1,16 +1,41 @@
 package forge.ai;
 
+import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+
 import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CardUtil;
+import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
 import forge.game.combat.Combat;
-import forge.game.cost.*;
+import forge.game.cost.Cost;
+import forge.game.cost.CostDamage;
+import forge.game.cost.CostDiscard;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostPayLife;
+import forge.game.cost.CostPayment;
+import forge.game.cost.CostPutCounter;
+import forge.game.cost.CostRemoveAnyCounter;
+import forge.game.cost.CostRemoveCounter;
+import forge.game.cost.CostSacrifice;
+import forge.game.cost.CostTapType;
+import forge.game.cost.PaymentDecision;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
@@ -19,12 +44,6 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.List;
-import java.util.Set;
 
 
 public class ComputerUtilCost {
@@ -118,7 +137,7 @@ public class ComputerUtilCost {
      *            the source
      * @return true, if successful
      */
-    public static boolean checkDiscardCost(final Player ai, final Cost cost, final Card source) {
+    public static boolean checkDiscardCost(final Player ai, final Cost cost, final Card source, SpellAbility sa) {
         if (cost == null) {
             return true;
         }
@@ -133,7 +152,7 @@ public class ComputerUtilCost {
                 if (type.equals("CARDNAME") && source.getAbilityText().contains("Bloodrush")) {
                     continue;
                 }
-                final CardCollection typeList = CardLists.getValidCards(hand, type.split(","), source.getController(), source, null);
+                final CardCollection typeList = CardLists.getValidCards(hand, type.split(","), source.getController(), source, sa);
                 if (typeList.size() > ai.getMaxHandSize()) {
                     continue;
                 }
@@ -143,10 +162,9 @@ public class ComputerUtilCost {
                     Card pref = ComputerUtil.getCardPreference(ai, source, "DiscardCost", typeList);
                     if (pref == null) {
                         return false;
-                    } else {
-                        typeList.remove(pref);
-                        hand.remove(pref);
                     }
+                    typeList.remove(pref);
+                    hand.remove(pref);
                 }
             }
         }
@@ -251,7 +269,7 @@ public class ComputerUtilCost {
                 }
 
                 final CardCollection sacList = new CardCollection();
-                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, null);
+                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sourceAbility);
 
                 int count = 0;
                 while (count < amount) {
@@ -301,7 +319,7 @@ public class ComputerUtilCost {
                 }
 
                 final CardCollection sacList = new CardCollection();
-                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, null);
+                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sourceAbility);
 
                 int count = 0;
                 while (count < amount) {
@@ -622,7 +640,7 @@ public class ComputerUtilCost {
         return checkLifeCost(payer, cost, source, 4, sa)
             && checkDamageCost(payer, cost, source, 4)
             && (isMine || checkSacrificeCost(payer, cost, source, sa))
-            && (isMine || checkDiscardCost(payer, cost, source))
+            && (isMine || checkDiscardCost(payer, cost, source, sa))
             && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
             && (!source.getName().equals("Perplex") || payer.getCardsIn(ZoneType.Hand).size() < 2)
             && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)
@@ -703,7 +721,7 @@ public class ComputerUtilCost {
                         continue;
                     }
 
-                    final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), source.getController(), source, null);
+                    final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), source.getController(), source, sa);
 
                     int count = 0;
                     while (count < val) {

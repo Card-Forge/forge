@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Align;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
@@ -13,18 +14,18 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
 import forge.card.CardRenderer;
-import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.card.CardZoom;
+import forge.gamemodes.planarconquest.ConquestReward;
 import forge.item.PaperCard;
-import forge.planarconquest.ConquestReward;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
-import forge.util.Utils;
 import forge.util.Localizer;
+import forge.util.Utils;
 
 public class ConquestRewardDialog extends FScrollPane {
     private static final float PADDING = Utils.scale(5);

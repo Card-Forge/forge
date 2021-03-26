@@ -17,15 +17,15 @@
  */
 package forge.deck;
 
-import forge.deck.generation.DeckGeneratorBase;
-import forge.deck.generation.IDeckGenPool;
-import forge.properties.ForgeConstants;
-import forge.util.FileUtil;
-import forge.util.MyRandom;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import forge.deck.generation.DeckGeneratorBase;
+import forge.deck.generation.IDeckGenPool;
+import forge.localinstance.properties.ForgeConstants;
+import forge.util.FileUtil;
+import forge.util.MyRandom;
 
 /**
  * <p>

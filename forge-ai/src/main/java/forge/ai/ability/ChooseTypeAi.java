@@ -1,20 +1,29 @@
 package forge.ai.ability;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.google.common.base.Predicates;
-import forge.ai.*;
+
+import forge.ai.AiCardMemory;
+import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilMana;
+import forge.ai.SpellAbilityAi;
 import forge.card.CardType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class ChooseTypeAi extends SpellAbilityAi {
     @Override

@@ -8,17 +8,17 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
-import forge.GuiBase;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.gamemodes.quest.QuestController;
+import forge.gamemodes.quest.QuestUtil;
+import forge.gamemodes.quest.bazaar.IQuestBazaarItem;
+import forge.gamemodes.quest.bazaar.QuestBazaarManager;
+import forge.gamemodes.quest.bazaar.QuestStallDefinition;
+import forge.gamemodes.quest.data.QuestAssets;
+import forge.gui.GuiBase;
 import forge.model.FModel;
-import forge.quest.QuestController;
-import forge.quest.QuestUtil;
-import forge.quest.bazaar.IQuestBazaarItem;
-import forge.quest.bazaar.QuestBazaarManager;
-import forge.quest.bazaar.QuestStallDefinition;
-import forge.quest.data.QuestAssets;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
@@ -28,8 +28,8 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextArea;
-import forge.util.Utils;
 import forge.util.Localizer;
+import forge.util.Utils;
 
 public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
     private static final Localizer localizer = Localizer.getInstance();

@@ -5,16 +5,16 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-import forge.toolbox.*;
-import forge.util.Localizer;
-import net.miginfocom.swing.MigLayout;
-import forge.assets.FSkinProp;
 import forge.game.GameType;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.DragCell;
@@ -22,6 +22,7 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerContainer;
+import forge.localinstance.skin.FSkinProp;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
@@ -29,7 +30,15 @@ import forge.screens.home.LblHeader;
 import forge.screens.home.StartButton;
 import forge.screens.home.VHomeUI;
 import forge.screens.home.VHomeUI.PnlDisplay;
+import forge.toolbox.FButton;
+import forge.toolbox.FLabel;
+import forge.toolbox.FPanel;
+import forge.toolbox.FRadioButton;
+import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedTextPane;
+import forge.toolbox.JXButtonPanel;
+import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 /** 
  * Assembles Swing components of sealed submenu singleton.

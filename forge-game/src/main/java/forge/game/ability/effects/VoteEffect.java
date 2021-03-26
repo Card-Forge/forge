@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import forge.game.ability.AbilityKey;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -16,6 +15,7 @@ import com.google.common.collect.Maps;
 
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -59,7 +59,7 @@ public class VoteEffect extends SpellAbilityEffect {
             voteType.addAll(Arrays.asList(sa.getParam("VoteType").split(",")));
         } else if (sa.hasParam("VoteCard")) {
             ZoneType zone = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Battlefield;
-            voteType.addAll(CardLists.getValidCards(game.getCardsIn(zone), sa.getParam("VoteCard"), host.getController(), host));
+            voteType.addAll(CardLists.getValidCards(game.getCardsIn(zone), sa.getParam("VoteCard"), host.getController(), host, sa));
         }
         if (voteType.isEmpty()) {
             return;

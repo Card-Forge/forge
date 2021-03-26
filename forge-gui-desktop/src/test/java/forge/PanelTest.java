@@ -1,12 +1,15 @@
 package forge;
 
-import forge.error.BugReporter;
+import java.awt.Color;
+import java.awt.Rectangle;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import org.testng.annotations.Test;
 
-import javax.swing.*;
-
-import java.awt.*;
+import forge.gui.error.BugReporter;
 
 /**
  * <p>
@@ -30,7 +33,7 @@ public class PanelTest extends JFrame {
      */
     @Test(timeOut = 1000, enabled = false)
     public void phaseTest1() {
-        final PanelTest p = new PanelTest();
+        PanelTest p = new PanelTest();
         p.setSize(300, 300);
         p.setVisible(true);
     }

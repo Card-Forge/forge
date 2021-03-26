@@ -67,7 +67,6 @@ import javax.swing.table.TableColumnModel;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.assets.FSkinProp;
 import forge.gui.MouseUtil;
 import forge.item.InventoryItem;
 import forge.itemmanager.ColumnDef;
@@ -76,6 +75,7 @@ import forge.itemmanager.ItemColumnConfig;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FSkin;

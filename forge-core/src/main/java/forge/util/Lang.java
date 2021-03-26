@@ -6,11 +6,16 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.util.lang.*;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
+import forge.util.lang.LangChinese;
+import forge.util.lang.LangEnglish;
+import forge.util.lang.LangGerman;
+import forge.util.lang.LangItalian;
+import forge.util.lang.LangJapanese;
+import forge.util.lang.LangSpanish;
 
 /**
  * Static library containing language-related utility methods.

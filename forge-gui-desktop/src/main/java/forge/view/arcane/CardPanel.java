@@ -17,32 +17,17 @@
  */
 package forge.view.arcane;
 
-import forge.CachedCardImage;
-import forge.FThreads;
-import forge.StaticData;
-import forge.card.CardEdition;
-import forge.card.mana.ManaCost;
-import forge.game.card.Card;
-import forge.game.card.CardView;
-import forge.game.card.CardView.CardStateView;
-import forge.game.keyword.Keyword;
-import forge.game.card.CounterType;
-import forge.game.zone.ZoneType;
-import forge.gui.CardContainer;
-import forge.item.PaperCard;
-import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgeConstants.CounterDisplayType;
-import forge.properties.ForgePreferences.FPref;
-import forge.screens.match.CMatchUI;
-import forge.toolbox.CardFaceSymbols;
-import forge.toolbox.FSkin.SkinnedPanel;
-import forge.toolbox.IDisposable;
-import forge.util.CardTranslation;
-import forge.view.arcane.util.OutlinedLabel;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.font.TextAttribute;
@@ -50,11 +35,38 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.JRootPane;
+import javax.swing.SwingUtilities;
+
+import forge.CachedCardImage;
+import forge.StaticData;
+import forge.card.CardEdition;
+import forge.card.mana.ManaCost;
+import forge.game.card.Card;
+import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
+import forge.game.card.CounterType;
+import forge.game.keyword.Keyword;
+import forge.game.zone.ZoneType;
+import forge.gui.CardContainer;
+import forge.gui.FThreads;
+import forge.item.PaperCard;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeConstants.CounterDisplayType;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
+import forge.screens.match.CMatchUI;
+import forge.toolbox.CardFaceSymbols;
+import forge.toolbox.FSkin.SkinnedPanel;
+import forge.toolbox.IDisposable;
+import forge.util.CardTranslation;
+import forge.view.arcane.util.OutlinedLabel;
 
 /**
  * <p>

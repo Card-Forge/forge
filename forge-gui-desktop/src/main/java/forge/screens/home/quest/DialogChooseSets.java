@@ -1,22 +1,39 @@
 package forge.screens.home.quest;
 
-import forge.assets.FSkinProp;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.function.Predicate;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
 import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.gui.SOverlayUtils;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
-import forge.toolbox.*;
-import forge.util.TextUtil;
+import forge.toolbox.FButton;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FCheckBoxList;
+import forge.toolbox.FLabel;
+import forge.toolbox.FOverlay;
+import forge.toolbox.FPanel;
+import forge.toolbox.FRadioButton;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
+import forge.toolbox.FTextField;
 import forge.util.Localizer;
+import forge.util.TextUtil;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.*;
-import java.util.List;
-import java.util.function.Predicate;
 
 public class DialogChooseSets {
 

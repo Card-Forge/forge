@@ -1,10 +1,10 @@
 package forge.toolbox.special;
 
+import javax.swing.JPanel;
+
 import forge.game.phase.PhaseType;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
 
 /** 
  * TODO: Write javadoc for this type.

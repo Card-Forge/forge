@@ -1,6 +1,6 @@
 package forge.util;
 
-import forge.FThreads;
+import forge.gui.FThreads;
 
 public abstract class WaitCallback<T> extends Callback<T> implements Runnable {
     public class Lock {

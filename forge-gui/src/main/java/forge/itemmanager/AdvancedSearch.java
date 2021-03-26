@@ -1,42 +1,51 @@
 package forge.itemmanager;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
 
-import forge.FThreads;
-import forge.GuiBase;
-import forge.UiCommand;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.CardType;
-import forge.card.MagicColor;
 import forge.card.CardType.CoreType;
 import forge.card.CardType.Supertype;
+import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
 import forge.game.keyword.Keyword;
-import forge.interfaces.IButton;
+import forge.gamemodes.planarconquest.ConquestCommander;
+import forge.gamemodes.planarconquest.ConquestPlane;
+import forge.gamemodes.planarconquest.ConquestRegion;
+import forge.gamemodes.quest.QuestSpellShop;
+import forge.gamemodes.quest.QuestWorld;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
+import forge.gui.UiCommand;
+import forge.gui.interfaces.IButton;
+import forge.gui.util.SGuiChoose;
+import forge.gui.util.SOptionPane;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.FModel;
-import forge.planarconquest.ConquestCommander;
-import forge.planarconquest.ConquestPlane;
-import forge.planarconquest.ConquestRegion;
-import forge.quest.QuestSpellShop;
-import forge.quest.QuestWorld;
-import forge.util.gui.SGuiChoose;
-import forge.util.gui.SOptionPane;
-import forge.util.Localizer;
 import forge.util.CardTranslation;
+import forge.util.Localizer;
 
 public class AdvancedSearch {
     public enum FilterOption {

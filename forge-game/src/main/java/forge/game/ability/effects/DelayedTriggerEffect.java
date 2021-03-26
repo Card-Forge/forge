@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import java.util.Map;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
@@ -14,8 +16,6 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
-
-import java.util.Map;
 
 public class DelayedTriggerEffect extends SpellAbilityEffect {
 

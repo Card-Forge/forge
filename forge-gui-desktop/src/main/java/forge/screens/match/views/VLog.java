@@ -22,8 +22,6 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import net.miginfocom.swing.MigLayout;
-
 import com.google.common.collect.Lists;
 
 import forge.game.GameLogEntry;
@@ -33,13 +31,14 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.GameLogPanel;
 import forge.screens.match.controllers.CLog;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinFont;
 import forge.util.Localizer;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Assembles Swing components of game log report.

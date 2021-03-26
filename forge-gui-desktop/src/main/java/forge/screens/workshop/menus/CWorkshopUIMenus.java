@@ -1,8 +1,9 @@
 package forge.screens.workshop.menus;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JMenu;
 
 /**
  * Gets the menus associated with the Game screen.

@@ -17,6 +17,10 @@
  */
 package forge.game.ability.effects;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
 import forge.GameCommand;
 import forge.card.CardType;
 import forge.card.mana.ManaCost;
@@ -36,10 +40,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
-
-import java.util.List;
-
-import com.google.common.collect.Lists;
 
 public abstract class AnimateEffectBase extends SpellAbilityEffect {
     public static void doAnimate(final Card c, final SpellAbility sa, final Integer power, final Integer toughness,

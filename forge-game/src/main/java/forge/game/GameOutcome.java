@@ -17,7 +17,15 @@
  */
 package forge.game;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.google.common.collect.Lists;
+
 import forge.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerOutcome;
@@ -25,10 +33,6 @@ import forge.game.player.PlayerStatistics;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.item.PaperCard;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * <p>

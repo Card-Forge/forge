@@ -1,6 +1,9 @@
 package forge.ai.simulation;
 
+import java.util.List;
+
 import com.google.common.collect.Lists;
+
 import forge.ai.ComputerUtilAbility;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
@@ -14,8 +17,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
-import java.util.List;
 
 public class GameSimulatorTest extends SimulationTestCase {
 

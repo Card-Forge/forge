@@ -1,8 +1,14 @@
 package forge.game.ability.effects;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.GameCommand;
 import forge.card.CardType;
 import forge.game.Game;
@@ -11,6 +17,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.KeywordInterface;
@@ -21,13 +28,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.Localizer;
-
-import java.util.Arrays;
-import java.util.List;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import forge.game.card.CardFactoryUtil;
 import forge.util.TextUtil;
 
 public class PumpEffect extends SpellAbilityEffect {
@@ -179,7 +179,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
         final StringBuilder sb = new StringBuilder();
         List<GameEntity> tgts = Lists.newArrayList();
-        tgts.addAll(getTargetCards(sa));
+        tgts.addAll(getCardsfromTargets(sa));
         if ((sa.usesTargeting() && sa.getTargetRestrictions().canTgtPlayer()) || sa.hasParam("Defined")) {
             tgts.addAll(getTargetPlayers(sa));
         }
@@ -279,7 +279,7 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         List<GameEntity> tgts = Lists.newArrayList();
-        List<Card> tgtCards = getTargetCards(sa);
+        List<Card> tgtCards = getCardsfromTargets(sa);
         List<Player> tgtPlayers = getTargetPlayers(sa);
         tgts.addAll(tgtCards);
         tgts.addAll(tgtPlayers);

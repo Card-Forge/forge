@@ -17,6 +17,18 @@
  */
 package forge.game.card;
 
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -25,7 +37,12 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import forge.card.*;
+
+import forge.card.CardStateName;
+import forge.card.CardType;
+import forge.card.ColorSet;
+import forge.card.ICardFace;
+import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
@@ -47,8 +64,15 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.spellability.*;
+import forge.game.spellability.AbilityStatic;
+import forge.game.spellability.AbilitySub;
+import forge.game.spellability.AlternativeCost;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.Spell;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityCantBeCast;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
@@ -57,12 +81,6 @@ import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.*;
-import java.util.Map.Entry;
-
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
 
@@ -100,8 +118,10 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
+                if (!hostCard.isFaceDown()) {
+                    hostCard.setOriginalStateAsFaceDown();
+                }
                 hostCard.getGame().getAction().moveToPlay(hostCard, this);
-                //c.setPreFaceDownState(CardStateName.Original);
             }
 
             @Override
@@ -767,8 +787,10 @@ public class CardFactoryUtil {
             final String[] rest = restriction.split(",");
             CardCollection list = CardLists.getValidCards(cc.getGame().getCardsInGame(), rest, cc, c, null);
             for (final Card card : list) {
-                if (!crdname.contains(card.getName())) {
-                    crdname.add(card.getName());
+                String name = card.getName();
+                // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
+                if (!crdname.contains(name) && !name.isEmpty()) {
+                    crdname.add(name);
                 }
             }
             return doXMath(crdname.size(), m, c);
@@ -821,13 +843,13 @@ public class CardFactoryUtil {
 
         if (l[0].startsWith("MostProminentCreatureType")) {
             String restriction = l[0].split(" ")[1];
-            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, cc, c);
+            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, cc, c, null);
             return doXMath(getMostProminentCreatureTypeSize(list), m, c);
         }
 
         if (l[0].startsWith("SecondMostProminentColor")) {
             String restriction = l[0].split(" ")[1];
-            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, cc, c);
+            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, cc, c, null);
             int[] colorSize = SortColorsFromList(list);
             return doXMath(colorSize[colorSize.length - 2], m, c);
         }
@@ -986,7 +1008,7 @@ public class CardFactoryUtil {
         if (sq[0].contains("YourDamageSourcesThisTurn")) {
             Iterable<Card> allSrc = cc.getAssignedDamageSources();
             String restriction = sq[0].split(" ")[1];
-            CardCollection filtered = CardLists.getValidCards(allSrc, restriction, cc, c);
+            CardCollection filtered = CardLists.getValidCards(allSrc, restriction, cc, c, null);
             return doXMath(filtered.size(), m, c);
         }
 
@@ -1831,7 +1853,7 @@ public class CardFactoryUtil {
 
             final String[] splitString = string.split("/", 2);
             String valid = splitString[0].substring(6);
-            final List<Card> list = CardLists.getValidCardsAsList(paidList, valid, source.getController(), source);
+            final List<Card> list = CardLists.getValidCardsAsList(paidList, valid, source.getController(), source, null);
             return doXMath(list.size(), splitString.length > 1 ? splitString[1] : null, source);
         }
 
@@ -4497,6 +4519,10 @@ public class CardFactoryUtil {
                 @Override
                 public boolean canPlay() {
                     if (!(this.getRestrictions().canPlay(this.getHostCard(), this))) {
+                        return false;
+                    }
+
+                    if (StaticAbilityCantBeCast.cantBeCastAbility(this, this.getHostCard(), this.getActivatingPlayer())) {
                         return false;
                     }
 

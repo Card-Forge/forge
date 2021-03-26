@@ -52,20 +52,16 @@ public class StaticAbilityCastWithFlash {
 
 
     public static boolean commonParts(final StaticAbility stAb, final SpellAbility sa, final Card card, final Player activator) {
-        final Card hostCard = stAb.getHostCard();
 
-        if (stAb.hasParam("ValidCard")
-                && !card.isValid(stAb.getParam("ValidCard").split(","), hostCard.getController(), hostCard, null)) {
+        if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
 
-        if (stAb.hasParam("ValidSA")
-                && !sa.isValid(stAb.getParam("ValidSA").split(","), hostCard.getController(), hostCard, null)) {
+        if (!stAb.matchesValidParam("ValidSA", sa)) {
             return false;
         }
 
-        if (stAb.hasParam("Caster") && (activator != null)
-                && !activator.isValid(stAb.getParam("Caster"), hostCard.getController(), hostCard, null)) {
+        if (!stAb.matchesValidParam("Caster", activator)) {
             return false;
         }
         return true;
@@ -92,7 +88,7 @@ public class StaticAbilityCastWithFlash {
             }
 
             String[] valids = stAb.getParam("Targeting").split(",");
-            if (!Iterables.any(sa.getTargets(), GameObjectPredicates.restriction(valids, hostCard.getController(), hostCard, null))) {
+            if (!Iterables.any(sa.getTargets(), GameObjectPredicates.restriction(valids, hostCard.getController(), hostCard, stAb))) {
                 return false;
             }
         }

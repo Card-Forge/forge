@@ -1,13 +1,13 @@
 package forge.screens.limited;
 
-import forge.FThreads;
 import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.deck.DeckGroup;
 import forge.deck.FDeckEditor;
 import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
-import forge.limited.SealedCardPoolGenerator;
+import forge.gamemodes.limited.SealedCardPoolGenerator;
+import forge.gui.FThreads;
 import forge.screens.LaunchScreen;
 import forge.screens.home.NewGameMenu;
 import forge.toolbox.FLabel;

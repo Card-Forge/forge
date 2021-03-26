@@ -1,5 +1,7 @@
 package forge.ai;
 
+import static forge.ai.ComputerUtilCard.getBestCreatureAI;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +23,36 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
-import forge.game.cost.*;
+import forge.game.cost.CostAddMana;
+import forge.game.cost.CostChooseCreatureType;
+import forge.game.cost.CostDamage;
+import forge.game.cost.CostDecisionMakerBase;
+import forge.game.cost.CostDiscard;
+import forge.game.cost.CostDraw;
+import forge.game.cost.CostExert;
+import forge.game.cost.CostExile;
+import forge.game.cost.CostExileFromStack;
+import forge.game.cost.CostExiledMoveToGrave;
+import forge.game.cost.CostFlipCoin;
+import forge.game.cost.CostGainControl;
+import forge.game.cost.CostGainLife;
+import forge.game.cost.CostMill;
+import forge.game.cost.CostPartMana;
+import forge.game.cost.CostPayEnergy;
+import forge.game.cost.CostPayLife;
+import forge.game.cost.CostPutCardToLib;
+import forge.game.cost.CostPutCounter;
+import forge.game.cost.CostRemoveAnyCounter;
+import forge.game.cost.CostRemoveCounter;
+import forge.game.cost.CostReturn;
+import forge.game.cost.CostReveal;
+import forge.game.cost.CostSacrifice;
+import forge.game.cost.CostTap;
+import forge.game.cost.CostTapType;
+import forge.game.cost.CostUnattach;
+import forge.game.cost.CostUntap;
+import forge.game.cost.CostUntapType;
+import forge.game.cost.PaymentDecision;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -30,8 +61,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-
-import static forge.ai.ComputerUtilCard.getBestCreatureAI;
 
 public class AiCostDecision extends CostDecisionMakerBase {
     private final SpellAbility ability;
@@ -185,7 +214,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
         else {
-            CardCollectionView chosen = ComputerUtil.chooseExileFrom(player, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c);
+            CardCollectionView chosen = ComputerUtil.chooseExileFrom(player, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c, ability);
             return null == chosen ? null : PaymentDecision.card(chosen);
         }
     }
@@ -392,7 +421,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             chosen = chosen.subList(0, c);
         }
         else {
-            chosen = ComputerUtil.choosePutToLibraryFrom(player, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c);
+            chosen = ComputerUtil.choosePutToLibraryFrom(player, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c, ability);
         }
         return chosen.isEmpty() ? null : PaymentDecision.card(chosen);
     }
@@ -464,7 +493,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             type = TextUtil.fastReplace(type, "+withTotalPowerGE", "");
             totap = ComputerUtil.chooseTapTypeAccumulatePower(player, type, ability, !cost.canTapSource, Integer.parseInt(totalP), exclude);
         } else {
-            totap = ComputerUtil.chooseTapType(player, type, source, !cost.canTapSource, c, exclude);
+            totap = ComputerUtil.chooseTapType(player, type, source, !cost.canTapSource, c, exclude, ability);
         }
 
         if (totap == null) {
@@ -480,6 +509,9 @@ public class AiCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(CostSacrifice cost) {
         if (cost.payCostFromSource()) {
             return PaymentDecision.card(source);
+        }
+        if (cost.getType().equals("OriginalHost")) {
+            return PaymentDecision.card(ability.getHostCard());
         }
         if (cost.getAmount().equals("All")) {
             // Does the AI want to use Sacrifice All?
@@ -507,7 +539,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
-        CardCollectionView res = ComputerUtil.chooseReturnType(player, cost.getType(), source, ability.getTargetCard(), c);
+        CardCollectionView res = ComputerUtil.chooseReturnType(player, cost.getType(), source, ability.getTargetCard(), c, ability);
         return res.isEmpty() ? null : PaymentDecision.card(res);
     }
 
@@ -825,7 +857,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
-        CardCollectionView list = ComputerUtil.chooseUntapType(player, cost.getType(), source, cost.canUntapSource, c);
+        CardCollectionView list = ComputerUtil.chooseUntapType(player, cost.getType(), source, cost.canUntapSource, c, ability);
 
         if (list == null) {
             System.out.println("Couldn't find a valid card to untap for: " + source.getName());

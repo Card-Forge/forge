@@ -1,6 +1,13 @@
 package forge.ai.ability;
 
-import forge.ai.*;
+import java.util.List;
+import java.util.Map;
+
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCombat;
+import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -15,9 +22,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.util.MyRandom;
-
-import java.util.List;
-import java.util.Map;
 
 public class FightAi extends SpellAbilityAi {
     @Override

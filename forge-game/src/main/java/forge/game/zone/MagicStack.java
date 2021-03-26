@@ -17,8 +17,14 @@
  */
 package forge.game.zone;
 
-import java.util.*;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.Stack;
+import java.util.TreeSet;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import com.esotericsoftware.minlog.Log;
@@ -144,6 +150,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
                 source.setCastSA(cause);
             }
+            source.cleanupExiledWith();
         }
 
         // Always add the ability here and always unfreeze the stack
@@ -277,13 +284,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // AbilityStatic should do nothing below
             return;
         }
-        else {
-            for (OptionalCost s : sp.getOptionalCosts()) {
-                source.addOptionalCostPaid(s);
-            }
-            // The ability is added to stack HERE
-            si = push(sp);
+
+        for (OptionalCost s : sp.getOptionalCosts()) {
+            source.addOptionalCostPaid(s);
         }
+        // The ability is added to stack HERE
+        si = push(sp);
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -433,6 +439,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // when something is added we need to setPriority
             game.getPhaseHandler().setPriority(sp.getActivatingPlayer());
         }
+
+        game.getAction().checkStaticAbilities();
+        game.getTriggerHandler().resetActiveTriggers();
 
         if (sp.isSpell() && !sp.isCopied()) {
             thisTurnCast.add(CardUtil.getLKICopy(sp.getHostCard()));

@@ -1,11 +1,25 @@
 package forge.game.card;
 
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 import forge.ImageKeys;
-import forge.card.*;
+import forge.card.CardEdition;
+import forge.card.CardRarity;
+import forge.card.CardRules;
+import forge.card.CardStateName;
+import forge.card.CardType;
+import forge.card.CardTypeView;
+import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.game.Direction;
 import forge.game.EvenOdd;
@@ -21,22 +35,14 @@ import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
+import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-import forge.util.CardTranslation;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class CardView extends GameEntityView {
     private static final long serialVersionUID = -3624090829028979255L;
-    private Card cardbackup;
 
     public static CardView get(Card c) {
         return c == null ? null : c.getView();
@@ -47,7 +53,12 @@ public class CardView extends GameEntityView {
         return s == null ? null : s.getView();
     }
 
-    public CardView getBackup() { return cardbackup == null ? null : getCardForUi(cardbackup.getPaperCard()); }
+    public CardView getBackup() {
+        if (get(TrackableProperty.PaperCardBackup) == null)
+            return null;
+        return getCardForUi(get(TrackableProperty.PaperCardBackup));
+    }
+
     public static CardView getCardForUi(IPaperCard pc) {
         return Card.getCardForUi(pc).getView();
     }
@@ -519,6 +530,10 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.EncodedCards);
     }
 
+    public FCollectionView<CardView> getUntilLeavesBattlefield() {
+        return get(TrackableProperty.UntilLeavesBattlefield);
+    }
+
     public GameEntityView getEntityAttachedTo() {
         return get(TrackableProperty.EntityAttachedTo);
     }
@@ -767,8 +782,8 @@ public class CardView extends GameEntityView {
         updateZoneText(c);
         updateDamage(c);
 
-        if (cardbackup == null && !c.isFaceDown() && c.hasBackSide()) {
-            cardbackup = c.getCardForUi();
+        if (getBackup() == null && !c.isFaceDown() && c.hasBackSide()) {
+            set(TrackableProperty.PaperCardBackup, c.getPaperCard());
         }
 
         boolean isSplitCard = c.isSplitCard();

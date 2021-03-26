@@ -1,12 +1,12 @@
 package forge.itemmanager.filters;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.google.common.base.Predicate;
 
 import forge.deck.DeckProxy;
 import forge.itemmanager.ItemManager;
-
-import java.util.HashSet;
-import java.util.Set;
 
 
 public class DeckFolderFilter extends ListLabelFilter<DeckProxy> {

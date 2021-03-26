@@ -6,13 +6,18 @@ import java.util.Map.Entry;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 
-import forge.FThreads;
 import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.TextRenderer;
 import forge.deck.CardPool;
+import forge.gamemodes.planarconquest.ConquestData;
+import forge.gamemodes.planarconquest.ConquestPlane;
+import forge.gamemodes.planarconquest.ConquestPreferences;
+import forge.gamemodes.planarconquest.ConquestPreferences.CQPref;
+import forge.gamemodes.planarconquest.ConquestUtil;
+import forge.gui.FThreads;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManager;
@@ -24,15 +29,10 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.model.FModel;
-import forge.planarconquest.ConquestData;
-import forge.planarconquest.ConquestPlane;
-import forge.planarconquest.ConquestPreferences;
-import forge.planarconquest.ConquestUtil;
-import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FEvent;
-import forge.toolbox.FLabel;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FLabel;
 import forge.util.Localizer;
 
 public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionScreen> {

@@ -1,5 +1,8 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
@@ -8,18 +11,20 @@ import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
+import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
-import forge.util.TextUtil;
 import forge.util.Localizer;
-
-import java.util.List;
-import java.util.Map;
+import forge.util.TextUtil;
 
 public class ChangeZoneAllEffect extends SpellAbilityEffect {
     @Override
@@ -37,6 +42,11 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
+        //if host is not on the battlefield don't apply
+        if (sa.hasParam("UntilHostLeavesPlay") && !sa.getHostCard().isInPlay()) {
+            return;
+        }
+
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<ZoneType> origin = ZoneType.listValueOf(sa.getParam("Origin"));
 
@@ -74,7 +84,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         }
 
         if (origin.contains(ZoneType.Library) && sa.hasParam("Search") && sa.getActivatingPlayer().canSearchLibraryWith(sa, null)) {
-            CardCollection libCards = CardLists.getValidCards(cards, "Card.inZoneLibrary", sa.getActivatingPlayer(), source);
+            CardCollection libCards = CardLists.getValidCards(cards, "Card.inZoneLibrary", sa.getActivatingPlayer(), source, sa);
             CardCollection libCardsYouOwn = CardLists.filterControlledBy(libCards, sa.getActivatingPlayer());
             if (!libCardsYouOwn.isEmpty()) { // Only searching one's own library would fire Archive Trap's altcost
                 sa.getActivatingPlayer().incLibrarySearched();
@@ -88,7 +98,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
         }
         if (origin.contains(ZoneType.Hand) && sa.hasParam("Search")) {
-            CardCollection handCards = CardLists.filterControlledBy(CardLists.getValidCards(cards, "Card.inZoneHand", sa.getActivatingPlayer(), source),
+            CardCollection handCards = CardLists.filterControlledBy(CardLists.getValidCards(cards, "Card.inZoneHand", sa.getActivatingPlayer(), source, sa),
                 sa.getActivatingPlayer().getOpponents());
             if (!handCards.isEmpty()) {
                 sa.getActivatingPlayer().getController().reveal(handCards, ZoneType.Hand, handCards.get(0).getOwner());
@@ -260,6 +270,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         triggerList.triggerChangesZoneAll(game);
 
+        if (sa.hasParam("UntilHostLeavesPlay")) {
+            source.addLeavesPlayCommand(untilHostLeavesPlayCommand(triggerList, source));
+        }
+
         // if Shuffle parameter exists, and any amount of cards were owned by
         // that player, then shuffle that library
         if (sa.hasParam("Shuffle")) {
@@ -270,5 +284,4 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
         }
     }
-
 }

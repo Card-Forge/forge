@@ -1,6 +1,11 @@
 package forge.ai.ability;
 
-import forge.ai.*;
+import forge.ai.AiController;
+import forge.ai.AiProps;
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCost;
+import forge.ai.PlayerControllerAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
@@ -43,10 +48,9 @@ public class TapAi extends TapAiBase {
 
         final Card source = sa.getHostCard();
         final Cost abCost = sa.getPayCosts();
-        if (abCost != null) {
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
-                return false;
-            }
+
+        if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
+            return false;
         }
 
         if (!sa.usesTargeting()) {

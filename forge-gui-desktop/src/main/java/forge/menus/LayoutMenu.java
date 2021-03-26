@@ -14,19 +14,19 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 
 import forge.Singletons;
-import forge.assets.FSkinProp;
 import forge.gui.GuiChoose;
 import forge.gui.MouseUtil;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.SLayoutIO;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedMenuItem;
+import forge.util.Localizer;
 import forge.view.FFrame;
 import forge.view.FView;
-import forge.util.Localizer;
 
 /**
  * Returns a JMenu containing options associated with game screen layout.

@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.google.common.base.Enums;
 import com.google.common.base.Function;
+
 import forge.StaticData;
 import forge.deck.CardPool;
 import forge.deck.Deck;

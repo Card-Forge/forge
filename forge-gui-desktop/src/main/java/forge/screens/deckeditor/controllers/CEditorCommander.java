@@ -17,10 +17,16 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
-import forge.UiCommand;
+
 import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -28,6 +34,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
 import forge.game.GameType;
+import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
@@ -41,12 +48,6 @@ import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
 
 /**
  * Child controller for constructed deck editor UI.

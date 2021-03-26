@@ -22,6 +22,7 @@ import java.util.Comparator;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
+import forge.game.CardTraitBase;
 import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -207,7 +208,7 @@ public final class CardPredicates {
         };
     }
 
-    public static final Predicate<Card> restriction(final String[] restrictions, final Player sourceController, final Card source, final SpellAbility spellAbility) {
+    public static final Predicate<Card> restriction(final String[] restrictions, final Player sourceController, final Card source, final CardTraitBase spellAbility) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {

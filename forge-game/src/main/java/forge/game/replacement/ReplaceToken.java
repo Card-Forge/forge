@@ -1,10 +1,10 @@
 package forge.game.replacement;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
-
-import java.util.Map;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -38,22 +38,13 @@ public class ReplaceToken extends ReplacementEffect {
             }
         }
 
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidPlayer").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
+            return false;
+        }
+        if (!matchesValidParam("ValidToken", runParams.get(AbilityKey.Token))) {
+            return false;
         }
 
-        if (hasParam("ValidToken")) {
-            if (runParams.containsKey(AbilityKey.Token)) {
-                if (!matchesValid(runParams.get(AbilityKey.Token), getParam("ValidToken").split(","), getHostCard())) {
-                    return false;
-                }
-            } else {
-                // in case RE is not updated yet
-                return false;
-            }
-        }
 
         return true;
     }

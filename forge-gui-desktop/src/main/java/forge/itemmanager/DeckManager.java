@@ -4,7 +4,9 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JMenu;
@@ -12,22 +14,19 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import forge.deck.Deck;
-import forge.screens.deckeditor.controllers.CEditorConstructed;
-import forge.screens.home.quest.DialogChooseFormats;
-import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
-import forge.UiCommand;
-import forge.assets.FSkinProp;
+import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.IHasGameType;
+import forge.gamemodes.quest.QuestWorld;
 import forge.gui.GuiUtils;
+import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.item.InventoryItem;
 import forge.itemmanager.filters.AdvancedSearchFilter;
@@ -42,17 +41,20 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.views.ItemCellRenderer;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemTableColumn;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
-import forge.quest.QuestWorld;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.controllers.ACEditorBase;
+import forge.screens.deckeditor.controllers.CEditorConstructed;
 import forge.screens.deckeditor.controllers.CEditorLimited;
 import forge.screens.deckeditor.controllers.CEditorQuest;
+import forge.screens.home.quest.DialogChooseFormats;
 import forge.screens.home.quest.DialogChooseSets;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+import forge.util.Localizer;
 
 /**
  * ItemManager for decks
@@ -121,7 +123,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     /**
      * Sets the delete command.
      *
-     * @param c0 &emsp; {@link forge.UiCommand} command executed on delete.
+     * @param c0 &emsp; {@link forge.forge.gui.UiCommand} command executed on delete.
      */
     public void setDeleteCommand(final UiCommand c0) {
         this.cmdDelete = c0;
@@ -130,7 +132,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     /**
      * Sets the select command.
      *
-     * @param c0 &emsp; {@link forge.UiCommand} command executed on row select.
+     * @param c0 &emsp; {@link forge.forge.gui.UiCommand} command executed on row select.
      */
     public void setSelectCommand(final UiCommand c0) {
         this.cmdSelect = c0;

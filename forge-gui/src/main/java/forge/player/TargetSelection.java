@@ -17,10 +17,17 @@
  */
 package forge.player;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameEntityView;
@@ -37,14 +44,8 @@ import forge.game.spellability.StackItemView;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.match.input.InputSelectTargets;
+import forge.gamemodes.match.input.InputSelectTargets;
 import forge.util.Aggregates;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -317,17 +318,15 @@ public class TargetSelection {
                 // Not enough targets, cancel targeting
                 return false;
             }
-            else {
-                Object madeChoice = mandatory ? controller.getGui().one(message, selectOptions) : controller.getGui().oneOrNone(message, selectOptions);
-                if (madeChoice == null) {
-                    return false;
-                }
-                if (madeChoice instanceof StackItemView) {
-                    ability.getTargets().add(stackItemViewCache.get(madeChoice).getSpellAbility(true));
-                }
-                else {// 'FINISH TARGETING' chosen
-                    bTargetingDone = true;
-                }
+            Object madeChoice = mandatory ? controller.getGui().one(message, selectOptions) : controller.getGui().oneOrNone(message, selectOptions);
+            if (madeChoice == null) {
+                return false;
+            }
+            if (madeChoice instanceof StackItemView) {
+                ability.getTargets().add(stackItemViewCache.get(madeChoice).getSpellAbility(true));
+            }
+            else {// 'FINISH TARGETING' chosen
+                bTargetingDone = true;
             }
         }
         return true;

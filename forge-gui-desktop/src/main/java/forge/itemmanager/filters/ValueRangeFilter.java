@@ -1,5 +1,12 @@
 package forge.itemmanager.filters;
 
+import java.awt.Component;
+
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import com.google.common.base.Predicate;
 
 import forge.card.CardRules;
@@ -12,12 +19,6 @@ import forge.toolbox.FSpinner;
 import forge.toolbox.FTextField;
 import forge.toolbox.LayoutHelper;
 import forge.util.ComparableOp;
-
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import java.awt.*;
 
 
 public abstract class ValueRangeFilter<T extends InventoryItem> extends ItemFilter<T> {

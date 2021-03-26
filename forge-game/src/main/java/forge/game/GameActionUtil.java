@@ -17,6 +17,10 @@
  */
 package forge.game;
 
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -27,8 +31,13 @@ import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardPlayOption;
 import forge.game.card.CardPlayOption.PayManaCost;
+import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -37,17 +46,20 @@ import forge.game.player.PlayerController;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.spellability.*;
+import forge.game.spellability.AbilityManaPart;
+import forge.game.spellability.AbilitySub;
+import forge.game.spellability.AlternativeCost;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.OptionalCostValue;
+import forge.game.spellability.Spell;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.List;
 
 
 /**
@@ -247,7 +259,7 @@ public final class GameActionUtil {
         if (sa.isManaAbility() && sa.isActivatedAbility() && activator.hasKeyword("Piracy") && source.isLand() && source.isInPlay() && !activator.equals(source.getController()) && sa.getPayCosts().hasTapCost()) {
             SpellAbility newSA = sa.copy(activator);
             // to bypass Activator restriction, set Activator to Player
-            sa.getRestrictions().setActivator("Player");
+            newSA.getRestrictions().setActivator("Player");
 
             // extra Mana restriction to only Spells
             for (AbilityManaPart mp : newSA.getAllManaParts()) {

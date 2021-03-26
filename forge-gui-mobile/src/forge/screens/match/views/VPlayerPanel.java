@@ -12,15 +12,15 @@ import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
-import forge.assets.FSkinColor.Colors;
 import forge.game.card.CardView;
 import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.toolbox.FCardPanel;
@@ -418,12 +418,13 @@ public class VPlayerPanel extends FContainer {
         @Override
         public void draw(Graphics g) {
             adjustHeight = 1;
+            float divider = Gdx.app.getGraphics().getHeight() > 900 ? 1.2f : 2f;
             if(Forge.altPlayerLayout && Forge.isLandscapeMode()) {
                 if (poisonCounters == 0 && energyCounters == 0 && experienceCounters == 0) {
                     g.fillRect(Color.DARK_GRAY, 0, 0, INFO2_FONT.getBounds(lifeStr).width+1, INFO2_FONT.getBounds(lifeStr).height+1);
                     g.drawText(lifeStr, INFO2_FONT, INFO_FORE_COLOR.getColor(), 0, 0, getWidth(), getHeight(), false, Align.left, false);
                 } else {
-                    float halfHeight = getHeight() / 2;
+                    float halfHeight = getHeight() / divider;
                     float textStart = halfHeight + Utils.scale(1);
                     float textWidth = getWidth() - textStart;
                     int mod = 1;

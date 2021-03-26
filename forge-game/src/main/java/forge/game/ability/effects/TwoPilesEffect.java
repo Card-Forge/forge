@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -11,9 +13,8 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 import forge.util.Localizer;
-
-import java.util.List;
 
 public class TwoPilesEffect extends SpellAbilityEffect {
 
@@ -52,6 +53,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
         final Card card = sa.getHostCard();
         ZoneType zone = null;
         boolean pile1WasChosen = true;
+        boolean isLeftRightPile = sa.hasParam("LeftRightPile");
 
         if (sa.hasParam("Zone")) {
             zone = ZoneType.smartValueOf(sa.getParam("Zone"));
@@ -83,14 +85,20 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                 } else {
                     pool0 = p.getCardsIn(zone);
                 }
-                CardCollection pool = CardLists.getValidCards(pool0, valid, card.getController(), card);
+                CardCollection pool = CardLists.getValidCards(pool0, valid, card.getController(), card, sa);
                 int size = pool.size();
                 if (size == 0) {
                     return;
                 }
 
-                String title = "One".equals(sa.getParamOrDefault("FaceDown", "False")) ? Localizer.getInstance().getMessage("lblSelectCardForFaceDownPile") :
-                        Localizer.getInstance().getMessage("lblDivideCardIntoTwoPiles");
+                String title;
+                if("One".equals(sa.getParamOrDefault("FaceDown", "False"))) {
+                    title = Localizer.getInstance().getMessage("lblSelectCardForFaceDownPile");
+                } else if (isLeftRightPile) {
+                    title = Localizer.getInstance().getMessage("lblSelectCardForLeftPile");
+                } else {
+                    title = Localizer.getInstance().getMessage("lblDivideCardIntoTwoPiles");
+                }
 
                 card.clearRemembered();
 
@@ -103,20 +111,49 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                 //System.out.println("Pile 2:" + pile2);
 
 
-                pile1WasChosen = chooser.getController().chooseCardsPile(sa, pile1, pile2, sa.getParamOrDefault("FaceDown", "False"));
+                if (isLeftRightPile) {
+                    pile1WasChosen = true;
+                } else {
+                    pile1WasChosen = chooser.getController().chooseCardsPile(sa, pile1, pile2, sa.getParamOrDefault("FaceDown", "False"));
+                }
                 CardCollectionView chosenPile = pile1WasChosen ? pile1 : pile2;
                 CardCollectionView unchosenPile = !pile1WasChosen ? pile1 : pile2;
                 
-                StringBuilder notification = new StringBuilder(chooser + " " + Localizer.getInstance().getMessage("lblChoosesPile") + " " + (pile1WasChosen ? "1" : "2") + ":\n");
-                if (!chosenPile.isEmpty()) {
-                    for (Card c : chosenPile) {
-                        notification.append(c.getName()).append("\n");
+                StringBuilder notification = new StringBuilder();
+                if (isLeftRightPile) {
+                    notification.append("\n");
+                    notification.append(Lang.getInstance().getPossessedObject(separator.getName(), Localizer.getInstance().getMessage("lblLeftPile")));
+                    notification.append("\n--------------------\n");
+                    if (!chosenPile.isEmpty()) {
+                        for (Card c : chosenPile) {
+                            notification.append(c.getName()).append("\n");
+                        }
+                    } else {
+                        notification.append("(" + Localizer.getInstance().getMessage("lblEmptyPile") + ")\n");
                     }
+                    notification.append("\n");
+                    notification.append(Lang.getInstance().getPossessedObject(separator.getName(), Localizer.getInstance().getMessage("lblRightPile")));
+                    notification.append("\n--------------------\n");
+                    if (!unchosenPile.isEmpty()) {
+                        for (Card c : unchosenPile) {
+                            notification.append(c.getName()).append("\n");
+                        }
+                    } else {
+                        notification.append("(" + Localizer.getInstance().getMessage("lblEmptyPile") + ")\n");
+                    }
+                    p.getGame().getAction().notifyOfValue(sa, separator, notification.toString(), separator);
                 } else {
-                    notification.append("(" + Localizer.getInstance().getMessage("lblEmptyPile") + ")");
+                    notification.append(chooser + " " + Localizer.getInstance().getMessage("lblChoosesPile") + " " + (pile1WasChosen ? "1" : "2") + ":\n");
+                    if (!chosenPile.isEmpty()) {
+                        for (Card c : chosenPile) {
+                            notification.append(c.getName()).append("\n");
+                        }
+                    } else {
+                        notification.append("(" + Localizer.getInstance().getMessage("lblEmptyPile") + ")");
+                    }
+                    p.getGame().getAction().notifyOfValue(sa, chooser, notification.toString(), chooser);
                 }
 
-                p.getGame().getAction().notifyOfValue(sa, chooser, notification.toString(), chooser);
 
                 // take action on the chosen pile
                 if (sa.hasParam("ChosenPile")) {

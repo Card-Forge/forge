@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+
 import com.google.common.collect.Lists;
 
 import forge.game.Game;
@@ -10,8 +12,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
-
-import java.util.List;
 
 
 public class ControlExchangeEffect extends SpellAbilityEffect {

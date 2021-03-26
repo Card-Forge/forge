@@ -1,5 +1,10 @@
 package forge.game.ability.effects;
 
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.Maps;
+
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -11,13 +16,8 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.util.Localizer;
 import forge.util.CardTranslation;
-
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.collect.Maps;
+import forge.util.Localizer;
 
 /** 
  * PeeakAndReveal is a simplified why of handling something that could
@@ -54,7 +54,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
                 peekCards.add(library.get(i));
             }
 
-            CardCollectionView revealableCards = CardLists.getValidCards(peekCards, revealValid, sa.getActivatingPlayer(), sa.getHostCard());
+            CardCollectionView revealableCards = CardLists.getValidCards(peekCards, revealValid, sa.getActivatingPlayer(), sa.getHostCard(), sa);
             boolean doReveal = !sa.hasParam("NoReveal") && !revealableCards.isEmpty();
             if (!sa.hasParam("NoPeek")) {
                 peekingPlayer.getController().reveal(peekCards, ZoneType.Library, peekingPlayer, CardTranslation.getTranslatedName(source.getName()) + " - " + Localizer.getInstance().getMessage("lblRevealingCardFrom") + " ");

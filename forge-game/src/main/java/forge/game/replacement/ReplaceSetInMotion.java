@@ -17,10 +17,10 @@
  */
 package forge.game.replacement;
 
+import java.util.Map;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
-
-import java.util.Map;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -43,10 +43,8 @@ public class ReplaceSetInMotion extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidPlayer")) {
-            if (!matchesValid(runParams.get(AbilityKey.Affected), getParam("ValidPlayer").split(","), getHostCard())) {
-                return false;
-            }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
+            return false;
         }
 
         return true;

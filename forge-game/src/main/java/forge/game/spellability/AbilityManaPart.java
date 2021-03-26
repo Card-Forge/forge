@@ -17,8 +17,12 @@
  */
 package forge.game.spellability;
 
-import com.google.common.collect.Lists;
+import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Lists;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -33,15 +37,12 @@ import forge.game.card.CardUtil;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
-import forge.game.replacement.*;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementType;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -273,6 +274,10 @@ public class AbilityManaPart implements java.io.Serializable {
 
     public void setExtraManaRestriction(String str) {
         this.extraManaRestrictions = str;
+    }
+
+    public String getExtraManaRestriction() {
+        return extraManaRestrictions;
     }
 
     public boolean meetsManaRestrictions(final SpellAbility sa) {

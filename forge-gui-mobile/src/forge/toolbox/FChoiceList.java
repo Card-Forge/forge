@@ -1,22 +1,23 @@
 package forge.toolbox;
 
+import static forge.card.CardRenderer.MANA_SYMBOL_SIZE;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import com.badlogic.gdx.utils.Align;
+
 import forge.Graphics;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
-import forge.assets.FSkinFont;
-import forge.assets.FSkinProp;
-import forge.assets.IHasSkinProp;
-import forge.assets.TextRenderer;
 import forge.assets.FSkinColor.Colors;
+import forge.assets.FSkinFont;
+import forge.assets.TextRenderer;
 import forge.card.CardFaceSymbols;
 import forge.card.CardRenderer;
-import forge.card.CardZoom;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.card.CardZoom;
 import forge.card.CardZoom.ActivateHandler;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
@@ -29,13 +30,13 @@ import forge.itemmanager.AdvancedSearch.FilterOperator;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.filters.AdvancedSearchFilter;
 import forge.itemmanager.filters.ItemFilter;
+import forge.localinstance.skin.FSkinProp;
+import forge.localinstance.skin.IHasSkinProp;
 import forge.screens.match.MatchController;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VStack;
 import forge.util.TextUtil;
 import forge.util.Utils;
-
-import static forge.card.CardRenderer.MANA_SYMBOL_SIZE;
 
 public class FChoiceList<T> extends FList<T> implements ActivateHandler {
     public static final FSkinColor ITEM_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);

@@ -1,45 +1,40 @@
 package forge.screens.constructed;
 
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import forge.GuiBase;
-import forge.assets.ImageCache;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckSection;
-import forge.deck.DeckType;
-import forge.deck.FDeckChooser;
-
-import forge.net.server.FServerManager;
-import forge.util.Localizer;
-
-import forge.util.MyRandom;
-import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.Iterables;
 
-import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
 import forge.ai.AIOption;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.ImageCache;
+import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckSection;
+import forge.deck.DeckType;
+import forge.deck.FDeckChooser;
 import forge.game.GameType;
-import forge.interfaces.ILobbyView;
+import forge.gamemodes.match.GameLobby;
+import forge.gamemodes.match.LobbySlot;
+import forge.gamemodes.match.LobbySlotType;
+import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
+import forge.gamemodes.net.server.FServerManager;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
+import forge.gui.interfaces.ILobbyView;
 import forge.interfaces.IPlayerChangeListener;
-import forge.match.GameLobby;
-import forge.match.LobbySlot;
-import forge.match.LobbySlotType;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
-import forge.net.event.UpdateLobbyPlayerEvent;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
@@ -47,11 +42,14 @@ import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
-import forge.toolbox.FList;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.util.Localizer;
+import forge.util.MyRandom;
+import forge.util.TextUtil;
 import forge.util.Utils;
 
 public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {

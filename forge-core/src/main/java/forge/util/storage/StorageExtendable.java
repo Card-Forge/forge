@@ -17,9 +17,9 @@
  */
 package forge.util.storage;
 
-import forge.util.IItemReader;
+import java.util.Map;
 
-import java.util.*;
+import forge.util.IItemReader;
 
 /**
  * <p>
