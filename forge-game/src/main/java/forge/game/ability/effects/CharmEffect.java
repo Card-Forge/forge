@@ -58,8 +58,9 @@ public class CharmEffect extends SpellAbilityEffect {
         List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
         final int num;
         boolean additionalDesc = sa.hasParam("AdditionalDescription");
+        boolean optional = sa.hasParam("Optional");
         // hotfix for complex cards when using getCardForUi
-        if (source.getController() == null && additionalDesc) {
+        if (source.getController() == null && additionalDesc && !optional) {
             // using getCardForUi game is not set, so can't guess max charm
             num = Integer.MAX_VALUE;
         } else {
@@ -67,7 +68,6 @@ public class CharmEffect extends SpellAbilityEffect {
         }
         final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParamOrDefault("MinCharmNum", "1"), sa) : num;
 
-        boolean optional = sa.hasParam("Optional");
         boolean repeat = sa.hasParam("CanRepeatModes");
         boolean random = sa.hasParam("Random");
         boolean limit = sa.hasParam("ActivationLimit");
