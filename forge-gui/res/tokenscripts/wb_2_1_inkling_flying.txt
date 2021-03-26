@@ -1,0 +1,7 @@
+Name:Inkling
+ManaCost:no cost
+Types:Creature Inkling
+Colors:white,black
+PT:2/1
+K:Flying
+Oracle:Flying
