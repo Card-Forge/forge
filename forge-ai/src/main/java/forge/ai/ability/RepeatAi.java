@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 
+import forge.ai.AiAttackController;
 import forge.ai.AiController;
 import forge.ai.ComputerUtilCost;
 import forge.ai.PlayerControllerAi;
@@ -14,7 +15,7 @@ public class RepeatAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Player opp = ai.getWeakestOpponent();
+        final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
 
         if (sa.usesTargeting()) {
             if (!opp.canBeTargetedBy(sa)) {
@@ -44,9 +45,8 @@ public class RepeatAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-    	
     	 if (sa.usesTargeting()) {
-         	final Player opp = ai.getWeakestOpponent();
+         	final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
              if (sa.canTarget(opp)) {
                  sa.resetTargets();
                  sa.getTargets().add(opp);

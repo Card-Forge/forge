@@ -66,7 +66,6 @@ public class TapAi extends TapAiBase {
                 // Set PayX here to maximum value.
                 // TODO need to set XManaCostPaid for targets, maybe doesn't need PayX anymore?
                 sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai));
-                // TODO since change of PayX. the shouldCastLessThanMax logic might be faulty
             }
 
             sa.resetTargets();

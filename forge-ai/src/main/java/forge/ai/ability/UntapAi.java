@@ -6,6 +6,7 @@ import java.util.Map;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
+import forge.ai.AiAttackController;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
@@ -130,7 +131,8 @@ public class UntapAi extends SpellAbilityAi {
         Player targetController = ai;
 
         if (sa.isCurse()) {
-            targetController = ai.getWeakestOpponent();
+            // TODO search through all opponents, may need to check if different controllers allowed
+            targetController = AiAttackController.choosePreferredDefenderPlayer(ai);
         }
 
         CardCollection list = CardLists.getTargetableCards(targetController.getCardsIn(ZoneType.Battlefield), sa);
@@ -149,8 +151,7 @@ public class UntapAi extends SpellAbilityAi {
         }
 
         CardCollection untapList = targetUntapped ? list : CardLists.filter(list, Presets.TAPPED);
-        // filter out enchantments and planeswalkers, their tapped state doesn't
-        // matter.
+        // filter out enchantments and planeswalkers, their tapped state doesn't matter.
         final String[] tappablePermanents = {"Creature", "Land", "Artifact"};
         untapList = CardLists.getValidCards(untapList, tappablePermanents, source.getController(), source, sa);
 

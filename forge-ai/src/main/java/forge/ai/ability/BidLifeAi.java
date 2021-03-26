@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import java.util.List;
 
+import forge.ai.AiAttackController;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -24,7 +25,7 @@ public class BidLifeAi extends SpellAbilityAi {
         if (tgt != null) {
             sa.resetTargets();
             if (tgt.canTgtCreature()) {
-                List<Card> list = CardLists.getTargetableCards(aiPlayer.getWeakestOpponent().getCardsIn(ZoneType.Battlefield), sa);
+                List<Card> list = CardLists.getTargetableCards(AiAttackController.choosePreferredDefenderPlayer(aiPlayer).getCardsIn(ZoneType.Battlefield), sa);
                 list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
                 if (list.isEmpty()) {
                     return false;

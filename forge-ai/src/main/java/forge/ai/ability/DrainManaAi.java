@@ -23,8 +23,7 @@ public class DrainManaAi extends SpellAbilityAi {
 
         if (tgt == null) {
             // assume we are looking to tap human's stuff
-            // TODO - check for things with untap abilities, and don't tap
-            // those.
+            // TODO - check for things with untap abilities, and don't tap those.
             final List<Player> defined = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
             if (!defined.contains(opp)) {

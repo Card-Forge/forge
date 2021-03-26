@@ -91,7 +91,7 @@ public class AiAttackController {
 
     public AiAttackController(final Player ai, boolean nextTurn) {
         this.ai = ai;
-        this.defendingOpponent = choosePreferredDefenderPlayer();
+        this.defendingOpponent = choosePreferredDefenderPlayer(ai);
         this.oppList = getOpponentCreatures(this.defendingOpponent);
         this.myList = ai.getCreaturesInPlay();
         this.attackers = new ArrayList<>();
@@ -107,7 +107,7 @@ public class AiAttackController {
 
     public AiAttackController(final Player ai, Card attacker) {
         this.ai = ai;
-        this.defendingOpponent = choosePreferredDefenderPlayer();       
+        this.defendingOpponent = choosePreferredDefenderPlayer(ai);       
         this.oppList = getOpponentCreatures(this.defendingOpponent);
         this.myList = ai.getCreaturesInPlay();
         this.attackers = new ArrayList<>();
@@ -156,13 +156,12 @@ public class AiAttackController {
     }
 
     /** Choose opponent for AI to attack here. Expand as necessary. */
-    private Player choosePreferredDefenderPlayer() {
-        Player defender = ai.getWeakestOpponent(); //Gets opponent with the least life
+    public static Player choosePreferredDefenderPlayer(Player ai) {
+        Player defender = ai.getWeakestOpponent(); //Concentrate on opponent within easy kill range
 
-        if (defender.getLife() < 8) { //Concentrate on opponent within easy kill range
-            return defender;
-        } else { //Otherwise choose a random opponent to ensure no ganging up on players
-            defender = ai.getOpponents().get(MyRandom.getRandom().nextInt(ai.getOpponents().size()));
+        if (defender.getLife() > 8) { //Otherwise choose a random opponent to ensure no ganging up on players
+            // TODO should we cache the random for each turn? some functions like shouldPumpCard base their decisions on the assumption who will be attacked
+            return ai.getOpponents().get(MyRandom.getRandom().nextInt(ai.getOpponents().size()));
         }
         return defender;
     }
@@ -624,7 +623,7 @@ public class AiAttackController {
         int totalCombatDamage = ComputerUtilCombat.sumDamageIfUnblocked(unblockedAttackers, opp) + trampleDamage;
         int totalPoisonDamage = ComputerUtilCombat.sumPoisonIfUnblocked(unblockedAttackers, opp);
 
-        if (totalCombatDamage + ComputerUtil.possibleNonCombatDamage(ai) >= opp.getLife()
+        if (totalCombatDamage + ComputerUtil.possibleNonCombatDamage(ai, opp) >= opp.getLife()
                 && !((opp.cantLoseForZeroOrLessLife() || ai.cantWin()) && opp.getLife() < 1)) {
             return true;
         }
@@ -919,7 +918,7 @@ public class AiAttackController {
         // find the potential damage ratio the AI can cause
         double humanLifeToDamageRatio = 1000000;
         if (candidateUnblockedDamage > 0) {
-            humanLifeToDamageRatio = (double) (opp.getLife() - ComputerUtil.possibleNonCombatDamage(ai)) / candidateUnblockedDamage;
+            humanLifeToDamageRatio = (double) (opp.getLife() - ComputerUtil.possibleNonCombatDamage(ai, opp)) / candidateUnblockedDamage;
         }
 
         // determine if the ai outnumbers the player

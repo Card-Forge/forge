@@ -10,4 +10,5 @@ SVar:DBCleanup:DB$ Cleanup | ForgetDefined$ TriggeredCard
 A:AB$ FlipACoin | Cost$ T | TgtZone$ Stack | TargetType$ Spell | ValidTgts$ Artifact.YouCtrl+IsRemembered | WinSubAbility$ DBDraw | LoseSubAbility$ DBCounter | TgtPrompt$ Select target Artifact spell | SpellDescription$ Flip a coin. If you win the flip, draw a card. If you lose the flip, counter target artifact spell you control that isn't the target of an ability from another creature named Goblin Artisans.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You
 SVar:DBCounter:DB$ Counter | Defined$ Targeted
+AI:RemoveDeck:All
 Oracle:{T}: Flip a coin. If you win the flip, draw a card. If you lose the flip, counter target artifact spell you control that isn't the target of an ability from another creature named Goblin Artisans.

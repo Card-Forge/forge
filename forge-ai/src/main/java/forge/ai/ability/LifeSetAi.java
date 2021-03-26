@@ -17,7 +17,7 @@ public class LifeSetAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final int myLife = ai.getLife();
-        final Player opponent = ai.getWeakestOpponent();
+        final Player opponent = ai.getStrongestOpponent();
         final int hlife = opponent.getLife();
         final String amountStr = sa.getParam("LifeAmount");
 
@@ -36,8 +36,7 @@ public class LifeSetAi extends SpellAbilityAi {
             return false;
         }
 
-        // TODO handle proper calculation of X values based on Cost and what
-        // would be paid
+        // TODO handle proper calculation of X values based on Cost and what would be paid
         int amount;
         // we shouldn't have to worry too much about PayX for SetLife
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
@@ -58,11 +57,9 @@ public class LifeSetAi extends SpellAbilityAi {
             if (tgt.canOnlyTgtOpponent()) {
                 sa.getTargets().add(opponent);
                 // if we can only target the human, and the Human's life
-                // would
-                // go up, don't play it.
+                // would go up, don't play it.
                 // possibly add a combo here for Magister Sphinx and
-                // Higedetsu's
-                // (sp?) Second Rite
+                // Higedetsu's (sp?) Second Rite
                 if ((amount > hlife) || !opponent.canLoseLife()) {
                     return false;
                 }
@@ -81,8 +78,7 @@ public class LifeSetAi extends SpellAbilityAi {
             if (sa.getParam("Defined").equals("Player")) {
                 if (amount == 0) {
                     return false;
-                } else if (myLife > amount) { // will decrease computer's
-                                              // life
+                } else if (myLife > amount) { // will decrease computer's life
                     if ((myLife < 5) || ((myLife - amount) > (hlife - amount))) {
                         return false;
                     }
@@ -104,7 +100,7 @@ public class LifeSetAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final int myLife = ai.getLife();
-        final Player opponent = ai.getWeakestOpponent();
+        final Player opponent = ai.getStrongestOpponent();
         final int hlife = opponent.getLife();
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
@@ -133,8 +129,7 @@ public class LifeSetAi extends SpellAbilityAi {
         }
 
         // If the Target is gaining life, target self.
-        // if the Target is modifying how much life is gained, this needs to
-        // be handled better
+        // if the Target is modifying how much life is gained, this needs to be handled better
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();

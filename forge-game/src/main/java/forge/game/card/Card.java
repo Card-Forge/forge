@@ -1247,17 +1247,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         currentState.addTrigger(t);
         return t;
     }
-    @Deprecated
-    public final void removeTrigger(final Trigger t) {
-        currentState.removeTrigger(t);
-    }
-    @Deprecated
-    public final void removeTrigger(final Trigger t, final CardStateName state) {
-        getState(state).removeTrigger(t);
-    }
-    public final void clearTriggersNew() {
-        currentState.clearTriggers();
-    }
 
     public final boolean hasTrigger(final Trigger t) {
        return currentState.hasTrigger(t);

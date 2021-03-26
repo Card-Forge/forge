@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import forge.ai.AiAttackController;
 import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -19,7 +20,7 @@ public class DigMultipleAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
-        Player opp = ai.getWeakestOpponent();
+        Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         final Card host = sa.getHostCard();
         Player libraryOwner = ai;
 
@@ -77,7 +78,7 @@ public class DigMultipleAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Player opp = ai.getWeakestOpponent();
+        final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (mandatory && sa.canTarget(opp)) {

@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import java.util.List;
 
+import forge.ai.AiAttackController;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCost;
@@ -60,11 +61,9 @@ public class DiscardAi extends SpellAbilityAi {
                 if (players.get(0) == ai) {
                     // the ai should only be using something like this if he has
                     // few cards in hand,
-                    // cards like this better have a good drawback to be in the
-                    // AIs deck
+                    // cards like this better have a good drawback to be in the AIs deck
                 } else {
-                    // defined to the human, so that's fine as long the human
-                    // has cards
+                    // defined to the human, so that's fine as long the human has cards
                     if (!humanHasHand) {
                         return false;
                     }
@@ -170,7 +169,7 @@ public class DiscardAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            Player opp = ai.getWeakestOpponent();
+            Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
             if (!discardTargetAI(ai, sa)) {
                 if (mandatory && sa.canTarget(opp)) {
                     sa.getTargets().add(opp);

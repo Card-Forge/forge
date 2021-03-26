@@ -8,6 +8,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.ai.AiAttackController;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
@@ -54,7 +55,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();
-            Player opp = ai.getWeakestOpponent();
+            Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
             if (sa.canTarget(opp)) {
                 sa.getTargets().add(opp);
             } else {

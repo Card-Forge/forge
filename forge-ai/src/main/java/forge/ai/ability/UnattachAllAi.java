@@ -56,7 +56,6 @@ public class UnattachAllAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card card = sa.getHostCard();
-        final Player opp = ai.getWeakestOpponent();
         // Check if there are any valid targets
         List<GameObject> targets = new ArrayList<>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -66,8 +65,8 @@ public class UnattachAllAi extends SpellAbilityAi {
 
         if (!mandatory && card.isEquipment() && !targets.isEmpty()) {
             Card newTarget = (Card) targets.get(0);
-            //don't equip human creatures
-            if (newTarget.getController().equals(opp)) {
+            //don't equip opponent creatures
+            if (!newTarget.getController().equals(ai)) {
                 return false;
             }
 
