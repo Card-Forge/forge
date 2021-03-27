@@ -28,6 +28,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -108,6 +109,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private ManaCost multiKickerManaCost = null;
     private Player activatingPlayer = null;
     private Player targetingPlayer = null;
+    private Pair<Long, Player> controlledByPlayer = null;
 
     private SpellAbility grantorOriginal = null;
     private StaticAbility grantorStatic = null;
@@ -452,6 +454,24 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setTargetingPlayer(Player targetingPlayer0) {
         targetingPlayer = targetingPlayer0;
+    }
+
+    /**
+     * @return returns who controls the controller of this sa when it is resolving (for Word of Command effect). Null means not being controlled by other
+     */
+    public Pair<Long, Player> getControlledByPlayer() {
+        return controlledByPlayer;
+    }
+    /**
+     * @param ts time stamp of the control player effect
+     * @param controller the player who will control the controller of this sa
+     */
+    public void setControlledByPlayer(long ts, Player controller) {
+        if (controller != null) {
+            controlledByPlayer = Pair.of(ts, controller);
+        } else {
+            controlledByPlayer = null;
+        }
     }
 
     public boolean isSpell() { return false; }

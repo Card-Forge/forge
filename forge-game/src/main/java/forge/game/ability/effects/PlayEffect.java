@@ -62,6 +62,8 @@ public class PlayEffect extends SpellAbilityEffect {
     public void resolve(final SpellAbility sa) {
         final Card source = sa.getHostCard();
         Player activator = sa.getActivatingPlayer();
+        Player controlledByPlayer = null;
+        long controlledByTimeStamp = -1;
         final Game game = activator.getGame();
         final boolean optional = sa.hasParam("Optional");
         boolean remember = sa.hasParam("RememberPlayed");
@@ -72,6 +74,11 @@ public class PlayEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("Controller")) {
             activator = AbilityUtils.getDefinedPlayers(source, sa.getParam("Controller"), sa).get(0);
+        }
+
+        if (sa.hasParam("ControlledByPlayer")) {
+            controlledByTimeStamp = game.getNextTimestamp();
+            controlledByPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("ControlledByPlayer"), sa).get(0);
         }
 
         final Player controller = activator;
@@ -164,13 +171,17 @@ public class PlayEffect extends SpellAbilityEffect {
             amount = tgtCards.size();
         }
 
+        if (controlledByPlayer != null) {
+            activator.addController(controlledByTimeStamp, controlledByPlayer);
+        }
+
         final CardCollection saidNoTo = new CardCollection();
         while (tgtCards.size() > saidNoTo.size() && saidNoTo.size() < amount && amount > 0) {
             activator.getController().tempShowCards(showCards);
             Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), null);
             activator.getController().endTempShowCards();
             if (tgtCard == null) {
-                return;
+                break;
             }
 
             final boolean wasFaceDown;
@@ -300,6 +311,9 @@ public class PlayEffect extends SpellAbilityEffect {
 
             tgtSA.setSVar("IsCastFromPlayEffect", "True");
 
+            // Add controlled by player to target SA so when the spell is resolving, the controller would be changed again
+            tgtSA.setControlledByPlayer(controlledByTimeStamp, controlledByPlayer);
+
             if (controller.getController().playSaFromPlayEffect(tgtSA)) {
                 if (remember) {
                     source.addRemembered(tgtSA.getHostCard());
@@ -316,6 +330,11 @@ public class PlayEffect extends SpellAbilityEffect {
             }
 
             amount--;
+        }
+
+        // Remove controlled by player if any
+        if (controlledByPlayer != null) {
+            activator.removeController(controlledByTimeStamp);
         }
     } // end resolve
 
