@@ -1509,27 +1509,30 @@ public class Player extends GameEntity implements Comparable<Player> {
             c = game.getAction().moveToHand(c, cause);
             drawn.add(c);
 
-            for(Player p : pList) {
+            for (Player p : pList) {
                 if (!revealed.containsKey(p)) {
                     revealed.put(p, new CardCollection());
                 }
                 revealed.get(p).add(c);
             }
 
-            setLastDrawnCard(c);
-            c.setDrawnThisTurn(true);
-            numDrawnThisTurn++;
-            if (game.getPhaseHandler().is(PhaseType.DRAW)) {
-                numDrawnThisDrawStep++;
-            }
-            view.updateNumDrawnThisTurn(this);
+            final boolean gameStarted = game.getAge().ordinal() > GameStage.Mulligan.ordinal();
+            if (gameStarted) {
+                setLastDrawnCard(c);
+                c.setDrawnThisTurn(true);
+                numDrawnThisTurn++;
+                if (game.getPhaseHandler().is(PhaseType.DRAW)) {
+                    numDrawnThisDrawStep++;
+                }
+                view.updateNumDrawnThisTurn(this);
 
-            // Run triggers
-            final Map<AbilityKey, Object> runParams = Maps.newHashMap();
-            runParams.put(AbilityKey.Card, c);
-            runParams.put(AbilityKey.Number, numDrawnThisTurn);
-            runParams.put(AbilityKey.Player, this);
-            game.getTriggerHandler().runTrigger(TriggerType.Drawn, runParams, false);
+                // Run triggers
+                final Map<AbilityKey, Object> runParams = Maps.newHashMap();
+                runParams.put(AbilityKey.Card, c);
+                runParams.put(AbilityKey.Number, numDrawnThisTurn);
+                runParams.put(AbilityKey.Player, this);
+                game.getTriggerHandler().runTrigger(TriggerType.Drawn, runParams, false);
+            }
         }
         else { // Lose by milling is always on. Give AI many cards it cannot play if you want it not to undertake actions
             triedToDrawFromEmptyLibrary = true;
