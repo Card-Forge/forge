@@ -1,0 +1,29 @@
+Name:Rowan, Scholar of Sparks
+ManaCost:2 R
+Types:Legendary Planeswalker Rowan
+Loyalty:2
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Instant and sorcery spells you cast cost {1} less to cast.
+A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ Player.Opponent | NumDmg$ X | SpellDescription$ CARDNAME deals 1 damage to each opponent. If you've drawn three or more cards this turn, she deals 3 damage to each opponent instead.
+SVar:X:Count$Compare Y GE3.3.1
+SVar:Y:Count$YouDrewThisTurn
+A:AB$ Effect | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Rowan, Scholar of Sparks | Triggers$ TRCast | SVars$ TrigCopy | SpellDescription$ You get an emblem with "Whenever you cast an instant or sorcery spell, you may pay {2}. If you do, copy that spell. You may choose new targets for the copy."
+SVar:TRCast:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigCopy | TriggerDescription$ Whenever you cast an instant or sorcery spell, you may pay {2}. If you do, copy that spell. You may choose new targets for the copy.
+SVar:TrigCopy:AB$ CopySpellAbility | Cost$ 2 | Defined$ TriggeredSpellAbility | AILogic$ AlwaysIfViable | MayChooseTarget$ True
+AlternateMode:Modal
+DeckHints:Type$Instant|Sorcery
+Oracle:Instant and sorcery spells you cast cost {1} less to cast.\n[+1]: Rowan, Scholar of Sparks deals 1 damage to each opponent. If you've drawn three or more cards this turn, she deals 3 damage to each opponent instead.\n[-4]: You get an emblem with "Whenever you cast an instant or sorcery spell, you may pay {2}. If you do, copy that spell. You may choose new targets for the copy."
+
+ALTERNATE
+
+Name:Will, Scholar of Frost
+ManaCost:4 U
+Types:Legendary Planeswalker Will
+Loyalty:4
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Instant and sorcery spells you cast cost {1} less to cast.
+A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | Power$ 0 | Toughness$ 2 | UntilYourNextTurn$ True | SpellDescription$ Up to one target creature has base power and toughness 0/2 until your next turn.
+A:AB$ Draw | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | NumCards$ 3 | SpellDescription$ Draw three cards.
+A:AB$ ChangeZone | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent | TgtPrompt$ Select up to five target permanents | TargetMin$ 0 | TargetMax$ 5 | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ DBRepeat | SpellDescription$ Exile up to five target permanents. For each permanent exiled this way, its controller creates a 4/4 blue and red Elemental creature token.
+SVar:DBRepeat:DB$ RepeatEach | DefinedCards$ DirectRemembered | UseImprinted$ True | RepeatSubAbility$ DBToken | SubAbility$ DBCleanup | ChangeZoneTables$ True
+SVar:DBToken:DB$ Token | TokenScript$ ur_4_4_elemental | TokenOwner$ ImprintedController
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Instant and sorcery spells you cast cost {1} less to cast.\n[+1]: Up to one target creature has base power and toughness 0/2 until your next turn.\n[−3]: Draw two cards.\n[−7]: Exile up to five target permanents. For each permanent exiled this way, its controller creates a 4/4 blue and red Elemental Creature token.
