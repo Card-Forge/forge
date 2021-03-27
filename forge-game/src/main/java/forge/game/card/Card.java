@@ -2061,6 +2061,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sb.append(" (").append(inst.getReminderText()).append(")");
                         printedKW.add(keyword);
                     }
+                } else if (keyword.startsWith("Ward")) {
+                    final String[] k = keyword.split(":");
+                    final Cost cost = new Cost(k[1], false);
+
+                    StringBuilder sbCost = new StringBuilder(k[0]);
+                    if (!cost.isOnlyManaCost()) {
+                        sbCost.append("—");
+                    } else {
+                        sbCost.append(" ");
+                    }
+                    sbCost.append(cost.toSimpleString());
+                    sbLong.append(sbCost).append(" (").append(inst.getReminderText()).append(")");
+                    sbLong.append("\r\n");
                 } else if (keyword.endsWith(" offering")) {
                     String offeringType = keyword.split(" ")[0];
                     if (sb.length() != 0) {

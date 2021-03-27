@@ -1,0 +1,7 @@
+Name:Waterfall Aerialist
+ManaCost:3 U
+Types:Creature Djinn Wizard
+PT:3/1
+K:Flying
+K:Ward:2
+Oracle:Flying\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
