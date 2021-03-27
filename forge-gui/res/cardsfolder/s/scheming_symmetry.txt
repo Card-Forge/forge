@@ -1,7 +1,6 @@
 Name:Scheming Symmetry
 ManaCost:B
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ B | ValidTgts$ Player | TargetMin$ 2 | TargetMax$ 2 | RepeatPlayers$ Targeted | RepeatSubAbility$ DBChange | StackDescription$ SpellDescription | SpellDescription$ Choose two target players. Each of them searches their library for a card, then shuffles their library and puts that card on top of it.
-SVar:DBChange:DB$ ChangeZone | DefinedPlayer$ Remembered | Chooser$ Remembered | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1
+A:SP$ ChangeZone | Cost$ B | DefinedPlayer$ Targeted | ValidTgts$ Player | TargetMin$ 2 | TargetMax$ 2 | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card | ChangeNum$ 1 | StackDescription$ SpellDescription | SpellDescription$ Choose two target players. Each of them searches their library for a card, then shuffles their library and puts that card on top of it.
 AI:RemoveDeck:All
 Oracle:Choose two target players. Each of them searches their library for a card, then shuffles their library and puts that card on top of it.

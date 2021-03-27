@@ -80,8 +80,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      * @return a {@link java.lang.String} object.
      */
     private static String changeHiddenOriginStackDescription(final SpellAbility sa) {
-        // TODO build Stack Description will need expansion as more cards are
-        // added
+        // TODO build Stack Description will need expansion as more cards are added
 
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getHostCard();
@@ -358,8 +357,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         if (destination.equals(ZoneType.Library)) {
-            if (sa.hasParam("Shuffle")) { // for things like Gaea's
-                                          // Blessing
+            if (sa.hasParam("Shuffle")) { // for things like Gaea's Blessing
                 sb.append("Shuffle").append(targetname);
 
                 sb.append(" into").append(pronoun).append("owner's library.");
@@ -869,28 +867,310 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
 
-        for (final Player player : fetchers) {
+        changeZonePlayerInvariant(chooser, sa, fetchers);
+    }
+
+    private static void changeZonePlayerInvariant(Player chooser, SpellAbility sa, List<Player> fetchers) {
+        final Card source = sa.getHostCard();
+        final Game game = source.getGame();
+        final boolean defined = sa.hasParam("Defined");
+        final String changeType = sa.getParam("ChangeType");
+        Map<Player, HiddenOriginChoices> HiddenOriginChoicesMap = Maps.newHashMap();
+
+        for (Player player : fetchers) {
             Player decider = chooser;
             if (decider == null) {
                 decider = player;
             }
-            changeZonePlayerInvariant(decider, sa, player);
-        }
-    }
 
-    private static void changeZonePlayerInvariant(Player decider, SpellAbility sa, Player player) {
-        final Game game = player.getGame();
-
-        if (sa.usesTargeting()) {
-            final List<Player> players = Lists.newArrayList(sa.getTargets().getTargetPlayers());
-            player = sa.hasParam("DefinedPlayer") ? player : players.get(0);
-            if (players.contains(player) && !player.canBeTargetedBy(sa)) {
-                return;
+            if (sa.usesTargeting()) {
+                final List<Player> players = Lists.newArrayList(sa.getTargets().getTargetPlayers());
+                player = sa.hasParam("DefinedPlayer") ? player : players.get(0);
+                if (players.contains(player) && !player.canBeTargetedBy(sa)) {
+                    return;
+                }
             }
+
+            List<ZoneType> origin = Lists.newArrayList();
+            if (sa.hasParam("Origin")) {
+                origin = ZoneType.listValueOf(sa.getParam("Origin"));
+            }
+            ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
+
+            if (sa.hasParam("OriginChoice")) {
+                // Currently only used for Mishra, but may be used by other things
+                // Improve how this message reacts for other cards
+                final List<ZoneType> alt = ZoneType.listValueOf(sa.getParam("OriginAlternative"));
+                CardCollectionView altFetchList = AbilityUtils.filterListByType(player.getCardsIn(alt), sa.getParam("ChangeType"), sa);
+
+                final StringBuilder sb = new StringBuilder();
+                sb.append(sa.getParam("AlternativeMessage")).append(" ");
+                sb.append(altFetchList.size()).append(" " + Localizer.getInstance().getMessage("lblCardMatchSearchingTypeInAlternateZones"));
+
+                if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneFromAltSource, sb.toString())) {
+                    origin = alt;
+                }
+            }
+
+            // this needs to be zero indexed. Top = 0, Third = 2
+            int libraryPos = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(source, sa.getParam("LibraryPosition"), sa) : 0;
+
+            if (sa.hasParam("DestinationAlternative")) {
+                final StringBuilder sb = new StringBuilder();
+                sb.append(sa.getParam("AlternativeDestinationMessage"));
+
+                if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneToAltDestination, sb.toString())) {
+                    destination = ZoneType.smartValueOf(sa.getParam("DestinationAlternative"));
+                    libraryPos = sa.hasParam("LibraryPositionAlternative") ? Integer.parseInt(sa.getParam("LibraryPositionAlternative")) : 0;
+                }
+            }
+
+            int changeNum = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(source, sa.getParam("ChangeNum"), sa) : 1;
+
+            final boolean optional = sa.hasParam("Optional");
+            if (optional) {
+                String prompt;
+                if (defined) {
+                    prompt = Localizer.getInstance().getMessage("lblPutThatCardFromPlayerOriginToDestination", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase(), destination.getTranslatedName().toLowerCase());
+                }
+                else {
+                    prompt = Localizer.getInstance().getMessage("lblSearchPlayerZoneConfirm", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase());
+                }
+                String message = MessageUtil.formatMessage(prompt , decider, player);
+                if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
+                    return;
+                }
+            }
+
+            CardCollection fetchList;
+            boolean shuffleMandatory = true;
+            boolean searchedLibrary = false;
+            if (defined) {
+                fetchList = new CardCollection(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
+                if (!sa.hasParam("ChangeNum")) {
+                    changeNum = fetchList.size();
+                }
+            }
+            else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)
+                    && !sa.hasParam("DefinedPlayer")) {
+                fetchList = new CardCollection(player.getGame().getCardsIn(origin));
+            }
+            else {
+                fetchList = new CardCollection(player.getCardsIn(origin));
+                if (origin.contains(ZoneType.Library) && !sa.hasParam("NoLooking")) {
+                    searchedLibrary = true;
+
+                    if (decider.hasKeyword("LimitSearchLibrary")) { // Aven Mindcensor
+                        fetchList.removeAll(player.getCardsIn(ZoneType.Library));
+                        final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
+                        if (fetchNum == 0) {
+                            searchedLibrary = false;
+                        }
+                        else {
+                            fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
+                        }
+                    }
+                    if (!decider.canSearchLibraryWith(sa, player)) {
+                        fetchList.removeAll(player.getCardsIn(ZoneType.Library));
+                        // "if you do/sb does, shuffle" is not mandatory (usually a triggered ability), should has this param.
+                        // "then shuffle" is mandatory
+                        shuffleMandatory = !sa.hasParam("ShuffleNonMandatory");
+                        searchedLibrary = false;
+                    }
+                }
+            }
+
+            //determine list of all cards to reveal to player in addition to those that can be chosen
+            DelayedReveal delayedReveal = null;
+            if (!defined && !sa.hasParam("AlreadyRevealed")) {
+                if (origin.contains(ZoneType.Library) && searchedLibrary) {
+                    final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
+                    CardCollectionView shown = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
+                    // Look at whole library before moving onto choosing a card
+                    delayedReveal = new DelayedReveal(shown, ZoneType.Library, PlayerView.get(player), CardTranslation.getTranslatedName(source.getName()) + " - " + Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
+                }
+                else if (origin.contains(ZoneType.Hand) && player.isOpponentOf(decider)) {
+                    delayedReveal = new DelayedReveal(player.getCardsIn(ZoneType.Hand), ZoneType.Hand, PlayerView.get(player), CardTranslation.getTranslatedName(source.getName()) + " - " + Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
+                }
+            }
+
+            Long controlTimestamp = null;
+            if (searchedLibrary) {
+                if (decider.equals(player)) {
+                    Map.Entry<Long, Player> searchControlPlayer = player.getControlledWhileSearching();
+                    if (searchControlPlayer != null) {
+                        controlTimestamp = searchControlPlayer.getKey();
+                        player.addController(controlTimestamp, searchControlPlayer.getValue());
+                    }
+
+                    decider.incLibrarySearched();
+                    // should only count the number of searching player's own library
+                    // Panglacial Wurm
+                    CardCollection canCastWhileSearching = CardLists.getKeyword(fetchList,
+                            "While you're searching your library, you may cast CARDNAME from your library.");
+                    for (final Card tgtCard : canCastWhileSearching) {
+                        List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, decider);
+                        if (sas.isEmpty()) {
+                            continue;
+                        }
+                        SpellAbility tgtSA = decider.getController().getAbilityToPlay(tgtCard, sas);
+                        if (!decider.getController().confirmAction(tgtSA, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())))) {
+                            continue;
+                        }
+                        tgtSA.setSVar("IsCastFromPlayEffect", "True");
+                        // if played, that card cannot be found
+                        if (decider.getController().playSaFromPlayEffect(tgtSA)) {
+                            fetchList.remove(tgtCard);
+                        }
+                        //some kind of reset here?
+                    }
+                }
+                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.Player, decider);
+                runParams.put(AbilityKey.Target, Lists.newArrayList(player));
+                decider.getGame().getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
+            }
+
+            if (!defined && changeType != null) {
+                fetchList = (CardCollection)AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
+            }
+
+            if (sa.hasParam("NoShuffle")) {
+                shuffleMandatory = false;
+            }
+
+            if (sa.hasParam("Unimprint")) {
+                source.clearImprintedCards();
+            }
+
+            String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : MessageUtil.formatMessage(Localizer.getInstance().getMessage("lblSelectCardFromPlayerZone", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase()), decider, player);
+            final String totalcmc = sa.getParam("WithTotalCMC");
+            int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
+
+            fetchList.sort();
+
+            CardCollection chosenCards = new CardCollection();
+            // only multi-select if player can select more than one
+            if (changeNum > 1 && allowMultiSelect(decider, sa)) {
+                List<Card> selectedCards;
+                if (! sa.hasParam("SelectPrompt")) {
+                    // new default messaging for multi select
+                    if (fetchList.size() > changeNum) {
+                        //Select up to %changeNum cards from %players %origin
+                        selectPrompt = MessageUtil.formatMessage(Localizer.getInstance().getMessage("lblSelectUpToNumCardFromPlayerZone", String.valueOf(changeNum), "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase()), decider, player);
+                    } else {
+                        selectPrompt = MessageUtil.formatMessage(Localizer.getInstance().getMessage("lblSelectCardsFromPlayerZone", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase()), decider, player);
+                    }
+                }
+                // ensure that selection is within maximum allowed changeNum
+                do {
+                    selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, 0, changeNum, delayedReveal, selectPrompt, decider);
+                } while (selectedCards != null && selectedCards.size() > changeNum);
+                if (selectedCards != null) {
+                    chosenCards.addAll(selectedCards);
+                }
+                // maybe prompt the user if they selected fewer than the maximum possible?
+            } else {
+                // one at a time
+                for (int i = 0; i < changeNum && destination != null; i++) {
+                    if (sa.hasParam("DifferentNames")) {
+                        for (Card c : chosenCards) {
+                            fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.sharesNameWith(c)));
+                        }
+                    }
+                    if (sa.hasParam("DifferentCMC")) {
+                        for (Card c : chosenCards) {
+                            fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.sharesCMCWith(c)));
+                        }
+                    }
+                    if (sa.hasParam("ShareLandType")) {
+                        // After the first card is chosen, check if the land type is shared
+                        for (final Card card : chosenCards) {
+                            fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
+                                @Override
+                                public boolean apply(final Card c) {
+                                    return c.sharesLandTypeWith(card);
+                                }
+
+                            });
+                        }
+                    }
+                    if (totalcmc != null) {
+                        if (totcmc >= 0) {
+                            fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + totcmc, source.getController(), source, sa);
+                        }
+                    }
+
+                    // If we're choosing multiple cards, only need to show the reveal dialog the first time through.
+                    boolean shouldReveal = (i == 0);
+                    Card c = null;
+                    if (sa.hasParam("AtRandom")) {
+                        if (shouldReveal && delayedReveal != null) {
+                            decider.getController().reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+                        }
+                        c = Aggregates.random(fetchList);
+                    } else if (defined && !sa.hasParam("ChooseFromDefined")) {
+                        c = Iterables.getFirst(fetchList, null);
+                    } else {
+                        String title = selectPrompt;
+                        if (changeNum > 1) { //indicate progress if multiple cards being chosen
+                            title += " (" + (i + 1) + " / " + changeNum + ")";
+                        }
+                        c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa, fetchList, shouldReveal ? delayedReveal : null, title, !sa.hasParam("Mandatory"), decider);
+                    }
+
+                    if (c == null) {
+                        final int num = Math.min(fetchList.size(), changeNum - i);
+                        String message = Localizer.getInstance().getMessage("lblCancelSearchUpToSelectNumCards", String.valueOf(num));
+
+                        if (fetchList.isEmpty() || decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
+                            break;
+                        }
+                        i--;
+                        continue;
+                    }
+
+                    fetchList.remove(c);
+                    if (delayedReveal != null) {
+                        delayedReveal.remove(CardView.get(c));
+                    }
+                    chosenCards.add(c);
+
+                    if (totalcmc != null) {
+                        totcmc -= c.getCMC();
+                    }
+                }
+            }
+
+            if (sa.hasParam("ShuffleChangedPile")) {
+                CardLists.shuffle(chosenCards);
+            }
+            // do not shuffle the library once we have placed a fetched card on top.
+            if (origin.contains(ZoneType.Library) && (destination == ZoneType.Library) && !"False".equals(sa.getParam("Shuffle"))) {
+                player.shuffle(sa);
+            }
+
+            // remove Controlled While Searching
+            if (controlTimestamp != null) {
+                player.removeController(controlTimestamp);
+            }
+
+            HiddenOriginChoices choices = new HiddenOriginChoices();
+            choices.searchedLibrary = searchedLibrary;
+            choices.shuffleMandatory = shuffleMandatory;
+            choices.chosenCards = chosenCards;
+            choices.libraryPos = libraryPos;
+            choices.origin = origin;
+            choices.destination = destination;
+            HiddenOriginChoicesMap.put(player, choices);
         }
 
+        final boolean remember = sa.hasParam("RememberChanged");
+        final boolean forget = sa.hasParam("ForgetChanged");
+        final boolean champion = sa.hasParam("Champion");
+        final boolean imprint = sa.hasParam("Imprint");
+        
         final SpellAbility root = sa.getRootAbility();
-
         SpellAbility cause = sa;
         if (root.isReplacementAbility()) {
             SpellAbility replacingObject = (SpellAbility) root.getReplacingObject(AbilityKey.Cause);
@@ -899,520 +1179,269 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
 
-        List<ZoneType> origin = Lists.newArrayList();
-        if (sa.hasParam("Origin")) {
-            origin = ZoneType.listValueOf(sa.getParam("Origin"));
-        }
-        ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
-        final Card source = sa.getHostCard();
-
-        // this needs to be zero indexed. Top = 0, Third = 2
-        int libraryPos = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(source, sa.getParam("LibraryPosition"), sa) : 0;
-
-        if (sa.hasParam("OriginChoice")) {
-            // Currently only used for Mishra, but may be used by other things
-            // Improve how this message reacts for other cards
-            final List<ZoneType> alt = ZoneType.listValueOf(sa.getParam("OriginAlternative"));
-            CardCollectionView altFetchList = AbilityUtils.filterListByType(player.getCardsIn(alt), sa.getParam("ChangeType"), sa);
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(sa.getParam("AlternativeMessage")).append(" ");
-            sb.append(altFetchList.size()).append(" " + Localizer.getInstance().getMessage("lblCardMatchSearchingTypeInAlternateZones"));
-
-            if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneFromAltSource, sb.toString())) {
-                origin = alt;
+        for (Player player : fetchers) {
+            boolean searchedLibrary = HiddenOriginChoicesMap.get(player).searchedLibrary;
+            boolean shuffleMandatory = HiddenOriginChoicesMap.get(player).shuffleMandatory;
+            CardCollection chosenCards = HiddenOriginChoicesMap.get(player).chosenCards;
+            int libraryPos = HiddenOriginChoicesMap.get(player).libraryPos;
+            List<ZoneType> origin = HiddenOriginChoicesMap.get(player).origin;
+            ZoneType destination = HiddenOriginChoicesMap.get(player).destination;
+            CardCollection movedCards = new CardCollection();
+            long ts = game.getNextTimestamp();
+            final CardZoneTable triggerList = new CardZoneTable();
+            boolean combatChanged = false;
+            Player decider = chooser;
+            if (decider == null) {
+                decider = player;
             }
-        }
 
-        if (sa.hasParam("DestinationAlternative")) {
-            final StringBuilder sb = new StringBuilder();
-            sb.append(sa.getParam("AlternativeDestinationMessage"));
-
-            if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneToAltDestination, sb.toString())) {
-                destination = ZoneType.smartValueOf(sa.getParam("DestinationAlternative"));
-                libraryPos = sa.hasParam("LibraryPositionAlternative") ? Integer.parseInt(sa.getParam("LibraryPositionAlternative")) : 0;
-            }
-        }
-
-        final boolean defined = sa.hasParam("Defined");
-        int changeNum = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(source, sa.getParam("ChangeNum"), sa) : 1;
-
-        final boolean optional = sa.hasParam("Optional");
-        if (optional) {
-            String prompt;
-            if (defined) {
-                prompt = Localizer.getInstance().getMessage("lblPutThatCardFromPlayerOriginToDestination", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase(), destination.getTranslatedName().toLowerCase());
-            }
-            else {
-                prompt = Localizer.getInstance().getMessage("lblSearchPlayerZoneConfirm", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase());
-            }
-            String message = MessageUtil.formatMessage(prompt , decider, player);
-            if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
-                return;
-            }
-        }
-
-        String changeType = sa.getParam("ChangeType");
-
-        CardCollection fetchList;
-        boolean shuffleMandatory = true;
-        boolean searchedLibrary = false;
-        if (defined) {
-            fetchList = new CardCollection(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
-            if (!sa.hasParam("ChangeNum")) {
-                changeNum = fetchList.size();
-            }
-        }
-        else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)
-                && !sa.hasParam("DefinedPlayer")) {
-            fetchList = new CardCollection(player.getGame().getCardsIn(origin));
-        }
-        else {
-            fetchList = new CardCollection(player.getCardsIn(origin));
-            if (origin.contains(ZoneType.Library) && !sa.hasParam("NoLooking")) {
-                searchedLibrary = true;
-
-                if (decider.hasKeyword("LimitSearchLibrary")) { // Aven Mindcensor
-                    fetchList.removeAll(player.getCardsIn(ZoneType.Library));
-                    final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
-                    if (fetchNum == 0) {
-                        searchedLibrary = false;
-                    }
-                    else {
-                        fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
-                    }
+            for (final Card c : chosenCards) {
+                Card movedCard = null;
+                final Zone originZone = game.getZoneOf(c);
+                Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+                moveParams.put(AbilityKey.FoundSearchingLibrary,  searchedLibrary);
+                if (destination.equals(ZoneType.Library)) {
+                    movedCard = game.getAction().moveToLibrary(c, libraryPos, cause, moveParams);
                 }
-                if (!decider.canSearchLibraryWith(sa, player)) {
-                    fetchList.removeAll(player.getCardsIn(ZoneType.Library));
-                    // "if you do/sb does, shuffle" is not mandatory (usually a triggered ability), should has this param.
-                    // "then shuffle" is mandatory
-                    shuffleMandatory = !sa.hasParam("ShuffleNonMandatory");
-                    searchedLibrary = false;
-                }
-            }
-        }
-
-        //determine list of all cards to reveal to player in addition to those that can be chosen
-        DelayedReveal delayedReveal = null;
-        if (!defined && !sa.hasParam("AlreadyRevealed")) {
-            if (origin.contains(ZoneType.Library) && searchedLibrary) {
-                final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
-                CardCollectionView shown = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
-                // Look at whole library before moving onto choosing a card
-                delayedReveal = new DelayedReveal(shown, ZoneType.Library, PlayerView.get(player), CardTranslation.getTranslatedName(source.getName()) + " - " + Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
-            }
-            else if (origin.contains(ZoneType.Hand) && player.isOpponentOf(decider)) {
-                delayedReveal = new DelayedReveal(player.getCardsIn(ZoneType.Hand), ZoneType.Hand, PlayerView.get(player), CardTranslation.getTranslatedName(source.getName()) + " - " + Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
-            }
-        }
-
-        Long controlTimestamp = null;
-        if (searchedLibrary) {
-            if (decider.equals(player)) {
-                Map.Entry<Long, Player> searchControlPlayer = player.getControlledWhileSearching();
-                if (searchControlPlayer != null) {
-                    controlTimestamp = searchControlPlayer.getKey();
-                    player.addController(controlTimestamp, searchControlPlayer.getValue());
-                }
-
-                decider.incLibrarySearched();
-                // should only count the number of searching player's own library
-                // Panglacial Wurm
-                CardCollection canCastWhileSearching = CardLists.getKeyword(fetchList,
-                        "While you're searching your library, you may cast CARDNAME from your library.");
-                for (final Card tgtCard : canCastWhileSearching) {
-                    List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, decider);
-                    if (sas.isEmpty()) {
-                        continue;
+                else if (destination.equals(ZoneType.Battlefield)) {
+                    if (sa.hasParam("Tapped")) {
+                        c.setTapped(true);
+                    } else if (sa.hasParam("Untapped")) {
+                        c.setTapped(false);
                     }
-                    SpellAbility tgtSA = decider.getController().getAbilityToPlay(tgtCard, sas);
-                    if (!decider.getController().confirmAction(tgtSA, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())))) {
-                        continue;
+                    if (sa.hasAdditionalAbility("AnimateSubAbility")) {
+                        // need LKI before Animate does apply
+                        moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
+
+                        source.addRemembered(c);
+                        AbilityUtils.resolve(sa.getAdditionalAbility("AnimateSubAbility"));
+                        source.removeRemembered(c);
                     }
-                    tgtSA.setSVar("IsCastFromPlayEffect", "True");
-                    // if played, that card cannot be found
-                    if (decider.getController().playSaFromPlayEffect(tgtSA)) {
-                        fetchList.remove(tgtCard);
+                    if (sa.hasParam("GainControl")) {
+                        Player newController = sa.getActivatingPlayer();
+                        if (sa.hasParam("NewController")) {
+                            newController = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("NewController"), sa).get(0);
+                        }
+                        c.setController(newController, game.getNextTimestamp());
                     }
-                    //some kind of reset here?
-                }
-            }
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.Player, decider);
-            runParams.put(AbilityKey.Target, Lists.newArrayList(player));
-            decider.getGame().getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
-        }
-
-        if (!defined && changeType != null) {
-            fetchList = (CardCollection)AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
-        }
-
-        if (sa.hasParam("NoShuffle")) {
-            shuffleMandatory = false;
-        }
-
-        if (sa.hasParam("Unimprint")) {
-            source.clearImprintedCards();
-        }
-
-        final boolean remember = sa.hasParam("RememberChanged");
-        final boolean champion = sa.hasParam("Champion");
-        final boolean forget = sa.hasParam("ForgetChanged");
-        final boolean imprint = sa.hasParam("Imprint");
-        String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : MessageUtil.formatMessage(Localizer.getInstance().getMessage("lblSelectCardFromPlayerZone", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase()), decider, player);
-        final String totalcmc = sa.getParam("WithTotalCMC");
-        int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
-
-        fetchList.sort();
-
-        CardCollection chosenCards = new CardCollection();
-        // only multi-select if player can select more than one
-        if (changeNum > 1 && allowMultiSelect(decider, sa)) {
-            List<Card> selectedCards;
-            if (! sa.hasParam("SelectPrompt")) {
-                // new default messaging for multi select
-                if (fetchList.size() > changeNum) {
-                    //Select up to %changeNum cards from %players %origin
-                    selectPrompt = MessageUtil.formatMessage(Localizer.getInstance().getMessage("lblSelectUpToNumCardFromPlayerZone", String.valueOf(changeNum), "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase()), decider, player);
-                } else {
-                    selectPrompt = MessageUtil.formatMessage(Localizer.getInstance().getMessage("lblSelectCardsFromPlayerZone", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase()), decider, player);
-                }
-            }
-            // ensure that selection is within maximum allowed changeNum
-            do {
-                selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, 0, changeNum, delayedReveal, selectPrompt, decider);
-            } while (selectedCards != null && selectedCards.size() > changeNum);
-            if (selectedCards != null) {
-                chosenCards.addAll(selectedCards);
-            }
-            // maybe prompt the user if they selected fewer than the maximum possible?
-        } else {
-            // one at a time
-            for (int i = 0; i < changeNum && destination != null; i++) {
-                if (sa.hasParam("DifferentNames")) {
-                    for (Card c : chosenCards) {
-                        fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.sharesNameWith(c)));
+                    if (sa.hasParam("WithCounters")) {
+                        String[] parse = sa.getParam("WithCounters").split("_");
+                        c.addEtbCounter(CounterType.getType(parse[0]), Integer.parseInt(parse[1]), player);
                     }
-                }
-                if (sa.hasParam("DifferentCMC")) {
-                    for (Card c : chosenCards) {
-                        fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.sharesCMCWith(c)));
+
+                    if (sa.hasParam("WithCountersType")) {
+                        CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                        int cAmount = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                        c.addEtbCounter(cType, cAmount, player);
                     }
-                }
-                if (sa.hasParam("ShareLandType")) {
-                    // After the first card is chosen, check if the land type is shared
-                    for (final Card card : chosenCards) {
-                        fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
-                            @Override
-                            public boolean apply(final Card c) {
-                                return c.sharesLandTypeWith(card);
+                    if (sa.hasParam("Transformed")) {
+                        if (c.isDoubleFaced()) {
+                            c.changeCardState("Transform", null, sa);
+                        } else {
+                            // If it can't Transform, don't change zones.
+                            continue;
+                        }
+                    }
+
+                    if (sa.hasParam("AttachedTo")) {
+                        CardCollection list = AbilityUtils.getDefinedCards(source, sa.getParam("AttachedTo"), sa);
+                        if (list.isEmpty()) {
+                            list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachedTo"), c.getController(), c, sa);
+                        }
+                        if (!list.isEmpty()) {
+                            Card attachedTo = null;
+                            if (list.size() > 1) {
+                                String title = Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(c.getName()));
+                                Map<String, Object> params = Maps.newHashMap();
+                                params.put("Attach", c);
+                                attachedTo = decider.getController().chooseSingleEntityForEffect(list, sa, title, params);
+                            }
+                            else {
+                                attachedTo = list.get(0);
                             }
 
-                        });
+                            if (c.isAttachment()) {
+                                c.attachToEntity(attachedTo);
+                            }
+                        }
+                        else { // When it should enter the battlefield attached to an illegal permanent it fails
+                            continue;
+                        }
                     }
-                }
-                if (totalcmc != null) {
-                    if (totcmc >= 0) {
-                        fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + totcmc, source.getController(), source, sa);
-                    }
-                }
 
-                // If we're choosing multiple cards, only need to show the reveal dialog the first time through.
-                boolean shouldReveal = (i == 0);
-                Card c = null;
-                if (sa.hasParam("AtRandom")) {
-                    if (shouldReveal && delayedReveal != null) {
-                        decider.getController().reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
-                    }
-                    c = Aggregates.random(fetchList);
-                } else if (defined && !sa.hasParam("ChooseFromDefined")) {
-                    c = Iterables.getFirst(fetchList, null);
-                } else {
-                    String title = selectPrompt;
-                    if (changeNum > 1) { //indicate progress if multiple cards being chosen
-                        title += " (" + (i + 1) + " / " + changeNum + ")";
-                    }
-                    c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa, fetchList, shouldReveal ? delayedReveal : null, title, !sa.hasParam("Mandatory"), decider);
-                }
-
-                if (c == null) {
-                    final int num = Math.min(fetchList.size(), changeNum - i);
-                    String message = Localizer.getInstance().getMessage("lblCancelSearchUpToSelectNumCards", String.valueOf(num));
-
-                    if (fetchList.isEmpty() || decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
-                        break;
-                    }
-                    i--;
-                    continue;
-                }
-
-                fetchList.remove(c);
-                if (delayedReveal != null) {
-                    delayedReveal.remove(CardView.get(c));
-                }
-                chosenCards.add(c);
-
-                if (totalcmc != null) {
-                    totcmc -= c.getCMC();
-                }
-            }
-        }
-
-        if (sa.hasParam("ShuffleChangedPile")) {
-            CardLists.shuffle(chosenCards);
-        }
-        // do not shuffle the library once we have placed a fetched
-        // card on top.
-        if (origin.contains(ZoneType.Library) && (destination == ZoneType.Library) && !"False".equals(sa.getParam("Shuffle"))) {
-            player.shuffle(sa);
-        }
-
-        CardCollection movedCards = new CardCollection();
-        long ts = game.getNextTimestamp();
-        final CardZoneTable triggerList = new CardZoneTable();
-        boolean combatChanged = false;
-        for (final Card c : chosenCards) {
-            Card movedCard = null;
-            final Zone originZone = game.getZoneOf(c);
-            Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
-            moveParams.put(AbilityKey.FoundSearchingLibrary, searchedLibrary);
-            if (destination.equals(ZoneType.Library)) {
-                movedCard = game.getAction().moveToLibrary(c, libraryPos, cause, moveParams);
-            }
-            else if (destination.equals(ZoneType.Battlefield)) {
-                if (sa.hasParam("Tapped")) {
-                    c.setTapped(true);
-                } else if (sa.hasParam("Untapped")) {
-                    c.setTapped(false);
-                }
-                if (sa.hasAdditionalAbility("AnimateSubAbility")) {
-                    // need LKI before Animate does apply
-                    moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
-
-                    source.addRemembered(c);
-                    AbilityUtils.resolve(sa.getAdditionalAbility("AnimateSubAbility"));
-                    source.removeRemembered(c);
-                }
-                if (sa.hasParam("GainControl")) {
-                    Player newController = sa.getActivatingPlayer();
-                    if (sa.hasParam("NewController")) {
-                        newController = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("NewController"), sa).get(0);
-                    }
-                    c.setController(newController, game.getNextTimestamp());
-                }
-                if (sa.hasParam("WithCounters")) {
-                    String[] parse = sa.getParam("WithCounters").split("_");
-                    c.addEtbCounter(CounterType.getType(parse[0]), Integer.parseInt(parse[1]), player);
-                }
-
-                if (sa.hasParam("WithCountersType")) {
-                    CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
-                    int cAmount = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
-                    c.addEtbCounter(cType, cAmount, player);
-                }
-                if (sa.hasParam("Transformed")) {
-                    if (c.isDoubleFaced()) {
-                        c.changeCardState("Transform", null, sa);
-                    } else {
-                        // If it can't Transform, don't change zones.
-                        continue;
-                    }
-                }
-
-                if (sa.hasParam("AttachedTo")) {
-                    CardCollection list = AbilityUtils.getDefinedCards(source, sa.getParam("AttachedTo"), sa);
-                    if (list.isEmpty()) {
-                        list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachedTo"), c.getController(), c, sa);
-                    }
-                    if (!list.isEmpty()) {
-                        Card attachedTo = null;
-                        if (list.size() > 1) {
-                            String title = Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(c.getName()));
+                    if (sa.hasParam("AttachedToPlayer")) {
+                        FCollectionView<Player> list = AbilityUtils.getDefinedPlayers(source, sa.getParam("AttachedToPlayer"), sa);
+                        if (!list.isEmpty()) {
+                            String title =  Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(c.getName()));
                             Map<String, Object> params = Maps.newHashMap();
                             params.put("Attach", c);
-                            attachedTo = decider.getController().chooseSingleEntityForEffect(list, sa, title, params);
-                        }
-                        else {
-                            attachedTo = list.get(0);
-                        }
-
-                        if (c.isAttachment()) {
+                            Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, title, params);
                             c.attachToEntity(attachedTo);
                         }
+                        else { // When it should enter the battlefield attached to an illegal permanent it fails
+                            continue;
+                        }
                     }
-                    else { // When it should enter the battlefield attached to an illegal permanent it fails
-                        continue;
+
+                    if (addToCombat(c, c.getController(), sa, "Attacking", "Blocking")) {
+                        combatChanged = true;
+                    }
+
+                    // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
+                    if (sa.hasParam("FaceDown")) {
+                        c.turnFaceDown(true);
+
+                        // set New Pt doesn't work because this values need to be copyable for clone effects
+                        if (sa.hasParam("FaceDownPower")) {
+                            c.setBasePower(AbilityUtils.calculateAmount(
+                                    source, sa.getParam("FaceDownPower"), sa));
+                        }
+                        if (sa.hasParam("FaceDownToughness")) {
+                            c.setBaseToughness(AbilityUtils.calculateAmount(
+                                    source, sa.getParam("FaceDownToughness"), sa));
+                        }
+
+                        if (sa.hasParam("FaceDownAddType")) {
+                            c.addType(Arrays.asList(sa.getParam("FaceDownAddType").split(" & ")));
+                        }
+
+                        if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
+                                || sa.hasParam("FaceDownAddType")) {
+                            final GameCommand unanimate = new GameCommand() {
+                                private static final long serialVersionUID = 8853789549297846163L;
+
+                                @Override
+                                public void run() {
+                                    c.clearStates(CardStateName.FaceDown, true);
+                                }
+                            };
+
+                            c.addFaceupCommand(unanimate);
+                        }
+                    }
+                    movedCard = game.getAction().moveToPlay(c, c.getController(), cause, moveParams);
+                    if (sa.hasParam("Tapped")) {
+                        movedCard.setTapped(true);
+                    } else if (sa.hasParam("Untapped")) {
+                        c.setTapped(false);
+                    }
+
+                    movedCard.setTimestamp(ts);
+                }
+                else if (destination.equals(ZoneType.Exile)) {
+                    movedCard = game.getAction().exile(c, sa, moveParams);
+                    if (!c.isToken()) {
+                        Card host = sa.getOriginalHost();
+                        if (host == null) {
+                            host = sa.getHostCard();
+                        }
+                        movedCard.setExiledWith(host);
+                        movedCard.setExiledBy(host.getController());
+                    }
+                    if (sa.hasParam("ExileFaceDown")) {
+                        movedCard.turnFaceDown(true);
+                    }
+                    if (sa.hasParam("Foretold")) {
+                        movedCard.setForetold(true);
+                        movedCard.setForetoldThisTurn(true);
+                        movedCard.setForetoldByEffect(true);
+                        // look at the exiled card
+                        movedCard.addMayLookTemp(sa.getActivatingPlayer());
+                    }
+                }
+                else {
+                    movedCard = game.getAction().moveTo(destination, c, 0, cause, moveParams);
+                }
+
+                movedCards.add(movedCard);
+
+                if (originZone != null) {
+                    triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
+
+                    if (c.getMeldedWith() != null) {
+                        Card meld = game.getCardState(c.getMeldedWith(), null);
+                        if (meld != null) {
+                            triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), meld);
+                        }
+                    }
+                    if (c.hasMergedCard()) {
+                        for (final Card card : c.getMergedCards()) {
+                            if (card == c) continue;
+                            triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), card);
+                        }
                     }
                 }
 
-                if (sa.hasParam("AttachedToPlayer")) {
-                    FCollectionView<Player> list = AbilityUtils.getDefinedPlayers(source, sa.getParam("AttachedToPlayer"), sa);
-                    if (!list.isEmpty()) {
-                        String title =  Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(c.getName()));
-                        Map<String, Object> params = Maps.newHashMap();
-                        params.put("Attach", c);
-                        Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, title, params);
-                        c.attachToEntity(attachedTo);
-                    }
-                    else { // When it should enter the battlefield attached to an illegal permanent it fails
-                        continue;
-                    }
+                if (champion) {
+                    final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
+                    runParams.put(AbilityKey.Championed, c);
+                    game.getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
                 }
 
-                if (addToCombat(c, c.getController(), sa, "Attacking", "Blocking")) {
-                    combatChanged = true;
-                }
-
-                // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
-                if (sa.hasParam("FaceDown")) {
-                    c.turnFaceDown(true);
-
-                    // set New Pt doesn't work because this values need to be copyable for clone effects
-                    if (sa.hasParam("FaceDownPower")) {
-                        c.setBasePower(AbilityUtils.calculateAmount(
-                                source, sa.getParam("FaceDownPower"), sa));
+                if (remember) {
+                    source.addRemembered(movedCard);
+                    // addRememberedFromCardState ?
+                    if (c.getMeldedWith() != null) {
+                        Card meld = game.getCardState(c.getMeldedWith(), null);
+                        if (meld != null) {
+                            source.addRemembered(meld);
+                        }
                     }
-                    if (sa.hasParam("FaceDownToughness")) {
-                        c.setBaseToughness(AbilityUtils.calculateAmount(
-                                source, sa.getParam("FaceDownToughness"), sa));
-                    }
-
-                    if (sa.hasParam("FaceDownAddType")) {
-                        c.addType(Arrays.asList(sa.getParam("FaceDownAddType").split(" & ")));
-                    }
-
-                    if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
-                            || sa.hasParam("FaceDownAddType")) {
-                        final GameCommand unanimate = new GameCommand() {
-                            private static final long serialVersionUID = 8853789549297846163L;
-
-                            @Override
-                            public void run() {
-                                c.clearStates(CardStateName.FaceDown, true);
-                            }
-                        };
-
-                        c.addFaceupCommand(unanimate);
+                    if (c.hasMergedCard()) {
+                        for (final Card card : c.getMergedCards()) {
+                            if (card == c) continue;
+                            source.addRemembered(card);
+                        }
                     }
                 }
-                movedCard = game.getAction().moveToPlay(c, c.getController(), cause, moveParams);
-                if (sa.hasParam("Tapped")) {
-                    movedCard.setTapped(true);
-                } else if (sa.hasParam("Untapped")) {
-                    c.setTapped(false);
+                if (forget) {
+                    source.removeRemembered(movedCard);
                 }
-
-                movedCard.setTimestamp(ts);
+                // for imprinted since this doesn't use Target
+                if (imprint) {
+                    source.addImprintedCard(movedCard);
+                    if (c.hasMergedCard()) {
+                        for (final Card card : c.getMergedCards()) {
+                            if (card == c) continue;
+                            source.addImprintedCard(card);
+                        }
+                    }
+                }
             }
-            else if (destination.equals(ZoneType.Exile)) {
-                movedCard = game.getAction().exile(c, sa, moveParams);
-                if (!c.isToken()) {
-                    Card host = sa.getOriginalHost();
-                    if (host == null) {
-                        host = sa.getHostCard();
-                    }
-                    movedCard.setExiledWith(host);
-                    movedCard.setExiledBy(host.getController());
-                }
-                if (sa.hasParam("ExileFaceDown")) {
-                    movedCard.turnFaceDown(true);
-                }
-                if (sa.hasParam("Foretold")) {
-                    movedCard.setForetold(true);
-                    movedCard.setForetoldThisTurn(true);
-                    movedCard.setForetoldByEffect(true);
-                    // look at the exiled card
-                    movedCard.addMayLookTemp(sa.getActivatingPlayer());
-                }
-            }
-            else {
-                movedCard = game.getAction().moveTo(destination, c, 0, cause, moveParams);
+
+            if (((!ZoneType.Battlefield.equals(destination) && changeType != null && !defined && !changeType.equals("Card"))
+                    || (sa.hasParam("Reveal") && !movedCards.isEmpty())) && !sa.hasParam("NoReveal")) {
+                game.getAction().reveal(movedCards, player);
             }
 
-            movedCards.add(movedCard);
-
-            if (originZone != null) {
-                triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
-
-                if (c.getMeldedWith() != null) {
-                    Card meld = game.getCardState(c.getMeldedWith(), null);
-                    if (meld != null) {
-                        triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), meld);
-                    }
-                }
-                if (c.hasMergedCard()) {
-                    for (final Card card : c.getMergedCards()) {
-                        if (card == c) continue;
-                        triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), card);
-                    }
-                }
+            if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined && shuffleMandatory)
+                    || (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle")))) {
+                player.shuffle(sa);
             }
 
-            if (champion) {
-                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
-                runParams.put(AbilityKey.Championed, c);
-                game.getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
+            if (sa.hasParam("AtEOT") && !movedCards.isEmpty()) {
+                registerDelayedTrigger(sa, sa.getParam("AtEOT"), movedCards);
             }
 
-            if (remember) {
-                source.addRemembered(movedCard);
-                // addRememberedFromCardState ?
-                if (c.getMeldedWith() != null) {
-                    Card meld = game.getCardState(c.getMeldedWith(), null);
-                    if (meld != null) {
-                        source.addRemembered(meld);
-                    }
-                }
-                if (c.hasMergedCard()) {
-                    for (final Card card : c.getMergedCards()) {
-                        if (card == c) continue;
-                        source.addRemembered(card);
-                    }
-                }
+            if (combatChanged) {
+                game.updateCombatForView();
+                game.fireEvent(new GameEventCombatChanged());
             }
-            if (forget) {
-                source.removeRemembered(movedCard);
-            }
-            // for imprinted since this doesn't use Target
-            if (imprint) {
-                source.addImprintedCard(movedCard);
-                if (c.hasMergedCard()) {
-                    for (final Card card : c.getMergedCards()) {
-                        if (card == c) continue;
-                        source.addImprintedCard(card);
-                    }
-                }
+            triggerList.triggerChangesZoneAll(game);
+
+            if (sa.hasParam("UntilHostLeavesPlay")) {
+                source.addLeavesPlayCommand(untilHostLeavesPlayCommand(triggerList, source));
             }
         }
+    }
 
-        if (((!ZoneType.Battlefield.equals(destination) && changeType != null && !defined && !changeType.equals("Card"))
-                || (sa.hasParam("Reveal") && !movedCards.isEmpty())) && !sa.hasParam("NoReveal")) {
-            game.getAction().reveal(movedCards, player);
-        }
-
-        if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined && shuffleMandatory)
-                || (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle")))) {
-            player.shuffle(sa);
-        }
-
-        if (sa.hasParam("AtEOT") && !movedCards.isEmpty()) {
-            registerDelayedTrigger(sa, sa.getParam("AtEOT"), movedCards);
-        }
-
-        if (combatChanged) {
-            game.updateCombatForView();
-            game.fireEvent(new GameEventCombatChanged());
-        }
-        triggerList.triggerChangesZoneAll(game);
-
-        if (sa.hasParam("UntilHostLeavesPlay")) {
-            source.addLeavesPlayCommand(untilHostLeavesPlayCommand(triggerList, source));
-        }
-
-        // remove Controlled While Searching
-        if (controlTimestamp != null) {
-            player.removeController(controlTimestamp);
-        }
+    private static class HiddenOriginChoices {
+        boolean shuffleMandatory;
+        boolean searchedLibrary;
+        CardCollection chosenCards;
+        int libraryPos;
+        List<ZoneType> origin;
+        ZoneType destination;
     }
 
     private static boolean allowMultiSelect(Player decider, SpellAbility sa) {

@@ -2,6 +2,7 @@ package forge.game.ability;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 import org.apache.commons.lang3.StringUtils;
@@ -660,5 +661,36 @@ public abstract class SpellAbilityEffect {
             }
 
         };
+    }
+
+    protected static void discard(SpellAbility sa, CardZoneTable table, Map<Player, CardCollectionView> discardedMap) {
+        Set<Player> discarders = discardedMap.keySet();
+        for (Player p : discarders) {
+            final CardCollection discardedByPlayer = new CardCollection();
+            for (Card card : Lists.newArrayList(discardedMap.get(p))) { // without copying will get concurrent modification exception
+                if (card == null) { continue; }
+                if (p.discard(card, sa, table) != null) {
+                    discardedByPlayer.add(card);
+                }
+            }
+            discardedMap.put(p, discardedByPlayer);
+        }
+
+        for (Player p : discarders) {
+            CardCollectionView discardedByPlayer = discardedMap.get(p);
+            if (!discardedByPlayer.isEmpty()) {
+                boolean firstDiscard = p.getNumDiscardedThisTurn() - discardedByPlayer.size() == 0;
+                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.Player, p);
+                runParams.put(AbilityKey.Cards, discardedByPlayer);
+                runParams.put(AbilityKey.Cause, sa);
+                runParams.put(AbilityKey.FirstTime, firstDiscard);
+                p.getGame().getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
+
+                if (sa.hasParam("RememberDiscardingPlayers")) {
+                    sa.getHostCard().addRemembered(p);
+                }
+            }
+        }
     }
 }
