@@ -26,4 +26,5 @@ A:AB$ ChangeZone | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | ValidTgts$
 SVar:DBRepeat:DB$ RepeatEach | DefinedCards$ DirectRemembered | UseImprinted$ True | RepeatSubAbility$ DBToken | SubAbility$ DBCleanup | ChangeZoneTables$ True
 SVar:DBToken:DB$ Token | TokenScript$ ur_4_4_elemental | TokenOwner$ ImprintedController
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
 Oracle:Instant and sorcery spells you cast cost {1} less to cast.\n[+1]: Up to one target creature has base power and toughness 0/2 until your next turn.\n[−3]: Draw two cards.\n[−7]: Exile up to five target permanents. For each permanent exiled this way, its controller creates a 4/4 blue and red Elemental Creature token.

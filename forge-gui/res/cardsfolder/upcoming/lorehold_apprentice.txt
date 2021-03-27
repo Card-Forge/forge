@@ -6,4 +6,5 @@ T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Tr
 T:Mode$ SpellCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | Secondary$ True | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, until end of turn, Spirit creatures you control gain "{T}: This creature deals 1 damage to each opponent."
 SVar:TrigPumpAll:DB$ AnimateAll | ValidCards$ Creature.Spirit+YouCtrl | Abilities$ Sizzle
 SVar:Sizzle:AB$ DealDamage | Cost$ T | Defined$ Opponent | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each opponent.
+DeckHints:Type$Instant|Sorcery
 Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, until end of turn, Spirit creatures you control gain "{T}: This creature deals 1 damage to each opponent."
