@@ -17,10 +17,12 @@
  */
 package forge.game.player;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
@@ -219,6 +221,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private CardCollection lostOwnership = new CardCollection();
     private CardCollection gainedOwnership = new CardCollection();
     private int numManaConversion = 0;
+    // The SA currently being paid for
+    private Deque<SpellAbility> paidForStack = new ArrayDeque<>();
 
     private Card monarchEffect = null;
     private Card blessingEffect = null;
@@ -3279,6 +3283,16 @@ public class Player extends GameEntity implements Comparable<Player> {
     @Override
     public PlayerView getView() {
         return view;
+    }
+
+    public SpellAbility getPaidForSA() {
+        return paidForStack.peek();
+    }
+    public void pushPaidForSA(SpellAbility sa) {
+        paidForStack.push(sa);
+    }
+    public void popPaidForSA() {
+        paidForStack.pop();
     }
 
     public boolean isMonarch() {

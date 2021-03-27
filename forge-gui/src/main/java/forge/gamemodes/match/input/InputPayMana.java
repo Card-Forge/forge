@@ -57,6 +57,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         game = player.getGame();
         saPaidFor = saPaidFor0;
 
+        // Set current paid for SA for player to be able to reference it later
+        player.pushPaidForSA(saPaidFor);
+
         //if player is floating mana, show mana pool to make it easier to use that mana
         wasFloatingMana = !player.getManaPool().isEmpty();
         if (wasFloatingMana) {
@@ -66,6 +69,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     @Override
     protected void onStop() {
+        // Clear current paid for SA
+        player.popPaidForSA();
+
         if (wasFloatingMana) { //hide mana pool if it was shown due to floating mana
             getController().getGui().hideManaPool(PlayerView.get(player));
         }
@@ -350,6 +356,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                         player.getManaPool().payManaFromAbility(saPaidFor, InputPayMana.this.manaCost, chosen);
                     }
                     onManaAbilityPaid();
+                    onStateChanged();
+                } else {
+                    // Need to call this to unlock
                     onStateChanged();
                 }
             }

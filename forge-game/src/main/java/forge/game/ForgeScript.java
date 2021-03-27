@@ -7,6 +7,7 @@ import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
+import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.util.Expressions;
@@ -189,6 +190,18 @@ public class ForgeScript {
             if (!Expressions.compare(y, property, x)) {
                 return false;
             }
+        } else if (property.equals("ManaAbilityCantPaidFor")) {
+            if (!sa.isManaAbility()) {
+                return false;
+            }
+            SpellAbility paidFor = sourceController.getPaidForSA();
+            do {
+                AbilityManaPart mana = sa.getManaPart();
+                if (paidFor != null && mana.meetsManaRestrictions(paidFor) && !mana.getExpressChoice().isEmpty()) {
+                    return false;
+                }
+                sa = sa.getSubAbility();
+            } while(sa != null);
         } else if (sa.getHostCard() != null) {
             return sa.getHostCard().hasProperty(property, sourceController, source, spellAbility);
         }

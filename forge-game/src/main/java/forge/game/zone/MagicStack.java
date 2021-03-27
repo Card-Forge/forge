@@ -479,6 +479,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             game.copyLastState();
         }
 
+        // Change controller of activating player if it was set in SA
+        if (sa.getControlledByPlayer() != null) {
+            sa.getActivatingPlayer().addController(sa.getControlledByPlayer().getLeft(), sa.getControlledByPlayer().getRight());
+        }
+
         if (thisHasFizzled) { // Fizzle
             if (sa.isBestow()) {
                 // 702.102d: if its target is illegal,
@@ -506,6 +511,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         } else {
             sa.resolve();
             // do creatures ETB from here?
+        }
+
+        // Change controller back if it was changed
+        if (sa.getControlledByPlayer() != null) {
+            sa.getActivatingPlayer().removeController(sa.getControlledByPlayer().getLeft());
+            // Cleanup controlled by player states
+            sa.setControlledByPlayer(-1, null);
         }
 
         game.fireEvent(new GameEventSpellResolved(sa, thisHasFizzled));
