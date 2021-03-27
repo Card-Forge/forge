@@ -1,0 +1,12 @@
+Name:Breena, the Demagogue
+ManaCost:1 W B
+Types:Legendary Creature Bird Warlock
+PT:1/3
+K:Flying
+T:Mode$ AttackersDeclared | AttackingPlayer$ Player | AttackedTarget$ Opponent.lifeGTX | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player attacks one of your opponents, if that opponent has more life than another of your opponents, that attacking player draws a card and you put two +1/+1 counters on a creature you control.
+SVar:TrigDraw:DB$ Draw | Defined$ AttackingPlayer | SubAbility$ DBChooseCard
+SVar:DBChooseCard:DB$ ChooseCard | Choices$ Creature.YouCtrl | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ ChosenCard | CounterType$ P1P1 | CounterNum$ 2
+SVar:X:PlayerCountOpponents$LowestLifeTotal
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever a player attacks one of your opponents, if that opponent has more life than another of your opponents, that attacking player draws a card and you put two +1/+1 counters on a creature you control.
