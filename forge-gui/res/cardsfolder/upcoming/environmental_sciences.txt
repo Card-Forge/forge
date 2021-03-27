@@ -1,0 +1,6 @@
+Name:Environmental Sciences
+ManaCost:2
+Types:Sorcery Lesson
+A:SP$ ChangeZone | Cost$ 2 | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | SubAbility$ DBEnergy | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle.You Gain 2 Life. | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$GainLife | LifeAmount$ 2
+Oracle:Search your library for a basic land card, reveal it, put it into your hand, then shuffle.You Gain 2 Life.
