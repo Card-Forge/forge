@@ -133,7 +133,7 @@ public class GameAction {
             return c;
         }
         if (zoneFrom == null && !c.isToken()) {
-            zoneTo.add(c, position);
+            zoneTo.add(c, position, CardUtil.getLKICopy(c));
             checkStaticAbilities();
             game.getTriggerHandler().registerActiveTrigger(c, true);
             game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
@@ -471,7 +471,7 @@ public class GameAction {
                 if (card == c) {
                     zoneTo.add(copied, position, lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
                 } else {
-                    zoneTo.add(card, position);
+                    zoneTo.add(card, position, CardUtil.getLKICopy(card));
                 }
                 card.setZone(zoneTo);
             }
@@ -598,8 +598,6 @@ public class GameAction {
                 copied.setState(CardStateName.Original, true);
             }
             unattachCardLeavingBattlefield(copied);
-            // Remove all changed keywords
-            copied.removeAllChangedText(game.getNextTimestamp());
         } else if (toBattlefield) {
             // reset timestamp in changezone effects so they have same timestamp if ETB simutaneously
             copied.setTimestamp(game.getNextTimestamp());
