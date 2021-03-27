@@ -4,16 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Maps;
+
 import forge.game.Game;
-import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
 
@@ -38,6 +39,7 @@ public class BalanceEffect extends SpellAbilityEffect {
         
         final FCollectionView<Player> players = game.getPlayersInTurnOrder();
         final List<CardCollection> validCards = new ArrayList<>(players.size());
+        Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
         
         for(int i = 0; i < players.size(); i++) {
             // Find the minimum of each Valid per player
@@ -46,37 +48,26 @@ public class BalanceEffect extends SpellAbilityEffect {
         }
         
         CardZoneTable table = new CardZoneTable();
-        for(int i = 0; i < players.size(); i++) {
+        for (int i = 0; i < players.size(); i++) {
             Player p = players.get(i);
             int numToBalance = validCards.get(i).size() - min;
             if (numToBalance == 0) {
                 continue;
             }
             if (zone.equals(ZoneType.Hand)) {
-                boolean firstDiscard = p.getNumDiscardedThisTurn() == 0;
-                final CardCollection discardedByPlayer = new CardCollection();
-                for (Card card : p.getController().chooseCardsToDiscardFrom(p, sa, validCards.get(i), numToBalance, numToBalance)) {
-                    if ( null == card ) continue;
-                    if (p.discard(card, sa, table) != null) {
-                        discardedByPlayer.add(card);
-                    }
-                }
-
-                if (!discardedByPlayer.isEmpty()) {
-                    final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                    runParams.put(AbilityKey.Player, p);
-                    runParams.put(AbilityKey.Cards, discardedByPlayer);
-                    runParams.put(AbilityKey.Cause, sa);
-                    runParams.put(AbilityKey.FirstTime, firstDiscard);
-                    game.getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
-                }
+                discardedMap.put(p, p.getController().chooseCardsToDiscardFrom(p, sa, validCards.get(i), numToBalance, numToBalance));
             } else { // Battlefield
-                for(Card card : p.getController().choosePermanentsToSacrifice(sa, numToBalance, numToBalance,  validCards.get(i), valid)) {
+                for (Card card : p.getController().choosePermanentsToSacrifice(sa, numToBalance, numToBalance,  validCards.get(i), valid)) {
                     if ( null == card ) continue; 
                     game.getAction().sacrifice(card, sa, table);
                 }
             }
         }
+
+        if (zone.equals(ZoneType.Hand)) {
+            discard(sa, table, discardedMap);
+        }
+
         table.triggerChangesZoneAll(game);
     }
 }
