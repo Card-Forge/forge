@@ -4,6 +4,7 @@ package forge.player;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.ImageKeys;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
@@ -88,6 +89,7 @@ public class HumanPlay {
         FThreads.assertExecutedByEdt(false);
 
         Card source = sa.getHostCard();
+        boolean isforetold = source.isForetold();
 
         if (sa instanceof LandAbility) {
             sa.setActivatingPlayer(p);
@@ -133,6 +135,8 @@ public class HumanPlay {
                 // need to get the changed card if able
                 Card rollback = p.getGame().getCardState(sa.getHostCard());
                 rollback.turnFaceDown(true);
+                //need to set correct imagekey when forcing facedown
+                rollback.setImageKey(ImageKeys.getTokenKey(isforetold ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD));
                 if (rollback.isInZone(ZoneType.Exile)) {
                     rollback.addMayLookTemp(p);
                 }
