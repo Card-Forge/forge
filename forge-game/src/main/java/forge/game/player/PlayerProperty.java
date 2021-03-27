@@ -225,9 +225,11 @@ public class PlayerProperty {
             if (source.getChosenPlayer() == null || !source.getChosenPlayer().equals(player)) {
                 return false;
             }
-        } else if (property.startsWith("LifeEquals_")) {
-            int life = AbilityUtils.calculateAmount(source, property.substring(11), null);
-            if (player.getLife() != life) {
+        } else if (property.startsWith("life")) {
+            int life = player.getLife();
+            int amount = AbilityUtils.calculateAmount(source, property.substring(6), spellAbility);
+
+            if (!Expressions.compare(life, property, amount)) {
                 return false;
             }
         } else if (property.equals("IsPoisoned")) {
