@@ -1002,6 +1002,18 @@ public class CardProperty {
                 }
             }
             return false;
+        } else if (property.startsWith("EnteredUnder")) {
+            Player u = card.getTurnInController();
+            if (u == null) {
+                return false;
+            }
+            final String valid = property.substring(13);
+            if (!u.isValid(valid, sourceController, source, spellAbility)) {
+                final List<Player> lp = AbilityUtils.getDefinedPlayers(source, valid, spellAbility);
+                if (!lp.contains(u)) {
+                    return false;
+                }
+            }
         } else if (property.equals("EnteredSinceYourLastTurn")) {
             if (card.getTurnInZone() <= sourceController.getLastTurnNr()) {
                 return false;

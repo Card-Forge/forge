@@ -285,6 +285,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private int regeneratedThisTurn = 0;
 
     private int turnInZone;
+    // the player that under which control it enters
+    private Player turnInController = null;
 
     private Map<String, Integer> xManaCostPaidByColor;
 
@@ -1629,6 +1631,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final void setTurnInZone(final int turn) {
         turnInZone = turn;
+    }
+
+    public final Player getTurnInController() {
+        return turnInController;
+    }
+
+    public final void setTurnInController(final Player p) {
+        turnInController = p;
     }
 
     public final void setManaCost(final ManaCost s) {
@@ -4270,13 +4280,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         removeChangedCardTypes(timestamp);
         updateKeywordsOnRemoveChangedText(
                 removeChangedCardKeywords(timestamp));
-        updateChangedText();
-    }
-
-    public final void removeAllChangedText(final Long timestamp) {
-        changedTextTypes.removeAll();
-        changedTextColors.removeAll();
-        updateKeywordsOnRemoveChangedText(removeChangedCardKeywords(timestamp));
         updateChangedText();
     }
 
