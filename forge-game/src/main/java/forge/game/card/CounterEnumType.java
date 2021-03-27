@@ -141,6 +141,8 @@ public enum CounterEnumType {
 
     HIT("HIT", 255, 245, 195),
 
+    HONE("HONE", 51, 227, 255),
+
     HOOFPRINT("HOOF", 233, 189, 170),
 
     HOUR("HOUR", 198, 197, 210),
