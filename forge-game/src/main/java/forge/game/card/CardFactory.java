@@ -848,8 +848,8 @@ public class CardFactory {
         final CardCloneStates result = new CardCloneStates(top, sa);
         result.put(state, ret);
 
-        // For transformed card or melded card, also copy the original state to avoid crash
-        if (state == CardStateName.Transformed || state == CardStateName.Meld) {
+        // For transformed, melded or MDFC card, also copy the original state to avoid crash
+        if (state == CardStateName.Transformed || state == CardStateName.Meld || state == CardStateName.Modal) {
             final CardState ret1 = new CardState(card, CardStateName.Original);
             ret1.copyFrom(top.getState(CardStateName.Original, true), false);
             result.put(CardStateName.Original, ret1);
