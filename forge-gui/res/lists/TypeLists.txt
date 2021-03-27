@@ -125,6 +125,7 @@ Hyena:Hyenas
 Illusion:Illusions
 Imp:Imps
 Incarnation:Incarnations
+Inkling:Inklings
 Insect:Insects
 Jackal:Jackals
 Jellyfish:Jellyfishes
@@ -282,6 +283,7 @@ Zubera:Zuberas
 [SpellTypes]
 Adventure
 Arcane
+Lesson
 Trap
 [EnchantmentTypes]
 Aura
