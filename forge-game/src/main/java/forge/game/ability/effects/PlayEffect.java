@@ -22,6 +22,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
 import forge.game.cost.Cost;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
@@ -312,7 +313,11 @@ public class PlayEffect extends SpellAbilityEffect {
             tgtSA.setSVar("IsCastFromPlayEffect", "True");
 
             // Add controlled by player to target SA so when the spell is resolving, the controller would be changed again
-            tgtSA.setControlledByPlayer(controlledByTimeStamp, controlledByPlayer);
+            if (controlledByPlayer != null) {
+                tgtSA.setControlledByPlayer(controlledByTimeStamp, controlledByPlayer);
+                activator.pushPaidForSA(tgtSA);
+                tgtSA.setManaCostBeingPaid(new ManaCostBeingPaid(tgtSA.getPayCosts().getCostMana().getManaCostFor(tgtSA), tgtSA.getPayCosts().getCostMana().getRestiction()));
+            }
 
             if (controller.getController().playSaFromPlayEffect(tgtSA)) {
                 if (remember) {
@@ -335,6 +340,7 @@ public class PlayEffect extends SpellAbilityEffect {
         // Remove controlled by player if any
         if (controlledByPlayer != null) {
             activator.removeController(controlledByTimeStamp);
+            activator.popPaidForSA();
         }
     } // end resolve
 

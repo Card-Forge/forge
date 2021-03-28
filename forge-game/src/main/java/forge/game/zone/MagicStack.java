@@ -518,6 +518,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             sa.getActivatingPlayer().removeController(sa.getControlledByPlayer().getLeft());
             // Cleanup controlled by player states
             sa.setControlledByPlayer(-1, null);
+            sa.setManaCostBeingPaid(null);
         }
 
         game.fireEvent(new GameEventSpellResolved(sa, thisHasFizzled));

@@ -19,6 +19,10 @@ public class InputPayManaOfCostPayment extends InputPayMana {
         manaCost = cost;
         extraMatrix = matrix;
         applyMatrix();
+
+        // Set Mana cost being paid for SA to be able to reference it later
+        player.pushPaidForSA(saPaidFor);
+        saPaidFor.setManaCostBeingPaid(manaCost);
     }
 
     private static final long serialVersionUID = 3467312982164195091L;
