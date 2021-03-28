@@ -1179,7 +1179,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
 
-        for (Player player : fetchers) {
+        for (Player player : HiddenOriginChoicesMap.keySet()) {
             boolean searchedLibrary = HiddenOriginChoicesMap.get(player).searchedLibrary;
             boolean shuffleMandatory = HiddenOriginChoicesMap.get(player).shuffleMandatory;
             CardCollection chosenCards = HiddenOriginChoicesMap.get(player).chosenCards;
