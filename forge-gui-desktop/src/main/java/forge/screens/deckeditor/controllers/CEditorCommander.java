@@ -82,7 +82,7 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
         allSections.add(DeckSection.Sideboard);
         allSections.add(DeckSection.Commander);
 
-        CardDb commonCards = FModel.getMagicDb().getCommonCards();
+        CardDb commonCards = FModel.getMagicDb().getCommonCards(false);
         if (gameType == GameType.Brawl){
             GameFormat format = FModel.getFormats().get("Brawl");
             Predicate<CardRules> commanderFilter = CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER;

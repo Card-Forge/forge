@@ -316,10 +316,12 @@ public enum CardZoomer {
      * Can simply rotate current card image in situ to get same effect.
      */
     private void toggleFlipCard() {
-        isInAltState = !isInAltState;
-        thisCard = thisCard.getCard().getState(isInAltState);
-        imagePanel.setRotation(thisCard.getCard().isFlipCard() && isInAltState ? 180 : 0);
-        setImage();
+        try { //prevent NPE trying to view card without alternate
+            isInAltState = !isInAltState;
+            thisCard = thisCard.getCard().getState(isInAltState);
+            imagePanel.setRotation(thisCard.getCard().isFlipCard() && isInAltState ? 180 : 0);
+            setImage();
+        } catch (Exception e){}
     }
 
     /**
