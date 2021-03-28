@@ -63,6 +63,7 @@ import forge.game.cost.CostRemoveCounter;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
@@ -110,6 +111,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private Player activatingPlayer = null;
     private Player targetingPlayer = null;
     private Pair<Long, Player> controlledByPlayer = null;
+    private ManaCostBeingPaid manaCostBeingPaid = null;
 
     private SpellAbility grantorOriginal = null;
     private StaticAbility grantorStatic = null;
@@ -472,6 +474,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         } else {
             controlledByPlayer = null;
         }
+    }
+
+    public ManaCostBeingPaid getManaCostBeingPaid() {
+        return manaCostBeingPaid;
+    }
+    public void setManaCostBeingPaid(ManaCostBeingPaid costBeingPaid) {
+        manaCostBeingPaid = costBeingPaid;
     }
 
     public boolean isSpell() { return false; }

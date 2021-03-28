@@ -2,12 +2,13 @@ package forge.game;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.cost.Cost;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
-import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.util.Expressions;
@@ -191,17 +192,24 @@ public class ForgeScript {
                 return false;
             }
         } else if (property.equals("ManaAbilityCantPaidFor")) {
-            if (!sa.isManaAbility()) {
+            SpellAbility paidFor = sourceController.getPaidForSA();
+            if (paidFor == null) {
                 return false;
             }
-            SpellAbility paidFor = sourceController.getPaidForSA();
-            do {
-                AbilityManaPart mana = sa.getManaPart();
-                if (paidFor != null && mana.meetsManaRestrictions(paidFor) && !mana.getExpressChoice().isEmpty()) {
-                    return false;
+            ManaCostBeingPaid manaCost = paidFor.getManaCostBeingPaid();
+            // The following code is taken from InputPayMana.java, to determine if this mana ability can pay for SA currently being paid
+            byte colorCanUse = 0;
+            for (final byte color : ManaAtom.MANATYPES) {
+                if (manaCost.isAnyPartPayableWith(color, sourceController.getManaPool())) {
+                    colorCanUse |= color;
                 }
-                sa = sa.getSubAbility();
-            } while(sa != null);
+            }
+            if (manaCost.isAnyPartPayableWith((byte) ManaAtom.GENERIC, sourceController.getManaPool())) {
+                colorCanUse |= ManaAtom.GENERIC;
+            }
+            if (sa.isManaAbilityFor(paidFor, colorCanUse)) {
+                return false;
+            }
         } else if (sa.getHostCard() != null) {
             return sa.getHostCard().hasProperty(property, sourceController, source, spellAbility);
         }

@@ -57,9 +57,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         game = player.getGame();
         saPaidFor = saPaidFor0;
 
-        // Set current paid for SA for player to be able to reference it later
-        player.pushPaidForSA(saPaidFor);
-
         //if player is floating mana, show mana pool to make it easier to use that mana
         wasFloatingMana = !player.getManaPool().isEmpty();
         if (wasFloatingMana) {
@@ -69,7 +66,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     @Override
     protected void onStop() {
-        // Clear current paid for SA
+        // Clear current Mana cost being paid for SA
+        saPaidFor.setManaCostBeingPaid(null);
         player.popPaidForSA();
 
         if (wasFloatingMana) { //hide mana pool if it was shown due to floating mana

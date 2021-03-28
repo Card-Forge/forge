@@ -1531,7 +1531,7 @@ public class ComputerUtilMana {
             public boolean apply(final Card c) {
                 for (final SpellAbility am : getAIPlayableMana(c)) {
                     am.setActivatingPlayer(ai);
-                    if (!checkPlayable || am.canPlay()) {
+                    if (!checkPlayable || (am.canPlay() && am.checkRestrictions(ai))) {
                         return true;
                     }
                 }
