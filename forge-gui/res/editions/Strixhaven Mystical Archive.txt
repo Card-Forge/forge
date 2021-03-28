@@ -5,10 +5,130 @@ Name=Strixhaven Mystical Archive
 Type=Other
 
 [cards]
+1 M Approach of the Second Sun
+2 M Day of Judgment
+3 U Defiant Strike
+4 U Divine Gambit
+5 R Ephemerate
+6 R Gift of Estates
+7 R Gods Willing
+8 R Mana Tithe
+9 U Revitalize
 10 R Swords to Plowshares
+11 M Teferi's Protection
+12 M Blue Sun's Zenith
+13 R Brainstorm
+14 R Compulsive Research
+15 R Counterspell
+16 R Memory Lapse
+17 M Mind's Desire
+18 U Negate
 19 U Opt
+20 U Strategic Planning
+21 R Tezzeret's Gambit
+22 M Time Warp
+23 U Whirlwind Denial
+24 U Agonizing Remorse
+25 M Crux of Fate
+26 R Dark Ritual
 27 M Demonic Tutor
+28 R Doom Blade
+29 U Duress
+30 U Eliminate
+31 R Inquisition of Kozilek
+32 R Sign in Blood
+33 M Tainted Pact
+34 R Tendrils of Agony
+35 U Village Rites
+36 M Chaos Warp
+37 U Claim the Firstborn
+38 R Faithless Looting
+39 R Grapeshot
+40 M Increasing Vengeance
+41 U Infuriate
+42 C Lightning Bolt
+43 M Mizzix's Mastery
+44 U Shock
+45 R Stone Rain
+46 U Thrill of Possibility
+47 R Urza's Rage
+48 R Abundant Harvest
+49 U Adventurous Impulse
+50 M Channel
+51 U Cultivate
+52 R Harmonize
+53 R Krosan Grip
+54 M Natural Order
+55 M Primal Command
+56 R Regrowth
+57 U Snakeskin Veil
+58 R Weather the Storm
+59 R Despark
+60 R Electrolyze
+61 R Growth Spiral
+62 R Lightning Helix
+63 R Putrefy
+64 M Approach of the Second Sun
+65 M Day of Judgment
+66 U Defiant Strike
+67 U Divine Gambit
+68 R Ephemerate
+69 R Gift of Estates
+70 R Gods Willing
+71 R Mana Tithe
+72 U Revitalize
 73 R Swords to Plowshares
+74 M Teferi's Protection
+75 M Blue Sun's Zenith
+76 R Brainstorm
+77 R Compulsive Research
+78 R Counterspell
+79 R Memory Lapse
+80 M Mind's Desire
+81 U Negate
 82 U Opt
+83 U Strategic Planning
+84 R Tezzeret's Gambit
+85 M Time Warp
+86 U Whirlwind Denial
+87 U Agonizing Remorse
+88 M Crux of Fate
+89 R Dark Ritual
 90 M Demonic Tutor
+91 R Doom Blade
+92 U Duress
+93 U Eliminate
+94 R Inquisition of Kozilek
+95 R Sign in Blood
+96 M Tainted Pact
+97 R Tendrils of Agony
+98 U Village Rites
+99 M Chaos Warp
+100 U Claim the Firstborn
+101 R Faithless Looting
+102 R Grapeshot
+103 M Increasing Vengeance
+104 U Infuriate
+105 C Lightning Bolt
+106 M Mizzix's Mastery
+107 U Shock
+108 R Stone Rain
+109 U Thrill of Possibility
+110 R Urza's Rage
+111 R Abundant Harvest
+112 U Adventurous Impulse
+113 M Channel
+114 U Cultivate
+115 R Harmonize
+116 R Krosan Grip
+117 M Natural Order
+118 M Primal Command
+119 R Regrowth
+120 U Snakeskin Veil
+121 R Weather the Storm
+122 R Despark
+123 R Electrolyze
+124 R Growth Spiral
+125 R Lightning Helix
+126 R Putrefy
 
