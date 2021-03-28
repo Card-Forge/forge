@@ -37,6 +37,7 @@ public class StaticData {
 
     private final String blockDataFolder;
     private final CardDb commonCards;
+    private final CardDb commonCardsforDeckEditor;
     private final CardDb variantCards;
     private final CardDb customCards;
     private final TokenDb allTokens;
@@ -108,11 +109,14 @@ public class StaticData {
             commonCards = new CardDb(regularCards, editions);
             variantCards = new CardDb(variantsCards, editions);
             customCards = new CardDb(customizedCards, customEditions);
+            commonCardsforDeckEditor = new CardDb(regularCards, editions);
 
             //must initialize after establish field values for the sake of card image logic
-            commonCards.initialize(false, false, enableUnknownCards, loadNonLegalCards);
-            variantCards.initialize(false, false, enableUnknownCards, loadNonLegalCards);
-            customCards.initialize(false, false, enableUnknownCards, loadNonLegalCards);
+            commonCards.initialize(false, false, enableUnknownCards, loadNonLegalCards, false);
+            variantCards.initialize(false, false, enableUnknownCards, loadNonLegalCards, false);
+            customCards.initialize(false, false, enableUnknownCards, loadNonLegalCards, false);
+            //cannot filter commonCards unless we don't allow to put duplicate parts on database, commonCardsforDeckEditor is strictly for Deck Editor use
+            commonCardsforDeckEditor.initialize(false, false, enableUnknownCards, loadNonLegalCards, true);
         }
 
         {
@@ -129,8 +133,10 @@ public class StaticData {
         {
             if (customCards.getAllCards().size() > 0) {
                 Collection<PaperCard> paperCards = customCards.getAllCards();
-                for(PaperCard p: paperCards)
+                for(PaperCard p: paperCards) {
                     commonCards.addCard(p);
+                    commonCardsforDeckEditor.addCard(p, true);
+                }
             }
         }
     }
@@ -239,7 +245,13 @@ public class StaticData {
     }
 
     public CardDb getCommonCards() {
-        return commonCards;
+        return getCommonCards(true);
+    }
+
+    public CardDb getCommonCards(boolean includeBackSides) {
+        if (includeBackSides)
+            return commonCards;
+        return commonCardsforDeckEditor;
     }
 
     public CardDb getCustomCards() {

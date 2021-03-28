@@ -156,6 +156,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     private void addSetCard(CardEdition e, CardInSet cis, CardRules cr) {
+        addSetCard(e, cis, cr, false);
+    }
+    private void addSetCard(CardEdition e, CardInSet cis, CardRules cr, boolean noSplitTypesNames) {
         int artIdx = 1;
         String key = e.getCode() + "/" + cis.name;
         if (artIds.containsKey(key)) {
@@ -163,7 +166,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         artIds.put(key, artIdx);
-        addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx));
+        addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx), noSplitTypesNames);
     }
 
     public void loadCard(String cardName, CardRules cr) {
@@ -182,7 +185,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         reIndex();
     }
 
-    public void initialize(boolean logMissingPerEdition, boolean logMissingSummary, boolean enableUnknownCards, boolean loadNonLegalCards) {
+    public void initialize(boolean logMissingPerEdition, boolean logMissingSummary, boolean enableUnknownCards, boolean loadNonLegalCards, boolean noSplitTypesNames) {
         Set<String> allMissingCards = new LinkedHashSet<>();
         List<String> missingCards = new ArrayList<>();
         CardEdition upcomingSet = null;
@@ -210,7 +213,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 }
 
                 if (cr != null) {
-                    addSetCard(e, cis, cr);
+                    addSetCard(e, cis, cr, noSplitTypesNames);
                 }
                 else {
                     missingCards.add(cis.name);
@@ -255,7 +258,12 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public void addCard(PaperCard paperCard) {
+        addCard(paperCard, false);
+    }
+    public void addCard(PaperCard paperCard, boolean noSplitTypesNames) {
         allCardsByName.put(paperCard.getName(), paperCard);
+
+        if (noSplitTypesNames) { return; }
 
         if (paperCard.getRules().getSplitType() == CardSplitType.None) { return; }
 

@@ -93,7 +93,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Planes);
                 allSections.add(DeckSection.Conspiracy);
 
-                normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
+                normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards(false).getAllCards(), PaperCard.class);
                 avatarPool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, PaperCard.FN_GET_RULES)), PaperCard.class);
                 planePool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)), PaperCard.class);
                 schemePool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)), PaperCard.class);
@@ -104,8 +104,8 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderFilter = CardRulesPredicates.Presets.CAN_BE_COMMANDER;
-                commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)), PaperCard.class);
-                normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
+                commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards(false).getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)), PaperCard.class);
+                normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards(false).getAllCards(), PaperCard.class);
 
                 wantUnique = true;
                 break;
@@ -113,8 +113,8 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderFilter = CardRulesPredicates.Presets.CAN_BE_TINY_LEADERS_COMMANDER;
-                commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)), PaperCard.class);
-                normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
+                commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards(false).getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)), PaperCard.class);
+                normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards(false).getAllCards(), PaperCard.class);
 
                 wantUnique = true;
                 break;
@@ -122,8 +122,8 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderFilter = Predicates.or(CardRulesPredicates.Presets.CAN_BE_OATHBREAKER, CardRulesPredicates.Presets.CAN_BE_SIGNATURE_SPELL);
-                commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)), PaperCard.class);
-                normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
+                commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards(false).getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)), PaperCard.class);
+                normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards(false).getAllCards(), PaperCard.class);
 
                 wantUnique = true;
                 break;
@@ -131,7 +131,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderFilter = CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER;
-                commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.and(
+                commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards(false).getAllCards(Predicates.and(
                         FModel.getFormats().get("Brawl").getFilterPrinted(), Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))), PaperCard.class);
                 normalPool = ItemPool.createFrom(FModel.getFormats().get("Brawl").getAllCards(), PaperCard.class);
 
