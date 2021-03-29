@@ -1,0 +1,9 @@
+Returned Pastcaller
+ManaCost:3 R RW W
+Types:Creature Spirit Cleric
+PT:4/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target Spirit,instant or sorcery card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl,Card.Spirit+YouOwn | TgtPrompt$ Select target Spirit,instant or sorcery card in your graveyard
+DeckHints:Type$Spirit
+Oracle:When Returned Pastcallers enters the battlefield, return target Spirit,instant or sorcery card from your graveyard to your hand.
