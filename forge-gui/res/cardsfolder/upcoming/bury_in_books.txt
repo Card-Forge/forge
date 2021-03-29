@@ -1,0 +1,8 @@
+Name:Bury in Books
+ManaCost:4 U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ CostReduction | Relative$ True | EffectZone$ All | Description$ This spell costs {2} less to cast if it targets an attacking creature.
+SVar:CostReduction:Count$Compare CheckTgt GE1.2.0
+SVar:CheckTgt:Targeted$Valid Creature.attacking
+A:SP$ ChangeZone | Cost$ 4 U | Origin$ Battlefield | Destination$ Library | ValidTgts$ Creature | LibraryPosition$ 1 | SpellDescription$ Put target creature into its owner's library second from the top.
+Oracle:This spell costs {2} less to cast if it targets an attacking creature.\nPut target creature into its owner's library second from the top.
