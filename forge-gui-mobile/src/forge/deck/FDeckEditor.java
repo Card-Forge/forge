@@ -1156,10 +1156,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                     // fall through to below
                                 default:
                                     if (cardManager.getWantUnique()) {
-                                        cardManager.setPool(editorType.applyCardFilter(ItemPool.createFrom(FModel.getMagicDb().getCommonCards(false).getUniqueCards(), PaperCard.class), additionalFilter), true);
+                                        cardManager.setPool(editorType.applyCardFilter(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(), PaperCard.class), additionalFilter), true);
                                     }
                                     else {
-                                        cardManager.setPool(editorType.applyCardFilter(ItemPool.createFrom(FModel.getMagicDb().getCommonCards(false).getAllCards(), PaperCard.class), additionalFilter), true);
+                                        cardManager.setPool(editorType.applyCardFilter(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(), PaperCard.class), additionalFilter), true);
                                     }
                                     break;
                             }
@@ -1243,7 +1243,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
 
                 //if card has more than one art option, add item to change user's preferred art
-                final List<PaperCard> artOptions = FModel.getMagicDb().getCommonCards(false).getAllCards(card.getName());
+                final List<PaperCard> artOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
                 if (artOptions != null && artOptions.size() > 1) {
                     menu.addItem(new FMenuItem(localizer.getMessage("lblChangePreferredArt"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
                         @Override
