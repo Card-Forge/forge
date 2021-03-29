@@ -842,7 +842,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
             String desc = node.getDescription();
             if (node.getHostCard() != null) {
-                String currentName = node.getHostCard().getName();
+                String currentName;
+                // if alternate state is viewed while card uses original
+                if (node.isIntrinsic() && !node.getHostCard().isMutated() && node.cardState != null) {
+                    currentName = node.cardState.getName();
+                }
+                else {
+                    currentName = node.getHostCard().getName();
+                }
                 desc = CardTranslation.translateMultipleDescriptionText(desc, currentName);
                 desc = TextUtil.fastReplace(desc, "CARDNAME", CardTranslation.getTranslatedName(currentName));
                 desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
