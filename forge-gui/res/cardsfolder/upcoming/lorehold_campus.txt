@@ -1,0 +1,8 @@
+Name:Lorehold Campus
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ Scry | Cost$ 4 T | ScryNum$ 1 | SpellDescription$ Scry 1.
+Oracle:Lorehold Campus enters the battlefield tapped.\n{T}: Add {R} or {W}.\n{4}, {T}: Scry 1.
