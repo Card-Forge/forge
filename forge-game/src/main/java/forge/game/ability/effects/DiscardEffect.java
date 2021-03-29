@@ -291,10 +291,6 @@ public class DiscardEffect extends SpellAbilityEffect {
 
         discard(sa, table, discardedMap);
 
-        if (sa.hasParam("RememberDiscarded")) {
-            source.addRemembered(discardedMap.values());
-        }
-
         // run trigger if something got milled
         table.triggerChangesZoneAll(game);
     } // discardResolve()
