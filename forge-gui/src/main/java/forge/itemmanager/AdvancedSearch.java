@@ -17,9 +17,11 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 
+import com.google.common.collect.Iterables;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.card.CardSplitType;
 import forge.card.CardType;
 import forge.card.CardType.CoreType;
 import forge.card.CardType.Supertype;
@@ -183,6 +185,19 @@ public class AdvancedSearch {
             }
             @Override
             protected Set<String> getItemValues(PaperCard input) {
+                CardSplitType cardSplitType = input.getRules().getSplitType();
+                //allow deck editor to find Adventure and Flip
+                if (cardSplitType == CardSplitType.Adventure || cardSplitType == CardSplitType.Flip) {
+                    if (input.getRules().getOtherPart() != null) {
+                        Set<String> subtypes = new HashSet<>();
+                        for (String subs : input.getRules().getOtherPart().getType().getSubtypes()) {
+                            subtypes.add(subs);
+                        }for (String subs : input.getRules().getMainPart().getType().getSubtypes()) {
+                            subtypes.add(subs);
+                        }
+                        return subtypes;
+                    }
+                }
                 return (Set<String>)input.getRules().getType().getSubtypes();
             }
         }),
