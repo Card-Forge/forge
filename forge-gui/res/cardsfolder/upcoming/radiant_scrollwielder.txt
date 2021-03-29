@@ -1,0 +1,15 @@
+Name:Radiant Scrollwielder
+ManaCost:2 R W
+Types:Creature Dwarf Cleric
+PT:2/4
+S:Mode$ Continuous | AddKeyword$ Lifelink | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | AffectedZone$ Stack | Description$ Instant and sorcery spells you control have lifelink.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At the beginning of your upkeep, exile an instant or sorcery card at random from your graveyard. You may cast it this turn. If a spell cast this way would be put into your graveyard, exile it instead.
+SVar:TrigExile:DB$ ChangeZone | DefinedPlayer$ You | Destination$ Exile | ChangeNum$ 1 | ChangeType$ Instant.YouOwn,Sorcery.YouOwn | AtRandom$ True | Origin$ Graveyard | Hidden$ True | Mandatory$ True | RememberChanged$ True | SubAbility$ DBMayCast
+SVar:DBMayCast:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Stack | ReplacementEffects$ ReplaceGraveyard
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may cast this card this turn. If a spell cast this way would be put into your graveyard, exile it instead.
+SVar:ReplaceGraveyard:Event$ Moved | ValidLKI$ Card.CastSa Spell.MayPlaySource | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile
+SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckNeeds:Type$Instant|Sorcery
+DeckHas:Ability$LifeGain
+Oracle:Instant and sorcery spells you control have lifelink.\nAt the beginning of your upkeep, exile an instant or sorcery card at random from your graveyard. You may cast it this turn. If a spell cast this way would be put into your graveyard, exile it instead.
