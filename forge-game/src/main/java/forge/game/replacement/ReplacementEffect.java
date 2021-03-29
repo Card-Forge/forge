@@ -216,7 +216,13 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     public String getDescription() {
         if (hasParam("Description") && !this.isSuppressed()) {
             String desc = AbilityUtils.applyDescriptionTextChangeEffects(getParam("Description"), this);
-            String currentName = getHostCard().getName();
+            String currentName;
+            if (this.isIntrinsic() && !this.getHostCard().isMutated() && cardState != null) {
+                currentName = cardState.getName();
+            }
+            else {
+                currentName = getHostCard().getName();
+            }
             desc = CardTranslation.translateSingleDescriptionText(desc, currentName);
             desc = TextUtil.fastReplace(desc, "CARDNAME", CardTranslation.getTranslatedName(currentName));
             desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));

@@ -131,7 +131,13 @@ public abstract class Trigger extends TriggerReplacementBase {
         if (hasParam("TriggerDescription") && !this.isSuppressed()) {
 
             StringBuilder sb = new StringBuilder();
-            String currentName = getHostCard().getName();
+            String currentName;
+            if (this.isIntrinsic() && !this.getHostCard().isMutated() && cardState != null) {
+                currentName = cardState.getName();
+            }
+            else {
+                currentName = getHostCard().getName();
+            }
             String desc = getParam("TriggerDescription");
             if (!desc.contains("ABILITY")) {
                 desc = CardTranslation.translateSingleDescriptionText(getParam("TriggerDescription"), currentName);
