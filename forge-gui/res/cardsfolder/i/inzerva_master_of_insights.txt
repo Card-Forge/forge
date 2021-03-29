@@ -2,8 +2,8 @@ Name:Inzerva, Master of Insights
 ManaCost:1 2/U 2/R
 Types:Legendary Planeswalker Inzerva
 Loyalty:4
-A:AB$ Draw | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Draw two cards, then discard a card. | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 1 | Mode$ TgtChoose
+A:AB$ Draw | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | NumCards$ 2 | SpellDescription$ Draw two cards, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 A:AB$ RepeatEach | Cost$ SubCounter<2/LOYALTY> | RepeatPlayers$ Opponent | RepeatSubAbility$ DBDig | SubAbility$ DBScry | Planeswalker$ True | SpellDescription$ Look at the top two cards of each other player's library, then put any number of them on the bottom of that library and the rest on top in any order.
 SVar:DBDig:DB$ Dig | Defined$ Remembered | DigNum$ 2 | AnyNumber$ True | DestinationZone$ Library | LibraryPosition2$ 0
 SVar:DBScry:DB$ Scry | ScryNum$ 2
