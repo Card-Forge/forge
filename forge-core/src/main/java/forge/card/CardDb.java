@@ -56,10 +56,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static String foilSuffix = "+";
     public final static char NameSetSeparator = '|';
 
-    // need this to obtain cardReference by name+set+artindex
-    private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.arrayLists());
     // for deck editor only
     private final ListMultimap<String, PaperCard> allCardsByNameNoAlt = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.arrayLists());
+    private final Map<String, PaperCard> uniqueCardsByNameNoAlt = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
+    // need this to obtain cardReference by name+set+artindex
+    private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.arrayLists());
     private final Map<String, PaperCard> uniqueCardsByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> rulesByName;
     private final Map<String, ICardFace> facesByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
@@ -275,8 +276,12 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     private void reIndex() {
         uniqueCardsByName.clear();
+        uniqueCardsByNameNoAlt.clear();
         for (Entry<String, Collection<PaperCard>> kv : allCardsByName.asMap().entrySet()) {
             uniqueCardsByName.put(kv.getKey(), getFirstWithImage(kv.getValue()));
+        }
+        for (Entry<String, Collection<PaperCard>> kv : allCardsByNameNoAlt.asMap().entrySet()) {
+            uniqueCardsByNameNoAlt.put(kv.getKey(), getFirstWithImage(kv.getValue()));
         }
     }
 
@@ -563,6 +568,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     @Override
     public Collection<PaperCard> getUniqueCards() {
         return uniqueCardsByName.values();
+    }
+
+    public Collection<PaperCard> getUniqueCardsNoAlt() {
+        return uniqueCardsByNameNoAlt.values();
     }
 
     public PaperCard getUniqueByName(final String name) {

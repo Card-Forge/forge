@@ -1156,7 +1156,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                     // fall through to below
                                 default:
                                     if (cardManager.getWantUnique()) {
-                                        cardManager.setPool(editorType.applyCardFilter(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class), additionalFilter), true);
+                                        cardManager.setPool(editorType.applyCardFilter(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(), PaperCard.class), additionalFilter), true);
                                     }
                                     else {
                                         cardManager.setPool(editorType.applyCardFilter(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(), PaperCard.class), additionalFilter), true);
