@@ -61,6 +61,13 @@ public class AdvancedSearch {
                 Set<String> names = new HashSet<>();
                 names.add(input.getName());
                 names.add(CardTranslation.getTranslatedName(input.getName()));
+                CardSplitType cardSplitType = input.getRules().getSplitType();
+                if (cardSplitType != CardSplitType.None && cardSplitType != CardSplitType.Split) {
+                    if (input.getRules().getOtherPart() != null) {
+                        names.add(input.getRules().getOtherPart().getName());
+                        names.add(CardTranslation.getTranslatedName(input.getRules().getOtherPart().getName()));
+                    }
+                }
                 return names;
             }
         }),
@@ -185,14 +192,15 @@ public class AdvancedSearch {
             @Override
             protected Set<String> getItemValues(PaperCard input) {
                 CardSplitType cardSplitType = input.getRules().getSplitType();
-                //allow deck editor to find Adventure and Flip
-                if (cardSplitType == CardSplitType.Adventure || cardSplitType == CardSplitType.Flip) {
+                if (cardSplitType != CardSplitType.None && cardSplitType != CardSplitType.Split) {
                     if (input.getRules().getOtherPart() != null) {
                         Set<String> subtypes = new HashSet<>();
                         for (String subs : input.getRules().getOtherPart().getType().getSubtypes()) {
-                            subtypes.add(subs);
+                            if (!subtypes.contains(subs))
+                                subtypes.add(subs);
                         }for (String subs : input.getRules().getMainPart().getType().getSubtypes()) {
-                            subtypes.add(subs);
+                            if (!subtypes.contains(subs))
+                                subtypes.add(subs);
                         }
                         return subtypes;
                     }
