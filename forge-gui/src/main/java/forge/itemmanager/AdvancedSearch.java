@@ -81,6 +81,13 @@ public class AdvancedSearch {
                 Set<String> names = new HashSet<>();
                 names.add(input.getRules().getOracleText());
                 names.add(CardTranslation.getTranslatedOracle(input.getName()));
+                CardSplitType cardSplitType = input.getRules().getSplitType();
+                if (cardSplitType != CardSplitType.None && cardSplitType != CardSplitType.Split) {
+                    if (input.getRules().getOtherPart() != null) {
+                        names.add(input.getRules().getOtherPart().getOracleText());
+                        names.add(CardTranslation.getTranslatedOracle(input.getRules().getOtherPart().getName()));
+                    }
+                }
                 return names;
             }
         }),
@@ -91,6 +98,18 @@ public class AdvancedSearch {
             }
             @Override
             protected Set<Keyword> getItemValues(PaperCard input) {
+                CardSplitType cardSplitType = input.getRules().getSplitType();
+                if (cardSplitType != CardSplitType.None && cardSplitType != CardSplitType.Split) {
+                    Set<Keyword> keywords = new HashSet<>();
+                    if (input.getRules().getOtherPart() != null) {
+                        PaperCard otherPart = FModel.getMagicDb().getCommonCards().getCard(input.getRules().getOtherPart().getName());
+                        if (otherPart != null) {
+                            keywords.addAll(Keyword.getKeywordSet(otherPart));
+                            keywords.addAll(Keyword.getKeywordSet(input));
+                        }
+                    }
+                    return keywords;
+                }
                 return Keyword.getKeywordSet(input);
             }
         }),
@@ -175,6 +194,24 @@ public class AdvancedSearch {
             protected Set<String> getItemValues(PaperCard input) {
                 final CardType type = input.getRules().getType();
                 final Set<String> types = new HashSet<>();
+                CardSplitType cardSplitType = input.getRules().getSplitType();
+                if (cardSplitType != CardSplitType.None && cardSplitType != CardSplitType.Split) {
+                    if (input.getRules().getOtherPart() != null) {
+                        for (Supertype supertype : input.getRules().getOtherPart().getType().getSupertypes()) {
+                            types.add(supertype.name());
+                        }
+                        for (CoreType coreType : input.getRules().getOtherPart().getType().getCoreTypes()) {
+                            types.add(coreType.name());
+                        }
+                        for (Supertype supertype : input.getRules().getMainPart().getType().getSupertypes()) {
+                            types.add(supertype.name());
+                        }
+                        for (CoreType coreType : input.getRules().getMainPart().getType().getCoreTypes()) {
+                            types.add(coreType.name());
+                        }
+                        return types;
+                    }
+                }
                 for (Supertype t : type.getSupertypes()) {
                     types.add(t.name());
                 }
@@ -196,11 +233,10 @@ public class AdvancedSearch {
                     if (input.getRules().getOtherPart() != null) {
                         Set<String> subtypes = new HashSet<>();
                         for (String subs : input.getRules().getOtherPart().getType().getSubtypes()) {
-                            if (!subtypes.contains(subs))
-                                subtypes.add(subs);
-                        }for (String subs : input.getRules().getMainPart().getType().getSubtypes()) {
-                            if (!subtypes.contains(subs))
-                                subtypes.add(subs);
+                            subtypes.add(subs);
+                        }
+                        for (String subs : input.getRules().getMainPart().getType().getSubtypes()) {
+                            subtypes.add(subs);
                         }
                         return subtypes;
                     }
