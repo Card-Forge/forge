@@ -266,11 +266,11 @@ public class TargetSelection {
             }
             if (((CardView) chosen).getZone().equals(ZoneType.Stack)) {
                 for (final SpellAbilityStackInstance si : game.getStack()) {
-                    // avoid peeking own SI so target is not changed
-                    if (si.compareToSpellAbility(ability)) {
-                        continue;
-                    }
                     SpellAbility abilityOnStack = si.getSpellAbility(true);
+                    if (si.compareToSpellAbility(ability)) {
+                        // By peeking at stack item, target is set to its SI state. So set it back before adding targets
+                        ability.resetTargets();
+                    }
                     if (abilityOnStack.getHostCard().getView().equals(chosen)) {
                         ability.getTargets().add(abilityOnStack);
                         break;
@@ -293,11 +293,11 @@ public class TargetSelection {
 
         final Game game = ability.getActivatingPlayer().getGame();
         for (final SpellAbilityStackInstance si : game.getStack()) {
-            // avoid peeking own SI so target is not changed
-            if (si.compareToSpellAbility(ability)) {
-                continue;
-            }
             SpellAbility abilityOnStack = si.getSpellAbility(true);
+            if (si.compareToSpellAbility(ability)) {
+                // By peeking at stack item, target is set to its SI state. So set it back before adding targets
+                ability.resetTargets();
+            }
             if (ability.canTargetSpellAbility(abilityOnStack)) {
                 stackItemViewCache.put(si.getView(), si);
                 selectOptions.add(si.getView());
