@@ -1388,6 +1388,10 @@ public class CardProperty {
             if (card.getNetPower() == card.getNetToughness()) {
                 return false;
             }
+        } else if (property.startsWith("equalPT")) {
+            if (card.getNetPower() != card.getNetToughness()) {
+                return false;
+            }
         } else if (property.equals("powerGTtoughness")) {
             if (card.getNetPower() <= card.getNetToughness()) {
                 return false;
