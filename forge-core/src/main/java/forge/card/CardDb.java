@@ -32,6 +32,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import forge.StaticData;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -56,9 +57,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static String foilSuffix = "+";
     public final static char NameSetSeparator = '|';
 
-    // for deck editor only
-    private final ListMultimap<String, PaperCard> allCardsByNameNoAlt = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.arrayLists());
-    private final Map<String, PaperCard> uniqueCardsByNameNoAlt = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     // need this to obtain cardReference by name+set+artindex
     private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.arrayLists());
     private final Map<String, PaperCard> uniqueCardsByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
@@ -70,7 +68,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private final Map<String, Integer> artIds = new HashMap<>();
 
     private final Collection<PaperCard> roAllCards = Collections.unmodifiableCollection(allCardsByName.values());
-    private final Collection<PaperCard> roAllCardsNoAlt = Collections.unmodifiableCollection(allCardsByNameNoAlt.values());
     private final CardEdition.Collection editions;
 
     public enum SetPreference {
@@ -260,7 +257,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     public void addCard(PaperCard paperCard) {
         allCardsByName.put(paperCard.getName(), paperCard);
-        allCardsByNameNoAlt.put(paperCard.getName(), paperCard);
 
         if (paperCard.getRules().getSplitType() == CardSplitType.None) { return; }
 
@@ -276,12 +272,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     private void reIndex() {
         uniqueCardsByName.clear();
-        uniqueCardsByNameNoAlt.clear();
         for (Entry<String, Collection<PaperCard>> kv : allCardsByName.asMap().entrySet()) {
             uniqueCardsByName.put(kv.getKey(), getFirstWithImage(kv.getValue()));
-        }
-        for (Entry<String, Collection<PaperCard>> kv : allCardsByNameNoAlt.asMap().entrySet()) {
-            uniqueCardsByNameNoAlt.put(kv.getKey(), getFirstWithImage(kv.getValue()));
         }
     }
 
@@ -571,7 +563,14 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public Collection<PaperCard> getUniqueCardsNoAlt() {
-        return uniqueCardsByNameNoAlt.values();
+        return Maps.filterEntries(this.uniqueCardsByName, new Predicate<Entry<String, PaperCard>>() {
+            @Override
+            public boolean apply(Entry<String, PaperCard> e) {
+                if (e == null)
+                    return false;
+                return e.getKey().equals(e.getValue().getName());
+            }
+        }).values();
     }
 
     public PaperCard getUniqueByName(final String name) {
@@ -592,7 +591,12 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public Collection<PaperCard> getAllCardsNoAlt() {
-        return roAllCardsNoAlt;
+        return Multimaps.filterEntries(allCardsByName, new Predicate<Entry<String, PaperCard>>() {
+            @Override
+            public boolean apply(Entry<String, PaperCard> entry) {
+                return entry.getKey().equals(entry.getValue().getName());
+            }
+        }).values();
     }
 
     public Collection<PaperCard> getAllNonPromoCards() {
@@ -623,7 +627,12 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public List<PaperCard> getAllCardsNoAlt(String cardName) {
-        return allCardsByNameNoAlt.get(getName(cardName));
+        return Lists.newArrayList(Multimaps.filterEntries(allCardsByName, new Predicate<Entry<String, PaperCard>>() {
+            @Override
+            public boolean apply(Entry<String, PaperCard> entry) {
+                return entry.getKey().equals(entry.getValue().getName());
+            }
+        }).get(getName(cardName)));
     }
 
     /**  Returns a modifiable list of cards matching the given predicate */
@@ -634,7 +643,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     /**  Returns a modifiable list of cards matching the given predicate */
     public List<PaperCard> getAllCardsNoAlt(Predicate<PaperCard> predicate) {
-        return Lists.newArrayList(Iterables.filter(this.roAllCardsNoAlt, predicate));
+        return Lists.newArrayList(Iterables.filter(getAllCardsNoAlt(), predicate));
     }
 
     // Do I want a foiled version of these cards?
