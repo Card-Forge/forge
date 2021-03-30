@@ -1,0 +1,10 @@
+Name:Lorehold Pledgemage
+ManaCost:1 RW RW
+Types:Creature Kor Shaman
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Magecraft - Whenever you cast or copy an instant or sorcery spell, CARDNAME gets +1/+0 until end of turn.
+T:Mode$ SpellCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Magecraft - Whenever you cast or copy an instant or sorcery spell, CARDNAME gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1
+SVar:BuffedBy:Instant,Sorcery
+DeckNeeds:Type$Instant|Sorcery
+Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, Lorehold Pledgemage gets +1/+0 until end of turn.
