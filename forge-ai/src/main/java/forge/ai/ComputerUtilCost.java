@@ -684,14 +684,14 @@ public class ComputerUtilCost {
     public static int getMaxXValue(SpellAbility sa, Player ai) {
         final Card source = sa.getHostCard();
         final SpellAbility root = sa.getRootAbility();
-        final Cost abCost = sa.getPayCosts();
+        final Cost abCost = root.getPayCosts();
         if (abCost == null || !abCost.hasXInAnyCostPart()) {
             return 0;
         }
 
         Integer val = null;
 
-        if (sa.costHasManaX()) {
+        if (root.costHasManaX()) {
             val = ComputerUtilMana.determineLeftoverMana(root, ai);
         }
 

@@ -123,7 +123,7 @@ public class DestroyAi extends SpellAbilityAi {
             // If there's X in payment costs and it's tied to targeting, make sure we set the XManaCostPaid first
             // (e.g. Heliod's Intervention)
             if ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid")) {
-                int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
                 sa.getRootAbility().setXManaCostPaid(xPay);
             }
 
@@ -136,11 +136,11 @@ public class DestroyAi extends SpellAbilityAi {
             sa.resetTargets();
             int maxTargets;
 
-            if (sa.costHasManaX()) {
+            if (sa.getRootAbility().costHasManaX()) {
                 // TODO: currently the AI will maximize mana spent on X, trying to maximize damage. This may need improvement.
                 maxTargets = ComputerUtilCost.getMaxXValue(sa, ai);
                 // need to set XPaid to get the right number for
-                sa.setXManaCostPaid(maxTargets);
+                sa.getRootAbility().setXManaCostPaid(maxTargets);
                 // need to check for maxTargets
                 maxTargets = Math.min(maxTargets, sa.getMaxTargets());
             } else {
