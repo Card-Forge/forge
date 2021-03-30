@@ -1,0 +1,10 @@
+Name:Clever Lumimancer
+ManaCost:W
+Types:Creature Human Wizard
+PT:0/1
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Magecraft - Whenever you cast or copy an instant or sorcery spell, CARDNAME gets +2/+2 until end of turn.
+T:Mode$ SpellCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Magecraft - Whenever you cast or copy an instant or sorcery spell, CARDNAME gets +2/+2 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ +2
+SVar:BuffedBy:Instant,Sorcery
+DeckNeeds:Type$Instant|Sorcery
+Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, Clever Lumimancer gets +2/+2 until end of turn.
