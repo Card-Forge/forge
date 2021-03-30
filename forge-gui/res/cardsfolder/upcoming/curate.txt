@@ -1,0 +1,7 @@
+Name:Curate
+ManaCost:1 U
+Types:Instant
+A:SP$ Dig | DigNum$ 2 | AnyNumber$ True | DestinationZone$ Graveyard | LibraryPosition2$ 0 | SubAbility$ DBDraw | StackDescription$ {p:You} looks at the top two cards of their library, puts any number of them into their graveyard and the rest back on top of their library in any order. | SpellDescription$ Look at the top two cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+DeckHas:Ability$Graveyard
+Oracle:Look at the top two cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order.\nDraw a card.
