@@ -9,7 +9,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
@@ -39,14 +38,14 @@ public class ClashEffect extends SpellAbilityEffect {
 
         if (victory) {
 
-            AbilitySub sub = sa.getAdditionalAbility("WinSubAbility");
+            SpellAbility sub = sa.getAdditionalAbility("WinSubAbility");
             if (sub != null) {
                 AbilityUtils.resolve(sub);
             }
 
             runParams.put(AbilityKey.Won, "True");
         } else {
-            AbilitySub sub = sa.getAdditionalAbility("OtherwiseSubAbility");
+            SpellAbility sub = sa.getAdditionalAbility("OtherwiseSubAbility");
             if (sub != null) {
                 AbilityUtils.resolve(sub);
             }

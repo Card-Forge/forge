@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
 
@@ -24,7 +23,7 @@ public class BranchEffect extends SpellAbilityEffect {
         final int svarValue = AbilityUtils.calculateAmount(host, branchSVar, sa);
         final int operandValue = AbilityUtils.calculateAmount(host, operand, sa);
 
-        AbilitySub sub = null;
+        SpellAbility sub = null;
         if (Expressions.compare(svarValue, operator, operandValue)) {
             sub = sa.getAdditionalAbility("TrueSubAbility");
         } else {

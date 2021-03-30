@@ -2,13 +2,11 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
 
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
@@ -67,10 +65,10 @@ public class BidLifeEffect extends SpellAbilityEffect {
         
         host.setChosenNumber(bid);
         host.addRemembered(winner);
-        final SpellAbility action = AbilityFactory.getAbility(host.getSVar(sa.getParam("BidSubAbility")), host);
-        action.setActivatingPlayer(sa.getActivatingPlayer());
-        ((AbilitySub) action).setParent(sa);
-        AbilityUtils.resolve(action);
+        final SpellAbility action = sa.getAdditionalAbility("BidSubAbility");
+        if (action != null) {
+            AbilityUtils.resolve(action);
+        }
         host.clearRemembered();
     }
 }

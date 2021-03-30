@@ -44,7 +44,6 @@ import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
@@ -1346,7 +1345,7 @@ public abstract class GameState {
                 } 
                 else if (info.startsWith("OnAdventure")) {
                     String abAdventure = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ExileOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.nonCopiedSpell";
-                    AbilitySub saAdventure = (AbilitySub)AbilityFactory.getAbility(abAdventure, c);
+                    SpellAbility saAdventure = AbilityFactory.getAbility(abAdventure, c);
                     StringBuilder sbPlay = new StringBuilder();
                     sbPlay.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonAdventure");
                     sbPlay.append(" | AffectedZone$ Exile | Description$ You may cast the card.");

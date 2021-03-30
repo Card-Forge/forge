@@ -82,9 +82,11 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasAdditionalAbility("Execute")) {
-            AbilitySub overridingSA = (AbilitySub)sa.getAdditionalAbility("Execute").copy(lki, sa.getActivatingPlayer(), false);
+            SpellAbility overridingSA = sa.getAdditionalAbility("Execute").copy(lki, sa.getActivatingPlayer(), false);
             // need to reset the parent, additionalAbility does set it to this
-            overridingSA.setParent(null);
+            if (overridingSA instanceof AbilitySub) {
+                ((AbilitySub)overridingSA).setParent(null);
+            }
             // Set Transform timestamp when the delayed trigger is created
             if (ApiType.SetState == overridingSA.getApi()) {
                 overridingSA.setSVar("StoredTransform", String.valueOf(sa.getHostCard().getTransformedTimestamp()));

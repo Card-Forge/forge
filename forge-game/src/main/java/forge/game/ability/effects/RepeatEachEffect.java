@@ -16,7 +16,6 @@ import forge.game.card.CardDamageMap;
 import forge.game.card.CardLists;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
@@ -33,7 +32,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         // Things to loop over: Cards, Players, or SAs
         final Card source = sa.getHostCard();
 
-        final AbilitySub repeat = sa.getAdditionalAbility("RepeatSubAbility");
+        final SpellAbility repeat = sa.getAdditionalAbility("RepeatSubAbility");
 
         if (repeat != null && !repeat.getHostCard().equalsWithTimestamp(source)) {
             // TODO: for some reason, the host card of the original additional SA is set to the cloned card when

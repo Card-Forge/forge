@@ -538,8 +538,8 @@ public class CardFactory {
         if (from.getSubAbility() != null) {
             to.setSubAbility((AbilitySub) from.getSubAbility().copy(host, p, lki));
         }
-        for (Map.Entry<String, AbilitySub> e : from.getAdditionalAbilities().entrySet()) {
-            to.setAdditionalAbility(e.getKey(), (AbilitySub) e.getValue().copy(host, p, lki));
+        for (Map.Entry<String, SpellAbility> e : from.getAdditionalAbilities().entrySet()) {
+            to.setAdditionalAbility(e.getKey(), e.getValue().copy(host, p, lki));
         }
         for (Map.Entry<String, List<AbilitySub>> e : from.getAdditionalAbilityLists().entrySet()) {
             to.setAdditionalAbilityList(e.getKey(), Lists.transform(e.getValue(), new Function<AbilitySub, AbilitySub>() {

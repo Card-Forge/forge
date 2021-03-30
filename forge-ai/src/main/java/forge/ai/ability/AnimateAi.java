@@ -30,6 +30,7 @@ import forge.game.cost.CostPutCounter;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityContinuous;
@@ -243,6 +244,11 @@ public class AnimateAi extends SpellAbilityAi {
         return true;
     }
 
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        return player.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2);
+    }
+    
     private boolean animateTgtAI(final SpellAbility sa) {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();

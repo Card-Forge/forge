@@ -7,7 +7,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -25,7 +24,7 @@ public class RepeatEffect extends SpellAbilityEffect {
         Card source = sa.getHostCard();
 
         // setup subability to repeat
-        AbilitySub repeat = sa.getAdditionalAbility("RepeatSubAbility");
+        SpellAbility repeat = sa.getAdditionalAbility("RepeatSubAbility");
 
         if (repeat != null && !repeat.getHostCard().equals(source)) {
             // TODO: for some reason, the host card of the original additional SA is set to the cloned card when
