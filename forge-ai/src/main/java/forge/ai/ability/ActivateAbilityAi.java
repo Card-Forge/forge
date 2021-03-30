@@ -21,7 +21,7 @@ public class ActivateAbilityAi extends SpellAbilityAi {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
-        final Player opp = ai.getWeakestOpponent();
+        final Player opp = ai.getStrongestOpponent();
 
         List<Card> list = CardLists.getType(opp.getCardsIn(ZoneType.Battlefield), sa.getParamOrDefault("Type", "Card"));
         if (list.isEmpty()) {
@@ -45,7 +45,7 @@ public class ActivateAbilityAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Player opp = ai.getWeakestOpponent();
+        final Player opp = ai.getStrongestOpponent();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
@@ -56,8 +56,7 @@ public class ActivateAbilityAi extends SpellAbilityAi {
             } else {
                 final List<Player> defined = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
-                // if at least two players are returned we can affect another opponent
-                return defined.size() > 1 || defined.contains(opp);
+                return defined.contains(opp);
             }
 
         } else {
