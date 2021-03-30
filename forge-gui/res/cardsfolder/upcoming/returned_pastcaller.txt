@@ -1,4 +1,4 @@
-Returned Pastcaller
+Name:Returned Pastcaller
 ManaCost:3 R RW W
 Types:Creature Spirit Cleric
 PT:4/2
