@@ -44,6 +44,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         final int counterAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
         final String valid = sa.getParam("ValidCards");
         final ZoneType zone = sa.hasParam("ValidZone") ? ZoneType.smartValueOf(sa.getParam("ValidZone")) : ZoneType.Battlefield;
+        final boolean etbcounter = sa.hasParam("ETB");
         final Game game = activator.getGame();
 
         if (counterAmount <= 0) {
@@ -67,7 +68,11 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         GameEntityCounterTable table = new GameEntityCounterTable();
         for (final Card tgtCard : cards) {
             boolean inBattlefield = game.getZoneOf(tgtCard).is(ZoneType.Battlefield);
-            tgtCard.addCounter(CounterType.getType(type), counterAmount, placer, inBattlefield, table);
+            if (etbcounter) {
+                tgtCard.addEtbCounter(CounterType.getType(type), counterAmount, placer);
+            } else {
+                tgtCard.addCounter(CounterType.getType(type), counterAmount, placer, inBattlefield, table);
+            }
             game.updateLastStateForCard(tgtCard);
         }
         table.triggerCountersPutAll(game);
