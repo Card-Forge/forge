@@ -82,7 +82,13 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
         boolean isOptional = sa.hasParam("Optional");
 
         for (Player controller : controllers) {
-            if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantCopyTheSpell", CardTranslation.getTranslatedName(card.getName())))) {
+            String nameforprompt = CardTranslation.getTranslatedName(card.getName());
+            //hotfix for Wandering Archaic prompt
+            if (sa.hasParam("CopyTriggeredSpellName")) {
+                final Map<AbilityKey, Object> tobjs = sa.getTriggeringObjects();
+                nameforprompt = (tobjs.get(AbilityKey.Card)).toString();
+            }
+            if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantCopyTheSpell", nameforprompt))) {
                 continue;
             }
 
