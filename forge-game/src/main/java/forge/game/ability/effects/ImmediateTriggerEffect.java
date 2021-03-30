@@ -75,9 +75,11 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasAdditionalAbility("Execute")) {
-            AbilitySub overridingSA = (AbilitySub)sa.getAdditionalAbility("Execute").copy(lki, sa.getActivatingPlayer(), false);
+            SpellAbility overridingSA = sa.getAdditionalAbility("Execute").copy(lki, sa.getActivatingPlayer(), false);
             // need to set Parent to null, otherwise it might have wrong root ability
-            overridingSA.setParent(null);
+            if (overridingSA instanceof AbilitySub) {
+                ((AbilitySub)overridingSA).setParent(null);
+            }
 
             if (sa.hasParam("CopyTriggeringObjects")) {
                 overridingSA.setTriggeringObjects(sa.getTriggeringObjects());

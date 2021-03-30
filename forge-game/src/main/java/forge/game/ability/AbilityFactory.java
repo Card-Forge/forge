@@ -53,6 +53,7 @@ public final class AbilityFactory {
 
     static final List<String> additionalAbilityKeys = Lists.newArrayList(
             "WinSubAbility", "OtherwiseSubAbility", // Clash
+            "BidSubAbility", // BidLifeEffect
             "ChooseNumberSubAbility", "Lowest", "Highest", "NotLowest", // ChooseNumber
             "HeadsSubAbility", "TailsSubAbility", "LoseSubAbility", // FlipCoin
             "TrueSubAbility", "FalseSubAbility", // Branch
@@ -272,7 +273,7 @@ public final class AbilityFactory {
 
         for (final String key : additionalAbilityKeys) {
             if (mapParams.containsKey(key) && spellAbility.getAdditionalAbility(key) == null) {
-                spellAbility.setAdditionalAbility(key, getSubAbility(state, mapParams.get(key), sVarHolder));
+                spellAbility.setAdditionalAbility(key, getAbility(state, mapParams.get(key), sVarHolder));
             }
         }
 

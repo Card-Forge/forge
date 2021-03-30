@@ -13,7 +13,6 @@ import forge.game.card.Card;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.util.Localizer;
@@ -97,7 +96,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                     }
                 }
                 if (countHeads > 0) {
-                    AbilitySub sub = sa.getAdditionalAbility("HeadsSubAbility");
+                    SpellAbility sub = sa.getAdditionalAbility("HeadsSubAbility");
                     if (sub != null) {
                         if (sa.hasParam("Amount")) {
                             sub.setSVar(varName, "Number$" + countHeads);
@@ -106,7 +105,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                     }
                 }
                 if (countTails > 0) {
-                    AbilitySub sub = sa.getAdditionalAbility("TailsSubAbility");
+                    SpellAbility sub = sa.getAdditionalAbility("TailsSubAbility");
                     if (sub != null) {
                         if (sa.hasParam("Amount")) {
                             sub.setSVar(varName, "Number$" + countTails);

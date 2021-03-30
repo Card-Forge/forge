@@ -11,7 +11,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.Localizer;
@@ -106,7 +105,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             }
             card.getGame().getAction().notifyOfValue(sa, card, sb.toString(), null);
             if (sa.hasParam("ChooseNumberSubAbility")) {
-                AbilitySub sub = sa.getAdditionalAbility("ChooseNumberSubAbility");
+                SpellAbility sub = sa.getAdditionalAbility("ChooseNumberSubAbility");
                 
                 for (Player p : chooseMap.keySet()) {
                     card.addRemembered(p);
@@ -117,7 +116,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             }
             
             if (sa.hasParam("Lowest")) {
-                AbilitySub sub = sa.getAdditionalAbility("Lowest");
+                SpellAbility sub = sa.getAdditionalAbility("Lowest");
 
                 for (Player p : lowestNum) {
                     card.addRemembered(p);
@@ -134,7 +133,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                         notLowestNum.add(p);
                     }
                 }
-                AbilitySub sub = sa.getAdditionalAbility("NotLowest");
+                SpellAbility sub = sa.getAdditionalAbility("NotLowest");
 
                 for (Player p : notLowestNum) {
                     card.addRemembered(p);
@@ -144,7 +143,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("Highest")) {
-                AbilitySub sub = sa.getAdditionalAbility("Highest");
+                SpellAbility sub = sa.getAdditionalAbility("Highest");
 
                 for (Player p : highestNum) {
                     card.addRemembered(p);

@@ -16,7 +16,6 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
@@ -67,7 +66,7 @@ public class RepeatEachAi extends SpellAbilityAi {
             return false;
         } else if ("AllPlayerLoseLife".equals(logic)) {
             final Card source = sa.getHostCard();
-            AbilitySub repeat = sa.getAdditionalAbility("RepeatSubAbility");
+            SpellAbility repeat = sa.getAdditionalAbility("RepeatSubAbility");
 
             String svar = repeat.getSVar(repeat.getParam("LifeAmount"));
             // replace RememberedPlayerCtrl with YouCtrl

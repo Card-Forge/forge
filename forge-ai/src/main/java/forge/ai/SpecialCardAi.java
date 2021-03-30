@@ -159,8 +159,7 @@ public class SpecialCardAi {
             final PhaseHandler ph = ai.getGame().getPhaseHandler();
             final Combat combat = ai.getGame().getCombat();
 
-            Card animated = AnimateAi.becomeAnimated(sa.getHostCard(), sa);
-            animated.addType("Creature");
+            Card animated = AnimateAi.becomeAnimated(sa.getHostCard(), sa.getSubAbility());
             if (sa.getHostCard().canReceiveCounters(CounterEnumType.P1P1)) {
                 animated.addCounter(CounterEnumType.P1P1, 2, ai, false, null);
             }
@@ -169,10 +168,6 @@ public class SpecialCardAi {
             boolean isValuableBlocker = combat != null && combat.getDefendingPlayers().contains(ai) && ComputerUtilCard.doesSpecifiedCreatureBlock(ai, animated);
 
             return isOppEOT || isValuableAttacker || isValuableBlocker;
-        }
-
-        public static SpellAbility considerAnimating(final Player ai, final SpellAbility sa, final List<SpellAbility> options) {
-            return ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) ? options.get(0) : options.get(1);
         }
     }
 

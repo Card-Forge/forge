@@ -313,7 +313,12 @@ public class CountersPutAi extends SpellAbilityAi {
         } else if (logic.startsWith("MoveCounter")) {
             return doMoveCounterLogic(ai, sa, ph);
         } else if (logic.equals("CrawlingBarrens")) {
-            return SpecialCardAi.CrawlingBarrens.consider(ai, sa);
+            boolean willActivate = SpecialCardAi.CrawlingBarrens.consider(ai, sa);
+            if (willActivate && ph.getPhase().isBefore(PhaseType.MAIN2)) {
+                // don't use this for mana until after combat
+                AiCardMemory.rememberCard(ai, source, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2);
+            }
+            return willActivate;
         }
 
         if (!sa.metConditions() && sa.getSubAbility() == null) {

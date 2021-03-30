@@ -12,6 +12,8 @@ import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.spellability.SpellAbility;
+import forge.util.Lang;
+import forge.util.TextUtil;
 
 
 public class AnimateEffect extends AnimateEffectBase {
@@ -139,6 +141,17 @@ public class AnimateEffect extends AnimateEffectBase {
 
         List<Card> tgts = getCardsfromTargets(sa);
 
+        if (sa.hasParam("Optional")) {
+            final String targets = Lang.joinHomogenous(tgts);
+            final String message = sa.hasParam("OptionQuestion")
+                    ? TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets)
+                    : getStackDescription(sa);
+
+            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message)) {
+                return;
+            }
+        }
+
         for (final Card c : tgts) {
             doAnimate(c, sa, power, toughness, types, removeTypes, finalDesc,
                     keywords, removeKeywords, hiddenKeywords,
@@ -229,9 +242,7 @@ public class AnimateEffect extends AnimateEffectBase {
 
         final List<Card> tgts = getCardsfromTargets(sa);
 
-        for (final Card c : tgts) {
-            sb.append(c).append(" ");
-        }
+        sb.append(Lang.joinHomogenous(tgts)).append(" ");
 
         // if power is -1, we'll assume it's not just setting toughness
         if (power != null && toughness != null) {

@@ -421,7 +421,7 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public AbilitySub getAdditionalAbility(String ability) {
+    public SpellAbility getAdditionalAbility(String ability) {
         return sa.getAdditionalAbility(ability);
     }
 
