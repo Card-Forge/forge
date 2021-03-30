@@ -1,0 +1,10 @@
+Name:Avatar
+ManaCost:no cost
+Types:Creature Avatar
+Colors:black,red
+K:Haste
+PT:3/6
+T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever this creature attacks, it deals 3 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 3
+SVar:HasAttackEffect:TRUE
+Oracle:Haste\nWhenever this creature attacks, it deals 3 damage to each opponent.
