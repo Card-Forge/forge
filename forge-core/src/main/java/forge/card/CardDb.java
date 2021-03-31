@@ -56,6 +56,7 @@ import forge.util.TextUtil;
 public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static String foilSuffix = "+";
     public final static char NameSetSeparator = '|';
+    private boolean loadNonLegalCards = true;
 
     // need this to obtain cardReference by name+set+artindex
     private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.arrayLists());
@@ -67,7 +68,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private final Map<String, String> alternateName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, Integer> artIds = new HashMap<>();
 
-    private final Collection<PaperCard> roAllCards = Collections.unmodifiableCollection(allCardsByName.values());
     private final CardEdition.Collection editions;
 
     public enum SetPreference {
@@ -156,6 +156,23 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
     }
 
+    private ListMultimap<String, PaperCard> getAllCardsByName() {
+        return Multimaps.filterKeys(allCardsByName, new Predicate<String>() {
+            @Override
+            public boolean apply(String s) {
+                if (loadNonLegalCards)
+                    return true;
+                PaperCard pc = getUniqueByName(s);
+                if (pc != null) {
+                    if (editions.get(pc.getEdition()).getType() == CardEdition.Type.FUNNY ||
+                            editions.get(pc.getEdition()).getBorderColor() == CardEdition.BorderColor.SILVER)
+                        return false;
+                }
+                return true;
+            }
+        });
+    }
+
     private void addSetCard(CardEdition e, CardInSet cis, CardRules cr) {
         int artIdx = 1;
         String key = e.getCode() + "/" + cis.name;
@@ -188,28 +205,20 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         List<String> missingCards = new ArrayList<>();
         CardEdition upcomingSet = null;
         Date today = new Date();
-        List<String> skippedCardName = new ArrayList<>();
+        this.loadNonLegalCards = loadNonLegalCards;
 
         for (CardEdition e : editions.getOrderedEditions()) {
             boolean coreOrExpSet = e.getType() == CardEdition.Type.CORE || e.getType() == CardEdition.Type.EXPANSION;
             boolean isCoreExpSet = coreOrExpSet || e.getType() == CardEdition.Type.REPRINT;
-            //todo sets with nonlegal cards should have tags in them so we don't need to specify the code here
-            boolean skip = !loadNonLegalCards && (e.getType() == CardEdition.Type.FUNNY || e.getBorderColor() == CardEdition.BorderColor.SILVER);
             if (logMissingPerEdition && isCoreExpSet) {
                 System.out.print(e.getName() + " (" + e.getAllCardsInSet().size() + " cards)");
             }
             if (coreOrExpSet && e.getDate().after(today) && upcomingSet == null) {
-                if (skip)
-                    upcomingSet = e;
+                upcomingSet = e;
             }
 
             for (CardEdition.CardInSet cis : e.getAllCardsInSet()) {
                 CardRules cr = rulesByName.get(cis.name);
-                if (cr != null && !cr.getType().isBasicLand() && skip) {
-                    skippedCardName.add(cis.name);
-                    continue;
-                }
-
                 if (cr != null) {
                     addSetCard(e, cis, cr);
                 }
@@ -245,7 +254,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if (!contains(cr.getName())) {
                 if (upcomingSet != null) {
                     addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown, 1));
-                } else if(enableUnknownCards && !skippedCardName.contains(cr.getName())) {
+                } else if(enableUnknownCards) {
                     System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
                     addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 1));
                 }
@@ -272,7 +281,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     private void reIndex() {
         uniqueCardsByName.clear();
-        for (Entry<String, Collection<PaperCard>> kv : allCardsByName.asMap().entrySet()) {
+        for (Entry<String, Collection<PaperCard>> kv : getAllCardsByName().asMap().entrySet()) {
             uniqueCardsByName.put(kv.getKey(), getFirstWithImage(kv.getValue()));
         }
     }
@@ -587,11 +596,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     @Override
     public Collection<PaperCard> getAllCards() {
-        return roAllCards;
+        return Collections.unmodifiableCollection(getAllCardsByName().values());
     }
 
     public Collection<PaperCard> getAllCardsNoAlt() {
-        return Multimaps.filterEntries(allCardsByName, new Predicate<Entry<String, PaperCard>>() {
+        return Multimaps.filterEntries(getAllCardsByName(), new Predicate<Entry<String, PaperCard>>() {
             @Override
             public boolean apply(Entry<String, PaperCard> entry) {
                 return entry.getKey().equals(entry.getValue().getName());
@@ -600,7 +609,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public Collection<PaperCard> getAllNonPromoCards() {
-        return Lists.newArrayList(Iterables.filter(this.roAllCards, new Predicate<PaperCard>() {
+        return Lists.newArrayList(Iterables.filter(getAllCards(), new Predicate<PaperCard>() {
             @Override
             public boolean apply(final PaperCard paperCard) {
                 CardEdition edition = null;
@@ -623,11 +632,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     @Override
     public List<PaperCard> getAllCards(String cardName) {
-        return allCardsByName.get(getName(cardName));
+        return getAllCardsByName().get(getName(cardName));
     }
 
     public List<PaperCard> getAllCardsNoAlt(String cardName) {
-        return Lists.newArrayList(Multimaps.filterEntries(allCardsByName, new Predicate<Entry<String, PaperCard>>() {
+        return Lists.newArrayList(Multimaps.filterEntries(getAllCardsByName(), new Predicate<Entry<String, PaperCard>>() {
             @Override
             public boolean apply(Entry<String, PaperCard> entry) {
                 return entry.getKey().equals(entry.getValue().getName());
@@ -638,7 +647,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     /**  Returns a modifiable list of cards matching the given predicate */
     @Override
     public List<PaperCard> getAllCards(Predicate<PaperCard> predicate) {
-        return Lists.newArrayList(Iterables.filter(this.roAllCards, predicate));
+        return Lists.newArrayList(Iterables.filter(getAllCards(), predicate));
     }
 
     /**  Returns a modifiable list of cards matching the given predicate */
@@ -665,12 +674,12 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     @Override
     public boolean contains(String name) {
-        return allCardsByName.containsKey(getName(name));
+        return getAllCardsByName().containsKey(getName(name));
     }
 
     @Override
     public Iterator<PaperCard> iterator() {
-        return this.roAllCards.iterator();
+        return getAllCards().iterator();
     }
 
     public Predicate<? super PaperCard> wasPrintedInSets(List<String> setCodes) {
