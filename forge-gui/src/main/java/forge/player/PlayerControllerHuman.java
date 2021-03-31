@@ -1149,6 +1149,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public CardCollectionView chooseCardsToDiscardUnlessType(final int num, final CardCollectionView hand,
             final String uType, final SpellAbility sa) {
+        String [] splitUTypes = uType.split(",");
         final InputSelectEntitiesFromList<Card> target = new InputSelectEntitiesFromList<Card>(this, num, num, hand,
                 sa) {
             private static final long serialVersionUID = -5774108410928795591L;
@@ -1156,14 +1157,26 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             @Override
             protected boolean hasAllTargets() {
                 for (final Card c : selected) {
-                    if (c.getType().hasStringType(uType)) {
-                        return true;
+                    for (String part : splitUTypes) {
+                        if (c.getType().hasStringType(part)) {
+                            return true;
+                        }
                     }
                 }
                 return super.hasAllTargets();
             }
         };
-        target.setMessage(localizer.getMessage("lblSelectNCardsToDiscardUnlessDiscarduType", uType));
+        int n=1;
+        StringBuilder promptType = new StringBuilder();
+        for (String part : splitUTypes) {
+            if (n==1) {
+                promptType.append(part);
+            } else {
+                promptType.append(" or ").append(part);
+            }
+            n++;
+        }
+        target.setMessage(localizer.getMessage("lblSelectNCardsToDiscardUnlessDiscarduType", promptType));
         target.showAndWait();
         return new CardCollection(target.getSelected());
     }
