@@ -29,7 +29,6 @@ import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.card.CardDb;
 import forge.card.CardEdition;
-import forge.card.CardRulesPredicates;
 import forge.deck.io.DeckPreferences;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.planarconquest.ConquestUtil;
@@ -1085,10 +1084,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             final Localizer localizer = Localizer.getInstance();
                             switch (editorType) {
                                 case Archenemy:
-                                    cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)), PaperCard.class), true);
+                                    cardManager.setPool(FModel.getArchenemyCards(), true);
                                     break;
                                 case Planechase:
-                                    cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)), PaperCard.class), true);
+                                    cardManager.setPool(FModel.getPlanechaseCards(), true);
                                     break;
                                 case Quest:
                                     final ItemPool<PaperCard> questPool = new ItemPool<>(PaperCard.class);
@@ -1156,10 +1155,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                     // fall through to below
                                 default:
                                     if (cardManager.getWantUnique()) {
-                                        cardManager.setPool(editorType.applyCardFilter(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(), PaperCard.class), additionalFilter), true);
+                                        cardManager.setPool(editorType.applyCardFilter(FModel.getUniqueCardsNoAlt(), additionalFilter), true);
                                     }
                                     else {
-                                        cardManager.setPool(editorType.applyCardFilter(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(), PaperCard.class), additionalFilter), true);
+                                        cardManager.setPool(editorType.applyCardFilter(FModel.getAllCardsNoAlt(), additionalFilter), true);
                                     }
                                     break;
                             }
