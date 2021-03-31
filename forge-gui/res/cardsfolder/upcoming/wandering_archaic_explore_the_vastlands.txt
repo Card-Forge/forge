@@ -3,7 +3,7 @@ ManaCost:5
 Types:Creature Avatar
 PT:4/4
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigCopySpell | TriggerDescription$ Whenever an opponent casts an instant or sorcery spell, they may pay {2}. If they don't, you may copy that spell. You may choose new targets for the copy.
-SVar:TrigCopySpell:DB$ CopySpellAbility | UnlessCost$ 2 | UnlessPayer$ TriggeredActivator | Defined$ TriggeredSpellAbility | AILogic$ Always | Optional$ True | CopyTriggeredSpellName$ True | MayChooseTarget$ True
+SVar:TrigCopySpell:DB$ CopySpellAbility | UnlessCost$ 2 | UnlessPayer$ TriggeredActivator | Defined$ TriggeredSpellAbility | AILogic$ Always | Optional$ True | MayChooseTarget$ True
 AlternateMode:Modal
 Oracle:Whenever an opponent casts an instant or sorcery spell, they may pay {2}. If they don't, you may copy that spell. You may choose new targets for the copy.
 

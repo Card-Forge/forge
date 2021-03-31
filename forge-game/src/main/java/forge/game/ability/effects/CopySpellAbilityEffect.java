@@ -82,20 +82,15 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
         boolean isOptional = sa.hasParam("Optional");
 
         for (Player controller : controllers) {
-            String nameforprompt = CardTranslation.getTranslatedName(card.getName());
-            //hotfix for Wandering Archaic prompt
-            if (sa.hasParam("CopyTriggeredSpellName")) {
-                final Map<AbilityKey, Object> tobjs = sa.getTriggeringObjects();
-                nameforprompt = (tobjs.get(AbilityKey.Card)).toString();
-            }
-            if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantCopyTheSpell", nameforprompt))) {
-                continue;
-            }
 
             List<SpellAbility> copies = Lists.newArrayList();
 
             SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa,
                     Localizer.getInstance().getMessage("lblSelectASpellCopy"), ImmutableMap.of());
+
+            if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantCopyTheSpell", CardTranslation.getTranslatedName(chosenSA.getHostCard().getName())))) {
+                continue;
+            }
 
             if (sa.hasParam("CopyForEachCanTarget")) {
                 // Find subability or rootability that has targets
