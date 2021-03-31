@@ -7,18 +7,189 @@ MciCode=stx
 Type=Expansion
 
 [cards]
+1 C Environmental Sciences
+2 C Expanded Anatomy
+3 C Introduction to Annihilation
+4 C Introduction to Prophecy
+6 R Wandering Archaic // Explore the Vastlands
+8 C Ageless Guardian
+9 C Beaming Defiance
+10 U Clever Lumimancer
+11 C Combat Professor
+12 C Defend the Campus
+15 U Dueling Coach
+16 C Eager First-Year
+17 R Elite Spellbinder
+24 U Professor of Symbology
+25 U Reduce to Memory
+29 R Sparring Regimen
+30 C Star Pupil
+31 U Stonebinder's Familiar
+33 R Strict Proctor
+34 C Study Break
+35 U Thunderous Orator
+37 R Archmage Emeritus
+39 C Bury in Books
+40 C Curate
+43 C Frost Trickster
+45 U Kelpie Guide
+48 R Multiple Choice
+49 C Pop Quiz
+51 C Resculpt
+54 U Solve the Equation
+57 R Teachings of the Archaics
+61 C Waterfall Aerialist
+63 C "A Poet That Knows It"
+64 R "Sinister Domain"
+67 R Confront the Past
+68 C "Deep Disappointment"
+70 U "Eyebat"
+72 U Go Blank
+76 U Mage Hunter
+83 M Professor Onyx
+91 U "Academic Debate"
+92 U "Forum Mooderator"
+93 C "Geist Commander"
+94 R "Conspiracy Theorist"
+96 R "I Have a Dragon and Dragon Says 'No'. Do You Have a Dragon? Didn't Think So"
+97 C "Approach of the Dragon"
+98 R Efreet Flamepainter
+99 C Enthusiastic Study
+100 U Explosive Welcome
+102 C First Day of Class
+104 U Grinning Ignus
+106 C Heated Debate
+107 U Igneous Inspiration
+108 R Illuminate History
+109 C Illustrious Historian
+114 U "We'll Do It Live!"
+115 U Storm-Kiln Artist
+116 C Sudden Breakthrough
+127 R Dragonsguard Elite
+131 C Field Trip
+132 U "Nightmare's Beverage"
+135 U "Hungry Chomp Rider"
+138 U "Master of Minecraft"
+146 R Verdant Mastery
+149 M Extus, Oriq Overlord // Awaken the Blood Avatar
+150 R Flamescroll Celebrant // Revel in Silence
+152 R Kianne, Dean of Substance // Imbraham, Dean of Theory
+155 R Plargg, Dean of Chaos // Augusta, Dean of Order
+156 M Rowan, Scholar of Sparks // Will, Scholar of Frost
+158 R Shaile, Dean of Radiance // Embrose, Dean of Shadow
+159 R Torrent Sculptor // Flamethrower Sonata
+160 R Uvilda, Dean of Perfection // Nassari, Dean of Expression
+161 R Valentin, Dean of the Vein // Lisette, Dean of the Root
+165 R Blade Historian
+171 U Creative Outburst
+173 R Culmination of Studies
+181 R "Tiger Surfer"
+183 C "Elemental Calling"
+186 U "Sublime Rehearsal"
+187 C "Frog Fractals"
+190 U Golden Ratio
+192 M Hofri Ghostforge
+196 M Kasmina, Enigma Sage
+198 U Lorehold Apprentice
 199 R Lorehold Command
+200 U Lorehold Excavation
+201 C Lorehold Pledgemage
+202 U "Malestrom Muse"
+203 M Magma Opus
+204 C Make Your Mark
+209 C "Oggyar Battle Seer"
+211 C Pest Summoning
+212 U Practical Research
+213 U Prismari Apprentice
 214 R Prismari Command
+215 C Prismari Pledgemage
+216 U Quandrix Apprentice
 217 R Quandrix Command
+220 U Quintorius, Field Historian
+221 R Radiant Scrollwielder
+222 U Reconstruct History
+223 C Relic Sloth
+224 U Returned Pastcaller
+226 C Rise of Extus
+227 U Rootha, Mercurial Artist
+230 M Shadrix Silverquill
+231 U Silverquill Apprentice
 232 R Silverquill Command
+235 C Spectacle Mage
+236 C Spirit Summoning
+239 C Stonebound Mentor
+240 M Tanazir Quandrix
+243 C Thrilling Discovery
+245 M Velomachus Lorehold
+247 U Witherbloom Apprentice
 248 R Witherbloom Command
+252 C Campus Guide
+253 R Codie, Vociferous Codex
+265 R Frostboil Snarl
+266 R Furycalm Snarl
+267 R Hall of Oracles
+268 C Lorehold Campus
+269 R Necroblossom Snarl
+270 C Prismari Campus
+271 C Quandrix Campus
+272 R Shineshadow Snarl
+274 R Vineglimmer Snarl
+
+[borderless]
+276 M Professor Onyx
+278 M Rowan, Scholar of Sparks // Will, Scholar of Frost
+279 M Kasmina, Enigma Sage
+
+[showcase]
+280 M Shadrix Silverquill
 
 [extended art]
+286 R Wandering Archaic // Explore the Vastlands
+287 R Academic Probation
+292 R Semester's End
+295 R Archmage Emeritus
+298 R Multiple Choice
+303 R Confront the Past
+307 R "Conspiracy Theorist"
+310 R Efreet Flamepainter
+316 R Dragonsguard Elite
+326 R Kianne, Dean of Substance // Imbraham, Dean of Theory
+328 R Plargg, Dean of Chaos // Augusta, Dean of Order
+330 R Shaile, Dean of Radiance // Embrose, Dean of Shadow
+332 R Uvilda, Dean of Perfection // Nassari, Dean of Expression
+333 R Valentin, Dean of the Vein // Lisette, Dean of the Root
+334 R Blade Historian
 345 R Lorehold Command
+346 M Magma Opus
 348 R Prismari Command
 349 R Quandrix Command
 352 R Silverquill Command
+355 R Venerable Warsinger
 356 R Witherbloom Command
+360 R Frostboil Snarl
+361 R Furycalm Snarl
+363 R Necroblossom Snarl
+364 R Shineshadow Snarl
+365 R Vineglimmer Snarl
+
+[precon product]
+366 L Plains
+367 L Plains
+368 L Island
+369 L Island
+370 L Swamp
+371 L Swamp
+372 L Mountain
+373 L Mountain
+374 L Forest
+375 L Forest
+
+[buy a box]
+376 R Dragonsguard Elite
+
+[promo]
+377 R Archmage Emeritus
+381 U Rip Apart
 
 [tokens]
 rw_3_2_spirit
