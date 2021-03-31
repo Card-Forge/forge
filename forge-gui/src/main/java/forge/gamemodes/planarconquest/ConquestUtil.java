@@ -187,7 +187,7 @@ public class ConquestUtil {
     public static Iterable<PaperCard> getStartingPlaneswalkerOptions(final PaperCard startingCommander) {
         final byte colorIdentity = startingCommander.getRules().getColorIdentity().getColor();
         final List<String> selected = Lists.newArrayList();
-        return Iterables.filter(FModel.getMagicDb().getCommonCards(), new Predicate<PaperCard>() {
+        return Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(), new Predicate<PaperCard>() {
             @Override
             public boolean apply(PaperCard card) {
                 if (FModel.getMagicDb().getEditions().get(card.getEdition()).getType() == CardEdition.Type.PROMOS

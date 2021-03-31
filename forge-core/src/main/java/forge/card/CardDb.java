@@ -282,7 +282,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private void reIndex() {
         uniqueCardsByName.clear();
         for (Entry<String, Collection<PaperCard>> kv : getAllCardsByName().asMap().entrySet()) {
-            uniqueCardsByName.put(kv.getKey(), getFirstWithImage(kv.getValue()));
+            PaperCard pc = getFirstWithImage(kv.getValue());
+            if (!loadNonLegalCards && (editions.get(pc.getEdition()).getType() == CardEdition.Type.FUNNY || editions.get(pc.getEdition()).getBorderColor() == CardEdition.BorderColor.SILVER))
+                continue;
+            uniqueCardsByName.put(kv.getKey(), pc);
         }
     }
 

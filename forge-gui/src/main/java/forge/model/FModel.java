@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Maps;
 
 import forge.CardStorageReader;
@@ -31,6 +32,7 @@ import forge.ImageKeys;
 import forge.MulliganDefs;
 import forge.StaticData;
 import forge.ai.AiProfileUtil;
+import forge.card.CardRulesPredicates;
 import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
 import forge.deck.CardRelationMatrixGenerator;
@@ -55,6 +57,7 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.card.CardPreferences;
 import forge.gui.interfaces.IProgressBar;
+import forge.item.PaperCard;
 import forge.itemmanager.ItemManagerConfig;
 import forge.localinstance.achievements.AchievementCollection;
 import forge.localinstance.achievements.ConstructedAchievements;
@@ -69,6 +72,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.player.GamePlayerUtil;
 import forge.util.CardTranslation;
 import forge.util.FileUtil;
+import forge.util.ItemPool;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.storage.IStorage;
@@ -109,6 +113,7 @@ public final class FModel {
     private static IStorage<ConquestPlane> planes;
     private static IStorage<QuestWorld> worlds;
     private static GameFormat.Collection formats;
+    private static ItemPool<PaperCard> uniqueCardsNoAlt, allCardsNoAlt, planechaseCards, archenemyCards;
 
     public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs) {
         //init version to log
@@ -270,6 +275,12 @@ public final class FModel {
                 deckGenMatrixLoaded=false;
             }
         }
+
+        //preload Itempool
+        uniqueCardsNoAlt = ItemPool.createFrom(getMagicDb().getCommonCards().getUniqueCardsNoAlt(), PaperCard.class);
+        allCardsNoAlt = ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(), PaperCard.class);
+        archenemyCards = ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)), PaperCard.class);
+        planechaseCards = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)), PaperCard.class);
     }
 
     private static boolean deckGenMatrixLoaded=false;
@@ -284,6 +295,22 @@ public final class FModel {
 
     public static ConquestController getConquest() {
         return conquest;
+    }
+
+    public static ItemPool<PaperCard> getUniqueCardsNoAlt() {
+        return uniqueCardsNoAlt;
+    }
+
+    public static ItemPool<PaperCard> getAllCardsNoAlt() {
+        return allCardsNoAlt;
+    }
+
+    public static ItemPool<PaperCard> getArchenemyCards() {
+        return archenemyCards;
+    }
+
+    public static ItemPool<PaperCard> getPlanechaseCards() {
+        return planechaseCards;
     }
 
     private static boolean keywordsLoaded = false;
