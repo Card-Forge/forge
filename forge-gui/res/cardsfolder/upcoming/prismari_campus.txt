@@ -1,0 +1,8 @@
+Name:Prismari Campus
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Scry | Cost$ 4 T | ScryNum$ 1 | SpellDescription$ Scry 1.
+Oracle:Prismari Campus enters the battlefield tapped.\n{T}: Add {U} or {R}.\n{4}, {T}: Scry 1.
