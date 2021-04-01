@@ -81,6 +81,7 @@ public enum Keyword {
     FORETELL("Foretell", KeywordWithCost.class, false, "During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost."),
     FORTIFY("Fortify", KeywordWithCost.class, false, "%s: Attach to target land you control. Fortify only as a sorcery."),
     FRENZY("Frenzy", KeywordWithAmount.class, false, "Whenever this creature attacks and isn't blocked, it gets +%d/+0 until end of turn."),
+    FUSE("Fuse", SimpleKeyword.class, true, "You may cast one or both halves of this card from your hand."),
     GRAFT("Graft", KeywordWithAmount.class, false, "This permanent enters the battlefield with {%d:+1/+1 counter} on it. Whenever another creature enters the battlefield, you may move a +1/+1 counter from this permanent onto it."),
     GRAVESTORM("Gravestorm", SimpleKeyword.class, false, "When you cast this spell, copy it for each permanent that was put into a graveyard from the battlefield this turn. If the spell has any targets, you may choose new targets for any of the copies."),
     HASTE("Haste", SimpleKeyword.class, true, "This creature can attack and {T} as soon as it comes under your control."),

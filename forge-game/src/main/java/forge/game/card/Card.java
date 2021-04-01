@@ -2438,7 +2438,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbBefore.append(keyword).append(" (").append(inst.getReminderText()).append(")");
                     sbBefore.append("\r\n");
                 } else if(keyword.equals("Conspire") || keyword.equals("Epic")
-                        || keyword.equals("Suspend") || keyword.equals("Jump-start")) {
+                        || keyword.equals("Suspend") || keyword.equals("Jump-start")
+                        || keyword.equals("Fuse")) {
                     sbAfter.append(keyword).append(" (").append(inst.getReminderText()).append(")");
                     sbAfter.append("\r\n");
                 } else if (keyword.startsWith("Ripple")) {
