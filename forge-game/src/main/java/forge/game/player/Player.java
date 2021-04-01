@@ -1157,24 +1157,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     /**
-     * Replace all instances of added keywords.
-     * @param oldKeyword the keyword to replace.
-     * @param newKeyword the keyword with which to replace.
-     */
-    private final void replaceAllKeywordInstances(final String oldKeyword, final String newKeyword) {
-        boolean keywordReplaced = false;
-        for (final KeywordsChange ck : changedKeywords.values()) {
-            if (ck.removeKeywordfromAdd(oldKeyword)) {
-                ck.addKeyword(newKeyword);
-                keywordReplaced = true;
-            }
-        }
-        if (keywordReplaced) {
-            updateKeywords();
-        }
-    }
-
-    /**
      * Remove all keyword changes which grant this {@link Player} the specified
      * keyword.
      * @param keyword the keyword to remove.

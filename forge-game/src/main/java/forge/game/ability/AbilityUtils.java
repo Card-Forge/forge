@@ -1834,6 +1834,19 @@ public class AbilityUtils {
 
                 return CardFactoryUtil.doXMath(game.getCounterAddedThisTurn(cType, parts[2], parts[3], c, player, ctb), expr, c);
             }
+
+            // count valid cards in any specified zone/s
+            if (l[0].startsWith("Valid")) {
+                String[] lparts = l[0].split(" ", 2);
+                final String[] rest = lparts[1].split(",");
+
+                final CardCollectionView cardsInZones = lparts[0].length() > 5
+                    ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(5)))
+                    : game.getCardsIn(ZoneType.Battlefield);
+
+                CardCollection cards = CardLists.getValidCards(cardsInZones, rest, player, c, ctb);
+                return CardFactoryUtil.doXMath(cards.size(), expr, c);
+            }
         }
         return CardFactoryUtil.xCount(c, s2);
     }
