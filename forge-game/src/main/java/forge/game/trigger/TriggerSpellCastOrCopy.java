@@ -1,0 +1,105 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package forge.game.trigger;
+
+import forge.game.Game;
+import forge.game.ability.AbilityKey;
+import forge.game.card.Card;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
+import forge.util.Localizer;
+
+import java.util.Map;
+
+/**
+ * <p>
+ * Trigger_SpellAbilityCopy class.
+ * </p>
+ *
+ * @author Forge
+ * @version $Id$
+ */
+public class TriggerSpellCastOrCopy extends Trigger {
+
+    /**
+     * <p>
+     * Constructor for Trigger_SpellCastOrCopy.
+     * </p>
+     *
+     * @param params
+     *            a {@link java.util.HashMap} object.
+     * @param host
+     *            a {@link Card} object.
+     * @param intrinsic
+     *            the intrinsic
+     */
+    public TriggerSpellCastOrCopy(final Map<String, String> params, final Card host, final boolean intrinsic) {
+        super(params, host, intrinsic);
+    }
+
+    /** {@inheritDoc}
+     * @param runParams*/
+    @Override
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        final SpellAbility spellAbility = (SpellAbility) runParams.get(AbilityKey.CastSA);
+        if (spellAbility == null) {
+            System.out.println("TriggerSpellCastOrCopy performTest encountered spellAbility == null. runParams2 = " + runParams);
+            return false;
+        }
+        final Card cast = spellAbility.getHostCard();
+        final Game game = cast.getGame();
+        final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spellAbility);
+
+        if (!matchesValidParam("ValidCard", cast)) {
+            return false;
+        }
+        if (!matchesValidParam("ValidSA", spellAbility)) {
+            return false;
+        }
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
+        }
+
+        if (hasParam("ValidActivatingPlayer")) {
+            if (si == null || !matchesValid(si.getSpellAbility(true).getActivatingPlayer(), getParam("ValidActivatingPlayer").split(","))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    /** {@inheritDoc} */
+    @Override
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        final SpellAbility castSA = (SpellAbility) runParams.get(AbilityKey.CastSA);
+        final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceFromSpellAbility(castSA);
+        sa.setTriggeringObject(AbilityKey.Card, castSA.getHostCard());
+        sa.setTriggeringObject(AbilityKey.SpellAbility, castSA);
+        sa.setTriggeringObject(AbilityKey.StackInstance, si);
+    }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(Localizer.getInstance().getMessage("lblCard")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblActivator")).append(": ").append(sa.getTriggeringObject(AbilityKey.Activator)).append(", ");
+        sb.append(Localizer.getInstance().getMessage("lblSpellAbility")).append(": ").append(sa.getTriggeringObject(AbilityKey.SpellAbility));
+        return sb.toString();
+    }
+}

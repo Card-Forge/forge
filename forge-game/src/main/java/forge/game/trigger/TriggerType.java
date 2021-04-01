@@ -93,6 +93,7 @@ public enum TriggerType {
     SpellAbilityCast(TriggerSpellAbilityCast.class),
     SpellAbilityCopy(TriggerSpellAbilityCopy.class),
     SpellCast(TriggerSpellAbilityCast.class),
+    SpellCastOrCopy(TriggerSpellCastOrCopy.class),
     SpellCopy(TriggerSpellAbilityCopy.class),
     Surveil(TriggerSurveil.class),
     Taps(TriggerTaps.class),
