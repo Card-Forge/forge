@@ -141,6 +141,8 @@ public enum CounterEnumType {
 
     HIT("HIT", 255, 245, 195),
 
+    HONE("HONE", 51, 227, 255),
+
     HOOFPRINT("HOOF", 233, 189, 170),
 
     HOUR("HOUR", 198, 197, 210),
@@ -230,6 +232,8 @@ public enum CounterEnumType {
     PRESSURE("PRESS", 255, 164, 159),
 
     PHYLACTERY("PHYLA", 117, 219, 153),
+
+    POINT("POINT", 153, 255, 130),
 
     POLYP("POLYP", 236, 185, 198),
 
