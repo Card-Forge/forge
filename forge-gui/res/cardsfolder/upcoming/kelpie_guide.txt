@@ -1,0 +1,7 @@
+Name:Kelpie Guide
+ManaCost:2 U
+Types:Creature Beast
+PT:2/2
+A:AB$ Untap | Cost$ T | ValidTgts$ Permanent.Other+YouCtrl | TgtPrompt$ Select another target permanent you control | SpellDescription$ Untap another target permanent you control.
+A:AB$ Tap | Cost$ T | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | IsPresent$ Land.YouCtrl | PresentCompare$ GE8 | SpellDescription$ Tap target permanent. Activate only if you control eight or more lands.
+Oracle:{T}: Untap another target permanent you control.\n{T}: Tap target permanent. Activate only if you control eight or more lands.

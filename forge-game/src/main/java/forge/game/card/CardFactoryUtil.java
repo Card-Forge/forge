@@ -796,6 +796,20 @@ public class CardFactoryUtil {
             return doXMath(crdname.size(), m, c);
         }
 
+        if (l[0].startsWith("DifferentPower_")) {
+            final List<Integer> powers = Lists.newArrayList();
+            final String restriction = l[0].substring(15);
+            final String[] rest = restriction.split(",");
+            CardCollection list = CardLists.getValidCards(cc.getGame().getCardsInGame(), rest, cc, c, null);
+            for (final Card card : list) {
+                Integer pow = card.getNetPower();
+                if (!powers.contains(pow)) {
+                    powers.add(pow);
+                }
+            }
+            return doXMath(powers.size(), m, c);
+        }
+
         if (l[0].startsWith("RememberedSize")) {
             return doXMath(c.getRememberedCount(), m, c);
         }

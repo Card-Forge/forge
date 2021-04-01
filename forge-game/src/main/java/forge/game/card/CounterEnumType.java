@@ -233,6 +233,8 @@ public enum CounterEnumType {
 
     PHYLACTERY("PHYLA", 117, 219, 153),
 
+    POINT("POINT", 153, 255, 130),
+
     POLYP("POLYP", 236, 185, 198),
 
     PREY("PREY", 240, 0, 0),
