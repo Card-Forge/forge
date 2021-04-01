@@ -26,6 +26,7 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.model.FModel;
+import forge.screens.LoadingOverlay;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
@@ -283,6 +284,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
     private static class SpellShopPage extends SpellShopBasePage {
         private FTextArea lblSellPercentage = add(new FTextArea(false));
+        private ItemPool<InventoryItem> shopItems = FModel.getQuest().getCards().getShopList();
 
         private SpellShopPage() {
             super(localizer.getMessage("lblCardsForSale"), FSkinImage.QUEST_BOOK, true);
@@ -291,12 +293,22 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
         @Override
         protected void refresh() {
-            Map<ColumnDef, ItemColumn> colOverrides = new HashMap<>();
-            ItemColumn.addColOverride(ItemManagerConfig.SPELL_SHOP, colOverrides, ColumnDef.PRICE, QuestSpellShop.fnPriceCompare, QuestSpellShop.fnPriceGet);
-            ItemColumn.addColOverride(ItemManagerConfig.SPELL_SHOP, colOverrides, ColumnDef.OWNED, FModel.getQuest().getCards().getFnOwnedCompare(), FModel.getQuest().getCards().getFnOwnedGet());
-            itemManager.setup(ItemManagerConfig.SPELL_SHOP, colOverrides);
+            FThreads.invokeInEdtLater(new Runnable() {
+                @Override
+                public void run() {
+                    LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoading"), new Runnable() {
+                        @Override
+                        public void run() {
+                            Map<ColumnDef, ItemColumn> colOverrides = new HashMap<>();
+                            ItemColumn.addColOverride(ItemManagerConfig.SPELL_SHOP, colOverrides, ColumnDef.PRICE, QuestSpellShop.fnPriceCompare, QuestSpellShop.fnPriceGet);
+                            ItemColumn.addColOverride(ItemManagerConfig.SPELL_SHOP, colOverrides, ColumnDef.OWNED, FModel.getQuest().getCards().getFnOwnedCompare(), FModel.getQuest().getCards().getFnOwnedGet());
+                            itemManager.setup(ItemManagerConfig.SPELL_SHOP, colOverrides);
 
-            itemManager.setPool(FModel.getQuest().getCards().getShopList());
+                            itemManager.setPool(shopItems);
+                        }
+                    });
+                }
+            });
         }
 
         @Override
