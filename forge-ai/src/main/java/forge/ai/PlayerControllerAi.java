@@ -530,7 +530,14 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public CardCollectionView chooseCardsToDiscardUnlessType(int num, CardCollectionView hand, String uType, SpellAbility sa) {
-        final CardCollectionView cardsOfType = CardLists.getType(hand, uType);
+        String [] splitUTypes = uType.split(",");
+        CardCollection cardsOfType = new CardCollection();
+        for (String part : splitUTypes) {
+            CardCollection partCards = CardLists.getType(hand, part);
+            if (!partCards.isEmpty()) {
+                cardsOfType.addAll(partCards);
+            }
+        }
         if (!cardsOfType.isEmpty()) {
             Card toDiscard = Aggregates.itemWithMin(cardsOfType, CardPredicates.Accessors.fnGetCmc);
             return new CardCollection(toDiscard);
