@@ -1,0 +1,10 @@
+Name:Ecological Appreciation
+ManaCost:X 2 G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library,Graveyard | Destination$ Library | ChangeType$ Creature.cmcLEX | ChangeNum$ 4 | DifferentNames$ True | Shuffle$ False | RememberChanged$ True | Reveal$ True | AILogic$ Intuition | SubAbility$ DBChangeZone1 | StackDescription$ SpellDescription | SpellDescription$ Search your library and graveyard for up to four creature cards with different names that each have mana value X or less and reveal them.
+SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Card.IsRemembered | Chooser$ Opponent | ChangeNum$ 2 | Mandatory$ True | NoLooking$ True | ForgetChanged$ True | Shuffle$ False | SelectPrompt$ Select two cards to shuffle into the library | SubAbility$ DBChangeZone2 | StackDescription$ SpellDescription | SpellDescription$ An opponent chooses two of those cards. Shuffle the chosen cards into your library
+SVar:DBChangeZone2:DB$ ChangeZoneAll | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.IsRemembered | Shuffle$ True | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ and put the rest onto the battlefield.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBExileSelf
+SVar:DBExileSelf:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME.
+SVar:X:Count$xPaid
+Oracle:Search your library and graveyard for up to four creature cards with different names that each have mana value X or less and reveal them. An opponent chooses two of those cards. Shuffle the chosen cards into your library and put the rest onto the battlefield. Exile Ecological Appreciation.

@@ -1,0 +1,8 @@
+Name:Quandrix Campus
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Scry | Cost$ 4 T | ScryNum$ 1 | SpellDescription$ Scry 1.
+Oracle:Quandrix Campus enters the battlefield tapped.\n{T}: Add {G} or {U}.\n{4}, {T}: Scry 1.

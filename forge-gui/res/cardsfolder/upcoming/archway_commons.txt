@@ -1,0 +1,9 @@
+Name:Archway Commons
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you pay {1}.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self | UnlessCost$ 1 | UnlessPayer$ You
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+SVar:NeedsToPlay:Land.untapped+YouCtrl
+Oracle:Archway Commons enters the battlefield tapped.\nWhen Archway Commons enters the battlefield, sacrifice it unless you pay {1}.\n{T}: Add one mana of any color.

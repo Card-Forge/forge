@@ -1,0 +1,10 @@
+Name:Hall of Oracles
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 1 T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+A:AB$ PutCounter | Cost$ T | CounterType$ P1P1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SorcerySpeed$ True | CheckSVar$ X | SVarCompare$ GE1 | SpellDescription$ Put a +1/+1 counter on target creature. Activate only as a sorcery and only if you've cast an instant or sorcery spell this turn.
+SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl
+DeckHints:Type$Instant|Sorcery
+DeckHas:Ability$Counters
+Oracle:{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\n{T}: Put a +1/+1 counter on target creature. Activate only as a sorcery and only if you've cast an instant or sorcery spell this turn.
