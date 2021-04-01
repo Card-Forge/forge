@@ -112,6 +112,63 @@ public class SpecialCardAi {
         }
     }
 
+    // Brain in a Jar
+    public static class BrainInAJar {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            final Card source = sa.getHostCard();
+
+            int counterNum = source.getCounters(CounterEnumType.CHARGE);
+            // no need for logic
+            if (counterNum == 0) {
+                return false;
+            }
+            int libsize = ai.getCardsIn(ZoneType.Library).size();
+
+            final CardCollection hand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.or(
+                    CardPredicates.isType("Instant"), CardPredicates.isType("Sorcery")));
+            if (!hand.isEmpty()) {
+                // has spell that can be cast in hand with put ability
+                if (!CardLists.filter(hand, CardPredicates.hasCMC(counterNum + 1)).isEmpty()) {
+                    return false;
+                }
+                // has spell that can be cast if one counter is removed
+                if (!CardLists.filter(hand, CardPredicates.hasCMC(counterNum)).isEmpty()) {
+                    sa.setXManaCostPaid(1);
+                    return true;
+                }
+            }
+            final CardCollection library = CardLists.filter(ai.getCardsIn(ZoneType.Library), Predicates.or(
+                    CardPredicates.isType("Instant"), CardPredicates.isType("Sorcery")));
+            if (!library.isEmpty()) {
+                // get max cmc of instant or sorceries in the libary
+                int maxCMC = 0;
+                for (final Card c : library) {
+                    int v = c.getCMC();
+                    if (c.isSplitCard()) {
+                        v = Math.max(c.getCMC(Card.SplitCMCMode.LeftSplitCMC), c.getCMC(Card.SplitCMCMode.RightSplitCMC));
+                    }
+                    if (v > maxCMC) {
+                        maxCMC = v;
+                    }
+                }
+                // there is a spell with more CMC, no need to remove counter
+                if (counterNum + 1 < maxCMC) {
+                    return false;
+                }
+                int maxToRemove = counterNum - maxCMC + 1;
+                // no Scry 0, even if its catched from later stuff
+                if (maxToRemove <= 0) {
+                    return false;
+                }
+                sa.setXManaCostPaid(maxToRemove);
+            } else {
+                // no Instant or Sorceries anymore, just scry
+                sa.setXManaCostPaid(Math.min(counterNum, libsize));
+            }
+            return true;
+        }
+    }
+
     // Chain of Acid
     public static class ChainOfAcid {
         public static boolean consider(final Player ai, final SpellAbility sa) {
@@ -903,6 +960,39 @@ public class SpecialCardAi {
             sa.setXManaCostPaid(tokenSize);
 
             return true;
+        }
+    }
+
+    // Multiple Choice
+    public static class MultipleChoice {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            int maxX = ComputerUtilCost.getMaxXValue(sa, ai);
+
+            if (maxX == 0) {
+                return false;
+            }
+
+            boolean canScryDraw = maxX >= 1 && ai.getCardsIn(ZoneType.Library).size() >= 3; // TODO: generalize / use profile values
+            boolean canBounce = maxX >= 2 && !ai.getOpponents().getCreaturesInPlay().isEmpty();
+            boolean shouldBounce = canBounce && ComputerUtilCard.evaluateCreature(ComputerUtilCard.getWorstCreatureAI(ai.getOpponents().getCreaturesInPlay())) > 210; // 180 is the level of a 4/4 token creature
+            boolean canMakeToken = maxX >= 3;
+            boolean canDoAll = maxX >= 4 && canScryDraw && shouldBounce;
+
+            if (canDoAll) {
+                sa.setXManaCostPaid(4);
+                return true;
+            } else if (canMakeToken) {
+                sa.setXManaCostPaid(3);
+                return true;
+            } else if (shouldBounce) {
+                sa.setXManaCostPaid(2);
+                return true;
+            } else if (canScryDraw) {
+                sa.setXManaCostPaid(1);
+                return true;
+            }
+
+            return false;
         }
     }
 
