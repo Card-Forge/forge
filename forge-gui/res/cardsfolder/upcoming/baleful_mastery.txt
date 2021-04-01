@@ -1,0 +1,11 @@
+Name:Baleful Mastery
+ManaCost:3 B
+Types:Instant
+SVar:AltCost:Cost$ 1 B | Description$ You may pay {1}{B} rather than pay this spell's mana cost.
+A:SP$ Pump | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBBranch | StackDescription$ SpellDescription | SpellDescription$ If the {1}{B} cost was paid, an opponent draws a card. Exile target creature or planeswalker.
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ AltCostPaid | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ OppDraw | FalseSubAbility$ DBExile
+SVar:OppDraw:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to draw a card | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ ChosenPlayer | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Exile
+SVar:AltCostPaid:Count$AltCost.1.0
+Oracle:You may pay {1}{B} rather than pay this spell’s mana cost.\nIf the {1}{B} cost was paid, an opponent draws a card.\nExile target creature or planeswalker.
