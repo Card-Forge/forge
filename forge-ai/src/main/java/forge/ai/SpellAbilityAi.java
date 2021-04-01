@@ -58,6 +58,11 @@ public abstract class SpellAbilityAi {
         final Card source = sa.getHostCard();
         final Cost cost = sa.getPayCosts();
 
+        if (sa.hasParam("AICheckCanPlayWithDefinedX")) {
+            // FIXME: can this somehow be simplified without the need for an extra AI hint?
+            sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai));
+        }
+
         if (!checkConditions(ai, sa, sa.getConditions())) {
             SpellAbility sub = sa.getSubAbility();
             if (sub != null && !checkConditions(ai, sub, sub.getConditions())) {

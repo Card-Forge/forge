@@ -3,6 +3,7 @@ package forge.ai.ability;
 import com.google.common.base.Predicates;
 
 import forge.ai.ComputerUtilMana;
+import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -47,6 +48,11 @@ public class ScryAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
+        // For Brain Jar, avoid competing against the other ability in the opponent's EOT.
+        if ("BrainJar".equals(sa.getParam("AILogic"))) {
+            return ph.getPhase().isAfter(PhaseType.MAIN2);
+        }
+
         // if the Scry ability requires tapping and has a mana cost, it's best done at the end of opponent's turn
         // and right before the beginning of AI's turn, if possible, to avoid mana locking the AI and also to
         // try to scry right before drawing a card. Also, avoid tapping creatures in the AI's turn, if possible,
@@ -102,56 +108,9 @@ public class ScryAi extends SpellAbilityAi {
         if ("Never".equals(aiLogic)) {
             return false;
         } else if ("BrainJar".equals(aiLogic)) {
-            final Card source = sa.getHostCard();
-            
-            int counterNum = source.getCounters(CounterEnumType.CHARGE);
-            // no need for logic
-            if (counterNum == 0) {
-                return false;
-            }
-            int libsize = ai.getCardsIn(ZoneType.Library).size();
-            
-            final CardCollection hand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.or( 
-                    CardPredicates.isType("Instant"), CardPredicates.isType("Sorcery")));
-            if (!hand.isEmpty()) {
-                // has spell that can be cast in hand with put ability
-                if (!CardLists.filter(hand, CardPredicates.hasCMC(counterNum + 1)).isEmpty()) {
-                    return false;
-                }
-                // has spell that can be cast if one counter is removed
-                if (!CardLists.filter(hand, CardPredicates.hasCMC(counterNum)).isEmpty()) {
-                    sa.setXManaCostPaid(1);
-                    return true;
-                }
-            }
-            final CardCollection library = CardLists.filter(ai.getCardsIn(ZoneType.Library), Predicates.or( 
-                    CardPredicates.isType("Instant"), CardPredicates.isType("Sorcery")));
-            if (!library.isEmpty()) {
-                // get max cmc of instant or sorceries in the libary 
-                int maxCMC = 0;
-                for (final Card c : library) {
-                    int v = c.getCMC(); 
-                    if (c.isSplitCard()) {
-                        v = Math.max(c.getCMC(SplitCMCMode.LeftSplitCMC), c.getCMC(SplitCMCMode.RightSplitCMC));
-                    }
-                    if (v > maxCMC) {
-                        maxCMC = v;
-                    }
-                }
-                // there is a spell with more CMC, no need to remove counter
-                if (counterNum + 1 < maxCMC) {
-                    return false;
-                }
-                int maxToRemove = counterNum - maxCMC + 1;
-                // no Scry 0, even if its catched from later stuff 
-                if (maxToRemove <= 0) {
-                    return false;
-                }
-                sa.setXManaCostPaid(maxToRemove);
-            } else {
-                // no Instant or Sorceries anymore, just scry
-                sa.setXManaCostPaid(Math.min(counterNum, libsize));
-            }
+            return SpecialCardAi.BrainInAJar.consider(ai, sa);
+        } else if ("MultipleChoice".equals(aiLogic)) {
+            return SpecialCardAi.MultipleChoice.consider(ai, sa);
         }
         return true;
     }
