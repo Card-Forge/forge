@@ -2,8 +2,7 @@ Name:Moorland Haunt
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Token | Cost$ W U T ExileFromGrave<1/Creature> | LegacyImage$ w 1 1 spirit flying isd | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 white Spirit creature token with flying.
+A:AB$ Token | Cost$ W U T ExileFromGrave<1/Creature> | CostDesc$ {W}{U}, {T}, Exile a creature card from your graveyard: | TokenScript$ w_1_1_spirit_flying | SpellDescription$ Create a 1/1 white Spirit creature token with flying.
 DeckNeeds:Color$White|Blue
 DeckHas:Ability$Mana.Colorless & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/moorland_haunt.jpg
 Oracle:{T}: Add {C}.\n{W}{U}, {T}, Exile a creature card from your graveyard: Create a 1/1 white Spirit creature token with flying.
