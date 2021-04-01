@@ -1,0 +1,17 @@
+[metadata]
+Code=C21
+Date=2021-04-23
+Name=Commander 2021
+Type=Other
+
+[cards]
+1 M Breena, the Demagogue
+4 M Zaffai, Thunder Conductor
+6 M Willowdusk, Essence Seer
+8 M Osgir, the Reconstructor
+9 M Adrix and Nev, Twincasters
+328 M Breena, the Demagogue
+331 M Zaffai, Thunder Conductor
+333 M Willowdusk, Essence Seer
+335 M Osgir, the Reconstructor
+336 M Adrix and Nev, Twincasters
