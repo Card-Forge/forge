@@ -215,6 +215,16 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             this.setSvarOperator(params.get("ConditionSVarCompare").substring(0, 2));
             this.setSvarOperand(params.get("ConditionSVarCompare").substring(2));
         }
+        if (params.containsKey("OrOtherConditionSVarCompare")) {
+            //unless another SVar is specified, check against the same one
+            if (params.containsKey("OrConditionCheckSVar")) {
+                this.setSvarToCheck2(params.get("OrConditionCheckSVar"));
+            } else {
+                this.setSvarToCheck2(params.get("ConditionCheckSVar"));
+            }
+            this.setSvarOperator2(params.get("OrOtherConditionSVarCompare").substring(0, 2));
+            this.setSvarOperand2(params.get("OrOtherConditionSVarCompare").substring(2));
+        }
         if (params.containsKey("ConditionTargetValidTargeting")) {
             this.setTargetValidTargeting(params.get("ConditionTargetValidTargeting"));
         }
@@ -455,8 +465,16 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.getsVarToCheck() != null) {
             final int svarValue = AbilityUtils.calculateAmount(host, this.getsVarToCheck(), sa);
             final int operandValue = AbilityUtils.calculateAmount(host, this.getsVarOperand(), sa);
+            boolean secondCheck = false;
+            if (this.getsVarToCheck2() != null) {
+                final int svarValue2 = AbilityUtils.calculateAmount(host, this.getsVarToCheck2(), sa);
+                final int operandValue2 = AbilityUtils.calculateAmount(host, this.getsVarOperand2(), sa);
+                if (Expressions.compare(svarValue2, this.getsVarOperator2(), operandValue2)) {
+                    secondCheck = true;
+                }
+            }
 
-            if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue)) {
+            if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue) && !secondCheck) {
                 return false;
             }
 

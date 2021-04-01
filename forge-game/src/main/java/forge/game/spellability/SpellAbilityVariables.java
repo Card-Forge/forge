@@ -81,8 +81,11 @@ public class SpellAbilityVariables implements Cloneable {
         this.playerContains = sav.getPlayerContains();
         this.presentZone = sav.getPresentZone();
         this.sVarToCheck = sav.getsVarToCheck();
+        this.sVarToCheck2 = sav.getsVarToCheck2();
         this.sVarOperator = sav.getsVarOperator();
+        this.sVarOperator2 = sav.getsVarOperator2();
         this.sVarOperand = sav.getsVarOperand();
+        this.sVarOperand2 = sav.getsVarOperand2();
         this.lifeTotal = sav.getLifeTotal();
         this.lifeAmount = sav.getLifeAmount();
         this.manaSpent = sav.getManaSpent();
@@ -164,12 +167,15 @@ public class SpellAbilityVariables implements Cloneable {
 
     /** The svar to check. */
     private String sVarToCheck = null;
+    private String sVarToCheck2 = null;
 
     /** The svar operator. */
     private String sVarOperator = "GE";
+    private String sVarOperator2 = "GE";
 
     /** The svar operand. */
     private String sVarOperand = "1";
+    private String sVarOperand2 = "1";
 
     /** The life total. */
     private String lifeTotal = null;
@@ -491,6 +497,9 @@ public class SpellAbilityVariables implements Cloneable {
     public final void setSvarToCheck(final String sVar) {
         this.setsVarToCheck(sVar);
     }
+    public final void setSvarToCheck2(final String sVar) {
+        this.setsVarToCheck2(sVar);
+    }
 
     /**
      * <p>
@@ -514,6 +523,14 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public final void setSvarOperand(final String operand) {
         this.setsVarOperand(operand);
+    }
+
+    //for second possible SVar condition
+    public final void setSvarOperator2(final String operator) {
+        this.setsVarOperator2(operator);
+    }
+    public final void setSvarOperand2(final String operand) {
+        this.setsVarOperand2(operand);
     }
 
     /**
@@ -729,6 +746,9 @@ public class SpellAbilityVariables implements Cloneable {
     public final String getsVarOperand() {
         return this.sVarOperand;
     }
+    public final String getsVarOperand2() {
+        return this.sVarOperand2;
+    }
 
     /**
      * Sets the s var operand.
@@ -739,6 +759,9 @@ public class SpellAbilityVariables implements Cloneable {
     public final void setsVarOperand(final String sVarOperand0) {
         this.sVarOperand = sVarOperand0;
     }
+    public final void setsVarOperand2(final String sVarOperand0) {
+        this.sVarOperand2 = sVarOperand0;
+    }
 
     /**
      * Gets the s var to check.
@@ -747,6 +770,9 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public final String getsVarToCheck() {
         return this.sVarToCheck;
+    }
+    public final String getsVarToCheck2() {
+        return this.sVarToCheck2;
     }
 
     /**
@@ -758,6 +784,9 @@ public class SpellAbilityVariables implements Cloneable {
     public final void setsVarToCheck(final String sVarToCheck) {
         this.sVarToCheck = sVarToCheck;
     }
+    public final void setsVarToCheck2(final String sVarToCheck) {
+        this.sVarToCheck2 = sVarToCheck;
+    }
 
     /**
      * Gets the s var operator.
@@ -766,6 +795,9 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public final String getsVarOperator() {
         return this.sVarOperator;
+    }
+    public final String getsVarOperator2() {
+        return this.sVarOperator2;
     }
 
     /**
@@ -776,6 +808,9 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public final void setsVarOperator(final String sVarOperator0) {
         this.sVarOperator = sVarOperator0;
+    }
+    public final void setsVarOperator2(final String sVarOperator0) {
+        this.sVarOperator2 = sVarOperator0;
     }
 
     /**
