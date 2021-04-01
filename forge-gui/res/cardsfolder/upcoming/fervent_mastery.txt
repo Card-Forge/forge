@@ -1,0 +1,15 @@
+Name:Fervent Mastery
+ManaCost:3 R R
+Types:Sorcery
+SVar:AltCost:Cost$ 2 R R | Description$ You may pay {2}{R}{R} rather than pay this spell's mana cost.
+A:SP$ Branch | BranchConditionSVar$ AltCostPaid | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ OppDiscard | FalseSubAbility$ DBSearch | SpellDescription$ If the {2}{R}{R} cost was paid, an opponent discards any number of cards, then draws that many cards. Search your library for up to three cards, put them into your hand, shuffle, then discard three cards at random.
+SVar:OppDiscard:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ ChosenPlayer | AILogic$ DiscardUncastableAndExcess | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ ChosenPlayer | NumCards$ Y | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBSearch
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Hidden$ True | ChangeNum$ 3 | ChangeType$ Card | Destination$ Hand | SubAbility$ DBResolve
+SVar:DBResolve:DB$ ChangeZoneResolve | SubAbility$ DBDiscard2
+SVar:DBDiscard2:DB$ Discard | Defined$ You | NumCards$ 3 | Mode$ Random
+SVar:Y:Remembered$Amount
+SVar:AltCostPaid:Count$AltCost.1.0
+Oracle:You may pay {2}{R}{R} rather than pay this spell’s mana cost.\nIf the {2}{R}{R} cost was paid, an opponent discards any number of cards, then draws that many cards.\nSearch your library for up to three cards, put them into your hand, shuffle, then discard three cards at random.
