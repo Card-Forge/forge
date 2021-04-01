@@ -12,4 +12,5 @@ SVar:DBResolve:DB$ ChangeZoneResolve | SubAbility$ DBDiscard2
 SVar:DBDiscard2:DB$ Discard | Defined$ You | NumCards$ 3 | Mode$ Random
 SVar:Y:Remembered$Amount
 SVar:AltCostPaid:Count$AltCost.1.0
+DeckHas:Ability$Discard
 Oracle:You may pay {2}{R}{R} rather than pay this spell’s mana cost.\nIf the {2}{R}{R} cost was paid, an opponent discards any number of cards, then draws that many cards.\nSearch your library for up to three cards, put them into your hand, shuffle, then discard three cards at random.
