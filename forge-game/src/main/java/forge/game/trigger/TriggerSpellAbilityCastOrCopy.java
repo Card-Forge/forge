@@ -50,7 +50,7 @@ import forge.util.Localizer;
  * @author Forge
  * @version $Id$
  */
-public class TriggerSpellAbilityCast extends Trigger {
+public class TriggerSpellAbilityCastOrCopy extends Trigger {
 
     /**
      * <p>
@@ -64,7 +64,7 @@ public class TriggerSpellAbilityCast extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerSpellAbilityCast(final Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerSpellAbilityCastOrCopy(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -80,17 +80,31 @@ public class TriggerSpellAbilityCast extends Trigger {
         final Card cast = spellAbility.getHostCard();
         final Game game = cast.getGame();
         final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spellAbility);
+        String castOrCopy = (String) runParams.get(AbilityKey.CastOrCopy);
 
-        if (this.getMode() == TriggerType.SpellCast) {
-            if (!spellAbility.isSpell()) {
+        // Specific checks for trigger types
+        if (castOrCopy.equals("Copy")) {
+            if (this.getMode().equals(TriggerType.AbilityCast) ||
+                    this.getMode().equals(TriggerType.SpellAbilityCast) ||
+                    this.getMode().equals(TriggerType.SpellCast)) {
                 return false;
             }
-        } else if (this.getMode() == TriggerType.AbilityCast) {
-            if (!spellAbility.isAbility()) {
+        } else if (castOrCopy.equals("Cast")) {
+            if (this.getMode().equals(TriggerType.SpellAbilityCopy) ||
+                    this.getMode().equals(TriggerType.SpellCopy)) {
                 return false;
             }
-        } else if (this.getMode() == TriggerType.SpellAbilityCast) {
-            // Empty block for readability.
+        }
+        if (spellAbility.isSpell()) {
+            if (this.getMode().equals(TriggerType.AbilityCast)) {
+                return false;
+            }
+        } else if (spellAbility.isAbility()) {
+            if (this.getMode().equals(TriggerType.SpellCast) ||
+                    this.getMode().equals(TriggerType.SpellCopy) ||
+                    this.getMode().equals(TriggerType.SpellCastOrCopy)) {
+                return false;
+            }
         }
 
         if (hasParam("ActivatedOnly")) {
@@ -99,6 +113,10 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
         }
 
+
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
+        }
 
         if (!matchesValidParam("ValidControllingPlayer", cast.getController())) {
             return false;

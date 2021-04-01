@@ -293,15 +293,16 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Cost, sp.getPayCosts());
+        runParams.put(AbilityKey.Player, sp.getHostCard().getController());
+        runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
+        runParams.put(AbilityKey.CastSA, si.getSpellAbility(true));
+        runParams.put(AbilityKey.CastSACMC, si.getSpellAbility(true).getHostCard().getCMC());
+        runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
+        runParams.put(AbilityKey.CurrentCastSpells, Lists.newArrayList(thisTurnCast));
         if (!sp.isCopied()) {
+            runParams.put(AbilityKey.CastOrCopy, "Cast");
             // Run SpellAbilityCast triggers
-            runParams.put(AbilityKey.Cost, sp.getPayCosts());
-            runParams.put(AbilityKey.Player, sp.getHostCard().getController());
-            runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
-            runParams.put(AbilityKey.CastSA, si.getSpellAbility(true));
-            runParams.put(AbilityKey.CastSACMC, si.getSpellAbility(true).getHostCard().getCMC());
-            runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
-            runParams.put(AbilityKey.CurrentCastSpells, Lists.newArrayList(thisTurnCast));
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
             
             sp.applyPayingManaEffects();
@@ -333,11 +334,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 game.getTriggerHandler().runTrigger(TriggerType.Crewed, runParams, false);
             }
         } else {
-            // Run SpellAbilityCopy triggers
-            runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
-            runParams.put(AbilityKey.CopySA, si.getSpellAbility(true));
-            runParams.put(AbilityKey.CastSA, si.getSpellAbility(true));
-            // Run SpellCopy triggers
+            runParams.put(AbilityKey.CastOrCopy, "Copy");
+            // Run Copy triggers
             if (sp.isSpell()) {
                 game.getTriggerHandler().runTrigger(TriggerType.SpellCopy, runParams, false);
             }
