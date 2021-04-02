@@ -1,0 +1,7 @@
+Name:Blood Age General
+ManaCost:1 R
+Types:Creature Spirit Warrior
+PT:2/2
+A:AB$ PumpAll | Cost$ T | ValidCards$ Spirit.attacking | NumAtt$ +1 | SpellDescription$ Attacking Spirits get +1/+0 until end of turn.
+DeckHints:Type$Spirit
+Oracle:{T}: Attacking Spirits get +1/+0 until end of turn.
