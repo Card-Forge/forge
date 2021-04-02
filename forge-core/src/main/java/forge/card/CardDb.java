@@ -56,7 +56,6 @@ import forge.util.TextUtil;
 public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static String foilSuffix = "+";
     public final static char NameSetSeparator = '|';
-    private boolean loadNonLegalCards = true;
 
     // need this to obtain cardReference by name+set+artindex
     private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.arrayLists());
@@ -69,6 +68,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private final Map<String, Integer> artIds = new HashMap<>();
 
     private final CardEdition.Collection editions;
+    private List<String> filtered;
 
     public enum SetPreference {
         Latest(false),
@@ -157,19 +157,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     private ListMultimap<String, PaperCard> getAllCardsByName() {
-        if (loadNonLegalCards)
-            return allCardsByName;
-        return Multimaps.filterKeys(allCardsByName, new Predicate<String>() {
-            @Override
-            public boolean apply(String s) {
-                PaperCard pc = getUniqueByName(s);
-                if (pc != null) {
-                    if (checkNonLegal(pc))
-                        return false;
-                }
-                return true;
-            }
-        });
+        return allCardsByName;
     }
 
     private void addSetCard(CardEdition e, CardInSet cis, CardRules cr) {
@@ -199,12 +187,12 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         reIndex();
     }
 
-    public void initialize(boolean logMissingPerEdition, boolean logMissingSummary, boolean enableUnknownCards, boolean loadNonLegalCards) {
+    public void initialize(boolean logMissingPerEdition, boolean logMissingSummary, boolean enableUnknownCards, List<String> filtered) {
+        this.filtered = filtered;
         Set<String> allMissingCards = new LinkedHashSet<>();
         List<String> missingCards = new ArrayList<>();
         CardEdition upcomingSet = null;
         Date today = new Date();
-        this.loadNonLegalCards = loadNonLegalCards;
 
         for (CardEdition e : editions.getOrderedEditions()) {
             boolean coreOrExpSet = e.getType() == CardEdition.Type.CORE || e.getType() == CardEdition.Type.EXPANSION;
@@ -264,6 +252,15 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public void addCard(PaperCard paperCard) {
+        if (filtered.contains(paperCard.getName())) {
+            //TODO: Funny cards (filtered) may have real cards (except basic lands which is excluded)
+            //This is needed since Concentrate is a real card and DS0 set (Drake Stone) has Concentrate card
+            if (paperCard.getEdition().equalsIgnoreCase("DS0") && paperCard.getName().equalsIgnoreCase("Concentrate"))
+                return;
+            else if (!paperCard.getName().equalsIgnoreCase("Concentrate"))
+                return;
+        }
+
         allCardsByName.put(paperCard.getName(), paperCard);
 
         if (paperCard.getRules().getSplitType() == CardSplitType.None) { return; }
@@ -282,21 +279,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         uniqueCardsByName.clear();
         for (Entry<String, Collection<PaperCard>> kv : getAllCardsByName().asMap().entrySet()) {
             PaperCard pc = getFirstWithImage(kv.getValue());
-            if (checkNonLegal(pc))
-                continue;
             uniqueCardsByName.put(kv.getKey(), pc);
         }
     }
 
-    private boolean checkNonLegal(PaperCard pc) {
-        try {
-            if (!loadNonLegalCards && (editions.get(pc.getEdition()).getType() == CardEdition.Type.FUNNY || editions.get(pc.getEdition()).getBorderColor() == CardEdition.BorderColor.SILVER))
-                return true;
-        } catch (Exception e) {
-            return false;
-        }
-        return false;
-    }
     private static PaperCard getFirstWithImage(final Collection<PaperCard> cards) {
         //NOTE: this is written this way to avoid checking final card in list
         final Iterator<PaperCard> iterator = cards.iterator();
@@ -588,8 +574,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             public boolean apply(Entry<String, PaperCard> e) {
                 if (e == null)
                     return false;
-                if (checkNonLegal(e.getValue()))
-                    return false;
                 return e.getKey().equals(e.getValue().getName());
             }
         }).values();
@@ -616,8 +600,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return Multimaps.filterEntries(getAllCardsByName(), new Predicate<Entry<String, PaperCard>>() {
             @Override
             public boolean apply(Entry<String, PaperCard> entry) {
-                if (checkNonLegal(entry.getValue()))
-                    return false;
                 return entry.getKey().equals(entry.getValue().getName());
             }
         }).values();
@@ -654,8 +636,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return Lists.newArrayList(Multimaps.filterEntries(getAllCardsByName(), new Predicate<Entry<String, PaperCard>>() {
             @Override
             public boolean apply(Entry<String, PaperCard> entry) {
-                if (checkNonLegal(entry.getValue()))
-                    return false;
                 return entry.getKey().equals(entry.getValue().getName());
             }
         }).get(getName(cardName)));
