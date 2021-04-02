@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:3/3
 S:Mode$ ReduceCost | ValidCard$ Card.Self | EffectZone$ All | Type$ Spell | Amount$ 2 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME costs {2}{U} less to cast if you've cast an instant or sorcery spell this turn.
 S:Mode$ ReduceCost | ValidCard$ Card.Self | EffectZone$ All | Type$ Spell | Amount$ 1 | Color$ U | CheckSVar$ X | SVarCompare$ GE1 | Secondary$ True | Description$ CARDNAME costs {2}{U} less to cast if you've cast an instant or sorcery spell this turn.
-SVar:X:Count$ThisTurnCast_Instant.YouOwn,Sorcery.YouOwn
+SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl
 DeckHints:Type$Instant|Sorcery
 K:Flying
 K:Prowess

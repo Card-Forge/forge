@@ -1,0 +1,8 @@
+Name:Burrog Befuddler
+ManaCost:1 U
+Types:Creature Frog Wizard
+PT:2/1
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets -1/-0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | IsCurse$ True
+Oracle:When Burrog Befuddler enters the battlefield, target creature gets -1/-0 until end of turn.
