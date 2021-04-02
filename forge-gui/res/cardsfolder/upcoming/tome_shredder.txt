@@ -1,0 +1,9 @@
+Name:Tome Shredder
+ManaCost:2 R
+Types:Creature Wolf
+PT:2/2
+K:Haste
+A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TgtPrompt$ Select target instant or sorcery card in your graveyard | SubAbility$ DBPutCounter | SpellDescription$ Exile target instant or sorcery card from your graveyard.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Haste\n{T}, Exile an instant or sorcery card from your graveyard: Put a +1/+1 counter on Tome Shredder.
