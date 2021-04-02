@@ -4864,6 +4864,11 @@ public class CardFactoryUtil {
         }
 
         altCostSA.setDescription(costDescription);
+
+        if (!params.get("StackDescription").isEmpty()) {
+            altCostSA.setStackDescription(params.get("StackDescription"));
+        }
+
         return altCostSA;
     }
 
