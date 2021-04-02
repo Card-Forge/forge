@@ -301,7 +301,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
         runParams.put(AbilityKey.CurrentCastSpells, Lists.newArrayList(thisTurnCast));
         if (!sp.isCopied()) {
-            runParams.put(AbilityKey.CastOrCopy, "Cast");
             // Run SpellAbilityCast triggers
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
             
@@ -334,7 +333,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 game.getTriggerHandler().runTrigger(TriggerType.Crewed, runParams, false);
             }
         } else {
-            runParams.put(AbilityKey.CastOrCopy, "Copy");
             // Run Copy triggers
             if (sp.isSpell()) {
                 game.getTriggerHandler().runTrigger(TriggerType.SpellCopy, runParams, false);

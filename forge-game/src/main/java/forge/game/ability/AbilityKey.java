@@ -25,7 +25,6 @@ public enum AbilityKey {
     AttackedTarget("AttackedTarget"),
     Blocker("Blocker"),
     Blockers("Blockers"),
-    CastOrCopy("CastOrCopy"),
     CastSA("CastSA"),
     CastSACMC("CastSACMC"),
     Card("Card"),
