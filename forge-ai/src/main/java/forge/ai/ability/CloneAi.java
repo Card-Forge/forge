@@ -102,11 +102,12 @@ public class CloneAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             chance = cloneTgtAI(sa);
         } else {
-            CardCollectionView choices = host.getGame().getCardsIn(ZoneType.Battlefield);
             if (sa.hasParam("Choices")) {
-                choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host, sa);
+                CardCollectionView choices = CardLists.getValidCards(host.getGame().getCardsIn(ZoneType.Battlefield),
+                        sa.getParam("Choices"), host.getController(), host, sa);
+
+                chance = !choices.isEmpty();
             }
-            chance = !choices.isEmpty();
         }
 
         // Improve AI for triggers. If source is a creature with:
