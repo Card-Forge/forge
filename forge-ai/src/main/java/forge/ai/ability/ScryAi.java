@@ -45,7 +45,7 @@ public class ScryAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
-        // For Brain Jar, avoid competing against the other ability in the opponent's EOT.
+        // For Brain in a Jar, avoid competing against the other ability in the opponent's EOT.
         if ("BrainJar".equals(sa.getParam("AILogic"))) {
             return ph.getPhase().isAfter(PhaseType.MAIN2);
         }
