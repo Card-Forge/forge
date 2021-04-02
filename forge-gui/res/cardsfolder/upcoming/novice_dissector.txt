@@ -1,0 +1,7 @@
+Name:Novice Dissector
+ManaCost:3 B
+Types:Creature Troll Warlock
+PT:3/3
+A:AB$ PutCounter | Cost$ 1 Sac<1/Creature.Other/another creature> | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on target creature. Activate only as a sorcery.
+DeckHas:Ability$Counters
+Oracle:{1}, Sacrifice another creature: Put a +1/+1 counter on target creature. Activate only as a sorcery.
