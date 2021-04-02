@@ -9,6 +9,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -95,11 +96,17 @@ public class CloneAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-
+        Card host = sa.getHostCard();
         boolean chance = true;
 
         if (sa.usesTargeting()) {
             chance = cloneTgtAI(sa);
+        } else {
+            CardCollectionView choices = host.getGame().getCardsIn(ZoneType.Battlefield);
+            if (sa.hasParam("Choices")) {
+                choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host, sa);
+            }
+            chance = !choices.isEmpty();
         }
 
         // Improve AI for triggers. If source is a creature with:
