@@ -79,16 +79,30 @@ public class StaticData {
         this.customEditions = new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder)));
         this.prefferedArt = prefferedArt;
         lastInstance = this;
+        List<String> funnyCards = new ArrayList<>();
+        List<String> filtered = new ArrayList<>();
 
         {
             final Map<String, CardRules> regularCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
             final Map<String, CardRules> variantsCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
             final Map<String, CardRules> customizedCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
+            for (CardEdition e : editions) {
+                if (e.getType() == CardEdition.Type.FUNNY || e.getBorderColor() == CardEdition.BorderColor.SILVER) {
+                    for (CardEdition.CardInSet cis : e.getAllCardsInSet()) {
+                        funnyCards.add(cis.name);
+                    }
+                }
+            }
+
             for (CardRules card : cardReader.loadCards()) {
                 if (null == card) continue;
 
                 final String cardName = card.getName();
+
+                if (!loadNonLegalCards && !card.getType().isBasicLand() && funnyCards.contains(cardName))
+                    filtered.add(cardName);
+
                 if (card.isVariant()) {
                     variantsCards.put(cardName, card);
                 } else {
@@ -104,15 +118,18 @@ public class StaticData {
                 }
             }
 
+            if (!filtered.isEmpty()) {
+                Collections.sort(filtered);
+            }
 
             commonCards = new CardDb(regularCards, editions);
             variantCards = new CardDb(variantsCards, editions);
             customCards = new CardDb(customizedCards, customEditions);
 
             //must initialize after establish field values for the sake of card image logic
-            commonCards.initialize(false, false, enableUnknownCards, loadNonLegalCards);
-            variantCards.initialize(false, false, enableUnknownCards, loadNonLegalCards);
-            customCards.initialize(false, false, enableUnknownCards, loadNonLegalCards);
+            commonCards.initialize(false, false, enableUnknownCards, filtered);
+            variantCards.initialize(false, false, enableUnknownCards, filtered);
+            customCards.initialize(false, false, enableUnknownCards, filtered);
         }
 
         {
