@@ -541,7 +541,11 @@ public class CostAdjustment {
                 }
                 curSa = curSa.getSubAbility();
             }
-            if (!targetValid) {
+            if (st.hasParam("UnlessValidTarget")) {
+                if (targetValid) {
+                    return false;
+                }
+            } else if (!targetValid) {
                 return false;
             }
         }
