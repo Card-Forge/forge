@@ -33,7 +33,6 @@ public enum AbilityKey {
     Cause("Cause"),
     Causer("Causer"),
     Championed("Championed"),
-    CopySA("CopySA"),
     Cost("Cost"),
     CostStack("CostStack"),
     CounterAmount("CounterAmount"),

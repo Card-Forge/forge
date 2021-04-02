@@ -50,7 +50,7 @@ import forge.util.Localizer;
  * @author Forge
  * @version $Id$
  */
-public class TriggerSpellAbilityCast extends Trigger {
+public class TriggerSpellAbilityCastOrCopy extends Trigger {
 
     /**
      * <p>
@@ -64,7 +64,7 @@ public class TriggerSpellAbilityCast extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerSpellAbilityCast(final Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerSpellAbilityCastOrCopy(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -81,24 +81,16 @@ public class TriggerSpellAbilityCast extends Trigger {
         final Game game = cast.getGame();
         final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spellAbility);
 
-        if (this.getMode() == TriggerType.SpellCast) {
-            if (!spellAbility.isSpell()) {
-                return false;
-            }
-        } else if (this.getMode() == TriggerType.AbilityCast) {
-            if (!spellAbility.isAbility()) {
-                return false;
-            }
-        } else if (this.getMode() == TriggerType.SpellAbilityCast) {
-            // Empty block for readability.
-        }
-
         if (hasParam("ActivatedOnly")) {
             if (spellAbility.isTrigger()) {
                 return false;
             }
         }
 
+
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
+        }
 
         if (!matchesValidParam("ValidControllingPlayer", cast.getController())) {
             return false;

@@ -2,8 +2,7 @@ Name:Archmage Emeritus
 ManaCost:2 U U
 Types:Creature Human Wizard
 PT:2/2
-T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, draw a card.
-T:Mode$ SpellCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, draw a card.
+T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 DeckNeeds:Type$Instant|Sorcery
 Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, draw a card.
