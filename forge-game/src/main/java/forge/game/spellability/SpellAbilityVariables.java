@@ -134,6 +134,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /** The n cards in hand. */
     private int cardsInHand = -1;
+    private int cardsInHand2 = -1;
 
     // Conditional States for Cards
     private boolean threshold = false;
@@ -383,6 +384,9 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public final void setActivateCardsInHand(final int cards) {
         this.setCardsInHand(cards);
+    }
+    public final void setActivateCardsInHand2(final int cards) {
+        this.setCardsInHand2(cards);
     }
 
 
@@ -830,6 +834,9 @@ public class SpellAbilityVariables implements Cloneable {
     public final int getCardsInHand() {
         return this.cardsInHand;
     }
+    public final int getCardsInHand2() {
+        return this.cardsInHand2;
+    }
 
     /**
      * Sets the cards in hand.
@@ -839,6 +846,9 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public final void setCardsInHand(final int cardsInHand0) {
         this.cardsInHand = cardsInHand0;
+    }
+    public final void setCardsInHand2(final int cardsInHand0) {
+        this.cardsInHand2 = cardsInHand0;
     }
 
     /**

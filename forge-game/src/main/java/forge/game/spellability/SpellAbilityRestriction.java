@@ -141,6 +141,9 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (params.containsKey("ActivationCardsInHand")) {
             this.setActivateCardsInHand(Integer.parseInt(params.get("ActivationCardsInHand")));
         }
+        if (params.containsKey("OrActivationCardsInHand")) {
+            this.setActivateCardsInHand2(Integer.parseInt(params.get("OrActivationCardsInHand")));
+        }
 
         if (params.containsKey("ActivationChosenColor")) {
             this.setColorToCheck(params.get("ActivationChosenColor"));
@@ -356,7 +359,12 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (getCardsInHand() != -1) {
-            if (activator.getCardsIn(ZoneType.Hand).size() != getCardsInHand()) {
+            int h = activator.getCardsIn(ZoneType.Hand).size();
+            if (getCardsInHand2() != -1) {
+                if (h != getCardsInHand() && h != getCardsInHand2()) {
+                    return false;
+                }
+            } else if (h != getCardsInHand()) {
                 return false;
             }
         }
