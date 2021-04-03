@@ -1,0 +1,9 @@
+Name:Mascot Interception
+ManaCost:3 R
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ CostReduction | Relative$ True | EffectZone$ All | Description$ This spell costs {3} less to cast if it targets a creature token.
+A:SP$ GainControl | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Untap$ True | LoseControl$ EOT | SubAbility$ DBPump | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gets +2/+0 and gains haste until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +2 | KW$ Haste
+SVar:CostReduction:Count$Compare CheckTgt GE1.3.0
+SVar:CheckTgt:Targeted$Valid Creature.token
+Oracle:Gain control of target creature until end of turn. Untap that creature. It gets +2/+0 and gains haste until end of turn.
