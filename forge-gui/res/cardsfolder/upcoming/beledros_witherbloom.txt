@@ -6,5 +6,5 @@ K:Flying
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each upkeep, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ bg_1_1_pest_lifegain | TokenOwner$ You
 A:AB$ UntapAll |  Cost$ PayLife<10> | ActivationLimit$ 1 | ValidCards$ Land.YouCtrl
-DeckHas:Ability$Token
+DeckHas:Ability$Token & Ability$LifeGain
 Oracle:Flying\nAt the beginning of each upkeep, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."\nPay 10 life: Untap all lands you control. Activate only once each turn.
