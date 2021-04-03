@@ -1,0 +1,9 @@
+Name:Rushed Rebirth
+ManaCost:B G
+Types:Instant
+A:SP$ Effect | Cost$ B G | ValidTgts$ Creature | TgtPrompt$ Choose target creature | Triggers$ TargetDies | RememberObjects$ Targeted | SpellDescription$ Choose target creature. When that creature dies this turn, search your library for a creature card with lesser mana value, put it onto the battlefield tapped, then shuffle.
+SVar:TargetDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.IsRemembered | Execute$ DBSearch | TriggerController$ You | TriggerDescription$ When that creature dies this turn, search your library for a creature card with lesser mana value, put it onto the battlefield tapped, then shuffle.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | TriggerZones$ Command | ChangeType$ Creature.cmcLTX | ChangeNum$ 1 | Tapped$ True | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:X:Remembered$CardManaCost
+Oracle:Choose target creature. When that creature dies this turn, search your library for a creature card with lesser mana value, put it onto the battlefield tapped, then shuffle.
