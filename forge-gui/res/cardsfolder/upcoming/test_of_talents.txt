@@ -10,5 +10,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
 SVar:NumInHand:TargetedController$CardsInHand
 SVar:NumInLib:TargetedController$CardsInLibrary
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Counter target instant or sorcery spell. Search its controller's graveyard, hand, and library for any number of cards with the same name as that spell and exile them. That player shuffles, then draws a card for each card exiled from their hand this way.
