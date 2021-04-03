@@ -1,0 +1,8 @@
+Name:Blot Out the Sky
+ManaCost:X W B
+Types:Sorcery
+A:SP$ Token | Cost$ X W B | TokenAmount$ X | TokenScript$ b_2_1_inkling_flying | TokenTapped$ True | SubAbility$ BlotDestroy | SpellDescription$ Create X tapped 2/1 white and black Inkling creature tokens with flying. If X is 6 or more, destroy all noncreature, nonland permanents.
+SVar:BlotDestroy:DB$ DestroyAll | ValidCards$ Permanent.nonCreature+nonLand | ConditionCheckSVar$ X | ConditionSVarCompare$ GE6
+SVar:X:Count$xPaid
+SVar:PayX:6
+Oracle:Create X tapped 2/1 white and black Inkling creature tokens with flying. If X is 6 or more, destroy all noncreature, nonland permanents.
