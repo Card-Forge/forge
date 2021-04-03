@@ -1,0 +1,9 @@
+Name:Daemogoth Titan
+ManaCost:B/G B/G B/G B/G
+Types:Creature Demon
+PT:11/10
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME attacks or blocks, sacrifice a creature.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigSac | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, sacrifice a creature.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature
+DeckHas:Ability$Sacrifice
+Oracle:Whenever Daemogoth Titan attacks or blocks, sacrifice a creature.

@@ -1,0 +1,12 @@
+Name:Dina, Soul Steeper
+ManaCost:B G
+Types:Legendary Creature Dryad Druid
+PT:1/3
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you gain life, each opponent loses 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+A:AB$ Pump | Cost$ 1 Sac<1/Creature.Other/another creature> | Defined$ Self | NumAtt$ +X | AILogic$ Aristocrat | SpellDescription$ CARDNAME gets +X/+0 until end of turn, where X is the sacrificed creature's power.
+SVar:X:Sacrificed$CardPower
+SVar:AIPreference:SacCost$Creature.Other
+DeckHas:Ability$Sacrifice
+DeckHints:Ability$LifeGain
+Oracle:Whenever you gain life, each opponent loses 1 life.\n{1}, Sacrifice another creature: Dina, Soul Steeper gets +X/+0 until end of turn, where X is the sacrificed creature's power.
