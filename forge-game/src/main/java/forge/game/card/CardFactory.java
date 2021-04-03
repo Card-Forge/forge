@@ -133,6 +133,10 @@ public class CardFactory {
         final Card original = targetSA.getHostCard();
         final Card c = copyCard(original, true);
 
+        if (sourceSA.hasParam("NonLegendary")) {
+            c.removeType(CardType.Supertype.Legendary);
+        }
+
         // change the color of the copy (eg: Fork)
         if (null != sourceSA && sourceSA.hasParam("CopyIsColor")) {
             String tmp = "";
