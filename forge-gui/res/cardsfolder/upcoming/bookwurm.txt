@@ -7,3 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 A:AB$ ChangeZone | Cost$ 2 G | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 2 | ActivationZone$ Graveyard | SpellDescription$ Put CARDNAME from your graveyard into your library third from the top.
+Oracle:Trample\nWhen Bookwurm enters the battlefield, you gain 3 life and draw a card.\n{2}{G}: Put Bookwurm from your graveyard into your library third from the top.
