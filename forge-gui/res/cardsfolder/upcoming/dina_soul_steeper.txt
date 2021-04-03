@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ 1 Sac<1/Creature.Other/another creature> | Defined$ Self | Nu
 SVar:X:Sacrificed$CardPower
 SVar:AIPreference:SacCost$Creature.Other
 DeckHas:Ability$Sacrifice
+DeckHints:Ability$LifeGain
 Oracle:Whenever you gain life, each opponent loses 1 life.\n{1}, Sacrifice another creature: Dina, Soul Steeper gets +X/+0 until end of turn, where X is the sacrificed creature's power.
