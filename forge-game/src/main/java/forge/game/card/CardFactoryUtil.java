@@ -4865,7 +4865,7 @@ public class CardFactoryUtil {
 
         altCostSA.setDescription(costDescription);
 
-        if (!params.get("StackDescription").isEmpty()) {
+        if (params.containsKey("StackDescription")) {
             altCostSA.setStackDescription(params.get("StackDescription"));
         }
 
