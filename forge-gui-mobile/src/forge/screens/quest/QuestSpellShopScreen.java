@@ -284,7 +284,6 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
     private static class SpellShopPage extends SpellShopBasePage {
         private FTextArea lblSellPercentage = add(new FTextArea(false));
-        private ItemPool<InventoryItem> shopItems = FModel.getQuest().getCards().getShopList();
 
         private SpellShopPage() {
             super(localizer.getMessage("lblCardsForSale"), FSkinImage.QUEST_BOOK, true);
@@ -304,7 +303,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                             ItemColumn.addColOverride(ItemManagerConfig.SPELL_SHOP, colOverrides, ColumnDef.OWNED, FModel.getQuest().getCards().getFnOwnedCompare(), FModel.getQuest().getCards().getFnOwnedGet());
                             itemManager.setup(ItemManagerConfig.SPELL_SHOP, colOverrides);
 
-                            itemManager.setPool(shopItems);
+                            itemManager.setPool(FModel.getQuest().getCards().getShopList());
                         }
                     });
                 }
