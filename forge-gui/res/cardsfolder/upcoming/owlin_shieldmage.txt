@@ -1,0 +1,7 @@
+Name:Owlin Shieldmage
+ManaCost:3 W B
+Types:Creature Bird Warlock
+PT:3/3
+K:Flying
+K:Ward:PayLife<3>
+Oracle:Flying\nWard—Pay 3 life. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays 3 life.)
