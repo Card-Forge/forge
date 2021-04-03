@@ -1,0 +1,8 @@
+Name:Promising Duskmage
+ManaCost:2 B
+Types:Creature Human Warlock
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+counters_GE1_P1P1 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, if it had a +1/+1 counter on it, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+DeckHints:Ability$Counters
+Oracle:When Promising Duskmage dies, if it had a +1/+1 counter on it, draw a card.
