@@ -4,7 +4,6 @@ Types:Creature Treefolk Warlock
 PT:5/5
 T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ LifeGain | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, you gain 1 life.
 SVar:LifeGain:DB$ GainLife | Defined$ You | LifeAmount$ 1
-SVar:BuffedBy:Instant,Sorcery
 DeckHints:Type$Instant|Sorcery
 DeckHas:Ability$LifeGain
 Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, you gain 1 life.
