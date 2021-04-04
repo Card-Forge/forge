@@ -73,14 +73,14 @@ public class ImageCache {
     private static final LoadingCache<String, Texture> cache = CacheBuilder.newBuilder()
             .maximumSize(Forge.cacheSize)
             .expireAfterAccess(15, TimeUnit.MINUTES)
+            .softValues()
             .removalListener(new RemovalListener<String, Texture>() {
                 @Override
                 public void onRemoval(RemovalNotification<String, Texture> removalNotification) {
-                    try {
-                        //should dispose the image regardless of removal cause
+                    if (removalNotification.wasEvicted()) {
                         removalNotification.getValue().dispose();
-                    } catch (Exception e){/*No OpenGL context found in the current thread.*/}
-                    CardRenderer.clearcardArtCache();
+                        CardRenderer.clearcardArtCache();
+                    }
                 }
             })
             .build(new ImageLoader());
@@ -113,13 +113,6 @@ public class ImageCache {
     }
 
     public static void disposeTexture(){
-        for (Texture t: cache.asMap().values()) {
-            try {
-                if (!t.toString().contains("pics/icons")) //fixes quest avatars black texture. todo: filter textures that are safe to dispose...
-                    if (!t.toString().contains("@"))  //generated texture don't need to be disposed manually
-                        t.dispose();
-            } catch (Exception e) {/*No OpenGL context found in the current thread.*/}
-        }
         CardRenderer.clearcardArtCache();
         clear();
     }
