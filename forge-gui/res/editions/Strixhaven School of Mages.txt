@@ -11,93 +11,212 @@ Type=Expansion
 2 C Expanded Anatomy
 3 C Introduction to Annihilation
 4 C Introduction to Prophecy
+5 M Mascot Exhibition
 6 R Wandering Archaic // Explore the Vastlands
+7 R Academic Probation
 8 C Ageless Guardian
 9 C Beaming Defiance
 10 U Clever Lumimancer
 11 C Combat Professor
 12 C Defend the Campus
+13 U Detention Vortex
+14 R Devastating Mastery
 15 U Dueling Coach
 16 C Eager First-Year
 17 R Elite Spellbinder
+18 C Expel
+19 C Guiding Voice
+20 R Leonin Lightscribe
+21 M Mavinda, Students' Advocate
+22 C Pilgrim of the Ages
+23 C Pillardrop Rescuer
 24 U Professor of Symbology
 25 U Reduce to Memory
+26 U Secret Rendezvous
+27 R Semester's End
+28 U Show of Confidence
 29 R Sparring Regimen
 30 C Star Pupil
 31 U Stonebinder's Familiar
+32 C Stonerise Spirit
 33 R Strict Proctor
 34 C Study Break
 35 U Thunderous Orator
+36 C Arcane Subtraction
 37 R Archmage Emeritus
+38 C Burrog Befuddler
 39 C Bury in Books
 40 C Curate
+41 U Divide by Zero
+42 R Dream Strix
 43 C Frost Trickster
+44 R Ingenious Mastery
 45 U Kelpie Guide
+46 U Mentor's Guidance
+47 U Mercurial Transformation
 48 R Multiple Choice
 49 C Pop Quiz
+50 C Reject
 51 C Resculpt
+52 C Serpentine Curve
+53 U Snow Day
 54 U Solve the Equation
+55 C Soothsayer Adept
+56 U Symmetry Sage
 57 R Teachings of the Archaics
+58 R Tempted by the Oriq
+59 U Test of Talents
+60 C Vortex Runner
 61 C Waterfall Aerialist
-63 C "A Poet That Knows It"
-64 R "Sinister Domain"
+62 U Wormhole Serpent
+63 C Arrogant Poet
+64 R Baleful Mastery
+65 U Brackish Trudge
+66 R Callous Bloodmage
 67 R Confront the Past
-68 C "Deep Disappointment"
-70 U "Eyebat"
+68 C Crushing Disappointment
+69 C Essence Infusion
+70 U Eyetwitch
+71 U Flunk
 72 U Go Blank
+73 C Hunt for Specimens
+74 C Lash of Malice
+75 C Leech Fanatic
 76 U Mage Hunter
+77 C Mage Hunter's Onslaught
+78 U Necrotic Fumes
+79 C Novice Dissector
+80 R Oriq Loremage
+81 U Plumb the Forgotten
+82 R Poet's Quill
 83 M Professor Onyx
-91 U "Academic Debate"
-92 U "Forum Mooderator"
-93 C "Geist Commander"
-94 R "Conspiracy Theorist"
-96 R "I Have a Dragon and Dragon Says 'No'. Do You Have a Dragon? Didn't Think So"
-97 C "Approach of the Dragon"
+84 C Professor's Warning
+85 C Promising Duskmage
+86 R Sedgemoor Witch
+87 C Specter of the Fens
+88 U Tenured Inkcaster
+89 U Umbral Juke
+90 C Unwilling Ingredient
+91 U Academic Debate
+92 U Ardent Dustspeaker
+93 C Blood Age General
+94 R Conspiracy Theorist
+95 M Crackle with Power
+96 R Draconic Intervention
+97 C Dragon's Approach
 98 R Efreet Flamepainter
 99 C Enthusiastic Study
 100 U Explosive Welcome
+101 R Fervent Mastery
 102 C First Day of Class
+103 C Fuming Effigy
 104 U Grinning Ignus
+105 U Hall Monitor
 106 C Heated Debate
 107 U Igneous Inspiration
 108 R Illuminate History
 109 C Illustrious Historian
-114 U "We'll Do It Live!"
+110 U Mascot Interception
+111 C Pigment Storm
+112 C Pillardrop Warden
+113 R Retriever Phoenix
+114 U Start from Scratch
 115 U Storm-Kiln Artist
 116 C Sudden Breakthrough
+117 C Tome Shredder
+118 C Twinscroll Shaman
+119 R Accomplished Alchemist
+120 R Basic Conjuration
+121 C Bayou Groff
+122 C Big Play
+123 U Bookwurm
+124 C Charge Through
+125 U Containment Breach
+126 U Devouring Tendrils
 127 R Dragonsguard Elite
+128 M Ecological Appreciation
+129 U Emergent Sequence
+130 R Exponential Growth
 131 C Field Trip
-132 U "Nightmare's Beverage"
-135 U "Hungry Chomp Rider"
-138 U "Master of Minecraft"
+132 U Fortifying Draught
+133 R Gnarled Professor
+134 U Honor Troll
+135 U Karok Wrangler
+136 C Leyline Invocation
+137 C Mage Duel
+138 U Master Symmetrist
+139 U Overgrown Arch
+140 C Professor of Zoomancy
+141 C Reckless Amplimancer
+142 C Scurrid Colony
+143 C Spined Karok
+144 C Springmane Cervin
+145 C Tangletrap
 146 R Verdant Mastery
+147 R Augmenter Pugilist // Echoing Equation
+148 M Blex, Vexing Pest // Search for Blex
 149 M Extus, Oriq Overlord // Awaken the Blood Avatar
 150 R Flamescroll Celebrant // Revel in Silence
+151 M Jadzi, Oracle of Arcavios // Journey to the Oracle
 152 R Kianne, Dean of Substance // Imbraham, Dean of Theory
+153 M Mila, Crafty Companion // Lukka, Wayward Bonder
+154 R Pestilent Cauldron // Restorative Burst
 155 R Plargg, Dean of Chaos // Augusta, Dean of Order
 156 M Rowan, Scholar of Sparks // Will, Scholar of Frost
+157 R Selfless Glyphweaver // Deadly Vanity
 158 R Shaile, Dean of Radiance // Embrose, Dean of Shadow
 159 R Torrent Sculptor // Flamethrower Sonata
 160 R Uvilda, Dean of Perfection // Nassari, Dean of Expression
 161 R Valentin, Dean of the Vein // Lisette, Dean of the Root
+162 U Aether Helix
+163 M Beledros Witherbloom
+164 C Biomathematician
 165 R Blade Historian
+166 C Blood Researcher
+167 M Blot Out the Sky
+168 M Body of Research
+169 U Closing Statement
+170 C Cram Session
 171 U Creative Outburst
+172 R Culling Ritual
 173 R Culmination of Studies
-181 R "Tiger Surfer"
-183 C "Elemental Calling"
-186 U "Sublime Rehearsal"
-187 C "Frog Fractals"
+174 R Daemogoth Titan
+175 U Daemogoth Woe-Eater
+176 U Deadly Brew
+177 U Decisive Denial
+178 U Dina, Soul Steeper
+179 R Double Major
+180 R Dramatic Finale
+181 R Elemental Expressionist
+182 C Elemental Masterpiece
+183 C Elemental Summoning
+184 C Eureka Moment
+185 C Exhilarating Elocution
+186 U Expressive Iteration
+187 C Fractal Summoning
+188 U Fracture
+189 M Galazeth Prismari
 190 U Golden Ratio
+191 M Harness Infinity
 192 M Hofri Ghostforge
+193 U Humiliate
+194 C Infuse with Vitality
+195 C Inkling Summoning
 196 M Kasmina, Enigma Sage
+197 U Killian, Ink Duelist
 198 U Lorehold Apprentice
 199 R Lorehold Command
 200 U Lorehold Excavation
 201 C Lorehold Pledgemage
-202 U "Malestrom Muse"
+202 U Maelstrom Muse
 203 M Magma Opus
 204 C Make Your Mark
-209 C "Oggyar Battle Seer"
+205 R Manifestation Sage
+206 C Moldering Karok
+207 U Mortality Spear
+208 C Needlethorn Drake
+209 C Oggyar Battle-Seer
+210 C Owlin Shieldmage
 211 C Pest Summoning
 212 U Practical Research
 213 U Prismari Apprentice
@@ -105,26 +224,53 @@ Type=Expansion
 215 C Prismari Pledgemage
 216 U Quandrix Apprentice
 217 R Quandrix Command
+218 U Quandrix Cultivator
+219 C Quandrix Pledgemage
 220 U Quintorius, Field Historian
 221 R Radiant Scrollwielder
 222 U Reconstruct History
 223 C Relic Sloth
 224 U Returned Pastcaller
+225 U Rip Apart
 226 C Rise of Extus
 227 U Rootha, Mercurial Artist
+228 R Rushed Rebirth
+229 U Shadewing Laureate
 230 M Shadrix Silverquill
 231 U Silverquill Apprentice
 232 R Silverquill Command
+233 C Silverquill Pledgemage
+234 R Silverquill Silencer
 235 C Spectacle Mage
 236 C Spirit Summoning
+237 C Spiteful Squad
+238 C Square Up
 239 C Stonebound Mentor
 240 M Tanazir Quandrix
+241 C Teach by Example
+242 U Tend the Pests
 243 C Thrilling Discovery
+244 R Vanishing Verse
 245 M Velomachus Lorehold
+246 R Venerable Warsinger
 247 U Witherbloom Apprentice
 248 R Witherbloom Command
+249 C Witherbloom Pledgemage
+250 U Zimone, Quandrix Prodigy
+251 C Biblioplex Assistant
 252 C Campus Guide
 253 R Codie, Vociferous Codex
+254 C Cogwork Archivist
+255 C Excavated Wall
+256 C Letter of Acceptance
+257 U Reflective Golem
+258 U Spell Satchel
+259 R Strixhaven Stadium
+260 U Team Pennant
+261 U Zephyr Boots
+262 U Access Tunnel
+263 C Archway Commons
+264 R The Biblioplex
 265 R Frostboil Snarl
 266 R Furycalm Snarl
 267 R Hall of Oracles
@@ -133,41 +279,91 @@ Type=Expansion
 270 C Prismari Campus
 271 C Quandrix Campus
 272 R Shineshadow Snarl
+273 C Silverquill Campus
 274 R Vineglimmer Snarl
+275 C Witherbloom Campus
 
 [borderless]
 276 M Professor Onyx
+277 M Mila, Crafty Companion // Lukka, Wayward Bonder
 278 M Rowan, Scholar of Sparks // Will, Scholar of Frost
 279 M Kasmina, Enigma Sage
 
 [showcase]
 280 M Shadrix Silverquill
+281 M Galazeth Prismari
+282 M Beledros Witherbloom
+283 M Velomachus Lorehold
+284 M Tanazir Quandrix
 
 [extended art]
+285 M Mascot Exhibition
 286 R Wandering Archaic // Explore the Vastlands
 287 R Academic Probation
+288 R Devastating Mastery
+289 R Elite Spellbinder
+290 R Leonin Lightscribe
+291 M Mavinda, Students' Advocate
 292 R Semester's End
+293 R Sparring Regimen
+294 R Strict Proctor
 295 R Archmage Emeritus
+296 R Dream Strix
 298 R Multiple Choice
+299 R Teachings of the Archaics
+301 R Baleful Mastery
 303 R Confront the Past
-307 R "Conspiracy Theorist"
+305 R Poet's Quill
+307 R Conspiracy Theorist
+308 M Crackle with Power
+309 R Draconic Intervention
 310 R Efreet Flamepainter
+311 R Fervent Mastery
+312 R Illuminate History
+313 R Retriever Phoenix
+315 R Basic Conjuration
 316 R Dragonsguard Elite
+317 M Ecological Appreciation
+318 R Exponential Growth
+319 R Gnarled Professor
+320 R Verdant Mastery
+321 R Augmenter Pugilist // Echoing Equation
+323 M Extus, Oriq Overlord // Awaken the Blood Avatar
+324 R Flamescroll Celebrant // Revel in Silence
+325 M Jadzi, Oracle of Arcavios // Journey to the Oracle
 326 R Kianne, Dean of Substance // Imbraham, Dean of Theory
+327 R Pestilent Cauldron // Restorative Burst
 328 R Plargg, Dean of Chaos // Augusta, Dean of Order
+329 R Selfless Glyphweaver // Deadly Vanity
 330 R Shaile, Dean of Radiance // Embrose, Dean of Shadow
+331 R Torrent Sculptor // Flamethrower Sonata
 332 R Uvilda, Dean of Perfection // Nassari, Dean of Expression
 333 R Valentin, Dean of the Vein // Lisette, Dean of the Root
 334 R Blade Historian
+335 M Blot Out the Sky
+336 M Body of Research
+338 R Culmination of Studies
+340 R Double Major
+341 R Dramatic Finale
+342 R Elemental Expressionist
+343 M Harness Infinity
+344 M Hofri Ghostforge
 345 R Lorehold Command
 346 M Magma Opus
+347 R Manifestation Sage
 348 R Prismari Command
 349 R Quandrix Command
+350 R Radiant Scrollwielder
 352 R Silverquill Command
+353 R Silverquill Silencer
+354 R Vanishing Verse
 355 R Venerable Warsinger
 356 R Witherbloom Command
+357 R Codie, Vociferous Codex
+358 R Strixhaven Stadium
 360 R Frostboil Snarl
 361 R Furycalm Snarl
+362 R Hall of Oracles
 363 R Necroblossom Snarl
 364 R Shineshadow Snarl
 365 R Vineglimmer Snarl
@@ -189,7 +385,10 @@ Type=Expansion
 
 [promo]
 377 R Archmage Emeritus
+378 U Fracture
+379 U Expressive Iteration
 381 U Rip Apart
+382 U Decisive Denial
 
 [tokens]
 rw_3_2_spirit
