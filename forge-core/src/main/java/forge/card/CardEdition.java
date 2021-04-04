@@ -116,7 +116,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     }
 
     // reserved names of sections inside edition files, that are not parsed as cards
-    private static final List<String> reservedSectionNames = ImmutableList.of("metadata", "tokens");
+    private static final List<String> reservedSectionNames = ImmutableList.of("metadata", "tokens", "other");
 
     // commonly used printsheets with collector number
     public enum EditionSectionWithCollectorNumbers {
@@ -127,7 +127,8 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         EXTENDED_ART("extended art"),
         ALTERNATE_ART("alternate art"),
         BUY_A_BOX("buy a box"),
-        PROMO("promo");
+        PROMO("promo"),
+        BOX_TOPPER("box topper");
 
         private final String name;
 

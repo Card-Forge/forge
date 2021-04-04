@@ -1551,7 +1551,7 @@ Kaya, Ghost Assassin|CN2|2
 
 [JMP Above the Clouds 4]
 1 Kira, Great Glass-Spinner|JMP
-1 Windstorm Drake|M21
+1 Windstorm Drake|JMP
 1 Tide Skimmer|M21
 1 Keen Glidemaster|M21
 1 Roaming Ghostlight|M21
