@@ -136,6 +136,143 @@ SLU/Riverglide Pathway.fullborder
 SLU/Timbercrown Pathway.fullborder
 SLU/Boulderloft Pathway.fullborder
 SLU/Branchloft Pathway.fullborder
+STA/Abundant Harvest2.fullborder
+STA/Adventurous Impulse1.fullborder
+STA/Adventurous Impulse2.fullborder
+STA/Agonizing Remorse1.fullborder
+STA/Agonizing Remorse2.fullborder
+STA/Approach of the Second Sun1.fullborder
+STA/Approach of the Second Sun2.fullborder
+STA/Blue Sun's Zenith1.fullborder
+STA/Blue Sun's Zenith2.fullborder
+STA/Brainstorm1.fullborder
+STA/Brainstorm2.fullborder
+STA/Channel1.fullborder
+STA/Channel2.fullborder
+STA/Chaos Warp1.fullborder
+STA/Chaos Warp2.fullborder
+STA/Claim the Firstborn1.fullborder
+STA/Claim the Firstborn2.fullborder
+STA/Compulsive Research1.fullborder
+STA/Compulsive Research2.fullborder
+STA/Counterspell1.fullborder
+STA/Counterspell2.fullborder
+STA/Crux of Fate1.fullborder
+STA/Crux of Fate2.fullborder
+STA/Cultivate1.fullborder
+STA/Cultivate2.fullborder
+STA/Dark Ritual1.fullborder
+STA/Dark Ritual2.fullborder
+STA/Day of Judgment1.fullborder
+STA/Day of Judgment2.fullborder
+STA/Defiant Strike1.fullborder
+STA/Defiant Strike2.fullborder
+STA/Demonic Tutor1.fullborder
+STA/Demonic Tutor2.fullborder
+STA/Despark1.fullborder
+STA/Despark2.fullborder
+STA/Divine Gambit1.fullborder
+STA/Divine Gambit2.fullborder
+STA/Doom Blade1.fullborder
+STA/Doom Blade2.fullborder
+STA/Duress1.fullborder
+STA/Duress2.fullborder
+STA/Electrolyze1.fullborder
+STA/Electrolyze2.fullborder
+STA/Eliminate1.fullborder
+STA/Eliminate2.fullborder
+STA/Ephemerate1.fullborder
+STA/Ephemerate2.fullborder
+STA/Faithless Looting1.fullborder
+STA/Faithless Looting2.fullborder
+STA/Gift of Estates1.fullborder
+STA/Gift of Estates2.fullborder
+STA/Gods Willing1.fullborder
+STA/Gods Willing2.fullborder
+STA/Grapeshot1.fullborder
+STA/Grapeshot2.fullborder
+STA/Growth Spiral1.fullborder
+STA/Growth Spiral2.fullborder
+STA/Harmonize1.fullborder
+STA/Harmonize2.fullborder
+STA/Increasing Vengeance1.fullborder
+STA/Increasing Vengeance2.fullborder
+STA/Infuriate1.fullborder
+STA/Infuriate2.fullborder
+STA/Inquisition of Kozilek1.fullborder
+STA/Inquisition of Kozilek2.fullborder
+STA/Krosan Grip1.fullborder
+STA/Krosan Grip2.fullborder
+STA/Lightning Bolt1.fullborder
+STA/Lightning Bolt2.fullborder
+STA/Lightning Helix1.fullborder
+STA/Lightning Helix2.fullborder
+STA/Mana Tithe1.fullborder
+STA/Mana Tithe2.fullborder
+STA/Memory Lapse1.fullborder
+STA/Memory Lapse2.fullborder
+STA/Mind's Desire1.fullborder
+STA/Mind's Desire2.fullborder
+STA/Mizzix's Mastery1.fullborder
+STA/Mizzix's Mastery2.fullborder
+STA/Natural Order1.fullborder
+STA/Natural Order2.fullborder
+STA/Negate1.fullborder
+STA/Negate2.fullborder
+STA/Opt1.fullborder
+STA/Opt2.fullborder
+STA/Primal Command1.fullborder
+STA/Primal Command2.fullborder
+STA/Putrefy1.fullborder
+STA/Putrefy2.fullborder
+STA/Regrowth1.fullborder
+STA/Regrowth2.fullborder
+STA/Revitalize1.fullborder
+STA/Revitalize2.fullborder
+STA/Shock1.fullborder
+STA/Shock2.fullborder
+STA/Sign in Blood1.fullborder
+STA/Sign in Blood2.fullborder
+STA/Snakeskin Veil1.fullborder
+STA/Snakeskin Veil2.fullborder
+STA/Stone Rain1.fullborder
+STA/Stone Rain2.fullborder
+STA/Strategic Planning1.fullborder
+STA/Strategic Planning2.fullborder
+STA/Swords to Plowshares1.fullborder
+STA/Swords to Plowshares2.fullborder
+STA/Tainted Pact1.fullborder
+STA/Tainted Pact2.fullborder
+STA/Teferi's Protection1.fullborder
+STA/Teferi's Protection2.fullborder
+STA/Tendrils of Agony1.fullborder
+STA/Tendrils of Agony2.fullborder
+STA/Tezzeret's Gambit1.fullborder
+STA/Tezzeret's Gambit2.fullborder
+STA/Thrill of Possibility1.fullborder
+STA/Thrill of Possibility2.fullborder
+STA/Time Warp1.fullborder
+STA/Time Warp2.fullborder
+STA/Urza's Rage1.fullborder
+STA/Urza's Rage2.fullborder
+STA/Village Rites1.fullborder
+STA/Village Rites2.fullborder
+STA/Weather the Storm1.fullborder
+STA/Weather the Storm2.fullborder
+STA/Whirlwind Denial1.fullborder
+STA/Whirlwind Denial2.fullborder
+STA/Abundant Harvest1.fullborder
+STX/Beledros Witherbloom2.fullborder
+STX/Galazeth Prismari2.fullborder
+STX/Kasmina, Enigma Sage2.fullborder
+STX/Lukka, Wayward Bonder2.fullborder
+STX/Mila, Crafty Companion2.fullborder
+STX/Professor Onyx2.fullborder
+STX/Rowan, Scholar of Sparks2.fullborder
+STX/Shadrix Silverquill2.fullborder
+STX/Tanazir Quandrix2.fullborder
+STX/Velomachus Lorehold2.fullborder
+STX/Will, Scholar of Frost2.fullborder
 THB/Ashiok, Nightmare Muse2.fullborder
 THB/Calix, Destiny's Hand2.fullborder
 THB/Elspeth, Sun's Nemesis2.fullborder
