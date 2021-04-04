@@ -1,0 +1,5 @@
+Name:Double Major
+ManaCost:G U
+Types:Instant
+A:SP$ CopySpellAbility | TgtPrompt$ Select target creature spell you control | ValidTgts$ Creature.YouCtrl | TargetType$ Spell | NonLegendary$ True | SpellDescription$ Copy target creature spell you control, except it isn't legendary if the spell is legendary. (A copy of a creature spell becomes a token.)
+Oracle:Copy target creature spell you control, except it isn't legendary if the spell is legendary. (A copy of a creature spell becomes a token.)

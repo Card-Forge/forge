@@ -1,0 +1,19 @@
+Name:Augmenter Pugilist
+ManaCost:1 G G
+Types:Creature Troll Druid
+PT:3/3
+K:Trample
+S:Mode$ Continuous | IsPresent$ Land.YouCtrl | PresentCompare$ GE8 | Affected$ Card.Self | AddPower$ 5 | AddToughness$ 5 | Description$ As long as you control eight or more lands, CARDNAME gets +5/+5.
+AlternateMode:Modal
+Oracle:Trample\nAs long as you control eight or more lands, Augmenter Pugilist gets +5/+5.
+
+ALTERNATE
+
+Name:Echoing Equation
+ManaCost:3 U U
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | RememberObjects$ Targeted | SubAbility$ DBRepeatEach | StackDescription$ Each other creature {p:You} controls becomes a copy of {c:Targeted} until end of turn, except those creatures aren't legendary if {c:Targeted} is legendary. | SpellDescription$ Choose target creature you control. Each other creature you control becomes a copy of it until end of turn, except those creatures aren't legendary if the chosen creature is legendary.
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatCards$ Creature.YouCtrl+IsNotRemembered | UseImprinted$ True | RepeatSubAbility$ DBClone | SubAbility$ DBCleanup
+SVar:DBClone:DB$ Clone | Defined$ Remembered | CloneTarget$ Imprinted | NonLegendary$ True | Duration$ UntilEndOfTurn
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+Oracle:Choose target creature you control. Each other creature you control becomes a copy of it until end of turn, except those creatures aren't legendary if the chosen creature is legendary.
