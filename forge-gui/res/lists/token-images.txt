@@ -1027,7 +1027,6 @@ gw_x_x_elemental.jpg https://downloads.cardforge.org/images/tokens/gw_x_x_elemen
 gw_x_x_elemental_total_creatures_2xm.jpg https://downloads.cardforge.org/images/tokens/gw_x_x_elemental_total_creatures_2xm.jpg
 gw_x_x_elemental_total_creatures_dgm.jpg https://downloads.cardforge.org/images/tokens/gw_x_x_elemental_total_creatures_dgm.jpg
 gw_x_x_elemental_total_creatures_mm3.jpg https://downloads.cardforge.org/images/tokens/gw_x_x_elemental_total_creatures_mm3.jpg
-hidden.jpg https://downloads.cardforge.org/images/tokens/hidden.jpg
 hornet.jpg https://downloads.cardforge.org/images/tokens/hornet.jpg
 hornet_dde.jpg https://downloads.cardforge.org/images/tokens/hornet_dde.jpg
 hornet_sth.jpg https://downloads.cardforge.org/images/tokens/hornet_sth.jpg
@@ -2025,6 +2024,7 @@ copy_tmp.jpg https://downloads.cardforge.org/images/tokens/copy_tmp.jpg
 copy_znr.jpg https://downloads.cardforge.org/images/tokens/copy_znr.jpg
 foretell.jpg https://downloads.cardforge.org/images/tokens/foretell.jpg
 foretell_khm.jpg https://downloads.cardforge.org/images/tokens/foretell_khm.jpg
+hidden.jpg https://downloads.cardforge.org/images/tokens/hidden.jpg
 manifest.jpg https://downloads.cardforge.org/images/tokens/manifest.jpg
 monarch.jpg https://downloads.cardforge.org/images/tokens/monarch.jpg
 monarch_cmr.jpg https://downloads.cardforge.org/images/tokens/monarch_cmr.jpg
