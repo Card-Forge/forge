@@ -1,7 +1,7 @@
 Name:Make your Mark
 ManaCost:RW
 Types:Instant
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | SubAbility$ DBEffect | SpellDescription$ Target creature gets +1/+0 until end of turn. When that creature dies this turn, create a 3/2 red and white Spirit creature token.
+A:SP$ Pump | Cost$ RW | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | SubAbility$ DBEffect | SpellDescription$ Target creature gets +1/+0 until end of turn. When that creature dies this turn, create a 3/2 red and white Spirit creature token.
 SVar:DBEffect:DB$ Effect | Triggers$ SpiritEmerge | RememberObjects$ ParentTarget | ExileOnMoved$ Battlefield | StackDescription$ When {c:Targeted} dies this turn, create a 3/2 red and white Spirit creature token.
 SVar:SpiritEmerge:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ DBToken | TriggerDescription$ When that creature dies this turn, create a 3/2 red and white Spirit creature token.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ rw_3_2_spirit | TokenOwner$ You
