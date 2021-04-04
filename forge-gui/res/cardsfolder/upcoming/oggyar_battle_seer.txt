@@ -1,0 +1,7 @@
+Name:Oggyar Battle-Seer
+ManaCost:3 U R
+Types:Creature Ogre Shaman
+PT:3/4
+K:Haste
+A:AB$ Scry | Cost$ T | ScryNum$ 1 | SpellDescription$ Scry 1.
+Oracle:Haste\n{T}: Scry 1.
