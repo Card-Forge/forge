@@ -1,0 +1,9 @@
+Name:Silverquill Pledgemage
+ManaCost:1 W/B W/B
+Types:Creature Vampire Cleric
+PT:3/1
+T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChoice | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, Silverquill Pledgemage gains your choice of flying or lifelink until end of turn.
+SVar:TrigChoice:DB$ GenericChoice | Choices$ DBFlying,DBLifelink | SpellDescription$ CARDNAME gains your choice of flying or lifelink until end of turn.
+SVar:DBFlying:DB$ Pump | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+SVar:DBLifelink:DB$ Pump | Defined$ Self | KW$ Lifelink | SpellDescription$ CARDNAME gains lifelink until end of turn.
+Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, Silverquill Pledgemage gains your choice of flying or lifelink until end of turn.
