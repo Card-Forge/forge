@@ -77,9 +77,8 @@ public class ImageCache {
             .removalListener(new RemovalListener<String, Texture>() {
                 @Override
                 public void onRemoval(RemovalNotification<String, Texture> removalNotification) {
-                    if(removalNotification.wasEvicted()||removalNotification.getCause() == RemovalCause.EXPIRED) {
-                        removalNotification.getValue().dispose();
-                    }
+                    //should dispose the image regardless of removal cause
+                    removalNotification.getValue().dispose();
                     CardRenderer.clearcardArtCache();
                 }
             })
