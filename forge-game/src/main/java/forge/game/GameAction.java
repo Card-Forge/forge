@@ -1238,6 +1238,7 @@ public class GameAction {
                 }
 
                 if ((game.getRules().hasAppliedVariant(GameType.Commander)
+                        || game.getRules().hasAppliedVariant(GameType.Brawl)
                         || game.getRules().hasAppliedVariant(GameType.Planeswalker)) && !checkAgain) {
                     Iterable<Card> cards = p.getCardsIn(ZoneType.Graveyard).threadSafeIterable();
                     for (final Card c : cards) {
