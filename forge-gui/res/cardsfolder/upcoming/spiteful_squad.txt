@@ -1,0 +1,11 @@
+Name:Spiteful Squad
+ManaCost:2 W B
+Types:Creature Human Warlock
+PT:0/0
+K:etbCounter:P1P1:2
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME dies, put its counters on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ EachFromSource | EachFromSource$ TriggeredCardLKICopy
+DeckHas:Ability$Counters
+SVar:SacMe:2
+Oracle:Deathtouch\nSpiteful Squad enters the battlefield with two +1/+1 counters on it.\nWhen Spiteful Squad dies, put its counters on target creature you control.

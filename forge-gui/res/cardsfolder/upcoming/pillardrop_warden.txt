@@ -1,0 +1,7 @@
+Name:Pillardrop Warden
+ManaCost:3 R
+Types:Creature Spirit Dwarf
+PT:1/5
+K:Reach
+A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | TgtPrompt$ Select target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | SorcerySpeed$ True | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target instant or sorcery card from your graveyard to your hand.
+Oracle:Reach\n{2}, {T}, Sacrifice Pillardrop Warden: Return target instant or sorcery card from your graveyard to your hand. Activate only as a sorcery.
