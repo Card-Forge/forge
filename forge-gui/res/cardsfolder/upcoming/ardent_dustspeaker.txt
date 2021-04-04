@@ -1,0 +1,11 @@
+Name:Ardent Dustspeaker
+ManaCost:4 R
+Types:Creature Minotaur Shaman
+PT:3/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ ABImpulse | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may put an instant or sorcery card from your graveyard on the bottom of your library. If you do, exile the top two cards of your library. You may play those cards this turn.
+SVar:ABImpulse:AB$ Dig | Cost$ PutCardToLibFromGrave<1/-1/Sorcery;Instant> | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | SubAbility$ DBEffect | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top two cards of your library. You may play this cards this turn.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Ardent Dustspeaker attacks, you may put an instant or sorcery card from your graveyard on the bottom of your library. If you do, exile the top two cards of your library. You may play those cards this turn.
