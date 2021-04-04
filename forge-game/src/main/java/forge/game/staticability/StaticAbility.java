@@ -539,6 +539,10 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
                 if (ph.isPlayerTurn(controller)) {
                     return false;
                 }
+            } else if (condition.equals("ExtraTurn")) {
+                if (!game.getPhaseHandler().getPlayerTurn().isExtraTurn()) {
+                    return false;
+                }
             } else if (condition.equals("PermanentOfEachColor")) {
                 if ((controller.getColoredCardsInPlay(MagicColor.Constant.BLACK).isEmpty()
                         || controller.getColoredCardsInPlay(MagicColor.Constant.BLUE).isEmpty()
