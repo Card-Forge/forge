@@ -49,7 +49,9 @@ final class ImageLoader extends CacheLoader<String, Texture> {
                 return t;
             }
             catch (Exception ex) {
-                Forge.log("Could not read image file " + fh.path() + "\n\nException:\n" + ex.toString());
+                //This would occur when forcing to clear the cache or preloading the cache while generating the view so we silence it unless the error is Corrupted or Missing Image
+                if (!ex.toString().contains("No OpenGL context found in the current thread"))
+                    Forge.log("Could not read image file " + fh.path() + "\n\nException:\n" + ex.toString());
             }
         }
         return null;
