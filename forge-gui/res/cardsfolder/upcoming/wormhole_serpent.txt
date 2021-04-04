@@ -1,0 +1,6 @@
+Name:Wormhole Serpent
+ManaCost:4 U
+Types:Creature Serpent
+PT:3/5
+A:AB$ Pump | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature can't be blocked this turn.
+Oracle:{3}{U}: Target creature can't be blocked this turn.

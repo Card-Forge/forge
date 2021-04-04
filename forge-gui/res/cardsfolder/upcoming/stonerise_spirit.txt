@@ -1,0 +1,7 @@
+Name:Stonerise Spirit
+ManaCost:1 W
+Types:Creature Spirit Bird
+PT:1/2
+K:Flying
+A:AB$ Pump | Cost$ 4 ExileFromGrave<1/Card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
+Oracle:Flying\n{4}, Exile a card from your graveyard: Target creature gains flying until end of turn.

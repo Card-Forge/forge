@@ -1,0 +1,10 @@
+Name:Oriq Loremage
+ManaCost:2 B B
+Types:Creature Human Warlock
+PT:3/3
+A:AB$ ChangeZone | Cost$ T | Origin$ Library | Destination$ Graveyard | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | RememberChanged$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ IsInstantOrSorcery | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:IsInstantOrSorcery:Remembered$Valid Instant,Sorcery
+DeckHas:Ability$Counters
+Oracle:{T}: Search your library for a card, put it into your graveyard, then shuffle. If it’s an instant or sorcery card, put a +1/+1 counter on Oriq Loremage.
