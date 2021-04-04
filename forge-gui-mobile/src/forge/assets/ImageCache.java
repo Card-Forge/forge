@@ -76,8 +76,10 @@ public class ImageCache {
             .removalListener(new RemovalListener<String, Texture>() {
                 @Override
                 public void onRemoval(RemovalNotification<String, Texture> removalNotification) {
-                    //should dispose the image regardless of removal cause
-                    removalNotification.getValue().dispose();
+                    try {
+                        //should dispose the image regardless of removal cause
+                        removalNotification.getValue().dispose();
+                    } catch (Exception e){/*No OpenGL context found in the current thread.*/}
                     CardRenderer.clearcardArtCache();
                 }
             })
@@ -112,9 +114,11 @@ public class ImageCache {
 
     public static void disposeTexture(){
         for (Texture t: cache.asMap().values()) {
-            if (!t.toString().contains("pics/icons")) //fixes quest avatars black texture. todo: filter textures that are safe to dispose...
-                if(!t.toString().contains("@"))  //generated texture don't need to be disposed manually
-                    t.dispose();
+            try {
+                if (!t.toString().contains("pics/icons")) //fixes quest avatars black texture. todo: filter textures that are safe to dispose...
+                    if (!t.toString().contains("@"))  //generated texture don't need to be disposed manually
+                        t.dispose();
+            } catch (Exception e) {/*No OpenGL context found in the current thread.*/}
         }
         CardRenderer.clearcardArtCache();
         clear();
