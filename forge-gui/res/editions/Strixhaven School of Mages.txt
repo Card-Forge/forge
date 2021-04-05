@@ -309,11 +309,16 @@ Type=Expansion
 294 R Strict Proctor
 295 R Archmage Emeritus
 296 R Dream Strix
+297 R Ingenious Mastery
 298 R Multiple Choice
 299 R Teachings of the Archaics
+300 R Tempted by the Oriq
 301 R Baleful Mastery
+302 R Callous Bloodmage
 303 R Confront the Past
+304 R Oriq Loremage
 305 R Poet's Quill
+306 R Sedgemoor Witch
 307 R Conspiracy Theorist
 308 M Crackle with Power
 309 R Draconic Intervention
@@ -321,6 +326,7 @@ Type=Expansion
 311 R Fervent Mastery
 312 R Illuminate History
 313 R Retriever Phoenix
+314 R Accomplished Alchemist
 315 R Basic Conjuration
 316 R Dragonsguard Elite
 317 M Ecological Appreciation
@@ -328,6 +334,7 @@ Type=Expansion
 319 R Gnarled Professor
 320 R Verdant Mastery
 321 R Augmenter Pugilist
+322 M Blex, Vexing Pest
 323 M Extus, Oriq Overlord
 324 R Flamescroll Celebrant
 325 M Jadzi, Oracle of Arcavios
@@ -342,7 +349,9 @@ Type=Expansion
 334 R Blade Historian
 335 M Blot Out the Sky
 336 M Body of Research
+337 R Culling Ritual
 338 R Culmination of Studies
+339 R Daemogoth Titan
 340 R Double Major
 341 R Dramatic Finale
 342 R Elemental Expressionist
@@ -354,6 +363,7 @@ Type=Expansion
 348 R Prismari Command
 349 R Quandrix Command
 350 R Radiant Scrollwielder
+351 R Rushed Rebirth
 352 R Silverquill Command
 353 R Silverquill Silencer
 354 R Vanishing Verse
@@ -361,6 +371,7 @@ Type=Expansion
 356 R Witherbloom Command
 357 R Codie, Vociferous Codex
 358 R Strixhaven Stadium
+359 R The Biblioplex
 360 R Frostboil Snarl
 361 R Furycalm Snarl
 362 R Hall of Oracles
@@ -387,6 +398,7 @@ Type=Expansion
 377 R Archmage Emeritus
 378 U Fracture
 379 U Expressive Iteration
+380 U Mortality Spear
 381 U Rip Apart
 382 U Decisive Denial
 
