@@ -77,71 +77,71 @@ public class DigMultipleEffect extends SpellAbilityEffect {
 
             if (validMap.isEmpty()) {
                 chooser.getController().notifyOfValue(sa, null, Localizer.getInstance().getMessage("lblNoValidCards"));
-                continue;
             }
+            else {
+                CardCollection chosen = chooser.getController().chooseCardsForEffectMultiple(validMap, sa, Localizer.getInstance().getMessage("lblChooseCards"), chooseOptional);
 
-            CardCollection chosen = chooser.getController().chooseCardsForEffectMultiple(validMap, sa, Localizer.getInstance().getMessage("lblChooseCards"), chooseOptional);
-
-            if (!chosen.isEmpty()) {
-                game.getAction().reveal(chosen, chooser, true, Localizer.getInstance().getMessage("lblPlayerPickedCardFrom", chooser.getName()));
-            }
-
-            if (sa.hasParam("ChooseAmount") || sa.hasParam("ChosenZone")) {
-                int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("ChooseAmount", "1"), sa);
-                final ZoneType chosenZone = sa.hasParam("ChosenZone") ? ZoneType.smartValueOf(sa.getParam("ChosenZone")) : ZoneType.Battlefield;
-
-                CardCollectionView extraChosen = chooser.getController().chooseCardsForEffect(chosen, sa, Localizer.getInstance().getMessage("lblChooseCards"), amount, amount, false, null);
-                if (!extraChosen.isEmpty()) {
-                    game.getAction().reveal(extraChosen, chooser, true, Localizer.getInstance().getMessage("lblPlayerPickedCardFrom", chooser.getName()));
+                if (!chosen.isEmpty()) {
+                    game.getAction().reveal(chosen, chooser, true, Localizer.getInstance().getMessage("lblPlayerPickedCardFrom", chooser.getName()));
                 }
 
-                for (Card c : extraChosen) {
-                    final ZoneType origin = c.getZone().getZoneType();
-                    final PlayerZone zone = c.getOwner().getZone(chosenZone);
-                    chosen.remove(c);
-                    rest.remove(c);
-                    c = game.getAction().moveTo(zone, c, sa);
-                    if (!origin.equals(c.getZone().getZoneType())) {
-                        table.put(origin, c.getZone().getZoneType(), c);
+                if (sa.hasParam("ChooseAmount") || sa.hasParam("ChosenZone")) {
+                    int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("ChooseAmount", "1"), sa);
+                    final ZoneType chosenZone = sa.hasParam("ChosenZone") ? ZoneType.smartValueOf(sa.getParam("ChosenZone")) : ZoneType.Battlefield;
+
+                    CardCollectionView extraChosen = chooser.getController().chooseCardsForEffect(chosen, sa, Localizer.getInstance().getMessage("lblChooseCards"), amount, amount, false, null);
+                    if (!extraChosen.isEmpty()) {
+                        game.getAction().reveal(extraChosen, chooser, true, Localizer.getInstance().getMessage("lblPlayerPickedCardFrom", chooser.getName()));
                     }
-                }
-            }
 
-            for (Card c : chosen) {
-                final ZoneType origin = c.getZone().getZoneType();
-                final PlayerZone zone = c.getOwner().getZone(destZone1);
-
-                if (zone.is(ZoneType.Library) || zone.is(ZoneType.PlanarDeck) || zone.is(ZoneType.SchemeDeck)) {
-                    if (libraryPosition == -1 || libraryPosition > zone.size()) {
-                        libraryPosition = zone.size();
-                    }
-                    c = game.getAction().moveTo(zone, c, libraryPosition, sa);
-                }
-                else {
-                    c = game.getAction().moveTo(zone, c, sa);
-                    if (destZone1.equals(ZoneType.Battlefield)) {
-                        if (sa.hasParam("Tapped")) {
-                            c.setTapped(true);
+                    for (Card c : extraChosen) {
+                        final ZoneType origin = c.getZone().getZoneType();
+                        final PlayerZone zone = c.getOwner().getZone(chosenZone);
+                        chosen.remove(c);
+                        rest.remove(c);
+                        c = game.getAction().moveTo(zone, c, sa);
+                        if (!origin.equals(c.getZone().getZoneType())) {
+                            table.put(origin, c.getZone().getZoneType(), c);
                         }
                     }
                 }
-                if (!origin.equals(c.getZone().getZoneType())) {
-                    table.put(origin, c.getZone().getZoneType(), c);
-                }
 
-                if (sa.hasParam("ExileFaceDown")) {
-                    c.turnFaceDown(true);
+                for (Card c : chosen) {
+                    final ZoneType origin = c.getZone().getZoneType();
+                    final PlayerZone zone = c.getOwner().getZone(destZone1);
+
+                    if (zone.is(ZoneType.Library) || zone.is(ZoneType.PlanarDeck) || zone.is(ZoneType.SchemeDeck)) {
+                        if (libraryPosition == -1 || libraryPosition > zone.size()) {
+                            libraryPosition = zone.size();
+                        }
+                        c = game.getAction().moveTo(zone, c, libraryPosition, sa);
+                    }
+                    else {
+                        c = game.getAction().moveTo(zone, c, sa);
+                        if (destZone1.equals(ZoneType.Battlefield)) {
+                            if (sa.hasParam("Tapped")) {
+                                c.setTapped(true);
+                            }
+                        }
+                    }
+                    if (!origin.equals(c.getZone().getZoneType())) {
+                        table.put(origin, c.getZone().getZoneType(), c);
+                    }
+
+                    if (sa.hasParam("ExileFaceDown")) {
+                        c.turnFaceDown(true);
+                    }
+                    if (sa.hasParam("Imprint")) {
+                        host.addImprintedCard(c);
+                    }
+                    if (sa.hasParam("ForgetOtherRemembered")) {
+                        host.clearRemembered();
+                    }
+                    if (sa.hasParam("RememberChanged")) {
+                        host.addRemembered(c);
+                    }
+                    rest.remove(c);
                 }
-                if (sa.hasParam("Imprint")) {
-                    host.addImprintedCard(c);
-                }
-                if (sa.hasParam("ForgetOtherRemembered")) {
-                    host.clearRemembered();
-                }
-                if (sa.hasParam("RememberChanged")) {
-                    host.addRemembered(c);
-                }
-                rest.remove(c);
             }
 
             // now, move the rest to destZone2
