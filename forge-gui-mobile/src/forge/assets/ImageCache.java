@@ -73,7 +73,6 @@ public class ImageCache {
     private static final LoadingCache<String, Texture> cache = CacheBuilder.newBuilder()
             .maximumSize(Forge.cacheSize)
             .expireAfterAccess(15, TimeUnit.MINUTES)
-            .softValues()
             .removalListener(new RemovalListener<String, Texture>() {
                 @Override
                 public void onRemoval(RemovalNotification<String, Texture> removalNotification) {
