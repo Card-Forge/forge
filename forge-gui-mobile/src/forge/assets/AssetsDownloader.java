@@ -115,7 +115,7 @@ public class AssetsDownloader {
 
         //prompt user whether they wish to download the updated resource files
         message = "There are updated resource files to download. " +
-                "This download is around 100MB, ";
+                "This download is around 50MB, ";
         if (Forge.getDeviceAdapter().isConnectedToWifi()) {
             message += "which shouldn't take long if your wifi connection is good.";
         }
