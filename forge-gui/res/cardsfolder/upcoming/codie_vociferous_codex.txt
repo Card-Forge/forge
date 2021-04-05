@@ -9,4 +9,4 @@ SVar:DBDig:DB$ DigUntil | Defined$ You | Valid$ Instant.cmcLTX,Sorcery.cmcLTX | 
 SVar:DBPlay:DB$ Play | Defined$ Imprinted | WithoutManaCost$ True | Optional$ True | ForgetTargetRemembered$ True | SubAbility$ DBRestRandomOrder
 SVar:DBRestRandomOrder:DB$ ChangeZone | Defined$ Remembered | AtRandom$ True | Origin$ Library | Destination$ Library | LibraryPosition$ -1
 SVar:X:TriggeredCard$CardManaCost
-Oracle:You can't cast creature spells.
+Oracle:You can’t cast permanent spells.\n{4}, {T}: Add {W}{U}{B}{R}{G}. When you cast your next spell this turn, exile cards from the top of your library until you exile an instant or sorcery card with lesser mana value. Until end of turn, you may cast that card without paying its mana cost. Put each other card exiled this way on the bottom of your library in a random order.
