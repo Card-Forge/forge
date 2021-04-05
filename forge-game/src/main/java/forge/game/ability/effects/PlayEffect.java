@@ -124,6 +124,7 @@ public class PlayEffect extends SpellAbilityEffect {
                     choice.add(possibleCard);
                 }
                 if (sa.hasParam("ChoiceNum")) {
+                    System.err.println("Offering random spells to copy: " + choice.toString());
                     final int choicenum = AbilityUtils.calculateAmount(source, sa.getParam("ChoiceNum"), sa);
                     tgtCards = new CardCollection(
                         activator.getController().chooseCardsForEffect(choice, sa,
@@ -134,6 +135,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 else {
                     tgtCards = choice;
                 }
+                System.err.println("Copying random spell(s): " + tgtCards.toString());
             }
             else {
                 return;

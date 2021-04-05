@@ -112,6 +112,8 @@ public class CopyPermanentEffect extends TokenEffectBase {
                     copysource.remove(cp);
                 }
                 tgtCards = choice;
+
+                System.err.println("Copying random permanent(s): " + tgtCards.toString());
             } else if (sa.hasParam("DefinedName")) {
                 String name = sa.getParam("DefinedName");
                 if (name.equals("NamedCard")) {
