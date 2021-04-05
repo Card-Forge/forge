@@ -83,6 +83,7 @@ public class ImageCache {
                 }
             })
             .build(new ImageLoader());
+    private static final LoadingCache<String, Texture> otherCache = CacheBuilder.newBuilder().build(new ImageLoader());
     public static final Texture defaultImage;
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
     public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
@@ -117,7 +118,11 @@ public class ImageCache {
     }
 
     public static Texture getImage(InventoryItem ii) {
-        return getImage(ii.getImageKey(false), true);
+        String imageKey = ii.getImageKey(false);
+        boolean isCardImage = imageKey.startsWith(ImageKeys.CARD_PREFIX) || imageKey.startsWith(ImageKeys.TOKEN_PREFIX);
+        if (isCardImage)
+            getImage(ii.getImageKey(false), true);
+        return getOtherImages(ii.getImageKey(false));
     }
 
     /**
@@ -127,7 +132,7 @@ public class ImageCache {
     public static FImage getIcon(IHasIcon ihi) {
         String imageKey = ihi.getIconImageKey();
         final Texture icon;
-        if (missingIconKeys.contains(imageKey) || (icon = getImage(ihi.getIconImageKey(), false)) == null) {
+        if (missingIconKeys.contains(imageKey) || (icon = getOtherImages(ihi.getIconImageKey())) == null) {
             missingIconKeys.add(imageKey);
             return FSkinImage.UNKNOWN;
         }
@@ -223,6 +228,18 @@ public class ImageCache {
                 if (imageBorder.get(image.toString()) == null)
                     imageBorder.put(image.toString(), Pair.of(Color.valueOf("#171717").toString(), false)); //black border
             }
+        }
+        return image;
+    }
+    public static Texture getOtherImages(String imageKey) {
+        if (StringUtils.isEmpty(imageKey)) {
+            return null;
+        }
+        Texture image;
+
+        try { image = otherCache.get(imageKey); }
+        catch (final Exception ex) {
+            image = null;
         }
         return image;
     }
