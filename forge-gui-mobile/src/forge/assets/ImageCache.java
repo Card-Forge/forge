@@ -83,7 +83,7 @@ public class ImageCache {
                 }
             })
             .build(new ImageLoader());
-    private static final LoadingCache<String, Texture> otherCache = CacheBuilder.newBuilder().build(new ImageLoader());
+    private static final LoadingCache<String, Texture> otherCache = CacheBuilder.newBuilder().build(new OtherImageLoader());
     public static final Texture defaultImage;
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
     public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
@@ -119,10 +119,11 @@ public class ImageCache {
 
     public static Texture getImage(InventoryItem ii) {
         String imageKey = ii.getImageKey(false);
-        boolean isCardImage = imageKey.startsWith(ImageKeys.CARD_PREFIX) || imageKey.startsWith(ImageKeys.TOKEN_PREFIX);
-        if (isCardImage)
-            getImage(ii.getImageKey(false), true);
-        return getOtherImages(ii.getImageKey(false));
+        if (imageKey != null) {
+            if(imageKey.startsWith(ImageKeys.CARD_PREFIX) || imageKey.startsWith(ImageKeys.TOKEN_PREFIX))
+                return getImage(ii.getImageKey(false), true, false);
+        }
+        return getImage(ii.getImageKey(false), true, true);
     }
 
     /**
@@ -132,7 +133,7 @@ public class ImageCache {
     public static FImage getIcon(IHasIcon ihi) {
         String imageKey = ihi.getIconImageKey();
         final Texture icon;
-        if (missingIconKeys.contains(imageKey) || (icon = getOtherImages(ihi.getIconImageKey())) == null) {
+        if (missingIconKeys.contains(imageKey) || (icon = getImage(ihi.getIconImageKey(), false, true)) == null) {
             missingIconKeys.add(imageKey);
             return FSkinImage.UNKNOWN;
         }
@@ -181,6 +182,9 @@ public class ImageCache {
      * </p>
      */
     public static Texture getImage(String imageKey, boolean useDefaultIfNotFound) {
+        return getImage(imageKey, useDefaultIfNotFound, false);
+    }
+    public static Texture getImage(String imageKey, boolean useDefaultIfNotFound, boolean useOtherCache) {
         if (StringUtils.isEmpty(imageKey)) {
             return null;
         }
@@ -199,7 +203,7 @@ public class ImageCache {
         Texture image;
         if (useDefaultIfNotFound) {
             // Load from file and add to cache if not found in cache initially.
-            image = cache.getIfPresent(imageKey);
+            image = useOtherCache ? otherCache.getIfPresent(imageKey) : cache.getIfPresent(imageKey);
 
             if (image != null) { return image; }
 
@@ -214,7 +218,7 @@ public class ImageCache {
             imageLoaded = true;
         }
 
-        try { image = cache.get(imageKey); }
+        try { image = useOtherCache ? otherCache.get(imageKey) : cache.get(imageKey); }
         catch (final Exception ex) {
             image = null;
         }
@@ -224,22 +228,13 @@ public class ImageCache {
         if (image == null) {
             if (useDefaultIfNotFound) {
                 image = defaultImage;
-                cache.put(imageKey, defaultImage);
+                if (useOtherCache)
+                    otherCache.put(imageKey, defaultImage);
+                else
+                    cache.put(imageKey, defaultImage);
                 if (imageBorder.get(image.toString()) == null)
                     imageBorder.put(image.toString(), Pair.of(Color.valueOf("#171717").toString(), false)); //black border
             }
-        }
-        return image;
-    }
-    public static Texture getOtherImages(String imageKey) {
-        if (StringUtils.isEmpty(imageKey)) {
-            return null;
-        }
-        Texture image;
-
-        try { image = otherCache.get(imageKey); }
-        catch (final Exception ex) {
-            image = null;
         }
         return image;
     }
