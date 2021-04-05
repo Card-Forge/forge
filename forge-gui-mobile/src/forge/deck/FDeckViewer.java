@@ -116,13 +116,10 @@ public class FDeckViewer extends FScreen {
     public static void show(final Deck deck0) {
         show(deck0, false);
     }
-    public static void show(final Deck deck0, boolean disposeTexture) {
+    public static void show(final Deck deck0, boolean noPreload) {
         if (deck0 == null) { return; }
 
-        if (disposeTexture) {
-            /*this is called on Quest shoplist, quest rewards, quest unlock sets*/
-            ImageCache.disposeTexture();
-        } else {
+        if (!noPreload){
             /*preload deck to cache*/
             ImageCache.preloadCache(deck0);
         }
