@@ -31,7 +31,6 @@ public class PrintSheet {
 
         for(CardEdition edition : editions) {
             for(PrintSheet ps : edition.getPrintSheetsBySection()) {
-                System.out.println(ps.name);
                 sheets.add(ps.name, ps);
             }
         }

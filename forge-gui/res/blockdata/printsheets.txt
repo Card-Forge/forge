@@ -1552,16 +1552,16 @@ Kaya, Ghost Assassin|CN2|2
 [JMP Above the Clouds 4]
 1 Kira, Great Glass-Spinner|JMP
 1 Windstorm Drake|JMP
-1 Tide Skimmer|JMP
-1 Keen Glidemaster|JMP
-1 Roaming Ghostlight|JMP
-1 Mistral Singer|JMP
-1 Wall of Runes|JMP
-1 Rain of Revelation|JMP
-1 Unsubstantiate|JMP
-1 Rookie Mistake|JMP
-1 Lofty Denial|JMP
-1 Capture Sphere|JMP
+1 Tide Skimmer|M21
+1 Keen Glidemaster|M21
+1 Roaming Ghostlight|M21
+1 Mistral Singer|M21
+1 Wall of Runes|M21
+1 Rain of Revelation|M21
+1 Unsubstantiate|M21
+1 Rookie Mistake|M21
+1 Lofty Denial|M21
+1 Capture Sphere|M21
 1 Thriving Isle|JMP
 7 Island|JMP|3
 
@@ -3068,7 +3068,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Teferi, Master of Time|M21|1
 1 Prescient Chimera|JMP
 1 Sage's Row Savant|JMP
-1 Tolarian Kraken|JMP
+1 Tolarian Kraken|M21
 1 Vodalian Arcanist|M21
 1 Teferi's Protege|M21|1
 1 Talrand's Invocation|JMP
