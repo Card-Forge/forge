@@ -12,7 +12,7 @@ Type=Expansion
 3 C Introduction to Annihilation
 4 C Introduction to Prophecy
 5 M Mascot Exhibition
-6 R Wandering Archaic // Explore the Vastlands
+6 R Wandering Archaic
 7 R Academic Probation
 8 C Ageless Guardian
 9 C Beaming Defiance
@@ -153,21 +153,21 @@ Type=Expansion
 144 C Springmane Cervin
 145 C Tangletrap
 146 R Verdant Mastery
-147 R Augmenter Pugilist // Echoing Equation
-148 M Blex, Vexing Pest // Search for Blex
-149 M Extus, Oriq Overlord // Awaken the Blood Avatar
-150 R Flamescroll Celebrant // Revel in Silence
-151 M Jadzi, Oracle of Arcavios // Journey to the Oracle
-152 R Kianne, Dean of Substance // Imbraham, Dean of Theory
-153 M Mila, Crafty Companion // Lukka, Wayward Bonder
-154 R Pestilent Cauldron // Restorative Burst
-155 R Plargg, Dean of Chaos // Augusta, Dean of Order
-156 M Rowan, Scholar of Sparks // Will, Scholar of Frost
-157 R Selfless Glyphweaver // Deadly Vanity
-158 R Shaile, Dean of Radiance // Embrose, Dean of Shadow
-159 R Torrent Sculptor // Flamethrower Sonata
-160 R Uvilda, Dean of Perfection // Nassari, Dean of Expression
-161 R Valentin, Dean of the Vein // Lisette, Dean of the Root
+147 R Augmenter Pugilist
+148 M Blex, Vexing Pest
+149 M Extus, Oriq Overlord
+150 R Flamescroll Celebrant
+151 M Jadzi, Oracle of Arcavios
+152 R Kianne, Dean of Substance
+153 M Mila, Crafty Companion
+154 R Pestilent Cauldron
+155 R Plargg, Dean of Chaos
+156 M Rowan, Scholar of Sparks
+157 R Selfless Glyphweaver
+158 R Shaile, Dean of Radiance
+159 R Torrent Sculptor
+160 R Uvilda, Dean of Perfection
+161 R Valentin, Dean of the Vein
 162 U Aether Helix
 163 M Beledros Witherbloom
 164 C Biomathematician
@@ -285,8 +285,8 @@ Type=Expansion
 
 [borderless]
 276 M Professor Onyx
-277 M Mila, Crafty Companion // Lukka, Wayward Bonder
-278 M Rowan, Scholar of Sparks // Will, Scholar of Frost
+277 M Mila, Crafty Companion
+278 M Rowan, Scholar of Sparks
 279 M Kasmina, Enigma Sage
 
 [showcase]
@@ -298,7 +298,7 @@ Type=Expansion
 
 [extended art]
 285 M Mascot Exhibition
-286 R Wandering Archaic // Explore the Vastlands
+286 R Wandering Archaic
 287 R Academic Probation
 288 R Devastating Mastery
 289 R Elite Spellbinder
@@ -327,18 +327,18 @@ Type=Expansion
 318 R Exponential Growth
 319 R Gnarled Professor
 320 R Verdant Mastery
-321 R Augmenter Pugilist // Echoing Equation
-323 M Extus, Oriq Overlord // Awaken the Blood Avatar
-324 R Flamescroll Celebrant // Revel in Silence
-325 M Jadzi, Oracle of Arcavios // Journey to the Oracle
-326 R Kianne, Dean of Substance // Imbraham, Dean of Theory
-327 R Pestilent Cauldron // Restorative Burst
-328 R Plargg, Dean of Chaos // Augusta, Dean of Order
-329 R Selfless Glyphweaver // Deadly Vanity
-330 R Shaile, Dean of Radiance // Embrose, Dean of Shadow
-331 R Torrent Sculptor // Flamethrower Sonata
-332 R Uvilda, Dean of Perfection // Nassari, Dean of Expression
-333 R Valentin, Dean of the Vein // Lisette, Dean of the Root
+321 R Augmenter Pugilist
+323 M Extus, Oriq Overlord
+324 R Flamescroll Celebrant
+325 M Jadzi, Oracle of Arcavios
+326 R Kianne, Dean of Substance
+327 R Pestilent Cauldron
+328 R Plargg, Dean of Chaos
+329 R Selfless Glyphweaver
+330 R Shaile, Dean of Radiance
+331 R Torrent Sculptor
+332 R Uvilda, Dean of Perfection
+333 R Valentin, Dean of the Vein
 334 R Blade Historian
 335 M Blot Out the Sky
 336 M Body of Research
