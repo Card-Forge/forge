@@ -239,11 +239,12 @@ public class ImageCache {
             return;
         if(deck == null||!Forge.enablePreloadExtendedArt)
             return;
-        for (PaperCard p : deck.getAllCardsInASinglePool().toFlatList()) {
-            if (getImage(p.getImageKey(false),false) == null)
-                System.err.println("could not load card image:"+p.toString());
+        if (deck.getAllCardsInASinglePool().toFlatList().size() <= 100) {
+            for (PaperCard p : deck.getAllCardsInASinglePool().toFlatList()) {
+                if (getImage(p.getImageKey(false),false) == null)
+                    System.err.println("could not load card image:"+p.toString());
+            }
         }
-
     }
     public static TextureRegion croppedBorderImage(Texture image) {
         if (!image.toString().contains(".fullborder."))
