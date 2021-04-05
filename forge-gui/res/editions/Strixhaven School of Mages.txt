@@ -391,4 +391,10 @@ Type=Expansion
 382 U Decisive Denial
 
 [tokens]
+bg_1_1_pest_lifegain
+br_3_6_avatar_haste_bolt
+c_a_treasure_sac
+gu_0_0_fractal
 rw_3_2_spirit
+ur_4_4_elemental
+wb_2_1_inkling_flying
