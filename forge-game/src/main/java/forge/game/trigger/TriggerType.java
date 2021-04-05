@@ -14,6 +14,7 @@ import forge.game.card.Card;
 public enum TriggerType {
     Abandoned(TriggerAbandoned.class),
     AbilityCast(TriggerSpellAbilityCastOrCopy.class),
+    AbilityTriggered(TriggerAbilityTriggered.class),
     Adapt(TriggerAdapt.class),
     Always(TriggerAlways.class),
     Attached(TriggerAttached.class),
