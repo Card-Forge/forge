@@ -44,7 +44,9 @@ public class CopyPermanentAi extends SpellAbilityAi {
             return false;
         }
 
-        if ("MimicVat".equals(aiLogic)) {
+        if ("MomirAvatar".equals(aiLogic)) {
+                return SpecialCardAi.MomirVigAvatar.consider(aiPlayer, sa);
+        } else if ("MimicVat".equals(aiLogic)) {
             return SpecialCardAi.MimicVat.considerCopy(aiPlayer, sa);
         } else if ("AtEOT".equals(aiLogic)) {
             return ph.is(PhaseType.END_OF_TURN);
