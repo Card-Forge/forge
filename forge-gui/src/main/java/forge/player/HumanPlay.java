@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.ImageKeys;
+import forge.game.cost.*;
+import forge.game.spellability.SpellAbilityStackInstance;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
@@ -27,31 +29,6 @@ import forge.game.card.CardView;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
-import forge.game.cost.Cost;
-import forge.game.cost.CostAddMana;
-import forge.game.cost.CostAdjustment;
-import forge.game.cost.CostDamage;
-import forge.game.cost.CostDiscard;
-import forge.game.cost.CostDraw;
-import forge.game.cost.CostExile;
-import forge.game.cost.CostFlipCoin;
-import forge.game.cost.CostGainControl;
-import forge.game.cost.CostGainLife;
-import forge.game.cost.CostMill;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPartMana;
-import forge.game.cost.CostPartWithList;
-import forge.game.cost.CostPayEnergy;
-import forge.game.cost.CostPayLife;
-import forge.game.cost.CostPutCardToLib;
-import forge.game.cost.CostPutCounter;
-import forge.game.cost.CostRemoveAnyCounter;
-import forge.game.cost.CostRemoveCounter;
-import forge.game.cost.CostReturn;
-import forge.game.cost.CostReveal;
-import forge.game.cost.CostSacrifice;
-import forge.game.cost.CostTapType;
-import forge.game.cost.PaymentDecision;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -454,6 +431,54 @@ public class HumanPlay {
                         costExile.payAsDecided(p, PaymentDecision.card(newList), sourceAbility);
                     }
                 }
+            }
+            else if (part instanceof CostExileFromStack) {
+                CostExileFromStack costExile = (CostExileFromStack) part;
+
+                final List<SpellAbility> saList = new ArrayList<>();
+                final List<String> descList = new ArrayList<>();
+
+                for (final SpellAbilityStackInstance si : p.getGame().getStack()) {
+                    final Card stC = si.getSourceCard();
+                    final SpellAbility stSA = si.getSpellAbility(true).getRootAbility();
+                    if (stC.isValid(part.getType().split(";"), p, source, sourceAbility) && stSA.isSpell()) {
+                        saList.add(stSA);
+                        if (stC.isCopiedSpell()) {
+                            descList.add(stSA.getStackDescription() + " (Copied Spell)");
+                        } else {
+                            descList.add(stSA.getStackDescription());
+                        }
+                    }
+                }
+
+                List<SpellAbility> payList = new ArrayList<>();
+                if (part.getType().equals("All")) {
+                    payList.addAll(saList);
+                } else {
+                    final int c = getAmountFromPart(part, source, sourceAbility);
+
+                    if (saList.size() < c) {
+                        return false;
+                    }
+
+                    for (int i = 0; i < c; i++) {
+                        //Have to use the stack descriptions here because some copied spells have no description otherwise
+                        final String o = controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblExileFromStack"), descList);
+
+                        if (o != null) {
+                            final SpellAbility toExile = saList.get(descList.indexOf(o));
+
+                            saList.remove(toExile);
+                            descList.remove(o);
+
+                            payList.add(toExile);
+                        } else {
+                            return false;
+                        }
+                    }
+                }
+
+                costExile.payAsDecided(p, PaymentDecision.spellabilities(payList), sourceAbility);
             }
             else if (part instanceof CostPutCardToLib) {
                 int amount = Integer.parseInt(part.getAmount());

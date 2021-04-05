@@ -112,6 +112,7 @@ public class CostExileFromStack extends CostPart {
             if (si != null) {
                 game.getStack().remove(si);
             }
+            game.getAction().exile(sa.getHostCard(), null);
         }
         return true;
     }
