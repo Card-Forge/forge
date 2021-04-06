@@ -56,6 +56,8 @@ import forge.util.TextUtil;
 public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static String foilSuffix = "+";
     public final static char NameSetSeparator = '|';
+    private final String exlcudedCardName = "Concentrate";
+    private final String exlcudedCardSet = "DS0";
 
     // need this to obtain cardReference by name+set+artindex
     private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.arrayLists());
@@ -142,7 +144,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         // create faces list from rules
         for (final CardRules rule : rules.values() ) {
-            if (filteredCards.contains(rule.getName()))
+            if (filteredCards.contains(rule.getName()) && !exlcudedCardName.equalsIgnoreCase(rule.getName()))
                 continue;
             final ICardFace main = rule.getMainPart();
             facesByName.put(main.getName(), main);
@@ -254,14 +256,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public void addCard(PaperCard paperCard) {
-        if (filtered.contains(paperCard.getName())) {
-            //TODO: Funny cards (filtered) may have real cards (except basic lands which is excluded)
-            //This is needed since Concentrate is a real card and DS0 set (Drake Stone) has Concentrate card
-            if (paperCard.getEdition().equalsIgnoreCase("DS0") && paperCard.getName().equalsIgnoreCase("Concentrate"))
-                return;
-            else if (!paperCard.getName().equalsIgnoreCase("Concentrate"))
-                return;
-        }
+        if (excludeCard(paperCard.getName(), paperCard.getEdition()))
+            return;
 
         allCardsByName.put(paperCard.getName(), paperCard);
 
@@ -276,7 +272,17 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             allCardsByName.put(paperCard.getRules().getMainPart().getName(), paperCard);
         }
     }
-
+    private boolean excludeCard(String cardName, String cardEdition) {
+        if (filtered.isEmpty())
+            return false;
+        if (filtered.contains(cardName)) {
+            if (exlcudedCardSet.equalsIgnoreCase(cardEdition) && exlcudedCardName.equalsIgnoreCase(cardName))
+                return true;
+            else if (!exlcudedCardName.equalsIgnoreCase(cardName))
+                return true;
+        }
+        return false;
+    }
     private void reIndex() {
         uniqueCardsByName.clear();
         for (Entry<String, Collection<PaperCard>> kv : getAllCardsByName().asMap().entrySet()) {
