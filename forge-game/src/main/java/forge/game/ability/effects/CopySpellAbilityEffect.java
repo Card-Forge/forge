@@ -211,6 +211,10 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             }
 
             controller.getController().orderAndPlaySimultaneousSa(copies);
+
+            if (sa.hasParam("RememberCopies")) {
+                card.addRemembered(copies);
+            }
         }
     } // end resolve
 
