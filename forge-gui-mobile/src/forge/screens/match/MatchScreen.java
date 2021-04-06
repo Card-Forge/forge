@@ -377,8 +377,10 @@ public class MatchScreen extends FScreen {
                 else
                     devMenu.setEnabled(false);
 
-                //rollbackphase enable -- todo limit by gametype?
-                devMenu.getChildAt(2).setEnabled(game.getPlayers().size() == 2 && game.getStack().size() == 0 && !GuiBase.isNetworkplay() && game.getPhase().isMain() && !game.getPlayerTurn().isAI());
+                try {
+                    //rollbackphase enable -- todo limit by gametype?
+                    devMenu.getChildAt(2).setEnabled(game.getPlayers().size() == 2 && game.getStack().size() == 0 && !GuiBase.isNetworkplay() && game.getPhase().isMain() && !game.getPlayerTurn().isAI());
+                } catch (Exception e) {/*NPE when the game hasn't started yet and you click dev mode*/}
             }
         }
 

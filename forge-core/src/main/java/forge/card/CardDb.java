@@ -135,12 +135,15 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
     }
 
-    public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0) {
+    public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, List<String> filteredCards) {
+        this.filtered = filteredCards;
         this.rulesByName = rules;
         this.editions = editions0;
 
         // create faces list from rules
         for (final CardRules rule : rules.values() ) {
+            if (filteredCards.contains(rule.getName()))
+                continue;
             final ICardFace main = rule.getMainPart();
             facesByName.put(main.getName(), main);
             if (main.getAltName() != null) {
@@ -187,8 +190,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         reIndex();
     }
 
-    public void initialize(boolean logMissingPerEdition, boolean logMissingSummary, boolean enableUnknownCards, List<String> filtered) {
-        this.filtered = filtered;
+    public void initialize(boolean logMissingPerEdition, boolean logMissingSummary, boolean enableUnknownCards) {
         Set<String> allMissingCards = new LinkedHashSet<>();
         List<String> missingCards = new ArrayList<>();
         CardEdition upcomingSet = null;
