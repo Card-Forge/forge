@@ -1660,6 +1660,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         chosenPlayer = p;
         view.updateChosenPlayer(this);
     }
+    public final void setSecretChosenPlayer(final Player p) {
+        chosenPlayer = p;
+    }
+    public final void revealChosenPlayer() {
+        view.updateChosenPlayer(this);
+    }
 
     public final boolean hasChosenNumber() {
         return chosenNumber != null;
