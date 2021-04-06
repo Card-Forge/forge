@@ -8,4 +8,5 @@ SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtProm
 SVar:DBScry:DB$ Scry | Defined$ You | ScryNum$ X
 SVar:X:Count$Valid Artifact.YouCtrl+tapped
 SVar:PlayMain1:TRUE
+DeckHints:Type$Artifact
 Oracle:Other artifact creatures you control have haste.\nWhenever one or more artifact creatures you control attack, Alibou, Ancient Witness deals X damage to any target and you scry X, where X is the number of tapped artifacts you control.
