@@ -35,9 +35,7 @@ public class ChooseCardNameAi extends SpellAbilityAi {
             }
 
             String logic = sa.getParam("AILogic");
-            if (logic.equals("MomirAvatar")) {
-                return SpecialCardAi.MomirVigAvatar.consider(ai, sa);
-            } else if (logic.equals("CursedScroll")) {
+            if (logic.equals("CursedScroll")) {
                 return SpecialCardAi.CursedScroll.consider(ai, sa);
             }
 

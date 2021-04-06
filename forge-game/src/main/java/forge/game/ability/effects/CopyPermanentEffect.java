@@ -101,17 +101,19 @@ public class CopyPermanentEffect extends TokenEffectBase {
                 List<Card> choice = Lists.newArrayList();
                 final String num = sa.hasParam("RandomNum") ? sa.getParam("RandomNum") : "1";
                 int ncopied = AbilityUtils.calculateAmount(host, num, sa);
-                while(ncopied > 0) {
+                while(ncopied > 0 && !copysource.isEmpty()) {
                     final PaperCard cp = Aggregates.random(copysource);
                     Card possibleCard = Card.fromPaperCard(cp, activator); // Need to temporarily set the Owner so the Game is set
 
                     if (possibleCard.isValid(valid, host.getController(), host, sa)) {
                         choice.add(possibleCard);
-                        copysource.remove(cp);
                         ncopied -= 1;
                     }
+                    copysource.remove(cp);
                 }
                 tgtCards = choice;
+
+                System.err.println("Copying random permanent(s): " + tgtCards.toString());
             } else if (sa.hasParam("DefinedName")) {
                 String name = sa.getParam("DefinedName");
                 if (name.equals("NamedCard")) {
