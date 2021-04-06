@@ -1,0 +1,11 @@
+Name:Fiery Encore
+ManaCost:4 R
+Types:Sorcery
+A:SP$ Discard | Cost$ 4 R | Mode$ TgtChoose | SubAbility$ DBDraw | RememberDiscarded$ True | SpellDescription$ Discard a card, then draw a card. When you discard a nonland card this way, CARDNAME deals damage equal to that card's mana value to target creature or planeswalker.
+SVar:DBDraw:DB$ Draw | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | Execute$ TrigDealDamage | RememberObjects$ RememberedCard | SubAbility$ DBCleanup | TriggerDescription$ When you discard a nonland card this way, CARDNAME deals damage equal to that card's mana value to target creature or planeswalker.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X
+SVar:X:Remembered$CardManaCost
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Storm
+Oracle:Discard a card, then draw a card. When you discard a card this way, Fiery Encore deals damage equal to that card's mana value to target creature or planeswalker.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
