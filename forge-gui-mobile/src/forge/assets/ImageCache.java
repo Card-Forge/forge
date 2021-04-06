@@ -77,7 +77,9 @@ public class ImageCache {
                 @Override
                 public void onRemoval(RemovalNotification<String, Texture> removalNotification) {
                     if (removalNotification.wasEvicted()) {
-                        removalNotification.getValue().dispose();
+                        if (removalNotification.getValue() != ImageCache.defaultImage)
+                            removalNotification.getValue().dispose();
+
                         CardRenderer.clearcardArtCache();
                     }
                 }
