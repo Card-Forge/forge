@@ -9,5 +9,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigTokenFly:DB$Token | TokenAmount$ 1 | TokenScript$ c_3_3_a_golem_flying | SubAbility$ DBTokenVig
 SVar:DBTokenVig:DB$Token | TokenAmount$ 1 | TokenScript$ c_3_3_a_golem_vigilance | SubAbility$ DBTokenTra
 SVar:DBTokenTra:DB$Token | TokenAmount$ 1 | TokenScript$ c_3_3_a_golem_trample
-DeckHints:Ability$Token
+DeckHas:Ability$Token
 Oracle:Flying, vigilance, trample\nWhen Triplicate Titan dies, create a 3/3 colorless Golem artifact creature token with flying, a 3/3 colorless Golem artifact creature token with vigilance, and a 3/3 colorless Golem artifact creature token with trample.
