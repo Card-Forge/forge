@@ -75,6 +75,7 @@ public enum AbilityKey {
     LifeGained("LifeGained"),
     Mana("Mana"),
     MergedCards("MergedCards"),
+    Mode("Mode"),
     MonstrosityAmount("MonstrosityAmount"),
     NewCard("NewCard"),
     NewCounterAmount("NewCounterAmount"),
@@ -118,6 +119,7 @@ public enum AbilityKey {
     Token("Token"),
     TokenNum("TokenNum"),
     Transformer("Transformer"),
+    TriggeredParams("TriggeredParams"),
     Vehicle("Vehicle"),
     Won("Won");
 

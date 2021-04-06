@@ -1,9 +1,10 @@
 Name:Madcap Experiment
 ManaCost:3 R
 Types:Sorcery
-A:SP$ DigUntil | Cost$ 3 R | Valid$ Artifact | ValidDescription$ artifact | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | RememberRevealed$ True | SubAbility$ DBDealDamage | SpellDescription$ Reveal cards from the top of your library until you reveal an artifact card. Put that card onto the battlefield and the rest on the bottom of your library in a random order. Madcap Experiment deals damage to you equal to the number of cards revealed this way.
-SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ X | SubAbility$ DBCleanup
+A:SP$ DigUntil | Cost$ 3 R | Valid$ Artifact | ValidDescription$ artifact | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | RememberRevealed$ True | SubAbility$ DBDealDamage | SpellDescription$ Reveal cards from the top of your library until you reveal an artifact card. Put that card onto the battlefield and the rest on the bottom of your library in a random order. CARDNAME deals damage to you equal to the number of cards revealed this way.
+SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount 
-SVar:Picture:http://www.wizards.com/global/images/magic/general/madcap_experiment.jpg
+SVar:X:Remembered$Amount
+DeckNeeds:Type$Artifact
+AI:RemoveDeck:Random
 Oracle:Reveal cards from the top of your library until you reveal an artifact card. Put that card onto the battlefield and the rest on the bottom of your library in a random order. Madcap Experiment deals damage to you equal to the number of cards revealed this way.

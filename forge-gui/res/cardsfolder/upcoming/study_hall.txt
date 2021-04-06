@@ -1,0 +1,10 @@
+Name:Study Hall
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 1 T | Produced$ Any | Amount$ 1 | TriggersWhenSpent$ TrigSpent | SpellDescription$ Add one mana of any color. When you spend this mana to cast your commander, scry X, where X is the number of times it's been cast from the command zone this game.
+SVar:TrigSpent:Mode$ SpellCast | ValidCard$ Card.IsCommander+YouOwn | ValidActivatingPlayer$ You | Execute$ TrigScry | TriggerDescription$ When you spend this mana to cast your commander, scry X, where X is the number of times it's been cast from the command zone this game.
+SVar:TrigScry:DB$ Scry | ScryNum$ X
+SVar:X:TriggeredCard$CommanderCastFromCommandZone
+AI:RemoveDeck:NonCommander
+Oracle:{T}: Add {C}.\n{1}, {T}: Add one mana of any color. When you spend this mana to cast your commander, scry X, where X is the number of times it's been cast from the command zone this game.
