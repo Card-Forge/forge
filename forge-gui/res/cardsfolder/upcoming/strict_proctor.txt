@@ -1,0 +1,8 @@
+Name:Strict Proctor
+ManaCost:1 W
+Types:Creature Spirit Cleric
+PT:1/3
+K:Flying
+T:Mode$ AbilityTriggered | ValidDestination$ Battlefield | ValidMode$ ChangesZone,ChangesZoneAll | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever a permanent entering the battlefield causes a triggered ability to trigger, counter that ability unless its controller pays {2}.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility | UnlessCost$ 2 | UnlessPayer$ TriggeredSpellAbilityController
+Oracle:Flying\nWhenever a permanent entering the battlefield causes a triggered ability to trigger, counter that ability unless its controller pays {2}.
