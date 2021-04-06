@@ -128,7 +128,7 @@ public class DestroyAi extends SpellAbilityAi {
             }
 
             // Assume there where already enough targets chosen by AI Logic Above
-            if (!sa.canAddMoreTarget() && sa.isTargetNumberValid()) {
+            if (sa.hasParam("AILogic") && !sa.canAddMoreTarget() && sa.isTargetNumberValid()) {
                 return true;
             }
 
