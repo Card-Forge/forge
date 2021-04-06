@@ -1,0 +1,8 @@
+Name:Battlemage's Bracers
+ManaCost:2 R
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Haste | Description$ Equipped creature has haste.
+T:Mode$ AbilityCast | ValidCard$ Creature.EquippedBy | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigCopyAbility | TriggerDescription$ Whenever an ability of equipped creature is activated, if it isn't a mana ability, you may pay {1}. If you do, copy that ability. You may choose new targets for the copy.
+SVar:TrigCopyAbility:DB$ CopySpellAbility | Cost$ 1 | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+Oracle:Equipped creature has haste.\nWhenever an ability of equipped creature is activated, if it isn't a mana ability, you may pay {1}. If you do, copy that ability. You may choose new targets for the copy.
