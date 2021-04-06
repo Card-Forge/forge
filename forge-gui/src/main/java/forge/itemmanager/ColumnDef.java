@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map.Entry;
 
+import forge.gamemodes.limited.CardRanker;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
@@ -38,7 +39,6 @@ import forge.card.mana.ManaCost;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
-import forge.gamemodes.limited.DraftRankCache;
 import forge.gui.card.CardPreferences;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -551,15 +551,13 @@ public enum ColumnDef {
     }
 
     private static Double toRanking(final InventoryItem i, boolean truncate) {
-        if (i instanceof IPaperCard){
-            IPaperCard cp = (IPaperCard) i;
-            Double ranking = DraftRankCache.getRanking(cp.getName(), cp.getEdition());
-            if (ranking != null) {
-                if (truncate) {
-                    return new BigDecimal(ranking).setScale(4, RoundingMode.HALF_UP).doubleValue();
-                }
-                return ranking;
+        if (i instanceof PaperCard){
+            PaperCard cp = (PaperCard) i;
+            double ranking = CardRanker.getRawScore(cp);
+            if (truncate) {
+                return new BigDecimal(ranking).setScale(4, RoundingMode.HALF_UP).doubleValue();
             }
+            return ranking;
         }
         return 500D;
     }
