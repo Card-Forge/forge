@@ -341,7 +341,14 @@ public class CardProperty {
             }
         } else if (property.startsWith("ControllerControls")) {
             final String type = property.substring(18);
-            if (type.startsWith("AtLeastAsMany")) {
+            if (type.startsWith("More")) {
+                String realType = type.split("More")[1];
+                CardCollectionView cards = CardLists.getType(controller.getCardsIn(ZoneType.Battlefield), realType);
+                CardCollectionView yours = CardLists.getType(sourceController.getCardsIn(ZoneType.Battlefield), realType);
+                if (cards.size() <= yours.size()) {
+                    return false;
+                }
+            } else if (type.startsWith("AtLeastAsMany")) {
                 String realType = type.split("AtLeastAsMany")[1];
                 CardCollectionView cards = CardLists.getType(controller.getCardsIn(ZoneType.Battlefield), realType);
                 CardCollectionView yours = CardLists.getType(sourceController.getCardsIn(ZoneType.Battlefield), realType);
