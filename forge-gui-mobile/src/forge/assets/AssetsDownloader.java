@@ -133,21 +133,21 @@ public class AssetsDownloader {
         }
 
         switch (SOptionPane.showOptionDialog(message, "", null, options)) {
-        case 1:
-            if (!canIgnoreDownload) {
-                Forge.exit(true); //exit if can't ignore download
-            }
-            return;
-        case 2:
-            Forge.exit(true);
-            return;
+            case 1:
+                if (!canIgnoreDownload) {
+                    Forge.exit(true); //exit if can't ignore download
+                }
+                return;
+            case 2:
+                Forge.exit(true);
+                return;
         }
 
         //android 11 SAF causes some issues, so skip deleting the res folder. res folder should be original and custom cards shouldn't be loaded from res folder
         boolean allowDeletion = Forge.androidVersion < 30;
         new GuiDownloadZipService("", "resource files",
                 "https://releases.cardforge.org/forge/forge-gui-android/" + Forge.CURRENT_VERSION + "/" + "assets.zip",
-                ForgeConstants.ASSETS_DIR, allowDeletion ? ForgeConstants.RES_DIR : null, splashScreen.getProgressBar()).downloadAndUnzip();
+                ForgeConstants.ASSETS_DIR, ForgeConstants.RES_DIR, splashScreen.getProgressBar(), allowDeletion).downloadAndUnzip();
 
         if (allowDeletion)
             FSkinFont.deleteCachedFiles(); //delete cached font files in case any skin's .ttf file changed

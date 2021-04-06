@@ -26,14 +26,19 @@ import forge.util.FileUtil;
 public class GuiDownloadZipService extends GuiDownloadService {
     private final String name, desc, sourceUrl, destFolder, deleteFolder;
     private int filesExtracted;
+    private boolean allowDeletion;
 
     public GuiDownloadZipService(final String name0, final String desc0, final String sourceUrl0, final String destFolder0, final String deleteFolder0, final IProgressBar progressBar0) {
+        this(name0, desc0, sourceUrl0, destFolder0, deleteFolder0, progressBar0,true);
+    }
+    public GuiDownloadZipService(final String name0, final String desc0, final String sourceUrl0, final String destFolder0, final String deleteFolder0, final IProgressBar progressBar0, final boolean allowDeletion0) {
         name = name0;
         desc = desc0;
         sourceUrl = sourceUrl0;
         destFolder = destFolder0;
         deleteFolder = deleteFolder0;
         progressBar = progressBar0;
+        allowDeletion = allowDeletion0;
     }
 
     @Override
@@ -151,7 +156,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
         try {
             GuiBase.getInterface().preventSystemSleep(true); //prevent system from going into sleep mode while unzipping
 
-            if (deleteFolder != null) {
+            if (deleteFolder != null && allowDeletion) {
                 final File deleteDir = new File(deleteFolder);
                 if (deleteDir.exists()) {
                     //attempt to delete previous res directory if to be rebuilt
