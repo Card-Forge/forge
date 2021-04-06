@@ -29,14 +29,21 @@ public class AssetsDownloader {
     public static void checkForUpdates(final SplashScreen splashScreen) {
         if (Gdx.app.getType() == ApplicationType.Desktop && SHARE_DESKTOP_ASSETS) { return; }
 
+        final boolean isSnapshots = Forge.CURRENT_VERSION.contains("SNAPSHOT");
+        final String snapsURL = "https://downloads.cardforge.org/dailysnapshots/";
+        final String releaseURL = "https://releases.cardforge.org/forge/forge-gui-android/";
+        final String versionText = isSnapshots ? snapsURL + "version.txt" : releaseURL + "version.txt";
+
         splashScreen.getProgressBar().setDescription("Checking for updates...");
 
         String message;
         boolean connectedToInternet = Forge.getDeviceAdapter().isConnectedToInternet();
         if (connectedToInternet) {
             try {
-                URL versionUrl = new URL("https://releases.cardforge.org/forge/forge-gui-android/version.txt");
+                URL versionUrl = new URL(versionText);
                 String version = FileUtil.readFileToString(versionUrl);
+                String filename = "forge-android-" + version + "-signed-aligned.apk";
+                String apkURL = isSnapshots ? snapsURL + filename : releaseURL + version + "/" + filename;
                 if (!StringUtils.isEmpty(version) && !Forge.CURRENT_VERSION.equals(version)) {
                     splashScreen.prepareForDialogs();
 
@@ -47,10 +54,8 @@ public class AssetsDownloader {
                         message += " If so, you may want to connect to wifi first. The download is around 6.5MB.";
                     }
                     if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later", true, true)) {
-                        String filename = "forge-android-" + version + "-signed-aligned.apk";
-                        String apkFile = new GuiDownloadZipService("", "update",
-                                "https://releases.cardforge.org/forge/forge-gui-android/" + version + "/" + filename,
-                                Forge.getDeviceAdapter().getDownloadsDir(), null, splashScreen.getProgressBar()).download(filename);
+                        String apkFile = new GuiDownloadZipService("", "update", apkURL,
+                            Forge.getDeviceAdapter().getDownloadsDir(), null, splashScreen.getProgressBar()).download(filename);
                         if (apkFile != null) {
                             /* FileUriExposedException was added on API 24, Forge now targets API 26 so Android 10 and above runs,
                             most user thinks Forge crashes but in reality, the method below just can't open the apk when Forge
@@ -145,9 +150,9 @@ public class AssetsDownloader {
 
         //android 11 SAF causes some issues, so skip deleting the res folder. res folder should be original and custom cards shouldn't be loaded from res folder
         boolean allowDeletion = Forge.androidVersion < 30;
-        new GuiDownloadZipService("", "resource files",
-                "https://releases.cardforge.org/forge/forge-gui-android/" + Forge.CURRENT_VERSION + "/" + "assets.zip",
-                ForgeConstants.ASSETS_DIR, ForgeConstants.RES_DIR, splashScreen.getProgressBar(), allowDeletion).downloadAndUnzip();
+        String assetURL = isSnapshots ? snapsURL + "assets.zip" : releaseURL + Forge.CURRENT_VERSION + "/" + "assets.zip";
+        new GuiDownloadZipService("", "resource files", assetURL,
+            ForgeConstants.ASSETS_DIR, ForgeConstants.RES_DIR, splashScreen.getProgressBar(), allowDeletion).downloadAndUnzip();
 
         if (allowDeletion)
             FSkinFont.deleteCachedFiles(); //delete cached font files in case any skin's .ttf file changed
