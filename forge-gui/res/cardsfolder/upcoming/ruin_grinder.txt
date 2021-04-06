@@ -1,0 +1,14 @@
+Name:Ruin Grinder
+ManaCost:5 R
+Types:Artifact Creature Construct
+PT:7/4
+K:Menace
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigRepeatEach | TriggerDescription$ When CARDNAME dies, each player may discard their hand and draw seven cards.
+SVar:TrigRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose
+SVar:DBChoose:DB$ GenericChoice | Choices$ DBDiscard,Noop | Defined$ Player.IsRemembered
+SVar:DBDiscard:DB$ Discard | Mode$ Hand | Defined$ Player.IsRemembered | SubAbility$ DBDraw | SpellDescription$ Discard your hand and draw seven cards.
+SVar:DBDraw:DB$ Draw | Defined$ Player.IsRemembered | NumCards$ 7
+SVar:Noop:DB$ Cleanup | SpellDescription$ Do nothing.
+K:TypeCycling:Mountain:2
+DeckHas:Ability$Discard
+Oracle:Menace\nWhen Ruin Grinder dies, each player may discard their hand and draw seven cards.\nMountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.)
