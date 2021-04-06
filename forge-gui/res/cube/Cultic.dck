@@ -1,0 +1,543 @@
+[metadata]
+Name=Cultic Cube (MTGO May 2020)
+[main]
+1 Dauntless Bodyguard|DOM
+1 Gideon's Lawkeeper|M12
+1 Giver of Runes|MH1
+1 Isamaru, Hound of Konda|CHK
+1 Kytheon, Hero of Akros|ORI
+1 Skymarcher Aspirant|RIX
+1 Student of Warfare|ROE
+1 Thraben Inspector|SOI
+1 Imposing Sovereign|M14
+1 Precinct Captain|RTR
+1 Stoneforge Mystic|WWK
+1 Tomik, Distinguished Advokist|WAR
+1 Porcelain Legionnaire|NPH
+1 Brightling|BBD
+1 Brimaz, King of Oreskos|BNG
+1 Kinjalli's Sunwing|XLN
+1 Monastery Mentor|FRF
+1 Ranger-Captain of Eos|MH1
+1 Stalking Leonin|C17
+1 Thalia, Heretic Cathar|EMN
+1 Hero of Bladehold|MBS
+1 Restoration Angel|AVR
+1 Angel of Sanctions|AKH
+1 Elesh Norn, Grand Cenobite|NPH
+1 Gideon Blackblade|WAR
+1 Gideon of the Trials|AKH
+1 Gideon, Ally of Zendikar|BFZ
+1 Serra the Benevolent|MH1
+1 Gideon Jura|M12
+1 Elspeth, Sun's Champion|THS
+1 Path to Exile|MMA
+1 Swords to Plowshares|LEB
+1 Unexpectedly Absent|C13
+1 Winds of Abandon|MH1
+1 Council's Judgment|CNS
+1 Day of Judgment|ZEN
+1 Wrath of God|10E
+1 Fumigate|KLD
+1 Finale of Glory|WAR
+1 Journey to Nowhere|ZEN
+1 Banishing Light|JOU
+1 Oblivion Ring|M12
+1 Jace, Vryn's Prodigy|ORI
+1 Looter il-Kor|TSP
+1 Merfolk Looter|M12
+1 Phantasmal Image|M12
+1 Snapcaster Mage|MM3
+1 Thing in the Ice|SOI
+1 Arcane Artisan|BBD
+1 Cloudkin Seer|M20
+1 Vendilion Clique|MOR
+1 Sower of Temptation|LRW
+1 Cavalier of Gales|M20
+1 Consecrated Sphinx|MBS
+1 Mu Yanling, Sky Dancer|M20
+1 Jace, the Mind Sculptor|WWK
+1 Brainstorm|MMQ
+1 Mystical Tutor|MIR
+1 Counterspell|LEB
+1 Daze|NEM
+1 Impulse|VIS
+1 Mana Leak|M12
+1 Miscalculation|ULG
+1 Remand|RAV
+1 Force of Negation|MH1
+1 Supreme Will|HOU
+1 Condescend|JVC
+1 Power Sink|ICE
+1 Pull from Tomorrow|AKH
+1 Dig Through Time|KTK
+1 Ponder|M12
+1 Preordain|M11
+1 Serum Visions|5DN
+1 Chart a Course|XLN
+1 Control Magic|LEB
+1 Heir of Falkenrath|SOI
+1 Kitesail Freebooter|XLN
+1 Mesmeric Fiend|TOR
+1 Oona's Prowler|LRW
+1 Pack Rat|RTR
+1 Shriekmaw|LRW
+1 Brain Maggot|JOU
+1 Coffin Queen|TMP
+1 Ophiomancer|C13
+1 Gonti, Lord of Luxury|KLD
+1 Hell's Caretaker|LEG
+1 Nekrataal|VIS
+1 Ravenous Chupacabra|RIX
+1 Skinrender|SOM
+1 Grave Titan|M11
+1 Sheoldred, Whispering One|NPH
+1 Griselbrand|AVR
+1 Liliana, the Last Hope|EMN
+1 Liliana, Death's Majesty|AKH
+1 Ob Nixilis Reignited|BFZ
+1 Cast Down|DOM
+1 Go for the Throat|MBS
+1 Ultimate Price|RTR
+1 Dismember|NPH
+1 Hero's Downfall|THS
+1 Duress|M11
+1 Inquisition of Kozilek|ROE
+1 Thoughtseize|LRW
+1 Collective Brutality|EMN
+1 Night's Whisper|5DN
+1 Buried Alive|ODY
+1 Never // Return|AKH
+1 Toxic Deluge|C13
+1 Damnation|PLC
+1 Bond of Revival|WAR
+1 Crux of Fate|FRF
+1 Diabolic Servitude|USG
+1 Falkenrath Gorger|SOI
+1 Firedrinker Satyr|THS
+1 Goblin Guide|ZEN
+1 Grim Lavamancer|M12
+1 Monastery Swiftspear|KTK
+1 Stromkirk Noble|ISD
+1 Village Messenger|SOI
+1 Zurgo Bellstriker|DTK
+1 Bomat Courier|KLD
+1 Ash Zealot|RTR
+1 Dire Fleet Daredevil|RIX
+1 Dismissive Pyromancer|M19
+1 Earthshaker Khenra|HOU
+1 Goblin Cratermaker|GRN
+1 Kari Zev, Skyship Raider|AER
+1 Young Pyromancer|M14
+1 Goblin Rabblemaster|M15
+1 Hanweir Garrison|EMN
+1 Krenko, Tin Street Kingpin|WAR
+1 Flametongue Kavu|PLS
+1 Glorybringer|AKH
+1 Inferno Titan|M11
+1 Chandra, Torch of Defiance|KLD
+1 Chandra, Awakened Inferno|M20
+1 Chandra, Flamecaller|OGW
+1 Burst Lightning|ZEN
+1 Lightning Bolt|M10
+1 Abrade|HOU
+1 Incinerate|MIR
+1 Lightning Strike|THS
+1 Magma Jet|5DN
+1 Searing Spear|M13
+1 Char|RAV
+1 Fireblast|VIS
+1 Magmatic Sinkhole|MH1
+1 Chain Lightning|LEG
+1 Firebolt|ODY
+1 Cut // Ribbons|AKH
+1 Light Up the Stage|RNA
+1 Fiery Confluence|C15
+1 Sneak Attack|USG
+1 Arbor Elf|WWK
+1 Avacyn's Pilgrim|ISD
+1 Birds of Paradise|RAV
+1 Elves of Deep Shadow|DRK
+1 Elvish Mystic|M14
+1 Fyndhorn Elves|ICE
+1 Hexdrinker|MH1
+1 Joraga Treespeaker|ROE
+1 Llanowar Elves|M10
+1 Devoted Druid|SHM
+1 Fauna Shaman|M11
+1 Paradise Druid|WAR
+1 Sakura-Tribe Elder|CHK
+1 Sylvan Caryatid|THS
+1 Rhonas the Indomitable|AKH
+1 Tireless Tracker|SOI
+1 Elvish Piper|M10
+1 Nightpack Ambusher|M20
+1 Biogenic Ooze|RNA
+1 Carnage Tyrant|XLN
+1 Honored Hydra|AKH
+1 Hornet Queen|M15
+1 Voracious Hydra|M20
+1 End-Raze Forerunners|RNA
+1 Woodfall Primus|SHM
+1 Worldspine Wurm|RTR
+1 Nissa, Voice of Zendikar|OGW
+1 Garruk Relentless|ISD
+1 Garruk Wildspeaker|LRW
+1 Nissa, Vital Force|KLD
+1 Farseek|RAV
+1 Nature's Lore|POR
+1 Rampant Growth|10E
+1 Green Sun's Zenith|MBS
+1 Genju of the Cedars|BOK
+1 Utopia Sprawl|DIS
+1 Wild Growth|BTD
+1 Fertile Ground|LRW
+1 Sylvan Library|LEG
+1 Supreme Verdict|RTR
+1 Teferi, Hero of Dominaria|DOM
+1 Fractured Identity|C17
+1 The Scarab God|HOU
+1 Daretti, Ingenious Iconoclast|CN2
+1 Domri, Chaos Bringer|RNA
+1 Ajani, the Greathearted|WAR
+1 Lingering Souls|DKA
+1 Magister of Worth|CNS
+1 Assassin's Trophy|GRN
+1 Izzet Charm|RTR
+1 Dack Fayden|CNS
+1 Saheeli, Sublime Artificer|WAR
+1 Figure of Destiny|EVE
+1 Bloodforged Battle-Axe|C17
+1 Bonesplitter|MRD
+1 Retrofitter Foundry|C18
+1 Lightning Greaves|DDE
+1 Smuggler's Copter|KLD
+1 Sorcerous Spyglass|XLN
+1 Grafted Wargear|5DN
+1 Heirloom Blade|C17
+1 Coercive Portal|CNS
+1 Fleetwheel Cruiser|KLD
+1 Batterskull|NPH
+1 Skysovereign, Consul Flagship|KLD
+1 Phyrexian Revoker|MBS
+1 Phyrexian Metamorph|NPH
+1 Myr Battlesphere|SOM
+1 Sundering Titan|DST
+1 Ancient Stone Idol|C18
+1 Hangarback Walker|ORI
+1 Walking Ballista|AER
+1 Arid Mesa|ZEN
+1 Arid Mesa|MM3
+1 Badlands|VMA
+1 Bayou|VMA
+1 Blood Crypt|RTR
+1 Bloodstained Mire|KTK
+1 Bloodstained Mire|ONS
+1 Breeding Pool|GTC
+1 Canyon Slough|AKH
+1 Celestial Colonnade|UMA
+1 Creeping Tar Pit|WWK
+1 Flooded Strand|KTK
+1 Flooded Strand|ONS
+1 Godless Shrine|GTC
+1 Hallowed Fountain|RTR
+1 Mana Confluence|JOU
+1 Marsh Flats|ZEN
+1 Marsh Flats|MM3
+1 Misty Rainforest|MM3
+1 Misty Rainforest|ZEN
+1 Overgrown Tomb|RTR
+1 Plateau|VMA
+1 Polluted Delta|KTK
+1 Polluted Delta|ONS
+1 Prismatic Vista|MH1
+1 Raging Ravine|WWK
+1 Sacred Foundry|GTC
+1 Savannah|VMA
+1 Scalding Tarn|ZEN
+1 Scalding Tarn|MM3
+1 Scrubland|VMA
+1 Shambling Vent|BFZ
+1 Steam Vents|RTR
+1 Stirring Wildwood|WWK
+1 Stomping Ground|GTC
+1 Taiga|VMA
+1 Temple Garden|RTR
+1 Temple of Epiphany|JOU
+1 Temple of Malady|JOU
+1 Temple of Mystery|THS
+1 Temple of Triumph|THS
+1 Tropical Island|VMA
+1 Tundra|VMA
+1 Underground Sea|VMA
+1 Verdant Catacombs|MM3
+1 Verdant Catacombs|ZEN
+1 Volcanic Island|VMA
+1 Watery Grave|GTC
+1 Windswept Heath|ONS
+1 Windswept Heath|KTK
+1 Wooded Foothills|ONS
+1 Wooded Foothills|KTK
+1 Karn, Scion of Urza|DOM
+1 Faerie Conclave|ULG
+1 Noble Hierarch|CON
+1 Nissa, Who Shakes the World|WAR
+1 Rishadan Port|MMQ
+1 Mishra's Factory|ATQ
+1 Faerie Guidemother|ELD
+1 Giant Killer|ELD
+1 Realm-Cloaked Giant|ELD
+1 Venerable Knight|ELD
+1 Avacyn, Angel of Hope|AVR
+1 Hypnotic Sprite|ELD
+1 Brazen Borrower|ELD
+1 Gadwick, the Wizened|ELD
+1 Murderous Rider|ELD
+1 Embereth Shieldbreaker|ELD
+1 Rimrock Knight|ELD
+1 Robber of the Rich|ELD
+1 Bonecrusher Giant|ELD
+1 Fire Ambush|PTK
+1 Gilded Goose|ELD
+1 Gingerbrute|ELD
+1 Stonecoil Serpent|ELD
+1 Garruk, Cursed Huntsman|ELD
+1 Oko, Thief of Crowns|ELD
+1 Fabled Passage|ELD
+1 Elspeth, Sun's Nemesis|THB
+1 Shatter the Sky|THB
+1 Nadir Kraken|THB
+1 Omen of the Sea|THB
+1 Thassa's Intervention|THB
+1 Agonizing Remorse|THB
+1 Primordial Mist|C18
+1 Purphoros's Intervention|THB
+1 Wolfwillow Haven|THB
+1 The First Iroan Games|THB
+1 Boreal Druid|CSP
+1 Endless One|BFZ
+1 Ugin, the Ineffable|WAR
+1 History of Benalia|DOM
+1 Thought Courier|5DN
+1 Quicksilver Amulet|ULG
+1 Cast Out|MB1
+1 Oust|MB1
+1 Declaration in Stone|SOI
+1 Grasp of Fate|MB1
+1 Prison Realm|WAR
+1 Sleight of Hand|7ED
+1 Scour All Possibilities|MH1
+1 Shimmer of Possibility|RNA
+1 Hieroglyphic Illumination|MB1
+1 Anticipate|DTK
+1 Fblthp, the Lost|MB1
+1 Censor|AKH
+1 Quench|RNA
+1 Rune Snag|CSP
+1 Complicate|ONS
+1 Cryptbreaker|EMN
+1 Goldmeadow Harrier|LRW
+1 Goblin Banneret|GRN
+1 Soul-Scar Mage|AKH
+1 Gore-House Chainwalker|RTR
+1 Galvanic Blast|SOM
+1 Volcanic Hammer|POR
+1 Wild Slash|FRF
+1 Boon Satyr|THS
+1 Call of the Herd|ODY
+1 Mouth // Feed|AKH
+1 Thrashing Brontodon|MB1
+1 Troll Ascetic|MRD
+1 Wolfir Avenger|AVR
+1 Questing Beast|ELD
+1 Trumpeting Herd|MH1
+1 Wolfbriar Elemental|WWK
+1 Captain's Claws|OGW
+1 Channeler Initiate|AKH
+1 Irrigated Farmland|AKH
+1 Fetid Pools|AKH
+1 Sulfurous Springs|10E
+1 Sheltered Thicket|AKH
+1 Scattered Groves|AKH
+1 Silent Clearing|MH1
+1 Nurturing Peatland|MH1
+1 Waterlogged Grove|MH1
+1 Sunbaked Canyon|MH1
+1 Shivan Reef|M15
+1 City of Brass|ARN
+1 Temporal Isolation|TSP
+1 Secure the Wastes|DTK
+1 Languish|ORI
+1 Ruinous Path|BFZ
+1 Doom Blade|M10
+1 Terror|CED
+1 Forked Bolt|ROE
+1 Disfigure|M20
+1 Rakdos Cackler|RTR
+1 Emrakul, the Promised End|EMN
+1 Wicked Wolf|ELD
+1 Treasure Cruise|MB1
+1 Memory Lapse|MIR
+1 Ilharg, the Raze-Boar|WAR
+1 Flames of the Firebrand|M14
+1 Arc Lightning|KTK
+1 Finale of Devastation|WAR
+1 Conclave Tribunal|GRN
+1 Mikaeus, the Lunarch|ISD
+1 Silverflame Squire|ELD
+1 Sunlance|PLC
+1 Zombify|ODY
+1 Vigor Mortis|RAV
+1 Pilfering Imp|GRN
+1 Victim of Night|ISD
+1 Vendetta|ROE
+1 Ransack the Lab|MH1
+1 Champion of Rhonas|AKH
+1 Beast Attack|ODY
+1 Worldly Tutor|MIR
+1 Wildcall|FRF
+1 Quarantine Field|BFZ
+1 Through the Breach|CHK
+1 Incendiary Flow|EMN
+1 Merchant of the Vale|ELD
+1 Hydroid Krasis|RNA
+1 Vindicate|APC
+1 Discovery // Dispersal|GRN
+1 Flayer Husk|MBS
+1 Unburial Rites|ISD
+1 Survival of the Fittest|EXO
+1 Vryn Wingmare|ORI
+1 Doomed Necromancer|ONS
+1 Makeshift Mannequin|LRW
+1 Faithless Looting|DKA
+1 Thran Temporal Gateway|DOM
+1 Dragonlord Atarka|DTK
+1 Dread Return|TSP
+1 Living Death|TMP
+1 Spined Thopter|NPH
+1 Resurrection|LEB
+1 Ghalta, Primal Hunger|RIX
+1 Volrath's Shapeshifter|STH
+1 Putrid Imp|TOR
+1 Call the Bloodline|SOI
+1 Liege of the Tangle|SOM
+1 Dramatic Entrance|SHM
+1 Shifty Doppelganger|ODY
+1 Gifts Ungiven|CHK
+1 Sign in Blood|M10
+1 The Ur-Dragon|C17
+1 Darigaaz Reincarnated|DOM
+1 Hellkite Overlord|ALA
+1 Karrthus, Tyrant of Jund|ARB
+1 Apex Altisaur|C19
+1 Eat to Extinction|THB
+1 Entomb|ODY
+1 Opt|INV
+1 Woe Strider|THB
+1 Swiftfoot Boots|M12
+1 Vivien's Arkbow|WAR
+1 Liliana of the Veil|ISD
+1 Logic Knot|FUT
+1 Hellrider|DKA
+1 Rampaging Ferocidon|XLN
+1 Spell Pierce|XLN
+1 Read the Bones|THS
+1 Murderous Cut|KTK
+1 Incubation Druid|RNA
+1 Once Upon a Time|ELD
+1 Herald of Anafenza|KTK
+1 Mistral Charger|DIS
+1 Shark Typhoon|IKO
+1 Neutralize|IKO
+1 Voracious Greatshark|IKO
+1 Curator of Mysteries|AKH
+1 Jace, Wielder of Mysteries|WAR
+1 Jace, Architect of Thought|RTR
+1 Intuition|TMP
+1 Commence the Endgame|WAR
+1 Heartless Act|IKO
+1 Frenzied Goblin|RAV
+1 Jackal Pup|TMP
+1 Lightning Berserker|DTK
+1 Shock|10E
+1 Vivien, Monsters' Advocate|IKO
+1 Gemrazer|IKO
+1 Three Visits|PTK
+1 Norwood Priestess|P02
+1 Sylvan Tutor|POR
+1 Ashiok, Nightmare Weaver|THS
+1 Ashiok, Nightmare Muse|THB
+1 Key to the City|KLD
+1 Ancestral Blade|M20
+1 Blade Splicer|NPH
+1 Syncopate|RTR
+1 Compulsive Research|E01
+1 Distress|10E
+1 Olivia's Dragoon|EMN
+1 Stromkirk Condemned|EMN
+1 Malicious Affliction|C14
+1 Ulcerate|M15
+1 Tithe Taker|RNA
+1 Eidolon of Obstruction|THB
+1 Shepherd of the Flock|ELD
+1 Cloistered Youth|ISD
+1 Flickerwisp|EVE
+1 Pacifism|M10
+1 Planar Outburst|BFZ
+1 Negate|M10
+1 Domestication|ROE
+1 Telling Time|RAV
+1 Fatal Push|AER
+1 Ob Nixilis of the Black Oath|OC14
+1 Anax, Hardened in the Forge|THB
+1 Storm's Wrath|THB
+1 Pyrite Spellbomb|MRD
+1 Vorapede|DKA
+1 Briarhorn|LRW
+1 Duskwatch Recruiter|SOI
+1 Garruk, Primal Hunter|M12
+1 Merfolk Branchwalker|XLN
+1 Mutavault|M14
+1 Vulshok Morningstar|DST
+1 Trusty Machete|ZEN
+1 Vault Skirge|NPH
+1 Ketria Triome|IKO
+1 Indatha Triome|IKO
+1 Ankh of Mishra|LEB
+1 Raugrin Triome|IKO
+1 Savai Triome|IKO
+1 Huatli, Warrior Poet|XLN
+1 Zagoth Triome|IKO
+1 Assault // Battery|INV
+1 Boon of the Wish-Giver|IKO
+1 Grim Tutor|S99
+1 Strategic Planning|HOU
+1 Aether Chaser|AER
+1 Territorial Hellkite|C17
+1 Titanoth Rex|IKO
+1 Savannah Lions|LEB
+1 Elite Vanguard|M10
+1 Spectral Grasp|CN2
+1 Rhys the Redeemed|SHM
+1 Revolutionary Rebuff|KLD
+1 Thirst for Knowledge|MRD
+1 Night Incarnate|C18
+1 Vilis, Broker of Blood|M20
+1 Last Gasp|RAV
+1 Yahenni's Expertise|AER
+1 Lay Bare the Heart|AKH
+1 Vraska's Contempt|XLN
+1 Seasoned Pyromancer|MH1
+1 Tarfire|LRW
+1 Seal of Fire|DIS
+1 Sweltering Suns|AKH
+1 Anger of the Gods|THS
+1 Slagstorm|MBS
+1 Patron of the Vein|C17
+1 Pathrazer of Ulamog|ROE
+1 Tezzeret, Artifice Master|M19
+1 Borderland Marauder|M15
+1 Unesh, Criosphinx Sovereign|HOU
+1 Dream Trawler|THB
+1 Threads of Disloyalty|BOK
+1 Think Twice|ISD
