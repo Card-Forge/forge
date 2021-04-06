@@ -1,19 +1,17 @@
 package forge.gamemodes.limited;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
-
 import forge.card.ColorSet;
 import forge.card.DeckHints;
 import forge.card.MagicColor;
 import forge.item.PaperCard;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public class CardRanker {
 
@@ -110,7 +108,7 @@ public class CardRanker {
         return cardScores;
     }
 
-    private static double getRawScore(PaperCard card) {
+    public static double getRawScore(PaperCard card) {
         Double rawScore;
         if (MagicColor.Constant.BASIC_LANDS.contains(card.getName())) {
             rawScore = SCORE_UNPICKABLE;
@@ -120,8 +118,14 @@ public class CardRanker {
             if (customRankings != null) {
                 rkg = DraftRankCache.getCustomRanking(customRankings, card.getName());
                 if (rkg == null) {
-                    // try the default rankings if custom rankings contain no entry
+                    // try the default rankings if custom rankings contain no entry, but penalize missing cards
                     rkg = DraftRankCache.getRanking(card.getName(), card.getEdition());
+                    if (rkg != null) {
+                        rkg = rkg + 1;
+                    }
+                }
+                if (rkg != null) {
+                    rkg = rkg / 2;
                 }
             } else {
                 rkg = DraftRankCache.getRanking(card.getName(), card.getEdition());
