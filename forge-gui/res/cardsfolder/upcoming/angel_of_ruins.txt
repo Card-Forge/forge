@@ -1,0 +1,9 @@
+Name:Angel of the Ruins
+ManaCost:5 W W
+Types:Artifact Creature Angel
+PT:5/7
+K:Flying
+K:TypeCycling:Plains:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile up to two target artifacts and/or enchantments.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | TargetMin$ 0 | TargetMax$ 2 | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile up to two target artifacts and/or enchantments.
+Oracle:Flying\nWhen Angel of the Ruins enters the battlefield, exile up to two targets artifacts and/or enchantments.\nPlainscycling {2}
