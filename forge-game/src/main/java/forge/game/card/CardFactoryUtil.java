@@ -2478,6 +2478,26 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
 
             inst.addTrigger(trigger);
+        } else if (keyword.equals("Demonstrate")) {
+            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerDescription$ Demonstrate (" + inst.getReminderText() + ")";
+            final String youCopyStr = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | Optional$ True | RememberCopies$ True";
+            final String chooseOppStr = "DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ConditionCheckSVar$ DemonstrateSVar | ConditionSVarCompare$ GE1";
+            final String oppCopyStr = "DB$ CopySpellAbility | Controller$ ChosenPlayer | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | ConditionCheckSVar$ DemonstrateSVar | ConditionSVarCompare$ GE1";
+            final String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
+
+            final Trigger trigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
+            final SpellAbility youCopy = AbilityFactory.getAbility(youCopyStr, card);
+            final AbilitySub chooseOpp = (AbilitySub) AbilityFactory.getAbility(chooseOppStr, card);
+            chooseOpp.setSVar("DemonstrateSVar", "Count$RememberedSize");
+            final AbilitySub oppCopy = (AbilitySub) AbilityFactory.getAbility(oppCopyStr, card);
+            oppCopy.setSVar("DemonstrateSVar", "Count$RememberedSize");
+            final AbilitySub cleanup = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
+            oppCopy.setSubAbility(cleanup);
+            chooseOpp.setSubAbility(oppCopy);
+            youCopy.setSubAbility(chooseOpp);
+            trigger.setOverridingAbility(youCopy);
+
+            inst.addTrigger(trigger);
         } else if (keyword.equals("Dethrone")) {
             final StringBuilder trigScript = new StringBuilder(
                     "Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player.withMostLife | Secondary$ True | "
