@@ -5,6 +5,9 @@ Name=Strixhaven: School of Mages
 Code2=STX
 MciCode=stx
 Type=Expansion
+BoosterCovers=3
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+Prerelease=6 Boosters, 1 RareMythic+
 
 [cards]
 1 C Environmental Sciences
