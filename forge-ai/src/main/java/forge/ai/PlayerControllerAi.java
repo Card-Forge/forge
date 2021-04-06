@@ -1063,14 +1063,13 @@ public class PlayerControllerAi extends PlayerController {
         boolean noManaCost = tgtSA.hasParam("WithoutManaCost");
         if (tgtSA instanceof Spell) { // Isn't it ALWAYS a spell?
             Spell spell = (Spell) tgtSA;
-            if (brains.canPlayFromEffectAI(spell, !optional, noManaCost) == AiPlayDecision.WillPlay || !optional) {
+            if (tgtSA.checkRestrictions(brains.getPlayer()) && (brains.canPlayFromEffectAI(spell, !optional, noManaCost) == AiPlayDecision.WillPlay || !optional)) {
                 if (noManaCost) {
                     return ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, tgtSA, getGame());
-                } else {
-                    return ComputerUtil.playStack(tgtSA, player, getGame());
                 }
-            } else 
-                return false; // didn't play spell
+                return ComputerUtil.playStack(tgtSA, player, getGame());
+            }
+            return false; // didn't play spell
         }
         return true;
     }
@@ -1093,7 +1092,6 @@ public class PlayerControllerAi extends PlayerController {
             boolean allCreatures = Iterables.all(Iterables.concat(pile1, pile2), CardPredicates.Presets.CREATURES);
             int cmc1 = allCreatures ? ComputerUtilCard.evaluateCreatureList(pile1) : ComputerUtilCard.evaluatePermanentList(pile1);
             int cmc2 = allCreatures ? ComputerUtilCard.evaluateCreatureList(pile2) : ComputerUtilCard.evaluatePermanentList(pile2);
-            System.out.println("value:" + cmc1 + " " + cmc2);
 
             // for now, this assumes that the outcome will be bad
             // TODO: This should really have a ChooseLogic param to
