@@ -133,6 +133,10 @@ public class CardFactory {
         final Card original = targetSA.getHostCard();
         final Card c = copyCard(original, true);
 
+        // clear remember/imprint for copied spells
+        c.clearRemembered();
+        c.clearImprintedCards();
+
         if (sourceSA.hasParam("NonLegendary")) {
             c.removeType(CardType.Supertype.Legendary);
         }

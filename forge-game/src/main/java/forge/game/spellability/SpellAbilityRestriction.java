@@ -20,14 +20,16 @@ package forge.game.spellability;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 import forge.game.Game;
+import forge.game.GameObject;
+import forge.game.GameObjectPredicates;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPlayOption;
@@ -39,6 +41,7 @@ import forge.game.staticability.StaticAbilityCastWithFlash;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import forge.util.collect.FCollection;
 
 /**
  * <p>
@@ -426,19 +429,17 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
         if (this.getIsPresent() != null) {
-            CardCollectionView list;
-            if (this.getPresentDefined() != null) {
-                list = AbilityUtils.getDefinedCards(sa.getHostCard(), this.getPresentDefined(), sa);
+            FCollection<GameObject> list;
+            if (getPresentDefined() != null) {
+                list = AbilityUtils.getDefinedObjects(sa.getHostCard(), getPresentDefined(), sa);
             } else {
-                list = game.getCardsIn(this.getPresentZone());
+                list = new FCollection<GameObject>(game.getCardsIn(getPresentZone()));
             }
 
-            list = CardLists.getValidCards(list, this.getIsPresent().split(","), activator, c, sa);
+            final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent().split(","), activator, c, sa)));
 
-            int right = 1;
             final String rightString = this.getPresentCompare().substring(2);
-            right = AbilityUtils.calculateAmount(c, rightString, sa);
-            final int left = list.size();
+            int right = AbilityUtils.calculateAmount(c, rightString, sa);
 
             if (!Expressions.compare(left, this.getPresentCompare(), right)) {
                 return false;
