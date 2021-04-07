@@ -93,6 +93,7 @@ public enum ApiType {
     Haunt (HauntEffect.class),
     Investigate (InvestigateEffect.class),
     ImmediateTrigger (ImmediateTriggerEffect.class),
+    Learn (LearnEffect.class),
     LookAt (LookAtEffect.class),
     LoseLife (LifeLoseEffect.class),
     LosesGame (GameLossEffect.class),

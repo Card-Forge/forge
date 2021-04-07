@@ -134,7 +134,7 @@ public class GameFormat implements Comparable<GameFormat> {
         if (!this.allowedSetCodes_ro.isEmpty()) {
             p = Predicates.and(p, printed ?
                     IPaperCard.Predicates.printedInSets(this.allowedSetCodes_ro, printed) :
-                    (Predicate<PaperCard>)(StaticData.instance().getCommonCards().wasPrintedInSets(this.allowedSetCodes_ro)));
+                    StaticData.instance().getCommonCards().wasPrintedInSets(this.allowedSetCodes_ro));
         }
         if (!this.allowedRarities.isEmpty()) {
             List<Predicate<? super PaperCard>> crp = Lists.newArrayList();
