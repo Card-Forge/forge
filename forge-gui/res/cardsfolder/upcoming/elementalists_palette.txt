@@ -1,0 +1,10 @@
+Name:Elementalist's Palette
+ManaCost:3
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Card.hasXCost | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounters | TriggerDescription$ Whenever you cast a spell with {X} in its mana cost, put two charge counters on CARDNAME.
+SVar:TrigPutCounters:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 2
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | RestrictValid$ CostContainsX | SpellDescription$ Add {C} for each charge counter on CARDNAME. Spend this mana only on costs that contain {X}.
+SVar:X:Count$CardCounters.CHARGE
+DeckHas:Ability$Counters
+Oracle:Whenever you cast a spell with {X} in its mana cost, put two charge counters on Elementalist's Palette.\n{T}: Add one mana of any color.\n{T}: Add {C} for each charge counter on Elementalist's Palette. Spend this mana only on costs that contain {X}.
