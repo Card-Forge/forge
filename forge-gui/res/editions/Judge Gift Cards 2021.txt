@@ -6,4 +6,6 @@ Type=Promos
 
 [cards]
 5 M The Gitrog Monster
+6 R Grand Arbiter Augustin IV
+7 M Karlov of the Ghost Council
 9 M Nicol Bolas, the Ravager
