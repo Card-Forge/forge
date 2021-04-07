@@ -1,0 +1,16 @@
+Name:Fractal Harness
+ManaCost:X 2 G
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it and attach CARDNAME to it.
+SVar:TrigToken:DB$ Token | TokenScript$ gu_0_0_fractal | RememberTokens$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigDoubleCounters | TriggerDescription$ Whenever equipped creature attacks, double the number of +1/+1 counters on it.
+SVar:TrigDoubleCounters:DB$ MultiplyCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ P1P1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ AE | Secondary$ True | Description$ Add attack effect to attached
+SVar:AE:SVar:HasAttackEffect:TRUE
+K:Equip:2
+DeckHas:Ability$Token & Ability$Counters
+Oracle:When Fractal Harness enters the battlefield, create a 0/0 blue and green Fractal creature token. Put X +1/+1 counters on it and attach Fractal Harness to it.\nWhenever equipped creature attacks, double the number of +1/+1 counters on it.\nEquip {2}
