@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -942,6 +943,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
 
+            // for Wish cards, if the player is controlled by someone else
+            // they can't fetch from the outside the game/sideboard
+            if (player.isControlled()) {
+                origin.remove(ZoneType.Sideboard);
+            }
+
             CardCollection fetchList;
             boolean shuffleMandatory = true;
             boolean searchedLibrary = false;
@@ -1179,6 +1186,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
 
+        boolean combatChanged = false;
+        final CardZoneTable triggerList = new CardZoneTable();
+
         for (Player player : HiddenOriginChoicesMap.keySet()) {
             boolean searchedLibrary = HiddenOriginChoicesMap.get(player).searchedLibrary;
             boolean shuffleMandatory = HiddenOriginChoicesMap.get(player).shuffleMandatory;
@@ -1188,12 +1198,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             ZoneType destination = HiddenOriginChoicesMap.get(player).destination;
             CardCollection movedCards = new CardCollection();
             long ts = game.getNextTimestamp();
-            final CardZoneTable triggerList = new CardZoneTable();
-            boolean combatChanged = false;
-            Player decider = chooser;
-            if (decider == null) {
-                decider = player;
-            }
+            Player decider = ObjectUtils.firstNonNull(chooser, player);
 
             for (final Card c : chosenCards) {
                 Card movedCard = null;
@@ -1423,15 +1428,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 registerDelayedTrigger(sa, sa.getParam("AtEOT"), movedCards);
             }
 
-            if (combatChanged) {
-                game.updateCombatForView();
-                game.fireEvent(new GameEventCombatChanged());
-            }
-            triggerList.triggerChangesZoneAll(game);
+        }
+        if (combatChanged) {
+            game.updateCombatForView();
+            game.fireEvent(new GameEventCombatChanged());
+        }
+        triggerList.triggerChangesZoneAll(game);
 
-            if (sa.hasParam("UntilHostLeavesPlay")) {
-                source.addLeavesPlayCommand(untilHostLeavesPlayCommand(triggerList, source));
-            }
+        if (sa.hasParam("UntilHostLeavesPlay")) {
+            source.addLeavesPlayCommand(untilHostLeavesPlayCommand(triggerList, source));
         }
     }
 

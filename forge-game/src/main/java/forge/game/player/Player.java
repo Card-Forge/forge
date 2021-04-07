@@ -2667,6 +2667,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         return null;
     }
 
+    public final boolean isControlled() {
+        Player ctrlPlayer = this.getControllingPlayer();
+        return ctrlPlayer != null && ctrlPlayer != this;
+    }
+
     public void addController(long timestamp, Player pl) {
         final IGameEntitiesFactory master = (IGameEntitiesFactory)pl.getLobbyPlayer();
         addController(timestamp, pl, master.createMindSlaveController(pl, this), true);
@@ -3602,6 +3607,51 @@ public class Player extends GameEntity implements Comparable<Player> {
                 revealCards.add(lki);
             }
             game.getAction().revealTo(revealCards, otherPlayers, Localizer.getInstance().getMessage("lblRevealFaceDownCards"));
+        }
+    }
+
+    public void learnLesson(SpellAbility sa, CardZoneTable table) {
+        // Replacement effects
+        Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.Cause, sa);
+        if (game.getReplacementHandler().run(ReplacementType.Learn, repParams) != ReplacementResult.NotReplaced) {
+            return;
+        }
+
+        CardCollection list = new CardCollection();
+        if (!isControlled()) {
+            list.addAll(CardLists.getType(getZone(ZoneType.Sideboard), "Lesson"));
+        }
+        list.addAll(getZone(ZoneType.Hand));
+        if (list.isEmpty()) {
+            return;
+        }
+
+        Card c = getController().chooseSingleCardForZoneChange(ZoneType.Hand, ImmutableList.of(ZoneType.Sideboard, ZoneType.Hand),
+                sa, list, null, "Learn a Lesson", true, this);
+        if (c == null) {
+            return;
+        }
+        if (c.isInZone(ZoneType.Sideboard)) { // Sideboard Lesson to Hand
+            Card moved = game.getAction().moveTo(ZoneType.Hand, c, sa);
+            table.put(ZoneType.Sideboard, ZoneType.Hand, moved);
+        } else if (c.isInZone(ZoneType.Hand)) { // Discard and Draw
+            boolean firstDiscard = getNumDiscardedThisTurn() == 0;
+            if (discard(c, sa, table) != null) {
+                // Change this if something would make multiple player learn at the same time
+
+                // Discard Trigger outside Effect
+                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.Player, this);
+                runParams.put(AbilityKey.Cards, new CardCollection(c));
+                runParams.put(AbilityKey.Cause, sa);
+                runParams.put(AbilityKey.FirstTime, firstDiscard);
+                getGame().getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
+
+                for (Card d : drawCards(1, sa)) {
+                    table.put(ZoneType.Library, ZoneType.Hand, d); // does a ChangesZoneAll care about moving from Library to Hand
+                }
+            }
         }
     }
 }

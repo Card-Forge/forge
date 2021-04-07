@@ -476,8 +476,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final boolean useUiPointAtCard =
         (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && (!GuiBase.getInterface().isLibgdxPort())) ?
         (cz.is(ZoneType.Battlefield) || cz.is(ZoneType.Hand) || cz.is(ZoneType.Library) ||
-         cz.is(ZoneType.Graveyard) || cz.is(ZoneType.Exile) || cz.is(ZoneType.Flashback) || cz.is(ZoneType.Command)) :
-        (cz.is(ZoneType.Hand) && cz.getPlayer() == player || cz.is(ZoneType.Battlefield));
+         cz.is(ZoneType.Graveyard) || cz.is(ZoneType.Exile) || cz.is(ZoneType.Flashback) ||
+         cz.is(ZoneType.Command) || cz.is(ZoneType.Sideboard)) :
+        (cz.is(ZoneType.Hand, player) || cz.is(ZoneType.Battlefield));
             if (!useUiPointAtCard) {
                 return false;
             }

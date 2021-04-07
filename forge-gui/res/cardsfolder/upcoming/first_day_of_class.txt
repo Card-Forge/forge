@@ -1,0 +1,10 @@
+Name:First Day of Class
+ManaCost:1 R
+Types:Instant
+A:SP$ Effect | Triggers$ CreatureETB | SubAbility$ DBLearn | SpellDescription$ Whenever a creature enters the battlefield under your control this turn, put a +1/+1 counter on it and it gains haste until end of turn.
+SVar:CreatureETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature enters the battlefield under your control this turn, put a +1/+1 counter on it and it gains haste until end of turn.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ TriggeredCard | KW$ Haste
+SVar:DBLearn:DB$ Learn | SpellDescription$ Learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
+DeckHas:Ability$Counters
+Oracle:Whenever a creature enters the battlefield under your control this turn, put a +1/+1 counter on it and it gains haste until end of turn.\nLearn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)

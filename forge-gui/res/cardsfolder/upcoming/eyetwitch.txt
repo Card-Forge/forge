@@ -1,0 +1,9 @@
+Name:Eyetwitch
+ManaCost:B
+Types:Creature Eye Bat
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLearn | TriggerDescription$ When CARDNAME dies, learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
+SVar:TrigLearn:DB$ Learn
+SVar:SacMe:1
+Oracle:Flying\nWhen Eyetwitch dies, learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)

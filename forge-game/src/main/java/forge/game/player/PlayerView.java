@@ -485,6 +485,8 @@ public class PlayerView extends GameEntityView {
             return TrackableProperty.Library;
         case Flashback:
             return TrackableProperty.Flashback;
+        case Sideboard:
+            return TrackableProperty.Sideboard;
         default:
             return null; //other zones not represented
         }

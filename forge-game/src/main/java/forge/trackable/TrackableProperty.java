@@ -171,6 +171,7 @@ public enum TrackableProperty {
     Graveyard(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Hand(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Library(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    Sideboard(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Mana(TrackableTypes.ManaMapType, FreezeMode.IgnoresFreeze),
     IsExtraTurn(TrackableTypes.BooleanType),
     ExtraTurnCount(TrackableTypes.IntegerType),
