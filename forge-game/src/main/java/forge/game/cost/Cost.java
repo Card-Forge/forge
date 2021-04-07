@@ -482,6 +482,10 @@ public class Cost implements Serializable {
             return new CostExert(splitStr[0], splitStr[1], description);
         }
 
+        if (parse.equals("RevealChosenPlayer")) {
+            return new CostRevealChosenPlayer();
+        }
+
         // These won't show up with multiples
         if (parse.equals("Untap") || parse.equals("Q")) {
             return new CostUntap();
