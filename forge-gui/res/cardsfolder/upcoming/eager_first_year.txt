@@ -1,5 +1,5 @@
 Name:Eager First-Year
-ManaCost:2 U R
+ManaCost:1 W
 Types:Creature Human Wizard
 PT:2/2
 T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Magecraft - Whenever you cast or copy an instant or sorcery spell, CARDNAME gets +1/+0 until end of turn.
