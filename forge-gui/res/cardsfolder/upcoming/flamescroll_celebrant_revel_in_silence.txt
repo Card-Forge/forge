@@ -13,8 +13,8 @@ ALTERNATE
 Name:Revel in Silence
 ManaCost:W W
 Types:Instant
-A:SP$ Effect | Cost$ W | Name$ Silence Effect | StaticAbilities$ STCantBeCast,STCantBeActivated | AILogic$ BeginningOfOppTurn | SubAbility$ DBChange | SpellDescription$ Your opponents can't cast spells or activate planeswalkers' loyalty abilities this turn.
-SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ Exile CARDNAME
+A:SP$ Effect | Cost$ W | Name$ Silence Effect | StaticAbilities$ STCantBeCast,STCantBeActivated | AILogic$ BeginningOfOppTurn | SubAbility$ DBChange | StackDescription$ SpellDescription | SpellDescription$ Your opponents can't cast spells or activate planeswalkers' loyalty abilities this turn. Exile CARDNAME.
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None
 SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Opponent | Description$ Your opponents can't cast spells.
 SVar:STCantBeActivated:Mode$ CantBeActivated | Activator$ Opponent | EffectZone$ Command | ValidCard$ Planeswalker | Loyalty$ True | Description$ Your opponents can't activate planeswalkers' loyalty abilities.
-Oracle:Your opponents can't cast spells this turn. (Spells cast before this resolves are unaffected.)
+Oracle:You opponents can’t cast spells or activate planeswalkers’ loyalty abilities this turn.\nExile Revel in Silence.
