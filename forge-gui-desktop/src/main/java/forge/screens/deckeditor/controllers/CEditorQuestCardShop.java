@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Iterables;
 import forge.deck.DeckBase;
 import forge.game.GameType;
 import forge.gamemodes.quest.QuestController;
@@ -80,7 +81,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
     private ItemPool<InventoryItem> cardsForSale;
     private final ItemPool<InventoryItem> fullCatalogCards =
-            ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(), InventoryItem.class);
+            ItemPool.createFrom(Iterables.concat(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(), FModel.getMagicDb().getCustomCards().getAllCardsNoAlt()), InventoryItem.class);
     private boolean showingFullCatalog = false;
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;

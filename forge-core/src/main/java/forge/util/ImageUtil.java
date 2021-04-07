@@ -21,6 +21,9 @@ public class ImageUtil {
         key = key.substring(2);
         PaperCard cp = StaticData.instance().getCommonCards().getCard(key);
         if (cp == null) {
+            cp = StaticData.instance().getCustomCards().getCard(key);
+        }
+        if (cp == null) {
             cp = StaticData.instance().getVariantCards().getCard(key);
         }
         return cp;
@@ -73,6 +76,8 @@ public class ImageUtil {
 
         if (includeSet) {
             String editionAliased = isDownloadUrl ? StaticData.instance().getEditions().getCode2ByCode(edition) : ImageKeys.getSetFolder(edition);
+            if (editionAliased == "") //FIXME: Custom Cards Workaround
+                editionAliased = edition;
             return TextUtil.concatNoSpace(editionAliased, "/", fname);
         } else {
             return fname;

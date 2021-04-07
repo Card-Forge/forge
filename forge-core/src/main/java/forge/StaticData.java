@@ -142,15 +142,6 @@ public class StaticData {
             }
             allTokens = new TokenDb(tokens, editions);
         }
-
-        {
-            if (customCards.getAllCards().size() > 0) {
-                Collection<PaperCard> paperCards = customCards.getAllCards();
-                for(PaperCard p: paperCards) {
-                    commonCards.addCard(p);
-                }
-            }
-        }
     }
 
     public static StaticData instance() {
