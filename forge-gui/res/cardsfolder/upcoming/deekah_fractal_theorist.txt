@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Legendary Creature Human Wizard
 PT:3/3
 T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is that spell's mana value.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ gu_0_0_fractal | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBPutCounter
+SVar:TrigToken:DB$ Token | TokenScript$ gu_0_0_fractal | RememberTokens$ True | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggerCount$CastSACMC
