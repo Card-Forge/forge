@@ -24,6 +24,7 @@ import java.util.Set;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 import forge.CardStorageReader;
@@ -277,8 +278,8 @@ public final class FModel {
         }
 
         //preload Itempool
-        uniqueCardsNoAlt = ItemPool.createFrom(getMagicDb().getCommonCards().getUniqueCardsNoAlt(), PaperCard.class);
-        allCardsNoAlt = ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(), PaperCard.class);
+        uniqueCardsNoAlt = ItemPool.createFrom(Iterables.concat(getMagicDb().getCommonCards().getUniqueCardsNoAlt(), getMagicDb().getCustomCards().getUniqueCardsNoAlt()), PaperCard.class);
+        allCardsNoAlt = ItemPool.createFrom(Iterables.concat(getMagicDb().getCommonCards().getAllCardsNoAlt(), getMagicDb().getCustomCards().getAllCardsNoAlt()), PaperCard.class);
         archenemyCards = ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)), PaperCard.class);
         planechaseCards = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)), PaperCard.class);
     }

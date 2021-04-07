@@ -27,6 +27,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
 
+import com.google.common.collect.Iterables;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.deck.CardPool;
@@ -93,7 +94,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Planes);
                 allSections.add(DeckSection.Conspiracy);
 
-                normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(), PaperCard.class);
+                normalPool = ItemPool.createFrom(Iterables.concat(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(), FModel.getMagicDb().getCustomCards().getAllCardsNoAlt()), PaperCard.class);
                 avatarPool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, PaperCard.FN_GET_RULES)), PaperCard.class);
                 planePool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)), PaperCard.class);
                 schemePool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)), PaperCard.class);
@@ -104,8 +105,8 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderFilter = CardRulesPredicates.Presets.CAN_BE_COMMANDER;
-                commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)), PaperCard.class);
-                normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(), PaperCard.class);
+                commanderPool = ItemPool.createFrom(Iterables.concat(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)), FModel.getMagicDb().getCustomCards().getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))), PaperCard.class);
+                normalPool = ItemPool.createFrom(Iterables.concat(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(), FModel.getMagicDb().getCustomCards().getAllCardsNoAlt()), PaperCard.class);
 
                 wantUnique = true;
                 break;
@@ -113,8 +114,10 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderFilter = CardRulesPredicates.Presets.CAN_BE_TINY_LEADERS_COMMANDER;
-                commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)), PaperCard.class);
-                normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(), PaperCard.class);
+                commanderPool = ItemPool.createFrom(Iterables.concat(
+                        FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)),
+                        FModel.getMagicDb().getCustomCards().getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))), PaperCard.class);
+                normalPool = ItemPool.createFrom(Iterables.concat(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(), FModel.getMagicDb().getCustomCards().getAllCardsNoAlt()), PaperCard.class);
 
                 wantUnique = true;
                 break;
@@ -122,8 +125,10 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderFilter = Predicates.or(CardRulesPredicates.Presets.CAN_BE_OATHBREAKER, CardRulesPredicates.Presets.CAN_BE_SIGNATURE_SPELL);
-                commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)), PaperCard.class);
-                normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(), PaperCard.class);
+                commanderPool = ItemPool.createFrom(Iterables.concat(
+                        FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)),
+                        FModel.getMagicDb().getCustomCards().getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))), PaperCard.class);
+                normalPool = ItemPool.createFrom(Iterables.concat(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(), FModel.getMagicDb().getCustomCards().getAllCardsNoAlt()), PaperCard.class);
 
                 wantUnique = true;
                 break;
@@ -131,8 +136,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderFilter = CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER;
-                commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.and(
-                        FModel.getFormats().get("Brawl").getFilterPrinted(), Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))), PaperCard.class);
+                commanderPool = ItemPool.createFrom(Iterables.concat(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.and(
+                        FModel.getFormats().get("Brawl").getFilterPrinted(), Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))), FModel.getMagicDb().getCustomCards().getAllCardsNoAlt(Predicates.and(
+                        FModel.getFormats().get("Brawl").getFilterPrinted(), Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)))), PaperCard.class);
                 normalPool = ItemPool.createFrom(FModel.getFormats().get("Brawl").getAllCards(), PaperCard.class);
 
                 wantUnique = true;
