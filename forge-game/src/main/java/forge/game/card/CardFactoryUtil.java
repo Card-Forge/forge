@@ -800,7 +800,7 @@ public class CardFactoryUtil {
             final List<Integer> powers = Lists.newArrayList();
             final String restriction = l[0].substring(15);
             final String[] rest = restriction.split(",");
-            CardCollection list = CardLists.getValidCards(cc.getGame().getCardsInGame(), rest, cc, c, null);
+            CardCollection list = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c, null);
             for (final Card card : list) {
                 Integer pow = card.getNetPower();
                 if (!powers.contains(pow)) {
