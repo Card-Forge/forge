@@ -1,0 +1,11 @@
+Name:Ruxa, Patient Professor
+ManaCost:2 G G
+Types:Legendary Creature Bear Druid
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, return target creature card with no abilities from your graveyard to your hand.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, return target creature card with no abilities from your graveyard to your hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.NoAbilities+YouOwn
+S:Mode$ Continuous | Affected$ Creature.NoAbilities+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control with no abilities get +1/+1.
+S:Mode$ Continuous | Affected$ Creature.NoAbilities+YouCtrl | AddHiddenKeyword$ You may have CARDNAME assign its combat damage as though it weren't blocked. | Description$ You may have creatures you control with no abilities assign their combat damage as though they weren't blocked.
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Ruxa, Patient Professor enters the battlefield or attacks, return target creature card with no abilities from your graveyard to your hand.\nCreatures you control with no abilities get +1/+1.\nYou may have creatures you control with no abilities assign their combat damage as though they weren't blocked.
