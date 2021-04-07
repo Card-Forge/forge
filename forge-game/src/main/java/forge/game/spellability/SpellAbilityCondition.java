@@ -30,17 +30,17 @@ import com.google.common.collect.Iterables;
 import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.GameObject;
+import forge.game.GameObjectPredicates;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import forge.util.collect.FCollection;
 
 /**
  * <p>
@@ -354,20 +354,18 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
         }
 
-        if (this.getIsPresent() != null) {
-            CardCollectionView list;
-            if (this.getPresentDefined() != null) {
-                list = AbilityUtils.getDefinedCards(host, this.getPresentDefined(), sa);
+        if (getIsPresent() != null) {
+            FCollection<GameObject> list;
+            if (getPresentDefined() != null) {
+                list = AbilityUtils.getDefinedObjects(host, getPresentDefined(), sa);
             } else {
-                list = game.getCardsIn(ZoneType.Battlefield);
+                list = new FCollection<GameObject>(game.getCardsIn(getPresentZone()));
             }
 
-            list = CardLists.getValidCards(list, this.getIsPresent().split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+            final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent().split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)));
 
             final String rightString = this.getPresentCompare().substring(2);
             int right = AbilityUtils.calculateAmount(host, rightString, sa);
-
-            final int left = list.size();
 
             if (!Expressions.compare(left, this.getPresentCompare(), right)) {
                 return false;
