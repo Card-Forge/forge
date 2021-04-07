@@ -2731,6 +2731,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return false;
     }
 
+    public boolean hasRemoveAll() {
+        for (final CardTraitChanges ck : changedCardTraits.values()) {
+            if (ck.isRemoveAll()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void updateSpellAbilities(List<SpellAbility> list, CardState state, Boolean mana) {
         if (hasRemoveIntrinsic()) {
             list.clear();
