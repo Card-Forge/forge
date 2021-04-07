@@ -9,4 +9,4 @@ SVar:DBCounters:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | Count
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$CardCounters.GROWTH
 DeckHas:Ability$Token & Ability$Counters
-Oracle:CARDNAME enters the battlefield with a growth counter on it.\nAt the beginning of your end step, double the number of growth counters on CARDNAME. Then create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is the number of growth counters on CARDNAME.
+Oracle:Paradox Zone enters the battlefield with a growth counter on it.\nAt the beginning of your end step, double the number of growth counters on Paradox Zone. Then create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is the number of growth counters on Paradox Zone.
