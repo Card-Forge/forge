@@ -1,0 +1,11 @@
+Name:Author of Shadows
+ManaCost:4 B
+Types:Creature Shade Warlock
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZoneAll | TriggerDescription$ When CARDNAME enters the battlefield, exile all cards from all opponents' graveyards. Choose a nonland card exiled this way. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell.
+SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.YouDontOwn | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBChooseCard
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ You | Choices$ Card.nonLand+IsRemembered | ChoiceTitle$ Choose a nonland card exiled this way | ChoiceZone$ Exile | Mandatory$ True | AILogic$ BestCard | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ ChosenCard | StaticAbilities$ STPlay | Duration$ Permanent | ExileOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+Oracle:When Author of Shadows enters the battlefield, exile all cards from all opponents' graveyards. Choose a nonland card exiled this way. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell.
