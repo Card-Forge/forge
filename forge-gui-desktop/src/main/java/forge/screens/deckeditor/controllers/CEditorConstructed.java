@@ -23,13 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
 
-import com.google.common.collect.Iterables;
-import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
