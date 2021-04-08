@@ -572,7 +572,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public int getActivationsThisGame() {
         return getHostCard().getAbilityActivatedThisGame(this);
     }
-
+    public int getResolvedThisTurn() {
+        return getHostCard().getAbilityResolvedThisTurn(this);
+    }
 
     public SpellAbilityCondition getConditions() {
         return conditions;

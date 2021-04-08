@@ -255,7 +255,7 @@ public class StaticEffect {
             }
 
             // remove abilities
-            if (hasParam("AddAbility") || hasParam("GainsAbilitiesOf")
+            if (hasParam("AddAbility") || hasParam("GainsAbilitiesOf") || hasParam("GainsAbilitiesDefined")
                     || hasParam("AddTrigger") || hasParam("AddStaticAbility") || hasParam("AddReplacementEffects")
                     || hasParam("RemoveAllAbilities") || hasParam("RemoveLandTypes")) {
                 affectedCard.removeChangedCardTraits(getTimestamp());

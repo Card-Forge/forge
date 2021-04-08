@@ -755,18 +755,23 @@ public final class StaticAbilityContinuous {
                     }
                 }
 
-                if (params.containsKey("GainsAbilitiesOf")) {
-                    final String[] valids = params.get("GainsAbilitiesOf").split(",");
-                    List<ZoneType> validZones;
+                if (params.containsKey("GainsAbilitiesOf") || params.containsKey("GainsAbilitiesOfDefined")) {
+                    CardCollection cardsIGainedAbilitiesFrom = new CardCollection();
                     final boolean loyaltyAB = params.containsKey("GainsLoyaltyAbilities");
-                    if (params.containsKey("GainsAbilitiesOfZones")) {
-                        validZones = ZoneType.listValueOf(params.get("GainsAbilitiesOfZones"));
-                    } else {
-                        validZones = ImmutableList.of(ZoneType.Battlefield);
-                    }
 
-                    CardCollectionView cardsIGainedAbilitiesFrom = game.getCardsIn(validZones);
-                    cardsIGainedAbilitiesFrom = CardLists.getValidCards(cardsIGainedAbilitiesFrom, valids, hostCard.getController(), hostCard, null);
+                    if (params.containsKey("GainsAbilitiesOf")) {
+                        final String[] valids = params.get("GainsAbilitiesOf").split(",");
+                        List<ZoneType> validZones;
+                        if (params.containsKey("GainsAbilitiesOfZones")) {
+                            validZones = ZoneType.listValueOf(params.get("GainsAbilitiesOfZones"));
+                        } else {
+                            validZones = ImmutableList.of(ZoneType.Battlefield);
+                        }
+                        cardsIGainedAbilitiesFrom.addAll(CardLists.getValidCards(game.getCardsIn(validZones), valids, hostCard.getController(), hostCard, stAb));
+                    }
+                    if (params.containsKey("GainsAbilitiesOfDefined")) {
+                        cardsIGainedAbilitiesFrom.addAll(AbilityUtils.getDefinedCards(hostCard, params.get("GainsAbilitiesOfDefined"), stAb));
+                    }
 
                     for (Card c : cardsIGainedAbilitiesFrom) {
                         for (SpellAbility sa : c.getSpellAbilities()) {

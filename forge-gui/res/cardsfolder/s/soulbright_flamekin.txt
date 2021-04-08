@@ -2,13 +2,8 @@ Name:Soulbright Flamekin
 ManaCost:1 R
 Types:Creature Elemental Shaman
 PT:2/1
-A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SubAbility$ StoreNum | SpellDescription$ Target creature gains trample until end of turn. If this is the third time this ability has resolved this turn, you may add {R}{R}{R}{R}{R}{R}{R}{R}.
-SVar:StoreNum:DB$ StoreSVar | SVar$ SoulbrightNum | Type$ CountSVar | Expression$ SoulbrightNum/Plus.1 | SubAbility$ SoulbrightMana
+A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SubAbility$ SoulbrightMana | SpellDescription$ Target creature gains trample until end of turn. If this is the third time this ability has resolved this turn, you may add {R}{R}{R}{R}{R}{R}{R}{R}.
 SVar:SoulbrightMana:DB$ Mana | Produced$ R R R R R R R R | ConditionCheckSVar$ SoulbrightNum | ConditionSVarCompare$ EQ3 | Optional$ True
-SVar:SoulbrightNum:Number$0
-T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReset | Static$ True
-SVar:TrigReset:DB$ StoreSVar | SVar$ SoulbrightNum | Type$ Number | Expression$ 0
+SVar:SoulbrightNum:Count$ResolvedThisTurn
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soulbright_flamekin.jpg
 Oracle:{2}: Target creature gains trample until end of turn. If this is the third time this ability has resolved this turn, you may add {R}{R}{R}{R}{R}{R}{R}{R}.
