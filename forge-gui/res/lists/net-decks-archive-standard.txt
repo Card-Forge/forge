@@ -2364,7 +2364,34 @@
 2021-02-14 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-02-14-standard-challenge.zip
 2021-02-15 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-02-15-standard-challenge.zip
 2021-02-15 Standard League (16 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-02-15-standard-league.zip
+2021-02-17 Standard Preliminary (3 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-02-17-standard-preliminary.zip
+2021-02-18 Standard League (13 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-02-18-standard-league.zip
+2021-02-21 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-02-21-standard-challenge.zip
+2021-02-22 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-02-22-standard-challenge.zip
+2021-02-22 Standard League (8 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-02-22-standard-league.zip
+2021-02-25 Standard League (8 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-02-25-standard-league.zip
+2021-02-28 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-02-28-standard-challenge.zip
+2021-03-01 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-01-standard-challenge.zip
+2021-03-01 Standard League (8 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-01-standard-league.zip
+2021-03-04 Standard League (13 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-04-standard-league.zip
 2021-03-05 Standard Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-05-standard-preliminary.zip
 2021-03-07 Standard Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-07-standard-showcase-challenge.zip
 2021-03-08 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-08-standard-challenge.zip
 2021-03-08 Standard League (14 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-08-standard-league.zip
+2021-03-24 Standard Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-24-standard-preliminary.zip
+2021-03-25 Standard League (5 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-25-standard-league.zip
+2021-03-26 Standard Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-26-standard-preliminary.zip
+2021-03-28 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-28-standard-challenge.zip
+2021-03-29 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-29-standard-challenge.zip
+2021-03-29 Standard Champ Qual (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-29-standard-champ-qual.zip
+2021-03-29 Standard League (10 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-29-standard-league.zip
+2021-03-31 Standard Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-03-31-standard-preliminary.zip
+2021-04-01 Standard League (6 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-04-01-standard-league.zip
+2021-04-01 Standard Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-04-01-standard-preliminary.zip
+2021-04-02 Standard Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-04-02-standard-preliminary.zip
+2021-04-04 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-04-04-standard-challenge.zip
+2021-04-05 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-04-05-standard-challenge.zip
+2021-04-05 Standard League (9 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-04-05-standard-league.zip
+2021-04-08 Standard League (8 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-04-08-standard-league.zip
+2021-04-08 Standard Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-04-08-standard-preliminary.zip
+2021-04-08 Standard Super Qualifier (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-04-08-standard-super-qualifier.zip
