@@ -489,15 +489,6 @@ public abstract class DeckGeneratorBase {
         return dLands;
     }
 
-    /**
-     * Get all dual lands that do not match this color combo.
-     *
-     * @return dual land names
-     */
-    protected List<String> getInverseDualLandList() {
-        return inverseDLands;
-    }
-
     private void addCardNameToList(String cardName, List<String> cardNameList) {
         if (pool.contains(cardName)) { //avoid adding card if it's not in pool
             cardNameList.add(cardName);

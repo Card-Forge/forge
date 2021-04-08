@@ -17,7 +17,7 @@
  */
 package forge.card;
 
-import java.util.StringTokenizer;
+import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -27,6 +27,9 @@ import forge.card.mana.IParserManaCost;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.util.TextUtil;
+
+import static forge.card.MagicColor.Constant.*;
+import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 
 /**
  * A collection of methods containing full
@@ -42,6 +45,7 @@ public final class CardRules implements ICardCharacteristics {
     private ICardFace otherPart;
     private CardAiHints aiHints;
     private ColorSet colorIdentity;
+    private ColorSet deckbuildingColors;
     private String meldWith;
     private String partnerWith;
 
@@ -580,5 +584,26 @@ public final class CardRules implements ICardCharacteristics {
             }
         }
         return null;
+    }
+
+    public ColorSet getDeckbuildingColors() {
+        if (deckbuildingColors == null) {
+            byte colors = 0;
+            if (mainPart.getType().isLand()) {
+                colors = getColorIdentity().getColor();
+                for (int i = 0; i < 5; i++) {
+                    if (containsIgnoreCase(mainPart.getOracleText(), BASIC_LANDS.get(i))) {
+                        colors |= 1 << i;
+                    }
+                }
+            } else {
+                colors = getColor().getColor();
+                if (getOtherPart() != null) {
+                    colors |= getOtherPart().getManaCost().getColorProfile();
+                }
+            }
+            deckbuildingColors = ColorSet.fromMask(colors);
+        }
+        return deckbuildingColors;
     }
 }

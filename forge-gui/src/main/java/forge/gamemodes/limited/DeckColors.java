@@ -39,7 +39,7 @@ public class DeckColors {
 
     public void addColorsOf(final IPaperCard pickedCard) {
         final ColorSet colorsCanAdd = chosen.inverse();
-        final ColorSet toAdd = colorsCanAdd.getSharedColors(pickedCard.getRules().getColor());
+        final ColorSet toAdd = colorsCanAdd.getSharedColors(pickedCard.getRules().getDeckbuildingColors());
 
         int cntColorsAssigned = getChosenColors().countColors();
         final boolean haveSpace = cntColorsAssigned < MAX_COLORS;

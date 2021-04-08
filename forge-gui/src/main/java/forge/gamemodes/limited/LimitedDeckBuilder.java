@@ -460,18 +460,14 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      * Add non-basic lands to the deck.
      */
     private void addNonBasicLands() {
-        final List<String> inverseDuals = getInverseDualLandList();
         final Iterable<PaperCard> lands = Iterables.filter(aiPlayables,
                 Predicates.compose(CardRulesPredicates.Presets.IS_NONBASIC_LAND, PaperCard.FN_GET_RULES));
         List<PaperCard> landsToAdd = new ArrayList<>();
         for (final PaperCard card : lands) {
             if (landsNeeded > 0) {
-                // Throw out any dual-lands for the wrong colors. Assume
-                // everything else is either
-                // (a) dual-land of the correct two colors, or
-                // (b) a land that generates colorless mana and has some other
-                // beneficial effect.
-                if (!inverseDuals.contains(card.getName())) {
+                // Use only lands that are within our colors
+                // TODO: Use off-color fetchlands that get an on-color dual land
+                if (card.getRules().getDeckbuildingColors().hasNoColorsExcept(colors)) {
                     landsToAdd.add(card);
                     landsNeeded--;
                     if (logToConsole) {
