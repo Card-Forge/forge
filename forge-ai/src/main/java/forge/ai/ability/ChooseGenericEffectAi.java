@@ -158,7 +158,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
                 }
             }
             return others;
-        } else if ("Counters").equals(logic)) {
+        } else if ("Counters".equals(logic)) {
             SpellAbility p1p1 = null, loyalty = null;
             for (final SpellAbility sp : spells) {
                 if (sp.getDescription().equals("P1P1")) {
