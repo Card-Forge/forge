@@ -1,0 +1,9 @@
+Name:Spawning Kraken
+ManaCost:5 U
+Types:Creature Kraken
+PT:6/6
+T:Mode$ DamageDone | ValidSource$ Kraken.YouCtrl,Leviathan.YouCtrl,Octopus.YouCtrl,Serpent.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Kraken, Leviathan, Octopus, or Serpent you control deals combat damage to a player, create a 9/9 blue Kraken creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_9_9_kraken | TokenOwner$ You
+DeckHas:Ability$Token
+DeckHints:Type$Kraken|Leviathan|Octopus|Serpent
+Oracle:Whenever a Kraken, Leviathan, Octopus, or Serpent you control deals combat damage to a player, create a 9/9 blue Kraken creature token.

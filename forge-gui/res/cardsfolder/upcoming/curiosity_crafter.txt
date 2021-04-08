@@ -1,0 +1,10 @@
+Name:Curiosity Crafter
+ManaCost:3 U
+Types:Creature Bird Wizard
+PT:3/3
+K:Flying
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+T:Mode$ DamageDone | ValidSource$ Creature.token+YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature token you control deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+DeckHints:Ability$Token
+Oracle:Flying\nYou have no maximum hand size.\nWhenever a creature token you control deals combat damage to a player, draw a card.
