@@ -392,6 +392,14 @@ public class CardFactoryUtil {
 
         int n = 0;
 
+        if (l[0].startsWith("TotalCommanderCastFromCommandZone")) {
+            int totCast = 0;
+            for (Player p : players) {
+                totCast += p.getTotalCommanderCast();
+            }
+            return doXMath(totCast, m, source);
+        }
+
         // methods for getting the highest/lowest playerXCount from a range of players
         if (l[0].startsWith("Highest")) {
             for (final Player player : players) {
@@ -1286,9 +1294,13 @@ public class CardFactoryUtil {
         }
         // Count$SumCMC_valid
         if (sq[0].contains("SumCMC")) {
+            ZoneType zone = ZoneType.Battlefield;
+            //graveyard support for Inferno Project (may need other zones or multi-zone in future)
+            if (sq[0].contains("Graveyard"))
+                zone = ZoneType.Graveyard;
             final String[] restrictions = l[0].split("_");
             final String[] rest = restrictions[1].split(",");
-            CardCollectionView cardsonbattlefield = game.getCardsIn(ZoneType.Battlefield);
+            CardCollectionView cardsonbattlefield = game.getCardsIn(zone);
             CardCollection filteredCards = CardLists.getValidCards(cardsonbattlefield, rest, cc, c, null);
             return Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetCmc);
         }

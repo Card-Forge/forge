@@ -1,0 +1,12 @@
+Name:Inferno Project
+ManaCost:6 R
+Types:Creature Elemental
+PT:0/0
+K:Trample
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with X +1/+1 counters on it, where X is the total mana value of instant and sorcery cards in your graveyard.
+SVar:X:Count$SumCMCGraveyard_Instant.YouOwn,Sorcery.YouOwn
+DeckHas:Ability$Counters
+DeckNeeds:Type$Instant|Sorcery
+AI:RemoveDeck:Random
+SVar:NeedsToPlayVar:X GE7
+Oracle:Trample\nInferno Project enters the battlefield with X +1/+1 counters on it, where X is the total mana value of instant and sorcery cards in your graveyard.
