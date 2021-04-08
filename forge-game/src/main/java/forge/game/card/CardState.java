@@ -198,7 +198,6 @@ public class CardState extends GameObject implements IHasSVars {
     public final String getBasePowerString() {
         return (null == basePowerString) ? "" + getBasePower() : basePowerString;
     }
-
     public final String getBaseToughnessString() {
         return (null == baseToughnessString) ? "" + getBaseToughness() : baseToughnessString;
     }
@@ -207,7 +206,6 @@ public class CardState extends GameObject implements IHasSVars {
     public final void setBasePowerString(final String s) {
         basePowerString = s;
     }
-
     public final void setBaseToughnessString(final String s) {
         baseToughnessString = s;
     }
@@ -313,7 +311,9 @@ public class CardState extends GameObject implements IHasSVars {
         return Iterables.filter(getSpellAbilities(), SpellAbilityPredicates.isIntrinsic());
     }
 
-
+    public final SpellAbility getFirstAbility() {
+        return Iterables.getFirst(getIntrinsicSpellAbilities(), null);
+    }
     public final SpellAbility getFirstSpellAbility() {
         return Iterables.getFirst(getNonManaAbilities(), null);
     }
@@ -321,7 +321,6 @@ public class CardState extends GameObject implements IHasSVars {
     public final boolean hasSpellAbility(final SpellAbility sa) {
         return getSpellAbilities().contains(sa);
     }
-
     public final boolean hasSpellAbility(final int id) {
         for (SpellAbility sa : getSpellAbilities()) {
             if (id == sa.getId()) {
@@ -377,10 +376,6 @@ public class CardState extends GameObject implements IHasSVars {
                 return;
             }
         }
-    }
-
-    public final SpellAbility getFirstAbility() {
-        return Iterables.getFirst(getIntrinsicSpellAbilities(), null);
     }
 
     public final FCollectionView<Trigger> getTriggers() {
@@ -467,7 +462,6 @@ public class CardState extends GameObject implements IHasSVars {
     public final boolean hasReplacementEffect(final ReplacementEffect re) {
         return getReplacementEffects().contains(re);
     }
-
     public final boolean hasReplacementEffect(final int id) {
         for (final ReplacementEffect r : getReplacementEffects()) {
             if (id == r.getId()) {
@@ -492,9 +486,8 @@ public class CardState extends GameObject implements IHasSVars {
     public final String getSVar(final String var) {
         if (sVars.containsKey(var)) {
             return sVars.get(var);
-        } else {
-            return "";
         }
+        return "";
     }
     public final boolean hasSVar(final String var) {
         if (var == null) {

@@ -2731,13 +2731,25 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return false;
     }
 
-    public boolean hasRemoveAll() {
-        for (final CardTraitChanges ck : changedCardTraits.values()) {
-            if (ck.isRemoveAll()) {
-                return true;
+    public boolean hasNoAbilities() {
+        if (!getUnhiddenKeywords().isEmpty()) {
+            return false;
+        }
+        if (!getStaticAbilities().isEmpty()) {
+            return false;
+        }
+        if (!getReplacementEffects().isEmpty()) {
+            return false;
+        }
+        if (!getTriggers().isEmpty()) {
+            return false;
+        }
+        for (SpellAbility sa : getSpellAbilities()) {
+            if (!(sa instanceof SpellPermanent)) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     public void updateSpellAbilities(List<SpellAbility> list, CardState state, Boolean mana) {

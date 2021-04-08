@@ -1749,8 +1749,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("NoAbilities")) {
-            // basic land types have no ability text, so need extra check
-            if (!((card.getAbilityText().trim().equals("") || card.isFaceDown()) && (!card.isLand() || card.hasRemoveAll()) && card.getUnhiddenKeywords().isEmpty())) {
+            if (!card.hasNoAbilities()) {
                 return false;
             }
         } else if (property.equals("HasCounters")) {
