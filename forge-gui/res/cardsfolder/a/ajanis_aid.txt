@@ -8,5 +8,4 @@ SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | Remember
 SVar:RPreventNextFromSource:Event$ DamageDone | IsCombat$ True | ValidSource$ Card.IsRemembered | Prevent$ True | PreventionEffect$ True | Description$ Prevent all combat damage a creature of your choice would deal this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Name$Ajani, Valiant Protector
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ajanis_aid.jpg
 Oracle:When Ajani's Aid enters the battlefield, you may search your library and/or graveyard for a card named Ajani, Valiant Protector, reveal it, and put it into your hand. If you search your library this way, shuffle it.\nSacrifice Ajani's Aid: Prevent all combat damage a creature of your choice would deal this turn.
