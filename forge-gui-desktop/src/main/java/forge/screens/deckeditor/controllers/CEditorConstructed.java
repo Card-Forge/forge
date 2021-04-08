@@ -63,8 +63,6 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
     private final List<DeckSection> allSections = new ArrayList<>();
     private ItemPool<PaperCard> normalPool, avatarPool, planePool, schemePool, conspiracyPool, commanderPool;
 
-    Predicate<CardRules> commanderFilter;
-
     CardManager catalogManager;
     CardManager deckManager;
 
@@ -94,51 +92,41 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Planes);
                 allSections.add(DeckSection.Conspiracy);
 
-                normalPool = ItemPool.createFrom(Iterables.concat(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(), FModel.getMagicDb().getCustomCards().getAllCardsNoAlt()), PaperCard.class);
-                avatarPool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, PaperCard.FN_GET_RULES)), PaperCard.class);
-                planePool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)), PaperCard.class);
-                schemePool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)), PaperCard.class);
-                conspiracyPool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_CONSPIRACY, PaperCard.FN_GET_RULES)), PaperCard.class);
+                normalPool = FModel.getAllCardsNoAlt();
+                avatarPool = FModel.getAvatarPool();
+                planePool = FModel.getPlanechaseCards();
+                schemePool = FModel.getArchenemyCards();
+                conspiracyPool = FModel.getConspiracyPool();
 
                 break;
             case Commander:
                 allSections.add(DeckSection.Commander);
 
-                commanderFilter = CardRulesPredicates.Presets.CAN_BE_COMMANDER;
-                commanderPool = ItemPool.createFrom(Iterables.concat(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)), FModel.getMagicDb().getCustomCards().getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))), PaperCard.class);
-                normalPool = ItemPool.createFrom(Iterables.concat(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(), FModel.getMagicDb().getCustomCards().getAllCardsNoAlt()), PaperCard.class);
+                commanderPool = FModel.getCommanderPool();
+                normalPool = FModel.getAllCardsNoAlt();
 
                 wantUnique = true;
                 break;
             case TinyLeaders:
                 allSections.add(DeckSection.Commander);
 
-                commanderFilter = CardRulesPredicates.Presets.CAN_BE_TINY_LEADERS_COMMANDER;
-                commanderPool = ItemPool.createFrom(Iterables.concat(
-                        FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)),
-                        FModel.getMagicDb().getCustomCards().getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))), PaperCard.class);
-                normalPool = ItemPool.createFrom(Iterables.concat(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(), FModel.getMagicDb().getCustomCards().getAllCardsNoAlt()), PaperCard.class);
+                commanderPool = FModel.getTinyLeadersCommander();
+                normalPool = FModel.getAllCardsNoAlt();
 
                 wantUnique = true;
                 break;
             case Oathbreaker:
                 allSections.add(DeckSection.Commander);
 
-                commanderFilter = Predicates.or(CardRulesPredicates.Presets.CAN_BE_OATHBREAKER, CardRulesPredicates.Presets.CAN_BE_SIGNATURE_SPELL);
-                commanderPool = ItemPool.createFrom(Iterables.concat(
-                        FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)),
-                        FModel.getMagicDb().getCustomCards().getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))), PaperCard.class);
-                normalPool = ItemPool.createFrom(Iterables.concat(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(), FModel.getMagicDb().getCustomCards().getAllCardsNoAlt()), PaperCard.class);
+                commanderPool = FModel.getOathbreakerCommander();
+                normalPool = FModel.getAllCardsNoAlt();
 
                 wantUnique = true;
                 break;
             case Brawl:
                 allSections.add(DeckSection.Commander);
 
-                commanderFilter = CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER;
-                commanderPool = ItemPool.createFrom(Iterables.concat(FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.and(
-                        FModel.getFormats().get("Brawl").getFilterPrinted(), Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))), FModel.getMagicDb().getCustomCards().getAllCardsNoAlt(Predicates.and(
-                        FModel.getFormats().get("Brawl").getFilterPrinted(), Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)))), PaperCard.class);
+                commanderPool = FModel.getBrawlCommander();
                 normalPool = ItemPool.createFrom(FModel.getFormats().get("Brawl").getAllCards(), PaperCard.class);
 
                 wantUnique = true;
