@@ -340,11 +340,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private int planeswalkerAbilityActivated = 0;
 
-    private final Map<SpellAbility, Integer> numberTurnActivations = Maps.newHashMap();
-    private final Map<SpellAbility, Integer> numberGameActivations = Maps.newHashMap();
-
-    private final Table<SpellAbility, StaticAbility, Integer> numberTurnActivationsStatic = HashBasedTable.create();
-    private final Table<SpellAbility, StaticAbility, Integer> numberGameActivationsStatic = HashBasedTable.create();
+    private final ActivationTable numberTurnActivations = new ActivationTable();
+    private final ActivationTable numberGameActivations = new ActivationTable();
+    private final ActivationTable numberAbilityResolved = new ActivationTable();
 
     private final Map<SpellAbility, List<String>> chosenModesTurn = Maps.newHashMap();
     private final Map<SpellAbility, List<String>> chosenModesGame = Maps.newHashMap();
@@ -6232,6 +6230,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         resetMayPlayTurn();
         resetExtertedThisTurn();
         resetChosenModeTurn();
+        resetAbilityResolvedThisTurn();
     }
 
     public boolean hasETBTrigger(final boolean drawbackOnly) {
@@ -6881,20 +6880,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void addAbilityActivated(SpellAbility ability) {
-        SpellAbility original = ability.getOriginalAbility();
-        if (original == null) {
-            original = ability;
-        }
-
-        int turnActivated = getAbilityActivatedThisTurn(ability);
-        int gameActivated = getAbilityActivatedThisGame(ability);
-        if (ability.getGrantorStatic() != null) {
-            numberTurnActivationsStatic.put(original, ability.getGrantorStatic(), turnActivated + 1);
-            numberGameActivationsStatic.put(original, ability.getGrantorStatic(), gameActivated + 1);
-        } else {
-            numberTurnActivations.put(original, turnActivated + 1);
-            numberGameActivations.put(original, gameActivated + 1);
-        }
+        numberTurnActivations.add(ability);
+        numberGameActivations.add(ability);
 
         if (ability.isPwAbility()) {
             addPlaneswalkerAbilityActivated();
@@ -6902,33 +6889,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public int getAbilityActivatedThisTurn(SpellAbility ability) {
-        SpellAbility original = ability.getOriginalAbility();
-        if (original == null) {
-            original = ability;
-        }
-
-        if (ability.getGrantorStatic() != null) {
-            if (numberTurnActivationsStatic.contains(original, ability.getGrantorStatic())) {
-                return numberTurnActivationsStatic.get(original, ability.getGrantorStatic());
-            }
-            return 0;
-        }
-        return numberTurnActivations.containsKey(original) ? numberTurnActivations.get(original) : 0;
+        return numberTurnActivations.get(ability);
     }
 
     public int getAbilityActivatedThisGame(SpellAbility ability) {
-        SpellAbility original = ability.getOriginalAbility();
-        if (original == null) {
-            original = ability;
-        }
+        return numberGameActivations.get(ability);
+    }
 
-        if (ability.getGrantorStatic() != null) {
-            if (numberGameActivationsStatic.contains(original, ability.getGrantorStatic())) {
-                return numberGameActivationsStatic.get(original, ability.getGrantorStatic());
-            }
-            return 0;
-        }
-        return numberGameActivations.containsKey(original) ? numberGameActivations.get(original) : 0;
+    public void addAbilityResolved(SpellAbility ability) {
+        numberAbilityResolved.add(ability);
+    }
+    public int getAbilityResolvedThisTurn(SpellAbility ability) {
+        return numberAbilityResolved.get(ability);
+    }
+
+    public void resetAbilityResolvedThisTurn() {
+        numberAbilityResolved.clear();
     }
 
     public List<String> getChosenModesTurn(SpellAbility ability) {
@@ -7030,7 +7006,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public void resetActivationsPerTurn() {
         planeswalkerAbilityActivated = 0;
         numberTurnActivations.clear();
-        numberTurnActivationsStatic.clear();
     }
 
     public void addCanBlockAdditional(int n, long timestamp) {

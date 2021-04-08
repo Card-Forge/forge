@@ -1395,6 +1395,14 @@ public class AbilityUtils {
             }
         }
 
+        // count times ability resolves this turn
+        if (!sa.isWrapper()) {
+            final Card host = sa.getHostCard();
+            if (host != null) {
+                host.addAbilityResolved(sa);
+            }
+        }
+
         final ApiType api = sa.getApi();
         if (api == null) {
             sa.resolve();
@@ -1825,6 +1833,10 @@ public class AbilityUtils {
                         }
                     }
                     return CardFactoryUtil.doXMath(v, expr, c);
+                }
+
+                if (sq[0].equals("ResolvedThisTurn")) {
+                    return CardFactoryUtil.doXMath(sa.getResolvedThisTurn(), expr, c);
                 }
             }
 
