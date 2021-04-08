@@ -6,12 +6,184 @@ Type=Other
 
 [cards]
 1 M Breena, the Demagogue
+3 M Veyran, Voice of Duality
 4 M Zaffai, Thunder Conductor
 6 M Willowdusk, Essence Seer
+7 M Alibou, Ancient Witness
 8 M Osgir, the Reconstructor
 9 M Adrix and Nev, Twincasters
+10 M Esix, Fractal Boon
+11 R Angel of the Ruins
+12 R Archaeomancer's Map
+13 R Bronze Guardian
+15 R Digsite Engineer
+16 R Excavation Technique
+18 R Losheel, Clockwork Scholar
+19 R Monologue Tax
+23 R Commander's Insight
+24 R Curiosity Crafter
+25 R Dazzling Sphinx
+26 R Deekah, Fractal Theorist
+27 R Inspiring Refrain
+28 R Muse Vortex
+29 R Octavia, Living Thesis
+30 R Perplexing Test
+31 R Replication Technique
+32 R Sly Instigator
+33 R Spawning Kraken
+34 R Theoretical Duplication
+47 R Audacious Reshapers
+48 R Battlemage's Bracers
+49 R Creative Technique
+50 R Cursed Mirror
+51 R Fiery Encore
+52 R Inferno Project
+53 R Laelia, the Blade Reforged
+54 R Radiant Performer
+55 R Rionya, Fire Dancer
+56 R Rousing Refrain
+57 R Ruin Grinder
+58 R Surge to Victory
+61 R Fractal Harness
+62 R Guardian Augmenter
+64 R Paradox Zone
+66 R Ruxa, Patient Professor
+67 R Sequence Engine
+72 R Oversimplify
+73 R Reinterpret
+75 R Wake the Past
+76 R Elementalist's Palette
+77 R Geometric Nexus
+79 R Triplicate Titan
+80 C Study Hall
+86 R Cleansing Nova
+87 U Darksteel Mutation
+88 U Dispatch
+89 C Dispeller's Capsule
+100 U Return to Dust
+101 R Rout
+102 C Sanctum Gargoyle
+106 M Sun Titan
+113 R Aether Gale
+114 R Aetherspouts
+115 C Brainstorm
+119 R Dig Through Time
+120 R Diluvian Primordial
+121 U Living Lore
+122 M Metallurgic Summonings
+123 R Mind's Desire
+124 M Naru Meha, Master Wizard
+125 C Ponder
+129 U Serum Visions
+130 R Swarm Intelligence
+131 R Talrand, Sky Summoner
+132 C Traumatic Visions
+133 C Treasure Cruise
+158 M Apex of Power
+159 R Blasphemous Act
+160 R Brass's Bounty
+161 R Chain Reaction
+162 R Charmbreaker Devils
+163 M Combustible Gearhulk
+164 M Daretti, Scrap Savant
+165 R Dualcaster Mage
+166 R Erratic Cyclops
+167 R Etali, Primal Storm
+168 C Faithless Looting
+169 M Feldon of the Third Path
+170 C Fiery Fall
+171 R Hellkite Igniter
+172 M Hellkite Tyrant
+173 R Hoard-Smelter Dragon
+174 U Humble Defector
+175 M Jaya Ballard
+176 C Mana Geyser
+177 R Pia Nalaar
+178 U Quicksmith Genius
+179 C Seething Song
+180 R Sunbird's Invocation
+181 U Thopter Engineer
+182 R Volcanic Vision
+183 R Wildfire Devils
+210 U Boros Charm
+211 R Call the Skybreaker
+213 U Crackling Drake
+216 M Epic Experiment
+220 R Jor Kadeen, the Prevailer
+234 C Arcane Signet
+236 C Boros Locket
+237 R Bosh, Iron Golem
+238 U Burnished Hart
+239 C Commander's Sphere
+242 R Duplicant
+244 U Hedron Archive
+245 C Ichor Wellspring
+247 C Izzet Signet
+248 R Key to the City
+250 U Meteor Golem
+251 C Mind Stone
+252 C Mycosynth Wellspring
+253 R Myr Battlesphere
+257 C Pilgrim's Eye
+259 M Pyromancer's Goggles
+260 R Scrap Trawler
+261 R Sculpting Steel
+263 U Sol Ring
+264 R Solemn Simulacrum
+266 R Steel Hellkite
+267 R Steel Overseer
+269 U Talisman of Creativity
+271 R Thousand-Year Elixir
+272 U Unstable Obelisk
+276 C Ancient Den
+278 R Battlefield Forge
+279 U Blighted Cataract
+282 U Boros Garrison
+285 U Darksteel Citadel
+286 C Desert of the Fervent
+287 C Desert of the Mindful
+292 C Great Furnace
+294 U Izzet Boilerworks
+300 U Mage-Ring Network
+301 U Memorial to Genius
+309 U Phyrexia's Core
+311 U Reliquary Tower
+314 R Scavenger Grounds
+316 R Shivan Reef
+318 R Slayers' Stronghold
+319 U Sunhome, Fortress of the Legion
+322 R Temple of Epiphany
+327 R Temple of Triumph
 328 M Breena, the Demagogue
+330 M Veyran, Voice of Duality
 331 M Zaffai, Thunder Conductor
 333 M Willowdusk, Essence Seer
+334 M Alibou, Ancient Witness
 335 M Osgir, the Reconstructor
 336 M Adrix and Nev, Twincasters
+338 R Angel of the Ruins
+339 R Archaeomancer's Map
+340 R Bronze Guardian
+342 R Digsite Engineer
+343 R Excavation Technique
+345 R Losheel, Clockwork Scholar
+346 R Monologue Tax
+352 R Dazzling Sphinx
+354 R Inspiring Refrain
+355 R Muse Vortex
+356 R Octavia, Living Thesis
+359 R Sly Instigator
+374 R Audacious Reshapers
+375 R Battlemage's Bracers
+376 R Creative Technique
+377 R Cursed Mirror
+378 R Fiery Encore
+379 R Inferno Project
+380 R Laelia, the Blade Reforged
+381 R Radiant Performer
+382 R Rionya, Fire Dancer
+383 R Rousing Refrain
+384 R Ruin Grinder
+385 R Surge to Victory
+400 R Reinterpret
+402 R Wake the Past
