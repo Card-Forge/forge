@@ -294,6 +294,8 @@ public class PumpEffect extends SpellAbilityEffect {
                 replaced = "CardUID_" + host.getId();
             } else if (defined.equals("ActivatorName")) {
                 replaced = sa.getActivatingPlayer().getName();
+            } else if (defined.equals("ChosenPlayer")) {
+                replaced = host.getChosenPlayer().getName();
             } else if (defined.endsWith("Player")) {
                 PlayerCollection players = AbilityUtils.getDefinedPlayers(host, defined, sa);
                 if (players.isEmpty()) return;
