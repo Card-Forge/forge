@@ -158,6 +158,20 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
                 }
             }
             return others;
+        } else if ("Counters".equals(logic)) {
+            SpellAbility p1p1 = null, loyalty = null;
+            for (final SpellAbility sp : spells) {
+                if (sp.getDescription().equals("P1P1")) {
+                    p1p1 = sp;
+                } else {
+                    loyalty = sp;
+                }
+            }
+            if (sa.getTargetCard().getType().isPlaneswalker()) {
+                return loyalty;
+            } else {
+                return p1p1;
+            }
         } else if ("Fatespinner".equals(logic)) {
             SpellAbility skipDraw = null, /*skipMain = null,*/ skipCombat = null;
             for (final SpellAbility sp : spells) {

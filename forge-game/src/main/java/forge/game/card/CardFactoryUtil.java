@@ -3393,7 +3393,7 @@ public class CardFactoryUtil {
             String costDesc = cost.toSimpleString();
 
             String strTrig = "Mode$ BecomesTarget | ValidSource$ Card.OppCtrl | ValidTarget$ Card.Self "
-                    + " | Secondary$ True | TriggerDescription$ Ward " + costDesc + " ("
+                    + " | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Ward " + costDesc + " ("
                     + inst.getReminderText() + ")";
             String effect = "DB$ Counter | Defined$ TriggeredSourceSA | UnlessCost$ " + k[1]
                     + " | UnlessPayer$ TriggeredSourceSAController";
