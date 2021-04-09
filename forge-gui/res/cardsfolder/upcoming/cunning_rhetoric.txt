@@ -1,0 +1,9 @@
+Name:Cunning Rhetoric
+ManaCost:2 B
+Types:Enchantment
+T:Mode$ AttackersDeclared | AttackingPlayer$ Player.Opponent | AttackedTarget$ You,Planeswalker.YouCtrl | NoResolvingCheck$ True | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever an opponent attacks you and/or one or more planeswalkers you control, exile the top card of that player's library. You may play that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast it.
+SVar:TrigExile:DB$ Dig | Defined$ TriggeredAttackingPlayer | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | Duration$ Permanent | ExileOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast it.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever an opponent attacks you and/or one or more planeswalkers you control, exile the top card of that player's library. You may play that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast it.
