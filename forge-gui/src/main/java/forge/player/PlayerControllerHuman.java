@@ -1130,7 +1130,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         final TargetChoices oldTarget = sa.getTargets();
         final TargetSelection select = new TargetSelection(this, sa);
-        sa.resetTargets();
+        sa.clearTargets();
         if (select.chooseTargets(oldTarget.size(), Lists.newArrayList(oldTarget.getDividedValues()), filter, optional)) {
             return sa.getTargets();
         } else {
