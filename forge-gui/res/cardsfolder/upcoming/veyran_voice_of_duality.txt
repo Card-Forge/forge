@@ -1,0 +1,10 @@
+Name:Veyran, Voice of Duality
+ManaCost:1 U R
+Types:Legendary Creature Efreet Wizard
+PT:2/2
+T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Magecraft - Whenever you cast or copy an instant or sorcery spell, CARDNAME gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | NumAtt$ 1 | NumDef$ 1
+S:Mode$ Panharmonicon | ValidMode$ SpellCast,SpellCopy,SpellCastOrCopy | ValidCard$ Permanent.YouCtrl | ValidCause$ Instant,Sorcery | ValidActivator$ You | Description$ If you casting or copying an instant or sorcery spell causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+SVar:BuffedBy:Instant,Sorcery
+DeckNeeds:Type$Instant|Sorcery
+Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, Veyran, Voice of Duality gets +1/+1 until end of turn.\nIf you casting or copying an instant or sorcery spell causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.

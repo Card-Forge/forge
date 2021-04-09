@@ -4,5 +4,5 @@ Types:Creature Elemental
 PT:5/7
 K:Reach
 S:Mode$ Continuous | Affected$ Land.YouCtrl | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands from your graveyard.
-K:Panharmonicon:Land:If a land entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+S:Mode$ Panharmonicon | ValidMode$ ChangesZone,ChangesZoneAll | ValidCard$ Permanent.YouCtrl | ValidCause$ Land | Destination$ Battlefield | Description$ If a land entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
 Oracle:Reach\nYou may play lands from your graveyard.\nIf a land entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.

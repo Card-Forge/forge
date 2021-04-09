@@ -337,17 +337,17 @@ public class ComputerUtilCost {
     }
 
     public static boolean isSacrificeSelfCost(final Cost cost) {
-    	 if (cost == null) {
-             return false;
-         }
-         for (final CostPart part : cost.getCostParts()) {
-             if (part instanceof CostSacrifice) {
-                 if ("CARDNAME".equals(part.getType())) {
-                	 return true;
-                 }
-             }
-         }
-         return false;
+        if (cost == null) {
+            return false;
+        }
+        for (final CostPart part : cost.getCostParts()) {
+            if (part instanceof CostSacrifice) {
+                if ("CARDNAME".equals(part.getType())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -367,13 +367,13 @@ public class ComputerUtilCost {
             if (part instanceof CostTapType) {
                 /*
                  * Only crew with creatures weaker than vehicle
-                 * 
+                 *
                  * Possible improvements:
                  * - block against evasive (flyers, intimidate, etc.)
                  * - break board stall by racing with evasive vehicle
                  */
                 if (sa.hasParam("Crew")) {
-                	Card vehicle = AnimateAi.becomeAnimated(source, sa);
+                    Card vehicle = AnimateAi.becomeAnimated(source, sa);
                     final int vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
                     String type = part.getType();
                     String totalP = type.split("withTotalPowerGE")[1];
@@ -390,7 +390,7 @@ public class ComputerUtilCost {
                     return ComputerUtil.chooseTapTypeAccumulatePower(ai, type, sa, true,
                             Integer.parseInt(totalP), exclude) != null;
                 }
-            	return false;
+                return false;
             }
         }
         return true;
@@ -478,9 +478,9 @@ public class ComputerUtilCost {
                 }
             }
             for (Card c : player.getCardsIn(ZoneType.Command)) {
-            	if (cannotBeCountered) {
-            	    continue;
-            	}
+                if (cannotBeCountered) {
+                    continue;
+                }
                 final String snem = c.getSVar("SpellsNeedExtraManaEffect");
                 if (!StringUtils.isBlank(snem)) {
                     if (StringUtils.isNumeric(snem)) {
@@ -548,7 +548,7 @@ public class ComputerUtilCost {
         }
 
         return ComputerUtilMana.canPayManaCost(sa, player, extraManaNeeded)
-            && CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);
+                && CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);
     } // canPayCost()
 
     public static boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
@@ -609,10 +609,10 @@ public class ComputerUtilCost {
                 return false;
             }
         } else if (aiLogic != null && aiLogic.startsWith("LifeLE")) {
-        	// if payer can't lose life its no need to pay unless
-        	if (!payer.canLoseLife())
-        		return false;
-        	else if (payer.getLife() <= Integer.valueOf(aiLogic.substring(6))) {
+            // if payer can't lose life its no need to pay unless
+            if (!payer.canLoseLife())
+                return false;
+            else if (payer.getLife() <= AbilityUtils.calculateAmount(source, aiLogic.substring(6), sa)) {
                 return true;
             }
         } else if ("WillAttack".equals(aiLogic)) {
@@ -638,13 +638,13 @@ public class ComputerUtilCost {
         // Didn't have any of the data on the original SA to pay dependant costs
 
         return checkLifeCost(payer, cost, source, 4, sa)
-            && checkDamageCost(payer, cost, source, 4)
-            && (isMine || checkSacrificeCost(payer, cost, source, sa))
-            && (isMine || checkDiscardCost(payer, cost, source, sa))
-            && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
-            && (!source.getName().equals("Perplex") || payer.getCardsIn(ZoneType.Hand).size() < 2)
-            && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)
-            && (!source.getName().equals("Chain of Vapor") || (payer.getWeakestOpponent().getCreaturesInPlay().size() > 0 && payer.getLandsInPlay().size() > 3));
+                && checkDamageCost(payer, cost, source, 4)
+                && (isMine || checkSacrificeCost(payer, cost, source, sa))
+                && (isMine || checkDiscardCost(payer, cost, source, sa))
+                && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
+                && (!source.getName().equals("Perplex") || payer.getCardsIn(ZoneType.Hand).size() < 2)
+                && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)
+                && (!source.getName().equals("Chain of Vapor") || (payer.getWeakestOpponent().getCreaturesInPlay().size() > 0 && payer.getLandsInPlay().size() > 3));
     }
 
     public static Set<String> getAvailableManaColors(Player ai, Card additionalLand) {

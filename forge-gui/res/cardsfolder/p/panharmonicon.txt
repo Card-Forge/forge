@@ -1,6 +1,5 @@
 Name:Panharmonicon
 ManaCost:4
 Types:Artifact
-K:Panharmonicon:Creature,Artifact:If an artifact or creature entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/panharmonicon.jpg
+S:Mode$ Panharmonicon | ValidMode$ ChangesZone,ChangesZoneAll | ValidCard$ Permanent.YouCtrl | ValidCause$ Artifact,Creature | Destination$ Battlefield | Description$ If an artifact or creature entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
 Oracle:If an artifact or creature entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
