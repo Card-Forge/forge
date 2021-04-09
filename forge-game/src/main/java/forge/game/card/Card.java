@@ -2290,8 +2290,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         final List<String> addedManaStrings = Lists.newArrayList();
-        boolean primaryCost = true;
-        boolean isNonAura = !type.hasSubtype("Aura");
 
         for (final SpellAbility sa : state.getSpellAbilities()) {
             // This code block is not shared by instants or sorceries. We don't need to check for permanence.
@@ -2299,15 +2297,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 continue;
             }
 
-            // should not print Spelldescription for Morph
-            if (sa.isCastFaceDown()) {
+            // skip Basic Spells
+            if (sa.isSpell() && sa.isBasicSpell()) {
                 continue;
             }
 
-            boolean isNonAuraPermanent = (sa instanceof SpellPermanent) && isNonAura;
-            if (isNonAuraPermanent && primaryCost) {
-                // For Alt costs, make sure to display the cost!
-                primaryCost = false;
+            // should not print Spelldescription for Morph
+            if (sa.isCastFaceDown()) {
                 continue;
             }
 
@@ -2332,10 +2328,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 addedManaStrings.add(sAbility);
             }
 
-            if (isNonAuraPermanent) {
-                sb.insert(0, "\r\n");
-                sb.insert(0, sAbility);
-            } else if (!sAbility.endsWith(state.getName() + "\r\n")) {
+            if (!sAbility.endsWith(state.getName() + "\r\n")) {
                 sb.append(sAbility);
                 sb.append("\r\n");
             }
