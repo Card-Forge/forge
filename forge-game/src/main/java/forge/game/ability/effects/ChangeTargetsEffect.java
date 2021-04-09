@@ -35,6 +35,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
         final List<SpellAbility> sas = getTargetSpells(sa);
         final boolean remember = sa.hasParam("RememberTargetedCard");
         final Player activator = sa.getActivatingPlayer();
+        final Player chooser = sa.hasParam("Chooser") ? getDefinedPlayersOrTargeted(sa, "Chooser").get(0) : sa.getActivatingPlayer();
 
         final MagicStack stack = activator.getGame().getStack();
         for (final SpellAbility tgtSA : sas) {
@@ -45,7 +46,6 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
             }
 
             SpellAbilityStackInstance changingTgtSI = si;
-            Player chooser = sa.getActivatingPlayer();
 
             // Redirect rules read 'you MAY choose new targets' ... okay!
             // TODO: Don't even ask to change targets, if the SA and subs don't actually have targets
@@ -79,7 +79,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 // gets the divied value from old target
                 Integer div = oldTargetBlock.getDividedValue(oldTarget);
                 newTargetBlock.remove(oldTarget);
-                replaceIn.updateTarget(newTargetBlock);
+                replaceIn.updateTarget(newTargetBlock, sa.getHostCard());
                 // 3. test if updated choices would be correct.
                 GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
 
@@ -88,10 +88,10 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                     if (div != null) {
                         newTargetBlock.addDividedAllocation(newTarget, div);
                     }
-                    replaceIn.updateTarget(newTargetBlock);
+                    replaceIn.updateTarget(newTargetBlock, sa.getHostCard());
                 }
                 else {
-                    replaceIn.updateTarget(oldTargetBlock);
+                    replaceIn.updateTarget(oldTargetBlock, sa.getHostCard());
                 }
             }
             else {
@@ -109,7 +109,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                                 changingTgtSA.addDividedAllocation(choice, div);
                             }
 
-                            changingTgtSI.updateTarget(changingTgtSA.getTargets());
+                            changingTgtSI.updateTarget(changingTgtSA.getTargets(), sa.getHostCard());
                         }
                         else if (sa.hasParam("DefinedMagnet")){
                             GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
@@ -117,7 +117,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                                 int div = changingTgtSA.getTotalDividedValue();
                                 changingTgtSA.resetTargets();
                                 changingTgtSA.getTargets().add(newTarget);
-                                changingTgtSI.updateTarget(changingTgtSA.getTargets());
+                                changingTgtSI.updateTarget(changingTgtSA.getTargets(), sa.getHostCard());
                                 if (changingTgtSA.isDividedAsYouChoose()) {
                                     changingTgtSA.addDividedAllocation(newTarget, div);
                                 }
@@ -127,9 +127,9 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                             // Update targets, with a potential new target
                             Predicate<GameObject> filter = sa.hasParam("TargetRestriction") ? GameObjectPredicates.restriction(sa.getParam("TargetRestriction").split(","), activator, sa.getHostCard(), sa) : null;
                             // TODO Creature.Other might not work yet as it should
-                            TargetChoices newTarget = sa.getActivatingPlayer().getController().chooseNewTargetsFor(changingTgtSA, filter, false);
+                            TargetChoices newTarget = chooser.getController().chooseNewTargetsFor(changingTgtSA, filter, false);
                             if (null != newTarget) {
-                                changingTgtSI.updateTarget(newTarget);
+                                changingTgtSI.updateTarget(newTarget, sa.getHostCard());
                             }
                         }
                     }

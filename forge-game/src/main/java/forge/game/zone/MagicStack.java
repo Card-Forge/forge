@@ -380,6 +380,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
                     }
                     runParams.put(AbilityKey.Targets, tc);
+                    runParams.put(AbilityKey.Cause, s.getHostCard());
                     game.getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
                 }
             }
@@ -392,6 +393,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
 
             runParams.put(AbilityKey.Targets, Lists.newArrayList(sp.getTargetCard()));
+            runParams.put(AbilityKey.Cause, sp.getHostCard());
             game.getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
         }
 
