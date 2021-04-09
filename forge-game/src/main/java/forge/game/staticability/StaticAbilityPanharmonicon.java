@@ -1,6 +1,8 @@
 package forge.game.staticability;
 
 import com.google.common.collect.ImmutableList;
+
+import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardZoneTable;
@@ -15,6 +17,26 @@ import java.util.Map;
 import org.apache.commons.lang3.ArrayUtils;
 
 public class StaticAbilityPanharmonicon {
+    static String MODE = "Panharmonicon";
+
+    public static int handlePanharmonicon(final Game game, final Trigger t, final Map<AbilityKey, Object> runParams) {
+        int n = 0;
+
+        // Checks only the battlefield, as those effects only work from there
+        for (final Card ca : t.getMode() == TriggerType.ChangesZone ? game.getLastStateBattlefield() : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
+                    continue;
+                }
+                if (applyPanharmoniconAbility(stAb, t, runParams)) {
+                    n++;
+                }
+            }
+        }
+
+        return n;
+    }
+
     public static boolean applyPanharmoniconAbility(final StaticAbility stAb, final Trigger trigger, final Map<AbilityKey, Object> runParams) {
         final Card card = stAb.getHostCard();
 

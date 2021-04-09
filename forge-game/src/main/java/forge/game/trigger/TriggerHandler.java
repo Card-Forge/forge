@@ -20,7 +20,6 @@ package forge.game.trigger;
 import java.util.*;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
@@ -35,11 +34,10 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.*;
-import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityPanharmonicon;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
@@ -358,7 +356,7 @@ public class TriggerHandler {
 
         for (final Trigger t : triggers) {
             if (!t.isStatic() && t.getHostCard().getController().equals(player) && canRunTrigger(t, mode, runParams)) {
-                int x = 1 + handlePanharmonicon(t, runParams);
+                int x = 1 + StaticAbilityPanharmonicon.handlePanharmonicon(game, t, runParams);
 
                 for (int i = 0; i < x; ++i) {
                     runSingleTrigger(t, runParams);
@@ -620,21 +618,6 @@ public class TriggerHandler {
                 p.getZone(ZoneType.Command).remove(regtrig.getHostCard());
             }
         }
-    }
-
-    private int handlePanharmonicon(final Trigger t, final Map<AbilityKey, Object> runParams) {
-        int n = 0;
-
-        // Checks only the battlefield, as those effects only work from there
-        for (final Card ca : game.getLastStateBattlefield()) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.applyAbility("Panharmonicon", t, runParams) && stAb.checkConditions()) {
-                    n++;
-                }
-            }
-        }
-
-        return n;
     }
 
     public List<Trigger> getActiveTrigger(final TriggerType mode, final Map<AbilityKey, Object> runParams) {

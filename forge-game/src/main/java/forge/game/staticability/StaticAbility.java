@@ -34,7 +34,6 @@ import forge.game.GameEntity;
 import forge.game.GameStage;
 import forge.game.IIdentifiable;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -46,7 +45,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.Trigger;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
@@ -455,19 +453,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             return StaticAbilityCantAttach.applyCantAttachAbility(this, card, target);
         } else if (mode.equals("CanAttackIfHaste")) {
             return StaticAbilityCantAttackBlock.applyCanAttackHasteAbility(this, card, target);
-        }
-
-        return false;
-    }
-
-    public final boolean applyAbility(final String mode, final Trigger trigger, final Map<AbilityKey, Object> runParams) {
-        // don't apply the ability if it hasn't got the right mode
-        if (!getParam("Mode").equals(mode)) {
-            return false;
-        }
-
-        if (mode.equals("Panharmonicon")) {
-            return StaticAbilityPanharmonicon.applyPanharmoniconAbility(this, trigger, runParams);
         }
 
         return false;
