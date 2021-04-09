@@ -844,25 +844,12 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
         for (final PaperCard card : lands) {
             if (landsNeeded > minBasics) {
-                // Throw out any dual-lands for the wrong colors. Assume
-                // everything else is either
-                // (a) dual-land of the correct two colors, or
-                // (b) a land that generates colorless mana and has some other
-                // beneficial effect.
-                if (!card.getRules().getColorIdentity().isColorless() && card.getRules().getColorIdentity().getSharedColors(colors).countColors()==0
-                        || card.getRules().getColorIdentity().isMulticolor()&&colors.isMonoColor()){//remove dual lands from mono coloured decks
-                    //skip as does not match colours
-                    if (logToConsole) {
-                        System.out.println("Excluding NonBasicLand: " + card.getName());
-                    }
-                    continue;
-                }
-                if (!inverseDLands.contains(card.getName())&&!dLands.contains(card.getName())&&MyRandom.getRandom().nextInt(100)<90) {
+                // Use only lands that are within our colors
+                if (card.getRules().getDeckbuildingColors().hasNoColorsExcept(colors)) {
                     landsToAdd.add(card);
                     landsNeeded--;
-                    if (logToConsole) {
-                        System.out.println("NonBasicLand[" + landsNeeded + "]:" + card.getName());
-                    }
+                } else if (logToConsole) {
+                    System.out.println("Excluding NonBasicLand: " + card.getName());
                 }
             }
         }

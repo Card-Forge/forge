@@ -96,7 +96,7 @@ public class CardRanker {
             if (card.getRules().getAiHints().getRemAIDecks()) {
                 score -= 20.0;
             }
-            if( !canAddMoreColors && !card.getRules().getManaCost().canBePaidWithAvaliable(chosenColors.getColor())) {
+            if( !canAddMoreColors && !card.getRules().getDeckbuildingColors().hasNoColorsExcept(chosenColors)) {
                 score -= 50.0;
             }
 
