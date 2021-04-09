@@ -1,3 +1,4 @@
+# TODO: Improve AI logic. Currently AI will sacrifice even if Troll can't attack at all.
 Name:Clackbridge Troll
 ManaCost:3 B B
 Types:Creature Troll

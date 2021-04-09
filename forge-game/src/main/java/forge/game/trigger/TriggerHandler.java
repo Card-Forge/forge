@@ -34,16 +34,12 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardState;
-import forge.game.card.CardZoneTable;
+import forge.game.card.*;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
@@ -362,7 +358,7 @@ public class TriggerHandler {
 
         for (final Trigger t : triggers) {
             if (!t.isStatic() && t.getHostCard().getController().equals(player) && canRunTrigger(t, mode, runParams)) {
-                int x = 1 + handlePanharmonicon(t, runParams, player);
+                int x = 1 + handlePanharmonicon(t, runParams);
 
                 for (int i = 0; i < x; ++i) {
                     runSingleTrigger(t, runParams);
@@ -626,100 +622,14 @@ public class TriggerHandler {
         }
     }
 
-    private int handlePanharmonicon(final Trigger t, final Map<AbilityKey, Object> runParams, final Player p) {
-        Card host = t.getHostCard();
+    private int handlePanharmonicon(final Trigger t, final Map<AbilityKey, Object> runParams) {
         int n = 0;
 
-        // Sanctum of All
-        if (host.isShrine() && host.isInZone(ZoneType.Battlefield) && p.equals(host.getController())) {
-            int shrineCount = CardLists.count(p.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Shrine"));
-            if (shrineCount >= 6) {
-                for (final Card ck : p.getCardsIn(ZoneType.Battlefield)) {
-                    for (final KeywordInterface ki : ck.getKeywords()) {
-                        final String kw = ki.getOriginal();
-                        if (kw.startsWith("Shrineharmonicon")) {
-                            final String valid = kw.split(":")[1];
-                            if (host.isValid(valid.split(","), p, ck, null)) {
-                                n++;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        // not a changesZone trigger or changesZoneAll
-        if (t.getMode() != TriggerType.ChangesZone && t.getMode() != TriggerType.ChangesZoneAll) {
-            return n;
-        }
-
-        // leave battlefield trigger, might be dying
-        // only real changeszone look back for this
-        if (t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Origin"))) {
-            // Need to get the last info from the trigger host
-            host = game.getChangeZoneLKIInfo(host);
-        }
-
-        // not a Permanent you control
-        if (!host.isPermanent() || !host.isInZone(ZoneType.Battlefield)) {
-            return 0;
-        }
-
-        if (t.getMode() == TriggerType.ChangesZone) {
-            // iterate over all cards
-            for (final Card ck : CardLists.filterControlledBy(p.getGame().getLastStateBattlefield(), p)) {
-                for (final KeywordInterface ki : ck.getKeywords()) {
-                    final String kw = ki.getOriginal();
-                    if (kw.startsWith("Panharmonicon")) {
-                        // Enter the Battlefield Trigger
-                        if (runParams.get(AbilityKey.Destination) instanceof String) {
-                            final String dest = (String) runParams.get(AbilityKey.Destination);
-                            if ("Battlefield".equals(dest) && runParams.get(AbilityKey.Card) instanceof Card) {
-                                final Card card = (Card) runParams.get(AbilityKey.Card);
-                                final String valid = kw.split(":")[1];
-                                if (card.isValid(valid.split(","), p, ck, null)) {
-                                    n++;
-                                }
-                            }
-                        }
-                    } else if (kw.startsWith("Dieharmonicon")) {
-                        // 700.4. The term dies means "is put into a graveyard from the battlefield."
-                        if (runParams.get(AbilityKey.Origin) instanceof String) {
-                            final String origin = (String) runParams.get(AbilityKey.Origin);
-                            if ("Battlefield".equals(origin) && runParams.get(AbilityKey.Destination) instanceof String) {
-                                final String dest = (String) runParams.get(AbilityKey.Destination);
-                                if ("Graveyard".equals(dest) && runParams.get(AbilityKey.Card) instanceof Card) {
-                                    final Card card = (Card) runParams.get(AbilityKey.Card);
-                                    final String valid = kw.split(":")[1];
-                                    if (card.isValid(valid.split(","), p, ck, null)) {
-                                        n++;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        } else if (t.getMode() == TriggerType.ChangesZoneAll) {
-            final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
-            // iterate over all cards that are on the battlefield right now, don't use last state
-            for (final Card ck : p.getCardsIn(ZoneType.Battlefield)) {
-                for (final KeywordInterface ki : ck.getKeywords()) {
-                    final String kw = ki.getOriginal();
-                    if (kw.startsWith("Panharmonicon")) {
-                        // currently there is no ChangesZoneAll that would trigger on etb
-                        final String valid = kw.split(":")[1];
-                        if (!table.filterCards(null, ZoneType.Battlefield, valid, ck, null).isEmpty()) {
-                            n++;
-                        }
-                    } else if (kw.startsWith("Dieharmonicon")) {
-                        // 700.4. The term dies means "is put into a graveyard from the battlefield."
-                        final String valid = kw.split(":")[1];
-                        if (!table.filterCards(ImmutableList.of(ZoneType.Battlefield), ZoneType.Graveyard,
-                                valid, ck, null).isEmpty()) {
-                            n++;
-                        }
-                    }
+        // Checks only the battlefield, as those effects only work from there
+        for (final Card ca : game.getLastStateBattlefield()) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("Panharmonicon", t, runParams) && stAb.checkConditions()) {
+                    n++;
                 }
             }
         }

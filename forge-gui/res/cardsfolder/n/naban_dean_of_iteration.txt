@@ -2,7 +2,6 @@ Name:Naban, Dean of Iteration
 ManaCost:1 U
 Types:Legendary Creature Human Wizard
 PT:2/1
-K:Panharmonicon:Wizard.YouCtrl:If a Wizard entering the battlefield under your control causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+S:Mode$ Panharmonicon | ValidMode$ ChangesZone,ChangesZoneAll | ValidCard$ Permanent.YouCtrl | ValidCause$ Wizard.YouCtrl | Destination$ Battlefield | Description$ If a Wizard entering the battlefield under your control causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
 DeckHints:Type$Wizard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/naban_dean_of_iteration.jpg
 Oracle:If a Wizard entering the battlefield under your control causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
