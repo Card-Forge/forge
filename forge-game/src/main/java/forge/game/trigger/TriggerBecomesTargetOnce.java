@@ -62,6 +62,9 @@ public class TriggerBecomesTargetOnce extends Trigger {
         if (!matchesValidParam("ValidTarget", runParams.get(AbilityKey.Targets))) {
             return false;
         }
+        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+            return false;
+        }
         return true;
     }
 

@@ -1,0 +1,22 @@
+Name:Psychic Battle
+ManaCost:3 U U
+Types:Enchantment
+T:Mode$ BecomesTargetOnce | ValidCause$ Card.notnamedPsychic Battle | TriggerZones$ Battlefield | Execute$ TrigReveal | TriggerDescription$ Whenever a player chooses one or more targets, each player reveals the top card of their library. The player who reveals the card with the highest converted mana cost may change the target or targets. If two or more cards are tied for highest cost, the target or targets remain unchanged. Changing targets this way doesn't trigger abilities of permanents named Psychic Battle.
+SVar:TrigReveal:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBDig | SubAbility$ DBChangeTargets
+SVar:DBDig:DB$ Dig | Defined$ Remembered | DigNum$ 1 | Reveal$ True | NoMove$ True | RememberRevealed$ True | SubAbility$ DBCheckLibrary
+SVar:DBCheckLibrary:DB$ Branch | BranchConditionSVar$ NumRememberedCard | TrueSubAbility$ DBCheckImprinted
+SVar:DBCheckImprinted:DB$ Branch | BranchConditionSVar$ NumImprintedCard | TrueSubAbility$ DBCompareCMC | FalseSubAbility$ DBImprint | SubAbility$ DBCleanupRemembered
+SVar:DBCompareCMC:DB$ Branch | BranchConditionSVar$ CMCRememberedCard | BranchConditionSVarCompare$ GTCMCImprintedCard | TrueSubAbility$ DBImprintForget | FalseSubAbility$ DBCompareCMC2
+SVar:DBCompareCMC2:DB$ Branch | BranchConditionSVar$ CMCRememberedCard | BranchConditionSVarCompare$ EQCMCImprintedCard | TrueSubAbility$ DBCleanupImprinted
+SVar:DBImprintForget:DB$ Cleanup | ClearImprinted$ True | SubAbility$ DBImprint
+SVar:DBImprint:DB$ Pump | ImprintCards$ Remembered
+SVar:DBChangeTargets:DB$ ChangeTargets | Defined$ TriggeredSourceSA | Chooser$ ImprintedOwner | Optional$ True | ConditionDefined$ Imprinted | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanupImprinted
+SVar:DBCleanupRemembered:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanupImprinted:DB$ Cleanup | ClearImprinted$ True
+SVar:NumRememberedCard:Remembered$Valid Card
+SVar:NumImprintedCard:Imprinted$Valid Card
+SVar:CMCRememberedCard:Remembered$CardManaCost
+SVar:CMCImprintedCard:Imprinted$CardManaCost
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Whenever a player chooses one or more targets, each player reveals the top card of their library. The player who reveals the card with the highest converted mana cost may change the target or targets. If two or more cards are tied for highest cost, the target or targets remain unchanged. Changing targets this way doesn't trigger abilities of permanents named Psychic Battle.

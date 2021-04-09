@@ -250,7 +250,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         return playersWithValidTargets;
     }
 
-    public void updateTarget(TargetChoices target) {
+    public void updateTarget(TargetChoices target, Card cause) {
         if (target != null) {
             TargetChoices oldTarget = tc;
             tc = target;
@@ -280,9 +280,14 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
                 runParams.put(AbilityKey.Target, tgt);
                 getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
             }
-            runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.Targets, distinctObjects);
-            getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
+            // Only run BecomesTargetOnce when at least one target is changed
+            if (!distinctObjects.isEmpty()) {
+                runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.SourceSA, ability);
+                runParams.put(AbilityKey.Targets, distinctObjects);
+                runParams.put(AbilityKey.Cause, cause);
+                getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
+            }
         }
     }
 
