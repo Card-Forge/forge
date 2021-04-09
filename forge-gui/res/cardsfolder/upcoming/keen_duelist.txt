@@ -1,0 +1,15 @@
+Name:Keen Duelist
+ManaCost:1 B
+Types:Creature Human Wizard
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigRepeatEach | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you and target opponent each reveal the top card of your library. You each lose life equal to the mana value of the card revealed by the other player. You each put the card you revealed into your hand.
+SVar:TrigRepeatEach:DB$ RepeatEach | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | RepeatPlayers$ TargetedAndYou | RepeatSubAbility$ DBReveal | SubAbility$ DBRepeatEach
+SVar:DBReveal:DB$ Dig | Defined$ Player.IsRemembered | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Library | RememberChanged$ True
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ TargetedAndYou | RepeatSubAbility$ DBImprint | SubAbility$ DBChangeZoneAll
+SVar:DBImprint:DB$ Pump | ImprintCards$ ValidAll Card.IsRemembered+nonRememberedPlayerCtrl | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X | SubAbility$ DBClearImprint
+SVar:DBClearImprint:DB$ Cleanup | ClearImprinted$ True
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Imprinted$CardManaCost
+Oracle:At the beginning of your upkeep, you and target opponent each reveal the top card of your library. You each lose life equal to the mana value of the card revealed by the other player. You each put the card you revealed into your hand.
