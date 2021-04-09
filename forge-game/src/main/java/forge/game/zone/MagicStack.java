@@ -335,6 +335,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
             // Run AbilityTriggered
             if (sp.isTrigger()) {
+                @SuppressWarnings("unchecked")
                 Map<AbilityKey, Object> newRunParams = (Map<AbilityKey, Object>) sp.getTriggeringObject(AbilityKey.TriggeredParams);
                 newRunParams.put(AbilityKey.SpellAbility, sp);
                 game.getTriggerHandler().runTrigger(TriggerType.AbilityTriggered, newRunParams, false);
