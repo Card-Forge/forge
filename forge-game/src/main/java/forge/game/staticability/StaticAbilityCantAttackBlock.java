@@ -20,6 +20,7 @@ package forge.game.staticability;
 import com.google.common.collect.Iterables;
 
 import forge.game.GameEntity;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
@@ -128,14 +129,14 @@ public class StaticAbilityCantAttackBlock {
      * 
      * @param stAb
      *            a StaticAbility
-     * @param card
+     * @param attacker
      *            the card
      * @return a Cost
      */
-    public static Cost getAttackCost(final StaticAbility stAb, final Card card, final GameEntity target) {
+    public static Cost getAttackCost(final StaticAbility stAb, final Card attacker, final GameEntity target) {
         final Card hostCard = stAb.getHostCard();
 
-        if (!stAb.matchesValidParam("ValidCard", card)) {
+        if (!stAb.matchesValidParam("ValidCard", attacker)) {
             return null;
         }
 
@@ -144,7 +145,14 @@ public class StaticAbilityCantAttackBlock {
         }
         String costString = stAb.getParam("Cost");
         if (stAb.hasSVar(costString)) {
-            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, stAb.getSVar(costString)));
+            boolean remember = stAb.hasParam("RememberingAttacker");
+            if (remember) {
+                hostCard.addRemembered(attacker);
+            }
+            costString = Integer.toString(AbilityUtils.calculateAmount(hostCard, stAb.getSVar(costString), stAb));
+            if (remember) {
+                hostCard.removeRemembered(attacker);
+            }
         }
 
         return new Cost(costString, true);
