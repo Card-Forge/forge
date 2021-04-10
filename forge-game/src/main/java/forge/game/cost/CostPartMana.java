@@ -57,9 +57,9 @@ public class CostPartMana extends CostPart {
     }
 
     // This version of the constructor allows to explicitly set exiledCreatureCost/enchantedCreatureCost, used only when copying costs
-    public CostPartMana(final ManaCost cost, String restriction, boolean exiledCreatureCost, boolean enchantedCreatureCost) {
+    public CostPartMana(final ManaCost cost, String restriction, boolean exiledCreatureCost, boolean enchantedCreatureCost, boolean XCantBe0) {
         this.cost = cost;
-        this.xCantBe0 = "XCantBe0".equals(restriction);
+        this.xCantBe0 = XCantBe0;
         this.isExiledCreatureCost = exiledCreatureCost;
         this.isEnchantedCreatureCost = enchantedCreatureCost;
         this.restriction = xCantBe0 || isExiledCreatureCost || isEnchantedCreatureCost? null : restriction;
