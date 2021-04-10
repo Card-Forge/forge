@@ -1724,12 +1724,10 @@ public class GameAction {
         }
     }
 
-    private void drawStartingHand(Player p1){
-
+    private void drawStartingHand(Player p1) {
         //check initial hand
         List<Card> lib1 = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
         List<Card> hand1 = lib1.subList(0,p1.getMaxHandSize());
-        System.out.println(hand1.toString());
 
         //shuffle
         List<Card> shuffledCards = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
@@ -1737,33 +1735,32 @@ public class GameAction {
 
         //check a second hand
         List<Card> hand2 = shuffledCards.subList(0,p1.getMaxHandSize());
-        System.out.println(hand2.toString());
 
         //choose better hand according to land count
         float averageLandRatio = getLandRatio(lib1);
-        if(getHandScore(hand1, averageLandRatio)>getHandScore(hand2, averageLandRatio)){
+        if (getHandScore(hand1, averageLandRatio) > getHandScore(hand2, averageLandRatio)) {
             p1.getZone(ZoneType.Library).setCards(shuffledCards);
         }
         p1.drawCards(p1.getMaxHandSize());
     }
 
-    private float getLandRatio(List<Card> deck){
+    private float getLandRatio(List<Card> deck) {
         int landCount = 0;
-        for(Card c:deck){
-            if(c.isLand()){
+        for (Card c:deck) {
+            if (c.isLand()){
                 landCount++;
             }
         }
-        if (landCount == 0 ){
+        if(landCount == 0) {
             return 0;
         }
         return Float.valueOf(landCount)/Float.valueOf(deck.size());
     }
 
-    private float getHandScore(List<Card> hand, float landRatio){
+    private float getHandScore(List<Card> hand, float landRatio) {
         int landCount = 0;
-        for(Card c:hand){
-            if(c.isLand()){
+        for (Card c:hand) {
+            if (c.isLand()) {
                 landCount++;
             }
         }
