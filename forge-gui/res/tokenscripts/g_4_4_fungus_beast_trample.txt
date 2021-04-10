@@ -1,0 +1,7 @@
+Name:Fungus Beast
+Colors:green
+ManaCost:no cost
+PT:4/4
+Types:Creature Fungus Beast
+K:Trample
+Oracle:Trample
