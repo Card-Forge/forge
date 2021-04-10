@@ -4,8 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 U R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Damage | AddSVar$ QuicksilverDraw | Description$ Enchanted creature has "{T}: This creature deals 1 damage to target player or planeswalker. You draw a card."
-SVar:Damage:AB$DealDamage | Cost$ T | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SubAbility$ QuicksilverDraw | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker.
-SVar:QuicksilverDraw:DB$Draw | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card.
+SVar:Damage:AB$ DealDamage | Cost$ T | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SubAbility$ QuicksilverDraw | SpellDescription$ This creature deals 1 damage to target player or planeswalker.
+SVar:QuicksilverDraw:DB$ Draw | NumCards$ 1 | Defined$ You | SpellDescription$ You draw a card.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksilver_dagger.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: This creature deals 1 damage to target player or planeswalker. You draw a card."
