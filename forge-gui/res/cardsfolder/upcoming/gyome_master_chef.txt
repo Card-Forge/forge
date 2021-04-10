@@ -5,7 +5,7 @@ PT:5/3
 K:Trample
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a number of Food tokens equal to the number of nontoken creatures you had enter the battlefield under your control this turn.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_food_sac | TokenOwner$ You
-A:AB$ Pump | Cost$ 1 Sac<1/Food> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ Target creature gains indestructible until end of turn. Tap it. (Damage and effects that say "destroy" don't destroy the creature.)
+A:AB$ Pump | Cost$ 1 Sac<1/Food> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ Target creature gains indestructible until end of turn. Tap it.
 SVar:DBTap:DB$ Tap | Defined$ Targeted
 SVar:X:Count$Valid Creature.nonToken+YouCtrl+ThisTurnEntered
 DeckHints:Ability$Food
