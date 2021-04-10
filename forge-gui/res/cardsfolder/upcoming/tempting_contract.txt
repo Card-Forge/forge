@@ -1,0 +1,11 @@
+Name:Tempting Contract
+ManaCost:4
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBRepeat | SubAbility$ DBToken | TriggerDescription$ At the beginning of your upkeep, each opponent may create a Treasure token. For each opponent who does, you create a Treasure token.
+SVar:DBRepeat:DB$ RepeatEach | RepeatSubAbility$ DBOppToken | RepeatPlayers$ Player.Opponent | SubAbility$ DBToken | RepeatOptionalForEachPlayer$ True | RepeatOptionalMessage$ Do you want to create a Treasure token?
+SVar:DBOppToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ Player.IsRemembered | RememberTokens$ True
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+DeckHas:Ability$Token & Ability$Sacrifice
+Oracle:At the beginning of your upkeep, each opponent may create a Treasure token. For each opponent who does, you create a Treasure token.
