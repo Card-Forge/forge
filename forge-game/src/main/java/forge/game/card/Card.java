@@ -1482,7 +1482,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             addCounterTimestamp(counterType);
         }
         if (table != null) {
-            table.put(this, counterType, addAmount);
+            table.put(source, this, counterType, addAmount);
         }
         return addAmount;
     }

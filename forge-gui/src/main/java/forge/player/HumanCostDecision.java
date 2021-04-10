@@ -861,11 +861,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 return false;
             }
 
-            if (c.getCounters(cType) <= counterTable.get(c, cType)) {
+            if (c.getCounters(cType) <= counterTable.get(null, c, cType)) {
                 return false;
             }
 
-            counterTable.put(c, cType, 1);
+            counterTable.put(null, c, cType, 1);
 
             onSelectStateChanged(c, true);
             refresh();
@@ -878,13 +878,13 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 return null;
             }
             if (counterType != null) {
-                if (c.getCounters(counterType) <= counterTable.get(c, counterType)) {
+                if (c.getCounters(counterType) <= counterTable.get(null, c, counterType)) {
                     return null;
                 }
             } else {
                 boolean found = false;
                 for (Map.Entry<CounterType, Integer> e : c.getCounters().entrySet()) {
-                    if (e.getValue() > counterTable.get(c, e.getKey())) {
+                    if (e.getValue() > counterTable.get(null, c, e.getKey())) {
                         found = true;
                         break;
                     }
@@ -915,13 +915,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         private int getDistibutedCounters() {
-            int sum = 0;
-
-            for (Integer v : this.counterTable.values()) {
-                sum += v;
-            }
-
-            return sum;
+            return counterTable.totalValues();
         }
 
         protected final boolean isValidChoice(final GameEntity choice) {
@@ -934,7 +928,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         @Override
         public Collection<GameEntity> getSelected() {
-            return counterTable.rowKeySet();
+            return counterTable.columnKeySet();
         }
     }
 
