@@ -6,5 +6,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ bg_1_1_pest_lifegain | TokenOwner$ You
 SVar:PlayMain1:TRUE
 DeckHints:Type$Pest
-DeckHas:Ability$Token
+DeckHas:Ability$Token & Ability$LifeGain
 Oracle:Attacking Pests you control get +1/+0 and have menace.\nWhenever a nontoken creature you control dies, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
