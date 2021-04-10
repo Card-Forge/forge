@@ -1,0 +1,10 @@
+Name:Blight Mound
+ManaCost:2 B
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Pest.YouCtrl+attacking | AddPower$ 1 | AddKeyword$ Menace | Description$ Attacking Pests you control get +1/+0 and have menace.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature you control dies, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ bg_1_1_pest_lifegain | TokenOwner$ You
+SVar:PlayMain1:TRUE
+DeckHints:Type$Pest
+DeckHas:Ability$Token
+Oracle:Attacking Pests you control get +1/+0 and have menace.\nWhenever a nontoken creature you control dies, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
