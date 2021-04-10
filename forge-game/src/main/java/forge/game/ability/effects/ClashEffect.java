@@ -30,30 +30,30 @@ public class ClashEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(final SpellAbility sa) {
-        final boolean victory = clashWithOpponent(sa);
+        final Card source = sa.getHostCard();
+        final Player player = source.getController();
+        final Player opponent = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(player.getOpponents(), sa, Localizer.getInstance().getMessage("lblChooseOpponent"), null);
+        final Player winner = clashWithOpponent(sa, opponent);
 
-        // Run triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, sa.getHostCard().getController());
-
-        if (victory) {
-
+        if (player.equals(winner)) {
             SpellAbility sub = sa.getAdditionalAbility("WinSubAbility");
             if (sub != null) {
                 AbilityUtils.resolve(sub);
             }
-
-            runParams.put(AbilityKey.Won, "True");
         } else {
             SpellAbility sub = sa.getAdditionalAbility("OtherwiseSubAbility");
             if (sub != null) {
                 AbilityUtils.resolve(sub);
             }
-
-            runParams.put(AbilityKey.Won, "False");
         }
-
         
+        // Run triggers
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Player, player);
+        runParams.put(AbilityKey.Won, player.equals(winner) ? "True" : "False");
+        sa.getHostCard().getGame().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams, false);
+        runParams.put(AbilityKey.Player, opponent);
+        runParams.put(AbilityKey.Won, opponent.equals(winner) ? "True" : "False");
         sa.getHostCard().getGame().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams, false);
     }
 
@@ -64,7 +64,7 @@ public class ClashEffect extends SpellAbilityEffect {
      *
      * @return a boolean.
      */
-    private static boolean clashWithOpponent(final SpellAbility sa) {
+    private static Player clashWithOpponent(final SpellAbility sa, Player opponent) {
         /*
          * Each clashing player reveals the top card of his or her library, then
          * puts that card on the top or bottom. A player wins if his or her card
@@ -74,53 +74,63 @@ public class ClashEffect extends SpellAbilityEffect {
          */
         final Card source = sa.getHostCard();
         final Player player = source.getController();
-        final Player opponent = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(player.getOpponents(), sa, Localizer.getInstance().getMessage("lblChooseOpponent"), null);
         final ZoneType lib = ZoneType.Library;
 
         if (sa.hasParam("RememberClasher")) {
             source.addRemembered(opponent);
         }
-    
+
         final PlayerZone pLib = player.getZone(lib);
         final PlayerZone oLib = opponent.getZone(lib);
-    
+
+        if ((pLib.size() == 0) && (oLib.size() == 0)) {
+            return null;
+        }
+
         final StringBuilder reveal = new StringBuilder();
-    
         Card pCard = null;
         Card oCard = null;
-    
+
         if (pLib.size() > 0) {
             pCard = pLib.get(0);
         }
         if (oLib.size() > 0) {
             oCard = oLib.get(0);
         }
-    
-        if ((pLib.size() == 0) && (oLib.size() == 0)) {
-            return false;
-        } else if (pLib.isEmpty()) {
-            clashMoveToTopOrBottom(opponent, oCard, sa);
-            return false;
-        } else if (oLib.isEmpty()) {
-            clashMoveToTopOrBottom(player, pCard, sa);
-            return true;
-        } else {
-            final int pCMC = pCard.getCMC();
-            final int oCMC = oCard.getCMC();
-            
-            // TODO: Split cards will return two CMC values, so both players may become winners of clash
-            
+
+        int pCMC = 0;
+        int oCMC = 0;
+
+        if (!pLib.isEmpty()) {
+            pCMC = pCard.getCMC();
+
             reveal.append(player).append(" " + Localizer.getInstance().getMessage("lblReveals") + ": ").append(pCard.getName()).append(". " + Localizer.getInstance().getMessage("lblCMC") + "= ").append(pCMC);
             reveal.append("\r\n");
+            clashMoveToTopOrBottom(player, pCard, sa);
+        }
+        else {
+            pCMC = -1;
+        }
+        if (!oLib.isEmpty()) {
+            oCMC = oCard.getCMC();
+
             reveal.append(opponent).append(" " + Localizer.getInstance().getMessage("lblReveals") + ": ").append(oCard.getName()).append(". " + Localizer.getInstance().getMessage("lblCMC") + "= ").append(oCMC);
             reveal.append("\r\n\r\n");
-            reveal.append(player).append(pCMC > oCMC ? " " + Localizer.getInstance().getMessage("lblWinsClash") + "." : " " + Localizer.getInstance().getMessage("lblLosesClash") + ".");
-            
-            player.getGame().getAction().notifyOfValue(sa, source, reveal.toString(), null);
-            clashMoveToTopOrBottom(player, pCard, sa);
             clashMoveToTopOrBottom(opponent, oCard, sa);
-            return pCMC > oCMC;
         }
+        else {
+            oCMC = -1;
+        }
+
+        // no winner
+        if (pCMC == oCMC) {
+            return null;
+        }
+
+        reveal.append(player).append(pCMC > oCMC ? " " + Localizer.getInstance().getMessage("lblWinsClash") + "." : " " + Localizer.getInstance().getMessage("lblLosesClash") + ".");
+        player.getGame().getAction().notifyOfValue(sa, source, reveal.toString(), null);
+
+        return pCMC > oCMC ? player : opponent;
     }
 
     private static void clashMoveToTopOrBottom(final Player p, final Card c, final SpellAbility sa) {
