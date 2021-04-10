@@ -1,0 +1,10 @@
+Name:Guardian Archon
+ManaCost:4 W W
+Types:Creature Archon
+PT:5/5
+K:Flying
+K:ETBReplacement:Other:ChooseP
+SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent | Secretly$ True | SpellDescription$ As CARDNAME enters the battlefield, secretly choose an opponent.
+A:AB$ Pump | Cost$ RevealChosenPlayer | Defined$ You | KW$ Protection:Player.ChosenPlayer:Protection from ChosenPlayer | DefinedKW$ ChosenPlayer | SubAbility$ DBPump | GameActivationLimit$ 1 | StackDescription$ {p:You} and | SpellDescription$ You and target permanent you control each gain protection from the chosen player until end of turn. Activate only once.
+SVar:DBPump:DB$ Pump | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | KW$ Protection:Player.ChosenPlayer:Protection from ChosenPlayer | DefinedKW$ ChosenPlayer | StackDescription$ {c:Targeted} each gain protection from {p:ChosenPlayer} until end of turn. Activate only once.
+Oracle:Flying\nAs Guardian Archon enters the battlefield, secretly choose an opponent.\nReveal the player you chose: You and target permanent you control each gain protection from the chosen player until end of turn. Activate only once.
