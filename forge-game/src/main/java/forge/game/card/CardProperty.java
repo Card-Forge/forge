@@ -1749,7 +1749,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("NoAbilities")) {
-            if (!((card.getAbilityText().trim().equals("") || card.isFaceDown()) && (card.getUnhiddenKeywords().isEmpty()))) {
+            if (!card.hasNoAbilities()) {
                 return false;
             }
         } else if (property.equals("HasCounters")) {
