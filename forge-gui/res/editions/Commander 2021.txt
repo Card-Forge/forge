@@ -273,10 +273,39 @@ Type=Other
 325 R Temple of Silence
 327 R Temple of Triumph
 328 M Breena, the Demagogue
+330 M Veyran, Voice of Duality
 331 M Zaffai, Thunder Conductor
 333 M Willowdusk, Essence Seer
+334 M Alibou, Ancient Witness
 335 M Osgir, the Reconstructor
 336 M Adrix and Nev, Twincasters
+338 R Angel of the Ruins
+339 R Archaeomancer's Map
+340 R Bronze Guardian
+342 R Digsite Engineer
+343 R Excavation Technique
+345 R Losheel, Clockwork Scholar
+346 R Monologue Tax
+352 R Dazzling Sphinx
+354 R Inspiring Refrain
+355 R Muse Vortex
+356 R Octavia, Living Thesis
+359 R Sly Instigator
+374 R Audacious Reshapers
+375 R Battlemage's Bracers
+376 R Creative Technique
+377 R Cursed Mirror
+378 R Fiery Encore
+379 R Inferno Project
+380 R Laelia, the Blade Reforged
+381 R Radiant Performer
+382 R Rionya, Fire Dancer
+383 R Rousing Refrain
+384 R Ruin Grinder
+385 R Surge to Victory
+400 R Reinterpret
+402 R Wake the Past
 386 R Blossoming Bogbeast
 408 C Tranquil Thicket
 409 R Yavimaya Coast
+
