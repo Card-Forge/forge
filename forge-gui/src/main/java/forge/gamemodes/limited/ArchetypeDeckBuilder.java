@@ -54,13 +54,7 @@ public class ArchetypeDeckBuilder extends CardThemedDeckBuilder{
                 }
             }
         }
-        String set;
-        if (setsWithBasicLands.size() > 1) {
-            set = setsWithBasicLands.get(MyRandom.getRandom().nextInt(setsWithBasicLands.size() - 1));
-        } else {
-            set = setsWithBasicLands.get(0);
-        }
-        return FModel.getMagicDb().getCommonCards().getCard(MagicColor.Constant.BASIC_LANDS.get(basicLand), set);
+        return super.getBasicLand(basicLand);
     }
 
 
