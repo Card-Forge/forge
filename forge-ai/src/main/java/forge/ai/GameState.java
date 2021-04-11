@@ -3,22 +3,11 @@ package forge.ai;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
+import com.google.common.collect.*;
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
 
 import forge.StaticData;
 import forge.card.CardStateName;
@@ -770,11 +759,18 @@ public abstract class GameState {
         game.fireEvent(new GameEventAttackersDeclared(attackingPlayer, attackersMap));
 
         if (!combat.getAttackers().isEmpty()) {
-            List<GameEntity> attackedTarget = Lists.newArrayList();
-            for (final Card c : combat.getAttackers()) {
-                attackedTarget.add(combat.getDefenderByAttacker(c));
+            List<GameEntity> attackedTarget = new ArrayList<>();
+            for (GameEntity ge : combat.getDefenders()) {
+                if (!combat.getAttackersOf(ge).isEmpty()) {
+                    final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                    runParams.put(AbilityKey.Attackers, combat.getAttackersOf(ge));
+                    runParams.put(AbilityKey.AttackingPlayer, combat.getAttackingPlayer());
+                    runParams.put(AbilityKey.AttackedTarget, ge);
+                    attackedTarget.add(ge);
+                    game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclaredOneTarget, runParams, false);
+                }
             }
-            final Map<AbilityKey, Object> runParams = Maps.newEnumMap(AbilityKey.class);
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Attackers, combat.getAttackers());
             runParams.put(AbilityKey.AttackingPlayer, combat.getAttackingPlayer());
             runParams.put(AbilityKey.AttackedTarget, attackedTarget);

@@ -17,18 +17,10 @@
  */
 package forge.game.phase;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
 
+import com.google.common.collect.*;
 import org.apache.commons.lang3.time.StopWatch;
-
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
 
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -621,9 +613,16 @@ public class PhaseHandler implements java.io.Serializable {
 
         // fire AttackersDeclared trigger
         if (!combat.getAttackers().isEmpty()) {
-            List<GameEntity> attackedTarget = Lists.newArrayList();
-            for (final Card c : combat.getAttackers()) {
-                attackedTarget.add(combat.getDefenderByAttacker(c));
+            List<GameEntity> attackedTarget = new ArrayList<>();
+            for (GameEntity ge : combat.getDefenders()) {
+                if (!combat.getAttackersOf(ge).isEmpty()) {
+                    final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                    runParams.put(AbilityKey.Attackers, combat.getAttackersOf(ge));
+                    runParams.put(AbilityKey.AttackingPlayer, combat.getAttackingPlayer());
+                    runParams.put(AbilityKey.AttackedTarget, ge);
+                    attackedTarget.add(ge);
+                    game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclaredOneTarget, runParams, false);
+                }
             }
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Attackers, combat.getAttackers());
