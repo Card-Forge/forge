@@ -21,7 +21,7 @@ public class ArchetypeDeckBuilder extends CardThemedDeckBuilder{
         archetype = archetype0;
         for(Pair<String, Double> pair : archetype.getCardProbabilities()){
             for(int i=0;i<5;++i){
-                if (pair.getLeft().equals(MagicColor.Constant.SNOW_LANDS.get(i))) {
+                if (pair.getLeft().equals(MagicColor.Constant.SNOW_LANDS.get(i)) && pair.getRight() > 0.04) {
                     needsSnowLands=true;
                     return;
                 }
