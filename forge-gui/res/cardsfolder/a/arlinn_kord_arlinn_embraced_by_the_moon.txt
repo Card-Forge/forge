@@ -4,10 +4,9 @@ Types:Legendary Planeswalker Arlinn
 Loyalty:3
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ +2 | NumDef$ +2 | KW$ Vigilance & Haste | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Until end of turn, up to one target creature gets +2/+2 and gains vigilance and haste.
 A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You | LegacyImage$ g 2 2 wolf soi | Planeswalker$ True | SubAbility$ DBTransform | SpellDescription$ Create a 2/2 green Wolf creature token. Transform CARDNAME.
-SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | StackDescription$ None
 AlternateMode:DoubleFaced
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arlinn_kord.jpg
 Oracle:[+1]: Until end of turn, up to one target creature gets +2/+2 and gains vigilance and haste.\n[0]: Create a 2/2 green Wolf creature token. Transform Arlinn Kord.
 
 ALTERNATE
@@ -24,5 +23,4 @@ A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Name$ Emblem - Arlinn, Embraced by 
 SVar:STArlinn:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Haste | AddAbility$ ArlinnDealDamage | AddSVar$ ArlinnX | Description$ Creatures you control have haste and "{T}: This creature deals damage equal to its power to any target."
 SVar:ArlinnDealDamage:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ ArlinnX | SpellDescription$ This creature deals damage equal to its power to any target.
 SVar:ArlinnX:Count$CardPower
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arlinn_embraced_by_the_moon.jpg
 Oracle:[+1]: Creatures you control get +1/+1 and gain trample until end of turn.\n[−1]: Arlinn, Embraced by the Moon deals 3 damage to any target. Transform Arlinn, Embraced by the Moon.\n[−6]: You get an emblem with "Creatures you control have haste and '{T}: This creature deals damage equal to its power to any target.'"
