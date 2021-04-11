@@ -17,9 +17,9 @@ import forge.model.FModel;
 public class ArchetypeDeckGenerator extends DeckProxy implements Comparable<ArchetypeDeckGenerator> {
     public static List<DeckProxy> getMatrixDecks(GameFormat format, boolean isForAi){
         final List<DeckProxy> decks = new ArrayList<>();
-            for(Archetype archetype: CardArchetypeLDAGenerator.ldaArchetypes.get(format.getName())) {
-                decks.add(new ArchetypeDeckGenerator(archetype, format, isForAi));
-            }
+        for(Archetype archetype: CardArchetypeLDAGenerator.ldaArchetypes.get(format.getName())) {
+            decks.add(new ArchetypeDeckGenerator(archetype, format, isForAi));
+        }
 
         return decks;
     }
