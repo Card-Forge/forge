@@ -1,5 +1,6 @@
 package forge.game;
 
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardView;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
@@ -54,6 +55,12 @@ public abstract class GameEntityView extends TrackableObject {
     public boolean hasCardAttachments() {
         return getAttachedCards() != null;
     }
+    public Iterable<CardView> getAllAttachedCards() {
+        return get(TrackableProperty.AllAttachedCards);
+    }
+    public boolean hasAnyCardAttachments() {
+        return getAllAttachedCards() != null;
+    }
 
     protected void updateAttachedCards(GameEntity e) {
         if (e.hasCardAttachments()) {
@@ -61,6 +68,12 @@ public abstract class GameEntityView extends TrackableObject {
         }
         else {
             set(TrackableProperty.AttachedCards, null);
+        }
+        CardCollectionView all = e.getAllAttachedCards();
+        if (all.isEmpty()) {
+            set(TrackableProperty.AllAttachedCards, null);
+        } else {
+            set(TrackableProperty.AllAttachedCards, CardView.getCollection(all));
         }
     }
 }

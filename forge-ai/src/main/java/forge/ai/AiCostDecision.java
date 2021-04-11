@@ -566,7 +566,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 int thisRemove = Math.min(prefCard.getCounters(cType), stillToRemove);
                 if (thisRemove > 0) {
                     removed += thisRemove;
-                    table.put(prefCard, CounterType.get(cType), thisRemove);
+                    table.put(null, prefCard, CounterType.get(cType), thisRemove);
                 }
             }
         }
@@ -632,7 +632,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     int thisRemove = Math.min(card.getCounters(ctype), c - toRemove);
                     if (thisRemove > 0) {
                         toRemove += thisRemove;
-                        table.put(card, ctype, thisRemove);
+                        table.put(null, card, ctype, thisRemove);
                     }
                 }
             }
@@ -660,7 +660,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                             int over = Math.min(e.getValue(), c - toRemove);
                             if (over > 0) {
                                 toRemove += over;
-                                table.put(crd, e.getKey(), over);
+                                table.put(null, crd, e.getKey(), over);
                             }
                         }
                     }
@@ -690,7 +690,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                             int over = Math.min(e.getValue(), c - toRemove);
                             if (over > 0) {
                                 toRemove += over;
-                                table.put(crd, e.getKey(), over);
+                                table.put(null, crd, e.getKey(), over);
                             }
                         }
                     }
@@ -730,7 +730,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 int over = Math.min(crd.getCounters(CounterEnumType.QUEST) - e, c - toRemove);
                 if (over > 0) {
                     toRemove += over;
-                    table.put(crd, CounterType.get(CounterEnumType.QUEST), over);
+                    table.put(null, crd, CounterType.get(CounterEnumType.QUEST), over);
                 }
             }
         }
@@ -754,7 +754,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 int thisRemove = Math.min(card.getCounters(cost.counter), c - toRemove);
                 if (thisRemove > 0) {
                     toRemove += thisRemove;
-                    table.put(card, cost.counter, thisRemove);
+                    table.put(null, card, cost.counter, thisRemove);
                 }
             }
         }
@@ -768,7 +768,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     int thisRemove = Math.min(e.getValue(), c - toRemove);
                     if (thisRemove > 0) {
                         toRemove += thisRemove;
-                        table.put(card, e.getKey(), thisRemove);
+                        table.put(null, card, e.getKey(), thisRemove);
                     }
                 }
             }

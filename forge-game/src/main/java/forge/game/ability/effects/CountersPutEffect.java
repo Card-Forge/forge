@@ -399,18 +399,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
         final Game game = card.getGame();
         final Player activator = sa.getActivatingPlayer();
 
-        CounterType counterType = null;
         String amount = sa.getParamOrDefault("CounterNum", "1");
         boolean rememberAmount = sa.hasParam("RememberAmount");
-
-        if (!sa.hasParam("EachExistingCounter") && !sa.hasParam("EachFromSource") && !sa.hasParam("SharedKeywords")) {
-            try {
-                counterType = AbilityUtils.getCounterType(sa.getParam("CounterType"), sa);
-            } catch (Exception e) {
-                System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
-                return;
-            }
-        }
 
         Player placer = activator;
         if (sa.hasParam("Placer")) {
@@ -422,7 +412,13 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
         GameEntityCounterTable table = new GameEntityCounterTable();
 
-        if (sa.hasParam("SharedKeywords")) {
+        if (sa.hasParam("TriggeredCounterMap")) {
+            @SuppressWarnings("unchecked")
+            Map<CounterType, Integer> counterMap = (Map<CounterType, Integer>) sa.getTriggeringObject(AbilityKey.CounterMap);
+            for (Map.Entry<CounterType, Integer> e : counterMap.entrySet()) {
+                resolvePerType(sa, placer, e.getKey(), e.getValue(), table);
+            }
+        } else if (sa.hasParam("SharedKeywords")) {
             List<String> keywords = Arrays.asList(sa.getParam("SharedKeywords").split(" & "));
             List<ZoneType> zones =  ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
             String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",") : new String[]{"Card"};
@@ -431,13 +427,19 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 resolvePerType(sa, placer, CounterType.getType(k), counterAmount, table);
             }
         } else {
+            CounterType counterType = null;
+            if (!sa.hasParam("EachExistingCounter") && !sa.hasParam("EachFromSource")) {
+                try {
+                    counterType = AbilityUtils.getCounterType(sa.getParam("CounterType"), sa);
+                } catch (Exception e) {
+                    System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
+                    return;
+                }
+            }
             resolvePerType(sa, placer, counterType, counterAmount, table);
         }
 
-        int totalAdded = 0;
-        for (Integer i : table.values()) {
-            totalAdded += i;
-        }
+        int totalAdded = table.totalValues();
 
         if (totalAdded > 0 && rememberAmount) {
             // TODO use SpellAbility Remember later

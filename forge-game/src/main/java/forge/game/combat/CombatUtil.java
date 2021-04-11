@@ -352,17 +352,19 @@ public class CombatUtil {
      * @param c
      *            a {@link forge.game.card.Card} object.
      */
-    public static void checkDeclaredAttacker(final Game game, final Card c, final Combat combat) {
+    public static void checkDeclaredAttacker(final Game game, final Card c, final Combat combat, boolean triggers) {
         // Run triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Attacker, c);
-        final List<Card> otherAttackers = combat.getAttackers();
-        otherAttackers.remove(c);
-        runParams.put(AbilityKey.OtherAttackers, otherAttackers);
-        runParams.put(AbilityKey.Attacked, combat.getDefenderByAttacker(c));
-        runParams.put(AbilityKey.DefendingPlayer, combat.getDefenderPlayerByAttacker(c));
-        runParams.put(AbilityKey.Defenders, combat.getDefenders());
-        game.getTriggerHandler().runTrigger(TriggerType.Attacks, runParams, false);
+        if (triggers) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Attacker, c);
+            final List<Card> otherAttackers = combat.getAttackers();
+            otherAttackers.remove(c);
+            runParams.put(AbilityKey.OtherAttackers, otherAttackers);
+            runParams.put(AbilityKey.Attacked, combat.getDefenderByAttacker(c));
+            runParams.put(AbilityKey.DefendingPlayer, combat.getDefenderPlayerByAttacker(c));
+            runParams.put(AbilityKey.Defenders, combat.getDefenders());
+            game.getTriggerHandler().runTrigger(TriggerType.Attacks, runParams, false);
+        }
 
         c.getDamageHistory().setCreatureAttackedThisCombat(true);
         c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();

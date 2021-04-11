@@ -17,7 +17,10 @@
  */
 package forge.game.cost;
 
-import com.google.common.collect.Table;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import com.google.common.base.Optional;
 
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
@@ -115,11 +118,13 @@ public class CostRemoveAnyCounter extends CostPart {
         final Card source = ability.getHostCard();
 
         int removed = 0;
-        for (Table.Cell<GameEntity, CounterType, Integer> cell : decision.counterTable.cellSet()) {
-            removed += cell.getValue();
-            cell.getRowKey().subtractCounter(cell.getColumnKey(), cell.getValue());
-            if (cell.getRowKey() instanceof Card) {
-                cell.getRowKey().getGame().updateLastStateForCard((Card) cell.getRowKey());
+        for (Entry<GameEntity, Map<CounterType, Integer>> e : decision.counterTable.row(Optional.absent()).entrySet()) {
+            for (Entry<CounterType, Integer> v : e.getValue().entrySet()) {
+                removed += v.getValue();
+                e.getKey().subtractCounter(v.getKey(), v.getValue());
+            }
+            if (e.getKey() instanceof Card) {
+                e.getKey().getGame().updateLastStateForCard((Card) e.getKey());
             }
         }
 
