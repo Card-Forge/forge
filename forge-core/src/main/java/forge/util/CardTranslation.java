@@ -113,8 +113,12 @@ public class CardTranslation {
 
     public static void buildOracleMapping(String faceName, String oracleText) {
         if (!needsTranslation() || oracleMappings.containsKey(faceName)) return;
-        String translatedName = getTranslatedName(faceName);
         String translatedText = getTranslatedOracle(faceName);
+        if (translatedText.equals("")) {
+            // english card only, fall back
+            return;
+        }
+        String translatedName = getTranslatedName(faceName);
         List <Pair <String, String> > mapping = new ArrayList<>();
         String [] splitOracleText = oracleText.split("\\\\n");
         String [] splitTranslatedText = translatedText.split("\r\n\r\n");
