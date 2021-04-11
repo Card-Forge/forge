@@ -632,7 +632,7 @@ public class PhaseHandler implements java.io.Serializable {
         }
 
         for (final Card c : combat.getAttackers()) {
-            CombatUtil.checkDeclaredAttacker(game, c, combat);
+            CombatUtil.checkDeclaredAttacker(game, c, combat, true);
         }
 
         game.getTriggerHandler().resetActiveTriggers();

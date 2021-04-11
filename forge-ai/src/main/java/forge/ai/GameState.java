@@ -758,30 +758,10 @@ public abstract class GameState {
         }
         game.fireEvent(new GameEventAttackersDeclared(attackingPlayer, attackersMap));
 
-        if (!combat.getAttackers().isEmpty()) {
-            List<GameEntity> attackedTarget = new ArrayList<>();
-            for (GameEntity ge : combat.getDefenders()) {
-                if (!combat.getAttackersOf(ge).isEmpty()) {
-                    final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                    runParams.put(AbilityKey.Attackers, combat.getAttackersOf(ge));
-                    runParams.put(AbilityKey.AttackingPlayer, combat.getAttackingPlayer());
-                    runParams.put(AbilityKey.AttackedTarget, ge);
-                    attackedTarget.add(ge);
-                    game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclaredOneTarget, runParams, false);
-                }
-            }
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.Attackers, combat.getAttackers());
-            runParams.put(AbilityKey.AttackingPlayer, combat.getAttackingPlayer());
-            runParams.put(AbilityKey.AttackedTarget, attackedTarget);
-            game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
-        }
-
         for (final Card c : combat.getAttackers()) {
-            CombatUtil.checkDeclaredAttacker(game, c, combat);
+            CombatUtil.checkDeclaredAttacker(game, c, combat, false);
         }
 
-        game.getTriggerHandler().resetActiveTriggers();
         game.updateCombatForView();
         game.fireEvent(new GameEventCombatChanged());
 
