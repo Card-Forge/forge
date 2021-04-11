@@ -8,7 +8,6 @@ import forge.deck.io.Archetype;
 import forge.game.GameFormat;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import forge.util.MyRandom;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class ArchetypeDeckBuilder extends CardThemedDeckBuilder{
