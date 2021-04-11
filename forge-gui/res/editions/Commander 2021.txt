@@ -138,6 +138,7 @@ Type=Other
 131 R Talrand, Sky Summoner
 132 C Traumatic Visions
 133 C Treasure Cruise
+134 U Ambition's Cost
 137 R Forgotten Ancient
 138 U Curse of Disturbance
 141 R Deathbringer Regent
