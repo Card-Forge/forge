@@ -1864,30 +1864,19 @@ public class AbilityUtils {
     }
 
     public static final void applyManaColorConversion(ManaConversionMatrix matrix, final Map<String, String> params) {
-        String conversionType = params.get("ManaColorConversion");
+        String conversion = params.get("ManaConversion");
 
-        // Choices are Additives(OR) or Restrictive(AND)
-        boolean additive = "Additive".equals(conversionType);
+        for (String pair : conversion.split(" ")) {
+            // Check if conversion is additive or restrictive and how to split
+            boolean additive = pair.contains("->");
+            String[] sides = pair.split(additive ? "->" : "<-");
 
-        for(String c : MagicColor.Constant.COLORS_AND_COLORLESS) {
-            // Use the strings from MagicColor, since that's how the Script will be coming in as
-            String key = StringUtils.capitalize(c) + "Conversion";
-            if (params.containsKey(key)) {
-                String convertTo = params.get(key);
-                byte convertByte = 0;
-                if ("Type".equals(convertTo)) {
-                    // IMPORTANT! We need to use Mana Color here not Card Color.
-                    convertByte = ManaAtom.ALL_MANA_TYPES;
-                } else if ("Color".equals(convertTo)) {
-                    // IMPORTANT! We need to use Mana Color here not Card Color.
-                    convertByte = ManaAtom.ALL_MANA_COLORS;
-                } else {
-                    for (final String convertColor : convertTo.split(",")) {
-                        convertByte |= ManaAtom.fromName(convertColor);
-                    }
+            if (sides[0].equals("AnyColor") || sides[0].equals("AnyType")) {
+                for (byte c : (sides[0].equals("AnyColor") ? MagicColor.WUBRG : MagicColor.WUBRGC)) {
+                    matrix.adjustColorReplacement(c, ManaAtom.fromConversion(sides[1]), additive);
                 }
-                // AdjustColorReplacement has two different matrices handling final mana conversion under the covers
-                matrix.adjustColorReplacement(ManaAtom.fromName(c), convertByte, additive);
+            } else {
+                matrix.adjustColorReplacement(ManaAtom.fromConversion(sides[0]), ManaAtom.fromConversion(sides[1]), additive);
             }
         }
     }

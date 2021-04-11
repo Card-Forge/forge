@@ -2,11 +2,7 @@ Name:Manascape Refractor
 ManaCost:3
 Types:Artifact
 K:CARDNAME enters the battlefield tapped.
-K:ManaConvert:Black:All
-K:ManaConvert:Blue:All
-K:ManaConvert:Green:All
-K:ManaConvert:Red:All
-K:ManaConvert:White:All
+K:ManaConvert:AnyType->AnyColor
 S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Land | Description$ CARDNAME has all activated abilities of all lands on the battlefield.
 Text:You may spend mana as though it were mana of any color to pay the activation costs of CARDNAME's abilities.
 AI:RemoveDeck:All
