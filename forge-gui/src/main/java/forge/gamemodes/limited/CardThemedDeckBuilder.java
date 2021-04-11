@@ -740,7 +740,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      *             the set to take basic lands from (pass 'null' for random).
      * @return card
      */
-    private PaperCard getBasicLand(final int basicLand) {
+    protected PaperCard getBasicLand(final int basicLand) {
         String set;
         if (setsWithBasicLands.size() > 1) {
             set = setsWithBasicLands.get(MyRandom.getRandom().nextInt(setsWithBasicLands.size() - 1));
