@@ -22,6 +22,7 @@ public enum TriggerType {
     AttackerBlockedOnce(TriggerAttackerBlockedOnce.class),
     AttackerBlockedByCreature(TriggerAttackerBlockedByCreature.class),
     AttackersDeclared(TriggerAttackersDeclared.class),
+    AttackersDeclaredOneTarget(TriggerAttackersDeclared.class),
     AttackerUnblocked(TriggerAttackerUnblocked.class),
     AttackerUnblockedOnce(TriggerAttackerUnblockedOnce.class),
     Attacks(TriggerAttacks.class),
