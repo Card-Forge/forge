@@ -331,12 +331,10 @@ public class DeckgenUtil {
         return deck;
     }
 
-
     /**
      * @param selection {@link java.lang.String} array
      * @return {@link forge.deck.Deck}
      */
-
     public static Deck buildColorDeck(List<String> selection, Predicate<PaperCard> formatFilter, boolean forAi) {
         try {
             final Deck deck;

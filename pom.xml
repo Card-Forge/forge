@@ -65,6 +65,7 @@
         <module>forge-gui-mobile-dev</module>
         <module>forge-gui-android</module>
         <module>forge-gui-ios</module>
+        <module>forge-lda</module>
     </modules>
 
     <distributionManagement>
