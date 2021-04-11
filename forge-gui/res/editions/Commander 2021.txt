@@ -6,20 +6,27 @@ Type=Other
 
 [cards]
 1 M Breena, the Demagogue
+2 M Felisa, Fang of Silverquill
 3 M Veyran, Voice of Duality
 4 M Zaffai, Thunder Conductor
+5 M Gyome, Master Chef
 6 M Willowdusk, Essence Seer
 7 M Alibou, Ancient Witness
 8 M Osgir, the Reconstructor
 9 M Adrix and Nev, Twincasters
-10 M Esix, Fractal Boon
+10 M Esix, Fractal Bloom
 11 R Angel of the Ruins
 12 R Archaeomancer's Map
 13 R Bronze Guardian
+14 R Combat Calligrapher
 15 R Digsite Engineer
 16 R Excavation Technique
+17 R Guardian Archon
 18 R Losheel, Clockwork Scholar
 19 R Monologue Tax
+20 R Nils, Discipline Enforcer
+21 R Promise of Loyalty
+22 R Scholarship Sponsor
 23 R Commander's Insight
 24 R Curiosity Crafter
 25 R Dazzling Sphinx
@@ -32,6 +39,18 @@ Type=Other
 32 R Sly Instigator
 33 R Spawning Kraken
 34 R Theoretical Duplication
+35 R Author of Shadows
+36 R Blight Mound
+37 R Bold Plagiarist
+38 R Cunning Rhetoric
+39 R Essence Pulse
+40 R Fain, the Broker
+41 R Incarnation Technique
+42 R Keen Duelist
+43 R Marshland Bloodcaster
+44 R Stinging Study
+45 R Tivash, Gloom Summoner
+46 R Veinwitch Coven
 47 R Audacious Reshapers
 48 R Battlemage's Bracers
 49 R Creative Technique
@@ -44,29 +63,66 @@ Type=Other
 56 R Rousing Refrain
 57 R Ruin Grinder
 58 R Surge to Victory
+59 R Blossoming Bogbeast
+60 R Ezzaroot Channeler
 61 R Fractal Harness
 62 R Guardian Augmenter
+63 R Healing Technique
 64 R Paradox Zone
+65 R Pest Infestation
 66 R Ruxa, Patient Professor
 67 R Sequence Engine
+68 R Sproutback Trudge
+69 R Trudge Garden
+70 R Yedora, Grave Gardener
+71 R Inkshield
 72 R Oversimplify
 73 R Reinterpret
+74 R Revival Experiment
 75 R Wake the Past
 76 R Elementalist's Palette
 77 R Geometric Nexus
+78 R Tempting Contract
 79 R Triplicate Titan
 80 C Study Hall
+81 R Witch's Clinic
+82 R Desolation Twin
+83 M Angel of Serenity
+84 R Boreas Charger
+85 R Citadel Siege
 86 R Cleansing Nova
 87 U Darksteel Mutation
 88 U Dispatch
 89 C Dispeller's Capsule
+90 R Duelist's Heritage
+91 U Elite Scaleguard
+92 U Ghostly Prison
+93 M Gideon, Champion of Justice
+94 R Hunted Lammasu
+95 R Knight of the White Orchid
+96 U Martial Impetus
+97 R Oblation
+98 U Oreskos Explorer
+99 U Orzhov Advokist
 100 U Return to Dust
 101 R Rout
 102 C Sanctum Gargoyle
+103 R Selfless Squire
+104 U Soul Snare
+105 R Stalking Leonin
 106 M Sun Titan
+107 R Sunscorch Regent
+108 R Together Forever
+109 R Tragic Arrogance
+110 U Vow of Duty
+111 R Windborn Muse
+112 R Zetalpa, Primal Dawn
 113 R Aether Gale
 114 R Aetherspouts
 115 C Brainstorm
+116 R Champion of Wits
+117 R Crafty Cutpurse
+118 R Curse of the Swine
 119 R Dig Through Time
 120 R Diluvian Primordial
 121 U Living Lore
@@ -74,11 +130,20 @@ Type=Other
 123 R Mind's Desire
 124 M Naru Meha, Master Wizard
 125 C Ponder
+126 U Rapid Hybridization
+127 R Reef Worm
+128 R Rite of Replication
 129 U Serum Visions
 130 R Swarm Intelligence
 131 R Talrand, Sky Summoner
 132 C Traumatic Visions
 133 C Treasure Cruise
+137 R Forgotten Ancient
+138 U Curse of Disturbance
+141 R Deathbringer Regent
+146 R Infernal Offering
+147 M Necropolis Regent
+150 U Parasitic Impetus
 158 M Apex of Power
 159 R Blasphemous Act
 160 R Brass's Bounty
@@ -105,85 +170,113 @@ Type=Other
 181 U Thopter Engineer
 182 R Volcanic Vision
 183 R Wildfire Devils
+185 R Arashi, the Sky Asunder
+186 U Beast Within
+188 R Ezuri's Predation
+190 M Garruk, Primal Hunter
+192 R Hornet Nest
+193 R Hornet Queen
+194 R Hydra Broodmaster
+195 R Incubation Druid
+196 R Kazandu Tuskcaller
+197 C Kodama's Reach
+198 U Krosan Grip
+199 R Managorger Hydra
+200 U Nissa's Expedition
+203 R Rampaging Baloths
+205 R Return of the Wildspeaker
+206 R Shamanic Revelation
+207 R Terastodon
+209 R Biomass Mutation
 210 U Boros Charm
 211 R Call the Skybreaker
+212 C Coiling Oracle
 213 U Crackling Drake
+214 R Deathbringer Liege
+215 R Debtors' Knell
 216 M Epic Experiment
+219 U Incubation // Incongruity
 220 R Jor Kadeen, the Prevailer
+221 M Kaseto, Orochi Archmage
+223 R Magister of Worth
+224 M Master Biomancer
+226 U Plaxcaster Frogling
+227 U Primal Empathy
+229 R Spitting Image
+230 R Teysa, Envoy of Ghosts
+231 U Trygon Predator
+232 R Utter End
 234 C Arcane Signet
+235 U Bloodthirsty Blade
 236 C Boros Locket
 237 R Bosh, Iron Golem
 238 U Burnished Hart
 239 C Commander's Sphere
+240 R Coveted Jewel
 242 R Duplicant
 244 U Hedron Archive
 245 C Ichor Wellspring
+246 R Idol of Oblivion
 247 C Izzet Signet
 248 R Key to the City
 250 U Meteor Golem
-251 C Mind Stone
+251 U Mind Stone
 252 C Mycosynth Wellspring
 253 R Myr Battlesphere
+254 U Orzhov Signet
+256 R Pendant of Prosperity
 257 C Pilgrim's Eye
 259 M Pyromancer's Goggles
 260 R Scrap Trawler
 261 R Sculpting Steel
+262 C Simic Signet
 263 U Sol Ring
 264 R Solemn Simulacrum
+265 U Spectral Searchlight
 266 R Steel Hellkite
 267 R Steel Overseer
 269 U Talisman of Creativity
 271 R Thousand-Year Elixir
 272 U Unstable Obelisk
+274 R Victory Chimes
 276 C Ancient Den
+277 U Barren Moor
 278 R Battlefield Forge
 279 U Blighted Cataract
+281 C Bojuka Bog
 282 U Boros Garrison
+283 R Caves of Koilos
 285 U Darksteel Citadel
 286 C Desert of the Fervent
 287 C Desert of the Mindful
 292 C Great Furnace
 294 U Izzet Boilerworks
+296 U Llanowar Reborn
+299 R Lumbering Falls
 300 U Mage-Ring Network
 301 U Memorial to Genius
+302 R Mikokoro, Center of the Sea
+303 R Mosswort Bridge
+305 U Novijen, Heart of Progress
+307 R Oran-Rief, the Vastwood
+308 U Orzhov Basilica
 309 U Phyrexia's Core
 311 U Reliquary Tower
 314 R Scavenger Grounds
 316 R Shivan Reef
+317 U Simic Growth Chamber
 318 R Slayers' Stronghold
 319 U Sunhome, Fortress of the Legion
+320 U Tainted Field
 322 R Temple of Epiphany
+324 R Temple of Mystery
+325 R Temple of Silence
 327 R Temple of Triumph
 328 M Breena, the Demagogue
-330 M Veyran, Voice of Duality
 331 M Zaffai, Thunder Conductor
 333 M Willowdusk, Essence Seer
-334 M Alibou, Ancient Witness
 335 M Osgir, the Reconstructor
 336 M Adrix and Nev, Twincasters
-338 R Angel of the Ruins
-339 R Archaeomancer's Map
-340 R Bronze Guardian
-342 R Digsite Engineer
-343 R Excavation Technique
-345 R Losheel, Clockwork Scholar
-346 R Monologue Tax
-352 R Dazzling Sphinx
-354 R Inspiring Refrain
-355 R Muse Vortex
-356 R Octavia, Living Thesis
-359 R Sly Instigator
-374 R Audacious Reshapers
-375 R Battlemage's Bracers
-376 R Creative Technique
-377 R Cursed Mirror
-378 R Fiery Encore
-379 R Inferno Project
-380 R Laelia, the Blade Reforged
-381 R Radiant Performer
-382 R Rionya, Fire Dancer
-383 R Rousing Refrain
-384 R Ruin Grinder
-385 R Surge to Victory
-400 R Reinterpret
-402 R Wake the Past
+386 R Blossoming Bogbeast
+408 C Tranquil Thicket
+409 R Yavimaya Coast
