@@ -41,14 +41,12 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.collect.FCollection;
-
 
 public abstract class GameEntity extends GameObject implements IIdentifiable {
     protected final int id;
     private String name = "";
     private int preventNextDamage = 0;
-    protected CardCollection attachedCards;
+    protected CardCollection attachedCards = new CardCollection();
     private Map<Card, Map<String, String>> preventionShieldsWithEffects = Maps.newTreeMap();
     protected Map<CounterType, Integer> counters = Maps.newHashMap();
 
@@ -285,43 +283,36 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     public abstract boolean hasKeyword(final Keyword keyword);
 
     public final CardCollectionView getEnchantedBy() {
-        if (attachedCards == null) {
-            return CardCollection.EMPTY;
-        }
         // enchanted means attached by Aura
-        return CardLists.filter(attachedCards, CardPredicates.Presets.AURA);
+        return CardLists.filter(getAttachedCards(), CardPredicates.Presets.AURA);
     }
 
+    // doesn't include phased out cards
     public final CardCollectionView getAttachedCards() {
-        return CardCollection.getView(attachedCards);
+        return CardLists.filter(attachedCards, CardPredicates.phasedIn());
+    }
+
+    // for view does include phased out cards
+    public final CardCollectionView getAllAttachedCards() {
+        return attachedCards;
     }
 
     public final void setAttachedCards(final Iterable<Card> cards) {
-        if (cards == null) {
-            attachedCards = null;
-        }
-        else {
-            attachedCards = new CardCollection(cards);
-        }
-
-        getView().updateAttachedCards(this);
+        attachedCards = new CardCollection(cards);
+        updateAttachedCards();
     }
 
     public final boolean hasCardAttachments() {
-        return FCollection.hasElements(attachedCards);
+        return !getAttachedCards().isEmpty();
     }
 
     public final boolean isEnchanted() {
-        if (attachedCards == null) {
-            return false;
-        }
-
         // enchanted means attached by Aura
-        return Iterables.any(attachedCards, CardPredicates.Presets.AURA);
+        return Iterables.any(getAttachedCards(), CardPredicates.Presets.AURA);
     }
 
     public final boolean hasCardAttachment(Card c) {
-        return FCollection.hasElement(attachedCards, c);
+        return getAttachedCards().contains(c);
     }
     public final boolean isEnchantedBy(Card c) {
         // Rule 303.4k  Even if c is no Aura it still counts
@@ -329,9 +320,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     public final boolean hasCardAttachment(final String cardName) {
-        if (attachedCards == null) {
-            return false;
-        }
         return CardLists.count(getAttachedCards(), CardPredicates.nameEquals(cardName)) > 0;
     }
     public final boolean isEnchantedBy(final String cardName) {
@@ -344,12 +332,8 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
      * @param Card c
      */
     public final void addAttachedCard(final Card c) {
-        if (attachedCards == null) {
-            attachedCards = new CardCollection();
-        }
-
         if (attachedCards.add(c)) {
-            getView().updateAttachedCards(this);
+            updateAttachedCards();
             getGame().fireEvent(new GameEventCardAttachment(c, null, this));
         }
     }
@@ -359,15 +343,14 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
      * @param Card c
      */
     public final void removeAttachedCard(final Card c) {
-        if (attachedCards == null) { return; }
-
         if (attachedCards.remove(c)) {
-            if (attachedCards.isEmpty()) {
-                attachedCards = null;
-            }
-            getView().updateAttachedCards(this);
+            updateAttachedCards();
             getGame().fireEvent(new GameEventCardAttachment(c, this, null));
         }
+    }
+
+    public final void updateAttachedCards() {
+        getView().updateAttachedCards(this);
     }
 
     public final void unAttachAllCards() {
