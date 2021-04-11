@@ -1,0 +1,8 @@
+Name:Angelic // Rocket
+ManaCost:8
+Types:Artifact Creature Angel
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | Host$ True | TriggerDescription$ When this creature enters the battlefield, you may destroy target nonland permanent.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonland | TgtPrompt$ Select target permanent.
+Oracle:Flying\nWhen this creature enters the battlefield, you may destroy target nonland permanent.

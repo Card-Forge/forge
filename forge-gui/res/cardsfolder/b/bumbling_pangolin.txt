@@ -1,0 +1,7 @@
+Name:Bumbling // Pangolin
+ManaCost:3 R
+Types:Host Creature Pangolin Beast
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | Host$ True | TriggerDescription$ When this creature enters the battlefield, you may destroy target artifact.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
+Oracle:When this creature enters the battlefield, you may destroy target artifact.

@@ -1,0 +1,8 @@
+Name:Common // Iguana
+ManaCost:1 R
+Types:Host Creature Lizard
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigDiscard | Host$ True | TriggerDescription$ When this creature enters the battlefield, you may discard a card. If you do, draw a card.
+SVar:TrigDiscard:AB$ Draw | Cost$ Discard<1/Card> | NumCards$ 1
+DeckHas:Ability$Discard
+Oracle:When this creature enters the battlefield, you may discard a card. If you do, draw a card.
