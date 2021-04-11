@@ -1030,7 +1030,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterAddedOnce, AbilityKey.newMap(runParams), false);
         }
         if (table != null) {
-            table.put(this, counterType, addAmount);
+            table.put(source, this, counterType, addAmount);
         }
         return addAmount;
     }
