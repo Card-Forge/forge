@@ -704,21 +704,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                     System.out.printf("Basics[%s]: %d/%d = %f%% = %d cards%n", MagicColor.Constant.BASIC_LANDS.get(i), clrCnts[i], totalColor, 100*p, nLand + 1);
                 }
 
-                PaperCard snowLand = null;
-                // if appropriate snow-covered lands are available, add them
-                for (final PaperCard cp : basicLands) {
-                    if (cp.getName().equals(MagicColor.Constant.SNOW_LANDS.get(i))) {
-                        snowLand = cp;
-                        break;
-                    }
-                }
-
                 for (int j = 0; j < nLand; j++) {
-                    if(snowLand!=null){
-                        deckList.add(snowLand);
-                    }else {
-                        deckList.add(getBasicLand(i));
-                    }
+                    deckList.add(getBasicLand(i));
                 }
             }
         }
@@ -740,7 +727,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      *             the set to take basic lands from (pass 'null' for random).
      * @return card
      */
-    private PaperCard getBasicLand(final int basicLand) {
+    protected PaperCard getBasicLand(final int basicLand) {
         String set;
         if (setsWithBasicLands.size() > 1) {
             set = setsWithBasicLands.get(MyRandom.getRandom().nextInt(setsWithBasicLands.size() - 1));
