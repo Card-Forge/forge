@@ -688,8 +688,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         toPanel.getAttachedPanels().clear();
 
-        if (card.hasCardAttachments()) {
-            final Iterable<CardView> enchants = card.getAttachedCards();
+        if (card.hasAnyCardAttachments()) {
+            final Iterable<CardView> enchants = card.getAllAttachedCards();
             for (final CardView e : enchants) {
                 final CardPanel cardE = getCardPanel(e.getId());
                 if (cardE != null) {

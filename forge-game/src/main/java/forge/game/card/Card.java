@@ -3226,19 +3226,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final CardCollectionView getEquippedBy() {
-        if (this.attachedCards == null) {
-            return CardCollection.EMPTY;
-        }
-
-        return CardLists.filter(attachedCards, CardPredicates.Presets.EQUIPMENT);
+        return CardLists.filter(getAttachedCards(), CardPredicates.Presets.EQUIPMENT);
     }
 
     public final boolean isEquipped() {
-        if (this.attachedCards == null) {
-            return false;
-        }
-
-        return Iterables.any(attachedCards, CardPredicates.Presets.EQUIPMENT);
+        return Iterables.any(getAttachedCards(), CardPredicates.Presets.EQUIPMENT);
     }
     public final boolean isEquippedBy(Card c) {
         return this.hasCardAttachment(c);
@@ -3248,19 +3240,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final CardCollectionView getFortifiedBy() {
-        if (this.attachedCards == null) {
-            return CardCollection.EMPTY;
-        }
-
-        return CardLists.filter(attachedCards, CardPredicates.Presets.FORTIFICATION);
+        return CardLists.filter(getAttachedCards(), CardPredicates.Presets.FORTIFICATION);
     }
 
     public final boolean isFortified() {
-        if (this.attachedCards == null) {
-            return false;
-        }
-
-        return Iterables.any(attachedCards, CardPredicates.Presets.FORTIFICATION);
+        return Iterables.any(getAttachedCards(), CardPredicates.Presets.FORTIFICATION);
     }
     public final boolean isFortifiedBy(Card c) {
         // 301.5e + 301.6
@@ -4622,6 +4606,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     eq.phase(fromUntapStep, false);
                 }
             }
+        }
+
+        // update the game entity it was attached to
+        GameEntity ge = this.getEntityAttachedTo();
+        if (ge != null) {
+            ge.updateAttachedCards();
         }
 
         getGame().fireEvent(new GameEventCardPhased(this, isPhasedOut()));

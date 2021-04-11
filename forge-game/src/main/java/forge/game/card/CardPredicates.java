@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -37,7 +37,7 @@ import forge.util.collect.FCollectionView;
  * <p>
  * Predicate<Card> interface.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -288,7 +288,7 @@ public final class CardPredicates {
             }
         };
     }
-    
+
     public static final Predicate<Card> greaterCMC(final int cmc) {
         return new Predicate<Card>() {
             @Override
@@ -354,7 +354,7 @@ public final class CardPredicates {
     public static final Predicate<Card> hasCounter(final CounterEnumType type, final int n) {
         return hasCounter(CounterType.get(type), n);
     }
-    
+
     public static final Predicate<Card> hasLessCounter(final CounterType type, final int n) {
         return new Predicate<Card>() {
             @Override
@@ -479,6 +479,16 @@ public final class CardPredicates {
         };
     }
 
+    public static final Predicate<Card> phasedIn() {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c)
+            {
+                return !c.isPhasedOut();
+            }
+        };
+    }
+
     public static class Presets {
 
         /**
@@ -497,7 +507,7 @@ public final class CardPredicates {
                 return c.isFaceDown();
             }
         };
-        
+
         /**
          * a Predicate<Card> to get all cards that are untapped.
          */
