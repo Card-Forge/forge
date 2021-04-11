@@ -64,7 +64,10 @@ public enum ManaCostShard {
     PR(ManaAtom.RED | ManaAtom.OR_2_LIFE, "P/R", "PR"),
     PG(ManaAtom.GREEN | ManaAtom.OR_2_LIFE, "P/G", "PG"),
 
-    X(ManaAtom.IS_X, "X");
+    X(ManaAtom.IS_X, "X"),
+
+    // Colored only X, each color can be used to pay for this only once (for Emblazoned Golem)
+    COLORED_X(ManaAtom.WHITE | ManaAtom.BLUE | ManaAtom.BLACK | ManaAtom.RED | ManaAtom.GREEN | ManaAtom.IS_X, "1");
 
     private final int shard;
 
@@ -297,7 +300,7 @@ public enum ManaCostShard {
     }
     
     public boolean isColor(byte colorCode) {
-    	return (colorCode & this.shard) > 0;
+        return (colorCode & this.shard) > 0;
     }
 
     public boolean canBePaidWithManaOfColor(byte colorCode) {
