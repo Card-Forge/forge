@@ -162,7 +162,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             layers.add(StaticAbilityLayer.COLOR);
         }
 
-        if (hasParam("RemoveAllAbilities") || hasParam("GainsAbilitiesOf") || hasParam("GainsAbilitiesDefined")) {
+        if (hasParam("RemoveAllAbilities") || hasParam("GainsAbilitiesOf") || hasParam("GainsAbilitiesOfDefined")) {
             layers.add(StaticAbilityLayer.ABILITIES);
         }
 

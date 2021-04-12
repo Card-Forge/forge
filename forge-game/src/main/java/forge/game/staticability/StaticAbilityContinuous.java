@@ -951,12 +951,11 @@ public final class StaticAbilityContinuous {
     }
 
     private static CardCollectionView getAffectedCards(final StaticAbility stAb, final CardCollectionView preList) {
-        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
         final Game game = hostCard.getGame();
         final Player controller = hostCard.getController();
 
-        if (params.containsKey("CharacteristicDefining")) {
+        if (stAb.hasParam("CharacteristicDefining")) {
             return new CardCollection(hostCard); // will always be the card itself
         }
 
@@ -966,37 +965,24 @@ public final class StaticAbilityContinuous {
         // add preList in addition to the normal affected cards
         // need to add before game cards to have preference over them
         if (!preList.isEmpty()) {
-            if (params.containsKey("AffectedZone")) {
+            if (stAb.hasParam("AffectedZone")) {
                 affectedCards.addAll(CardLists.filter(preList, CardPredicates.inZone(
-                        ZoneType.listValueOf(params.get("AffectedZone")))));
+                        ZoneType.listValueOf(stAb.getParam("AffectedZone")))));
             } else {
                 affectedCards.addAll(CardLists.filter(preList, CardPredicates.inZone(ZoneType.Battlefield)));
             }
         }
 
-        if (params.containsKey("AffectedZone")) {
-            affectedCards.addAll(game.getCardsIn(ZoneType.listValueOf(params.get("AffectedZone"))));
+        if (stAb.hasParam("AffectedZone")) {
+            affectedCards.addAll(game.getCardsIn(ZoneType.listValueOf(stAb.getParam("AffectedZone"))));
         } else {
             affectedCards.addAll(game.getCardsIn(ZoneType.Battlefield));
         }
-
-        if (params.containsKey("Affected") && !params.get("Affected").contains(",")) {
-            if (params.get("Affected").contains("Self")) {
-                affectedCards = new CardCollection(hostCard);
-            } else if (params.get("Affected").contains("EnchantedBy")) {
-                affectedCards = new CardCollection(hostCard.getEnchantingCard());
-            } else if (params.get("Affected").contains("EquippedBy")) {
-                affectedCards = new CardCollection(hostCard.getEquipping());
-            } else if (params.get("Affected").equals("EffectSource")) {
-                affectedCards = new CardCollection(AbilityUtils.getDefinedCards(hostCard, params.get("Affected"), null));
-                return affectedCards;
-            }
+        if (stAb.hasParam("Affected")) {
+            affectedCards = CardLists.getValidCards(affectedCards, stAb.getParam("Affected").split(","), controller, hostCard, stAb);
         }
 
-        if (params.containsKey("Affected")) {
-            affectedCards = CardLists.getValidCards(affectedCards, params.get("Affected").split(","), controller, hostCard, null);
-        }
-        affectedCards.removeAll((List<?>) stAb.getIgnoreEffectCards());
+        affectedCards.removeAll(stAb.getIgnoreEffectCards());
         return affectedCards;
     }
 }
