@@ -1,4 +1,4 @@
-Name:Make your Mark
+Name:Make Your Mark
 ManaCost:RW
 Types:Instant
 A:SP$ Pump | Cost$ RW | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | SubAbility$ DBEffect | SpellDescription$ Target creature gets +1/+0 until end of turn. When that creature dies this turn, create a 3/2 red and white Spirit creature token.
