@@ -3127,6 +3127,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         int deckSize = getCardsIn(ZoneType.Library).size();
         int minSize = game.getMatch().getRules().getGameType().getDeckFormat().getMainRange().getMinimum();
 
+        game.getAction().checkStaticAbilities(false);
+
         for (final Card c : getCardsIn(ZoneType.Sideboard)) {
             for (KeywordInterface inst : c.getKeywords()) {
                 if (!(inst instanceof Companion)) {

@@ -1,0 +1,8 @@
+Name:Mother Kangaroo
+ManaCost:4 G
+Types:Host Creature Kangaroo
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRoll | Host$ True | TriggerDescription$ When this creature enters the battlefield, roll a six-sided die. Put a number of +1/+1 counters on this creature equal to the result.
+SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBCounters
+SVar:DBCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Result
+Oracle:When this creature enters the battlefield, roll a six-sided die. Put a number of +1/+1 counters on this creature equal to the result.

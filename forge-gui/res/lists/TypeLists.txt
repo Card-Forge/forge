@@ -130,6 +130,7 @@ Insect:Insects
 Jackal:Jackals
 Jellyfish:Jellyfishes
 Juggernaut:Juggernauts
+Kangaroo:Kangaroos
 Kavu:Kavu
 Killbot:Killbots
 Kirin:Kirins

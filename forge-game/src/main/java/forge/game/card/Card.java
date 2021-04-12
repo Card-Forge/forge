@@ -1915,6 +1915,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         s.append(" on it.");
                     }
                     sbLong.append(s).append("\r\n");
+                } else if (keyword.startsWith("ManaConvert")) {
+                    final String[] k = keyword.split(":");
+                    sbLong.append(k[2]).append("\r\n");
                 } else if (keyword.startsWith("Protection:") || keyword.startsWith("DeckLimit")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[2]).append("\r\n");
