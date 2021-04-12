@@ -42,6 +42,9 @@ public class GauntletUtil {
             case PIONEER_CARDGEN_DECK:
                     deck = DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getPioneer(),true);
                     break;
+            case HISTORIC_CARDGEN_DECK:
+                    deck = DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getHistoric(),true);
+                    break;
             case MODERN_CARDGEN_DECK:
                     deck = DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getModern(),true);
                     break;

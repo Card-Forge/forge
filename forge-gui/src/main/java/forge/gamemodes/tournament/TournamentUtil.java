@@ -39,6 +39,9 @@ public class TournamentUtil {
                 case PIONEER_CARDGEN_DECK:
                     deck = DeckgenUtil.buildCardGenDeck(FModel.getFormats().getPioneer(),true);
                     break;
+                case HISTORIC_CARDGEN_DECK:
+                    deck = DeckgenUtil.buildCardGenDeck(FModel.getFormats().getHistoric(),true);
+                    break;
                 case MODERN_CARDGEN_DECK:
                     deck = DeckgenUtil.buildCardGenDeck(FModel.getFormats().getModern(),true);
                     break;

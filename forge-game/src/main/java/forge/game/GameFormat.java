@@ -484,6 +484,10 @@ public class GameFormat implements Comparable<GameFormat> {
             return this.map.get("Pioneer");
         }
 
+        public GameFormat getHistoric() {
+            return this.map.get("Historic");
+        }
+
         public GameFormat getModern() {
             return this.map.get("Modern");
         }

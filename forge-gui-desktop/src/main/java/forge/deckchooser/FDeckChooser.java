@@ -613,6 +613,11 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                     updateMatrix(FModel.getFormats().getPioneer());
                 }
                 break;
+            case HISTORIC_CARDGEN_DECK:
+                if(FModel.isdeckGenMatrixLoaded()) {
+                    updateMatrix(FModel.getFormats().getHistoric());
+                }
+                break;
             case MODERN_CARDGEN_DECK:
                 if(FModel.isdeckGenMatrixLoaded()) {
                     updateMatrix(FModel.getFormats().getModern());
