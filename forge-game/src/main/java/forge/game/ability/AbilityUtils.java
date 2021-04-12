@@ -1496,16 +1496,44 @@ public class AbilityUtils {
         else if (unlessCost.equals("ChosenNumber")) {
             cost = new Cost(new ManaCost(new ManaCostParser(String.valueOf(source.getChosenNumber()))), true);
         }
-        else if (unlessCost.equals("RememberedCostMinus2")) {
-            Card rememberedCard = (Card) source.getFirstRemembered();
-            if (rememberedCard == null) {
+        else if (unlessCost.startsWith("DefinedCost")) {
+            CardCollection definedCards = AbilityUtils.getDefinedCards(sa.getHostCard(), unlessCost.split("_")[1], sa);
+            if (definedCards.isEmpty()) {
                 sa.resolve();
                 resolveSubAbilities(sa, game);
                 return;
             }
-            ManaCostBeingPaid newCost = new ManaCostBeingPaid(rememberedCard.getManaCost());
-            newCost.decreaseGenericMana(2);
+            Card card = definedCards.getFirst();
+            ManaCostBeingPaid newCost = new ManaCostBeingPaid(card.getManaCost());
+            // Check if there's a third underscore for cost modifying
+            if (unlessCost.split("_").length == 3) {
+                String modifier = unlessCost.split("_")[2];
+                if (modifier.startsWith("Minus")) {
+                    newCost.decreaseGenericMana(Integer.parseInt(modifier.substring(5)));
+                } else {
+                    newCost.increaseGenericMana(Integer.parseInt(modifier.substring(4)));
+                }
+            }
             cost = new Cost(newCost.toManaCost(), true);
+        }
+        else if (unlessCost.startsWith("DefinedSACost")) {
+            FCollection<SpellAbility> definedSAs = AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), unlessCost.split("_")[1], sa);
+            if (definedSAs.isEmpty()) {
+                sa.resolve();
+                resolveSubAbilities(sa, game);
+                return;
+            }
+            Card host = definedSAs.getFirst().getHostCard();
+            if (host.getManaCost() == null) {
+                cost = new Cost(ManaCost.ZERO, true);
+            } else {
+                int xCount = host.getManaCost().countX();
+                int xPaid = host.getXManaCostPaid() * xCount;
+                ManaCostBeingPaid toPay = new ManaCostBeingPaid(host.getManaCost());
+                toPay.decreaseShard(ManaCostShard.X, xCount);
+                toPay.increaseGenericMana(xPaid);
+                cost = new Cost(toPay.toManaCost(), true);
+            }
         }
         else if (!StringUtils.isBlank(sa.getSVar(unlessCost)) || !StringUtils.isBlank(source.getSVar(unlessCost))) {
             // check for X costs (stored in SVars
