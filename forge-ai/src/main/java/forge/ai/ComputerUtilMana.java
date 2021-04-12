@@ -341,7 +341,7 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (canPayShardWithSpellAbility(toPay, ai, paymentChoice, sa, checkCosts)) {
+            if (canPayShardWithSpellAbility(toPay, ai, paymentChoice, sa, checkCosts, cost.getXManaCostPaidByColor())) {
                 return paymentChoice;
             }
         }
@@ -547,7 +547,7 @@ public class ComputerUtilMana {
                 }
 
                 // get a mana of this type from floating, bail if none available
-                final Mana mana = getMana(ai, part, sa, cost.getSourceRestriction(), (byte) -1);
+                final Mana mana = getMana(ai, part, sa, cost.getSourceRestriction(), (byte) -1, cost.getXManaCostPaidByColor());
                 if (mana != null) {
                     if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana, false)) {
                         manaSpentToPay.add(0, mana);
@@ -936,7 +936,7 @@ public class ComputerUtilMana {
                 }
 
                 // get a mana of this type from floating, bail if none available
-                final Mana mana = getMana(ai, part, sa, cost.getSourceRestriction(), hasConverge ? cost.getColorsPaid() : -1);
+                final Mana mana = getMana(ai, part, sa, cost.getSourceRestriction(), hasConverge ? cost.getColorsPaid() : -1, cost.getXManaCostPaidByColor());
                 if (mana != null) {
                     if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana, test)) {
                         manaSpentToPay.add(0, mana);
@@ -965,8 +965,10 @@ public class ComputerUtilMana {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a {@link forge.game.mana.Mana} object.
      */
-    private static Mana getMana(final Player ai, final ManaCostShard shard, final SpellAbility saBeingPaidFor, String restriction, final byte colorsPaid) {
-        final List<Pair<Mana, Integer>> weightedOptions = selectManaToPayFor(ai.getManaPool(), shard, saBeingPaidFor, restriction, colorsPaid);
+    private static Mana getMana(final Player ai, final ManaCostShard shard, final SpellAbility saBeingPaidFor,
+            String restriction, final byte colorsPaid, Map<String, Integer> xManaCostPaidByColor) {
+        final List<Pair<Mana, Integer>> weightedOptions = selectManaToPayFor(ai.getManaPool(), shard,
+            saBeingPaidFor, restriction, colorsPaid, xManaCostPaidByColor);
 
         // Exclude border case
         if (weightedOptions.isEmpty()) {
@@ -1015,9 +1017,13 @@ public class ComputerUtilMana {
     }
 
     private static List<Pair<Mana, Integer>> selectManaToPayFor(final ManaPool manapool, final ManaCostShard shard,
-            final SpellAbility saBeingPaidFor, String restriction, final byte colorsPaid) {
+            final SpellAbility saBeingPaidFor, String restriction, final byte colorsPaid, Map<String, Integer> xManaCostPaidByColor) {
         final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<>();
         for (final Mana thisMana : manapool) {
+            if (shard == ManaCostShard.COLORED_X && !ManaCostBeingPaid.canColoredXShardBePaidByColor(MagicColor.toShortString(thisMana.getColor()), xManaCostPaidByColor)) {
+                continue;
+            }
+
             if (!manapool.canPayForShardWithColor(shard, thisMana.getColor())) {
                 continue;
             }
@@ -1093,7 +1099,7 @@ public class ComputerUtilMana {
         }
     }
 
-    private static boolean canPayShardWithSpellAbility(ManaCostShard toPay, Player ai, SpellAbility ma, SpellAbility sa, boolean checkCosts) {
+    private static boolean canPayShardWithSpellAbility(ManaCostShard toPay, Player ai, SpellAbility ma, SpellAbility sa, boolean checkCosts, Map<String, Integer> xManaCostPaidByColor) {
         final Card sourceCard = ma.getHostCard();
 
         if (isManaSourceReserved(ai, sourceCard, sa)) {
@@ -1131,6 +1137,10 @@ public class ComputerUtilMana {
 
         if (m.isComboMana()) {
             for (String s : m.getComboColors().split(" ")) {
+                if (toPay == ManaCostShard.COLORED_X && !ManaCostBeingPaid.canColoredXShardBePaidByColor(s, xManaCostPaidByColor)) {
+                    continue;
+                }
+
                 if ("Any".equals(s) || ai.getManaPool().canPayForShardWithColor(toPay, ManaAtom.fromName(s)))
                     return true;
             }
@@ -1141,6 +1151,9 @@ public class ComputerUtilMana {
             Set<String> reflected = CardUtil.getReflectableManaColors(ma);
 
             for (byte c : MagicColor.WUBRG) {
+                if (toPay == ManaCostShard.COLORED_X && !ManaCostBeingPaid.canColoredXShardBePaidByColor(MagicColor.toShortString(c), xManaCostPaidByColor)) {
+                    continue;
+                }
                 if (ai.getManaPool().canPayForShardWithColor(toPay, c) && reflected.contains(MagicColor.toLongString(c))) {
                     m.setExpressChoice(MagicColor.toShortString(c));
                     return true;
@@ -1148,6 +1161,16 @@ public class ComputerUtilMana {
             }
             return false;
         }
+
+        if (toPay == ManaCostShard.COLORED_X) {
+            for (String s : m.mana().split(" ")) {
+                if (ManaCostBeingPaid.canColoredXShardBePaidByColor(s, xManaCostPaidByColor)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         return true;
     }
 
@@ -1434,17 +1457,26 @@ public class ComputerUtilMana {
         // Tack xMana Payments into mana here if X is a set value
         if (cost.getXcounter() > 0 || extraMana > 0) {
             int manaToAdd = 0;
+            int xCounter = cost.getXcounter();
             if (test && extraMana > 0) {
-                final int multiplicator = Math.max(cost.getXcounter(), 1);
+                final int multiplicator = Math.max(xCounter, 1);
                 manaToAdd = extraMana * multiplicator;
             } else {
-                manaToAdd = AbilityUtils.calculateAmount(card, "X", sa) * cost.getXcounter();
+                manaToAdd = AbilityUtils.calculateAmount(card, "X", sa) * xCounter;
             }
 
-            cost.increaseShard(ManaCostShard.parseNonGeneric(sa.getParamOrDefault("XColor", "1")), manaToAdd);
+            String xColor = sa.getParamOrDefault("XColor", "1");
+            if (card.hasKeyword("Spend only colored mana on X. No more than one mana of each color may be spent this way.")) {
+                xColor = "WUBRGX";
+            }
+            if (xCounter > 0) {
+                cost.setXManaCostPaid(manaToAdd / xCounter, xColor);
+            } else {
+                cost.increaseShard(ManaCostShard.parseNonGeneric(xColor), manaToAdd);
+            }
 
             if (!test) {
-                sa.setXManaCostPaid(manaToAdd / cost.getXcounter());
+                sa.setXManaCostPaid(manaToAdd / xCounter);
             }
         }
 

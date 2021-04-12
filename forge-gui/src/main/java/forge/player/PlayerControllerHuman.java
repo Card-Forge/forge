@@ -396,6 +396,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     canChooseZero = false;
                 }
             }
+            if (ability.getHostCard().hasKeyword("Spend only colored mana on X. No more than one mana of each color may be spent this way.")) {
+                max = 5;
+            }
         }
         final int min = canChooseZero ? 0 : 1;
 
