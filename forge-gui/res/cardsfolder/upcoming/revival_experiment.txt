@@ -10,4 +10,5 @@ SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ Y | SubAbility$ DBChange
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None
 SVar:X:Remembered$Amount
 SVar:Y:SVar$X/Times.3
+DeckHas:Ability$Graveyard
 Oracle:For each permanent type, return up to one card of that type from your graveyard to the battlefield. You lose 3 life for each card returned this way. Exile Revival Experiment.
