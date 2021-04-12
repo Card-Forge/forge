@@ -591,7 +591,7 @@ public final class StaticAbilityContinuous {
                     p.setMaxHandSize(p.getMaxHandSize() + rmax);
                 }
 
-                if (params.containsKey("ManaColorConversion")) {
+                if (params.containsKey("ManaConversion")) {
                     AbilityUtils.applyManaColorConversion(p.getManaPool(), params);
                 }
             }

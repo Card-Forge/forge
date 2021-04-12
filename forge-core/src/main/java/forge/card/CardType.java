@@ -91,6 +91,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     public enum Supertype {
         Basic,
         Elite,
+        Host,
         Legendary,
         Snow,
         Ongoing,

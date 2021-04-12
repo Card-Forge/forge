@@ -1,12 +1,14 @@
 Name:Kaboom!
 ManaCost:4 R
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 4 R | ValidTgts$ Player | TargetMin$ 0 | TargetMax$ Maxplayer | RepeatPlayers$ Targeted | RepeatSubAbility$ DBDigUntil | StackDescription$ SpellDescription | SpellDescription$ Choose any number of target players. For each of those players, reveal cards from the top of your library until you reveal a nonland card, Kaboom! deals damage equal to that card's converted mana cost to that player, then you put the revealed cards on the bottom of your library in any order.
-SVar:DBDigUntil:DB$ DigUntil | Defined$ You | Valid$ Card.nonLand | ValidDescription$ nonland card | FoundDestination$ Library | FoundLibraryPosition$ -1 | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RememberFound$ True | SubAbility$ DBDmg
-SVar:DBDmg:DB$ DealDamage | Defined$ Player.IsRemembered | NumDmg$ X | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
-SVar:X:Remembered$CardManaCost
-SVar:Maxplayer:PlayerCountPlayers$Amount
+A:SP$ RepeatEach | Cost$ 4 R | ValidTgts$ Player | TargetMin$ 0 | TargetMax$ MaxTgt | RepeatTargeted$ Targeted | RepeatSubAbility$ DBDigUntil | StackDescription$ SpellDescription | SpellDescription$ Choose any number of target players or planeswalkers. For each of them, reveal cards from the top of your library until you reveal a nonland card, Kaboom! deals damage equal to that card's converted mana cost to that player or planeswalker, then you put the revealed cards on the bottom of your library in any order.
+SVar:DBDigUntil:DB$ DigUntil | Defined$ You | Valid$ Card.nonLand | ValidDescription$ nonland card | FoundDestination$ Library | FoundLibraryPosition$ -1 | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | ImprintFound$ True | SubAbility$ DBDmg
+SVar:DBDmg:DB$ DealDamage | Defined$ Remembered | NumDmg$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+SVar:X:Imprinted$CardManaCost
+SVar:MaxTgt:SVar$MaxPl/Plus.MaxPW
+SVar:MaxPl:PlayerCountPlayers$Amount
+SVar:MaxPW:Count$Valid Planeswalker
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaboom!.jpg
 Oracle:Choose any number of target players or planeswalkers. For each of them, reveal cards from the top of your library until you reveal a nonland card, Kaboom! deals damage equal to that card's converted mana cost to that player or planeswalker, then you put the revealed cards on the bottom of your library in any order.
