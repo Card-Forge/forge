@@ -1496,16 +1496,44 @@ public class AbilityUtils {
         else if (unlessCost.equals("ChosenNumber")) {
             cost = new Cost(new ManaCost(new ManaCostParser(String.valueOf(source.getChosenNumber()))), true);
         }
-        else if (unlessCost.equals("RememberedCostMinus2")) {
-            Card rememberedCard = (Card) source.getFirstRemembered();
-            if (rememberedCard == null) {
+        else if (unlessCost.startsWith("DefinedCost")) {
+            CardCollection definedCards = AbilityUtils.getDefinedCards(sa.getHostCard(), unlessCost.split("_")[1], sa);
+            if (definedCards.isEmpty()) {
                 sa.resolve();
                 resolveSubAbilities(sa, game);
                 return;
             }
-            ManaCostBeingPaid newCost = new ManaCostBeingPaid(rememberedCard.getManaCost());
-            newCost.decreaseGenericMana(2);
+            Card card = definedCards.getFirst();
+            ManaCostBeingPaid newCost = new ManaCostBeingPaid(card.getManaCost());
+            // Check if there's a third underscore for cost modifying
+            if (unlessCost.split("_").length == 3) {
+                String modifier = unlessCost.split("_")[2];
+                if (modifier.startsWith("Minus")) {
+                    newCost.decreaseGenericMana(Integer.parseInt(modifier.substring(5)));
+                } else {
+                    newCost.increaseGenericMana(Integer.parseInt(modifier.substring(4)));
+                }
+            }
             cost = new Cost(newCost.toManaCost(), true);
+        }
+        else if (unlessCost.startsWith("DefinedSACost")) {
+            FCollection<SpellAbility> definedSAs = AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), unlessCost.split("_")[1], sa);
+            if (definedSAs.isEmpty()) {
+                sa.resolve();
+                resolveSubAbilities(sa, game);
+                return;
+            }
+            Card host = definedSAs.getFirst().getHostCard();
+            if (host.getManaCost() == null) {
+                cost = new Cost(ManaCost.ZERO, true);
+            } else {
+                int xCount = host.getManaCost().countX();
+                int xPaid = host.getXManaCostPaid() * xCount;
+                ManaCostBeingPaid toPay = new ManaCostBeingPaid(host.getManaCost());
+                toPay.decreaseShard(ManaCostShard.X, xCount);
+                toPay.increaseGenericMana(xPaid);
+                cost = new Cost(toPay.toManaCost(), true);
+            }
         }
         else if (!StringUtils.isBlank(sa.getSVar(unlessCost)) || !StringUtils.isBlank(source.getSVar(unlessCost))) {
             // check for X costs (stored in SVars
@@ -1864,30 +1892,19 @@ public class AbilityUtils {
     }
 
     public static final void applyManaColorConversion(ManaConversionMatrix matrix, final Map<String, String> params) {
-        String conversionType = params.get("ManaColorConversion");
+        String conversion = params.get("ManaConversion");
 
-        // Choices are Additives(OR) or Restrictive(AND)
-        boolean additive = "Additive".equals(conversionType);
+        for (String pair : conversion.split(" ")) {
+            // Check if conversion is additive or restrictive and how to split
+            boolean additive = pair.contains("->");
+            String[] sides = pair.split(additive ? "->" : "<-");
 
-        for(String c : MagicColor.Constant.COLORS_AND_COLORLESS) {
-            // Use the strings from MagicColor, since that's how the Script will be coming in as
-            String key = StringUtils.capitalize(c) + "Conversion";
-            if (params.containsKey(key)) {
-                String convertTo = params.get(key);
-                byte convertByte = 0;
-                if ("Type".equals(convertTo)) {
-                    // IMPORTANT! We need to use Mana Color here not Card Color.
-                    convertByte = ManaAtom.ALL_MANA_TYPES;
-                } else if ("Color".equals(convertTo)) {
-                    // IMPORTANT! We need to use Mana Color here not Card Color.
-                    convertByte = ManaAtom.ALL_MANA_COLORS;
-                } else {
-                    for (final String convertColor : convertTo.split(",")) {
-                        convertByte |= ManaAtom.fromName(convertColor);
-                    }
+            if (sides[0].equals("AnyColor") || sides[0].equals("AnyType")) {
+                for (byte c : (sides[0].equals("AnyColor") ? MagicColor.WUBRG : MagicColor.WUBRGC)) {
+                    matrix.adjustColorReplacement(c, ManaAtom.fromConversion(sides[1]), additive);
                 }
-                // AdjustColorReplacement has two different matrices handling final mana conversion under the covers
-                matrix.adjustColorReplacement(ManaAtom.fromName(c), convertByte, additive);
+            } else {
+                matrix.adjustColorReplacement(ManaAtom.fromConversion(sides[0]), ManaAtom.fromConversion(sides[1]), additive);
             }
         }
     }
