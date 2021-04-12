@@ -1,0 +1,8 @@
+Name:Big Boa Constrictor
+ManaCost:3 B
+Types:Host Creature Snake
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRoll | Host$ True | TriggerDescription$ When this creature enters the battlefield, roll a six-sided die. Target opponent loses life equal to the result.
+SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBLife
+SVar:DBLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ Result
+Oracle:When this creature enters the battlefield, roll a six-sided die. Target opponent loses life equal to the result.
