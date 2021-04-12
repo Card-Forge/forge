@@ -1,4 +1,4 @@
-Name:Mother // Kangaroo
+Name:Mother Kangaroo
 ManaCost:4 G
 Types:Host Creature Kangaroo
 PT:1/1

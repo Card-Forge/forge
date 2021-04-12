@@ -1,4 +1,4 @@
-Name:Feisty // Stegosaurus
+Name:Feisty Stegosaurus
 ManaCost:4 R
 Types:Host Creature Dinosaur
 PT:2/1

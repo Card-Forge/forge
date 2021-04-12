@@ -1,4 +1,4 @@
-Name:Mer // Man
+Name:Mer Man
 ManaCost:4 U
 Types:Host Creature Human Fish
 PT:3/3

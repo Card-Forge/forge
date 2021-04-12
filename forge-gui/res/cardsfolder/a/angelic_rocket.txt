@@ -1,4 +1,4 @@
-Name:Angelic // Rocket
+Name:Angelic Rocket
 ManaCost:8
 Types:Artifact Creature Angel
 PT:4/4

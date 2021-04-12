@@ -8,7 +8,7 @@ Type=Funny
 Border=Silver
 
 [cards]
-1 C Adorable // Kitten
+1 C Adorable Kitten
 2 C AWOL
 3 U Emcee
 4 R Flavor Judge

@@ -1,4 +1,4 @@
-Name:Labro // Bot
+Name:Labro Bot
 ManaCost:5
 Types:Artifact Host Creature Dog
 PT:3/3

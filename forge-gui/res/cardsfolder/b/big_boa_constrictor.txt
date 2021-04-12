@@ -1,4 +1,4 @@
-Name:Big Boa // Constrictor
+Name:Big Boa Constrictor
 ManaCost:3 B
 Types:Host Creature Snake
 PT:3/3

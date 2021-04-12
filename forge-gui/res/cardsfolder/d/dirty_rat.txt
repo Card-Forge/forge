@@ -1,4 +1,4 @@
-Name:Dirty // Rat
+Name:Dirty Rat
 ManaCost:1 B
 Types:Host Creature Rat
 PT:1/1

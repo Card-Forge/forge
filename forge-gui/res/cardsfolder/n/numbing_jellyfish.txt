@@ -1,4 +1,4 @@
-Name:Numbing // Jellyfish
+Name:Numbing Jellyfish
 ManaCost:3 U
 Types:Host Creature Jellyfish
 PT:2/3

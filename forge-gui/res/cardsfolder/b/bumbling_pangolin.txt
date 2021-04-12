@@ -1,4 +1,4 @@
-Name:Bumbling // Pangolin
+Name:Bumbling Pangolin
 ManaCost:3 R
 Types:Host Creature Pangolin Beast
 PT:2/2

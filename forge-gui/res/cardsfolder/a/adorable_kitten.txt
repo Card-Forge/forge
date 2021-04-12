@@ -1,4 +1,4 @@
-Name:Adorable // Kitten
+Name:Adorable Kitten
 ManaCost:W
 Types:Host Creature Cat
 PT:1/1

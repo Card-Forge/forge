@@ -1,4 +1,4 @@
-Name:Eager // Beaver
+Name:Eager Beaver
 ManaCost:2 G
 Types:Host Creature Beaver
 PT:3/2

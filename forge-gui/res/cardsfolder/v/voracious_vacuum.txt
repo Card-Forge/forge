@@ -1,4 +1,4 @@
-Name:Voracious // Vacuum
+Name:Voracious Vacuum
 ManaCost:3
 Types:Artifact Host Creature Construct
 PT:1/1

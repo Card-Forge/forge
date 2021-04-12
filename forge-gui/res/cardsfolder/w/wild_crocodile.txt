@@ -1,4 +1,4 @@
-Name:Wild // Crocodile
+Name:Wild Crocodile
 ManaCost:1 G
 Types:Host Creature Crocodile
 PT:1/1

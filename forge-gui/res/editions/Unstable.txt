@@ -30,12 +30,12 @@ U Knight of the Kitchen Sink F
 14 U Midlife Upgrade
 15 R Oddly Uneven
 16 C Old Guard
-17 C Ordinary // Pony
+17 C Ordinary Pony
 18 U Rhino-
 19 C Riveting Rigger
 20 R Rules Lawyer
 21 C Sacrifice Play
-22 C Shaggy // Camel
+22 C Shaggy Camel
 23 U Side Quest
 24 C Success!
 25 U Teacher's Pet
@@ -43,7 +43,7 @@ U Knight of the Kitchen Sink F
 27 C Blurry Beeble
 28 C Chipper Chopper
 29 R Clocknapper
-30 C Crafty // Octopus
+30 C Crafty Octopus
 31 U Crow Storm
 32 C Defective Detective
 33 U Five-Finger Discount
@@ -52,13 +52,13 @@ U Knight of the Kitchen Sink F
 36 R Incite Insight
 37 U Kindly Cognician
 38 C Magic Word
-39 C Mer // Man
+39 C Mer Man
 40 U More or Less
 C Novellamental
 C Novellamental
 C Novellamental
 C Novellamental
-42 C Numbing // Jellyfish
+42 C Numbing Jellyfish
 43 U S.N.E.A.K. Dispatcher
 44 U Socketed Sprocketer
 45 C Spell Suck
@@ -72,9 +72,9 @@ R Very Cryptic Command D
 R Very Cryptic Command E
 R Very Cryptic Command F
 50 C Wall of Fortune
-51 C Big Boa // Constrictor
+51 C Big Boa Constrictor
 52 C capital offense
-53 C Dirty // Rat
+53 C Dirty Rat
 C Extremely Slow Zombie
 C Extremely Slow Zombie
 C Extremely Slow Zombie
@@ -101,16 +101,16 @@ U Sly Spy F
 69 R Spike, Tournament Grinder
 70 U Squirrel-Powered Scheme
 71 C Steady-Handed Mook
-72 C Stinging // Scorpion
+72 C Stinging Scorpion
 73 C Subcontract
 74 M Summon the Pack
 75 U Zombified
 76 R The Big Idea
 77 C Box of Free-Range Goblins
-78 C Bumbling // Pangolin
-79 C Common // Iguana
+78 C Bumbling Pangolin
+79 C Common Iguana
 80 R The Countdown Is at One
-81 C Feisty // Stegosaurus
+81 C Feisty Stegosaurus
 U Garbage Elemental A
 U Garbage Elemental B
 U Garbage Elemental C
@@ -147,7 +147,7 @@ C Beast in Show
 104 U Chittering Doom
 105 U Clever Combo
 106 U Druid of the Sacred Beaker
-107 C Eager // Beaver
+107 C Eager Beaver
 108 R Earl of Squirrel
 109 U First Pick
 110 U Ground Pounder
@@ -161,7 +161,7 @@ R Ineffable Blessing E
 R Ineffable Blessing F
 114 C Joyride Rigger
 115 U Monkey-
-116 C Mother // Kangaroo
+116 C Mother Kangaroo
 117 C Multi-Headed
 118 C Really Epic Punch
 119 C Selfie Preservation
@@ -170,7 +170,7 @@ R Ineffable Blessing F
 122 U Slaying Mantis
 123 C Squirrel Dealer
 124 U Steamflogger Service Rep
-125 C Wild // Crocodile
+125 C Wild Crocodile
 126 C Willing Test Subject
 127 M Baron Von Count
 128 R Better Than One
@@ -184,7 +184,7 @@ R Ineffable Blessing F
 136 M Urza, Academy Headmaster
 137 R X
 138 R Mary O'Kill
-139 R Angelic // Rocket
+139 R Angelic Rocket
 140 U Border Guardian
 141 U Buzzing Whack-a-Doodle
 142 U Clock of DOOOOOOOOOOOOM!
@@ -201,11 +201,11 @@ R Everythingamajig C
 R Everythingamajig D
 R Everythingamajig E
 R Everythingamajig F
-148 C Gnome-Made // Engine
+148 C Gnome-Made Engine
 149 R Handy Dandy Clone Machine
 150 R Kindslaver
 151 U Krark's Other Thumb
-152 U Labro // Bot
+152 U Labro Bot
 153 U Lobe Lobber
 154 C Mad Science Fair Project
 155 R Modular Monstrosity
@@ -217,7 +217,7 @@ R Everythingamajig F
 161 U Steam-Powered
 162 U Steel Squirrel
 163 M Sword of Dungeons & Dragons
-164 C Voracious // Vacuum
+164 C Voracious Vacuum
 C Secret Base
 C Secret Base
 C Secret Base

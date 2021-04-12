@@ -1,4 +1,4 @@
-Name:Gnome-Made // Engine
+Name:Gnome-Made Engine
 ManaCost:4
 Types:Artifact Host Creature Construct
 PT:2/2

@@ -1,4 +1,4 @@
-Name:Shaggy // Camel
+Name:Shaggy Camel
 ManaCost:3 W
 Types:Host Creature Camel
 PT:3/3

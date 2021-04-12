@@ -1,4 +1,4 @@
-Name:Common // Iguana
+Name:Common Iguana
 ManaCost:1 R
 Types:Host Creature Lizard
 PT:1/3

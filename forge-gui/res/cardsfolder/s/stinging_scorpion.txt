@@ -1,4 +1,4 @@
-Name:Stinging // Scorpion
+Name:Stinging Scorpion
 ManaCost:4 B
 Types:Host Creature Scorpion
 PT:3/2
