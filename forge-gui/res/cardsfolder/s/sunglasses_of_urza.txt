@@ -1,8 +1,6 @@
 Name:Sunglasses of Urza
 ManaCost:3
 Types:Artifact
-S:Mode$ Continuous | Affected$ You | ManaColorConversion$ Additive | WhiteConversion$ Red | Description$ You may spend white mana as though it were red mana.
-AI:RemoveDeck:Random
+S:Mode$ Continuous | Affected$ You | ManaConversion$ W->R | Description$ You may spend white mana as though it were red mana.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sunglasses_of_urza.jpg
 Oracle:You may spend white mana as though it were red mana.

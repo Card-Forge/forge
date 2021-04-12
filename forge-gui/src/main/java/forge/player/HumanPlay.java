@@ -708,13 +708,17 @@ public class HumanPlay {
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestiction());
 
         String xInCard = source.getSVar("X");
+        String xColor = ability.getParam("XColor");
+        if (source.hasKeyword("Spend only colored mana on X. No more than one mana of each color may be spent this way.")) {
+            xColor = "WUBRGX";
+        }
         if (mc.getAmountOfX() > 0 && !"Count$xPaid".equals(xInCard)) { // announce X will overwrite whatever was in card script
             int xPaid = AbilityUtils.calculateAmount(source, "X", ability);
-            toPay.setXManaCostPaid(xPaid, ability.getParam("XColor"));
+            toPay.setXManaCostPaid(xPaid, xColor);
             ability.setXManaCostPaid(xPaid);
         }
         else if (ability.getXManaCostPaid() != null) { //ensure pre-announced X value retained
-            toPay.setXManaCostPaid(ability.getXManaCostPaid(), ability.getParam("XColor"));
+            toPay.setXManaCostPaid(ability.getXManaCostPaid(), xColor);
         }
 
         int timesMultikicked = source.getKickerMagnitude();

@@ -2,8 +2,7 @@ Name:Flash
 ManaCost:1 U
 Types:Instant
 A:SP$ ChangeZone | Cost$ 1 U | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SubAbility$ DBSac | RememberChanged$ True | SpellDescription$ You may put a creature card from your hand onto the battlefield. If you do, sacrifice it unless you pay its mana cost reduced by up to {2}.
-SVar:DBSac:DB$ SacrificeAll | Defined$ Remembered | UnlessCost$ RememberedCostMinus2 | UnlessPayer$ You | SubAbility$ DBCleanup
+SVar:DBSac:DB$ SacrificeAll | Defined$ Remembered | UnlessCost$ DefinedCost_Remembered_Minus2 | UnlessPayer$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flash.jpg
 Oracle:You may put a creature card from your hand onto the battlefield. If you do, sacrifice it unless you pay its mana cost reduced by up to {2}.

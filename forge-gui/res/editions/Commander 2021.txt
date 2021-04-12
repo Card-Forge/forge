@@ -283,15 +283,39 @@ Type=Other
 338 R Angel of the Ruins
 339 R Archaeomancer's Map
 340 R Bronze Guardian
+341 R Combat Calligrapher
 342 R Digsite Engineer
 343 R Excavation Technique
+344 R Guardian Archon
 345 R Losheel, Clockwork Scholar
 346 R Monologue Tax
+347 R Nils, Discipline Enforcer
+348 R Promise of Loyalty
+349 R Scholarship Sponsor
+350 R Commander's Insight
+351 R Curiosity Crafter
 352 R Dazzling Sphinx
+353 R Deekah, Fractal Theorist
 354 R Inspiring Refrain
 355 R Muse Vortex
 356 R Octavia, Living Thesis
+357 R Perplexing Test
+358 R Replication Technique
 359 R Sly Instigator
+360 R Spawning Kraken
+361 R Theoretical Duplication
+362 R Author of Shadows
+363 R Blight Mound
+364 R Bold Plagiarist
+365 R Cunning Rhetoric
+366 R Essence Pulse
+367 R Fain, the Broker
+368 R Incarnation Technique
+369 R Keen Duelist
+370 R Marshland Bloodcaster
+371 R Stinging Study
+372 R Tivash, Gloom Summoner
+373 R Veinwitch Coven
 374 R Audacious Reshapers
 375 R Battlemage's Bracers
 376 R Creative Technique
@@ -304,9 +328,27 @@ Type=Other
 383 R Rousing Refrain
 384 R Ruin Grinder
 385 R Surge to Victory
-400 R Reinterpret
-402 R Wake the Past
 386 R Blossoming Bogbeast
+387 R Ezzaroot Channeler
+388 R Fractal Harness
+389 R Guardian Augmenter
+390 R Healing Technique
+391 R Paradox Zone
+392 R Pest Infestation
+393 R Ruxa, Patient Professor
+394 R Sequence Engine
+395 R Sproutback Trudge
+396 R Trudge Garden
+397 R Yedora, Grave Gardener
+398 R Inkshield
+399 R Oversimplify
+400 R Reinterpret
+401 R Revival Experiment
+402 R Wake the Past
+403 R Elementalist's Palette
+404 R Geometric Nexus
+405 R Tempting Contract
+406 R Triplicate Titan
+407 R Witch's Clinic
 408 C Tranquil Thicket
 409 R Yavimaya Coast
-

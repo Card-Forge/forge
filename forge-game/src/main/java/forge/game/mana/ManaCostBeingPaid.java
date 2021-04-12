@@ -240,7 +240,7 @@ public class ManaCostBeingPaid {
 
     public final boolean isNeeded(final Mana paid, final ManaPool pool) {
         for (ManaCostShard shard : unpaidShards.keySet()) {
-            if (canBePaidWith(shard, paid, pool)) {
+            if (canBePaidWith(shard, paid, pool, xManaCostPaidByColor)) {
                 return true;
             }
         }
@@ -260,7 +260,7 @@ public class ManaCostBeingPaid {
             shard = ManaCostShard.GENERIC;
         }
         else {
-            shard = ManaCostShard.valueOf(ManaAtom.fromName(xColor));
+            shard = ManaCostShard.parseNonGeneric(xColor);
         }
         increaseShard(shard, xCost, true);
     }
@@ -441,6 +441,10 @@ public class ManaCostBeingPaid {
         Predicate<ManaCostShard> predCanBePaid = new Predicate<ManaCostShard>() {
             @Override
             public boolean apply(ManaCostShard ms) {
+                // Check Colored X and see if the color is already used
+                if (ms == ManaCostShard.COLORED_X && !canColoredXShardBePaidByColor(MagicColor.toShortString(colorMask), xManaCostPaidByColor)) {
+                    return false;
+                }
                 return pool.canPayForShardWithColor(ms, colorMask);
             }
         };
@@ -465,7 +469,7 @@ public class ManaCostBeingPaid {
         Predicate<ManaCostShard> predCanBePaid = new Predicate<ManaCostShard>() {
             @Override
             public boolean apply(ManaCostShard ms) {
-                return canBePaidWith(ms, mana, pool);
+                return canBePaidWith(ms, mana, pool, xManaCostPaidByColor);
             }
         };
 
@@ -552,7 +556,14 @@ public class ManaCostBeingPaid {
         return 5;
     }
 
-    private static boolean canBePaidWith(final ManaCostShard shard, final Mana mana, final ManaPool pool) {
+    public static boolean canColoredXShardBePaidByColor(String color, Map<String, Integer> xManaCostPaidByColor) {
+        if (xManaCostPaidByColor != null && xManaCostPaidByColor.get(color) != null) {
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean canBePaidWith(final ManaCostShard shard, final Mana mana, final ManaPool pool, Map<String, Integer> xManaCostPaidByColor) {
         if (shard.isSnow() && !mana.isSnow()) {
             return false;
         }
@@ -563,6 +574,11 @@ public class ManaCostBeingPaid {
         // snow can be paid for any color
         if (shard.getColorMask() != 0 && mana.isSnow() && pool.isSnowForColor()) {
             return true;
+        }
+
+        // Check Colored X and see if the color is already used
+        if (shard == ManaCostShard.COLORED_X && !canColoredXShardBePaidByColor(MagicColor.toShortString(mana.getColor()), xManaCostPaidByColor)) {
+            return false;
         }
 
         byte color = mana.getColor();

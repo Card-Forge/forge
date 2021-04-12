@@ -93,11 +93,10 @@ public class HumanPlaySpellAbility {
         ability = GameActionUtil.addExtraKeywordCost(ability);
 
         if (ability.isSpell() && !ability.isCopied()) { // These hidden keywords should only apply on the Stack
-            final Card host = ability.getHostCard();
-            if (host.hasKeyword("May spend mana as though it were mana of any type to cast CARDNAME")
+            if (c.hasKeyword("May spend mana as though it were mana of any type to cast CARDNAME")
                     || (option != null && option.isIgnoreManaCostType())) {
                 manaTypeConversion = true;
-            } else if (host.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")
+            } else if (c.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")
                     || (option != null && option.isIgnoreManaCostColor())) {
                 manaColorConversion = true;
             }
@@ -127,13 +126,12 @@ public class HumanPlaySpellAbility {
 
         if (ability.isAbility() && ability.isActivatedAbility()) {
             final Map<String, String> params = Maps.newHashMap();
-            params.put("ManaColorConversion", "Additive");
 
             for (KeywordInterface inst : c.getKeywords()) {
                 String keyword = inst.getOriginal();
                 if (keyword.startsWith("ManaConvert")) {
                     final String[] k = keyword.split(":");
-                    params.put(k[1] + "Conversion", k[2]);
+                    params.put("ManaConversion", k[1]);
                     keywordColor = true;
                 }
             }

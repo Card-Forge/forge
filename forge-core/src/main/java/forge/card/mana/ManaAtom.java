@@ -59,6 +59,18 @@ public abstract class ManaAtom {
         return 0; // generic
     }
 
+    public static byte fromConversion(String s) {
+        switch (s) {
+            case "AnyColor": return ALL_MANA_COLORS;
+            case "AnyType": return ALL_MANA_TYPES;
+        }
+        byte b = 0;
+        for (char c : s.toCharArray()) {
+            b |= fromName(c);
+        }
+        return b;
+    }
+
     public static int getIndexOfFirstManaType(final byte color){
         for (int i = 0; i < MANATYPES.length; i++) {
             if ((color & MANATYPES[i]) != 0) {

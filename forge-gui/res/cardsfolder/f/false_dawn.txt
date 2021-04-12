@@ -5,6 +5,6 @@ A:SP$ Effect | Cost$ 1 W | ReplacementEffects$ FDRep | StaticAbilities$ FDManaCo
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:FDRep:Event$ ProduceMana | ActiveZones$ Command | ValidCard$ Card.YouCtrl | ReplaceWith$ ProduceW | Description$ Spells and abilities you control that would add colored mana add that much white mana instead.
 SVar:ProduceW:DB$ ReplaceMana | ReplaceColor$ W
-SVar:FDManaConvertion:Mode$ Continuous | EffectZone$ Command | Affected$ You | ManaColorConversion$ Additive | WhiteConversion$ Color | Description$ You may spend white mana as though it were mana of any color.
+SVar:FDManaConvertion:Mode$ Continuous | EffectZone$ Command | Affected$ You | ManaConversion$ W->AnyColor | Description$ You may spend white mana as though it were mana of any color.
 AI:RemoveDeck:All
 Oracle:Until end of turn, spells and abilities you control that would add colored mana instead add that much white mana. Until end of turn, you may spend white mana as though it were mana of any color.\nDraw a card.
