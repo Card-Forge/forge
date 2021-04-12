@@ -218,12 +218,12 @@ public final class LDAModelGenetrator {
             }
             LinkedHashMap<String, Integer> wordCounts = new LinkedHashMap<>();
             for( Deck deck: decks){
-                String name = deck.getName().replaceAll(".* Version - ","").replaceAll(" \\((Modern|Pioneer|Standard|Legacy|Vintage), #[0-9]+\\)","");
-                name = name.replaceAll("\\(Modern|Pioneer|Standard|Legacy|Vintage|Fuck|Shit|Cunt\\)","");
+                String name = deck.getName().replaceAll(".* Version - ","").replaceAll(" \\((Historic|Modern|Pioneer|Standard|Legacy|Vintage), #[0-9]+\\)","");
+                name = name.replaceAll("\\(Historic|Modern|Pioneer|Standard|Legacy|Vintage|Fuck|Shit|Cunt\\)","");
                 String[] tokens = name.split(" ");
                 for(String rawtoken: tokens){
                     String token = rawtoken.toLowerCase();
-                    if (token.matches("[0-9]+")) {
+                    if (token.matches("[0-9]+") || token.matches("\\s?\\-\\s?")) {
                         //skip just numbers as not useful
                         continue;
                     }
