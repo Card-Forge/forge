@@ -4,7 +4,7 @@ Types:Legendary Creature Shapeshifter
 PT:6/6
 K:Changeling
 K:ETBReplacement:Other:ChooseCT
-SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | StackDescription$ SpellDescription
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | StackDescription$ SpellDescription | AILogic$ MostProminentInComputerDeck
 AI:RemoveDeck:Random
 S:Mode$ ReduceCost | ValidCard$ Card.ChosenType | Type$ Spell | Activator$ You | Amount$ 1 | Color$ W U B R G | Description$ Spells of the chosen type you cast cost {W}{U}{B}{R}{G} less to cast. This effect reduces only the amount of colored mana you pay.
 S:Mode$ Continuous | Affected$ Creature.ChosenType+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other creatures you control of the chosen type get +1/+1.
