@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
@@ -1129,8 +1130,7 @@ public class AttachAi extends SpellAbilityAi {
                 for (Card target : list) {
                     for (Trigger t : target.getTriggers()) {
                         if (t.getMode() == TriggerType.SpellCast) {
-                            final Map<String, String> params = t.getMapParams();
-                            if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer"))) {
+                            if ("Card.Self".equals(t.getParam("TargetsValid")) && "You".equals(t.getParam("ValidActivatingPlayer"))) {
                                 magnetList.add(target);
                                 break;
                             }
