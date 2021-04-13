@@ -139,12 +139,29 @@ Type=Other
 132 C Traumatic Visions
 133 C Treasure Cruise
 134 U Ambition's Cost
-137 R Forgotten Ancient
+135 U Ancient Craving
+136 U Bloodthirsty Aerialist
+137 R Bloodtracker
 138 U Curse of Disturbance
+139 R Damnable Pact
+140 R Deadly Tempest
 141 R Deathbringer Regent
+142 R Defiant Bloodlord
+143 C Epicure of Blood
+144 C Feed the Swarm
+145 R Greed
 146 R Infernal Offering
 147 M Necropolis Regent
+148 M Noxious Gearhulk
+149 M Ob Nixilis Reignited
 150 U Parasitic Impetus
+151 U Reckless Spite
+152 R Sangromancer
+153 U Sanguine Bond
+154 U Silversmote Ghoul
+155 U Suffer the Past
+156 R Taste of Death
+157 U Vampire Nighthawk
 158 M Apex of Power
 159 R Blasphemous Act
 160 R Brass's Bounty
@@ -171,10 +188,14 @@ Type=Other
 181 U Thopter Engineer
 182 R Volcanic Vision
 183 R Wildfire Devils
+184 R Ageless Entity
 185 R Arashi, the Sky Asunder
 186 U Beast Within
+187 U Cultivate
 188 R Ezuri's Predation
+189 R Forgotten Ancient
 190 M Garruk, Primal Hunter
+191 C Gift of Paradise
 192 R Hornet Nest
 193 R Hornet Queen
 194 R Hydra Broodmaster
@@ -184,10 +205,14 @@ Type=Other
 198 U Krosan Grip
 199 R Managorger Hydra
 200 U Nissa's Expedition
+201 R Nissa's Renewal
+202 U Pulse of Murasa
 203 R Rampaging Baloths
+204 C Rampant Growth
 205 R Return of the Wildspeaker
 206 R Shamanic Revelation
 207 R Terastodon
+208 R Verdant Sun's Avatar
 209 R Biomass Mutation
 210 U Boros Charm
 211 R Call the Skybreaker
@@ -196,17 +221,23 @@ Type=Other
 214 R Deathbringer Liege
 215 R Debtors' Knell
 216 M Epic Experiment
+217 R Gaze of Granite
+218 R Gluttonous Troll
 219 U Incubation // Incongruity
 220 R Jor Kadeen, the Prevailer
 221 M Kaseto, Orochi Archmage
+222 U Leyline Prowler
 223 R Magister of Worth
 224 M Master Biomancer
+225 U Moldervine Reclamation
 226 U Plaxcaster Frogling
 227 U Primal Empathy
+228 R Sapling of Colfenor
 229 R Spitting Image
 230 R Teysa, Envoy of Ghosts
 231 U Trygon Predator
 232 R Utter End
+233 M Alhammarret's Archive
 234 C Arcane Signet
 235 U Bloodthirsty Blade
 236 C Boros Locket
@@ -214,19 +245,24 @@ Type=Other
 238 U Burnished Hart
 239 C Commander's Sphere
 240 R Coveted Jewel
+241 R Druidic Satchel
 242 R Duplicant
+243 U Elixir of Immortality
 244 U Hedron Archive
 245 C Ichor Wellspring
 246 R Idol of Oblivion
 247 C Izzet Signet
 248 R Key to the City
+249 R Loxodon Warhammer
 250 U Meteor Golem
 251 U Mind Stone
 252 C Mycosynth Wellspring
 253 R Myr Battlesphere
 254 U Orzhov Signet
+255 U Paradise Plume
 256 R Pendant of Prosperity
 257 C Pilgrim's Eye
+258 C Pristine Talisman
 259 M Pyromancer's Goggles
 260 R Scrap Trawler
 261 R Sculpting Steel
@@ -236,50 +272,76 @@ Type=Other
 265 U Spectral Searchlight
 266 R Steel Hellkite
 267 R Steel Overseer
+268 U Sun Droplet
 269 U Talisman of Creativity
+270 U Talisman of Resilience
 271 R Thousand-Year Elixir
 272 U Unstable Obelisk
+273 R Venser's Journal
 274 R Victory Chimes
+275 R Well of Lost Dreams
 276 C Ancient Den
 277 U Barren Moor
 278 R Battlefield Forge
 279 U Blighted Cataract
+280 U Blighted Woodland
 281 C Bojuka Bog
 282 U Boros Garrison
 283 R Caves of Koilos
+284 C Command Tower
 285 U Darksteel Citadel
 286 C Desert of the Fervent
 287 C Desert of the Mindful
+288 R Exotic Orchard
+289 C Forgotten Cave
+290 C Gingerbread Cabin
+291 U Golgari Rot Farm
 292 C Great Furnace
+293 R High Market
 294 U Izzet Boilerworks
+295 C Jungle Hollow
 296 U Llanowar Reborn
+297 R Llanowar Wastes
+298 C Lonely Sandbar
 299 R Lumbering Falls
 300 U Mage-Ring Network
 301 U Memorial to Genius
 302 R Mikokoro, Center of the Sea
 303 R Mosswort Bridge
+304 U Myriad Landscape
 305 U Novijen, Heart of Progress
+306 C Opal Palace
 307 R Oran-Rief, the Vastwood
 308 U Orzhov Basilica
 309 U Phyrexia's Core
+310 C Radiant Fountain
 311 U Reliquary Tower
+312 U Rogue's Passage
+313 U Sapseep Forest
 314 R Scavenger Grounds
+315 C Secluded Steppe
 316 R Shivan Reef
 317 U Simic Growth Chamber
 318 R Slayers' Stronghold
 319 U Sunhome, Fortress of the Legion
 320 U Tainted Field
+321 U Tainted Wood
 322 R Temple of Epiphany
+323 R Temple of Malady
 324 R Temple of Mystery
 325 R Temple of Silence
+326 U Temple of the False God
 327 R Temple of Triumph
 328 M Breena, the Demagogue
+329 M Felisa, Fang of Silverquill
 330 M Veyran, Voice of Duality
 331 M Zaffai, Thunder Conductor
+332 M Gyome, Master Chef
 333 M Willowdusk, Essence Seer
 334 M Alibou, Ancient Witness
 335 M Osgir, the Reconstructor
 336 M Adrix and Nev, Twincasters
+337 M Esix, Fractal Bloom
 338 R Angel of the Ruins
 339 R Archaeomancer's Map
 340 R Bronze Guardian
