@@ -2,10 +2,10 @@ Name:Giant's Amulet
 ManaCost:U
 Types:Artifact Equipment
 K:Equip:2
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 1 | Description$ Equipped creature gets +0/+1.
-S:Mode$ Continuous | Affected$ Creature.EquippedBy+untapped | AddKeyword$ Hexproof | Description$ Equipped creature has hexproof as long as it's untapped.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {U}{3}. If you do, create a 4/4 blue Giant Wizard creature token, then attach CARDNAME to it.
-SVar:TrigToken:AB$ Token | Cost$ 3 U | LegacyImage$ u 4 4 giant wizard khm | TokenScript$ u_4_4_giant_wizard | TokenAmount$ 1 | TokenOwner$ You | RememberTokens$ True | Optional$ True | SubAbility$ DBAttach
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 1 | AddStaticAbility$ Hexproof | Description$ Equipped creature gets +0/+1 has "This creature has hexproof as long as it's untapped." (It can't be the target of spells or abilities your opponents control.)
+SVar:Hexproof:Mode$ Continuous | Affected$ Card.Self+untapped | AddKeyword$ Hexproof | Description$ This creature has hexproof as long as it's untapped.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {3}{U}. If you do, create a 4/4 blue Giant Wizard creature token, then attach CARDNAME to it.
+SVar:TrigToken:AB$ Token | Cost$ 3 U | TokenScript$ u_4_4_giant_wizard | RememberTokens$ True | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Object$ TriggeredCard | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token

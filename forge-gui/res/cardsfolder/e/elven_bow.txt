@@ -2,9 +2,9 @@ Name:Elven Bow
 ManaCost:G
 Types:Artifact Equipment
 K:Equip:3
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 2 | AddKeyword$ Reach | Description$ Equipped creature gets +3/+0 and has reach.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 2 | AddKeyword$ Reach | Description$ Equipped creature gets +1/+2 and has reach.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {2}. If you do, create a 1/1 green Elf Warrior creature token, then attach CARDNAME to it.
-SVar:TrigToken:AB$ Token | Cost$ 2 | LegacyImage$ g 1 1 elf warrior khm | TokenScript$ g_1_1_elf_warrior | TokenAmount$ 1 | TokenOwner$ You | RememberTokens$ True | Optional$ True | SubAbility$ DBAttach
+SVar:TrigToken:AB$ Token | Cost$ 2 | TokenScript$ g_1_1_elf_warrior | RememberTokens$ True | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Object$ TriggeredCard | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token
