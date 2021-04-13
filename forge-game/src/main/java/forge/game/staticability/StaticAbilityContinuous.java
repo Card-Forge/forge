@@ -168,7 +168,7 @@ public final class StaticAbilityContinuous {
 
         if (layer == StaticAbilityLayer.TEXT && params.containsKey("GainTextOf")) {
             final String valid = params.get("GainTextOf");
-            CardCollection allValid = CardLists.getValidCards(game.getCardsInGame(), valid, hostCard.getController(), hostCard, null);
+            CardCollection allValid = CardLists.getValidCards(game.getCardsInGame(), valid, hostCard.getController(), hostCard, stAb);
             if (allValid.size() > 1) {
                 // TODO: if ever necessary, support gaining text of multiple cards at the same time
                 System.err.println("Error: GainTextOf parameter was not defined as a unique card for " + hostCard);
@@ -271,7 +271,7 @@ public final class StaticAbilityContinuous {
                         String keywordDefined = params.get("KeywordDefined");
                         CardCollectionView definedCards = game.getCardsIn(ZoneType.Battlefield);
                         definedCards = CardLists.getValidCards(definedCards, keywordDefined, hostCard.getController(),
-                                hostCard, null);
+                                hostCard, stAb);
                         for (Card c : definedCards) {
                             final int cmc = c.getCMC();
                             String y = (input.replace(" from EachCMCAmongDefined", ":Card.cmcEQ"
@@ -504,7 +504,7 @@ public final class StaticAbilityContinuous {
                 if ("True".equals(look)) {
                     look = "You";
                 }
-                mayLookAt = AbilityUtils.getDefinedPlayers(hostCard, look, null);
+                mayLookAt = AbilityUtils.getDefinedPlayers(hostCard, look, stAb);
             }
             if (params.containsKey("MayPlay")) {
                 controllerMayPlay = true;
@@ -567,7 +567,7 @@ public final class StaticAbilityContinuous {
                     }
                 }
                 if (params.containsKey("ControlOpponentsSearchingLibrary")) {
-                    Player cntl = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, params.get("ControlOpponentsSearchingLibrary"), null), null);
+                    Player cntl = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, params.get("ControlOpponentsSearchingLibrary"), stAb), null);
                     p.addControlledWhileSearching(se.getTimestamp(), cntl);
                 }
 
@@ -941,7 +941,7 @@ public final class StaticAbilityContinuous {
         final String[] strngs = params.get("Affected").split(",");
 
         for (Player p : controller.getGame().getPlayersInTurnOrder()) {
-            if (p.isValid(strngs, controller, hostCard, null)) {
+            if (p.isValid(strngs, controller, hostCard, stAb)) {
                 players.add(p);
             }
         }

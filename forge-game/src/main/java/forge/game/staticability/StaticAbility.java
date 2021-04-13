@@ -514,7 +514,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
                     return false;
                 }
             }
-        } else {
+        } else if (!hasParam("CharacteristicDefining")) {
             if (!getHostCard().isInZone(ZoneType.Battlefield)) { // default
                 return false;
             }
