@@ -1,7 +1,6 @@
 Name:Flawless Maneuver
 ManaCost:2 W
 Types:Instant
-S:Mode$ Continuous | CharacteristicDefining$ True | AddKeyword$ Alternative Cost:0 | CheckSVar$ X | Description$ If you control a commander, you may cast this spell without paying its mana cost.
+S:Mode$ Continuous | CharacteristicDefining$ True | AddKeyword$ Alternative Cost:0 | IsPresent$ Card.IsCommander+YouCtrl | Description$ If you control a commander, you may cast this spell without paying its mana cost.
 A:SP$ PumpAll | Cost$ 2 W | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SpellDescription$ Creatures you control gain indestructible until end of turn.
-SVar:X:Count$Valid Card.IsCommander+YouCtrl
 Oracle:If you control a commander, you may cast this spell without paying its mana cost.\nCreatures you control gain indestructible until end of turn.

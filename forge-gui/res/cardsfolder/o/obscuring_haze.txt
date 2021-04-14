@@ -1,8 +1,7 @@
 Name:Obscuring Haze
 ManaCost:2 G
 Types:Instant
-S:Mode$ Continuous | CharacteristicDefining$ True | AddKeyword$ Alternative Cost:0 | CheckSVar$ X | Description$ If you control a commander, you may cast this spell without paying its mana cost.
+S:Mode$ Continuous | CharacteristicDefining$ True | AddKeyword$ Alternative Cost:0 | IsPresent$ Card.IsCommander+YouCtrl | Description$ If you control a commander, you may cast this spell without paying its mana cost.
 A:SP$ Effect | Cost$ 2 G | ReplacementEffects$ RPrevent | AILogic$ Fog | SpellDescription$ Prevent all damage that would be dealt this turn by creatures your opponents control.
-SVar:X:Count$Valid Card.IsCommander+YouCtrl
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidSource$ Creature.OppCtrl | Description$ Prevent all damage that would be dealt this turn by creatures your opponents control.
 Oracle:If you control a commander, you may cast this spell without paying its mana cost.\nPrevent all damage that would be dealt this turn by creatures your opponents control.

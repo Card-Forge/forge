@@ -1,7 +1,6 @@
 Name:Deflecting Swat
 ManaCost:2 R
 Types:Instant
-S:Mode$ Continuous | CharacteristicDefining$ True |AddKeyword$ Alternative Cost:0 | CheckSVar$ X | Description$ If you control a commander, you may cast this spell without paying its mana cost.
+S:Mode$ Continuous | CharacteristicDefining$ True |AddKeyword$ Alternative Cost:0 | IsPresent$ Card.IsCommander+YouCtrl | Description$ If you control a commander, you may cast this spell without paying its mana cost.
 A:SP$ ChangeTargets | Cost$ 2 R | TargetType$ Spell,Activated,Triggered | Optional$ True | ValidTgts$ Card | TgtPrompt$ Select target spell or ability | SpellDescription$ You may choose new targets for target spell or ability.
-SVar:X:Count$Valid Card.IsCommander+YouCtrl
 Oracle:If you control a commander, you may cast this spell without paying its mana cost.\nYou may choose new targets for target spell or ability.
