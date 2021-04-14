@@ -14,7 +14,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerDamageDone;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -56,7 +56,7 @@ public abstract class DamageAiBase extends SpellAbilityAi {
         boolean dmgByCardsInHand = false;
 
         if ("X".equals(sa.getParam("NumDmg")) && sa.getHostCard() != null && sa.hasSVar(sa.getParam("NumDmg")) &&
-                sa.getHostCard().getSVar(sa.getParam("NumDmg")).equals("TargetedPlayer$CardsInHand")) {
+                sa.getSVar(sa.getParam("NumDmg")).equals("TargetedPlayer$CardsInHand")) {
             dmgByCardsInHand = true;
         }
         // Not sure if type choice implemented for the AI yet but it should at least recognize this spell hits harder on larger enemy hand size
@@ -75,7 +75,7 @@ public abstract class DamageAiBase extends SpellAbilityAi {
         // If has triggered ability on dealing damage to an opponent, go for it!
         Card hostcard = sa.getHostCard();
         for (Trigger trig : hostcard.getTriggers()) {
-            if (trig instanceof TriggerDamageDone) {
+            if (trig.getMode() == TriggerType.DamageDone) {
                 if (("Opponent".equals(trig.getParam("ValidTarget")))
                         && (!"True".equals(trig.getParam("CombatDamage")))) {
                     return true;

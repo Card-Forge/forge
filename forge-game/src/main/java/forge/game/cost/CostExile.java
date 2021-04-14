@@ -141,7 +141,9 @@ public class CostExile extends CostPartWithList {
             return list.contains(source);
         }
 
-        list = CardLists.getValidCards(list, type.split(";"), payer, source, ability);
+        if (!type.contains("X")) {
+            list = CardLists.getValidCards(list, type.split(";"), payer, source, ability);
+        }
 
         final Integer amount = this.convertAmount();
         if ((amount != null) && (list.size() < amount)) {

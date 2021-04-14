@@ -16,14 +16,32 @@ public class FlipACoinAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
 
         if (sa.hasParam("AILogic")) {
-            String AILogic = sa.getParam("AILogic");
-            if (AILogic.equals("Never")) {
+            String ailogic = sa.getParam("AILogic");
+            if (ailogic.equals("Never")) {
                 return false;
-            } else if (AILogic.equals("PhaseOut")) {
+            } else if (ailogic.equals("PhaseOut")) {
                 if (!ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(sa.getHostCard())) {
                     return false;
                 }
-            } else if (AILogic.equals("KillOrcs")) {
+            } else if (ailogic.equals("Bangchuckers")) {
+                if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN) ) {
+                    return false;
+                }
+                sa.resetTargets();
+                for (Player o : ai.getOpponents()) {
+                    if (sa.canTarget(o) && o.canLoseLife() && !o.cantLose()) {
+                        sa.getTargets().add(o);
+                        return true;
+                    }
+                }
+                for (Card c : ai.getOpponents().getCreaturesInPlay()) {
+                    if (sa.canTarget(c)) {
+                        sa.getTargets().add(c);
+                        return true;
+                    }
+                }
+                return false;
+            } else if (ailogic.equals("KillOrcs")) {
             	if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN) ) {
                     return false;
             	}
