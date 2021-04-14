@@ -822,6 +822,8 @@ public class Game {
         // Remove leftover items from
         this.getStack().removeInstancesControlledBy(p);
 
+        getTriggerHandler().onPlayerLost(p);
+
         ingamePlayers.remove(p);
         lostPlayers.add(p);
 

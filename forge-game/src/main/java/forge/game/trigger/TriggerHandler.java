@@ -422,11 +422,6 @@ public class TriggerHandler {
             }
         }
 
-        if (delayedTriggers.contains(regtrig) && game.getCardState(regtrig.getHostCard(), null) == null) {
-            delayedTriggers.remove(regtrig);
-            return false; // CR 603.2f owner lost game
-        }
-
         if (!regtrig.requirementsCheck(game)) {
             return false; // Conditions aren't right.
         }
@@ -633,5 +628,16 @@ public class TriggerHandler {
             }
         }
         return trigger;
+    }
+
+    public void onPlayerLost(Player p) {
+        List<Trigger> lost = new ArrayList<>();
+        for (Trigger t : delayedTriggers) {
+            // CR 603.2f owner of trigger source lost game || 800.4d trigger controller lost game
+            if (game.getCardState(t.getHostCard(), null) == null || t.getHostCard().getOwner().equals(p)) {
+                lost.add(t);
+            }
+        }
+        delayedTriggers.removeAll(lost);
     }
 }
