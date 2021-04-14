@@ -39,6 +39,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
@@ -211,6 +212,10 @@ public class ControlGainAi extends SpellAbilityAi {
             }
 
             while (t == null) {
+                // filter by MustTarget requirement
+                CardCollection originalList = new CardCollection(list);
+                boolean mustTargetFiltered = StaticAbilityMustTarget.filterMustTargetCards(ai, list, sa);
+
                 if (planeswalkers > 0) {
                     t = ComputerUtilCard.getBestPlaneswalkerAI(list);
                 } else if (creatures > 0) {
@@ -236,6 +241,11 @@ public class ControlGainAi extends SpellAbilityAi {
                         artifacts--;
                     if (t.isEnchantment())
                         enchantments--;
+                }
+
+                // Restore original list for next loop if filtered by MustTarget requirement
+                if (mustTargetFiltered) {
+                    list = originalList;
                 }
 
                 if (!sa.canTarget(t)) {

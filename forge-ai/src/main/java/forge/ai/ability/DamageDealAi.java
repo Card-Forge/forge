@@ -46,6 +46,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -342,6 +343,9 @@ public class DamageDealAi extends DamageAiBase {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
         List<Card> hPlay = getTargetableCards(ai, sa, pl, tgt, activator, source, game);
+
+        // Filter MustTarget requirements
+        StaticAbilityMustTarget.filterMustTargetCards(ai, hPlay, sa);
 
         CardCollection killables = CardLists.filter(hPlay, new Predicate<Card>() {
             @Override

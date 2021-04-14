@@ -89,6 +89,7 @@ import forge.game.spellability.SpellAbilityCondition;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
@@ -827,8 +828,11 @@ public class AiController {
             }
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         }
-        if (sa.usesTargeting() && !sa.isTargetNumberValid()) {
-            if (!sa.getTargetRestrictions().hasCandidates(sa, true)) {
+        if (sa.usesTargeting()) {
+            if (!sa.isTargetNumberValid() && !sa.getTargetRestrictions().hasCandidates(sa, true)) {
+                return AiPlayDecision.TargetingFailed;
+            }
+            if (!StaticAbilityMustTarget.meetsMustTargetRestriction(sa)) {
                 return AiPlayDecision.TargetingFailed;
             }
         }

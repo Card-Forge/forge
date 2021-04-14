@@ -43,12 +43,13 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private boolean bOk = false;
     private final boolean mandatory;
     private Predicate<GameObject> filter;
+    private boolean mustTargetFiltered;
     private static final long serialVersionUID = -1091595663541356356L;
 
     public final boolean hasCancelled() { return bCancel; }
     public final boolean hasPressedOk() { return bOk; }
 
-    public InputSelectTargets(final PlayerControllerHuman controller, final List<Card> choices, final SpellAbility sa, final boolean mandatory, Collection<Integer> divisionValues, Predicate<GameObject> filter) {
+    public InputSelectTargets(final PlayerControllerHuman controller, final List<Card> choices, final SpellAbility sa, final boolean mandatory, Collection<Integer> divisionValues, Predicate<GameObject> filter, boolean mustTargetFiltered) {
         super(controller);
         this.choices = choices;
         this.tgt = sa.getTargetRestrictions();
@@ -56,6 +57,13 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         this.mandatory = mandatory;
         this.divisionValues = divisionValues;
         this.filter = filter;
+
+        this.mustTargetFiltered = mustTargetFiltered;
+        for (final Card card : sa.getTargets().getTargetCards()) {
+            targetDepth.put(card, Integer.valueOf(1));
+            lastTarget = card;
+        }
+
         controller.getGui().setSelectables(CardView.getCollection(choices));
         final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
         for (final Card c : choices) {
@@ -64,6 +72,11 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
+                for (final GameEntity c : targetDepth.keySet()) {
+                    if (c instanceof Card) {
+                        controller.getGui().setUsedToPay(CardView.get((Card) c), true);
+                    }
+                }
                 controller.getGui().updateZones(zonesToUpdate);
             }
         });
@@ -300,7 +313,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
 
         //TODO return the correct reason to display
-        if (!sa.canTarget(player)) {
+        if (!sa.canTarget(player) || mustTargetFiltered) {
             showMessage(sa.getHostCard() + " - Cannot target this player (Hexproof? Protection? Restrictions?).");
             return;
         }
@@ -386,7 +399,12 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             bOk = true;
             this.done();
         } else {
-            this.showMessage();
+            // If selected one card that is must target, finish this selection, then populate target list again from caller.
+            if (ge instanceof Card && mustTargetFiltered) {
+                this.done();
+            } else {
+                this.showMessage();
+            }
         }
     }
 

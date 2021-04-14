@@ -19,6 +19,7 @@ import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.util.MyRandom;
@@ -50,6 +51,9 @@ public class FightAi extends SpellAbilityAi {
         aiCreatures = ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
         List<Card> humCreatures = ai.getOpponents().getCreaturesInPlay();
         humCreatures = CardLists.getTargetableCards(humCreatures, sa);
+        // Filter MustTarget requirements
+        StaticAbilityMustTarget.filterMustTargetCards(ai, humCreatures, sa);
+
         if (humCreatures.isEmpty())
             return false; //prevent IndexOutOfBoundsException on MOJHOSTO variant
 

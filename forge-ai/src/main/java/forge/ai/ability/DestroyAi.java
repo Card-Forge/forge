@@ -18,6 +18,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
 
 public class DestroyAi extends SpellAbilityAi {
@@ -222,6 +223,10 @@ public class DestroyAi extends SpellAbilityAi {
             // target loop
             // TODO use can add more Targets
             while (sa.getTargets().size() < maxTargets) {
+                // filter by MustTarget requirement
+                CardCollection originalList = new CardCollection(list);
+                boolean mustTargetFiltered = StaticAbilityMustTarget.filterMustTargetCards(ai, list, sa);
+
                 if (list.isEmpty()) {
                     if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
                         sa.resetTargets();
@@ -282,6 +287,12 @@ public class DestroyAi extends SpellAbilityAi {
                         }
                     }
                 }
+
+                // Restore original list for next loop if filtered by MustTarget requirement
+                if (mustTargetFiltered) {
+                    list = originalList;
+                }
+
                 list.remove(choice);
                 sa.getTargets().add(choice);
             }
