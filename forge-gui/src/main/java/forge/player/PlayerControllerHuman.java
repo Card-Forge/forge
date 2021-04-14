@@ -2838,7 +2838,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     continue;
                 }
                 c.getZone().remove(c);
-                c.ceaseToExist();
+                c.ceaseToExist(true);
 
                 StringBuilder sb = new StringBuilder();
                 sb.append(p).append(" removes ").append(c).append(" from game due to Dev Cheats.");

@@ -783,7 +783,7 @@ public class Game {
                         cc.removeEncodedCard(c);
                         cc.removeRemembered(c);
                     }
-                    c.ceaseToExist();
+                    c.ceaseToExist(false);
                 } else {
                     // return stolen permanents
                     if (c.getController().equals(p) && c.isInZone(ZoneType.Battlefield)) {
