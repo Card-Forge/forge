@@ -6,7 +6,7 @@ Code2=STX
 MciCode=stx
 Type=Expansion
 BoosterCovers=3
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+Booster=1 fromSheet("STX lesson"), 9 Common, 3 Uncommon, 1 RareMythic, 1 fromSheet("STA cards")
 Prerelease=6 Boosters, 1 RareMythic+
 
 [cards]
@@ -404,6 +404,28 @@ Prerelease=6 Boosters, 1 RareMythic+
 380 U Mortality Spear
 381 U Rip Apart
 382 U Decisive Denial
+
+[lesson]
+383 Environmental Sciences
+384 Expanded Anatomy
+385 Introduction to Annihilation
+386 Introduction to Prophecy
+387 Mascot Exhibition
+388 Academic Probation
+389 Reduce to Memory
+390 Mercurial Transformation
+391 Teachings of the Archaics
+392 Confront the Past
+393 Necrotic Fumes
+394 Illuminate History
+395 Start from Scratch
+396 Basic Conjuration
+397 Containment Breach
+398 Elemental Summoning
+399 Fractal Summoning
+400 Inkling Summoning
+401 Pest Summoning
+402 Spirit Summoning
 
 [tokens]
 bg_1_1_pest_lifegain

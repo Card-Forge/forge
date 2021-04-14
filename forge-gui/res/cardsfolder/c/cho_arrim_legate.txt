@@ -2,9 +2,8 @@ Name:Cho-Arrim Legate
 ManaCost:2 W
 Types:Creature Human Soldier
 PT:1/2
-S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AddKeyword$ Alternative Cost:0 | CheckSVar$ X | CheckSecondSVar$ Y | Description$ If an opponent controls a Swamp and you control a Plains, you may cast this spell without paying its mana cost.
+S:Mode$ Continuous | CharacteristicDefining$ True | AddKeyword$ Alternative Cost:0 | CheckSVar$ X | CheckSecondSVar$ Y | Description$ If an opponent controls a Swamp and you control a Plains, you may cast this spell without paying its mana cost.
 K:Protection from black
 SVar:X:Count$Valid Swamp.OppCtrl
 SVar:Y:Count$Valid Plains.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cho_arrim_legate.jpg
 Oracle:If an opponent controls a Swamp and you control a Plains, you may cast this spell without paying its mana cost.\nProtection from black

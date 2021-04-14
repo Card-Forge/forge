@@ -168,7 +168,7 @@ public final class StaticAbilityContinuous {
 
         if (layer == StaticAbilityLayer.TEXT && params.containsKey("GainTextOf")) {
             final String valid = params.get("GainTextOf");
-            CardCollection allValid = CardLists.getValidCards(game.getCardsInGame(), valid, hostCard.getController(), hostCard, null);
+            CardCollection allValid = CardLists.getValidCards(game.getCardsInGame(), valid, hostCard.getController(), hostCard, stAb);
             if (allValid.size() > 1) {
                 // TODO: if ever necessary, support gaining text of multiple cards at the same time
                 System.err.println("Error: GainTextOf parameter was not defined as a unique card for " + hostCard);
@@ -271,7 +271,7 @@ public final class StaticAbilityContinuous {
                         String keywordDefined = params.get("KeywordDefined");
                         CardCollectionView definedCards = game.getCardsIn(ZoneType.Battlefield);
                         definedCards = CardLists.getValidCards(definedCards, keywordDefined, hostCard.getController(),
-                                hostCard, null);
+                                hostCard, stAb);
                         for (Card c : definedCards) {
                             final int cmc = c.getCMC();
                             String y = (input.replace(" from EachCMCAmongDefined", ":Card.cmcEQ"
@@ -504,7 +504,7 @@ public final class StaticAbilityContinuous {
                 if ("True".equals(look)) {
                     look = "You";
                 }
-                mayLookAt = AbilityUtils.getDefinedPlayers(hostCard, look, null);
+                mayLookAt = AbilityUtils.getDefinedPlayers(hostCard, look, stAb);
             }
             if (params.containsKey("MayPlay")) {
                 controllerMayPlay = true;
@@ -567,7 +567,7 @@ public final class StaticAbilityContinuous {
                     }
                 }
                 if (params.containsKey("ControlOpponentsSearchingLibrary")) {
-                    Player cntl = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, params.get("ControlOpponentsSearchingLibrary"), null), null);
+                    Player cntl = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, params.get("ControlOpponentsSearchingLibrary"), stAb), null);
                     p.addControlledWhileSearching(se.getTimestamp(), cntl);
                 }
 
@@ -941,7 +941,7 @@ public final class StaticAbilityContinuous {
         final String[] strngs = params.get("Affected").split(",");
 
         for (Player p : controller.getGame().getPlayersInTurnOrder()) {
-            if (p.isValid(strngs, controller, hostCard, null)) {
+            if (p.isValid(strngs, controller, hostCard, stAb)) {
                 players.add(p);
             }
         }
@@ -951,12 +951,11 @@ public final class StaticAbilityContinuous {
     }
 
     private static CardCollectionView getAffectedCards(final StaticAbility stAb, final CardCollectionView preList) {
-        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
         final Game game = hostCard.getGame();
         final Player controller = hostCard.getController();
 
-        if (params.containsKey("CharacteristicDefining")) {
+        if (stAb.hasParam("CharacteristicDefining")) {
             return new CardCollection(hostCard); // will always be the card itself
         }
 
@@ -966,37 +965,24 @@ public final class StaticAbilityContinuous {
         // add preList in addition to the normal affected cards
         // need to add before game cards to have preference over them
         if (!preList.isEmpty()) {
-            if (params.containsKey("AffectedZone")) {
+            if (stAb.hasParam("AffectedZone")) {
                 affectedCards.addAll(CardLists.filter(preList, CardPredicates.inZone(
-                        ZoneType.listValueOf(params.get("AffectedZone")))));
+                        ZoneType.listValueOf(stAb.getParam("AffectedZone")))));
             } else {
                 affectedCards.addAll(CardLists.filter(preList, CardPredicates.inZone(ZoneType.Battlefield)));
             }
         }
 
-        if (params.containsKey("AffectedZone")) {
-            affectedCards.addAll(game.getCardsIn(ZoneType.listValueOf(params.get("AffectedZone"))));
+        if (stAb.hasParam("AffectedZone")) {
+            affectedCards.addAll(game.getCardsIn(ZoneType.listValueOf(stAb.getParam("AffectedZone"))));
         } else {
             affectedCards.addAll(game.getCardsIn(ZoneType.Battlefield));
         }
-
-        if (params.containsKey("Affected") && !params.get("Affected").contains(",")) {
-            if (params.get("Affected").contains("Self")) {
-                affectedCards = new CardCollection(hostCard);
-            } else if (params.get("Affected").contains("EnchantedBy")) {
-                affectedCards = new CardCollection(hostCard.getEnchantingCard());
-            } else if (params.get("Affected").contains("EquippedBy")) {
-                affectedCards = new CardCollection(hostCard.getEquipping());
-            } else if (params.get("Affected").equals("EffectSource")) {
-                affectedCards = new CardCollection(AbilityUtils.getDefinedCards(hostCard, params.get("Affected"), null));
-                return affectedCards;
-            }
+        if (stAb.hasParam("Affected")) {
+            affectedCards = CardLists.getValidCards(affectedCards, stAb.getParam("Affected").split(","), controller, hostCard, stAb);
         }
 
-        if (params.containsKey("Affected")) {
-            affectedCards = CardLists.getValidCards(affectedCards, params.get("Affected").split(","), controller, hostCard, null);
-        }
-        affectedCards.removeAll((List<?>) stAb.getIgnoreEffectCards());
+        affectedCards.removeAll(stAb.getIgnoreEffectCards());
         return affectedCards;
     }
 }
