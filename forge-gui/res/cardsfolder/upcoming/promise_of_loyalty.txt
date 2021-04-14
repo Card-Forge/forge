@@ -7,4 +7,5 @@ SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Creature.IsNotRemembered+Contro
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ VowStatic | ForgetOnMoved$ Battlefield | ForgetCounter$ VOW | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:VowStatic:Mode$ CantAttack | ValidCard$ Card.IsRemembered | Target$ You | Description$ Each of these creatures can’t attack you for as long as it has a vow counter on it.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
 Oracle:Each player puts a vow counter on a creature they control and sacrifices the rest. Each of those creatures can’t attack you for as long as it has a vow counter on it.
