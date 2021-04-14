@@ -1,7 +1,6 @@
 Name:Deadly Rollick
 ManaCost:3 B
 Types:Instant
-S:Mode$ Continuous | CharacteristicDefining$ True | AddKeyword$ Alternative Cost:0 | CheckSVar$ X | Description$ If you control a commander, you may cast this spell without paying its mana cost.
+S:Mode$ Continuous | CharacteristicDefining$ True | AddKeyword$ Alternative Cost:0 | IsPresent$ Card.IsCommander+YouCtrl | Description$ If you control a commander, you may cast this spell without paying its mana cost.
 A:SP$ ChangeZone | Cost$ 3 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
-SVar:X:Count$Valid Card.IsCommander+YouCtrl
 Oracle:If you control a commander, you may cast this spell without paying its mana cost.\nExile target creature.
