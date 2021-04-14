@@ -1,0 +1,6 @@
+Name:Standard Bearer
+ManaCost:1 W
+Types:Creature Human Flagbearer
+PT:1/1
+S:Mode$ MustTarget | ValidSA$ Spell.OppCtrl,Activated.OppCtrl | ValidTarget$ Flagbearer | ValidZone$ Battlefield | Description$ While an opponent is choosing targets as part of casting a spell they control or activating an ability they control, that player must choose at least one Flagbearer on the battlefield if able.
+Oracle:While an opponent is choosing targets as part of casting a spell they control or activating an ability they control, that player must choose at least one Flagbearer on the battlefield if able.

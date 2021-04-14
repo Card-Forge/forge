@@ -1131,7 +1131,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final TargetChoices oldTarget = sa.getTargets();
         final TargetSelection select = new TargetSelection(this, sa);
         sa.clearTargets();
-        if (select.chooseTargets(oldTarget.size(), Lists.newArrayList(oldTarget.getDividedValues()), filter, optional)) {
+        if (select.chooseTargets(oldTarget.size(), Lists.newArrayList(oldTarget.getDividedValues()), filter, optional, false)) {
             return sa.getTargets();
         } else {
             sa.setTargets(oldTarget);
@@ -1897,7 +1897,28 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean chooseTargetsFor(final SpellAbility currentAbility) {
         final TargetSelection select = new TargetSelection(this, currentAbility);
-        return select.chooseTargets(null, null, null, false);
+        boolean canFilterMustTarget = true;
+
+        // Can't filter MustTarget if any parent ability is also targeting
+        SpellAbility checkSA = currentAbility.getParent();
+        while (checkSA != null) {
+            if (checkSA.usesTargeting()) {
+                canFilterMustTarget = false;
+                break;
+            }
+            checkSA = checkSA.getParent();
+        }
+        // Can't filter MustTarget is any SubAbility is also targeting
+        checkSA = currentAbility.getSubAbility();
+        while (checkSA != null) {
+            if (checkSA.usesTargeting()) {
+                canFilterMustTarget = false;
+                break;
+            }
+            checkSA = checkSA.getSubAbility();
+        }
+
+        return select.chooseTargets(null, null, null, false, canFilterMustTarget);
     }
 
     @Override

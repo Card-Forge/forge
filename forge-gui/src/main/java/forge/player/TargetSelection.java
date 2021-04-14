@@ -42,6 +42,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.StackItemView;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.InputSelectTargets;
@@ -75,7 +76,7 @@ public class TargetSelection {
         return ability.isTrigger() || getTgt().getMandatory();
     }
 
-    public final boolean chooseTargets(Integer numTargets, Collection<Integer> divisionValues, Predicate<GameObject> filter, boolean optional) {
+    public final boolean chooseTargets(Integer numTargets, Collection<Integer> divisionValues, Predicate<GameObject> filter, boolean optional, boolean canFilterMustTarget) {
         if (!ability.usesTargeting()) {
             throw new RuntimeException("TargetSelection.chooseTargets called for ability that does not target - " + ability);
         }
@@ -127,6 +128,10 @@ public class TargetSelection {
         }
         else {
             List<Card> validTargets = CardUtil.getValidCardsToTarget(tgt, ability);
+            boolean mustTargetFiltered = false;
+            if (canFilterMustTarget) {
+                mustTargetFiltered = StaticAbilityMustTarget.filterMustTargetCards(controller.getPlayer(), validTargets, ability);
+            }
             if (filter != null) {
                 validTargets = new CardCollection(Iterables.filter(validTargets, filter));
             }
@@ -145,6 +150,10 @@ public class TargetSelection {
                 }
             }
             if (validTargets.isEmpty()) {
+                // If all targets are filtered after applying MustTarget static ability, the spell can't be cast or the ability can't be activated
+                if (mustTargetFiltered) {
+                    return false;
+                }
                 //if no valid cards to target and only one valid non-card, auto-target the non-card
                 //this handles "target opponent" cards, along with any other cards that can only target a single non-card game entity
                 //note that we don't handle auto-targeting cards this way since it's possible that the result will be undesirable
@@ -170,7 +179,7 @@ public class TargetSelection {
             PlayerView playerView = controller.getLocalPlayerView();
             PlayerZoneUpdates playerZoneUpdates = controller.getGui().openZones(playerView, zones, playersWithValidTargets);
             if (!zones.contains(ZoneType.Stack)) {
-                InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory, divisionValues, filter);
+                InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory, divisionValues, filter, mustTargetFiltered);
                 inp.showAndWait();
                 choiceResult = !inp.hasCancelled();
                 bTargetingDone = inp.hasPressedOk();
@@ -182,7 +191,7 @@ public class TargetSelection {
             }
         }
         // some inputs choose cards one-by-one and need to be called again
-        return choiceResult && chooseTargets(numTargets, divisionValues, filter, optional);
+        return choiceResult && chooseTargets(numTargets, divisionValues, filter, optional, canFilterMustTarget);
     }
 
     private final boolean chooseCardFromList(final List<Card> choices, final boolean targeted, final boolean mandatory) {

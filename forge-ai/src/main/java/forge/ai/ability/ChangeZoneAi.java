@@ -58,6 +58,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -1160,6 +1161,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             if (!list.isEmpty()) {
                 if (destination.equals(ZoneType.Battlefield) || origin.contains(ZoneType.Battlefield)) {
+                    // filter by MustTarget requirement
+                    CardCollection originalList = new CardCollection(list);
+                    boolean mustTargetFiltered = StaticAbilityMustTarget.filterMustTargetCards(ai, list, sa);
+
                     final Card mostExpensive = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false);
                     if (mostExpensive.isCreature()) {
                         // if a creature is most expensive take the best one
@@ -1187,6 +1192,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         if (!ComputerUtilCard.useRemovalNow(sa, choice, 0, destination)) {
                             return false;
                         }
+                    }
+
+                    // Restore original list for next loop if filtered by MustTarget requirement
+                    if (mustTargetFiltered) {
+                        list = originalList;
                     }
                 } else if (destination.equals(ZoneType.Hand) || destination.equals(ZoneType.Library)) {
                     List<Card> nonLands = CardLists.getNotType(list, "Land");

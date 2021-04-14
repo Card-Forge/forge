@@ -69,6 +69,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCastWithFlash;
+import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
@@ -77,6 +78,7 @@ import forge.util.Aggregates;
 import forge.util.CardTranslation;
 import forge.util.Expressions;
 import forge.util.Lang;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 
 //only SpellAbility can go on the stack
@@ -1962,6 +1964,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
             currentAbility = subAbility;
         } while (currentAbility != null);
+
+        // Check if meet MustTarget restriction
+        if (!StaticAbilityMustTarget.meetsMustTargetRestriction(this)) {
+            String message = Localizer.getInstance().getMessage("lblInvalidTargetSpecification");
+            getActivatingPlayer().getController().notifyOfValue(null, null, message);
+            return false;
+        }
+
         return true;
     }
     public final void clearTargets() {
