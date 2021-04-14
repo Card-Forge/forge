@@ -36,6 +36,11 @@ public class ControlPlayerEffect extends SpellAbilityEffect {
             game.getUntap().addUntil(pTarget, new GameCommand() {
                 @Override
                 public void run() {
+                    // CR 800.4b
+                    if (activator.hasLost()) {
+                        return;
+                    }
+
                     long ts = game.getNextTimestamp();
                     pTarget.addController(ts, activator);
                     

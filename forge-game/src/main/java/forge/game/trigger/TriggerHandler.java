@@ -422,6 +422,11 @@ public class TriggerHandler {
             }
         }
 
+        if (delayedTriggers.contains(regtrig) && game.getCardState(regtrig.getHostCard(), null) == null) {
+            delayedTriggers.remove(regtrig);
+            return false; // CR 603.2f owner lost game
+        }
+
         if (!regtrig.requirementsCheck(game)) {
             return false; // Conditions aren't right.
         }
