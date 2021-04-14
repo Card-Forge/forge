@@ -232,7 +232,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     }
                 } else {
                  // Allow ordering the rest of the revealed cards
-                    if ((revealedDest.isKnown()) && revealed.size() >= 2) {
+                    if (revealedDest.isKnown() && revealed.size() >= 2 && !sa.hasParam("NoReordering")) {
                         revealed = (CardCollection)p.getController().orderMoveToZoneList(revealed, revealedDest, sa);
                     }
                     if (revealedDest == ZoneType.Library && !shuffle

@@ -4,9 +4,12 @@ Types:Legendary Artifact Creature Construct
 PT:1/4
 S:Mode$ CantBeCast | ValidCard$ Permanent | Caster$ You | Description$ You can't cast permanent spells.
 A:AB$ Mana | Cost$ 4 T | Produced$ W U B R G | SubAbility$ DBTrigger | SpellDescription$ Add {W}{U}{B}{R}{G}. When you cast your next spell this turn, exile cards from the top of your library until you exile an instant or sorcery card with lesser mana value. Until end of turn, you may cast that card without paying its mana cost. Put each other card exiled this way on the bottom of your library in a random order.
-SVar:DBTrigger:DB$ DelayedTrigger | Mode$ SpellCast | ValidActivatingPlayer$ You | Execute$ DBDig | TriggerDescription$ When you cast your next spell this turn, exile cards from the top of your library until you exile an instant or sorcery card with lesser mana value. Until end of turn, you may cast that card without paying its mana cost. Put each other card exiled this way on the bottom of your library in a random order.
-SVar:DBDig:DB$ DigUntil | Defined$ You | Valid$ Instant.cmcLTX,Sorcery.cmcLTX | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | RememberRevealed$ True | ImprintFound$ True | RevealRandomOrder$ True | SubAbility$ DBPlay
-SVar:DBPlay:DB$ Play | Defined$ Imprinted | WithoutManaCost$ True | Optional$ True | ForgetTargetRemembered$ True | SubAbility$ DBRestRandomOrder
-SVar:DBRestRandomOrder:DB$ ChangeZone | Defined$ Remembered | AtRandom$ True | Origin$ Library | Destination$ Library | LibraryPosition$ -1
+SVar:DBTrigger:DB$ DelayedTrigger | Mode$ SpellCast | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ DBDig | TriggerDescription$ When you cast your next spell this turn, exile cards from the top of your library until you exile an instant or sorcery card with lesser mana value. Until end of turn, you may cast that card without paying its mana cost. Put each other card exiled this way on the bottom of your library in a random order.
+SVar:DBDig:DB$ DigUntil | Defined$ You | Valid$ Instant.cmcLTX,Sorcery.cmcLTX | FoundDestination$ Exile | RevealedDestination$ Exile | RememberRevealed$ True | ImprintFound$ True | NoReordering$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Imprinted | ForgetOnMoved$ Exile | SubAbility$ DBRestRandomOrder
+SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | AffectedZone$ Exile
+SVar:DBRestRandomOrder:DB$ ChangeZone | Defined$ Remembered | AtRandom$ True | Origin$ Exile | Destination$ Library | LibraryPosition$ -1
 SVar:X:TriggeredCard$CardManaCost
+AI:RemoveDeck:Random
+DeckNeeds:Type$Instant|Sorcery
 Oracle:You can’t cast permanent spells.\n{4}, {T}: Add {W}{U}{B}{R}{G}. When you cast your next spell this turn, exile cards from the top of your library until you exile an instant or sorcery card with lesser mana value. Until end of turn, you may cast that card without paying its mana cost. Put each other card exiled this way on the bottom of your library in a random order.
