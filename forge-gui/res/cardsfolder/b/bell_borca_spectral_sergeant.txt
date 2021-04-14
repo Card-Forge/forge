@@ -3,7 +3,7 @@ ManaCost:2 R W
 Types:Legendary Creature Spirit Soldier
 PT:*/5
 Text:Note the converted mana cost of each card as it's put into exile.
-T:Mode$ ChangesZone | Destination$ Exile | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigNoteNum | Static$ True
+T:Mode$ ChangesZone | Destination$ Exile | ValidCard$ Card.nonToken | TriggerZones$ Battlefield | Execute$ TrigNoteNum | Static$ True
 SVar:TrigNoteNum:DB$ StoreSVar | SVar$ ExiledCMC | Type$ Triggered | Expression$ CardManaCost | ConditionCheckSVar$ X | ConditionSVarCompare$ GTExiledCMC
 SVar:ExiledCMC:Number$0
 SVar:X:TriggeredCard$CardManaCost
