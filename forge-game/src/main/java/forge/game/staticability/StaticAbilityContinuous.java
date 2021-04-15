@@ -882,6 +882,17 @@ public final class StaticAbilityContinuous {
                 affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost,
                         mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null,
                         mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
+
+                // If the MayPlay effect only affected itself, check if it is in graveyard and give other player who cast Shaman's Trance MayPlay
+                if (stAb.getParam("Affected").equals("Card.Self") && affectedCard.isInZone(ZoneType.Graveyard)) {
+                    for (final Player p : game.getPlayers()) {
+                        if (p.hasKeyword("Shaman's Trance") && mayPlayController != p) {
+                            affectedCard.setMayPlay(p, mayPlayWithoutManaCost,
+                                    mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null,
+                                    mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
+                        }
+                    }
+                }
             }
         }
 
@@ -979,7 +990,26 @@ public final class StaticAbilityContinuous {
             affectedCards.addAll(game.getCardsIn(ZoneType.Battlefield));
         }
         if (stAb.hasParam("Affected")) {
+            // Handle Shaman's Trance
+            CardCollection affectedCardsOriginal = null;
+            if (controller.hasKeyword("Shaman's Trance") && stAb.hasParam("MayPlay")) {
+                affectedCardsOriginal = new CardCollection(affectedCards);
+            }
+
             affectedCards = CardLists.getValidCards(affectedCards, stAb.getParam("Affected").split(","), controller, hostCard, stAb);
+
+            // Add back all cards that are in other player's graveyard, and meet the restrictions without YouOwn/YouCtrl (treat it as in your graveyard)
+            if (affectedCardsOriginal != null) {
+                String affectedParam = stAb.getParam("Affected");
+                affectedParam = affectedParam.replaceAll("[\\.\\+]YouOwn", "");
+                affectedParam = affectedParam.replaceAll("[\\.\\+]YouCtrl", "");
+                String[] restrictions = affectedParam.split(",");
+                for (final Card card : affectedCardsOriginal) {
+                    if (card.isInZone(ZoneType.Graveyard) && card.getController() != controller && card.isValid(restrictions, controller, hostCard, stAb)) {
+                        affectedCards.add(card);
+                    }
+                }
+            }
         }
 
         affectedCards.removeAll(stAb.getIgnoreEffectCards());
