@@ -15,6 +15,7 @@ import com.google.common.collect.Maps;
 
 import forge.GameCommand;
 import forge.card.CardStateName;
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
@@ -27,6 +28,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CardState;
 import forge.game.card.CardUtil;
 import forge.game.card.CardView;
 import forge.game.card.CardZoneTable;
@@ -651,6 +653,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
 
+                    // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
+                    if (sa.hasParam("FaceDown")) {
+                        gameCard.turnFaceDown(true);
+                        setFaceDownState(gameCard, sa);
+                    }
+
                     movedCard = game.getAction().moveTo(gameCard.getController().getZone(destination), gameCard, cause, moveParams);
                     if (sa.hasParam("Unearth")) {
                         movedCard.setUnearthed(true);
@@ -661,9 +669,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("LeaveBattlefield")) {
                         addLeaveBattlefieldReplacement(movedCard, sa, sa.getParam("LeaveBattlefield"));
-                    }
-                    if (sa.hasParam("FaceDown")) {
-                        movedCard.turnFaceDown(true);
                     }
                     if (addToCombat(movedCard, movedCard.getController(), sa, "Attacking", "Blocking")) {
                         combatChanged = true;
@@ -1295,34 +1300,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
                     if (sa.hasParam("FaceDown")) {
                         c.turnFaceDown(true);
-
-                        // set New Pt doesn't work because this values need to be copyable for clone effects
-                        if (sa.hasParam("FaceDownPower")) {
-                            c.setBasePower(AbilityUtils.calculateAmount(
-                                    source, sa.getParam("FaceDownPower"), sa));
-                        }
-                        if (sa.hasParam("FaceDownToughness")) {
-                            c.setBaseToughness(AbilityUtils.calculateAmount(
-                                    source, sa.getParam("FaceDownToughness"), sa));
-                        }
-
-                        if (sa.hasParam("FaceDownAddType")) {
-                            c.addType(Arrays.asList(sa.getParam("FaceDownAddType").split(" & ")));
-                        }
-
-                        if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
-                                || sa.hasParam("FaceDownAddType")) {
-                            final GameCommand unanimate = new GameCommand() {
-                                private static final long serialVersionUID = 8853789549297846163L;
-
-                                @Override
-                                public void run() {
-                                    c.clearStates(CardStateName.FaceDown, true);
-                                }
-                            };
-
-                            c.addFaceupCommand(unanimate);
-                        }
+                        setFaceDownState(c, sa);
                     }
                     movedCard = game.getAction().moveToPlay(c, c.getController(), cause, moveParams);
                     if (sa.hasParam("Tapped")) {
@@ -1458,6 +1436,39 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 && !sa.hasParam("AtRandom")
                 && (!sa.hasParam("Defined") || sa.hasParam("ChooseFromDefined"))
                 && sa.getParam("WithTotalCMC") == null;
+    }
+
+    private static void setFaceDownState(Card c, SpellAbility sa) {
+        final Card source = sa.getHostCard();
+        CardState faceDown = c.getFaceDownState();
+
+        // set New Pt doesn't work because this values need to be copyable for clone effects
+        if (sa.hasParam("FaceDownPower")) {
+            faceDown.setBasePower(AbilityUtils.calculateAmount(
+                    source, sa.getParam("FaceDownPower"), sa));
+        }
+        if (sa.hasParam("FaceDownToughness")) {
+            faceDown.setBaseToughness(AbilityUtils.calculateAmount(
+                    source, sa.getParam("FaceDownToughness"), sa));
+        }
+
+        if (sa.hasParam("FaceDownSetType")) {
+            faceDown.setType(new CardType(Arrays.asList(sa.getParam("FaceDownSetType").split(" & ")), false));
+        }
+
+        if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
+                || sa.hasParam("FaceDownSetType")) {
+            final GameCommand unanimate = new GameCommand() {
+                private static final long serialVersionUID = 8853789549297846163L;
+
+                @Override
+                public void run() {
+                    c.clearStates(CardStateName.FaceDown, true);
+                }
+            };
+
+            c.addFaceupCommand(unanimate);
+        }
     }
 
     /**

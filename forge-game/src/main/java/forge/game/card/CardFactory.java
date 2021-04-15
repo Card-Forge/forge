@@ -623,7 +623,7 @@ public class CardFactory {
             // if something is cloning a facedown card, it only clones the
             // facedown state into original
             final CardState ret = new CardState(out, CardStateName.Original);
-            ret.copyFrom(in.getState(CardStateName.FaceDown, true), false);
+            ret.copyFrom(in.getFaceDownState(), false);
             result.put(CardStateName.Original, ret);
         } else if (in.isFlipCard()) {
             // if something is cloning a flip card, copy both original and
@@ -828,9 +828,6 @@ public class CardFactory {
                 state.removeIntrinsicKeyword("Devoid");
             }
         }
-
-        // Dont copy the facedown state, make new one
-        result.put(CardStateName.FaceDown, CardUtil.getFaceDownCharacteristic(out));
         return result;
     }
 

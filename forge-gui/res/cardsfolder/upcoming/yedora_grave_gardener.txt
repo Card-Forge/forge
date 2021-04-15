@@ -3,6 +3,5 @@ ManaCost:4 G
 Types:Legendary Creature Treefolk Druid
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken+Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ Whenever another nontoken creature you control dies, you may return it to the battlefield face down under its owner's control. It's a Forest land. (It has no other types or abilities.)
-SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | FaceDown$ True | AnimateSubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Land,Forest | RemoveCardTypes$ True | Permanent$ True
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | FaceDown$ True | FaceDownSetType$ Land & Forest
 Oracle:Whenever another nontoken creature you control dies, you may return it to the battlefield face down under its owner's control. It's a Forest land. (It has no other types or abilities.)
