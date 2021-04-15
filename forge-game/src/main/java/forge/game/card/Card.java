@@ -6757,13 +6757,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void ceaseToExist(boolean skipTrig) {
-        // CR 800.4d if card is controlled by opponent, LTB should trigger
-        if (skipTrig || getOwner().equals(getController())) {
-            getGame().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        // CR 603.6c other players LTB triggers should work
+        if (skipTrig) {
+            getZone().remove(this);
+            setZone(getOwner().getZone(ZoneType.None));
         }
-        game.getAction().moveTo(ZoneType.None, this, null);
-        if (skipTrig || getOwner().equals(getController())) {
-            getGame().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        else {
+            game.getAction().moveTo(ZoneType.None, this, null);
         }
     }
 
