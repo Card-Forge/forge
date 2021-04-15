@@ -5,13 +5,11 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCloneStates;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactory;
@@ -54,6 +52,8 @@ public class MutateEffect extends SpellAbilityEffect {
             host.setController(p, 0);
         }
 
+        final boolean wasFaceDown = target.isFaceDown();
+
         host.setMergedToCard(target);
         // If first time mutate, add target first.
         if (!target.hasMergedCard()) {
@@ -72,10 +72,15 @@ public class MutateEffect extends SpellAbilityEffect {
         // Now add all abilities from bottom cards
         final Long ts = game.getNextTimestamp();
         target.setMutatedTimestamp(ts);
-        if (topCard.getCurrentStateName() != CardStateName.FaceDown) {
-            final CardCloneStates mutatedStates = CardFactory.getMutatedCloneStates(target, sa);
-            target.addCloneState(mutatedStates, ts);
+
+        target.addCloneState(CardFactory.getMutatedCloneStates(target, sa), ts);
+
+        // currently used by Tezzeret, Cruel Machinist and Yedora, Grave Gardener
+        // when mutating onto the FaceDown, their effect should end, then 721.2e would stop trigger
+        if (wasFaceDown && !target.isFaceDown()) {
+            target.runFaceupCommands();
         }
+
         // Re-register triggers for target card
         game.getTriggerHandler().clearActiveTriggers(target, null);
         game.getTriggerHandler().registerActiveTrigger(target, false);

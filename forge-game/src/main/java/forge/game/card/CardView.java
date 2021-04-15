@@ -142,6 +142,10 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.Foretold);
     }
 
+    public boolean isManifested() {
+        return get(TrackableProperty.Manifested);
+    }
+
     public boolean isFlipCard() {
         return get(TrackableProperty.FlipCard);
     }
@@ -792,6 +796,7 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.FlipCard, c.isFlipCard());
         set(TrackableProperty.Facedown, c.isFaceDown());
         set(TrackableProperty.Foretold, c.isForetold());
+        set(TrackableProperty.Manifested, c.isManifested());
         set(TrackableProperty.Adventure, c.isAdventureCard());
         set(TrackableProperty.DoubleFaced, c.isDoubleFaced());
         set(TrackableProperty.Modal, c.isModal());
@@ -1059,6 +1064,12 @@ public class CardView extends GameEntityView {
             return getImageKey(null);
         }
         public String getImageKey(Iterable<PlayerView> viewers) {
+            if (getState() == CardStateName.FaceDown) {
+                if (getCard().getZone() == ZoneType.Exile) {
+                    return ImageKeys.getTokenKey(getCard().isForeTold() ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD);
+                }
+                return ImageKeys.getTokenKey(getCard().isManifested() ? ImageKeys.MANIFEST_IMAGE : ImageKeys.MORPH_IMAGE);
+            }
             if (canBeShownToAny(viewers)) {
                 return get(TrackableProperty.ImageKey);
             }

@@ -380,10 +380,7 @@ public final class CardUtil {
 
         //show hidden if exiled facedown
         if (state == CardStateName.FaceDown) {
-            if (c.isInZone(ZoneType.Exile))
-                ret.setImageKey(ImageKeys.getTokenKey(c.isForetold() ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD));
-            else
-                ret.setImageKey(ImageKeys.getTokenKey(c.isManifested() ? ImageKeys.MANIFEST_IMAGE : ImageKeys.MORPH_IMAGE));
+            ret.setImageKey(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD));
         } else {
             ret.setImageKey(c.getImageKey());
         }

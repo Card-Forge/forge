@@ -27,6 +27,7 @@ public enum TrackableProperty {
     Flipped(TrackableTypes.BooleanType),
     Facedown(TrackableTypes.BooleanType),
     Foretold(TrackableTypes.BooleanType),
+    Manifested(TrackableTypes.BooleanType),
     Modal(TrackableTypes.BooleanType),
     Adventure(TrackableTypes.BooleanType),
     DoubleFaced(TrackableTypes.BooleanType),
