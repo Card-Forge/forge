@@ -302,6 +302,7 @@ public class GameFormat implements Comparable<GameFormat> {
         {
             coreFormats.add("Standard.txt");
             coreFormats.add("Pioneer.txt");
+            coreFormats.add("Historic.txt");
             coreFormats.add("Modern.txt");
             coreFormats.add("Legacy.txt");
             coreFormats.add("Vintage.txt");
