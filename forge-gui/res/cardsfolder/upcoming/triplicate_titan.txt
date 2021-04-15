@@ -6,8 +6,9 @@ K:Flying
 K:Vigilance
 K:Trample
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigTokenFly | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, create a 3/3 colorless Golem artifact creature token with flying, a 3/3 colorless Golem artifact creature token with vigilance, and a 3/3 colorless Golem artifact creature token with trample.
-SVar:TrigTokenFly:DB$Token | TokenAmount$ 1 | TokenScript$ c_3_3_a_golem_flying | SubAbility$ DBTokenVig
+SVar:TrigTokenFly:DB$Token | TokenAmount$ 1 | TokenScript$ c_3_3_a_golem_flying | ChangeZoneTable$ True | SubAbility$ DBTokenVig
 SVar:DBTokenVig:DB$Token | TokenAmount$ 1 | TokenScript$ c_3_3_a_golem_vigilance | SubAbility$ DBTokenTra
-SVar:DBTokenTra:DB$Token | TokenAmount$ 1 | TokenScript$ c_3_3_a_golem_trample
+SVar:DBTokenTra:DB$Token | TokenAmount$ 1 | TokenScript$ c_3_3_a_golem_trample | SubAbility$ DBResolve
+SVar:DBResolve:DB$ ChangeZoneResolve
 DeckHas:Ability$Token
 Oracle:Flying, vigilance, trample\nWhen Triplicate Titan dies, create a 3/3 colorless Golem artifact creature token with flying, a 3/3 colorless Golem artifact creature token with vigilance, and a 3/3 colorless Golem artifact creature token with trample.
