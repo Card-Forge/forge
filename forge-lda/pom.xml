@@ -12,12 +12,45 @@
     <name>Forge LDA</name>
 
     <properties>
-        <parsedVersion.majorVersion>0</parsedVersion.majorVersion>
-        <parsedVersion.minorVersion>0</parsedVersion.minorVersion>
-        <parsedVersion.incrementalVersion>0</parsedVersion.incrementalVersion>
+        <alpha-version>1.6.39.001</alpha-version>
     </properties>
 
+    <build>
+        <sourceDirectory>src</sourceDirectory>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>filters</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <finalName>forge-lda-${alpha-version}</finalName>
+    </build>
+
     <dependencies>
+        <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-game</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-ai</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>forge</groupId>
             <artifactId>forge-gui</artifactId>
@@ -29,9 +62,10 @@
             <version>3.8.1</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-math3</artifactId>
-            <version>3.6.1</version>
+            <groupId>forge</groupId>
+            <artifactId>forge-gui-desktop</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
