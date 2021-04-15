@@ -1,0 +1,6 @@
+Name:Golem
+ManaCost:no cost
+PT:3/3
+Types:Artifact Creature Golem
+K:Trample
+Oracle:Trample
