@@ -6,7 +6,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-//import forge.GuiDesktop;
+import forge.GuiDesktop;
 import forge.StaticData;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -15,6 +15,7 @@ import forge.deck.DeckFormat;
 import forge.deck.io.Archetype;
 import forge.deck.io.CardThemedLDAIO;
 import forge.deck.io.DeckStorage;
+import forge.gui.GuiBase;
 import forge.lda.dataset.Dataset;
 import forge.lda.lda.LDA;
 import forge.game.GameFormat;
@@ -42,7 +43,7 @@ public final class LDAModelGenetrator {
 
 
     public static final void main(String[] args){
-        //GuiBase.setInterface(new GuiDesktop());
+        GuiBase.setInterface(new GuiDesktop());
         FModel.initialize(null, new Function<ForgePreferences, Void>()  {
             @Override
             public Void apply(ForgePreferences preferences) {
@@ -57,6 +58,7 @@ public final class LDAModelGenetrator {
         List<String> formatStrings = new ArrayList<>();
         formatStrings.add(FModel.getFormats().getStandard().getName());
         formatStrings.add(FModel.getFormats().getPioneer().getName());
+        formatStrings.add(FModel.getFormats().getHistoric().getName());
         formatStrings.add(FModel.getFormats().getModern().getName());
         formatStrings.add("Legacy");
         formatStrings.add("Vintage");

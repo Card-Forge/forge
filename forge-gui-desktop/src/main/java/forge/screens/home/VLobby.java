@@ -246,6 +246,7 @@ public class VLobby implements ILobbyView {
         switch (selectedDeckType){
             case STANDARD_CARDGEN_DECK:
             case PIONEER_CARDGEN_DECK:
+            case HISTORIC_CARDGEN_DECK:
             case MODERN_CARDGEN_DECK:
             case LEGACY_CARDGEN_DECK:
             case VINTAGE_CARDGEN_DECK:
