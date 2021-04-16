@@ -132,7 +132,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
 
         // We probably should be storing SA svars too right?
         if (!sa.isWrapper()) {
-            for (final Entry<String, String> e : sa.getSVars().entrySet()) {
+            for (final Entry<String, String> e : sa.getDirectSVars().entrySet()) {
                 final String value = e.getValue();
                 if (!StringUtils.isEmpty(value)) {
                     storedSVars.put(e.getKey(), value);

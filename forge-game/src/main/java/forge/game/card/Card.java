@@ -1589,8 +1589,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         currentState.setSVar(var, str);
     }
 
+    @Override
     public final Map<String, String> getSVars() {
         return currentState.getSVars();
+    }
+
+    @Override
+    public Map<String, String> getDirectSVars() {
+        return ImmutableMap.of();
     }
 
     public final void setSVars(final Map<String, String> newSVars) {

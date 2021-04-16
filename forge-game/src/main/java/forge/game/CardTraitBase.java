@@ -1,6 +1,5 @@
 package forge.game;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -531,9 +530,14 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
 
     @Override
     public Map<String, String> getSVars() {
-        Map<String, String> res = new HashMap<>(getSVarFallback().getSVars());
+        Map<String, String> res = Maps.newHashMap(getSVarFallback().getSVars());
         res.putAll(sVars);
         return res;
+    }
+
+    @Override
+    public Map<String, String> getDirectSVars() {
+        return sVars;
     }
 
     @Override
