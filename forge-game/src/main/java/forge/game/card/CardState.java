@@ -480,30 +480,46 @@ public class CardState extends GameObject implements IHasSVars {
         return null;
     }
 
+    @Override
     public final Map<String, String> getSVars() {
         return sVars;
     }
+
+    @Override
+    public Map<String, String> getDirectSVars() {
+        return sVars;
+    }
+
+    @Override
     public final String getSVar(final String var) {
         if (sVars.containsKey(var)) {
             return sVars.get(var);
         }
         return "";
     }
+
+    @Override
     public final boolean hasSVar(final String var) {
         if (var == null) {
             return false;
         }
         return sVars.containsKey(var);
     }
+
+    @Override
     public final void setSVar(final String var, final String str) {
         sVars.put(var, str);
         view.updateFoilIndex(card.getState(CardStateName.Original));
     }
+
+    @Override
     public final void setSVars(final Map<String, String> newSVars) {
         sVars = Maps.newTreeMap();
         sVars.putAll(newSVars);
         view.updateFoilIndex(card.getState(CardStateName.Original));
     }
+
+    @Override
     public final void removeSVar(final String var) {
         sVars.remove(var);
     }

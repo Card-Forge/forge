@@ -172,8 +172,6 @@ public class CostRemoveCounter extends CostPart {
 
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
-        Card source = ability.getHostCard();
-
         int removed = 0;
         final int toRemove = decision.c;
 
@@ -184,7 +182,7 @@ public class CostRemoveCounter extends CostPart {
             c.getGame().updateLastStateForCard(c);
         }
 
-        source.setSVar("CostCountersRemoved", Integer.toString(removed));
+        ability.setSVar("CostCountersRemoved", Integer.toString(removed));
         return true;
     }
 
