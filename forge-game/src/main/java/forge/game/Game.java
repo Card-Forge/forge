@@ -769,12 +769,19 @@ public class Game {
             p.revealFaceDownCards();
         }
 
-        for(Card c : cards) {
+        for (Card c : cards) {
+            // CR 800.4d if card is controlled by opponent, LTB should trigger
+            if (c.getOwner().equals(p) && c.getController().equals(p)) {
+                c.getCurrentState().clearTriggers();
+            }
+        }
+
+        for (Card c : cards) {
             if (c.getController().equals(p) && (c.isPlane() || c.isPhenomenon())) {
                 planarControllerLost = true;
             }
 
-            if(isMultiplayer) {
+            if (isMultiplayer) {
                 // unattach all "Enchant Player"
                 c.removeAttachedTo(p);
                 if (c.getOwner().equals(p)) {
@@ -783,7 +790,9 @@ public class Game {
                         cc.removeEncodedCard(c);
                         cc.removeRemembered(c);
                     }
-                    c.ceaseToExist();
+                    c.ceaseToExist(false);
+                    // CR 603.2f owner of trigger source lost game
+                    triggerHandler.clearDelayedTrigger(c);
                 } else {
                     // return stolen permanents
                     if (c.getController().equals(p) && c.isInZone(ZoneType.Battlefield)) {
