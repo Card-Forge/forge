@@ -5,7 +5,7 @@ Loyalty:1
 K:ETBReplacement:Other:RollLoyal
 SVar:RollLoyal:DB$ RollDice | Sides$ 4 | ResultSVar$ Result | SubAbility$ DBLoyalty | SpellDescription$ Add 1d4 loyalty counters to CARDNAME
 SVar:DBLoyalty:DB$ PutCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ Result | ETB$ True
-A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Opponent | TokenOwner$ Targeted | TokenScript$ b_1_1_skeleton_opp_life | Planeswalker$ True | SpellDescription$ Target opponent creates a 1/1 black Skeleton creature token with "When this creature dies, each opponent gains 2 life.""
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Opponent | TokenOwner$ Targeted | TokenScript$ b_1_1_skeleton_opp_life | Planeswalker$ True | SpellDescription$ Target opponent creates a 1/1 black Skeleton creature token with "When this creature dies, each opponent gains 2 life."
 A:AB$ RollDice | Cost$ AddCounter<1/LOYALTY> | Sides$ 20 | On1$ DBSkipTurn | ResultSVar$ Result | Planeswalker$ True | SubAbility$ DBDraw | SpellDescription$ Roll a d20. If you roll a 1, skip your next turn. If you roll a 12 or higher, draw a card.
 SVar:DBSkipTurn:DB$ SkipTurn | Defined$ You | NumTurns$ 1
 SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ Result | ConditionSVarCompare$ GE12
@@ -13,5 +13,6 @@ A:AB$ Token | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True 
 SVar:DBCleric:DB$ Token | TokenScript$ w_1_1_cleric_lifelink | SubAbility$ DBRogue
 SVar:DBRogue:DB$ Token | TokenScript$ b_2_2_rogue_hexproof | SubAbility$ DBWizard
 SVar:DBWizard:DB$ Token | TokenScript$ u_1_1_wizard_flying
-DeckHas:Ability$Token
-Oracle:[+1]: Target opponent creates a 1/1 black Skeleton creature token with “When this creature dies, each opponent gains 2 life.”\n[+1]: Roll a d20. If you roll a 1, skip your next turn. If you roll a 12 or higher, draw a card.\n[−6]: You get an adventuring party. (Your party is a 3/3 red Fighter with first strike, a 1/1 white Cleric with lifelink, a 2/2 black Rogue with hexproof, and a 1/1 blue Wizard with flying.)
+DeckHas:Ability$Token & Ability$LifeGain
+DeckHints:Ability$Party
+Oracle:[+1]: Target opponent creates a 1/1 black Skeleton creature token with "When this creature dies, each opponent gains 2 life."\n[+1]: Roll a d20. If you roll a 1, skip your next turn. If you roll a 12 or higher, draw a card.\n[−6]: You get an adventuring party. (Your party is a 3/3 red Fighter with first strike, a 1/1 white Cleric with lifelink, a 2/2 black Rogue with hexproof, and a 1/1 blue Wizard with flying.)
