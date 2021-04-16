@@ -9,9 +9,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.io.Files;
@@ -20,8 +23,6 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IProgressBar;
 import forge.util.FileUtil;
-import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
-import org.apache.commons.compress.archivers.zip.ZipFile;
 
 public class GuiDownloadZipService extends GuiDownloadService {
     private final String name, desc, sourceUrl, destFolder, deleteFolder;
@@ -171,16 +172,13 @@ public class GuiDownloadZipService extends GuiDownloadService {
                 }
             }
 
-            final ZipFile zipFile = new ZipFile(zipFilename, null); //null uses FallbackZipEncoding
-            final java.util.zip.ZipFile zipFile1 = new java.util.zip.ZipFile(zipFilename); //for getting the size/number of entries for progress bar
-            final Enumeration<? extends ZipArchiveEntry> entries = zipFile.getEntries();
+            final ZipFile zipFile = new ZipFile(zipFilename, Charset.forName("IBM437"));
+            final Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
             progressBar.reset();
             progressBar.setPercentMode(true);
             progressBar.setDescription("Extracting " + desc);
-            progressBar.setMaximum(zipFile1.size());
-            //close since we already get the number of entries...
-            zipFile1.close();
+            progressBar.setMaximum(zipFile.size());
 
             FileUtil.ensureDirectoryExists(destFolder);
 
@@ -190,7 +188,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
                 if (cancel) { break; }
 
                 try {
-                    final ZipArchiveEntry entry = entries.nextElement();
+                    final ZipEntry entry = entries.nextElement();
 
                     final String path = destFolder + File.separator + entry.getName();
                     if (entry.isDirectory()) {
