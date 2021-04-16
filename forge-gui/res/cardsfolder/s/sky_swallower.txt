@@ -4,7 +4,6 @@ Types:Creature Leviathan
 PT:8/8
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ When CARDNAME enters the battlefield, target opponent gains control of all other permanents you control.
-SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Opponent | AllValid$ Permanent.Other+YouCtrl | NewController$ Opponent
+SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | AllValid$ Permanent.Other+YouCtrl | NewController$ TargetedPlayer
 AI:RemoveDeck:Random
-SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96835.jpg
 Oracle:Flying\nWhen Sky Swallower enters the battlefield, target opponent gains control of all other permanents you control.
