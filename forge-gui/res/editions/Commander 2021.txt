@@ -414,3 +414,35 @@ Type=Other
 407 R Witch's Clinic
 408 C Tranquil Thicket
 409 R Yavimaya Coast
+
+[tokens]
+b_2_2_zombie
+wb_1_1_spirit_flying
+b_4_4_horror
+u_2_2_drake_flying
+c_x_x_a_construct
+ur_5_5_elemental_flying
+c_a_food_sac
+g_1_1_saproling
+b_x_x_demon_flying
+c_1_1_a_myr
+c_0_0_a_construct_total_artifacts
+c_1_1_a_thopter_flying
+c_3_3_a_golem_flying
+c_3_3_a_golem_trample
+c_3_3_a_golem_vigilance
+g_3_3_beast
+u_3_3_fish_hatches_whale
+u_6_6_whale_hatches_kraken
+g_6_6_wurm
+u_9_9_kraken
+g_1_1_insect_flying_deathtouch
+g_4_4_beast
+g_x_x_hydra
+g_2_2_boar
+g_3_3_frog_lizard
+g_3_3_elephant
+c_10_10_eldrazi
+
+[other]
+eternalize_champion_of_wits
