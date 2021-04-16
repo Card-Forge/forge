@@ -1,7 +1,7 @@
 Name:Mage Duel
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature.YouCtrl | AILogic$ Fight | TgtPrompt$ Select target creature you control | SubAbility$ DBFight | NumAtt$ +1 | NumDef$ +2 | SpellDescription$ Target creature you control gets +1/+2 until end of turn. It fights target creature you don't control.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ Fight | TgtPrompt$ Select target creature you control | SubAbility$ DBFight | NumAtt$ +1 | NumDef$ +2 | SpellDescription$ Target creature you control gets +1/+2 until end of turn. It fights target creature you don't control.
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control
 S:Mode$ ReduceCost | ValidCard$ Card.Self | EffectZone$ All | Type$ Spell | Amount$ 2 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME costs {2} less to cast if you've cast an instant or sorcery spell this turn.
 SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl
