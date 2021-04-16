@@ -6756,11 +6756,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
 
-    public void ceaseToExist() {
-        getGame().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        getZone().remove(this);
-        setZone(null);
-        getGame().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+    public void ceaseToExist(boolean skipTrig) {
+        // CR 603.6c other players LTB triggers should work
+        if (skipTrig) {
+            getZone().remove(this);
+            setZone(getOwner().getZone(ZoneType.None));
+        }
+        else {
+            game.getAction().moveTo(ZoneType.None, this, null);
+        }
     }
 
     public void forceTurnFaceUp() {

@@ -631,13 +631,12 @@ public class TriggerHandler {
     }
 
     public void onPlayerLost(Player p) {
-        List<Trigger> lost = new ArrayList<>();
-        for (Trigger t : delayedTriggers) {
-            // CR 603.2f owner of trigger source lost game || 800.4d trigger controller lost game
-            if (game.getCardState(t.getHostCard(), null) == null || t.getHostCard().getOwner().equals(p)) {
-                lost.add(t);
+        List<Trigger> lost = new ArrayList<>(delayedTriggers);
+        for (Trigger t : lost) {
+            // CR 800.4d trigger controller lost game
+            if (t.getHostCard().getOwner().equals(p)) {
+                delayedTriggers.remove(t);
             }
         }
-        delayedTriggers.removeAll(lost);
     }
 }
