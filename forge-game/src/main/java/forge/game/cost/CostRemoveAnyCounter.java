@@ -115,8 +115,6 @@ public class CostRemoveAnyCounter extends CostPart {
 
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
-        final Card source = ability.getHostCard();
-
         int removed = 0;
         for (Entry<GameEntity, Map<CounterType, Integer>> e : decision.counterTable.row(Optional.absent()).entrySet()) {
             for (Entry<CounterType, Integer> v : e.getValue().entrySet()) {
@@ -128,7 +126,7 @@ public class CostRemoveAnyCounter extends CostPart {
             }
         }
 
-        source.setSVar("CostCountersRemoved", Integer.toString(removed));
+        ability.setSVar("CostCountersRemoved", Integer.toString(removed));
         return true;
     }
 

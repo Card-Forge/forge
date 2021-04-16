@@ -17,12 +17,18 @@
  */
 package forge.game.trigger;
 
-import java.util.Map;
+import java.util.*;
 
+import com.google.common.collect.Iterables;
+import forge.game.GameEntity;
+import forge.game.GameObjectPredicates;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
+import forge.util.collect.FCollection;
 
 /**
  * TODO Write javadoc for this type.
@@ -64,7 +70,25 @@ public class TriggerAttackersDeclared extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Attackers, AbilityKey.AttackingPlayer, AbilityKey.AttackedTarget);
+        Iterable<GameEntity> attackedTarget = (Iterable<GameEntity>) runParams.get(AbilityKey.AttackedTarget);
+
+        CardCollection attackers = (CardCollection)(runParams.get(AbilityKey.Attackers));
+        if (hasParam("ValidAttackers")) {
+            attackers = CardLists.getValidCards(attackers, getParam("ValidAttackers").split(","), getHostCard().getController(), getHostCard(), this);
+            FCollection<GameEntity> defenders = new FCollection<>();
+            for (Card attacker : attackers) {
+                defenders.add(attacker.getGame().getCombat().getDefenderByAttacker(attacker));
+            }
+            attackedTarget = defenders;
+        }
+        sa.setTriggeringObject(AbilityKey.Attackers, attackers);
+
+        if (hasParam("AttackedTarget")) {
+            attackedTarget = Iterables.filter(attackedTarget, GameObjectPredicates.restriction(getParam("AttackedTarget").split(","), getHostCard().getController(), getHostCard(), this));
+        }
+        sa.setTriggeringObject(AbilityKey.AttackedTarget, attackedTarget);
+
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.AttackingPlayer);
     }
 
     @Override

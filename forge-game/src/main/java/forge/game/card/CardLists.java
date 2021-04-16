@@ -30,6 +30,7 @@ import forge.game.CardTraitBase;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 
@@ -230,7 +231,67 @@ public class CardLists {
     }
 
     public static CardCollection getTargetableCards(Iterable<Card> cardList, SpellAbility source) {
-        return CardLists.filter(cardList, CardPredicates.isTargetableBy(source));
+        CardCollection result = CardLists.filter(cardList, CardPredicates.isTargetableBy(source));
+        // Filter more cards that can only be detected along with other candiates
+        if (source.getTargets().isEmpty() && source.getMinTargets() >= 2) {
+            CardCollection removeList = new CardCollection();
+            TargetRestrictions tr = source.getTargetRestrictions();
+            for (final Card card : cardList) {
+                if (tr.isSameController()) {
+                    boolean found = false;
+                    for (final Card card2 : cardList) {
+                        if (card != card2 && card.getController() == card2.getController()) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        removeList.add(card);
+                    }
+                }
+
+                if (tr.isWithoutSameCreatureType()) {
+                    boolean found = false;
+                    for (final Card card2 : cardList) {
+                        if (card != card2 && !card.sharesCreatureTypeWith(card2)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        removeList.add(card);
+                    }
+                }
+
+                if (tr.isWithSameCreatureType()) {
+                    boolean found = false;
+                    for (final Card card2 : cardList) {
+                        if (card != card2 && card.sharesCreatureTypeWith(card2)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        removeList.add(card);
+                    }
+                }
+
+                if (tr.isWithSameCardType()) {
+                    boolean found = false;
+                    for (final Card card2 : cardList) {
+                        if (card != card2 && card.sharesCardTypeWith(card2)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        removeList.add(card);
+                    }
+                }
+            }
+            result.removeAll(removeList);
+        }
+        return result;
     }
 
     public static CardCollection getKeyword(Iterable<Card> cardList, final String keyword) {

@@ -240,6 +240,17 @@ public class CombatUtil {
             }
         }
 
+        // Quasi-goad logic for "Kardur, Doomscourge" etc. that isn't goad but behaves the same
+        if (defender.hasKeyword("Creatures your opponents control attack a player other than you if able.")) {
+            for (GameEntity ge : getAllPossibleDefenders(attacker.getController())) {
+                if (!defender.equals(ge) && ge instanceof Player) {
+                    if (canAttack(attacker, ge)) {
+                        return false;
+                    }
+                }
+            }
+        }
+
         // Keywords
         final boolean canAttackWithDefender = attacker.hasKeyword("CARDNAME can attack as though it didn't have defender.");
         for (final KeywordInterface keyword : attacker.getKeywords()) {
