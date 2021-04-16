@@ -1748,7 +1748,7 @@ Champion of Arashin
 Charge
 Cliffside Lookout
 Cloudshift
-#Coalition Honor Guard
+Coalition Honor Guard
 Collar the Culprit
 Congregate
 Conviction
