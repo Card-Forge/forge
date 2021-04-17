@@ -496,7 +496,7 @@ public final class CardUtil {
                     break;
                 }
 
-                colors = CardUtil.getReflectableManaColors(ab, sa, colors, parents);
+                colors = CardUtil.getReflectableManaColors(sa, ab, colors, parents);
             }
         }
         return colors;
