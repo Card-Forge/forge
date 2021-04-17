@@ -852,7 +852,24 @@ public class GameAction {
     }
 
     public final Card exile(final Card c, SpellAbility cause) {
-        return exile(c, cause, null);
+        if (c == null) {
+            return null;
+        }
+        return exile(new CardCollection(c), cause).get(0);
+    }
+    public final CardCollection exile(final CardCollection cards, SpellAbility cause) {
+        CardZoneTable table = new CardZoneTable();
+        CardCollection result = new CardCollection();
+        for (Card card : cards) {
+            if (cause != null) {
+                table.put(card.getZone().getZoneType(), ZoneType.Exile, card);
+            }
+            result.add(exile(card, cause, null));
+        }
+        if (cause != null) {
+            table.triggerChangesZoneAll(game, cause);
+        }
+        return result;
     }
     public final Card exile(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
         if (game.isCardExiled(c)) {
