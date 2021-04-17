@@ -2,9 +2,8 @@ Name:Drover of the Mighty
 ManaCost:1 G
 Types:Creature Human Druid
 PT:1/1
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | CheckSVar$ Y | SVarCompare$ GE1 | Description$ CARDNAME gets +2/+2 as long as you control a Dinosaur.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | IsPresent$ Dinosaur.YouCtrl | Description$ CARDNAME gets +2/+2 as long as you control a Dinosaur.
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
-SVar:Y:Count$Valid Dinosaur.Other+YouCtrl
+DeckHints:Type$Dinosaur
 SVar:BuffedBy:Dinosaur
-SVar:Picture:http://mythicspoiler.com/ixa/cards/droverofthemighty.jpg
 Oracle:Drover of the Mighty gets +2/+2 as long as you control a Dinosaur.\n{T}: Add one mana of any color.
