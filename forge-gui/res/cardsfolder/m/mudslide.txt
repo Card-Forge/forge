@@ -2,7 +2,8 @@ Name:Mudslide
 ManaCost:2 R
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.withoutFlying | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Creatures without flying don't untap during their controllers' untap steps.
-T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ At the beginning of each player's upkeep, that player may choose any number of tapped creatures without flying they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ DBCleanup | TriggerDescription$ At the beginning of each player's upkeep, that player may choose any number of tapped creatures without flying they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | SubAbility$ TrigChoose
 SVar:TrigChoose:DB$ ChooseCard | Defined$ TriggeredPlayer | Amount$ X | Choices$ Creature.tapped+withoutFlying | TargetControls$ True | ChoiceTitle$ Choose any number of tapped nongreen creatures you control | ChoiceZone$ Battlefield | SubAbility$ DBUntap
 SVar:DBUntap:DB$ RepeatEach | DefinedCards$ ChosenCard | RepeatSubAbility$ UntapEach
 SVar:UntapEach:DB$ Untap | Defined$ Remembered | UnlessCost$ 2 | UnlessPayer$ RememberedController | UnlessSwitched$ True | ShowCurrentCard$ Remembered
