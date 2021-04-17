@@ -68,6 +68,6 @@ public class BalanceEffect extends SpellAbilityEffect {
             discard(sa, table, discardedMap);
         }
 
-        table.triggerChangesZoneAll(game);
+        table.triggerChangesZoneAll(game, sa);
     }
 }

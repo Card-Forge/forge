@@ -5,14 +5,12 @@ package forge.game.card;
 
 import java.util.Map;
 
-import com.google.common.collect.ForwardingTable;
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Table;
+import com.google.common.collect.*;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
+import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
@@ -53,11 +51,12 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
         return dataMap;
     }
 
-    public void triggerChangesZoneAll(final Game game) {
+    public void triggerChangesZoneAll(final Game game, final SpellAbility cause) {
         if (!isEmpty()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cards, new CardZoneTable(this));
-            game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
+            runParams.put(AbilityKey.Cause, cause);
+            game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, AbilityKey.newMap(runParams), false);
         }
     }
 

@@ -657,7 +657,7 @@ public abstract class SpellAbilityEffect {
                         untilTable.put(cell.getColumnKey(), cell.getRowKey(), movedCard);
                     }
                 }
-                untilTable.triggerChangesZoneAll(game);
+                untilTable.triggerChangesZoneAll(game, null);
             }
 
         };

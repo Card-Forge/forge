@@ -1260,7 +1260,7 @@ public class GameAction {
             if (game.getCombat() != null) {
                 game.getCombat().removeAbsentCombatants();
             }
-            table.triggerChangesZoneAll(game);
+            table.triggerChangesZoneAll(game, null);
             if (!checkAgain) {
                 break; // do not continue the loop
             }

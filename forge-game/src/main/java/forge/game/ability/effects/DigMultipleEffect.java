@@ -183,7 +183,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
             }
         }
         //table trigger there
-        table.triggerChangesZoneAll(game);
+        table.triggerChangesZoneAll(game, sa);
     }
 
 }

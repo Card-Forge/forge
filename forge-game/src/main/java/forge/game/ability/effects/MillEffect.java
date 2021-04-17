@@ -81,7 +81,7 @@ public class MillEffect extends SpellAbilityEffect {
         }
 
         // run trigger if something got milled
-        table.triggerChangesZoneAll(game);
+        table.triggerChangesZoneAll(game, sa);
     }
 
     @Override

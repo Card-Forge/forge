@@ -43,7 +43,7 @@ public class AttachEffect extends SpellAbilityEffect {
             if (newZone != previousZone) {
                 table.put(previousZone, newZone, c);
             }
-            table.triggerChangesZoneAll(game);
+            table.triggerChangesZoneAll(game, sa);
         }
 
         final Card source = sa.getHostCard();

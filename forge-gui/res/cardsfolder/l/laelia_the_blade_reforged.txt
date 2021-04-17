@@ -1,0 +1,13 @@
+Name:Laelia, the Blade Reforged
+ManaCost:2 R
+Types:Legendary Creature Spirit Warrior
+PT:2/2
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME attacks, exile the top card of your library. You may play that card this turn.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZoneAll | ValidCause$ SpellAbility.YouCtrl | Origin$ Library,Graveyard | Destination$ Exile | ValidCards$ Card.YouOwn | Execute$ TrigPutCounter | TriggerDescription$ Whenever you exile one or more cards from your library and/or your graveyard, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Haste\nWhenever Laelia, the Blade Reforged attacks, exile the top card of your library. You may play that card this turn.\nWhenever you exile one or more cards from your library and/or your graveyard, put a +1/+1 counter on Laelia.

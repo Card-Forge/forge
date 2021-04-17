@@ -811,7 +811,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             game.getAction().reveal(commandCards, player, true, "Revealed cards in ");
         }
 
-        triggerList.triggerChangesZoneAll(game);
+        triggerList.triggerChangesZoneAll(game, sa);
         counterTable.triggerCountersPutAll(game);
 
 
@@ -1411,7 +1411,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             game.updateCombatForView();
             game.fireEvent(new GameEventCombatChanged());
         }
-        triggerList.triggerChangesZoneAll(game);
+        triggerList.triggerChangesZoneAll(game, sa);
 
         if (sa.hasParam("UntilHostLeavesPlay")) {
             source.addLeavesPlayCommand(untilHostLeavesPlayCommand(triggerList, source));

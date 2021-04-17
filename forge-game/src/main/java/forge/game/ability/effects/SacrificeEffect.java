@@ -186,7 +186,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
             }
         }
 
-        table.triggerChangesZoneAll(game);
+        table.triggerChangesZoneAll(game, sa);
     }
 
     @Override

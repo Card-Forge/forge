@@ -97,7 +97,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
                 card.addRemembered(CardUtil.getLKICopy(c, cachedMap));
             }
         }
-        table.triggerChangesZoneAll(game);
+        table.triggerChangesZoneAll(game, sa);
     }
 
 }

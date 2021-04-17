@@ -406,7 +406,7 @@ public class DigEffect extends SpellAbilityEffect {
             game.fireEvent(new GameEventCombatChanged());
         }
         //table trigger there
-        table.triggerChangesZoneAll(game);
+        table.triggerChangesZoneAll(game, sa);
         counterTable.triggerCountersPutAll(game);
     }
 

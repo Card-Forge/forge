@@ -268,7 +268,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
         }
 
-        triggerList.triggerChangesZoneAll(game);
+        triggerList.triggerChangesZoneAll(game, sa);
 
         if (sa.hasParam("UntilHostLeavesPlay")) {
             source.addLeavesPlayCommand(untilHostLeavesPlayCommand(triggerList, source));

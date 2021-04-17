@@ -40,6 +40,6 @@ public class PermanentEffect extends SpellAbilityEffect {
         if (newZone != previousZone) {
             table.put(previousZone, newZone, c);
         }
-        table.triggerChangesZoneAll(game);
+        table.triggerChangesZoneAll(game, sa);
     }
 }

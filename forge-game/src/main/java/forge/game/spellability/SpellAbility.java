@@ -2003,6 +2003,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 return false;
             }
         }
+        else if (incR[0].equals("SpellAbility")) {
+            // Match anything
+        }
         else { //not a spell/ability type
             return false;
         }

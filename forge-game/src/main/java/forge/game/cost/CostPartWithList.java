@@ -64,8 +64,6 @@ public abstract class CostPartWithList extends CostPart {
      *
      * @param sa
      *            the sa
-     * @param hash
-     *            the hash
      */
     public final void reportPaidCardsTo(final SpellAbility sa) {
         if (sa == null) {
@@ -177,7 +175,7 @@ public abstract class CostPartWithList extends CostPart {
         // copy table because the original get cleaned after the cost is done
         final CardZoneTable copyTable = new CardZoneTable();
         copyTable.putAll(table);
-        copyTable.triggerChangesZoneAll(payer.getGame());
+        copyTable.triggerChangesZoneAll(payer.getGame(), null);
     }
 
 }
