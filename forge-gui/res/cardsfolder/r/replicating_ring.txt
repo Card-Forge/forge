@@ -2,7 +2,7 @@ Name:Replicating Ring
 ManaCost:3
 Types:Snow Artifact
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a night counter on CARDNAME. Then if it has eight or more night counters on it, remove all of them and create eight colorless snow artifact tokens named Replicated Ring with “{T}: At the beginning of your upkeep, put a night counter on CARDNAME. Then if it has eight or more night counters on it, remove all of them and create eight colorless snow artifact tokens named Replicated Ring with "{T}: Add one mana of any color."
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a night counter on CARDNAME. Then if it has eight or more night counters on it, remove all of them and create eight colorless snow artifact tokens named Replicated Ring with “{T}: Add one mana of any color."
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ NIGHT | CounterNum$ 1 | SubAbility$ DBBranch
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ ReplicateTimer | TrueSubAbility$ DBRemoveCtrs
 SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ NIGHT | CounterNum$ All | SubAbility$ DBToken
