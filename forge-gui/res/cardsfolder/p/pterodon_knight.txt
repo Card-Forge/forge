@@ -2,8 +2,7 @@ Name:Pterodon Knight
 ManaCost:3 W
 Types:Creature Human Knight
 PT:3/3
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has flying as long as you control a Dinosaur.
-SVar:X:Count$Valid Creature.Dinosaur+YouCtrl
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | IsPresent$ Dinosaur.YouCtrl | Description$ CARDNAME has flying as long as you control a Dinosaur.
 DeckHints:Type$Dinosaur
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pterodon_knight.jpg
+SVar:BuffedBy:Dinosaur
 Oracle:Pterodon Knight has flying as long as you control a Dinosaur.
