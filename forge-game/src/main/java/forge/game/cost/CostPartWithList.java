@@ -175,7 +175,7 @@ public abstract class CostPartWithList extends CostPart {
         // copy table because the original get cleaned after the cost is done
         final CardZoneTable copyTable = new CardZoneTable();
         copyTable.putAll(table);
-        copyTable.triggerChangesZoneAll(payer.getGame(), null);
+        copyTable.triggerChangesZoneAll(payer.getGame(), ability);
     }
 
 }
