@@ -698,7 +698,7 @@ public class HumanPlay {
             ability.clearTappedForConvoke();
         }
         if (!table.isEmpty() && !manaInputCancelled) {
-            table.triggerChangesZoneAll(game, null);
+            table.triggerChangesZoneAll(game, ability);
         }
         return !manaInputCancelled;
     }
