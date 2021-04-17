@@ -92,7 +92,7 @@ public class TokenEffect extends TokenEffectBase {
         }
 
         if (!useZoneTable) {
-            triggerList.triggerChangesZoneAll(game);
+            triggerList.triggerChangesZoneAll(game, sa);
             triggerList.clear();
         }
 

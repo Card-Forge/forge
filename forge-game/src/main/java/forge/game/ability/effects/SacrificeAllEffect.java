@@ -97,7 +97,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
                 }
             }
         }
-        table.triggerChangesZoneAll(game);
+        table.triggerChangesZoneAll(game, sa);
     }
 
 }

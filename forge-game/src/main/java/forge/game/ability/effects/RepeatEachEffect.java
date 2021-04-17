@@ -173,7 +173,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             sa.setDamageMap(null);
         }
         if (sa.hasParam("ChangeZoneTable")) {
-            sa.getChangeZoneTable().triggerChangesZoneAll(game);
+            sa.getChangeZoneTable().triggerChangesZoneAll(game, sa);
             sa.setChangeZoneTable(null);
         }
     }

@@ -45,7 +45,7 @@ public class InvestigateEffect extends TokenEffectBase {
                 MutableBoolean combatChanged = new MutableBoolean(false);
                 makeTokens(prototype, p, sa, 1, true, false, triggerList, combatChanged);
 
-                triggerList.triggerChangesZoneAll(game);
+                triggerList.triggerChangesZoneAll(game, sa);
                 p.addInvestigatedThisTurn();
 
                 game.fireEvent(new GameEventTokenCreated());

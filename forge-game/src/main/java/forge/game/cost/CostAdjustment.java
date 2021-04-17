@@ -237,7 +237,7 @@ public class CostAdjustment {
                         table.put(ZoneType.Graveyard, d.getZone().getZoneType(), d);
                     }
                 }
-                table.triggerChangesZoneAll(game);
+                table.triggerChangesZoneAll(game, null);
             }
             if (sa.getHostCard().hasKeyword(Keyword.CONVOKE)) {
                 adjustCostByConvokeOrImprovise(cost, sa, false, test);
@@ -508,6 +508,13 @@ public class CostAdjustment {
                 }
             } else if (type.equals("Loyalty")) {
                 if (!sa.isPwAbility()) {
+                    return false;
+                }
+            } else if (type.equals("Foretell")) {
+                if (!sa.isForetelling()) {
+                    return false;
+                }
+                if (st.hasParam("FirstForetell") && activator.getNumForetoldThisTurn() > 0) {
                     return false;
                 }
             }

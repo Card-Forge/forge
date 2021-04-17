@@ -21,6 +21,10 @@ public class TriggerChangesZoneAll extends Trigger {
     public boolean performTest(Map<AbilityKey, Object> runParams) {
         final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
 
+        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+            return false;
+        }
+
         return !filterCards(table).isEmpty();
     }
 
@@ -32,6 +36,7 @@ public class TriggerChangesZoneAll extends Trigger {
 
         sa.setTriggeringObject(AbilityKey.Cards, allCards);
         sa.setTriggeringObject(AbilityKey.Amount, allCards.size());
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Cause);
     }
 
     @Override

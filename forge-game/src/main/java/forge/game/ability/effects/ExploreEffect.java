@@ -91,7 +91,7 @@ public class ExploreEffect extends SpellAbilityEffect {
             game.getTriggerHandler().runTrigger(TriggerType.Explores, AbilityKey.mapFromCard(c), false);
         }
         table.triggerCountersPutAll(game);
-        triggerList.triggerChangesZoneAll(game);
+        triggerList.triggerChangesZoneAll(game, sa);
     }
 
 }

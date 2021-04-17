@@ -104,7 +104,7 @@ public class DestroyEffect extends SpellAbilityEffect {
             }
         }
 
-        table.triggerChangesZoneAll(game);
+        table.triggerChangesZoneAll(game, sa);
     }
 
     protected void internalDestroy(Card gameCard, SpellAbility sa, CardZoneTable table, Map<Integer, Card> cachedMap) {

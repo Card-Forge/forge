@@ -17,7 +17,7 @@ public class ChangeZoneResolveEffect extends SpellAbilityEffect {
         CardZoneTable table = sa.getChangeZoneTable();
         if (table != null) {
 
-            table.triggerChangesZoneAll(game);
+            table.triggerChangesZoneAll(game, sa);
             table.clear();
         }
     }

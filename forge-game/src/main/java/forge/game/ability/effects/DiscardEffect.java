@@ -292,6 +292,6 @@ public class DiscardEffect extends SpellAbilityEffect {
         discard(sa, table, discardedMap);
 
         // run trigger if something got milled
-        table.triggerChangesZoneAll(game);
+        table.triggerChangesZoneAll(game, sa);
     } // discardResolve()
 }

@@ -101,7 +101,7 @@ public class CostMill extends CostPart {
     public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability) {
         CardZoneTable table = new CardZoneTable();
         ability.getPaidHash().put("Milled", (CardCollection) ai.mill(decision.c, ZoneType.Graveyard, false, ability, table));
-        table.triggerChangesZoneAll(ai.getGame());
+        table.triggerChangesZoneAll(ai.getGame(), null);
         return true;
     }
 

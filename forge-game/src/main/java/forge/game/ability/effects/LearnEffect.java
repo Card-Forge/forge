@@ -21,7 +21,7 @@ public class LearnEffect extends SpellAbilityEffect {
         for (Player p : getTargetPlayers(sa)) {
             p.learnLesson(sa, table);
         }
-        table.triggerChangesZoneAll(game);
+        table.triggerChangesZoneAll(game, sa);
     }
 
 }

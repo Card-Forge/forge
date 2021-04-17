@@ -187,7 +187,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
         } // end foreach Card
 
         if (!useZoneTable) {
-            triggerList.triggerChangesZoneAll(game);
+            triggerList.triggerChangesZoneAll(game, sa);
             triggerList.clear();
         }
         if (combatChanged.isTrue()) {

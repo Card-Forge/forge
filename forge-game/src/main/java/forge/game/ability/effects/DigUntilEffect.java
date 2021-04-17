@@ -260,7 +260,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
             game.updateCombatForView();
             game.fireEvent(new GameEventCombatChanged());
         }
-        table.triggerChangesZoneAll(game);
+        table.triggerChangesZoneAll(game, sa);
     } // end resolve
 
 }

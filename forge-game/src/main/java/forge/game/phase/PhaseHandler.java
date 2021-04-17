@@ -398,7 +398,7 @@ public class PhaseHandler implements java.io.Serializable {
                                 discarded.add(c);
                             }
                         }
-                        table.triggerChangesZoneAll(game);
+                        table.triggerChangesZoneAll(game, null);
 
                         if (!discarded.isEmpty()) {
                             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -1068,7 +1068,7 @@ public class PhaseHandler implements java.io.Serializable {
                             // currently there can be only one Spell put on the Stack at once, or Land Abilities be played
                             final CardZoneTable triggerList = new CardZoneTable();
                             triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), saHost);
-                            triggerList.triggerChangesZoneAll(game);
+                            triggerList.triggerChangesZoneAll(game, null);
                         }
 
                     }
@@ -1262,7 +1262,7 @@ public class PhaseHandler implements java.io.Serializable {
 
     /**
      * returns the continuous extra turn count
-     * @param PLayer p
+     * @param p
      * @return int
      */
     public int getExtraTurnForPlayer(final Player p) {
