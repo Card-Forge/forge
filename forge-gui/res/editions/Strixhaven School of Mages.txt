@@ -86,11 +86,11 @@ Prerelease=6 Boosters, 1 RareMythic+
 74 C Lash of Malice
 75 C Leech Fanatic
 76 U Mage Hunter
-77 C Mage Hunter's Onslaught
+77 C Mage Hunters' Onslaught
 78 U Necrotic Fumes
 79 C Novice Dissector
 80 R Oriq Loremage
-81 U Plumb the Forgotten
+81 U Plumb the Forbidden
 82 R Poet's Quill
 83 M Professor Onyx
 84 C Professor's Warning
@@ -100,7 +100,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 88 U Tenured Inkcaster
 89 U Umbral Juke
 90 C Unwilling Ingredient
-91 U Academic Debate
+91 U Academic Dispute
 92 U Ardent Dustspeaker
 93 C Blood Age General
 94 R Conspiracy Theorist
