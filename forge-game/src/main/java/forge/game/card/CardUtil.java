@@ -425,8 +425,8 @@ public final class CardUtil {
                 if (sa.getActivatingPlayer() == null) {
                     sa.setActivatingPlayer(sa.getHostCard().getController());
                 }
-                final Game game = sa.getActivatingPlayer().getGame();
-                cards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card, sa);
+                final Player activator = sa.getActivatingPlayer();
+                cards = CardLists.getValidCards(activator.getGame().getCardsIn(ZoneType.Battlefield), validCard, activator, card, sa);
             }
 
             // remove anything cards that is already in parents
