@@ -3,6 +3,8 @@ package forge.ai.ability;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Predicates;
+
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -11,6 +13,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -179,18 +182,18 @@ public class CloneAi extends SpellAbilityAi {
     @Override
     protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional,
             Player targetedPlayer, Map<String, Object> params) {
-
         final Card host = sa.getHostCard();
+        final String name = host.getName();
         final Player ctrl = host.getController();
 
         final Card cloneTarget = getCloneTarget(sa);
         final boolean isOpp = cloneTarget.getController().isOpponentOf(sa.getActivatingPlayer());
 
-        final boolean isVesuva = "Vesuva".equals(host.getName());
+        final boolean isVesuva = "Vesuva".equals(name) || "Sculpting Steel".equals(name);
         final boolean canCloneLegendary = "True".equalsIgnoreCase(sa.getParam("NonLegendary"));
 
         String filter = !isVesuva ? "Permanent.YouDontCtrl,Permanent.nonLegendary"
-                : "Permanent.YouDontCtrl+notnamedVesuva,Permanent.nonLegendary+notnamedVesuva";
+                : "Permanent.YouDontCtrl+notnamed" + name + ",Permanent.nonLegendary+notnamed" + name;
 
         // TODO: rewrite this block so that this is done somehow more elegantly
         if (canCloneLegendary) {
@@ -209,11 +212,12 @@ public class CloneAi extends SpellAbilityAi {
             }
         }
 
-        Card choice = isOpp ? ComputerUtilCard.getWorstAI(options) : ComputerUtilCard.getBestAI(options);
-
-        if (isVesuva && "Vesuva".equals(choice.getName())) {
-            choice = null;
+        // prevent loop of choosing copy of same card
+        if (isVesuva) {
+            options = CardLists.filter(options, Predicates.not(CardPredicates.sharesNameWith(host)));
         }
+
+        Card choice = isOpp ? ComputerUtilCard.getWorstAI(options) : ComputerUtilCard.getBestAI(options);
 
         return choice;
     }
