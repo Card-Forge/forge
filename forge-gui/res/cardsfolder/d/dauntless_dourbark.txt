@@ -3,10 +3,9 @@ ManaCost:3 G
 Types:Creature Treefolk Warrior
 PT:*/*
 S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Forests you control plus the number of Treefolk you control.
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample | CheckSVar$ OtherTREEFOLK | SVarCompare$ GE1 | Description$ CARDNAME has trample as long as you control another Treefolk.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample | IsPresent$ Treefolk.YouCtrl+Other | Description$ CARDNAME has trample as long as you control another Treefolk.
 SVar:X:Count$Valid Treefolk.YouCtrl/Plus.FOREST
 SVar:FOREST:Count$Valid Forest.YouCtrl
-SVar:OtherTREEFOLK:Count$Valid Treefolk.YouCtrl+Other
 SVar:BuffedBy:Forest,Treefolk
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dauntless_dourbark.jpg
+DeckHints:Type$Treefolk
 Oracle:Dauntless Dourbark's power and toughness are each equal to the number of Forests you control plus the number of Treefolk you control.\nDauntless Dourbark has trample as long as you control another Treefolk.

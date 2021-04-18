@@ -3,9 +3,8 @@ ManaCost:2 B
 Types:Creature Ogre Warrior
 PT:3/2
 K:CARDNAME can't block.
-S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ Regen | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you control a Demon, CARDNAME has "{B}: Regenerate CARDNAME."
-SVar:Regen:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
-SVar:X:Count$Valid Demon.YouCtrl
-DeckHints:Type$Demon
-SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80520.jpg
+S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ Regen | IsPresent$ Demon.YouCtrl | Description$ As long as you control a Demon, CARDNAME has "{B}: Regenerate CARDNAME."
+SVar:Regen:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+SVar:BuffedBy:Demon
+DeckNeeds:Type$Demon
 Oracle:Villainous Ogre can't block.\nAs long as you control a Demon, Villainous Ogre has "{B}: Regenerate Villainous Ogre."
