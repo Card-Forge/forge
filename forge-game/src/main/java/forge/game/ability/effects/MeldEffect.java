@@ -15,6 +15,8 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 
+import java.util.Arrays;
+
 public class MeldEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
@@ -23,8 +25,6 @@ public class MeldEffect extends SpellAbilityEffect {
         String secName = sa.getParam("Secondary");
         Game game = hostCard.getGame();
         Player controller = sa.getActivatingPlayer();
-
-        Card primary = game.getAction().exile(hostCard, sa);
 
         // a creature you control and own named secondary
         CardCollection field = CardLists.filter(
@@ -38,7 +38,10 @@ public class MeldEffect extends SpellAbilityEffect {
 
         Card secondary = controller.getController().chooseSingleEntityForEffect(field, sa, Localizer.getInstance().getMessage("lblChooseCardToMeld"), null);
 
-        secondary = game.getAction().exile(secondary, sa);
+        CardCollection exiled = new CardCollection(Arrays.asList(hostCard, secondary));
+        exiled = game.getAction().exile(exiled, sa);
+        Card primary = exiled.get(0);
+        secondary = exiled.get(1);
 
         // cards has wrong name in exile
         if (!primary.sharesNameWith(primName) || !secondary.sharesNameWith(secName)) {

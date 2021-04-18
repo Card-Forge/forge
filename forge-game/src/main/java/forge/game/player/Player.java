@@ -1831,7 +1831,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         for (Card m : milledView) {
             final ZoneType origin = m.getZone().getZoneType();
             final Card d = game.getAction().moveTo(destination, m, sa);
-            table.put(origin, d.getZone().getZoneType(), d);
+            if (d.getZone().is(destination)) {
+                table.put(origin, d.getZone().getZoneType(), d);
+            }
         }
 
         return milled;

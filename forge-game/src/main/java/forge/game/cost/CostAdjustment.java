@@ -237,7 +237,7 @@ public class CostAdjustment {
                         table.put(ZoneType.Graveyard, d.getZone().getZoneType(), d);
                     }
                 }
-                table.triggerChangesZoneAll(game, null);
+                table.triggerChangesZoneAll(game, sa);
             }
             if (sa.getHostCard().hasKeyword(Keyword.CONVOKE)) {
                 adjustCostByConvokeOrImprovise(cost, sa, false, test);
