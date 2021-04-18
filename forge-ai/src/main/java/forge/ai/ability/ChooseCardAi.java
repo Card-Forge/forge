@@ -75,10 +75,8 @@ public class ChooseCardAi extends SpellAbilityAi {
             return !choices.isEmpty();
         } else if (aiLogic.equals("AtLeast2") || aiLogic.equals("BestBlocker")) {
             return choices.size() >= 2;
-        } else if (aiLogic.equals("Clone") || aiLogic.equals("Vesuva")) {
-            final String filter = aiLogic.equals("Clone") ? "Permanent.YouDontCtrl,Permanent.nonLegendary"
-                    : "Permanent.YouDontCtrl+notnamedVesuva,Permanent.nonLegendary+notnamedVesuva";
-
+        } else if (aiLogic.equals("Clone")) {
+            final String filter = "Permanent.YouDontCtrl,Permanent.nonLegendary";
             choices = CardLists.getValidCards(choices, filter, host.getController(), host, sa);
             return !choices.isEmpty();
         } else if (aiLogic.equals("Never")) {
@@ -173,18 +171,13 @@ public class ChooseCardAi extends SpellAbilityAi {
                 options = CardLists.filter(options, Presets.UNTAPPED);
             }
             choice = ComputerUtilCard.getBestCreatureAI(options);
-        } else if (logic.equals("Clone") || logic.equals("Vesuva")) {
-            final String filter = logic.equals("Clone") ? "Permanent.YouDontCtrl,Permanent.nonLegendary" :
-                    "Permanent.YouDontCtrl+notnamedVesuva,Permanent.nonLegendary+notnamedVesuva";
-
+        } else if (logic.equals("Clone")) {
+            final String filter = "Permanent.YouDontCtrl,Permanent.nonLegendary";
             CardCollection newOptions = CardLists.getValidCards(options, filter.split(","), ctrl, host, sa);
             if (!newOptions.isEmpty()) {
                 options = newOptions;
             }
             choice = ComputerUtilCard.getBestAI(options);
-            if (logic.equals("Vesuva") && "Vesuva".equals(choice.getName())) {
-                choice = null;
-            }
         } else if ("RandomNonLand".equals(logic)) {
             options = CardLists.getValidCards(options, "Card.nonLand", host.getController(), host, sa);
             choice = Aggregates.random(options);
