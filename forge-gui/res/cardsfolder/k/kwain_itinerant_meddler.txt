@@ -2,7 +2,7 @@ Name:Kwain, Itinerant Meddler
 ManaCost:W U
 Types:Legendary Creature Rabbit Wizard
 PT:1/3
-A:AB$ Draw | Cost$ T | Defined$ Player | OptionalDecider$ True | RememberDrawn$ True | SubAbility$ DBGainLife
+A:AB$ Draw | Cost$ T | Defined$ Player | OptionalDecider$ True | RememberDrawn$ True | SubAbility$ DBGainLife | SpellDescription$ Each player may draw a card, then each player who drew a card this way gains 1 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ RememberedController | LifeAmount$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:{T}: Each player may draw a card, then each player who drew a card this way gains 1 life.
