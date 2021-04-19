@@ -47,6 +47,8 @@ import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -406,19 +408,37 @@ public class CountersPutAi extends SpellAbilityAi {
         }
 
         if ("Polukranos".equals(logic)) {
+            boolean found = false;
+            for (Trigger tr : source.getTriggers()) {
+                if (!tr.getMode().equals(TriggerType.BecomeMonstrous)) {
+                    continue;
+                }
+                SpellAbility oa = tr.ensureAbility();
+                if (oa == null) {
+                    continue;
+                }
 
-            CardCollection targets = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), sa);
+                // need to set Activating player
+                oa.setActivatingPlayer(ai);
+                CardCollection targets = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), oa);
 
-            if (!targets.isEmpty()){
-                boolean canSurvive = false;
-                for (Card humanCreature : targets) {
-                    if (!FightAi.canKill(humanCreature, source, 0)){
-                        canSurvive = true;
+                if (!targets.isEmpty()){
+                    boolean canSurvive = false;
+                    for (Card humanCreature : targets) {
+                        if (!FightAi.canKill(humanCreature, source, 0)){
+                            canSurvive = true;
+                            break;
+                        }
                     }
-                }
-                if (!canSurvive){
-                    return false;
-                }
+                    if (!canSurvive){
+                        return false;
+                    }
+                };
+                found = true;
+                break;
+            }
+            if (!found) {
+                return false;
             }
         }
 
