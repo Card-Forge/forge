@@ -1,0 +1,13 @@
+Name:Elemental Expressionist
+ManaCost:UR UR UR UR
+Types:Creature Orc Wizard
+PT:4/4
+T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Magecraft - Whenever you cast or copy an instant or sorcery spell, choose target creature you control. Until end of turn, it gains "If this creature would leave the battlefield, exile it instead of putting it anywhere else" and "When this creature is put into exile, create a 4/4 blue and red Elemental creature token." (Each instance of that ability triggers separately.)
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | Replacements$ Exile | Triggers$ Exiled
+SVar:Exile:Event$ Moved | ValidCard$ Card.Self | ActiveZones$ Battlefield | Origin$ Battlefield | ExcludeDestination$ Exile | ReplaceWith$ DBChangeZone | Description$ If this creature would leave the battlefield, exile it instead of putting it anywhere else.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile
+SVar:Exiled:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Exile | ValidCard$ Card.Self | Execute$ DBToken | TriggerDescription$ When this creature is put into exile, create a 4/4 blue and red Elemental creature token.
+SVar:DBToken:DB$ Token | TokenScript$ ur_4_4_elemental
+DeckHas:Ability$Token
+DeckNeeds:Type$Instant|Sorcery
+Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, choose target creature you control. Until end of turn, it gains "If this creature would leave the battlefield, exile it instead of putting it anywhere else" and "When this creature is put into exile, create a 4/4 blue and red Elemental creature token." (Each instance of that ability triggers separately.)
