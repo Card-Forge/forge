@@ -2052,19 +2052,6 @@ public class AbilityUtils {
         }
     }
 
-    public static SpellAbility getCause(SpellAbility sa) {
-        final SpellAbility root = sa.getRootAbility();
-        SpellAbility cause = sa;
-        if (root.isReplacementAbility()) {
-            SpellAbility replacingObject = (SpellAbility) root.getReplacingObject(AbilityKey.Cause);
-            if (replacingObject != null) {
-                cause = replacingObject;
-            }
-        }
-        return cause;
-    }
-
-
     public static SpellAbility addSpliceEffects(final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Player player = sa.getActivatingPlayer();

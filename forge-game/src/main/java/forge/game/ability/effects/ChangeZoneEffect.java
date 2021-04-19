@@ -448,8 +448,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final Game game = player.getGame();
         final CardCollection commandCards = new CardCollection();
 
-        SpellAbility cause = AbilityUtils.getCause(sa);
-
         ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<ZoneType> origin = Lists.newArrayList();
         if (sa.hasParam("Origin")) {
@@ -553,7 +551,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
 
-                movedCard = game.getAction().moveToLibrary(gameCard, libraryPosition, cause);
+                movedCard = game.getAction().moveToLibrary(gameCard, libraryPosition, sa);
 
             } else {
                 if (destination.equals(ZoneType.Battlefield)) {
@@ -659,7 +657,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         setFaceDownState(gameCard, sa);
                     }
 
-                    movedCard = game.getAction().moveTo(gameCard.getController().getZone(destination), gameCard, cause, moveParams);
+                    movedCard = game.getAction().moveTo(gameCard.getController().getZone(destination), gameCard, sa, moveParams);
                     if (sa.hasParam("Unearth")) {
                         movedCard.setUnearthed(true);
                         movedCard.addChangedCardKeywords(Lists.newArrayList("Haste"), null, false, false,
@@ -699,7 +697,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         gameCard.setExiledWith(host);
                         gameCard.setExiledBy(host.getController());
                     }
-                    movedCard = game.getAction().moveTo(destination, gameCard, cause);
+                    movedCard = game.getAction().moveTo(destination, gameCard, sa);
                     if (ZoneType.Hand.equals(destination) && ZoneType.Command.equals(originZone.getZoneType())) {
                         StringBuilder sb = new StringBuilder();
                         sb.append(movedCard.getName()).append(" has moved from Command Zone to ").append(player).append("'s hand.");
@@ -1181,15 +1179,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final boolean forget = sa.hasParam("ForgetChanged");
         final boolean champion = sa.hasParam("Champion");
         final boolean imprint = sa.hasParam("Imprint");
-        
-        final SpellAbility root = sa.getRootAbility();
-        SpellAbility cause = sa;
-        if (root.isReplacementAbility()) {
-            SpellAbility replacingObject = (SpellAbility) root.getReplacingObject(AbilityKey.Cause);
-            if (replacingObject != null) {
-                cause = replacingObject;
-            }
-        }
 
         boolean combatChanged = false;
         final CardZoneTable triggerList = new CardZoneTable();
@@ -1211,7 +1200,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
                 moveParams.put(AbilityKey.FoundSearchingLibrary,  searchedLibrary);
                 if (destination.equals(ZoneType.Library)) {
-                    movedCard = game.getAction().moveToLibrary(c, libraryPos, cause, moveParams);
+                    movedCard = game.getAction().moveToLibrary(c, libraryPos, sa, moveParams);
                 }
                 else if (destination.equals(ZoneType.Battlefield)) {
                     if (sa.hasParam("Tapped")) {
@@ -1302,7 +1291,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         c.turnFaceDown(true);
                         setFaceDownState(c, sa);
                     }
-                    movedCard = game.getAction().moveToPlay(c, c.getController(), cause, moveParams);
+                    movedCard = game.getAction().moveToPlay(c, c.getController(), sa, moveParams);
                     if (sa.hasParam("Tapped")) {
                         movedCard.setTapped(true);
                     } else if (sa.hasParam("Untapped")) {
@@ -1333,7 +1322,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
                 else {
-                    movedCard = game.getAction().moveTo(destination, c, 0, cause, moveParams);
+                    movedCard = game.getAction().moveTo(destination, c, 0, sa, moveParams);
                 }
 
                 movedCards.add(movedCard);
