@@ -9,6 +9,7 @@ import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
 
+import com.badlogic.gdx.graphics.glutils.HdpiMode;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -17,9 +18,9 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.backends.lwjgl.LwjglClipboard;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard;
 
 import forge.Forge;
 import forge.assets.AssetsDownloader;
@@ -85,8 +86,8 @@ public class Main {
 
         // Fullscreen width and height for desktop mode (desktopMode = true)
         // Can be specified inside the file fullscreen_resolution.ini to override default (in the format WxH, e.g. 1920x1080)
-        int desktopScreenWidth = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
-        int desktopScreenHeight = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
+        int desktopScreenWidth = Lwjgl3ApplicationConfiguration.getDisplayMode().width;
+        int desktopScreenHeight = Lwjgl3ApplicationConfiguration.getDisplayMode().height;
         boolean fullscreenFlag = true;
         if (FileUtil.doesFileExist(desktopModeAssetsDir + "screen_resolution.ini")) {
             res = FileUtil.readFileToString(desktopModeAssetsDir + "screen_resolution.ini").split("x");
@@ -97,17 +98,18 @@ public class Main {
             }
         }
 
-        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        config.resizable = false;
-        config.width = desktopMode ? desktopScreenWidth : screenWidth;
-        config.height = desktopMode ? desktopScreenHeight : screenHeight;
-        config.fullscreen = desktopMode && fullscreenFlag;
-        config.title = "Forge";
-        config.useHDPI = desktopMode; // enable HiDPI on Mac OS
+        Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+        config.setResizable(false);
+        config.setWindowedMode(desktopMode ? desktopScreenWidth : screenWidth,  desktopMode ? desktopScreenHeight : screenHeight);
+        if (desktopMode && fullscreenFlag)
+            config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
+        config.setTitle("Forge");
+        if (desktopMode)
+            config.setHdpiMode(HdpiMode.Logical);
 
         ForgePreferences prefs = FModel.getPreferences();
         boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
-        new LwjglApplication(Forge.getApp(new LwjglClipboard(), new DesktopAdapter(switchOrientationFile),//todo get totalRAM && isTabletDevice
+        new Lwjgl3Application(Forge.getApp(new Lwjgl3Clipboard(), new DesktopAdapter(switchOrientationFile),//todo get totalRAM && isTabletDevice
                 desktopMode ? desktopModeAssetsDir : assetsDir, propertyConfig, false, 0, false, 0, "", ""), config);
     }
 
