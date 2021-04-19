@@ -2,7 +2,8 @@ Name:Specter of the Fens
 ManaCost:3 B
 Types:Creature Specter
 PT:2/3
+K:Flying
 A:AB$ LoseLife | Cost$ 5 B | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 2 life and you gain 2 life.
-SVar:DBGainLife:DB$GainLife | LifeAmount$ 2
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
 DeckHas:Ability$LifeGain
-Oracle:{5}{B}: Target opponent loses 2 life and you gain 2 life.
+Oracle:Flying\n{5}{B}: Target opponent loses 2 life and you gain 2 life.
