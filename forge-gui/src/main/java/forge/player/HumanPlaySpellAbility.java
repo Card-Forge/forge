@@ -93,10 +93,10 @@ public class HumanPlaySpellAbility {
         ability = GameActionUtil.addExtraKeywordCost(ability);
 
         if (ability.isSpell() && !ability.isCopied()) { // These hidden keywords should only apply on the Stack
-            if (c.hasKeyword("May spend mana as though it were mana of any type to cast CARDNAME")
+            if (ability.getHostCard().hasKeyword("May spend mana as though it were mana of any type to cast CARDNAME")
                     || (option != null && option.isIgnoreManaCostType())) {
                 manaTypeConversion = true;
-            } else if (c.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")
+            } else if (ability.getHostCard().hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")
                     || (option != null && option.isIgnoreManaCostColor())) {
                 manaColorConversion = true;
             }
