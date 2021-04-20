@@ -319,7 +319,9 @@ public class TriggerHandler {
                 checkStatics |= type.equals("Battlefield");
             } else {
                 final ZoneType zone = (ZoneType) runParams.get(AbilityKey.Destination);
-                checkStatics |= zone.equals(ZoneType.Battlefield);
+                if (zone != null) {
+                    checkStatics |= zone.equals(ZoneType.Battlefield);
+                }
             }
         }
 

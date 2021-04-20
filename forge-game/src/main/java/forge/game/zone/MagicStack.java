@@ -586,7 +586,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (source.isCopiedSpell() && source.isInZone(ZoneType.Stack)) {
-            source.ceaseToExist(true);
+            game.getAction().ceaseToExist(source, true);
             return;
         }
 

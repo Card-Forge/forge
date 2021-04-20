@@ -785,12 +785,12 @@ public class Game {
                 // unattach all "Enchant Player"
                 c.removeAttachedTo(p);
                 if (c.getOwner().equals(p)) {
-                    for(Card cc : cards) {
+                    for (Card cc : cards) {
                         cc.removeImprintedCard(c);
                         cc.removeEncodedCard(c);
                         cc.removeRemembered(c);
                     }
-                    c.ceaseToExist(false);
+                    getAction().ceaseToExist(c, false);
                     // CR 603.2f owner of trigger source lost game
                     triggerHandler.clearDelayedTrigger(c);
                 } else {

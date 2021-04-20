@@ -2357,7 +2357,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public void rollback() {
         for (Card c : rollbackEffects) {
-            c.ceaseToExist(true);
+            c.getGame().getAction().ceaseToExist(c, true);
         }
         rollbackEffects.clear();
     }

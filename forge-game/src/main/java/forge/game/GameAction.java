@@ -919,6 +919,38 @@ public class GameAction {
         }
     }
 
+    public void ceaseToExist(Card c, boolean skipTrig) {
+        final String origin = c.getZone().getZoneType().name();
+
+        c.getZone().remove(c);
+        c.setZone(null);
+
+        // CR 603.6c other players LTB triggers should work
+        if (!skipTrig) {
+            game.addChangeZoneLKIInfo(c);
+            Card lki = null;
+            CardCollectionView lastBattlefield = game.getLastStateBattlefield();
+            int idx = lastBattlefield.indexOf(c);
+            if (idx != -1) {
+                lki = lastBattlefield.get(idx);
+            }
+            if (lki == null) {
+                lki = CardUtil.getLKICopy(c);
+            }
+            if (game.getCombat() != null) {
+                game.getCombat().removeFromCombat(c);
+                game.getCombat().saveLKI(lki);
+            }
+            game.getTriggerHandler().registerActiveLTBTrigger(lki);
+
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
+            runParams.put(AbilityKey.CardLKI, lki);
+            runParams.put(AbilityKey.Origin, origin);
+            game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, false);
+            game.getTriggerHandler().runWaitingTriggers();
+        }
+    }
+
     // Temporarily disable (if mode = true) actively checking static abilities.
     private void setHoldCheckingStaticAbilities(boolean mode) {
         holdCheckingStaticAbilities = mode;
