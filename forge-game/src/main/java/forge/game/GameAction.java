@@ -920,17 +920,14 @@ public class GameAction {
     }
 
     public void ceaseToExist(Card c, boolean skipTrig) {
-        final String origin = c.getZone().getZoneType().name();
-
         c.getZone().remove(c);
-        c.setZone(null);
 
         // CR 603.6c other players LTB triggers should work
         if (!skipTrig) {
             game.addChangeZoneLKIInfo(c);
-            Card lki = null;
             CardCollectionView lastBattlefield = game.getLastStateBattlefield();
             int idx = lastBattlefield.indexOf(c);
+            Card lki = null;
             if (idx != -1) {
                 lki = lastBattlefield.get(idx);
             }
@@ -942,10 +939,9 @@ public class GameAction {
                 game.getCombat().saveLKI(lki);
             }
             game.getTriggerHandler().registerActiveLTBTrigger(lki);
-
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
             runParams.put(AbilityKey.CardLKI, lki);
-            runParams.put(AbilityKey.Origin, origin);
+            runParams.put(AbilityKey.Origin, c.getZone().getZoneType().name());
             game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, false);
             game.getTriggerHandler().runWaitingTriggers();
         }

@@ -789,6 +789,7 @@ public class Game {
                         cc.removeImprintedCard(c);
                         cc.removeEncodedCard(c);
                         cc.removeRemembered(c);
+                        cc.removeAttachedTo(c);
                     }
                     getAction().ceaseToExist(c, false);
                     // CR 603.2f owner of trigger source lost game
