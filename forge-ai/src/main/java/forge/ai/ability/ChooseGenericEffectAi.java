@@ -163,7 +163,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             // than Elspeth Conquers Death with different choice parameters
             SpellAbility p1p1 = null, loyalty = null;
             for (final SpellAbility sp : spells) {
-                if (sp.getDescription().contains("+1/+1")) {
+                if (("P1P1").equals(sp.getParam("CounterType"))) {
                     p1p1 = sp;
                 } else {
                     loyalty = sp;
