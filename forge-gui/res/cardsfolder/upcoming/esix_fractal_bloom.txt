@@ -1,0 +1,11 @@
+Name:Esix, Fractal Bloom
+ManaCost:4 G U
+Types:Legendary Creature Fractal
+PT:4/4
+K:Flying
+R:Event$ CreateToken | ActiveZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ0 | ValidPlayer$ You | PlayerTurn$ True | Optional$ True | ReplaceWith$ DBCopy | Description$ The first time you would create one or more tokens during each of your turns, you may instead choose a creature other than CARDNAME and create that many tokens that are copies of that creature.
+SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.YouCtrl+Other | NumCopies$ Y
+SVar:X:PlayerCountPropertyYou$TokensCreatedThisTurn
+SVar:Y:ReplaceCount$TokenNum
+DeckHas:Ability$Token
+Oracle:Flying\nThe first time you would create one or more tokens during each of your turns, you may instead choose a creature other than Esix, Fractal Bloom and create that many tokens that are copies of that creature.
