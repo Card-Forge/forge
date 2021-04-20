@@ -121,7 +121,7 @@ public class TriggerHandler {
     }
 
     public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic) {
-        return parseTrigger(trigParse, host, intrinsic, host);
+        return parseTrigger(trigParse, host, intrinsic, host.getCurrentState());
     }
 
     public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic, final IHasSVars sVarHolder) {
