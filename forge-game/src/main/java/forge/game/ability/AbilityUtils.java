@@ -550,15 +550,21 @@ public class AbilityUtils {
                 players.remove(game.getPhaseHandler().getPlayerTurn());
                 val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
-            else if (hType.startsWith("PropertyYou") && ability instanceof SpellAbility) {
-                // Hollow One
-                players.add(((SpellAbility) ability).getActivatingPlayer());
+            else if (hType.startsWith("PropertyYou")) {
+                if (ability instanceof SpellAbility) {
+                    // Hollow One
+                    players.add(((SpellAbility) ability).getActivatingPlayer());
+                } else {
+                    players.add(player);
+                }
                 val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
-            else if (hType.startsWith("Property") && ability instanceof SpellAbility) {
+            else if (hType.startsWith("Property")) {
                 String defined = hType.split("Property")[1];
                 for (Player p : game.getPlayersInTurnOrder()) {
-                    if (p.hasProperty(defined, ((SpellAbility) ability).getActivatingPlayer(), ability.getHostCard(), ability)) {
+                    if (ability instanceof SpellAbility && p.hasProperty(defined, ((SpellAbility) ability).getActivatingPlayer(), ability.getHostCard(), ability)) {
+                        players.add(p);
+                    } else if (!(ability instanceof SpellAbility) && p.hasProperty(defined, player, ability.getHostCard(), ability)) {
                         players.add(p);
                     }
                 }
