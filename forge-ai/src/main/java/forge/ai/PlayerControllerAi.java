@@ -1029,7 +1029,7 @@ public class PlayerControllerAi extends PlayerController {
                     */
                     if (sa.isMayChooseNewTargets() && !sa.setupTargets()) {
                         if (sa.isSpell()) {
-                            sa.getHostCard().ceaseToExist(false);
+                            player.getGame().getAction().ceaseToExist(sa.getHostCard(), false);
                         }
                         continue;
                     }

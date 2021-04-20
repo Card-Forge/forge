@@ -3,6 +3,8 @@ package forge.game.ability.effects;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
@@ -13,12 +15,14 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
+import forge.util.collect.FCollection;
 
 public class CloneEffect extends SpellAbilityEffect {
     // TODO update this method
@@ -139,10 +143,6 @@ public class CloneEffect extends SpellAbilityEffect {
 
         tgtCard.updateStateForView();
 
-        //Clear Remembered and Imprint lists
-        tgtCard.clearRemembered();
-        tgtCard.clearImprintedCards();
-
         // check if clone is now an Aura that needs to be attached
         if (tgtCard.isAura() && !tgtCard.isInZone(ZoneType.Battlefield)) {
             AttachEffect.attachAuraOnIndirectEnterBattlefield(tgtCard);
@@ -150,12 +150,23 @@ public class CloneEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("Duration")) {
             final Card cloneCard = tgtCard;
+            // if clone is temporary, target needs old values back after
+            final Iterable<Card> clonedImprinted = new CardCollection(tgtCard.getImprintedCards());
+            final Iterable<Object> clonedRemembered = new FCollection<>(tgtCard.getRemembered());
+
             final GameCommand unclone = new GameCommand() {
                 private static final long serialVersionUID = -78375985476256279L;
 
                 @Override
                 public void run() {
                     if (cloneCard.removeCloneState(ts)) {
+                        // remove values gained while being cloned
+                        cloneCard.clearImprintedCards();
+                        cloneCard.clearRemembered();
+                        // restore original Remembered and Imprinted, ignore cards from players who lost
+                        cloneCard.addImprintedCards(Iterables.filter(clonedImprinted, Predicates.not(CardPredicates.inZone(ZoneType.None))));
+                        cloneCard.addRemembered(Iterables.filter(clonedRemembered, Player.class));
+                        cloneCard.addRemembered(Iterables.filter(Iterables.filter(clonedRemembered, Card.class),  CardPredicates.ownerLives()));
                         cloneCard.updateStateForView();
                         game.fireEvent(new GameEventCardStatsChanged(cloneCard));
                     }
@@ -176,9 +187,15 @@ public class CloneEffect extends SpellAbilityEffect {
                 sa.getHostCard().addFacedownCommand(unclone);
             }
         }
+
+        //Clear Remembered and Imprint lists
+        tgtCard.clearRemembered();
+        tgtCard.clearImprintedCards();
+
         if (sa.hasParam("RememberCloneOrigin")) {
             tgtCard.addRemembered(cardToCopy);
         }
+
         game.fireEvent(new GameEventCardStatsChanged(tgtCard));
     } // cloneResolve
 
