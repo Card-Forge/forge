@@ -87,7 +87,7 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-backend-android</artifactId>
-            <version>1.9.13</version>
+            <version>1.10.0</version>
         </dependency>
     </dependencies>
 

@@ -681,12 +681,11 @@ public class Graphics {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         } else {
             batch.end();
-            shaderOutline.begin();
+            shaderOutline.bind();
             shaderOutline.setUniformf("u_viewportInverse", new Vector2(1f / w, 1f / h));
             shaderOutline.setUniformf("u_offset", 3f);
             shaderOutline.setUniformf("u_step", Math.min(1f, w / 70f));
             shaderOutline.setUniformf("u_color", new Vector3(glowColor.r, glowColor.g, glowColor.b));
-            shaderOutline.end();
             batch.setShader(shaderOutline);
             batch.begin();
             //glow
@@ -705,12 +704,11 @@ public class Graphics {
             batch.draw(image, adjustX(x), adjustY(yBox, h), w, h);
         } else {
             batch.end();
-            shaderOutline.begin();
+            shaderOutline.bind();
             shaderOutline.setUniformf("u_viewportInverse", new Vector2(1f / w, 1f / h));
             shaderOutline.setUniformf("u_offset", 3f);
             shaderOutline.setUniformf("u_step", Math.min(1f, w / 70f));
             shaderOutline.setUniformf("u_color", new Vector3(glowColor.r, glowColor.g, glowColor.b));
-            shaderOutline.end();
             batch.setShader(shaderOutline);
             batch.begin();
             //glow
