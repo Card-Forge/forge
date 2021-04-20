@@ -3206,7 +3206,7 @@ public class CardFactoryUtil {
                         trigStr.append(" | Secondary$ True");
                     }
                     trigStr.append("| TriggerDescription$ ").append(desc).append(" — ").append(sa.getDescription());
-                    final Trigger  t = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+                    final Trigger t = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
                     t.setOverridingAbility(sa);
                     inst.addTrigger(t);
                 }
