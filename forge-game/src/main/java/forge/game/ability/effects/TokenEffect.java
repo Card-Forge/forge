@@ -67,10 +67,6 @@ public class TokenEffect extends TokenEffectBase {
             }
         }
 
-        // Cause of the Token Effect, in general it should be this
-        // but if its a Replacement Effect, it might be something else or null
-        SpellAbility cause = AbilityUtils.getCause(sa);
-
         Card prototype = loadTokenPrototype(sa);
 
         final int finalAmount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("TokenAmount", "1"), sa);
@@ -88,7 +84,7 @@ public class TokenEffect extends TokenEffectBase {
 
         MutableBoolean combatChanged = new MutableBoolean(false);
         for (final Player owner : AbilityUtils.getDefinedPlayers(host, sa.getParamOrDefault("TokenOwner", "You"), sa)) {
-            makeTokens(prototype, owner, sa, finalAmount, cause != null, false, triggerList, combatChanged);
+            makeTokens(prototype, owner, sa, finalAmount, true, false, triggerList, combatChanged);
         }
 
         if (!useZoneTable) {
