@@ -2,7 +2,7 @@ Name:Detention Vortex
 ManaCost:W
 Types:Enchantment Aura
 K:Enchant nonland permanent
-A:SP$ Attach | Cost$ 3 W | ValidTgts$ Permanent.nonLand | AILogic$ Curse
+A:SP$ Attach | Cost$ W | ValidTgts$ Permanent.nonLand | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. & CARDNAME's activated abilities can't be activated. | Description$ Enchanted permanent can't attack or block and its activated abilities can't be activated.
 A:AB$ Destroy | Cost$ 3 | Defined$ Self | Activator$ Player.Opponent | SorcerySpeed$ True | SpellDescription$ Destroy CARDNAME. Only your opponents may activate this ability and only as a sorcery.
 Oracle:Enchant nonland permanent\nEnchanted permanent can't attack or block, and its activated abilities can't be activated.\n{3}: Destroy Detention Vortex. Only your opponents may activate this ability and only as a sorcery.
