@@ -41,7 +41,7 @@ public class ChangeTargetsAi extends SpellAbilityAi {
             return false;
         }
 
-        if (sa.getTargets().size() != 0) {
+        if (sa.getTargets().size() != 0 && sa.isTrigger()) {
             // something was already chosen before (e.g. in response to a trigger - Mizzium Meddler), so just proceed
             return true;
         }
@@ -84,6 +84,16 @@ public class ChangeTargetsAi extends SpellAbilityAi {
                 // do not pay Phyrexian mana if the spell is a damaging one but it deals less damage or the same damage as we'll pay life
                 return false;
             }
+        }
+
+        Card firstCard = topSa.getTargets().getFirstTargetedCard();
+        // if we're not the target don't intervene unless we can steal a buff
+        if (firstCard != null && !aiPlayer.equals(firstCard.getController()) && !topSa.getHostCard().getController().equals(firstCard.getController()) && !topSa.getHostCard().getController().getAllies().contains(firstCard.getController())) {
+            return false;
+        }
+        Player firstPlayer = topSa.getTargets().getFirstTargetedPlayer();
+        if (firstPlayer != null && !aiPlayer.equals(firstPlayer)) {
+            return false;
         }
 
         sa.resetTargets();
