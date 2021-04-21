@@ -10,6 +10,9 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
@@ -295,6 +298,7 @@ public class MenuScroller {
 
     this.menu = menu;
     menu.addPopupMenuListener(menuListener);
+    menu.addMouseWheelListener(new MouseScrollListener());
   }
 
   /**
@@ -585,5 +589,13 @@ public class MenuScroller {
     public int getIconHeight() {
       return 10;
     }
+  }
+
+  private class MouseScrollListener implements MouseWheelListener {
+      public void mouseWheelMoved(MouseWheelEvent mwe){
+          firstIndex += mwe.getWheelRotation();
+          refreshMenu();
+          mwe.consume();
+      }
   }
 }

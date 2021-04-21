@@ -908,6 +908,7 @@ public final class CMatchUI
         //show menu if mouse was trigger for ability
         final JPopupMenu menu = new JPopupMenu(Localizer.getInstance().getMessage("lblAbilities"));
         //add scroll area when too big
+        // TODO: do we need a user setting for the scrollCount?
         MenuScroller.setScrollerFor(menu, 8, 125, 3, 1);
 
         boolean enabled;
