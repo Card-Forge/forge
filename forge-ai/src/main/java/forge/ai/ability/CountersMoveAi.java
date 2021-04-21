@@ -372,54 +372,57 @@ public class CountersMoveAi extends SpellAbilityAi {
                 }
             }
 
-            List<Card> aiList = CardLists.filterControlledBy(tgtCards, ai);
-            if (!aiList.isEmpty()) {
-                List<Card> best = CardLists.filter(aiList, new Predicate<Card>() {
+            Card lki = CardUtil.getLKICopy(src);
+            lki.clearCounters();
+            // go for opponent when value implies debuff
+            if (ComputerUtilCard.evaluateCreature(src) > ComputerUtilCard.evaluateCreature(lki)) {
+                List<Card> aiList = CardLists.filterControlledBy(tgtCards, ai);
+                if (!aiList.isEmpty()) {
+                    List<Card> best = CardLists.filter(aiList, new Predicate<Card>() {
 
-                    @Override
-                    public boolean apply(Card card) {
-                        // gain from useless
-                        if (ComputerUtilCard.isUselessCreature(ai, card)) {
-                            return false;
-                        }
-
-                        // source would leave the game
-                        if (card.hasSVar("EndOfTurnLeavePlay")) {
-                            return false;
-                        }
-
-                        if (cType != null) {
-                            if (cType.is(CounterEnumType.P1P1) && card.hasKeyword(Keyword.UNDYING)) {
-                                return false;
-                            }
-                            if (cType.is(CounterEnumType.M1M1) && card.hasKeyword(Keyword.PERSIST)) {
+                        @Override
+                        public boolean apply(Card card) {
+                            // gain from useless
+                            if (ComputerUtilCard.isUselessCreature(ai, card)) {
                                 return false;
                             }
 
-                            if (!card.canReceiveCounters(cType)) {
+                            // source would leave the game
+                            if (card.hasSVar("EndOfTurnLeavePlay")) {
                                 return false;
                             }
+
+                            if (cType != null) {
+                                if (cType.is(CounterEnumType.P1P1) && card.hasKeyword(Keyword.UNDYING)) {
+                                    return false;
+                                }
+                                if (cType.is(CounterEnumType.M1M1)) {
+                                    return false;
+                                }
+
+                                if (!card.canReceiveCounters(cType)) {
+                                    return false;
+                                }
+                            }
+                            return true;
                         }
+                    });
+
+                    if (best.isEmpty()) {
+                        best = aiList;
+                    }
+
+                    Card card = ComputerUtilCard.getBestCreatureAI(best);
+
+                    if (card != null) {
+                        sa.getTargets().add(card);
                         return true;
                     }
-                });
-
-                if (best.isEmpty()) {
-                    best = aiList;
-                }
-
-                Card card = ComputerUtilCard.getBestCreatureAI(best);
-
-                if (card != null) {
-                    sa.getTargets().add(card);
-                    return true;
                 }
             }
 
-            // move counter to opponents creature but only if you can not steal
-            // them
-            // try to move to something useless or something that would leave
-            // play
+            // move counter to opponents creature but only if you can not steal them
+            // try to move to something useless or something that would leave play
             List<Card> oppList = CardLists.filterControlledBy(tgtCards, ai.getOpponents());
             if (!oppList.isEmpty()) {
                 List<Card> best = CardLists.filter(oppList, new Predicate<Card>() {
@@ -441,7 +444,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                 });
 
                 if (best.isEmpty()) {
-                    best = aiList;
+                    best = oppList;
                 }
 
                 Card card = ComputerUtilCard.getBestCreatureAI(best);
@@ -455,7 +458,7 @@ public class CountersMoveAi extends SpellAbilityAi {
         }
     }
 
-    // used for multiple sources -> defied
+    // used for multiple sources -> defined
     // or for source -> multiple defined
     @Override
     protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional,
