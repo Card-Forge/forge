@@ -943,7 +943,6 @@ public class GameAction {
             runParams.put(AbilityKey.CardLKI, lki);
             runParams.put(AbilityKey.Origin, c.getZone().getZoneType().name());
             game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, false);
-            game.getTriggerHandler().runWaitingTriggers();
         }
     }
 
