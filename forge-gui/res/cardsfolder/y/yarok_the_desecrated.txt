@@ -4,5 +4,5 @@ Types:Legendary Creature Elemental Horror
 PT:3/5
 K:Deathtouch
 K:Lifelink
-S:Mode$ Panharmonicon | ValidMode$ ChangesZone,ChangesZoneAll | ValidCard$ Permanent | ValidCause$ Permanent.YouCtrl | Destination$ Battlefield | Description$ If a permanent entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+S:Mode$ Panharmonicon | ValidMode$ ChangesZone,ChangesZoneAll | ValidCard$ Permanent.YouCtrl | ValidCause$ Permanent | Destination$ Battlefield | Description$ If a permanent entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
 Oracle:Deathtouch, lifelink\nIf a permanent entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
