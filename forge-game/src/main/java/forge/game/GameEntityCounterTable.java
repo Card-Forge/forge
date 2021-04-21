@@ -41,7 +41,11 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
 
     public int get(Player putter, GameEntity object, CounterType type) {
         Optional<Player> o = Optional.fromNullable(putter);
-        return ObjectUtils.firstNonNull(get(o, object).get(type), 0);
+        Map<CounterType, Integer> map = get(o, object);
+        if (map == null || !map.containsKey(type)) {
+            return 0;
+        }
+        return ObjectUtils.firstNonNull(map.get(type), 0);
     }
 
     public int totalValues() {
@@ -59,7 +63,7 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
      */
     public Map<CounterType, Integer> filterToRemove(GameEntity ge) {
         Map<CounterType, Integer> result = Maps.newHashMap();
-        if (!containsRow(ge)) {
+        if (!containsColumn(ge)) {
             result.putAll(ge.getCounters());
             return result;
         }
