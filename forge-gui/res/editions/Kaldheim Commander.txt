@@ -128,9 +128,12 @@ Type=Other
 [tokens]
 c_1_1_a_servo
 c_1_1_a_thopter_flying
+g_1_1_elf_warrior
 g_2_2_boar
 g_7_7_elemental_trample
+r_5_5_dragon_flying
 w_1_1_bird_flying
 w_1_1_kithkin_soldier
 w_1_1_soldier
 w_1_1_pegasus_flying
+w_1_1_spirit_flying

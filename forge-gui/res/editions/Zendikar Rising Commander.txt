@@ -160,4 +160,4 @@ b_1_1_goblin_rogue
 b_1_1_rat
 rg_5_5_elemental
 c_1_1_a_thopter_flying
-
+ub_1_1_faerie_rogue_flying
