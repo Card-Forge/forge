@@ -83,6 +83,7 @@ Jace, Unraveler of Secrets|Jace's Perfect Plan|So, I've read about this neat guy
 Jace, Wielder of Mysteries|Jace's Neat Solution|Everything is solved. No loose ends.
 Jaya Ballard|Jaya's Flashback|Fire is easily rekindled.
 Karn Liberated|Karn's Reset|Let's do this again!
+Kasmina, Enigma Sage|Kasmina's Private Tutoring|This will be on the spelling test next week.
 Kaya the Inexorable|Kaya's Dimensional Breach|A little help here?
 Kaya, Ghost Assassin|Kaya's Syphon|You don't MIND, do you?
 Kaya, Orzhov Usurper|Kaya's Revenge of Emptiness|Nothing I do can hurt you. Literally.
@@ -103,6 +104,7 @@ Liliana, Untouched by Death|Liliana's Graveyard Party|What? I'm not touching you
 Liliana, Waker of the Dead|Liliana's Rotten Reserves|They awaken, feeling well-rested.
 Lord Windgrace|Windgrace's Hunting Party|Let me show you a true cat-astrophe.
 Lukka, Coppercoat Outcast|Lukka's Ultimatum|Get them.
+Lukka, Wayward Bonder|Lukka's Pandemonium|At them, girl!
 Nahiri, Heir of the Ancients|Swiss-Army Nahiri|It pays to be well-equipped.
 Nahiri, the Harbinger|Nahiri's Mystery Guest|This should be your cue to run.
 Nahiri, the Lithomancer|Nahiri's Gift|I pulled it out! Now I'm a king!
@@ -127,10 +129,12 @@ Ob Nixilis of the Black Oath|Nixilis's Black Oath|We all have to bring sacrifice
 Ob Nixilis Reignited|Ob Nixilis's Torment|I'll give you dreams from beyond the underworld!
 Oko, the Trickster|Oko's Massive Friends|And watch where you're stomping!
 Oko, Thief of Crowns|Oko's Unfair Switcheroo|How about some magic beans for that?
+Professor Onyx|Professor's Discipline|You'll get it back at the end of the semester unless you pay a... fine.
 Ral Zarek|Ral's Long Day|So much work, so much time!
 Ral, Caller of Storms|Ral's Invocation|The storm called and left a message.
 Ral, Izzet Viceroy|Ral's Bonus|I was just researching lightning and then it hit me.
 Rowan, Fearless Sparkmage|Rowan's Magnetic Personality|Personal magnetism can create the spark of revolt.
+Rowan, Scholar of Sparks|Rowan's Twin Magic|Of course I haven't copied my answers, professor!
 Saheeli Rai|Saheeli's Creativity|I love when all the pieces come together!
 Saheeli, the Gifted|Saheeli's Doubling Season|Polished to mirror sheen.
 Samut, the Tested|Samut's Rapid Deployment|My friends will be here in a flash.
@@ -177,6 +181,7 @@ Vraska, Golgari Queen|Vraska's Training Regime|Step one - give them a scratch. T
 Vraska, Regal Gorgon|Vraska's Scavenger Hunt|Death is not the opposite of life - it's its complement.
 Vraska, Relic Seeker|Vraska's Mark|Never play hide and seek with a Gorgon.
 Vraska, Scheming Gorgon|Vraska's Stone Gaze|I think we could use a new figurehead!
+Will, Scholar of Frost|Will's Elementics|I think it's better this way.
 Wrenn and Six|Wrenn's Bountiful Land|Let's retrace our steps.
 Xenagos, the Reveler|Xenagos's Reveal|Mwahahaha! Now I'm a god!
 Jiang Yanggu|Yanggu's Giant Growth|Now, Mowu! Fetch that tree!
