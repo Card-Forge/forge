@@ -4,7 +4,7 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, CARDNAME becomes a 5/5 Demon creature with flying and haste in addition to its other types until end of turn.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.Other+YouCtrl | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigAnimate | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, CARDNAME becomes a 5/5 Demon creature with flying and haste in addition to its other types until end of turn.
 SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 5 | Toughness$ 5 | Types$ Creature,Demon | Keywords$ Flying & Haste
-SVar:PlayMain1:Always
+SVar:PlayMain1:ALWAYS
 SVar:BuffedBy:Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daxoss_torment.jpg
 Oracle:Constellation — Whenever Daxos's Torment or another enchantment enters the battlefield under your control, Daxos's Torment becomes a 5/5 Demon creature with flying and haste in addition to its other types until end of turn.
