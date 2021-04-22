@@ -215,7 +215,8 @@ public class Main extends AndroidApplication {
                     +"LibGDX "+ Version.VERSION+"\n"+"Can't access external storage");
             return;
         }
-        String assetsDir = Environment.getExternalStorageDirectory() + "/Forge/";
+        String obbforge = Environment.getExternalStorageDirectory() + "/obbforge"; //if obbforge file exists in Phone Storage, use app-specific Obb directory as path
+        String assetsDir = FileUtil.doesFileExist(obbforge) ? getContext().getObbDir()+"/Forge/" : Environment.getExternalStorageDirectory()+"/Forge/";
         if (!FileUtil.ensureDirectoryExists(assetsDir)) {
             //fake init for error message
             //set current orientation
