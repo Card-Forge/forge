@@ -640,5 +640,7 @@ public class TriggerHandler {
                 delayedTriggers.remove(t);
             }
         }
+        // run all ChangesZone
+        runWaitingTriggers();
     }
 }
