@@ -840,6 +840,8 @@ public class CombatUtil {
             if (attacker.hasStartOfKeyword("All creatures able to block CARDNAME do so.")
                     || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.")
                             && combat.getBlockers(attacker).isEmpty())
+                    || (attacker.hasStartOfKeyword("CARDNAME must be blocked by exactly one creature if able.")
+                            && combat.getBlockers(attacker).size() != 1)
                     || (attacker.hasStartOfKeyword("CARDNAME must be blocked by two or more creatures if able.")
                             && combat.getBlockers(attacker).size() < 2)) {
                 attackersWithLure.add(attacker);
@@ -990,6 +992,7 @@ public class CombatUtil {
         // attacker with lure, the blocker can't block the former
         if (!attacker.hasKeyword("All creatures able to block CARDNAME do so.")
                 && !(attacker.hasKeyword("CARDNAME must be blocked if able.") && combat.getBlockers(attacker).isEmpty())
+                && !(attacker.hasKeyword("CARDNAME must be blocked by exactly one creature if able.") && combat.getBlockers(attacker).size() != 1)
                 && !(attacker.hasKeyword("CARDNAME must be blocked by two or more creatures if able.") && combat.getBlockers(attacker).size() < 2)
                 && !(blocker.getMustBlockCards() != null && blocker.getMustBlockCards().contains(attacker))
                 && !mustBeBlockedBy
