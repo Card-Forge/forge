@@ -275,7 +275,7 @@ public final class StaticAbilityContinuous {
                         for (Card c : definedCards) {
                             final int cmc = c.getCMC();
                             String y = (input.replace(" from EachCMCAmongDefined", ":Card.cmcEQ"
-                                    + (cmc) + ":Protection from converted mana cost " + (cmc)));
+                                    + (cmc) + ":Protection from mana value " + (cmc)));
                             if (!newKeywords.contains(y)) {
                                 newKeywords.add(y);
                             }
