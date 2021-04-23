@@ -433,17 +433,22 @@ public class AiController {
                     }
                 }
 
-                // don't play the land if it has cycling and enough lands are available
-                final FCollectionView<SpellAbility> spellAbilities = c.getSpellAbilities();
-
                 final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
                 CardCollection lands = new CardCollection(battlefield);
                 lands.addAll(hand);
                 lands = CardLists.filter(lands, CardPredicates.Presets.LANDS);
                 int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
-                for (final SpellAbility sa : spellAbilities) {
-                    if (sa.isCycling()) {
-                        if (lands.size() >= Math.max(maxCmcInHand, 6)) {
+
+                if (lands.size() >= Math.max(maxCmcInHand, 6)) {
+                    // don't play MDFC land if other side is spell and enough lands are available
+                    if (!c.isLand() || (c.isModal() && !c.getState(CardStateName.Modal).getType().isLand())) {
+                        return false;
+                    }
+
+                    // don't play the land if it has cycling and enough lands are available
+                    final FCollectionView<SpellAbility> spellAbilities = c.getSpellAbilities();
+                    for (final SpellAbility sa : spellAbilities) {
+                        if (sa.isCycling()) {
                             return false;
                         }
                     }
