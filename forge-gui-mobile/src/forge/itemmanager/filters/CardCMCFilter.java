@@ -21,7 +21,7 @@ public class CardCMCFilter extends ValueRangeFilter<PaperCard> {
 
     @Override
     protected String getCaption() {
-        return "CMC";
+        return "Mana Value";
     }
 
     @Override

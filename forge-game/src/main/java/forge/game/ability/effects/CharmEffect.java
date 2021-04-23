@@ -103,7 +103,7 @@ public class CharmEffect extends SpellAbilityEffect {
         if (limit) {
             int limitNum = AbilityUtils.calculateAmount(source, sa.getParam("ActivationLimit"), sa);
             if (limitNum == 1) {
-                sb.append(". Activate this ability only once each turn.");
+                sb.append(". Activate only once each turn.");
             } else {
                 sb.append(". Additional code needed in CharmEffect.");
             }

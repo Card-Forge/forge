@@ -210,7 +210,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                     soFar += card.getCMC();
                 }
                 if (soFar > maxTotalCMC) {
-                    showMessage(sa.getHostCard() + " - Cannot target this card (CMC limit exceeded)");
+                    showMessage(sa.getHostCard() + " - Cannot target this card (mana value limit exceeded)");
                     return false;
                 }
             }
@@ -260,7 +260,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             }
         }
 
-        // If all cards must have different CMC
+        // If all cards must have different mana values
         if (tgt.isDifferentCMC()) {
             final List<Integer> targetedCMCs = new ArrayList<>();
             for (final GameObject o : targetDepth.keySet()) {
@@ -270,7 +270,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 }
             }
             if (targetedCMCs.contains(card.getCMC())) {
-                showMessage(sa.getHostCard() + " - Cannot target this card (must have different CMC)");
+                showMessage(sa.getHostCard() + " - Cannot target this card (must have different mana values)");
                 return false;
             }
         }

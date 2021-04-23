@@ -280,10 +280,10 @@ public class ConquestUtil {
         RARE     (FSkinProp.IMG_PW_BADGE_RARE, new RarityFilter(EnumSet.of(CardRarity.Rare, CardRarity.Special, CardRarity.MythicRare)), "Rare"),
         MYTHIC   (FSkinProp.IMG_PW_BADGE_MYTHIC, new RarityFilter(EnumSet.of(CardRarity.MythicRare)), "Mythic Rare (100%)"),
 
-        CMC_LOW      (FSkinProp.IMG_CMC_LOW, new CMCFilter(0, 3), "CMC 0-3"),
-        CMC_LOW_MID  (FSkinProp.IMG_CMC_LOW_MID, new CMCFilter(2, 5), "CMC 2-5"),
-        CMC_MID_HIGH (FSkinProp.IMG_CMC_MID_HIGH, new CMCFilter(4, 7), "CMC 4-7"),
-        CMC_HIGH     (FSkinProp.IMG_CMC_HIGH, new CMCFilter(6, -1), "CMC 6+");
+        CMC_LOW      (FSkinProp.IMG_CMC_LOW, new CMCFilter(0, 3), "Mana Value 0-3"),
+        CMC_LOW_MID  (FSkinProp.IMG_CMC_LOW_MID, new CMCFilter(2, 5), "Mana Value 2-5"),
+        CMC_MID_HIGH (FSkinProp.IMG_CMC_MID_HIGH, new CMCFilter(4, 7), "Mana Value 4-7"),
+        CMC_HIGH     (FSkinProp.IMG_CMC_HIGH, new CMCFilter(6, -1), "Mana Value 6+");
 
         private final FSkinProp skinProp;
         private final Predicate<PaperCard> predicate;
